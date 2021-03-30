@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-RecyclerView'>/**@class com.android.internal.widget.RecyclerView
+</span> implements com.android.internal.widget.ScrollingView
+
+ implements com.android.internal.widget.NestedScrollingChild
+
+@extends android.view.ViewGroup
+
+ A flexible view for providing a limited window into a large data set.
+
+ &lt;h3&gt;Glossary of terms:&lt;/h3&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;&lt;em&gt;Adapter:&lt;/em&gt; A subclass of {@link com.android.internal.widget.RecyclerView.Adapter} responsible for providing views
+     that represent items in a data set.&lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;Position:&lt;/em&gt; The position of a data item within an &lt;em&gt;Adapter&lt;/em&gt;.&lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;Index:&lt;/em&gt; The index of an attached child view as used in a call to
+     {@link ViewGroup#getChildAt}. Contrast with &lt;em&gt;Position.&lt;/em&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;Binding:&lt;/em&gt; The process of preparing a child view to display data corresponding
+     to a &lt;em&gt;position&lt;/em&gt; within the adapter.&lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;Recycle (view):&lt;/em&gt; A view previously used to display data for a specific adapter
+     position may be placed in a cache for later reuse to display the same type of data again
+     later. This can drastically improve performance by skipping initial layout inflation
+     or construction.&lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;Scrap (view):&lt;/em&gt; A child view that has entered into a temporarily detached
+     state during layout. Scrap views may be reused without becoming fully detached
+     from the parent RecyclerView, either unmodified if no rebinding is required or modified
+     by the adapter if the view was considered &lt;em&gt;dirty&lt;/em&gt;.&lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;Dirty (view):&lt;/em&gt; A child view that must be rebound by the adapter before
+     being displayed.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;h4&gt;Positions in RecyclerView:&lt;/h4&gt;
+ &lt;p&gt;
+ RecyclerView introduces an additional level of abstraction between the {@link com.android.internal.widget.RecyclerView.Adapter} and
+ {@link com.android.internal.widget.RecyclerView.LayoutManager} to be able to detect data set changes in batches during a layout
+ calculation. This saves LayoutManager from tracking adapter changes to calculate animations.
+ It also helps with performance because all view bindings happen at the same time and unnecessary
+ bindings are avoided.
+ &lt;p&gt;
+ For this reason, there are two types of &lt;code&gt;position&lt;/code&gt; related methods in RecyclerView:
+ &lt;ul&gt;
+     &lt;li&gt;layout position: Position of an item in the latest layout calculation. This is the
+     position from the LayoutManager's perspective.&lt;/li&gt;
+     &lt;li&gt;adapter position: Position of an item in the adapter. This is the position from
+     the Adapter's perspective.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ These two positions are the same except the time between dispatching &lt;code&gt;adapter.notify*
+ &lt;/code&gt; events and calculating the updated layout.
+ &lt;p&gt;
+ Methods that return or receive &lt;code&gt;*LayoutPosition*&lt;/code&gt; use position as of the latest
+ layout calculation (e.g. {@link com.android.internal.widget.RecyclerView.ViewHolder#getLayoutPosition()},
+ {@link #findViewHolderForLayoutPosition}(int)). These positions include all changes until the
+ last layout calculation. You can rely on these positions to be consistent with what user is
+ currently seeing on the screen. For example, if you have a list of items on the screen and user
+ asks for the 5&lt;sup&gt;th&lt;/sup&gt; element, you should use these methods as they'll match what user
+ is seeing.
+ &lt;p&gt;
+ The other set of position related methods are in the form of
+ &lt;code&gt;*AdapterPosition*&lt;/code&gt;. (e.g. {@link com.android.internal.widget.RecyclerView.ViewHolder#getAdapterPosition()},
+ {@link #findViewHolderForAdapterPosition}(int)) You should use these methods when you need to
+ work with up-to-date adapter positions even if they may not have been reflected to layout yet.
+ For example, if you want to access the item in the adapter on a ViewHolder click, you should use
+ {@link com.android.internal.widget.RecyclerView.ViewHolder#getAdapterPosition()}. Beware that these methods may not be able to calculate
+ adapter positions if {@link com.android.internal.widget.RecyclerView.Adapter#notifyDataSetChanged()} has been called and new layout has
+ not yet been calculated. For this reasons, you should carefully handle {@link #NO_POSITION} or
+ &lt;code&gt;null&lt;/code&gt; results from these methods.
+ &lt;p&gt;
+ When writing a {@link com.android.internal.widget.RecyclerView.LayoutManager} you almost always want to use layout positions whereas when
+ writing an {@link com.android.internal.widget.RecyclerView.Adapter}, you probably want to use adapter positions.
+*/
+var RecyclerView = {
+
+<span id='com-android-internal-widget-RecyclerView-property-HORIZONTAL'>/***/
+</span>HORIZONTAL : &quot;0&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-VERTICAL'>/***/
+</span>VERTICAL : &quot;1&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-NO_POSITION'>/***/
+</span>NO_POSITION : &quot;-1&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-NO_ID'>/***/
+</span>NO_ID : &quot;-1&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-INVALID_TYPE'>/***/
+</span>INVALID_TYPE : &quot;-1&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-TOUCH_SLOP_DEFAULT'>/** Constant for use with {@link #setScrollingTouchSlop}(int). Indicates
+</span> that the RecyclerView should use the standard touch slop for smooth,
+ continuous scrolling.
+*/
+TOUCH_SLOP_DEFAULT : &quot;0&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-TOUCH_SLOP_PAGING'>/** Constant for use with {@link #setScrollingTouchSlop}(int). Indicates
+</span> that the RecyclerView should use the standard touch slop for scrolling
+ widgets that snap to a page or other coarse-grained barrier.
+*/
+TOUCH_SLOP_PAGING : &quot;1&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-SCROLL_STATE_IDLE'>/** The RecyclerView is not currently scrolling.
+</span> @see #getScrollState()
+*/
+SCROLL_STATE_IDLE : &quot;0&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-SCROLL_STATE_DRAGGING'>/** The RecyclerView is currently being dragged by outside input such as user touch input.
+</span> @see #getScrollState()
+*/
+SCROLL_STATE_DRAGGING : &quot;1&quot;,
+<span id='com-android-internal-widget-RecyclerView-property-SCROLL_STATE_SETTLING'>/** The RecyclerView is currently animating to a final position while not under
+</span> outside control.
+ @see #getScrollState()
+*/
+SCROLL_STATE_SETTLING : &quot;2&quot;,
+<span id='com-android-internal-widget-RecyclerView-method-getCompatAccessibilityDelegate'>/**Returns the accessibility delegate compatibility implementation used by the RecyclerView.
+</span>@return {Object {com.android.internal.widget.RecyclerViewAccessibilityDelegate}} An instance of AccessibilityDelegateCompat used by RecyclerView
+*/
+getCompatAccessibilityDelegate : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setAccessibilityDelegateCompat'>/**Sets the accessibility delegate compatibility implementation used by RecyclerView.
+</span>@param {Object {RecyclerViewAccessibilityDelegate}} accessibilityDelegate The accessibility delegate to be used by RecyclerView.
+*/
+setAccessibilityDelegateCompat : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setHasFixedSize'>/**RecyclerView can perform several optimizations if it can know in advance that RecyclerView's
+</span> size is not affected by the adapter contents. RecyclerView can still change its size based
+ on other factors (e.g. its parent's size) but this size calculation cannot depend on the
+ size of its children or contents of its adapter (except the number of items in the adapter).
+ &lt;p&gt;
+ If your use of RecyclerView falls into this category, set this to {@code true}. It will allow
+ RecyclerView to avoid invalidating the whole layout when its adapter contents change.
+@param {Boolean} hasFixedSize true if adapter changes cannot affect the size of the RecyclerView.
+*/
+setHasFixedSize : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-hasFixedSize'>/**
+</span>@return {Boolean} true if the app has specified that changes in adapter content cannot change
+ the size of the RecyclerView itself.
+*/
+hasFixedSize : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setClipToPadding'>/**
+</span>*/
+setClipToPadding : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getClipToPadding'>/**Returns whether this RecyclerView will clip its children to its padding, and resize (but
+</span> not clip) any EdgeEffect to the padded region, if padding is present.
+ &lt;p&gt;
+ By default, children are clipped to the padding of their parent
+ RecyclerView. This clipping behavior is only enabled if padding is non-zero.
+@return {Boolean} true if this RecyclerView clips children to its padding and resizes (but doesn't
+         clip) any EdgeEffect to the padded region, false otherwise.
+@attr name android:clipToPadding
+*/
+getClipToPadding : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setScrollingTouchSlop'>/**Configure the scrolling touch slop for a specific use case.
+</span>
+ Set up the RecyclerView's scrolling motion threshold based on common usages.
+ Valid arguments are {@link #TOUCH_SLOP_DEFAULT} and {@link #TOUCH_SLOP_PAGING}.
+@param {Number} slopConstant One of the &lt;code&gt;TOUCH_SLOP_&lt;/code&gt; constants representing
+                     the intended usage of this RecyclerView
+*/
+setScrollingTouchSlop : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-swapAdapter'>/**Swaps the current adapter with the provided one. It is similar to
+</span> {@link #setAdapter}(Adapter) but assumes existing adapter and the new adapter uses the same
+ {@link com.android.internal.widget.RecyclerView.ViewHolder} and does not clear the RecycledViewPool.
+ &lt;p&gt;
+ Note that it still calls onAdapterChanged callbacks.
+@param {Object {com.android.internal.widget.RecyclerView.Adapter}} adapter The new adapter to set, or null to set no adapter.
+@param {Boolean} removeAndRecycleExistingViews If set to true, RecyclerView will recycle all existing
+                                      Views. If adapters have stable ids and/or you want to
+                                      animate the disappearing views, you may prefer to set
+                                      this to false.
+@see #setAdapter(Adapter)
+*/
+swapAdapter : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setAdapter'>/**Set a new adapter to provide child views on demand.
+</span> &lt;p&gt;
+ When adapter is changed, all existing views are recycled back to the pool. If the pool has
+ only one adapter, it will be cleared.
+@param {Object {com.android.internal.widget.RecyclerView.Adapter}} adapter The new adapter to set, or null to set no adapter.
+@see #swapAdapter(Adapter, boolean)
+*/
+setAdapter : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getAdapter'>/**Retrieves the previously set adapter or null if no adapter is set.
+</span>@return {Object {com.android.internal.widget.RecyclerView.Adapter}} The previously set adapter
+@see #setAdapter(Adapter)
+*/
+getAdapter : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setRecyclerListener'>/**Register a listener that will be notified whenever a child view is recycled.
+</span>
+ &lt;p&gt;This listener will be called when a LayoutManager or the RecyclerView decides
+ that a child view is no longer needed. If an application associates expensive
+ or heavyweight data with item views, this may be a good place to release
+ or free those resources.&lt;/p&gt;
+@param {Object {RecyclerView.RecyclerListener}} listener Listener to register, or null to clear
+*/
+setRecyclerListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getBaseline'>/**&lt;p&gt;Return the offset of the RecyclerView's text baseline from the its top
+</span> boundary. If the LayoutManager of this RecyclerView does not support baseline alignment,
+ this method returns -1.&lt;/p&gt;
+@return {Number} the offset of the baseline within the RecyclerView's bounds or -1
+         if baseline alignment is not supported
+*/
+getBaseline : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-addOnChildAttachStateChangeListener'>/**Register a listener that will be notified whenever a child view is attached to or detached
+</span> from RecyclerView.
+
+ &lt;p&gt;This listener will be called when a LayoutManager or the RecyclerView decides
+ that a child view is no longer needed. If an application associates expensive
+ or heavyweight data with item views, this may be a good place to release
+ or free those resources.&lt;/p&gt;
+@param {Object {RecyclerView.OnChildAttachStateChangeListener}} listener Listener to register
+*/
+addOnChildAttachStateChangeListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-removeOnChildAttachStateChangeListener'>/**Removes the provided listener from child attached state listeners list.
+</span>@param {Object {RecyclerView.OnChildAttachStateChangeListener}} listener Listener to unregister
+*/
+removeOnChildAttachStateChangeListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-clearOnChildAttachStateChangeListeners'>/**Removes all listeners that were added via
+</span> {@link #addOnChildAttachStateChangeListener}(OnChildAttachStateChangeListener).
+*/
+clearOnChildAttachStateChangeListeners : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setLayoutManager'>/**Set the {@link com.android.internal.widget.RecyclerView.LayoutManager} that this RecyclerView will use.
+</span>
+ &lt;p&gt;In contrast to other adapter-backed views such as {@link android.widget.ListView}
+ or {@link android.widget.GridView}, RecyclerView allows client code to provide custom
+ layout arrangements for child views. These arrangements are controlled by the
+ {@link com.android.internal.widget.RecyclerView.LayoutManager}. A LayoutManager must be provided for RecyclerView to function.&lt;/p&gt;
+
+ &lt;p&gt;Several default strategies are provided for common uses such as lists and grids.&lt;/p&gt;
+@param {Object {RecyclerView.LayoutManager}} layout LayoutManager to use
+*/
+setLayoutManager : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setOnFlingListener'>/**Set a {@link com.android.internal.widget.RecyclerView.OnFlingListener} for this {@link com.android.internal.widget.RecyclerView}.
+</span> &lt;p&gt;
+ If the {@link com.android.internal.widget.RecyclerView.OnFlingListener} is set then it will receive
+ calls to {@link #fling(int,int)} and will be able to intercept them.
+@param {Object {RecyclerView.OnFlingListener}} onFlingListener The {@link OnFlingListener} instance.
+*/
+setOnFlingListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getOnFlingListener'>/**Get the current {@link com.android.internal.widget.RecyclerView.OnFlingListener} from this {@link com.android.internal.widget.RecyclerView}.
+</span>@return {Object {com.android.internal.widget.RecyclerView.OnFlingListener}} The {@link OnFlingListener} instance currently set (can be null).
+*/
+getOnFlingListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getLayoutManager'>/**Return the {@link com.android.internal.widget.RecyclerView.LayoutManager} currently responsible for
+</span> layout policy for this RecyclerView.
+@return {Object {com.android.internal.widget.RecyclerView.LayoutManager}} The currently bound LayoutManager
+*/
+getLayoutManager : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getRecycledViewPool'>/**Retrieve this RecyclerView's {@link com.android.internal.widget.RecyclerView.RecycledViewPool}. This method will never return null;
+</span> if no pool is set for this view a new one will be created. See
+ {@link #setRecycledViewPool(RecycledViewPool) setRecycledViewPool} for more information.
+@return {Object {com.android.internal.widget.RecyclerView.RecycledViewPool}} The pool used to store recycled item views for reuse.
+@see #setRecycledViewPool(RecycledViewPool)
+*/
+getRecycledViewPool : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setRecycledViewPool'>/**Recycled view pools allow multiple RecyclerViews to share a common pool of scrap views.
+</span> This can be useful if you have multiple RecyclerViews with adapters that use the same
+ view types, for example if you have several data sets with the same kinds of item views
+ displayed by a {@link android.support.v4.view.com.android.internal.widget.ViewPager com.android.internal.widget.ViewPager}.
+@param {Object {RecyclerView.RecycledViewPool}} pool Pool to set. If this parameter is null a new pool will be created and used.
+*/
+setRecycledViewPool : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setViewCacheExtension'>/**Sets a new {@link com.android.internal.widget.RecyclerView.ViewCacheExtension} to be used by the Recycler.
+</span>@param {Object {RecyclerView.ViewCacheExtension}} extension ViewCacheExtension to be used or null if you want to clear the existing one.
+@see {@link ViewCacheExtension#getViewForPositionAndType(Recycler, int, int)}
+*/
+setViewCacheExtension : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setItemViewCacheSize'>/**Set the number of offscreen views to retain before adding them to the potentially shared
+</span> {@link #getRecycledViewPool() recycled view pool}.
+
+ &lt;p&gt;The offscreen view cache stays aware of changes in the attached adapter, allowing
+ a LayoutManager to reuse those views unmodified without needing to return to the adapter
+ to rebind them.&lt;/p&gt;
+@param {Number} size Number of views to cache offscreen before returning them to the general
+             recycled view pool
+*/
+setItemViewCacheSize : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getScrollState'>/**Return the current scrolling state of the RecyclerView.
+</span>@return {Number} {@link #SCROLL_STATE_IDLE}, {@link #SCROLL_STATE_DRAGGING} or
+ {@link #SCROLL_STATE_SETTLING}
+*/
+getScrollState : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-addItemDecoration'>/**Add an {@link com.android.internal.widget.RecyclerView.ItemDecoration} to this RecyclerView. Item decorations can
+</span> affect both measurement and drawing of individual item views.
+
+ &lt;p&gt;Item decorations are ordered. Decorations placed earlier in the list will
+ be run/queried/drawn first for their effects on item views. Padding added to views
+ will be nested; a padding added by an earlier decoration will mean further
+ item decorations in the list will be asked to draw/pad within the previous decoration's
+ given area.&lt;/p&gt;
+@param {Object {RecyclerView.ItemDecoration}} decor Decoration to add
+@param {Number} index Position in the decoration chain to insert this decoration at. If this value
+              is negative the decoration will be added at the end.
+*/
+addItemDecoration : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-addItemDecoration'>/**Add an {@link com.android.internal.widget.RecyclerView.ItemDecoration} to this RecyclerView. Item decorations can
+</span> affect both measurement and drawing of individual item views.
+
+ &lt;p&gt;Item decorations are ordered. Decorations placed earlier in the list will
+ be run/queried/drawn first for their effects on item views. Padding added to views
+ will be nested; a padding added by an earlier decoration will mean further
+ item decorations in the list will be asked to draw/pad within the previous decoration's
+ given area.&lt;/p&gt;
+@param {Object {RecyclerView.ItemDecoration}} decor Decoration to add
+*/
+addItemDecoration : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-removeItemDecoration'>/**Remove an {@link com.android.internal.widget.RecyclerView.ItemDecoration} from this RecyclerView.
+</span>
+ &lt;p&gt;The given decoration will no longer impact the measurement and drawing of
+ item views.&lt;/p&gt;
+@param {Object {RecyclerView.ItemDecoration}} decor Decoration to remove
+@see #addItemDecoration(ItemDecoration)
+*/
+removeItemDecoration : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setChildDrawingOrderCallback'>/**Sets the {@link com.android.internal.widget.RecyclerView.ChildDrawingOrderCallback} to be used for drawing children.
+</span> &lt;p&gt;
+ See {@link ViewGroup#getChildDrawingOrder(int, int)} for details. Calling this method will
+ always call {@link ViewGroup#setChildrenDrawingOrderEnabled(boolean)}. The parameter will be
+ true if childDrawingOrderCallback is not null, false otherwise.
+ &lt;p&gt;
+ Note that child drawing order may be overridden by View's elevation.
+@param {Object {RecyclerView.ChildDrawingOrderCallback}} childDrawingOrderCallback The ChildDrawingOrderCallback to be used by the drawing
+                                  system.
+*/
+setChildDrawingOrderCallback : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setOnScrollListener'>/**Set a listener that will be notified of any changes in scroll state or position.
+</span>@param {Object {RecyclerView.OnScrollListener}} listener Listener to set or null to clear
+@deprecated Use {@link #addOnScrollListener(OnScrollListener)} and
+             {@link #removeOnScrollListener(OnScrollListener)}
+*/
+setOnScrollListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-addOnScrollListener'>/**Add a listener that will be notified of any changes in scroll state or position.
+</span>
+ &lt;p&gt;Components that add a listener should take care to remove it when finished.
+ Other components that take ownership of a view may call {@link #clearOnScrollListeners}()
+ to remove all attached listeners.&lt;/p&gt;
+@param {Object {RecyclerView.OnScrollListener}} listener listener to set or null to clear
+*/
+addOnScrollListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-removeOnScrollListener'>/**Remove a listener that was notified of any changes in scroll state or position.
+</span>@param {Object {RecyclerView.OnScrollListener}} listener listener to set or null to clear
+*/
+removeOnScrollListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-clearOnScrollListeners'>/**Remove all secondary listener that were notified of any changes in scroll state or position.
+</span>*/
+clearOnScrollListeners : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-scrollToPosition'>/**Convenience method to scroll to a certain position.
+</span>
+ RecyclerView does not implement scrolling logic, rather forwards the call to
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#scrollToPosition(int)}
+@param {Number} position Scroll to this adapter position
+@see com.android.internal.widget.RecyclerView.LayoutManager#scrollToPosition(int)
+*/
+scrollToPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-smoothScrollToPosition'>/**Starts a smooth scroll to an adapter position.
+</span> &lt;p&gt;
+ To support smooth scrolling, you must override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#smoothScrollToPosition(RecyclerView, State, int)} and create a
+ {@link com.android.internal.widget.RecyclerView.SmoothScroller}.
+ &lt;p&gt;
+ {@link com.android.internal.widget.RecyclerView.LayoutManager} is responsible for creating the actual scroll action. If you want to
+ provide a custom smooth scroll logic, override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#smoothScrollToPosition(RecyclerView, State, int)} in your
+ LayoutManager.
+@param {Number} position The adapter position to scroll to
+@see LayoutManager#smoothScrollToPosition(RecyclerView, State, int)
+*/
+smoothScrollToPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-scrollTo'>/**
+</span>*/
+scrollTo : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-scrollBy'>/**
+</span>*/
+scrollBy : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-computeHorizontalScrollOffset'>/**&lt;p&gt;Compute the horizontal offset of the horizontal scrollbar's thumb within the horizontal
+</span> range. This value is used to compute the length of the thumb within the scrollbar's track.
+ &lt;/p&gt;
+
+ &lt;p&gt;The range is expressed in arbitrary units that must be the same as the units used by
+ {@link #computeHorizontalScrollRange}() and {@link #computeHorizontalScrollExtent}().&lt;/p&gt;
+
+ &lt;p&gt;Default implementation returns 0.&lt;/p&gt;
+
+ &lt;p&gt;If you want to support scroll bars, override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#computeHorizontalScrollOffset(com.android.internal.widget.RecyclerView.State)} in your
+ LayoutManager. &lt;/p&gt;
+@return {Number} The horizontal offset of the scrollbar's thumb
+@see com.android.internal.widget.RecyclerView.LayoutManager#computeHorizontalScrollOffset
+ (RecyclerView.State)
+*/
+computeHorizontalScrollOffset : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-computeHorizontalScrollExtent'>/**&lt;p&gt;Compute the horizontal extent of the horizontal scrollbar's thumb within the
+</span> horizontal range. This value is used to compute the length of the thumb within the
+ scrollbar's track.&lt;/p&gt;
+
+ &lt;p&gt;The range is expressed in arbitrary units that must be the same as the units used by
+ {@link #computeHorizontalScrollRange}() and {@link #computeHorizontalScrollOffset}().&lt;/p&gt;
+
+ &lt;p&gt;Default implementation returns 0.&lt;/p&gt;
+
+ &lt;p&gt;If you want to support scroll bars, override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#computeHorizontalScrollExtent(com.android.internal.widget.RecyclerView.State)} in your
+ LayoutManager.&lt;/p&gt;
+@return {Number} The horizontal extent of the scrollbar's thumb
+@see RecyclerView.LayoutManager#computeHorizontalScrollExtent(RecyclerView.State)
+*/
+computeHorizontalScrollExtent : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-computeHorizontalScrollRange'>/**&lt;p&gt;Compute the horizontal range that the horizontal scrollbar represents.&lt;/p&gt;
+</span>
+ &lt;p&gt;The range is expressed in arbitrary units that must be the same as the units used by
+ {@link #computeHorizontalScrollExtent}() and {@link #computeHorizontalScrollOffset}().&lt;/p&gt;
+
+ &lt;p&gt;Default implementation returns 0.&lt;/p&gt;
+
+ &lt;p&gt;If you want to support scroll bars, override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#computeHorizontalScrollRange(com.android.internal.widget.RecyclerView.State)} in your
+ LayoutManager.&lt;/p&gt;
+@return {Number} The total horizontal range represented by the vertical scrollbar
+@see RecyclerView.LayoutManager#computeHorizontalScrollRange(RecyclerView.State)
+*/
+computeHorizontalScrollRange : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-computeVerticalScrollOffset'>/**&lt;p&gt;Compute the vertical offset of the vertical scrollbar's thumb within the vertical range.
+</span> This value is used to compute the length of the thumb within the scrollbar's track. &lt;/p&gt;
+
+ &lt;p&gt;The range is expressed in arbitrary units that must be the same as the units used by
+ {@link #computeVerticalScrollRange}() and {@link #computeVerticalScrollExtent}().&lt;/p&gt;
+
+ &lt;p&gt;Default implementation returns 0.&lt;/p&gt;
+
+ &lt;p&gt;If you want to support scroll bars, override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#computeVerticalScrollOffset(com.android.internal.widget.RecyclerView.State)} in your
+ LayoutManager.&lt;/p&gt;
+@return {Number} The vertical offset of the scrollbar's thumb
+@see com.android.internal.widget.RecyclerView.LayoutManager#computeVerticalScrollOffset
+ (RecyclerView.State)
+*/
+computeVerticalScrollOffset : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-computeVerticalScrollExtent'>/**&lt;p&gt;Compute the vertical extent of the vertical scrollbar's thumb within the vertical range.
+</span> This value is used to compute the length of the thumb within the scrollbar's track.&lt;/p&gt;
+
+ &lt;p&gt;The range is expressed in arbitrary units that must be the same as the units used by
+ {@link #computeVerticalScrollRange}() and {@link #computeVerticalScrollOffset}().&lt;/p&gt;
+
+ &lt;p&gt;Default implementation returns 0.&lt;/p&gt;
+
+ &lt;p&gt;If you want to support scroll bars, override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#computeVerticalScrollExtent(com.android.internal.widget.RecyclerView.State)} in your
+ LayoutManager.&lt;/p&gt;
+@return {Number} The vertical extent of the scrollbar's thumb
+@see RecyclerView.LayoutManager#computeVerticalScrollExtent(RecyclerView.State)
+*/
+computeVerticalScrollExtent : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-computeVerticalScrollRange'>/**&lt;p&gt;Compute the vertical range that the vertical scrollbar represents.&lt;/p&gt;
+</span>
+ &lt;p&gt;The range is expressed in arbitrary units that must be the same as the units used by
+ {@link #computeVerticalScrollExtent}() and {@link #computeVerticalScrollOffset}().&lt;/p&gt;
+
+ &lt;p&gt;Default implementation returns 0.&lt;/p&gt;
+
+ &lt;p&gt;If you want to support scroll bars, override
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#computeVerticalScrollRange(com.android.internal.widget.RecyclerView.State)} in your
+ LayoutManager.&lt;/p&gt;
+@return {Number} The total vertical range represented by the vertical scrollbar
+@see RecyclerView.LayoutManager#computeVerticalScrollRange(RecyclerView.State)
+*/
+computeVerticalScrollRange : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setLayoutFrozen'>/**Enable or disable layout and scroll.  After &lt;code&gt;setLayoutFrozen(true)&lt;/code&gt; is called,
+</span> Layout requests will be postponed until &lt;code&gt;setLayoutFrozen(false)&lt;/code&gt; is called;
+ child views are not updated when RecyclerView is frozen, {@link #smoothScrollBy(int, int)},
+ {@link #scrollBy(int, int)}, {@link #scrollToPosition}(int) and
+ {@link #smoothScrollToPosition}(int) are dropped; TouchEvents and GenericMotionEvents are
+ dropped; {@link com.android.internal.widget.RecyclerView.LayoutManager#onFocusSearchFailed(View, int, Recycler, State)} will not be
+ called.
+
+ &lt;p&gt;
+ &lt;code&gt;setLayoutFrozen(true)&lt;/code&gt; does not prevent app from directly calling {@link com.android.internal.widget.RecyclerView.LayoutManager#scrollToPosition(int)}, {@link com.android.internal.widget.RecyclerView.LayoutManager#smoothScrollToPosition(
+ RecyclerView, State, int)}.
+ &lt;p&gt;
+ {@link #setAdapter}(Adapter) and {@link #swapAdapter(Adapter, boolean)} will automatically
+ stop frozen.
+ &lt;p&gt;
+ Note: Running ItemAnimator is not stopped automatically,  it's caller's
+ responsibility to call ItemAnimator.end().
+@param {Boolean} frozen   true to freeze layout and scroll, false to re-enable.
+*/
+setLayoutFrozen : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-isLayoutFrozen'>/**Returns true if layout and scroll are frozen.
+</span>@return {Boolean} true if layout and scroll are frozen
+@see #setLayoutFrozen(boolean)
+*/
+isLayoutFrozen : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-smoothScrollBy'>/**Animate a scroll by the given amount of pixels along either axis.
+</span>@param {Number} dx Pixels to scroll horizontally
+@param {Number} dy Pixels to scroll vertically
+*/
+smoothScrollBy : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-smoothScrollBy'>/**Animate a scroll by the given amount of pixels along either axis.
+</span>@param {Number} dx Pixels to scroll horizontally
+@param {Number} dy Pixels to scroll vertically
+@param {Object {Interpolator}} interpolator {@link Interpolator} to be used for scrolling. If it is
+                     {@code null}, RecyclerView is going to use the default interpolator.
+*/
+smoothScrollBy : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-fling'>/**Begin a standard fling with an initial velocity along each axis in pixels per second.
+</span> If the velocity given is below the system-defined minimum this method will return false
+ and no fling will occur.
+@param {Number} velocityX Initial horizontal velocity in pixels per second
+@param {Number} velocityY Initial vertical velocity in pixels per second
+@return {Boolean} true if the fling was started, false if the velocity was too low to fling or
+ LayoutManager does not support scrolling in the axis fling is issued.
+@see LayoutManager#canScrollVertically()
+@see LayoutManager#canScrollHorizontally()
+*/
+fling : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-stopScroll'>/**Stop any current scroll in progress, such as one started by
+</span> {@link #smoothScrollBy(int, int)}, {@link #fling(int, int)} or a touch-initiated fling.
+*/
+stopScroll : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getMinFlingVelocity'>/**Returns the minimum velocity to start a fling.
+</span>@return {Number} The minimum velocity to start a fling
+*/
+getMinFlingVelocity : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getMaxFlingVelocity'>/**Returns the maximum fling velocity used by this RecyclerView.
+</span>@return {Number} The maximum fling velocity used by this RecyclerView.
+*/
+getMaxFlingVelocity : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-focusSearch'>/**Since RecyclerView is a collection ViewGroup that includes virtual children (items that are
+</span> in the Adapter but not visible in the UI), it employs a more involved focus search strategy
+ that differs from other ViewGroups.
+ &lt;p&gt;
+ It first does a focus search within the RecyclerView. If this search finds a View that is in
+ the focus direction with respect to the currently focused View, RecyclerView returns that
+ child as the next focus target. When it cannot find such child, it calls
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#onFocusSearchFailed(View, int, Recycler, State)} to layout more Views
+ in the focus search direction. If LayoutManager adds a View that matches the
+ focus search criteria, it will be returned as the focus search result. Otherwise,
+ RecyclerView will call parent to handle the focus search like a regular ViewGroup.
+ &lt;p&gt;
+ When the direction is {@link View#FOCUS_FORWARD} or {@link View#FOCUS_BACKWARD}, a View that
+ is not in the focus direction is still valid focus target which may not be the desired
+ behavior if the Adapter has more children in the focus direction. To handle this case,
+ RecyclerView converts the focus direction to an absolute direction and makes a preliminary
+ focus search in that direction. If there are no Views to gain focus, it will call
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#onFocusSearchFailed(View, int, Recycler, State)} before running a
+ focus search with the original (relative) direction. This allows RecyclerView to provide
+ better candidates to the focus search while still allowing the view system to take focus from
+ the RecyclerView and give it to a more suitable child if such child exists.
+@param {Object {View}} focused The view that currently has focus
+@param {Number} direction One of {@link View#FOCUS_UP}, {@link View#FOCUS_DOWN},
+ {@link View#FOCUS_LEFT}, {@link View#FOCUS_RIGHT}, {@link View#FOCUS_FORWARD},
+ {@link View#FOCUS_BACKWARD} or 0 for not applicable.
+@return {Object {android.view.View}} A new View that can be the next focus after the focused View
+*/
+focusSearch : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-requestChildFocus'>/**
+</span>*/
+requestChildFocus : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-requestChildRectangleOnScreen'>/**
+</span>*/
+requestChildRectangleOnScreen : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-addFocusables'>/**
+</span>*/
+addFocusables : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-isAttachedToWindow'>/**Returns true if RecyclerView is attached to window.
+</span>*/
+isAttachedToWindow : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-addOnItemTouchListener'>/**Add an {@link com.android.internal.widget.RecyclerView.OnItemTouchListener} to intercept touch events before they are dispatched
+</span> to child views or this view's standard scrolling behavior.
+
+ &lt;p&gt;Client code may use listeners to implement item manipulation behavior. Once a listener
+ returns true from
+ {@link com.android.internal.widget.RecyclerView.OnItemTouchListener#onInterceptTouchEvent(RecyclerView, MotionEvent)} its
+ {@link com.android.internal.widget.RecyclerView.OnItemTouchListener#onTouchEvent(RecyclerView, MotionEvent)} method will be called
+ for each incoming MotionEvent until the end of the gesture.&lt;/p&gt;
+@param {Object {RecyclerView.OnItemTouchListener}} listener Listener to add
+@see SimpleOnItemTouchListener
+*/
+addOnItemTouchListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-removeOnItemTouchListener'>/**Remove an {@link com.android.internal.widget.RecyclerView.OnItemTouchListener}. It will no longer be able to intercept touch events.
+</span>@param {Object {RecyclerView.OnItemTouchListener}} listener Listener to remove
+*/
+removeOnItemTouchListener : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onInterceptTouchEvent'>/**
+</span>*/
+onInterceptTouchEvent : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-requestDisallowInterceptTouchEvent'>/**
+</span>*/
+requestDisallowInterceptTouchEvent : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onGenericMotionEvent'>/**
+</span>*/
+onGenericMotionEvent : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setItemAnimator'>/**Sets the {@link com.android.internal.widget.RecyclerView.ItemAnimator} that will handle animations involving changes
+</span> to the items in this RecyclerView. By default, RecyclerView instantiates and
+ uses an instance of {@link com.android.internal.widget.DefaultItemAnimator}. Whether item animations are
+ enabled for the RecyclerView depends on the ItemAnimator and whether
+ the LayoutManager {@link com.android.internal.widget.RecyclerView.LayoutManager#supportsPredictiveItemAnimations()
+ supports item animations}.
+@param {Object {RecyclerView.ItemAnimator}} animator The ItemAnimator being set. If null, no animations will occur
+ when changes occur to the items in this RecyclerView.
+*/
+setItemAnimator : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-isComputingLayout'>/**Returns whether RecyclerView is currently computing a layout.
+</span> &lt;p&gt;
+ If this method returns true, it means that RecyclerView is in a lockdown state and any
+ attempt to update adapter contents will result in an exception because adapter contents
+ cannot be changed while RecyclerView is trying to compute the layout.
+ &lt;p&gt;
+ It is very unlikely that your code will be running during this state as it is
+ called by the framework when a layout traversal happens or RecyclerView starts to scroll
+ in response to system events (touch, accessibility etc).
+ &lt;p&gt;
+ This case may happen if you have some custom logic to change adapter contents in
+ response to a View callback (e.g. focus change callback) which might be triggered during a
+ layout calculation. In these cases, you should just postpone the change using a Handler or a
+ similar mechanism.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if RecyclerView is currently computing a layout, &lt;code&gt;false&lt;/code&gt;
+         otherwise
+*/
+isComputingLayout : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-sendAccessibilityEventUnchecked'>/**
+</span>*/
+sendAccessibilityEventUnchecked : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getItemAnimator'>/**Gets the current ItemAnimator for this RecyclerView. A null return value
+</span> indicates that there is no animator and that item changes will happen without
+ any animations. By default, RecyclerView instantiates and
+ uses an instance of {@link com.android.internal.widget.DefaultItemAnimator}.
+@return {Object {com.android.internal.widget.RecyclerView.ItemAnimator}} ItemAnimator The current ItemAnimator. If null, no animations will occur
+ when changes occur to the items in this RecyclerView.
+*/
+getItemAnimator : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-requestLayout'>/**
+</span>*/
+requestLayout : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onDraw'>/**
+</span>*/
+onDraw : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-generateLayoutParams'>/**
+</span>*/
+generateLayoutParams : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-isAnimating'>/**Returns true if RecyclerView is currently running some animations.
+</span> &lt;p&gt;
+ If you want to be notified when animations are finished, use
+ {@link com.android.internal.widget.RecyclerView.ItemAnimator#isRunning(com.android.internal.widget.RecyclerView.ItemAnimator.com.android.internal.widget.RecyclerView.ItemAnimatorFinishedListener)}.
+@return {Boolean} True if there are some item animations currently running or waiting to be started.
+*/
+isAnimating : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-invalidateItemDecorations'>/**Invalidates all ItemDecorations. If RecyclerView has item decorations, calling this method
+</span> will trigger a {@link #requestLayout}() call.
+*/
+invalidateItemDecorations : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getPreserveFocusAfterLayout'>/**Returns true if the RecyclerView should attempt to preserve currently focused Adapter Item's
+</span> focus even if the View representing the Item is replaced during a layout calculation.
+ &lt;p&gt;
+ By default, this value is {@code true}.
+@return {Boolean} True if the RecyclerView will try to preserve focused Item after a layout if it loses
+ focus.
+@see #setPreserveFocusAfterLayout(boolean)
+*/
+getPreserveFocusAfterLayout : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-setPreserveFocusAfterLayout'>/**Set whether the RecyclerView should try to keep the same Item focused after a layout
+</span> calculation or not.
+ &lt;p&gt;
+ Usually, LayoutManagers keep focused views visible before and after layout but sometimes,
+ views may lose focus during a layout calculation as their state changes or they are replaced
+ with another view due to type change or animation. In these cases, RecyclerView can request
+ focus on the new view automatically.
+@param {Boolean} preserveFocusAfterLayout Whether RecyclerView should preserve focused Item during a
+                                 layout calculations. Defaults to true.
+@see #getPreserveFocusAfterLayout()
+*/
+setPreserveFocusAfterLayout : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getChildViewHolder'>/**Retrieve the {@link com.android.internal.widget.RecyclerView.ViewHolder} for the given child view.
+</span>@param {Object {View}} child Child of this RecyclerView to query for its ViewHolder
+@return {Object {com.android.internal.widget.RecyclerView.ViewHolder}} The child view's ViewHolder
+*/
+getChildViewHolder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-findContainingItemView'>/**Traverses the ancestors of the given view and returns the item view that contains it and
+</span> also a direct child of the RecyclerView. This returned view can be used to get the
+ ViewHolder by calling {@link #getChildViewHolder}(View).
+@param {Object {View}} view The view that is a descendant of the RecyclerView.
+@return {Object {android.view.View}} The direct child of the RecyclerView which contains the given view or null if the
+ provided view is not a descendant of this RecyclerView.
+@see #getChildViewHolder(View)
+@see #findContainingViewHolder(View)
+*/
+findContainingItemView : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-findContainingViewHolder'>/**Returns the ViewHolder that contains the given view.
+</span>@param {Object {View}} view The view that is a descendant of the RecyclerView.
+@return {Object {com.android.internal.widget.RecyclerView.ViewHolder}} The ViewHolder that contains the given view or null if the provided view is not a
+ descendant of this RecyclerView.
+*/
+findContainingViewHolder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getChildPosition'>/**
+</span>@deprecated use {@link #getChildAdapterPosition(View)} or
+ {@link #getChildLayoutPosition(View)}.
+*/
+getChildPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getChildAdapterPosition'>/**Return the adapter position that the given child view corresponds to.
+</span>@param {Object {View}} child Child View to query
+@return {Number} Adapter position corresponding to the given view or {@link #NO_POSITION}
+*/
+getChildAdapterPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getChildLayoutPosition'>/**Return the adapter position of the given child view as of the latest completed layout pass.
+</span> &lt;p&gt;
+ This position may not be equal to Item's adapter position if there are pending changes
+ in the adapter which have not been reflected to the layout yet.
+@param {Object {View}} child Child View to query
+@return {Number} Adapter position of the given View as of last layout pass or {@link #NO_POSITION} if
+ the View is representing a removed item.
+*/
+getChildLayoutPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getChildItemId'>/**Return the stable item id that the given child view corresponds to.
+</span>@param {Object {View}} child Child View to query
+@return {Number} Item id corresponding to the given view or {@link #NO_ID}
+*/
+getChildItemId : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-findViewHolderForPosition'>/**
+</span>@deprecated use {@link #findViewHolderForLayoutPosition(int)} or
+ {@link #findViewHolderForAdapterPosition(int)}
+*/
+findViewHolderForPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-findViewHolderForLayoutPosition'>/**Return the ViewHolder for the item in the given position of the data set as of the latest
+</span> layout pass.
+ &lt;p&gt;
+ This method checks only the children of RecyclerView. If the item at the given
+ &lt;code&gt;position&lt;/code&gt; is not laid out, it &lt;em&gt;will not&lt;/em&gt; create a new one.
+ &lt;p&gt;
+ Note that when Adapter contents change, ViewHolder positions are not updated until the
+ next layout calculation. If there are pending adapter updates, the return value of this
+ method may not match your adapter contents. You can use
+ #{@link com.android.internal.widget.RecyclerView.ViewHolder#getAdapterPosition()} to get the current adapter position of a ViewHolder.
+ &lt;p&gt;
+ When the ItemAnimator is running a change animation, there might be 2 ViewHolders
+ with the same layout position representing the same Item. In this case, the updated
+ ViewHolder will be returned.
+@param {Number} position The position of the item in the data set of the adapter
+@return {Object {com.android.internal.widget.RecyclerView.ViewHolder}} The ViewHolder at &lt;code&gt;position&lt;/code&gt; or null if there is no such item
+*/
+findViewHolderForLayoutPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-findViewHolderForAdapterPosition'>/**Return the ViewHolder for the item in the given position of the data set. Unlike
+</span> {@link #findViewHolderForLayoutPosition}(int) this method takes into account any pending
+ adapter changes that may not be reflected to the layout yet. On the other hand, if
+ {@link com.android.internal.widget.RecyclerView.Adapter#notifyDataSetChanged()} has been called but the new layout has not been
+ calculated yet, this method will return &lt;code&gt;null&lt;/code&gt; since the new positions of views
+ are unknown until the layout is calculated.
+ &lt;p&gt;
+ This method checks only the children of RecyclerView. If the item at the given
+ &lt;code&gt;position&lt;/code&gt; is not laid out, it &lt;em&gt;will not&lt;/em&gt; create a new one.
+ &lt;p&gt;
+ When the ItemAnimator is running a change animation, there might be 2 ViewHolders
+ representing the same Item. In this case, the updated ViewHolder will be returned.
+@param {Number} position The position of the item in the data set of the adapter
+@return {Object {com.android.internal.widget.RecyclerView.ViewHolder}} The ViewHolder at &lt;code&gt;position&lt;/code&gt; or null if there is no such item
+*/
+findViewHolderForAdapterPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-findViewHolderForItemId'>/**Return the ViewHolder for the item with the given id. The RecyclerView must
+</span> use an Adapter with {@link com.android.internal.widget.RecyclerView.Adapter#setHasStableIds(boolean) stableIds} to
+ return a non-null value.
+ &lt;p&gt;
+ This method checks only the children of RecyclerView. If the item with the given
+ &lt;code&gt;id&lt;/code&gt; is not laid out, it &lt;em&gt;will not&lt;/em&gt; create a new one.
+
+ When the ItemAnimator is running a change animation, there might be 2 ViewHolders with the
+ same id. In this case, the updated ViewHolder will be returned.
+@param {Number} id The id for the requested item
+@return {Object {com.android.internal.widget.RecyclerView.ViewHolder}} The ViewHolder with the given &lt;code&gt;id&lt;/code&gt; or null if there is no such item
+*/
+findViewHolderForItemId : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-findChildViewUnder'>/**Find the topmost view under the given point.
+</span>@param {Number} x Horizontal position in pixels to search
+@param {Number} y Vertical position in pixels to search
+@return {Object {android.view.View}} The child view under (x, y) or null if no matching child is found
+*/
+findChildViewUnder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-drawChild'>/**
+</span>*/
+drawChild : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-offsetChildrenVertical'>/**Offset the bounds of all child views by &lt;code&gt;dy&lt;/code&gt; pixels.
+</span> Useful for implementing simple scrolling in {@link com.android.internal.widget.RecyclerView.LayoutManager com.android.internal.widget.RecyclerView.LayoutManagers}.
+@param {Number} dy Vertical pixel offset to apply to the bounds of all child views
+*/
+offsetChildrenVertical : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onChildAttachedToWindow'>/**Called when an item view is attached to this RecyclerView.
+</span>
+ &lt;p&gt;Subclasses of RecyclerView may want to perform extra bookkeeping or modifications
+ of child views as they become attached. This will be called before a
+ {@link com.android.internal.widget.RecyclerView.LayoutManager} measures or lays out the view and is a good time to perform these
+ changes.&lt;/p&gt;
+@param {Object {View}} child Child view that is now attached to this RecyclerView and its associated window
+*/
+onChildAttachedToWindow : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onChildDetachedFromWindow'>/**Called when an item view is detached from this RecyclerView.
+</span>
+ &lt;p&gt;Subclasses of RecyclerView may want to perform extra bookkeeping or modifications
+ of child views as they become detached. This will be called as a
+ {@link com.android.internal.widget.RecyclerView.LayoutManager} fully detaches the child view from the parent and its window.&lt;/p&gt;
+@param {Object {View}} child Child view that is now detached from this RecyclerView and its associated window
+*/
+onChildDetachedFromWindow : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-offsetChildrenHorizontal'>/**Offset the bounds of all child views by &lt;code&gt;dx&lt;/code&gt; pixels.
+</span> Useful for implementing simple scrolling in {@link com.android.internal.widget.RecyclerView.LayoutManager com.android.internal.widget.RecyclerView.LayoutManagers}.
+@param {Number} dx Horizontal pixel offset to apply to the bounds of all child views
+*/
+offsetChildrenHorizontal : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-getDecoratedBoundsWithMargins'>/**Returns the bounds of the view including its decoration and margins.
+</span>@param {Object {View}} view The view element to check
+@param {Object {Rect}} outBounds A rect that will receive the bounds of the element including its
+                  decoration and margins.
+*/
+getDecoratedBoundsWithMargins : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onScrolled'>/**Called when the scroll position of this RecyclerView changes. Subclasses should use
+</span> this method to respond to scrolling within the adapter's data set instead of an explicit
+ listener.
+
+ &lt;p&gt;This method will always be invoked before listeners. If a subclass needs to perform
+ any additional upkeep or bookkeeping after scrolling but before listeners run,
+ this is a good place to do so.&lt;/p&gt;
+
+ &lt;p&gt;This differs from {@link View#onScrollChanged(int, int, int, int)} in that it receives
+ the distance scrolled in either direction within the adapter's data set instead of absolute
+ scroll coordinates. Since RecyclerView cannot compute the absolute scroll position from
+ any arbitrary point in the data set, &lt;code&gt;onScrollChanged&lt;/code&gt; will always receive
+ the current {@link View#getScrollX()} and {@link View#getScrollY()} values which
+ do not correspond to the data set scroll position. However, some subclasses may choose
+ to use these fields as special offsets.&lt;/p&gt;
+@param {Number} dx horizontal distance scrolled in pixels
+@param {Number} dy vertical distance scrolled in pixels
+*/
+onScrolled : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-onScrollStateChanged'>/**Called when the scroll state of this RecyclerView changes. Subclasses should use this
+</span> method to respond to state changes instead of an explicit listener.
+
+ &lt;p&gt;This method will always be invoked before listeners, but after the LayoutManager
+ responds to the scroll state change.&lt;/p&gt;
+@param {Number} state the new scroll state, one of {@link #SCROLL_STATE_IDLE},
+              {@link #SCROLL_STATE_DRAGGING} or {@link #SCROLL_STATE_SETTLING}
+*/
+onScrollStateChanged : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-method-hasPendingAdapterUpdates'>/**Returns whether there are pending adapter updates which are not yet applied to the layout.
+</span> &lt;p&gt;
+ If this method returns &lt;code&gt;true&lt;/code&gt;, it means that what user is currently seeing may not
+ reflect them adapter contents (depending on what has changed).
+ You may use this information to defer or cancel some operations.
+ &lt;p&gt;
+ This method returns true if RecyclerView has not yet calculated the first layout after it is
+ attached to the Window or the Adapter has been replaced.
+@return {Boolean} True if there are some adapter updates which are not yet reflected to layout or false
+ if layout is up to date.
+*/
+hasPendingAdapterUpdates : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

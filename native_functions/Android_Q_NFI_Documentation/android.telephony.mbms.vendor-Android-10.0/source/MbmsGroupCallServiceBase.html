@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase'>/**@class android.telephony.mbms.vendor.MbmsGroupCallServiceBase
+</span>@extends android.app.Service
+
+ Base class for MBMS group-call services. The middleware should override this class to implement
+ its {@link Service} for group calls
+ Subclasses should call this class's {@link #onBind} method to obtain an {@link IBinder} if they
+ override {@link #onBind}.
+ @hide
+*/
+var MbmsGroupCallServiceBase = {
+
+<span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase-method-initialize'>/**Initialize the group call service for this app and subscription ID, registering the callback.
+</span>
+ May throw an {@link IllegalArgumentException} or a {@link SecurityException}, which
+ will be intercepted and passed to the app as
+ {@link MbmsErrors.InitializationErrtrors#ERROR_UNABLE_TO_INITIALIZE}
+
+ May return any value from {@link MbmsErrors.InitializationErrors}
+ or {@link MbmsErrors#SUCCESS}. Non-successful error codes will be passed to the app via
+ {@link IMbmsGroupCallSessionCallback#onError(int, String)}.
+@param {Object {MbmsGroupCallSessionCallback}} callback The callback to use to communicate with the app.
+@param {Number} subscriptionId The subscription ID to use.
+*/
+initialize : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase-method-startGroupCall'>/**Starts a particular group call. This method may perform asynchronous work. When
+</span> the call is ready for consumption, the middleware should inform the app via
+ {@link IGroupCallCallback#onGroupCallStateChanged(int, int)}.
+
+ May throw an {@link IllegalArgumentException} or an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+@param {Number} tmgi The TMGI, an identifier for the group call.
+@param {Object {java.util.List}} saiList A list of SAIs for the group call.
+@param {Object {java.util.List}} frequencyList A list of frequencies for the group call.
+@param {Object {GroupCallCallback}} callback The callback object on which the app wishes to receive updates.
+@return {Number} Any error in {@link MbmsErrors.GeneralErrors}
+*/
+startGroupCall : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase-method-stopGroupCall'>/**Stop the group call identified by {@code tmgi}.
+</span>
+ The callback provided via {@link #startGroupCall} should no longer be
+ used after this method has called by the app.
+
+ May throw an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+@param {Number} tmgi The TMGI for the call to stop.
+*/
+stopGroupCall : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase-method-updateGroupCall'>/**Called when the app receives new SAI and frequency information for the group call identified
+</span> by {@code tmgi}.
+@param {Number} saiList New list of SAIs that the call is available on.
+@param {Number} frequencyList New list of frequencies that the call is available on.
+*/
+updateGroupCall : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase-method-dispose'>/**Signals that the app wishes to dispose of the session identified by the
+</span> {@code subscriptionId} argument and the caller's uid. No notification back to the
+ app is required for this operation, and the corresponding callback provided via
+ {@link #initialize} should no longer be used
+ after this method has been called by the app.
+
+ May throw an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+*/
+dispose : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase-method-onAppCallbackDied'>/**Indicates that the app identified by the given UID and subscription ID has died.
+</span>@param {Number} uid the UID of the app, as returned by {@link Binder#getCallingUid()}.
+@param {Number} subscriptionId The subscription ID the app is using.
+*/
+onAppCallbackDied : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsGroupCallServiceBase-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

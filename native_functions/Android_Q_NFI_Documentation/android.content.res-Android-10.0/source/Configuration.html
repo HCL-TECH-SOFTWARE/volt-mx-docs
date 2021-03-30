@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-res-Configuration'>/**@class android.content.res.Configuration
+</span> implements android.os.Parcelable
+
+ implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ This class describes all device configuration information that can
+ impact the resources the application retrieves.  This includes both
+ user-specified configuration options (locale list and scaling) as well
+ as device configurations (such as input modes, screen size and screen orientation).
+ &lt;p&gt;You can acquire this object from {@link android.content.res.Resources}, using {@link android.content.res.Resources#getConfiguration}. Thus, from an activity, you can get it by chaining the request
+ with {@link android.app.Activity#getResources}:&lt;/p&gt;
+ &lt;pre&gt;Configuration config = getResources().getConfiguration();&lt;/pre&gt;
+*/
+var Configuration = {
+
+<span id='android-content-res-Configuration-property-EMPTY'>/**@hide */
+</span>EMPTY : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-fontScale'>/** Current user preference for the scaling factor for fonts, relative
+</span> to the base density scaling.
+*/
+fontScale : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-mcc'>/** IMSI MCC (Mobile Country Code), corresponding to
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#MccQualifier&quot;&gt;mcc&lt;/a&gt;
+ resource qualifier.  0 if undefined.
+*/
+mcc : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-mnc'>/** IMSI MNC (Mobile Network Code), corresponding to
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#MccQualifier&quot;&gt;mnc&lt;/a&gt;
+ resource qualifier.  0 if undefined. Note that the actual MNC may be 0; in order to check
+ for this use the {@link #MNC_ZERO} symbol.
+*/
+mnc : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-MNC_ZERO'>/** Constant used to to represent MNC (Mobile Network Code) zero.
+</span> 0 cannot be used, since it is used to represent an undefined MNC.
+*/
+MNC_ZERO : &quot;65535&quot;,
+<span id='android-content-res-Configuration-property-locale'>/** Current user preference for the locale, corresponding to
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#LocaleQualifier&quot;&gt;locale&lt;/a&gt;
+ resource qualifier.
+
+ @deprecated Do not set or read this directly. Use {@link #getLocales}() and
+ {@link #setLocales}(LocaleList). If only the primary locale is needed,
+ &lt;code&gt;getLocales().get(0)&lt;/code&gt; is now the preferred accessor.
+*/
+locale : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-userSetLocale'>/** Locale should persist on setting.  This is hidden because it is really
+</span> questionable whether this is the right way to expose the functionality.
+ @hide
+*/
+userSetLocale : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_WIDE_COLOR_GAMUT_MASK'>/**Constant for {@link #colorMode}: bits that encode whether the screen is wide gamut. */
+</span>COLOR_MODE_WIDE_COLOR_GAMUT_MASK : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_WIDE_COLOR_GAMUT_UNDEFINED'>/** Constant for {@link #colorMode}: a {@link #COLOR_MODE_WIDE_COLOR_GAMUT_MASK} value
+</span> indicating that it is unknown whether or not the screen is wide gamut.
+*/
+COLOR_MODE_WIDE_COLOR_GAMUT_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_WIDE_COLOR_GAMUT_NO'>/** Constant for {@link #colorMode}: a {@link #COLOR_MODE_WIDE_COLOR_GAMUT_MASK} value
+</span> indicating that the screen is not wide gamut.
+ &lt;p&gt;Corresponds to the &lt;code&gt;-nowidecg&lt;/code&gt; resource qualifier.&lt;/p&gt;
+*/
+COLOR_MODE_WIDE_COLOR_GAMUT_NO : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_WIDE_COLOR_GAMUT_YES'>/** Constant for {@link #colorMode}: a {@link #COLOR_MODE_WIDE_COLOR_GAMUT_MASK} value
+</span> indicating that the screen is wide gamut.
+ &lt;p&gt;Corresponds to the &lt;code&gt;-widecg&lt;/code&gt; resource qualifier.&lt;/p&gt;
+*/
+COLOR_MODE_WIDE_COLOR_GAMUT_YES : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_HDR_MASK'>/**Constant for {@link #colorMode}: bits that encode the dynamic range of the screen. */
+</span>COLOR_MODE_HDR_MASK : &quot;12&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_HDR_SHIFT'>/**Constant for {@link #colorMode}: bits shift to get the screen dynamic range. */
+</span>COLOR_MODE_HDR_SHIFT : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_HDR_UNDEFINED'>/** Constant for {@link #colorMode}: a {@link #COLOR_MODE_HDR_MASK} value
+</span> indicating that it is unknown whether or not the screen is HDR.
+*/
+COLOR_MODE_HDR_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_HDR_NO'>/** Constant for {@link #colorMode}: a {@link #COLOR_MODE_HDR_MASK} value
+</span> indicating that the screen is not HDR (low/standard dynamic range).
+ &lt;p&gt;Corresponds to the &lt;code&gt;-lowdr&lt;/code&gt; resource qualifier.&lt;/p&gt;
+*/
+COLOR_MODE_HDR_NO : &quot;4&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_HDR_YES'>/** Constant for {@link #colorMode}: a {@link #COLOR_MODE_HDR_MASK} value
+</span> indicating that the screen is HDR (dynamic range).
+ &lt;p&gt;Corresponds to the &lt;code&gt;-highdr&lt;/code&gt; resource qualifier.&lt;/p&gt;
+*/
+COLOR_MODE_HDR_YES : &quot;8&quot;,
+<span id='android-content-res-Configuration-property-COLOR_MODE_UNDEFINED'>/**Constant for {@link #colorMode}: a value indicating that the color mode is undefined */
+</span>COLOR_MODE_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-colorMode'>/** Bit mask of color capabilities of the screen. Currently there are two fields:
+</span> &lt;p&gt;The {@link #COLOR_MODE_WIDE_COLOR_GAMUT_MASK} bits define the color gamut of
+ the screen. They may be one of
+ {@link #COLOR_MODE_WIDE_COLOR_GAMUT_NO} or {@link #COLOR_MODE_WIDE_COLOR_GAMUT_YES}.&lt;/p&gt;
+
+ &lt;p&gt;The {@link #COLOR_MODE_HDR_MASK} defines the dynamic range of the screen. They may be
+ one of {@link #COLOR_MODE_HDR_NO} or {@link #COLOR_MODE_HDR_YES}.&lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href=&quot;{@docRoot}guide/practices/screens_support.html&quot;&gt;Supporting
+ Multiple Screens&lt;/a&gt; for more information.&lt;/p&gt;
+*/
+colorMode : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_SIZE_MASK'>/**Constant for {@link #screenLayout}: bits that encode the size. */
+</span>SCREENLAYOUT_SIZE_MASK : &quot;15&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_SIZE_UNDEFINED'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_SIZE_MASK}
+</span> value indicating that no size has been set. */
+SCREENLAYOUT_SIZE_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_SIZE_SMALL'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_SIZE_MASK}
+</span> value indicating the screen is at least approximately 320x426 dp units,
+ corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenSizeQualifier&quot;&gt;small&lt;/a&gt;
+ resource qualifier.
+ See &lt;a href=&quot;{@docRoot}guide/practices/screens_support.html&quot;&gt;Supporting
+ Multiple Screens&lt;/a&gt; for more information. */
+SCREENLAYOUT_SIZE_SMALL : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_SIZE_NORMAL'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_SIZE_MASK}
+</span> value indicating the screen is at least approximately 320x470 dp units,
+ corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenSizeQualifier&quot;&gt;normal&lt;/a&gt;
+ resource qualifier.
+ See &lt;a href=&quot;{@docRoot}guide/practices/screens_support.html&quot;&gt;Supporting
+ Multiple Screens&lt;/a&gt; for more information. */
+SCREENLAYOUT_SIZE_NORMAL : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_SIZE_LARGE'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_SIZE_MASK}
+</span> value indicating the screen is at least approximately 480x640 dp units,
+ corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenSizeQualifier&quot;&gt;large&lt;/a&gt;
+ resource qualifier.
+ See &lt;a href=&quot;{@docRoot}guide/practices/screens_support.html&quot;&gt;Supporting
+ Multiple Screens&lt;/a&gt; for more information. */
+SCREENLAYOUT_SIZE_LARGE : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_SIZE_XLARGE'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_SIZE_MASK}
+</span> value indicating the screen is at least approximately 720x960 dp units,
+ corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenSizeQualifier&quot;&gt;xlarge&lt;/a&gt;
+ resource qualifier.
+ See &lt;a href=&quot;{@docRoot}guide/practices/screens_support.html&quot;&gt;Supporting
+ Multiple Screens&lt;/a&gt; for more information.*/
+SCREENLAYOUT_SIZE_XLARGE : &quot;4&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LONG_MASK'>/**Constant for {@link #screenLayout}: bits that encode the aspect ratio. */
+</span>SCREENLAYOUT_LONG_MASK : &quot;48&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LONG_UNDEFINED'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_LONG_MASK}
+</span> value indicating that no size has been set. */
+SCREENLAYOUT_LONG_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LONG_NO'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_LONG_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenAspectQualifier&quot;&gt;notlong&lt;/a&gt;
+ resource qualifier. */
+SCREENLAYOUT_LONG_NO : &quot;16&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LONG_YES'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_LONG_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenAspectQualifier&quot;&gt;long&lt;/a&gt;
+ resource qualifier. */
+SCREENLAYOUT_LONG_YES : &quot;32&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LAYOUTDIR_MASK'>/**Constant for {@link #screenLayout}: bits that encode the layout direction. */
+</span>SCREENLAYOUT_LAYOUTDIR_MASK : &quot;192&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LAYOUTDIR_SHIFT'>/**Constant for {@link #screenLayout}: bits shift to get the layout direction. */
+</span>SCREENLAYOUT_LAYOUTDIR_SHIFT : &quot;6&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LAYOUTDIR_UNDEFINED'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_LAYOUTDIR_MASK}
+</span> value indicating that no layout dir has been set. */
+SCREENLAYOUT_LAYOUTDIR_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LAYOUTDIR_LTR'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_LAYOUTDIR_MASK}
+</span> value indicating that a layout dir has been set to LTR. */
+SCREENLAYOUT_LAYOUTDIR_LTR : &quot;64&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_LAYOUTDIR_RTL'>/**Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_LAYOUTDIR_MASK}
+</span> value indicating that a layout dir has been set to RTL. */
+SCREENLAYOUT_LAYOUTDIR_RTL : &quot;128&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_ROUND_MASK'>/**Constant for {@link #screenLayout}: bits that encode roundness of the screen. */
+</span>SCREENLAYOUT_ROUND_MASK : &quot;768&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_ROUND_SHIFT'>/**@hide Constant for {@link #screenLayout}: bit shift to get to screen roundness bits */
+</span>SCREENLAYOUT_ROUND_SHIFT : &quot;8&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_ROUND_UNDEFINED'>/** Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_ROUND_MASK} value indicating
+</span> that it is unknown whether or not the screen has a round shape.
+*/
+SCREENLAYOUT_ROUND_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_ROUND_NO'>/** Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_ROUND_MASK} value indicating
+</span> that the screen does not have a rounded shape.
+*/
+SCREENLAYOUT_ROUND_NO : &quot;256&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_ROUND_YES'>/** Constant for {@link #screenLayout}: a {@link #SCREENLAYOUT_ROUND_MASK} value indicating
+</span> that the screen has a rounded shape. Corners may not be visible to the user;
+ developers should pay special attention to the {@link android.view.WindowInsets} delivered
+ to views for more information about ensuring content is not obscured.
+
+ &lt;p&gt;Corresponds to the &lt;code&gt;-round&lt;/code&gt; resource qualifier.&lt;/p&gt;
+*/
+SCREENLAYOUT_ROUND_YES : &quot;512&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_UNDEFINED'>/**Constant for {@link #screenLayout}: a value indicating that screenLayout is undefined */
+</span>SCREENLAYOUT_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-SCREENLAYOUT_COMPAT_NEEDED'>/** Special flag we generate to indicate that the screen layout requires
+</span> us to use a compatibility mode for apps that are not modern layout
+ aware.
+ @hide
+*/
+SCREENLAYOUT_COMPAT_NEEDED : &quot;268435456&quot;,
+<span id='android-content-res-Configuration-property-screenLayout'>/** Bit mask of overall layout of the screen.  Currently there are four
+</span> fields:
+ &lt;p&gt;The {@link #SCREENLAYOUT_SIZE_MASK} bits define the overall size
+ of the screen.  They may be one of
+ {@link #SCREENLAYOUT_SIZE_SMALL}, {@link #SCREENLAYOUT_SIZE_NORMAL},
+ {@link #SCREENLAYOUT_SIZE_LARGE}, or {@link #SCREENLAYOUT_SIZE_XLARGE}.&lt;/p&gt;
+
+ &lt;p&gt;The {@link #SCREENLAYOUT_LONG_MASK} defines whether the screen
+ is wider/taller than normal.  They may be one of
+ {@link #SCREENLAYOUT_LONG_NO} or {@link #SCREENLAYOUT_LONG_YES}.&lt;/p&gt;
+
+ &lt;p&gt;The {@link #SCREENLAYOUT_LAYOUTDIR_MASK} defines whether the screen layout
+ is either LTR or RTL.  They may be one of
+ {@link #SCREENLAYOUT_LAYOUTDIR_LTR} or {@link #SCREENLAYOUT_LAYOUTDIR_RTL}.&lt;/p&gt;
+
+ &lt;p&gt;The {@link #SCREENLAYOUT_ROUND_MASK} defines whether the screen has a rounded
+ shape. They may be one of {@link #SCREENLAYOUT_ROUND_NO} or {@link #SCREENLAYOUT_ROUND_YES}.
+ &lt;/p&gt;
+
+ &lt;p&gt;See &lt;a href=&quot;{@docRoot}guide/practices/screens_support.html&quot;&gt;Supporting
+ Multiple Screens&lt;/a&gt; for more information.&lt;/p&gt;
+*/
+screenLayout : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-windowConfiguration'>/** Configuration relating to the windowing state of the object associated with this
+</span> Configuration. Contents of this field are not intended to affect resources, but need to be
+ communicated and propagated at the same time as the rest of Configuration.
+ @hide
+*/
+windowConfiguration : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-TOUCHSCREEN_UNDEFINED'>/**Constant for {@link #touchscreen}: a value indicating that no value has been set. */
+</span>TOUCHSCREEN_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-TOUCHSCREEN_NOTOUCH'>/**Constant for {@link #touchscreen}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#TouchscreenQualifier&quot;&gt;notouch&lt;/a&gt;
+ resource qualifier. */
+TOUCHSCREEN_NOTOUCH : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-TOUCHSCREEN_STYLUS'>/**@deprecated Not currently supported or used. */
+</span>TOUCHSCREEN_STYLUS : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-TOUCHSCREEN_FINGER'>/**Constant for {@link #touchscreen}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#TouchscreenQualifier&quot;&gt;finger&lt;/a&gt;
+ resource qualifier. */
+TOUCHSCREEN_FINGER : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-touchscreen'>/** The kind of touch screen attached to the device.
+</span> One of: {@link #TOUCHSCREEN_NOTOUCH}, {@link #TOUCHSCREEN_FINGER}.
+*/
+touchscreen : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARD_UNDEFINED'>/**Constant for {@link #keyboard}: a value indicating that no value has been set. */
+</span>KEYBOARD_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARD_NOKEYS'>/**Constant for {@link #keyboard}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ImeQualifier&quot;&gt;nokeys&lt;/a&gt;
+ resource qualifier. */
+KEYBOARD_NOKEYS : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARD_QWERTY'>/**Constant for {@link #keyboard}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ImeQualifier&quot;&gt;qwerty&lt;/a&gt;
+ resource qualifier. */
+KEYBOARD_QWERTY : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARD_12KEY'>/**Constant for {@link #keyboard}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ImeQualifier&quot;&gt;12key&lt;/a&gt;
+ resource qualifier. */
+KEYBOARD_12KEY : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-keyboard'>/** The kind of keyboard attached to the device.
+</span> One of: {@link #KEYBOARD_NOKEYS}, {@link #KEYBOARD_QWERTY},
+ {@link #KEYBOARD_12KEY}.
+*/
+keyboard : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARDHIDDEN_UNDEFINED'>/**Constant for {@link #keyboardHidden}: a value indicating that no value has been set. */
+</span>KEYBOARDHIDDEN_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARDHIDDEN_NO'>/**Constant for {@link #keyboardHidden}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#KeyboardAvailQualifier&quot;&gt;keysexposed&lt;/a&gt;
+ resource qualifier. */
+KEYBOARDHIDDEN_NO : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARDHIDDEN_YES'>/**Constant for {@link #keyboardHidden}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#KeyboardAvailQualifier&quot;&gt;keyshidden&lt;/a&gt;
+ resource qualifier. */
+KEYBOARDHIDDEN_YES : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-KEYBOARDHIDDEN_SOFT'>/**Constant matching actual resource implementation. {@hide} */
+</span>KEYBOARDHIDDEN_SOFT : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-keyboardHidden'>/** A flag indicating whether any keyboard is available.  Unlike
+</span> {@link #hardKeyboardHidden}, this also takes into account a soft
+ keyboard, so if the hard keyboard is hidden but there is soft
+ keyboard available, it will be set to NO.  Value is one of:
+ {@link #KEYBOARDHIDDEN_NO}, {@link #KEYBOARDHIDDEN_YES}.
+*/
+keyboardHidden : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-HARDKEYBOARDHIDDEN_UNDEFINED'>/**Constant for {@link #hardKeyboardHidden}: a value indicating that no value has been set. */
+</span>HARDKEYBOARDHIDDEN_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-HARDKEYBOARDHIDDEN_NO'>/**Constant for {@link #hardKeyboardHidden}, value corresponding to the
+</span> physical keyboard being exposed. */
+HARDKEYBOARDHIDDEN_NO : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-HARDKEYBOARDHIDDEN_YES'>/**Constant for {@link #hardKeyboardHidden}, value corresponding to the
+</span> physical keyboard being hidden. */
+HARDKEYBOARDHIDDEN_YES : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-hardKeyboardHidden'>/** A flag indicating whether the hard keyboard has been hidden.  This will
+</span> be set on a device with a mechanism to hide the keyboard from the
+ user, when that mechanism is closed.  One of:
+ {@link #HARDKEYBOARDHIDDEN_NO}, {@link #HARDKEYBOARDHIDDEN_YES}.
+*/
+hardKeyboardHidden : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATION_UNDEFINED'>/**Constant for {@link #navigation}: a value indicating that no value has been set. */
+</span>NAVIGATION_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATION_NONAV'>/**Constant for {@link #navigation}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NavigationQualifier&quot;&gt;nonav&lt;/a&gt;
+ resource qualifier. */
+NAVIGATION_NONAV : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATION_DPAD'>/**Constant for {@link #navigation}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NavigationQualifier&quot;&gt;dpad&lt;/a&gt;
+ resource qualifier. */
+NAVIGATION_DPAD : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATION_TRACKBALL'>/**Constant for {@link #navigation}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NavigationQualifier&quot;&gt;trackball&lt;/a&gt;
+ resource qualifier. */
+NAVIGATION_TRACKBALL : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATION_WHEEL'>/**Constant for {@link #navigation}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NavigationQualifier&quot;&gt;wheel&lt;/a&gt;
+ resource qualifier. */
+NAVIGATION_WHEEL : &quot;4&quot;,
+<span id='android-content-res-Configuration-property-navigation'>/** The kind of navigation method available on the device.
+</span> One of: {@link #NAVIGATION_NONAV}, {@link #NAVIGATION_DPAD},
+ {@link #NAVIGATION_TRACKBALL}, {@link #NAVIGATION_WHEEL}.
+*/
+navigation : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATIONHIDDEN_UNDEFINED'>/**Constant for {@link #navigationHidden}: a value indicating that no value has been set. */
+</span>NAVIGATIONHIDDEN_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATIONHIDDEN_NO'>/**Constant for {@link #navigationHidden}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NavAvailQualifier&quot;&gt;navexposed&lt;/a&gt;
+ resource qualifier. */
+NAVIGATIONHIDDEN_NO : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-NAVIGATIONHIDDEN_YES'>/**Constant for {@link #navigationHidden}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NavAvailQualifier&quot;&gt;navhidden&lt;/a&gt;
+ resource qualifier. */
+NAVIGATIONHIDDEN_YES : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-navigationHidden'>/** A flag indicating whether any 5-way or DPAD navigation available.
+</span> This will be set on a device with a mechanism to hide the navigation
+ controls from the user, when that mechanism is closed.  One of:
+ {@link #NAVIGATIONHIDDEN_NO}, {@link #NAVIGATIONHIDDEN_YES}.
+*/
+navigationHidden : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-ORIENTATION_UNDEFINED'>/**Constant for {@link #orientation}: a value indicating that no value has been set. */
+</span>ORIENTATION_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-ORIENTATION_PORTRAIT'>/**Constant for {@link #orientation}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#OrientationQualifier&quot;&gt;port&lt;/a&gt;
+ resource qualifier. */
+ORIENTATION_PORTRAIT : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-ORIENTATION_LANDSCAPE'>/**Constant for {@link #orientation}, value corresponding to the
+</span> &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#OrientationQualifier&quot;&gt;land&lt;/a&gt;
+ resource qualifier. */
+ORIENTATION_LANDSCAPE : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-ORIENTATION_SQUARE'>/**@deprecated Not currently supported or used. */
+</span>ORIENTATION_SQUARE : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-orientation'>/** Overall orientation of the screen.  May be one of
+</span> {@link #ORIENTATION_LANDSCAPE}, {@link #ORIENTATION_PORTRAIT}.
+*/
+orientation : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_MASK'>/**Constant for {@link #uiMode}: bits that encode the mode type. */
+</span>UI_MODE_TYPE_MASK : &quot;15&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_UNDEFINED'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value indicating that no mode type has been set. */
+UI_MODE_TYPE_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_NORMAL'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value that corresponds to
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#UiModeQualifier&quot;&gt;no
+ UI mode&lt;/a&gt; resource qualifier specified. */
+UI_MODE_TYPE_NORMAL : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_DESK'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#UiModeQualifier&quot;&gt;desk&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_TYPE_DESK : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_CAR'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#UiModeQualifier&quot;&gt;car&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_TYPE_CAR : &quot;3&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_TELEVISION'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#UiModeQualifier&quot;&gt;television&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_TYPE_TELEVISION : &quot;4&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_APPLIANCE'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#UiModeQualifier&quot;&gt;appliance&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_TYPE_APPLIANCE : &quot;5&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_WATCH'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#UiModeQualifier&quot;&gt;watch&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_TYPE_WATCH : &quot;6&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_TYPE_VR_HEADSET'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_TYPE_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#UiModeQualifier&quot;&gt;vrheadset&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_TYPE_VR_HEADSET : &quot;7&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_NIGHT_MASK'>/**Constant for {@link #uiMode}: bits that encode the night mode. */
+</span>UI_MODE_NIGHT_MASK : &quot;48&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_NIGHT_UNDEFINED'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+</span> value indicating that no mode type has been set. */
+UI_MODE_NIGHT_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_NIGHT_NO'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NightQualifier&quot;&gt;notnight&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_NIGHT_NO : &quot;16&quot;,
+<span id='android-content-res-Configuration-property-UI_MODE_NIGHT_YES'>/**Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+</span> value that corresponds to the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#NightQualifier&quot;&gt;night&lt;/a&gt;
+ resource qualifier. */
+UI_MODE_NIGHT_YES : &quot;32&quot;,
+<span id='android-content-res-Configuration-property-uiMode'>/** Bit mask of the ui mode.  Currently there are two fields:
+</span> &lt;p&gt;The {@link #UI_MODE_TYPE_MASK} bits define the overall ui mode of the
+ device. They may be one of {@link #UI_MODE_TYPE_UNDEFINED},
+ {@link #UI_MODE_TYPE_NORMAL}, {@link #UI_MODE_TYPE_DESK},
+ {@link #UI_MODE_TYPE_CAR}, {@link #UI_MODE_TYPE_TELEVISION},
+ {@link #UI_MODE_TYPE_APPLIANCE}, {@link #UI_MODE_TYPE_WATCH},
+ or {@link #UI_MODE_TYPE_VR_HEADSET}.
+
+ &lt;p&gt;The {@link #UI_MODE_NIGHT_MASK} defines whether the screen
+ is in a special mode. They may be one of {@link #UI_MODE_NIGHT_UNDEFINED},
+ {@link #UI_MODE_NIGHT_NO} or {@link #UI_MODE_NIGHT_YES}.
+*/
+uiMode : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-SCREEN_WIDTH_DP_UNDEFINED'>/** Default value for {@link #screenWidthDp} indicating that no width
+</span> has been specified.
+*/
+SCREEN_WIDTH_DP_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-screenWidthDp'>/** The current width of the available screen space, in dp units,
+</span> corresponding to
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenWidthQualifier&quot;&gt;screen
+ width&lt;/a&gt; resource qualifier.  Set to
+ {@link #SCREEN_WIDTH_DP_UNDEFINED} if no width is specified.
+*/
+screenWidthDp : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-SCREEN_HEIGHT_DP_UNDEFINED'>/** Default value for {@link #screenHeightDp} indicating that no width
+</span> has been specified.
+*/
+SCREEN_HEIGHT_DP_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-screenHeightDp'>/** The current height of the available screen space, in dp units,
+</span> corresponding to
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#ScreenHeightQualifier&quot;&gt;screen
+ height&lt;/a&gt; resource qualifier.  Set to
+ {@link #SCREEN_HEIGHT_DP_UNDEFINED} if no height is specified.
+*/
+screenHeightDp : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-SMALLEST_SCREEN_WIDTH_DP_UNDEFINED'>/** Default value for {@link #smallestScreenWidthDp} indicating that no width
+</span> has been specified.
+*/
+SMALLEST_SCREEN_WIDTH_DP_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-smallestScreenWidthDp'>/** The smallest screen size an application will see in normal operation,
+</span> corresponding to
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#SmallestScreenWidthQualifier&quot;&gt;smallest
+ screen width&lt;/a&gt; resource qualifier.
+ This is the smallest value of both screenWidthDp and screenHeightDp
+ in both portrait and landscape.  Set to
+ {@link #SMALLEST_SCREEN_WIDTH_DP_UNDEFINED} if no width is specified.
+*/
+smallestScreenWidthDp : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-DENSITY_DPI_UNDEFINED'>/** Default value for {@link #densityDpi} indicating that no width
+</span> has been specified.
+*/
+DENSITY_DPI_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-DENSITY_DPI_ANY'>/** Value for {@link #densityDpi} for resources that scale to any density (vector drawables).
+</span> {@hide}
+*/
+DENSITY_DPI_ANY : &quot;65534&quot;,
+<span id='android-content-res-Configuration-property-DENSITY_DPI_NONE'>/** Value for {@link #densityDpi} for resources that are not meant to be scaled.
+</span> {@hide}
+*/
+DENSITY_DPI_NONE : &quot;65535&quot;,
+<span id='android-content-res-Configuration-property-densityDpi'>/** The target screen density being rendered to,
+</span> corresponding to
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/providing-resources.html#DensityQualifier&quot;&gt;density&lt;/a&gt;
+ resource qualifier.  Set to
+ {@link #DENSITY_DPI_UNDEFINED} if no density is specified.
+*/
+densityDpi : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-compatScreenWidthDp'>/**@hide Hack to get this information from WM to app running in compat mode. */
+</span>compatScreenWidthDp : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-compatScreenHeightDp'>/**@hide Hack to get this information from WM to app running in compat mode. */
+</span>compatScreenHeightDp : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-compatSmallestScreenWidthDp'>/**@hide Hack to get this information from WM to app running in compat mode. */
+</span>compatSmallestScreenWidthDp : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-ASSETS_SEQ_UNDEFINED'>/** An undefined assetsSeq. This will not override an existing assetsSeq.
+</span> @hide
+*/
+ASSETS_SEQ_UNDEFINED : &quot;0&quot;,
+<span id='android-content-res-Configuration-property-assetsSeq'>/** Internal counter that allows us to piggyback off the configuration change mechanism to
+</span> signal to apps that the the assets for an Application have changed. A difference in these
+ between two Configurations will yield a diff flag of
+ {@link ActivityInfo#CONFIG_ASSETS_PATHS}.
+ @hide
+*/
+assetsSeq : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-seq'>/** @hide Internal book-keeping.
+</span>*/
+seq : &quot;null&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_MCC'>/**@hide Native-specific bit mask for MCC config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_MCC : &quot;1&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_MNC'>/**@hide Native-specific bit mask for MNC config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_MNC : &quot;2&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_LOCALE'>/**@hide Native-specific bit mask for LOCALE config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_LOCALE : &quot;4&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_TOUCHSCREEN'>/**@hide Native-specific bit mask for TOUCHSCREEN config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_TOUCHSCREEN : &quot;8&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_KEYBOARD'>/**@hide Native-specific bit mask for KEYBOARD config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_KEYBOARD : &quot;16&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_KEYBOARD_HIDDEN'>/**@hide Native-specific bit mask for KEYBOARD_HIDDEN config; DO NOT USE UNLESS YOU
+</span> ARE SURE. */
+NATIVE_CONFIG_KEYBOARD_HIDDEN : &quot;32&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_NAVIGATION'>/**@hide Native-specific bit mask for NAVIGATION config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_NAVIGATION : &quot;64&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_ORIENTATION'>/**@hide Native-specific bit mask for ORIENTATION config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_ORIENTATION : &quot;128&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_DENSITY'>/**@hide Native-specific bit mask for DENSITY config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_DENSITY : &quot;256&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_SCREEN_SIZE'>/**@hide Native-specific bit mask for SCREEN_SIZE config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_SCREEN_SIZE : &quot;512&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_VERSION'>/**@hide Native-specific bit mask for VERSION config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_VERSION : &quot;1024&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_SCREEN_LAYOUT'>/**@hide Native-specific bit mask for SCREEN_LAYOUT config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_SCREEN_LAYOUT : &quot;2048&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_UI_MODE'>/**@hide Native-specific bit mask for UI_MODE config; DO NOT USE UNLESS YOU ARE SURE. */
+</span>NATIVE_CONFIG_UI_MODE : &quot;4096&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_SMALLEST_SCREEN_SIZE'>/**@hide Native-specific bit mask for SMALLEST_SCREEN_SIZE config; DO NOT USE UNLESS YOU
+</span> ARE SURE. */
+NATIVE_CONFIG_SMALLEST_SCREEN_SIZE : &quot;8192&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_LAYOUTDIR'>/**@hide Native-specific bit mask for LAYOUTDIR config ; DO NOT USE UNLESS YOU ARE SURE.*/
+</span>NATIVE_CONFIG_LAYOUTDIR : &quot;16384&quot;,
+<span id='android-content-res-Configuration-property-NATIVE_CONFIG_COLOR_MODE'>/**@hide Native-specific bit mask for COLOR_MODE config ; DO NOT USE UNLESS YOU ARE SURE.*/
+</span>NATIVE_CONFIG_COLOR_MODE : &quot;65536&quot;,
+<span id='android-content-res-Configuration-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-res-Configuration-method-resetScreenLayout'>/**
+</span>@hide 
+*/
+resetScreenLayout : function(  ) {},
+
+<span id='android-content-res-Configuration-method-reduceScreenLayout'>/**
+</span>@hide 
+*/
+reduceScreenLayout : function(  ) {},
+
+<span id='android-content-res-Configuration-method-configurationDiffToString'>/**
+</span>@hide 
+*/
+configurationDiffToString : function(  ) {},
+
+<span id='android-content-res-Configuration-method-isLayoutSizeAtLeast'>/**Check if the Configuration's current {@link #screenLayout} is at
+</span> least the given size.
+@param {Number} size The desired size, either {@link #SCREENLAYOUT_SIZE_SMALL},
+ {@link #SCREENLAYOUT_SIZE_NORMAL}, {@link #SCREENLAYOUT_SIZE_LARGE}, or
+ {@link #SCREENLAYOUT_SIZE_XLARGE}.
+@return {Boolean} Returns true if the current screen layout size is at least
+ the given size.
+*/
+isLayoutSizeAtLeast : function(  ) {},
+
+<span id='android-content-res-Configuration-method-setTo'>/**Sets the fields in this object to those in the given Configuration.
+</span>@param {Object {Configuration}} o The Configuration object used to set the values of this Configuration's fields.
+*/
+setTo : function(  ) {},
+
+<span id='android-content-res-Configuration-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-res-Configuration-method-writeToProto'>/**Write to a protocol buffer output stream.
+</span> Protocol buffer message definition at {@link android.content.ConfigurationProto}
+ Has the option to ignore fields that don't need to be persisted to disk.
+@param {Object {ProtoOutputStream}} protoOutputStream Stream to write the Configuration object to.
+@param {Number} fieldId           Field Id of the Configuration as defined in the parent message
+@param {Boolean} persisted         Note if this proto will be persisted to disk
+@param {Boolean} critical          If true, reduce amount of data written.
+@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-content-res-Configuration-method-writeToProto'>/**Write to a protocol buffer output stream.
+</span> Protocol buffer message definition at {@link android.content.ConfigurationProto}
+@param {Object {ProtoOutputStream}} protoOutputStream Stream to write the Configuration object to.
+@param {Number} fieldId           Field Id of the Configuration as defined in the parent message
+@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-content-res-Configuration-method-writeToProto'>/**Write to a protocol buffer output stream.
+</span> Protocol buffer message definition at {@link android.content.ConfigurationProto}
+@param {Object {ProtoOutputStream}} protoOutputStream Stream to write the Configuration object to.
+@param {Number} fieldId           Field Id of the Configuration as defined in the parent message
+@param {Boolean} critical          If true, reduce amount of data written.
+@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-content-res-Configuration-method-readFromProto'>/**Read from a protocol buffer output stream.
+</span> Protocol buffer message definition at {@link android.content.ConfigurationProto}
+@param {Object {ProtoInputStream}} protoInputStream Stream to read the Configuration object from.
+@param {Number} fieldId          Field Id of the Configuration as defined in the parent message
+@hide 
+*/
+readFromProto : function(  ) {},
+
+<span id='android-content-res-Configuration-method-writeResConfigToProto'>/**Write full {@link android.content.ResourcesConfigurationProto} to protocol buffer output
+</span> stream.
+@param {Object {ProtoOutputStream}} protoOutputStream Stream to write the Configuration object to.
+@param {Number} fieldId           Field Id of the Configuration as defined in the parent message
+@param {Object {DisplayMetrics}} metrics           Current display information
+@hide 
+*/
+writeResConfigToProto : function(  ) {},
+
+<span id='android-content-res-Configuration-method-uiModeToString'>/**Convert the UI mode to a human readable format.
+</span>@hide 
+*/
+uiModeToString : function(  ) {},
+
+<span id='android-content-res-Configuration-method-setToDefaults'>/**Set this object to the system defaults.
+</span>*/
+setToDefaults : function(  ) {},
+
+<span id='android-content-res-Configuration-method-unset'>/**Set this object to completely undefined.
+</span>@hide 
+*/
+unset : function(  ) {},
+
+<span id='android-content-res-Configuration-method-makeDefault'>/**{@hide}
+</span>*/
+makeDefault : function(  ) {},
+
+<span id='android-content-res-Configuration-method-updateFrom'>/**Copies the fields from delta into this Configuration object, keeping
+</span> track of which ones have changed. Any undefined fields in {@code delta}
+ are ignored and not copied in to the current Configuration.
+@return {Number} a bit mask of the changed fields, as per {@link #diff}
+*/
+updateFrom : function(  ) {},
+
+<span id='android-content-res-Configuration-method-diff'>/**Return a bit mask of the differences between this Configuration
+</span> object and the given one.  Does not change the values of either.  Any
+ undefined fields in &lt;var&gt;delta&lt;/var&gt; are ignored.
+@return {Number} Returns a bit mask indicating which configuration
+ values has changed, containing any combination of
+ {@link android.content.pm.ActivityInfo#CONFIG_FONT_SCALE
+ PackageManager.ActivityInfo.CONFIG_FONT_SCALE},
+ {@link android.content.pm.ActivityInfo#CONFIG_MCC
+ PackageManager.ActivityInfo.CONFIG_MCC},
+ {@link android.content.pm.ActivityInfo#CONFIG_MNC
+ PackageManager.ActivityInfo.CONFIG_MNC},
+ {@link android.content.pm.ActivityInfo#CONFIG_LOCALE
+ PackageManager.ActivityInfo.CONFIG_LOCALE},
+ {@link android.content.pm.ActivityInfo#CONFIG_TOUCHSCREEN
+ PackageManager.ActivityInfo.CONFIG_TOUCHSCREEN},
+ {@link android.content.pm.ActivityInfo#CONFIG_KEYBOARD
+ PackageManager.ActivityInfo.CONFIG_KEYBOARD},
+ {@link android.content.pm.ActivityInfo#CONFIG_NAVIGATION
+ PackageManager.ActivityInfo.CONFIG_NAVIGATION},
+ {@link android.content.pm.ActivityInfo#CONFIG_ORIENTATION
+ PackageManager.ActivityInfo.CONFIG_ORIENTATION},
+ {@link android.content.pm.ActivityInfo#CONFIG_SCREEN_LAYOUT
+ PackageManager.ActivityInfo.CONFIG_SCREEN_LAYOUT}, or
+ {@link android.content.pm.ActivityInfo#CONFIG_SCREEN_SIZE
+ PackageManager.ActivityInfo.CONFIG_SCREEN_SIZE}, or
+ {@link android.content.pm.ActivityInfo#CONFIG_SMALLEST_SCREEN_SIZE
+ PackageManager.ActivityInfo.CONFIG_SMALLEST_SCREEN_SIZE}.
+ {@link android.content.pm.ActivityInfo#CONFIG_LAYOUT_DIRECTION
+ PackageManager.ActivityInfo.CONFIG_LAYOUT_DIRECTION}.
+*/
+diff : function(  ) {},
+
+<span id='android-content-res-Configuration-method-diffPublicOnly'>/**Returns the diff against the provided {@link android.content.res.Configuration} excluding values that would
+</span> publicly be equivalent, such as appBounds.
+@param {Object {Configuration}} delta {@link Configuration} to compare to.
+
+ TODO(b/36812336): Remove once appBounds has been moved out of Configuration.
+ {@hide}
+*/
+diffPublicOnly : function(  ) {},
+
+<span id='android-content-res-Configuration-method-diff'>/**Variation of {@link #diff}(Configuration) with an option to skip checks for undefined values.
+</span>@hide 
+*/
+diff : function(  ) {},
+
+<span id='android-content-res-Configuration-method-needNewResources'>/**Determines if a new resource needs to be loaded from the bit set of
+</span> configuration changes returned by {@link #updateFrom}(Configuration).
+@param {Number} configChanges the mask of changes configurations as returned by
+                      {@link #updateFrom(Configuration)}
+@param {Number} interestingChanges the configuration changes that the resource
+                           can handle as given in
+                           {@link android.util.TypedValue#changingConfigurations}
+@return {Boolean} {@code true} if the resource needs to be loaded, {@code false}
+         otherwise
+*/
+needNewResources : function(  ) {},
+
+<span id='android-content-res-Configuration-method-isOtherSeqNewer'>/**
+</span>@hide Return true if the sequence of 'other' is better than this.  Assumes
+ that 'this' is your current sequence and 'other' is a new one you have
+ received some how and want to compare with what you have.
+*/
+isOtherSeqNewer : function(  ) {},
+
+<span id='android-content-res-Configuration-method-describeContents'>/**Parcelable methods
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-res-Configuration-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-res-Configuration-method-readFromParcel'>/**
+</span>*/
+readFromParcel : function(  ) {},
+
+<span id='android-content-res-Configuration-method-compareTo'>/**
+</span>*/
+compareTo : function(  ) {},
+
+<span id='android-content-res-Configuration-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-content-res-Configuration-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-content-res-Configuration-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-content-res-Configuration-method-getLocales'>/**Get the locale list. This is the preferred way for getting the locales (instead of using
+</span> the direct accessor to {@link #locale}, which would only provide the primary locale).
+@return {Object {android.os.LocaleList}} The locale list.
+*/
+getLocales : function(  ) {},
+
+<span id='android-content-res-Configuration-method-setLocales'>/**Set the locale list. This is the preferred way for setting up the locales (instead of using
+</span> the direct accessor or {@link #setLocale}(Locale)). This will also set the layout direction
+ according to the first locale in the list.
+
+ Note that the layout direction will always come from the first locale in the locale list,
+ even if the locale is not supported by the resources (the resources may only support
+ another locale further down the list which has a different direction).
+@param {Object {LocaleList}} locales The locale list. If null, an empty LocaleList will be assigned.
+*/
+setLocales : function(  ) {},
+
+<span id='android-content-res-Configuration-method-setLocale'>/**Set the locale list to a list of just one locale. This will also set the layout direction
+</span> according to the locale.
+
+ Note that after this is run, calling &lt;code&gt;.equals()&lt;/code&gt; on the input locale and the
+ {@link #locale} attribute would return &lt;code&gt;true&lt;/code&gt; if they are not null, but there is
+ no guarantee that they would be the same object.
+
+ See also the note about layout direction in {@link #setLocales}(LocaleList).
+@param {Object {Locale}} loc The locale. Can be null.
+*/
+setLocale : function(  ) {},
+
+<span id='android-content-res-Configuration-method-clearLocales'>/**
+</span>@hide Clears the locale without changing layout direction.
+*/
+clearLocales : function(  ) {},
+
+<span id='android-content-res-Configuration-method-getLayoutDirection'>/**Return the layout direction. Will be either {@link View#LAYOUT_DIRECTION_LTR} or
+</span> {@link View#LAYOUT_DIRECTION_RTL}.
+@return {Number} Returns {@link View#LAYOUT_DIRECTION_RTL} if the configuration
+ is {@link #SCREENLAYOUT_LAYOUTDIR_RTL}, otherwise {@link View#LAYOUT_DIRECTION_LTR}.
+*/
+getLayoutDirection : function(  ) {},
+
+<span id='android-content-res-Configuration-method-setLayoutDirection'>/**Set the layout direction from a Locale.
+</span>@param {Object {Locale}} loc The Locale. If null will set the layout direction to
+ {@link View#LAYOUT_DIRECTION_LTR}. If not null will set it to the layout direction
+ corresponding to the Locale.
+@see View#LAYOUT_DIRECTION_LTR
+@see View#LAYOUT_DIRECTION_RTL
+*/
+setLayoutDirection : function(  ) {},
+
+<span id='android-content-res-Configuration-method-isScreenRound'>/**Return whether the screen has a round shape. Apps may choose to change styling based
+</span> on this property, such as the alignment or layout of text or informational icons.
+@return {Boolean} true if the screen is rounded, false otherwise
+*/
+isScreenRound : function(  ) {},
+
+<span id='android-content-res-Configuration-method-isScreenWideColorGamut'>/**Return whether the screen has a wide color gamut and wide color gamut rendering
+</span> is supported by this device.
+
+ When true, it implies the screen is colorspace aware but not
+ necessarily color-managed. The final colors may still be changed by the
+ screen depending on user settings.
+@return {Boolean} true if the screen has a wide color gamut and wide color gamut rendering
+ is supported, false otherwise
+*/
+isScreenWideColorGamut : function(  ) {},
+
+<span id='android-content-res-Configuration-method-isScreenHdr'>/**Return whether the screen has a high dynamic range.
+</span>@return {Boolean} true if the screen has a high dynamic range, false otherwise
+*/
+isScreenHdr : function(  ) {},
+
+<span id='android-content-res-Configuration-method-localesToResourceQualifier'>/**
+</span>@hide 
+*/
+localesToResourceQualifier : function(  ) {},
+
+<span id='android-content-res-Configuration-method-resourceQualifierString'>/**Returns a string representation of the configuration that can be parsed
+</span> by build tools (like AAPT), without display metrics included
+@hide 
+*/
+resourceQualifierString : function(  ) {},
+
+<span id='android-content-res-Configuration-method-resourceQualifierString'>/**Returns a string representation of the configuration that can be parsed
+</span> by build tools (like AAPT).
+@hide 
+*/
+resourceQualifierString : function(  ) {},
+
+<span id='android-content-res-Configuration-method-generateDelta'>/**Generate a delta Configuration between &lt;code&gt;base&lt;/code&gt; and &lt;code&gt;change&lt;/code&gt;. The
+</span> resulting delta can be used with {@link #updateFrom}(Configuration).
+ &lt;p /&gt;
+ Caveat: If the any of the Configuration's members becomes undefined, then
+ {@link #updateFrom}(Configuration) will treat it as a no-op and not update that member.
+
+ This is fine for device configurations as no member is ever undefined.
+ {@hide}
+*/
+generateDelta : function(  ) {},
+
+<span id='android-content-res-Configuration-method-readXmlAttrs'>/**Reads the attributes corresponding to Configuration member fields from the Xml parser.
+</span> The parser is expected to be on a tag which has Configuration attributes.
+@param {Object {XmlPullParser}} parser The Xml parser from which to read attributes.
+@param {Object {Configuration}} configOut The Configuration to populate from the Xml attributes.
+ {@hide}
+*/
+readXmlAttrs : function(  ) {},
+
+<span id='android-content-res-Configuration-method-writeXmlAttrs'>/**Writes the Configuration's member fields as attributes into the XmlSerializer.
+</span> The serializer is expected to have already started a tag so that attributes can be
+ immediately written.
+@param {Object {XmlSerializer}} xml The serializer to which to write the attributes.
+@param {Object {Configuration}} config The Configuration whose member fields to write.
+ {@hide}
+*/
+writeXmlAttrs : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

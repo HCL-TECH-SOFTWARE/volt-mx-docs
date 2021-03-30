@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-voice-AlwaysOnHotwordDetector'>/**@class android.service.voice.AlwaysOnHotwordDetector
+</span>@extends java.lang.Object
+
+ A class that lets a VoiceInteractionService implementation interact with
+ always-on keyphrase detection APIs.
+*/
+var AlwaysOnHotwordDetector = {
+
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-STATE_HARDWARE_UNAVAILABLE'>/** Indicates that recognition for the given keyphrase is not available on the system
+</span> because of the hardware configuration.
+ No further interaction should be performed with the detector that returns this availability.
+*/
+STATE_HARDWARE_UNAVAILABLE : &quot;-2&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-STATE_KEYPHRASE_UNSUPPORTED'>/** Indicates that recognition for the given keyphrase is not supported.
+</span> No further interaction should be performed with the detector that returns this availability.
+*/
+STATE_KEYPHRASE_UNSUPPORTED : &quot;-1&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-STATE_KEYPHRASE_UNENROLLED'>/** Indicates that the given keyphrase is not enrolled.
+</span> The caller may choose to begin an enrollment flow for the keyphrase.
+*/
+STATE_KEYPHRASE_UNENROLLED : &quot;1&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-STATE_KEYPHRASE_ENROLLED'>/** Indicates that the given keyphrase is currently enrolled and it's possible to start
+</span> recognition for it.
+*/
+STATE_KEYPHRASE_ENROLLED : &quot;2&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-MANAGE_ACTION_ENROLL'>/** Indicates that we need to enroll.
+</span>
+ @hide
+*/
+MANAGE_ACTION_ENROLL : &quot;0&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-MANAGE_ACTION_RE_ENROLL'>/** Indicates that we need to re-enroll.
+</span>
+ @hide
+*/
+MANAGE_ACTION_RE_ENROLL : &quot;1&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-MANAGE_ACTION_UN_ENROLL'>/** Indicates that we need to un-enroll.
+</span>
+ @hide
+*/
+MANAGE_ACTION_UN_ENROLL : &quot;2&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-RECOGNITION_FLAG_NONE'>/** Empty flag for {@link #startRecognition}(int).
+</span>
+ @hide
+*/
+RECOGNITION_FLAG_NONE : &quot;0&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-RECOGNITION_FLAG_CAPTURE_TRIGGER_AUDIO'>/** Recognition flag for {@link #startRecognition}(int) that indicates
+</span> whether the trigger audio for hotword needs to be captured.
+*/
+RECOGNITION_FLAG_CAPTURE_TRIGGER_AUDIO : &quot;1&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-RECOGNITION_FLAG_ALLOW_MULTIPLE_TRIGGERS'>/** Recognition flag for {@link #startRecognition}(int) that indicates
+</span> whether the recognition should keep going on even after the keyphrase triggers.
+ If this flag is specified, it's possible to get multiple triggers after a
+ call to {@link #startRecognition}(int) if the user speaks the keyphrase multiple times.
+ When this isn't specified, the default behavior is to stop recognition once the
+ keyphrase is spoken, till the caller starts recognition again.
+*/
+RECOGNITION_FLAG_ALLOW_MULTIPLE_TRIGGERS : &quot;2&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-RECOGNITION_MODE_VOICE_TRIGGER'>/** Simple recognition of the key phrase.
+</span> Returned by {@link #getSupportedRecognitionModes}()
+*/
+RECOGNITION_MODE_VOICE_TRIGGER : &quot;1&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-property-RECOGNITION_MODE_USER_IDENTIFICATION'>/** User identification performed with the keyphrase recognition.
+</span> Returned by {@link #getSupportedRecognitionModes}()
+*/
+RECOGNITION_MODE_USER_IDENTIFICATION : &quot;2&quot;,
+<span id='android-service-voice-AlwaysOnHotwordDetector-method-getSupportedRecognitionModes'>/**Gets the recognition modes supported by the associated keyphrase.
+</span>@see #RECOGNITION_MODE_USER_IDENTIFICATION
+@see #RECOGNITION_MODE_VOICE_TRIGGER
+@throws UnsupportedOperationException if the keyphrase itself isn't supported.
+         Callers should only call this method after a supported state callback on
+         {@link Callback#onAvailabilityChanged(int)} to avoid this exception.
+@throws IllegalStateException if the detector is in an invalid state.
+         This may happen if another detector has been instantiated or the
+         {@link VoiceInteractionService} hosting this detector has been shut down.
+*/
+getSupportedRecognitionModes : function(  ) {},
+
+<span id='android-service-voice-AlwaysOnHotwordDetector-method-startRecognition'>/**Starts recognition for the associated keyphrase.
+</span>@param {Number} recognitionFlags The flags to control the recognition properties.
+@see #RECOGNITION_FLAG_ALLOW_MULTIPLE_TRIGGERS
+@param recognitionFlags The flags to control the recognition properties.
+@return {Boolean} Indicates whether the call succeeded or not.
+@throws UnsupportedOperationException if the recognition isn't supported.
+         Callers should only call this method after a supported state callback on
+         {@link Callback#onAvailabilityChanged(int)} to avoid this exception.
+@throws IllegalStateException if the detector is in an invalid state.
+         This may happen if another detector has been instantiated or the
+         {@link VoiceInteractionService} hosting this detector has been shut down.
+*/
+startRecognition : function(  ) {},
+
+<span id='android-service-voice-AlwaysOnHotwordDetector-method-stopRecognition'>/**Stops recognition for the associated keyphrase.
+</span>@return {Boolean} Indicates whether the call succeeded or not.
+@throws UnsupportedOperationException if the recognition isn't supported.
+         Callers should only call this method after a supported state callback on
+         {@link Callback#onAvailabilityChanged(int)} to avoid this exception.
+@throws IllegalStateException if the detector is in an invalid state.
+         This may happen if another detector has been instantiated or the
+         {@link VoiceInteractionService} hosting this detector has been shut down.
+*/
+stopRecognition : function(  ) {},
+
+<span id='android-service-voice-AlwaysOnHotwordDetector-method-createEnrollIntent'>/**Creates an intent to start the enrollment for the associated keyphrase.
+</span> This intent must be invoked using {@link Activity#startActivityForResult(Intent, int)}.
+ Starting re-enrollment is only valid if the keyphrase is un-enrolled,
+ i.e. {@link #STATE_KEYPHRASE_UNENROLLED},
+ otherwise {@link #createReEnrollIntent}() should be preferred.
+@return {Object {android.content.Intent}} An {@link Intent} to start enrollment for the given keyphrase.
+@throws UnsupportedOperationException if managing they keyphrase isn't supported.
+         Callers should only call this method after a supported state callback on
+         {@link Callback#onAvailabilityChanged(int)} to avoid this exception.
+@throws IllegalStateException if the detector is in an invalid state.
+         This may happen if another detector has been instantiated or the
+         {@link VoiceInteractionService} hosting this detector has been shut down.
+*/
+createEnrollIntent : function(  ) {},
+
+<span id='android-service-voice-AlwaysOnHotwordDetector-method-createUnEnrollIntent'>/**Creates an intent to start the un-enrollment for the associated keyphrase.
+</span> This intent must be invoked using {@link Activity#startActivityForResult(Intent, int)}.
+ Starting re-enrollment is only valid if the keyphrase is already enrolled,
+ i.e. {@link #STATE_KEYPHRASE_ENROLLED}, otherwise invoking this may result in an error.
+@return {Object {android.content.Intent}} An {@link Intent} to start un-enrollment for the given keyphrase.
+@throws UnsupportedOperationException if managing they keyphrase isn't supported.
+         Callers should only call this method after a supported state callback on
+         {@link Callback#onAvailabilityChanged(int)} to avoid this exception.
+@throws IllegalStateException if the detector is in an invalid state.
+         This may happen if another detector has been instantiated or the
+         {@link VoiceInteractionService} hosting this detector has been shut down.
+*/
+createUnEnrollIntent : function(  ) {},
+
+<span id='android-service-voice-AlwaysOnHotwordDetector-method-createReEnrollIntent'>/**Creates an intent to start the re-enrollment for the associated keyphrase.
+</span> This intent must be invoked using {@link Activity#startActivityForResult(Intent, int)}.
+ Starting re-enrollment is only valid if the keyphrase is already enrolled,
+ i.e. {@link #STATE_KEYPHRASE_ENROLLED}, otherwise invoking this may result in an error.
+@return {Object {android.content.Intent}} An {@link Intent} to start re-enrollment for the given keyphrase.
+@throws UnsupportedOperationException if managing they keyphrase isn't supported.
+         Callers should only call this method after a supported state callback on
+         {@link Callback#onAvailabilityChanged(int)} to avoid this exception.
+@throws IllegalStateException if the detector is in an invalid state.
+         This may happen if another detector has been instantiated or the
+         {@link VoiceInteractionService} hosting this detector has been shut down.
+*/
+createReEnrollIntent : function(  ) {},
+
+<span id='android-service-voice-AlwaysOnHotwordDetector-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

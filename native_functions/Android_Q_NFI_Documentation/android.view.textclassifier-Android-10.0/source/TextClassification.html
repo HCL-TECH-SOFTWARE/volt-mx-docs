@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-textclassifier-TextClassification'>/**@class android.view.textclassifier.TextClassification
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Information for generating a widget to handle classified text.
+
+ &lt;p&gt;A TextClassification object contains icons, labels, onClickListeners and intents that may
+ be used to build a widget that can be used to act on classified text. There is the concept of a
+ &lt;i&gt;primary action&lt;/i&gt; and other &lt;i&gt;secondary actions&lt;/i&gt;.
+
+ &lt;p&gt;e.g. building a view that, when clicked, shares the classified text with the preferred app:
+
+ &lt;pre&gt;{@code
+   // Called preferably outside the UiThread.
+   TextClassification classification = textClassifier.classifyText(allText, 10, 25);
+
+   // Called on the UiThread.
+   Button button = new Button(context);
+   button.setCompoundDrawablesWithIntrinsicBounds(classification.getIcon(), null, null, null);
+   button.setText(classification.getLabel());
+   button.setOnClickListener(v -&gt; classification.getActions().get(0).getActionIntent().send());
+ }&lt;/pre&gt;
+
+ &lt;p&gt;e.g. starting an action mode with menu items that can handle the classified text:
+
+ &lt;pre&gt;{@code
+   // Called preferably outside the UiThread.
+   final TextClassification classification = textClassifier.classifyText(allText, 10, 25);
+
+   // Called on the UiThread.
+   view.startActionMode(new ActionMode.Callback() {
+
+       public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+           for (int i = 0; i &lt; classification.getActions().size(); ++i) {
+              RemoteAction action = classification.getActions().get(i);
+              menu.add(Menu.NONE, i, 20, action.getTitle())
+                 .setIcon(action.getIcon());
+           }
+           return true;
+       }
+
+       public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+           classification.getActions().get(item.getItemId()).getActionIntent().send();
+           return true;
+       }
+
+       ...
+   });
+ }&lt;/pre&gt;
+*/
+var TextClassification = {
+
+<span id='android-view-textclassifier-TextClassification-property-EMPTY'>/** @hide
+</span>*/
+EMPTY : &quot;null&quot;,
+<span id='android-view-textclassifier-TextClassification-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-textclassifier-TextClassification-method-getText'>/**Gets the classified text.
+</span>*/
+getText : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getEntityCount'>/**Returns the number of entities found in the classified text.
+</span>*/
+getEntityCount : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getEntity'>/**Returns the entity at the specified index. Entities are ordered from high confidence
+</span> to low confidence.
+@throws IndexOutOfBoundsException if the specified index is out of range.
+@see #getEntityCount() for the number of entities available.
+*/
+getEntity : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getConfidenceScore'>/**Returns the confidence score for the specified entity. The value ranges from
+</span> 0 (low confidence) to 1 (high confidence). 0 indicates that the entity was not found for the
+ classified text.
+*/
+getConfidenceScore : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getActions'>/**Returns a list of actions that may be performed on the text. The list is ordered based on
+</span> the likelihood that a user will use the action, with the most likely action appearing first.
+*/
+getActions : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getIcon'>/**Returns an icon that may be rendered on a widget used to act on the classified text.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;This field is not parcelable and only represents the icon of the
+ first {@link RemoteAction} (if one exists) when this object is read from a parcel.
+@deprecated Use {@link #getActions()} instead.
+*/
+getIcon : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getLabel'>/**Returns a label that may be rendered on a widget used to act on the classified text.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;This field is not parcelable and only represents the label of the
+ first {@link RemoteAction} (if one exists) when this object is read from a parcel.
+@deprecated Use {@link #getActions()} instead.
+*/
+getLabel : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getIntent'>/**Returns an intent that may be fired to act on the classified text.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;This field is not parcelled and will always return null when this
+ object is read from a parcel.
+@deprecated Use {@link #getActions()} instead.
+*/
+getIntent : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getOnClickListener'>/**Returns the OnClickListener that may be triggered to act on the classified text.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;This field is not parcelable and only represents the first
+ {@link RemoteAction} (if one exists) when this object is read from a parcel.
+@deprecated Use {@link #getActions()} instead.
+*/
+getOnClickListener : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getId'>/**Returns the id, if one exists, for this object.
+</span>*/
+getId : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-getExtras'>/**Returns the extended data.
+</span>
+ &lt;p&gt;&lt;b&gt;NOTE: &lt;/b&gt;Do not modify this bundle.
+*/
+getExtras : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-createIntentOnClickListener'>/**Creates an OnClickListener that triggers the specified PendingIntent.
+</span>@hide 
+*/
+createIntentOnClickListener : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-createPendingIntent'>/**Creates a PendingIntent for the specified intent.
+</span> Returns null if the intent is not supported for the specified context.
+@throws IllegalArgumentException if context or intent is null
+@hide 
+*/
+createPendingIntent : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassification-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

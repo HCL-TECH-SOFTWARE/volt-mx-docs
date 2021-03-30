@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-ImsReasonInfo'>/**@class android.telephony.ims.ImsReasonInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class enables an application to get details on why a method call failed.
+
+ @hide
+*/
+var ImsReasonInfo = {
+
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UNSPECIFIED'>/** The Reason is unspecified.
+</span>*/
+CODE_UNSPECIFIED : &quot;0&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_ILLEGAL_ARGUMENT'>/** The passed argument is invalid.
+</span>*/
+CODE_LOCAL_ILLEGAL_ARGUMENT : &quot;101&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_ILLEGAL_STATE'>/** The operation was invoked while in an invalid call state.
+</span>*/
+CODE_LOCAL_ILLEGAL_STATE : &quot;102&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_INTERNAL_ERROR'>/** IMS service internal error
+</span>*/
+CODE_LOCAL_INTERNAL_ERROR : &quot;103&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_IMS_SERVICE_DOWN'>/** ImsService has crashed (service connection is lost).
+</span>*/
+CODE_LOCAL_IMS_SERVICE_DOWN : &quot;106&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_NO_PENDING_CALL'>/** No pending incoming call exists
+</span>*/
+CODE_LOCAL_NO_PENDING_CALL : &quot;107&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_ENDED_BY_CONFERENCE_MERGE'>/** IMS Call ended during conference merge process
+</span>*/
+CODE_LOCAL_ENDED_BY_CONFERENCE_MERGE : &quot;108&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_POWER_OFF'>/** Service unavailable; radio power off
+</span>*/
+CODE_LOCAL_POWER_OFF : &quot;111&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_LOW_BATTERY'>/** Service unavailable; low battery
+</span>*/
+CODE_LOCAL_LOW_BATTERY : &quot;112&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_NETWORK_NO_SERVICE'>/** Service unavailable; out of service (data service state)
+</span>*/
+CODE_LOCAL_NETWORK_NO_SERVICE : &quot;121&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_NETWORK_NO_LTE_COVERAGE'>/** Service unavailable; no LTE coverage
+</span> (VoLTE is not supported even though IMS is registered)
+*/
+CODE_LOCAL_NETWORK_NO_LTE_COVERAGE : &quot;122&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_NETWORK_ROAMING'>/** Service unavailable; located in roaming area
+</span>*/
+CODE_LOCAL_NETWORK_ROAMING : &quot;123&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_NETWORK_IP_CHANGED'>/** Service unavailable; IP changed
+</span>*/
+CODE_LOCAL_NETWORK_IP_CHANGED : &quot;124&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_SERVICE_UNAVAILABLE'>/** Service unavailable; for an unspecified reason
+</span>*/
+CODE_LOCAL_SERVICE_UNAVAILABLE : &quot;131&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_NOT_REGISTERED'>/** Service unavailable; IMS is not registered
+</span>*/
+CODE_LOCAL_NOT_REGISTERED : &quot;132&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_EXCEEDED'>/** Maximum number of simultaneous calls exceeded
+</span>*/
+CODE_LOCAL_CALL_EXCEEDED : &quot;141&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_BUSY'>/** The call is busy.
+</span>*/
+CODE_LOCAL_CALL_BUSY : &quot;142&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_DECLINE'>/** The Call has been declined locally on this device.
+</span>*/
+CODE_LOCAL_CALL_DECLINE : &quot;143&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_VCC_ON_PROGRESSING'>/** Can not complete call; an SRVCC is in progress.
+</span>*/
+CODE_LOCAL_CALL_VCC_ON_PROGRESSING : &quot;144&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_RESOURCE_RESERVATION_FAILED'>/** Can not complete call; resource reservation is failed (QoS precondition)
+</span>*/
+CODE_LOCAL_CALL_RESOURCE_RESERVATION_FAILED : &quot;145&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_CS_RETRY_REQUIRED'>/** VoLTE service can't be provided by the network or remote end, retry the call.
+</span> Resolve the extra code provided in (EXTRA_CODE_CALL_RETRY_*) if the below code is set
+*/
+CODE_LOCAL_CALL_CS_RETRY_REQUIRED : &quot;146&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_VOLTE_RETRY_REQUIRED'>/** VoLTE service can't be provided by the network temporarily, retry the call.
+</span>*/
+CODE_LOCAL_CALL_VOLTE_RETRY_REQUIRED : &quot;147&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_CALL_TERMINATED'>/** IMS call is already terminated (in TERMINATED state).
+</span>*/
+CODE_LOCAL_CALL_TERMINATED : &quot;148&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_HO_NOT_FEASIBLE'>/** Call was disconnected because a handover is not feasible due to network conditions.
+</span>*/
+CODE_LOCAL_HO_NOT_FEASIBLE : &quot;149&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOCAL_IMS_NOT_SUPPORTED_ON_DEVICE'>/** This device does not support IMS.
+</span> @hide
+*/
+CODE_LOCAL_IMS_NOT_SUPPORTED_ON_DEVICE : &quot;150&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_TIMEOUT_1XX_WAITING'>/** 1xx waiting timer is expired after sending INVITE request (MO calls only)
+</span>*/
+CODE_TIMEOUT_1XX_WAITING : &quot;201&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_TIMEOUT_NO_ANSWER'>/** User didn't answer during call setup operation (MO/MT)
+</span> MO : 200 OK to INVITE request is not received,
+ MT : No action from user after alerting the call
+*/
+CODE_TIMEOUT_NO_ANSWER : &quot;202&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_TIMEOUT_NO_ANSWER_CALL_UPDATE'>/** User no answer during call update operation (MO/MT)
+</span> MO : 200 OK to re-INVITE request is not received,
+ MT : No action from user after alerting the call
+*/
+CODE_TIMEOUT_NO_ANSWER_CALL_UPDATE : &quot;203&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_CALL_BARRED'>/** The call was blocked by call barring configuration.
+</span>*/
+CODE_CALL_BARRED : &quot;240&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_FDN_BLOCKED'>/** The operation is restricted to fixed dialing numbers only.
+</span>*/
+CODE_FDN_BLOCKED : &quot;241&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_IMEI_NOT_ACCEPTED'>/** Network rejected the emergency call request because IMEI was used as identification
+</span> and this capability is not supported by the network.
+*/
+CODE_IMEI_NOT_ACCEPTED : &quot;243&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_MODIFIED_TO_USSD'>/** Stk Call Control modified DIAL request to USSD request.
+</span>*/
+CODE_DIAL_MODIFIED_TO_USSD : &quot;244&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_MODIFIED_TO_SS'>/** Stk Call Control modified DIAL request to SS request.
+</span>*/
+CODE_DIAL_MODIFIED_TO_SS : &quot;245&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_MODIFIED_TO_DIAL'>/** Stk Call Control modified DIAL request to DIAL with modified data.
+</span>*/
+CODE_DIAL_MODIFIED_TO_DIAL : &quot;246&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_MODIFIED_TO_DIAL_VIDEO'>/** Stk Call Control modified DIAL request to Video DIAL request.
+</span>*/
+CODE_DIAL_MODIFIED_TO_DIAL_VIDEO : &quot;247&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_VIDEO_MODIFIED_TO_DIAL'>/** Stk Call Control modified Video DIAL request to DIAL request.
+</span>*/
+CODE_DIAL_VIDEO_MODIFIED_TO_DIAL : &quot;248&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_VIDEO_MODIFIED_TO_DIAL_VIDEO'>/** Stk Call Control modified Video DIAL request to Video DIAL request.
+</span>*/
+CODE_DIAL_VIDEO_MODIFIED_TO_DIAL_VIDEO : &quot;249&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_VIDEO_MODIFIED_TO_SS'>/** Stk Call Control modified Video DIAL request to SS request.
+</span>*/
+CODE_DIAL_VIDEO_MODIFIED_TO_SS : &quot;250&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DIAL_VIDEO_MODIFIED_TO_USSD'>/** Stk Call Control modified Video DIAL request to USSD request.
+</span>*/
+CODE_DIAL_VIDEO_MODIFIED_TO_USSD : &quot;251&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_REDIRECTED'>/** SIP 3xx response: SIP request is redirected
+</span>*/
+CODE_SIP_REDIRECTED : &quot;321&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_BAD_REQUEST'>/** Sip 400 response : Bad Request
+</span>*/
+CODE_SIP_BAD_REQUEST : &quot;331&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_FORBIDDEN'>/** Sip 403 response : Forbidden
+</span>*/
+CODE_SIP_FORBIDDEN : &quot;332&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_NOT_FOUND'>/** Sip 404 response : Not Found
+</span>*/
+CODE_SIP_NOT_FOUND : &quot;333&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_NOT_SUPPORTED'>/** Not supported, because of one of the following:
+</span> SIP response 415 : Unsupported Media Type,
+ SIP response 416 : Unsupported URI Scheme,
+ SIP response 420 : Bad Extension
+*/
+CODE_SIP_NOT_SUPPORTED : &quot;334&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_REQUEST_TIMEOUT'>/** SIP response 408 : Request Timeout.
+</span>*/
+CODE_SIP_REQUEST_TIMEOUT : &quot;335&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_TEMPRARILY_UNAVAILABLE'>/** SIP response 480 : Temporarily Unavailable
+</span>*/
+CODE_SIP_TEMPRARILY_UNAVAILABLE : &quot;336&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_BAD_ADDRESS'>/** SIP response 484 : Address Incomplete
+</span>*/
+CODE_SIP_BAD_ADDRESS : &quot;337&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_BUSY'>/** Returned a busy response, may be one of the following:
+</span> SIP response 486 : Busy Here,
+ SIP response 600 : Busy Everywhere
+*/
+CODE_SIP_BUSY : &quot;338&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_REQUEST_CANCELLED'>/** SIP response 487 : Request Terminated
+</span>*/
+CODE_SIP_REQUEST_CANCELLED : &quot;339&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_NOT_ACCEPTABLE'>/** Received a not acceptable response, will be one of the following:
+</span> SIP response 406 : Not Acceptable
+ SIP response 488 : Not Acceptable Here
+ SIP response 606 : Not Acceptable
+*/
+CODE_SIP_NOT_ACCEPTABLE : &quot;340&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_NOT_REACHABLE'>/** Received a not acceptable response, will be one of the following:
+</span> SIP response 410 : Gone
+ SIP response 604 : Does Not Exist Anywhere
+*/
+CODE_SIP_NOT_REACHABLE : &quot;341&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_CLIENT_ERROR'>/** Received another unspecified error SIP response from the client.
+</span>*/
+CODE_SIP_CLIENT_ERROR : &quot;342&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_TRANSACTION_DOES_NOT_EXIST'>/** SIP response 481: Transaction Does Not Exist
+</span>*/
+CODE_SIP_TRANSACTION_DOES_NOT_EXIST : &quot;343&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_SERVER_INTERNAL_ERROR'>/** SIP response 501 : Server Internal Error
+</span>*/
+CODE_SIP_SERVER_INTERNAL_ERROR : &quot;351&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_SERVICE_UNAVAILABLE'>/** SIP response 503 : Service Unavailable
+</span>*/
+CODE_SIP_SERVICE_UNAVAILABLE : &quot;352&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_SERVER_TIMEOUT'>/** SIP response 504 : Server Time-out
+</span>*/
+CODE_SIP_SERVER_TIMEOUT : &quot;353&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_SERVER_ERROR'>/** Received an unspecified SIP server error response.
+</span>*/
+CODE_SIP_SERVER_ERROR : &quot;354&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_USER_REJECTED'>/** 603 : Decline
+</span>*/
+CODE_SIP_USER_REJECTED : &quot;361&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_GLOBAL_ERROR'>/** Unspecified 6xx error.
+</span>*/
+CODE_SIP_GLOBAL_ERROR : &quot;362&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_EMERGENCY_TEMP_FAILURE'>/** Emergency call failed in the modem with a temporary fail cause and should be redialed on this
+</span> slot.
+*/
+CODE_EMERGENCY_TEMP_FAILURE : &quot;363&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_EMERGENCY_PERM_FAILURE'>/** Emergency call failed in the modem with a permanent fail cause and should not be redialed on
+</span> this slot. If there are any other slots available for emergency calling, try those.
+*/
+CODE_EMERGENCY_PERM_FAILURE : &quot;364&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_USER_MARKED_UNWANTED'>/** Call failure code during hangup/reject if user marked the call as unwanted.
+</span>
+ Android Telephony will receive information whether ROBO call feature is supported by the
+ network from modem and propagate the same to AOSP as new ImsCallProfile members. OEMs can
+ check this information and provide an option to the user to mark the call as unwanted.
+*/
+CODE_SIP_USER_MARKED_UNWANTED : &quot;365&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_METHOD_NOT_ALLOWED'>/** SIP Response : 405
+</span> Method not allowed for the address in the Request URI
+*/
+CODE_SIP_METHOD_NOT_ALLOWED : &quot;366&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_PROXY_AUTHENTICATION_REQUIRED'>/** SIP Response : 407
+</span> The request requires user authentication
+*/
+CODE_SIP_PROXY_AUTHENTICATION_REQUIRED : &quot;367&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_REQUEST_ENTITY_TOO_LARGE'>/** SIP Response : 413
+</span> Request body too large
+*/
+CODE_SIP_REQUEST_ENTITY_TOO_LARGE : &quot;368&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_REQUEST_URI_TOO_LARGE'>/** SIP Response : 414
+</span> Request-URI too large
+*/
+CODE_SIP_REQUEST_URI_TOO_LARGE : &quot;369&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_EXTENSION_REQUIRED'>/** SIP Response : 421
+</span> Specific extension is required, which is not present in the HEADER
+*/
+CODE_SIP_EXTENSION_REQUIRED : &quot;370&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_INTERVAL_TOO_BRIEF'>/** SIP Response : 422
+</span> The session expiration field too small
+*/
+CODE_SIP_INTERVAL_TOO_BRIEF : &quot;371&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_CALL_OR_TRANS_DOES_NOT_EXIST'>/** SIP Response : 481
+</span> Request received by the server does not match any dialog or transaction
+*/
+CODE_SIP_CALL_OR_TRANS_DOES_NOT_EXIST : &quot;372&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_LOOP_DETECTED'>/** SIP Response : 482
+</span> Server has detected a loop
+*/
+CODE_SIP_LOOP_DETECTED : &quot;373&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_TOO_MANY_HOPS'>/** SIP Response : 483
+</span> Max-Forwards value reached
+*/
+CODE_SIP_TOO_MANY_HOPS : &quot;374&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_AMBIGUOUS'>/** SIP Response : 485
+</span> Request-URI is ambiguous
+
+*/
+CODE_SIP_AMBIGUOUS : &quot;376&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_REQUEST_PENDING'>/** SIP Response : 491
+</span> Server has pending request for same dialog
+*/
+CODE_SIP_REQUEST_PENDING : &quot;377&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_UNDECIPHERABLE'>/** SIP Response : 493
+</span> The request cannot be decrypted by recipient
+*/
+CODE_SIP_UNDECIPHERABLE : &quot;378&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_MEDIA_INIT_FAILED'>/** Media resource initialization failed
+</span>*/
+CODE_MEDIA_INIT_FAILED : &quot;401&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_MEDIA_NO_DATA'>/** RTP timeout (no audio / video traffic in the session)
+</span>*/
+CODE_MEDIA_NO_DATA : &quot;402&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_MEDIA_NOT_ACCEPTABLE'>/** Media is not supported; so dropped the call
+</span>*/
+CODE_MEDIA_NOT_ACCEPTABLE : &quot;403&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_MEDIA_UNSPECIFIED'>/** Unspecified media related error.
+</span>*/
+CODE_MEDIA_UNSPECIFIED : &quot;404&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_USER_TERMINATED'>/** User triggers the call to be terminated.
+</span>*/
+CODE_USER_TERMINATED : &quot;501&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_USER_NOANSWER'>/** No action was taken while an incoming call was ringing.
+</span>*/
+CODE_USER_NOANSWER : &quot;502&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_USER_IGNORE'>/** User ignored an incoming call.
+</span>*/
+CODE_USER_IGNORE : &quot;503&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_USER_DECLINE'>/** User declined an incoming call.
+</span>*/
+CODE_USER_DECLINE : &quot;504&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_LOW_BATTERY'>/** Device declined/ended a call due to a low battery condition.
+</span>*/
+CODE_LOW_BATTERY : &quot;505&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_BLACKLISTED_CALL_ID'>/** Device declined a call due to a blacklisted caller ID.
+</span>*/
+CODE_BLACKLISTED_CALL_ID : &quot;506&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_USER_TERMINATED_BY_REMOTE'>/** The call has been terminated by the network or remote user.
+</span>*/
+CODE_USER_TERMINATED_BY_REMOTE : &quot;510&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_USER_REJECTED_SESSION_MODIFICATION'>/** Upgrade Downgrade request rejected by
+</span> Remote user if the request is MO initiated
+ Local user if the request is MT initiated
+*/
+CODE_USER_REJECTED_SESSION_MODIFICATION : &quot;511&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_USER_CANCELLED_SESSION_MODIFICATION'>/** Upgrade Downgrade request cancelled by the user who initiated it
+</span>*/
+CODE_USER_CANCELLED_SESSION_MODIFICATION : &quot;512&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SESSION_MODIFICATION_FAILED'>/** UPGRADE DOWNGRADE operation failed
+</span> This can happen due to failure from SIP/RTP/SDP generation or a Call end is
+ triggered/received while Reinvite is in progress.
+*/
+CODE_SESSION_MODIFICATION_FAILED : &quot;1517&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_NOT_SUPPORTED'>/** UT is currently not supported on this device.
+</span>*/
+CODE_UT_NOT_SUPPORTED : &quot;801&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_SERVICE_UNAVAILABLE'>/** UT services are currently not available on this device.
+</span>*/
+CODE_UT_SERVICE_UNAVAILABLE : &quot;802&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_OPERATION_NOT_ALLOWED'>/** The requested UT operation is not allowed.
+</span>*/
+CODE_UT_OPERATION_NOT_ALLOWED : &quot;803&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_NETWORK_ERROR'>/** The UT request resulted in a network error.
+</span>*/
+CODE_UT_NETWORK_ERROR : &quot;804&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_CB_PASSWORD_MISMATCH'>/** The password entered for UT operations does not match the stored password.
+</span>*/
+CODE_UT_CB_PASSWORD_MISMATCH : &quot;821&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_SS_MODIFIED_TO_DIAL'>/** Sim Toolkit Call Control modified the UT operation to a dial command.
+</span>*/
+CODE_UT_SS_MODIFIED_TO_DIAL : &quot;822&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_SS_MODIFIED_TO_USSD'>/** Sim Toolkit Call Control modified the UT operation to a USSD command.
+</span>*/
+CODE_UT_SS_MODIFIED_TO_USSD : &quot;823&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_SS_MODIFIED_TO_SS'>/** Sim Toolkit Call Control modified the UT operation to another supplementary service command.
+</span>*/
+CODE_UT_SS_MODIFIED_TO_SS : &quot;824&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UT_SS_MODIFIED_TO_DIAL_VIDEO'>/** Sim Toolkit Call Control modified the UT operation to a video call dial command.
+</span>*/
+CODE_UT_SS_MODIFIED_TO_DIAL_VIDEO : &quot;825&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_ECBM_NOT_SUPPORTED'>/** Emergency callback mode is not supported.
+</span>*/
+CODE_ECBM_NOT_SUPPORTED : &quot;901&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_MULTIENDPOINT_NOT_SUPPORTED'>/** Fail code used to indicate that Multi-endpoint is not supported by the IMS framework.
+</span>*/
+CODE_MULTIENDPOINT_NOT_SUPPORTED : &quot;902&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REGISTRATION_ERROR'>/** IMS Registration error code
+</span>*/
+CODE_REGISTRATION_ERROR : &quot;1000&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_ANSWERED_ELSEWHERE'>/** MT call has ended due to a release from the network because the call was answered elsewhere.
+</span>*/
+CODE_ANSWERED_ELSEWHERE : &quot;1014&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_CALL_PULL_OUT_OF_SYNC'>/** For MultiEndpoint - Call Pull request has failed.
+</span>*/
+CODE_CALL_PULL_OUT_OF_SYNC : &quot;1015&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_CALL_END_CAUSE_CALL_PULL'>/** For MultiEndpoint - Call has been pulled from primary to secondary.
+</span>*/
+CODE_CALL_END_CAUSE_CALL_PULL : &quot;1016&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_CALL_DROP_IWLAN_TO_LTE_UNAVAILABLE'>/** CALL DROP error code for the case when a device is ePDG capable and when the user is on an
+</span> active wifi call and at the edge of coverage and there is no qualified LTE network available
+ to handover the call to. We get a handover NOT_TRIGERRED message from the modem. This error
+ code is received as part of the handover message.
+*/
+CODE_CALL_DROP_IWLAN_TO_LTE_UNAVAILABLE : &quot;1100&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECTED_ELSEWHERE'>/** For MultiEndPoint - Call was rejected elsewhere
+</span>*/
+CODE_REJECTED_ELSEWHERE : &quot;1017&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SUPP_SVC_FAILED'>/** Supplementary Services (HOLD/RESUME) - the command failed.
+</span>*/
+CODE_SUPP_SVC_FAILED : &quot;1201&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SUPP_SVC_CANCELLED'>/** Supplementary Services (HOLD/RESUME) - the command was cancelled.
+</span>*/
+CODE_SUPP_SVC_CANCELLED : &quot;1202&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SUPP_SVC_REINVITE_COLLISION'>/** Supplementary Services (HOLD/RESUME) - the command resulted in a re-invite collision.
+</span>*/
+CODE_SUPP_SVC_REINVITE_COLLISION : &quot;1203&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_IWLAN_DPD_FAILURE'>/** DPD Procedure received no response or send failed.
+</span>*/
+CODE_IWLAN_DPD_FAILURE : &quot;1300&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_EPDG_TUNNEL_ESTABLISH_FAILURE'>/** Establishment of the ePDG Tunnel Failed.
+</span>*/
+CODE_EPDG_TUNNEL_ESTABLISH_FAILURE : &quot;1400&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_EPDG_TUNNEL_REKEY_FAILURE'>/** Re-keying of the ePDG Tunnel Failed; may not always result in teardown.
+</span>*/
+CODE_EPDG_TUNNEL_REKEY_FAILURE : &quot;1401&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_EPDG_TUNNEL_LOST_CONNECTION'>/** Connection to the packet gateway is lost.
+</span>*/
+CODE_EPDG_TUNNEL_LOST_CONNECTION : &quot;1402&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_MAXIMUM_NUMBER_OF_CALLS_REACHED'>/** The maximum number of calls allowed has been reached.  Used in a multi-endpoint scenario
+</span> where the number of calls across all connected devices has reached the maximum.
+*/
+CODE_MAXIMUM_NUMBER_OF_CALLS_REACHED : &quot;1403&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REMOTE_CALL_DECLINE'>/** Similar to {@link #CODE_LOCAL_CALL_DECLINE}, except indicates that a remote device has
+</span> declined the call.  Used in a multi-endpoint scenario where a remote device declined an
+ incoming call.
+*/
+CODE_REMOTE_CALL_DECLINE : &quot;1404&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DATA_LIMIT_REACHED'>/** Indicates the call was disconnected due to the user reaching their data limit.
+</span>*/
+CODE_DATA_LIMIT_REACHED : &quot;1405&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_DATA_DISABLED'>/** Indicates the call was disconnected due to the user disabling cellular data.
+</span>*/
+CODE_DATA_DISABLED : &quot;1406&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_WIFI_LOST'>/** Indicates a call was disconnected due to loss of wifi signal.
+</span>*/
+CODE_WIFI_LOST : &quot;1407&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_IKEV2_AUTH_FAILURE'>/** Indicates the registration attempt on IWLAN failed due to IKEv2 authetication failure
+</span> during tunnel establishment.
+*/
+CODE_IKEV2_AUTH_FAILURE : &quot;1408&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_OFF'>/**The call cannot be established because RADIO is OFF */
+</span>CODE_RADIO_OFF : &quot;1500&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_NO_VALID_SIM'>/**The call cannot be established because of no valid SIM */
+</span>CODE_NO_VALID_SIM : &quot;1501&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_INTERNAL_ERROR'>/**The failure is due internal error at modem */
+</span>CODE_RADIO_INTERNAL_ERROR : &quot;1502&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_NETWORK_RESP_TIMEOUT'>/**The failure is due to UE timer expired while waiting for a response from network */
+</span>CODE_NETWORK_RESP_TIMEOUT : &quot;1503&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_NETWORK_REJECT'>/**The failure is due to explicit reject from network */
+</span>CODE_NETWORK_REJECT : &quot;1504&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_ACCESS_FAILURE'>/**The failure is due to radio access failure. ex. RACH failure */
+</span>CODE_RADIO_ACCESS_FAILURE : &quot;1505&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_LINK_FAILURE'>/**Call/IMS registration failed/dropped because of a RLF */
+</span>CODE_RADIO_LINK_FAILURE : &quot;1506&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_LINK_LOST'>/**Call/IMS registration failed/dropped because of radio link lost */
+</span>CODE_RADIO_LINK_LOST : &quot;1507&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_UPLINK_FAILURE'>/**The call Call/IMS registration failed because of a radio uplink issue */
+</span>CODE_RADIO_UPLINK_FAILURE : &quot;1508&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_SETUP_FAILURE'>/**Call failed because of a RRC connection setup failure */
+</span>CODE_RADIO_SETUP_FAILURE : &quot;1509&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_RELEASE_NORMAL'>/**Call failed/dropped because of RRC connection release from NW */
+</span>CODE_RADIO_RELEASE_NORMAL : &quot;1510&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_RADIO_RELEASE_ABNORMAL'>/**Call failed/dropped because of RRC abnormally released by modem/network */
+</span>CODE_RADIO_RELEASE_ABNORMAL : &quot;1511&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_ACCESS_CLASS_BLOCKED'>/**Call failed because of access class barring */
+</span>CODE_ACCESS_CLASS_BLOCKED : &quot;1512&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_NETWORK_DETACH'>/**Call/IMS registration is failed/dropped because of a network detach */
+</span>CODE_NETWORK_DETACH : &quot;1513&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_SIP_ALTERNATE_EMERGENCY_CALL'>/** Call failed due to SIP code 380 (Alternative Service response) while dialing an &quot;undetected
+</span> emergency number&quot;.  This scenario is important in some regions where the carrier network will
+ identify other non-emergency help numbers (e.g. mountain rescue) when attempting to dial.
+*/
+CODE_SIP_ALTERNATE_EMERGENCY_CALL : &quot;1514&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_UNOBTAINABLE_NUMBER'>/** Call failed because of unobtainable number
+</span> @hide
+*/
+CODE_UNOBTAINABLE_NUMBER : &quot;1515&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_NO_CSFB_IN_CS_ROAM'>/** Call failed because WiFi call could not complete and circuit switch silent redial
+</span> is not allowed while roaming on another network.
+*/
+CODE_NO_CSFB_IN_CS_ROAM : &quot;1516&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_UNKNOWN'>/** The rejection cause is not known.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_UNKNOWN : &quot;1600&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_CALL_WAITING_DISABLED'>/** Ongoing call, and call waiting is disabled.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_CALL_WAITING_DISABLED : &quot;1601&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_CALL_ON_OTHER_SUB'>/** A call is ongoing on another sub.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_CALL_ON_OTHER_SUB : &quot;1602&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_1X_COLLISION'>/** CDMA call collision.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_1X_COLLISION : &quot;1603&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_SERVICE_NOT_REGISTERED'>/** IMS is not registered for service yet.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_SERVICE_NOT_REGISTERED : &quot;1604&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_CALL_TYPE_NOT_ALLOWED'>/** The call type is not allowed on the current RAT.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_CALL_TYPE_NOT_ALLOWED : &quot;1605&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_E911_CALL'>/** And emergency call is ongoing.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_E911_CALL : &quot;1606&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_CALL_SETUP'>/** Another call is in the process of being establilshed.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_CALL_SETUP : &quot;1607&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_MAX_CALL_LIMIT_REACHED'>/** Maximum number of allowed calls are already in progress.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_MAX_CALL_LIMIT_REACHED : &quot;1608&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_UNSUPPORTED_SIP_HEADERS'>/** Invalid/unsupported SIP headers received.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_UNSUPPORTED_SIP_HEADERS : &quot;1609&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_UNSUPPORTED_SDP_HEADERS'>/** Invalid/unsupported SDP headers received.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_UNSUPPORTED_SDP_HEADERS : &quot;1610&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_CALL_TRANSFER'>/** A call transfer is in progress.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_CALL_TRANSFER : &quot;1611&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_INTERNAL_ERROR'>/** An internal error occured while processing the call.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_INTERNAL_ERROR : &quot;1612&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_QOS_FAILURE'>/** Call failure due to lack of dedicated bearer.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_QOS_FAILURE : &quot;1613&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_HANDOVER'>/** A call handover is in progress.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_HANDOVER : &quot;1614&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_VT_TTY_NOT_ALLOWED'>/** Video calling not supported with TTY.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_VT_TTY_NOT_ALLOWED : &quot;1615&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_CALL_UPGRADE'>/** A call upgrade is in progress.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_CALL_UPGRADE : &quot;1616&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_CONFERENCE_TTY_NOT_ALLOWED'>/** Call from conference server, when TTY mode is ON.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_CONFERENCE_TTY_NOT_ALLOWED : &quot;1617&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_CONFERENCE_CALL'>/** A conference call is ongoing.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_CONFERENCE_CALL : &quot;1618&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_VT_AVPF_NOT_ALLOWED'>/** A video call with AVPF is not supported.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_VT_AVPF_NOT_ALLOWED : &quot;1619&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_ENCRYPTED_CALL'>/** And encrypted call is ongoing; other calls not supported.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_ENCRYPTED_CALL : &quot;1620&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_REJECT_ONGOING_CS_CALL'>/** A CS call is ongoing.
+</span> &lt;p&gt;
+ Used with implicit call rejection.
+*/
+CODE_REJECT_ONGOING_CS_CALL : &quot;1621&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_1'>/***/
+</span>CODE_OEM_CAUSE_1 : &quot;61441&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_2'>/***/
+</span>CODE_OEM_CAUSE_2 : &quot;61442&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_3'>/***/
+</span>CODE_OEM_CAUSE_3 : &quot;61443&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_4'>/***/
+</span>CODE_OEM_CAUSE_4 : &quot;61444&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_5'>/***/
+</span>CODE_OEM_CAUSE_5 : &quot;61445&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_6'>/***/
+</span>CODE_OEM_CAUSE_6 : &quot;61446&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_7'>/***/
+</span>CODE_OEM_CAUSE_7 : &quot;61447&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_8'>/***/
+</span>CODE_OEM_CAUSE_8 : &quot;61448&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_9'>/***/
+</span>CODE_OEM_CAUSE_9 : &quot;61449&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_10'>/***/
+</span>CODE_OEM_CAUSE_10 : &quot;61450&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_11'>/***/
+</span>CODE_OEM_CAUSE_11 : &quot;61451&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_12'>/***/
+</span>CODE_OEM_CAUSE_12 : &quot;61452&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_13'>/***/
+</span>CODE_OEM_CAUSE_13 : &quot;61453&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_14'>/***/
+</span>CODE_OEM_CAUSE_14 : &quot;61454&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CODE_OEM_CAUSE_15'>/***/
+</span>CODE_OEM_CAUSE_15 : &quot;61455&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-EXTRA_MSG_SERVICE_NOT_AUTHORIZED'>/** Network string error messages.
+</span> mExtraMessage may have these values.
+*/
+EXTRA_MSG_SERVICE_NOT_AUTHORIZED : &quot;Forbidden. Not Authorized for Service&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-EXTRA_CODE_CALL_RETRY_NORMAL'>/** An extra that may be populated when the {@link CODE_LOCAL_CALL_CS_RETRY_REQUIRED} result has
+</span> been returned.
+ &lt;p&gt;
+ Try to connect the call using CS
+*/
+EXTRA_CODE_CALL_RETRY_NORMAL : &quot;1&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-EXTRA_CODE_CALL_RETRY_SILENT_REDIAL'>/** An extra that may be populated when the {@link CODE_LOCAL_CALL_CS_RETRY_REQUIRED} result has
+</span> been returned.
+ &lt;p&gt;
+ Try to connect the call using CS and do not notify the user.
+*/
+EXTRA_CODE_CALL_RETRY_SILENT_REDIAL : &quot;2&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-EXTRA_CODE_CALL_RETRY_BY_SETTINGS'>/** An extra that may be populated when the {@link CODE_LOCAL_CALL_CS_RETRY_REQUIRED} result has
+</span> been returned.
+ &lt;p&gt;
+ Try to connect the call using CS by using the settings.
+*/
+EXTRA_CODE_CALL_RETRY_BY_SETTINGS : &quot;3&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-mCode'>/**@hide */
+</span>mCode : &quot;null&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-mExtraCode'>/**@hide */
+</span>mExtraCode : &quot;null&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-mExtraMessage'>/**@hide */
+</span>mExtraMessage : &quot;null&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-telephony-ims-ImsReasonInfo-method-getCode'>/**
+</span>@return {Number} an integer representing more information about the completion of an operation.
+*/
+getCode : function(  ) {},
+
+<span id='android-telephony-ims-ImsReasonInfo-method-getExtraCode'>/**
+</span>@return {Number} an optional OEM specified code that provides extra information.
+*/
+getExtraCode : function(  ) {},
+
+<span id='android-telephony-ims-ImsReasonInfo-method-getExtraMessage'>/**
+</span>@return {String} an optional OEM specified string that provides extra information about the operation
+ result.
+*/
+getExtraMessage : function(  ) {},
+
+<span id='android-telephony-ims-ImsReasonInfo-method-toString'>/**
+</span>@return {String} the string format of {@link ImsReasonInfo}
+*/
+toString : function(  ) {},
+
+<span id='android-telephony-ims-ImsReasonInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-telephony-ims-ImsReasonInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

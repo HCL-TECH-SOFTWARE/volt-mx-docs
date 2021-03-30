@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-animation-GridLayoutAnimationController'>/**@class android.view.animation.GridLayoutAnimationController
+</span>@extends android.view.animation.LayoutAnimationController
+
+ A layout animation controller is used to animated a grid layout's children.
+
+ While {@link android.view.animation.LayoutAnimationController} relies only on the index of the child
+ in the view group to compute the animation delay, this class uses both the
+ X and Y coordinates of the child within a grid.
+
+ In addition, the animation direction can be controlled. The default direction
+ is &lt;code&gt;DIRECTION_LEFT_TO_RIGHT | DIRECTION_TOP_TO_BOTTOM&lt;/code&gt;. You can
+ also set the animation priority to columns or rows. The default priority is
+ none.
+
+ Information used to compute the animation delay of each child are stored
+ in an instance of
+ {@link android.view.animation.GridLayoutAnimationController.AnimationParameters},
+ itself stored in the {@link android.view.ViewGroup.LayoutParams} of the view.
+
+ @see LayoutAnimationController
+ @see android.widget.GridView
+
+ @attr ref android.R.styleable#GridLayoutAnimation_columnDelay
+ @attr ref android.R.styleable#GridLayoutAnimation_rowDelay
+ @attr ref android.R.styleable#GridLayoutAnimation_direction
+ @attr ref android.R.styleable#GridLayoutAnimation_directionPriority
+*/
+var GridLayoutAnimationController = {
+
+<span id='android-view-animation-GridLayoutAnimationController-property-DIRECTION_LEFT_TO_RIGHT'>/** Animates the children starting from the left of the grid to the right.
+</span>*/
+DIRECTION_LEFT_TO_RIGHT : &quot;0&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-DIRECTION_RIGHT_TO_LEFT'>/** Animates the children starting from the right of the grid to the left.
+</span>*/
+DIRECTION_RIGHT_TO_LEFT : &quot;1&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-DIRECTION_TOP_TO_BOTTOM'>/** Animates the children starting from the top of the grid to the bottom.
+</span>*/
+DIRECTION_TOP_TO_BOTTOM : &quot;0&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-DIRECTION_BOTTOM_TO_TOP'>/** Animates the children starting from the bottom of the grid to the top.
+</span>*/
+DIRECTION_BOTTOM_TO_TOP : &quot;2&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-DIRECTION_HORIZONTAL_MASK'>/** Bitmask used to retrieve the horizontal component of the direction.
+</span>*/
+DIRECTION_HORIZONTAL_MASK : &quot;1&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-DIRECTION_VERTICAL_MASK'>/** Bitmask used to retrieve the vertical component of the direction.
+</span>*/
+DIRECTION_VERTICAL_MASK : &quot;2&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-PRIORITY_NONE'>/** Rows and columns are animated at the same time.
+</span>*/
+PRIORITY_NONE : &quot;0&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-PRIORITY_COLUMN'>/** Columns are animated first.
+</span>*/
+PRIORITY_COLUMN : &quot;1&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-property-PRIORITY_ROW'>/** Rows are animated first.
+</span>*/
+PRIORITY_ROW : &quot;2&quot;,
+<span id='android-view-animation-GridLayoutAnimationController-method-getColumnDelay'>/**Returns the delay by which the children's animation are offset from one
+</span> column to the other. The delay is expressed as a fraction of the
+ animation duration.
+@return {Number} a fraction of the animation duration
+@see #setColumnDelay(float)
+@see #getRowDelay()
+@see #setRowDelay(float)
+*/
+getColumnDelay : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-setColumnDelay'>/**Sets the delay, as a fraction of the animation duration, by which the
+</span> children's animations are offset from one column to the other.
+@param {Number} columnDelay a fraction of the animation duration
+@see #getColumnDelay()
+@see #getRowDelay()
+@see #setRowDelay(float)
+*/
+setColumnDelay : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-getRowDelay'>/**Returns the delay by which the children's animation are offset from one
+</span> row to the other. The delay is expressed as a fraction of the
+ animation duration.
+@return {Number} a fraction of the animation duration
+@see #setRowDelay(float)
+@see #getColumnDelay()
+@see #setColumnDelay(float)
+*/
+getRowDelay : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-setRowDelay'>/**Sets the delay, as a fraction of the animation duration, by which the
+</span> children's animations are offset from one row to the other.
+@param {Number} rowDelay a fraction of the animation duration
+@see #getRowDelay()
+@see #getColumnDelay()
+@see #setColumnDelay(float)
+*/
+setRowDelay : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-getDirection'>/**Returns the direction of the animation. {@link #DIRECTION_HORIZONTAL_MASK}
+</span> and {@link #DIRECTION_VERTICAL_MASK} can be used to retrieve the
+ horizontal and vertical components of the direction.
+@return {Number} the direction of the animation
+@see #setDirection(int)
+@see #DIRECTION_BOTTOM_TO_TOP
+@see #DIRECTION_TOP_TO_BOTTOM
+@see #DIRECTION_LEFT_TO_RIGHT
+@see #DIRECTION_RIGHT_TO_LEFT
+@see #DIRECTION_HORIZONTAL_MASK
+@see #DIRECTION_VERTICAL_MASK
+*/
+getDirection : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-setDirection'>/**Sets the direction of the animation. The direction is expressed as an
+</span> integer containing a horizontal and vertical component. For instance,
+ &lt;code&gt;DIRECTION_BOTTOM_TO_TOP | DIRECTION_RIGHT_TO_LEFT&lt;/code&gt;.
+@param {Number} direction the direction of the animation
+@see #getDirection()
+@see #DIRECTION_BOTTOM_TO_TOP
+@see #DIRECTION_TOP_TO_BOTTOM
+@see #DIRECTION_LEFT_TO_RIGHT
+@see #DIRECTION_RIGHT_TO_LEFT
+@see #DIRECTION_HORIZONTAL_MASK
+@see #DIRECTION_VERTICAL_MASK
+*/
+setDirection : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-getDirectionPriority'>/**Returns the direction priority for the animation. The priority can
+</span> be either {@link #PRIORITY_NONE}, {@link #PRIORITY_COLUMN} or
+ {@link #PRIORITY_ROW}.
+@return {Number} the priority of the animation direction
+@see #setDirectionPriority(int)
+@see #PRIORITY_COLUMN
+@see #PRIORITY_NONE
+@see #PRIORITY_ROW
+*/
+getDirectionPriority : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-setDirectionPriority'>/**Specifies the direction priority of the animation. For instance,
+</span> {@link #PRIORITY_COLUMN} will give priority to columns: the animation
+ will first play on the column, then on the rows.Z
+@param {Number} directionPriority the direction priority of the animation
+@see #getDirectionPriority()
+@see #PRIORITY_COLUMN
+@see #PRIORITY_NONE
+@see #PRIORITY_ROW
+*/
+setDirectionPriority : function(  ) {},
+
+<span id='android-view-animation-GridLayoutAnimationController-method-willOverlap'>/**{@inheritDoc}
+</span>*/
+willOverlap : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

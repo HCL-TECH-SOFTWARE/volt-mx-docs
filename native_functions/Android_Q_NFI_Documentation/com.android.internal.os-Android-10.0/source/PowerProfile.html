@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-PowerProfile'>/**@class com.android.internal.os.PowerProfile
+</span>@extends java.lang.Object
+
+ Reports power consumption values for various device activities. Reads values from an XML file.
+ Customize the XML file for different devices.
+ [hidden]
+*/
+var PowerProfile = {
+
+<span id='com-android-internal-os-PowerProfile-property-POWER_CPU_SUSPEND'>/***/
+</span>POWER_CPU_SUSPEND : &quot;cpu.suspend&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_CPU_IDLE'>/***/
+</span>POWER_CPU_IDLE : &quot;cpu.idle&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_CPU_ACTIVE'>/***/
+</span>POWER_CPU_ACTIVE : &quot;cpu.active&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_SCAN'>/** Power consumption when WiFi driver is scanning for networks.
+</span>*/
+POWER_WIFI_SCAN : &quot;wifi.scan&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_ON'>/** Power consumption when WiFi driver is on.
+</span>*/
+POWER_WIFI_ON : &quot;wifi.on&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_ACTIVE'>/** Power consumption when WiFi driver is transmitting/receiving.
+</span>*/
+POWER_WIFI_ACTIVE : &quot;wifi.active&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_CONTROLLER_IDLE'>/***/
+</span>POWER_WIFI_CONTROLLER_IDLE : &quot;wifi.controller.idle&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_CONTROLLER_RX'>/***/
+</span>POWER_WIFI_CONTROLLER_RX : &quot;wifi.controller.rx&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_CONTROLLER_TX'>/***/
+</span>POWER_WIFI_CONTROLLER_TX : &quot;wifi.controller.tx&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_CONTROLLER_TX_LEVELS'>/***/
+</span>POWER_WIFI_CONTROLLER_TX_LEVELS : &quot;wifi.controller.tx_levels&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_CONTROLLER_OPERATING_VOLTAGE'>/***/
+</span>POWER_WIFI_CONTROLLER_OPERATING_VOLTAGE : &quot;wifi.controller.voltage&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BLUETOOTH_CONTROLLER_IDLE'>/***/
+</span>POWER_BLUETOOTH_CONTROLLER_IDLE : &quot;bluetooth.controller.idle&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BLUETOOTH_CONTROLLER_RX'>/***/
+</span>POWER_BLUETOOTH_CONTROLLER_RX : &quot;bluetooth.controller.rx&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BLUETOOTH_CONTROLLER_TX'>/***/
+</span>POWER_BLUETOOTH_CONTROLLER_TX : &quot;bluetooth.controller.tx&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE'>/***/
+</span>POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE : &quot;bluetooth.controller.voltage&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_MODEM_CONTROLLER_SLEEP'>/***/
+</span>POWER_MODEM_CONTROLLER_SLEEP : &quot;modem.controller.sleep&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_MODEM_CONTROLLER_IDLE'>/***/
+</span>POWER_MODEM_CONTROLLER_IDLE : &quot;modem.controller.idle&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_MODEM_CONTROLLER_RX'>/***/
+</span>POWER_MODEM_CONTROLLER_RX : &quot;modem.controller.rx&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_MODEM_CONTROLLER_TX'>/***/
+</span>POWER_MODEM_CONTROLLER_TX : &quot;modem.controller.tx&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_MODEM_CONTROLLER_OPERATING_VOLTAGE'>/***/
+</span>POWER_MODEM_CONTROLLER_OPERATING_VOLTAGE : &quot;modem.controller.voltage&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_GPS_ON'>/** Power consumption when GPS is on.
+</span>*/
+POWER_GPS_ON : &quot;gps.on&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_GPS_SIGNAL_QUALITY_BASED'>/** GPS power parameters based on signal quality
+</span>*/
+POWER_GPS_SIGNAL_QUALITY_BASED : &quot;gps.signalqualitybased&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_GPS_OPERATING_VOLTAGE'>/***/
+</span>POWER_GPS_OPERATING_VOLTAGE : &quot;gps.voltage&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BLUETOOTH_ON'>/** Power consumption when Bluetooth driver is on.
+</span>
+ @deprecated
+*/
+POWER_BLUETOOTH_ON : &quot;bluetooth.on&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BLUETOOTH_ACTIVE'>/** Power consumption when Bluetooth driver is transmitting/receiving.
+</span>
+ @deprecated
+*/
+POWER_BLUETOOTH_ACTIVE : &quot;bluetooth.active&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BLUETOOTH_AT_CMD'>/** Power consumption when Bluetooth driver gets an AT command.
+</span>
+ @deprecated
+*/
+POWER_BLUETOOTH_AT_CMD : &quot;bluetooth.at&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_AMBIENT_DISPLAY'>/** Power consumption when screen is in doze/ambient/always-on mode, including backlight power.
+</span>*/
+POWER_AMBIENT_DISPLAY : &quot;ambient.on&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_SCREEN_ON'>/** Power consumption when screen is on, not including the backlight power.
+</span>*/
+POWER_SCREEN_ON : &quot;screen.on&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_RADIO_ON'>/** Power consumption when cell radio is on but not on a call.
+</span>*/
+POWER_RADIO_ON : &quot;radio.on&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_RADIO_SCANNING'>/** Power consumption when cell radio is hunting for a signal.
+</span>*/
+POWER_RADIO_SCANNING : &quot;radio.scanning&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_RADIO_ACTIVE'>/** Power consumption when talking on the phone.
+</span>*/
+POWER_RADIO_ACTIVE : &quot;radio.active&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_SCREEN_FULL'>/** Power consumption at full backlight brightness. If the backlight is at
+</span> 50% brightness, then this should be multiplied by 0.5
+*/
+POWER_SCREEN_FULL : &quot;screen.full&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_AUDIO'>/** Power consumed by the audio hardware when playing back audio content. This is in addition
+</span> to the CPU power, probably due to a DSP and / or amplifier.
+*/
+POWER_AUDIO : &quot;audio&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_VIDEO'>/** Power consumed by any media hardware when playing back video content. This is in addition
+</span> to the CPU power, probably due to a DSP.
+*/
+POWER_VIDEO : &quot;video&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_FLASHLIGHT'>/** Average power consumption when camera flashlight is on.
+</span>*/
+POWER_FLASHLIGHT : &quot;camera.flashlight&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_MEMORY'>/** Power consumption when DDR is being used.
+</span>*/
+POWER_MEMORY : &quot;memory.bandwidths&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_CAMERA'>/** Average power consumption when the camera is on over all standard use cases.
+</span>
+ TODO: Add more fine-grained camera power metrics.
+*/
+POWER_CAMERA : &quot;camera.avg&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_WIFI_BATCHED_SCAN'>/** Power consumed by wif batched scaning.  Broken down into bins by
+</span> Channels Scanned per Hour.  May do 1-720 scans per hour of 1-100 channels
+ for a range of 1-72,000.  Going logrithmic (1-8, 9-64, 65-512, 513-4096, 4097-)!
+*/
+POWER_WIFI_BATCHED_SCAN : &quot;wifi.batchedscan&quot;,
+<span id='com-android-internal-os-PowerProfile-property-POWER_BATTERY_CAPACITY'>/** Battery capacity in milliAmpHour (mAh).
+</span>*/
+POWER_BATTERY_CAPACITY : &quot;battery.capacity&quot;,
+<span id='com-android-internal-os-PowerProfile-method-getNumCpuClusters'>/**
+</span>*/
+getNumCpuClusters : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getNumCoresInCpuCluster'>/**
+</span>*/
+getNumCoresInCpuCluster : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getNumSpeedStepsInCpuCluster'>/**
+</span>*/
+getNumSpeedStepsInCpuCluster : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getAveragePowerForCpuCluster'>/**
+</span>*/
+getAveragePowerForCpuCluster : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getAveragePowerForCpuCore'>/**
+</span>*/
+getAveragePowerForCpuCore : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getNumElements'>/**Returns the number of memory bandwidth buckets defined in power_profile.xml, or a
+</span> default value if the subsystem has no recorded value.
+@return {Number} the number of memory bandwidth buckets.
+*/
+getNumElements : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getAveragePowerOrDefault'>/**Returns the average current in mA consumed by the subsystem, or the given
+</span> default value if the subsystem has no recorded value.
+@param {String} type         the subsystem type
+@param {Number} defaultValue the value to return if the subsystem has no recorded value.
+@return {Number} the average current in milliAmps.
+*/
+getAveragePowerOrDefault : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getAveragePower'>/**Returns the average current in mA consumed by the subsystem
+</span>@param {String} type the subsystem type
+@return {Number} the average current in milliAmps.
+*/
+getAveragePower : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getAveragePower'>/**Returns the average current in mA consumed by the subsystem for the given level.
+</span>@param {String} type  the subsystem type
+@param {Number} level the level of power at which the subsystem is running. For instance, the
+              signal strength of the cell network between 0 and 4 (if there are 4 bars max.)
+              If there is no data for multiple levels, the level is ignored.
+@return {Number} the average current in milliAmps.
+*/
+getAveragePower : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-getBatteryCapacity'>/**Returns the battery capacity, if available, in milli Amp Hours. If not available,
+</span> it returns zero.
+@return {Number} the battery capacity in mAh
+*/
+getBatteryCapacity : function(  ) {},
+
+<span id='com-android-internal-os-PowerProfile-method-writeToProto'>/**Dump power constants into PowerProfileProto
+</span>*/
+writeToProto : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

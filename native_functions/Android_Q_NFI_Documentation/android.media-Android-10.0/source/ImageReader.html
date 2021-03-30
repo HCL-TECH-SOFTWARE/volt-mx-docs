@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-ImageReader'>/**@class android.media.ImageReader
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ &lt;p&gt;The ImageReader class allows direct application access to image data
+ rendered into a {@link android.view.Surface}&lt;/p&gt;
+
+ &lt;p&gt;Several Android media API classes accept Surface objects as targets to
+ render to, including {@link android.media.MediaPlayer}, {@link android.media.MediaCodec},
+ {@link android.hardware.camera2.CameraDevice}, {@link android.media.ImageWriter} and
+ {@link android.renderscript.Allocation RenderScript Allocations}. The image
+ sizes and formats that can be used with each source vary, and should be
+ checked in the documentation for the specific API.&lt;/p&gt;
+
+ &lt;p&gt;The image data is encapsulated in {@link android.media.Image} objects, and multiple such
+ objects can be accessed at the same time, up to the number specified by the
+ {@code maxImages} constructor parameter. New images sent to an ImageReader
+ through its {@link Surface} are queued until accessed through the {@link #acquireLatestImage}
+ or {@link #acquireNextImage} call. Due to memory limits, an image source will
+ eventually stall or drop Images in trying to render to the Surface if the
+ ImageReader does not obtain and release Images at a rate equal to the
+ production rate.&lt;/p&gt;
+*/
+var ImageReader = {
+
+<span id='android-media-ImageReader-method-newInstance'>/**&lt;p&gt;
+</span> Create a new reader for images of the desired size and format.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The {@code maxImages} parameter determines the maximum number of
+ {@link android.media.Image} objects that can be be acquired from the
+ {@code ImageReader} simultaneously. Requesting more buffers will use up
+ more memory, so it is important to use only the minimum number necessary
+ for the use case.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The valid sizes and formats depend on the source of the image data.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the {@code format} is {@link android.media.ImageFormat#PRIVATE PRIVATE}, the created
+ {@link android.media.ImageReader} will produce images that are not directly accessible
+ by the application. The application can still acquire images from this
+ {@link android.media.ImageReader}, and send them to the
+ {@link android.hardware.camera2.CameraDevice camera} for reprocessing via
+ {@link android.media.ImageWriter} interface. However, the {@link android.media.Image#getPlanes()
+ getPlanes()} will return an empty array for {@link android.media.ImageFormat#PRIVATE
+ PRIVATE} format images. The application can check if an existing reader's
+ format by calling {@link #getImageFormat}().
+ &lt;/p&gt;
+ &lt;p&gt;
+ {@link android.media.ImageFormat#PRIVATE PRIVATE} format {@link android.media.ImageReader
+ android.media.ImageReaders} are more efficient to use when application access to image
+ data is not necessary, compared to ImageReaders using other format such
+ as {@link android.media.ImageFormat#YUV_420_888 YUV_420_888}.
+ &lt;/p&gt;
+@param {Number} width The default width in pixels of the Images that this reader
+            will produce.
+@param {Number} height The default height in pixels of the Images that this reader
+            will produce.
+@param {Number} format The format of the Image that this reader will produce. This
+            must be one of the {@link android.graphics.ImageFormat} or
+            {@link android.graphics.PixelFormat} constants. Note that not
+            all formats are supported, like ImageFormat.NV21.
+@param {Number} maxImages The maximum number of images the user will want to
+            access simultaneously. This should be as small as possible to
+            limit memory use. Once maxImages Images are obtained by the
+            user, one of them has to be released before a new Image will
+            become available for access through
+            {@link #acquireLatestImage()} or {@link #acquireNextImage()}.
+            Must be greater than 0.
+@see Image
+*/
+newInstance : function(  ) {},
+
+<span id='android-media-ImageReader-method-newInstance'>/**&lt;p&gt;
+</span> Create a new reader for images of the desired size, format and consumer usage flag.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The {@code maxImages} parameter determines the maximum number of {@link android.media.Image} objects that
+ can be be acquired from the {@code ImageReader} simultaneously. Requesting more buffers will
+ use up more memory, so it is important to use only the minimum number necessary for the use
+ case.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The valid sizes and formats depend on the source of the image data.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The format and usage flag combination describes how the buffer will be used by
+ consumer end-points. For example, if the application intends to send the images to
+ {@link android.media.MediaCodec} or {@link android.media.MediaRecorder} for hardware video
+ encoding, the format and usage flag combination needs to be
+ {@link android.media.ImageFormat#PRIVATE PRIVATE} and {@link HardwareBuffer#USAGE_VIDEO_ENCODE}. When an
+ {@link android.media.ImageReader} object is created with a valid size and such format/usage flag
+ combination, the application can send the {@link android.media.Image images} to an {@link android.media.ImageWriter} that
+ is created with the input {@link android.view.Surface} provided by the
+ {@link android.media.MediaCodec} or {@link android.media.MediaRecorder}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the {@code format} is {@link android.media.ImageFormat#PRIVATE PRIVATE}, the created {@link android.media.ImageReader}
+ will produce images that are not directly accessible by the application. The application can
+ still acquire images from this {@link android.media.ImageReader}, and send them to the
+ {@link android.hardware.camera2.CameraDevice camera} for reprocessing, or to the
+ {@link android.media.MediaCodec} / {@link android.media.MediaRecorder} for hardware video
+ encoding via {@link android.media.ImageWriter} interface. However, the {@link android.media.Image#getPlanes()
+ getPlanes()} will return an empty array for {@link android.media.ImageFormat#PRIVATE PRIVATE} format
+ images. The application can check if an existing reader's format by calling
+ {@link #getImageFormat}().
+ &lt;/p&gt;
+ &lt;p&gt;
+ {@link android.media.ImageFormat#PRIVATE PRIVATE} format {@link android.media.ImageReader android.media.ImageReaders} are more
+ efficient to use when application access to image data is not necessary, compared to
+ ImageReaders using other format such as {@link android.media.ImageFormat#YUV_420_888 YUV_420_888}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Note that not all format and usage flag combinations are supported by the
+ {@link android.media.ImageReader}. Below are the supported combinations by the {@link android.media.ImageReader}
+ (assuming the consumer end-points support the such image consumption, e.g., hardware video
+ encoding).
+ &lt;table&gt;
+ &lt;tr&gt;
+   &lt;th&gt;Format&lt;/th&gt;
+   &lt;th&gt;Compatible usage flags&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt;non-{@link android.graphics.ImageFormat#PRIVATE PRIVATE} formats defined by
+   {@link android.graphics.android.media.ImageFormat android.media.ImageFormat} or
+   {@link android.graphics.PixelFormat PixelFormat}&lt;/td&gt;
+   &lt;td&gt;{@link HardwareBuffer#USAGE_CPU_READ_RARELY} or
+   {@link HardwareBuffer#USAGE_CPU_READ_OFTEN}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+   &lt;td&gt;{@link android.graphics.ImageFormat#PRIVATE}&lt;/td&gt;
+   &lt;td&gt;{@link HardwareBuffer#USAGE_VIDEO_ENCODE} or
+   {@link HardwareBuffer#USAGE_GPU_SAMPLED_IMAGE}, or combined&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ Using other combinations may result in {@link IllegalArgumentException}.
+ &lt;/p&gt;
+@param {Number} width The default width in pixels of the Images that this reader will produce.
+@param {Number} height The default height in pixels of the Images that this reader will produce.
+@param {Number} format The format of the Image that this reader will produce. This must be one of the
+            {@link android.graphics.ImageFormat} or {@link android.graphics.PixelFormat}
+            constants. Note that not all formats are supported, like ImageFormat.NV21.
+@param {Number} maxImages The maximum number of images the user will want to access simultaneously.
+            This should be as small as possible to limit memory use. Once maxImages Images are
+            obtained by the user, one of them has to be released before a new Image will
+            become available for access through {@link #acquireLatestImage()} or
+            {@link #acquireNextImage()}. Must be greater than 0.
+@param {Number} usage The intended usage of the images produced by this ImageReader. See the usages
+              on {@link HardwareBuffer} for a list of valid usage bits. See also
+              {@link HardwareBuffer#isSupported(int, int, int, int, long)} for checking
+              if a combination is supported. If it's not supported this will throw
+              an {@link IllegalArgumentException}.
+@see Image
+@see HardwareBuffer
+*/
+newInstance : function(  ) {},
+
+<span id='android-media-ImageReader-method-getWidth'>/**The default width of {@link android.media.Image android.media.Images}, in pixels.
+</span>
+ &lt;p&gt;The width may be overridden by the producer sending buffers to this
+ ImageReader's Surface. If so, the actual width of the images can be
+ found using {@link android.media.Image#getWidth}.&lt;/p&gt;
+@return {Number} the expected width of an Image
+*/
+getWidth : function(  ) {},
+
+<span id='android-media-ImageReader-method-getHeight'>/**The default height of {@link android.media.Image android.media.Images}, in pixels.
+</span>
+ &lt;p&gt;The height may be overridden by the producer sending buffers to this
+ ImageReader's Surface. If so, the actual height of the images can be
+ found using {@link android.media.Image#getHeight}.&lt;/p&gt;
+@return {Number} the expected height of an Image
+*/
+getHeight : function(  ) {},
+
+<span id='android-media-ImageReader-method-getImageFormat'>/**The default {@link android.media.ImageFormat image format} of {@link android.media.Image android.media.Images}.
+</span>
+ &lt;p&gt;Some color formats may be overridden by the producer sending buffers to
+ this ImageReader's Surface if the default color format allows. ImageReader
+ guarantees that all {@link android.media.Image android.media.Images} acquired from ImageReader
+ (for example, with {@link #acquireNextImage}) will have a &quot;compatible&quot;
+ format to what was specified in {@link #newInstance}.
+ As of now, each format is only compatible to itself.
+ The actual format of the images can be found using {@link android.media.Image#getFormat}.&lt;/p&gt;
+@return {Number} the expected format of an Image
+@see ImageFormat
+*/
+getImageFormat : function(  ) {},
+
+<span id='android-media-ImageReader-method-getMaxImages'>/**Maximum number of images that can be acquired from the ImageReader by any time (for example,
+</span> with {@link #acquireNextImage}).
+
+ &lt;p&gt;An image is considered acquired after it's returned by a function from ImageReader, and
+ until the Image is {@link android.media.Image#close closed} to release the image back to the ImageReader.
+ &lt;/p&gt;
+
+ &lt;p&gt;Attempting to acquire more than {@code maxImages} concurrently will result in the
+ acquire function throwing a {@link IllegalStateException}. Furthermore,
+ while the max number of images have been acquired by the ImageReader user, the producer
+ enqueueing additional images may stall until at least one image has been released. &lt;/p&gt;
+@return {Number} Maximum number of images for this ImageReader.
+@see Image#close
+*/
+getMaxImages : function(  ) {},
+
+<span id='android-media-ImageReader-method-getSurface'>/**&lt;p&gt;Get a {@link Surface} that can be used to produce {@link android.media.Image android.media.Images} for this
+</span> {@code ImageReader}.&lt;/p&gt;
+
+ &lt;p&gt;Until valid image data is rendered into this {@link Surface}, the
+ {@link #acquireNextImage} method will return {@code null}. Only one source
+ can be producing data into this Surface at the same time, although the
+ same {@link Surface} can be reused with a different API once the first source is
+ disconnected from the {@link Surface}.&lt;/p&gt;
+
+ &lt;p&gt;Please note that holding on to the Surface object returned by this method is not enough
+ to keep its parent ImageReader from being reclaimed. In that sense, a Surface acts like a
+ {@link java.lang.ref.WeakReference weak reference} to the ImageReader that provides it.&lt;/p&gt;
+@return {Object {android.view.Surface}} A {@link Surface} to use for a drawing target for various APIs.
+*/
+getSurface : function(  ) {},
+
+<span id='android-media-ImageReader-method-acquireLatestImage'>/**&lt;p&gt;
+</span> Acquire the latest {@link android.media.Image} from the ImageReader's queue, dropping older
+ {@link android.media.Image images}. Returns {@code null} if no new image is available.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This operation will acquire all the images possible from the ImageReader,
+ but {@link #close} all images that aren't the latest. This function is
+ recommended to use over {@link #acquireNextImage} for most use-cases, as it's
+ more suited for real-time processing.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Note that {@link #getMaxImages maxImages} should be at least 2 for
+ {@link #acquireLatestImage} to be any different than {@link #acquireNextImage} -
+ discarding all-but-the-newest {@link android.media.Image} requires temporarily acquiring two
+ {@link android.media.Image android.media.Images} at once. Or more generally, calling {@link #acquireLatestImage}
+ with less than two images of margin, that is
+ {@code (maxImages - currentAcquiredImages &lt; 2)} will not discard as expected.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This operation will fail by throwing an {@link IllegalStateException} if
+ {@code maxImages} have been acquired with {@link #acquireLatestImage} or
+ {@link #acquireNextImage}. In particular a sequence of {@link #acquireLatestImage}
+ calls greater than {@link #getMaxImages} without calling {@link android.media.Image#close} in-between
+ will exhaust the underlying queue. At such a time, {@link IllegalStateException}
+ will be thrown until more images are
+ released with {@link android.media.Image#close}.
+ &lt;/p&gt;
+@return {Object {android.media.Image}} latest frame of image data, or {@code null} if no image data is available.
+@throws IllegalStateException if too many images are currently acquired
+*/
+acquireLatestImage : function(  ) {},
+
+<span id='android-media-ImageReader-method-acquireNextImageNoThrowISE'>/**Don't throw IllegalStateException if there are too many images acquired.
+</span>@return {Object {android.media.Image}} Image if acquiring succeeded, or null otherwise.
+@hide 
+*/
+acquireNextImageNoThrowISE : function(  ) {},
+
+<span id='android-media-ImageReader-method-acquireNextImage'>/**&lt;p&gt;
+</span> Acquire the next Image from the ImageReader's queue. Returns {@code null} if
+ no new image is available.
+ &lt;/p&gt;
+
+ &lt;p&gt;&lt;i&gt;Warning:&lt;/i&gt; Consider using {@link #acquireLatestImage}() instead, as it will
+ automatically release older images, and allow slower-running processing routines to catch
+ up to the newest frame. Usage of {@link #acquireNextImage} is recommended for
+ batch/background processing. Incorrectly using this function can cause images to appear
+ with an ever-increasing delay, followed by a complete stall where no new images seem to
+ appear.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This operation will fail by throwing an {@link IllegalStateException} if
+ {@code maxImages} have been acquired with {@link #acquireNextImage} or
+ {@link #acquireLatestImage}. In particular a sequence of {@link #acquireNextImage} or
+ {@link #acquireLatestImage} calls greater than {@link #getMaxImages maxImages} without
+ calling {@link android.media.Image#close} in-between will exhaust the underlying queue. At such a time,
+ {@link IllegalStateException} will be thrown until more images are released with
+ {@link android.media.Image#close}.
+ &lt;/p&gt;
+@return {Object {android.media.Image}} a new frame of image data, or {@code null} if no image data is available.
+@throws IllegalStateException if {@code maxImages} images are currently acquired
+@see #acquireLatestImage
+*/
+acquireNextImage : function(  ) {},
+
+<span id='android-media-ImageReader-method-setOnImageAvailableListener'>/**Register a listener to be invoked when a new image becomes available
+</span> from the ImageReader.
+@param {Object {ImageReader.OnImageAvailableListener}} listener
+            The listener that will be run.
+@param {Object {Handler}} handler
+            The handler on which the listener should be invoked, or null
+            if the listener should be invoked on the calling thread's looper.
+@throws IllegalArgumentException
+            If no handler specified and the calling thread has no looper.
+*/
+setOnImageAvailableListener : function(  ) {},
+
+<span id='android-media-ImageReader-method-close'>/**Free up all the resources associated with this ImageReader.
+</span>
+ &lt;p&gt;
+ After calling this method, this ImageReader can not be used. Calling
+ any methods on this ImageReader and Images previously provided by
+ {@link #acquireNextImage} or {@link #acquireLatestImage}
+ will result in an {@link IllegalStateException}, and attempting to read from
+ {@link ByteBuffer ByteBuffers} returned by an earlier
+ {@link Image.android.media.Image.Plane#getBuffer android.media.Image.Plane#getBuffer} call will
+ have undefined behavior.
+ &lt;/p&gt;
+*/
+close : function(  ) {},
+
+<span id='android-media-ImageReader-method-discardFreeBuffers'>/**Discard any free buffers owned by this ImageReader.
+</span>
+ &lt;p&gt;
+ Generally, the ImageReader caches buffers for reuse once they have been
+ allocated, for best performance. However, sometimes it may be important to
+ release all the cached, unused buffers to save on memory.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Calling this method will discard all free cached buffers. This does not include any buffers
+ associated with Images acquired from the ImageReader, any filled buffers waiting to be
+ acquired, and any buffers currently in use by the source rendering buffers into the
+ ImageReader's Surface.
+ &lt;p&gt;
+ The ImageReader continues to be usable after this call, but may need to reallocate buffers
+ when more buffers are needed for rendering.
+ &lt;/p&gt;
+*/
+discardFreeBuffers : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

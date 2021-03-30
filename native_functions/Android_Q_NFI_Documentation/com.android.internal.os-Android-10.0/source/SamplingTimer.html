@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer'>/**@class com.android.internal.os.BatteryStatsImpl.SamplingTimer
+</span>@extends com.android.internal.os.BatteryStatsImpl.Timer
+
+ A counter meant to accept monotonically increasing values to its {@link #update(long, int)}
+ method. The state of the timer according to its {@link com.android.internal.os.BatteryStatsImpl.TimeBase} will determine how much
+ of the value is recorded.
+
+ If the value being recorded resets, {@link #endSample}() can be called in order to
+ account for the change. If the value passed in to {@link #update(long, int)} decreased
+ between calls, the {@link #endSample}() is automatically called and the new value is
+ expected to increase monotonically from that point on.
+*/
+var SamplingTimer = {
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-endSample'>/**Ends the current sample, allowing subsequent values to {@link #update(long, int)} to
+</span> be less than the values used for a previous invocation.
+*/
+endSample : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-setUpdateVersion'>/**
+</span>*/
+setUpdateVersion : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-getUpdateVersion'>/**
+</span>*/
+getUpdateVersion : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-update'>/**Updates the current recorded values. These are meant to be monotonically increasing
+</span> and cumulative. If you are dealing with deltas, use {@link #add(long, int)}.
+
+ If the values being recorded have been reset, the monotonically increasing requirement
+ will be broken. In this case, {@link #endSample}() is automatically called and
+ the total value of totalTime and count are recorded, starting a new monotonically
+ increasing sample.
+@param {Number} totalTime total time of sample in microseconds.
+@param {Number} count total number of times the event being sampled occurred.
+*/
+update : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-add'>/**Adds deltaTime and deltaCount to the current sample.
+</span>@param {Number} deltaTime additional time recorded since the last sampled event, in microseconds.
+@param {Number} deltaCount additional number of times the event being sampled occurred.
+*/
+add : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-onTimeStarted'>/**
+</span>*/
+onTimeStarted : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-onTimeStopped'>/**
+</span>*/
+onTimeStopped : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-logState'>/**
+</span>*/
+logState : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-SamplingTimer-method-reset'>/**
+</span>*/
+reset : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

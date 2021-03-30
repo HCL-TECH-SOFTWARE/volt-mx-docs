@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-PowerManager'>/**@class android.os.PowerManager
+</span>@extends java.lang.Object
+
+ This class gives you control of the power state of the device.
+
+ &lt;p&gt;
+ &lt;b&gt;Device battery life will be significantly affected by the use of this API.&lt;/b&gt;
+ Do not acquire {@link android.os.PowerManager.WakeLock}s unless you really need them, use the minimum levels
+ possible, and be sure to release them as soon as possible.
+ &lt;/p&gt;&lt;p&gt;
+ The primary API you'll use is {@link #newWakeLock(int, String) newWakeLock()}.
+ This will create a {@link android.os.PowerManager.WakeLock} object.  You can then use methods
+ on the wake lock object to control the power state of the device.
+ &lt;/p&gt;&lt;p&gt;
+ In practice it's quite simple:
+ {@samplecode
+ PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+ PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, &quot;My Tag&quot;);
+ wl.acquire();
+   ..screen will stay on during this section..
+ wl.release();
+ }
+ &lt;/p&gt;&lt;p&gt;
+ The following wake lock levels are defined, with varying effects on system power.
+ &lt;i&gt;These levels are mutually exclusive - you may only specify one of them.&lt;/i&gt;
+
+ &lt;table&gt;
+     &lt;tr&gt;&lt;th&gt;Flag Value&lt;/th&gt;
+     &lt;th&gt;CPU&lt;/th&gt; &lt;th&gt;Screen&lt;/th&gt; &lt;th&gt;Keyboard&lt;/th&gt;&lt;/tr&gt;
+
+     &lt;tr&gt;&lt;td&gt;{@link #PARTIAL_WAKE_LOCK}&lt;/td&gt;
+         &lt;td&gt;On*&lt;/td&gt; &lt;td&gt;Off&lt;/td&gt; &lt;td&gt;Off&lt;/td&gt;
+     &lt;/tr&gt;
+
+     &lt;tr&gt;&lt;td&gt;{@link #SCREEN_DIM_WAKE_LOCK}&lt;/td&gt;
+         &lt;td&gt;On&lt;/td&gt; &lt;td&gt;Dim&lt;/td&gt; &lt;td&gt;Off&lt;/td&gt;
+     &lt;/tr&gt;
+
+     &lt;tr&gt;&lt;td&gt;{@link #SCREEN_BRIGHT_WAKE_LOCK}&lt;/td&gt;
+         &lt;td&gt;On&lt;/td&gt; &lt;td&gt;Bright&lt;/td&gt; &lt;td&gt;Off&lt;/td&gt;
+     &lt;/tr&gt;
+
+     &lt;tr&gt;&lt;td&gt;{@link #FULL_WAKE_LOCK}&lt;/td&gt;
+         &lt;td&gt;On&lt;/td&gt; &lt;td&gt;Bright&lt;/td&gt; &lt;td&gt;Bright&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;/p&gt;&lt;p&gt;
+ *&lt;i&gt;If you hold a partial wake lock, the CPU will continue to run, regardless of any
+ display timeouts or the state of the screen and even after the user presses the power button.
+ In all other wake locks, the CPU will run, but the user can still put the device to sleep
+ using the power button.&lt;/i&gt;
+ &lt;/p&gt;&lt;p&gt;
+ In addition, you can add two more flags, which affect behavior of the screen only.
+ &lt;i&gt;These flags have no effect when combined with a {@link #PARTIAL_WAKE_LOCK}.&lt;/i&gt;&lt;/p&gt;
+
+ &lt;table&gt;
+     &lt;tr&gt;&lt;th&gt;Flag Value&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;
+
+     &lt;tr&gt;&lt;td&gt;{@link #ACQUIRE_CAUSES_WAKEUP}&lt;/td&gt;
+         &lt;td&gt;Normal wake locks don't actually turn on the illumination.  Instead, they cause
+         the illumination to remain on once it turns on (e.g. from user activity).  This flag
+         will force the screen and/or keyboard to turn on immediately, when the WakeLock is
+         acquired.  A typical use would be for notifications which are important for the user to
+         see immediately.&lt;/td&gt;
+     &lt;/tr&gt;
+
+     &lt;tr&gt;&lt;td&gt;{@link #ON_AFTER_RELEASE}&lt;/td&gt;
+         &lt;td&gt;If this flag is set, the user activity timer will be reset when the WakeLock is
+         released, causing the illumination to remain on a bit longer.  This can be used to
+         reduce flicker if you are cycling between wake lock conditions.&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;p&gt;
+ Any application using a WakeLock must request the {@code android.permission.WAKE_LOCK}
+ permission in an {@code &lt;uses-permission&gt;} element of the application's manifest.
+ &lt;/p&gt;
+*/
+var PowerManager = {
+
+<span id='android-os-PowerManager-property-PARTIAL_WAKE_LOCK'>/** Wake lock level: Ensures that the CPU is running; the screen and keyboard
+</span> backlight will be allowed to go off.
+ &lt;p&gt;
+ If the user presses the power button, then the screen will be turned off
+ but the CPU will be kept on until all partial wake locks have been released.
+ &lt;/p&gt;
+*/
+PARTIAL_WAKE_LOCK : &quot;null&quot;,
+<span id='android-os-PowerManager-property-SCREEN_DIM_WAKE_LOCK'>/** Wake lock level: Ensures that the screen is on (but may be dimmed);
+</span> the keyboard backlight will be allowed to go off.
+ &lt;p&gt;
+ If the user presses the power button, then the {@link #SCREEN_DIM_WAKE_LOCK} will be
+ implicitly released by the system, causing both the screen and the CPU to be turned off.
+ Contrast with {@link #PARTIAL_WAKE_LOCK}.
+ &lt;/p&gt;
+
+ @deprecated Most applications should use
+ {@link android.view.WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON} instead
+ of this type of wake lock, as it will be correctly managed by the platform
+ as the user moves between applications and doesn't require a special permission.
+*/
+SCREEN_DIM_WAKE_LOCK : &quot;null&quot;,
+<span id='android-os-PowerManager-property-SCREEN_BRIGHT_WAKE_LOCK'>/** Wake lock level: Ensures that the screen is on at full brightness;
+</span> the keyboard backlight will be allowed to go off.
+ &lt;p&gt;
+ If the user presses the power button, then the {@link #SCREEN_BRIGHT_WAKE_LOCK} will be
+ implicitly released by the system, causing both the screen and the CPU to be turned off.
+ Contrast with {@link #PARTIAL_WAKE_LOCK}.
+ &lt;/p&gt;
+
+ @deprecated Most applications should use
+ {@link android.view.WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON} instead
+ of this type of wake lock, as it will be correctly managed by the platform
+ as the user moves between applications and doesn't require a special permission.
+*/
+SCREEN_BRIGHT_WAKE_LOCK : &quot;null&quot;,
+<span id='android-os-PowerManager-property-FULL_WAKE_LOCK'>/** Wake lock level: Ensures that the screen and keyboard backlight are on at
+</span> full brightness.
+ &lt;p&gt;
+ If the user presses the power button, then the {@link #FULL_WAKE_LOCK} will be
+ implicitly released by the system, causing both the screen and the CPU to be turned off.
+ Contrast with {@link #PARTIAL_WAKE_LOCK}.
+ &lt;/p&gt;
+
+ @deprecated Most applications should use
+ {@link android.view.WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON} instead
+ of this type of wake lock, as it will be correctly managed by the platform
+ as the user moves between applications and doesn't require a special permission.
+*/
+FULL_WAKE_LOCK : &quot;null&quot;,
+<span id='android-os-PowerManager-property-PROXIMITY_SCREEN_OFF_WAKE_LOCK'>/** Wake lock level: Turns the screen off when the proximity sensor activates.
+</span> &lt;p&gt;
+ If the proximity sensor detects that an object is nearby, the screen turns off
+ immediately.  Shortly after the object moves away, the screen turns on again.
+ &lt;/p&gt;&lt;p&gt;
+ A proximity wake lock does not prevent the device from falling asleep
+ unlike {@link #FULL_WAKE_LOCK}, {@link #SCREEN_BRIGHT_WAKE_LOCK} and
+ {@link #SCREEN_DIM_WAKE_LOCK}.  If there is no user activity and no other
+ wake locks are held, then the device will fall asleep (and lock) as usual.
+ However, the device will not fall asleep while the screen has been turned off
+ by the proximity sensor because it effectively counts as ongoing user activity.
+ &lt;/p&gt;&lt;p&gt;
+ Since not all devices have proximity sensors, use {@link #isWakeLockLevelSupported}
+ to determine whether this wake lock level is supported.
+ &lt;/p&gt;&lt;p&gt;
+ Cannot be used with {@link #ACQUIRE_CAUSES_WAKEUP}.
+ &lt;/p&gt;
+*/
+PROXIMITY_SCREEN_OFF_WAKE_LOCK : &quot;null&quot;,
+<span id='android-os-PowerManager-property-DOZE_WAKE_LOCK'>/** Wake lock level: Put the screen in a low power state and allow the CPU to suspend
+</span> if no other wake locks are held.
+ &lt;p&gt;
+ This is used by the dream manager to implement doze mode.  It currently
+ has no effect unless the power manager is in the dozing state.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+
+ {@hide}
+*/
+DOZE_WAKE_LOCK : &quot;null&quot;,
+<span id='android-os-PowerManager-property-DRAW_WAKE_LOCK'>/** Wake lock level: Keep the device awake enough to allow drawing to occur.
+</span> &lt;p&gt;
+ This is used by the window manager to allow applications to draw while the
+ system is dozing.  It currently has no effect unless the power manager is in
+ the dozing state.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+
+ {@hide}
+*/
+DRAW_WAKE_LOCK : &quot;null&quot;,
+<span id='android-os-PowerManager-property-WAKE_LOCK_LEVEL_MASK'>/** Mask for the wake lock level component of a combined wake lock level and flags integer.
+</span>
+ @hide
+*/
+WAKE_LOCK_LEVEL_MASK : &quot;65535&quot;,
+<span id='android-os-PowerManager-property-ACQUIRE_CAUSES_WAKEUP'>/** Wake lock flag: Turn the screen on when the wake lock is acquired.
+</span> &lt;p&gt;
+ Normally wake locks don't actually wake the device, they just cause
+ the screen to remain on once it's already on.  Think of the video player
+ application as the normal behavior.  Notifications that pop up and want
+ the device to be on are the exception; use this flag to be like them.
+ &lt;/p&gt;&lt;p&gt;
+ Cannot be used with {@link #PARTIAL_WAKE_LOCK}.
+ &lt;/p&gt;
+*/
+ACQUIRE_CAUSES_WAKEUP : &quot;268435456&quot;,
+<span id='android-os-PowerManager-property-ON_AFTER_RELEASE'>/** Wake lock flag: When this wake lock is released, poke the user activity timer
+</span> so the screen stays on for a little longer.
+ &lt;p&gt;
+ Will not turn the screen on if it is not already on.
+ See {@link #ACQUIRE_CAUSES_WAKEUP} if you want that.
+ &lt;/p&gt;&lt;p&gt;
+ Cannot be used with {@link #PARTIAL_WAKE_LOCK}.
+ &lt;/p&gt;
+*/
+ON_AFTER_RELEASE : &quot;536870912&quot;,
+<span id='android-os-PowerManager-property-UNIMPORTANT_FOR_LOGGING'>/** Wake lock flag: This wake lock is not important for logging events.  If a later
+</span> wake lock is acquired that is important, it will be considered the one to log.
+ @hide
+*/
+UNIMPORTANT_FOR_LOGGING : &quot;1073741824&quot;,
+<span id='android-os-PowerManager-property-RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY'>/** Flag for {@link android.os.PowerManager.WakeLock#release android.os.PowerManager.WakeLock.release(int)}: Defer releasing a
+</span> {@link #PROXIMITY_SCREEN_OFF_WAKE_LOCK} wake lock until the proximity sensor
+ indicates that an object is not in close proximity.
+*/
+RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY : &quot;1&quot;,
+<span id='android-os-PowerManager-property-RELEASE_FLAG_TIMEOUT'>/** Flag for {@link android.os.PowerManager.WakeLock#release(int)} when called due to timeout.
+</span> @hide
+*/
+RELEASE_FLAG_TIMEOUT : &quot;65536&quot;,
+<span id='android-os-PowerManager-property-BRIGHTNESS_ON'>/** Brightness value for fully on.
+</span> @hide
+*/
+BRIGHTNESS_ON : &quot;255&quot;,
+<span id='android-os-PowerManager-property-BRIGHTNESS_OFF'>/** Brightness value for fully off.
+</span> @hide
+*/
+BRIGHTNESS_OFF : &quot;0&quot;,
+<span id='android-os-PowerManager-property-BRIGHTNESS_DEFAULT'>/** Brightness value for default policy handling by the system.
+</span> @hide
+*/
+BRIGHTNESS_DEFAULT : &quot;-1&quot;,
+<span id='android-os-PowerManager-property-USER_ACTIVITY_EVENT_OTHER'>/** User activity event type: Unspecified event type.
+</span> @hide
+*/
+USER_ACTIVITY_EVENT_OTHER : &quot;0&quot;,
+<span id='android-os-PowerManager-property-USER_ACTIVITY_EVENT_BUTTON'>/** User activity event type: Button or key pressed or released.
+</span> @hide
+*/
+USER_ACTIVITY_EVENT_BUTTON : &quot;1&quot;,
+<span id='android-os-PowerManager-property-USER_ACTIVITY_EVENT_TOUCH'>/** User activity event type: Touch down, move or up.
+</span> @hide
+*/
+USER_ACTIVITY_EVENT_TOUCH : &quot;2&quot;,
+<span id='android-os-PowerManager-property-USER_ACTIVITY_EVENT_ACCESSIBILITY'>/** User activity event type: Accessibility taking action on behalf of user.
+</span> @hide
+*/
+USER_ACTIVITY_EVENT_ACCESSIBILITY : &quot;3&quot;,
+<span id='android-os-PowerManager-property-USER_ACTIVITY_EVENT_ATTENTION'>/** User activity event type: {@link android.service.attention.AttentionService} taking action
+</span> on behalf of user.
+ @hide
+*/
+USER_ACTIVITY_EVENT_ATTENTION : &quot;4&quot;,
+<span id='android-os-PowerManager-property-USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS'>/** User activity flag: If already dimmed, extend the dim timeout
+</span> but do not brighten.  This flag is useful for keeping the screen on
+ a little longer without causing a visible change such as when
+ the power key is pressed.
+ @hide
+*/
+USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS : &quot;1&quot;,
+<span id='android-os-PowerManager-property-USER_ACTIVITY_FLAG_INDIRECT'>/** User activity flag: Note the user activity as usual but do not
+</span> reset the user activity timeout.  This flag is useful for applying
+ user activity power hints when interacting with the device indirectly
+ on a secondary screen while allowing the primary screen to go to sleep.
+ @hide
+*/
+USER_ACTIVITY_FLAG_INDIRECT : &quot;2&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_MIN'>/** @hide
+</span>*/
+GO_TO_SLEEP_REASON_MIN : &quot;0&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_APPLICATION'>/** Go to sleep reason code: Going to sleep due by application request.
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_APPLICATION : &quot;0&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_DEVICE_ADMIN'>/** Go to sleep reason code: Going to sleep due by request of the
+</span> device administration policy.
+ @hide
+*/
+GO_TO_SLEEP_REASON_DEVICE_ADMIN : &quot;1&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_TIMEOUT'>/** Go to sleep reason code: Going to sleep due to a screen timeout.
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_TIMEOUT : &quot;2&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_LID_SWITCH'>/** Go to sleep reason code: Going to sleep due to the lid switch being closed.
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_LID_SWITCH : &quot;3&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_POWER_BUTTON'>/** Go to sleep reason code: Going to sleep due to the power button being pressed.
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_POWER_BUTTON : &quot;4&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_HDMI'>/** Go to sleep reason code: Going to sleep due to HDMI.
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_HDMI : &quot;5&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_SLEEP_BUTTON'>/** Go to sleep reason code: Going to sleep due to the sleep button being pressed.
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_SLEEP_BUTTON : &quot;6&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_ACCESSIBILITY'>/** Go to sleep reason code: Going to sleep by request of an accessibility service
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_ACCESSIBILITY : &quot;7&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_FORCE_SUSPEND'>/** Go to sleep reason code: Going to sleep due to force-suspend.
+</span> @hide
+*/
+GO_TO_SLEEP_REASON_FORCE_SUSPEND : &quot;8&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_REASON_MAX'>/** @hide
+</span>*/
+GO_TO_SLEEP_REASON_MAX : &quot;8&quot;,
+<span id='android-os-PowerManager-property-GO_TO_SLEEP_FLAG_NO_DOZE'>/** Go to sleep flag: Skip dozing state and directly go to full sleep.
+</span> @hide
+*/
+GO_TO_SLEEP_FLAG_NO_DOZE : &quot;1&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_UNKNOWN'>/** Wake up reason code: Waking for an unknown reason.
+</span> @hide
+*/
+WAKE_REASON_UNKNOWN : &quot;0&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_POWER_BUTTON'>/** Wake up reason code: Waking up due to power button press.
+</span> @hide
+*/
+WAKE_REASON_POWER_BUTTON : &quot;1&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_APPLICATION'>/** Wake up reason code: Waking up because an application requested it.
+</span> @hide
+*/
+WAKE_REASON_APPLICATION : &quot;2&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_PLUGGED_IN'>/** Wake up reason code: Waking up due to being plugged in or docked on a wireless charger.
+</span> @hide
+*/
+WAKE_REASON_PLUGGED_IN : &quot;3&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_GESTURE'>/** Wake up reason code: Waking up due to a user performed gesture (e.g. douple tapping on the
+</span> screen).
+ @hide
+*/
+WAKE_REASON_GESTURE : &quot;4&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_CAMERA_LAUNCH'>/** Wake up reason code: Waking up due to the camera being launched.
+</span> @hide
+*/
+WAKE_REASON_CAMERA_LAUNCH : &quot;5&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_WAKE_KEY'>/** Wake up reason code: Waking up because a wake key other than power was pressed.
+</span> @hide
+*/
+WAKE_REASON_WAKE_KEY : &quot;6&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_WAKE_MOTION'>/** Wake up reason code: Waking up because a wake motion was performed.
+</span>
+ For example, a trackball that was set to wake the device up was spun.
+ @hide
+*/
+WAKE_REASON_WAKE_MOTION : &quot;7&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_HDMI'>/** Wake up reason code: Waking due to HDMI.
+</span> @hide
+*/
+WAKE_REASON_HDMI : &quot;8&quot;,
+<span id='android-os-PowerManager-property-WAKE_REASON_LID'>/** Wake up reason code: Waking due to the lid being opened.
+</span> @hide
+*/
+WAKE_REASON_LID : &quot;9&quot;,
+<span id='android-os-PowerManager-property-REBOOT_RECOVERY'>/** The value to pass as the 'reason' argument to reboot() to reboot into
+</span> recovery mode for tasks other than applying system updates, such as
+ doing factory resets.
+ &lt;p&gt;
+ Requires the {@link android.Manifest.permission#RECOVERY}
+ permission (in addition to
+ {@link android.Manifest.permission#REBOOT}).
+ &lt;/p&gt;
+ @hide
+*/
+REBOOT_RECOVERY : &quot;recovery&quot;,
+<span id='android-os-PowerManager-property-REBOOT_RECOVERY_UPDATE'>/** The value to pass as the 'reason' argument to reboot() to reboot into
+</span> recovery mode for applying system updates.
+ &lt;p&gt;
+ Requires the {@link android.Manifest.permission#RECOVERY}
+ permission (in addition to
+ {@link android.Manifest.permission#REBOOT}).
+ &lt;/p&gt;
+ @hide
+*/
+REBOOT_RECOVERY_UPDATE : &quot;recovery-update&quot;,
+<span id='android-os-PowerManager-property-REBOOT_REQUESTED_BY_DEVICE_OWNER'>/** The value to pass as the 'reason' argument to reboot() when device owner requests a reboot on
+</span> the device.
+ @hide
+*/
+REBOOT_REQUESTED_BY_DEVICE_OWNER : &quot;deviceowner&quot;,
+<span id='android-os-PowerManager-property-REBOOT_SAFE_MODE'>/** The 'reason' value used when rebooting in safe mode
+</span> @hide
+*/
+REBOOT_SAFE_MODE : &quot;safemode&quot;,
+<span id='android-os-PowerManager-property-REBOOT_QUIESCENT'>/** The 'reason' value used when rebooting the device without turning on the screen.
+</span> @hide
+*/
+REBOOT_QUIESCENT : &quot;quiescent&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_USER_REQUESTED'>/** The value to pass as the 'reason' argument to android_reboot().
+</span> @hide
+*/
+SHUTDOWN_USER_REQUESTED : &quot;userrequested&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_BATTERY_THERMAL_STATE'>/** The value to pass as the 'reason' argument to android_reboot() when battery temperature
+</span> is too high.
+ @hide
+*/
+SHUTDOWN_BATTERY_THERMAL_STATE : &quot;thermal,battery&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_THERMAL_STATE'>/** The value to pass as the 'reason' argument to android_reboot() when device temperature
+</span> is too high.
+ @hide
+*/
+SHUTDOWN_THERMAL_STATE : &quot;thermal&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_LOW_BATTERY'>/** The value to pass as the 'reason' argument to android_reboot() when device is running
+</span> critically low on battery.
+ @hide
+*/
+SHUTDOWN_LOW_BATTERY : &quot;battery&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_REASON_UNKNOWN'>/** constant for shutdown reason being unknown.
+</span> @hide
+*/
+SHUTDOWN_REASON_UNKNOWN : &quot;0&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_REASON_SHUTDOWN'>/** constant for shutdown reason being normal shutdown.
+</span> @hide
+*/
+SHUTDOWN_REASON_SHUTDOWN : &quot;1&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_REASON_REBOOT'>/** constant for shutdown reason being reboot.
+</span> @hide
+*/
+SHUTDOWN_REASON_REBOOT : &quot;2&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_REASON_USER_REQUESTED'>/** constant for shutdown reason being user requested.
+</span> @hide
+*/
+SHUTDOWN_REASON_USER_REQUESTED : &quot;3&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_REASON_THERMAL_SHUTDOWN'>/** constant for shutdown reason being overheating.
+</span> @hide
+*/
+SHUTDOWN_REASON_THERMAL_SHUTDOWN : &quot;4&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_REASON_LOW_BATTERY'>/** constant for shutdown reason being low battery.
+</span> @hide
+*/
+SHUTDOWN_REASON_LOW_BATTERY : &quot;5&quot;,
+<span id='android-os-PowerManager-property-SHUTDOWN_REASON_BATTERY_THERMAL'>/** constant for shutdown reason being critical battery thermal state.
+</span> @hide
+*/
+SHUTDOWN_REASON_BATTERY_THERMAL : &quot;6&quot;,
+<span id='android-os-PowerManager-property-LOCATION_MODE_NO_CHANGE'>/** Either the location providers shouldn't be affected by battery saver,
+</span> or battery saver is off.
+*/
+LOCATION_MODE_NO_CHANGE : &quot;0&quot;,
+<span id='android-os-PowerManager-property-LOCATION_MODE_GPS_DISABLED_WHEN_SCREEN_OFF'>/** In this mode, the GPS based location provider should be disabled when battery saver is on and
+</span> the device is non-interactive.
+*/
+LOCATION_MODE_GPS_DISABLED_WHEN_SCREEN_OFF : &quot;1&quot;,
+<span id='android-os-PowerManager-property-LOCATION_MODE_ALL_DISABLED_WHEN_SCREEN_OFF'>/** All location providers should be disabled when battery saver is on and
+</span> the device is non-interactive.
+*/
+LOCATION_MODE_ALL_DISABLED_WHEN_SCREEN_OFF : &quot;2&quot;,
+<span id='android-os-PowerManager-property-LOCATION_MODE_FOREGROUND_ONLY'>/** In this mode, all the location providers will be kept available, but location fixes
+</span> should only be provided to foreground apps.
+*/
+LOCATION_MODE_FOREGROUND_ONLY : &quot;3&quot;,
+<span id='android-os-PowerManager-property-LOCATION_MODE_THROTTLE_REQUESTS_WHEN_SCREEN_OFF'>/** In this mode, location will not be turned off, but LocationManager will throttle all
+</span> requests to providers when the device is non-interactive.
+*/
+LOCATION_MODE_THROTTLE_REQUESTS_WHEN_SCREEN_OFF : &quot;4&quot;,
+<span id='android-os-PowerManager-property-MIN_LOCATION_MODE'>/**@hide */
+</span>MIN_LOCATION_MODE : &quot;0&quot;,
+<span id='android-os-PowerManager-property-MAX_LOCATION_MODE'>/**@hide */
+</span>MAX_LOCATION_MODE : &quot;4&quot;,
+<span id='android-os-PowerManager-property-POWER_SAVE_MODE_TRIGGER_PERCENTAGE'>/** Indicates automatic battery saver toggling by the system will be based on percentage.
+</span>
+ @see PowerManager#getPowerSaveModeTrigger()
+
+  @hide
+*/
+POWER_SAVE_MODE_TRIGGER_PERCENTAGE : &quot;0&quot;,
+<span id='android-os-PowerManager-property-POWER_SAVE_MODE_TRIGGER_DYNAMIC'>/** Indicates automatic battery saver toggling by the system will be based on the state
+</span> of the dynamic power savings signal.
+
+ @see PowerManager#setDynamicPowerSaveHint(boolean, int)
+ @see PowerManager#getPowerSaveModeTrigger()
+
+  @hide
+*/
+POWER_SAVE_MODE_TRIGGER_DYNAMIC : &quot;1&quot;,
+<span id='android-os-PowerManager-property-THERMAL_STATUS_NONE'>/** Thermal status code: Not under throttling.
+</span>*/
+THERMAL_STATUS_NONE : &quot;null&quot;,
+<span id='android-os-PowerManager-property-THERMAL_STATUS_LIGHT'>/** Thermal status code: Light throttling where UX is not impacted.
+</span>*/
+THERMAL_STATUS_LIGHT : &quot;null&quot;,
+<span id='android-os-PowerManager-property-THERMAL_STATUS_MODERATE'>/** Thermal status code: Moderate throttling where UX is not largely impacted.
+</span>*/
+THERMAL_STATUS_MODERATE : &quot;null&quot;,
+<span id='android-os-PowerManager-property-THERMAL_STATUS_SEVERE'>/** Thermal status code: Severe throttling where UX is largely impacted.
+</span>*/
+THERMAL_STATUS_SEVERE : &quot;null&quot;,
+<span id='android-os-PowerManager-property-THERMAL_STATUS_CRITICAL'>/** Thermal status code: Platform has done everything to reduce power.
+</span>*/
+THERMAL_STATUS_CRITICAL : &quot;null&quot;,
+<span id='android-os-PowerManager-property-THERMAL_STATUS_EMERGENCY'>/** Thermal status code: Key components in platform are shutting down due to thermal condition.
+</span> Device functionalities will be limited.
+*/
+THERMAL_STATUS_EMERGENCY : &quot;null&quot;,
+<span id='android-os-PowerManager-property-THERMAL_STATUS_SHUTDOWN'>/** Thermal status code: Need shutdown immediately.
+</span>*/
+THERMAL_STATUS_SHUTDOWN : &quot;null&quot;,
+<span id='android-os-PowerManager-property-ACTION_POWER_SAVE_MODE_CHANGED'>/** Intent that is broadcast when the state of {@link #isPowerSaveMode}() changes.
+</span> This broadcast is only sent to registered receivers.
+*/
+ACTION_POWER_SAVE_MODE_CHANGED : &quot;android.os.action.POWER_SAVE_MODE_CHANGED&quot;,
+<span id='android-os-PowerManager-property-ACTION_POWER_SAVE_MODE_CHANGED_INTERNAL'>/** Intent that is broadcast when the state of {@link #isPowerSaveMode}() changes.
+</span> @hide
+*/
+ACTION_POWER_SAVE_MODE_CHANGED_INTERNAL : &quot;android.os.action.POWER_SAVE_MODE_CHANGED_INTERNAL&quot;,
+<span id='android-os-PowerManager-property-ACTION_DEVICE_IDLE_MODE_CHANGED'>/** Intent that is broadcast when the state of {@link #isDeviceIdleMode}() changes.
+</span> This broadcast is only sent to registered receivers.
+*/
+ACTION_DEVICE_IDLE_MODE_CHANGED : &quot;android.os.action.DEVICE_IDLE_MODE_CHANGED&quot;,
+<span id='android-os-PowerManager-property-ACTION_LIGHT_DEVICE_IDLE_MODE_CHANGED'>/** Intent that is broadcast when the state of {@link #isLightDeviceIdleMode}() changes.
+</span> This broadcast is only sent to registered receivers.
+ @hide
+*/
+ACTION_LIGHT_DEVICE_IDLE_MODE_CHANGED : &quot;android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED&quot;,
+<span id='android-os-PowerManager-property-ACTION_POWER_SAVE_WHITELIST_CHANGED'>/** @hide Intent that is broadcast when the set of power save whitelist apps has changed.
+</span> This broadcast is only sent to registered receivers.
+*/
+ACTION_POWER_SAVE_WHITELIST_CHANGED : &quot;android.os.action.POWER_SAVE_WHITELIST_CHANGED&quot;,
+<span id='android-os-PowerManager-property-ACTION_POWER_SAVE_TEMP_WHITELIST_CHANGED'>/** @hide Intent that is broadcast when the set of temporarily whitelisted apps has changed.
+</span> This broadcast is only sent to registered receivers.
+*/
+ACTION_POWER_SAVE_TEMP_WHITELIST_CHANGED : &quot;android.os.action.POWER_SAVE_TEMP_WHITELIST_CHANGED&quot;,
+<span id='android-os-PowerManager-property-ACTION_POWER_SAVE_MODE_CHANGING'>/** Intent that is broadcast when the state of {@link #isPowerSaveMode}() is about to change.
+</span> This broadcast is only sent to registered receivers.
+
+ @hide
+*/
+ACTION_POWER_SAVE_MODE_CHANGING : &quot;android.os.action.POWER_SAVE_MODE_CHANGING&quot;,
+<span id='android-os-PowerManager-property-EXTRA_POWER_SAVE_MODE'>/**@hide */
+</span>EXTRA_POWER_SAVE_MODE : &quot;mode&quot;,
+<span id='android-os-PowerManager-property-ACTION_SCREEN_BRIGHTNESS_BOOST_CHANGED'>/** Intent that is broadcast when the state of {@link #isScreenBrightnessBoosted}() has changed.
+</span> This broadcast is only sent to registered receivers.
+
+ @deprecated This intent is rarely used and will be phased out soon.
+ @hide
+ @removed
+*/
+ACTION_SCREEN_BRIGHTNESS_BOOST_CHANGED : &quot;android.os.action.SCREEN_BRIGHTNESS_BOOST_CHANGED&quot;,
+<span id='android-os-PowerManager-property-PRE_IDLE_TIMEOUT_MODE_NORMAL'>/** Constant for PreIdleTimeout normal mode (default mode, not short nor extend timeout) .
+</span> @hide
+*/
+PRE_IDLE_TIMEOUT_MODE_NORMAL : &quot;0&quot;,
+<span id='android-os-PowerManager-property-PRE_IDLE_TIMEOUT_MODE_LONG'>/** Constant for PreIdleTimeout long mode (extend timeout to keep in inactive mode
+</span> longer).
+ @hide
+*/
+PRE_IDLE_TIMEOUT_MODE_LONG : &quot;1&quot;,
+<span id='android-os-PowerManager-property-PRE_IDLE_TIMEOUT_MODE_SHORT'>/** Constant for PreIdleTimeout short mode (short timeout to go to doze mode quickly)
+</span> @hide
+*/
+PRE_IDLE_TIMEOUT_MODE_SHORT : &quot;2&quot;,
+<span id='android-os-PowerManager-method-sleepReasonToString'>/**
+</span>@hide 
+*/
+sleepReasonToString : function(  ) {},
+
+<span id='android-os-PowerManager-method-wakeReasonToString'>/**Convert the wake reason to a string for debugging purposes.
+</span>@hide 
+*/
+wakeReasonToString : function(  ) {},
+
+<span id='android-os-PowerManager-method-locationPowerSaveModeToString'>/**
+</span>@hide 
+*/
+locationPowerSaveModeToString : function(  ) {},
+
+<span id='android-os-PowerManager-method-getMinimumScreenBrightnessSetting'>/**Gets the minimum supported screen brightness setting.
+</span> The screen may be allowed to become dimmer than this value but
+ this is the minimum value that can be set by the user.
+@hide 
+*/
+getMinimumScreenBrightnessSetting : function(  ) {},
+
+<span id='android-os-PowerManager-method-getMaximumScreenBrightnessSetting'>/**Gets the maximum supported screen brightness setting.
+</span> The screen may be allowed to become dimmer than this value but
+ this is the maximum value that can be set by the user.
+@hide 
+*/
+getMaximumScreenBrightnessSetting : function(  ) {},
+
+<span id='android-os-PowerManager-method-getDefaultScreenBrightnessSetting'>/**Gets the default screen brightness setting.
+</span>@hide 
+*/
+getDefaultScreenBrightnessSetting : function(  ) {},
+
+<span id='android-os-PowerManager-method-getMinimumScreenBrightnessForVrSetting'>/**Gets the minimum supported screen brightness setting for VR Mode.
+</span>@hide 
+*/
+getMinimumScreenBrightnessForVrSetting : function(  ) {},
+
+<span id='android-os-PowerManager-method-getMaximumScreenBrightnessForVrSetting'>/**Gets the maximum supported screen brightness setting for VR Mode.
+</span> The screen may be allowed to become dimmer than this value but
+ this is the maximum value that can be set by the user.
+@hide 
+*/
+getMaximumScreenBrightnessForVrSetting : function(  ) {},
+
+<span id='android-os-PowerManager-method-getDefaultScreenBrightnessForVrSetting'>/**Gets the default screen brightness for VR setting.
+</span>@hide 
+*/
+getDefaultScreenBrightnessForVrSetting : function(  ) {},
+
+<span id='android-os-PowerManager-method-newWakeLock'>/**Creates a new wake lock with the specified level and flags.
+</span> &lt;p&gt;
+ The {@code levelAndFlags} parameter specifies a wake lock level and optional flags
+ combined using the logical OR operator.
+ &lt;/p&gt;&lt;p&gt;
+ The wake lock levels are: {@link #PARTIAL_WAKE_LOCK},
+ {@link #FULL_WAKE_LOCK}, {@link #SCREEN_DIM_WAKE_LOCK}
+ and {@link #SCREEN_BRIGHT_WAKE_LOCK}.  Exactly one wake lock level must be
+ specified as part of the {@code levelAndFlags} parameter.
+ &lt;/p&gt;&lt;p&gt;
+ The wake lock flags are: {@link #ACQUIRE_CAUSES_WAKEUP}
+ and {@link #ON_AFTER_RELEASE}.  Multiple flags can be combined as part of the
+ {@code levelAndFlags} parameters.
+ &lt;/p&gt;&lt;p&gt;
+ Call {@link android.os.PowerManager.WakeLock#acquire() acquire()} on the object to acquire the
+ wake lock, and {@link android.os.PowerManager.WakeLock#release release()} when you are done.
+ &lt;/p&gt;&lt;p&gt;
+ {@samplecode
+ PowerManager pm = (PowerManager)mContext.getSystemService(
+                                          Context.POWER_SERVICE);
+ PowerManager.WakeLock wl = pm.newWakeLock(
+                                      PowerManager.SCREEN_DIM_WAKE_LOCK
+                                      | PowerManager.ON_AFTER_RELEASE,
+                                      TAG);
+ wl.acquire();
+ // ... do work...
+ wl.release();
+ }
+ &lt;/p&gt;&lt;p&gt;
+ Although a wake lock can be created without special permissions,
+ the {@link android.Manifest.permission#WAKE_LOCK} permission is
+ required to actually acquire or release the wake lock that is returned.
+ &lt;/p&gt;&lt;p class=&quot;note&quot;&gt;
+ If using this to keep the screen on, you should strongly consider using
+ {@link android.view.WindowManager.LayoutParams#FLAG_KEEP_SCREEN_ON} instead.
+ This window flag will be correctly managed by the platform
+ as the user moves between applications and doesn't require a special permission.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Recommended naming conventions for tags to make debugging easier:
+ &lt;ul&gt;
+ &lt;li&gt;use a unique prefix delimited by a colon for your app/library (e.g.
+ gmail:mytag) to make it easier to understand where the wake locks comes
+ from. This namespace will also avoid collision for tags inside your app
+ coming from different libraries which will make debugging easier.
+ &lt;li&gt;use constants (e.g. do not include timestamps in the tag) to make it
+ easier for tools to aggregate similar wake locks. When collecting
+ debugging data, the platform only monitors a finite number of tags,
+ using constants will help tools to provide better debugging data.
+ &lt;li&gt;avoid using Class#getName() or similar method since this class name
+ can be transformed by java optimizer and obfuscator tools.
+ &lt;li&gt;avoid wrapping the tag or a prefix to avoid collision with wake lock
+ tags from the platform (e.g. *alarm*).
+ &lt;li&gt;never include personnally identifiable information for privacy
+ reasons.
+ &lt;/ul&gt;
+ &lt;/p&gt;
+@param {Number} levelAndFlags Combination of wake lock level and flag values defining
+ the requested behavior of the WakeLock.
+@param {String} tag Your class name (or other tag) for debugging purposes.
+@see WakeLock#acquire()
+@see WakeLock#release()
+@see #PARTIAL_WAKE_LOCK
+@see #FULL_WAKE_LOCK
+@see #SCREEN_DIM_WAKE_LOCK
+@see #SCREEN_BRIGHT_WAKE_LOCK
+@see #PROXIMITY_SCREEN_OFF_WAKE_LOCK
+@see #ACQUIRE_CAUSES_WAKEUP
+@see #ON_AFTER_RELEASE
+*/
+newWakeLock : function(  ) {},
+
+<span id='android-os-PowerManager-method-validateWakeLockParameters'>/**
+</span>@hide 
+*/
+validateWakeLockParameters : function(  ) {},
+
+<span id='android-os-PowerManager-method-userActivity'>/**Notifies the power manager that user activity happened.
+</span> &lt;p&gt;
+ Resets the auto-off timer and brightens the screen if the device
+ is not asleep.  This is what happens normally when a key or the touch
+ screen is pressed or when some other user activity occurs.
+ This method does not wake up the device if it has been put to sleep.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} when The time of the user activity, in the {@link SystemClock#uptimeMillis()}
+ time base.  This timestamp is used to correctly order the user activity request with
+ other power management functions.  It should be set
+ to the timestamp of the input event that caused the user activity.
+@param {Boolean} noChangeLights If true, does not cause the keyboard backlight to turn on
+ because of this event.  This is set when the power key is pressed.
+ We want the device to stay on while the button is down, but we're about
+ to turn off the screen so we don't want the keyboard backlight to turn on again.
+ Otherwise the lights flash on and then off and it looks weird.
+@see #wakeUp
+@see #goToSleep
+@removed Requires signature or system permission.
+@deprecated Use {@link #userActivity(long, int, int)}.
+*/
+userActivity : function(  ) {},
+
+<span id='android-os-PowerManager-method-userActivity'>/**Notifies the power manager that user activity happened.
+</span> &lt;p&gt;
+ Resets the auto-off timer and brightens the screen if the device
+ is not asleep.  This is what happens normally when a key or the touch
+ screen is pressed or when some other user activity occurs.
+ This method does not wake up the device if it has been put to sleep.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} or
+ {@link android.Manifest.permission#USER_ACTIVITY} permission.
+ &lt;/p&gt;
+@param {Number} when The time of the user activity, in the {@link SystemClock#uptimeMillis()}
+ time base.  This timestamp is used to correctly order the user activity request with
+ other power management functions.  It should be set
+ to the timestamp of the input event that caused the user activity.
+@param {Number} event The user activity event.
+@param {Number} flags Optional user activity flags.
+@see #wakeUp
+@see #goToSleep
+@hide Requires signature or system permission.
+*/
+userActivity : function(  ) {},
+
+<span id='android-os-PowerManager-method-goToSleep'>/**Forces the device to go to sleep.
+</span> &lt;p&gt;
+ Overrides all the wake locks that are held.
+ This is what happens when the power key is pressed to turn off the screen.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} time The time when the request to go to sleep was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp is used to correctly
+ order the go to sleep request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to go to sleep.
+@see #userActivity
+@see #wakeUp
+@removed Requires signature permission.
+*/
+goToSleep : function(  ) {},
+
+<span id='android-os-PowerManager-method-goToSleep'>/**Forces the device to go to sleep.
+</span> &lt;p&gt;
+ Overrides all the wake locks that are held.
+ This is what happens when the power key is pressed to turn off the screen.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} time The time when the request to go to sleep was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp is used to correctly
+ order the go to sleep request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to go to sleep.
+@param {Number} reason The reason the device is going to sleep.
+@param {Number} flags Optional flags to apply when going to sleep.
+@see #userActivity
+@see #wakeUp
+@hide Requires signature permission.
+*/
+goToSleep : function(  ) {},
+
+<span id='android-os-PowerManager-method-wakeUp'>/**Forces the device to wake up from sleep.
+</span> &lt;p&gt;
+ If the device is currently asleep, wakes it up, otherwise does nothing.
+ This is what happens when the power key is pressed to turn on the screen.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} time The time when the request to wake up was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp is used to correctly
+ order the wake up request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to wake up.
+@see #userActivity
+@see #goToSleep
+@deprecated Use {@link #wakeUp(long, int, String)} instead.
+@removed Requires signature permission.
+*/
+wakeUp : function(  ) {},
+
+<span id='android-os-PowerManager-method-wakeUp'>/**Forces the device to wake up from sleep.
+</span> &lt;p&gt;
+ If the device is currently asleep, wakes it up, otherwise does nothing.
+ This is what happens when the power key is pressed to turn on the screen.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} time The time when the request to wake up was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp is used to correctly
+ order the wake up request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to wake up.
+@param {String} details A free form string to explain the specific details behind the wake up for
+                debugging purposes.
+@see #userActivity
+@see #goToSleep
+@deprecated Use {@link #wakeUp(long, int, String)} instead.
+@hide 
+*/
+wakeUp : function(  ) {},
+
+<span id='android-os-PowerManager-method-wakeUp'>/**Forces the device to wake up from sleep.
+</span> &lt;p&gt;
+ If the device is currently asleep, wakes it up, otherwise does nothing.
+ This is what happens when the power key is pressed to turn on the screen.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} time The time when the request to wake up was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp is used to correctly
+ order the wake up request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to wake up.
+@param {Number} reason The reason for the wake up.
+@param {String} details A free form string to explain the specific details behind the wake up for
+                debugging purposes.
+@see #userActivity
+@see #goToSleep
+@hide 
+*/
+wakeUp : function(  ) {},
+
+<span id='android-os-PowerManager-method-nap'>/**Forces the device to start napping.
+</span> &lt;p&gt;
+ If the device is currently awake, starts dreaming, otherwise does nothing.
+ When the dream ends or if the dream cannot be started, the device will
+ either wake up or go to sleep depending on whether there has been recent
+ user activity.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} time The time when the request to nap was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp is used to correctly
+ order the nap request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to nap.
+@see #wakeUp
+@see #goToSleep
+@hide Requires signature permission.
+*/
+nap : function(  ) {},
+
+<span id='android-os-PowerManager-method-dream'>/**Requests the device to start dreaming.
+</span> &lt;p&gt;
+ If dream can not be started, for example if another {@link android.os.PowerManager} transition is in
+ progress, does nothing. Unlike {@link #nap}(long), this does not put device to sleep when
+ dream ends.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#READ_DREAM_STATE} and
+ {@link android.Manifest.permission#WRITE_DREAM_STATE} permissions.
+ &lt;/p&gt;
+@param {Number} time The time when the request to nap was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp may be used to correctly
+ order the dream request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to dream.
+@hide 
+*/
+dream : function(  ) {},
+
+<span id='android-os-PowerManager-method-boostScreenBrightness'>/**Boosts the brightness of the screen to maximum for a predetermined
+</span> period of time.  This is used to make the screen more readable in bright
+ daylight for a short duration.
+ &lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@param {Number} time The time when the request to boost was issued, in the
+ {@link SystemClock#uptimeMillis()} time base.  This timestamp is used to correctly
+ order the boost request with other power management functions.  It should be set
+ to the timestamp of the input event that caused the request to boost.
+@hide Requires signature permission.
+*/
+boostScreenBrightness : function(  ) {},
+
+<span id='android-os-PowerManager-method-isScreenBrightnessBoosted'>/**Returns whether the screen brightness is currently boosted to maximum, caused by a call
+</span> to {@link #boostScreenBrightness}(long).
+@return {Boolean} {@code True} if the screen brightness is currently boosted. {@code False} otherwise.
+@deprecated This call is rarely used and will be phased out soon.
+@hide 
+@removed 
+*/
+isScreenBrightnessBoosted : function(  ) {},
+
+<span id='android-os-PowerManager-method-isWakeLockLevelSupported'>/**Returns true if the specified wake lock level is supported.
+</span>@param {Number} level The wake lock level to check.
+@return {Boolean} True if the specified wake lock level is supported.
+*/
+isWakeLockLevelSupported : function(  ) {},
+
+<span id='android-os-PowerManager-method-isScreenOn'>/**Returns true if the device is in an interactive state.
+</span> &lt;p&gt;
+ For historical reasons, the name of this method refers to the power state of
+ the screen but it actually describes the overall interactive state of
+ the device.  This method has been replaced by {@link #isInteractive}.
+ &lt;/p&gt;&lt;p&gt;
+ The value returned by this method only indicates whether the device is
+ in an interactive state which may have nothing to do with the screen being
+ on or off.  To determine the actual state of the screen,
+ use {@link android.view.Display#getState}.
+ &lt;/p&gt;
+@return {Boolean} True if the device is in an interactive state.
+@deprecated Use {@link #isInteractive} instead.
+*/
+isScreenOn : function(  ) {},
+
+<span id='android-os-PowerManager-method-isInteractive'>/**Returns true if the device is in an interactive state.
+</span> &lt;p&gt;
+ When this method returns true, the device is awake and ready to interact
+ with the user (although this is not a guarantee that the user is actively
+ interacting with the device just this moment).  The main screen is usually
+ turned on while in this state.  Certain features, such as the proximity
+ sensor, may temporarily turn off the screen while still leaving the device in an
+ interactive state.  Note in particular that the device is still considered
+ to be interactive while dreaming (since dreams can be interactive) but not
+ when it is dozing or asleep.
+ &lt;/p&gt;&lt;p&gt;
+ When this method returns false, the device is dozing or asleep and must
+ be awoken before it will become ready to interact with the user again.  The
+ main screen is usually turned off while in this state.  Certain features,
+ such as &quot;ambient mode&quot; may cause the main screen to remain on (albeit in a
+ low power state) to display system-provided content while the device dozes.
+ &lt;/p&gt;&lt;p&gt;
+ The system will send a {@link android.content.Intent#ACTION_SCREEN_ON screen on}
+ or {@link android.content.Intent#ACTION_SCREEN_OFF screen off} broadcast
+ whenever the interactive state of the device changes.  For historical reasons,
+ the names of these broadcasts refer to the power state of the screen
+ but they are actually sent in response to changes in the overall interactive
+ state of the device, as described by this method.
+ &lt;/p&gt;&lt;p&gt;
+ Services may use the non-interactive state as a hint to conserve power
+ since the user is not present.
+ &lt;/p&gt;
+@return {Boolean} True if the device is in an interactive state.
+@see android.content.Intent#ACTION_SCREEN_ON
+@see android.content.Intent#ACTION_SCREEN_OFF
+*/
+isInteractive : function(  ) {},
+
+<span id='android-os-PowerManager-method-reboot'>/**Reboot the device.  Will not return if the reboot is successful.
+</span> &lt;p&gt;
+ Requires the {@link android.Manifest.permission#REBOOT} permission.
+ &lt;/p&gt;
+@param {String} reason code to pass to the kernel (e.g., &quot;recovery&quot;) to
+               request special boot modes, or null.
+*/
+reboot : function(  ) {},
+
+<span id='android-os-PowerManager-method-rebootSafeMode'>/**Reboot the device. Will not return if the reboot is successful.
+</span> &lt;p&gt;
+ Requires the {@link android.Manifest.permission#REBOOT} permission.
+ &lt;/p&gt;
+@hide 
+*/
+rebootSafeMode : function(  ) {},
+
+<span id='android-os-PowerManager-method-isPowerSaveMode'>/**Returns true if the device is currently in power save mode.  When in this mode,
+</span> applications should reduce their functionality in order to conserve battery as
+ much as possible.  You can monitor for changes to this state with
+ {@link #ACTION_POWER_SAVE_MODE_CHANGED}.
+@return {Boolean} Returns true if currently in low power mode, else false.
+*/
+isPowerSaveMode : function(  ) {},
+
+<span id='android-os-PowerManager-method-setPowerSaveModeEnabled'>/**Set the current power save mode.
+</span>@return {Boolean} True if the set was allowed.
+@hide 
+@see #isPowerSaveMode()
+*/
+setPowerSaveModeEnabled : function(  ) {},
+
+<span id='android-os-PowerManager-method-setDynamicPowerSaveHint'>/**Updates the current state of dynamic power savings and disable threshold. This is
+</span> a signal to the system which an app can update to serve as an indicator that
+ the user will be in a battery critical situation before being able to plug in.
+ Only apps with the {@link android.Manifest.permission#POWER_SAVER} permission may do this.
+ This is a device global state, not a per user setting.
+
+ &lt;p&gt;When enabled, the system may enact various measures for reducing power consumption in
+ order to help ensure that the user will make it to their next charging point. The most
+ visible of these will be the automatic enabling of battery saver if the user has set
+ their battery saver mode to &quot;automatic&quot;. Note
+ that this is NOT simply an on/off switch for features, but rather a hint for the
+ system to consider enacting these power saving features, some of which have additional
+ logic around when to activate based on this signal.
+
+ &lt;p&gt;The provided threshold is the percentage the system should consider itself safe at given
+ the current state of the device. The value is an integer representing a battery level.
+
+ &lt;p&gt;The threshold is meant to set an explicit stopping point for dynamic power savings
+ functionality so that the dynamic power savings itself remains a signal rather than becoming
+ an on/off switch for a subset of features.
+@param {Boolean} powerSaveHint A signal indicating to the system if it believes the
+ dynamic power savings behaviors should be activated.
+@param {Number} disableThreshold When the suggesting app believes it would be safe to disable dynamic
+ power savings behaviors.
+@param disableThreshold When the suggesting app believes it would be safe to disable dynamic
+ power savings behaviors.
+@return {Boolean} True if the update was allowed and succeeded.
+@hide 
+*/
+setDynamicPowerSaveHint : function(  ) {},
+
+<span id='android-os-PowerManager-method-setAdaptivePowerSavePolicy'>/**Sets the policy for adaptive power save.
+</span>@return {Boolean} true if there was an effectual change. If full battery saver is enabled or the
+ adaptive policy is not enabled, then this will return false.
+@hide 
+*/
+setAdaptivePowerSavePolicy : function(  ) {},
+
+<span id='android-os-PowerManager-method-setAdaptivePowerSaveEnabled'>/**Enables or disables adaptive power save.
+</span>@return {Boolean} true if there was an effectual change. If full battery saver is enabled, then this
+ will return false.
+@hide 
+*/
+setAdaptivePowerSaveEnabled : function(  ) {},
+
+<span id='android-os-PowerManager-method-getPowerSaveModeTrigger'>/**Returns the current battery saver control mode. Values it may return are defined in
+</span> AutoPowerSaveModeTriggers. Note that this is a global device state, not a per user setting.
+@return {Number} The current value power saver mode for the system.
+@see AutoPowerSaveModeTriggers
+@see PowerManager#getPowerSaveModeTrigger()
+@hide 
+*/
+getPowerSaveModeTrigger : function(  ) {},
+
+<span id='android-os-PowerManager-method-getPowerSaveState'>/**Get data about the battery saver mode for a specific service
+</span>@param {Number} serviceType unique key for the service, one of {@link ServiceType}
+@return {Object {android.os.PowerSaveState}} Battery saver state data.
+@hide 
+@see com.android.server.power.batterysaver.BatterySaverPolicy
+@see PowerSaveState
+*/
+getPowerSaveState : function(  ) {},
+
+<span id='android-os-PowerManager-method-getLocationPowerSaveMode'>/**Returns how location features should behave when battery saver is on. When battery saver
+</span> is off, this will always return {@link #LOCATION_MODE_NO_CHANGE}.
+
+ &lt;p&gt;This API is normally only useful for components that provide location features.
+@see #isPowerSaveMode()
+@see #ACTION_POWER_SAVE_MODE_CHANGED
+*/
+getLocationPowerSaveMode : function(  ) {},
+
+<span id='android-os-PowerManager-method-isDeviceIdleMode'>/**Returns true if the device is currently in idle mode.  This happens when a device
+</span> has been sitting unused and unmoving for a sufficiently long period of time, so that
+ it decides to go into a lower power-use state.  This may involve things like turning
+ off network access to apps.  You can monitor for changes to this state with
+ {@link #ACTION_DEVICE_IDLE_MODE_CHANGED}.
+@return {Boolean} Returns true if currently in active device idle mode, else false.  This is
+ when idle mode restrictions are being actively applied; it will return false if the
+ device is in a long-term idle mode but currently running a maintenance window where
+ restrictions have been lifted.
+*/
+isDeviceIdleMode : function(  ) {},
+
+<span id='android-os-PowerManager-method-isLightDeviceIdleMode'>/**Returns true if the device is currently in light idle mode.  This happens when a device
+</span> has had its screen off for a short time, switching it into a batching mode where we
+ execute jobs, syncs, networking on a batching schedule.  You can monitor for changes to
+ this state with {@link #ACTION_LIGHT_DEVICE_IDLE_MODE_CHANGED}.
+@return {Boolean} Returns true if currently in active light device idle mode, else false.  This is
+ when light idle mode restrictions are being actively applied; it will return false if the
+ device is in a long-term idle mode but currently running a maintenance window where
+ restrictions have been lifted.
+@hide 
+*/
+isLightDeviceIdleMode : function(  ) {},
+
+<span id='android-os-PowerManager-method-isIgnoringBatteryOptimizations'>/**Return whether the given application package name is on the device's power whitelist.
+</span> Apps can be placed on the whitelist through the settings UI invoked by
+ {@link android.provider.Settings#ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS}.
+*/
+isIgnoringBatteryOptimizations : function(  ) {},
+
+<span id='android-os-PowerManager-method-shutdown'>/**Turn off the device.
+</span>@param {Boolean} confirm If true, shows a shutdown confirmation dialog.
+@param {String} reason code to pass to android_reboot() (e.g. &quot;userrequested&quot;), or null.
+@param {Boolean} wait If true, this call waits for the shutdown to complete and does not return.
+@hide 
+*/
+shutdown : function(  ) {},
+
+<span id='android-os-PowerManager-method-isSustainedPerformanceModeSupported'>/**This function checks if the device has implemented Sustained Performance
+</span> Mode. This needs to be checked only once and is constant for a particular
+ device/release.
+
+ Sustained Performance Mode is intended to provide a consistent level of
+ performance for prolonged amount of time.
+
+ Applications should check if the device supports this mode, before using
+ {@link android.view.Window#setSustainedPerformanceMode}.
+@return {Boolean} Returns True if the device supports it, false otherwise.
+@see android.view.Window#setSustainedPerformanceMode
+*/
+isSustainedPerformanceModeSupported : function(  ) {},
+
+<span id='android-os-PowerManager-method-getCurrentThermalStatus'>/**This function returns the current thermal status of the device.
+</span>@return {Number} thermal status as int, {@link #THERMAL_STATUS_NONE} if device in not under
+ thermal throttling.
+*/
+getCurrentThermalStatus : function(  ) {},
+
+<span id='android-os-PowerManager-method-addThermalStatusListener'>/**This function adds a listener for thermal status change, listen call back will be
+</span> enqueued tasks on the main thread
+@param {Object {PowerManager.OnThermalStatusChangedListener}} listener listener to be added,
+*/
+addThermalStatusListener : function(  ) {},
+
+<span id='android-os-PowerManager-method-addThermalStatusListener'>/**This function adds a listener for thermal status change.
+</span>@param {Object {Executor}} executor {@link Executor} to handle listener callback.
+@param {Object {PowerManager.OnThermalStatusChangedListener}} listener listener to be added.
+*/
+addThermalStatusListener : function(  ) {},
+
+<span id='android-os-PowerManager-method-removeThermalStatusListener'>/**This function removes a listener for thermal status change
+</span>@param {Object {PowerManager.OnThermalStatusChangedListener}} listener listener to be removed
+*/
+removeThermalStatusListener : function(  ) {},
+
+<span id='android-os-PowerManager-method-setDozeAfterScreenOff'>/**If true, the doze component is not started until after the screen has been
+</span> turned off and the screen off animation has been performed.
+@hide 
+*/
+setDozeAfterScreenOff : function(  ) {},
+
+<span id='android-os-PowerManager-method-getLastShutdownReason'>/**Returns the reason the phone was last shutdown. Calling app must have the
+</span> {@link android.Manifest.permission#DEVICE_POWER} permission to request this information.
+@return {Number} Reason for shutdown as an int, {@link #SHUTDOWN_REASON_UNKNOWN} if the file could
+ not be accessed.
+@hide 
+*/
+getLastShutdownReason : function(  ) {},
+
+<span id='android-os-PowerManager-method-getLastSleepReason'>/**Returns the reason the device last went to sleep (i.e. the last value of
+</span> the second argument of {@link #goToSleep(long, int, int) goToSleep}).
+@return {Number} One of the {@code GO_TO_SLEEP_REASON_*} constants.
+@hide 
+*/
+getLastSleepReason : function(  ) {},
+
+<span id='android-os-PowerManager-method-forceSuspend'>/**Forces the device to go to suspend, even if there are currently wakelocks being held.
+</span> &lt;b&gt;Caution&lt;/b&gt;
+ This is a very dangerous command as it puts the device to sleep immediately. Apps and parts
+ of the system will not be notified and will not have an opportunity to save state prior to
+ the device going to suspend.
+ This method should only be used in very rare circumstances where the device is intended
+ to appear as completely off to the user and they have a well understood, reliable way of
+ re-enabling it.
+ &lt;/p&gt;&lt;p&gt;
+ Requires the {@link android.Manifest.permission#DEVICE_POWER} permission.
+ &lt;/p&gt;
+@return {Boolean} true on success, false otherwise.
+@hide 
+*/
+forceSuspend : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

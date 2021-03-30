@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-DeviceConfig'>/**@class android.provider.DeviceConfig
+</span>@extends java.lang.Object
+
+ Device level configuration parameters which can be tuned by a separate configuration service.
+ Namespaces that end in &quot;_native&quot; such as {@link #NAMESPACE_NETD_NATIVE} are intended to be used
+ by native code and should be pushed to system properties to make them accessible.
+
+ @hide
+*/
+var DeviceConfig = {
+
+<span id='android-provider-DeviceConfig-property-CONTENT_URI'>/** The content:// style URL for the config table.
+</span>
+ @hide
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_ACTIVITY_MANAGER'>/** Namespace for activity manager related features. These features will be applied
+</span> immediately upon change.
+
+ @hide
+*/
+NAMESPACE_ACTIVITY_MANAGER : &quot;activity_manager&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_ACTIVITY_MANAGER_NATIVE_BOOT'>/** Namespace for all activity manager related features that are used at the native level.
+</span> These features are applied at reboot.
+
+ @hide
+*/
+NAMESPACE_ACTIVITY_MANAGER_NATIVE_BOOT : &quot;activity_manager_native_boot&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_APP_COMPAT'>/** Namespace for all app compat related features.  These features will be applied
+</span> immediately upon change.
+
+ @hide
+*/
+NAMESPACE_APP_COMPAT : &quot;app_compat&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_ATTENTION_MANAGER_SERVICE'>/** Namespace for AttentionManagerService related features.
+</span>
+ @hide
+*/
+NAMESPACE_ATTENTION_MANAGER_SERVICE : &quot;attention_manager_service&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_AUTOFILL'>/** Namespace for autofill feature that provides suggestions across all apps when
+</span> the user interacts with input fields.
+
+ @hide
+*/
+NAMESPACE_AUTOFILL : &quot;autofill&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_CONNECTIVITY'>/** Namespace for all networking connectivity related features.
+</span>
+ @hide
+*/
+NAMESPACE_CONNECTIVITY : &quot;connectivity&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_CONTENT_CAPTURE'>/** Namespace for content capture feature used by on-device machine intelligence
+</span> to provide suggestions in a privacy-safe manner.
+
+ @hide
+*/
+NAMESPACE_CONTENT_CAPTURE : &quot;content_capture&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_DEX_BOOT'>/** Namespace for how dex runs. The feature requires a reboot to reach a clean state.
+</span>
+ @hide
+*/
+NAMESPACE_DEX_BOOT : &quot;dex_boot&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_GAME_DRIVER'>/** Namespace for all Game Driver features.
+</span>
+ @hide
+*/
+NAMESPACE_GAME_DRIVER : &quot;game_driver&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_INPUT_NATIVE_BOOT'>/** Namespace for all input-related features that are used at the native level.
+</span> These features are applied at reboot.
+
+ @hide
+*/
+NAMESPACE_INPUT_NATIVE_BOOT : &quot;input_native_boot&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_INTELLIGENCE_ATTENTION'>/** Namespace for attention-based features provided by on-device machine intelligence.
+</span>
+ @hide
+*/
+NAMESPACE_INTELLIGENCE_ATTENTION : &quot;intelligence_attention&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_INTELLIGENCE_CONTENT_SUGGESTIONS'>/** Definitions for properties related to Content Suggestions.
+</span>
+ @hide
+*/
+NAMESPACE_INTELLIGENCE_CONTENT_SUGGESTIONS : &quot;intelligence_content_suggestions&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_MEDIA_NATIVE'>/** Namespace for all media native related features.
+</span>
+ @hide
+*/
+NAMESPACE_MEDIA_NATIVE : &quot;media_native&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_NETD_NATIVE'>/** Namespace for all netd related features.
+</span>
+ @hide
+*/
+NAMESPACE_NETD_NATIVE : &quot;netd_native&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_ROLLBACK'>/** Namespace for Rollback flags that are applied immediately.
+</span>
+ @hide
+*/
+NAMESPACE_ROLLBACK : &quot;rollback&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_ROLLBACK_BOOT'>/** Namespace for Rollback flags that are applied after a reboot.
+</span>
+ @hide
+*/
+NAMESPACE_ROLLBACK_BOOT : &quot;rollback_boot&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_RUNTIME'>/** Namespace for all runtime related features that don't require a reboot to become active.
+</span> There are no feature flags using NAMESPACE_RUNTIME.
+
+ @hide
+*/
+NAMESPACE_RUNTIME : &quot;runtime&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_RUNTIME_NATIVE'>/** Namespace for all runtime related features that require system properties for accessing
+</span> the feature flags from C++ or Java language code. One example is the app image startup
+ cache feature use_app_image_startup_cache.
+
+ @hide
+*/
+NAMESPACE_RUNTIME_NATIVE : &quot;runtime_native&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_RUNTIME_NATIVE_BOOT'>/** Namespace for all runtime native boot related features. Boot in this case refers to the
+</span> fact that the properties only take affect after rebooting the device.
+
+ @hide
+*/
+NAMESPACE_RUNTIME_NATIVE_BOOT : &quot;runtime_native_boot&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_SCHEDULER'>/** Namespace for system scheduler related features. These features will be applied
+</span> immediately upon change.
+
+ @hide
+*/
+NAMESPACE_SCHEDULER : &quot;scheduler&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_STORAGE'>/** Namespace for storage-related features.
+</span>
+ @hide
+*/
+NAMESPACE_STORAGE : &quot;storage&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_SYSTEMUI'>/** Namespace for System UI related features.
+</span>
+ @hide
+*/
+NAMESPACE_SYSTEMUI : &quot;systemui&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_TELEPHONY'>/** Telephony related properties.
+</span>
+ @hide
+*/
+NAMESPACE_TELEPHONY : &quot;telephony&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_TEXTCLASSIFIER'>/** Namespace for TextClassifier related features.
+</span>
+ @hide
+ @see android.provider.Settings.Global.TEXT_CLASSIFIER_CONSTANTS
+*/
+NAMESPACE_TEXTCLASSIFIER : &quot;textclassifier&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_CONTACTS_PROVIDER'>/** Namespace for contacts provider related features.
+</span>
+ @hide
+*/
+NAMESPACE_CONTACTS_PROVIDER : &quot;contacts_provider&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_SETTINGS_UI'>/** Namespace for settings ui related features
+</span>
+ @hide
+*/
+NAMESPACE_SETTINGS_UI : &quot;settings_ui&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_WINDOW_MANAGER'>/** Namespace for window manager related features. The names to access the properties in this
+</span> namespace should be defined in {@link android.provider.DeviceConfig.WindowManager}.
+
+ @hide
+*/
+NAMESPACE_WINDOW_MANAGER : &quot;android:window_manager&quot;,
+<span id='android-provider-DeviceConfig-property-NAMESPACE_PRIVACY'>/** Privacy related properties definitions.
+</span>
+ @hide
+*/
+NAMESPACE_PRIVACY : &quot;privacy&quot;,
+<span id='android-provider-DeviceConfig-method-getProperty'>/**Look up the value of a property for a particular namespace.
+</span>@param {String} namespace The namespace containing the property to look up.
+@param {String} name      The name of the property to look up.
+@return {String} the corresponding value, or null if not present.
+@hide 
+*/
+getProperty : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-getString'>/**Look up the String value of a property for a particular namespace.
+</span>@param {String} namespace    The namespace containing the property to look up.
+@param {String} name         The name of the property to look up.
+@param {String} defaultValue The value to return if the property does not exist or has no non-null
+                     value.
+@return {String} the corresponding value, or defaultValue if none exists.
+@hide 
+*/
+getString : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-getBoolean'>/**Look up the boolean value of a property for a particular namespace.
+</span>@param {String} namespace The namespace containing the property to look up.
+@param {String} name      The name of the property to look up.
+@param {Boolean} defaultValue The value to return if the property does not exist or has no non-null
+                     value.
+@return {Boolean} the corresponding value, or defaultValue if none exists.
+@hide 
+*/
+getBoolean : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-getInt'>/**Look up the int value of a property for a particular namespace.
+</span>@param {String} namespace The namespace containing the property to look up.
+@param {String} name      The name of the property to look up.
+@param {Number} defaultValue The value to return if the property does not exist, has no non-null
+                     value, or fails to parse into an int.
+@return {Number} the corresponding value, or defaultValue if either none exists or it does not parse.
+@hide 
+*/
+getInt : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-getLong'>/**Look up the long value of a property for a particular namespace.
+</span>@param {String} namespace The namespace containing the property to look up.
+@param {String} name      The name of the property to look up.
+@param {Number} defaultValue The value to return if the property does not exist, has no non-null
+                     value, or fails to parse into a long.
+@return {Number} the corresponding value, or defaultValue if either none exists or it does not parse.
+@hide 
+*/
+getLong : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-getFloat'>/**Look up the float value of a property for a particular namespace.
+</span>@param {String} namespace The namespace containing the property to look up.
+@param {String} name      The name of the property to look up.
+@param {Number} defaultValue The value to return if the property does not exist, has no non-null
+                     value, or fails to parse into a float.
+@return {Number} the corresponding value, or defaultValue if either none exists or it does not parse.
+@hide 
+*/
+getFloat : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-setProperty'>/**Create a new property with the the provided name and value in the provided namespace, or
+</span> update the value of such a property if it already exists. The same name can exist in multiple
+ namespaces and might have different values in any or all namespaces.
+ &lt;p&gt;
+ The method takes an argument indicating whether to make the value the default for this
+ property.
+ &lt;p&gt;
+ All properties stored for a particular scope can be reverted to their default values
+ by passing the namespace to {@link #resetToDefaults(int, String)}.
+@param {String} namespace   The namespace containing the property to create or update.
+@param {String} name        The name of the property to create or update.
+@param {String} value       The value to store for the property.
+@param {Boolean} makeDefault Whether to make the new value the default one.
+@return {Boolean} True if the value was set, false if the storage implementation throws errors.
+@hide 
+@see #resetToDefaults(int, String).
+*/
+setProperty : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-resetToDefaults'>/**Reset properties to their default values.
+</span> &lt;p&gt;
+ The method accepts an optional namespace parameter. If provided, only properties set within
+ that namespace will be reset. Otherwise, all properties will be reset.
+@param {Number} resetMode The reset mode to use.
+@param {String} namespace Optionally, the specific namespace which resets will be limited to.
+@hide 
+@see #setProperty(String, String, String, boolean)
+*/
+resetToDefaults : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-addOnPropertyChangedListener'>/**Add a listener for property changes.
+</span> &lt;p&gt;
+ This listener will be called whenever properties in the specified namespace change. Callbacks
+ will be made on the specified executor. Future calls to this method with the same listener
+ will replace the old namespace and executor. Remove the listener entirely by calling
+ {@link #removeOnPropertyChangedListener}(OnPropertyChangedListener).
+@param {String} namespace                 The namespace containing properties to monitor.
+@param {Object {Executor}} executor                  The executor which will be used to run callbacks.
+@param {Object {DeviceConfig.OnPropertyChangedListener}} onPropertyChangedListener The listener to add.
+@hide 
+@see #removeOnPropertyChangedListener(OnPropertyChangedListener)
+@removed 
+*/
+addOnPropertyChangedListener : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-addOnPropertiesChangedListener'>/**Add a listener for property changes.
+</span> &lt;p&gt;
+ This listener will be called whenever properties in the specified namespace change. Callbacks
+ will be made on the specified executor. Future calls to this method with the same listener
+ will replace the old namespace and executor. Remove the listener entirely by calling
+ {@link #removeOnPropertiesChangedListener}(OnPropertiesChangedListener).
+@param {String} namespace                   The namespace containing properties to monitor.
+@param {Object {Executor}} executor                    The executor which will be used to run callbacks.
+@param {Object {DeviceConfig.OnPropertiesChangedListener}} onPropertiesChangedListener The listener to add.
+@hide 
+@see #removeOnPropertiesChangedListener(OnPropertiesChangedListener)
+*/
+addOnPropertiesChangedListener : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-removeOnPropertyChangedListener'>/**Remove a listener for property changes. The listener will receive no further notification of
+</span> property changes.
+@param {Object {DeviceConfig.OnPropertyChangedListener}} onPropertyChangedListener The listener to remove.
+@hide 
+@see #addOnPropertyChangedListener(String, Executor, OnPropertyChangedListener)
+@removed 
+*/
+removeOnPropertyChangedListener : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-removeOnPropertiesChangedListener'>/**Remove a listener for property changes. The listener will receive no further notification of
+</span> property changes.
+@param {Object {DeviceConfig.OnPropertiesChangedListener}} onPropertiesChangedListener The listener to remove.
+@hide 
+@see #addOnPropertiesChangedListener(String, Executor, OnPropertiesChangedListener)
+*/
+removeOnPropertiesChangedListener : function(  ) {},
+
+<span id='android-provider-DeviceConfig-method-enforceReadPermission'>/**Enforces READ_DEVICE_CONFIG permission if namespace is not one of public namespaces.
+</span>@hide 
+*/
+enforceReadPermission : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

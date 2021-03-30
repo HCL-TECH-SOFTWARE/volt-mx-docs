@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase'>/**@class android.telephony.mbms.vendor.MbmsStreamingServiceBase
+</span>@extends IMbmsStreamingService.Stub
+
+ Base class for MBMS streaming services. The middleware should return an instance of this
+ object from its {@link android.app.Service#onBind(Intent)} method.
+ @hide
+*/
+var MbmsStreamingServiceBase = {
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-initialize'>/**Initialize streaming service for this app and subId, registering the listener.
+</span>
+ May throw an {@link IllegalArgumentException} or a {@link SecurityException}, which
+ will be intercepted and passed to the app as
+ {@link MbmsErrors.InitializationErrors#ERROR_UNABLE_TO_INITIALIZE}
+
+ May return any value from {@link MbmsErrors.InitializationErrors}
+ or {@link MbmsErrors#SUCCESS}. Non-successful error codes will be passed to the app via
+ {@link IMbmsStreamingSessionCallback#onError(int, String)}.
+@param {Object {MbmsStreamingSessionCallback}} callback The callback to use to communicate with the app.
+@param {Number} subscriptionId The subscription ID to use.
+*/
+initialize : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-initialize'>/**Actual AIDL implementation that hides the callback AIDL from the middleware.
+</span>@hide 
+*/
+initialize : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-requestUpdateStreamingServices'>/**Registers serviceClasses of interest with the appName/subId key.
+</span> Starts async fetching data on streaming services of matching classes to be reported
+ later via {@link IMbmsStreamingSessionCallback#onStreamingServicesUpdated(List)}
+
+ Note that subsequent calls with the same uid and subId will replace
+ the service class list.
+
+ May throw an {@link IllegalArgumentException} or an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+@param {Object {java.util.List}} serviceClasses The service classes that the app wishes to get info on. The strings
+                       may contain arbitrary data as negotiated between the app and the
+                       carrier.
+@return {Number} {@link MbmsErrors#SUCCESS} or any of the errors in
+ {@link MbmsErrors.GeneralErrors}
+*/
+requestUpdateStreamingServices : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-startStreaming'>/**Starts streaming on a particular service. This method may perform asynchronous work. When
+</span> the middleware is ready to send bits to the frontend, it should inform the app via
+ {@link IStreamingServiceCallback#onStreamStateUpdated(int, int)}.
+
+ May throw an {@link IllegalArgumentException} or an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+@param {String} serviceId The ID of the streaming service that the app has requested.
+@param {Object {StreamingServiceCallback}} callback The callback object on which the app wishes to receive updates.
+@return {Number} Any error in {@link MbmsErrors.GeneralErrors}
+*/
+startStreaming : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-startStreaming'>/**Actual AIDL implementation of startStreaming that hides the callback AIDL from the
+</span> middleware.
+@hide 
+*/
+startStreaming : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-getPlaybackUri'>/**Retrieves the streaming URI for a particular service. If the middleware is not yet ready to
+</span> stream the service, this method may return null.
+
+ May throw an {@link IllegalArgumentException} or an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+@param {String} serviceId The ID of the streaming service that the app has requested.
+@return {Object {android.net.Uri}} An opaque {@link Uri} to be passed to a video player that understands the format.
+*/
+getPlaybackUri : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-stopStreaming'>/**Stop streaming the stream identified by {@code serviceId}. Notification of the resulting
+</span> stream state change should be reported to the app via
+ {@link IStreamingServiceCallback#onStreamStateUpdated(int, int)}.
+
+ In addition, the callback provided via
+ {@link #startStreaming(int, String, IStreamingServiceCallback)} should no longer be
+ used after this method has called by the app.
+
+ May throw an {@link IllegalArgumentException} or an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+@param {String} serviceId The ID of the streaming service that the app wishes to stop.
+*/
+stopStreaming : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-dispose'>/**Signals that the app wishes to dispose of the session identified by the
+</span> {@code subscriptionId} argument and the caller's uid. No notification back to the
+ app is required for this operation, and the corresponding callback provided via
+ {@link #initialize(IMbmsStreamingSessionCallback, int)} should no longer be used
+ after this method has been called by the app.
+
+ May throw an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+*/
+dispose : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-onAppCallbackDied'>/**Indicates that the app identified by the given UID and subscription ID has died.
+</span>@param {Number} uid the UID of the app, as returned by {@link Binder#getCallingUid()}.
+@param {Number} subscriptionId The subscription ID the app is using.
+*/
+onAppCallbackDied : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-asBinder'>/**
+</span>@hide 
+*/
+asBinder : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsStreamingServiceBase-method-onTransact'>/**
+</span>@hide 
+*/
+onTransact : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

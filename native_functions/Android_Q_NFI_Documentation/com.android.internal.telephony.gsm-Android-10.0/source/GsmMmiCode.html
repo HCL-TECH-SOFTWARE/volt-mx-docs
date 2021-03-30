@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-gsm-GsmMmiCode'>/**@class com.android.internal.telephony.gsm.GsmMmiCode
+</span> implements com.android.internal.telephony.MmiCode
+
+@extends android.os.Handler
+
+ The motto for this file is:
+
+ &quot;NOTE:    By using the # as a separator, most cases are expected to be unambiguous.&quot;
+   -- TS 22.030 6.5.2
+
+ {@hide}
+
+*/
+var GsmMmiCode = {
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-property-mDialingNumber'>/***/
+</span>mDialingNumber : &quot;null&quot;,
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-newFromDialString'>/**Some dial strings in GSM are defined to do non-call setup
+</span> things, such as modify or query supplementary service settings (eg, call
+ forwarding). These are generally referred to as &quot;MMI codes&quot;.
+ We look to see if the dial string contains a valid MMI code (potentially
+ with a dial string at the end as well) and return info here.
+
+ If the dial string contains no MMI code, we return an instance with
+ only &quot;dialingNumber&quot; set
+
+ Please see flow chart in TS 22.030 6.5.3.2
+*/
+newFromDialString : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-newFromDialString'>/**
+</span>*/
+newFromDialString : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-newNetworkInitiatedUssd'>/**
+</span>*/
+newNetworkInitiatedUssd : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-newFromUssdUserInput'>/**
+</span>*/
+newFromUssdUserInput : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-processSsData'>/**Process SS Data
+</span>*/
+processSsData : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-getState'>/**
+</span>*/
+getState : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-getMessage'>/**
+</span>*/
+getMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-getPhone'>/**
+</span>*/
+getPhone : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-cancel'>/**
+</span>*/
+cancel : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-isCancelable'>/**
+</span>*/
+isCancelable : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-getDialString'>/**
+</span>*/
+getDialString : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-isPinPukCommand'>/**
+</span>@return {Boolean} true if the Service Code is PIN/PIN2/PUK/PUK2-related
+*/
+isPinPukCommand : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-isTemporaryModeCLIR'>/**See TS 22.030 Annex B.
+</span> In temporary mode, to suppress CLIR for a single call, enter:
+      &quot; * 31 # [called number] SEND &quot;
+  In temporary mode, to invoke CLIR for a single call enter:
+       &quot; # 31 # [called number] SEND &quot;
+*/
+isTemporaryModeCLIR : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-getCLIRMode'>/**returns CommandsInterface.CLIR_*
+</span> See also isTemporaryModeCLIR()
+*/
+getCLIRMode : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-isPendingUSSD'>/**Returns true if this is a USSD code that's been submitted to the
+</span> network...eg, after processCode() is called
+*/
+isPendingUSSD : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-isUssdRequest'>/**
+</span>*/
+isUssdRequest : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-isSsInfo'>/**
+</span>*/
+isSsInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-isVoiceUnconditionalForwarding'>/**
+</span>*/
+isVoiceUnconditionalForwarding : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-processCode'>/**Process a MMI code or short code...anything that isn't a dialing number
+</span>*/
+processCode : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-onUssdFinished'>/**Called from GsmCdmaPhone
+</span>
+ An unsolicited USSD NOTIFY or REQUEST has come in matching
+ up with this pending USSD request
+
+ Note: If REQUEST, this exchange is complete, but the session remains
+       active (ie, the network expects user input).
+*/
+onUssdFinished : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-onUssdFinishedError'>/**Called from GsmCdmaPhone
+</span>
+ The radio has reset, and this is still pending
+*/
+onUssdFinishedError : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-onUssdRelease'>/**Called from GsmCdmaPhone
+</span>
+ An unsolicited USSD NOTIFY or REQUEST has come in matching
+ up with this pending USSD request
+
+ Note: If REQUEST, this exchange is complete, but the session remains
+       active (ie, the network expects user input).
+*/
+onUssdRelease : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-sendUssd'>/**
+</span>*/
+sendUssd : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-handleMessage'>/**Called from GsmCdmaPhone.handleMessage; not a Handler subclass
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-getUssdCallbackReceiver'>/**
+</span>*/
+getUssdCallbackReceiver : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-GsmMmiCode-method-toString'>/**TODO: It would be nice to have a method here that can take in a dialstring and
+</span> figure out if there is an MMI code embedded within it.  This code would replace
+ some of the string parsing functionality in the Phone App's
+ SpecialCharSequenceMgr class.
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

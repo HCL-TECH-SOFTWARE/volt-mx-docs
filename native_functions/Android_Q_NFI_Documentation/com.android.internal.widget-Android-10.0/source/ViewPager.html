@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-ViewPager'>/**@class com.android.internal.widget.ViewPager
+</span>@extends android.view.ViewGroup
+
+ Framework copy of the support-v4 ViewPager class.
+*/
+var ViewPager = {
+
+<span id='com-android-internal-widget-ViewPager-property-SCROLL_STATE_IDLE'>/** Indicates that the pager is in an idle, settled state. The current page
+</span> is fully in view and no animation is in progress.
+*/
+SCROLL_STATE_IDLE : &quot;0&quot;,
+<span id='com-android-internal-widget-ViewPager-property-SCROLL_STATE_DRAGGING'>/** Indicates that the pager is currently being dragged by the user.
+</span>*/
+SCROLL_STATE_DRAGGING : &quot;1&quot;,
+<span id='com-android-internal-widget-ViewPager-property-SCROLL_STATE_SETTLING'>/** Indicates that the pager is in the process of settling to a final position.
+</span>*/
+SCROLL_STATE_SETTLING : &quot;2&quot;,
+<span id='com-android-internal-widget-ViewPager-method-setAdapter'>/**Set a PagerAdapter that will supply views for this pager as needed.
+</span>@param {Object {PagerAdapter}} adapter Adapter to use
+*/
+setAdapter : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-getAdapter'>/**Retrieve the current adapter supplying pages.
+</span>@return {Object {com.android.internal.widget.PagerAdapter}} The currently registered PagerAdapter
+*/
+getAdapter : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setCurrentItem'>/**Set the currently selected page. If the ViewPager has already been through its first
+</span> layout with its current adapter there will be a smooth animated transition between
+ the current item and the specified item.
+@param {Number} item Item index to select
+*/
+setCurrentItem : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setCurrentItem'>/**Set the currently selected page.
+</span>@param {Number} item Item index to select
+@param {Boolean} smoothScroll True to smoothly scroll to the new item, false to transition immediately
+*/
+setCurrentItem : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-getCurrentItem'>/**
+</span>*/
+getCurrentItem : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setOnPageChangeListener'>/**Set a listener that will be invoked whenever the page changes or is incrementally
+</span> scrolled. See {@link com.android.internal.widget.ViewPager.OnPageChangeListener}.
+@param {Object {ViewPager.OnPageChangeListener}} listener Listener to set
+*/
+setOnPageChangeListener : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setPageTransformer'>/**Set a {@link com.android.internal.widget.ViewPager.PageTransformer} that will be called for each attached page whenever
+</span> the scroll position is changed. This allows the application to apply custom property
+ transformations to each page, overriding the default sliding look and feel.
+
+ &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Prior to Android 3.0 the property animation APIs did not exist.
+ As a result, setting a PageTransformer prior to Android 3.0 (API 11) will have no effect.&lt;/p&gt;
+@param {Boolean} reverseDrawingOrder true if the supplied PageTransformer requires page views
+                            to be drawn from last to first instead of first to last.
+@param {Object {ViewPager.PageTransformer}} transformer PageTransformer that will modify each page's animation properties
+*/
+setPageTransformer : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-getOffscreenPageLimit'>/**Returns the number of pages that will be retained to either side of the
+</span> current page in the view hierarchy in an idle state. Defaults to 1.
+@return {Number} How many pages will be kept offscreen on either side
+@see #setOffscreenPageLimit(int)
+*/
+getOffscreenPageLimit : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setOffscreenPageLimit'>/**Set the number of pages that should be retained to either side of the
+</span> current page in the view hierarchy in an idle state. Pages beyond this
+ limit will be recreated from the adapter when needed.
+
+ &lt;p&gt;This is offered as an optimization. If you know in advance the number
+ of pages you will need to support or have lazy-loading mechanisms in place
+ on your pages, tweaking this setting can have benefits in perceived smoothness
+ of paging animations and interaction. If you have a small number of pages (3-4)
+ that you can keep active all at once, less time will be spent in layout for
+ newly created view subtrees as the user pages back and forth.&lt;/p&gt;
+
+ &lt;p&gt;You should keep this limit low, especially if your pages have complex layouts.
+ This setting defaults to 1.&lt;/p&gt;
+@param {Number} limit How many pages will be kept offscreen in an idle state.
+*/
+setOffscreenPageLimit : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setPageMargin'>/**Set the margin between pages.
+</span>@param {Number} marginPixels Distance between adjacent pages in pixels
+@see #getPageMargin()
+@see #setPageMarginDrawable(android.graphics.drawable.Drawable)
+@see #setPageMarginDrawable(int)
+*/
+setPageMargin : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-getPageMargin'>/**Return the margin between pages.
+</span>@return {Number} The size of the margin in pixels
+*/
+getPageMargin : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setPageMarginDrawable'>/**Set a drawable that will be used to fill the margin between pages.
+</span>@param {Object {Drawable}} d Drawable to display between pages
+*/
+setPageMarginDrawable : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-setPageMarginDrawable'>/**Set a drawable that will be used to fill the margin between pages.
+</span>@param {Number} resId Resource ID of a drawable to display between pages
+*/
+setPageMarginDrawable : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-populate'>/**
+</span>*/
+populate : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-onRestoreInstanceState'>/**
+</span>*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-addView'>/**
+</span>*/
+addView : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-getCurrent'>/**
+</span>*/
+getCurrent : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-removeView'>/**
+</span>*/
+removeView : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-computeScroll'>/**
+</span>*/
+computeScroll : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-onInterceptTouchEvent'>/**
+</span>*/
+onInterceptTouchEvent : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-canScrollHorizontally'>/**
+</span>*/
+canScrollHorizontally : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-dispatchKeyEvent'>/**
+</span>*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-executeKeyEvent'>/**You can call this function yourself to have the scroll view perform
+</span> scrolling from a key event, just as if the event had been dispatched to
+ it by the view hierarchy.
+@param {Object {KeyEvent}} event The key event to execute.
+@return {Boolean} Return true if the event was handled, else false.
+*/
+executeKeyEvent : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-arrowScroll'>/**
+</span>*/
+arrowScroll : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-onRtlPropertiesChanged'>/**
+</span>*/
+onRtlPropertiesChanged : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-addFocusables'>/**We only want the current page that is being shown to be focusable.
+</span>*/
+addFocusables : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-addTouchables'>/**We only want the current page that is being shown to be touchable.
+</span>*/
+addTouchables : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-generateLayoutParams'>/**
+</span>*/
+generateLayoutParams : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-onInitializeAccessibilityEvent'>/**
+</span>*/
+onInitializeAccessibilityEvent : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-onInitializeAccessibilityNodeInfo'>/**
+</span>*/
+onInitializeAccessibilityNodeInfo : function(  ) {},
+
+<span id='com-android-internal-widget-ViewPager-method-performAccessibilityAction'>/**
+</span>*/
+performAccessibilityAction : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

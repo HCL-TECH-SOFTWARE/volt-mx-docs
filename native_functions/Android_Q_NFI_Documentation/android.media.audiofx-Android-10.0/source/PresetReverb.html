@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiofx-PresetReverb'>/**@class android.media.audiofx.PresetReverb
+</span>@extends android.media.audiofx.AudioEffect
+
+ A sound generated within a room travels in many directions. The listener first hears the
+ direct sound from the source itself. Later, he or she hears discrete echoes caused by sound
+ bouncing off nearby walls, the ceiling and the floor. As sound waves arrive after
+ undergoing more and more reflections, individual reflections become indistinguishable and
+ the listener hears continuous reverberation that decays over time.
+ Reverb is vital for modeling a listener's environment. It can be used in music applications
+ to simulate music being played back in various environments, or in games to immerse the
+ listener within the game's environment.
+ The PresetReverb class allows an application to configure the global reverb using a reverb preset.
+ This is primarily used for adding some reverb in a music playback context. Applications
+ requiring control over a more advanced environmental reverb are advised to use the
+ {@link android.media.audiofx.EnvironmentalReverb} class.
+ &lt;p&gt;An application creates a PresetReverb object to instantiate and control a reverb engine in the
+ audio framework.
+ &lt;p&gt;The methods, parameter types and units exposed by the PresetReverb implementation are
+ directly mapping those defined by the OpenSL ES 1.0.1 Specification
+ (http://www.khronos.org/opensles/) for the SLPresetReverbItf interface.
+ Please refer to this specification for more details.
+ &lt;p&gt;The PresetReverb is an output mix auxiliary effect and should be created on
+ Audio session 0. In order for a MediaPlayer or AudioTrack to be fed into this effect,
+ they must be explicitely attached to it and a send level must be specified. Use the effect ID
+ returned by getId() method to designate this particular effect when attaching it to the
+ MediaPlayer or AudioTrack.
+ &lt;p&gt;Creating a reverb on the output mix (audio session 0) requires permission
+ {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS}
+ &lt;p&gt;See {@link android.media.audiofx.AudioEffect} class for more details on controlling
+ audio effects.
+*/
+var PresetReverb = {
+
+<span id='android-media-audiofx-PresetReverb-property-PARAM_PRESET'>/** Preset. Parameter ID for
+</span> {@link android.media.audiofx.PresetReverb.OnParameterChangeListener}
+*/
+PARAM_PRESET : &quot;0&quot;,
+<span id='android-media-audiofx-PresetReverb-property-PRESET_NONE'>/** No reverb or reflections
+</span>*/
+PRESET_NONE : &quot;0&quot;,
+<span id='android-media-audiofx-PresetReverb-property-PRESET_SMALLROOM'>/** Reverb preset representing a small room less than five meters in length
+</span>*/
+PRESET_SMALLROOM : &quot;1&quot;,
+<span id='android-media-audiofx-PresetReverb-property-PRESET_MEDIUMROOM'>/** Reverb preset representing a medium room with a length of ten meters or less
+</span>*/
+PRESET_MEDIUMROOM : &quot;2&quot;,
+<span id='android-media-audiofx-PresetReverb-property-PRESET_LARGEROOM'>/** Reverb preset representing a large-sized room suitable for live performances
+</span>*/
+PRESET_LARGEROOM : &quot;3&quot;,
+<span id='android-media-audiofx-PresetReverb-property-PRESET_MEDIUMHALL'>/** Reverb preset representing a medium-sized hall
+</span>*/
+PRESET_MEDIUMHALL : &quot;4&quot;,
+<span id='android-media-audiofx-PresetReverb-property-PRESET_LARGEHALL'>/** Reverb preset representing a large-sized hall suitable for a full orchestra
+</span>*/
+PRESET_LARGEHALL : &quot;5&quot;,
+<span id='android-media-audiofx-PresetReverb-property-PRESET_PLATE'>/** Reverb preset representing a synthesis of the traditional plate reverb
+</span>*/
+PRESET_PLATE : &quot;6&quot;,
+<span id='android-media-audiofx-PresetReverb-method-setPreset'>/**Enables a preset on the reverb.
+</span>  &lt;p&gt;The reverb PRESET_NONE disables any reverb from the current output but does not free the
+  resources associated with the reverb. For an application to signal to the implementation
+  to free the resources, it must call the release() method.
+@param {Number} preset this must be one of the the preset constants defined in this class.
+ e.g. {@link #PRESET_SMALLROOM}
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setPreset : function(  ) {},
+
+<span id='android-media-audiofx-PresetReverb-method-getPreset'>/**Gets current reverb preset.
+</span>@return {Number} the preset that is set at the moment.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getPreset : function(  ) {},
+
+<span id='android-media-audiofx-PresetReverb-method-setParameterListener'>/**Registers an OnParameterChangeListener interface.
+</span>@param {Object {PresetReverb.OnParameterChangeListener}} listener OnParameterChangeListener interface registered
+*/
+setParameterListener : function(  ) {},
+
+<span id='android-media-audiofx-PresetReverb-method-getProperties'>/**Gets the preset reverb properties. This method is useful when a snapshot of current
+</span> preset reverb settings must be saved by the application.
+@return {Object {android.media.audiofx.PresetReverb.Settings}} a PresetReverb.Settings object containing all current parameters values
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getProperties : function(  ) {},
+
+<span id='android-media-audiofx-PresetReverb-method-setProperties'>/**Sets the preset reverb properties. This method is useful when preset reverb settings have to
+</span> be applied from a previous backup.
+@param {Object {PresetReverb.Settings}} settings a PresetReverb.Settings object containing the properties to apply
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setProperties : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

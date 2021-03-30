@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ex-camera2-utils-SysTrace'>/**@class com.android.ex.camera2.utils.SysTrace
+</span>@extends java.lang.Object
+
+ Writes trace events to the system trace buffer.  These trace events can be
+ collected and visualized using the Systrace tool.
+
+ &lt;p&gt;
+ This tracing mechanism is independent of the method tracing mechanism
+ offered by {@link Debug#startMethodTracing}.  In particular, it enables
+ tracing of events that occur across multiple processes.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ All traces are written using the &lt;pre&gt;APP&lt;/pre&gt; tag.
+ &lt;/p&gt;
+*/
+var SysTrace = {
+
+<span id='com-android-ex-camera2-utils-SysTrace-method-traceCounter'>/**Writes trace message to indicate the value of a given counter.
+</span>@param {String} counterName The counter name to appear in the trace.
+@param {Number} counterValue The counter value.
+*/
+traceCounter : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-SysTrace-method-beginSection'>/**Writes a trace message to indicate that a given section of code has begun. This call must
+</span> be followed by a corresponding call to {@link #endSection}() on the same thread.
+
+ &lt;p class=&quot;note&quot;&gt; At this time the vertical bar character '|', newline character '\n', and
+ null character '\0' are used internally by the tracing mechanism.  If sectionName contains
+ these characters they will be replaced with a space character in the trace.
+@param {String} sectionName The name of the code section to appear in the trace.  This may be at
+ most 127 Unicode code units long.
+*/
+beginSection : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-SysTrace-method-endSection'>/**Writes a trace message to indicate that a given section of code has
+</span> ended.
+ &lt;p&gt;
+ This call must be preceded by a corresponding call to
+ {@link #beginSection}(String). Calling this method will mark the end of
+ the most recently begun section of code, so care must be taken to ensure
+ that beginSection / endSection pairs are properly nested and called from
+ the same thread.
+ &lt;/p&gt;
+*/
+endSection : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-SysTrace-method-beginSectionAsync'>/**Writes a trace message to indicate that a given section of code has
+</span> begun.
+
+ &lt;p&gt;Must be followed by a call to {@link #endSectionAsync} using the same
+ tag. Unlike {@link #beginSection} and {@link #endSection},
+ asynchronous events do not need to be nested. The name and cookie used to
+ begin an event must be used to end it.&lt;/p&gt;
+@param {String} methodName The method name to appear in the trace.
+@param {Number} cookie Unique identifier for distinguishing simultaneous events
+*/
+beginSectionAsync : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-SysTrace-method-endSectionAsync'>/**Writes a trace message to indicate that the current method has ended.
+</span> Must be called exactly once for each call to {@link #beginSectionAsync}
+ using the same tag, name and cookie.
+@param {String} methodName The method name to appear in the trace.
+@param {Number} cookie Unique identifier for distinguishing simultaneous events
+*/
+endSectionAsync : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-notification-NotificationListenerService'>/**@class android.service.notification.NotificationListenerService
+</span>@extends android.app.Service
+
+ A service that receives calls from the system when new notifications are
+ posted or removed, or their ranking changed.
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with
+ the {@link android.Manifest.permission#BIND_NOTIFICATION_LISTENER_SERVICE} permission
+ and include an intent filter with the {@link #SERVICE_INTERFACE} action. For example:&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;service android:name=&quot;.NotificationListener&quot;
+          android:label=&quot;&amp;#64;string/service_name&quot;
+          android:permission=&quot;android.permission.BIND_NOTIFICATION_LISTENER_SERVICE&quot;&gt;
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.service.notification.NotificationListenerService&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+ &amp;lt;/service&gt;&lt;/pre&gt;
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing any operations. The {@link #requestRebind}(ComponentName)
+ method is the &lt;i&gt;only&lt;/i&gt; one that is safe to call before {@link #onListenerConnected}()
+ or after {@link #onListenerDisconnected}().
+ &lt;/p&gt;
+ &lt;p&gt; Notification listeners cannot get notification access or be bound by the system on
+ {@linkplain ActivityManager#isLowRamDevice() low-RAM} devices. The system also ignores
+ notification listeners running in a work profile. A
+ {@link android.app.admin.DevicePolicyManager} might block notifications originating from a work
+ profile.&lt;/p&gt;
+ &lt;p&gt;
+     From {@link Build.VERSION_CODES#N} onward all callbacks are called on the main thread. Prior
+     to N, there is no guarantee on what thread the callback will happen.
+ &lt;/p&gt;
+*/
+var NotificationListenerService = {
+
+<span id='android-service-notification-NotificationListenerService-property-INTERRUPTION_FILTER_ALL'>/** {@link #getCurrentInterruptionFilter() Interruption filter} constant -
+</span>     Normal interruption filter.
+*/
+INTERRUPTION_FILTER_ALL : &quot;1&quot;,
+<span id='android-service-notification-NotificationListenerService-property-INTERRUPTION_FILTER_PRIORITY'>/** {@link #getCurrentInterruptionFilter() Interruption filter} constant -
+</span>     Priority interruption filter.
+*/
+INTERRUPTION_FILTER_PRIORITY : &quot;2&quot;,
+<span id='android-service-notification-NotificationListenerService-property-INTERRUPTION_FILTER_NONE'>/** {@link #getCurrentInterruptionFilter() Interruption filter} constant -
+</span>     No interruptions filter.
+*/
+INTERRUPTION_FILTER_NONE : &quot;3&quot;,
+<span id='android-service-notification-NotificationListenerService-property-INTERRUPTION_FILTER_ALARMS'>/** {@link #getCurrentInterruptionFilter() Interruption filter} constant -
+</span>     Alarms only interruption filter.
+*/
+INTERRUPTION_FILTER_ALARMS : &quot;4&quot;,
+<span id='android-service-notification-NotificationListenerService-property-INTERRUPTION_FILTER_UNKNOWN'>/**{@link #getCurrentInterruptionFilter() Interruption filter} constant - returned when
+</span> the value is unavailable for any reason.  For example, before the notification listener
+ is connected.
+
+ {@see #onListenerConnected()}
+*/
+INTERRUPTION_FILTER_UNKNOWN : &quot;0&quot;,
+<span id='android-service-notification-NotificationListenerService-property-HINT_HOST_DISABLE_EFFECTS'>/**{@link #getCurrentListenerHints() Listener hints} constant - the primary device UI
+</span> should disable notification sound, vibrating and other visual or aural effects.
+ This does not change the interruption filter, only the effects. */
+HINT_HOST_DISABLE_EFFECTS : &quot;1&quot;,
+<span id='android-service-notification-NotificationListenerService-property-HINT_HOST_DISABLE_NOTIFICATION_EFFECTS'>/**{@link #getCurrentListenerHints() Listener hints} constant - the primary device UI
+</span> should disable notification sound, but not phone calls.
+ This does not change the interruption filter, only the effects. */
+HINT_HOST_DISABLE_NOTIFICATION_EFFECTS : &quot;2&quot;,
+<span id='android-service-notification-NotificationListenerService-property-HINT_HOST_DISABLE_CALL_EFFECTS'>/**{@link #getCurrentListenerHints() Listener hints} constant - the primary device UI
+</span> should disable phone call sounds, buyt not notification sound.
+ This does not change the interruption filter, only the effects. */
+HINT_HOST_DISABLE_CALL_EFFECTS : &quot;4&quot;,
+<span id='android-service-notification-NotificationListenerService-property-SUPPRESSED_EFFECT_SCREEN_OFF'>/** Whether notification suppressed by DND should not interruption visually when the screen is
+</span> off.
+
+ @deprecated Use the more specific visual effects in {@link NotificationManager.Policy}.
+*/
+SUPPRESSED_EFFECT_SCREEN_OFF : &quot;1&quot;,
+<span id='android-service-notification-NotificationListenerService-property-SUPPRESSED_EFFECT_SCREEN_ON'>/** Whether notification suppressed by DND should not interruption visually when the screen is
+</span> on.
+
+ @deprecated Use the more specific visual effects in {@link NotificationManager.Policy}.
+*/
+SUPPRESSED_EFFECT_SCREEN_ON : &quot;2&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_CLICK'>/**Notification was canceled by the status bar reporting a notification click. */
+</span>REASON_CLICK : &quot;1&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_CANCEL'>/**Notification was canceled by the status bar reporting a user dismissal. */
+</span>REASON_CANCEL : &quot;2&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_CANCEL_ALL'>/**Notification was canceled by the status bar reporting a user dismiss all. */
+</span>REASON_CANCEL_ALL : &quot;3&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_ERROR'>/**Notification was canceled by the status bar reporting an inflation error. */
+</span>REASON_ERROR : &quot;4&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_PACKAGE_CHANGED'>/**Notification was canceled by the package manager modifying the package. */
+</span>REASON_PACKAGE_CHANGED : &quot;5&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_USER_STOPPED'>/**Notification was canceled by the owning user context being stopped. */
+</span>REASON_USER_STOPPED : &quot;6&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_PACKAGE_BANNED'>/**Notification was canceled by the user banning the package. */
+</span>REASON_PACKAGE_BANNED : &quot;7&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_APP_CANCEL'>/**Notification was canceled by the app canceling this specific notification. */
+</span>REASON_APP_CANCEL : &quot;8&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_APP_CANCEL_ALL'>/**Notification was canceled by the app cancelling all its notifications. */
+</span>REASON_APP_CANCEL_ALL : &quot;9&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_LISTENER_CANCEL'>/**Notification was canceled by a listener reporting a user dismissal. */
+</span>REASON_LISTENER_CANCEL : &quot;10&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_LISTENER_CANCEL_ALL'>/**Notification was canceled by a listener reporting a user dismiss all. */
+</span>REASON_LISTENER_CANCEL_ALL : &quot;11&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_GROUP_SUMMARY_CANCELED'>/**Notification was canceled because it was a member of a canceled group. */
+</span>REASON_GROUP_SUMMARY_CANCELED : &quot;12&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_GROUP_OPTIMIZATION'>/**Notification was canceled because it was an invisible member of a group. */
+</span>REASON_GROUP_OPTIMIZATION : &quot;13&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_PACKAGE_SUSPENDED'>/**Notification was canceled by the device administrator suspending the package. */
+</span>REASON_PACKAGE_SUSPENDED : &quot;14&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_PROFILE_TURNED_OFF'>/**Notification was canceled by the owning managed profile being turned off. */
+</span>REASON_PROFILE_TURNED_OFF : &quot;15&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_UNAUTOBUNDLED'>/**Autobundled summary notification was canceled because its group was unbundled */
+</span>REASON_UNAUTOBUNDLED : &quot;16&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_CHANNEL_BANNED'>/**Notification was canceled by the user banning the channel. */
+</span>REASON_CHANNEL_BANNED : &quot;17&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_SNOOZED'>/**Notification was snoozed. */
+</span>REASON_SNOOZED : &quot;18&quot;,
+<span id='android-service-notification-NotificationListenerService-property-REASON_TIMEOUT'>/**Notification was canceled due to timeout */
+</span>REASON_TIMEOUT : &quot;19&quot;,
+<span id='android-service-notification-NotificationListenerService-property-TRIM_FULL'>/** The full trim of the StatusBarNotification including all its features.
+</span>
+ @hide
+ @removed
+*/
+TRIM_FULL : &quot;0&quot;,
+<span id='android-service-notification-NotificationListenerService-property-TRIM_LIGHT'>/** A light trim of the StatusBarNotification excluding the following features:
+</span>
+ &lt;ol&gt;
+     &lt;li&gt;{@link Notification#tickerView tickerView}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#contentView contentView}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#largeIcon largeIcon}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#bigContentView bigContentView}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#headsUpContentView headsUpContentView}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#EXTRA_LARGE_ICON extras[EXTRA_LARGE_ICON]}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#EXTRA_LARGE_ICON_BIG extras[EXTRA_LARGE_ICON_BIG]}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#EXTRA_PICTURE extras[EXTRA_PICTURE]}&lt;/li&gt;
+     &lt;li&gt;{@link Notification#EXTRA_BIG_TEXT extras[EXTRA_BIG_TEXT]}&lt;/li&gt;
+ &lt;/ol&gt;
+
+ @hide
+ @removed
+*/
+TRIM_LIGHT : &quot;1&quot;,
+<span id='android-service-notification-NotificationListenerService-property-NOTIFICATION_CHANNEL_OR_GROUP_ADDED'>/** Channel or group modification reason provided to
+</span> {@link #onNotificationChannelModified(String, UserHandle,NotificationChannel, int)} or
+ {@link #onNotificationChannelGroupModified(String, UserHandle, NotificationChannelGroup,
+ int)}- the provided object was created.
+*/
+NOTIFICATION_CHANNEL_OR_GROUP_ADDED : &quot;1&quot;,
+<span id='android-service-notification-NotificationListenerService-property-NOTIFICATION_CHANNEL_OR_GROUP_UPDATED'>/** Channel or group modification reason provided to
+</span> {@link #onNotificationChannelModified(String, UserHandle, NotificationChannel, int)} or
+ {@link #onNotificationChannelGroupModified(String, UserHandle,NotificationChannelGroup, int)}
+ - the provided object was updated.
+*/
+NOTIFICATION_CHANNEL_OR_GROUP_UPDATED : &quot;2&quot;,
+<span id='android-service-notification-NotificationListenerService-property-NOTIFICATION_CHANNEL_OR_GROUP_DELETED'>/** Channel or group modification reason provided to
+</span> {@link #onNotificationChannelModified(String, UserHandle, NotificationChannel, int)} or
+ {@link #onNotificationChannelGroupModified(String, UserHandle, NotificationChannelGroup,
+ int)}- the provided object was deleted.
+*/
+NOTIFICATION_CHANNEL_OR_GROUP_DELETED : &quot;3&quot;,
+<span id='android-service-notification-NotificationListenerService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.service.notification.NotificationListenerService&quot;,
+<span id='android-service-notification-NotificationListenerService-method-onNotificationPosted'>/**Implement this method to learn about new notifications as they are posted by apps.
+</span>@param {Object {StatusBarNotification}} sbn A data structure encapsulating the original {@link android.app.Notification}
+            object as well as its identifying information (tag and id) and source
+            (package name).
+*/
+onNotificationPosted : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationPosted'>/**Implement this method to learn about new notifications as they are posted by apps.
+</span>@param {Object {StatusBarNotification}} sbn A data structure encapsulating the original {@link android.app.Notification}
+            object as well as its identifying information (tag and id) and source
+            (package name).
+@param {Object {NotificationListenerService.RankingMap}} rankingMap The current ranking map that can be used to retrieve ranking information
+                   for active notifications, including the newly posted one.
+*/
+onNotificationPosted : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationRemoved'>/**Implement this method to learn when notifications are removed.
+</span> &lt;p&gt;
+ This might occur because the user has dismissed the notification using system UI (or another
+ notification listener) or because the app has withdrawn the notification.
+ &lt;p&gt;
+ NOTE: The {@link android.service.notification.StatusBarNotification} object you receive will be &quot;light&quot;; that is, the
+ result from {@link android.service.notification.StatusBarNotification#getNotification} may be missing some heavyweight
+ fields such as {@link android.app.Notification#contentView} and
+ {@link android.app.Notification#largeIcon}. However, all other fields on
+ {@link android.service.notification.StatusBarNotification}, sufficient to match this call with a prior call to
+ {@link #onNotificationPosted}(StatusBarNotification), will be intact.
+@param {Object {StatusBarNotification}} sbn A data structure encapsulating at least the original information (tag and id)
+            and source (package name) used to post the {@link android.app.Notification} that
+            was just removed.
+*/
+onNotificationRemoved : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationRemoved'>/**Implement this method to learn when notifications are removed.
+</span> &lt;p&gt;
+ This might occur because the user has dismissed the notification using system UI (or another
+ notification listener) or because the app has withdrawn the notification.
+ &lt;p&gt;
+ NOTE: The {@link android.service.notification.StatusBarNotification} object you receive will be &quot;light&quot;; that is, the
+ result from {@link android.service.notification.StatusBarNotification#getNotification} may be missing some heavyweight
+ fields such as {@link android.app.Notification#contentView} and
+ {@link android.app.Notification#largeIcon}. However, all other fields on
+ {@link android.service.notification.StatusBarNotification}, sufficient to match this call with a prior call to
+ {@link #onNotificationPosted}(StatusBarNotification), will be intact.
+@param {Object {StatusBarNotification}} sbn A data structure encapsulating at least the original information (tag and id)
+            and source (package name) used to post the {@link android.app.Notification} that
+            was just removed.
+@param {Object {NotificationListenerService.RankingMap}} rankingMap The current ranking map that can be used to retrieve ranking information
+                   for active notifications.
+*/
+onNotificationRemoved : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationRemoved'>/**Implement this method to learn when notifications are removed and why.
+</span> &lt;p&gt;
+ This might occur because the user has dismissed the notification using system UI (or another
+ notification listener) or because the app has withdrawn the notification.
+ &lt;p&gt;
+ NOTE: The {@link android.service.notification.StatusBarNotification} object you receive will be &quot;light&quot;; that is, the
+ result from {@link android.service.notification.StatusBarNotification#getNotification} may be missing some heavyweight
+ fields such as {@link android.app.Notification#contentView} and
+ {@link android.app.Notification#largeIcon}. However, all other fields on
+ {@link android.service.notification.StatusBarNotification}, sufficient to match this call with a prior call to
+ {@link #onNotificationPosted}(StatusBarNotification), will be intact.
+@param {Object {StatusBarNotification}} sbn A data structure encapsulating at least the original information (tag and id)
+            and source (package name) used to post the {@link android.app.Notification} that
+            was just removed.
+@param {Object {NotificationListenerService.RankingMap}} rankingMap The current ranking map that can be used to retrieve ranking information
+                   for active notifications.
+@param {Number} reason see {@link #REASON_LISTENER_CANCEL}, etc.
+*/
+onNotificationRemoved : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationRemoved'>/**NotificationStats are not populated for notification listeners, so fall back to
+</span> {@link #onNotificationRemoved(StatusBarNotification, android.service.notification.NotificationListenerService.RankingMap, int)}.
+@hide 
+*/
+onNotificationRemoved : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onListenerConnected'>/**Implement this method to learn about when the listener is enabled and connected to
+</span> the notification manager.  You are safe to call {@link #getActiveNotifications}()
+ at this time.
+*/
+onListenerConnected : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onListenerDisconnected'>/**Implement this method to learn about when the listener is disconnected from the
+</span> notification manager.You will not receive any events after this call, and may only
+ call {@link #requestRebind}(ComponentName) at this time.
+*/
+onListenerDisconnected : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationRankingUpdate'>/**Implement this method to be notified when the notification ranking changes.
+</span>@param {Object {NotificationListenerService.RankingMap}} rankingMap The current ranking map that can be used to retrieve ranking information
+                   for active notifications.
+*/
+onNotificationRankingUpdate : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onListenerHintsChanged'>/**Implement this method to be notified when the
+</span> {@link #getCurrentListenerHints() Listener hints} change.
+@param {Number} hints The current {@link #getCurrentListenerHints() listener hints}.
+*/
+onListenerHintsChanged : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onSilentStatusBarIconsVisibilityChanged'>/**Implement this method to be notified when the behavior of silent notifications in the status
+</span> bar changes. See {@link NotificationManager#shouldHideSilentStatusBarIcons()}.
+@param {Boolean} hideSilentStatusIcons whether or not status bar icons should be hidden for silent
+                              notifications
+*/
+onSilentStatusBarIconsVisibilityChanged : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationChannelModified'>/**Implement this method to learn about notification channel modifications.
+</span>
+ &lt;p&gt;The caller must have {@link CompanionDeviceManager#getAssociations() an associated
+ device} in order to receive this callback.
+@param {String} pkg The package the channel belongs to.
+@param {Object {UserHandle}} user The user on which the change was made.
+@param {Object {NotificationChannel}} channel The channel that has changed.
+@param {Number} modificationType One of {@link #NOTIFICATION_CHANNEL_OR_GROUP_ADDED},
+                   {@link #NOTIFICATION_CHANNEL_OR_GROUP_UPDATED},
+                   {@link #NOTIFICATION_CHANNEL_OR_GROUP_DELETED}.
+*/
+onNotificationChannelModified : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onNotificationChannelGroupModified'>/**Implement this method to learn about notification channel group modifications.
+</span>
+ &lt;p&gt;The caller must have {@link CompanionDeviceManager#getAssociations() an associated
+ device} in order to receive this callback.
+@param {String} pkg The package the group belongs to.
+@param {Object {UserHandle}} user The user on which the change was made.
+@param {Object {NotificationChannelGroup}} group The group that has changed.
+@param {Number} modificationType One of {@link #NOTIFICATION_CHANNEL_OR_GROUP_ADDED},
+                   {@link #NOTIFICATION_CHANNEL_OR_GROUP_UPDATED},
+                   {@link #NOTIFICATION_CHANNEL_OR_GROUP_DELETED}.
+*/
+onNotificationChannelGroupModified : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onInterruptionFilterChanged'>/**Implement this method to be notified when the
+</span> {@link #getCurrentInterruptionFilter() interruption filter} changed.
+@param {Number} interruptionFilter The current
+     {@link #getCurrentInterruptionFilter() interruption filter}.
+*/
+onInterruptionFilterChanged : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-cancelNotification'>/**Inform the notification manager about dismissal of a single notification.
+</span> &lt;p&gt;
+ Use this if your listener has a user interface that allows the user to dismiss individual
+ notifications, similar to the behavior of Android's status bar and notification panel.
+ It should be called after the user dismisses a single notification using your UI;
+ upon being informed, the notification manager will actually remove the notification
+ and you will get an {@link #onNotificationRemoved}(StatusBarNotification) callback.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; If your listener allows the user to fire a notification's
+ {@link android.app.Notification#contentIntent} by tapping/clicking/etc., you should call
+ this method at that time &lt;i&gt;if&lt;/i&gt; the Notification in question has the
+ {@link android.app.Notification#FLAG_AUTO_CANCEL} flag set.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {String} pkg Package of the notifying app.
+@param {String} tag Tag of the notification as specified by the notifying app in
+     {@link android.app.NotificationManager#notify(String, int, android.app.Notification)}.
+@param {Number} id  ID of the notification as specified by the notifying app in
+     {@link android.app.NotificationManager#notify(String, int, android.app.Notification)}.
+ &lt;p&gt;
+@deprecated Use {@link #cancelNotification(String key)}
+ instead. Beginning with {@link android.os.Build.VERSION_CODES#LOLLIPOP} this method will no longer
+ cancel the notification. It will continue to cancel the notification for applications
+ whose {@code targetSdkVersion} is earlier than {@link android.os.Build.VERSION_CODES#LOLLIPOP}.
+*/
+cancelNotification : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-cancelNotification'>/**Inform the notification manager about dismissal of a single notification.
+</span> &lt;p&gt;
+ Use this if your listener has a user interface that allows the user to dismiss individual
+ notifications, similar to the behavior of Android's status bar and notification panel.
+ It should be called after the user dismisses a single notification using your UI;
+ upon being informed, the notification manager will actually remove the notification
+ and you will get an {@link #onNotificationRemoved}(StatusBarNotification) callback.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; If your listener allows the user to fire a notification's
+ {@link android.app.Notification#contentIntent} by tapping/clicking/etc., you should call
+ this method at that time &lt;i&gt;if&lt;/i&gt; the Notification in question has the
+ {@link android.app.Notification#FLAG_AUTO_CANCEL} flag set.
+ &lt;p&gt;
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {String} key Notification to dismiss from {@link StatusBarNotification#getKey()}.
+*/
+cancelNotification : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-cancelAllNotifications'>/**Inform the notification manager about dismissal of all notifications.
+</span> &lt;p&gt;
+ Use this if your listener has a user interface that allows the user to dismiss all
+ notifications, similar to the behavior of Android's status bar and notification panel.
+ It should be called after the user invokes the &quot;dismiss all&quot; function of your UI;
+ upon being informed, the notification manager will actually remove all active notifications
+ and you will get multiple {@link #onNotificationRemoved}(StatusBarNotification) callbacks.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+
+ {@see #cancelNotification(String, String, int)}
+*/
+cancelAllNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-cancelNotifications'>/**Inform the notification manager about dismissal of specific notifications.
+</span> &lt;p&gt;
+ Use this if your listener has a user interface that allows the user to dismiss
+ multiple notifications at once.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {Object {java.lang.String[]}} keys Notifications to dismiss, or {@code null} to dismiss all.
+
+ {@see #cancelNotification(String, String, int)}
+*/
+cancelNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-snoozeNotification'>/**Inform the notification manager about snoozing a specific notification.
+</span> &lt;p&gt;
+ Use this if your listener has a user interface that allows the user to snooze a notification
+ until a given {@link android.service.notification.SnoozeCriterion}. It should be called after the user snoozes a single
+ notification using your UI; upon being informed, the notification manager will actually
+ remove the notification and you will get an
+ {@link #onNotificationRemoved}(StatusBarNotification) callback. When the snoozing period
+ expires, you will get a {@link #onNotificationPosted(StatusBarNotification, android.service.notification.NotificationListenerService.RankingMap)}
+ callback for the notification.
+@param {String} key The key of the notification to snooze
+@param {String} snoozeCriterionId The{@link SnoozeCriterion#getId()} of a context to snooze the
+                          notification until.
+@hide 
+@removed 
+*/
+snoozeNotification : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-snoozeNotification'>/**Inform the notification manager about snoozing a specific notification.
+</span> &lt;p&gt;
+ Use this if your listener has a user interface that allows the user to snooze a notification
+ for a time. It should be called after the user snoozes a single notification using
+ your UI; upon being informed, the notification manager will actually remove the notification
+ and you will get an {@link #onNotificationRemoved}(StatusBarNotification) callback. When the
+ snoozing period expires, you will get a
+ {@link #onNotificationPosted(StatusBarNotification, android.service.notification.NotificationListenerService.RankingMap)} callback for the
+ notification.
+@param {String} key The key of the notification to snooze
+@param {Number} durationMs A duration to snooze the notification for, in milliseconds.
+*/
+snoozeNotification : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-setNotificationsShown'>/**Inform the notification manager that these notifications have been viewed by the
+</span> user. This should only be called when there is sufficient confidence that the user is
+ looking at the notifications, such as when the notifications appear on the screen due to
+ an explicit user interaction.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {Object {java.lang.String[]}} keys Notifications to mark as seen.
+*/
+setNotificationsShown : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-updateNotificationChannel'>/**Updates a notification channel for a given package for a given user. This should only be used
+</span> to reflect changes a user has made to the channel via the listener's user interface.
+
+ &lt;p&gt;This method will throw a security exception if you don't have access to notifications
+ for the given user.&lt;/p&gt;
+ &lt;p&gt;The caller must have {@link CompanionDeviceManager#getAssociations() an associated
+ device} in order to use this method.
+@param {String} pkg The package the channel belongs to.
+@param {Object {UserHandle}} user The user the channel belongs to.
+@param {Object {NotificationChannel}} channel the channel to update.
+*/
+updateNotificationChannel : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getNotificationChannels'>/**Returns all notification channels belonging to the given package for a given user.
+</span>
+ &lt;p&gt;This method will throw a security exception if you don't have access to notifications
+ for the given user.&lt;/p&gt;
+ &lt;p&gt;The caller must have {@link CompanionDeviceManager#getAssociations() an associated
+ device} or be the {@link android.service.notification.NotificationAssistantService notification assistant} in order to
+ use this method.
+@param {String} pkg The package to retrieve channels for.
+*/
+getNotificationChannels : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getNotificationChannelGroups'>/**Returns all notification channel groups belonging to the given package for a given user.
+</span>
+ &lt;p&gt;This method will throw a security exception if you don't have access to notifications
+ for the given user.&lt;/p&gt;
+ &lt;p&gt;The caller must have {@link CompanionDeviceManager#getAssociations() an associated
+ device} or be the {@link android.service.notification.NotificationAssistantService notification assistant} in order to
+ use this method.
+@param {String} pkg The package to retrieve channel groups for.
+*/
+getNotificationChannelGroups : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-setOnNotificationPostedTrim'>/**Sets the notification trim that will be received via {@link #onNotificationPosted}.
+</span>
+ &lt;p&gt;
+ Setting a trim other than {@link #TRIM_FULL} enables listeners that don't need access to the
+ full notification features right away to reduce their memory footprint. Full notifications
+ can be requested on-demand via {@link #getActiveNotifications}(int).
+
+ &lt;p&gt;
+ Set to {@link #TRIM_FULL} initially.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {Number} trim trim of the notifications to be passed via {@link #onNotificationPosted}.
+             See &lt;code&gt;TRIM_*&lt;/code&gt; constants.
+@removed 
+@param trim trim of the notifications to be passed via {@link #onNotificationPosted}.
+             See &lt;code&gt;TRIM_*&lt;/code&gt; constants.
+*/
+setOnNotificationPostedTrim : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getActiveNotifications'>/**Request the list of outstanding notifications (that is, those that are visible to the
+</span> current user). Useful when you don't know what's already been posted.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@return {Object {android.service.notification.StatusBarNotification}} An array of active notifications, sorted in natural order.
+*/
+getActiveNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getSnoozedNotifications'>/**Like {@link #getActiveNotifications}(), but returns the list of currently snoozed
+</span> notifications, for all users this listener has access to.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@return {Object {android.service.notification.StatusBarNotification}} An array of snoozed notifications, sorted in natural order.
+*/
+getSnoozedNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getActiveNotifications'>/**Request the list of outstanding notifications (that is, those that are visible to the
+</span> current user). Useful when you don't know what's already been posted.
+@param {Number} trim trim of the notifications to be returned. See &lt;code&gt;TRIM_*&lt;/code&gt; constants.
+@removed 
+@param trim trim of the notifications to be returned. See &lt;code&gt;TRIM_*&lt;/code&gt; constants.
+@return {Object {android.service.notification.StatusBarNotification}} An array of active notifications, sorted in natural order.
+*/
+getActiveNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getActiveNotifications'>/**Request one or more notifications by key. Useful if you have been keeping track of
+</span> notifications but didn't want to retain the bits, and now need to go back and extract
+ more data out of those notifications.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {Object {java.lang.String[]}} keys the keys of the notifications to request
+@return {Object {android.service.notification.StatusBarNotification}} An array of notifications corresponding to the requested keys, in the
+ same order as the key list.
+*/
+getActiveNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getActiveNotifications'>/**Request one or more notifications by key. Useful if you have been keeping track of
+</span> notifications but didn't want to retain the bits, and now need to go back and extract
+ more data out of those notifications.
+@param {Object {java.lang.String[]}} keys the keys of the notifications to request
+@param {Number} trim trim of the notifications to be returned. See &lt;code&gt;TRIM_*&lt;/code&gt; constants.
+@param keys the keys of the notifications to request
+@param trim trim of the notifications to be returned. See &lt;code&gt;TRIM_*&lt;/code&gt; constants.
+@return {Object {android.service.notification.StatusBarNotification}} An array of notifications corresponding to the requested keys, in the
+ same order as the key list.
+*/
+getActiveNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getCurrentListenerHints'>/**Gets the set of hints representing current state.
+</span>
+ &lt;p&gt;
+ The current state may differ from the requested state if the hint represents state
+ shared across all listeners or a feature the notification host does not support or refuses
+ to grant.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@return {Number} Zero or more of the HINT_ constants.
+*/
+getCurrentListenerHints : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getCurrentInterruptionFilter'>/**Gets the current notification interruption filter active on the host.
+</span>
+ &lt;p&gt;
+ The interruption filter defines which notifications are allowed to interrupt the user
+ (e.g. via sound &amp;amp; vibration) and is applied globally. Listeners can find out whether
+ a specific notification matched the interruption filter via
+ {@link android.service.notification.NotificationListenerService.Ranking#matchesInterruptionFilter()}.
+ &lt;p&gt;
+ The current filter may differ from the previously requested filter if the notification host
+ does not support or refuses to apply the requested filter, or if another component changed
+ the filter in the meantime.
+ &lt;p&gt;
+ Listen for updates using {@link #onInterruptionFilterChanged}(int).
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@return {Number} One of the INTERRUPTION_FILTER_ constants, or INTERRUPTION_FILTER_UNKNOWN when
+ unavailable.
+*/
+getCurrentInterruptionFilter : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-clearRequestedListenerHints'>/**Clears listener hints set via {@link #getCurrentListenerHints}().
+</span>
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+*/
+clearRequestedListenerHints : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-requestListenerHints'>/**Sets the desired {@link #getCurrentListenerHints() listener hints}.
+</span>
+ &lt;p&gt;
+ This is merely a request, the host may or may not choose to take action depending
+ on other listener requests or other global state.
+ &lt;p&gt;
+ Listen for updates using {@link #onListenerHintsChanged}(int).
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {Number} hints One or more of the HINT_ constants.
+*/
+requestListenerHints : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-requestInterruptionFilter'>/**Sets the desired {@link #getCurrentInterruptionFilter() interruption filter}.
+</span>
+ &lt;p&gt;
+ This is merely a request, the host may or may not choose to apply the requested
+ interruption filter depending on other listener requests or other global state.
+ &lt;p&gt;
+ Listen for updates using {@link #onInterruptionFilterChanged}(int).
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@param {Number} interruptionFilter One of the INTERRUPTION_FILTER_ constants.
+*/
+requestInterruptionFilter : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-getCurrentRanking'>/**Returns current ranking information.
+</span>
+ &lt;p&gt;
+ The returned object represents the current ranking snapshot and only
+ applies for currently active notifications.
+ &lt;p&gt;
+ Generally you should use the RankingMap that is passed with events such
+ as {@link #onNotificationPosted(StatusBarNotification, android.service.notification.NotificationListenerService.RankingMap)},
+ {@link #onNotificationRemoved(StatusBarNotification, android.service.notification.NotificationListenerService.RankingMap)}, and
+ so on. This method should only be used when needing access outside of
+ such events, for example to retrieve the RankingMap right after
+ initialization.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation.
+@return {Object {android.service.notification.NotificationListenerService.RankingMap}} A {@link RankingMap} object providing access to ranking information
+*/
+getCurrentRanking : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onBind'>/**This is not the lifecycle event you are looking for.
+</span>
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing any operations.
+*/
+onBind : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-registerAsSystemService'>/**Directly register this service with the Notification Manager.
+</span>
+ &lt;p&gt;Only system services may use this call. It will fail for non-system callers.
+ Apps should ask the user to add their listener in Settings.
+@param {Object {Context}} context Context required for accessing resources. Since this service isn't
+    launched as a real Service when using this method, a context has to be passed in.
+@param {Object {ComponentName}} componentName the component that will consume the notification information
+@param {Number} currentUser the user to use as the stream filter
+@hide 
+@removed 
+*/
+registerAsSystemService : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-unregisterAsSystemService'>/**Directly unregister this service from the Notification Manager.
+</span>
+ &lt;p&gt;This method will fail for listeners that were not registered
+ with (@link registerAsService).
+@hide 
+@removed 
+*/
+unregisterAsSystemService : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-requestRebind'>/**Request that the listener be rebound, after a previous call to {@link #requestUnbind}.
+</span>
+ &lt;p&gt;This method will fail for listeners that have
+ not been granted the permission by the user.
+*/
+requestRebind : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-requestUnbind'>/**Request that the service be unbound.
+</span>
+ &lt;p&gt;Once this is called, you will no longer receive updates and no method calls are
+ guaranteed to be successful, until you next receive the {@link #onListenerConnected}() event.
+ The service will likely be killed by the system after this call.
+
+ &lt;p&gt;The service should wait for the {@link #onListenerConnected}() event
+ before performing this operation. I know it's tempting, but you must wait.
+*/
+requestUnbind : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-createLegacyIconExtras'>/**Convert new-style Icons to legacy representations for pre-M clients.
+</span>@hide 
+*/
+createLegacyIconExtras : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-method-applyUpdateLocked'>/**
+</span>@hide 
+*/
+applyUpdateLocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-BidiFormatter'>/**@class android.text.BidiFormatter
+</span>@extends java.lang.Object
+
+ Utility class for formatting text for display in a potentially opposite-directionality context
+ without garbling. The directionality of the context is set at formatter creation and the
+ directionality of the text can be either estimated or passed in when known.
+
+ &lt;p&gt;To support versions lower than {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+ you can use the support library's {@link android.support.v4.text.BidiFormatter} class.
+
+ &lt;p&gt;These APIs provides the following functionality:
+ &lt;p&gt;
+ 1. Bidi Wrapping
+ When text in one language is mixed into a document in another, opposite-directionality language,
+ e.g. when an English business name is embedded in some Hebrew text, both the inserted string
+ and the text surrounding it may be displayed incorrectly unless the inserted string is explicitly
+ separated from the surrounding text in a &quot;wrapper&quot; that:
+ &lt;p&gt;
+ - Declares its directionality so that the string is displayed correctly. This can be done in
+   Unicode bidi formatting codes by {@link #unicodeWrap} and similar methods.
+ &lt;p&gt;
+ - Isolates the string's directionality, so it does not unduly affect the surrounding content.
+   Currently, this can only be done using invisible Unicode characters of the same direction as
+   the context (LRM or RLM) in addition to the directionality declaration above, thus &quot;resetting&quot;
+   the directionality to that of the context. The &quot;reset&quot; may need to be done at both ends of the
+   string. Without &quot;reset&quot; after the string, the string will &quot;stick&quot; to a number or logically
+   separate opposite-direction text that happens to follow it in-line (even if separated by
+   neutral content like spaces and punctuation). Without &quot;reset&quot; before the string, the same can
+   happen there, but only with more opposite-direction text, not a number. One approach is to
+   &quot;reset&quot; the direction only after each string, on the theory that if the preceding opposite-
+   direction text is itself bidi-wrapped, the &quot;reset&quot; after it will prevent the sticking. (Doing
+   the &quot;reset&quot; only before each string definitely does not work because we do not want to require
+   bidi-wrapping numbers, and a bidi-wrapped opposite-direction string could be followed by a
+   number.) Still, the safest policy is to do the &quot;reset&quot; on both ends of each string, since RTL
+   message translations often contain untranslated Latin-script brand names and technical terms,
+   and one of these can be followed by a bidi-wrapped inserted value. On the other hand, when one
+   has such a message, it is best to do the &quot;reset&quot; manually in the message translation itself,
+   since the message's opposite-direction text could be followed by an inserted number, which we
+   would not bidi-wrap anyway. Thus, &quot;reset&quot; only after the string is the current default. In an
+   alternative to &quot;reset&quot;, recent additions to the HTML, CSS, and Unicode standards allow the
+   isolation to be part of the directionality declaration. This form of isolation is better than
+   &quot;reset&quot; because it takes less space, does not require knowing the context directionality, has a
+   gentler effect than &quot;reset&quot;, and protects both ends of the string. However, we do not yet allow
+   using it because required platforms do not yet support it.
+ &lt;p&gt;
+ Providing these wrapping services is the basic purpose of the bidi formatter.
+ &lt;p&gt;
+ 2. Directionality estimation
+ How does one know whether a string about to be inserted into surrounding text has the same
+ directionality? Well, in many cases, one knows that this must be the case when writing the code
+ doing the insertion, e.g. when a localized message is inserted into a localized page. In such
+ cases there is no need to involve the bidi formatter at all. In some other cases, it need not be
+ the same as the context, but is either constant (e.g. urls are always LTR) or otherwise known.
+ In the remaining cases, e.g. when the string is user-entered or comes from a database, the
+ language of the string (and thus its directionality) is not known a priori, and must be
+ estimated at run-time. The bidi formatter can do this automatically using the default
+ first-strong estimation algorithm. It can also be configured to use a custom directionality
+ estimation object.
+*/
+var BidiFormatter = {
+
+<span id='android-text-BidiFormatter-method-getInstance'>/**Factory for creating an instance of BidiFormatter for the default locale directionality.
+</span>
+ This does not create any new objects, and returns already existing static instances.
+*/
+getInstance : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-getInstance'>/**Factory for creating an instance of BidiFormatter given the context directionality.
+</span>
+ This does not create any new objects, and returns already existing static instances.
+@param {Boolean} rtlContext Whether the context directionality is RTL.
+*/
+getInstance : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-getInstance'>/**Factory for creating an instance of BidiFormatter given the context locale.
+</span>
+ This does not create any new objects, and returns already existing static instances.
+@param {Object {Locale}} locale The context locale.
+*/
+getInstance : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-isRtlContext'>/**
+</span>@return {Boolean} Whether the context directionality is RTL
+*/
+isRtlContext : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-getStereoReset'>/**
+</span>@return {Boolean} Whether directionality &quot;reset&quot; should also be done before a string being
+ bidi-wrapped, not just after it.
+*/
+getStereoReset : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-markAfter'>/**Returns a Unicode bidi mark matching the context directionality (LRM or RLM) if either the
+</span> overall or the exit directionality of a given string is opposite to the context directionality.
+ Putting this after the string (including its directionality declaration wrapping) prevents it
+ from &quot;sticking&quot; to other opposite-directionality text or a number appearing after it inline
+ with only neutral content in between. Otherwise returns the empty string. While the exit
+ directionality is determined by scanning the end of the string, the overall directionality is
+ given explicitly by a heuristic to estimate the {@code str}'s directionality.
+@param {Object {CharSequence}} str CharSequence after which the mark may need to appear.
+@param {Object {TextDirectionHeuristic}} heuristic The text direction heuristic that will be used to estimate the {@code str}'s
+                  directionality.
+@return {String} LRM for RTL text in LTR context; RLM for LTR text in RTL context;
+     else, the empty string.
+@hide 
+*/
+markAfter : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-markBefore'>/**Returns a Unicode bidi mark matching the context directionality (LRM or RLM) if either the
+</span> overall or the entry directionality of a given string is opposite to the context
+ directionality. Putting this before the string (including its directionality declaration
+ wrapping) prevents it from &quot;sticking&quot; to other opposite-directionality text appearing before
+ it inline with only neutral content in between. Otherwise returns the empty string. While the
+ entry directionality is determined by scanning the beginning of the string, the overall
+ directionality is given explicitly by a heuristic to estimate the {@code str}'s directionality.
+@param {Object {CharSequence}} str CharSequence before which the mark may need to appear.
+@param {Object {TextDirectionHeuristic}} heuristic The text direction heuristic that will be used to estimate the {@code str}'s
+                  directionality.
+@return {String} LRM for RTL text in LTR context; RLM for LTR text in RTL context;
+     else, the empty string.
+@hide 
+*/
+markBefore : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-isRtl'>/**Estimates the directionality of a string using the default text direction heuristic.
+</span>@param {String} str String whose directionality is to be estimated.
+@return {Boolean} true if {@code str}'s estimated overall directionality is RTL. Otherwise returns
+          false.
+*/
+isRtl : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-isRtl'>/**Operates like {@link #isRtl}(String), but takes a CharSequence instead of a string
+</span>@param {Object {CharSequence}} str CharSequence whose directionality is to be estimated.
+@return {Boolean} true if {@code str}'s estimated overall directionality is RTL. Otherwise returns
+          false.
+*/
+isRtl : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Formats a string of given directionality for use in plain-text output of the context
+</span> directionality, so an opposite-directionality string is neither garbled nor garbles its
+ surroundings. This makes use of Unicode bidi formatting characters.
+ &lt;p&gt;
+ The algorithm: In case the given directionality doesn't match the context directionality, wraps
+ the string with Unicode bidi formatting characters: RLE+{@code str}+PDF for RTL text, or
+ LRE+{@code str}+PDF for LTR text.
+ &lt;p&gt;
+ If {@code isolate}, directionally isolates the string so that it does not garble its
+ surroundings. Currently, this is done by &quot;resetting&quot; the directionality after the string by
+ appending a trailing Unicode bidi mark matching the context directionality (LRM or RLM) when
+ either the overall directionality or the exit directionality of the string is opposite to
+ that of the context. Unless the formatter was built using
+ {@link android.text.BidiFormatter.Builder#stereoReset(boolean)} with a {@code false} argument, also prepends a Unicode
+ bidi mark matching the context directionality when either the overall directionality or the
+ entry directionality of the string is opposite to that of the context. Note that as opposed
+ to the overall directionality, the entry and exit directionalities are determined from the
+ string itself.
+ &lt;p&gt;
+ Does *not* do HTML-escaping.
+@param {String} str The input string.
+@param {Object {TextDirectionHeuristic}} heuristic The algorithm to be used to estimate the string's overall direction.
+        See {@link TextDirectionHeuristics} for pre-defined heuristics.
+@param {Boolean} isolate Whether to directionally isolate the string to prevent it from garbling the
+     content around it
+@return {String} Input string after applying the above processing. {@code null} if {@code str} is
+     {@code null}.
+*/
+unicodeWrap : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Operates like {@link #unicodeWrap(String, android.text.TextDirectionHeuristic, boolean)}, but takes a
+</span> CharSequence instead of a string
+@param {Object {CharSequence}} str The input CharSequence.
+@param {Object {TextDirectionHeuristic}} heuristic The algorithm to be used to estimate the CharSequence's overall direction.
+        See {@link TextDirectionHeuristics} for pre-defined heuristics.
+@param {Boolean} isolate Whether to directionally isolate the CharSequence to prevent it from garbling
+     the content around it
+@return {Object {java.lang.CharSequence}} Input CharSequence after applying the above processing. {@code null} if {@code str}
+     is {@code null}.
+*/
+unicodeWrap : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Operates like {@link #unicodeWrap(String, android.text.TextDirectionHeuristic, boolean)}, but assumes
+</span> {@code isolate} is true.
+@param {String} str The input string.
+@param {Object {TextDirectionHeuristic}} heuristic The algorithm to be used to estimate the string's overall direction.
+        See {@link TextDirectionHeuristics} for pre-defined heuristics.
+@return {String} Input string after applying the above processing.
+*/
+unicodeWrap : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Operates like {@link #unicodeWrap(CharSequence, android.text.TextDirectionHeuristic, boolean)}, but
+</span> assumes {@code isolate} is true.
+@param {Object {CharSequence}} str The input CharSequence.
+@param {Object {TextDirectionHeuristic}} heuristic The algorithm to be used to estimate the CharSequence's overall direction.
+        See {@link TextDirectionHeuristics} for pre-defined heuristics.
+@return {Object {java.lang.CharSequence}} Input CharSequence after applying the above processing.
+*/
+unicodeWrap : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Operates like {@link #unicodeWrap(String, android.text.TextDirectionHeuristic, boolean)}, but uses the
+</span> formatter's default direction estimation algorithm.
+@param {String} str The input string.
+@param {Boolean} isolate Whether to directionally isolate the string to prevent it from garbling the
+     content around it
+@return {String} Input string after applying the above processing.
+*/
+unicodeWrap : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Operates like {@link #unicodeWrap(CharSequence, android.text.TextDirectionHeuristic, boolean)}, but uses
+</span> the formatter's default direction estimation algorithm.
+@param {Object {CharSequence}} str The input CharSequence.
+@param {Boolean} isolate Whether to directionally isolate the CharSequence to prevent it from garbling
+     the content around it
+@return {Object {java.lang.CharSequence}} Input CharSequence after applying the above processing.
+*/
+unicodeWrap : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Operates like {@link #unicodeWrap(String, android.text.TextDirectionHeuristic, boolean)}, but uses the
+</span> formatter's default direction estimation algorithm and assumes {@code isolate} is true.
+@param {String} str The input string.
+@return {String} Input string after applying the above processing.
+*/
+unicodeWrap : function(  ) {},
+
+<span id='android-text-BidiFormatter-method-unicodeWrap'>/**Operates like {@link #unicodeWrap(CharSequence, android.text.TextDirectionHeuristic, boolean)}, but uses
+</span> the formatter's default direction estimation algorithm and assumes {@code isolate} is true.
+@param {Object {CharSequence}} str The input CharSequence.
+@return {Object {java.lang.CharSequence}} Input CharSequence after applying the above processing.
+*/
+unicodeWrap : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

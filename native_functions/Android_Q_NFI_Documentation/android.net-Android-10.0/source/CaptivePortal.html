@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-CaptivePortal'>/**@class android.net.CaptivePortal
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class allowing apps handling the {@link android.net.ConnectivityManager#ACTION_CAPTIVE_PORTAL_SIGN_IN}
+ activity to indicate to the system different outcomes of captive portal sign in.  This class is
+ passed as an extra named {@link android.net.ConnectivityManager#EXTRA_CAPTIVE_PORTAL} with the
+ {@code ACTION_CAPTIVE_PORTAL_SIGN_IN} activity.
+*/
+var CaptivePortal = {
+
+<span id='android-net-CaptivePortal-property-APP_RETURN_DISMISSED'>/** Response code from the captive portal application, indicating that the portal was dismissed
+</span> and the network should be re-validated.
+ @see ICaptivePortal#appResponse(int)
+ @see android.net.INetworkMonitor#notifyCaptivePortalAppFinished(int)
+ @hide
+*/
+APP_RETURN_DISMISSED : &quot;0&quot;,
+<span id='android-net-CaptivePortal-property-APP_RETURN_UNWANTED'>/** Response code from the captive portal application, indicating that the user did not login and
+</span> does not want to use the captive portal network.
+ @see ICaptivePortal#appResponse(int)
+ @see android.net.INetworkMonitor#notifyCaptivePortalAppFinished(int)
+ @hide
+*/
+APP_RETURN_UNWANTED : &quot;1&quot;,
+<span id='android-net-CaptivePortal-property-APP_RETURN_WANTED_AS_IS'>/** Response code from the captive portal application, indicating that the user does not wish to
+</span> login but wants to use the captive portal network as-is.
+ @see ICaptivePortal#appResponse(int)
+ @see android.net.INetworkMonitor#notifyCaptivePortalAppFinished(int)
+ @hide
+*/
+APP_RETURN_WANTED_AS_IS : &quot;2&quot;,
+<span id='android-net-CaptivePortal-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-CaptivePortal-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-CaptivePortal-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-CaptivePortal-method-reportCaptivePortalDismissed'>/**Indicate to the system that the captive portal has been
+</span> dismissed.  In response the framework will re-evaluate the network's
+ connectivity and might take further action thereafter.
+*/
+reportCaptivePortalDismissed : function(  ) {},
+
+<span id='android-net-CaptivePortal-method-ignoreNetwork'>/**Indicate to the system that the user does not want to pursue signing in to the
+</span> captive portal and the system should continue to prefer other networks
+ without captive portals for use as the default active data network.  The
+ system will not retest the network for a captive portal so as to avoid
+ disturbing the user with further sign in to network notifications.
+*/
+ignoreNetwork : function(  ) {},
+
+<span id='android-net-CaptivePortal-method-useNetwork'>/**Indicate to the system the user wants to use this network as is, even though
+</span> the captive portal is still in place.  The system will treat the network
+ as if it did not have a captive portal when selecting the network to use
+ as the default active data network. This may result in this network
+ becoming the default active data network, which could disrupt network
+ connectivity for apps because the captive portal is still in place.
+@hide 
+*/
+useNetwork : function(  ) {},
+
+<span id='android-net-CaptivePortal-method-logEvent'>/**Log a captive portal login event.
+</span>@param {Number} eventId one of the CAPTIVE_PORTAL_LOGIN_* constants in metrics_constants.proto.
+@param {String} packageName captive portal application package name.
+@hide 
+*/
+logEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-TagTechnology'>/**@class android.nfc.tech.TagTechnology
+</span> implements java.io.Closeable
+
+ {@link android.nfc.tech.TagTechnology} is an interface to a technology in a {@link Tag}.
+ &lt;p&gt;
+ Obtain a {@link android.nfc.tech.TagTechnology} implementation by calling the static method &lt;code&gt;get()&lt;/code&gt;
+ on the implementation class.
+ &lt;p&gt;
+ NFC tags are based on a number of independently developed technologies and offer a
+ wide range of capabilities. The
+ {@link android.nfc.tech.TagTechnology} implementations provide access to these different
+ technologies and capabilities. Some sub-classes map to technology
+ specification (for example {@link android.nfc.tech.NfcA}, {@link android.nfc.tech.IsoDep}, others map to
+ pseudo-technologies or capabilities (for example {@link android.nfc.tech.Ndef}, {@link android.nfc.tech.NdefFormatable}).
+ &lt;p&gt;
+ It is mandatory for all Android NFC devices to provide the following
+ {@link android.nfc.tech.TagTechnology} implementations.
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.nfc.tech.NfcA} (also known as ISO 14443-3A)
+ &lt;li&gt;{@link android.nfc.tech.NfcB} (also known as ISO 14443-3B)
+ &lt;li&gt;{@link android.nfc.tech.NfcF} (also known as JIS 6319-4)
+ &lt;li&gt;{@link android.nfc.tech.NfcV} (also known as ISO 15693)
+ &lt;li&gt;{@link android.nfc.tech.IsoDep}
+ &lt;li&gt;{@link android.nfc.tech.Ndef} on NFC Forum Type 1, Type 2, Type 3 or Type 4 compliant tags
+ &lt;/ul&gt;
+ It is optional for Android NFC devices to provide the following
+ {@link android.nfc.tech.TagTechnology} implementations. If it is not provided, the
+ Android device will never enumerate that class via {@link Tag#getTechList}.
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.nfc.tech.MifareClassic}
+ &lt;li&gt;{@link android.nfc.tech.MifareUltralight}
+ &lt;li&gt;{@link android.nfc.tech.NfcBarcode}
+ &lt;li&gt;{@link android.nfc.tech.NdefFormatable} must only be enumerated on tags for which this Android device
+ is capable of formatting. Proprietary knowledge is often required to format a tag
+ to make it NDEF compatible.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ {@link android.nfc.tech.TagTechnology} implementations provide methods that fall into two classes:
+ &lt;em&gt;cached getters&lt;/em&gt; and &lt;em&gt;I/O operations&lt;/em&gt;.
+ &lt;h4&gt;Cached getters&lt;/h4&gt;
+ These methods (usually prefixed by &lt;code&gt;get&lt;/code&gt; or &lt;code&gt;is&lt;/code&gt;) return
+ properties of the tag, as determined at discovery time. These methods will never
+ block or cause RF activity, and do not require {@link #connect} to have been called.
+ They also never update, for example if a property is changed by an I/O operation with a tag
+ then the cached getter will still return the result from tag discovery time.
+ &lt;h4&gt;I/O operations&lt;/h4&gt;
+ I/O operations may require RF activity, and may block. They have the following semantics.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #connect} must be called before using any other I/O operation.
+ &lt;li&gt;{@link #close} must be called after completing I/O operations with a
+ {@link android.nfc.tech.TagTechnology}, and it will cancel all other blocked I/O operations on other threads
+ (including {@link #connect} with {@link IOException}.
+ &lt;li&gt;Only one {@link android.nfc.tech.TagTechnology} can be connected at a time. Other calls to
+ {@link #connect} will return {@link IOException}.
+ &lt;li&gt;I/O operations may block, and should never be called on the main application
+ thread.
+ &lt;/ul&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Methods that perform I/O operations
+ require the {@link android.Manifest.permission#NFC} permission.
+*/
+var TagTechnology = {
+
+<span id='android-nfc-tech-TagTechnology-property-NFC_A'>/** This technology is an instance of {@link android.nfc.tech.NfcA}.
+</span> &lt;p&gt;Support for this technology type is mandatory.
+ @hide
+*/
+NFC_A : &quot;1&quot;,
+<span id='android-nfc-tech-TagTechnology-property-NFC_B'>/** This technology is an instance of {@link android.nfc.tech.NfcB}.
+</span> &lt;p&gt;Support for this technology type is mandatory.
+ @hide
+*/
+NFC_B : &quot;2&quot;,
+<span id='android-nfc-tech-TagTechnology-property-ISO_DEP'>/** This technology is an instance of {@link android.nfc.tech.IsoDep}.
+</span> &lt;p&gt;Support for this technology type is mandatory.
+ @hide
+*/
+ISO_DEP : &quot;3&quot;,
+<span id='android-nfc-tech-TagTechnology-property-NFC_F'>/** This technology is an instance of {@link android.nfc.tech.NfcF}.
+</span> &lt;p&gt;Support for this technology type is mandatory.
+ @hide
+*/
+NFC_F : &quot;4&quot;,
+<span id='android-nfc-tech-TagTechnology-property-NFC_V'>/** This technology is an instance of {@link android.nfc.tech.NfcV}.
+</span> &lt;p&gt;Support for this technology type is mandatory.
+ @hide
+*/
+NFC_V : &quot;5&quot;,
+<span id='android-nfc-tech-TagTechnology-property-NDEF'>/** This technology is an instance of {@link android.nfc.tech.Ndef}.
+</span> &lt;p&gt;Support for this technology type is mandatory.
+ @hide
+*/
+NDEF : &quot;6&quot;,
+<span id='android-nfc-tech-TagTechnology-property-NDEF_FORMATABLE'>/** This technology is an instance of {@link android.nfc.tech.NdefFormatable}.
+</span> &lt;p&gt;Support for this technology type is mandatory.
+ @hide
+*/
+NDEF_FORMATABLE : &quot;7&quot;,
+<span id='android-nfc-tech-TagTechnology-property-MIFARE_CLASSIC'>/** This technology is an instance of {@link android.nfc.tech.MifareClassic}.
+</span> &lt;p&gt;Support for this technology type is optional. If a stack doesn't support this technology
+ type tags using it must still be discovered and present the lower level radio interface
+ technologies in use.
+ @hide
+*/
+MIFARE_CLASSIC : &quot;8&quot;,
+<span id='android-nfc-tech-TagTechnology-property-MIFARE_ULTRALIGHT'>/** This technology is an instance of {@link android.nfc.tech.MifareUltralight}.
+</span> &lt;p&gt;Support for this technology type is optional. If a stack doesn't support this technology
+ type tags using it must still be discovered and present the lower level radio interface
+ technologies in use.
+ @hide
+*/
+MIFARE_ULTRALIGHT : &quot;9&quot;,
+<span id='android-nfc-tech-TagTechnology-property-NFC_BARCODE'>/** This technology is an instance of {@link android.nfc.tech.NfcBarcode}.
+</span> &lt;p&gt;Support for this technology type is optional. If a stack doesn't support this technology
+ type tags using it must still be discovered and present the lower level radio interface
+ technologies in use.
+ @hide
+*/
+NFC_BARCODE : &quot;10&quot;,
+<span id='android-nfc-tech-TagTechnology-method-getTag'>/**Get the {@link Tag} object backing this {@link android.nfc.tech.TagTechnology} object.
+</span>@return {Object {android.nfc.Tag}} the {@link Tag} backing this {@link TagTechnology} object.
+*/
+getTag : function(  ) {},
+
+<span id='android-nfc-tech-TagTechnology-method-connect'>/**Enable I/O operations to the tag from this {@link android.nfc.tech.TagTechnology} object.
+</span> &lt;p&gt;May cause RF activity and may block. Must not be called
+ from the main application thread. A blocked call will be canceled with
+ {@link IOException} by calling {@link #close} from another thread.
+ &lt;p&gt;Only one {@link android.nfc.tech.TagTechnology} object can be connected to a {@link Tag} at a time.
+ &lt;p&gt;Applications must call {@link #close} when I/O operations are complete.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@see #close()
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or connect is canceled
+*/
+connect : function(  ) {},
+
+<span id='android-nfc-tech-TagTechnology-method-reconnect'>/**Re-connect to the {@link Tag} associated with this connection. Reconnecting to a tag can be
+</span> used to reset the state of the tag itself.
+
+ &lt;p&gt;May cause RF activity and may block. Must not be called
+ from the main application thread. A blocked call will be canceled with
+ {@link IOException} by calling {@link #close} from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@see #connect()
+@see #close()
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or connect is canceled
+@hide 
+*/
+reconnect : function(  ) {},
+
+<span id='android-nfc-tech-TagTechnology-method-close'>/**Disable I/O operations to the tag from this {@link android.nfc.tech.TagTechnology} object, and release resources.
+</span> &lt;p&gt;Also causes all blocked I/O operations on other thread to be canceled and
+ return with {@link IOException}.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@see #connect()
+*/
+close : function(  ) {},
+
+<span id='android-nfc-tech-TagTechnology-method-isConnected'>/**Helper to indicate if I/O operations should be possible.
+</span>
+ &lt;p&gt;Returns true if {@link #connect} has completed, and {@link #close} has not been
+ called, and the {@link Tag} is not known to be out of range.
+ &lt;p&gt;Does not cause RF activity, and does not block.
+@return {Boolean} true if I/O operations should be possible
+*/
+isConnected : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

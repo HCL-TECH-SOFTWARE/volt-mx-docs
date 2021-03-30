@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-NetworkAgent'>/**@class android.net.NetworkAgent
+</span>@extends android.os.Handler
+
+ A Utility class for handling for communicating between bearer-specific
+ code and ConnectivityService.
+
+ A bearer may have more than one NetworkAgent if it can simultaneously
+ support separate networks (IMS / Internet / MMS Apns on cellular, or
+ perhaps connections with different SSID or P2P for Wi-Fi).
+
+ @hide
+*/
+var NetworkAgent = {
+
+<span id='android-net-NetworkAgent-property-netId'>/***/
+</span>netId : &quot;null&quot;,
+<span id='android-net-NetworkAgent-property-mFactorySerialNumber'>/***/
+</span>mFactorySerialNumber : &quot;null&quot;,
+<span id='android-net-NetworkAgent-property-CMD_SUSPECT_BAD'>/** Sent by ConnectivityService to the NetworkAgent to inform it of
+</span> suspected connectivity problems on its network.  The NetworkAgent
+ should take steps to verify and correct connectivity.
+*/
+CMD_SUSPECT_BAD : &quot;528384&quot;,
+<span id='android-net-NetworkAgent-property-EVENT_NETWORK_INFO_CHANGED'>/** Sent by the NetworkAgent (note the EVENT vs CMD prefix) to
+</span> ConnectivityService to pass the current NetworkInfo (connection state).
+ Sent when the NetworkInfo changes, mainly due to change of state.
+ obj = NetworkInfo
+*/
+EVENT_NETWORK_INFO_CHANGED : &quot;528385&quot;,
+<span id='android-net-NetworkAgent-property-EVENT_NETWORK_CAPABILITIES_CHANGED'>/** Sent by the NetworkAgent to ConnectivityService to pass the current
+</span> NetworkCapabilties.
+ obj = NetworkCapabilities
+*/
+EVENT_NETWORK_CAPABILITIES_CHANGED : &quot;528386&quot;,
+<span id='android-net-NetworkAgent-property-EVENT_NETWORK_PROPERTIES_CHANGED'>/** Sent by the NetworkAgent to ConnectivityService to pass the current
+</span> NetworkProperties.
+ obj = NetworkProperties
+*/
+EVENT_NETWORK_PROPERTIES_CHANGED : &quot;528387&quot;,
+<span id='android-net-NetworkAgent-property-WIFI_BASE_SCORE'>/***/
+</span>WIFI_BASE_SCORE : &quot;60&quot;,
+<span id='android-net-NetworkAgent-property-EVENT_NETWORK_SCORE_CHANGED'>/** Sent by the NetworkAgent to ConnectivityService to pass the current
+</span> network score.
+ obj = network score Integer
+*/
+EVENT_NETWORK_SCORE_CHANGED : &quot;528388&quot;,
+<span id='android-net-NetworkAgent-property-CMD_REPORT_NETWORK_STATUS'>/** Sent by ConnectivityService to the NetworkAgent to inform the agent of the
+</span> networks status - whether we could use the network or could not, due to
+ either a bad network configuration (no internet link) or captive portal.
+
+ arg1 = either {@code VALID_NETWORK} or {@code INVALID_NETWORK}
+ obj = Bundle containing map from {@code REDIRECT_URL_KEY} to {@code String}
+       representing URL that Internet probe was redirect to, if it was redirected,
+       or mapping to {@code null} otherwise.
+*/
+CMD_REPORT_NETWORK_STATUS : &quot;528391&quot;,
+<span id='android-net-NetworkAgent-property-VALID_NETWORK'>/***/
+</span>VALID_NETWORK : &quot;1&quot;,
+<span id='android-net-NetworkAgent-property-INVALID_NETWORK'>/***/
+</span>INVALID_NETWORK : &quot;2&quot;,
+<span id='android-net-NetworkAgent-property-REDIRECT_URL_KEY'>/***/
+</span>REDIRECT_URL_KEY : &quot;null&quot;,
+<span id='android-net-NetworkAgent-property-EVENT_SET_EXPLICITLY_SELECTED'>/** Sent by the NetworkAgent to ConnectivityService to indicate this network was
+</span> explicitly selected.  This should be sent before the NetworkInfo is marked
+ CONNECTED so it can be given special treatment at that time.
+
+ obj = boolean indicating whether to use this network even if unvalidated
+*/
+EVENT_SET_EXPLICITLY_SELECTED : &quot;528392&quot;,
+<span id='android-net-NetworkAgent-property-CMD_SAVE_ACCEPT_UNVALIDATED'>/** Sent by ConnectivityService to the NetworkAgent to inform the agent of
+</span> whether the network should in the future be used even if not validated.
+ This decision is made by the user, but it is the network transport's
+ responsibility to remember it.
+
+ arg1 = 1 if true, 0 if false
+*/
+CMD_SAVE_ACCEPT_UNVALIDATED : &quot;528393&quot;,
+<span id='android-net-NetworkAgent-property-CMD_REQUEST_BANDWIDTH_UPDATE'>/** Sent by ConnectivityService to the NetworkAgent to inform the agent to pull
+</span> the underlying network connection for updated bandwidth information.
+*/
+CMD_REQUEST_BANDWIDTH_UPDATE : &quot;528394&quot;,
+<span id='android-net-NetworkAgent-property-CMD_START_SOCKET_KEEPALIVE'>/** Sent by ConnectivityService to the NetworkAgent to request that the specified packet be sent
+</span> periodically on the given interval.
+
+   arg1 = the slot number of the keepalive to start
+   arg2 = interval in seconds
+   obj = KeepalivePacketData object describing the data to be sent
+
+ Also used internally by ConnectivityService / KeepaliveTracker, with different semantics.
+*/
+CMD_START_SOCKET_KEEPALIVE : &quot;528395&quot;,
+<span id='android-net-NetworkAgent-property-CMD_STOP_SOCKET_KEEPALIVE'>/** Requests that the specified keepalive packet be stopped.
+</span>
+ arg1 = slot number of the keepalive to stop.
+
+ Also used internally by ConnectivityService / KeepaliveTracker, with different semantics.
+*/
+CMD_STOP_SOCKET_KEEPALIVE : &quot;528396&quot;,
+<span id='android-net-NetworkAgent-property-EVENT_SOCKET_KEEPALIVE'>/** Sent by the NetworkAgent to ConnectivityService to provide status on a socket keepalive
+</span> request. This may either be the reply to a CMD_START_SOCKET_KEEPALIVE, or an asynchronous
+ error notification.
+
+ This is also sent by KeepaliveTracker to the app's {@link android.net.SocketKeepalive},
+ so that the app's {@link android.net.SocketKeepalive.Callback} methods can be called.
+
+ arg1 = slot number of the keepalive
+ arg2 = error code
+*/
+EVENT_SOCKET_KEEPALIVE : &quot;528397&quot;,
+<span id='android-net-NetworkAgent-property-CMD_ADD_KEEPALIVE_PACKET_FILTER'>/** Sent by the KeepaliveTracker to NetworkAgent to add a packet filter.
+</span>
+ For TCP keepalive offloads, keepalive packets are sent by the firmware. However, because the
+ remote site will send ACK packets in response to the keepalive packets, the firmware also
+ needs to be configured to properly filter the ACKs to prevent the system from waking up.
+ This does not happen with UDP, so this message is TCP-specific.
+ arg1 = slot number of the keepalive to filter for.
+ obj = the keepalive packet to send repeatedly.
+*/
+CMD_ADD_KEEPALIVE_PACKET_FILTER : &quot;528400&quot;,
+<span id='android-net-NetworkAgent-property-CMD_REMOVE_KEEPALIVE_PACKET_FILTER'>/** Sent by the KeepaliveTracker to NetworkAgent to remove a packet filter. See
+</span> {@link #CMD_ADD_KEEPALIVE_PACKET_FILTER}.
+ arg1 = slot number of the keepalive packet filter to remove.
+*/
+CMD_REMOVE_KEEPALIVE_PACKET_FILTER : &quot;528401&quot;,
+<span id='android-net-NetworkAgent-property-CMD_SET_SIGNAL_STRENGTH_THRESHOLDS'>/** Sent by ConnectivityService to inform this network transport of signal strength thresholds
+</span> that when crossed should trigger a system wakeup and a NetworkCapabilities update.
+
+   obj = int[] describing signal strength thresholds.
+*/
+CMD_SET_SIGNAL_STRENGTH_THRESHOLDS : &quot;528398&quot;,
+<span id='android-net-NetworkAgent-property-CMD_PREVENT_AUTOMATIC_RECONNECT'>/** Sent by ConnectivityService to the NeworkAgent to inform the agent to avoid
+</span> automatically reconnecting to this network (e.g. via autojoin).  Happens
+ when user selects &quot;No&quot; option on the &quot;Stay connected?&quot; dialog box.
+*/
+CMD_PREVENT_AUTOMATIC_RECONNECT : &quot;528399&quot;,
+<span id='android-net-NetworkAgent-method-handleMessage'>/**
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='android-net-NetworkAgent-method-sendLinkProperties'>/**Called by the bearer code when it has new LinkProperties data.
+</span>*/
+sendLinkProperties : function(  ) {},
+
+<span id='android-net-NetworkAgent-method-sendNetworkInfo'>/**Called by the bearer code when it has new NetworkInfo data.
+</span>*/
+sendNetworkInfo : function(  ) {},
+
+<span id='android-net-NetworkAgent-method-sendNetworkCapabilities'>/**Called by the bearer code when it has new NetworkCapabilities data.
+</span>*/
+sendNetworkCapabilities : function(  ) {},
+
+<span id='android-net-NetworkAgent-method-sendNetworkScore'>/**Called by the bearer code when it has a new score for this network.
+</span>*/
+sendNetworkScore : function(  ) {},
+
+<span id='android-net-NetworkAgent-method-explicitlySelected'>/**Called by the bearer to indicate this network was manually selected by the user.
+</span> This should be called before the NetworkInfo is marked CONNECTED so that this
+ Network can be given special treatment at that time. If {@code acceptUnvalidated} is
+ {@code true}, then the system will switch to this network. If it is {@code false} and the
+ network cannot be validated, the system will ask the user whether to switch to this network.
+ If the user confirms and selects &quot;don't ask again&quot;, then the system will call
+ {@link #saveAcceptUnvalidated} to persist the user's choice. Thus, if the transport ever
+ calls this method with {@code acceptUnvalidated} set to {@code false}, it must also implement
+ {@link #saveAcceptUnvalidated} to respect the user's choice.
+*/
+explicitlySelected : function(  ) {},
+
+<span id='android-net-NetworkAgent-method-explicitlySelected'>/**Called by the bearer to indicate this network was manually selected by the user.
+</span> This should be called before the NetworkInfo is marked CONNECTED so that this
+ Network can be given special treatment at that time. If {@code acceptUnvalidated} is
+ {@code true}, then the system will switch to this network. If it is {@code false} and the
+ network cannot be validated, the system will ask the user whether to switch to this network.
+ If the user confirms and selects &quot;don't ask again&quot;, then the system will call
+ {@link #saveAcceptUnvalidated} to persist the user's choice. Thus, if the transport ever
+ calls this method with {@code acceptUnvalidated} set to {@code false}, it must also implement
+ {@link #saveAcceptUnvalidated} to respect the user's choice.
+*/
+explicitlySelected : function(  ) {},
+
+<span id='android-net-NetworkAgent-method-onSocketKeepaliveEvent'>/**Called by the network when a socket keepalive event occurs.
+</span>*/
+onSocketKeepaliveEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-fingerprint-FingerprintManager'>/**@class android.hardware.fingerprint.FingerprintManager
+</span> implements android.hardware.biometrics.BiometricAuthenticator
+
+ implements android.hardware.biometrics.BiometricFingerprintConstants
+
+@extends java.lang.Object
+
+ A class that coordinates access to the fingerprint hardware.
+ @deprecated See {@link BiometricPrompt} which shows a system-provided dialog upon starting
+ authentication. In a world where devices may have different types of biometric authentication,
+ it's much more realistic to have a system-provided authentication dialog since the method may
+ vary by vendor/device.
+*/
+var FingerprintManager = {
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-authenticate'>/**Request authentication of a crypto object. This call warms up the fingerprint hardware
+</span> and starts scanning for a fingerprint. It terminates when
+ {@link android.hardware.fingerprint.FingerprintManager.AuthenticationCallback#onAuthenticationError(int, CharSequence)} or
+ {@link android.hardware.fingerprint.FingerprintManager.AuthenticationCallback#onAuthenticationSucceeded(AuthenticationResult)} is called, at
+ which point the object is no longer valid. The operation can be canceled by using the
+ provided cancel object.
+@param {Object {FingerprintManager.CryptoObject}} crypto object associated with the call or null if none required.
+@param {Object {CancellationSignal}} cancel an object that can be used to cancel authentication
+@param {Number} flags optional flags; should be 0
+@param {Object {FingerprintManager.AuthenticationCallback}} callback an object to receive authentication events
+@param {Object {Handler}} handler an optional handler to handle callback events
+@throws IllegalArgumentException if the crypto operation is not supported or is not backed
+         by &lt;a href=&quot;{@docRoot}training/articles/keystore.html&quot;&gt;Android Keystore
+         facility&lt;/a&gt;.
+@throws IllegalStateException if the crypto primitive is not initialized.
+@deprecated See {@link BiometricPrompt#authenticate(CancellationSignal, Executor,
+ BiometricPrompt.AuthenticationCallback)} and {@link BiometricPrompt#authenticate(
+ BiometricPrompt.CryptoObject, CancellationSignal, Executor,
+ BiometricPrompt.AuthenticationCallback)}
+*/
+authenticate : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-authenticate'>/**Per-user version, see {@link android.hardware.fingerprint.FingerprintManager#authenticate(CryptoObject,
+</span> CancellationSignal, int, AuthenticationCallback, Handler)}. This version does not
+ display the BiometricPrompt.
+@param {Object {FingerprintManager.CryptoObject}} userId the user ID that the fingerprint hardware will authenticate for.
+@hide 
+*/
+authenticate : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-enroll'>/**Request fingerprint enrollment. This call warms up the fingerprint hardware
+</span> and starts scanning for fingerprints. Progress will be indicated by callbacks to the
+ {@link android.hardware.fingerprint.FingerprintManager.EnrollmentCallback} object. It terminates when
+ {@link android.hardware.fingerprint.FingerprintManager.EnrollmentCallback#onEnrollmentError(int, CharSequence)} or
+ {@link EnrollmentCallback#onEnrollmentProgress(int) is called with remaining == 0, at
+ which point the object is no longer valid. The operation can be canceled by using the
+ provided cancel object.
+@param {Object {byte[]}} token a unique token provided by a recent creation or verification of device
+ credentials (e.g. pin, pattern or password).
+@param {Object {CancellationSignal}} cancel an object that can be used to cancel enrollment
+@param {Number} flags optional flags
+@param {Number} userId the user to whom this fingerprint will belong to
+@param {Object {FingerprintManager.EnrollmentCallback}} callback an object to receive enrollment events
+@hide 
+*/
+enroll : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-preEnroll'>/**Requests a pre-enrollment auth token to tie enrollment to the confirmation of
+</span> existing device credentials (e.g. pin/pattern/password).
+@hide 
+*/
+preEnroll : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-postEnroll'>/**Finishes enrollment and cancels the current auth token.
+</span>@hide 
+*/
+postEnroll : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-setActiveUser'>/**Sets the active user. This is meant to be used to select the current profile for enrollment
+</span> to allow separate enrolled fingers for a work profile
+@param {Number} userId
+@hide 
+*/
+setActiveUser : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-remove'>/**Remove given fingerprint template from fingerprint hardware and/or protected storage.
+</span>@param {Object {Fingerprint}} fp the fingerprint item to remove
+@param {Number} userId the user who this fingerprint belongs to
+@param {Object {FingerprintManager.RemovalCallback}} callback an optional callback to verify that fingerprint templates have been
+ successfully removed. May be null of no callback is required.
+@hide 
+*/
+remove : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-enumerate'>/**Enumerate all fingerprint templates stored in hardware and/or protected storage.
+</span>@param {Number} userId the user who this fingerprint belongs to
+@param {Object {FingerprintManager.EnumerateCallback}} callback an optional callback to verify that fingerprint templates have been
+ successfully removed. May be null of no callback is required.
+@hide 
+*/
+enumerate : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-rename'>/**Renames the given fingerprint template
+</span>@param {Number} fpId the fingerprint id
+@param {Number} userId the user who this fingerprint belongs to
+@param {String} newName the new name
+@hide 
+*/
+rename : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-getEnrolledFingerprints'>/**Obtain the list of enrolled fingerprints templates.
+</span>@return {Object {java.util.List}} list of current fingerprint items
+@hide 
+*/
+getEnrolledFingerprints : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-getEnrolledFingerprints'>/**Obtain the list of enrolled fingerprints templates.
+</span>@return {Object {java.util.List}} list of current fingerprint items
+@hide 
+*/
+getEnrolledFingerprints : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-hasEnrolledTemplates'>/**
+</span>@hide 
+*/
+hasEnrolledTemplates : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-hasEnrolledTemplates'>/**
+</span>@hide 
+*/
+hasEnrolledTemplates : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-hasEnrolledFingerprints'>/**Determine if there is at least one fingerprint enrolled.
+</span>@return {Boolean} true if at least one fingerprint is enrolled, false otherwise
+@deprecated See {@link BiometricPrompt} and
+ {@link FingerprintManager#FINGERPRINT_ERROR_NO_FINGERPRINTS}
+*/
+hasEnrolledFingerprints : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-hasEnrolledFingerprints'>/**
+</span>@hide 
+*/
+hasEnrolledFingerprints : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-isHardwareDetected'>/**Determine if fingerprint hardware is present and functional.
+</span>@return {Boolean} true if hardware is present and functional, false otherwise.
+@deprecated See {@link BiometricPrompt} and
+ {@link FingerprintManager#FINGERPRINT_ERROR_HW_UNAVAILABLE}
+*/
+isHardwareDetected : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-getAuthenticatorId'>/**Retrieves the authenticator token for binding keys to the lifecycle
+</span> of the calling user's fingerprints. Used only by internal clients.
+@hide 
+*/
+getAuthenticatorId : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-addLockoutResetCallback'>/**
+</span>@hide 
+*/
+addLockoutResetCallback : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-getErrorString'>/**
+</span>@hide 
+*/
+getErrorString : function(  ) {},
+
+<span id='android-hardware-fingerprint-FingerprintManager-method-getAcquiredString'>/**
+</span>@hide 
+*/
+getAcquiredString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

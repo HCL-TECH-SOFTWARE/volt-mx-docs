@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-RecyclerView-Adapter'>/**@class com.android.internal.widget.RecyclerView.Adapter
+</span>@extends java.lang.Object
+
+ Base class for an Adapter
+
+ &lt;p&gt;Adapters provide a binding from an app-specific data set to views that are displayed
+ within a {@link com.android.internal.widget.RecyclerView}.&lt;/p&gt;
+
+ @param &lt;VH&gt; A class that extends ViewHolder that will be used by the adapter.
+*/
+var Adapter = {
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onCreateViewHolder'>/**Called when RecyclerView needs a new {@link com.android.internal.widget.RecyclerView.ViewHolder} of the given type to represent
+</span> an item.
+ &lt;p&gt;
+ This new ViewHolder should be constructed with a new View that can represent the items
+ of the given type. You can either create a new View manually or inflate it from an XML
+ layout file.
+ &lt;p&gt;
+ The new ViewHolder will be used to display items of the adapter using
+ {@link #onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
+ different items in the data set, it is a good idea to cache references to sub views of
+ the View to avoid unnecessary {@link View#findViewById(int)} calls.
+@param {Object {ViewGroup}} parent The ViewGroup into which the new View will be added after it is bound to
+               an adapter position.
+@param {Number} viewType The view type of the new View.
+@return {Object {com.android.internal.widget.RecyclerView.ViewHolder}} A new ViewHolder that holds a View of the given view type.
+@see #getItemViewType(int)
+@see #onBindViewHolder(ViewHolder, int)
+*/
+onCreateViewHolder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onBindViewHolder'>/**Called by RecyclerView to display the data at the specified position. This method should
+</span> update the contents of the {@link com.android.internal.widget.RecyclerView.ViewHolder#itemView} to reflect the item at the given
+ position.
+ &lt;p&gt;
+ Note that unlike {@link android.widget.ListView}, RecyclerView will not call this method
+ again if the position of the item changes in the data set unless the item itself is
+ invalidated or the new position cannot be determined. For this reason, you should only
+ use the &lt;code&gt;position&lt;/code&gt; parameter while acquiring the related data item inside
+ this method and should not keep a copy of it. If you need the position of an item later
+ on (e.g. in a click listener), use {@link com.android.internal.widget.RecyclerView.ViewHolder#getAdapterPosition()} which will
+ have the updated adapter position.
+
+ Override {@link #onBindViewHolder(ViewHolder, int, List)} instead if Adapter can
+ handle efficient partial bind.
+@param {Object {RecyclerView.ViewHolder}} holder The ViewHolder which should be updated to represent the contents of the
+        item at the given position in the data set.
+@param {Number} position The position of the item within the adapter's data set.
+*/
+onBindViewHolder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onBindViewHolder'>/**Called by RecyclerView to display the data at the specified position. This method
+</span> should update the contents of the {@link com.android.internal.widget.RecyclerView.ViewHolder#itemView} to reflect the item at
+ the given position.
+ &lt;p&gt;
+ Note that unlike {@link android.widget.ListView}, RecyclerView will not call this method
+ again if the position of the item changes in the data set unless the item itself is
+ invalidated or the new position cannot be determined. For this reason, you should only
+ use the &lt;code&gt;position&lt;/code&gt; parameter while acquiring the related data item inside
+ this method and should not keep a copy of it. If you need the position of an item later
+ on (e.g. in a click listener), use {@link com.android.internal.widget.RecyclerView.ViewHolder#getAdapterPosition()} which will
+ have the updated adapter position.
+ &lt;p&gt;
+ Partial bind vs full bind:
+ &lt;p&gt;
+ The payloads parameter is a merge list from {@link #notifyItemChanged(int, Object)} or
+ {@link #notifyItemRangeChanged(int, int, Object)}.  If the payloads list is not empty,
+ the ViewHolder is currently bound to old data and Adapter may run an efficient partial
+ update using the payload info.  If the payload is empty,  Adapter must run a full bind.
+ Adapter should not assume that the payload passed in notify methods will be received by
+ onBindViewHolder().  For example when the view is not attached to the screen, the
+ payload in notifyItemChange() will be simply dropped.
+@param {Object {RecyclerView.ViewHolder}} holder The ViewHolder which should be updated to represent the contents of the
+               item at the given position in the data set.
+@param {Number} position The position of the item within the adapter's data set.
+@param {Object {java.util.List}} payloads A non-null list of merged payloads. Can be empty list if requires full
+                 update.
+*/
+onBindViewHolder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-createViewHolder'>/**This method calls {@link #onCreateViewHolder(ViewGroup, int)} to create a new
+</span> {@link com.android.internal.widget.RecyclerView.ViewHolder} and initializes some private fields to be used by RecyclerView.
+@see #onCreateViewHolder(ViewGroup, int)
+*/
+createViewHolder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-bindViewHolder'>/**This method internally calls {@link #onBindViewHolder(ViewHolder, int)} to update the
+</span> {@link com.android.internal.widget.RecyclerView.ViewHolder} contents with the item at the given position and also sets up some
+ private fields to be used by RecyclerView.
+@see #onBindViewHolder(ViewHolder, int)
+*/
+bindViewHolder : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-getItemViewType'>/**Return the view type of the item at &lt;code&gt;position&lt;/code&gt; for the purposes
+</span> of view recycling.
+
+ &lt;p&gt;The default implementation of this method returns 0, making the assumption of
+ a single view type for the adapter. Unlike ListView adapters, types need not
+ be contiguous. Consider using id resources to uniquely identify item view types.
+@param {Number} position position to query
+@return {Number} integer value identifying the type of the view needed to represent the item at
+                 &lt;code&gt;position&lt;/code&gt;. Type codes need not be contiguous.
+*/
+getItemViewType : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-setHasStableIds'>/**Indicates whether each item in the data set can be represented with a unique identifier
+</span> of type {@link java.lang.Long}.
+@param {Boolean} hasStableIds Whether items in data set have unique identifiers or not.
+@see #hasStableIds()
+@see #getItemId(int)
+*/
+setHasStableIds : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-getItemId'>/**Return the stable ID for the item at &lt;code&gt;position&lt;/code&gt;. If {@link #hasStableIds}()
+</span> would return false this method should return {@link #NO_ID}. The default implementation
+ of this method returns {@link #NO_ID}.
+@param {Number} position Adapter position to query
+@return {Number} the stable ID of the item at position
+*/
+getItemId : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-getItemCount'>/**Returns the total number of items in the data set held by the adapter.
+</span>@return {Number} The total number of items in this adapter.
+*/
+getItemCount : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-hasStableIds'>/**Returns true if this adapter publishes a unique &lt;code&gt;long&lt;/code&gt; value that can
+</span> act as a key for the item at a given position in the data set. If that item is relocated
+ in the data set, the ID returned for that item should be the same.
+@return {Boolean} true if this adapter's items have stable IDs
+*/
+hasStableIds : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onViewRecycled'>/**Called when a view created by this adapter has been recycled.
+</span>
+ &lt;p&gt;A view is recycled when a {@link com.android.internal.widget.RecyclerView.LayoutManager} decides that it no longer
+ needs to be attached to its parent {@link com.android.internal.widget.RecyclerView}. This can be because it has
+ fallen out of visibility or a set of cached views represented by views still
+ attached to the parent RecyclerView. If an item view has large or expensive data
+ bound to it such as large bitmaps, this may be a good place to release those
+ resources.&lt;/p&gt;
+ &lt;p&gt;
+ RecyclerView calls this method right before clearing ViewHolder's internal data and
+ sending it to RecycledViewPool. This way, if ViewHolder was holding valid information
+ before being recycled, you can call {@link com.android.internal.widget.RecyclerView.ViewHolder#getAdapterPosition()} to get
+ its adapter position.
+@param {Object {RecyclerView.ViewHolder}} holder The ViewHolder for the view being recycled
+*/
+onViewRecycled : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onFailedToRecycleView'>/**Called by the RecyclerView if a ViewHolder created by this Adapter cannot be recycled
+</span> due to its transient state. Upon receiving this callback, Adapter can clear the
+ animation(s) that effect the View's transient state and return &lt;code&gt;true&lt;/code&gt; so that
+ the View can be recycled. Keep in mind that the View in question is already removed from
+ the RecyclerView.
+ &lt;p&gt;
+ In some cases, it is acceptable to recycle a View although it has transient state. Most
+ of the time, this is a case where the transient state will be cleared in
+ {@link #onBindViewHolder(ViewHolder, int)} call when View is rebound to a new position.
+ For this reason, RecyclerView leaves the decision to the Adapter and uses the return
+ value of this method to decide whether the View should be recycled or not.
+ &lt;p&gt;
+ Note that when all animations are created by {@link com.android.internal.widget.RecyclerView.ItemAnimator}, you
+ should never receive this callback because RecyclerView keeps those Views as children
+ until their animations are complete. This callback is useful when children of the item
+ views create animations which may not be easy to implement using an {@link com.android.internal.widget.RecyclerView.ItemAnimator}.
+ &lt;p&gt;
+ You should &lt;em&gt;never&lt;/em&gt; fix this issue by calling
+ &lt;code&gt;holder.itemView.setHasTransientState(false);&lt;/code&gt; unless you've previously called
+ &lt;code&gt;holder.itemView.setHasTransientState(true);&lt;/code&gt;. Each
+ &lt;code&gt;View.setHasTransientState(true)&lt;/code&gt; call must be matched by a
+ &lt;code&gt;View.setHasTransientState(false)&lt;/code&gt; call, otherwise, the state of the View
+ may become inconsistent. You should always prefer to end or cancel animations that are
+ triggering the transient state instead of handling it manually.
+@param {Object {RecyclerView.ViewHolder}} holder The ViewHolder containing the View that could not be recycled due to its
+               transient state.
+@return {Boolean} True if the View should be recycled, false otherwise. Note that if this method
+ returns &lt;code&gt;true&lt;/code&gt;, RecyclerView &lt;em&gt;will ignore&lt;/em&gt; the transient state of
+ the View and recycle it regardless. If this method returns &lt;code&gt;false&lt;/code&gt;,
+ RecyclerView will check the View's transient state again before giving a final decision.
+ Default implementation returns false.
+*/
+onFailedToRecycleView : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onViewAttachedToWindow'>/**Called when a view created by this adapter has been attached to a window.
+</span>
+ &lt;p&gt;This can be used as a reasonable signal that the view is about to be seen
+ by the user. If the adapter previously freed any resources in
+ {@link #onViewDetachedFromWindow(RecyclerView.ViewHolder) onViewDetachedFromWindow}
+ those resources should be restored here.&lt;/p&gt;
+@param {Object {RecyclerView.ViewHolder}} holder Holder of the view being attached
+*/
+onViewAttachedToWindow : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onViewDetachedFromWindow'>/**Called when a view created by this adapter has been detached from its window.
+</span>
+ &lt;p&gt;Becoming detached from the window is not necessarily a permanent condition;
+ the consumer of an Adapter's views may choose to cache views offscreen while they
+ are not visible, attaching and detaching them as appropriate.&lt;/p&gt;
+@param {Object {RecyclerView.ViewHolder}} holder Holder of the view being detached
+*/
+onViewDetachedFromWindow : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-hasObservers'>/**Returns true if one or more observers are attached to this adapter.
+</span>@return {Boolean} true if this adapter has observers
+*/
+hasObservers : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-registerAdapterDataObserver'>/**Register a new observer to listen for data changes.
+</span>
+ &lt;p&gt;The adapter may publish a variety of events describing specific changes.
+ Not all adapters may support all change types and some may fall back to a generic
+ {@link com.android.internal.widget.RecyclerView.AdapterDataObserver#onChanged()
+ &quot;something changed&quot;} event if more specific data is not available.&lt;/p&gt;
+
+ &lt;p&gt;Components registering observers with an adapter are responsible for
+ {@link #unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver)
+ unregistering} those observers when finished.&lt;/p&gt;
+@param {Object {RecyclerView.AdapterDataObserver}} observer Observer to register
+@see #unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver)
+*/
+registerAdapterDataObserver : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-unregisterAdapterDataObserver'>/**Unregister an observer currently listening for data changes.
+</span>
+ &lt;p&gt;The unregistered observer will no longer receive events about changes
+ to the adapter.&lt;/p&gt;
+@param {Object {RecyclerView.AdapterDataObserver}} observer Observer to unregister
+@see #registerAdapterDataObserver(RecyclerView.AdapterDataObserver)
+*/
+unregisterAdapterDataObserver : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onAttachedToRecyclerView'>/**Called by RecyclerView when it starts observing this Adapter.
+</span> &lt;p&gt;
+ Keep in mind that same adapter may be observed by multiple RecyclerViews.
+@param {Object {RecyclerView}} recyclerView The RecyclerView instance which started observing this adapter.
+@see #onDetachedFromRecyclerView(RecyclerView)
+*/
+onAttachedToRecyclerView : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-onDetachedFromRecyclerView'>/**Called by RecyclerView when it stops observing this Adapter.
+</span>@param {Object {RecyclerView}} recyclerView The RecyclerView instance which stopped observing this adapter.
+@see #onAttachedToRecyclerView(RecyclerView)
+*/
+onDetachedFromRecyclerView : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyDataSetChanged'>/**Notify any registered observers that the data set has changed.
+</span>
+ &lt;p&gt;There are two different classes of data change events, item changes and structural
+ changes. Item changes are when a single item has its data updated but no positional
+ changes have occurred. Structural changes are when items are inserted, removed or moved
+ within the data set.&lt;/p&gt;
+
+ &lt;p&gt;This event does not specify what about the data set has changed, forcing
+ any observers to assume that all existing items and structure may no longer be valid.
+ LayoutManagers will be forced to fully rebind and relayout all visible views.&lt;/p&gt;
+
+ &lt;p&gt;&lt;code&gt;RecyclerView&lt;/code&gt; will attempt to synthesize visible structural change events
+ for adapters that report that they have {@link #hasStableIds() stable IDs} when
+ this method is used. This can help for the purposes of animation and visual
+ object persistence but individual item views will still need to be rebound
+ and relaid out.&lt;/p&gt;
+
+ &lt;p&gt;If you are writing an adapter it will always be more efficient to use the more
+ specific change events if you can. Rely on &lt;code&gt;notifyDataSetChanged()&lt;/code&gt;
+ as a last resort.&lt;/p&gt;
+@see #notifyItemChanged(int)
+@see #notifyItemInserted(int)
+@see #notifyItemRemoved(int)
+@see #notifyItemRangeChanged(int, int)
+@see #notifyItemRangeInserted(int, int)
+@see #notifyItemRangeRemoved(int, int)
+*/
+notifyDataSetChanged : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemChanged'>/**Notify any registered observers that the item at &lt;code&gt;position&lt;/code&gt; has changed.
+</span> Equivalent to calling &lt;code&gt;notifyItemChanged(position, null);&lt;/code&gt;.
+
+ &lt;p&gt;This is an item change event, not a structural change event. It indicates that any
+ reflection of the data at &lt;code&gt;position&lt;/code&gt; is out of date and should be updated.
+ The item at &lt;code&gt;position&lt;/code&gt; retains the same identity.&lt;/p&gt;
+@param {Number} position Position of the item that has changed
+@see #notifyItemRangeChanged(int, int)
+*/
+notifyItemChanged : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemChanged'>/**Notify any registered observers that the item at &lt;code&gt;position&lt;/code&gt; has changed with
+</span> an optional payload object.
+
+ &lt;p&gt;This is an item change event, not a structural change event. It indicates that any
+ reflection of the data at &lt;code&gt;position&lt;/code&gt; is out of date and should be updated.
+ The item at &lt;code&gt;position&lt;/code&gt; retains the same identity.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Client can optionally pass a payload for partial change. These payloads will be merged
+ and may be passed to adapter's {@link #onBindViewHolder(ViewHolder, int, List)} if the
+ item is already represented by a ViewHolder and it will be rebound to the same
+ ViewHolder. A notifyItemRangeChanged() with null payload will clear all existing
+ payloads on that item and prevent future payload until
+ {@link #onBindViewHolder(ViewHolder, int, List)} is called. Adapter should not assume
+ that the payload will always be passed to onBindViewHolder(), e.g. when the view is not
+ attached, the payload will be simply dropped.
+@param {Number} position Position of the item that has changed
+@param {Object {Object}} payload Optional parameter, use null to identify a &quot;full&quot; update
+@see #notifyItemRangeChanged(int, int)
+*/
+notifyItemChanged : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemRangeChanged'>/**Notify any registered observers that the &lt;code&gt;itemCount&lt;/code&gt; items starting at
+</span> position &lt;code&gt;positionStart&lt;/code&gt; have changed.
+ Equivalent to calling &lt;code&gt;notifyItemRangeChanged(position, itemCount, null);&lt;/code&gt;.
+
+ &lt;p&gt;This is an item change event, not a structural change event. It indicates that
+ any reflection of the data in the given position range is out of date and should
+ be updated. The items in the given range retain the same identity.&lt;/p&gt;
+@param {Number} positionStart Position of the first item that has changed
+@param {Number} itemCount Number of items that have changed
+@see #notifyItemChanged(int)
+*/
+notifyItemRangeChanged : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemRangeChanged'>/**Notify any registered observers that the &lt;code&gt;itemCount&lt;/code&gt; items starting at
+</span> position &lt;code&gt;positionStart&lt;/code&gt; have changed. An optional payload can be
+ passed to each changed item.
+
+ &lt;p&gt;This is an item change event, not a structural change event. It indicates that any
+ reflection of the data in the given position range is out of date and should be updated.
+ The items in the given range retain the same identity.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Client can optionally pass a payload for partial change. These payloads will be merged
+ and may be passed to adapter's {@link #onBindViewHolder(ViewHolder, int, List)} if the
+ item is already represented by a ViewHolder and it will be rebound to the same
+ ViewHolder. A notifyItemRangeChanged() with null payload will clear all existing
+ payloads on that item and prevent future payload until
+ {@link #onBindViewHolder(ViewHolder, int, List)} is called. Adapter should not assume
+ that the payload will always be passed to onBindViewHolder(), e.g. when the view is not
+ attached, the payload will be simply dropped.
+@param {Number} positionStart Position of the first item that has changed
+@param {Number} itemCount Number of items that have changed
+@param {Object {Object}} payload  Optional parameter, use null to identify a &quot;full&quot; update
+@see #notifyItemChanged(int)
+*/
+notifyItemRangeChanged : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemInserted'>/**Notify any registered observers that the item reflected at &lt;code&gt;position&lt;/code&gt;
+</span> has been newly inserted. The item previously at &lt;code&gt;position&lt;/code&gt; is now at
+ position &lt;code&gt;position + 1&lt;/code&gt;.
+
+ &lt;p&gt;This is a structural change event. Representations of other existing items in the
+ data set are still considered up to date and will not be rebound, though their
+ positions may be altered.&lt;/p&gt;
+@param {Number} position Position of the newly inserted item in the data set
+@see #notifyItemRangeInserted(int, int)
+*/
+notifyItemInserted : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemMoved'>/**Notify any registered observers that the item reflected at &lt;code&gt;fromPosition&lt;/code&gt;
+</span> has been moved to &lt;code&gt;toPosition&lt;/code&gt;.
+
+ &lt;p&gt;This is a structural change event. Representations of other existing items in the
+ data set are still considered up to date and will not be rebound, though their
+ positions may be altered.&lt;/p&gt;
+@param {Number} fromPosition Previous position of the item.
+@param {Number} toPosition New position of the item.
+*/
+notifyItemMoved : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemRangeInserted'>/**Notify any registered observers that the currently reflected &lt;code&gt;itemCount&lt;/code&gt;
+</span> items starting at &lt;code&gt;positionStart&lt;/code&gt; have been newly inserted. The items
+ previously located at &lt;code&gt;positionStart&lt;/code&gt; and beyond can now be found starting
+ at position &lt;code&gt;positionStart + itemCount&lt;/code&gt;.
+
+ &lt;p&gt;This is a structural change event. Representations of other existing items in the
+ data set are still considered up to date and will not be rebound, though their positions
+ may be altered.&lt;/p&gt;
+@param {Number} positionStart Position of the first item that was inserted
+@param {Number} itemCount Number of items inserted
+@see #notifyItemInserted(int)
+*/
+notifyItemRangeInserted : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemRemoved'>/**Notify any registered observers that the item previously located at &lt;code&gt;position&lt;/code&gt;
+</span> has been removed from the data set. The items previously located at and after
+ &lt;code&gt;position&lt;/code&gt; may now be found at &lt;code&gt;oldPosition - 1&lt;/code&gt;.
+
+ &lt;p&gt;This is a structural change event. Representations of other existing items in the
+ data set are still considered up to date and will not be rebound, though their positions
+ may be altered.&lt;/p&gt;
+@param {Number} position Position of the item that has now been removed
+@see #notifyItemRangeRemoved(int, int)
+*/
+notifyItemRemoved : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Adapter-method-notifyItemRangeRemoved'>/**Notify any registered observers that the &lt;code&gt;itemCount&lt;/code&gt; items previously
+</span> located at &lt;code&gt;positionStart&lt;/code&gt; have been removed from the data set. The items
+ previously located at and after &lt;code&gt;positionStart + itemCount&lt;/code&gt; may now be found
+ at &lt;code&gt;oldPosition - itemCount&lt;/code&gt;.
+
+ &lt;p&gt;This is a structural change event. Representations of other existing items in the data
+ set are still considered up to date and will not be rebound, though their positions
+ may be altered.&lt;/p&gt;
+@param {Number} positionStart Previous position of the first item that was removed
+@param {Number} itemCount Number of items removed from the data set
+*/
+notifyItemRangeRemoved : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

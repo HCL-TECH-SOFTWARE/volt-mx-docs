@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-carrierdefaultapp-CustomConfigLoader'>/**@class com.android.carrierdefaultapp.CustomConfigLoader
+</span>@extends java.lang.Object
+
+ Default carrier app allows carrier customization. OEMs could configure a list
+ of carrier actions defined in {@link com.android.carrierdefaultapp.CarrierActionUtils
+ CarrierActionUtils} to act upon certain signal or even different args of the same signal.
+ This allows different interpretations of the signal between carriers and could easily alter the
+ app's behavior in a configurable way. This helper class loads and parses the carrier configs
+ and return a list of predefined carrier actions for the given input signal.
+*/
+var CustomConfigLoader = {
+
+<span id='com-android-carrierdefaultapp-CustomConfigLoader-method-loadCarrierActionList'>/**loads and parses the carrier config, return a list of carrier action for the given signal
+</span>@param {Object {Context}} context
+@param {Object {Intent}} intent passing signal for config match
+@return {Object {java.util.List}} a list of carrier action for the given signal based on the carrier config.
+
+  Example: input intent TelephonyIntent.ACTION_CARRIER_SIGNAL_REQUEST_NETWORK_FAILED
+  This intent allows fined-grained matching based on both intent type &amp; extra values:
+  apnType and errorCode.
+  apnType read from passing intent is &quot;default&quot; and errorCode is 0x26 for example and
+  returned carrier config from carrier_default_actions_on_redirection_string_array is
+  {
+      &quot;default, 0x26:1,4&quot;, // 0x26(NETWORK_FAILURE)
+      &quot;default, 0x70:2,3&quot; // 0x70(APN_TYPE_CONFLICT)
+  }
+  [1, 4] // 1(CARRIER_ACTION_DISABLE_METERED_APNS), 4(CARRIER_ACTION_SHOW_PORTAL_NOTIFICATION)
+  returns as the action index list based on the matching rule.
+*/
+loadCarrierActionList : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

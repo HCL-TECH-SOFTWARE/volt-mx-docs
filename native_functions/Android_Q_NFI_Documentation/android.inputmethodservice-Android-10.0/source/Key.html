@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-inputmethodservice-Keyboard-Key'>/**@class android.inputmethodservice.Keyboard.Key
+</span>@extends java.lang.Object
+
+ Class for describing the position and characteristics of a single key in the keyboard.
+ 
+ @attr ref android.R.styleable#Keyboard_keyWidth
+ @attr ref android.R.styleable#Keyboard_keyHeight
+ @attr ref android.R.styleable#Keyboard_horizontalGap
+ @attr ref android.R.styleable#Keyboard_Key_codes
+ @attr ref android.R.styleable#Keyboard_Key_keyIcon
+ @attr ref android.R.styleable#Keyboard_Key_keyLabel
+ @attr ref android.R.styleable#Keyboard_Key_iconPreview
+ @attr ref android.R.styleable#Keyboard_Key_isSticky
+ @attr ref android.R.styleable#Keyboard_Key_isRepeatable
+ @attr ref android.R.styleable#Keyboard_Key_isModifier
+ @attr ref android.R.styleable#Keyboard_Key_popupKeyboard
+ @attr ref android.R.styleable#Keyboard_Key_popupCharacters
+ @attr ref android.R.styleable#Keyboard_Key_keyOutputText
+ @attr ref android.R.styleable#Keyboard_Key_keyEdgeFlags
+*/
+var Key = {
+
+<span id='android-inputmethodservice-Keyboard-Key-property-codes'>/**
+</span> All the key codes (unicode or custom code) that this key could generate, zero'th 
+ being the most important.
+*/
+codes : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-label'>/**Label to display */
+</span>label : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-icon'>/**Icon to display instead of a label. Icon takes precedence over a label */
+</span>icon : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-iconPreview'>/**Preview version of the icon, for the preview popup */
+</span>iconPreview : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-width'>/**Width of the key, not including the gap */
+</span>width : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-height'>/**Height of the key, not including the gap */
+</span>height : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-gap'>/**The horizontal gap before this key */
+</span>gap : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-sticky'>/**Whether this key is sticky, i.e., a toggle key */
+</span>sticky : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-x'>/**X coordinate of the key in the keyboard layout */
+</span>x : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-y'>/**Y coordinate of the key in the keyboard layout */
+</span>y : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-pressed'>/**The current pressed state of this key */
+</span>pressed : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-on'>/**If this is a sticky key, is it on? */
+</span>on : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-text'>/**Text to output when pressed. This can be multiple characters, like &quot;.com&quot; */
+</span>text : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-popupCharacters'>/**Popup characters */
+</span>popupCharacters : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-edgeFlags'>/**
+</span> Flags that specify the anchoring to edges of the keyboard for detecting touch events
+ that are just out of the boundary of the key. This is a bit mask of 
+ {@link android.inputmethodservice.Keyboard#EDGE_LEFT}, {@link android.inputmethodservice.Keyboard#EDGE_RIGHT}, {@link android.inputmethodservice.Keyboard#EDGE_TOP} and
+ {@link android.inputmethodservice.Keyboard#EDGE_BOTTOM}.
+*/
+edgeFlags : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-modifier'>/**Whether this is a modifier key, such as Shift or Alt */
+</span>modifier : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-popupResId'>/**
+</span> If this key pops up a mini keyboard, this is the resource id for the XML layout for that
+ keyboard.
+*/
+popupResId : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-property-repeatable'>/**Whether this key repeats itself when held down */
+</span>repeatable : &quot;null&quot;,
+<span id='android-inputmethodservice-Keyboard-Key-method-onPressed'>/**Informs the key that it has been pressed, in case it needs to change its appearance or
+</span> state.
+@see #onReleased(boolean)
+*/
+onPressed : function(  ) {},
+
+<span id='android-inputmethodservice-Keyboard-Key-method-onReleased'>/**Changes the pressed state of the key.
+</span>
+ &lt;p&gt;Toggled state of the key will be flipped when all the following conditions are
+ fulfilled:&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;This is a sticky key, that is, {@link #sticky} is {@code true}.
+     &lt;li&gt;The parameter {@code inside} is {@code true}.
+     &lt;li&gt;{@link android.os.Build.VERSION#SDK_INT} is greater than
+         {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}.
+ &lt;/ul&gt;
+@param {Boolean} inside whether the finger was released inside the key. Works only on Android M and
+ later. See the method document for details.
+@see #onPressed()
+*/
+onReleased : function(  ) {},
+
+<span id='android-inputmethodservice-Keyboard-Key-method-isInside'>/**Detects if a point falls inside this key.
+</span>@param {Number} x the x-coordinate of the point
+@param {Number} y the y-coordinate of the point
+@return {Boolean} whether or not the point falls inside the key. If the key is attached to an edge,
+ it will assume that all points between the key and the edge are considered to be inside
+ the key.
+*/
+isInside : function(  ) {},
+
+<span id='android-inputmethodservice-Keyboard-Key-method-squaredDistanceFrom'>/**Returns the square of the distance between the center of the key and the given point.
+</span>@param {Number} x the x-coordinate of the point
+@param {Number} y the y-coordinate of the point
+@return {Number} the square of the distance of the point from the center of the key
+*/
+squaredDistanceFrom : function(  ) {},
+
+<span id='android-inputmethodservice-Keyboard-Key-method-getCurrentDrawableState'>/**Returns the drawable state for the key, based on the current state and type of the key.
+</span>@return {Number} the drawable state of the key.
+@see android.graphics.drawable.StateListDrawable#setState(int[])
+*/
+getCurrentDrawableState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

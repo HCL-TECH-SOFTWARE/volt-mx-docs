@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ims-ImsCall-Listener'>/**@class com.android.ims.ImsCall.Listener
+</span>@extends java.lang.Object
+
+ Listener for events relating to an IMS call, such as when a call is being
+ received (&quot;on ringing&quot;) or a call is outgoing (&quot;on calling&quot;).
+ &lt;p&gt;Many of these events are also received by {@link com.android.ims.ImsCallSession.Listener}.&lt;/p&gt;
+*/
+var Listener = {
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallProgressing'>/**Called when a request is sent out to initiate a new call
+</span> and 1xx response is received from the network.
+ The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallProgressing : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallStarted'>/**Called when the call is established.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallStarted : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallStartFailed'>/**Called when the call setup is failed.
+</span> The default implementation calls {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the call setup failure
+*/
+onCallStartFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallTerminated'>/**Called when the call is terminated.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the call termination
+*/
+onCallTerminated : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallHeld'>/**Called when the call is in hold.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallHeld : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallHoldFailed'>/**Called when the call hold is failed.
+</span> The default implementation calls {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the call hold failure
+*/
+onCallHoldFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallHoldReceived'>/**Called when the call hold is received from the remote user.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallHoldReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallResumed'>/**Called when the call is in call.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallResumed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallResumeFailed'>/**Called when the call resume is failed.
+</span> The default implementation calls {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the call resume failure
+*/
+onCallResumeFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallResumeReceived'>/**Called when the call resume is received from the remote user.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallResumeReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallMerged'>/**Called when the call is in call.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the active IMS call
+@param {Object {ImsCall}} peerCall the call object that carries out the held IMS call
+@param {Boolean} swapCalls {@code true} if the foreground and background calls should be swapped
+                              now that the merge has completed.
+*/
+onCallMerged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallMergeFailed'>/**Called when the call merge is failed.
+</span> The default implementation calls {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the call merge failure
+*/
+onCallMergeFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallUpdated'>/**Called when the call is updated (except for hold/unhold).
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallUpdated : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallUpdateFailed'>/**Called when the call update is failed.
+</span> The default implementation calls {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the call update failure
+*/
+onCallUpdateFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallUpdateReceived'>/**Called when the call update is received from the remote user.
+</span>@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallUpdateReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallConferenceExtended'>/**Called when the call is extended to the conference call.
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsCall}} newCall the call object that is extended to the conference from the active call
+*/
+onCallConferenceExtended : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallConferenceExtendFailed'>/**Called when the conference extension is failed.
+</span> The default implementation calls {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the conference extension failure
+*/
+onCallConferenceExtendFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallConferenceExtendReceived'>/**Called when the conference extension is received from the remote user.
+</span>@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsCall}} newCall the call object that is extended to the conference from the active call
+*/
+onCallConferenceExtendReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallInviteParticipantsRequestDelivered'>/**Called when the invitation request of the participants is delivered to
+</span> the conference server.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallInviteParticipantsRequestDelivered : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallInviteParticipantsRequestFailed'>/**Called when the invitation request of the participants is failed.
+</span>@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the conference invitation failure
+*/
+onCallInviteParticipantsRequestFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallRemoveParticipantsRequestDelivered'>/**Called when the removal request of the participants is delivered to
+</span> the conference server.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallRemoveParticipantsRequestDelivered : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallRemoveParticipantsRequestFailed'>/**Called when the removal request of the participants is failed.
+</span>@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of the conference removal failure
+*/
+onCallRemoveParticipantsRequestFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallConferenceStateUpdated'>/**Called when the conference state is updated.
+</span>@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsConferenceState}} state state of the participant who is participated in the conference call
+*/
+onCallConferenceStateUpdated : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onConferenceParticipantsStateChanged'>/**Called when the state of IMS conference participant(s) has changed.
+</span>@param {Object {ImsCall}} call the call object that carries out the IMS call.
+@param {Object {java.util.List}} participants the participant(s) and their new state information.
+*/
+onConferenceParticipantsStateChanged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallUssdMessageReceived'>/**Called when the USSD message is received from the network.
+</span>@param {Object {ImsCall}} mode mode of the USSD message (REQUEST / NOTIFY)
+@param {Number} ussdMessage USSD message
+*/
+onCallUssdMessageReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallError'>/**Called when an error occurs. The default implementation is no op.
+</span> overridden. The default implementation is no op. Error events are
+ not re-directed to this callback and are handled in {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Object {ImsReasonInfo}} reasonInfo detailed reason of this error
+@see ImsReasonInfo
+*/
+onCallError : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallStateChanged'>/**Called when an event occurs and the corresponding callback is not
+</span> overridden. The default implementation is no op. Error events are
+ not re-directed to this callback and are handled in {@link #onCallError}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallStateChanged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallStateChanged'>/**Called when the call moves the hold state to the conversation state.
+</span> For example, when merging the active &amp; hold call, the state of all the hold call
+ will be changed from hold state to conversation state.
+ This callback method can be invoked even though the application does not trigger
+ any operations.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Number} state the detailed state of call state changes;
+      Refer to CALL_STATE_* in {@link ImsCall}
+*/
+onCallStateChanged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallSuppServiceReceived'>/**Called when the call supp service is received
+</span> The default implementation calls {@link #onCallStateChanged}.
+@param {Object {ImsCall}} call the call object that carries out the IMS call
+*/
+onCallSuppServiceReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallSessionTtyModeReceived'>/**Called when TTY mode of remote party changed
+</span>@param {Object {ImsCall}} call the call object that carries out the IMS call
+@param {Number} mode TTY mode of remote party
+*/
+onCallSessionTtyModeReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallHandover'>/**Called when handover occurs from one access technology to another.
+</span>@param {Object {ImsCall}} imsCall ImsCall object
+@param {Number} srcAccessTech original access technology
+@param {Number} targetAccessTech new access technology
+@param {Object {ImsReasonInfo}} reasonInfo
+*/
+onCallHandover : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onRttModifyRequestReceived'>/**Called when the remote party issues an RTT modify request
+</span>@param {Object {ImsCall}} imsCall ImsCall object
+*/
+onRttModifyRequestReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onRttModifyResponseReceived'>/**Called when the remote party responds to a locally-issued RTT request.
+</span>@param {Object {ImsCall}} imsCall ImsCall object
+@param {Number} status The status of the request. See
+               {@link Connection.RttModifyStatus} for possible values.
+*/
+onRttModifyResponseReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onRttMessageReceived'>/**Called when the remote party has sent some characters via RTT
+</span>@param {Object {ImsCall}} imsCall ImsCall object
+@param {String} message A string containing the transmitted characters.
+*/
+onRttMessageReceived : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallHandoverFailed'>/**Called when handover from one access technology to another fails.
+</span>@param {Object {ImsCall}} imsCall call that failed the handover.
+@param {Number} srcAccessTech original access technology
+@param {Number} targetAccessTech new access technology
+@param {Object {ImsReasonInfo}} reasonInfo
+*/
+onCallHandoverFailed : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onMultipartyStateChanged'>/**Notifies of a change to the multiparty state for this {@code ImsCall}.
+</span>@param {Object {ImsCall}} imsCall The IMS call.
+@param {Boolean} isMultiParty {@code true} if the call became multiparty, {@code false}
+      otherwise.
+*/
+onMultipartyStateChanged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onRttAudioIndicatorChanged'>/**Called when rtt call audio indicator has changed.
+</span>@param {Object {ImsCall}} imsCall ImsCall object
+@param {Object {ImsStreamMediaProfile}} profile updated ImsStreamMediaProfile profile.
+*/
+onRttAudioIndicatorChanged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-Listener-method-onCallQualityChanged'>/**Called when the call quality has changed.
+</span>@param {Object {ImsCall}} imsCall ImsCall object
+@param {Object {CallQuality}} callQuality the updated CallQuality
+*/
+onCallQualityChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

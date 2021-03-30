@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-format-DateFormat'>/**@class android.text.format.DateFormat
+</span>@extends java.lang.Object
+
+ Utility class for producing strings with formatted date/time.
+
+ &lt;p&gt;Most callers should avoid supplying their own format strings to this
+ class' {@code format} methods and rely on the correctly localized ones
+ supplied by the system. This class' factory methods return
+ appropriately-localized {@link java.text.DateFormat} instances, suitable
+ for both formatting and parsing dates. For the canonical documentation
+ of format strings, see {@link java.text.SimpleDateFormat}.
+
+ &lt;p&gt;In cases where the system does not provide a suitable pattern,
+ this class offers the {@link #getBestDateTimePattern} method.
+
+ &lt;p&gt;The {@code format} methods in this class implement a subset of Unicode
+ &lt;a href=&quot;http://www.unicode.org/reports/tr35/#Date_Format_Patterns&quot;&gt;UTS #35&lt;/a&gt; patterns.
+ The subset currently supported by this class includes the following format characters:
+ {@code acdEHhLKkLMmsyz}. Up to API level 17, only {@code adEhkMmszy} were supported.
+ Note that this class incorrectly implements {@code k} as if it were {@code H} for backwards
+ compatibility.
+
+ &lt;p&gt;See {@link java.text.SimpleDateFormat} for more documentation
+ about patterns, or if you need a more complete or correct implementation.
+ Note that the non-{@code format} methods in this class are implemented by
+ {@code SimpleDateFormat}.
+*/
+var DateFormat = {
+
+<span id='android-text-format-DateFormat-property-QUOTE'>/** @deprecated Use a literal {@code '} instead.
+</span> @removed
+*/
+QUOTE : &quot;39&quot;,
+<span id='android-text-format-DateFormat-property-AM_PM'>/** @deprecated Use a literal {@code 'a'} instead.
+</span> @removed
+*/
+AM_PM : &quot;97&quot;,
+<span id='android-text-format-DateFormat-property-CAPITAL_AM_PM'>/** @deprecated Use a literal {@code 'a'} instead; 'A' was always equivalent to 'a'.
+</span> @removed
+*/
+CAPITAL_AM_PM : &quot;65&quot;,
+<span id='android-text-format-DateFormat-property-DATE'>/** @deprecated Use a literal {@code 'd'} instead.
+</span> @removed
+*/
+DATE : &quot;100&quot;,
+<span id='android-text-format-DateFormat-property-DAY'>/** @deprecated Use a literal {@code 'E'} instead.
+</span> @removed
+*/
+DAY : &quot;69&quot;,
+<span id='android-text-format-DateFormat-property-HOUR'>/** @deprecated Use a literal {@code 'h'} instead.
+</span> @removed
+*/
+HOUR : &quot;104&quot;,
+<span id='android-text-format-DateFormat-property-HOUR_OF_DAY'>/** @deprecated Use a literal {@code 'H'} (for compatibility with {@link SimpleDateFormat}
+</span> and Unicode) or {@code 'k'} (for compatibility with Android releases up to and including
+ Jelly Bean MR-1) instead. Note that the two are incompatible.
+
+ @removed
+*/
+HOUR_OF_DAY : &quot;107&quot;,
+<span id='android-text-format-DateFormat-property-MINUTE'>/** @deprecated Use a literal {@code 'm'} instead.
+</span> @removed
+*/
+MINUTE : &quot;109&quot;,
+<span id='android-text-format-DateFormat-property-MONTH'>/** @deprecated Use a literal {@code 'M'} instead.
+</span> @removed
+*/
+MONTH : &quot;77&quot;,
+<span id='android-text-format-DateFormat-property-STANDALONE_MONTH'>/** @deprecated Use a literal {@code 'L'} instead.
+</span> @removed
+*/
+STANDALONE_MONTH : &quot;76&quot;,
+<span id='android-text-format-DateFormat-property-SECONDS'>/** @deprecated Use a literal {@code 's'} instead.
+</span> @removed
+*/
+SECONDS : &quot;115&quot;,
+<span id='android-text-format-DateFormat-property-TIME_ZONE'>/** @deprecated Use a literal {@code 'z'} instead.
+</span> @removed
+*/
+TIME_ZONE : &quot;122&quot;,
+<span id='android-text-format-DateFormat-property-YEAR'>/** @deprecated Use a literal {@code 'y'} instead.
+</span> @removed
+*/
+YEAR : &quot;121&quot;,
+<span id='android-text-format-DateFormat-method-is24HourFormat'>/**Returns true if times should be formatted as 24 hour times, false if times should be
+</span> formatted as 12 hour (AM/PM) times. Based on the user's chosen locale and other preferences.
+@param {Object {Context}} context the context to use for the content resolver
+@return {Boolean} true if 24 hour time format is selected, false otherwise.
+*/
+is24HourFormat : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-is24HourFormat'>/**Returns true if times should be formatted as 24 hour times, false if times should be
+</span> formatted as 12 hour (AM/PM) times. Based on the user's chosen locale and other preferences.
+@param {Object {Context}} context the context to use for the content resolver
+@param {Number} userHandle the user handle of the user to query.
+@return {Boolean} true if 24 hour time format is selected, false otherwise.
+@hide 
+*/
+is24HourFormat : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-is24HourLocale'>/**Returns true if the specified locale uses a 24-hour time format by default, ignoring user
+</span> settings.
+@param {Object {Locale}} locale the locale to check
+@return {Boolean} true if the locale uses a 24 hour time format by default, false otherwise
+@hide 
+*/
+is24HourLocale : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getBestDateTimePattern'>/**Returns the best possible localized form of the given skeleton for the given
+</span> locale. A skeleton is similar to, and uses the same format characters as, a Unicode
+ &lt;a href=&quot;http://www.unicode.org/reports/tr35/#Date_Format_Patterns&quot;&gt;UTS #35&lt;/a&gt;
+ pattern.
+
+ &lt;p&gt;One difference is that order is irrelevant. For example, &quot;MMMMd&quot; will return
+ &quot;MMMM d&quot; in the {@code en_US} locale, but &quot;d. MMMM&quot; in the {@code de_CH} locale.
+
+ &lt;p&gt;Note also in that second example that the necessary punctuation for German was
+ added. For the same input in {@code es_ES}, we'd have even more extra text:
+ &quot;d 'de' MMMM&quot;.
+
+ &lt;p&gt;This method will automatically correct for grammatical necessity. Given the
+ same &quot;MMMMd&quot; input, this method will return &quot;d LLLL&quot; in the {@code fa_IR} locale,
+ where stand-alone months are necessary. Lengths are preserved where meaningful,
+ so &quot;Md&quot; would give a different result to &quot;MMMd&quot;, say, except in a locale such as
+ {@code ja_JP} where there is only one length of month.
+
+ &lt;p&gt;This method will only return patterns that are in CLDR, and is useful whenever
+ you know what elements you want in your format string but don't want to make your
+ code specific to any one locale.
+@param {Object {Locale}} locale the locale into which the skeleton should be localized
+@param {String} skeleton a skeleton as described above
+@return {String} a string pattern suitable for use with {@link java.text.SimpleDateFormat}.
+*/
+getBestDateTimePattern : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getTimeFormat'>/**Returns a {@link java.text.DateFormat} object that can format the time according
+</span> to the context's locale and the user's 12-/24-hour clock preference.
+@param {Object {Context}} context the application context
+@return {Object {java.text.DateFormat}} the {@link java.text.DateFormat} object that properly formats the time.
+*/
+getTimeFormat : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getTimeFormatString'>/**Returns a String pattern that can be used to format the time according
+</span> to the context's locale and the user's 12-/24-hour clock preference.
+@param {Object {Context}} context the application context
+@hide 
+*/
+getTimeFormatString : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getTimeFormatString'>/**Returns a String pattern that can be used to format the time according
+</span> to the context's locale and the user's 12-/24-hour clock preference.
+@param {Object {Context}} context the application context
+@param {Number} userHandle the user handle of the user to query the format for
+@hide 
+*/
+getTimeFormatString : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getDateFormat'>/**Returns a {@link java.text.DateFormat} object that can format the date
+</span> in short form according to the context's locale.
+@param {Object {Context}} context the application context
+@return {Object {java.text.DateFormat}} the {@link java.text.DateFormat} object that properly formats the date.
+*/
+getDateFormat : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getLongDateFormat'>/**Returns a {@link java.text.DateFormat} object that can format the date
+</span> in long form (such as {@code Monday, January 3, 2000}) for the context's locale.
+@param {Object {Context}} context the application context
+@return {Object {java.text.DateFormat}} the {@link java.text.DateFormat} object that formats the date in long form.
+*/
+getLongDateFormat : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getMediumDateFormat'>/**Returns a {@link java.text.DateFormat} object that can format the date
+</span> in medium form (such as {@code Jan 3, 2000}) for the context's locale.
+@param {Object {Context}} context the application context
+@return {Object {java.text.DateFormat}} the {@link java.text.DateFormat} object that formats the date in long form.
+*/
+getMediumDateFormat : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-getDateFormatOrder'>/**Gets the current date format stored as a char array. Returns a 3 element
+</span> array containing the day ({@code 'd'}), month ({@code 'M'}), and year ({@code 'y'}))
+ in the order specified by the user's format preference.  Note that this order is
+ &lt;i&gt;only&lt;/i&gt; appropriate for all-numeric dates; spelled-out (MEDIUM and LONG)
+ dates will generally contain other punctuation, spaces, or words,
+ not just the day, month, and year, and not necessarily in the same
+ order returned here.
+*/
+getDateFormatOrder : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-format'>/**Given a format string and a time in milliseconds since Jan 1, 1970 GMT, returns a
+</span> CharSequence containing the requested date.
+@param {Object {CharSequence}} inFormat the format string, as described in {@link android.text.format.DateFormat}
+@param {Number} inTimeInMillis in milliseconds since Jan 1, 1970 GMT
+@return {Object {java.lang.CharSequence}} a {@link CharSequence} containing the requested text
+*/
+format : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-format'>/**Given a format string and a {@link java.util.Date} object, returns a CharSequence containing
+</span> the requested date.
+@param {Object {CharSequence}} inFormat the format string, as described in {@link android.text.format.DateFormat}
+@param {Object {Date}} inDate the date to format
+@return {Object {java.lang.CharSequence}} a {@link CharSequence} containing the requested text
+*/
+format : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-hasSeconds'>/**Indicates whether the specified format string contains seconds.
+</span>
+ Always returns false if the input format is null.
+@param {Object {CharSequence}} inFormat the format string, as described in {@link android.text.format.DateFormat}
+@return {Boolean} true if the format string contains {@link #SECONDS}, false otherwise
+@hide 
+*/
+hasSeconds : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-hasDesignator'>/**Test if a format string contains the given designator. Always returns
+</span> {@code false} if the input format is {@code null}.
+
+ Note that this is intended for searching for designators, not arbitrary
+ characters. So searching for a literal single quote would not work correctly.
+@hide 
+*/
+hasDesignator : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-format'>/**Given a format string and a {@link java.util.Calendar} object, returns a CharSequence
+</span> containing the requested date.
+@param {Object {CharSequence}} inFormat the format string, as described in {@link android.text.format.DateFormat}
+@param {Object {Calendar}} inDate the date to format
+@return {Object {java.lang.CharSequence}} a {@link CharSequence} containing the requested text
+*/
+format : function(  ) {},
+
+<span id='android-text-format-DateFormat-method-appendQuotedText'>/**Strips quotation marks from the {@code formatString} and appends the result back to the
+</span> {@code formatString}.
+@param {Object {SpannableStringBuilder}} formatString the format string, as described in
+                     {@link android.text.format.DateFormat}, to be modified
+@param {Number} index        index of the first quote
+@return {Number} the length of the quoted text that was appended.
+@hide 
+*/
+appendQuotedText : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-AutofillFieldClassificationService'>/**@class android.service.autofill.AutofillFieldClassificationService
+</span>@extends android.app.Service
+
+ A service that calculates field classification scores.
+
+ &lt;p&gt;A field classification score is a {@code float} representing how well an
+ {@link AutofillValue} filled matches a expected value predicted by an autofill service
+ &amp;mdash;a full match is {@code 1.0} (representing 100%), while a full mismatch is {@code 0.0}.
+
+ &lt;p&gt;The exact score depends on the algorithm used to calculate it&amp;mdash;the service must provide
+ at least one default algorithm (which is used when the algorithm is not specified or is invalid),
+ but it could provide more (in which case the algorithm name should be specified by the caller
+ when calculating the scores).
+
+ {@hide}
+*/
+var AutofillFieldClassificationService = {
+
+<span id='android-service-autofill-AutofillFieldClassificationService-property-SERVICE_INTERFACE'>/** The {@link Intent} action that must be declared as handled by a service
+</span> in its manifest for the system to recognize it as a quota providing service.
+*/
+SERVICE_INTERFACE : &quot;android.service.autofill.AutofillFieldClassificationService&quot;,
+<span id='android-service-autofill-AutofillFieldClassificationService-property-SERVICE_META_DATA_KEY_DEFAULT_ALGORITHM'>/** Manifest metadata key for the resource string containing the name of the default field
+</span> classification algorithm.
+*/
+SERVICE_META_DATA_KEY_DEFAULT_ALGORITHM : &quot;android.autofill.field_classification.default_algorithm&quot;,
+<span id='android-service-autofill-AutofillFieldClassificationService-property-SERVICE_META_DATA_KEY_AVAILABLE_ALGORITHMS'>/** Manifest metadata key for the resource string array containing the names of all field
+</span> classification algorithms provided by the service.
+*/
+SERVICE_META_DATA_KEY_AVAILABLE_ALGORITHMS : &quot;android.autofill.field_classification.available_algorithms&quot;,
+<span id='android-service-autofill-AutofillFieldClassificationService-property-REQUIRED_ALGORITHM_EDIT_DISTANCE'>/** Field classification algorithm that computes the edit distance between two Strings.
+</span>
+ &lt;p&gt;Service implementation must provide this algorithm.&lt;/p&gt;
+*/
+REQUIRED_ALGORITHM_EDIT_DISTANCE : &quot;EDIT_DISTANCE&quot;,
+<span id='android-service-autofill-AutofillFieldClassificationService-property-REQUIRED_ALGORITHM_EXACT_MATCH'>/** Field classification algorithm that computes whether the last four digits between two
+</span> Strings match exactly.
+
+ &lt;p&gt;Service implementation must provide this algorithm.&lt;/p&gt;
+*/
+REQUIRED_ALGORITHM_EXACT_MATCH : &quot;EXACT_MATCH&quot;,
+<span id='android-service-autofill-AutofillFieldClassificationService-property-EXTRA_SCORES'>/**{@hide} */
+</span>EXTRA_SCORES : &quot;scores&quot;,
+<span id='android-service-autofill-AutofillFieldClassificationService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-service-autofill-AutofillFieldClassificationService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-autofill-AutofillFieldClassificationService-method-onGetScores'>/**Calculates field classification scores in a batch.
+</span>
+ &lt;p&gt;A field classification score is a {@code float} representing how well an
+ {@link AutofillValue} filled matches a expected value predicted by an autofill service
+ &amp;mdash;a full match is {@code 1.0} (representing 100%), while a full mismatch is {@code 0.0}.
+
+ &lt;p&gt;The exact score depends on the algorithm used to calculate it&amp;mdash;the service must
+ provide at least one default algorithm (which is used when the algorithm is not specified
+ or is invalid), but it could provide more (in which case the algorithm name should be
+ specified by the caller when calculating the scores).
+
+ &lt;p&gt;For example, if the service provides an algorithm named {@code EXACT_MATCH} that
+ returns {@code 1.0} if all characters match or {@code 0.0} otherwise, a call to:
+
+ &lt;pre&gt;
+ service.onGetScores(&quot;EXACT_MATCH&quot;, null,
+   Arrays.asList(AutofillValue.forText(&quot;email1&quot;), AutofillValue.forText(&quot;PHONE1&quot;)),
+   Arrays.asList(&quot;email1&quot;, &quot;phone1&quot;));
+ &lt;/pre&gt;
+
+ &lt;p&gt;Returns:
+
+ &lt;pre&gt;
+ [
+   [1.0, 0.0], // &quot;email1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+   [0.0, 0.0]  // &quot;PHONE1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+ ];
+ &lt;/pre&gt;
+
+ &lt;p&gt;If the same algorithm allows the caller to specify whether the comparisons should be
+ case sensitive by passing a boolean option named {@code &quot;case_sensitive&quot;}, then a call to:
+
+ &lt;pre&gt;
+ Bundle algorithmOptions = new Bundle();
+ algorithmOptions.putBoolean(&quot;case_sensitive&quot;, false);
+
+ service.onGetScores(&quot;EXACT_MATCH&quot;, algorithmOptions,
+   Arrays.asList(AutofillValue.forText(&quot;email1&quot;), AutofillValue.forText(&quot;PHONE1&quot;)),
+   Arrays.asList(&quot;email1&quot;, &quot;phone1&quot;));
+ &lt;/pre&gt;
+
+ &lt;p&gt;Returns:
+
+ &lt;pre&gt;
+ [
+   [1.0, 0.0], // &quot;email1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+   [0.0, 1.0]  // &quot;PHONE1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+ ];
+ &lt;/pre&gt;
+@param {String} algorithm name of the algorithm to be used to calculate the scores. If invalid or
+ {@code null}, the default algorithm is used instead.
+@param {Object {Bundle}} algorithmOptions optional arguments to be passed to the algorithm.
+@param {Object {java.util.List}} actualValues values entered by the user.
+@param {Object {java.util.List}} userDataValues values predicted from the user data.
+@return {Number} the calculated scores of {@code actualValues} x {@code userDataValues}.
+
+ {@hide}
+@deprecated Use {@link AutofillFieldClassificationService#onCalculateScores} instead.
+*/
+onGetScores : function(  ) {},
+
+<span id='android-service-autofill-AutofillFieldClassificationService-method-onCalculateScores'>/**Calculates field classification scores in a batch.
+</span>
+ &lt;p&gt;A field classification score is a {@code float} representing how well an
+ {@link AutofillValue} matches a expected value predicted by an autofill service
+ &amp;mdash;a full match is {@code 1.0} (representing 100%), while a full mismatch is {@code 0.0}.
+
+ &lt;p&gt;The exact score depends on the algorithm used to calculate it&amp;mdash;the service must
+ provide at least one default algorithm (which is used when the algorithm is not specified
+ or is invalid), but it could provide more (in which case the algorithm name should be
+ specified by the caller when calculating the scores).
+
+ &lt;p&gt;For example, if the service provides an algorithm named {@code EXACT_MATCH} that
+ returns {@code 1.0} if all characters match or {@code 0.0} otherwise, a call to:
+
+ &lt;pre&gt;
+ HashMap algorithms = new HashMap&lt;&gt;();
+ algorithms.put(&quot;email&quot;, &quot;EXACT_MATCH&quot;);
+ algorithms.put(&quot;phone&quot;, &quot;EXACT_MATCH&quot;);
+
+ HashMap args = new HashMap&lt;&gt;();
+ args.put(&quot;email&quot;, null);
+ args.put(&quot;phone&quot;, null);
+
+ service.onCalculateScores(Arrays.asList(AutofillValue.forText(&quot;email1&quot;),
+ AutofillValue.forText(&quot;PHONE1&quot;)), Arrays.asList(&quot;email1&quot;, &quot;phone1&quot;),
+ Array.asList(&quot;email&quot;, &quot;phone&quot;), algorithms, args);
+ &lt;/pre&gt;
+
+ &lt;p&gt;Returns:
+
+ &lt;pre&gt;
+ [
+   [1.0, 0.0], // &quot;email1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+   [0.0, 0.0]  // &quot;PHONE1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+ ];
+ &lt;/pre&gt;
+
+ &lt;p&gt;If the same algorithm allows the caller to specify whether the comparisons should be
+ case sensitive by passing a boolean option named {@code &quot;case_sensitive&quot;}, then a call to:
+
+ &lt;pre&gt;
+ Bundle algorithmOptions = new Bundle();
+ algorithmOptions.putBoolean(&quot;case_sensitive&quot;, false);
+ args.put(&quot;phone&quot;, algorithmOptions);
+
+ service.onCalculateScores(Arrays.asList(AutofillValue.forText(&quot;email1&quot;),
+ AutofillValue.forText(&quot;PHONE1&quot;)), Arrays.asList(&quot;email1&quot;, &quot;phone1&quot;),
+ Array.asList(&quot;email&quot;, &quot;phone&quot;), algorithms, args);
+ &lt;/pre&gt;
+
+ &lt;p&gt;Returns:
+
+ &lt;pre&gt;
+ [
+   [1.0, 0.0], // &quot;email1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+   [0.0, 1.0]  // &quot;PHONE1&quot; compared against [&quot;email1&quot;, &quot;phone1&quot;]
+ ];
+ &lt;/pre&gt;
+@param {Object {java.util.List}} actualValues values entered by the user.
+@param {Object {java.util.List}} userDataValues values predicted from the user data.
+@param {Object {java.util.List}} categoryIds category Ids correspoinding to userDataValues
+@param {String} defaultAlgorithm default field classification algorithm
+@param {Object {Bundle}} algorithms array of field classification algorithms
+@return {Number} the calculated scores of {@code actualValues} x {@code userDataValues}.
+
+ {@hide}
+*/
+onCalculateScores : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

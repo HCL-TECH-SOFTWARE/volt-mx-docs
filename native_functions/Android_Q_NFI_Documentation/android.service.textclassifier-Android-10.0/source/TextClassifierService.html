@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-textclassifier-TextClassifierService'>/**@class android.service.textclassifier.TextClassifierService
+</span>@extends android.app.Service
+
+ Abstract base class for the TextClassifier service.
+
+ &lt;p&gt;A TextClassifier service provides text classification related features for the system.
+ The system's default TextClassifierService is configured in
+ {@code config_defaultTextClassifierService}. If this config has no value, a
+ {@link android.view.textclassifier.TextClassifierImpl} is loaded in the calling app's process.
+
+ &lt;p&gt;See: {@link TextClassifier}.
+ See: {@link TextClassificationManager}.
+
+ &lt;p&gt;Include the following in the manifest:
+
+ &lt;pre&gt;
+ {@literal
+ &lt;service android:name=&quot;.YourTextClassifierService&quot;
+          android:permission=&quot;android.permission.BIND_TEXTCLASSIFIER_SERVICE&quot;&gt;
+     &lt;intent-filter&gt;
+         &lt;action android:name=&quot;android.service.textclassifier.TextClassifierService&quot; /&gt;
+     &lt;/intent-filter&gt;
+ &lt;/service&gt;}&lt;/pre&gt;
+
+ &lt;p&gt;From {@link android.os.Build.VERSION_CODES#Q} onward, all callbacks are called on the main
+ thread. Prior to Q, there is no guarantee on what thread the callback will happen. You should
+ make sure the callbacks are executed in your desired thread by using a executor, a handler or
+ something else along the line.
+
+ @see TextClassifier
+ @hide
+*/
+var TextClassifierService = {
+
+<span id='android-service-textclassifier-TextClassifierService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span> To be supported, the service must also require the
+ {@link android.Manifest.permission#BIND_TEXTCLASSIFIER_SERVICE} permission so
+ that other applications can not abuse it.
+*/
+SERVICE_INTERFACE : &quot;android.service.textclassifier.TextClassifierService&quot;,
+<span id='android-service-textclassifier-TextClassifierService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onSuggestSelection'>/**Returns suggested text selection start and end indices, recognized entity types, and their
+</span> associated confidence scores. The entity types are ordered from highest to lowest scoring.
+@param {Object {TextClassificationSessionId}} sessionId the session id
+@param {Object {TextSelection.Request}} request the text selection request
+@param {Object {CancellationSignal}} cancellationSignal object to watch for canceling the current operation
+@param {Object {android.service.textclassifier.TextClassifierService.Callback}} callback the callback to return the result to
+*/
+onSuggestSelection : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onClassifyText'>/**Classifies the specified text and returns a {@link TextClassification} object that can be
+</span> used to generate a widget for handling the classified text.
+@param {Object {TextClassificationSessionId}} sessionId the session id
+@param {Object {TextClassification.Request}} request the text classification request
+@param {Object {CancellationSignal}} cancellationSignal object to watch for canceling the current operation
+@param {Object {android.service.textclassifier.TextClassifierService.Callback}} callback the callback to return the result to
+*/
+onClassifyText : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onGenerateLinks'>/**Generates and returns a {@link TextLinks} that may be applied to the text to annotate it with
+</span> links information.
+@param {Object {TextClassificationSessionId}} sessionId the session id
+@param {Object {TextLinks.Request}} request the text classification request
+@param {Object {CancellationSignal}} cancellationSignal object to watch for canceling the current operation
+@param {Object {android.service.textclassifier.TextClassifierService.Callback}} callback the callback to return the result to
+*/
+onGenerateLinks : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onDetectLanguage'>/**Detects and returns the language of the give text.
+</span>@param {Object {TextClassificationSessionId}} sessionId the session id
+@param {Object {TextLanguage.Request}} request the language detection request
+@param {Object {CancellationSignal}} cancellationSignal object to watch for canceling the current operation
+@param {Object {android.service.textclassifier.TextClassifierService.Callback}} callback the callback to return the result to
+*/
+onDetectLanguage : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onSuggestConversationActions'>/**Suggests and returns a list of actions according to the given conversation.
+</span>@param {Object {TextClassificationSessionId}} sessionId the session id
+@param {Object {ConversationActions.Request}} request the conversation actions request
+@param {Object {CancellationSignal}} cancellationSignal object to watch for canceling the current operation
+@param {Object {android.service.textclassifier.TextClassifierService.Callback}} callback the callback to return the result to
+*/
+onSuggestConversationActions : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onSelectionEvent'>/**Writes the selection event.
+</span> This is called when a selection event occurs. e.g. user changed selection; or smart selection
+ happened.
+
+ &lt;p&gt;The default implementation ignores the event.
+@param {Object {TextClassificationSessionId}} sessionId the session id
+@param {Object {SelectionEvent}} event the selection event
+@deprecated Use {@link #onTextClassifierEvent(TextClassificationSessionId, TextClassifierEvent)}
+      instead
+*/
+onSelectionEvent : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onTextClassifierEvent'>/**Writes the TextClassifier event.
+</span> This is called when a TextClassifier event occurs. e.g. user changed selection,
+ smart selection happened, or a link was clicked.
+
+ &lt;p&gt;The default implementation ignores the event.
+@param {Object {TextClassificationSessionId}} sessionId the session id
+@param {Object {TextClassifierEvent}} event the TextClassifier event
+*/
+onTextClassifierEvent : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onCreateTextClassificationSession'>/**Creates a new text classification session for the specified context.
+</span>@param {Object {TextClassificationContext}} context the text classification context
+@param {Object {TextClassificationSessionId}} sessionId the session's Id
+*/
+onCreateTextClassificationSession : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-onDestroyTextClassificationSession'>/**Destroys the text classification session identified by the specified sessionId.
+</span>@param {Object {TextClassificationSessionId}} sessionId the id of the session to destroy
+*/
+onDestroyTextClassificationSession : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-getLocalTextClassifier'>/**Returns a TextClassifier that runs in this service's process.
+</span> If the local TextClassifier is disabled, this returns {@link TextClassifier#NO_OP}.
+@deprecated Use {@link #getDefaultTextClassifierImplementation(Context)} instead.
+*/
+getLocalTextClassifier : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-getDefaultTextClassifierImplementation'>/**Returns the platform's default TextClassifier implementation.
+</span>*/
+getDefaultTextClassifierImplementation : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-getResponse'>/**
+</span>@hide 
+*/
+getResponse : function(  ) {},
+
+<span id='android-service-textclassifier-TextClassifierService-method-getServiceComponentName'>/**Returns the component name of the system default textclassifier service if it can be found
+</span> on the system. Otherwise, returns null.
+@hide 
+*/
+getServiceComponentName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

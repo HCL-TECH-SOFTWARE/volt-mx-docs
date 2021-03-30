@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-GradientDrawable'>/**@class android.graphics.drawable.GradientDrawable
+</span>@extends android.graphics.drawable.Drawable
+
+ A Drawable with a color gradient for buttons, backgrounds, etc.
+
+ &lt;p&gt;It can be defined in an XML file with the &lt;code&gt;&amp;lt;shape&gt;&lt;/code&gt; element. For more
+ information, see the guide to &lt;a
+ href=&quot;{@docRoot}guide/topics/resources/drawable-resource.html&quot;&gt;Drawable Resources&lt;/a&gt;.&lt;/p&gt;
+
+ @attr ref android.R.styleable#GradientDrawable_visible
+ @attr ref android.R.styleable#GradientDrawable_shape
+ @attr ref android.R.styleable#GradientDrawable_innerRadiusRatio
+ @attr ref android.R.styleable#GradientDrawable_innerRadius
+ @attr ref android.R.styleable#GradientDrawable_thicknessRatio
+ @attr ref android.R.styleable#GradientDrawable_thickness
+ @attr ref android.R.styleable#GradientDrawable_useLevel
+ @attr ref android.R.styleable#GradientDrawableSize_width
+ @attr ref android.R.styleable#GradientDrawableSize_height
+ @attr ref android.R.styleable#GradientDrawableGradient_startColor
+ @attr ref android.R.styleable#GradientDrawableGradient_centerColor
+ @attr ref android.R.styleable#GradientDrawableGradient_endColor
+ @attr ref android.R.styleable#GradientDrawableGradient_useLevel
+ @attr ref android.R.styleable#GradientDrawableGradient_angle
+ @attr ref android.R.styleable#GradientDrawableGradient_type
+ @attr ref android.R.styleable#GradientDrawableGradient_centerX
+ @attr ref android.R.styleable#GradientDrawableGradient_centerY
+ @attr ref android.R.styleable#GradientDrawableGradient_gradientRadius
+ @attr ref android.R.styleable#GradientDrawableSolid_color
+ @attr ref android.R.styleable#GradientDrawableStroke_width
+ @attr ref android.R.styleable#GradientDrawableStroke_color
+ @attr ref android.R.styleable#GradientDrawableStroke_dashWidth
+ @attr ref android.R.styleable#GradientDrawableStroke_dashGap
+ @attr ref android.R.styleable#GradientDrawablePadding_left
+ @attr ref android.R.styleable#GradientDrawablePadding_top
+ @attr ref android.R.styleable#GradientDrawablePadding_right
+ @attr ref android.R.styleable#GradientDrawablePadding_bottom
+*/
+var GradientDrawable = {
+
+<span id='android-graphics-drawable-GradientDrawable-property-RECTANGLE'>/** Shape is a rectangle, possibly with rounded corners
+</span>*/
+RECTANGLE : &quot;0&quot;,
+<span id='android-graphics-drawable-GradientDrawable-property-OVAL'>/** Shape is an ellipse
+</span>*/
+OVAL : &quot;1&quot;,
+<span id='android-graphics-drawable-GradientDrawable-property-LINE'>/** Shape is a line
+</span>*/
+LINE : &quot;2&quot;,
+<span id='android-graphics-drawable-GradientDrawable-property-RING'>/** Shape is a ring.
+</span>*/
+RING : &quot;3&quot;,
+<span id='android-graphics-drawable-GradientDrawable-property-LINEAR_GRADIENT'>/** Gradient is linear (default.)
+</span>*/
+LINEAR_GRADIENT : &quot;0&quot;,
+<span id='android-graphics-drawable-GradientDrawable-property-RADIAL_GRADIENT'>/** Gradient is circular.
+</span>*/
+RADIAL_GRADIENT : &quot;1&quot;,
+<span id='android-graphics-drawable-GradientDrawable-property-SWEEP_GRADIENT'>/** Gradient is a sweep.
+</span>*/
+SWEEP_GRADIENT : &quot;2&quot;,
+<span id='android-graphics-drawable-GradientDrawable-method-getPadding'>/**
+</span>*/
+getPadding : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setCornerRadii'>/**Specifies radii for each of the 4 corners. For each corner, the array
+</span> contains 2 values, &lt;code&gt;[X_radius, Y_radius]&lt;/code&gt;. The corners are
+ ordered top-left, top-right, bottom-right, bottom-left. This property
+ is honored only when the shape is of type {@link #RECTANGLE}.
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.
+@param {Object {float[]}} radii an array of length &gt;= 8 containing 4 pairs of X and Y
+              radius for each corner, specified in pixels
+@see #mutate()
+@see #setShape(int)
+@see #setCornerRadius(float)
+*/
+setCornerRadii : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getCornerRadii'>/**Returns the radii for each of the 4 corners. For each corner, the array
+</span> contains 2 values, &lt;code&gt;[X_radius, Y_radius]&lt;/code&gt;. The corners are
+ ordered top-left, top-right, bottom-right, bottom-left.
+ &lt;p&gt;
+ If the radius was previously set with {@link #setCornerRadius}(float),
+ or if the corners are not rounded, this method will return {@code null}.
+@return {Number} an array containing the radii for each of the 4 corners, or
+         {@code null}
+@see #setCornerRadii(float[])
+*/
+getCornerRadii : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setCornerRadius'>/**Specifies the radius for the corners of the gradient. If this is &gt; 0,
+</span> then the drawable is drawn in a round-rectangle, rather than a
+ rectangle. This property is honored only when the shape is of type
+ {@link #RECTANGLE}.
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.
+@param {Number} radius The radius in pixels of the corners of the rectangle shape
+@see #mutate()
+@see #setCornerRadii(float[])
+@see #setShape(int)
+*/
+setCornerRadius : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getCornerRadius'>/**Returns the radius for the corners of the gradient, that was previously set with
+</span> {@link #setCornerRadius}(float).
+ &lt;p&gt;
+ If the radius was previously cleared via passing {@code null}
+ to {@link #setCornerRadii(float[])}, this method will return 0.
+@return {Number} the radius in pixels of the corners of the rectangle shape, or 0
+@see #setCornerRadius
+*/
+getCornerRadius : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setStroke'>/**&lt;p&gt;Set the stroke width and color for the drawable. If width is zero,
+</span> then no stroke is drawn.&lt;/p&gt;
+ &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.&lt;/p&gt;
+@param {Number} width The width in pixels of the stroke
+@param {Number} color The color of the stroke
+@see #mutate()
+@see #setStroke(int, int, float, float)
+*/
+setStroke : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setStroke'>/**&lt;p&gt;Set the stroke width and color state list for the drawable. If width
+</span> is zero, then no stroke is drawn.&lt;/p&gt;
+ &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.&lt;/p&gt;
+@param {Number} width The width in pixels of the stroke
+@param {Object {ColorStateList}} colorStateList The color state list of the stroke
+@see #mutate()
+@see #setStroke(int, ColorStateList, float, float)
+*/
+setStroke : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setStroke'>/**&lt;p&gt;Set the stroke width and color for the drawable. If width is zero,
+</span> then no stroke is drawn. This method can also be used to dash the stroke.&lt;/p&gt;
+ &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.&lt;/p&gt;
+@param {Number} width The width in pixels of the stroke
+@param {Number} color The color of the stroke
+@param {Number} dashWidth The length in pixels of the dashes, set to 0 to disable dashes
+@param {Number} dashGap The gap in pixels between dashes
+@see #mutate()
+@see #setStroke(int, int)
+*/
+setStroke : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setStroke'>/**&lt;p&gt;Set the stroke width and color state list for the drawable. If width
+</span> is zero, then no stroke is drawn. This method can also be used to dash
+ the stroke.&lt;/p&gt;
+ &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.&lt;/p&gt;
+@param {Number} width The width in pixels of the stroke
+@param {Object {ColorStateList}} colorStateList The color state list of the stroke
+@param {Number} dashWidth The length in pixels of the dashes, set to 0 to disable dashes
+@param {Number} dashGap The gap in pixels between dashes
+@see #mutate()
+@see #setStroke(int, ColorStateList)
+*/
+setStroke : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setSize'>/**&lt;p&gt;Sets the size of the shape drawn by this drawable.&lt;/p&gt;
+</span> &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.&lt;/p&gt;
+@param {Number} width The width of the shape used by this drawable
+@param {Number} height The height of the shape used by this drawable
+@see #mutate()
+@see #setGradientType(int)
+*/
+setSize : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setShape'>/**&lt;p&gt;Sets the type of shape used to draw the gradient.&lt;/p&gt;
+</span> &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.&lt;/p&gt;
+@param {Number} shape The desired shape for this drawable: {@link #LINE},
+              {@link #OVAL}, {@link #RECTANGLE} or {@link #RING}
+@see #mutate()
+*/
+setShape : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getShape'>/**Returns the type of shape used by this drawable, one of {@link #LINE},
+</span> {@link #OVAL}, {@link #RECTANGLE} or {@link #RING}.
+@return {Number} the type of shape used by this drawable
+@see #setShape(int)
+*/
+getShape : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setGradientType'>/**Sets the type of gradient used by this drawable.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.
+@param {Number} gradient The type of the gradient: {@link #LINEAR_GRADIENT},
+                 {@link #RADIAL_GRADIENT} or {@link #SWEEP_GRADIENT}
+@see #mutate()
+@see #getGradientType()
+*/
+setGradientType : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getGradientType'>/**Returns the type of gradient used by this drawable, one of
+</span> {@link #LINEAR_GRADIENT}, {@link #RADIAL_GRADIENT}, or
+ {@link #SWEEP_GRADIENT}.
+@return {Number} the type of gradient used by this drawable
+@see #setGradientType(int)
+*/
+getGradientType : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setGradientCenter'>/**Sets the position of the center of the gradient as a fraction of the
+</span> width and height.
+ &lt;p&gt;
+ The default value is (0.5, 0.5).
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.
+@param {Number} x the X-position of the center of the gradient
+@param {Number} y the Y-position of the center of the gradient
+@see #mutate()
+@see #setGradientType(int)
+@see #getGradientCenterX()
+@see #getGradientCenterY()
+*/
+setGradientCenter : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getGradientCenterX'>/**Returns the X-position of the center of the gradient as a fraction of
+</span> the width.
+@return {Number} the X-position of the center of the gradient
+@see #setGradientCenter(float, float)
+*/
+getGradientCenterX : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getGradientCenterY'>/**Returns the Y-position of the center of this gradient as a fraction of
+</span> the height.
+@return {Number} the Y-position of the center of the gradient
+@see #setGradientCenter(float, float)
+*/
+getGradientCenterY : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setGradientRadius'>/**Sets the radius of the gradient. The radius is honored only when the
+</span> gradient type is set to {@link #RADIAL_GRADIENT}.
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.
+@param {Number} gradientRadius the radius of the gradient in pixels
+@see #mutate()
+@see #setGradientType(int)
+@see #getGradientRadius()
+*/
+setGradientRadius : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getGradientRadius'>/**Returns the radius of the gradient in pixels. The radius is valid only
+</span> when the gradient type is set to {@link #RADIAL_GRADIENT}.
+@return {Number} the radius of the gradient in pixels
+@see #setGradientRadius(float)
+*/
+getGradientRadius : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setUseLevel'>/**Sets whether this drawable's {@code level} property will be used to
+</span> scale the gradient. If a gradient is not used, this property has no
+ effect.
+ &lt;p&gt;
+ Scaling behavior varies based on gradient type:
+ &lt;ul&gt;
+     &lt;li&gt;{@link #LINEAR_GRADIENT} adjusts the ending position along the
+         gradient's axis of orientation (see {@link #getOrientation}())
+     &lt;li&gt;{@link #RADIAL_GRADIENT} adjusts the outer radius
+     &lt;li&gt;{@link #SWEEP_GRADIENT} adjusts the ending angle
+ &lt;ul&gt;
+ &lt;p&gt;
+ The default value for this property is {@code false}.
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: This property corresponds to the
+ {@code android:useLevel} attribute on the inner {@code &lt;gradient&gt;}
+ tag, NOT the {@code android:useLevel} attribute on the outer
+ {@code &lt;shape&gt;} tag. For example,
+ &lt;pre&gt;{@code
+ &lt;shape ...&gt;
+     &lt;gradient
+         ...
+         android:useLevel=&quot;true&quot; /&gt;
+ &lt;/shape&gt;
+ }&lt;/pre&gt;&lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: Changing this property will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing this property.
+@param {Boolean} useLevel {@code true} if the gradient should be scaled based on
+                 level, {@code false} otherwise
+@see #mutate()
+@see #setLevel(int)
+@see #getLevel()
+@see #getUseLevel()
+@attr ref android.R.styleable#GradientDrawableGradient_useLevel
+*/
+setUseLevel : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getUseLevel'>/**Returns whether this drawable's {@code level} property will be used to
+</span> scale the gradient.
+@return {Boolean} {@code true} if the gradient should be scaled based on level,
+         {@code false} otherwise
+@see #setUseLevel(boolean)
+@attr ref android.R.styleable#GradientDrawableGradient_useLevel
+*/
+getUseLevel : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getOrientation'>/**Returns the orientation of the gradient defined in this drawable.
+</span>@return {Object {android.graphics.drawable.GradientDrawable.Orientation}} the orientation of the gradient defined in this drawable
+@see #setOrientation(Orientation)
+*/
+getOrientation : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setOrientation'>/**Sets the orientation of the gradient defined in this drawable.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing orientation will affect all instances
+ of a drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing the orientation.
+@param {Object {GradientDrawable.Orientation}} orientation the desired orientation (angle) of the gradient
+@see #mutate()
+@see #getOrientation()
+*/
+setOrientation : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setColors'>/**Sets the colors used to draw the gradient.
+</span> &lt;p&gt;
+ Each color is specified as an ARGB integer and the array must contain at
+ least 2 colors.
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing colors will affect all instances of a
+ drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing the colors.
+@param {Object {int[]}} colors an array containing 2 or more ARGB colors
+@see #mutate()
+@see #setColor(int)
+*/
+setColors : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setColors'>/**Sets the colors and offsets used to draw the gradient.
+</span> &lt;p&gt;
+ Each color is specified as an ARGB integer and the array must contain at
+ least 2 colors.
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing colors will affect all instances of a
+ drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing the colors.
+@param {Object {int[]}} colors an array containing 2 or more ARGB colors
+@param {Object {float[]}} offsets optional array of floating point parameters representing the positions
+                of the colors. Null evenly disperses the colors
+@see #mutate()
+@see #setColors(int[])
+*/
+setColors : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getColors'>/**Returns the colors used to draw the gradient, or {@code null} if the
+</span> gradient is drawn using a single color or no colors.
+@return {Number} the colors used to draw the gradient, or {@code null}
+@see #setColors(int[] colors)
+*/
+getColors : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setXfermode'>/**
+</span>@param {Object {Xfermode}} mode to draw this drawable with
+@hide 
+*/
+setXfermode : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setAntiAlias'>/**
+</span>@param {Boolean} aa to draw this drawable with
+@hide 
+*/
+setAntiAlias : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setInnerRadiusRatio'>/**Inner radius of the ring expressed as a ratio of the ring's width.
+</span>@see #getInnerRadiusRatio()
+@attr ref android.R.styleable#GradientDrawable_innerRadiusRatio
+*/
+setInnerRadiusRatio : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getInnerRadiusRatio'>/**Return the inner radius of the ring expressed as a ratio of the ring's width.
+</span>@see #setInnerRadiusRatio(float)
+@attr ref android.R.styleable#GradientDrawable_innerRadiusRatio
+*/
+getInnerRadiusRatio : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setInnerRadius'>/**Configure the inner radius of the ring.
+</span>@see #getInnerRadius()
+@attr ref android.R.styleable#GradientDrawable_innerRadius
+*/
+setInnerRadius : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getInnerRadius'>/**Retrn the inner radius of the ring
+</span>@see #setInnerRadius(int)
+@attr ref android.R.styleable#GradientDrawable_innerRadius
+*/
+getInnerRadius : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setThicknessRatio'>/**Configure the thickness of the ring expressed as a ratio of the ring's width.
+</span>@see #getThicknessRatio()
+@attr ref android.R.styleable#GradientDrawable_thicknessRatio
+*/
+setThicknessRatio : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getThicknessRatio'>/**Return the thickness ratio of the ring expressed as a ratio of the ring's width.
+</span>@see #setThicknessRatio(float)
+@attr ref android.R.styleable#GradientDrawable_thicknessRatio
+*/
+getThicknessRatio : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setThickness'>/**Configure the thickness of the ring.
+</span>@attr ref android.R.styleable#GradientDrawable_thickness
+*/
+setThickness : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getThickness'>/**Return the thickness of the ring
+</span>@see #setThickness(int)
+@attr ref android.R.styleable#GradientDrawable_thickness
+*/
+getThickness : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setPadding'>/**Configure the padding of the gradient shape
+</span>@param {Number} left Left padding of the gradient shape
+@param {Number} top Top padding of the gradient shape
+@param {Number} right Right padding of the gradient shape
+@param {Number} bottom Bottom padding of the gradient shape
+@attr ref android.R.styleable#GradientDrawablePadding_left
+@attr ref android.R.styleable#GradientDrawablePadding_top
+@attr ref android.R.styleable#GradientDrawablePadding_right
+@attr ref android.R.styleable#GradientDrawablePadding_bottom
+*/
+setPadding : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setColor'>/**Changes this drawable to use a single color instead of a gradient.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing color will affect all instances of a
+ drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing the color.
+@param {Number} argb The color used to fill the shape
+@see #mutate()
+@see #setColors(int[])
+@see #getColor
+*/
+setColor : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setColor'>/**Changes this drawable to use a single color state list instead of a
+</span> gradient. Calling this method with a null argument will clear the color
+ and is equivalent to calling {@link #setColor}(int) with the argument
+ {@link Color#TRANSPARENT}.
+ &lt;p&gt;
+ &lt;strong&gt;Note&lt;/strong&gt;: changing color will affect all instances of a
+ drawable loaded from a resource. It is recommended to invoke
+ {@link #mutate}() before changing the color.&lt;/p&gt;
+@param {Object {ColorStateList}} colorStateList The color state list used to fill the shape
+@see #mutate()
+@see #getColor
+*/
+setColor : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getColor'>/**Returns the color state list used to fill the shape, or {@code null} if
+</span> the shape is filled with a gradient or has no fill color.
+@return {Object {android.content.res.ColorStateList}} the color state list used to fill this gradient, or {@code null}
+@see #setColor(int)
+@see #setColor(ColorStateList)
+*/
+getColor : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-isStateful'>/**
+</span>*/
+isStateful : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-hasFocusStateSpecified'>/**
+</span>@hide 
+*/
+hasFocusStateSpecified : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getChangingConfigurations'>/**
+</span>*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setAlpha'>/**
+</span>*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getAlpha'>/**
+</span>*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setDither'>/**
+</span>*/
+setDither : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getColorFilter'>/**
+</span>*/
+getColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setColorFilter'>/**
+</span>*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setTintList'>/**
+</span>*/
+setTintList : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-setTintBlendMode'>/**
+</span>*/
+setTintBlendMode : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getOpacity'>/**
+</span>*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-applyTheme'>/**
+</span>*/
+applyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-canApplyTheme'>/**
+</span>*/
+canApplyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getIntrinsicWidth'>/**
+</span>*/
+getIntrinsicWidth : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getIntrinsicHeight'>/**
+</span>*/
+getIntrinsicHeight : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getOpticalInsets'>/**
+</span>*/
+getOpticalInsets : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getConstantState'>/**
+</span>*/
+getConstantState : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-getOutline'>/**
+</span>*/
+getOutline : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-mutate'>/**
+</span>*/
+mutate : function(  ) {},
+
+<span id='android-graphics-drawable-GradientDrawable-method-clearMutated'>/**
+</span>@hide 
+*/
+clearMutated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

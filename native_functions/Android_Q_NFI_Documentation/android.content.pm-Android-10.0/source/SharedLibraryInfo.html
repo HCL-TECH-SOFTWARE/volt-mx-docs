@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-SharedLibraryInfo'>/**@class android.content.pm.SharedLibraryInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class provides information for a shared library. There are
+ three types of shared libraries: builtin - non-updatable part of
+ the OS; dynamic - updatable backwards-compatible dynamically linked;
+ static - non backwards-compatible emulating static linking.
+*/
+var SharedLibraryInfo = {
+
+<span id='android-content-pm-SharedLibraryInfo-property-TYPE_BUILTIN'>/** Shared library type: this library is a part of the OS
+</span> and cannot be updated or uninstalled.
+*/
+TYPE_BUILTIN : &quot;0&quot;,
+<span id='android-content-pm-SharedLibraryInfo-property-TYPE_DYNAMIC'>/** Shared library type: this library is backwards-compatible, can
+</span> be updated, and updates can be uninstalled. Clients link against
+ the latest version of the library.
+*/
+TYPE_DYNAMIC : &quot;1&quot;,
+<span id='android-content-pm-SharedLibraryInfo-property-TYPE_STATIC'>/** Shared library type: this library is &lt;strong&gt;not&lt;/strong&gt; backwards
+</span> -compatible, can be updated and updates can be uninstalled. Clients
+ link against a specific version of the library.
+*/
+TYPE_STATIC : &quot;2&quot;,
+<span id='android-content-pm-SharedLibraryInfo-property-VERSION_UNDEFINED'>/** Constant for referring to an undefined version.
+</span>*/
+VERSION_UNDEFINED : &quot;-1&quot;,
+<span id='android-content-pm-SharedLibraryInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-SharedLibraryInfo-method-createForStatic'>/**
+</span>@hide 
+*/
+createForStatic : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-createForDynamic'>/**
+</span>@hide 
+*/
+createForDynamic : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getType'>/**Gets the type of this library.
+</span>@return {Number} The library type.
+*/
+getType : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getName'>/**Gets the library name an app defines in its manifest
+</span> to depend on the library.
+@return {String} The name.
+*/
+getName : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getPath'>/**If the shared library is a jar file, returns the path of that jar. Null otherwise.
+</span> Only libraries with TYPE_BUILTIN are in jar files.
+@return {String} The path.
+@hide 
+*/
+getPath : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getPackageName'>/**If the shared library is an apk, returns the package name. Null otherwise.
+</span> Only libraries with TYPE_DYNAMIC or TYPE_STATIC are in apks.
+@return {String} The package name.
+@hide 
+*/
+getPackageName : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getAllCodePaths'>/**Get all code paths for that library.
+</span>@return {Object {java.util.List}} All code paths.
+@hide 
+*/
+getAllCodePaths : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-addDependency'>/**Add a library dependency to that library. Note that this
+</span> should be called under the package manager lock.
+@hide 
+*/
+addDependency : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-clearDependencies'>/**Clear all dependencies.
+</span>@hide 
+*/
+clearDependencies : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getDependencies'>/**Gets the libraries this library directly depends on. Note that
+</span> the package manager prevents recursive dependencies when installing
+ a package.
+@return {Object {java.util.List}} The dependencies.
+@hide 
+*/
+getDependencies : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getVersion'>/**
+</span>@deprecated Use {@link #getLongVersion()} instead.
+*/
+getVersion : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getLongVersion'>/**Gets the version of the library. For {@link #TYPE_STATIC static} libraries
+</span> this is the declared version and for {@link #TYPE_DYNAMIC dynamic} and
+ {@link #TYPE_BUILTIN builtin} it is {@link #VERSION_UNDEFINED} as these
+ are not versioned.
+@return {Number} The version.
+*/
+getLongVersion : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-isBuiltin'>/**
+</span>@removed 
+*/
+isBuiltin : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-isDynamic'>/**
+</span>@removed 
+*/
+isDynamic : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-isStatic'>/**
+</span>@removed 
+*/
+isStatic : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getDeclaringPackage'>/**Gets the package that declares the library.
+</span>@return {Object {android.content.pm.VersionedPackage}} The package declaring the library.
+*/
+getDeclaringPackage : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-getDependentPackages'>/**Gets the packages that depend on the library.
+</span>@return {Object {java.util.List}} The dependent packages.
+*/
+getDependentPackages : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-SharedLibraryInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

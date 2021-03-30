@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageParser-Package'>/**@class android.content.pm.PackageParser.Package
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Representation of a full package parsed from APK files on disk. A package
+ consists of a single base APK, and zero or more split APKs.
+*/
+var Package = {
+
+<span id='android-content-pm-PackageParser-Package-property-packageName'>/***/
+</span>packageName : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-manifestPackageName'>/***/
+</span>manifestPackageName : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-splitNames'>/**Names of any split APKs, ordered by parsed splitName */
+</span>splitNames : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-volumeUuid'>/***/
+</span>volumeUuid : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-codePath'>/** Path where this package was found on disk. For monolithic packages
+</span> this is path to single base APK file; for cluster packages this is
+ path to the cluster directory.
+*/
+codePath : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-baseCodePath'>/**Path of base APK */
+</span>baseCodePath : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-splitCodePaths'>/**Paths of any split APKs, ordered by parsed splitName */
+</span>splitCodePaths : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-baseRevisionCode'>/**Revision code of base APK */
+</span>baseRevisionCode : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-splitRevisionCodes'>/**Revision codes of any split APKs, ordered by parsed splitName */
+</span>splitRevisionCodes : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-splitFlags'>/**Flags of any split APKs; ordered by parsed splitName */
+</span>splitFlags : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-splitPrivateFlags'>/** Private flags of any split APKs; ordered by parsed splitName.
+</span>
+ {@hide}
+*/
+splitPrivateFlags : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-baseHardwareAccelerated'>/***/
+</span>baseHardwareAccelerated : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-applicationInfo'>/***/
+</span>applicationInfo : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-permissions'>/***/
+</span>permissions : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-permissionGroups'>/***/
+</span>permissionGroups : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-activities'>/***/
+</span>activities : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-receivers'>/***/
+</span>receivers : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-providers'>/***/
+</span>providers : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-services'>/***/
+</span>services : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-instrumentation'>/***/
+</span>instrumentation : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-requestedPermissions'>/***/
+</span>requestedPermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-implicitPermissions'>/**Permissions requested but not in the manifest. */
+</span>implicitPermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-protectedBroadcasts'>/***/
+</span>protectedBroadcasts : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-parentPackage'>/***/
+</span>parentPackage : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-childPackages'>/***/
+</span>childPackages : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-staticSharedLibName'>/***/
+</span>staticSharedLibName : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-staticSharedLibVersion'>/***/
+</span>staticSharedLibVersion : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-libraryNames'>/***/
+</span>libraryNames : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-usesLibraries'>/***/
+</span>usesLibraries : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-usesStaticLibraries'>/***/
+</span>usesStaticLibraries : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-usesStaticLibrariesVersions'>/***/
+</span>usesStaticLibrariesVersions : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-usesStaticLibrariesCertDigests'>/***/
+</span>usesStaticLibrariesCertDigests : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-usesOptionalLibraries'>/***/
+</span>usesOptionalLibraries : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-usesLibraryFiles'>/***/
+</span>usesLibraryFiles : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-usesLibraryInfos'>/***/
+</span>usesLibraryInfos : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-preferredActivityFilters'>/***/
+</span>preferredActivityFilters : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mOriginalPackages'>/***/
+</span>mOriginalPackages : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mRealPackage'>/***/
+</span>mRealPackage : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mAdoptPermissions'>/***/
+</span>mAdoptPermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mAppMetaData'>/***/
+</span>mAppMetaData : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mVersionCode'>/***/
+</span>mVersionCode : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mVersionCodeMajor'>/***/
+</span>mVersionCodeMajor : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mVersionName'>/***/
+</span>mVersionName : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mSharedUserId'>/***/
+</span>mSharedUserId : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mSharedUserLabel'>/***/
+</span>mSharedUserLabel : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mSigningDetails'>/***/
+</span>mSigningDetails : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mPreferredOrder'>/***/
+</span>mPreferredOrder : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mLastPackageUsageTimeInMills'>/***/
+</span>mLastPackageUsageTimeInMills : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mExtras'>/***/
+</span>mExtras : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-configPreferences'>/***/
+</span>configPreferences : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-reqFeatures'>/***/
+</span>reqFeatures : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-featureGroups'>/***/
+</span>featureGroups : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-installLocation'>/***/
+</span>installLocation : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-coreApp'>/***/
+</span>coreApp : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mRequiredForAllUsers'>/***/
+</span>mRequiredForAllUsers : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mRestrictedAccountType'>/***/
+</span>mRestrictedAccountType : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mRequiredAccountType'>/***/
+</span>mRequiredAccountType : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mOverlayTarget'>/***/
+</span>mOverlayTarget : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mOverlayTargetName'>/***/
+</span>mOverlayTargetName : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mOverlayCategory'>/***/
+</span>mOverlayCategory : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mOverlayPriority'>/***/
+</span>mOverlayPriority : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mOverlayIsStatic'>/***/
+</span>mOverlayIsStatic : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mCompileSdkVersion'>/***/
+</span>mCompileSdkVersion : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mCompileSdkVersionCodename'>/***/
+</span>mCompileSdkVersionCodename : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mUpgradeKeySets'>/** Data used to feed the KeySetManagerService
+</span>*/
+mUpgradeKeySets : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-mKeySetMapping'>/***/
+</span>mKeySetMapping : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-cpuAbiOverride'>/** The install time abi override for this package, if any.
+</span>
+ TODO: This seems like a horrible place to put the abiOverride because
+ this isn't something the packageParser parsers. However, this fits in with
+ the rest of the PackageManager where package scanning randomly pushes
+ and prods fields out of {@code this.applicationInfo}.
+*/
+cpuAbiOverride : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-use32bitAbi'>/** The install time abi override to choose 32bit abi's when multiple abi's
+</span> are present. This is only meaningfull for multiarch applications.
+ The use32bitAbi attribute is ignored if cpuAbiOverride is also set.
+*/
+use32bitAbi : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-restrictUpdateHash'>/***/
+</span>restrictUpdateHash : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-visibleToInstantApps'>/**Set if the app or any of its components are visible to instant applications. */
+</span>visibleToInstantApps : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-isStub'>/**Whether or not the package is a stub and must be replaced by the full version. */
+</span>isStub : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-Package-method-getLongVersionCode'>/**
+</span>*/
+getLongVersionCode : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationVolumeUuid'>/**
+</span>*/
+setApplicationVolumeUuid : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationInfoCodePath'>/**
+</span>*/
+setApplicationInfoCodePath : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationInfoResourcePath'>/**
+</span>@deprecated Forward locked apps no longer supported. Resource path not needed.
+*/
+setApplicationInfoResourcePath : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationInfoBaseResourcePath'>/**
+</span>@deprecated Forward locked apps no longer supported. Resource path not needed.
+*/
+setApplicationInfoBaseResourcePath : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationInfoBaseCodePath'>/**
+</span>*/
+setApplicationInfoBaseCodePath : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-getChildPackageNames'>/**
+</span>*/
+getChildPackageNames : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-hasChildPackage'>/**
+</span>*/
+hasChildPackage : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationInfoSplitCodePaths'>/**
+</span>*/
+setApplicationInfoSplitCodePaths : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationInfoSplitResourcePaths'>/**
+</span>@deprecated Forward locked apps no longer supported. Resource path not needed.
+*/
+setApplicationInfoSplitResourcePaths : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setSplitCodePaths'>/**
+</span>*/
+setSplitCodePaths : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setCodePath'>/**
+</span>*/
+setCodePath : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setBaseCodePath'>/**
+</span>*/
+setBaseCodePath : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setSigningDetails'>/**Sets signing details on the package and any of its children.
+</span>*/
+setSigningDetails : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setVolumeUuid'>/**
+</span>*/
+setVolumeUuid : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setApplicationInfoFlags'>/**
+</span>*/
+setApplicationInfoFlags : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setUse32bitAbi'>/**
+</span>*/
+setUse32bitAbi : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isLibrary'>/**
+</span>*/
+isLibrary : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-getAllCodePaths'>/**
+</span>*/
+getAllCodePaths : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-getAllCodePathsExcludingResourceOnly'>/**Filtered set of {@link #getAllCodePaths}() that excludes
+</span> resource-only APKs.
+*/
+getAllCodePathsExcludingResourceOnly : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-setPackageName'>/**
+</span>*/
+setPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-hasComponentClassName'>/**
+</span>*/
+hasComponentClassName : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isExternal'>/**
+</span>@hide 
+*/
+isExternal : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isForwardLocked'>/**
+</span>@hide 
+*/
+isForwardLocked : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isOem'>/**
+</span>@hide 
+*/
+isOem : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isVendor'>/**
+</span>@hide 
+*/
+isVendor : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isProduct'>/**
+</span>@hide 
+*/
+isProduct : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isProductServices'>/**
+</span>@hide 
+*/
+isProductServices : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isOdm'>/**
+</span>@hide 
+*/
+isOdm : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isPrivileged'>/**
+</span>@hide 
+*/
+isPrivileged : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isSystem'>/**
+</span>@hide 
+*/
+isSystem : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isUpdatedSystemApp'>/**
+</span>@hide 
+*/
+isUpdatedSystemApp : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-canHaveOatDir'>/**
+</span>@hide 
+*/
+canHaveOatDir : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-isMatch'>/**
+</span>*/
+isMatch : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-getLatestPackageUseTimeInMills'>/**
+</span>*/
+getLatestPackageUseTimeInMills : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-getLatestForegroundPackageUseTimeInMills'>/**
+</span>*/
+getLatestForegroundPackageUseTimeInMills : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-PackageParser-Package-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

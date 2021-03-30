@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-ProvisioningManager'>/**@class android.telephony.ims.ProvisioningManager
+</span>@extends java.lang.Object
+
+ Manages IMS provisioning and configuration parameters, as well as callbacks for apps to listen
+ to changes in these configurations.
+
+ IMS provisioning keys are defined per carrier or OEM using OMA-DM or other provisioning
+ applications and may vary. It is up to the carrier and OEM applications to ensure that the
+ correct provisioning keys are being used when integrating with a vendor's ImsService.
+
+ Note: For compatibility purposes, the integer values [0 - 99] used in
+ {@link #setProvisioningIntValue(int, int)} have been reserved for existing provisioning keys
+ previously defined in the Android framework. Please do not redefine new provisioning keys in this
+ range or it may generate collisions with existing keys. Some common constants have also been
+ defined in this class to make integrating with other system apps easier.
+ @hide
+*/
+var ProvisioningManager = {
+
+<span id='android-telephony-ims-ProvisioningManager-property-STRING_QUERY_RESULT_ERROR_GENERIC'>/** The query from {@link #getProvisioningStringValue}(int) has resulted in an unspecified error.
+</span>*/
+STRING_QUERY_RESULT_ERROR_GENERIC : &quot;STRING_QUERY_RESULT_ERROR_GENERIC&quot;,
+<span id='android-telephony-ims-ProvisioningManager-property-STRING_QUERY_RESULT_ERROR_NOT_READY'>/** The query from {@link #getProvisioningStringValue}(int) has resulted in an error because the
+</span> ImsService implementation was not ready for provisioning queries.
+*/
+STRING_QUERY_RESULT_ERROR_NOT_READY : &quot;STRING_QUERY_RESULT_ERROR_NOT_READY&quot;,
+<span id='android-telephony-ims-ProvisioningManager-property-PROVISIONING_VALUE_DISABLED'>/** The integer result of provisioning for the queried key is disabled.
+</span>*/
+PROVISIONING_VALUE_DISABLED : &quot;0&quot;,
+<span id='android-telephony-ims-ProvisioningManager-property-PROVISIONING_VALUE_ENABLED'>/** The integer result of provisioning for the queried key is enabled.
+</span>*/
+PROVISIONING_VALUE_ENABLED : &quot;1&quot;,
+<span id='android-telephony-ims-ProvisioningManager-property-KEY_VOICE_OVER_WIFI_ROAMING_ENABLED_OVERRIDE'>/** Override the user-defined WiFi Roaming enabled setting for this subscription, defined in
+</span> {@link SubscriptionManager#WFC_ROAMING_ENABLED_CONTENT_URI}, for the purposes of provisioning
+ the subscription for WiFi Calling.
+
+ @see #getProvisioningIntValue(int)
+ @see #setProvisioningIntValue(int, int)
+*/
+KEY_VOICE_OVER_WIFI_ROAMING_ENABLED_OVERRIDE : &quot;26&quot;,
+<span id='android-telephony-ims-ProvisioningManager-property-KEY_VOICE_OVER_WIFI_MODE_OVERRIDE'>/** Override the user-defined WiFi mode for this subscription, defined in
+</span> {@link SubscriptionManager#WFC_MODE_CONTENT_URI}, for the purposes of provisioning
+ this subscription for WiFi Calling.
+
+ Valid values for this key are:
+ {@link android.telephony.ims.ImsMmTelManager#WIFI_MODE_WIFI_ONLY},
+ {@link android.telephony.ims.ImsMmTelManager#WIFI_MODE_CELLULAR_PREFERRED}, or
+ {@link android.telephony.ims.ImsMmTelManager#WIFI_MODE_WIFI_PREFERRED}.
+
+ @see #getProvisioningIntValue(int)
+ @see #setProvisioningIntValue(int, int)
+*/
+KEY_VOICE_OVER_WIFI_MODE_OVERRIDE : &quot;27&quot;,
+<span id='android-telephony-ims-ProvisioningManager-method-createForSubscriptionId'>/**Create a new {@link android.telephony.ims.ProvisioningManager} for the subscription specified.
+</span>@param {Number} subId The ID of the subscription that this ProvisioningManager will use.
+@see android.telephony.SubscriptionManager#getActiveSubscriptionInfoList()
+@throws IllegalArgumentException if the subscription is invalid.
+*/
+createForSubscriptionId : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-registerProvisioningChangedCallback'>/**Register a new {@link android.telephony.ims.ProvisioningManager.Callback} to listen to changes to changes in IMS provisioning.
+</span>
+ When the subscription associated with this callback is removed (SIM removed, ESIM swap,
+ etc...), this callback will automatically be removed.
+@param {Object {Executor}} executor The {@link Executor} to call the callback methods on
+@param {Object {ProvisioningManager.Callback}} callback The provisioning callbackto be registered.
+@see #unregisterProvisioningChangedCallback(Callback)
+@see SubscriptionManager.OnSubscriptionsChangedListener
+@throws IllegalArgumentException if the subscription associated with this callback is not
+ active (SIM is not inserted, ESIM inactive) or the subscription is invalid.
+@throws ImsException if the subscription associated with this callback is valid, but
+ the {@link ImsService} associated with the subscription is not available. This can happen if
+ the service crashed, for example. See {@link ImsException#getCode()} for a more detailed
+ reason.
+*/
+registerProvisioningChangedCallback : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-unregisterProvisioningChangedCallback'>/**Unregister an existing {@link android.telephony.ims.ProvisioningManager.Callback}. When the subscription associated with this
+</span> callback is removed (SIM removed, ESIM swap, etc...), this callback will automatically be
+ removed. If this method is called for an inactive subscription, it will result in a no-op.
+@param {Object {ProvisioningManager.Callback}} callback The existing {@link Callback} to be removed.
+@see #registerProvisioningChangedCallback(Executor, Callback)
+@throws IllegalArgumentException if the subscription associated with this callback is
+ invalid.
+*/
+unregisterProvisioningChangedCallback : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-getProvisioningIntValue'>/**Query for the integer value associated with the provided key.
+</span>
+ This operation is blocking and should not be performed on the UI thread.
+@param {Number} key An integer that represents the provisioning key, which is defined by the OEM.
+@return {Number} an integer value for the provided key, or
+ {@link ImsConfigImplBase#CONFIG_RESULT_UNKNOWN} if the key doesn't exist.
+@throws IllegalArgumentException if the key provided was invalid.
+*/
+getProvisioningIntValue : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-getProvisioningStringValue'>/**Query for the String value associated with the provided key.
+</span>
+ This operation is blocking and should not be performed on the UI thread.
+@param {Number} key A String that represents the provisioning key, which is defined by the OEM.
+@return {String} a String value for the provided key, {@code null} if the key doesn't exist, or
+ {@link StringResultError} if there was an error getting the value for the provided key.
+@throws IllegalArgumentException if the key provided was invalid.
+*/
+getProvisioningStringValue : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-setProvisioningIntValue'>/**Set the integer value associated with the provided key.
+</span>
+ This operation is blocking and should not be performed on the UI thread.
+
+ Use {@link #setProvisioningStringValue(int, String)} with proper namespacing (to be defined
+ per OEM or carrier) when possible instead to avoid key collision if needed.
+@param {Number} key An integer that represents the provisioning key, which is defined by the OEM.
+@param {Number} value a integer value for the provided key.
+@return {Number} the result of setting the configuration value.
+*/
+setProvisioningIntValue : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-setProvisioningStringValue'>/**Set the String value associated with the provided key.
+</span>
+ This operation is blocking and should not be performed on the UI thread.
+@param {Number} key A String that represents the provisioning key, which is defined by the OEM and
+     should be appropriately namespaced to avoid collision.
+@param {String} value a String value for the provided key.
+@return {Number} the result of setting the configuration value.
+*/
+setProvisioningStringValue : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-setProvisioningStatusForCapability'>/**Set the provisioning status for the IMS MmTel capability using the specified subscription.
+</span>
+ Provisioning may or may not be required, depending on the carrier configuration. If
+ provisioning is not required for the carrier associated with this subscription or the device
+ does not support the capability/technology combination specified, this operation will be a
+ no-op.
+@param {Number} isProvisioned true if the device is provisioned for UT over IMS, false otherwise.
+@see CarrierConfigManager#KEY_CARRIER_VOLTE_PROVISIONING_REQUIRED_BOOL
+@param isProvisioned true if the device is provisioned for UT over IMS, false otherwise.
+*/
+setProvisioningStatusForCapability : function(  ) {},
+
+<span id='android-telephony-ims-ProvisioningManager-method-getProvisioningStatusForCapability'>/**Get the provisioning status for the IMS MmTel capability specified.
+</span>
+ If provisioning is not required for the queried
+ {@link MmTelFeature.MmTelCapabilities.MmTelCapability} and
+ {@link ImsRegistrationImplBase.ImsRegistrationTech} combination specified, this method will
+ always return {@code true}.
+@see CarrierConfigManager#KEY_CARRIER_UT_PROVISIONING_REQUIRED_BOOL
+@see CarrierConfigManager#KEY_CARRIER_VOLTE_PROVISIONING_REQUIRED_BOOL
+@return {Boolean} true if the device is provisioned for the capability or does not require
+ provisioning, false if the capability does require provisioning and has not been
+ provisioned yet.
+*/
+getProvisioningStatusForCapability : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

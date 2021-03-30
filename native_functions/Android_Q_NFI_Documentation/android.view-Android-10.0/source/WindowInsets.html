@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-WindowInsets'>/**@class android.view.WindowInsets
+</span>@extends java.lang.Object
+
+ Describes a set of insets for window content.
+
+ &lt;p&gt;WindowInsets are immutable and may be expanded to include more inset types in the future.
+ To adjust insets, use one of the supplied clone methods to obtain a new WindowInsets instance
+ with the adjusted properties.&lt;/p&gt;
+
+ &lt;p&gt;Note: Before {@link android.os.Build.VERSION_CODES#P P}, WindowInsets instances were only
+ immutable during a single layout pass (i.e. would return the same values between
+ {@link android.view.View#onApplyWindowInsets} and {@link android.view.View#onLayout}, but could return other values
+ otherwise). Starting with {@link android.os.Build.VERSION_CODES#P P}, WindowInsets are
+ always immutable and implement equality.
+
+ @see View.OnApplyWindowInsetsListener
+ @see View#onApplyWindowInsets(WindowInsets)
+*/
+var WindowInsets = {
+
+<span id='android-view-WindowInsets-property-CONSUMED'>/** Since new insets may be added in the future that existing apps couldn't
+</span> know about, this fully empty constant shouldn't be made available to apps
+ since it would allow them to inadvertently consume unknown insets by returning it.
+ @hide
+*/
+CONSUMED : &quot;null&quot;,
+<span id='android-view-WindowInsets-method-getSystemWindowInsetsAsRect'>/**Used to provide a safe copy of the system window insets to pass through
+</span> to the existing fitSystemWindows method and other similar internals.
+@hide 
+@deprecated use {@link #getSystemWindowInsets()} instead.
+*/
+getSystemWindowInsetsAsRect : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getSystemWindowInsets'>/**Returns the system window insets in pixels.
+</span>
+ &lt;p&gt;The system window inset represents the area of a full-screen window that is
+ partially or fully obscured by the status bar, navigation bar, IME or other system windows.
+ &lt;/p&gt;
+@return {Object {android.graphics.Insets}} The system window insets
+*/
+getSystemWindowInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getInsets'>/**Returns the insets of a specific set of windows causing insets, denoted by the
+</span> {@code typeMask} bit mask of {@link android.view.Type.InsetType}s.
+@param {Number} typeMask Bit mask of {@link InsetType}s to query the insets for.
+@return {Object {android.graphics.Insets}} The insets.
+@hide pending unhide
+*/
+getInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getMaxInsets'>/**Returns the maximum amount of insets a specific set of windows can cause, denoted by the
+</span> {@code typeMask} bit mask of {@link android.view.Type.InsetType}s.
+
+ &lt;p&gt;The maximum insets represents the area of a a window that that &lt;b&gt;may&lt;/b&gt; be partially
+ or fully obscured by the system window identified by {@code type}. This value does not
+ change based on the visibility state of those elements. for example, if the status bar is
+ normally shown, but temporarily hidden, the maximum inset will still provide the inset
+ associated with the status bar being shown.&lt;/p&gt;
+@param {Number} typeMask Bit mask of {@link InsetType}s to query the insets for.
+@return {Object {android.graphics.Insets}} The insets.
+@throws IllegalArgumentException If the caller tries to query {@link Type#ime()}. Maximum
+                                  insets are not available for this type as the height of the
+                                  IME is dynamic depending on the {@link EditorInfo} of the
+                                  currently focused view, as well as the UI state of the IME.
+@hide pending unhide
+*/
+getMaxInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-isVisible'>/**Returns whether a set of windows that may cause insets is currently visible on screen,
+</span> regardless of whether it actually overlaps with this window.
+@param {Number} typeMask Bit mask of {@link InsetType}s to query visibility status.
+@return {Boolean} {@code true} if and only if all windows included in {@code typeMask} are currently
+         visible on screen.
+@hide pending unhide
+*/
+isVisible : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getSystemWindowInsetLeft'>/**Returns the left system window inset in pixels.
+</span>
+ &lt;p&gt;The system window inset represents the area of a full-screen window that is
+ partially or fully obscured by the status bar, navigation bar, IME or other system windows.
+ &lt;/p&gt;
+@return {Number} The left system window inset
+*/
+getSystemWindowInsetLeft : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getSystemWindowInsetTop'>/**Returns the top system window inset in pixels.
+</span>
+ &lt;p&gt;The system window inset represents the area of a full-screen window that is
+ partially or fully obscured by the status bar, navigation bar, IME or other system windows.
+ &lt;/p&gt;
+@return {Number} The top system window inset
+*/
+getSystemWindowInsetTop : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getSystemWindowInsetRight'>/**Returns the right system window inset in pixels.
+</span>
+ &lt;p&gt;The system window inset represents the area of a full-screen window that is
+ partially or fully obscured by the status bar, navigation bar, IME or other system windows.
+ &lt;/p&gt;
+@return {Number} The right system window inset
+*/
+getSystemWindowInsetRight : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getSystemWindowInsetBottom'>/**Returns the bottom system window inset in pixels.
+</span>
+ &lt;p&gt;The system window inset represents the area of a full-screen window that is
+ partially or fully obscured by the status bar, navigation bar, IME or other system windows.
+ &lt;/p&gt;
+@return {Number} The bottom system window inset
+*/
+getSystemWindowInsetBottom : function(  ) {},
+
+<span id='android-view-WindowInsets-method-hasSystemWindowInsets'>/**Returns true if this WindowInsets has nonzero system window insets.
+</span>
+ &lt;p&gt;The system window inset represents the area of a full-screen window that is
+ partially or fully obscured by the status bar, navigation bar, IME or other system windows.
+ &lt;/p&gt;
+@return {Boolean} true if any of the system window inset values are nonzero
+*/
+hasSystemWindowInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-hasInsets'>/**Returns true if this WindowInsets has any nonzero insets.
+</span>@return {Boolean} true if any inset values are nonzero
+*/
+hasInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getDisplayCutout'>/**Returns the display cutout if there is one.
+</span>@return {Object {android.view.DisplayCutout}} the display cutout or null if there is none
+@see DisplayCutout
+*/
+getDisplayCutout : function(  ) {},
+
+<span id='android-view-WindowInsets-method-consumeDisplayCutout'>/**Returns a copy of this WindowInsets with the cutout fully consumed.
+</span>@return {Object {android.view.WindowInsets}} A modified copy of this WindowInsets
+*/
+consumeDisplayCutout : function(  ) {},
+
+<span id='android-view-WindowInsets-method-isConsumed'>/**Check if these insets have been fully consumed.
+</span>
+ &lt;p&gt;Insets are considered &quot;consumed&quot; if the applicable &lt;code&gt;consume*&lt;/code&gt; methods
+ have been called such that all insets have been set to zero. This affects propagation of
+ insets through the view hierarchy; insets that have not been fully consumed will continue
+ to propagate down to child views.&lt;/p&gt;
+
+ &lt;p&gt;The result of this method is equivalent to the return value of
+ {@link android.view.View#fitSystemWindows(android.graphics.Rect)}.&lt;/p&gt;
+@return {Boolean} true if the insets have been fully consumed.
+*/
+isConsumed : function(  ) {},
+
+<span id='android-view-WindowInsets-method-isRound'>/**Returns true if the associated window has a round shape.
+</span>
+ &lt;p&gt;A round window's left, top, right and bottom edges reach all the way to the
+ associated edges of the window but the corners may not be visible. Views responding
+ to round insets should take care to not lay out critical elements within the corners
+ where they may not be accessible.&lt;/p&gt;
+@return {Boolean} True if the window is round
+*/
+isRound : function(  ) {},
+
+<span id='android-view-WindowInsets-method-consumeSystemWindowInsets'>/**Returns a copy of this WindowInsets with the system window insets fully consumed.
+</span>@return {Object {android.view.WindowInsets}} A modified copy of this WindowInsets
+*/
+consumeSystemWindowInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-replaceSystemWindowInsets'>/**Returns a copy of this WindowInsets with selected system window insets replaced
+</span> with new values.
+
+ &lt;p&gt;Note: If the system window insets are already consumed, this method will return them
+ unchanged on {@link android.os.Build.VERSION_CODES#Q Q} and later. Prior to
+ {@link android.os.Build.VERSION_CODES#Q Q}, the new values were applied regardless of
+ whether they were consumed, and this method returns invalid non-zero consumed insets.
+@param {Number} left New left inset in pixels
+@param {Number} top New top inset in pixels
+@param {Number} right New right inset in pixels
+@param {Number} bottom New bottom inset in pixels
+@return {Object {android.view.WindowInsets}} A modified copy of this WindowInsets
+@deprecated use {@code Builder#Builder(WindowInsets)} with
+             {@link Builder#setSystemWindowInsets(Insets)} instead.
+*/
+replaceSystemWindowInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-replaceSystemWindowInsets'>/**Returns a copy of this WindowInsets with selected system window insets replaced
+</span> with new values.
+
+ &lt;p&gt;Note: If the system window insets are already consumed, this method will return them
+ unchanged on {@link android.os.Build.VERSION_CODES#Q Q} and later. Prior to
+ {@link android.os.Build.VERSION_CODES#Q Q}, the new values were applied regardless of
+ whether they were consumed, and this method returns invalid non-zero consumed insets.
+@param {Object {Rect}} systemWindowInsets New system window insets. Each field is the inset in pixels
+                           for that edge
+@return {Object {android.view.WindowInsets}} A modified copy of this WindowInsets
+@deprecated use {@code Builder#Builder(WindowInsets)} with
+             {@link Builder#setSystemWindowInsets(Insets)} instead.
+*/
+replaceSystemWindowInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getStableInsets'>/**Returns the stable insets in pixels.
+</span>
+ &lt;p&gt;The stable inset represents the area of a full-screen window that &lt;b&gt;may&lt;/b&gt; be
+ partially or fully obscured by the system UI elements.  This value does not change
+ based on the visibility state of those elements; for example, if the status bar is
+ normally shown, but temporarily hidden, the stable inset will still provide the inset
+ associated with the status bar being shown.&lt;/p&gt;
+@return {Object {android.graphics.Insets}} The stable insets
+*/
+getStableInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getStableInsetTop'>/**Returns the top stable inset in pixels.
+</span>
+ &lt;p&gt;The stable inset represents the area of a full-screen window that &lt;b&gt;may&lt;/b&gt; be
+ partially or fully obscured by the system UI elements.  This value does not change
+ based on the visibility state of those elements; for example, if the status bar is
+ normally shown, but temporarily hidden, the stable inset will still provide the inset
+ associated with the status bar being shown.&lt;/p&gt;
+@return {Number} The top stable inset
+*/
+getStableInsetTop : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getStableInsetLeft'>/**Returns the left stable inset in pixels.
+</span>
+ &lt;p&gt;The stable inset represents the area of a full-screen window that &lt;b&gt;may&lt;/b&gt; be
+ partially or fully obscured by the system UI elements.  This value does not change
+ based on the visibility state of those elements; for example, if the status bar is
+ normally shown, but temporarily hidden, the stable inset will still provide the inset
+ associated with the status bar being shown.&lt;/p&gt;
+@return {Number} The left stable inset
+*/
+getStableInsetLeft : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getStableInsetRight'>/**Returns the right stable inset in pixels.
+</span>
+ &lt;p&gt;The stable inset represents the area of a full-screen window that &lt;b&gt;may&lt;/b&gt; be
+ partially or fully obscured by the system UI elements.  This value does not change
+ based on the visibility state of those elements; for example, if the status bar is
+ normally shown, but temporarily hidden, the stable inset will still provide the inset
+ associated with the status bar being shown.&lt;/p&gt;
+@return {Number} The right stable inset
+*/
+getStableInsetRight : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getStableInsetBottom'>/**Returns the bottom stable inset in pixels.
+</span>
+ &lt;p&gt;The stable inset represents the area of a full-screen window that &lt;b&gt;may&lt;/b&gt; be
+ partially or fully obscured by the system UI elements.  This value does not change
+ based on the visibility state of those elements; for example, if the status bar is
+ normally shown, but temporarily hidden, the stable inset will still provide the inset
+ associated with the status bar being shown.&lt;/p&gt;
+@return {Number} The bottom stable inset
+*/
+getStableInsetBottom : function(  ) {},
+
+<span id='android-view-WindowInsets-method-hasStableInsets'>/**Returns true if this WindowInsets has nonzero stable insets.
+</span>
+ &lt;p&gt;The stable inset represents the area of a full-screen window that &lt;b&gt;may&lt;/b&gt; be
+ partially or fully obscured by the system UI elements.  This value does not change
+ based on the visibility state of those elements; for example, if the status bar is
+ normally shown, but temporarily hidden, the stable inset will still provide the inset
+ associated with the status bar being shown.&lt;/p&gt;
+@return {Boolean} true if any of the stable inset values are nonzero
+*/
+hasStableInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getSystemGestureInsets'>/**Returns the system gesture insets.
+</span>
+ &lt;p&gt;The system gesture insets represent the area of a window where system gestures have
+ priority and may consume some or all touch input, e.g. due to the a system bar
+ occupying it, or it being reserved for touch-only gestures.
+
+ &lt;p&gt;An app can declare priority over system gestures with
+ {@link android.view.View#setSystemGestureExclusionRects} outside of the
+ {@link #getMandatorySystemGestureInsets() mandatory system gesture insets}.
+
+ &lt;p&gt;Simple taps are guaranteed to reach the window even within the system gesture insets,
+ as long as they are outside the {@link #getTappableElementInsets() system window insets}.
+
+ &lt;p&gt;When {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_STABLE} is requested, an inset will be returned
+ even when the system gestures are inactive due to
+ {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN} or
+ {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION}.
+
+ &lt;p&gt;This inset is consumed together with the {@link #getSystemWindowInsets()
+ system window insets} by {@link #consumeSystemWindowInsets}().
+@see #getMandatorySystemGestureInsets
+*/
+getSystemGestureInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getMandatorySystemGestureInsets'>/**Returns the mandatory system gesture insets.
+</span>
+ &lt;p&gt;The mandatory system gesture insets represent the area of a window where mandatory system
+ gestures have priority and may consume some or all touch input, e.g. due to the a system bar
+ occupying it, or it being reserved for touch-only gestures.
+
+ &lt;p&gt;In contrast to {@link #getSystemGestureInsets regular system gestures}, &lt;b&gt;mandatory&lt;/b&gt;
+ system gestures cannot be overriden by {@link android.view.View#setSystemGestureExclusionRects}.
+
+ &lt;p&gt;Simple taps are guaranteed to reach the window even within the system gesture insets,
+ as long as they are outside the {@link #getTappableElementInsets() system window insets}.
+
+ &lt;p&gt;When {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_STABLE} is requested, an inset will be returned
+ even when the system gestures are inactive due to
+ {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN} or
+ {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION}.
+
+ &lt;p&gt;This inset is consumed together with the {@link #getSystemWindowInsets()
+ system window insets} by {@link #consumeSystemWindowInsets}().
+@see #getSystemGestureInsets
+*/
+getMandatorySystemGestureInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-getTappableElementInsets'>/**Returns the tappable element insets.
+</span>
+ &lt;p&gt;The tappable element insets represent how much tappable elements &lt;b&gt;must at least&lt;/b&gt; be
+ inset to remain both tappable and visually unobstructed by persistent system windows.
+
+ &lt;p&gt;This may be smaller than {@link #getSystemWindowInsets}() if the system window is
+ largely transparent and lets through simple taps (but not necessarily more complex gestures).
+
+ &lt;p&gt;Note that generally, tappable elements &lt;strong&gt;should&lt;/strong&gt; be aligned with the
+ {@link #getSystemWindowInsets() system window insets} instead to avoid overlapping with the
+ system bars.
+
+ &lt;p&gt;When {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_STABLE} is requested, an inset will be returned
+ even when the area covered by the inset would be tappable due to
+ {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN} or
+ {@link android.view.View#SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION}.
+
+ &lt;p&gt;This inset is consumed together with the {@link #getSystemWindowInsets()
+ system window insets} by {@link #consumeSystemWindowInsets}().
+*/
+getTappableElementInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-consumeStableInsets'>/**Returns a copy of this WindowInsets with the stable insets fully consumed.
+</span>@return {Object {android.view.WindowInsets}} A modified copy of this WindowInsets
+*/
+consumeStableInsets : function(  ) {},
+
+<span id='android-view-WindowInsets-method-shouldAlwaysConsumeSystemBars'>/**
+</span>@hide 
+*/
+shouldAlwaysConsumeSystemBars : function(  ) {},
+
+<span id='android-view-WindowInsets-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-view-WindowInsets-method-inset'>/**Returns a copy of this instance inset in the given directions.
+</span>@see #inset(int, int, int, int)
+@deprecated use {@link #inset(Insets)}
+@hide 
+*/
+inset : function(  ) {},
+
+<span id='android-view-WindowInsets-method-inset'>/**Returns a copy of this instance inset in the given directions.
+</span>@see #inset(int, int, int, int)
+@hide 
+*/
+inset : function(  ) {},
+
+<span id='android-view-WindowInsets-method-inset'>/**Returns a copy of this instance inset in the given directions.
+</span>
+ This is intended for dispatching insets to areas of the window that are smaller than the
+ current area.
+
+ &lt;p&gt;Example:
+ &lt;pre&gt;
+ childView.dispatchApplyWindowInsets(insets.inset(
+         childMarginLeft, childMarginTop, childMarginBottom, childMarginRight));
+ &lt;/pre&gt;
+@param {Number} left the amount of insets to remove from the left. Must be non-negative.
+@param {Number} top the amount of insets to remove from the top. Must be non-negative.
+@param {Number} right the amount of insets to remove from the right. Must be non-negative.
+@param {Number} bottom the amount of insets to remove from the bottom. Must be non-negative.
+@return {Object {android.view.WindowInsets}} the inset insets
+*/
+inset : function(  ) {},
+
+<span id='android-view-WindowInsets-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-view-WindowInsets-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

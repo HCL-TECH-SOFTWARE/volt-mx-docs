@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaCodecInfo'>/**@class android.media.MediaCodecInfo
+</span>@extends java.lang.Object
+
+ Provides information about a given media codec available on the device. You can
+ iterate through all codecs available by querying {@link android.media.MediaCodecList}. For example,
+ here's how to find an encoder that supports a given MIME type:
+ &lt;pre&gt;
+ private static MediaCodecInfo selectCodec(String mimeType) {
+     int numCodecs = MediaCodecList.getCodecCount();
+     for (int i = 0; i &amp;lt; numCodecs; i++) {
+         MediaCodecInfo codecInfo = MediaCodecList.getCodecInfoAt(i);
+
+         if (!codecInfo.isEncoder()) {
+             continue;
+         }
+
+         String[] types = codecInfo.getSupportedTypes();
+         for (int j = 0; j &amp;lt; types.length; j++) {
+             if (types[j].equalsIgnoreCase(mimeType)) {
+                 return codecInfo;
+             }
+         }
+     }
+     return null;
+ }&lt;/pre&gt;
+
+*/
+var MediaCodecInfo = {
+
+<span id='android-media-MediaCodecInfo-method-getName'>/**Retrieve the codec name.
+</span>
+ &lt;strong&gt;Note:&lt;/strong&gt; Implementations may provide multiple aliases (codec
+ names) for the same underlying codec, any of which can be used to instantiate the same
+ underlying codec in {@link android.media.MediaCodec#createByCodecName}.
+
+ Applications targeting SDK &lt; {@link android.os.Build.VERSION_CODES#Q}, cannot determine if
+ the multiple codec names listed in MediaCodecList are in-fact for the same codec.
+*/
+getName : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-getCanonicalName'>/**Retrieve the underlying codec name.
+</span>
+ Device implementations may provide multiple aliases (codec names) for the same underlying
+ codec to maintain backward app compatibility. This method returns the name of the underlying
+ codec name, which must not be another alias. For non-aliases this is always the name of the
+ codec.
+*/
+getCanonicalName : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-isAlias'>/**Query if the codec is an alias for another underlying codec.
+</span>*/
+isAlias : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-isEncoder'>/**Query if the codec is an encoder.
+</span>*/
+isEncoder : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-isVendor'>/**Query if the codec is provided by the Android platform (false) or the device manufacturer
+</span> (true).
+*/
+isVendor : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-isSoftwareOnly'>/**Query if the codec is software only. Software-only codecs are more secure as they run in
+</span> a tighter security sandbox. On the other hand, software-only codecs do not provide any
+ performance guarantees.
+*/
+isSoftwareOnly : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-isHardwareAccelerated'>/**Query if the codec is hardware accelerated. This attribute is provided by the device
+</span> manufacturer. Note that it cannot be tested for correctness.
+*/
+isHardwareAccelerated : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-getSupportedTypes'>/**Query the media types supported by the codec.
+</span>*/
+getSupportedTypes : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-getCapabilitiesForType'>/**Enumerates the capabilities of the codec component. Since a single
+</span> component can support data of a variety of types, the type has to be
+ specified to yield a meaningful result.
+@param {String} type The MIME type to query
+*/
+getCapabilitiesForType : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-method-makeRegular'>/**
+</span>@hide 
+*/
+makeRegular : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

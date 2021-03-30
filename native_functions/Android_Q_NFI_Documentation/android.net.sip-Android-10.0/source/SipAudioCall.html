@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-sip-SipAudioCall'>/**@class android.net.sip.SipAudioCall
+</span>@extends java.lang.Object
+
+ Handles an Internet audio call over SIP. You can instantiate this class with {@link android.net.sip.SipManager},
+ using {@link android.net.sip.SipManager#makeAudioCall makeAudioCall()} and  {@link android.net.sip.SipManager#takeAudioCall
+ takeAudioCall()}.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Using this class require the
+   {@link android.Manifest.permission#INTERNET} and
+   {@link android.Manifest.permission#USE_SIP} permissions. In addition, {@link #startAudio} requires the
+   {@link android.Manifest.permission#RECORD_AUDIO},
+   {@link android.Manifest.permission#ACCESS_WIFI_STATE}, and
+   {@link android.Manifest.permission#WAKE_LOCK} permissions; and {@link #setSpeakerMode
+   setSpeakerMode()} requires the
+   {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS} permission.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using SIP, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/network/sip.html&quot;&gt;Session Initiation Protocol&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var SipAudioCall = {
+
+<span id='android-net-sip-SipAudioCall-method-setListener'>/**Sets the listener to listen to the audio call events. The method calls
+</span> {@link #setListener setListener(listener, false)}.
+@param {Object {SipAudioCall.Listener}} listener to listen to the audio call events of this object
+@see #setListener(Listener, boolean)
+*/
+setListener : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-setListener'>/**Sets the listener to listen to the audio call events. A
+</span> {@link android.net.sip.SipAudioCall} can only hold one listener at a time. Subsequent
+ calls to this method override the previous listener.
+@param {Object {SipAudioCall.Listener}} listener to listen to the audio call events of this object
+@param {Boolean} callbackImmediately set to true if the caller wants to be called
+      back immediately on the current state
+*/
+setListener : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-isInCall'>/**Checks if the call is established.
+</span>@return {Boolean} true if the call is established
+*/
+isInCall : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-isOnHold'>/**Checks if the call is on hold.
+</span>@return {Boolean} true if the call is on hold
+*/
+isOnHold : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-close'>/**Closes this object. This object is not usable after being closed.
+</span>*/
+close : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-getLocalProfile'>/**Gets the local SIP profile.
+</span>@return {Object {android.net.sip.SipProfile}} the local SIP profile
+*/
+getLocalProfile : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-getPeerProfile'>/**Gets the peer's SIP profile.
+</span>@return {Object {android.net.sip.SipProfile}} the peer's SIP profile
+*/
+getPeerProfile : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-getState'>/**Gets the state of the {@link android.net.sip.SipSession} that carries this call.
+</span> The value returned must be one of the states in {@link android.net.sip.SipSession.State}.
+@return {Number} the session state
+*/
+getState : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-getSipSession'>/**Gets the {@link android.net.sip.SipSession} that carries this call.
+</span>@return {Object {android.net.sip.SipSession}} the session object that carries this call
+@hide 
+*/
+getSipSession : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-attachCall'>/**Attaches an incoming call to this call object.
+</span>@param {Object {SipSession}} session the session that receives the incoming call
+@param {String} sessionDescription the session description of the incoming call
+@throws SipException if the SIP service fails to attach this object to
+        the session or VOIP API is not supported by the device
+@see SipManager#isVoipSupported
+*/
+attachCall : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-makeCall'>/**Initiates an audio call to the specified profile. The attempt will be
+</span> timed out if the call is not established within {@code timeout} seconds
+ and {@link android.net.sip.SipAudioCall.Listener#onError onError(SipAudioCall, SipErrorCode.TIME_OUT, String)}
+ will be called.
+@param {Object {SipProfile}} peerProfile the SIP profile to make the call to
+@param {Object {SipSession}} sipSession the {@link SipSession} for carrying out the call
+@param {Number} timeout the timeout value in seconds. Default value (defined by
+        SIP protocol) is used if {@code timeout} is zero or negative.
+@see Listener#onError
+@throws SipException if the SIP service fails to create a session for the
+        call or VOIP API is not supported by the device
+@see SipManager#isVoipSupported
+*/
+makeCall : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-endCall'>/**Ends a call.
+</span>@throws SipException if the SIP service fails to end the call
+*/
+endCall : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-holdCall'>/**Puts a call on hold.  When succeeds, {@link android.net.sip.SipAudioCall.Listener#onCallHeld} is
+</span> called. The attempt will be timed out if the call is not established
+ within {@code timeout} seconds and
+ {@link android.net.sip.SipAudioCall.Listener#onError onError(SipAudioCall, SipErrorCode.TIME_OUT, String)}
+ will be called.
+@param {Number} timeout the timeout value in seconds. Default value (defined by
+        SIP protocol) is used if {@code timeout} is zero or negative.
+@see Listener#onError
+@throws SipException if the SIP service fails to hold the call
+*/
+holdCall : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-answerCall'>/**Answers a call. The attempt will be timed out if the call is not
+</span> established within {@code timeout} seconds and
+ {@link android.net.sip.SipAudioCall.Listener#onError onError(SipAudioCall, SipErrorCode.TIME_OUT, String)}
+ will be called.
+@param {Number} timeout the timeout value in seconds. Default value (defined by
+        SIP protocol) is used if {@code timeout} is zero or negative.
+@see Listener#onError
+@throws SipException if the SIP service fails to answer the call
+*/
+answerCall : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-continueCall'>/**Continues a call that's on hold. When succeeds,
+</span> {@link android.net.sip.SipAudioCall.Listener#onCallEstablished} is called. The attempt will be timed
+ out if the call is not established within {@code timeout} seconds and
+ {@link android.net.sip.SipAudioCall.Listener#onError onError(SipAudioCall, SipErrorCode.TIME_OUT, String)}
+ will be called.
+@param {Number} timeout the timeout value in seconds. Default value (defined by
+        SIP protocol) is used if {@code timeout} is zero or negative.
+@see Listener#onError
+@throws SipException if the SIP service fails to unhold the call
+*/
+continueCall : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-toggleMute'>/**Toggles mute.
+</span>*/
+toggleMute : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-isMuted'>/**Checks if the call is muted.
+</span>@return {Boolean} true if the call is muted
+*/
+isMuted : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-setSpeakerMode'>/**Puts the device to speaker mode.
+</span> &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Requires the
+   {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS} permission.&lt;/p&gt;
+@param {Boolean} speakerMode set true to enable speaker mode; false to disable
+*/
+setSpeakerMode : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-sendDtmf'>/**Sends a DTMF code. According to &lt;a href=&quot;http://tools.ietf.org/html/rfc2833&quot;&gt;RFC 2883&lt;/a&gt;,
+</span> event 0--9 maps to decimal
+ value 0--9, '*' to 10, '#' to 11, event 'A'--'D' to 12--15, and event
+ flash to 16. Currently, event flash is not supported.
+@param {Number} code the DTMF code to send. Value 0 to 15 (inclusive) are valid
+        inputs.
+*/
+sendDtmf : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-sendDtmf'>/**Sends a DTMF code. According to &lt;a href=&quot;http://tools.ietf.org/html/rfc2833&quot;&gt;RFC 2883&lt;/a&gt;,
+</span> event 0--9 maps to decimal
+ value 0--9, '*' to 10, '#' to 11, event 'A'--'D' to 12--15, and event
+ flash to 16. Currently, event flash is not supported.
+@param {Number} code the DTMF code to send. Value 0 to 15 (inclusive) are valid
+        inputs.
+@param {Object {Message}} result the result message to send when done
+*/
+sendDtmf : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-getAudioStream'>/**Gets the {@link AudioStream} object used in this call. The object
+</span> represents the RTP stream that carries the audio data to and from the
+ peer. The object may not be created before the call is established. And
+ it is undefined after the call ends or the {@link #close} method is
+ called.
+@return {Object {android.net.rtp.AudioStream}} the {@link AudioStream} object or null if the RTP stream has not
+      yet been set up
+@hide 
+*/
+getAudioStream : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-getAudioGroup'>/**Gets the {@link AudioGroup} object which the {@link AudioStream} object
+</span> joins. The group object may not exist before the call is established.
+ Also, the {@code AudioStream} may change its group during a call (e.g.,
+ after the call is held/un-held). Finally, the {@code AudioGroup} object
+ returned by this method is undefined after the call ends or the
+ {@link #close} method is called. If a group object is set by
+ {@link #setAudioGroup}(AudioGroup), then this method returns that object.
+@return {Object {android.net.rtp.AudioGroup}} the {@link AudioGroup} object or null if the RTP stream has not
+      yet been set up
+@see #getAudioStream
+@hide 
+*/
+getAudioGroup : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-setAudioGroup'>/**Sets the {@link AudioGroup} object which the {@link AudioStream} object
+</span> joins. If {@code audioGroup} is null, then the {@code AudioGroup} object
+ will be dynamically created when needed. Note that the mode of the
+ {@code AudioGroup} is not changed according to the audio settings (i.e.,
+ hold, mute, speaker phone) of this object. This is mainly used to merge
+ multiple {@code SipAudioCall} objects to form a conference call. The
+ settings of the first object (that merges others) override others'.
+@see #getAudioStream
+@hide 
+*/
+setAudioGroup : function(  ) {},
+
+<span id='android-net-sip-SipAudioCall-method-startAudio'>/**Starts the audio for the established call. This method should be called
+</span> after {@link android.net.sip.SipAudioCall.Listener#onCallEstablished} is called.
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Requires the
+   {@link android.Manifest.permission#RECORD_AUDIO},
+   {@link android.Manifest.permission#ACCESS_WIFI_STATE} and
+   {@link android.Manifest.permission#WAKE_LOCK} permissions.&lt;/p&gt;
+*/
+startAudio : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

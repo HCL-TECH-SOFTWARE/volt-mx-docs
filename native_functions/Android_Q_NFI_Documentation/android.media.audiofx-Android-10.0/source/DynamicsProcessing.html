@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiofx-DynamicsProcessing'>/**@class android.media.audiofx.DynamicsProcessing
+</span>@extends android.media.audiofx.AudioEffect
+
+ DynamicsProcessing is an audio effect for equalizing and changing dynamic range properties of the
+ sound. It is composed of multiple stages including equalization, multi-band compression and
+ limiter.
+ &lt;p&gt;The number of bands and active stages is configurable, and most parameters can be controlled
+ in realtime, such as gains, attack/release times, thresholds, etc.
+ &lt;p&gt;The effect is instantiated and controlled by channels. Each channel has the same basic
+ architecture, but all of their parameters are independent from other channels.
+ &lt;p&gt;The basic channel configuration is:
+ &lt;pre&gt;
+
+    Channel 0          Channel 1       ....       Channel N-1
+      Input              Input                       Input
+        |                  |                           |
+   +----v----+        +----v----+                 +----v----+
+   |inputGain|        |inputGain|                 |inputGain|
+   +---------+        +---------+                 +---------+
+        |                  |                           |
+  +-----v-----+      +-----v-----+               +-----v-----+
+  |   PreEQ   |      |   PreEQ   |               |   PreEQ   |
+  +-----------+      +-----------+               +-----------+
+        |                  |                           |
+  +-----v-----+      +-----v-----+               +-----v-----+
+  |    MBC    |      |    MBC    |               |    MBC    |
+  +-----------+      +-----------+               +-----------+
+        |                  |                           |
+  +-----v-----+      +-----v-----+               +-----v-----+
+  |  PostEQ   |      |  PostEQ   |               |  PostEQ   |
+  +-----------+      +-----------+               +-----------+
+        |                  |                           |
+  +-----v-----+      +-----v-----+               +-----v-----+
+  |  Limiter  |      |  Limiter  |               |  Limiter  |
+  +-----------+      +-----------+               +-----------+
+        |                  |                           |
+     Output             Output                      Output
+ &lt;/pre&gt;
+
+ &lt;p&gt;Where the stages are:
+ inputGain: input gain factor in decibels (dB). 0 dB means no change in level.
+ PreEQ:  Multi-band Equalizer.
+ MBC:    Multi-band Compressor
+ PostEQ: Multi-band Equalizer
+ Limiter: Single band compressor/limiter.
+
+ &lt;p&gt;An application creates a DynamicsProcessing object to instantiate and control this audio
+ effect in the audio framework. A DynamicsProcessor.Config and DynamicsProcessor.Config.Builder
+ are available to help configure the multiple stages and each band parameters if desired.
+ &lt;p&gt;See each stage documentation for further details.
+ &lt;p&gt;If no Config is specified during creation, a default configuration is chosen.
+ &lt;p&gt;To attach the DynamicsProcessing to a particular AudioTrack or MediaPlayer,
+ specify the audio session ID of this AudioTrack or MediaPlayer when constructing the effect
+ (see {@link AudioTrack#getAudioSessionId()} and {@link MediaPlayer#getAudioSessionId()}).
+
+ &lt;p&gt;To attach the DynamicsProcessing to a particular AudioTrack or MediaPlayer, specify the audio
+ session ID of this AudioTrack or MediaPlayer when constructing the DynamicsProcessing.
+ &lt;p&gt;See {@link android.media.MediaPlayer#getAudioSessionId()} for details on audio sessions.
+ &lt;p&gt;See {@link android.media.audiofx.AudioEffect} class for more details on controlling audio
+ effects.
+*/
+var DynamicsProcessing = {
+
+<span id='android-media-audiofx-DynamicsProcessing-property-VARIANT_FAVOR_FREQUENCY_RESOLUTION'>/** Index of variant that favors frequency resolution. Frequency domain based implementation.
+</span>*/
+VARIANT_FAVOR_FREQUENCY_RESOLUTION : &quot;0&quot;,
+<span id='android-media-audiofx-DynamicsProcessing-property-VARIANT_FAVOR_TIME_RESOLUTION'>/** Index of variant that favors time resolution resolution. Time domain based implementation.
+</span>*/
+VARIANT_FAVOR_TIME_RESOLUTION : &quot;1&quot;,
+<span id='android-media-audiofx-DynamicsProcessing-method-getConfig'>/**Returns the Config object used to setup this effect.
+</span>@return {Object {android.media.audiofx.DynamicsProcessing.Config}} Config Current Config object used to setup this DynamicsProcessing effect.
+*/
+getConfig : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getChannelByChannelIndex'>/**
+</span>*/
+getChannelByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setChannelTo'>/**
+</span>*/
+setChannelTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setAllChannelsTo'>/**
+</span>*/
+setAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getInputGainByChannelIndex'>/**
+</span>*/
+getInputGainByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setInputGainbyChannel'>/**
+</span>*/
+setInputGainbyChannel : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setInputGainAllChannelsTo'>/**
+</span>*/
+setInputGainAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getPreEqByChannelIndex'>/**
+</span>*/
+getPreEqByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPreEqByChannelIndex'>/**
+</span>*/
+setPreEqByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPreEqAllChannelsTo'>/**
+</span>*/
+setPreEqAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getPreEqBandByChannelIndex'>/**
+</span>*/
+getPreEqBandByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPreEqBandByChannelIndex'>/**
+</span>*/
+setPreEqBandByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPreEqBandAllChannelsTo'>/**
+</span>*/
+setPreEqBandAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getMbcByChannelIndex'>/**
+</span>*/
+getMbcByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setMbcByChannelIndex'>/**
+</span>*/
+setMbcByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setMbcAllChannelsTo'>/**
+</span>*/
+setMbcAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getMbcBandByChannelIndex'>/**
+</span>*/
+getMbcBandByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setMbcBandByChannelIndex'>/**
+</span>*/
+setMbcBandByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setMbcBandAllChannelsTo'>/**
+</span>*/
+setMbcBandAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getPostEqByChannelIndex'>/**
+</span>*/
+getPostEqByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPostEqByChannelIndex'>/**
+</span>*/
+setPostEqByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPostEqAllChannelsTo'>/**
+</span>*/
+setPostEqAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getPostEqBandByChannelIndex'>/**
+</span>*/
+getPostEqBandByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPostEqBandByChannelIndex'>/**
+</span>*/
+setPostEqBandByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setPostEqBandAllChannelsTo'>/**
+</span>*/
+setPostEqBandAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getLimiterByChannelIndex'>/**
+</span>*/
+getLimiterByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setLimiterByChannelIndex'>/**
+</span>*/
+setLimiterByChannelIndex : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setLimiterAllChannelsTo'>/**
+</span>*/
+setLimiterAllChannelsTo : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getChannelCount'>/**Gets the number of channels in the effect engine
+</span>@return {Number} number of channels currently in use by the effect engine
+*/
+getChannelCount : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setParameterListener'>/**
+</span>@param {Object {DynamicsProcessing.OnParameterChangeListener}} listener OnParameterChangeListener interface registered
+@param listener OnParameterChangeListener interface registered
+*/
+setParameterListener : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-getProperties'>/**
+</span>@hide Gets the DynamicsProcessing properties. This method is useful when a snapshot of current
+ effect settings must be saved by the application.
+@return {Object {android.media.audiofx.DynamicsProcessing.Settings}} a DynamicsProcessing.Settings object containing all current parameters values
+*/
+getProperties : function(  ) {},
+
+<span id='android-media-audiofx-DynamicsProcessing-method-setProperties'>/**
+</span>@param {Object {DynamicsProcessing.Settings}} settings a DynamicsProcessing.Settings object containing the properties to apply
+@param settings a DynamicsProcessing.Settings object containing the properties to apply
+*/
+setProperties : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

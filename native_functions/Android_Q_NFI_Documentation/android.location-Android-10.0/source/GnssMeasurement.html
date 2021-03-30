@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-GnssMeasurement'>/**@class android.location.GnssMeasurement
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class representing a GNSS satellite measurement, containing raw and computed information.
+*/
+var GnssMeasurement = {
+
+<span id='android-location-GnssMeasurement-property-MULTIPATH_INDICATOR_UNKNOWN'>/** The indicator is not available or the presence or absence of multipath is unknown.
+</span>*/
+MULTIPATH_INDICATOR_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GnssMeasurement-property-MULTIPATH_INDICATOR_DETECTED'>/** The measurement shows signs of multi-path.
+</span>*/
+MULTIPATH_INDICATOR_DETECTED : &quot;1&quot;,
+<span id='android-location-GnssMeasurement-property-MULTIPATH_INDICATOR_NOT_DETECTED'>/** The measurement shows no signs of multi-path.
+</span>*/
+MULTIPATH_INDICATOR_NOT_DETECTED : &quot;2&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_UNKNOWN'>/**This GNSS measurement's tracking state is invalid or unknown. */
+</span>STATE_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_CODE_LOCK'>/**This GNSS measurement's tracking state has code lock. */
+</span>STATE_CODE_LOCK : &quot;1&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_BIT_SYNC'>/**This GNSS measurement's tracking state has bit sync. */
+</span>STATE_BIT_SYNC : &quot;2&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_SUBFRAME_SYNC'>/**This GNSS measurement's tracking state has sub-frame sync. */
+</span>STATE_SUBFRAME_SYNC : &quot;4&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_TOW_DECODED'>/**This GNSS measurement's tracking state has time-of-week decoded. */
+</span>STATE_TOW_DECODED : &quot;8&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_MSEC_AMBIGUOUS'>/**This GNSS measurement's tracking state contains millisecond ambiguity. */
+</span>STATE_MSEC_AMBIGUOUS : &quot;16&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_SYMBOL_SYNC'>/**This GNSS measurement's tracking state has symbol sync. */
+</span>STATE_SYMBOL_SYNC : &quot;32&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_GLO_STRING_SYNC'>/**This Glonass measurement's tracking state has string sync. */
+</span>STATE_GLO_STRING_SYNC : &quot;64&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_GLO_TOD_DECODED'>/**This Glonass measurement's tracking state has time-of-day decoded. */
+</span>STATE_GLO_TOD_DECODED : &quot;128&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_BDS_D2_BIT_SYNC'>/**This Beidou measurement's tracking state has D2 bit sync. */
+</span>STATE_BDS_D2_BIT_SYNC : &quot;256&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_BDS_D2_SUBFRAME_SYNC'>/**This Beidou measurement's tracking state has D2 sub-frame sync. */
+</span>STATE_BDS_D2_SUBFRAME_SYNC : &quot;512&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_GAL_E1BC_CODE_LOCK'>/**This Galileo measurement's tracking state has E1B/C code lock. */
+</span>STATE_GAL_E1BC_CODE_LOCK : &quot;1024&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_GAL_E1C_2ND_CODE_LOCK'>/**This Galileo measurement's tracking state has E1C secondary code lock. */
+</span>STATE_GAL_E1C_2ND_CODE_LOCK : &quot;2048&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_GAL_E1B_PAGE_SYNC'>/**This Galileo measurement's tracking state has E1B page sync. */
+</span>STATE_GAL_E1B_PAGE_SYNC : &quot;4096&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_SBAS_SYNC'>/**This SBAS measurement's tracking state has whole second level sync. */
+</span>STATE_SBAS_SYNC : &quot;8192&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_TOW_KNOWN'>/** This GNSS measurement's tracking state has time-of-week known, possibly not decoded
+</span> over the air but has been determined from other sources. If TOW decoded is set then TOW Known
+ will also be set.
+*/
+STATE_TOW_KNOWN : &quot;16384&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_GLO_TOD_KNOWN'>/** This Glonass measurement's tracking state has time-of-day known, possibly not decoded
+</span> over the air but has been determined from other sources. If TOD decoded is set then TOD Known
+ will also be set.
+*/
+STATE_GLO_TOD_KNOWN : &quot;32768&quot;,
+<span id='android-location-GnssMeasurement-property-STATE_2ND_CODE_LOCK'>/**This GNSS measurement's tracking state has secondary code lock. */
+</span>STATE_2ND_CODE_LOCK : &quot;65536&quot;,
+<span id='android-location-GnssMeasurement-property-ADR_STATE_UNKNOWN'>/** The state of the value {@link #getAccumulatedDeltaRangeMeters}() is invalid or unknown.
+</span>*/
+ADR_STATE_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GnssMeasurement-property-ADR_STATE_VALID'>/** The state of the {@link #getAccumulatedDeltaRangeMeters}() is valid.
+</span>*/
+ADR_STATE_VALID : &quot;1&quot;,
+<span id='android-location-GnssMeasurement-property-ADR_STATE_RESET'>/** The state of the {@link #getAccumulatedDeltaRangeMeters}() has detected a reset.
+</span>*/
+ADR_STATE_RESET : &quot;2&quot;,
+<span id='android-location-GnssMeasurement-property-ADR_STATE_CYCLE_SLIP'>/** The state of the {@link #getAccumulatedDeltaRangeMeters}() has a cycle slip detected.
+</span>*/
+ADR_STATE_CYCLE_SLIP : &quot;4&quot;,
+<span id='android-location-GnssMeasurement-property-ADR_STATE_HALF_CYCLE_RESOLVED'>/** Reports whether the value {@link #getAccumulatedDeltaRangeMeters}() has resolved the half
+</span> cycle ambiguity.
+
+ &lt;p&gt; When this bit is set, the {@link #getAccumulatedDeltaRangeMeters}() corresponds to the
+ carrier phase measurement plus an accumulated integer number of carrier full cycles.
+
+ &lt;p&gt; When this bit is unset, the {@link #getAccumulatedDeltaRangeMeters}() corresponds to the
+ carrier phase measurement plus an accumulated integer number of carrier half cycles.
+*/
+ADR_STATE_HALF_CYCLE_RESOLVED : &quot;8&quot;,
+<span id='android-location-GnssMeasurement-property-ADR_STATE_HALF_CYCLE_REPORTED'>/** Reports whether the flag {@link #ADR_STATE_HALF_CYCLE_RESOLVED} has been reported by the
+</span> GNSS hardware.
+
+ &lt;p&gt; When this bit is set, the value of {@link #getAccumulatedDeltaRangeUncertaintyMeters}()
+ can be low (centimeter level) whether or not the half cycle ambiguity is resolved.
+
+ &lt;p&gt; When this bit is unset, the value of {@link #getAccumulatedDeltaRangeUncertaintyMeters}()
+ is larger, to cover the potential error due to half cycle ambiguity being unresolved.
+*/
+ADR_STATE_HALF_CYCLE_REPORTED : &quot;16&quot;,
+<span id='android-location-GnssMeasurement-property-ADR_STATE_ALL'>/** All the 'Accumulated Delta Range' flags.
+</span> @hide
+*/
+ADR_STATE_ALL : &quot;31&quot;,
+<span id='android-location-GnssMeasurement-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-location-GnssMeasurement-method-set'>/**Sets all contents to the values stored in the provided object.
+</span>@hide 
+*/
+set : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-reset'>/**Resets all the contents to its original state.
+</span>@hide 
+*/
+reset : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getSvid'>/**Gets the satellite ID.
+</span>
+ &lt;p&gt;Interpretation depends on {@link #getConstellationType}().
+ See {@link android.location.GnssStatus#getSvid(int)}.
+*/
+getSvid : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setSvid'>/**Sets the Satellite ID.
+</span>@hide 
+*/
+setSvid : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getConstellationType'>/**Gets the constellation type.
+</span>
+ &lt;p&gt;The return value is one of those constants with {@code CONSTELLATION_} prefix in
+ {@link android.location.GnssStatus}.
+*/
+getConstellationType : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setConstellationType'>/**Sets the constellation type.
+</span>@hide 
+*/
+setConstellationType : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getTimeOffsetNanos'>/**Gets the time offset at which the measurement was taken in nanoseconds.
+</span>
+ &lt;p&gt;The reference receiver's time from which this is offset is specified by
+ {@link android.location.GnssClock#getTimeNanos()}.
+
+ &lt;p&gt;The sign of this value is given by the following equation:
+ &lt;pre&gt;
+      measurement time = TimeNanos + TimeOffsetNanos&lt;/pre&gt;
+
+ &lt;p&gt;The value provides an individual time-stamp for the measurement, and allows sub-nanosecond
+ accuracy.
+*/
+getTimeOffsetNanos : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setTimeOffsetNanos'>/**Sets the time offset at which the measurement was taken in nanoseconds.
+</span>@hide 
+*/
+setTimeOffsetNanos : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getState'>/**Gets per-satellite sync state.
+</span>
+ &lt;p&gt;It represents the current sync state for the associated satellite.
+
+ &lt;p&gt;This value helps interpret {@link #getReceivedSvTimeNanos}().
+*/
+getState : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setState'>/**Sets the sync state.
+</span>@hide 
+*/
+setState : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getReceivedSvTimeNanos'>/**Gets the received GNSS satellite time, at the measurement time, in nanoseconds.
+</span>
+ &lt;p&gt;The received satellite time is relative to the beginning of the system week for all
+ constellations except for Glonass where it is relative to the beginning of the Glonass
+ system day.
+
+ &lt;p&gt;The table below indicates the valid range of the received GNSS satellite time. These
+ ranges depend on the constellation and code being tracked and the state of the tracking
+ algorithms given by the {@link #getState} method. The minimum value of this field is zero.
+ The maximum value of this field is determined by looking across all of the state flags
+ that are set, for the given constellation and code type, and finding the the maximum value
+ in this table.
+
+ &lt;p&gt;For example, for GPS L1 C/A, if STATE_TOW_KNOWN is set, this field can be any value from 0
+ to 1 week (in nanoseconds), and for GAL E1B code, if only STATE_GAL_E1BC_CODE_LOCK is set,
+ then this field can be any value from 0 to 4 milliseconds (in nanoseconds.)
+
+ &lt;table border=&quot;1&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;td /&gt;
+       &lt;td colspan=&quot;3&quot;&gt;&lt;strong&gt;GPS/QZSS&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;GLNS&lt;/strong&gt;&lt;/td&gt;
+       &lt;td colspan=&quot;2&quot;&gt;&lt;strong&gt;BDS&lt;/strong&gt;&lt;/td&gt;
+       &lt;td colspan=&quot;3&quot;&gt;&lt;strong&gt;GAL&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;SBAS&lt;/strong&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;&lt;strong&gt;State Flag&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;L1 C/A&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;L5I&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;L5Q&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;L1OF&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;B1I (D1)&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;B1I &amp;nbsp;(D2)&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;E1B&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;E1C&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;E5AQ&lt;/strong&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;strong&gt;L1 C/A&lt;/strong&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_UNKNOWN&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+       &lt;td&gt;0&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_CODE_LOCK&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+       &lt;td&gt;1 ms&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_SYMBOL_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;20 ms (optional)&lt;/td&gt;
+       &lt;td&gt;10 ms&lt;/td&gt;
+       &lt;td&gt;1 ms (optional)&lt;/td&gt;
+       &lt;td&gt;10 ms&lt;/td&gt;
+       &lt;td&gt;20 ms (optional)&lt;/td&gt;
+       &lt;td&gt;2 ms&lt;/td&gt;
+       &lt;td&gt;4 ms (optional)&lt;/td&gt;
+       &lt;td&gt;4 ms (optional)&lt;/td&gt;
+       &lt;td&gt;1 ms (optional)&lt;/td&gt;
+       &lt;td&gt;2 ms&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_BIT_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;20 ms&lt;/td&gt;
+       &lt;td&gt;20 ms&lt;/td&gt;
+       &lt;td&gt;1 ms (optional)&lt;/td&gt;
+       &lt;td&gt;20 ms&lt;/td&gt;
+       &lt;td&gt;20 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;8 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;1 ms (optional)&lt;/td&gt;
+       &lt;td&gt;4 ms&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_SUBFRAME_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;6s&lt;/td&gt;
+       &lt;td&gt;6s&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;2 s&lt;/td&gt;
+       &lt;td&gt;6 s&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;100 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_TOW_DECODED&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td colspan=&quot;2&quot;&gt;1 week&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;1 day&lt;/td&gt;
+       &lt;td colspan=&quot;2&quot;&gt;1 week&lt;/td&gt;
+       &lt;td colspan=&quot;2&quot;&gt;1 week&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;1 week&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_TOW_KNOWN&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td colspan=&quot;3&quot;&gt;1 week&lt;/td&gt;
+       &lt;td&gt;1 day&lt;/td&gt;
+       &lt;td colspan=&quot;2&quot;&gt;1 week&lt;/td&gt;
+       &lt;td colspan=&quot;3&quot;&gt;1 week&lt;/td&gt;
+       &lt;td&gt;1 week&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_GLO_STRING_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;2 s&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_GLO_TOD_DECODED&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;1 day&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_GLO_TOD_KNOWN&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;1 day&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_BDS_D2_BIT_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;2 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_BDS_D2_SUBFRAME_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;600 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_GAL_E1BC_CODE_LOCK&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;4 ms&lt;/td&gt;
+       &lt;td&gt;4 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_GAL_E1C_2ND_CODE_LOCK&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;100 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_2ND_CODE_LOCK&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;10 ms (optional)&lt;/td&gt;
+       &lt;td&gt;20 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;100 ms (optional)&lt;/td&gt;
+       &lt;td&gt;100 ms&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_GAL_E1B_PAGE_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;2 s&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+       &lt;td&gt;
+         &lt;strong&gt;STATE_SBAS_SYNC&lt;/strong&gt;
+       &lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;-&lt;/td&gt;
+       &lt;td&gt;1 s&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;Note: TOW Known refers to the case where TOW is possibly not decoded over the air but has
+ been determined from other sources. If TOW decoded is set then TOW Known must also be set.
+
+ &lt;p&gt;Note well: if there is any ambiguity in integer millisecond, STATE_MSEC_AMBIGUOUS must be
+ set accordingly, in the 'state' field. This value must be populated, unless the 'state' ==
+ STATE_UNKNOWN.
+
+ &lt;p&gt;Note on optional flags:
+ &lt;ul&gt;
+     &lt;li&gt; For L1 C/A and B1I, STATE_SYMBOL_SYNC is optional since the symbol length is the
+     same as the bit length.
+     &lt;li&gt; For L5Q and E5aQ, STATE_BIT_SYNC and STATE_SYMBOL_SYNC are optional since they are
+     implied by STATE_CODE_LOCK.
+     &lt;li&gt; STATE_2ND_CODE_LOCK for L5I is optional since it is implied by STATE_SYMBOL_SYNC.
+     &lt;li&gt; STATE_2ND_CODE_LOCK for E1C is optional since it is implied by
+     STATE_GAL_E1C_2ND_CODE_LOCK.
+     &lt;li&gt; For E1B and E1C, STATE_SYMBOL_SYNC is optional, because it is implied by
+     STATE_GAL_E1BC_CODE_LOCK.
+ &lt;/ul&gt;
+*/
+getReceivedSvTimeNanos : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setReceivedSvTimeNanos'>/**Sets the received GNSS time in nanoseconds.
+</span>@hide 
+*/
+setReceivedSvTimeNanos : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getReceivedSvTimeUncertaintyNanos'>/**Gets the error estimate (1-sigma) for the received GNSS time, in nanoseconds.
+</span>*/
+getReceivedSvTimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setReceivedSvTimeUncertaintyNanos'>/**Sets the received GNSS time uncertainty (1-Sigma) in nanoseconds.
+</span>@hide 
+*/
+setReceivedSvTimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getCn0DbHz'>/**Gets the Carrier-to-noise density in dB-Hz.
+</span>
+ &lt;p&gt;Typical range: 10-50 db-Hz.
+
+ &lt;p&gt;The value contains the measured C/N0 for the signal at the antenna input.
+*/
+getCn0DbHz : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setCn0DbHz'>/**Sets the carrier-to-noise density in dB-Hz.
+</span>@hide 
+*/
+setCn0DbHz : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getPseudorangeRateMetersPerSecond'>/**Gets the Pseudorange rate at the timestamp in m/s.
+</span>
+ &lt;p&gt;The error estimate for this value is
+ {@link #getPseudorangeRateUncertaintyMetersPerSecond}().
+
+ &lt;p&gt;The value is uncorrected, i.e. corrections for receiver and satellite clock frequency
+ errors are not included.
+
+ &lt;p&gt;A positive 'uncorrected' value indicates that the SV is moving away from the receiver. The
+ sign of the 'uncorrected' 'pseudorange rate' and its relation to the sign of 'doppler shift'
+ is given by the equation:
+
+ &lt;pre&gt;
+      pseudorange rate = -k * doppler shift   (where k is a constant)&lt;/pre&gt;
+*/
+getPseudorangeRateMetersPerSecond : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setPseudorangeRateMetersPerSecond'>/**Sets the pseudorange rate at the timestamp in m/s.
+</span>@hide 
+*/
+setPseudorangeRateMetersPerSecond : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getPseudorangeRateUncertaintyMetersPerSecond'>/**Gets the pseudorange's rate uncertainty (1-Sigma) in m/s.
+</span>
+ &lt;p&gt;The uncertainty is represented as an absolute (single sided) value.
+*/
+getPseudorangeRateUncertaintyMetersPerSecond : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setPseudorangeRateUncertaintyMetersPerSecond'>/**Sets the pseudorange's rate uncertainty (1-Sigma) in m/s.
+</span>@hide 
+*/
+setPseudorangeRateUncertaintyMetersPerSecond : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getAccumulatedDeltaRangeState'>/**Gets 'Accumulated Delta Range' state.
+</span>
+ &lt;p&gt;It indicates whether {@link #getAccumulatedDeltaRangeMeters}() is reset or there is a
+ cycle slip (indicating 'loss of lock').
+*/
+getAccumulatedDeltaRangeState : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setAccumulatedDeltaRangeState'>/**Sets the 'Accumulated Delta Range' state.
+</span>@hide 
+*/
+setAccumulatedDeltaRangeState : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getAccumulatedDeltaRangeMeters'>/**Gets the accumulated delta range since the last channel reset, in meters.
+</span>
+ &lt;p&gt;The error estimate for this value is {@link #getAccumulatedDeltaRangeUncertaintyMeters}().
+
+ &lt;p&gt;The availability of the value is represented by {@link #getAccumulatedDeltaRangeState}().
+
+ &lt;p&gt;A positive value indicates that the SV is moving away from the receiver.
+ The sign of {@link #getAccumulatedDeltaRangeMeters}() and its relation to the sign of
+ {@link #getCarrierPhase}() is given by the equation:
+
+ &lt;pre&gt;
+          accumulated delta range = -k * carrier phase    (where k is a constant)&lt;/pre&gt;
+
+ &lt;p&gt;Similar to the concept of an RTCM &quot;Phaserange&quot;, when the accumulated delta range is
+ initially chosen, and whenever it is reset, it will retain the integer nature
+ of the relative carrier phase offset between satellites observed by this receiver, such that
+ the double difference of this value between receivers and satellites may be used, together
+ with integer ambiguity resolution, to determine highly precise relative location between
+ receivers.
+
+ &lt;p&gt;This includes ensuring that all half-cycle ambiguities are resolved before this value is
+ reported as {@link #ADR_STATE_VALID}.
+
+ &lt;p&gt;The alignment of the phase measurement will not be adjusted by the receiver so the
+ in-phase and quadrature phase components will have a quarter cycle offset as they do when
+ transmitted from the satellites. If the measurement is from a combination of the in-phase
+ and quadrature phase components, then the alignment of the phase measurement will be aligned
+ to the in-phase component.
+*/
+getAccumulatedDeltaRangeMeters : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setAccumulatedDeltaRangeMeters'>/**Sets the accumulated delta range in meters.
+</span>@hide 
+*/
+setAccumulatedDeltaRangeMeters : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getAccumulatedDeltaRangeUncertaintyMeters'>/**Gets the accumulated delta range's uncertainty (1-Sigma) in meters.
+</span>
+ &lt;p&gt;The uncertainty is represented as an absolute (single sided) value.
+
+ &lt;p&gt;The status of the value is represented by {@link #getAccumulatedDeltaRangeState}().
+*/
+getAccumulatedDeltaRangeUncertaintyMeters : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setAccumulatedDeltaRangeUncertaintyMeters'>/**Sets the accumulated delta range's uncertainty (1-sigma) in meters.
+</span>
+ &lt;p&gt;The status of the value is represented by {@link #getAccumulatedDeltaRangeState}().
+@hide 
+*/
+setAccumulatedDeltaRangeUncertaintyMeters : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-hasCarrierFrequencyHz'>/**Returns {@code true} if {@link #getCarrierFrequencyHz}() is available, {@code false}
+</span> otherwise.
+*/
+hasCarrierFrequencyHz : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getCarrierFrequencyHz'>/**Gets the carrier frequency of the tracked signal.
+</span>
+ &lt;p&gt;For example it can be the GPS central frequency for L1 = 1575.45 MHz, or L2 = 1227.60 MHz,
+ L5 = 1176.45 MHz, varying GLO channels, etc. If the field is not set, it is the primary
+ common use central frequency, e.g. L1 = 1575.45 MHz for GPS.
+
+ &lt;p&gt; For an L1, L5 receiver tracking a satellite on L1 and L5 at the same time, two raw
+ measurement objects will be reported for this same satellite, in one of the measurement
+ objects, all the values related to L1 will be filled, and in the other all of the values
+ related to L5 will be filled.
+
+ &lt;p&gt;The value is only available if {@link #hasCarrierFrequencyHz}() is {@code true}.
+@return {Number} the carrier frequency of the signal tracked in Hz.
+*/
+getCarrierFrequencyHz : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setCarrierFrequencyHz'>/**Sets the Carrier frequency in Hz.
+</span>@hide 
+*/
+setCarrierFrequencyHz : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-resetCarrierFrequencyHz'>/**Resets the Carrier frequency in Hz.
+</span>@hide 
+*/
+resetCarrierFrequencyHz : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-hasCarrierCycles'>/**Returns {@code true} if {@link #getCarrierCycles}() is available, {@code false} otherwise.
+</span>@deprecated use {@link #getAccumulatedDeltaRangeState()} instead.
+*/
+hasCarrierCycles : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getCarrierCycles'>/**The number of full carrier cycles between the satellite and the receiver.
+</span>
+ &lt;p&gt;The reference frequency is given by the value of {@link #getCarrierFrequencyHz}().
+
+ &lt;p&gt;The value is only available if {@link #hasCarrierCycles}() is {@code true}.
+@deprecated use {@link #getAccumulatedDeltaRangeMeters()} instead.
+*/
+getCarrierCycles : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setCarrierCycles'>/**Sets the number of full carrier cycles between the satellite and the receiver.
+</span>@deprecated use {@link #setAccumulatedDeltaRangeMeters(double)}
+ and {@link #setAccumulatedDeltaRangeState(int)} instead.
+@hide 
+*/
+setCarrierCycles : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-resetCarrierCycles'>/**Resets the number of full carrier cycles between the satellite and the receiver.
+</span>@deprecated use {@link #setAccumulatedDeltaRangeMeters(double)}
+ and {@link #setAccumulatedDeltaRangeState(int)} instead.
+@hide 
+*/
+resetCarrierCycles : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-hasCarrierPhase'>/**Returns {@code true} if {@link #getCarrierPhase}() is available, {@code false} otherwise.
+</span>@deprecated use {@link #getAccumulatedDeltaRangeState()} instead.
+*/
+hasCarrierPhase : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getCarrierPhase'>/**Gets the RF phase detected by the receiver.
+</span>
+ &lt;p&gt;Range: [0.0, 1.0].
+
+ &lt;p&gt;This is the fractional part of the complete carrier phase measurement.
+
+ &lt;p&gt;The reference frequency is given by the value of {@link #getCarrierFrequencyHz}().
+
+ &lt;p&gt;The error estimate for this value is {@link #getCarrierPhaseUncertainty}().
+
+ &lt;p&gt;The value is only available if {@link #hasCarrierPhase}() is {@code true}.
+@deprecated use {@link #getAccumulatedDeltaRangeMeters()} instead.
+*/
+getCarrierPhase : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setCarrierPhase'>/**Sets the RF phase detected by the receiver.
+</span>@deprecated use {@link #setAccumulatedDeltaRangeMeters(double)}
+ and {@link #setAccumulatedDeltaRangeState(int)} instead.
+@hide 
+*/
+setCarrierPhase : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-resetCarrierPhase'>/**Resets the RF phase detected by the receiver.
+</span>@deprecated use {@link #setAccumulatedDeltaRangeMeters(double)}
+ and {@link #setAccumulatedDeltaRangeState(int)} instead.
+@hide 
+*/
+resetCarrierPhase : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-hasCarrierPhaseUncertainty'>/**Returns {@code true} if {@link #getCarrierPhaseUncertainty}() is available, {@code false}
+</span> otherwise.
+@deprecated use {@link #getAccumulatedDeltaRangeState()} instead.
+*/
+hasCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getCarrierPhaseUncertainty'>/**Gets the carrier-phase's uncertainty (1-Sigma).
+</span>
+ &lt;p&gt;The uncertainty is represented as an absolute (single sided) value.
+
+ &lt;p&gt;The value is only available if {@link #hasCarrierPhaseUncertainty}() is {@code true}.
+@deprecated use {@link #getAccumulatedDeltaRangeUncertaintyMeters()} instead.
+*/
+getCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setCarrierPhaseUncertainty'>/**Sets the Carrier-phase's uncertainty (1-Sigma) in cycles.
+</span>@deprecated use {@link #setAccumulatedDeltaRangeUncertaintyMeters(double)}
+ and {@link #setAccumulatedDeltaRangeState(int)} instead.
+@hide 
+*/
+setCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-resetCarrierPhaseUncertainty'>/**Resets the Carrier-phase's uncertainty (1-Sigma) in cycles.
+</span>@deprecated use {@link #setAccumulatedDeltaRangeUncertaintyMeters(double)}
+ and {@link #setAccumulatedDeltaRangeState(int)} instead.
+@hide 
+*/
+resetCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getMultipathIndicator'>/**Gets a value indicating the 'multipath' state of the event.
+</span>*/
+getMultipathIndicator : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setMultipathIndicator'>/**Sets the 'multi-path' indicator.
+</span>@hide 
+*/
+setMultipathIndicator : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-hasSnrInDb'>/**Returns {@code true} if {@link #getSnrInDb}() is available, {@code false} otherwise.
+</span>*/
+hasSnrInDb : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getSnrInDb'>/**Gets the (post-correlation &amp; integration) Signal-to-Noise ratio (SNR) in dB.
+</span>
+ &lt;p&gt;The value is only available if {@link #hasSnrInDb}() is {@code true}.
+*/
+getSnrInDb : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setSnrInDb'>/**Sets the Signal-to-noise ratio (SNR) in dB.
+</span>@hide 
+*/
+setSnrInDb : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-resetSnrInDb'>/**Resets the Signal-to-noise ratio (SNR) in dB.
+</span>@hide 
+*/
+resetSnrInDb : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-hasAutomaticGainControlLevelDb'>/**Returns {@code true} if {@link #getAutomaticGainControlLevelDb}() is available,
+</span> {@code false} otherwise.
+*/
+hasAutomaticGainControlLevelDb : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getAutomaticGainControlLevelDb'>/**Gets the Automatic Gain Control level in dB.
+</span>
+ &lt;p&gt; AGC acts as a variable gain amplifier adjusting the power of the incoming signal. The AGC
+ level may be used to indicate potential interference. When AGC is at a nominal level, this
+ value must be set as 0. Higher gain (and/or lower input power) shall be output as a positive
+ number. Hence in cases of strong jamming, in the band of this signal, this value will go more
+ negative.
+
+ &lt;p&gt; Note: Different hardware designs (e.g. antenna, pre-amplification, or other RF HW
+ components) may also affect the typical output of of this value on any given hardware design
+ in an open sky test - the important aspect of this output is that changes in this value are
+ indicative of changes on input signal power in the frequency band for this measurement.
+
+ &lt;p&gt; The value is only available if {@link #hasAutomaticGainControlLevelDb}() is {@code true}
+*/
+getAutomaticGainControlLevelDb : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setAutomaticGainControlLevelInDb'>/**Sets the Automatic Gain Control level in dB.
+</span>@hide 
+*/
+setAutomaticGainControlLevelInDb : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-resetAutomaticGainControlLevel'>/**Resets the Automatic Gain Control level.
+</span>@hide 
+*/
+resetAutomaticGainControlLevel : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-hasCodeType'>/**Returns {@code true} if {@link #getCodeType}() is available,
+</span> {@code false} otherwise.
+*/
+hasCodeType : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-getCodeType'>/**Gets the GNSS measurement's code type.
+</span>
+ &lt;p&gt;Similar to the Attribute field described in RINEX 3.03, e.g., in Tables 4-10, and Table
+ A2 at the RINEX 3.03 Update 1 Document.
+
+ &lt;p&gt;Returns &quot;A&quot; for GALILEO E1A, GALILEO E6A, IRNSS L5A, IRNSS SA.
+
+ &lt;p&gt;Returns &quot;B&quot; for GALILEO E1B, GALILEO E6B, IRNSS L5B, IRNSS SB.
+
+ &lt;p&gt;Returns &quot;C&quot; for GPS L1 C/A,  GPS L2 C/A, GLONASS G1 C/A, GLONASS G2 C/A, GALILEO E1C,
+ GALILEO E6C, SBAS L1 C/A, QZSS L1 C/A, IRNSS L5C.
+
+ &lt;p&gt;Returns &quot;I&quot; for GPS L5 I, GLONASS G3 I, GALILEO E5a I, GALILEO E5b I, GALILEO E5a+b I,
+ SBAS L5 I, QZSS L5 I, BDS B1 I, BDS B2 I, BDS B3 I.
+
+ &lt;p&gt;Returns &quot;L&quot; for GPS L1C (P), GPS L2C (L), QZSS L1C (P), QZSS L2C (L), LEX(6) L.
+
+ &lt;p&gt;Returns &quot;M&quot; for GPS L1M, GPS L2M.
+
+ &lt;p&gt;Returns &quot;N&quot; for GPS L1 codeless, GPS L2 codeless.
+
+ &lt;p&gt;Returns &quot;P&quot; for GPS L1P, GPS L2P, GLONASS G1P, GLONASS G2P.
+
+ &lt;p&gt;Returns &quot;Q&quot; for GPS L5 Q, GLONASS G3 Q, GALILEO E5a Q, GALILEO E5b Q, GALILEO E5a+b Q,
+ SBAS L5 Q, QZSS L5 Q, BDS B1 Q, BDS B2 Q, BDS B3 Q.
+
+ &lt;p&gt;Returns &quot;S&quot; for GPS L1C (D), GPS L2C (M), QZSS L1C (D), QZSS L2C (M), LEX(6) S.
+
+ &lt;p&gt;Returns &quot;W&quot; for GPS L1 Z-tracking, GPS L2 Z-tracking.
+
+ &lt;p&gt;Returns &quot;X&quot; for GPS L1C (D+P), GPS L2C (M+L), GPS L5 (I+Q), GLONASS G3 (I+Q), GALILEO
+ E1 (B+C), GALILEO E5a (I+Q), GALILEO E5b (I+Q), GALILEO E5a+b(I+Q), GALILEO E6 (B+C), SBAS
+ L5 (I+Q), QZSS L1C (D+P), QZSS L2C (M+L), QZSS L5 (I+Q), LEX(6) (S+L), BDS B1 (I+Q), BDS
+ B2 (I+Q), BDS B3 (I+Q), IRNSS L5 (B+C).
+
+ &lt;p&gt;Returns &quot;Y&quot; for GPS L1Y, GPS L2Y.
+
+ &lt;p&gt;Returns &quot;Z&quot; for GALILEO E1 (A+B+C), GALILEO E6 (A+B+C), QZSS L1-SAIF.
+
+ &lt;p&gt;Returns &quot;UNKNOWN&quot; if the GNSS Measurement's code type is unknown.
+
+ &lt;p&gt;This is used to specify the observation descriptor defined in GNSS Observation Data File
+ Header Section Description in the RINEX standard (Version 3.XX), in cases where the code type
+ does not align with the above listed values. For example, if a code type &quot;G&quot; is added, this
+ string shall be set to &quot;G&quot;.
+*/
+getCodeType : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-setCodeType'>/**Sets the GNSS measurement's code type.
+</span>@hide 
+*/
+setCodeType : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-resetCodeType'>/**Resets the GNSS measurement's code type.
+</span>@hide 
+*/
+resetCodeType : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-location-GnssMeasurement-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

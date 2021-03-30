@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-SimpleCursorAdapter'>/**@class android.widget.SimpleCursorAdapter
+</span>@extends android.widget.ResourceCursorAdapter
+
+ An easy adapter to map columns from a cursor to TextViews or ImageViews
+ defined in an XML file. You can specify which columns you want, which
+ views you want to display the columns, and the XML file that defines
+ the appearance of these views.
+
+ Binding occurs in two phases. First, if a
+ {@link android.widget.SimpleCursorAdapter.ViewBinder} is available,
+ {@link android.widget.SimpleAdapter.ViewBinder#setViewValue(android.view.View, android.database.Cursor, int)}
+ is invoked. If the returned value is true, binding has occured. If the
+ returned value is false and the view to bind is a TextView,
+ {@link #setViewText(TextView, String)} is invoked. If the returned value
+ is false and the view to bind is an ImageView,
+ {@link #setViewImage(ImageView, String)} is invoked. If no appropriate
+ binding can be found, an {@link IllegalStateException} is thrown.
+
+ If this adapter is used with filtering, for instance in an
+ {@link android.widget.AutoCompleteTextView}, you can use the
+ {@link android.widget.SimpleCursorAdapter.CursorToStringConverter} and the
+ {@link android.widget.FilterQueryProvider} interfaces
+ to get control over the filtering process. You can refer to
+ {@link #convertToString(android.database.Cursor)} and
+ {@link #runQueryOnBackgroundThread}(CharSequence) for more information.
+*/
+var SimpleCursorAdapter = {
+
+<span id='android-widget-SimpleCursorAdapter-method-bindView'>/**Binds all of the field names passed into the &quot;to&quot; parameter of the
+</span> constructor with their corresponding cursor columns as specified in the
+ &quot;from&quot; parameter.
+
+ Binding occurs in two phases. First, if a
+ {@link android.widget.SimpleCursorAdapter.ViewBinder} is available,
+ {@link android.widget.SimpleAdapter.ViewBinder#setViewValue(android.view.View, android.database.Cursor, int)}
+ is invoked. If the returned value is true, binding has occured. If the
+ returned value is false and the view to bind is a TextView,
+ {@link #setViewText(TextView, String)} is invoked. If the returned value is
+ false and the view to bind is an ImageView,
+ {@link #setViewImage(ImageView, String)} is invoked. If no appropriate
+ binding can be found, an {@link IllegalStateException} is thrown.
+@throws IllegalStateException if binding cannot occur
+@see android.widget.CursorAdapter#bindView(android.view.View,
+      android.content.Context, android.database.Cursor)
+@see #getViewBinder()
+@see #setViewBinder(android.widget.SimpleCursorAdapter.ViewBinder)
+@see #setViewImage(ImageView, String)
+@see #setViewText(TextView, String)
+*/
+bindView : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-getViewBinder'>/**Returns the {@link android.widget.SimpleAdapter.ViewBinder} used to bind data to views.
+</span>@return {Object {android.widget.SimpleCursorAdapter.ViewBinder}} a ViewBinder or null if the binder does not exist
+@see #bindView(android.view.View, android.content.Context, android.database.Cursor)
+@see #setViewBinder(android.widget.SimpleCursorAdapter.ViewBinder)
+*/
+getViewBinder : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-setViewBinder'>/**Sets the binder used to bind data to views.
+</span>@param {Object {SimpleCursorAdapter.ViewBinder}} viewBinder the binder used to bind data to views, can be null to
+        remove the existing binder
+@see #bindView(android.view.View, android.content.Context, android.database.Cursor)
+@see #getViewBinder()
+*/
+setViewBinder : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-setViewImage'>/**Called by bindView() to set the image for an ImageView but only if
+</span> there is no existing ViewBinder or if the existing ViewBinder cannot
+ handle binding to an ImageView.
+
+ By default, the value will be treated as an image resource. If the
+ value cannot be used as an image resource, the value is used as an
+ image Uri.
+
+ Intended to be overridden by Adapters that need to filter strings
+ retrieved from the database.
+@param {Object {ImageView}} v ImageView to receive an image
+@param {String} value the value retrieved from the cursor
+*/
+setViewImage : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-setViewText'>/**Called by bindView() to set the text for a TextView but only if
+</span> there is no existing ViewBinder or if the existing ViewBinder cannot
+ handle binding to a TextView.
+
+ Intended to be overridden by Adapters that need to filter strings
+ retrieved from the database.
+@param {Object {TextView}} v TextView to receive text
+@param {String} text the text to be set for the TextView
+*/
+setViewText : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-getStringConversionColumn'>/**Return the index of the column used to get a String representation
+</span> of the Cursor.
+@return {Number} a valid index in the current Cursor or -1
+@see android.widget.CursorAdapter#convertToString(android.database.Cursor)
+@see #setStringConversionColumn(int)
+@see #setCursorToStringConverter(android.widget.SimpleCursorAdapter.CursorToStringConverter)
+@see #getCursorToStringConverter()
+*/
+getStringConversionColumn : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-setStringConversionColumn'>/**Defines the index of the column in the Cursor used to get a String
+</span> representation of that Cursor. The column is used to convert the
+ Cursor to a String only when the current CursorToStringConverter
+ is null.
+@param {Number} stringConversionColumn a valid index in the current Cursor or -1 to use the default
+        conversion mechanism
+@see android.widget.CursorAdapter#convertToString(android.database.Cursor)
+@see #getStringConversionColumn()
+@see #setCursorToStringConverter(android.widget.SimpleCursorAdapter.CursorToStringConverter)
+@see #getCursorToStringConverter()
+*/
+setStringConversionColumn : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-getCursorToStringConverter'>/**Returns the converter used to convert the filtering Cursor
+</span> into a String.
+@return {Object {android.widget.SimpleCursorAdapter.CursorToStringConverter}} null if the converter does not exist or an instance of
+         {@link android.widget.SimpleCursorAdapter.CursorToStringConverter}
+@see #setCursorToStringConverter(android.widget.SimpleCursorAdapter.CursorToStringConverter)
+@see #getStringConversionColumn()
+@see #setStringConversionColumn(int)
+@see android.widget.CursorAdapter#convertToString(android.database.Cursor)
+*/
+getCursorToStringConverter : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-setCursorToStringConverter'>/**Sets the converter  used to convert the filtering Cursor
+</span> into a String.
+@param {Object {SimpleCursorAdapter.CursorToStringConverter}} cursorToStringConverter the Cursor to String converter, or
+        null to remove the converter
+@see #setCursorToStringConverter(android.widget.SimpleCursorAdapter.CursorToStringConverter)
+@see #getStringConversionColumn()
+@see #setStringConversionColumn(int)
+@see android.widget.CursorAdapter#convertToString(android.database.Cursor)
+*/
+setCursorToStringConverter : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-convertToString'>/**Returns a CharSequence representation of the specified Cursor as defined
+</span> by the current CursorToStringConverter. If no CursorToStringConverter
+ has been set, the String conversion column is used instead. If the
+ conversion column is -1, the returned String is empty if the cursor
+ is null or Cursor.toString().
+@param {Object {Cursor}} cursor the Cursor to convert to a CharSequence
+@return {Object {java.lang.CharSequence}} a non-null CharSequence representing the cursor
+*/
+convertToString : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-swapCursor'>/**
+</span>*/
+swapCursor : function(  ) {},
+
+<span id='android-widget-SimpleCursorAdapter-method-changeCursorAndColumns'>/**Change the cursor and change the column-to-view mappings at the same time.
+</span>@param {Object {Cursor}} c The database cursor.  Can be null if the cursor is not available yet.
+@param {Object {java.lang.String[]}} from A list of column names representing the data to bind to the UI.  Can be null 
+            if the cursor is not available yet.
+@param {Object {int[]}} to The views that should display column in the &quot;from&quot; parameter.
+            These should all be TextViews. The first N views in this list
+            are given the values of the first N columns in the from
+            parameter.  Can be null if the cursor is not available yet.
+*/
+changeCursorAndColumns : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

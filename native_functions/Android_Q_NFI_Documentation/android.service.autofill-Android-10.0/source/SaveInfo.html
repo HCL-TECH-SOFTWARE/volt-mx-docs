@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-SaveInfo'>/**@class android.service.autofill.SaveInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Information used to indicate that an {@link android.service.autofill.AutofillService} is interested on saving the
+ user-inputed data for future use, through a
+ {@link android.service.autofill.AutofillService#onSaveRequest(SaveRequest, SaveCallback)}
+ call.
+
+ &lt;p&gt;A {@link android.service.autofill.SaveInfo} is always associated with a {@link android.service.autofill.FillResponse}, and it contains at least
+ two pieces of information:
+
+ &lt;ol&gt;
+   &lt;li&gt;The type(s) of user data (like password or credit card info) that would be saved.
+   &lt;li&gt;The minimum set of views (represented by their {@link AutofillId}) that need to be changed
+       to trigger a save request.
+ &lt;/ol&gt;
+
+ &lt;p&gt;Typically, the {@link android.service.autofill.SaveInfo} contains the same {@code id}s as the {@link android.service.autofill.Dataset}:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   new FillResponse.Builder()
+       .addDataset(new Dataset.Builder()
+           .setValue(id1, AutofillValue.forText(&quot;homer&quot;), createPresentation(&quot;homer&quot;)) // username
+           .setValue(id2, AutofillValue.forText(&quot;D'OH!&quot;), createPresentation(&quot;password for homer&quot;)) // password
+           .build())
+       .setSaveInfo(new SaveInfo.Builder(
+           SaveInfo.SAVE_DATA_TYPE_USERNAME | SaveInfo.SAVE_DATA_TYPE_PASSWORD,
+           new AutofillId[] { id1, id2 }).build())
+       .build();
+ &lt;/pre&gt;
+
+ &lt;p&gt;The save type flags are used to display the appropriate strings in the autofill save UI.
+ You can pass multiple values, but try to keep it short if possible. In the above example, just
+ {@code SaveInfo.SAVE_DATA_TYPE_PASSWORD} would be enough.
+
+ &lt;p&gt;There might be cases where the {@link android.service.autofill.AutofillService} knows how to fill the screen,
+ but the user has no data for it. In that case, the {@link android.service.autofill.FillResponse} should contain just the
+ {@link android.service.autofill.SaveInfo}, but no {@link android.service.autofill.Dataset android.service.autofill.Datasets}:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   new FillResponse.Builder()
+       .setSaveInfo(new SaveInfo.Builder(SaveInfo.SAVE_DATA_TYPE_PASSWORD,
+           new AutofillId[] { id1, id2 }).build())
+       .build();
+ &lt;/pre&gt;
+
+ &lt;p&gt;There might be cases where the user data in the {@link android.service.autofill.AutofillService} is enough
+ to populate some fields but not all, and the service would still be interested on saving the
+ other fields. In that case, the service could set the
+ {@link android.service.autofill.SaveInfo.Builder#setOptionalIds(AutofillId[])} as well:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   new FillResponse.Builder()
+       .addDataset(new Dataset.Builder()
+           .setValue(id1, AutofillValue.forText(&quot;742 Evergreen Terrace&quot;),
+               createPresentation(&quot;742 Evergreen Terrace&quot;)) // street
+           .setValue(id2, AutofillValue.forText(&quot;Springfield&quot;),
+               createPresentation(&quot;Springfield&quot;)) // city
+           .build())
+       .setSaveInfo(new SaveInfo.Builder(SaveInfo.SAVE_DATA_TYPE_ADDRESS,
+           new AutofillId[] { id1, id2 }) // street and  city
+           .setOptionalIds(new AutofillId[] { id3, id4 }) // state and zipcode
+           .build())
+       .build();
+ &lt;/pre&gt;
+
+ &lt;a name=&quot;TriggeringSaveRequest&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Triggering a save request&lt;/h3&gt;
+
+ &lt;p&gt;The {@link android.service.autofill.AutofillService#onSaveRequest(SaveRequest, SaveCallback)} can be triggered after
+ any of the following events:
+ &lt;ul&gt;
+   &lt;li&gt;The {@link Activity} finishes.
+   &lt;li&gt;The app explicitly calls {@link AutofillManager#commit()}.
+   &lt;li&gt;All required views become invisible (if the {@link android.service.autofill.SaveInfo} was created with the
+       {@link #FLAG_SAVE_ON_ALL_VIEWS_INVISIBLE} flag).
+   &lt;li&gt;The user clicks a specific view (defined by {@link android.service.autofill.BatchUpdates.Builder#setTriggerId(AutofillId)}.
+ &lt;/ul&gt;
+
+ &lt;p&gt;But it is only triggered when all conditions below are met:
+ &lt;ul&gt;
+   &lt;li&gt;The {@link android.service.autofill.SaveInfo} associated with the {@link android.service.autofill.FillResponse} is not {@code null} neither
+       has the {@link #FLAG_DELAY_SAVE} flag.
+   &lt;li&gt;The {@link AutofillValue}s of all required views (as set by the {@code requiredIds} passed
+       to the {@link android.service.autofill.SaveInfo.Builder} constructor are not empty.
+   &lt;li&gt;The {@link AutofillValue} of at least one view (be it required or optional) has changed
+       (i.e., it's neither the same value passed in a {@link android.service.autofill.Dataset}, nor the initial value
+       presented in the view).
+   &lt;li&gt;There is no {@link android.service.autofill.Dataset} in the last {@link android.service.autofill.FillResponse} that completely matches the
+       screen state (i.e., all required and optional fields in the dataset have the same value as
+       the fields in the screen).
+   &lt;li&gt;The user explicitly tapped the autofill save UI asking to save data for autofill.
+ &lt;/ul&gt;
+
+ &lt;a name=&quot;CustomizingSaveUI&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Customizing the autofill save UI&lt;/h3&gt;
+
+ &lt;p&gt;The service can also customize some aspects of the autofill save UI:
+ &lt;ul&gt;
+   &lt;li&gt;Add a simple subtitle by calling {@link android.service.autofill.BatchUpdates.Builder#setDescription(CharSequence)}.
+   &lt;li&gt;Add a customized subtitle by calling
+       {@link android.service.autofill.BatchUpdates.Builder#setCustomDescription(CustomDescription)}.
+   &lt;li&gt;Customize the button used to reject the save request by calling
+       {@link android.service.autofill.BatchUpdates.Builder#setNegativeAction(int, IntentSender)}.
+   &lt;li&gt;Decide whether the UI should be shown based on the user input validation by calling
+       {@link android.service.autofill.BatchUpdates.Builder#setValidator(Validator)}.
+ &lt;/ul&gt;
+*/
+var SaveInfo = {
+
+<span id='android-service-autofill-SaveInfo-property-SAVE_DATA_TYPE_GENERIC'>/** Type used when the service can save the contents of a screen, but cannot describe what
+</span> the content is for.
+*/
+SAVE_DATA_TYPE_GENERIC : &quot;0&quot;,
+<span id='android-service-autofill-SaveInfo-property-SAVE_DATA_TYPE_PASSWORD'>/** Type used when the {@link android.service.autofill.FillResponse} represents user credentials that have a password.
+</span>*/
+SAVE_DATA_TYPE_PASSWORD : &quot;1&quot;,
+<span id='android-service-autofill-SaveInfo-property-SAVE_DATA_TYPE_ADDRESS'>/** Type used on when the {@link android.service.autofill.FillResponse} represents a physical address (such as street,
+</span> city, state, etc).
+*/
+SAVE_DATA_TYPE_ADDRESS : &quot;2&quot;,
+<span id='android-service-autofill-SaveInfo-property-SAVE_DATA_TYPE_CREDIT_CARD'>/** Type used when the {@link android.service.autofill.FillResponse} represents a credit card.
+</span>*/
+SAVE_DATA_TYPE_CREDIT_CARD : &quot;4&quot;,
+<span id='android-service-autofill-SaveInfo-property-SAVE_DATA_TYPE_USERNAME'>/** Type used when the {@link android.service.autofill.FillResponse} represents just an username, without a password.
+</span>*/
+SAVE_DATA_TYPE_USERNAME : &quot;8&quot;,
+<span id='android-service-autofill-SaveInfo-property-SAVE_DATA_TYPE_EMAIL_ADDRESS'>/** Type used when the {@link android.service.autofill.FillResponse} represents just an email address, without a password.
+</span>*/
+SAVE_DATA_TYPE_EMAIL_ADDRESS : &quot;16&quot;,
+<span id='android-service-autofill-SaveInfo-property-NEGATIVE_BUTTON_STYLE_CANCEL'>/** Style for the negative button of the save UI to cancel the
+</span> save operation. In this case, the user tapping the negative
+ button signals that they would prefer to not save the filled
+ content.
+*/
+NEGATIVE_BUTTON_STYLE_CANCEL : &quot;0&quot;,
+<span id='android-service-autofill-SaveInfo-property-NEGATIVE_BUTTON_STYLE_REJECT'>/** Style for the negative button of the save UI to reject the
+</span> save operation. This could be useful if the user needs to
+ opt-in your service and the save prompt is an advertisement
+ of the potential value you can add to the user. In this
+ case, the user tapping the negative button sends a strong
+ signal that the feature may not be useful and you may
+ consider some backoff strategy.
+*/
+NEGATIVE_BUTTON_STYLE_REJECT : &quot;1&quot;,
+<span id='android-service-autofill-SaveInfo-property-FLAG_SAVE_ON_ALL_VIEWS_INVISIBLE'>/** Usually, a save request is only automatically &lt;a href=&quot;#TriggeringSaveRequest&quot;&gt;triggered&lt;/a&gt;
+</span> once the {@link Activity} finishes. If this flag is set, it is triggered once all saved views
+ become invisible.
+*/
+FLAG_SAVE_ON_ALL_VIEWS_INVISIBLE : &quot;1&quot;,
+<span id='android-service-autofill-SaveInfo-property-FLAG_DONT_SAVE_ON_FINISH'>/** By default, a save request is automatically &lt;a href=&quot;#TriggeringSaveRequest&quot;&gt;triggered&lt;/a&gt;
+</span> once the {@link Activity} finishes. If this flag is set, finishing the activity doesn't
+ trigger a save request.
+
+ &lt;p&gt;This flag is typically used in conjunction with {@link android.service.autofill.BatchUpdates.Builder#setTriggerId(AutofillId)}.
+*/
+FLAG_DONT_SAVE_ON_FINISH : &quot;2&quot;,
+<span id='android-service-autofill-SaveInfo-property-FLAG_DELAY_SAVE'>/** Postpone the autofill save UI.
+</span>
+ &lt;p&gt;If flag is set, the autofill save UI is not triggered when the
+ autofill context associated with the response associated with this {@link android.service.autofill.SaveInfo} is
+ committed (with {@link AutofillManager#commit()}). Instead, the {@link android.service.autofill.FillContext}
+ is delivered in future fill requests (with {@link android.service.autofill.AutofillService#onFillRequest(FillRequest, android.os.CancellationSignal, FillCallback)})
+ and save request (with {@link android.service.autofill.AutofillService#onSaveRequest(SaveRequest, SaveCallback)})
+ of an activity belonging to the same task.
+
+ &lt;p&gt;This flag should be used when the service detects that the application uses
+ multiple screens to implement an autofillable workflow (for example, one screen for the
+ username field, another for password).
+*/
+FLAG_DELAY_SAVE : &quot;4&quot;,
+<span id='android-service-autofill-SaveInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-service-autofill-SaveInfo-method-getNegativeActionStyle'>/**
+</span>@hide 
+*/
+getNegativeActionStyle : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getNegativeActionListener'>/**
+</span>@hide 
+*/
+getNegativeActionListener : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getRequiredIds'>/**
+</span>@hide 
+*/
+getRequiredIds : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getOptionalIds'>/**
+</span>@hide 
+*/
+getOptionalIds : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getType'>/**
+</span>@hide 
+*/
+getType : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getFlags'>/**
+</span>@hide 
+*/
+getFlags : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getDescription'>/**
+</span>@hide 
+*/
+getDescription : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getCustomDescription'>/**
+</span>@hide 
+*/
+getCustomDescription : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getValidator'>/**
+</span>@hide 
+*/
+getValidator : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getSanitizerKeys'>/**
+</span>@hide 
+*/
+getSanitizerKeys : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getSanitizerValues'>/**
+</span>@hide 
+*/
+getSanitizerValues : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-getTriggerId'>/**
+</span>@hide 
+*/
+getTriggerId : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-service-autofill-SaveInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-apk-VerityBuilder'>/**@class android.util.apk.VerityBuilder
+</span>@extends java.lang.Object
+
+ VerityBuilder builds the verity Merkle tree and other metadata.  The generated tree format can
+ be stored on disk for fs-verity setup and used by kernel.  The builder support standard
+ fs-verity, and Android specific apk-verity that requires additional kernel patches.
+
+ &lt;p&gt;Unlike a regular Merkle tree of fs-verity, the apk-verity tree does not cover the file content
+ fully, and has to skip APK Signing Block with some special treatment for the &quot;Central Directory
+ offset&quot; field of ZIP End of Central Directory.
+
+ @hide
+*/
+var VerityBuilder = {
+
+<span id='android-util-apk-VerityBuilder-method-generateFsVerityTree'>/**Generates the 4k, SHA-256 based Merkle tree for the given APK and stores in the {@link ByteBuffer} created by the {@link android.util.apk.ByteBufferFactory}.  The output is suitable to be used as
+</span> the on-disk format for fs-verity to use.
+@return {Object {android.util.apk.VerityBuilder.VerityResult}} VerityResult containing a buffer with the generated Merkle tree stored at the
+         front, the tree size, and the calculated root hash.
+*/
+generateFsVerityTree : function(  ) {},
+
+<span id='android-util-apk-VerityBuilder-method-generateApkVerityTree'>/**Generates the 4k, SHA-256 based Merkle tree for the given APK and stores in the {@link ByteBuffer} created by the {@link android.util.apk.ByteBufferFactory}.  The Merkle tree does not cover Signing
+</span> Block specificed in {@code signatureInfo}.  The output is suitable to be used as the on-disk
+ format for fs-verity to use (with elide and patch extensions).
+@return {Object {android.util.apk.VerityBuilder.VerityResult}} VerityResult containing a buffer with the generated Merkle tree stored at the
+         front, the tree size, and the calculated root hash.
+*/
+generateApkVerityTree : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

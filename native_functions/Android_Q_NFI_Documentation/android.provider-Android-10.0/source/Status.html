@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-VoicemailContract-Status'>/**@class android.provider.VoicemailContract.Status
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+Defines fields exposed through the /status path of this content provider. */
+var Status = {
+
+<span id='android-provider-VoicemailContract-Status-property-CONTENT_URI'>/**URI to insert/retrieve status of voicemail source. */
+</span>CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DIR_TYPE'>/**The MIME type for a collection of voicemail source statuses. */
+</span>DIR_TYPE : &quot;vnd.android.cursor.dir/voicemail.source.status&quot;,
+<span id='android-provider-VoicemailContract-Status-property-ITEM_TYPE'>/**The MIME type for a single voicemail source status entry. */
+</span>ITEM_TYPE : &quot;vnd.android.cursor.item/voicemail.source.status&quot;,
+<span id='android-provider-VoicemailContract-Status-property-SOURCE_PACKAGE'>/** The package name of the voicemail source. There can only be a one entry per account
+</span> per source.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+SOURCE_PACKAGE : &quot;source_package&quot;,
+<span id='android-provider-VoicemailContract-Status-property-SOURCE_TYPE'>/** The type of the source, which determines how to interpret source-specific states.
+</span> Typically this will be set to the same string as
+ {@link android.telephony.CarrierConfigManager#KEY_VVM_TYPE_STRING}. For example,
+ &quot;vvm_type_omtp&quot;.
+
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+
+ @see #CONFIGURATION_STATE
+ @see #DATA_CHANNEL_STATE
+ @see #NOTIFICATION_CHANNEL_STATE
+*/
+SOURCE_TYPE : &quot;source_type&quot;,
+<span id='android-provider-VoicemailContract-Status-property-PHONE_ACCOUNT_COMPONENT_NAME'>/** The {@link ComponentName} of the {@link android.provider.CommonDataKinds.PhoneAccount} in string form. The
+</span> {@link android.provider.CommonDataKinds.PhoneAccount} differentiates voicemail sources from the same package.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PHONE_ACCOUNT_COMPONENT_NAME : &quot;phone_account_component_name&quot;,
+<span id='android-provider-VoicemailContract-Status-property-PHONE_ACCOUNT_ID'>/** The identifier of a {@link android.provider.CommonDataKinds.PhoneAccount} that is unique to a specified component. The
+</span> {@link android.provider.CommonDataKinds.PhoneAccount} differentiates voicemail sources from the same package.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PHONE_ACCOUNT_ID : &quot;phone_account_id&quot;,
+<span id='android-provider-VoicemailContract-Status-property-SETTINGS_URI'>/** The URI to call to invoke source specific voicemail settings screen. On a user request
+</span> to setup voicemail an intent with action VIEW with this URI will be fired by the system.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+SETTINGS_URI : &quot;settings_uri&quot;,
+<span id='android-provider-VoicemailContract-Status-property-VOICEMAIL_ACCESS_URI'>/** The URI to call when the user requests to directly access the voicemail from the remote
+</span> server. In case of an IVR voicemail system this is typically set to the the voicemail
+ number specified using a tel:/ URI.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+VOICEMAIL_ACCESS_URI : &quot;voicemail_access_uri&quot;,
+<span id='android-provider-VoicemailContract-Status-property-CONFIGURATION_STATE'>/** The configuration state of the voicemail source.
+</span>
+ &lt;P&gt;Negative values are reserved to the source for source-specific states, see
+ {@link #SOURCE_TYPE}
+
+ &lt;P&gt; Possible values:
+ {@link #CONFIGURATION_STATE_OK},
+ {@link #CONFIGURATION_STATE_NOT_CONFIGURED},
+ {@link #CONFIGURATION_STATE_CAN_BE_CONFIGURED}
+ {@link #CONFIGURATION_STATE_CONFIGURING}
+ {@link #CONFIGURATION_STATE_FAILED}
+ {@link #CONFIGURATION_STATE_DISABLED}
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CONFIGURATION_STATE : &quot;configuration_state&quot;,
+<span id='android-provider-VoicemailContract-Status-property-CONFIGURATION_STATE_OK'>/**Value of {@link #CONFIGURATION_STATE} to indicate an all OK configuration status. */
+</span>CONFIGURATION_STATE_OK : &quot;0&quot;,
+<span id='android-provider-VoicemailContract-Status-property-CONFIGURATION_STATE_NOT_CONFIGURED'>/** Value of {@link #CONFIGURATION_STATE} to indicate the visual voicemail is not
+</span> yet configured on this device.
+*/
+CONFIGURATION_STATE_NOT_CONFIGURED : &quot;1&quot;,
+<span id='android-provider-VoicemailContract-Status-property-CONFIGURATION_STATE_CAN_BE_CONFIGURED'>/** Value of {@link #CONFIGURATION_STATE} to indicate the visual voicemail is not
+</span> yet configured on this device but can be configured by the user.
+ &lt;p&gt; This state must be used when the source has verified that the current user can be
+ upgraded to visual voicemail and would like to show a set up invitation message.
+*/
+CONFIGURATION_STATE_CAN_BE_CONFIGURED : &quot;2&quot;,
+<span id='android-provider-VoicemailContract-Status-property-CONFIGURATION_STATE_CONFIGURING'>/** Value of {@link #CONFIGURATION_STATE} to indicate that visual voicemail still is being
+</span> configured.
+*/
+CONFIGURATION_STATE_CONFIGURING : &quot;3&quot;,
+<span id='android-provider-VoicemailContract-Status-property-CONFIGURATION_STATE_FAILED'>/** Value of {@link #CONFIGURATION_STATE} to indicate that visual voicemail has failed to
+</span> be configured.
+*/
+CONFIGURATION_STATE_FAILED : &quot;4&quot;,
+<span id='android-provider-VoicemailContract-Status-property-CONFIGURATION_STATE_DISABLED'>/** Value of {@link #CONFIGURATION_STATE} to indicate that visual voicemail is disabled by
+</span> the user.
+*/
+CONFIGURATION_STATE_DISABLED : &quot;5&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE'>/** The data channel state of the voicemail source. This the channel through which the source
+</span> pulls voicemail data from a remote server.
+
+ &lt;P&gt;Negative values are reserved to the source for source-specific states, see
+ {@link #SOURCE_TYPE}
+
+ &lt;P&gt; Possible values:
+ {@link #DATA_CHANNEL_STATE_OK},
+ {@link #DATA_CHANNEL_STATE_NO_CONNECTION}
+ &lt;/P&gt;
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+DATA_CHANNEL_STATE : &quot;data_channel_state&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE_OK'>/**  Value of {@link #DATA_CHANNEL_STATE} to indicate that data channel is working fine.
+</span>*/
+DATA_CHANNEL_STATE_OK : &quot;0&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE_NO_CONNECTION'>/**  Value of {@link #DATA_CHANNEL_STATE} to indicate that data channel failed to find a
+</span>  suitable network to connect to the server.
+*/
+DATA_CHANNEL_STATE_NO_CONNECTION : &quot;1&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE_NO_CONNECTION_CELLULAR_REQUIRED'>/**  Value of {@link #DATA_CHANNEL_STATE} to indicate that data channel failed to find a
+</span>  suitable network to connect to the server, and the carrier requires using cellular
+  data network to connect to the server.
+*/
+DATA_CHANNEL_STATE_NO_CONNECTION_CELLULAR_REQUIRED : &quot;2&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE_BAD_CONFIGURATION'>/**  Value of {@link #DATA_CHANNEL_STATE} to indicate that data channel received incorrect
+</span>  settings or credentials to connect to the server
+*/
+DATA_CHANNEL_STATE_BAD_CONFIGURATION : &quot;3&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE_COMMUNICATION_ERROR'>/**  Value of {@link #DATA_CHANNEL_STATE} to indicate that a error has occurred in the data
+</span>  channel while communicating with the server
+*/
+DATA_CHANNEL_STATE_COMMUNICATION_ERROR : &quot;4&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE_SERVER_ERROR'>/**  Value of {@link #DATA_CHANNEL_STATE} to indicate that the server reported an internal
+</span>  error to the data channel.
+*/
+DATA_CHANNEL_STATE_SERVER_ERROR : &quot;5&quot;,
+<span id='android-provider-VoicemailContract-Status-property-DATA_CHANNEL_STATE_SERVER_CONNECTION_ERROR'>/**  Value of {@link #DATA_CHANNEL_STATE} to indicate that while there is a suitable network,
+</span>  the data channel is unable to establish a connection with the server.
+*/
+DATA_CHANNEL_STATE_SERVER_CONNECTION_ERROR : &quot;6&quot;,
+<span id='android-provider-VoicemailContract-Status-property-NOTIFICATION_CHANNEL_STATE'>/** The notification channel state of the voicemail source. This is the channel through which
+</span> the source gets notified of new voicemails on the remote server.
+
+ &lt;P&gt;Negative values are reserved to the source for source-specific states, see
+ {@link #SOURCE_TYPE}
+
+ &lt;P&gt; Possible values:
+ {@link #NOTIFICATION_CHANNEL_STATE_OK},
+ {@link #NOTIFICATION_CHANNEL_STATE_NO_CONNECTION},
+ {@link #NOTIFICATION_CHANNEL_STATE_MESSAGE_WAITING}
+ &lt;/P&gt;
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+NOTIFICATION_CHANNEL_STATE : &quot;notification_channel_state&quot;,
+<span id='android-provider-VoicemailContract-Status-property-NOTIFICATION_CHANNEL_STATE_OK'>/** Value of {@link #NOTIFICATION_CHANNEL_STATE} to indicate that the notification channel is
+</span> working fine.
+*/
+NOTIFICATION_CHANNEL_STATE_OK : &quot;0&quot;,
+<span id='android-provider-VoicemailContract-Status-property-NOTIFICATION_CHANNEL_STATE_NO_CONNECTION'>/** Value of {@link #NOTIFICATION_CHANNEL_STATE} to indicate that the notification channel
+</span> connection is not working.
+*/
+NOTIFICATION_CHANNEL_STATE_NO_CONNECTION : &quot;1&quot;,
+<span id='android-provider-VoicemailContract-Status-property-NOTIFICATION_CHANNEL_STATE_MESSAGE_WAITING'>/** Value of {@link #NOTIFICATION_CHANNEL_STATE} to indicate that there are messages waiting
+</span> on the server but the details are not known.
+ &lt;p&gt; Use this state when the notification can only tell that there are pending messages on
+ the server but no details of the sender/time etc are known.
+*/
+NOTIFICATION_CHANNEL_STATE_MESSAGE_WAITING : &quot;2&quot;,
+<span id='android-provider-VoicemailContract-Status-property-QUOTA_OCCUPIED'>/** Amount of resource that is used by existing voicemail in the visual voicemail inbox,
+</span> or {@link #QUOTA_UNAVAILABLE} if the quota has never been updated before. This value is
+ used to inform the client the situation on the remote server. Unit is not specified.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+QUOTA_OCCUPIED : &quot;quota_occupied&quot;,
+<span id='android-provider-VoicemailContract-Status-property-QUOTA_TOTAL'>/** Total resource in the visual voicemail inbox that can be used, or
+</span> {@link #QUOTA_UNAVAILABLE} if server either has unlimited quota or does not provide quota
+ information. This value is used to inform the client the situation on the remote server.
+ Unit is not specified.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+QUOTA_TOTAL : &quot;quota_total&quot;,
+<span id='android-provider-VoicemailContract-Status-property-QUOTA_UNAVAILABLE'>/** Value for {@link #QUOTA_OCCUPIED} and {@link #QUOTA_TOTAL} to indicate that no
+</span> information is available.
+*/
+QUOTA_UNAVAILABLE : &quot;-1&quot;,
+<span id='android-provider-VoicemailContract-Status-method-buildSourceUri'>/**A convenience method to build status URI specific to a source package by appending
+</span> {@link android.provider.VoicemailContract#PARAM_KEY_SOURCE_PACKAGE} param to the base URI.
+*/
+buildSourceUri : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

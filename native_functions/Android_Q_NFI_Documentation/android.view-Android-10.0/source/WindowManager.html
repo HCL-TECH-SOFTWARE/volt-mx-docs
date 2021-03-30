@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-WindowManager'>/**@class android.view.WindowManager
+</span> implements android.view.ViewManager
+
+ The interface that apps use to talk to the window manager.
+ &lt;/p&gt;&lt;p&gt;
+ Each window manager instance is bound to a particular {@link android.view.Display}.
+ To obtain a {@link android.view.WindowManager} for a different display, use
+ {@link Context#createDisplayContext} to obtain a {@link Context} for that
+ display, then use &lt;code&gt;Context.getSystemService(Context.WINDOW_SERVICE)&lt;/code&gt;
+ to get the WindowManager.
+ &lt;/p&gt;&lt;p&gt;
+ The simplest way to show a window on another display is to create a
+ {@link Presentation}.  The presentation will automatically obtain a
+ {@link android.view.WindowManager} and {@link Context} for that display.
+ &lt;/p&gt;
+*/
+var WindowManager = {
+
+<span id='android-view-WindowManager-property-DOCKED_INVALID'>/**@hide */
+</span>DOCKED_INVALID : &quot;-1&quot;,
+<span id='android-view-WindowManager-property-DOCKED_LEFT'>/**@hide */
+</span>DOCKED_LEFT : &quot;1&quot;,
+<span id='android-view-WindowManager-property-DOCKED_TOP'>/**@hide */
+</span>DOCKED_TOP : &quot;2&quot;,
+<span id='android-view-WindowManager-property-DOCKED_RIGHT'>/**@hide */
+</span>DOCKED_RIGHT : &quot;3&quot;,
+<span id='android-view-WindowManager-property-DOCKED_BOTTOM'>/**@hide */
+</span>DOCKED_BOTTOM : &quot;4&quot;,
+<span id='android-view-WindowManager-property-INPUT_CONSUMER_PIP'>/**@hide */
+</span>INPUT_CONSUMER_PIP : &quot;pip_input_consumer&quot;,
+<span id='android-view-WindowManager-property-INPUT_CONSUMER_NAVIGATION'>/**@hide */
+</span>INPUT_CONSUMER_NAVIGATION : &quot;nav_input_consumer&quot;,
+<span id='android-view-WindowManager-property-INPUT_CONSUMER_WALLPAPER'>/**@hide */
+</span>INPUT_CONSUMER_WALLPAPER : &quot;wallpaper_input_consumer&quot;,
+<span id='android-view-WindowManager-property-INPUT_CONSUMER_RECENTS_ANIMATION'>/**@hide */
+</span>INPUT_CONSUMER_RECENTS_ANIMATION : &quot;recents_animation_input_consumer&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_UNSET'>/** Not set up for a transition.
+</span> @hide
+*/
+TRANSIT_UNSET : &quot;-1&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_NONE'>/** No animation for transition.
+</span> @hide
+*/
+TRANSIT_NONE : &quot;0&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_ACTIVITY_OPEN'>/** A window in a new activity is being opened on top of an existing one in the same task.
+</span> @hide
+*/
+TRANSIT_ACTIVITY_OPEN : &quot;6&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_ACTIVITY_CLOSE'>/** The window in the top-most activity is being closed to reveal the previous activity in the
+</span> same task.
+ @hide
+*/
+TRANSIT_ACTIVITY_CLOSE : &quot;7&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TASK_OPEN'>/** A window in a new task is being opened on top of an existing one in another activity's task.
+</span> @hide
+*/
+TRANSIT_TASK_OPEN : &quot;8&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TASK_CLOSE'>/** A window in the top-most activity is being closed to reveal the previous activity in a
+</span> different task.
+ @hide
+*/
+TRANSIT_TASK_CLOSE : &quot;9&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TASK_TO_FRONT'>/** A window in an existing task is being displayed on top of an existing one in another
+</span> activity's task.
+ @hide
+*/
+TRANSIT_TASK_TO_FRONT : &quot;10&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TASK_TO_BACK'>/** A window in an existing task is being put below all other tasks.
+</span> @hide
+*/
+TRANSIT_TASK_TO_BACK : &quot;11&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_WALLPAPER_CLOSE'>/** A window in a new activity that doesn't have a wallpaper is being opened on top of one that
+</span> does, effectively closing the wallpaper.
+ @hide
+*/
+TRANSIT_WALLPAPER_CLOSE : &quot;12&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_WALLPAPER_OPEN'>/** A window in a new activity that does have a wallpaper is being opened on one that didn't,
+</span> effectively opening the wallpaper.
+ @hide
+*/
+TRANSIT_WALLPAPER_OPEN : &quot;13&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_WALLPAPER_INTRA_OPEN'>/** A window in a new activity is being opened on top of an existing one, and both are on top
+</span> of the wallpaper.
+ @hide
+*/
+TRANSIT_WALLPAPER_INTRA_OPEN : &quot;14&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_WALLPAPER_INTRA_CLOSE'>/** The window in the top-most activity is being closed to reveal the previous activity, and
+</span> both are on top of the wallpaper.
+ @hide
+*/
+TRANSIT_WALLPAPER_INTRA_CLOSE : &quot;15&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TASK_OPEN_BEHIND'>/** A window in a new task is being opened behind an existing one in another activity's task.
+</span> The new window will show briefly and then be gone.
+ @hide
+*/
+TRANSIT_TASK_OPEN_BEHIND : &quot;16&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TASK_IN_PLACE'>/** A window in a task is being animated in-place.
+</span> @hide
+*/
+TRANSIT_TASK_IN_PLACE : &quot;17&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_ACTIVITY_RELAUNCH'>/** An activity is being relaunched (e.g. due to configuration change).
+</span> @hide
+*/
+TRANSIT_ACTIVITY_RELAUNCH : &quot;18&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_DOCK_TASK_FROM_RECENTS'>/** A task is being docked from recents.
+</span> @hide
+*/
+TRANSIT_DOCK_TASK_FROM_RECENTS : &quot;19&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_KEYGUARD_GOING_AWAY'>/** Keyguard is going away.
+</span> @hide
+*/
+TRANSIT_KEYGUARD_GOING_AWAY : &quot;20&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_KEYGUARD_GOING_AWAY_ON_WALLPAPER'>/** Keyguard is going away with showing an activity behind that requests wallpaper.
+</span> @hide
+*/
+TRANSIT_KEYGUARD_GOING_AWAY_ON_WALLPAPER : &quot;21&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_KEYGUARD_OCCLUDE'>/** Keyguard is being occluded.
+</span> @hide
+*/
+TRANSIT_KEYGUARD_OCCLUDE : &quot;22&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_KEYGUARD_UNOCCLUDE'>/** Keyguard is being unoccluded.
+</span> @hide
+*/
+TRANSIT_KEYGUARD_UNOCCLUDE : &quot;23&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TRANSLUCENT_ACTIVITY_OPEN'>/** A translucent activity is being opened.
+</span> @hide
+*/
+TRANSIT_TRANSLUCENT_ACTIVITY_OPEN : &quot;24&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TRANSLUCENT_ACTIVITY_CLOSE'>/** A translucent activity is being closed.
+</span> @hide
+*/
+TRANSIT_TRANSLUCENT_ACTIVITY_CLOSE : &quot;25&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_CRASHING_ACTIVITY_CLOSE'>/** A crashing activity is being closed.
+</span> @hide
+*/
+TRANSIT_CRASHING_ACTIVITY_CLOSE : &quot;26&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_TASK_CHANGE_WINDOWING_MODE'>/** A task is changing windowing modes
+</span> @hide
+*/
+TRANSIT_TASK_CHANGE_WINDOWING_MODE : &quot;27&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_FLAG_KEYGUARD_GOING_AWAY_TO_SHADE'>/** Transition flag: Keyguard is going away, but keeping the notification shade open
+</span> @hide
+*/
+TRANSIT_FLAG_KEYGUARD_GOING_AWAY_TO_SHADE : &quot;1&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_FLAG_KEYGUARD_GOING_AWAY_NO_ANIMATION'>/** Transition flag: Keyguard is going away, but doesn't want an animation for it
+</span> @hide
+*/
+TRANSIT_FLAG_KEYGUARD_GOING_AWAY_NO_ANIMATION : &quot;2&quot;,
+<span id='android-view-WindowManager-property-TRANSIT_FLAG_KEYGUARD_GOING_AWAY_WITH_WALLPAPER'>/** Transition flag: Keyguard is going away while it was showing the system wallpaper.
+</span> @hide
+*/
+TRANSIT_FLAG_KEYGUARD_GOING_AWAY_WITH_WALLPAPER : &quot;4&quot;,
+<span id='android-view-WindowManager-property-REMOVE_CONTENT_MODE_UNDEFINED'>/** Remove content mode: Indicates remove content mode is currently not defined.
+</span> @hide
+*/
+REMOVE_CONTENT_MODE_UNDEFINED : &quot;0&quot;,
+<span id='android-view-WindowManager-property-REMOVE_CONTENT_MODE_MOVE_TO_PRIMARY'>/** Remove content mode: Indicates that when display is removed, all its activities will be moved
+</span> to the primary display and the topmost activity should become focused.
+ @hide
+*/
+REMOVE_CONTENT_MODE_MOVE_TO_PRIMARY : &quot;1&quot;,
+<span id='android-view-WindowManager-property-REMOVE_CONTENT_MODE_DESTROY'>/** Remove content mode: Indicates that when display is removed, all its stacks and tasks will be
+</span> removed, all activities will be destroyed according to the usual lifecycle.
+ @hide
+*/
+REMOVE_CONTENT_MODE_DESTROY : &quot;2&quot;,
+<span id='android-view-WindowManager-property-TAKE_SCREENSHOT_FULLSCREEN'>/** Message for taking fullscreen screenshot
+</span> @hide
+*/
+TAKE_SCREENSHOT_FULLSCREEN : &quot;1&quot;,
+<span id='android-view-WindowManager-property-TAKE_SCREENSHOT_SELECTED_REGION'>/** Message for taking screenshot of selected region.
+</span> @hide
+*/
+TAKE_SCREENSHOT_SELECTED_REGION : &quot;2&quot;,
+<span id='android-view-WindowManager-property-PARCEL_KEY_SHORTCUTS_ARRAY'>/** @hide
+</span>*/
+PARCEL_KEY_SHORTCUTS_ARRAY : &quot;shortcuts_array&quot;,
+<span id='android-view-WindowManager-method-getDefaultDisplay'>/**Returns the {@link android.view.Display} upon which this {@link android.view.WindowManager} instance
+</span> will create new windows.
+ &lt;p&gt;
+ Despite the name of this method, the display that is returned is not
+ necessarily the primary display of the system (see {@link android.view.Display#DEFAULT_DISPLAY}).
+ The returned display could instead be a secondary display that this
+ window manager instance is managing.  Think of it as the display that
+ this {@link android.view.WindowManager} instance uses by default.
+ &lt;/p&gt;&lt;p&gt;
+ To create windows on a different display, you need to obtain a
+ {@link android.view.WindowManager} for that {@link android.view.Display}.  (See the {@link android.view.WindowManager}
+ class documentation for more information.)
+ &lt;/p&gt;
+@return {Object {android.view.Display}} The display that this window manager is managing.
+*/
+getDefaultDisplay : function(  ) {},
+
+<span id='android-view-WindowManager-method-removeViewImmediate'>/**Special variation of {@link #removeView} that immediately invokes
+</span> the given view hierarchy's {@link android.view.View#onDetachedFromWindow()
+ android.view.View.onDetachedFromWindow()} methods before returning.  This is not
+ for normal applications; using it correctly requires great care.
+@param {Object {View}} view The view to be removed.
+*/
+removeViewImmediate : function(  ) {},
+
+<span id='android-view-WindowManager-method-requestAppKeyboardShortcuts'>/**Request for keyboard shortcuts to be retrieved asynchronously.
+</span>@param {Object {WindowManager.KeyboardShortcutsReceiver}} receiver The callback to be triggered when the result is ready.
+@hide 
+*/
+requestAppKeyboardShortcuts : function(  ) {},
+
+<span id='android-view-WindowManager-method-getCurrentImeTouchRegion'>/**Return the touch region for the current IME window, or an empty region if there is none.
+</span>@return {Object {android.graphics.Region}} The region of the IME that is accepting touch inputs, or null if there is no IME, no
+         region or there was an error.
+@hide 
+*/
+getCurrentImeTouchRegion : function(  ) {},
+
+<span id='android-view-WindowManager-method-setShouldShowWithInsecureKeyguard'>/**Sets that the display should show its content when non-secure keyguard is shown.
+</span>@param {Number} displayId Display ID.
+@param {Boolean} shouldShow Indicates that the display should show its content when non-secure keyguard
+                  is shown.
+@see KeyguardManager#isDeviceSecure()
+@see KeyguardManager#isDeviceLocked()
+@hide 
+*/
+setShouldShowWithInsecureKeyguard : function(  ) {},
+
+<span id='android-view-WindowManager-method-setShouldShowSystemDecors'>/**Sets that the display should show system decors.
+</span> &lt;p&gt;
+ System decors include status bar, navigation bar, launcher.
+ &lt;/p&gt;
+@param {Number} displayId The id of the display.
+@param {Boolean} shouldShow Indicates that the display should show system decors.
+@see #shouldShowSystemDecors(int)
+@hide 
+*/
+setShouldShowSystemDecors : function(  ) {},
+
+<span id='android-view-WindowManager-method-shouldShowSystemDecors'>/**Checks if the display supports showing system decors.
+</span> &lt;p&gt;
+ System decors include status bar, navigation bar, launcher.
+ &lt;/p&gt;
+@param {Number} displayId The id of the display.
+@see #setShouldShowSystemDecors(int, boolean)
+@hide 
+*/
+shouldShowSystemDecors : function(  ) {},
+
+<span id='android-view-WindowManager-method-setShouldShowIme'>/**Sets that the display should show IME.
+</span>@param {Number} displayId Display ID.
+@param {Boolean} shouldShow Indicates that the display should show IME.
+@hide 
+*/
+setShouldShowIme : function(  ) {},
+
+<span id='android-view-WindowManager-method-shouldShowIme'>/**Indicates that the display should show IME.
+</span>@param {Number} displayId The id of the display.
+@return {Boolean} {@code true} if the display should show IME when an input field becomes
+ focused on it.
+@hide 
+*/
+shouldShowIme : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-util-SMSDispatcherUtil'>/**@class com.android.internal.telephony.util.SMSDispatcherUtil
+</span>@extends java.lang.Object
+
+ Utilities used by {@link com.android.internal.telephony.SMSDispatcher}'s subclasses.
+
+ These methods can not be moved to {@link CdmaSMSDispatcher} and {@link GsmSMSDispatcher} because
+ they also need to be called from {@link ImsSmsDispatcher} and the utilities will invoke the cdma
+ or gsm version of the method based on the format.
+*/
+var SMSDispatcherUtil = {
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPdu'>/**Trigger the proper implementation for getting submit pdu for text sms based on format.
+</span>@param {Boolean} isCdma true if cdma format should be used.
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {String} destAddr the address to send the message to
+@param {String} message the body of the message.
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@param {Object {SmsHeader}} smsHeader message header.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPdu'>/**Trigger the proper implementation for getting submit pdu for text sms based on format.
+</span>@param {Boolean} isCdma true if cdma format should be used.
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {String} destAddr the address to send the message to
+@param {String} message the body of the message.
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@param {Object {SmsHeader}} smsHeader message header.
+@param {Number} priority Priority level of the message
+  Refer specification See 3GPP2 C.S0015-B, v2.0, table 4.5.9-1
+  ---------------------------------
+  PRIORITY      | Level of Priority
+  ---------------------------------
+      '00'      |     Normal
+      '01'      |     Interactive
+      '10'      |     Urgent
+      '11'      |     Emergency
+  ----------------------------------
+  Any Other values included Negative considered as Invalid Priority Indicator of the message.
+@param {Number} validityPeriod Validity Period of the message in mins.
+  Refer specification 3GPP TS 23.040 V6.8.1 section 9.2.3.12.1.
+  Validity Period(Minimum) -&gt; 5 mins
+  Validity Period(Maximum) -&gt; 635040 mins(i.e.63 weeks).
+  Any Other values included Negative considered as Invalid Validity Period of the message.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPduGsm'>/**Gsm implementation for
+</span> {@link #getSubmitPdu(boolean, String, String, String, boolean)}
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {String} destAddr the address to send the message to
+@param {String} message the body of the message.
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPduGsm : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPduGsm'>/**Gsm implementation for
+</span> {@link #getSubmitPdu(boolean, String, String, String, boolean, int)}
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {String} destAddr the address to send the message to
+@param {String} message the body of the message.
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@param {Number} validityPeriod Validity Period of the message in mins.
+  Refer specification 3GPP TS 23.040 V6.8.1 section 9.2.3.12.1.
+  Validity Period(Minimum) -&gt; 5 mins
+  Validity Period(Maximum) -&gt; 635040 mins(i.e.63 weeks).
+  Any Other values included Negative considered as Invalid Validity Period of the message.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPduGsm : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPduCdma'>/**Cdma implementation for
+</span> {@link #getSubmitPdu(boolean, String, String, String, boolean, SmsHeader)}
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {String} destAddr the address to send the message to
+@param {String} message the body of the message.
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@param {Object {SmsHeader}} smsHeader message header.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPduCdma : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPduCdma'>/**Cdma implementation for
+</span> {@link #getSubmitPdu(boolean, String, String, String, boolean, SmsHeader)}
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {String} destAddr the address to send the message to
+@param {String} message the body of the message.
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@param {Object {SmsHeader}} smsHeader message header.
+@param {Number} priority Priority level of the message
+  Refer specification See 3GPP2 C.S0015-B, v2.0, table 4.5.9-1
+  ---------------------------------
+  PRIORITY      | Level of Priority
+  ---------------------------------
+      '00'      |     Normal
+      '01'      |     Interactive
+      '10'      |     Urgent
+      '11'      |     Emergency
+  ----------------------------------
+  Any Other values included Negative considered as Invalid Priority Indicator of the message.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPduCdma : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPdu'>/**Trigger the proper implementation for getting submit pdu for data sms based on format.
+</span>@param {Boolean} isCdma true if cdma format should be used.
+@param {String} destAddr the address to send the message to
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {Number} destPort the port to deliver the message to
+@param {Object {byte[]}} message the body of the message to send
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPduCdma'>/**Cdma implementation of {@link #getSubmitPdu(boolean, String, String, int, byte[], boolean)}
+</span>@param {String} destAddr the address to send the message to
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {Number} destPort the port to deliver the message to
+@param {Object {byte[]}} message the body of the message to send
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPduCdma : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-getSubmitPduGsm'>/**Gsm implementation of {@link #getSubmitPdu(boolean, String, String, int, byte[], boolean)}
+</span>@param {String} destAddr the address to send the message to
+@param {String} scAddr is the service center address or null to use the current default SMSC
+@param {Number} destPort the port to deliver the message to
+@param {Object {byte[]}} message the body of the message to send
+@param {Boolean} statusReportRequested whether or not a status report is requested.
+@return {Object {com.android.internal.telephony.SmsMessageBase.SubmitPduBase}} the submit pdu.
+*/
+getSubmitPduGsm : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-calculateLength'>/**Calculate the number of septets needed to encode the message. This function should only be
+</span> called for individual segments of multipart message.
+@param {Boolean} isCdma  true if cdma format should be used.
+@param {Object {CharSequence}} messageBody the message to encode
+@param {Boolean} use7bitOnly ignore (but still count) illegal characters if true
+@return {Object {com.android.internal.telephony.GsmAlphabet.TextEncodingDetails}} TextEncodingDetails
+*/
+calculateLength : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-calculateLengthGsm'>/**Gsm implementation for {@link #calculateLength(boolean, CharSequence, boolean)}
+</span>@param {Object {CharSequence}} messageBody the message to encode
+@param {Boolean} use7bitOnly ignore (but still count) illegal characters if true
+@return {Object {com.android.internal.telephony.GsmAlphabet.TextEncodingDetails}} TextEncodingDetails
+*/
+calculateLengthGsm : function(  ) {},
+
+<span id='com-android-internal-telephony-util-SMSDispatcherUtil-method-calculateLengthCdma'>/**Cdma implementation for {@link #calculateLength(boolean, CharSequence, boolean)}
+</span>@param {Object {CharSequence}} messageBody the message to encode
+@param {Boolean} use7bitOnly ignore (but still count) illegal characters if true
+@return {Object {com.android.internal.telephony.GsmAlphabet.TextEncodingDetails}} TextEncodingDetails
+*/
+calculateLengthCdma : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-webkit-TracingController'>/**@class android.webkit.TracingController
+</span>@extends java.lang.Object
+
+ Manages tracing of WebViews. In particular provides functionality for the app
+ to enable/disable tracing of parts of code and to collect tracing data.
+ This is useful for profiling performance issues, debugging and memory usage
+ analysis in production and real life scenarios.
+ &lt;p&gt;
+ The resulting trace data is sent back as a byte sequence in json format. This
+ file can be loaded in &quot;chrome://tracing&quot; for further analysis.
+ &lt;p&gt;
+ Example usage:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ TracingController tracingController = TracingController.getInstance();
+ tracingController.start(new TracingConfig.Builder()
+                  .addCategories(TracingConfig.CATEGORIES_WEB_DEVELOPER).build());
+ ...
+ tracingController.stop(new FileOutputStream(&quot;trace.json&quot;),
+                        Executors.newSingleThreadExecutor());
+ &lt;/pre&gt;&lt;/p&gt;
+*/
+var TracingController = {
+
+<span id='android-webkit-TracingController-method-getInstance'>/**Returns the default TracingController instance. At present there is
+</span> only one TracingController instance for all WebView instances,
+ however this restriction may be relaxed in a future Android release.
+@return {Object {android.webkit.TracingController}} The default TracingController instance.
+*/
+getInstance : function(  ) {},
+
+<span id='android-webkit-TracingController-method-start'>/**Starts tracing all webviews. Depending on the trace mode in traceConfig
+</span> specifies how the trace events are recorded.
+
+ For tracing modes {@link android.webkit.TracingConfig#RECORD_UNTIL_FULL} and
+ {@link android.webkit.TracingConfig#RECORD_CONTINUOUSLY} the events are recorded
+ using an internal buffer and flushed to the outputStream when
+ {@link #stop(OutputStream, Executor)} is called.
+@param {Object {TracingConfig}} tracingConfig Configuration options to use for tracing.
+@throws IllegalStateException If the system is already tracing.
+@throws IllegalArgumentException If the configuration is invalid (e.g.
+         invalid category pattern or invalid tracing mode).
+*/
+start : function(  ) {},
+
+<span id='android-webkit-TracingController-method-stop'>/**Stops tracing and flushes tracing data to the specified outputStream.
+</span>
+ The data is sent to the specified output stream in json format typically
+ in chunks by invoking {@link java.io.OutputStream#write(byte[])}. On completion
+ the {@link java.io.OutputStream#close()} method is called.
+@param {Object {OutputStream}} outputStream The output stream the tracing data will be sent to. If null
+                     the tracing data will be discarded.
+@param {Object {Executor}} executor The {@link java.util.concurrent.Executor} on which the
+        outputStream {@link java.io.OutputStream#write(byte[])} and
+        {@link java.io.OutputStream#close()} methods will be invoked.
+@return {Boolean} False if the WebView framework was not tracing at the time of the call,
+         true otherwise.
+*/
+stop : function(  ) {},
+
+<span id='android-webkit-TracingController-method-isTracing'>/**Returns whether the WebView framework is tracing.
+</span>@return {Boolean} True if tracing is enabled.
+*/
+isTracing : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

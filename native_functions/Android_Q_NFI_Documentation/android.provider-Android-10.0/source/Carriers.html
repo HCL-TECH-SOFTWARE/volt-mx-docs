@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Telephony-Carriers'>/**@class android.provider.Telephony.Carriers
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+ Carriers class contains information about APNs, including MMSC information.
+*/
+var Carriers = {
+
+<span id='android-provider-Telephony-Carriers-property-CONTENT_URI'>/** The {@code content://} style URL for this table.
+</span> For MSIM, this will return APNs for the default subscription
+ {@link SubscriptionManager#getDefaultSubscriptionId()}. To specify subId for MSIM,
+ use {@link Uri#withAppendedPath(Uri, String)} to append with subscription id.
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Telephony-Carriers-property-SIM_APN_URI'>/** The {@code content://} style URL for this table. Used for APN query based on current
+</span> subscription. Instead of specifying carrier matching information in the selection,
+ this API will return all matching APNs from current subscription carrier and queries
+ will be applied on top of that. If there is no match for MVNO (Mobile Virtual Network
+ Operator) APNs, return APNs from its MNO (based on mccmnc) instead. For MSIM, this will
+ return APNs for the default subscription
+ {@link SubscriptionManager#getDefaultSubscriptionId()}. To specify subId for MSIM,
+ use {@link Uri#withAppendedPath(Uri, String)} to append with subscription id.
+*/
+SIM_APN_URI : &quot;null&quot;,
+<span id='android-provider-Telephony-Carriers-property-DPC_URI'>/** The {@code content://} style URL to be called from DevicePolicyManagerService,
+</span> can manage DPC-owned APNs.
+ @hide
+*/
+DPC_URI : &quot;null&quot;,
+<span id='android-provider-Telephony-Carriers-property-FILTERED_URI'>/** The {@code content://} style URL to be called from Telephony to query APNs.
+</span> When DPC-owned APNs are enforced, only DPC-owned APNs are returned, otherwise only
+ non-DPC-owned APNs are returned. For MSIM, this will return APNs for the default
+ subscription {@link SubscriptionManager#getDefaultSubscriptionId()}. To specify subId
+ for MSIM, use {@link Uri#withAppendedPath(Uri, String)} to append with subscription id.
+ @hide
+*/
+FILTERED_URI : &quot;null&quot;,
+<span id='android-provider-Telephony-Carriers-property-ENFORCE_MANAGED_URI'>/** The {@code content://} style URL to be called from DevicePolicyManagerService
+</span> or Telephony to manage whether DPC-owned APNs are enforced.
+ @hide
+*/
+ENFORCE_MANAGED_URI : &quot;null&quot;,
+<span id='android-provider-Telephony-Carriers-property-ENFORCE_KEY'>/** The column name for ENFORCE_MANAGED_URI, indicates whether DPC-owned APNs are enforced.
+</span> @hide
+*/
+ENFORCE_KEY : &quot;enforced&quot;,
+<span id='android-provider-Telephony-Carriers-property-DEFAULT_SORT_ORDER'>/** The default sort order for this table.
+</span>*/
+DEFAULT_SORT_ORDER : &quot;name ASC&quot;,
+<span id='android-provider-Telephony-Carriers-property-NAME'>/** Entry name.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+NAME : &quot;name&quot;,
+<span id='android-provider-Telephony-Carriers-property-APN'>/** APN name.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+APN : &quot;apn&quot;,
+<span id='android-provider-Telephony-Carriers-property-PROXY'>/** Proxy address.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PROXY : &quot;proxy&quot;,
+<span id='android-provider-Telephony-Carriers-property-PORT'>/** Proxy port.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PORT : &quot;port&quot;,
+<span id='android-provider-Telephony-Carriers-property-MMSPROXY'>/** MMS proxy address.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+MMSPROXY : &quot;mmsproxy&quot;,
+<span id='android-provider-Telephony-Carriers-property-MMSPORT'>/** MMS proxy port.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+MMSPORT : &quot;mmsport&quot;,
+<span id='android-provider-Telephony-Carriers-property-SERVER'>/** Server address.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+SERVER : &quot;server&quot;,
+<span id='android-provider-Telephony-Carriers-property-USER'>/** APN username.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+USER : &quot;user&quot;,
+<span id='android-provider-Telephony-Carriers-property-PASSWORD'>/** APN password.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PASSWORD : &quot;password&quot;,
+<span id='android-provider-Telephony-Carriers-property-MMSC'>/** MMSC URL.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+MMSC : &quot;mmsc&quot;,
+<span id='android-provider-Telephony-Carriers-property-MCC'>/** Mobile Country Code (MCC).
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+ @deprecated Use {@link #SIM_APN_URI} to query APN instead, this API will return
+ matching APNs based on current subscription carrier, thus no need to specify MCC and
+ other carrier matching information. In the future, Android will not support MCC for
+ APN query.
+*/
+MCC : &quot;mcc&quot;,
+<span id='android-provider-Telephony-Carriers-property-MNC'>/** Mobile Network Code (MNC).
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+ @deprecated Use {@link #SIM_APN_URI} to query APN instead, this API will return
+ matching APNs based on current subscription carrier, thus no need to specify MNC and
+ other carrier matching information. In the future, Android will not support MNC for
+ APN query.
+*/
+MNC : &quot;mnc&quot;,
+<span id='android-provider-Telephony-Carriers-property-NUMERIC'>/** Numeric operator ID (as String). Usually {@code MCC + MNC}.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+ @deprecated Use {@link #SIM_APN_URI} to query APN instead, this API will return
+ matching APNs based on current subscription carrier, thus no need to specify Numeric
+ and other carrier matching information. In the future, Android will not support Numeric
+ for APN query.
+*/
+NUMERIC : &quot;numeric&quot;,
+<span id='android-provider-Telephony-Carriers-property-AUTH_TYPE'>/** Authentication type.
+</span> &lt;P&gt;Type:  INTEGER&lt;/P&gt;
+*/
+AUTH_TYPE : &quot;authtype&quot;,
+<span id='android-provider-Telephony-Carriers-property-TYPE'>/** Comma-delimited list of APN types.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+TYPE : &quot;type&quot;,
+<span id='android-provider-Telephony-Carriers-property-PROTOCOL'>/** The protocol to use to connect to this APN.
+</span>
+ One of the {@code PDP_type} values in TS 27.007 section 10.1.1.
+ For example: {@code IP}, {@code IPV6}, {@code IPV4V6}, or {@code PPP}.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PROTOCOL : &quot;protocol&quot;,
+<span id='android-provider-Telephony-Carriers-property-ROAMING_PROTOCOL'>/** The protocol to use to connect to this APN when roaming.
+</span> The syntax is the same as protocol.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+ROAMING_PROTOCOL : &quot;roaming_protocol&quot;,
+<span id='android-provider-Telephony-Carriers-property-CURRENT'>/** Is this the current APN?
+</span> &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+CURRENT : &quot;current&quot;,
+<span id='android-provider-Telephony-Carriers-property-CARRIER_ENABLED'>/** Is this APN enabled?
+</span> &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+CARRIER_ENABLED : &quot;carrier_enabled&quot;,
+<span id='android-provider-Telephony-Carriers-property-BEARER'>/** Radio Access Technology info.
+</span> To check what values are allowed, refer to {@link android.telephony.ServiceState}.
+ This should be spread to other technologies,
+ but is currently only used for LTE (14) and eHRPD (13).
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ @deprecated this column is no longer supported, use {@link #NETWORK_TYPE_BITMASK} instead
+*/
+BEARER : &quot;bearer&quot;,
+<span id='android-provider-Telephony-Carriers-property-BEARER_BITMASK'>/** Radio Access Technology bitmask.
+</span> To check what values can be contained, refer to {@link android.telephony.ServiceState}.
+ 0 indicates all techs otherwise first bit refers to RAT/bearer 1, second bit refers to
+ RAT/bearer 2 and so on.
+ Bitmask for a radio tech R is (1 &lt;&lt; (R - 1))
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ @hide
+ @deprecated this column is no longer supported, use {@link #NETWORK_TYPE_BITMASK} instead
+*/
+BEARER_BITMASK : &quot;bearer_bitmask&quot;,
+<span id='android-provider-Telephony-Carriers-property-NETWORK_TYPE_BITMASK'>/** Radio technology (network type) bitmask.
+</span> To check what values can be contained, refer to the NETWORK_TYPE_ constants in
+ {@link android.telephony.TelephonyManager}.
+ Bitmask for a radio tech R is (1 &lt;&lt; (R - 1))
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+NETWORK_TYPE_BITMASK : &quot;network_type_bitmask&quot;,
+<span id='android-provider-Telephony-Carriers-property-MVNO_TYPE'>/** MVNO type:
+</span> {@code SPN (Service Provider Name), IMSI, GID (Group Identifier Level 1)}.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ @deprecated Use {@link #SIM_APN_URI} to query APN instead, this API will return
+ matching APNs based on current subscription carrier, thus no need to specify MVNO_TYPE
+ and other carrier matching information. In the future, Android will not support MVNO_TYPE
+ for APN query.
+*/
+MVNO_TYPE : &quot;mvno_type&quot;,
+<span id='android-provider-Telephony-Carriers-property-MVNO_MATCH_DATA'>/** MVNO data.
+</span> Use the following examples.
+ &lt;ul&gt;
+     &lt;li&gt;SPN: A MOBILE, BEN NL, ...&lt;/li&gt;
+     &lt;li&gt;IMSI: 302720x94, 2060188, ...&lt;/li&gt;
+     &lt;li&gt;GID: 4E, 33, ...&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ @deprecated Use {@link #SIM_APN_URI} to query APN instead, this API will return
+ matching APNs based on current subscription carrier, thus no need to specify
+ MVNO_MATCH_DATA and other carrier matching information. In the future, Android will not
+ support MVNO_MATCH_DATA for APN query.
+*/
+MVNO_MATCH_DATA : &quot;mvno_match_data&quot;,
+<span id='android-provider-Telephony-Carriers-property-SUBSCRIPTION_ID'>/** The subscription to which the APN belongs to
+</span> &lt;p&gt;Type: INTEGER (long) &lt;/p&gt;
+*/
+SUBSCRIPTION_ID : &quot;sub_id&quot;,
+<span id='android-provider-Telephony-Carriers-property-PROFILE_ID'>/** The profile_id to which the APN saved in modem.
+</span> &lt;p&gt;Type: INTEGER&lt;/p&gt;
+@hide
+*/
+PROFILE_ID : &quot;profile_id&quot;,
+<span id='android-provider-Telephony-Carriers-property-MODEM_PERSIST'>/** If set to {@code true}, then the APN setting will persist to the modem.
+</span> &lt;p&gt;Type: INTEGER (boolean)&lt;/p&gt;
+@hide
+*/
+MODEM_PERSIST : &quot;modem_cognitive&quot;,
+<span id='android-provider-Telephony-Carriers-property-MAX_CONNECTIONS'>/** The max number of connections of this APN.
+</span> &lt;p&gt;Type: INTEGER&lt;/p&gt;
+@hide
+*/
+MAX_CONNECTIONS : &quot;max_conns&quot;,
+<span id='android-provider-Telephony-Carriers-property-WAIT_TIME_RETRY'>/** The wait time for retrying the APN, in milliseconds.
+</span> &lt;p&gt;Type: INTEGER&lt;/p&gt;
+@hide
+*/
+WAIT_TIME_RETRY : &quot;wait_time&quot;,
+<span id='android-provider-Telephony-Carriers-property-TIME_LIMIT_FOR_MAX_CONNECTIONS'>/** The max number of seconds this APN will support its maximum number of connections
+</span> as defined in {@link #MAX_CONNECTIONS}.
+ &lt;p&gt;Type: INTEGER&lt;/p&gt;
+@hide
+*/
+TIME_LIMIT_FOR_MAX_CONNECTIONS : &quot;max_conns_time&quot;,
+<span id='android-provider-Telephony-Carriers-property-MTU'>/** The MTU (maximum transmit unit) size of the mobile interface to which the APN is
+</span> connected, in bytes.
+ &lt;p&gt;Type: INTEGER &lt;/p&gt;
+ @hide
+*/
+MTU : &quot;mtu&quot;,
+<span id='android-provider-Telephony-Carriers-property-EDITED_STATUS'>/** APN edit status. APN could be added/edited/deleted by a user or carrier.
+</span> see all possible returned APN edit status.
+ &lt;ul&gt;
+     &lt;li&gt;{@link #UNEDITED}&lt;/li&gt;
+     &lt;li&gt;{@link #USER_EDITED}&lt;/li&gt;
+     &lt;li&gt;{@link #USER_DELETED}&lt;/li&gt;
+     &lt;li&gt;{@link #CARRIER_EDITED}&lt;/li&gt;
+     &lt;li&gt;{@link #CARRIER_DELETED}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;Type: INTEGER &lt;/p&gt;
+ @hide
+*/
+EDITED_STATUS : &quot;edited&quot;,
+<span id='android-provider-Telephony-Carriers-property-USER_VISIBLE'>/** {@code true} if this APN visible to the user, {@code false} otherwise.
+</span> &lt;p&gt;Type: INTEGER (boolean)&lt;/p&gt;
+ @hide
+*/
+USER_VISIBLE : &quot;user_visible&quot;,
+<span id='android-provider-Telephony-Carriers-property-USER_EDITABLE'>/** {@code true} if the user allowed to edit this APN, {@code false} otherwise.
+</span> &lt;p&gt;Type: INTEGER (boolean)&lt;/p&gt;
+ @hide
+*/
+USER_EDITABLE : &quot;user_editable&quot;,
+<span id='android-provider-Telephony-Carriers-property-UNEDITED'>/** {@link #EDITED_STATUS APN edit status} indicates that this APN has not been edited or
+</span> fails to edit.
+ &lt;p&gt;Type: INTEGER &lt;/p&gt;
+ @hide
+*/
+UNEDITED : &quot;0&quot;,
+<span id='android-provider-Telephony-Carriers-property-USER_EDITED'>/** {@link #EDITED_STATUS APN edit status} indicates that this APN has been edited by users.
+</span> &lt;p&gt;Type: INTEGER &lt;/p&gt;
+ @hide
+*/
+USER_EDITED : &quot;1&quot;,
+<span id='android-provider-Telephony-Carriers-property-USER_DELETED'>/** {@link #EDITED_STATUS APN edit status} indicates that this APN has been deleted by users.
+</span> &lt;p&gt;Type: INTEGER &lt;/p&gt;
+ @hide
+*/
+USER_DELETED : &quot;2&quot;,
+<span id='android-provider-Telephony-Carriers-property-USER_DELETED_BUT_PRESENT_IN_XML'>/** {@link #EDITED_STATUS APN edit status} is an intermediate value used to indicate that an
+</span> entry deleted by the user is still present in the new APN database and therefore must
+ remain tagged as user deleted rather than completely removed from the database.
+ @hide
+*/
+USER_DELETED_BUT_PRESENT_IN_XML : &quot;3&quot;,
+<span id='android-provider-Telephony-Carriers-property-CARRIER_EDITED'>/** {@link #EDITED_STATUS APN edit status} indicates that this APN has been edited by
+</span> carriers.
+ &lt;p&gt;Type: INTEGER &lt;/p&gt;
+ @hide
+*/
+CARRIER_EDITED : &quot;4&quot;,
+<span id='android-provider-Telephony-Carriers-property-CARRIER_DELETED'>/** {@link #EDITED_STATUS APN edit status} indicates that this APN has been deleted by
+</span> carriers. CARRIER_DELETED values are currently not used as there is no use case.
+ If they are used, delete() will have to change accordingly. Currently it is hardcoded to
+ USER_DELETED.
+ &lt;p&gt;Type: INTEGER &lt;/p&gt;
+ @hide
+*/
+CARRIER_DELETED : &quot;5&quot;,
+<span id='android-provider-Telephony-Carriers-property-CARRIER_DELETED_BUT_PRESENT_IN_XML'>/** {@link #EDITED_STATUS APN edit status} is an intermediate value used to indicate that an
+</span> entry deleted by the carrier is still present in the new APN database and therefore must
+ remain tagged as user deleted rather than completely removed from the database.
+ @hide
+*/
+CARRIER_DELETED_BUT_PRESENT_IN_XML : &quot;6&quot;,
+<span id='android-provider-Telephony-Carriers-property-OWNED_BY'>/** The owner of the APN.
+</span> &lt;p&gt;Type: INTEGER&lt;/p&gt;
+ @hide
+*/
+OWNED_BY : &quot;owned_by&quot;,
+<span id='android-provider-Telephony-Carriers-property-OWNED_BY_DPC'>/** Possible value for the OWNED_BY field.
+</span> APN is owned by DPC.
+ @hide
+*/
+OWNED_BY_DPC : &quot;0&quot;,
+<span id='android-provider-Telephony-Carriers-property-OWNED_BY_OTHERS'>/** Possible value for the OWNED_BY field.
+</span> APN is owned by other sources.
+ @hide
+*/
+OWNED_BY_OTHERS : &quot;1&quot;,
+<span id='android-provider-Telephony-Carriers-property-APN_SET_ID'>/** The APN set id. When the user manually selects an APN or the framework sets an APN as
+</span> preferred, all APNs with the same set id as the selected APN should be prioritized over
+ APNs in other sets.
+ &lt;p&gt;Type: INTEGER&lt;/p&gt;
+ @hide
+*/
+APN_SET_ID : &quot;apn_set_id&quot;,
+<span id='android-provider-Telephony-Carriers-property-NO_APN_SET_ID'>/** Possible value for the {@link #APN_SET_ID} field. By default APNs will not belong to a
+</span> set. If the user manually selects an APN without apn set id, there is no need to
+ prioritize any specific APN set ids.
+ &lt;p&gt;Type: INTEGER&lt;/p&gt;
+ @hide
+*/
+NO_APN_SET_ID : &quot;0&quot;,
+<span id='android-provider-Telephony-Carriers-property-CARRIER_ID'>/** A unique carrier id associated with this APN
+</span> {@see TelephonyManager#getSimCarrierId()}
+ &lt;p&gt;Type: STRING&lt;/p&gt;
+*/
+CARRIER_ID : &quot;carrier_id&quot;,
+<span id='android-provider-Telephony-Carriers-property-SKIP_464XLAT'>/** The skip 464xlat flag. Flag works as follows.
+</span> {@link #SKIP_464XLAT_DEFAULT}: the APN will skip only APN is IMS and no internet.
+ {@link #SKIP_464XLAT_DISABLE}: the APN will NOT skip 464xlat
+ {@link #SKIP_464XLAT_ENABLE}: the APN will skip 464xlat
+ &lt;p&gt;Type: INTEGER&lt;/p&gt;
+
+ @hide
+*/
+SKIP_464XLAT : &quot;skip_464xlat&quot;,
+<span id='android-provider-Telephony-Carriers-property-SKIP_464XLAT_DEFAULT'>/** Possible value for the {@link #SKIP_464XLAT} field.
+</span> &lt;p&gt;Type: INTEGER&lt;/p&gt;
+
+ @hide
+*/
+SKIP_464XLAT_DEFAULT : &quot;-1&quot;,
+<span id='android-provider-Telephony-Carriers-property-SKIP_464XLAT_DISABLE'>/** Possible value for the {@link #SKIP_464XLAT} field.
+</span> &lt;p&gt;Type: INTEGER&lt;/p&gt;
+
+ @hide
+*/
+SKIP_464XLAT_DISABLE : &quot;0&quot;,
+<span id='android-provider-Telephony-Carriers-property-SKIP_464XLAT_ENABLE'>/** Possible value for the {@link #SKIP_464XLAT} field.
+</span> &lt;p&gt;Type: INTEGER&lt;/p&gt;
+
+ @hide
+*/
+SKIP_464XLAT_ENABLE : &quot;1&quot;,
+
+};</pre>
+</body>
+</html>

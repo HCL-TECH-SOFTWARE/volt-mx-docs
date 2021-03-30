@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-ArrayMap'>/**@class android.util.ArrayMap
+</span> implements java.util.Map
+
+@extends java.lang.Object
+
+ ArrayMap is a generic key-&gt;value mapping data structure that is
+ designed to be more memory efficient than a traditional {@link java.util.HashMap}.
+ It keeps its mappings in an array data structure -- an integer array of hash
+ codes for each item, and an Object array of the key/value pairs.  This allows it to
+ avoid having to create an extra object for every entry put in to the map, and it
+ also tries to control the growth of the size of these arrays more aggressively
+ (since growing them only requires copying the entries in the array, not rebuilding
+ a hash map).
+
+ &lt;p&gt;Note that this implementation is not intended to be appropriate for data structures
+ that may contain large numbers of items.  It is generally slower than a traditional
+ HashMap, since lookups require a binary search and adds and removes require inserting
+ and deleting entries in the array.  For containers holding up to hundreds of items,
+ the performance difference is not significant, less than 50%.&lt;/p&gt;
+
+ &lt;p&gt;Because this container is intended to better balance memory use, unlike most other
+ standard Java containers it will shrink its array as items are removed from it.  Currently
+ you have no control over this shrinking -- if you set a capacity and then remove an
+ item, it may reduce the capacity to better match the current size.  In the future an
+ explicit call to set the capacity should turn off this aggressive shrinking behavior.&lt;/p&gt;
+*/
+var ArrayMap = {
+
+<span id='android-util-ArrayMap-property-EMPTY'>/** @hide Special immutable empty ArrayMap.
+</span>*/
+EMPTY : &quot;null&quot;,
+<span id='android-util-ArrayMap-method-clear'>/**Make the array map empty.  All storage is released.
+</span>*/
+clear : function(  ) {},
+
+<span id='android-util-ArrayMap-method-erase'>/**
+</span>@hide Like {@link #clear}, but doesn't reduce the capacity of the ArrayMap.
+*/
+erase : function(  ) {},
+
+<span id='android-util-ArrayMap-method-ensureCapacity'>/**Ensure the array map can hold at least &lt;var&gt;minimumCapacity&lt;/var&gt;
+</span> items.
+*/
+ensureCapacity : function(  ) {},
+
+<span id='android-util-ArrayMap-method-containsKey'>/**Check whether a key exists in the array.
+</span>@param {Object {Object}} key The key to search for.
+@return {Boolean} Returns true if the key exists, else false.
+*/
+containsKey : function(  ) {},
+
+<span id='android-util-ArrayMap-method-indexOfKey'>/**Returns the index of a key in the set.
+</span>@param {Object {Object}} key The key to search for.
+@return {Number} Returns the index of the key if it exists, else a negative integer.
+*/
+indexOfKey : function(  ) {},
+
+<span id='android-util-ArrayMap-method-indexOfValue'>/**Returns an index for which {@link #valueAt} would return the
+</span> specified value, or a negative number if no keys map to the
+ specified value.
+ Beware that this is a linear search, unlike lookups by key,
+ and that multiple keys can map to the same value and this will
+ find only one of them.
+*/
+indexOfValue : function(  ) {},
+
+<span id='android-util-ArrayMap-method-containsValue'>/**Check whether a value exists in the array.  This requires a linear search
+</span> through the entire array.
+@param {Object {Object}} value The value to search for.
+@return {Boolean} Returns true if the value exists, else false.
+*/
+containsValue : function(  ) {},
+
+<span id='android-util-ArrayMap-method-get'>/**Retrieve a value from the array.
+</span>@param {Object {Object}} key The key of the value to retrieve.
+@return {Object {java.lang.Object}} Returns the value associated with the given key,
+ or null if there is no such key.
+*/
+get : function(  ) {},
+
+<span id='android-util-ArrayMap-method-keyAt'>/**Return the key at the given index in the array.
+</span>
+ &lt;p&gt;For indices outside of the range &lt;code&gt;0...size()-1&lt;/code&gt;, the behavior is undefined for
+ apps targeting {@link android.os.Build.VERSION_CODES#P} and earlier, and an
+ {@link ArrayIndexOutOfBoundsException} is thrown for apps targeting
+ {@link android.os.Build.VERSION_CODES#Q} and later.&lt;/p&gt;
+@param {Number} index The desired index, must be between 0 and {@link #size()}-1.
+@return {Object {java.lang.Object}} Returns the key stored at the given index.
+*/
+keyAt : function(  ) {},
+
+<span id='android-util-ArrayMap-method-valueAt'>/**Return the value at the given index in the array.
+</span>
+ &lt;p&gt;For indices outside of the range &lt;code&gt;0...size()-1&lt;/code&gt;, the behavior is undefined for
+ apps targeting {@link android.os.Build.VERSION_CODES#P} and earlier, and an
+ {@link ArrayIndexOutOfBoundsException} is thrown for apps targeting
+ {@link android.os.Build.VERSION_CODES#Q} and later.&lt;/p&gt;
+@param {Number} index The desired index, must be between 0 and {@link #size()}-1.
+@return {Object {java.lang.Object}} Returns the value stored at the given index.
+*/
+valueAt : function(  ) {},
+
+<span id='android-util-ArrayMap-method-setValueAt'>/**Set the value at a given index in the array.
+</span>
+ &lt;p&gt;For indices outside of the range &lt;code&gt;0...size()-1&lt;/code&gt;, the behavior is undefined for
+ apps targeting {@link android.os.Build.VERSION_CODES#P} and earlier, and an
+ {@link ArrayIndexOutOfBoundsException} is thrown for apps targeting
+ {@link android.os.Build.VERSION_CODES#Q} and later.&lt;/p&gt;
+@param {Number} index The desired index, must be between 0 and {@link #size()}-1.
+@param {Object {Object}} value The new value to store at this index.
+@return {Object {java.lang.Object}} Returns the previous value at the given index.
+*/
+setValueAt : function(  ) {},
+
+<span id='android-util-ArrayMap-method-isEmpty'>/**Return true if the array map contains no items.
+</span>*/
+isEmpty : function(  ) {},
+
+<span id='android-util-ArrayMap-method-put'>/**Add a new value to the array map.
+</span>@param {Object {Object}} key The key under which to store the value.  If
+ this key already exists in the array, its value will be replaced.
+@param {Object {Object}} value The value to store for the given key.
+@return {Object {java.lang.Object}} Returns the old value that was stored for the given key, or null if there
+ was no such key.
+*/
+put : function(  ) {},
+
+<span id='android-util-ArrayMap-method-append'>/**Special fast path for appending items to the end of the array without validation.
+</span> The array must already be large enough to contain the item.
+@hide 
+*/
+append : function(  ) {},
+
+<span id='android-util-ArrayMap-method-validate'>/**The use of the {@link #append} function can result in invalid array maps, in particular
+</span> an array map where the same key appears multiple times.  This function verifies that
+ the array map is valid, throwing IllegalArgumentException if a problem is found.  The
+ main use for this method is validating an array map after unpacking from an IPC, to
+ protect against malicious callers.
+@hide 
+*/
+validate : function(  ) {},
+
+<span id='android-util-ArrayMap-method-putAll'>/**Perform a {@link #put(Object, Object)} of all key/value pairs in &lt;var&gt;array&lt;/var&gt;
+</span>@param {Object {android.util.ArrayMap}} array The array whose contents are to be retrieved.
+*/
+putAll : function(  ) {},
+
+<span id='android-util-ArrayMap-method-remove'>/**Remove an existing key from the array map.
+</span>@param {Object {Object}} key The key of the mapping to remove.
+@return {Object {java.lang.Object}} Returns the value that was stored under the key, or null if there
+ was no such key.
+*/
+remove : function(  ) {},
+
+<span id='android-util-ArrayMap-method-removeAt'>/**Remove the key/value mapping at the given index.
+</span>
+ &lt;p&gt;For indices outside of the range &lt;code&gt;0...size()-1&lt;/code&gt;, the behavior is undefined for
+ apps targeting {@link android.os.Build.VERSION_CODES#P} and earlier, and an
+ {@link ArrayIndexOutOfBoundsException} is thrown for apps targeting
+ {@link android.os.Build.VERSION_CODES#Q} and later.&lt;/p&gt;
+@param {Number} index The desired index, must be between 0 and {@link #size()}-1.
+@return {Object {java.lang.Object}} Returns the value that was stored at this index.
+*/
+removeAt : function(  ) {},
+
+<span id='android-util-ArrayMap-method-size'>/**Return the number of items in this array map.
+</span>*/
+size : function(  ) {},
+
+<span id='android-util-ArrayMap-method-equals'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;This implementation returns false if the object is not a map, or
+ if the maps have different sizes. Otherwise, for each key in this map,
+ values of both maps are compared. If the values for any key are not
+ equal, the method returns false, otherwise it returns true.
+*/
+equals : function(  ) {},
+
+<span id='android-util-ArrayMap-method-hashCode'>/**{@inheritDoc}
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-util-ArrayMap-method-toString'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;This implementation composes a string by iterating over its mappings. If
+ this map contains itself as a key or a value, the string &quot;(this Map)&quot;
+ will appear in its place.
+*/
+toString : function(  ) {},
+
+<span id='android-util-ArrayMap-method-containsAll'>/**Determine if the array map contains all of the keys in the given collection.
+</span>@param {Object {java.util.Collection}} collection The collection whose contents are to be checked against.
+@return {Boolean} Returns true if this array map contains a key for every entry
+ in &lt;var&gt;collection&lt;/var&gt;, else returns false.
+*/
+containsAll : function(  ) {},
+
+<span id='android-util-ArrayMap-method-putAll'>/**Perform a {@link #put(Object, Object)} of all key/value pairs in &lt;var&gt;map&lt;/var&gt;
+</span>@param {Object {java.util.Map}} map The map whose contents are to be retrieved.
+*/
+putAll : function(  ) {},
+
+<span id='android-util-ArrayMap-method-removeAll'>/**Remove all keys in the array map that exist in the given collection.
+</span>@param {Object {java.util.Collection}} collection The collection whose contents are to be used to remove keys.
+@return {Boolean} Returns true if any keys were removed from the array map, else false.
+*/
+removeAll : function(  ) {},
+
+<span id='android-util-ArrayMap-method-retainAll'>/**Remove all keys in the array map that do &lt;b&gt;not&lt;/b&gt; exist in the given collection.
+</span>@param {Object {java.util.Collection}} collection The collection whose contents are to be used to determine which
+ keys to keep.
+@return {Boolean} Returns true if any keys were removed from the array map, else false.
+*/
+retainAll : function(  ) {},
+
+<span id='android-util-ArrayMap-method-entrySet'>/**Return a {@link java.util.Set} for iterating over and interacting with all mappings
+</span> in the array map.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this is a very inefficient way to access the array contents, it
+ requires generating a number of temporary objects and allocates additional state
+ information associated with the container that will remain for the life of the container.&lt;/p&gt;
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt;&lt;/p&gt; the semantics of this
+ Set are subtly different than that of a {@link java.util.HashMap}: most important,
+ the {@link java.util.Map.Entry Map.Entry} object returned by its iterator is a single
+ object that exists for the entire iterator, so you can &lt;b&gt;not&lt;/b&gt; hold on to it
+ after calling {@link java.util.Iterator#next() Iterator.next}.&lt;/p&gt;
+*/
+entrySet : function(  ) {},
+
+<span id='android-util-ArrayMap-method-keySet'>/**Return a {@link java.util.Set} for iterating over and interacting with all keys
+</span> in the array map.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this is a fairly inefficient way to access the array contents, it
+ requires generating a number of temporary objects and allocates additional state
+ information associated with the container that will remain for the life of the container.&lt;/p&gt;
+*/
+keySet : function(  ) {},
+
+<span id='android-util-ArrayMap-method-values'>/**Return a {@link java.util.Collection} for iterating over and interacting with all values
+</span> in the array map.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this is a fairly inefficient way to access the array contents, it
+ requires generating a number of temporary objects and allocates additional state
+ information associated with the container that will remain for the life of the container.&lt;/p&gt;
+*/
+values : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

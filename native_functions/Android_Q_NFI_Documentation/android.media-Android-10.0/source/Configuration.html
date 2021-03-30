@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-VolumeShaper-Configuration'>/**@class android.media.VolumeShaper.Configuration
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ The {@code VolumeShaper.Configuration} class contains curve
+ and duration information.
+ It is constructed by the {@link android.media.VolumeShaper.Configuration.Builder}.
+ &lt;p&gt;
+ A {@code VolumeShaper.Configuration} is used by
+ {@link android.media.VolumeAutomation#createVolumeShaper(Configuration)
+ android.media.VolumeAutomation.createVolumeShaper(Configuration)} to create
+ a {@code VolumeShaper} and
+ by {@link android.media.VolumeShaper#replace(Configuration, Operation, boolean)
+ android.media.VolumeShaper.replace(Configuration, Operation, boolean)}
+ to replace an existing {@code configuration}.
+ &lt;p&gt;
+ The {@link android.media.AudioTrack} and {@link android.media.MediaPlayer} classes implement
+ the {@link android.media.VolumeAutomation} interface.
+*/
+var Configuration = {
+
+<span id='android-media-VolumeShaper-Configuration-property-INTERPOLATOR_TYPE_STEP'>/** Stepwise volume curve.
+</span>*/
+INTERPOLATOR_TYPE_STEP : &quot;0&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-INTERPOLATOR_TYPE_LINEAR'>/** Linear interpolated volume curve.
+</span>*/
+INTERPOLATOR_TYPE_LINEAR : &quot;1&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-INTERPOLATOR_TYPE_CUBIC'>/** Cubic interpolated volume curve.
+</span> This is default if unspecified.
+*/
+INTERPOLATOR_TYPE_CUBIC : &quot;2&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-INTERPOLATOR_TYPE_CUBIC_MONOTONIC'>/** Cubic interpolated volume curve
+</span> that preserves local monotonicity.
+ So long as the control points are locally monotonic,
+ the curve interpolation between those points are monotonic.
+ This is useful for cubic spline interpolated
+ volume ramps and ducks.
+*/
+INTERPOLATOR_TYPE_CUBIC_MONOTONIC : &quot;3&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-OPTION_FLAG_VOLUME_IN_DBFS'>/** @hide
+</span> Use a dB full scale volume range for the volume curve.
+&lt;p&gt;
+ The volume scale is typically from 0.f to 1.f on a linear scale;
+ this option changes to -inf to 0.f on a db full scale,
+ where 0.f is equivalent to a scale of 1.f.
+*/
+OPTION_FLAG_VOLUME_IN_DBFS : &quot;1&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-OPTION_FLAG_CLOCK_TIME'>/** @hide
+</span> Use clock time instead of media time.
+&lt;p&gt;
+ The default implementation of {@code VolumeShaper} is to apply
+ volume changes by the media time of the player.
+ Hence, the {@code VolumeShaper} will speed or slow down to
+ match player changes of playback rate, pause, or resume.
+&lt;p&gt;
+ The {@code OPTION_FLAG_CLOCK_TIME} option allows the {@code VolumeShaper}
+ progress to be determined by clock time instead of media time.
+*/
+OPTION_FLAG_CLOCK_TIME : &quot;2&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-LINEAR_RAMP'>/** A one second linear ramp from silence to full volume.
+</span> Use {@link android.media.VolumeShaper.Builder#reflectTimes()}
+ or {@link android.media.VolumeShaper.Builder#invertVolumes()} to generate
+ the matching linear duck.
+*/
+LINEAR_RAMP : &quot;null&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-CUBIC_RAMP'>/** A one second cubic ramp from silence to full volume.
+</span> Use {@link android.media.VolumeShaper.Builder#reflectTimes()}
+ or {@link android.media.VolumeShaper.Builder#invertVolumes()} to generate
+ the matching cubic duck.
+*/
+CUBIC_RAMP : &quot;null&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-SINE_RAMP'>/** A one second sine curve
+</span> from silence to full volume for energy preserving cross fades.
+ Use {@link android.media.VolumeShaper.Builder#reflectTimes()} to generate
+ the matching cosine duck.
+*/
+SINE_RAMP : &quot;null&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-SCURVE_RAMP'>/** A one second sine-squared s-curve ramp
+</span> from silence to full volume.
+ Use {@link android.media.VolumeShaper.Builder#reflectTimes()}
+ or {@link android.media.VolumeShaper.Builder#invertVolumes()} to generate
+ the matching sine-squared s-curve duck.
+*/
+SCURVE_RAMP : &quot;null&quot;,
+<span id='android-media-VolumeShaper-Configuration-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-media-VolumeShaper-Configuration-method-getMaximumCurvePoints'>/**Returns the maximum number of curve points allowed for
+</span> {@link android.media.VolumeShaper.Builder#setCurve(float[], float[])}.
+*/
+getMaximumCurvePoints : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-getType'>/**
+</span>@hide Returns the {@code VolumeShaper} type.
+*/
+getType : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-getId'>/**
+</span>@hide Returns the {@code VolumeShaper} id.
+*/
+getId : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-getInterpolatorType'>/**Returns the interpolator type.
+</span>*/
+getInterpolatorType : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-getOptionFlags'>/**
+</span>@hide Returns the option flags
+*/
+getOptionFlags : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-getDuration'>/**Returns the duration of the volume shape in milliseconds.
+</span>*/
+getDuration : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-getTimes'>/**Returns the times (x) coordinate array of the volume curve points.
+</span>*/
+getTimes : function(  ) {},
+
+<span id='android-media-VolumeShaper-Configuration-method-getVolumes'>/**Returns the volumes (y) coordinate array of the volume curve points.
+</span>*/
+getVolumes : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

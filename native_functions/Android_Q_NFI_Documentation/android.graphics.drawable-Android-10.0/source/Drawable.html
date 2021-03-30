@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-Drawable'>/**@class android.graphics.drawable.Drawable
+</span>@extends java.lang.Object
+
+ A Drawable is a general abstraction for &quot;something that can be drawn.&quot;  Most
+ often you will deal with Drawable as the type of resource retrieved for
+ drawing things to the screen; the Drawable class provides a generic API for
+ dealing with an underlying visual resource that may take a variety of forms.
+ Unlike a {@link android.view.View}, a Drawable does not have any facility to
+ receive events or otherwise interact with the user.
+
+ &lt;p&gt;In addition to simple drawing, Drawable provides a number of generic
+ mechanisms for its client to interact with what is being drawn:
+
+ &lt;ul&gt;
+     &lt;li&gt; The {@link #setBounds} method &lt;var&gt;must&lt;/var&gt; be called to tell the
+     Drawable where it is drawn and how large it should be.  All Drawables
+     should respect the requested size, often simply by scaling their
+     imagery.  A client can find the preferred size for some Drawables with
+     the {@link #getIntrinsicHeight} and {@link #getIntrinsicWidth} methods.
+
+     &lt;li&gt; The {@link #getPadding} method can return from some Drawables
+     information about how to frame content that is placed inside of them.
+     For example, a Drawable that is intended to be the frame for a button
+     widget would need to return padding that correctly places the label
+     inside of itself.
+
+     &lt;li&gt; The {@link #setState} method allows the client to tell the Drawable
+     in which state it is to be drawn, such as &quot;focused&quot;, &quot;selected&quot;, etc.
+     Some drawables may modify their imagery based on the selected state.
+
+     &lt;li&gt; The {@link #setLevel} method allows the client to supply a single
+     continuous controller that can modify the Drawable is displayed, such as
+     a battery level or progress level.  Some drawables may modify their
+     imagery based on the current level.
+
+     &lt;li&gt; A Drawable can perform animations by calling back to its client
+     through the {@link android.graphics.drawable.Drawable.Callback} interface.  All clients should support this
+     interface (via {@link #setCallback}) so that animations will work.  A
+     simple way to do this is through the system facilities such as
+     {@link android.view.View#setBackground(Drawable)} and
+     {@link android.widget.ImageView}.
+ &lt;/ul&gt;
+
+ Though usually not visible to the application, Drawables may take a variety
+ of forms:
+
+ &lt;ul&gt;
+     &lt;li&gt; &lt;b&gt;Bitmap&lt;/b&gt;: the simplest Drawable, a PNG or JPEG image.
+     &lt;li&gt; &lt;b&gt;Nine Patch&lt;/b&gt;: an extension to the PNG format allows it to
+     specify information about how to stretch it and place things inside of
+     it.
+     &lt;li&gt;&lt;b&gt;Vector&lt;/b&gt;: a drawable defined in an XML file as a set of points,
+     lines, and curves along with its associated color information. This type
+     of drawable can be scaled without loss of display quality.
+     &lt;li&gt; &lt;b&gt;Shape&lt;/b&gt;: contains simple drawing commands instead of a raw
+     bitmap, allowing it to resize better in some cases.
+     &lt;li&gt; &lt;b&gt;Layers&lt;/b&gt;: a compound drawable, which draws multiple underlying
+     drawables on top of each other.
+     &lt;li&gt; &lt;b&gt;States&lt;/b&gt;: a compound drawable that selects one of a set of
+     drawables based on its state.
+     &lt;li&gt; &lt;b&gt;Levels&lt;/b&gt;: a compound drawable that selects one of a set of
+     drawables based on its level.
+     &lt;li&gt; &lt;b&gt;Scale&lt;/b&gt;: a compound drawable with a single child drawable,
+     whose overall size is modified based on the current level.
+ &lt;/ul&gt;
+
+ &lt;a name=&quot;Custom&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Custom drawables&lt;/h3&gt;
+
+ &lt;p&gt;
+ All versions of Android allow the Drawable class to be extended and used at
+ run time in place of framework-provided drawable classes. Starting in
+ {@link android.os.Build.VERSION_CODES#N API 24}, custom drawables classes
+ may also be used in XML.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Custom drawable classes are only accessible from
+ within your application package. Other applications will not be able to load
+ them.
+ &lt;p&gt;
+ At a minimum, custom drawable classes must implement the abstract methods on
+ Drawable and should override the {@link android.graphics.drawable.Drawable#draw(Canvas)} method to
+ draw content.
+ &lt;p&gt;
+ Custom drawables classes may be used in XML in multiple ways:
+ &lt;ul&gt;
+     &lt;li&gt;
+         Using the fully-qualified class name as the XML element name. For
+         this method, the custom drawable class must be a public top-level
+         class.
+ &lt;pre&gt;
+ &amp;lt;com.myapp.MyCustomDrawable xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     android:color=&quot;#ffff0000&quot; /&amp;gt;
+ &lt;/pre&gt;
+     &lt;/li&gt;
+     &lt;li&gt;
+         Using &lt;em&gt;drawable&lt;/em&gt; as the XML element name and specifying the
+         fully-qualified class name from the &lt;em&gt;class&lt;/em&gt; attribute. This
+         method may be used for both public top-level classes and public
+         static inner classes.
+ &lt;pre&gt;
+ &amp;lt;drawable xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     class=&quot;com.myapp.MyTopLevelClass$InnerCustomDrawable&quot;
+     android:color=&quot;#ffff0000&quot; /&amp;gt;
+ &lt;/pre&gt;
+     &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about how to use drawables, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/graphics/2d-graphics.html&quot;&gt;Canvas and Drawables&lt;/a&gt; developer
+ guide. For information and examples of creating drawable resources (XML or bitmap files that
+ can be loaded in code), read the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/drawable-resource.html&quot;&gt;Drawable Resources&lt;/a&gt;
+ document.&lt;/p&gt;&lt;/div&gt;
+*/
+var Drawable = {
+
+<span id='android-graphics-drawable-Drawable-method-draw'>/**Draw in its bounds (set via setBounds) respecting optional effects such
+</span> as alpha (set via setAlpha) and color filter (set via setColorFilter).
+@param {Object {Canvas}} canvas The canvas to draw into
+*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setBounds'>/**Specify a bounding rectangle for the Drawable. This is where the drawable
+</span> will draw when its draw() method is called.
+*/
+setBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setBounds'>/**Specify a bounding rectangle for the Drawable. This is where the drawable
+</span> will draw when its draw() method is called.
+*/
+setBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-copyBounds'>/**Return a copy of the drawable's bounds in the specified Rect (allocated
+</span> by the caller). The bounds specify where this will draw when its draw()
+ method is called.
+@param {Object {Rect}} bounds Rect to receive the drawable's bounds (allocated by the
+               caller).
+*/
+copyBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-copyBounds'>/**Return a copy of the drawable's bounds in a new Rect. This returns the
+</span> same values as getBounds(), but the returned object is guaranteed to not
+ be changed later by the drawable (i.e. it retains no reference to this
+ rect). If the caller already has a Rect allocated, call copyBounds(rect).
+@return {Object {android.graphics.Rect}} A copy of the drawable's bounds
+*/
+copyBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getBounds'>/**Return the drawable's bounds Rect. Note: for efficiency, the returned
+</span> object may be the same object stored in the drawable (though this is not
+ guaranteed), so if a persistent copy of the bounds is needed, call
+ copyBounds(rect) instead.
+ You should also not change the object returned by this method as it may
+ be the same object stored in the drawable.
+@return {Object {android.graphics.Rect}} The bounds of the drawable (which may change later, so caller
+         beware). DO NOT ALTER the returned object as it may change the
+         stored bounds of this drawable.
+@see #copyBounds()
+@see #copyBounds(android.graphics.Rect)
+*/
+getBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getDirtyBounds'>/**Return the drawable's dirty bounds Rect. Note: for efficiency, the
+</span> returned object may be the same object stored in the drawable (though
+ this is not guaranteed).
+ &lt;p&gt;
+ By default, this returns the full drawable bounds. Custom drawables may
+ override this method to perform more precise invalidation.
+@return {Object {android.graphics.Rect}} The dirty bounds of this drawable
+*/
+getDirtyBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setChangingConfigurations'>/**Set a mask of the configuration parameters for which this drawable
+</span> may change, requiring that it be re-created.
+@param {Number} configs A mask of the changing configuration parameters, as
+ defined by {@link android.content.pm.ActivityInfo}.
+@see android.content.pm.ActivityInfo
+*/
+setChangingConfigurations : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getChangingConfigurations'>/**Return a mask of the configuration parameters for which this drawable
+</span> may change, requiring that it be re-created.  The default implementation
+ returns whatever was provided through
+ {@link #setChangingConfigurations}(int) or 0 by default.  Subclasses
+ may extend this to or in the changing configurations of any other
+ drawables they hold.
+@return {Number} Returns a mask of the changing configuration parameters, as
+ defined by {@link android.content.pm.ActivityInfo}.
+@see android.content.pm.ActivityInfo
+*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setDither'>/**Set to true to have the drawable dither its colors when drawn to a
+</span> device with fewer than 8-bits per color component.
+@see android.graphics.Paint#setDither(boolean);
+@deprecated This property is ignored.
+*/
+setDither : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setFilterBitmap'>/**Set to true to have the drawable filter its bitmaps with bilinear
+</span> sampling when they are scaled or rotated.
+
+ &lt;p&gt;This can improve appearance when bitmaps are rotated. If the drawable
+ does not use bitmaps, this call is ignored.&lt;/p&gt;
+@see #isFilterBitmap()
+@see android.graphics.Paint#setFilterBitmap(boolean);
+*/
+setFilterBitmap : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-isFilterBitmap'>/**
+</span>@return {Boolean} whether this drawable filters its bitmaps
+@see #setFilterBitmap(boolean)
+*/
+isFilterBitmap : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setCallback'>/**Bind a {@link android.graphics.drawable.Drawable.Callback} object to this Drawable.  Required for clients
+</span> that want to support animated drawables.
+@param {Object {Drawable.Callback}} cb The client's Callback implementation.
+@see #getCallback()
+*/
+setCallback : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getCallback'>/**Return the current {@link android.graphics.drawable.Drawable.Callback} implementation attached to this
+</span> Drawable.
+@return {Object {android.graphics.drawable.Drawable.Callback}} A {@link Callback} instance or null if no callback was set.
+@see #setCallback(android.graphics.drawable.Drawable.Callback)
+*/
+getCallback : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-invalidateSelf'>/**Use the current {@link android.graphics.drawable.Drawable.Callback} implementation to have this Drawable
+</span> redrawn.  Does nothing if there is no Callback attached to the
+ Drawable.
+@see Callback#invalidateDrawable
+@see #getCallback()
+@see #setCallback(android.graphics.drawable.Drawable.Callback)
+*/
+invalidateSelf : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-scheduleSelf'>/**Use the current {@link android.graphics.drawable.Drawable.Callback} implementation to have this Drawable
+</span> scheduled.  Does nothing if there is no Callback attached to the
+ Drawable.
+@param {Object {Runnable}} what The action being scheduled.
+@param {Number} when The time (in milliseconds) to run.
+@see Callback#scheduleDrawable
+*/
+scheduleSelf : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-unscheduleSelf'>/**Use the current {@link android.graphics.drawable.Drawable.Callback} implementation to have this Drawable
+</span> unscheduled.  Does nothing if there is no Callback attached to the
+ Drawable.
+@param {Object {Runnable}} what The runnable that you no longer want called.
+@see Callback#unscheduleDrawable
+*/
+unscheduleSelf : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getLayoutDirection'>/**Returns the resolved layout direction for this Drawable.
+</span>@return {Number} One of {@link android.view.View#LAYOUT_DIRECTION_LTR},
+         {@link android.view.View#LAYOUT_DIRECTION_RTL}
+@see #setLayoutDirection(int)
+*/
+getLayoutDirection : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setLayoutDirection'>/**Set the layout direction for this drawable. Should be a resolved
+</span> layout direction, as the Drawable has no capacity to do the resolution on
+ its own.
+@param {Number} layoutDirection the resolved layout direction for the drawable,
+                        either {@link android.view.View#LAYOUT_DIRECTION_LTR}
+                        or {@link android.view.View#LAYOUT_DIRECTION_RTL}
+@return {Boolean} {@code true} if the layout direction change has caused the
+         appearance of the drawable to change such that it needs to be
+         re-drawn, {@code false} otherwise
+@see #getLayoutDirection()
+*/
+setLayoutDirection : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-onLayoutDirectionChanged'>/**Called when the drawable's resolved layout direction changes.
+</span>@param {Number} layoutDirection the new resolved layout direction
+@return {Boolean} {@code true} if the layout direction change has caused the
+         appearance of the drawable to change such that it needs to be
+         re-drawn, {@code false} otherwise
+@see #setLayoutDirection(int)
+*/
+onLayoutDirectionChanged : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setAlpha'>/**Specify an alpha value for the drawable. 0 means fully transparent, and
+</span> 255 means fully opaque.
+*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getAlpha'>/**Gets the current alpha value for the drawable. 0 means fully transparent,
+</span> 255 means fully opaque. This method is implemented by
+ Drawable subclasses and the value returned is specific to how that class treats alpha.
+ The default return value is 255 if the class does not override this method to return a value
+ specific to its use of alpha.
+*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setXfermode'>/**
+</span>@hide Internal-only method for setting xfermode on certain supported drawables.
+
+ Should not be made public since the layers and drawing area with which
+ Drawables draw is private implementation detail, and not something apps
+ should rely upon.
+*/
+setXfermode : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setColorFilter'>/**Specify an optional color filter for the drawable.
+</span> &lt;p&gt;
+ If a Drawable has a ColorFilter, each output pixel of the Drawable's
+ drawing contents will be modified by the color filter before it is
+ blended onto the render target of a Canvas.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Pass {@code null} to remove any existing color filter.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting a non-{@code null} color
+ filter disables {@link #setTintList(ColorStateList) tint}.
+ &lt;/p&gt;
+@param {Object {ColorFilter}} colorFilter The color filter to apply, or {@code null} to remove the
+            existing color filter
+*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setColorFilter'>/**Specify a color and Porter-Duff mode to be the color filter for this
+</span> drawable.
+ &lt;p&gt;
+ Convenience for {@link #setColorFilter}(ColorFilter) which constructs a
+ {@link PorterDuffColorFilter}.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting a color filter disables
+ {@link #setTintList(ColorStateList) tint}.
+ &lt;/p&gt;
+@see {@link #setColorFilter(ColorFilter)} }
+@deprecated use {@link #setColorFilter(ColorFilter)} with an instance
+ of {@link android.graphics.BlendModeColorFilter}
+*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setTint'>/**Specifies tint color for this drawable.
+</span> &lt;p&gt;
+ A Drawable's drawing content will be blended together with its tint
+ before it is drawn to the screen. This functions similarly to
+ {@link #setColorFilter(int, PorterDuff.Mode)}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ To clear the tint, pass {@code null} to
+ {@link #setTintList}(ColorStateList).
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting a color filter via
+ {@link #setColorFilter}(ColorFilter) or
+ {@link #setColorFilter(int, PorterDuff.Mode)} overrides tint.
+ &lt;/p&gt;
+@param {Number} tintColor Color to use for tinting this drawable
+@see #setTintList(ColorStateList)
+@see #setTintMode(PorterDuff.Mode)
+@see #setTintBlendMode(BlendMode)
+*/
+setTint : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setTintList'>/**Specifies tint color for this drawable as a color state list.
+</span> &lt;p&gt;
+ A Drawable's drawing content will be blended together with its tint
+ before it is drawn to the screen. This functions similarly to
+ {@link #setColorFilter(int, PorterDuff.Mode)}.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting a color filter via
+ {@link #setColorFilter}(ColorFilter) or
+ {@link #setColorFilter(int, PorterDuff.Mode)} overrides tint.
+ &lt;/p&gt;
+@param {Object {ColorStateList}} tint Color state list to use for tinting this drawable, or
+            {@code null} to clear the tint
+@see #setTint(int)
+@see #setTintMode(PorterDuff.Mode)
+@see #setTintBlendMode(BlendMode)
+*/
+setTintList : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setTintMode'>/**Specifies a tint blending mode for this drawable.
+</span> &lt;p&gt;
+ Defines how this drawable's tint color should be blended into the drawable
+ before it is drawn to screen. Default tint mode is {@link PorterDuff.Mode#SRC_IN}.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting a color filter via
+ {@link #setColorFilter}(ColorFilter) or
+ {@link #setColorFilter(int, PorterDuff.Mode)} overrides tint.
+ &lt;/p&gt;
+@param {Object {PorterDuff.Mode}} tintMode A Porter-Duff blending mode to apply to the drawable, a value of null sets
+                 the default Porter-Diff blending mode value
+                 of {@link PorterDuff.Mode#SRC_IN}
+@see #setTint(int)
+@see #setTintList(ColorStateList)
+*/
+setTintMode : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setTintBlendMode'>/**Specifies a tint blending mode for this drawable.
+</span> &lt;p&gt;
+ Defines how this drawable's tint color should be blended into the drawable
+ before it is drawn to screen. Default tint mode is {@link BlendMode#SRC_IN}.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting a color filter via
+ {@link #setColorFilter}(ColorFilter)
+ &lt;/p&gt;
+@param {Object {BlendMode}} blendMode BlendMode to apply to the drawable, a value of null sets the default
+                  blend mode value of {@link BlendMode#SRC_IN}
+@see #setTint(int)
+@see #setTintList(ColorStateList)
+*/
+setTintBlendMode : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getColorFilter'>/**Returns the current color filter, or {@code null} if none set.
+</span>@return {Object {android.graphics.ColorFilter}} the current color filter, or {@code null} if none set
+*/
+getColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-clearColorFilter'>/**Removes the color filter for this drawable.
+</span>*/
+clearColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setHotspot'>/**Specifies the hotspot's location within the drawable.
+</span>@param {Number} x The X coordinate of the center of the hotspot
+@param {Number} y The Y coordinate of the center of the hotspot
+*/
+setHotspot : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setHotspotBounds'>/**Sets the bounds to which the hotspot is constrained, if they should be
+</span> different from the drawable bounds.
+@param {Number} left position in pixels of the left bound
+@param {Number} top position in pixels of the top bound
+@param {Number} right position in pixels of the right bound
+@param {Number} bottom position in pixels of the bottom bound
+@see #getHotspotBounds(android.graphics.Rect)
+*/
+setHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getHotspotBounds'>/**Populates {@code outRect} with the hotspot bounds.
+</span>@param {Object {Rect}} outRect the rect to populate with the hotspot bounds
+@see #setHotspotBounds(int, int, int, int)
+*/
+getHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-isProjected'>/**Whether this drawable requests projection. Indicates that the
+</span> {@link android.graphics.RenderNode} this Drawable will draw into should be drawn immediately
+ after the closest ancestor RenderNode containing a projection receiver.
+@see android.graphics.RenderNode#setProjectBackwards(boolean)
+*/
+isProjected : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-isStateful'>/**Indicates whether this drawable will change its appearance based on
+</span> state. Clients can use this to determine whether it is necessary to
+ calculate their state and call setState.
+@return {Boolean} True if this drawable changes its appearance based on state,
+         false otherwise.
+@see #setState(int[])
+*/
+isStateful : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-hasFocusStateSpecified'>/**Indicates whether this drawable has at least one state spec explicitly
+</span> specifying {@link android.R.attr#state_focused}.
+
+ &lt;p&gt;Note: A View uses a {@link android.graphics.drawable.Drawable} instance as its background and it
+ changes its appearance based on a state. On keyboard devices, it should
+ specify its {@link android.R.attr#state_focused} to make sure the user
+ knows which view is holding the focus.&lt;/p&gt;
+@return {Boolean} {@code true} if {@link android.R.attr#state_focused} is specified
+ for this drawable.
+@hide 
+*/
+hasFocusStateSpecified : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setState'>/**Specify a set of states for the drawable. These are use-case specific,
+</span> so see the relevant documentation. As an example, the background for
+ widgets like Button understand the following states:
+ [{@link android.R.attr#state_focused},
+  {@link android.R.attr#state_pressed}].
+
+ &lt;p&gt;If the new state you are supplying causes the appearance of the
+ Drawable to change, then it is responsible for calling
+ {@link #invalidateSelf} in order to have itself redrawn, &lt;em&gt;and&lt;/em&gt;
+ true will be returned from this function.
+
+ &lt;p&gt;Note: The Drawable holds a reference on to &lt;var&gt;stateSet&lt;/var&gt;
+ until a new state array is given to it, so you must not modify this
+ array during that time.&lt;/p&gt;
+@param {Object {int[]}} stateSet The new set of states to be displayed.
+@return {Boolean} Returns true if this change in state has caused the appearance
+ of the Drawable to change (hence requiring an invalidate), otherwise
+ returns false.
+*/
+setState : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getState'>/**Describes the current state, as a union of primitve states, such as
+</span> {@link android.R.attr#state_focused},
+ {@link android.R.attr#state_selected}, etc.
+ Some drawables may modify their imagery based on the selected state.
+@return {Number} An array of resource Ids describing the current state.
+*/
+getState : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-jumpToCurrentState'>/**If this Drawable does transition animations between states, ask that
+</span> it immediately jump to the current state and skip any active animations.
+*/
+jumpToCurrentState : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getCurrent'>/**
+</span>@return {Object {android.graphics.drawable.Drawable}} The current drawable that will be used by this drawable. For simple drawables, this
+         is just the drawable itself. For drawables that change state like
+         {@link StateListDrawable} and {@link LevelListDrawable} this will be the child drawable
+         currently in use.
+*/
+getCurrent : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setLevel'>/**Specify the level for the drawable.  This allows a drawable to vary its
+</span> imagery based on a continuous controller, for example to show progress
+ or volume level.
+
+ &lt;p&gt;If the new level you are supplying causes the appearance of the
+ Drawable to change, then it is responsible for calling
+ {@link #invalidateSelf} in order to have itself redrawn, &lt;em&gt;and&lt;/em&gt;
+ true will be returned from this function.
+@param {Number} level The new level, from 0 (minimum) to 10000 (maximum).
+@return {Boolean} Returns true if this change in level has caused the appearance
+ of the Drawable to change (hence requiring an invalidate), otherwise
+ returns false.
+*/
+setLevel : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getLevel'>/**Retrieve the current level.
+</span>@return {Number} int Current level, from 0 (minimum) to 10000 (maximum).
+*/
+getLevel : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setVisible'>/**Set whether this Drawable is visible.  This generally does not impact
+</span> the Drawable's behavior, but is a hint that can be used by some
+ Drawables, for example, to decide whether run animations.
+@param {Boolean} visible Set to true if visible, false if not.
+@param {Boolean} restart You can supply true here to force the drawable to behave
+                as if it has just become visible, even if it had last
+                been set visible.  Used for example to force animations
+                to restart.
+@return {Boolean} boolean Returns true if the new visibility is different than
+         its previous state.
+*/
+setVisible : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-isVisible'>/**
+</span>*/
+isVisible : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-setAutoMirrored'>/**Set whether this Drawable is automatically mirrored when its layout direction is RTL
+</span> (right-to left). See {@link android.util.LayoutDirection}.
+@param {Boolean} mirrored Set to true if the Drawable should be mirrored, false if not.
+*/
+setAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-isAutoMirrored'>/**Tells if this Drawable will be automatically mirrored  when its layout direction is RTL
+</span> right-to-left. See {@link android.util.LayoutDirection}.
+@return {Boolean} boolean Returns true if this Drawable will be automatically mirrored.
+*/
+isAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-applyTheme'>/**Applies the specified theme to this Drawable and its children.
+</span>@param {Object {Resources.Theme}} t the theme to apply
+*/
+applyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-canApplyTheme'>/**
+</span>*/
+canApplyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getOpacity'>/**Return the opacity/transparency of this Drawable.  The returned value is
+</span> one of the abstract format constants in
+ {@link android.graphics.PixelFormat}:
+ {@link android.graphics.PixelFormat#UNKNOWN},
+ {@link android.graphics.PixelFormat#TRANSLUCENT},
+ {@link android.graphics.PixelFormat#TRANSPARENT}, or
+ {@link android.graphics.PixelFormat#OPAQUE}.
+
+ &lt;p&gt;An OPAQUE drawable is one that draws all all content within its bounds, completely
+ covering anything behind the drawable. A TRANSPARENT drawable is one that draws nothing
+ within its bounds, allowing everything behind it to show through. A TRANSLUCENT drawable
+ is a drawable in any other state, where the drawable will draw some, but not all,
+ of the content within its bounds and at least some content behind the drawable will
+ be visible. If the visibility of the drawable's contents cannot be determined, the
+ safest/best return value is TRANSLUCENT.
+
+ &lt;p&gt;Generally a Drawable should be as conservative as possible with the
+ value it returns.  For example, if it contains multiple child drawables
+ and only shows one of them at a time, if only one of the children is
+ TRANSLUCENT and the others are OPAQUE then TRANSLUCENT should be
+ returned.  You can use the method {@link #resolveOpacity} to perform a
+ standard reduction of two opacities to the appropriate single output.
+
+ &lt;p&gt;Note that the returned value does not necessarily take into account a
+ custom alpha or color filter that has been applied by the client through
+ the {@link #setAlpha} or {@link #setColorFilter} methods. Some subclasses,
+ such as {@link android.graphics.drawable.BitmapDrawable}, {@link android.graphics.drawable.ColorDrawable}, and {@link android.graphics.drawable.GradientDrawable},
+ do account for the value of {@link #setAlpha}, but the general behavior is dependent
+ upon the implementation of the subclass.
+@deprecated This method is no longer used in graphics optimizations
+@return {Number} int The opacity class of the Drawable.
+@see android.graphics.PixelFormat
+*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-resolveOpacity'>/**Return the appropriate opacity value for two source opacities.  If
+</span> either is UNKNOWN, that is returned; else, if either is TRANSLUCENT,
+ that is returned; else, if either is TRANSPARENT, that is returned;
+ else, OPAQUE is returned.
+
+ &lt;p&gt;This is to help in implementing {@link #getOpacity}.
+@param {Number} op1 One opacity value.
+@param {Number} op2 Another opacity value.
+@return {Number} int The combined opacity value.
+@see #getOpacity
+*/
+resolveOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getTransparentRegion'>/**Returns a Region representing the part of the Drawable that is completely
+</span> transparent.  This can be used to perform drawing operations, identifying
+ which parts of the target will not change when rendering the Drawable.
+ The default implementation returns null, indicating no transparent
+ region; subclasses can optionally override this to return an actual
+ Region if they want to supply this optimization information, but it is
+ not required that they do so.
+@return {Object {android.graphics.Region}} Returns null if the Drawables has no transparent region to
+ report, else a Region holding the parts of the Drawable's bounds that
+ are transparent.
+*/
+getTransparentRegion : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getIntrinsicWidth'>/**Returns the drawable's intrinsic width.
+</span> &lt;p&gt;
+ Intrinsic width is the width at which the drawable would like to be laid
+ out, including any inherent padding. If the drawable has no intrinsic
+ width, such as a solid color, this method returns -1.
+@return {Number} the intrinsic width, or -1 if no intrinsic width
+*/
+getIntrinsicWidth : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getIntrinsicHeight'>/**Returns the drawable's intrinsic height.
+</span> &lt;p&gt;
+ Intrinsic height is the height at which the drawable would like to be
+ laid out, including any inherent padding. If the drawable has no
+ intrinsic height, such as a solid color, this method returns -1.
+@return {Number} the intrinsic height, or -1 if no intrinsic height
+*/
+getIntrinsicHeight : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getMinimumWidth'>/**Returns the minimum width suggested by this Drawable. If a View uses this
+</span> Drawable as a background, it is suggested that the View use at least this
+ value for its width. (There will be some scenarios where this will not be
+ possible.) This value should INCLUDE any padding.
+@return {Number} The minimum width suggested by this Drawable. If this Drawable
+         doesn't have a suggested minimum width, 0 is returned.
+*/
+getMinimumWidth : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getMinimumHeight'>/**Returns the minimum height suggested by this Drawable. If a View uses this
+</span> Drawable as a background, it is suggested that the View use at least this
+ value for its height. (There will be some scenarios where this will not be
+ possible.) This value should INCLUDE any padding.
+@return {Number} The minimum height suggested by this Drawable. If this Drawable
+         doesn't have a suggested minimum height, 0 is returned.
+*/
+getMinimumHeight : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getPadding'>/**Return in padding the insets suggested by this Drawable for placing
+</span> content inside the drawable's bounds. Positive values move toward the
+ center of the Drawable (set Rect.inset).
+@return {Boolean} true if this drawable actually has a padding, else false. When false is returned,
+ the padding is always set to 0.
+*/
+getPadding : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getOpticalInsets'>/**Return in insets the layout insets suggested by this Drawable for use with alignment
+</span> operations during layout.
+*/
+getOpticalInsets : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getOutline'>/**Called to get the drawable to populate the Outline that defines its drawing area.
+</span> &lt;p&gt;
+ This method is called by the default {@link android.view.ViewOutlineProvider} to define
+ the outline of the View.
+ &lt;p&gt;
+ The default behavior defines the outline to be the bounding rectangle of 0 alpha.
+ Subclasses that wish to convey a different shape or alpha value must override this method.
+@see android.view.View#setOutlineProvider(android.view.ViewOutlineProvider)
+*/
+getOutline : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-mutate'>/**Make this drawable mutable. This operation cannot be reversed. A mutable
+</span> drawable is guaranteed to not share its state with any other drawable.
+ This is especially useful when you need to modify properties of drawables
+ loaded from resources. By default, all drawables instances loaded from
+ the same resource share a common state; if you modify the state of one
+ instance, all the other instances will receive the same modification.
+
+ Calling this method on a mutable Drawable will have no effect.
+@return {Object {android.graphics.drawable.Drawable}} This drawable.
+@see ConstantState
+@see #getConstantState()
+*/
+mutate : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-clearMutated'>/**Clears the mutated state, allowing this drawable to be cached and
+</span> mutated again.
+ &lt;p&gt;
+ This is hidden because only framework drawables can be cached, so
+ custom drawables don't need to support constant state, mutate(), or
+ clearMutated().
+@hide 
+*/
+clearMutated : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromStream'>/**Create a drawable from an inputstream
+</span>*/
+createFromStream : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromResourceStream'>/**Create a drawable from an inputstream, using the given resources and
+</span> value to determine density information.
+*/
+createFromResourceStream : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromResourceStream'>/**Create a drawable from an inputstream, using the given resources and
+</span> value to determine density information.
+@deprecated Prefer the version without an Options object.
+*/
+createFromResourceStream : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromXml'>/**Create a drawable from an XML document. For more information on how to
+</span> create resources in XML, see
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/drawable-resource.html&quot;&gt;Drawable Resources&lt;/a&gt;.
+*/
+createFromXml : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromXml'>/**Create a drawable from an XML document using an optional {@link Theme}.
+</span> For more information on how to create resources in XML, see
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/drawable-resource.html&quot;&gt;Drawable Resources&lt;/a&gt;.
+*/
+createFromXml : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromXmlForDensity'>/**Version of {@link #createFromXml(Resources, XmlPullParser, Theme)} that accepts a density
+</span> override.
+@hide 
+*/
+createFromXmlForDensity : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromXmlInner'>/**Create from inside an XML document.  Called on a parser positioned at
+</span> a tag in an XML document, tries to create a Drawable from that tag.
+ Returns null if the tag is not a valid drawable.
+*/
+createFromXmlInner : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromXmlInner'>/**Create a drawable from inside an XML document using an optional
+</span> {@link Theme}. Called on a parser positioned at a tag in an XML
+ document, tries to create a Drawable from that tag. Returns {@code null}
+ if the tag is not a valid drawable.
+*/
+createFromXmlInner : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-createFromPath'>/**Create a drawable from file path name.
+</span>*/
+createFromPath : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-inflate'>/**Inflate this Drawable from an XML resource. Does not apply a theme.
+</span>@see #inflate(Resources, XmlPullParser, AttributeSet, Theme)
+*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-inflate'>/**Inflate this Drawable from an XML resource optionally styled by a theme.
+</span> This can't be called more than once for each Drawable. Note that framework may have called
+ this once to create the Drawable instance from XML resource.
+@param {Object {Resources}} r Resources used to resolve attribute values
+@param {Object {XmlPullParser}} parser XML parser from which to inflate this Drawable
+@param {Object {AttributeSet}} attrs Base set of attribute values
+@param {Object {Resources.Theme}} theme Theme to apply, may be null
+@throws XmlPullParserException
+@throws IOException
+*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-getConstantState'>/**Return a {@link android.graphics.drawable.Drawable.ConstantState} instance that holds the shared state of this Drawable.
+</span>@return {Object {android.graphics.drawable.Drawable.ConstantState}} The ConstantState associated to that Drawable.
+@see ConstantState
+@see Drawable#mutate()
+*/
+getConstantState : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-parseTintMode'>/**Parses a {@link android.graphics.PorterDuff.Mode} from a tintMode
+</span> attribute's enum value.
+@hide 
+*/
+parseTintMode : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-method-parseBlendMode'>/**Parses a {@link android.graphics.BlendMode} from a tintMode
+</span> attribute's enum value.
+@hide 
+*/
+parseBlendMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

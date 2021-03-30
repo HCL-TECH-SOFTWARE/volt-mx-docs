@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-UserHandle'>/**@class android.os.UserHandle
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Representation of a user on the device.
+*/
+var UserHandle = {
+
+<span id='android-os-UserHandle-property-PER_USER_RANGE'>/** @hide Range of uids allocated for a user.
+</span>*/
+PER_USER_RANGE : &quot;100000&quot;,
+<span id='android-os-UserHandle-property-USER_ALL'>/**@hide A user id to indicate all users on the device */
+</span>USER_ALL : &quot;-1&quot;,
+<span id='android-os-UserHandle-property-ALL'>/**@hide A user handle to indicate all users on the device */
+</span>ALL : &quot;null&quot;,
+<span id='android-os-UserHandle-property-USER_CURRENT'>/**@hide A user id to indicate the currently active user */
+</span>USER_CURRENT : &quot;-2&quot;,
+<span id='android-os-UserHandle-property-CURRENT'>/**@hide A user handle to indicate the current user of the device */
+</span>CURRENT : &quot;null&quot;,
+<span id='android-os-UserHandle-property-USER_CURRENT_OR_SELF'>/**@hide A user id to indicate that we would like to send to the current
+</span>  user, but if this is calling from a user process then we will send it
+  to the caller's user instead of failing with a security exception */
+USER_CURRENT_OR_SELF : &quot;-3&quot;,
+<span id='android-os-UserHandle-property-CURRENT_OR_SELF'>/**@hide A user handle to indicate that we would like to send to the current
+</span>  user, but if this is calling from a user process then we will send it
+  to the caller's user instead of failing with a security exception */
+CURRENT_OR_SELF : &quot;null&quot;,
+<span id='android-os-UserHandle-property-USER_NULL'>/**@hide An undefined user id */
+</span>USER_NULL : &quot;-10000&quot;,
+<span id='android-os-UserHandle-property-USER_OWNER'>/** @hide A user id constant to indicate the &quot;owner&quot; user of the device
+</span> @deprecated Consider using either {@link android.os.UserHandle#USER_SYSTEM} constant or
+ check the target user's flag {@link android.content.pm.UserInfo#isAdmin}.
+*/
+USER_OWNER : &quot;0&quot;,
+<span id='android-os-UserHandle-property-OWNER'>/** @hide A user handle to indicate the primary/owner user of the device
+</span> @deprecated Consider using either {@link android.os.UserHandle#SYSTEM} constant or
+ check the target user's flag {@link android.content.pm.UserInfo#isAdmin}.
+*/
+OWNER : &quot;null&quot;,
+<span id='android-os-UserHandle-property-USER_SYSTEM'>/**@hide A user id constant to indicate the &quot;system&quot; user of the device */
+</span>USER_SYSTEM : &quot;0&quot;,
+<span id='android-os-UserHandle-property-USER_SERIAL_SYSTEM'>/**@hide A user serial constant to indicate the &quot;system&quot; user of the device */
+</span>USER_SERIAL_SYSTEM : &quot;0&quot;,
+<span id='android-os-UserHandle-property-SYSTEM'>/**@hide A user handle to indicate the &quot;system&quot; user of the device */
+</span>SYSTEM : &quot;null&quot;,
+<span id='android-os-UserHandle-property-MU_ENABLED'>/** @hide Enable multi-user related side effects. Set this to false if
+</span> there are problems with single user use-cases.
+*/
+MU_ENABLED : &quot;true&quot;,
+<span id='android-os-UserHandle-property-ERR_GID'>/**@hide */
+</span>ERR_GID : &quot;-1&quot;,
+<span id='android-os-UserHandle-property-AID_ROOT'>/**@hide */
+</span>AID_ROOT : &quot;0&quot;,
+<span id='android-os-UserHandle-property-AID_APP_START'>/**@hide */
+</span>AID_APP_START : &quot;10000&quot;,
+<span id='android-os-UserHandle-property-AID_APP_END'>/**@hide */
+</span>AID_APP_END : &quot;19999&quot;,
+<span id='android-os-UserHandle-property-AID_SHARED_GID_START'>/**@hide */
+</span>AID_SHARED_GID_START : &quot;50000&quot;,
+<span id='android-os-UserHandle-property-AID_CACHE_GID_START'>/**@hide */
+</span>AID_CACHE_GID_START : &quot;20000&quot;,
+<span id='android-os-UserHandle-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-os-UserHandle-method-isSameUser'>/**Checks to see if the user id is the same for the two uids, i.e., they belong to the same
+</span> user.
+@hide 
+*/
+isSameUser : function(  ) {},
+
+<span id='android-os-UserHandle-method-isSameApp'>/**Checks to see if both uids are referring to the same app id, ignoring the user id part of the
+</span> uids.
+@param {Number} uid1 uid to compare
+@param {Number} uid2 other uid to compare
+@return {Boolean} whether the appId is the same for both uids
+@hide 
+*/
+isSameApp : function(  ) {},
+
+<span id='android-os-UserHandle-method-isIsolated'>/**Whether a UID is an &quot;isolated&quot; UID.
+</span>@hide 
+*/
+isIsolated : function(  ) {},
+
+<span id='android-os-UserHandle-method-isApp'>/**Whether a UID belongs to a regular app. *Note* &quot;Not a regular app&quot; does not mean
+</span> &quot;it's system&quot;, because of isolated UIDs. Use {@link #isCore} for that.
+@hide 
+*/
+isApp : function(  ) {},
+
+<span id='android-os-UserHandle-method-isCore'>/**Whether a UID belongs to a system core component or not.
+</span>@hide 
+*/
+isCore : function(  ) {},
+
+<span id='android-os-UserHandle-method-getUserHandleForUid'>/**Returns the user for a given uid.
+</span>@param {Number} uid A uid for an application running in a particular user.
+@return {Object {android.os.UserHandle}} A {@link UserHandle} for that user.
+*/
+getUserHandleForUid : function(  ) {},
+
+<span id='android-os-UserHandle-method-getUserId'>/**Returns the user id for a given uid.
+</span>@hide 
+*/
+getUserId : function(  ) {},
+
+<span id='android-os-UserHandle-method-getCallingUserId'>/**
+</span>@hide 
+*/
+getCallingUserId : function(  ) {},
+
+<span id='android-os-UserHandle-method-getCallingAppId'>/**
+</span>@hide 
+*/
+getCallingAppId : function(  ) {},
+
+<span id='android-os-UserHandle-method-of'>/**
+</span>@hide 
+*/
+of : function(  ) {},
+
+<span id='android-os-UserHandle-method-getUid'>/**Returns the uid that is composed from the userId and the appId.
+</span>@hide 
+*/
+getUid : function(  ) {},
+
+<span id='android-os-UserHandle-method-getAppId'>/**Returns the app id (or base uid) for a given uid, stripping out the user id from it.
+</span>@hide 
+*/
+getAppId : function(  ) {},
+
+<span id='android-os-UserHandle-method-getUserGid'>/**Returns the gid shared between all apps with this userId.
+</span>@hide 
+*/
+getUserGid : function(  ) {},
+
+<span id='android-os-UserHandle-method-getSharedAppGid'>/**
+</span>@hide 
+*/
+getSharedAppGid : function(  ) {},
+
+<span id='android-os-UserHandle-method-getSharedAppGid'>/**
+</span>@hide 
+*/
+getSharedAppGid : function(  ) {},
+
+<span id='android-os-UserHandle-method-getAppIdFromSharedAppGid'>/**Returns the app id for a given shared app gid. Returns -1 if the ID is invalid.
+</span>@hide 
+*/
+getAppIdFromSharedAppGid : function(  ) {},
+
+<span id='android-os-UserHandle-method-getCacheAppGid'>/**
+</span>@hide 
+*/
+getCacheAppGid : function(  ) {},
+
+<span id='android-os-UserHandle-method-getCacheAppGid'>/**
+</span>@hide 
+*/
+getCacheAppGid : function(  ) {},
+
+<span id='android-os-UserHandle-method-formatUid'>/**Generate a text representation of the uid, breaking out its individual
+</span> components -- user, app, isolated, etc.
+@hide 
+*/
+formatUid : function(  ) {},
+
+<span id='android-os-UserHandle-method-formatUid'>/**Generate a text representation of the uid, breaking out its individual
+</span> components -- user, app, isolated, etc.
+@hide 
+*/
+formatUid : function(  ) {},
+
+<span id='android-os-UserHandle-method-formatUid'>/**Generate a text representation of the uid, breaking out its individual
+</span> components -- user, app, isolated, etc.
+@hide 
+*/
+formatUid : function(  ) {},
+
+<span id='android-os-UserHandle-method-parseUserArg'>/**
+</span>@hide 
+*/
+parseUserArg : function(  ) {},
+
+<span id='android-os-UserHandle-method-myUserId'>/**Returns the user id of the current process
+</span>@return {Number} user id of the current process
+@hide 
+*/
+myUserId : function(  ) {},
+
+<span id='android-os-UserHandle-method-isOwner'>/**Returns true if this UserHandle refers to the owner user; false otherwise.
+</span>@return {Boolean} true if this UserHandle refers to the owner user; false otherwise.
+@hide 
+@deprecated please use {@link #isSystem()} or check for
+ {@link android.content.pm.UserInfo#isPrimary()}
+ {@link android.content.pm.UserInfo#isAdmin()} based on your particular use case.
+*/
+isOwner : function(  ) {},
+
+<span id='android-os-UserHandle-method-isSystem'>/**
+</span>@return {Boolean} true if this UserHandle refers to the system user; false otherwise.
+@hide 
+*/
+isSystem : function(  ) {},
+
+<span id='android-os-UserHandle-method-getIdentifier'>/**Returns the userId stored in this UserHandle.
+</span>@hide 
+*/
+getIdentifier : function(  ) {},
+
+<span id='android-os-UserHandle-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-os-UserHandle-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-os-UserHandle-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-os-UserHandle-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-os-UserHandle-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-os-UserHandle-method-writeToParcel'>/**Write a UserHandle to a Parcel, handling null pointers.  Must be
+</span> read with {@link #readFromParcel}(Parcel).
+@param {Object {UserHandle}} h The UserHandle to be written.
+@param {Object {Parcel}} out The Parcel in which the UserHandle will be placed.
+@see #readFromParcel(Parcel)
+*/
+writeToParcel : function(  ) {},
+
+<span id='android-os-UserHandle-method-readFromParcel'>/**Read a UserHandle from a Parcel that was previously written
+</span> with {@link #writeToandroid.os.Parcel(UserHandle, android.os.Parcel)}, returning either
+ a null or new object as appropriate.
+@param {Object {Parcel}} in The Parcel from which to read the UserHandle
+@return {Object {android.os.UserHandle}} Returns a new UserHandle matching the previously written
+ object, or null if a null had been written.
+@see #writeToParcel(UserHandle, Parcel)
+*/
+readFromParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

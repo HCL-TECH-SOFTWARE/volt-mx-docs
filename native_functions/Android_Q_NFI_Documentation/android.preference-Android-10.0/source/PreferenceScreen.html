@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-preference-PreferenceScreen'>/**@class android.preference.PreferenceScreen
+</span> implements android.widget.AdapterView.OnItemClickListener
+
+ implements android.content.DialogInterface.OnDismissListener
+
+@extends android.preference.PreferenceGroup
+
+ Represents a top-level {@link android.preference.Preference} that
+ is the root of a Preference hierarchy. A {@link android.preference.PreferenceActivity}
+ points to an instance of this class to show the preferences. To instantiate
+ this class, use {@link android.preference.PreferenceManager#createPreferenceScreen(Context)}.
+ &lt;ul&gt;
+ This class can appear in two places:
+ &lt;li&gt; When a {@link android.preference.PreferenceActivity} points to this, it is used as the root
+ and is not shown (only the contained preferences are shown).
+ &lt;li&gt; When it appears inside another preference hierarchy, it is shown and
+ serves as the gateway to another screen of preferences (either by showing
+ another screen of preferences as a {@link Dialog} or via a
+ {@link Context#startActivity(android.content.Intent)} from the
+ {@link android.preference.Preference#getIntent()}). The children of this {@link android.preference.PreferenceScreen}
+ are NOT shown in the screen that this {@link android.preference.PreferenceScreen} is shown in.
+ Instead, a separate screen will be shown when this preference is clicked.
+ &lt;/ul&gt;
+ &lt;p&gt;Here's an example XML layout of a PreferenceScreen:&lt;/p&gt;
+ &lt;pre&gt;
+&amp;lt;PreferenceScreen
+        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+        android:key=&quot;first_preferencescreen&quot;&amp;gt;
+    &amp;lt;CheckBoxPreference
+            android:key=&quot;wifi enabled&quot;
+            android:title=&quot;WiFi&quot; /&amp;gt;
+    &amp;lt;PreferenceScreen
+            android:key=&quot;second_preferencescreen&quot;
+            android:title=&quot;WiFi settings&quot;&amp;gt;
+        &amp;lt;CheckBoxPreference
+                android:key=&quot;prefer wifi&quot;
+                android:title=&quot;Prefer WiFi&quot; /&amp;gt;
+        ... other preferences here ...
+    &amp;lt;/PreferenceScreen&amp;gt;
+&amp;lt;/PreferenceScreen&amp;gt; &lt;/pre&gt;
+ &lt;p&gt;
+ In this example, the &quot;first_preferencescreen&quot; will be used as the root of the
+ hierarchy and given to a {@link android.preference.PreferenceActivity}. The first screen will
+ show preferences &quot;WiFi&quot; (which can be used to quickly enable/disable WiFi)
+ and &quot;WiFi settings&quot;. The &quot;WiFi settings&quot; is the &quot;second_preferencescreen&quot; and when
+ clicked will show another screen of preferences such as &quot;Prefer WiFi&quot; (and
+ the other preferences that are children of the &quot;second_preferencescreen&quot; tag).
+ 
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For information about building a settings UI with Preferences,
+ read the &lt;a href=&quot;{@docRoot}guide/topics/ui/settings.html&quot;&gt;Settings&lt;/a&gt;
+ guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ @see PreferenceCategory
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}jetpack/androidx.html&quot;&gt;AndroidX&lt;/a&gt;
+      &lt;a href=&quot;{@docRoot}reference/androidx/preference/package-summary.html&quot;&gt;
+      Preference Library&lt;/a&gt; for consistent behavior across all devices. For more information on
+      using the AndroidX Preference Library see
+      &lt;a href=&quot;{@docRoot}guide/topics/ui/settings.html&quot;&gt;Settings&lt;/a&gt;.
+*/
+var PreferenceScreen = {
+
+<span id='android-preference-PreferenceScreen-method-getRootAdapter'>/**Returns an adapter that can be attached to a {@link android.preference.PreferenceActivity}
+</span> or {@link android.preference.PreferenceFragment} to show the preferences contained in this
+ {@link android.preference.PreferenceScreen}.
+ &lt;p&gt;
+ This {@link android.preference.PreferenceScreen} will NOT appear in the returned adapter, instead
+ it appears in the hierarchy above this {@link android.preference.PreferenceScreen}.
+ &lt;p&gt;
+ This adapter's {@link Adapter#getItem(int)} should always return a
+ subclass of {@link android.preference.Preference}.
+@return {Object {android.widget.ListAdapter}} An adapter that provides the {@link Preference} contained in this
+         {@link PreferenceScreen}.
+*/
+getRootAdapter : function(  ) {},
+
+<span id='android-preference-PreferenceScreen-method-bind'>/**Binds a {@link ListView} to the preferences contained in this {@link android.preference.PreferenceScreen} via
+</span> {@link #getRootAdapter}(). It also handles passing list item clicks to the corresponding
+ {@link android.preference.Preference} contained by this {@link android.preference.PreferenceScreen}.
+@param {Object {ListView}} listView The list view to attach to.
+*/
+bind : function(  ) {},
+
+<span id='android-preference-PreferenceScreen-method-onDismiss'>/**
+</span>*/
+onDismiss : function(  ) {},
+
+<span id='android-preference-PreferenceScreen-method-getDialog'>/**Used to get a handle to the dialog. 
+</span> This is useful for cases where we want to manipulate the dialog
+ as we would with any other activity or view.
+*/
+getDialog : function(  ) {},
+
+<span id='android-preference-PreferenceScreen-method-onItemClick'>/**
+</span>*/
+onItemClick : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

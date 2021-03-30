@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-sqlite-SQLiteOpenHelper'>/**@class android.database.sqlite.SQLiteOpenHelper
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ A helper class to manage database creation and version management.
+
+ &lt;p&gt;You create a subclass implementing {@link #onCreate}, {@link #onUpgrade} and
+ optionally {@link #onOpen}, and this class takes care of opening the database
+ if it exists, creating it if it does not, and upgrading it as necessary.
+ Transactions are used to make sure the database is always in a sensible state.
+
+ &lt;p&gt;This class makes it easy for {@link android.content.ContentProvider}
+ implementations to defer opening and upgrading the database until first use,
+ to avoid blocking application startup with long-running database upgrades.
+
+ &lt;p&gt;For an example, see the NotePadProvider class in the NotePad sample application,
+ in the &lt;em&gt;samples/&lt;/em&gt; directory of the SDK.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; this class assumes
+ monotonically increasing version numbers for upgrades.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; the {@link AutoCloseable} interface was
+ first added in the {@link android.os.Build.VERSION_CODES#Q} release.&lt;/p&gt;
+*/
+var SQLiteOpenHelper = {
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-getDatabaseName'>/**Return the name of the SQLite database being opened, as given to
+</span> the constructor.
+*/
+getDatabaseName : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-setWriteAheadLoggingEnabled'>/**Enables or disables the use of write-ahead logging for the database.
+</span>
+ Write-ahead logging cannot be used with read-only databases so the value of
+ this flag is ignored if the database is opened read-only.
+@param {Boolean} enabled True if write-ahead logging should be enabled, false if it
+ should be disabled.
+@see SQLiteDatabase#enableWriteAheadLogging()
+*/
+setWriteAheadLoggingEnabled : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-setLookasideConfig'>/**Configures &lt;a href=&quot;https://sqlite.org/malloc.html#lookaside&quot;&gt;lookaside memory allocator&lt;/a&gt;
+</span>
+ &lt;p&gt;This method should be called from the constructor of the subclass,
+ before opening the database, since lookaside memory configuration can only be changed
+ when no connection is using it
+
+ &lt;p&gt;SQLite default settings will be used, if this method isn't called.
+ Use {@code setLookasideConfig(0,0)} to disable lookaside
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Provided slotSize/slotCount configuration is just a recommendation.
+ The system may choose different values depending on a device, e.g. lookaside allocations
+ can be disabled on low-RAM devices
+@param {Number} slotSize The size in bytes of each lookaside slot.
+@param {Number} slotCount The total number of lookaside memory slots per database connection.
+*/
+setLookasideConfig : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-setOpenParams'>/**Sets configuration parameters that are used for opening {@link android.database.sqlite.SQLiteDatabase}.
+</span> &lt;p&gt;Please note that {@link android.database.sqlite.SQLiteDatabase#CREATE_IF_NECESSARY} flag will always be set when
+ opening the database
+@param {Object {SQLiteDatabase.OpenParams}} openParams configuration parameters that are used for opening {@link SQLiteDatabase}.
+@throws IllegalStateException if the database is already open
+*/
+setOpenParams : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-setIdleConnectionTimeout'>/**Sets the maximum number of milliseconds that SQLite connection is allowed to be idle
+</span> before it is closed and removed from the pool.
+
+ &lt;p&gt;This method should be called from the constructor of the subclass,
+ before opening the database
+
+ &lt;p&gt;&lt;b&gt;DO NOT USE&lt;/b&gt; this method.
+ This feature has negative side effects that are very hard to foresee.
+ See the javadoc of
+ {@link android.database.sqlite.SQLiteDatabase.OpenParams.Builder#setIdleConnectionTimeout(long)}
+ for the details.
+@param {Number} idleConnectionTimeoutMs timeout in milliseconds. Use {@link Long#MAX_VALUE} value
+ to allow unlimited idle connections.
+@see SQLiteDatabase.OpenParams.Builder#setIdleConnectionTimeout(long)
+@deprecated DO NOT USE this method. See the javadoc of
+ {@link SQLiteDatabase.OpenParams.Builder#setIdleConnectionTimeout(long)}
+ for the details.
+*/
+setIdleConnectionTimeout : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-getWritableDatabase'>/**Create and/or open a database that will be used for reading and writing.
+</span> The first time this is called, the database will be opened and
+ {@link #onCreate}, {@link #onUpgrade} and/or {@link #onOpen} will be
+ called.
+
+ &lt;p&gt;Once opened successfully, the database is cached, so you can
+ call this method every time you need to write to the database.
+ (Make sure to call {@link #close} when you no longer need the database.)
+ Errors such as bad permissions or a full disk may cause this method
+ to fail, but future attempts may succeed if the problem is fixed.&lt;/p&gt;
+
+ &lt;p class=&quot;caution&quot;&gt;Database upgrade may take a long time, you
+ should not call this method from the application main thread, including
+ from {@link android.content.ContentProvider#onCreate ContentProvider.onCreate()}.
+@throws SQLiteException if the database cannot be opened for writing
+@return {Object {android.database.sqlite.SQLiteDatabase}} a read/write database object valid until {@link #close} is called
+*/
+getWritableDatabase : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-getReadableDatabase'>/**Create and/or open a database.  This will be the same object returned by
+</span> {@link #getWritableDatabase} unless some problem, such as a full disk,
+ requires the database to be opened read-only.  In that case, a read-only
+ database object will be returned.  If the problem is fixed, a future call
+ to {@link #getWritableDatabase} may succeed, in which case the read-only
+ database object will be closed and the read/write object will be returned
+ in the future.
+
+ &lt;p class=&quot;caution&quot;&gt;Like {@link #getWritableDatabase}, this method may
+ take a long time to return, so you should not call it from the
+ application main thread, including from
+ {@link android.content.ContentProvider#onCreate ContentProvider.onCreate()}.
+@throws SQLiteException if the database cannot be opened
+@return {Object {android.database.sqlite.SQLiteDatabase}} a database object valid until {@link #getWritableDatabase}
+     or {@link #close} is called.
+*/
+getReadableDatabase : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-close'>/**Close any open database object.
+</span>*/
+close : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-onConfigure'>/**Called when the database connection is being configured, to enable features such as
+</span> write-ahead logging or foreign key support.
+ &lt;p&gt;
+ This method is called before {@link #onCreate}, {@link #onUpgrade}, {@link #onDowngrade}, or
+ {@link #onOpen} are called. It should not modify the database except to configure the
+ database connection as required.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This method should only call methods that configure the parameters of the database
+ connection, such as {@link android.database.sqlite.SQLiteDatabase#enableWriteAheadLogging}
+ {@link android.database.sqlite.SQLiteDatabase#setForeignKeyConstraintsEnabled}, {@link android.database.sqlite.SQLiteDatabase#setLocale},
+ {@link android.database.sqlite.SQLiteDatabase#setMaximumSize}, or executing PRAGMA statements.
+ &lt;/p&gt;
+@param {Object {SQLiteDatabase}} db The database.
+*/
+onConfigure : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-onBeforeDelete'>/**Called before the database is deleted when the version returned by
+</span> {@link android.database.sqlite.SQLiteDatabase#getVersion()} is lower than the minimum supported version passed (if at
+ all) while creating this helper. After the database is deleted, a fresh database with the
+ given version is created. This will be followed by {@link #onConfigure}(SQLiteDatabase) and
+ {@link #onCreate}(SQLiteDatabase) being called with a new SQLiteDatabase object
+@param {Object {SQLiteDatabase}} db the database opened with this helper
+@see #SQLiteOpenHelper(Context, String, CursorFactory, int, int, DatabaseErrorHandler)
+@hide 
+*/
+onBeforeDelete : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-onCreate'>/**Called when the database is created for the first time. This is where the
+</span> creation of tables and the initial population of the tables should happen.
+@param {Object {SQLiteDatabase}} db The database.
+*/
+onCreate : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-onUpgrade'>/**Called when the database needs to be upgraded. The implementation
+</span> should use this method to drop tables, add tables, or do anything else it
+ needs to upgrade to the new schema version.
+
+ &lt;p&gt;
+ The SQLite ALTER TABLE documentation can be found
+ &lt;a href=&quot;http://sqlite.org/lang_altertable.html&quot;&gt;here&lt;/a&gt;. If you add new columns
+ you can use ALTER TABLE to insert them into a live table. If you rename or remove columns
+ you can use ALTER TABLE to rename the old table, then create the new table and then
+ populate the new table with the contents of the old table.
+ &lt;/p&gt;&lt;p&gt;
+ This method executes within a transaction.  If an exception is thrown, all changes
+ will automatically be rolled back.
+ &lt;/p&gt;
+@param {Object {SQLiteDatabase}} db The database.
+@param {Number} oldVersion The old database version.
+@param {Number} newVersion The new database version.
+*/
+onUpgrade : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-onDowngrade'>/**Called when the database needs to be downgraded. This is strictly similar to
+</span> {@link #onUpgrade} method, but is called whenever current version is newer than requested one.
+ However, this method is not abstract, so it is not mandatory for a customer to
+ implement it. If not overridden, default implementation will reject downgrade and
+ throws SQLiteException
+
+ &lt;p&gt;
+ This method executes within a transaction.  If an exception is thrown, all changes
+ will automatically be rolled back.
+ &lt;/p&gt;
+@param {Object {SQLiteDatabase}} db The database.
+@param {Number} oldVersion The old database version.
+@param {Number} newVersion The new database version.
+*/
+onDowngrade : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteOpenHelper-method-onOpen'>/**Called when the database has been opened.  The implementation
+</span> should check {@link android.database.sqlite.SQLiteDatabase#isReadOnly} before updating the
+ database.
+ &lt;p&gt;
+ This method is called after the database connection has been configured
+ and after the database schema has been created, upgraded or downgraded as necessary.
+ If the database connection must be configured in some way before the schema
+ is created, upgraded, or downgraded, do it in {@link #onConfigure} instead.
+ &lt;/p&gt;
+@param {Object {SQLiteDatabase}} db The database.
+*/
+onOpen : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-radio-RadioManager-ProgramInfo'>/**@class android.hardware.radio.RadioManager.ProgramInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+Radio program information. */
+var ProgramInfo = {
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getSelector'>/**Program selector, necessary for tuning to a program.
+</span>@return {Object {android.hardware.radio.ProgramSelector}} the program selector.
+*/
+getSelector : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getLogicallyTunedTo'>/**Identifier currently used for program selection.
+</span>
+ This identifier can be used to determine which technology is
+ currently being used for reception.
+
+ Some program selectors contain tuning information for different radio
+ technologies (i.e. FM RDS and DAB). For example, user may tune using
+ a ProgramSelector with RDS_PI primary identifier, but the tuner hardware
+ may choose to use DAB technology to make actual tuning. This identifier
+ must reflect that.
+*/
+getLogicallyTunedTo : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getPhysicallyTunedTo'>/**Identifier currently used by hardware to physically tune to a channel.
+</span>
+ Some radio technologies broadcast the same program on multiple channels,
+ i.e. with RDS AF the same program may be broadcasted on multiple
+ alternative frequencies; the same DAB program may be broadcast on
+ multiple ensembles. This identifier points to the channel to which the
+ radio hardware is physically tuned to.
+*/
+getPhysicallyTunedTo : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getRelatedContent'>/**Primary identifiers of related contents.
+</span>
+ Some radio technologies provide pointers to other programs that carry
+ related content (i.e. DAB soft-links). This field is a list of pointers
+ to other programs on the program list.
+
+ Please note, that these identifiers does not have to exist on the program
+ list - i.e. DAB tuner may provide information on FM RDS alternatives
+ despite not supporting FM RDS. If the system has multiple tuners, another
+ one may have it on its list.
+*/
+getRelatedContent : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getChannel'>/**Main channel expressed in units according to band type.
+</span> Currently all defined band types express channels as frequency in kHz
+@return {Number} the program channel
+@deprecated Use {@link getSelector()} instead.
+*/
+getChannel : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getSubChannel'>/**Sub channel ID. E.g 1 for HD radio HD1
+</span>@return {Number} the program sub channel
+@deprecated Use {@link getSelector()} instead.
+*/
+getSubChannel : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-isTuned'>/**{@code true} if the tuner is currently tuned on a valid station
+</span>@return {Boolean} {@code true} if currently tuned, {@code false} otherwise.
+*/
+isTuned : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-isStereo'>/**{@code true} if the received program is stereo
+</span>@return {Boolean} {@code true} if stereo, {@code false} otherwise.
+*/
+isStereo : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-isDigital'>/**{@code true} if the received program is digital (e.g HD radio)
+</span>@return {Boolean} {@code true} if digital, {@code false} otherwise.
+@deprecated Use {@link getLogicallyTunedTo()} instead.
+*/
+isDigital : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-isLive'>/**{@code true} if the program is currently playing live stream.
+</span> This may result in a slightly altered reception parameters,
+ usually targetted at reduced latency.
+*/
+isLive : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-isMuted'>/**{@code true} if radio stream is not playing, ie. due to bad reception
+</span> conditions or buffering. In this state volume knob MAY be disabled to
+ prevent user increasing volume too much.
+ It does NOT mean the user has muted audio.
+*/
+isMuted : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-isTrafficProgram'>/**{@code true} if radio station transmits traffic information
+</span> regularily.
+*/
+isTrafficProgram : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-isTrafficAnnouncementActive'>/**{@code true} if radio station transmits traffic information
+</span> at the very moment.
+*/
+isTrafficAnnouncementActive : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getSignalStrength'>/**Signal quality (as opposed to the name) indication from 0 (no signal)
+</span> to 100 (excellent)
+@return {Number} the signal quality indication.
+*/
+getSignalStrength : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getMetadata'>/**Metadata currently received from this station.
+</span> null if no metadata have been received
+@return {Object {android.hardware.radio.RadioMetadata}} current meta data received from this program.
+*/
+getMetadata : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-getVendorInfo'>/**A map of vendor-specific opaque strings, passed from HAL without changes.
+</span> Format of these strings can vary across vendors.
+
+ It may be used for extra features, that's not supported by a platform,
+ for example: paid-service=true; bitrate=320kbps.
+
+ Keys must be prefixed with unique vendor Java-style namespace,
+ eg. 'com.somecompany.parameter1'.
+*/
+getVendorInfo : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ProgramInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

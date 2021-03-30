@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-SearchRecentSuggestions'>/**@class android.provider.SearchRecentSuggestions
+</span>@extends java.lang.Object
+
+ This is a utility class providing access to
+ {@link android.content.SearchRecentSuggestionsProvider}.
+
+ &lt;p&gt;Unlike some utility classes, this one must be instantiated and properly initialized, so that
+ it can be configured to operate with the search suggestions provider that you have created.
+
+ &lt;p&gt;Typically, you will do this in your searchable activity, each time you receive an incoming
+ {@link android.content.Intent#ACTION_SEARCH ACTION_SEARCH} Intent.  The code to record each
+ incoming query is as follows:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+      SearchSuggestions suggestions = new SearchSuggestions(this,
+              MySuggestionsProvider.AUTHORITY, MySuggestionsProvider.MODE);
+      suggestions.saveRecentQuery(queryString, null);
+ &lt;/pre&gt;
+
+ &lt;p&gt;For a working example, see SearchSuggestionSampleProvider and SearchQueryResults in
+ samples/ApiDemos/app.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For information about using search suggestions in your application, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/search/adding-recent-query-suggestions.html&quot;&gt;Adding Recent Query
+ Suggestions&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var SearchRecentSuggestions = {
+
+<span id='android-provider-SearchRecentSuggestions-property-QUERIES_PROJECTION_1LINE'>/** This is the database projection that can be used to view saved queries, when
+</span> configured for one-line operation.
+*/
+QUERIES_PROJECTION_1LINE : &quot;null&quot;,
+<span id='android-provider-SearchRecentSuggestions-property-QUERIES_PROJECTION_2LINE'>/** This is the database projection that can be used to view saved queries, when
+</span> configured for two-line operation.
+*/
+QUERIES_PROJECTION_2LINE : &quot;null&quot;,
+<span id='android-provider-SearchRecentSuggestions-property-QUERIES_PROJECTION_DATE_INDEX'>/**Index into the provided query projections.  For use with Cursor.update methods. */
+</span>QUERIES_PROJECTION_DATE_INDEX : &quot;1&quot;,
+<span id='android-provider-SearchRecentSuggestions-property-QUERIES_PROJECTION_QUERY_INDEX'>/**Index into the provided query projections.  For use with Cursor.update methods. */
+</span>QUERIES_PROJECTION_QUERY_INDEX : &quot;2&quot;,
+<span id='android-provider-SearchRecentSuggestions-property-QUERIES_PROJECTION_DISPLAY1_INDEX'>/**Index into the provided query projections.  For use with Cursor.update methods. */
+</span>QUERIES_PROJECTION_DISPLAY1_INDEX : &quot;3&quot;,
+<span id='android-provider-SearchRecentSuggestions-property-QUERIES_PROJECTION_DISPLAY2_INDEX'>/**Index into the provided query projections.  For use with Cursor.update methods. */
+</span>QUERIES_PROJECTION_DISPLAY2_INDEX : &quot;4&quot;,
+<span id='android-provider-SearchRecentSuggestions-method-saveRecentQuery'>/**Add a query to the recent queries list.  Returns immediately, performing the save
+</span> in the background.
+@param {String} queryString The string as typed by the user.  This string will be displayed as
+ the suggestion, and if the user clicks on the suggestion, this string will be sent to your
+ searchable activity (as a new search query).
+@param {String} line2 If you have configured your recent suggestions provider with
+ {@link android.content.SearchRecentSuggestionsProvider#DATABASE_MODE_2LINES}, you can
+ pass a second line of text here.  It will be shown in a smaller font, below the primary
+ suggestion.  When typing, matches in either line of text will be displayed in the list.
+ If you did not configure two-line mode, or if a given suggestion does not have any
+ additional text to display, you can pass null here.
+*/
+saveRecentQuery : function(  ) {},
+
+<span id='android-provider-SearchRecentSuggestions-method-clearHistory'>/**Completely delete the history.  Use this call to implement a &quot;clear history&quot; UI.
+</span>
+ Any application that implements search suggestions based on previous actions (such as
+ recent queries, page/items viewed, etc.) should provide a way for the user to clear the
+ history.  This gives the user a measure of privacy, if they do not wish for their recent
+ searches to be replayed by other users of the device (via suggestions).
+*/
+clearHistory : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-VpnService'>/**@class android.net.VpnService
+</span>@extends android.app.Service
+
+ VpnService is a base class for applications to extend and build their
+ own VPN solutions. In general, it creates a virtual network interface,
+ configures addresses and routing rules, and returns a file descriptor
+ to the application. Each read from the descriptor retrieves an outgoing
+ packet which was routed to the interface. Each write to the descriptor
+ injects an incoming packet just like it was received from the interface.
+ The interface is running on Internet Protocol (IP), so packets are
+ always started with IP headers. The application then completes a VPN
+ connection by processing and exchanging packets with the remote server
+ over a tunnel.
+
+ &lt;p&gt;Letting applications intercept packets raises huge security concerns.
+ A VPN application can easily break the network. Besides, two of them may
+ conflict with each other. The system takes several actions to address
+ these issues. Here are some key points:
+ &lt;ul&gt;
+   &lt;li&gt;User action is required the first time an application creates a VPN
+       connection.&lt;/li&gt;
+   &lt;li&gt;There can be only one VPN connection running at the same time. The
+       existing interface is deactivated when a new one is created.&lt;/li&gt;
+   &lt;li&gt;A system-managed notification is shown during the lifetime of a
+       VPN connection.&lt;/li&gt;
+   &lt;li&gt;A system-managed dialog gives the information of the current VPN
+       connection. It also provides a button to disconnect.&lt;/li&gt;
+   &lt;li&gt;The network is restored automatically when the file descriptor is
+       closed. It also covers the cases when a VPN application is crashed
+       or killed by the system.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;There are two primary methods in this class: {@link #prepare} and
+ {@link android.net.IpSecTransform.Builder#establish}. The former deals with user action and stops
+ the VPN connection created by another application. The latter creates
+ a VPN interface using the parameters supplied to the {@link android.net.IpSecTransform.Builder}.
+ An application must call {@link #prepare} to grant the right to use
+ other methods in this class, and the right can be revoked at any time.
+ Here are the general steps to create a VPN connection:
+ &lt;ol&gt;
+   &lt;li&gt;When the user presses the button to connect, call {@link #prepare}
+       and launch the returned intent, if non-null.&lt;/li&gt;
+   &lt;li&gt;When the application becomes prepared, start the service.&lt;/li&gt;
+   &lt;li&gt;Create a tunnel to the remote server and negotiate the network
+       parameters for the VPN connection.&lt;/li&gt;
+   &lt;li&gt;Supply those parameters to a {@link android.net.IpSecTransform.Builder} and create a VPN
+       interface by calling {@link android.net.IpSecTransform.Builder#establish}.&lt;/li&gt;
+   &lt;li&gt;Process and exchange packets between the tunnel and the returned
+       file descriptor.&lt;/li&gt;
+   &lt;li&gt;When {@link #onRevoke} is invoked, close the file descriptor and
+       shut down the tunnel gracefully.&lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt;Services extending this class need to be declared with an appropriate
+ permission and intent filter. Their access must be secured by
+ {@link android.Manifest.permission#BIND_VPN_SERVICE} permission, and
+ their intent filter must match {@link #SERVICE_INTERFACE} action. Here
+ is an example of declaring a VPN service in {@code AndroidManifest.xml}:
+ &lt;pre&gt;
+ &amp;lt;service android:name=&quot;.ExampleVpnService&quot;
+         android:permission=&quot;android.permission.BIND_VPN_SERVICE&quot;&amp;gt;
+     &amp;lt;intent-filter&amp;gt;
+         &amp;lt;action android:name=&quot;android.net.VpnService&quot;/&amp;gt;
+     &amp;lt;/intent-filter&amp;gt;
+ &amp;lt;/service&amp;gt;&lt;/pre&gt;
+
+ &lt;p&gt; The Android system starts a VPN in the background by calling
+ {@link android.content.Context#startService startService()}. In Android 8.0
+ (API level 26) and higher, the system places VPN apps on the temporary
+ whitelist for a short period so the app can start in the background. The VPN
+ app must promote itself to the foreground after it's launched or the system
+ will shut down the app.
+
+ &lt;h3&gt;Developer's guide&lt;/h3&gt;
+
+ &lt;p&gt;To learn more about developing VPN apps, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/connectivity/vpn&quot;&gt;VPN developer's guide&lt;/a&gt;.
+
+ @see Builder
+*/
+var VpnService = {
+
+<span id='android-net-VpnService-property-SERVICE_INTERFACE'>/** The action must be matched by the intent filter of this service. It also
+</span> needs to require {@link android.Manifest.permission#BIND_VPN_SERVICE}
+ permission so that other applications cannot abuse it.
+*/
+SERVICE_INTERFACE : &quot;android.net.VpnService&quot;,
+<span id='android-net-VpnService-property-SERVICE_META_DATA_SUPPORTS_ALWAYS_ON'>/** Key for boolean meta-data field indicating whether this VpnService supports always-on mode.
+</span>
+ &lt;p&gt;For a VPN app targeting {@link android.os.Build.VERSION_CODES#N API 24} or above, Android
+ provides users with the ability to set it as always-on, so that VPN connection is
+ persisted after device reboot and app upgrade. Always-on VPN can also be enabled by device
+ owner and profile owner apps through
+ {@link DevicePolicyManager#setAlwaysOnVpnPackage}.
+
+ &lt;p&gt;VPN apps not supporting this feature should opt out by adding this meta-data field to the
+ {@code VpnService} component of {@code AndroidManifest.xml}. In case there is more than one
+ {@code VpnService} component defined in {@code AndroidManifest.xml}, opting out any one of
+ them will opt out the entire app. For example,
+ &lt;pre&gt; {@code
+ &lt;service android:name=&quot;.ExampleVpnService&quot;
+         android:permission=&quot;android.permission.BIND_VPN_SERVICE&quot;&gt;
+     &lt;intent-filter&gt;
+         &lt;action android:name=&quot;android.net.VpnService&quot;/&gt;
+     &lt;/intent-filter&gt;
+     &lt;meta-data android:name=&quot;android.net.VpnService.SUPPORTS_ALWAYS_ON&quot;
+             android:value=false/&gt;
+ &lt;/service&gt;
+ } &lt;/pre&gt;
+
+ &lt;p&gt;This meta-data field defaults to {@code true} if absent. It will only have effect on
+ {@link android.os.Build.VERSION_CODES#O_MR1} or higher.
+*/
+SERVICE_META_DATA_SUPPORTS_ALWAYS_ON : &quot;android.net.VpnService.SUPPORTS_ALWAYS_ON&quot;,
+<span id='android-net-VpnService-method-prepare'>/**Prepare to establish a VPN connection. This method returns {@code null}
+</span> if the VPN application is already prepared or if the user has previously
+ consented to the VPN application. Otherwise, it returns an
+ {@link Intent} to a system activity. The application should launch the
+ activity using {@link Activity#startActivityForResult} to get itself
+ prepared. The activity may pop up a dialog to require user action, and
+ the result will come back via its {@link Activity#onActivityResult}.
+ If the result is {@link Activity#RESULT_OK}, the application becomes
+ prepared and is granted to use other methods in this class.
+
+ &lt;p&gt;Only one application can be granted at the same time. The right
+ is revoked when another application is granted. The application
+ losing the right will be notified via its {@link #onRevoke}. Unless
+ it becomes prepared again, subsequent calls to other methods in this
+ class will fail.
+
+ &lt;p&gt;The user may disable the VPN at any time while it is activated, in
+ which case this method will return an intent the next time it is
+ executed to obtain the user's consent again.
+@see #onRevoke
+*/
+prepare : function(  ) {},
+
+<span id='android-net-VpnService-method-prepareAndAuthorize'>/**Version of {@link #prepare}(Context) which does not require user consent.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#CONTROL_VPN} and should generally not be
+ used. Only acceptable in situations where user consent has been obtained through other means.
+
+ &lt;p&gt;Once this is run, future preparations may be done with the standard prepare method as this
+ will authorize the package to prepare the VPN without consent in the future.
+@hide 
+*/
+prepareAndAuthorize : function(  ) {},
+
+<span id='android-net-VpnService-method-protect'>/**Protect a socket from VPN connections. After protecting, data sent
+</span> through this socket will go directly to the underlying network,
+ so its traffic will not be forwarded through the VPN.
+ This method is useful if some connections need to be kept
+ outside of VPN. For example, a VPN tunnel should protect itself if its
+ destination is covered by VPN routes. Otherwise its outgoing packets
+ will be sent back to the VPN interface and cause an infinite loop. This
+ method will fail if the application is not prepared or is revoked.
+
+ &lt;p class=&quot;note&quot;&gt;The socket is NOT closed by this method.
+@return {Boolean} {@code true} on success.
+*/
+protect : function(  ) {},
+
+<span id='android-net-VpnService-method-protect'>/**Convenience method to protect a {@link Socket} from VPN connections.
+</span>@return {Boolean} {@code true} on success.
+@see #protect(int)
+*/
+protect : function(  ) {},
+
+<span id='android-net-VpnService-method-protect'>/**Convenience method to protect a {@link DatagramSocket} from VPN
+</span> connections.
+@return {Boolean} {@code true} on success.
+@see #protect(int)
+*/
+protect : function(  ) {},
+
+<span id='android-net-VpnService-method-addAddress'>/**Adds a network address to the VPN interface.
+</span>
+ Both IPv4 and IPv6 addresses are supported. The VPN must already be established. Fails if the
+ address is already in use or cannot be assigned to the interface for any other reason.
+
+ Adding an address implicitly allows traffic from that address family (i.e., IPv4 or IPv6) to
+ be routed over the VPN. @see Builder#allowFamily
+@param {Object {InetAddress}} address The IP address (IPv4 or IPv6) to assign to the VPN interface.
+@param {Number} prefixLength The prefix length of the address.
+@param prefixLength The prefix length of the address.
+@return {Boolean} {@code true} on success.
+@see Builder#addAddress
+@hide 
+*/
+addAddress : function(  ) {},
+
+<span id='android-net-VpnService-method-removeAddress'>/**Removes a network address from the VPN interface.
+</span>
+ Both IPv4 and IPv6 addresses are supported. The VPN must already be established. Fails if the
+ address is not assigned to the VPN interface, or if it is the only address assigned (thus
+ cannot be removed), or if the address cannot be removed for any other reason.
+
+ After removing an address, if there are no addresses, routes or DNS servers of a particular
+ address family (i.e., IPv4 or IPv6) configured on the VPN, that &lt;b&gt;DOES NOT&lt;/b&gt; block that
+ family from being routed. In other words, once an address family has been allowed, it stays
+ allowed for the rest of the VPN's session. @see Builder#allowFamily
+@param {Object {InetAddress}} address The IP address (IPv4 or IPv6) to assign to the VPN interface.
+@param {Number} prefixLength The prefix length of the address.
+@param prefixLength The prefix length of the address.
+@return {Boolean} {@code true} on success.
+@hide 
+*/
+removeAddress : function(  ) {},
+
+<span id='android-net-VpnService-method-setUnderlyingNetworks'>/**Sets the underlying networks used by the VPN for its upstream connections.
+</span>
+ &lt;p&gt;Used by the system to know the actual networks that carry traffic for apps affected by
+ this VPN in order to present this information to the user (e.g., via status bar icons).
+
+ &lt;p&gt;This method only needs to be called if the VPN has explicitly bound its underlying
+ communications channels &amp;mdash; such as the socket(s) passed to {@link #protect}(int) &amp;mdash;
+ to a {@code Network} using APIs such as {@link android.net.Network#bindSocket(Socket)} or
+ {@link android.net.Network#bindSocket(DatagramSocket)}. The VPN should call this method every time
+ the set of {@code Network}s it is using changes.
+
+ &lt;p&gt;{@code networks} is one of the following:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;strong&gt;a non-empty array&lt;/strong&gt;: an array of one or more {@link android.net.Network}s, in
+ decreasing preference order. For example, if this VPN uses both wifi and mobile (cellular)
+ networks to carry app traffic, but prefers or uses wifi more than mobile, wifi should appear
+ first in the array.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;an empty array&lt;/strong&gt;: a zero-element array, meaning that the VPN has no
+ underlying network connection, and thus, app traffic will not be sent or received.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;null&lt;/strong&gt;: (default) signifies that the VPN uses whatever is the system's
+ default network. I.e., it doesn't use the {@code bindSocket} or {@code bindDatagramSocket}
+ APIs mentioned above to send traffic over specific channels.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;This call will succeed only if the VPN is currently established. For setting this value
+ when the VPN has not yet been established, see {@link android.net.IpSecTransform.Builder#setUnderlyingNetworks}.
+@param {Object {android.net.Network[]}} networks An array of networks the VPN uses to tunnel traffic to/from its servers.
+@return {Boolean} {@code true} on success.
+*/
+setUnderlyingNetworks : function(  ) {},
+
+<span id='android-net-VpnService-method-isAlwaysOn'>/**Returns whether the service is running in always-on VPN mode. In this mode the system ensures
+</span> that the service is always running by restarting it when necessary, e.g. after reboot.
+@see DevicePolicyManager#setAlwaysOnVpnPackage(ComponentName, String, boolean, Set)
+*/
+isAlwaysOn : function(  ) {},
+
+<span id='android-net-VpnService-method-isLockdownEnabled'>/**Returns whether the service is running in always-on VPN lockdown mode. In this mode the
+</span> system ensures that the service is always running and that the apps aren't allowed to bypass
+ the VPN.
+@see DevicePolicyManager#setAlwaysOnVpnPackage(ComponentName, String, boolean, Set)
+*/
+isLockdownEnabled : function(  ) {},
+
+<span id='android-net-VpnService-method-onBind'>/**Return the communication interface to the service. This method returns
+</span> {@code null} on {@link Intent}s other than {@link #SERVICE_INTERFACE}
+ action. Applications overriding this method must identify the intent
+ and return the corresponding interface accordingly.
+@see Service#onBind
+*/
+onBind : function(  ) {},
+
+<span id='android-net-VpnService-method-onRevoke'>/**Invoked when the application is revoked. At this moment, the VPN
+</span> interface is already deactivated by the system. The application should
+ close the file descriptor and shut down gracefully. The default
+ implementation of this method is calling {@link Service#stopSelf()}.
+
+ &lt;p class=&quot;note&quot;&gt;Calls to this method may not happen on the main thread
+ of the process.
+@see #prepare
+*/
+onRevoke : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageInstaller-SessionParams'>/**@class android.content.pm.PackageInstaller.SessionParams
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Parameters for creating a new {@link android.content.pm.PackageParser.PackageInstaller.Session}.
+*/
+var SessionParams = {
+
+<span id='android-content-pm-PackageInstaller-SessionParams-property-MODE_INVALID'>/**{@hide} */
+</span>MODE_INVALID : &quot;-1&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-MODE_FULL_INSTALL'>/** Mode for an install session whose staged APKs should fully replace any
+</span> existing APKs for the target app.
+*/
+MODE_FULL_INSTALL : &quot;1&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-MODE_INHERIT_EXISTING'>/** Mode for an install session that should inherit any existing APKs for the
+</span> target app, unless they have been explicitly overridden (based on split
+ name) by the session. For example, this can be used to add one or more
+ split APKs to an existing installation.
+ &lt;p&gt;
+ If there are no existing APKs for the target app, this behaves like
+ {@link #MODE_FULL_INSTALL}.
+*/
+MODE_INHERIT_EXISTING : &quot;2&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-RESTRICTED_PERMISSIONS_ALL'>/** Special constant to refer to all restricted permissions.
+</span>*/
+RESTRICTED_PERMISSIONS_ALL : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-UID_UNKNOWN'>/**{@hide} */
+</span>UID_UNKNOWN : &quot;-1&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-mode'>/**{@hide} */
+</span>mode : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-installFlags'>/**{@hide} */
+</span>installFlags : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-installLocation'>/**{@hide} */
+</span>installLocation : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-installReason'>/**{@hide} */
+</span>installReason : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-sizeBytes'>/**{@hide} */
+</span>sizeBytes : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-appPackageName'>/**{@hide} */
+</span>appPackageName : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-appIcon'>/**{@hide} */
+</span>appIcon : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-appLabel'>/**{@hide} */
+</span>appLabel : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-appIconLastModified'>/**{@hide} */
+</span>appIconLastModified : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-originatingUri'>/**{@hide} */
+</span>originatingUri : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-originatingUid'>/**{@hide} */
+</span>originatingUid : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-referrerUri'>/**{@hide} */
+</span>referrerUri : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-abiOverride'>/**{@hide} */
+</span>abiOverride : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-volumeUuid'>/**{@hide} */
+</span>volumeUuid : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-grantedRuntimePermissions'>/**{@hide} */
+</span>grantedRuntimePermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-whitelistedRestrictedPermissions'>/**{@hide} */
+</span>whitelistedRestrictedPermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-installerPackageName'>/**{@hide} */
+</span>installerPackageName : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-isMultiPackage'>/**{@hide} */
+</span>isMultiPackage : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-isStaged'>/**{@hide} */
+</span>isStaged : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-requiredInstalledVersionCode'>/**{@hide} */
+</span>requiredInstalledVersionCode : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionParams-method-copy'>/**{@hide}
+</span>*/
+copy : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-areHiddenOptionsSet'>/**Check if there are hidden options set.
+</span>
+ &lt;p&gt;Hidden options are those options that cannot be verified via public or system-api
+ methods on {@link android.content.pm.PackageInstaller.SessionInfo}.
+@return {Boolean} {@code true} if any hidden option is set.
+@hide 
+*/
+areHiddenOptionsSet : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setInstallLocation'>/**Provide value of {@link android.content.pm.PackageParser.PackageInfo#installLocation}, which may be used
+</span> to determine where the app will be staged. Defaults to
+ {@link android.content.pm.PackageParser.PackageInfo#INSTALL_LOCATION_INTERNAL_ONLY}.
+*/
+setInstallLocation : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setSize'>/**Optionally indicate the total size (in bytes) of all APKs that will be
+</span> delivered in this session. The system may use this to ensure enough disk
+ space exists before proceeding, or to estimate container size for
+ installations living on external storage.
+@see PackageInfo#INSTALL_LOCATION_AUTO
+@see PackageInfo#INSTALL_LOCATION_PREFER_EXTERNAL
+*/
+setSize : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setAppPackageName'>/**Optionally set the package name of the app being installed. It's strongly
+</span> recommended that you provide this value when known, so that observers can
+ communicate installing apps to users.
+ &lt;p&gt;
+ If the APKs staged in the session aren't consistent with this package
+ name, the install will fail. Regardless of this value, all APKs in the
+ app must have the same package name.
+*/
+setAppPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setAppIcon'>/**Optionally set an icon representing the app being installed. This should
+</span> be roughly {@link android.content.pm.PackageParser.ActivityManager#getLauncherLargeIconSize()} in both
+ dimensions.
+*/
+setAppIcon : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setAppLabel'>/**Optionally set a label representing the app being installed.
+</span>*/
+setAppLabel : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setOriginatingUri'>/**Optionally set the URI where this package was downloaded from. This is
+</span> informational and may be used as a signal for anti-malware purposes.
+@see Intent#EXTRA_ORIGINATING_URI
+*/
+setOriginatingUri : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setOriginatingUid'>/**Sets the UID that initiated the package installation. This is informational
+</span> and may be used as a signal for anti-malware purposes.
+*/
+setOriginatingUid : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setReferrerUri'>/**Optionally set the URI that referred you to install this package. This is
+</span> informational and may be used as a signal for anti-malware purposes.
+@see Intent#EXTRA_REFERRER
+*/
+setReferrerUri : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setGrantedRuntimePermissions'>/**Sets which runtime permissions to be granted to the package at installation.
+</span>@param {Object {java.lang.String[]}} permissions The permissions to grant or null to grant all runtime
+     permissions.
+@hide 
+*/
+setGrantedRuntimePermissions : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setWhitelistedRestrictedPermissions'>/**Sets which restricted permissions to be whitelisted for the app. Whitelisting
+</span> is not granting the permissions, rather it allows the app to hold permissions
+ which are otherwise restricted. Whitelisting a non restricted permission has
+ no effect.
+
+ &lt;p&gt; Permissions can be hard restricted which means that the app cannot hold
+ them or soft restricted where the app can hold the permission but in a weaker
+ form. Whether a permission is {@link android.content.pm.PackageParser.PermissionInfo#FLAG_HARD_RESTRICTED hard
+ restricted} or {@link android.content.pm.PackageParser.PermissionInfo#FLAG_SOFT_RESTRICTED soft restricted}
+ depends on the permission declaration. Whitelisting a hard restricted permission
+ allows the app to hold that permission and whitelisting a soft restricted
+ permission allows the app to hold the permission in its full, unrestricted form.
+
+ &lt;p&gt; Permissions can also be immutably restricted which means that the whitelist
+ state of the permission can be determined only at install time and cannot be
+ changed on updated or at a later point via the package manager APIs.
+
+ &lt;p&gt;Initially, all restricted permissions are whitelisted but you can change
+ which ones are whitelisted by calling this method or the corresponding ones
+ on the {@link android.content.pm.PackageParser.PackageManager}.
+@see PackageManager#addWhitelistedRestrictedPermission(String, String, int)
+@see PackageManager#removeWhitelistedRestrictedPermission(String, String, int)
+*/
+setWhitelistedRestrictedPermissions : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setEnableRollback'>/**Request that rollbacks be enabled or disabled for the given upgrade.
+</span>
+ &lt;p&gt;If the parent session is staged or has rollback enabled, all children sessions
+ must have the same properties.
+@param {Boolean} enable set to {@code true} to enable, {@code false} to disable
+@hide 
+*/
+setEnableRollback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setAllowDowngrade'>/**
+</span>@deprecated use {@link #setRequestDowngrade(boolean)}.
+ {@hide}
+*/
+setAllowDowngrade : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setRequestDowngrade'>/**{@hide}
+</span>*/
+setRequestDowngrade : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setRequiredInstalledVersionCode'>/**Require the given version of the package be installed.
+</span> The install will only be allowed if the existing version code of
+ the package installed on the device matches the given version code.
+ Use {@link * android.content.pm.PackageParser.PackageManager#VERSION_CODE_HIGHEST} to allow
+ installation regardless of the currently installed package version.
+@hide 
+*/
+setRequiredInstalledVersionCode : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setInstallFlagsForcePermissionPrompt'>/**{@hide}
+</span>*/
+setInstallFlagsForcePermissionPrompt : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setDontKillApp'>/**{@hide}
+</span>*/
+setDontKillApp : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setInstallAsInstantApp'>/**{@hide}
+</span>*/
+setInstallAsInstantApp : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setInstallAsVirtualPreload'>/**Sets the install as a virtual preload. Will only have effect when called
+</span> by the verifier.
+ {@hide}
+*/
+setInstallAsVirtualPreload : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setInstallReason'>/**Set the reason for installing this package.
+</span> &lt;p&gt;
+ The install reason should be a pre-defined integer. The behavior is
+ undefined if other values are used.
+@see PackageManager#INSTALL_REASON_UNKNOWN
+@see PackageManager#INSTALL_REASON_POLICY
+@see PackageManager#INSTALL_REASON_DEVICE_RESTORE
+@see PackageManager#INSTALL_REASON_DEVICE_SETUP
+@see PackageManager#INSTALL_REASON_USER
+*/
+setInstallReason : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setAllocateAggressive'>/**{@hide}
+</span>*/
+setAllocateAggressive : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setInstallerPackageName'>/**Set the installer package for the app.
+</span>
+ By default this is the app that created the {@link android.content.pm.PackageParser.PackageInstaller} object.
+@param {String} installerPackageName name of the installer package
+ {@hide}
+*/
+setInstallerPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setMultiPackage'>/**Set this session to be the parent of a multi-package install.
+</span>
+ A multi-package install session contains no APKs and only references other install
+ sessions via ID. When a multi-package session is committed, all of its children
+ are committed to the system in an atomic manner. If any children fail to install,
+ all of them do, including the multi-package session.
+*/
+setMultiPackage : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setStaged'>/**Set this session to be staged to be installed at reboot.
+</span>
+ Staged sessions are scheduled to be installed at next reboot. Staged sessions can also be
+ multi-package. In that case, if any of the children sessions fail to install at reboot,
+ all the other children sessions are aborted as well.
+
+ &lt;p&gt;If the parent session is staged or has rollback enabled, all children sessions
+ must have the same properties.
+
+ {@hide}
+*/
+setStaged : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-setInstallAsApex'>/**Set this session to be installing an APEX package.
+</span>
+ {@hide}
+*/
+setInstallAsApex : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-getEnableRollback'>/**
+</span>@hide 
+*/
+getEnableRollback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-dump'>/**{@hide}
+</span>*/
+dump : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionParams-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

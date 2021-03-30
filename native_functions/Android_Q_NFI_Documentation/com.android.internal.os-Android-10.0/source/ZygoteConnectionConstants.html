@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-ZygoteConnectionConstants'>/**@class com.android.internal.os.ZygoteConnectionConstants
+</span>@extends java.lang.Object
+
+ Sharable zygote constants.
+
+ @hide
+*/
+var ZygoteConnectionConstants = {
+
+<span id='com-android-internal-os-ZygoteConnectionConstants-property-CONNECTION_TIMEOUT_MILLIS'>/** {@link android.net.LocalSocket#setSoTimeout} value for connections.
+</span> Effectively, the amount of time a requestor has between the start of
+ the request and the completed request. The select-loop mode Zygote
+ doesn't have the logic to return to the select loop in the middle of
+ a request, so we need to time out here to avoid being denial-of-serviced.
+*/
+CONNECTION_TIMEOUT_MILLIS : &quot;1000&quot;,
+<span id='com-android-internal-os-ZygoteConnectionConstants-property-MAX_ZYGOTE_ARGC'>/**max number of arguments that a connection can specify */
+</span>MAX_ZYGOTE_ARGC : &quot;1024&quot;,
+<span id='com-android-internal-os-ZygoteConnectionConstants-property-WRAPPED_PID_TIMEOUT_MILLIS'>/** Wait time for a wrapped app to report back its pid.
+</span>
+ We'll wait up to thirty seconds. This should give enough time for the fork
+ to go through, but not to trigger the watchdog in the system server (by default
+ sixty seconds).
+
+ WARNING: This may trigger the watchdog in debug mode. However, to support
+          wrapping on lower-end devices we do not have much choice.
+*/
+WRAPPED_PID_TIMEOUT_MILLIS : &quot;30000&quot;,
+
+};</pre>
+</body>
+</html>

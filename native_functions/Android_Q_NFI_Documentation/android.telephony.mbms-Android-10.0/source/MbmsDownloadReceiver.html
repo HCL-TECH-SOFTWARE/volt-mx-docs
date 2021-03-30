@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-mbms-MbmsDownloadReceiver'>/**@class android.telephony.mbms.MbmsDownloadReceiver
+</span>@extends android.content.BroadcastReceiver
+
+ The {@link BroadcastReceiver} responsible for handling intents sent from the middleware. Apps
+ that wish to download using MBMS APIs should declare this class in their AndroidManifest.xml as
+ follows:
+&lt;pre&gt;{@code
+&lt;receiver
+    android:name=&quot;android.telephony.mbms.MbmsDownloadReceiver&quot;
+    android:permission=&quot;android.permission.SEND_EMBMS_INTENTS&quot;
+    android:enabled=&quot;true&quot;
+    android:exported=&quot;true&quot;&gt;
+&lt;/receiver&gt;}&lt;/pre&gt;
+*/
+var MbmsDownloadReceiver = {
+
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-DOWNLOAD_TOKEN_SUFFIX'>/**@hide */
+</span>DOWNLOAD_TOKEN_SUFFIX : &quot;.download_token&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-MBMS_FILE_PROVIDER_META_DATA_KEY'>/**@hide */
+</span>MBMS_FILE_PROVIDER_META_DATA_KEY : &quot;mbms-file-provider-authority&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-RESULT_OK'>/** Indicates that the requested operation completed without error.
+</span> @hide
+*/
+RESULT_OK : &quot;0&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-RESULT_INVALID_ACTION'>/** Indicates that the intent sent had an invalid action. This will be the result if
+</span> {@link Intent#getAction()} returns anything other than
+ {@link VendorUtils#ACTION_DOWNLOAD_RESULT_INTERNAL},
+ {@link VendorUtils#ACTION_FILE_DESCRIPTOR_REQUEST}, or
+ {@link VendorUtils#ACTION_CLEANUP}.
+ This is a fatal result code and no result extras should be expected.
+ @hide
+*/
+RESULT_INVALID_ACTION : &quot;1&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-RESULT_MALFORMED_INTENT'>/** Indicates that the intent was missing some required extras.
+</span> This is a fatal result code and no result extras should be expected.
+ @hide
+*/
+RESULT_MALFORMED_INTENT : &quot;2&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-RESULT_BAD_TEMP_FILE_ROOT'>/** Indicates that the supplied value for {@link VendorUtils#EXTRA_TEMP_FILE_ROOT}
+</span> does not match what the app has stored.
+ This is a fatal result code and no result extras should be expected.
+ @hide
+*/
+RESULT_BAD_TEMP_FILE_ROOT : &quot;3&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-RESULT_DOWNLOAD_FINALIZATION_ERROR'>/** Indicates that the manager was unable to move the completed download to its final location.
+</span> This is a fatal result code and no result extras should be expected.
+ @hide
+*/
+RESULT_DOWNLOAD_FINALIZATION_ERROR : &quot;4&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-RESULT_TEMP_FILE_GENERATION_ERROR'>/** Indicates that the manager was unable to generate one or more of the requested file
+</span> descriptors.
+ This is a non-fatal result code -- some file descriptors may still be generated, but there
+ is no guarantee that they will be the same number as requested.
+ @hide
+*/
+RESULT_TEMP_FILE_GENERATION_ERROR : &quot;5&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-property-RESULT_APP_NOTIFICATION_ERROR'>/** Indicates that the manager was unable to notify the app of the completed download.
+</span> This is a fatal result code and no result extras should be expected.
+ @hide
+*/
+RESULT_APP_NOTIFICATION_ERROR : &quot;6&quot;,
+<span id='android-telephony-mbms-MbmsDownloadReceiver-method-onReceive'>/**
+</span>@hide 
+*/
+onReceive : function(  ) {},
+
+<span id='android-telephony-mbms-MbmsDownloadReceiver-method-getFileRelativePath'>/**
+</span>@hide 
+*/
+getFileRelativePath : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

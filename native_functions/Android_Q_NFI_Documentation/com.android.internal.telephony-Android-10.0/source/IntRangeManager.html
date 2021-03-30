@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-IntRangeManager'>/**@class com.android.internal.telephony.IntRangeManager
+</span>@extends java.lang.Object
+
+ Clients can enable reception of SMS-CB messages for specific ranges of
+ message identifiers (channels). This class keeps track of the currently
+ enabled message identifiers and calls abstract methods to update the
+ radio when the range of enabled message identifiers changes.
+
+ An update is a call to {@link #startUpdate} followed by zero or more
+ calls to {@link #addRange} followed by a call to {@link #finishUpdate}.
+ Calls to {@link #enableRange} and {@link #disableRange} will perform
+ an incremental update operation if the enabled ranges have changed.
+ A full update operation (i.e. after a radio reset) can be performed
+ by a call to {@link #updateRanges}.
+
+ Clients are identified by String (the name associated with the User ID
+ of the caller) so that a call to remove a range can be mapped to the
+ client that enabled that range (or else rejected).
+*/
+var IntRangeManager = {
+
+<span id='com-android-internal-telephony-IntRangeManager-method-enableRange'>/**Enable a range for the specified client and update ranges
+</span> if necessary. If {@link #finishUpdate} returns failure,
+ false is returned and the range is not added.
+@param {Number} startId the first id included in the range
+@param {Number} endId the last id included in the range
+@param {String} client the client requesting the enabled range
+@return {Boolean} true if successful, false otherwise
+*/
+enableRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IntRangeManager-method-disableRange'>/**Disable a range for the specified client and update ranges
+</span> if necessary. If {@link #finishUpdate} returns failure,
+ false is returned and the range is not removed.
+@param {Number} startId the first id included in the range
+@param {Number} endId the last id included in the range
+@param {String} client the client requesting to disable the range
+@return {Boolean} true if successful, false otherwise
+*/
+disableRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IntRangeManager-method-updateRanges'>/**Perform a complete update operation (enable all ranges). Useful
+</span> after a radio reset. Calls {@link #startUpdate}, followed by zero or
+ more calls to {@link #addRange}, followed by {@link #finishUpdate}.
+@return {Boolean} true if successful, false otherwise
+*/
+updateRanges : function(  ) {},
+
+<span id='com-android-internal-telephony-IntRangeManager-method-isEmpty'>/**Returns whether the list of ranges is completely empty.
+</span>@return {Boolean} true if there are no enabled ranges
+*/
+isEmpty : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

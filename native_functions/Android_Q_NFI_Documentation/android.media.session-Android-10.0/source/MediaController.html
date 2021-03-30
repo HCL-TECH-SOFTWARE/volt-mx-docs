@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-session-MediaController'>/**@class android.media.session.MediaController
+</span>@extends java.lang.Object
+
+ Allows an app to interact with an ongoing media session. Media buttons and
+ other commands can be sent to the session. A callback may be registered to
+ receive updates from the session, such as metadata and play state changes.
+ &lt;p&gt;
+ A MediaController can be created through {@link android.media.session.MediaSessionManager} if you
+ hold the &quot;android.permission.MEDIA_CONTENT_CONTROL&quot; permission or are an
+ enabled notification listener or by getting a {@link android.media.session.MediaSession.Token}
+ directly from the session owner.
+ &lt;p&gt;
+ MediaController objects are thread-safe.
+*/
+var MediaController = {
+
+<span id='android-media-session-MediaController-method-getTransportControls'>/**Get a {@link android.media.session.MediaController.TransportControls} instance to send transport actions to
+</span> the associated session.
+@return {Object {android.media.session.MediaController.TransportControls}} A transport controls instance.
+*/
+getTransportControls : function(  ) {},
+
+<span id='android-media-session-MediaController-method-dispatchMediaButtonEvent'>/**Send the specified media button event to the session. Only media keys can
+</span> be sent by this method, other keys will be ignored.
+@param {Object {KeyEvent}} keyEvent The media button event to dispatch.
+@return {Boolean} true if the event was sent to the session, false otherwise.
+*/
+dispatchMediaButtonEvent : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getPlaybackState'>/**Get the current playback state for this session.
+</span>@return {Object {android.media.session.PlaybackState}} The current PlaybackState or null
+*/
+getPlaybackState : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getMetadata'>/**Get the current metadata for this session.
+</span>@return {Object {android.media.MediaMetadata}} The current MediaMetadata or null.
+*/
+getMetadata : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getQueue'>/**Get the current play queue for this session if one is set. If you only
+</span> care about the current item {@link #getMetadata}() should be used.
+@return {Object {java.util.List}} The current play queue or null.
+*/
+getQueue : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getQueueTitle'>/**Get the queue title for this session.
+</span>*/
+getQueueTitle : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getExtras'>/**Get the extras for this session.
+</span>*/
+getExtras : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getRatingType'>/**Get the rating type supported by the session. One of:
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link Rating#RATING_NONE}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_HEART}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_THUMB_UP_DOWN}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_3_STARS}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_4_STARS}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_5_STARS}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_PERCENTAGE}&lt;/li&gt;
+ &lt;/ul&gt;
+@return {Number} The supported rating type
+*/
+getRatingType : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getFlags'>/**Get the flags for this session. Flags are defined in {@link android.media.session.MediaSession}.
+</span>@return {Number} The current set of flags for the session.
+*/
+getFlags : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getPlaybackInfo'>/**Get the current playback info for this session.
+</span>@return {Object {android.media.session.MediaController.PlaybackInfo}} The current playback info or null.
+*/
+getPlaybackInfo : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getSessionActivity'>/**Get an intent for launching UI associated with this session if one
+</span> exists.
+@return {Object {android.app.PendingIntent}} A {@link PendingIntent} to launch UI or null.
+*/
+getSessionActivity : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getSessionToken'>/**Get the token for the session this is connected to.
+</span>@return {Object {android.media.session.MediaSession.Token}} The token for the connected session.
+*/
+getSessionToken : function(  ) {},
+
+<span id='android-media-session-MediaController-method-setVolumeTo'>/**Set the volume of the output this session is playing on. The command will
+</span> be ignored if it does not support
+ {@link VolumeProvider#VOLUME_CONTROL_ABSOLUTE}. The flags in
+ {@link AudioManager} may be used to affect the handling.
+@param {Number} value The value to set it to, between 0 and the reported max.
+@param {Number} flags Flags from {@link AudioManager} to include with the volume
+            request.
+@param flags Flags from {@link AudioManager} to include with the volume
+            request.
+*/
+setVolumeTo : function(  ) {},
+
+<span id='android-media-session-MediaController-method-adjustVolume'>/**Adjust the volume of the output this session is playing on. The direction
+</span> must be one of {@link AudioManager#ADJUST_LOWER},
+ {@link AudioManager#ADJUST_RAISE}, or {@link AudioManager#ADJUST_SAME}.
+ The command will be ignored if the session does not support
+ {@link VolumeProvider#VOLUME_CONTROL_RELATIVE} or
+ {@link VolumeProvider#VOLUME_CONTROL_ABSOLUTE}. The flags in
+ {@link AudioManager} may be used to affect the handling.
+@param {Number} direction The direction to adjust the volume in.
+@param {Number} flags Any flags to pass with the command.
+@param flags Any flags to pass with the command.
+*/
+adjustVolume : function(  ) {},
+
+<span id='android-media-session-MediaController-method-registerCallback'>/**Registers a callback to receive updates from the Session. Updates will be
+</span> posted on the caller's thread.
+@param {Object {MediaController.Callback}} callback The callback object, must not be null.
+*/
+registerCallback : function(  ) {},
+
+<span id='android-media-session-MediaController-method-registerCallback'>/**Registers a callback to receive updates from the session. Updates will be
+</span> posted on the specified handler's thread.
+@param {Object {MediaController.Callback}} callback The callback object, must not be null.
+@param {Object {Handler}} handler The handler to post updates on. If null the callers thread
+            will be used.
+*/
+registerCallback : function(  ) {},
+
+<span id='android-media-session-MediaController-method-unregisterCallback'>/**Unregisters the specified callback. If an update has already been posted
+</span> you may still receive it after calling this method.
+@param {Object {MediaController.Callback}} callback The callback to remove.
+*/
+unregisterCallback : function(  ) {},
+
+<span id='android-media-session-MediaController-method-sendCommand'>/**Sends a generic command to the session. It is up to the session creator
+</span> to decide what commands and parameters they will support. As such,
+ commands should only be sent to sessions that the controller owns.
+@param {String} command The command to send
+@param {Object {Bundle}} args Any parameters to include with the command
+@param {Object {ResultReceiver}} cb The callback to receive the result on
+*/
+sendCommand : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getPackageName'>/**Get the session owner's package name.
+</span>@return {String} The package name of of the session owner.
+*/
+getPackageName : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getSessionInfo'>/**Gets the additional session information which was set when the session was created.
+</span>@return {Object {android.os.Bundle}} The additional session information, or an empty {@link Bundle} if not set.
+*/
+getSessionInfo : function(  ) {},
+
+<span id='android-media-session-MediaController-method-getTag'>/**Get the session's tag for debugging purposes.
+</span>@return {String} The session's tag.
+@hide 
+*/
+getTag : function(  ) {},
+
+<span id='android-media-session-MediaController-method-controlsSameSession'>/**
+</span>@hide 
+*/
+controlsSameSession : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

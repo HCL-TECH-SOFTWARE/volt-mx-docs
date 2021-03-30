@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-proto-EncodedBuffer'>/**@class android.util.proto.EncodedBuffer
+</span>@extends java.lang.Object
+
+ A stream of bytes containing a read pointer and a write pointer,
+ backed by a set of fixed-size buffers.  There are write functions for the
+ primitive types stored by protocol buffers, but none of the logic
+ for tags, inner objects, or any of that.
+
+ Terminology:
+      *Pos:       Position in the whole data set (as if it were a single buffer).
+      *Index:     Position within a buffer.
+      *BufIndex:  Index of a buffer within the mBuffers list
+ @hide
+*/
+var EncodedBuffer = {
+
+<span id='android-util-proto-EncodedBuffer-method-startEditing'>/**Rewind the read and write pointers, and record how much data was last written.
+</span>*/
+startEditing : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-rewindRead'>/**Rewind the read pointer. Don't touch the write pointer.
+</span>*/
+rewindRead : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getReadableSize'>/**Only valid after startEditing. Returns -1 before that.
+</span>*/
+getReadableSize : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getSize'>/**Returns the buffer size
+</span>@return {Number} the buffer size
+*/
+getSize : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getReadPos'>/**Only valid after startEditing.
+</span>*/
+getReadPos : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-skipRead'>/**Skip over _amount_ bytes.
+</span>*/
+skipRead : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-readRawByte'>/**Read one byte from the stream and advance the read pointer.
+</span>@throws IndexOutOfBoundsException if the read point is past the end of
+ the buffer or past the read limit previously set by startEditing().
+*/
+readRawByte : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-readRawUnsigned'>/**Read an unsigned varint. The value will be returend in a java signed long.
+</span>*/
+readRawUnsigned : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-readRawFixed32'>/**Read 32 little endian bits from the stream.
+</span>*/
+readRawFixed32 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawByte'>/**Write a single byte to the stream.
+</span>*/
+writeRawByte : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getRawVarint32Size'>/**Return how many bytes a 32 bit unsigned varint will take when written to the stream.
+</span>*/
+getRawVarint32Size : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawVarint32'>/**Write an unsigned varint to the stream. A signed value would need to take 10 bytes.
+</span>@param {Number} val treated as unsigned.
+*/
+writeRawVarint32 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getRawZigZag32Size'>/**Return how many bytes a 32 bit signed zig zag value will take when written to the stream.
+</span>*/
+getRawZigZag32Size : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawZigZag32'>/**Write a zig-zag encoded value.
+</span>@param {Number} val treated as signed
+*/
+writeRawZigZag32 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getRawVarint64Size'>/**Return how many bytes a 64 bit varint will take when written to the stream.
+</span>*/
+getRawVarint64Size : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawVarint64'>/**Write a 64 bit varint to the stream.
+</span>*/
+writeRawVarint64 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getRawZigZag64Size'>/**Return how many bytes a signed 64 bit zig zag value will take when written to the stream.
+</span>*/
+getRawZigZag64Size : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawZigZag64'>/**Write a 64 bit signed zig zag value to the stream.
+</span>*/
+writeRawZigZag64 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawFixed32'>/**Write 4 little endian bytes to the stream.
+</span>*/
+writeRawFixed32 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawFixed64'>/**Write 8 little endian bytes to the stream.
+</span>*/
+writeRawFixed64 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawBuffer'>/**Write a buffer to the stream. Writes nothing if val is null or zero-length.
+</span>*/
+writeRawBuffer : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeRawBuffer'>/**Write part of an array of bytes.
+</span>*/
+writeRawBuffer : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-writeFromThisBuffer'>/**Copies data _size_ bytes of data within this buffer from _srcOffset_
+</span> to the current write position. Like memmov but handles the chunked buffer.
+*/
+writeFromThisBuffer : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getWritePos'>/**Returns the index into the virtual array of the write pointer.
+</span>*/
+getWritePos : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-rewindWriteTo'>/**Resets the write pointer to a virtual location as returned by getWritePos.
+</span>*/
+rewindWriteTo : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getRawFixed32At'>/**Read a 32 bit value from the stream.
+</span>
+ Doesn't touch or affect mWritePos.
+*/
+getRawFixed32At : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-editRawFixed32'>/**Overwrite a 32 bit value in the stream.
+</span>
+ Doesn't touch or affect mWritePos.
+*/
+editRawFixed32 : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getBytes'>/**Get a copy of the first _size_ bytes of data. This is not range
+</span> checked, and if the bounds are outside what has been written you will
+ get garbage and if it is outside the buffers that have been allocated,
+ you will get an exception.
+*/
+getBytes : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getChunkCount'>/**Get the number of chunks allocated.
+</span>*/
+getChunkCount : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getWriteIndex'>/**Get the write position inside the current write chunk.
+</span>*/
+getWriteIndex : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getWriteBufIndex'>/**Get the index of the current write chunk in the list of chunks.
+</span>*/
+getWriteBufIndex : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-getDebugString'>/**Return debugging information about this EncodedBuffer object.
+</span>*/
+getDebugString : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-dumpBuffers'>/**Print the internal buffer chunks.
+</span>*/
+dumpBuffers : function(  ) {},
+
+<span id='android-util-proto-EncodedBuffer-method-dumpByteString'>/**Print the internal buffer chunks.
+</span>*/
+dumpByteString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

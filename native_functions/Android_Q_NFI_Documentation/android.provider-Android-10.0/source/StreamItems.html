@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-StreamItems'>/**@class android.provider.ContactsContract.StreamItems
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.ContactsContract.StreamItemsColumns
+
+@extends java.lang.Object
+
+ &lt;p&gt;
+ Constants for the stream_items table, which contains social stream updates from
+ the user's contact list.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Only a certain number of stream items will ever be stored under a given raw contact.
+ Users of this API can query {@link android.provider.ContactsContract.StreamItems#CONTENT_LIMIT_URI} to
+ determine this limit, and should restrict the number of items inserted in any given
+ transaction correspondingly.  Insertion of more items beyond the limit will
+ automatically lead to deletion of the oldest items, by {@link android.provider.ContactsContract.StreamItems#TIMESTAMP}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Access to the social stream through these URIs requires additional permissions beyond the
+ read/write contact permissions required by the provider.  Querying for social stream data
+ requires android.permission.READ_SOCIAL_STREAM permission, and inserting or updating social
+ stream items requires android.permission.WRITE_SOCIAL_STREAM permission.
+ &lt;/p&gt;
+ &lt;h3&gt;Account check&lt;/h3&gt;
+ &lt;p&gt;
+ The content URIs to the insert, update and delete operations are required to have the account
+ information matching that of the owning raw contact as query parameters, namely
+ {@link android.provider.ContactsContract.RawContacts#ACCOUNT_TYPE} and {@link android.provider.ContactsContract.RawContacts#ACCOUNT_NAME}.
+ {@link android.provider.ContactsContract.RawContacts#DATA_SET} isn't required.
+ &lt;/p&gt;
+ &lt;h3&gt;Operations&lt;/h3&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;b&gt;Insert&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;p&gt;Social stream updates are always associated with a raw contact.  There are a couple
+ of ways to insert these entries.
+ &lt;dl&gt;
+ &lt;dt&gt;Via the {@link android.provider.ContactsContract.RawContacts.StreamItems#CONTENT_DIRECTORY} sub-path of a raw contact:&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;pre&gt;
+ ContentValues values = new ContentValues();
+ values.put(StreamItems.TEXT, &quot;Breakfasted at Tiffanys&quot;);
+ values.put(StreamItems.TIMESTAMP, timestamp);
+ values.put(StreamItems.COMMENTS, &quot;3 people reshared this&quot;);
+ Uri.Builder builder = RawContacts.CONTENT_URI.buildUpon();
+ ContentUris.appendId(builder, rawContactId);
+ builder.appendEncodedPath(RawContacts.StreamItems.CONTENT_DIRECTORY);
+ builder.appendQueryParameter(RawContacts.ACCOUNT_NAME, accountName);
+ builder.appendQueryParameter(RawContacts.ACCOUNT_TYPE, accountType);
+ Uri streamItemUri = getContentResolver().insert(builder.build(), values);
+ long streamItemId = ContentUris.parseId(streamItemUri);
+ &lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;Via {@link android.provider.ContactsContract.StreamItems#CONTENT_URI}:&lt;/dt&gt;
+ &lt;dd&gt;
+&lt;pre&gt;
+ ContentValues values = new ContentValues();
+ values.put(StreamItems.RAW_CONTACT_ID, rawContactId);
+ values.put(StreamItems.TEXT, &quot;Breakfasted at Tiffanys&quot;);
+ values.put(StreamItems.TIMESTAMP, timestamp);
+ values.put(StreamItems.COMMENTS, &quot;3 people reshared this&quot;);
+ Uri.Builder builder = StreamItems.CONTENT_URI.buildUpon();
+ builder.appendQueryParameter(RawContacts.ACCOUNT_NAME, accountName);
+ builder.appendQueryParameter(RawContacts.ACCOUNT_TYPE, accountType);
+ Uri streamItemUri = getContentResolver().insert(builder.build(), values);
+ long streamItemId = ContentUris.parseId(streamItemUri);
+&lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;/dd&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ Once a {@link android.provider.ContactsContract.StreamItems} entry has been inserted, photos associated with that
+ social update can be inserted.  For example, after one of the insertions above,
+ photos could be added to the stream item in one of the following ways:
+ &lt;dl&gt;
+ &lt;dt&gt;Via a URI including the stream item ID:&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;pre&gt;
+ values.clear();
+ values.put(StreamItemPhotos.SORT_INDEX, 1);
+ values.put(StreamItemPhotos.PHOTO, photoData);
+ getContentResolver().insert(Uri.withAppendedPath(
+     ContentUris.withAppendedId(StreamItems.CONTENT_URI, streamItemId),
+     StreamItems.StreamItemPhotos.CONTENT_DIRECTORY), values);
+ &lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;Via {@link android.provider.ContactsContract.StreamItems#CONTENT_PHOTO_URI}:&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;pre&gt;
+ values.clear();
+ values.put(StreamItemPhotos.STREAM_ITEM_ID, streamItemId);
+ values.put(StreamItemPhotos.SORT_INDEX, 1);
+ values.put(StreamItemPhotos.PHOTO, photoData);
+ getContentResolver().insert(StreamItems.CONTENT_PHOTO_URI, values);
+ &lt;/pre&gt;
+ &lt;p&gt;Note that this latter form allows the insertion of a stream item and its
+ photos in a single transaction, by using {@link ContentProviderOperation} with
+ back references to populate the stream item ID in the {@link ContentValues}.
+ &lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;/p&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Update&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;Updates can be performed by appending the stream item ID to the
+ {@link android.provider.ContactsContract.StreamItems#CONTENT_URI} URI.  Only social stream entries that were
+ created by the calling package can be updated.&lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Delete&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;Deletes can be performed by appending the stream item ID to the
+ {@link android.provider.ContactsContract.StreamItems#CONTENT_URI} URI.  Only social stream entries that were
+ created by the calling package can be deleted.&lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Query&lt;/b&gt;&lt;/dt&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;Finding all social stream updates for a given contact&lt;/dt&gt;
+ &lt;dd&gt;By Contact ID:
+ &lt;pre&gt;
+ Cursor c = getContentResolver().query(Uri.withAppendedPath(
+          ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId),
+          Contacts.StreamItems.CONTENT_DIRECTORY),
+          null, null, null, null);
+ &lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;dd&gt;By lookup key:
+ &lt;pre&gt;
+ Cursor c = getContentResolver().query(Contacts.CONTENT_URI.buildUpon()
+          .appendPath(lookupKey)
+          .appendPath(Contacts.StreamItems.CONTENT_DIRECTORY).build(),
+          null, null, null, null);
+ &lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;Finding all social stream updates for a given raw contact&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;pre&gt;
+ Cursor c = getContentResolver().query(Uri.withAppendedPath(
+          ContentUris.withAppendedId(RawContacts.CONTENT_URI, rawContactId),
+          RawContacts.StreamItems.CONTENT_DIRECTORY)),
+          null, null, null, null);
+ &lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;Querying for a specific stream item by ID&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;pre&gt;
+ Cursor c = getContentResolver().query(ContentUris.withAppendedId(
+          StreamItems.CONTENT_URI, streamItemId),
+          null, null, null, null);
+ &lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;/dl&gt;
+
+ @deprecated - Do not use. This will not be supported in the future. In the future,
+ cursors returned from related queries will be empty.
+
+ @removed
+*/
+var StreamItems = {
+
+<span id='android-provider-ContactsContract-StreamItems-property-CONTENT_URI'>/** The content:// style URI for this table, which handles social network stream
+</span> updates for the user's contacts.
+
+ @deprecated - Do not use. This will not be supported in the future. In the future,
+ cursors returned from related queries will be empty.
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-StreamItems-property-CONTENT_PHOTO_URI'>/** &lt;p&gt;
+</span> A content:// style URI for the photos stored in a sub-table underneath
+ stream items.  This is only used for inserts, and updates - queries and deletes
+ for photos should be performed by appending
+ {@link android.provider.ContactsContract.StreamItems.StreamItemPhotos#CONTENT_DIRECTORY} path to URIs for a
+ specific stream item.
+ &lt;/p&gt;
+ &lt;p&gt;
+ When using this URI, the stream item ID for the photo(s) must be identified
+ in the {@link ContentValues} passed in.
+ &lt;/p&gt;
+
+ @deprecated - Do not use. This will not be supported in the future. In the future,
+ cursors returned from related queries will be empty.
+*/
+CONTENT_PHOTO_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-StreamItems-property-CONTENT_LIMIT_URI'>/** This URI allows the caller to query for the maximum number of stream items
+</span> that will be stored under any single raw contact.
+
+ @deprecated - Do not use. This will not be supported in the future. In the future,
+ cursors returned from related queries will be empty.
+*/
+CONTENT_LIMIT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-StreamItems-property-CONTENT_TYPE'>/** The MIME type of a directory of stream items.
+</span>
+ @deprecated - Do not use. This will not be supported in the future. In the future,
+ cursors returned from related queries will be empty.
+*/
+CONTENT_TYPE : &quot;vnd.android.cursor.dir/stream_item&quot;,
+<span id='android-provider-ContactsContract-StreamItems-property-CONTENT_ITEM_TYPE'>/** The MIME type of a single stream item.
+</span>
+ @deprecated - Do not use. This will not be supported in the future. In the future,
+ cursors returned from related queries will be empty.
+*/
+CONTENT_ITEM_TYPE : &quot;vnd.android.cursor.item/stream_item&quot;,
+<span id='android-provider-ContactsContract-StreamItems-property-MAX_ITEMS'>/** Queries to {@link android.provider.ContactsContract.StreamItems#CONTENT_LIMIT_URI} will
+</span> contain this column, with the value indicating the maximum number of
+ stream items that will be stored under any single raw contact.
+
+ @deprecated - Do not use. This will not be supported in the future. In the future,
+ cursors returned from related queries will be empty.
+*/
+MAX_ITEMS : &quot;max_items&quot;,
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-IccSmsInterfaceManager'>/**@class com.android.internal.telephony.IccSmsInterfaceManager
+</span>@extends java.lang.Object
+
+ IccSmsInterfaceManager to provide an inter-process communication to
+ access Sms in Icc.
+*/
+var IccSmsInterfaceManager = {
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-property-SMS_MESSAGE_PRIORITY_NOT_SPECIFIED'>/***/
+</span>SMS_MESSAGE_PRIORITY_NOT_SPECIFIED : &quot;-1&quot;,
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-property-SMS_MESSAGE_PERIOD_NOT_SPECIFIED'>/***/
+</span>SMS_MESSAGE_PERIOD_NOT_SPECIFIED : &quot;-1&quot;,
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-property-mDispatchersController'>/***/
+</span>mDispatchersController : &quot;null&quot;,
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-updateMessageOnIccEf'>/**Update the specified message on the Icc.
+</span>@param {String} index record index of message to update
+@param {Number} status new message status (STATUS_ON_ICC_READ,
+                  STATUS_ON_ICC_UNREAD, STATUS_ON_ICC_SENT,
+                  STATUS_ON_ICC_UNSENT, STATUS_ON_ICC_FREE)
+@param {Number} pdu the raw PDU to store
+@return {Boolean} success or not
+*/
+updateMessageOnIccEf : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-copyMessageToIccEf'>/**Copy a raw SMS PDU to the Icc.
+</span>@param {String} pdu the raw PDU to store
+@param {Number} status message status (STATUS_ON_ICC_READ, STATUS_ON_ICC_UNREAD,
+               STATUS_ON_ICC_SENT, STATUS_ON_ICC_UNSENT)
+@return {Boolean} success or not
+*/
+copyMessageToIccEf : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-getAllMessagesFromIccEf'>/**Retrieves all messages currently stored on Icc.
+</span>@return {Object {java.util.List}} list of SmsRawData of all sms on Icc
+*/
+getAllMessagesFromIccEf : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendDataWithSelfPermissions'>/**A permissions check before passing to {@link com.android.internal.telephony.IccSmsInterfaceManager#sendDataInternal}.
+</span> This method checks if the calling package or itself has the permission to send the data sms.
+*/
+sendDataWithSelfPermissions : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendData'>/**A permissions check before passing to {@link com.android.internal.telephony.IccSmsInterfaceManager#sendDataInternal}.
+</span> This method checks only if the calling package has the permission to send the data sms.
+*/
+sendData : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendText'>/**A permissions check before passing to {@link com.android.internal.telephony.IccSmsInterfaceManager#sendTextInternal}.
+</span> This method checks only if the calling package has the permission to send the sms.
+ Note: SEND_SMS permission should be checked by the caller of this method
+*/
+sendText : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendTextWithSelfPermissions'>/**A permissions check before passing to {@link com.android.internal.telephony.IccSmsInterfaceManager#sendTextInternal}.
+</span> This method checks if the calling package or itself has the permission to send the sms.
+*/
+sendTextWithSelfPermissions : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendTextWithOptions'>/**Send a text based SMS with Messaging Options.
+</span>@param {String} destAddr the address to send the message to
+@param {String} scAddr is the service center address or null to use
+  the current default SMSC
+@param {String} text the body of the message to send
+@param {String} sentIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is successfully sent, or failed.
+  The result code will be &lt;code&gt;Activity.RESULT_OK&lt;code&gt; for success,
+  or one of these errors:&lt;br&gt;
+  &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt;&lt;br&gt;
+  &lt;code&gt;RESULT_ERROR_RADIO_OFF&lt;/code&gt;&lt;br&gt;
+  &lt;code&gt;RESULT_ERROR_NULL_PDU&lt;/code&gt;&lt;br&gt;
+  For &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt; the sentIntent may include
+  the extra &quot;errorCode&quot; containing a radio technology specific value,
+  generally only useful for troubleshooting.&lt;br&gt;
+  The per-application based SMS control checks sentIntent. If sentIntent
+  is NULL the caller will be checked against all unknown applications,
+  which cause smaller number of SMS to be sent in checking period.
+@param {Object {PendingIntent}} deliveryIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is delivered to the recipient.  The
+  raw pdu of the status report is in the extended data (&quot;pdu&quot;).
+@param {Object {PendingIntent}} persistMessageForNonDefaultSmsApp whether the sent message should
+  be automatically persisted in the SMS db. It only affects messages sent
+  by a non-default SMS app. Currently only the carrier app can set this
+  parameter to false to skip auto message persistence.
+@param {Boolean} priority Priority level of the message
+  Refer specification See 3GPP2 C.S0015-B, v2.0, table 4.5.9-1
+  ---------------------------------
+  PRIORITY      | Level of Priority
+  ---------------------------------
+      '00'      |     Normal
+      '01'      |     Interactive
+      '10'      |     Urgent
+      '11'      |     Emergency
+  ----------------------------------
+  Any Other values including negative considered as Invalid Priority Indicator of the message.
+@param {Number} expectMore is a boolean to indicate the sending messages through same link or not.
+@param {Boolean} validityPeriod Validity Period of the message in mins.
+  Refer specification 3GPP TS 23.040 V6.8.1 section 9.2.3.12.1.
+  Validity Period(Minimum) -&gt; 5 mins
+  Validity Period(Maximum) -&gt; 635040 mins(i.e.63 weeks).
+  Any Other values including negative considered as Invalid Validity Period of the message.
+*/
+sendTextWithOptions : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-injectSmsPdu'>/**Inject an SMS PDU into the android application framework.
+</span>@param {Object {byte[]}} pdu is the byte array of pdu to be injected into android application framework
+@param {String} format is the format of SMS pdu (3gpp or 3gpp2)
+@param {Object {PendingIntent}} receivedIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is successfully received by the
+  android application framework. This intent is broadcasted at
+  the same time an SMS received from radio is acknowledged back.
+*/
+injectSmsPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendMultipartText'>/**Send a multi-part text based SMS.
+</span>@param {String} destAddr the address to send the message to
+@param {String} scAddr is the service center address or null to use
+   the current default SMSC
+@param {String} parts an &lt;code&gt;ArrayList&lt;/code&gt; of strings that, in order,
+   comprise the original message
+@param {Object {java.util.List}} sentIntents if not null, an &lt;code&gt;ArrayList&lt;/code&gt; of
+   &lt;code&gt;PendingIntent&lt;/code&gt;s (one for each message part) that is
+   broadcast when the corresponding message part has been sent.
+   The result code will be &lt;code&gt;Activity.RESULT_OK&lt;code&gt; for success,
+   or one of these errors:
+   &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt;
+   &lt;code&gt;RESULT_ERROR_RADIO_OFF&lt;/code&gt;
+   &lt;code&gt;RESULT_ERROR_NULL_PDU&lt;/code&gt;.
+  The per-application based SMS control checks sentIntent. If sentIntent
+  is NULL the caller will be checked against all unknown applications,
+  which cause smaller number of SMS to be sent in checking period.
+@param {Object {java.util.List}} deliveryIntents if not null, an &lt;code&gt;ArrayList&lt;/code&gt; of
+   &lt;code&gt;PendingIntent&lt;/code&gt;s (one for each message part) that is
+   broadcast when the corresponding message part has been delivered
+   to the recipient.  The raw pdu of the status report is in the
+   extended data (&quot;pdu&quot;).
+*/
+sendMultipartText : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendMultipartTextWithOptions'>/**Send a multi-part text based SMS with Messaging Options.
+</span>@param {String} destAddr the address to send the message to
+@param {String} scAddr is the service center address or null to use
+   the current default SMSC
+@param {String} parts an &lt;code&gt;ArrayList&lt;/code&gt; of strings that, in order,
+   comprise the original message
+@param {Object {java.util.List}} sentIntents if not null, an &lt;code&gt;ArrayList&lt;/code&gt; of
+   &lt;code&gt;PendingIntent&lt;/code&gt;s (one for each message part) that is
+   broadcast when the corresponding message part has been sent.
+   The result code will be &lt;code&gt;Activity.RESULT_OK&lt;code&gt; for success,
+   or one of these errors:
+   &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt;
+   &lt;code&gt;RESULT_ERROR_RADIO_OFF&lt;/code&gt;
+   &lt;code&gt;RESULT_ERROR_NULL_PDU&lt;/code&gt;.
+  The per-application based SMS control checks sentIntent. If sentIntent
+  is NULL the caller will be checked against all unknown applications,
+  which cause smaller number of SMS to be sent in checking period.
+@param {Object {java.util.List}} deliveryIntents if not null, an &lt;code&gt;ArrayList&lt;/code&gt; of
+   &lt;code&gt;PendingIntent&lt;/code&gt;s (one for each message part) that is
+   broadcast when the corresponding message part has been delivered
+   to the recipient.  The raw pdu of the status report is in the
+   extended data (&quot;pdu&quot;).
+@param {Object {java.util.List}} persistMessageForNonDefaultSmsApp whether the sent message should
+   be automatically persisted in the SMS db. It only affects messages sent
+   by a non-default SMS app. Currently only the carrier app can set this
+   parameter to false to skip auto message persistence.
+@param {Boolean} priority Priority level of the message
+  Refer specification See 3GPP2 C.S0015-B, v2.0, table 4.5.9-1
+  ---------------------------------
+  PRIORITY      | Level of Priority
+  ---------------------------------
+      '00'      |     Normal
+      '01'      |     Interactive
+      '10'      |     Urgent
+      '11'      |     Emergency
+  ----------------------------------
+  Any Other values including negative considered as Invalid Priority Indicator of the message.
+@param {Number} expectMore is a boolean to indicate the sending messages through same link or not.
+@param {Boolean} validityPeriod Validity Period of the message in mins.
+  Refer specification 3GPP TS 23.040 V6.8.1 section 9.2.3.12.1.
+  Validity Period(Minimum) -&gt; 5 mins
+  Validity Period(Maximum) -&gt; 635040 mins(i.e.63 weeks).
+  Any Other values including negative considered as Invalid Validity Period of the message.
+*/
+sendMultipartTextWithOptions : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-getPremiumSmsPermission'>/**
+</span>*/
+getPremiumSmsPermission : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-setPremiumSmsPermission'>/**
+</span>*/
+setPremiumSmsPermission : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-enableCellBroadcast'>/**
+</span>*/
+enableCellBroadcast : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-disableCellBroadcast'>/**
+</span>*/
+disableCellBroadcast : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-enableCellBroadcastRange'>/**
+</span>*/
+enableCellBroadcastRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-disableCellBroadcastRange'>/**
+</span>*/
+disableCellBroadcastRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-enableGsmBroadcastRange'>/**
+</span>*/
+enableGsmBroadcastRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-disableGsmBroadcastRange'>/**
+</span>*/
+disableGsmBroadcastRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-enableCdmaBroadcastRange'>/**
+</span>*/
+enableCdmaBroadcastRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-disableCdmaBroadcastRange'>/**
+</span>*/
+disableCdmaBroadcastRange : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-isImsSmsSupported'>/**
+</span>*/
+isImsSmsSupported : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-getImsSmsFormat'>/**
+</span>*/
+getImsSmsFormat : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendStoredText'>/**
+</span>*/
+sendStoredText : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-sendStoredMultipartText'>/**
+</span>*/
+sendStoredMultipartText : function(  ) {},
+
+<span id='com-android-internal-telephony-IccSmsInterfaceManager-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

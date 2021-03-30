@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-PerformanceCollector'>/**@class android.os.PerformanceCollector
+</span>@extends java.lang.Object
+
+ Collects performance data between two function calls in Bundle objects and
+ outputs the results using writer of type {@link android.os.PerformanceCollector.PerformanceResultsWriter}.
+ &lt;p&gt;
+ {@link #beginSnapshot}(String) and {@link #endSnapshot}() functions collect
+ memory usage information and measure runtime between calls to begin and end.
+ These functions logically wrap around an entire test, and should be called
+ with name of test as the label, e.g. EmailPerformanceTest.
+ &lt;p&gt;
+ {@link #startTiming}(String) and {@link #stopTiming}(String) functions
+ measure runtime between calls to start and stop. These functions logically
+ wrap around a single test case or a small block of code, and should be called
+ with the name of test case as the label, e.g. testSimpleSendMailSequence.
+ &lt;p&gt;
+ {@link #addIteration}(String) inserts intermediate measurement point which
+ can be labeled with a String, e.g. Launch email app, compose, send, etc.
+ &lt;p&gt;
+ Snapshot and timing functions do not interfere with each other, and thus can
+ be called in any order. The intended structure is to wrap begin/endSnapshot
+ around calls to start/stopTiming, for example:
+ &lt;p&gt;
+ &lt;code&gt;beginSnapshot(&quot;EmailPerformanceTest&quot;);
+ startTiming(&quot;testSimpleSendSequence&quot;);
+ addIteration(&quot;Launch email app&quot;);
+ addIteration(&quot;Compose&quot;);
+ stopTiming(&quot;Send&quot;);
+ startTiming(&quot;testComplexSendSequence&quot;);
+ stopTiming(&quot;&quot;);
+ startTiming(&quot;testAddLabel&quot;);
+ stopTiming(&quot;&quot;);
+ endSnapshot();&lt;/code&gt;
+ &lt;p&gt;
+ Structure of results output is up to implementor of
+ {@link android.os.PerformanceCollector.PerformanceResultsWriter }.
+
+ {@hide} Pending approval for public API.
+*/
+var PerformanceCollector = {
+
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_ITERATIONS'>/** In a results Bundle, this key references a List of iteration Bundles.
+</span>*/
+METRIC_KEY_ITERATIONS : &quot;iterations&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_LABEL'>/** In an iteration Bundle, this key describes the iteration.
+</span>*/
+METRIC_KEY_LABEL : &quot;label&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_CPU_TIME'>/** In a results Bundle, this key reports the cpu time of the code block
+</span> under measurement.
+*/
+METRIC_KEY_CPU_TIME : &quot;cpu_time&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_EXECUTION_TIME'>/** In a results Bundle, this key reports the execution time of the code
+</span> block under measurement.
+*/
+METRIC_KEY_EXECUTION_TIME : &quot;execution_time&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_PRE_RECEIVED_TRANSACTIONS'>/** In a snapshot Bundle, this key reports the number of received
+</span> transactions from the binder driver before collection started.
+*/
+METRIC_KEY_PRE_RECEIVED_TRANSACTIONS : &quot;pre_received_transactions&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_PRE_SENT_TRANSACTIONS'>/** In a snapshot Bundle, this key reports the number of transactions sent by
+</span> the running program before collection started.
+*/
+METRIC_KEY_PRE_SENT_TRANSACTIONS : &quot;pre_sent_transactions&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_RECEIVED_TRANSACTIONS'>/** In a snapshot Bundle, this key reports the number of received
+</span> transactions from the binder driver.
+*/
+METRIC_KEY_RECEIVED_TRANSACTIONS : &quot;received_transactions&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_SENT_TRANSACTIONS'>/** In a snapshot Bundle, this key reports the number of transactions sent by
+</span> the running program.
+*/
+METRIC_KEY_SENT_TRANSACTIONS : &quot;sent_transactions&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_GC_INVOCATION_COUNT'>/** In a snapshot Bundle, this key reports the number of garbage collection
+</span> invocations.
+*/
+METRIC_KEY_GC_INVOCATION_COUNT : &quot;gc_invocation_count&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_JAVA_ALLOCATED'>/** In a snapshot Bundle, this key reports the amount of allocated memory
+</span> used by the running program.
+*/
+METRIC_KEY_JAVA_ALLOCATED : &quot;java_allocated&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_JAVA_FREE'>/** In a snapshot Bundle, this key reports the amount of free memory
+</span> available to the running program.
+*/
+METRIC_KEY_JAVA_FREE : &quot;java_free&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_JAVA_PRIVATE_DIRTY'>/** In a snapshot Bundle, this key reports the number of private dirty pages
+</span> used by dalvik.
+*/
+METRIC_KEY_JAVA_PRIVATE_DIRTY : &quot;java_private_dirty&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_JAVA_PSS'>/** In a snapshot Bundle, this key reports the proportional set size for
+</span> dalvik.
+*/
+METRIC_KEY_JAVA_PSS : &quot;java_pss&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_JAVA_SHARED_DIRTY'>/** In a snapshot Bundle, this key reports the number of shared dirty pages
+</span> used by dalvik.
+*/
+METRIC_KEY_JAVA_SHARED_DIRTY : &quot;java_shared_dirty&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_JAVA_SIZE'>/** In a snapshot Bundle, this key reports the total amount of memory
+</span> available to the running program.
+*/
+METRIC_KEY_JAVA_SIZE : &quot;java_size&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_NATIVE_ALLOCATED'>/** In a snapshot Bundle, this key reports the amount of allocated memory in
+</span> the native heap.
+*/
+METRIC_KEY_NATIVE_ALLOCATED : &quot;native_allocated&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_NATIVE_FREE'>/** In a snapshot Bundle, this key reports the amount of free memory in the
+</span> native heap.
+*/
+METRIC_KEY_NATIVE_FREE : &quot;native_free&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_NATIVE_PRIVATE_DIRTY'>/** In a snapshot Bundle, this key reports the number of private dirty pages
+</span> used by the native heap.
+*/
+METRIC_KEY_NATIVE_PRIVATE_DIRTY : &quot;native_private_dirty&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_NATIVE_PSS'>/** In a snapshot Bundle, this key reports the proportional set size for the
+</span> native heap.
+*/
+METRIC_KEY_NATIVE_PSS : &quot;native_pss&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_NATIVE_SHARED_DIRTY'>/** In a snapshot Bundle, this key reports the number of shared dirty pages
+</span> used by the native heap.
+*/
+METRIC_KEY_NATIVE_SHARED_DIRTY : &quot;native_shared_dirty&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_NATIVE_SIZE'>/** In a snapshot Bundle, this key reports the size of the native heap.
+</span>*/
+METRIC_KEY_NATIVE_SIZE : &quot;native_size&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_GLOBAL_ALLOC_COUNT'>/** In a snapshot Bundle, this key reports the number of objects allocated
+</span> globally.
+*/
+METRIC_KEY_GLOBAL_ALLOC_COUNT : &quot;global_alloc_count&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_GLOBAL_ALLOC_SIZE'>/** In a snapshot Bundle, this key reports the size of all objects allocated
+</span> globally.
+*/
+METRIC_KEY_GLOBAL_ALLOC_SIZE : &quot;global_alloc_size&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_GLOBAL_FREED_COUNT'>/** In a snapshot Bundle, this key reports the number of objects freed
+</span> globally.
+*/
+METRIC_KEY_GLOBAL_FREED_COUNT : &quot;global_freed_count&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_GLOBAL_FREED_SIZE'>/** In a snapshot Bundle, this key reports the size of all objects freed
+</span> globally.
+*/
+METRIC_KEY_GLOBAL_FREED_SIZE : &quot;global_freed_size&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_OTHER_PRIVATE_DIRTY'>/** In a snapshot Bundle, this key reports the number of private dirty pages
+</span> used by everything else.
+*/
+METRIC_KEY_OTHER_PRIVATE_DIRTY : &quot;other_private_dirty&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_OTHER_PSS'>/** In a snapshot Bundle, this key reports the proportional set size for
+</span> everything else.
+*/
+METRIC_KEY_OTHER_PSS : &quot;other_pss&quot;,
+<span id='android-os-PerformanceCollector-property-METRIC_KEY_OTHER_SHARED_DIRTY'>/** In a snapshot Bundle, this key reports the number of shared dirty pages
+</span> used by everything else.
+*/
+METRIC_KEY_OTHER_SHARED_DIRTY : &quot;other_shared_dirty&quot;,
+<span id='android-os-PerformanceCollector-method-setPerformanceResultsWriter'>/**
+</span>*/
+setPerformanceResultsWriter : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-beginSnapshot'>/**Begin collection of memory usage information.
+</span>@param {String} label description of code block between beginSnapshot and
+              endSnapshot, used to label output
+*/
+beginSnapshot : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-endSnapshot'>/**End collection of memory usage information. Returns collected data in a
+</span> Bundle object.
+@return {Object {android.os.Bundle}} Memory and runtime metrics stored as key/value pairs. Values are
+         of type long, and keys include:
+         &lt;ul&gt;
+         &lt;li&gt;{@link #METRIC_KEY_CPU_TIME cpu_time}
+         &lt;li&gt;{@link #METRIC_KEY_EXECUTION_TIME execution_time}
+         &lt;li&gt;{@link #METRIC_KEY_PRE_RECEIVED_TRANSACTIONS
+         pre_received_transactions}
+         &lt;li&gt;{@link #METRIC_KEY_PRE_SENT_TRANSACTIONS
+         pre_sent_transactions}
+         &lt;li&gt;{@link #METRIC_KEY_RECEIVED_TRANSACTIONS
+         received_transactions}
+         &lt;li&gt;{@link #METRIC_KEY_SENT_TRANSACTIONS sent_transactions}
+         &lt;li&gt;{@link #METRIC_KEY_GC_INVOCATION_COUNT gc_invocation_count}
+         &lt;li&gt;{@link #METRIC_KEY_JAVA_ALLOCATED java_allocated}
+         &lt;li&gt;{@link #METRIC_KEY_JAVA_FREE java_free}
+         &lt;li&gt;{@link #METRIC_KEY_JAVA_PRIVATE_DIRTY java_private_dirty}
+         &lt;li&gt;{@link #METRIC_KEY_JAVA_PSS java_pss}
+         &lt;li&gt;{@link #METRIC_KEY_JAVA_SHARED_DIRTY java_shared_dirty}
+         &lt;li&gt;{@link #METRIC_KEY_JAVA_SIZE java_size}
+         &lt;li&gt;{@link #METRIC_KEY_NATIVE_ALLOCATED native_allocated}
+         &lt;li&gt;{@link #METRIC_KEY_NATIVE_FREE native_free}
+         &lt;li&gt;{@link #METRIC_KEY_NATIVE_PRIVATE_DIRTY native_private_dirty}
+         &lt;li&gt;{@link #METRIC_KEY_NATIVE_PSS native_pss}
+         &lt;li&gt;{@link #METRIC_KEY_NATIVE_SHARED_DIRTY native_shared_dirty}
+         &lt;li&gt;{@link #METRIC_KEY_NATIVE_SIZE native_size}
+         &lt;li&gt;{@link #METRIC_KEY_GLOBAL_ALLOC_COUNT global_alloc_count}
+         &lt;li&gt;{@link #METRIC_KEY_GLOBAL_ALLOC_SIZE global_alloc_size}
+         &lt;li&gt;{@link #METRIC_KEY_GLOBAL_FREED_COUNT global_freed_count}
+         &lt;li&gt;{@link #METRIC_KEY_GLOBAL_FREED_SIZE global_freed_size}
+         &lt;li&gt;{@link #METRIC_KEY_OTHER_PRIVATE_DIRTY other_private_dirty}
+         &lt;li&gt;{@link #METRIC_KEY_OTHER_PSS other_pss}
+         &lt;li&gt;{@link #METRIC_KEY_OTHER_SHARED_DIRTY other_shared_dirty}
+         &lt;/ul&gt;
+*/
+endSnapshot : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-startTiming'>/**Start measurement of user and cpu time.
+</span>@param {String} label description of code block between startTiming and
+        stopTiming, used to label output
+*/
+startTiming : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-addIteration'>/**Add a measured segment, and start measuring the next segment. Returns
+</span> collected data in a Bundle object.
+@param {String} label description of code block between startTiming and
+              addIteration, and between two calls to addIteration, used
+              to label output
+@return {Object {android.os.Bundle}} Runtime metrics stored as key/value pairs. Values are of type
+         long, and keys include:
+         &lt;ul&gt;
+         &lt;li&gt;{@link #METRIC_KEY_LABEL label}
+         &lt;li&gt;{@link #METRIC_KEY_CPU_TIME cpu_time}
+         &lt;li&gt;{@link #METRIC_KEY_EXECUTION_TIME execution_time}
+         &lt;/ul&gt;
+*/
+addIteration : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-stopTiming'>/**Stop measurement of user and cpu time.
+</span>@param {String} label description of code block between addIteration or
+              startTiming and stopTiming, used to label output
+@return {Object {android.os.Bundle}} Runtime metrics stored in a bundle, including all iterations
+         between calls to startTiming and stopTiming. List of iterations
+         is keyed by {@link #METRIC_KEY_ITERATIONS iterations}.
+*/
+stopTiming : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-addMeasurement'>/**Add an integer type measurement to the collector.
+</span>@param {String} label short description of the metric that was measured
+@param {Number} value long value of the measurement
+*/
+addMeasurement : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-addMeasurement'>/**Add a float type measurement to the collector.
+</span>@param {String} label short description of the metric that was measured
+@param {Number} value float value of the measurement
+*/
+addMeasurement : function(  ) {},
+
+<span id='android-os-PerformanceCollector-method-addMeasurement'>/**Add a string field to the collector.
+</span>@param {String} label short description of the metric that was measured
+@param {String} value string summary of the measurement
+*/
+addMeasurement : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

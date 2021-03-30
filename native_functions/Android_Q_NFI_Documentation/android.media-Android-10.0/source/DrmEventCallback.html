@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaPlayer2-DrmEventCallback'>/**@class android.media.MediaPlayer2.DrmEventCallback
+</span>@extends java.lang.Object
+
+ Interface definition for callbacks to be invoked when the player has the corresponding
+ DRM events.
+*/
+var DrmEventCallback = {
+
+<span id='android-media-MediaPlayer2-DrmEventCallback-method-onDrmInfo'>/**Called to indicate DRM info is available. Return a {@link android.media.MediaPlayer2.DrmPreparationInfo} object that
+</span> bundles DRM initialization parameters.
+@param {Object {MediaPlayer2}} mp the {@code MediaPlayer2} associated with this callback
+@param {Object {DataSourceDesc}} dsd the {@link DataSourceDesc} of this data source
+@param {Object {MediaPlayer2.DrmInfo}} drmInfo DRM info of the source including PSSH, and subset of crypto schemes
+        supported by this device
+@return {Object {android.media.MediaPlayer2.DrmPreparationInfo}} a {@link DrmPreparationInfo} object to initialize DRM playback, or null to skip
+         DRM initialization
+*/
+onDrmInfo : function(  ) {},
+
+<span id='android-media-MediaPlayer2-DrmEventCallback-method-onDrmConfig'>/**Called to give the app the opportunity to configure DRM before the session is created.
+</span>
+ This facilitates configuration of the properties, like 'securityLevel', which
+ has to be set after DRM scheme creation but before the DRM session is opened.
+
+ The only allowed DRM calls in this listener are
+ {@link android.media.MediaDrm#getPropertyString(String)},
+ {@link android.media.MediaDrm#getPropertyByteArray(String)},
+ {@link android.media.MediaDrm#setPropertyString(String, String)},
+ {@link android.media.MediaDrm#setPropertyByteArray(String, byte[])},
+ {@link android.media.MediaDrm#setOnExpirationUpdateListener},
+ and {@link android.media.MediaDrm#setOnKeyStatusChangeListener}.
+@param {Object {MediaPlayer2}} mp the {@code MediaPlayer2} associated with this callback
+@param {Object {DataSourceDesc}} dsd the {@link DataSourceDesc} of this data source
+@param {Object {MediaDrm}} drm handle to get/set DRM properties and listeners for this data source
+*/
+onDrmConfig : function(  ) {},
+
+<span id='android-media-MediaPlayer2-DrmEventCallback-method-onDrmKeyRequest'>/**Called to indicate the DRM session for {@code dsd} is ready for key request/response
+</span>@param {Object {MediaPlayer2}} mp the {@code MediaPlayer2} associated with this callback
+@param {Object {DataSourceDesc}} dsd the {@link DataSourceDesc} of this data source
+@param {Object {MediaDrm.KeyRequest}} request a {@link MediaDrm.KeyRequest} prepared using the
+        {@link DrmPreparationInfo} returned from
+        {@link #onDrmInfo(MediaPlayer2, DataSourceDesc, DrmInfo)}
+@return {Number} the response to {@code request} (from license server); returning {@code null} or
+         throwing an {@link RuntimeException} from this callback would trigger an
+         {@link EventCallback#onError}.
+*/
+onDrmKeyRequest : function(  ) {},
+
+<span id='android-media-MediaPlayer2-DrmEventCallback-method-onDrmPrepared'>/**Called to notify the client that {@code mp} is ready to decrypt DRM protected data source
+</span> {@code dsd} or if there is an error during DRM preparation
+@param {Object {MediaPlayer2}} mp the {@code MediaPlayer2} associated with this callback
+@param {Object {DataSourceDesc}} dsd the {@link DataSourceDesc} of this data source
+@param {Number} status the result of DRM preparation.
+@param {Object {byte[]}} keySetId optional identifier that can be used to restore DRM playback initiated
+        with a {@link MediaDrm#KEY_TYPE_OFFLINE} key request.
+@see DrmPreparationInfo.Builder#setKeySetId(byte[])
+*/
+onDrmPrepared : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

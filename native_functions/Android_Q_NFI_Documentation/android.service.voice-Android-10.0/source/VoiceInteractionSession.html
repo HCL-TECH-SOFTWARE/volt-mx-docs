@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-voice-VoiceInteractionSession'>/**@class android.service.voice.VoiceInteractionSession
+</span> implements android.view.KeyEvent.Callback
+
+ implements android.content.ComponentCallbacks2
+
+@extends java.lang.Object
+
+ An active voice interaction session, providing a facility for the implementation
+ to interact with the user in the voice interaction layer.  The user interface is
+ initially shown by default, and can be created be overriding {@link #onCreateContentView}()
+ in which the UI can be built.
+
+ &lt;p&gt;A voice interaction session can be self-contained, ultimately calling {@link #finish}
+ when done.  It can also initiate voice interactions with applications by calling
+ {@link #startVoiceActivity}&lt;/p&gt;.
+*/
+var VoiceInteractionSession = {
+
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_WITH_ASSIST'>/** Flag received in {@link #onShow}: originator requested that the session be started with
+</span> assist data from the currently focused activity.
+*/
+SHOW_WITH_ASSIST : &quot;1&quot;,
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_WITH_SCREENSHOT'>/** Flag received in {@link #onShow}: originator requested that the session be started with
+</span> a screen shot of the currently focused activity.
+*/
+SHOW_WITH_SCREENSHOT : &quot;2&quot;,
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_SOURCE_ASSIST_GESTURE'>/** Flag for use with {@link #onShow}: indicates that the session has been started from the
+</span> system assist gesture.
+*/
+SHOW_SOURCE_ASSIST_GESTURE : &quot;4&quot;,
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_SOURCE_APPLICATION'>/** Flag for use with {@link #onShow}: indicates that the application itself has invoked
+</span> the assistant.
+*/
+SHOW_SOURCE_APPLICATION : &quot;8&quot;,
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_SOURCE_ACTIVITY'>/** Flag for use with {@link #onShow}: indicates that an Activity has invoked the voice
+</span> interaction service for a local interaction using
+ {@link Activity#startLocalVoiceInteraction(Bundle)}.
+*/
+SHOW_SOURCE_ACTIVITY : &quot;16&quot;,
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_SOURCE_PUSH_TO_TALK'>/** Flag for use with {@link #onShow}: indicates that the voice interaction service was invoked
+</span> from a physical button.
+*/
+SHOW_SOURCE_PUSH_TO_TALK : &quot;32&quot;,
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_SOURCE_NOTIFICATION'>/** Flag for use with {@link #onShow}: indicates that the voice interaction service was invoked
+</span> from a notification.
+*/
+SHOW_SOURCE_NOTIFICATION : &quot;64&quot;,
+<span id='android-service-voice-VoiceInteractionSession-property-SHOW_SOURCE_AUTOMOTIVE_SYSTEM_UI'>/** Flag for use with {@link #onShow}: indicates that the voice interaction service was invoked
+</span> from an Android automotive system UI.
+*/
+SHOW_SOURCE_AUTOMOTIVE_SYSTEM_UI : &quot;128&quot;,
+<span id='android-service-voice-VoiceInteractionSession-method-getContext'>/**
+</span>*/
+getContext : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-setDisabledShowContext'>/**Equivalent to {@link android.service.voice.VoiceInteractionService#setDisabledShowContext
+</span> android.service.voice.VoiceInteractionService.setDisabledShowContext(int)}.
+*/
+setDisabledShowContext : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-getDisabledShowContext'>/**Equivalent to {@link android.service.voice.VoiceInteractionService#getDisabledShowContext
+</span> android.service.voice.VoiceInteractionService.getDisabledShowContext}.
+*/
+getDisabledShowContext : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-getUserDisabledShowContext'>/**Return which show context flags have been disabled by the user through the system
+</span> settings UI, so the session will never get this data.  Returned flags are any combination of
+ {@link android.service.voice.VoiceInteractionSession#SHOW_WITH_ASSIST android.service.voice.VoiceInteractionSession.SHOW_WITH_ASSIST} and
+ {@link android.service.voice.VoiceInteractionSession#SHOW_WITH_SCREENSHOT
+ android.service.voice.VoiceInteractionSession.SHOW_WITH_SCREENSHOT}.  Note that this only tells you about
+ global user settings, not about restrictions that may be applied contextual based on
+ the current application the user is in or other transient states.
+*/
+getUserDisabledShowContext : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-show'>/**Show the UI for this session.  This asks the system to go through the process of showing
+</span> your UI, which will eventually culminate in {@link #onShow}.  This is similar to calling
+ {@link android.service.voice.VoiceInteractionService#showSession android.service.voice.VoiceInteractionService.showSession}.
+@param {Object {Bundle}} args Arbitrary arguments that will be propagated {@link #onShow}.
+@param {Number} flags Indicates additional optional behavior that should be performed.  May
+ be any combination of
+ {@link VoiceInteractionSession#SHOW_WITH_ASSIST VoiceInteractionSession.SHOW_WITH_ASSIST} and
+ {@link VoiceInteractionSession#SHOW_WITH_SCREENSHOT
+ VoiceInteractionSession.SHOW_WITH_SCREENSHOT}
+ to request that the system generate and deliver assist data on the current foreground
+ app as part of showing the session UI.
+*/
+show : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-hide'>/**Hide the session's UI, if currently shown.  Call this when you are done with your
+</span> user interaction.
+*/
+hide : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-setUiEnabled'>/**Control whether the UI layer for this session is enabled.  It is enabled by default.
+</span> If set to false, you will not be able to provide a UI through {@link #onCreateContentView}().
+*/
+setUiEnabled : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-setTheme'>/**You can call this to customize the theme used by your IME's window.
+</span> This must be set before {@link #onCreate}, so you
+ will typically call it in your constructor with the resource ID
+ of your custom theme.
+*/
+setTheme : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-startVoiceActivity'>/**Ask that a new activity be started for voice interaction.  This will create a
+</span> new dedicated task in the activity manager for this voice interaction session;
+ this means that {@link Intent#FLAG_ACTIVITY_NEW_TASK Intent.FLAG_ACTIVITY_NEW_TASK}
+ will be set for you to make it a new task.
+
+ &lt;p&gt;The newly started activity will be displayed to the user in a special way, as
+ a layer under the voice interaction UI.&lt;/p&gt;
+
+ &lt;p&gt;As the voice activity runs, it can retrieve a {@link android.app.VoiceInteractor}
+ through which it can perform voice interactions through your session.  These requests
+ for voice interactions will appear as callbacks on {@link #onGetSupportedCommands},
+ {@link #onRequestConfirmation}, {@link #onRequestPickOption},
+ {@link #onRequestCompleteVoice}, {@link #onRequestAbortVoice},
+ or {@link #onRequestCommand}
+
+ &lt;p&gt;You will receive a call to {@link #onTaskStarted} when the task starts up
+ and {@link #onTaskFinished} when the last activity has finished.
+@param {Object {Intent}} intent The Intent to start this voice interaction.  The given Intent will
+ always have {@link Intent#CATEGORY_VOICE Intent.CATEGORY_VOICE} added to it, since
+ this is part of a voice interaction.
+*/
+startVoiceActivity : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-startAssistantActivity'>/**&lt;p&gt;Ask that a new assistant activity be started.  This will create a new task in the
+</span> in activity manager: this means that
+ {@link Intent#FLAG_ACTIVITY_NEW_TASK Intent.FLAG_ACTIVITY_NEW_TASK}
+ will be set for you to make it a new task.&lt;/p&gt;
+
+ &lt;p&gt;The newly started activity will be displayed on top of other activities in the system
+ in a new layer that is not affected by multi-window mode.  Tasks started from this activity
+ will go into the normal activity layer and not this new layer.&lt;/p&gt;
+
+ &lt;p&gt;By default, the system will create a window for the UI for this session.  If you are using
+ an assistant activity instead, then you can disable the window creation by calling
+ {@link #setUiEnabled} in {@link #onPrepareShow(Bundle, int)}.&lt;/p&gt;
+*/
+startAssistantActivity : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-requestDirectActions'>/**Requests a list of supported actions from an app.
+</span>@param {Object {VoiceInteractionSession.ActivityId}} activityId Ths activity id of the app to get the actions from.
+@param {Object {CancellationSignal}} resultExecutor The handler to receive the callback
+@param {Object {Executor}} cancellationSignal A signal to cancel the operation in progress,
+     or {@code null} if none.
+@param {Object {java.util.function.Consumer}} callback The callback to receive the response
+*/
+requestDirectActions : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onDirectActionsInvalidated'>/**Called when the direct actions are invalidated.
+</span>*/
+onDirectActionsInvalidated : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-performDirectAction'>/**Asks that an action be performed by the app. This will send a request to the app which
+</span> provided this action.
+
+ &lt;p&gt; An action could take time to execute and the result is provided asynchronously
+ via a callback. If the action is taking longer and you want to cancel its execution
+ you can pass in a cancellation signal through which to notify the app to abort the
+ action.
+@param {Object {DirectAction}} action The action to be performed.
+@param {Object {Bundle}} extras Any optional extras sent to the app as part of the request
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress,
+                          or {@code null} if none.
+@param {Object {Executor}} resultExecutor The handler to receive the callback.
+@param {Object {java.util.function.Consumer}} resultListener The callback to receive the response.
+@see #requestDirectActions(ActivityId, CancellationSignal, Executor, Consumer)
+@see Activity#onGetDirectActions(CancellationSignal, Consumer)
+*/
+performDirectAction : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-setKeepAwake'>/**Set whether this session will keep the device awake while it is running a voice
+</span> activity.  By default, the system holds a wake lock for it while in this state,
+ so that it can work even if the screen is off.  Setting this to false removes that
+ wake lock, allowing the CPU to go to sleep.  This is typically used if the
+ session decides it has been waiting too long for a response from the user and
+ doesn't want to let this continue to drain the battery.
+
+ &lt;p&gt;Passing false here will release the wake lock, and you can call later with
+ true to re-acquire it.  It will also be automatically re-acquired for you each
+ time you start a new voice activity task -- that is when you call
+ {@link #startVoiceActivity}.&lt;/p&gt;
+*/
+setKeepAwake : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-closeSystemDialogs'>/**Request that all system dialogs (and status bar shade etc) be closed, allowing
+</span> access to the session's UI.  This will &lt;em&gt;not&lt;/em&gt; cause the lock screen to be
+ dismissed.
+*/
+closeSystemDialogs : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-getLayoutInflater'>/**Convenience for inflating views.
+</span>*/
+getLayoutInflater : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-getWindow'>/**Retrieve the window being used to show the session's UI.
+</span>*/
+getWindow : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-finish'>/**Finish the session.  This completely destroys the session -- the next time it is shown,
+</span> an entirely new one will be created.  You do not normally call this function; instead,
+ use {@link #hide} and allow the system to destroy your session if it needs its RAM.
+*/
+finish : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onCreate'>/**Initiatize a new session.  At this point you don't know exactly what this
+</span> session will be used for; you will find that out in {@link #onShow}.
+*/
+onCreate : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onPrepareShow'>/**Called prior to {@link #onShow} before any UI setup has occurred.  Not generally useful.
+</span>@param {Object {Bundle}} args The arguments that were supplied to
+ {@link VoiceInteractionService#showSession VoiceInteractionService.showSession}.
+@param {Number} showFlags The show flags originally provided to
+ {@link VoiceInteractionService#showSession VoiceInteractionService.showSession}.
+*/
+onPrepareShow : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onShow'>/**Called when the session UI is going to be shown.  This is called after
+</span> {@link #onCreateContentView} (if the session's content UI needed to be created) and
+ immediately prior to the window being shown.  This may be called while the window
+ is already shown, if a show request has come in while it is shown, to allow you to
+ update the UI to match the new show arguments.
+@param {Object {Bundle}} args The arguments that were supplied to
+ {@link VoiceInteractionService#showSession VoiceInteractionService.showSession}.
+@param {Number} showFlags The show flags originally provided to
+ {@link VoiceInteractionService#showSession VoiceInteractionService.showSession}.
+*/
+onShow : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onHide'>/**Called immediately after stopping to show the session UI.
+</span>*/
+onHide : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onDestroy'>/**Last callback to the session as it is being finished.
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onCreateContentView'>/**Hook in which to create the session's UI.
+</span>*/
+onCreateContentView : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-setContentView'>/**
+</span>*/
+setContentView : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onAssistStructureFailure'>/**Called when there has been a failure transferring the {@link AssistStructure} to
+</span> the assistant.  This may happen, for example, if the data is too large and results
+ in an out of memory exception, or the client has provided corrupt data.  This will
+ be called immediately before {@link #onHandleAssist} and the AssistStructure supplied
+ there afterwards will be null.
+@param {Object {Throwable}} failure The failure exception that was thrown when building the
+ {@link AssistStructure}.
+*/
+onAssistStructureFailure : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onHandleAssist'>/**Called to receive data from the application that the user was currently viewing when
+</span> an assist session is started.  If the original show request did not specify
+ {@link #SHOW_WITH_ASSIST}, this method will not be called.
+@param {Object {Bundle}} data Arbitrary data supplied by the app through
+ {@link android.app.Activity#onProvideAssistData Activity.onProvideAssistData}.
+ May be null if assist data has been disabled by the user or device policy.
+@param {Object {AssistStructure}} structure If available, the structure definition of all windows currently
+ displayed by the app.  May be null if assist data has been disabled by the user
+ or device policy; will be an empty stub if the application has disabled assist
+ by marking its window as secure.
+@param {Object {AssistContent}} content Additional content data supplied by the app through
+ {@link android.app.Activity#onProvideAssistContent Activity.onProvideAssistContent}.
+ May be null if assist data has been disabled by the user or device policy; will
+ not be automatically filled in with data from the app if the app has marked its
+ window as secure.
+@deprecated use {@link #onHandleAssist(AssistState)}
+*/
+onHandleAssist : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onHandleAssist'>/**Called to receive data from the application that the user was currently viewing when
+</span> an assist session is started.  If the original show request did not specify
+ {@link #SHOW_WITH_ASSIST}, this method will not be called.
+
+ &lt;p&gt;This method is called for all activities along with an index and count that indicates
+ which activity the data is for. {@code index} will be between 0 and {@code count}-1 and
+ this method is called once for each activity in no particular order. The {@code count}
+ indicates how many activities to expect assist data for, including the top focused one.
+ The focused activity can be determined by calling {@link android.service.voice.VoiceInteractionSession.AssistState#isFocused()}.
+
+ &lt;p&gt;To be responsive to assist requests, process assist data as soon as it is received,
+ without waiting for all queued activities to return assist data.
+@param {Object {VoiceInteractionSession.AssistState}} state The state object capturing the state of an activity.
+*/
+onHandleAssist : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onHandleAssistSecondary'>/**Called to receive data from other applications that the user was or is interacting with,
+</span> that are currently on the screen in a multi-window display environment, not including the
+ currently focused activity. This could be
+ a free-form window, a picture-in-picture window, or another window in a split-screen display.
+ &lt;p&gt;
+ This method is very similar to
+ {@link #onHandleAssist} except that it is called
+ for additional non-focused activities along with an index and count that indicates
+ which additional activity the data is for. {@code index} will be between 1 and
+ {@code count}-1 and this method is called once for each additional window, in no particular
+ order. The {@code count} indicates how many windows to expect assist data for, including the
+ top focused activity, which continues to be returned via {@link #onHandleAssist}.
+ &lt;p&gt;
+ To be responsive to assist requests, process assist data as soon as it is received,
+ without waiting for all queued activities to return assist data.
+@param {Object {Bundle}} data Arbitrary data supplied by the app through
+ {@link android.app.Activity#onProvideAssistData Activity.onProvideAssistData}.
+ May be null if assist data has been disabled by the user or device policy.
+@param {Object {AssistStructure}} structure If available, the structure definition of all windows currently
+ displayed by the app.  May be null if assist data has been disabled by the user
+ or device policy; will be an empty stub if the application has disabled assist
+ by marking its window as secure.
+@param {Object {AssistContent}} content Additional content data supplied by the app through
+ {@link android.app.Activity#onProvideAssistContent Activity.onProvideAssistContent}.
+ May be null if assist data has been disabled by the user or device policy; will
+ not be automatically filled in with data from the app if the app has marked its
+ window as secure.
+@param {Number} index the index of the additional activity that this data
+        is for.
+@param {Number} count the total number of additional activities for which the assist data is being
+        returned, including the focused activity that is returned via
+        {@link #onHandleAssist}.
+@deprecated use {@link #onHandleAssist(AssistState)}
+*/
+onHandleAssistSecondary : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onHandleScreenshot'>/**Called to receive a screenshot of what the user was currently viewing when an assist
+</span> session is started.  May be null if screenshots are disabled by the user, policy,
+ or application.  If the original show request did not specify
+ {@link #SHOW_WITH_SCREENSHOT}, this method will not be called.
+*/
+onHandleScreenshot : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onKeyDown'>/**
+</span>*/
+onKeyDown : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onKeyLongPress'>/**
+</span>*/
+onKeyLongPress : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onKeyUp'>/**
+</span>*/
+onKeyUp : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onKeyMultiple'>/**
+</span>*/
+onKeyMultiple : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onBackPressed'>/**Called when the user presses the back button while focus is in the session UI.  Note
+</span> that this will only happen if the session UI has requested input focus in its window;
+ otherwise, the back key will go to whatever window has focus and do whatever behavior
+ it normally has there.  The default implementation simply calls {@link #hide}.
+*/
+onBackPressed : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onCloseSystemDialogs'>/**Sessions automatically watch for requests that all system UI be closed (such as when
+</span> the user presses HOME), which will appear here.  The default implementation always
+ calls {@link #hide}.
+*/
+onCloseSystemDialogs : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onLockscreenShown'>/**Called when the lockscreen was shown.
+</span>*/
+onLockscreenShown : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onConfigurationChanged'>/**
+</span>*/
+onConfigurationChanged : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onLowMemory'>/**
+</span>*/
+onLowMemory : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onTrimMemory'>/**
+</span>*/
+onTrimMemory : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onComputeInsets'>/**Compute the interesting insets into your UI.  The default implementation
+</span> sets {@link android.service.voice.VoiceInteractionSession.Insets#contentandroid.service.voice.VoiceInteractionSession.Insets outandroid.service.voice.VoiceInteractionSession.Insets.contentandroid.service.voice.VoiceInteractionSession.Insets.top} to the height
+ of the window, meaning it should not adjust content underneath.  The default touchable
+ insets are {@link android.service.voice.VoiceInteractionSession.Insets#TOUCHABLE_INSETS_FRAME}, meaning it consumes all touch
+ events within its window frame.
+@param {Object {VoiceInteractionSession.Insets}} outInsets Fill in with the current UI insets.
+*/
+onComputeInsets : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onTaskStarted'>/**Called when a task initiated by {@link #startVoiceActivity(android.content.Intent)}
+</span> has actually started.
+@param {Object {Intent}} intent The original {@link Intent} supplied to
+ {@link #startVoiceActivity(android.content.Intent)}.
+@param {Number} taskId Unique ID of the now running task.
+*/
+onTaskStarted : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onTaskFinished'>/**Called when the last activity of a task initiated by
+</span> {@link #startVoiceActivity(android.content.Intent)} has finished.  The default
+ implementation calls {@link #finish}() on the assumption that this represents
+ the completion of a voice action.  You can override the implementation if you would
+ like a different behavior.
+@param {Object {Intent}} intent The original {@link Intent} supplied to
+ {@link #startVoiceActivity(android.content.Intent)}.
+@param {Number} taskId Unique ID of the finished task.
+*/
+onTaskFinished : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onGetSupportedCommands'>/**Request to query for what extended commands the session supports.
+</span>@param {Object {java.lang.String[]}} commands An array of commands that are being queried.
+@return {Boolean} Return an array of booleans indicating which of each entry in the
+ command array is supported.  A true entry in the array indicates the command
+ is supported; false indicates it is not.  The default implementation returns
+ an array of all false entries.
+*/
+onGetSupportedCommands : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onRequestConfirmation'>/**Request to confirm with the user before proceeding with an unrecoverable operation,
+</span> corresponding to a {@link android.app.VoiceInteractor.ConfirmationRequest
+ VoiceInteractor.ConfirmationRequest}.
+@param {Object {VoiceInteractionSession.ConfirmationRequest}} request The active request.
+*/
+onRequestConfirmation : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onRequestPickOption'>/**Request for the user to pick one of N options, corresponding to a
+</span> {@link android.app.VoiceInteractor.PickOptionRequest VoiceInteractor.PickOptionRequest}.
+@param {Object {VoiceInteractionSession.PickOptionRequest}} request The active request.
+*/
+onRequestPickOption : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onRequestCompleteVoice'>/**Request to complete the voice interaction session because the voice activity successfully
+</span> completed its interaction using voice.  Corresponds to
+ {@link android.app.VoiceInteractor.CompleteVoiceRequest
+ VoiceInteractor.CompleteVoiceRequest}.  The default implementation just sends an empty
+ confirmation back to allow the activity to exit.
+@param {Object {VoiceInteractionSession.CompleteVoiceRequest}} request The active request.
+*/
+onRequestCompleteVoice : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onRequestAbortVoice'>/**Request to abort the voice interaction session because the voice activity can not
+</span> complete its interaction using voice.  Corresponds to
+ {@link android.app.VoiceInteractor.AbortVoiceRequest
+ VoiceInteractor.AbortVoiceRequest}.  The default implementation just sends an empty
+ confirmation back to allow the activity to exit.
+@param {Object {VoiceInteractionSession.AbortVoiceRequest}} request The active request.
+*/
+onRequestAbortVoice : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onRequestCommand'>/**Process an arbitrary extended command from the caller,
+</span> corresponding to a {@link android.app.VoiceInteractor.CommandRequest
+ VoiceInteractor.CommandRequest}.
+@param {Object {VoiceInteractionSession.CommandRequest}} request The active request.
+*/
+onRequestCommand : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-onCancelRequest'>/**Called when the {@link android.app.VoiceInteractor} has asked to cancel a {@link android.service.voice.VoiceInteractionSession.Request}
+</span> that was previously delivered to {@link #onRequestConfirmation},
+ {@link #onRequestPickOption}, {@link #onRequestCompleteVoice}, {@link #onRequestAbortVoice},
+ or {@link #onRequestCommand}.
+@param {Object {VoiceInteractionSession.Request}} request The request that is being canceled.
+*/
+onCancelRequest : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionSession-method-dump'>/**Print the Service's state into the given stream.  This gets invoked by
+</span> {@link android.service.voice.VoiceInteractionSessionService} when its Service
+ {@link android.app.Service#dump} method is called.
+@param {String} prefix Text to print at the front of each line.
+@param {Object {FileDescriptor}} fd The raw file descriptor that the dump is being sent to.
+@param {Object {PrintWriter}} writer The PrintWriter to which you should dump your state.  This will be
+ closed for you after you return.
+@param {Object {java.lang.String[]}} args additional arguments to the dump request.
+*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

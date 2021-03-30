@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-permission-PermissionControllerService'>/**@class android.permission.PermissionControllerService
+</span>@extends android.app.Service
+
+ This service is meant to be implemented by the app controlling permissions.
+
+ @see PermissionControllerManager
+
+ @hide
+*/
+var PermissionControllerService = {
+
+<span id='android-permission-PermissionControllerService-property-SERVICE_INTERFACE'>/** The {@link Intent} action that must be declared as handled by a service
+</span> in its manifest for the system to recognize it as a runtime permission
+ presenter service.
+*/
+SERVICE_INTERFACE : &quot;android.permission.PermissionControllerService&quot;,
+<span id='android-permission-PermissionControllerService-method-onRevokeRuntimePermissions'>/**Revoke a set of runtime permissions for various apps.
+</span>@param {Object {java.util.Map}} requests The permissions to revoke as {@code Map&lt;packageName, List&lt;permission&gt;&gt;}
+@param {Boolean} doDryRun Compute the permissions that would be revoked, but not actually revoke them
+@param {Number} reason Why the permission should be revoked
+@param {String} callerPackageName The package name of the calling app
+@param {Object {java.util.function.Consumer}} callback Callback waiting for the actually removed permissions as
+ {@code Map&lt;packageName, List&lt;permission&gt;&gt;}
+*/
+onRevokeRuntimePermissions : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onGetRuntimePermissionsBackup'>/**Create a backup of the runtime permissions.
+</span>@param {Object {UserHandle}} user The user to back up
+@param {Object {OutputStream}} backup The stream to write the backup to
+@param {Object {Runnable}} callback Callback waiting for operation to be complete
+*/
+onGetRuntimePermissionsBackup : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onRestoreRuntimePermissionsBackup'>/**Restore a backup of the runtime permissions.
+</span>
+ &lt;p&gt;If an app mentioned in the backup is not installed the state should be saved to later
+ be restored via {@link #onRestoreDelayedRuntimePermissionsBackup}.
+@param {Object {UserHandle}} user The user to restore
+@param {Object {InputStream}} backup The stream to read the backup from
+@param {Object {Runnable}} callback Callback waiting for operation to be complete
+*/
+onRestoreRuntimePermissionsBackup : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onRestoreDelayedRuntimePermissionsBackup'>/**Restore the permission state of an app that was provided in
+</span> {@link #onRestoreRuntimePermissionsBackup} but could not be restored back then.
+@param {String} packageName The app to restore
+@param {Object {UserHandle}} user The user to restore
+@param {Object {java.util.function.Consumer}} callback Callback waiting for whether there is still delayed backup left
+*/
+onRestoreDelayedRuntimePermissionsBackup : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onGetAppPermissions'>/**Gets the runtime permissions for an app.
+</span>@param {String} packageName The package for which to query.
+@param {Object {java.util.function.Consumer}} callback Callback waiting for the descriptions of the runtime permissions of the app
+*/
+onGetAppPermissions : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onRevokeRuntimePermission'>/**Revokes the permission {@code permissionName} for app {@code packageName}
+</span>@param {String} packageName The package for which to revoke
+@param {String} permissionName The permission to revoke
+@param {Object {Runnable}} callback Callback waiting for operation to be complete
+*/
+onRevokeRuntimePermission : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onCountPermissionApps'>/**Count how many apps have one of a set of permissions.
+</span>@param {Object {java.util.List}} permissionNames The permissions the app might have
+@param {Number} flags Modify which apps to count. By default all non-system apps that request a
+              permission are counted
+@param {Object {IntConsumer}} callback Callback waiting for the number of apps that have one of the permissions
+*/
+onCountPermissionApps : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onGetPermissionUsages'>/**Count how many apps have used permissions.
+</span>@param {Boolean} countSystem Also count system apps
+@param {Number} numMillis The number of milliseconds in the past to check for uses
+@param {Object {java.util.function.Consumer}} callback Callback waiting for the descriptions of the users of permissions
+*/
+onGetPermissionUsages : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onGrantOrUpgradeDefaultRuntimePermissions'>/**Grant or upgrade runtime permissions. The upgrade could be performed
+</span> based on whether the device upgraded, whether the permission database
+ version is old, or because the permission policy changed.
+@param {Object {Runnable}} callback Callback waiting for operation to be complete
+@see PackageManager#isDeviceUpgrading()
+@see PermissionManager#getRuntimePermissionsVersion()
+@see PermissionManager#setRuntimePermissionsVersion(int)
+*/
+onGrantOrUpgradeDefaultRuntimePermissions : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onSetRuntimePermissionGrantStateByDeviceAdmin'>/**Set the runtime permission state from a device admin.
+</span>@param {String} callerPackageName The package name of the admin requesting the change
+@param {String} packageName Package the permission belongs to
+@param {String} permission Permission to change
+@param {Number} grantState State to set the permission into
+@param {Object {java.util.function.Consumer}} callback Callback waiting for whether the state could be set or not
+*/
+onSetRuntimePermissionGrantStateByDeviceAdmin : function(  ) {},
+
+<span id='android-permission-PermissionControllerService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

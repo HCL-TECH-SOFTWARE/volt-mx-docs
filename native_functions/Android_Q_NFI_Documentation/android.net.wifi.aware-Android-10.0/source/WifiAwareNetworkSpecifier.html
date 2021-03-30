@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-aware-WifiAwareNetworkSpecifier'>/**@class android.net.wifi.aware.WifiAwareNetworkSpecifier
+</span> implements android.os.Parcelable
+
+@extends android.net.NetworkSpecifier
+
+ Network specifier object used to request a Wi-Fi Aware network. Apps should use the
+ {@link android.net.wifi.aware.WifiAwareNetworkSpecifier.Builder} class to create an instance.
+*/
+var WifiAwareNetworkSpecifier = {
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-NETWORK_SPECIFIER_TYPE_IB'>/** TYPE: in band, specific peer: role, client_id, session_id, peer_id, pmk/passphrase optional
+</span> @hide
+*/
+NETWORK_SPECIFIER_TYPE_IB : &quot;0&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-NETWORK_SPECIFIER_TYPE_IB_ANY_PEER'>/** TYPE: in band, any peer: role, client_id, session_id, pmk/passphrase optional
+</span> [only permitted for RESPONDER]
+ @hide
+*/
+NETWORK_SPECIFIER_TYPE_IB_ANY_PEER : &quot;1&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-NETWORK_SPECIFIER_TYPE_OOB'>/** TYPE: out-of-band: role, client_id, peer_mac, pmk/passphrase optional
+</span> @hide
+*/
+NETWORK_SPECIFIER_TYPE_OOB : &quot;2&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-NETWORK_SPECIFIER_TYPE_OOB_ANY_PEER'>/** TYPE: out-of-band, any peer: role, client_id, pmk/passphrase optional
+</span> [only permitted for RESPONDER]
+ @hide
+*/
+NETWORK_SPECIFIER_TYPE_OOB_ANY_PEER : &quot;3&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-NETWORK_SPECIFIER_TYPE_MAX_VALID'>/**@hide */
+</span>NETWORK_SPECIFIER_TYPE_MAX_VALID : &quot;3&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-type'>/** One of the NETWORK_SPECIFIER_TYPE_* constants. The type of the network specifier object.
+</span> @hide
+*/
+type : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-role'>/** The role of the device: WifiAwareManager.WIFI_AWARE_DATA_PATH_ROLE_INITIATOR or
+</span> WifiAwareManager.WIFI_AWARE_DATA_PATH_ROLE_RESPONDER.
+ @hide
+*/
+role : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-clientId'>/** The client ID of the device.
+</span> @hide
+*/
+clientId : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-sessionId'>/** The session ID in which context to request a data-path. Only relevant for IB requests.
+</span> @hide
+*/
+sessionId : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-peerId'>/** The peer ID of the device which the data-path should be connected to. Only relevant for
+</span> IB requests (i.e. not IB_ANY_PEER or OOB*).
+ @hide
+*/
+peerId : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-peerMac'>/** The peer MAC address of the device which the data-path should be connected to. Only relevant
+</span> for OB requests (i.e. not OOB_ANY_PEER or IB*).
+ @hide
+*/
+peerMac : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-pmk'>/** The PMK of the requested data-path. Can be null. Only one or none of pmk or passphrase should
+</span> be specified.
+ @hide
+*/
+pmk : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-passphrase'>/** The Passphrase of the requested data-path. Can be null. Only one or none of the pmk or
+</span> passphrase should be specified.
+ @hide
+*/
+passphrase : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-port'>/** The port information to be used for this link. This information will be communicated to the
+</span> peer as part of the layer 2 link setup.
+
+ Information only allowed on secure links since a single layer-2 link is set up for all
+ requestors. Therefore if multiple apps on a single device request links to the same peer
+ device they all get the same link. However, the link is only set up on the first request -
+ hence only the first can transmit the port information. But we don't want to expose that
+ information to other apps. Limiting to secure links would (usually) imply single app usage.
+
+ @hide
+*/
+port : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-transportProtocol'>/** The transport protocol information to be used for this link. This information will be
+</span> communicated to the peer as part of the layer 2 link setup.
+
+ Information only allowed on secure links since a single layer-2 link is set up for all
+ requestors. Therefore if multiple apps on a single device request links to the same peer
+ device they all get the same link. However, the link is only set up on the first request -
+ hence only the first can transmit the port information. But we don't want to expose that
+ information to other apps. Limiting to secure links would (usually) imply single app usage.
+
+ @hide
+*/
+transportProtocol : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-requestorUid'>/** The UID of the process initializing this network specifier. Validated by receiver using
+</span> checkUidIfNecessary() and is used by satisfiedBy() to determine whether matches the
+ offered network.
+
+ @hide
+*/
+requestorUid : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-isOutOfBand'>/**Indicates whether the network specifier specifies an OOB (out-of-band) data-path - i.e. a
+</span> data-path created without a corresponding Aware discovery session.
+@hide 
+*/
+isOutOfBand : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-satisfiedBy'>/**
+</span>@hide 
+*/
+satisfiedBy : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-hashCode'>/**
+</span>@hide 
+*/
+hashCode : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-equals'>/**
+</span>@hide 
+*/
+equals : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-toString'>/**
+</span>@hide 
+*/
+toString : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareNetworkSpecifier-method-assertValidFromUid'>/**
+</span>@hide 
+*/
+assertValidFromUid : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

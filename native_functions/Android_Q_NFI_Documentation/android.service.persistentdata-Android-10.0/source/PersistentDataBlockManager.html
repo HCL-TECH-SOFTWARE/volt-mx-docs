@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-persistentdata-PersistentDataBlockManager'>/**@class android.service.persistentdata.PersistentDataBlockManager
+</span>@extends java.lang.Object
+
+ Interface for reading and writing data blocks to a persistent partition.
+
+ Allows writing one block at a time. Namely, each time
+ {@link android.service.persistentdata.PersistentDataBlockManager#write(byte[])}
+ is called, it will overwite the data that was previously written on the block.
+
+ Clients can query the size of the currently written block via
+ {@link android.service.persistentdata.PersistentDataBlockManager#getDataBlockSize()}.
+
+ Clients can query the maximum size for a block via
+ {@link android.service.persistentdata.PersistentDataBlockManager#getMaximumDataBlockSize()}
+
+ Clients can read the currently written block by invoking
+ {@link android.service.persistentdata.PersistentDataBlockManager#read()}.
+
+ @hide
+*/
+var PersistentDataBlockManager = {
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-property-FLASH_LOCK_UNKNOWN'>/** Indicates that the device's bootloader lock state is UNKNOWN.
+</span>*/
+FLASH_LOCK_UNKNOWN : &quot;-1&quot;,
+<span id='android-service-persistentdata-PersistentDataBlockManager-property-FLASH_LOCK_UNLOCKED'>/** Indicates that the device's bootloader is UNLOCKED.
+</span>*/
+FLASH_LOCK_UNLOCKED : &quot;0&quot;,
+<span id='android-service-persistentdata-PersistentDataBlockManager-property-FLASH_LOCK_LOCKED'>/** Indicates that the device's bootloader is LOCKED.
+</span>*/
+FLASH_LOCK_LOCKED : &quot;1&quot;,
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-write'>/**Writes {@code data} to the persistent partition. Previously written data
+</span> will be overwritten. This data will persist across factory resets.
+
+ Returns the number of bytes written or -1 on error. If the block is too big
+ to fit on the partition, returns -MAX_BLOCK_SIZE.
+
+ {@link #wipe} will block any further {@link #write} operation until reboot,
+ in which case -1 will be returned.
+@param {Object {byte[]}} data the data to write
+*/
+write : function(  ) {},
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-read'>/**Returns the data block stored on the persistent partition.
+</span>*/
+read : function(  ) {},
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-getDataBlockSize'>/**Retrieves the size of the block currently written to the persistent partition.
+</span>
+ Return -1 on error.
+*/
+getDataBlockSize : function(  ) {},
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-getMaximumDataBlockSize'>/**Retrieves the maximum size allowed for a data block.
+</span>
+ Returns -1 on error.
+*/
+getMaximumDataBlockSize : function(  ) {},
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-wipe'>/**Zeroes the previously written block in its entirety. Calling this method
+</span> will erase all data written to the persistent data partition.
+ It will also prevent any further {@link #write} operation until reboot,
+ in order to prevent a potential race condition. See b/30352311.
+*/
+wipe : function(  ) {},
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-setOemUnlockEnabled'>/**Writes a byte enabling or disabling the ability to &quot;OEM unlock&quot; the device.
+</span>@deprecated use {@link OemLockManager#setOemUnlockAllowedByUser(boolean)} instead.
+*/
+setOemUnlockEnabled : function(  ) {},
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-getOemUnlockEnabled'>/**Returns whether or not &quot;OEM unlock&quot; is enabled or disabled on this device.
+</span>@deprecated use {@link OemLockManager#isOemUnlockAllowedByUser()} instead.
+*/
+getOemUnlockEnabled : function(  ) {},
+
+<span id='android-service-persistentdata-PersistentDataBlockManager-method-getFlashLockState'>/**Retrieves available information about this device's flash lock state.
+</span>@return {Number} {@link #FLASH_LOCK_LOCKED} if device bootloader is locked,
+ {@link #FLASH_LOCK_UNLOCKED} if device bootloader is unlocked, or {@link #FLASH_LOCK_UNKNOWN}
+ if this information cannot be ascertained on this device.
+*/
+getFlashLockState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

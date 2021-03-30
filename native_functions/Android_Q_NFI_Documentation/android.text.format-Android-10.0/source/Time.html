@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-format-Time'>/**@class android.text.format.Time
+</span>@extends java.lang.Object
+
+ An alternative to the {@link java.util.Calendar} and
+ {@link java.util.GregorianCalendar} classes. An instance of the Time class represents
+ a moment in time, specified with second precision. It is modelled after
+ struct tm. This class is not thread-safe and does not consider leap seconds.
+
+ &lt;p&gt;This class has a number of issues and it is recommended that
+ {@link java.util.GregorianCalendar} is used instead.
+
+ &lt;p&gt;Known issues:
+ &lt;ul&gt;
+     &lt;li&gt;For historical reasons when performing time calculations all arithmetic currently takes
+     place using 32-bit integers. This limits the reliable time range representable from 1902
+     until 2037.See the wikipedia article on the
+     &lt;a href=&quot;http://en.wikipedia.org/wiki/Year_2038_problem&quot;&gt;Year 2038 problem&lt;/a&gt; for details.
+     Do not rely on this behavior; it may change in the future.
+     &lt;/li&gt;
+     &lt;li&gt;Calling {@link #switchTimezone}(String) on a date that cannot exist, such as a wall time
+     that was skipped due to a DST transition, will result in a date in 1969 (i.e. -1, or 1 second
+     before 1st Jan 1970 UTC).&lt;/li&gt;
+     &lt;li&gt;Much of the formatting / parsing assumes ASCII text and is therefore not suitable for
+     use with non-ASCII scripts.&lt;/li&gt;
+     &lt;li&gt;No support for pseudo-zones like &quot;GMT-07:00&quot;.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ @deprecated Use {@link java.util.GregorianCalendar} instead.
+*/
+var Time = {
+
+<span id='android-text-format-Time-property-TIMEZONE_UTC'>/***/
+</span>TIMEZONE_UTC : &quot;UTC&quot;,
+<span id='android-text-format-Time-property-EPOCH_JULIAN_DAY'>/** The Julian day of the epoch, that is, January 1, 1970 on the Gregorian
+</span> calendar.
+*/
+EPOCH_JULIAN_DAY : &quot;2440588&quot;,
+<span id='android-text-format-Time-property-MONDAY_BEFORE_JULIAN_EPOCH'>/** The Julian day of the Monday in the week of the epoch, December 29, 1969
+</span> on the Gregorian calendar.
+*/
+MONDAY_BEFORE_JULIAN_EPOCH : &quot;2440585&quot;,
+<span id='android-text-format-Time-property-allDay'>/** True if this is an allDay event. The hour, minute, second fields are
+</span> all zero, and the date is displayed the same in all time zones.
+*/
+allDay : &quot;null&quot;,
+<span id='android-text-format-Time-property-second'>/** Seconds [0-61] (2 leap seconds allowed)
+</span>*/
+second : &quot;null&quot;,
+<span id='android-text-format-Time-property-minute'>/** Minute [0-59]
+</span>*/
+minute : &quot;null&quot;,
+<span id='android-text-format-Time-property-hour'>/** Hour of day [0-23]
+</span>*/
+hour : &quot;null&quot;,
+<span id='android-text-format-Time-property-monthDay'>/** Day of month [1-31]
+</span>*/
+monthDay : &quot;null&quot;,
+<span id='android-text-format-Time-property-month'>/** Month [0-11]
+</span>*/
+month : &quot;null&quot;,
+<span id='android-text-format-Time-property-year'>/** Year. For example, 1970.
+</span>*/
+year : &quot;null&quot;,
+<span id='android-text-format-Time-property-weekDay'>/** Day of week [0-6]
+</span>*/
+weekDay : &quot;null&quot;,
+<span id='android-text-format-Time-property-yearDay'>/** Day of year [0-365]
+</span>*/
+yearDay : &quot;null&quot;,
+<span id='android-text-format-Time-property-isDst'>/** This time is in daylight savings time. One of:
+</span> &lt;ul&gt;
+ &lt;li&gt;&lt;b&gt;positive&lt;/b&gt; - in dst&lt;/li&gt;
+ &lt;li&gt;&lt;b&gt;0&lt;/b&gt; - not in dst&lt;/li&gt;
+ &lt;li&gt;&lt;b&gt;negative&lt;/b&gt; - unknown&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+isDst : &quot;null&quot;,
+<span id='android-text-format-Time-property-gmtoff'>/** Offset in seconds from UTC including any DST offset.
+</span>*/
+gmtoff : &quot;null&quot;,
+<span id='android-text-format-Time-property-timezone'>/** The timezone for this Time.  Should not be null.
+</span>*/
+timezone : &quot;null&quot;,
+<span id='android-text-format-Time-property-SECOND'>/***/
+</span>SECOND : &quot;1&quot;,
+<span id='android-text-format-Time-property-MINUTE'>/***/
+</span>MINUTE : &quot;2&quot;,
+<span id='android-text-format-Time-property-HOUR'>/***/
+</span>HOUR : &quot;3&quot;,
+<span id='android-text-format-Time-property-MONTH_DAY'>/***/
+</span>MONTH_DAY : &quot;4&quot;,
+<span id='android-text-format-Time-property-MONTH'>/***/
+</span>MONTH : &quot;5&quot;,
+<span id='android-text-format-Time-property-YEAR'>/***/
+</span>YEAR : &quot;6&quot;,
+<span id='android-text-format-Time-property-WEEK_DAY'>/***/
+</span>WEEK_DAY : &quot;7&quot;,
+<span id='android-text-format-Time-property-YEAR_DAY'>/***/
+</span>YEAR_DAY : &quot;8&quot;,
+<span id='android-text-format-Time-property-WEEK_NUM'>/***/
+</span>WEEK_NUM : &quot;9&quot;,
+<span id='android-text-format-Time-property-SUNDAY'>/***/
+</span>SUNDAY : &quot;0&quot;,
+<span id='android-text-format-Time-property-MONDAY'>/***/
+</span>MONDAY : &quot;1&quot;,
+<span id='android-text-format-Time-property-TUESDAY'>/***/
+</span>TUESDAY : &quot;2&quot;,
+<span id='android-text-format-Time-property-WEDNESDAY'>/***/
+</span>WEDNESDAY : &quot;3&quot;,
+<span id='android-text-format-Time-property-THURSDAY'>/***/
+</span>THURSDAY : &quot;4&quot;,
+<span id='android-text-format-Time-property-FRIDAY'>/***/
+</span>FRIDAY : &quot;5&quot;,
+<span id='android-text-format-Time-property-SATURDAY'>/***/
+</span>SATURDAY : &quot;6&quot;,
+<span id='android-text-format-Time-method-normalize'>/**Ensures the values in each field are in range. For example if the
+</span> current value of this calendar is March 32, normalize() will convert it
+ to April 1. It also fills in weekDay, yearDay, isDst and gmtoff.
+
+ &lt;p&gt;
+ If &quot;ignoreDst&quot; is true, then this method sets the &quot;isDst&quot; field to -1
+ (the &quot;unknown&quot; value) before normalizing.  It then computes the
+ time in milliseconds and sets the correct value for &quot;isDst&quot; if the
+ fields resolve to a valid date / time.
+
+ &lt;p&gt;
+ See {@link #toMillis}(boolean) for more information about when to
+ use &lt;tt&gt;true&lt;/tt&gt; or &lt;tt&gt;false&lt;/tt&gt; for &quot;ignoreDst&quot; and when {@code -1}
+ might be returned.
+@return {Number} the UTC milliseconds since the epoch, or {@code -1}
+*/
+normalize : function(  ) {},
+
+<span id='android-text-format-Time-method-switchTimezone'>/**Convert this time object so the time represented remains the same, but is
+</span> instead located in a different timezone. This method automatically calls
+ normalize() in some cases.
+
+ &lt;p&gt;This method can return incorrect results if the date / time cannot be normalized.
+*/
+switchTimezone : function(  ) {},
+
+<span id='android-text-format-Time-method-getActualMaximum'>/**Return the maximum possible value for the given field given the value of
+</span> the other fields. Requires that it be normalized for MONTH_DAY and
+ YEAR_DAY.
+@param {Number} field one of the constants for HOUR, MINUTE, SECOND, etc.
+@return {Number} the maximum value for the field.
+*/
+getActualMaximum : function(  ) {},
+
+<span id='android-text-format-Time-method-clear'>/**Clears all values, setting the timezone to the given timezone. Sets isDst
+</span> to a negative value to mean &quot;unknown&quot;.
+@param {String} timezoneId the timezone to use.
+*/
+clear : function(  ) {},
+
+<span id='android-text-format-Time-method-compare'>/**Compare two {@code Time} objects and return a negative number if {@code
+</span> a} is less than {@code b}, a positive number if {@code a} is greater than
+ {@code b}, or 0 if they are equal.
+
+ &lt;p&gt;
+ This method can return an incorrect answer when the date / time fields of
+ either {@code Time} have been set to a local time that contradicts the
+ available timezone information.
+@param {Object {Time}} a first {@code Time} instance to compare
+@param {Object {Time}} b second {@code Time} instance to compare
+@throws NullPointerException if either argument is {@code null}
+@throws IllegalArgumentException if {@link #allDay} is true but {@code
+             hour}, {@code minute}, and {@code second} are not 0.
+@return {Number} a negative result if {@code a} is earlier, a positive result if
+         {@code b} is earlier, or 0 if they are equal.
+*/
+compare : function(  ) {},
+
+<span id='android-text-format-Time-method-format'>/**Print the current value given the format string provided. See man
+</span> strftime for what means what. The final string must be less than 256
+ characters.
+@param {String} format a string containing the desired format.
+@return {String} a String containing the current time expressed in the current locale.
+*/
+format : function(  ) {},
+
+<span id='android-text-format-Time-method-toString'>/**Return the current time in YYYYMMDDTHHMMSS&amp;lt;tz&amp;gt; format
+</span>*/
+toString : function(  ) {},
+
+<span id='android-text-format-Time-method-parse'>/**Parses a date-time string in either the RFC 2445 format or an abbreviated
+</span> format that does not include the &quot;time&quot; field.  For example, all of the
+ following strings are valid:
+
+ &lt;ul&gt;
+   &lt;li&gt;&quot;20081013T160000Z&quot;&lt;/li&gt;
+   &lt;li&gt;&quot;20081013T160000&quot;&lt;/li&gt;
+   &lt;li&gt;&quot;20081013&quot;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ Returns whether or not the time is in UTC (ends with Z).  If the string
+ ends with &quot;Z&quot; then the timezone is set to UTC.  If the date-time string
+ included only a date and no time field, then the &lt;code&gt;allDay&lt;/code&gt;
+ field of this Time class is set to true and the &lt;code&gt;hour&lt;/code&gt;,
+ &lt;code&gt;minute&lt;/code&gt;, and &lt;code&gt;second&lt;/code&gt; fields are set to zero;
+ otherwise (a time field was included in the date-time string)
+ &lt;code&gt;allDay&lt;/code&gt; is set to false. The fields &lt;code&gt;weekDay&lt;/code&gt;,
+ &lt;code&gt;yearDay&lt;/code&gt;, and &lt;code&gt;gmtoff&lt;/code&gt; are always set to zero,
+ and the field &lt;code&gt;isDst&lt;/code&gt; is set to -1 (unknown).  To set those
+ fields, call {@link #normalize}(boolean) after parsing.
+
+ To parse a date-time string and convert it to UTC milliseconds, do
+ something like this:
+
+ &lt;pre&gt;
+   Time time = new Time();
+   String date = &quot;20081013T160000Z&quot;;
+   time.parse(date);
+   long millis = time.normalize(false);
+ &lt;/pre&gt;
+@param {String} s the string to parse
+@return {Boolean} true if the resulting time value is in UTC time
+@throws android.util.TimeFormatException if s cannot be parsed.
+*/
+parse : function(  ) {},
+
+<span id='android-text-format-Time-method-parse3339'>/**Parse a time in RFC 3339 format.  This method also parses simple dates
+</span> (that is, strings that contain no time or time offset).  For example,
+ all of the following strings are valid:
+
+ &lt;ul&gt;
+   &lt;li&gt;&quot;2008-10-13T16:00:00.000Z&quot;&lt;/li&gt;
+   &lt;li&gt;&quot;2008-10-13T16:00:00.000+07:00&quot;&lt;/li&gt;
+   &lt;li&gt;&quot;2008-10-13T16:00:00.000-07:00&quot;&lt;/li&gt;
+   &lt;li&gt;&quot;2008-10-13&quot;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+ If the string contains a time and time offset, then the time offset will
+ be used to convert the time value to UTC.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ If the given string contains just a date (with no time field), then
+ the {@link #allDay} field is set to true and the {@link #hour},
+ {@link #minute}, and  {@link #second} fields are set to zero.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Returns true if the resulting time value is in UTC time.
+ &lt;/p&gt;
+@param {String} s the string to parse
+@return {Boolean} true if the resulting time value is in UTC time
+@throws android.util.TimeFormatException if s cannot be parsed.
+*/
+parse3339 : function(  ) {},
+
+<span id='android-text-format-Time-method-getCurrentTimezone'>/**Returns the timezone string that is currently set for the device.
+</span>*/
+getCurrentTimezone : function(  ) {},
+
+<span id='android-text-format-Time-method-setToNow'>/**Sets the time of the given Time object to the current time.
+</span>*/
+setToNow : function(  ) {},
+
+<span id='android-text-format-Time-method-toMillis'>/**Converts this time to milliseconds. Suitable for interacting with the
+</span> standard java libraries. The time is in UTC milliseconds since the epoch.
+ This does an implicit normalization to compute the milliseconds but does
+ &lt;em&gt;not&lt;/em&gt; change any of the fields in this Time object.  If you want
+ to normalize the fields in this Time object and also get the milliseconds
+ then use {@link #normalize}(boolean).
+
+ &lt;p&gt;
+ If &quot;ignoreDst&quot; is false, then this method uses the current setting of the
+ &quot;isDst&quot; field and will adjust the returned time if the &quot;isDst&quot; field is
+ wrong for the given time.  See the sample code below for an example of
+ this.
+
+ &lt;p&gt;
+ If &quot;ignoreDst&quot; is true, then this method ignores the current setting of
+ the &quot;isDst&quot; field in this Time object and will instead figure out the
+ correct value of &quot;isDst&quot; (as best it can) from the fields in this
+ Time object.  The only case where this method cannot figure out the
+ correct value of the &quot;isDst&quot; field is when the time is inherently
+ ambiguous because it falls in the hour that is repeated when switching
+ from Daylight-Saving Time to Standard Time.
+
+ &lt;p&gt;
+ Here is an example where &lt;tt&gt;toMillis(true)&lt;/tt&gt; adjusts the time,
+ assuming that DST changes at 2am on Sunday, Nov 4, 2007.
+
+ &lt;pre&gt;
+ Time time = new Time();
+ time.set(4, 10, 2007);  // set the date to Nov 4, 2007, 12am
+ time.normalize(false);       // this sets isDst = 1
+ time.monthDay += 1;     // changes the date to Nov 5, 2007, 12am
+ millis = time.toMillis(false);   // millis is Nov 4, 2007, 11pm
+ millis = time.toMillis(true);    // millis is Nov 5, 2007, 12am
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ To avoid this problem, use &lt;tt&gt;toMillis(true)&lt;/tt&gt;
+ after adding or subtracting days or explicitly setting the &quot;monthDay&quot;
+ field.  On the other hand, if you are adding
+ or subtracting hours or minutes, then you should use
+ &lt;tt&gt;toMillis(false)&lt;/tt&gt;.
+
+ &lt;p&gt;
+ You should also use &lt;tt&gt;toMillis(false)&lt;/tt&gt; if you want
+ to read back the same milliseconds that you set with {@link #set}(long)
+ or {@link #set}(Time) or after parsing a date string.
+
+ &lt;p&gt;
+ This method can return {@code -1} when the date / time fields have been
+ set to a local time that conflicts with available timezone information.
+ For example, when daylight savings transitions cause an hour to be
+ skipped: times within that hour will return {@code -1} if isDst =
+ {@code -1}.
+*/
+toMillis : function(  ) {},
+
+<span id='android-text-format-Time-method-set'>/**Sets the fields in this Time object given the UTC milliseconds.  After
+</span> this method returns, all the fields are normalized.
+ This also sets the &quot;isDst&quot; field to the correct value.
+@param {Number} millis the time in UTC milliseconds since the epoch.
+*/
+set : function(  ) {},
+
+<span id='android-text-format-Time-method-format2445'>/**Format according to RFC 2445 DATE-TIME type.
+</span>
+ &lt;p&gt;The same as format(&quot;%Y%m%dT%H%M%S&quot;), or format(&quot;%Y%m%dT%H%M%SZ&quot;) for a Time with a
+ timezone set to &quot;UTC&quot;.
+*/
+format2445 : function(  ) {},
+
+<span id='android-text-format-Time-method-set'>/**Copy the value of that to this Time object. No normalization happens.
+</span>*/
+set : function(  ) {},
+
+<span id='android-text-format-Time-method-set'>/**Sets the fields. Sets weekDay, yearDay and gmtoff to 0, and isDst to -1.
+</span> Call {@link #normalize}(boolean) if you need those.
+*/
+set : function(  ) {},
+
+<span id='android-text-format-Time-method-set'>/**Sets the date from the given fields.  Also sets allDay to true.
+</span> Sets weekDay, yearDay and gmtoff to 0, and isDst to -1.
+ Call {@link #normalize}(boolean) if you need those.
+@param {Number} monthDay the day of the month (in the range [1,31])
+@param {Number} month the zero-based month number (in the range [0,11])
+@param {Number} year the year
+*/
+set : function(  ) {},
+
+<span id='android-text-format-Time-method-before'>/**Returns true if the time represented by this Time object occurs before
+</span> the given time.
+
+ &lt;p&gt;
+ Equivalent to {@code Time.compare(this, that) &lt; 0}. See
+ {@link #compare(android.text.format.Time, android.text.format.Time)} for details.
+@param {Object {Time}} that a given Time object to compare against
+@return {Boolean} true if this time is less than the given time
+*/
+before : function(  ) {},
+
+<span id='android-text-format-Time-method-after'>/**Returns true if the time represented by this Time object occurs after
+</span> the given time.
+
+ &lt;p&gt;
+ Equivalent to {@code Time.compare(this, that) &gt; 0}. See
+ {@link #compare(android.text.format.Time, android.text.format.Time)} for details.
+@param {Object {Time}} that a given Time object to compare against
+@return {Boolean} true if this time is greater than the given time
+*/
+after : function(  ) {},
+
+<span id='android-text-format-Time-method-getWeekNumber'>/**Computes the week number according to ISO 8601.  The current Time
+</span> object must already be normalized because this method uses the
+ yearDay and weekDay fields.
+
+ &lt;p&gt;
+ In IS0 8601, weeks start on Monday.
+ The first week of the year (week 1) is defined by ISO 8601 as the
+ first week with four or more of its days in the starting year.
+ Or equivalently, the week containing January 4.  Or equivalently,
+ the week with the year's first Thursday in it.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ The week number can be calculated by counting Thursdays.  Week N
+ contains the Nth Thursday of the year.
+ &lt;/p&gt;
+@return {Number} the ISO week number.
+*/
+getWeekNumber : function(  ) {},
+
+<span id='android-text-format-Time-method-format3339'>/**Return a string in the RFC 3339 format.
+</span> &lt;p&gt;
+ If allDay is true, expresses the time as Y-M-D&lt;/p&gt;
+ &lt;p&gt;
+ Otherwise, if the timezone is UTC, expresses the time as Y-M-D-T-H-M-S UTC&lt;/p&gt;
+ &lt;p&gt;
+ Otherwise the time is expressed the time as Y-M-D-T-H-M-S +- GMT&lt;/p&gt;
+@return {String} string in the RFC 3339 format.
+*/
+format3339 : function(  ) {},
+
+<span id='android-text-format-Time-method-isEpoch'>/**Returns true if the day of the given time is the epoch on the Julian Calendar
+</span> (January 1, 1970 on the Gregorian calendar).
+
+ &lt;p&gt;
+ This method can return an incorrect answer when the date / time fields have
+ been set to a local time that contradicts the available timezone information.
+@param {Object {Time}} time the time to test
+@return {Boolean} true if epoch.
+*/
+isEpoch : function(  ) {},
+
+<span id='android-text-format-Time-method-getJulianDay'>/**Computes the Julian day number for a point in time in a particular
+</span> timezone. The Julian day for a given date is the same for every
+ timezone. For example, the Julian day for July 1, 2008 is 2454649.
+
+ &lt;p&gt;Callers must pass the time in UTC millisecond (as can be returned
+ by {@link #toMillis}(boolean) or {@link #normalize}(boolean))
+ and the offset from UTC of the timezone in seconds (as might be in
+ {@link #gmtoff}).
+
+ &lt;p&gt;The Julian day is useful for testing if two events occur on the
+ same calendar date and for determining the relative time of an event
+ from the present (&quot;yesterday&quot;, &quot;3 days ago&quot;, etc.).
+@param {Number} millis the time in UTC milliseconds
+@param {Number} gmtoff the offset from UTC in seconds
+@return {Number} the Julian day
+*/
+getJulianDay : function(  ) {},
+
+<span id='android-text-format-Time-method-setJulianDay'>/**&lt;p&gt;Sets the time from the given Julian day number, which must be based on
+</span> the same timezone that is set in this Time object.  The &quot;gmtoff&quot; field
+ need not be initialized because the given Julian day may have a different
+ GMT offset than whatever is currently stored in this Time object anyway.
+ After this method returns all the fields will be normalized and the time
+ will be set to 12am at the beginning of the given Julian day.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ The only exception to this is if 12am does not exist for that day because
+ of daylight saving time.  For example, Cairo, Eqypt moves time ahead one
+ hour at 12am on April 25, 2008 and there are a few other places that
+ also change daylight saving time at 12am.  In those cases, the time
+ will be set to 1am.
+ &lt;/p&gt;
+@param {Number} julianDay the Julian day in the timezone for this Time object
+@return {Number} the UTC milliseconds for the beginning of the Julian day
+*/
+setJulianDay : function(  ) {},
+
+<span id='android-text-format-Time-method-getWeeksSinceEpochFromJulianDay'>/**Returns the week since {@link #EPOCH_JULIAN_DAY} (Jan 1, 1970) adjusted
+</span> for first day of week. This takes a julian day and the week start day and
+ calculates which week since {@link #EPOCH_JULIAN_DAY} that day occurs in,
+ starting at 0. *Do not* use this to compute the ISO week number for the
+ year.
+@param {Number} julianDay The julian day to calculate the week number for
+@param {Number} firstDayOfWeek Which week day is the first day of the week, see
+            {@link #SUNDAY}
+@return {Number} Weeks since the epoch
+*/
+getWeeksSinceEpochFromJulianDay : function(  ) {},
+
+<span id='android-text-format-Time-method-getJulianMondayFromWeeksSinceEpoch'>/**Takes a number of weeks since the epoch and calculates the Julian day of
+</span> the Monday for that week. This assumes that the week containing the
+ {@link #EPOCH_JULIAN_DAY} is considered week 0. It returns the Julian day
+ for the Monday week weeks after the Monday of the week containing the
+ epoch.
+@param {Number} week Number of weeks since the epoch
+@return {Number} The julian day for the Monday of the given week since the epoch
+*/
+getJulianMondayFromWeeksSinceEpoch : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

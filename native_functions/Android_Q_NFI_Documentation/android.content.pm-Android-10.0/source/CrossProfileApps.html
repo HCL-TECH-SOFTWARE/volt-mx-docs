@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-CrossProfileApps'>/**@class android.content.pm.CrossProfileApps
+</span>@extends java.lang.Object
+
+ Class for handling cross profile operations. Apps can use this class to interact with its
+ instance in any profile that is in {@link #getTargetUserProfiles}(). For example, app can
+ use this class to start its main activity in managed profile.
+*/
+var CrossProfileApps = {
+
+<span id='android-content-pm-CrossProfileApps-method-startMainActivity'>/**Starts the specified main activity of the caller package in the specified profile.
+</span>@param {Object {ComponentName}} component The ComponentName of the activity to launch, it must be exported and has
+        action {@link android.content.Intent#ACTION_MAIN}, category
+        {@link android.content.Intent#CATEGORY_LAUNCHER}. Otherwise, SecurityException will
+        be thrown.
+@param {Object {UserHandle}} targetUser The UserHandle of the profile, must be one of the users returned by
+        {@link #getTargetUserProfiles()}, otherwise a {@link SecurityException} will
+        be thrown.
+*/
+startMainActivity : function(  ) {},
+
+<span id='android-content-pm-CrossProfileApps-method-startActivity'>/**Starts the specified activity of the caller package in the specified profile. Unlike
+</span> {@link #startMainActivity}, this can start any activity of the caller package, not just
+ the main activity.
+ The caller must have the {@link android.Manifest.permission#INTERACT_ACROSS_PROFILES}
+ permission and both the caller and target user profiles must be in the same profile group.
+@param {Object {ComponentName}} component The ComponentName of the activity to launch. It must be exported.
+@param {Object {UserHandle}} targetUser The UserHandle of the profile, must be one of the users returned by
+        {@link #getTargetUserProfiles()}, otherwise a {@link SecurityException} will
+        be thrown.
+@hide 
+*/
+startActivity : function(  ) {},
+
+<span id='android-content-pm-CrossProfileApps-method-getTargetUserProfiles'>/**Return a list of user profiles that that the caller can use when calling other APIs in this
+</span> class.
+ &lt;p&gt;
+ A user profile would be considered as a valid target user profile, provided that:
+ &lt;ul&gt;
+ &lt;li&gt;It gets caller app installed&lt;/li&gt;
+ &lt;li&gt;It is not equal to the calling user&lt;/li&gt;
+ &lt;li&gt;It is in the same profile group of calling user profile&lt;/li&gt;
+ &lt;li&gt;It is enabled&lt;/li&gt;
+ &lt;/ul&gt;
+@see UserManager#getUserProfiles()
+*/
+getTargetUserProfiles : function(  ) {},
+
+<span id='android-content-pm-CrossProfileApps-method-getProfileSwitchingLabel'>/**Return a label that calling app can show to user for the semantic of profile switching --
+</span> launching its own activity in specified user profile. For example, it may return
+ &quot;Switch to work&quot; if the given user handle is the managed profile one.
+@param {Object {UserHandle}} userHandle The UserHandle of the target profile, must be one of the users returned by
+        {@link #getTargetUserProfiles()}, otherwise a {@link SecurityException} will
+        be thrown.
+@return {Object {java.lang.CharSequence}} a label that calling app can show user for the semantic of launching its own
+         activity in the specified user profile.
+@see #startMainActivity(ComponentName, UserHandle)
+*/
+getProfileSwitchingLabel : function(  ) {},
+
+<span id='android-content-pm-CrossProfileApps-method-getProfileSwitchingIconDrawable'>/**Return a drawable that calling app can show to user for the semantic of profile switching --
+</span> launching its own activity in specified user profile. For example, it may return a briefcase
+ icon if the given user handle is the managed profile one.
+@param {Object {UserHandle}} userHandle The UserHandle of the target profile, must be one of the users returned by
+        {@link #getTargetUserProfiles()}, otherwise a {@link SecurityException} will
+        be thrown.
+@return {Object {android.graphics.drawable.Drawable}} an icon that calling app can show user for the semantic of launching its own
+         activity in specified user profile.
+@see #startMainActivity(ComponentName, UserHandle)
+*/
+getProfileSwitchingIconDrawable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

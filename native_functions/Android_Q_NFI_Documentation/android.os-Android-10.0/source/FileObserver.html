@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-FileObserver'>/**@class android.os.FileObserver
+</span>@extends java.lang.Object
+
+ Monitors files (using &lt;a href=&quot;http://en.wikipedia.org/wiki/Inotify&quot;&gt;inotify&lt;/a&gt;)
+ to fire an event after files are accessed or changed by by any process on
+ the device (including this one).  FileObserver is an abstract class;
+ subclasses must implement the event handler {@link #onEvent(int, String)}.
+
+ &lt;p&gt;Each FileObserver instance can monitor multiple files or directories.
+ If a directory is monitored, events will be triggered for all files and
+ subdirectories inside the monitored directory.&lt;/p&gt;
+
+ &lt;p&gt;An event mask is used to specify which changes or actions to report.
+ Event type constants are used to describe the possible changes in the
+ event mask as well as what actually happened in event callbacks.&lt;/p&gt;
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Warning&lt;/b&gt;: If a FileObserver is garbage collected, it
+ will stop sending events.  To ensure you keep receiving events, you must
+ keep a reference to the FileObserver instance from some other live object.&lt;/p&gt;
+*/
+var FileObserver = {
+
+<span id='android-os-FileObserver-property-ACCESS'>/**Event type: Data was read from a file */
+</span>ACCESS : &quot;1&quot;,
+<span id='android-os-FileObserver-property-MODIFY'>/**Event type: Data was written to a file */
+</span>MODIFY : &quot;2&quot;,
+<span id='android-os-FileObserver-property-ATTRIB'>/**Event type: Metadata (permissions, owner, timestamp) was changed explicitly */
+</span>ATTRIB : &quot;4&quot;,
+<span id='android-os-FileObserver-property-CLOSE_WRITE'>/**Event type: Someone had a file or directory open for writing, and closed it */
+</span>CLOSE_WRITE : &quot;8&quot;,
+<span id='android-os-FileObserver-property-CLOSE_NOWRITE'>/**Event type: Someone had a file or directory open read-only, and closed it */
+</span>CLOSE_NOWRITE : &quot;16&quot;,
+<span id='android-os-FileObserver-property-OPEN'>/**Event type: A file or directory was opened */
+</span>OPEN : &quot;32&quot;,
+<span id='android-os-FileObserver-property-MOVED_FROM'>/**Event type: A file or subdirectory was moved from the monitored directory */
+</span>MOVED_FROM : &quot;64&quot;,
+<span id='android-os-FileObserver-property-MOVED_TO'>/**Event type: A file or subdirectory was moved to the monitored directory */
+</span>MOVED_TO : &quot;128&quot;,
+<span id='android-os-FileObserver-property-CREATE'>/**Event type: A new file or subdirectory was created under the monitored directory */
+</span>CREATE : &quot;256&quot;,
+<span id='android-os-FileObserver-property-DELETE'>/**Event type: A file was deleted from the monitored directory */
+</span>DELETE : &quot;512&quot;,
+<span id='android-os-FileObserver-property-DELETE_SELF'>/**Event type: The monitored file or directory was deleted; monitoring effectively stops */
+</span>DELETE_SELF : &quot;1024&quot;,
+<span id='android-os-FileObserver-property-MOVE_SELF'>/**Event type: The monitored file or directory was moved; monitoring continues */
+</span>MOVE_SELF : &quot;2048&quot;,
+<span id='android-os-FileObserver-property-ALL_EVENTS'>/**Event mask: All valid event types, combined */
+</span>ALL_EVENTS : &quot;4095&quot;,
+<span id='android-os-FileObserver-method-startWatching'>/**Start watching for events.  The monitored file or directory must exist at
+</span> this time, or else no events will be reported (even if it appears later).
+ If monitoring is already started, this call has no effect.
+*/
+startWatching : function(  ) {},
+
+<span id='android-os-FileObserver-method-stopWatching'>/**Stop watching for events.  Some events may be in process, so events
+</span> may continue to be reported even after this method completes.  If
+ monitoring is already stopped, this call has no effect.
+*/
+stopWatching : function(  ) {},
+
+<span id='android-os-FileObserver-method-onEvent'>/**The event handler, which must be implemented by subclasses.
+</span>
+ &lt;p class=&quot;note&quot;&gt;This method is invoked on a special FileObserver thread.
+ It runs independently of any threads, so take care to use appropriate
+ synchronization!  Consider using {@link android.os.Handler#post(Runnable)} to shift
+ event handling work to the main thread to avoid concurrency problems.&lt;/p&gt;
+
+ &lt;p&gt;Event handlers must not throw exceptions.&lt;/p&gt;
+@param {Number} event The type of event which happened
+@param {String} path The path, relative to the main monitored file or directory,
+     of the file or directory which triggered the event.  This value can
+     be {@code null} for certain events, such as {@link #MOVE_SELF}.
+*/
+onEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

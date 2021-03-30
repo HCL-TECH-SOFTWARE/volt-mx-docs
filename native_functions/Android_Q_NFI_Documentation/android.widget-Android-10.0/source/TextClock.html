@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-TextClock'>/**@class android.widget.TextClock
+</span>@extends android.widget.TextView
+
+ &lt;p&gt;&lt;code&gt;TextClock&lt;/code&gt; can display the current date and/or time as
+ a formatted string.&lt;/p&gt;
+
+ &lt;p&gt;This view honors the 24-hour format system setting. As such, it is
+ possible and recommended to provide two different formatting patterns:
+ one to display the date/time in 24-hour mode and one to display the
+ date/time in 12-hour mode. Most callers will want to use the defaults,
+ though, which will be appropriate for the user's locale.&lt;/p&gt;
+
+ &lt;p&gt;It is possible to determine whether the system is currently in
+ 24-hour mode by calling {@link #is24HourModeEnabled()}.&lt;/p&gt;
+
+ &lt;p&gt;The rules used by this widget to decide how to format the date and
+ time are the following:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;In 24-hour mode:
+         &lt;ul&gt;
+             &lt;li&gt;Use the value returned by {@link #getFormat24Hour()} when non-null&lt;/li&gt;
+             &lt;li&gt;Otherwise, use the value returned by {@link #getFormat12Hour()} when non-null&lt;/li&gt;
+             &lt;li&gt;Otherwise, use a default value appropriate for the user's locale, such as {@code h:mm a}&lt;/li&gt;
+         &lt;/ul&gt;
+     &lt;/li&gt;
+     &lt;li&gt;In 12-hour mode:
+         &lt;ul&gt;
+             &lt;li&gt;Use the value returned by {@link #getFormat12Hour()} when non-null&lt;/li&gt;
+             &lt;li&gt;Otherwise, use the value returned by {@link #getFormat24Hour()} when non-null&lt;/li&gt;
+             &lt;li&gt;Otherwise, use a default value appropriate for the user's locale, such as {@code HH:mm}&lt;/li&gt;
+         &lt;/ul&gt;
+     &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The {@link CharSequence} instances used as formatting patterns when calling either
+ {@link #setFormat24Hour(CharSequence)} or {@link #setFormat12Hour(CharSequence)} can
+ contain styling information. To do so, use a {@link android.text.Spanned} object.
+ Note that if you customize these strings, it is your responsibility to supply strings
+ appropriate for formatting dates and/or times in the user's locale.&lt;/p&gt;
+
+ @attr ref android.R.styleable#TextClock_format12Hour
+ @attr ref android.R.styleable#TextClock_format24Hour
+ @attr ref android.R.styleable#TextClock_timeZone
+*/
+var TextClock = {
+
+<span id='android-widget-TextClock-property-DEFAULT_FORMAT_12_HOUR'>/** The default formatting pattern in 12-hour mode. This pattern is used
+</span> if {@link #setFormat12Hour(CharSequence)} is called with a null pattern
+ or if no pattern was specified when creating an instance of this class.
+
+ This default pattern shows only the time, hours and minutes, and an am/pm
+ indicator.
+
+ @see #setFormat12Hour(CharSequence)
+ @see #getFormat12Hour()
+
+ @deprecated Let the system use locale-appropriate defaults instead.
+*/
+DEFAULT_FORMAT_12_HOUR : &quot;null&quot;,
+<span id='android-widget-TextClock-property-DEFAULT_FORMAT_24_HOUR'>/** The default formatting pattern in 24-hour mode. This pattern is used
+</span> if {@link #setFormat24Hour(CharSequence)} is called with a null pattern
+ or if no pattern was specified when creating an instance of this class.
+
+ This default pattern shows only the time, hours and minutes.
+
+ @see #setFormat24Hour(CharSequence)
+ @see #getFormat24Hour()
+
+ @deprecated Let the system use locale-appropriate defaults instead.
+*/
+DEFAULT_FORMAT_24_HOUR : &quot;null&quot;,
+<span id='android-widget-TextClock-method-getFormat12Hour'>/**Returns the formatting pattern used to display the date and/or time
+</span> in 12-hour mode. The formatting pattern syntax is described in
+ {@link DateFormat}.
+@return {Object {java.lang.CharSequence}} A {@link CharSequence} or null.
+@see #setFormat12Hour(CharSequence)
+@see #is24HourModeEnabled()
+*/
+getFormat12Hour : function(  ) {},
+
+<span id='android-widget-TextClock-method-setFormat12Hour'>/**&lt;p&gt;Specifies the formatting pattern used to display the date and/or time
+</span> in 12-hour mode. The formatting pattern syntax is described in
+ {@link DateFormat}.&lt;/p&gt;
+
+ &lt;p&gt;If this pattern is set to null, {@link #getFormat24Hour()} will be used
+ even in 12-hour mode. If both 24-hour and 12-hour formatting patterns
+ are set to null, the default pattern for the current locale will be used
+ instead.&lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; if styling is not needed, it is highly recommended
+ you supply a format string generated by
+ {@link DateFormat#getBestDateTimePattern(java.util.Locale, String)}. This method
+ takes care of generating a format string adapted to the desired locale.&lt;/p&gt;
+@param {Object {CharSequence}} format A date/time formatting pattern as described in {@link DateFormat}
+@see #getFormat12Hour()
+@see #is24HourModeEnabled()
+@see DateFormat#getBestDateTimePattern(java.util.Locale, String)
+@see DateFormat
+@attr ref android.R.styleable#TextClock_format12Hour
+*/
+setFormat12Hour : function(  ) {},
+
+<span id='android-widget-TextClock-method-setContentDescriptionFormat12Hour'>/**Like setFormat12Hour, but for the content description.
+</span>@hide 
+*/
+setContentDescriptionFormat12Hour : function(  ) {},
+
+<span id='android-widget-TextClock-method-getFormat24Hour'>/**Returns the formatting pattern used to display the date and/or time
+</span> in 24-hour mode. The formatting pattern syntax is described in
+ {@link DateFormat}.
+@return {Object {java.lang.CharSequence}} A {@link CharSequence} or null.
+@see #setFormat24Hour(CharSequence)
+@see #is24HourModeEnabled()
+*/
+getFormat24Hour : function(  ) {},
+
+<span id='android-widget-TextClock-method-setFormat24Hour'>/**&lt;p&gt;Specifies the formatting pattern used to display the date and/or time
+</span> in 24-hour mode. The formatting pattern syntax is described in
+ {@link DateFormat}.&lt;/p&gt;
+
+ &lt;p&gt;If this pattern is set to null, {@link #getFormat24Hour()} will be used
+ even in 12-hour mode. If both 24-hour and 12-hour formatting patterns
+ are set to null, the default pattern for the current locale will be used
+ instead.&lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; if styling is not needed, it is highly recommended
+ you supply a format string generated by
+ {@link DateFormat#getBestDateTimePattern(java.util.Locale, String)}. This method
+ takes care of generating a format string adapted to the desired locale.&lt;/p&gt;
+@param {Object {CharSequence}} format A date/time formatting pattern as described in {@link DateFormat}
+@see #getFormat24Hour()
+@see #is24HourModeEnabled()
+@see DateFormat#getBestDateTimePattern(java.util.Locale, String)
+@see DateFormat
+@attr ref android.R.styleable#TextClock_format24Hour
+*/
+setFormat24Hour : function(  ) {},
+
+<span id='android-widget-TextClock-method-setContentDescriptionFormat24Hour'>/**Like setFormat24Hour, but for the content description.
+</span>@hide 
+*/
+setContentDescriptionFormat24Hour : function(  ) {},
+
+<span id='android-widget-TextClock-method-setShowCurrentUserTime'>/**Sets whether this clock should always track the current user and not the user of the
+</span> current process. This is used for single instance processes like the systemUI who need
+ to display time for different users.
+@hide 
+*/
+setShowCurrentUserTime : function(  ) {},
+
+<span id='android-widget-TextClock-method-refresh'>/**Update the displayed time if necessary and invalidate the view.
+</span>@hide 
+*/
+refresh : function(  ) {},
+
+<span id='android-widget-TextClock-method-is24HourModeEnabled'>/**Indicates whether the system is currently using the 24-hour mode.
+</span>
+ When the system is in 24-hour mode, this view will use the pattern
+ returned by {@link #getFormat24Hour()}. In 12-hour mode, the pattern
+ returned by {@link #getFormat12Hour()} is used instead.
+
+ If either one of the formats is null, the other format is used. If
+ both formats are null, the default formats for the current locale are used.
+@return {Boolean} true if time should be displayed in 24-hour format, false if it
+         should be displayed in 12-hour format.
+@see #setFormat12Hour(CharSequence)
+@see #getFormat12Hour()
+@see #setFormat24Hour(CharSequence)
+@see #getFormat24Hour()
+*/
+is24HourModeEnabled : function(  ) {},
+
+<span id='android-widget-TextClock-method-getTimeZone'>/**Indicates which time zone is currently used by this view.
+</span>@return {String} The ID of the current time zone or null if the default time zone,
+         as set by the user, must be used
+@see TimeZone
+@see java.util.TimeZone#getAvailableIDs()
+@see #setTimeZone(String)
+*/
+getTimeZone : function(  ) {},
+
+<span id='android-widget-TextClock-method-setTimeZone'>/**Sets the specified time zone to use in this clock. When the time zone
+</span> is set through this method, system time zone changes (when the user
+ sets the time zone in settings for instance) will be ignored.
+@param {String} timeZone The desired time zone's ID as specified in {@link TimeZone}
+                 or null to user the time zone specified by the user
+                 (system time zone)
+@see #getTimeZone()
+@see java.util.TimeZone#getAvailableIDs()
+@see TimeZone#getTimeZone(String)
+@attr ref android.R.styleable#TextClock_timeZone
+*/
+setTimeZone : function(  ) {},
+
+<span id='android-widget-TextClock-method-getFormat'>/**Returns the current format string. Always valid after constructor has
+</span> finished, and will never be {@code null}.
+@hide 
+*/
+getFormat : function(  ) {},
+
+<span id='android-widget-TextClock-method-onVisibilityAggregated'>/**
+</span>*/
+onVisibilityAggregated : function(  ) {},
+
+<span id='android-widget-TextClock-method-disableClockTick'>/**Used by tests to stop the clock tick from updating the text.
+</span>@hide 
+*/
+disableClockTick : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

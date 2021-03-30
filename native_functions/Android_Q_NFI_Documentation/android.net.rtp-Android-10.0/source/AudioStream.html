@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-rtp-AudioStream'>/**@class android.net.rtp.AudioStream
+</span>@extends android.net.rtp.RtpStream
+
+ An AudioStream is a {@link android.net.rtp.RtpStream} which carrys audio payloads over
+ Real-time Transport Protocol (RTP). Two different classes are developed in
+ order to support various usages such as audio conferencing. An AudioStream
+ represents a remote endpoint which consists of a network mapping and a
+ configured {@link android.net.rtp.AudioCodec}. On the other side, An {@link android.net.rtp.AudioGroup}
+ represents a local endpoint which mixes all the AudioStreams and optionally
+ interacts with the speaker and the microphone at the same time. The simplest
+ usage includes one for each endpoints. For other combinations, developers
+ should be aware of the limitations described in {@link android.net.rtp.AudioGroup}.
+
+ &lt;p&gt;An AudioStream becomes busy when it joins an AudioGroup. In this case most
+ of the setter methods are disabled. This is designed to ease the task of
+ managing native resources. One can always make an AudioStream leave its
+ AudioGroup by calling {@link #join}(AudioGroup) with {@code null} and put it
+ back after the modification is done.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;Using this class requires
+ {@link android.Manifest.permission#INTERNET} permission.&lt;/p&gt;
+
+ @see RtpStream
+ @see AudioGroup
+*/
+var AudioStream = {
+
+<span id='android-net-rtp-AudioStream-method-isBusy'>/**Returns {@code true} if the stream has already joined an
+</span> {@link android.net.rtp.AudioGroup}.
+*/
+isBusy : function(  ) {},
+
+<span id='android-net-rtp-AudioStream-method-getGroup'>/**Returns the joined {@link android.net.rtp.AudioGroup}.
+</span>*/
+getGroup : function(  ) {},
+
+<span id='android-net-rtp-AudioStream-method-join'>/**Joins an {@link android.net.rtp.AudioGroup}. Each stream can join only one group at a
+</span> time. The group can be changed by passing a different one or removed
+ by calling this method with {@code null}.
+@param {Object {AudioGroup}} group The AudioGroup to join or {@code null} to leave.
+@throws IllegalStateException if the stream is not properly configured.
+@see AudioGroup
+*/
+join : function(  ) {},
+
+<span id='android-net-rtp-AudioStream-method-getCodec'>/**Returns the {@link android.net.rtp.AudioCodec}, or {@code null} if it is not set.
+</span>@see #setCodec(AudioCodec)
+*/
+getCodec : function(  ) {},
+
+<span id='android-net-rtp-AudioStream-method-setCodec'>/**Sets the {@link android.net.rtp.AudioCodec}.
+</span>@param {Object {AudioCodec}} codec The AudioCodec to be used.
+@throws IllegalArgumentException if its type is used by DTMF.
+@throws IllegalStateException if the stream is busy.
+*/
+setCodec : function(  ) {},
+
+<span id='android-net-rtp-AudioStream-method-getDtmfType'>/**Returns the RTP payload type for dual-tone multi-frequency (DTMF) digits,
+</span> or {@code -1} if it is not enabled.
+@see #setDtmfType(int)
+*/
+getDtmfType : function(  ) {},
+
+<span id='android-net-rtp-AudioStream-method-setDtmfType'>/**Sets the RTP payload type for dual-tone multi-frequency (DTMF) digits.
+</span> The primary usage is to send digits to the remote gateway to perform
+ certain tasks, such as second-stage dialing. According to RFC 2833, the
+ RTP payload type for DTMF is assigned dynamically, so it must be in the
+ range of 96 and 127. One can use {@code -1} to disable DTMF and free up
+ the previous assigned type. This method cannot be called when the stream
+ already joined an {@link android.net.rtp.AudioGroup}.
+@param {Number} type The RTP payload type to be used or {@code -1} to disable it.
+@throws IllegalArgumentException if the type is invalid or used by codec.
+@throws IllegalStateException if the stream is busy.
+@see AudioGroup#sendDtmf(int)
+*/
+setDtmfType : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

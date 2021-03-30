@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-soundtrigger-SoundTriggerModule'>/**@class android.hardware.soundtrigger.SoundTriggerModule
+</span>@extends java.lang.Object
+
+ The SoundTriggerModule provides APIs to control sound models and sound detection
+ on a given sound trigger hardware module.
+
+ @hide
+*/
+var SoundTriggerModule = {
+
+<span id='android-hardware-soundtrigger-SoundTriggerModule-method-detach'>/**Detach from this module. The {@link android.hardware.soundtrigger.SoundTrigger.StatusListener} callback will not be called
+</span> anymore and associated resources will be released.
+*/
+detach : function(  ) {},
+
+<span id='android-hardware-soundtrigger-SoundTriggerModule-method-loadSoundModel'>/**Load a {@link android.hardware.soundtrigger.SoundTrigger.SoundModel} to the hardware. A sound model must be loaded in
+</span> order to start listening to a key phrase in this model.
+@param {Object {SoundTrigger.SoundModel}} model The sound model to load.
+@param {Object {int[]}} soundModelHandle an array of int where the sound model handle will be returned.
+@return {Number} - {@link SoundTrigger#STATUS_OK} in case of success
+         - {@link SoundTrigger#STATUS_ERROR} in case of unspecified error
+         - {@link SoundTrigger#STATUS_PERMISSION_DENIED} if the caller does not have
+         system permission
+         - {@link SoundTrigger#STATUS_NO_INIT} if the native service cannot be reached
+         - {@link SoundTrigger#STATUS_BAD_VALUE} if parameters are invalid
+         - {@link SoundTrigger#STATUS_DEAD_OBJECT} if the binder transaction to the native
+         service fails
+         - {@link SoundTrigger#STATUS_INVALID_OPERATION} if the call is out of sequence
+*/
+loadSoundModel : function(  ) {},
+
+<span id='android-hardware-soundtrigger-SoundTriggerModule-method-unloadSoundModel'>/**Unload a {@link android.hardware.soundtrigger.SoundTrigger.SoundModel} and abort any pendiong recognition
+</span>@param {Number} soundModelHandle The sound model handle
+@return {Number} - {@link SoundTrigger#STATUS_OK} in case of success
+         - {@link SoundTrigger#STATUS_ERROR} in case of unspecified error
+         - {@link SoundTrigger#STATUS_PERMISSION_DENIED} if the caller does not have
+         system permission
+         - {@link SoundTrigger#STATUS_NO_INIT} if the native service cannot be reached
+         - {@link SoundTrigger#STATUS_BAD_VALUE} if the sound model handle is invalid
+         - {@link SoundTrigger#STATUS_DEAD_OBJECT} if the binder transaction to the native
+         service fails
+*/
+unloadSoundModel : function(  ) {},
+
+<span id='android-hardware-soundtrigger-SoundTriggerModule-method-startRecognition'>/**Start listening to all key phrases in a {@link android.hardware.soundtrigger.SoundTrigger.SoundModel}.
+</span> Recognition must be restarted after each callback (success or failure) received on
+ the {@link android.hardware.soundtrigger.SoundTrigger.StatusListener}.
+@param {Number} soundModelHandle The sound model handle to start listening to
+@param {Object {SoundTrigger.RecognitionConfig}} config contains configuration information for this recognition request:
+  recognition mode, keyphrases, users, minimum confidence levels...
+@return {Number} - {@link SoundTrigger#STATUS_OK} in case of success
+         - {@link SoundTrigger#STATUS_ERROR} in case of unspecified error
+         - {@link SoundTrigger#STATUS_PERMISSION_DENIED} if the caller does not have
+         system permission
+         - {@link SoundTrigger#STATUS_NO_INIT} if the native service cannot be reached
+         - {@link SoundTrigger#STATUS_BAD_VALUE} if the sound model handle is invalid
+         - {@link SoundTrigger#STATUS_DEAD_OBJECT} if the binder transaction to the native
+         service fails
+         - {@link SoundTrigger#STATUS_INVALID_OPERATION} if the call is out of sequence
+*/
+startRecognition : function(  ) {},
+
+<span id='android-hardware-soundtrigger-SoundTriggerModule-method-stopRecognition'>/**Stop listening to all key phrases in a {@link android.hardware.soundtrigger.SoundTrigger.SoundModel}
+</span>@param {Number} soundModelHandle The sound model handle to stop listening to
+@return {Number} - {@link SoundTrigger#STATUS_OK} in case of success
+         - {@link SoundTrigger#STATUS_ERROR} in case of unspecified error
+         - {@link SoundTrigger#STATUS_PERMISSION_DENIED} if the caller does not have
+         system permission
+         - {@link SoundTrigger#STATUS_NO_INIT} if the native service cannot be reached
+         - {@link SoundTrigger#STATUS_BAD_VALUE} if the sound model handle is invalid
+         - {@link SoundTrigger#STATUS_DEAD_OBJECT} if the binder transaction to the native
+         service fails
+         - {@link SoundTrigger#STATUS_INVALID_OPERATION} if the call is out of sequence
+*/
+stopRecognition : function(  ) {},
+
+<span id='android-hardware-soundtrigger-SoundTriggerModule-method-getModelState'>/**Get the current state of a {@link android.hardware.soundtrigger.SoundTrigger.SoundModel}.
+</span> The state will be returned asynchronously as a {@link android.hardware.soundtrigger.SoundTrigger#RecognitionEvent}
+ in the callback registered in the {@link android.hardware.soundtrigger.SoundTrigger.startRecognition} method.
+@param {Number} soundModelHandle The sound model handle indicating which model's state to return
+@return {Number} - {@link SoundTrigger#STATUS_OK} in case of success
+         - {@link SoundTrigger#STATUS_ERROR} in case of unspecified error
+         - {@link SoundTrigger#STATUS_PERMISSION_DENIED} if the caller does not have
+         system permission
+         - {@link SoundTrigger#STATUS_NO_INIT} if the native service cannot be reached
+         - {@link SoundTrigger#STATUS_BAD_VALUE} if the sound model handle is invalid
+         - {@link SoundTrigger#STATUS_DEAD_OBJECT} if the binder transaction to the native
+         service fails
+         - {@link SoundTrigger#STATUS_INVALID_OPERATION} if the call is out of sequence
+*/
+getModelState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

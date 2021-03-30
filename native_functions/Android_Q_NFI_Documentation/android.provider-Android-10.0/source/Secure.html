@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Settings-Secure'>/**@class android.provider.Settings.Secure
+</span>@extends android.provider.Settings.NameValueTable
+
+ Secure system settings, containing system preferences that applications
+ can read but are not allowed to write.  These are for preferences that
+ the user must explicitly modify through the system UI or specialized
+ APIs for those values, not modified directly by applications.
+*/
+var Secure = {
+
+<span id='android-provider-Settings-Secure-property-CONTENT_URI'>/** The content:// style URL for this table
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Settings-Secure-property-DEVELOPMENT_SETTINGS_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Global#DEVELOPMENT_SETTINGS_ENABLED}
+</span> instead
+*/
+DEVELOPMENT_SETTINGS_ENABLED : &quot;development_settings_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-BUGREPORT_IN_POWER_MENU'>/** When the user has enable the option to have a &quot;bug report&quot; command
+</span> in the power menu.
+ @deprecated Use {@link android.provider.Settings.Global#BUGREPORT_IN_POWER_MENU} instead
+ @hide
+*/
+BUGREPORT_IN_POWER_MENU : &quot;bugreport_in_power_menu&quot;,
+<span id='android-provider-Settings-Secure-property-ADB_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Global#ADB_ENABLED} instead
+</span>*/
+ADB_ENABLED : &quot;adb_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ALLOW_MOCK_LOCATION'>/** Setting to allow mock locations and location provider status to be injected into the
+</span> LocationManager service for testing purposes during application development.  These
+ locations and status values  override actual location and status information generated
+ by network, gps, or other location providers.
+
+ @deprecated This settings is not used anymore.
+*/
+ALLOW_MOCK_LOCATION : &quot;mock_location&quot;,
+<span id='android-provider-Settings-Secure-property-ODI_CAPTIONS_ENABLED'>/** Setting to indicate that on device captions are enabled.
+</span>
+ @hide
+*/
+ODI_CAPTIONS_ENABLED : &quot;odi_captions_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ANDROID_ID'>/** On Android 8.0 (API level 26) and higher versions of the platform,
+</span> a 64-bit number (expressed as a hexadecimal string), unique to
+ each combination of app-signing key, user, and device.
+ Values of {@code ANDROID_ID} are scoped by signing key and user.
+ The value may change if a factory reset is performed on the
+ device or if an APK signing key changes.
+
+ For more information about how the platform handles {@code ANDROID_ID}
+ in Android 8.0 (API level 26) and higher, see &lt;a
+ href=&quot;{@docRoot}about/versions/oreo/android-8.0-changes.html#privacy-all&quot;&gt;
+ Android 8.0 Behavior Changes&lt;/a&gt;.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; For apps that were installed
+ prior to updating the device to a version of Android 8.0
+ (API level 26) or higher, the value of {@code ANDROID_ID} changes
+ if the app is uninstalled and then reinstalled after the OTA.
+ To preserve values across uninstalls after an OTA to Android 8.0
+ or higher, developers can use
+ &lt;a href=&quot;{@docRoot}guide/topics/data/keyvaluebackup.html&quot;&gt;
+ Key/Value Backup&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;In versions of the platform lower than Android 8.0 (API level 26),
+ a 64-bit number (expressed as a hexadecimal string) that is randomly
+ generated when the user first sets up the device and should remain
+ constant for the lifetime of the user's device.
+
+ On devices that have
+ &lt;a href=&quot;{@docRoot}about/versions/android-4.2.html#MultipleUsers&quot;&gt;
+ multiple users&lt;/a&gt;, each user appears as a
+ completely separate device, so the {@code ANDROID_ID} value is
+ unique to each user.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; If the caller is an Instant App the ID is scoped
+ to the Instant App, it is generated when the Instant App is first installed and reset if
+ the user clears the Instant App.
+*/
+ANDROID_ID : &quot;android_id&quot;,
+<span id='android-provider-Settings-Secure-property-BLUETOOTH_ON'>/** @deprecated Use {@link android.provider.Settings.Global#BLUETOOTH_ON} instead
+</span>*/
+BLUETOOTH_ON : &quot;bluetooth_on&quot;,
+<span id='android-provider-Settings-Secure-property-DATA_ROAMING'>/** @deprecated Use {@link android.provider.Settings.Global#DATA_ROAMING} instead
+</span>*/
+DATA_ROAMING : &quot;data_roaming&quot;,
+<span id='android-provider-Settings-Secure-property-DEFAULT_INPUT_METHOD'>/** Setting to record the input method used by default, holding the ID
+</span> of the desired method.
+*/
+DEFAULT_INPUT_METHOD : &quot;default_input_method&quot;,
+<span id='android-provider-Settings-Secure-property-SELECTED_INPUT_METHOD_SUBTYPE'>/** Setting to record the input method subtype used by default, holding the ID
+</span> of the desired method.
+*/
+SELECTED_INPUT_METHOD_SUBTYPE : &quot;selected_input_method_subtype&quot;,
+<span id='android-provider-Settings-Secure-property-INPUT_METHODS_SUBTYPE_HISTORY'>/** Setting to record the history of input method subtype, holding the pair of ID of IME
+</span> and its last used subtype.
+ @hide
+*/
+INPUT_METHODS_SUBTYPE_HISTORY : &quot;input_methods_subtype_history&quot;,
+<span id='android-provider-Settings-Secure-property-INPUT_METHOD_SELECTOR_VISIBILITY'>/** Setting to record the visibility of input method selector
+</span>*/
+INPUT_METHOD_SELECTOR_VISIBILITY : &quot;input_method_selector_visibility&quot;,
+<span id='android-provider-Settings-Secure-property-VOICE_INTERACTION_SERVICE'>/** The currently selected voice interaction service flattened ComponentName.
+</span> @hide
+*/
+VOICE_INTERACTION_SERVICE : &quot;voice_interaction_service&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_SERVICE'>/** The currently selected autofill service flattened ComponentName.
+</span> @hide
+*/
+AUTOFILL_SERVICE : &quot;autofill_service&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_FEATURE_FIELD_CLASSIFICATION'>/** Boolean indicating if Autofill supports field classification.
+</span>
+ @see android.service.autofill.AutofillService
+
+ @hide
+*/
+AUTOFILL_FEATURE_FIELD_CLASSIFICATION : &quot;autofill_field_classification&quot;,
+<span id='android-provider-Settings-Secure-property-DARK_MODE_DIALOG_SEEN'>/** Boolean indicating if the dark mode dialog shown on first toggle has been seen.
+</span>
+ @hide
+*/
+DARK_MODE_DIALOG_SEEN : &quot;dark_mode_dialog_seen&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_USER_DATA_MAX_USER_DATA_SIZE'>/** Defines value returned by {@link android.service.autofill.UserData#getMaxUserDataSize()}.
+</span>
+ @hide
+*/
+AUTOFILL_USER_DATA_MAX_USER_DATA_SIZE : &quot;autofill_user_data_max_user_data_size&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_USER_DATA_MAX_FIELD_CLASSIFICATION_IDS_SIZE'>/** Defines value returned by
+</span> {@link android.service.autofill.UserData#getMaxFieldClassificationIdsSize()}.
+
+ @hide
+*/
+AUTOFILL_USER_DATA_MAX_FIELD_CLASSIFICATION_IDS_SIZE : &quot;autofill_user_data_max_field_classification_size&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_USER_DATA_MAX_CATEGORY_COUNT'>/** Defines value returned by
+</span> {@link android.service.autofill.UserData#getMaxCategoryCount()}.
+
+ @hide
+*/
+AUTOFILL_USER_DATA_MAX_CATEGORY_COUNT : &quot;autofill_user_data_max_category_count&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_USER_DATA_MAX_VALUE_LENGTH'>/** Defines value returned by {@link android.service.autofill.UserData#getMaxValueLength()}.
+</span>
+ @hide
+*/
+AUTOFILL_USER_DATA_MAX_VALUE_LENGTH : &quot;autofill_user_data_max_value_length&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_USER_DATA_MIN_VALUE_LENGTH'>/** Defines value returned by {@link android.service.autofill.UserData#getMinValueLength()}.
+</span>
+ @hide
+*/
+AUTOFILL_USER_DATA_MIN_VALUE_LENGTH : &quot;autofill_user_data_min_value_length&quot;,
+<span id='android-provider-Settings-Secure-property-CONTENT_CAPTURE_ENABLED'>/** Defines whether Content Capture is enabled for the user.
+</span>
+ &lt;p&gt;Type: {@code int} ({@code 0} for disabled, {@code 1} for enabled).
+ &lt;p&gt;Default: enabled
+
+ @hide
+*/
+CONTENT_CAPTURE_ENABLED : &quot;content_capture_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-DEVICE_PROVISIONED'>/** @deprecated Use {@link android.provider.Settings.Global#DEVICE_PROVISIONED} instead
+</span>*/
+DEVICE_PROVISIONED : &quot;device_provisioned&quot;,
+<span id='android-provider-Settings-Secure-property-USER_SETUP_COMPLETE'>/** Indicates whether the current user has completed setup via the setup wizard.
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+USER_SETUP_COMPLETE : &quot;user_setup_complete&quot;,
+<span id='android-provider-Settings-Secure-property-USER_SETUP_PERSONALIZATION_NOT_STARTED'>/** Indicates that the user has not started setup personalization.
+</span> One of the possible states for {@link #USER_SETUP_PERSONALIZATION_STATE}.
+
+ @hide
+*/
+USER_SETUP_PERSONALIZATION_NOT_STARTED : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-USER_SETUP_PERSONALIZATION_STARTED'>/** Indicates that the user has not yet completed setup personalization.
+</span> One of the possible states for {@link #USER_SETUP_PERSONALIZATION_STATE}.
+
+ @hide
+*/
+USER_SETUP_PERSONALIZATION_STARTED : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-USER_SETUP_PERSONALIZATION_PAUSED'>/** Indicates that the user has snoozed personalization and will complete it later.
+</span> One of the possible states for {@link #USER_SETUP_PERSONALIZATION_STATE}.
+
+ @hide
+*/
+USER_SETUP_PERSONALIZATION_PAUSED : &quot;2&quot;,
+<span id='android-provider-Settings-Secure-property-USER_SETUP_PERSONALIZATION_COMPLETE'>/** Indicates that the user has completed setup personalization.
+</span> One of the possible states for {@link #USER_SETUP_PERSONALIZATION_STATE}.
+
+ @hide
+*/
+USER_SETUP_PERSONALIZATION_COMPLETE : &quot;10&quot;,
+<span id='android-provider-Settings-Secure-property-USER_SETUP_PERSONALIZATION_STATE'>/** Defines the user's current state of device personalization.
+</span> The possible states are defined in {@link android.provider.Secure.UserSetupPersonalization}.
+
+ @hide
+*/
+USER_SETUP_PERSONALIZATION_STATE : &quot;user_setup_personalization_state&quot;,
+<span id='android-provider-Settings-Secure-property-TV_USER_SETUP_COMPLETE'>/** Whether the current user has been set up via setup wizard (0 = false, 1 = true)
+</span> This value differs from USER_SETUP_COMPLETE in that it can be reset back to 0
+ in case SetupWizard has been re-enabled on TV devices.
+
+ @hide
+*/
+TV_USER_SETUP_COMPLETE : &quot;tv_user_setup_complete&quot;,
+<span id='android-provider-Settings-Secure-property-COMPLETED_CATEGORY_PREFIX'>/** The prefix for a category name that indicates whether a suggested action from that
+</span> category was marked as completed.
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+COMPLETED_CATEGORY_PREFIX : &quot;suggested.completed_category.&quot;,
+<span id='android-provider-Settings-Secure-property-ENABLED_INPUT_METHODS'>/** List of input methods that are currently enabled.  This is a string
+</span> containing the IDs of all enabled input methods, each ID separated
+ by ':'.
+
+ Format like &quot;ime0;subtype0;subtype1;subtype2:ime1:ime2;subtype0&quot;
+ where imeId is ComponentName and subtype is int32.
+*/
+ENABLED_INPUT_METHODS : &quot;enabled_input_methods&quot;,
+<span id='android-provider-Settings-Secure-property-DISABLED_SYSTEM_INPUT_METHODS'>/** List of system input methods that are currently disabled.  This is a string
+</span> containing the IDs of all disabled input methods, each ID separated
+ by ':'.
+ @hide
+*/
+DISABLED_SYSTEM_INPUT_METHODS : &quot;disabled_system_input_methods&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_IME_WITH_HARD_KEYBOARD'>/** Whether to show the IME when a hard keyboard is connected. This is a boolean that
+</span> determines if the IME should be shown when a hard keyboard is attached.
+ @hide
+*/
+SHOW_IME_WITH_HARD_KEYBOARD : &quot;show_ime_with_hard_keyboard&quot;,
+<span id='android-provider-Settings-Secure-property-HTTP_PROXY'>/** Host name and port for global http proxy. Uses ':' seperator for
+</span> between host and port.
+
+ @deprecated Use {@link android.provider.Settings.Global#HTTP_PROXY}
+*/
+HTTP_PROXY : &quot;http_proxy&quot;,
+<span id='android-provider-Settings-Secure-property-ALWAYS_ON_VPN_APP'>/** Package designated as always-on VPN provider.
+</span>
+ @hide
+*/
+ALWAYS_ON_VPN_APP : &quot;always_on_vpn_app&quot;,
+<span id='android-provider-Settings-Secure-property-ALWAYS_ON_VPN_LOCKDOWN'>/** Whether to block networking outside of VPN connections while always-on is set.
+</span> @see #ALWAYS_ON_VPN_APP
+
+ @hide
+*/
+ALWAYS_ON_VPN_LOCKDOWN : &quot;always_on_vpn_lockdown&quot;,
+<span id='android-provider-Settings-Secure-property-ALWAYS_ON_VPN_LOCKDOWN_WHITELIST'>/** Comma separated list of packages that are allowed to access the network when VPN is in
+</span> lockdown mode but not running.
+ @see #ALWAYS_ON_VPN_LOCKDOWN
+
+ @hide
+*/
+ALWAYS_ON_VPN_LOCKDOWN_WHITELIST : &quot;always_on_vpn_lockdown_whitelist&quot;,
+<span id='android-provider-Settings-Secure-property-INSTALL_NON_MARKET_APPS'>/** Whether applications can be installed for this user via the system's
+</span> {@link Intent#ACTION_INSTALL_PACKAGE} mechanism.
+
+ &lt;p&gt;1 = permit app installation via the system package installer intent
+ &lt;p&gt;0 = do not allow use of the package installer
+ @deprecated Starting from {@link android.os.Build.VERSION_CODES#O}, apps should use
+ {@link PackageManager#canRequestPackageInstalls()}
+ @see PackageManager#canRequestPackageInstalls()
+*/
+INSTALL_NON_MARKET_APPS : &quot;install_non_market_apps&quot;,
+<span id='android-provider-Settings-Secure-property-UNKNOWN_SOURCES_DEFAULT_REVERSED'>/** A flag to tell {@link com.android.server.devicepolicy.DevicePolicyManagerService} that
+</span> the default for {@link #INSTALL_NON_MARKET_APPS} is reversed for this user on OTA. So it
+ can set the restriction {@link android.os.UserManager#DISALLOW_INSTALL_UNKNOWN_SOURCES}
+ on behalf of the profile owner if needed to make the change transparent for profile
+ owners.
+
+ @hide
+*/
+UNKNOWN_SOURCES_DEFAULT_REVERSED : &quot;unknown_sources_default_reversed&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_PROVIDERS_ALLOWED'>/** Comma-separated list of location providers that are enabled. Do not rely on this value
+</span> being present or correct, or on ContentObserver notifications on the corresponding Uri.
+
+ @deprecated The preferred methods for checking provider status and listening for changes
+ are via {@link LocationManager#isProviderEnabled(String)} and
+ {@link LocationManager#PROVIDERS_CHANGED_ACTION}.
+*/
+LOCATION_PROVIDERS_ALLOWED : &quot;location_providers_allowed&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_MODE'>/** The current location mode of the device. Do not rely on this value being present or on
+</span> ContentObserver notifications on the corresponding Uri.
+
+ @deprecated The preferred methods for checking location mode and listening for changes
+ are via {@link LocationManager#isLocationEnabled()} and
+ {@link LocationManager#MODE_CHANGED_ACTION}.
+*/
+LOCATION_MODE : &quot;location_mode&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_CHANGER'>/** The App or module that changes the location mode.
+</span> @hide
+*/
+LOCATION_CHANGER : &quot;location_changer&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_CHANGER_UNKNOWN'>/** The location changer is unknown or unable to detect.
+</span> @hide
+*/
+LOCATION_CHANGER_UNKNOWN : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_CHANGER_SYSTEM_SETTINGS'>/** Location settings in system settings.
+</span> @hide
+*/
+LOCATION_CHANGER_SYSTEM_SETTINGS : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_CHANGER_QUICK_SETTINGS'>/** The location icon in drop down notification drawer.
+</span> @hide
+*/
+LOCATION_CHANGER_QUICK_SETTINGS : &quot;2&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_MODE_OFF'>/** Location mode is off.
+</span>*/
+LOCATION_MODE_OFF : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_MODE_SENSORS_ONLY'>/** This mode no longer has any distinct meaning, but is interpreted as the location mode is
+</span> on.
+
+ @deprecated See {@link #LOCATION_MODE}.
+*/
+LOCATION_MODE_SENSORS_ONLY : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_MODE_BATTERY_SAVING'>/** This mode no longer has any distinct meaning, but is interpreted as the location mode is
+</span> on.
+
+ @deprecated See {@link #LOCATION_MODE}.
+*/
+LOCATION_MODE_BATTERY_SAVING : &quot;2&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_MODE_HIGH_ACCURACY'>/** This mode no longer has any distinct meaning, but is interpreted as the location mode is
+</span> on.
+
+ @deprecated See {@link #LOCATION_MODE}.
+*/
+LOCATION_MODE_HIGH_ACCURACY : &quot;3&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_MODE_ON'>/** Location mode is on.
+</span>
+ @hide
+*/
+LOCATION_MODE_ON : &quot;3&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_BIOMETRIC_WEAK_FLAGS'>/** A flag containing settings used for biometric weak
+</span> @hide
+*/
+LOCK_BIOMETRIC_WEAK_FLAGS : &quot;lock_biometric_weak_flags&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_TO_APP_EXIT_LOCKED'>/** Whether lock-to-app will lock the keyguard when exiting.
+</span> @hide
+*/
+LOCK_TO_APP_EXIT_LOCKED : &quot;lock_to_app_exit_locked&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_PATTERN_ENABLED'>/** Whether autolock is enabled (0 = false, 1 = true)
+</span>
+ @deprecated Use {@link android.app.KeyguardManager} to determine the state and security
+             level of the keyguard. Accessing this setting from an app that is targeting
+             {@link VERSION_CODES#M} or later throws a {@code SecurityException}.
+*/
+LOCK_PATTERN_ENABLED : &quot;lock_pattern_autolock&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_PATTERN_VISIBLE'>/** Whether lock pattern is visible as user enters (0 = false, 1 = true)
+</span>
+ @deprecated Accessing this setting from an app that is targeting
+             {@link VERSION_CODES#M} or later throws a {@code SecurityException}.
+*/
+LOCK_PATTERN_VISIBLE : &quot;lock_pattern_visible_pattern&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED'>/** Whether lock pattern will vibrate as user enters (0 = false, 1 =
+</span> true)
+
+ @deprecated Starting in {@link VERSION_CODES#JELLY_BEAN_MR1} the
+             lockscreen uses
+             {@link android.provider.BrowserContract.Settings.System#HAPTIC_FEEDBACK_ENABLED}.
+             Accessing this setting from an app that is targeting
+             {@link VERSION_CODES#M} or later throws a {@code SecurityException}.
+*/
+LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED : &quot;lock_pattern_tactile_feedback_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_LOCK_AFTER_TIMEOUT'>/** This preference allows the device to be locked given time after screen goes off,
+</span> subject to current DeviceAdmin policy limits.
+ @hide
+*/
+LOCK_SCREEN_LOCK_AFTER_TIMEOUT : &quot;lock_screen_lock_after_timeout&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_OWNER_INFO'>/** This preference contains the string that shows for owner info on LockScreen.
+</span> @hide
+ @deprecated
+*/
+LOCK_SCREEN_OWNER_INFO : &quot;lock_screen_owner_info&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_APPWIDGET_IDS'>/** Ids of the user-selected appwidgets on the lockscreen (comma-delimited).
+</span> @hide
+*/
+LOCK_SCREEN_APPWIDGET_IDS : &quot;lock_screen_appwidget_ids&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_FALLBACK_APPWIDGET_ID'>/** Id of the appwidget shown on the lock screen when appwidgets are disabled.
+</span> @hide
+*/
+LOCK_SCREEN_FALLBACK_APPWIDGET_ID : &quot;lock_screen_fallback_appwidget_id&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_STICKY_APPWIDGET'>/** Index of the lockscreen appwidget to restore, -1 if none.
+</span> @hide
+*/
+LOCK_SCREEN_STICKY_APPWIDGET : &quot;lock_screen_sticky_appwidget&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_OWNER_INFO_ENABLED'>/** This preference enables showing the owner info on LockScreen.
+</span> @hide
+ @deprecated
+*/
+LOCK_SCREEN_OWNER_INFO_ENABLED : &quot;lock_screen_owner_info_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS'>/** Indicates whether the user has allowed notifications to be shown atop a securely locked
+</span> screen in their full &quot;private&quot; form (same as when the device is unlocked).
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS : &quot;lock_screen_allow_private_notifications&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_ALLOW_REMOTE_INPUT'>/** When set by a user, allows notification remote input atop a securely locked screen
+</span> without having to unlock
+ @hide
+*/
+LOCK_SCREEN_ALLOW_REMOTE_INPUT : &quot;lock_screen_allow_remote_input&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_CUSTOM_CLOCK_FACE'>/** Indicates which clock face to show on lock screen and AOD.
+</span> @hide
+*/
+LOCK_SCREEN_CUSTOM_CLOCK_FACE : &quot;lock_screen_custom_clock_face&quot;,
+<span id='android-provider-Settings-Secure-property-DOCKED_CLOCK_FACE'>/** Indicates which clock face to show on lock screen and AOD while docked.
+</span> @hide
+*/
+DOCKED_CLOCK_FACE : &quot;docked_clock_face&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_NOTE_ABOUT_NOTIFICATION_HIDING'>/** Set by the system to track if the user needs to see the call to action for
+</span> the lockscreen notification policy.
+ @hide
+*/
+SHOW_NOTE_ABOUT_NOTIFICATION_HIDING : &quot;show_note_about_notification_hiding&quot;,
+<span id='android-provider-Settings-Secure-property-TRUST_AGENTS_INITIALIZED'>/** Set to 1 by the system after trust agents have been initialized.
+</span> @hide
+*/
+TRUST_AGENTS_INITIALIZED : &quot;trust_agents_initialized&quot;,
+<span id='android-provider-Settings-Secure-property-LOGGING_ID'>/** The Logging ID (a unique 64-bit value) as a hex string.
+</span> Used as a pseudonymous identifier for logging.
+ @deprecated This identifier is poorly initialized and has
+ many collisions.  It should not be used.
+*/
+LOGGING_ID : &quot;logging_id&quot;,
+<span id='android-provider-Settings-Secure-property-NETWORK_PREFERENCE'>/** @deprecated Use {@link android.provider.Settings.Global#NETWORK_PREFERENCE} instead
+</span>*/
+NETWORK_PREFERENCE : &quot;network_preference&quot;,
+<span id='android-provider-Settings-Secure-property-PARENTAL_CONTROL_ENABLED'>/** No longer supported.
+</span>*/
+PARENTAL_CONTROL_ENABLED : &quot;parental_control_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-PARENTAL_CONTROL_LAST_UPDATE'>/** No longer supported.
+</span>*/
+PARENTAL_CONTROL_LAST_UPDATE : &quot;parental_control_last_update&quot;,
+<span id='android-provider-Settings-Secure-property-PARENTAL_CONTROL_REDIRECT_URL'>/** No longer supported.
+</span>*/
+PARENTAL_CONTROL_REDIRECT_URL : &quot;parental_control_redirect_url&quot;,
+<span id='android-provider-Settings-Secure-property-SETTINGS_CLASSNAME'>/** Settings classname to launch when Settings is clicked from All
+</span> Applications.  Needed because of user testing between the old
+ and new Settings apps.
+*/
+SETTINGS_CLASSNAME : &quot;settings_classname&quot;,
+<span id='android-provider-Settings-Secure-property-USB_MASS_STORAGE_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Global#USB_MASS_STORAGE_ENABLED} instead
+</span>*/
+USB_MASS_STORAGE_ENABLED : &quot;usb_mass_storage_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-USE_GOOGLE_MAIL'>/** @deprecated Use {@link android.provider.Settings.Global#USE_GOOGLE_MAIL} instead
+</span>*/
+USE_GOOGLE_MAIL : &quot;use_google_mail&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_ENABLED'>/** If accessibility is enabled.
+</span>*/
+ACCESSIBILITY_ENABLED : &quot;accessibility_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_SHORTCUT_ENABLED'>/** Setting specifying if the accessibility shortcut is enabled.
+</span> @hide
+*/
+ACCESSIBILITY_SHORTCUT_ENABLED : &quot;accessibility_shortcut_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN'>/** Setting specifying if the accessibility shortcut is enabled.
+</span> @hide
+*/
+ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN : &quot;accessibility_shortcut_on_lock_screen&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN'>/** Setting specifying if the accessibility shortcut dialog has been shown to this user.
+</span> @hide
+*/
+ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN : &quot;accessibility_shortcut_dialog_shown&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_SHORTCUT_TARGET_SERVICE'>/** Setting specifying the accessibility service to be toggled via the accessibility
+</span> shortcut. Must be its flattened {@link ComponentName}.
+ @hide
+*/
+ACCESSIBILITY_SHORTCUT_TARGET_SERVICE : &quot;accessibility_shortcut_target_service&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_BUTTON_TARGET_COMPONENT'>/** Setting specifying the accessibility service or feature to be toggled via the
+</span> accessibility button in the navigation bar. This is either a flattened
+ {@link ComponentName} or the class name of a system class implementing a supported
+ accessibility feature.
+ @hide
+*/
+ACCESSIBILITY_BUTTON_TARGET_COMPONENT : &quot;accessibility_button_target_component&quot;,
+<span id='android-provider-Settings-Secure-property-TOUCH_EXPLORATION_ENABLED'>/** If touch exploration is enabled.
+</span>*/
+TOUCH_EXPLORATION_ENABLED : &quot;touch_exploration_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ENABLED_ACCESSIBILITY_SERVICES'>/** List of the enabled accessibility providers.
+</span>*/
+ENABLED_ACCESSIBILITY_SERVICES : &quot;enabled_accessibility_services&quot;,
+<span id='android-provider-Settings-Secure-property-TOUCH_EXPLORATION_GRANTED_ACCESSIBILITY_SERVICES'>/** List of the accessibility services to which the user has granted
+</span> permission to put the device into touch exploration mode.
+
+ @hide
+*/
+TOUCH_EXPLORATION_GRANTED_ACCESSIBILITY_SERVICES : &quot;touch_exploration_granted_accessibility_services&quot;,
+<span id='android-provider-Settings-Secure-property-GLOBAL_ACTIONS_PANEL_ENABLED'>/** Whether the Global Actions Panel is enabled.
+</span> @hide
+*/
+GLOBAL_ACTIONS_PANEL_ENABLED : &quot;global_actions_panel_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-GLOBAL_ACTIONS_PANEL_AVAILABLE'>/** Whether the Global Actions Panel can be toggled on or off in Settings.
+</span> @hide
+*/
+GLOBAL_ACTIONS_PANEL_AVAILABLE : &quot;global_actions_panel_available&quot;,
+<span id='android-provider-Settings-Secure-property-GLOBAL_ACTIONS_PANEL_DEBUG_ENABLED'>/** Enables debug mode for the Global Actions Panel.
+</span> @hide
+*/
+GLOBAL_ACTIONS_PANEL_DEBUG_ENABLED : &quot;global_actions_panel_debug_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-HUSH_GESTURE_USED'>/** Whether the hush gesture has ever been used
+</span> @hide
+*/
+HUSH_GESTURE_USED : &quot;hush_gesture_used&quot;,
+<span id='android-provider-Settings-Secure-property-MANUAL_RINGER_TOGGLE_COUNT'>/** Number of times the user has manually clicked the ringer toggle
+</span> @hide
+*/
+MANUAL_RINGER_TOGGLE_COUNT : &quot;manual_ringer_toggle_count&quot;,
+<span id='android-provider-Settings-Secure-property-CHARGING_SOUNDS_ENABLED'>/** Whether to play a sound for charging events.
+</span> @hide
+*/
+CHARGING_SOUNDS_ENABLED : &quot;charging_sounds_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-CHARGING_VIBRATION_ENABLED'>/** Whether to vibrate for charging events.
+</span> @hide
+*/
+CHARGING_VIBRATION_ENABLED : &quot;charging_vibration_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ZEN_DURATION'>/** If 0, turning on dnd manually will last indefinitely.
+</span> Else if non-negative, turning on dnd manually will last for this many minutes.
+ Else (if negative), turning on dnd manually will surface a dialog that prompts
+ user to specify a duration.
+ @hide
+*/
+ZEN_DURATION : &quot;zen_duration&quot;,
+<span id='android-provider-Settings-Secure-property-ZEN_DURATION_PROMPT'>/**@hide */
+</span>ZEN_DURATION_PROMPT : &quot;-1&quot;,
+<span id='android-provider-Settings-Secure-property-ZEN_DURATION_FOREVER'>/**@hide */
+</span>ZEN_DURATION_FOREVER : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_ZEN_UPGRADE_NOTIFICATION'>/** If nonzero, will show the zen upgrade notification when the user toggles DND on/off.
+</span> @hide
+*/
+SHOW_ZEN_UPGRADE_NOTIFICATION : &quot;show_zen_upgrade_notification&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_ZEN_SETTINGS_SUGGESTION'>/** If nonzero, will show the zen update settings suggestion.
+</span> @hide
+*/
+SHOW_ZEN_SETTINGS_SUGGESTION : &quot;show_zen_settings_suggestion&quot;,
+<span id='android-provider-Settings-Secure-property-ZEN_SETTINGS_UPDATED'>/** If nonzero, zen has not been updated to reflect new changes.
+</span> @hide
+*/
+ZEN_SETTINGS_UPDATED : &quot;zen_settings_updated&quot;,
+<span id='android-provider-Settings-Secure-property-ZEN_SETTINGS_SUGGESTION_VIEWED'>/** If nonzero, zen setting suggestion has been viewed by user
+</span> @hide
+*/
+ZEN_SETTINGS_SUGGESTION_VIEWED : &quot;zen_settings_suggestion_viewed&quot;,
+<span id='android-provider-Settings-Secure-property-IN_CALL_NOTIFICATION_ENABLED'>/** Whether the in call notification is enabled to play sound during calls.  The value is
+</span> boolean (1 or 0).
+ @hide
+*/
+IN_CALL_NOTIFICATION_ENABLED : &quot;in_call_notification_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-KEYGUARD_SLICE_URI'>/** Uri of the slice that's presented on the keyguard.
+</span> Defaults to a slice with the date and next alarm.
+
+ @hide
+*/
+KEYGUARD_SLICE_URI : &quot;keyguard_slice_uri&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_SPEAK_PASSWORD'>/** Whether to speak passwords while in accessibility mode.
+</span>
+ @deprecated The speaking of passwords is controlled by individual accessibility services.
+ Apps should ignore this setting and provide complete information to accessibility
+ at all times, which was the behavior when this value was {@code true}.
+*/
+ACCESSIBILITY_SPEAK_PASSWORD : &quot;speak_password&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED'>/** Whether to draw text with high contrast while in accessibility mode.
+</span>
+ @hide
+*/
+ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED : &quot;high_text_contrast_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED'>/** Setting that specifies whether the display magnification is enabled via a system-wide
+</span> triple tap gesture. Display magnifications allows the user to zoom in the display content
+ and is targeted to low vision users. The current magnification scale is controlled by
+ {@link #ACCESSIBILITY_DISPLAY_MAGNIFICATION_SCALE}.
+
+ @hide
+*/
+ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED : &quot;accessibility_display_magnification_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED'>/** Setting that specifies whether the display magnification is enabled via a shortcut
+</span> affordance within the system's navigation area. Display magnifications allows the user to
+ zoom in the display content and is targeted to low vision users. The current
+ magnification scale is controlled by {@link #ACCESSIBILITY_DISPLAY_MAGNIFICATION_SCALE}.
+
+ @hide
+*/
+ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED : &quot;accessibility_display_magnification_navbar_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_DISPLAY_MAGNIFICATION_SCALE'>/** Setting that specifies what the display magnification scale is.
+</span> Display magnifications allows the user to zoom in the display
+ content and is targeted to low vision users. Whether a display
+ magnification is performed is controlled by
+ {@link #ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED} and
+ {@link #ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED}
+
+ @hide
+*/
+ACCESSIBILITY_DISPLAY_MAGNIFICATION_SCALE : &quot;accessibility_display_magnification_scale&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_DISPLAY_MAGNIFICATION_AUTO_UPDATE'>/** Unused mangnification setting
+</span>
+ @hide
+ @deprecated
+*/
+ACCESSIBILITY_DISPLAY_MAGNIFICATION_AUTO_UPDATE : &quot;accessibility_display_magnification_auto_update&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_SOFT_KEYBOARD_MODE'>/** Setting that specifies what mode the soft keyboard is in (default or hidden). Can be
+</span> modified from an AccessibilityService using the SoftKeyboardController.
+
+ @hide
+*/
+ACCESSIBILITY_SOFT_KEYBOARD_MODE : &quot;accessibility_soft_keyboard_mode&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_MODE_AUTO'>/** Default soft keyboard behavior.
+</span>
+ @hide
+*/
+SHOW_MODE_AUTO : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_MODE_HIDDEN'>/** Soft keyboard is never shown.
+</span>
+ @hide
+*/
+SHOW_MODE_HIDDEN : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_ENABLED'>/** Setting that specifies whether timed text (captions) should be
+</span> displayed in video content. Text display properties are controlled by
+ the following settings:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ACCESSIBILITY_CAPTIONING_LOCALE}
+ &lt;li&gt;{@link #ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR}
+ &lt;li&gt;{@link #ACCESSIBILITY_CAPTIONING_FOREGROUND_COLOR}
+ &lt;li&gt;{@link #ACCESSIBILITY_CAPTIONING_EDGE_COLOR}
+ &lt;li&gt;{@link #ACCESSIBILITY_CAPTIONING_EDGE_TYPE}
+ &lt;li&gt;{@link #ACCESSIBILITY_CAPTIONING_TYPEFACE}
+ &lt;li&gt;{@link #ACCESSIBILITY_CAPTIONING_FONT_SCALE}
+ &lt;/ul&gt;
+
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_ENABLED : &quot;accessibility_captioning_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_LOCALE'>/** Setting that specifies the language for captions as a locale string,
+</span> e.g. en_US.
+
+ @see java.util.Locale#toString
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_LOCALE : &quot;accessibility_captioning_locale&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_PRESET'>/** Integer property that specifies the preset style for captions, one
+</span> of:
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.view.accessibility.CaptioningManager.CaptionStyle#PRESET_CUSTOM}
+ &lt;li&gt;a valid index of {@link android.view.accessibility.CaptioningManager.CaptionStyle#PRESETS}
+ &lt;/ul&gt;
+
+ @see java.util.Locale#toString
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_PRESET : &quot;accessibility_captioning_preset&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR'>/** Integer property that specifes the background color for captions as a
+</span> packed 32-bit color.
+
+ @see android.graphics.Color#argb
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR : &quot;accessibility_captioning_background_color&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_FOREGROUND_COLOR'>/** Integer property that specifes the foreground color for captions as a
+</span> packed 32-bit color.
+
+ @see android.graphics.Color#argb
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_FOREGROUND_COLOR : &quot;accessibility_captioning_foreground_color&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_EDGE_TYPE'>/** Integer property that specifes the edge type for captions, one of:
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link android.view.accessibility.CaptioningManager.CaptionStyle#EDGE_TYPE_NONE}
+ &lt;li&gt;{@link android.view.accessibility.CaptioningManager.CaptionStyle#EDGE_TYPE_OUTLINE}
+ &lt;li&gt;{@link android.view.accessibility.CaptioningManager.CaptionStyle#EDGE_TYPE_DROP_SHADOW}
+ &lt;/ul&gt;
+
+ @see #ACCESSIBILITY_CAPTIONING_EDGE_COLOR
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_EDGE_TYPE : &quot;accessibility_captioning_edge_type&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_EDGE_COLOR'>/** Integer property that specifes the edge color for captions as a
+</span> packed 32-bit color.
+
+ @see #ACCESSIBILITY_CAPTIONING_EDGE_TYPE
+ @see android.graphics.Color#argb
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_EDGE_COLOR : &quot;accessibility_captioning_edge_color&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_WINDOW_COLOR'>/** Integer property that specifes the window color for captions as a
+</span> packed 32-bit color.
+
+ @see android.graphics.Color#argb
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_WINDOW_COLOR : &quot;accessibility_captioning_window_color&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_TYPEFACE'>/** String property that specifies the typeface for captions, one of:
+</span> &lt;ul&gt;
+ &lt;li&gt;DEFAULT
+ &lt;li&gt;MONOSPACE
+ &lt;li&gt;SANS_SERIF
+ &lt;li&gt;SERIF
+ &lt;/ul&gt;
+
+ @see android.graphics.Typeface
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_TYPEFACE : &quot;accessibility_captioning_typeface&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_CAPTIONING_FONT_SCALE'>/** Floating point property that specifies font scaling for captions.
+</span>
+ @hide
+*/
+ACCESSIBILITY_CAPTIONING_FONT_SCALE : &quot;accessibility_captioning_font_scale&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_DISPLAY_INVERSION_ENABLED'>/** Setting that specifies whether display color inversion is enabled.
+</span>*/
+ACCESSIBILITY_DISPLAY_INVERSION_ENABLED : &quot;accessibility_display_inversion_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED'>/** Setting that specifies whether display color space adjustment is
+</span> enabled.
+
+ @hide
+*/
+ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED : &quot;accessibility_display_daltonizer_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_DISPLAY_DALTONIZER'>/** Integer property that specifies the type of color space adjustment to
+</span> perform. Valid values are defined in AccessibilityManager and Settings arrays.xml:
+ - AccessibilityManager.DALTONIZER_DISABLED = -1
+ - AccessibilityManager.DALTONIZER_SIMULATE_MONOCHROMACY = 0
+ - &lt;item&gt;@string/daltonizer_mode_protanomaly&lt;/item&gt; = 11
+ - AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY and
+       &lt;item&gt;@string/daltonizer_mode_deuteranomaly&lt;/item&gt; = 12
+ - &lt;item&gt;@string/daltonizer_mode_tritanomaly&lt;/item&gt; = 13
+
+ @hide
+*/
+ACCESSIBILITY_DISPLAY_DALTONIZER : &quot;accessibility_display_daltonizer&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_AUTOCLICK_ENABLED'>/** Setting that specifies whether automatic click when the mouse pointer stops moving is
+</span> enabled.
+
+ @hide
+*/
+ACCESSIBILITY_AUTOCLICK_ENABLED : &quot;accessibility_autoclick_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_AUTOCLICK_DELAY'>/** Integer setting specifying amount of time in ms the mouse pointer has to stay still
+</span> before performing click when {@link #ACCESSIBILITY_AUTOCLICK_ENABLED} is set.
+
+ @see #ACCESSIBILITY_AUTOCLICK_ENABLED
+ @hide
+*/
+ACCESSIBILITY_AUTOCLICK_DELAY : &quot;accessibility_autoclick_delay&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_LARGE_POINTER_ICON'>/** Whether or not larger size icons are used for the pointer of mouse/trackpad for
+</span> accessibility.
+ (0 = false, 1 = true)
+ @hide
+*/
+ACCESSIBILITY_LARGE_POINTER_ICON : &quot;accessibility_large_pointer_icon&quot;,
+<span id='android-provider-Settings-Secure-property-LONG_PRESS_TIMEOUT'>/** The timeout for considering a press to be a long press in milliseconds.
+</span> @hide
+*/
+LONG_PRESS_TIMEOUT : &quot;long_press_timeout&quot;,
+<span id='android-provider-Settings-Secure-property-MULTI_PRESS_TIMEOUT'>/** The duration in milliseconds between the first tap's up event and the second tap's
+</span> down event for an interaction to be considered part of the same multi-press.
+ @hide
+*/
+MULTI_PRESS_TIMEOUT : &quot;multi_press_timeout&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS'>/** Setting that specifies recommended timeout in milliseconds for controls
+</span> which don't need user's interactions.
+
+ @hide
+*/
+ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS : &quot;accessibility_non_interactive_ui_timeout_ms&quot;,
+<span id='android-provider-Settings-Secure-property-ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS'>/** Setting that specifies recommended timeout in milliseconds for controls
+</span> which need user's interactions.
+
+ @hide
+*/
+ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS : &quot;accessibility_interactive_ui_timeout_ms&quot;,
+<span id='android-provider-Settings-Secure-property-ENABLED_PRINT_SERVICES'>/** List of the enabled print services.
+</span>
+ N and beyond uses {@link #DISABLED_PRINT_SERVICES}. But this might be used in an upgrade
+ from pre-N.
+
+ @hide
+*/
+ENABLED_PRINT_SERVICES : &quot;enabled_print_services&quot;,
+<span id='android-provider-Settings-Secure-property-DISABLED_PRINT_SERVICES'>/** List of the disabled print services.
+</span>
+ @hide
+*/
+DISABLED_PRINT_SERVICES : &quot;disabled_print_services&quot;,
+<span id='android-provider-Settings-Secure-property-DISPLAY_DENSITY_FORCED'>/** The saved value for WindowManagerService.setForcedDisplayDensity()
+</span> formatted as a single integer representing DPI. If unset, then use
+ the real display density.
+
+ @hide
+*/
+DISPLAY_DENSITY_FORCED : &quot;display_density_forced&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_USE_DEFAULTS'>/** Setting to always use the default text-to-speech settings regardless
+</span> of the application settings.
+ 1 = override application settings,
+ 0 = use application settings (if specified).
+
+ @deprecated  The value of this setting is no longer respected by
+ the framework text to speech APIs as of the Ice Cream Sandwich release.
+*/
+TTS_USE_DEFAULTS : &quot;tts_use_defaults&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_DEFAULT_RATE'>/** Default text-to-speech engine speech rate. 100 = 1x
+</span>*/
+TTS_DEFAULT_RATE : &quot;tts_default_rate&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_DEFAULT_PITCH'>/** Default text-to-speech engine pitch. 100 = 1x
+</span>*/
+TTS_DEFAULT_PITCH : &quot;tts_default_pitch&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_DEFAULT_SYNTH'>/** Default text-to-speech engine.
+</span>*/
+TTS_DEFAULT_SYNTH : &quot;tts_default_synth&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_DEFAULT_LANG'>/** Default text-to-speech language.
+</span>
+ @deprecated this setting is no longer in use, as of the Ice Cream
+ Sandwich release. Apps should never need to read this setting directly,
+ instead can query the TextToSpeech framework classes for the default
+ locale. {@link TextToSpeech#getLanguage()}.
+*/
+TTS_DEFAULT_LANG : &quot;tts_default_lang&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_DEFAULT_COUNTRY'>/** Default text-to-speech country.
+</span>
+ @deprecated this setting is no longer in use, as of the Ice Cream
+ Sandwich release. Apps should never need to read this setting directly,
+ instead can query the TextToSpeech framework classes for the default
+ locale. {@link TextToSpeech#getLanguage()}.
+*/
+TTS_DEFAULT_COUNTRY : &quot;tts_default_country&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_DEFAULT_VARIANT'>/** Default text-to-speech locale variant.
+</span>
+ @deprecated this setting is no longer in use, as of the Ice Cream
+ Sandwich release. Apps should never need to read this setting directly,
+ instead can query the TextToSpeech framework classes for the
+ locale that is in use {@link TextToSpeech#getLanguage()}.
+*/
+TTS_DEFAULT_VARIANT : &quot;tts_default_variant&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_DEFAULT_LOCALE'>/** Stores the default tts locales on a per engine basis. Stored as
+</span> a comma seperated list of values, each value being of the form
+ {@code engine_name:locale} for example,
+ {@code com.foo.ttsengine:eng-USA,com.bar.ttsengine:esp-ESP}. This
+ supersedes {@link #TTS_DEFAULT_LANG}, {@link #TTS_DEFAULT_COUNTRY} and
+ {@link #TTS_DEFAULT_VARIANT}. Apps should never need to read this
+ setting directly, and can query the TextToSpeech framework classes
+ for the locale that is in use.
+
+ @hide
+*/
+TTS_DEFAULT_LOCALE : &quot;tts_default_locale&quot;,
+<span id='android-provider-Settings-Secure-property-TTS_ENABLED_PLUGINS'>/** Space delimited list of plugin packages that are enabled.
+</span>*/
+TTS_ENABLED_PLUGINS : &quot;tts_enabled_plugins&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON}
+</span> instead.
+*/
+WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON : &quot;wifi_networks_available_notification_on&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY}
+</span> instead.
+*/
+WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY : &quot;wifi_networks_available_repeat_delay&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_NUM_OPEN_NETWORKS_KEPT'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_NUM_OPEN_NETWORKS_KEPT}
+</span> instead.
+*/
+WIFI_NUM_OPEN_NETWORKS_KEPT : &quot;wifi_num_open_networks_kept&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_ON'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_ON}
+</span> instead.
+*/
+WIFI_ON : &quot;wifi_on&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_ACCEPTABLE_PACKET_LOSS_PERCENTAGE'>/** The acceptable packet loss percentage (range 0 - 100) before trying
+</span> another AP on the same network.
+ @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_ACCEPTABLE_PACKET_LOSS_PERCENTAGE : &quot;wifi_watchdog_acceptable_packet_loss_percentage&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_AP_COUNT'>/** The number of access points required for a network in order for the
+</span> watchdog to monitor it.
+ @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_AP_COUNT : &quot;wifi_watchdog_ap_count&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_BACKGROUND_CHECK_DELAY_MS'>/** The delay between background checks.
+</span> @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_BACKGROUND_CHECK_DELAY_MS : &quot;wifi_watchdog_background_check_delay_ms&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_BACKGROUND_CHECK_ENABLED'>/** Whether the Wi-Fi watchdog is enabled for background checking even
+</span> after it thinks the user has connected to a good access point.
+ @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_BACKGROUND_CHECK_ENABLED : &quot;wifi_watchdog_background_check_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_BACKGROUND_CHECK_TIMEOUT_MS'>/** The timeout for a background ping
+</span> @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_BACKGROUND_CHECK_TIMEOUT_MS : &quot;wifi_watchdog_background_check_timeout_ms&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_INITIAL_IGNORED_PING_COUNT'>/** The number of initial pings to perform that *may* be ignored if they
+</span> fail. Again, if these fail, they will *not* be used in packet loss
+ calculation. For example, one network always seemed to time out for
+ the first couple pings, so this is set to 3 by default.
+ @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_INITIAL_IGNORED_PING_COUNT : &quot;wifi_watchdog_initial_ignored_ping_count&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_MAX_AP_CHECKS'>/** The maximum number of access points (per network) to attempt to test.
+</span> If this number is reached, the watchdog will no longer monitor the
+ initial connection state for the network. This is a safeguard for
+ networks containing multiple APs whose DNS does not respond to pings.
+ @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_MAX_AP_CHECKS : &quot;wifi_watchdog_max_ap_checks&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_ON'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_WATCHDOG_ON} instead
+</span>*/
+WIFI_WATCHDOG_ON : &quot;wifi_watchdog_on&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_WATCH_LIST'>/** A comma-separated list of SSIDs for which the Wi-Fi watchdog should be enabled.
+</span> @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_WATCH_LIST : &quot;wifi_watchdog_watch_list&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_PING_COUNT'>/** The number of pings to test if an access point is a good connection.
+</span> @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_PING_COUNT : &quot;wifi_watchdog_ping_count&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_PING_DELAY_MS'>/** The delay between pings.
+</span> @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_PING_DELAY_MS : &quot;wifi_watchdog_ping_delay_ms&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_WATCHDOG_PING_TIMEOUT_MS'>/** The timeout per ping.
+</span> @deprecated This setting is not used.
+*/
+WIFI_WATCHDOG_PING_TIMEOUT_MS : &quot;wifi_watchdog_ping_timeout_ms&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_MAX_DHCP_RETRY_COUNT'>/** @deprecated Use
+</span> {@link android.provider.Settings.Global#WIFI_MAX_DHCP_RETRY_COUNT} instead
+*/
+WIFI_MAX_DHCP_RETRY_COUNT : &quot;wifi_max_dhcp_retry_count&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS'>/** @deprecated Use
+</span> {@link android.provider.Settings.Global#WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS} instead
+*/
+WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS : &quot;wifi_mobile_data_transition_wakelock_timeout_ms&quot;,
+<span id='android-provider-Settings-Secure-property-CONNECTIVITY_RELEASE_PENDING_INTENT_DELAY_MS'>/** The number of milliseconds to hold on to a PendingIntent based request. This delay gives
+</span> the receivers of the PendingIntent an opportunity to make a new network request before
+ the Network satisfying the request is potentially removed.
+
+ @hide
+*/
+CONNECTIVITY_RELEASE_PENDING_INTENT_DELAY_MS : &quot;connectivity_release_pending_intent_delay_ms&quot;,
+<span id='android-provider-Settings-Secure-property-BACKGROUND_DATA'>/** Whether background data usage is allowed.
+</span>
+ @deprecated As of {@link VERSION_CODES#ICE_CREAM_SANDWICH},
+             availability of background data depends on several
+             combined factors. When background data is unavailable,
+             {@link ConnectivityManager#getActiveNetworkInfo()} will
+             now appear disconnected.
+*/
+BACKGROUND_DATA : &quot;background_data&quot;,
+<span id='android-provider-Settings-Secure-property-ALLOWED_GEOLOCATION_ORIGINS'>/** Origins for which browsers should allow geolocation by default.
+</span> The value is a space-separated list of origins.
+*/
+ALLOWED_GEOLOCATION_ORIGINS : &quot;allowed_geolocation_origins&quot;,
+<span id='android-provider-Settings-Secure-property-PREFERRED_TTY_MODE'>/** The preferred TTY mode     0 = TTy Off, CDMA default
+</span>                            1 = TTY Full
+                            2 = TTY HCO
+                            3 = TTY VCO
+ @hide
+*/
+PREFERRED_TTY_MODE : &quot;preferred_tty_mode&quot;,
+<span id='android-provider-Settings-Secure-property-ENHANCED_VOICE_PRIVACY_ENABLED'>/** Whether the enhanced voice privacy mode is enabled.
+</span> 0 = normal voice privacy
+ 1 = enhanced voice privacy
+ @hide
+*/
+ENHANCED_VOICE_PRIVACY_ENABLED : &quot;enhanced_voice_privacy_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-TTY_MODE_ENABLED'>/** Whether the TTY mode mode is enabled.
+</span> 0 = disabled
+ 1 = enabled
+ @hide
+*/
+TTY_MODE_ENABLED : &quot;tty_mode_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-RTT_CALLING_MODE'>/** User-selected RTT mode. When on, outgoing and incoming calls will be answered as RTT
+</span> calls when supported by the device and carrier. Boolean value.
+ 0 = OFF
+ 1 = ON
+*/
+RTT_CALLING_MODE : &quot;rtt_calling_mode&quot;,
+<span id='android-provider-Settings-Secure-property-BACKUP_ENABLED'>/**        /**
+</span> Controls whether settings backup is enabled.
+ Type: int ( 0 = disabled, 1 = enabled )
+ @hide
+*/
+BACKUP_ENABLED : &quot;backup_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-BACKUP_AUTO_RESTORE'>/** Controls whether application data is automatically restored from backup
+</span> at install time.
+ Type: int ( 0 = disabled, 1 = enabled )
+ @hide
+*/
+BACKUP_AUTO_RESTORE : &quot;backup_auto_restore&quot;,
+<span id='android-provider-Settings-Secure-property-BACKUP_PROVISIONED'>/** Indicates whether settings backup has been fully provisioned.
+</span> Type: int ( 0 = unprovisioned, 1 = fully provisioned )
+ @hide
+*/
+BACKUP_PROVISIONED : &quot;backup_provisioned&quot;,
+<span id='android-provider-Settings-Secure-property-BACKUP_TRANSPORT'>/** Component of the transport to use for backup/restore.
+</span> @hide
+*/
+BACKUP_TRANSPORT : &quot;backup_transport&quot;,
+<span id='android-provider-Settings-Secure-property-LAST_SETUP_SHOWN'>/** Indicates the version for which the setup wizard was last shown. The version gets
+</span> bumped for each release when there is new setup information to show.
+
+ @hide
+*/
+LAST_SETUP_SHOWN : &quot;last_setup_shown&quot;,
+<span id='android-provider-Settings-Secure-property-WIFI_IDLE_MS'>/** The interval in milliseconds after which Wi-Fi is considered idle.
+</span> When idle, it is possible for the device to be switched from Wi-Fi to
+ the mobile data network.
+ @hide
+ @deprecated Use {@link android.provider.Settings.Global#WIFI_IDLE_MS}
+ instead.
+*/
+WIFI_IDLE_MS : &quot;wifi_idle_ms&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_GLOBAL_SEARCH_ACTIVITY'>/** The global search provider chosen by the user (if multiple global
+</span> search providers are installed). This will be the provider returned
+ by {@link SearchManager#getGlobalSearchActivity()} if it's still
+ installed. This setting is stored as a flattened component name as
+ per {@link ComponentName#flattenToString()}.
+
+ @hide
+*/
+SEARCH_GLOBAL_SEARCH_ACTIVITY : &quot;search_global_search_activity&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_NUM_PROMOTED_SOURCES'>/** The number of promoted sources in GlobalSearch.
+</span> @hide
+*/
+SEARCH_NUM_PROMOTED_SOURCES : &quot;search_num_promoted_sources&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_MAX_RESULTS_TO_DISPLAY'>/** The maximum number of suggestions returned by GlobalSearch.
+</span> @hide
+*/
+SEARCH_MAX_RESULTS_TO_DISPLAY : &quot;search_max_results_to_display&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_MAX_RESULTS_PER_SOURCE'>/** The number of suggestions GlobalSearch will ask each non-web search source for.
+</span> @hide
+*/
+SEARCH_MAX_RESULTS_PER_SOURCE : &quot;search_max_results_per_source&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_WEB_RESULTS_OVERRIDE_LIMIT'>/** The number of suggestions the GlobalSearch will ask the web search source for.
+</span> @hide
+*/
+SEARCH_WEB_RESULTS_OVERRIDE_LIMIT : &quot;search_web_results_override_limit&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_PROMOTED_SOURCE_DEADLINE_MILLIS'>/** The number of milliseconds that GlobalSearch will wait for suggestions from
+</span> promoted sources before continuing with all other sources.
+ @hide
+*/
+SEARCH_PROMOTED_SOURCE_DEADLINE_MILLIS : &quot;search_promoted_source_deadline_millis&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_SOURCE_TIMEOUT_MILLIS'>/** The number of milliseconds before GlobalSearch aborts search suggesiton queries.
+</span> @hide
+*/
+SEARCH_SOURCE_TIMEOUT_MILLIS : &quot;search_source_timeout_millis&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_PREFILL_MILLIS'>/** The maximum number of milliseconds that GlobalSearch shows the previous results
+</span> after receiving a new query.
+ @hide
+*/
+SEARCH_PREFILL_MILLIS : &quot;search_prefill_millis&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_MAX_STAT_AGE_MILLIS'>/** The maximum age of log data used for shortcuts in GlobalSearch.
+</span> @hide
+*/
+SEARCH_MAX_STAT_AGE_MILLIS : &quot;search_max_stat_age_millis&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_MAX_SOURCE_EVENT_AGE_MILLIS'>/** The maximum age of log data used for source ranking in GlobalSearch.
+</span> @hide
+*/
+SEARCH_MAX_SOURCE_EVENT_AGE_MILLIS : &quot;search_max_source_event_age_millis&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_MIN_IMPRESSIONS_FOR_SOURCE_RANKING'>/** The minimum number of impressions needed to rank a source in GlobalSearch.
+</span> @hide
+*/
+SEARCH_MIN_IMPRESSIONS_FOR_SOURCE_RANKING : &quot;search_min_impressions_for_source_ranking&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_MIN_CLICKS_FOR_SOURCE_RANKING'>/** The minimum number of clicks needed to rank a source in GlobalSearch.
+</span> @hide
+*/
+SEARCH_MIN_CLICKS_FOR_SOURCE_RANKING : &quot;search_min_clicks_for_source_ranking&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_MAX_SHORTCUTS_RETURNED'>/** The maximum number of shortcuts shown by GlobalSearch.
+</span> @hide
+*/
+SEARCH_MAX_SHORTCUTS_RETURNED : &quot;search_max_shortcuts_returned&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_QUERY_THREAD_CORE_POOL_SIZE'>/** The size of the core thread pool for suggestion queries in GlobalSearch.
+</span> @hide
+*/
+SEARCH_QUERY_THREAD_CORE_POOL_SIZE : &quot;search_query_thread_core_pool_size&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_QUERY_THREAD_MAX_POOL_SIZE'>/** The maximum size of the thread pool for suggestion queries in GlobalSearch.
+</span> @hide
+*/
+SEARCH_QUERY_THREAD_MAX_POOL_SIZE : &quot;search_query_thread_max_pool_size&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_SHORTCUT_REFRESH_CORE_POOL_SIZE'>/** The size of the core thread pool for shortcut refreshing in GlobalSearch.
+</span> @hide
+*/
+SEARCH_SHORTCUT_REFRESH_CORE_POOL_SIZE : &quot;search_shortcut_refresh_core_pool_size&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_SHORTCUT_REFRESH_MAX_POOL_SIZE'>/** The maximum size of the thread pool for shortcut refreshing in GlobalSearch.
+</span> @hide
+*/
+SEARCH_SHORTCUT_REFRESH_MAX_POOL_SIZE : &quot;search_shortcut_refresh_max_pool_size&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_THREAD_KEEPALIVE_SECONDS'>/** The maximun time that excess threads in the GlobalSeach thread pools will
+</span> wait before terminating.
+ @hide
+*/
+SEARCH_THREAD_KEEPALIVE_SECONDS : &quot;search_thread_keepalive_seconds&quot;,
+<span id='android-provider-Settings-Secure-property-SEARCH_PER_SOURCE_CONCURRENT_QUERY_LIMIT'>/** The maximum number of concurrent suggestion queries to each source.
+</span> @hide
+*/
+SEARCH_PER_SOURCE_CONCURRENT_QUERY_LIMIT : &quot;search_per_source_concurrent_query_limit&quot;,
+<span id='android-provider-Settings-Secure-property-MOUNT_PLAY_NOTIFICATION_SND'>/** Whether or not alert sounds are played on StorageManagerService events.
+</span> (0 = false, 1 = true)
+ @hide
+*/
+MOUNT_PLAY_NOTIFICATION_SND : &quot;mount_play_not_snd&quot;,
+<span id='android-provider-Settings-Secure-property-MOUNT_UMS_AUTOSTART'>/** Whether or not UMS auto-starts on UMS host detection. (0 = false, 1 = true)
+</span> @hide
+*/
+MOUNT_UMS_AUTOSTART : &quot;mount_ums_autostart&quot;,
+<span id='android-provider-Settings-Secure-property-MOUNT_UMS_PROMPT'>/** Whether or not a notification is displayed on UMS host detection. (0 = false, 1 = true)
+</span> @hide
+*/
+MOUNT_UMS_PROMPT : &quot;mount_ums_prompt&quot;,
+<span id='android-provider-Settings-Secure-property-MOUNT_UMS_NOTIFY_ENABLED'>/** Whether or not a notification is displayed while UMS is enabled. (0 = false, 1 = true)
+</span> @hide
+*/
+MOUNT_UMS_NOTIFY_ENABLED : &quot;mount_ums_notify_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ANR_SHOW_BACKGROUND'>/** If nonzero, ANRs in invisible background processes bring up a dialog.
+</span> Otherwise, the process will be silently killed.
+
+ Also prevents ANRs and crash dialogs from being suppressed.
+ @hide
+*/
+ANR_SHOW_BACKGROUND : &quot;anr_show_background&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_FIRST_CRASH_DIALOG_DEV_OPTION'>/** If nonzero, crashes in foreground processes will bring up a dialog.
+</span> Otherwise, the process will be silently killed.
+ @hide
+*/
+SHOW_FIRST_CRASH_DIALOG_DEV_OPTION : &quot;show_first_crash_dialog_dev_option&quot;,
+<span id='android-provider-Settings-Secure-property-VOICE_RECOGNITION_SERVICE'>/** The {@link ComponentName} string of the service to be used as the voice recognition
+</span> service.
+
+ @hide
+*/
+VOICE_RECOGNITION_SERVICE : &quot;voice_recognition_service&quot;,
+<span id='android-provider-Settings-Secure-property-PACKAGE_VERIFIER_USER_CONSENT'>/** Stores whether an user has consented to have apps verified through PAM.
+</span> The value is boolean (1 or 0).
+
+ @hide
+*/
+PACKAGE_VERIFIER_USER_CONSENT : &quot;package_verifier_user_consent&quot;,
+<span id='android-provider-Settings-Secure-property-SELECTED_SPELL_CHECKER'>/** The {@link ComponentName} string of the selected spell checker service which is
+</span> one of the services managed by the text service manager.
+
+ @hide
+*/
+SELECTED_SPELL_CHECKER : &quot;selected_spell_checker&quot;,
+<span id='android-provider-Settings-Secure-property-SELECTED_SPELL_CHECKER_SUBTYPE'>/** {@link android.view.textservice.SpellCheckerSubtype#hashCode()} of the selected subtype
+</span> of the selected spell checker service which is one of the services managed by the text
+ service manager.
+
+ @hide
+*/
+SELECTED_SPELL_CHECKER_SUBTYPE : &quot;selected_spell_checker_subtype&quot;,
+<span id='android-provider-Settings-Secure-property-SPELL_CHECKER_ENABLED'>/** Whether spell checker is enabled or not.
+</span>
+ @hide
+*/
+SPELL_CHECKER_ENABLED : &quot;spell_checker_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_POWER_BUTTON_BEHAVIOR'>/** What happens when the user presses the Power button while in-call
+</span> and the screen is on.&lt;br/&gt;
+ &lt;b&gt;Values:&lt;/b&gt;&lt;br/&gt;
+ 1 - The Power button turns off the screen and locks the device. (Default behavior)&lt;br/&gt;
+ 2 - The Power button hangs up the current call.&lt;br/&gt;
+
+ @hide
+*/
+INCALL_POWER_BUTTON_BEHAVIOR : &quot;incall_power_button_behavior&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF'>/** INCALL_POWER_BUTTON_BEHAVIOR value for &quot;turn off screen&quot;.
+</span> @hide
+*/
+INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_POWER_BUTTON_BEHAVIOR_HANGUP'>/** INCALL_POWER_BUTTON_BEHAVIOR value for &quot;hang up&quot;.
+</span> @hide
+*/
+INCALL_POWER_BUTTON_BEHAVIOR_HANGUP : &quot;2&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_POWER_BUTTON_BEHAVIOR_DEFAULT'>/** INCALL_POWER_BUTTON_BEHAVIOR default value.
+</span> @hide
+*/
+INCALL_POWER_BUTTON_BEHAVIOR_DEFAULT : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_BACK_BUTTON_BEHAVIOR'>/** What happens when the user presses the Back button while in-call
+</span> and the screen is on.&lt;br/&gt;
+ &lt;b&gt;Values:&lt;/b&gt;&lt;br/&gt;
+ 0 - The Back buttons does nothing different.&lt;br/&gt;
+ 1 - The Back button hangs up the current call.&lt;br/&gt;
+
+ @hide
+*/
+INCALL_BACK_BUTTON_BEHAVIOR : &quot;incall_back_button_behavior&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_BACK_BUTTON_BEHAVIOR_NONE'>/** INCALL_BACK_BUTTON_BEHAVIOR value for no action.
+</span> @hide
+*/
+INCALL_BACK_BUTTON_BEHAVIOR_NONE : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_BACK_BUTTON_BEHAVIOR_HANGUP'>/** INCALL_BACK_BUTTON_BEHAVIOR value for &quot;hang up&quot;.
+</span> @hide
+*/
+INCALL_BACK_BUTTON_BEHAVIOR_HANGUP : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-INCALL_BACK_BUTTON_BEHAVIOR_DEFAULT'>/** INCALL_POWER_BUTTON_BEHAVIOR default value.
+</span> @hide
+*/
+INCALL_BACK_BUTTON_BEHAVIOR_DEFAULT : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-WAKE_GESTURE_ENABLED'>/** Whether the device should wake when the wake gesture sensor detects motion.
+</span> @hide
+*/
+WAKE_GESTURE_ENABLED : &quot;wake_gesture_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-DOZE_ENABLED'>/** Whether the device should doze if configured.
+</span> @hide
+*/
+DOZE_ENABLED : &quot;doze_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-DOZE_ALWAYS_ON'>/** Indicates whether doze should be always on.
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+DOZE_ALWAYS_ON : &quot;doze_always_on&quot;,
+<span id='android-provider-Settings-Secure-property-DOZE_PICK_UP_GESTURE'>/** Whether the device should pulse on pick up gesture.
+</span> @hide
+*/
+DOZE_PICK_UP_GESTURE : &quot;doze_pulse_on_pick_up&quot;,
+<span id='android-provider-Settings-Secure-property-DOZE_PULSE_ON_LONG_PRESS'>/** Whether the device should pulse on long press gesture.
+</span> @hide
+*/
+DOZE_PULSE_ON_LONG_PRESS : &quot;doze_pulse_on_long_press&quot;,
+<span id='android-provider-Settings-Secure-property-DOZE_DOUBLE_TAP_GESTURE'>/** Whether the device should pulse on double tap gesture.
+</span> @hide
+*/
+DOZE_DOUBLE_TAP_GESTURE : &quot;doze_pulse_on_double_tap&quot;,
+<span id='android-provider-Settings-Secure-property-DOZE_TAP_SCREEN_GESTURE'>/** Whether the device should respond to the SLPI tap gesture.
+</span> @hide
+*/
+DOZE_TAP_SCREEN_GESTURE : &quot;doze_tap_gesture&quot;,
+<span id='android-provider-Settings-Secure-property-DOZE_WAKE_SCREEN_GESTURE'>/** Gesture that wakes up the display, showing the ambient version of the status bar.
+</span> @hide
+*/
+DOZE_WAKE_SCREEN_GESTURE : &quot;doze_wake_screen_gesture&quot;,
+<span id='android-provider-Settings-Secure-property-SKIP_GESTURE'>/** Gesture that skips media.
+</span> @hide
+*/
+SKIP_GESTURE : &quot;skip_gesture&quot;,
+<span id='android-provider-Settings-Secure-property-SKIP_GESTURE_COUNT'>/** Count of successful gestures.
+</span> @hide
+*/
+SKIP_GESTURE_COUNT : &quot;skip_gesture_count&quot;,
+<span id='android-provider-Settings-Secure-property-SILENCE_GESTURE'>/** Gesture that silences sound (alarms, notification, calls).
+</span> @hide
+*/
+SILENCE_GESTURE : &quot;silence_gesture&quot;,
+<span id='android-provider-Settings-Secure-property-SILENCE_ALARMS_GESTURE_COUNT'>/** Count of successful silence alarms gestures.
+</span> @hide
+*/
+SILENCE_ALARMS_GESTURE_COUNT : &quot;silence_alarms_gesture_count&quot;,
+<span id='android-provider-Settings-Secure-property-SILENCE_TIMER_GESTURE_COUNT'>/** Count of successful silence timer gestures.
+</span> @hide
+*/
+SILENCE_TIMER_GESTURE_COUNT : &quot;silence_timer_gesture_count&quot;,
+<span id='android-provider-Settings-Secure-property-SILENCE_CALL_GESTURE_COUNT'>/** Count of successful silence call gestures.
+</span> @hide
+*/
+SILENCE_CALL_GESTURE_COUNT : &quot;silence_call_gesture_count&quot;,
+<span id='android-provider-Settings-Secure-property-SILENCE_NOTIFICATION_GESTURE_COUNT'>/** Count of successful silence notification gestures.
+</span> @hide
+*/
+SILENCE_NOTIFICATION_GESTURE_COUNT : &quot;silence_notification_gesture_count&quot;,
+<span id='android-provider-Settings-Secure-property-UI_NIGHT_MODE'>/** The current night mode that has been selected by the user.  Owned
+</span> and controlled by UiModeManagerService.  Constants are as per
+ UiModeManager.
+ @hide
+*/
+UI_NIGHT_MODE : &quot;ui_night_mode&quot;,
+<span id='android-provider-Settings-Secure-property-SCREENSAVER_ENABLED'>/** Whether screensavers are enabled.
+</span> @hide
+*/
+SCREENSAVER_ENABLED : &quot;screensaver_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-SCREENSAVER_COMPONENTS'>/** The user's chosen screensaver components.
+</span>
+ These will be launched by the PhoneWindowManager after a timeout when not on
+ battery, or upon dock insertion (if SCREENSAVER_ACTIVATE_ON_DOCK is set to 1).
+ @hide
+*/
+SCREENSAVER_COMPONENTS : &quot;screensaver_components&quot;,
+<span id='android-provider-Settings-Secure-property-SCREENSAVER_ACTIVATE_ON_DOCK'>/** If screensavers are enabled, whether the screensaver should be automatically launched
+</span> when the device is inserted into a (desk) dock.
+ @hide
+*/
+SCREENSAVER_ACTIVATE_ON_DOCK : &quot;screensaver_activate_on_dock&quot;,
+<span id='android-provider-Settings-Secure-property-SCREENSAVER_ACTIVATE_ON_SLEEP'>/** If screensavers are enabled, whether the screensaver should be automatically launched
+</span> when the screen times out when not on battery.
+ @hide
+*/
+SCREENSAVER_ACTIVATE_ON_SLEEP : &quot;screensaver_activate_on_sleep&quot;,
+<span id='android-provider-Settings-Secure-property-SCREENSAVER_DEFAULT_COMPONENT'>/** If screensavers are enabled, the default screensaver component.
+</span> @hide
+*/
+SCREENSAVER_DEFAULT_COMPONENT : &quot;screensaver_default_component&quot;,
+<span id='android-provider-Settings-Secure-property-NFC_PAYMENT_DEFAULT_COMPONENT'>/** The default NFC payment component
+</span> @hide
+*/
+NFC_PAYMENT_DEFAULT_COMPONENT : &quot;nfc_payment_default_component&quot;,
+<span id='android-provider-Settings-Secure-property-NFC_PAYMENT_FOREGROUND'>/** Whether NFC payment is handled by the foreground application or a default.
+</span> @hide
+*/
+NFC_PAYMENT_FOREGROUND : &quot;nfc_payment_foreground&quot;,
+<span id='android-provider-Settings-Secure-property-SMS_DEFAULT_APPLICATION'>/** Specifies the package name currently configured to be the primary sms application
+</span> @hide
+*/
+SMS_DEFAULT_APPLICATION : &quot;sms_default_application&quot;,
+<span id='android-provider-Settings-Secure-property-DIALER_DEFAULT_APPLICATION'>/** Specifies the package name currently configured to be the default dialer application
+</span> @hide
+*/
+DIALER_DEFAULT_APPLICATION : &quot;dialer_default_application&quot;,
+<span id='android-provider-Settings-Secure-property-CALL_SCREENING_DEFAULT_COMPONENT'>/** Specifies the component name currently configured to be the default call screening
+</span> application
+ @hide
+*/
+CALL_SCREENING_DEFAULT_COMPONENT : &quot;call_screening_default_component&quot;,
+<span id='android-provider-Settings-Secure-property-EMERGENCY_ASSISTANCE_APPLICATION'>/** Specifies the package name currently configured to be the emergency assistance application
+</span>
+ @see android.telephony.TelephonyManager#ACTION_EMERGENCY_ASSISTANCE
+
+ @hide
+*/
+EMERGENCY_ASSISTANCE_APPLICATION : &quot;emergency_assistance_application&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_STRUCTURE_ENABLED'>/** Specifies whether the current app context on scren (assist data) will be sent to the
+</span> assist application (active voice interaction service).
+
+ @hide
+*/
+ASSIST_STRUCTURE_ENABLED : &quot;assist_structure_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_SCREENSHOT_ENABLED'>/** Specifies whether a screenshot of the screen contents will be sent to the assist
+</span> application (active voice interaction service).
+
+ @hide
+*/
+ASSIST_SCREENSHOT_ENABLED : &quot;assist_screenshot_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_DISCLOSURE_ENABLED'>/** Specifies whether the screen will show an animation if screen contents are sent to the
+</span> assist application (active voice interaction service).
+
+ Note that the disclosure will be forced for third-party assistants or if the device
+ does not support disabling it.
+
+ @hide
+*/
+ASSIST_DISCLOSURE_ENABLED : &quot;assist_disclosure_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_ROTATION_SUGGESTIONS'>/** Control if rotation suggestions are sent to System UI when in rotation locked mode.
+</span> Done to enable screen rotation while the the screen rotation is locked. Enabling will
+ poll the accelerometer in rotation locked mode.
+
+ If 0, then rotation suggestions are not sent to System UI. If 1, suggestions are sent.
+
+ @hide
+*/
+SHOW_ROTATION_SUGGESTIONS : &quot;show_rotation_suggestions&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_ROTATION_SUGGESTIONS_DISABLED'>/** The disabled state of SHOW_ROTATION_SUGGESTIONS.
+</span> @hide
+*/
+SHOW_ROTATION_SUGGESTIONS_DISABLED : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_ROTATION_SUGGESTIONS_ENABLED'>/** The enabled state of SHOW_ROTATION_SUGGESTIONS.
+</span> @hide
+*/
+SHOW_ROTATION_SUGGESTIONS_ENABLED : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_ROTATION_SUGGESTIONS_DEFAULT'>/** The default state of SHOW_ROTATION_SUGGESTIONS.
+</span> @hide
+*/
+SHOW_ROTATION_SUGGESTIONS_DEFAULT : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-NUM_ROTATION_SUGGESTIONS_ACCEPTED'>/** The number of accepted rotation suggestions. Used to determine if the user has been
+</span> introduced to rotation suggestions.
+ @hide
+*/
+NUM_ROTATION_SUGGESTIONS_ACCEPTED : &quot;num_rotation_suggestions_accepted&quot;,
+<span id='android-provider-Settings-Secure-property-ENABLED_NOTIFICATION_ASSISTANT'>/** Read only list of the service components that the current user has explicitly allowed to
+</span> see and assist with all of the user's notifications.
+
+ @deprecated Use
+ {@link NotificationManager#isNotificationAssistantAccessGranted(ComponentName)}.
+ @hide
+*/
+ENABLED_NOTIFICATION_ASSISTANT : &quot;enabled_notification_assistant&quot;,
+<span id='android-provider-Settings-Secure-property-ENABLED_NOTIFICATION_LISTENERS'>/** Read only list of the service components that the current user has explicitly allowed to
+</span> see all of the user's notifications, separated by ':'.
+
+ @hide
+ @deprecated Use
+ {@link NotificationManager#isNotificationListenerAccessGranted(ComponentName)}.
+*/
+ENABLED_NOTIFICATION_LISTENERS : &quot;enabled_notification_listeners&quot;,
+<span id='android-provider-Settings-Secure-property-ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES'>/** Read only list of the packages that the current user has explicitly allowed to
+</span> manage do not disturb, separated by ':'.
+
+ @deprecated Use {@link NotificationManager#isNotificationPolicyAccessGranted()}.
+ @hide
+*/
+ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES : &quot;enabled_notification_policy_access_packages&quot;,
+<span id='android-provider-Settings-Secure-property-SYNC_PARENT_SOUNDS'>/** Defines whether managed profile ringtones should be synced from it's parent profile
+</span> &lt;p&gt;
+ 0 = ringtones are not synced
+ 1 = ringtones are synced from the profile's parent (default)
+ &lt;p&gt;
+ This value is only used for managed profiles.
+ @hide
+*/
+SYNC_PARENT_SOUNDS : &quot;sync_parent_sounds&quot;,
+<span id='android-provider-Settings-Secure-property-IMMERSIVE_MODE_CONFIRMATIONS'>/**@hide */
+</span>IMMERSIVE_MODE_CONFIRMATIONS : &quot;immersive_mode_confirmations&quot;,
+<span id='android-provider-Settings-Secure-property-PRINT_SERVICE_SEARCH_URI'>/** This is the query URI for finding a print service to install.
+</span>
+ @hide
+*/
+PRINT_SERVICE_SEARCH_URI : &quot;print_service_search_uri&quot;,
+<span id='android-provider-Settings-Secure-property-PAYMENT_SERVICE_SEARCH_URI'>/** This is the query URI for finding a NFC payment service to install.
+</span>
+ @hide
+*/
+PAYMENT_SERVICE_SEARCH_URI : &quot;payment_service_search_uri&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOFILL_SERVICE_SEARCH_URI'>/** This is the query URI for finding a auto fill service to install.
+</span>
+ @hide
+*/
+AUTOFILL_SERVICE_SEARCH_URI : &quot;autofill_service_search_uri&quot;,
+<span id='android-provider-Settings-Secure-property-SKIP_FIRST_USE_HINTS'>/** If enabled, apps should try to skip any introductory hints on first launch. This might
+</span> apply to users that are already familiar with the environment or temporary users.
+ &lt;p&gt;
+ Type : int (0 to show hints, 1 to skip showing hints)
+*/
+SKIP_FIRST_USE_HINTS : &quot;skip_first_use_hints&quot;,
+<span id='android-provider-Settings-Secure-property-UNSAFE_VOLUME_MUSIC_ACTIVE_MS'>/** Persisted playback time after a user confirmation of an unsafe volume level.
+</span>
+ @hide
+*/
+UNSAFE_VOLUME_MUSIC_ACTIVE_MS : &quot;unsafe_volume_music_active_ms&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_SHOW_NOTIFICATIONS'>/** Indicates whether notification display on the lock screen is enabled.
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+LOCK_SCREEN_SHOW_NOTIFICATIONS : &quot;lock_screen_show_notifications&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS'>/** Indicates whether the lock screen should display silent notifications.
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS : &quot;lock_screen_show_silent_notifications&quot;,
+<span id='android-provider-Settings-Secure-property-SHOW_NOTIFICATION_SNOOZE'>/** Indicates whether snooze options should be shown on notifications
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+SHOW_NOTIFICATION_SNOOZE : &quot;show_notification_snooze&quot;,
+<span id='android-provider-Settings-Secure-property-TV_INPUT_HIDDEN_INPUTS'>/** List of TV inputs that are currently hidden. This is a string
+</span> containing the IDs of all hidden TV inputs. Each ID is encoded by
+ {@link android.net.Uri#encode(String)} and separated by ':'.
+ @hide
+*/
+TV_INPUT_HIDDEN_INPUTS : &quot;tv_input_hidden_inputs&quot;,
+<span id='android-provider-Settings-Secure-property-TV_INPUT_CUSTOM_LABELS'>/** List of custom TV input labels. This is a string containing &lt;TV input id, custom name&gt;
+</span> pairs. TV input id and custom name are encoded by {@link android.net.Uri#encode(String)}
+ and separated by ','. Each pair is separated by ':'.
+ @hide
+*/
+TV_INPUT_CUSTOM_LABELS : &quot;tv_input_custom_labels&quot;,
+<span id='android-provider-Settings-Secure-property-TV_APP_USES_NON_SYSTEM_INPUTS'>/** Whether TV app uses non-system inputs.
+</span>
+ &lt;p&gt;
+ The value is boolean (1 or 0), where 1 means non-system TV inputs are allowed,
+ and 0 means non-system TV inputs are not allowed.
+
+ &lt;p&gt;
+ Devices such as sound bars may have changed the system property allow_third_party_inputs
+ to false so the TV Application only uses HDMI and other built in inputs. This setting
+ allows user to override the default and have the TV Application use third party TV inputs
+ available on play store.
+
+ @hide
+*/
+TV_APP_USES_NON_SYSTEM_INPUTS : &quot;tv_app_uses_non_system_inputs&quot;,
+<span id='android-provider-Settings-Secure-property-USB_AUDIO_AUTOMATIC_ROUTING_DISABLED'>/** Whether automatic routing of system audio to USB audio peripheral is disabled.
+</span> The value is boolean (1 or 0), where 1 means automatic routing is disabled,
+ and 0 means automatic routing is enabled.
+
+ @hide
+*/
+USB_AUDIO_AUTOMATIC_ROUTING_DISABLED : &quot;usb_audio_automatic_routing_disabled&quot;,
+<span id='android-provider-Settings-Secure-property-SLEEP_TIMEOUT'>/** The timeout in milliseconds before the device fully goes to sleep after
+</span> a period of inactivity.  This value sets an upper bound on how long the device
+ will stay awake or dreaming without user activity.  It should generally
+ be longer than {@link android.provider.BrowserContract.Settings.System#SCREEN_OFF_TIMEOUT} as otherwise the device
+ will sleep before it ever has a chance to dream.
+ &lt;p&gt;
+ Use -1 to disable this timeout.
+ &lt;/p&gt;
+
+ @hide
+*/
+SLEEP_TIMEOUT : &quot;sleep_timeout&quot;,
+<span id='android-provider-Settings-Secure-property-DOUBLE_TAP_TO_WAKE'>/** Controls whether double tap to wake is enabled.
+</span> @hide
+*/
+DOUBLE_TAP_TO_WAKE : &quot;double_tap_to_wake&quot;,
+<span id='android-provider-Settings-Secure-property-ASSISTANT'>/** The current assistant component. It could be a voice interaction service,
+</span> or an activity that handles ACTION_ASSIST, or empty which means using the default
+ handling.
+
+ &lt;p&gt;This should be set indirectly by setting the {@link android.app.role.RoleManager#ROLE_ASSISTANT assistant role}.
+
+ @hide
+*/
+ASSISTANT : &quot;assistant&quot;,
+<span id='android-provider-Settings-Secure-property-CAMERA_GESTURE_DISABLED'>/** Whether the camera launch gesture should be disabled.
+</span>
+ @hide
+*/
+CAMERA_GESTURE_DISABLED : &quot;camera_gesture_disabled&quot;,
+<span id='android-provider-Settings-Secure-property-CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED'>/** Whether the camera launch gesture to double tap the power button when the screen is off
+</span> should be disabled.
+
+ @hide
+*/
+CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED : &quot;camera_double_tap_power_gesture_disabled&quot;,
+<span id='android-provider-Settings-Secure-property-CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED'>/** Whether the camera double twist gesture to flip between front and back mode should be
+</span> enabled.
+
+ @hide
+*/
+CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED : &quot;camera_double_twist_to_flip_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-CAMERA_LIFT_TRIGGER_ENABLED'>/** Whether or not the smart camera lift trigger that launches the camera when the user moves
+</span> the phone into a position for taking photos should be enabled.
+
+ @hide
+*/
+CAMERA_LIFT_TRIGGER_ENABLED : &quot;camera_lift_trigger_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-CAMERA_LIFT_TRIGGER_ENABLED_DEFAULT'>/** The default enable state of the camera lift trigger.
+</span>
+ @hide
+*/
+CAMERA_LIFT_TRIGGER_ENABLED_DEFAULT : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-FLASHLIGHT_AVAILABLE'>/** Whether or not the flashlight (camera torch mode) is available required to turn
+</span> on flashlight.
+
+ @hide
+*/
+FLASHLIGHT_AVAILABLE : &quot;flashlight_available&quot;,
+<span id='android-provider-Settings-Secure-property-FLASHLIGHT_ENABLED'>/** Whether or not flashlight is enabled.
+</span>
+ @hide
+*/
+FLASHLIGHT_ENABLED : &quot;flashlight_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-FACE_UNLOCK_KEYGUARD_ENABLED'>/** Whether or not face unlock is allowed on Keyguard.
+</span> @hide
+*/
+FACE_UNLOCK_KEYGUARD_ENABLED : &quot;face_unlock_keyguard_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-FACE_UNLOCK_DISMISSES_KEYGUARD'>/** Whether or not face unlock dismisses the keyguard.
+</span> @hide
+*/
+FACE_UNLOCK_DISMISSES_KEYGUARD : &quot;face_unlock_dismisses_keyguard&quot;,
+<span id='android-provider-Settings-Secure-property-FACE_UNLOCK_ATTENTION_REQUIRED'>/** Whether or not face unlock requires attention. This is a cached value, the source of
+</span> truth is obtained through the HAL.
+ @hide
+*/
+FACE_UNLOCK_ATTENTION_REQUIRED : &quot;face_unlock_attention_required&quot;,
+<span id='android-provider-Settings-Secure-property-FACE_UNLOCK_DIVERSITY_REQUIRED'>/** Whether or not face unlock requires a diverse set of poses during enrollment. This is a
+</span> cached value, the source of truth is obtained through the HAL.
+ @hide
+*/
+FACE_UNLOCK_DIVERSITY_REQUIRED : &quot;face_unlock_diversity_required&quot;,
+<span id='android-provider-Settings-Secure-property-FACE_UNLOCK_APP_ENABLED'>/** Whether or not face unlock is allowed for apps (through BiometricPrompt).
+</span> @hide
+*/
+FACE_UNLOCK_APP_ENABLED : &quot;face_unlock_app_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION'>/** Whether or not face unlock always requires user confirmation, meaning {@link android.hardware.biometrics.BiometricPrompt.Builder#setConfirmationRequired(boolean)}
+</span> is always 'true'. This overrides the behavior that apps choose in the
+ setConfirmationRequired API.
+ @hide
+*/
+FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION : &quot;face_unlock_always_require_confirmation&quot;,
+<span id='android-provider-Settings-Secure-property-FACE_UNLOCK_EDUCATION_INFO_DISPLAYED'>/** Whether or not the face unlock education screen has been shown to the user.
+</span> @hide
+*/
+FACE_UNLOCK_EDUCATION_INFO_DISPLAYED : &quot;face_unlock_education_info_displayed&quot;,
+<span id='android-provider-Settings-Secure-property-BIOMETRIC_DEBUG_ENABLED'>/** Whether or not debugging is enabled.
+</span> @hide
+*/
+BIOMETRIC_DEBUG_ENABLED : &quot;biometric_debug_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_GESTURE_ENABLED'>/** Whether the assist gesture should be enabled.
+</span>
+ @hide
+*/
+ASSIST_GESTURE_ENABLED : &quot;assist_gesture_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_GESTURE_SENSITIVITY'>/** Sensitivity control for the assist gesture.
+</span>
+ @hide
+*/
+ASSIST_GESTURE_SENSITIVITY : &quot;assist_gesture_sensitivity&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_GESTURE_SILENCE_ALERTS_ENABLED'>/** Whether the assist gesture should silence alerts.
+</span>
+ @hide
+*/
+ASSIST_GESTURE_SILENCE_ALERTS_ENABLED : &quot;assist_gesture_silence_alerts_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_GESTURE_WAKE_ENABLED'>/** Whether the assist gesture should wake the phone.
+</span>
+ @hide
+*/
+ASSIST_GESTURE_WAKE_ENABLED : &quot;assist_gesture_wake_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ASSIST_GESTURE_SETUP_COMPLETE'>/** Indicates whether the Assist Gesture Deferred Setup has been completed.
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+ASSIST_GESTURE_SETUP_COMPLETE : &quot;assist_gesture_setup_complete&quot;,
+<span id='android-provider-Settings-Secure-property-TRUST_AGENTS_EXTEND_UNLOCK'>/** Control whether Trust Agents are in active unlock or extend unlock mode.
+</span> @hide
+*/
+TRUST_AGENTS_EXTEND_UNLOCK : &quot;trust_agents_extend_unlock&quot;,
+<span id='android-provider-Settings-Secure-property-LOCK_SCREEN_WHEN_TRUST_LOST'>/** Control whether the screen locks when trust is lost.
+</span> @hide
+*/
+LOCK_SCREEN_WHEN_TRUST_LOST : &quot;lock_screen_when_trust_lost&quot;,
+<span id='android-provider-Settings-Secure-property-NIGHT_DISPLAY_ACTIVATED'>/** Control whether Night display is currently activated.
+</span> @hide
+*/
+NIGHT_DISPLAY_ACTIVATED : &quot;night_display_activated&quot;,
+<span id='android-provider-Settings-Secure-property-NIGHT_DISPLAY_AUTO_MODE'>/** Control whether Night display will automatically activate/deactivate.
+</span> @hide
+*/
+NIGHT_DISPLAY_AUTO_MODE : &quot;night_display_auto_mode&quot;,
+<span id='android-provider-Settings-Secure-property-NIGHT_DISPLAY_COLOR_TEMPERATURE'>/** Control the color temperature of Night Display, represented in Kelvin.
+</span> @hide
+*/
+NIGHT_DISPLAY_COLOR_TEMPERATURE : &quot;night_display_color_temperature&quot;,
+<span id='android-provider-Settings-Secure-property-NIGHT_DISPLAY_CUSTOM_START_TIME'>/** Custom time when Night display is scheduled to activate.
+</span> Represented as milliseconds from midnight (e.g. 79200000 == 10pm).
+ @hide
+*/
+NIGHT_DISPLAY_CUSTOM_START_TIME : &quot;night_display_custom_start_time&quot;,
+<span id='android-provider-Settings-Secure-property-NIGHT_DISPLAY_CUSTOM_END_TIME'>/** Custom time when Night display is scheduled to deactivate.
+</span> Represented as milliseconds from midnight (e.g. 21600000 == 6am).
+ @hide
+*/
+NIGHT_DISPLAY_CUSTOM_END_TIME : &quot;night_display_custom_end_time&quot;,
+<span id='android-provider-Settings-Secure-property-NIGHT_DISPLAY_LAST_ACTIVATED_TIME'>/** A String representing the LocalDateTime when Night display was last activated. Use to
+</span> decide whether to apply the current activated state after a reboot or user change. In
+ legacy cases, this is represented by the time in milliseconds (since epoch).
+ @hide
+*/
+NIGHT_DISPLAY_LAST_ACTIVATED_TIME : &quot;night_display_last_activated_time&quot;,
+<span id='android-provider-Settings-Secure-property-DISPLAY_WHITE_BALANCE_ENABLED'>/** Control whether display white balance is currently enabled.
+</span> @hide
+*/
+DISPLAY_WHITE_BALANCE_ENABLED : &quot;display_white_balance_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-ENABLED_VR_LISTENERS'>/** Names of the service components that the current user has explicitly allowed to
+</span> be a VR mode listener, separated by ':'.
+
+ @hide
+*/
+ENABLED_VR_LISTENERS : &quot;enabled_vr_listeners&quot;,
+<span id='android-provider-Settings-Secure-property-VR_DISPLAY_MODE'>/** Behavior of the display while in VR mode.
+</span>
+ One of {@link #VR_DISPLAY_MODE_LOW_PERSISTENCE} or {@link #VR_DISPLAY_MODE_OFF}.
+
+ @hide
+*/
+VR_DISPLAY_MODE : &quot;vr_display_mode&quot;,
+<span id='android-provider-Settings-Secure-property-VR_DISPLAY_MODE_LOW_PERSISTENCE'>/** Lower the display persistence while the system is in VR mode.
+</span>
+ @see PackageManager#FEATURE_VR_MODE_HIGH_PERFORMANCE
+
+ @hide.
+*/
+VR_DISPLAY_MODE_LOW_PERSISTENCE : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-VR_DISPLAY_MODE_OFF'>/** Do not alter the display persistence while the system is in VR mode.
+</span>
+ @see PackageManager#FEATURE_VR_MODE_HIGH_PERFORMANCE
+
+ @hide.
+*/
+VR_DISPLAY_MODE_OFF : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-CARRIER_APPS_HANDLED'>/** Whether CarrierAppUtils#disableCarrierAppsUntilPrivileged has been executed at least
+</span> once.
+
+ &lt;p&gt;This is used to ensure that we only take one pass which will disable apps that are not
+ privileged (if any). From then on, we only want to enable apps (when a matching SIM is
+ inserted), to avoid disabling an app that the user might actively be using.
+
+ &lt;p&gt;Will be set to 1 once executed.
+
+ @hide
+*/
+CARRIER_APPS_HANDLED : &quot;carrier_apps_handled&quot;,
+<span id='android-provider-Settings-Secure-property-MANAGED_PROFILE_CONTACT_REMOTE_SEARCH'>/** Whether parent user can access remote contact in managed profile.
+</span>
+ @hide
+*/
+MANAGED_PROFILE_CONTACT_REMOTE_SEARCH : &quot;managed_profile_contact_remote_search&quot;,
+<span id='android-provider-Settings-Secure-property-CROSS_PROFILE_CALENDAR_ENABLED'>/** Whether parent profile can access remote calendar data in managed profile.
+</span>
+ @hide
+*/
+CROSS_PROFILE_CALENDAR_ENABLED : &quot;cross_profile_calendar_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOMATIC_STORAGE_MANAGER_ENABLED'>/** Whether or not the automatic storage manager is enabled and should run on the device.
+</span>
+ @hide
+*/
+AUTOMATIC_STORAGE_MANAGER_ENABLED : &quot;automatic_storage_manager_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN'>/** How many days of information for the automatic storage manager to retain on the device.
+</span>
+ @hide
+*/
+AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN : &quot;automatic_storage_manager_days_to_retain&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_DEFAULT'>/** Default number of days of information for the automatic storage manager to retain.
+</span>
+ @hide
+*/
+AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_DEFAULT : &quot;90&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOMATIC_STORAGE_MANAGER_BYTES_CLEARED'>/** How many bytes the automatic storage manager has cleared out.
+</span>
+ @hide
+*/
+AUTOMATIC_STORAGE_MANAGER_BYTES_CLEARED : &quot;automatic_storage_manager_bytes_cleared&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOMATIC_STORAGE_MANAGER_LAST_RUN'>/** Last run time for the automatic storage manager.
+</span>
+ @hide
+*/
+AUTOMATIC_STORAGE_MANAGER_LAST_RUN : &quot;automatic_storage_manager_last_run&quot;,
+<span id='android-provider-Settings-Secure-property-AUTOMATIC_STORAGE_MANAGER_TURNED_OFF_BY_POLICY'>/** If the automatic storage manager has been disabled by policy. Note that this doesn't
+</span> mean that the automatic storage manager is prevented from being re-enabled -- this only
+ means that it was turned off by policy at least once.
+
+ @hide
+*/
+AUTOMATIC_STORAGE_MANAGER_TURNED_OFF_BY_POLICY : &quot;automatic_storage_manager_turned_off_by_policy&quot;,
+<span id='android-provider-Settings-Secure-property-SYSTEM_NAVIGATION_KEYS_ENABLED'>/** Whether SystemUI navigation keys is enabled.
+</span> @hide
+*/
+SYSTEM_NAVIGATION_KEYS_ENABLED : &quot;system_navigation_keys_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-QS_TILES'>/** Holds comma separated list of ordering of QS tiles.
+</span> @hide
+*/
+QS_TILES : &quot;sysui_qs_tiles&quot;,
+<span id='android-provider-Settings-Secure-property-INSTANT_APPS_ENABLED'>/** Specifies whether the web action API is enabled.
+</span>
+ @hide
+*/
+INSTANT_APPS_ENABLED : &quot;instant_apps_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-DEVICE_PAIRED'>/** Has this pairable device been paired or upgraded from a previously paired system.
+</span> @hide
+*/
+DEVICE_PAIRED : &quot;device_paired&quot;,
+<span id='android-provider-Settings-Secure-property-PACKAGE_VERIFIER_STATE'>/** Integer state indicating whether package verifier is enabled.
+</span> TODO(b/34259924): Remove this setting.
+
+ @hide
+*/
+PACKAGE_VERIFIER_STATE : &quot;package_verifier_state&quot;,
+<span id='android-provider-Settings-Secure-property-CMAS_ADDITIONAL_BROADCAST_PKG'>/** Specifies additional package name for broadcasting the CMAS messages.
+</span> @hide
+*/
+CMAS_ADDITIONAL_BROADCAST_PKG : &quot;cmas_additional_broadcast_pkg&quot;,
+<span id='android-provider-Settings-Secure-property-NOTIFICATION_BADGING'>/** Whether the launcher should show any notification badges.
+</span> The value is boolean (1 or 0).
+ @hide
+*/
+NOTIFICATION_BADGING : &quot;notification_badging&quot;,
+<span id='android-provider-Settings-Secure-property-NOTIFICATION_BUBBLES'>/** Whether the notification bubbles are globally enabled
+</span> The value is boolean (1 or 0).
+ @hide
+*/
+NOTIFICATION_BUBBLES : &quot;notification_bubbles&quot;,
+<span id='android-provider-Settings-Secure-property-NOTIFICATION_DISMISS_RTL'>/** Whether notifications are dismissed by a right-to-left swipe (instead of a left-to-right
+</span> swipe).
+
+ @hide
+*/
+NOTIFICATION_DISMISS_RTL : &quot;notification_dismiss_rtl&quot;,
+<span id='android-provider-Settings-Secure-property-QS_AUTO_ADDED_TILES'>/** Comma separated list of QS tiles that have been auto-added already.
+</span> @hide
+*/
+QS_AUTO_ADDED_TILES : &quot;qs_auto_tiles&quot;,
+<span id='android-provider-Settings-Secure-property-LOCKDOWN_IN_POWER_MENU'>/** Whether the Lockdown button should be shown in the power menu.
+</span> @hide
+*/
+LOCKDOWN_IN_POWER_MENU : &quot;lockdown_in_power_menu&quot;,
+<span id='android-provider-Settings-Secure-property-BACKUP_MANAGER_CONSTANTS'>/** Backup manager behavioral parameters.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;key_value_backup_interval_milliseconds=14400000,key_value_backup_require_charging=true&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ key_value_backup_interval_milliseconds  (long)
+ key_value_backup_fuzz_milliseconds      (long)
+ key_value_backup_require_charging       (boolean)
+ key_value_backup_required_network_type  (int)
+ full_backup_interval_milliseconds       (long)
+ full_backup_require_charging            (boolean)
+ full_backup_required_network_type       (int)
+ backup_finished_notification_receivers  (String[])
+ &lt;/pre&gt;
+
+ backup_finished_notification_receivers uses &quot;:&quot; as delimeter for values.
+
+ &lt;p&gt;
+ Type: string
+ @hide
+*/
+BACKUP_MANAGER_CONSTANTS : &quot;backup_manager_constants&quot;,
+<span id='android-provider-Settings-Secure-property-BACKUP_LOCAL_TRANSPORT_PARAMETERS'>/** Local transport parameters so we can configure it for tests.
+</span> This is encoded as a key=value list, separated by commas.
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ fake_encryption_flag  (boolean)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+*/
+BACKUP_LOCAL_TRANSPORT_PARAMETERS : &quot;backup_local_transport_parameters&quot;,
+<span id='android-provider-Settings-Secure-property-BLUETOOTH_ON_WHILE_DRIVING'>/** Flag to set if the system should predictively attempt to re-enable Bluetooth while
+</span> the user is driving.
+ @hide
+*/
+BLUETOOTH_ON_WHILE_DRIVING : &quot;bluetooth_on_while_driving&quot;,
+<span id='android-provider-Settings-Secure-property-VOLUME_HUSH_GESTURE'>/** What behavior should be invoked when the volume hush gesture is triggered
+</span> One of VOLUME_HUSH_OFF, VOLUME_HUSH_VIBRATE, VOLUME_HUSH_MUTE.
+
+ @hide
+*/
+VOLUME_HUSH_GESTURE : &quot;volume_hush_gesture&quot;,
+<span id='android-provider-Settings-Secure-property-VOLUME_HUSH_OFF'>/**@hide */
+</span>VOLUME_HUSH_OFF : &quot;0&quot;,
+<span id='android-provider-Settings-Secure-property-VOLUME_HUSH_VIBRATE'>/**@hide */
+</span>VOLUME_HUSH_VIBRATE : &quot;1&quot;,
+<span id='android-provider-Settings-Secure-property-VOLUME_HUSH_MUTE'>/**@hide */
+</span>VOLUME_HUSH_MUTE : &quot;2&quot;,
+<span id='android-provider-Settings-Secure-property-LOW_POWER_MANUAL_ACTIVATION_COUNT'>/** The number of times (integer) the user has manually enabled battery saver.
+</span> @hide
+*/
+LOW_POWER_MANUAL_ACTIVATION_COUNT : &quot;low_power_manual_activation_count&quot;,
+<span id='android-provider-Settings-Secure-property-LOW_POWER_WARNING_ACKNOWLEDGED'>/** Whether the &quot;first time battery saver warning&quot; dialog needs to be shown (0: default)
+</span> or not (1).
+
+ @hide
+*/
+LOW_POWER_WARNING_ACKNOWLEDGED : &quot;low_power_warning_acknowledged&quot;,
+<span id='android-provider-Settings-Secure-property-SUPPRESS_AUTO_BATTERY_SAVER_SUGGESTION'>/** 0 (default) Auto battery saver suggestion has not been suppressed. 1) it has been
+</span> suppressed.
+ @hide
+*/
+SUPPRESS_AUTO_BATTERY_SAVER_SUGGESTION : &quot;suppress_auto_battery_saver_suggestion&quot;,
+<span id='android-provider-Settings-Secure-property-PACKAGES_TO_CLEAR_DATA_BEFORE_FULL_RESTORE'>/** List of packages, which data need to be unconditionally cleared before full restore.
+</span> Type: string
+ @hide
+*/
+PACKAGES_TO_CLEAR_DATA_BEFORE_FULL_RESTORE : &quot;packages_to_clear_data_before_full_restore&quot;,
+<span id='android-provider-Settings-Secure-property-NOTIFICATION_NEW_INTERRUPTION_MODEL'>/** Setting to determine whether to use the new notification priority handling features.
+</span> @hide
+*/
+NOTIFICATION_NEW_INTERRUPTION_MODEL : &quot;new_interruption_model&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_ACCESS_CHECK_INTERVAL_MILLIS'>/** How often to check for location access.
+</span> @hide
+*/
+LOCATION_ACCESS_CHECK_INTERVAL_MILLIS : &quot;location_access_check_interval_millis&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_ACCESS_CHECK_DELAY_MILLIS'>/** Delay between granting location access and checking it.
+</span> @hide
+*/
+LOCATION_ACCESS_CHECK_DELAY_MILLIS : &quot;location_access_check_delay_millis&quot;,
+<span id='android-provider-Settings-Secure-property-LOCATION_PERMISSIONS_UPGRADE_TO_Q_MODE'>/** What should happen to the location permissions when upgraded to Android Q.
+</span>
+ &lt;ul&gt;
+     &lt;li&gt;0/unset == revoke permissions&lt;/li&gt;
+     &lt;li&gt;anything else == Don't do anything&lt;/li&gt;
+ &lt;/ul&gt;
+
+ @hide
+*/
+LOCATION_PERMISSIONS_UPGRADE_TO_Q_MODE : &quot;location_permissions_upgrade_to_q_mode&quot;,
+<span id='android-provider-Settings-Secure-property-THEME_CUSTOMIZATION_OVERLAY_PACKAGES'>/** Map of android.theme.customization.* categories to the enabled overlay package for that
+</span> category, formatted as a serialized {@link org.json.JSONObject}. If there is no
+ corresponding package included for a category, then all overlay packages in that
+ category must be disabled.
+ @hide
+*/
+THEME_CUSTOMIZATION_OVERLAY_PACKAGES : &quot;theme_customization_overlay_packages&quot;,
+<span id='android-provider-Settings-Secure-property-NAVIGATION_MODE'>/** Navigation bar mode.
+</span>  0 = 3 button
+  1 = 2 button
+  2 = fully gestural
+ @hide
+*/
+NAVIGATION_MODE : &quot;navigation_mode&quot;,
+<span id='android-provider-Settings-Secure-property-AWARE_ENABLED'>/** Controls whether aware is enabled.
+</span> @hide
+*/
+AWARE_ENABLED : &quot;aware_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-AWARE_LOCK_ENABLED'>/** Controls whether aware_lock is enabled.
+</span> @hide
+*/
+AWARE_LOCK_ENABLED : &quot;aware_lock_enabled&quot;,
+<span id='android-provider-Settings-Secure-property-SETTINGS_TO_BACKUP'>/** This are the settings to be backed up.
+</span>
+ NOTE: Settings are backed up and restored in the order they appear
+       in this array. If you have one setting depending on another,
+       make sure that they are ordered appropriately.
+
+ @hide
+*/
+SETTINGS_TO_BACKUP : &quot;null&quot;,
+<span id='android-provider-Settings-Secure-property-VALIDATORS'>/** All settings in {@link SETTINGS_TO_BACKUP} array *must* have a non-null validator,
+</span> otherwise they won't be restored.
+
+ @hide
+*/
+VALIDATORS : &quot;null&quot;,
+<span id='android-provider-Settings-Secure-property-LEGACY_RESTORE_SETTINGS'>/** Keys we no longer back up under the current schema, but want to continue to
+</span> process when restoring historical backup datasets.
+
+ All settings in {@link LEGACY_RESTORE_SETTINGS} array *must* have a non-null validator,
+ otherwise they won't be restored.
+
+ @hide
+*/
+LEGACY_RESTORE_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-Secure-property-INSTANT_APP_SETTINGS'>/** Secure settings which can be accessed by instant apps.
+</span> @hide
+*/
+INSTANT_APP_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-Secure-method-getMovedToGlobalSettings'>/**
+</span>@hide 
+*/
+getMovedToGlobalSettings : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-clearProviderForTest'>/**
+</span>@hide 
+*/
+clearProviderForTest : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getString'>/**Look up a name in the database.
+</span>@param {Object {ContentResolver}} resolver to access the database with
+@param {String} name to look up in the table
+@return {String} the corresponding value, or null if not present
+*/
+getString : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getStringForUser'>/**
+</span>@hide 
+*/
+getStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putString'>/**Store a name/value pair into the database.
+</span>@param {Object {ContentResolver}} resolver to access the database with
+@param {String} name to store
+@param {String} value to associate with the name
+@return {Boolean} true if the value was set, false on database errors
+*/
+putString : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putStringForUser'>/**
+</span>@hide 
+*/
+putStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putStringForUser'>/**
+</span>@hide 
+*/
+putStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putString'>/**Store a name/value pair into the database.
+</span> &lt;p&gt;
+ The method takes an optional tag to associate with the setting
+ which can be used to clear only settings made by your package and
+ associated with this tag by passing the tag to {@link #resetToDefaults(ContentResolver, String)}. Anyone can override
+ the current tag. Also if another package changes the setting
+ then the tag will be set to the one specified in the set call
+ which can be null. Also any of the settings setters that do not
+ take a tag as an argument effectively clears the tag.
+ &lt;/p&gt;&lt;p&gt;
+ For example, if you set settings A and B with tags T1 and T2 and
+ another app changes setting A (potentially to the same value), it
+ can assign to it a tag T3 (note that now the package that changed
+ the setting is not yours). Now if you reset your changes for T1 and
+ T2 only setting B will be reset and A not (as it was changed by
+ another package) but since A did not change you are in the desired
+ initial state. Now if the other app changes the value of A (assuming
+ you registered an observer in the beginning) you would detect that
+ the setting was changed by another app and handle this appropriately
+ (ignore, set back to some value, etc).
+ &lt;/p&gt;&lt;p&gt;
+ Also the method takes an argument whether to make the value the
+ default for this setting. If the system already specified a default
+ value, then the one passed in here will &lt;strong&gt;not&lt;/strong&gt;
+ be set as the default.
+ &lt;/p&gt;
+@param {Object {ContentResolver}} resolver to access the database with.
+@param {String} name to store.
+@param {String} value to associate with the name.
+@param {String} tag to associate with the setting.
+@param {Boolean} makeDefault whether to make the value the default one.
+@return {Boolean} true if the value was set, false on database errors.
+@see #resetToDefaults(ContentResolver, String)
+@hide 
+*/
+putString : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-resetToDefaults'>/**Reset the settings to their defaults. This would reset &lt;strong&gt;only&lt;/strong&gt;
+</span> settings set by the caller's package. Think of it of a way to undo your own
+ changes to the global settings. Passing in the optional tag will reset only
+ settings changed by your package and associated with this tag.
+@param {Object {ContentResolver}} resolver Handle to the content resolver.
+@param {String} tag Optional tag which should be associated with the settings to reset.
+@see #putString(ContentResolver, String, String, String, boolean)
+@hide 
+*/
+resetToDefaults : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-resetToDefaultsAsUser'>/**Reset the settings to their defaults for a given user with a specific mode. The
+</span> optional tag argument is valid only for {@link #RESET_MODE_PACKAGE_DEFAULTS}
+ allowing resetting the settings made by a package and associated with the tag.
+@param {Object {ContentResolver}} resolver Handle to the content resolver.
+@param {String} tag Optional tag which should be associated with the settings to reset.
+@param {Number} mode The reset mode.
+@param {Number} userHandle The user for which to reset to defaults.
+@see #RESET_MODE_PACKAGE_DEFAULTS
+@see #RESET_MODE_UNTRUSTED_DEFAULTS
+@see #RESET_MODE_UNTRUSTED_CHANGES
+@see #RESET_MODE_TRUSTED_DEFAULTS
+@hide 
+*/
+resetToDefaultsAsUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getUriFor'>/**Construct the content URI for a particular name/value pair,
+</span> useful for monitoring changes with a ContentObserver.
+@param {String} name to look up in the table
+@return {Object {android.net.Uri}} the corresponding content URI, or null if not present
+*/
+getUriFor : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getInt'>/**Convenience function for retrieving a single secure settings value
+</span> as an integer.  Note that internally setting values are always
+ stored as strings; this function converts the string to an integer
+ for you.  The default value will be returned if the setting is
+ not defined or not an integer.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid integer.
+*/
+getInt : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getIntForUser'>/**
+</span>@hide 
+*/
+getIntForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getInt'>/**Convenience function for retrieving a single secure settings value
+</span> as an integer.  Note that internally setting values are always
+ stored as strings; this function converts the string to an integer
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not an integer.
+@return {Number} The setting's current value.
+*/
+getInt : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getIntForUser'>/**
+</span>@hide 
+*/
+getIntForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putInt'>/**Convenience function for updating a single settings value as an
+</span> integer. This will either create a new entry in the table if the
+ given name does not exist, or modify the value of the existing row
+ with that name.  Note that internally setting values are always
+ stored as strings, so this function converts the given value to a
+ string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putInt : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putIntForUser'>/**
+</span>@hide 
+*/
+putIntForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getLong'>/**Convenience function for retrieving a single secure settings value
+</span> as a {@code long}.  Note that internally setting values are always
+ stored as strings; this function converts the string to a {@code long}
+ for you.  The default value will be returned if the setting is
+ not defined or not a {@code long}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid {@code long}.
+*/
+getLong : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getLongForUser'>/**
+</span>@hide 
+*/
+getLongForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getLong'>/**Convenience function for retrieving a single secure settings value
+</span> as a {@code long}.  Note that internally setting values are always
+ stored as strings; this function converts the string to a {@code long}
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@return {Number} The setting's current value.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not an integer.
+*/
+getLong : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getLongForUser'>/**
+</span>@hide 
+*/
+getLongForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putLong'>/**Convenience function for updating a secure settings value as a long
+</span> integer. This will either create a new entry in the table if the
+ given name does not exist, or modify the value of the existing row
+ with that name.  Note that internally setting values are always
+ stored as strings, so this function converts the given value to a
+ string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putLong : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putLongForUser'>/**
+</span>@hide 
+*/
+putLongForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getFloat'>/**Convenience function for retrieving a single secure settings value
+</span> as a floating point number.  Note that internally setting values are
+ always stored as strings; this function converts the string to an
+ float for you. The default value will be returned if the setting
+ is not defined or not a valid float.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid float.
+*/
+getFloat : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getFloatForUser'>/**
+</span>@hide 
+*/
+getFloatForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getFloat'>/**Convenience function for retrieving a single secure settings value
+</span> as a float.  Note that internally setting values are always
+ stored as strings; this function converts the string to a float
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not a float.
+@return {Number} The setting's current value.
+*/
+getFloat : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getFloatForUser'>/**
+</span>@hide 
+*/
+getFloatForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putFloat'>/**Convenience function for updating a single settings value as a
+</span> floating point number. This will either create a new entry in the
+ table if the given name does not exist, or modify the value of the
+ existing row with that name.  Note that internally setting values
+ are always stored as strings, so this function converts the given
+ value to a string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putFloat : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-putFloatForUser'>/**
+</span>@hide 
+*/
+putFloatForUser : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-getCloneToManagedProfileSettings'>/**
+</span>@hide 
+*/
+getCloneToManagedProfileSettings : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-isLocationProviderEnabled'>/**Helper method for determining if a location provider is enabled.
+</span>@param {Object {ContentResolver}} cr the content resolver to use
+@param {String} provider the location provider to query
+@return {Boolean} true if the provider is enabled
+@deprecated use {@link LocationManager#isProviderEnabled(String)}
+*/
+isLocationProviderEnabled : function(  ) {},
+
+<span id='android-provider-Settings-Secure-method-setLocationProviderEnabled'>/**Thread-safe method for enabling or disabling a single location provider. This will have
+</span> no effect on Android Q and above.
+@param {Object {ContentResolver}} cr the content resolver to use
+@param {String} provider the location provider to enable or disable
+@param {Boolean} enabled true if the provider should be enabled
+@deprecated This API is deprecated
+*/
+setLocationProviderEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

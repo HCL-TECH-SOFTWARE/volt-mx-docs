@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-textservice-SpellCheckerService'>/**@class android.service.textservice.SpellCheckerService
+</span>@extends android.app.Service
+
+ SpellCheckerService provides an abstract base class for a spell checker.
+ This class combines a service to the system with the spell checker service interface that
+ spell checker must implement.
+
+ &lt;p&gt;In addition to the normal Service lifecycle methods, this class
+ introduces a new specific callback that subclasses should override
+ {@link #createSession}() to provide a spell checker session that is corresponding
+ to requested language and so on. The spell checker session returned by this method
+ should extend {@link android.service.textservice.SpellCheckerService.Session}.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Returning spell check results&lt;/h3&gt;
+
+ &lt;p&gt;{@link android.service.textservice.SpellCheckerService.Session#onGetSuggestions(TextInfo, int)}
+ should return spell check results.
+ It receives {@link android.view.textservice.TextInfo} and returns
+ {@link android.view.textservice.SuggestionsInfo} for the input.
+ You may want to override
+ {@link android.service.textservice.SpellCheckerService.Session#onGetSuggestionsMultiple(TextInfo[], int, boolean)} for
+ better performance and quality.
+ &lt;/p&gt;
+
+ &lt;p&gt;Please note that {@link android.service.textservice.SpellCheckerService.Session#getLocale()} does not return a valid
+ locale before {@link android.service.textservice.SpellCheckerService.Session#onCreate()} &lt;/p&gt;
+
+*/
+var SpellCheckerService = {
+
+<span id='android-service-textservice-SpellCheckerService-property-SERVICE_INTERFACE'>/***/
+</span>SERVICE_INTERFACE : &quot;android.service.textservice.SpellCheckerService&quot;,
+<span id='android-service-textservice-SpellCheckerService-method-onBind'>/**Implement to return the implementation of the internal spell checker
+</span> service interface. Subclasses should not override.
+*/
+onBind : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-method-createSession'>/**Factory method to create a spell checker session impl
+</span>@return {Object {android.service.textservice.SpellCheckerService.Session}} SpellCheckerSessionImpl which should be overridden by a concrete implementation.
+*/
+createSession : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

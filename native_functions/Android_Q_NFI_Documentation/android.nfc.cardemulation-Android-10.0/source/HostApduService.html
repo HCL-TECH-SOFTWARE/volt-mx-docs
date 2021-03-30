@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-cardemulation-HostApduService'>/**@class android.nfc.cardemulation.HostApduService
+</span>@extends android.app.Service
+
+ &lt;p&gt;HostApduService is a convenience {@link Service} class that can be
+ extended to emulate an NFC card inside an Android
+ service component.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guide&lt;/h3&gt;
+ For a general introduction to card emulation, see
+ &lt;a href=&quot;{@docRoot}guide/topics/connectivity/nfc/hce.html&quot;&gt;
+ Host-based Card Emulation&lt;/a&gt;.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;h3&gt;NFC Protocols&lt;/h3&gt;
+ &lt;p&gt;Cards emulated by this class are based on the NFC-Forum ISO-DEP
+ protocol (based on ISO/IEC 14443-4) and support processing
+ command Application Protocol Data Units (APDUs) as
+ defined in the ISO/IEC 7816-4 specification.
+
+ &lt;h3&gt;Service selection&lt;/h3&gt;
+ &lt;p&gt;When a remote NFC device wants to talk to your
+ service, it sends a so-called
+ &quot;SELECT AID&quot; APDU as defined in the ISO/IEC 7816-4 specification.
+ The AID is an application identifier defined in ISO/IEC 7816-4.
+
+ &lt;p&gt;The registration procedure for AIDs is defined in the
+ ISO/IEC 7816-5 specification. If you don't want to register an
+ AID, you are free to use AIDs in the proprietary range:
+ bits 8-5 of the first byte must each be set to '1'. For example,
+ &quot;0xF00102030405&quot; is a proprietary AID. If you do use proprietary
+ AIDs, it is recommended to choose an AID of at least 6 bytes,
+ to reduce the risk of collisions with other applications that
+ might be using proprietary AIDs as well.
+
+ &lt;h3&gt;AID groups&lt;/h3&gt;
+ &lt;p&gt;In some cases, a service may need to register multiple AIDs
+ to implement a certain application, and it needs to be sure
+ that it is the default handler for all of these AIDs (as opposed
+ to some AIDs in the group going to another service).
+
+ &lt;p&gt;An AID group is a list of AIDs that should be considered as
+ belonging together by the OS. For all AIDs in an AID group, the
+ OS will guarantee one of the following:
+ &lt;ul&gt;
+ &lt;li&gt;All AIDs in the group are routed to this service
+ &lt;li&gt;No AIDs in the group are routed to this service
+ &lt;/ul&gt;
+ In other words, there is no in-between state, where some AIDs
+ in the group can be routed to this service, and some to another.
+ &lt;h3&gt;AID groups and categories&lt;/h3&gt;
+ &lt;p&gt;Each AID group can be associated with a category. This allows
+ the Android OS to classify services, and it allows the user to
+ set defaults at the category level instead of the AID level.
+
+ &lt;p&gt;You can use
+ {@link android.nfc.cardemulation.CardEmulation#isDefaultServiceForCategory(android.content.ComponentName, String)}
+ to determine if your service is the default handler for a category.
+
+ &lt;p&gt;In this version of the platform, the only known categories
+ are {@link android.nfc.cardemulation.CardEmulation#CATEGORY_PAYMENT} and {@link android.nfc.cardemulation.CardEmulation#CATEGORY_OTHER}.
+ AID groups without a category, or with a category that is not recognized
+ by the current platform version, will automatically be
+ grouped into the {@link android.nfc.cardemulation.CardEmulation#CATEGORY_OTHER} category.
+ &lt;h3&gt;Service AID registration&lt;/h3&gt;
+ &lt;p&gt;To tell the platform which AIDs groups
+ are requested by this service, a {@link #SERVICE_META_DATA}
+ entry must be included in the declaration of the service. An
+ example of a HostApduService manifest declaration is shown below:
+ &lt;pre&gt; &amp;lt;service android:name=&quot;.MyHostApduService&quot; android:exported=&quot;true&quot; android:permission=&quot;android.permission.BIND_NFC_SERVICE&quot;&amp;gt;
+     &amp;lt;intent-filter&amp;gt;
+         &amp;lt;action android:name=&quot;android.nfc.cardemulation.action.HOST_APDU_SERVICE&quot;/&amp;gt;
+     &amp;lt;/intent-filter&amp;gt;
+     &amp;lt;meta-data android:name=&quot;android.nfc.cardemulation.host_apdu_ervice&quot; android:resource=&quot;@xml/apduservice&quot;/&amp;gt;
+ &amp;lt;/service&amp;gt;&lt;/pre&gt;
+
+ This meta-data tag points to an apduservice.xml file.
+ An example of this file with a single AID group declaration is shown below:
+ &lt;pre&gt;
+ &amp;lt;host-apdu-service xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+           android:description=&quot;@string/servicedesc&quot; android:requireDeviceUnlock=&quot;false&quot;&amp;gt;
+       &amp;lt;aid-group android:description=&quot;@string/aiddescription&quot; android:category=&quot;other&quot;&gt;
+           &amp;lt;aid-filter android:name=&quot;F0010203040506&quot;/&amp;gt;
+           &amp;lt;aid-filter android:name=&quot;F0394148148100&quot;/&amp;gt;
+       &amp;lt;/aid-group&amp;gt;
+ &amp;lt;/host-apdu-service&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;The {@link android.R.styleable#HostApduService &amp;lt;host-apdu-service&amp;gt;} is required
+ to contain a
+ {@link android.R.styleable#HostApduService_description &amp;lt;android:description&amp;gt;}
+ attribute that contains a user-friendly description of the service that may be shown in UI.
+ The
+ {@link android.R.styleable#HostApduService_requireDeviceUnlock &amp;lt;requireDeviceUnlock&amp;gt;}
+ attribute can be used to specify that the device must be unlocked before this service
+ can be invoked to handle APDUs.
+ &lt;p&gt;The {@link android.R.styleable#HostApduService &amp;lt;host-apdu-service&amp;gt;} must
+ contain one or more {@link android.R.styleable#AidGroup &amp;lt;aid-group&amp;gt;} tags.
+ Each {@link android.R.styleable#AidGroup &amp;lt;aid-group&amp;gt;} must contain one or
+ more {@link android.R.styleable#AidFilter &amp;lt;aid-filter&amp;gt;} tags, each of which
+ contains a single AID. The AID must be specified in hexadecimal format, and contain
+ an even number of characters.
+ &lt;h3&gt;AID conflict resolution&lt;/h3&gt;
+ Multiple HostApduServices may be installed on a single device, and the same AID
+ can be registered by more than one service. The Android platform resolves AID
+ conflicts depending on which category an AID belongs to. Each category may
+ have a different conflict resolution policy. For example, for some categories
+ the user may be able to select a default service in the Android settings UI.
+ For other categories, to policy may be to always ask the user which service
+ is to be invoked in case of conflict.
+
+ To query the conflict resolution policy for a certain category, see
+ {@link android.nfc.cardemulation.CardEmulation#getSelectionModeForCategory(String)}.
+
+ &lt;h3&gt;Data exchange&lt;/h3&gt;
+ &lt;p&gt;Once the platform has resolved a &quot;SELECT AID&quot; command APDU to a specific
+ service component, the &quot;SELECT AID&quot; command APDU and all subsequent
+ command APDUs will be sent to that service through
+ {@link #processCommandApdu(byte[], Bundle)}, until either:
+ &lt;ul&gt;
+ &lt;li&gt;The NFC link is broken&lt;/li&gt;
+ &lt;li&gt;A &quot;SELECT AID&quot; APDU is received which resolves to another service&lt;/li&gt;
+ &lt;/ul&gt;
+ These two scenarios are indicated by a call to {@link #onDeactivated}(int).
+
+ &lt;p class=&quot;note&quot;&gt;Use of this class requires the
+ {@link PackageManager#FEATURE_NFC_HOST_CARD_EMULATION} to be present
+ on the device.
+
+*/
+var HostApduService = {
+
+<span id='android-nfc-cardemulation-HostApduService-property-SERVICE_INTERFACE'>/** The {@link Intent} action that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.nfc.cardemulation.action.HOST_APDU_SERVICE&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-SERVICE_META_DATA'>/** The name of the meta-data element that contains
+</span> more information about this service.
+*/
+SERVICE_META_DATA : &quot;android.nfc.cardemulation.host_apdu_service&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-DEACTIVATION_LINK_LOSS'>/** Reason for {@link #onDeactivated}(int).
+</span> Indicates deactivation was due to the NFC link
+ being lost.
+*/
+DEACTIVATION_LINK_LOSS : &quot;0&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-DEACTIVATION_DESELECTED'>/** Reason for {@link #onDeactivated}(int).
+</span>
+ &lt;p&gt;Indicates deactivation was due to a different AID
+ being selected (which implicitly deselects the AID
+ currently active on the logical channel).
+
+ &lt;p&gt;Note that this next AID may still be resolved to this
+ service, in which case {@link #processCommandApdu(byte[], Bundle)}
+ will be called again.
+*/
+DEACTIVATION_DESELECTED : &quot;1&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-MSG_COMMAND_APDU'>/** MSG_COMMAND_APDU is sent by NfcService when
+</span> a 7816-4 command APDU has been received.
+
+ @hide
+*/
+MSG_COMMAND_APDU : &quot;0&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-MSG_RESPONSE_APDU'>/** MSG_RESPONSE_APDU is sent to NfcService to send
+</span> a response APDU back to the remote device.
+
+ @hide
+*/
+MSG_RESPONSE_APDU : &quot;1&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-MSG_DEACTIVATED'>/** MSG_DEACTIVATED is sent by NfcService when
+</span> the current session is finished; either because
+ another AID was selected that resolved to
+ another service, or because the NFC link
+ was deactivated.
+
+ @hide
+*/
+MSG_DEACTIVATED : &quot;2&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-MSG_UNHANDLED'>/**
+</span> @hide
+*/
+MSG_UNHANDLED : &quot;3&quot;,
+<span id='android-nfc-cardemulation-HostApduService-property-KEY_DATA'>/** @hide
+</span>*/
+KEY_DATA : &quot;data&quot;,
+<span id='android-nfc-cardemulation-HostApduService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-nfc-cardemulation-HostApduService-method-sendResponseApdu'>/**Sends a response APDU back to the remote device.
+</span>
+ &lt;p&gt;Note: this method may be called from any thread and will not block.
+@param {Object {byte[]}} responseApdu A byte-array containing the reponse APDU.
+*/
+sendResponseApdu : function(  ) {},
+
+<span id='android-nfc-cardemulation-HostApduService-method-notifyUnhandled'>/**Calling this method allows the service to tell the OS
+</span> that it won't be able to complete this transaction -
+ for example, because it requires data connectivity
+ that is not present at that moment.
+
+ The OS may use this indication to give the user a list
+ of alternative applications that can handle the last
+ AID that was selected. If the user would select an
+ application from the list, that action by itself
+ will not cause the default to be changed; the selected
+ application will be invoked for the next tap only.
+
+ If there are no other applications that can handle
+ this transaction, the OS will show an error dialog
+ indicating your service could not complete the
+ transaction.
+
+ &lt;p&gt;Note: this method may be called anywhere between
+    the first {@link #processCommandApdu(byte[], Bundle)}
+    call and a {@link #onDeactivated}(int) call.
+*/
+notifyUnhandled : function(  ) {},
+
+<span id='android-nfc-cardemulation-HostApduService-method-processCommandApdu'>/**&lt;p&gt;This method will be called when a command APDU has been received
+</span> from a remote device. A response APDU can be provided directly
+ by returning a byte-array in this method. Note that in general
+ response APDUs must be sent as quickly as possible, given the fact
+ that the user is likely holding his device over an NFC reader
+ when this method is called.
+
+ &lt;p class=&quot;note&quot;&gt;If there are multiple services that have registered for the same
+ AIDs in their meta-data entry, you will only get called if the user has
+ explicitly selected your service, either as a default or just for the next tap.
+
+ &lt;p class=&quot;note&quot;&gt;This method is running on the main thread of your application.
+ If you cannot return a response APDU immediately, return null
+ and use the {@link #sendResponseApdu(byte[])} method later.
+@param {Object {byte[]}} commandApdu The APDU that was received from the remote device
+@param {Object {Bundle}} extras A bundle containing extra data. May be null.
+@return {Number} a byte-array containing the response APDU, or null if no
+         response APDU can be sent at this point.
+*/
+processCommandApdu : function(  ) {},
+
+<span id='android-nfc-cardemulation-HostApduService-method-onDeactivated'>/**This method will be called in two possible scenarios:
+</span> &lt;li&gt;The NFC link has been deactivated or lost
+ &lt;li&gt;A different AID has been selected and was resolved to a different
+     service component
+@param {Number} reason Either {@link #DEACTIVATION_LINK_LOSS} or {@link #DEACTIVATION_DESELECTED}
+*/
+onDeactivated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

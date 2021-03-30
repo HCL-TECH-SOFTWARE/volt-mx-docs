@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-CallbackRegistry'>/**@class com.android.internal.util.CallbackRegistry
+</span> implements java.lang.Cloneable
+
+@extends java.lang.Object
+
+ Tracks callbacks for the event. This class supports reentrant modification
+ of the callbacks during notification without adversely disrupting notifications.
+ A common pattern for callbacks is to receive a notification and then remove
+ themselves. This class handles this behavior with constant memory under
+ most circumstances.
+
+ &lt;p&gt;A subclass of {@link com.android.internal.util.CallbackRegistry.NotifierCallback} must be passed to
+ the constructor to define how notifications should be called. That implementation
+ does the actual notification on the listener.&lt;/p&gt;
+
+ &lt;p&gt;This class supports only callbacks with at most two parameters.
+ Typically, these are the notification originator and a parameter, but these may
+ be used as required. If more than two parameters are required or primitive types
+ must be used, &lt;code&gt;A&lt;/code&gt; should be some kind of containing structure that
+ the subclass may reuse between notifications.&lt;/p&gt;
+
+ @param &lt;C&gt; The callback type.
+ @param &lt;T&gt; The notification sender type. Typically this is the containing class.
+ @param &lt;A&gt; Opaque argument used to pass additional data beyond an int.
+*/
+var CallbackRegistry = {
+
+<span id='com-android-internal-util-CallbackRegistry-method-notifyCallbacks'>/**Notify all callbacks.
+</span>@param {Object {Object}} sender The originator. This is an opaque parameter passed to
+      {@link CallbackRegistry.NotifierCallback#onNotifyCallback(Object, Object, int, A)}
+@param {Number} arg An opaque parameter passed to
+      {@link CallbackRegistry.NotifierCallback#onNotifyCallback(Object, Object, int, A)}
+@param {Object {Object}} arg2 An opaque parameter passed to
+      {@link CallbackRegistry.NotifierCallback#onNotifyCallback(Object, Object, int, A)}
+*/
+notifyCallbacks : function(  ) {},
+
+<span id='com-android-internal-util-CallbackRegistry-method-add'>/**Add a callback to be notified. If the callback is already in the list, another won't
+</span> be added. This does not affect current notifications.
+@param {Object {Object}} callback The callback to add.
+*/
+add : function(  ) {},
+
+<span id='com-android-internal-util-CallbackRegistry-method-remove'>/**Remove a callback. This callback won't be notified after this call completes.
+</span>@param {Object {Object}} callback The callback to remove.
+*/
+remove : function(  ) {},
+
+<span id='com-android-internal-util-CallbackRegistry-method-copyListeners'>/**Makes a copy of the registered callbacks and returns it.
+</span>@return {Object {java.util.ArrayList}} a copy of the registered callbacks.
+*/
+copyListeners : function(  ) {},
+
+<span id='com-android-internal-util-CallbackRegistry-method-isEmpty'>/**Returns true if there are no registered callbacks or false otherwise.
+</span>@return {Boolean} true if there are no registered callbacks or false otherwise.
+*/
+isEmpty : function(  ) {},
+
+<span id='com-android-internal-util-CallbackRegistry-method-clear'>/**Removes all callbacks from the list.
+</span>*/
+clear : function(  ) {},
+
+<span id='com-android-internal-util-CallbackRegistry-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

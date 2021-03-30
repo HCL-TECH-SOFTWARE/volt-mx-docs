@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-params-MeteringRectangle'>/**@class android.hardware.camera2.params.MeteringRectangle
+</span>@extends java.lang.Object
+
+ An immutable class to represent a rectangle {@code (x, y, width, height)} with an additional
+ weight component.
+ &lt;p&gt;
+ The rectangle is defined to be inclusive of the specified coordinates.
+ &lt;/p&gt;
+ &lt;p&gt;
+ When used with a {@link CaptureRequest}, the coordinate system is based on the active pixel
+ array, with {@code (0,0)} being the top-left pixel in the
+ {@link CameraCharacteristics#SENSOR_INFO_ACTIVE_ARRAY_SIZE active pixel array}, and
+ {@code (android.sensor.info.activeArraySize.width - 1,
+ android.sensor.info.activeArraySize.height - 1)} being the bottom-right pixel in the active pixel
+ array.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The weight must range from {@value #METERING_WEIGHT_MIN} to {@value #METERING_WEIGHT_MAX}
+ inclusively, and represents a weight for every pixel in the area. This means that a large
+ metering area with the same weight as a smaller area will have more effect in the metering
+ result. Metering areas can partially overlap and the camera device will add the weights in the
+ overlap rectangle.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If all rectangles have 0 weight, then no specific metering area needs to be used by the camera
+ device. If the metering rectangle is outside the used android.scaler.cropRegion returned in
+ capture result metadata, the camera device will ignore the sections outside the rectangle and
+ output the used sections in the result metadata.
+ &lt;/p&gt;
+*/
+var MeteringRectangle = {
+
+<span id='android-hardware-camera2-params-MeteringRectangle-property-METERING_WEIGHT_MIN'>/** The minimum value of valid metering weight.
+</span>*/
+METERING_WEIGHT_MIN : &quot;0&quot;,
+<span id='android-hardware-camera2-params-MeteringRectangle-property-METERING_WEIGHT_MAX'>/** The maximum value of valid metering weight.
+</span>*/
+METERING_WEIGHT_MAX : &quot;1000&quot;,
+<span id='android-hardware-camera2-params-MeteringRectangle-property-METERING_WEIGHT_DONT_CARE'>/** Weights set to this value will cause the camera device to ignore this rectangle.
+</span> If all metering rectangles are weighed with 0, the camera device will choose its own metering
+ rectangles.
+*/
+METERING_WEIGHT_DONT_CARE : &quot;0&quot;,
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getX'>/**Return the X coordinate of the left side of the rectangle.
+</span>@return {Number} x coordinate &gt;= 0
+*/
+getX : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getY'>/**Return the Y coordinate of the upper side of the rectangle.
+</span>@return {Number} y coordinate &gt;= 0
+*/
+getY : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getWidth'>/**Return the width of the rectangle.
+</span>@return {Number} width &gt;= 0
+*/
+getWidth : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getHeight'>/**Return the height of the rectangle.
+</span>@return {Number} height &gt;= 0
+*/
+getHeight : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getMeteringWeight'>/**Return the metering weight of the rectangle.
+</span>@return {Number} weight &gt;= 0
+*/
+getMeteringWeight : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getUpperLeftPoint'>/**Convenience method to create the upper-left (X,Y) coordinate as a {@link Point}.
+</span>@return {Object {android.graphics.Point}} a new {@code (x,y)} {@link Point} with both x,y &gt;= 0
+*/
+getUpperLeftPoint : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getSize'>/**Convenience method to create the size from this metering rectangle.
+</span>
+ &lt;p&gt;This strips away the X,Y,weight from the rectangle.&lt;/p&gt;
+@return {Object {android.util.Size}} a new {@link Size} with non-negative width and height
+*/
+getSize : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-getRect'>/**Convenience method to create a {@link Rect} from this metering rectangle.
+</span>
+ &lt;p&gt;This strips away the weight from the rectangle.&lt;/p&gt;
+@return {Object {android.graphics.Rect}} a new {@link Rect} with non-negative x1, y1, x2, y2
+*/
+getRect : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-equals'>/**{@inheritDoc}
+</span>*/
+equals : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-equals'>/**Compare two metering rectangles to see if they are equal.
+</span>
+ Two weighted rectangles are only considered equal if each of their components
+ (x, y, width, height, weight) is respectively equal.
+@param {Object {MeteringRectangle}} other Another MeteringRectangle
+@return {Boolean} {@code true} if the metering rectangles are equal, {@code false} otherwise
+*/
+equals : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-hashCode'>/**{@inheritDoc}
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-hardware-camera2-params-MeteringRectangle-method-toString'>/**Return the metering rectangle as a string representation
+</span> {@code &quot;(x:%d, y:%d, w:%d, h:%d, wt:%d)&quot;} where each {@code %d} respectively represents
+ the x, y, width, height, and weight points.
+@return {String} string representation of the metering rectangle
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

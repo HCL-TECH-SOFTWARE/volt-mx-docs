@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-image-DynamicSystemManager'>/**@class android.os.image.DynamicSystemManager
+</span>@extends java.lang.Object
+
+ The DynamicSystemManager offers a mechanism to use a new system image temporarily. After the
+ installation, the device can reboot into this image with a new created /data. This image will
+ last until the next reboot and then the device will go back to the original image. However the
+ installed image and the new created /data are not deleted but disabled. Thus the application can
+ either re-enable the installed image by calling {@link #toggle} or use the {@link #remove} to
+ delete it completely. In other words, there are three device states: no installation, installed
+ and running. The procedure to install a DynamicSystem starts with a {@link #startInstallation},
+ followed by a series of {@link #write} and ends with a {@link commit}. Once the installation is
+ complete, the device state changes from no installation to the installed state and a followed
+ reboot will change its state to running. Note one instance of DynamicSystem can exist on a given
+ device thus the {@link #startInstallation} will fail if the device is currently running a
+ DynamicSystem.
+
+ @hide
+*/
+var DynamicSystemManager = {
+
+<span id='android-os-image-DynamicSystemManager-method-startInstallation'>/**Start DynamicSystem installation. This call may take an unbounded amount of time. The caller
+</span> may use another thread to call the getStartProgress() to get the progress.
+@param {Number} systemSize system size in bytes
+@param {Number} userdataSize userdata size in bytes
+@return {Object {android.os.image.DynamicSystemManager.Session}} {@code true} if the call succeeds. {@code false} either the device does not contain
+     enough space or a DynamicSystem is currently in use where the {@link #isInUse} would be
+     true.
+*/
+startInstallation : function(  ) {},
+
+<span id='android-os-image-DynamicSystemManager-method-getInstallationProgress'>/**Query the progress of the current installation operation. This can be called while the
+</span> installation is in progress.
+@return {Object {GsiProgress}} GsiProgress GsiProgress { int status; long bytes_processed; long total_bytes; } The
+     status field can be IGsiService.STATUS_NO_OPERATION, IGsiService.STATUS_WORKING or
+     IGsiService.STATUS_COMPLETE.
+*/
+getInstallationProgress : function(  ) {},
+
+<span id='android-os-image-DynamicSystemManager-method-abort'>/**Abort the installation process. Note this method must be called in a thread other than the
+</span> one calling the startInstallation method as the startInstallation method will not return
+ until it is finished.
+@return {Boolean} {@code true} if the call succeeds. {@code false} if there is no installation
+     currently.
+*/
+abort : function(  ) {},
+
+<span id='android-os-image-DynamicSystemManager-method-isInUse'>/**
+</span>@return {Boolean} {@code true} if the device is running a dynamic system
+*/
+isInUse : function(  ) {},
+
+<span id='android-os-image-DynamicSystemManager-method-isInstalled'>/**
+</span>@return {Boolean} {@code true} if the device has a dynamic system installed
+*/
+isInstalled : function(  ) {},
+
+<span id='android-os-image-DynamicSystemManager-method-isEnabled'>/**
+</span>@return {Boolean} {@code true} if the device has a dynamic system enabled
+*/
+isEnabled : function(  ) {},
+
+<span id='android-os-image-DynamicSystemManager-method-remove'>/**Remove DynamicSystem installation if present
+</span>@return {Boolean} {@code true} if the call succeeds. {@code false} if there is no installed image.
+*/
+remove : function(  ) {},
+
+<span id='android-os-image-DynamicSystemManager-method-setEnable'>/**Enable or disable DynamicSystem.
+</span>@return {Boolean} {@code true} if the call succeeds. {@code false} if there is no installed image.
+*/
+setEnable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

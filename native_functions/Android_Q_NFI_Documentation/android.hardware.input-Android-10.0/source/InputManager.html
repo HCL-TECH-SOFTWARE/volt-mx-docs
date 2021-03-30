@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-input-InputManager'>/**@class android.hardware.input.InputManager
+</span>@extends java.lang.Object
+
+ Provides information about input devices and available key layouts.
+*/
+var InputManager = {
+
+<span id='android-hardware-input-InputManager-property-ACTION_QUERY_KEYBOARD_LAYOUTS'>/** Broadcast Action: Query available keyboard layouts.
+</span> &lt;p&gt;
+ The input manager service locates available keyboard layouts
+ by querying broadcast receivers that are registered for this action.
+ An application can offer additional keyboard layouts to the user
+ by declaring a suitable broadcast receiver in its manifest.
+ &lt;/p&gt;&lt;p&gt;
+ Here is an example broadcast receiver declaration that an application
+ might include in its AndroidManifest.xml to advertise keyboard layouts.
+ The meta-data specifies a resource that contains a description of each keyboard
+ layout that is provided by the application.
+ &lt;pre&gt;&lt;code&gt;
+ &amp;lt;receiver android:name=&quot;.InputDeviceReceiver&quot;
+         android:label=&quot;@string/keyboard_layouts_label&quot;&gt;
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.hardware.input.action.QUERY_KEYBOARD_LAYOUTS&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+     &amp;lt;meta-data android:name=&quot;android.hardware.input.metadata.KEYBOARD_LAYOUTS&quot;
+             android:resource=&quot;@xml/keyboard_layouts&quot; /&gt;
+ &amp;lt;/receiver&gt;
+ &lt;/code&gt;&lt;/pre&gt;
+ &lt;/p&gt;&lt;p&gt;
+ In the above example, the &lt;code&gt;@xml/keyboard_layouts&lt;/code&gt; resource refers to
+ an XML resource whose root element is &lt;code&gt;&amp;lt;keyboard-layouts&gt;&lt;/code&gt; that
+ contains zero or more &lt;code&gt;&amp;lt;keyboard-layout&gt;&lt;/code&gt; elements.
+ Each &lt;code&gt;&amp;lt;keyboard-layout&gt;&lt;/code&gt; element specifies the name, label, and location
+ of a key character map for a particular keyboard layout.  The label on the receiver
+ is used to name the collection of keyboard layouts provided by this receiver in the
+ keyboard layout settings.
+ &lt;pre&gt;&lt;code&gt;
+ &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &amp;lt;keyboard-layouts xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+     &amp;lt;keyboard-layout android:name=&quot;keyboard_layout_english_us&quot;
+             android:label=&quot;@string/keyboard_layout_english_us_label&quot;
+             android:keyboardLayout=&quot;@raw/keyboard_layout_english_us&quot; /&gt;
+ &amp;lt;/keyboard-layouts&gt;
+ &lt;/pre&gt;&lt;/code&gt;
+ &lt;/p&gt;&lt;p&gt;
+ The &lt;code&gt;android:name&lt;/code&gt; attribute specifies an identifier by which
+ the keyboard layout will be known in the package.
+ The &lt;code&gt;android:label&lt;/code&gt; attribute specifies a human-readable descriptive
+ label to describe the keyboard layout in the user interface, such as &quot;English (US)&quot;.
+ The &lt;code&gt;android:keyboardLayout&lt;/code&gt; attribute refers to a
+ &lt;a href=&quot;http://source.android.com/tech/input/key-character-map-files.html&quot;&gt;
+ key character map&lt;/a&gt; resource that defines the keyboard layout.
+ &lt;/p&gt;
+*/
+ACTION_QUERY_KEYBOARD_LAYOUTS : &quot;android.hardware.input.action.QUERY_KEYBOARD_LAYOUTS&quot;,
+<span id='android-hardware-input-InputManager-property-META_DATA_KEYBOARD_LAYOUTS'>/** Metadata Key: Keyboard layout metadata associated with
+</span> {@link #ACTION_QUERY_KEYBOARD_LAYOUTS}.
+ &lt;p&gt;
+ Specifies the resource id of a XML resource that describes the keyboard
+ layouts that are provided by the application.
+ &lt;/p&gt;
+*/
+META_DATA_KEYBOARD_LAYOUTS : &quot;android.hardware.input.metadata.KEYBOARD_LAYOUTS&quot;,
+<span id='android-hardware-input-InputManager-property-MIN_POINTER_SPEED'>/** Pointer Speed: The minimum (slowest) pointer speed (-7).
+</span> @hide
+*/
+MIN_POINTER_SPEED : &quot;-7&quot;,
+<span id='android-hardware-input-InputManager-property-MAX_POINTER_SPEED'>/** Pointer Speed: The maximum (fastest) pointer speed (7).
+</span> @hide
+*/
+MAX_POINTER_SPEED : &quot;7&quot;,
+<span id='android-hardware-input-InputManager-property-DEFAULT_POINTER_SPEED'>/** Pointer Speed: The default pointer speed (0).
+</span> @hide
+*/
+DEFAULT_POINTER_SPEED : &quot;0&quot;,
+<span id='android-hardware-input-InputManager-property-INJECT_INPUT_EVENT_MODE_ASYNC'>/** Input Event Injection Synchronization Mode: None.
+</span> Never blocks.  Injection is asynchronous and is assumed always to be successful.
+ @hide
+*/
+INJECT_INPUT_EVENT_MODE_ASYNC : &quot;0&quot;,
+<span id='android-hardware-input-InputManager-property-INJECT_INPUT_EVENT_MODE_WAIT_FOR_RESULT'>/** Input Event Injection Synchronization Mode: Wait for result.
+</span> Waits for previous events to be dispatched so that the input dispatcher can
+ determine whether input event injection will be permitted based on the current
+ input focus.  Does not wait for the input event to finish being handled
+ by the application.
+ @hide
+*/
+INJECT_INPUT_EVENT_MODE_WAIT_FOR_RESULT : &quot;1&quot;,
+<span id='android-hardware-input-InputManager-property-INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH'>/** Input Event Injection Synchronization Mode: Wait for finish.
+</span> Waits for the event to be delivered to the application and handled.
+ @hide
+*/
+INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH : &quot;2&quot;,
+<span id='android-hardware-input-InputManager-property-SWITCH_STATE_UNKNOWN'>/** Switch State: Unknown.
+</span>
+ The system has yet to report a valid value for the switch.
+ @hide
+*/
+SWITCH_STATE_UNKNOWN : &quot;-1&quot;,
+<span id='android-hardware-input-InputManager-property-SWITCH_STATE_OFF'>/** Switch State: Off.
+</span> @hide
+*/
+SWITCH_STATE_OFF : &quot;0&quot;,
+<span id='android-hardware-input-InputManager-property-SWITCH_STATE_ON'>/** Switch State: On.
+</span> @hide
+*/
+SWITCH_STATE_ON : &quot;1&quot;,
+<span id='android-hardware-input-InputManager-method-getInstance'>/**Gets an instance of the input manager.
+</span>@return {Object {android.hardware.input.InputManager}} The input manager instance.
+@hide 
+*/
+getInstance : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getInputDevice'>/**Gets information about the input device with the specified id.
+</span>@param {Number} id The device id.
+@return {Object {android.view.InputDevice}} The input device or null if not found.
+*/
+getInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getInputDeviceByDescriptor'>/**Gets information about the input device with the specified descriptor.
+</span>@param {String} descriptor The input device descriptor.
+@return {Object {android.view.InputDevice}} The input device or null if not found.
+@hide 
+*/
+getInputDeviceByDescriptor : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getInputDeviceIds'>/**Gets the ids of all input devices in the system.
+</span>@return {Number} The input device ids.
+*/
+getInputDeviceIds : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-isInputDeviceEnabled'>/**Returns true if an input device is enabled. Should return true for most
+</span> situations. Some system apps may disable an input device, for
+ example to prevent unwanted touch events.
+@param {Number} id The input device Id.
+@hide 
+*/
+isInputDeviceEnabled : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-enableInputDevice'>/**Enables an InputDevice.
+</span> &lt;p&gt;
+ Requires {@link android.Manifest.permissions.DISABLE_INPUT_DEVICE}.
+ &lt;/p&gt;
+@param {Number} id The input device Id.
+@hide 
+*/
+enableInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-disableInputDevice'>/**Disables an InputDevice.
+</span> &lt;p&gt;
+ Requires {@link android.Manifest.permissions.DISABLE_INPUT_DEVICE}.
+ &lt;/p&gt;
+@param {Number} id The input device Id.
+@hide 
+*/
+disableInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-registerInputDeviceListener'>/**Registers an input device listener to receive notifications about when
+</span> input devices are added, removed or changed.
+@param {Object {InputManager.InputDeviceListener}} listener The listener to register.
+@param {Object {Handler}} handler The handler on which the listener should be invoked, or null
+ if the listener should be invoked on the calling thread's looper.
+@see #unregisterInputDeviceListener
+*/
+registerInputDeviceListener : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-unregisterInputDeviceListener'>/**Unregisters an input device listener.
+</span>@param {Object {InputManager.InputDeviceListener}} listener The listener to unregister.
+@see #registerInputDeviceListener
+*/
+unregisterInputDeviceListener : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-isInTabletMode'>/**Queries whether the device is in tablet mode.
+</span>@return {Number} The tablet switch state which is one of {@link #SWITCH_STATE_UNKNOWN},
+ {@link #SWITCH_STATE_OFF} or {@link #SWITCH_STATE_ON}.
+@hide 
+*/
+isInTabletMode : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-registerOnTabletModeChangedListener'>/**Register a tablet mode changed listener.
+</span>@param {Object {InputManager.OnTabletModeChangedListener}} listener The listener to register.
+@param {Object {Handler}} handler The handler on which the listener should be invoked, or null
+ if the listener should be invoked on the calling thread's looper.
+@hide 
+*/
+registerOnTabletModeChangedListener : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-unregisterOnTabletModeChangedListener'>/**Unregister a tablet mode changed listener.
+</span>@param {Object {InputManager.OnTabletModeChangedListener}} listener The listener to unregister.
+@hide 
+*/
+unregisterOnTabletModeChangedListener : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getKeyboardLayouts'>/**Gets information about all supported keyboard layouts.
+</span> &lt;p&gt;
+ The input manager consults the built-in keyboard layouts as well
+ as all keyboard layouts advertised by applications using a
+ {@link #ACTION_QUERY_KEYBOARD_LAYOUTS} broadcast receiver.
+ &lt;/p&gt;
+@return {Object {android.hardware.input.KeyboardLayout}} A list of all supported keyboard layouts.
+@hide 
+*/
+getKeyboardLayouts : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getKeyboardLayoutsForInputDevice'>/**Gets information about all supported keyboard layouts appropriate
+</span> for a specific input device.
+ &lt;p&gt;
+ The input manager consults the built-in keyboard layouts as well
+ as all keyboard layouts advertised by applications using a
+ {@link #ACTION_QUERY_KEYBOARD_LAYOUTS} broadcast receiver.
+ &lt;/p&gt;
+@return {Object {android.hardware.input.KeyboardLayout}} A list of all supported keyboard layouts for a specific
+ input device.
+@hide 
+*/
+getKeyboardLayoutsForInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getKeyboardLayout'>/**Gets the keyboard layout with the specified descriptor.
+</span>@param {String} keyboardLayoutDescriptor The keyboard layout descriptor, as returned by
+ {@link KeyboardLayout#getDescriptor()}.
+@return {Object {android.hardware.input.KeyboardLayout}} The keyboard layout, or null if it could not be loaded.
+@hide 
+*/
+getKeyboardLayout : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getCurrentKeyboardLayoutForInputDevice'>/**Gets the current keyboard layout descriptor for the specified input
+</span> device.
+@param {Object {InputDeviceIdentifier}} identifier Identifier for the input device
+@return {String} The keyboard layout descriptor, or null if no keyboard layout has
+         been set.
+@hide 
+*/
+getCurrentKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-setCurrentKeyboardLayoutForInputDevice'>/**Sets the current keyboard layout descriptor for the specified input
+</span> device.
+ &lt;p&gt;
+ This method may have the side-effect of causing the input device in
+ question to be reconfigured.
+ &lt;/p&gt;
+@param {Object {InputDeviceIdentifier}} identifier The identifier for the input device.
+@param {String} keyboardLayoutDescriptor The keyboard layout descriptor to use,
+            must not be null.
+@hide 
+*/
+setCurrentKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getEnabledKeyboardLayoutsForInputDevice'>/**Gets all keyboard layout descriptors that are enabled for the specified
+</span> input device.
+@param {Object {InputDeviceIdentifier}} identifier The identifier for the input device.
+@return {String} The keyboard layout descriptors.
+@hide 
+*/
+getEnabledKeyboardLayoutsForInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-addKeyboardLayoutForInputDevice'>/**Adds the keyboard layout descriptor for the specified input device.
+</span> &lt;p&gt;
+ This method may have the side-effect of causing the input device in
+ question to be reconfigured.
+ &lt;/p&gt;
+@param {Object {InputDeviceIdentifier}} identifier The identifier for the input device.
+@param {String} keyboardLayoutDescriptor The descriptor of the keyboard layout to
+            add.
+@hide 
+*/
+addKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-removeKeyboardLayoutForInputDevice'>/**Removes the keyboard layout descriptor for the specified input device.
+</span> &lt;p&gt;
+ This method may have the side-effect of causing the input device in
+ question to be reconfigured.
+ &lt;/p&gt;
+@param {Object {InputDeviceIdentifier}} identifier The identifier for the input device.
+@param {String} keyboardLayoutDescriptor The descriptor of the keyboard layout to
+            remove.
+@hide 
+*/
+removeKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getTouchCalibration'>/**Gets the TouchCalibration applied to the specified input device's coordinates.
+</span>@param {String} inputDeviceDescriptor The input device descriptor.
+@return {Object {android.hardware.input.TouchCalibration}} The TouchCalibration currently assigned for use with the given
+ input device. If none is set, an identity TouchCalibration is returned.
+@hide 
+*/
+getTouchCalibration : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-setTouchCalibration'>/**Sets the TouchCalibration to apply to the specified input device's coordinates.
+</span> &lt;p&gt;
+ This method may have the side-effect of causing the input device in question
+ to be reconfigured. Requires {@link android.Manifest.permissions.SET_INPUT_CALIBRATION}.
+ &lt;/p&gt;
+@param {String} inputDeviceDescriptor The input device descriptor.
+@param {Number} calibration The calibration to be applied
+@hide 
+*/
+setTouchCalibration : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getPointerSpeed'>/**Gets the mouse pointer speed.
+</span> &lt;p&gt;
+ Only returns the permanent mouse pointer speed.  Ignores any temporary pointer
+ speed set by {@link #tryPointerSpeed}.
+ &lt;/p&gt;
+@param {Object {Context}} context The application context.
+@return {Number} The pointer speed as a value between {@link #MIN_POINTER_SPEED} and
+ {@link #MAX_POINTER_SPEED}, or the default value {@link #DEFAULT_POINTER_SPEED}.
+@hide 
+*/
+getPointerSpeed : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-setPointerSpeed'>/**Sets the mouse pointer speed.
+</span> &lt;p&gt;
+ Requires {@link android.Manifest.permissions.WRITE_SETTINGS}.
+ &lt;/p&gt;
+@param {Object {Context}} context The application context.
+@param {Number} speed The pointer speed as a value between {@link #MIN_POINTER_SPEED} and
+ {@link #MAX_POINTER_SPEED}, or the default value {@link #DEFAULT_POINTER_SPEED}.
+@hide 
+*/
+setPointerSpeed : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-tryPointerSpeed'>/**Changes the mouse pointer speed temporarily, but does not save the setting.
+</span> &lt;p&gt;
+ Requires {@link android.Manifest.permission.SET_POINTER_SPEED}.
+ &lt;/p&gt;
+@param {Number} speed The pointer speed as a value between {@link #MIN_POINTER_SPEED} and
+ {@link #MAX_POINTER_SPEED}, or the default value {@link #DEFAULT_POINTER_SPEED}.
+@hide 
+*/
+tryPointerSpeed : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-deviceHasKeys'>/**Queries the framework about whether any physical keys exist on the
+</span> any keyboard attached to the device that are capable of producing the given
+ array of key codes.
+@param {Object {int[]}} keyCodes The array of key codes to query.
+@return {Boolean} A new array of the same size as the key codes array whose elements
+ are set to true if at least one attached keyboard supports the corresponding key code
+ at the same index in the key codes array.
+@hide 
+*/
+deviceHasKeys : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-deviceHasKeys'>/**Queries the framework about whether any physical keys exist on the
+</span> any keyboard attached to the device that are capable of producing the given
+ array of key codes.
+@param {Number} id The id of the device to query.
+@param {Object {int[]}} keyCodes The array of key codes to query.
+@return {Boolean} A new array of the same size as the key codes array whose elements are set to true
+ if the given device could produce the corresponding key code at the same index in the key
+ codes array.
+@hide 
+*/
+deviceHasKeys : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-injectInputEvent'>/**Injects an input event into the event system on behalf of an application.
+</span> The synchronization mode determines whether the method blocks while waiting for
+ input injection to proceed.
+ &lt;p&gt;
+ Requires {@link android.Manifest.permission.INJECT_EVENTS} to inject into
+ windows that are owned by other applications.
+ &lt;/p&gt;&lt;p&gt;
+ Make sure you correctly set the event time and input source of the event
+ before calling this method.
+ &lt;/p&gt;
+@param {Object {InputEvent}} event The event to inject.
+@param {Number} mode The synchronization mode.  One of:
+ {@link #INJECT_INPUT_EVENT_MODE_ASYNC},
+ {@link #INJECT_INPUT_EVENT_MODE_WAIT_FOR_RESULT}, or
+ {@link #INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH}.
+@return {Boolean} True if input event injection succeeded.
+@hide 
+*/
+injectInputEvent : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-setPointerIconType'>/**Changes the mouse pointer's icon shape into the specified id.
+</span>@param {Number} iconId The id of the pointer graphic, as a value between
+ {@link PointerIcon.TYPE_ARROW} and {@link PointerIcon.TYPE_GRABBING}.
+@hide 
+*/
+setPointerIconType : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-setCustomPointerIcon'>/**
+</span>@hide 
+*/
+setCustomPointerIcon : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-requestPointerCapture'>/**Request or release pointer capture.
+</span> &lt;p&gt;
+ When in capturing mode, the pointer icon disappears and all mouse events are dispatched to
+ the window which has requested the capture. Relative position changes are available through
+ {@link MotionEvent#getX} and {@link MotionEvent#getY}.
+@param {Object {IBinder}} enable true when requesting pointer capture, false when releasing.
+@hide 
+*/
+requestPointerCapture : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-monitorGestureInput'>/**Monitor input on the specified display for gestures.
+</span>@hide 
+*/
+monitorGestureInput : function(  ) {},
+
+<span id='android-hardware-input-InputManager-method-getInputDeviceVibrator'>/**Gets a vibrator service associated with an input device, assuming it has one.
+</span>@return {Object {android.os.Vibrator}} The vibrator, never null.
+@hide 
+*/
+getInputDeviceVibrator : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

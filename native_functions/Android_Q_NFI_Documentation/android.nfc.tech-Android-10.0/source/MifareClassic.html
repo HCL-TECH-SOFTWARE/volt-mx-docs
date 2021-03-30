@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-MifareClassic'>/**@class android.nfc.tech.MifareClassic
+</span>@extends android.nfc.tech.BasicTagTechnology
+
+ Provides access to MIFARE Classic properties and I/O operations on a {@link Tag}.
+
+ &lt;p&gt;Acquire a {@link android.nfc.tech.MifareClassic} object using {@link #get}.
+
+ &lt;p&gt;MIFARE Classic is also known as MIFARE Standard.
+ &lt;p&gt;MIFARE Classic tags are divided into sectors, and each sector is sub-divided into
+ blocks. Block size is always 16 bytes ({@link #BLOCK_SIZE}. Sector size varies.
+ &lt;ul&gt;
+ &lt;li&gt;MIFARE Classic Mini are 320 bytes ({@link #SIZE_MINI}), with 5 sectors each of 4 blocks.
+ &lt;li&gt;MIFARE Classic 1k are 1024 bytes ({@link #SIZE_1K}), with 16 sectors each of 4 blocks.
+ &lt;li&gt;MIFARE Classic 2k are 2048 bytes ({@link #SIZE_2K}), with 32 sectors each of 4 blocks.
+ &lt;li&gt;MIFARE Classic 4k are 4096 bytes ({@link #SIZE_4K}). The first 32 sectors contain 4 blocks
+ and the last 8 sectors contain 16 blocks.
+ &lt;/ul&gt;
+
+ &lt;p&gt;MIFARE Classic tags require authentication on a per-sector basis before any
+ other I/O operations on that sector can be performed. There are two keys per sector,
+ and ACL bits determine what I/O operations are allowed on that sector after
+ authenticating with a key. {@see #authenticateSectorWithKeyA} and
+ {@see #authenticateSectorWithKeyB}.
+
+ &lt;p&gt;Three well-known authentication keys are defined in this class:
+ {@link #KEY_DEFAULT}, {@link #KEY_MIFARE_APPLICATION_DIRECTORY},
+ {@link #KEY_NFC_FORUM}.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #KEY_DEFAULT} is the default factory key for MIFARE Classic.
+ &lt;li&gt;{@link #KEY_MIFARE_APPLICATION_DIRECTORY} is the well-known key for
+ MIFARE Classic cards that have been formatted according to the
+ MIFARE Application Directory (MAD) specification.
+ &lt;li&gt;{@link #KEY_NFC_FORUM} is the well-known key for MIFARE Classic cards that
+ have been formatted according to the NXP specification for NDEF on MIFARE Classic.
+
+ &lt;p&gt;Implementation of this class on a Android NFC device is optional.
+ If it is not implemented, then
+ {@link android.nfc.tech.MifareClassic} will never be enumerated in {@link Tag#getTechList}.
+ If it is enumerated, then all {@link android.nfc.tech.MifareClassic} I/O operations will be supported,
+ and {@link android.nfc.tech.Ndef#MIFARE_CLASSIC} NDEF tags will also be supported. In either case,
+ {@link android.nfc.tech.NfcA} will also be enumerated on the tag, because all MIFARE Classic tags are also
+ {@link android.nfc.tech.NfcA}.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Methods that perform I/O operations
+ require the {@link android.Manifest.permission#NFC} permission.
+*/
+var MifareClassic = {
+
+<span id='android-nfc-tech-MifareClassic-property-KEY_DEFAULT'>/** The default factory key.
+</span>*/
+KEY_DEFAULT : &quot;null&quot;,
+<span id='android-nfc-tech-MifareClassic-property-KEY_MIFARE_APPLICATION_DIRECTORY'>/** The well-known key for tags formatted according to the
+</span> MIFARE Application Directory (MAD) specification.
+*/
+KEY_MIFARE_APPLICATION_DIRECTORY : &quot;null&quot;,
+<span id='android-nfc-tech-MifareClassic-property-KEY_NFC_FORUM'>/** The well-known key for tags formatted according to the
+</span> NDEF on MIFARE Classic specification.
+*/
+KEY_NFC_FORUM : &quot;null&quot;,
+<span id='android-nfc-tech-MifareClassic-property-TYPE_UNKNOWN'>/**A MIFARE Classic compatible card of unknown type */
+</span>TYPE_UNKNOWN : &quot;-1&quot;,
+<span id='android-nfc-tech-MifareClassic-property-TYPE_CLASSIC'>/**A MIFARE Classic tag */
+</span>TYPE_CLASSIC : &quot;0&quot;,
+<span id='android-nfc-tech-MifareClassic-property-TYPE_PLUS'>/**A MIFARE Plus tag */
+</span>TYPE_PLUS : &quot;1&quot;,
+<span id='android-nfc-tech-MifareClassic-property-TYPE_PRO'>/**A MIFARE Pro tag */
+</span>TYPE_PRO : &quot;2&quot;,
+<span id='android-nfc-tech-MifareClassic-property-SIZE_1K'>/**Tag contains 16 sectors, each with 4 blocks. */
+</span>SIZE_1K : &quot;1024&quot;,
+<span id='android-nfc-tech-MifareClassic-property-SIZE_2K'>/**Tag contains 32 sectors, each with 4 blocks. */
+</span>SIZE_2K : &quot;2048&quot;,
+<span id='android-nfc-tech-MifareClassic-property-SIZE_4K'>/** Tag contains 40 sectors. The first 32 sectors contain 4 blocks and the last 8 sectors
+</span> contain 16 blocks.
+*/
+SIZE_4K : &quot;4096&quot;,
+<span id='android-nfc-tech-MifareClassic-property-SIZE_MINI'>/**Tag contains 5 sectors, each with 4 blocks. */
+</span>SIZE_MINI : &quot;320&quot;,
+<span id='android-nfc-tech-MifareClassic-property-BLOCK_SIZE'>/**Size of a MIFARE Classic block (in bytes) */
+</span>BLOCK_SIZE : &quot;16&quot;,
+<span id='android-nfc-tech-MifareClassic-method-get'>/**Get an instance of {@link android.nfc.tech.MifareClassic} for the given tag.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+ &lt;p&gt;Returns null if {@link android.nfc.tech.MifareClassic} was not enumerated in {@link Tag#getTechList}.
+ This indicates the tag is not MIFARE Classic compatible, or this Android
+ device does not support MIFARE Classic.
+@param {Object {Tag}} tag an MIFARE Classic compatible tag
+@return {Object {android.nfc.tech.MifareClassic}} MIFARE Classic object
+*/
+get : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-getType'>/**Return the type of this MIFARE Classic compatible tag.
+</span> &lt;p&gt;One of {@link #TYPE_UNKNOWN}, {@link #TYPE_CLASSIC}, {@link #TYPE_PLUS} or
+ {@link #TYPE_PRO}.
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} type
+*/
+getType : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-getSize'>/**Return the size of the tag in bytes
+</span> &lt;p&gt;One of {@link #SIZE_MINI}, {@link #SIZE_1K}, {@link #SIZE_2K}, {@link #SIZE_4K}.
+ These constants are equal to their respective size in bytes.
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} size in bytes
+*/
+getSize : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-isEmulated'>/**Return true if the tag is emulated, determined at discovery time.
+</span> These are actually smart-cards that emulate a MIFARE Classic interface.
+ They can be treated identically to a MIFARE Classic tag.
+@hide 
+*/
+isEmulated : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-getSectorCount'>/**Return the number of MIFARE Classic sectors.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} number of sectors
+*/
+getSectorCount : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-getBlockCount'>/**Return the total number of MIFARE Classic blocks.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} total number of blocks
+*/
+getBlockCount : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-getBlockCountInSector'>/**Return the number of blocks in the given sector.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+@param {Number} sectorIndex index of sector, starting from 0
+@return {Number} number of blocks in the sector
+*/
+getBlockCountInSector : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-blockToSector'>/**Return the sector that contains a given block.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+@param {Number} blockIndex index of block to lookup, starting from 0
+@return {Number} sector index that contains the block
+*/
+blockToSector : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-sectorToBlock'>/**Return the first block of a given sector.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+@param {Number} sectorIndex index of sector to lookup, starting from 0
+@return {Number} block index of first block in sector
+*/
+sectorToBlock : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-authenticateSectorWithKeyA'>/**Authenticate a sector with key A.
+</span>
+ &lt;p&gt;Successful authentication of a sector with key A enables other
+ I/O operations on that sector. The set of operations granted by key A
+ key depends on the ACL bits set in that sector. For more information
+ see the MIFARE Classic specification on &lt;a href=&quot;http://www.nxp.com&quot;&gt;http://www.nxp.com&lt;/a&gt;.
+
+ &lt;p&gt;A failed authentication attempt causes an implicit reconnection to the
+ tag, so authentication to other sectors will be lost.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} sectorIndex index of sector to authenticate, starting from 0
+@param {Object {byte[]}} key 6-byte authentication key
+@return {Boolean} true on success, false on authentication failure
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+authenticateSectorWithKeyA : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-authenticateSectorWithKeyB'>/**Authenticate a sector with key B.
+</span>
+ &lt;p&gt;Successful authentication of a sector with key B enables other
+ I/O operations on that sector. The set of operations granted by key B
+ depends on the ACL bits set in that sector. For more information
+ see the MIFARE Classic specification on &lt;a href=&quot;http://www.nxp.com&quot;&gt;http://www.nxp.com&lt;/a&gt;.
+
+ &lt;p&gt;A failed authentication attempt causes an implicit reconnection to the
+ tag, so authentication to other sectors will be lost.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} sectorIndex index of sector to authenticate, starting from 0
+@param {Object {byte[]}} key 6-byte authentication key
+@return {Boolean} true on success, false on authentication failure
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+authenticateSectorWithKeyB : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-readBlock'>/**Read 16-byte block.
+</span>
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} blockIndex index of block to read, starting from 0
+@return {Number} 16 byte block
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+readBlock : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-writeBlock'>/**Write 16-byte block.
+</span>
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} blockIndex index of block to write, starting from 0
+@param {Object {byte[]}} data 16 bytes of data to write
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+writeBlock : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-increment'>/**Increment a value block, storing the result in the temporary block on the tag.
+</span>
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} blockIndex index of block to increment, starting from 0
+@param {Number} value non-negative to increment by
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+increment : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-decrement'>/**Decrement a value block, storing the result in the temporary block on the tag.
+</span>
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} blockIndex index of block to decrement, starting from 0
+@param {Number} value non-negative to decrement by
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+decrement : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-transfer'>/**Copy from the temporary block to a value block.
+</span>
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} blockIndex index of block to copy to
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+transfer : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-restore'>/**Copy from a value block to the temporary block.
+</span>
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} blockIndex index of block to copy from
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+restore : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-transceive'>/**Send raw NfcA data to a tag and receive the response.
+</span>
+ &lt;p&gt;This is equivalent to connecting to this tag via {@link android.nfc.tech.NfcA}
+ and calling {@link android.nfc.tech.NfcA#transceive}. Note that all MIFARE Classic
+ tags are based on {@link android.nfc.tech.NfcA} technology.
+
+ &lt;p&gt;Use {@link #getMaxTransceiveLength} to retrieve the maximum number of bytes
+ that can be sent with {@link #transceive}.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@see NfcA#transceive
+*/
+transceive : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-getMaxTransceiveLength'>/**Return the maximum number of bytes that can be sent with {@link #transceive}.
+</span>@return {Number} the maximum number of bytes that can be sent with {@link #transceive}.
+*/
+getMaxTransceiveLength : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-setTimeout'>/**Set the {@link #transceive} timeout in milliseconds.
+</span>
+ &lt;p&gt;The timeout only applies to {@link #transceive} on this object,
+ and is reset to a default value when {@link #close} is called.
+
+ &lt;p&gt;Setting a longer timeout may be useful when performing
+ transactions that require a long processing time on the tag
+ such as key generation.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} timeout timeout value in milliseconds
+*/
+setTimeout : function(  ) {},
+
+<span id='android-nfc-tech-MifareClassic-method-getTimeout'>/**Get the current {@link #transceive} timeout in milliseconds.
+</span>
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@return {Number} timeout value in milliseconds
+*/
+getTimeout : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

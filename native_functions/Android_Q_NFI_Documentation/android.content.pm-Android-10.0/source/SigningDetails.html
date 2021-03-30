@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageParser-SigningDetails'>/**@class android.content.pm.PackageParser.SigningDetails
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+  A container for signing-related data of an application package.
+ @hide
+*/
+var SigningDetails = {
+
+<span id='android-content-pm-PackageParser-SigningDetails-property-signatures'>/***/
+</span>signatures : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-SigningDetails-property-signatureSchemeVersion'>/***/
+</span>signatureSchemeVersion : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-SigningDetails-property-publicKeys'>/***/
+</span>publicKeys : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-SigningDetails-property-pastSigningCertificates'>/** APK Signature Scheme v3 includes support for adding a proof-of-rotation record that
+</span> contains two pieces of information:
+   1) the past signing certificates
+   2) the flags that APK wants to assign to each of the past signing certificates.
+
+ This collection of {@code Signature} objects, each of which is formed from a former
+ signing certificate of this APK before it was changed by signing certificate rotation,
+ represents the first piece of information.  It is the APK saying to the rest of the
+ world: &quot;hey if you trust the old cert, you can trust me!&quot;  This is useful, if for
+ instance, the platform would like to determine whether or not to allow this APK to do
+ something it would've allowed it to do under the old cert (like upgrade).
+*/
+pastSigningCertificates : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-SigningDetails-property-UNKNOWN'>/**A representation of unknown signing details. Use instead of null. */
+</span>UNKNOWN : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-SigningDetails-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasSignatures'>/**Returns true if the signing details have one or more signatures.
+</span>*/
+hasSignatures : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasPastSigningCertificates'>/**Returns true if the signing details have past signing certificates.
+</span>*/
+hasPastSigningCertificates : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasAncestorOrSelf'>/**Determines if the provided {@code oldDetails} is an ancestor of or the same as this one.
+</span> If the {@code oldDetails} signing certificate appears in our pastSigningCertificates,
+ then that means it has authorized a signing certificate rotation, which eventually leads
+ to our certificate, and thus can be trusted. If this method evaluates to true, this
+ SigningDetails object should be trusted if the previous one is.
+*/
+hasAncestorOrSelf : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasAncestor'>/**Similar to {@code hasAncestorOrSelf}.  Returns true only if this {@code SigningDetails}
+</span> is a descendant of {@code oldDetails}, not if they're the same.  This is used to
+ determine if this object is newer than the provided one.
+*/
+hasAncestor : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-checkCapability'>/**Determines if the provided {@code oldDetails} is an ancestor of this one, and whether or
+</span> not this one grants it the provided capability, represented by the {@code flags}
+ parameter.  In the event of signing certificate rotation, a package may still interact
+ with entities signed by its old signing certificate and not want to break previously
+ functioning behavior.  The {@code flags} value determines which capabilities the app
+ signed by the newer signing certificate would like to continue to give to its previous
+ signing certificate(s).
+*/
+checkCapability : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-checkCapabilityRecover'>/**A special case of {@code checkCapability} which re-encodes both sets of signing
+</span> certificates to counteract a previous re-encoding.
+*/
+checkCapabilityRecover : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasCertificate'>/**Determine if {@code signature} is in this SigningDetails' signing certificate history,
+</span> including the current signer.  Automatically returns false if this object has multiple
+ signing certificates, since rotation is only supported for single-signers; this is
+ enforced by {@code hasCertificateInternal}.
+*/
+hasCertificate : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasCertificate'>/**Determine if {@code signature} is in this SigningDetails' signing certificate history,
+</span> including the current signer, and whether or not it has the given permission.
+ Certificates which match our current signer automatically get all capabilities.
+ Automatically returns false if this object has multiple signing certificates, since
+ rotation is only supported for single-signers.
+*/
+hasCertificate : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasCertificate'>/**Convenient wrapper for calling {@code hasCertificate} with certificate's raw bytes.
+</span>*/
+hasCertificate : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-checkCapability'>/**Determines if the provided {@code sha256String} is an ancestor of this one, and whether
+</span> or not this one grants it the provided capability, represented by the {@code flags}
+ parameter.  In the event of signing certificate rotation, a package may still interact
+ with entities signed by its old signing certificate and not want to break previously
+ functioning behavior.  The {@code flags} value determines which capabilities the app
+ signed by the newer signing certificate would like to continue to give to its previous
+ signing certificate(s).
+@param {String} sha256String A hex-encoded representation of a sha256 digest.  In the case of an
+                     app with multiple signers, this represents the hex-encoded sha256
+                     digest of the combined hex-encoded sha256 digests of each individual
+                     signing certificate according to {@link
+                     PackageUtils#computeSignaturesSha256Digest(Signature[])}
+*/
+checkCapability : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasSha256Certificate'>/**Determine if the {@code sha256Certificate} is in this SigningDetails' signing certificate
+</span> history, including the current signer.  Automatically returns false if this object has
+ multiple signing certificates, since rotation is only supported for single-signers.
+*/
+hasSha256Certificate : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hasSha256Certificate'>/**Determine if the {@code sha256Certificate} certificate hash corresponds to a signing
+</span> certificate in this SigningDetails' signing certificate history, including the current
+ signer, and whether or not it has the given permission.  Certificates which match our
+ current signer automatically get all capabilities. Automatically returns false if this
+ object has multiple signing certificates, since rotation is only supported for
+ single-signers.
+*/
+hasSha256Certificate : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-signaturesMatchExactly'>/**Returns true if the signatures in this and other match exactly.
+</span>*/
+signaturesMatchExactly : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-content-pm-PackageParser-SigningDetails-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

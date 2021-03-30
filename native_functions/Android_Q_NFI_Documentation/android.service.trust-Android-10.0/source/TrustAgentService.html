@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-trust-TrustAgentService'>/**@class android.service.trust.TrustAgentService
+</span>@extends android.app.Service
+
+ A service that notifies the system about whether it believes the environment of the device
+ to be trusted.
+
+ &lt;p&gt;Trust agents may only be provided by the platform. It is expected that there is only
+ one trust agent installed on the platform. In the event there is more than one,
+ either trust agent can enable trust.
+ &lt;/p&gt;
+
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with
+ the {@link android.Manifest.permission#BIND_TRUST_AGENT} permission
+ and include an intent filter with the {@link #SERVICE_INTERFACE} action. For example:&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;service android:name=&quot;.TrustAgent&quot;
+          android:label=&quot;&amp;#64;string/service_name&quot;
+          android:permission=&quot;android.permission.BIND_TRUST_AGENT&quot;&gt;
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.service.trust.TrustAgentService&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+     &amp;lt;meta-data android:name=&quot;android.service.trust.trustagent&quot;
+          android:value=&quot;&amp;#64;xml/trust_agent&quot; /&gt;
+ &amp;lt;/service&gt;&lt;/pre&gt;
+
+ &lt;p&gt;The associated meta-data file can specify an activity that is accessible through Settings
+ and should allow configuring the trust agent, as defined in
+ {@link android.R.styleable#TrustAgent}. For example:&lt;/p&gt;
+
+ &lt;pre&gt;
+ &amp;lt;trust-agent xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+          android:settingsActivity=&quot;.TrustAgentSettings&quot; /&gt;&lt;/pre&gt;
+
+ @hide
+*/
+var TrustAgentService = {
+
+<span id='android-service-trust-TrustAgentService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.service.trust.TrustAgentService&quot;,
+<span id='android-service-trust-TrustAgentService-property-TRUST_AGENT_META_DATA'>/** The name of the {@code meta-data} tag pointing to additional configuration of the trust
+</span> agent.
+*/
+TRUST_AGENT_META_DATA : &quot;android.service.trust.trustagent&quot;,
+<span id='android-service-trust-TrustAgentService-property-FLAG_GRANT_TRUST_INITIATED_BY_USER'>/** Flag for {@link #grantTrust(CharSequence, long, int)} indicating that trust is being granted
+</span> as the direct result of user action - such as solving a security challenge. The hint is used
+ by the system to optimize the experience. Behavior may vary by device and release, so
+ one should only set this parameter if it meets the above criteria rather than relying on
+ the behavior of any particular device or release.
+*/
+FLAG_GRANT_TRUST_INITIATED_BY_USER : &quot;1&quot;,
+<span id='android-service-trust-TrustAgentService-property-FLAG_GRANT_TRUST_DISMISS_KEYGUARD'>/** Flag for {@link #grantTrust(CharSequence, long, int)} indicating that the agent would like
+</span> to dismiss the keyguard. When using this flag, the {@code TrustAgentService} must ensure
+ it is only set in response to a direct user action with the expectation of dismissing the
+ keyguard.
+*/
+FLAG_GRANT_TRUST_DISMISS_KEYGUARD : &quot;2&quot;,
+<span id='android-service-trust-TrustAgentService-property-TOKEN_STATE_ACTIVE'>/** Int enum indicating that escrow token is active.
+</span> See {@link #onEscrowTokenStateReceived(long, int)}
+
+*/
+TOKEN_STATE_ACTIVE : &quot;1&quot;,
+<span id='android-service-trust-TrustAgentService-property-TOKEN_STATE_INACTIVE'>/** Int enum indicating that escow token is inactive.
+</span> See {@link #onEscrowTokenStateReceived(long, int)}
+
+*/
+TOKEN_STATE_INACTIVE : &quot;0&quot;,
+<span id='android-service-trust-TrustAgentService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onUnlockAttempt'>/**Called after the user attempts to authenticate in keyguard with their device credentials,
+</span> such as pin, pattern or password.
+@param {Boolean} successful true if the user successfully completed the challenge.
+*/
+onUnlockAttempt : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onTrustTimeout'>/**Called when the timeout provided by the agent expires.  Note that this may be called earlier
+</span> than requested by the agent if the trust timeout is adjusted by the system or
+ {@link DevicePolicyManager}.  The agent is expected to re-evaluate the trust state and only
+ call {@link #grantTrust(CharSequence, long, boolean)} if the trust state should be
+ continued.
+*/
+onTrustTimeout : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onDeviceLocked'>/**Called when the device enters a state where a PIN, pattern or
+</span> password must be entered to unlock it.
+*/
+onDeviceLocked : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onDeviceUnlocked'>/**Called when the device leaves a state where a PIN, pattern or
+</span> password must be entered to unlock it.
+*/
+onDeviceUnlocked : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onDeviceUnlockLockout'>/**Called when the device enters a temporary unlock lockout.
+</span>
+ &lt;p&gt;This occurs when the user has consecutively failed to unlock the device too many times,
+ and must wait until a timeout has passed to perform another attempt. The user may then only
+ use strong authentication mechanisms (PIN, pattern or password) to unlock the device.
+ Calls to {@link #grantTrust(CharSequence, long, int)} will be ignored until the user has
+ unlocked the device and {@link #onDeviceUnlocked}() is called.
+@param {Number} timeoutMs The amount of time, in milliseconds, that needs to elapse before the user
+    can attempt to unlock the device again.
+*/
+onDeviceUnlockLockout : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onEscrowTokenAdded'>/**Called when an escrow token is added for user userId.
+</span>@param {Object {byte[]}} token the added token
+@param {Number} handle the handle to the corresponding internal synthetic password. A user is unlocked
+ by presenting both handle and escrow token.
+@param {Object {UserHandle}} user the user to which the escrow token is added.
+*/
+onEscrowTokenAdded : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onEscrowTokenStateReceived'>/**Called when an escrow token state is received upon request.
+</span>@param {Number} handle the handle to the internal synthetic password.
+@param {Number} state the state of the requested escrow token, see {@link TokenState}.
+*/
+onEscrowTokenStateReceived : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onEscrowTokenRemoved'>/**Called when an escrow token is removed.
+</span>@param {Number} handle the handle to the removed the synthetic password.
+@param {Boolean} successful whether the removing operaiton is achieved.
+*/
+onEscrowTokenRemoved : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onConfigure'>/**Called when device policy admin wants to enable specific options for agent in response to
+</span> {@link DevicePolicyManager#setKeyguardDisabledFeatures(ComponentName, int)} and
+ {@link DevicePolicyManager#setTrustAgentConfiguration(ComponentName, ComponentName,
+ PersistableBundle)}.
+ &lt;p&gt;Agents that support configuration options should overload this method and return 'true'.
+@param {Object {java.util.List}} options The aggregated list of options or an empty list if no restrictions apply.
+@return {Boolean} true if it supports configuration options.
+*/
+onConfigure : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-grantTrust'>/**Call to grant trust on the device.
+</span>@param {Object {CharSequence}} message describes why the device is trusted, e.g. &quot;Trusted by location&quot;.
+@param {Number} durationMs amount of time in milliseconds to keep the device in a trusted state.
+    Trust for this agent will automatically be revoked when the timeout expires unless
+    extended by a subsequent call to this function. The timeout is measured from the
+    invocation of this function as dictated by {@link SystemClock#elapsedRealtime())}.
+    For security reasons, the value should be no larger than necessary.
+    The value may be adjusted by the system as necessary to comply with a policy controlled
+    by the system or {@link DevicePolicyManager} restrictions. See {@link #onTrustTimeout()}
+    for determining when trust expires.
+@param {Boolean} initiatedByUser this is a hint to the system that trust is being granted as the
+    direct result of user action - such as solving a security challenge. The hint is used
+    by the system to optimize the experience. Behavior may vary by device and release, so
+    one should only set this parameter if it meets the above criteria rather than relying on
+    the behavior of any particular device or release. Corresponds to
+    {@link #FLAG_GRANT_TRUST_INITIATED_BY_USER}.
+@throws IllegalStateException if the agent is not currently managing trust.
+@deprecated use {@link #grantTrust(CharSequence, long, int)} instead.
+*/
+grantTrust : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-grantTrust'>/**Call to grant trust on the device.
+</span>@param {Object {CharSequence}} message describes why the device is trusted, e.g. &quot;Trusted by location&quot;.
+@param {Number} durationMs amount of time in milliseconds to keep the device in a trusted state.
+    Trust for this agent will automatically be revoked when the timeout expires unless
+    extended by a subsequent call to this function. The timeout is measured from the
+    invocation of this function as dictated by {@link SystemClock#elapsedRealtime())}.
+    For security reasons, the value should be no larger than necessary.
+    The value may be adjusted by the system as necessary to comply with a policy controlled
+    by the system or {@link DevicePolicyManager} restrictions. See {@link #onTrustTimeout()}
+    for determining when trust expires.
+@param {Number} flags TBDocumented
+@throws IllegalStateException if the agent is not currently managing trust.
+*/
+grantTrust : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-revokeTrust'>/**Call to revoke trust on the device.
+</span>*/
+revokeTrust : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-setManagingTrust'>/**Call to notify the system if the agent is ready to manage trust.
+</span>
+ This property is not persistent across recreating the service and defaults to false.
+ Therefore this method is typically called when initializing the agent in {@link #onCreate}.
+@param {Boolean} managingTrust indicates if the agent would like to manage trust.
+*/
+setManagingTrust : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-addEscrowToken'>/**Call to add an escrow token to derive a synthetic password. A synthetic password is an
+</span> alternaive to the user-set password/pin/pattern in order to unlock encrypted disk. An escrow
+ token can be taken and internally derive the synthetic password. The new added token will not
+ be acivated until the user input the correct PIN/Passcode/Password once.
+
+ Result will be return by callback {@link #onEscrowTokenAdded(long, int)}
+@param {Object {byte[]}} token an escrow token of high entropy.
+@param {Object {UserHandle}} user the user which the escrow token will be added to.
+*/
+addEscrowToken : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-isEscrowTokenActive'>/**Call to check the active state of an escrow token.
+</span>
+ Result will be return in callback {@link #onEscrowTokenStateReceived(long, boolean)}
+@param {Number} handle the handle of escrow token to the internal synthetic password.
+@param {Object {UserHandle}} user the user which the escrow token is added to.
+*/
+isEscrowTokenActive : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-removeEscrowToken'>/**Call to remove the escrow token.
+</span>
+ Result will be return in callback {@link #onEscrowTokenRemoved(long, boolean)}
+@param {Number} handle the handle of escrow tokent to the internal synthetic password.
+@param {Object {UserHandle}} user the user id which the escrow token is added to.
+*/
+removeEscrowToken : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-unlockUserWithToken'>/**Call to unlock user's FBE.
+</span>@param {Number} handle the handle of escrow tokent to the internal synthetic password.
+@param {Object {byte[]}} token the escrow token
+@param {Object {UserHandle}} user the user about to be unlocked.
+*/
+unlockUserWithToken : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-showKeyguardErrorMessage'>/**Request showing a transient error message on the keyguard.
+</span> The message will be visible on the lock screen or always on display if possible but can be
+ overridden by other keyguard events of higher priority - eg. fingerprint auth error.
+ Other trust agents may override your message if posted simultaneously.
+@param {Object {CharSequence}} message Message to show.
+*/
+showKeyguardErrorMessage : function(  ) {},
+
+<span id='android-service-trust-TrustAgentService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

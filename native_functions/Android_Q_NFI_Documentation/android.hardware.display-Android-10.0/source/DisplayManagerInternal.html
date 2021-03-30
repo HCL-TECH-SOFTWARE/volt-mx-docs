@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-display-DisplayManagerInternal'>/**@class android.hardware.display.DisplayManagerInternal
+</span>@extends java.lang.Object
+
+ Display manager local system service interface.
+
+ @hide Only for use within the system server.
+*/
+var DisplayManagerInternal = {
+
+<span id='android-hardware-display-DisplayManagerInternal-method-initPowerManagement'>/**Called by the power manager to initialize power management facilities.
+</span>*/
+initPowerManagement : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-requestPowerState'>/**Called by the power manager to request a new power state.
+</span> &lt;p&gt;
+ The display power controller makes a copy of the provided object and then
+ begins adjusting the power state to match what was requested.
+ &lt;/p&gt;
+@param {Object {DisplayManagerInternal.DisplayPowerRequest}} request The requested power state.
+@param {Boolean} waitForNegativeProximity If true, issues a request to wait for
+ negative proximity before turning the screen back on, assuming the screen
+ was turned off by the proximity sensor.
+@return {Boolean} True if display is ready, false if there are important changes that must
+ be made asynchronously (such as turning the screen on), in which case the caller
+ should grab a wake lock, watch for {@link DisplayPowerCallbacks#onStateChanged()}
+ then try the request again later until the state converges.
+*/
+requestPowerState : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-isProximitySensorAvailable'>/**Returns true if the proximity sensor screen-off function is available.
+</span>*/
+isProximitySensorAvailable : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-screenshot'>/**Take a screenshot of the specified display and return a buffer.
+</span>@param {Number} displayId The display id to take the screenshot of.
+@return {Object {android.view.SurfaceControl.ScreenshotGraphicBuffer}} The buffer or null if we have failed.
+*/
+screenshot : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-getDisplayInfo'>/**Returns information about the specified logical display.
+</span>@param {Number} displayId The logical display id.
+@return {Object {android.view.DisplayInfo}} The logical display info, or null if the display does not exist.  The
+ returned object must be treated as immutable.
+*/
+getDisplayInfo : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-registerDisplayTransactionListener'>/**Registers a display transaction listener to provide the client a chance to
+</span> update its surfaces within the same transaction as any display layout updates.
+@param {Object {DisplayManagerInternal.DisplayTransactionListener}} listener The listener to register.
+*/
+registerDisplayTransactionListener : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-unregisterDisplayTransactionListener'>/**Unregisters a display transaction listener to provide the client a chance to
+</span> update its surfaces within the same transaction as any display layout updates.
+@param {Object {DisplayManagerInternal.DisplayTransactionListener}} listener The listener to unregister.
+*/
+unregisterDisplayTransactionListener : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-setDisplayInfoOverrideFromWindowManager'>/**Overrides the display information of a particular logical display.
+</span> This is used by the window manager to control the size and characteristics
+ of the default display.  It is expected to apply the requested change
+ to the display information synchronously so that applications will immediately
+ observe the new state.
+
+ NOTE: This method must be the only entry point by which the window manager
+ influences the logical configuration of displays.
+@param {Number} displayId The logical display id.
+@param {Object {DisplayInfo}} info The new data to be stored.
+*/
+setDisplayInfoOverrideFromWindowManager : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-getNonOverrideDisplayInfo'>/**Get current display info without override from WindowManager.
+</span> Current implementation of LogicalDisplay#getDisplayInfoLocked() always returns display info
+ with overrides from WM if set. This method can be used for getting real display size without
+ overrides to determine if real changes to display metrics happened.
+@param {Number} displayId Id of the target display.
+@param {Object {DisplayInfo}} outInfo {@link DisplayInfo} to fill.
+*/
+getNonOverrideDisplayInfo : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-performTraversal'>/**Called by the window manager to perform traversals while holding a
+</span> surface flinger transaction.
+*/
+performTraversal : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-setDisplayProperties'>/**Tells the display manager about properties of the display that depend on the windows on it.
+</span> This includes whether there is interesting unique content on the specified logical display,
+ and whether the one of the windows has a preferred refresh rate.
+ &lt;p&gt;
+ If the display has unique content, then the display manager arranges for it
+ to be presented on a physical display if appropriate.  Otherwise, the display manager
+ may choose to make the physical display mirror some other logical display.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ If one of the windows on the display has a preferred refresh rate that's supported by the
+ display, then the display manager will request its use.
+ &lt;/p&gt;
+@param {Number} displayId The logical display id to update.
+@param {Boolean} hasContent True if the logical display has content. This is used to control automatic
+ mirroring.
+@param {Number} requestedRefreshRate The preferred refresh rate for the top-most visible window that
+ has a preference.
+@param {Number} requestedModeId The preferred mode id for the top-most visible window that has a
+ preference.
+@param {Boolean} inTraversal True if called from WindowManagerService during a window traversal
+ prior to call to performTraversalInTransactionFromWindowManager.
+*/
+setDisplayProperties : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-setDisplayOffsets'>/**Applies an offset to the contents of a display, for example to avoid burn-in.
+</span> &lt;p&gt;
+ TODO: Technically this should be associated with a physical rather than logical
+ display but this is good enough for now.
+ &lt;/p&gt;
+@param {Number} displayId The logical display id to update.
+@param {Number} x The X offset by which to shift the contents of the display.
+@param {Number} y The Y offset by which to shift the contents of the display.
+*/
+setDisplayOffsets : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-setDisplayScalingDisabled'>/**Disables scaling for a display.
+</span>@param {Number} displayId The logical display id to disable scaling for.
+@param {Boolean} disableScaling {@code true} to disable scaling,
+ {@code false} to use the default scaling behavior of the logical display.
+*/
+setDisplayScalingDisabled : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-setDisplayAccessUIDs'>/**Provide a list of UIDs that are present on the display and are allowed to access it.
+</span>@param {Object {android.util.SparseArray}} displayAccessUIDs Mapping displayId -&gt; int array of UIDs.
+*/
+setDisplayAccessUIDs : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-persistBrightnessTrackerState'>/**Persist brightness slider events and ambient brightness stats.
+</span>*/
+persistBrightnessTrackerState : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-onOverlayChanged'>/**Notifies the display manager that resource overlays have changed.
+</span>*/
+onOverlayChanged : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-getDisplayedContentSamplingAttributes'>/**Get the attributes available for display color sampling.
+</span>@param {Number} displayId id of the display to collect the sample from.
+@return {Object {android.hardware.display.DisplayedContentSamplingAttributes}} The attributes the display supports, or null if sampling is not supported.
+*/
+getDisplayedContentSamplingAttributes : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-setDisplayedContentSamplingEnabled'>/**Enable or disable the collection of color samples.
+</span>@param {Number} displayId id of the display to collect the sample from.
+@param {Boolean} componentMask a bitmask of the color channels to collect samples for, or zero for all
+                      available.
+@param {Number} maxFrames maintain a ringbuffer of the last maxFrames.
+@param {Number} enable True to enable, False to disable.
+@return {Boolean} True if sampling was enabled, false if failure.
+*/
+setDisplayedContentSamplingEnabled : function(  ) {},
+
+<span id='android-hardware-display-DisplayManagerInternal-method-getDisplayedContentSample'>/**Accesses the color histogram statistics of displayed frames on devices that support sampling.
+</span>@param {Number} displayId id of the display to collect the sample from
+@param {Number} maxFrames limit the statistics to the last maxFrames number of frames.
+@param {Number} timestamp discard statistics that were collected prior to timestamp, where timestamp
+                  is given as CLOCK_MONOTONIC.
+@return {Object {android.hardware.display.DisplayedContentSample}} The statistics representing a histogram of the color distribution of the frames
+         displayed on-screen, or null if sampling is not supported.
+*/
+getDisplayedContentSample : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

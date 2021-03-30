@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-oemlock-OemLockManager'>/**@class android.service.oemlock.OemLockManager
+</span>@extends java.lang.Object
+
+ Interface for managing the OEM lock on the device.
+
+ This will only be available if the device implements OEM lock protection.
+
+ Multiple actors have an opinion on whether the device can be OEM unlocked and they must all be in
+ agreement for unlock to be possible.
+
+ @hide
+*/
+var OemLockManager = {
+
+<span id='android-service-oemlock-OemLockManager-method-getLockName'>/**Returns a vendor specific name for the OEM lock.
+</span>
+ This value is used to identify the security protocol used by locks.
+@return {String} The name of the OEM lock or {@code null} if failed to get the name.
+*/
+getLockName : function(  ) {},
+
+<span id='android-service-oemlock-OemLockManager-method-setOemUnlockAllowedByCarrier'>/**Sets whether the carrier has allowed this device to be OEM unlocked.
+</span>
+ Depending on the implementation, the validity of the request might need to be proved. This
+ can be acheived by passing a signature that the system will use to verify the request is
+ legitimate.
+
+ All actors involved must agree for OEM unlock to be possible.
+@param {Boolean} allowed Whether the device should be allowed to be unlocked.
+@param {Object {byte[]}} signature Optional proof of request validity, {@code null} for none.
+@throws IllegalArgumentException if a signature is required but was not provided.
+@throws SecurityException if the wrong signature was provided.
+@see #isOemUnlockAllowedByCarrier()
+*/
+setOemUnlockAllowedByCarrier : function(  ) {},
+
+<span id='android-service-oemlock-OemLockManager-method-isOemUnlockAllowedByCarrier'>/**Returns whether the carrier has allowed this device to be OEM unlocked.
+</span>@return {Boolean} Whether OEM unlock is allowed by the carrier, or true if no OEM lock is present.
+@see #setOemUnlockAllowedByCarrier(boolean, byte[])
+*/
+isOemUnlockAllowedByCarrier : function(  ) {},
+
+<span id='android-service-oemlock-OemLockManager-method-setOemUnlockAllowedByUser'>/**Sets whether the user has allowed this device to be unlocked.
+</span>
+ All actors involved must agree for OEM unlock to be possible.
+@param {Boolean} allowed Whether the device should be allowed to be unlocked.
+@throws SecurityException if the user is not allowed to unlock the device.
+@see #isOemUnlockAllowedByUser()
+*/
+setOemUnlockAllowedByUser : function(  ) {},
+
+<span id='android-service-oemlock-OemLockManager-method-isOemUnlockAllowedByUser'>/**Returns whether, or not, the user has allowed this device to be OEM unlocked.
+</span>@return {Boolean} Whether OEM unlock is allowed by the user, or true if no OEM lock is present.
+@see #setOemUnlockAllowedByUser(boolean)
+*/
+isOemUnlockAllowedByUser : function(  ) {},
+
+<span id='android-service-oemlock-OemLockManager-method-isOemUnlockAllowed'>/**
+</span>@return {Boolean} Whether the bootloader is able to OEM unlock the device.
+@hide 
+*/
+isOemUnlockAllowed : function(  ) {},
+
+<span id='android-service-oemlock-OemLockManager-method-isDeviceOemUnlocked'>/**
+</span>@return {Boolean} Whether the device has been OEM unlocked by the bootloader.
+@hide 
+*/
+isDeviceOemUnlocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

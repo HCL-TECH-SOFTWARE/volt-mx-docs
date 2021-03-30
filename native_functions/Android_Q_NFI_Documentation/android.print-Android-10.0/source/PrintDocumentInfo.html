@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-print-PrintDocumentInfo'>/**@class android.print.PrintDocumentInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class encapsulates information about a document for printing
+ purposes. This meta-data is used by the platform and print services,
+ components that interact with printers. For example, this class
+ contains the number of pages contained in the document it describes and
+ this number of pages is shown to the user allowing him/her to select
+ the range to print. Also a print service may optimize the printing
+ process based on the content type, such as document or photo.
+ &lt;p&gt;
+ Instances of this class are created by the printing application and
+ passed to the {@link android.print.PrintDocumentAdapter.LayoutResultCallback#onLayoutFinished(
+ PrintDocumentInfo, boolean) android.print.PrintDocumentAdapter.LayoutResultCallback.onLayoutFinished(
+ PrintDocumentInfo, boolean)} callback after successfully laying out the
+ content which is performed in {@link PrintDocumentAdapter#onLayout(android.print.PrintAttributes,
+ android.print.PrintAttributes, android.os.CancellationSignal, PrintDocumentAdapter.LayoutResultCallback,
+ android.os.Bundle) PrintDocumentAdapter.onLayout(android.print.PrintAttributes,
+ android.print.PrintAttributes, android.os.CancellationSignal,
+ PrintDocumentAdapter.LayoutResultCallback, android.os.Bundle)}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ An example usage looks like this:
+ &lt;pre&gt;
+
+ . . .
+
+ public void onLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes,
+         CancellationSignal cancellationSignal, LayoutResultCallback callback,
+         Bundle metadata) {
+
+        // Assume the app defined a LayoutResult class which contains
+        // the layout result data and that the content is a document.
+        LayoutResult result = doSomeLayoutWork();
+
+        PrintDocumentInfo info = new PrintDocumentInfo
+                .Builder(&quot;printed_file.pdf&quot;)
+                .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                .setPageCount(result.getPageCount())
+                .build();
+
+       callback.onLayoutFinished(info, result.getContentChanged());
+   }
+
+   . . .
+
+ &lt;/pre&gt;
+ &lt;/p&gt;
+*/
+var PrintDocumentInfo = {
+
+<span id='android-print-PrintDocumentInfo-property-PAGE_COUNT_UNKNOWN'>/** Constant for unknown page count.
+</span>*/
+PAGE_COUNT_UNKNOWN : &quot;-1&quot;,
+<span id='android-print-PrintDocumentInfo-property-CONTENT_TYPE_UNKNOWN'>/** Content type: unknown.
+</span>*/
+CONTENT_TYPE_UNKNOWN : &quot;-1&quot;,
+<span id='android-print-PrintDocumentInfo-property-CONTENT_TYPE_DOCUMENT'>/** Content type: document.
+</span> &lt;p&gt;
+ A print service may use normal paper to print the content instead
+ of dedicated photo paper. Also it may use a lower quality printing
+ process as the content is not as sensitive to print quality variation
+ as a photo is.
+ &lt;/p&gt;
+*/
+CONTENT_TYPE_DOCUMENT : &quot;0&quot;,
+<span id='android-print-PrintDocumentInfo-property-CONTENT_TYPE_PHOTO'>/** Content type: photo.
+</span> &lt;p&gt;
+ A print service may use dedicated photo paper to print the content
+ instead of normal paper. Also it may use a higher quality printing
+ process as the content is more sensitive to print quality variation
+ than a document.
+ &lt;/p&gt;
+*/
+CONTENT_TYPE_PHOTO : &quot;1&quot;,
+<span id='android-print-PrintDocumentInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-print-PrintDocumentInfo-method-getName'>/**Gets the document name. This name may be shown to
+</span> the user.
+@return {String} The document name.
+*/
+getName : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-getPageCount'>/**Gets the total number of pages.
+</span>@return {Number} The number of pages.
+@see #PAGE_COUNT_UNKNOWN
+*/
+getPageCount : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-getContentType'>/**Gets the content type.
+</span>@return {Number} The content type.
+@see #CONTENT_TYPE_UNKNOWN
+@see #CONTENT_TYPE_DOCUMENT
+@see #CONTENT_TYPE_PHOTO
+*/
+getContentType : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-getDataSize'>/**Gets the document data size in bytes.
+</span>@return {Number} The data size.
+*/
+getDataSize : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-setDataSize'>/**Sets the document data size in bytes.
+</span>@param {Number} dataSize The data size.
+@hide 
+*/
+setDataSize : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-print-PrintDocumentInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-permission-PermissionControllerManager'>/**@class android.permission.PermissionControllerManager
+</span>@extends java.lang.Object
+
+ Interface for communicating with the permission controller.
+
+ @hide
+*/
+var PermissionControllerManager = {
+
+<span id='android-permission-PermissionControllerManager-property-KEY_RESULT'>/** The key for retrieving the result from the returned bundle.
+</span>
+ @hide
+*/
+KEY_RESULT : &quot;android.permission.PermissionControllerManager.key.result&quot;,
+<span id='android-permission-PermissionControllerManager-property-REASON_MALWARE'>/**The permissions are revoked because the apps holding the permissions are malware */
+</span>REASON_MALWARE : &quot;1&quot;,
+<span id='android-permission-PermissionControllerManager-property-REASON_INSTALLER_POLICY_VIOLATION'>/** The permissions are revoked because the apps holding the permissions violate a policy of the
+</span> app that installed it.
+
+ &lt;p&gt;If this reason is used only permissions of apps that are installed by the caller of the
+ API can be revoked.
+*/
+REASON_INSTALLER_POLICY_VIOLATION : &quot;2&quot;,
+<span id='android-permission-PermissionControllerManager-property-COUNT_ONLY_WHEN_GRANTED'>/**Count an app only if the permission is granted to the app. */
+</span>COUNT_ONLY_WHEN_GRANTED : &quot;1&quot;,
+<span id='android-permission-PermissionControllerManager-property-COUNT_WHEN_SYSTEM'>/**Count and app even if it is a system app. */
+</span>COUNT_WHEN_SYSTEM : &quot;2&quot;,
+<span id='android-permission-PermissionControllerManager-method-revokeRuntimePermissions'>/**Revoke a set of runtime permissions for various apps.
+</span>@param {Object {java.util.Map}} request The permissions to revoke as {@code Map&lt;packageName, List&lt;permission&gt;&gt;}
+@param {Boolean} doDryRun Compute the permissions that would be revoked, but not actually revoke them
+@param {Number} reason Why the permission should be revoked
+@param {Object {Executor}} executor Executor on which to invoke the callback
+@param {Object {PermissionControllerManager.OnRevokeRuntimePermissionsCallback}} callback Callback to receive the result
+*/
+revokeRuntimePermissions : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-setRuntimePermissionGrantStateByDeviceAdmin'>/**Set the runtime permission state from a device admin.
+</span>@param {String} callerPackageName The package name of the admin requesting the change
+@param {String} packageName Package the permission belongs to
+@param {String} permission Permission to change
+@param {Number} grantState State to set the permission into
+@param {Object {Executor}} executor Executor to run the {@code callback} on
+@param {Object {java.util.function.Consumer}} callback The callback
+@hide 
+*/
+setRuntimePermissionGrantStateByDeviceAdmin : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-getRuntimePermissionBackup'>/**Create a backup of the runtime permissions.
+</span>@param {Object {UserHandle}} user The user to be backed up
+@param {Object {Executor}} executor Executor on which to invoke the callback
+@param {Object {PermissionControllerManager.OnGetRuntimePermissionBackupCallback}} callback Callback to receive the result
+@hide 
+*/
+getRuntimePermissionBackup : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-restoreRuntimePermissionBackup'>/**Restore a backup of the runtime permissions.
+</span>@param {Object {byte[]}} backup the backup to restore. The backup is sent asynchronously, hence it should not
+               be modified after calling this method.
+@param {Object {UserHandle}} user The user to be restore
+@hide 
+*/
+restoreRuntimePermissionBackup : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-restoreDelayedRuntimePermissionBackup'>/**Restore a backup of the runtime permissions that has been delayed.
+</span>@param {String} packageName The package that is ready to have it's permissions restored.
+@param {Object {UserHandle}} user The user to restore
+@param {Object {Executor}} executor Executor to execute the callback on
+@param {Object {java.util.function.Consumer}} callback Is called with {@code true} iff there is still more delayed backup left
+@hide 
+*/
+restoreDelayedRuntimePermissionBackup : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-getAppPermissions'>/**Gets the runtime permissions for an app.
+</span>@param {String} packageName The package for which to query.
+@param {Object {PermissionControllerManager.OnGetAppPermissionResultCallback}} callback Callback to receive the result.
+@param {Object {Handler}} handler Handler on which to invoke the callback.
+@hide 
+*/
+getAppPermissions : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-revokeRuntimePermission'>/**Revoke the permission {@code permissionName} for app {@code packageName}
+</span>@param {String} packageName The package for which to revoke
+@param {String} permissionName The permission to revoke
+@hide 
+*/
+revokeRuntimePermission : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-countPermissionApps'>/**Count how many apps have one of a set of permissions.
+</span>@param {Object {java.util.List}} permissionNames The permissions the app might have
+@param {Number} flags Modify which apps to count. By default all non-system apps that request a
+              permission are counted
+@param {Object {PermissionControllerManager.OnCountPermissionAppsResultCallback}} callback Callback to receive the result
+@param {Object {Handler}} handler Handler on which to invoke the callback
+@hide 
+*/
+countPermissionApps : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-getPermissionUsages'>/**Count how many apps have used permissions.
+</span>@param {Boolean} countSystem Also count system apps
+@param {Number} numMillis The number of milliseconds in the past to check for uses
+@param {Object {Executor}} executor Executor on which to invoke the callback
+@param {Object {PermissionControllerManager.OnPermissionUsageResultCallback}} callback Callback to receive the result
+@hide 
+*/
+getPermissionUsages : function(  ) {},
+
+<span id='android-permission-PermissionControllerManager-method-grantOrUpgradeDefaultRuntimePermissions'>/**Grant or upgrade runtime permissions. The upgrade could be performed
+</span> based on whether the device upgraded, whether the permission database
+ version is old, or because the permission policy changed.
+@param {Object {Executor}} executor Executor on which to invoke the callback
+@param {Object {java.util.function.Consumer}} callback Callback to receive the result
+@hide 
+*/
+grantOrUpgradeDefaultRuntimePermissions : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

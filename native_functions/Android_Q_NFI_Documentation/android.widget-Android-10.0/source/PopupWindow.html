@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-PopupWindow'>/**@class android.widget.PopupWindow
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ This class represents a popup window that can be used to display an
+ arbitrary view. The popup window is a floating container that appears on top
+ of the current activity.
+ &lt;/p&gt;
+ &lt;a name=&quot;Animation&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Animation&lt;/h3&gt;
+ &lt;p&gt;
+ On all versions of Android, popup window enter and exit animations may be
+ specified by calling {@link #setAnimationStyle}(int) and passing the
+ resource ID for an animation style that defines {@code windowEnterAnimation}
+ and {@code windowExitAnimation}. For example, passing
+ {@link android.R.style#Animation_Dialog} will give a scale and alpha
+ animation.
+ &lt;/br&gt;
+ A window animation style may also be specified in the popup window's style
+ XML via the {@link android.R.styleable#PopupWindow_popupAnimationStyle popupAnimationStyle}
+ attribute.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Starting with API 23, more complex popup window enter and exit transitions
+ may be specified by calling either {@link #setEnterTransition}(Transition)
+ or {@link #setExitTransition}(Transition) and passing a  {@link Transition}.
+ &lt;/br&gt;
+ Popup enter and exit transitions may also be specified in the popup window's
+ style XML via the {@link android.R.styleable#PopupWindow_popupEnterTransition popupEnterTransition}
+ and {@link android.R.styleable#PopupWindow_popupExitTransition popupExitTransition}
+ attributes, respectively.
+ &lt;/p&gt;
+
+ @attr ref android.R.styleable#PopupWindow_overlapAnchor
+ @attr ref android.R.styleable#PopupWindow_popupAnimationStyle
+ @attr ref android.R.styleable#PopupWindow_popupBackground
+ @attr ref android.R.styleable#PopupWindow_popupElevation
+ @attr ref android.R.styleable#PopupWindow_popupEnterTransition
+ @attr ref android.R.styleable#PopupWindow_popupExitTransition
+
+ @see android.widget.AutoCompleteTextView
+ @see android.widget.Spinner
+*/
+var PopupWindow = {
+
+<span id='android-widget-PopupWindow-property-INPUT_METHOD_FROM_FOCUSABLE'>/** Mode for {@link #setInputMethodMode}(int): the requirements for the
+</span> input method should be based on the focusability of the popup.  That is
+ if it is focusable than it needs to work with the input method, else
+ it doesn't.
+*/
+INPUT_METHOD_FROM_FOCUSABLE : &quot;0&quot;,
+<span id='android-widget-PopupWindow-property-INPUT_METHOD_NEEDED'>/** Mode for {@link #setInputMethodMode}(int): this popup always needs to
+</span> work with an input method, regardless of whether it is focusable.  This
+ means that it will always be displayed so that the user can also operate
+ the input method while it is shown.
+*/
+INPUT_METHOD_NEEDED : &quot;1&quot;,
+<span id='android-widget-PopupWindow-property-INPUT_METHOD_NOT_NEEDED'>/** Mode for {@link #setInputMethodMode}(int): this popup never needs to
+</span> work with an input method, regardless of whether it is focusable.  This
+ means that it will always be displayed to use as much space on the
+ screen as needed, regardless of whether this covers the input method.
+*/
+INPUT_METHOD_NOT_NEEDED : &quot;2&quot;,
+<span id='android-widget-PopupWindow-method-setEnterTransition'>/**Sets the enter transition to be used when the popup window is shown.
+</span>@param {Object {Transition}} enterTransition the enter transition, or {@code null} to clear
+@see #getEnterTransition()
+@attr ref android.R.styleable#PopupWindow_popupEnterTransition
+*/
+setEnterTransition : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getEnterTransition'>/**Returns the enter transition to be used when the popup window is shown.
+</span>@return {Object {android.transition.Transition}} the enter transition, or {@code null} if not set
+@see #setEnterTransition(Transition)
+@attr ref android.R.styleable#PopupWindow_popupEnterTransition
+*/
+getEnterTransition : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setExitTransition'>/**Sets the exit transition to be used when the popup window is dismissed.
+</span>@param {Object {Transition}} exitTransition the exit transition, or {@code null} to clear
+@see #getExitTransition()
+@attr ref android.R.styleable#PopupWindow_popupExitTransition
+*/
+setExitTransition : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getExitTransition'>/**Returns the exit transition to be used when the popup window is
+</span> dismissed.
+@return {Object {android.transition.Transition}} the exit transition, or {@code null} if not set
+@see #setExitTransition(Transition)
+@attr ref android.R.styleable#PopupWindow_popupExitTransition
+*/
+getExitTransition : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getEpicenterBounds'>/**&lt;p&gt;Returns bounds which are used as a center of the enter and exit transitions.&lt;p/&gt;
+</span>
+ &lt;p&gt;Transitions use Rect, referred to as the epicenter, to orient
+ the direction of travel. For popup windows, the anchor view bounds are
+ used as the default epicenter.&lt;/p&gt;
+
+ &lt;p&gt;See {@link Transition#setEpicenterCallback(EpicenterCallback)} for more
+ information about how transition epicenters work.&lt;/p&gt;
+@return {Object {android.graphics.Rect}} bounds relative to anchor view, or {@code null} if not set
+@see #setEpicenterBounds(Rect)
+*/
+getEpicenterBounds : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setEpicenterBounds'>/**&lt;p&gt;Sets the bounds used as the epicenter of the enter and exit transitions.&lt;/p&gt;
+</span>
+ &lt;p&gt;Transitions use Rect, referred to as the epicenter, to orient
+ the direction of travel. For popup windows, the anchor view bounds are
+ used as the default epicenter.&lt;/p&gt;
+
+ &lt;p&gt;See {@link Transition#setEpicenterCallback(EpicenterCallback)} for more
+ information about how transition epicenters work.&lt;/p&gt;
+@param {Object {Rect}} bounds the epicenter bounds relative to the anchor view, or
+               {@code null} to use the default epicenter
+@see #getEpicenterBounds()
+*/
+setEpicenterBounds : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getBackground'>/**Return the drawable used as the popup window's background.
+</span>@return {Object {android.graphics.drawable.Drawable}} the background drawable or {@code null} if not set
+@see #setBackgroundDrawable(Drawable)
+@attr ref android.R.styleable#PopupWindow_popupBackground
+*/
+getBackground : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setBackgroundDrawable'>/**Specifies the background drawable for this popup window. The background
+</span> can be set to {@code null}.
+@param {Object {Drawable}} background the popup's background
+@see #getBackground()
+@attr ref android.R.styleable#PopupWindow_popupBackground
+*/
+setBackgroundDrawable : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getElevation'>/**
+</span>@return {Number} the elevation for this popup window in pixels
+@see #setElevation(float)
+@attr ref android.R.styleable#PopupWindow_popupElevation
+*/
+getElevation : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setElevation'>/**Specifies the elevation for this popup window.
+</span>@param {Number} elevation the popup's elevation in pixels
+@see #getElevation()
+@attr ref android.R.styleable#PopupWindow_popupElevation
+*/
+setElevation : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getAnimationStyle'>/**&lt;p&gt;Return the animation style to use the popup appears and disappears&lt;/p&gt;
+</span>@return {Number} the animation style to use the popup appears and disappears
+*/
+getAnimationStyle : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setIgnoreCheekPress'>/**Set the flag on popup to ignore cheek press events; by default this flag
+</span> is set to false
+ which means the popup will not ignore cheek press dispatch events.
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@see #update()
+*/
+setIgnoreCheekPress : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setAnimationStyle'>/**&lt;p&gt;Change the animation style resource for this popup.&lt;/p&gt;
+</span>
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@param {Number} animationStyle animation style to use when the popup appears
+      and disappears.  Set to -1 for the default animation, 0 for no
+      animation, or a resource identifier for an explicit animation.
+@see #update()
+*/
+setAnimationStyle : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getContentView'>/**&lt;p&gt;Return the view used as the content of the popup window.&lt;/p&gt;
+</span>@return {Object {android.view.View}} a {@link android.view.View} representing the popup's content
+@see #setContentView(android.view.View)
+*/
+getContentView : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setContentView'>/**&lt;p&gt;Change the popup's content. The content is represented by an instance
+</span> of {@link android.view.View}.&lt;/p&gt;
+
+ &lt;p&gt;This method has no effect if called when the popup is showing.&lt;/p&gt;
+@param {Object {View}} contentView the new content for the popup
+@see #getContentView()
+@see #isShowing()
+*/
+setContentView : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setTouchInterceptor'>/**Set a callback for all touch events being dispatched to the popup
+</span> window.
+*/
+setTouchInterceptor : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isFocusable'>/**&lt;p&gt;Indicate whether the popup window can grab the focus.&lt;/p&gt;
+</span>@return {Boolean} true if the popup is focusable, false otherwise
+@see #setFocusable(boolean)
+*/
+isFocusable : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setFocusable'>/**&lt;p&gt;Changes the focusability of the popup window. When focusable, the
+</span> window will grab the focus from the current focused widget if the popup
+ contains a focusable {@link android.view.View}.  By default a popup
+ window is not focusable.&lt;/p&gt;
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@param {Boolean} focusable true if the popup should grab focus, false otherwise.
+@see #isFocusable()
+@see #isShowing()
+@see #update()
+*/
+setFocusable : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getInputMethodMode'>/**Return the current value in {@link #setInputMethodMode}(int).
+</span>@see #setInputMethodMode(int)
+*/
+getInputMethodMode : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setInputMethodMode'>/**Control how the popup operates with an input method: one of
+</span> {@link #INPUT_METHOD_FROM_FOCUSABLE}, {@link #INPUT_METHOD_NEEDED},
+ or {@link #INPUT_METHOD_NOT_NEEDED}.
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@see #getInputMethodMode()
+@see #update()
+*/
+setInputMethodMode : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setSoftInputMode'>/**Sets the operating mode for the soft input area.
+</span>@param {Number} mode The desired mode, see
+        {@link android.view.WindowManager.LayoutParams#softInputMode}
+        for the full list
+@see android.view.WindowManager.LayoutParams#softInputMode
+@see #getSoftInputMode()
+*/
+setSoftInputMode : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getSoftInputMode'>/**Returns the current value in {@link #setSoftInputMode}(int).
+</span>@see #setSoftInputMode(int)
+@see android.view.WindowManager.LayoutParams#softInputMode
+*/
+getSoftInputMode : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isTouchable'>/**&lt;p&gt;Indicates whether the popup window receives touch events.&lt;/p&gt;
+</span>@return {Boolean} true if the popup is touchable, false otherwise
+@see #setTouchable(boolean)
+*/
+isTouchable : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setTouchable'>/**&lt;p&gt;Changes the touchability of the popup window. When touchable, the
+</span> window will receive touch events, otherwise touch events will go to the
+ window below it. By default the window is touchable.&lt;/p&gt;
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@param {Boolean} touchable true if the popup should receive touch events, false otherwise
+@see #isTouchable()
+@see #isShowing()
+@see #update()
+*/
+setTouchable : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isOutsideTouchable'>/**&lt;p&gt;Indicates whether the popup window will be informed of touch events
+</span> outside of its window.&lt;/p&gt;
+@return {Boolean} true if the popup is outside touchable, false otherwise
+@see #setOutsideTouchable(boolean)
+*/
+isOutsideTouchable : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setOutsideTouchable'>/**&lt;p&gt;Controls whether the pop-up will be informed of touch events outside
+</span> of its window.  This only makes sense for pop-ups that are touchable
+ but not focusable, which means touches outside of the window will
+ be delivered to the window behind.  The default is false.&lt;/p&gt;
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@param {Boolean} touchable true if the popup should receive outside
+ touch events, false otherwise
+@see #isOutsideTouchable()
+@see #isShowing()
+@see #update()
+*/
+setOutsideTouchable : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isClippingEnabled'>/**&lt;p&gt;Indicates whether clipping of the popup window is enabled.&lt;/p&gt;
+</span>@return {Boolean} true if the clipping is enabled, false otherwise
+@see #setClippingEnabled(boolean)
+*/
+isClippingEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setClippingEnabled'>/**&lt;p&gt;Allows the popup window to extend beyond the bounds of the screen. By default the
+</span> window is clipped to the screen boundaries. Setting this to false will allow windows to be
+ accurately positioned.&lt;/p&gt;
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@param {Boolean} enabled false if the window should be allowed to extend outside of the screen
+@see #isShowing()
+@see #isClippingEnabled()
+@see #update()
+*/
+setClippingEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isClipToScreenEnabled'>/**&lt;p&gt;Indicates whether this popup will be clipped to the screen and not to the
+</span> containing window&lt;p/&gt;
+@return {Boolean} true if popup will be clipped to the screen instead of the window, false otherwise
+@deprecated Use {@link #isClippedToScreen()} instead
+@removed 
+*/
+isClipToScreenEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setClipToScreenEnabled'>/**&lt;p&gt;Clip this popup window to the screen, but not to the containing window.&lt;/p&gt;
+</span>
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@deprecated Use {@link #setIsClippedToScreen(boolean)} instead
+@removed 
+*/
+setClipToScreenEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isClippedToScreen'>/**&lt;p&gt;Indicates whether this popup will be clipped to the screen and not to the
+</span> containing window&lt;p/&gt;
+@return {Boolean} true if popup will be clipped to the screen instead of the window, false otherwise
+@see #setIsClippedToScreen(boolean)
+*/
+isClippedToScreen : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setIsClippedToScreen'>/**&lt;p&gt;Clip this popup window to the screen, but not to the containing window.&lt;/p&gt;
+</span>
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@param {Boolean} enabled true to clip to the screen.
+@see #isClippedToScreen()
+*/
+setIsClippedToScreen : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isSplitTouchEnabled'>/**&lt;p&gt;Indicates whether the popup window supports splitting touches.&lt;/p&gt;
+</span>@return {Boolean} true if the touch splitting is enabled, false otherwise
+@see #setSplitTouchEnabled(boolean)
+*/
+isSplitTouchEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setSplitTouchEnabled'>/**&lt;p&gt;Allows the popup window to split touches across other windows that also
+</span> support split touch.  When this flag is false, the first pointer
+ that goes down determines the window to which all subsequent touches
+ go until all pointers go up.  When this flag is true, each pointer
+ (not necessarily the first) that goes down determines the window
+ to which all subsequent touches of that pointer will go until that
+ pointer goes up thereby enabling touches with multiple pointers
+ to be split across multiple windows.&lt;/p&gt;
+@param {Boolean} enabled true if the split touches should be enabled, false otherwise
+@see #isSplitTouchEnabled()
+*/
+setSplitTouchEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isLayoutInScreenEnabled'>/**&lt;p&gt;Indicates whether the popup window will be forced into using absolute screen coordinates
+</span> for positioning.&lt;/p&gt;
+@return {Boolean} true if the window will always be positioned in screen coordinates.
+@deprecated Use {@link #isLaidOutInScreen()} instead
+@removed 
+*/
+isLayoutInScreenEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setLayoutInScreenEnabled'>/**&lt;p&gt;Allows the popup window to force the flag
+</span> {@link WindowManager.LayoutParams#FLAG_LAYOUT_IN_SCREEN}, overriding default behavior.
+ This will cause the popup to be positioned in absolute screen coordinates.&lt;/p&gt;
+@param {Boolean} enabled true if the popup should always be positioned in screen coordinates
+@deprecated Use {@link #setIsLaidOutInScreen(boolean)} instead
+@removed 
+*/
+setLayoutInScreenEnabled : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isLaidOutInScreen'>/**&lt;p&gt;Indicates whether the popup window will be forced into using absolute screen coordinates
+</span> for positioning.&lt;/p&gt;
+@return {Boolean} true if the window will always be positioned in screen coordinates.
+@see #setIsLaidOutInScreen(boolean)
+*/
+isLaidOutInScreen : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setIsLaidOutInScreen'>/**&lt;p&gt;Allows the popup window to force the flag
+</span> {@link WindowManager.LayoutParams#FLAG_LAYOUT_IN_SCREEN}, overriding default behavior.
+ This will cause the popup to be positioned in absolute screen coordinates.&lt;/p&gt;
+@param {Boolean} enabled true if the popup should always be positioned in screen coordinates
+@see #isLaidOutInScreen()
+*/
+setIsLaidOutInScreen : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isAttachedInDecor'>/**&lt;p&gt;Indicates whether the popup window will be attached in the decor frame of its parent
+</span> window.
+@return {Boolean} true if the window will be attached to the decor frame of its parent window.
+@see #setAttachedInDecor(boolean)
+@see WindowManager.LayoutParams#FLAG_LAYOUT_ATTACHED_IN_DECOR
+*/
+isAttachedInDecor : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setAttachedInDecor'>/**&lt;p&gt;This will attach the popup window to the decor frame of the parent window to avoid
+</span> overlaping with screen decorations like the navigation bar. Overrides the default behavior of
+ the flag {@link WindowManager.LayoutParams#FLAG_LAYOUT_ATTACHED_IN_DECOR}.
+
+ &lt;p&gt;By default the flag is set on SDK version {@link Build.VERSION_CODES#LOLLIPOP_MR1} or
+ greater and cleared on lesser SDK versions.
+@param {Boolean} enabled true if the popup should be attached to the decor frame of its parent window.
+@see WindowManager.LayoutParams#FLAG_LAYOUT_ATTACHED_IN_DECOR
+*/
+setAttachedInDecor : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setLayoutInsetDecor'>/**Allows the popup window to force the flag
+</span> {@link WindowManager.LayoutParams#FLAG_LAYOUT_INSET_DECOR}, overriding default behavior.
+ This will cause the popup to inset its content to account for system windows overlaying
+ the screen, such as the status bar.
+
+ &lt;p&gt;This will often be combined with {@link #setIsLaidOutInScreen}(boolean).
+@param {Boolean} enabled true if the popup's views should inset content to account for system windows,
+                the way that decor views behave for full-screen windows.
+@hide 
+*/
+setLayoutInsetDecor : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setWindowLayoutType'>/**Set the layout type for this window.
+</span> &lt;p&gt;
+ See {@link WindowManager.LayoutParams#type} for possible values.
+@param {Number} layoutType Layout type for this window.
+@see WindowManager.LayoutParams#type
+*/
+setWindowLayoutType : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getWindowLayoutType'>/**Returns the layout type for this window.
+</span>@see #setWindowLayoutType(int)
+*/
+getWindowLayoutType : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isTouchModal'>/**&lt;p&gt;Indicates whether outside touches will be sent to this window
+</span> or other windows behind it&lt;p/&gt;
+@return {Boolean} true if touches will be sent to this window, false otherwise
+@see #setTouchModal(boolean)
+*/
+isTouchModal : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setTouchModal'>/**&lt;p&gt;Set whether this window is touch modal or if outside touches will be sent to
+</span> other windows behind it.&lt;p/&gt;
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to one of
+ the {@link #update}() methods.&lt;/p&gt;
+@param {Boolean} touchModal true to sent all outside touches to this window,
+ false to other windows behind it
+@see #isTouchModal()
+*/
+setTouchModal : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setWindowLayoutMode'>/**&lt;p&gt;Change the width and height measure specs that are given to the
+</span> window manager by the popup.  By default these are 0, meaning that
+ the current width or height is requested as an explicit size from
+ the window manager.  You can supply
+ {@link ViewGroup.LayoutParams#WRAP_CONTENT} or
+ {@link ViewGroup.LayoutParams#MATCH_PARENT} to have that measure
+ spec supplied instead, replacing the absolute width and height that
+ has been set in the popup.&lt;/p&gt;
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown.&lt;/p&gt;
+@param {Number} widthSpec an explicit width measure spec mode, either
+ {@link ViewGroup.LayoutParams#WRAP_CONTENT},
+ {@link ViewGroup.LayoutParams#MATCH_PARENT}, or 0 to use the absolute
+ width.
+@param {Number} heightSpec an explicit height measure spec mode, either
+ {@link ViewGroup.LayoutParams#WRAP_CONTENT},
+ {@link ViewGroup.LayoutParams#MATCH_PARENT}, or 0 to use the absolute
+ height.
+@deprecated Use {@link #setWidth(int)} and {@link #setHeight(int)}.
+*/
+setWindowLayoutMode : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getHeight'>/**Returns the popup's requested height. May be a layout constant such as
+</span> {@link android.widget.AbsListView.LayoutParams#WRAP_CONTENT} or {@link android.widget.AbsListView.LayoutParams#MATCH_PARENT}.
+ &lt;p&gt;
+ The actual size of the popup may depend on other factors such as
+ clipping and window layout.
+@return {Number} the popup height in pixels or a layout constant
+@see #setHeight(int)
+*/
+getHeight : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setHeight'>/**Sets the popup's requested height. May be a layout constant such as
+</span> {@link android.widget.AbsListView.LayoutParams#WRAP_CONTENT} or {@link android.widget.AbsListView.LayoutParams#MATCH_PARENT}.
+ &lt;p&gt;
+ The actual size of the popup may depend on other factors such as
+ clipping and window layout.
+ &lt;p&gt;
+ If the popup is showing, calling this method will take effect the next
+ time the popup is shown.
+@param {Number} height the popup height in pixels or a layout constant
+@see #getHeight()
+@see #isShowing()
+*/
+setHeight : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getWidth'>/**Returns the popup's requested width. May be a layout constant such as
+</span> {@link android.widget.AbsListView.LayoutParams#WRAP_CONTENT} or {@link android.widget.AbsListView.LayoutParams#MATCH_PARENT}.
+ &lt;p&gt;
+ The actual size of the popup may depend on other factors such as
+ clipping and window layout.
+@return {Number} the popup width in pixels or a layout constant
+@see #setWidth(int)
+*/
+getWidth : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setWidth'>/**Sets the popup's requested width. May be a layout constant such as
+</span> {@link android.widget.AbsListView.LayoutParams#WRAP_CONTENT} or {@link android.widget.AbsListView.LayoutParams#MATCH_PARENT}.
+ &lt;p&gt;
+ The actual size of the popup may depend on other factors such as
+ clipping and window layout.
+ &lt;p&gt;
+ If the popup is showing, calling this method will take effect the next
+ time the popup is shown.
+@param {Number} width the popup width in pixels or a layout constant
+@see #getWidth()
+@see #isShowing()
+*/
+setWidth : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setOverlapAnchor'>/**Sets whether the popup window should overlap its anchor view when
+</span> displayed as a drop-down.
+ &lt;p&gt;
+ If the popup is showing, calling this method will take effect only
+ the next time the popup is shown.
+@param {Boolean} overlapAnchor Whether the popup should overlap its anchor.
+@see #getOverlapAnchor()
+@see #isShowing()
+*/
+setOverlapAnchor : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getOverlapAnchor'>/**Returns whether the popup window should overlap its anchor view when
+</span> displayed as a drop-down.
+@return {Boolean} Whether the popup should overlap its anchor.
+@see #setOverlapAnchor(boolean)
+*/
+getOverlapAnchor : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isShowing'>/**&lt;p&gt;Indicate whether this popup window is showing on screen.&lt;/p&gt;
+</span>@return {Boolean} true if the popup is showing, false otherwise
+*/
+isShowing : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-showAtLocation'>/**&lt;p&gt;
+</span> Display the content view in a popup window at the specified location. If the popup window
+ cannot fit on screen, it will be clipped. See {@link android.view.WindowManager.LayoutParams}
+ for more information on how gravity and the x and y parameters are related. Specifying
+ a gravity of {@link android.view.Gravity#NO_GRAVITY} is similar to specifying
+ &lt;code&gt;Gravity.LEFT | Gravity.TOP&lt;/code&gt;.
+ &lt;/p&gt;
+@param {Object {View}} parent a parent view to get the {@link android.view.View#getWindowToken()} token from
+@param {Number} gravity the gravity which controls the placement of the popup window
+@param {Number} x the popup's x location offset
+@param {Number} y the popup's y location offset
+*/
+showAtLocation : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-showAtLocation'>/**Display the content view in a popup window at the specified location.
+</span>@param {Object {IBinder}} token Window token to use for creating the new window
+@param {Number} gravity the gravity which controls the placement of the popup window
+@param {Number} x the popup's x location offset
+@param {Number} y the popup's y location offset
+@hide Internal use only. Applications should use
+       {@link #showAtLocation(View, int, int, int)} instead.
+*/
+showAtLocation : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-showAsDropDown'>/**Display the content view in a popup window anchored to the bottom-left
+</span> corner of the anchor view. If there is not enough room on screen to show
+ the popup in its entirety, this method tries to find a parent scroll
+ view to scroll. If no parent scroll view can be scrolled, the
+ bottom-left corner of the popup is pinned at the top left corner of the
+ anchor view.
+@param {Object {View}} anchor the view on which to pin the popup window
+@see #dismiss()
+*/
+showAsDropDown : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-showAsDropDown'>/**Display the content view in a popup window anchored to the bottom-left
+</span> corner of the anchor view offset by the specified x and y coordinates.
+ If there is not enough room on screen to show the popup in its entirety,
+ this method tries to find a parent scroll view to scroll. If no parent
+ scroll view can be scrolled, the bottom-left corner of the popup is
+ pinned at the top left corner of the anchor view.
+ &lt;p&gt;
+ If the view later scrolls to move &lt;code&gt;anchor&lt;/code&gt; to a different
+ location, the popup will be moved correspondingly.
+@param {Object {View}} anchor the view on which to pin the popup window
+@param {Number} xoff A horizontal offset from the anchor in pixels
+@param {Number} yoff A vertical offset from the anchor in pixels
+@see #dismiss()
+*/
+showAsDropDown : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-showAsDropDown'>/**Displays the content view in a popup window anchored to the corner of
+</span> another view. The window is positioned according to the specified
+ gravity and offset by the specified x and y coordinates.
+ &lt;p&gt;
+ If there is not enough room on screen to show the popup in its entirety,
+ this method tries to find a parent scroll view to scroll. If no parent
+ view can be scrolled, the specified vertical gravity will be ignored and
+ the popup will anchor itself such that it is visible.
+ &lt;p&gt;
+ If the view later scrolls to move &lt;code&gt;anchor&lt;/code&gt; to a different
+ location, the popup will be moved correspondingly.
+@param {Object {View}} anchor the view on which to pin the popup window
+@param {Number} xoff A horizontal offset from the anchor in pixels
+@param {Number} yoff A vertical offset from the anchor in pixels
+@param {Number} gravity Alignment of the popup relative to the anchor
+@see #dismiss()
+*/
+showAsDropDown : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-isAboveAnchor'>/**Indicates whether the popup is showing above (the y coordinate of the popup's bottom
+</span> is less than the y coordinate of the anchor) or below the anchor view (the y coordinate
+ of the popup is greater than y coordinate of the anchor's bottom).
+
+ The value returned
+ by this method is meaningful only after {@link #showAsDropDown(android.view.View)}
+ or {@link #showAsDropDown(android.view.View, int, int)} was invoked.
+@return {Boolean} True if this popup is showing above the anchor view, false otherwise.
+*/
+isAboveAnchor : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getMaxAvailableHeight'>/**Returns the maximum height that is available for the popup to be
+</span> completely shown. It is recommended that this height be the maximum for
+ the popup's height, otherwise it is possible that the popup will be
+ clipped.
+@param {Object {View}} anchor The view on which the popup window must be anchored.
+@return {Number} The maximum available height for the popup to be completely
+         shown.
+*/
+getMaxAvailableHeight : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getMaxAvailableHeight'>/**Returns the maximum height that is available for the popup to be
+</span> completely shown. It is recommended that this height be the maximum for
+ the popup's height, otherwise it is possible that the popup will be
+ clipped.
+@param {Object {View}} anchor The view on which the popup window must be anchored.
+@param {Number} yOffset y offset from the view's bottom edge
+@return {Number} The maximum available height for the popup to be completely
+         shown.
+*/
+getMaxAvailableHeight : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-getMaxAvailableHeight'>/**Returns the maximum height that is available for the popup to be
+</span> completely shown, optionally ignoring any bottom decorations such as
+ the input method. It is recommended that this height be the maximum for
+ the popup's height, otherwise it is possible that the popup will be
+ clipped.
+@param {Object {View}} anchor The view on which the popup window must be anchored.
+@param {Number} yOffset y offset from the view's bottom edge
+@param {Boolean} ignoreBottomDecorations if true, the height returned will be
+        all the way to the bottom of the display, ignoring any
+        bottom decorations
+@return {Number} The maximum available height for the popup to be completely
+         shown.
+*/
+getMaxAvailableHeight : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-dismiss'>/**Disposes of the popup window. This method can be invoked only after
+</span> {@link #showAsDropDown(android.view.View)} has been executed. Failing
+ that, calling this method will have no effect.
+@see #showAsDropDown(android.view.View)
+*/
+dismiss : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-setOnDismissListener'>/**Sets the listener to be called when the window is dismissed.
+</span>@param {Object {PopupWindow.OnDismissListener}} onDismissListener The listener.
+*/
+setOnDismissListener : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-update'>/**Updates the state of the popup window, if it is currently being displayed,
+</span> from the currently set state.
+ &lt;p&gt;
+ This includes:
+ &lt;ul&gt;
+     &lt;li&gt;{@link #setClippingEnabled}(boolean)&lt;/li&gt;
+     &lt;li&gt;{@link #setFocusable}(boolean)&lt;/li&gt;
+     &lt;li&gt;{@link #setIgnoreCheekPress}()&lt;/li&gt;
+     &lt;li&gt;{@link #setInputMethodMode}(int)&lt;/li&gt;
+     &lt;li&gt;{@link #setTouchable}(boolean)&lt;/li&gt;
+     &lt;li&gt;{@link #setAnimationStyle}(int)&lt;/li&gt;
+     &lt;li&gt;{@link #setTouchModal}(boolean) (boolean)}&lt;/li&gt;
+     &lt;li&gt;{@link #setIsClippedToScreen}(boolean)&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+update : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-update'>/**Updates the dimension of the popup window.
+</span> &lt;p&gt;
+ Calling this function also updates the window with the current popup
+ state as described for {@link #update}().
+@param {Number} width the new width in pixels, must be &gt;= 0 or -1 to ignore
+@param {Number} height the new height in pixels, must be &gt;= 0 or -1 to ignore
+*/
+update : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-update'>/**Updates the position and the dimension of the popup window.
+</span> &lt;p&gt;
+ Width and height can be set to -1 to update location only. Calling this
+ function also updates the window with the current popup state as
+ described for {@link #update}().
+@param {Number} x the new x location
+@param {Number} y the new y location
+@param {Number} width the new width in pixels, must be &gt;= 0 or -1 to ignore
+@param {Number} height the new height in pixels, must be &gt;= 0 or -1 to ignore
+*/
+update : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-update'>/**Updates the position and the dimension of the popup window.
+</span> &lt;p&gt;
+ Width and height can be set to -1 to update location only. Calling this
+ function also updates the window with the current popup state as
+ described for {@link #update}().
+@param {Number} x the new x location
+@param {Number} y the new y location
+@param {Number} width the new width in pixels, must be &gt;= 0 or -1 to ignore
+@param {Number} height the new height in pixels, must be &gt;= 0 or -1 to ignore
+@param {Boolean} force {@code true} to reposition the window even if the specified
+              position already seems to correspond to the LayoutParams,
+              {@code false} to only reposition if needed
+*/
+update : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-update'>/**Updates the position and the dimension of the popup window.
+</span> &lt;p&gt;
+ Calling this function also updates the window with the current popup
+ state as described for {@link #update}().
+@param {Object {View}} anchor the popup's anchor view
+@param {Number} width the new width in pixels, must be &gt;= 0 or -1 to ignore
+@param {Number} height the new height in pixels, must be &gt;= 0 or -1 to ignore
+*/
+update : function(  ) {},
+
+<span id='android-widget-PopupWindow-method-update'>/**Updates the position and the dimension of the popup window.
+</span> &lt;p&gt;
+ Width and height can be set to -1 to update location only. Calling this
+ function also updates the window with the current popup state as
+ described for {@link #update}().
+ &lt;p&gt;
+ If the view later scrolls to move {@code anchor} to a different
+ location, the popup will be moved correspondingly.
+@param {Object {View}} anchor the popup's anchor view
+@param {Number} xoff x offset from the view's left edge
+@param {Number} yoff y offset from the view's bottom edge
+@param {Number} width the new width in pixels, must be &gt;= 0 or -1 to ignore
+@param {Number} height the new height in pixels, must be &gt;= 0 or -1 to ignore
+*/
+update : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

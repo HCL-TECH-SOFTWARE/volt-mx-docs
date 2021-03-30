@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-print-PrintManager'>/**@class android.print.PrintManager
+</span>@extends java.lang.Object
+
+ System level service for accessing the printing capabilities of the platform.
+
+ &lt;h3&gt;Print mechanics&lt;/h3&gt;
+ &lt;p&gt;
+ The key idea behind printing on the platform is that the content to be printed
+ should be laid out for the currently selected print options resulting in an
+ optimized output and higher user satisfaction. To achieve this goal the platform
+ declares a contract that the printing application has to follow which is defined
+ by the {@link android.print.PrintDocumentAdapter} class. At a higher level the contract is that
+ when the user selects some options from the print UI that may affect the way
+ content is laid out, for example page size, the application receives a callback
+ allowing it to layout the content to better fit these new constraints. After a
+ layout pass the system may ask the application to render one or more pages one
+ or more times. For example, an application may produce a single column list for
+ smaller page sizes and a multi-column table for larger page sizes.
+ &lt;/p&gt;
+ &lt;h3&gt;Print jobs&lt;/h3&gt;
+ &lt;p&gt;
+ Print jobs are started by calling the {@link #print(String, PrintDocumentAdapter,
+ android.print.PrintAttributes)} from an activity which results in bringing up the system print
+ UI. Once the print UI is up, when the user changes a selected print option that
+ affects the way content is laid out the system starts to interact with the
+ application following the mechanics described the section above.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Print jobs can be in {@link android.print.PrintJobInfo#STATE_CREATED created}, {@link android.print.PrintJobInfo#STATE_QUEUED queued}, {@link android.print.PrintJobInfo#STATE_STARTED started},
+ {@link android.print.PrintJobInfo#STATE_BLOCKED blocked}, {@link android.print.PrintJobInfo#STATE_COMPLETED
+ completed}, {@link android.print.PrintJobInfo#STATE_FAILED failed}, and {@link android.print.PrintJobInfo#STATE_CANCELED canceled} state. Print jobs are stored in dedicated
+ system spooler until they are handled which is they are cancelled or completed.
+ Active print jobs, ones that are not cancelled or completed, are considered failed
+ if the device reboots as the new boot may be after a very long time. The user may
+ choose to restart such print jobs. Once a print job is queued all relevant content
+ is stored in the system spooler and its lifecycle becomes detached from this of
+ the application that created it.
+ &lt;/p&gt;
+ &lt;p&gt;
+ An applications can query the print spooler for current print jobs it created
+ but not print jobs created by other applications.
+ &lt;/p&gt;
+
+ @see PrintJob
+ @see PrintJobInfo
+*/
+var PrintManager = {
+
+<span id='android-print-PrintManager-property-PRINT_SPOOLER_PACKAGE_NAME'>/** Package name of print spooler.
+</span>
+ @hide
+*/
+PRINT_SPOOLER_PACKAGE_NAME : &quot;com.android.printspooler&quot;,
+<span id='android-print-PrintManager-property-ENABLED_SERVICES'>/** Select enabled services.
+</span> &lt;/p&gt;
+ @see #getPrintServices
+ @hide
+*/
+ENABLED_SERVICES : &quot;1&quot;,
+<span id='android-print-PrintManager-property-DISABLED_SERVICES'>/** Select disabled services.
+</span> &lt;/p&gt;
+ @see #getPrintServices
+ @hide
+*/
+DISABLED_SERVICES : &quot;2&quot;,
+<span id='android-print-PrintManager-property-ALL_SERVICES'>/** Select all services.
+</span> &lt;/p&gt;
+ @see #getPrintServices
+ @hide
+*/
+ALL_SERVICES : &quot;3&quot;,
+<span id='android-print-PrintManager-property-ACTION_PRINT_DIALOG'>/** The action for launching the print dialog activity.
+</span>
+ @hide
+*/
+ACTION_PRINT_DIALOG : &quot;android.print.PRINT_DIALOG&quot;,
+<span id='android-print-PrintManager-property-EXTRA_PRINT_DIALOG_INTENT'>/** Extra with the intent for starting the print dialog.
+</span> &lt;p&gt;
+ &lt;strong&gt;Type:&lt;/strong&gt; {@link android.content.IntentSender}
+ &lt;/p&gt;
+
+ @hide
+*/
+EXTRA_PRINT_DIALOG_INTENT : &quot;android.print.intent.extra.EXTRA_PRINT_DIALOG_INTENT&quot;,
+<span id='android-print-PrintManager-property-EXTRA_PRINT_JOB'>/** Extra with a print job.
+</span> &lt;p&gt;
+ &lt;strong&gt;Type:&lt;/strong&gt; {@link android.print.PrintJobInfo}
+ &lt;/p&gt;
+
+ @hide
+*/
+EXTRA_PRINT_JOB : &quot;android.print.intent.extra.EXTRA_PRINT_JOB&quot;,
+<span id='android-print-PrintManager-property-EXTRA_PRINT_DOCUMENT_ADAPTER'>/** Extra with the print document adapter to be printed.
+</span> &lt;p&gt;
+ &lt;strong&gt;Type:&lt;/strong&gt; {@link android.print.IPrintDocumentAdapter}
+ &lt;/p&gt;
+
+ @hide
+*/
+EXTRA_PRINT_DOCUMENT_ADAPTER : &quot;android.print.intent.extra.EXTRA_PRINT_DOCUMENT_ADAPTER&quot;,
+<span id='android-print-PrintManager-property-APP_ID_ANY'>/**@hide */
+</span>APP_ID_ANY : &quot;-2&quot;,
+<span id='android-print-PrintManager-method-getGlobalPrintManagerForUser'>/**Creates an instance that can access all print jobs.
+</span>@param {Number} userId The user id for which to get all print jobs.
+@return {Object {android.print.PrintManager}} An instance if the caller has the permission to access all print
+         jobs, null otherwise.
+@hide 
+*/
+getGlobalPrintManagerForUser : function(  ) {},
+
+<span id='android-print-PrintManager-method-addPrintJobStateChangeListener'>/**Adds a listener for observing the state of print jobs.
+</span>@param {Object {PrintManager.PrintJobStateChangeListener}} listener The listener to add.
+@hide 
+*/
+addPrintJobStateChangeListener : function(  ) {},
+
+<span id='android-print-PrintManager-method-removePrintJobStateChangeListener'>/**Removes a listener for observing the state of print jobs.
+</span>@param {Object {PrintManager.PrintJobStateChangeListener}} listener The listener to remove.
+@hide 
+*/
+removePrintJobStateChangeListener : function(  ) {},
+
+<span id='android-print-PrintManager-method-getPrintJob'>/**Gets a print job given its id.
+</span>@param {Object {PrintJobId}} printJobId The id of the print job.
+@return {Object {android.print.PrintJob}} The print job list.
+@see PrintJob
+@hide 
+*/
+getPrintJob : function(  ) {},
+
+<span id='android-print-PrintManager-method-getCustomPrinterIcon'>/**Get the custom icon for a printer. If the icon is not cached, the icon is
+</span> requested asynchronously. Once it is available the printer is updated.
+@param {Object {PrinterId}} printerId the id of the printer the icon should be loaded for
+@return {Object {android.graphics.drawable.Icon}} the custom icon to be used for the printer or null if the icon is
+         not yet available
+@see android.print.PrinterInfo.Builder#setHasCustomPrinterIcon(boolean)
+@hide 
+*/
+getCustomPrinterIcon : function(  ) {},
+
+<span id='android-print-PrintManager-method-getPrintJobs'>/**Gets the print jobs for this application.
+</span>@return {Object {java.util.List}} The print job list.
+@see PrintJob
+*/
+getPrintJobs : function(  ) {},
+
+<span id='android-print-PrintManager-method-print'>/**Creates a print job for printing a {@link android.print.PrintDocumentAdapter} with
+</span> default print attributes.
+ &lt;p&gt;
+ Calling this method brings the print UI allowing the user to customize
+ the print job and returns a {@link android.print.PrintJob} object without waiting for the
+ user to customize or confirm the print job. The returned print job instance
+ is in a {@link android.print.PrintJobInfo#STATE_CREATED created} state.
+ &lt;p&gt;
+ This method can be called only from an {@link Activity}. The rationale is that
+ printing from a service will create an inconsistent user experience as the print
+ UI would appear without any context.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Also the passed in {@link android.print.PrintDocumentAdapter} will be considered invalid if
+ your activity is finished. The rationale is that once the activity that
+ initiated printing is finished, the provided adapter may be in an inconsistent
+ state as it may depend on the UI presented by the activity.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The default print attributes are a hint to the system how the data is to
+ be printed. For example, a photo editor may look at the photo aspect ratio
+ to determine the default orientation and provide a hint whether the printing
+ should be in portrait or landscape. The system will do a best effort to
+ selected the hinted options in the print dialog, given the current printer
+ supports them.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Calling this method will bring the print dialog and
+ the system will connect to the provided {@link android.print.PrintDocumentAdapter}. If a
+ configuration change occurs that you application does not handle, for example
+ a rotation change, the system will drop the connection to the adapter as the
+ activity has to be recreated and the old adapter may be invalid in this context,
+ hence a new adapter instance is required. As a consequence, if your activity
+ does not handle configuration changes (default behavior), you have to save the
+ state that you were printing and call this method again when your activity
+ is recreated.
+ &lt;/p&gt;
+@param {String} printJobName A name for the new print job which is shown to the user.
+@param {Object {PrintDocumentAdapter}} documentAdapter An adapter that emits the document to print.
+@param {Object {PrintAttributes}} attributes The default print job attributes or &lt;code&gt;null&lt;/code&gt;.
+@return {Object {android.print.PrintJob}} The created print job on success or null on failure.
+@throws IllegalStateException If not called from an {@link Activity}.
+@throws IllegalArgumentException If the print job name is empty or the
+ document adapter is null.
+@see PrintJob
+*/
+print : function(  ) {},
+
+<span id='android-print-PrintManager-method-addPrintServicesChangeListener'>/**Listen for changes to the installed and enabled print services.
+</span>@param {Object {PrintManager.PrintServicesChangeListener}} listener the listener to add
+@param {Object {Handler}} handler the handler the listener is called back on
+@see android.print.PrintManager#getPrintServices
+@hide 
+*/
+addPrintServicesChangeListener : function(  ) {},
+
+<span id='android-print-PrintManager-method-removePrintServicesChangeListener'>/**Stop listening for changes to the installed and enabled print services.
+</span>@param {Object {PrintManager.PrintServicesChangeListener}} listener the listener to remove
+@see android.print.PrintManager#getPrintServices
+@hide 
+*/
+removePrintServicesChangeListener : function(  ) {},
+
+<span id='android-print-PrintManager-method-getPrintServices'>/**Gets the list of print services, but does not register for updates. The user has to register
+</span> for updates by itself, or use {@link android.print.PrintServicesLoader}.
+@param {Number} selectionFlags flags selecting which services to get. Either
+                       {@link #ENABLED_SERVICES},{@link #DISABLED_SERVICES}, or both.
+@return {Object {java.util.List}} The print service list or an empty list.
+@see #addPrintServicesChangeListener(PrintServicesChangeListener, Handler)
+@see #removePrintServicesChangeListener(PrintServicesChangeListener)
+@hide 
+*/
+getPrintServices : function(  ) {},
+
+<span id='android-print-PrintManager-method-addPrintServiceRecommendationsChangeListener'>/**Listen for changes to the print service recommendations.
+</span>@param {Object {PrintManager.PrintServiceRecommendationsChangeListener}} listener the listener to add
+@param {Object {Handler}} handler the handler the listener is called back on
+@see android.print.PrintManager#getPrintServiceRecommendations
+@hide 
+*/
+addPrintServiceRecommendationsChangeListener : function(  ) {},
+
+<span id='android-print-PrintManager-method-removePrintServiceRecommendationsChangeListener'>/**Stop listening for changes to the print service recommendations.
+</span>@param {Object {PrintManager.PrintServiceRecommendationsChangeListener}} listener the listener to remove
+@see android.print.PrintManager#getPrintServiceRecommendations
+@hide 
+*/
+removePrintServiceRecommendationsChangeListener : function(  ) {},
+
+<span id='android-print-PrintManager-method-getPrintServiceRecommendations'>/**Gets the list of print service recommendations, but does not register for updates. The user
+</span> has to register for updates by itself, or use {@link android.print.PrintServiceRecommendationsLoader}.
+@return {Object {java.util.List}} The print service recommendations list or an empty list.
+@see #addPrintServiceRecommendationsChangeListener
+@see #removePrintServiceRecommendationsChangeListener
+@hide 
+*/
+getPrintServiceRecommendations : function(  ) {},
+
+<span id='android-print-PrintManager-method-createPrinterDiscoverySession'>/**
+</span>@hide 
+*/
+createPrinterDiscoverySession : function(  ) {},
+
+<span id='android-print-PrintManager-method-setPrintServiceEnabled'>/**Enable or disable a print service.
+</span>@param {Object {ComponentName}} service The service to enabled or disable
+@param {Boolean} isEnabled whether the service should be enabled or disabled
+@hide 
+*/
+setPrintServiceEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

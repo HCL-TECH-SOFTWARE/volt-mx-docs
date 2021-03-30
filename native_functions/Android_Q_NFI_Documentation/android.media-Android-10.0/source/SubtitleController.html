@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-SubtitleController'>/**@class android.media.SubtitleController
+</span>@extends java.lang.Object
+
+ The subtitle controller provides the architecture to display subtitles for a
+ media source.  It allows specifying which tracks to display, on which anchor
+ to display them, and also allows adding external, out-of-band subtitle tracks.
+
+ @hide
+*/
+var SubtitleController = {
+
+<span id='android-media-SubtitleController-method-getTracks'>/**
+</span>@return {Object {android.media.SubtitleTrack}} the available subtitle tracks for this media. These include
+ the tracks found by {@link MediaPlayer} as well as any tracks added
+ manually via {@link #addTrack}.
+*/
+getTracks : function(  ) {},
+
+<span id='android-media-SubtitleController-method-getSelectedTrack'>/**
+</span>@return {Object {android.media.SubtitleTrack}} the currently selected subtitle track
+*/
+getSelectedTrack : function(  ) {},
+
+<span id='android-media-SubtitleController-method-selectTrack'>/**Selects a subtitle track.  As a result, this track will receive
+</span> in-band data from the {@link android.media.MediaPlayer}.  However, this does
+ not change the subtitle visibility.
+
+ Should be called from the anchor's (UI) thread. {@see #Anchor.getSubtitleLooper}
+@param {Object {SubtitleTrack}} track The subtitle track to select.  This must be one of the
+              tracks in {@link #getTracks}.
+@return {Boolean} true if the track was successfully selected.
+*/
+selectTrack : function(  ) {},
+
+<span id='android-media-SubtitleController-method-getDefaultTrack'>/**
+</span>@return {Object {android.media.SubtitleTrack}} the default subtitle track based on system preferences, or null,
+ if no such track exists in this manager.
+
+ Supports HLS-flags: AUTOSELECT, FORCED &amp; DEFAULT.
+
+ 1. If captioning is disabled, only consider FORCED tracks. Otherwise,
+ consider all tracks, but prefer non-FORCED ones.
+ 2. If user selected &quot;Default&quot; caption language:
+   a. If there is a considered track with DEFAULT=yes, returns that track
+      (favor the first one in the current language if there are more than
+      one default tracks, or the first in general if none of them are in
+      the current language).
+   b. Otherwise, if there is a track with AUTOSELECT=yes in the current
+      language, return that one.
+   c. If there are no default tracks, and no autoselectable tracks in the
+      current language, return null.
+ 3. If there is a track with the caption language, select that one.  Prefer
+ the one with AUTOSELECT=no.
+
+ The default values for these flags are DEFAULT=no, AUTOSELECT=yes
+ and FORCED=no.
+*/
+getDefaultTrack : function(  ) {},
+
+<span id='android-media-SubtitleController-method-selectDefaultTrack'>/**
+</span>@hide - should be called from anchor thread
+*/
+selectDefaultTrack : function(  ) {},
+
+<span id='android-media-SubtitleController-method-reset'>/**
+</span>@hide - must be called from anchor thread
+*/
+reset : function(  ) {},
+
+<span id='android-media-SubtitleController-method-addTrack'>/**Adds a new, external subtitle track to the manager.
+</span>@param {Object {MediaFormat}} format the format of the track that will include at least
+               the MIME type {@link MediaFormat@KEY_MIME}.
+@return {Object {android.media.SubtitleTrack}} the created {@link SubtitleTrack} object
+*/
+addTrack : function(  ) {},
+
+<span id='android-media-SubtitleController-method-show'>/**Show the selected (or default) subtitle track.
+</span>
+ Should be called from the anchor's (UI) thread. {@see #Anchor.getSubtitleLooper}
+*/
+show : function(  ) {},
+
+<span id='android-media-SubtitleController-method-hide'>/**Hide the selected (or default) subtitle track.
+</span>
+ Should be called from the anchor's (UI) thread. {@see #Anchor.getSubtitleLooper}
+*/
+hide : function(  ) {},
+
+<span id='android-media-SubtitleController-method-registerRenderer'>/**Add support for a subtitle format in {@link android.media.MediaPlayer}.
+</span>@param {Object {SubtitleController.Renderer}} renderer a {@link SubtitleController.Renderer} object that adds
+                 support for a subtitle format.
+*/
+registerRenderer : function(  ) {},
+
+<span id='android-media-SubtitleController-method-hasRendererFor'>/**
+</span>@hide 
+*/
+hasRendererFor : function(  ) {},
+
+<span id='android-media-SubtitleController-method-setAnchor'>/**
+</span>@hide - called from anchor's looper (if any, both when unsetting and
+  setting)
+*/
+setAnchor : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

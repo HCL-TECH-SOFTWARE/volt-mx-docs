@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Debug-MemoryInfo'>/**@class android.os.Debug.MemoryInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class is used to retrieved various statistics about the memory mappings for this
+ process. The returned info is broken down by dalvik, native, and other. All results are in kB.
+*/
+var MemoryInfo = {
+
+<span id='android-os-Debug-MemoryInfo-property-dalvikPss'>/**The proportional set size for dalvik heap.  (Doesn't include other Dalvik overhead.) */
+</span>dalvikPss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikSwappablePss'>/**@hide We may want to expose this, eventually. */
+</span>dalvikSwappablePss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikRss'>/**@hide The resident set size for dalvik heap.  (Without other Dalvik overhead.) */
+</span>dalvikRss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikPrivateDirty'>/**The private dirty pages used by dalvik heap. */
+</span>dalvikPrivateDirty : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikSharedDirty'>/**The shared dirty pages used by dalvik heap. */
+</span>dalvikSharedDirty : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikPrivateClean'>/**@hide We may want to expose this, eventually. */
+</span>dalvikPrivateClean : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikSharedClean'>/**@hide We may want to expose this, eventually. */
+</span>dalvikSharedClean : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikSwappedOut'>/**@hide We may want to expose this, eventually. */
+</span>dalvikSwappedOut : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-dalvikSwappedOutPss'>/**@hide We may want to expose this, eventually. */
+</span>dalvikSwappedOutPss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativePss'>/**The proportional set size for the native heap. */
+</span>nativePss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativeSwappablePss'>/**@hide We may want to expose this, eventually. */
+</span>nativeSwappablePss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativeRss'>/**@hide The resident set size for the native heap. */
+</span>nativeRss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativePrivateDirty'>/**The private dirty pages used by the native heap. */
+</span>nativePrivateDirty : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativeSharedDirty'>/**The shared dirty pages used by the native heap. */
+</span>nativeSharedDirty : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativePrivateClean'>/**@hide We may want to expose this, eventually. */
+</span>nativePrivateClean : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativeSharedClean'>/**@hide We may want to expose this, eventually. */
+</span>nativeSharedClean : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativeSwappedOut'>/**@hide We may want to expose this, eventually. */
+</span>nativeSwappedOut : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-nativeSwappedOutPss'>/**@hide We may want to expose this, eventually. */
+</span>nativeSwappedOutPss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherPss'>/**The proportional set size for everything else. */
+</span>otherPss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherSwappablePss'>/**@hide We may want to expose this, eventually. */
+</span>otherSwappablePss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherRss'>/**@hide The resident set size for everything else. */
+</span>otherRss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherPrivateDirty'>/**The private dirty pages used by everything else. */
+</span>otherPrivateDirty : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherSharedDirty'>/**The shared dirty pages used by everything else. */
+</span>otherSharedDirty : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherPrivateClean'>/**@hide We may want to expose this, eventually. */
+</span>otherPrivateClean : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherSharedClean'>/**@hide We may want to expose this, eventually. */
+</span>otherSharedClean : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherSwappedOut'>/**@hide We may want to expose this, eventually. */
+</span>otherSwappedOut : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-otherSwappedOutPss'>/**@hide We may want to expose this, eventually. */
+</span>otherSwappedOutPss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-hasSwappedOutPss'>/**@hide */
+</span>hasSwappedOutPss : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-property-HEAP_UNKNOWN'>/**@hide */
+</span>HEAP_UNKNOWN : &quot;0&quot;,
+<span id='android-os-Debug-MemoryInfo-property-HEAP_DALVIK'>/**@hide */
+</span>HEAP_DALVIK : &quot;1&quot;,
+<span id='android-os-Debug-MemoryInfo-property-HEAP_NATIVE'>/**@hide */
+</span>HEAP_NATIVE : &quot;2&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_OTHER'>/**@hide */
+</span>OTHER_DALVIK_OTHER : &quot;0&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_STACK'>/**@hide */
+</span>OTHER_STACK : &quot;1&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_CURSOR'>/**@hide */
+</span>OTHER_CURSOR : &quot;2&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_ASHMEM'>/**@hide */
+</span>OTHER_ASHMEM : &quot;3&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_GL_DEV'>/**@hide */
+</span>OTHER_GL_DEV : &quot;4&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_UNKNOWN_DEV'>/**@hide */
+</span>OTHER_UNKNOWN_DEV : &quot;5&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_SO'>/**@hide */
+</span>OTHER_SO : &quot;6&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_JAR'>/**@hide */
+</span>OTHER_JAR : &quot;7&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_APK'>/**@hide */
+</span>OTHER_APK : &quot;8&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_TTF'>/**@hide */
+</span>OTHER_TTF : &quot;9&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DEX'>/**@hide */
+</span>OTHER_DEX : &quot;10&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_OAT'>/**@hide */
+</span>OTHER_OAT : &quot;11&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_ART'>/**@hide */
+</span>OTHER_ART : &quot;12&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_UNKNOWN_MAP'>/**@hide */
+</span>OTHER_UNKNOWN_MAP : &quot;13&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_GRAPHICS'>/**@hide */
+</span>OTHER_GRAPHICS : &quot;14&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_GL'>/**@hide */
+</span>OTHER_GL : &quot;15&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_OTHER_MEMTRACK'>/**@hide */
+</span>OTHER_OTHER_MEMTRACK : &quot;16&quot;,
+<span id='android-os-Debug-MemoryInfo-property-NUM_OTHER_STATS'>/**@hide */
+</span>NUM_OTHER_STATS : &quot;17&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_NORMAL'>/**@hide */
+</span>OTHER_DALVIK_NORMAL : &quot;17&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_LARGE'>/**@hide */
+</span>OTHER_DALVIK_LARGE : &quot;18&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_ZYGOTE'>/**@hide */
+</span>OTHER_DALVIK_ZYGOTE : &quot;19&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_NON_MOVING'>/**@hide */
+</span>OTHER_DALVIK_NON_MOVING : &quot;20&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_DALVIK_START'>/**@hide */
+</span>OTHER_DVK_STAT_DALVIK_START : &quot;0&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_DALVIK_END'>/**@hide */
+</span>OTHER_DVK_STAT_DALVIK_END : &quot;3&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_OTHER_LINEARALLOC'>/**@hide */
+</span>OTHER_DALVIK_OTHER_LINEARALLOC : &quot;21&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_OTHER_ACCOUNTING'>/**@hide */
+</span>OTHER_DALVIK_OTHER_ACCOUNTING : &quot;22&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_OTHER_CODE_CACHE'>/**@hide */
+</span>OTHER_DALVIK_OTHER_CODE_CACHE : &quot;23&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_OTHER_COMPILER_METADATA'>/**@hide */
+</span>OTHER_DALVIK_OTHER_COMPILER_METADATA : &quot;24&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DALVIK_OTHER_INDIRECT_REFERENCE_TABLE'>/**@hide */
+</span>OTHER_DALVIK_OTHER_INDIRECT_REFERENCE_TABLE : &quot;25&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_DALVIK_OTHER_START'>/**@hide */
+</span>OTHER_DVK_STAT_DALVIK_OTHER_START : &quot;4&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_DALVIK_OTHER_END'>/**@hide */
+</span>OTHER_DVK_STAT_DALVIK_OTHER_END : &quot;8&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DEX_BOOT_VDEX'>/**@hide */
+</span>OTHER_DEX_BOOT_VDEX : &quot;26&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DEX_APP_DEX'>/**@hide */
+</span>OTHER_DEX_APP_DEX : &quot;27&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DEX_APP_VDEX'>/**@hide */
+</span>OTHER_DEX_APP_VDEX : &quot;28&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_DEX_START'>/**@hide */
+</span>OTHER_DVK_STAT_DEX_START : &quot;9&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_DEX_END'>/**@hide */
+</span>OTHER_DVK_STAT_DEX_END : &quot;11&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_ART_APP'>/**@hide */
+</span>OTHER_ART_APP : &quot;29&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_ART_BOOT'>/**@hide */
+</span>OTHER_ART_BOOT : &quot;30&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_ART_START'>/**@hide */
+</span>OTHER_DVK_STAT_ART_START : &quot;12&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OTHER_DVK_STAT_ART_END'>/**@hide */
+</span>OTHER_DVK_STAT_ART_END : &quot;13&quot;,
+<span id='android-os-Debug-MemoryInfo-property-NUM_DVK_STATS'>/**@hide */
+</span>NUM_DVK_STATS : &quot;14&quot;,
+<span id='android-os-Debug-MemoryInfo-property-NUM_CATEGORIES'>/**@hide */
+</span>NUM_CATEGORIES : &quot;9&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_PSS'>/**@hide */
+</span>OFFSET_PSS : &quot;0&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_SWAPPABLE_PSS'>/**@hide */
+</span>OFFSET_SWAPPABLE_PSS : &quot;1&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_RSS'>/**@hide */
+</span>OFFSET_RSS : &quot;2&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_PRIVATE_DIRTY'>/**@hide */
+</span>OFFSET_PRIVATE_DIRTY : &quot;3&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_SHARED_DIRTY'>/**@hide */
+</span>OFFSET_SHARED_DIRTY : &quot;4&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_PRIVATE_CLEAN'>/**@hide */
+</span>OFFSET_PRIVATE_CLEAN : &quot;5&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_SHARED_CLEAN'>/**@hide */
+</span>OFFSET_SHARED_CLEAN : &quot;6&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_SWAPPED_OUT'>/**@hide */
+</span>OFFSET_SWAPPED_OUT : &quot;7&quot;,
+<span id='android-os-Debug-MemoryInfo-property-OFFSET_SWAPPED_OUT_PSS'>/**@hide */
+</span>OFFSET_SWAPPED_OUT_PSS : &quot;8&quot;,
+<span id='android-os-Debug-MemoryInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-os-Debug-MemoryInfo-method-set'>/**
+</span>@hide Copy contents from another object.
+*/
+set : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalPss'>/**Return total PSS memory usage in kB.
+</span>*/
+getTotalPss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalUss'>/**
+</span>@hide Return total PSS memory usage in kB.
+*/
+getTotalUss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalSwappablePss'>/**Return total PSS memory usage in kB mapping a file of one of the following extension:
+</span> .so, .jar, .apk, .ttf, .dex, .odex, .oat, .art .
+*/
+getTotalSwappablePss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalRss'>/**
+</span>@hide Return total RSS memory usage in kB.
+*/
+getTotalRss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalPrivateDirty'>/**Return total private dirty memory usage in kB.
+</span>*/
+getTotalPrivateDirty : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalSharedDirty'>/**Return total shared dirty memory usage in kB.
+</span>*/
+getTotalSharedDirty : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalPrivateClean'>/**Return total shared clean memory usage in kB.
+</span>*/
+getTotalPrivateClean : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalSharedClean'>/**Return total shared clean memory usage in kB.
+</span>*/
+getTotalSharedClean : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalSwappedOut'>/**Return total swapped out memory in kB.
+</span>@hide 
+*/
+getTotalSwappedOut : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getTotalSwappedOutPss'>/**Return total swapped out memory in kB, proportional.
+</span>@hide 
+*/
+getTotalSwappedOutPss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherPss'>/**
+</span>@hide 
+*/
+getOtherPss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherSwappablePss'>/**
+</span>@hide 
+*/
+getOtherSwappablePss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherRss'>/**
+</span>@hide 
+*/
+getOtherRss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherPrivateDirty'>/**
+</span>@hide 
+*/
+getOtherPrivateDirty : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherSharedDirty'>/**
+</span>@hide 
+*/
+getOtherSharedDirty : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherPrivateClean'>/**
+</span>@hide 
+*/
+getOtherPrivateClean : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherPrivate'>/**
+</span>@hide 
+*/
+getOtherPrivate : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherSharedClean'>/**
+</span>@hide 
+*/
+getOtherSharedClean : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherSwappedOut'>/**
+</span>@hide 
+*/
+getOtherSwappedOut : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherSwappedOutPss'>/**
+</span>@hide 
+*/
+getOtherSwappedOutPss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getOtherLabel'>/**
+</span>@hide 
+*/
+getOtherLabel : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getMemoryStat'>/**Returns the value of a particular memory statistic or {@code null} if no
+</span> such memory statistic exists.
+
+ &lt;p&gt;The following table lists the memory statistics that are supported.
+ Note that memory statistics may be added or removed in a future API level.&lt;/p&gt;
+
+ &lt;table&gt;
+     &lt;thead&gt;
+         &lt;tr&gt;
+             &lt;th&gt;Memory statistic name&lt;/th&gt;
+             &lt;th&gt;Meaning&lt;/th&gt;
+             &lt;th&gt;Example&lt;/th&gt;
+             &lt;th&gt;Supported (API Levels)&lt;/th&gt;
+         &lt;/tr&gt;
+     &lt;/thead&gt;
+     &lt;tbody&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.java-heap&lt;/td&gt;
+             &lt;td&gt;The private Java Heap usage in kB. This corresponds to the Java Heap field
+                 in the App Summary section output by dumpsys meminfo.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.native-heap&lt;/td&gt;
+             &lt;td&gt;The private Native Heap usage in kB. This corresponds to the Native Heap
+                 field in the App Summary section output by dumpsys meminfo.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.code&lt;/td&gt;
+             &lt;td&gt;The memory usage for static code and resources in kB. This corresponds to
+                 the Code field in the App Summary section output by dumpsys meminfo.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.stack&lt;/td&gt;
+             &lt;td&gt;The stack usage in kB. This corresponds to the Stack field in the
+                 App Summary section output by dumpsys meminfo.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.graphics&lt;/td&gt;
+             &lt;td&gt;The graphics usage in kB. This corresponds to the Graphics field in the
+                 App Summary section output by dumpsys meminfo.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.private-other&lt;/td&gt;
+             &lt;td&gt;Other private memory usage in kB. This corresponds to the Private Other
+                 field output in the App Summary section by dumpsys meminfo.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.system&lt;/td&gt;
+             &lt;td&gt;Shared and system memory usage in kB. This corresponds to the System
+                 field output in the App Summary section by dumpsys meminfo.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.total-pss&lt;/td&gt;
+             &lt;td&gt;Total PPS memory usage in kB.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;summary.total-swap&lt;/td&gt;
+             &lt;td&gt;Total swap usage in kB.&lt;/td&gt;
+             &lt;td&gt;{@code 1442}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+     &lt;/tbody&gt;
+ &lt;/table&gt;
+*/
+getMemoryStat : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getMemoryStats'>/**Returns a map of the names/values of the memory statistics
+</span> that {@link #getMemoryStat}(String) supports.
+@return {Object {java.util.Map}} a map of the names/values of the supported memory statistics.
+*/
+getMemoryStats : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryJavaHeap'>/**Pss of Java Heap bytes in KB due to the application.
+</span> Notes:
+  * OTHER_ART is the boot image. Anything private here is blamed on
+    the application, not the system.
+  * dalvikPrivateDirty includes private zygote, which means the
+    application dirtied something allocated by the zygote. We blame
+    the application for that memory, not the system.
+  * Does not include OTHER_DALVIK_OTHER, which is considered VM
+    Overhead and lumped into Private Other.
+  * We don't include dalvikPrivateClean, because there should be no
+    such thing as private clean for the Java Heap.
+@hide 
+*/
+getSummaryJavaHeap : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryNativeHeap'>/**Pss of Native Heap bytes in KB due to the application.
+</span> Notes:
+  * Includes private dirty malloc space.
+  * We don't include nativePrivateClean, because there should be no
+    such thing as private clean for the Native Heap.
+@hide 
+*/
+getSummaryNativeHeap : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryCode'>/**Pss of code and other static resource bytes in KB due to
+</span> the application.
+@hide 
+*/
+getSummaryCode : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryStack'>/**Pss in KB of the stack due to the application.
+</span> Notes:
+  * Includes private dirty stack, which includes both Java and Native
+    stack.
+  * Does not include private clean stack, because there should be no
+    such thing as private clean for the stack.
+@hide 
+*/
+getSummaryStack : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryGraphics'>/**Pss in KB of graphics due to the application.
+</span> Notes:
+  * Includes private Gfx, EGL, and GL.
+  * Warning: These numbers can be misreported by the graphics drivers.
+  * We don't include shared graphics. It may make sense to, because
+    shared graphics are likely buffers due to the application
+    anyway, but it's simpler to implement to just group all shared
+    memory into the System category.
+@hide 
+*/
+getSummaryGraphics : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryPrivateOther'>/**Pss in KB due to the application that haven't otherwise been
+</span> accounted for.
+@hide 
+*/
+getSummaryPrivateOther : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummarySystem'>/**Pss in KB due to the system.
+</span> Notes:
+  * Includes all shared memory.
+@hide 
+*/
+getSummarySystem : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryTotalPss'>/**Total Pss in KB.
+</span>@hide 
+*/
+getSummaryTotalPss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryTotalSwap'>/**Total Swap in KB.
+</span> Notes:
+  * Some of this memory belongs in other categories, but we don't
+    know if the Swap memory is shared or private, so we don't know
+    what to blame on the application and what on the system.
+    For now, just lump all the Swap in one place.
+    For kernels reporting SwapPss {@link #getSummaryTotalSwapPss}()
+    will report the application proportional Swap.
+@hide 
+*/
+getSummaryTotalSwap : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-getSummaryTotalSwapPss'>/**Total proportional Swap in KB.
+</span> Notes:
+  * Always 0 if {@link #hasSwappedOutPss} is false.
+@hide 
+*/
+getSummaryTotalSwapPss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-hasSwappedOutPss'>/**Return true if the kernel is reporting pss swapped out...  that is, if
+</span> {@link #getSummaryTotalSwapPss}() will return non-0 values.
+@hide 
+*/
+hasSwappedOutPss : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-os-Debug-MemoryInfo-method-readFromParcel'>/**
+</span>*/
+readFromParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

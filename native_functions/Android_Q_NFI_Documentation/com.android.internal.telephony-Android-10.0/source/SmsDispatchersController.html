@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-SmsDispatchersController'>/**@class com.android.internal.telephony.SmsDispatchersController
+</span>@extends android.os.Handler
+
+
+*/
+var SmsDispatchersController = {
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-dispose'>/**
+</span>*/
+dispose : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-handleMessage'>/**Handles events coming from the phone stack. Overridden from handler.
+</span>@param {Object {Message}} msg the message to handle
+*/
+handleMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-injectSmsPdu'>/**Inject an SMS PDU into the android platform only if it is class 1.
+</span>@param {Object {byte[]}} pdu is the byte array of pdu to be injected into android telephony layer
+@param {String} format is the format of SMS pdu (3gpp or 3gpp2)
+@param {Object {SmsDispatchersController.SmsInjectionCallback}} callback if not NULL this callback is triggered when the message is successfully
+                 received by the android telephony layer. This callback is triggered at
+                 the same time an SMS received from radio is responded back.
+*/
+injectSmsPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-injectSmsPdu'>/**Inject an SMS PDU into the android platform.
+</span>@param {Object {SmsMessage}} msg is the {@link SmsMessage} to be injected into android telephony layer
+@param {String} format is the format of SMS pdu (3gpp or 3gpp2)
+@param {Object {SmsDispatchersController.SmsInjectionCallback}} callback if not NULL this callback is triggered when the message is successfully
+                 received by the android telephony layer. This callback is triggered at
+                 the same time an SMS received from radio is responded back.
+@param {Boolean} ignoreClass if set to false, this method will inject class 1 sms only.
+*/
+injectSmsPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-sendRetrySms'>/**Retry the message along to the radio.
+</span>@param {Object {SMSDispatcher.SmsTracker}} tracker holds the SMS message to send
+*/
+sendRetrySms : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-isIms'>/**
+</span>*/
+isIms : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-getImsSmsFormat'>/**
+</span>*/
+getImsSmsFormat : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-isCdmaFormat'>/**Determines whether or not format given is CDMA format.
+</span>@param {String} format
+@return {Boolean} true if format given is CDMA format, false otherwise.
+*/
+isCdmaFormat : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-sendText'>/**Send a text based SMS.
+</span>@param {String} destAddr the address to send the message to
+@param {String} scAddr is the service center address or null to use
+  the current default SMSC
+@param {String} text the body of the message to send
+@param {Object {PendingIntent}} sentIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is successfully sent, or failed.
+  The result code will be &lt;code&gt;Activity.RESULT_OK&lt;code&gt; for success,
+  or one of these errors:&lt;br&gt;
+  &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt;&lt;br&gt;
+  &lt;code&gt;RESULT_ERROR_RADIO_OFF&lt;/code&gt;&lt;br&gt;
+  &lt;code&gt;RESULT_ERROR_NULL_PDU&lt;/code&gt;&lt;br&gt;
+  &lt;code&gt;RESULT_ERROR_NO_SERVICE&lt;/code&gt;&lt;br&gt;.
+  For &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt; the sentIntent may include
+  the extra &quot;errorCode&quot; containing a radio technology specific value,
+  generally only useful for troubleshooting.&lt;br&gt;
+  The per-application based SMS control checks sentIntent. If sentIntent
+  is NULL the caller will be checked against all unknown applications,
+  which cause smaller number of SMS to be sent in checking period.
+@param {Object {PendingIntent}} deliveryIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is delivered to the recipient.  The
+@param {Object {Uri}} messageUri optional URI of the message if it is already stored in the system
+@param {String} callingPkg the calling package name
+@param {Boolean} persistMessage whether to save the sent message into SMS DB for a
+   non-default SMS app.
+@param {Number} priority Priority level of the message
+  Refer specification See 3GPP2 C.S0015-B, v2.0, table 4.5.9-1
+  ---------------------------------
+  PRIORITY      | Level of Priority
+  ---------------------------------
+      '00'      |     Normal
+      '01'      |     Interactive
+      '10'      |     Urgent
+      '11'      |     Emergency
+  ----------------------------------
+  Any Other values included Negative considered as Invalid Priority Indicator of the message.
+@param {Boolean} expectMore is a boolean to indicate the sending messages through same link or not.
+@param {Number} validityPeriod Validity Period of the message in mins.
+  Refer specification 3GPP TS 23.040 V6.8.1 section 9.2.3.12.1.
+  Validity Period(Minimum) -&gt; 5 mins
+  Validity Period(Maximum) -&gt; 635040 mins(i.e.63 weeks).
+  Any Other values included Negative considered as Invalid Validity Period of the message.
+*/
+sendText : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-getPremiumSmsPermission'>/**Returns the premium SMS permission for the specified package. If the package has never
+</span> been seen before, the default {@link com.android.internal.telephony.SmsUsageMonitor#PREMIUM_SMS_PERMISSION_ASK_USER}
+ will be returned.
+@param {String} packageName the name of the package to query permission
+@return {Number} one of {@link SmsUsageMonitor#PREMIUM_SMS_PERMISSION_UNKNOWN},
+  {@link SmsUsageMonitor#PREMIUM_SMS_PERMISSION_ASK_USER},
+  {@link SmsUsageMonitor#PREMIUM_SMS_PERMISSION_NEVER_ALLOW}, or
+  {@link SmsUsageMonitor#PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW}
+*/
+getPremiumSmsPermission : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-setPremiumSmsPermission'>/**Sets the premium SMS permission for the specified package and save the value asynchronously
+</span> to persistent storage.
+@param {String} packageName the name of the package to set permission
+@param {Number} permission one of {@link SmsUsageMonitor#PREMIUM_SMS_PERMISSION_ASK_USER},
+  {@link SmsUsageMonitor#PREMIUM_SMS_PERMISSION_NEVER_ALLOW}, or
+  {@link SmsUsageMonitor#PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW}
+*/
+setPremiumSmsPermission : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-getUsageMonitor'>/**
+</span>*/
+getUsageMonitor : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-handleSmsStatusReport'>/**Triggers the correct method for handling the sms status report based on the format.
+</span>@param {Object {SMSDispatcher.SmsTracker}} tracker the sms tracker.
+@param {String} format the format.
+@param {Object {byte[]}} pdu the pdu of the report.
+@return {Object {android.util.Pair}} a Pair in which the first boolean is whether the report was handled successfully
+          or not and the second boolean is whether processing the sms is complete and the
+          tracker no longer need to be kept track of, false if we should expect more callbacks
+          and the tracker should be kept.
+*/
+handleSmsStatusReport : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsDispatchersController-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

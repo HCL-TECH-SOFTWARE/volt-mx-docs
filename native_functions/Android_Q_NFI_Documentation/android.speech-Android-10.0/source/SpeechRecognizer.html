@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-speech-SpeechRecognizer'>/**@class android.speech.SpeechRecognizer
+</span>@extends java.lang.Object
+
+ This class provides access to the speech recognition service. This service allows access to the
+ speech recognizer. Do not instantiate this class directly, instead, call
+ {@link android.speech.SpeechRecognizer#createandroid.speech.SpeechRecognizer(Context)}. This class's methods must be
+ invoked only from the main application thread. 
+
+ &lt;p&gt;The implementation of this API is likely to stream audio to remote servers to perform speech
+ recognition. As such this API is not intended to be used for continuous recognition, which would
+ consume a significant amount of battery and bandwidth.
+
+ &lt;p&gt;Please note that the application must have {@link android.Manifest.permission#RECORD_AUDIO}
+ permission to use this class.
+*/
+var SpeechRecognizer = {
+
+<span id='android-speech-SpeechRecognizer-property-RESULTS_RECOGNITION'>/** Key used to retrieve an {@code ArrayList&lt;String&gt;} from the {@link Bundle} passed to the
+</span> {@link android.speech.RecognitionListener#onResults(Bundle)} and
+ {@link android.speech.RecognitionListener#onPartialResults(Bundle)} methods. These strings are the possible
+ recognition results, where the first element is the most likely candidate.
+*/
+RESULTS_RECOGNITION : &quot;results_recognition&quot;,
+<span id='android-speech-SpeechRecognizer-property-CONFIDENCE_SCORES'>/** Key used to retrieve a float array from the {@link Bundle} passed to the
+</span> {@link android.speech.RecognitionListener#onResults(Bundle)} and
+ {@link android.speech.RecognitionListener#onPartialResults(Bundle)} methods. The array should be
+ the same size as the ArrayList provided in {@link #RESULTS_RECOGNITION}, and should contain
+ values ranging from 0.0 to 1.0, or -1 to represent an unavailable confidence score.
+ &lt;p&gt;
+ Confidence values close to 1.0 indicate high confidence (the speech recognizer is confident
+ that the recognition result is correct), while values close to 0.0 indicate low confidence.
+ &lt;p&gt;
+ This value is optional and might not be provided.
+*/
+CONFIDENCE_SCORES : &quot;confidence_scores&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_NETWORK_TIMEOUT'>/**Network operation timed out. */
+</span>ERROR_NETWORK_TIMEOUT : &quot;1&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_NETWORK'>/**Other network related errors. */
+</span>ERROR_NETWORK : &quot;2&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_AUDIO'>/**Audio recording error. */
+</span>ERROR_AUDIO : &quot;3&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_SERVER'>/**Server sends error status. */
+</span>ERROR_SERVER : &quot;4&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_CLIENT'>/**Other client side errors. */
+</span>ERROR_CLIENT : &quot;5&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_SPEECH_TIMEOUT'>/**No speech input */
+</span>ERROR_SPEECH_TIMEOUT : &quot;6&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_NO_MATCH'>/**No recognition result matched. */
+</span>ERROR_NO_MATCH : &quot;7&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_RECOGNIZER_BUSY'>/**RecognitionService busy. */
+</span>ERROR_RECOGNIZER_BUSY : &quot;8&quot;,
+<span id='android-speech-SpeechRecognizer-property-ERROR_INSUFFICIENT_PERMISSIONS'>/**Insufficient permissions */
+</span>ERROR_INSUFFICIENT_PERMISSIONS : &quot;9&quot;,
+<span id='android-speech-SpeechRecognizer-method-isRecognitionAvailable'>/**Checks whether a speech recognition service is available on the system. If this method
+</span> returns {@code false}, {@link android.speech.SpeechRecognizer#createandroid.speech.SpeechRecognizer(Context)} will
+ fail.
+@param {Object {Context}} context with which {@code SpeechRecognizer} will be created
+@return {Boolean} {@code true} if recognition is available, {@code false} otherwise
+*/
+isRecognitionAvailable : function(  ) {},
+
+<span id='android-speech-SpeechRecognizer-method-createSpeechRecognizer'>/**Factory method to create a new {@code SpeechRecognizer}. Please note that
+</span> {@link #setRecognitionListener}(RecognitionListener) should be called before dispatching any
+ command to the created {@code SpeechRecognizer}, otherwise no notifications will be
+ received.
+@param {Object {Context}} context in which to create {@code SpeechRecognizer}
+@return {Object {android.speech.SpeechRecognizer}} a new {@code SpeechRecognizer}
+*/
+createSpeechRecognizer : function(  ) {},
+
+<span id='android-speech-SpeechRecognizer-method-createSpeechRecognizer'>/**Factory method to create a new {@code SpeechRecognizer}. Please note that
+</span> {@link #setRecognitionListener}(RecognitionListener) should be called before dispatching any
+ command to the created {@code SpeechRecognizer}, otherwise no notifications will be
+ received.
+
+ Use this version of the method to specify a specific service to direct this
+ {@link android.speech.SpeechRecognizer} to. Normally you would not use this; use
+ {@link #createSpeechRecognizer}(Context) instead to use the system default recognition
+ service.
+@param {Object {Context}} context in which to create {@code SpeechRecognizer}
+@param {Object {ComponentName}} serviceComponent the {@link ComponentName} of a specific service to direct this
+        {@code SpeechRecognizer} to
+@return {Object {android.speech.SpeechRecognizer}} a new {@code SpeechRecognizer}
+*/
+createSpeechRecognizer : function(  ) {},
+
+<span id='android-speech-SpeechRecognizer-method-setRecognitionListener'>/**Sets the listener that will receive all the callbacks. The previous unfinished commands will
+</span> be executed with the old listener, while any following command will be executed with the new
+ listener.
+@param {Object {RecognitionListener}} listener listener that will receive all the callbacks from the created
+        {@link SpeechRecognizer}, this must not be null.
+*/
+setRecognitionListener : function(  ) {},
+
+<span id='android-speech-SpeechRecognizer-method-startListening'>/**Starts listening for speech. Please note that
+</span> {@link #setRecognitionListener}(RecognitionListener) should be called beforehand, otherwise
+ no notifications will be received.
+@param {Object {Intent}} recognizerIntent contains parameters for the recognition to be performed. The intent
+        may also contain optional extras, see {@link RecognizerIntent}. If these values are
+        not set explicitly, default values will be used by the recognizer.
+*/
+startListening : function(  ) {},
+
+<span id='android-speech-SpeechRecognizer-method-stopListening'>/**Stops listening for speech. Speech captured so far will be recognized as if the user had
+</span> stopped speaking at this point. Note that in the default case, this does not need to be
+ called, as the speech endpointer will automatically stop the recognizer listening when it
+ determines speech has completed. However, you can manipulate endpointer parameters directly
+ using the intent extras defined in {@link android.speech.RecognizerIntent}, in which case you may sometimes
+ want to manually call this method to stop listening sooner. Please note that
+ {@link #setRecognitionListener}(RecognitionListener) should be called beforehand, otherwise
+ no notifications will be received.
+*/
+stopListening : function(  ) {},
+
+<span id='android-speech-SpeechRecognizer-method-cancel'>/**Cancels the speech recognition. Please note that
+</span> {@link #setRecognitionListener}(RecognitionListener) should be called beforehand, otherwise
+ no notifications will be received.
+*/
+cancel : function(  ) {},
+
+<span id='android-speech-SpeechRecognizer-method-destroy'>/**Destroys the {@code SpeechRecognizer} object.
+</span>*/
+destroy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

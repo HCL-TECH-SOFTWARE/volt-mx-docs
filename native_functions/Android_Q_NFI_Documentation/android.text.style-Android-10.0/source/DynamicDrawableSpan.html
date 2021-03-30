@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-style-DynamicDrawableSpan'>/**@class android.text.style.DynamicDrawableSpan
+</span>@extends android.text.style.ReplacementSpan
+
+ Span that replaces the text it's attached to with a {@link Drawable} that can be aligned with
+ the bottom or with the baseline of the surrounding text.
+ &lt;p&gt;
+ For an implementation that constructs the drawable from various sources (&lt;code&gt;Bitmap&lt;/code&gt;,
+ &lt;code&gt;Drawable&lt;/code&gt;, resource id or &lt;code&gt;Uri&lt;/code&gt;) use {@link android.text.style.ImageSpan}.
+ &lt;p&gt;
+ A simple implementation of &lt;code&gt;DynamicDrawableSpan&lt;/code&gt; that uses drawables from resources
+ looks like this:
+ &lt;pre&gt;
+ class MyDynamicDrawableSpan extends DynamicDrawableSpan {
+
+ private final Context mContext;
+ private final int mResourceId;
+
+ public MyDynamicDrawableSpan(Context context, @DrawableRes int resourceId) {
+     mContext = context;
+     mResourceId = resourceId;
+ }
+
+ {@literal @}Override
+ public Drawable getDrawable() {
+      Drawable drawable = mContext.getDrawable(mResourceId);
+      drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+      return drawable;
+ }
+ }&lt;/pre&gt;
+ The class can be used like this:
+ &lt;pre&gt;
+ SpannableString string = new SpannableString(&quot;Text with a drawable span&quot;);
+ string.setSpan(new MyDynamicDrawableSpan(context, R.mipmap.ic_launcher), 12, 20, Spanned
+ .SPAN_EXCLUSIVE_EXCLUSIVE);&lt;/pre&gt;
+ &lt;img src=&quot;{@docRoot}reference/android/images/text/style/dynamicdrawablespan.png&quot; /&gt;
+ &lt;figcaption&gt;Replacing text with a drawable.&lt;/figcaption&gt;
+*/
+var DynamicDrawableSpan = {
+
+<span id='android-text-style-DynamicDrawableSpan-property-ALIGN_BOTTOM'>/** A constant indicating that the bottom of this span should be aligned
+</span> with the bottom of the surrounding text, i.e., at the same level as the
+ lowest descender in the text.
+*/
+ALIGN_BOTTOM : &quot;0&quot;,
+<span id='android-text-style-DynamicDrawableSpan-property-ALIGN_BASELINE'>/** A constant indicating that the bottom of this span should be aligned
+</span> with the baseline of the surrounding text.
+*/
+ALIGN_BASELINE : &quot;1&quot;,
+<span id='android-text-style-DynamicDrawableSpan-property-ALIGN_CENTER'>/** A constant indicating that this span should be vertically centered between
+</span> the top and the lowest descender.
+*/
+ALIGN_CENTER : &quot;2&quot;,
+<span id='android-text-style-DynamicDrawableSpan-method-getVerticalAlignment'>/**Returns the vertical alignment of this span, one of {@link #ALIGN_BOTTOM},
+</span> {@link #ALIGN_BASELINE} or {@link #ALIGN_CENTER}.
+*/
+getVerticalAlignment : function(  ) {},
+
+<span id='android-text-style-DynamicDrawableSpan-method-getDrawable'>/**Your subclass must implement this method to provide the bitmap
+</span> to be drawn.  The dimensions of the bitmap must be the same
+ from each call to the next.
+*/
+getDrawable : function(  ) {},
+
+<span id='android-text-style-DynamicDrawableSpan-method-getSize'>/**
+</span>*/
+getSize : function(  ) {},
+
+<span id='android-text-style-DynamicDrawableSpan-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

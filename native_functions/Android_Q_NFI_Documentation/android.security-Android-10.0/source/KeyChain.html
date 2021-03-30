@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-security-KeyChain'>/**@class android.security.KeyChain
+</span>@extends java.lang.Object
+
+ The {@code KeyChain} class provides access to private keys and
+ their corresponding certificate chains in credential storage.
+
+ &lt;p&gt;Applications accessing the {@code KeyChain} normally go through
+ these steps:
+
+ &lt;ol&gt;
+
+ &lt;li&gt;Receive a callback from an {@link javax.net.ssl.X509KeyManager
+ X509KeyManager} that a private key is requested.
+
+ &lt;li&gt;Call {@link #choosePrivateKeyAlias
+ choosePrivateKeyAlias} to allow the user to select from a
+ list of currently available private keys and corresponding
+ certificate chains. The chosen alias will be returned by the
+ callback {@link android.security.KeyChainAliasCallback#alias}, or null if no private
+ key is available or the user cancels the request.
+
+ &lt;li&gt;Call {@link #getPrivateKey} and {@link #getCertificateChain} to
+ retrieve the credentials to return to the corresponding {@link javax.net.ssl.X509KeyManager} callbacks.
+
+ &lt;/ol&gt;
+
+ &lt;p&gt;An application may remember the value of a selected alias to
+ avoid prompting the user with {@link #choosePrivateKeyAlias
+ choosePrivateKeyAlias} on subsequent connections. If the alias is
+ no longer valid, null will be returned on lookups using that value
+
+ &lt;p&gt;An application can request the installation of private keys and
+ certificates via the {@code Intent} provided by {@link #createInstallIntent}. Private keys installed via this {@code
+ Intent} will be accessible via {@link #choosePrivateKeyAlias} while
+ Certificate Authority (CA) certificates will be trusted by all
+ applications through the default {@code X509TrustManager}.
+*/
+var KeyChain = {
+
+<span id='android-security-KeyChain-property-ACCOUNT_TYPE'>/** @hide Also used by KeyChainService implementation
+</span>*/
+ACCOUNT_TYPE : &quot;com.android.keychain&quot;,
+<span id='android-security-KeyChain-property-EXTRA_RESPONSE'>/** Extra for use with {@link #ACTION_CHOOSER}
+</span> @hide Also used by KeyChainActivity implementation
+*/
+EXTRA_RESPONSE : &quot;response&quot;,
+<span id='android-security-KeyChain-property-EXTRA_URI'>/** Extra for use with {@link #ACTION_CHOOSER}
+</span> @hide Also used by KeyChainActivity implementation
+*/
+EXTRA_URI : &quot;uri&quot;,
+<span id='android-security-KeyChain-property-EXTRA_ALIAS'>/** Extra for use with {@link #ACTION_CHOOSER}
+</span> @hide Also used by KeyChainActivity implementation
+*/
+EXTRA_ALIAS : &quot;alias&quot;,
+<span id='android-security-KeyChain-property-EXTRA_SENDER'>/** Extra for use with {@link #ACTION_CHOOSER}
+</span> @hide Also used by KeyChainActivity implementation
+*/
+EXTRA_SENDER : &quot;sender&quot;,
+<span id='android-security-KeyChain-property-EXTRA_KEY_TYPES'>/** Extra for use with {@link #ACTION_CHOOSER}
+</span> @hide Also used by KeyChainActivity implementation
+*/
+EXTRA_KEY_TYPES : &quot;key_types&quot;,
+<span id='android-security-KeyChain-property-EXTRA_ISSUERS'>/** Extra for use with {@link #ACTION_CHOOSER}
+</span> @hide Also used by KeyChainActivity implementation
+*/
+EXTRA_ISSUERS : &quot;issuers&quot;,
+<span id='android-security-KeyChain-property-EXTRA_NAME'>/** Optional extra to specify a {@code String} credential name on
+</span> the {@code Intent} returned by {@link #createInstallIntent}.
+*/
+EXTRA_NAME : &quot;name&quot;,
+<span id='android-security-KeyChain-property-EXTRA_CERTIFICATE'>/** Optional extra to specify an X.509 certificate to install on
+</span> the {@code Intent} returned by {@link #createInstallIntent}.
+ The extra value should be a PEM or ASN.1 DER encoded {@code
+ byte[]}. An {@link X509Certificate} can be converted to DER
+ encoded bytes with {@link X509Certificate#getEncoded}.
+
+ &lt;p&gt;{@link #EXTRA_NAME} may be used to provide a default alias
+ name for the installed certificate.
+*/
+EXTRA_CERTIFICATE : &quot;CERT&quot;,
+<span id='android-security-KeyChain-property-EXTRA_PKCS12'>/** Optional extra for use with the {@code Intent} returned by
+</span> {@link #createInstallIntent} to specify a PKCS#12 key store to
+ install. The extra value should be a {@code byte[]}. The bytes
+ may come from an external source or be generated with {@link java.security.KeyStore#store} on a &quot;PKCS12&quot; instance.
+
+ &lt;p&gt;The user will be prompted for the password to load the key store.
+
+ &lt;p&gt;The key store will be scanned for {@link java.security.KeyStore.PrivateKeyEntry} entries and both the
+ private key and associated certificate chain will be installed.
+
+ &lt;p&gt;{@link #EXTRA_NAME} may be used to provide a default alias
+ name for the installed credentials.
+*/
+EXTRA_PKCS12 : &quot;PKCS12&quot;,
+<span id='android-security-KeyChain-property-ACTION_STORAGE_CHANGED'>/** Broadcast Action: Indicates the trusted storage has changed. Sent when
+</span> one of this happens:
+
+ &lt;ul&gt;
+ &lt;li&gt;a new CA is added,
+ &lt;li&gt;an existing CA is removed or disabled,
+ &lt;li&gt;a disabled CA is enabled,
+ &lt;li&gt;trusted storage is reset (all user certs are cleared),
+ &lt;li&gt;when permission to access a private key is changed.
+ &lt;/ul&gt;
+
+ @deprecated Use {@link #ACTION_KEYCHAIN_CHANGED}, {@link #ACTION_TRUST_STORE_CHANGED} or
+ {@link #ACTION_KEY_ACCESS_CHANGED}. Apps that target a version higher than
+ {@link android.os.Build.VERSION_CODES#N_MR1} will only receive this broadcast if they
+ register for it at runtime.
+*/
+ACTION_STORAGE_CHANGED : &quot;android.security.STORAGE_CHANGED&quot;,
+<span id='android-security-KeyChain-property-ACTION_KEYCHAIN_CHANGED'>/** Broadcast Action: Indicates the contents of the keychain has changed. Sent when a KeyChain
+</span> entry is added, modified or removed.
+*/
+ACTION_KEYCHAIN_CHANGED : &quot;android.security.action.KEYCHAIN_CHANGED&quot;,
+<span id='android-security-KeyChain-property-ACTION_TRUST_STORE_CHANGED'>/** Broadcast Action: Indicates the contents of the trusted certificate store has changed. Sent
+</span> when one the following occurs:
+
+ &lt;ul&gt;
+ &lt;li&gt;A pre-installed CA is disabled or re-enabled&lt;/li&gt;
+ &lt;li&gt;A CA is added or removed from the trust store&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_TRUST_STORE_CHANGED : &quot;android.security.action.TRUST_STORE_CHANGED&quot;,
+<span id='android-security-KeyChain-property-ACTION_KEY_ACCESS_CHANGED'>/** Broadcast Action: Indicates that the access permissions for a private key have changed.
+</span>
+*/
+ACTION_KEY_ACCESS_CHANGED : &quot;android.security.action.KEY_ACCESS_CHANGED&quot;,
+<span id='android-security-KeyChain-property-EXTRA_KEY_ALIAS'>/** Used as a String extra field in {@link #ACTION_KEY_ACCESS_CHANGED} to supply the alias of
+</span> the key.
+*/
+EXTRA_KEY_ALIAS : &quot;android.security.extra.KEY_ALIAS&quot;,
+<span id='android-security-KeyChain-property-EXTRA_KEY_ACCESSIBLE'>/** Used as a boolean extra field in {@link #ACTION_KEY_ACCESS_CHANGED} to supply if the key is
+</span> accessible to the application.
+*/
+EXTRA_KEY_ACCESSIBLE : &quot;android.security.extra.KEY_ACCESSIBLE&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_SUCCESS'>/** Indicates that a call to {@link #generateKeyPair} was successful.
+</span> @hide
+*/
+KEY_GEN_SUCCESS : &quot;0&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_MISSING_ALIAS'>/** An alias was missing from the key specifications when calling {@link #generateKeyPair}.
+</span> @hide
+*/
+KEY_GEN_MISSING_ALIAS : &quot;1&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_SUPERFLUOUS_ATTESTATION_CHALLENGE'>/** A key attestation challenge was provided to {@link #generateKeyPair}, but it shouldn't
+</span> have been provided.
+ @hide
+*/
+KEY_GEN_SUPERFLUOUS_ATTESTATION_CHALLENGE : &quot;2&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_NO_SUCH_ALGORITHM'>/** Algorithm not supported by {@link #generateKeyPair}
+</span> @hide
+*/
+KEY_GEN_NO_SUCH_ALGORITHM : &quot;3&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_INVALID_ALGORITHM_PARAMETERS'>/** Invalid algorithm parameters when calling {@link #generateKeyPair}
+</span> @hide
+*/
+KEY_GEN_INVALID_ALGORITHM_PARAMETERS : &quot;4&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_NO_KEYSTORE_PROVIDER'>/** Keystore is not available when calling {@link #generateKeyPair}
+</span> @hide
+*/
+KEY_GEN_NO_KEYSTORE_PROVIDER : &quot;5&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_STRONGBOX_UNAVAILABLE'>/** StrongBox unavailable when calling {@link #generateKeyPair}
+</span> @hide
+*/
+KEY_GEN_STRONGBOX_UNAVAILABLE : &quot;6&quot;,
+<span id='android-security-KeyChain-property-KEY_GEN_FAILURE'>/** General failure while calling {@link #generateKeyPair}
+</span> @hide
+*/
+KEY_GEN_FAILURE : &quot;7&quot;,
+<span id='android-security-KeyChain-property-KEY_ATTESTATION_SUCCESS'>/** Successful call to {@link #attestKey}
+</span> @hide
+*/
+KEY_ATTESTATION_SUCCESS : &quot;0&quot;,
+<span id='android-security-KeyChain-property-KEY_ATTESTATION_MISSING_CHALLENGE'>/** Attestation challenge missing when calling {@link #attestKey}
+</span> @hide
+*/
+KEY_ATTESTATION_MISSING_CHALLENGE : &quot;1&quot;,
+<span id='android-security-KeyChain-property-KEY_ATTESTATION_CANNOT_COLLECT_DATA'>/** The caller requested Device ID attestation when calling {@link #attestKey}, but has no
+</span> permissions to get device identifiers.
+ @hide
+*/
+KEY_ATTESTATION_CANNOT_COLLECT_DATA : &quot;2&quot;,
+<span id='android-security-KeyChain-property-KEY_ATTESTATION_CANNOT_ATTEST_IDS'>/** The underlying hardware does not support Device ID attestation or cannot attest to the
+</span> identifiers that are stored on the device. This indicates permanent inability
+ to get attestation records on the device.
+ @hide
+*/
+KEY_ATTESTATION_CANNOT_ATTEST_IDS : &quot;3&quot;,
+<span id='android-security-KeyChain-property-KEY_ATTESTATION_FAILURE'>/** General failure when calling {@link #attestKey}
+</span> @hide
+*/
+KEY_ATTESTATION_FAILURE : &quot;4&quot;,
+<span id='android-security-KeyChain-method-createInstallIntent'>/**Returns an {@code Intent} that can be used for credential
+</span> installation. The intent may be used without any extras, in
+ which case the user will be able to install credentials from
+ their own source.
+
+ &lt;p&gt;Alternatively, {@link #EXTRA_CERTIFICATE} or {@link #EXTRA_PKCS12} maybe used to specify the bytes of an X.509
+ certificate or a PKCS#12 key store for installation. These
+ extras may be combined with {@link #EXTRA_NAME} to provide a
+ default alias name for credentials being installed.
+
+ &lt;p&gt;When used with {@link Activity#startActivityForResult},
+ {@link Activity#RESULT_OK} will be returned if a credential was
+ successfully installed, otherwise {@link Activity#RESULT_CANCELED} will be returned.
+*/
+createInstallIntent : function(  ) {},
+
+<span id='android-security-KeyChain-method-choosePrivateKeyAlias'>/**Launches an {@code Activity} for the user to select the alias
+</span> for a private key and certificate pair for authentication. The
+ selected alias or null will be returned via the
+ KeyChainAliasCallback callback.
+
+ &lt;p&gt;A device policy controller (as a device or profile owner) can
+ intercept the request before the activity is shown, to pick a
+ specific private key alias by implementing
+ {@link android.app.admin.DeviceAdminReceiver#onChoosePrivateKeyAlias
+ onChoosePrivateKeyAlias}.
+
+ &lt;p&gt;{@code keyTypes} and {@code issuers} may be used to
+ narrow down suggested choices to the user. If either {@code keyTypes}
+ or {@code issuers} is specified and non-empty, and there are no
+ matching certificates in the KeyChain, then the certificate
+ selection prompt would be suppressed entirely.
+
+ &lt;p&gt;{@code host} and {@code port} may be used to give the user
+ more context about the server requesting the credentials.
+
+ &lt;p&gt;{@code alias} allows the caller to preselect an existing
+ alias which will still be subject to user confirmation.
+@param {Object {Activity}} activity The {@link Activity} context to use for
+     launching the new sub-Activity to prompt the user to select
+     a private key; used only to call startActivity(); must not
+     be null.
+@param {Object {KeyChainAliasCallback}} response Callback to invoke when the request completes;
+     must not be null.
+@param {Object {java.lang.String[]}} keyTypes The acceptable types of asymmetric keys such as
+     &quot;RSA&quot;, &quot;EC&quot; or null.
+@param {Object {java.security.Principal[]}} issuers The acceptable certificate issuers for the
+     certificate matching the private key, or null.
+@param {String} host The host name of the server requesting the
+     certificate, or null if unavailable.
+@param {Number} port The port number of the server requesting the
+     certificate, or -1 if unavailable.
+@param {String} alias The alias to preselect if available, or null if
+     unavailable.
+*/
+choosePrivateKeyAlias : function(  ) {},
+
+<span id='android-security-KeyChain-method-choosePrivateKeyAlias'>/**Launches an {@code Activity} for the user to select the alias
+</span> for a private key and certificate pair for authentication. The
+ selected alias or null will be returned via the
+ KeyChainAliasCallback callback.
+
+ &lt;p&gt;A device policy controller (as a device or profile owner) can
+ intercept the request before the activity is shown, to pick a
+ specific private key alias by implementing
+ {@link android.app.admin.DeviceAdminReceiver#onChoosePrivateKeyAlias
+ onChoosePrivateKeyAlias}.
+
+ &lt;p&gt;{@code keyTypes} and {@code issuers} may be used to
+ narrow down suggested choices to the user. If either {@code keyTypes}
+ or {@code issuers} is specified and non-empty, and there are no
+ matching certificates in the KeyChain, then the certificate
+ selection prompt would be suppressed entirely.
+
+ &lt;p&gt;{@code uri} may be used to give the user more context about
+ the server requesting the credentials.
+
+ &lt;p&gt;{@code alias} allows the caller to preselect an existing
+ alias which will still be subject to user confirmation.
+@param {Object {Activity}} activity The {@link Activity} context to use for
+     launching the new sub-Activity to prompt the user to select
+     a private key; used only to call startActivity(); must not
+     be null.
+@param {Object {KeyChainAliasCallback}} response Callback to invoke when the request completes;
+     must not be null.
+@param {Object {java.lang.String[]}} keyTypes The acceptable types of asymmetric keys such as
+     &quot;RSA&quot;, &quot;EC&quot; or null.
+@param {Object {java.security.Principal[]}} issuers The acceptable certificate issuers for the
+     certificate matching the private key, or null.
+@param {Object {Uri}} uri The full URI the server is requesting the certificate
+     for, or null if unavailable.
+@param {String} alias The alias to preselect if available, or null if
+     unavailable.
+@throws IllegalArgumentException if the specified issuers are not
+     of type {@code X500Principal}.
+*/
+choosePrivateKeyAlias : function(  ) {},
+
+<span id='android-security-KeyChain-method-getPrivateKey'>/**Returns the {@code PrivateKey} for the requested alias, or null if the alias does not exist
+</span> or the caller has no permission to access it (see note on exceptions below).
+
+ &lt;p&gt; This method may block while waiting for a connection to another process, and must never
+ be called from the main thread.
+ &lt;p&gt; As {@link Activity} and {@link Service} contexts are short-lived and can be destroyed
+ at any time from the main thread, it is safer to rely on a long-lived context such as one
+ returned from {@link Context#getApplicationContext()}.
+
+ &lt;p&gt; If the caller provides a valid alias to which it was not granted access, then the
+ caller must invoke {@link #choosePrivateKeyAlias} again to get another valid alias
+ or a grant to access the same alias.
+ &lt;p&gt;On Android versions prior to Q, when a key associated with the specified alias is
+ unavailable, the method will throw a {@code KeyChainException} rather than return null.
+ If the exception's cause (as obtained by calling {@code KeyChainException.getCause()})
+ is a throwable of type {@code IllegalStateException} then the caller lacks a grant
+ to access the key and certificates associated with this alias.
+@param {Object {Context}} alias The alias of the desired private key, typically returned via
+              {@link KeyChainAliasCallback#alias}.
+@throws KeyChainException if the alias was valid but there was some problem accessing it.
+@throws IllegalStateException if called from the main thread.
+*/
+getPrivateKey : function(  ) {},
+
+<span id='android-security-KeyChain-method-getKeyPair'>/**
+</span>@hide 
+*/
+getKeyPair : function(  ) {},
+
+<span id='android-security-KeyChain-method-getCertificateChain'>/**Returns the {@code X509Certificate} chain for the requested alias, or null if the alias
+</span> does not exist or the caller has no permission to access it (see note on exceptions
+ in {@link #getPrivateKey}).
+
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If a certificate chain was explicitly specified when the alias was
+ installed, this method will return that chain. If only the client certificate was specified
+ at the installation time, this method will try to build a certificate chain using all
+ available trust anchors (preinstalled and user-added).
+
+ &lt;p&gt; This method may block while waiting for a connection to another process, and must never
+ be called from the main thread.
+ &lt;p&gt; As {@link Activity} and {@link Service} contexts are short-lived and can be destroyed
+ at any time from the main thread, it is safer to rely on a long-lived context such as one
+ returned from {@link Context#getApplicationContext()}.
+ &lt;p&gt; In case the caller specifies an alias for which it lacks a grant, it must call
+ {@link #choosePrivateKeyAlias} again. See {@link #getPrivateKey} for more details on
+ coping with this scenario.
+@param {Object {Context}} alias The alias of the desired certificate chain, typically
+ returned via {@link KeyChainAliasCallback#alias}.
+@throws KeyChainException if the alias was valid but there was some problem accessing it.
+@throws IllegalStateException if called from the main thread.
+*/
+getCertificateChain : function(  ) {},
+
+<span id='android-security-KeyChain-method-isKeyAlgorithmSupported'>/**Returns {@code true} if the current device's {@code KeyChain} supports a
+</span> specific {@code PrivateKey} type indicated by {@code algorithm} (e.g.,
+ &quot;RSA&quot;).
+*/
+isKeyAlgorithmSupported : function(  ) {},
+
+<span id='android-security-KeyChain-method-isBoundKeyAlgorithm'>/**Returns {@code true} if the current device's {@code KeyChain} binds any
+</span> {@code PrivateKey} of the given {@code algorithm} to the device once
+ imported or generated. This can be used to tell if there is special
+ hardware support that can be used to bind keys to the device in a way
+ that makes it non-exportable.
+@deprecated Whether the key is bound to the secure hardware is known only
+ once the key has been imported. To find out, use:
+ &lt;pre&gt;{@code
+ PrivateKey key = ...; // private key from KeyChain
+
+ KeyFactory keyFactory =
+     KeyFactory.getInstance(key.getAlgorithm(), &quot;AndroidKeyStore&quot;);
+ KeyInfo keyInfo = keyFactory.getKeySpec(key, KeyInfo.class);
+ if (keyInfo.isInsideSecureHardware()) {
+     // The key is bound to the secure hardware of this Android
+ }}&lt;/pre&gt;
+*/
+isBoundKeyAlgorithm : function(  ) {},
+
+<span id='android-security-KeyChain-method-toCertificate'>/**
+</span>@hide 
+*/
+toCertificate : function(  ) {},
+
+<span id='android-security-KeyChain-method-toCertificates'>/**
+</span>@hide 
+*/
+toCertificates : function(  ) {},
+
+<span id='android-security-KeyChain-method-bind'>/**
+</span>@hide for reuse by CertInstaller and Settings.
+
+ Caller should call unbindService on the result when finished.
+*/
+bind : function(  ) {},
+
+<span id='android-security-KeyChain-method-bindAsUser'>/**
+</span>@hide 
+*/
+bindAsUser : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

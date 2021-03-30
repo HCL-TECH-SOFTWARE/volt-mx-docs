@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-Criteria'>/**@class android.location.Criteria
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class indicating the application criteria for selecting a
+ location provider. Providers may be ordered according to accuracy,
+ power usage, ability to report altitude, speed, bearing, and monetary
+ cost.
+*/
+var Criteria = {
+
+<span id='android-location-Criteria-property-NO_REQUIREMENT'>/** A constant indicating that the application does not choose to
+</span> place requirement on a particular feature.
+*/
+NO_REQUIREMENT : &quot;0&quot;,
+<span id='android-location-Criteria-property-POWER_LOW'>/** A constant indicating a low power requirement.
+</span>*/
+POWER_LOW : &quot;1&quot;,
+<span id='android-location-Criteria-property-POWER_MEDIUM'>/** A constant indicating a medium power requirement.
+</span>*/
+POWER_MEDIUM : &quot;2&quot;,
+<span id='android-location-Criteria-property-POWER_HIGH'>/** A constant indicating a high power requirement.
+</span>*/
+POWER_HIGH : &quot;3&quot;,
+<span id='android-location-Criteria-property-ACCURACY_FINE'>/** A constant indicating a finer location accuracy requirement
+</span>*/
+ACCURACY_FINE : &quot;1&quot;,
+<span id='android-location-Criteria-property-ACCURACY_COARSE'>/** A constant indicating an approximate accuracy requirement
+</span>*/
+ACCURACY_COARSE : &quot;2&quot;,
+<span id='android-location-Criteria-property-ACCURACY_LOW'>/** A constant indicating a low location accuracy requirement
+</span> - may be used for horizontal, altitude, speed or bearing accuracy.
+ For horizontal and vertical position this corresponds roughly to
+ an accuracy of greater than 500 meters.
+*/
+ACCURACY_LOW : &quot;1&quot;,
+<span id='android-location-Criteria-property-ACCURACY_MEDIUM'>/** A constant indicating a medium accuracy requirement
+</span> - currently used only for horizontal accuracy.
+ For horizontal position this corresponds roughly to to an accuracy
+ of between 100 and 500 meters.
+*/
+ACCURACY_MEDIUM : &quot;2&quot;,
+<span id='android-location-Criteria-property-ACCURACY_HIGH'>/** a constant indicating a high accuracy requirement
+</span> - may be used for horizontal, altitude, speed or bearing accuracy.
+ For horizontal and vertical position this corresponds roughly to
+ an accuracy of less than 100 meters.
+*/
+ACCURACY_HIGH : &quot;3&quot;,
+<span id='android-location-Criteria-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-location-Criteria-method-setHorizontalAccuracy'>/**Indicates the desired horizontal accuracy (latitude and longitude).
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_MEDIUM},
+ {@link #ACCURACY_HIGH} or {@link #NO_REQUIREMENT}.
+ More accurate location may consume more power and may take longer.
+@throws IllegalArgumentException if accuracy is not one of the supported constants
+*/
+setHorizontalAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-getHorizontalAccuracy'>/**Returns a constant indicating the desired horizontal accuracy (latitude and longitude).
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_MEDIUM},
+ {@link #ACCURACY_HIGH} or {@link #NO_REQUIREMENT}.
+*/
+getHorizontalAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-setVerticalAccuracy'>/**Indicates the desired vertical accuracy (altitude).
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_MEDIUM},
+ {@link #ACCURACY_HIGH} or {@link #NO_REQUIREMENT}.
+ More accurate location may consume more power and may take longer.
+@throws IllegalArgumentException if accuracy is not one of the supported constants
+*/
+setVerticalAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-getVerticalAccuracy'>/**Returns a constant indicating the desired vertical accuracy (altitude).
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_HIGH},
+ or {@link #NO_REQUIREMENT}.
+*/
+getVerticalAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-setSpeedAccuracy'>/**Indicates the desired speed accuracy.
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_HIGH},
+ or {@link #NO_REQUIREMENT}.
+ More accurate location may consume more power and may take longer.
+@throws IllegalArgumentException if accuracy is not one of the supported constants
+*/
+setSpeedAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-getSpeedAccuracy'>/**Returns a constant indicating the desired speed accuracy
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_HIGH},
+ or {@link #NO_REQUIREMENT}.
+*/
+getSpeedAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-setBearingAccuracy'>/**Indicates the desired bearing accuracy.
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_HIGH},
+ or {@link #NO_REQUIREMENT}.
+ More accurate location may consume more power and may take longer.
+@throws IllegalArgumentException if accuracy is not one of the supported constants
+*/
+setBearingAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-getBearingAccuracy'>/**Returns a constant indicating the desired bearing accuracy.
+</span> Accuracy may be {@link #ACCURACY_LOW}, {@link #ACCURACY_HIGH},
+ or {@link #NO_REQUIREMENT}.
+*/
+getBearingAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-setAccuracy'>/**Indicates the desired accuracy for latitude and longitude. Accuracy
+</span> may be {@link #ACCURACY_FINE} if desired location
+ is fine, else it can be {@link #ACCURACY_COARSE}.
+ More accurate location may consume more power and may take longer.
+@throws IllegalArgumentException if accuracy is not one of the supported constants
+*/
+setAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-getAccuracy'>/**Returns a constant indicating desired accuracy of location
+</span> Accuracy may be {@link #ACCURACY_FINE} if desired location
+ is fine, else it can be {@link #ACCURACY_COARSE}.
+*/
+getAccuracy : function(  ) {},
+
+<span id='android-location-Criteria-method-setPowerRequirement'>/**Indicates the desired maximum power level.  The level parameter
+</span> must be one of NO_REQUIREMENT, POWER_LOW, POWER_MEDIUM, or
+ POWER_HIGH.
+*/
+setPowerRequirement : function(  ) {},
+
+<span id='android-location-Criteria-method-getPowerRequirement'>/**Returns a constant indicating the desired power requirement.  The
+</span> returned
+*/
+getPowerRequirement : function(  ) {},
+
+<span id='android-location-Criteria-method-setCostAllowed'>/**Indicates whether the provider is allowed to incur monetary cost.
+</span>*/
+setCostAllowed : function(  ) {},
+
+<span id='android-location-Criteria-method-isCostAllowed'>/**Returns whether the provider is allowed to incur monetary cost.
+</span>*/
+isCostAllowed : function(  ) {},
+
+<span id='android-location-Criteria-method-setAltitudeRequired'>/**Indicates whether the provider must provide altitude information.
+</span> Not all fixes are guaranteed to contain such information.
+*/
+setAltitudeRequired : function(  ) {},
+
+<span id='android-location-Criteria-method-isAltitudeRequired'>/**Returns whether the provider must provide altitude information.
+</span> Not all fixes are guaranteed to contain such information.
+*/
+isAltitudeRequired : function(  ) {},
+
+<span id='android-location-Criteria-method-setSpeedRequired'>/**Indicates whether the provider must provide speed information.
+</span> Not all fixes are guaranteed to contain such information.
+*/
+setSpeedRequired : function(  ) {},
+
+<span id='android-location-Criteria-method-isSpeedRequired'>/**Returns whether the provider must provide speed information.
+</span> Not all fixes are guaranteed to contain such information.
+*/
+isSpeedRequired : function(  ) {},
+
+<span id='android-location-Criteria-method-setBearingRequired'>/**Indicates whether the provider must provide bearing information.
+</span> Not all fixes are guaranteed to contain such information.
+*/
+setBearingRequired : function(  ) {},
+
+<span id='android-location-Criteria-method-isBearingRequired'>/**Returns whether the provider must provide bearing information.
+</span> Not all fixes are guaranteed to contain such information.
+*/
+isBearingRequired : function(  ) {},
+
+<span id='android-location-Criteria-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-location-Criteria-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-location-Criteria-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

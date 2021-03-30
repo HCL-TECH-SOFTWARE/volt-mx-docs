@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-privacy-DifferentialPrivacyEncoder'>/**@class android.privacy.DifferentialPrivacyEncoder
+</span> An interface for differential privacy encoder.
+ Applications can use it to convert privacy sensitive data to privacy protected report.
+ There is no decoder implemented in Android as it is not possible decode a single report by
+ design.
+
+ &lt;p&gt;Each type of log should have its own encoder, otherwise it may leak
+ some information about Permanent Randomized Response(PRR, is used to create a “noisy”
+ answer which is memoized by the client and permanently reused in place of the real answer).
+
+ &lt;p&gt;Some encoders may not support all encoding methods, and it will throw {@link UnsupportedOperationException} if you call unsupported encoding method.
+
+ &lt;p&gt;&lt;b&gt;WARNING:&lt;/b&gt; Privacy protection works only when encoder uses a suitable DP configuration,
+ and the configuration and algorithm that is suitable is highly dependent on the use case.
+ If the configuration is not suitable for the use case, it may hurt privacy or utility or both.
+
+ @hide
+*/
+var DifferentialPrivacyEncoder = {
+
+<span id='android-privacy-DifferentialPrivacyEncoder-method-encodeString'>/**Apply differential privacy to encode a string.
+</span>@param {String} original An arbitrary string
+@return {Number} Differential privacy encoded bytes derived from the string
+*/
+encodeString : function(  ) {},
+
+<span id='android-privacy-DifferentialPrivacyEncoder-method-encodeBoolean'>/**Apply differential privacy to encode a boolean.
+</span>@param {Boolean} original An arbitrary boolean.
+@return {Number} Differential privacy encoded bytes derived from the boolean
+*/
+encodeBoolean : function(  ) {},
+
+<span id='android-privacy-DifferentialPrivacyEncoder-method-encodeBits'>/**Apply differential privacy to encode sequence of bytes.
+</span>@param {Object {byte[]}} original An arbitrary byte array.
+@return {Number} Differential privacy encoded bytes derived from the bytes
+*/
+encodeBits : function(  ) {},
+
+<span id='android-privacy-DifferentialPrivacyEncoder-method-getConfig'>/**Returns the configuration that this encoder is using.
+</span>*/
+getConfig : function(  ) {},
+
+<span id='android-privacy-DifferentialPrivacyEncoder-method-isInsecureEncoderForTest'>/**Return True if the output from encoder is NOT securely randomized, otherwise encoder should
+</span> be secure to randomize input.
+
+ &lt;b&gt; A non-secure encoder is intended only for testing only and must not be used to process
+ real data.
+ &lt;/b&gt;
+*/
+isInsecureEncoderForTest : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

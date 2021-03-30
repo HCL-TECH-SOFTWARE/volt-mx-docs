@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-layoutlib-bridge-impl-GcSnapshot'>/**@class com.android.layoutlib.bridge.impl.GcSnapshot
+</span>@extends java.lang.Object
+
+ Class representing a graphics context snapshot, as well as a context stack as a linked list.
+ &lt;p&gt;
+ This is based on top of {@link Graphics2D} but can operate independently if none are available
+ yet when setting transforms and clip information.
+ &lt;p&gt;
+ This allows for drawing through {@link #draw(Drawable, Paint_Delegate, boolean, boolean)} and
+ {@link #draw}(Drawable)
+
+ Handling of layers (created with {@link Canvas#saveLayer(RectF, Paint, int)}) is handled through
+ a list of Graphics2D for each layers. The class actually maintains a list of {@link Layer}
+ for each layer. Doing a save() will duplicate this list so that each graphics2D object
+ ({@link Layer#getGraphics()}) is configured only for the new snapshot.
+*/
+var GcSnapshot = {
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-createDefaultSnapshot'>/**Creates the root snapshot associating it with a given bitmap.
+</span> &lt;p&gt;
+ If &lt;var&gt;bitmap&lt;/var&gt; is null, then {@link com.android.layoutlib.bridge.impl.GcSnapshot#setBitmap(Bitmap_Delegate)} must be
+ called before the snapshot can be used to draw. Transform and clip operations are permitted
+ before.
+@param {Object {Bitmap_Delegate}} bitmap the image to associate to the snapshot or null.
+@return {Object {com.android.layoutlib.bridge.impl.GcSnapshot}} the root snapshot
+*/
+createDefaultSnapshot : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-save'>/**Saves the current state according to the given flags and returns the new current snapshot.
+</span> &lt;p/&gt;
+ This is the equivalent of {@link Canvas#save(int)}
+@param {Number} flags the save flags.
+@return {Object {com.android.layoutlib.bridge.impl.GcSnapshot}} the new snapshot
+@see Canvas#save(int)
+*/
+save : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-saveLayer'>/**Saves the current state and creates a new layer, and returns the new current snapshot.
+</span> &lt;p/&gt;
+ This is the equivalent of {@link Canvas#saveLayer(RectF, Paint, int)}
+@param {Object {RectF}} layerBounds the layer bounds
+@param {Object {Paint_Delegate}} paint the Paint information used to blit the layer back into the layers underneath
+          upon restore
+@param {Number} flags the save flags.
+@return {Object {com.android.layoutlib.bridge.impl.GcSnapshot}} the new snapshot
+@see Canvas#saveLayer(RectF, Paint, int)
+*/
+saveLayer : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-dispose'>/**
+</span>*/
+dispose : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-restore'>/**Restores the top {@link com.android.layoutlib.bridge.impl.GcSnapshot}, and returns the next one.
+</span>*/
+restore : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-restoreTo'>/**Restores the {@link com.android.layoutlib.bridge.impl.GcSnapshot} to &lt;var&gt;saveCount&lt;/var&gt;.
+</span>@param {Number} saveCount the saveCount or -1 to only restore 1.
+@return {Object {com.android.layoutlib.bridge.impl.GcSnapshot}} the new head of the Gc snapshot stack.
+*/
+restoreTo : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-size'>/**
+</span>*/
+size : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-setBitmap'>/**Link the snapshot to a Bitmap_Delegate.
+</span> &lt;p/&gt;
+ This is only for the case where the snapshot was created with a null image when calling
+ {@link #createDefaultSnapshot(Bitmap_Delegate)}, and is therefore not yet linked to
+ a previous snapshot.
+ &lt;p/&gt;
+ If any transform or clip information was set before, they are put into the Graphics object.
+@param {Object {Bitmap_Delegate}} bitmap the bitmap to link to.
+*/
+setBitmap : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-translate'>/**
+</span>*/
+translate : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-rotate'>/**
+</span>*/
+rotate : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-scale'>/**
+</span>*/
+scale : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-getTransform'>/**
+</span>*/
+getTransform : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-setTransform'>/**
+</span>*/
+setTransform : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-clip'>/**
+</span>*/
+clip : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-clipRect'>/**
+</span>*/
+clipRect : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-getClip'>/**Returns the current clip, or null if none have been setup.
+</span>*/
+getClip : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-draw'>/**Executes the Drawable's draw method, with a null paint delegate.
+</span> &lt;p/&gt;
+ Note that the method can be called several times if there are more than one active layer.
+*/
+draw : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-draw'>/**Executes the Drawable's draw method.
+</span> &lt;p/&gt;
+ Note that the method can be called several times if there are more than one active layer.
+@param {Object {GcSnapshot.Drawable}} compositeOnly whether the paint is used for composite only. This is typically
+          the case for bitmaps.
+@param {Object {Paint_Delegate}} forceSrcMode if true, this overrides the composite to be SRC
+*/
+draw : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-GcSnapshot-method-getOriginalClip'>/**Returns the clip of the oldest snapshot of the stack, appropriately translated to be
+</span> expressed in the coordinate system of the latest snapshot.
+*/
+getOriginalClip : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

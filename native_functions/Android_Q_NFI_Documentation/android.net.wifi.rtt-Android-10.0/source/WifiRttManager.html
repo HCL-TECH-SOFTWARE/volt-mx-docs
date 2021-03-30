@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-rtt-WifiRttManager'>/**@class android.net.wifi.rtt.WifiRttManager
+</span>@extends java.lang.Object
+
+ This class provides the primary API for measuring distance (range) to other devices using the
+ IEEE 802.11mc Wi-Fi Round Trip Time (RTT) technology.
+ &lt;p&gt;
+ The devices which can be ranged include:
+ &lt;li&gt;Access Points (APs)
+ &lt;li&gt;Wi-Fi Aware peers
+ &lt;p&gt;
+ Ranging requests are triggered using
+ {@link #startRanging(RangingRequest, Executor, android.net.wifi.rtt.RangingResultCallback)}. Results (in case of
+ successful operation) are returned in the {@link android.net.wifi.rtt.RangingResultCallback#onRangingResults(List)}
+ callback.
+ &lt;p&gt;
+     Wi-Fi RTT may not be usable at some points, e.g. when Wi-Fi is disabled. To validate that
+     the functionality is available use the {@link #isAvailable}() function. To track
+     changes in RTT usability register for the {@link #ACTION_WIFI_RTT_STATE_CHANGED}
+     broadcast. Note that this broadcast is not sticky - you should register for it and then
+     check the above API to avoid a race condition.
+*/
+var WifiRttManager = {
+
+<span id='android-net-wifi-rtt-WifiRttManager-property-ACTION_WIFI_RTT_STATE_CHANGED'>/** Broadcast intent action to indicate that the state of Wi-Fi RTT availability has changed.
+</span> Use the {@link #isAvailable}() to query the current status.
+ This broadcast is &lt;b&gt;not&lt;/b&gt; sticky, use the {@link #isAvailable}() API after registering
+ the broadcast to check the current state of Wi-Fi RTT.
+ &lt;p&gt;Note: The broadcast is only delivered to registered receivers - no manifest registered
+ components will be launched.
+*/
+ACTION_WIFI_RTT_STATE_CHANGED : &quot;android.net.wifi.rtt.action.WIFI_RTT_STATE_CHANGED&quot;,
+<span id='android-net-wifi-rtt-WifiRttManager-method-isAvailable'>/**Returns the current status of RTT API: whether or not RTT is available. To track
+</span> changes in the state of RTT API register for the
+ {@link #ACTION_WIFI_RTT_STATE_CHANGED} broadcast.
+ &lt;p&gt;Note: availability of RTT does not mean that the app can use the API. The app's
+ permissions and platform Location Mode are validated at run-time.
+@return {Boolean} A boolean indicating whether the app can use the RTT API at this time (true) or
+ not (false).
+*/
+isAvailable : function(  ) {},
+
+<span id='android-net-wifi-rtt-WifiRttManager-method-startRanging'>/**Initiate a request to range to a set of devices specified in the {@link android.net.wifi.rtt.RangingRequest}.
+</span> Results will be returned in the {@link android.net.wifi.rtt.RangingResultCallback} set of callbacks.
+@param {Object {RangingRequest}} request  A request specifying a set of devices whose distance measurements are
+                 requested.
+@param {Object {Executor}} executor The Executor on which to run the callback.
+@param {Object {RangingResultCallback}} callback A callback for the result of the ranging request.
+*/
+startRanging : function(  ) {},
+
+<span id='android-net-wifi-rtt-WifiRttManager-method-startRanging'>/**Initiate a request to range to a set of devices specified in the {@link android.net.wifi.rtt.RangingRequest}.
+</span> Results will be returned in the {@link android.net.wifi.rtt.RangingResultCallback} set of callbacks.
+@param {Object {WorkSource}} workSource A mechanism to specify an alternative work-source for the request.
+@param {Object {RangingRequest}} request  A request specifying a set of devices whose distance measurements are
+                 requested.
+@param {Object {Executor}} executor The Executor on which to run the callback.
+@param {Object {RangingResultCallback}} callback A callback for the result of the ranging request.
+@hide 
+*/
+startRanging : function(  ) {},
+
+<span id='android-net-wifi-rtt-WifiRttManager-method-cancelRanging'>/**Cancel all ranging requests for the specified work sources. The requests have been requested
+</span> using {@link #startRanging(WorkSource, RangingRequest, Executor, android.net.wifi.rtt.RangingResultCallback)}.
+@param {Object {WorkSource}} workSource The work-sources of the requesters.
+@hide 
+*/
+cancelRanging : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

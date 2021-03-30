@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-VolumeProvider'>/**@class android.media.VolumeProvider
+</span>@extends java.lang.Object
+
+ Handles requests to adjust or set the volume on a session. This is also used
+ to push volume updates back to the session. The provider must call
+ {@link #setCurrentVolume}(int) each time the volume being provided changes.
+ &lt;p&gt;
+ You can set a volume provider on a session by calling
+ {@link MediaSession#setPlaybackToRemote}.
+*/
+var VolumeProvider = {
+
+<span id='android-media-VolumeProvider-property-VOLUME_CONTROL_FIXED'>/** The volume is fixed and can not be modified. Requests to change volume
+</span> should be ignored.
+*/
+VOLUME_CONTROL_FIXED : &quot;0&quot;,
+<span id='android-media-VolumeProvider-property-VOLUME_CONTROL_RELATIVE'>/** The volume control uses relative adjustment via
+</span> {@link #onAdjustVolume}(int). Attempts to set the volume to a specific
+ value should be ignored.
+*/
+VOLUME_CONTROL_RELATIVE : &quot;1&quot;,
+<span id='android-media-VolumeProvider-property-VOLUME_CONTROL_ABSOLUTE'>/** The volume control uses an absolute value. It may be adjusted using
+</span> {@link #onAdjustVolume}(int) or set directly using
+ {@link #onSetVolumeTo}(int).
+*/
+VOLUME_CONTROL_ABSOLUTE : &quot;2&quot;,
+<span id='android-media-VolumeProvider-method-getVolumeControl'>/**Get the volume control type that this volume provider uses.
+</span>@return {Number} The volume control type for this volume provider
+*/
+getVolumeControl : function(  ) {},
+
+<span id='android-media-VolumeProvider-method-getMaxVolume'>/**Get the maximum volume this provider allows.
+</span>@return {Number} The max allowed volume.
+*/
+getMaxVolume : function(  ) {},
+
+<span id='android-media-VolumeProvider-method-getCurrentVolume'>/**Gets the current volume. This will be the last value set by
+</span> {@link #setCurrentVolume}(int).
+@return {Number} The current volume.
+*/
+getCurrentVolume : function(  ) {},
+
+<span id='android-media-VolumeProvider-method-setCurrentVolume'>/**Notify the system that the current volume has been changed. This must be
+</span> called every time the volume changes to ensure it is displayed properly.
+@param {Number} currentVolume The current volume on the output.
+*/
+setCurrentVolume : function(  ) {},
+
+<span id='android-media-VolumeProvider-method-onSetVolumeTo'>/**Override to handle requests to set the volume of the current output.
+</span> After the volume has been modified {@link #setCurrentVolume} must be
+ called to notify the system.
+@param {Number} volume The volume to set the output to.
+*/
+onSetVolumeTo : function(  ) {},
+
+<span id='android-media-VolumeProvider-method-onAdjustVolume'>/**Override to handle requests to adjust the volume of the current output.
+</span> Direction will be one of {@link android.media.AudioManager#ADJUST_LOWER},
+ {@link android.media.AudioManager#ADJUST_RAISE}, {@link android.media.AudioManager#ADJUST_SAME}.
+ After the volume has been modified {@link #setCurrentVolume} must be
+ called to notify the system.
+@param {Number} direction The direction to change the volume in.
+*/
+onAdjustVolume : function(  ) {},
+
+<span id='android-media-VolumeProvider-method-setCallback'>/**Sets a callback to receive volume changes.
+</span>@hide 
+*/
+setCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

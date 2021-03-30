@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-inspector-InspectableProperty'>/**@class android.view.inspector.InspectableProperty
+</span> implements java.lang.annotation.Annotation
+
+ Marks a getter of a property on an inspectable node.
+
+ This annotation is inherited by default. If a child class doesn't add it to a getter, but a
+ parent class does, the property will be inspected, even if the child overrides the definition
+ of the getter. If a child class defines a property of the same name of a property on the parent
+ but on a different getter, the inspector will use the child's getter when inspecting instances
+ of the child, and the parent's otherwise.
+
+ @see InspectionCompanion#mapProperties(PropertyMapper)
+ @see InspectionCompanion#readProperties(Object, PropertyReader)
+ @hide
+*/
+var InspectableProperty = {
+
+<span id='android-view-inspector-InspectableProperty-method-name'>/**The name of the property.
+</span>
+ If left empty (the default), the property name will be inferred from the name of the getter
+ method.
+@return {String} The name of the property.
+*/
+name : function(  ) {},
+
+<span id='android-view-inspector-InspectableProperty-method-attributeId'>/**If the property is inflated from XML, the resource ID of its XML attribute.
+</span>
+ If left as {ID_NULL}, and {@link #hasAttributeId}() is true, the attribute ID will be
+ inferred from {@link #name}().
+@return {Number} The attribute ID of the property or {@link Resources#ID_NULL}
+*/
+attributeId : function(  ) {},
+
+<span id='android-view-inspector-InspectableProperty-method-hasAttributeId'>/**If this property has an attribute ID.
+</span>
+ Set to false if the annotated property does not have an attribute ID, that is, it is not
+ inflated from an XML attribute. This will prevent the automatic inference of the attribute
+ ID if {@link #attributeId}() is set to {@link Resources#ID_NULL}.
+@return {Boolean} Whether to infer an attribute ID if not supplied
+*/
+hasAttributeId : function(  ) {},
+
+<span id='android-view-inspector-InspectableProperty-method-valueType'>/**Specify how to interpret a value type packed into a primitive integer.
+</span>@return {Object {android.view.inspector.InspectableProperty.ValueType}} A {@link ValueType}
+*/
+valueType : function(  ) {},
+
+<span id='android-view-inspector-InspectableProperty-method-enumMapping'>/**For enumerations packed into primitive {int} properties, map the values to string names.
+</span>
+ Note that {@link #enumMapping}() cannot be used simultaneously with {@link #flagMapping}().
+@return {Object {android.view.inspector.InspectableProperty.EnumEntry}} An array of {@link EnumEntry}, empty if not applicable
+@see android.annotation.IntDef
+*/
+enumMapping : function(  ) {},
+
+<span id='android-view-inspector-InspectableProperty-method-flagMapping'>/**For flags packed into primitive {int} properties, model the string names of the flags.
+</span>
+ Note that {@link #flagMapping}() cannot be used simultaneously with {@link #enumMapping}().
+@return {Object {android.view.inspector.InspectableProperty.FlagEntry}} An array of {@link FlagEntry}, empty if not applicable
+@see android.annotation.IntDef
+@see IntFlagMapping
+*/
+flagMapping : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

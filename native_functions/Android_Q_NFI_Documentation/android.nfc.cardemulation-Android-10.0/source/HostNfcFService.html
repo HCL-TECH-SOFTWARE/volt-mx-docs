@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-cardemulation-HostNfcFService'>/**@class android.nfc.cardemulation.HostNfcFService
+</span>@extends android.app.Service
+
+ &lt;p&gt;HostNfcFService is a convenience {@link Service} class that can be
+ extended to emulate an NFC-F card inside an Android service component.
+
+ &lt;h3&gt;NFC Protocols&lt;/h3&gt;
+ &lt;p&gt;Cards emulated by this class are based on the NFC-Forum NFC-F
+ protocol (based on the JIS-X 6319-4 specification.)&lt;/p&gt;
+
+ &lt;h3&gt;System Code and NFCID2 registration&lt;/h3&gt;
+ &lt;p&gt;A {@link android.nfc.cardemulation.HostNfcFService android.nfc.cardemulation.HostNfcFService service} can register
+ exactly one System Code and one NFCID2. For details about the use of
+ System Code and NFCID2, see the NFC Forum Digital specification.&lt;/p&gt;
+ &lt;p&gt;To statically register a System Code and NFCID2 with the service, a {@link #SERVICE_META_DATA}
+ entry must be included in the declaration of the service.
+
+ &lt;p&gt;All {@link android.nfc.cardemulation.HostNfcFService android.nfc.cardemulation.HostNfcFService} declarations in the manifest must require the
+ {@link android.Manifest.permission#BIND_NFC_SERVICE} permission
+ in their &amp;lt;service&amp;gt; tag, to ensure that only the platform can bind to your service.&lt;/p&gt;
+
+ &lt;p&gt;An example of a HostNfcFService manifest declaration is shown below:
+
+ &lt;pre&gt; &amp;lt;service android:name=&quot;.MyHostNfcFService&quot; android:exported=&quot;true&quot; android:permission=&quot;android.permission.BIND_NFC_SERVICE&quot;&amp;gt;
+     &amp;lt;intent-filter&amp;gt;
+         &amp;lt;action android:name=&quot;android.nfc.cardemulation.action.HOST_NFCF_SERVICE&quot;/&amp;gt;
+     &amp;lt;/intent-filter&amp;gt;
+     &amp;lt;meta-data android:name=&quot;android.nfc.cardemulation.host_nfcf_service&quot; android:resource=&quot;@xml/nfcfservice&quot;/&amp;gt;
+ &amp;lt;/service&amp;gt;&lt;/pre&gt;
+
+ This meta-data tag points to an nfcfservice.xml file.
+ An example of this file with a System Code and NFCID2 declaration is shown below:
+ &lt;pre&gt;
+ &amp;lt;host-nfcf-service xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+           android:description=&quot;@string/servicedesc&quot;&amp;gt;
+       &amp;lt;system-code-filter android:name=&quot;4000&quot;/&amp;gt;
+       &amp;lt;nfcid2-filter android:name=&quot;02FE000000000000&quot;/&amp;gt;
+         &amp;lt;t3tPmm-filter android:name=&quot;FFFFFFFFFFFFFFFF&quot;/&amp;gt;
+ &amp;lt;/host-nfcf-service&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;The {@link android.R.styleable#HostNfcFService &amp;lt;host-nfcf-service&amp;gt;} is required
+ to contain a
+ {@link android.R.styleable#HostApduService_description &amp;lt;android:description&amp;gt;}
+ attribute that contains a user-friendly description of the service that may be shown in UI.
+ &lt;p&gt;The {@link android.R.styleable#HostNfcFService &amp;lt;host-nfcf-service&amp;gt;} must
+ contain:
+ &lt;ul&gt;
+ &lt;li&gt;Exactly one {@link android.R.styleable#SystemCodeFilter &amp;lt;system-code-filter&amp;gt;} tag.&lt;/li&gt;
+ &lt;li&gt;Exactly one {@link android.R.styleable#Nfcid2Filter &amp;lt;nfcid2-filter&amp;gt;} tag.&lt;/li&gt;
+ &lt;li&gt;Zero or one {@link android.R.styleable#T3tPmmFilter &amp;lt;t3tPmm-filter&amp;gt;} tag.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;Alternatively, the System Code and NFCID2 can be dynamically registererd for a service
+ by using the {@link android.nfc.cardemulation.NfcFCardEmulation#registerSystemCodeForService(ComponentName, String)} and
+ {@link android.nfc.cardemulation.NfcFCardEmulation#setNfcid2ForService(ComponentName, String)} methods.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Service selection&lt;/h3&gt;
+ &lt;p&gt;When a remote NFC devices wants to communicate with your service, it
+ sends a SENSF_REQ command to the NFC controller, requesting a System Code.
+ If a {@link android.nfc.cardemulation.NfcFCardEmulation android.nfc.cardemulation.NfcFCardEmulation service} has registered
+ this system code and has been enabled by the foreground application, the
+ NFC controller will respond with the NFCID2 that is registered for this service.
+ The reader can then continue data exchange with this service by using the NFCID2.&lt;/p&gt;
+
+ &lt;h3&gt;Data exchange&lt;/h3&gt;
+ &lt;p&gt;After service selection, all frames addressed to the NFCID2 of this service will
+ be sent through {@link #processNfcFPacket(byte[], Bundle)}, until the NFC link is
+ broken.&lt;p&gt;
+
+ &lt;p&gt;When the NFC link is broken, {@link #onDeactivated}(int) will be called.&lt;/p&gt;
+*/
+var HostNfcFService = {
+
+<span id='android-nfc-cardemulation-HostNfcFService-property-SERVICE_INTERFACE'>/** The {@link Intent} action that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.nfc.cardemulation.action.HOST_NFCF_SERVICE&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-property-SERVICE_META_DATA'>/** The name of the meta-data element that contains
+</span> more information about this service.
+*/
+SERVICE_META_DATA : &quot;android.nfc.cardemulation.host_nfcf_service&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-property-DEACTIVATION_LINK_LOSS'>/** Reason for {@link #onDeactivated}(int).
+</span> Indicates deactivation was due to the NFC link
+ being lost.
+*/
+DEACTIVATION_LINK_LOSS : &quot;0&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-property-MSG_COMMAND_PACKET'>/** MSG_COMMAND_PACKET is sent by NfcService when
+</span> a NFC-F command packet has been received.
+
+ @hide
+*/
+MSG_COMMAND_PACKET : &quot;0&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-property-MSG_RESPONSE_PACKET'>/** MSG_RESPONSE_PACKET is sent to NfcService to send
+</span> a response packet back to the remote device.
+
+ @hide
+*/
+MSG_RESPONSE_PACKET : &quot;1&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-property-MSG_DEACTIVATED'>/** MSG_DEACTIVATED is sent by NfcService when
+</span> the current session is finished; because
+ the NFC link was deactivated.
+
+ @hide
+*/
+MSG_DEACTIVATED : &quot;2&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-property-KEY_DATA'>/** @hide
+</span>*/
+KEY_DATA : &quot;data&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-property-KEY_MESSENGER'>/** @hide
+</span>*/
+KEY_MESSENGER : &quot;messenger&quot;,
+<span id='android-nfc-cardemulation-HostNfcFService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-nfc-cardemulation-HostNfcFService-method-sendResponsePacket'>/**Sends a response packet back to the remote device.
+</span>
+ &lt;p&gt;Note: this method may be called from any thread and will not block.
+@param {Object {byte[]}} responsePacket A byte-array containing the response packet.
+*/
+sendResponsePacket : function(  ) {},
+
+<span id='android-nfc-cardemulation-HostNfcFService-method-processNfcFPacket'>/**&lt;p&gt;This method will be called when a NFC-F packet has been received
+</span> from a remote device. A response packet can be provided directly
+ by returning a byte-array in this method. Note that in general
+ response packets must be sent as quickly as possible, given the fact
+ that the user is likely holding his device over an NFC reader
+ when this method is called.
+
+ &lt;p class=&quot;note&quot;&gt;This method is running on the main thread of your application.
+ If you cannot return a response packet immediately, return null
+ and use the {@link #sendResponsePacket(byte[])} method later.
+@param {Object {byte[]}} commandPacket The NFC-F packet that was received from the remote device
+@param {Object {Bundle}} extras A bundle containing extra data. May be null.
+@return {Number} a byte-array containing the response packet, or null if no
+         response packet can be sent at this point.
+*/
+processNfcFPacket : function(  ) {},
+
+<span id='android-nfc-cardemulation-HostNfcFService-method-onDeactivated'>/**This method will be called in following possible scenarios:
+</span> &lt;li&gt;The NFC link has been lost
+@param {Number} reason {@link #DEACTIVATION_LINK_LOSS}
+*/
+onDeactivated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

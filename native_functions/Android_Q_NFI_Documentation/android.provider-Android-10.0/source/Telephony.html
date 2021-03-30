@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Telephony'>/**@class android.provider.Telephony
+</span>@extends java.lang.Object
+
+ The Telephony provider contains data related to phone operation, specifically SMS and MMS
+ messages, access to the APN list, including the MMSC to use, and the service state.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; These APIs are not available on all Android-powered
+ devices. If your app depends on telephony features such as for managing SMS messages, include
+ a &lt;a href=&quot;{@docRoot}guide/topics/manifest/uses-feature-element.html&quot;&gt;{@code &lt;uses-feature&gt;}
+ &lt;/a&gt; element in your manifest that declares the {@code &quot;android.hardware.telephony&quot;} hardware
+ feature. Alternatively, you can check for telephony availability at runtime using either
+ {@link android.content.pm.PackageManager#hasSystemFeature
+ hasSystemFeature(PackageManager.FEATURE_TELEPHONY)} or {@link android.telephony.TelephonyManager#getPhoneType}.&lt;/p&gt;
+
+ &lt;h3&gt;Creating an SMS app&lt;/h3&gt;
+
+ &lt;p&gt;Only the default SMS app (selected by the user in system settings) is able to write to the
+ SMS Provider (the tables defined within the {@code Telephony} class) and only the default SMS
+ app receives the {@link android.provider.Telephony.Sms.Intents#SMS_DELIVER_ACTION} broadcast
+ when the user receives an SMS or the {@link android.provider.Telephony.Sms.Intents#WAP_PUSH_DELIVER_ACTION} broadcast when the user
+ receives an MMS.&lt;/p&gt;
+
+ &lt;p&gt;Any app that wants to behave as the user's default SMS app must handle the following intents:
+ &lt;ul&gt;
+ &lt;li&gt;In a broadcast receiver, include an intent filter for {@link android.provider.Telephony.Sms.Intents#SMS_DELIVER_ACTION}
+ (&lt;code&gt;&quot;android.provider.Telephony.SMS_DELIVER&quot;&lt;/code&gt;). The broadcast receiver must also
+ require the {@link android.Manifest.permission#BROADCAST_SMS} permission.
+ &lt;p&gt;This allows your app to directly receive incoming SMS messages.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;In a broadcast receiver, include an intent filter for {@link android.provider.Telephony.Sms.Intents#WAP_PUSH_DELIVER_ACTION}} ({@code &quot;android.provider.Telephony.WAP_PUSH_DELIVER&quot;})
+ with the MIME type &lt;code&gt;&quot;application/vnd.wap.mms-message&quot;&lt;/code&gt;.
+ The broadcast receiver must also require the {@link android.Manifest.permission#BROADCAST_WAP_PUSH} permission.
+ &lt;p&gt;This allows your app to directly receive incoming MMS messages.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;In your activity that delivers new messages, include an intent filter for
+ {@link android.content.Intent#ACTION_SENDTO} (&lt;code&gt;&quot;android.intent.action.SENDTO&quot;
+ &lt;/code&gt;) with schemas, &lt;code&gt;sms:&lt;/code&gt;, &lt;code&gt;smsto:&lt;/code&gt;, &lt;code&gt;mms:&lt;/code&gt;, and
+ &lt;code&gt;mmsto:&lt;/code&gt;.
+ &lt;p&gt;This allows your app to receive intents from other apps that want to deliver a
+ message.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;In a service, include an intent filter for {@link android.telephony.TelephonyManager#ACTION_RESPOND_VIA_MESSAGE}
+ (&lt;code&gt;&quot;android.intent.action.RESPOND_VIA_MESSAGE&quot;&lt;/code&gt;) with schemas,
+ &lt;code&gt;sms:&lt;/code&gt;, &lt;code&gt;smsto:&lt;/code&gt;, &lt;code&gt;mms:&lt;/code&gt;, and &lt;code&gt;mmsto:&lt;/code&gt;.
+ This service must also require the {@link android.Manifest.permission#SEND_RESPOND_VIA_MESSAGE} permission.
+ &lt;p&gt;This allows users to respond to incoming phone calls with an immediate text message
+ using your app.&lt;/p&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Other apps that are not selected as the default SMS app can only &lt;em&gt;read&lt;/em&gt; the SMS
+ Provider, but may also be notified when a new SMS arrives by listening for the {@link android.provider.Telephony.Sms.Intents#SMS_RECEIVED_ACTION}
+ broadcast, which is a non-abortable broadcast that may be delivered to multiple apps. This
+ broadcast is intended for apps that&amp;mdash;while not selected as the default SMS app&amp;mdash;need to
+ read special incoming messages such as to perform phone number verification.&lt;/p&gt;
+
+ &lt;p&gt;For more information about building SMS apps, read the blog post, &lt;a
+ href=&quot;http://android-developers.blogspot.com/2013/10/getting-your-sms-apps-ready-for-kitkat.html&quot;
+ &gt;Getting Your SMS Apps Ready for KitKat&lt;/a&gt;.&lt;/p&gt;
+
+*/
+var Telephony = {
+
+
+};</pre>
+</body>
+</html>

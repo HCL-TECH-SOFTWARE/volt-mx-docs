@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-HardwareRenderer'>/**@class android.graphics.HardwareRenderer
+</span>@extends java.lang.Object
+
+ &lt;p&gt;Creates an instance of a hardware-accelerated renderer. This is used to render a scene built
+ from {@link android.graphics.RenderNode}'s to an output {@link android.view.Surface}. There can be as many
+ HardwareRenderer instances as desired.&lt;/p&gt;
+
+ &lt;h3&gt;Resources &amp; lifecycle&lt;/h3&gt;
+
+ &lt;p&gt;All HardwareRenderer instances share a common render thread. The render thread contains
+ the GPU context &amp; resources necessary to do GPU-accelerated rendering. As such, the first
+ HardwareRenderer created comes with the cost of also creating the associated GPU contexts,
+ however each incremental HardwareRenderer thereafter is fairly cheap. The expected usage
+ is to have a HardwareRenderer instance for every active {@link Surface}. For example
+ when an Activity shows a Dialog the system internally will use 2 hardware renderers, both
+ of which may be drawing at the same time.&lt;/p&gt;
+
+ &lt;p&gt;NOTE: Due to the shared, cooperative nature of the render thread it is critical that
+ any {@link Surface} used must have a prompt, reliable consuming side. System-provided
+ consumers such as {@link android.view.SurfaceView},
+ {@link android.view.Window#takeSurface(SurfaceHolder.Callback2)},
+ or {@link android.view.TextureView} all fit this requirement. However if custom consumers
+ are used such as when using {@link android.graphics.SurfaceTexture} or {@link android.media.ImageReader}
+ it is the app's responsibility to ensure that they consume updates promptly and rapidly.
+ Failure to do so will cause the render thread to stall on that surface, blocking all
+ HardwareRenderer instances.&lt;/p&gt;
+*/
+var HardwareRenderer = {
+
+<span id='android-graphics-HardwareRenderer-property-SYNC_OK'>/** Nothing interesting to report. Sync &amp; draw kicked off
+</span>*/
+SYNC_OK : &quot;0&quot;,
+<span id='android-graphics-HardwareRenderer-property-SYNC_REDRAW_REQUESTED'>/** The renderer is requesting a redraw. This can occur if there's an animation that's running
+</span> in the RenderNode tree and the hardware renderer is unable to self-animate.
+
+ &lt;p&gt;If this is returned from syncAndDraw the expectation is that syncAndDraw
+ will be called again on the next vsync signal.
+*/
+SYNC_REDRAW_REQUESTED : &quot;1&quot;,
+<span id='android-graphics-HardwareRenderer-property-SYNC_LOST_SURFACE_REWARD_IF_FOUND'>/** The hardware renderer no longer has a valid {@link android.view.Surface} to render to.
+</span> This can happen if {@link Surface#release()} was called. The user should no longer
+ attempt to call syncAndDraw until a new surface has been provided by calling
+ setSurface.
+
+ &lt;p&gt;Spoiler: the reward is GPU-accelerated drawing, better find that Surface!
+*/
+SYNC_LOST_SURFACE_REWARD_IF_FOUND : &quot;2&quot;,
+<span id='android-graphics-HardwareRenderer-property-SYNC_CONTEXT_IS_STOPPED'>/** The hardware renderer has been set to a &quot;stopped&quot; state. If this is returned then the
+</span> rendering content has been synced, however a frame was not produced.
+*/
+SYNC_CONTEXT_IS_STOPPED : &quot;4&quot;,
+<span id='android-graphics-HardwareRenderer-property-SYNC_FRAME_DROPPED'>/** The content was synced but the renderer has declined to produce a frame in this vsync
+</span> interval. This can happen if a frame was already drawn in this vsync or if the renderer
+ is outrunning the frame consumer. The renderer will internally re-schedule itself
+ to render a frame in the next vsync signal, so the caller does not need to do anything
+ in response to this signal.
+*/
+SYNC_FRAME_DROPPED : &quot;8&quot;,
+<span id='android-graphics-HardwareRenderer-property-FLAG_DUMP_FRAMESTATS'>/**@hide */
+</span>FLAG_DUMP_FRAMESTATS : &quot;1&quot;,
+<span id='android-graphics-HardwareRenderer-property-FLAG_DUMP_RESET'>/**@hide */
+</span>FLAG_DUMP_RESET : &quot;2&quot;,
+<span id='android-graphics-HardwareRenderer-property-FLAG_DUMP_ALL'>/**@hide */
+</span>FLAG_DUMP_ALL : &quot;1&quot;,
+<span id='android-graphics-HardwareRenderer-method-destroy'>/**Destroys the rendering context of this HardwareRenderer. This destroys the resources
+</span> associated with this renderer and releases the currently set {@link Surface}. This must
+ be called when this HardwareRenderer is no longer needed.
+
+ &lt;p&gt;The renderer may be restored from this state by setting a new {@link Surface}, setting
+ new rendering content with {@link #setContentRoot}(RenderNode), and resuming
+ rendering by issuing a new {@link android.graphics.HardwareRenderer.FrameRenderRequest}.
+
+ &lt;p&gt;It is recommended to call this in response to callbacks such as
+ {@link android.view.SurfaceHolder.Callback#surfaceDestroyed(SurfaceHolder)}.
+
+ &lt;p&gt;Note that if there are any outstanding frame commit callbacks they may never being
+ invoked if the frame was deferred to a later vsync.
+*/
+destroy : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setName'>/**Sets a name for this renderer. This is used to identify this renderer instance
+</span> when reporting debug information such as the per-window frame time metrics
+ reported by 'adb shell dumpsys gfxinfo [package] framestats'
+@param {String} name The debug name to use for this HardwareRenderer instance
+*/
+setName : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setLightSourceGeometry'>/**Sets the center of the light source. The light source point controls the directionality
+</span> and shape of shadows rendered by RenderNode Z &amp; elevation.
+
+ &lt;p&gt;The platform's recommendation is to set lightX to 'displayWidth / 2f - windowLeft', set
+ lightY to 0 - windowTop, lightZ set to 600dp, and lightRadius to 800dp.
+
+ &lt;p&gt;The light source should be setup both as part of initial configuration, and whenever
+ the window moves to ensure the light source stays anchored in display space instead
+ of in window space.
+
+ &lt;p&gt;This must be set at least once along with {@link #setLightSourceAlpha(float, float)}
+ before shadows will work.
+@param {Number} lightX      The X position of the light source
+@param {Number} lightY      The Y position of the light source
+@param {Number} lightZ      The Z position of the light source. Must be &gt;= 0.
+@param {Number} lightRadius The radius of the light source. Smaller radius will have sharper edges,
+                    larger radius will have softer shadows.
+*/
+setLightSourceGeometry : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setLightSourceAlpha'>/**Configures the ambient &amp; spot shadow alphas. This is the alpha used when the shadow
+</span> has max alpha, and ramps down from the values provided to zero.
+
+ &lt;p&gt;These values are typically provided by the current theme, see
+ {@link android.R.attr#spotShadowAlpha} and {@link android.R.attr#ambientShadowAlpha}.
+
+ &lt;p&gt;This must be set at least once along with
+ {@link #setLightSourceGeometry(float, float, float, float)} before shadows will work.
+@param {Number} ambientShadowAlpha The alpha for the ambient shadow. If unsure, a reasonable default
+                           is 0.039f.
+@param {Number} spotShadowAlpha    The alpha for the spot shadow. If unsure, a reasonable default is
+                           0.19f.
+*/
+setLightSourceAlpha : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setContentRoot'>/**Sets the content root to render. It is not necessary to call this whenever the content
+</span> recording changes. Any mutations to the RenderNode content, or any of the RenderNode's
+ contained within the content node, will be applied whenever a new {@link android.graphics.HardwareRenderer.FrameRenderRequest}
+ is issued via {@link #createRenderRequest}() and {@link android.graphics.HardwareRenderer.FrameRenderRequest#syncAndDraw()}.
+@param {Object {RenderNode}} content The content to set as the root RenderNode. If null the content root is removed
+                and the renderer will draw nothing.
+*/
+setContentRoot : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setSurface'>/**&lt;p&gt;The surface to render into. The surface is assumed to be associated with the display and
+</span> as such is still driven by vsync signals such as those from
+ {@link android.view.Choreographer} and that it has a native refresh rate matching that of
+ the display's (typically 60hz).&lt;/p&gt;
+
+ &lt;p&gt;NOTE: Due to the shared, cooperative nature of the render thread it is critical that
+ any {@link Surface} used must have a prompt, reliable consuming side. System-provided
+ consumers such as {@link android.view.SurfaceView},
+ {@link android.view.Window#takeSurface(SurfaceHolder.Callback2)},
+ or {@link android.view.TextureView} all fit this requirement. However if custom consumers
+ are used such as when using {@link android.graphics.SurfaceTexture} or {@link android.media.ImageReader}
+ it is the app's responsibility to ensure that they consume updates promptly and rapidly.
+ Failure to do so will cause the render thread to stall on that surface, blocking all
+ HardwareRenderer instances.&lt;/p&gt;
+@param {Object {Surface}} surface The surface to render into. If null then rendering will be stopped. If
+                non-null then {@link Surface#isValid()} must be true.
+*/
+setSurface : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-createRenderRequest'>/**Returns a {@link android.graphics.HardwareRenderer.FrameRenderRequest} that can be used to render a new frame. This is used
+</span> to synchronize the RenderNode content provided by {@link #setContentRoot}(RenderNode) with
+ the RenderThread and then renders a single frame to the Surface set with
+ {@link #setSurface}(Surface).
+@return {Object {android.graphics.HardwareRenderer.FrameRenderRequest}} An instance of {@link FrameRenderRequest}. The instance may be reused for every
+ frame, so the caller should not hold onto it for longer than a single render request.
+*/
+createRenderRequest : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-syncAndDrawFrame'>/**Syncs the RenderNode tree to the render thread and requests a frame to be drawn.
+</span>@hide 
+*/
+syncAndDrawFrame : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-pause'>/**Suspends any current rendering into the surface but do not do any destruction. This
+</span> is useful to temporarily suspend using the active Surface in order to do any Surface
+ mutations necessary.
+
+ &lt;p&gt;Any subsequent draws will override the pause, resuming normal operation.
+@return {Boolean} true if there was an outstanding render request, false otherwise. If this is true
+ the caller should ensure that {@link #createRenderRequest()}
+ and {@link FrameRenderRequest#syncAndDraw()} is called at the soonest
+ possible time to resume normal operation.
+
+ TODO Should this be exposed? ViewRootImpl needs it because it destroys the old
+ Surface before getting a new one. However things like SurfaceView will ensure that
+ the old surface remains un-destroyed until after a new frame has been produced with
+ the new surface.
+@hide 
+*/
+pause : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setStopped'>/**Hard stops rendering into the surface. If the renderer is stopped it will
+</span> block any attempt to render. Calls to {@link android.graphics.HardwareRenderer.FrameRenderRequest#syncAndDraw()} will
+ still sync over the latest rendering content, however they will not render and instead
+ {@link #SYNC_CONTEXT_IS_STOPPED} will be returned.
+
+ &lt;p&gt;If false is passed then rendering will resume as normal. Any pending rendering requests
+ will produce a new frame at the next vsync signal.
+
+ &lt;p&gt;This is useful in combination with lifecycle events such as {@link Activity#onStop()}
+ and {@link Activity#onStart()}.
+@param {Boolean} stopped true to stop all rendering, false to resume
+@hide 
+*/
+setStopped : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-stop'>/**Hard stops rendering into the surface. If the renderer is stopped it will
+</span> block any attempt to render. Calls to {@link android.graphics.HardwareRenderer.FrameRenderRequest#syncAndDraw()} will
+ still sync over the latest rendering content, however they will not render and instead
+ {@link #SYNC_CONTEXT_IS_STOPPED} will be returned.
+
+ &lt;p&gt;This is useful in combination with lifecycle events such as {@link Activity#onStop()}.
+ See {@link #start}() for resuming rendering.
+*/
+stop : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-start'>/**Resumes rendering into the surface. Any pending rendering requests
+</span> will produce a new frame at the next vsync signal.
+
+ &lt;p&gt;This is useful in combination with lifecycle events such as {@link Activity#onStart()}.
+ See {@link #stop}() for stopping rendering.
+*/
+start : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-clearContent'>/**Destroys all the display lists associated with the current rendering content.
+</span> This includes releasing a reference to the current content root RenderNode. It will
+ therefore be necessary to call {@link #setContentRoot}(RenderNode) in order to resume
+ rendering after calling this, along with re-recording the display lists for the
+ RenderNode tree.
+
+ &lt;p&gt;It is recommended, but not necessary, to use this in combination with lifecycle events
+ such as {@link Activity#onStop()} and {@link Activity#onStart()} or in response to
+ {@link android.content.ComponentCallbacks2#onTrimMemory(int)} signals such as
+ {@link android.content.ComponentCallbacks2#TRIM_MEMORY_UI_HIDDEN}
+
+ See also {@link #stop}().
+*/
+clearContent : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setForceDark'>/**Whether or not the force-dark feature should be used for this renderer.
+</span>@hide 
+*/
+setForceDark : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-allocateBuffers'>/**Allocate buffers ahead of time to avoid allocation delays during rendering.
+</span>
+ &lt;p&gt;Typically a Surface will allocate buffers lazily. This is usually fine and reduces the
+ memory usage of Surfaces that render rarely or never hit triple buffering. However
+ for UI it can result in a slight bit of jank on first launch. This hint will
+ tell the HardwareRenderer that now is a good time to allocate the 3 buffers
+ necessary for typical rendering.
+
+ &lt;p&gt;Must be called after a {@link Surface} has been set.
+
+ TODO: Figure out if we even need/want this. Should HWUI just be doing this in response
+ to setSurface anyway? Vulkan swapchain makes this murky, so delay making it public
+@hide 
+*/
+allocateBuffers : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-notifyFramePending'>/**Notifies the hardware renderer that a call to {@link android.graphics.HardwareRenderer.FrameRenderRequest#syncAndDraw()} will
+</span> be coming soon. This is used to help schedule when RenderThread-driven animations will
+ happen as the renderer wants to avoid producing more than one frame per vsync signal.
+*/
+notifyFramePending : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setOpaque'>/**Change the HardwareRenderer's opacity. Will take effect on the next frame produced.
+</span>
+ &lt;p&gt;If the renderer is set to opaque it is the app's responsibility to ensure that the
+ content renders to every pixel of the Surface, otherwise corruption may result. Note that
+ this includes ensuring that the first draw of any given pixel does not attempt to blend
+ against the destination. If this is false then the hardware renderer will clear to
+ transparent at the start of every frame.
+@param {Boolean} opaque true if the content rendered is opaque, false if the renderer should clear
+               to transparent before rendering
+*/
+setOpaque : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-isOpaque'>/**Whether or not the renderer is set to be opaque. See {@link #setOpaque}(boolean)
+</span>@return {Boolean} true if the renderer is opaque, false otherwise
+*/
+isOpaque : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setFrameCompleteCallback'>/**
+</span>@hide 
+*/
+setFrameCompleteCallback : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-addFrameMetricsObserver'>/**TODO: Public API this?
+</span>@hide 
+*/
+addFrameMetricsObserver : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-removeFrameMetricsObserver'>/**TODO: Public API this?
+</span>@hide 
+*/
+removeFrameMetricsObserver : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setWideGamut'>/**Enable/disable wide gamut rendering on this renderer. Whether or not the actual rendering
+</span> will be wide gamut depends on the hardware support for such rendering.
+@param {Boolean} wideGamut true if this renderer should render in wide gamut, false if it should
+                  render in sRGB
+                  TODO: Figure out color...
+@hide 
+*/
+setWideGamut : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-fence'>/**Blocks until all previously queued work has completed.
+</span>
+ TODO: Only used for draw finished listeners, but the FrameCompleteCallback does that
+ better
+@hide 
+*/
+fence : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-registerAnimatingRenderNode'>/**
+</span>@hide 
+*/
+registerAnimatingRenderNode : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-registerVectorDrawableAnimator'>/**
+</span>@hide 
+*/
+registerVectorDrawableAnimator : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-stopDrawing'>/**Prevents any further drawing until {@link android.graphics.HardwareRenderer.FrameRenderRequest#syncAndDraw()} is called.
+</span> This is a signal that the contents of the RenderNode tree are no longer safe to play back.
+ In practice this usually means that there are Functor pointers in the
+ display list that are no longer valid.
+
+ TODO: Can we get webview off of this?
+@hide 
+*/
+stopDrawing : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-createTextureLayer'>/**Creates a new hardware layer. A hardware layer built by calling this
+</span> method will be treated as a texture layer, instead of as a render target.
+@return {Object {android.view.TextureLayer}} A hardware layer
+@hide 
+*/
+createTextureLayer : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-detachSurfaceTexture'>/**Detaches the layer's surface texture from the GL context and releases
+</span> the texture id
+@hide 
+*/
+detachSurfaceTexture : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-buildLayer'>/**
+</span>@hide 
+*/
+buildLayer : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-copyLayerInto'>/**
+</span>@hide 
+*/
+copyLayerInto : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-pushLayerUpdate'>/**Indicates that the specified hardware layer needs to be updated
+</span> as soon as possible.
+@param {Object {TextureLayer}} layer The hardware layer that needs an update
+@hide 
+*/
+pushLayerUpdate : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-onLayerDestroyed'>/**Tells the HardwareRenderer that the layer is destroyed. The renderer
+</span> should remove the layer from any update queues.
+@hide 
+*/
+onLayerDestroyed : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setFrameCallback'>/**
+</span>@hide 
+*/
+setFrameCallback : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-addRenderNode'>/**Adds a rendernode to the renderer which can be drawn and changed asynchronously to the
+</span> rendernode of the UI thread.
+@param {Object {RenderNode}} node       The node to add.
+@param {Boolean} placeFront If true, the render node will be placed in front of the content node,
+                   otherwise behind the content node.
+@hide 
+*/
+addRenderNode : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-removeRenderNode'>/**Only especially added render nodes can be removed.
+</span>@param {Object {RenderNode}} node The node which was added via addRenderNode which should get removed again.
+@hide 
+*/
+removeRenderNode : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-drawRenderNode'>/**Draws a particular render node. If the node is not the content node, only the additional
+</span> nodes will get drawn and the content remains untouched.
+@param {Object {RenderNode}} node The node to be drawn.
+@hide 
+*/
+drawRenderNode : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-loadSystemProperties'>/**Loads system properties used by the renderer. This method is invoked
+</span> whenever system properties are modified. Implementations can use this
+ to trigger live updates of the renderer based on properties.
+@return {Boolean} True if a property has changed.
+@hide 
+*/
+loadSystemProperties : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-dumpProfileInfo'>/**
+</span>@hide 
+*/
+dumpProfileInfo : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setContentDrawBounds'>/**To avoid unnecessary overdrawing of the main content all additionally passed render nodes
+</span> will be prevented to overdraw this area. It will be synchronized with the draw call.
+ This should be updated in the content view's draw call.
+@param {Number} left   The left side of the protected bounds.
+@param {Number} top    The top side of the protected bounds.
+@param {Number} right  The right side of the protected bounds.
+@param {Number} bottom The bottom side of the protected bounds.
+@hide 
+*/
+setContentDrawBounds : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setPictureCaptureCallback'>/**
+</span>@hide 
+*/
+setPictureCaptureCallback : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-isWideGamut'>/**
+</span>@hide 
+*/
+isWideGamut : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-invokeFunctor'>/**
+</span>@hide 
+*/
+invokeFunctor : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setFPSDivisor'>/**b/68769804: For low FPS experiments.
+</span>@hide 
+*/
+setFPSDivisor : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setContextPriority'>/**Changes the OpenGL context priority if IMG_context_priority extension is available. Must be
+</span> called before any OpenGL context is created.
+@param {Number} priority The priority to use. Must be one of EGL_CONTEXT_PRIORITY_* values.
+@hide 
+*/
+setContextPriority : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setHighContrastText'>/**Sets whether or not high contrast text rendering is enabled. The setting is global
+</span> but only affects content rendered after the change is made.
+@hide 
+*/
+setHighContrastText : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setIsolatedProcess'>/**If set RenderThread will avoid doing any IPC using instead a fake vsync &amp; DisplayInfo source
+</span>@hide 
+*/
+setIsolatedProcess : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setDebuggingEnabled'>/**If set extra graphics debugging abilities will be enabled such as dumping skp
+</span>@hide 
+*/
+setDebuggingEnabled : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-copySurfaceInto'>/**
+</span>@hide 
+*/
+copySurfaceInto : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-createHardwareBitmap'>/**Creates a {@link android.graphics.Bitmap.Config#HARDWARE} bitmap from the given
+</span> RenderNode. Note that the RenderNode should be created as a root node (so x/y of 0,0), and
+ not the RenderNode from a View.
+@hide 
+*/
+createHardwareBitmap : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-trimMemory'>/**Invoke this method when the system is running out of memory. This
+</span> method will attempt to recover as much memory as possible, based on
+ the specified hint.
+@param {Number} level Hint about the amount of memory that should be trimmed,
+              see {@link android.content.ComponentCallbacks}
+@hide 
+*/
+trimMemory : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-overrideProperty'>/**
+</span>@hide 
+*/
+overrideProperty : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setupDiskCache'>/**Sets the directory to use as a persistent storage for threaded rendering
+</span> resources.
+@param {Object {File}} cacheDir A directory the current process can write to
+@hide 
+*/
+setupDiskCache : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-setPackageName'>/**
+</span>@hide 
+*/
+setPackageName : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-disableVsync'>/**
+</span>@hide 
+*/
+disableVsync : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-method-preload'>/**Start render thread and initialize EGL or Vulkan.
+</span>
+ Initializing EGL involves loading and initializing the graphics driver. Some drivers take
+ several 10s of milliseconds to do this, so doing it on-demand when an app tries to render
+ its first frame adds directly to user-visible app launch latency.
+
+ Should only be called after GraphicsEnvironment.chooseDriver().
+@hide 
+*/
+preload : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

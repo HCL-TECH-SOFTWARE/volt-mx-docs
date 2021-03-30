@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-NfcBarcode'>/**@class android.nfc.tech.NfcBarcode
+</span>@extends android.nfc.tech.BasicTagTechnology
+
+ Provides access to tags containing just a barcode.
+
+ &lt;p&gt;Acquire an {@link android.nfc.tech.NfcBarcode} object using {@link #get}.
+
+*/
+var NfcBarcode = {
+
+<span id='android-nfc-tech-NfcBarcode-property-TYPE_KOVIO'>/**Kovio Tags */
+</span>TYPE_KOVIO : &quot;1&quot;,
+<span id='android-nfc-tech-NfcBarcode-property-TYPE_UNKNOWN'>/***/
+</span>TYPE_UNKNOWN : &quot;-1&quot;,
+<span id='android-nfc-tech-NfcBarcode-property-EXTRA_BARCODE_TYPE'>/**@hide */
+</span>EXTRA_BARCODE_TYPE : &quot;barcodetype&quot;,
+<span id='android-nfc-tech-NfcBarcode-method-get'>/**Get an instance of {@link android.nfc.tech.NfcBarcode} for the given tag.
+</span>
+ &lt;p&gt;Returns null if {@link android.nfc.tech.NfcBarcode} was not enumerated in {@link Tag#getTechList}.
+
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@param {Object {Tag}} tag an NfcBarcode compatible tag
+@return {Object {android.nfc.tech.NfcBarcode}} NfcBarcode object
+*/
+get : function(  ) {},
+
+<span id='android-nfc-tech-NfcBarcode-method-getType'>/**Returns the NFC Barcode tag type.
+</span>
+ &lt;p&gt;Currently only one of {@link #TYPE_KOVIO} or {@link #TYPE_UNKNOWN}.
+
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} the NFC Barcode tag type
+*/
+getType : function(  ) {},
+
+<span id='android-nfc-tech-NfcBarcode-method-getBarcode'>/**Returns the barcode of an NfcBarcode tag.
+</span>
+ &lt;p&gt; Tags of {@link #TYPE_KOVIO} return 16 bytes:
+     &lt;ul&gt;
+     &lt;p&gt; The first byte is 0x80 ORd with a manufacturer ID, corresponding
+       to ISO/IEC 7816-6.
+     &lt;p&gt; The second byte describes the payload data format. Defined data
+       format types include the following:&lt;ul&gt;
+       &lt;li&gt;0x00: Reserved for manufacturer assignment&lt;/li&gt;
+       &lt;li&gt;0x01: 96-bit URL with &quot;http://www.&quot; prefix&lt;/li&gt;
+       &lt;li&gt;0x02: 96-bit URL with &quot;https://www.&quot; prefix&lt;/li&gt;
+       &lt;li&gt;0x03: 96-bit URL with &quot;http://&quot; prefix&lt;/li&gt;
+       &lt;li&gt;0x04: 96-bit URL with &quot;https://&quot; prefix&lt;/li&gt;
+       &lt;li&gt;0x05: 96-bit GS1 EPC&lt;/li&gt;
+       &lt;li&gt;0x06-0xFF: reserved&lt;/li&gt;
+       &lt;/ul&gt;
+     &lt;p&gt;The following 12 bytes are payload:&lt;ul&gt;
+       &lt;li&gt; In case of a URL payload, the payload is encoded in US-ASCII,
+            following the limitations defined in RFC3987.
+            {@see &lt;a href=&quot;http://www.ietf.org/rfc/rfc3987.txt&quot;&gt;RFC 3987&lt;/a&gt;}&lt;/li&gt;
+       &lt;li&gt; In case of GS1 EPC data, see &lt;a href=&quot;http://www.gs1.org/gsmp/kc/epcglobal/tds/&quot;&gt;
+            GS1 Electronic Product Code (EPC) Tag Data Standard (TDS)&lt;/a&gt; for more details.
+       &lt;/li&gt;
+     &lt;/ul&gt;
+     &lt;p&gt;The last 2 bytes comprise the CRC.
+     &lt;/ul&gt;
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} a byte array containing the barcode
+@see &lt;a href=&quot;http://www.thinfilm.no/docs/thinfilm-nfc-barcode-datasheet.pdf&quot;&gt;
+      Thinfilm NFC Barcode tag specification (previously Kovio NFC Barcode)&lt;/a&gt;
+@see &lt;a href=&quot;http://www.thinfilm.no/docs/thinfilm-nfc-barcode-data-format.pdf&quot;&gt;
+      Thinfilm NFC Barcode data format (previously Kovio NFC Barcode)&lt;/a&gt;
+*/
+getBarcode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

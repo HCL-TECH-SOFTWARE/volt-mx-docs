@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-CalendarContract-CalendarAlerts'>/**@class android.provider.CalendarContract.CalendarAlerts
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.CalendarContract.CalendarAlertsColumns
+
+ implements android.provider.CalendarContract.EventsColumns
+
+ implements android.provider.CalendarContract.CalendarColumns
+
+@extends java.lang.Object
+
+ Fields and helpers for accessing calendar alerts information. These
+ fields are for tracking which alerts have been fired. Scheduled alarms
+ will generate an intent using {@link #ACTION_EVENT_REMINDER}. Apps that
+ receive this action may update the {@link #STATE} for the reminder when
+ they have finished handling it. Apps that have their notifications
+ disabled should not modify the table to ensure that they do not conflict
+ with another app that is generating a notification. In general, apps
+ should not need to write to this table directly except to update the
+ state of a reminder.
+*/
+var CalendarAlerts = {
+
+<span id='android-provider-CalendarContract-CalendarAlerts-property-TABLE_NAME'>/** @hide
+</span>*/
+TABLE_NAME : &quot;CalendarAlerts&quot;,
+<span id='android-provider-CalendarContract-CalendarAlerts-property-CONTENT_URI'>/** The Uri for querying calendar alert information
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-CalendarAlerts-property-CONTENT_URI_BY_INSTANCE'>/** This URI is for grouping the query results by event_id and begin
+</span> time.  This will return one result per instance of an event.  So
+ events with multiple alarms will appear just once, but multiple
+ instances of a repeating event will show up multiple times.
+*/
+CONTENT_URI_BY_INSTANCE : &quot;null&quot;,
+<span id='android-provider-CalendarContract-CalendarAlerts-method-insert'>/**Helper for inserting an alarm time associated with an event TODO move
+</span> to Provider
+@hide 
+*/
+insert : function(  ) {},
+
+<span id='android-provider-CalendarContract-CalendarAlerts-method-findNextAlarmTime'>/**Finds the next alarm after (or equal to) the given time and returns
+</span> the time of that alarm or -1 if no such alarm exists. This is a
+ blocking call and should not be done on the UI thread. TODO move to
+ provider
+@param {Object {ContentResolver}} cr the ContentResolver
+@param {Number} millis the time in UTC milliseconds
+@return {Number} the next alarm time greater than or equal to &quot;millis&quot;, or -1
+         if no such alarm exists.
+@hide 
+*/
+findNextAlarmTime : function(  ) {},
+
+<span id='android-provider-CalendarContract-CalendarAlerts-method-rescheduleMissedAlarms'>/**Searches the CalendarAlerts table for alarms that should have fired
+</span> but have not and then reschedules them. This method can be called at
+ boot time to restore alarms that may have been lost due to a phone
+ reboot. TODO move to provider
+@param {Object {ContentResolver}} cr the ContentResolver
+@param {Object {Context}} context the Context
+@param {Object {AlarmManager}} manager the AlarmManager
+@hide 
+*/
+rescheduleMissedAlarms : function(  ) {},
+
+<span id='android-provider-CalendarContract-CalendarAlerts-method-scheduleAlarm'>/**Schedules an alarm intent with the system AlarmManager that will
+</span> notify listeners when a reminder should be fired. The provider will
+ keep scheduled reminders up to date but apps may use this to
+ implement snooze functionality without modifying the reminders table.
+ Scheduled alarms will generate an intent using
+ {@link #ACTION_EVENT_REMINDER}. TODO Move to provider
+@param {Object {Context}} context A context for referencing system resources
+@param {Object {AlarmManager}} manager The AlarmManager to use or null
+@param {Number} alarmTime The time to fire the intent in UTC millis since
+            epoch
+@hide 
+*/
+scheduleAlarm : function(  ) {},
+
+<span id='android-provider-CalendarContract-CalendarAlerts-method-alarmExists'>/**Searches for an entry in the CalendarAlerts table that matches the
+</span> given event id, begin time and alarm time. If one is found then this
+ alarm already exists and this method returns true. TODO Move to
+ provider
+@param {Object {ContentResolver}} cr the ContentResolver
+@param {Number} eventId the event id to match
+@param {Number} begin the start time of the event in UTC millis
+@param {Number} alarmTime the alarm time of the event in UTC millis
+@return {Boolean} true if there is already an alarm for the given event with
+         the same start time and alarm time.
+@hide 
+*/
+alarmExists : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

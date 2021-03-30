@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-radio-ProgramSelector'>/**@class android.hardware.radio.ProgramSelector
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A set of identifiers necessary to tune to a given station.
+
+ This can hold various identifiers, like
+ - AM/FM frequency
+ - HD Radio subchannel
+ - DAB channel info
+
+ The primary ID uniquely identifies a station and can be used for equality
+ check. The secondary IDs are supplementary and can speed up tuning process,
+ but the primary ID is sufficient (ie. after a full band scan).
+
+ Two selectors with different secondary IDs, but the same primary ID are
+ considered equal. In particular, secondary IDs vector may get updated for
+ an entry on the program list (ie. when a better frequency for a given
+ station is found).
+
+ The primaryId of a given programType MUST be of a specific type:
+ - AM, FM: RDS_PI if the station broadcasts RDS, AMFM_FREQUENCY otherwise;
+ - AM_HD, FM_HD: HD_STATION_ID_EXT;
+ - DAB: DAB_SIDECC;
+ - DRMO: DRMO_SERVICE_ID;
+ - SXM: SXM_SERVICE_ID;
+ - VENDOR: VENDOR_PRIMARY.
+ @hide
+*/
+var ProgramSelector = {
+
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_INVALID'>/**Invalid program type.
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_INVALID : &quot;0&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_AM'>/**Analogue AM radio (with or without RDS).
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_AM : &quot;1&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_FM'>/**analogue FM radio (with or without RDS).
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_FM : &quot;2&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_AM_HD'>/**AM HD Radio.
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_AM_HD : &quot;3&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_FM_HD'>/**FM HD Radio.
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_FM_HD : &quot;4&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_DAB'>/**Digital audio broadcasting.
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_DAB : &quot;5&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_DRMO'>/**Digital Radio Mondiale.
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_DRMO : &quot;6&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_SXM'>/**SiriusXM Satellite Radio.
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_SXM : &quot;7&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_VENDOR_START'>/**Vendor-specific, not synced across devices.
+</span> @deprecated use {@link ProgramIdentifier} instead
+*/
+PROGRAM_TYPE_VENDOR_START : &quot;1000&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-PROGRAM_TYPE_VENDOR_END'>/**@deprecated use {@link ProgramIdentifier} instead */
+</span>PROGRAM_TYPE_VENDOR_END : &quot;1999&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_INVALID'>/***/
+</span>IDENTIFIER_TYPE_INVALID : &quot;0&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_AMFM_FREQUENCY'>/**kHz */
+</span>IDENTIFIER_TYPE_AMFM_FREQUENCY : &quot;1&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_RDS_PI'>/**16bit */
+</span>IDENTIFIER_TYPE_RDS_PI : &quot;2&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_HD_STATION_ID_EXT'>/** 64bit compound primary identifier for HD Radio.
+</span>
+ Consists of (from the LSB):
+ - 32bit: Station ID number;
+ - 4bit: HD_SUBCHANNEL;
+ - 18bit: AMFM_FREQUENCY.
+ The remaining bits should be set to zeros when writing on the chip side
+ and ignored when read.
+*/
+IDENTIFIER_TYPE_HD_STATION_ID_EXT : &quot;3&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_HD_SUBCHANNEL'>/** HD Radio subchannel - a value of range 0-7.
+</span>
+ The subchannel index is 0-based (where 0 is MPS and 1..7 are SPS),
+ as opposed to HD Radio standard (where it's 1-based).
+
+ @deprecated use IDENTIFIER_TYPE_HD_STATION_ID_EXT instead
+*/
+IDENTIFIER_TYPE_HD_SUBCHANNEL : &quot;4&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_HD_STATION_NAME'>/** 64bit additional identifier for HD Radio.
+</span>
+ Due to Station ID abuse, some HD_STATION_ID_EXT identifiers may be not
+ globally unique. To provide a best-effort solution, a short version of
+ station name may be carried as additional identifier and may be used
+ by the tuner hardware to double-check tuning.
+
+ The name is limited to the first 8 A-Z0-9 characters (lowercase letters
+ must be converted to uppercase). Encoded in little-endian ASCII:
+ the first character of the name is the LSB.
+
+ For example: &quot;Abc&quot; is encoded as 0x434241.
+*/
+IDENTIFIER_TYPE_HD_STATION_NAME : &quot;10004&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DAB_SIDECC'>/** @see {@link IDENTIFIER_TYPE_DAB_SID_EXT}
+</span>*/
+IDENTIFIER_TYPE_DAB_SIDECC : &quot;5&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DAB_SID_EXT'>/** 28bit compound primary identifier for Digital Audio Broadcasting.
+</span>
+ Consists of (from the LSB):
+ - 16bit: SId;
+ - 8bit: ECC code;
+ - 4bit: SCIdS.
+
+ SCIdS (Service Component Identifier within the Service) value
+ of 0 represents the main service, while 1 and above represents
+ secondary services.
+
+ The remaining bits should be set to zeros when writing on the chip side
+ and ignored when read.
+*/
+IDENTIFIER_TYPE_DAB_SID_EXT : &quot;5&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DAB_ENSEMBLE'>/**16bit */
+</span>IDENTIFIER_TYPE_DAB_ENSEMBLE : &quot;6&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DAB_SCID'>/**12bit */
+</span>IDENTIFIER_TYPE_DAB_SCID : &quot;7&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DAB_FREQUENCY'>/**kHz */
+</span>IDENTIFIER_TYPE_DAB_FREQUENCY : &quot;8&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DRMO_SERVICE_ID'>/**24bit */
+</span>IDENTIFIER_TYPE_DRMO_SERVICE_ID : &quot;9&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DRMO_FREQUENCY'>/**kHz */
+</span>IDENTIFIER_TYPE_DRMO_FREQUENCY : &quot;10&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_DRMO_MODULATION'>/** 1: AM, 2:FM
+</span> @deprecated use {@link IDENTIFIER_TYPE_DRMO_FREQUENCY} instead
+*/
+IDENTIFIER_TYPE_DRMO_MODULATION : &quot;11&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_SXM_SERVICE_ID'>/**32bit */
+</span>IDENTIFIER_TYPE_SXM_SERVICE_ID : &quot;12&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_SXM_CHANNEL'>/**0-999 range */
+</span>IDENTIFIER_TYPE_SXM_CHANNEL : &quot;13&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_VENDOR_START'>/** Primary identifier for vendor-specific radio technology.
+</span> The value format is determined by a vendor.
+
+ It must not be used in any other programType than corresponding VENDOR
+ type between VENDOR_START and VENDOR_END (eg. identifier type 1015 must
+ not be used in any program type other than 1015).
+*/
+IDENTIFIER_TYPE_VENDOR_START : &quot;1000&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_VENDOR_END'>/** @see {@link IDENTIFIER_TYPE_VENDOR_START}
+</span>*/
+IDENTIFIER_TYPE_VENDOR_END : &quot;1999&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_VENDOR_PRIMARY_START'>/** @deprecated use {@link IDENTIFIER_TYPE_VENDOR_START} instead
+</span>*/
+IDENTIFIER_TYPE_VENDOR_PRIMARY_START : &quot;1000&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-IDENTIFIER_TYPE_VENDOR_PRIMARY_END'>/** @deprecated use {@link IDENTIFIER_TYPE_VENDOR_END} instead
+</span>*/
+IDENTIFIER_TYPE_VENDOR_PRIMARY_END : &quot;1999&quot;,
+<span id='android-hardware-radio-ProgramSelector-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-hardware-radio-ProgramSelector-method-getProgramType'>/**Type of a radio technology.
+</span>@return {Number} program type.
+@deprecated use {@link getPrimaryId} instead
+*/
+getProgramType : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-getPrimaryId'>/**Primary program identifier uniquely identifies a station and is used to
+</span> determine equality between two ProgramSelectors.
+@return {Object {android.hardware.radio.ProgramSelector.Identifier}} primary identifier.
+*/
+getPrimaryId : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-getSecondaryIds'>/**Secondary program identifier is not required for tuning, but may make it
+</span> faster or more reliable.
+@return {Object {android.hardware.radio.ProgramSelector.Identifier}} secondary identifier list, must not be modified.
+*/
+getSecondaryIds : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-getFirstId'>/**Looks up an identifier of a given type (either primary or secondary).
+</span>
+ If there are multiple identifiers if a given type, then first in order (where primary id is
+ before any secondary) is selected.
+@param {Number} type type of identifier.
+@return {Number} identifier value, if found.
+@throws IllegalArgumentException, if not found.
+*/
+getFirstId : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-getAllIds'>/**Looks up all identifier of a given type (either primary or secondary).
+</span>
+ Some identifiers may be provided multiple times, for example
+ IDENTIFIER_TYPE_AMFM_FREQUENCY for FM Alternate Frequencies.
+@param {Number} type type of identifier.
+@return {Object {android.hardware.radio.ProgramSelector.Identifier}} a list of identifiers, generated on each call. May be modified.
+*/
+getAllIds : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-getVendorIds'>/**Vendor identifiers are passed as-is to the HAL implementation,
+</span> preserving elements order.
+@return {Number} an array of vendor identifiers, must not be modified.
+@deprecated for HAL 1.x compatibility;
+             HAL 2.x uses standard primary/secondary lists for vendor IDs
+*/
+getVendorIds : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-withSecondaryPreferred'>/**Creates an equivalent ProgramSelector with a given secondary identifier preferred.
+</span>
+ Used to point to a specific physical identifier for technologies that may broadcast the same
+ program on different channels. For example, with a DAB program broadcasted over multiple
+ ensembles, the radio hardware may select the one with the strongest signal. The UI may select
+ preferred ensemble though, so the radio hardware may try to use it in the first place.
+
+ This is a best-effort hint for the tuner, not a guaranteed behavior.
+
+ Setting the given secondary identifier as preferred means filtering out other secondary
+ identifiers of its type and adding it to the list.
+@param {Object {ProgramSelector.Identifier}} preferred preferred secondary identifier
+@return {Object {android.hardware.radio.ProgramSelector}} a new ProgramSelector with a given secondary identifier preferred
+*/
+withSecondaryPreferred : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-createAmFmSelector'>/**Builds new ProgramSelector for AM/FM frequency.
+</span>@param {Number} band the band.
+@param {Number} frequencyKhz the frequency in kHz.
+@return {Object {android.hardware.radio.ProgramSelector}} new ProgramSelector object representing given frequency.
+@throws IllegalArgumentException if provided frequency is out of bounds.
+*/
+createAmFmSelector : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-createAmFmSelector'>/**Builds new ProgramSelector for AM/FM frequency.
+</span>
+ This method variant supports HD Radio subchannels, but it's undesirable to
+ select them manually. Instead, the value should be retrieved from program list.
+@param {Number} band the band.
+@param {Number} frequencyKhz the frequency in kHz.
+@param {Number} subChannel 1-based HD Radio subchannel.
+@return {Object {android.hardware.radio.ProgramSelector}} new ProgramSelector object representing given frequency.
+@throws IllegalArgumentException if provided frequency is out of bounds,
+         or tried setting a subchannel for analog AM/FM.
+*/
+createAmFmSelector : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-hardware-radio-ProgramSelector-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

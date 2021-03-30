@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-NetworkCapabilities'>/**@class android.net.NetworkCapabilities
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Representation of the capabilities of an active network. Instances are
+ typically obtained through
+ {@link android.net.NetworkCallback#onCapabilitiesChanged(android.net.Network, android.net.NetworkCapabilities)}
+ or {@link android.net.ConnectivityManager#getNetworkCapabilities(Network)}.
+ &lt;p&gt;
+ This replaces the old {@link android.net.ConnectivityManager#TYPE_MOBILE} method of
+ network selection. Rather than indicate a need for Wi-Fi because an
+ application needs high bandwidth and risk obsolescence when a new, fast
+ network appears (like LTE), the application should specify it needs high
+ bandwidth. Similarly if an application needs an unmetered network for a bulk
+ transfer it can specify that rather than assuming all cellular based
+ connections are metered and all Wi-Fi based connections are not.
+*/
+var NetworkCapabilities = {
+
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_MMS'>/** Indicates this is a network that has the ability to reach the
+</span> carrier's MMSC for sending and receiving MMS messages.
+*/
+NET_CAPABILITY_MMS : &quot;0&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_SUPL'>/** Indicates this is a network that has the ability to reach the carrier's
+</span> SUPL server, used to retrieve GPS information.
+*/
+NET_CAPABILITY_SUPL : &quot;1&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_DUN'>/** Indicates this is a network that has the ability to reach the carrier's
+</span> DUN or tethering gateway.
+*/
+NET_CAPABILITY_DUN : &quot;2&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_FOTA'>/** Indicates this is a network that has the ability to reach the carrier's
+</span> FOTA portal, used for over the air updates.
+*/
+NET_CAPABILITY_FOTA : &quot;3&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_IMS'>/** Indicates this is a network that has the ability to reach the carrier's
+</span> IMS servers, used for network registration and signaling.
+*/
+NET_CAPABILITY_IMS : &quot;4&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_CBS'>/** Indicates this is a network that has the ability to reach the carrier's
+</span> CBS servers, used for carrier specific services.
+*/
+NET_CAPABILITY_CBS : &quot;5&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_WIFI_P2P'>/** Indicates this is a network that has the ability to reach a Wi-Fi direct
+</span> peer.
+*/
+NET_CAPABILITY_WIFI_P2P : &quot;6&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_IA'>/** Indicates this is a network that has the ability to reach a carrier's
+</span> Initial Attach servers.
+*/
+NET_CAPABILITY_IA : &quot;7&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_RCS'>/** Indicates this is a network that has the ability to reach a carrier's
+</span> RCS servers, used for Rich Communication Services.
+*/
+NET_CAPABILITY_RCS : &quot;8&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_XCAP'>/** Indicates this is a network that has the ability to reach a carrier's
+</span> XCAP servers, used for configuration and control.
+*/
+NET_CAPABILITY_XCAP : &quot;9&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_EIMS'>/** Indicates this is a network that has the ability to reach a carrier's
+</span> Emergency IMS servers or other services, used for network signaling
+ during emergency calls.
+*/
+NET_CAPABILITY_EIMS : &quot;10&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_NOT_METERED'>/** Indicates that this network is unmetered.
+</span>*/
+NET_CAPABILITY_NOT_METERED : &quot;11&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_INTERNET'>/** Indicates that this network should be able to reach the internet.
+</span>*/
+NET_CAPABILITY_INTERNET : &quot;12&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_NOT_RESTRICTED'>/** Indicates that this network is available for general use.  If this is not set
+</span> applications should not attempt to communicate on this network.  Note that this
+ is simply informative and not enforcement - enforcement is handled via other means.
+ Set by default.
+*/
+NET_CAPABILITY_NOT_RESTRICTED : &quot;13&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_TRUSTED'>/** Indicates that the user has indicated implicit trust of this network.  This
+</span> generally means it's a sim-selected carrier, a plugged in ethernet, a paired
+ BT device or a wifi the user asked to connect to.  Untrusted networks
+ are probably limited to unknown wifi AP.  Set by default.
+*/
+NET_CAPABILITY_TRUSTED : &quot;14&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_NOT_VPN'>/** Indicates that this network is not a VPN.  This capability is set by default and should be
+</span> explicitly cleared for VPN networks.
+*/
+NET_CAPABILITY_NOT_VPN : &quot;15&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_VALIDATED'>/** Indicates that connectivity on this network was successfully validated. For example, for a
+</span> network with NET_CAPABILITY_INTERNET, it means that Internet connectivity was successfully
+ detected.
+*/
+NET_CAPABILITY_VALIDATED : &quot;16&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_CAPTIVE_PORTAL'>/** Indicates that this network was found to have a captive portal in place last time it was
+</span> probed.
+*/
+NET_CAPABILITY_CAPTIVE_PORTAL : &quot;17&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_NOT_ROAMING'>/** Indicates that this network is not roaming.
+</span>*/
+NET_CAPABILITY_NOT_ROAMING : &quot;18&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_FOREGROUND'>/** Indicates that this network is available for use by apps, and not a network that is being
+</span> kept up in the background to facilitate fast network switching.
+*/
+NET_CAPABILITY_FOREGROUND : &quot;19&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_NOT_CONGESTED'>/** Indicates that this network is not congested.
+</span> &lt;p&gt;
+ When a network is congested, applications should defer network traffic
+ that can be done at a later time, such as uploading analytics.
+*/
+NET_CAPABILITY_NOT_CONGESTED : &quot;20&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_NOT_SUSPENDED'>/** Indicates that this network is not currently suspended.
+</span> &lt;p&gt;
+ When a network is suspended, the network's IP addresses and any connections
+ established on the network remain valid, but the network is temporarily unable
+ to transfer data. This can happen, for example, if a cellular network experiences
+ a temporary loss of signal, such as when driving through a tunnel, etc.
+ A network with this capability is not suspended, so is expected to be able to
+ transfer data.
+*/
+NET_CAPABILITY_NOT_SUSPENDED : &quot;21&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_OEM_PAID'>/** Indicates that traffic that goes through this network is paid by oem. For example,
+</span> this network can be used by system apps to upload telemetry data.
+ @hide
+*/
+NET_CAPABILITY_OEM_PAID : &quot;22&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_MCX'>/** Indicates this is a network that has the ability to reach a carrier's Mission Critical
+</span> servers.
+*/
+NET_CAPABILITY_MCX : &quot;23&quot;,
+<span id='android-net-NetworkCapabilities-property-NET_CAPABILITY_PARTIAL_CONNECTIVITY'>/** Indicates that this network was tested to only provide partial connectivity.
+</span> @hide
+*/
+NET_CAPABILITY_PARTIAL_CONNECTIVITY : &quot;24&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_CELLULAR'>/** Indicates this network uses a Cellular transport.
+</span>*/
+TRANSPORT_CELLULAR : &quot;0&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_WIFI'>/** Indicates this network uses a Wi-Fi transport.
+</span>*/
+TRANSPORT_WIFI : &quot;1&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_BLUETOOTH'>/** Indicates this network uses a Bluetooth transport.
+</span>*/
+TRANSPORT_BLUETOOTH : &quot;2&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_ETHERNET'>/** Indicates this network uses an Ethernet transport.
+</span>*/
+TRANSPORT_ETHERNET : &quot;3&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_VPN'>/** Indicates this network uses a VPN transport.
+</span>*/
+TRANSPORT_VPN : &quot;4&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_WIFI_AWARE'>/** Indicates this network uses a Wi-Fi Aware transport.
+</span>*/
+TRANSPORT_WIFI_AWARE : &quot;5&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_LOWPAN'>/** Indicates this network uses a LoWPAN transport.
+</span>*/
+TRANSPORT_LOWPAN : &quot;6&quot;,
+<span id='android-net-NetworkCapabilities-property-TRANSPORT_TEST'>/** Indicates this network uses a Test-only virtual interface as a transport.
+</span>
+ @hide
+*/
+TRANSPORT_TEST : &quot;7&quot;,
+<span id='android-net-NetworkCapabilities-property-MIN_TRANSPORT'>/**@hide */
+</span>MIN_TRANSPORT : &quot;0&quot;,
+<span id='android-net-NetworkCapabilities-property-MAX_TRANSPORT'>/**@hide */
+</span>MAX_TRANSPORT : &quot;7&quot;,
+<span id='android-net-NetworkCapabilities-property-LINK_BANDWIDTH_UNSPECIFIED'>/** Value indicating that link bandwidth is unspecified.
+</span> @hide
+*/
+LINK_BANDWIDTH_UNSPECIFIED : &quot;0&quot;,
+<span id='android-net-NetworkCapabilities-property-SIGNAL_STRENGTH_UNSPECIFIED'>/** Magic value that indicates no signal strength provided. A request specifying this value is
+</span> always satisfied.
+*/
+SIGNAL_STRENGTH_UNSPECIFIED : &quot;-2147483648&quot;,
+<span id='android-net-NetworkCapabilities-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-NetworkCapabilities-method-clearAll'>/**Completely clears the contents of this object, removing even the capabilities that are set
+</span> by default when the object is constructed.
+@hide 
+*/
+clearAll : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-set'>/**Set all contents of this object to the contents of a NetworkCapabilities.
+</span>@hide 
+*/
+set : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-addCapability'>/**Adds the given capability to this {@code NetworkCapability} instance.
+</span> Multiple capabilities may be applied sequentially.  Note that when searching
+ for a network to satisfy a request, all capabilities requested must be satisfied.
+ &lt;p&gt;
+ If the given capability was previously added to the list of unwanted capabilities
+ then the capability will also be removed from the list of unwanted capabilities.
+@param {Number} capability the capability to be added.
+@return {Object {android.net.NetworkCapabilities}} This NetworkCapabilities instance, to facilitate chaining.
+@hide 
+*/
+addCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-addUnwantedCapability'>/**Adds the given capability to the list of unwanted capabilities of this
+</span> {@code NetworkCapability} instance.  Multiple unwanted capabilities may be applied
+ sequentially.  Note that when searching for a network to satisfy a request, the network
+ must not contain any capability from unwanted capability list.
+ &lt;p&gt;
+ If the capability was previously added to the list of required capabilities (for
+ example, it was there by default or added using {@link #addCapability}(int) method), then
+ it will be removed from the list of required capabilities as well.
+@see #addCapability(int)
+@hide 
+*/
+addUnwantedCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-removeCapability'>/**Removes (if found) the given capability from this {@code NetworkCapability} instance.
+</span> &lt;p&gt;
+ Note that this method removes capabilities that were added via {@link #addCapability}(int),
+ {@link #addUnwantedCapability}(int) or {@link #setCapabilities(int[], int[])} .
+@param {Number} capability the capability to be removed.
+@return {Object {android.net.NetworkCapabilities}} This NetworkCapabilities instance, to facilitate chaining.
+@hide 
+*/
+removeCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setCapability'>/**Sets (or clears) the given capability on this {@link android.net.NetworkCapabilities}
+</span> instance.
+@hide 
+*/
+setCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getCapabilities'>/**Gets all the capabilities set on this {@code NetworkCapability} instance.
+</span>@return {Number} an array of capability values for this instance.
+@hide 
+*/
+getCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getUnwantedCapabilities'>/**Gets all the unwanted capabilities set on this {@code NetworkCapability} instance.
+</span>@return {Number} an array of unwanted capability values for this instance.
+@hide 
+*/
+getUnwantedCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setCapabilities'>/**Sets all the capabilities set on this {@code NetworkCapability} instance.
+</span> This overwrites any existing capabilities.
+@hide 
+*/
+setCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setCapabilities'>/**
+</span>@deprecated use {@link #setCapabilities(int[], int[])}
+@hide 
+*/
+setCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-hasCapability'>/**Tests for the presence of a capability on this instance.
+</span>@param {Number} capability the capabilities to be tested for.
+@return {Boolean} {@code true} if set on this instance.
+*/
+hasCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-hasUnwantedCapability'>/**
+</span>@hide 
+*/
+hasUnwantedCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-hasConnectivityManagedCapability'>/**Check if this NetworkCapabilities has system managed capabilities or not.
+</span>@hide 
+*/
+hasConnectivityManagedCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-describeFirstNonRequestableCapability'>/**Convenience function that returns a human-readable description of the first mutable
+</span> capability we find. Used to present an error message to apps that request mutable
+ capabilities.
+@hide 
+*/
+describeFirstNonRequestableCapability : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-equalsNetCapabilities'>/**
+</span>@hide 
+*/
+equalsNetCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-maybeMarkCapabilitiesRestricted'>/**Removes the NET_CAPABILITY_NOT_RESTRICTED capability if all the capabilities it provides are
+</span> typically provided by restricted networks.
+
+ TODO: consider:
+ - Renaming it to guessRestrictedCapability and make it set the
+   restricted capability bit in addition to clearing it.
+@hide 
+*/
+maybeMarkCapabilitiesRestricted : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-isValidTransport'>/**
+</span>@hide 
+*/
+isValidTransport : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-addTransportType'>/**Adds the given transport type to this {@code NetworkCapability} instance.
+</span> Multiple transports may be applied sequentially.  Note that when searching
+ for a network to satisfy a request, any listed in the request will satisfy the request.
+ For example {@code TRANSPORT_WIFI} and {@code TRANSPORT_ETHERNET} added to a
+ {@code NetworkCapabilities} would cause either a Wi-Fi network or an Ethernet network
+ to be selected.  This is logically different than
+ {@code NetworkCapabilities.NET_CAPABILITY_*} listed above.
+@param {Number} transportType the transport type to be added.
+@return {Object {android.net.NetworkCapabilities}} This NetworkCapabilities instance, to facilitate chaining.
+@hide 
+*/
+addTransportType : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-removeTransportType'>/**Removes (if found) the given transport from this {@code NetworkCapability} instance.
+</span>@param {Number} transportType the transport type to be removed.
+@return {Object {android.net.NetworkCapabilities}} This NetworkCapabilities instance, to facilitate chaining.
+@hide 
+*/
+removeTransportType : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setTransportType'>/**Sets (or clears) the given transport on this {@link android.net.NetworkCapabilities}
+</span> instance.
+@hide 
+*/
+setTransportType : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getTransportTypes'>/**Gets all the transports set on this {@code NetworkCapability} instance.
+</span>@return {Number} an array of transport type values for this instance.
+@hide 
+*/
+getTransportTypes : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setTransportTypes'>/**Sets all the transports set on this {@code NetworkCapability} instance.
+</span> This overwrites any existing transports.
+@hide 
+*/
+setTransportTypes : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-hasTransport'>/**Tests for the presence of a transport on this instance.
+</span>@param {Number} transportType the transport type to be tested for.
+@return {Boolean} {@code true} if set on this instance.
+*/
+hasTransport : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-equalsTransportTypes'>/**
+</span>@hide 
+*/
+equalsTransportTypes : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setEstablishingVpnAppUid'>/**Set the UID of the managing app.
+</span>@hide 
+*/
+setEstablishingVpnAppUid : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getEstablishingVpnAppUid'>/**
+</span>@hide 
+*/
+getEstablishingVpnAppUid : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setLinkUpstreamBandwidthKbps'>/**Sets the upstream bandwidth for this network in Kbps.  This always only refers to
+</span> the estimated first hop transport bandwidth.
+ &lt;p&gt;
+ Note that when used to request a network, this specifies the minimum acceptable.
+ When received as the state of an existing network this specifies the typical
+ first hop bandwidth expected.  This is never measured, but rather is inferred
+ from technology type and other link parameters.  It could be used to differentiate
+ between very slow 1xRTT cellular links and other faster networks or even between
+ 802.11b vs 802.11AC wifi technologies.  It should not be used to differentiate between
+ fast backhauls and slow backhauls.
+@param {Number} upKbps the estimated first hop upstream (device to network) bandwidth.
+@hide 
+*/
+setLinkUpstreamBandwidthKbps : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getLinkUpstreamBandwidthKbps'>/**Retrieves the upstream bandwidth for this network in Kbps.  This always only refers to
+</span> the estimated first hop transport bandwidth.
+@return {Number} The estimated first hop upstream (device to network) bandwidth.
+*/
+getLinkUpstreamBandwidthKbps : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setLinkDownstreamBandwidthKbps'>/**Sets the downstream bandwidth for this network in Kbps.  This always only refers to
+</span> the estimated first hop transport bandwidth.
+ &lt;p&gt;
+ Note that when used to request a network, this specifies the minimum acceptable.
+ When received as the state of an existing network this specifies the typical
+ first hop bandwidth expected.  This is never measured, but rather is inferred
+ from technology type and other link parameters.  It could be used to differentiate
+ between very slow 1xRTT cellular links and other faster networks or even between
+ 802.11b vs 802.11AC wifi technologies.  It should not be used to differentiate between
+ fast backhauls and slow backhauls.
+@param {Number} downKbps the estimated first hop downstream (network to device) bandwidth.
+@hide 
+*/
+setLinkDownstreamBandwidthKbps : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getLinkDownstreamBandwidthKbps'>/**Retrieves the downstream bandwidth for this network in Kbps.  This always only refers to
+</span> the estimated first hop transport bandwidth.
+@return {Number} The estimated first hop downstream (network to device) bandwidth.
+*/
+getLinkDownstreamBandwidthKbps : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-minBandwidth'>/**
+</span>@hide 
+*/
+minBandwidth : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-maxBandwidth'>/**
+</span>@hide 
+*/
+maxBandwidth : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setNetworkSpecifier'>/**Sets the optional bearer specific network specifier.
+</span> This has no meaning if a single transport is also not specified, so calling
+ this without a single transport set will generate an exception, as will
+ subsequently adding or removing transports after this is set.
+ &lt;/p&gt;
+@param {Object {NetworkSpecifier}} networkSpecifier A concrete, parcelable framework class that extends
+                         NetworkSpecifier.
+@return {Object {android.net.NetworkCapabilities}} This NetworkCapabilities instance, to facilitate chaining.
+@hide 
+*/
+setNetworkSpecifier : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setTransportInfo'>/**Sets the optional transport specific information.
+</span>@param {Object {TransportInfo}} transportInfo A concrete, parcelable framework class that extends
+ {@link TransportInfo}.
+@return {Object {android.net.NetworkCapabilities}} This NetworkCapabilities instance, to facilitate chaining.
+@hide 
+*/
+setTransportInfo : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getNetworkSpecifier'>/**Gets the optional bearer specific network specifier. May be {@code null} if not set.
+</span>@return {Object {android.net.NetworkSpecifier}} The optional {@link NetworkSpecifier} specifying the bearer specific network
+         specifier or {@code null}. See {@link #setNetworkSpecifier}.
+@hide 
+*/
+getNetworkSpecifier : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getTransportInfo'>/**Returns a transport-specific information container. The application may cast this
+</span> container to a concrete sub-class based on its knowledge of the network request. The
+ application should be able to deal with a {@code null} return value or an invalid case,
+ e.g. use {@code instanceof} operator to verify expected type.
+@return {Object {android.net.TransportInfo}} A concrete implementation of the {@link TransportInfo} class or null if not
+ available for the network.
+*/
+getTransportInfo : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setSignalStrength'>/**Sets the signal strength. This is a signed integer, with higher values indicating a stronger
+</span> signal. The exact units are bearer-dependent. For example, Wi-Fi uses the same RSSI units
+ reported by wifi code.
+ &lt;p&gt;
+ Note that when used to register a network callback, this specifies the minimum acceptable
+ signal strength. When received as the state of an existing network it specifies the current
+ value. A value of code SIGNAL_STRENGTH_UNSPECIFIED} means no value when received and has no
+ effect when requesting a callback.
+@param {Number} signalStrength the bearer-specific signal strength.
+@hide 
+*/
+setSignalStrength : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-hasSignalStrength'>/**Returns {@code true} if this object specifies a signal strength.
+</span>@hide 
+*/
+hasSignalStrength : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getSignalStrength'>/**Retrieves the signal strength.
+</span>@return {Number} The bearer-specific signal strength.
+*/
+getSignalStrength : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setSingleUid'>/**Convenience method to set the UIDs this network applies to to a single UID.
+</span>@hide 
+*/
+setSingleUid : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setUids'>/**Set the list of UIDs this network applies to.
+</span> This makes a copy of the set so that callers can't modify it after the call.
+@hide 
+*/
+setUids : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getUids'>/**Get the list of UIDs this network applies to.
+</span> This returns a copy of the set so that callers can't modify the original object.
+@hide 
+*/
+getUids : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-appliesToUid'>/**Test whether this network applies to this UID.
+</span>@hide 
+*/
+appliesToUid : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-equalsUids'>/**Tests if the set of UIDs that this network applies to is the same as the passed network.
+</span> &lt;p&gt;
+ This test only checks whether equal range objects are in both sets. It will
+ return false if the ranges are not exactly the same, even if the covered UIDs
+ are for an equivalent result.
+ &lt;p&gt;
+ Note that this method is not very optimized, which is fine as long as it's not used very
+ often.
+ &lt;p&gt;
+ nc is assumed nonnull.
+@hide 
+*/
+equalsUids : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-satisfiedByUids'>/**Test whether the passed NetworkCapabilities satisfies the UIDs this capabilities require.
+</span>
+ This method is called on the NetworkCapabilities embedded in a request with the
+ capabilities of an available network. It checks whether all the UIDs from this listen
+ (representing the UIDs that must have access to the network) are satisfied by the UIDs
+ in the passed nc (representing the UIDs that this network is available to).
+ &lt;p&gt;
+ As a special exception, the UID that created the passed network (as represented by its
+ mEstablishingVpnAppUid field) always satisfies a NetworkRequest requiring it (of LISTEN
+ or REQUEST types alike), even if the network does not apply to it. That is so a VPN app
+ can see its own network when it listens for it.
+ &lt;p&gt;
+ nc is assumed nonnull. Else, NPE.
+@see #appliesToUid
+@hide 
+*/
+satisfiedByUids : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-appliesToUidRange'>/**Returns whether this network applies to the passed ranges.
+</span> This assumes that to apply, the passed range has to be entirely contained
+ within one of the ranges this network applies to. If the ranges are not normalized,
+ this method may return false even though all required UIDs are covered because no
+ single range contained them all.
+@hide 
+*/
+appliesToUidRange : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-setSSID'>/**Sets the SSID of this network.
+</span>@hide 
+*/
+setSSID : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-getSSID'>/**Gets the SSID of this network, or null if none or unknown.
+</span>@hide 
+*/
+getSSID : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-equalsSSID'>/**Tests if the SSID of this network is the same as the SSID of the passed network.
+</span>@hide 
+*/
+equalsSSID : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-satisfiedBySSID'>/**Check if the SSID requirements of this object are matched by the passed object.
+</span>@hide 
+*/
+satisfiedBySSID : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-combineCapabilities'>/**Combine a set of Capabilities to this one.  Useful for coming up with the complete set.
+</span> &lt;p&gt;
+ Note that this method may break an invariant of having a particular capability in either
+ wanted or unwanted lists but never in both.  Requests that have the same capability in
+ both lists will never be satisfied.
+@hide 
+*/
+combineCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-satisfiedByNetworkCapabilities'>/**Check if our requirements are satisfied by the given {@code NetworkCapabilities}.
+</span>@param {Object {NetworkCapabilities}} nc the {@code NetworkCapabilities} that may or may not satisfy our requirements.
+@hide 
+*/
+satisfiedByNetworkCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-satisfiedByImmutableNetworkCapabilities'>/**Check if our immutable requirements are satisfied by the given {@code NetworkCapabilities}.
+</span>@param {Object {NetworkCapabilities}} nc the {@code NetworkCapabilities} that may or may not satisfy our requirements.
+@hide 
+*/
+satisfiedByImmutableNetworkCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-describeImmutableDifferences'>/**Checks that our immutable capabilities are the same as those of the given
+</span> {@code NetworkCapabilities} and return a String describing any difference.
+ The returned String is empty if there is no difference.
+@hide 
+*/
+describeImmutableDifferences : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-equalRequestableCapabilities'>/**Checks that our requestable capabilities are the same as those of the given
+</span> {@code NetworkCapabilities}.
+@hide 
+*/
+equalRequestableCapabilities : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-appendStringRepresentationOfBitMaskToStringBuilder'>/**
+</span>@hide 
+*/
+appendStringRepresentationOfBitMaskToStringBuilder : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-capabilityNamesOf'>/**
+</span>@hide 
+*/
+capabilityNamesOf : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-capabilityNameOf'>/**
+</span>@hide 
+*/
+capabilityNameOf : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-transportNamesOf'>/**
+</span>@hide 
+*/
+transportNamesOf : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-transportNameOf'>/**
+</span>@hide 
+*/
+transportNameOf : function(  ) {},
+
+<span id='android-net-NetworkCapabilities-method-isMetered'>/**Check if this {@code NetworkCapability} instance is metered.
+</span>@return {Boolean} {@code true} if {@code NET_CAPABILITY_NOT_METERED} is not set on this instance.
+@hide 
+*/
+isMetered : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

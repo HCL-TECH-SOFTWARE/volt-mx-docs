@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-Cursor'>/**@class android.database.Cursor
+</span> implements java.io.Closeable
+
+ This interface provides random read-write access to the result set returned
+ by a database query.
+ &lt;p&gt;
+ Cursor implementations are not required to be synchronized so code using a Cursor from multiple
+ threads should perform its own synchronization when using the Cursor.
+ &lt;/p&gt;&lt;p&gt;
+ Implementations should subclass {@link android.database.AbstractCursor}.
+ &lt;/p&gt;
+*/
+var Cursor = {
+
+<span id='android-database-Cursor-property-FIELD_TYPE_NULL'>/**Value returned by {@link #getType}(int) if the specified column is null */
+</span>FIELD_TYPE_NULL : &quot;0&quot;,
+<span id='android-database-Cursor-property-FIELD_TYPE_INTEGER'>/**Value returned by {@link #getType}(int) if the specified  column type is integer */
+</span>FIELD_TYPE_INTEGER : &quot;1&quot;,
+<span id='android-database-Cursor-property-FIELD_TYPE_FLOAT'>/**Value returned by {@link #getType}(int) if the specified column type is float */
+</span>FIELD_TYPE_FLOAT : &quot;2&quot;,
+<span id='android-database-Cursor-property-FIELD_TYPE_STRING'>/**Value returned by {@link #getType}(int) if the specified column type is string */
+</span>FIELD_TYPE_STRING : &quot;3&quot;,
+<span id='android-database-Cursor-property-FIELD_TYPE_BLOB'>/**Value returned by {@link #getType}(int) if the specified column type is blob */
+</span>FIELD_TYPE_BLOB : &quot;4&quot;,
+<span id='android-database-Cursor-method-getCount'>/**Returns the numbers of rows in the cursor.
+</span>@return {Number} the number of rows in the cursor.
+*/
+getCount : function(  ) {},
+
+<span id='android-database-Cursor-method-getPosition'>/**Returns the current position of the cursor in the row set.
+</span> The value is zero-based. When the row set is first returned the cursor
+ will be at positon -1, which is before the first row. After the
+ last row is returned another call to next() will leave the cursor past
+ the last entry, at a position of count().
+@return {Number} the current cursor position.
+*/
+getPosition : function(  ) {},
+
+<span id='android-database-Cursor-method-move'>/**Move the cursor by a relative amount, forward or backward, from the
+</span> current position. Positive offsets move forwards, negative offsets move
+ backwards. If the final position is outside of the bounds of the result
+ set then the resultant position will be pinned to -1 or count() depending
+ on whether the value is off the front or end of the set, respectively.
+
+ &lt;p&gt;This method will return true if the requested destination was
+ reachable, otherwise, it returns false. For example, if the cursor is at
+ currently on the second entry in the result set and move(-5) is called,
+ the position will be pinned at -1, and false will be returned.
+@param {Number} offset the offset to be applied from the current position.
+@return {Boolean} whether the requested move fully succeeded.
+*/
+move : function(  ) {},
+
+<span id='android-database-Cursor-method-moveToPosition'>/**Move the cursor to an absolute position. The valid
+</span> range of values is -1 &amp;lt;= position &amp;lt;= count.
+
+ &lt;p&gt;This method will return true if the request destination was reachable, 
+ otherwise, it returns false.
+@param {Number} position the zero-based position to move to.
+@return {Boolean} whether the requested move fully succeeded.
+*/
+moveToPosition : function(  ) {},
+
+<span id='android-database-Cursor-method-moveToFirst'>/**Move the cursor to the first row.
+</span>
+ &lt;p&gt;This method will return false if the cursor is empty.
+@return {Boolean} whether the move succeeded.
+*/
+moveToFirst : function(  ) {},
+
+<span id='android-database-Cursor-method-moveToLast'>/**Move the cursor to the last row.
+</span>
+ &lt;p&gt;This method will return false if the cursor is empty.
+@return {Boolean} whether the move succeeded.
+*/
+moveToLast : function(  ) {},
+
+<span id='android-database-Cursor-method-moveToNext'>/**Move the cursor to the next row.
+</span>
+ &lt;p&gt;This method will return false if the cursor is already past the
+ last entry in the result set.
+@return {Boolean} whether the move succeeded.
+*/
+moveToNext : function(  ) {},
+
+<span id='android-database-Cursor-method-moveToPrevious'>/**Move the cursor to the previous row.
+</span>
+ &lt;p&gt;This method will return false if the cursor is already before the
+ first entry in the result set.
+@return {Boolean} whether the move succeeded.
+*/
+moveToPrevious : function(  ) {},
+
+<span id='android-database-Cursor-method-isFirst'>/**Returns whether the cursor is pointing to the first row.
+</span>@return {Boolean} whether the cursor is pointing at the first entry.
+*/
+isFirst : function(  ) {},
+
+<span id='android-database-Cursor-method-isLast'>/**Returns whether the cursor is pointing to the last row.
+</span>@return {Boolean} whether the cursor is pointing at the last entry.
+*/
+isLast : function(  ) {},
+
+<span id='android-database-Cursor-method-isBeforeFirst'>/**Returns whether the cursor is pointing to the position before the first
+</span> row.
+@return {Boolean} whether the cursor is before the first result.
+*/
+isBeforeFirst : function(  ) {},
+
+<span id='android-database-Cursor-method-isAfterLast'>/**Returns whether the cursor is pointing to the position after the last
+</span> row.
+@return {Boolean} whether the cursor is after the last result.
+*/
+isAfterLast : function(  ) {},
+
+<span id='android-database-Cursor-method-getColumnIndex'>/**Returns the zero-based index for the given column name, or -1 if the column doesn't exist.
+</span> If you expect the column to exist use {@link #getColumnIndexOrThrow}(String) instead, which
+ will make the error more clear.
+@param {String} columnName the name of the target column.
+@return {Number} the zero-based column index for the given column name, or -1 if
+ the column name does not exist.
+@see #getColumnIndexOrThrow(String)
+*/
+getColumnIndex : function(  ) {},
+
+<span id='android-database-Cursor-method-getColumnIndexOrThrow'>/**Returns the zero-based index for the given column name, or throws
+</span> {@link IllegalArgumentException} if the column doesn't exist. If you're not sure if
+ a column will exist or not use {@link #getColumnIndex}(String) and check for -1, which
+ is more efficient than catching the exceptions.
+@param {String} columnName the name of the target column.
+@return {Number} the zero-based column index for the given column name
+@see #getColumnIndex(String)
+@throws IllegalArgumentException if the column does not exist
+*/
+getColumnIndexOrThrow : function(  ) {},
+
+<span id='android-database-Cursor-method-getColumnName'>/**Returns the column name at the given zero-based column index.
+</span>@param {Number} columnIndex the zero-based index of the target column.
+@return {String} the column name for the given column index.
+*/
+getColumnName : function(  ) {},
+
+<span id='android-database-Cursor-method-getColumnNames'>/**Returns a string array holding the names of all of the columns in the
+</span> result set in the order in which they were listed in the result.
+@return {String} the names of the columns returned in this query.
+*/
+getColumnNames : function(  ) {},
+
+<span id='android-database-Cursor-method-getColumnCount'>/**Return total number of columns
+</span>@return {Number} number of columns
+*/
+getColumnCount : function(  ) {},
+
+<span id='android-database-Cursor-method-getBlob'>/**Returns the value of the requested column as a byte array.
+</span>
+ &lt;p&gt;The result and whether this method throws an exception when the
+ column value is null or the column type is not a blob type is
+ implementation-defined.
+@param {Number} columnIndex the zero-based index of the target column.
+@return {Number} the value of that column as a byte array.
+*/
+getBlob : function(  ) {},
+
+<span id='android-database-Cursor-method-getString'>/**Returns the value of the requested column as a String.
+</span>
+ &lt;p&gt;The result and whether this method throws an exception when the
+ column value is null or the column type is not a string type is
+ implementation-defined.
+@param {Number} columnIndex the zero-based index of the target column.
+@return {String} the value of that column as a String.
+*/
+getString : function(  ) {},
+
+<span id='android-database-Cursor-method-copyStringToBuffer'>/**Retrieves the requested column text and stores it in the buffer provided.
+</span> If the buffer size is not sufficient, a new char buffer will be allocated 
+ and assigned to CharArrayBuffer.data
+@param {Number} columnIndex the zero-based index of the target column.
+        if the target column is null, return buffer
+@param {Object {CharArrayBuffer}} buffer the buffer to copy the text into.
+*/
+copyStringToBuffer : function(  ) {},
+
+<span id='android-database-Cursor-method-getShort'>/**Returns the value of the requested column as a short.
+</span>
+ &lt;p&gt;The result and whether this method throws an exception when the
+ column value is null, the column type is not an integral type, or the
+ integer value is outside the range [&lt;code&gt;Short.MIN_VALUE&lt;/code&gt;,
+ &lt;code&gt;Short.MAX_VALUE&lt;/code&gt;] is implementation-defined.
+@param {Number} columnIndex the zero-based index of the target column.
+@return {Number} the value of that column as a short.
+*/
+getShort : function(  ) {},
+
+<span id='android-database-Cursor-method-getInt'>/**Returns the value of the requested column as an int.
+</span>
+ &lt;p&gt;The result and whether this method throws an exception when the
+ column value is null, the column type is not an integral type, or the
+ integer value is outside the range [&lt;code&gt;Integer.MIN_VALUE&lt;/code&gt;,
+ &lt;code&gt;Integer.MAX_VALUE&lt;/code&gt;] is implementation-defined.
+@param {Number} columnIndex the zero-based index of the target column.
+@return {Number} the value of that column as an int.
+*/
+getInt : function(  ) {},
+
+<span id='android-database-Cursor-method-getLong'>/**Returns the value of the requested column as a long.
+</span>
+ &lt;p&gt;The result and whether this method throws an exception when the
+ column value is null, the column type is not an integral type, or the
+ integer value is outside the range [&lt;code&gt;Long.MIN_VALUE&lt;/code&gt;,
+ &lt;code&gt;Long.MAX_VALUE&lt;/code&gt;] is implementation-defined.
+@param {Number} columnIndex the zero-based index of the target column.
+@return {Number} the value of that column as a long.
+*/
+getLong : function(  ) {},
+
+<span id='android-database-Cursor-method-getFloat'>/**Returns the value of the requested column as a float.
+</span>
+ &lt;p&gt;The result and whether this method throws an exception when the
+ column value is null, the column type is not a floating-point type, or the
+ floating-point value is not representable as a &lt;code&gt;float&lt;/code&gt; value is
+ implementation-defined.
+@param {Number} columnIndex the zero-based index of the target column.
+@return {Number} the value of that column as a float.
+*/
+getFloat : function(  ) {},
+
+<span id='android-database-Cursor-method-getDouble'>/**Returns the value of the requested column as a double.
+</span>
+ &lt;p&gt;The result and whether this method throws an exception when the
+ column value is null, the column type is not a floating-point type, or the
+ floating-point value is not representable as a &lt;code&gt;double&lt;/code&gt; value is
+ implementation-defined.
+@param {Number} columnIndex the zero-based index of the target column.
+@return {Number} the value of that column as a double.
+*/
+getDouble : function(  ) {},
+
+<span id='android-database-Cursor-method-getType'>/**Returns data type of the given column's value.
+</span> The preferred type of the column is returned but the data may be converted to other types
+ as documented in the get-type methods such as {@link #getInt}(int), {@link #getFloat}(int)
+ etc.
+&lt;p&gt;
+ Returned column types are
+ &lt;ul&gt;
+   &lt;li&gt;{@link #FIELD_TYPE_NULL}&lt;/li&gt;
+   &lt;li&gt;{@link #FIELD_TYPE_INTEGER}&lt;/li&gt;
+   &lt;li&gt;{@link #FIELD_TYPE_FLOAT}&lt;/li&gt;
+   &lt;li&gt;{@link #FIELD_TYPE_STRING}&lt;/li&gt;
+   &lt;li&gt;{@link #FIELD_TYPE_BLOB}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+@param {Number} columnIndex the zero-based index of the target column.
+@return {Number} column value type
+*/
+getType : function(  ) {},
+
+<span id='android-database-Cursor-method-isNull'>/**Returns &lt;code&gt;true&lt;/code&gt; if the value in the indicated column is null.
+</span>@param {Number} columnIndex the zero-based index of the target column.
+@return {Boolean} whether the column value is null.
+*/
+isNull : function(  ) {},
+
+<span id='android-database-Cursor-method-deactivate'>/**Deactivates the Cursor, making all calls on it fail until {@link #requery} is called.
+</span> Inactive Cursors use fewer resources than active Cursors.
+ Calling {@link #requery} will make the cursor active again.
+@deprecated Since {@link #requery()} is deprecated, so too is this.
+*/
+deactivate : function(  ) {},
+
+<span id='android-database-Cursor-method-requery'>/**Performs the query that created the cursor again, refreshing its 
+</span> contents. This may be done at any time, including after a call to {@link #deactivate}.
+
+ Since this method could execute a query on the database and potentially take
+ a while, it could cause ANR if it is called on Main (UI) thread.
+ A warning is printed if this method is being executed on Main thread.
+@return {Boolean} true if the requery succeeded, false if not, in which case the
+         cursor becomes invalid.
+@deprecated Don't use this. Just request a new cursor, so you can do this
+ asynchronously and update your list view once the new cursor comes back.
+*/
+requery : function(  ) {},
+
+<span id='android-database-Cursor-method-close'>/**Closes the Cursor, releasing all of its resources and making it completely invalid.
+</span> Unlike {@link #deactivate}() a call to {@link #requery}() will not make the Cursor valid
+ again.
+*/
+close : function(  ) {},
+
+<span id='android-database-Cursor-method-isClosed'>/**return true if the cursor is closed
+</span>@return {Boolean} true if the cursor is closed.
+*/
+isClosed : function(  ) {},
+
+<span id='android-database-Cursor-method-registerContentObserver'>/**Register an observer that is called when changes happen to the content backing this cursor.
+</span> Typically the data set won't change until {@link #requery}() is called.
+@param {Object {ContentObserver}} observer the object that gets notified when the content backing the cursor changes.
+@see #unregisterContentObserver(ContentObserver)
+*/
+registerContentObserver : function(  ) {},
+
+<span id='android-database-Cursor-method-unregisterContentObserver'>/**Unregister an observer that has previously been registered with this
+</span> cursor via {@link #registerContentObserver}.
+@param {Object {ContentObserver}} observer the object to unregister.
+@see #registerContentObserver(ContentObserver)
+*/
+unregisterContentObserver : function(  ) {},
+
+<span id='android-database-Cursor-method-registerDataSetObserver'>/**Register an observer that is called when changes happen to the contents
+</span> of the this cursors data set, for example, when the data set is changed via
+ {@link #requery}(), {@link #deactivate}(), or {@link #close}().
+@param {Object {DataSetObserver}} observer the object that gets notified when the cursors data set changes.
+@see #unregisterDataSetObserver(DataSetObserver)
+*/
+registerDataSetObserver : function(  ) {},
+
+<span id='android-database-Cursor-method-unregisterDataSetObserver'>/**Unregister an observer that has previously been registered with this
+</span> cursor via {@link #registerContentObserver}.
+@param {Object {DataSetObserver}} observer the object to unregister.
+@see #registerDataSetObserver(DataSetObserver)
+*/
+unregisterDataSetObserver : function(  ) {},
+
+<span id='android-database-Cursor-method-setNotificationUri'>/**Register to watch a content URI for changes. This can be the URI of a specific data row (for 
+</span> example, &quot;content://my_provider_type/23&quot;), or a a generic URI for a content type.
+
+ &lt;p&gt;Calling this overrides any previous call to
+ {@link #setNotificationUris(ContentResolver, List)}.
+@param {Object {ContentResolver}} cr The content resolver from the caller's context. The listener attached to 
+ this resolver will be notified.
+@param {Object {Uri}} uri The content URI to watch.
+*/
+setNotificationUri : function(  ) {},
+
+<span id='android-database-Cursor-method-setNotificationUris'>/**Similar to {@link #setNotificationUri(ContentResolver, Uri)}, except this version allows
+</span> to watch multiple content URIs for changes.
+
+ &lt;p&gt;If this is not implemented, this is equivalent to calling
+ {@link #setNotificationUri(ContentResolver, Uri)} with the first URI in {@code uris}.
+
+ &lt;p&gt;Calling this overrides any previous call to
+ {@link #setNotificationUri(ContentResolver, Uri)}.
+@param {Object {ContentResolver}} cr The content resolver from the caller's context. The listener attached to
+ this resolver will be notified.
+@param {Object {java.util.List}} uris The content URIs to watch.
+*/
+setNotificationUris : function(  ) {},
+
+<span id='android-database-Cursor-method-getNotificationUri'>/**Return the URI at which notifications of changes in this Cursor's data
+</span> will be delivered, as previously set by {@link #setNotificationUri}.
+@return {Object {android.net.Uri}} Returns a URI that can be used with
+ {@link ContentResolver#registerContentObserver(android.net.Uri, boolean, ContentObserver)
+ ContentResolver.registerContentObserver} to find out about changes to this Cursor's
+ data.  May be null if no notification URI has been set.
+*/
+getNotificationUri : function(  ) {},
+
+<span id='android-database-Cursor-method-getNotificationUris'>/**Return the URIs at which notifications of changes in this Cursor's data
+</span> will be delivered, as previously set by {@link #setNotificationUris}.
+
+ &lt;p&gt;If this is not implemented, this is equivalent to calling {@link #getNotificationUri}().
+@return {Object {java.util.List}} Returns URIs that can be used with
+ {@link ContentResolver#registerContentObserver(android.net.Uri, boolean, ContentObserver)
+ ContentResolver.registerContentObserver} to find out about changes to this Cursor's
+ data. May be null if no notification URI has been set.
+*/
+getNotificationUris : function(  ) {},
+
+<span id='android-database-Cursor-method-getWantsAllOnMoveCalls'>/**onMove() will only be called across processes if this method returns true.
+</span>@return {Boolean} whether all cursor movement should result in a call to onMove().
+*/
+getWantsAllOnMoveCalls : function(  ) {},
+
+<span id='android-database-Cursor-method-setExtras'>/**Sets a {@link Bundle} that will be returned by {@link #getExtras}().
+</span>@param {Object {Bundle}} extras {@link Bundle} to set, or null to set an empty bundle.
+*/
+setExtras : function(  ) {},
+
+<span id='android-database-Cursor-method-getExtras'>/**Returns a bundle of extra values. This is an optional way for cursors to provide out-of-band
+</span> metadata to their users. One use of this is for reporting on the progress of network requests
+ that are required to fetch data for the cursor.
+
+ &lt;p&gt;These values may only change when requery is called.
+@return {Object {android.os.Bundle}} cursor-defined values, or {@link android.os.Bundle#EMPTY Bundle.EMPTY} if there
+         are no values. Never &lt;code&gt;null&lt;/code&gt;.
+*/
+getExtras : function(  ) {},
+
+<span id='android-database-Cursor-method-respond'>/**This is an out-of-band way for the the user of a cursor to communicate with the cursor. The
+</span> structure of each bundle is entirely defined by the cursor.
+
+ &lt;p&gt;One use of this is to tell a cursor that it should retry its network request after it
+ reported an error.
+@param {Object {Bundle}} extras extra values, or {@link android.os.Bundle#EMPTY Bundle.EMPTY}.
+         Never &lt;code&gt;null&lt;/code&gt;.
+@return {Object {android.os.Bundle}} extra values, or {@link android.os.Bundle#EMPTY Bundle.EMPTY}.
+         Never &lt;code&gt;null&lt;/code&gt;.
+*/
+respond : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

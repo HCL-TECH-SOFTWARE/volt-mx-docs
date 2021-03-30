@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-FillEventHistory-Event'>/**@class android.service.autofill.FillEventHistory.Event
+</span>@extends java.lang.Object
+
+ Description of an event that occured after the latest call to
+ {@link android.service.autofill.FillCallback#onSuccess(FillResponse)}.
+*/
+var Event = {
+
+<span id='android-service-autofill-FillEventHistory-Event-property-TYPE_DATASET_SELECTED'>/** A dataset was selected. The dataset selected can be read from {@link #getDatasetId}().
+</span>
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;on Android {@link android.os.Build.VERSION_CODES#O}, this event was also
+ incorrectly reported after a
+ {@link android.service.autofill.Dataset.Builder#setAuthentication(IntentSender) dataset authentication} was
+ selected and the service returned a dataset in the
+ {@link AutofillManager#EXTRA_AUTHENTICATION_RESULT} of the activity launched from that
+ {@link IntentSender}. This behavior was fixed on Android
+ {@link android.os.Build.VERSION_CODES#O_MR1}.
+*/
+TYPE_DATASET_SELECTED : &quot;0&quot;,
+<span id='android-service-autofill-FillEventHistory-Event-property-TYPE_DATASET_AUTHENTICATION_SELECTED'>/** A {@link android.service.autofill.Dataset.Builder#setAuthentication(IntentSender) dataset authentication} was
+</span> selected. The dataset authenticated can be read from {@link #getDatasetId}().
+*/
+TYPE_DATASET_AUTHENTICATION_SELECTED : &quot;1&quot;,
+<span id='android-service-autofill-FillEventHistory-Event-property-TYPE_AUTHENTICATION_SELECTED'>/** A {@link android.service.autofill.FillResponse.Builder#setAuthentication(android.view.autofill.AutofillId[],
+</span> IntentSender, android.widget.RemoteViews) fill response authentication} was selected.
+*/
+TYPE_AUTHENTICATION_SELECTED : &quot;2&quot;,
+<span id='android-service-autofill-FillEventHistory-Event-property-TYPE_SAVE_SHOWN'>/**A save UI was shown. */
+</span>TYPE_SAVE_SHOWN : &quot;3&quot;,
+<span id='android-service-autofill-FillEventHistory-Event-property-TYPE_CONTEXT_COMMITTED'>/** A committed autofill context for which the autofill service provided datasets.
+</span>
+ &lt;p&gt;This event is useful to track:
+ &lt;ul&gt;
+   &lt;li&gt;Which datasets (if any) were selected by the user
+       ({@link #getSelectedDatasetIds}()).
+   &lt;li&gt;Which datasets (if any) were NOT selected by the user
+       ({@link #getIgnoredDatasetIds}()).
+   &lt;li&gt;Which fields in the selected datasets were changed by the user after the dataset
+       was selected ({@link #getChangedFields}().
+   &lt;li&gt;Which fields match the {@link android.service.autofill.UserData} set by the service.
+ &lt;/ul&gt;
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;This event is only generated when:
+ &lt;ul&gt;
+   &lt;li&gt;The autofill context is committed.
+   &lt;li&gt;The service provides at least one dataset in the
+       {@link android.service.autofill.FillResponse fill responses} associated with the context.
+   &lt;li&gt;The last {@link android.service.autofill.FillResponse fill responses} associated with the context has the
+       {@link android.service.autofill.FillResponse#FLAG_TRACK_CONTEXT_COMMITED} flag.
+ &lt;/ul&gt;
+
+ &lt;p&gt;See {@link android.view.autofill.AutofillManager} for more information about autofill
+ contexts.
+*/
+TYPE_CONTEXT_COMMITTED : &quot;4&quot;,
+<span id='android-service-autofill-FillEventHistory-Event-method-getType'>/**Returns the type of the event.
+</span>@return {Number} The type of the event
+*/
+getType : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-getDatasetId'>/**Returns the id of dataset the id was on.
+</span>@return {String} The id of dataset, or {@code null} the event is not associated with a dataset.
+*/
+getDatasetId : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-getClientState'>/**Returns the client state from the {@link android.service.autofill.FillResponse} used to generate this event.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;the state is associated with the app that was autofilled in the previous
+ {@link android.service.autofill.AutofillService#onFillRequest(FillRequest, android.os.CancellationSignal, FillCallback)},
+ which is not necessary the same app being autofilled now.
+*/
+getClientState : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-getSelectedDatasetIds'>/**Returns which datasets were selected by the user.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;Only set on events of type {@link #TYPE_CONTEXT_COMMITTED}.
+*/
+getSelectedDatasetIds : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-getIgnoredDatasetIds'>/**Returns which datasets were NOT selected by the user.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;Only set on events of type {@link #TYPE_CONTEXT_COMMITTED}.
+*/
+getIgnoredDatasetIds : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-getChangedFields'>/**Returns which fields in the selected datasets were changed by the user after the dataset
+</span> was selected.
+
+ &lt;p&gt;For example, server provides:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+  FillResponse response = new FillResponse.Builder()
+      .addDataset(new Dataset.Builder(presentation1)
+          .setId(&quot;4815&quot;)
+          .setValue(usernameId, AutofillValue.forText(&quot;MrPlow&quot;))
+          .build())
+      .addDataset(new Dataset.Builder(presentation2)
+          .setId(&quot;162342&quot;)
+          .setValue(passwordId, AutofillValue.forText(&quot;D'OH&quot;))
+          .build())
+      .build();
+ &lt;/pre&gt;
+
+ &lt;p&gt;User select both datasets (for username and password) but after the fields are
+ autofilled, user changes them to:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   username = &quot;ElBarto&quot;;
+   password = &quot;AyCaramba&quot;;
+ &lt;/pre&gt;
+
+ &lt;p&gt;Then the result is the following map:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   usernameId =&gt; &quot;4815&quot;
+   passwordId =&gt; &quot;162342&quot;
+ &lt;/pre&gt;
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;Only set on events of type {@link #TYPE_CONTEXT_COMMITTED}.
+@return {Object {java.util.Map}} map map whose key is the id of the change fields, and value is the id of
+ dataset that has that field and was selected by the user.
+*/
+getChangedFields : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-getFieldsClassification'>/**Gets the &lt;a href=&quot;AutofillService.html#FieldClassification&quot;&gt;field classification&lt;/a&gt;
+</span> results.
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;Only set on events of type {@link #TYPE_CONTEXT_COMMITTED}, when the
+ service requested {@link android.service.autofill.FillResponse.Builder#setFieldClassificationIds(AutofillId...)
+ field classification}.
+*/
+getFieldsClassification : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-getManuallyEnteredField'>/**Returns which fields were available on datasets provided by the service but manually
+</span> entered by the user.
+
+ &lt;p&gt;For example, server provides:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+  FillResponse response = new FillResponse.Builder()
+      .addDataset(new Dataset.Builder(presentation1)
+          .setId(&quot;4815&quot;)
+          .setValue(usernameId, AutofillValue.forText(&quot;MrPlow&quot;))
+          .setValue(passwordId, AutofillValue.forText(&quot;AyCaramba&quot;))
+          .build())
+      .addDataset(new Dataset.Builder(presentation2)
+          .setId(&quot;162342&quot;)
+          .setValue(usernameId, AutofillValue.forText(&quot;ElBarto&quot;))
+          .setValue(passwordId, AutofillValue.forText(&quot;D'OH&quot;))
+          .build())
+      .addDataset(new Dataset.Builder(presentation3)
+          .setId(&quot;108&quot;)
+          .setValue(usernameId, AutofillValue.forText(&quot;MrPlow&quot;))
+          .setValue(passwordId, AutofillValue.forText(&quot;D'OH&quot;))
+          .build())
+      .build();
+ &lt;/pre&gt;
+
+ &lt;p&gt;User doesn't select a dataset but manually enters:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   username = &quot;MrPlow&quot;;
+   password = &quot;D'OH&quot;;
+ &lt;/pre&gt;
+
+ &lt;p&gt;Then the result is the following map:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   usernameId =&gt; { &quot;4815&quot;, &quot;108&quot;}
+   passwordId =&gt; { &quot;162342&quot;, &quot;108&quot; }
+ &lt;/pre&gt;
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;Only set on events of type {@link #TYPE_CONTEXT_COMMITTED}.
+@return {Object {java.util.Map}} map map whose key is the id of the manually-entered field, and value is the
+ ids of the datasets that have that value but were not selected by the user.
+*/
+getManuallyEnteredField : function(  ) {},
+
+<span id='android-service-autofill-FillEventHistory-Event-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

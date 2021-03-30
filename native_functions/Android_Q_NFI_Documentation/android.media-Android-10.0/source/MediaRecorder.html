@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaRecorder'>/**@class android.media.MediaRecorder
+</span> implements android.media.AudioRouting
+
+ implements android.media.AudioRecordingMonitor
+
+ implements android.media.AudioRecordingMonitorClient
+
+ implements android.media.MicrophoneDirection
+
+@extends java.lang.Object
+
+ Used to record audio and video. The recording control is based on a
+ simple state machine (see below).
+
+ &lt;p&gt;&lt;img src=&quot;{@docRoot}images/mediarecorder_state_diagram.gif&quot; border=&quot;0&quot; /&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;A common case of using MediaRecorder to record audio works as follows:
+
+ &lt;pre&gt;MediaRecorder recorder = new MediaRecorder();
+ recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+ recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+ recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+ recorder.setOutputFile(PATH_NAME);
+ recorder.prepare();
+ recorder.start();   // Recording is now started
+ ...
+ recorder.stop();
+ recorder.reset();   // You can reuse the object by going back to setAudioSource() step
+ recorder.release(); // Now the object cannot be reused
+ &lt;/pre&gt;
+
+ &lt;p&gt;Applications may want to register for informational and error
+ events in order to be informed of some internal update and possible
+ runtime errors during recording. Registration for such events is
+ done by setting the appropriate listeners (via calls
+ (to {@link #setOnInfoListener}(OnInfoListener)setOnInfoListener and/or
+ {@link #setOnErrorListener}(OnErrorListener)setOnErrorListener).
+ In order to receive the respective callback associated with these listeners,
+ applications are required to create MediaRecorder objects on threads with a
+ Looper running (the main UI thread by default already has a Looper running).
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Currently, MediaRecorder does not work on the emulator.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about how to use MediaRecorder for recording video, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/media/camera.html#capture-video&quot;&gt;Camera&lt;/a&gt; developer guide.
+ For more information about how to use MediaRecorder for recording sound, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/media/audio-capture.html&quot;&gt;Audio Capture&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var MediaRecorder = {
+
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_ERROR_UNKNOWN'>/**Unspecified media recorder error.
+</span> @see android.media.MediaRecorder.OnErrorListener
+*/
+MEDIA_RECORDER_ERROR_UNKNOWN : &quot;1&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_ERROR_SERVER_DIED'>/**Media server died. In this case, the application must release the
+</span> MediaRecorder object and instantiate a new one.
+ @see android.media.MediaRecorder.OnErrorListener
+*/
+MEDIA_ERROR_SERVER_DIED : &quot;100&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_INFO_UNKNOWN'>/**Unspecified media recorder info.
+</span> @see android.media.MediaRecorder.OnInfoListener
+*/
+MEDIA_RECORDER_INFO_UNKNOWN : &quot;1&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_INFO_MAX_DURATION_REACHED'>/**A maximum duration had been setup and has now been reached.
+</span> @see android.media.MediaRecorder.OnInfoListener
+*/
+MEDIA_RECORDER_INFO_MAX_DURATION_REACHED : &quot;800&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED'>/**A maximum filesize had been setup and has now been reached.
+</span> Note: This event will not be sent if application already set
+ next output file through {@link #setNextOutputFile}.
+ @see android.media.MediaRecorder.OnInfoListener
+*/
+MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED : &quot;801&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_INFO_MAX_FILESIZE_APPROACHING'>/**A maximum filesize had been setup and current recorded file size
+</span> has reached 90% of the limit. This is sent once per file upon
+ reaching/passing the 90% limit. To continue the recording, applicaiton
+ should use {@link #setNextOutputFile} to set the next output file.
+ Otherwise, recording will stop when reaching maximum file size.
+ @see android.media.MediaRecorder.OnInfoListener
+*/
+MEDIA_RECORDER_INFO_MAX_FILESIZE_APPROACHING : &quot;802&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_INFO_NEXT_OUTPUT_FILE_STARTED'>/**A maximum filesize had been reached and MediaRecorder has switched
+</span> output to a new file set by application {@link #setNextOutputFile}.
+ For best practice, application should use this event to keep track
+ of whether the file previously set has been used or not.
+ @see android.media.MediaRecorder.OnInfoListener
+*/
+MEDIA_RECORDER_INFO_NEXT_OUTPUT_FILE_STARTED : &quot;803&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_LIST_START'>/**informational events for individual tracks, for testing purpose.
+</span> The track informational event usually contains two parts in the ext1
+ arg of the onInfo() callback: bit 31-28 contains the track id; and
+ the rest of the 28 bits contains the informational event defined here.
+ For example, ext1 = (1 &lt;&lt; 28 | MEDIA_RECORDER_TRACK_INFO_TYPE) if the
+ track id is 1 for informational event MEDIA_RECORDER_TRACK_INFO_TYPE;
+ while ext1 = (0 &lt;&lt; 28 | MEDIA_RECORDER_TRACK_INFO_TYPE) if the track
+ id is 0 for informational event MEDIA_RECORDER_TRACK_INFO_TYPE. The
+ application should extract the track id and the type of informational
+ event from ext1, accordingly.
+
+ FIXME:
+ Please update the comment for onInfo also when these
+ events are unhidden so that application knows how to extract the track
+ id and the informational event type from onInfo callback.
+
+ {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_LIST_START : &quot;1000&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_COMPLETION_STATUS'>/**Signal the completion of the track for the recording session.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_COMPLETION_STATUS : &quot;1000&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_PROGRESS_IN_TIME'>/**Indicate the recording progress in time (ms) during recording.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_PROGRESS_IN_TIME : &quot;1001&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_TYPE'>/**Indicate the track type: 0 for Audio and 1 for Video.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_TYPE : &quot;1002&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_DURATION_MS'>/**Provide the track duration information.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_DURATION_MS : &quot;1003&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_MAX_CHUNK_DUR_MS'>/**Provide the max chunk duration in time (ms) for the given track.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_MAX_CHUNK_DUR_MS : &quot;1004&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_ENCODED_FRAMES'>/**Provide the total number of recordd frames.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_ENCODED_FRAMES : &quot;1005&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INTER_CHUNK_TIME_MS'>/**Provide the max spacing between neighboring chunks for the given track.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INTER_CHUNK_TIME_MS : &quot;1006&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_INITIAL_DELAY_MS'>/**Provide the elapsed time measuring from the start of the recording
+</span> till the first output frame of the given track is received, excluding
+ any intentional start time offset of a recording session for the
+ purpose of eliminating the recording sound in the recorded file.
+ {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_INITIAL_DELAY_MS : &quot;1007&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_START_OFFSET_MS'>/**Provide the start time difference (delay) betweeen this track and
+</span> the start of the movie.
+ {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_START_OFFSET_MS : &quot;1008&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_DATA_KBYTES'>/**Provide the total number of data (in kilo-bytes) encoded.
+</span> {@hide}
+*/
+MEDIA_RECORDER_TRACK_INFO_DATA_KBYTES : &quot;1009&quot;,
+<span id='android-media-MediaRecorder-property-MEDIA_RECORDER_TRACK_INFO_LIST_END'>/** {@hide}
+</span>*/
+MEDIA_RECORDER_TRACK_INFO_LIST_END : &quot;2000&quot;,
+<span id='android-media-MediaRecorder-method-setCamera'>/**Sets a {@link android.hardware.Camera} to use for recording.
+</span>
+ &lt;p&gt;Use this function to switch quickly between preview and capture mode without a teardown of
+ the camera object. {@link android.hardware.Camera#unlock()} should be called before
+ this. Must call before {@link #prepare}.&lt;/p&gt;
+@param {Object {Camera}} c the Camera to use for recording
+@deprecated Use {@link #getSurface} and the {@link android.hardware.camera2} API instead.
+*/
+setCamera : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getSurface'>/**Gets the surface to record from when using SURFACE video source.
+</span>
+ &lt;p&gt; May only be called after {@link #prepare}. Frames rendered to the Surface before
+ {@link #start} will be discarded.&lt;/p&gt;
+@throws IllegalStateException if it is called before {@link #prepare}, after
+ {@link #stop}, or is called when VideoSource is not set to SURFACE.
+@see android.media.MediaRecorder.VideoSource
+*/
+getSurface : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setInputSurface'>/**Configures the recorder to use a persistent surface when using SURFACE video source.
+</span> &lt;p&gt; May only be called before {@link #prepare}. If called, {@link #getSurface} should
+ not be used and will throw IllegalStateException. Frames rendered to the Surface
+ before {@link #start} will be discarded.&lt;/p&gt;
+@param {Object {Surface}} surface a persistent input surface created by
+           {@link MediaCodec#createPersistentInputSurface}
+@throws IllegalStateException if it is called after {@link #prepare} and before
+ {@link #stop}.
+@throws IllegalArgumentException if the surface was not created by
+           {@link MediaCodec#createPersistentInputSurface}.
+@see MediaCodec#createPersistentInputSurface
+@see MediaRecorder.VideoSource
+*/
+setInputSurface : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setPreviewDisplay'>/**Sets a Surface to show a preview of recorded media (video). Calls this
+</span> before prepare() to make sure that the desirable preview display is
+ set. If {@link #setCamera}(Camera) is used and the surface has been
+ already set to the camera, application do not need to call this. If
+ this is called with non-null surface, the preview surface of the camera
+ will be replaced by the new surface. If this method is called with null
+ surface or not called at all, media recorder will not change the preview
+ surface of the camera.
+@param {Object {Surface}} sv the Surface to use for the preview
+@see android.hardware.Camera#setPreviewDisplay(android.view.SurfaceHolder)
+*/
+setPreviewDisplay : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-isSystemOnlyAudioSource'>/**
+</span>@param {Number} source An audio source to test
+@param source An audio source to test
+@return {Boolean} true if the source is only visible to system components
+*/
+isSystemOnlyAudioSource : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-toLogFriendlyAudioSource'>/**
+</span>@hide 
+*/
+toLogFriendlyAudioSource : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setAudioSource'>/**Sets the audio source to be used for recording. If this method is not
+</span> called, the output file will not contain an audio track. The source needs
+ to be specified before setting recording-parameters or encoders. Call
+ this only before setOutputFormat().
+@param {Number} audioSource the audio source to use
+@throws IllegalStateException if it is called after setOutputFormat()
+@see android.media.MediaRecorder.AudioSource
+*/
+setAudioSource : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getAudioSourceMax'>/**Gets the maximum value for audio sources.
+</span>@see android.media.MediaRecorder.AudioSource
+*/
+getAudioSourceMax : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setVideoSource'>/**Sets the video source to be used for recording. If this method is not
+</span> called, the output file will not contain an video track. The source needs
+ to be specified before setting recording-parameters or encoders. Call
+ this only before setOutputFormat().
+@param {Number} video_source the video source to use
+@throws IllegalStateException if it is called after setOutputFormat()
+@see android.media.MediaRecorder.VideoSource
+*/
+setVideoSource : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setProfile'>/**Uses the settings from a CamcorderProfile object for recording. This method should
+</span> be called after the video AND audio sources are set, and before setOutputFile().
+ If a time lapse CamcorderProfile is used, audio related source or recording
+ parameters are ignored.
+@param {Object {CamcorderProfile}} profile the CamcorderProfile to use
+@see android.media.CamcorderProfile
+*/
+setProfile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setCaptureRate'>/**Set video frame capture rate. This can be used to set a different video frame capture
+</span> rate than the recorded video's playback rate. This method also sets the recording mode
+ to time lapse. In time lapse video recording, only video is recorded. Audio related
+ parameters are ignored when a time lapse recording session starts, if an application
+ sets them.
+@param {Number} fps Rate at which frames should be captured in frames per second.
+ The fps can go as low as desired. However the fastest fps will be limited by the hardware.
+ For resolutions that can be captured by the video camera, the fastest fps can be computed using
+ {@link android.hardware.Camera.Parameters#getPreviewFpsRange(int[])}. For higher
+ resolutions the fastest fps may be more restrictive.
+ Note that the recorder cannot guarantee that frames will be captured at the
+ given rate due to camera/encoder limitations. However it tries to be as close as
+ possible.
+*/
+setCaptureRate : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setOrientationHint'>/**Sets the orientation hint for output video playback.
+</span> This method should be called before prepare(). This method will not
+ trigger the source video frame to rotate during video recording, but to
+ add a composition matrix containing the rotation angle in the output
+ video if the output format is OutputFormat.THREE_GPP or
+ OutputFormat.MPEG_4 so that a video player can choose the proper
+ orientation for playback. Note that some video players may choose
+ to ignore the compostion matrix in a video during playback.
+@param {Number} degrees the angle to be rotated clockwise in degrees.
+ The supported angles are 0, 90, 180, and 270 degrees.
+@throws IllegalArgumentException if the angle is not supported.
+*/
+setOrientationHint : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setLocation'>/**Set and store the geodata (latitude and longitude) in the output file.
+</span> This method should be called before prepare(). The geodata is
+ stored in udta box if the output format is OutputFormat.THREE_GPP
+ or OutputFormat.MPEG_4, and is ignored for other output formats.
+ The geodata is stored according to ISO-6709 standard.
+@param {Number} latitude latitude in degrees. Its value must be in the
+ range [-90, 90].
+@param {Number} longitude longitude in degrees. Its value must be in the
+ range [-180, 180].
+@throws IllegalArgumentException if the given latitude or
+ longitude is out of range.
+*/
+setLocation : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setOutputFormat'>/**Sets the format of the output file produced during recording. Call this
+</span> after setAudioSource()/setVideoSource() but before prepare().
+
+ &lt;p&gt;It is recommended to always use 3GP format when using the H.263
+ video encoder and AMR audio encoder. Using an MPEG-4 container format
+ may confuse some desktop players.&lt;/p&gt;
+@param {Number} output_format the output format to use. The output format
+ needs to be specified before setting recording-parameters or encoders.
+@throws IllegalStateException if it is called after prepare() or before
+ setAudioSource()/setVideoSource().
+@see android.media.MediaRecorder.OutputFormat
+*/
+setOutputFormat : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setVideoSize'>/**Sets the width and height of the video to be captured.  Must be called
+</span> after setVideoSource(). Call this after setOutFormat() but before
+ prepare().
+@param {Number} width the width of the video to be captured
+@param {Number} height the height of the video to be captured
+@throws IllegalStateException if it is called after
+ prepare() or before setOutputFormat()
+*/
+setVideoSize : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setVideoFrameRate'>/**Sets the frame rate of the video to be captured.  Must be called
+</span> after setVideoSource(). Call this after setOutFormat() but before
+ prepare().
+@param {Number} rate the number of frames per second of video to capture
+@throws IllegalStateException if it is called after
+ prepare() or before setOutputFormat().
+
+ NOTE: On some devices that have auto-frame rate, this sets the
+ maximum frame rate, not a constant frame rate. Actual frame rate
+ will vary according to lighting conditions.
+*/
+setVideoFrameRate : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setMaxDuration'>/**Sets the maximum duration (in ms) of the recording session.
+</span> Call this after setOutFormat() but before prepare().
+ After recording reaches the specified duration, a notification
+ will be sent to the {@link android.media.MediaRecorder.OnInfoListener}
+ with a &quot;what&quot; code of {@link #MEDIA_RECORDER_INFO_MAX_DURATION_REACHED}
+ and recording will be stopped. Stopping happens asynchronously, there
+ is no guarantee that the recorder will have stopped by the time the
+ listener is notified.
+
+ &lt;p&gt;When using MPEG-4 container ({@link #setOutputFormat}(int) with
+ {@link android.media.MediaMuxer.OutputFormat#MPEG_4}), it is recommended to set maximum duration that fits the use
+ case. Setting a larger than required duration may result in a larger than needed output file
+ because of space reserved for MOOV box expecting large movie data in this recording session.
+  Unused space of MOOV box is turned into FREE box in the output file.&lt;/p&gt;
+@param {Number} max_duration_ms the maximum duration in ms (if zero or negative, disables the duration limit)
+*/
+setMaxDuration : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setMaxFileSize'>/**Sets the maximum filesize (in bytes) of the recording session.
+</span> Call this after setOutFormat() but before prepare().
+ After recording reaches the specified filesize, a notification
+ will be sent to the {@link android.media.MediaRecorder.OnInfoListener}
+ with a &quot;what&quot; code of {@link #MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED}
+ and recording will be stopped. Stopping happens asynchronously, there
+ is no guarantee that the recorder will have stopped by the time the
+ listener is notified.
+
+ &lt;p&gt;When using MPEG-4 container ({@link #setOutputFormat}(int) with
+ {@link android.media.MediaMuxer.OutputFormat#MPEG_4}), it is recommended to set maximum filesize that fits the use
+ case. Setting a larger than required filesize may result in a larger than needed output file
+ because of space reserved for MOOV box expecting large movie data in this recording session.
+ Unused space of MOOV box is turned into FREE box in the output file.&lt;/p&gt;
+@param {Number} max_filesize_bytes the maximum filesize in bytes (if zero or negative, disables the limit)
+*/
+setMaxFileSize : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setAudioEncoder'>/**Sets the audio encoder to be used for recording. If this method is not
+</span> called, the output file will not contain an audio track. Call this after
+ setOutputFormat() but before prepare().
+@param {Number} audio_encoder the audio encoder to use.
+@throws IllegalStateException if it is called before
+ setOutputFormat() or after prepare().
+@see android.media.MediaRecorder.AudioEncoder
+*/
+setAudioEncoder : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setVideoEncoder'>/**Sets the video encoder to be used for recording. If this method is not
+</span> called, the output file will not contain an video track. Call this after
+ setOutputFormat() and before prepare().
+@param {Number} video_encoder the video encoder to use.
+@throws IllegalStateException if it is called before
+ setOutputFormat() or after prepare()
+@see android.media.MediaRecorder.VideoEncoder
+*/
+setVideoEncoder : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setAudioSamplingRate'>/**Sets the audio sampling rate for recording. Call this method before prepare().
+</span> Prepare() may perform additional checks on the parameter to make sure whether
+ the specified audio sampling rate is applicable. The sampling rate really depends
+ on the format for the audio recording, as well as the capabilities of the platform.
+ For instance, the sampling rate supported by AAC audio coding standard ranges
+ from 8 to 96 kHz, the sampling rate supported by AMRNB is 8kHz, and the sampling
+ rate supported by AMRWB is 16kHz. Please consult with the related audio coding
+ standard for the supported audio sampling rate.
+@param {Number} samplingRate the sampling rate for audio in samples per second.
+*/
+setAudioSamplingRate : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setAudioChannels'>/**Sets the number of audio channels for recording. Call this method before prepare().
+</span> Prepare() may perform additional checks on the parameter to make sure whether the
+ specified number of audio channels are applicable.
+@param {Number} numChannels the number of audio channels. Usually it is either 1 (mono) or 2
+ (stereo).
+*/
+setAudioChannels : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setAudioEncodingBitRate'>/**Sets the audio encoding bit rate for recording. Call this method before prepare().
+</span> Prepare() may perform additional checks on the parameter to make sure whether the
+ specified bit rate is applicable, and sometimes the passed bitRate will be clipped
+ internally to ensure the audio recording can proceed smoothly based on the
+ capabilities of the platform.
+@param {Number} bitRate the audio encoding bit rate in bits per second.
+*/
+setAudioEncodingBitRate : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setVideoEncodingBitRate'>/**Sets the video encoding bit rate for recording. Call this method before prepare().
+</span> Prepare() may perform additional checks on the parameter to make sure whether the
+ specified bit rate is applicable, and sometimes the passed bitRate will be
+ clipped internally to ensure the video recording can proceed smoothly based on
+ the capabilities of the platform.
+@param {Number} bitRate the video encoding bit rate in bits per second.
+*/
+setVideoEncodingBitRate : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setVideoEncodingProfileLevel'>/**Sets the desired video encoding profile and level for recording. The profile and level
+</span> must be valid for the video encoder set by {@link #setVideoEncoder}. This method can
+ called before or after {@link #setVideoEncoder} but it must be called before {@link #prepare}.
+ {@code prepare()} may perform additional checks on the parameter to make sure that the specified
+ profile and level are applicable, and sometimes the passed profile or level will be
+ discarded due to codec capablity or to ensure the video recording can proceed smoothly
+ based on the capabilities of the platform. &lt;br&gt;Application can also use the
+ {@link android.media.MediaCodecInfo.CodecCapabilities#profileLevels} to query applicable combination of profile
+ and level for the corresponding format. Note that the requested profile/level may not be supported by
+ the codec that is actually being used by this MediaRecorder instance.
+@param {Number} profile declared in {@link MediaCodecInfo.CodecProfileLevel}.
+@param {Number} level declared in {@link MediaCodecInfo.CodecProfileLevel}.
+@throws IllegalArgumentException when an invalid profile or level value is used.
+*/
+setVideoEncodingProfileLevel : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setAuxiliaryOutputFile'>/**Currently not implemented. It does nothing.
+</span>@deprecated Time lapse mode video recording using camera still image capture
+ is not desirable, and will not be supported.
+@hide 
+*/
+setAuxiliaryOutputFile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setAuxiliaryOutputFile'>/**Currently not implemented. It does nothing.
+</span>@deprecated Time lapse mode video recording using camera still image capture
+ is not desirable, and will not be supported.
+@hide 
+*/
+setAuxiliaryOutputFile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setOutputFile'>/**Pass in the file descriptor of the file to be written. Call this after
+</span> setOutputFormat() but before prepare().
+@param {Object {FileDescriptor}} fd an open file descriptor to be written into.
+@throws IllegalStateException if it is called before
+ setOutputFormat() or after prepare()
+*/
+setOutputFile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setOutputFile'>/**Pass in the file object to be written. Call this after setOutputFormat() but before prepare().
+</span> File should be seekable. After setting the next output file, application should not use the
+ file until {@link #stop}. Application is responsible for cleaning up unused files after
+ {@link #stop} is called.
+@param {Object {File}} file the file object to be written into.
+*/
+setOutputFile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setNextOutputFile'>/**Sets the next output file descriptor to be used when the maximum filesize is reached
+</span> on the prior output {@link #setOutputFile} or {@link #setNextOutputFile}). File descriptor
+ must be seekable and writable. After setting the next output file, application should not
+ use the file referenced by this file descriptor until {@link #stop}. It is the application's
+ responsibility to close the file descriptor. It is safe to do so as soon as this call returns.
+ Application must call this after receiving on the
+ {@link android.media.MediaRecorder.OnInfoListener} a &quot;what&quot; code of
+ {@link #MEDIA_RECORDER_INFO_MAX_FILESIZE_APPROACHING} and before receiving a &quot;what&quot; code of
+ {@link #MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED}. The file is not used until switching to
+ that output. Application will receive{@link #MEDIA_RECORDER_INFO_NEXT_OUTPUT_FILE_STARTED}
+ when the next output file is used. Application will not be able to set a new output file if
+ the previous one has not been used. Application is responsible for cleaning up unused files
+ after {@link #stop} is called.
+@param {Object {FileDescriptor}} fd an open file descriptor to be written into.
+@throws IllegalStateException if it is called before prepare().
+@throws IOException if setNextOutputFile fails otherwise.
+*/
+setNextOutputFile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setOutputFile'>/**Sets the path of the output file to be produced. Call this after
+</span> setOutputFormat() but before prepare().
+@param {String} path The pathname to use.
+@throws IllegalStateException if it is called before
+ setOutputFormat() or after prepare()
+*/
+setOutputFile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setNextOutputFile'>/**Sets the next output file to be used when the maximum filesize is reached on the prior
+</span> output {@link #setOutputFile} or {@link #setNextOutputFile}). File should be seekable.
+ After setting the next output file, application should not use the file until {@link #stop}.
+ Application must call this after receiving on the
+ {@link android.media.MediaRecorder.OnInfoListener} a &quot;what&quot; code of
+ {@link #MEDIA_RECORDER_INFO_MAX_FILESIZE_APPROACHING} and before receiving a &quot;what&quot; code of
+ {@link #MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED}. The file is not used until switching to
+ that output. Application will receive {@link #MEDIA_RECORDER_INFO_NEXT_OUTPUT_FILE_STARTED}
+ when the next output file is used. Application will not be able to set a new output file if
+ the previous one has not been used. Application is responsible for cleaning up unused files
+ after {@link #stop} is called.
+@param {Object {File}} file The file to use.
+@throws IllegalStateException if it is called before prepare().
+@throws IOException if setNextOutputFile fails otherwise.
+*/
+setNextOutputFile : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-prepare'>/**Prepares the recorder to begin capturing and encoding data. This method
+</span> must be called after setting up the desired audio and video sources,
+ encoders, file format, etc., but before start().
+@throws IllegalStateException if it is called after
+ start() or before setOutputFormat().
+@throws IOException if prepare fails otherwise.
+*/
+prepare : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-start'>/**Begins capturing and encoding data to the file specified with
+</span> setOutputFile(). Call this after prepare().
+
+ &lt;p&gt;Since API level 13, if applications set a camera via
+ {@link #setCamera}(Camera), the apps can use the camera after this method
+ call. The apps do not need to lock the camera again. However, if this
+ method fails, the apps should still lock the camera back. The apps should
+ not start another recording session during recording.
+@throws IllegalStateException if it is called before
+ prepare() or when the camera is already in use by another app.
+*/
+start : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-stop'>/**Stops recording. Call this after start(). Once recording is stopped,
+</span> you will have to configure it again as if it has just been constructed.
+ Note that a RuntimeException is intentionally thrown to the
+ application, if no valid audio/video data has been received when stop()
+ is called. This happens if stop() is called immediately after
+ start(). The failure lets the application take action accordingly to
+ clean up the output file (delete the output file, for instance), since
+ the output file is not properly constructed when this happens.
+@throws IllegalStateException if it is called before start()
+*/
+stop : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-pause'>/**Pauses recording. Call this after start(). You may resume recording
+</span> with resume() without reconfiguration, as opposed to stop(). It does
+ nothing if the recording is already paused.
+
+ When the recording is paused and resumed, the resulting output would
+ be as if nothing happend during paused period, immediately switching
+ to the resumed scene.
+@throws IllegalStateException if it is called before start() or after
+ stop()
+*/
+pause : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-resume'>/**Resumes recording. Call this after start(). It does nothing if the
+</span> recording is not paused.
+@throws IllegalStateException if it is called before start() or after
+ stop()
+@see android.media.MediaRecorder#pause
+*/
+resume : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-reset'>/**Restarts the MediaRecorder to its idle state. After calling
+</span> this method, you will have to configure it again as if it had just been
+ constructed.
+*/
+reset : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getMaxAmplitude'>/**Returns the maximum absolute amplitude that was sampled since the last
+</span> call to this method. Call this only after the setAudioSource().
+@return {Number} the maximum absolute amplitude measured since the last call, or
+ 0 when called for the first time
+@throws IllegalStateException if it is called before
+ the audio source has been set.
+*/
+getMaxAmplitude : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setOnErrorListener'>/**Register a callback to be invoked when an error occurs while
+</span> recording.
+@param {Object {MediaRecorder.OnErrorListener}} l the callback that will be run
+*/
+setOnErrorListener : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setOnInfoListener'>/**Register a callback to be invoked when an informational event occurs while
+</span> recording.
+@param {Object {MediaRecorder.OnInfoListener}} listener the callback that will be run
+*/
+setOnInfoListener : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setPreferredDevice'>/**Specifies an audio device (via an {@link android.media.AudioDeviceInfo} object) to route
+</span> the input from this MediaRecorder.
+@param {Object {AudioDeviceInfo}} deviceInfo The {@link AudioDeviceInfo} specifying the audio source.
+  If deviceInfo is null, default routing is restored.
+@return {Boolean} true if succesful, false if the specified {@link AudioDeviceInfo} is non-null and
+ does not correspond to a valid audio input device.
+*/
+setPreferredDevice : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getPreferredDevice'>/**Returns the selected input device specified by {@link #setPreferredDevice}. Note that this
+</span> is not guaranteed to correspond to the actual device being used for recording.
+*/
+getPreferredDevice : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getRoutedDevice'>/**Returns an {@link android.media.AudioDeviceInfo} identifying the current routing of this MediaRecorder
+</span> Note: The query is only valid if the MediaRecorder is currently recording.
+ If the recorder is not recording, the returned device can be null or correspond to previously
+ selected device when the recorder was last active.
+*/
+getRoutedDevice : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-addOnRoutingChangedListener'>/**Adds an {@link android.media.AudioRouting.OnRoutingChangedListener} to receive notifications of routing
+</span> changes on this MediaRecorder.
+@param {Object {AudioRouting.OnRoutingChangedListener}} listener The {@link AudioRouting.OnRoutingChangedListener} interface to receive
+ notifications of rerouting events.
+@param {Object {Handler}} handler  Specifies the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the handler on the main looper will be used.
+*/
+addOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-removeOnRoutingChangedListener'>/**Removes an {@link android.media.AudioRouting.OnRoutingChangedListener} which has been previously added
+</span> to receive rerouting notifications.
+@param {Object {AudioRouting.OnRoutingChangedListener}} listener The previously added {@link AudioRouting.OnRoutingChangedListener} interface
+ to remove.
+*/
+removeOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getActiveMicrophones'>/**Return A lists of {@link android.media.MicrophoneInfo} representing the active microphones.
+</span> By querying channel mapping for each active microphone, developer can know how
+ the microphone is used by each channels or a capture stream.
+@return {Object {java.util.List}} a lists of {@link MicrophoneInfo} representing the active microphones
+@throws IOException if an error occurs
+*/
+getActiveMicrophones : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setPreferredMicrophoneDirection'>/**Specifies the logical microphone (for processing).
+</span>@param {Number} direction Direction constant.
+@return {Boolean} true if sucessful.
+*/
+setPreferredMicrophoneDirection : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-setPreferredMicrophoneFieldDimension'>/**Specifies the zoom factor (i.e. the field dimension) for the selected microphone
+</span> (for processing). The selected microphone is determined by the use-case for the stream.
+@param {Number} zoom the desired field dimension of microphone capture. Range is from -1 (wide angle),
+ though 0 (no zoom) to 1 (maximum zoom).
+@return {Boolean} true if sucessful.
+*/
+setPreferredMicrophoneFieldDimension : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-registerAudioRecordingCallback'>/**Register a callback to be notified of audio capture changes via a
+</span> {@link android.media.AudioManager.AudioRecordingCallback}. A callback is received when the capture path
+ configuration changes (pre-processing, format, sampling rate...) or capture is
+ silenced/unsilenced by the system.
+@param {Object {Executor}} executor {@link Executor} to handle the callbacks.
+@param {Object {AudioManager.AudioRecordingCallback}} cb non-null callback to register
+*/
+registerAudioRecordingCallback : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-unregisterAudioRecordingCallback'>/**Unregister an audio recording callback previously registered with
+</span> {@link #registerAudioRecordingCallback(Executor, android.media.AudioManager.AudioRecordingCallback)}.
+@param {Object {AudioManager.AudioRecordingCallback}} cb non-null callback to unregister
+*/
+unregisterAudioRecordingCallback : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getActiveRecordingConfiguration'>/**Returns the current active audio recording for this audio recorder.
+</span>@return {Object {android.media.AudioRecordingConfiguration}} a valid {@link AudioRecordingConfiguration} if this recorder is active
+ or null otherwise.
+@see AudioRecordingConfiguration
+*/
+getActiveRecordingConfiguration : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getPortId'>/**
+</span>@hide 
+*/
+getPortId : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-release'>/**Releases resources associated with this MediaRecorder object.
+</span> It is good practice to call this method when you're done
+ using the MediaRecorder. In particular, whenever an Activity
+ of an application is paused (its onPause() method is called),
+ or stopped (its onStop() method is called), this method should be
+ invoked to release the MediaRecorder object, unless the application
+ has a special need to keep the object around. In addition to
+ unnecessary resources (such as memory and instances of codecs)
+ being held, failure to call this method immediately if a
+ MediaRecorder object is no longer needed may also lead to
+ continuous battery consumption for mobile devices, and recording
+ failure for other applications if no multiple instances of the
+ same codec are supported on a device. Even if multiple instances
+ of the same codec are supported, some performance degradation
+ may be expected when unnecessary multiple instances are used
+ at the same time.
+*/
+release : function(  ) {},
+
+<span id='android-media-MediaRecorder-method-getMetrics'>/**Return Metrics data about the current Mediarecorder instance.
+</span>@return {Object {android.os.PersistableBundle}} a {@link PersistableBundle} containing the set of attributes and values
+ available for the media being generated by this instance of
+ MediaRecorder.
+ The attributes are descibed in {@link MetricsConstants}.
+
+  Additional vendor-specific fields may also be present in
+  the return value.
+*/
+getMetrics : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-speech-tts-TtsEngines'>/**@class android.speech.tts.TtsEngines
+</span>@extends java.lang.Object
+
+ Support class for querying the list of available engines
+ on the device and deciding which one to use etc.
+
+ Comments in this class the use the shorthand &quot;system engines&quot; for engines that
+ are a part of the system image.
+
+ This class is thread-safe/
+
+ @hide
+*/
+var TtsEngines = {
+
+<span id='android-speech-tts-TtsEngines-method-getDefaultEngine'>/**
+</span>@return {String} the default TTS engine. If the user has set a default, and the engine
+         is available on the device, the default is returned. Otherwise,
+         the highest ranked engine is returned as per {@link EngineInfoComparator}.
+*/
+getDefaultEngine : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-getHighestRankedEngineName'>/**
+</span>@return {String} the package name of the highest ranked system engine, {@code null}
+         if no TTS engines were present in the system image.
+*/
+getHighestRankedEngineName : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-getEngineInfo'>/**Returns the engine info for a given engine name. Note that engines are
+</span> identified by their package name.
+*/
+getEngineInfo : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-getEngines'>/**Gets a list of all installed TTS engines.
+</span>@return {Object {java.util.List}} A list of engine info objects. The list can be empty, but never {@code null}.
+*/
+getEngines : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-isEngineInstalled'>/**
+</span>@return {Boolean} true if a given engine is installed on the system.
+*/
+isEngineInstalled : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-getSettingsIntent'>/**
+</span>@return {Object {android.content.Intent}} an intent that can launch the settings activity for a given tts engine.
+*/
+getSettingsIntent : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-getLocalePrefForEngine'>/**Returns the default locale for a given TTS engine. Attempts to read the
+</span> value from {@link Settings.Secure#TTS_DEFAULT_LOCALE}, failing which the
+ default phone locale is returned.
+@param {String} engineName the engine to return the locale for.
+@return {Object {java.util.Locale}} the locale preference for this engine. Will be non null.
+*/
+getLocalePrefForEngine : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-getLocalePrefForEngine'>/**Returns the default locale for a given TTS engine from given settings string.
+</span>*/
+getLocalePrefForEngine : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-isLocaleSetToDefaultForEngine'>/**True if a given TTS engine uses the default phone locale as a default locale. Attempts to
+</span> read the value from {@link Settings.Secure#TTS_DEFAULT_LOCALE}. If
+ its  value is empty, this methods returns true.
+@param {String} engineName the engine to return the locale for.
+*/
+isLocaleSetToDefaultForEngine : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-parseLocaleString'>/**Parses a locale encoded as a string, and tries its best to return a valid {@link Locale}
+</span> object, even if the input string is encoded using the old-style 3 character format e.g.
+ &quot;deu-deu&quot;. At the end, we test if the resulting locale can return ISO3 language and
+ country codes ({@link Locale#getISO3Language()} and {@link Locale#getISO3Country()}),
+ if it fails to do so, we return null.
+*/
+parseLocaleString : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-normalizeTTSLocale'>/**This method tries its best to return a valid {@link Locale} object from the TTS-specific
+</span> Locale input (returned by {@link android.speech.tts.TextToSpeech#getLanguage}
+ and {@link android.speech.tts.TextToSpeech#getDefaultLanguage}). A TTS Locale language field contains
+ a three-letter ISO 639-2/T code (where a proper Locale would use a two-letter ISO 639-1
+ code), and the country field contains a three-letter ISO 3166 country code (where a proper
+ Locale would use a two-letter ISO 3166-1 code).
+
+ This method tries to convert three-letter language and country codes into their two-letter
+ equivalents. If it fails to do so, it keeps the value from the TTS locale.
+*/
+normalizeTTSLocale : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-toOldLocaleStringFormat'>/**Return the old-style string form of the locale. It consists of 3 letter codes:
+</span> &lt;ul&gt;
+   &lt;li&gt;&quot;ISO 639-2/T language code&quot; if the locale has no country entry&lt;/li&gt;
+   &lt;li&gt; &quot;ISO 639-2/T language code{@link #LOCALE_DELIMITER}ISO 3166 country code&quot;
+     if the locale has no variant entry&lt;/li&gt;
+   &lt;li&gt; &quot;ISO 639-2/T language code{@link #LOCALE_DELIMITER}ISO 3166 country
+     code{@link #LOCALE_DELIMITER}variant&quot; if the locale has a variant entry&lt;/li&gt;
+ &lt;/ul&gt;
+ If we fail to generate those codes using {@link Locale#getISO3Country()} and
+ {@link Locale#getISO3Language()}, then we return new String[]{&quot;eng&quot;,&quot;USA&quot;,&quot;&quot;};
+*/
+toOldLocaleStringFormat : function(  ) {},
+
+<span id='android-speech-tts-TtsEngines-method-updateLocalePrefForEngine'>/**Serialize the locale to a string and store it as a default locale for the given engine. If
+</span> the passed locale is null, an empty string will be serialized; that empty string, when
+ read back, will evaluate to {@link Locale#getDefault()}.
+*/
+updateLocalePrefForEngine : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

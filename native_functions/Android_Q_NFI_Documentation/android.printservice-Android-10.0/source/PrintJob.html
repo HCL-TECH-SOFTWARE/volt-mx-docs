@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-printservice-PrintJob'>/**@class android.printservice.PrintJob
+</span>@extends java.lang.Object
+
+ This class represents a print job from the perspective of a print
+ service. It provides APIs for observing the print job state and
+ performing operations on the print job.
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; All methods of this class must be invoked on
+ the main application thread.
+ &lt;/p&gt;
+*/
+var PrintJob = {
+
+<span id='android-printservice-PrintJob-method-getId'>/**Gets the unique print job id.
+</span>@return {Object {android.print.PrintJobId}} The id.
+*/
+getId : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-getInfo'>/**Gets the {@link android.printservice.PrintJobInfo} that describes this job.
+</span> &lt;p&gt;
+ &lt;strong&gt;Node:&lt;/strong&gt;The returned info object is a snapshot of the
+ current print job state. Every call to this method returns a fresh
+ info object that reflects the current print job state.
+ &lt;/p&gt;
+@return {Object {android.print.PrintJobInfo}} The print job info.
+*/
+getInfo : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-getDocument'>/**Gets the printed document.
+</span>@return {Object {android.printservice.PrintDocument}} The document.
+*/
+getDocument : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-isQueued'>/**Gets whether this print job is queued. Such a print job is
+</span> ready to be printed and can be started or cancelled.
+@return {Boolean} Whether the print job is queued.
+@see #start()
+@see #cancel()
+*/
+isQueued : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-isStarted'>/**Gets whether this print job is started. Such a print job is
+</span> being printed and can be completed or canceled or failed.
+@return {Boolean} Whether the print job is started.
+@see #complete()
+@see #cancel()
+@see #fail(String)
+*/
+isStarted : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-isBlocked'>/**Gets whether this print job is blocked. Such a print job is halted
+</span> due to an abnormal condition and can be started or canceled or failed.
+@return {Boolean} Whether the print job is blocked.
+@see #start()
+@see #cancel()
+@see #fail(String)
+*/
+isBlocked : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-isCompleted'>/**Gets whether this print job is completed. Such a print job
+</span> is successfully printed. This is a final state.
+@return {Boolean} Whether the print job is completed.
+@see #complete()
+*/
+isCompleted : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-isFailed'>/**Gets whether this print job is failed. Such a print job is
+</span> not successfully printed due to an error. This is a final state.
+@return {Boolean} Whether the print job is failed.
+@see #fail(String)
+*/
+isFailed : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-isCancelled'>/**Gets whether this print job is cancelled. Such a print job was
+</span> cancelled as a result of a user request. This is a final state.
+@return {Boolean} Whether the print job is cancelled.
+@see #cancel()
+*/
+isCancelled : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-start'>/**Starts the print job. You should call this method if {@link #isQueued}() or {@link #isBlocked}() returns true and you started
+</span> resumed printing.
+ &lt;p&gt;
+ This resets the print status to null. Set the new status by using {@link #setStatus}.
+ &lt;/p&gt;
+@return {Boolean} Whether the job was started.
+@see #isQueued()
+@see #isBlocked()
+*/
+start : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-block'>/**Blocks the print job. You should call this method if {@link #isStarted}() returns true and
+</span> you need to block the print job. For example, the user has to add some paper to continue
+ printing. To resume the print job call {@link #start}(). To change the reason call
+ {@link #setStatus}(CharSequence).
+@param {String} reason The human readable, short, and translated reason why the print job is blocked.
+@return {Boolean} Whether the job was blocked.
+@see #isStarted()
+@see #isBlocked()
+*/
+block : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-complete'>/**Completes the print job. You should call this method if {@link #isStarted}() returns true and you are done printing.
+</span>@return {Boolean} Whether the job as completed.
+@see #isStarted()
+*/
+complete : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-fail'>/**Fails the print job. You should call this method if {@link #isQueued}() or {@link #isStarted}() or {@link #isBlocked}()
+</span> returns true you failed while printing.
+@param {String} error The human readable, short, and translated reason
+ for the failure.
+@return {Boolean} Whether the job was failed.
+@see #isQueued()
+@see #isStarted()
+@see #isBlocked()
+*/
+fail : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-cancel'>/**Cancels the print job. You should call this method if {@link #isQueued}() or {@link #isStarted() or #isBlocked()} returns
+</span> true and you canceled the print job as a response to a call to
+ {@link android.printservice.PrintService#onRequestCancelPrintJob(PrintJob)}.
+@return {Boolean} Whether the job is canceled.
+@see #isStarted()
+@see #isQueued()
+@see #isBlocked()
+*/
+cancel : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-setProgress'>/**Sets the progress of this print job as a fraction of 1.
+</span>@param {Number} progress The new progress
+*/
+setProgress : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-setStatus'>/**Sets the status of this print job. This should be a human readable, short, and translated
+</span> description of the current state of the print job.
+ &lt;p /&gt;
+ This overrides any previously set status set via {@link #setStatus}(CharSequence),
+ {@link #setStatus}(int), {@link #block}(String), or {@link #fail}(String),
+@param {Object {CharSequence}} status The new status. If null the status will be empty.
+*/
+setStatus : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-setStatus'>/**Sets the status of this print job as a string resource.
+</span> &lt;p /&gt;
+ This overrides any previously set status set via {@link #setStatus}(CharSequence),
+ {@link #setStatus}(int), {@link #block}(String), or {@link #fail}(String),
+@param {Number} statusResId The new status as a String resource. If 0 the status will be empty.
+*/
+setStatus : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-setTag'>/**Sets a tag that is valid in the context of a {@link android.printservice.PrintService}
+</span> and is not interpreted by the system. For example, a print service
+ may set as a tag the key of the print job returned by a remote
+ print server, if the printing is off handed to a cloud based service.
+@param {String} tag The tag.
+@return {Boolean} True if the tag was set, false otherwise.
+*/
+setTag : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-getTag'>/**Gets the print job tag.
+</span>@return {String} The tag or null.
+@see #setTag(String)
+*/
+getTag : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-getAdvancedStringOption'>/**Gets the value of an advanced (printer specific) print option.
+</span>@param {String} key The option key.
+@return {String} The option value.
+*/
+getAdvancedStringOption : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-hasAdvancedOption'>/**Gets whether this job has a given advanced (printer specific) print
+</span> option.
+@param {String} key The option key.
+@return {Boolean} Whether the option is present.
+*/
+hasAdvancedOption : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-getAdvancedIntOption'>/**Gets the value of an advanced (printer specific) print option.
+</span>@param {String} key The option key.
+@return {Number} The option value.
+*/
+getAdvancedIntOption : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-printservice-PrintJob-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

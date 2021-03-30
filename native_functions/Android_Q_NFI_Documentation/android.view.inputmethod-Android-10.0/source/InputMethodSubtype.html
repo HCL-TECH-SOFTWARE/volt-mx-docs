@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-inputmethod-InputMethodSubtype'>/**@class android.view.inputmethod.InputMethodSubtype
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class is used to specify meta information of a subtype contained in an input method editor
+ (IME). Subtype can describe locale (e.g. en_US, fr_FR...) and mode (e.g. voice, keyboard...),
+ and is used for IME switch and settings. The input method subtype allows the system to bring up
+ the specified subtype of the designated IME directly.
+
+ &lt;p&gt;It should be defined in an XML resource file of the input method with the
+ &lt;code&gt;&amp;lt;subtype&amp;gt;&lt;/code&gt; element, which resides within an {@code &lt;input-method&gt;} element.
+ For more information, see the guide to
+ &lt;a href=&quot;{@docRoot}guide/topics/text/creating-input-method.html&quot;&gt;
+ Creating an Input Method&lt;/a&gt;.&lt;/p&gt;
+
+ @see InputMethodInfo
+
+ @attr ref android.R.styleable#InputMethod_Subtype_label
+ @attr ref android.R.styleable#InputMethod_Subtype_icon
+ @attr ref android.R.styleable#InputMethod_Subtype_languageTag
+ @attr ref android.R.styleable#InputMethod_Subtype_imeSubtypeLocale
+ @attr ref android.R.styleable#InputMethod_Subtype_imeSubtypeMode
+ @attr ref android.R.styleable#InputMethod_Subtype_imeSubtypeExtraValue
+ @attr ref android.R.styleable#InputMethod_Subtype_isAuxiliary
+ @attr ref android.R.styleable#InputMethod_Subtype_overridesImplicitlyEnabledSubtype
+ @attr ref android.R.styleable#InputMethod_Subtype_subtypeId
+ @attr ref android.R.styleable#InputMethod_Subtype_isAsciiCapable
+*/
+var InputMethodSubtype = {
+
+<span id='android-view-inputmethod-InputMethodSubtype-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-inputmethod-InputMethodSubtype-method-getNameResId'>/**
+</span>@return {Number} Resource ID of the subtype name string.
+*/
+getNameResId : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getIconResId'>/**
+</span>@return {Number} Resource ID of the subtype icon drawable.
+*/
+getIconResId : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getLocale'>/**
+</span>@return {String} The locale of the subtype. This method returns the &quot;locale&quot; string parameter passed
+ to the constructor.
+@deprecated Use {@link #getLanguageTag()} instead.
+*/
+getLocale : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getLanguageTag'>/**
+</span>@return {String} the BCP-47 Language Tag of the subtype.  Returns an empty string when no Language Tag
+ is specified.
+@see Locale#forLanguageTag(String)
+*/
+getLanguageTag : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getLocaleObject'>/**
+</span>@return {Object {java.util.Locale}} {@link Locale} constructed from {@link #getLanguageTag()}. If the Language Tag is not
+ specified, then try to construct from {@link #getLocale()}
+
+ &lt;p&gt;TODO: Consider to make this a public API, or move this to support lib.&lt;/p&gt;
+@hide 
+*/
+getLocaleObject : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getMode'>/**
+</span>@return {String} The mode of the subtype.
+*/
+getMode : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getExtraValue'>/**
+</span>@return {String} The extra value of the subtype.
+*/
+getExtraValue : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-isAuxiliary'>/**
+</span>@return {Boolean} true if this subtype is auxiliary, false otherwise. An auxiliary subtype will not be
+ shown in the list of enabled IMEs for choosing the current IME in the Settings even when this
+ subtype is enabled. Please note that this subtype will still be shown in the list of IMEs in
+ the IME switcher to allow the user to tentatively switch to this subtype while an IME is
+ shown. The framework will never switch the current IME to this subtype by
+ {@link android.view.inputmethod.InputMethodManager#switchToLastInputMethod}.
+ The intent of having this flag is to allow for IMEs that are invoked in a one-shot way as
+ auxiliary input mode, and return to the previous IME once it is finished (e.g. voice input).
+*/
+isAuxiliary : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-overridesImplicitlyEnabledSubtype'>/**
+</span>@return {Boolean} true when this subtype will be enabled by default if no other subtypes in the IME
+ are enabled explicitly, false otherwise. Note that a subtype with this method returning true
+ will not be shown in the list of subtypes in each IME's subtype enabler. Having an
+ &quot;automatic&quot; subtype is an example use of this flag.
+*/
+overridesImplicitlyEnabledSubtype : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-isAsciiCapable'>/**
+</span>@return {Boolean} true if this subtype is Ascii capable, false otherwise. If the subtype is ASCII
+ capable, it should guarantee that the user can input ASCII characters with this subtype.
+ This is important because many password fields only allow ASCII-characters.
+*/
+isAsciiCapable : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getDisplayName'>/**Returns a display name for this subtype.
+</span>
+ &lt;p&gt;If {@code subtypeNameResId} is specified (!= 0) text generated from that resource will
+ be returned. The localized string resource of the label should be capitalized for inclusion
+ in UI lists. The string resource may contain at most one {@code %s}. If present, the
+ {@code %s} will be replaced with the display name of the subtype locale in the user's locale.
+
+ &lt;p&gt;If {@code subtypeNameResId} is not specified (== 0) the framework returns the display name
+ of the subtype locale, as capitalized for use in UI lists, in the user's locale.
+@param {Object {Context}} context {@link Context} will be used for getting {@link Locale} and
+ {@link android.content.pm.PackageManager}.
+@param {String} packageName The package name of the input method.
+@param {Object {ApplicationInfo}} appInfo The {@link ApplicationInfo} of the input method.
+@return {Object {java.lang.CharSequence}} a display name for this subtype.
+*/
+getDisplayName : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-containsExtraValueKey'>/**The string of ExtraValue in subtype should be defined as follows:
+</span> example: key0,key1=value1,key2,key3,key4=value4
+@param {String} key The key of extra value
+@return {Boolean} The subtype contains specified the extra value
+*/
+containsExtraValueKey : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getExtraValueOf'>/**The string of ExtraValue in subtype should be defined as follows:
+</span> example: key0,key1=value1,key2,key3,key4=value4
+@param {String} key The key of extra value
+@return {String} The value of the specified key
+*/
+getExtraValueOf : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-hasSubtypeId'>/**
+</span>@hide 
+@return {Boolean} {@code true} if a valid subtype ID exists.
+*/
+hasSubtypeId : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-getSubtypeId'>/**
+</span>@hide 
+@return {Number} subtype ID. {@code 0} means that not subtype ID is specified.
+*/
+getSubtypeId : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSubtype-method-sort'>/**Sort the list of InputMethodSubtype
+</span>@param {Object {Context}} context Context will be used for getting localized strings from IME
+@param {Number} flags Flags for the sort order
+@param {Object {InputMethodInfo}} imi InputMethodInfo of which subtypes are subject to be sorted
+@param {Object {java.util.List}} subtypeList List of InputMethodSubtype which will be sorted
+@return {Object {java.util.List}} Sorted list of subtypes
+@hide 
+*/
+sort : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

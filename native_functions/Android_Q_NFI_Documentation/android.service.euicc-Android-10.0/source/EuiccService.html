@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-euicc-EuiccService'>/**@class android.service.euicc.EuiccService
+</span>@extends android.app.Service
+
+ Service interface linking the system with an eUICC local profile assistant (LPA) application.
+
+ &lt;p&gt;An LPA consists of two separate components (which may both be implemented in the same APK):
+ the LPA backend, and the LPA UI or LUI.
+
+ &lt;p&gt;To implement the LPA backend, you must extend this class and declare this service in your
+ manifest file. The service must require the
+ {@link android.Manifest.permission#BIND_EUICC_SERVICE} permission and include an intent filter
+ with the {@link #EUICC_SERVICE_INTERFACE} action. It's suggested that the priority of the intent
+ filter to be set to a non-zero value in case multiple implementations are present on the device.
+ See the below example. Note that there will be problem if two LPAs are present and they have the
+ same priority.
+ Example:
+
+ &lt;pre&gt;{@code
+ &lt;service android:name=&quot;.MyEuiccService&quot;
+          android:permission=&quot;android.permission.BIND_EUICC_SERVICE&quot;&gt;
+     &lt;intent-filter android:priority=&quot;100&quot;&gt;
+         &lt;action android:name=&quot;android.service.euicc.EuiccService&quot; /&gt;
+     &lt;/intent-filter&gt;
+ &lt;/service&gt;
+ }&lt;/pre&gt;
+
+ &lt;p&gt;To implement the LUI, you must provide an activity for the following actions:
+
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS}
+ &lt;li&gt;{@link #ACTION_PROVISION_EMBEDDED_SUBSCRIPTION}
+ &lt;/ul&gt;
+
+ &lt;p&gt;As with the service, each activity must require the
+ {@link android.Manifest.permission#BIND_EUICC_SERVICE} permission. Each should have an intent
+ filter with the appropriate action, the {@link #CATEGORY_EUICC_UI} category, and a non-zero
+ priority.
+
+ &lt;p&gt;Old implementations of EuiccService may support passing in slot IDs equal to
+ {@link android.telephony.SubscriptionManager#INVALID_SIM_SLOT_INDEX}, which allows the LPA to
+ decide which eUICC to target when there are multiple eUICCs. This behavior is not supported in
+ Android Q or later.
+
+ @hide
+*/
+var EuiccService = {
+
+<span id='android-service-euicc-EuiccService-property-EUICC_SERVICE_INTERFACE'>/**Action which must be included in this service's intent filter. */
+</span>EUICC_SERVICE_INTERFACE : &quot;android.service.euicc.EuiccService&quot;,
+<span id='android-service-euicc-EuiccService-property-CATEGORY_EUICC_UI'>/**Category which must be defined to all UI actions, for efficient lookup. */
+</span>CATEGORY_EUICC_UI : &quot;android.service.euicc.category.EUICC_UI&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_BIND_CARRIER_PROVISIONING_SERVICE'>/** Action used to bind the carrier app and get the activation code from the carrier app. This
+</span> activation code will be used to download the eSIM profile during eSIM activation flow.
+*/
+ACTION_BIND_CARRIER_PROVISIONING_SERVICE : &quot;android.service.euicc.action.BIND_CARRIER_PROVISIONING_SERVICE&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS'>/** @see android.telephony.euicc.EuiccManager#ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS
+</span> The difference is this one is used by system to bring up the LUI.
+*/
+ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS : &quot;android.service.euicc.action.MANAGE_EMBEDDED_SUBSCRIPTIONS&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_PROVISION_EMBEDDED_SUBSCRIPTION'>/**@see android.telephony.euicc.EuiccManager#ACTION_PROVISION_EMBEDDED_SUBSCRIPTION */
+</span>ACTION_PROVISION_EMBEDDED_SUBSCRIPTION : &quot;android.service.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED'>/** @see android.telephony.euicc.EuiccManager#ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED. This is
+</span> a protected intent that can only be sent by the system, and requires the
+ {@link android.Manifest.permission#BIND_EUICC_SERVICE} permission.
+*/
+ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED : &quot;android.service.euicc.action.TOGGLE_SUBSCRIPTION_PRIVILEGED&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_DELETE_SUBSCRIPTION_PRIVILEGED'>/** @see android.telephony.euicc.EuiccManager#ACTION_DELETE_SUBSCRIPTION_PRIVILEGED. This is
+</span> a protected intent that can only be sent by the system, and requires the
+ {@link android.Manifest.permission#BIND_EUICC_SERVICE} permission.
+*/
+ACTION_DELETE_SUBSCRIPTION_PRIVILEGED : &quot;android.service.euicc.action.DELETE_SUBSCRIPTION_PRIVILEGED&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_RENAME_SUBSCRIPTION_PRIVILEGED'>/** @see android.telephony.euicc.EuiccManager#ACTION_RENAME_SUBSCRIPTION_PRIVILEGED. This is
+</span> a protected intent that can only be sent by the system, and requires the
+ {@link android.Manifest.permission#BIND_EUICC_SERVICE} permission.
+*/
+ACTION_RENAME_SUBSCRIPTION_PRIVILEGED : &quot;android.service.euicc.action.RENAME_SUBSCRIPTION_PRIVILEGED&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_RESOLVE_DEACTIVATE_SIM'>/** Alert the user that this action will result in an active SIM being deactivated.
+</span> To implement the LUI triggered by the system, you need to define this in AndroidManifest.xml.
+*/
+ACTION_RESOLVE_DEACTIVATE_SIM : &quot;android.service.euicc.action.RESOLVE_DEACTIVATE_SIM&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_RESOLVE_NO_PRIVILEGES'>/** Alert the user about a download/switch being done for an app that doesn't currently have
+</span> carrier privileges.
+*/
+ACTION_RESOLVE_NO_PRIVILEGES : &quot;android.service.euicc.action.RESOLVE_NO_PRIVILEGES&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_RESOLVE_CONFIRMATION_CODE'>/** Ask the user to input carrier confirmation code.
+</span>
+ @deprecated From Q, the resolvable errors happened in the download step are presented as
+ bit map in {@link #EXTRA_RESOLVABLE_ERRORS}. The corresponding action would be
+ {@link #ACTION_RESOLVE_RESOLVABLE_ERRORS}.
+*/
+ACTION_RESOLVE_CONFIRMATION_CODE : &quot;android.service.euicc.action.RESOLVE_CONFIRMATION_CODE&quot;,
+<span id='android-service-euicc-EuiccService-property-ACTION_RESOLVE_RESOLVABLE_ERRORS'>/**Ask the user to resolve all the resolvable errors. */
+</span>ACTION_RESOLVE_RESOLVABLE_ERRORS : &quot;android.service.euicc.action.RESOLVE_RESOLVABLE_ERRORS&quot;,
+<span id='android-service-euicc-EuiccService-property-RESOLVABLE_ERROR_CONFIRMATION_CODE'>/** Possible value for the bit map of resolvable errors indicating the download process needs
+</span> the user to input confirmation code.
+*/
+RESOLVABLE_ERROR_CONFIRMATION_CODE : &quot;1&quot;,
+<span id='android-service-euicc-EuiccService-property-RESOLVABLE_ERROR_POLICY_RULES'>/** Possible value for the bit map of resolvable errors indicating the download process needs
+</span> the user's consent to allow profile policy rules.
+*/
+RESOLVABLE_ERROR_POLICY_RULES : &quot;2&quot;,
+<span id='android-service-euicc-EuiccService-property-EXTRA_RESOLUTION_CALLING_PACKAGE'>/** Intent extra set for resolution requests containing the package name of the calling app.
+</span> This is used by the above actions including ACTION_RESOLVE_DEACTIVATE_SIM,
+ ACTION_RESOLVE_NO_PRIVILEGES and ACTION_RESOLVE_RESOLVABLE_ERRORS.
+*/
+EXTRA_RESOLUTION_CALLING_PACKAGE : &quot;android.service.euicc.extra.RESOLUTION_CALLING_PACKAGE&quot;,
+<span id='android-service-euicc-EuiccService-property-EXTRA_RESOLVABLE_ERRORS'>/** Intent extra set for resolution requests containing the list of resolvable errors to be
+</span> resolved. Each resolvable error is an integer. Its possible values include:
+ &lt;UL&gt;
+ &lt;LI&gt;{@link #RESOLVABLE_ERROR_CONFIRMATION_CODE}
+ &lt;LI&gt;{@link #RESOLVABLE_ERROR_POLICY_RULES}
+ &lt;/UL&gt;
+*/
+EXTRA_RESOLVABLE_ERRORS : &quot;android.service.euicc.extra.RESOLVABLE_ERRORS&quot;,
+<span id='android-service-euicc-EuiccService-property-EXTRA_RESOLUTION_CONFIRMATION_CODE_RETRIED'>/** Intent extra set for resolution requests containing a boolean indicating whether to ask the
+</span> user to retry another confirmation code.
+*/
+EXTRA_RESOLUTION_CONFIRMATION_CODE_RETRIED : &quot;android.service.euicc.extra.RESOLUTION_CONFIRMATION_CODE_RETRIED&quot;,
+<span id='android-service-euicc-EuiccService-property-EXTRA_RESOLUTION_CARD_ID'>/** Intent extra set for resolution requests containing an int indicating the current card Id.
+</span>*/
+EXTRA_RESOLUTION_CARD_ID : &quot;android.service.euicc.extra.RESOLUTION_CARD_ID&quot;,
+<span id='android-service-euicc-EuiccService-property-RESULT_OK'>/**Result code for a successful operation. */
+</span>RESULT_OK : &quot;0&quot;,
+<span id='android-service-euicc-EuiccService-property-RESULT_MUST_DEACTIVATE_SIM'>/**Result code indicating that an active SIM must be deactivated to perform the operation. */
+</span>RESULT_MUST_DEACTIVATE_SIM : &quot;-1&quot;,
+<span id='android-service-euicc-EuiccService-property-RESULT_RESOLVABLE_ERRORS'>/**Result code indicating that the user must resolve resolvable errors. */
+</span>RESULT_RESOLVABLE_ERRORS : &quot;-2&quot;,
+<span id='android-service-euicc-EuiccService-property-RESULT_NEED_CONFIRMATION_CODE'>/** Result code indicating that the user must input a carrier confirmation code.
+</span>
+ @deprecated From Q, the resolvable errors happened in the download step are presented as
+ bit map in {@link #EXTRA_RESOLVABLE_ERRORS}. The corresponding result would be
+ {@link #RESULT_RESOLVABLE_ERRORS}.
+*/
+RESULT_NEED_CONFIRMATION_CODE : &quot;-2&quot;,
+<span id='android-service-euicc-EuiccService-property-RESULT_FIRST_USER'>/**Start of implementation-specific error results. */
+</span>RESULT_FIRST_USER : &quot;1&quot;,
+<span id='android-service-euicc-EuiccService-property-RESOLUTION_ACTIONS'>/** List of all valid resolution actions for validation purposes.
+</span> @hide
+*/
+RESOLUTION_ACTIONS : &quot;null&quot;,
+<span id='android-service-euicc-EuiccService-property-EXTRA_RESOLUTION_CONSENT'>/** Boolean extra for resolution actions indicating whether the user granted consent.
+</span> This is used and set by the implementation and used in {@code EuiccOperation}.
+*/
+EXTRA_RESOLUTION_CONSENT : &quot;android.service.euicc.extra.RESOLUTION_CONSENT&quot;,
+<span id='android-service-euicc-EuiccService-property-EXTRA_RESOLUTION_CONFIRMATION_CODE'>/** String extra for resolution actions indicating the carrier confirmation code.
+</span> This is used and set by the implementation and used in {@code EuiccOperation}.
+*/
+EXTRA_RESOLUTION_CONFIRMATION_CODE : &quot;android.service.euicc.extra.RESOLUTION_CONFIRMATION_CODE&quot;,
+<span id='android-service-euicc-EuiccService-property-EXTRA_RESOLUTION_ALLOW_POLICY_RULES'>/** String extra for resolution actions indicating whether the user allows policy rules.
+</span> This is used and set by the implementation and used in {@code EuiccOperation}.
+*/
+EXTRA_RESOLUTION_ALLOW_POLICY_RULES : &quot;android.service.euicc.extra.RESOLUTION_ALLOW_POLICY_RULES&quot;,
+<span id='android-service-euicc-EuiccService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onBind'>/**If overriding this method, call through to the super method for any unknown actions.
+</span> {@inheritDoc}
+*/
+onBind : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onGetEid'>/**Return the EID of the eUICC.
+</span>@param {Number} slotId ID of the SIM slot being queried.
+@return {String} the EID.
+@see android.telephony.euicc.EuiccManager#getEid
+*/
+onGetEid : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onGetOtaStatus'>/**Return the status of OTA update.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@return {Number} The status of Euicc OTA update.
+@see android.telephony.euicc.EuiccManager#getOtaStatus
+*/
+onGetOtaStatus : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onStartOtaIfNecessary'>/**Perform OTA if current OS is not the latest one.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {Object {EuiccService.OtaStatusChangedCallback}} statusChangedCallback Function called when OTA status changed.
+*/
+onStartOtaIfNecessary : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onGetDownloadableSubscriptionMetadata'>/**Populate {@link DownloadableSubscription} metadata for the given downloadable subscription.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {Object {DownloadableSubscription}} subscription A subscription whose metadata needs to be populated.
+@param {Boolean} forceDeactivateSim If true, and if an active SIM must be deactivated to access the
+     eUICC, perform this action automatically. Otherwise, {@link #RESULT_MUST_DEACTIVATE_SIM)}
+     should be returned to allow the user to consent to this operation first.
+@return {Object {android.service.euicc.GetDownloadableSubscriptionMetadataResult}} The result of the operation.
+@see android.telephony.euicc.EuiccManager#getDownloadableSubscriptionMetadata
+*/
+onGetDownloadableSubscriptionMetadata : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onGetDefaultDownloadableSubscriptionList'>/**Return metadata for subscriptions which are available for download for this device.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {Boolean} forceDeactivateSim If true, and if an active SIM must be deactivated to access the
+     eUICC, perform this action automatically. Otherwise, {@link #RESULT_MUST_DEACTIVATE_SIM)}
+     should be returned to allow the user to consent to this operation first.
+@return {Object {android.service.euicc.GetDefaultDownloadableSubscriptionListResult}} The result of the list operation.
+@see android.telephony.euicc.EuiccManager#getDefaultDownloadableSubscriptionList
+*/
+onGetDefaultDownloadableSubscriptionList : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onDownloadSubscription'>/**Download the given subscription.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {Object {DownloadableSubscription}} subscription The subscription to download.
+@param {Boolean} switchAfterDownload If true, the subscription should be enabled upon successful
+     download.
+@param {Boolean} forceDeactivateSim If true, and if an active SIM must be deactivated to access the
+     eUICC, perform this action automatically. Otherwise, {@link #RESULT_MUST_DEACTIVATE_SIM}
+     should be returned to allow the user to consent to this operation first.
+@param {Object {Bundle}} resolvedBundle The bundle containing information on resolved errors. It can contain
+     a string of confirmation code for the key {@link #EXTRA_RESOLUTION_CONFIRMATION_CODE},
+     and a boolean for key {@link #EXTRA_RESOLUTION_ALLOW_POLICY_RULES} indicating whether
+     the user allows profile policy rules or not.
+@return {Object {android.service.euicc.DownloadSubscriptionResult}} a DownloadSubscriptionResult instance including a result code, a resolvable errors
+     bit map, and original the card Id. The result code may be one of the predefined
+     {@code RESULT_} constants or any implementation-specific code starting with
+     {@link #RESULT_FIRST_USER}. The resolvable error bit map can be either 0 or values
+     defined in {@code RESOLVABLE_ERROR_}. A subclass should override this method. Otherwise,
+     this method does nothing and returns null by default.
+@see android.telephony.euicc.EuiccManager#downloadSubscription
+*/
+onDownloadSubscription : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onDownloadSubscription'>/**Download the given subscription.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {Object {DownloadableSubscription}} subscription The subscription to download.
+@param {Boolean} switchAfterDownload If true, the subscription should be enabled upon successful
+     download.
+@param {Boolean} forceDeactivateSim If true, and if an active SIM must be deactivated to access the
+     eUICC, perform this action automatically. Otherwise, {@link #RESULT_MUST_DEACTIVATE_SIM}
+     should be returned to allow the user to consent to this operation first.
+@return {Number} the result of the download operation. May be one of the predefined {@code RESULT_}
+     constants or any implementation-specific code starting with {@link #RESULT_FIRST_USER}.
+@see android.telephony.euicc.EuiccManager#downloadSubscription
+@deprecated From Q, a subclass should use and override the above
+ {@link #onDownloadSubscription(int, DownloadableSubscription, boolean, boolean, Bundle)}. The
+ default return value for this one is Integer.MIN_VALUE.
+*/
+onDownloadSubscription : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onGetEuiccProfileInfoList'>/**Return a list of all @link EuiccProfileInfo}s.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@return {Object {android.service.euicc.GetEuiccProfileInfoListResult}} The result of the operation.
+@see android.telephony.SubscriptionManager#getAvailableSubscriptionInfoList
+@see android.telephony.SubscriptionManager#getAccessibleSubscriptionInfoList
+*/
+onGetEuiccProfileInfoList : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onGetEuiccInfo'>/**Return info about the eUICC chip/device.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@return {Object {android.telephony.euicc.EuiccInfo}} the {@link EuiccInfo} for the eUICC chip/device.
+@see android.telephony.euicc.EuiccManager#getEuiccInfo
+*/
+onGetEuiccInfo : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onDeleteSubscription'>/**Delete the given subscription.
+</span>
+ &lt;p&gt;If the subscription is currently active, it should be deactivated first (equivalent to a
+ physical SIM being ejected).
+@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {String} iccid the ICCID of the subscription to delete.
+@return {Number} the result of the delete operation. May be one of the predefined {@code RESULT_}
+     constants or any implementation-specific code starting with {@link #RESULT_FIRST_USER}.
+@see android.telephony.euicc.EuiccManager#deleteSubscription
+*/
+onDeleteSubscription : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onSwitchToSubscription'>/**Switch to the given subscription.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {String} iccid the ICCID of the subscription to enable. May be null, in which case the current
+     profile should be deactivated and no profile should be activated to replace it - this is
+     equivalent to a physical SIM being ejected.
+@param {Boolean} forceDeactivateSim If true, and if an active SIM must be deactivated to access the
+     eUICC, perform this action automatically. Otherwise, {@link #RESULT_MUST_DEACTIVATE_SIM}
+     should be returned to allow the user to consent to this operation first.
+@return {Number} the result of the switch operation. May be one of the predefined {@code RESULT_}
+     constants or any implementation-specific code starting with {@link #RESULT_FIRST_USER}.
+@see android.telephony.euicc.EuiccManager#switchToSubscription
+*/
+onSwitchToSubscription : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onUpdateSubscriptionNickname'>/**Update the nickname of the given subscription.
+</span>@param {Number} slotId ID of the SIM slot to use for the operation.
+@param {String} iccid the ICCID of the subscription to update.
+@param {String} nickname the new nickname to apply.
+@return {Number} the result of the update operation. May be one of the predefined {@code RESULT_}
+     constants or any implementation-specific code starting with {@link #RESULT_FIRST_USER}.
+@see android.telephony.euicc.EuiccManager#updateSubscriptionNickname
+*/
+onUpdateSubscriptionNickname : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onEraseSubscriptions'>/**Erase all of the subscriptions on the device.
+</span>
+ &lt;p&gt;This is intended to be used for device resets. As such, the reset should be performed even
+ if an active SIM must be deactivated in order to access the eUICC.
+@param {Number} slotId ID of the SIM slot to use for the operation.
+@return {Number} the result of the erase operation. May be one of the predefined {@code RESULT_}
+     constants or any implementation-specific code starting with {@link #RESULT_FIRST_USER}.
+@see android.telephony.euicc.EuiccManager#eraseSubscriptions
+*/
+onEraseSubscriptions : function(  ) {},
+
+<span id='android-service-euicc-EuiccService-method-onRetainSubscriptionsForFactoryReset'>/**Ensure that subscriptions will be retained on the next factory reset.
+</span>
+ &lt;p&gt;Called directly before a factory reset. Assumes that a normal factory reset will lead to
+ profiles being erased on first boot (to cover fastboot/recovery wipes), so the implementation
+ should persist some bit that will remain accessible after the factory reset to bypass this
+ flow when this method is called.
+@param {Number} slotId ID of the SIM slot to use for the operation.
+@return {Number} the result of the operation. May be one of the predefined {@code RESULT_} constants
+     or any implementation-specific code starting with {@link #RESULT_FIRST_USER}.
+*/
+onRetainSubscriptionsForFactoryReset : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

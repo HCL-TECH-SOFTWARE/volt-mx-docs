@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-ExifInterface'>/**@class android.media.ExifInterface
+</span>@extends java.lang.Object
+
+ This is a class for reading and writing Exif tags in a JPEG file or a RAW image file.
+ &lt;p&gt;
+ Supported formats are: JPEG, DNG, CR2, NEF, NRW, ARW, RW2, ORF, PEF, SRW, RAF and HEIF.
+ &lt;p&gt;
+ Attribute mutation is supported for JPEG image files.
+ &lt;p&gt;
+ Note: It is recommended to use the &lt;a href=&quot;{@docRoot}jetpack/androidx.html&quot;&gt;AndroidX&lt;/a&gt;
+ &lt;a href=&quot;{@docRoot}reference/androidx/exifinterface/media/ExifInterface.html&quot;&gt;ExifInterface
+ Library&lt;/a&gt; since it is a superset of this class. In addition to the functionalities of this
+ class, it supports parsing extra metadata such as exposure and data compression information
+ as well as setting extra metadata such as GPS and datetime information.
+*/
+var ExifInterface = {
+
+<span id='android-media-ExifInterface-property-TAG_ARTIST'>/**Type is String. */
+</span>TAG_ARTIST : &quot;Artist&quot;,
+<span id='android-media-ExifInterface-property-TAG_BITS_PER_SAMPLE'>/**Type is int. */
+</span>TAG_BITS_PER_SAMPLE : &quot;BitsPerSample&quot;,
+<span id='android-media-ExifInterface-property-TAG_COMPRESSION'>/**Type is int. */
+</span>TAG_COMPRESSION : &quot;Compression&quot;,
+<span id='android-media-ExifInterface-property-TAG_COPYRIGHT'>/**Type is String. */
+</span>TAG_COPYRIGHT : &quot;Copyright&quot;,
+<span id='android-media-ExifInterface-property-TAG_DATETIME'>/**Type is String. */
+</span>TAG_DATETIME : &quot;DateTime&quot;,
+<span id='android-media-ExifInterface-property-TAG_IMAGE_DESCRIPTION'>/**Type is String. */
+</span>TAG_IMAGE_DESCRIPTION : &quot;ImageDescription&quot;,
+<span id='android-media-ExifInterface-property-TAG_IMAGE_LENGTH'>/**Type is int. */
+</span>TAG_IMAGE_LENGTH : &quot;ImageLength&quot;,
+<span id='android-media-ExifInterface-property-TAG_IMAGE_WIDTH'>/**Type is int. */
+</span>TAG_IMAGE_WIDTH : &quot;ImageWidth&quot;,
+<span id='android-media-ExifInterface-property-TAG_JPEG_INTERCHANGE_FORMAT'>/**Type is int. */
+</span>TAG_JPEG_INTERCHANGE_FORMAT : &quot;JPEGInterchangeFormat&quot;,
+<span id='android-media-ExifInterface-property-TAG_JPEG_INTERCHANGE_FORMAT_LENGTH'>/**Type is int. */
+</span>TAG_JPEG_INTERCHANGE_FORMAT_LENGTH : &quot;JPEGInterchangeFormatLength&quot;,
+<span id='android-media-ExifInterface-property-TAG_MAKE'>/**Type is String. */
+</span>TAG_MAKE : &quot;Make&quot;,
+<span id='android-media-ExifInterface-property-TAG_MODEL'>/**Type is String. */
+</span>TAG_MODEL : &quot;Model&quot;,
+<span id='android-media-ExifInterface-property-TAG_ORIENTATION'>/**Type is int. */
+</span>TAG_ORIENTATION : &quot;Orientation&quot;,
+<span id='android-media-ExifInterface-property-TAG_PHOTOMETRIC_INTERPRETATION'>/**Type is int. */
+</span>TAG_PHOTOMETRIC_INTERPRETATION : &quot;PhotometricInterpretation&quot;,
+<span id='android-media-ExifInterface-property-TAG_PLANAR_CONFIGURATION'>/**Type is int. */
+</span>TAG_PLANAR_CONFIGURATION : &quot;PlanarConfiguration&quot;,
+<span id='android-media-ExifInterface-property-TAG_PRIMARY_CHROMATICITIES'>/**Type is rational. */
+</span>TAG_PRIMARY_CHROMATICITIES : &quot;PrimaryChromaticities&quot;,
+<span id='android-media-ExifInterface-property-TAG_REFERENCE_BLACK_WHITE'>/**Type is rational. */
+</span>TAG_REFERENCE_BLACK_WHITE : &quot;ReferenceBlackWhite&quot;,
+<span id='android-media-ExifInterface-property-TAG_RESOLUTION_UNIT'>/**Type is int. */
+</span>TAG_RESOLUTION_UNIT : &quot;ResolutionUnit&quot;,
+<span id='android-media-ExifInterface-property-TAG_ROWS_PER_STRIP'>/**Type is int. */
+</span>TAG_ROWS_PER_STRIP : &quot;RowsPerStrip&quot;,
+<span id='android-media-ExifInterface-property-TAG_SAMPLES_PER_PIXEL'>/**Type is int. */
+</span>TAG_SAMPLES_PER_PIXEL : &quot;SamplesPerPixel&quot;,
+<span id='android-media-ExifInterface-property-TAG_SOFTWARE'>/**Type is String. */
+</span>TAG_SOFTWARE : &quot;Software&quot;,
+<span id='android-media-ExifInterface-property-TAG_STRIP_BYTE_COUNTS'>/**Type is int. */
+</span>TAG_STRIP_BYTE_COUNTS : &quot;StripByteCounts&quot;,
+<span id='android-media-ExifInterface-property-TAG_STRIP_OFFSETS'>/**Type is int. */
+</span>TAG_STRIP_OFFSETS : &quot;StripOffsets&quot;,
+<span id='android-media-ExifInterface-property-TAG_TRANSFER_FUNCTION'>/**Type is int. */
+</span>TAG_TRANSFER_FUNCTION : &quot;TransferFunction&quot;,
+<span id='android-media-ExifInterface-property-TAG_WHITE_POINT'>/**Type is rational. */
+</span>TAG_WHITE_POINT : &quot;WhitePoint&quot;,
+<span id='android-media-ExifInterface-property-TAG_X_RESOLUTION'>/**Type is rational. */
+</span>TAG_X_RESOLUTION : &quot;XResolution&quot;,
+<span id='android-media-ExifInterface-property-TAG_Y_CB_CR_COEFFICIENTS'>/**Type is rational. */
+</span>TAG_Y_CB_CR_COEFFICIENTS : &quot;YCbCrCoefficients&quot;,
+<span id='android-media-ExifInterface-property-TAG_Y_CB_CR_POSITIONING'>/**Type is int. */
+</span>TAG_Y_CB_CR_POSITIONING : &quot;YCbCrPositioning&quot;,
+<span id='android-media-ExifInterface-property-TAG_Y_CB_CR_SUB_SAMPLING'>/**Type is int. */
+</span>TAG_Y_CB_CR_SUB_SAMPLING : &quot;YCbCrSubSampling&quot;,
+<span id='android-media-ExifInterface-property-TAG_Y_RESOLUTION'>/**Type is rational. */
+</span>TAG_Y_RESOLUTION : &quot;YResolution&quot;,
+<span id='android-media-ExifInterface-property-TAG_APERTURE_VALUE'>/**Type is rational. */
+</span>TAG_APERTURE_VALUE : &quot;ApertureValue&quot;,
+<span id='android-media-ExifInterface-property-TAG_BRIGHTNESS_VALUE'>/**Type is rational. */
+</span>TAG_BRIGHTNESS_VALUE : &quot;BrightnessValue&quot;,
+<span id='android-media-ExifInterface-property-TAG_CFA_PATTERN'>/**Type is String. */
+</span>TAG_CFA_PATTERN : &quot;CFAPattern&quot;,
+<span id='android-media-ExifInterface-property-TAG_COLOR_SPACE'>/**Type is int. */
+</span>TAG_COLOR_SPACE : &quot;ColorSpace&quot;,
+<span id='android-media-ExifInterface-property-TAG_COMPONENTS_CONFIGURATION'>/**Type is String. */
+</span>TAG_COMPONENTS_CONFIGURATION : &quot;ComponentsConfiguration&quot;,
+<span id='android-media-ExifInterface-property-TAG_COMPRESSED_BITS_PER_PIXEL'>/**Type is rational. */
+</span>TAG_COMPRESSED_BITS_PER_PIXEL : &quot;CompressedBitsPerPixel&quot;,
+<span id='android-media-ExifInterface-property-TAG_CONTRAST'>/**Type is int. */
+</span>TAG_CONTRAST : &quot;Contrast&quot;,
+<span id='android-media-ExifInterface-property-TAG_CUSTOM_RENDERED'>/**Type is int. */
+</span>TAG_CUSTOM_RENDERED : &quot;CustomRendered&quot;,
+<span id='android-media-ExifInterface-property-TAG_DATETIME_DIGITIZED'>/**Type is String. */
+</span>TAG_DATETIME_DIGITIZED : &quot;DateTimeDigitized&quot;,
+<span id='android-media-ExifInterface-property-TAG_DATETIME_ORIGINAL'>/**Type is String. */
+</span>TAG_DATETIME_ORIGINAL : &quot;DateTimeOriginal&quot;,
+<span id='android-media-ExifInterface-property-TAG_DEVICE_SETTING_DESCRIPTION'>/**Type is String. */
+</span>TAG_DEVICE_SETTING_DESCRIPTION : &quot;DeviceSettingDescription&quot;,
+<span id='android-media-ExifInterface-property-TAG_DIGITAL_ZOOM_RATIO'>/**Type is double. */
+</span>TAG_DIGITAL_ZOOM_RATIO : &quot;DigitalZoomRatio&quot;,
+<span id='android-media-ExifInterface-property-TAG_EXIF_VERSION'>/**Type is String. */
+</span>TAG_EXIF_VERSION : &quot;ExifVersion&quot;,
+<span id='android-media-ExifInterface-property-TAG_EXPOSURE_BIAS_VALUE'>/**Type is double. */
+</span>TAG_EXPOSURE_BIAS_VALUE : &quot;ExposureBiasValue&quot;,
+<span id='android-media-ExifInterface-property-TAG_EXPOSURE_INDEX'>/**Type is rational. */
+</span>TAG_EXPOSURE_INDEX : &quot;ExposureIndex&quot;,
+<span id='android-media-ExifInterface-property-TAG_EXPOSURE_MODE'>/**Type is int. */
+</span>TAG_EXPOSURE_MODE : &quot;ExposureMode&quot;,
+<span id='android-media-ExifInterface-property-TAG_EXPOSURE_PROGRAM'>/**Type is int. */
+</span>TAG_EXPOSURE_PROGRAM : &quot;ExposureProgram&quot;,
+<span id='android-media-ExifInterface-property-TAG_EXPOSURE_TIME'>/**Type is double. */
+</span>TAG_EXPOSURE_TIME : &quot;ExposureTime&quot;,
+<span id='android-media-ExifInterface-property-TAG_F_NUMBER'>/**Type is double. */
+</span>TAG_F_NUMBER : &quot;FNumber&quot;,
+<span id='android-media-ExifInterface-property-TAG_APERTURE'>/** Type is double.
+</span>
+ @deprecated use {@link #TAG_F_NUMBER} instead
+*/
+TAG_APERTURE : &quot;FNumber&quot;,
+<span id='android-media-ExifInterface-property-TAG_FILE_SOURCE'>/**Type is String. */
+</span>TAG_FILE_SOURCE : &quot;FileSource&quot;,
+<span id='android-media-ExifInterface-property-TAG_FLASH'>/**Type is int. */
+</span>TAG_FLASH : &quot;Flash&quot;,
+<span id='android-media-ExifInterface-property-TAG_FLASH_ENERGY'>/**Type is rational. */
+</span>TAG_FLASH_ENERGY : &quot;FlashEnergy&quot;,
+<span id='android-media-ExifInterface-property-TAG_FLASHPIX_VERSION'>/**Type is String. */
+</span>TAG_FLASHPIX_VERSION : &quot;FlashpixVersion&quot;,
+<span id='android-media-ExifInterface-property-TAG_FOCAL_LENGTH'>/**Type is rational. */
+</span>TAG_FOCAL_LENGTH : &quot;FocalLength&quot;,
+<span id='android-media-ExifInterface-property-TAG_FOCAL_LENGTH_IN_35MM_FILM'>/**Type is int. */
+</span>TAG_FOCAL_LENGTH_IN_35MM_FILM : &quot;FocalLengthIn35mmFilm&quot;,
+<span id='android-media-ExifInterface-property-TAG_FOCAL_PLANE_RESOLUTION_UNIT'>/**Type is int. */
+</span>TAG_FOCAL_PLANE_RESOLUTION_UNIT : &quot;FocalPlaneResolutionUnit&quot;,
+<span id='android-media-ExifInterface-property-TAG_FOCAL_PLANE_X_RESOLUTION'>/**Type is rational. */
+</span>TAG_FOCAL_PLANE_X_RESOLUTION : &quot;FocalPlaneXResolution&quot;,
+<span id='android-media-ExifInterface-property-TAG_FOCAL_PLANE_Y_RESOLUTION'>/**Type is rational. */
+</span>TAG_FOCAL_PLANE_Y_RESOLUTION : &quot;FocalPlaneYResolution&quot;,
+<span id='android-media-ExifInterface-property-TAG_GAIN_CONTROL'>/**Type is int. */
+</span>TAG_GAIN_CONTROL : &quot;GainControl&quot;,
+<span id='android-media-ExifInterface-property-TAG_ISO_SPEED_RATINGS'>/**Type is int. */
+</span>TAG_ISO_SPEED_RATINGS : &quot;ISOSpeedRatings&quot;,
+<span id='android-media-ExifInterface-property-TAG_ISO'>/** Type is int.
+</span>
+ @deprecated use {@link #TAG_ISO_SPEED_RATINGS} instead
+*/
+TAG_ISO : &quot;ISOSpeedRatings&quot;,
+<span id='android-media-ExifInterface-property-TAG_IMAGE_UNIQUE_ID'>/**Type is String. */
+</span>TAG_IMAGE_UNIQUE_ID : &quot;ImageUniqueID&quot;,
+<span id='android-media-ExifInterface-property-TAG_LIGHT_SOURCE'>/**Type is int. */
+</span>TAG_LIGHT_SOURCE : &quot;LightSource&quot;,
+<span id='android-media-ExifInterface-property-TAG_MAKER_NOTE'>/**Type is String. */
+</span>TAG_MAKER_NOTE : &quot;MakerNote&quot;,
+<span id='android-media-ExifInterface-property-TAG_MAX_APERTURE_VALUE'>/**Type is rational. */
+</span>TAG_MAX_APERTURE_VALUE : &quot;MaxApertureValue&quot;,
+<span id='android-media-ExifInterface-property-TAG_METERING_MODE'>/**Type is int. */
+</span>TAG_METERING_MODE : &quot;MeteringMode&quot;,
+<span id='android-media-ExifInterface-property-TAG_NEW_SUBFILE_TYPE'>/**Type is int. */
+</span>TAG_NEW_SUBFILE_TYPE : &quot;NewSubfileType&quot;,
+<span id='android-media-ExifInterface-property-TAG_OECF'>/**Type is String. */
+</span>TAG_OECF : &quot;OECF&quot;,
+<span id='android-media-ExifInterface-property-TAG_OFFSET_TIME'>/**Type is String. {@hide} */
+</span>TAG_OFFSET_TIME : &quot;OffsetTime&quot;,
+<span id='android-media-ExifInterface-property-TAG_OFFSET_TIME_ORIGINAL'>/**Type is String. {@hide} */
+</span>TAG_OFFSET_TIME_ORIGINAL : &quot;OffsetTimeOriginal&quot;,
+<span id='android-media-ExifInterface-property-TAG_OFFSET_TIME_DIGITIZED'>/**Type is String. {@hide} */
+</span>TAG_OFFSET_TIME_DIGITIZED : &quot;OffsetTimeDigitized&quot;,
+<span id='android-media-ExifInterface-property-TAG_PIXEL_X_DIMENSION'>/**Type is int. */
+</span>TAG_PIXEL_X_DIMENSION : &quot;PixelXDimension&quot;,
+<span id='android-media-ExifInterface-property-TAG_PIXEL_Y_DIMENSION'>/**Type is int. */
+</span>TAG_PIXEL_Y_DIMENSION : &quot;PixelYDimension&quot;,
+<span id='android-media-ExifInterface-property-TAG_RELATED_SOUND_FILE'>/**Type is String. */
+</span>TAG_RELATED_SOUND_FILE : &quot;RelatedSoundFile&quot;,
+<span id='android-media-ExifInterface-property-TAG_SATURATION'>/**Type is int. */
+</span>TAG_SATURATION : &quot;Saturation&quot;,
+<span id='android-media-ExifInterface-property-TAG_SCENE_CAPTURE_TYPE'>/**Type is int. */
+</span>TAG_SCENE_CAPTURE_TYPE : &quot;SceneCaptureType&quot;,
+<span id='android-media-ExifInterface-property-TAG_SCENE_TYPE'>/**Type is String. */
+</span>TAG_SCENE_TYPE : &quot;SceneType&quot;,
+<span id='android-media-ExifInterface-property-TAG_SENSING_METHOD'>/**Type is int. */
+</span>TAG_SENSING_METHOD : &quot;SensingMethod&quot;,
+<span id='android-media-ExifInterface-property-TAG_SHARPNESS'>/**Type is int. */
+</span>TAG_SHARPNESS : &quot;Sharpness&quot;,
+<span id='android-media-ExifInterface-property-TAG_SHUTTER_SPEED_VALUE'>/**Type is rational. */
+</span>TAG_SHUTTER_SPEED_VALUE : &quot;ShutterSpeedValue&quot;,
+<span id='android-media-ExifInterface-property-TAG_SPATIAL_FREQUENCY_RESPONSE'>/**Type is String. */
+</span>TAG_SPATIAL_FREQUENCY_RESPONSE : &quot;SpatialFrequencyResponse&quot;,
+<span id='android-media-ExifInterface-property-TAG_SPECTRAL_SENSITIVITY'>/**Type is String. */
+</span>TAG_SPECTRAL_SENSITIVITY : &quot;SpectralSensitivity&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBFILE_TYPE'>/**Type is int. */
+</span>TAG_SUBFILE_TYPE : &quot;SubfileType&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBSEC_TIME'>/**Type is String. */
+</span>TAG_SUBSEC_TIME : &quot;SubSecTime&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBSEC_TIME_DIG'>/** Type is String.
+</span>
+ @deprecated use {@link #TAG_SUBSEC_TIME_DIGITIZED} instead
+*/
+TAG_SUBSEC_TIME_DIG : &quot;SubSecTimeDigitized&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBSEC_TIME_DIGITIZED'>/**Type is String. */
+</span>TAG_SUBSEC_TIME_DIGITIZED : &quot;SubSecTimeDigitized&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBSEC_TIME_ORIG'>/** Type is String.
+</span>
+ @deprecated use {@link #TAG_SUBSEC_TIME_ORIGINAL} instead
+*/
+TAG_SUBSEC_TIME_ORIG : &quot;SubSecTimeOriginal&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBSEC_TIME_ORIGINAL'>/**Type is String. */
+</span>TAG_SUBSEC_TIME_ORIGINAL : &quot;SubSecTimeOriginal&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBJECT_AREA'>/**Type is int. */
+</span>TAG_SUBJECT_AREA : &quot;SubjectArea&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBJECT_DISTANCE'>/**Type is double. */
+</span>TAG_SUBJECT_DISTANCE : &quot;SubjectDistance&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBJECT_DISTANCE_RANGE'>/**Type is int. */
+</span>TAG_SUBJECT_DISTANCE_RANGE : &quot;SubjectDistanceRange&quot;,
+<span id='android-media-ExifInterface-property-TAG_SUBJECT_LOCATION'>/**Type is int. */
+</span>TAG_SUBJECT_LOCATION : &quot;SubjectLocation&quot;,
+<span id='android-media-ExifInterface-property-TAG_USER_COMMENT'>/**Type is String. */
+</span>TAG_USER_COMMENT : &quot;UserComment&quot;,
+<span id='android-media-ExifInterface-property-TAG_WHITE_BALANCE'>/**Type is int. */
+</span>TAG_WHITE_BALANCE : &quot;WhiteBalance&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_ALTITUDE'>/** The altitude (in meters) based on the reference in TAG_GPS_ALTITUDE_REF.
+</span> Type is rational.
+*/
+TAG_GPS_ALTITUDE : &quot;GPSAltitude&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_ALTITUDE_REF'>/** 0 if the altitude is above sea level. 1 if the altitude is below sea
+</span> level. Type is int.
+*/
+TAG_GPS_ALTITUDE_REF : &quot;GPSAltitudeRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_AREA_INFORMATION'>/**Type is String. */
+</span>TAG_GPS_AREA_INFORMATION : &quot;GPSAreaInformation&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DOP'>/**Type is rational. */
+</span>TAG_GPS_DOP : &quot;GPSDOP&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DATESTAMP'>/**Type is String. */
+</span>TAG_GPS_DATESTAMP : &quot;GPSDateStamp&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_BEARING'>/**Type is rational. */
+</span>TAG_GPS_DEST_BEARING : &quot;GPSDestBearing&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_BEARING_REF'>/**Type is String. */
+</span>TAG_GPS_DEST_BEARING_REF : &quot;GPSDestBearingRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_DISTANCE'>/**Type is rational. */
+</span>TAG_GPS_DEST_DISTANCE : &quot;GPSDestDistance&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_DISTANCE_REF'>/**Type is String. */
+</span>TAG_GPS_DEST_DISTANCE_REF : &quot;GPSDestDistanceRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_LATITUDE'>/**Type is rational. */
+</span>TAG_GPS_DEST_LATITUDE : &quot;GPSDestLatitude&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_LATITUDE_REF'>/**Type is String. */
+</span>TAG_GPS_DEST_LATITUDE_REF : &quot;GPSDestLatitudeRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_LONGITUDE'>/**Type is rational. */
+</span>TAG_GPS_DEST_LONGITUDE : &quot;GPSDestLongitude&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DEST_LONGITUDE_REF'>/**Type is String. */
+</span>TAG_GPS_DEST_LONGITUDE_REF : &quot;GPSDestLongitudeRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_DIFFERENTIAL'>/**Type is int. */
+</span>TAG_GPS_DIFFERENTIAL : &quot;GPSDifferential&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_IMG_DIRECTION'>/**Type is rational. */
+</span>TAG_GPS_IMG_DIRECTION : &quot;GPSImgDirection&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_IMG_DIRECTION_REF'>/**Type is String. */
+</span>TAG_GPS_IMG_DIRECTION_REF : &quot;GPSImgDirectionRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_LATITUDE'>/**Type is rational. Format is &quot;num1/denom1,num2/denom2,num3/denom3&quot;. */
+</span>TAG_GPS_LATITUDE : &quot;GPSLatitude&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_LATITUDE_REF'>/**Type is String. */
+</span>TAG_GPS_LATITUDE_REF : &quot;GPSLatitudeRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_LONGITUDE'>/**Type is rational. Format is &quot;num1/denom1,num2/denom2,num3/denom3&quot;. */
+</span>TAG_GPS_LONGITUDE : &quot;GPSLongitude&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_LONGITUDE_REF'>/**Type is String. */
+</span>TAG_GPS_LONGITUDE_REF : &quot;GPSLongitudeRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_MAP_DATUM'>/**Type is String. */
+</span>TAG_GPS_MAP_DATUM : &quot;GPSMapDatum&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_MEASURE_MODE'>/**Type is String. */
+</span>TAG_GPS_MEASURE_MODE : &quot;GPSMeasureMode&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_PROCESSING_METHOD'>/**Type is String. Name of GPS processing method used for location finding. */
+</span>TAG_GPS_PROCESSING_METHOD : &quot;GPSProcessingMethod&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_SATELLITES'>/**Type is String. */
+</span>TAG_GPS_SATELLITES : &quot;GPSSatellites&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_SPEED'>/**Type is rational. */
+</span>TAG_GPS_SPEED : &quot;GPSSpeed&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_SPEED_REF'>/**Type is String. */
+</span>TAG_GPS_SPEED_REF : &quot;GPSSpeedRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_STATUS'>/**Type is String. */
+</span>TAG_GPS_STATUS : &quot;GPSStatus&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_TIMESTAMP'>/**Type is String. Format is &quot;hh:mm:ss&quot;. */
+</span>TAG_GPS_TIMESTAMP : &quot;GPSTimeStamp&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_TRACK'>/**Type is rational. */
+</span>TAG_GPS_TRACK : &quot;GPSTrack&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_TRACK_REF'>/**Type is String. */
+</span>TAG_GPS_TRACK_REF : &quot;GPSTrackRef&quot;,
+<span id='android-media-ExifInterface-property-TAG_GPS_VERSION_ID'>/**Type is String. */
+</span>TAG_GPS_VERSION_ID : &quot;GPSVersionID&quot;,
+<span id='android-media-ExifInterface-property-TAG_INTEROPERABILITY_INDEX'>/**Type is String. */
+</span>TAG_INTEROPERABILITY_INDEX : &quot;InteroperabilityIndex&quot;,
+<span id='android-media-ExifInterface-property-TAG_THUMBNAIL_IMAGE_LENGTH'>/**Type is int. */
+</span>TAG_THUMBNAIL_IMAGE_LENGTH : &quot;ThumbnailImageLength&quot;,
+<span id='android-media-ExifInterface-property-TAG_THUMBNAIL_IMAGE_WIDTH'>/**Type is int. */
+</span>TAG_THUMBNAIL_IMAGE_WIDTH : &quot;ThumbnailImageWidth&quot;,
+<span id='android-media-ExifInterface-property-TAG_DNG_VERSION'>/**Type is int. DNG Specification 1.4.0.0. Section 4 */
+</span>TAG_DNG_VERSION : &quot;DNGVersion&quot;,
+<span id='android-media-ExifInterface-property-TAG_DEFAULT_CROP_SIZE'>/**Type is int. DNG Specification 1.4.0.0. Section 4 */
+</span>TAG_DEFAULT_CROP_SIZE : &quot;DefaultCropSize&quot;,
+<span id='android-media-ExifInterface-property-TAG_ORF_THUMBNAIL_IMAGE'>/**Type is undefined. See Olympus MakerNote tags in http://www.exiv2.org/tags-olympus.html. */
+</span>TAG_ORF_THUMBNAIL_IMAGE : &quot;ThumbnailImage&quot;,
+<span id='android-media-ExifInterface-property-TAG_ORF_PREVIEW_IMAGE_START'>/**Type is int. See Olympus Camera Settings tags in http://www.exiv2.org/tags-olympus.html. */
+</span>TAG_ORF_PREVIEW_IMAGE_START : &quot;PreviewImageStart&quot;,
+<span id='android-media-ExifInterface-property-TAG_ORF_PREVIEW_IMAGE_LENGTH'>/**Type is int. See Olympus Camera Settings tags in http://www.exiv2.org/tags-olympus.html. */
+</span>TAG_ORF_PREVIEW_IMAGE_LENGTH : &quot;PreviewImageLength&quot;,
+<span id='android-media-ExifInterface-property-TAG_ORF_ASPECT_FRAME'>/**Type is int. See Olympus Image Processing tags in http://www.exiv2.org/tags-olympus.html. */
+</span>TAG_ORF_ASPECT_FRAME : &quot;AspectFrame&quot;,
+<span id='android-media-ExifInterface-property-TAG_RW2_SENSOR_BOTTOM_BORDER'>/** Type is int. See PanasonicRaw tags in
+</span> http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/PanasonicRaw.html
+*/
+TAG_RW2_SENSOR_BOTTOM_BORDER : &quot;SensorBottomBorder&quot;,
+<span id='android-media-ExifInterface-property-TAG_RW2_SENSOR_LEFT_BORDER'>/** Type is int. See PanasonicRaw tags in
+</span> http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/PanasonicRaw.html
+*/
+TAG_RW2_SENSOR_LEFT_BORDER : &quot;SensorLeftBorder&quot;,
+<span id='android-media-ExifInterface-property-TAG_RW2_SENSOR_RIGHT_BORDER'>/** Type is int. See PanasonicRaw tags in
+</span> http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/PanasonicRaw.html
+*/
+TAG_RW2_SENSOR_RIGHT_BORDER : &quot;SensorRightBorder&quot;,
+<span id='android-media-ExifInterface-property-TAG_RW2_SENSOR_TOP_BORDER'>/** Type is int. See PanasonicRaw tags in
+</span> http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/PanasonicRaw.html
+*/
+TAG_RW2_SENSOR_TOP_BORDER : &quot;SensorTopBorder&quot;,
+<span id='android-media-ExifInterface-property-TAG_RW2_ISO'>/** Type is int. See PanasonicRaw tags in
+</span> http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/PanasonicRaw.html
+*/
+TAG_RW2_ISO : &quot;ISO&quot;,
+<span id='android-media-ExifInterface-property-TAG_RW2_JPG_FROM_RAW'>/** Type is undefined. See PanasonicRaw tags in
+</span> http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/PanasonicRaw.html
+*/
+TAG_RW2_JPG_FROM_RAW : &quot;JpgFromRaw&quot;,
+<span id='android-media-ExifInterface-property-TAG_XMP'>/** Type is byte[]. See &lt;a href=
+</span> &quot;https://en.wikipedia.org/wiki/Extensible_Metadata_Platform&quot;&gt;Extensible
+ Metadata Platform (XMP)&lt;/a&gt; for details on contents.
+*/
+TAG_XMP : &quot;Xmp&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_UNDEFINED'>/***/
+</span>ORIENTATION_UNDEFINED : &quot;0&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_NORMAL'>/***/
+</span>ORIENTATION_NORMAL : &quot;1&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_FLIP_HORIZONTAL'>/***/
+</span>ORIENTATION_FLIP_HORIZONTAL : &quot;2&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_ROTATE_180'>/***/
+</span>ORIENTATION_ROTATE_180 : &quot;3&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_FLIP_VERTICAL'>/***/
+</span>ORIENTATION_FLIP_VERTICAL : &quot;4&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_TRANSPOSE'>/***/
+</span>ORIENTATION_TRANSPOSE : &quot;5&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_ROTATE_90'>/***/
+</span>ORIENTATION_ROTATE_90 : &quot;6&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_TRANSVERSE'>/***/
+</span>ORIENTATION_TRANSVERSE : &quot;7&quot;,
+<span id='android-media-ExifInterface-property-ORIENTATION_ROTATE_270'>/***/
+</span>ORIENTATION_ROTATE_270 : &quot;8&quot;,
+<span id='android-media-ExifInterface-property-WHITEBALANCE_AUTO'>/***/
+</span>WHITEBALANCE_AUTO : &quot;0&quot;,
+<span id='android-media-ExifInterface-property-WHITEBALANCE_MANUAL'>/***/
+</span>WHITEBALANCE_MANUAL : &quot;1&quot;,
+<span id='android-media-ExifInterface-method-getAttribute'>/**Returns the value of the specified tag or {@code null} if there
+</span> is no such tag in the image file.
+@param {String} tag the name of the tag.
+*/
+getAttribute : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getAttributeInt'>/**Returns the integer value of the specified tag. If there is no such tag
+</span> in the image file or the value cannot be parsed as integer, return
+ &lt;var&gt;defaultValue&lt;/var&gt;.
+@param {String} tag the name of the tag.
+@param {Number} defaultValue the value to return if the tag is not available.
+*/
+getAttributeInt : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getAttributeDouble'>/**Returns the double value of the tag that is specified as rational or contains a
+</span> double-formatted value. If there is no such tag in the image file or the value cannot be
+ parsed as double, return &lt;var&gt;defaultValue&lt;/var&gt;.
+@param {String} tag the name of the tag.
+@param {Number} defaultValue the value to return if the tag is not available.
+*/
+getAttributeDouble : function(  ) {},
+
+<span id='android-media-ExifInterface-method-setAttribute'>/**Set the value of the specified tag.
+</span>@param {String} tag the name of the tag.
+@param {String} value the value of the tag.
+*/
+setAttribute : function(  ) {},
+
+<span id='android-media-ExifInterface-method-saveAttributes'>/**Save the tag data into the original image file. This is expensive because
+</span> it involves copying all the data from one file to another and deleting
+ the old file and renaming the other. It's best to use
+ {@link #setAttribute(String,String)} to set all attributes to write and
+ make a single call rather than multiple calls for each attribute.
+ &lt;p&gt;
+ This method is only supported for JPEG files.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: after calling this method, any attempts to obtain range information
+ from {@link #getAttributeRange}(String) or {@link #getThumbnailRange}()
+ will throw {@link IllegalStateException}, since the offsets may have
+ changed in the newly written file.
+ &lt;/p&gt;
+*/
+saveAttributes : function(  ) {},
+
+<span id='android-media-ExifInterface-method-hasThumbnail'>/**Returns true if the image file has a thumbnail.
+</span>*/
+hasThumbnail : function(  ) {},
+
+<span id='android-media-ExifInterface-method-hasAttribute'>/**Returns true if the image file has the given attribute defined.
+</span>@param {String} tag the name of the tag.
+*/
+hasAttribute : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getThumbnail'>/**Returns the JPEG compressed thumbnail inside the image file, or {@code null} if there is no
+</span> JPEG compressed thumbnail.
+ The returned data can be decoded using
+ {@link android.graphics.BitmapFactory#decodeByteArray(byte[],int,int)}
+*/
+getThumbnail : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getThumbnailBytes'>/**Returns the thumbnail bytes inside the image file, regardless of the compression type of the
+</span> thumbnail image.
+*/
+getThumbnailBytes : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getThumbnailBitmap'>/**Creates and returns a Bitmap object of the thumbnail image based on the byte array and the
+</span> thumbnail compression value, or {@code null} if the compression type is unsupported.
+*/
+getThumbnailBitmap : function(  ) {},
+
+<span id='android-media-ExifInterface-method-isThumbnailCompressed'>/**Returns true if thumbnail image is JPEG Compressed, or false if either thumbnail image does
+</span> not exist or thumbnail image is uncompressed.
+*/
+isThumbnailCompressed : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getThumbnailRange'>/**Returns the offset and length of thumbnail inside the image file, or
+</span> {@code null} if there is no thumbnail.
+@return {Number} two-element array, the offset in the first value, and length in
+         the second, or {@code null} if no thumbnail was found.
+@throws IllegalStateException if {@link #saveAttributes()} has been
+             called since the underlying file was initially parsed, since
+             that means offsets may have changed.
+*/
+getThumbnailRange : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getAttributeRange'>/**Returns the offset and length of the requested tag inside the image file,
+</span> or {@code null} if the tag is not contained.
+@return {Number} two-element array, the offset in the first value, and length in
+         the second, or {@code null} if no tag was found.
+@throws IllegalStateException if {@link #saveAttributes()} has been
+             called since the underlying file was initially parsed, since
+             that means offsets may have changed.
+*/
+getAttributeRange : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getAttributeBytes'>/**Returns the raw bytes for the value of the requested tag inside the image
+</span> file, or {@code null} if the tag is not contained.
+@return {Number} raw bytes for the value of the requested tag, or {@code null} if
+         no tag was found.
+*/
+getAttributeBytes : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getLatLong'>/**Stores the latitude and longitude value in a float array. The first element is
+</span> the latitude, and the second element is the longitude. Returns false if the
+ Exif tags are not available.
+*/
+getLatLong : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getAltitude'>/**Return the altitude in meters. If the exif tag does not exist, return
+</span> &lt;var&gt;defaultValue&lt;/var&gt;.
+@param {Number} defaultValue the value to return if the tag is not available.
+*/
+getAltitude : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getDateTime'>/**Returns parsed {@code DateTime} value, or -1 if unavailable or invalid.
+</span>@hide 
+*/
+getDateTime : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getDateTimeDigitized'>/**Returns parsed {@code DateTimeDigitized} value, or -1 if unavailable or
+</span> invalid.
+@hide 
+*/
+getDateTimeDigitized : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getDateTimeOriginal'>/**Returns parsed {@code DateTimeOriginal} value, or -1 if unavailable or
+</span> invalid.
+@hide 
+*/
+getDateTimeOriginal : function(  ) {},
+
+<span id='android-media-ExifInterface-method-getGpsDateTime'>/**Returns number of milliseconds since Jan. 1, 1970, midnight UTC.
+</span> Returns -1 if the date time information if not available.
+@hide 
+*/
+getGpsDateTime : function(  ) {},
+
+<span id='android-media-ExifInterface-method-convertRationalLatLonToFloat'>/**{@hide}
+</span>*/
+convertRationalLatLonToFloat : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

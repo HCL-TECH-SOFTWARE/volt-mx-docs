@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-print-PrintJobInfo'>/**@class android.print.PrintJobInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class represents the description of a print job. The print job
+ state includes properties such as its id, print attributes used for
+ generating the content, and so on. Note that the print jobs state may
+ change over time and this class represents a snapshot of this state.
+*/
+var PrintJobInfo = {
+
+<span id='android-print-PrintJobInfo-property-STATE_ANY'>/** Constant for matching any print job state.
+</span>
+ @hide
+*/
+STATE_ANY : &quot;-1&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_ANY_VISIBLE_TO_CLIENTS'>/** Constant for matching any print job state.
+</span>
+ @hide
+*/
+STATE_ANY_VISIBLE_TO_CLIENTS : &quot;-2&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_ANY_ACTIVE'>/** Constant for matching any active print job state.
+</span>
+ @hide
+*/
+STATE_ANY_ACTIVE : &quot;-3&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_ANY_SCHEDULED'>/** Constant for matching any scheduled, i.e. delivered to a print
+</span> service, print job state.
+
+ @hide
+*/
+STATE_ANY_SCHEDULED : &quot;-4&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_CREATED'>/** Print job state: The print job is being created but not yet
+</span> ready to be printed.
+ &lt;p&gt;
+ Next valid states: {@link #STATE_QUEUED}
+ &lt;/p&gt;
+*/
+STATE_CREATED : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_QUEUED'>/** Print job state: The print jobs is created, it is ready
+</span> to be printed and should be processed.
+ &lt;p&gt;
+ Next valid states: {@link #STATE_STARTED}, {@link #STATE_FAILED},
+ {@link #STATE_CANCELED}
+ &lt;/p&gt;
+*/
+STATE_QUEUED : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_STARTED'>/** Print job state: The print job is being printed.
+</span> &lt;p&gt;
+ Next valid states: {@link #STATE_COMPLETED}, {@link #STATE_FAILED},
+ {@link #STATE_CANCELED}, {@link #STATE_BLOCKED}
+ &lt;/p&gt;
+*/
+STATE_STARTED : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_BLOCKED'>/** Print job state: The print job is blocked.
+</span> &lt;p&gt;
+ Next valid states: {@link #STATE_FAILED}, {@link #STATE_CANCELED},
+ {@link #STATE_STARTED}
+ &lt;/p&gt;
+*/
+STATE_BLOCKED : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_COMPLETED'>/** Print job state: The print job is successfully printed.
+</span> This is a terminal state.
+ &lt;p&gt;
+ Next valid states: None
+ &lt;/p&gt;
+*/
+STATE_COMPLETED : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_FAILED'>/** Print job state: The print job was printing but printing failed.
+</span> &lt;p&gt;
+ Next valid states: {@link #STATE_CANCELED}, {@link #STATE_STARTED}
+ &lt;/p&gt;
+*/
+STATE_FAILED : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-property-STATE_CANCELED'>/** Print job state: The print job is canceled.
+</span> This is a terminal state.
+ &lt;p&gt;
+ Next valid states: None
+ &lt;/p&gt;
+*/
+STATE_CANCELED : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-print-PrintJobInfo-method-getId'>/**Gets the unique print job id.
+</span>@return {Object {android.print.PrintJobId}} The id.
+*/
+getId : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setId'>/**Sets the unique print job id.
+</span>@param {Object {PrintJobId}} id The job id.
+@hide 
+*/
+setId : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getLabel'>/**Gets the human readable job label.
+</span>@return {String} The label.
+*/
+getLabel : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setLabel'>/**Sets the human readable job label.
+</span>@param {String} label The label.
+@hide 
+*/
+setLabel : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getPrinterId'>/**Gets the unique target printer id.
+</span>@return {Object {android.print.PrinterId}} The target printer id.
+*/
+getPrinterId : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setPrinterId'>/**Sets the unique target printer id.
+</span>@param {Object {PrinterId}} printerId The target printer id.
+@hide 
+*/
+setPrinterId : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getPrinterName'>/**Gets the name of the target printer.
+</span>@return {String} The printer name.
+@hide 
+*/
+getPrinterName : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setPrinterName'>/**Sets the name of the target printer.
+</span>@param {String} printerName The printer name.
+@hide 
+*/
+setPrinterName : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getState'>/**Gets the current job state.
+</span>@return {Number} The job state.
+@see #STATE_CREATED
+@see #STATE_QUEUED
+@see #STATE_STARTED
+@see #STATE_COMPLETED
+@see #STATE_BLOCKED
+@see #STATE_FAILED
+@see #STATE_CANCELED
+*/
+getState : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setState'>/**Sets the current job state.
+</span>@param {Number} state The job state.
+@hide 
+*/
+setState : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setProgress'>/**Sets the progress of the print job.
+</span>@param {Number} progress the progress of the job
+@hide 
+*/
+setProgress : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setStatus'>/**Sets the status of the print job.
+</span>@param {Object {CharSequence}} status the status of the job, can be null
+@hide 
+*/
+setStatus : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setStatus'>/**Sets the status of the print job.
+</span>@param {Number} status The new status as a string resource
+@param {Object {CharSequence}} appPackageName App package name the resource belongs to
+@hide 
+*/
+setStatus : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getAppId'>/**Sets the owning application id.
+</span>@return {Number} The owning app id.
+@hide 
+*/
+getAppId : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setAppId'>/**Sets the owning application id.
+</span>@param {Number} appId The owning app id.
+@hide 
+*/
+setAppId : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getTag'>/**Gets the optional tag assigned by a print service.
+</span>@return {String} The tag.
+@hide 
+*/
+getTag : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setTag'>/**Sets the optional tag assigned by a print service.
+</span>@param {String} tag The tag.
+@hide 
+*/
+setTag : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getCreationTime'>/**Gets the wall time in millisecond when this print job was created.
+</span>@return {Number} The creation time in milliseconds.
+*/
+getCreationTime : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setCreationTime'>/**Sets the wall time in milliseconds when this print job was created.
+</span>@param {Number} creationTime The creation time in milliseconds.
+@hide 
+*/
+setCreationTime : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getCopies'>/**Gets the number of copies.
+</span>@return {Number} The number of copies or zero if not set.
+*/
+getCopies : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setCopies'>/**Sets the number of copies.
+</span>@param {Number} copyCount The number of copies.
+@hide 
+*/
+setCopies : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getPages'>/**Gets the included pages.
+</span>@return {Object {android.print.PageRange}} The included pages or &lt;code&gt;null&lt;/code&gt; if not set.
+*/
+getPages : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setPages'>/**Sets the included pages.
+</span>@param {Object {android.print.PageRange[]}} pageRanges The included pages.
+@hide 
+*/
+setPages : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getAttributes'>/**Gets the print job attributes.
+</span>@return {Object {android.print.PrintAttributes}} The attributes.
+*/
+getAttributes : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setAttributes'>/**Sets the print job attributes.
+</span>@param {Object {PrintAttributes}} attributes The attributes.
+@hide 
+*/
+setAttributes : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getDocumentInfo'>/**Gets the info describing the printed document.
+</span>@return {Object {android.print.PrintDocumentInfo}} The document info.
+@hide 
+*/
+getDocumentInfo : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setDocumentInfo'>/**Sets the info describing the printed document.
+</span>@param {Object {PrintDocumentInfo}} info The document info.
+@hide 
+*/
+setDocumentInfo : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-isCancelling'>/**Gets whether this print is being cancelled.
+</span>@return {Boolean} True if the print job is being cancelled.
+@hide 
+*/
+isCancelling : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setCancelling'>/**Sets whether this print is being cancelled.
+</span>@param {Boolean} cancelling True if the print job is being cancelled.
+@hide 
+*/
+setCancelling : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-shouldStayAwake'>/**If the print job is actively processed, i.e. the device needs to stay on.
+</span>@hide 
+*/
+shouldStayAwake : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-hasAdvancedOption'>/**Gets whether this job has a given advanced (printer specific) print
+</span> option.
+@param {String} key The option key.
+@return {Boolean} Whether the option is present.
+*/
+hasAdvancedOption : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getAdvancedStringOption'>/**Gets the value of an advanced (printer specific) print option.
+</span>@param {String} key The option key.
+@return {String} The option value.
+*/
+getAdvancedStringOption : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getAdvancedIntOption'>/**Gets the value of an advanced (printer specific) print option.
+</span>@param {String} key The option key.
+@return {Number} The option value.
+*/
+getAdvancedIntOption : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getAdvancedOptions'>/**Gets the advanced options.
+</span>@return {Object {android.os.Bundle}} The advanced options.
+@hide 
+*/
+getAdvancedOptions : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-setAdvancedOptions'>/**Sets the advanced options.
+</span>@param {Object {Bundle}} options The advanced options.
+@hide 
+*/
+setAdvancedOptions : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-stateToString'>/**
+</span>@hide 
+*/
+stateToString : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getProgress'>/**Get the progress that has been made printing this job.
+</span>@return {Number} the print progress or -1 if not set
+@hide 
+*/
+getProgress : function(  ) {},
+
+<span id='android-print-PrintJobInfo-method-getStatus'>/**Get the status of this job.
+</span>@param {Object {PackageManager}} pm Package manager used to resolve the string
+@return {Object {java.lang.CharSequence}} the status of this job or null if not set
+@hide 
+*/
+getStatus : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

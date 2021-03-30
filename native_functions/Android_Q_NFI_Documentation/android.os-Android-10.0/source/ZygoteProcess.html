@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-ZygoteProcess'>/**@class android.os.ZygoteProcess
+</span>@extends java.lang.Object
+
+ Maintains communication state with the zygote processes. This class is responsible
+ for the sockets opened to the zygotes and for starting processes on behalf of the
+ {@link android.os.Process} class.
+
+ {@hide}
+*/
+var ZygoteProcess = {
+
+<span id='android-os-ZygoteProcess-method-getPrimarySocketAddress'>/**
+</span>*/
+getPrimarySocketAddress : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-start'>/**Start a new process.
+</span>
+ &lt;p&gt;If processes are enabled, a new process is created and the
+ static main() function of a &lt;var&gt;processClass&lt;/var&gt; is executed there.
+ The process will continue running after this function returns.
+
+ &lt;p&gt;If processes are not enabled, a new thread in the caller's
+ process is created and main() of &lt;var&gt;processclass&lt;/var&gt; called there.
+
+ &lt;p&gt;The niceName parameter, if not an empty string, is a custom name to
+ give to the process instead of using processClass.  This allows you to
+ make easily identifyable processes even if you are using the same base
+ &lt;var&gt;processClass&lt;/var&gt; to start them.
+
+ When invokeWith is not null, the process will be started as a fresh app
+ and not a zygote fork. Note that this is only allowed for uid 0 or when
+ runtimeFlags contains DEBUG_ENABLE_DEBUGGER.
+@param {String} processClass The class to use as the process's main entry
+                     point.
+@param {String} niceName A more readable name to use for the process.
+@param {Number} uid The user-id under which the process will run.
+@param {Number} gid The group-id under which the process will run.
+@param {Object {int[]}} gids Additional group-ids associated with the process.
+@param {Number} runtimeFlags Additional flags.
+@param {Number} targetSdkVersion The target SDK version for the app.
+@param {Number} seInfo null-ok SELinux information for the new process.
+@param {String} abi non-null the ABI this app should be started with.
+@param {String} instructionSet null-ok the instruction set to use.
+@param {String} appDataDir null-ok the data directory of the app.
+@param {String} invokeWith null-ok the command to invoke with.
+@param {String} packageName null-ok the name of the package this process belongs to.
+@param {String} zygoteArgs Additional arguments to supply to the zygote process.
+@return {Object {android.os.Process.ProcessStartResult}} An object that describes the result of the attempt to start the process.
+@throws RuntimeException on fatal start failure
+*/
+start : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-close'>/**Closes the connections to the zygote, if they exist.
+</span>*/
+close : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-establishZygoteConnectionForAbi'>/**Tries to establish a connection to the zygote that handles a given {@code abi}. Might block
+</span> and retry if the zygote is unresponsive. This method is a no-op if a connection is
+ already open.
+*/
+establishZygoteConnectionForAbi : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-getZygotePid'>/**Attempt to retrieve the PID of the zygote serving the given abi.
+</span>*/
+getZygotePid : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-setApiBlacklistExemptions'>/**Push hidden API blacklisting exemptions into the zygote process(es).
+</span>
+ &lt;p&gt;The list of exemptions will take affect for all new processes forked from the zygote after
+ this call.
+@param {Object {java.util.List}} exemptions List of hidden API exemption prefixes. Any matching members are treated as
+        whitelisted/public APIs (i.e. allowed, no logging of usage).
+*/
+setApiBlacklistExemptions : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-setHiddenApiAccessLogSampleRate'>/**Set the precentage of detected hidden API accesses that are logged to the event log.
+</span>
+ &lt;p&gt;This rate will take affect for all new processes forked from the zygote after this call.
+@param {Number} rate An integer between 0 and 0x10000 inclusive. 0 means no event logging.
+*/
+setHiddenApiAccessLogSampleRate : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-setHiddenApiAccessStatslogSampleRate'>/**Set the precentage of detected hidden API accesses that are logged to the new event log.
+</span>
+ &lt;p&gt;This rate will take affect for all new processes forked from the zygote after this call.
+@param {Number} rate An integer between 0 and 0x10000 inclusive. 0 means no event logging.
+*/
+setHiddenApiAccessStatslogSampleRate : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-preloadApp'>/**Instructs the zygote to pre-load the application code for the given Application.
+</span> Only the app zygote supports this function.
+ TODO preloadPackageForAbi() can probably be removed and the callers an use this instead.
+*/
+preloadApp : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-preloadPackageForAbi'>/**Instructs the zygote to pre-load the classes and native libraries at the given paths
+</span> for the specified abi. Not all zygotes support this function.
+*/
+preloadPackageForAbi : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-preloadDefault'>/**Instructs the zygote to preload the default set of classes and resources. Returns
+</span> {@code true} if a preload was performed as a result of this call, and {@code false}
+ otherwise. The latter usually means that the zygote eagerly preloaded at startup
+ or due to a previous call to {@code preloadDefault}. Note that this call is synchronous.
+*/
+preloadDefault : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-waitForConnectionToZygote'>/**Try connecting to the Zygote over and over again until we hit a time-out.
+</span>@param {String} zygoteSocketName The name of the socket to connect to.
+*/
+waitForConnectionToZygote : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-waitForConnectionToZygote'>/**Try connecting to the Zygote over and over again until we hit a time-out.
+</span>@param {Object {LocalSocketAddress}} zygoteSocketAddress The name of the socket to connect to.
+*/
+waitForConnectionToZygote : function(  ) {},
+
+<span id='android-os-ZygoteProcess-method-startChildZygote'>/**Starts a new zygote process as a child of this zygote. This is used to create
+</span> secondary zygotes that inherit data from the zygote that this object
+ communicates with. This returns a new ZygoteProcess representing a connection
+ to the newly created zygote. Throws an exception if the zygote cannot be started.
+@param {String} processClass The class to use as the child zygote's main entry
+                     point.
+@param {String} niceName A more readable name to use for the process.
+@param {Number} uid The user-id under which the child zygote will run.
+@param {Number} gid The group-id under which the child zygote will run.
+@param {Object {int[]}} gids Additional group-ids associated with the child zygote process.
+@param {Number} runtimeFlags Additional flags.
+@param {String} seInfo null-ok SELinux information for the child zygote process.
+@param {String} abi non-null the ABI of the child zygote
+@param {String} acceptedAbiList ABIs this child zygote will accept connections for; this
+                        may be different from &lt;code&gt;abi&lt;/code&gt; in case the children
+                        spawned from this Zygote only communicate using ABI-safe methods.
+@param {String} instructionSet null-ok the instruction set to use.
+@param {Number} uidRangeStart The first UID in the range the child zygote may setuid()/setgid() to
+@param {Number} uidRangeEnd The last UID in the range the child zygote may setuid()/setgid() to
+*/
+startChildZygote : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

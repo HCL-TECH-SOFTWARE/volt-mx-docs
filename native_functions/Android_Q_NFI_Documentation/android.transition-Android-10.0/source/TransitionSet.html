@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-transition-TransitionSet'>/**@class android.transition.TransitionSet
+</span>@extends android.transition.Transition
+
+ A TransitionSet is a parent of child transitions (including other
+ TransitionSets). Using TransitionSets enables more complex
+ choreography of transitions, where some sets play {@link #ORDERING_TOGETHER} and
+ others play {@link #ORDERING_SEQUENTIAL}. For example, {@link android.transition.AutoTransition}
+ uses a TransitionSet to sequentially play a Fade(Fade.OUT), followed by
+ a {@link android.transition.ChangeBounds}, followed by a Fade(Fade.OUT) transition.
+
+ &lt;p&gt;A TransitionSet can be described in a resource file by using the
+ tag &lt;code&gt;transitionSet&lt;/code&gt;, along with the standard
+ attributes of {@link android.R.styleable#TransitionSet} and
+ {@link android.R.styleable#Transition}. Child transitions of the
+ TransitionSet object can be loaded by adding those child tags inside the
+ enclosing &lt;code&gt;transitionSet&lt;/code&gt; tag. For example, the following xml
+ describes a TransitionSet that plays a Fade and then a ChangeBounds
+ transition on the affected view targets:&lt;/p&gt;
+ &lt;pre&gt;
+     &amp;lt;transitionSet xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+             android:transitionOrdering=&quot;sequential&quot;&amp;gt;
+         &amp;lt;fade/&amp;gt;
+         &amp;lt;changeBounds/&amp;gt;
+     &amp;lt;/transitionSet&amp;gt;
+ &lt;/pre&gt;
+*/
+var TransitionSet = {
+
+<span id='android-transition-TransitionSet-property-ORDERING_TOGETHER'>/** A flag used to indicate that the child transitions of this set
+</span> should all start at the same time.
+*/
+ORDERING_TOGETHER : &quot;0&quot;,
+<span id='android-transition-TransitionSet-property-ORDERING_SEQUENTIAL'>/** A flag used to indicate that the child transitions of this set should
+</span> play in sequence; when one child transition ends, the next child
+ transition begins. Note that a transition does not end until all
+ instances of it (which are playing on all applicable targets of the
+ transition) end.
+*/
+ORDERING_SEQUENTIAL : &quot;1&quot;,
+<span id='android-transition-TransitionSet-method-setOrdering'>/**Sets the play order of this set's child transitions.
+</span>@param {Number} ordering {@link #ORDERING_TOGETHER} to play this set's child
+ transitions together, {@link #ORDERING_SEQUENTIAL} to play the child
+ transitions in sequence.
+@return {Object {android.transition.TransitionSet}} This transitionSet object.
+*/
+setOrdering : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-getOrdering'>/**Returns the ordering of this TransitionSet. By default, the value is
+</span> {@link #ORDERING_TOGETHER}.
+@return {Number} {@link #ORDERING_TOGETHER} if child transitions will play at the same
+ time, {@link #ORDERING_SEQUENTIAL} if they will play in sequence.
+@see #setOrdering(int)
+*/
+getOrdering : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-addTransition'>/**Adds child transition to this set. The order in which this child transition
+</span> is added relative to other child transitions that are added, in addition to
+ the {@link #getOrdering() ordering} property, determines the
+ order in which the transitions are started.
+
+ &lt;p&gt;If this transitionSet has a {@link #getDuration() duration},
+ {@link #getInterpolator() interpolator}, {@link #getPropagation() propagation delay},
+ {@link #getPathMotion() path motion}, or
+ {@link #setEpicenterCallback(EpicenterCallback) epicenter callback}
+ set on it, the child transition will inherit the values that are set.
+ Transitions are assumed to have a maximum of one transitionSet parent.&lt;/p&gt;
+@param {Object {Transition}} transition A non-null child transition to be added to this set.
+@return {Object {android.transition.TransitionSet}} This transitionSet object.
+*/
+addTransition : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-getTransitionCount'>/**Returns the number of child transitions in the TransitionSet.
+</span>@return {Number} The number of child transitions in the TransitionSet.
+@see #addTransition(Transition)
+@see #getTransitionAt(int)
+*/
+getTransitionCount : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-getTransitionAt'>/**Returns the child Transition at the specified position in the TransitionSet.
+</span>@param {Number} index The position of the Transition to retrieve.
+@see #addTransition(Transition)
+@see #getTransitionCount()
+*/
+getTransitionAt : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-setDuration'>/**Setting a non-negative duration on a TransitionSet causes all of the child
+</span> transitions (current and future) to inherit this duration.
+@param {Number} duration The length of the animation, in milliseconds.
+@return {Object {android.transition.TransitionSet}} This transitionSet object.
+*/
+setDuration : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-setStartDelay'>/**
+</span>*/
+setStartDelay : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-setInterpolator'>/**
+</span>*/
+setInterpolator : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-addTarget'>/**
+</span>*/
+addTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-addTarget'>/**
+</span>*/
+addTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-addTarget'>/**
+</span>*/
+addTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-addTarget'>/**
+</span>*/
+addTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-addListener'>/**
+</span>*/
+addListener : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-removeTarget'>/**
+</span>*/
+removeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-removeTarget'>/**
+</span>*/
+removeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-removeTarget'>/**
+</span>*/
+removeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-removeTarget'>/**
+</span>*/
+removeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-excludeTarget'>/**
+</span>*/
+excludeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-excludeTarget'>/**
+</span>*/
+excludeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-excludeTarget'>/**
+</span>*/
+excludeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-excludeTarget'>/**
+</span>*/
+excludeTarget : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-removeListener'>/**
+</span>*/
+removeListener : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-setPathMotion'>/**
+</span>*/
+setPathMotion : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-removeTransition'>/**Removes the specified child transition from this set.
+</span>@param {Object {Transition}} transition The transition to be removed.
+@return {Object {android.transition.TransitionSet}} This transitionSet object.
+*/
+removeTransition : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-captureStartValues'>/**
+</span>*/
+captureStartValues : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-captureEndValues'>/**
+</span>*/
+captureEndValues : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-pause'>/**
+</span>@hide 
+*/
+pause : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-resume'>/**
+</span>@hide 
+*/
+resume : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-setPropagation'>/**
+</span>*/
+setPropagation : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-setEpicenterCallback'>/**
+</span>*/
+setEpicenterCallback : function(  ) {},
+
+<span id='android-transition-TransitionSet-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-SearchSnippets'>/**@class android.provider.ContactsContract.SearchSnippets
+</span>@extends java.lang.Object
+
+ Additional column returned by
+ {@link android.provider.ContactsContract.Contacts#CONTENT_FILTER_URI Contacts.CONTENT_FILTER_URI} explaining
+ why the filter matched the contact. This column will contain extracts from the contact's
+ constituent {@link android.provider.ContactsContract.Data android.provider.ContactsContract.Data} items, formatted in a way that indicates the section of the
+ snippet that matched the filter.
+
+ &lt;p&gt;
+ The following example searches for all contacts that match the query &quot;presi&quot; and requests
+ the snippet column as well.
+ &lt;pre&gt;
+ Builder builder = Contacts.CONTENT_FILTER_URI.buildUpon();
+ builder.appendPath(&quot;presi&quot;);
+ // Defer snippeting to the client side if possible, for performance reasons.
+ builder.appendQueryParameter(SearchSnippets.DEFERRED_SNIPPETING_KEY,&quot;1&quot;);
+
+ Cursor cursor = getContentResolver().query(builder.build());
+
+ Bundle extras = cursor.getExtras();
+ if (extras.getBoolean(ContactsContract.DEFERRED_SNIPPETING)) {
+     // Do our own snippet formatting.
+     // For a contact with the email address (president@organization.com), the snippet
+     // column will contain the string &quot;president@organization.com&quot;.
+ } else {
+     // The snippet has already been pre-formatted, we can display it as is.
+     // For a contact with the email address (president@organization.com), the snippet
+     // column will contain the string &quot;[presi]dent@organization.com&quot;.
+ }
+ &lt;/pre&gt;
+ &lt;/p&gt;
+*/
+var SearchSnippets = {
+
+<span id='android-provider-ContactsContract-SearchSnippets-property-SNIPPET'>/** The search snippet constructed by SQLite snippeting functionality.
+</span> &lt;p&gt;
+ The snippet may contain (parts of) several data elements belonging to the contact,
+ with the matching parts optionally surrounded by special characters that indicate the
+ start and end of matching text.
+
+ For example, if a contact has an address &quot;123 Main Street&quot;, using a filter &quot;mai&quot; would
+ return the formatted snippet &quot;123 [Mai]n street&quot;.
+
+ @see &lt;a href=&quot;http://www.sqlite.org/fts3.html#snippet&quot;&gt;
+         http://www.sqlite.org/fts3.html#snippet&lt;/a&gt;
+*/
+SNIPPET : &quot;snippet&quot;,
+<span id='android-provider-ContactsContract-SearchSnippets-property-SNIPPET_ARGS_PARAM_KEY'>/** Comma-separated parameters for the generation of the snippet:
+</span> &lt;ul&gt;
+ &lt;li&gt;The &quot;start match&quot; text. Default is '['&lt;/li&gt;
+ &lt;li&gt;The &quot;end match&quot; text. Default is ']'&lt;/li&gt;
+ &lt;li&gt;The &quot;ellipsis&quot; text. Default is &quot;...&quot;&lt;/li&gt;
+ &lt;li&gt;Maximum number of tokens to include in the snippet. Can be either
+ a positive or a negative number: A positive number indicates how many
+ tokens can be returned in total. A negative number indicates how many
+ tokens can be returned per occurrence of the search terms.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ @hide
+*/
+SNIPPET_ARGS_PARAM_KEY : &quot;snippet_args&quot;,
+<span id='android-provider-ContactsContract-SearchSnippets-property-DEFERRED_SNIPPETING_KEY'>/** The key to ask the provider to defer the formatting of the snippet to the client if
+</span> possible, for performance reasons.
+ A value of 1 indicates true, 0 indicates false. False is the default.
+ When a cursor is returned to the client, it should check for an extra with the name
+ {@link android.provider.ContactsContract#DEFERRED_SNIPPETING} in the cursor. If it exists, the client
+ should do its own formatting of the snippet. If it doesn't exist, the snippet column
+ in the cursor should already contain a formatted snippet.
+*/
+DEFERRED_SNIPPETING_KEY : &quot;deferred_snippeting&quot;,
+
+};</pre>
+</body>
+</html>

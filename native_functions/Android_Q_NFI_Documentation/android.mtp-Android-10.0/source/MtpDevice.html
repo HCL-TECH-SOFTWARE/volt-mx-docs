@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-mtp-MtpDevice'>/**@class android.mtp.MtpDevice
+</span>@extends java.lang.Object
+
+ This class represents an MTP or PTP device connected on the USB host bus. An application can
+ instantiate an object of this type, by referencing an attached {@link android.hardware.usb.UsbDevice} and then use methods in this class to get information about the
+ device and objects stored on it, as well as open the connection and transfer data.
+*/
+var MtpDevice = {
+
+<span id='android-mtp-MtpDevice-method-open'>/**Opens the MTP device.  Once the device is open it takes ownership of the
+</span> {@link android.hardware.usb.UsbDeviceConnection}.
+ The connection will be closed when you call {@link #close}()
+ The connection will also be closed if this method fails.
+@param {Object {UsbDeviceConnection}} connection an open {@link android.hardware.usb.UsbDeviceConnection} for the device
+@return {Boolean} true if the device was successfully opened.
+*/
+open : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-close'>/**Closes all resources related to the MtpDevice object.
+</span> After this is called, the object can not be used until {@link #open} is called again
+ with a new {@link android.hardware.usb.UsbDeviceConnection}.
+*/
+close : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getDeviceName'>/**Returns the name of the USB device
+</span> This returns the same value as {@link android.hardware.usb.UsbDevice#getDeviceName}
+ for the device's {@link android.hardware.usb.UsbDevice}
+@return {String} the device name
+*/
+getDeviceName : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getDeviceId'>/**Returns the USB ID of the USB device.
+</span> This returns the same value as {@link android.hardware.usb.UsbDevice#getDeviceId}
+ for the device's {@link android.hardware.usb.UsbDevice}
+@return {Number} the device ID
+*/
+getDeviceId : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getDeviceInfo'>/**Returns the {@link android.mtp.MtpDeviceInfo} for this device
+</span>@return {Object {android.mtp.MtpDeviceInfo}} the device info, or null if fetching device info fails
+*/
+getDeviceInfo : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getStorageIds'>/**Returns the list of IDs for all storage units on this device
+</span> Information about each storage unit can be accessed via {@link #getStorageInfo}.
+@return {Number} the list of storage IDs, or null if fetching storage IDs fails
+*/
+getStorageIds : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getObjectHandles'>/**Returns the list of object handles for all objects on the given storage unit,
+</span> with the given format and parent.
+ Information about each object can be accessed via {@link #getObjectInfo}.
+@param {Number} storageId the storage unit to query
+@param {Number} format the format of the object to return, or zero for all formats
+@param {Number} objectHandle the parent object to query, -1 for the storage root,
+     or zero for all objects
+@return {Number} the object handles, or null if fetching object handles fails
+*/
+getObjectHandles : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getObject'>/**Returns the data for an object as a byte array.
+</span> This call may block for an arbitrary amount of time depending on the size
+ of the data and speed of the devices.
+@param {Number} objectHandle handle of the object to read
+@param {Number} objectSize the size of the object (this should match
+      {@link MtpObjectInfo#getCompressedSize})
+@return {Number} the object's data, or null if reading fails
+*/
+getObject : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getPartialObject'>/**Obtains object bytes in the specified range and writes it to an array.
+</span> This call may block for an arbitrary amount of time depending on the size
+ of the data and speed of the devices.
+@param {Number} objectHandle handle of the object to read
+@param {Number} offset Start index of reading range. It must be a non-negative value at most
+     0xffffffff.
+@param {Number} size Size of reading range. It must be a non-negative value at most Integer.MAX_VALUE
+     or 0xffffffff. If 0xffffffff is specified, the method obtains the full bytes of object.
+@param {Object {byte[]}} buffer Array to write data.
+@return {Number} Size of bytes that are actually read.
+*/
+getPartialObject : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getPartialObject64'>/**Obtains object bytes in the specified range and writes it to an array.
+</span> This call may block for an arbitrary amount of time depending on the size
+ of the data and speed of the devices.
+
+ This is a vender-extended operation supported by Android that enables us to pass
+ unsigned 64-bit offset. Check if the MTP device supports the operation by using
+ {@link android.mtp.MtpDeviceInfo#getOperationsSupported()}.
+@param {Number} objectHandle handle of the object to read
+@param {Number} offset Start index of reading range. It must be a non-negative value.
+@param {Number} size Size of reading range. It must be a non-negative value at most Integer.MAX_VALUE.
+@param {Object {byte[]}} buffer Array to write data.
+@return {Number} Size of bytes that are actually read.
+@see MtpConstants#OPERATION_GET_PARTIAL_OBJECT_64
+*/
+getPartialObject64 : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getThumbnail'>/**Returns the thumbnail data for an object as a byte array.
+</span> The size and format of the thumbnail data can be determined via
+ {@link android.mtp.MtpObjectInfo#getThumbCompressedSize} and
+ {@link android.mtp.MtpObjectInfo#getThumbFormat}.
+ For typical devices the format is JPEG.
+@param {Number} objectHandle handle of the object to read
+@return {Number} the object's thumbnail, or null if reading fails
+*/
+getThumbnail : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getStorageInfo'>/**Retrieves the {@link android.mtp.MtpStorageInfo} for a storage unit.
+</span>@param {Number} storageId the ID of the storage unit
+@return {Object {android.mtp.MtpStorageInfo}} the MtpStorageInfo, or null if fetching storage info fails
+*/
+getStorageInfo : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getObjectInfo'>/**Retrieves the {@link android.mtp.MtpObjectInfo} for an object.
+</span>@param {Number} objectHandle the handle of the object
+@return {Object {android.mtp.MtpObjectInfo}} the MtpObjectInfo, or null if fetching object info fails
+*/
+getObjectInfo : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-deleteObject'>/**Deletes an object on the device.  This call may block, since
+</span> deleting a directory containing many files may take a long time
+ on some devices.
+@param {Number} objectHandle handle of the object to delete
+@return {Boolean} true if the deletion succeeds
+*/
+deleteObject : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getParent'>/**Retrieves the object handle for the parent of an object on the device.
+</span>@param {Number} objectHandle handle of the object to query
+@return {Number} the parent's handle, or zero if it is in the root of the storage
+*/
+getParent : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getStorageId'>/**Retrieves the ID of the storage unit containing the given object on the device.
+</span>@param {Number} objectHandle handle of the object to query
+@return {Number} the object's storage unit ID
+*/
+getStorageId : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-importFile'>/**Copies the data for an object to a file in external storage.
+</span> This call may block for an arbitrary amount of time depending on the size
+ of the data and speed of the devices.
+@param {Number} objectHandle handle of the object to read
+@param {String} destPath path to destination for the file transfer.
+      This path should be in the external storage as defined by
+      {@link android.os.Environment#getExternalStorageDirectory}
+@return {Boolean} true if the file transfer succeeds
+*/
+importFile : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-importFile'>/**Copies the data for an object to a file descriptor.
+</span> This call may block for an arbitrary amount of time depending on the size
+ of the data and speed of the devices. The file descriptor is not closed
+ on completion, and must be done by the caller.
+@param {Number} objectHandle handle of the object to read
+@param {Object {ParcelFileDescriptor}} descriptor file descriptor to write the data to for the file transfer.
+@return {Boolean} true if the file transfer succeeds
+*/
+importFile : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-sendObject'>/**Copies the data for an object from a file descriptor.
+</span> This call may block for an arbitrary amount of time depending on the size
+ of the data and speed of the devices. The file descriptor is not closed
+ on completion, and must be done by the caller.
+@param {Number} objectHandle handle of the target file
+@param {Number} size size of the file in bytes
+@param {Object {ParcelFileDescriptor}} descriptor file descriptor to read the data from.
+@return {Boolean} true if the file transfer succeeds
+*/
+sendObject : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-sendObjectInfo'>/**Uploads an object metadata for a new entry. The {@link android.mtp.MtpObjectInfo} can be
+</span> created with the {@link android.mtp.MtpObjectInfo.Builder} class.
+
+ The returned {@link android.mtp.MtpObjectInfo} has the new object handle field filled in.
+@param {Object {MtpObjectInfo}} info metadata of the entry
+@return {Object {android.mtp.MtpObjectInfo}} object info of the created entry, or null if sending object info fails
+*/
+sendObjectInfo : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-readEvent'>/**Reads an event from the device. It blocks the current thread until it gets an event.
+</span> It throws OperationCanceledException if it is cancelled by signal.
+@param {Object {CancellationSignal}} signal signal for cancellation
+@return {Object {android.mtp.MtpEvent}} obtained event
+@throws IOException
+*/
+readEvent : function(  ) {},
+
+<span id='android-mtp-MtpDevice-method-getObjectSizeLong'>/**Returns object size in 64-bit integer.
+</span>
+ Though MtpObjectInfo#getCompressedSize returns the object size in 32-bit unsigned integer,
+ this method returns the object size in 64-bit integer from the object property. Thus it can
+ fetch 4GB+ object size correctly. If the device does not support objectSize property, it
+ throws IOException.
+@hide 
+*/
+getObjectSizeLong : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

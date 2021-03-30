@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaSync'>/**@class android.media.MediaSync
+</span>@extends java.lang.Object
+
+ MediaSync class can be used to synchronously play audio and video streams.
+ It can be used to play audio-only or video-only stream, too.
+
+ &lt;p&gt;MediaSync is generally used like this:
+ &lt;pre&gt;
+ MediaSync sync = new MediaSync();
+ sync.setSurface(surface);
+ Surface inputSurface = sync.createInputSurface();
+ ...
+ // MediaCodec videoDecoder = ...;
+ videoDecoder.configure(format, inputSurface, ...);
+ ...
+ sync.setAudioTrack(audioTrack);
+ sync.setCallback(new MediaSync.Callback() {
+     {@literal @Override}
+     public void onAudioBufferConsumed(MediaSync sync, ByteBuffer audioBuffer, int bufferId) {
+         ...
+     }
+ }, null);
+ // This needs to be done since sync is paused on creation.
+ sync.setPlaybackParams(new PlaybackParams().setSpeed(1.f));
+
+ for (;;) {
+   ...
+   // send video frames to surface for rendering, e.g., call
+   // videoDecoder.releaseOutputBuffer(videoOutputBufferIx, videoPresentationTimeNs);
+   // More details are available as below.
+   ...
+   sync.queueAudio(audioByteBuffer, bufferId, audioPresentationTimeUs); // non-blocking.
+   // The audioByteBuffer and bufferId will be returned via callback.
+   // More details are available as below.
+   ...
+     ...
+ }
+ sync.setPlaybackParams(new PlaybackParams().setSpeed(0.f));
+ sync.release();
+ sync = null;
+
+ // The following code snippet illustrates how video/audio raw frames are created by
+ // MediaCodec's, how they are fed to MediaSync and how they are returned by MediaSync.
+ // This is the callback from MediaCodec.
+ onOutputBufferAvailable(MediaCodec codec, int bufferId, BufferInfo info) {
+     // ...
+     if (codec == videoDecoder) {
+         // surface timestamp must contain media presentation time in nanoseconds.
+         codec.releaseOutputBuffer(bufferId, 1000 * info.presentationTime);
+     } else {
+         ByteBuffer audioByteBuffer = codec.getOutputBuffer(bufferId);
+         sync.queueAudio(audioByteBuffer, bufferId, info.presentationTime);
+     }
+     // ...
+ }
+
+ // This is the callback from MediaSync.
+ onAudioBufferConsumed(MediaSync sync, ByteBuffer buffer, int bufferId) {
+     // ...
+     audioDecoder.releaseBuffer(bufferId, false);
+     // ...
+ }
+
+ &lt;/pre&gt;
+
+ The client needs to configure corresponding sink by setting the Surface and/or AudioTrack
+ based on the stream type it will play.
+ &lt;p&gt;
+ For video, the client needs to call {@link #createInputSurface} to obtain a surface on
+ which it will render video frames.
+ &lt;p&gt;
+ For audio, the client needs to set up audio track correctly, e.g., using {@link android.media.AudioTrack#MODE_STREAM}. The audio buffers are sent to MediaSync directly via {@link #queueAudio}, and are returned to the client via {@link android.media.MediaCodec.Callback#onAudioBufferConsumed}
+ asynchronously. The client should not modify an audio buffer till it's returned.
+ &lt;p&gt;
+ The client can optionally pre-fill audio/video buffers by setting playback rate to 0.0,
+ and then feed audio/video buffers to corresponding components. This can reduce possible
+ initial underrun.
+ &lt;p&gt;
+*/
+var MediaSync = {
+
+<span id='android-media-MediaSync-property-MEDIASYNC_ERROR_AUDIOTRACK_FAIL'>/**Audio track failed.
+</span> @see android.media.MediaSync.OnErrorListener
+*/
+MEDIASYNC_ERROR_AUDIOTRACK_FAIL : &quot;1&quot;,
+<span id='android-media-MediaSync-property-MEDIASYNC_ERROR_SURFACE_FAIL'>/**The surface failed to handle video buffers.
+</span> @see android.media.MediaSync.OnErrorListener
+*/
+MEDIASYNC_ERROR_SURFACE_FAIL : &quot;2&quot;,
+<span id='android-media-MediaSync-method-release'>/**Make sure you call this when you're done to free up any opened
+</span> component instance instead of relying on the garbage collector
+ to do this for you at some point in the future.
+*/
+release : function(  ) {},
+
+<span id='android-media-MediaSync-method-setCallback'>/**Sets an asynchronous callback for actionable MediaSync events.
+</span> &lt;p&gt;
+ This method can be called multiple times to update a previously set callback. If the
+ handler is changed, undelivered notifications scheduled for the old handler may be dropped.
+ &lt;p&gt;
+ &lt;b&gt;Do not call this inside callback.&lt;/b&gt;
+@param {Object {MediaSync.Callback}} cb The callback that will run. Use {@code null} to stop receiving callbacks.
+@param {Object {Handler}} handler The Handler that will run the callback. Use {@code null} to use MediaSync's
+     internal handler if it exists.
+*/
+setCallback : function(  ) {},
+
+<span id='android-media-MediaSync-method-setOnErrorListener'>/**Sets an asynchronous callback for error events.
+</span> &lt;p&gt;
+ This method can be called multiple times to update a previously set listener. If the
+ handler is changed, undelivered notifications scheduled for the old handler may be dropped.
+ &lt;p&gt;
+ &lt;b&gt;Do not call this inside callback.&lt;/b&gt;
+@param {Object {MediaSync.OnErrorListener}} listener The callback that will run. Use {@code null} to stop receiving callbacks.
+@param {Object {Handler}} handler The Handler that will run the callback. Use {@code null} to use MediaSync's
+     internal handler if it exists.
+*/
+setOnErrorListener : function(  ) {},
+
+<span id='android-media-MediaSync-method-setSurface'>/**Sets the output surface for MediaSync.
+</span> &lt;p&gt;
+ Currently, this is only supported in the Initialized state.
+@param {Object {Surface}} surface Specify a surface on which to render the video data.
+@throws IllegalArgumentException if the surface has been released, is invalid,
+     or can not be connected.
+@throws IllegalStateException if setting the surface is not supported, e.g.
+     not in the Initialized state, or another surface has already been set.
+*/
+setSurface : function(  ) {},
+
+<span id='android-media-MediaSync-method-setAudioTrack'>/**Sets the audio track for MediaSync.
+</span> &lt;p&gt;
+ Currently, this is only supported in the Initialized state.
+@param {Object {AudioTrack}} audioTrack Specify an AudioTrack through which to render the audio data.
+@throws IllegalArgumentException if the audioTrack has been released, or is invalid.
+@throws IllegalStateException if setting the audio track is not supported, e.g.
+     not in the Initialized state, or another audio track has already been set.
+*/
+setAudioTrack : function(  ) {},
+
+<span id='android-media-MediaSync-method-createInputSurface'>/**Requests a Surface to use as the input. This may only be called after
+</span> {@link #setSurface}.
+ &lt;p&gt;
+ The application is responsible for calling release() on the Surface when
+ done.
+@throws IllegalStateException if not set, or another input surface has
+     already been created.
+*/
+createInputSurface : function(  ) {},
+
+<span id='android-media-MediaSync-method-setPlaybackParams'>/**Sets playback rate using {@link android.media.PlaybackParams}.
+</span> &lt;p&gt;
+ When using MediaSync with {@link android.media.AudioTrack}, set playback params using this
+ call instead of calling it directly on the track, so that the sync is aware of
+ the params change.
+ &lt;p&gt;
+ This call also works if there is no audio track.
+@param {Object {PlaybackParams}} params the playback params to use. {@link PlaybackParams#getSpeed
+     Speed} is the ratio between desired playback rate and normal one. 1.0 means
+     normal playback speed. 0.0 means pause. Value larger than 1.0 means faster playback,
+     while value between 0.0 and 1.0 for slower playback. &lt;b&gt;Note:&lt;/b&gt; the normal rate
+     does not change as a result of this call. To restore the original rate at any time,
+     use speed of 1.0.
+@throws IllegalStateException if the internal sync engine or the audio track has not
+     been initialized.
+@throws IllegalArgumentException if the params are not supported.
+*/
+setPlaybackParams : function(  ) {},
+
+<span id='android-media-MediaSync-method-getPlaybackParams'>/**Gets the playback rate using {@link android.media.PlaybackParams}.
+</span>@return {Object {android.media.PlaybackParams}} the playback rate being used.
+@throws IllegalStateException if the internal sync engine or the audio track has not
+     been initialized.
+*/
+getPlaybackParams : function(  ) {},
+
+<span id='android-media-MediaSync-method-setSyncParams'>/**Sets A/V sync mode.
+</span>@param {Object {SyncParams}} params the A/V sync params to apply
+@throws IllegalStateException if the internal player engine has not been
+ initialized.
+@throws IllegalArgumentException if params are not supported.
+*/
+setSyncParams : function(  ) {},
+
+<span id='android-media-MediaSync-method-getSyncParams'>/**Gets the A/V sync mode.
+</span>@return {Object {android.media.SyncParams}} the A/V sync params
+@throws IllegalStateException if the internal player engine has not been
+ initialized.
+*/
+getSyncParams : function(  ) {},
+
+<span id='android-media-MediaSync-method-flush'>/**Flushes all buffers from the sync object.
+</span> &lt;p&gt;
+ All pending unprocessed audio and video buffers are discarded. If an audio track was
+ configured, it is flushed and stopped. If a video output surface was configured, the
+ last frame queued to it is left on the frame. Queue a blank video frame to clear the
+ surface,
+ &lt;p&gt;
+ No callbacks are received for the flushed buffers.
+@throws IllegalStateException if the internal player engine has not been
+ initialized.
+*/
+flush : function(  ) {},
+
+<span id='android-media-MediaSync-method-getTimestamp'>/**Get current playback position.
+</span> &lt;p&gt;
+ The MediaTimestamp represents how the media time correlates to the system time in
+ a linear fashion using an anchor and a clock rate. During regular playback, the media
+ time moves fairly constantly (though the anchor frame may be rebased to a current
+ system time, the linear correlation stays steady). Therefore, this method does not
+ need to be called often.
+ &lt;p&gt;
+ To help users get current playback position, this method always anchors the timestamp
+ to the current {@link System#nanoTime system time}, so
+ {@link android.media.MediaTimestamp#getAnchorMediaTimeUs} can be used as current playback position.
+@return {Object {android.media.MediaTimestamp}} a MediaTimestamp object if a timestamp is available, or {@code null} if no timestamp
+         is available, e.g. because the media player has not been initialized.
+@see MediaTimestamp
+*/
+getTimestamp : function(  ) {},
+
+<span id='android-media-MediaSync-method-queueAudio'>/**Queues the audio data asynchronously for playback (AudioTrack must be in streaming mode).
+</span> If the audio track was flushed as a result of {@link #flush}, it will be restarted.
+@param {Object {ByteBuffer}} audioData the buffer that holds the data to play. This buffer will be returned
+     to the client via registered callback.
+@param {Number} bufferId an integer used to identify audioData. It will be returned to
+     the client along with audioData. This helps applications to keep track of audioData,
+     e.g., it can be used to store the output buffer index used by the audio codec.
+@param {Number} presentationTimeUs the presentation timestamp in microseconds for the first frame
+     in the buffer.
+@throws IllegalStateException if audio track is not set or internal configureation
+     has not been done correctly.
+*/
+queueAudio : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

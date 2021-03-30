@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-print-pdf-PrintedPdfDocument'>/**@class android.print.pdf.PrintedPdfDocument
+</span>@extends android.graphics.pdf.PdfDocument
+
+ This class is a helper for creating a PDF file for given print attributes. It is useful for
+ implementing printing via the native Android graphics APIs.
+ &lt;p&gt;
+ This class computes the page width, page height, and content rectangle from the provided print
+ attributes and these precomputed values can be accessed via {@link #getPageWidth}(),
+ {@link #getPageHeight}(), and {@link #getPageContentRect}(), respectively. The
+ {@link #startPage}(int) methods creates pages whose
+ {@link android.graphics.pdf.PdfDocument.PageInfo PageInfo} is initialized with the precomputed
+ values for width, height, and content rectangle.
+ &lt;p&gt;
+ A typical use of the APIs looks like this:
+ &lt;/p&gt;
+ &lt;pre&gt;
+ // open a new document
+ PrintedPdfDocument document = new PrintedPdfDocument(context,
+         printAttributes);
+
+ // start a page
+ Page page = document.startPage(0);
+
+ // draw something on the page
+ View content = getContentView();
+ content.draw(page.getCanvas());
+
+ // finish the page
+ document.finishPage(page);
+ . . .
+ // add more pages
+ . . .
+ // write the document content
+ document.writeTo(getOutputStream());
+
+ //close the document
+ document.close();
+ &lt;/pre&gt;
+*/
+var PrintedPdfDocument = {
+
+<span id='android-print-pdf-PrintedPdfDocument-method-startPage'>/**Starts a new page. The page is created using width, height and content rectangle computed
+</span> from the print attributes passed in the constructor and the given page number to create an
+ appropriate {@link android.graphics.pdf.PdfDocument.PageInfo PageInfo}.
+ &lt;p&gt;
+ After the page is created you can draw arbitrary content on the page's canvas which you can
+ get by calling {@link android.graphics.pdf.PdfDocument.Page#getCanvas() Page.getCanvas()}.
+ After you are done drawing the content you should finish the page by calling
+ {@link #finishPage}(Page). After the page is finished you should no longer access the page or
+ its canvas.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Do not call this method after {@link #close}(). Also do not call this
+ method if the last page returned by this method is not finished by calling
+ {@link #finishPage}(Page).
+ &lt;/p&gt;
+@param {Number} pageNumber The page number. Must be a non negative.
+@return {Object {android.graphics.pdf.PdfDocument.Page}} A blank page.
+@see #finishPage(Page)
+*/
+startPage : function(  ) {},
+
+<span id='android-print-pdf-PrintedPdfDocument-method-getPageWidth'>/**Gets the page width.
+</span>@return {Number} The page width in PostScript points (1/72th of an inch).
+*/
+getPageWidth : function(  ) {},
+
+<span id='android-print-pdf-PrintedPdfDocument-method-getPageHeight'>/**Gets the page height.
+</span>@return {Number} The page height in PostScript points (1/72th of an inch).
+*/
+getPageHeight : function(  ) {},
+
+<span id='android-print-pdf-PrintedPdfDocument-method-getPageContentRect'>/**Gets the content rectangle. This is the area of the page that
+</span> contains printed data and is relative to the page top left.
+@return {Object {android.graphics.Rect}} The content rectangle.
+*/
+getPageContentRect : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

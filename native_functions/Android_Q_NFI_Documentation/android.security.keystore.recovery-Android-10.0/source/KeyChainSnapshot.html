@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-security-keystore-recovery-KeyChainSnapshot'>/**@class android.security.keystore.recovery.KeyChainSnapshot
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A snapshot of a version of the keystore. Two events can trigger the generation of a new snapshot:
+
+ &lt;ul&gt;
+     &lt;li&gt;The user's lock screen changes. (A key derived from the user's lock screen is used to
+         protected the keychain, which is why this forces a new snapshot.)
+     &lt;li&gt;A key is added to or removed from the recoverable keychain.
+ &lt;/ul&gt;
+
+ &lt;p&gt;The snapshot data is also encrypted with the remote trusted hardware's public key, so even
+ the recovery agent itself should not be able to decipher the data. The recovery agent sends an
+ instance of this to the remote trusted hardware whenever a new snapshot is generated. During a
+ recovery flow, the recovery agent retrieves a snapshot from the remote trusted hardware. It then
+ sends it to the framework, where it is decrypted using the user's lock screen from their previous
+ device.
+
+ @hide
+*/
+var KeyChainSnapshot = {
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getSnapshotVersion'>/**Snapshot version for given recovery agent. It is incremented when user secret or list of
+</span> application keys changes.
+*/
+getSnapshotVersion : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getMaxAttempts'>/**Number of user secret guesses allowed during KeyChain recovery.
+</span>*/
+getMaxAttempts : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getCounterId'>/**CounterId which is rotated together with user secret.
+</span>*/
+getCounterId : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getServerParams'>/**Server parameters.
+</span>*/
+getServerParams : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getTrustedHardwareCertPath'>/**CertPath containing the public key used to encrypt {@code encryptedRecoveryKeyBlob}.
+</span>*/
+getTrustedHardwareCertPath : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getKeyChainProtectionParams'>/**UI and key derivation parameters. Note that combination of secrets may be used.
+</span>*/
+getKeyChainProtectionParams : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getWrappedApplicationKeys'>/**List of application keys, with key material encrypted by
+</span> the recovery key ({@link #getEncryptedRecoveryKeyBlob}).
+*/
+getWrappedApplicationKeys : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-getEncryptedRecoveryKeyBlob'>/**Recovery key blob, encrypted by user secret and recovery service public key.
+</span>*/
+getEncryptedRecoveryKeyBlob : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainSnapshot-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-RouteInfo'>/**@class android.net.RouteInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Represents a network route.
+ &lt;p&gt;
+ This is used both to describe static network configuration and live network
+ configuration information.
+
+ A route contains three pieces of information:
+ &lt;ul&gt;
+ &lt;li&gt;a destination {@link android.net.IpPrefix} specifying the network destinations covered by this route.
+     If this is {@code null} it indicates a default route of the address family (IPv4 or IPv6)
+     implied by the gateway IP address.
+ &lt;li&gt;a gateway {@link InetAddress} indicating the next hop to use.  If this is {@code null} it
+     indicates a directly-connected route.
+ &lt;li&gt;an interface (which may be unspecified).
+ &lt;/ul&gt;
+ Either the destination or the gateway may be {@code null}, but not both.  If the
+ destination and gateway are both specified, they must be of the same address family
+ (IPv4 or IPv6).
+*/
+var RouteInfo = {
+
+<span id='android-net-RouteInfo-property-RTN_UNICAST'>/**Unicast route. @hide */
+</span>RTN_UNICAST : &quot;1&quot;,
+<span id='android-net-RouteInfo-property-RTN_UNREACHABLE'>/**Unreachable route. @hide */
+</span>RTN_UNREACHABLE : &quot;7&quot;,
+<span id='android-net-RouteInfo-property-RTN_THROW'>/**Throw route. @hide */
+</span>RTN_THROW : &quot;9&quot;,
+<span id='android-net-RouteInfo-property-CREATOR'>/** Implement the Parcelable interface.
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-net-RouteInfo-method-makeHostRoute'>/**
+</span>@hide 
+*/
+makeHostRoute : function(  ) {},
+
+<span id='android-net-RouteInfo-method-makeHostRoute'>/**
+</span>@hide 
+*/
+makeHostRoute : function(  ) {},
+
+<span id='android-net-RouteInfo-method-getDestination'>/**Retrieves the destination address and prefix length in the form of an {@link android.net.IpPrefix}.
+</span>@return {Object {android.net.IpPrefix}} {@link IpPrefix} specifying the destination.  This is never {@code null}.
+*/
+getDestination : function(  ) {},
+
+<span id='android-net-RouteInfo-method-getDestinationLinkAddress'>/**TODO: Convert callers to use IpPrefix and then remove.
+</span>@hide 
+*/
+getDestinationLinkAddress : function(  ) {},
+
+<span id='android-net-RouteInfo-method-getGateway'>/**Retrieves the gateway or next hop {@link InetAddress} for this route.
+</span>@return {Object {java.net.InetAddress}} {@link InetAddress} specifying the gateway or next hop.  This may be
+                             {@code null} for a directly-connected route.&quot;
+*/
+getGateway : function(  ) {},
+
+<span id='android-net-RouteInfo-method-getInterface'>/**Retrieves the interface used for this route if specified, else {@code null}.
+</span>@return {String} The name of the interface used for this route.
+*/
+getInterface : function(  ) {},
+
+<span id='android-net-RouteInfo-method-getType'>/**Retrieves the type of this route.
+</span>@return {Number} The type of this route; one of the {@code RTN_xxx} constants defined in this class.
+@hide 
+*/
+getType : function(  ) {},
+
+<span id='android-net-RouteInfo-method-isDefaultRoute'>/**Indicates if this route is a default route (ie, has no destination specified).
+</span>@return {Boolean} {@code true} if the destination has a prefix length of 0.
+*/
+isDefaultRoute : function(  ) {},
+
+<span id='android-net-RouteInfo-method-isIPv4Default'>/**Indicates if this route is an IPv4 default route.
+</span>@hide 
+*/
+isIPv4Default : function(  ) {},
+
+<span id='android-net-RouteInfo-method-isIPv6Default'>/**Indicates if this route is an IPv6 default route.
+</span>@hide 
+*/
+isIPv6Default : function(  ) {},
+
+<span id='android-net-RouteInfo-method-isHostRoute'>/**Indicates if this route is a host route (ie, matches only a single host address).
+</span>@return {Boolean} {@code true} if the destination has a prefix length of 32 or 128 for IPv4 or IPv6,
+ respectively.
+@hide 
+*/
+isHostRoute : function(  ) {},
+
+<span id='android-net-RouteInfo-method-hasGateway'>/**Indicates if this route has a next hop ({@code true}) or is directly-connected
+</span> ({@code false}).
+@return {Boolean} {@code true} if a gateway is specified
+*/
+hasGateway : function(  ) {},
+
+<span id='android-net-RouteInfo-method-matches'>/**Determines whether the destination and prefix of this route includes the specified
+</span> address.
+@param {Object {InetAddress}} destination A {@link InetAddress} to test to see if it would match this route.
+@return {Boolean} {@code true} if the destination and prefix length cover the given address.
+*/
+matches : function(  ) {},
+
+<span id='android-net-RouteInfo-method-selectBestRoute'>/**Find the route from a Collection of routes that best matches a given address.
+</span> May return null if no routes are applicable.
+@param {Object {java.util.Collection}} routes a Collection of RouteInfos to chose from
+@param {Object {InetAddress}} dest the InetAddress your trying to get to
+@return {Object {android.net.RouteInfo}} the RouteInfo from the Collection that best fits the given address
+@hide 
+*/
+selectBestRoute : function(  ) {},
+
+<span id='android-net-RouteInfo-method-toString'>/**Returns a human-readable description of this object.
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-RouteInfo-method-equals'>/**Compares this RouteInfo object against the specified object and indicates if they are equal.
+</span>@return {Boolean} {@code true} if the objects are equal, {@code false} otherwise.
+*/
+equals : function(  ) {},
+
+<span id='android-net-RouteInfo-method-hashCode'>/**Returns a hashcode for this &lt;code&gt;RouteInfo&lt;/code&gt; object.
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-net-RouteInfo-method-describeContents'>/**Implement the Parcelable interface
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-RouteInfo-method-writeToParcel'>/**Implement the Parcelable interface
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

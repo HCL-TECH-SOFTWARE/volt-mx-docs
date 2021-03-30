@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-notification-NotificationAssistantService'>/**@class android.service.notification.NotificationAssistantService
+</span>@extends android.service.notification.NotificationListenerService
+
+ A service that helps the user manage notifications.
+ &lt;p&gt;
+ Only one notification assistant can be active at a time. Unlike notification listener services,
+ assistant services can additionally modify certain aspects about notifications
+ (see {@link android.service.notification.Adjustment}) before they are posted.
+&lt;p&gt;
+ A note about managed profiles: Unlike {@link android.service.notification.NotificationListenerService listener services},
+ NotificationAssistantServices are allowed to run in managed profiles
+ (see {@link DevicePolicyManager#isManagedProfile(ComponentName)}), so they can access the
+ information they need to create good {@link android.service.notification.Adjustment adjustments}. To maintain the contract
+ with {@link android.service.notification.NotificationListenerService}, an assistant service will receive all of the
+ callbacks from {@link android.service.notification.NotificationListenerService} for the current user, managed profiles of
+ that user, and ones that affect all users. However,
+ {@link #onNotificationEnqueued}(StatusBarNotification) will only be called for notifications
+ sent to the current user, and {@link android.service.notification.Adjustment adjuments} will only be accepted for the
+ current user.
+ &lt;p&gt;
+     All callbacks are called on the main thread.
+ &lt;/p&gt;
+ @hide
+*/
+var NotificationAssistantService = {
+
+<span id='android-service-notification-NotificationAssistantService-property-SOURCE_FROM_APP'>/** To indicate an adjustment is from an app.
+</span>*/
+SOURCE_FROM_APP : &quot;0&quot;,
+<span id='android-service-notification-NotificationAssistantService-property-SOURCE_FROM_ASSISTANT'>/** To indicate an adjustment is from a {@link android.service.notification.NotificationAssistantService}.
+</span>*/
+SOURCE_FROM_ASSISTANT : &quot;1&quot;,
+<span id='android-service-notification-NotificationAssistantService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.service.notification.NotificationAssistantService&quot;,
+<span id='android-service-notification-NotificationAssistantService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onNotificationSnoozedUntilContext'>/**A notification was snoozed until a context. For use with
+</span> {@link android.service.notification.Adjustment#KEY_SNOOZE_CRITERIA}. When the device reaches the given context, the
+ assistant should restore the notification with {@link #unsnoozeNotification}(String).
+@param {Object {StatusBarNotification}} sbn the notification to snooze
+@param {String} snoozeCriterionId the {@link SnoozeCriterion#getId()} representing a device context.
+*/
+onNotificationSnoozedUntilContext : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onNotificationEnqueued'>/**A notification was posted by an app. Called before post.
+</span>
+ &lt;p&gt;Note: this method is only called if you don't override
+ {@link #onNotificationEnqueued(StatusBarNotification, NotificationChannel)}.&lt;/p&gt;
+@param {Object {StatusBarNotification}} sbn the new notification
+@return {Object {android.service.notification.Adjustment}} an adjustment or null to take no action, within 100ms.
+*/
+onNotificationEnqueued : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onNotificationEnqueued'>/**A notification was posted by an app. Called before post.
+</span>@param {Object {StatusBarNotification}} sbn the new notification
+@param {Object {NotificationChannel}} channel the channel the notification was posted to
+@return {Object {android.service.notification.Adjustment}} an adjustment or null to take no action, within 100ms.
+*/
+onNotificationEnqueued : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onNotificationRemoved'>/**Implement this method to learn when notifications are removed, how they were interacted with
+</span> before removal, and why they were removed.
+ &lt;p&gt;
+ This might occur because the user has dismissed the notification using system UI (or another
+ notification listener) or because the app has withdrawn the notification.
+ &lt;p&gt;
+ NOTE: The {@link android.service.notification.StatusBarNotification} object you receive will be &quot;light&quot;; that is, the
+ result from {@link android.service.notification.StatusBarNotification#getNotification} may be missing some heavyweight
+ fields such as {@link android.app.Notification#contentView} and
+ {@link android.app.Notification#largeIcon}. However, all other fields on
+ {@link android.service.notification.StatusBarNotification}, sufficient to match this call with a prior call to
+ {@link #onNotificationPosted}(StatusBarNotification), will be intact.
+@param {Object {StatusBarNotification}} sbn A data structure encapsulating at least the original information (tag and id)
+            and source (package name) used to post the {@link android.app.Notification} that
+            was just removed.
+@param {Object {NotificationListenerService.RankingMap}} rankingMap The current ranking map that can be used to retrieve ranking information
+                   for active notifications.
+@param {Object {NotificationStats}} stats Stats about how the user interacted with the notification before it was removed.
+@param {Number} reason see {@link #REASON_LISTENER_CANCEL}, etc.
+*/
+onNotificationRemoved : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onNotificationsSeen'>/**Implement this to know when a user has seen notifications, as triggered by
+</span> {@link #setNotificationsShown(String[])}.
+*/
+onNotificationsSeen : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onNotificationExpansionChanged'>/**Implement this to know when a notification change (expanded / collapsed) is visible to user.
+</span>@param {String} key the notification key
+@param {Boolean} isUserAction whether the expanded change is caused by user action.
+@param {Boolean} isExpanded whether the notification is expanded.
+*/
+onNotificationExpansionChanged : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onNotificationDirectReplied'>/**Implement this to know when a direct reply is sent from a notification.
+</span>@param {String} key the notification key
+*/
+onNotificationDirectReplied : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onSuggestedReplySent'>/**Implement this to know when a suggested reply is sent.
+</span>@param {String} key the notification key
+@param {Object {CharSequence}} reply the reply that is just sent
+@param {Number} source the source that provided the reply, e.g. SOURCE_FROM_APP
+*/
+onSuggestedReplySent : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onActionInvoked'>/**Implement this to know when an action is clicked.
+</span>@param {String} key the notification key
+@param {Object {Notification.Action}} action the action that is just clicked
+@param {Number} source the source that provided the action, e.g. SOURCE_FROM_APP
+*/
+onActionInvoked : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-onAllowedAdjustmentsChanged'>/**Implement this to know when a user has changed which features of
+</span> their notifications the assistant can modify.
+ &lt;p&gt; Query {@link NotificationManager#getAllowedAssistantAdjustments()} to see what
+ {@link android.service.notification.Adjustment adjustments} you are currently allowed to make.&lt;/p&gt;
+*/
+onAllowedAdjustmentsChanged : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-adjustNotification'>/**Updates a notification.  N.B. this won’t cause
+</span> an existing notification to alert, but might allow a future update to
+ this notification to alert.
+@param {Object {Adjustment}} adjustment the adjustment with an explanation
+*/
+adjustNotification : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-adjustNotifications'>/**Updates existing notifications. Re-ranking won't occur until all adjustments are applied.
+</span> N.B. this won’t cause an existing notification to alert, but might allow a future update to
+ these notifications to alert.
+@param {Object {java.util.List}} adjustments a list of adjustments with explanations
+*/
+adjustNotifications : function(  ) {},
+
+<span id='android-service-notification-NotificationAssistantService-method-unsnoozeNotification'>/**Inform the notification manager about un-snoozing a specific notification.
+</span> &lt;p&gt;
+ This should only be used for notifications snoozed because of a contextual snooze suggestion
+ you provided via {@link android.service.notification.Adjustment#KEY_SNOOZE_CRITERIA}. Once un-snoozed, you will get a
+ {@link #onNotificationPosted(StatusBarNotification, android.service.notification.NotificationListenerService.RankingMap)} callback for the
+ notification.
+@param {String} key The key of the notification to snooze
+*/
+unsnoozeNotification : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

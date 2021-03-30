@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-notification-ConditionProviderService'>/**@class android.service.notification.ConditionProviderService
+</span>@extends android.app.Service
+
+ A service that provides conditions about boolean state.
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with
+ the {@link android.Manifest.permission#BIND_CONDITION_PROVIDER_SERVICE} permission
+ and include an intent filter with the {@link #SERVICE_INTERFACE} action. If you want users to be
+ able to create and update conditions for this service to monitor, include the
+ {@link #META_DATA_RULE_TYPE} and {@link #META_DATA_CONFIGURATION_ACTIVITY} tags and request the
+ {@link android.Manifest.permission#ACCESS_NOTIFICATION_POLICY} permission. For example:&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;service android:name=&quot;.MyConditionProvider&quot;
+          android:label=&quot;&amp;#64;string/service_name&quot;
+          android:permission=&quot;android.permission.BIND_CONDITION_PROVIDER_SERVICE&quot;&gt;
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.service.notification.ConditionProviderService&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+     &amp;lt;meta-data
+               android:name=&quot;android.service.zen.automatic.ruleType&quot;
+               android:value=&quot;@string/my_condition_rule&quot;&gt;
+           &amp;lt;/meta-data&gt;
+           &amp;lt;meta-data
+               android:name=&quot;android.service.zen.automatic.configurationActivity&quot;
+               android:value=&quot;com.my.package/.MyConditionConfigurationActivity&quot;&gt;
+           &amp;lt;/meta-data&gt;
+ &amp;lt;/service&gt;&lt;/pre&gt;
+
+  &lt;p&gt; Condition providers cannot be bound by the system on
+ {@link ActivityManager#isLowRamDevice() low ram} devices&lt;/p&gt;
+
+ @deprecated Instead of using an automatically bound service, use
+ {@link android.app.NotificationManager#setAutomaticZenRuleState(String, android.service.notification.Condition)} to tell the
+ system about the state of your rule. In order to maintain a link from
+ Settings to your rule configuration screens, provide a configuration activity that handles
+ {@link android.app.NotificationManager#ACTION_AUTOMATIC_ZEN_RULE} on your
+ {@link android.app.AutomaticZenRule} via
+ {@link android.app.AutomaticZenRule#setConfigurationActivity(ComponentName)}.
+*/
+var ConditionProviderService = {
+
+<span id='android-service-notification-ConditionProviderService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.service.notification.ConditionProviderService&quot;,
+<span id='android-service-notification-ConditionProviderService-property-META_DATA_RULE_TYPE'>/** The name of the {@code meta-data} tag containing a localized name of the type of zen rules
+</span> provided by this service.
+
+ @deprecated see {@link android.app.NotificationManager#META_DATA_AUTOMATIC_RULE_TYPE}.
+*/
+META_DATA_RULE_TYPE : &quot;android.service.zen.automatic.ruleType&quot;,
+<span id='android-service-notification-ConditionProviderService-property-META_DATA_CONFIGURATION_ACTIVITY'>/** The name of the {@code meta-data} tag containing the {@link ComponentName} of an activity
+</span> that allows users to configure the conditions provided by this service.
+
+ @deprecated see {@link android.app.NotificationManager#ACTION_AUTOMATIC_ZEN_RULE}.
+*/
+META_DATA_CONFIGURATION_ACTIVITY : &quot;android.service.zen.automatic.configurationActivity&quot;,
+<span id='android-service-notification-ConditionProviderService-property-META_DATA_RULE_INSTANCE_LIMIT'>/** The name of the {@code meta-data} tag containing the maximum number of rule instances that
+</span> can be created for this rule type. Omit or enter a value &lt;= 0 to allow unlimited instances.
+
+ @deprecated see {@link android.app.NotificationManager#META_DATA_RULE_INSTANCE_LIMIT}.
+*/
+META_DATA_RULE_INSTANCE_LIMIT : &quot;android.service.zen.automatic.ruleInstanceLimit&quot;,
+<span id='android-service-notification-ConditionProviderService-property-EXTRA_RULE_ID'>/** A String rule id extra passed to {@link #META_DATA_CONFIGURATION_ACTIVITY}.
+</span>
+ @deprecated see {@link android.app.NotificationManager#EXTRA_AUTOMATIC_RULE_ID}.
+*/
+EXTRA_RULE_ID : &quot;android.service.notification.extra.RULE_ID&quot;,
+<span id='android-service-notification-ConditionProviderService-method-onConnected'>/**Called when this service is connected.
+</span>*/
+onConnected : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-onRequestConditions'>/**
+</span>*/
+onRequestConditions : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-onSubscribe'>/**Called by the system when there is a new {@link android.service.notification.Condition} to be managed by this provider.
+</span>@param {Object {Uri}} conditionId the Uri describing the criteria of the condition.
+*/
+onSubscribe : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-onUnsubscribe'>/**Called by the system when a {@link android.service.notification.Condition} has been deleted.
+</span>@param {Object {Uri}} conditionId the Uri describing the criteria of the deleted condition.
+*/
+onUnsubscribe : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-requestRebind'>/**Request that the provider be rebound, after a previous call to (@link #requestUnbind).
+</span>
+ &lt;p&gt;This method will fail for providers that have not been granted the permission by the user.
+*/
+requestRebind : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-requestUnbind'>/**Request that the provider service be unbound.
+</span>
+ &lt;p&gt;This will no longer receive subscription updates and will not be able to update the
+ state of conditions until {@link #requestRebind}(ComponentName) is called.
+ The service will likely be killed by the system after this call.
+
+ &lt;p&gt;The service should wait for the {@link #onConnected}() event before performing this
+ operation.
+*/
+requestUnbind : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-notifyCondition'>/**Informs the notification manager that the state of a Condition has changed. Use this method
+</span> to put the system into Do Not Disturb mode or request that it exits Do Not Disturb mode. This
+ call will be ignored unless there is an enabled {@link android.app.AutomaticZenRule} owned by
+ service that has an {@link android.app.AutomaticZenRule#getConditionId()} equal to this
+ {@link android.service.notification.Condition#id}.
+@param {Object {Condition}} condition the condition that has changed.
+@deprecated see
+ {@link android.app.NotificationManager#setAutomaticZenRuleState(String, Condition)}.
+*/
+notifyCondition : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-notifyConditions'>/**Informs the notification manager that the state of one or more Conditions has changed. See
+</span> {@link #notifyCondition}(Condition) for restrictions.
+@param {Object {android.service.notification.Condition[]}} conditions the changed conditions.
+@deprecated see
+       {@link android.app.NotificationManager#setAutomaticZenRuleState(String, Condition)}.
+*/
+notifyConditions : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-notification-ConditionProviderService-method-isBound'>/**
+</span>@hide 
+*/
+isBound : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

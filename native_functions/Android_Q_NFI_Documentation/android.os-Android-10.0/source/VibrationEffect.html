@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-VibrationEffect'>/**@class android.os.VibrationEffect
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A VibrationEffect describes a haptic effect to be performed by a {@link android.os.Vibrator}.
+
+ These effects may be any number of things, from single shot vibrations to complex waveforms.
+*/
+var VibrationEffect = {
+
+<span id='android-os-VibrationEffect-property-DEFAULT_AMPLITUDE'>/** The default vibration strength of the device.
+</span>*/
+DEFAULT_AMPLITUDE : &quot;-1&quot;,
+<span id='android-os-VibrationEffect-property-MAX_AMPLITUDE'>/** The maximum amplitude value
+</span> @hide
+*/
+MAX_AMPLITUDE : &quot;255&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_CLICK'>/** A click effect.
+</span>
+ @see #get(int)
+*/
+EFFECT_CLICK : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_DOUBLE_CLICK'>/** A double click effect.
+</span>
+ @see #get(int)
+*/
+EFFECT_DOUBLE_CLICK : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_TICK'>/** A tick effect.
+</span> @see #get(int)
+*/
+EFFECT_TICK : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_THUD'>/** A thud effect.
+</span> @see #get(int)
+ @hide
+*/
+EFFECT_THUD : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_POP'>/** A pop effect.
+</span> @see #get(int)
+ @hide
+*/
+EFFECT_POP : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_HEAVY_CLICK'>/** A heavy click effect.
+</span> @see #get(int)
+*/
+EFFECT_HEAVY_CLICK : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_TEXTURE_TICK'>/** A texture effect meant to replicate soft ticks.
+</span>
+ Unlike normal effects, texture effects are meant to be called repeatedly, generally in
+ response to some motion, in order to replicate the feeling of some texture underneath the
+ user's fingers.
+
+ @see #get(int)
+ @hide
+*/
+EFFECT_TEXTURE_TICK : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_STRENGTH_LIGHT'>/**{@hide} */
+</span>EFFECT_STRENGTH_LIGHT : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_STRENGTH_MEDIUM'>/**{@hide} */
+</span>EFFECT_STRENGTH_MEDIUM : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-EFFECT_STRENGTH_STRONG'>/**{@hide} */
+</span>EFFECT_STRENGTH_STRONG : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-RINGTONES'>/** Ringtone patterns. They may correspond with the device's ringtone audio, or may just be a
+</span> pattern that can be played as a ringtone with any audio, depending on the device.
+
+ @see #get(Uri, Context)
+ @hide
+*/
+RINGTONES : &quot;null&quot;,
+<span id='android-os-VibrationEffect-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-os-VibrationEffect-method-createOneShot'>/**Create a one shot vibration.
+</span>
+ One shot vibrations will vibrate constantly for the specified period of time at the
+ specified amplitude, and then stop.
+@param {Number} milliseconds The number of milliseconds to vibrate. This must be a positive number.
+@param {Number} amplitude The strength of the vibration. This must be a value between 1 and 255, or
+ {@link #DEFAULT_AMPLITUDE}.
+@return {Object {android.os.VibrationEffect}} The desired effect.
+*/
+createOneShot : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-createWaveform'>/**Create a waveform vibration.
+</span>
+ Waveform vibrations are a potentially repeating series of timing and amplitude pairs. For
+ each pair, the value in the amplitude array determines the strength of the vibration and the
+ value in the timing array determines how long it vibrates for. An amplitude of 0 implies no
+ vibration (i.e. off), and any pairs with a timing value of 0 will be ignored.
+ &lt;p&gt;
+ The amplitude array of the generated waveform will be the same size as the given
+ timing array with alternating values of 0 (i.e. off) and {@link #DEFAULT_AMPLITUDE},
+ starting with 0. Therefore the first timing value will be the period to wait before turning
+ the vibrator on, the second value will be how long to vibrate at {@link #DEFAULT_AMPLITUDE}
+ strength, etc.
+ &lt;/p&gt;&lt;p&gt;
+ To cause the pattern to repeat, pass the index into the timings array at which to start the
+ repetition, or -1 to disable repeating.
+ &lt;/p&gt;
+@param {Object {long[]}} timings The pattern of alternating on-off timings, starting with off. Timing values
+                of 0 will cause the timing / amplitude pair to be ignored.
+@param {Number} repeat The index into the timings array at which to repeat, or -1 if you you don't
+               want to repeat.
+@return {Object {android.os.VibrationEffect}} The desired effect.
+*/
+createWaveform : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-createWaveform'>/**Create a waveform vibration.
+</span>
+ Waveform vibrations are a potentially repeating series of timing and amplitude pairs. For
+ each pair, the value in the amplitude array determines the strength of the vibration and the
+ value in the timing array determines how long it vibrates for. An amplitude of 0 implies no
+ vibration (i.e. off), and any pairs with a timing value of 0 will be ignored.
+ &lt;/p&gt;&lt;p&gt;
+ To cause the pattern to repeat, pass the index into the timings array at which to start the
+ repetition, or -1 to disable repeating.
+ &lt;/p&gt;
+@param {Object {long[]}} timings The timing values of the timing / amplitude pairs. Timing values of 0
+                will cause the pair to be ignored.
+@param {Object {int[]}} amplitudes The amplitude values of the timing / amplitude pairs. Amplitude values
+                   must be between 0 and 255, or equal to {@link #DEFAULT_AMPLITUDE}. An
+                   amplitude value of 0 implies the motor is off.
+@param {Number} repeat The index into the timings array at which to repeat, or -1 if you you don't
+               want to repeat.
+@return {Object {android.os.VibrationEffect}} The desired effect.
+*/
+createWaveform : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-createPredefined'>/**Create a predefined vibration effect.
+</span>
+ Predefined effects are a set of common vibration effects that should be identical, regardless
+ of the app they come from, in order to provide a cohesive experience for users across
+ the entire device. They also may be custom tailored to the device hardware in order to
+ provide a better experience than you could otherwise build using the generic building
+ blocks.
+
+ This will fallback to a generic pattern if one exists and there does not exist a
+ hardware-specific implementation of the effect.
+@param {Number} effectId The ID of the effect to perform:
+                 {@link #EFFECT_CLICK}, {@link #EFFECT_DOUBLE_CLICK}, {@link #EFFECT_TICK}
+@return {Object {android.os.VibrationEffect}} The desired effect.
+*/
+createPredefined : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-get'>/**Get a predefined vibration effect.
+</span>
+ Predefined effects are a set of common vibration effects that should be identical, regardless
+ of the app they come from, in order to provide a cohesive experience for users across
+ the entire device. They also may be custom tailored to the device hardware in order to
+ provide a better experience than you could otherwise build using the generic building
+ blocks.
+
+ This will fallback to a generic pattern if one exists and there does not exist a
+ hardware-specific implementation of the effect.
+@param {Number} effectId The ID of the effect to perform:
+                 {@link #EFFECT_CLICK}, {@link #EFFECT_DOUBLE_CLICK}, {@link #EFFECT_TICK}
+@return {Object {android.os.VibrationEffect}} The desired effect.
+@hide 
+*/
+get : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-get'>/**Get a predefined vibration effect.
+</span>
+ Predefined effects are a set of common vibration effects that should be identical, regardless
+ of the app they come from, in order to provide a cohesive experience for users across
+ the entire device. They also may be custom tailored to the device hardware in order to
+ provide a better experience than you could otherwise build using the generic building
+ blocks.
+
+ Some effects you may only want to play if there's a hardware specific implementation because
+ they may, for example, be too disruptive to the user without tuning. The {@code fallback}
+ parameter allows you to decide whether you want to fallback to the generic implementation or
+ only play if there's a tuned, hardware specific one available.
+@param {Number} effectId The ID of the effect to perform:
+                 {@link #EFFECT_CLICK}, {@link #EFFECT_DOUBLE_CLICK}, {@link #EFFECT_TICK}
+@param {Boolean} fallback Whether to fallback to a generic pattern if a hardware specific
+                 implementation doesn't exist.
+@return {Object {android.os.VibrationEffect}} The desired effect.
+@hide 
+*/
+get : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-get'>/**Get a predefined vibration effect associated with a given URI.
+</span>
+ Predefined effects are a set of common vibration effects that should be identical, regardless
+ of the app they come from, in order to provide a cohesive experience for users across
+ the entire device. They also may be custom tailored to the device hardware in order to
+ provide a better experience than you could otherwise build using the generic building
+ blocks.
+@param {Object {Uri}} uri The URI associated with the haptic effect.
+@param {Object {Context}} context The context used to get the URI to haptic effect association.
+@return {Object {android.os.VibrationEffect}} The desired effect, or {@code null} if there's no associated effect.
+@hide 
+*/
+get : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-validate'>/**
+</span>@hide 
+*/
+validate : function(  ) {},
+
+<span id='android-os-VibrationEffect-method-getDuration'>/**Gets the estimated duration of the vibration in milliseconds.
+</span>
+ For effects without a defined end (e.g. a Waveform with a non-negative repeat index), this
+ returns Long.MAX_VALUE. For effects with an unknown duration (e.g. Prebaked effects where
+ the length is device and potentially run-time dependent), this returns -1.
+@hide 
+*/
+getDuration : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

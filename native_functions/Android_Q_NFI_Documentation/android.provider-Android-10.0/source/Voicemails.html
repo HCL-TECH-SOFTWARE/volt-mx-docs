@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-VoicemailContract-Voicemails'>/**@class android.provider.VoicemailContract.Voicemails
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.OpenableColumns
+
+@extends java.lang.Object
+
+Defines fields exposed through the /voicemail path of this content provider. */
+var Voicemails = {
+
+<span id='android-provider-VoicemailContract-Voicemails-property-CONTENT_URI'>/**URI to insert/retrieve voicemails. */
+</span>CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-DIR_TYPE'>/**The MIME type for a collection of voicemails. */
+</span>DIR_TYPE : &quot;vnd.android.cursor.dir/voicemails&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-ITEM_TYPE'>/**The MIME type for a single voicemail. */
+</span>ITEM_TYPE : &quot;vnd.android.cursor.item/voicemail&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-NUMBER'>/** Phone number of the voicemail sender.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+NUMBER : &quot;number&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-DATE'>/** The date the voicemail was sent, in milliseconds since the epoch
+</span> &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+DATE : &quot;date&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-DURATION'>/** The duration of the voicemail in seconds.
+</span> &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+DURATION : &quot;duration&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-NEW'>/** Whether or not the voicemail has been acknowledged (notification sent to the user).
+</span> &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+NEW : &quot;new&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-IS_READ'>/** Whether this item has been read or otherwise consumed by the user.
+</span> &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+IS_READ : &quot;is_read&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-STATE'>/** The mail box state of the voicemail. This field is currently not used by the system.
+</span> &lt;P&gt; Possible values: {@link #STATE_INBOX}, {@link #STATE_DELETED},
+ {@link #STATE_UNDELETED}.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ @hide
+*/
+STATE : &quot;state&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-STATE_INBOX'>/** Value of {@link #STATE} when the voicemail is in inbox.
+</span> @hide
+*/
+STATE_INBOX : &quot;null&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-STATE_DELETED'>/** Value of {@link #STATE} when the voicemail has been marked as deleted.
+</span> @hide
+*/
+STATE_DELETED : &quot;null&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-STATE_UNDELETED'>/** Value of {@link #STATE} when the voicemail has marked as undeleted.
+</span> @hide
+*/
+STATE_UNDELETED : &quot;null&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-SOURCE_PACKAGE'>/** Package name of the source application that inserted the voicemail.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+SOURCE_PACKAGE : &quot;source_package&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-SOURCE_DATA'>/** Application-specific data available to the source application that
+</span> inserted the voicemail. This is typically used to store the source
+ specific message id to identify this voicemail on the remote
+ voicemail server.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt; Note that this is NOT the voicemail media content data.
+*/
+SOURCE_DATA : &quot;source_data&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-HAS_CONTENT'>/** Whether the media content for this voicemail is available for
+</span> consumption.
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+HAS_CONTENT : &quot;has_content&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-MIME_TYPE'>/** MIME type of the media content for the voicemail.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+MIME_TYPE : &quot;mime_type&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-TRANSCRIPTION'>/** The transcription of the voicemail entry. This will only be populated if the voicemail
+</span> entry has a valid transcription.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+TRANSCRIPTION : &quot;transcription&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-TRANSCRIPTION_STATE'>/** The state of the voicemail transcription.
+</span> &lt;P&gt; Possible values: {@link #TRANSCRIPTION_NOT_STARTED},
+ {@link #TRANSCRIPTION_IN_PROGRESS}, {@link #TRANSCRIPTION_FAILED},
+ {@link #TRANSCRIPTION_AVAILABLE}.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ @hide
+*/
+TRANSCRIPTION_STATE : &quot;transcription_state&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-TRANSCRIPTION_NOT_STARTED'>/** Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has not yet
+</span> been attempted.
+ @hide
+*/
+TRANSCRIPTION_NOT_STARTED : &quot;0&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-TRANSCRIPTION_IN_PROGRESS'>/** Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has begun
+</span> but is not yet complete.
+ @hide
+*/
+TRANSCRIPTION_IN_PROGRESS : &quot;1&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-TRANSCRIPTION_FAILED'>/** Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has
+</span> been attempted and failed.
+ @hide
+*/
+TRANSCRIPTION_FAILED : &quot;2&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-TRANSCRIPTION_AVAILABLE'>/** Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has
+</span> completed and the result has been stored in the {@link #TRANSCRIPTION} column.
+ @hide
+*/
+TRANSCRIPTION_AVAILABLE : &quot;3&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-_DATA'>/** Path to the media content file. Internal only field.
+</span> @hide
+*/
+_DATA : &quot;_data&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-PHONE_ACCOUNT_COMPONENT_NAME'>/** The {@link ComponentName} of the {@link android.provider.CommonDataKinds.PhoneAccount} in string form. The
+</span> {@link android.provider.CommonDataKinds.PhoneAccount} of the voicemail is used to differentiate voicemails from different
+ sources.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PHONE_ACCOUNT_COMPONENT_NAME : &quot;subscription_component_name&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-PHONE_ACCOUNT_ID'>/** The identifier of a {@link android.provider.CommonDataKinds.PhoneAccount} that is unique to a specified
+</span> {@link ComponentName}. The {@link android.provider.CommonDataKinds.PhoneAccount} of the voicemail is used to differentiate
+ voicemails from different sources.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PHONE_ACCOUNT_ID : &quot;subscription_id&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-DIRTY'>/** Flag used to indicate that local, unsynced changes are present.
+</span> Currently, this is used to indicate that the voicemail was read or deleted.
+ The value will be 1 if dirty is true, 0 if false.
+
+ &lt;p&gt;When a caller updates a voicemail row (either with {@link ContentResolver#update} or
+ {@link ContentResolver#applyBatch}), and if the {@link ContentValues} doesn't contain
+ this column, the voicemail provider implicitly sets it to 0 if the calling package is
+ the {@link #SOURCE_PACKAGE} or to 1 otherwise. To prevent this behavior, explicitly set
+ {@link #DIRTY_RETAIN} to DIRTY in the {@link ContentValues}.
+
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+
+ @see #DIRTY_RETAIN
+*/
+DIRTY : &quot;dirty&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-DIRTY_RETAIN'>/** Value of {@link #DIRTY} when updating to indicate that the value should not be updated
+</span> during this operation.
+*/
+DIRTY_RETAIN : &quot;-1&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-DELETED'>/** Flag used to indicate that the voicemail was deleted but not synced to the server.
+</span> A deleted row should be ignored.
+ The value will be 1 if deleted is true, 0 if false.
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+DELETED : &quot;deleted&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-LAST_MODIFIED'>/** The date the row is last inserted, updated, or marked as deleted, in milliseconds
+</span> since the epoch. Read only.
+ &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+LAST_MODIFIED : &quot;last_modified&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-BACKED_UP'>/** Flag to indicate the voicemail was backed up. The value will be 1 if backed up, 0 if
+</span> not.
+
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+BACKED_UP : &quot;backed_up&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-RESTORED'>/** Flag to indicate the voicemail was restored from a backup. The value will be 1 if
+</span> restored, 0 if not.
+
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+RESTORED : &quot;restored&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-ARCHIVED'>/** Flag to indicate the voicemail was marked as archived. Archived voicemail should not be
+</span> deleted even if it no longer exist on the server. The value will be 1 if archived true, 0
+ if not.
+
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+ARCHIVED : &quot;archived&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-property-IS_OMTP_VOICEMAIL'>/** Flag to indicate the voicemail is a OMTP voicemail handled by the {@link android.telephony.VisualVoicemailService}. The UI should only show OMTP voicemails from
+</span> the current visual voicemail package. For example, the selection could be
+ {@code WHERE (IS_OMTP_VOICEMAIL == 0) OR ( IS_OMTP_VOICEMAIL == 1 AND SOURCE_PACKAGE ==
+ &quot;current.vvm.package&quot;)}
+
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+
+ @see android.telephony.TelephonyManager#getVisualVoicemailPackageName
+*/
+IS_OMTP_VOICEMAIL : &quot;is_omtp_voicemail&quot;,
+<span id='android-provider-VoicemailContract-Voicemails-method-buildSourceUri'>/**A convenience method to build voicemail URI specific to a source package by appending
+</span> {@link android.provider.VoicemailContract#PARAM_KEY_SOURCE_PACKAGE} param to the base URI.
+*/
+buildSourceUri : function(  ) {},
+
+<span id='android-provider-VoicemailContract-Voicemails-method-insert'>/**Inserts a new voicemail into the voicemail content provider.
+</span>@param {Object {Context}} context The context of the app doing the inserting
+@param {Object {Voicemail}} voicemail Data to be inserted
+@return {Object {android.net.Uri}} {@link Uri} of the newly inserted {@link Voicemail}
+@hide 
+*/
+insert : function(  ) {},
+
+<span id='android-provider-VoicemailContract-Voicemails-method-insert'>/**Inserts a list of voicemails into the voicemail content provider.
+</span>@param {Object {Context}} context The context of the app doing the inserting
+@param {Object {java.util.List}} voicemails Data to be inserted
+@return {Number} the number of voicemails inserted
+@hide 
+*/
+insert : function(  ) {},
+
+<span id='android-provider-VoicemailContract-Voicemails-method-deleteAll'>/**Clears all voicemails accessible to this voicemail content provider for the calling
+</span> package. By default, a package only has permission to delete voicemails it inserted.
+@return {Number} the number of voicemails deleted
+@hide 
+*/
+deleteAll : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

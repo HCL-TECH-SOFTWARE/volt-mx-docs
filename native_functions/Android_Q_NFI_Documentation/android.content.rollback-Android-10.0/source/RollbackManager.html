@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-rollback-RollbackManager'>/**@class android.content.rollback.RollbackManager
+</span>@extends java.lang.Object
+
+ Offers the ability to rollback packages after upgrade.
+ &lt;p&gt;
+ For packages installed with rollbacks enabled, the RollbackManager can be
+ used to initiate rollback of those packages for a limited time period after
+ upgrade.
+
+ @see PackageInstaller.SessionParams#setEnableRollback(boolean)
+ @hide
+*/
+var RollbackManager = {
+
+<span id='android-content-rollback-RollbackManager-property-PROPERTY_ROLLBACK_LIFETIME_MILLIS'>/** Lifetime duration of rollback packages in millis. A rollback will be available for
+</span> at most that duration of time after a package is installed with
+ {@link PackageInstaller.SessionParams#setEnableRollback(boolean)}.
+
+ &lt;p&gt;If flag value is negative, the default value will be assigned.
+
+ @see RollbackManager
+
+ Flag type: {@code long}
+ Namespace: NAMESPACE_ROLLBACK_BOOT
+
+ @hide
+*/
+PROPERTY_ROLLBACK_LIFETIME_MILLIS : &quot;rollback_lifetime_in_millis&quot;,
+<span id='android-content-rollback-RollbackManager-property-EXTRA_STATUS'>/** Status of a rollback commit. Will be one of
+</span> {@link #STATUS_SUCCESS}, {@link #STATUS_FAILURE},
+ {@link #STATUS_FAILURE_ROLLBACK_UNAVAILABLE}, {@link #STATUS_FAILURE_INSTALL}
+
+ @see Intent#getIntExtra(String, int)
+*/
+EXTRA_STATUS : &quot;android.content.rollback.extra.STATUS&quot;,
+<span id='android-content-rollback-RollbackManager-property-EXTRA_STATUS_MESSAGE'>/** Detailed string representation of the status, including raw details that
+</span> are useful for debugging.
+
+ @see Intent#getStringExtra(String)
+*/
+EXTRA_STATUS_MESSAGE : &quot;android.content.rollback.extra.STATUS_MESSAGE&quot;,
+<span id='android-content-rollback-RollbackManager-property-STATUS_SUCCESS'>/** The rollback was successfully committed.
+</span>*/
+STATUS_SUCCESS : &quot;0&quot;,
+<span id='android-content-rollback-RollbackManager-property-STATUS_FAILURE'>/** The rollback could not be committed due to some generic failure.
+</span>
+ @see #EXTRA_STATUS_MESSAGE
+*/
+STATUS_FAILURE : &quot;1&quot;,
+<span id='android-content-rollback-RollbackManager-property-STATUS_FAILURE_ROLLBACK_UNAVAILABLE'>/** The rollback could not be committed because it was no longer available.
+</span>
+ @see #EXTRA_STATUS_MESSAGE
+*/
+STATUS_FAILURE_ROLLBACK_UNAVAILABLE : &quot;2&quot;,
+<span id='android-content-rollback-RollbackManager-property-STATUS_FAILURE_INSTALL'>/** The rollback failed to install successfully.
+</span>
+ @see #EXTRA_STATUS_MESSAGE
+*/
+STATUS_FAILURE_INSTALL : &quot;3&quot;,
+<span id='android-content-rollback-RollbackManager-method-getAvailableRollbacks'>/**Returns a list of all currently available rollbacks.
+</span>@throws SecurityException if the caller does not have appropriate permissions.
+*/
+getAvailableRollbacks : function(  ) {},
+
+<span id='android-content-rollback-RollbackManager-method-getRecentlyCommittedRollbacks'>/**Gets the list of all recently committed rollbacks.
+</span> This is for the purposes of preventing re-install of a bad version of a
+ package and monitoring the status of a staged rollback.
+ &lt;p&gt;
+ Returns an empty list if there are no recently committed rollbacks.
+ &lt;p&gt;
+ To avoid having to keep around complete rollback history forever on a
+ device, the returned list of rollbacks is only guaranteed to include
+ rollbacks that are still relevant. A rollback is no longer considered
+ relevant if the package is subsequently uninstalled or upgraded
+ (without the possibility of rollback) to a higher version code than was
+ rolled back from.
+@return {Object {java.util.List}} the recently committed rollbacks
+@throws SecurityException if the caller does not have appropriate permissions.
+*/
+getRecentlyCommittedRollbacks : function(  ) {},
+
+<span id='android-content-rollback-RollbackManager-method-commitRollback'>/**Commit the rollback with given id, rolling back all versions of the
+</span> packages to the last good versions previously installed on the device
+ as specified in the corresponding RollbackInfo object. The
+ rollback will fail if any of the installed packages or available
+ rollbacks are inconsistent with the versions specified in the given
+ rollback object, which can happen if a package has been updated or a
+ rollback expired since the rollback object was retrieved from
+ {@link #getAvailableRollbacks}().
+@param {Number} rollbackId ID of the rollback to commit
+@param {Object {java.util.List}} causePackages package versions to record as the motivation for this
+                      rollback.
+@param {Object {IntentSender}} statusReceiver where to deliver the results. Intents sent to
+                       this receiver contain {@link #EXTRA_STATUS}
+                       and {@link #EXTRA_STATUS_MESSAGE}.
+@throws SecurityException if the caller does not have appropriate permissions.
+*/
+commitRollback : function(  ) {},
+
+<span id='android-content-rollback-RollbackManager-method-reloadPersistedData'>/**Reload all persisted rollback data from device storage.
+</span> This API is meant to test that rollback state is properly preserved
+ across device reboot, by simulating what happens on reboot without
+ actually rebooting the device.
+@throws SecurityException if the caller does not have appropriate permissions.
+@hide 
+*/
+reloadPersistedData : function(  ) {},
+
+<span id='android-content-rollback-RollbackManager-method-expireRollbackForPackage'>/**Expire the rollback data for a given package.
+</span> This API is meant to facilitate testing of rollback logic for
+ expiring rollback data. Removes rollback data for available and
+ recently committed rollbacks that contain the given package.
+@param {String} packageName the name of the package to expire data for.
+@throws SecurityException if the caller does not have appropriate permissions.
+@hide 
+*/
+expireRollbackForPackage : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

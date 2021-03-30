@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-Window-Callback'>/**@class android.view.Window.Callback
+</span> API from a Window back to its caller.  This allows the client to
+ intercept key dispatching, panels and menus, etc.
+*/
+var Callback = {
+
+<span id='android-view-Window-Callback-method-dispatchKeyEvent'>/**Called to process key events.  At the very least your
+</span> implementation must call
+ {@link android.view.Window#superDispatchKeyEvent} to do the
+ standard key processing.
+@param {Object {KeyEvent}} event The key event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='android-view-Window-Callback-method-dispatchKeyShortcutEvent'>/**Called to process a key shortcut event.
+</span> At the very least your implementation must call
+ {@link android.view.Window#superDispatchKeyShortcutEvent} to do the
+ standard key shortcut processing.
+@param {Object {KeyEvent}} event The key shortcut event.
+@return {Boolean} True if this event was consumed.
+*/
+dispatchKeyShortcutEvent : function(  ) {},
+
+<span id='android-view-Window-Callback-method-dispatchTouchEvent'>/**Called to process touch screen events.  At the very least your
+</span> implementation must call
+ {@link android.view.Window#superDispatchTouchEvent} to do the
+ standard touch screen processing.
+@param {Object {MotionEvent}} event The touch screen event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchTouchEvent : function(  ) {},
+
+<span id='android-view-Window-Callback-method-dispatchTrackballEvent'>/**Called to process trackball events.  At the very least your
+</span> implementation must call
+ {@link android.view.Window#superDispatchTrackballEvent} to do the
+ standard trackball processing.
+@param {Object {MotionEvent}} event The trackball event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchTrackballEvent : function(  ) {},
+
+<span id='android-view-Window-Callback-method-dispatchGenericMotionEvent'>/**Called to process generic motion events.  At the very least your
+</span> implementation must call
+ {@link android.view.Window#superDispatchGenericMotionEvent} to do the
+ standard processing.
+@param {Object {MotionEvent}} event The generic motion event.
+@return {Boolean} boolean Return true if this event was consumed.
+*/
+dispatchGenericMotionEvent : function(  ) {},
+
+<span id='android-view-Window-Callback-method-dispatchPopulateAccessibilityEvent'>/**Called to process population of {@link AccessibilityEvent}s.
+</span>@param {Object {AccessibilityEvent}} event The event.
+@return {Boolean} boolean Return true if event population was completed.
+*/
+dispatchPopulateAccessibilityEvent : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onCreatePanelView'>/**Instantiate the view to display in the panel for 'featureId'.
+</span> You can return null, in which case the default content (typically
+ a menu) will be created for you.
+@param {Number} featureId Which panel is being created.
+@return {Object {android.view.View}} view The top-level view to place in the panel.
+@see #onPreparePanel
+*/
+onCreatePanelView : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onCreatePanelMenu'>/**Initialize the contents of the menu for panel 'featureId'.  This is
+</span> called if onCreatePanelView() returns null, giving you a standard
+ menu in which you can place your items.  It is only called once for
+ the panel, the first time it is shown.
+
+ &lt;p&gt;You can safely hold on to &lt;var&gt;menu&lt;/var&gt; (and any items created
+ from it), making modifications to it as desired, until the next
+ time onCreatePanelMenu() is called for this feature.
+@param {Number} featureId The panel being created.
+@param {Object {Menu}} menu The menu inside the panel.
+@return {Boolean} boolean You must return true for the panel to be displayed;
+         if you return false it will not be shown.
+*/
+onCreatePanelMenu : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onPreparePanel'>/**Prepare a panel to be displayed.  This is called right before the
+</span> panel window is shown, every time it is shown.
+@param {Number} featureId The panel that is being displayed.
+@param {Object {View}} view The View that was returned by onCreatePanelView().
+@param {Object {Menu}} menu If onCreatePanelView() returned null, this is the Menu
+             being displayed in the panel.
+@return {Boolean} boolean You must return true for the panel to be displayed;
+         if you return false it will not be shown.
+@see #onCreatePanelView
+*/
+onPreparePanel : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onMenuOpened'>/**Called when a panel's menu is opened by the user. This may also be
+</span> called when the menu is changing from one type to another (for
+ example, from the icon menu to the expanded menu).
+@param {Number} featureId The panel that the menu is in.
+@param {Object {Menu}} menu The menu that is opened.
+@return {Boolean} Return true to allow the menu to open, or false to prevent
+         the menu from opening.
+*/
+onMenuOpened : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onMenuItemSelected'>/**Called when a panel's menu item has been selected by the user.
+</span>@param {Number} featureId The panel that the menu is in.
+@param {Object {MenuItem}} item The menu item that was selected.
+@return {Boolean} boolean Return true to finish processing of selection, or
+         false to perform the normal menu handling (calling its
+         Runnable or sending a Message to its target Handler).
+*/
+onMenuItemSelected : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onWindowAttributesChanged'>/**This is called whenever the current window attributes change.
+</span>*/
+onWindowAttributesChanged : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onContentChanged'>/**This hook is called whenever the content view of the screen changes
+</span> (due to a call to
+ {@link Window#setContentView(View, android.view.ViewGroup.LayoutParams)
+ Window.setContentView} or
+ {@link Window#addContentView(View, android.view.ViewGroup.LayoutParams)
+ Window.addContentView}).
+*/
+onContentChanged : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onWindowFocusChanged'>/**This hook is called whenever the window focus changes.  See
+</span> {@link android.view.View#onWindowFocusChanged(boolean)
+ android.view.View.onWindowFocusChangedNotLocked(boolean)} for more information.
+@param {Boolean} hasFocus Whether the window now has focus.
+*/
+onWindowFocusChanged : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onAttachedToWindow'>/**Called when the window has been attached to the window manager.
+</span> See {@link android.view.View#onAttachedToWindow() android.view.View.onAttachedToWindow()}
+ for more information.
+*/
+onAttachedToWindow : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onDetachedFromWindow'>/**Called when the window has been detached from the window manager.
+</span> See {@link android.view.View#onDetachedFromWindow() android.view.View.onDetachedFromWindow()}
+ for more information.
+*/
+onDetachedFromWindow : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onPanelClosed'>/**Called when a panel is being closed.  If another logical subsequent
+</span> panel is being opened (and this panel is being closed to make room for the subsequent
+ panel), this method will NOT be called.
+@param {Number} featureId The panel that is being displayed.
+@param {Object {Menu}} menu If onCreatePanelView() returned null, this is the Menu
+            being displayed in the panel.
+*/
+onPanelClosed : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onSearchRequested'>/**Called when the user signals the desire to start a search.
+</span>@return {Boolean} true if search launched, false if activity refuses (blocks)
+@see android.app.Activity#onSearchRequested()
+*/
+onSearchRequested : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onSearchRequested'>/**Called when the user signals the desire to start a search.
+</span>@param {Object {SearchEvent}} searchEvent A {@link SearchEvent} describing the signal to
+                   start a search.
+@return {Boolean} true if search launched, false if activity refuses (blocks)
+*/
+onSearchRequested : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onWindowStartingActionMode'>/**Called when an action mode is being started for this window. Gives the
+</span> callback an opportunity to handle the action mode in its own unique and
+ beautiful way. If this method returns null the system can choose a way
+ to present the mode or choose not to start the mode at all. This is equivalent
+ to {@link #onWindowStartingActionMode(android.view.ActionMode.Callback, int)}
+ with type {@link android.view.ActionMode#TYPE_PRIMARY}.
+@param {Object {ActionMode.Callback}} callback Callback to control the lifecycle of this action mode
+@return {Object {android.view.ActionMode}} The ActionMode that was started, or null if the system should present it
+*/
+onWindowStartingActionMode : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onWindowStartingActionMode'>/**Called when an action mode is being started for this window. Gives the
+</span> callback an opportunity to handle the action mode in its own unique and
+ beautiful way. If this method returns null the system can choose a way
+ to present the mode or choose not to start the mode at all.
+@param {Object {ActionMode.Callback}} callback Callback to control the lifecycle of this action mode
+@param {Number} type One of {@link ActionMode#TYPE_PRIMARY} or {@link ActionMode#TYPE_FLOATING}.
+@return {Object {android.view.ActionMode}} The ActionMode that was started, or null if the system should present it
+*/
+onWindowStartingActionMode : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onActionModeStarted'>/**Called when an action mode has been started. The appropriate mode callback
+</span> method will have already been invoked.
+@param {Object {ActionMode}} mode The new mode that has just been started.
+*/
+onActionModeStarted : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onActionModeFinished'>/**Called when an action mode has been finished. The appropriate mode callback
+</span> method will have already been invoked.
+@param {Object {ActionMode}} mode The mode that was just finished.
+*/
+onActionModeFinished : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onProvideKeyboardShortcuts'>/**Called when Keyboard Shortcuts are requested for the current window.
+</span>@param {Object {java.util.List}} data The data list to populate with shortcuts.
+@param {Object {Menu}} menu The current menu, which may be null.
+@param {Number} deviceId The id for the connected device the shortcuts should be provided for.
+*/
+onProvideKeyboardShortcuts : function(  ) {},
+
+<span id='android-view-Window-Callback-method-onPointerCaptureChanged'>/**Called when pointer capture is enabled or disabled for the current window.
+</span>@param {Boolean} hasCapture True if the window has pointer capture.
+*/
+onPointerCaptureChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

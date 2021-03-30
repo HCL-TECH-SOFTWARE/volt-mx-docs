@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-res-TypedArray'>/**@class android.content.res.TypedArray
+</span>@extends java.lang.Object
+
+ Container for an array of values that were retrieved with
+ {@link android.content.res.Resources.Theme#obtainStyledAttributes(AttributeSet, int[], int, int)}
+ or {@link android.content.res.Resources#obtainAttributes}.  Be
+ sure to call {@link #recycle} when done with them.
+
+ The indices used to retrieve values from this structure correspond to
+ the positions of the attributes given to obtainStyledAttributes.
+*/
+var TypedArray = {
+
+<span id='android-content-res-TypedArray-method-length'>/**Returns the number of values in this array.
+</span>@throws RuntimeException if the TypedArray has already been recycled.
+*/
+length : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getIndexCount'>/**Returns the number of indices in the array that actually have data. Attributes with a value
+</span> of @empty are included, as this is an explicit indicator.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getIndexCount : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getIndex'>/**Returns an index in the array that has data. Attributes with a value of @empty are included,
+</span> as this is an explicit indicator.
+@param {Number} at The index you would like to returned, ranging from 0 to
+           {@link #getIndexCount()}.
+@return {Number} The index at the given offset, which can be used with
+         {@link #getValue} and related APIs.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getIndex : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getResources'>/**Returns the Resources object this array was loaded from.
+</span>@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getResources : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getText'>/**Retrieves the styled string value for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ If the attribute is not a string, this method will attempt to coerce
+ it to a string.
+@param {Number} index Index of attribute to retrieve.
+@return {Object {java.lang.CharSequence}} CharSequence holding string data. May be styled. Returns
+         {@code null} if the attribute is not defined or could not be
+         coerced to a string.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getText : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getString'>/**Retrieves the string value for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ If the attribute is not a string, this method will attempt to coerce
+ it to a string.
+@param {Number} index Index of attribute to retrieve.
+@return {String} String holding string data. Any styling information is removed.
+         Returns {@code null} if the attribute is not defined or could
+         not be coerced to a string.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getString : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getNonResourceString'>/**Retrieves the string value for the attribute at &lt;var&gt;index&lt;/var&gt;, but
+</span> only if that string comes from an immediate value in an XML file.  That
+ is, this does not allow references to string resources, string
+ attributes, or conversions from other types.  As such, this method
+ will only return strings for TypedArray objects that come from
+ attributes in an XML file.
+@param {Number} index Index of attribute to retrieve.
+@return {String} String holding string data. Any styling information is removed.
+         Returns {@code null} if the attribute is not defined or is not
+         an immediate string value.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getNonResourceString : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getNonConfigurationString'>/**Retrieves the string value for the attribute at &lt;var&gt;index&lt;/var&gt; that is
+</span> not allowed to change with the given configurations.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} allowedChangingConfigs Bit mask of configurations from
+        {@link Configuration}.NATIVE_CONFIG_* that are allowed to change.
+@return {String} String holding string data. Any styling information is removed.
+         Returns {@code null} if the attribute is not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@hide 
+*/
+getNonConfigurationString : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getBoolean'>/**Retrieve the boolean value for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ If the attribute is an integer value, this method will return whether
+ it is equal to zero. If the attribute is not a boolean or integer value,
+ this method will attempt to coerce it to an integer using
+ {@link Integer#decode(String)} and return whether it is equal to zero.
+@param {Number} index Index of attribute to retrieve.
+@param {Boolean} defValue Value to return if the attribute is not defined or
+                 cannot be coerced to an integer.
+@return {Boolean} Boolean value of the attribute, or defValue if the attribute was
+         not defined or could not be coerced to an integer.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getBoolean : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getInt'>/**Retrieve the integer value for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ If the attribute is not an integer, this method will attempt to coerce
+ it to an integer using {@link Integer#decode(String)}.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 cannot be coerced to an integer.
+@return {Number} Integer value of the attribute, or defValue if the attribute was
+         not defined or could not be coerced to an integer.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getInt : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getFloat'>/**Retrieve the float value for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ If the attribute is not a float or an integer, this method will attempt
+ to coerce it to a float using {@link Float#parseFloat(String)}.
+@param {Number} index Index of attribute to retrieve.
+@return {Number} Attribute float value, or defValue if the attribute was
+         not defined or could not be coerced to a float.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getFloat : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getColor'>/**Retrieve the color value for the attribute at &lt;var&gt;index&lt;/var&gt;.  If
+</span> the attribute references a color resource holding a complex
+ {@link android.content.res.ColorStateList}, then the default color from
+ the set is returned.
+ &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not an integer color or color state list.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 not a resource.
+@return {Number} Attribute color value, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not an integer color or color state list.
+*/
+getColor : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getComplexColor'>/**Retrieve the ComplexColor for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> The value may be either a {@link android.content.res.ColorStateList} which can wrap a simple
+ color value or a {@link android.content.res.GradientColor}
+ &lt;p&gt;
+ This method will return {@code null} if the attribute is not defined or
+ is not an integer color, color state list or GradientColor.
+@param {Number} index Index of attribute to retrieve.
+@return {Object {android.content.res.ComplexColor}} ComplexColor for the attribute, or {@code null} if not defined.
+@throws RuntimeException if the attribute if the TypedArray has already
+         been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not an integer color, color state list or GradientColor.
+@hide 
+*/
+getComplexColor : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getColorStateList'>/**Retrieve the ColorStateList for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> The value may be either a single solid color or a reference to
+ a color or complex {@link android.content.res.ColorStateList}
+ description.
+ &lt;p&gt;
+ This method will return {@code null} if the attribute is not defined or
+ is not an integer color or color state list.
+@param {Number} index Index of attribute to retrieve.
+@return {Object {android.content.res.ColorStateList}} ColorStateList for the attribute, or {@code null} if not
+         defined.
+@throws RuntimeException if the attribute if the TypedArray has already
+         been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not an integer color or color state list.
+*/
+getColorStateList : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getInteger'>/**Retrieve the integer value for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ Unlike {@link #getInt(int, int)}, this method will throw an exception if
+ the attribute is defined but is not an integer.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 not a resource.
+@return {Number} Attribute integer value, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not an integer.
+*/
+getInteger : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getDimension'>/**Retrieve a dimensional unit attribute at &lt;var&gt;index&lt;/var&gt;. Unit
+</span> conversions are based on the current {@link DisplayMetrics}
+ associated with the resources this {@link android.content.res.TypedArray} object
+ came from.
+ &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not a dimension.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 not a resource.
+@return {Number} Attribute dimension value multiplied by the appropriate
+         metric, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not an integer.
+@see #getDimensionPixelOffset
+@see #getDimensionPixelSize
+*/
+getDimension : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getDimensionPixelOffset'>/**Retrieve a dimensional unit attribute at &lt;var&gt;index&lt;/var&gt; for use
+</span> as an offset in raw pixels.  This is the same as
+ {@link #getDimension}, except the returned value is converted to
+ integer pixels for you.  An offset conversion involves simply
+ truncating the base value to an integer.
+ &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not a dimension.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 not a resource.
+@return {Number} Attribute dimension value multiplied by the appropriate
+         metric and truncated to integer pixels, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not an integer.
+@see #getDimension
+@see #getDimensionPixelSize
+*/
+getDimensionPixelOffset : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getDimensionPixelSize'>/**Retrieve a dimensional unit attribute at &lt;var&gt;index&lt;/var&gt; for use
+</span> as a size in raw pixels.  This is the same as
+ {@link #getDimension}, except the returned value is converted to
+ integer pixels for use as a size.  A size conversion involves
+ rounding the base value, and ensuring that a non-zero base value
+ is at least one pixel in size.
+ &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not a dimension.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 not a resource.
+@return {Number} Attribute dimension value multiplied by the appropriate
+         metric and truncated to integer pixels, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not a dimension.
+@see #getDimension
+@see #getDimensionPixelOffset
+*/
+getDimensionPixelSize : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getLayoutDimension'>/**Special version of {@link #getDimensionPixelSize} for retrieving
+</span> {@link android.view.ViewGroup}'s layout_width and layout_height
+ attributes.  This is only here for performance reasons; applications
+ should use {@link #getDimensionPixelSize}.
+ &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not a dimension or integer (enum).
+@param {Number} index Index of the attribute to retrieve.
+@param {String} name Textual name of attribute for error reporting.
+@return {Number} Attribute dimension value multiplied by the appropriate
+         metric and truncated to integer pixels.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not a dimension or integer (enum).
+*/
+getLayoutDimension : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getLayoutDimension'>/**Special version of {@link #getDimensionPixelSize} for retrieving
+</span> {@link android.view.ViewGroup}'s layout_width and layout_height
+ attributes.  This is only here for performance reasons; applications
+ should use {@link #getDimensionPixelSize}.
+@param {Number} index Index of the attribute to retrieve.
+@param {Number} defValue The default value to return if this attribute is not
+                 default or contains the wrong type of data.
+@return {Number} Attribute dimension value multiplied by the appropriate
+         metric and truncated to integer pixels.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getLayoutDimension : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getFraction'>/**Retrieves a fractional unit attribute at &lt;var&gt;index&lt;/var&gt;.
+</span>@param {Number} index Index of attribute to retrieve.
+@param {Number} base The base value of this fraction.  In other words, a
+             standard fraction is multiplied by this value.
+@param {Number} pbase The parent base value of this fraction.  In other
+             words, a parent fraction (nn%p) is multiplied by this
+             value.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 not a resource.
+@return {Number} Attribute fractional value multiplied by the appropriate
+         base value, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not a fraction.
+*/
+getFraction : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getResourceId'>/**Retrieves the resource identifier for the attribute at
+</span> &lt;var&gt;index&lt;/var&gt;.  Note that attribute resource as resolved when
+ the overall {@link android.content.res.TypedArray} object is retrieved.  As a
+ result, this function will return the resource identifier of the
+ final resource value that was found, &lt;em&gt;not&lt;/em&gt; necessarily the
+ original resource that was specified by the attribute.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or
+                 not a resource.
+@return {Number} Attribute resource identifier, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getResourceId : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getThemeAttributeId'>/**Retrieves the theme attribute resource identifier for the attribute at
+</span> &lt;var&gt;index&lt;/var&gt;.
+@param {Number} index Index of attribute to retrieve.
+@param {Number} defValue Value to return if the attribute is not defined or not a
+                 resource.
+@return {Number} Theme attribute resource identifier, or defValue if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@hide 
+*/
+getThemeAttributeId : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getDrawable'>/**Retrieve the Drawable for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not a color or drawable resource.
+@param {Number} index Index of attribute to retrieve.
+@return {Object {android.graphics.drawable.Drawable}} Drawable for the attribute, or {@code null} if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not a color or drawable resource.
+*/
+getDrawable : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getDrawableForDensity'>/**Version of {@link #getDrawable}(int) that accepts an override density.
+</span>@hide 
+*/
+getDrawableForDensity : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getFont'>/**Retrieve the Typeface for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not a font.
+@param {Number} index Index of attribute to retrieve.
+@return {Object {android.graphics.Typeface}} Typeface for the attribute, or {@code null} if not defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+@throws UnsupportedOperationException if the attribute is defined but is
+         not a font resource.
+*/
+getFont : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getTextArray'>/**Retrieve the CharSequence[] for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> This gets the resource ID of the selected attribute, and uses
+ {@link android.content.res.Resources#getTextArray android.content.res.Resources.getTextArray} of the owning
+ Resources object to retrieve its String[].
+ &lt;p&gt;
+ This method will throw an exception if the attribute is defined but is
+ not a text array resource.
+@param {Number} index Index of attribute to retrieve.
+@return {Object {java.lang.CharSequence}} CharSequence[] for the attribute, or {@code null} if not
+         defined.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getTextArray : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getValue'>/**Retrieve the raw TypedValue for the attribute at &lt;var&gt;index&lt;/var&gt;.
+</span>@param {Number} index Index of attribute to retrieve.
+@param {Object {TypedValue}} outValue TypedValue object in which to place the attribute's
+                 data.
+@return {Boolean} {@code true} if the value was retrieved and not @empty, {@code false} otherwise.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getValue : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getType'>/**Returns the type of attribute at the specified index.
+</span>@param {Number} index Index of attribute whose type to retrieve.
+@return {Number} Attribute type.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getType : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getSourceResourceId'>/**Returns the resource ID of the style or layout against which the specified attribute was
+</span> resolved, otherwise returns defValue.
+
+ For example, if you we resolving two attributes {@code android:attribute1} and
+ {@code android:attribute2} and you were inflating a {@link android.view.View} from
+ {@code layout/my_layout.xml}:
+ &lt;pre&gt;
+     &amp;lt;View
+         style=&quot;@style/viewStyle&quot;
+         android:layout_width=&quot;wrap_content&quot;
+         android:layout_height=&quot;wrap_content&quot;
+         android:attribute1=&quot;foo&quot;/&amp;gt;
+ &lt;/pre&gt;
+
+ and {@code @style/viewStyle} is:
+ &lt;pre&gt;
+     &amp;lt;style android:name=&quot;viewStyle&quot;&amp;gt;
+         &amp;lt;item name=&quot;android:attribute2&quot;&amp;gt;bar&amp;lt;item/&amp;gt;
+     &amp;lt;style/&amp;gt;
+ &lt;/pre&gt;
+
+ then resolved {@link android.content.res.TypedArray} will have values that return source resource ID of
+ {@code R.layout.my_layout} for {@code android:attribute1} and {@code R.style.viewStyle} for
+ {@code android:attribute2}.
+@param {Number} index Index of attribute whose source style to retrieve.
+@param {Number} defaultValue Value to return if the attribute is not defined or
+                     not a resource.
+@return {Number} Either a style resource ID, layout resource ID, or defaultValue if it was not
+ resolved in a style or layout.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getSourceResourceId : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-hasValue'>/**Determines whether there is an attribute at &lt;var&gt;index&lt;/var&gt;.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the attribute was set to {@code @empty} or
+ {@code @undefined}, this method returns {@code false}.
+@param {Number} index Index of attribute to retrieve.
+@return {Boolean} True if the attribute has a value, false otherwise.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+hasValue : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-hasValueOrEmpty'>/**Determines whether there is an attribute at &lt;var&gt;index&lt;/var&gt;, returning
+</span> {@code true} if the attribute was explicitly set to {@code @empty} and
+ {@code false} only if the attribute was undefined.
+@param {Number} index Index of attribute to retrieve.
+@return {Boolean} True if the attribute has a value or is empty, false otherwise.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+hasValueOrEmpty : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-peekValue'>/**Retrieve the raw TypedValue for the attribute at &lt;var&gt;index&lt;/var&gt;
+</span> and return a temporary object holding its data.  This object is only
+ valid until the next call on to {@link android.content.res.TypedArray}.
+@param {Number} index Index of attribute to retrieve.
+@return {Object {android.util.TypedValue}} Returns a TypedValue object if the attribute is defined,
+         containing its data; otherwise returns null.  (You will not
+         receive a TypedValue whose type is TYPE_NULL.)
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+peekValue : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getPositionDescription'>/**Returns a message about the parser state suitable for printing error messages.
+</span>@return {String} Human-readable description of current parser state.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+getPositionDescription : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-recycle'>/**Recycles the TypedArray, to be re-used by a later caller. After calling
+</span> this function you must not ever touch the typed array again.
+@throws RuntimeException if the TypedArray has already been recycled.
+*/
+recycle : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-extractThemeAttrs'>/**Extracts theme attributes from a typed array for later resolution using
+</span> {@link android.content.res.Resources.Theme#resolveAttributes(int[], int[])}.
+ Removes the entries from the typed array so that subsequent calls to typed
+ getters will return the default value without crashing.
+@return {Number} an array of length {@link #getIndexCount()} populated with theme
+         attributes, or null if there are no theme attributes in the typed
+         array
+@throws RuntimeException if the TypedArray has already been recycled.
+@hide 
+*/
+extractThemeAttrs : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-extractThemeAttrs'>/**
+</span>@hide 
+*/
+extractThemeAttrs : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-getChangingConfigurations'>/**Return a mask of the configuration parameters for which the values in
+</span> this typed array may change.
+@return {Number} Returns a mask of the changing configuration parameters, as
+         defined by {@link android.content.pm.ActivityInfo}.
+@throws RuntimeException if the TypedArray has already been recycled.
+@see android.content.pm.ActivityInfo
+*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-content-res-TypedArray-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

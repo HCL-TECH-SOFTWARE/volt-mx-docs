@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-sidekick-SidekickInternal'>/**@class android.hardware.sidekick.SidekickInternal
+</span>@extends java.lang.Object
+
+ Sidekick local system service interface.
+
+ @hide Only for use within the system server, and maybe by Clockwork Home.
+*/
+var SidekickInternal = {
+
+<span id='android-hardware-sidekick-SidekickInternal-method-reset'>/**Tell Sidekick to reset back to newly-powered-on state.
+</span>@return {Boolean} true on success (Sidekick is reset), false if Sidekick is not
+ available (failed or not present). Either way, upon return Sidekick is
+ guaranteed not to be controlling the display.
+*/
+reset : function(  ) {},
+
+<span id='android-hardware-sidekick-SidekickInternal-method-startDisplayControl'>/**Tell Sidekick it can start controlling the display.
+</span>
+ SidekickServer may choose not to actually control the display, if it's been told
+ via other channels to leave the previous image on the display (same as SUSPEND in
+ a non-Sidekick system).
+@param {Number} displayState - one of Display.STATE_DOZE_SUSPEND, Display.STATE_ON_SUSPEND
+@return {Boolean} true on success, false on failure (no sidekick available)
+*/
+startDisplayControl : function(  ) {},
+
+<span id='android-hardware-sidekick-SidekickInternal-method-endDisplayControl'>/**Tell Sidekick it must stop controlling the display.
+</span>
+ No return code because this must always succeed - after return, Sidekick
+ is guaranteed to not be controlling the display.
+*/
+endDisplayControl : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-security-keystore-KeyProtection'>/**@class android.security.keystore.KeyProtection
+</span> implements java.security.KeyStore.ProtectionParameter
+
+ implements android.security.keystore.UserAuthArgs
+
+@extends java.lang.Object
+
+ Specification of how a key or key pair is secured when imported into the
+ &lt;a href=&quot;{@docRoot}training/articles/keystore.html&quot;&gt;Android Keystore system&lt;/a&gt;. This class
+ specifies authorized uses of the imported key, such as whether user authentication is required
+ for using the key, what operations the key is authorized for (e.g., decryption, but not signing)
+ with what parameters (e.g., only with a particular padding scheme or digest), and the key's
+ validity start and end dates. Key use authorizations expressed in this class apply only to secret
+ keys and private keys -- public keys can be used for any supported operations.
+
+ &lt;p&gt;To import a key or key pair into the Android Keystore, create an instance of this class using
+ the {@link android.security.keystore.KeyGenParameterSpec.Builder} and pass the instance into {@link java.security.KeyStore#setEntry(String, java.security.KeyStore.Entry, ProtectionParameter) KeyStore.setEntry}
+ with the key or key pair being imported.
+
+ &lt;p&gt;To obtain the secret/symmetric or private key from the Android Keystore use
+ {@link java.security.KeyStore#getKey(String, char[]) KeyStore.getKey(String, null)} or
+ {@link java.security.KeyStore#getEntry(String, java.security.KeyStore.ProtectionParameter) KeyStore.getEntry(String, null)}.
+ To obtain the public key from the Android Keystore use
+ {@link java.security.KeyStore#getCertificate(String)} and then
+ {@link Certificate#getPublicKey()}.
+
+ &lt;p&gt;To help obtain algorithm-specific public parameters of key pairs stored in the Android
+ Keystore, its private keys implement {@link java.security.interfaces.ECKey} or
+ {@link java.security.interfaces.RSAKey} interfaces whereas its public keys implement
+ {@link java.security.interfaces.ECPublicKey} or {@link java.security.interfaces.RSAPublicKey}
+ interfaces.
+
+ &lt;p&gt;NOTE: The key material of keys stored in the Android Keystore is not accessible.
+
+ &lt;p&gt;Instances of this class are immutable.
+
+ &lt;p&gt;&lt;h3&gt;Known issues&lt;/h3&gt;
+ A known bug in Android 6.0 (API Level 23) causes user authentication-related authorizations to be
+ enforced even for public keys. To work around this issue extract the public key material to use
+ outside of Android Keystore. For example:
+ &lt;pre&gt; {@code
+ PublicKey unrestrictedPublicKey =
+         KeyFactory.getInstance(publicKey.getAlgorithm()).generatePublic(
+                 new X509EncodedKeySpec(publicKey.getEncoded()));
+ }&lt;/pre&gt;
+
+ &lt;p&gt;&lt;h3&gt;Example: AES key for encryption/decryption in GCM mode&lt;/h3&gt;
+ This example illustrates how to import an AES key into the Android KeyStore under alias
+ {@code key1} authorized to be used only for encryption/decryption in GCM mode with no padding.
+ The key must export its key material via {@link Key#getEncoded()} in {@code RAW} format.
+ &lt;pre&gt; {@code
+ SecretKey key = ...; // AES key
+
+ KeyStore keyStore = KeyStore.getInstance(&quot;AndroidKeyStore&quot;);
+ keyStore.load(null);
+ keyStore.setEntry(
+         &quot;key1&quot;,
+         new KeyStore.SecretKeyEntry(key),
+         new KeyProtection.Builder(KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)
+                 .setBlockMode(KeyProperties.BLOCK_MODE_GCM)
+                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+                 .build());
+ // Key imported, obtain a reference to it.
+ SecretKey keyStoreKey = (SecretKey) keyStore.getKey(&quot;key1&quot;, null);
+ // The original key can now be discarded.
+
+ Cipher cipher = Cipher.getInstance(&quot;AES/GCM/NoPadding&quot;);
+ cipher.init(Cipher.ENCRYPT_MODE, keyStoreKey);
+ ...
+ }&lt;/pre&gt;
+
+ &lt;p&gt;&lt;h3&gt;Example: HMAC key for generating MACs using SHA-512&lt;/h3&gt;
+ This example illustrates how to import an HMAC key into the Android KeyStore under alias
+ {@code key1} authorized to be used only for generating MACs using SHA-512 digest. The key must
+ export its key material via {@link Key#getEncoded()} in {@code RAW} format.
+ &lt;pre&gt; {@code
+ SecretKey key = ...; // HMAC key of algorithm &quot;HmacSHA512&quot;.
+
+ KeyStore keyStore = KeyStore.getInstance(&quot;AndroidKeyStore&quot;);
+ keyStore.load(null);
+ keyStore.setEntry(
+         &quot;key1&quot;,
+         new KeyStore.SecretKeyEntry(key),
+         new KeyProtection.Builder(KeyProperties.PURPOSE_SIGN).build());
+ // Key imported, obtain a reference to it.
+ SecretKey keyStoreKey = (SecretKey) keyStore.getKey(&quot;key1&quot;, null);
+ // The original key can now be discarded.
+
+ Mac mac = Mac.getInstance(&quot;HmacSHA512&quot;);
+ mac.init(keyStoreKey);
+ ...
+ }&lt;/pre&gt;
+
+ &lt;p&gt;&lt;h3&gt;Example: EC key pair for signing/verification using ECDSA&lt;/h3&gt;
+ This example illustrates how to import an EC key pair into the Android KeyStore under alias
+ {@code key2} with the private key authorized to be used only for signing with SHA-256 or SHA-512
+ digests. The use of the public key is unrestricted. Both the private and the public key must
+ export their key material via {@link Key#getEncoded()} in {@code PKCS#8} and {@code X.509} format
+ respectively.
+ &lt;pre&gt; {@code
+ PrivateKey privateKey = ...;   // EC private key
+ Certificate[] certChain = ...; // Certificate chain with the first certificate
+                                // containing the corresponding EC public key.
+
+ KeyStore keyStore = KeyStore.getInstance(&quot;AndroidKeyStore&quot;);
+ keyStore.load(null);
+ keyStore.setEntry(
+         &quot;key2&quot;,
+         new KeyStore.PrivateKeyEntry(privateKey, certChain),
+         new KeyProtection.Builder(KeyProperties.PURPOSE_SIGN)
+                 .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
+                 .build());
+ // Key pair imported, obtain a reference to it.
+ PrivateKey keyStorePrivateKey = (PrivateKey) keyStore.getKey(&quot;key2&quot;, null);
+ PublicKey publicKey = keyStore.getCertificate(&quot;key2&quot;).getPublicKey();
+ // The original private key can now be discarded.
+
+ Signature signature = Signature.getInstance(&quot;SHA256withECDSA&quot;);
+ signature.initSign(keyStorePrivateKey);
+ ...
+ }&lt;/pre&gt;
+
+ &lt;p&gt;&lt;h3&gt;Example: RSA key pair for signing/verification using PKCS#1 padding&lt;/h3&gt;
+ This example illustrates how to import an RSA key pair into the Android KeyStore under alias
+ {@code key2} with the private key authorized to be used only for signing using the PKCS#1
+ signature padding scheme with SHA-256 digest and only if the user has been authenticated within
+ the last ten minutes. The use of the public key is unrestricted (see Known Issues). Both the
+ private and the public key must export their key material via {@link Key#getEncoded()} in
+ {@code PKCS#8} and {@code X.509} format respectively.
+ &lt;pre&gt; {@code
+ PrivateKey privateKey = ...;   // RSA private key
+ Certificate[] certChain = ...; // Certificate chain with the first certificate
+                                // containing the corresponding RSA public key.
+
+ KeyStore keyStore = KeyStore.getInstance(&quot;AndroidKeyStore&quot;);
+ keyStore.load(null);
+ keyStore.setEntry(
+         &quot;key2&quot;,
+         new KeyStore.PrivateKeyEntry(privateKey, certChain),
+         new KeyProtection.Builder(KeyProperties.PURPOSE_SIGN)
+                 .setDigests(KeyProperties.DIGEST_SHA256)
+                 .setSignaturePaddings(KeyProperties.SIGNATURE_PADDING_RSA_PKCS1)
+                 // Only permit this key to be used if the user
+                 // authenticated within the last ten minutes.
+                 .setUserAuthenticationRequired(true)
+                 .setUserAuthenticationValidityDurationSeconds(10 * 60)
+                 .build());
+ // Key pair imported, obtain a reference to it.
+ PrivateKey keyStorePrivateKey = (PrivateKey) keyStore.getKey(&quot;key2&quot;, null);
+ PublicKey publicKey = keyStore.getCertificate(&quot;key2&quot;).getPublicKey();
+ // The original private key can now be discarded.
+
+ Signature signature = Signature.getInstance(&quot;SHA256withRSA&quot;);
+ signature.initSign(keyStorePrivateKey);
+ ...
+ }&lt;/pre&gt;
+
+ &lt;p&gt;&lt;h3&gt;Example: RSA key pair for encryption/decryption using PKCS#1 padding&lt;/h3&gt;
+ This example illustrates how to import an RSA key pair into the Android KeyStore under alias
+ {@code key2} with the private key authorized to be used only for decryption using the PKCS#1
+ encryption padding scheme. The use of public key is unrestricted, thus permitting encryption
+ using any padding schemes and digests. Both the private and the public key must export their key
+ material via {@link Key#getEncoded()} in {@code PKCS#8} and {@code X.509} format respectively.
+ &lt;pre&gt; {@code
+ PrivateKey privateKey = ...;   // RSA private key
+ Certificate[] certChain = ...; // Certificate chain with the first certificate
+                                // containing the corresponding RSA public key.
+
+ KeyStore keyStore = KeyStore.getInstance(&quot;AndroidKeyStore&quot;);
+ keyStore.load(null);
+ keyStore.setEntry(
+         &quot;key2&quot;,
+         new KeyStore.PrivateKeyEntry(privateKey, certChain),
+         new KeyProtection.Builder(KeyProperties.PURPOSE_DECRYPT)
+                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_PKCS1)
+                 .build());
+ // Key pair imported, obtain a reference to it.
+ PrivateKey keyStorePrivateKey = (PrivateKey) keyStore.getKey(&quot;key2&quot;, null);
+ PublicKey publicKey = keyStore.getCertificate(&quot;key2&quot;).getPublicKey();
+ // The original private key can now be discarded.
+
+ Cipher cipher = Cipher.getInstance(&quot;RSA/ECB/PKCS1Padding&quot;);
+ cipher.init(Cipher.DECRYPT_MODE, keyStorePrivateKey);
+ ...
+ }&lt;/pre&gt;
+*/
+var KeyProtection = {
+
+<span id='android-security-keystore-KeyProtection-method-getKeyValidityStart'>/**Gets the time instant before which the key is not yet valid.
+</span>@return {Object {java.util.Date}} instant or {@code null} if not restricted.
+*/
+getKeyValidityStart : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getKeyValidityForConsumptionEnd'>/**Gets the time instant after which the key is no long valid for decryption and verification.
+</span>@return {Object {java.util.Date}} instant or {@code null} if not restricted.
+*/
+getKeyValidityForConsumptionEnd : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getKeyValidityForOriginationEnd'>/**Gets the time instant after which the key is no long valid for encryption and signing.
+</span>@return {Object {java.util.Date}} instant or {@code null} if not restricted.
+*/
+getKeyValidityForOriginationEnd : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getPurposes'>/**Gets the set of purposes (e.g., encrypt, decrypt, sign) for which the key can be used.
+</span> Attempts to use the key for any other purpose will be rejected.
+
+ &lt;p&gt;See {@link android.security.keystore.KeyProperties}.{@code PURPOSE} flags.
+*/
+getPurposes : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getEncryptionPaddings'>/**Gets the set of padding schemes (e.g., {@code PKCS7Padding}, {@code PKCS1Padding},
+</span> {@code NoPadding}) with which the key can be used when encrypting/decrypting. Attempts to use
+ the key with any other padding scheme will be rejected.
+
+ &lt;p&gt;See {@link android.security.keystore.KeyProperties}.{@code ENCRYPTION_PADDING} constants.
+*/
+getEncryptionPaddings : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getSignaturePaddings'>/**Gets the set of padding schemes (e.g., {@code PSS}, {@code PKCS#1}) with which the key
+</span> can be used when signing/verifying. Attempts to use the key with any other padding scheme
+ will be rejected.
+
+ &lt;p&gt;See {@link android.security.keystore.KeyProperties}.{@code SIGNATURE_PADDING} constants.
+*/
+getSignaturePaddings : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getDigests'>/**Gets the set of digest algorithms (e.g., {@code SHA-256}, {@code SHA-384}) with which the key
+</span> can be used.
+
+ &lt;p&gt;See {@link android.security.keystore.KeyProperties}.{@code DIGEST} constants.
+@throws IllegalStateException if this set has not been specified.
+@see #isDigestsSpecified()
+*/
+getDigests : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isDigestsSpecified'>/**Returns {@code true} if the set of digest algorithms with which the key can be used has been
+</span> specified.
+@see #getDigests()
+*/
+isDigestsSpecified : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getBlockModes'>/**Gets the set of block modes (e.g., {@code GCM}, {@code CBC}) with which the key can be used
+</span> when encrypting/decrypting. Attempts to use the key with any other block modes will be
+ rejected.
+
+ &lt;p&gt;See {@link android.security.keystore.KeyProperties}.{@code BLOCK_MODE} constants.
+*/
+getBlockModes : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isRandomizedEncryptionRequired'>/**Returns {@code true} if encryption using this key must be sufficiently randomized to produce
+</span> different ciphertexts for the same plaintext every time. The formal cryptographic property
+ being required is &lt;em&gt;indistinguishability under chosen-plaintext attack ({@code
+ IND-CPA})&lt;/em&gt;. This property is important because it mitigates several classes of
+ weaknesses due to which ciphertext may leak information about plaintext. For example, if a
+ given plaintext always produces the same ciphertext, an attacker may see the repeated
+ ciphertexts and be able to deduce something about the plaintext.
+*/
+isRandomizedEncryptionRequired : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isUserAuthenticationRequired'>/**Returns {@code true} if the key is authorized to be used only if the user has been
+</span> authenticated.
+
+ &lt;p&gt;This authorization applies only to secret key and private key operations. Public key
+ operations are not restricted.
+@see #getUserAuthenticationValidityDurationSeconds()
+@see Builder#setUserAuthenticationRequired(boolean)
+*/
+isUserAuthenticationRequired : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isUserConfirmationRequired'>/**Returns {@code true} if the key is authorized to be used only for messages confirmed by the
+</span> user.
+
+ Confirmation is separate from user authentication (see
+ {@link #isUserAuthenticationRequired}()). Keys can be created that require confirmation but
+ not user authentication, or user authentication but not confirmation, or both. Confirmation
+ verifies that some user with physical possession of the device has approved a displayed
+ message. User authentication verifies that the correct user is present and has
+ authenticated.
+
+ &lt;p&gt;This authorization applies only to secret key and private key operations. Public key
+ operations are not restricted.
+@see Builder#setUserConfirmationRequired(boolean)
+*/
+isUserConfirmationRequired : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getUserAuthenticationValidityDurationSeconds'>/**Gets the duration of time (seconds) for which this key is authorized to be used after the
+</span> user is successfully authenticated. This has effect only if user authentication is required
+ (see {@link #isUserAuthenticationRequired}()).
+
+ &lt;p&gt;This authorization applies only to secret key and private key operations. Public key
+ operations are not restricted.
+@return {Number} duration in seconds or {@code -1} if authentication is required for every use of the
+         key.
+@see #isUserAuthenticationRequired()
+@see Builder#setUserAuthenticationValidityDurationSeconds(int)
+*/
+getUserAuthenticationValidityDurationSeconds : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isUserPresenceRequired'>/**Returns {@code true} if the key is authorized to be used only if a test of user presence has
+</span> been performed between the {@code Signature.initSign()} and {@code Signature.sign()} calls.
+ It requires that the KeyStore implementation have a direct way to validate the user presence
+ for example a KeyStore hardware backed strongbox can use a button press that is observable
+ in hardware. A test for user presence is tangential to authentication. The test can be part
+ of an authentication step as long as this step can be validated by the hardware protecting
+ the key and cannot be spoofed. For example, a physical button press can be used as a test of
+ user presence if the other pins connected to the button are not able to simulate a button
+ press. There must be no way for the primary processor to fake a button press, or that
+ button must not be used as a test of user presence.
+*/
+isUserPresenceRequired : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isUserAuthenticationValidWhileOnBody'>/**Returns {@code true} if the key will be de-authorized when the device is removed from the
+</span> user's body.  This option has no effect on keys that don't have an authentication validity
+ duration, and has no effect if the device lacks an on-body sensor.
+
+ &lt;p&gt;Authorization applies only to secret key and private key operations. Public key operations
+ are not restricted.
+@see #isUserAuthenticationRequired()
+@see #getUserAuthenticationValidityDurationSeconds()
+@see Builder#setUserAuthenticationValidWhileOnBody(boolean)
+*/
+isUserAuthenticationValidWhileOnBody : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isInvalidatedByBiometricEnrollment'>/**Returns {@code true} if the key is irreversibly invalidated when a new biometric is
+</span> enrolled or all enrolled biometrics are removed. This has effect only for keys that
+ require biometric user authentication for every use.
+@see #isUserAuthenticationRequired()
+@see #getUserAuthenticationValidityDurationSeconds()
+@see Builder#setInvalidatedByBiometricEnrollment(boolean)
+*/
+isInvalidatedByBiometricEnrollment : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-getBoundToSpecificSecureUserId'>/**Return the secure user id that this key should be bound to.
+</span>
+ Normally an authentication-bound key is tied to the secure user id of the current user
+ (either the root SID from GateKeeper for auth-bound keys with a timeout, or the authenticator
+ id of the current biometric set for keys requiring explicit biometric authorization).
+ If this parameter is set (this method returning non-zero value), the key should be tied to
+ the specified secure user id, overriding the logic above.
+
+ This is only applicable when {@link #isUserAuthenticationRequired} is {@code true}
+@see KeymasterUtils#addUserAuthArgs
+@hide 
+*/
+getBoundToSpecificSecureUserId : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isCriticalToDeviceEncryption'>/**Return whether this key is critical to the device encryption flow.
+</span>@see android.security.KeyStore#FLAG_CRITICAL_TO_DEVICE_ENCRYPTION
+@hide 
+*/
+isCriticalToDeviceEncryption : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isUnlockedDeviceRequired'>/**Returns {@code true} if the screen must be unlocked for this key to be used for decryption or
+</span> signing. Encryption and signature verification will still be available when the screen is
+ locked.
+@see Builder#setUnlockedDeviceRequired(boolean)
+*/
+isUnlockedDeviceRequired : function(  ) {},
+
+<span id='android-security-keystore-KeyProtection-method-isStrongBoxBacked'>/**Returns {@code true} if the key is protected by a Strongbox security chip.
+</span>@hide 
+*/
+isStrongBoxBacked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

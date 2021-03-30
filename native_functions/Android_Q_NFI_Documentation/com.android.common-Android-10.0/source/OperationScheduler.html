@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-common-OperationScheduler'>/**@class com.android.common.OperationScheduler
+</span>@extends java.lang.Object
+
+ Tracks the success/failure history of a particular network operation in
+ persistent storage and computes retry strategy accordingly.  Handles
+ exponential backoff, periodic rescheduling, event-driven triggering,
+ retry-after moratorium intervals, etc. based on caller-specified parameters.
+
+ &lt;p&gt;This class does not directly perform or invoke any operations,
+ it only keeps track of the schedule.  Somebody else needs to call
+ {@link #getNextTimeMillis} as appropriate and do the actual work.
+*/
+var OperationScheduler = {
+
+<span id='com-android-common-OperationScheduler-method-parseOptions'>/**Parse scheduler options supplied in this string form:
+</span>
+ &lt;pre&gt;
+ backoff=(fixed)+(incremental)[+(exponential)] max=(maxmoratorium) min=(mintrigger) [period=](interval)
+ &lt;/pre&gt;
+
+ All values are times in (possibly fractional) &lt;em&gt;seconds&lt;/em&gt; (not milliseconds).
+ Omitted settings are left at whatever existing default value was passed in.
+
+ &lt;p&gt;
+ The default options: &lt;code&gt;backoff=0+5 max=86400 min=0 period=0&lt;/code&gt;&lt;br&gt;
+ Fractions are OK: &lt;code&gt;backoff=+2.5 period=10.0&lt;/code&gt;&lt;br&gt;
+ The &quot;period=&quot; can be omitted: &lt;code&gt;3600&lt;/code&gt;&lt;br&gt;
+@param {String} spec describing some or all scheduler options.
+@param {Object {OperationScheduler.Options}} options to update with parsed values.
+@return {Object {com.android.common.OperationScheduler.Options}} the options passed in (for convenience)
+@throws IllegalArgumentException if the syntax is invalid
+*/
+parseOptions : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-getNextTimeMillis'>/**Compute the time of the next operation.  Does not modify any state
+</span> (unless the clock rolls backwards, in which case timers are reset).
+@param {Object {OperationScheduler.Options}} options to use for this computation.
+@return {Number} the wall clock time ({@link System#currentTimeMillis()}) when the
+ next operation should be attempted -- immediately, if the return value is
+ before the current time.
+*/
+getNextTimeMillis : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-getLastSuccessTimeMillis'>/**Return the last time the operation completed.  Does not modify any state.
+</span>@return {Number} the wall clock time when {@link #onSuccess()} was last called.
+*/
+getLastSuccessTimeMillis : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-getLastAttemptTimeMillis'>/**Return the last time the operation was attempted.  Does not modify any state.
+</span>@return {Number} the wall clock time when {@link #onSuccess()} or {@link
+ #onTransientError()} was last called.
+*/
+getLastAttemptTimeMillis : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-setTriggerTimeMillis'>/**Request an operation to be performed at a certain time.  The actual
+</span> scheduled time may be affected by error backoff logic and defined
+ minimum intervals.  Use {@link Long#MAX_VALUE} to disable triggering.
+@param {Number} millis wall clock time ({@link System#currentTimeMillis()}) to
+ trigger another operation; 0 to trigger immediately
+*/
+setTriggerTimeMillis : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-setMoratoriumTimeMillis'>/**Forbid any operations until after a certain (absolute) time.
+</span> Limited by {@link com.android.common.OperationScheduler.Options#maxMoratoriumMillis}.
+@param {Number} millis wall clock time ({@link System#currentTimeMillis()})
+ when operations should be allowed again; 0 to remove moratorium
+*/
+setMoratoriumTimeMillis : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-setMoratoriumTimeHttp'>/**Forbid any operations until after a certain time, as specified in
+</span> the format used by the HTTP &quot;Retry-After&quot; header.
+ Limited by {@link com.android.common.OperationScheduler.Options#maxMoratoriumMillis}.
+@param {String} retryAfter moratorium time in HTTP format
+@return {Boolean} true if a time was successfully parsed
+*/
+setMoratoriumTimeHttp : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-setEnabledState'>/**Enable or disable all operations.  When disabled, all calls to
+</span> {@link #getNextTimeMillis} return {@link Long#MAX_VALUE}.
+ Commonly used when data network availability goes up and down.
+@param {Boolean} enabled if operations can be performed
+*/
+setEnabledState : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-onSuccess'>/**Report successful completion of an operation.  Resets all error
+</span> counters, clears any trigger directives, and records the success.
+*/
+onSuccess : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-onTransientError'>/**Report a transient error (usually a network failure).  Increments
+</span> the error count and records the time of the latest error for backoff
+ purposes.
+*/
+onTransientError : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-resetTransientError'>/**Reset all transient error counts, allowing the next operation to proceed
+</span> immediately without backoff.  Commonly used on network state changes, when
+ partial progress occurs (some data received), and in other circumstances
+ where there is reason to hope things might start working better.
+*/
+resetTransientError : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-onPermanentError'>/**Report a permanent error that will not go away until further notice.
+</span> No operation will be scheduled until {@link #resetPermanentError}()
+ is called.  Commonly used for authentication failures (which are reset
+ when the accounts database is updated).
+*/
+onPermanentError : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-resetPermanentError'>/**Reset any permanent error status set by {@link #onPermanentError},
+</span> allowing operations to be scheduled as normal.
+*/
+resetPermanentError : function(  ) {},
+
+<span id='com-android-common-OperationScheduler-method-toString'>/**Return a string description of the scheduler state for debugging.
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

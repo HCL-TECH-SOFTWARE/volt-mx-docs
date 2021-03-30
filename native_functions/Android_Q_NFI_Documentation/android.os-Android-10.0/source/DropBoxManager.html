@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-DropBoxManager'>/**@class android.os.DropBoxManager
+</span>@extends java.lang.Object
+
+ Enqueues chunks of data (from various sources -- application crashes, kernel
+ log records, etc.).  The queue is size bounded and will drop old data if the
+ enqueued data exceeds the maximum size.  You can think of this as a
+ persistent, system-wide, blob-oriented &quot;logcat&quot;.
+
+ &lt;p&gt;DropBoxManager entries are not sent anywhere directly, but other system
+ services and debugging tools may scan and upload entries for processing.
+*/
+var DropBoxManager = {
+
+<span id='android-os-DropBoxManager-property-IS_EMPTY'>/**Flag value: Entry's content was deleted to save space. */
+</span>IS_EMPTY : &quot;1&quot;,
+<span id='android-os-DropBoxManager-property-IS_TEXT'>/**Flag value: Content is human-readable UTF-8 text (can be combined with IS_GZIPPED). */
+</span>IS_TEXT : &quot;2&quot;,
+<span id='android-os-DropBoxManager-property-IS_GZIPPED'>/**Flag value: Content can be decompressed with {@link java.util.zip.GZIPOutputStream}. */
+</span>IS_GZIPPED : &quot;4&quot;,
+<span id='android-os-DropBoxManager-property-ACTION_DROPBOX_ENTRY_ADDED'>/** Broadcast Action: This is broadcast when a new entry is added in the dropbox.
+</span> You must hold the {@link android.Manifest.permission#READ_LOGS} permission
+ in order to receive this broadcast. This broadcast can be rate limited for low priority
+ entries
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_DROPBOX_ENTRY_ADDED : &quot;android.intent.action.DROPBOX_ENTRY_ADDED&quot;,
+<span id='android-os-DropBoxManager-property-EXTRA_TAG'>/** Extra for {@link android.os.DropBoxManager#ACTION_DROPBOX_ENTRY_ADDED}:
+</span> string containing the dropbox tag.
+*/
+EXTRA_TAG : &quot;tag&quot;,
+<span id='android-os-DropBoxManager-property-EXTRA_TIME'>/** Extra for {@link android.os.DropBoxManager#ACTION_DROPBOX_ENTRY_ADDED}:
+</span> long integer value containing time (in milliseconds since January 1, 1970 00:00:00 UTC)
+ when the entry was created.
+*/
+EXTRA_TIME : &quot;time&quot;,
+<span id='android-os-DropBoxManager-property-EXTRA_DROPPED_COUNT'>/** Extra for {@link android.os.DropBoxManager#ACTION_DROPBOX_ENTRY_ADDED}:
+</span> integer value containing number of broadcasts dropped due to rate limiting on
+ this {@link android.os.DropBoxManager#EXTRA_TAG}
+*/
+EXTRA_DROPPED_COUNT : &quot;android.os.extra.DROPPED_COUNT&quot;,
+<span id='android-os-DropBoxManager-method-addText'>/**Stores human-readable text.  The data may be discarded eventually (or even
+</span> immediately) if space is limited, or ignored entirely if the tag has been
+ blocked (see {@link #isTagEnabled}).
+@param {String} tag describing the type of entry being stored
+@param {String} data value to store
+*/
+addText : function(  ) {},
+
+<span id='android-os-DropBoxManager-method-addData'>/**Stores binary data, which may be ignored or discarded as with {@link #addText}.
+</span>@param {String} tag describing the type of entry being stored
+@param {Object {byte[]}} data value to store
+@param {Number} flags describing the data
+*/
+addData : function(  ) {},
+
+<span id='android-os-DropBoxManager-method-addFile'>/**Stores the contents of a file, which may be ignored or discarded as with
+</span> {@link #addText}.
+@param {String} tag describing the type of entry being stored
+@param {Object {File}} file to read from
+@param {Number} flags describing the data
+@throws IOException if the file can't be opened
+*/
+addFile : function(  ) {},
+
+<span id='android-os-DropBoxManager-method-isTagEnabled'>/**Checks any blacklists (set in system settings) to see whether a certain
+</span> tag is allowed.  Entries with disabled tags will be dropped immediately,
+ so you can save the work of actually constructing and sending the data.
+@param {String} tag that would be used in {@link #addText} or {@link #addFile}
+@return {Boolean} whether events with that tag would be accepted
+*/
+isTagEnabled : function(  ) {},
+
+<span id='android-os-DropBoxManager-method-getNextEntry'>/**Gets the next entry from the drop box &lt;em&gt;after&lt;/em&gt; the specified time.
+</span> You must always call {@link android.os.DropBoxManager.Entry#close()} on the return value!
+@param {String} tag of entry to look for, null for all tags
+@param {Number} msec time of the last entry seen
+@return {Object {android.os.DropBoxManager.Entry}} the next entry, or null if there are no more entries
+*/
+getNextEntry : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

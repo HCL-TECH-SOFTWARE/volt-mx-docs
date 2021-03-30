@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-augmented-AugmentedAutofillService'>/**@class android.service.autofill.augmented.AugmentedAutofillService
+</span>@extends android.app.Service
+
+ A service used to augment the Autofill subsystem by potentially providing autofill data when the
+ &quot;standard&quot; workflow failed (for example, because the standard AutofillService didn't have data).
+
+ @hide
+*/
+var AugmentedAutofillService = {
+
+<span id='android-service-autofill-augmented-AugmentedAutofillService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span> To be supported, the service must also require the
+ {@link android.Manifest.permission#BIND_AUGMENTED_AUTOFILL_SERVICE} permission so
+ that other applications can not abuse it.
+*/
+SERVICE_INTERFACE : &quot;android.service.autofill.augmented.AugmentedAutofillService&quot;,
+<span id='android-service-autofill-augmented-AugmentedAutofillService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-service-autofill-augmented-AugmentedAutofillService-method-onBind'>/**
+</span>@hide 
+*/
+onBind : function(  ) {},
+
+<span id='android-service-autofill-augmented-AugmentedAutofillService-method-onUnbind'>/**
+</span>*/
+onUnbind : function(  ) {},
+
+<span id='android-service-autofill-augmented-AugmentedAutofillService-method-onConnected'>/**Called when the Android system connects to service.
+</span>
+ &lt;p&gt;You should generally do initialization here rather than in {@link #onCreate}.
+*/
+onConnected : function(  ) {},
+
+<span id='android-service-autofill-augmented-AugmentedAutofillService-method-onFillRequest'>/**Asks the service to handle an &quot;augmented&quot; autofill request.
+</span>
+ &lt;p&gt;This method is called when the &quot;stantard&quot; autofill service cannot handle a request, which
+ typically occurs when:
+ &lt;ul&gt;
+   &lt;li&gt;Service does not recognize what should be autofilled.
+   &lt;li&gt;Service does not have data to fill the request.
+   &lt;li&gt;Service blacklisted that app (or activity) for autofill.
+   &lt;li&gt;App disabled itself for autofill.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Differently from the standard autofill workflow, on augmented autofill the service is
+ responsible to generate the autofill UI and request the Android system to autofill the
+ activity when the user taps an action in that UI (through the
+ {@link android.service.autofill.augmented.FillController#autofill(List)} method).
+
+ &lt;p&gt;The service &lt;b&gt;MUST&lt;/b&gt; call {@link FillCallback#onSuccess(android.service.autofill.augmented.FillResponse)} as soon as possible,
+ passing {@code null} when it cannot fulfill the request.
+@param {Object {FillRequest}} request the request to handle.
+@param {Object {CancellationSignal}} cancellationSignal signal for observing cancellation requests. The system will use
+     this to notify you that the fill result is no longer needed and you should stop
+     handling this fill request in order to save resources.
+@param {Object {FillController}} controller object used to interact with the autofill system.
+@param {Object {FillCallback}} callback object used to notify the result of the request. Service &lt;b&gt;must&lt;/b&gt; call
+ {@link FillCallback#onSuccess(android.service.autofill.augmented.FillResponse)}.
+*/
+onFillRequest : function(  ) {},
+
+<span id='android-service-autofill-augmented-AugmentedAutofillService-method-onDisconnected'>/**Called when the Android system disconnects from the service.
+</span>
+ &lt;p&gt; At this point this service may no longer be an active {@link android.service.autofill.augmented.AugmentedAutofillService}.
+ It should not make calls on {@link AutofillManager} that requires the caller to be
+ the current service.
+*/
+onDisconnected : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

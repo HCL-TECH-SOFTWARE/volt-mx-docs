@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-ScoredNetwork'>/**@class android.net.ScoredNetwork
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A network identifier along with a score for the quality of that network.
+
+ @hide
+*/
+var ScoredNetwork = {
+
+<span id='android-net-ScoredNetwork-property-ATTRIBUTES_KEY_BADGING_CURVE'>/** Key used with the {@link #attributes} bundle to define the badging curve.
+</span>
+ &lt;p&gt;The badging curve is a {@link android.net.RssiCurve} used to map different RSSI values to {@link android.net.NetworkBadging.Badging} enums.
+*/
+ATTRIBUTES_KEY_BADGING_CURVE : &quot;android.net.attributes.key.BADGING_CURVE&quot;,
+<span id='android-net-ScoredNetwork-property-ATTRIBUTES_KEY_HAS_CAPTIVE_PORTAL'>/** Extra used with {@link #attributes} to specify whether the
+</span> network is believed to have a captive portal.
+ &lt;p&gt;
+ This data may be used, for example, to display a visual indicator
+ in a network selection list.
+ &lt;p&gt;
+ Note that the this extra conveys the possible presence of a
+ captive portal, not its state or the user's ability to open
+ the portal.
+ &lt;p&gt;
+ If no value is associated with this key then it's unknown.
+*/
+ATTRIBUTES_KEY_HAS_CAPTIVE_PORTAL : &quot;android.net.attributes.key.HAS_CAPTIVE_PORTAL&quot;,
+<span id='android-net-ScoredNetwork-property-ATTRIBUTES_KEY_RANKING_SCORE_OFFSET'>/** Key used with the {@link #attributes} bundle to define the rankingScoreOffset int value.
+</span>
+ &lt;p&gt;The rankingScoreOffset is used when calculating the ranking score used to rank networks
+ against one another. See {@link #calculateRankingScore} for more information.
+*/
+ATTRIBUTES_KEY_RANKING_SCORE_OFFSET : &quot;android.net.attributes.key.RANKING_SCORE_OFFSET&quot;,
+<span id='android-net-ScoredNetwork-property-networkKey'>/**A {@link android.net.NetworkKey} uniquely identifying this network. */
+</span>networkKey : &quot;null&quot;,
+<span id='android-net-ScoredNetwork-property-rssiCurve'>/** The {@link android.net.RssiCurve} representing the scores for this network based on the RSSI.
+</span>
+ &lt;p&gt;This field is optional and may be set to null to indicate that no score is available for
+ this network at this time. Such networks, along with networks for which the scorer has not
+ responded, are always prioritized below scored networks, regardless of the score.
+*/
+rssiCurve : &quot;null&quot;,
+<span id='android-net-ScoredNetwork-property-meteredHint'>/** A boolean value that indicates whether or not the network is believed to be metered.
+</span>
+ &lt;p&gt;A network can be classified as metered if the user would be
+ sensitive to heavy data usage on that connection due to monetary costs,
+ data limitations or battery/performance issues. A typical example would
+ be a wifi connection where the user would be charged for usage.
+*/
+meteredHint : &quot;null&quot;,
+<span id='android-net-ScoredNetwork-property-attributes'>/** An additional collection of optional attributes set by
+</span> the Network Recommendation Provider.
+
+ @see #ATTRIBUTES_KEY_HAS_CAPTIVE_PORTAL
+ @see #ATTRIBUTES_KEY_RANKING_SCORE_OFFSET
+*/
+attributes : &quot;null&quot;,
+<span id='android-net-ScoredNetwork-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-ScoredNetwork-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-ScoredNetwork-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-ScoredNetwork-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-net-ScoredNetwork-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-net-ScoredNetwork-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-ScoredNetwork-method-hasRankingScore'>/**Returns true if a ranking score can be calculated for this network.
+</span>@hide 
+*/
+hasRankingScore : function(  ) {},
+
+<span id='android-net-ScoredNetwork-method-calculateRankingScore'>/**Returns a ranking score for a given RSSI which can be used to comparatively
+</span> rank networks.
+
+ &lt;p&gt;The score obtained by the rssiCurve is bitshifted left by 8 bits to expand it to an
+ integer and then the offset is added. If the addition operation overflows or underflows,
+ Integer.MAX_VALUE and Integer.MIN_VALUE will be returned respectively.
+
+ &lt;p&gt;{@link #hasRankingScore} should be called first to ensure this network is capable
+ of returning a ranking score.
+@throws UnsupportedOperationException if there is no RssiCurve and no rankingScoreOffset
+ for this network (hasRankingScore returns false).
+@hide 
+*/
+calculateRankingScore : function(  ) {},
+
+<span id='android-net-ScoredNetwork-method-calculateBadge'>/**Return the {@link android.net.NetworkBadging.Badging} enum for this network for the given RSSI, derived from the
+</span> badging curve.
+
+ &lt;p&gt;If no badging curve is present, {@link #BADGE_NONE} will be returned.
+@param {Number} rssi The rssi level for which the badge should be calculated
+*/
+calculateBadge : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

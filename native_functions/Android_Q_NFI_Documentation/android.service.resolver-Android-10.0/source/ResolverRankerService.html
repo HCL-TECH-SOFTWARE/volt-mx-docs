@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-resolver-ResolverRankerService'>/**@class android.service.resolver.ResolverRankerService
+</span>@extends android.app.Service
+
+ A service to rank apps according to usage stats of apps, when the system is resolving targets for
+ an Intent.
+
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with the
+ {@link android.Manifest.permission#BIND_RESOLVER_RANKER_SERVICE} permission, and include an
+ intent filter with the {@link #SERVICE_INTERFACE} action. For example:&lt;/p&gt;
+ &lt;pre&gt;
+     &amp;lt;service android:name=&quot;.MyResolverRankerService&quot;
+             android:exported=&quot;true&quot;
+             android:priority=&quot;100&quot;
+             android:permission=&quot;android.permission.BIND_RESOLVER_RANKER_SERVICE&quot;&amp;gt;
+         &amp;lt;intent-filter&amp;gt;
+             &amp;lt;action android:name=&quot;android.service.resolver.ResolverRankerService&quot; /&amp;gt;
+         &amp;lt;/intent-filter&amp;gt;
+     &amp;lt;/service&amp;gt;
+ &lt;/pre&gt;
+ @hide
+*/
+var ResolverRankerService = {
+
+<span id='android-service-resolver-ResolverRankerService-property-SERVICE_INTERFACE'>/** The Intent action that a service must respond to. Add it to the intent filter of the service
+</span> in its manifest.
+*/
+SERVICE_INTERFACE : &quot;android.service.resolver.ResolverRankerService&quot;,
+<span id='android-service-resolver-ResolverRankerService-property-HOLD_PERMISSION'>/** The permission that a service must hold. If the service does not hold the permission, the
+</span> system will skip that service.
+*/
+HOLD_PERMISSION : &quot;android.permission.PROVIDE_RESOLVER_RANKER_SERVICE&quot;,
+<span id='android-service-resolver-ResolverRankerService-property-BIND_PERMISSION'>/** The permission that a service must require to ensure that only Android system can bind to it.
+</span> If this permission is not enforced in the AndroidManifest of the service, the system will
+ skip that service.
+*/
+BIND_PERMISSION : &quot;android.permission.BIND_RESOLVER_RANKER_SERVICE&quot;,
+<span id='android-service-resolver-ResolverRankerService-method-onPredictSharingProbabilities'>/**Called by the system to retrieve a list of probabilities to rank apps/options. To implement
+</span> it, set selectProbability of each input {@link android.service.resolver.ResolverTarget}. The higher the
+ selectProbability is, the more likely the {@link android.service.resolver.ResolverTarget} will be selected by the
+ user. Override this function to provide prediction results.
+@param {Object {java.util.List}} targets a list of {@link ResolverTarget}, for the list of apps to be ranked.
+@throws Exception when the prediction task fails.
+*/
+onPredictSharingProbabilities : function(  ) {},
+
+<span id='android-service-resolver-ResolverRankerService-method-onTrainRankingModel'>/**Called by the system to train/update a ranking service, after the user makes a selection from
+</span> the ranked list of apps. Override this function to enable model updates.
+@param {Object {java.util.List}} targets a list of {@link ResolverTarget}, for the list of apps to be ranked.
+@param {Number} selectedPosition the position of the selected app in the list.
+@throws Exception when the training task fails.
+*/
+onTrainRankingModel : function(  ) {},
+
+<span id='android-service-resolver-ResolverRankerService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-resolver-ResolverRankerService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

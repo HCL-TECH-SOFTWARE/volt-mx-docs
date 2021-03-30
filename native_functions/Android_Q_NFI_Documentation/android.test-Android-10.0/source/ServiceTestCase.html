@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-test-ServiceTestCase'>/**@class android.test.ServiceTestCase
+</span>@extends android.test.AndroidTestCase
+
+ This test case provides a framework in which you can test Service classes in
+ a controlled environment.  It provides basic support for the lifecycle of a
+ Service, and hooks with which you can inject various dependencies and control
+ the environment in which your Service is tested.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about application testing, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/testing/index.html&quot;&gt;Testing&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;p&gt;&lt;b&gt;Lifecycle Support.&lt;/b&gt;
+ A Service is accessed with a specific sequence of
+ calls, as described in the
+ &lt;a href=&quot;http://developer.android.com/guide/topics/fundamentals/services.html&quot;&gt;Services&lt;/a&gt;
+ document. In order to support the lifecycle of a Service,
+ &lt;code&gt;ServiceTestCase&lt;/code&gt; enforces this protocol:
+
+ &lt;ul&gt;
+      &lt;li&gt;
+          The {@link #setUp}() method is called before each test method. The base implementation
+          gets the system context. If you override &lt;code&gt;setUp()&lt;/code&gt;, you must call
+          &lt;code&gt;super.setUp()&lt;/code&gt; as the first statement in your override.
+      &lt;/li&gt;
+      &lt;li&gt;
+          The test case waits to call {@link android.app.Service#onCreate()} until one of your
+          test methods calls {@link #startService} or {@link #bindService}.  This gives you an
+          opportunity to set up or adjust any additional framework or test logic before you test
+          the running service.
+      &lt;/li&gt;
+      &lt;li&gt;
+          When one of your test methods calls {@link #startService android.test.ServiceTestCase.startService()}
+          or {@link #bindService  android.test.ServiceTestCase.bindService()}, the test case calls
+          {@link android.app.Service#onCreate() Service.onCreate()} and then calls either
+          {@link android.app.Service#startService(Intent) Service.startService(Intent)} or
+          {@link android.app.Service#bindService(Intent, ServiceConnection, int)
+          Service.bindService(Intent, ServiceConnection, int)}, as appropriate. It also stores
+          values needed to track and support the lifecycle.
+      &lt;/li&gt;
+      &lt;li&gt;
+          After each test method finishes, the test case calls the {@link #tearDown} method. This
+          method stops and destroys the service with the appropriate calls, depending on how the
+          service was started. If you override &lt;code&gt;tearDown()&lt;/code&gt;, your must call the
+          &lt;code&gt;super.tearDown()&lt;/code&gt; as the last statement in your override.
+      &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;
+      &lt;strong&gt;Dependency Injection.&lt;/strong&gt;
+      A service has two inherent dependencies, its {@link android.content.Context Context} and its
+      associated {@link android.app.Application Application}. The ServiceTestCase framework
+      allows you to inject modified, mock, or isolated replacements for these dependencies, and
+      thus perform unit tests with controlled dependencies in an isolated environment.
+ &lt;/p&gt;
+ &lt;p&gt;
+      By default, the test case is injected with a full system context and a generic
+      {@link android.test.mock.MockApplication MockApplication} object. You can inject
+      alternatives to either of these by invoking
+      {@link android.test.AndroidTestCase#setContext(Context) setContext()} or
+      {@link #setApplication setApplication()}.  You must do this &lt;em&gt;before&lt;/em&gt; calling
+      startService() or bindService().  The test framework provides a
+      number of alternatives for Context, including
+      {@link android.test.mock.MockContext MockContext},
+      {@link android.test.RenamingDelegatingContext RenamingDelegatingContext},
+      {@link android.content.ContextWrapper ContextWrapper}, and
+      {@link android.test.IsolatedContext}.
+
+ @deprecated Use
+ &lt;a href=&quot;{@docRoot}reference/android/support/test/rule/ServiceTestRule.html&quot;&gt;
+ ServiceTestRule&lt;/a&gt; instead. New tests should be written using the
+ &lt;a href=&quot;{@docRoot}tools/testing-support-library/index.html&quot;&gt;Android Testing Support Library&lt;/a&gt;.
+*/
+var ServiceTestCase = {
+
+<span id='android-test-ServiceTestCase-method-getService'>/**
+</span>@return {Object {android.app.Service}} An instance of the service under test. This instance is created automatically when
+ a test calls {@link #startService} or {@link #bindService}.
+*/
+getService : function(  ) {},
+
+<span id='android-test-ServiceTestCase-method-setApplication'>/**Sets the application that is used during the test.  If you do not call this method,
+</span> a new {@link android.test.mock.MockApplication MockApplication} object is used.
+@param {Object {Application}} application The Application object that is used by the service under test.
+@see #getApplication()
+*/
+setApplication : function(  ) {},
+
+<span id='android-test-ServiceTestCase-method-getApplication'>/**Returns the Application object in use by the service under test.
+</span>@return {Object {android.app.Application}} The application object.
+@see #setApplication
+*/
+getApplication : function(  ) {},
+
+<span id='android-test-ServiceTestCase-method-getSystemContext'>/**Returns the real system context that is saved by {@link #setUp}(). Use it to create
+</span> mock or other types of context objects for the service under test.
+@return {Object {android.content.Context}} A normal system context.
+*/
+getSystemContext : function(  ) {},
+
+<span id='android-test-ServiceTestCase-method-testServiceTestCaseSetUpProperly'>/**Tests that {@link #setupService}() runs correctly and issues an
+</span> {@link junit.framework.Assert#assertNotNull(String, Object)} if it does.
+ You can override this test method if you wish.
+@throws Exception
+*/
+testServiceTestCaseSetUpProperly : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvInputService-HardwareSession'>/**@class android.media.tv.TvInputService.HardwareSession
+</span>@extends android.media.tv.TvInputService.Session
+
+ Base class for a TV input session which represents an external device connected to a
+ hardware TV input.
+
+ &lt;p&gt;This class is for an input which provides channels for the external set-top box to the
+ application. Once a TV input returns an implementation of this class on
+ {@link #onCreateSession}(String), the framework will create a separate session for
+ a hardware TV Input (e.g. HDMI 1) and forward the application's surface to the session so
+ that the user can see the screen of the hardware TV Input when she tunes to a channel from
+ this TV input. The implementation of this class is expected to change the channel of the
+ external set-top box via a proprietary protocol when {@link android.media.tv.TvInputService.HardwareSession#onTune} is
+ requested by the application.
+
+ &lt;p&gt;Note that this class is not for inputs for internal hardware like built-in tuner and HDMI
+ 1.
+
+ @see #onCreateSession(String)
+*/
+var HardwareSession = {
+
+<span id='android-media-tv-TvInputService-HardwareSession-method-getHardwareInputId'>/**Returns the hardware TV input ID the external device is connected to.
+</span>
+ &lt;p&gt;TV input is expected to provide {@link android.R.attr#setupActivity} so that
+ the application can launch it before using this TV input. The setup activity may let
+ the user select the hardware TV input to which the external device is connected. The ID
+ of the selected one should be stored in the TV input so that it can be returned here.
+*/
+getHardwareInputId : function(  ) {},
+
+<span id='android-media-tv-TvInputService-HardwareSession-method-onSetSurface'>/**This method will not be called in {@link android.media.tv.TvInputService.HardwareSession}. Framework will
+</span> forward the application's surface to the hardware TV input.
+*/
+onSetSurface : function(  ) {},
+
+<span id='android-media-tv-TvInputService-HardwareSession-method-onHardwareVideoAvailable'>/**Called when the underlying hardware TV input session calls
+</span> {@link android.media.tv.TvInputService.Session#notifyVideoAvailable()}.
+*/
+onHardwareVideoAvailable : function(  ) {},
+
+<span id='android-media-tv-TvInputService-HardwareSession-method-onHardwareVideoUnavailable'>/**Called when the underlying hardware TV input session calls
+</span> {@link android.media.tv.TvInputService.Session#notifyVideoUnavailable(int)}.
+@param {Number} reason The reason that the hardware TV input stopped the playback:
+ &lt;ul&gt;
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_UNKNOWN}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_TUNING}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_WEAK_SIGNAL}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_BUFFERING}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_AUDIO_ONLY}
+ &lt;/ul&gt;
+*/
+onHardwareVideoUnavailable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

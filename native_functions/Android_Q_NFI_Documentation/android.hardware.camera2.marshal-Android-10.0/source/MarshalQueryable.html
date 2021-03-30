@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-marshal-MarshalQueryable'>/**@class android.hardware.camera2.marshal.MarshalQueryable
+</span> Query if a marshaler can marshal to/from a particular native and managed type; if it supports
+ the combination, allow creating a marshaler instance to do the serialization.
+
+ &lt;p&gt;Not all queryable instances will support exactly one combination. Some, such as the
+ primitive queryable will support all primitive to/from managed mappings (as long as they are
+ 1:1). Others, such as the rectangle queryable will only support integer to rectangle mappings.
+ &lt;/p&gt;
+
+ &lt;p&gt;Yet some others are codependent on other queryables; e.g. array queryables might only support
+ a type map for {@code T[]} if another queryable exists with support for the component type
+ {@code T}.&lt;/p&gt;
+*/
+var MarshalQueryable = {
+
+<span id='android-hardware-camera2-marshal-MarshalQueryable-method-createMarshaler'>/**Create a marshaler between the selected managed and native type.
+</span>
+ &lt;p&gt;This marshaler instance is only good for that specific type mapping; and will refuse
+ to map other managed types, other native types, or an other combination that isn't
+ this exact one.&lt;/p&gt;
+@param {Object {android.hardware.camera2.utils.TypeReference}} managedType a managed type reference
+@param {Number} nativeType the native type, e.g.
+          {@link android.hardware.camera2.impl.CameraMetadataNative#TYPE_BYTE TYPE_BYTE}
+@return {Object {android.hardware.camera2.marshal.Marshaler}} 
+@throws UnsupportedOperationException
+          if {@link #isTypeMappingSupported} returns {@code false}
+*/
+createMarshaler : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalQueryable-method-isTypeMappingSupported'>/**Determine whether or not this query marshal is able to create a marshaler that will
+</span> support the managed type and native type mapping.
+
+ &lt;p&gt;If this returns {@code true}, then a marshaler can be instantiated by
+ {@link #createMarshaler} that will marshal data to/from the native type
+ from/to the managed type.&lt;/p&gt;
+
+ &lt;p&gt;Most marshalers are likely to only support one type map.&lt;/p&gt;
+*/
+isTypeMappingSupported : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

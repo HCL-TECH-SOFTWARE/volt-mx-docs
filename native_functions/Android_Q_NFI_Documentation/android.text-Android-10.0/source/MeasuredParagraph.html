@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-MeasuredParagraph'>/**@class android.text.MeasuredParagraph
+</span>@extends java.lang.Object
+
+ MeasuredParagraph provides text information for rendering purpose.
+
+ The first motivation of this class is identify the text directions and retrieving individual
+ character widths. However retrieving character widths is slower than identifying text directions.
+ Thus, this class provides several builder methods for specific purposes.
+
+ - buildForBidi:
+   Compute only text directions.
+ - buildForMeasurement:
+   Compute text direction and all character widths.
+ - buildForStaticLayout:
+   This is bit special. StaticLayout also needs to know text direction and character widths for
+   line breaking, but all things are done in native code. Similarly, text measurement is done
+   in native code. So instead of storing result to Java array, this keeps the result in native
+   code since there is no good reason to move the results to Java layer.
+
+ In addition to the character widths, some additional information is computed for each purposes,
+ e.g. whole text length for measurement or font metrics for static layout.
+
+ MeasuredParagraph is NOT a thread safe object.
+ @hide
+*/
+var MeasuredParagraph = {
+
+<span id='android-text-MeasuredParagraph-method-recycle'>/**Recycle the MeasuredParagraph.
+</span>
+ Do not call any methods after you call this method.
+*/
+recycle : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-release'>/**Releases internal buffers.
+</span>*/
+release : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getTextLength'>/**Returns the length of the paragraph.
+</span>
+ This is always available.
+*/
+getTextLength : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getChars'>/**Returns the characters to be measured.
+</span>
+ This is always available.
+*/
+getChars : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getParagraphDir'>/**Returns the paragraph direction.
+</span>
+ This is always available.
+*/
+getParagraphDir : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getDirections'>/**Returns the directions.
+</span>
+ This is always available.
+*/
+getDirections : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getWholeWidth'>/**Returns the whole text width.
+</span>
+ This is available only if the MeasuredParagraph is computed with buildForMeasurement.
+ Returns 0 in other cases.
+*/
+getWholeWidth : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getWidths'>/**Returns the individual character's width.
+</span>
+ This is available only if the MeasuredParagraph is computed with buildForMeasurement.
+ Returns empty array in other cases.
+*/
+getWidths : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getSpanEndCache'>/**Returns the MetricsAffectingSpan end indices.
+</span>
+ If the input text is not a spanned string, this has one value that is the length of the text.
+
+ This is available only if the MeasuredParagraph is computed with buildForStaticLayout.
+ Returns empty array in other cases.
+*/
+getSpanEndCache : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getFontMetrics'>/**Returns the int array which holds FontMetrics.
+</span>
+ This array holds the repeat of top, bottom, ascent, descent of font metrics value.
+
+ This is available only if the MeasuredParagraph is computed with buildForStaticLayout.
+ Returns empty array in other cases.
+*/
+getFontMetrics : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getMeasuredText'>/**Returns the native ptr of the MeasuredParagraph.
+</span>
+ This is available only if the MeasuredParagraph is computed with buildForStaticLayout.
+ Returns null in other cases.
+*/
+getMeasuredText : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getWidth'>/**Returns the width of the given range.
+</span>
+ This is not available if the MeasuredParagraph is computed with buildForBidi.
+ Returns 0 if the MeasuredParagraph is computed with buildForBidi.
+@param {Number} start the inclusive start offset of the target region in the text
+@param {Number} end the exclusive end offset of the target region in the text
+*/
+getWidth : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getBounds'>/**Retrieves the bounding rectangle that encloses all of the characters, with an implied origin
+</span> at (0, 0).
+
+ This is available only if the MeasuredParagraph is computed with buildForStaticLayout.
+*/
+getBounds : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getCharWidthAt'>/**Returns a width of the character at the offset.
+</span>
+ This is available only if the MeasuredParagraph is computed with buildForStaticLayout.
+*/
+getCharWidthAt : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-buildForBidi'>/**Generates new MeasuredParagraph for Bidi computation.
+</span>
+ If recycle is null, this returns new instance. If recycle is not null, this fills computed
+ result to recycle and returns recycle.
+@param {Object {CharSequence}} text the character sequence to be measured
+@param {Number} start the inclusive start offset of the target region in the text
+@param {Number} end the exclusive end offset of the target region in the text
+@param {Object {TextDirectionHeuristic}} textDir the text direction
+@param {Object {MeasuredParagraph}} recycle pass existing MeasuredParagraph if you want to recycle it.
+@return {Object {android.text.MeasuredParagraph}} measured text
+*/
+buildForBidi : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-buildForMeasurement'>/**Generates new MeasuredParagraph for measuring texts.
+</span>
+ If recycle is null, this returns new instance. If recycle is not null, this fills computed
+ result to recycle and returns recycle.
+@param {Object {TextPaint}} paint the paint to be used for rendering the text.
+@param {Object {CharSequence}} text the character sequence to be measured
+@param {Number} start the inclusive start offset of the target region in the text
+@param {Number} end the exclusive end offset of the target region in the text
+@param {Object {TextDirectionHeuristic}} textDir the text direction
+@param {Object {MeasuredParagraph}} recycle pass existing MeasuredParagraph if you want to recycle it.
+@return {Object {android.text.MeasuredParagraph}} measured text
+*/
+buildForMeasurement : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-buildForStaticLayout'>/**Generates new MeasuredParagraph for StaticLayout.
+</span>
+ If recycle is null, this returns new instance. If recycle is not null, this fills computed
+ result to recycle and returns recycle.
+@param {Object {TextPaint}} paint the paint to be used for rendering the text.
+@param {Object {CharSequence}} text the character sequence to be measured
+@param {Number} start the inclusive start offset of the target region in the text
+@param {Number} end the exclusive end offset of the target region in the text
+@param {Object {TextDirectionHeuristic}} textDir the text direction
+@param {Boolean} computeHyphenation true if need to compute hyphenation, otherwise false
+@param {Boolean} computeLayout true if need to compute full layout, otherwise false.
+@param {Object {MeasuredParagraph}} hint pass if you already have measured paragraph.
+@param {Object {MeasuredParagraph}} recycle pass existing MeasuredParagraph if you want to recycle it.
+@return {Object {android.text.MeasuredParagraph}} measured text
+*/
+buildForStaticLayout : function(  ) {},
+
+<span id='android-text-MeasuredParagraph-method-getMemoryUsage'>/**This only works if the MeasuredParagraph is computed with buildForStaticLayout.
+</span>*/
+getMemoryUsage : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

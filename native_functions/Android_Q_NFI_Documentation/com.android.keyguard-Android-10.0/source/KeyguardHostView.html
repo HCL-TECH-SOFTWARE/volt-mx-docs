@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-keyguard-KeyguardHostView'>/**@class com.android.keyguard.KeyguardHostView
+</span> implements com.android.keyguard.KeyguardSecurityContainer.SecurityCallback
+
+@extends android.widget.FrameLayout
+
+ Base class for keyguard view.  {@link #reset} is where you should
+ reset the state of your view.  Use the {@link KeyguardViewCallback} via
+ {@link #getCallback}() to send information back (such as poking the wake lock,
+ or finishing the keyguard).
+
+ Handles intercepting of media keys that still work when the keyguard is
+ showing.
+*/
+var KeyguardHostView = {
+
+<span id='com-android-keyguard-KeyguardHostView-property-DEBUG'>/***/
+</span>DEBUG : &quot;false&quot;,
+<span id='com-android-keyguard-KeyguardHostView-method-setOnDismissAction'>/**Sets an action to run when keyguard finishes.
+</span>@param {Object {ActivityStarter.OnDismissAction}} action
+*/
+setOnDismissAction : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-hasDismissActions'>/**
+</span>*/
+hasDismissActions : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-cancelDismissAction'>/**
+</span>*/
+cancelDismissAction : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-showPrimarySecurityScreen'>/**Called when the view needs to be shown.
+</span>*/
+showPrimarySecurityScreen : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-getCurrentSecurityView'>/**
+</span>*/
+getCurrentSecurityView : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-showPromptReason'>/**Show a string explaining why the security view needs to be solved.
+</span>@param {Number} reason a flag indicating which string should be shown, see
+               {@link KeyguardSecurityView#PROMPT_REASON_NONE},
+               {@link KeyguardSecurityView#PROMPT_REASON_RESTART} and
+               {@link KeyguardSecurityView#PROMPT_REASON_TIMEOUT}.
+*/
+showPromptReason : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-showMessage'>/**
+</span>*/
+showMessage : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-showErrorMessage'>/**
+</span>*/
+showErrorMessage : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-dismiss'>/**Dismisses the keyguard by going to the next screen or making it gone.
+</span>@param {Number} targetUserId a user that needs to be the foreground user at the dismissal completion.
+@return {Boolean} True if the keyguard is done.
+*/
+dismiss : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-handleBackKey'>/**
+</span>*/
+handleBackKey : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-dismiss'>/**
+</span>*/
+dismiss : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-finish'>/**Authentication has happened and it's time to dismiss keyguard. This function
+</span> should clean up and inform KeyguardViewMediator.
+@param {Boolean} strongAuth whether the user has authenticated with strong authentication like
+                   pattern, password or PIN but not by trust agents or fingerprint
+@param {Number} targetUserId a user that needs to be the foreground user at the dismissal completion.
+*/
+finish : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-reset'>/**
+</span>*/
+reset : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-onCancelClicked'>/**
+</span>*/
+onCancelClicked : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-resetSecurityContainer'>/**
+</span>*/
+resetSecurityContainer : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-onSecurityModeChanged'>/**
+</span>*/
+onSecurityModeChanged : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-getAccessibilityTitleForCurrentMode'>/**
+</span>*/
+getAccessibilityTitleForCurrentMode : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-userActivity'>/**
+</span>*/
+userActivity : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-onPause'>/**Called when the Keyguard is not actively shown anymore on the screen.
+</span>*/
+onPause : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-onResume'>/**Called when the Keyguard is actively shown on the screen.
+</span>*/
+onResume : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-startAppearAnimation'>/**Starts the animation when the Keyguard gets shown.
+</span>*/
+startAppearAnimation : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-startDisappearAnimation'>/**
+</span>*/
+startDisappearAnimation : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-cleanUp'>/**Called before this view is being removed.
+</span>*/
+cleanUp : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-dispatchKeyEvent'>/**
+</span>*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-interceptMediaKey'>/**Allows the media keys to work when the keyguard is showing.
+</span> The media keys should be of no interest to the actual keyguard view(s),
+ so intercepting them here should not be of any harm.
+@param {Object {KeyEvent}} event The key event
+@return {Boolean} whether the event was consumed as a media key.
+*/
+interceptMediaKey : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-dispatchSystemUiVisibilityChanged'>/**
+</span>*/
+dispatchSystemUiVisibilityChanged : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-shouldEnableMenuKey'>/**
+</span>*/
+shouldEnableMenuKey : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-setViewMediatorCallback'>/**
+</span>*/
+setViewMediatorCallback : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-setLockPatternUtils'>/**
+</span>*/
+setLockPatternUtils : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-getSecurityMode'>/**
+</span>*/
+getSecurityMode : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardHostView-method-getCurrentSecurityMode'>/**
+</span>*/
+getCurrentSecurityMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-LatencyTracker'>/**@class com.android.internal.util.LatencyTracker
+</span>@extends java.lang.Object
+
+ Class to track various latencies in SystemUI. It then outputs the latency to logcat so these
+ latencies can be captured by tests and then used for dashboards.
+ &lt;p&gt;
+ This is currently only in Keyguard so it can be shared between SystemUI and Keyguard, but
+ eventually we'd want to merge these two packages together so Keyguard can use common classes
+ that are shared with SystemUI.
+*/
+var LatencyTracker = {
+
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_EXPAND_PANEL'>/** Time it takes until the first frame of the notification panel to be displayed while expanding
+</span>*/
+ACTION_EXPAND_PANEL : &quot;0&quot;,
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_TOGGLE_RECENTS'>/** Time it takes until the first frame of recents is drawn after invoking it with the button.
+</span>*/
+ACTION_TOGGLE_RECENTS : &quot;1&quot;,
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_FINGERPRINT_WAKE_AND_UNLOCK'>/** Time between we get a fingerprint acquired signal until we start with the unlock animation
+</span>*/
+ACTION_FINGERPRINT_WAKE_AND_UNLOCK : &quot;2&quot;,
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_CHECK_CREDENTIAL'>/** Time it takes to check PIN/Pattern/Password.
+</span>*/
+ACTION_CHECK_CREDENTIAL : &quot;3&quot;,
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_CHECK_CREDENTIAL_UNLOCKED'>/** Time it takes to check fully PIN/Pattern/Password, i.e. that's the time spent including the
+</span> actions to unlock a user.
+*/
+ACTION_CHECK_CREDENTIAL_UNLOCKED : &quot;4&quot;,
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_TURN_ON_SCREEN'>/** Time it takes to turn on the screen.
+</span>*/
+ACTION_TURN_ON_SCREEN : &quot;5&quot;,
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_ROTATE_SCREEN'>/** Time it takes to rotate the screen.
+</span>*/
+ACTION_ROTATE_SCREEN : &quot;6&quot;,
+<span id='com-android-internal-util-LatencyTracker-property-ACTION_FACE_WAKE_AND_UNLOCK'>/***/
+</span>ACTION_FACE_WAKE_AND_UNLOCK : &quot;6&quot;,
+<span id='com-android-internal-util-LatencyTracker-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-internal-util-LatencyTracker-method-isEnabled'>/**
+</span>*/
+isEnabled : function(  ) {},
+
+<span id='com-android-internal-util-LatencyTracker-method-onActionStart'>/**Notifies that an action is starting. This needs to be called from the main thread.
+</span>@param {Number} action The action to start. One of the ACTION_* values.
+*/
+onActionStart : function(  ) {},
+
+<span id='com-android-internal-util-LatencyTracker-method-onActionEnd'>/**Notifies that an action has ended. This needs to be called from the main thread.
+</span>@param {Number} action The action to end. One of the ACTION_* values.
+*/
+onActionEnd : function(  ) {},
+
+<span id='com-android-internal-util-LatencyTracker-method-logAction'>/**Logs an action that has started and ended. This needs to be called from the main thread.
+</span>@param {Number} action The action to end. One of the ACTION_* values.
+@param {Number} duration The duration of the action in ms.
+*/
+logAction : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

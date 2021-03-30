@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-AnimatedImageDrawable'>/**@class android.graphics.drawable.AnimatedImageDrawable
+</span> implements android.graphics.drawable.Animatable2
+
+@extends android.graphics.drawable.Drawable
+
+ {@link android.graphics.drawable.Drawable} for drawing animated images (like GIF).
+
+ &lt;p&gt;The framework handles decoding subsequent frames in another thread and
+ updating when necessary. The drawable will only animate while it is being
+ displayed.&lt;/p&gt;
+
+ &lt;p&gt;Created by {@link ImageDecoder#decodeDrawable}. A user needs to call
+ {@link #start} to start the animation.&lt;/p&gt;
+
+ &lt;p&gt;It can also be defined in XML using the &lt;code&gt;&amp;lt;animated-image&gt;&lt;/code&gt;
+ element.&lt;/p&gt;
+
+ @attr ref android.R.styleable#AnimatedImageDrawable_src
+ @attr ref android.R.styleable#AnimatedImageDrawable_autoStart
+ @attr ref android.R.styleable#AnimatedImageDrawable_repeatCount
+ @attr ref android.R.styleable#AnimatedImageDrawable_autoMirrored
+*/
+var AnimatedImageDrawable = {
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-property-REPEAT_INFINITE'>/**  Pass this to {@link #setRepeatCount} to repeat infinitely.
+</span>
+  &lt;p&gt;{@link android.graphics.drawable.Animatable2.AnimationCallback#onAnimationEnd} will never be
+  called unless there is an error.&lt;/p&gt;
+*/
+REPEAT_INFINITE : &quot;-1&quot;,
+<span id='android-graphics-drawable-AnimatedImageDrawable-property-LOOP_INFINITE'>/**@removed
+</span> @deprecated Replaced with REPEAT_INFINITE to match other APIs.
+*/
+LOOP_INFINITE : &quot;-1&quot;,
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-setRepeatCount'>/**Specify the number of times to repeat the animation.
+</span>
+  &lt;p&gt;By default, the repeat count in the encoded data is respected. If set
+  to {@link #REPEAT_INFINITE}, the animation will repeat as long as it is
+  displayed. If the value is {@code 0}, the animation will play once.&lt;/p&gt;
+
+  &lt;p&gt;This call replaces the current repeat count. If the encoded data
+  specified a repeat count of {@code 2} (meaning that
+  {@link #getRepeatCount}() returns {@code 2}, the animation will play
+  three times. Calling {@code setRepeatCount(1)} will result in playing only
+  twice and {@link #getRepeatCount}() returning {@code 1}.&lt;/p&gt;
+
+  &lt;p&gt;If the animation is already playing, the iterations that have already
+  occurred count towards the new count. If the animation has already
+  repeated the appropriate number of times (or more), it will finish its
+  current iteration and then stop.&lt;/p&gt;
+*/
+setRepeatCount : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-setLoopCount'>/**
+</span>@removed 
+@deprecated Replaced with setRepeatCount to match other APIs.
+*/
+setLoopCount : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-getRepeatCount'>/**Retrieve the number of times the animation will repeat.
+</span>
+  &lt;p&gt;By default, the repeat count in the encoded data is respected. If the
+  value is {@link #REPEAT_INFINITE}, the animation will repeat as long as
+  it is displayed. If the value is {@code 0}, it will play once.&lt;/p&gt;
+
+  &lt;p&gt;Calling {@link #setRepeatCount} will make future calls to this method
+  return the value passed to {@link #setRepeatCount}.&lt;/p&gt;
+*/
+getRepeatCount : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-getLoopCount'>/**
+</span>@removed 
+@deprecated Replaced with getRepeatCount to match other APIs.
+*/
+getLoopCount : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-getIntrinsicWidth'>/**
+</span>*/
+getIntrinsicWidth : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-getIntrinsicHeight'>/**
+</span>*/
+getIntrinsicHeight : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-setAlpha'>/**
+</span>*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-getAlpha'>/**
+</span>*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-setColorFilter'>/**
+</span>*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-getColorFilter'>/**
+</span>*/
+getColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-getOpacity'>/**
+</span>*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-setAutoMirrored'>/**
+</span>*/
+setAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-onLayoutDirectionChanged'>/**
+</span>*/
+onLayoutDirectionChanged : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-isAutoMirrored'>/**
+</span>*/
+isAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-isRunning'>/**Return whether the animation is currently running.
+</span>
+  &lt;p&gt;When this drawable is created, this will return {@code false}. A client
+  needs to call {@link #start} to start the animation.&lt;/p&gt;
+*/
+isRunning : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-start'>/**Start the animation.
+</span>
+  &lt;p&gt;Does nothing if the animation is already running. If the animation is stopped,
+  this will reset it.&lt;/p&gt;
+
+  &lt;p&gt;When the drawable is drawn, starting the animation,
+  {@link android.graphics.drawable.Animatable2.AnimationCallback#onAnimationStart} will be called.&lt;/p&gt;
+*/
+start : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-stop'>/**Stop the animation.
+</span>
+  &lt;p&gt;If the animation is stopped, it will continue to display the frame
+  it was displaying when stopped.&lt;/p&gt;
+*/
+stop : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-registerAnimationCallback'>/**
+</span>*/
+registerAnimationCallback : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-unregisterAnimationCallback'>/**
+</span>*/
+unregisterAnimationCallback : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedImageDrawable-method-clearAnimationCallbacks'>/**
+</span>*/
+clearAnimationCallbacks : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

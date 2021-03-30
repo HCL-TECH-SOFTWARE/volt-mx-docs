@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-RelativeLayout'>/**@class android.widget.RelativeLayout
+</span>@extends android.view.ViewGroup
+
+ A Layout where the positions of the children can be described in relation to each other or to the
+ parent.
+
+ &lt;p&gt;
+ Note that you cannot have a circular dependency between the size of the RelativeLayout and the
+ position of its children. For example, you cannot have a RelativeLayout whose height is set to
+ {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT WRAP_CONTENT} and a child set to
+ {@link #ALIGN_PARENT_BOTTOM}.
+ &lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; In platform version 17 and lower, RelativeLayout was affected by
+ a measurement bug that could cause child views to be measured with incorrect
+ {@link android.view.View.MeasureSpec MeasureSpec} values. (See
+ {@link android.view.View.MeasureSpec#makeMeasureSpec(int, int) MeasureSpec.makeMeasureSpec}
+ for more details.) This was triggered when a RelativeLayout container was placed in
+ a scrolling container, such as a ScrollView or HorizontalScrollView. If a custom view
+ not equipped to properly measure with the MeasureSpec mode
+ {@link android.view.View.MeasureSpec#UNSPECIFIED UNSPECIFIED} was placed in a RelativeLayout,
+ this would silently work anyway as RelativeLayout would pass a very large
+ {@link android.view.View.MeasureSpec#AT_MOST AT_MOST} MeasureSpec instead.&lt;/p&gt;
+
+ &lt;p&gt;This behavior has been preserved for apps that set &lt;code&gt;android:targetSdkVersion=&quot;17&quot;&lt;/code&gt;
+ or older in their manifest's &lt;code&gt;uses-sdk&lt;/code&gt; tag for compatibility. Apps targeting SDK
+ version 18 or newer will receive the correct behavior&lt;/p&gt;
+
+ &lt;p&gt;See the &lt;a href=&quot;{@docRoot}guide/topics/ui/layout/relative.html&quot;&gt;Relative
+ Layout&lt;/a&gt; guide.&lt;/p&gt;
+
+ &lt;p&gt;
+ Also see {@link android.widget.RelativeLayout.LayoutParams RelativeLayout.LayoutParams} for
+ layout attributes
+ &lt;/p&gt;
+
+ @attr ref android.R.styleable#RelativeLayout_gravity
+ @attr ref android.R.styleable#RelativeLayout_ignoreGravity
+*/
+var RelativeLayout = {
+
+<span id='android-widget-RelativeLayout-property-TRUE'>/***/
+</span>TRUE : &quot;-1&quot;,
+<span id='android-widget-RelativeLayout-property-LEFT_OF'>/** Rule that aligns a child's right edge with another child's left edge.
+</span>*/
+LEFT_OF : &quot;0&quot;,
+<span id='android-widget-RelativeLayout-property-RIGHT_OF'>/** Rule that aligns a child's left edge with another child's right edge.
+</span>*/
+RIGHT_OF : &quot;1&quot;,
+<span id='android-widget-RelativeLayout-property-ABOVE'>/** Rule that aligns a child's bottom edge with another child's top edge.
+</span>*/
+ABOVE : &quot;2&quot;,
+<span id='android-widget-RelativeLayout-property-BELOW'>/** Rule that aligns a child's top edge with another child's bottom edge.
+</span>*/
+BELOW : &quot;3&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_BASELINE'>/** Rule that aligns a child's baseline with another child's baseline.
+</span>*/
+ALIGN_BASELINE : &quot;4&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_LEFT'>/** Rule that aligns a child's left edge with another child's left edge.
+</span>*/
+ALIGN_LEFT : &quot;5&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_TOP'>/** Rule that aligns a child's top edge with another child's top edge.
+</span>*/
+ALIGN_TOP : &quot;6&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_RIGHT'>/** Rule that aligns a child's right edge with another child's right edge.
+</span>*/
+ALIGN_RIGHT : &quot;7&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_BOTTOM'>/** Rule that aligns a child's bottom edge with another child's bottom edge.
+</span>*/
+ALIGN_BOTTOM : &quot;8&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_PARENT_LEFT'>/** Rule that aligns the child's left edge with its RelativeLayout
+</span> parent's left edge.
+*/
+ALIGN_PARENT_LEFT : &quot;9&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_PARENT_TOP'>/** Rule that aligns the child's top edge with its RelativeLayout
+</span> parent's top edge.
+*/
+ALIGN_PARENT_TOP : &quot;10&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_PARENT_RIGHT'>/** Rule that aligns the child's right edge with its RelativeLayout
+</span> parent's right edge.
+*/
+ALIGN_PARENT_RIGHT : &quot;11&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_PARENT_BOTTOM'>/** Rule that aligns the child's bottom edge with its RelativeLayout
+</span> parent's bottom edge.
+*/
+ALIGN_PARENT_BOTTOM : &quot;12&quot;,
+<span id='android-widget-RelativeLayout-property-CENTER_IN_PARENT'>/** Rule that centers the child with respect to the bounds of its
+</span> RelativeLayout parent.
+*/
+CENTER_IN_PARENT : &quot;13&quot;,
+<span id='android-widget-RelativeLayout-property-CENTER_HORIZONTAL'>/** Rule that centers the child horizontally with respect to the
+</span> bounds of its RelativeLayout parent.
+*/
+CENTER_HORIZONTAL : &quot;14&quot;,
+<span id='android-widget-RelativeLayout-property-CENTER_VERTICAL'>/** Rule that centers the child vertically with respect to the
+</span> bounds of its RelativeLayout parent.
+*/
+CENTER_VERTICAL : &quot;15&quot;,
+<span id='android-widget-RelativeLayout-property-START_OF'>/** Rule that aligns a child's end edge with another child's start edge.
+</span>*/
+START_OF : &quot;16&quot;,
+<span id='android-widget-RelativeLayout-property-END_OF'>/** Rule that aligns a child's start edge with another child's end edge.
+</span>*/
+END_OF : &quot;17&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_START'>/** Rule that aligns a child's start edge with another child's start edge.
+</span>*/
+ALIGN_START : &quot;18&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_END'>/** Rule that aligns a child's end edge with another child's end edge.
+</span>*/
+ALIGN_END : &quot;19&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_PARENT_START'>/** Rule that aligns the child's start edge with its RelativeLayout
+</span> parent's start edge.
+*/
+ALIGN_PARENT_START : &quot;20&quot;,
+<span id='android-widget-RelativeLayout-property-ALIGN_PARENT_END'>/** Rule that aligns the child's end edge with its RelativeLayout
+</span> parent's end edge.
+*/
+ALIGN_PARENT_END : &quot;21&quot;,
+<span id='android-widget-RelativeLayout-method-shouldDelayChildPressedState'>/**
+</span>*/
+shouldDelayChildPressedState : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-setIgnoreGravity'>/**Defines which View is ignored when the gravity is applied. This setting has no
+</span> effect if the gravity is &lt;code&gt;Gravity.START | Gravity.TOP&lt;/code&gt;.
+@param {Number} viewId The id of the View to be ignored by gravity, or 0 if no View
+        should be ignored.
+@see #setGravity(int)
+@attr ref android.R.styleable#RelativeLayout_ignoreGravity
+*/
+setIgnoreGravity : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-getIgnoreGravity'>/**Get the id of the View to be ignored by gravity
+</span>@attr ref android.R.styleable#RelativeLayout_ignoreGravity
+*/
+getIgnoreGravity : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-getGravity'>/**Describes how the child views are positioned.
+</span>@return {Number} the gravity.
+@see #setGravity(int)
+@see android.view.Gravity
+@attr ref android.R.styleable#RelativeLayout_gravity
+*/
+getGravity : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-setGravity'>/**Describes how the child views are positioned. Defaults to
+</span> &lt;code&gt;Gravity.START | Gravity.TOP&lt;/code&gt;.
+
+ &lt;p&gt;Note that since RelativeLayout considers the positioning of each child
+ relative to one another to be significant, setting gravity will affect
+ the positioning of all children as a single unit within the parent.
+ This happens after children have been relatively positioned.&lt;/p&gt;
+@param {Number} gravity See {@link android.view.Gravity}
+@see #setHorizontalGravity(int)
+@see #setVerticalGravity(int)
+@attr ref android.R.styleable#RelativeLayout_gravity
+*/
+setGravity : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-setHorizontalGravity'>/**
+</span>*/
+setHorizontalGravity : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-setVerticalGravity'>/**
+</span>*/
+setVerticalGravity : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-getBaseline'>/**
+</span>*/
+getBaseline : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-requestLayout'>/**
+</span>*/
+requestLayout : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-generateLayoutParams'>/**
+</span>*/
+generateLayoutParams : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-dispatchPopulateAccessibilityEventInternal'>/**
+</span>@hide 
+*/
+dispatchPopulateAccessibilityEventInternal : function(  ) {},
+
+<span id='android-widget-RelativeLayout-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

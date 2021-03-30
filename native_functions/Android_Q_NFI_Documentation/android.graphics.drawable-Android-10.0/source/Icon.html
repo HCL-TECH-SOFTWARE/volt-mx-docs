@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-Icon'>/**@class android.graphics.drawable.Icon
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ An umbrella container for several serializable graphics representations, including Bitmaps,
+ compressed bitmap images (e.g. JPG or PNG), and drawable resources (including vectors).
+
+ &lt;a href=&quot;https://developer.android.com/training/displaying-bitmaps/index.html&quot;&gt;Much ink&lt;/a&gt;
+ has been spilled on the best way to load images, and many clients may have different needs when
+ it comes to threading and fetching. This class is therefore focused on encapsulation rather than
+ behavior.
+*/
+var Icon = {
+
+<span id='android-graphics-drawable-Icon-property-TYPE_BITMAP'>/** An icon that was created using {@link android.graphics.drawable.Icon#createWithBitmap(Bitmap)}.
+</span> @see #getType
+*/
+TYPE_BITMAP : &quot;1&quot;,
+<span id='android-graphics-drawable-Icon-property-TYPE_RESOURCE'>/** An icon that was created using {@link android.graphics.drawable.Icon#createWithResource}.
+</span> @see #getType
+*/
+TYPE_RESOURCE : &quot;2&quot;,
+<span id='android-graphics-drawable-Icon-property-TYPE_DATA'>/** An icon that was created using {@link android.graphics.drawable.Icon#createWithData(byte[], int, int)}.
+</span> @see #getType
+*/
+TYPE_DATA : &quot;3&quot;,
+<span id='android-graphics-drawable-Icon-property-TYPE_URI'>/** An icon that was created using {@link android.graphics.drawable.Icon#createWithContentUri}
+</span> or {@link android.graphics.drawable.Icon#createWithFilePath(String)}.
+ @see #getType
+*/
+TYPE_URI : &quot;4&quot;,
+<span id='android-graphics-drawable-Icon-property-TYPE_ADAPTIVE_BITMAP'>/** An icon that was created using {@link android.graphics.drawable.Icon#createWithAdaptiveBitmap}.
+</span> @see #getType
+*/
+TYPE_ADAPTIVE_BITMAP : &quot;5&quot;,
+<span id='android-graphics-drawable-Icon-property-MIN_ASHMEM_ICON_SIZE'>/**@hide */
+</span>MIN_ASHMEM_ICON_SIZE : &quot;131072&quot;,
+<span id='android-graphics-drawable-Icon-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-graphics-drawable-Icon-method-getType'>/**Gets the type of the icon provided.
+</span> &lt;p&gt;
+ Note that new types may be added later, so callers should guard against other
+ types being returned.
+*/
+getType : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getBitmap'>/**
+</span>@return {Object {android.graphics.Bitmap}} The {@link android.graphics.Bitmap} held by this {@link #TYPE_BITMAP} Icon.
+@hide 
+*/
+getBitmap : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getDataLength'>/**
+</span>@return {Number} The length of the compressed bitmap byte array held by this {@link #TYPE_DATA} Icon.
+@hide 
+*/
+getDataLength : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getDataOffset'>/**
+</span>@return {Number} The offset into the byte array held by this {@link #TYPE_DATA} Icon at which
+ valid compressed bitmap data is found.
+@hide 
+*/
+getDataOffset : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getDataBytes'>/**
+</span>@return {Number} The byte array held by this {@link #TYPE_DATA} Icon ctonaining compressed
+ bitmap data.
+@hide 
+*/
+getDataBytes : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getResources'>/**
+</span>@return {Object {android.content.res.Resources}} The {@link android.content.res.Resources} for this {@link #TYPE_RESOURCE} Icon.
+@hide 
+*/
+getResources : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getResPackage'>/**Gets the package used to create this icon.
+</span> &lt;p&gt;
+ Only valid for icons of type {@link #TYPE_RESOURCE}.
+ Note: This package may not be available if referenced in the future, and it is
+ up to the caller to ensure safety if this package is re-used and/or persisted.
+*/
+getResPackage : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getResId'>/**Gets the resource used to create this icon.
+</span> &lt;p&gt;
+ Only valid for icons of type {@link #TYPE_RESOURCE}.
+ Note: This resource may not be available if the application changes at all, and it is
+ up to the caller to ensure safety if this resource is re-used and/or persisted.
+*/
+getResId : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getUriString'>/**
+</span>@return {String} The URI (as a String) for this {@link #TYPE_URI} Icon.
+@hide 
+*/
+getUriString : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-getUri'>/**Gets the uri used to create this icon.
+</span> &lt;p&gt;
+ Only valid for icons of type {@link #TYPE_URI}.
+ Note: This uri may not be available in the future, and it is
+ up to the caller to ensure safety if this uri is re-used and/or persisted.
+*/
+getUri : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-loadDrawableAsync'>/**Invokes {@link #loadDrawable}(Context) on the given {@link android.os.Handler Handler}
+</span> and then sends &lt;code&gt;andThen&lt;/code&gt; to the same Handler when finished.
+@param {Object {Context}} context {@link android.content.Context Context} in which to load the drawable; see
+                {@link #loadDrawable(Context)}
+@param {Object {Message}} andThen {@link android.os.Message} to send to its target once the drawable
+                is available. The {@link android.os.Message#obj obj}
+                property is populated with the Drawable.
+*/
+loadDrawableAsync : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-loadDrawableAsync'>/**Invokes {@link #loadDrawable}(Context) on a background thread and notifies the &lt;code&gt;
+</span> {@link android.graphics.drawable.Icon.OnDrawableLoadedListener#onDrawableLoaded listener} &lt;/code&gt; on the {@code handler}
+ when finished.
+@param {Object {Context}} context {@link Context Context} in which to load the drawable; see
+                {@link #loadDrawable(Context)}
+@param {Object {Icon.OnDrawableLoadedListener}} listener to be {@link OnDrawableLoadedListener#onDrawableLoaded notified} when
+                 {@link #loadDrawable(Context)} finished
+@param {Object {Handler}} handler {@link Handler} on which to notify the {@code listener}
+*/
+loadDrawableAsync : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-loadDrawable'>/**Returns a Drawable that can be used to draw the image inside this Icon, constructing it
+</span> if necessary. Depending on the type of image, this may not be something you want to do on
+ the UI thread, so consider using
+ {@link #loadDrawableAsync(Context, Message) loadDrawableAsync} instead.
+@param {Object {Context}} context {@link android.content.Context Context} in which to load the drawable; used
+                to access {@link android.content.res.Resources Resources}, for example.
+@return {Object {android.graphics.drawable.Drawable}} A fresh instance of a drawable for this image, yours to keep.
+*/
+loadDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-loadDrawableAsUser'>/**Load the requested resources under the given userId, if the system allows it,
+</span> before actually loading the drawable.
+@hide 
+*/
+loadDrawableAsUser : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-convertToAshmem'>/**Puts the memory used by this instance into Ashmem memory, if possible.
+</span>@hide 
+*/
+convertToAshmem : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-writeToStream'>/**Writes a serialized version of an Icon to the specified stream.
+</span>@param {Object {OutputStream}} stream The stream on which to serialize the Icon.
+@hide 
+*/
+writeToStream : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createFromStream'>/**Create an Icon from the specified stream.
+</span>@param {Object {InputStream}} stream The input stream from which to reconstruct the Icon.
+@hide 
+*/
+createFromStream : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-sameAs'>/**Compares if this icon is constructed from the same resources as another icon.
+</span> Note that this is an inexpensive operation and doesn't do deep Bitmap equality comparisons.
+@param {Object {Icon}} otherIcon the other icon
+@return {Boolean} whether this icon is the same as the another one
+@hide 
+*/
+sameAs : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithResource'>/**Create an Icon pointing to a drawable resource.
+</span>@param {Object {Context}} context The context for the application whose resources should be used to resolve the
+                given resource ID.
+@param {Number} resId ID of the drawable resource
+*/
+createWithResource : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithResource'>/**Version of createWithResource that takes Resources. Do not use.
+</span>@hide 
+*/
+createWithResource : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithResource'>/**Create an Icon pointing to a drawable resource.
+</span>@param {String} resPackage Name of the package containing the resource in question
+@param {Number} resId ID of the drawable resource
+*/
+createWithResource : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithBitmap'>/**Create an Icon pointing to a bitmap in memory.
+</span>@param {Object {Bitmap}} bits A valid {@link android.graphics.Bitmap} object
+*/
+createWithBitmap : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithAdaptiveBitmap'>/**Create an Icon pointing to a bitmap in memory that follows the icon design guideline defined
+</span> by {@link android.graphics.drawable.AdaptiveIconDrawable}.
+@param {Object {Bitmap}} bits A valid {@link android.graphics.Bitmap} object
+*/
+createWithAdaptiveBitmap : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithData'>/**Create an Icon pointing to a compressed bitmap stored in a byte array.
+</span>@param {Object {byte[]}} data Byte array storing compressed bitmap data of a type that
+             {@link android.graphics.BitmapFactory}
+             can decode (see {@link android.graphics.Bitmap.CompressFormat}).
+@param {Number} offset Offset into &lt;code&gt;data&lt;/code&gt; at which the bitmap data starts
+@param {Number} length Length of the bitmap data
+*/
+createWithData : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithContentUri'>/**Create an Icon pointing to an image file specified by URI.
+</span>@param {String} uri A uri referring to local content:// or file:// image data.
+*/
+createWithContentUri : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithContentUri'>/**Create an Icon pointing to an image file specified by URI.
+</span>@param {Object {Uri}} uri A uri referring to local content:// or file:// image data.
+*/
+createWithContentUri : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-setTint'>/**Store a color to use whenever this Icon is drawn.
+</span>@param {Number} tint a color, as in {@link Drawable#setTint(int)}
+@return {Object {android.graphics.drawable.Icon}} this same object, for use in chained construction
+*/
+setTint : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-setTintList'>/**Store a color to use whenever this Icon is drawn.
+</span>@param {Object {ColorStateList}} tintList as in {@link Drawable#setTintList(ColorStateList)}, null to remove tint
+@return {Object {android.graphics.drawable.Icon}} this same object, for use in chained construction
+*/
+setTintList : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-setTintMode'>/**Store a blending mode to use whenever this Icon is drawn.
+</span>@param {Object {PorterDuff.Mode}} mode a blending mode, as in {@link Drawable#setTintMode(PorterDuff.Mode)}, may be null
+@return {Object {android.graphics.drawable.Icon}} this same object, for use in chained construction
+*/
+setTintMode : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-setTintBlendMode'>/**Store a blending mode to use whenever this Icon is drawn.
+</span>@param {Object {BlendMode}} mode a blending mode, as in {@link Drawable#setTintMode(PorterDuff.Mode)}, may be null
+@return {Object {android.graphics.drawable.Icon}} this same object, for use in chained construction
+*/
+setTintBlendMode : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-hasTint'>/**
+</span>@hide 
+*/
+hasTint : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-createWithFilePath'>/**Create an Icon pointing to an image file specified by path.
+</span>@param {String} path A path to a file that contains compressed bitmap data of
+           a type that {@link android.graphics.BitmapFactory} can decode.
+*/
+createWithFilePath : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-describeContents'>/**Parcelable interface
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-scaleDownIfNecessary'>/**Scale down a bitmap to a given max width and max height. The scaling will be done in a uniform way
+</span>@param {Object {Bitmap}} bitmap the bitmap to scale down
+@param {Number} maxWidth the maximum width allowed
+@param {Number} maxHeight the maximum height allowed
+@return {Object {android.graphics.Bitmap}} the scaled bitmap if necessary or the original bitmap if no scaling was needed
+@hide 
+*/
+scaleDownIfNecessary : function(  ) {},
+
+<span id='android-graphics-drawable-Icon-method-scaleDownIfNecessary'>/**Scale down this icon to a given max width and max height.
+</span> The scaling will be done in a uniform way and currently only bitmaps are supported.
+@param {Number} maxWidth the maximum width allowed
+@param {Number} maxHeight the maximum height allowed
+@hide 
+*/
+scaleDownIfNecessary : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

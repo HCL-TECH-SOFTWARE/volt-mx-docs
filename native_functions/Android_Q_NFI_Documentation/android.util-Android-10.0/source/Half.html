@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-Half'>/**@class android.util.Half
+</span> implements java.lang.Comparable
+
+@extends java.lang.Number
+
+ &lt;p&gt;The {@code Half} class is a wrapper and a utility class to manipulate half-precision 16-bit
+ &lt;a href=&quot;https://en.wikipedia.org/wiki/Half-precision_floating-point_format&quot;&gt;IEEE 754&lt;/a&gt;
+ floating point data types (also called fp16 or binary16). A half-precision float can be
+ created from or converted to single-precision floats, and is stored in a short data type.
+ To distinguish short values holding half-precision floats from regular short values,
+ it is recommended to use the &lt;code&gt;@HalfFloat&lt;/code&gt; annotation.&lt;/p&gt;
+
+ &lt;p&gt;The IEEE 754 standard specifies an fp16 as having the following format:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Sign bit: 1 bit&lt;/li&gt;
+ &lt;li&gt;Exponent width: 5 bits&lt;/li&gt;
+ &lt;li&gt;Significand: 10 bits&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The format is laid out as follows:&lt;/p&gt;
+ &lt;pre&gt;
+ 1   11111   1111111111
+ ^   --^--   -----^----
+ sign  |          |_______ significand
+       |
+       -- exponent
+ &lt;/pre&gt;
+
+ &lt;p&gt;Half-precision floating points can be useful to save memory and/or
+ bandwidth at the expense of range and precision when compared to single-precision
+ floating points (fp32).&lt;/p&gt;
+ &lt;p&gt;To help you decide whether fp16 is the right storage type for you need, please
+ refer to the table below that shows the available precision throughout the range of
+ possible values. The &lt;em&gt;precision&lt;/em&gt; column indicates the step size between two
+ consecutive numbers in a specific part of the range.&lt;/p&gt;
+
+ &lt;table summary=&quot;Precision of fp16 across the range&quot;&gt;
+     &lt;tr&gt;&lt;th&gt;Range start&lt;/th&gt;&lt;th&gt;Precision&lt;/th&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 16,777,216&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 16,384&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 16,777,216&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 8,192&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 8,388,608&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 4,096&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 4,194,304&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 2,048&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 2,097,152&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 1,024&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 1,048,576&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 512&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 524,288&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 256&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 262,144&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 128&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 131,072&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 64&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 65,536&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 32&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 32,768&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 16&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 16,384&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 8&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 8,192&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 4&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 4,096&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1 &amp;frasl; 2&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 2,048&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 1,024&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 512&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 256&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 128&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 64&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;32&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 32&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;64&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 16&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;128&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 8&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;256&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 4&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;512&lt;/td&gt;&lt;td&gt;1 &amp;frasl; 2&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;1,024&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;2,048&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;4,096&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;8,192&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;16,384&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;32,768&lt;/td&gt;&lt;td&gt;32&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;This table shows that numbers higher than 1024 lose all fractional precision.&lt;/p&gt;
+*/
+var Half = {
+
+<span id='android-util-Half-property-SIZE'>/** The number of bits used to represent a half-precision float value.
+</span>*/
+SIZE : &quot;16&quot;,
+<span id='android-util-Half-property-EPSILON'>/** Epsilon is the difference between 1.0 and the next value representable
+</span> by a half-precision floating-point.
+*/
+EPSILON : &quot;5120&quot;,
+<span id='android-util-Half-property-MAX_EXPONENT'>/** Maximum exponent a finite half-precision float may have.
+</span>*/
+MAX_EXPONENT : &quot;15&quot;,
+<span id='android-util-Half-property-MIN_EXPONENT'>/** Minimum exponent a normalized half-precision float may have.
+</span>*/
+MIN_EXPONENT : &quot;-14&quot;,
+<span id='android-util-Half-property-LOWEST_VALUE'>/** Smallest negative value a half-precision float may have.
+</span>*/
+LOWEST_VALUE : &quot;-1025&quot;,
+<span id='android-util-Half-property-MAX_VALUE'>/** Maximum positive finite value a half-precision float may have.
+</span>*/
+MAX_VALUE : &quot;31743&quot;,
+<span id='android-util-Half-property-MIN_NORMAL'>/** Smallest positive normal value a half-precision float may have.
+</span>*/
+MIN_NORMAL : &quot;1024&quot;,
+<span id='android-util-Half-property-MIN_VALUE'>/** Smallest positive non-zero value a half-precision float may have.
+</span>*/
+MIN_VALUE : &quot;1&quot;,
+<span id='android-util-Half-property-NaN'>/** A Not-a-Number representation of a half-precision float.
+</span>*/
+NaN : &quot;32256&quot;,
+<span id='android-util-Half-property-NEGATIVE_INFINITY'>/** Negative infinity of type half-precision float.
+</span>*/
+NEGATIVE_INFINITY : &quot;-1024&quot;,
+<span id='android-util-Half-property-NEGATIVE_ZERO'>/** Negative 0 of type half-precision float.
+</span>*/
+NEGATIVE_ZERO : &quot;-32768&quot;,
+<span id='android-util-Half-property-POSITIVE_INFINITY'>/** Positive infinity of type half-precision float.
+</span>*/
+POSITIVE_INFINITY : &quot;31744&quot;,
+<span id='android-util-Half-property-POSITIVE_ZERO'>/** Positive 0 of type half-precision float.
+</span>*/
+POSITIVE_ZERO : &quot;0&quot;,
+<span id='android-util-Half-method-halfValue'>/**Returns the half-precision value of this {@code Half} as a {@code short}
+</span> containing the bit representation described in {@link android.util.Half}.
+@return {Number} The half-precision float value represented by this object
+*/
+halfValue : function(  ) {},
+
+<span id='android-util-Half-method-byteValue'>/**Returns the value of this {@code Half} as a {@code byte} after
+</span> a narrowing primitive conversion.
+@return {Number} The half-precision float value represented by this object
+         converted to type {@code byte}
+*/
+byteValue : function(  ) {},
+
+<span id='android-util-Half-method-shortValue'>/**Returns the value of this {@code Half} as a {@code short} after
+</span> a narrowing primitive conversion.
+@return {Number} The half-precision float value represented by this object
+         converted to type {@code short}
+*/
+shortValue : function(  ) {},
+
+<span id='android-util-Half-method-intValue'>/**Returns the value of this {@code Half} as a {@code int} after
+</span> a narrowing primitive conversion.
+@return {Number} The half-precision float value represented by this object
+         converted to type {@code int}
+*/
+intValue : function(  ) {},
+
+<span id='android-util-Half-method-longValue'>/**Returns the value of this {@code Half} as a {@code long} after
+</span> a narrowing primitive conversion.
+@return {Number} The half-precision float value represented by this object
+         converted to type {@code long}
+*/
+longValue : function(  ) {},
+
+<span id='android-util-Half-method-floatValue'>/**Returns the value of this {@code Half} as a {@code float} after
+</span> a widening primitive conversion.
+@return {Number} The half-precision float value represented by this object
+         converted to type {@code float}
+*/
+floatValue : function(  ) {},
+
+<span id='android-util-Half-method-doubleValue'>/**Returns the value of this {@code Half} as a {@code double} after
+</span> a widening primitive conversion.
+@return {Number} The half-precision float value represented by this object
+         converted to type {@code double}
+*/
+doubleValue : function(  ) {},
+
+<span id='android-util-Half-method-isNaN'>/**Returns true if this {@code Half} value represents a Not-a-Number,
+</span> false otherwise.
+@return {Boolean} True if the value is a NaN, false otherwise
+*/
+isNaN : function(  ) {},
+
+<span id='android-util-Half-method-equals'>/**Compares this object against the specified object. The result is {@code true}
+</span> if and only if the argument is not {@code null} and is a {@code Half} object
+ that represents the same half-precision value as the this object. Two
+ half-precision values are considered to be the same if and only if the method
+ {@link #halfToIntBits}(short) returns an identical {@code int} value for both.
+@param {Object {Object}} o The object to compare
+@return {Boolean} True if the objects are the same, false otherwise
+@see #halfToIntBits(short)
+*/
+equals : function(  ) {},
+
+<span id='android-util-Half-method-hashCode'>/**Returns a hash code for this {@code Half} object. The result is the
+</span> integer bit representation, exactly as produced by the method
+ {@link #halfToIntBits}(short), of the primitive half-precision float
+ value represented by this {@code Half} object.
+@return {Number} A hash code value for this object
+*/
+hashCode : function(  ) {},
+
+<span id='android-util-Half-method-toString'>/**Returns a string representation of the specified half-precision
+</span> float value. See {@link #toString}(short) for more information.
+@return {String} A string representation of this {@code Half} object
+*/
+toString : function(  ) {},
+
+<span id='android-util-Half-method-compareTo'>/**&lt;p&gt;Compares the two specified half-precision float values. The following
+</span> conditions apply during the comparison:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;{@link #NaN} is considered by this method to be equal to itself and greater
+ than all other half-precision float values (including {@code #POSITIVE_INFINITY})&lt;/li&gt;
+ &lt;li&gt;{@link #POSITIVE_ZERO} is considered by this method to be greater than
+ {@link #NEGATIVE_ZERO}.&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Object {Half}} h The half-precision float value to compare to the half-precision value
+          represented by this {@code Half} object
+@return {Number} The value {@code 0} if {@code x} is numerically equal to {@code y}; a
+          value less than {@code 0} if {@code x} is numerically less than {@code y};
+          and a value greater than {@code 0} if {@code x} is numerically greater
+          than {@code y}
+*/
+compareTo : function(  ) {},
+
+<span id='android-util-Half-method-hashCode'>/**Returns a hash code for a half-precision float value.
+</span>@param {Number} h The value to hash
+@return {Number} A hash code value for a half-precision float value
+*/
+hashCode : function(  ) {},
+
+<span id='android-util-Half-method-compare'>/**&lt;p&gt;Compares the two specified half-precision float values. The following
+</span> conditions apply during the comparison:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;{@link #NaN} is considered by this method to be equal to itself and greater
+ than all other half-precision float values (including {@code #POSITIVE_INFINITY})&lt;/li&gt;
+ &lt;li&gt;{@link #POSITIVE_ZERO} is considered by this method to be greater than
+ {@link #NEGATIVE_ZERO}.&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} x The first half-precision float value to compare.
+@param {Number} y The second half-precision float value to compare
+@return {Number} The value {@code 0} if {@code x} is numerically equal to {@code y}, a
+          value less than {@code 0} if {@code x} is numerically less than {@code y},
+          and a value greater than {@code 0} if {@code x} is numerically greater
+          than {@code y}
+*/
+compare : function(  ) {},
+
+<span id='android-util-Half-method-halfToShortBits'>/**&lt;p&gt;Returns a representation of the specified half-precision float value
+</span> according to the bit layout described in {@link android.util.Half}.&lt;/p&gt;
+
+ &lt;p&gt;Similar to {@link #halfToIntBits}(short), this method collapses all
+ possible Not-a-Number values to a single canonical Not-a-Number value
+ defined by {@link #NaN}.&lt;/p&gt;
+@param {Number} h A half-precision float value
+@return {Number} The bits that represent the half-precision float value
+@see #halfToIntBits(short)
+*/
+halfToShortBits : function(  ) {},
+
+<span id='android-util-Half-method-halfToIntBits'>/**&lt;p&gt;Returns a representation of the specified half-precision float value
+</span> according to the bit layout described in {@link android.util.Half}.&lt;/p&gt;
+
+ &lt;p&gt;Unlike {@link #halfToRawIntBits}(short), this method collapses all
+ possible Not-a-Number values to a single canonical Not-a-Number value
+ defined by {@link #NaN}.&lt;/p&gt;
+@param {Number} h A half-precision float value
+@return {Number} The bits that represent the half-precision float value
+@see #halfToRawIntBits(short)
+@see #halfToShortBits(short)
+@see #intBitsToHalf(int)
+*/
+halfToIntBits : function(  ) {},
+
+<span id='android-util-Half-method-halfToRawIntBits'>/**&lt;p&gt;Returns a representation of the specified half-precision float value
+</span> according to the bit layout described in {@link android.util.Half}.&lt;/p&gt;
+
+ &lt;p&gt;The argument is considered to be a representation of a half-precision
+ float value according to the bit layout described in {@link android.util.Half}. The 16
+ most significant bits of the returned value are set to 0.&lt;/p&gt;
+@param {Number} h A half-precision float value
+@return {Number} The bits that represent the half-precision float value
+@see #halfToIntBits(short)
+@see #intBitsToHalf(int)
+*/
+halfToRawIntBits : function(  ) {},
+
+<span id='android-util-Half-method-intBitsToHalf'>/**&lt;p&gt;Returns the half-precision float value corresponding to a given
+</span> bit representation.&lt;/p&gt;
+
+ &lt;p&gt;The argument is considered to be a representation of a half-precision
+ float value according to the bit layout described in {@link android.util.Half}. The 16
+ most significant bits of the argument are ignored.&lt;/p&gt;
+@param {Number} bits An integer
+@return {Number} The half-precision float value with the same bit pattern
+*/
+intBitsToHalf : function(  ) {},
+
+<span id='android-util-Half-method-copySign'>/**Returns the first parameter with the sign of the second parameter.
+</span> This method treats NaNs as having a sign.
+@param {Number} magnitude A half-precision float value providing the magnitude of the result
+@param {Number} sign  A half-precision float value providing the sign of the result
+@return {Number} A value with the magnitude of the first parameter and the sign
+         of the second parameter
+*/
+copySign : function(  ) {},
+
+<span id='android-util-Half-method-abs'>/**Returns the absolute value of the specified half-precision float.
+</span> Special values are handled in the following ways:
+ &lt;ul&gt;
+ &lt;li&gt;If the specified half-precision float is NaN, the result is NaN&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is zero (negative or positive),
+ the result is positive zero (see {@link #POSITIVE_ZERO})&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is infinity (negative or positive),
+ the result is positive infinity (see {@link #POSITIVE_INFINITY})&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} h A half-precision float value
+@return {Number} The absolute value of the specified half-precision float
+*/
+abs : function(  ) {},
+
+<span id='android-util-Half-method-round'>/**Returns the closest integral half-precision float value to the specified
+</span> half-precision float value. Special values are handled in the
+ following ways:
+ &lt;ul&gt;
+ &lt;li&gt;If the specified half-precision float is NaN, the result is NaN&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is infinity (negative or positive),
+ the result is infinity (with the same sign)&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is zero (negative or positive),
+ the result is zero (with the same sign)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} h A half-precision float value
+@return {Number} The value of the specified half-precision float rounded to the nearest
+         half-precision float value
+*/
+round : function(  ) {},
+
+<span id='android-util-Half-method-ceil'>/**Returns the smallest half-precision float value toward negative infinity
+</span> greater than or equal to the specified half-precision float value.
+ Special values are handled in the following ways:
+ &lt;ul&gt;
+ &lt;li&gt;If the specified half-precision float is NaN, the result is NaN&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is infinity (negative or positive),
+ the result is infinity (with the same sign)&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is zero (negative or positive),
+ the result is zero (with the same sign)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} h A half-precision float value
+@return {Number} The smallest half-precision float value toward negative infinity
+         greater than or equal to the specified half-precision float value
+*/
+ceil : function(  ) {},
+
+<span id='android-util-Half-method-floor'>/**Returns the largest half-precision float value toward positive infinity
+</span> less than or equal to the specified half-precision float value.
+ Special values are handled in the following ways:
+ &lt;ul&gt;
+ &lt;li&gt;If the specified half-precision float is NaN, the result is NaN&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is infinity (negative or positive),
+ the result is infinity (with the same sign)&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is zero (negative or positive),
+ the result is zero (with the same sign)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} h A half-precision float value
+@return {Number} The largest half-precision float value toward positive infinity
+         less than or equal to the specified half-precision float value
+*/
+floor : function(  ) {},
+
+<span id='android-util-Half-method-trunc'>/**Returns the truncated half-precision float value of the specified
+</span> half-precision float value. Special values are handled in the following ways:
+ &lt;ul&gt;
+ &lt;li&gt;If the specified half-precision float is NaN, the result is NaN&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is infinity (negative or positive),
+ the result is infinity (with the same sign)&lt;/li&gt;
+ &lt;li&gt;If the specified half-precision float is zero (negative or positive),
+ the result is zero (with the same sign)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} h A half-precision float value
+@return {Number} The truncated half-precision float value of the specified
+         half-precision float value
+*/
+trunc : function(  ) {},
+
+<span id='android-util-Half-method-min'>/**Returns the smaller of two half-precision float values (the value closest
+</span> to negative infinity). Special values are handled in the following ways:
+ &lt;ul&gt;
+ &lt;li&gt;If either value is NaN, the result is NaN&lt;/li&gt;
+ &lt;li&gt;{@link #NEGATIVE_ZERO} is smaller than {@link #POSITIVE_ZERO}&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} x The first half-precision value
+@param {Number} y The second half-precision value
+@return {Number} The smaller of the two specified half-precision values
+*/
+min : function(  ) {},
+
+<span id='android-util-Half-method-max'>/**Returns the larger of two half-precision float values (the value closest
+</span> to positive infinity). Special values are handled in the following ways:
+ &lt;ul&gt;
+ &lt;li&gt;If either value is NaN, the result is NaN&lt;/li&gt;
+ &lt;li&gt;{@link #POSITIVE_ZERO} is greater than {@link #NEGATIVE_ZERO}&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} x The first half-precision value
+@param {Number} y The second half-precision value
+@return {Number} The larger of the two specified half-precision values
+*/
+max : function(  ) {},
+
+<span id='android-util-Half-method-less'>/**Returns true if the first half-precision float value is less (smaller
+</span> toward negative infinity) than the second half-precision float value.
+ If either of the values is NaN, the result is false.
+@param {Number} x The first half-precision value
+@param {Number} y The second half-precision value
+@return {Boolean} True if x is less than y, false otherwise
+*/
+less : function(  ) {},
+
+<span id='android-util-Half-method-lessEquals'>/**Returns true if the first half-precision float value is less (smaller
+</span> toward negative infinity) than or equal to the second half-precision
+ float value. If either of the values is NaN, the result is false.
+@param {Number} x The first half-precision value
+@param {Number} y The second half-precision value
+@return {Boolean} True if x is less than or equal to y, false otherwise
+*/
+lessEquals : function(  ) {},
+
+<span id='android-util-Half-method-greater'>/**Returns true if the first half-precision float value is greater (larger
+</span> toward positive infinity) than the second half-precision float value.
+ If either of the values is NaN, the result is false.
+@param {Number} x The first half-precision value
+@param {Number} y The second half-precision value
+@return {Boolean} True if x is greater than y, false otherwise
+*/
+greater : function(  ) {},
+
+<span id='android-util-Half-method-greaterEquals'>/**Returns true if the first half-precision float value is greater (larger
+</span> toward positive infinity) than or equal to the second half-precision float
+ value. If either of the values is NaN, the result is false.
+@param {Number} x The first half-precision value
+@param {Number} y The second half-precision value
+@return {Boolean} True if x is greater than y, false otherwise
+*/
+greaterEquals : function(  ) {},
+
+<span id='android-util-Half-method-equals'>/**Returns true if the two half-precision float values are equal.
+</span> If either of the values is NaN, the result is false. {@link #POSITIVE_ZERO}
+ and {@link #NEGATIVE_ZERO} are considered equal.
+@param {Number} x The first half-precision value
+@param {Number} y The second half-precision value
+@return {Boolean} True if x is equal to y, false otherwise
+*/
+equals : function(  ) {},
+
+<span id='android-util-Half-method-getSign'>/**Returns the sign of the specified half-precision float.
+</span>@param {Number} h A half-precision float value
+@return {Number} 1 if the value is positive, -1 if the value is negative
+*/
+getSign : function(  ) {},
+
+<span id='android-util-Half-method-getExponent'>/**Returns the unbiased exponent used in the representation of
+</span> the specified  half-precision float value. if the value is NaN
+ or infinite, this* method returns {@link #MAX_EXPONENT} + 1.
+ If the argument is 0 or a subnormal representation, this method
+ returns {@link #MIN_EXPONENT} - 1.
+@param {Number} h A half-precision float value
+@return {Number} The unbiased exponent of the specified value
+*/
+getExponent : function(  ) {},
+
+<span id='android-util-Half-method-getSignificand'>/**Returns the significand, or mantissa, used in the representation
+</span> of the specified half-precision float value.
+@param {Number} h A half-precision float value
+@return {Number} The significand, or significand, of the specified vlaue
+*/
+getSignificand : function(  ) {},
+
+<span id='android-util-Half-method-isInfinite'>/**Returns true if the specified half-precision float value represents
+</span> infinity, false otherwise.
+@param {Number} h A half-precision float value
+@return {Boolean} True if the value is positive infinity or negative infinity,
+         false otherwise
+*/
+isInfinite : function(  ) {},
+
+<span id='android-util-Half-method-isNaN'>/**Returns true if the specified half-precision float value represents
+</span> a Not-a-Number, false otherwise.
+@param {Number} h A half-precision float value
+@return {Boolean} True if the value is a NaN, false otherwise
+*/
+isNaN : function(  ) {},
+
+<span id='android-util-Half-method-isNormalized'>/**Returns true if the specified half-precision float value is normalized
+</span> (does not have a subnormal representation). If the specified value is
+ {@link #POSITIVE_INFINITY}, {@link #NEGATIVE_INFINITY},
+ {@link #POSITIVE_ZERO}, {@link #NEGATIVE_ZERO}, NaN or any subnormal
+ number, this method returns false.
+@param {Number} h A half-precision float value
+@return {Boolean} True if the value is normalized, false otherwise
+*/
+isNormalized : function(  ) {},
+
+<span id='android-util-Half-method-toFloat'>/**&lt;p&gt;Converts the specified half-precision float value into a
+</span> single-precision float value. The following special cases are handled:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;If the input is {@link #NaN}, the returned value is {@link Float#NaN}&lt;/li&gt;
+ &lt;li&gt;If the input is {@link #POSITIVE_INFINITY} or
+ {@link #NEGATIVE_INFINITY}, the returned value is respectively
+ {@link Float#POSITIVE_INFINITY} or {@link Float#NEGATIVE_INFINITY}&lt;/li&gt;
+ &lt;li&gt;If the input is 0 (positive or negative), the returned value is +/-0.0f&lt;/li&gt;
+ &lt;li&gt;Otherwise, the returned value is a normalized single-precision float value&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} h The half-precision float value to convert to single-precision
+@return {Number} A normalized single-precision float value
+*/
+toFloat : function(  ) {},
+
+<span id='android-util-Half-method-toHalf'>/**&lt;p&gt;Converts the specified single-precision float value into a
+</span> half-precision float value. The following special cases are handled:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;If the input is NaN (see {@link Float#isNaN(float)}), the returned
+ value is {@link #NaN}&lt;/li&gt;
+ &lt;li&gt;If the input is {@link Float#POSITIVE_INFINITY} or
+ {@link Float#NEGATIVE_INFINITY}, the returned value is respectively
+ {@link #POSITIVE_INFINITY} or {@link #NEGATIVE_INFINITY}&lt;/li&gt;
+ &lt;li&gt;If the input is 0 (positive or negative), the returned value is
+ {@link #POSITIVE_ZERO} or {@link #NEGATIVE_ZERO}&lt;/li&gt;
+ &lt;li&gt;If the input is a less than {@link #MIN_VALUE}, the returned value
+ is flushed to {@link #POSITIVE_ZERO} or {@link #NEGATIVE_ZERO}&lt;/li&gt;
+ &lt;li&gt;If the input is a less than {@link #MIN_NORMAL}, the returned value
+ is a denorm half-precision float&lt;/li&gt;
+ &lt;li&gt;Otherwise, the returned value is rounded to the nearest
+ representable half-precision float value&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} f The single-precision float value to convert to half-precision
+@return {Number} A half-precision float value
+*/
+toHalf : function(  ) {},
+
+<span id='android-util-Half-method-valueOf'>/**Returns a {@code Half} instance representing the specified
+</span> half-precision float value.
+@param {Number} h A half-precision float value
+@return {Object {android.util.Half}} a {@code Half} instance representing {@code h}
+*/
+valueOf : function(  ) {},
+
+<span id='android-util-Half-method-valueOf'>/**Returns a {@code Half} instance representing the specified float value.
+</span>@param {Number} f A float value
+@return {Object {android.util.Half}} a {@code Half} instance representing {@code f}
+*/
+valueOf : function(  ) {},
+
+<span id='android-util-Half-method-valueOf'>/**Returns a {@code Half} instance representing the specified string value.
+</span> Calling this method is equivalent to calling
+ &lt;code&gt;toHalf(Float.parseString(h))&lt;/code&gt;. See {@link Float#valueOf(String)}
+ for more information on the format of the string representation.
+@param {String} s The string to be parsed
+@return {Object {android.util.Half}} a {@code Half} instance representing {@code h}
+@throws NumberFormatException if the string does not contain a parsable
+         half-precision float value
+*/
+valueOf : function(  ) {},
+
+<span id='android-util-Half-method-parseHalf'>/**Returns the half-precision float value represented by the specified string.
+</span> Calling this method is equivalent to calling
+ &lt;code&gt;toHalf(Float.parseString(h))&lt;/code&gt;. See {@link Float#valueOf(String)}
+ for more information on the format of the string representation.
+@param {String} s The string to be parsed
+@return {Number} A half-precision float value represented by the string
+@throws NumberFormatException if the string does not contain a parsable
+         half-precision float value
+*/
+parseHalf : function(  ) {},
+
+<span id='android-util-Half-method-toString'>/**Returns a string representation of the specified half-precision
+</span> float value. Calling this method is equivalent to calling
+ &lt;code&gt;Float.toString(toFloat(h))&lt;/code&gt;. See {@link Float#toString(float)}
+ for more information on the format of the string representation.
+@param {Number} h A half-precision float value
+@return {String} A string representation of the specified value
+*/
+toString : function(  ) {},
+
+<span id='android-util-Half-method-toHexString'>/**&lt;p&gt;Returns a hexadecimal string representation of the specified half-precision
+</span> float value. If the value is a NaN, the result is &lt;code&gt;&quot;NaN&quot;&lt;/code&gt;,
+ otherwise the result follows this format:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;If the sign is positive, no sign character appears in the result&lt;/li&gt;
+ &lt;li&gt;If the sign is negative, the first character is &lt;code&gt;'-'&lt;/code&gt;&lt;/li&gt;
+ &lt;li&gt;If the value is inifinity, the string is &lt;code&gt;&quot;Infinity&quot;&lt;/code&gt;&lt;/li&gt;
+ &lt;li&gt;If the value is 0, the string is &lt;code&gt;&quot;0x0.0p0&quot;&lt;/code&gt;&lt;/li&gt;
+ &lt;li&gt;If the value has a normalized representation, the exponent and
+ significand are represented in the string in two fields. The significand
+ starts with &lt;code&gt;&quot;0x1.&quot;&lt;/code&gt; followed by its lowercase hexadecimal
+ representation. Trailing zeroes are removed unless all digits are 0, then
+ a single zero is used. The significand representation is followed by the
+ exponent, represented by &lt;code&gt;&quot;p&quot;&lt;/code&gt;, itself followed by a decimal
+ string of the unbiased exponent&lt;/li&gt;
+ &lt;li&gt;If the value has a subnormal representation, the significand starts
+ with &lt;code&gt;&quot;0x0.&quot;&lt;/code&gt; followed by its lowercase hexadecimal
+ representation. Trailing zeroes are removed unless all digits are 0, then
+ a single zero is used. The significand representation is followed by the
+ exponent, represented by &lt;code&gt;&quot;p-14&quot;&lt;/code&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} h A half-precision float value
+@return {String} A hexadecimal string representation of the specified value
+*/
+toHexString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

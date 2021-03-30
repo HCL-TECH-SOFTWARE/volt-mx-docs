@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-bitmap-RequestKey'>/**@class com.android.bitmap.RequestKey
+</span> The decode task uses this class to get input to decode. You must implement at least one of
+ {@link #createFileDescriptorFactoryAsync(RequestKey, com.android.bitmap.ContiguousFIFOAggregator.Callback)} or {@link #createInputStream}().
+ {@link com.android.bitmap.DecodeTask} will prioritize
+ {@link #createFileDescriptorFactoryAsync(RequestKey, com.android.bitmap.ContiguousFIFOAggregator.Callback)} before falling back to
+ {@link #createInputStream}().
+
+ &lt;p&gt;
+ Clients of this interface must also implement {@link #equals}(Object) and {@link #hashCode}() as
+ this object will be used as a cache key.
+
+ &lt;p&gt;
+ The following is a high level view of the interactions between RequestKey and the rest of the
+ system.
+
+       BasicBitmapDrawable
+           UI Thread
+              ++
+       bind() ||            Background Thread
+              |+--------------------&gt;+
+              || createFDFasync()   ||
+              ||                    || Download from url
+              ||                    || Cache on disk
+              ||                    ||
+              ||                    vv
+              |&lt;--------------------+x
+              ||        FDFcreated()
+              ||
+              ||
+              ||                DecodeTask
+              ||             AsyncTask Thread
+              |+--------------------&gt;+
+              || new().execute()    ||
+              ||                    || Decode from FDF
+              ||                    || or createInputStream()
+              ||                    ||
+              ||                    vv
+              |&lt;--------------------+x
+              ||  onDecodeComplete()
+              vv
+ invalidate() xx
+*/
+var RequestKey = {
+
+<span id='com-android-bitmap-RequestKey-method-createFileDescriptorFactoryAsync'>/**Create an {@link com.android.bitmap.RequestKey.FileDescriptorFactory} for a local file stored on the device and pass it to
+</span> the given callback. This method will be called in favor of {@link #createInputStream}()},
+ which will only be called if null is returned from this method,
+ or {@link com.android.bitmap.ContiguousFIFOAggregator.Callback#fileDescriptorFactoryCreated(RequestKey, com.android.bitmap.RequestKey.FileDescriptorFactory)} is called
+ with a null FileDescriptorFactory.
+
+ Clients should implement this method if files are in the local cache folder, or if files must
+ be downloaded and cached.
+
+ This method must be called from the UI thread.
+@param {Object {RequestKey}} key      The key to create a FileDescriptorFactory for. This key will be passed to the
+                 callback so it can check whether the key has changed.
+@param {Object {RequestKey.Callback}} callback The callback to notify once the FileDescriptorFactory is created or has failed
+                 to be created.
+                 Do not invoke the callback directly from this method. Instead, create a handler
+                 and post a Runnable.
+@return {Object {com.android.bitmap.RequestKey.Cancelable}} If the client will attempt to create a FileDescriptorFactory, return a Cancelable
+ object to cancel the asynchronous task. If the client wants to create an InputStream instead,
+ return null. The callback must be notified if and only if the client returns a Cancelable
+ object and not null.
+*/
+createFileDescriptorFactoryAsync : function(  ) {},
+
+<span id='com-android-bitmap-RequestKey-method-createInputStream'>/**Create an {@link InputStream} for the source. This method will be called if
+</span> {@link #createFileDescriptorFactoryAsync(RequestKey, com.android.bitmap.ContiguousFIFOAggregator.Callback)} returns null.
+
+ Clients should implement this method if files exist in the assets/ folder, or for prototypes
+ that open a connection directly on a URL (be warned that this will cause GCs).
+
+ This method can be called from any thread.
+*/
+createInputStream : function(  ) {},
+
+<span id='com-android-bitmap-RequestKey-method-hasOrientationExif'>/**Return true if the image source may have be oriented in either portrait or landscape, and
+</span> will need to be automatically re-oriented based on accompanying Exif metadata.
+
+ This method can be called from any thread.
+*/
+hasOrientationExif : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-view-InputBindResult-ResultCode'>/**@class com.android.internal.view.InputBindResult.ResultCode
+</span> implements java.lang.annotation.Annotation
+
+*/
+var ResultCode = {
+
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-SUCCESS_WITH_IME_SESSION'>/** Indicates that everything in this result object including {@link #method} is valid.
+</span>*/
+SUCCESS_WITH_IME_SESSION : &quot;0&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-SUCCESS_WAITING_IME_SESSION'>/** Indicates that this is a temporary binding until the
+</span> {@link android.inputmethodservice.InputMethodService} (IMS) establishes a valid session
+ to {@link com.android.server.inputmethod.InputMethodManagerService} (IMMS).
+
+ &lt;p&gt;Note that in this state the IMS is already bound to IMMS but the logical session
+ is not yet established on top of the IPC channel.&lt;/p&gt;
+
+ &lt;p&gt;Some of fields such as {@link #channel} is not yet available.&lt;/p&gt;
+
+ @see android.inputmethodservice.InputMethodService##onCreateInputMethodSessionInterface()
+*/
+SUCCESS_WAITING_IME_SESSION : &quot;1&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-SUCCESS_WAITING_IME_BINDING'>/** Indicates that this is a temporary binding until the
+</span> {@link android.inputmethodservice.InputMethodService} (IMS) establishes a valid session
+ to {@link com.android.server.inputmethod.InputMethodManagerService} (IMMS).
+
+ &lt;p&gt;Note that in this state the IMMS has already initiated a connection to the IMS but
+ the binding process is not completed yet.&lt;/p&gt;
+
+ &lt;p&gt;Some of fields such as {@link #channel} is not yet available.&lt;/p&gt;
+ @see android.content.ServiceConnection#onServiceConnected(ComponentName, IBinder)
+*/
+SUCCESS_WAITING_IME_BINDING : &quot;2&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-SUCCESS_REPORT_WINDOW_FOCUS_ONLY'>/** Indicates that this is not intended for starting input but just for reporting window
+</span> focus change from the application process.
+
+ &lt;p&gt;All other fields do not have meaningful value.&lt;/p&gt;
+*/
+SUCCESS_REPORT_WINDOW_FOCUS_ONLY : &quot;3&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_NULL'>/** Indicates somehow
+</span> {@link com.android.server.inputmethod.InputMethodManagerService#startInputOrWindowGainedFocus}
+ is trying to return null {@link com.android.internal.view.InputBindResult}, which must never happen.
+*/
+ERROR_NULL : &quot;4&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_NO_IME'>/** Indicates that {@link com.android.server.inputmethod.InputMethodManagerService}
+</span> recognizes no IME.
+*/
+ERROR_NO_IME : &quot;5&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_INVALID_PACKAGE_NAME'>/** Indicates that {@link android.view.inputmethod.EditorInfo#packageName} does not match
+</span> the caller UID.
+
+ @see android.view.inputmethod.EditorInfo#packageName
+*/
+ERROR_INVALID_PACKAGE_NAME : &quot;6&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_SYSTEM_NOT_READY'>/** Indicates that the system is still in an early stage of the boot process and any 3rd
+</span> party application is not allowed to run.
+
+ @see com.android.server.SystemService#PHASE_THIRD_PARTY_APPS_CAN_START
+*/
+ERROR_SYSTEM_NOT_READY : &quot;7&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_IME_NOT_CONNECTED'>/** Indicates that {@link com.android.server.inputmethod.InputMethodManagerService} tried to
+</span> connect to an {@link android.inputmethodservice.InputMethodService} but failed.
+
+ @see android.content.Context#bindServiceAsUser(Intent, ServiceConnection, int, UserHandle)
+*/
+ERROR_IME_NOT_CONNECTED : &quot;8&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_INVALID_USER'>/** Indicates that the caller is not the foreground user, does not have
+</span> {@link android.Manifest.permission#INTERACT_ACROSS_USERS_FULL} permission, or the user
+ specified in {@link android.view.inputmethod.EditorInfo#targetInputMethodUser} is not
+ running.
+*/
+ERROR_INVALID_USER : &quot;9&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_NULL_EDITOR_INFO'>/** Indicates that the caller should have specified non-null
+</span> {@link android.view.inputmethod.EditorInfo}.
+*/
+ERROR_NULL_EDITOR_INFO : &quot;10&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_NOT_IME_TARGET_WINDOW'>/** Indicates that the target window the client specified cannot be the IME target right now.
+</span>
+ &lt;p&gt;Due to the asynchronous nature of Android OS, we cannot completely avoid this error.
+ The client should try to restart input when its {@link android.view.Window} is focused
+ again.&lt;/p&gt;
+
+ @see com.android.server.wm.WindowManagerInternal#isInputMethodClientFocus(int, int, int)
+*/
+ERROR_NOT_IME_TARGET_WINDOW : &quot;11&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_NO_EDITOR'>/** Indicates that focused view in the current window is not an editor.
+</span>*/
+ERROR_NO_EDITOR : &quot;12&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_DISPLAY_ID_MISMATCH'>/** Indicates that there is a mismatch in display ID between IME client and focused Window.
+</span>*/
+ERROR_DISPLAY_ID_MISMATCH : &quot;13&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_INVALID_DISPLAY_ID'>/** Indicates that current IME client is no longer allowed to access to the associated
+</span> display.
+*/
+ERROR_INVALID_DISPLAY_ID : &quot;14&quot;,
+<span id='com-android-internal-view-InputBindResult-ResultCode-property-ERROR_INVALID_CLIENT'>/** Indicates that the client is not recognized by the system.
+</span>*/
+ERROR_INVALID_CLIENT : &quot;15&quot;,
+
+};</pre>
+</body>
+</html>

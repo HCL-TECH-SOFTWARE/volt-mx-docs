@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-opengl-GLSurfaceView-Renderer'>/**@class android.opengl.GLSurfaceView.Renderer
+</span> A generic renderer interface.
+ &lt;p&gt;
+ The renderer is responsible for making OpenGL calls to render a frame.
+ &lt;p&gt;
+ GLSurfaceView clients typically create their own classes that implement
+ this interface, and then call {@link android.opengl.GLSurfaceView#setRenderer} to
+ register the renderer with the GLSurfaceView.
+ &lt;p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about how to use OpenGL, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/graphics/opengl.html&quot;&gt;OpenGL&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;h3&gt;Threading&lt;/h3&gt;
+ The renderer will be called on a separate thread, so that rendering
+ performance is decoupled from the UI thread. Clients typically need to
+ communicate with the renderer from the UI thread, because that's where
+ input events are received. Clients can communicate using any of the
+ standard Java techniques for cross-thread communication, or they can
+ use the {@link android.opengl.GLSurfaceView#queueEvent(Runnable)} convenience method.
+ &lt;p&gt;
+ &lt;h3&gt;EGL Context Lost&lt;/h3&gt;
+ There are situations where the EGL rendering context will be lost. This
+ typically happens when device wakes up after going to sleep. When
+ the EGL context is lost, all OpenGL resources (such as textures) that are
+ associated with that context will be automatically deleted. In order to
+ keep rendering correctly, a renderer must recreate any lost resources
+ that it still needs. The {@link #onSurfaceCreated(GL10, android.opengl.EGLConfig)} method
+ is a convenient place to do this.
+
+
+ @see #setRenderer(Renderer)
+*/
+var Renderer = {
+
+<span id='android-opengl-GLSurfaceView-Renderer-method-onSurfaceCreated'>/**Called when the surface is created or recreated.
+</span> &lt;p&gt;
+ Called when the rendering thread
+ starts and whenever the EGL context is lost. The EGL context will typically
+ be lost when the Android device awakes after going to sleep.
+ &lt;p&gt;
+ Since this method is called at the beginning of rendering, as well as
+ every time the EGL context is lost, this method is a convenient place to put
+ code to create resources that need to be created when the rendering
+ starts, and that need to be recreated when the EGL context is lost.
+ Textures are an example of a resource that you might want to create
+ here.
+ &lt;p&gt;
+ Note that when the EGL context is lost, all OpenGL resources associated
+ with that context will be automatically deleted. You do not need to call
+ the corresponding &quot;glDelete&quot; methods such as glDeleteTextures to
+ manually delete these lost resources.
+ &lt;p&gt;
+@param {Object {GL10}} gl the GL interface. Use &lt;code&gt;instanceof&lt;/code&gt; to
+ test if the interface supports GL11 or higher interfaces.
+@param {Object {EGLConfig}} config the EGLConfig of the created surface. Can be used
+ to create matching pbuffers.
+*/
+onSurfaceCreated : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-Renderer-method-onSurfaceChanged'>/**Called when the surface changed size.
+</span> &lt;p&gt;
+ Called after the surface is created and whenever
+ the OpenGL ES surface size changes.
+ &lt;p&gt;
+ Typically you will set your viewport here. If your camera
+ is fixed then you could also set your projection matrix here:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ void onSurfaceChanged(GL10 gl, int width, int height) {
+     gl.glViewport(0, 0, width, height);
+     // for a fixed camera, set the projection too
+     float ratio = (float) width / height;
+     gl.glMatrixMode(GL10.GL_PROJECTION);
+     gl.glLoadIdentity();
+     gl.glFrustumf(-ratio, ratio, -1, 1, 1, 10);
+ }
+ &lt;/pre&gt;
+@param {Object {GL10}} gl the GL interface. Use &lt;code&gt;instanceof&lt;/code&gt; to
+ test if the interface supports GL11 or higher interfaces.
+@param {Number} width
+@param {Number} height
+*/
+onSurfaceChanged : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-Renderer-method-onDrawFrame'>/**Called to draw the current frame.
+</span> &lt;p&gt;
+ This method is responsible for drawing the current frame.
+ &lt;p&gt;
+ The implementation of this method typically looks like this:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ void onDrawFrame(GL10 gl) {
+     gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+     //... other gl calls to render the scene ...
+ }
+ &lt;/pre&gt;
+@param {Object {GL10}} gl the GL interface. Use &lt;code&gt;instanceof&lt;/code&gt; to
+ test if the interface supports GL11 or higher interfaces.
+*/
+onDrawFrame : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

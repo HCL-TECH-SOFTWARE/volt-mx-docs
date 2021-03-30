@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-SettingInjectorService'>/**@class android.location.SettingInjectorService
+</span>@extends android.app.Service
+
+ Dynamically specifies the summary (subtitle) and enabled status of a preference injected into
+ the list of app settings displayed by the system settings app
+ &lt;p/&gt;
+ For use only by apps that are included in the system image, for preferences that affect multiple
+ apps. Location settings that apply only to one app should be shown within that app,
+ rather than in the system settings.
+ &lt;p/&gt;
+ To add a preference to the list, a subclass of {@link android.location.SettingInjectorService} must be declared in
+ the manifest as so:
+
+ &lt;pre&gt;
+     &amp;lt;service android:name=&quot;com.example.android.injector.MyInjectorService&quot; &amp;gt;
+         &amp;lt;intent-filter&amp;gt;
+             &amp;lt;action android:name=&quot;android.location.SettingInjectorService&quot; /&amp;gt;
+         &amp;lt;/intent-filter&amp;gt;
+
+         &amp;lt;meta-data
+             android:name=&quot;android.location.SettingInjectorService&quot;
+             android:resource=&quot;@xml/my_injected_location_setting&quot; /&amp;gt;
+     &amp;lt;/service&amp;gt;
+ &lt;/pre&gt;
+ The resource file specifies the static data for the setting:
+ &lt;pre&gt;
+     &amp;lt;injected-location-setting xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+         android:title=&quot;@string/injected_setting_title&quot;
+         android:icon=&quot;@drawable/ic_acme_corp&quot;
+         android:settingsActivity=&quot;com.example.android.injector.MySettingActivity&quot;
+     /&amp;gt;
+ &lt;/pre&gt;
+ Here:
+ &lt;ul&gt;
+ &lt;li&gt;title: The {@link android.preference.Preference#getTitle()} value. The title should make
+ it clear which apps are affected by the setting, typically by including the name of the
+ developer. For example, &quot;Acme Corp. ads preferences.&quot; &lt;/li&gt;
+
+ &lt;li&gt;icon: The {@link android.preference.Preference#getIcon()} value. Typically this will be a
+ generic icon for the developer rather than the icon for an individual app.&lt;/li&gt;
+
+ &lt;li&gt;settingsActivity: the activity which is launched to allow the user to modify the setting
+ value.  The activity must be in the same package as the subclass of
+ {@link android.location.SettingInjectorService}. The activity should use your own branding to help emphasize
+ to the user that it is not part of the system settings.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ To ensure a good user experience, your {@link android.app.Application#onCreate()},
+ {@link #onGetSummary}(), and {@link #onGetEnabled}() methods must all be fast. If any are slow,
+ it can delay the display of settings values for other apps as well. Note further that all are
+ called on your app's UI thread.
+ &lt;p/&gt;
+ For compactness, only one copy of a given setting should be injected. If each account has a
+ distinct value for the setting, then the {@link #onGetSummary}() value should represent a summary
+ of the state across all of the accounts and {@code settingsActivity} should display the value for
+ each account.
+*/
+var SettingInjectorService = {
+
+<span id='android-location-SettingInjectorService-property-ACTION_SERVICE_INTENT'>/** Intent action that must be declared in the manifest for the subclass. Used to start the
+</span> service to read the dynamic status for the setting.
+*/
+ACTION_SERVICE_INTENT : &quot;android.location.SettingInjectorService&quot;,
+<span id='android-location-SettingInjectorService-property-META_DATA_NAME'>/** Name of the meta-data tag used to specify the resource file that includes the settings
+</span> attributes.
+*/
+META_DATA_NAME : &quot;android.location.SettingInjectorService&quot;,
+<span id='android-location-SettingInjectorService-property-ATTRIBUTES_NAME'>/** Name of the XML tag that includes the attributes for the setting.
+</span>*/
+ATTRIBUTES_NAME : &quot;injected-location-setting&quot;,
+<span id='android-location-SettingInjectorService-property-ACTION_INJECTED_SETTING_CHANGED'>/** Intent action a client should broadcast when the value of one of its injected settings has
+</span> changed, so that the setting can be updated in the UI.
+*/
+ACTION_INJECTED_SETTING_CHANGED : &quot;android.location.InjectedSettingChanged&quot;,
+<span id='android-location-SettingInjectorService-property-SUMMARY_KEY'>/** Name of the bundle key for the string specifying the summary for the setting (e.g., &quot;ON&quot; or
+</span> &quot;OFF&quot;).
+
+ @hide
+*/
+SUMMARY_KEY : &quot;summary&quot;,
+<span id='android-location-SettingInjectorService-property-ENABLED_KEY'>/** Name of the bundle key for the string specifying whether the setting is currently enabled.
+</span>
+ @hide
+*/
+ENABLED_KEY : &quot;enabled&quot;,
+<span id='android-location-SettingInjectorService-property-MESSENGER_KEY'>/** Name of the intent key used to specify the messenger
+</span>
+ @hide
+*/
+MESSENGER_KEY : &quot;messenger&quot;,
+<span id='android-location-SettingInjectorService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-location-SettingInjectorService-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='android-location-SettingInjectorService-method-onStartCommand'>/**
+</span>*/
+onStartCommand : function(  ) {},
+
+<span id='android-location-SettingInjectorService-method-refreshSettings'>/**Sends a broadcast to refresh the injected settings on location settings page.
+</span>*/
+refreshSettings : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

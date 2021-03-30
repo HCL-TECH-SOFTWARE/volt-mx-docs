@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvContract-Channels-Logo'>/**@class android.media.tv.TvContract.Channels.Logo
+</span>@extends java.lang.Object
+
+ A sub-directory of a single TV channel that represents its primary logo.
+
+ &lt;p&gt;To access this directory, append {@link android.media.tv.TvContract.Channels.Logo#CONTENT_DIRECTORY} to the raw
+ channel URI.  The resulting URI represents an image file, and should be interacted
+ using ContentResolver.openAssetFileDescriptor.
+
+ &lt;p&gt;Note that this sub-directory also supports opening the logo as an asset file in write
+ mode.  Callers can create or replace the primary logo associated with this channel by
+ opening the asset file and writing the full-size photo contents into it. (Make sure there
+ is no padding around the logo image.) When the file is closed, the image will be parsed,
+ sized down if necessary, and stored.
+
+ &lt;p&gt;Usage example:
+ &lt;pre&gt;
+ public void writeChannelLogo(long channelId, byte[] logo) {
+     Uri channelLogoUri = TvContract.buildChannelLogoUri(channelId);
+     try {
+         AssetFileDescriptor fd =
+             getContentResolver().openAssetFileDescriptor(channelLogoUri, &quot;rw&quot;);
+         OutputStream os = fd.createOutputStream();
+         os.write(logo);
+         os.close();
+         fd.close();
+     } catch (IOException e) {
+         // Handle error cases.
+     }
+ }
+ &lt;/pre&gt;
+*/
+var Logo = {
+
+<span id='android-media-tv-TvContract-Channels-Logo-property-CONTENT_DIRECTORY'>/** The directory twig for this sub-table.
+</span>*/
+CONTENT_DIRECTORY : &quot;logo&quot;,
+
+};</pre>
+</body>
+</html>

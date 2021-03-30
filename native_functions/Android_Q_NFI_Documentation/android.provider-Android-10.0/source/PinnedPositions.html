@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-PinnedPositions'>/**@class android.provider.ContactsContract.PinnedPositions
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ Contact-specific information about whether or not a contact has been pinned by the user
+ at a particular position within the system contact application's user interface.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This pinning information can be used by individual applications to customize how
+ they order particular pinned contacts. For example, a Dialer application could
+ use pinned information to order user-pinned contacts in a top row of favorites.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ It is possible for two or more contacts to occupy the same pinned position (due
+ to aggregation and sync), so this pinning information should be used on a best-effort
+ basis to order contacts in-application rather than an absolute guide on where a contact
+ should be positioned. Contacts returned by the ContactsProvider will not be ordered based
+ on this information, so it is up to the client application to reorder these contacts within
+ their own UI adhering to (or ignoring as appropriate) information stored in the pinned
+ column.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ By default, unpinned contacts will have a pinned position of
+ {@link android.provider.ContactsContract.PinnedPositions#UNPINNED}. Client-provided pinned positions can be positive
+ integers that are greater than 1.
+ &lt;/p&gt;
+*/
+var PinnedPositions = {
+
+<span id='android-provider-ContactsContract-PinnedPositions-property-UNDEMOTE_METHOD'>/** The method to invoke in order to undemote a formerly demoted contact. The contact id of
+</span> the contact must be provided as an argument. If the contact was not previously demoted,
+ nothing will be done.
+ @hide
+*/
+UNDEMOTE_METHOD : &quot;undemote&quot;,
+<span id='android-provider-ContactsContract-PinnedPositions-property-UNPINNED'>/** Default value for the pinned position of an unpinned contact.
+</span>*/
+UNPINNED : &quot;0&quot;,
+<span id='android-provider-ContactsContract-PinnedPositions-property-DEMOTED'>/** Value of pinned position for a contact that a user has indicated should be considered
+</span> of the lowest priority. It is up to the client application to determine how to present
+ such a contact - for example all the way at the bottom of a contact list, or simply
+ just hidden from view.
+*/
+DEMOTED : &quot;-1&quot;,
+<span id='android-provider-ContactsContract-PinnedPositions-method-undemote'>/**Undemotes a formerly demoted contact. If the contact was not previously demoted, nothing
+</span> will be done.
+@param {Object {ContentResolver}} contentResolver to perform the undemote operation on.
+@param {Number} contactId the id of the contact to undemote.
+*/
+undemote : function(  ) {},
+
+<span id='android-provider-ContactsContract-PinnedPositions-method-pin'>/**Pins a contact at a provided position, or unpins a contact.
+</span>@param {Object {ContentResolver}} contentResolver to perform the pinning operation on.
+@param {Number} pinnedPosition the position to pin the contact at. To unpin a contact, use
+         {@link PinnedPositions#UNPINNED}.
+*/
+pin : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

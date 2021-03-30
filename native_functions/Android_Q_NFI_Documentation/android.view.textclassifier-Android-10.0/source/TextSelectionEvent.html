@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-textclassifier-TextClassifierEvent-TextSelectionEvent'>/**@class android.view.textclassifier.TextClassifierEvent.TextSelectionEvent
+</span> implements android.os.Parcelable
+
+@extends android.view.textclassifier.TextClassifierEvent
+
+ This class represents events that are related to the smart text selection feature.
+ &lt;p&gt;
+ &lt;pre&gt;
+     // User started a selection. e.g. &quot;York&quot; in text &quot;New York City, NY&quot;.
+     new TextSelectionEvent.Builder(TYPE_SELECTION_STARTED)
+         .setEventContext(classificationContext)
+         .setEventIndex(0)
+         .build();
+
+     // System smart-selects a recognized entity. e.g. &quot;New York City&quot;.
+     new TextSelectionEvent.Builder(TYPE_SMART_SELECTION_MULTI)
+         .setEventContext(classificationContext)
+         .setResultId(textSelection.getId())
+         .setRelativeWordStartIndex(-1) // Goes back one word to &quot;New&quot; from &quot;York&quot;.
+         .setRelativeWordEndIndex(2)    // Goes forward 2 words from &quot;York&quot; to start of &quot;,&quot;.
+         .setEntityTypes(textClassification.getEntity(0))
+         .setScore(textClassification.getConfidenceScore(entityType))
+         .setEventIndex(1)
+         .build();
+
+     // User resets the selection to the original selection. i.e. &quot;York&quot;.
+     new TextSelectionEvent.Builder(TYPE_SELECTION_RESET)
+         .setEventContext(classificationContext)
+         .setResultId(textSelection.getId())
+         .setRelativeSuggestedWordStartIndex(-1) // Repeated from above.
+         .setRelativeSuggestedWordEndIndex(2)    // Repeated from above.
+         .setRelativeWordStartIndex(0)           // Original selection is always at (0, 1].
+         .setRelativeWordEndIndex(1)
+         .setEntityTypes(textClassification.getEntity(0))
+         .setScore(textClassification.getConfidenceScore(entityType))
+         .setEventIndex(2)
+         .build();
+
+     // User modified the selection. e.g. &quot;New&quot;.
+     new TextSelectionEvent.Builder(TYPE_SELECTION_MODIFIED)
+         .setEventContext(classificationContext)
+         .setResultId(textSelection.getId())
+         .setRelativeSuggestedWordStartIndex(-1) // Repeated from above.
+         .setRelativeSuggestedWordEndIndex(2)    // Repeated from above.
+         .setRelativeWordStartIndex(-1)          // Goes backward one word from &quot;York&quot; to
+         &quot;New&quot;.
+         .setRelativeWordEndIndex(0)             // Goes backward one word to exclude &quot;York&quot;.
+         .setEntityTypes(textClassification.getEntity(0))
+         .setScore(textClassification.getConfidenceScore(entityType))
+         .setEventIndex(3)
+         .build();
+
+     // Smart (contextual) actions (at indices, 0, 1, 2) presented to the user.
+     // e.g. &quot;Map&quot;, &quot;Ride share&quot;, &quot;Explore&quot;.
+     new TextSelectionEvent.Builder(TYPE_ACTIONS_SHOWN)
+         .setEventContext(classificationContext)
+         .setResultId(textClassification.getId())
+         .setEntityTypes(textClassification.getEntity(0))
+         .setScore(textClassification.getConfidenceScore(entityType))
+         .setActionIndices(0, 1, 2)
+         .setEventIndex(4)
+         .build();
+
+     // User chooses the &quot;Copy&quot; action.
+     new TextSelectionEvent.Builder(TYPE_COPY_ACTION)
+         .setEventContext(classificationContext)
+         .setResultId(textClassification.getId())
+         .setEntityTypes(textClassification.getEntity(0))
+         .setScore(textClassification.getConfidenceScore(entityType))
+         .setEventIndex(5)
+         .build();
+
+     // User chooses smart action at index 1. i.e. &quot;Ride share&quot;.
+     new TextSelectionEvent.Builder(TYPE_SMART_ACTION)
+         .setEventContext(classificationContext)
+         .setResultId(textClassification.getId())
+         .setEntityTypes(textClassification.getEntity(0))
+         .setScore(textClassification.getConfidenceScore(entityType))
+         .setActionIndices(1)
+         .setEventIndex(5)
+         .build();
+
+     // Selection dismissed.
+     new TextSelectionEvent.Builder(TYPE_SELECTION_DESTROYED)
+         .setEventContext(classificationContext)
+         .setResultId(textClassification.getId())
+         .setEntityTypes(textClassification.getEntity(0))
+         .setScore(textClassification.getConfidenceScore(entityType))
+         .setEventIndex(6)
+         .build();
+ &lt;/pre&gt;
+ &lt;p&gt;
+*/
+var TextSelectionEvent = {
+
+<span id='android-view-textclassifier-TextClassifierEvent-TextSelectionEvent-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-TextSelectionEvent-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-TextSelectionEvent-method-getRelativeWordStartIndex'>/**Returns the relative word index of the start of the selection.
+</span>*/
+getRelativeWordStartIndex : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-TextSelectionEvent-method-getRelativeWordEndIndex'>/**Returns the relative word (exclusive) index of the end of the selection.
+</span>*/
+getRelativeWordEndIndex : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-TextSelectionEvent-method-getRelativeSuggestedWordStartIndex'>/**Returns the relative word index of the start of the smart selection.
+</span>*/
+getRelativeSuggestedWordStartIndex : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-TextSelectionEvent-method-getRelativeSuggestedWordEndIndex'>/**Returns the relative word (exclusive) index of the end of the
+</span> smart selection.
+*/
+getRelativeSuggestedWordEndIndex : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

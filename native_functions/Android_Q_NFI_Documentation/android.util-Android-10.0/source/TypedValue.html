@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-TypedValue'>/**@class android.util.TypedValue
+</span>@extends java.lang.Object
+
+ Container for a dynamically typed data value.  Primarily used with
+ {@link android.content.res.Resources} for holding resource values.
+*/
+var TypedValue = {
+
+<span id='android-util-TypedValue-property-TYPE_NULL'>/**The value contains no data. */
+</span>TYPE_NULL : &quot;0&quot;,
+<span id='android-util-TypedValue-property-TYPE_REFERENCE'>/**The &lt;var&gt;data&lt;/var&gt; field holds a resource identifier. */
+</span>TYPE_REFERENCE : &quot;1&quot;,
+<span id='android-util-TypedValue-property-TYPE_ATTRIBUTE'>/**The &lt;var&gt;data&lt;/var&gt; field holds an attribute resource
+</span>  identifier (referencing an attribute in the current theme
+  style, not a resource entry). */
+TYPE_ATTRIBUTE : &quot;2&quot;,
+<span id='android-util-TypedValue-property-TYPE_STRING'>/**The &lt;var&gt;string&lt;/var&gt; field holds string data.  In addition, if
+</span>  &lt;var&gt;data&lt;/var&gt; is non-zero then it is the string block
+  index of the string and &lt;var&gt;assetCookie&lt;/var&gt; is the set of
+  assets the string came from. */
+TYPE_STRING : &quot;3&quot;,
+<span id='android-util-TypedValue-property-TYPE_FLOAT'>/**The &lt;var&gt;data&lt;/var&gt; field holds an IEEE 754 floating point number. */
+</span>TYPE_FLOAT : &quot;4&quot;,
+<span id='android-util-TypedValue-property-TYPE_DIMENSION'>/**The &lt;var&gt;data&lt;/var&gt; field holds a complex number encoding a
+</span>  dimension value. */
+TYPE_DIMENSION : &quot;5&quot;,
+<span id='android-util-TypedValue-property-TYPE_FRACTION'>/**The &lt;var&gt;data&lt;/var&gt; field holds a complex number encoding a fraction
+</span>  of a container. */
+TYPE_FRACTION : &quot;6&quot;,
+<span id='android-util-TypedValue-property-TYPE_FIRST_INT'>/**Identifies the start of plain integer values.  Any type value
+</span>  from this to {@link #TYPE_LAST_INT} means the
+  &lt;var&gt;data&lt;/var&gt; field holds a generic integer value. */
+TYPE_FIRST_INT : &quot;16&quot;,
+<span id='android-util-TypedValue-property-TYPE_INT_DEC'>/**The &lt;var&gt;data&lt;/var&gt; field holds a number that was
+</span>  originally specified in decimal. */
+TYPE_INT_DEC : &quot;16&quot;,
+<span id='android-util-TypedValue-property-TYPE_INT_HEX'>/**The &lt;var&gt;data&lt;/var&gt; field holds a number that was
+</span>  originally specified in hexadecimal (0xn). */
+TYPE_INT_HEX : &quot;17&quot;,
+<span id='android-util-TypedValue-property-TYPE_INT_BOOLEAN'>/**The &lt;var&gt;data&lt;/var&gt; field holds 0 or 1 that was originally
+</span>  specified as &quot;false&quot; or &quot;true&quot;. */
+TYPE_INT_BOOLEAN : &quot;18&quot;,
+<span id='android-util-TypedValue-property-TYPE_FIRST_COLOR_INT'>/**Identifies the start of integer values that were specified as
+</span>  color constants (starting with '#'). */
+TYPE_FIRST_COLOR_INT : &quot;28&quot;,
+<span id='android-util-TypedValue-property-TYPE_INT_COLOR_ARGB8'>/**The &lt;var&gt;data&lt;/var&gt; field holds a color that was originally
+</span>  specified as #aarrggbb. */
+TYPE_INT_COLOR_ARGB8 : &quot;28&quot;,
+<span id='android-util-TypedValue-property-TYPE_INT_COLOR_RGB8'>/**The &lt;var&gt;data&lt;/var&gt; field holds a color that was originally
+</span>  specified as #rrggbb. */
+TYPE_INT_COLOR_RGB8 : &quot;29&quot;,
+<span id='android-util-TypedValue-property-TYPE_INT_COLOR_ARGB4'>/**The &lt;var&gt;data&lt;/var&gt; field holds a color that was originally
+</span>  specified as #argb. */
+TYPE_INT_COLOR_ARGB4 : &quot;30&quot;,
+<span id='android-util-TypedValue-property-TYPE_INT_COLOR_RGB4'>/**The &lt;var&gt;data&lt;/var&gt; field holds a color that was originally
+</span>  specified as #rgb. */
+TYPE_INT_COLOR_RGB4 : &quot;31&quot;,
+<span id='android-util-TypedValue-property-TYPE_LAST_COLOR_INT'>/**Identifies the end of integer values that were specified as color
+</span>  constants. */
+TYPE_LAST_COLOR_INT : &quot;31&quot;,
+<span id='android-util-TypedValue-property-TYPE_LAST_INT'>/**Identifies the end of plain integer values. */
+</span>TYPE_LAST_INT : &quot;31&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_SHIFT'>/**Complex data: bit location of unit information. */
+</span>COMPLEX_UNIT_SHIFT : &quot;0&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_MASK'>/**Complex data: mask to extract unit information (after shifting by
+</span>  {@link #COMPLEX_UNIT_SHIFT}). This gives us 16 possible types, as
+  defined below. */
+COMPLEX_UNIT_MASK : &quot;15&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_PX'>/**{@link #TYPE_DIMENSION} complex unit: Value is raw pixels. */
+</span>COMPLEX_UNIT_PX : &quot;0&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_DIP'>/**{@link #TYPE_DIMENSION} complex unit: Value is Device Independent
+</span>  Pixels. */
+COMPLEX_UNIT_DIP : &quot;1&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_SP'>/**{@link #TYPE_DIMENSION} complex unit: Value is a scaled pixel. */
+</span>COMPLEX_UNIT_SP : &quot;2&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_PT'>/**{@link #TYPE_DIMENSION} complex unit: Value is in points. */
+</span>COMPLEX_UNIT_PT : &quot;3&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_IN'>/**{@link #TYPE_DIMENSION} complex unit: Value is in inches. */
+</span>COMPLEX_UNIT_IN : &quot;4&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_MM'>/**{@link #TYPE_DIMENSION} complex unit: Value is in millimeters. */
+</span>COMPLEX_UNIT_MM : &quot;5&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_FRACTION'>/**{@link #TYPE_FRACTION} complex unit: A basic fraction of the overall
+</span>  size. */
+COMPLEX_UNIT_FRACTION : &quot;0&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_UNIT_FRACTION_PARENT'>/**{@link #TYPE_FRACTION} complex unit: A fraction of the parent size. */
+</span>COMPLEX_UNIT_FRACTION_PARENT : &quot;1&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_RADIX_SHIFT'>/**Complex data: where the radix information is, telling where the decimal
+</span>  place appears in the mantissa. */
+COMPLEX_RADIX_SHIFT : &quot;4&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_RADIX_MASK'>/**Complex data: mask to extract radix information (after shifting by
+</span> {@link #COMPLEX_RADIX_SHIFT}). This give us 4 possible fixed point 
+ representations as defined below. */
+COMPLEX_RADIX_MASK : &quot;3&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_RADIX_23p0'>/**Complex data: the mantissa is an integral number -- i.e., 0xnnnnnn.0 */
+</span>COMPLEX_RADIX_23p0 : &quot;0&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_RADIX_16p7'>/**Complex data: the mantissa magnitude is 16 bits -- i.e, 0xnnnn.nn */
+</span>COMPLEX_RADIX_16p7 : &quot;1&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_RADIX_8p15'>/**Complex data: the mantissa magnitude is 8 bits -- i.e, 0xnn.nnnn */
+</span>COMPLEX_RADIX_8p15 : &quot;2&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_RADIX_0p23'>/**Complex data: the mantissa magnitude is 0 bits -- i.e, 0x0.nnnnnn */
+</span>COMPLEX_RADIX_0p23 : &quot;3&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_MANTISSA_SHIFT'>/**Complex data: bit location of mantissa information. */
+</span>COMPLEX_MANTISSA_SHIFT : &quot;8&quot;,
+<span id='android-util-TypedValue-property-COMPLEX_MANTISSA_MASK'>/**Complex data: mask to extract mantissa information (after shifting by
+</span>  {@link #COMPLEX_MANTISSA_SHIFT}). This gives us 23 bits of precision;
+  the top bit is the sign. */
+COMPLEX_MANTISSA_MASK : &quot;16777215&quot;,
+<span id='android-util-TypedValue-property-DATA_NULL_UNDEFINED'>/** {@link #TYPE_NULL} data indicating the value was not specified.
+</span>*/
+DATA_NULL_UNDEFINED : &quot;0&quot;,
+<span id='android-util-TypedValue-property-DATA_NULL_EMPTY'>/** {@link #TYPE_NULL} data indicating the value was explicitly set to null.
+</span>*/
+DATA_NULL_EMPTY : &quot;1&quot;,
+<span id='android-util-TypedValue-property-DENSITY_DEFAULT'>/** If {@link #density} is equal to this value, then the density should be
+</span> treated as the system's default density value: {@link android.util.DisplayMetrics#DENSITY_DEFAULT}.
+*/
+DENSITY_DEFAULT : &quot;0&quot;,
+<span id='android-util-TypedValue-property-DENSITY_NONE'>/** If {@link #density} is equal to this value, then there is no density
+</span> associated with the resource and it should not be scaled.
+*/
+DENSITY_NONE : &quot;65535&quot;,
+<span id='android-util-TypedValue-property-type'>/**The type held by this value, as defined by the constants here.
+</span>  This tells you how to interpret the other fields in the object. */
+type : &quot;null&quot;,
+<span id='android-util-TypedValue-property-string'>/**If the value holds a string, this is it. */
+</span>string : &quot;null&quot;,
+<span id='android-util-TypedValue-property-data'>/**Basic data in the value, interpreted according to {@link #type} */
+</span>data : &quot;null&quot;,
+<span id='android-util-TypedValue-property-assetCookie'>/**Additional information about where the value came from; only
+</span>  set for strings. */
+assetCookie : &quot;null&quot;,
+<span id='android-util-TypedValue-property-resourceId'>/**If Value came from a resource, this holds the corresponding resource id. */
+</span>resourceId : &quot;null&quot;,
+<span id='android-util-TypedValue-property-changingConfigurations'>/** If the value came from a resource, these are the configurations for
+</span> which its contents can change.
+
+ &lt;p&gt;For example, if a resource has a value defined for the -land resource qualifier,
+ this field will have the {@link android.content.pm.ActivityInfo#CONFIG_ORIENTATION} bit set.
+ &lt;/p&gt;
+
+ @see android.content.pm.ActivityInfo#CONFIG_MCC
+ @see android.content.pm.ActivityInfo#CONFIG_MNC
+ @see android.content.pm.ActivityInfo#CONFIG_LOCALE
+ @see android.content.pm.ActivityInfo#CONFIG_TOUCHSCREEN
+ @see android.content.pm.ActivityInfo#CONFIG_KEYBOARD
+ @see android.content.pm.ActivityInfo#CONFIG_KEYBOARD_HIDDEN
+ @see android.content.pm.ActivityInfo#CONFIG_NAVIGATION
+ @see android.content.pm.ActivityInfo#CONFIG_ORIENTATION
+ @see android.content.pm.ActivityInfo#CONFIG_SCREEN_LAYOUT
+ @see android.content.pm.ActivityInfo#CONFIG_UI_MODE
+ @see android.content.pm.ActivityInfo#CONFIG_SCREEN_SIZE
+ @see android.content.pm.ActivityInfo#CONFIG_SMALLEST_SCREEN_SIZE
+ @see android.content.pm.ActivityInfo#CONFIG_DENSITY
+ @see android.content.pm.ActivityInfo#CONFIG_LAYOUT_DIRECTION
+ @see android.content.pm.ActivityInfo#CONFIG_COLOR_MODE
+
+*/
+changingConfigurations : &quot;null&quot;,
+<span id='android-util-TypedValue-property-density'>/** If the Value came from a resource, this holds the corresponding pixel density.
+</span> */
+density : &quot;null&quot;,
+<span id='android-util-TypedValue-property-sourceResourceId'>/** If the Value came from a style resource or a layout resource (set in an XML layout), this
+</span> holds the corresponding style or layout resource id against which the attribute was resolved.
+*/
+sourceResourceId : &quot;null&quot;,
+<span id='android-util-TypedValue-method-getFloat'>/**Return the data for this value as a float.  Only use for values
+</span>  whose type is {@link #TYPE_FLOAT}.
+*/
+getFloat : function(  ) {},
+
+<span id='android-util-TypedValue-method-isColorType'>/**Determine if a value is a color.
+</span>
+ This works by comparing {@link #type} to {@link #TYPE_FIRST_COLOR_INT}
+ and {@link #TYPE_LAST_COLOR_INT}.
+@return {Boolean} true if this value is a color
+*/
+isColorType : function(  ) {},
+
+<span id='android-util-TypedValue-method-complexToFloat'>/**Retrieve the base value from a complex data integer.  This uses the 
+</span> {@link #COMPLEX_MANTISSA_MASK} and {@link #COMPLEX_RADIX_MASK} fields of 
+ the data to compute a floating point representation of the number they 
+ describe.  The units are ignored.
+@param {Number} complex A complex data value.
+@return {Number} A floating point value corresponding to the complex data.
+*/
+complexToFloat : function(  ) {},
+
+<span id='android-util-TypedValue-method-complexToDimension'>/**Converts a complex data value holding a dimension to its final floating 
+</span> point value. The given &lt;var&gt;data&lt;/var&gt; must be structured as a 
+ {@link #TYPE_DIMENSION}.
+@param {Number} data A complex data value holding a unit, magnitude, and 
+             mantissa.
+@param {Object {DisplayMetrics}} metrics Current display metrics to use in the conversion -- 
+                supplies display density and scaling information.
+@return {Number} The complex floating point value multiplied by the appropriate 
+ metrics depending on its unit.
+*/
+complexToDimension : function(  ) {},
+
+<span id='android-util-TypedValue-method-complexToDimensionPixelOffset'>/**Converts a complex data value holding a dimension to its final value
+</span> as an integer pixel offset.  This is the same as
+ {@link #complexToDimension}, except the raw floating point value is
+ truncated to an integer (pixel) value.
+ The given &lt;var&gt;data&lt;/var&gt; must be structured as a 
+ {@link #TYPE_DIMENSION}.
+@param {Number} data A complex data value holding a unit, magnitude, and 
+             mantissa.
+@param {Object {DisplayMetrics}} metrics Current display metrics to use in the conversion -- 
+                supplies display density and scaling information.
+@return {Number} The number of pixels specified by the data and its desired
+ multiplier and units.
+*/
+complexToDimensionPixelOffset : function(  ) {},
+
+<span id='android-util-TypedValue-method-complexToDimensionPixelSize'>/**Converts a complex data value holding a dimension to its final value
+</span> as an integer pixel size.  This is the same as
+ {@link #complexToDimension}, except the raw floating point value is
+ converted to an integer (pixel) value for use as a size.  A size
+ conversion involves rounding the base value, and ensuring that a
+ non-zero base value is at least one pixel in size.
+ The given &lt;var&gt;data&lt;/var&gt; must be structured as a 
+ {@link #TYPE_DIMENSION}.
+@param {Number} data A complex data value holding a unit, magnitude, and 
+             mantissa.
+@param {Object {DisplayMetrics}} metrics Current display metrics to use in the conversion -- 
+                supplies display density and scaling information.
+@return {Number} The number of pixels specified by the data and its desired
+ multiplier and units.
+*/
+complexToDimensionPixelSize : function(  ) {},
+
+<span id='android-util-TypedValue-method-complexToDimensionNoisy'>/**
+</span>@hide Was accidentally exposed in API level 1 for debugging purposes.
+ Kept for compatibility just in case although the debugging code has been removed.
+*/
+complexToDimensionNoisy : function(  ) {},
+
+<span id='android-util-TypedValue-method-getComplexUnit'>/**Return the complex unit type for this value. For example, a dimen type
+</span> with value 12sp will return {@link #COMPLEX_UNIT_SP}. Only use for values
+ whose type is {@link #TYPE_DIMENSION}.
+@return {Number} The complex unit type.
+*/
+getComplexUnit : function(  ) {},
+
+<span id='android-util-TypedValue-method-applyDimension'>/**Converts an unpacked complex data value holding a dimension to its final floating 
+</span> point value. The two parameters &lt;var&gt;unit&lt;/var&gt; and &lt;var&gt;value&lt;/var&gt;
+ are as in {@link #TYPE_DIMENSION}.
+@param {Number} unit The unit to convert from.
+@param {Number} value The value to apply the unit to.
+@param {Object {DisplayMetrics}} metrics Current display metrics to use in the conversion -- 
+                supplies display density and scaling information.
+@return {Number} The complex floating point value multiplied by the appropriate 
+ metrics depending on its unit.
+*/
+applyDimension : function(  ) {},
+
+<span id='android-util-TypedValue-method-getDimension'>/**Return the data for this value as a dimension.  Only use for values 
+</span> whose type is {@link #TYPE_DIMENSION}.
+@param {Object {DisplayMetrics}} metrics Current display metrics to use in the conversion -- 
+                supplies display density and scaling information.
+@return {Number} The complex floating point value multiplied by the appropriate 
+ metrics depending on its unit.
+*/
+getDimension : function(  ) {},
+
+<span id='android-util-TypedValue-method-complexToFraction'>/**Converts a complex data value holding a fraction to its final floating 
+</span> point value. The given &lt;var&gt;data&lt;/var&gt; must be structured as a 
+ {@link #TYPE_FRACTION}.
+@param {Number} data A complex data value holding a unit, magnitude, and 
+             mantissa.
+@param {Number} base The base value of this fraction.  In other words, a 
+             standard fraction is multiplied by this value.
+@param {Number} pbase The parent base value of this fraction.  In other 
+             words, a parent fraction (nn%p) is multiplied by this
+             value.
+@return {Number} The complex floating point value multiplied by the appropriate 
+ base value depending on its unit.
+*/
+complexToFraction : function(  ) {},
+
+<span id='android-util-TypedValue-method-getFraction'>/**Return the data for this value as a fraction.  Only use for values whose 
+</span> type is {@link #TYPE_FRACTION}.
+@param {Number} base The base value of this fraction.  In other words, a 
+             standard fraction is multiplied by this value.
+@param {Number} pbase The parent base value of this fraction.  In other 
+             words, a parent fraction (nn%p) is multiplied by this
+             value.
+@return {Number} The complex floating point value multiplied by the appropriate 
+ base value depending on its unit.
+*/
+getFraction : function(  ) {},
+
+<span id='android-util-TypedValue-method-coerceToString'>/**Regardless of the actual type of the value, try to convert it to a
+</span> string value.  For example, a color type will be converted to a
+ string of the form #aarrggbb.
+@return {Object {java.lang.CharSequence}} CharSequence The coerced string value.  If the value is
+         null or the type is not known, null is returned.
+*/
+coerceToString : function(  ) {},
+
+<span id='android-util-TypedValue-method-coerceToString'>/**Perform type conversion as per {@link #coerceToString}() on an
+</span> explicitly supplied type and data.
+@param {Number} type The data type identifier.
+@param {Number} data The data value.
+@return {String} String The coerced string value.  If the value is
+         null or the type is not known, null is returned.
+*/
+coerceToString : function(  ) {},
+
+<span id='android-util-TypedValue-method-setTo'>/**
+</span>*/
+setTo : function(  ) {},
+
+<span id='android-util-TypedValue-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

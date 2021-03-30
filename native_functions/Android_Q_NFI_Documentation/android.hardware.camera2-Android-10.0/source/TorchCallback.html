@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-CameraManager-TorchCallback'>/**@class android.hardware.camera2.CameraManager.TorchCallback
+</span>@extends java.lang.Object
+
+ A callback for camera flash torch modes becoming unavailable, disabled, or enabled.
+
+ &lt;p&gt;The torch mode becomes unavailable when the camera device it belongs to becomes
+ unavailable or other camera resources it needs become busy due to other higher priority
+ camera activities. The torch mode becomes disabled when it was turned off or when the camera
+ device it belongs to is no longer in use and other camera resources it needs are no longer
+ busy. A camera's torch mode is turned off when an application calls {@link #setTorchMode} to
+ turn off the camera's torch mode, or when an application turns on another camera's torch mode
+ if keeping multiple torch modes on simultaneously is not supported. The torch mode becomes
+ enabled when it is turned on via {@link #setTorchMode}.&lt;/p&gt;
+
+ &lt;p&gt;The torch mode is available to set via {@link #setTorchMode} only when it's in a disabled
+ or enabled state.&lt;/p&gt;
+
+ &lt;p&gt;Extend this callback and pass an instance of the subclass to
+ {@link android.hardware.camera2.CameraManager#registerTorchCallback} to be notified of such status changes.
+ &lt;/p&gt;
+
+ @see #registerTorchCallback
+*/
+var TorchCallback = {
+
+<span id='android-hardware-camera2-CameraManager-TorchCallback-method-onTorchModeUnavailable'>/**A camera's torch mode has become unavailable to set via {@link #setTorchMode}.
+</span>
+ &lt;p&gt;If torch mode was previously turned on by calling {@link #setTorchMode}, it will be
+ turned off before {@link android.hardware.camera2.CameraManager.TorchCallback#onTorchModeUnavailable} is
+ invoked. {@link #setTorchMode} will fail until the torch mode has entered a disabled or
+ enabled state again.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {String} cameraId The unique identifier of the camera whose torch mode has become
+                 unavailable.
+*/
+onTorchModeUnavailable : function(  ) {},
+
+<span id='android-hardware-camera2-CameraManager-TorchCallback-method-onTorchModeChanged'>/**A camera's torch mode has become enabled or disabled and can be changed via
+</span> {@link #setTorchMode}.
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {String} cameraId The unique identifier of the camera whose torch mode has been changed.
+@param {Boolean} enabled The state that the torch mode of the camera has been changed to.
+                {@code true} when the torch mode has become on and available to be turned
+                off. {@code false} when the torch mode has becomes off and available to
+                be turned on.
+*/
+onTorchModeChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvInputService'>/**@class android.media.tv.TvInputService
+</span>@extends android.app.Service
+
+ The TvInputService class represents a TV input or source such as HDMI or built-in tuner which
+ provides pass-through video or broadcast TV programs.
+
+ &lt;p&gt;Applications will not normally use this service themselves, instead relying on the standard
+ interaction provided by {@link android.media.tv.TvView}. Those implementing TV input services should normally do
+ so by deriving from this class and providing their own session implementation based on
+ {@link android.media.tv.TvInputService.Session}. All TV input services must require that clients hold the
+ {@link android.Manifest.permission#BIND_TV_INPUT} in order to interact with the service; if this
+ permission is not specified in the manifest, the system will refuse to bind to that TV input
+ service.
+*/
+var TvInputService = {
+
+<span id='android-media-tv-TvInputService-property-SERVICE_INTERFACE'>/** This is the interface name that a service implementing a TV input should say that it support
+</span> -- that is, this is the action it uses for its intent filter. To be supported, the service
+ must also require the {@link android.Manifest.permission#BIND_TV_INPUT} permission so that
+ other applications cannot abuse it.
+*/
+SERVICE_INTERFACE : &quot;android.media.tv.TvInputService&quot;,
+<span id='android-media-tv-TvInputService-property-SERVICE_META_DATA'>/** Name under which a TvInputService component publishes information about itself.
+</span> This meta-data must reference an XML resource containing an
+ &lt;code&gt;&amp;lt;{@link android.R.styleable#TvInputService tv-input}&amp;gt;&lt;/code&gt;
+ tag.
+*/
+SERVICE_META_DATA : &quot;android.media.tv.input&quot;,
+<span id='android-media-tv-TvInputService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-media-tv-TvInputService-method-onCreateSession'>/**Returns a concrete implementation of {@link android.media.tv.TvInputManager.Session}.
+</span>
+ &lt;p&gt;May return {@code null} if this TV input service fails to create a session for some
+ reason. If TV input represents an external device connected to a hardware TV input,
+ {@link android.media.tv.TvInputService.HardwareSession} should be returned.
+@param {String} inputId The ID of the TV input associated with the session.
+*/
+onCreateSession : function(  ) {},
+
+<span id='android-media-tv-TvInputService-method-onCreateRecordingSession'>/**Returns a concrete implementation of {@link android.media.tv.TvInputService.RecordingSession}.
+</span>
+ &lt;p&gt;May return {@code null} if this TV input service fails to create a recording session for
+ some reason.
+@param {String} inputId The ID of the TV input associated with the recording session.
+*/
+onCreateRecordingSession : function(  ) {},
+
+<span id='android-media-tv-TvInputService-method-onHardwareAdded'>/**Returns a new {@link android.media.tv.TvInputInfo} object if this service is responsible for
+</span> {@code hardwareInfo}; otherwise, return {@code null}. Override to modify default behavior of
+ ignoring all hardware input.
+@param {Object {TvInputHardwareInfo}} hardwareInfo {@link TvInputHardwareInfo} object just added.
+@hide 
+*/
+onHardwareAdded : function(  ) {},
+
+<span id='android-media-tv-TvInputService-method-onHardwareRemoved'>/**Returns the input ID for {@code deviceId} if it is handled by this service;
+</span> otherwise, return {@code null}. Override to modify default behavior of ignoring all hardware
+ input.
+@param {Object {TvInputHardwareInfo}} hardwareInfo {@link TvInputHardwareInfo} object just removed.
+@hide 
+*/
+onHardwareRemoved : function(  ) {},
+
+<span id='android-media-tv-TvInputService-method-onHdmiDeviceAdded'>/**Returns a new {@link android.media.tv.TvInputInfo} object if this service is responsible for
+</span> {@code deviceInfo}; otherwise, return {@code null}. Override to modify default behavior of
+ ignoring all HDMI logical input device.
+@param {Object {HdmiDeviceInfo}} deviceInfo {@link HdmiDeviceInfo} object just added.
+@hide 
+*/
+onHdmiDeviceAdded : function(  ) {},
+
+<span id='android-media-tv-TvInputService-method-onHdmiDeviceRemoved'>/**Returns the input ID for {@code deviceInfo} if it is handled by this service; otherwise,
+</span> return {@code null}. Override to modify default behavior of ignoring all HDMI logical input
+ device.
+@param {Object {HdmiDeviceInfo}} deviceInfo {@link HdmiDeviceInfo} object just removed.
+@hide 
+*/
+onHdmiDeviceRemoved : function(  ) {},
+
+<span id='android-media-tv-TvInputService-method-isNavigationKey'>/**
+</span>@hide 
+*/
+isNavigationKey : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

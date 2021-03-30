@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-marshal-Marshaler'>/**@class android.hardware.camera2.marshal.Marshaler
+</span>@extends java.lang.Object
+
+ Base class to marshal data to/from managed/native metadata byte buffers.
+
+ &lt;p&gt;This class should not be created directly; an instance of it can be obtained
+ using {@link android.hardware.camera2.marshal.MarshalQueryable#createMarshaler} for the same type {@code T} if the native type
+ mapping for {@code T} {@link android.hardware.camera2.marshal.MarshalQueryable#isTypeMappingSupported supported}.&lt;/p&gt;
+
+ @param &lt;T&gt; the compile-time managed type
+*/
+var Marshaler = {
+
+<span id='android-hardware-camera2-marshal-Marshaler-property-NATIVE_SIZE_DYNAMIC'>/** Used to denote variable-length data structures.
+</span>
+ &lt;p&gt;If the size is dynamic then we can't know ahead of time how big of a data structure
+ to preallocate for e.g. arrays, so one object must be unmarshaled at a time.&lt;/p&gt;
+*/
+NATIVE_SIZE_DYNAMIC : &quot;null&quot;,
+<span id='android-hardware-camera2-marshal-Marshaler-method-marshal'>/**Marshal the specified object instance (value) into a byte buffer.
+</span>
+ &lt;p&gt;Upon completion, the {@link ByteBuffer#position()} will have advanced by
+ the {@link #calculateMarshalSize marshal size} of {@code value}.&lt;/p&gt;
+@param {Object {Object}} value the value of type T that we wish to write into the byte buffer
+@param {Object {ByteBuffer}} buffer the byte buffer into which the marshaled object will be written
+*/
+marshal : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-Marshaler-method-calculateMarshalSize'>/**Get the size in bytes for how much space would be required to write this {@code value}
+</span> into a byte buffer using the given {@code nativeType}.
+
+ &lt;p&gt;If the size of this {@code T} instance when serialized into a buffer is always constant,
+ then this method will always return the same value (and particularly, it will return
+ an equivalent value to {@link #getNativeSize}().&lt;/p&gt;
+
+ &lt;p&gt;Overriding this method is a must when the size is {@link NATIVE_SIZE_DYNAMIC dynamic}.&lt;/p&gt;
+@param {Object {Object}} value the value of type T that we wish to write into the byte buffer
+@return {Number} the size that would need to be written to the byte buffer
+*/
+calculateMarshalSize : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-Marshaler-method-unmarshal'>/**Unmarshal a new object instance from the byte buffer into its managed type.
+</span>
+ &lt;p&gt;Upon completion, the {@link ByteBuffer#position()} will have advanced by
+ the {@link #calculateMarshalSize marshal size} of the returned {@code T} instance.&lt;/p&gt;
+@param {Object {ByteBuffer}} buffer the byte buffer, from which we will read the object
+@return {Object {java.lang.Object}} a new instance of type T read from the byte buffer
+*/
+unmarshal : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-Marshaler-method-getNativeSize'>/**How many bytes a single instance of {@code T} will take up if marshalled to/from
+</span> {@code nativeType}.
+
+ &lt;p&gt;When unmarshaling data from native to managed, the instance {@code T} is not yet
+ available. If the native size is always a fixed mapping regardless of the instance of
+ {@code T} (e.g. if the type is not a container of some sort), it can be used to preallocate
+ containers for {@code T} to avoid resizing them.&lt;/p&gt;
+
+ &lt;p&gt;In particular, the array marshaler takes advantage of this (when size is not dynamic)
+ to preallocate arrays of the right length when unmarshaling an array {@code T[]}.&lt;/p&gt;
+@return {Number} a size in bytes, or {@link #NATIVE_SIZE_DYNAMIC} if the size is dynamic
+*/
+getNativeSize : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-Marshaler-method-getTypeReference'>/**The type reference for {@code T} for the managed type side of this marshaler.
+</span>*/
+getTypeReference : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-Marshaler-method-getNativeType'>/**The native type corresponding to this marshaler for the native side of this marshaler.
+</span>*/
+getNativeType : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-GpsMeasurement'>/**@class android.location.GpsMeasurement
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class representing a GPS satellite measurement, containing raw and computed information.
+
+ @hide
+*/
+var GpsMeasurement = {
+
+<span id='android-location-GpsMeasurement-property-LOSS_OF_LOCK_UNKNOWN'>/** The indicator is not available or it is unknown.
+</span>*/
+LOSS_OF_LOCK_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GpsMeasurement-property-LOSS_OF_LOCK_OK'>/** The measurement does not present any indication of 'loss of lock'.
+</span>*/
+LOSS_OF_LOCK_OK : &quot;1&quot;,
+<span id='android-location-GpsMeasurement-property-LOSS_OF_LOCK_CYCLE_SLIP'>/** 'Loss of lock' detected between the previous and current observation: cycle slip possible.
+</span>*/
+LOSS_OF_LOCK_CYCLE_SLIP : &quot;2&quot;,
+<span id='android-location-GpsMeasurement-property-MULTIPATH_INDICATOR_UNKNOWN'>/** The indicator is not available or it is unknown.
+</span>*/
+MULTIPATH_INDICATOR_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GpsMeasurement-property-MULTIPATH_INDICATOR_DETECTED'>/** The measurement has been indicated to use multi-path.
+</span>*/
+MULTIPATH_INDICATOR_DETECTED : &quot;1&quot;,
+<span id='android-location-GpsMeasurement-property-MULTIPATH_INDICATOR_NOT_USED'>/** The measurement has been indicated not tu use multi-path.
+</span>*/
+MULTIPATH_INDICATOR_NOT_USED : &quot;2&quot;,
+<span id='android-location-GpsMeasurement-property-STATE_UNKNOWN'>/** The state of GPS receiver the measurement is invalid or unknown.
+</span>*/
+STATE_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GpsMeasurement-property-STATE_CODE_LOCK'>/** The state of the GPS receiver is ranging code lock.
+</span>*/
+STATE_CODE_LOCK : &quot;1&quot;,
+<span id='android-location-GpsMeasurement-property-STATE_BIT_SYNC'>/** The state of the GPS receiver is in bit sync.
+</span>*/
+STATE_BIT_SYNC : &quot;2&quot;,
+<span id='android-location-GpsMeasurement-property-STATE_SUBFRAME_SYNC'>/**The state of the GPS receiver is in sub-frame sync.
+</span>*/
+STATE_SUBFRAME_SYNC : &quot;4&quot;,
+<span id='android-location-GpsMeasurement-property-STATE_TOW_DECODED'>/** The state of the GPS receiver has TOW decoded.
+</span>*/
+STATE_TOW_DECODED : &quot;8&quot;,
+<span id='android-location-GpsMeasurement-property-STATE_MSEC_AMBIGUOUS'>/** The state of the GPS receiver contains millisecond ambiguity.
+</span>*/
+STATE_MSEC_AMBIGUOUS : &quot;16&quot;,
+<span id='android-location-GpsMeasurement-property-ADR_STATE_UNKNOWN'>/** The state of the 'Accumulated Delta Range' is invalid or unknown.
+</span>*/
+ADR_STATE_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GpsMeasurement-property-ADR_STATE_VALID'>/** The state of the 'Accumulated Delta Range' is valid.
+</span>*/
+ADR_STATE_VALID : &quot;1&quot;,
+<span id='android-location-GpsMeasurement-property-ADR_STATE_RESET'>/** The state of the 'Accumulated Delta Range' has detected a reset.
+</span>*/
+ADR_STATE_RESET : &quot;2&quot;,
+<span id='android-location-GpsMeasurement-property-ADR_STATE_CYCLE_SLIP'>/** The state of the 'Accumulated Delta Range' has a cycle slip detected.
+</span>*/
+ADR_STATE_CYCLE_SLIP : &quot;4&quot;,
+<span id='android-location-GpsMeasurement-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-location-GpsMeasurement-method-set'>/**Sets all contents to the values stored in the provided object.
+</span>*/
+set : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-reset'>/**Resets all the contents to its original state.
+</span>*/
+reset : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getPrn'>/**Gets the Pseudo-random number (PRN).
+</span> Range: [1, 32]
+*/
+getPrn : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setPrn'>/**Sets the Pseud-random number (PRN).
+</span>*/
+setPrn : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getTimeOffsetInNs'>/**Gets the time offset at which the measurement was taken in nanoseconds.
+</span> The reference receiver's time is specified by {@link android.location.GpsClock#getTimeInNs()} and should be
+ interpreted in the same way as indicated by {@link android.location.GpsClock#getType()}.
+
+ The sign of this value is given by the following equation:
+      measurement time = time_ns + time_offset_ns
+
+ The value provides an individual time-stamp for the measurement, and allows sub-nanosecond
+ accuracy.
+*/
+getTimeOffsetInNs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setTimeOffsetInNs'>/**Sets the time offset at which the measurement was taken in nanoseconds.
+</span>*/
+setTimeOffsetInNs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getState'>/**Gets per-satellite sync state.
+</span> It represents the current sync state for the associated satellite.
+
+ This value helps interpret {@link #getReceivedGpsTowInNs}().
+*/
+getState : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setState'>/**Sets the sync state.
+</span>*/
+setState : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getReceivedGpsTowInNs'>/**Gets the received GPS Time-of-Week at the measurement time, in nanoseconds.
+</span> The value is relative to the beginning of the current GPS week.
+
+ Given {@link #getState}() of the GPS receiver, the range of this field can be:
+      Searching           : [ 0           ]   : {@link #STATE_UNKNOWN} is set
+      Ranging code lock   : [ 0    1 ms   ]   : {@link #STATE_CODE_LOCK} is set
+      Bit sync            : [ 0   20 ms   ]   : {@link #STATE_BIT_SYNC} is set
+      Subframe sync       : [ 0    6 ms   ]   : {@link #STATE_SUBFRAME_SYNC} is set
+      TOW decoded         : [ 0    1 week ]   : {@link #STATE_TOW_DECODED} is set
+*/
+getReceivedGpsTowInNs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setReceivedGpsTowInNs'>/**Sets the received GPS time-of-week in nanoseconds.
+</span>*/
+setReceivedGpsTowInNs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getReceivedGpsTowUncertaintyInNs'>/**Gets the received GPS time-of-week's uncertainty (1-Sigma) in nanoseconds.
+</span>*/
+getReceivedGpsTowUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setReceivedGpsTowUncertaintyInNs'>/**Sets the received GPS time-of-week's uncertainty (1-Sigma) in nanoseconds.
+</span>*/
+setReceivedGpsTowUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getCn0InDbHz'>/**Gets the Carrier-to-noise density in dB-Hz.
+</span> Range: [0, 63].
+
+ The value contains the measured C/N0 for the signal at the antenna input.
+*/
+getCn0InDbHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setCn0InDbHz'>/**Sets the carrier-to-noise density in dB-Hz.
+</span>*/
+setCn0InDbHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getPseudorangeRateInMetersPerSec'>/**Gets the Pseudorange rate at the timestamp in m/s.
+</span> The reported value includes {@link #getPseudorangeRateUncertaintyInMetersPerSec}().
+
+ The correction of a given Pseudorange Rate value includes corrections from receiver and
+ satellite clock frequency errors.
+ {@link #isPseudorangeRateCorrected}() identifies the type of value reported.
+
+ A positive 'uncorrected' value indicates that the SV is moving away from the receiver.
+ The sign of the 'uncorrected' Pseudorange Rate and its relation to the sign of
+ {@link #getDopplerShiftInHz}() is given by the equation:
+      pseudorange rate = -k * doppler shift   (where k is a constant)
+*/
+getPseudorangeRateInMetersPerSec : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setPseudorangeRateInMetersPerSec'>/**Sets the pseudorange rate at the timestamp in m/s.
+</span>*/
+setPseudorangeRateInMetersPerSec : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-isPseudorangeRateCorrected'>/**See {@link #getPseudorangeRateInMetersPerSec}() for more details.
+</span>@return {Boolean} {@code true} if {@link #getPseudorangeRateInMetersPerSec()} contains a corrected
+         value, {@code false} if it contains an uncorrected value.
+*/
+isPseudorangeRateCorrected : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getPseudorangeRateUncertaintyInMetersPerSec'>/**Gets the pseudorange's rate uncertainty (1-Sigma) in m/s.
+</span> The uncertainty is represented as an absolute (single sided) value.
+*/
+getPseudorangeRateUncertaintyInMetersPerSec : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setPseudorangeRateUncertaintyInMetersPerSec'>/**Sets the pseudorange's rate uncertainty (1-Sigma) in m/s.
+</span>*/
+setPseudorangeRateUncertaintyInMetersPerSec : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getAccumulatedDeltaRangeState'>/**Gets 'Accumulated Delta Range' state.
+</span> It indicates whether {@link #getAccumulatedDeltaRangeInMeters}() is reset or there is a
+ cycle slip (indicating 'loss of lock').
+*/
+getAccumulatedDeltaRangeState : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setAccumulatedDeltaRangeState'>/**Sets the 'Accumulated Delta Range' state.
+</span>*/
+setAccumulatedDeltaRangeState : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getAccumulatedDeltaRangeInMeters'>/**Gets the accumulated delta range since the last channel reset, in meters.
+</span> The reported value includes {@link #getAccumulatedDeltaRangeUncertaintyInMeters}().
+
+ The availability of the value is represented by {@link #getAccumulatedDeltaRangeState}().
+
+ A positive value indicates that the SV is moving away from the receiver.
+ The sign of {@link #getAccumulatedDeltaRangeInMeters}() and its relation to the sign of
+ {@link #getCarrierPhase}() is given by the equation:
+          accumulated delta range = -k * carrier phase    (where k is a constant)
+*/
+getAccumulatedDeltaRangeInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setAccumulatedDeltaRangeInMeters'>/**Sets the accumulated delta range in meters.
+</span>*/
+setAccumulatedDeltaRangeInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getAccumulatedDeltaRangeUncertaintyInMeters'>/**Gets the accumulated delta range's uncertainty (1-Sigma) in meters.
+</span> The uncertainty is represented as an absolute (single sided) value.
+
+ The status of the value is represented by {@link #getAccumulatedDeltaRangeState}().
+*/
+getAccumulatedDeltaRangeUncertaintyInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setAccumulatedDeltaRangeUncertaintyInMeters'>/**Sets the accumulated delta range's uncertainty (1-sigma) in meters.
+</span>
+ The status of the value is represented by {@link #getAccumulatedDeltaRangeState}().
+*/
+setAccumulatedDeltaRangeUncertaintyInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasPseudorangeInMeters'>/**Returns true if {@link #getPseudorangeInMeters}() is available, false otherwise.
+</span>*/
+hasPseudorangeInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getPseudorangeInMeters'>/**Gets the best derived pseudorange by the chipset, in meters.
+</span> The reported pseudorange includes {@link #getPseudorangeUncertaintyInMeters}().
+
+ The value is only available if {@link #hasPseudorangeInMeters}() is true.
+*/
+getPseudorangeInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setPseudorangeInMeters'>/**Sets the Pseudo-range in meters.
+</span>*/
+setPseudorangeInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetPseudorangeInMeters'>/**Resets the Pseudo-range in meters.
+</span>*/
+resetPseudorangeInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasPseudorangeUncertaintyInMeters'>/**Returns true if {@link #getPseudorangeUncertaintyInMeters}() is available, false otherwise.
+</span>*/
+hasPseudorangeUncertaintyInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getPseudorangeUncertaintyInMeters'>/**Gets the pseudorange's uncertainty (1-Sigma) in meters.
+</span> The value contains the 'pseudorange' and 'clock' uncertainty in it.
+ The uncertainty is represented as an absolute (single sided) value.
+
+ The value is only available if {@link #hasPseudorangeUncertaintyInMeters}() is true.
+*/
+getPseudorangeUncertaintyInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setPseudorangeUncertaintyInMeters'>/**Sets the pseudo-range's uncertainty (1-Sigma) in meters.
+</span>*/
+setPseudorangeUncertaintyInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetPseudorangeUncertaintyInMeters'>/**Resets the pseudo-range's uncertainty (1-Sigma) in meters.
+</span>*/
+resetPseudorangeUncertaintyInMeters : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasCodePhaseInChips'>/**Returns true if {@link #getCodePhaseInChips}() is available, false otherwise.
+</span>*/
+hasCodePhaseInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getCodePhaseInChips'>/**Gets the fraction of the current C/A code cycle.
+</span> Range: [0, 1023]
+ The reference frequency is given by the value of {@link #getCarrierFrequencyInHz}().
+ The reported code-phase includes {@link #getCodePhaseUncertaintyInChips}().
+
+ The value is only available if {@link #hasCodePhaseInChips}() is true.
+*/
+getCodePhaseInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setCodePhaseInChips'>/**Sets the Code-phase in chips.
+</span>*/
+setCodePhaseInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetCodePhaseInChips'>/**Resets the Code-phase in chips.
+</span>*/
+resetCodePhaseInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasCodePhaseUncertaintyInChips'>/**Returns true if {@link #getCodePhaseUncertaintyInChips}() is available, false otherwise.
+</span>*/
+hasCodePhaseUncertaintyInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getCodePhaseUncertaintyInChips'>/**Gets the code-phase's uncertainty (1-Sigma) as a fraction of chips.
+</span> The uncertainty is represented as an absolute (single sided) value.
+
+ The value is only available if {@link #hasCodePhaseUncertaintyInChips}() is true.
+*/
+getCodePhaseUncertaintyInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setCodePhaseUncertaintyInChips'>/**Sets the Code-phase's uncertainty (1-Sigma) in fractions of chips.
+</span>*/
+setCodePhaseUncertaintyInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetCodePhaseUncertaintyInChips'>/**Resets the Code-phase's uncertainty (1-Sigma) in fractions of chips.
+</span>*/
+resetCodePhaseUncertaintyInChips : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasCarrierFrequencyInHz'>/**Returns true if {@link #getCarrierFrequencyInHz}() is available, false otherwise.
+</span>*/
+hasCarrierFrequencyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getCarrierFrequencyInHz'>/**Gets the carrier frequency at which codes and messages are modulated, it can be L1 or L2.
+</span> If the field is not set, the carrier frequency corresponds to L1.
+
+ The value is only available if {@link #hasCarrierFrequencyInHz}() is true.
+*/
+getCarrierFrequencyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setCarrierFrequencyInHz'>/**Sets the Carrier frequency (L1 or L2) in Hz.
+</span>*/
+setCarrierFrequencyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetCarrierFrequencyInHz'>/**Resets the Carrier frequency (L1 or L2) in Hz.
+</span>*/
+resetCarrierFrequencyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasCarrierCycles'>/**Returns true if {@link #getCarrierCycles}() is available, false otherwise.
+</span>*/
+hasCarrierCycles : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getCarrierCycles'>/**The number of full carrier cycles between the satellite and the receiver.
+</span> The reference frequency is given by the value of {@link #getCarrierFrequencyInHz}().
+
+ The value is only available if {@link #hasCarrierCycles}() is true.
+*/
+getCarrierCycles : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setCarrierCycles'>/**Sets the number of full carrier cycles between the satellite and the receiver.
+</span>*/
+setCarrierCycles : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetCarrierCycles'>/**Resets the number of full carrier cycles between the satellite and the receiver.
+</span>*/
+resetCarrierCycles : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasCarrierPhase'>/**Returns true if {@link #getCarrierPhase}() is available, false otherwise.
+</span>*/
+hasCarrierPhase : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getCarrierPhase'>/**Gets the RF phase detected by the receiver.
+</span> Range: [0.0, 1.0].
+ This is usually the fractional part of the complete carrier phase measurement.
+
+ The reference frequency is given by the value of {@link #getCarrierFrequencyInHz}().
+ The reported carrier-phase includes {@link #getCarrierPhaseUncertainty}().
+
+ The value is only available if {@link #hasCarrierPhase}() is true.
+*/
+getCarrierPhase : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setCarrierPhase'>/**Sets the RF phase detected by the receiver.
+</span>*/
+setCarrierPhase : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetCarrierPhase'>/**Resets the RF phase detected by the receiver.
+</span>*/
+resetCarrierPhase : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasCarrierPhaseUncertainty'>/**Returns true if {@link #getCarrierPhaseUncertainty}() is available, false otherwise.
+</span>*/
+hasCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getCarrierPhaseUncertainty'>/**Gets the carrier-phase's uncertainty (1-Sigma).
+</span> The uncertainty is represented as an absolute (single sided) value.
+
+ The value is only available if {@link #hasCarrierPhaseUncertainty}() is true.
+*/
+getCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setCarrierPhaseUncertainty'>/**Sets the Carrier-phase's uncertainty (1-Sigma) in cycles.
+</span>*/
+setCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetCarrierPhaseUncertainty'>/**Resets the Carrier-phase's uncertainty (1-Sigma) in cycles.
+</span>*/
+resetCarrierPhaseUncertainty : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getLossOfLock'>/**Gets a value indicating the 'loss of lock' state of the event.
+</span>*/
+getLossOfLock : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setLossOfLock'>/**Sets the 'loss of lock' status.
+</span>*/
+setLossOfLock : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasBitNumber'>/**Returns true if {@link #getBitNumber}() is available, false otherwise.
+</span>*/
+hasBitNumber : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getBitNumber'>/**Gets the number of GPS bits transmitted since Sat-Sun midnight (GPS week).
+</span>
+ The value is only available if {@link #hasBitNumber}() is true.
+*/
+getBitNumber : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setBitNumber'>/**Sets the bit number within the broadcast frame.
+</span>*/
+setBitNumber : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetBitNumber'>/**Resets the bit number within the broadcast frame.
+</span>*/
+resetBitNumber : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasTimeFromLastBitInMs'>/**Returns true if {@link #getTimeFromLastBitInMs}() is available, false otherwise.
+</span>*/
+hasTimeFromLastBitInMs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getTimeFromLastBitInMs'>/**Gets the elapsed time since the last received bit in milliseconds.
+</span> Range: [0, 20].
+
+ The value is only available if {@link #hasTimeFromLastBitInMs}() is true.
+*/
+getTimeFromLastBitInMs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setTimeFromLastBitInMs'>/**Sets the elapsed time since the last received bit in milliseconds.
+</span>*/
+setTimeFromLastBitInMs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetTimeFromLastBitInMs'>/**Resets the elapsed time since the last received bit in milliseconds.
+</span>*/
+resetTimeFromLastBitInMs : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasDopplerShiftInHz'>/**Returns true if {@link #getDopplerShiftInHz}() is available, false otherwise.
+</span>*/
+hasDopplerShiftInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getDopplerShiftInHz'>/**Gets the Doppler Shift in Hz.
+</span> A positive value indicates that the SV is moving toward the receiver.
+
+ The reference frequency is given by the value of {@link #getCarrierFrequencyInHz}().
+ The reported doppler shift includes {@link #getDopplerShiftUncertaintyInHz}().
+
+ The value is only available if {@link #hasDopplerShiftInHz}() is true.
+*/
+getDopplerShiftInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setDopplerShiftInHz'>/**Sets the Doppler shift in Hz.
+</span>*/
+setDopplerShiftInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetDopplerShiftInHz'>/**Resets the Doppler shift in Hz.
+</span>*/
+resetDopplerShiftInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasDopplerShiftUncertaintyInHz'>/**Returns true if {@link #getDopplerShiftUncertaintyInHz}() is available, false otherwise.
+</span>*/
+hasDopplerShiftUncertaintyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getDopplerShiftUncertaintyInHz'>/**Gets the Doppler's Shift uncertainty (1-Sigma) in Hz.
+</span> The uncertainty is represented as an absolute (single sided) value.
+
+ The value is only available if {@link #hasDopplerShiftUncertaintyInHz}() is true.
+*/
+getDopplerShiftUncertaintyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setDopplerShiftUncertaintyInHz'>/**Sets the Doppler's shift uncertainty (1-Sigma) in Hz.
+</span>*/
+setDopplerShiftUncertaintyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetDopplerShiftUncertaintyInHz'>/**Resets the Doppler's shift uncertainty (1-Sigma) in Hz.
+</span>*/
+resetDopplerShiftUncertaintyInHz : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getMultipathIndicator'>/**Gets a value indicating the 'multipath' state of the event.
+</span>*/
+getMultipathIndicator : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setMultipathIndicator'>/**Sets the 'multi-path' indicator.
+</span>*/
+setMultipathIndicator : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasSnrInDb'>/**Returns true if {@link #getSnrInDb}() is available, false otherwise.
+</span>*/
+hasSnrInDb : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getSnrInDb'>/**Gets the Signal-to-Noise ratio (SNR) in dB.
+</span>
+ The value is only available if {@link #hasSnrInDb}() is true.
+*/
+getSnrInDb : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setSnrInDb'>/**Sets the Signal-to-noise ratio (SNR) in dB.
+</span>*/
+setSnrInDb : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetSnrInDb'>/**Resets the Signal-to-noise ratio (SNR) in dB.
+</span>*/
+resetSnrInDb : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasElevationInDeg'>/**Returns true if {@link #getElevationInDeg}() is available, false otherwise.
+</span>*/
+hasElevationInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getElevationInDeg'>/**Gets the Elevation in degrees.
+</span> Range: [-90, 90]
+ The reported elevation includes {@link #getElevationUncertaintyInDeg}().
+
+ The value is only available if {@link #hasElevationInDeg}() is true.
+*/
+getElevationInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setElevationInDeg'>/**Sets the Elevation in degrees.
+</span>*/
+setElevationInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetElevationInDeg'>/**Resets the Elevation in degrees.
+</span>*/
+resetElevationInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasElevationUncertaintyInDeg'>/**Returns true if {@link #getElevationUncertaintyInDeg}() is available, false otherwise.
+</span>*/
+hasElevationUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getElevationUncertaintyInDeg'>/**Gets the elevation's uncertainty (1-Sigma) in degrees.
+</span> Range: [0, 90]
+
+ The uncertainty is represented as an absolute (single sided) value.
+
+ The value is only available if {@link #hasElevationUncertaintyInDeg}() is true.
+*/
+getElevationUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setElevationUncertaintyInDeg'>/**Sets the elevation's uncertainty (1-Sigma) in degrees.
+</span>*/
+setElevationUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetElevationUncertaintyInDeg'>/**Resets the elevation's uncertainty (1-Sigma) in degrees.
+</span>*/
+resetElevationUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasAzimuthInDeg'>/**Returns true if {@link #getAzimuthInDeg}() is available, false otherwise.
+</span>*/
+hasAzimuthInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getAzimuthInDeg'>/**Gets the azimuth in degrees.
+</span> Range: [0, 360).
+
+ The reported azimuth includes {@link #getAzimuthUncertaintyInDeg}().
+
+ The value is only available if {@link #hasAzimuthInDeg}() is true.
+*/
+getAzimuthInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setAzimuthInDeg'>/**Sets the Azimuth in degrees.
+</span>*/
+setAzimuthInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetAzimuthInDeg'>/**Resets the Azimuth in degrees.
+</span>*/
+resetAzimuthInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-hasAzimuthUncertaintyInDeg'>/**Returns true if {@link #getAzimuthUncertaintyInDeg}() is available, false otherwise.
+</span>*/
+hasAzimuthUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-getAzimuthUncertaintyInDeg'>/**Gets the azimuth's uncertainty (1-Sigma) in degrees.
+</span> Range: [0, 180].
+
+ The uncertainty is represented as an absolute (single sided) value.
+
+ The value is only available if {@link #hasAzimuthUncertaintyInDeg}() is true.
+*/
+getAzimuthUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setAzimuthUncertaintyInDeg'>/**Sets the Azimuth's uncertainty (1-Sigma) in degrees.
+</span>*/
+setAzimuthUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-resetAzimuthUncertaintyInDeg'>/**Resets the Azimuth's uncertainty (1-Sigma) in degrees.
+</span>*/
+resetAzimuthUncertaintyInDeg : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-isUsedInFix'>/**Gets a flag indicating whether the GPS represented by the measurement was used for computing
+</span> the most recent fix.
+@return {Boolean} A non-null value if the data is available, null otherwise.
+*/
+isUsedInFix : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-setUsedInFix'>/**Sets the Used-in-Fix flag.
+</span>*/
+setUsedInFix : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-location-GpsMeasurement-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

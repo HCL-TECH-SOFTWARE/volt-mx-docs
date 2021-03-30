@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-renderscript-ScriptIntrinsicBLAS'>/**@class android.renderscript.ScriptIntrinsicBLAS
+</span>@extends android.renderscript.ScriptIntrinsic
+
+
+ ScriptIntrinsicBLAS class provides high performance RenderScript APIs to BLAS.
+
+ The BLAS (Basic Linear Algebra Subprograms) are routines that provide standard
+ building blocks for performing basic vector and matrix operations.
+
+ For detailed description of BLAS, please refer to http://www.netlib.org/blas/
+
+*/
+var ScriptIntrinsicBLAS = {
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-NO_TRANSPOSE'>/***/
+</span>NO_TRANSPOSE : &quot;111&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-TRANSPOSE'>/***/
+</span>TRANSPOSE : &quot;112&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-CONJ_TRANSPOSE'>/***/
+</span>CONJ_TRANSPOSE : &quot;113&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-UPPER'>/***/
+</span>UPPER : &quot;121&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-LOWER'>/***/
+</span>LOWER : &quot;122&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-NON_UNIT'>/***/
+</span>NON_UNIT : &quot;131&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-UNIT'>/***/
+</span>UNIT : &quot;132&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-LEFT'>/***/
+</span>LEFT : &quot;141&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-property-RIGHT'>/***/
+</span>RIGHT : &quot;142&quot;,
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-create'>/**Create an intrinsic to access BLAS subroutines.
+</span>@param {Object {RenderScript}} rs The RenderScript context
+@return {Object {android.renderscript.ScriptIntrinsicBLAS}} ScriptIntrinsicBLAS
+*/
+create : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SGEMV'>/**SGEMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d58/sgemv_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+SGEMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DGEMV'>/**DGEMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/dc/da8/dgemv_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+DGEMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CGEMV'>/**CGEMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y   or   y := alpha*A**H*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/d8a/cgemv_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+CGEMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZGEMV'>/**ZGEMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y   or   y := alpha*A**H*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d40/zgemv_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+ZGEMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SGBMV'>/**SGBMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d6/d46/sgbmv_8f.html
+
+ Note: For a M*N matrix, the input Allocation should also be of size M*N (dimY = M, dimX = N),
+       but only the region M*(KL+KU+1) will be referenced. The following subroutine can is an
+       example showing how to convert the original matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, m):
+              for j in range(max(0, i-kl), min(i+ku+1, n)):
+                  b[i, j-i+kl] = a[i, j]
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} KL The number of sub-diagonals of the matrix A.
+@param {Number} KU The number of super-diagonals of the matrix A.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains the band matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+SGBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DGBMV'>/**DGBMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d2/d3f/dgbmv_8f.html
+
+ Note: For a M*N matrix, the input Allocation should also be of size M*N (dimY = M, dimX = N),
+       but only the region M*(KL+KU+1) will be referenced. The following subroutine can is an
+       example showing how to convert the original matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, m):
+              for j in range(max(0, i-kl), min(i+ku+1, n)):
+                  b[i, j-i+kl] = a[i, j]
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} KL The number of sub-diagonals of the matrix A.
+@param {Number} KU The number of super-diagonals of the matrix A.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains the band matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+DGBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CGBMV'>/**CGBMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y   or   y := alpha*A**H*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/d75/cgbmv_8f.html
+
+ Note: For a M*N matrix, the input Allocation should also be of size M*N (dimY = M, dimX = N),
+       but only the region M*(KL+KU+1) will be referenced. The following subroutine can is an
+       example showing how to convert the original matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, m):
+              for j in range(max(0, i-kl), min(i+ku+1, n)):
+                  b[i, j-i+kl] = a[i, j]
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} KL The number of sub-diagonals of the matrix A.
+@param {Number} KU The number of super-diagonals of the matrix A.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains the band matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+CGBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZGBMV'>/**ZGBMV performs one of the matrix-vector operations
+</span> y := alpha*A*x + beta*y   or   y := alpha*A**T*x + beta*y   or   y := alpha*A**H*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d9/d46/zgbmv_8f.html
+
+ Note: For a M*N matrix, the input Allocation should also be of size M*N (dimY = M, dimX = N),
+       but only the region M*(KL+KU+1) will be referenced. The following subroutine can is an
+       example showing how to convert the original matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, m):
+              for j in range(max(0, i-kl), min(i+ku+1, n)):
+                  b[i, j-i+kl] = a[i, j]
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} KL The number of sub-diagonals of the matrix A.
+@param {Number} KU The number of super-diagonals of the matrix A.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains the band matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+ZGBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STRMV'>/**STRMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x
+
+ Details: http://www.netlib.org/lapack/explore-html/de/d45/strmv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+STRMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTRMV'>/**DTRMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x
+
+ Details: http://www.netlib.org/lapack/explore-html/dc/d7e/dtrmv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+DTRMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTRMV'>/**CTRMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x   or   x := A**H*x
+
+ Details: http://www.netlib.org/lapack/explore-html/df/d78/ctrmv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+CTRMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTRMV'>/**ZTRMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x   or   x := A**H*x
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/dd1/ztrmv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+ZTRMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STBMV'>/**STBMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x
+
+ Details: http://www.netlib.org/lapack/explore-html/d6/d7d/stbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+STBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTBMV'>/**DTBMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x
+
+ Details: http://www.netlib.org/lapack/explore-html/df/d29/dtbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+DTBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTBMV'>/**CTBMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x   or   x := A**H*x
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/dcd/ctbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+CTBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTBMV'>/**ZTBMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x   or   x := A**H*x
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/d39/ztbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+ZTBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STPMV'>/**STPMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x
+
+ Details: http://www.netlib.org/lapack/explore-html/db/db1/stpmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+STPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTPMV'>/**DTPMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x
+
+ Details: http://www.netlib.org/lapack/explore-html/dc/dcd/dtpmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+DTPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTPMV'>/**CTPMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x   or   x := A**H*x
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/dbb/ctpmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+CTPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTPMV'>/**ZTPMV performs one of the matrix-vector operations
+</span> x := A*x   or   x := A**T*x   or   x := A**H*x
+
+ Details: http://www.netlib.org/lapack/explore-html/d2/d9e/ztpmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+ZTPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STRSV'>/**STRSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/d2a/strsv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+STRSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTRSV'>/**DTRSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d6/d96/dtrsv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+DTRSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTRSV'>/**CTRSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b   or   A**H*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/dc8/ctrsv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+CTRSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTRSV'>/**ZTRSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b   or   A**H*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d1/d2f/ztrsv_8f.html
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+ZTRSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STBSV'>/**STBSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/d1f/stbsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+STBSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTBSV'>/**DTBSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/dcf/dtbsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+DTBSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTBSV'>/**CTBSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b   or   A**H*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d9/d5f/ctbsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+CTBSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTBSV'>/**ZTBSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b   or   A**H*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/d5a/ztbsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+ZTBSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STPSV'>/**STPSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/d7c/stpsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+STPSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTPSV'>/**DTPSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d9/d84/dtpsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+DTPSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTPSV'>/**CTPSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b   or   A**H*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/d8/d56/ctpsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+CTPSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTPSV'>/**ZTPSV solves one of the systems of equations
+</span> A*x = b   or   A**T*x = b   or   A**H*x = b
+
+ Details: http://www.netlib.org/lapack/explore-html/da/d57/ztpsv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the matrix is an upper or lower triangular matrix.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Allocation}} Ap The input allocation contains packed matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+*/
+ZTPSV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSYMV'>/**SSYMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d2/d94/ssymv_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+SSYMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSBMV'>/**SSBMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/da1/ssbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the band matrix A is being supplied.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+SSBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSPMV'>/**SSPMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d8/d68/sspmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the matrix A is supplied in packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+SSPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SGER'>/**SGER performs the rank 1 operation
+</span> A := alpha*x*y**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d5c/sger_8f.html
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+*/
+SGER : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSYR'>/**SSYR performs the rank 1 operation
+</span> A := alpha*x*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d6/dac/ssyr_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+*/
+SSYR : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSPR'>/**SSPR performs the rank 1 operation
+</span> A := alpha*x*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d2/d9b/sspr_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F32}.
+*/
+SSPR : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSYR2'>/**SSYR2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**T + alpha*y*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d99/ssyr2_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+*/
+SSYR2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSPR2'>/**SSPR2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**T + alpha*y*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d3e/sspr2_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F32}.
+*/
+SSPR2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSYMV'>/**DSYMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d8/dbe/dsymv_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+DSYMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSBMV'>/**DSBMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d8/d1e/dsbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the band matrix A is being supplied.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+DSBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSPMV'>/**DSPMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/d85/dspmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the matrix A is supplied in packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+DSPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DGER'>/**DGER performs the rank 1 operation
+</span> A := alpha*x*y**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/dc/da8/dger_8f.html
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+*/
+DGER : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSYR'>/**DSYR performs the rank 1 operation
+</span> A := alpha*x*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/d60/dsyr_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+*/
+DSYR : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSPR'>/**DSPR performs the rank 1 operation
+</span> A := alpha*x*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/dd/dba/dspr_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F64}.
+*/
+DSPR : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSYR2'>/**DSYR2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**T + alpha*y*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/de/d41/dsyr2_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+*/
+DSYR2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSPR2'>/**DSPR2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**T + alpha*y*x**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/dd/d9e/dspr2_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F64}.
+*/
+DSPR2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHEMV'>/**CHEMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d7/d51/chemv_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+CHEMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHBMV'>/**CHBMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/db/dc2/chbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the band matrix A is being supplied.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+CHBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHPMV'>/**CHPMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d2/d06/chpmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the matrix A is supplied in packed form.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+CHPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CGERU'>/**CGERU performs the rank 1 operation
+</span> A := alpha*x*y**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d5f/cgeru_8f.html
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+*/
+CGERU : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CGERC'>/**CGERC performs the rank 1 operation
+</span> A := alpha*x*y**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/dd/d84/cgerc_8f.html
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+*/
+CGERC : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHER'>/**CHER performs the rank 1 operation
+</span> A := alpha*x*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/d6d/cher_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+*/
+CHER : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHPR'>/**CHPR performs the rank 1 operation
+</span> A := alpha*x*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/db/dcd/chpr_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+*/
+CHPR : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHER2'>/**CHER2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**H + alpha*y*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d87/cher2_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+*/
+CHER2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHPR2'>/**CHPR2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**H + alpha*y*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d6/d44/chpr2_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F32_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F32_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+*/
+CHPR2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHEMV'>/**ZHEMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/ddd/zhemv_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+ZHEMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHBMV'>/**ZHBMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/d1a/zhbmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should also be of size N*N (dimY = N, dimX = N),
+       but only the region N*(K+1) will be referenced. The following subroutine can is an
+       example showing how to convert a UPPER trianglar matrix 'a' to row-based band matrix 'b'.
+           for i in range(0, n):
+              for j in range(i, min(i+k+1, n)):
+                  b[i, j-i] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the band matrix A is being supplied.
+@param {Number} K The number of off-diagonals of the matrix A
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+ZHBMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHPMV'>/**ZHPMV performs the matrix-vector operation
+</span> y := alpha*A*x + beta*y
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/d60/zhpmv_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part of the matrix A is supplied in packed form.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+*/
+ZHPMV : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZGERU'>/**ZGERU performs the rank 1 operation
+</span> A := alpha*x*y**T + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d7/d12/zgeru_8f.html
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+*/
+ZGERU : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZGERC'>/**ZGERC performs the rank 1 operation
+</span> A := alpha*x*y**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/dad/zgerc_8f.html
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+*/
+ZGERC : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHER'>/**ZHER performs the rank 1 operation
+</span> A := alpha*x*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/de/d0e/zher_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+*/
+ZHER : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHPR'>/**ZHPR performs the rank 1 operation
+</span> A := alpha*x*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/de/de1/zhpr_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+*/
+ZHPR : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHER2'>/**ZHER2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**H + alpha*y*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/da/d8a/zher2_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+*/
+ZHER2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHPR2'>/**ZHPR2 performs the symmetric rank 2 operation
+</span> A := alpha*x*y**H + alpha*y*x**H + A
+
+ Details: http://www.netlib.org/lapack/explore-html/d5/d52/zhpr2_8f.html
+
+ Note: For a N*N matrix, the input Allocation should be a 1D allocation of size dimX = N*(N+1)/2,
+       The following subroutine can is an example showing how to convert a UPPER trianglar matrix
+       'a' to packed matrix 'b'.
+           k = 0
+           for i in range(0, n):
+              for j in range(i, n):
+                  b[k++] = a[i, j]
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be supplied in the packed form.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} X The input allocation contains vector x, supported elements type {@link Element#F64_2}.
+@param {Number} incX The increment for the elements of vector x, must be larger than zero.
+@param {Object {Allocation}} Y The input allocation contains vector y, supported elements type {@link Element#F64_2}.
+@param {Number} incY The increment for the elements of vector y, must be larger than zero.
+@param {Object {Allocation}} Ap The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+*/
+ZHPR2 : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SGEMM'>/**SGEMM performs one of the matrix-matrix operations
+</span> C := alpha*op(A)*op(B) + beta*C   where op(X) is one of op(X) = X  or  op(X) = X**T
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/de2/sgemm_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} TransB The type of transpose applied to matrix B.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32}.
+*/
+SGEMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DGEMM'>/**DGEMM performs one of the matrix-matrix operations
+</span> C := alpha*op(A)*op(B) + beta*C   where op(X) is one of op(X) = X  or  op(X) = X**T
+
+ Details: http://www.netlib.org/lapack/explore-html/d7/d2b/dgemm_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} TransB The type of transpose applied to matrix B.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64}.
+*/
+DGEMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CGEMM'>/**CGEMM performs one of the matrix-matrix operations
+</span> C := alpha*op(A)*op(B) + beta*C   where op(X) is one of op(X) = X  or  op(X) = X**T  or  op(X) = X**H
+
+ Details: http://www.netlib.org/lapack/explore-html/d6/d5b/cgemm_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} TransB The type of transpose applied to matrix B.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32_2}.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32_2}.
+*/
+CGEMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZGEMM'>/**ZGEMM performs one of the matrix-matrix operations
+</span> C := alpha*op(A)*op(B) + beta*C   where op(X) is one of op(X) = X  or  op(X) = X**T  or  op(X) = X**H
+
+ Details: http://www.netlib.org/lapack/explore-html/d7/d76/zgemm_8f.html
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} TransB The type of transpose applied to matrix B.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64_2}.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64_2}.
+*/
+ZGEMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSYMM'>/**SSYMM performs one of the matrix-matrix operations
+</span> C := alpha*A*B + beta*C   or   C := alpha*B*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d7/d42/ssymm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32}.
+*/
+SSYMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSYMM'>/**DSYMM performs one of the matrix-matrix operations
+</span> C := alpha*A*B + beta*C   or   C := alpha*B*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d8/db0/dsymm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64}.
+*/
+DSYMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CSYMM'>/**CSYMM performs one of the matrix-matrix operations
+</span> C := alpha*A*B + beta*C   or   C := alpha*B*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/db/d59/csymm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32_2}.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32_2}.
+*/
+CSYMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZSYMM'>/**ZSYMM performs one of the matrix-matrix operations
+</span> C := alpha*A*B + beta*C   or   C := alpha*B*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/df/d51/zsymm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64_2}.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64_2}.
+*/
+ZSYMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSYRK'>/**SSYRK performs one of the symmetric rank k operations
+</span> C := alpha*A*A**T + beta*C   or   C := alpha*A**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d0/d40/ssyrk_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32}.
+*/
+SSYRK : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSYRK'>/**DSYRK performs one of the symmetric rank k operations
+</span> C := alpha*A*A**T + beta*C   or   C := alpha*A**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/dc/d05/dsyrk_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64}.
+*/
+DSYRK : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CSYRK'>/**CSYRK performs one of the symmetric rank k operations
+</span> C := alpha*A*A**T + beta*C   or   C := alpha*A**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/d6a/csyrk_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32_2}.
+*/
+CSYRK : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZSYRK'>/**ZSYRK performs one of the symmetric rank k operations
+</span> C := alpha*A*A**T + beta*C   or   C := alpha*A**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/de/d54/zsyrk_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64_2}.
+*/
+ZSYRK : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-SSYR2K'>/**SSYR2K performs one of the symmetric rank 2k operations
+</span> C := alpha*A*B**T + alpha*B*A**T + beta*C   or   C := alpha*A**T*B + alpha*B**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/df/d3d/ssyr2k_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32}.
+*/
+SSYR2K : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DSYR2K'>/**DSYR2K performs one of the symmetric rank 2k operations
+</span> C := alpha*A*B**T + alpha*B*A**T + beta*C   or   C := alpha*A**T*B + alpha*B**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d1/dec/dsyr2k_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64}.
+*/
+DSYR2K : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CSYR2K'>/**CSYR2K performs one of the symmetric rank 2k operations
+</span> C := alpha*A*B**T + alpha*B*A**T + beta*C   or   C := alpha*A**T*B + alpha*B**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/de/d7e/csyr2k_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32_2}.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32_2}.
+*/
+CSYR2K : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZSYR2K'>/**ZSYR2K performs one of the symmetric rank 2k operations
+</span> C := alpha*A*B**T + alpha*B*A**T + beta*C   or   C := alpha*A**T*B + alpha*B**T*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/df/d20/zsyr2k_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64_2}.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64_2}.
+*/
+ZSYR2K : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STRMM'>/**STRMM performs one of the matrix-matrix operations
+</span> B := alpha*op(A)*B   or   B := alpha*B*op(A)
+ op(A) is one of  op(A) = A  or  op(A) = A**T
+
+ Details: http://www.netlib.org/lapack/explore-html/df/d01/strmm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32}.
+*/
+STRMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTRMM'>/**DTRMM performs one of the matrix-matrix operations
+</span> B := alpha*op(A)*B   or   B := alpha*B*op(A)
+ op(A) is one of  op(A) = A  or  op(A) = A**T
+
+ Details: http://www.netlib.org/lapack/explore-html/dd/d19/dtrmm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64}.
+*/
+DTRMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTRMM'>/**CTRMM performs one of the matrix-matrix operations
+</span> B := alpha*op(A)*B   or   B := alpha*B*op(A)
+ op(A) is one of  op(A) = A  or  op(A) = A**T  or  op(A) = A**H
+
+ Details: http://www.netlib.org/lapack/explore-html/d4/d9b/ctrmm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32_2}.
+*/
+CTRMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTRMM'>/**ZTRMM performs one of the matrix-matrix operations
+</span> B := alpha*op(A)*B   or   B := alpha*B*op(A)
+ op(A) is one of  op(A) = A  or  op(A) = A**T  or  op(A) = A**H
+
+ Details: http://www.netlib.org/lapack/explore-html/d8/de1/ztrmm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64_2}.
+*/
+ZTRMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-STRSM'>/**STRSM solves one of the matrix equations
+</span> op(A)*X := alpha*B   or   X*op(A) := alpha*B
+ op(A) is one of  op(A) = A  or  op(A) = A**T
+
+ Details: http://www.netlib.org/lapack/explore-html/d2/d8b/strsm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32}.
+*/
+STRSM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-DTRSM'>/**DTRSM solves one of the matrix equations
+</span> op(A)*X := alpha*B   or   X*op(A) := alpha*B
+ op(A) is one of  op(A) = A  or  op(A) = A**T
+
+ Details: http://www.netlib.org/lapack/explore-html/de/da7/dtrsm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64}.
+*/
+DTRSM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CTRSM'>/**CTRSM solves one of the matrix equations
+</span> op(A)*X := alpha*B   or   X*op(A) := alpha*B
+ op(A) is one of  op(A) = A  or  op(A) = A**T  or  op(A) = A**H
+
+ Details: http://www.netlib.org/lapack/explore-html/de/d30/ctrsm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32_2}.
+*/
+CTRSM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZTRSM'>/**ZTRSM solves one of the matrix equations
+</span> op(A)*X := alpha*B   or   X*op(A) := alpha*B
+ op(A) is one of  op(A) = A  or  op(A) = A**T  or  op(A) = A**H
+
+ Details: http://www.netlib.org/lapack/explore-html/d1/d39/ztrsm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether matrix A is upper or lower triangular.
+@param {Number} TransA The type of transpose applied to matrix A.
+@param {Number} Diag Specifies whether or not A is unit triangular.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64_2}.
+*/
+ZTRSM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHEMM'>/**CHEMM performs one of the matrix-matrix operations
+</span> C := alpha*A*B + beta*C   or   C := alpha*B*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d3/d66/chemm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32_2}.
+@param {Object {Float2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32_2}.
+*/
+CHEMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHEMM'>/**ZHEMM performs one of the matrix-matrix operations
+</span> C := alpha*A*B + beta*C   or   C := alpha*B*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d6/d3e/zhemm_8f.html
+@param {Number} Side Specifies whether the symmetric matrix A appears on the left or right.
+@param {Number} Uplo Specifies whether the upper or lower triangular part is to be referenced.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64_2}.
+@param {Object {Double2}} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64_2}.
+*/
+ZHEMM : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHERK'>/**CHERK performs one of the hermitian rank k operations
+</span> C := alpha*A*A**H + beta*C   or   C := alpha*A**H*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d8/d52/cherk_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32_2}.
+*/
+CHERK : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHERK'>/**ZHERK performs one of the hermitian rank k operations
+</span> C := alpha*A*A**H + beta*C   or   C := alpha*A**H*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d1/db1/zherk_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Number} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64_2}.
+*/
+ZHERK : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-CHER2K'>/**CHER2K performs one of the hermitian rank 2k operations
+</span> C := alpha*A*B**H + conjg( alpha )*B*A**H + beta*C   or   C := alpha*A**H*B + conjg( alpha )*B**H*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d1/d82/cher2k_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Object {Float2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F32_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F32_2}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F32_2}.
+*/
+CHER2K : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-ZHER2K'>/**ZHER2K performs one of the hermitian rank 2k operations
+</span> C := alpha*A*B**H + conjg( alpha )*B*A**H + beta*C   or   C := alpha*A**H*B + conjg( alpha )*B**H*A + beta*C
+
+ Details: http://www.netlib.org/lapack/explore-html/d7/dfa/zher2k_8f.html
+@param {Number} Uplo Specifies whether the upper or lower triangular part of C is to be referenced.
+@param {Number} Trans The type of transpose applied to the operation.
+@param {Object {Double2}} alpha The scalar alpha.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#F64_2}.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#F64_2}.
+@param {Number} beta The scalar beta.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#F64_2}.
+*/
+ZHER2K : function(  ) {},
+
+<span id='android-renderscript-ScriptIntrinsicBLAS-method-BNNM'>/**8-bit GEMM-like operation for neural networks: C = A * Transpose(B)
+</span> Calculations are done in 1.10.21 fixed-point format for the final output,
+ just before there's a shift down to drop the fractional parts. The output
+ values are gated to 0 to 255 to fit in a byte, but the 10-bit format
+ gives some headroom to avoid wrapping around on small overflows.
+@param {Object {Allocation}} A The input allocation contains matrix A, supported elements type {@link Element#U8}.
+@param {Number} a_offset The offset for all values in matrix A, e.g A[i,j] = A[i,j] - a_offset. Value should be from 0 to 255.
+@param {Object {Allocation}} B The input allocation contains matrix B, supported elements type {@link Element#U8}.
+@param {Number} b_offset The offset for all values in matrix B, e.g B[i,j] = B[i,j] - b_offset. Value should be from 0 to 255.
+@param {Object {Allocation}} C The input allocation contains matrix C, supported elements type {@link Element#U8}.
+@param {Number} c_offset The offset for all values in matrix C.
+@param {Number} c_mult The multiplier for all values in matrix C, e.g C[i,j] = (C[i,j] + c_offset) * c_mult.
+*/
+BNNM : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

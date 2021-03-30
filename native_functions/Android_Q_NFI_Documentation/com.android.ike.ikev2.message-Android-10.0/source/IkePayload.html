@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ike-ikev2-message-IkePayload'>/**@class com.android.ike.ikev2.message.IkePayload
+</span>@extends java.lang.Object
+
+ IkePayload is an abstract class that represents the common information for all IKE payload types.
+
+ &lt;p&gt;Each types of IKE payload should implement its own subclass with its own decoding and encoding
+ logic.
+
+ @see &lt;a href=&quot;https://tools.ietf.org/html/rfc7296#section-3.2&quot;&gt;RFC 7296, Internet Key Exchange
+     Protocol Version 2 (IKEv2)&lt;/a&gt;
+*/
+var IkePayload = {
+
+<span id='com-android-ike-ikev2-message-IkePayload-property-GENERIC_HEADER_LENGTH'>/**Length of a generic IKE payload header */
+</span>GENERIC_HEADER_LENGTH : &quot;4&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_NO_NEXT'>/**No Next Payload */
+</span>PAYLOAD_TYPE_NO_NEXT : &quot;0&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_SA'>/**Security Association Payload */
+</span>PAYLOAD_TYPE_SA : &quot;33&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_KE'>/**Key Exchange Payload */
+</span>PAYLOAD_TYPE_KE : &quot;34&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_ID_INITIATOR'>/**Identification Payload for IKE SA Initiator */
+</span>PAYLOAD_TYPE_ID_INITIATOR : &quot;35&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_ID_RESPONDER'>/**Identification Payload for IKE SA Responder */
+</span>PAYLOAD_TYPE_ID_RESPONDER : &quot;36&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_CERT'>/**Certification Payload */
+</span>PAYLOAD_TYPE_CERT : &quot;37&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_AUTH'>/**Authentication Payload */
+</span>PAYLOAD_TYPE_AUTH : &quot;39&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_NONCE'>/**Nonce Payload */
+</span>PAYLOAD_TYPE_NONCE : &quot;40&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_NOTIFY'>/**Notify Payload */
+</span>PAYLOAD_TYPE_NOTIFY : &quot;41&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_DELETE'>/**Delete Payload */
+</span>PAYLOAD_TYPE_DELETE : &quot;42&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_VENDOR'>/**Vendor Payload */
+</span>PAYLOAD_TYPE_VENDOR : &quot;43&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_TS_INITIATOR'>/**Traffic Selector Payload of Child SA Initiator */
+</span>PAYLOAD_TYPE_TS_INITIATOR : &quot;44&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_TS_RESPONDER'>/**Traffic Selector Payload of Child SA Responder */
+</span>PAYLOAD_TYPE_TS_RESPONDER : &quot;45&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PAYLOAD_TYPE_SK'>/**Encrypted and Authenticated Payload */
+</span>PAYLOAD_TYPE_SK : &quot;46&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PROTOCOL_ID_UNSET'>/***/
+</span>PROTOCOL_ID_UNSET : &quot;0&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PROTOCOL_ID_IKE'>/***/
+</span>PROTOCOL_ID_IKE : &quot;1&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PROTOCOL_ID_AH'>/***/
+</span>PROTOCOL_ID_AH : &quot;2&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-PROTOCOL_ID_ESP'>/***/
+</span>PROTOCOL_ID_ESP : &quot;3&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-SPI_LEN_NOT_INCLUDED'>/***/
+</span>SPI_LEN_NOT_INCLUDED : &quot;0&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-SPI_LEN_IPSEC'>/***/
+</span>SPI_LEN_IPSEC : &quot;4&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-SPI_LEN_IKE'>/***/
+</span>SPI_LEN_IKE : &quot;8&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-SPI_NOT_INCLUDED'>/***/
+</span>SPI_NOT_INCLUDED : &quot;0&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-IP_PORT_LEN'>/**Length of port number in bytes */
+</span>IP_PORT_LEN : &quot;2&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-payloadType'>/***/
+</span>payloadType : &quot;null&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-property-isCritical'>/***/
+</span>isCritical : &quot;null&quot;,
+<span id='com-android-ike-ikev2-message-IkePayload-method-getTypeString'>/**Return the payload type as a String.
+</span>@return {String} the payload type as a String.
+*/
+getTypeString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

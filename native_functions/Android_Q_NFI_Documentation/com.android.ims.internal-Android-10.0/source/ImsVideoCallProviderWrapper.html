@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ims-internal-ImsVideoCallProviderWrapper'>/**@class com.android.ims.internal.ImsVideoCallProviderWrapper
+</span>@extends android.telecom.Connection.VideoProvider
+
+ Subclass implementation of {@link Connection.VideoProvider}. This intermediates and
+ communicates with the actual implementation of the video call provider in the IMS service; it is
+ in essence, a wrapper around the IMS's video call provider implementation.
+
+ This class maintains a binder by which the ImsVideoCallProvider's implementation can communicate
+ its intent to invoke callbacks. In this class, the message across this binder is handled, and
+ the superclass's methods are used to execute the callbacks.
+
+ @hide
+*/
+var ImsVideoCallProviderWrapper = {
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-registerForDataUsageUpdate'>/**
+</span>*/
+registerForDataUsageUpdate : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-unregisterForDataUsageUpdate'>/**
+</span>*/
+unregisterForDataUsageUpdate : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-addImsVideoProviderCallback'>/**
+</span>*/
+addImsVideoProviderCallback : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-removeImsVideoProviderCallback'>/**
+</span>*/
+removeImsVideoProviderCallback : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSetCamera'>/**
+</span>@inheritDoc 
+*/
+onSetCamera : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSetPreviewSurface'>/**
+</span>@inheritDoc 
+*/
+onSetPreviewSurface : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSetDisplaySurface'>/**
+</span>@inheritDoc 
+*/
+onSetDisplaySurface : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSetDeviceOrientation'>/**
+</span>@inheritDoc 
+*/
+onSetDeviceOrientation : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSetZoom'>/**
+</span>@inheritDoc 
+*/
+onSetZoom : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSendSessionModifyRequest'>/**Handles session modify requests received from the {@link android.telecom.InCallService}.
+</span>@inheritDoc 
+*/
+onSendSessionModifyRequest : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSendSessionModifyResponse'>/**
+</span>@inheritDoc 
+*/
+onSendSessionModifyResponse : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onRequestCameraCapabilities'>/**
+</span>@inheritDoc 
+*/
+onRequestCameraCapabilities : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onRequestConnectionDataUsage'>/**
+</span>@inheritDoc 
+*/
+onRequestConnectionDataUsage : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onSetPauseImage'>/**
+</span>@inheritDoc 
+*/
+onSetPauseImage : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-isPauseRequest'>/**Determines if a session modify request represents a request to pause the video.
+</span>@param {Number} from The from video state.
+@param {Number} to The to video state.
+@return {Boolean} {@code true} if a pause was requested.
+*/
+isPauseRequest : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-isResumeRequest'>/**Determines if a session modify request represents a request to resume the video.
+</span>@param {Number} from The from video state.
+@param {Number} to The to video state.
+@return {Boolean} {@code true} if a resume was requested.
+*/
+isResumeRequest : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-isTurnOffCameraRequest'>/**Determines if this request includes turning the camera off (ie turning off transmission).
+</span>@param {Number} from the from video state.
+@param {Number} to the to video state.
+@return {Boolean} true if the state change disables the user's camera.
+*/
+isTurnOffCameraRequest : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-isTurnOnCameraRequest'>/**Determines if this request includes turning the camera on (ie turning on transmission).
+</span>@param {Number} from the from video state.
+@param {Number} to the to video state.
+@return {Boolean} true if the state change enables the user's camera.
+*/
+isTurnOnCameraRequest : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-maybeFilterPauseResume'>/**Filters incoming pause and resume requests based on whether there are other active pause or
+</span> resume requests at the current time.
+
+ Requests to pause the video stream using the {@link VideoProfile#STATE_PAUSED} bit can come
+ from both the {@link android.telecom.InCallService}, as well as via the
+ {@link #pauseVideo(int, int)} and {@link #resumeVideo(int, int)} methods.  As a result,
+ multiple sources can potentially pause or resume the video stream.  This method ensures that
+ providing any one request source has paused the video that the video will remain paused.
+@param {Object {VideoProfile}} fromProfile The request's from {@link VideoProfile}.
+@param {Object {VideoProfile}} toProfile The request's to {@link VideoProfile}.
+@param {Number} source The source of the request, as identified by a {@code VideoPauseTracker#SOURCE*}
+               constant.
+@return {Object {android.telecom.VideoProfile}} The new toProfile, with the pause bit set or unset based on whether we should
+      actually pause or resume the video at the current time.
+*/
+maybeFilterPauseResume : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-pauseVideo'>/**Issues a request to pause the video using {@link VideoProfile#STATE_PAUSED} from a source
+</span> other than the InCall UI.
+@param {Number} fromVideoState The current video state (prior to issuing the pause).
+@param {Number} source The source of the pause request.
+*/
+pauseVideo : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-resumeVideo'>/**Issues a request to resume the video using {@link VideoProfile#STATE_PAUSED} from a source
+</span> other than the InCall UI.
+@param {Number} fromVideoState The current video state (prior to issuing the resume).
+@param {Number} source The source of the resume request.
+*/
+resumeVideo : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-wasVideoPausedFromSource'>/**Determines if a specified source has issued a pause request.
+</span>@param {Number} source The source.
+@return {Boolean} {@code true} if the source issued a pause request, {@code false} otherwise.
+*/
+wasVideoPausedFromSource : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-setUseVideoPauseWorkaround'>/**
+</span>*/
+setUseVideoPauseWorkaround : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-onVideoStateChanged'>/**Called by {@code ImsPhoneConnection} when there is a change to the video state of the call.
+</span> Informs the video pause tracker that the video is no longer paused.  This ensures that
+ subsequent pause requests are not filtered out.
+@param {Number} newVideoState The new video state.
+*/
+onVideoStateChanged : function(  ) {},
+
+<span id='com-android-ims-internal-ImsVideoCallProviderWrapper-method-setIsVideoEnabled'>/**Sets whether video is enabled locally or not.
+</span> Used to reject incoming video requests when video is disabled locally due to data being
+ disabled on a call where video calls are metered.
+@param {Boolean} isVideoEnabled {@code true} if video is locally enabled, {@code false} otherwise.
+*/
+setIsVideoEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

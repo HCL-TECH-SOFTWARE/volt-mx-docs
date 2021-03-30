@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-TextView'>/**@class android.widget.TextView
+</span> implements android.view.ViewTreeObserver.OnPreDrawListener
+
+@extends android.view.View
+
+ A user interface element that displays text to the user.
+ To provide user-editable text, see {@link android.widget.EditText}.
+ &lt;p&gt;
+ The following code sample shows a typical use, with an XML layout
+ and code to modify the contents of the text view:
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+ &amp;lt;LinearLayout
+       xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+       android:layout_width=&quot;match_parent&quot;
+       android:layout_height=&quot;match_parent&quot;&amp;gt;
+    &amp;lt;TextView
+        android:id=&quot;@+id/text_view_id&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:text=&quot;@string/hello&quot; /&amp;gt;
+ &amp;lt;/LinearLayout&amp;gt;
+ &lt;/pre&gt;
+ &lt;p&gt;
+ This code sample demonstrates how to modify the contents of the text view
+ defined in the previous XML layout:
+ &lt;/p&gt;
+ &lt;pre&gt;
+ public class MainActivity extends Activity {
+
+    protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+         final TextView helloTextView = (TextView) findViewById(R.id.text_view_id);
+         helloTextView.setText(R.string.user_greeting);
+     }
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ To customize the appearance of TextView, see &lt;a href=&quot;https://developer.android.com/guide/topics/ui/themes.html&quot;&gt;Styles and Themes&lt;/a&gt;.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;XML attributes&lt;/b&gt;
+ &lt;p&gt;
+ See {@link android.R.styleable#android.widget.TextView android.widget.TextView Attributes},
+ {@link android.R.styleable#View View Attributes}
+
+ @attr ref android.R.styleable#TextView_text
+ @attr ref android.R.styleable#TextView_bufferType
+ @attr ref android.R.styleable#TextView_hint
+ @attr ref android.R.styleable#TextView_textColor
+ @attr ref android.R.styleable#TextView_textColorHighlight
+ @attr ref android.R.styleable#TextView_textColorHint
+ @attr ref android.R.styleable#TextView_textAppearance
+ @attr ref android.R.styleable#TextView_textColorLink
+ @attr ref android.R.styleable#TextView_textFontWeight
+ @attr ref android.R.styleable#TextView_textSize
+ @attr ref android.R.styleable#TextView_textScaleX
+ @attr ref android.R.styleable#TextView_fontFamily
+ @attr ref android.R.styleable#TextView_typeface
+ @attr ref android.R.styleable#TextView_textStyle
+ @attr ref android.R.styleable#TextView_cursorVisible
+ @attr ref android.R.styleable#TextView_maxLines
+ @attr ref android.R.styleable#TextView_maxHeight
+ @attr ref android.R.styleable#TextView_lines
+ @attr ref android.R.styleable#TextView_height
+ @attr ref android.R.styleable#TextView_minLines
+ @attr ref android.R.styleable#TextView_minHeight
+ @attr ref android.R.styleable#TextView_maxEms
+ @attr ref android.R.styleable#TextView_maxWidth
+ @attr ref android.R.styleable#TextView_ems
+ @attr ref android.R.styleable#TextView_width
+ @attr ref android.R.styleable#TextView_minEms
+ @attr ref android.R.styleable#TextView_minWidth
+ @attr ref android.R.styleable#TextView_gravity
+ @attr ref android.R.styleable#TextView_scrollHorizontally
+ @attr ref android.R.styleable#TextView_password
+ @attr ref android.R.styleable#TextView_singleLine
+ @attr ref android.R.styleable#TextView_selectAllOnFocus
+ @attr ref android.R.styleable#TextView_includeFontPadding
+ @attr ref android.R.styleable#TextView_maxLength
+ @attr ref android.R.styleable#TextView_shadowColor
+ @attr ref android.R.styleable#TextView_shadowDx
+ @attr ref android.R.styleable#TextView_shadowDy
+ @attr ref android.R.styleable#TextView_shadowRadius
+ @attr ref android.R.styleable#TextView_autoLink
+ @attr ref android.R.styleable#TextView_linksClickable
+ @attr ref android.R.styleable#TextView_numeric
+ @attr ref android.R.styleable#TextView_digits
+ @attr ref android.R.styleable#TextView_phoneNumber
+ @attr ref android.R.styleable#TextView_inputMethod
+ @attr ref android.R.styleable#TextView_capitalize
+ @attr ref android.R.styleable#TextView_autoText
+ @attr ref android.R.styleable#TextView_editable
+ @attr ref android.R.styleable#TextView_freezesText
+ @attr ref android.R.styleable#TextView_ellipsize
+ @attr ref android.R.styleable#TextView_drawableTop
+ @attr ref android.R.styleable#TextView_drawableBottom
+ @attr ref android.R.styleable#TextView_drawableRight
+ @attr ref android.R.styleable#TextView_drawableLeft
+ @attr ref android.R.styleable#TextView_drawableStart
+ @attr ref android.R.styleable#TextView_drawableEnd
+ @attr ref android.R.styleable#TextView_drawablePadding
+ @attr ref android.R.styleable#TextView_drawableTint
+ @attr ref android.R.styleable#TextView_drawableTintMode
+ @attr ref android.R.styleable#TextView_lineSpacingExtra
+ @attr ref android.R.styleable#TextView_lineSpacingMultiplier
+ @attr ref android.R.styleable#TextView_justificationMode
+ @attr ref android.R.styleable#TextView_marqueeRepeatLimit
+ @attr ref android.R.styleable#TextView_inputType
+ @attr ref android.R.styleable#TextView_imeOptions
+ @attr ref android.R.styleable#TextView_privateImeOptions
+ @attr ref android.R.styleable#TextView_imeActionLabel
+ @attr ref android.R.styleable#TextView_imeActionId
+ @attr ref android.R.styleable#TextView_editorExtras
+ @attr ref android.R.styleable#TextView_elegantTextHeight
+ @attr ref android.R.styleable#TextView_fallbackLineSpacing
+ @attr ref android.R.styleable#TextView_letterSpacing
+ @attr ref android.R.styleable#TextView_fontFeatureSettings
+ @attr ref android.R.styleable#TextView_fontVariationSettings
+ @attr ref android.R.styleable#TextView_breakStrategy
+ @attr ref android.R.styleable#TextView_hyphenationFrequency
+ @attr ref android.R.styleable#TextView_autoSizeTextType
+ @attr ref android.R.styleable#TextView_autoSizeMinTextSize
+ @attr ref android.R.styleable#TextView_autoSizeMaxTextSize
+ @attr ref android.R.styleable#TextView_autoSizeStepGranularity
+ @attr ref android.R.styleable#TextView_autoSizePresetSizes
+ @attr ref android.R.styleable#TextView_textCursorDrawable
+ @attr ref android.R.styleable#TextView_textSelectHandle
+ @attr ref android.R.styleable#TextView_textSelectHandleLeft
+ @attr ref android.R.styleable#TextView_textSelectHandleRight
+ @attr ref android.R.styleable#TextView_allowUndo
+ @attr ref android.R.styleable#TextView_enabled
+*/
+var TextView = {
+
+<span id='android-widget-TextView-property-AUTO_SIZE_TEXT_TYPE_NONE'>/** The TextView does not auto-size text (default).
+</span>*/
+AUTO_SIZE_TEXT_TYPE_NONE : &quot;0&quot;,
+<span id='android-widget-TextView-property-AUTO_SIZE_TEXT_TYPE_UNIFORM'>/** The TextView scales text size both horizontally and vertically to fit within the
+</span> container.
+*/
+AUTO_SIZE_TEXT_TYPE_UNIFORM : &quot;1&quot;,
+<span id='android-widget-TextView-property-UNKNOWN_BORING'>/**@hide */
+</span>UNKNOWN_BORING : &quot;null&quot;,
+<span id='android-widget-TextView-method-preloadFontCache'>/**Kick-start the font cache for the zygote process (to pay the cost of
+</span> initializing freetype for our default font only once).
+@hide 
+*/
+preloadFontCache : function(  ) {},
+
+<span id='android-widget-TextView-method-setAutoSizeTextTypeWithDefaults'>/**Specify whether this widget should automatically scale the text to try to perfectly fit
+</span> within the layout bounds by using the default auto-size configuration.
+@param {Number} autoSizeTextType the type of auto-size. Must be one of
+        {@link TextView#AUTO_SIZE_TEXT_TYPE_NONE} or
+        {@link TextView#AUTO_SIZE_TEXT_TYPE_UNIFORM}
+@throws IllegalArgumentException if &lt;code&gt;autoSizeTextType&lt;/code&gt; is none of the types above.
+@attr ref android.R.styleable#TextView_autoSizeTextType
+@see #getAutoSizeTextType()
+*/
+setAutoSizeTextTypeWithDefaults : function(  ) {},
+
+<span id='android-widget-TextView-method-setAutoSizeTextTypeUniformWithConfiguration'>/**Specify whether this widget should automatically scale the text to try to perfectly fit
+</span> within the layout bounds. If all the configuration params are valid the type of auto-size is
+ set to {@link #AUTO_SIZE_TEXT_TYPE_UNIFORM}.
+@param {Number} autoSizeMinTextSize the minimum text size available for auto-size
+@param {Number} autoSizeMaxTextSize the maximum text size available for auto-size
+@param {Number} autoSizeStepGranularity the auto-size step granularity. It is used in conjunction with
+                                the minimum and maximum text size in order to build the set of
+                                text sizes the system uses to choose from when auto-sizing
+@param {Number} unit the desired dimension unit for all sizes above. See {@link TypedValue} for the
+             possible dimension units
+@throws IllegalArgumentException if any of the configuration params are invalid.
+@attr ref android.R.styleable#TextView_autoSizeTextType
+@attr ref android.R.styleable#TextView_autoSizeMinTextSize
+@attr ref android.R.styleable#TextView_autoSizeMaxTextSize
+@attr ref android.R.styleable#TextView_autoSizeStepGranularity
+@see #setAutoSizeTextTypeWithDefaults(int)
+@see #setAutoSizeTextTypeUniformWithPresetSizes(int[], int)
+@see #getAutoSizeMinTextSize()
+@see #getAutoSizeMaxTextSize()
+@see #getAutoSizeStepGranularity()
+@see #getAutoSizeTextAvailableSizes()
+*/
+setAutoSizeTextTypeUniformWithConfiguration : function(  ) {},
+
+<span id='android-widget-TextView-method-setAutoSizeTextTypeUniformWithPresetSizes'>/**Specify whether this widget should automatically scale the text to try to perfectly fit
+</span> within the layout bounds. If at least one value from the &lt;code&gt;presetSizes&lt;/code&gt; is valid
+ then the type of auto-size is set to {@link #AUTO_SIZE_TEXT_TYPE_UNIFORM}.
+@param {Object {int[]}} presetSizes an {@code int} array of sizes in pixels
+@param {Number} unit the desired dimension unit for the preset sizes above. See {@link TypedValue} for
+             the possible dimension units
+@throws IllegalArgumentException if all of the &lt;code&gt;presetSizes&lt;/code&gt; are invalid.
+@attr ref android.R.styleable#TextView_autoSizeTextType
+@attr ref android.R.styleable#TextView_autoSizePresetSizes
+@see #setAutoSizeTextTypeWithDefaults(int)
+@see #setAutoSizeTextTypeUniformWithConfiguration(int, int, int, int)
+@see #getAutoSizeMinTextSize()
+@see #getAutoSizeMaxTextSize()
+@see #getAutoSizeTextAvailableSizes()
+*/
+setAutoSizeTextTypeUniformWithPresetSizes : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutoSizeTextType'>/**Returns the type of auto-size set for this widget.
+</span>@return {Number} an {@code int} corresponding to one of the auto-size types:
+         {@link TextView#AUTO_SIZE_TEXT_TYPE_NONE} or
+         {@link TextView#AUTO_SIZE_TEXT_TYPE_UNIFORM}
+@attr ref android.R.styleable#TextView_autoSizeTextType
+@see #setAutoSizeTextTypeWithDefaults(int)
+@see #setAutoSizeTextTypeUniformWithConfiguration(int, int, int, int)
+@see #setAutoSizeTextTypeUniformWithPresetSizes(int[], int)
+*/
+getAutoSizeTextType : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutoSizeStepGranularity'>/**
+</span>@return {Number} the current auto-size step granularity in pixels.
+@attr ref android.R.styleable#TextView_autoSizeStepGranularity
+@see #setAutoSizeTextTypeUniformWithConfiguration(int, int, int, int)
+*/
+getAutoSizeStepGranularity : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutoSizeMinTextSize'>/**
+</span>@return {Number} the current auto-size minimum text size in pixels (the default is 12sp). Note that
+         if auto-size has not been configured this function returns {@code -1}.
+@attr ref android.R.styleable#TextView_autoSizeMinTextSize
+@see #setAutoSizeTextTypeUniformWithConfiguration(int, int, int, int)
+@see #setAutoSizeTextTypeUniformWithPresetSizes(int[], int)
+*/
+getAutoSizeMinTextSize : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutoSizeMaxTextSize'>/**
+</span>@return {Number} the current auto-size maximum text size in pixels (the default is 112sp). Note that
+         if auto-size has not been configured this function returns {@code -1}.
+@attr ref android.R.styleable#TextView_autoSizeMaxTextSize
+@see #setAutoSizeTextTypeUniformWithConfiguration(int, int, int, int)
+@see #setAutoSizeTextTypeUniformWithPresetSizes(int[], int)
+*/
+getAutoSizeMaxTextSize : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutoSizeTextAvailableSizes'>/**
+</span>@return {Number} the current auto-size {@code int} sizes array (in pixels).
+@see #setAutoSizeTextTypeUniformWithConfiguration(int, int, int, int)
+@see #setAutoSizeTextTypeUniformWithPresetSizes(int[], int)
+*/
+getAutoSizeTextAvailableSizes : function(  ) {},
+
+<span id='android-widget-TextView-method-onActivityResult'>/**
+</span>@hide 
+*/
+onActivityResult : function(  ) {},
+
+<span id='android-widget-TextView-method-setEnabled'>/**
+</span>*/
+setEnabled : function(  ) {},
+
+<span id='android-widget-TextView-method-setTypeface'>/**Sets the typeface and style in which the text should be displayed,
+</span> and turns on the fake bold and italic bits in the Paint if the
+ Typeface that you provided does not have all the bits in the
+ style that you specified.
+@attr ref android.R.styleable#TextView_typeface
+@attr ref android.R.styleable#TextView_textStyle
+*/
+setTypeface : function(  ) {},
+
+<span id='android-widget-TextView-method-getText'>/**Return the text that TextView is displaying. If {@link #setText}(CharSequence) was called
+</span> with an argument of {@link android.widget.TextView.BufferType#SPANNABLE BufferType.SPANNABLE}
+ or {@link android.widget.TextView.BufferType#EDITABLE BufferType.EDITABLE}, you can cast
+ the return value from this method to Spannable or Editable, respectively.
+
+ &lt;p&gt;The content of the return value should not be modified. If you want a modifiable one, you
+ should make your own copy first.&lt;/p&gt;
+@return {Object {java.lang.CharSequence}} The text displayed by the text view.
+@attr ref android.R.styleable#TextView_text
+*/
+getText : function(  ) {},
+
+<span id='android-widget-TextView-method-length'>/**Returns the length, in characters, of the text managed by this TextView
+</span>@return {Number} The length of the text managed by the TextView in characters.
+*/
+length : function(  ) {},
+
+<span id='android-widget-TextView-method-getEditableText'>/**Return the text that TextView is displaying as an Editable object. If the text is not
+</span> editable, null is returned.
+@see #getText
+*/
+getEditableText : function(  ) {},
+
+<span id='android-widget-TextView-method-getTransformed'>/**
+</span>@hide 
+*/
+getTransformed : function(  ) {},
+
+<span id='android-widget-TextView-method-getLineHeight'>/**Gets the vertical distance between lines of text, in pixels.
+</span> Note that markup within the text can cause individual lines
+ to be taller or shorter than this height, and the layout may
+ contain additional first-or last-line padding.
+@return {Number} The height of one standard line in pixels.
+*/
+getLineHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-getLayout'>/**Gets the {@link android.text.Layout} that is currently being used to display the text.
+</span> This value can be null if the text or width has recently changed.
+@return {Object {android.text.Layout}} The Layout that is currently being used to display the text.
+*/
+getLayout : function(  ) {},
+
+<span id='android-widget-TextView-method-getUndoManager'>/**Retrieve the {@link android.content.UndoManager} that is currently associated
+</span> with this TextView.  By default there is no associated UndoManager, so null
+ is returned.  One can be associated with the TextView through
+ {@link #setUndoManager(android.content.UndoManager, String)}
+@hide 
+*/
+getUndoManager : function(  ) {},
+
+<span id='android-widget-TextView-method-getEditorForTesting'>/**
+</span>@hide 
+*/
+getEditorForTesting : function(  ) {},
+
+<span id='android-widget-TextView-method-setUndoManager'>/**Associate an {@link android.content.UndoManager} with this TextView.  Once
+</span> done, all edit operations on the TextView will result in appropriate
+ {@link android.content.UndoOperation} objects pushed on the given UndoManager's
+ stack.
+@param {Object {UndoManager}} undoManager The {@link android.content.UndoManager} to associate with
+ this TextView, or null to clear any existing association.
+@param {String} tag String tag identifying this particular TextView owner in the
+ UndoManager.  This is used to keep the correct association with the
+ {@link android.content.UndoOwner} of any operations inside of the UndoManager.
+@hide 
+*/
+setUndoManager : function(  ) {},
+
+<span id='android-widget-TextView-method-getKeyListener'>/**Gets the current {@link KeyListener} for the TextView.
+</span> This will frequently be null for non-EditText TextViews.
+@return {Object {android.text.method.KeyListener}} the current key listener for this TextView.
+@attr ref android.R.styleable#TextView_numeric
+@attr ref android.R.styleable#TextView_digits
+@attr ref android.R.styleable#TextView_phoneNumber
+@attr ref android.R.styleable#TextView_inputMethod
+@attr ref android.R.styleable#TextView_capitalize
+@attr ref android.R.styleable#TextView_autoText
+*/
+getKeyListener : function(  ) {},
+
+<span id='android-widget-TextView-method-setKeyListener'>/**Sets the key listener to be used with this TextView.  This can be null
+</span> to disallow user input.  Note that this method has significant and
+ subtle interactions with soft keyboards and other input method:
+ see {@link KeyListener#getInputType() KeyListener.getInputType()}
+ for important details.  Calling this method will replace the current
+ content type of the text view with the content type returned by the
+ key listener.
+ &lt;p&gt;
+ Be warned that if you want a TextView with a key listener or movement
+ method not to be focusable, or if you want a TextView without a
+ key listener or movement method to be focusable, you must call
+ {@link #setFocusable} again after calling this to get the focusability
+ back the way you want it.
+@attr ref android.R.styleable#TextView_numeric
+@attr ref android.R.styleable#TextView_digits
+@attr ref android.R.styleable#TextView_phoneNumber
+@attr ref android.R.styleable#TextView_inputMethod
+@attr ref android.R.styleable#TextView_capitalize
+@attr ref android.R.styleable#TextView_autoText
+*/
+setKeyListener : function(  ) {},
+
+<span id='android-widget-TextView-method-getMovementMethod'>/**Gets the {@link android.text.method.MovementMethod} being used for this TextView,
+</span> which provides positioning, scrolling, and text selection functionality.
+ This will frequently be null for non-EditText TextViews.
+@return {Object {android.text.method.MovementMethod}} the movement method being used for this TextView.
+@see android.text.method.MovementMethod
+*/
+getMovementMethod : function(  ) {},
+
+<span id='android-widget-TextView-method-setMovementMethod'>/**Sets the {@link android.text.method.MovementMethod} for handling arrow key movement
+</span> for this TextView. This can be null to disallow using the arrow keys to move the
+ cursor or scroll the view.
+ &lt;p&gt;
+ Be warned that if you want a TextView with a key listener or movement
+ method not to be focusable, or if you want a TextView without a
+ key listener or movement method to be focusable, you must call
+ {@link #setFocusable} again after calling this to get the focusability
+ back the way you want it.
+*/
+setMovementMethod : function(  ) {},
+
+<span id='android-widget-TextView-method-getTransformationMethod'>/**Gets the current {@link android.text.method.TransformationMethod} for the TextView.
+</span> This is frequently null, except for single-line and password fields.
+@return {Object {android.text.method.TransformationMethod}} the current transformation method for this TextView.
+@attr ref android.R.styleable#TextView_password
+@attr ref android.R.styleable#TextView_singleLine
+*/
+getTransformationMethod : function(  ) {},
+
+<span id='android-widget-TextView-method-setTransformationMethod'>/**Sets the transformation that is applied to the text that this
+</span> TextView is displaying.
+@attr ref android.R.styleable#TextView_password
+@attr ref android.R.styleable#TextView_singleLine
+*/
+setTransformationMethod : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundPaddingTop'>/**Returns the top padding of the view, plus space for the top
+</span> Drawable if any.
+*/
+getCompoundPaddingTop : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundPaddingBottom'>/**Returns the bottom padding of the view, plus space for the bottom
+</span> Drawable if any.
+*/
+getCompoundPaddingBottom : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundPaddingLeft'>/**Returns the left padding of the view, plus space for the left
+</span> Drawable if any.
+*/
+getCompoundPaddingLeft : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundPaddingRight'>/**Returns the right padding of the view, plus space for the right
+</span> Drawable if any.
+*/
+getCompoundPaddingRight : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundPaddingStart'>/**Returns the start padding of the view, plus space for the start
+</span> Drawable if any.
+*/
+getCompoundPaddingStart : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundPaddingEnd'>/**Returns the end padding of the view, plus space for the end
+</span> Drawable if any.
+*/
+getCompoundPaddingEnd : function(  ) {},
+
+<span id='android-widget-TextView-method-getExtendedPaddingTop'>/**Returns the extended top padding of the view, including both the
+</span> top Drawable if any and any extra space to keep more than maxLines
+ of text from showing.  It is only valid to call this after measuring.
+*/
+getExtendedPaddingTop : function(  ) {},
+
+<span id='android-widget-TextView-method-getExtendedPaddingBottom'>/**Returns the extended bottom padding of the view, including both the
+</span> bottom Drawable if any and any extra space to keep more than maxLines
+ of text from showing.  It is only valid to call this after measuring.
+*/
+getExtendedPaddingBottom : function(  ) {},
+
+<span id='android-widget-TextView-method-getTotalPaddingLeft'>/**Returns the total left padding of the view, including the left
+</span> Drawable if any.
+*/
+getTotalPaddingLeft : function(  ) {},
+
+<span id='android-widget-TextView-method-getTotalPaddingRight'>/**Returns the total right padding of the view, including the right
+</span> Drawable if any.
+*/
+getTotalPaddingRight : function(  ) {},
+
+<span id='android-widget-TextView-method-getTotalPaddingStart'>/**Returns the total start padding of the view, including the start
+</span> Drawable if any.
+*/
+getTotalPaddingStart : function(  ) {},
+
+<span id='android-widget-TextView-method-getTotalPaddingEnd'>/**Returns the total end padding of the view, including the end
+</span> Drawable if any.
+*/
+getTotalPaddingEnd : function(  ) {},
+
+<span id='android-widget-TextView-method-getTotalPaddingTop'>/**Returns the total top padding of the view, including the top
+</span> Drawable if any, the extra space to keep more than maxLines
+ from showing, and the vertical offset for gravity, if any.
+*/
+getTotalPaddingTop : function(  ) {},
+
+<span id='android-widget-TextView-method-getTotalPaddingBottom'>/**Returns the total bottom padding of the view, including the bottom
+</span> Drawable if any, the extra space to keep more than maxLines
+ from showing, and the vertical offset for gravity, if any.
+*/
+getTotalPaddingBottom : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawables'>/**Sets the Drawables (if any) to appear to the left of, above, to the
+</span> right of, and below the text. Use {@code null} if you do not want a
+ Drawable there. The Drawables must already have had
+ {@link Drawable#setBounds} called.
+ &lt;p&gt;
+ Calling this method will overwrite any Drawables previously set using
+ {@link #setCompoundDrawablesRelative} or related methods.
+@attr ref android.R.styleable#TextView_drawableLeft
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableRight
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+setCompoundDrawables : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawablesWithIntrinsicBounds'>/**Sets the Drawables (if any) to appear to the left of, above, to the
+</span> right of, and below the text. Use 0 if you do not want a Drawable there.
+ The Drawables' bounds will be set to their intrinsic bounds.
+ &lt;p&gt;
+ Calling this method will overwrite any Drawables previously set using
+ {@link #setCompoundDrawablesRelative} or related methods.
+@param {Number} left Resource identifier of the left Drawable.
+@param {Number} top Resource identifier of the top Drawable.
+@param {Number} right Resource identifier of the right Drawable.
+@param {Number} bottom Resource identifier of the bottom Drawable.
+@attr ref android.R.styleable#TextView_drawableLeft
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableRight
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+setCompoundDrawablesWithIntrinsicBounds : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawablesWithIntrinsicBounds'>/**Sets the Drawables (if any) to appear to the left of, above, to the
+</span> right of, and below the text. Use {@code null} if you do not want a
+ Drawable there. The Drawables' bounds will be set to their intrinsic
+ bounds.
+ &lt;p&gt;
+ Calling this method will overwrite any Drawables previously set using
+ {@link #setCompoundDrawablesRelative} or related methods.
+@attr ref android.R.styleable#TextView_drawableLeft
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableRight
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+setCompoundDrawablesWithIntrinsicBounds : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawablesRelative'>/**Sets the Drawables (if any) to appear to the start of, above, to the end
+</span> of, and below the text. Use {@code null} if you do not want a Drawable
+ there. The Drawables must already have had {@link Drawable#setBounds}
+ called.
+ &lt;p&gt;
+ Calling this method will overwrite any Drawables previously set using
+ {@link #setCompoundDrawables} or related methods.
+@attr ref android.R.styleable#TextView_drawableStart
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableEnd
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+setCompoundDrawablesRelative : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawablesRelativeWithIntrinsicBounds'>/**Sets the Drawables (if any) to appear to the start of, above, to the end
+</span> of, and below the text. Use 0 if you do not want a Drawable there. The
+ Drawables' bounds will be set to their intrinsic bounds.
+ &lt;p&gt;
+ Calling this method will overwrite any Drawables previously set using
+ {@link #setCompoundDrawables} or related methods.
+@param {Number} start Resource identifier of the start Drawable.
+@param {Number} top Resource identifier of the top Drawable.
+@param {Number} end Resource identifier of the end Drawable.
+@param {Number} bottom Resource identifier of the bottom Drawable.
+@attr ref android.R.styleable#TextView_drawableStart
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableEnd
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+setCompoundDrawablesRelativeWithIntrinsicBounds : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawablesRelativeWithIntrinsicBounds'>/**Sets the Drawables (if any) to appear to the start of, above, to the end
+</span> of, and below the text. Use {@code null} if you do not want a Drawable
+ there. The Drawables' bounds will be set to their intrinsic bounds.
+ &lt;p&gt;
+ Calling this method will overwrite any Drawables previously set using
+ {@link #setCompoundDrawables} or related methods.
+@attr ref android.R.styleable#TextView_drawableStart
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableEnd
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+setCompoundDrawablesRelativeWithIntrinsicBounds : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundDrawables'>/**Returns drawables for the left, top, right, and bottom borders.
+</span>@attr ref android.R.styleable#TextView_drawableLeft
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableRight
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+getCompoundDrawables : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundDrawablesRelative'>/**Returns drawables for the start, top, end, and bottom borders.
+</span>@attr ref android.R.styleable#TextView_drawableStart
+@attr ref android.R.styleable#TextView_drawableTop
+@attr ref android.R.styleable#TextView_drawableEnd
+@attr ref android.R.styleable#TextView_drawableBottom
+*/
+getCompoundDrawablesRelative : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawablePadding'>/**Sets the size of the padding between the compound drawables and
+</span> the text.
+@attr ref android.R.styleable#TextView_drawablePadding
+*/
+setCompoundDrawablePadding : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundDrawablePadding'>/**Returns the padding between the compound drawables and the text.
+</span>@attr ref android.R.styleable#TextView_drawablePadding
+*/
+getCompoundDrawablePadding : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawableTintList'>/**Applies a tint to the compound drawables. Does not modify the
+</span> current tint mode, which is {@link PorterDuff.Mode#SRC_IN} by default.
+ &lt;p&gt;
+ Subsequent calls to
+ {@link #setCompoundDrawables(Drawable, Drawable, Drawable, Drawable)}
+ and related methods will automatically mutate the drawables and apply
+ the specified tint and tint mode using
+ {@link Drawable#setTintList(ColorStateList)}.
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@attr ref android.R.styleable#TextView_drawableTint
+@see #getCompoundDrawableTintList()
+@see Drawable#setTintList(ColorStateList)
+*/
+setCompoundDrawableTintList : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundDrawableTintList'>/**
+</span>@return {Object {android.content.res.ColorStateList}} the tint applied to the compound drawables
+@attr ref android.R.styleable#TextView_drawableTint
+@see #setCompoundDrawableTintList(ColorStateList)
+*/
+getCompoundDrawableTintList : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawableTintMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setCompoundDrawableTintList}(ColorStateList) to the compound
+ drawables. The default mode is {@link PorterDuff.Mode#SRC_IN}.
+@param {Object {PorterDuff.Mode}} tintMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#TextView_drawableTintMode
+@see #setCompoundDrawableTintList(ColorStateList)
+@see Drawable#setTintMode(PorterDuff.Mode)
+*/
+setCompoundDrawableTintMode : function(  ) {},
+
+<span id='android-widget-TextView-method-setCompoundDrawableTintBlendMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setCompoundDrawableTintList}(ColorStateList) to the compound
+ drawables. The default mode is {@link PorterDuff.Mode#SRC_IN}.
+@param {Object {BlendMode}} blendMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#TextView_drawableTintMode
+@see #setCompoundDrawableTintList(ColorStateList)
+@see Drawable#setTintBlendMode(BlendMode)
+*/
+setCompoundDrawableTintBlendMode : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundDrawableTintMode'>/**Returns the blending mode used to apply the tint to the compound
+</span> drawables, if specified.
+@return {Object {android.graphics.PorterDuff.Mode}} the blending mode used to apply the tint to the compound
+         drawables
+@attr ref android.R.styleable#TextView_drawableTintMode
+@see #setCompoundDrawableTintMode(PorterDuff.Mode)
+*/
+getCompoundDrawableTintMode : function(  ) {},
+
+<span id='android-widget-TextView-method-getCompoundDrawableTintBlendMode'>/**Returns the blending mode used to apply the tint to the compound
+</span> drawables, if specified.
+@return {Object {android.graphics.BlendMode}} the blending mode used to apply the tint to the compound
+         drawables
+@attr ref android.R.styleable#TextView_drawableTintMode
+@see #setCompoundDrawableTintBlendMode(BlendMode)
+*/
+getCompoundDrawableTintBlendMode : function(  ) {},
+
+<span id='android-widget-TextView-method-setPadding'>/**
+</span>@inheritDoc 
+@see #setFirstBaselineToTopHeight(int)
+@see #setLastBaselineToBottomHeight(int)
+*/
+setPadding : function(  ) {},
+
+<span id='android-widget-TextView-method-setPaddingRelative'>/**
+</span>@inheritDoc 
+@see #setFirstBaselineToTopHeight(int)
+@see #setLastBaselineToBottomHeight(int)
+*/
+setPaddingRelative : function(  ) {},
+
+<span id='android-widget-TextView-method-setFirstBaselineToTopHeight'>/**Updates the top padding of the TextView so that {@code firstBaselineToTopHeight} is
+</span> the distance between the top of the TextView and first line's baseline.
+ &lt;p&gt;
+ &lt;img src=&quot;{@docRoot}reference/android/images/text/widget/first_last_baseline.png&quot; /&gt;
+ &lt;figcaption&gt;First and last baseline metrics for a TextView.&lt;/figcaption&gt;
+
+ &lt;strong&gt;Note&lt;/strong&gt; that if {@code FontMetrics.top} or {@code FontMetrics.ascent} was
+ already greater than {@code firstBaselineToTopHeight}, the top padding is not updated.
+ Moreover since this function sets the top padding, if the height of the TextView is less than
+ the sum of top padding, line height and bottom padding, top of the line will be pushed
+ down and bottom will be clipped.
+@param {Number} firstBaselineToTopHeight distance between first baseline to top of the container
+      in pixels
+@see #getFirstBaselineToTopHeight()
+@see #setLastBaselineToBottomHeight(int)
+@see #setPadding(int, int, int, int)
+@see #setPaddingRelative(int, int, int, int)
+@attr ref android.R.styleable#TextView_firstBaselineToTopHeight
+*/
+setFirstBaselineToTopHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-setLastBaselineToBottomHeight'>/**Updates the bottom padding of the TextView so that {@code lastBaselineToBottomHeight} is
+</span> the distance between the bottom of the TextView and the last line's baseline.
+ &lt;p&gt;
+ &lt;img src=&quot;{@docRoot}reference/android/images/text/widget/first_last_baseline.png&quot; /&gt;
+ &lt;figcaption&gt;First and last baseline metrics for a TextView.&lt;/figcaption&gt;
+
+ &lt;strong&gt;Note&lt;/strong&gt; that if {@code FontMetrics.bottom} or {@code FontMetrics.descent} was
+ already greater than {@code lastBaselineToBottomHeight}, the bottom padding is not updated.
+ Moreover since this function sets the bottom padding, if the height of the TextView is less
+ than the sum of top padding, line height and bottom padding, bottom of the text will be
+ clipped.
+@param {Number} lastBaselineToBottomHeight distance between last baseline to bottom of the container
+      in pixels
+@see #getLastBaselineToBottomHeight()
+@see #setFirstBaselineToTopHeight(int)
+@see #setPadding(int, int, int, int)
+@see #setPaddingRelative(int, int, int, int)
+@attr ref android.R.styleable#TextView_lastBaselineToBottomHeight
+*/
+setLastBaselineToBottomHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-getFirstBaselineToTopHeight'>/**Returns the distance between the first text baseline and the top of this TextView.
+</span>@see #setFirstBaselineToTopHeight(int)
+@attr ref android.R.styleable#TextView_firstBaselineToTopHeight
+*/
+getFirstBaselineToTopHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-getLastBaselineToBottomHeight'>/**Returns the distance between the last text baseline and the bottom of this TextView.
+</span>@see #setLastBaselineToBottomHeight(int)
+@attr ref android.R.styleable#TextView_lastBaselineToBottomHeight
+*/
+getLastBaselineToBottomHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutoLinkMask'>/**Gets the autolink mask of the text.
+</span>
+ See {@link Linkify#ALL} and peers for possible values.
+@attr ref android.R.styleable#TextView_autoLink
+*/
+getAutoLinkMask : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSelectHandle'>/**Sets the Drawable corresponding to the selection handle used for
+</span> positioning the cursor within text. The Drawable defaults to the value
+ of the textSelectHandle attribute.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@see #setTextSelectHandle(int)
+@attr ref android.R.styleable#TextView_textSelectHandle
+*/
+setTextSelectHandle : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSelectHandle'>/**Sets the Drawable corresponding to the selection handle used for
+</span> positioning the cursor within text. The Drawable defaults to the value
+ of the textSelectHandle attribute.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@see #setTextSelectHandle(Drawable)
+@attr ref android.R.styleable#TextView_textSelectHandle
+*/
+setTextSelectHandle : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextSelectHandle'>/**Returns the Drawable corresponding to the selection handle used
+</span> for positioning the cursor within text.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@return {Object {android.graphics.drawable.Drawable}} the text select handle drawable
+@see #setTextSelectHandle(Drawable)
+@see #setTextSelectHandle(int)
+@attr ref android.R.styleable#TextView_textSelectHandle
+*/
+getTextSelectHandle : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSelectHandleLeft'>/**Sets the Drawable corresponding to the left handle used
+</span> for selecting text. The Drawable defaults to the value of the
+ textSelectHandleLeft attribute.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@see #setTextSelectHandleLeft(int)
+@attr ref android.R.styleable#TextView_textSelectHandleLeft
+*/
+setTextSelectHandleLeft : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSelectHandleLeft'>/**Sets the Drawable corresponding to the left handle used
+</span> for selecting text. The Drawable defaults to the value of the
+ textSelectHandleLeft attribute.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@see #setTextSelectHandleLeft(Drawable)
+@attr ref android.R.styleable#TextView_textSelectHandleLeft
+*/
+setTextSelectHandleLeft : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextSelectHandleLeft'>/**Returns the Drawable corresponding to the left handle used
+</span> for selecting text.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@return {Object {android.graphics.drawable.Drawable}} the left text selection handle drawable
+@see #setTextSelectHandleLeft(Drawable)
+@see #setTextSelectHandleLeft(int)
+@attr ref android.R.styleable#TextView_textSelectHandleLeft
+*/
+getTextSelectHandleLeft : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSelectHandleRight'>/**Sets the Drawable corresponding to the right handle used
+</span> for selecting text. The Drawable defaults to the value of the
+ textSelectHandleRight attribute.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@see #setTextSelectHandleRight(int)
+@attr ref android.R.styleable#TextView_textSelectHandleRight
+*/
+setTextSelectHandleRight : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSelectHandleRight'>/**Sets the Drawable corresponding to the right handle used
+</span> for selecting text. The Drawable defaults to the value of the
+ textSelectHandleRight attribute.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@see #setTextSelectHandleRight(Drawable)
+@attr ref android.R.styleable#TextView_textSelectHandleRight
+*/
+setTextSelectHandleRight : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextSelectHandleRight'>/**Returns the Drawable corresponding to the right handle used
+</span> for selecting text.
+ Note that any change applied to the handle Drawable will not be visible
+ until the handle is hidden and then drawn again.
+@return {Object {android.graphics.drawable.Drawable}} the right text selection handle drawable
+@see #setTextSelectHandleRight(Drawable)
+@see #setTextSelectHandleRight(int)
+@attr ref android.R.styleable#TextView_textSelectHandleRight
+*/
+getTextSelectHandleRight : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextCursorDrawable'>/**Sets the Drawable corresponding to the text cursor. The Drawable defaults to the
+</span> value of the textCursorDrawable attribute.
+ Note that any change applied to the cursor Drawable will not be visible
+ until the cursor is hidden and then drawn again.
+@see #setTextCursorDrawable(int)
+@attr ref android.R.styleable#TextView_textCursorDrawable
+*/
+setTextCursorDrawable : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextCursorDrawable'>/**Sets the Drawable corresponding to the text cursor. The Drawable defaults to the
+</span> value of the textCursorDrawable attribute.
+ Note that any change applied to the cursor Drawable will not be visible
+ until the cursor is hidden and then drawn again.
+@see #setTextCursorDrawable(Drawable)
+@attr ref android.R.styleable#TextView_textCursorDrawable
+*/
+setTextCursorDrawable : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextCursorDrawable'>/**Returns the Drawable corresponding to the text cursor.
+</span> Note that any change applied to the cursor Drawable will not be visible
+ until the cursor is hidden and then drawn again.
+@return {Object {android.graphics.drawable.Drawable}} the text cursor drawable
+@see #setTextCursorDrawable(Drawable)
+@see #setTextCursorDrawable(int)
+@attr ref android.R.styleable#TextView_textCursorDrawable
+*/
+getTextCursorDrawable : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextAppearance'>/**Sets the text appearance from the specified style resource.
+</span> &lt;p&gt;
+ Use a framework-defined {@code TextAppearance} style like
+ {@link android.R.style#TextAppearance_Material_Body1 @android:style/TextAppearance.Material.Body1}
+ or see {@link android.R.styleable#TextAppearance TextAppearance} for the
+ set of attributes that can be used in a custom style.
+@param {Number} resId the resource identifier of the style to apply
+@attr ref android.R.styleable#TextView_textAppearance
+*/
+setTextAppearance : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextAppearance'>/**Sets the text color, size, style, hint color, and highlight color
+</span> from the specified TextAppearance resource.
+@deprecated Use {@link #setTextAppearance(int)} instead.
+*/
+setTextAppearance : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextLocale'>/**Get the default primary {@link Locale} of the text in this TextView. This will always be
+</span> the first member of {@link #getTextLocales}().
+@return {Object {java.util.Locale}} the default primary {@link Locale} of the text in this TextView.
+*/
+getTextLocale : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextLocales'>/**Get the default {@link LocaleList} of the text in this TextView.
+</span>@return {Object {android.os.LocaleList}} the default {@link LocaleList} of the text in this TextView.
+*/
+getTextLocales : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextLocale'>/**Set the default {@link Locale} of the text in this TextView to a one-member
+</span> {@link LocaleList} containing just the given Locale.
+@param {Object {Locale}} locale the {@link Locale} for drawing text, must not be null.
+@see #setTextLocales
+*/
+setTextLocale : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextLocales'>/**Set the default {@link LocaleList} of the text in this TextView to the given value.
+</span>
+ This value is used to choose appropriate typefaces for ambiguous characters (typically used
+ for CJK locales to disambiguate Hanzi/Kanji/Hanja characters). It also affects
+ other aspects of text display, including line breaking.
+@param {Object {LocaleList}} locales the {@link LocaleList} for drawing text, must not be null or empty.
+@see Paint#setTextLocales
+*/
+setTextLocales : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextSize'>/**
+</span>@return {Number} the size (in pixels) of the default text size in this TextView.
+*/
+getTextSize : function(  ) {},
+
+<span id='android-widget-TextView-method-getScaledTextSize'>/**
+</span>@return {Number} the size (in scaled pixels) of the default text size in this TextView.
+@hide 
+*/
+getScaledTextSize : function(  ) {},
+
+<span id='android-widget-TextView-method-getTypefaceStyle'>/**
+</span>@hide 
+*/
+getTypefaceStyle : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSize'>/**Set the default text size to the given value, interpreted as &quot;scaled
+</span> pixel&quot; units.  This size is adjusted based on the current density and
+ user font size preference.
+
+ &lt;p&gt;Note: if this TextView has the auto-size feature enabled than this function is no-op.
+@param {Number} size The scaled pixel size.
+@attr ref android.R.styleable#TextView_textSize
+*/
+setTextSize : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextSize'>/**Set the default text size to a given unit and value. See {@link TypedValue} for the possible dimension units.
+</span>
+ &lt;p&gt;Note: if this TextView has the auto-size feature enabled than this function is no-op.
+@param {Number} unit The desired dimension unit.
+@param {Number} size The desired size in the given units.
+@attr ref android.R.styleable#TextView_textSize
+*/
+setTextSize : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextScaleX'>/**Gets the extent by which text should be stretched horizontally.
+</span> This will usually be 1.0.
+@return {Number} The horizontal scale factor.
+*/
+getTextScaleX : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextScaleX'>/**Sets the horizontal scale factor for text. The default value
+</span> is 1.0. Values greater than 1.0 stretch the text wider.
+ Values less than 1.0 make the text narrower. By default, this value is 1.0.
+@param {Number} size The horizontal scale factor.
+@attr ref android.R.styleable#TextView_textScaleX
+*/
+setTextScaleX : function(  ) {},
+
+<span id='android-widget-TextView-method-setTypeface'>/**Sets the typeface and style in which the text should be displayed.
+</span> Note that not all Typeface families actually have bold and italic
+ variants, so you may need to use
+ {@link #setTypeface(Typeface, int)} to get the appearance
+ that you actually want.
+@see #getTypeface()
+@attr ref android.R.styleable#TextView_fontFamily
+@attr ref android.R.styleable#TextView_typeface
+@attr ref android.R.styleable#TextView_textStyle
+*/
+setTypeface : function(  ) {},
+
+<span id='android-widget-TextView-method-getTypeface'>/**Gets the current {@link Typeface} that is used to style the text.
+</span>@return {Object {android.graphics.Typeface}} The current Typeface.
+@see #setTypeface(Typeface)
+@attr ref android.R.styleable#TextView_fontFamily
+@attr ref android.R.styleable#TextView_typeface
+@attr ref android.R.styleable#TextView_textStyle
+*/
+getTypeface : function(  ) {},
+
+<span id='android-widget-TextView-method-setElegantTextHeight'>/**Set the TextView's elegant height metrics flag. This setting selects font
+</span> variants that have not been compacted to fit Latin-based vertical
+ metrics, and also increases top and bottom bounds to provide more space.
+@param {Boolean} elegant set the paint's elegant metrics flag.
+@see #isElegantTextHeight()
+@see Paint#isElegantTextHeight()
+@attr ref android.R.styleable#TextView_elegantTextHeight
+*/
+setElegantTextHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-setFallbackLineSpacing'>/**Set whether to respect the ascent and descent of the fallback fonts that are used in
+</span> displaying the text (which is needed to avoid text from consecutive lines running into
+ each other). If set, fallback fonts that end up getting used can increase the ascent
+ and descent of the lines that they are used on.
+ &lt;p/&gt;
+ It is required to be true if text could be in languages like Burmese or Tibetan where text
+ is typically much taller or deeper than Latin text.
+@param {Boolean} enabled whether to expand linespacing based on fallback fonts, {@code true} by default
+@see StaticLayout.Builder#setUseLineSpacingFromFallbacks(boolean)
+@attr ref android.R.styleable#TextView_fallbackLineSpacing
+*/
+setFallbackLineSpacing : function(  ) {},
+
+<span id='android-widget-TextView-method-isFallbackLineSpacing'>/**
+</span>@return {Boolean} whether fallback line spacing is enabled, {@code true} by default
+@see #setFallbackLineSpacing(boolean)
+@attr ref android.R.styleable#TextView_fallbackLineSpacing
+*/
+isFallbackLineSpacing : function(  ) {},
+
+<span id='android-widget-TextView-method-isElegantTextHeight'>/**Get the value of the TextView's elegant height metrics flag. This setting selects font
+</span> variants that have not been compacted to fit Latin-based vertical
+ metrics, and also increases top and bottom bounds to provide more space.
+@return {Boolean} {@code true} if the elegant height metrics flag is set.
+@see #setElegantTextHeight(boolean)
+@see Paint#setElegantTextHeight(boolean)
+*/
+isElegantTextHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-getLetterSpacing'>/**Gets the text letter-space value, which determines the spacing between characters.
+</span> The value returned is in ems. Normally, this value is 0.0.
+@return {Number} The text letter-space value in ems.
+@see #setLetterSpacing(float)
+@see Paint#setLetterSpacing
+*/
+getLetterSpacing : function(  ) {},
+
+<span id='android-widget-TextView-method-setLetterSpacing'>/**Sets text letter-spacing in em units.  Typical values
+</span> for slight expansion will be around 0.05.  Negative values tighten text.
+@param {Number} letterSpacing A text letter-space value in ems.
+@see Paint#getLetterSpacing
+@param letterSpacing A text letter-space value in ems.
+@attr ref android.R.styleable#TextView_letterSpacing
+*/
+setLetterSpacing : function(  ) {},
+
+<span id='android-widget-TextView-method-getFontFeatureSettings'>/**Returns the font feature settings. The format is the same as the CSS
+</span> font-feature-settings attribute:
+ &lt;a href=&quot;https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&quot;&gt;
+     https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&lt;/a&gt;
+@return {String} the currently set font feature settings.  Default is null.
+@see #setFontFeatureSettings(String)
+@see Paint#setFontFeatureSettings(String) Paint.setFontFeatureSettings(String)
+*/
+getFontFeatureSettings : function(  ) {},
+
+<span id='android-widget-TextView-method-getFontVariationSettings'>/**Returns the font variation settings.
+</span>@return {String} the currently set font variation settings.  Returns null if no variation is
+ specified.
+@see #setFontVariationSettings(String)
+@see Paint#setFontVariationSettings(String) Paint.setFontVariationSettings(String)
+*/
+getFontVariationSettings : function(  ) {},
+
+<span id='android-widget-TextView-method-setBreakStrategy'>/**Sets the break strategy for breaking paragraphs into lines. The default value for
+</span> TextView is {@link Layout#BREAK_STRATEGY_HIGH_QUALITY}, and the default value for
+ EditText is {@link Layout#BREAK_STRATEGY_SIMPLE}, the latter to avoid the
+ text &quot;dancing&quot; when being edited.
+ &lt;p/&gt;
+ Enabling hyphenation with either using {@link Layout#HYPHENATION_FREQUENCY_NORMAL} or
+ {@link Layout#HYPHENATION_FREQUENCY_FULL} while line breaking is set to one of
+ {@link Layout#BREAK_STRATEGY_BALANCED}, {@link Layout#BREAK_STRATEGY_HIGH_QUALITY}
+ improves the structure of text layout however has performance impact and requires more time
+ to do the text layout.
+@attr ref android.R.styleable#TextView_breakStrategy
+@see #getBreakStrategy()
+@see #setHyphenationFrequency(int)
+*/
+setBreakStrategy : function(  ) {},
+
+<span id='android-widget-TextView-method-getBreakStrategy'>/**Gets the current strategy for breaking paragraphs into lines.
+</span>@return {Number} the current strategy for breaking paragraphs into lines.
+@attr ref android.R.styleable#TextView_breakStrategy
+@see #setBreakStrategy(int)
+*/
+getBreakStrategy : function(  ) {},
+
+<span id='android-widget-TextView-method-setHyphenationFrequency'>/**Sets the frequency of automatic hyphenation to use when determining word breaks.
+</span> The default value for both TextView and {@link android.widget.EditText} is
+ {@link Layout#HYPHENATION_FREQUENCY_NONE}. Note that the default hyphenation frequency value
+ is set from the theme.
+ &lt;p/&gt;
+ Enabling hyphenation with either using {@link Layout#HYPHENATION_FREQUENCY_NORMAL} or
+ {@link Layout#HYPHENATION_FREQUENCY_FULL} while line breaking is set to one of
+ {@link Layout#BREAK_STRATEGY_BALANCED}, {@link Layout#BREAK_STRATEGY_HIGH_QUALITY}
+ improves the structure of text layout however has performance impact and requires more time
+ to do the text layout.
+ &lt;p/&gt;
+ Note: Before Android Q, in the theme hyphenation frequency is set to
+ {@link Layout#HYPHENATION_FREQUENCY_NORMAL}. The default value is changed into
+ {@link Layout#HYPHENATION_FREQUENCY_NONE} on Q.
+@param {Number} hyphenationFrequency the hyphenation frequency to use, one of
+                             {@link Layout#HYPHENATION_FREQUENCY_NONE},
+                             {@link Layout#HYPHENATION_FREQUENCY_NORMAL},
+                             {@link Layout#HYPHENATION_FREQUENCY_FULL}
+@attr ref android.R.styleable#TextView_hyphenationFrequency
+@see #getHyphenationFrequency()
+@see #getBreakStrategy()
+*/
+setHyphenationFrequency : function(  ) {},
+
+<span id='android-widget-TextView-method-getHyphenationFrequency'>/**Gets the current frequency of automatic hyphenation to be used when determining word breaks.
+</span>@return {Number} the current frequency of automatic hyphenation to be used when determining word
+ breaks.
+@attr ref android.R.styleable#TextView_hyphenationFrequency
+@see #setHyphenationFrequency(int)
+*/
+getHyphenationFrequency : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextMetricsParams'>/**Gets the parameters for text layout precomputation, for use with {@link PrecomputedText}.
+</span>@return {Object {android.text.PrecomputedText.Params}} a current {@link PrecomputedText.Params}
+@see PrecomputedText
+*/
+getTextMetricsParams : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextMetricsParams'>/**Apply the text layout parameter.
+</span>
+ Update the TextView parameters to be compatible with {@link PrecomputedText.Params}.
+@see PrecomputedText
+*/
+setTextMetricsParams : function(  ) {},
+
+<span id='android-widget-TextView-method-setJustificationMode'>/**Set justification mode. The default value is {@link Layout#JUSTIFICATION_MODE_NONE}. If the
+</span> last line is too short for justification, the last line will be displayed with the
+ alignment set by {@link android.view.View#setTextAlignment}.
+@see #getJustificationMode()
+*/
+setJustificationMode : function(  ) {},
+
+<span id='android-widget-TextView-method-getJustificationMode'>/**
+</span>@return {Number} true if currently paragraph justification mode.
+@see #setJustificationMode(int)
+*/
+getJustificationMode : function(  ) {},
+
+<span id='android-widget-TextView-method-setFontFeatureSettings'>/**Sets font feature settings. The format is the same as the CSS
+</span> font-feature-settings attribute:
+ &lt;a href=&quot;https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&quot;&gt;
+     https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&lt;/a&gt;
+@param {String} fontFeatureSettings font feature settings represented as CSS compatible string
+@see #getFontFeatureSettings()
+@see Paint#getFontFeatureSettings() Paint.getFontFeatureSettings()
+@attr ref android.R.styleable#TextView_fontFeatureSettings
+*/
+setFontFeatureSettings : function(  ) {},
+
+<span id='android-widget-TextView-method-setFontVariationSettings'>/**Sets TrueType or OpenType font variation settings. The settings string is constructed from
+</span> multiple pairs of axis tag and style values. The axis tag must contain four ASCII characters
+ and must be wrapped with single quotes (U+0027) or double quotes (U+0022). Axis strings that
+ are longer or shorter than four characters, or contain characters outside of U+0020..U+007E
+ are invalid. If a specified axis name is not defined in the font, the settings will be
+ ignored.
+
+ &lt;p&gt;
+ Examples,
+ &lt;ul&gt;
+ &lt;li&gt;Set font width to 150.
+ &lt;pre&gt;
+ &lt;code&gt;
+   TextView textView = (TextView) findViewById(R.id.textView);
+   textView.setFontVariationSettings(&quot;'wdth' 150&quot;);
+ &lt;/code&gt;
+ &lt;/pre&gt;
+ &lt;/li&gt;
+
+ &lt;li&gt;Set the font slant to 20 degrees and ask for italic style.
+ &lt;pre&gt;
+ &lt;code&gt;
+   TextView textView = (TextView) findViewById(R.id.textView);
+   textView.setFontVariationSettings(&quot;'slnt' 20, 'ital' 1&quot;);
+ &lt;/code&gt;
+ &lt;/pre&gt;
+ &lt;/p&gt;
+ &lt;/li&gt;
+ &lt;/ul&gt;
+@param {String} fontVariationSettings font variation settings. You can pass null or empty string as
+                              no variation settings.
+@return {Boolean} true if the given settings is effective to at least one font file underlying this
+         TextView. This function also returns true for empty settings string. Otherwise
+         returns false.
+@throws IllegalArgumentException If given string is not a valid font variation settings
+                                  format.
+@see #getFontVariationSettings()
+@see FontVariationAxis
+@attr ref android.R.styleable#TextView_fontVariationSettings
+*/
+setFontVariationSettings : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextColor'>/**Sets the text color for all the states (normal, selected,
+</span> focused) to be this color.
+@param {Number} color A color value in the form 0xAARRGGBB.
+ Do not pass a resource ID. To get a color value from a resource ID, call
+ {@link android.support.v4.content.ContextCompat#getColor(Context, int) getColor}.
+@see #setTextColor(ColorStateList)
+@see #getTextColors()
+@attr ref android.R.styleable#TextView_textColor
+*/
+setTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextColor'>/**Sets the text color.
+</span>@see #setTextColor(int)
+@see #getTextColors()
+@see #setHintTextColor(ColorStateList)
+@see #setLinkTextColor(ColorStateList)
+@attr ref android.R.styleable#TextView_textColor
+*/
+setTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextColors'>/**Gets the text colors for the different states (normal, selected, focused) of the TextView.
+</span>@see #setTextColor(ColorStateList)
+@see #setTextColor(int)
+@attr ref android.R.styleable#TextView_textColor
+*/
+getTextColors : function(  ) {},
+
+<span id='android-widget-TextView-method-getCurrentTextColor'>/**Return the current color selected for normal text.
+</span>@return {Number} Returns the current text color.
+*/
+getCurrentTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-setHighlightColor'>/**Sets the color used to display the selection highlight.
+</span>@attr ref android.R.styleable#TextView_textColorHighlight
+*/
+setHighlightColor : function(  ) {},
+
+<span id='android-widget-TextView-method-getHighlightColor'>/**
+</span>@return {Number} the color used to display the selection highlight
+@see #setHighlightColor(int)
+@attr ref android.R.styleable#TextView_textColorHighlight
+*/
+getHighlightColor : function(  ) {},
+
+<span id='android-widget-TextView-method-setShowSoftInputOnFocus'>/**Sets whether the soft input method will be made visible when this
+</span> TextView gets focused. The default is true.
+*/
+setShowSoftInputOnFocus : function(  ) {},
+
+<span id='android-widget-TextView-method-getShowSoftInputOnFocus'>/**Returns whether the soft input method will be made visible when this
+</span> TextView gets focused. The default is true.
+*/
+getShowSoftInputOnFocus : function(  ) {},
+
+<span id='android-widget-TextView-method-setShadowLayer'>/**Gives the text a shadow of the specified blur radius and color, the specified
+</span> distance from its drawn position.
+ &lt;p&gt;
+ The text shadow produced does not interact with the properties on view
+ that are responsible for real time shadows,
+ {@link View#getElevation() elevation} and
+ {@link View#getTranslationZ() translationZ}.
+@see Paint#setShadowLayer(float, float, float, int)
+@attr ref android.R.styleable#TextView_shadowColor
+@attr ref android.R.styleable#TextView_shadowDx
+@attr ref android.R.styleable#TextView_shadowDy
+@attr ref android.R.styleable#TextView_shadowRadius
+*/
+setShadowLayer : function(  ) {},
+
+<span id='android-widget-TextView-method-getShadowRadius'>/**Gets the radius of the shadow layer.
+</span>@return {Number} the radius of the shadow layer. If 0, the shadow layer is not visible
+@see #setShadowLayer(float, float, float, int)
+@attr ref android.R.styleable#TextView_shadowRadius
+*/
+getShadowRadius : function(  ) {},
+
+<span id='android-widget-TextView-method-getShadowDx'>/**
+</span>@return {Number} the horizontal offset of the shadow layer
+@see #setShadowLayer(float, float, float, int)
+@attr ref android.R.styleable#TextView_shadowDx
+*/
+getShadowDx : function(  ) {},
+
+<span id='android-widget-TextView-method-getShadowDy'>/**Gets the vertical offset of the shadow layer.
+</span>@return {Number} The vertical offset of the shadow layer.
+@see #setShadowLayer(float, float, float, int)
+@attr ref android.R.styleable#TextView_shadowDy
+*/
+getShadowDy : function(  ) {},
+
+<span id='android-widget-TextView-method-getShadowColor'>/**Gets the color of the shadow layer.
+</span>@return {Number} the color of the shadow layer
+@see #setShadowLayer(float, float, float, int)
+@attr ref android.R.styleable#TextView_shadowColor
+*/
+getShadowColor : function(  ) {},
+
+<span id='android-widget-TextView-method-getPaint'>/**Gets the {@link TextPaint} used for the text.
+</span> Use this only to consult the Paint's properties and not to change them.
+@return {Object {android.text.TextPaint}} The base paint used for the text.
+*/
+getPaint : function(  ) {},
+
+<span id='android-widget-TextView-method-setAutoLinkMask'>/**Sets the autolink mask of the text.  See {@link android.text.util.Linkify#ALL Linkify.ALL} and peers for
+</span> possible values.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt;
+ {@link android.text.util.Linkify#MAP_ADDRESSES Linkify.MAP_ADDRESSES}
+ is deprecated and should be avoided; see its documentation.
+@attr ref android.R.styleable#TextView_autoLink
+*/
+setAutoLinkMask : function(  ) {},
+
+<span id='android-widget-TextView-method-setLinksClickable'>/**Sets whether the movement method will automatically be set to
+</span> {@link LinkMovementMethod} if {@link #setAutoLinkMask} has been
+ set to nonzero and links are detected in {@link #setText}.
+ The default is true.
+@attr ref android.R.styleable#TextView_linksClickable
+*/
+setLinksClickable : function(  ) {},
+
+<span id='android-widget-TextView-method-getLinksClickable'>/**Returns whether the movement method will automatically be set to
+</span> {@link LinkMovementMethod} if {@link #setAutoLinkMask} has been
+ set to nonzero and links are detected in {@link #setText}.
+ The default is true.
+@attr ref android.R.styleable#TextView_linksClickable
+*/
+getLinksClickable : function(  ) {},
+
+<span id='android-widget-TextView-method-getUrls'>/**Returns the list of {@link android.text.style.URLSpan URLSpans} attached to the text
+</span> (by {@link Linkify} or otherwise) if any.  You can call
+ {@link URLSpan#getURL} on them to find where they link to
+ or use {@link Spanned#getSpanStart} and {@link Spanned#getSpanEnd}
+ to find the region of the text they are attached to.
+*/
+getUrls : function(  ) {},
+
+<span id='android-widget-TextView-method-setHintTextColor'>/**Sets the color of the hint text for all the states (disabled, focussed, selected...) of this
+</span> TextView.
+@see #setHintTextColor(ColorStateList)
+@see #getHintTextColors()
+@see #setTextColor(int)
+@attr ref android.R.styleable#TextView_textColorHint
+*/
+setHintTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-setHintTextColor'>/**Sets the color of the hint text.
+</span>@see #getHintTextColors()
+@see #setHintTextColor(int)
+@see #setTextColor(ColorStateList)
+@see #setLinkTextColor(ColorStateList)
+@attr ref android.R.styleable#TextView_textColorHint
+*/
+setHintTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-getHintTextColors'>/**
+</span>@return {Object {android.content.res.ColorStateList}} the color of the hint text, for the different states of this TextView.
+@see #setHintTextColor(ColorStateList)
+@see #setHintTextColor(int)
+@see #setTextColor(ColorStateList)
+@see #setLinkTextColor(ColorStateList)
+@attr ref android.R.styleable#TextView_textColorHint
+*/
+getHintTextColors : function(  ) {},
+
+<span id='android-widget-TextView-method-getCurrentHintTextColor'>/**&lt;p&gt;Return the current color selected to paint the hint text.&lt;/p&gt;
+</span>@return {Number} Returns the current hint text color.
+*/
+getCurrentHintTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-setLinkTextColor'>/**Sets the color of links in the text.
+</span>@see #setLinkTextColor(ColorStateList)
+@see #getLinkTextColors()
+@attr ref android.R.styleable#TextView_textColorLink
+*/
+setLinkTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-setLinkTextColor'>/**Sets the color of links in the text.
+</span>@see #setLinkTextColor(int)
+@see #getLinkTextColors()
+@see #setTextColor(ColorStateList)
+@see #setHintTextColor(ColorStateList)
+@attr ref android.R.styleable#TextView_textColorLink
+*/
+setLinkTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-getLinkTextColors'>/**
+</span>@return {Object {android.content.res.ColorStateList}} the list of colors used to paint the links in the text, for the different states of
+ this TextView
+@see #setLinkTextColor(ColorStateList)
+@see #setLinkTextColor(int)
+@attr ref android.R.styleable#TextView_textColorLink
+*/
+getLinkTextColors : function(  ) {},
+
+<span id='android-widget-TextView-method-setGravity'>/**Sets the horizontal alignment of the text and the
+</span> vertical gravity that will be used when there is extra space
+ in the TextView beyond what is required for the text itself.
+@see android.view.Gravity
+@attr ref android.R.styleable#TextView_gravity
+*/
+setGravity : function(  ) {},
+
+<span id='android-widget-TextView-method-getGravity'>/**Returns the horizontal and vertical alignment of this TextView.
+</span>@see android.view.Gravity
+@attr ref android.R.styleable#TextView_gravity
+*/
+getGravity : function(  ) {},
+
+<span id='android-widget-TextView-method-getPaintFlags'>/**Gets the flags on the Paint being used to display the text.
+</span>@return {Number} The flags on the Paint being used to display the text.
+@see Paint#getFlags
+*/
+getPaintFlags : function(  ) {},
+
+<span id='android-widget-TextView-method-setPaintFlags'>/**Sets flags on the Paint being used to display the text and
+</span> reflows the text if they are different from the old flags.
+@see Paint#setFlags
+*/
+setPaintFlags : function(  ) {},
+
+<span id='android-widget-TextView-method-setHorizontallyScrolling'>/**Sets whether the text should be allowed to be wider than the
+</span> View is.  If false, it will be wrapped to the width of the View.
+@attr ref android.R.styleable#TextView_scrollHorizontally
+*/
+setHorizontallyScrolling : function(  ) {},
+
+<span id='android-widget-TextView-method-isHorizontallyScrollable'>/**Returns whether the text is allowed to be wider than the View.
+</span> If false, the text will be wrapped to the width of the View.
+@attr ref android.R.styleable#TextView_scrollHorizontally
+@see #setHorizontallyScrolling(boolean)
+*/
+isHorizontallyScrollable : function(  ) {},
+
+<span id='android-widget-TextView-method-getHorizontallyScrolling'>/**Returns whether the text is allowed to be wider than the View.
+</span> If false, the text will be wrapped to the width of the View.
+@attr ref android.R.styleable#TextView_scrollHorizontally
+@hide 
+*/
+getHorizontallyScrolling : function(  ) {},
+
+<span id='android-widget-TextView-method-setMinLines'>/**Sets the height of the TextView to be at least {@code minLines} tall.
+</span> &lt;p&gt;
+ This value is used for height calculation if LayoutParams does not force TextView to have an
+ exact height. Setting this value overrides other previous minimum height configurations such
+ as {@link #setMinHeight}(int) or {@link #setHeight}(int). {@link #setSingleLine}() will set
+ this value to 1.
+@param {Number} minLines the minimum height of TextView in terms of number of lines
+@see #getMinLines()
+@see #setLines(int)
+@attr ref android.R.styleable#TextView_minLines
+*/
+setMinLines : function(  ) {},
+
+<span id='android-widget-TextView-method-getMinLines'>/**Returns the minimum height of TextView in terms of number of lines or -1 if the minimum
+</span> height was set using {@link #setMinHeight}(int) or {@link #setHeight}(int).
+@return {Number} the minimum height of TextView in terms of number of lines or -1 if the minimum
+         height is not defined in lines
+@see #setMinLines(int)
+@see #setLines(int)
+@attr ref android.R.styleable#TextView_minLines
+*/
+getMinLines : function(  ) {},
+
+<span id='android-widget-TextView-method-setMinHeight'>/**Sets the height of the TextView to be at least {@code minPixels} tall.
+</span> &lt;p&gt;
+ This value is used for height calculation if LayoutParams does not force TextView to have an
+ exact height. Setting this value overrides previous minimum height configurations such as
+ {@link #setMinLines}(int) or {@link #setLines}(int).
+ &lt;p&gt;
+ The value given here is different than {@link #setMinimumHeight}(int). Between
+ {@code minHeight} and the value set in {@link #setMinimumHeight}(int), the greater one is
+ used to decide the final height.
+@param {Number} minPixels the minimum height of TextView in terms of pixels
+@see #getMinHeight()
+@see #setHeight(int)
+@attr ref android.R.styleable#TextView_minHeight
+*/
+setMinHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-getMinHeight'>/**Returns the minimum height of TextView in terms of pixels or -1 if the minimum height was
+</span> set using {@link #setMinLines}(int) or {@link #setLines}(int).
+@return {Number} the minimum height of TextView in terms of pixels or -1 if the minimum height is not
+         defined in pixels
+@see #setMinHeight(int)
+@see #setHeight(int)
+@attr ref android.R.styleable#TextView_minHeight
+*/
+getMinHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-setMaxLines'>/**Sets the height of the TextView to be at most {@code maxLines} tall.
+</span> &lt;p&gt;
+ This value is used for height calculation if LayoutParams does not force TextView to have an
+ exact height. Setting this value overrides previous maximum height configurations such as
+ {@link #setMaxHeight}(int) or {@link #setLines}(int).
+@param {Number} maxLines the maximum height of TextView in terms of number of lines
+@see #getMaxLines()
+@see #setLines(int)
+@attr ref android.R.styleable#TextView_maxLines
+*/
+setMaxLines : function(  ) {},
+
+<span id='android-widget-TextView-method-getMaxLines'>/**Returns the maximum height of TextView in terms of number of lines or -1 if the
+</span> maximum height was set using {@link #setMaxHeight}(int) or {@link #setHeight}(int).
+@return {Number} the maximum height of TextView in terms of number of lines. -1 if the maximum height
+         is not defined in lines.
+@see #setMaxLines(int)
+@see #setLines(int)
+@attr ref android.R.styleable#TextView_maxLines
+*/
+getMaxLines : function(  ) {},
+
+<span id='android-widget-TextView-method-setMaxHeight'>/**Sets the height of the TextView to be at most {@code maxPixels} tall.
+</span> &lt;p&gt;
+ This value is used for height calculation if LayoutParams does not force TextView to have an
+ exact height. Setting this value overrides previous maximum height configurations such as
+ {@link #setMaxLines}(int) or {@link #setLines}(int).
+@param {Number} maxPixels the maximum height of TextView in terms of pixels
+@see #getMaxHeight()
+@see #setHeight(int)
+@attr ref android.R.styleable#TextView_maxHeight
+*/
+setMaxHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-getMaxHeight'>/**Returns the maximum height of TextView in terms of pixels or -1 if the maximum height was
+</span> set using {@link #setMaxLines}(int) or {@link #setLines}(int).
+@return {Number} the maximum height of TextView in terms of pixels or -1 if the maximum height
+         is not defined in pixels
+@see #setMaxHeight(int)
+@see #setHeight(int)
+@attr ref android.R.styleable#TextView_maxHeight
+*/
+getMaxHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-setLines'>/**Sets the height of the TextView to be exactly {@code lines} tall.
+</span> &lt;p&gt;
+ This value is used for height calculation if LayoutParams does not force TextView to have an
+ exact height. Setting this value overrides previous minimum/maximum height configurations
+ such as {@link #setMinLines}(int) or {@link #setMaxLines}(int). {@link #setSingleLine}() will
+ set this value to 1.
+@param {Number} lines the exact height of the TextView in terms of lines
+@see #setHeight(int)
+@attr ref android.R.styleable#TextView_lines
+*/
+setLines : function(  ) {},
+
+<span id='android-widget-TextView-method-setHeight'>/**Sets the height of the TextView to be exactly &lt;code&gt;pixels&lt;/code&gt; tall.
+</span> &lt;p&gt;
+ This value is used for height calculation if LayoutParams does not force TextView to have an
+ exact height. Setting this value overrides previous minimum/maximum height configurations
+ such as {@link #setMinHeight}(int) or {@link #setMaxHeight}(int).
+@param {Number} pixels the exact height of the TextView in terms of pixels
+@see #setLines(int)
+@attr ref android.R.styleable#TextView_height
+*/
+setHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-setMinEms'>/**Sets the width of the TextView to be at least {@code minEms} wide.
+</span> &lt;p&gt;
+ This value is used for width calculation if LayoutParams does not force TextView to have an
+ exact width. Setting this value overrides previous minimum width configurations such as
+ {@link #setMinWidth}(int) or {@link #setWidth}(int).
+@param {Number} minEms the minimum width of TextView in terms of ems
+@see #getMinEms()
+@see #setEms(int)
+@attr ref android.R.styleable#TextView_minEms
+*/
+setMinEms : function(  ) {},
+
+<span id='android-widget-TextView-method-getMinEms'>/**Returns the minimum width of TextView in terms of ems or -1 if the minimum width was set
+</span> using {@link #setMinWidth}(int) or {@link #setWidth}(int).
+@return {Number} the minimum width of TextView in terms of ems. -1 if the minimum width is not
+         defined in ems
+@see #setMinEms(int)
+@see #setEms(int)
+@attr ref android.R.styleable#TextView_minEms
+*/
+getMinEms : function(  ) {},
+
+<span id='android-widget-TextView-method-setMinWidth'>/**Sets the width of the TextView to be at least {@code minPixels} wide.
+</span> &lt;p&gt;
+ This value is used for width calculation if LayoutParams does not force TextView to have an
+ exact width. Setting this value overrides previous minimum width configurations such as
+ {@link #setMinEms}(int) or {@link #setEms}(int).
+ &lt;p&gt;
+ The value given here is different than {@link #setMinimumWidth}(int). Between
+ {@code minWidth} and the value set in {@link #setMinimumWidth}(int), the greater one is used
+ to decide the final width.
+@param {Number} minPixels the minimum width of TextView in terms of pixels
+@see #getMinWidth()
+@see #setWidth(int)
+@attr ref android.R.styleable#TextView_minWidth
+*/
+setMinWidth : function(  ) {},
+
+<span id='android-widget-TextView-method-getMinWidth'>/**Returns the minimum width of TextView in terms of pixels or -1 if the minimum width was set
+</span> using {@link #setMinEms}(int) or {@link #setEms}(int).
+@return {Number} the minimum width of TextView in terms of pixels or -1 if the minimum width is not
+         defined in pixels
+@see #setMinWidth(int)
+@see #setWidth(int)
+@attr ref android.R.styleable#TextView_minWidth
+*/
+getMinWidth : function(  ) {},
+
+<span id='android-widget-TextView-method-setMaxEms'>/**Sets the width of the TextView to be at most {@code maxEms} wide.
+</span> &lt;p&gt;
+ This value is used for width calculation if LayoutParams does not force TextView to have an
+ exact width. Setting this value overrides previous maximum width configurations such as
+ {@link #setMaxWidth}(int) or {@link #setWidth}(int).
+@param {Number} maxEms the maximum width of TextView in terms of ems
+@see #getMaxEms()
+@see #setEms(int)
+@attr ref android.R.styleable#TextView_maxEms
+*/
+setMaxEms : function(  ) {},
+
+<span id='android-widget-TextView-method-getMaxEms'>/**Returns the maximum width of TextView in terms of ems or -1 if the maximum width was set
+</span> using {@link #setMaxWidth}(int) or {@link #setWidth}(int).
+@return {Number} the maximum width of TextView in terms of ems or -1 if the maximum width is not
+         defined in ems
+@see #setMaxEms(int)
+@see #setEms(int)
+@attr ref android.R.styleable#TextView_maxEms
+*/
+getMaxEms : function(  ) {},
+
+<span id='android-widget-TextView-method-setMaxWidth'>/**Sets the width of the TextView to be at most {@code maxPixels} wide.
+</span> &lt;p&gt;
+ This value is used for width calculation if LayoutParams does not force TextView to have an
+ exact width. Setting this value overrides previous maximum width configurations such as
+ {@link #setMaxEms}(int) or {@link #setEms}(int).
+@param {Number} maxPixels the maximum width of TextView in terms of pixels
+@see #getMaxWidth()
+@see #setWidth(int)
+@attr ref android.R.styleable#TextView_maxWidth
+*/
+setMaxWidth : function(  ) {},
+
+<span id='android-widget-TextView-method-getMaxWidth'>/**Returns the maximum width of TextView in terms of pixels or -1 if the maximum width was set
+</span> using {@link #setMaxEms}(int) or {@link #setEms}(int).
+@return {Number} the maximum width of TextView in terms of pixels. -1 if the maximum width is not
+         defined in pixels
+@see #setMaxWidth(int)
+@see #setWidth(int)
+@attr ref android.R.styleable#TextView_maxWidth
+*/
+getMaxWidth : function(  ) {},
+
+<span id='android-widget-TextView-method-setEms'>/**Sets the width of the TextView to be exactly {@code ems} wide.
+</span>
+ This value is used for width calculation if LayoutParams does not force TextView to have an
+ exact width. Setting this value overrides previous minimum/maximum configurations such as
+ {@link #setMinEms}(int) or {@link #setMaxEms}(int).
+@param {Number} ems the exact width of the TextView in terms of ems
+@see #setWidth(int)
+@attr ref android.R.styleable#TextView_ems
+*/
+setEms : function(  ) {},
+
+<span id='android-widget-TextView-method-setWidth'>/**Sets the width of the TextView to be exactly {@code pixels} wide.
+</span> &lt;p&gt;
+ This value is used for width calculation if LayoutParams does not force TextView to have an
+ exact width. Setting this value overrides previous minimum/maximum width configurations
+ such as {@link #setMinWidth}(int) or {@link #setMaxWidth}(int).
+@param {Number} pixels the exact width of the TextView in terms of pixels
+@see #setEms(int)
+@attr ref android.R.styleable#TextView_width
+*/
+setWidth : function(  ) {},
+
+<span id='android-widget-TextView-method-setLineSpacing'>/**Sets line spacing for this TextView.  Each line other than the last line will have its height
+</span> multiplied by {@code mult} and have {@code add} added to it.
+@param {Number} add The value in pixels that should be added to each line other than the last line.
+            This will be applied after the multiplier
+@param {Number} mult The value by which each line height other than the last line will be multiplied
+             by
+@attr ref android.R.styleable#TextView_lineSpacingExtra
+@attr ref android.R.styleable#TextView_lineSpacingMultiplier
+*/
+setLineSpacing : function(  ) {},
+
+<span id='android-widget-TextView-method-getLineSpacingMultiplier'>/**Gets the line spacing multiplier
+</span>@return {Number} the value by which each line's height is multiplied to get its actual height.
+@see #setLineSpacing(float, float)
+@see #getLineSpacingExtra()
+@attr ref android.R.styleable#TextView_lineSpacingMultiplier
+*/
+getLineSpacingMultiplier : function(  ) {},
+
+<span id='android-widget-TextView-method-getLineSpacingExtra'>/**Gets the line spacing extra space
+</span>@return {Number} the extra space that is added to the height of each lines of this TextView.
+@see #setLineSpacing(float, float)
+@see #getLineSpacingMultiplier()
+@attr ref android.R.styleable#TextView_lineSpacingExtra
+*/
+getLineSpacingExtra : function(  ) {},
+
+<span id='android-widget-TextView-method-setLineHeight'>/**Sets an explicit line height for this TextView. This is equivalent to the vertical distance
+</span> between subsequent baselines in the TextView.
+@param {Number} lineHeight the line height in pixels
+@see #setLineSpacing(float, float)
+@see #getLineSpacingExtra()
+@attr ref android.R.styleable#TextView_lineHeight
+*/
+setLineHeight : function(  ) {},
+
+<span id='android-widget-TextView-method-append'>/**Convenience method to append the specified text to the TextView's
+</span> display buffer, upgrading it to {@link android.widget.TextView.BufferType#EDITABLE}
+ if it was not already editable.
+@param {Object {CharSequence}} text text to be appended to the already displayed text
+*/
+append : function(  ) {},
+
+<span id='android-widget-TextView-method-append'>/**Convenience method to append the specified text slice to the TextView's
+</span> display buffer, upgrading it to {@link android.widget.TextView.BufferType#EDITABLE}
+ if it was not already editable.
+@param {Object {CharSequence}} text text to be appended to the already displayed text
+@param {Number} start the index of the first character in the {@code text}
+@param {Number} end the index of the character following the last character in the {@code text}
+@see Appendable#append(CharSequence, int, int)
+*/
+append : function(  ) {},
+
+<span id='android-widget-TextView-method-drawableHotspotChanged'>/**
+</span>*/
+drawableHotspotChanged : function(  ) {},
+
+<span id='android-widget-TextView-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='android-widget-TextView-method-onRestoreInstanceState'>/**
+</span>*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='android-widget-TextView-method-setFreezesText'>/**Control whether this text view saves its entire text contents when
+</span> freezing to an icicle, in addition to dynamic state such as cursor
+ position.  By default this is false, not saving the text.  Set to true
+ if the text in the text view is not being saved somewhere else in
+ persistent storage (such as in a content provider) so that if the
+ view is later thawed the user will not lose their data. For
+ {@link android.widget.EditText} it is always enabled, regardless of
+ the value of the attribute.
+@param {Boolean} freezesText Controls whether a frozen icicle should include the
+ entire text data: true to include it, false to not.
+@attr ref android.R.styleable#TextView_freezesText
+*/
+setFreezesText : function(  ) {},
+
+<span id='android-widget-TextView-method-getFreezesText'>/**Return whether this text view is including its entire text contents
+</span> in frozen icicles. For {@link android.widget.EditText} it always returns true.
+@return {Boolean} Returns true if text is included, false if it isn't.
+@see #setFreezesText
+*/
+getFreezesText : function(  ) {},
+
+<span id='android-widget-TextView-method-setEditableFactory'>/**Sets the Factory used to create new {@link Editable Editables}.
+</span>@param {Object {Editable.Factory}} factory {@link android.text.Editable.Factory Editable.Factory} to be used
+@see android.text.Editable.Factory
+@see android.widget.TextView.BufferType#EDITABLE
+*/
+setEditableFactory : function(  ) {},
+
+<span id='android-widget-TextView-method-setSpannableFactory'>/**Sets the Factory used to create new {@link Spannable Spannables}.
+</span>@param {Object {Spannable.Factory}} factory {@link android.text.Spannable.Factory Spannable.Factory} to be used
+@see android.text.Spannable.Factory
+@see android.widget.TextView.BufferType#SPANNABLE
+*/
+setSpannableFactory : function(  ) {},
+
+<span id='android-widget-TextView-method-setText'>/**Sets the text to be displayed. TextView &lt;em&gt;does not&lt;/em&gt; accept
+</span> HTML-like formatting, which you can do with text strings in XML resource files.
+ To style your strings, attach android.text.style.* objects to a
+ {@link android.text.SpannableString}, or see the
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/available-resources.html#stringresources&quot;&gt;
+ Available Resource Types&lt;/a&gt; documentation for an example of setting
+ formatted text in the XML resource file.
+ &lt;p/&gt;
+ When required, TextView will use {@link android.text.Spannable.Factory} to create final or
+ intermediate {@link Spannable Spannables}. Likewise it will use
+ {@link android.text.Editable.Factory} to create final or intermediate
+ {@link Editable Editables}.
+
+ If the passed text is a {@link PrecomputedText} but the parameters used to create the
+ PrecomputedText mismatches with this TextView, IllegalArgumentException is thrown. To ensure
+ the parameters match, you can call {@link android.widget.TextView#setTextMetricsParams} before calling this.
+@param {Object {CharSequence}} text text to be displayed
+@attr ref android.R.styleable#TextView_text
+@throws IllegalArgumentException if the passed text is a {@link PrecomputedText} but the
+                                  parameters used to create the PrecomputedText mismatches
+                                  with this TextView.
+*/
+setText : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextKeepState'>/**Sets the text to be displayed but retains the cursor position. Same as
+</span> {@link #setText}(CharSequence) except that the cursor position (if any) is retained in the
+ new text.
+ &lt;p/&gt;
+ When required, TextView will use {@link android.text.Spannable.Factory} to create final or
+ intermediate {@link Spannable Spannables}. Likewise it will use
+ {@link android.text.Editable.Factory} to create final or intermediate
+ {@link Editable Editables}.
+@param {Object {CharSequence}} text text to be displayed
+@see #setText(CharSequence)
+*/
+setTextKeepState : function(  ) {},
+
+<span id='android-widget-TextView-method-setText'>/**Sets the text to be displayed and the {@link android.widget.TextView.BufferType}.
+</span> &lt;p/&gt;
+ When required, TextView will use {@link android.text.Spannable.Factory} to create final or
+ intermediate {@link Spannable Spannables}. Likewise it will use
+ {@link android.text.Editable.Factory} to create final or intermediate
+ {@link Editable Editables}.
+
+ Subclasses overriding this method should ensure that the following post condition holds,
+ in order to guarantee the safety of the view's measurement and layout operations:
+ regardless of the input, after calling #setText both {@code mText} and {@code mTransformed}
+ will be different from {@code null}.
+@param {Object {CharSequence}} text text to be displayed
+@param {Object {TextView.BufferType}} type a {@link android.widget.TextView.BufferType} which defines whether the text is
+              stored as a static text, styleable/spannable text, or editable text
+@see #setText(CharSequence)
+@see android.widget.TextView.BufferType
+@see #setSpannableFactory(Spannable.Factory)
+@see #setEditableFactory(Editable.Factory)
+@attr ref android.R.styleable#TextView_text
+@attr ref android.R.styleable#TextView_bufferType
+*/
+setText : function(  ) {},
+
+<span id='android-widget-TextView-method-setText'>/**Sets the TextView to display the specified slice of the specified
+</span> char array. You must promise that you will not change the contents
+ of the array except for right before another call to setText(),
+ since the TextView has no way to know that the text
+ has changed and that it needs to invalidate and re-layout.
+@param {Object {char[]}} text char array to be displayed
+@param {Number} start start index in the char array
+@param {Number} len length of char count after {@code start}
+*/
+setText : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextKeepState'>/**Sets the text to be displayed and the {@link android.widget.TextView.BufferType} but retains
+</span> the cursor position. Same as
+ {@link #setText(CharSequence, android.widget.TextView.BufferType)} except that the cursor
+ position (if any) is retained in the new text.
+ &lt;p/&gt;
+ When required, TextView will use {@link android.text.Spannable.Factory} to create final or
+ intermediate {@link Spannable Spannables}. Likewise it will use
+ {@link android.text.Editable.Factory} to create final or intermediate
+ {@link Editable Editables}.
+@param {Object {CharSequence}} text text to be displayed
+@param {Object {TextView.BufferType}} type a {@link android.widget.TextView.BufferType} which defines whether the text is
+              stored as a static text, styleable/spannable text, or editable text
+@see #setText(CharSequence, android.widget.TextView.BufferType)
+*/
+setTextKeepState : function(  ) {},
+
+<span id='android-widget-TextView-method-setText'>/**Sets the text to be displayed using a string resource identifier.
+</span>@param {Number} resid the resource identifier of the string resource to be displayed
+@see #setText(CharSequence)
+@attr ref android.R.styleable#TextView_text
+*/
+setText : function(  ) {},
+
+<span id='android-widget-TextView-method-setText'>/**Sets the text to be displayed using a string resource identifier and the
+</span> {@link android.widget.TextView.BufferType}.
+ &lt;p/&gt;
+ When required, TextView will use {@link android.text.Spannable.Factory} to create final or
+ intermediate {@link Spannable Spannables}. Likewise it will use
+ {@link android.text.Editable.Factory} to create final or intermediate
+ {@link Editable Editables}.
+@param {Number} resid the resource identifier of the string resource to be displayed
+@param {Object {TextView.BufferType}} type a {@link android.widget.TextView.BufferType} which defines whether the text is
+              stored as a static text, styleable/spannable text, or editable text
+@see #setText(int)
+@see #setText(CharSequence)
+@see android.widget.TextView.BufferType
+@see #setSpannableFactory(Spannable.Factory)
+@see #setEditableFactory(Editable.Factory)
+@attr ref android.R.styleable#TextView_text
+@attr ref android.R.styleable#TextView_bufferType
+*/
+setText : function(  ) {},
+
+<span id='android-widget-TextView-method-setHint'>/**Sets the text to be displayed when the text of the TextView is empty.
+</span> Null means to use the normal empty text. The hint does not currently
+ participate in determining the size of the view.
+@attr ref android.R.styleable#TextView_hint
+*/
+setHint : function(  ) {},
+
+<span id='android-widget-TextView-method-setHint'>/**Sets the text to be displayed when the text of the TextView is empty,
+</span> from a resource.
+@attr ref android.R.styleable#TextView_hint
+*/
+setHint : function(  ) {},
+
+<span id='android-widget-TextView-method-getHint'>/**Returns the hint that is displayed when the text of the TextView
+</span> is empty.
+@attr ref android.R.styleable#TextView_hint
+*/
+getHint : function(  ) {},
+
+<span id='android-widget-TextView-method-isSingleLine'>/**Returns if the text is constrained to a single horizontally scrolling line ignoring new
+</span> line characters instead of letting it wrap onto multiple lines.
+@attr ref android.R.styleable#TextView_singleLine
+*/
+isSingleLine : function(  ) {},
+
+<span id='android-widget-TextView-method-setInputType'>/**Set the type of the content with a constant as defined for {@link android.widget.EditorInfo#inputType}. This
+</span> will take care of changing the key listener, by calling {@link #setKeyListener}(KeyListener),
+ to match the given content type.  If the given content type is {@link android.widget.EditorInfo#TYPE_NULL}
+ then a soft keyboard will not be displayed for this text view.
+
+ Note that the maximum number of displayed lines (see {@link #setMaxLines}(int)) will be
+ modified if you change the {@link android.widget.EditorInfo#TYPE_TEXT_FLAG_MULTI_LINE} flag of the input
+ type.
+@see #getInputType()
+@see #setRawInputType(int)
+@see android.text.InputType
+@attr ref android.R.styleable#TextView_inputType
+*/
+setInputType : function(  ) {},
+
+<span id='android-widget-TextView-method-setRawInputType'>/**Directly change the content type integer of the text view, without
+</span> modifying any other state.
+@see #setInputType(int)
+@see android.text.InputType
+@attr ref android.R.styleable#TextView_inputType
+*/
+setRawInputType : function(  ) {},
+
+<span id='android-widget-TextView-method-getInputType'>/**Get the type of the editable content.
+</span>@see #setInputType(int)
+@see android.text.InputType
+*/
+getInputType : function(  ) {},
+
+<span id='android-widget-TextView-method-setImeOptions'>/**Change the editor type integer associated with the text view, which
+</span> is reported to an Input Method Editor (IME) with {@link android.widget.EditorInfo#imeOptions}
+ when it has focus.
+@see #getImeOptions
+@see android.view.inputmethod.EditorInfo
+@attr ref android.R.styleable#TextView_imeOptions
+*/
+setImeOptions : function(  ) {},
+
+<span id='android-widget-TextView-method-getImeOptions'>/**Get the type of the Input Method Editor (IME).
+</span>@return {Number} the type of the IME
+@see #setImeOptions(int)
+@see EditorInfo
+*/
+getImeOptions : function(  ) {},
+
+<span id='android-widget-TextView-method-setImeActionLabel'>/**Change the custom IME action associated with the text view, which
+</span> will be reported to an IME with {@link android.widget.EditorInfo#actionLabel}
+ and {@link android.widget.EditorInfo#actionId} when it has focus.
+@see #getImeActionLabel
+@see #getImeActionId
+@see android.view.inputmethod.EditorInfo
+@attr ref android.R.styleable#TextView_imeActionLabel
+@attr ref android.R.styleable#TextView_imeActionId
+*/
+setImeActionLabel : function(  ) {},
+
+<span id='android-widget-TextView-method-getImeActionLabel'>/**Get the IME action label previous set with {@link #setImeActionLabel}.
+</span>@see #setImeActionLabel
+@see android.view.inputmethod.EditorInfo
+*/
+getImeActionLabel : function(  ) {},
+
+<span id='android-widget-TextView-method-getImeActionId'>/**Get the IME action ID previous set with {@link #setImeActionLabel}.
+</span>@see #setImeActionLabel
+@see android.view.inputmethod.EditorInfo
+*/
+getImeActionId : function(  ) {},
+
+<span id='android-widget-TextView-method-setOnEditorActionListener'>/**Set a special listener to be called when an action is performed
+</span> on the text view.  This will be called when the enter key is pressed,
+ or when an action supplied to the IME is selected by the user.  Setting
+ this means that the normal hard key event will not insert a newline
+ into the text view, even if it is multi-line; holding down the ALT
+ modifier will, however, allow the user to insert a newline character.
+*/
+setOnEditorActionListener : function(  ) {},
+
+<span id='android-widget-TextView-method-onEditorAction'>/**Called when an attached input method calls
+</span> {@link InputConnection#performEditorAction(int)
+ InputConnection.performEditorAction()}
+ for this text view.  The default implementation will call your action
+ listener supplied to {@link #setOnEditorActionListener}, or perform
+ a standard operation for {@link android.widget.EditorInfo#IME_ACTION_NEXT
+ android.widget.EditorInfo.IME_ACTION_NEXT}, {@link android.widget.EditorInfo#IME_ACTION_PREVIOUS
+ android.widget.EditorInfo.IME_ACTION_PREVIOUS}, or {@link android.widget.EditorInfo#IME_ACTION_DONE
+ android.widget.EditorInfo.IME_ACTION_DONE}.
+
+ &lt;p&gt;For backwards compatibility, if no IME options have been set and the
+ text view would not normally advance focus on enter, then
+ the NEXT and DONE actions received here will be turned into an enter
+ key down/up pair to go through the normal key handling.
+@param {Number} actionCode The code of the action being performed.
+@see #setOnEditorActionListener
+*/
+onEditorAction : function(  ) {},
+
+<span id='android-widget-TextView-method-setPrivateImeOptions'>/**Set the private content type of the text, which is the
+</span> {@link android.widget.EditorInfo#privateImeOptions android.widget.EditorInfo.privateImeOptions}
+ field that will be filled in when creating an input connection.
+@see #getPrivateImeOptions()
+@see EditorInfo#privateImeOptions
+@attr ref android.R.styleable#TextView_privateImeOptions
+*/
+setPrivateImeOptions : function(  ) {},
+
+<span id='android-widget-TextView-method-getPrivateImeOptions'>/**Get the private type of the content.
+</span>@see #setPrivateImeOptions(String)
+@see EditorInfo#privateImeOptions
+*/
+getPrivateImeOptions : function(  ) {},
+
+<span id='android-widget-TextView-method-setInputExtras'>/**Set the extra input data of the text, which is the
+</span> {@link android.widget.EditorInfo#extras TextBoxAttribute.extras}
+ Bundle that will be filled in when creating an input connection.  The
+ given integer is the resource identifier of an XML resource holding an
+ {@link android.R.styleable#InputExtras &amp;lt;input-extras&amp;gt;} XML tree.
+@see #getInputExtras(boolean)
+@see EditorInfo#extras
+@attr ref android.R.styleable#TextView_editorExtras
+*/
+setInputExtras : function(  ) {},
+
+<span id='android-widget-TextView-method-getInputExtras'>/**Retrieve the input extras currently associated with the text view, which
+</span> can be viewed as well as modified.
+@param {Boolean} create If true, the extras will be created if they don't already
+ exist.  Otherwise, null will be returned if none have been created.
+@see #setInputExtras(int)
+@see EditorInfo#extras
+@attr ref android.R.styleable#TextView_editorExtras
+*/
+getInputExtras : function(  ) {},
+
+<span id='android-widget-TextView-method-setImeHintLocales'>/**Change &quot;hint&quot; locales associated with the text view, which will be reported to an IME with
+</span> {@link android.widget.EditorInfo#hintLocales} when it has focus.
+
+ Starting with Android O, this also causes internationalized listeners to be created (or
+ change locale) based on the first locale in the input locale list.
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you want new &quot;hint&quot; to take effect immediately you need to
+ call {@link InputMethodManager#restartInput(View)}.&lt;/p&gt;
+@param {Object {LocaleList}} hintLocales List of the languages that the user is supposed to switch to no matter
+ what input method subtype is currently used. Set {@code null} to clear the current &quot;hint&quot;.
+@see #getImeHintLocales()
+@see android.view.inputmethod.EditorInfo#hintLocales
+*/
+setImeHintLocales : function(  ) {},
+
+<span id='android-widget-TextView-method-getImeHintLocales'>/**
+</span>@return {Object {android.os.LocaleList}} The current languages list &quot;hint&quot;. {@code null} when no &quot;hint&quot; is available.
+@see #setImeHintLocales(LocaleList)
+@see android.view.inputmethod.EditorInfo#hintLocales
+*/
+getImeHintLocales : function(  ) {},
+
+<span id='android-widget-TextView-method-getError'>/**Returns the error message that was set to be displayed with
+</span> {@link #setError}, or &lt;code&gt;null&lt;/code&gt; if no error was set
+ or if it the error was cleared by the widget after user input.
+*/
+getError : function(  ) {},
+
+<span id='android-widget-TextView-method-setError'>/**Sets the right-hand compound drawable of the TextView to the &quot;error&quot;
+</span> icon and sets an error message that will be displayed in a popup when
+ the TextView has focus.  The icon and error message will be reset to
+ null when any key events cause changes to the TextView's text.  If the
+ &lt;code&gt;error&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, the error message and icon
+ will be cleared.
+*/
+setError : function(  ) {},
+
+<span id='android-widget-TextView-method-setError'>/**Sets the right-hand compound drawable of the TextView to the specified
+</span> icon and sets an error message that will be displayed in a popup when
+ the TextView has focus.  The icon and error message will be reset to
+ null when any key events cause changes to the TextView's text.  The
+ drawable must already have had {@link Drawable#setBounds} set on it.
+ If the &lt;code&gt;error&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, the error message will
+ be cleared (and you should provide a &lt;code&gt;null&lt;/code&gt; icon as well).
+*/
+setError : function(  ) {},
+
+<span id='android-widget-TextView-method-setFilters'>/**Sets the list of input filters that will be used if the buffer is
+</span> Editable. Has no effect otherwise.
+@attr ref android.R.styleable#TextView_maxLength
+*/
+setFilters : function(  ) {},
+
+<span id='android-widget-TextView-method-getFilters'>/**Returns the current list of input filters.
+</span>@attr ref android.R.styleable#TextView_maxLength
+*/
+getFilters : function(  ) {},
+
+<span id='android-widget-TextView-method-onPreDraw'>/**{@inheritDoc}
+</span>*/
+onPreDraw : function(  ) {},
+
+<span id='android-widget-TextView-method-onScreenStateChanged'>/**
+</span>*/
+onScreenStateChanged : function(  ) {},
+
+<span id='android-widget-TextView-method-jumpDrawablesToCurrentState'>/**
+</span>*/
+jumpDrawablesToCurrentState : function(  ) {},
+
+<span id='android-widget-TextView-method-invalidateDrawable'>/**
+</span>*/
+invalidateDrawable : function(  ) {},
+
+<span id='android-widget-TextView-method-hasOverlappingRendering'>/**
+</span>*/
+hasOverlappingRendering : function(  ) {},
+
+<span id='android-widget-TextView-method-isTextSelectable'>/**Returns the state of the {@code textIsSelectable} flag (See
+</span> {@link #setTextIsSelectable setTextIsSelectable()}). Although you have to set this flag
+ to allow users to select and copy text in a non-editable TextView, the content of an
+ {@link android.widget.EditText} can always be selected, independently of the value of this flag.
+ &lt;p&gt;
+@return {Boolean} True if the text displayed in this TextView can be selected by the user.
+@attr ref android.R.styleable#TextView_textIsSelectable
+*/
+isTextSelectable : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextIsSelectable'>/**Sets whether the content of this view is selectable by the user. The default is
+</span> {@code false}, meaning that the content is not selectable.
+ &lt;p&gt;
+ When you use a TextView to display a useful piece of information to the user (such as a
+ contact's address), make it selectable, so that the user can select and copy its
+ content. You can also use set the XML attribute
+ {@link android.R.styleable#TextView_textIsSelectable} to &quot;true&quot;.
+ &lt;p&gt;
+ When you call this method to set the value of {@code textIsSelectable}, it sets
+ the flags {@code focusable}, {@code focusableInTouchMode}, {@code clickable},
+ and {@code longClickable} to the same value. These flags correspond to the attributes
+ {@link android.R.styleable#View_focusable android:focusable},
+ {@link android.R.styleable#View_focusableInTouchMode android:focusableInTouchMode},
+ {@link android.R.styleable#View_clickable android:clickable}, and
+ {@link android.R.styleable#View_longClickable android:longClickable}. To restore any of these
+ flags to a state you had set previously, call one or more of the following methods:
+ {@link #setFocusable(boolean) setFocusable()},
+ {@link #setFocusableInTouchMode(boolean) setFocusableInTouchMode()},
+ {@link #setClickable(boolean) setClickable()} or
+ {@link #setLongClickable(boolean) setLongClickable()}.
+@param {Boolean} selectable Whether the content of this TextView should be selectable.
+*/
+setTextIsSelectable : function(  ) {},
+
+<span id='android-widget-TextView-method-getHorizontalOffsetForDrawables'>/**
+</span>@hide 
+*/
+getHorizontalOffsetForDrawables : function(  ) {},
+
+<span id='android-widget-TextView-method-getFocusedRect'>/**
+</span>*/
+getFocusedRect : function(  ) {},
+
+<span id='android-widget-TextView-method-getLineCount'>/**Return the number of lines of text, or 0 if the internal Layout has not
+</span> been built.
+*/
+getLineCount : function(  ) {},
+
+<span id='android-widget-TextView-method-getLineBounds'>/**Return the baseline for the specified line (0...getLineCount() - 1)
+</span> If bounds is not null, return the top, left, right, bottom extents
+ of the specified line in it. If the internal Layout has not been built,
+ return 0 and set bounds to (0, 0, 0, 0)
+@param {Number} line which line to examine (0..getLineCount() - 1)
+@param {Object {Rect}} bounds Optional. If not null, it returns the extent of the line
+@return {Number} the Y-coordinate of the baseline
+*/
+getLineBounds : function(  ) {},
+
+<span id='android-widget-TextView-method-getBaseline'>/**
+</span>*/
+getBaseline : function(  ) {},
+
+<span id='android-widget-TextView-method-onResolvePointerIcon'>/**
+</span>*/
+onResolvePointerIcon : function(  ) {},
+
+<span id='android-widget-TextView-method-onKeyPreIme'>/**
+</span>*/
+onKeyPreIme : function(  ) {},
+
+<span id='android-widget-TextView-method-handleBackInTextActionModeIfNeeded'>/**
+</span>@hide 
+*/
+handleBackInTextActionModeIfNeeded : function(  ) {},
+
+<span id='android-widget-TextView-method-onKeyDown'>/**
+</span>*/
+onKeyDown : function(  ) {},
+
+<span id='android-widget-TextView-method-onKeyMultiple'>/**
+</span>*/
+onKeyMultiple : function(  ) {},
+
+<span id='android-widget-TextView-method-resetErrorChangedFlag'>/**Resets the mErrorWasChanged flag, so that future calls to {@link #setError}(CharSequence)
+</span> can be recorded.
+@hide 
+*/
+resetErrorChangedFlag : function(  ) {},
+
+<span id='android-widget-TextView-method-hideErrorIfUnchanged'>/**
+</span>@hide 
+*/
+hideErrorIfUnchanged : function(  ) {},
+
+<span id='android-widget-TextView-method-onKeyUp'>/**
+</span>*/
+onKeyUp : function(  ) {},
+
+<span id='android-widget-TextView-method-onCheckIsTextEditor'>/**
+</span>*/
+onCheckIsTextEditor : function(  ) {},
+
+<span id='android-widget-TextView-method-onCreateInputConnection'>/**
+</span>*/
+onCreateInputConnection : function(  ) {},
+
+<span id='android-widget-TextView-method-extractText'>/**If this TextView contains editable content, extract a portion of it
+</span> based on the information in &lt;var&gt;request&lt;/var&gt; in to &lt;var&gt;outText&lt;/var&gt;.
+@return {Boolean} Returns true if the text was successfully extracted, else false.
+*/
+extractText : function(  ) {},
+
+<span id='android-widget-TextView-method-setExtractedText'>/**Apply to this text view the given extracted text, as previously
+</span> returned by {@link #extractText(ExtractedTextRequest, ExtractedText)}.
+*/
+setExtractedText : function(  ) {},
+
+<span id='android-widget-TextView-method-setExtracting'>/**
+</span>@hide 
+*/
+setExtracting : function(  ) {},
+
+<span id='android-widget-TextView-method-onCommitCompletion'>/**Called by the framework in response to a text completion from
+</span> the current input method, provided by it calling
+ {@link InputConnection#commitCompletion
+ InputConnection.commitCompletion()}.  The default implementation does
+ nothing; text views that are supporting auto-completion should override
+ this to do their desired behavior.
+@param {Object {CompletionInfo}} text The auto complete text the user has selected.
+*/
+onCommitCompletion : function(  ) {},
+
+<span id='android-widget-TextView-method-onCommitCorrection'>/**Called by the framework in response to a text auto-correction (such as fixing a typo using a
+</span> dictionary) from the current input method, provided by it calling
+ {@link InputConnection#commitCorrection(CorrectionInfo) InputConnection.commitCorrection()}.
+ The default implementation flashes the background of the corrected word to provide
+ feedback to the user.
+@param {Object {CorrectionInfo}} info The auto correct info about the text that was corrected.
+*/
+onCommitCorrection : function(  ) {},
+
+<span id='android-widget-TextView-method-beginBatchEdit'>/**
+</span>*/
+beginBatchEdit : function(  ) {},
+
+<span id='android-widget-TextView-method-endBatchEdit'>/**
+</span>*/
+endBatchEdit : function(  ) {},
+
+<span id='android-widget-TextView-method-onBeginBatchEdit'>/**Called by the framework in response to a request to begin a batch
+</span> of edit operations through a call to link {@link #beginBatchEdit}().
+*/
+onBeginBatchEdit : function(  ) {},
+
+<span id='android-widget-TextView-method-onEndBatchEdit'>/**Called by the framework in response to a request to end a batch
+</span> of edit operations through a call to link {@link #endBatchEdit}.
+*/
+onEndBatchEdit : function(  ) {},
+
+<span id='android-widget-TextView-method-onPrivateIMECommand'>/**Called by the framework in response to a private command from the
+</span> current method, provided by it calling
+ {@link InputConnection#performPrivateCommand
+ InputConnection.performPrivateCommand()}.
+@param {String} action The action name of the command.
+@param {Object {Bundle}} data Any additional data for the command.  This may be null.
+@return {Boolean} Return true if you handled the command, else false.
+*/
+onPrivateIMECommand : function(  ) {},
+
+<span id='android-widget-TextView-method-nullLayouts'>/**
+</span>@hide 
+*/
+nullLayouts : function(  ) {},
+
+<span id='android-widget-TextView-method-makeNewLayout'>/**The width passed in is now the desired layout width,
+</span> not the full view width with padding.
+ {@hide}
+*/
+makeNewLayout : function(  ) {},
+
+<span id='android-widget-TextView-method-useDynamicLayout'>/**Returns true if DynamicLayout is required
+</span>@hide 
+*/
+useDynamicLayout : function(  ) {},
+
+<span id='android-widget-TextView-method-setIncludeFontPadding'>/**Set whether the TextView includes extra top and bottom padding to make
+</span> room for accents that go above the normal ascent and descent.
+ The default is true.
+@see #getIncludeFontPadding()
+@attr ref android.R.styleable#TextView_includeFontPadding
+*/
+setIncludeFontPadding : function(  ) {},
+
+<span id='android-widget-TextView-method-getIncludeFontPadding'>/**Gets whether the TextView includes extra top and bottom padding to make
+</span> room for accents that go above the normal ascent and descent.
+@see #setIncludeFontPadding(boolean)
+@attr ref android.R.styleable#TextView_includeFontPadding
+*/
+getIncludeFontPadding : function(  ) {},
+
+<span id='android-widget-TextView-method-bringPointIntoView'>/**Move the point, specified by the offset, into the view if it is needed.
+</span> This has to be called after layout. Returns true if anything changed.
+*/
+bringPointIntoView : function(  ) {},
+
+<span id='android-widget-TextView-method-moveCursorToVisibleOffset'>/**Move the cursor, if needed, so that it is at an offset that is visible
+</span> to the user.  This will not move the cursor if it represents more than
+ one character (a selection range).  This will only work if the
+ TextView contains spannable text; otherwise it will do nothing.
+@return {Boolean} True if the cursor was actually moved, false otherwise.
+*/
+moveCursorToVisibleOffset : function(  ) {},
+
+<span id='android-widget-TextView-method-computeScroll'>/**
+</span>*/
+computeScroll : function(  ) {},
+
+<span id='android-widget-TextView-method-debug'>/**
+</span>*/
+debug : function(  ) {},
+
+<span id='android-widget-TextView-method-getSelectionStart'>/**Convenience for {@link Selection#getSelectionStart}.
+</span>*/
+getSelectionStart : function(  ) {},
+
+<span id='android-widget-TextView-method-getSelectionEnd'>/**Convenience for {@link Selection#getSelectionEnd}.
+</span>*/
+getSelectionEnd : function(  ) {},
+
+<span id='android-widget-TextView-method-hasSelection'>/**Return true iff there is a selection of nonzero length inside this text view.
+</span>*/
+hasSelection : function(  ) {},
+
+<span id='android-widget-TextView-method-setSingleLine'>/**Sets the properties of this field (lines, horizontally scrolling,
+</span> transformation method) to be for a single-line input.
+@attr ref android.R.styleable#TextView_singleLine
+*/
+setSingleLine : function(  ) {},
+
+<span id='android-widget-TextView-method-setAllCaps'>/**Sets the properties of this field to transform input to ALL CAPS
+</span> display. This may use a &quot;small caps&quot; formatting if available.
+ This setting will be ignored if this field is editable or selectable.
+
+ This call replaces the current transformation method. Disabling this
+ will not necessarily restore the previous behavior from before this
+ was enabled.
+@see #setTransformationMethod(TransformationMethod)
+@attr ref android.R.styleable#TextView_textAllCaps
+*/
+setAllCaps : function(  ) {},
+
+<span id='android-widget-TextView-method-isAllCaps'>/**Checks whether the transformation method applied to this TextView is set to ALL CAPS.
+</span>@return {Boolean} Whether the current transformation method is for ALL CAPS.
+@see #setAllCaps(boolean)
+@see #setTransformationMethod(TransformationMethod)
+*/
+isAllCaps : function(  ) {},
+
+<span id='android-widget-TextView-method-setSingleLine'>/**If true, sets the properties of this field (number of lines, horizontally scrolling,
+</span> transformation method) to be for a single-line input; if false, restores these to the default
+ conditions.
+
+ Note that the default conditions are not necessarily those that were in effect prior this
+ method, and you may want to reset these properties to your custom values.
+@attr ref android.R.styleable#TextView_singleLine
+*/
+setSingleLine : function(  ) {},
+
+<span id='android-widget-TextView-method-setEllipsize'>/**Causes words in the text that are longer than the view's width
+</span> to be ellipsized instead of broken in the middle.  You may also
+ want to {@link #setSingleLine} or {@link #setHorizontallyScrolling}
+ to constrain the text to a single line.  Use &lt;code&gt;null&lt;/code&gt;
+ to turn off ellipsizing.
+
+ If {@link #setMaxLines} has been used to set two or more lines,
+ only {@link android.text.TextUtils.TruncateAt#END} and
+ {@link android.text.TextUtils.TruncateAt#MARQUEE} are supported
+ (other ellipsizing types will not do anything).
+@attr ref android.R.styleable#TextView_ellipsize
+*/
+setEllipsize : function(  ) {},
+
+<span id='android-widget-TextView-method-setMarqueeRepeatLimit'>/**Sets how many times to repeat the marquee animation. Only applied if the
+</span> TextView has marquee enabled. Set to -1 to repeat indefinitely.
+@see #getMarqueeRepeatLimit()
+@attr ref android.R.styleable#TextView_marqueeRepeatLimit
+*/
+setMarqueeRepeatLimit : function(  ) {},
+
+<span id='android-widget-TextView-method-getMarqueeRepeatLimit'>/**Gets the number of times the marquee animation is repeated. Only meaningful if the
+</span> TextView has marquee enabled.
+@return {Number} the number of times the marquee animation is repeated. -1 if the animation
+ repeats indefinitely
+@see #setMarqueeRepeatLimit(int)
+@attr ref android.R.styleable#TextView_marqueeRepeatLimit
+*/
+getMarqueeRepeatLimit : function(  ) {},
+
+<span id='android-widget-TextView-method-getEllipsize'>/**Returns where, if anywhere, words that are longer than the view
+</span> is wide should be ellipsized.
+*/
+getEllipsize : function(  ) {},
+
+<span id='android-widget-TextView-method-setSelectAllOnFocus'>/**Set the TextView so that when it takes focus, all the text is
+</span> selected.
+@attr ref android.R.styleable#TextView_selectAllOnFocus
+*/
+setSelectAllOnFocus : function(  ) {},
+
+<span id='android-widget-TextView-method-setCursorVisible'>/**Set whether the cursor is visible. The default is true. Note that this property only
+</span> makes sense for editable TextView.
+@see #isCursorVisible()
+@attr ref android.R.styleable#TextView_cursorVisible
+*/
+setCursorVisible : function(  ) {},
+
+<span id='android-widget-TextView-method-isCursorVisible'>/**
+</span>@return {Boolean} whether or not the cursor is visible (assuming this TextView is editable)
+@see #setCursorVisible(boolean)
+@attr ref android.R.styleable#TextView_cursorVisible
+*/
+isCursorVisible : function(  ) {},
+
+<span id='android-widget-TextView-method-addTextChangedListener'>/**Adds a TextWatcher to the list of those whose methods are called
+</span> whenever this TextView's text changes.
+ &lt;p&gt;
+ In 1.0, the {@link TextWatcher#afterTextChanged} method was erroneously
+ not called after {@link #setText} calls.  Now, doing {@link #setText}
+ if there are any text changed listeners forces the buffer type to
+ Editable if it would not otherwise be and does call this method.
+*/
+addTextChangedListener : function(  ) {},
+
+<span id='android-widget-TextView-method-removeTextChangedListener'>/**Removes the specified TextWatcher from the list of those whose
+</span> methods are called
+ whenever this TextView's text changes.
+*/
+removeTextChangedListener : function(  ) {},
+
+<span id='android-widget-TextView-method-onWindowFocusChanged'>/**
+</span>*/
+onWindowFocusChanged : function(  ) {},
+
+<span id='android-widget-TextView-method-clearComposingText'>/**Use {@link BaseInputConnection#removeComposingSpans
+</span> BaseInputConnection.removeComposingSpans()} to remove any IME composing
+ state from this text view.
+*/
+clearComposingText : function(  ) {},
+
+<span id='android-widget-TextView-method-setSelected'>/**
+</span>*/
+setSelected : function(  ) {},
+
+<span id='android-widget-TextView-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='android-widget-TextView-method-onGenericMotionEvent'>/**
+</span>*/
+onGenericMotionEvent : function(  ) {},
+
+<span id='android-widget-TextView-method-showContextMenu'>/**
+</span>*/
+showContextMenu : function(  ) {},
+
+<span id='android-widget-TextView-method-showContextMenu'>/**
+</span>*/
+showContextMenu : function(  ) {},
+
+<span id='android-widget-TextView-method-didTouchFocusSelect'>/**Returns true, only while processing a touch gesture, if the initial
+</span> touch down event caused focus to move to the text view and as a result
+ its selection changed.  Only valid while processing the touch gesture
+ of interest, in an editable text view.
+*/
+didTouchFocusSelect : function(  ) {},
+
+<span id='android-widget-TextView-method-cancelLongPress'>/**
+</span>*/
+cancelLongPress : function(  ) {},
+
+<span id='android-widget-TextView-method-onTrackballEvent'>/**
+</span>*/
+onTrackballEvent : function(  ) {},
+
+<span id='android-widget-TextView-method-setScroller'>/**Sets the Scroller used for producing a scrolling animation
+</span>@param {Object {Scroller}} s A Scroller instance
+*/
+setScroller : function(  ) {},
+
+<span id='android-widget-TextView-method-findViewsWithText'>/**
+</span>*/
+findViewsWithText : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextColors'>/**Returns the TextView_textColor attribute from the TypedArray, if set, or
+</span> the TextAppearance_textColor from the TextView_textAppearance attribute,
+ if TextView_textColor was not set directly.
+@removed 
+*/
+getTextColors : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextColor'>/**Returns the default color from the TextView_textColor attribute from the
+</span> AttributeSet, if set, or the default color from the
+ TextAppearance_textColor from the TextView_textAppearance attribute, if
+ TextView_textColor was not set directly.
+@removed 
+*/
+getTextColor : function(  ) {},
+
+<span id='android-widget-TextView-method-onKeyShortcut'>/**
+</span>*/
+onKeyShortcut : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextOperationUser'>/**Associate {@link UserHandle} who is considered to be the logical owner of the text shown in
+</span> this {@link android.widget.TextView}.
+
+ &lt;p&gt;Most of applications should not worry about this.  Some privileged apps that host UI for
+ other apps may need to set this so that the system can user right user's resources and
+ services such as input methods and spell checkers.&lt;/p&gt;
+@param {Object {UserHandle}} user {@link UserHandle} who is considered to be the owner of the text shown in this
+        {@link TextView}. {@code null} to reset {@link #mTextOperationUser}.
+@hide 
+*/
+setTextOperationUser : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextServicesLocale'>/**This is a temporary method. Future versions may support multi-locale text.
+</span> Caveat: This method may not return the latest text services locale, but this should be
+ acceptable and it's more important to make this method asynchronous.
+@return {Object {java.util.Locale}} The locale that should be used for a word iterator
+ in this TextView, based on the current spell checker settings,
+ the current IME's locale, or the system default locale.
+ Please note that a word iterator in this TextView is different from another word iterator
+ used by SpellChecker.java of TextView. This method should be used for the former.
+@hide 
+*/
+getTextServicesLocale : function(  ) {},
+
+<span id='android-widget-TextView-method-isInExtractedMode'>/**
+</span>@return {Boolean} {@code true} if this TextView is specialized for showing and interacting with the
+ extracted text in a full-screen input method.
+@hide 
+*/
+isInExtractedMode : function(  ) {},
+
+<span id='android-widget-TextView-method-getSpellCheckerLocale'>/**This is a temporary method. Future versions may support multi-locale text.
+</span> Caveat: This method may not return the latest spell checker locale, but this should be
+ acceptable and it's more important to make this method asynchronous.
+@return {Object {java.util.Locale}} The locale that should be used for a spell checker in this TextView,
+ based on the current spell checker settings, the current IME's locale, or the system default
+ locale.
+@hide 
+*/
+getSpellCheckerLocale : function(  ) {},
+
+<span id='android-widget-TextView-method-getWordIterator'>/**This method is used by the ArrowKeyMovementMethod to jump from one word to the other.
+</span> Made available to achieve a consistent behavior.
+@hide 
+*/
+getWordIterator : function(  ) {},
+
+<span id='android-widget-TextView-method-onPopulateAccessibilityEventInternal'>/**
+</span>@hide 
+*/
+onPopulateAccessibilityEventInternal : function(  ) {},
+
+<span id='android-widget-TextView-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+<span id='android-widget-TextView-method-autofill'>/**
+</span>*/
+autofill : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutofillType'>/**
+</span>*/
+getAutofillType : function(  ) {},
+
+<span id='android-widget-TextView-method-getAutofillValue'>/**Gets the {@link android.widget.TextView}'s current text for AutoFill. The value is trimmed to 100K
+</span> {@code char}s if longer.
+@return {Object {android.view.autofill.AutofillValue}} current text, {@code null} if the text is not editable
+@see View#getAutofillValue()
+*/
+getAutofillValue : function(  ) {},
+
+<span id='android-widget-TextView-method-onInitializeAccessibilityEventInternal'>/**
+</span>@hide 
+*/
+onInitializeAccessibilityEventInternal : function(  ) {},
+
+<span id='android-widget-TextView-method-onInitializeAccessibilityNodeInfoInternal'>/**
+</span>@hide 
+*/
+onInitializeAccessibilityNodeInfoInternal : function(  ) {},
+
+<span id='android-widget-TextView-method-addExtraDataToAccessibilityNodeInfo'>/**
+</span>*/
+addExtraDataToAccessibilityNodeInfo : function(  ) {},
+
+<span id='android-widget-TextView-method-populateCharacterBounds'>/**Populate requested character bounds in a {@link CursorAnchorInfo.Builder}
+</span>@param {Object {CursorAnchorInfo.Builder}} builder The builder to populate
+@param {Number} startIndex The starting character index to populate
+@param {Number} endIndex The ending character index to populate
+@param {Number} viewportToContentHorizontalOffset The horizontal offset from the viewport to the
+ content
+@param {Number} viewportToContentVerticalOffset The vertical offset from the viewport to the content
+@hide 
+*/
+populateCharacterBounds : function(  ) {},
+
+<span id='android-widget-TextView-method-isPositionVisible'>/**
+</span>@hide 
+*/
+isPositionVisible : function(  ) {},
+
+<span id='android-widget-TextView-method-performAccessibilityActionInternal'>/**Performs an accessibility action after it has been offered to the
+</span> delegate.
+@hide 
+*/
+performAccessibilityActionInternal : function(  ) {},
+
+<span id='android-widget-TextView-method-sendAccessibilityEventInternal'>/**
+</span>@hide 
+*/
+sendAccessibilityEventInternal : function(  ) {},
+
+<span id='android-widget-TextView-method-sendAccessibilityEventUnchecked'>/**
+</span>*/
+sendAccessibilityEventUnchecked : function(  ) {},
+
+<span id='android-widget-TextView-method-isInputMethodTarget'>/**Returns whether this text view is a current input method target.  The
+</span> default implementation just checks with {@link InputMethodManager}.
+@return {Boolean} True if the TextView is a current input method target; false otherwise.
+*/
+isInputMethodTarget : function(  ) {},
+
+<span id='android-widget-TextView-method-onTextContextMenuItem'>/**Called when a context menu option for the text view is selected.  Currently
+</span> this will be one of {@link android.R.id#selectAll}, {@link android.R.id#cut},
+ {@link android.R.id#copy}, {@link android.R.id#paste} or {@link android.R.id#shareText}.
+@return {Boolean} true if the context menu item action was performed.
+*/
+onTextContextMenuItem : function(  ) {},
+
+<span id='android-widget-TextView-method-performLongClick'>/**
+</span>*/
+performLongClick : function(  ) {},
+
+<span id='android-widget-TextView-method-isSuggestionsEnabled'>/**Return whether or not suggestions are enabled on this TextView. The suggestions are generated
+</span> by the IME or by the spell checker as the user types. This is done by adding
+ {@link SuggestionSpan}s to the text.
+
+ When suggestions are enabled (default), this list of suggestions will be displayed when the
+ user asks for them on these parts of the text. This value depends on the inputType of this
+ TextView.
+
+ The class of the input type must be {@link InputType#TYPE_CLASS_TEXT}.
+
+ In addition, the type variation must be one of
+ {@link InputType#TYPE_TEXT_VARIATION_NORMAL},
+ {@link InputType#TYPE_TEXT_VARIATION_EMAIL_SUBJECT},
+ {@link InputType#TYPE_TEXT_VARIATION_LONG_MESSAGE},
+ {@link InputType#TYPE_TEXT_VARIATION_SHORT_MESSAGE} or
+ {@link InputType#TYPE_TEXT_VARIATION_WEB_EDIT_TEXT}.
+
+ And finally, the {@link InputType#TYPE_TEXT_FLAG_NO_SUGGESTIONS} flag must &lt;i&gt;not&lt;/i&gt; be set.
+@return {Boolean} true if the suggestions popup window is enabled, based on the inputType.
+*/
+isSuggestionsEnabled : function(  ) {},
+
+<span id='android-widget-TextView-method-setCustomSelectionActionModeCallback'>/**If provided, this ActionMode.Callback will be used to create the ActionMode when text
+</span> selection is initiated in this View.
+
+ &lt;p&gt;The standard implementation populates the menu with a subset of Select All, Cut, Copy,
+ Paste, Replace and Share actions, depending on what this View supports.
+
+ &lt;p&gt;A custom implementation can add new entries in the default menu in its
+ {@link android.view.ActionMode.Callback#onPrepareActionMode(ActionMode, android.view.Menu)}
+ method. The default actions can also be removed from the menu using
+ {@link android.view.Menu#removeItem(int)} and passing {@link android.R.id#selectAll},
+ {@link android.R.id#cut}, {@link android.R.id#copy}, {@link android.R.id#paste},
+ {@link android.R.id#replaceText} or {@link android.R.id#shareText} ids as parameters.
+
+ &lt;p&gt;Returning false from
+ {@link android.view.ActionMode.Callback#onCreateActionMode(ActionMode, android.view.Menu)}
+ will prevent the action mode from being started.
+
+ &lt;p&gt;Action click events should be handled by the custom implementation of
+ {@link android.view.ActionMode.Callback#onActionItemClicked(ActionMode,
+ android.view.MenuItem)}.
+
+ &lt;p&gt;Note that text selection mode is not started when a TextView receives focus and the
+ {@link android.R.attr#selectAllOnFocus} flag has been set. The content is highlighted in
+ that case, to allow for quick replacement.
+*/
+setCustomSelectionActionModeCallback : function(  ) {},
+
+<span id='android-widget-TextView-method-getCustomSelectionActionModeCallback'>/**Retrieves the value set in {@link #setCustomSelectionActionModeCallback}. Default is null.
+</span>@return {Object {android.view.ActionMode.Callback}} The current custom selection callback.
+*/
+getCustomSelectionActionModeCallback : function(  ) {},
+
+<span id='android-widget-TextView-method-setCustomInsertionActionModeCallback'>/**If provided, this ActionMode.Callback will be used to create the ActionMode when text
+</span> insertion is initiated in this View.
+ The standard implementation populates the menu with a subset of Select All,
+ Paste and Replace actions, depending on what this View supports.
+
+ &lt;p&gt;A custom implementation can add new entries in the default menu in its
+ {@link android.view.ActionMode.Callback#onPrepareActionMode(android.view.ActionMode,
+ android.view.Menu)} method. The default actions can also be removed from the menu using
+ {@link android.view.Menu#removeItem(int)} and passing {@link android.R.id#selectAll},
+ {@link android.R.id#paste} or {@link android.R.id#replaceText} ids as parameters.&lt;/p&gt;
+
+ &lt;p&gt;Returning false from
+ {@link android.view.ActionMode.Callback#onCreateActionMode(android.view.ActionMode,
+ android.view.Menu)} will prevent the action mode from being started.&lt;/p&gt;
+
+ &lt;p&gt;Action click events should be handled by the custom implementation of
+ {@link android.view.ActionMode.Callback#onActionItemClicked(android.view.ActionMode,
+ android.view.MenuItem)}.&lt;/p&gt;
+
+ &lt;p&gt;Note that text insertion mode is not started when a TextView receives focus and the
+ {@link android.R.attr#selectAllOnFocus} flag has been set.&lt;/p&gt;
+*/
+setCustomInsertionActionModeCallback : function(  ) {},
+
+<span id='android-widget-TextView-method-getCustomInsertionActionModeCallback'>/**Retrieves the value set in {@link #setCustomInsertionActionModeCallback}. Default is null.
+</span>@return {Object {android.view.ActionMode.Callback}} The current custom insertion callback.
+*/
+getCustomInsertionActionModeCallback : function(  ) {},
+
+<span id='android-widget-TextView-method-setTextClassifier'>/**Sets the {@link TextClassifier} for this TextView.
+</span>*/
+setTextClassifier : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextClassifier'>/**Returns the {@link TextClassifier} used by this TextView.
+</span> If no TextClassifier has been set, this TextView uses the default set by the
+ {@link TextClassificationManager}.
+*/
+getTextClassifier : function(  ) {},
+
+<span id='android-widget-TextView-method-requestActionMode'>/**Starts an ActionMode for the specified TextLinkSpan.
+</span>@return {Boolean} Whether or not we're attempting to start the action mode.
+@hide 
+*/
+requestActionMode : function(  ) {},
+
+<span id='android-widget-TextView-method-handleClick'>/**Handles a click on the specified TextLinkSpan.
+</span>@return {Boolean} Whether or not the click is being handled.
+@hide 
+*/
+handleClick : function(  ) {},
+
+<span id='android-widget-TextView-method-hideFloatingToolbar'>/**
+</span>@hide 
+*/
+hideFloatingToolbar : function(  ) {},
+
+<span id='android-widget-TextView-method-getOffsetForPosition'>/**Get the character offset closest to the specified absolute position. A typical use case is to
+</span> pass the result of {@link MotionEvent#getX()} and {@link MotionEvent#getY()} to this method.
+@param {Number} x The horizontal absolute position of a point on screen
+@param {Number} y The vertical absolute position of a point on screen
+@return {Number} the character offset for the character whose position is closest to the specified
+  position. Returns -1 if there is no layout.
+*/
+getOffsetForPosition : function(  ) {},
+
+<span id='android-widget-TextView-method-onDragEvent'>/**
+</span>*/
+onDragEvent : function(  ) {},
+
+<span id='android-widget-TextView-method-onRtlPropertiesChanged'>/**
+</span>*/
+onRtlPropertiesChanged : function(  ) {},
+
+<span id='android-widget-TextView-method-getTextDirectionHeuristic'>/**Returns resolved {@link TextDirectionHeuristic} that will be used for text layout.
+</span> The {@link TextDirectionHeuristic} that is used by TextView is only available after
+ {@link #getTextDirection}() and {@link #getLayoutDirection}() is resolved. Therefore the
+ return value may not be the same as the one TextView uses if the View's layout direction is
+ not resolved or detached from parent root view.
+*/
+getTextDirectionHeuristic : function(  ) {},
+
+<span id='android-widget-TextView-method-onResolveDrawables'>/**
+</span>@hide 
+*/
+onResolveDrawables : function(  ) {},
+
+<span id='android-widget-TextView-method-getIterableTextForAccessibility'>/**
+</span>@hide 
+*/
+getIterableTextForAccessibility : function(  ) {},
+
+<span id='android-widget-TextView-method-getIteratorForGranularity'>/**
+</span>@hide 
+*/
+getIteratorForGranularity : function(  ) {},
+
+<span id='android-widget-TextView-method-getAccessibilitySelectionStart'>/**
+</span>@hide 
+*/
+getAccessibilitySelectionStart : function(  ) {},
+
+<span id='android-widget-TextView-method-isAccessibilitySelectionExtendable'>/**
+</span>@hide 
+*/
+isAccessibilitySelectionExtendable : function(  ) {},
+
+<span id='android-widget-TextView-method-getAccessibilitySelectionEnd'>/**
+</span>@hide 
+*/
+getAccessibilitySelectionEnd : function(  ) {},
+
+<span id='android-widget-TextView-method-setAccessibilitySelection'>/**
+</span>@hide 
+*/
+setAccessibilitySelection : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

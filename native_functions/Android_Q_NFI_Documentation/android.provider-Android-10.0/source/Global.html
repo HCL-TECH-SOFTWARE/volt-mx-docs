@@ -1,0 +1,3790 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Settings-Global'>/**@class android.provider.Settings.Global
+</span>@extends android.provider.Settings.NameValueTable
+
+ Global system settings, containing preferences that always apply identically
+ to all defined users.  Applications can read these but are not allowed to write;
+ like the &quot;Secure&quot; settings, these are for preferences that the user must
+ explicitly modify through the system UI or specialized APIs for those values.
+*/
+var Global = {
+
+<span id='android-provider-Settings-Global-property-CONTENT_URI'>/** The content:// style URL for global secure settings items.  Not public.
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Settings-Global-property-ADD_USERS_WHEN_LOCKED'>/** Whether users are allowed to add more users or guest from lockscreen.
+</span> &lt;p&gt;
+ Type: int
+ @hide
+*/
+ADD_USERS_WHEN_LOCKED : &quot;add_users_when_locked&quot;,
+<span id='android-provider-Settings-Global-property-APPLY_RAMPING_RINGER'>/** Whether applying ramping ringer on incoming phone call ringtone.
+</span> &lt;p&gt;1 = apply ramping ringer
+ &lt;p&gt;0 = do not apply ramping ringer
+*/
+APPLY_RAMPING_RINGER : &quot;apply_ramping_ringer&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED'>/** Setting whether the global gesture for enabling accessibility is enabled.
+</span> If this gesture is enabled the user will be able to perfrom it to enable
+ the accessibility state without visiting the settings app.
+
+ @hide
+ No longer used. Should be removed once all dependencies have been updated.
+*/
+ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED : &quot;enable_accessibility_global_gesture_enabled&quot;,
+<span id='android-provider-Settings-Global-property-AIRPLANE_MODE_ON'>/** Whether Airplane Mode is on.
+</span>*/
+AIRPLANE_MODE_ON : &quot;airplane_mode_on&quot;,
+<span id='android-provider-Settings-Global-property-THEATER_MODE_ON'>/** Whether Theater Mode is on.
+</span> {@hide}
+*/
+THEATER_MODE_ON : &quot;theater_mode_on&quot;,
+<span id='android-provider-Settings-Global-property-RADIO_BLUETOOTH'>/** Constant for use in AIRPLANE_MODE_RADIOS to specify Bluetooth radio.
+</span>*/
+RADIO_BLUETOOTH : &quot;bluetooth&quot;,
+<span id='android-provider-Settings-Global-property-RADIO_WIFI'>/** Constant for use in AIRPLANE_MODE_RADIOS to specify Wi-Fi radio.
+</span>*/
+RADIO_WIFI : &quot;wifi&quot;,
+<span id='android-provider-Settings-Global-property-RADIO_WIMAX'>/** {@hide}
+</span>*/
+RADIO_WIMAX : &quot;wimax&quot;,
+<span id='android-provider-Settings-Global-property-RADIO_CELL'>/** Constant for use in AIRPLANE_MODE_RADIOS to specify Cellular radio.
+</span>*/
+RADIO_CELL : &quot;cell&quot;,
+<span id='android-provider-Settings-Global-property-RADIO_NFC'>/** Constant for use in AIRPLANE_MODE_RADIOS to specify NFC radio.
+</span>*/
+RADIO_NFC : &quot;nfc&quot;,
+<span id='android-provider-Settings-Global-property-AIRPLANE_MODE_RADIOS'>/** A comma separated list of radios that need to be disabled when airplane mode
+</span> is on. This overrides WIFI_ON and BLUETOOTH_ON, if Wi-Fi and bluetooth are
+ included in the comma separated list.
+*/
+AIRPLANE_MODE_RADIOS : &quot;airplane_mode_radios&quot;,
+<span id='android-provider-Settings-Global-property-AIRPLANE_MODE_TOGGLEABLE_RADIOS'>/** A comma separated list of radios that should to be disabled when airplane mode
+</span> is on, but can be manually reenabled by the user.  For example, if RADIO_WIFI is
+ added to both AIRPLANE_MODE_RADIOS and AIRPLANE_MODE_TOGGLEABLE_RADIOS, then Wifi
+ will be turned off when entering airplane mode, but the user will be able to reenable
+ Wifi in the Settings app.
+
+ {@hide}
+*/
+AIRPLANE_MODE_TOGGLEABLE_RADIOS : &quot;airplane_mode_toggleable_radios&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_CLASS_OF_DEVICE'>/** An integer representing the Bluetooth Class of Device (CoD).
+</span>
+ @hide
+*/
+BLUETOOTH_CLASS_OF_DEVICE : &quot;bluetooth_class_of_device&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_DISABLED_PROFILES'>/** A Long representing a bitmap of profiles that should be disabled when bluetooth starts.
+</span> See {@link android.bluetooth.BluetoothProfile}.
+ {@hide}
+*/
+BLUETOOTH_DISABLED_PROFILES : &quot;bluetooth_disabled_profiles&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_INTEROPERABILITY_LIST'>/** A semi-colon separated list of Bluetooth interoperability workarounds.
+</span> Each entry is a partial Bluetooth device address string and an integer representing
+ the feature to be disabled, separated by a comma. The integer must correspond
+ to a interoperability feature as defined in &quot;interop.h&quot; in /system/bt.
+ &lt;p&gt;
+ Example: &lt;br/&gt;
+   &quot;00:11:22,0;01:02:03:04,2&quot;
+ @hide
+*/
+BLUETOOTH_INTEROPERABILITY_LIST : &quot;bluetooth_interoperability_list&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SLEEP_POLICY'>/** The policy for deciding when Wi-Fi should go to sleep (which will in
+</span> turn switch to using the mobile data as an Internet connection).
+ &lt;p&gt;
+ Set to one of {@link #WIFI_SLEEP_POLICY_DEFAULT},
+ {@link #WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED}, or
+ {@link #WIFI_SLEEP_POLICY_NEVER}.
+*/
+WIFI_SLEEP_POLICY : &quot;wifi_sleep_policy&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SLEEP_POLICY_DEFAULT'>/** Value for {@link #WIFI_SLEEP_POLICY} to use the default Wi-Fi sleep
+</span> policy, which is to sleep shortly after the turning off
+ according to the {@link #STAY_ON_WHILE_PLUGGED_IN} setting.
+*/
+WIFI_SLEEP_POLICY_DEFAULT : &quot;0&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED'>/** Value for {@link #WIFI_SLEEP_POLICY} to use the default policy when
+</span> the device is on battery, and never go to sleep when the device is
+ plugged in.
+*/
+WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED : &quot;1&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SLEEP_POLICY_NEVER'>/** Value for {@link #WIFI_SLEEP_POLICY} to never go to sleep.
+</span>*/
+WIFI_SLEEP_POLICY_NEVER : &quot;2&quot;,
+<span id='android-provider-Settings-Global-property-AUTO_TIME'>/** Value to specify if the user prefers the date, time and time zone
+</span> to be automatically fetched from the network (NITZ). 1=yes, 0=no
+*/
+AUTO_TIME : &quot;auto_time&quot;,
+<span id='android-provider-Settings-Global-property-AUTO_TIME_ZONE'>/** Value to specify if the user prefers the time zone
+</span> to be automatically fetched from the network (NITZ). 1=yes, 0=no
+*/
+AUTO_TIME_ZONE : &quot;auto_time_zone&quot;,
+<span id='android-provider-Settings-Global-property-CAR_DOCK_SOUND'>/** URI for the car dock &quot;in&quot; event sound.
+</span> @hide
+*/
+CAR_DOCK_SOUND : &quot;car_dock_sound&quot;,
+<span id='android-provider-Settings-Global-property-CAR_UNDOCK_SOUND'>/** URI for the car dock &quot;out&quot; event sound.
+</span> @hide
+*/
+CAR_UNDOCK_SOUND : &quot;car_undock_sound&quot;,
+<span id='android-provider-Settings-Global-property-DESK_DOCK_SOUND'>/** URI for the desk dock &quot;in&quot; event sound.
+</span> @hide
+*/
+DESK_DOCK_SOUND : &quot;desk_dock_sound&quot;,
+<span id='android-provider-Settings-Global-property-DESK_UNDOCK_SOUND'>/** URI for the desk dock &quot;out&quot; event sound.
+</span> @hide
+*/
+DESK_UNDOCK_SOUND : &quot;desk_undock_sound&quot;,
+<span id='android-provider-Settings-Global-property-DOCK_SOUNDS_ENABLED'>/** Whether to play a sound for dock events.
+</span> @hide
+*/
+DOCK_SOUNDS_ENABLED : &quot;dock_sounds_enabled&quot;,
+<span id='android-provider-Settings-Global-property-DOCK_SOUNDS_ENABLED_WHEN_ACCESSIBILITY'>/** Whether to play a sound for dock events, only when an accessibility service is on.
+</span> @hide
+*/
+DOCK_SOUNDS_ENABLED_WHEN_ACCESSIBILITY : &quot;dock_sounds_enabled_when_accessbility&quot;,
+<span id='android-provider-Settings-Global-property-LOCK_SOUND'>/** URI for the &quot;device locked&quot; (keyguard shown) sound.
+</span> @hide
+*/
+LOCK_SOUND : &quot;lock_sound&quot;,
+<span id='android-provider-Settings-Global-property-UNLOCK_SOUND'>/** URI for the &quot;device unlocked&quot; sound.
+</span> @hide
+*/
+UNLOCK_SOUND : &quot;unlock_sound&quot;,
+<span id='android-provider-Settings-Global-property-TRUSTED_SOUND'>/** URI for the &quot;device is trusted&quot; sound, which is played when the device enters the trusted
+</span> state without unlocking.
+ @hide
+*/
+TRUSTED_SOUND : &quot;trusted_sound&quot;,
+<span id='android-provider-Settings-Global-property-LOW_BATTERY_SOUND'>/** URI for the low battery sound file.
+</span> @hide
+*/
+LOW_BATTERY_SOUND : &quot;low_battery_sound&quot;,
+<span id='android-provider-Settings-Global-property-POWER_SOUNDS_ENABLED'>/** Whether to play a sound for low-battery alerts.
+</span> @hide
+*/
+POWER_SOUNDS_ENABLED : &quot;power_sounds_enabled&quot;,
+<span id='android-provider-Settings-Global-property-CHARGING_STARTED_SOUND'>/** URI for the &quot;wireless charging started&quot; and &quot;wired charging started&quot; sound.
+</span> @hide
+*/
+CHARGING_STARTED_SOUND : &quot;wireless_charging_started_sound&quot;,
+<span id='android-provider-Settings-Global-property-CHARGING_SOUNDS_ENABLED'>/** Whether to play a sound for charging events.
+</span> @deprecated Use {@link android.provider.Settings.Secure#CHARGING_SOUNDS_ENABLED} instead
+ @hide
+*/
+CHARGING_SOUNDS_ENABLED : &quot;charging_sounds_enabled&quot;,
+<span id='android-provider-Settings-Global-property-CHARGING_VIBRATION_ENABLED'>/** Whether to vibrate for wireless charging events.
+</span> @deprecated Use {@link android.provider.Settings.Secure#CHARGING_VIBRATION_ENABLED}
+ @hide
+*/
+CHARGING_VIBRATION_ENABLED : &quot;charging_vibration_enabled&quot;,
+<span id='android-provider-Settings-Global-property-STAY_ON_WHILE_PLUGGED_IN'>/** Whether we keep the device on while the device is plugged in.
+</span> Supported values are:
+ &lt;ul&gt;
+ &lt;li&gt;{@code 0} to never stay on while plugged in&lt;/li&gt;
+ &lt;li&gt;{@link BatteryManager#BATTERY_PLUGGED_AC} to stay on for AC charger&lt;/li&gt;
+ &lt;li&gt;{@link BatteryManager#BATTERY_PLUGGED_USB} to stay on for USB charger&lt;/li&gt;
+ &lt;li&gt;{@link BatteryManager#BATTERY_PLUGGED_WIRELESS} to stay on for wireless charger&lt;/li&gt;
+ &lt;/ul&gt;
+ These values can be OR-ed together.
+*/
+STAY_ON_WHILE_PLUGGED_IN : &quot;stay_on_while_plugged_in&quot;,
+<span id='android-provider-Settings-Global-property-BUGREPORT_IN_POWER_MENU'>/** When the user has enable the option to have a &quot;bug report&quot; command
+</span> in the power menu.
+ @hide
+*/
+BUGREPORT_IN_POWER_MENU : &quot;bugreport_in_power_menu&quot;,
+<span id='android-provider-Settings-Global-property-ADB_ENABLED'>/** Whether ADB is enabled.
+</span>*/
+ADB_ENABLED : &quot;adb_enabled&quot;,
+<span id='android-provider-Settings-Global-property-DEBUG_VIEW_ATTRIBUTES'>/** Whether Views are allowed to save their attribute data.
+</span> @hide
+*/
+DEBUG_VIEW_ATTRIBUTES : &quot;debug_view_attributes&quot;,
+<span id='android-provider-Settings-Global-property-DEBUG_VIEW_ATTRIBUTES_APPLICATION_PACKAGE'>/** Which application package is allowed to save View attribute data.
+</span> @hide
+*/
+DEBUG_VIEW_ATTRIBUTES_APPLICATION_PACKAGE : &quot;debug_view_attributes_application_package&quot;,
+<span id='android-provider-Settings-Global-property-ASSISTED_GPS_ENABLED'>/** Whether assisted GPS should be enabled or not.
+</span> @hide
+*/
+ASSISTED_GPS_ENABLED : &quot;assisted_gps_enabled&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_ON'>/** Whether bluetooth is enabled/disabled
+</span> 0=disabled. 1=enabled.
+*/
+BLUETOOTH_ON : &quot;bluetooth_on&quot;,
+<span id='android-provider-Settings-Global-property-CDMA_CELL_BROADCAST_SMS'>/** CDMA Cell Broadcast SMS
+</span>                            0 = CDMA Cell Broadcast SMS disabled
+                            1 = CDMA Cell Broadcast SMS enabled
+ @hide
+*/
+CDMA_CELL_BROADCAST_SMS : &quot;cdma_cell_broadcast_sms&quot;,
+<span id='android-provider-Settings-Global-property-CDMA_ROAMING_MODE'>/** The CDMA roaming mode 0 = Home Networks, CDMA default
+</span>                       1 = Roaming on Affiliated networks
+                       2 = Roaming on any networks
+ @hide
+*/
+CDMA_ROAMING_MODE : &quot;roaming_settings&quot;,
+<span id='android-provider-Settings-Global-property-CDMA_SUBSCRIPTION_MODE'>/** The CDMA subscription mode 0 = RUIM/SIM (default)
+</span>                                1 = NV
+ @hide
+*/
+CDMA_SUBSCRIPTION_MODE : &quot;subscription_mode&quot;,
+<span id='android-provider-Settings-Global-property-DEFAULT_RESTRICT_BACKGROUND_DATA'>/** The default value for whether background data is enabled or not.
+</span>
+ Used by {@code NetworkPolicyManagerService}.
+
+ @hide
+*/
+DEFAULT_RESTRICT_BACKGROUND_DATA : &quot;default_restrict_background_data&quot;,
+<span id='android-provider-Settings-Global-property-DATA_ACTIVITY_TIMEOUT_MOBILE'>/**Inactivity timeout to track mobile data activity.
+</span>
+ If set to a positive integer, it indicates the inactivity timeout value in seconds to
+ infer the data activity of mobile network. After a period of no activity on mobile
+ networks with length specified by the timeout, an {@code ACTION_DATA_ACTIVITY_CHANGE}
+ intent is fired to indicate a transition of network status from &quot;active&quot; to &quot;idle&quot;. Any
+ subsequent activity on mobile networks triggers the firing of {@code
+ ACTION_DATA_ACTIVITY_CHANGE} intent indicating transition from &quot;idle&quot; to &quot;active&quot;.
+
+ Network activity refers to transmitting or receiving data on the network interfaces.
+
+ Tracking is disabled if set to zero or negative value.
+
+ @hide
+*/
+DATA_ACTIVITY_TIMEOUT_MOBILE : &quot;data_activity_timeout_mobile&quot;,
+<span id='android-provider-Settings-Global-property-DATA_ACTIVITY_TIMEOUT_WIFI'>/**Timeout to tracking Wifi data activity. Same as {@code DATA_ACTIVITY_TIMEOUT_MOBILE}
+</span> but for Wifi network.
+ @hide
+*/
+DATA_ACTIVITY_TIMEOUT_WIFI : &quot;data_activity_timeout_wifi&quot;,
+<span id='android-provider-Settings-Global-property-DATA_ROAMING'>/** Whether or not data roaming is enabled. (0 = false, 1 = true)
+</span>*/
+DATA_ROAMING : &quot;data_roaming&quot;,
+<span id='android-provider-Settings-Global-property-MDC_INITIAL_MAX_RETRY'>/** The value passed to a Mobile DataConnection via bringUp which defines the
+</span> number of retries to preform when setting up the initial connection. The default
+ value defined in DataConnectionTrackerBase#DEFAULT_MDC_INITIAL_RETRY is currently 1.
+ @hide
+*/
+MDC_INITIAL_MAX_RETRY : &quot;mdc_initial_max_retry&quot;,
+<span id='android-provider-Settings-Global-property-FORCE_ALLOW_ON_EXTERNAL'>/** Whether any package can be on external storage. When this is true, any
+</span> package, regardless of manifest values, is a candidate for installing
+ or moving onto external storage. (0 = false, 1 = true)
+ @hide
+*/
+FORCE_ALLOW_ON_EXTERNAL : &quot;force_allow_on_external&quot;,
+<span id='android-provider-Settings-Global-property-DEFAULT_SM_DP_PLUS'>/** The default SM-DP+ configured for this device.
+</span>
+ &lt;p&gt;An SM-DP+ is used by an LPA (see {@link android.service.euicc.EuiccService}) to
+ download profiles. If this value is set, the LPA will query this server for any profiles
+ available to this device. If any are available, they may be downloaded during device
+ provisioning or in settings without needing the user to enter an activation code.
+
+ @see android.service.euicc.EuiccService
+ @hide
+*/
+DEFAULT_SM_DP_PLUS : &quot;default_sm_dp_plus&quot;,
+<span id='android-provider-Settings-Global-property-EUICC_PROVISIONED'>/** Whether any profile has ever been downloaded onto a eUICC on the device.
+</span>
+ &lt;p&gt;Used to hide eUICC UI from users who have never made use of it and would only be
+ confused by seeing references to it in settings.
+ (0 = false, 1 = true)
+ @hide
+*/
+EUICC_PROVISIONED : &quot;euicc_provisioned&quot;,
+<span id='android-provider-Settings-Global-property-EUICC_SUPPORTED_COUNTRIES'>/** List of ISO country codes in which eUICC UI is shown. Country codes should be separated
+</span> by comma.
+
+ &lt;p&gt;Used to hide eUICC UI from users who are currently in countries no carriers support
+ eUICC.
+ @hide
+*/
+EUICC_SUPPORTED_COUNTRIES : &quot;euicc_supported_countries&quot;,
+<span id='android-provider-Settings-Global-property-DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES'>/** Whether any activity can be resized. When this is true, any
+</span> activity, regardless of manifest values, can be resized for multi-window.
+ (0 = false, 1 = true)
+ @hide
+*/
+DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES : &quot;force_resizable_activities&quot;,
+<span id='android-provider-Settings-Global-property-DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT'>/** Whether to enable experimental freeform support for windows.
+</span> @hide
+*/
+DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT : &quot;enable_freeform_support&quot;,
+<span id='android-provider-Settings-Global-property-DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS'>/** Whether to enable experimental desktop mode on secondary displays.
+</span> @hide
+*/
+DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS : &quot;force_desktop_mode_on_external_displays&quot;,
+<span id='android-provider-Settings-Global-property-DEVELOPMENT_SETTINGS_ENABLED'>/** Whether user has enabled development settings.
+</span>*/
+DEVELOPMENT_SETTINGS_ENABLED : &quot;development_settings_enabled&quot;,
+<span id='android-provider-Settings-Global-property-DEVICE_PROVISIONED'>/** Whether the device has been provisioned (0 = false, 1 = true).
+</span> &lt;p&gt;On a multiuser device with a separate system user, the screen may be locked
+ as soon as this is set to true and further activities cannot be launched on the
+ system user unless they are marked to show over keyguard.
+*/
+DEVICE_PROVISIONED : &quot;device_provisioned&quot;,
+<span id='android-provider-Settings-Global-property-DEVICE_PROVISIONING_MOBILE_DATA_ENABLED'>/** Indicates whether mobile data should be allowed while the device is being provisioned.
+</span> This allows the provisioning process to turn off mobile data before the user
+ has an opportunity to set things up, preventing other processes from burning
+ precious bytes before wifi is setup.
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+DEVICE_PROVISIONING_MOBILE_DATA_ENABLED : &quot;device_provisioning_mobile_data&quot;,
+<span id='android-provider-Settings-Global-property-DISPLAY_SIZE_FORCED'>/** The saved value for WindowManagerService.setForcedDisplaySize().
+</span> Two integers separated by a comma.  If unset, then use the real display size.
+ @hide
+*/
+DISPLAY_SIZE_FORCED : &quot;display_size_forced&quot;,
+<span id='android-provider-Settings-Global-property-DISPLAY_SCALING_FORCE'>/** The saved value for WindowManagerService.setForcedDisplayScalingMode().
+</span> 0 or unset if scaling is automatic, 1 if scaling is disabled.
+ @hide
+*/
+DISPLAY_SCALING_FORCE : &quot;display_scaling_force&quot;,
+<span id='android-provider-Settings-Global-property-DOWNLOAD_MAX_BYTES_OVER_MOBILE'>/** The maximum size, in bytes, of a download that the download manager will transfer over
+</span> a non-wifi connection.
+ @hide
+*/
+DOWNLOAD_MAX_BYTES_OVER_MOBILE : &quot;download_manager_max_bytes_over_mobile&quot;,
+<span id='android-provider-Settings-Global-property-DOWNLOAD_RECOMMENDED_MAX_BYTES_OVER_MOBILE'>/** The recommended maximum size, in bytes, of a download that the download manager should
+</span> transfer over a non-wifi connection. Over this size, the use will be warned, but will
+ have the option to start the download over the mobile connection anyway.
+ @hide
+*/
+DOWNLOAD_RECOMMENDED_MAX_BYTES_OVER_MOBILE : &quot;download_manager_recommended_max_bytes_over_mobile&quot;,
+<span id='android-provider-Settings-Global-property-INSTALL_NON_MARKET_APPS'>/** @deprecated Use {@link android.provider.Settings.Secure#INSTALL_NON_MARKET_APPS} instead
+</span>*/
+INSTALL_NON_MARKET_APPS : &quot;install_non_market_apps&quot;,
+<span id='android-provider-Settings-Global-property-HDMI_CONTROL_ENABLED'>/** Whether HDMI control shall be enabled. If disabled, no CEC/MHL command will be
+</span> sent or processed. (0 = false, 1 = true)
+ @hide
+*/
+HDMI_CONTROL_ENABLED : &quot;hdmi_control_enabled&quot;,
+<span id='android-provider-Settings-Global-property-HDMI_SYSTEM_AUDIO_CONTROL_ENABLED'>/** Whether HDMI System Audio Control feature is enabled. If enabled, TV will try to turn on
+</span> system audio mode if there's a connected CEC-enabled AV Receiver. Then audio stream will
+ be played on AVR instead of TV spaeker. If disabled, the system audio mode will never be
+ activated.
+ @hide
+*/
+HDMI_SYSTEM_AUDIO_CONTROL_ENABLED : &quot;hdmi_system_audio_control_enabled&quot;,
+<span id='android-provider-Settings-Global-property-HDMI_CEC_SWITCH_ENABLED'>/** Whether HDMI Routing Control feature is enabled. If enabled, the switch device will
+</span> route to the correct input source on receiving Routing Control related messages. If
+ disabled, you can only switch the input via controls on this device.
+ @hide
+*/
+HDMI_CEC_SWITCH_ENABLED : &quot;hdmi_cec_switch_enabled&quot;,
+<span id='android-provider-Settings-Global-property-HDMI_CONTROL_AUTO_WAKEUP_ENABLED'>/** Whether TV will automatically turn on upon reception of the CEC command
+</span> &amp;lt;Text View On&amp;gt; or &amp;lt;Image View On&amp;gt;. (0 = false, 1 = true)
+
+ @hide
+*/
+HDMI_CONTROL_AUTO_WAKEUP_ENABLED : &quot;hdmi_control_auto_wakeup_enabled&quot;,
+<span id='android-provider-Settings-Global-property-HDMI_CONTROL_AUTO_DEVICE_OFF_ENABLED'>/** Whether TV will also turn off other CEC devices when it goes to standby mode.
+</span> (0 = false, 1 = true)
+
+ @hide
+*/
+HDMI_CONTROL_AUTO_DEVICE_OFF_ENABLED : &quot;hdmi_control_auto_device_off_enabled&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_BACKGROUND_THROTTLE_INTERVAL_MS'>/** The interval in milliseconds at which location requests will be throttled when they are
+</span> coming from the background.
+
+ @hide
+*/
+LOCATION_BACKGROUND_THROTTLE_INTERVAL_MS : &quot;location_background_throttle_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_BACKGROUND_THROTTLE_PROXIMITY_ALERT_INTERVAL_MS'>/** Most frequent location update interval in milliseconds that proximity alert is allowed
+</span> to request.
+ @hide
+*/
+LOCATION_BACKGROUND_THROTTLE_PROXIMITY_ALERT_INTERVAL_MS : &quot;location_background_throttle_proximity_alert_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_BACKGROUND_THROTTLE_PACKAGE_WHITELIST'>/** Packages that are whitelisted for background throttling (throttling will not be applied).
+</span> @hide
+*/
+LOCATION_BACKGROUND_THROTTLE_PACKAGE_WHITELIST : &quot;location_background_throttle_package_whitelist&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_IGNORE_SETTINGS_PACKAGE_WHITELIST'>/** Packages that are whitelisted for ignoring location settings (may retrieve location even
+</span> when user location settings are off), for emergency purposes.
+ @hide
+*/
+LOCATION_IGNORE_SETTINGS_PACKAGE_WHITELIST : &quot;location_ignore_settings_package_whitelist&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_DISABLE_STATUS_CALLBACKS'>/** Whether to disable location status callbacks in preparation for deprecation.
+</span> @hide
+*/
+LOCATION_DISABLE_STATUS_CALLBACKS : &quot;location_disable_status_callbacks&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_LAST_LOCATION_MAX_AGE_MILLIS'>/** Maximum staleness allowed for last location when returned to clients with only foreground
+</span> location permissions.
+ @hide
+*/
+LOCATION_LAST_LOCATION_MAX_AGE_MILLIS : &quot;location_last_location_max_age_millis&quot;,
+<span id='android-provider-Settings-Global-property-MHL_INPUT_SWITCHING_ENABLED'>/** Whether TV will switch to MHL port when a mobile device is plugged in.
+</span> (0 = false, 1 = true)
+ @hide
+*/
+MHL_INPUT_SWITCHING_ENABLED : &quot;mhl_input_switching_enabled&quot;,
+<span id='android-provider-Settings-Global-property-MHL_POWER_CHARGE_ENABLED'>/** Whether TV will charge the mobile device connected at MHL port. (0 = false, 1 = true)
+</span> @hide
+*/
+MHL_POWER_CHARGE_ENABLED : &quot;mhl_power_charge_enabled&quot;,
+<span id='android-provider-Settings-Global-property-MOBILE_DATA'>/** Whether mobile data connections are allowed by the user.  See
+</span> ConnectivityManager for more info.
+ @hide
+*/
+MOBILE_DATA : &quot;mobile_data&quot;,
+<span id='android-provider-Settings-Global-property-MOBILE_DATA_ALWAYS_ON'>/** Whether the mobile data connection should remain active even when higher
+</span> priority networks like WiFi are active, to help make network switching faster.
+
+ See ConnectivityService for more info.
+
+ (0 = disabled, 1 = enabled)
+ @hide
+*/
+MOBILE_DATA_ALWAYS_ON : &quot;mobile_data_always_on&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_ALWAYS_REQUESTED'>/** Whether the wifi data connection should remain active even when higher
+</span> priority networks like Ethernet are active, to keep both networks.
+ In the case where higher priority networks are connected, wifi will be
+ unused unless an application explicitly requests to use it.
+
+ See ConnectivityService for more info.
+
+ (0 = disabled, 1 = enabled)
+ @hide
+*/
+WIFI_ALWAYS_REQUESTED : &quot;wifi_always_requested&quot;,
+<span id='android-provider-Settings-Global-property-CONNECTIVITY_METRICS_BUFFER_SIZE'>/** Size of the event buffer for IP connectivity metrics.
+</span> @hide
+*/
+CONNECTIVITY_METRICS_BUFFER_SIZE : &quot;connectivity_metrics_buffer_size&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_ENABLED'>/**{@hide} */
+</span>NETSTATS_ENABLED : &quot;netstats_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_POLL_INTERVAL'>/**{@hide} */
+</span>NETSTATS_POLL_INTERVAL : &quot;netstats_poll_interval&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_TIME_CACHE_MAX_AGE'>/**{@hide} */
+</span>NETSTATS_TIME_CACHE_MAX_AGE : &quot;netstats_time_cache_max_age&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_GLOBAL_ALERT_BYTES'>/**{@hide} */
+</span>NETSTATS_GLOBAL_ALERT_BYTES : &quot;netstats_global_alert_bytes&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_SAMPLE_ENABLED'>/**{@hide} */
+</span>NETSTATS_SAMPLE_ENABLED : &quot;netstats_sample_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_AUGMENT_ENABLED'>/**{@hide} */
+</span>NETSTATS_AUGMENT_ENABLED : &quot;netstats_augment_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_DEV_BUCKET_DURATION'>/**{@hide} */
+</span>NETSTATS_DEV_BUCKET_DURATION : &quot;netstats_dev_bucket_duration&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_DEV_PERSIST_BYTES'>/**{@hide} */
+</span>NETSTATS_DEV_PERSIST_BYTES : &quot;netstats_dev_persist_bytes&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_DEV_ROTATE_AGE'>/**{@hide} */
+</span>NETSTATS_DEV_ROTATE_AGE : &quot;netstats_dev_rotate_age&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_DEV_DELETE_AGE'>/**{@hide} */
+</span>NETSTATS_DEV_DELETE_AGE : &quot;netstats_dev_delete_age&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_BUCKET_DURATION'>/**{@hide} */
+</span>NETSTATS_UID_BUCKET_DURATION : &quot;netstats_uid_bucket_duration&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_PERSIST_BYTES'>/**{@hide} */
+</span>NETSTATS_UID_PERSIST_BYTES : &quot;netstats_uid_persist_bytes&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_ROTATE_AGE'>/**{@hide} */
+</span>NETSTATS_UID_ROTATE_AGE : &quot;netstats_uid_rotate_age&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_DELETE_AGE'>/**{@hide} */
+</span>NETSTATS_UID_DELETE_AGE : &quot;netstats_uid_delete_age&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_TAG_BUCKET_DURATION'>/**{@hide} */
+</span>NETSTATS_UID_TAG_BUCKET_DURATION : &quot;netstats_uid_tag_bucket_duration&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_TAG_PERSIST_BYTES'>/**{@hide} */
+</span>NETSTATS_UID_TAG_PERSIST_BYTES : &quot;netstats_uid_tag_persist_bytes&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_TAG_ROTATE_AGE'>/**{@hide} */
+</span>NETSTATS_UID_TAG_ROTATE_AGE : &quot;netstats_uid_tag_rotate_age&quot;,
+<span id='android-provider-Settings-Global-property-NETSTATS_UID_TAG_DELETE_AGE'>/**{@hide} */
+</span>NETSTATS_UID_TAG_DELETE_AGE : &quot;netstats_uid_tag_delete_age&quot;,
+<span id='android-provider-Settings-Global-property-NETPOLICY_QUOTA_ENABLED'>/**{@hide} */
+</span>NETPOLICY_QUOTA_ENABLED : &quot;netpolicy_quota_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETPOLICY_QUOTA_UNLIMITED'>/**{@hide} */
+</span>NETPOLICY_QUOTA_UNLIMITED : &quot;netpolicy_quota_unlimited&quot;,
+<span id='android-provider-Settings-Global-property-NETPOLICY_QUOTA_LIMITED'>/**{@hide} */
+</span>NETPOLICY_QUOTA_LIMITED : &quot;netpolicy_quota_limited&quot;,
+<span id='android-provider-Settings-Global-property-NETPOLICY_QUOTA_FRAC_JOBS'>/**{@hide} */
+</span>NETPOLICY_QUOTA_FRAC_JOBS : &quot;netpolicy_quota_frac_jobs&quot;,
+<span id='android-provider-Settings-Global-property-NETPOLICY_QUOTA_FRAC_MULTIPATH'>/**{@hide} */
+</span>NETPOLICY_QUOTA_FRAC_MULTIPATH : &quot;netpolicy_quota_frac_multipath&quot;,
+<span id='android-provider-Settings-Global-property-NETPOLICY_OVERRIDE_ENABLED'>/**{@hide} */
+</span>NETPOLICY_OVERRIDE_ENABLED : &quot;netpolicy_override_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_PREFERENCE'>/** User preference for which network(s) should be used. Only the
+</span> connectivity service should touch this.
+*/
+NETWORK_PREFERENCE : &quot;network_preference&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_SCORER_APP'>/** Which package name to use for network scoring. If null, or if the package is not a valid
+</span> scorer app, external network scores will neither be requested nor accepted.
+ @hide
+*/
+NETWORK_SCORER_APP : &quot;network_scorer_app&quot;,
+<span id='android-provider-Settings-Global-property-NIGHT_DISPLAY_FORCED_AUTO_MODE_AVAILABLE'>/** Whether night display forced auto mode is available.
+</span> 0 = unavailable, 1 = available.
+ @hide
+*/
+NIGHT_DISPLAY_FORCED_AUTO_MODE_AVAILABLE : &quot;night_display_forced_auto_mode_available&quot;,
+<span id='android-provider-Settings-Global-property-NITZ_UPDATE_DIFF'>/** If the NITZ_UPDATE_DIFF time is exceeded then an automatic adjustment
+</span> to SystemClock will be allowed even if NITZ_UPDATE_SPACING has not been
+ exceeded.
+ @hide
+*/
+NITZ_UPDATE_DIFF : &quot;nitz_update_diff&quot;,
+<span id='android-provider-Settings-Global-property-NITZ_UPDATE_SPACING'>/** The length of time in milli-seconds that automatic small adjustments to
+</span> SystemClock are ignored if NITZ_UPDATE_DIFF is not exceeded.
+ @hide
+*/
+NITZ_UPDATE_SPACING : &quot;nitz_update_spacing&quot;,
+<span id='android-provider-Settings-Global-property-NTP_SERVER'>/**Preferred NTP server. {@hide} */
+</span>NTP_SERVER : &quot;ntp_server&quot;,
+<span id='android-provider-Settings-Global-property-NTP_TIMEOUT'>/**Timeout in milliseconds to wait for NTP server. {@hide} */
+</span>NTP_TIMEOUT : &quot;ntp_timeout&quot;,
+<span id='android-provider-Settings-Global-property-STORAGE_BENCHMARK_INTERVAL'>/**{@hide} */
+</span>STORAGE_BENCHMARK_INTERVAL : &quot;storage_benchmark_interval&quot;,
+<span id='android-provider-Settings-Global-property-SETTINGS_USE_PSD_API'>/** Whether or not Settings should enable psd API.
+</span> {@hide}
+*/
+SETTINGS_USE_PSD_API : &quot;settings_use_psd_api&quot;,
+<span id='android-provider-Settings-Global-property-SETTINGS_USE_EXTERNAL_PROVIDER_API'>/** Whether or not Settings should enable external provider API.
+</span> {@hide}
+*/
+SETTINGS_USE_EXTERNAL_PROVIDER_API : &quot;settings_use_external_provider_api&quot;,
+<span id='android-provider-Settings-Global-property-DNS_RESOLVER_SAMPLE_VALIDITY_SECONDS'>/** Sample validity in seconds to configure for the system DNS resolver.
+</span> {@hide}
+*/
+DNS_RESOLVER_SAMPLE_VALIDITY_SECONDS : &quot;dns_resolver_sample_validity_seconds&quot;,
+<span id='android-provider-Settings-Global-property-DNS_RESOLVER_SUCCESS_THRESHOLD_PERCENT'>/** Success threshold in percent for use with the system DNS resolver.
+</span> {@hide}
+*/
+DNS_RESOLVER_SUCCESS_THRESHOLD_PERCENT : &quot;dns_resolver_success_threshold_percent&quot;,
+<span id='android-provider-Settings-Global-property-DNS_RESOLVER_MIN_SAMPLES'>/** Minimum number of samples needed for statistics to be considered meaningful in the
+</span> system DNS resolver.
+ {@hide}
+*/
+DNS_RESOLVER_MIN_SAMPLES : &quot;dns_resolver_min_samples&quot;,
+<span id='android-provider-Settings-Global-property-DNS_RESOLVER_MAX_SAMPLES'>/** Maximum number taken into account for statistics purposes in the system DNS resolver.
+</span> {@hide}
+*/
+DNS_RESOLVER_MAX_SAMPLES : &quot;dns_resolver_max_samples&quot;,
+<span id='android-provider-Settings-Global-property-OTA_DISABLE_AUTOMATIC_UPDATE'>/** Whether to disable the automatic scheduling of system updates.
+</span> 1 = system updates won't be automatically scheduled (will always
+ present notification instead).
+ 0 = system updates will be automatically scheduled. (default)
+ @hide
+*/
+OTA_DISABLE_AUTOMATIC_UPDATE : &quot;ota_disable_automatic_update&quot;,
+<span id='android-provider-Settings-Global-property-PACKAGE_VERIFIER_ENABLE'>/** Whether the package manager should send package verification broadcasts for verifiers to
+</span> review apps prior to installation.
+ 1 = request apps to be verified prior to installation, if a verifier exists.
+ 0 = do not verify apps before installation
+ @hide
+*/
+PACKAGE_VERIFIER_ENABLE : &quot;package_verifier_enable&quot;,
+<span id='android-provider-Settings-Global-property-PACKAGE_VERIFIER_TIMEOUT'>/**Timeout for package verification.
+</span> @hide */
+PACKAGE_VERIFIER_TIMEOUT : &quot;verifier_timeout&quot;,
+<span id='android-provider-Settings-Global-property-PACKAGE_VERIFIER_DEFAULT_RESPONSE'>/**Default response code for package verification.
+</span> @hide */
+PACKAGE_VERIFIER_DEFAULT_RESPONSE : &quot;verifier_default_response&quot;,
+<span id='android-provider-Settings-Global-property-PACKAGE_VERIFIER_SETTING_VISIBLE'>/** Show package verification setting in the Settings app.
+</span> 1 = show (default)
+ 0 = hide
+ @hide
+*/
+PACKAGE_VERIFIER_SETTING_VISIBLE : &quot;verifier_setting_visible&quot;,
+<span id='android-provider-Settings-Global-property-PACKAGE_VERIFIER_INCLUDE_ADB'>/** Run package verification on apps installed through ADB/ADT/USB
+</span> 1 = perform package verification on ADB installs (default)
+ 0 = bypass package verification on ADB installs
+ @hide
+*/
+PACKAGE_VERIFIER_INCLUDE_ADB : &quot;verifier_verify_adb_installs&quot;,
+<span id='android-provider-Settings-Global-property-FSTRIM_MANDATORY_INTERVAL'>/** Time since last fstrim (milliseconds) after which we force one to happen
+</span> during device startup.  If unset, the default is 3 days.
+ @hide
+*/
+FSTRIM_MANDATORY_INTERVAL : &quot;fstrim_mandatory_interval&quot;,
+<span id='android-provider-Settings-Global-property-PDP_WATCHDOG_POLL_INTERVAL_MS'>/** The interval in milliseconds at which to check packet counts on the
+</span> mobile data interface when screen is on, to detect possible data
+ connection problems.
+ @hide
+*/
+PDP_WATCHDOG_POLL_INTERVAL_MS : &quot;pdp_watchdog_poll_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-PDP_WATCHDOG_LONG_POLL_INTERVAL_MS'>/** The interval in milliseconds at which to check packet counts on the
+</span> mobile data interface when screen is off, to detect possible data
+ connection problems.
+ @hide
+*/
+PDP_WATCHDOG_LONG_POLL_INTERVAL_MS : &quot;pdp_watchdog_long_poll_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-PDP_WATCHDOG_ERROR_POLL_INTERVAL_MS'>/** The interval in milliseconds at which to check packet counts on the
+</span> mobile data interface after {@link #PDP_WATCHDOG_TRIGGER_PACKET_COUNT}
+ outgoing packets has been reached without incoming packets.
+ @hide
+*/
+PDP_WATCHDOG_ERROR_POLL_INTERVAL_MS : &quot;pdp_watchdog_error_poll_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-PDP_WATCHDOG_TRIGGER_PACKET_COUNT'>/** The number of outgoing packets sent without seeing an incoming packet
+</span> that triggers a countdown (of {@link #PDP_WATCHDOG_ERROR_POLL_COUNT}
+ device is logged to the event log
+ @hide
+*/
+PDP_WATCHDOG_TRIGGER_PACKET_COUNT : &quot;pdp_watchdog_trigger_packet_count&quot;,
+<span id='android-provider-Settings-Global-property-PDP_WATCHDOG_ERROR_POLL_COUNT'>/** The number of polls to perform (at {@link #PDP_WATCHDOG_ERROR_POLL_INTERVAL_MS})
+</span> after hitting {@link #PDP_WATCHDOG_TRIGGER_PACKET_COUNT} before
+ attempting data connection recovery.
+ @hide
+*/
+PDP_WATCHDOG_ERROR_POLL_COUNT : &quot;pdp_watchdog_error_poll_count&quot;,
+<span id='android-provider-Settings-Global-property-PDP_WATCHDOG_MAX_PDP_RESET_FAIL_COUNT'>/** The number of failed PDP reset attempts before moving to something more
+</span> drastic: re-registering to the network.
+ @hide
+*/
+PDP_WATCHDOG_MAX_PDP_RESET_FAIL_COUNT : &quot;pdp_watchdog_max_pdp_reset_fail_count&quot;,
+<span id='android-provider-Settings-Global-property-SETUP_PREPAID_DATA_SERVICE_URL'>/** URL to open browser on to allow user to manage a prepay account
+</span> @hide
+*/
+SETUP_PREPAID_DATA_SERVICE_URL : &quot;setup_prepaid_data_service_url&quot;,
+<span id='android-provider-Settings-Global-property-SETUP_PREPAID_DETECTION_TARGET_URL'>/** URL to attempt a GET on to see if this is a prepay device
+</span> @hide
+*/
+SETUP_PREPAID_DETECTION_TARGET_URL : &quot;setup_prepaid_detection_target_url&quot;,
+<span id='android-provider-Settings-Global-property-SETUP_PREPAID_DETECTION_REDIR_HOST'>/** Host to check for a redirect to after an attempt to GET
+</span> SETUP_PREPAID_DETECTION_TARGET_URL. (If we redirected there,
+ this is a prepaid device with zero balance.)
+ @hide
+*/
+SETUP_PREPAID_DETECTION_REDIR_HOST : &quot;setup_prepaid_detection_redir_host&quot;,
+<span id='android-provider-Settings-Global-property-SMS_OUTGOING_CHECK_INTERVAL_MS'>/** The interval in milliseconds at which to check the number of SMS sent out without asking
+</span> for use permit, to limit the un-authorized SMS usage.
+
+ @hide
+*/
+SMS_OUTGOING_CHECK_INTERVAL_MS : &quot;sms_outgoing_check_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-SMS_OUTGOING_CHECK_MAX_COUNT'>/** The number of outgoing SMS sent without asking for user permit (of {@link #SMS_OUTGOING_CHECK_INTERVAL_MS}
+</span>
+ @hide
+*/
+SMS_OUTGOING_CHECK_MAX_COUNT : &quot;sms_outgoing_check_max_count&quot;,
+<span id='android-provider-Settings-Global-property-SMS_SHORT_CODE_CONFIRMATION'>/** Used to disable SMS short code confirmation - defaults to true.
+</span> True indcates we will do the check, etc.  Set to false to disable.
+ @see com.android.internal.telephony.SmsUsageMonitor
+ @hide
+*/
+SMS_SHORT_CODE_CONFIRMATION : &quot;sms_short_code_confirmation&quot;,
+<span id='android-provider-Settings-Global-property-SMS_SHORT_CODE_RULE'>/** Used to select which country we use to determine premium sms codes.
+</span> One of com.android.internal.telephony.SMSDispatcher.PREMIUM_RULE_USE_SIM,
+ com.android.internal.telephony.SMSDispatcher.PREMIUM_RULE_USE_NETWORK,
+ or com.android.internal.telephony.SMSDispatcher.PREMIUM_RULE_USE_BOTH.
+ @hide
+*/
+SMS_SHORT_CODE_RULE : &quot;sms_short_code_rule&quot;,
+<span id='android-provider-Settings-Global-property-TCP_DEFAULT_INIT_RWND'>/** Used to select TCP's default initial receiver window size in segments - defaults to a build config value
+</span> @hide
+*/
+TCP_DEFAULT_INIT_RWND : &quot;tcp_default_init_rwnd&quot;,
+<span id='android-provider-Settings-Global-property-TETHER_SUPPORTED'>/** Used to disable Tethering on a device - defaults to true
+</span> @hide
+*/
+TETHER_SUPPORTED : &quot;tether_supported&quot;,
+<span id='android-provider-Settings-Global-property-TETHER_DUN_REQUIRED'>/** Used to require DUN APN on the device or not - defaults to a build config value
+</span> which defaults to false
+ @hide
+*/
+TETHER_DUN_REQUIRED : &quot;tether_dun_required&quot;,
+<span id='android-provider-Settings-Global-property-TETHER_DUN_APN'>/** Used to hold a gservices-provisioned apn value for DUN.  If set, or the
+</span> corresponding build config values are set it will override the APN DB
+ values.
+ Consists of a comma seperated list of strings:
+ &quot;name,apn,proxy,port,username,password,server,mmsc,mmsproxy,mmsport,mcc,mnc,auth,type&quot;
+ note that empty fields can be omitted: &quot;name,apn,,,,,,,,,310,260,,DUN&quot;
+ @hide
+*/
+TETHER_DUN_APN : &quot;tether_dun_apn&quot;,
+<span id='android-provider-Settings-Global-property-TETHER_OFFLOAD_DISABLED'>/** Used to disable trying to talk to any available tethering offload HAL.
+</span>
+ Integer values are interpreted as boolean, and the absence of an explicit setting
+ is interpreted as |false|.
+ @hide
+*/
+TETHER_OFFLOAD_DISABLED : &quot;tether_offload_disabled&quot;,
+<span id='android-provider-Settings-Global-property-TETHER_ENABLE_LEGACY_DHCP_SERVER'>/** Use the old dnsmasq DHCP server for tethering instead of the framework implementation.
+</span>
+ Integer values are interpreted as boolean, and the absence of an explicit setting
+ is interpreted as |false|.
+ @hide
+*/
+TETHER_ENABLE_LEGACY_DHCP_SERVER : &quot;tether_enable_legacy_dhcp_server&quot;,
+<span id='android-provider-Settings-Global-property-CARRIER_APP_WHITELIST'>/** List of certificate (hex string representation of the application's certificate - SHA-1
+</span> or SHA-256) and carrier app package pairs which are whitelisted to prompt the user for
+ install when a sim card with matching UICC carrier privilege rules is inserted.  The
+ certificate is used as a key, so the certificate encoding here must be the same as the
+ certificate encoding used on the SIM.
+
+ The value is &quot;cert1:package1;cert2:package2;...&quot;
+ @hide
+*/
+CARRIER_APP_WHITELIST : &quot;carrier_app_whitelist&quot;,
+<span id='android-provider-Settings-Global-property-CARRIER_APP_NAMES'>/** Map of package name to application names. The application names cannot and will not be
+</span> localized. App names may not contain colons or semicolons.
+
+ The value is &quot;packageName1:appName1;packageName2:appName2;...&quot;
+ @hide
+*/
+CARRIER_APP_NAMES : &quot;carrier_app_names&quot;,
+<span id='android-provider-Settings-Global-property-USB_MASS_STORAGE_ENABLED'>/** USB Mass Storage Enabled
+</span>*/
+USB_MASS_STORAGE_ENABLED : &quot;usb_mass_storage_enabled&quot;,
+<span id='android-provider-Settings-Global-property-USE_GOOGLE_MAIL'>/** If this setting is set (to anything), then all references
+</span> to Gmail on the device must change to Google Mail.
+*/
+USE_GOOGLE_MAIL : &quot;use_google_mail&quot;,
+<span id='android-provider-Settings-Global-property-USER_SWITCHER_ENABLED'>/** Whether or not switching/creating users is enabled by user.
+</span> @hide
+*/
+USER_SWITCHER_ENABLED : &quot;user_switcher_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WEBVIEW_DATA_REDUCTION_PROXY_KEY'>/** Webview Data reduction proxy key.
+</span> @hide
+*/
+WEBVIEW_DATA_REDUCTION_PROXY_KEY : &quot;webview_data_reduction_proxy_key&quot;,
+<span id='android-provider-Settings-Global-property-WEBVIEW_FALLBACK_LOGIC_ENABLED'>/** Whether or not the WebView fallback mechanism should be enabled.
+</span> 0=disabled, 1=enabled.
+ @hide
+*/
+WEBVIEW_FALLBACK_LOGIC_ENABLED : &quot;webview_fallback_logic_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WEBVIEW_PROVIDER'>/** Name of the package used as WebView provider (if unset the provider is instead determined
+</span> by the system).
+ @hide
+*/
+WEBVIEW_PROVIDER : &quot;webview_provider&quot;,
+<span id='android-provider-Settings-Global-property-WEBVIEW_MULTIPROCESS'>/** Developer setting to enable WebView multiprocess rendering.
+</span> @hide
+*/
+WEBVIEW_MULTIPROCESS : &quot;webview_multiprocess&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_SWITCH_NOTIFICATION_DAILY_LIMIT'>/** The maximum number of notifications shown in 24 hours when switching networks.
+</span> @hide
+*/
+NETWORK_SWITCH_NOTIFICATION_DAILY_LIMIT : &quot;network_switch_notification_daily_limit&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_SWITCH_NOTIFICATION_RATE_LIMIT_MILLIS'>/** The minimum time in milliseconds between notifications when switching networks.
+</span> @hide
+*/
+NETWORK_SWITCH_NOTIFICATION_RATE_LIMIT_MILLIS : &quot;network_switch_notification_rate_limit_millis&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_AVOID_BAD_WIFI'>/** Whether to automatically switch away from wifi networks that lose Internet access.
+</span> Only meaningful if config_networkAvoidBadWifi is set to 0, otherwise the system always
+ avoids such networks. Valid values are:
+
+ 0: Don't avoid bad wifi, don't prompt the user. Get stuck on bad wifi like it's 2013.
+ null: Ask the user whether to switch away from bad wifi.
+ 1: Avoid bad wifi.
+
+ @hide
+*/
+NETWORK_AVOID_BAD_WIFI : &quot;network_avoid_bad_wifi&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_METERED_MULTIPATH_PREFERENCE'>/** User setting for ConnectivityManager.getMeteredMultipathPreference(). This value may be
+</span> overridden by the system based on device or application state. If null, the value
+ specified by config_networkMeteredMultipathPreference is used.
+
+ @hide
+*/
+NETWORK_METERED_MULTIPATH_PREFERENCE : &quot;network_metered_multipath_preference&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_DEFAULT_DAILY_MULTIPATH_QUOTA_BYTES'>/** Default daily multipath budget used by ConnectivityManager.getMultipathPreference()
+</span> on metered networks. This default quota is only used if quota could not be determined
+ from data plan or data limit/warning set by the user.
+ @hide
+*/
+NETWORK_DEFAULT_DAILY_MULTIPATH_QUOTA_BYTES : &quot;network_default_daily_multipath_quota_bytes&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_WATCHLIST_LAST_REPORT_TIME'>/** Network watchlist last report time.
+</span> @hide
+*/
+NETWORK_WATCHLIST_LAST_REPORT_TIME : &quot;network_watchlist_last_report_time&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_BADGING_THRESHOLDS'>/** The thresholds of the wifi throughput badging (SD, HD etc.) as a comma-delimited list of
+</span> colon-delimited key-value pairs. The key is the badging enum value defined in
+ android.net.ScoredNetwork and the value is the minimum sustained network throughput in
+ kbps required for the badge. For example: &quot;10:3000,20:5000,30:25000&quot;
+
+ @hide
+*/
+WIFI_BADGING_THRESHOLDS : &quot;wifi_badging_thresholds&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_DISPLAY_ON'>/** Whether Wifi display is enabled/disabled
+</span> 0=disabled. 1=enabled.
+ @hide
+*/
+WIFI_DISPLAY_ON : &quot;wifi_display_on&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_DISPLAY_CERTIFICATION_ON'>/** Whether Wifi display certification mode is enabled/disabled
+</span> 0=disabled. 1=enabled.
+ @hide
+*/
+WIFI_DISPLAY_CERTIFICATION_ON : &quot;wifi_display_certification_on&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_DISPLAY_WPS_CONFIG'>/** WPS Configuration method used by Wifi display, this setting only
+</span> takes effect when WIFI_DISPLAY_CERTIFICATION_ON is 1 (enabled).
+
+ Possible values are:
+
+ WpsInfo.INVALID: use default WPS method chosen by framework
+ WpsInfo.PBC    : use Push button
+ WpsInfo.KEYPAD : use Keypad
+ WpsInfo.DISPLAY: use Display
+ @hide
+*/
+WIFI_DISPLAY_WPS_CONFIG : &quot;wifi_display_wps_config&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON'>/** Whether to notify the user of open networks.
+</span> &lt;p&gt;
+ If not connected and the scan results have an open network, we will
+ put this notification up. If we attempt to connect to a network or
+ the open network(s) disappear, we remove the notification. When we
+ show the notification, we will not show it again for
+ {@link android.provider.Settings.Secure#WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY} time.
+
+ @deprecated This feature is no longer controlled by this setting in
+ {@link android.os.Build.VERSION_CODES#O}.
+*/
+WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON : &quot;wifi_networks_available_notification_on&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_CARRIER_NETWORKS_AVAILABLE_NOTIFICATION_ON'>/** Whether to notify the user of carrier networks.
+</span> &lt;p&gt;
+ If not connected and the scan results have a carrier network, we will
+ put this notification up. If we attempt to connect to a network or
+ the carrier network(s) disappear, we remove the notification. When we
+ show the notification, we will not show it again for
+ {@link android.provider.Settings.Global#WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY} time.
+ @hide
+*/
+WIFI_CARRIER_NETWORKS_AVAILABLE_NOTIFICATION_ON : &quot;wifi_carrier_networks_available_notification_on&quot;,
+<span id='android-provider-Settings-Global-property-WIMAX_NETWORKS_AVAILABLE_NOTIFICATION_ON'>/** {@hide}
+</span>*/
+WIMAX_NETWORKS_AVAILABLE_NOTIFICATION_ON : &quot;wimax_networks_available_notification_on&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY'>/** Delay (in seconds) before repeating the Wi-Fi networks available notification.
+</span> Connecting to a network will reset the timer.
+*/
+WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY : &quot;wifi_networks_available_repeat_delay&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_COUNTRY_CODE'>/** 802.11 country code in ISO 3166 format
+</span> @hide
+*/
+WIFI_COUNTRY_CODE : &quot;wifi_country_code&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_FRAMEWORK_SCAN_INTERVAL_MS'>/** The interval in milliseconds to issue wake up scans when wifi needs
+</span> to connect. This is necessary to connect to an access point when
+ device is on the move and the screen is off.
+ @hide
+*/
+WIFI_FRAMEWORK_SCAN_INTERVAL_MS : &quot;wifi_framework_scan_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_IDLE_MS'>/** The interval in milliseconds after which Wi-Fi is considered idle.
+</span> When idle, it is possible for the device to be switched from Wi-Fi to
+ the mobile data network.
+ @hide
+*/
+WIFI_IDLE_MS : &quot;wifi_idle_ms&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_NUM_OPEN_NETWORKS_KEPT'>/** When the number of open networks exceeds this number, the
+</span> least-recently-used excess networks will be removed.
+*/
+WIFI_NUM_OPEN_NETWORKS_KEPT : &quot;wifi_num_open_networks_kept&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_ON'>/** Whether the Wi-Fi should be on.  Only the Wi-Fi service should touch this.
+</span>*/
+WIFI_ON : &quot;wifi_on&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SCAN_ALWAYS_AVAILABLE'>/** Setting to allow scans to be enabled even wifi is turned off for connectivity.
+</span> @hide
+*/
+WIFI_SCAN_ALWAYS_AVAILABLE : &quot;wifi_scan_always_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_RTT_BACKGROUND_EXEC_GAP_MS'>/** The interval in milliseconds at which wifi rtt ranging requests will be throttled when
+</span> they are coming from the background.
+
+ @hide
+*/
+WIFI_RTT_BACKGROUND_EXEC_GAP_MS : &quot;wifi_rtt_background_exec_gap_ms&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_P2P_PENDING_FACTORY_RESET'>/** Indicate whether factory reset request is pending.
+</span>
+ Type: int (0 for false, 1 for true)
+ @hide
+*/
+WIFI_P2P_PENDING_FACTORY_RESET : &quot;wifi_p2p_pending_factory_reset&quot;,
+<span id='android-provider-Settings-Global-property-SOFT_AP_TIMEOUT_ENABLED'>/** Whether soft AP will shut down after a timeout period when no devices are connected.
+</span>
+ Type: int (0 for false, 1 for true)
+ @hide
+*/
+SOFT_AP_TIMEOUT_ENABLED : &quot;soft_ap_timeout_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_WAKEUP_ENABLED'>/** Value to specify if Wi-Fi Wakeup feature is enabled.
+</span>
+ Type: int (0 for false, 1 for true)
+ @hide
+*/
+WIFI_WAKEUP_ENABLED : &quot;wifi_wakeup_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_SCORING_UI_ENABLED'>/** Value to specify whether network quality scores and badging should be shown in the UI.
+</span>
+ Type: int (0 for false, 1 for true)
+ @hide
+*/
+NETWORK_SCORING_UI_ENABLED : &quot;network_scoring_ui_enabled&quot;,
+<span id='android-provider-Settings-Global-property-SPEED_LABEL_CACHE_EVICTION_AGE_MILLIS'>/** Value to specify how long in milliseconds to retain seen score cache curves to be used
+</span> when generating SSID only bases score curves.
+
+ Type: long
+ @hide
+*/
+SPEED_LABEL_CACHE_EVICTION_AGE_MILLIS : &quot;speed_label_cache_eviction_age_millis&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_RECOMMENDATIONS_ENABLED'>/** Value to specify if network recommendations from
+</span> {@link com.android.server.NetworkScoreService} are enabled.
+
+ Type: int
+ Valid values:
+   -1 = Forced off
+    0 = Disabled
+    1 = Enabled
+
+ Most readers of this setting should simply check if value == 1 to determined the
+ enabled state.
+ @hide
+*/
+NETWORK_RECOMMENDATIONS_ENABLED : &quot;network_recommendations_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_RECOMMENDATIONS_PACKAGE'>/** Which package name to use for network recommendations. If null, network recommendations
+</span> will neither be requested nor accepted.
+
+ Use {@link NetworkScoreManager#getActiveScorerPackage()} to read this value and
+ {@link NetworkScoreManager#setActiveScorer(String)} to write it.
+
+ Type: string - package name
+ @hide
+*/
+NETWORK_RECOMMENDATIONS_PACKAGE : &quot;network_recommendations_package&quot;,
+<span id='android-provider-Settings-Global-property-USE_OPEN_WIFI_PACKAGE'>/** The package name of the application that connect and secures high quality open wifi
+</span> networks automatically.
+
+ Type: string package name or null if the feature is either not provided or disabled.
+ @hide
+*/
+USE_OPEN_WIFI_PACKAGE : &quot;use_open_wifi_package&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_RECOMMENDATION_REQUEST_TIMEOUT_MS'>/** The number of milliseconds the {@link com.android.server.NetworkScoreService}
+</span> will give a recommendation request to complete before returning a default response.
+
+ Type: long
+ @hide
+ @deprecated to be removed
+*/
+NETWORK_RECOMMENDATION_REQUEST_TIMEOUT_MS : &quot;network_recommendation_request_timeout_ms&quot;,
+<span id='android-provider-Settings-Global-property-RECOMMENDED_NETWORK_EVALUATOR_CACHE_EXPIRY_MS'>/** The expiration time in milliseconds for the {@link android.net.WifiKey} request cache in
+</span> {@link com.android.server.wifi.RecommendedNetworkEvaluator}.
+
+ Type: long
+ @hide
+*/
+RECOMMENDED_NETWORK_EVALUATOR_CACHE_EXPIRY_MS : &quot;recommended_network_evaluator_cache_expiry_ms&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SCAN_THROTTLE_ENABLED'>/** Whether wifi scan throttle is enabled or not.
+</span> This is intended to be used via adb commands or a menu in developer option to turn off
+ the default wifi scan throttling mechanism for apps.
+
+ Type: int (0 for false, 1 for true)
+ @hide
+*/
+WIFI_SCAN_THROTTLE_ENABLED : &quot;wifi_scan_throttle_enabled&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_ALWAYS_AVAILABLE'>/** Settings to allow BLE scans to be enabled even when Bluetooth is turned off for
+</span> connectivity.
+ @hide
+*/
+BLE_SCAN_ALWAYS_AVAILABLE : &quot;ble_scan_always_enabled&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_LOW_POWER_WINDOW_MS'>/** The length in milliseconds of a BLE scan window in a low-power scan mode.
+</span> @hide
+*/
+BLE_SCAN_LOW_POWER_WINDOW_MS : &quot;ble_scan_low_power_window_ms&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_BALANCED_WINDOW_MS'>/** The length in milliseconds of a BLE scan window in a balanced scan mode.
+</span> @hide
+*/
+BLE_SCAN_BALANCED_WINDOW_MS : &quot;ble_scan_balanced_window_ms&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_LOW_LATENCY_WINDOW_MS'>/** The length in milliseconds of a BLE scan window in a low-latency scan mode.
+</span> @hide
+*/
+BLE_SCAN_LOW_LATENCY_WINDOW_MS : &quot;ble_scan_low_latency_window_ms&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_LOW_POWER_INTERVAL_MS'>/** The length in milliseconds of a BLE scan interval in a low-power scan mode.
+</span> @hide
+*/
+BLE_SCAN_LOW_POWER_INTERVAL_MS : &quot;ble_scan_low_power_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_BALANCED_INTERVAL_MS'>/** The length in milliseconds of a BLE scan interval in a balanced scan mode.
+</span> @hide
+*/
+BLE_SCAN_BALANCED_INTERVAL_MS : &quot;ble_scan_balanced_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_LOW_LATENCY_INTERVAL_MS'>/** The length in milliseconds of a BLE scan interval in a low-latency scan mode.
+</span> @hide
+*/
+BLE_SCAN_LOW_LATENCY_INTERVAL_MS : &quot;ble_scan_low_latency_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-BLE_SCAN_BACKGROUND_MODE'>/** The mode that BLE scanning clients will be moved to when in the background.
+</span> @hide
+*/
+BLE_SCAN_BACKGROUND_MODE : &quot;ble_scan_background_mode&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SAVED_STATE'>/** Used to save the Wifi_ON state prior to tethering.
+</span> This state will be checked to restore Wifi after
+ the user turns off tethering.
+
+ @hide
+*/
+WIFI_SAVED_STATE : &quot;wifi_saved_state&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SUPPLICANT_SCAN_INTERVAL_MS'>/** The interval in milliseconds to scan as used by the wifi supplicant
+</span> @hide
+*/
+WIFI_SUPPLICANT_SCAN_INTERVAL_MS : &quot;wifi_supplicant_scan_interval_ms&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_ENHANCED_AUTO_JOIN'>/** whether frameworks handles wifi auto-join
+</span> @hide
+*/
+WIFI_ENHANCED_AUTO_JOIN : &quot;wifi_enhanced_auto_join&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_NETWORK_SHOW_RSSI'>/** whether settings show RSSI
+</span> @hide
+*/
+WIFI_NETWORK_SHOW_RSSI : &quot;wifi_network_show_rssi&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SCAN_INTERVAL_WHEN_P2P_CONNECTED_MS'>/** The interval in milliseconds to scan at supplicant when p2p is connected
+</span> @hide
+*/
+WIFI_SCAN_INTERVAL_WHEN_P2P_CONNECTED_MS : &quot;wifi_scan_interval_p2p_connected_ms&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_WATCHDOG_ON'>/** Whether the Wi-Fi watchdog is enabled.
+</span>*/
+WIFI_WATCHDOG_ON : &quot;wifi_watchdog_on&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED'>/** Setting to turn off poor network avoidance on Wi-Fi. Feature is enabled by default and
+</span> the setting needs to be set to 0 to disable it.
+ @hide
+*/
+WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED : &quot;wifi_watchdog_poor_network_test_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SUSPEND_OPTIMIZATIONS_ENABLED'>/** Setting to turn on suspend optimizations at screen off on Wi-Fi. Enabled by default and
+</span> needs to be set to 0 to disable it.
+ @hide
+*/
+WIFI_SUSPEND_OPTIMIZATIONS_ENABLED : &quot;wifi_suspend_optimizations_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_VERBOSE_LOGGING_ENABLED'>/** Setting to enable verbose logging in Wi-Fi; disabled by default, and setting to 1
+</span> will enable it. In the future, additional values may be supported.
+ @hide
+*/
+WIFI_VERBOSE_LOGGING_ENABLED : &quot;wifi_verbose_logging_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED'>/** Setting to enable connected MAC randomization in Wi-Fi; disabled by default, and
+</span> setting to 1 will enable it. In the future, additional values may be supported.
+ @deprecated MAC randomization is now a per-network setting
+ @hide
+*/
+WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED : &quot;wifi_connected_mac_randomization_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_SCORE_PARAMS'>/** Parameters to adjust the performance of framework wifi scoring methods.
+</span> &lt;p&gt;
+ Encoded as a comma-separated key=value list, for example:
+   &quot;rssi5=-80:-77:-70:-57,rssi2=-83:-80:-73:-60,horizon=15&quot;
+ This is intended for experimenting with new parameter values,
+ and is normally unset or empty. The example does not include all
+ parameters that may be honored.
+ Default values are provided by code or device configurations.
+ Errors in the parameters will cause the entire setting to be ignored.
+ @hide
+*/
+WIFI_SCORE_PARAMS : &quot;wifi_score_params&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_IS_UNUSABLE_EVENT_METRICS_ENABLED'>/** Setting to enable logging WifiIsUnusableEvent in metrics
+</span> which gets triggered when wifi becomes unusable.
+ Disabled by default, and setting it to 1 will enable it.
+ @hide
+*/
+WIFI_IS_UNUSABLE_EVENT_METRICS_ENABLED : &quot;wifi_is_unusable_event_metrics_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_DATA_STALL_MIN_TX_BAD'>/** The minimum number of txBad the framework has to observe
+</span> to trigger a wifi data stall.
+ @hide
+*/
+WIFI_DATA_STALL_MIN_TX_BAD : &quot;wifi_data_stall_min_tx_bad&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_DATA_STALL_MIN_TX_SUCCESS_WITHOUT_RX'>/** The minimum number of txSuccess the framework has to observe
+</span> to trigger a wifi data stall when rxSuccess is 0.
+ @hide
+*/
+WIFI_DATA_STALL_MIN_TX_SUCCESS_WITHOUT_RX : &quot;wifi_data_stall_min_tx_success_without_rx&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_LINK_SPEED_METRICS_ENABLED'>/** Setting to enable logging Wifi LinkSpeedCounts in metrics.
+</span> Disabled by default, and setting it to 1 will enable it.
+ @hide
+*/
+WIFI_LINK_SPEED_METRICS_ENABLED : &quot;wifi_link_speed_metrics_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_PNO_FREQUENCY_CULLING_ENABLED'>/** Setting to enable the PNO frequency culling optimization.
+</span> Disabled by default, and setting it to 1 will enable it.
+ The value is boolean (0 or 1).
+ @hide
+*/
+WIFI_PNO_FREQUENCY_CULLING_ENABLED : &quot;wifi_pno_frequency_culling_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_PNO_RECENCY_SORTING_ENABLED'>/** Setting to enable including recency information when determining pno network priorities.
+</span> Disabled by default, and setting it to 1 will enable it.
+ The value is boolean (0 or 1).
+ @hide
+*/
+WIFI_PNO_RECENCY_SORTING_ENABLED : &quot;wifi_pno_recency_sorting_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_LINK_PROBING_ENABLED'>/** Setting to enable the Wi-Fi link probing.
+</span> Enabled by default, and setting it to 0 will disable it.
+ The value is boolean (0 or 1).
+ @hide
+*/
+WIFI_LINK_PROBING_ENABLED : &quot;wifi_link_probing_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_MAX_DHCP_RETRY_COUNT'>/** The maximum number of times we will retry a connection to an access
+</span> point for which we have failed in acquiring an IP address from DHCP.
+ A value of N means that we will make N+1 connection attempts in all.
+*/
+WIFI_MAX_DHCP_RETRY_COUNT : &quot;wifi_max_dhcp_retry_count&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS'>/** Maximum amount of time in milliseconds to hold a wakelock while waiting for mobile
+</span> data connectivity to be established after a disconnect from Wi-Fi.
+*/
+WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS : &quot;wifi_mobile_data_transition_wakelock_timeout_ms&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN'>/** This setting controls whether WiFi configurations created by a Device Owner app
+</span> should be locked down (that is, be editable or removable only by the Device Owner App,
+ not even by Settings app).
+ This setting takes integer values. Non-zero values mean DO created configurations
+ are locked down. Value of zero means they are not. Default value in the absence of
+ actual value to this setting is 0.
+*/
+WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN : &quot;wifi_device_owner_configs_lockdown&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_FREQUENCY_BAND'>/** The operational wifi frequency band
+</span> Set to one of {@link WifiManager#WIFI_FREQUENCY_BAND_AUTO},
+ {@link WifiManager#WIFI_FREQUENCY_BAND_5GHZ} or
+ {@link WifiManager#WIFI_FREQUENCY_BAND_2GHZ}
+
+ @hide
+*/
+WIFI_FREQUENCY_BAND : &quot;wifi_frequency_band&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_P2P_DEVICE_NAME'>/** The Wi-Fi peer-to-peer device name
+</span> @hide
+*/
+WIFI_P2P_DEVICE_NAME : &quot;wifi_p2p_device_name&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_REENABLE_DELAY_MS'>/** The min time between wifi disable and wifi enable
+</span> @hide
+*/
+WIFI_REENABLE_DELAY_MS : &quot;wifi_reenable_delay&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_EPHEMERAL_OUT_OF_RANGE_TIMEOUT_MS'>/** Timeout for ephemeral networks when all known BSSIDs go out of range. We will disconnect
+</span> from an ephemeral network if there is no BSSID for that network with a non-null score that
+ has been seen in this time period.
+
+ If this is less than or equal to zero, we use a more conservative behavior and only check
+ for a non-null score from the currently connected or target BSSID.
+ @hide
+*/
+WIFI_EPHEMERAL_OUT_OF_RANGE_TIMEOUT_MS : &quot;wifi_ephemeral_out_of_range_timeout_ms&quot;,
+<span id='android-provider-Settings-Global-property-DATA_STALL_ALARM_NON_AGGRESSIVE_DELAY_IN_MS'>/** The number of milliseconds to delay when checking for data stalls during
+</span> non-aggressive detection. (screen is turned off.)
+ @hide
+*/
+DATA_STALL_ALARM_NON_AGGRESSIVE_DELAY_IN_MS : &quot;data_stall_alarm_non_aggressive_delay_in_ms&quot;,
+<span id='android-provider-Settings-Global-property-DATA_STALL_ALARM_AGGRESSIVE_DELAY_IN_MS'>/** The number of milliseconds to delay when checking for data stalls during
+</span> aggressive detection. (screen on or suspected data stall)
+ @hide
+*/
+DATA_STALL_ALARM_AGGRESSIVE_DELAY_IN_MS : &quot;data_stall_alarm_aggressive_delay_in_ms&quot;,
+<span id='android-provider-Settings-Global-property-PROVISIONING_APN_ALARM_DELAY_IN_MS'>/** The number of milliseconds to allow the provisioning apn to remain active
+</span> @hide
+*/
+PROVISIONING_APN_ALARM_DELAY_IN_MS : &quot;provisioning_apn_alarm_delay_in_ms&quot;,
+<span id='android-provider-Settings-Global-property-GPRS_REGISTER_CHECK_PERIOD_MS'>/** The interval in milliseconds at which to check gprs registration
+</span> after the first registration mismatch of gprs and voice service,
+ to detect possible data network registration problems.
+
+ @hide
+*/
+GPRS_REGISTER_CHECK_PERIOD_MS : &quot;gprs_register_check_period_ms&quot;,
+<span id='android-provider-Settings-Global-property-WTF_IS_FATAL'>/** Nonzero causes Log.wtf() to crash.
+</span> @hide
+*/
+WTF_IS_FATAL : &quot;wtf_is_fatal&quot;,
+<span id='android-provider-Settings-Global-property-MODE_RINGER'>/** Ringer mode. This is used internally, changing this value will not
+</span> change the ringer mode. See AudioManager.
+*/
+MODE_RINGER : &quot;mode_ringer&quot;,
+<span id='android-provider-Settings-Global-property-OVERLAY_DISPLAY_DEVICES'>/** Overlay display devices setting.
+</span> The associated value is a specially formatted string that describes the
+ size and density of simulated secondary display devices.
+ &lt;p&gt;
+ Format: {width}x{height}/{dpi};...
+ &lt;/p&gt;&lt;p&gt;
+ Example:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;1280x720/213&lt;/code&gt;: make one overlay that is 1280x720 at 213dpi.&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;1920x1080/320;1280x720/213&lt;/code&gt;: make two overlays, the first
+ at 1080p and the second at 720p.&lt;/li&gt;
+ &lt;li&gt;If the value is empty, then no overlay display devices are created.&lt;/li&gt;
+ &lt;/ul&gt;&lt;/p&gt;
+
+ @hide
+*/
+OVERLAY_DISPLAY_DEVICES : &quot;overlay_display_devices&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_DISCHARGE_DURATION_THRESHOLD'>/** Threshold values for the duration and level of a discharge cycle,
+</span> under which we log discharge cycle info.
+
+ @hide
+*/
+BATTERY_DISCHARGE_DURATION_THRESHOLD : &quot;battery_discharge_duration_threshold&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_DISCHARGE_THRESHOLD'>/**@hide */
+</span>BATTERY_DISCHARGE_THRESHOLD : &quot;battery_discharge_threshold&quot;,
+<span id='android-provider-Settings-Global-property-SEND_ACTION_APP_ERROR'>/** Flag for allowing ActivityManagerService to send ACTION_APP_ERROR
+</span> intents on application crashes and ANRs. If this is disabled, the
+ crash/ANR dialog will never display the &quot;Report&quot; button.
+ &lt;p&gt;
+ Type: int (0 = disallow, 1 = allow)
+
+ @hide
+*/
+SEND_ACTION_APP_ERROR : &quot;send_action_app_error&quot;,
+<span id='android-provider-Settings-Global-property-DROPBOX_AGE_SECONDS'>/** Maximum age of entries kept by {@link DropBoxManager}.
+</span>
+ @hide
+*/
+DROPBOX_AGE_SECONDS : &quot;dropbox_age_seconds&quot;,
+<span id='android-provider-Settings-Global-property-DROPBOX_MAX_FILES'>/** Maximum number of entry files which {@link DropBoxManager} will keep
+</span> around.
+
+ @hide
+*/
+DROPBOX_MAX_FILES : &quot;dropbox_max_files&quot;,
+<span id='android-provider-Settings-Global-property-DROPBOX_QUOTA_KB'>/** Maximum amount of disk space used by {@link DropBoxManager} no matter
+</span> what.
+
+ @hide
+*/
+DROPBOX_QUOTA_KB : &quot;dropbox_quota_kb&quot;,
+<span id='android-provider-Settings-Global-property-DROPBOX_QUOTA_PERCENT'>/** Percent of free disk (excluding reserve) which {@link DropBoxManager}
+</span> will use.
+
+ @hide
+*/
+DROPBOX_QUOTA_PERCENT : &quot;dropbox_quota_percent&quot;,
+<span id='android-provider-Settings-Global-property-DROPBOX_RESERVE_PERCENT'>/** Percent of total disk which {@link DropBoxManager} will never dip
+</span> into.
+
+ @hide
+*/
+DROPBOX_RESERVE_PERCENT : &quot;dropbox_reserve_percent&quot;,
+<span id='android-provider-Settings-Global-property-DROPBOX_TAG_PREFIX'>/** Prefix for per-tag dropbox disable/enable settings.
+</span>
+ @hide
+*/
+DROPBOX_TAG_PREFIX : &quot;dropbox:&quot;,
+<span id='android-provider-Settings-Global-property-ERROR_LOGCAT_PREFIX'>/** Lines of logcat to include with system crash/ANR/etc. reports, as a
+</span> prefix of the dropbox tag of the report type. For example,
+ &quot;logcat_for_system_server_anr&quot; controls the lines of logcat captured
+ with system server ANR reports. 0 to disable.
+
+ @hide
+*/
+ERROR_LOGCAT_PREFIX : &quot;logcat_for_&quot;,
+<span id='android-provider-Settings-Global-property-SYS_FREE_STORAGE_LOG_INTERVAL'>/** The interval in minutes after which the amount of free storage left
+</span> on the device is logged to the event log
+
+ @hide
+*/
+SYS_FREE_STORAGE_LOG_INTERVAL : &quot;sys_free_storage_log_interval&quot;,
+<span id='android-provider-Settings-Global-property-DISK_FREE_CHANGE_REPORTING_THRESHOLD'>/** Threshold for the amount of change in disk free space required to
+</span> report the amount of free space. Used to prevent spamming the logs
+ when the disk free space isn't changing frequently.
+
+ @hide
+*/
+DISK_FREE_CHANGE_REPORTING_THRESHOLD : &quot;disk_free_change_reporting_threshold&quot;,
+<span id='android-provider-Settings-Global-property-SYS_STORAGE_THRESHOLD_PERCENTAGE'>/** Minimum percentage of free storage on the device that is used to
+</span> determine if the device is running low on storage. The default is 10.
+ &lt;p&gt;
+ Say this value is set to 10, the device is considered running low on
+ storage if 90% or more of the device storage is filled up.
+
+ @hide
+*/
+SYS_STORAGE_THRESHOLD_PERCENTAGE : &quot;sys_storage_threshold_percentage&quot;,
+<span id='android-provider-Settings-Global-property-SYS_STORAGE_THRESHOLD_MAX_BYTES'>/** Maximum byte size of the low storage threshold. This is to ensure
+</span> that {@link #SYS_STORAGE_THRESHOLD_PERCENTAGE} does not result in an
+ overly large threshold for large storage devices. Currently this must
+ be less than 2GB. This default is 500MB.
+
+ @hide
+*/
+SYS_STORAGE_THRESHOLD_MAX_BYTES : &quot;sys_storage_threshold_max_bytes&quot;,
+<span id='android-provider-Settings-Global-property-SYS_STORAGE_FULL_THRESHOLD_BYTES'>/** Minimum bytes of free storage on the device before the data partition
+</span> is considered full. By default, 1 MB is reserved to avoid system-wide
+ SQLite disk full exceptions.
+
+ @hide
+*/
+SYS_STORAGE_FULL_THRESHOLD_BYTES : &quot;sys_storage_full_threshold_bytes&quot;,
+<span id='android-provider-Settings-Global-property-SYS_STORAGE_CACHE_PERCENTAGE'>/** Minimum percentage of storage on the device that is reserved for
+</span> cached data.
+
+ @hide
+*/
+SYS_STORAGE_CACHE_PERCENTAGE : &quot;sys_storage_cache_percentage&quot;,
+<span id='android-provider-Settings-Global-property-SYS_STORAGE_CACHE_MAX_BYTES'>/** Maximum bytes of storage on the device that is reserved for cached
+</span> data.
+
+ @hide
+*/
+SYS_STORAGE_CACHE_MAX_BYTES : &quot;sys_storage_cache_max_bytes&quot;,
+<span id='android-provider-Settings-Global-property-SYNC_MAX_RETRY_DELAY_IN_SECONDS'>/** The maximum reconnect delay for short network outages or when the
+</span> network is suspended due to phone use.
+
+ @hide
+*/
+SYNC_MAX_RETRY_DELAY_IN_SECONDS : &quot;sync_max_retry_delay_in_seconds&quot;,
+<span id='android-provider-Settings-Global-property-CONNECTIVITY_CHANGE_DELAY'>/** The number of milliseconds to delay before sending out
+</span> {@link ConnectivityManager#CONNECTIVITY_ACTION} broadcasts. Ignored.
+
+ @hide
+*/
+CONNECTIVITY_CHANGE_DELAY : &quot;connectivity_change_delay&quot;,
+<span id='android-provider-Settings-Global-property-CONNECTIVITY_SAMPLING_INTERVAL_IN_SECONDS'>/** Network sampling interval, in seconds. We'll generate link information
+</span> about bytes/packets sent and error rates based on data sampled in this interval
+
+ @hide
+*/
+CONNECTIVITY_SAMPLING_INTERVAL_IN_SECONDS : &quot;connectivity_sampling_interval_in_seconds&quot;,
+<span id='android-provider-Settings-Global-property-PAC_CHANGE_DELAY'>/** The series of successively longer delays used in retrying to download PAC file.
+</span> Last delay is used between successful PAC downloads.
+
+ @hide
+*/
+PAC_CHANGE_DELAY : &quot;pac_change_delay&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_MODE_IGNORE'>/** Don't attempt to detect captive portals.
+</span>
+ @hide
+*/
+CAPTIVE_PORTAL_MODE_IGNORE : &quot;0&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_MODE_PROMPT'>/** When detecting a captive portal, display a notification that
+</span> prompts the user to sign in.
+
+ @hide
+*/
+CAPTIVE_PORTAL_MODE_PROMPT : &quot;1&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_MODE_AVOID'>/** When detecting a captive portal, immediately disconnect from the
+</span> network and do not reconnect to that network in the future.
+
+ @hide
+*/
+CAPTIVE_PORTAL_MODE_AVOID : &quot;2&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_MODE'>/** What to do when connecting a network that presents a captive portal.
+</span> Must be one of the CAPTIVE_PORTAL_MODE_* constants above.
+
+ The default for this setting is CAPTIVE_PORTAL_MODE_PROMPT.
+ @hide
+*/
+CAPTIVE_PORTAL_MODE : &quot;captive_portal_mode&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_DETECTION_ENABLED'>/** Setting to turn off captive portal detection. Feature is enabled by
+</span> default and the setting needs to be set to 0 to disable it.
+
+ @deprecated use CAPTIVE_PORTAL_MODE_IGNORE to disable captive portal detection
+ @hide
+*/
+CAPTIVE_PORTAL_DETECTION_ENABLED : &quot;captive_portal_detection_enabled&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_SERVER'>/** The server used for captive portal detection upon a new conection. A
+</span> 204 response code from the server is used for validation.
+ TODO: remove this deprecated symbol.
+
+ @hide
+*/
+CAPTIVE_PORTAL_SERVER : &quot;captive_portal_server&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_HTTPS_URL'>/** The URL used for HTTPS captive portal detection upon a new connection.
+</span> A 204 response code from the server is used for validation.
+
+ @hide
+*/
+CAPTIVE_PORTAL_HTTPS_URL : &quot;captive_portal_https_url&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_HTTP_URL'>/** The URL used for HTTP captive portal detection upon a new connection.
+</span> A 204 response code from the server is used for validation.
+
+ @hide
+*/
+CAPTIVE_PORTAL_HTTP_URL : &quot;captive_portal_http_url&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_FALLBACK_URL'>/** The URL used for fallback HTTP captive portal detection when previous HTTP
+</span> and HTTPS captive portal detection attemps did not return a conclusive answer.
+
+ @hide
+*/
+CAPTIVE_PORTAL_FALLBACK_URL : &quot;captive_portal_fallback_url&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_OTHER_FALLBACK_URLS'>/** A comma separated list of URLs used for captive portal detection in addition to the
+</span> fallback HTTP url associated with the CAPTIVE_PORTAL_FALLBACK_URL settings.
+
+ @hide
+*/
+CAPTIVE_PORTAL_OTHER_FALLBACK_URLS : &quot;captive_portal_other_fallback_urls&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_FALLBACK_PROBE_SPECS'>/** A list of captive portal detection specifications used in addition to the fallback URLs.
+</span> Each spec has the format url@@/@@statusCodeRegex@@/@@contentRegex. Specs are separated
+ by &quot;@@,@@&quot;.
+ @hide
+*/
+CAPTIVE_PORTAL_FALLBACK_PROBE_SPECS : &quot;captive_portal_fallback_probe_specs&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_USE_HTTPS'>/** Whether to use HTTPS for network validation. This is enabled by default and the setting
+</span> needs to be set to 0 to disable it. This setting is a misnomer because captive portals
+ don't actually use HTTPS, but it's consistent with the other settings.
+
+ @hide
+*/
+CAPTIVE_PORTAL_USE_HTTPS : &quot;captive_portal_use_https&quot;,
+<span id='android-provider-Settings-Global-property-CAPTIVE_PORTAL_USER_AGENT'>/** Which User-Agent string to use in the header of the captive portal detection probes.
+</span> The User-Agent field is unset when this setting has no value (HttpUrlConnection default).
+
+ @hide
+*/
+CAPTIVE_PORTAL_USER_AGENT : &quot;captive_portal_user_agent&quot;,
+<span id='android-provider-Settings-Global-property-DATA_STALL_RECOVERY_ON_BAD_NETWORK'>/** Whether to try cellular data recovery when a bad network is reported.
+</span>
+ @hide
+*/
+DATA_STALL_RECOVERY_ON_BAD_NETWORK : &quot;data_stall_recovery_on_bad_network&quot;,
+<span id='android-provider-Settings-Global-property-MIN_DURATION_BETWEEN_RECOVERY_STEPS_IN_MS'>/** Minumim duration in millisecodns between cellular data recovery attempts
+</span>
+ @hide
+*/
+MIN_DURATION_BETWEEN_RECOVERY_STEPS_IN_MS : &quot;min_duration_between_recovery_steps&quot;,
+<span id='android-provider-Settings-Global-property-NSD_ON'>/** Whether network service discovery is enabled.
+</span>
+ @hide
+*/
+NSD_ON : &quot;nsd_on&quot;,
+<span id='android-provider-Settings-Global-property-SET_INSTALL_LOCATION'>/** Let user pick default install location.
+</span>
+ @hide
+*/
+SET_INSTALL_LOCATION : &quot;set_install_location&quot;,
+<span id='android-provider-Settings-Global-property-DEFAULT_INSTALL_LOCATION'>/** Default install location value.
+</span> 0 = auto, let system decide
+ 1 = internal
+ 2 = sdcard
+ @hide
+*/
+DEFAULT_INSTALL_LOCATION : &quot;default_install_location&quot;,
+<span id='android-provider-Settings-Global-property-INET_CONDITION_DEBOUNCE_UP_DELAY'>/** ms during which to consume extra events related to Inet connection
+</span> condition after a transtion to fully-connected
+
+ @hide
+*/
+INET_CONDITION_DEBOUNCE_UP_DELAY : &quot;inet_condition_debounce_up_delay&quot;,
+<span id='android-provider-Settings-Global-property-INET_CONDITION_DEBOUNCE_DOWN_DELAY'>/** ms during which to consume extra events related to Inet connection
+</span> condtion after a transtion to partly-connected
+
+ @hide
+*/
+INET_CONDITION_DEBOUNCE_DOWN_DELAY : &quot;inet_condition_debounce_down_delay&quot;,
+<span id='android-provider-Settings-Global-property-READ_EXTERNAL_STORAGE_ENFORCED_DEFAULT'>/**{@hide} */
+</span>READ_EXTERNAL_STORAGE_ENFORCED_DEFAULT : &quot;read_external_storage_enforced_default&quot;,
+<span id='android-provider-Settings-Global-property-HTTP_PROXY'>/** Host name and port for global http proxy. Uses ':' seperator for
+</span> between host and port.
+*/
+HTTP_PROXY : &quot;http_proxy&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_HTTP_PROXY_HOST'>/** Host name for global http proxy. Set via ConnectivityManager.
+</span>
+ @hide
+*/
+GLOBAL_HTTP_PROXY_HOST : &quot;global_http_proxy_host&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_HTTP_PROXY_PORT'>/** Integer host port for global http proxy. Set via ConnectivityManager.
+</span>
+ @hide
+*/
+GLOBAL_HTTP_PROXY_PORT : &quot;global_http_proxy_port&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_HTTP_PROXY_EXCLUSION_LIST'>/** Exclusion list for global proxy. This string contains a list of
+</span> comma-separated domains where the global proxy does not apply.
+ Domains should be listed in a comma- separated list. Example of
+ acceptable formats: &quot;.domain1.com,my.domain2.com&quot; Use
+ ConnectivityManager to set/get.
+
+ @hide
+*/
+GLOBAL_HTTP_PROXY_EXCLUSION_LIST : &quot;global_http_proxy_exclusion_list&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_HTTP_PROXY_PAC'>/** The location PAC File for the proxy.
+</span> @hide
+*/
+GLOBAL_HTTP_PROXY_PAC : &quot;global_proxy_pac_url&quot;,
+<span id='android-provider-Settings-Global-property-SET_GLOBAL_HTTP_PROXY'>/** Enables the UI setting to allow the user to specify the global HTTP
+</span> proxy and associated exclusion list.
+
+ @hide
+*/
+SET_GLOBAL_HTTP_PROXY : &quot;set_global_http_proxy&quot;,
+<span id='android-provider-Settings-Global-property-DEFAULT_DNS_SERVER'>/** Setting for default DNS in case nobody suggests one
+</span>
+ @hide
+*/
+DEFAULT_DNS_SERVER : &quot;default_dns_server&quot;,
+<span id='android-provider-Settings-Global-property-PRIVATE_DNS_MODE'>/** The requested Private DNS mode (string), and an accompanying specifier (string).
+</span>
+ Currently, the specifier holds the chosen provider name when the mode requests
+ a specific provider. It may be used to store the provider name even when the
+ mode changes so that temporarily disabling and re-enabling the specific
+ provider mode does not necessitate retyping the provider hostname.
+
+ @hide
+*/
+PRIVATE_DNS_MODE : &quot;private_dns_mode&quot;,
+<span id='android-provider-Settings-Global-property-PRIVATE_DNS_SPECIFIER'>/** @hide
+</span>*/
+PRIVATE_DNS_SPECIFIER : &quot;private_dns_specifier&quot;,
+<span id='android-provider-Settings-Global-property-PRIVATE_DNS_DEFAULT_MODE'>/** Forced override of the default mode (hardcoded as &quot;automatic&quot;, nee &quot;opportunistic&quot;).
+</span> This allows changing the default mode without effectively disabling other modes,
+ all of which require explicit user action to enable/configure. See also b/79719289.
+
+ Value is a string, suitable for assignment to PRIVATE_DNS_MODE above.
+
+ {@hide}
+*/
+PRIVATE_DNS_DEFAULT_MODE : &quot;private_dns_default_mode&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_BTSNOOP_DEFAULT_MODE'>/**{@hide} */
+</span>BLUETOOTH_BTSNOOP_DEFAULT_MODE : &quot;bluetooth_btsnoop_default_mode&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_HEADSET_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_HEADSET_PRIORITY_PREFIX : &quot;bluetooth_headset_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_A2DP_SINK_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_A2DP_SINK_PRIORITY_PREFIX : &quot;bluetooth_a2dp_sink_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_A2DP_SRC_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_A2DP_SRC_PRIORITY_PREFIX : &quot;bluetooth_a2dp_src_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_A2DP_SUPPORTS_OPTIONAL_CODECS_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_A2DP_SUPPORTS_OPTIONAL_CODECS_PREFIX : &quot;bluetooth_a2dp_supports_optional_codecs_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_A2DP_OPTIONAL_CODECS_ENABLED_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_A2DP_OPTIONAL_CODECS_ENABLED_PREFIX : &quot;bluetooth_a2dp_optional_codecs_enabled_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_INPUT_DEVICE_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_INPUT_DEVICE_PRIORITY_PREFIX : &quot;bluetooth_input_device_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_MAP_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_MAP_PRIORITY_PREFIX : &quot;bluetooth_map_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_MAP_CLIENT_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_MAP_CLIENT_PRIORITY_PREFIX : &quot;bluetooth_map_client_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_PBAP_CLIENT_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_PBAP_CLIENT_PRIORITY_PREFIX : &quot;bluetooth_pbap_client_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_SAP_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_SAP_PRIORITY_PREFIX : &quot;bluetooth_sap_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_PAN_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_PAN_PRIORITY_PREFIX : &quot;bluetooth_pan_priority_&quot;,
+<span id='android-provider-Settings-Global-property-BLUETOOTH_HEARING_AID_PRIORITY_PREFIX'>/**{@hide} */
+</span>BLUETOOTH_HEARING_AID_PRIORITY_PREFIX : &quot;bluetooth_hearing_aid_priority_&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_RADIO_BUG_DETECTION'>/** Enable/disable radio bug detection
+</span>
+ {@hide}
+*/
+ENABLE_RADIO_BUG_DETECTION : &quot;enable_radio_bug_detection&quot;,
+<span id='android-provider-Settings-Global-property-RADIO_BUG_WAKELOCK_TIMEOUT_COUNT_THRESHOLD'>/** Count threshold of RIL wakelock timeout for radio bug detection
+</span>
+ {@hide}
+*/
+RADIO_BUG_WAKELOCK_TIMEOUT_COUNT_THRESHOLD : &quot;radio_bug_wakelock_timeout_count_threshold&quot;,
+<span id='android-provider-Settings-Global-property-RADIO_BUG_SYSTEM_ERROR_COUNT_THRESHOLD'>/** Count threshold of RIL system error for radio bug detection
+</span>
+ {@hide}
+*/
+RADIO_BUG_SYSTEM_ERROR_COUNT_THRESHOLD : &quot;radio_bug_system_error_count_threshold&quot;,
+<span id='android-provider-Settings-Global-property-ACTIVITY_MANAGER_CONSTANTS'>/** Activity manager specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;gc_timeout=5000,max_cached_processes=24&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ max_cached_processes                 (int)
+ background_settle_time               (long)
+ fgservice_min_shown_time             (long)
+ fgservice_min_report_time            (long)
+ fgservice_screen_on_before_time      (long)
+ fgservice_screen_on_after_time       (long)
+ content_provider_retain_time         (long)
+ gc_timeout                           (long)
+ gc_min_interval                      (long)
+ full_pss_min_interval                (long)
+ full_pss_lowered_interval            (long)
+ power_check_interval                 (long)
+ power_check_max_cpu_1                (int)
+ power_check_max_cpu_2                (int)
+ power_check_max_cpu_3                (int)
+ power_check_max_cpu_4                (int)
+ service_usage_interaction_time       (long)
+ usage_stats_interaction_interval     (long)
+ service_restart_duration             (long)
+ service_reset_run_duration           (long)
+ service_restart_duration_factor      (int)
+ service_min_restart_time_between     (long)
+ service_max_inactivity               (long)
+ service_bg_start_timeout             (long)
+ service_bg_activity_start_timeout    (long)
+ process_start_async                  (boolean)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.am.ActivityManagerConstants
+*/
+ACTIVITY_MANAGER_CONSTANTS : &quot;activity_manager_constants&quot;,
+<span id='android-provider-Settings-Global-property-ACTIVITY_STARTS_LOGGING_ENABLED'>/** Feature flag to enable or disable the activity starts logging feature.
+</span> Type: int (0 for false, 1 for true)
+ Default: 1
+ @hide
+*/
+ACTIVITY_STARTS_LOGGING_ENABLED : &quot;activity_starts_logging_enabled&quot;,
+<span id='android-provider-Settings-Global-property-APP_BINDING_CONSTANTS'>/** @hide
+</span> @see com.android.server.appbinding.AppBindingConstants
+*/
+APP_BINDING_CONSTANTS : &quot;app_binding_constants&quot;,
+<span id='android-provider-Settings-Global-property-APP_OPS_CONSTANTS'>/** App ops specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;state_settle_time=10000&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ top_state_settle_time                (long)
+ fg_service_state_settle_time         (long)
+ bg_state_settle_time                 (long)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.AppOpsService.Constants
+*/
+APP_OPS_CONSTANTS : &quot;app_ops_constants&quot;,
+<span id='android-provider-Settings-Global-property-DEVICE_IDLE_CONSTANTS'>/** Device Idle (Doze) specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;inactive_to=60000,sensing_to=400000&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ inactive_to                      (long)
+ sensing_to                       (long)
+ motion_inactive_to               (long)
+ idle_after_inactive_to           (long)
+ idle_pending_to                  (long)
+ max_idle_pending_to              (long)
+ idle_pending_factor              (float)
+ quick_doze_delay_to              (long)
+ idle_to                          (long)
+ max_idle_to                      (long)
+ idle_factor                      (float)
+ min_time_to_alarm                (long)
+ max_temp_app_whitelist_duration  (long)
+ notification_whitelist_duration  (long)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.DeviceIdleController.Constants
+*/
+DEVICE_IDLE_CONSTANTS : &quot;device_idle_constants&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_SAVER_CONSTANTS'>/** Battery Saver specific settings
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;vibration_disabled=true,adjust_brightness_factor=0.5&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ advertise_is_enabled              (boolean)
+ datasaver_disabled                (boolean)
+ enable_night_mode                 (boolean)
+ launch_boost_disabled             (boolean)
+ vibration_disabled                (boolean)
+ animation_disabled                (boolean)
+ soundtrigger_disabled             (boolean)
+ fullbackup_deferred               (boolean)
+ keyvaluebackup_deferred           (boolean)
+ firewall_disabled                 (boolean)
+ gps_mode                          (int)
+ adjust_brightness_disabled        (boolean)
+ adjust_brightness_factor          (float)
+ force_all_apps_standby            (boolean)
+ force_background_check            (boolean)
+ optional_sensors_disabled         (boolean)
+ aod_disabled                      (boolean)
+ quick_doze_enabled                (boolean)
+ &lt;/pre&gt;
+ @hide
+ @see com.android.server.power.batterysaver.BatterySaverPolicy
+*/
+BATTERY_SAVER_CONSTANTS : &quot;battery_saver_constants&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_SAVER_DEVICE_SPECIFIC_CONSTANTS'>/** Battery Saver device specific settings
+</span> This is encoded as a key=value list, separated by commas.
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+     cpufreq-i (list of &quot;core-number:frequency&quot; pairs concatenated with /)
+     cpufreq-n (list of &quot;core-number:frequency&quot; pairs concatenated with /)
+ &lt;/pre&gt;
+
+ See {@link com.android.server.power.batterysaver.BatterySaverPolicy} for the details.
+
+ @hide
+*/
+BATTERY_SAVER_DEVICE_SPECIFIC_CONSTANTS : &quot;battery_saver_device_specific_constants&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_SAVER_ADAPTIVE_CONSTANTS'>/** Settings for adaptive Battery Saver mode. Uses the same flags as
+</span> {@link #BATTERY_SAVER_CONSTANTS}.
+
+ @hide
+*/
+BATTERY_SAVER_ADAPTIVE_CONSTANTS : &quot;battery_saver_adaptive_constants&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_SAVER_ADAPTIVE_DEVICE_SPECIFIC_CONSTANTS'>/** Device specific settings for adaptive Battery Saver mode. Uses the same flags as
+</span> {@link #BATTERY_SAVER_DEVICE_SPECIFIC_CONSTANTS}.
+
+ @hide
+*/
+BATTERY_SAVER_ADAPTIVE_DEVICE_SPECIFIC_CONSTANTS : &quot;battery_saver_adaptive_device_specific_constants&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_TIP_CONSTANTS'>/** Battery tip specific settings
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;battery_tip_enabled=true,summary_enabled=true,high_usage_enabled=true,&quot;
+ &quot;high_usage_app_count=3,reduced_battery_enabled=false,reduced_battery_percent=50,&quot;
+ &quot;high_usage_battery_draining=25,high_usage_period_ms=3000&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ battery_tip_enabled              (boolean)
+ summary_enabled                  (boolean)
+ battery_saver_tip_enabled        (boolean)
+ high_usage_enabled               (boolean)
+ high_usage_app_count             (int)
+ high_usage_period_ms             (long)
+ high_usage_battery_draining      (int)
+ app_restriction_enabled          (boolean)
+ reduced_battery_enabled          (boolean)
+ reduced_battery_percent          (int)
+ low_battery_enabled              (boolean)
+ low_battery_hour                 (int)
+ &lt;/pre&gt;
+ @hide
+*/
+BATTERY_TIP_CONSTANTS : &quot;battery_tip_constants&quot;,
+<span id='android-provider-Settings-Global-property-ANOMALY_DETECTION_CONSTANTS'>/** Battery anomaly detection specific settings
+</span> This is encoded as a key=value list, separated by commas.
+ wakeup_blacklisted_tags is a string, encoded as a set of tags, encoded via
+ {@link Uri#encode(String)}, separated by colons. Ex:
+
+ &quot;anomaly_detection_enabled=true,wakelock_threshold=2000,wakeup_alarm_enabled=true,&quot;
+ &quot;wakeup_alarm_threshold=10,wakeup_blacklisted_tags=tag1:tag2:with%2Ccomma:with%3Acolon&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ anomaly_detection_enabled       (boolean)
+ wakelock_enabled                (boolean)
+ wakelock_threshold              (long)
+ wakeup_alarm_enabled            (boolean)
+ wakeup_alarm_threshold          (long)
+ wakeup_blacklisted_tags         (string)
+ bluetooth_scan_enabled          (boolean)
+ bluetooth_scan_threshold        (long)
+ &lt;/pre&gt;
+ @hide
+*/
+ANOMALY_DETECTION_CONSTANTS : &quot;anomaly_detection_constants&quot;,
+<span id='android-provider-Settings-Global-property-ANOMALY_CONFIG_VERSION'>/** An integer to show the version of the anomaly config. Ex: 1, which means
+</span> current version is 1.
+ @hide
+*/
+ANOMALY_CONFIG_VERSION : &quot;anomaly_config_version&quot;,
+<span id='android-provider-Settings-Global-property-ANOMALY_CONFIG'>/** A base64-encoded string represents anomaly stats config, used for
+</span> {@link android.app.StatsManager}.
+ @hide
+*/
+ANOMALY_CONFIG : &quot;anomaly_config&quot;,
+<span id='android-provider-Settings-Global-property-ALWAYS_ON_DISPLAY_CONSTANTS'>/** Always on display(AOD) specific settings
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;prox_screen_off_delay=10000,screen_brightness_array=0:1:2:3:4&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ screen_brightness_array         (int[])
+ dimming_scrim_array             (int[])
+ prox_screen_off_delay           (long)
+ prox_cooldown_trigger           (long)
+ prox_cooldown_period            (long)
+ &lt;/pre&gt;
+ @hide
+*/
+ALWAYS_ON_DISPLAY_CONSTANTS : &quot;always_on_display_constants&quot;,
+<span id='android-provider-Settings-Global-property-SYS_VDSO'>/** System VDSO global setting. This links to the &quot;sys.vdso&quot; system property.
+</span> The following values are supported:
+ false  -&gt; both 32 and 64 bit vdso disabled
+ 32     -&gt; 32 bit vdso enabled
+ 64     -&gt; 64 bit vdso enabled
+ Any other value defaults to both 32 bit and 64 bit true.
+ @hide
+*/
+SYS_VDSO : &quot;sys_vdso&quot;,
+<span id='android-provider-Settings-Global-property-SYS_UIDCPUPOWER'>/** UidCpuPower global setting. This links the sys.uidcpupower system property.
+</span> The following values are supported:
+ 0 -&gt; /proc/uid_cpupower/* are disabled
+ 1 -&gt; /proc/uid_cpupower/* are enabled
+ Any other value defaults to enabled.
+ @hide
+*/
+SYS_UIDCPUPOWER : &quot;sys_uidcpupower&quot;,
+<span id='android-provider-Settings-Global-property-SYS_TRACED'>/** traced global setting. This controls weather the deamons: traced and
+</span> traced_probes run. This links the sys.traced system property.
+ The following values are supported:
+ 0 -&gt; traced and traced_probes are disabled
+ 1 -&gt; traced and traced_probes are enabled
+ Any other value defaults to disabled.
+ @hide
+*/
+SYS_TRACED : &quot;sys_traced&quot;,
+<span id='android-provider-Settings-Global-property-FPS_DEVISOR'>/** An integer to reduce the FPS by this factor. Only for experiments. Need to reboot the
+</span> device for this setting to take full effect.
+
+ @hide
+*/
+FPS_DEVISOR : &quot;fps_divisor&quot;,
+<span id='android-provider-Settings-Global-property-DISPLAY_PANEL_LPM'>/** Flag to enable or disable display panel low power mode (lpm)
+</span> false -&gt; Display panel power saving mode is disabled.
+ true  -&gt; Display panel power saving mode is enabled.
+
+ @hide
+*/
+DISPLAY_PANEL_LPM : &quot;display_panel_lpm&quot;,
+<span id='android-provider-Settings-Global-property-APP_TIME_LIMIT_USAGE_SOURCE'>/** App time limit usage source setting.
+</span> This controls which app in a task will be considered the source of usage when
+ calculating app usage time limits.
+
+ 1 -&gt; task root app
+ 2 -&gt; current app
+ Any other value defaults to task root app.
+
+ Need to reboot the device for this setting to take effect.
+ @hide
+*/
+APP_TIME_LIMIT_USAGE_SOURCE : &quot;app_time_limit_usage_source&quot;,
+<span id='android-provider-Settings-Global-property-APP_IDLE_CONSTANTS'>/** App standby (app idle) specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+ &lt;p&gt;
+ &quot;idle_duration=5000,parole_interval=4500,screen_thresholds=0/0/60000/120000&quot;
+ &lt;p&gt;
+ All durations are in millis.
+ Array values are separated by forward slashes
+ The following keys are supported:
+
+ &lt;pre&gt;
+ parole_interval                  (long)
+ parole_window                    (long)
+ parole_duration                  (long)
+ screen_thresholds                (long[4])
+ elapsed_thresholds               (long[4])
+ strong_usage_duration            (long)
+ notification_seen_duration       (long)
+ system_update_usage_duration     (long)
+ prediction_timeout               (long)
+ sync_adapter_duration            (long)
+ exempted_sync_duration           (long)
+ system_interaction_duration      (long)
+ initial_foreground_service_start_duration (long)
+ stable_charging_threshold        (long)
+
+ idle_duration        (long) // This is deprecated and used to circumvent b/26355386.
+ idle_duration2       (long) // deprecated
+ wallclock_threshold  (long) // deprecated
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.usage.UsageStatsService.SettingsObserver
+*/
+APP_IDLE_CONSTANTS : &quot;app_idle_constants&quot;,
+<span id='android-provider-Settings-Global-property-ART_VERIFIER_VERIFY_DEBUGGABLE'>/** Enable ART bytecode verification verifications for debuggable apps.
+</span> 0 = disable, 1 = enable.
+ @hide
+*/
+ART_VERIFIER_VERIFY_DEBUGGABLE : &quot;art_verifier_verify_debuggable&quot;,
+<span id='android-provider-Settings-Global-property-POWER_MANAGER_CONSTANTS'>/** Power manager specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;no_cached_wake_locks=1&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ no_cached_wake_locks                 (boolean)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.power.PowerManagerConstants
+*/
+POWER_MANAGER_CONSTANTS : &quot;power_manager_constants&quot;,
+<span id='android-provider-Settings-Global-property-ALARM_MANAGER_CONSTANTS'>/** Alarm manager specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;min_futurity=5000,allow_while_idle_short_time=4500&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ min_futurity                         (long)
+ min_interval                         (long)
+ allow_while_idle_short_time          (long)
+ allow_while_idle_long_time           (long)
+ allow_while_idle_whitelist_duration  (long)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.AlarmManagerService.Constants
+*/
+ALARM_MANAGER_CONSTANTS : &quot;alarm_manager_constants&quot;,
+<span id='android-provider-Settings-Global-property-JOB_SCHEDULER_CONSTANTS'>/** Job scheduler specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;min_ready_jobs_count=2,moderate_use_factor=.5&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ min_idle_count                       (int)
+ min_charging_count                   (int)
+ min_connectivity_count               (int)
+ min_content_count                    (int)
+ min_ready_jobs_count                 (int)
+ heavy_use_factor                     (float)
+ moderate_use_factor                  (float)
+ fg_job_count                         (int)
+ bg_normal_job_count                  (int)
+ bg_moderate_job_count                (int)
+ bg_low_job_count                     (int)
+ bg_critical_job_count                (int)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.job.JobSchedulerService.Constants
+*/
+JOB_SCHEDULER_CONSTANTS : &quot;job_scheduler_constants&quot;,
+<span id='android-provider-Settings-Global-property-JOB_SCHEDULER_QUOTA_CONTROLLER_CONSTANTS'>/** Job scheduler QuotaController specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;max_job_count_working=5,max_job_count_rare=2&quot;
+
+ &lt;p&gt;
+ Type: string
+
+ @hide
+ @see com.android.server.job.JobSchedulerService.Constants
+*/
+JOB_SCHEDULER_QUOTA_CONTROLLER_CONSTANTS : &quot;job_scheduler_quota_controller_constants&quot;,
+<span id='android-provider-Settings-Global-property-JOB_SCHEDULER_TIME_CONTROLLER_CONSTANTS'>/** Job scheduler TimeController specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;skip_not_ready_jobs=true5,other_key=2&quot;
+
+ &lt;p&gt;
+ Type: string
+
+ @hide
+ @see com.android.server.job.JobSchedulerService.Constants
+*/
+JOB_SCHEDULER_TIME_CONTROLLER_CONSTANTS : &quot;job_scheduler_time_controller_constants&quot;,
+<span id='android-provider-Settings-Global-property-SHORTCUT_MANAGER_CONSTANTS'>/** ShortcutManager specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;reset_interval_sec=86400,max_updates_per_interval=1&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ reset_interval_sec              (long)
+ max_updates_per_interval        (int)
+ max_icon_dimension_dp           (int, DP)
+ max_icon_dimension_dp_lowram    (int, DP)
+ max_shortcuts                   (int)
+ icon_quality                    (int, 0-100)
+ icon_format                     (String)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.pm.ShortcutService.ConfigConstants
+*/
+SHORTCUT_MANAGER_CONSTANTS : &quot;shortcut_manager_constants&quot;,
+<span id='android-provider-Settings-Global-property-DEVICE_POLICY_CONSTANTS'>/** DevicePolicyManager specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &lt;pre&gt;
+ das_died_service_reconnect_backoff_sec       (long)
+ das_died_service_reconnect_backoff_increase  (float)
+ das_died_service_reconnect_max_backoff_sec   (long)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ see also com.android.server.devicepolicy.DevicePolicyConstants
+*/
+DEVICE_POLICY_CONSTANTS : &quot;device_policy_constants&quot;,
+<span id='android-provider-Settings-Global-property-TEXT_CLASSIFIER_CONSTANTS'>/** TextClassifier specific settings.
+</span> This is encoded as a key=value list, separated by commas. String[] types like
+ entity_list_default use &quot;:&quot; as delimiter for values. Ex:
+
+ &lt;pre&gt;
+ classify_text_max_range_length                   (int)
+ detect_language_from_text_enabled                (boolean)
+ entity_list_default                              (String[])
+ entity_list_editable                             (String[])
+ entity_list_not_editable                         (String[])
+ generate_links_log_sample_rate                   (int)
+ generate_links_max_text_length                   (int)
+ in_app_conversation_action_types_default         (String[])
+ lang_id_context_settings                         (float[])
+ lang_id_threshold_override                       (float)
+ local_textclassifier_enabled                     (boolean)
+ model_dark_launch_enabled                        (boolean)
+ notification_conversation_action_types_default   (String[])
+ smart_linkify_enabled                            (boolean)
+ smart_select_animation_enabled                   (boolean)
+ smart_selection_enabled                          (boolean)
+ smart_text_share_enabled                         (boolean)
+ suggest_selection_max_range_length               (int)
+ system_textclassifier_enabled                    (boolean)
+ template_intent_factory_enabled                  (boolean)
+ translate_in_classification_enabled              (boolean)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ see also android.view.textclassifier.TextClassificationConstants
+*/
+TEXT_CLASSIFIER_CONSTANTS : &quot;text_classifier_constants&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_STATS_CONSTANTS'>/** BatteryStats specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex: &quot;foo=1,bar=true&quot;
+
+ The following keys are supported:
+ &lt;pre&gt;
+ track_cpu_times_by_proc_state (boolean)
+ track_cpu_active_cluster_time (boolean)
+ read_binary_cpu_time          (boolean)
+ proc_state_cpu_times_read_delay_ms (long)
+ external_stats_collection_rate_limit_ms (long)
+ battery_level_collection_delay_ms (long)
+ max_history_files (int)
+ max_history_buffer_kb (int)
+ battery_charged_delay_ms (int)
+ &lt;/pre&gt;
+
+ &lt;p&gt;
+ Type: string
+ @hide
+ see also com.android.internal.os.BatteryStatsImpl.Constants
+*/
+BATTERY_STATS_CONSTANTS : &quot;battery_stats_constants&quot;,
+<span id='android-provider-Settings-Global-property-SYNC_MANAGER_CONSTANTS'>/** SyncManager specific settings.
+</span>
+ &lt;p&gt;
+ Type: string
+ @hide
+ @see com.android.server.content.SyncManagerConstants
+*/
+SYNC_MANAGER_CONSTANTS : &quot;sync_manager_constants&quot;,
+<span id='android-provider-Settings-Global-property-BROADCAST_FG_CONSTANTS'>/** Broadcast dispatch tuning parameters specific to foreground broadcasts.
+</span>
+ This is encoded as a key=value list, separated by commas. Ex: &quot;foo=1,bar=true&quot;
+
+ The following keys are supported:
+ &lt;pre&gt;
+ bcast_timeout                (long)
+ bcast_slow_time              (long)
+ bcast_deferral               (long)
+ bcast_deferral_decay_factor  (float)
+ bcast_deferral_floor         (long)
+ bcast_allow_bg_activity_start_timeout    (long)
+ &lt;/pre&gt;
+
+ @hide
+*/
+BROADCAST_FG_CONSTANTS : &quot;bcast_fg_constants&quot;,
+<span id='android-provider-Settings-Global-property-BROADCAST_BG_CONSTANTS'>/** Broadcast dispatch tuning parameters specific to background broadcasts.
+</span>
+ This is encoded as a key=value list, separated by commas. Ex: &quot;foo=1,bar=true&quot;.
+ See {@link #BROADCAST_FG_CONSTANTS} for the list of supported keys.
+
+ @hide
+*/
+BROADCAST_BG_CONSTANTS : &quot;bcast_bg_constants&quot;,
+<span id='android-provider-Settings-Global-property-BROADCAST_OFFLOAD_CONSTANTS'>/** Broadcast dispatch tuning parameters specific to specific &quot;offline&quot; broadcasts.
+</span>
+ This is encoded as a key=value list, separated by commas. Ex: &quot;foo=1,bar=true&quot;.
+ See {@link #BROADCAST_FG_CONSTANTS} for the list of supported keys.
+
+ @hide
+*/
+BROADCAST_OFFLOAD_CONSTANTS : &quot;bcast_offload_constants&quot;,
+<span id='android-provider-Settings-Global-property-APP_STANDBY_ENABLED'>/** Whether or not App Standby feature is enabled by system. This controls throttling of apps
+</span> based on usage patterns and predictions. Platform will turn on this feature if both this
+ flag and {@link #ADAPTIVE_BATTERY_MANAGEMENT_ENABLED} is on.
+ Type: int (0 for false, 1 for true)
+ Default: 1
+ @hide
+ @see #ADAPTIVE_BATTERY_MANAGEMENT_ENABLED
+*/
+APP_STANDBY_ENABLED : &quot;app_standby_enabled&quot;,
+<span id='android-provider-Settings-Global-property-ADAPTIVE_BATTERY_MANAGEMENT_ENABLED'>/** Whether or not adaptive battery feature is enabled by user. Platform will turn on this
+</span> feature if both this flag and {@link #APP_STANDBY_ENABLED} is on.
+ Type: int (0 for false, 1 for true)
+ Default: 1
+ @hide
+ @see #APP_STANDBY_ENABLED
+*/
+ADAPTIVE_BATTERY_MANAGEMENT_ENABLED : &quot;adaptive_battery_management_enabled&quot;,
+<span id='android-provider-Settings-Global-property-APP_AUTO_RESTRICTION_ENABLED'>/** Whether or not app auto restriction is enabled. When it is enabled, settings app will
+</span> auto restrict the app if it has bad behavior(e.g. hold wakelock for long time).
+
+ Type: boolean (0 for false, 1 for true)
+ Default: 1
+
+ @hide
+*/
+APP_AUTO_RESTRICTION_ENABLED : &quot;app_auto_restriction_enabled&quot;,
+<span id='android-provider-Settings-Global-property-FORCED_APP_STANDBY_ENABLED'>/** Feature flag to enable or disable the Forced App Standby feature.
+</span> Type: int (0 for false, 1 for true)
+ Default: 1
+ @hide
+*/
+FORCED_APP_STANDBY_ENABLED : &quot;forced_app_standby_enabled&quot;,
+<span id='android-provider-Settings-Global-property-FORCED_APP_STANDBY_FOR_SMALL_BATTERY_ENABLED'>/** Whether or not to enable Forced App Standby on small battery devices.
+</span> Type: int (0 for false, 1 for true)
+ Default: 0
+ @hide
+*/
+FORCED_APP_STANDBY_FOR_SMALL_BATTERY_ENABLED : &quot;forced_app_standby_for_small_battery_enabled&quot;,
+<span id='android-provider-Settings-Global-property-USER_ABSENT_RADIOS_OFF_FOR_SMALL_BATTERY_ENABLED'>/** Whether or not to enable the User Absent, Radios Off feature on small battery devices.
+</span> Type: int (0 for false, 1 for true)
+ Default: 0
+ @hide
+*/
+USER_ABSENT_RADIOS_OFF_FOR_SMALL_BATTERY_ENABLED : &quot;user_absent_radios_off_for_small_battery_enabled&quot;,
+<span id='android-provider-Settings-Global-property-USER_ABSENT_TOUCH_OFF_FOR_SMALL_BATTERY_ENABLED'>/** Whether or not to enable the User Absent, Touch Off feature on small battery devices.
+</span> Type: int (0 for false, 1 for true)
+ Default: 0
+ @hide
+*/
+USER_ABSENT_TOUCH_OFF_FOR_SMALL_BATTERY_ENABLED : &quot;user_absent_touch_off_for_small_battery_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_ON_WHEN_PROXY_DISCONNECTED'>/** Whether or not to turn on Wifi when proxy is disconnected.
+</span> Type: int (0 for false, 1 for true)
+ Default: 1
+ @hide
+*/
+WIFI_ON_WHEN_PROXY_DISCONNECTED : &quot;wifi_on_when_proxy_disconnected&quot;,
+<span id='android-provider-Settings-Global-property-TIME_ONLY_MODE_CONSTANTS'>/** Time Only Mode specific settings.
+</span> This is encoded as a key=value list, separated by commas. Ex: &quot;foo=1,bar=true&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ enabled                  (boolean)
+ disable_home             (boolean)
+ disable_tilt_to_wake     (boolean)
+ disable_touch_to_wake    (boolean)
+ &lt;/pre&gt;
+ Type: string
+ @hide
+*/
+TIME_ONLY_MODE_CONSTANTS : &quot;time_only_mode_constants&quot;,
+<span id='android-provider-Settings-Global-property-UNGAZE_SLEEP_ENABLED'>/** Whether of not to send keycode sleep for ungaze when Home is the foreground activity on
+</span> watch type devices.
+ Type: int (0 for false, 1 for true)
+ Default: 0
+ @hide
+*/
+UNGAZE_SLEEP_ENABLED : &quot;ungaze_sleep_enabled&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_WATCHLIST_ENABLED'>/** Whether or not Network Watchlist feature is enabled.
+</span> Type: int (0 for false, 1 for true)
+ Default: 0
+ @hide
+*/
+NETWORK_WATCHLIST_ENABLED : &quot;network_watchlist_enabled&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_HIDDEN_LAUNCHER_ICON_APPS_ENABLED'>/** Whether or not show hidden launcher icon apps feature is enabled.
+</span> Type: int (0 for false, 1 for true)
+ Default: 1
+ @hide
+*/
+SHOW_HIDDEN_LAUNCHER_ICON_APPS_ENABLED : &quot;show_hidden_icon_apps_enabled&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_NEW_APP_INSTALLED_NOTIFICATION_ENABLED'>/** Whether or not show new app installed notification is enabled.
+</span> Type: int (0 for false, 1 for true)
+ Default: 0
+ @hide
+*/
+SHOW_NEW_APP_INSTALLED_NOTIFICATION_ENABLED : &quot;show_new_app_installed_notification_enabled&quot;,
+<span id='android-provider-Settings-Global-property-KEEP_PROFILE_IN_BACKGROUND'>/** Flag to keep background restricted profiles running after exiting. If disabled,
+</span> the restricted profile can be put into stopped state as soon as the user leaves it.
+ Type: int (0 for false, 1 for true)
+
+ Overridden by the system based on device information. If null, the value specified
+ by {@code config_keepRestrictedProfilesInBackground} is used.
+
+ @hide
+*/
+KEEP_PROFILE_IN_BACKGROUND : &quot;keep_profile_in_background&quot;,
+<span id='android-provider-Settings-Global-property-DEFAULT_ADB_ALLOWED_CONNECTION_TIME'>/** The default time in ms within which a subsequent connection from an always allowed system
+</span> is allowed to reconnect without user interaction.
+
+ @hide
+*/
+DEFAULT_ADB_ALLOWED_CONNECTION_TIME : &quot;604800000&quot;,
+<span id='android-provider-Settings-Global-property-ADB_ALLOWED_CONNECTION_TIME'>/** When the user first connects their device to a system a prompt is displayed to allow
+</span> the adb connection with an option to 'Always allow' connections from this system. If the
+ user selects this always allow option then the connection time is stored for the system.
+ This setting is the time in ms within which a subsequent connection from an always
+ allowed system is allowed to reconnect without user interaction.
+
+ Type: long
+
+ @hide
+*/
+ADB_ALLOWED_CONNECTION_TIME : &quot;adb_allowed_connection_time&quot;,
+<span id='android-provider-Settings-Global-property-WINDOW_ANIMATION_SCALE'>/** Scaling factor for normal window animations. Setting to 0 will
+</span> disable window animations.
+*/
+WINDOW_ANIMATION_SCALE : &quot;window_animation_scale&quot;,
+<span id='android-provider-Settings-Global-property-TRANSITION_ANIMATION_SCALE'>/** Scaling factor for activity transition animations. Setting to 0 will
+</span> disable window animations.
+*/
+TRANSITION_ANIMATION_SCALE : &quot;transition_animation_scale&quot;,
+<span id='android-provider-Settings-Global-property-ANIMATOR_DURATION_SCALE'>/** Scaling factor for Animator-based animations. This affects both the
+</span> start delay and duration of all such animations. Setting to 0 will
+ cause animations to end immediately. The default value is 1.
+*/
+ANIMATOR_DURATION_SCALE : &quot;animator_duration_scale&quot;,
+<span id='android-provider-Settings-Global-property-FANCY_IME_ANIMATIONS'>/** Scaling factor for normal window animations. Setting to 0 will
+</span> disable window animations.
+
+ @hide
+*/
+FANCY_IME_ANIMATIONS : &quot;fancy_ime_animations&quot;,
+<span id='android-provider-Settings-Global-property-COMPATIBILITY_MODE'>/** If 0, the compatibility mode is off for all applications.
+</span> If 1, older applications run under compatibility mode.
+ TODO: remove this settings before code freeze (bug/1907571)
+ @hide
+*/
+COMPATIBILITY_MODE : &quot;compatibility_mode&quot;,
+<span id='android-provider-Settings-Global-property-EMERGENCY_TONE'>/** CDMA only settings
+</span> Emergency Tone  0 = Off
+                 1 = Alert
+                 2 = Vibrate
+ @hide
+*/
+EMERGENCY_TONE : &quot;emergency_tone&quot;,
+<span id='android-provider-Settings-Global-property-CALL_AUTO_RETRY'>/** CDMA only settings
+</span> Whether the auto retry is enabled. The value is
+ boolean (1 or 0).
+ @hide
+*/
+CALL_AUTO_RETRY : &quot;call_auto_retry&quot;,
+<span id='android-provider-Settings-Global-property-EMERGENCY_AFFORDANCE_NEEDED'>/** A setting that can be read whether the emergency affordance is currently needed.
+</span> The value is a boolean (1 or 0).
+ @hide
+*/
+EMERGENCY_AFFORDANCE_NEEDED : &quot;emergency_affordance_needed&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_AUTOMATIC_SYSTEM_SERVER_HEAP_DUMPS'>/** Whether to enable automatic system server heap dumps. This only works on userdebug or
+</span> eng builds, not on user builds. This is set by the user and overrides the config value.
+ 1 means enable, 0 means disable.
+
+ @hide
+*/
+ENABLE_AUTOMATIC_SYSTEM_SERVER_HEAP_DUMPS : &quot;enable_automatic_system_server_heap_dumps&quot;,
+<span id='android-provider-Settings-Global-property-PREFERRED_NETWORK_MODE'>/** See RIL_PreferredNetworkType in ril.h
+</span> @hide
+*/
+PREFERRED_NETWORK_MODE : &quot;preferred_network_mode&quot;,
+<span id='android-provider-Settings-Global-property-DEBUG_APP'>/** Name of an application package to be debugged.
+</span>*/
+DEBUG_APP : &quot;debug_app&quot;,
+<span id='android-provider-Settings-Global-property-WAIT_FOR_DEBUGGER'>/** If 1, when launching DEBUG_APP it will wait for the debugger before
+</span> starting user code.  If 0, it will run normally.
+*/
+WAIT_FOR_DEBUGGER : &quot;wait_for_debugger&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_GPU_DEBUG_LAYERS'>/** Allow GPU debug layers?
+</span> 0 = no
+ 1 = yes
+ @hide
+*/
+ENABLE_GPU_DEBUG_LAYERS : &quot;enable_gpu_debug_layers&quot;,
+<span id='android-provider-Settings-Global-property-GPU_DEBUG_APP'>/** App allowed to load GPU debug layers
+</span> @hide
+*/
+GPU_DEBUG_APP : &quot;gpu_debug_app&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_SETTINGS_ANGLE_DEBUG_PACKAGE'>/** Package containing ANGLE libraries other than system, which are only available
+</span> to dumpable apps that opt-in.
+ @hide
+*/
+GLOBAL_SETTINGS_ANGLE_DEBUG_PACKAGE : &quot;angle_debug_package&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_SETTINGS_ANGLE_GL_DRIVER_ALL_ANGLE'>/** Force all PKGs to use ANGLE, regardless of any other settings
+</span> The value is a boolean (1 or 0).
+ @hide
+*/
+GLOBAL_SETTINGS_ANGLE_GL_DRIVER_ALL_ANGLE : &quot;angle_gl_driver_all_angle&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_SETTINGS_ANGLE_GL_DRIVER_SELECTION_PKGS'>/** List of PKGs that have an OpenGL driver selected
+</span> @hide
+*/
+GLOBAL_SETTINGS_ANGLE_GL_DRIVER_SELECTION_PKGS : &quot;angle_gl_driver_selection_pkgs&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_SETTINGS_ANGLE_GL_DRIVER_SELECTION_VALUES'>/** List of selected OpenGL drivers, corresponding to the PKGs in GLOBAL_SETTINGS_DRIVER_PKGS
+</span> @hide
+*/
+GLOBAL_SETTINGS_ANGLE_GL_DRIVER_SELECTION_VALUES : &quot;angle_gl_driver_selection_values&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_SETTINGS_ANGLE_WHITELIST'>/** List of package names that should check ANGLE rules
+</span> @hide
+*/
+GLOBAL_SETTINGS_ANGLE_WHITELIST : &quot;angle_whitelist&quot;,
+<span id='android-provider-Settings-Global-property-GLOBAL_SETTINGS_SHOW_ANGLE_IN_USE_DIALOG_BOX'>/** Show the &quot;ANGLE In Use&quot; dialog box to the user when ANGLE is the OpenGL driver.
+</span> The value is a boolean (1 or 0).
+ @hide
+*/
+GLOBAL_SETTINGS_SHOW_ANGLE_IN_USE_DIALOG_BOX : &quot;show_angle_in_use_dialog_box&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_ALL_APPS'>/** Game Driver global preference for all Apps.
+</span> 0 = Default
+ 1 = All Apps use Game Driver
+ 2 = All Apps use system graphics driver
+ @hide
+*/
+GAME_DRIVER_ALL_APPS : &quot;game_driver_all_apps&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_OPT_IN_APPS'>/** List of Apps selected to use Game Driver.
+</span> i.e. &lt;pkg1&gt;,&lt;pkg2&gt;,...,&lt;pkgN&gt;
+ @hide
+*/
+GAME_DRIVER_OPT_IN_APPS : &quot;game_driver_opt_in_apps&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_PRERELEASE_OPT_IN_APPS'>/** List of Apps selected to use prerelease Game Driver.
+</span> i.e. &lt;pkg1&gt;,&lt;pkg2&gt;,...,&lt;pkgN&gt;
+ @hide
+*/
+GAME_DRIVER_PRERELEASE_OPT_IN_APPS : &quot;game_driver_prerelease_opt_in_apps&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_OPT_OUT_APPS'>/** List of Apps selected not to use Game Driver.
+</span> i.e. &lt;pkg1&gt;,&lt;pkg2&gt;,...,&lt;pkgN&gt;
+ @hide
+*/
+GAME_DRIVER_OPT_OUT_APPS : &quot;game_driver_opt_out_apps&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_BLACKLIST'>/** Apps on the blacklist that are forbidden to use Game Driver.
+</span> @hide
+*/
+GAME_DRIVER_BLACKLIST : &quot;game_driver_blacklist&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_BLACKLISTS'>/** List of blacklists, each blacklist is a blacklist for a specific version of Game Driver.
+</span> @hide
+*/
+GAME_DRIVER_BLACKLISTS : &quot;game_driver_blacklists&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_WHITELIST'>/** Apps on the whitelist that are allowed to use Game Driver.
+</span> The string is a list of application package names, seperated by comma.
+ i.e. &lt;apk1&gt;,&lt;apk2&gt;,...,&lt;apkN&gt;
+ @hide
+*/
+GAME_DRIVER_WHITELIST : &quot;game_driver_whitelist&quot;,
+<span id='android-provider-Settings-Global-property-GAME_DRIVER_SPHAL_LIBRARIES'>/** List of libraries in sphal accessible by Game Driver
+</span> The string is a list of library names, separated by colon.
+ i.e. &lt;lib1&gt;:&lt;lib2&gt;:...:&lt;libN&gt;
+ @hide
+*/
+GAME_DRIVER_SPHAL_LIBRARIES : &quot;game_driver_sphal_libraries&quot;,
+<span id='android-provider-Settings-Global-property-GPU_DEBUG_LAYERS'>/** Ordered GPU debug layer list for Vulkan
+</span> i.e. &lt;layer1&gt;:&lt;layer2&gt;:...:&lt;layerN&gt;
+ @hide
+*/
+GPU_DEBUG_LAYERS : &quot;gpu_debug_layers&quot;,
+<span id='android-provider-Settings-Global-property-GPU_DEBUG_LAYERS_GLES'>/** Ordered GPU debug layer list for GLES
+</span> i.e. &lt;layer1&gt;:&lt;layer2&gt;:...:&lt;layerN&gt;
+ @hide
+*/
+GPU_DEBUG_LAYERS_GLES : &quot;gpu_debug_layers_gles&quot;,
+<span id='android-provider-Settings-Global-property-GPU_DEBUG_LAYER_APP'>/** Addition app for GPU layer discovery
+</span> @hide
+*/
+GPU_DEBUG_LAYER_APP : &quot;gpu_debug_layer_app&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_PROCESSES'>/** Control whether the process CPU usage meter should be shown.
+</span>
+ @deprecated This functionality is no longer available as of
+ {@link android.os.Build.VERSION_CODES#N_MR1}.
+*/
+SHOW_PROCESSES : &quot;show_processes&quot;,
+<span id='android-provider-Settings-Global-property-LOW_POWER_MODE'>/** If 1 low power mode (aka battery saver) is enabled.
+</span> @hide
+*/
+LOW_POWER_MODE : &quot;low_power&quot;,
+<span id='android-provider-Settings-Global-property-LOW_POWER_MODE_STICKY'>/** If 1, battery saver ({@link #LOW_POWER_MODE}) will be re-activated after the device
+</span> is unplugged from a charger or rebooted.
+ @hide
+*/
+LOW_POWER_MODE_STICKY : &quot;low_power_sticky&quot;,
+<span id='android-provider-Settings-Global-property-LOW_POWER_MODE_STICKY_AUTO_DISABLE_LEVEL'>/** When a device is unplugged from a changer (or is rebooted), do not re-activate battery
+</span> saver even if {@link #LOW_POWER_MODE_STICKY} is 1, if the battery level is equal to or
+ above this threshold.
+
+ @hide
+*/
+LOW_POWER_MODE_STICKY_AUTO_DISABLE_LEVEL : &quot;low_power_sticky_auto_disable_level&quot;,
+<span id='android-provider-Settings-Global-property-LOW_POWER_MODE_STICKY_AUTO_DISABLE_ENABLED'>/** Whether sticky battery saver should be deactivated once the battery level has reached the
+</span> threshold specified by {@link #LOW_POWER_MODE_STICKY_AUTO_DISABLE_LEVEL}.
+
+ @hide
+*/
+LOW_POWER_MODE_STICKY_AUTO_DISABLE_ENABLED : &quot;low_power_sticky_auto_disable_enabled&quot;,
+<span id='android-provider-Settings-Global-property-LOW_POWER_MODE_TRIGGER_LEVEL'>/** Battery level [1-100] at which low power mode automatically turns on.
+</span> If 0, it will not automatically turn on. For Q and newer, it will only automatically
+ turn on if the value is greater than 0 and the {@link #AUTOMATIC_POWER_SAVE_MODE}
+ setting is also set to
+ {@link android.os.PowerManager.AutoPowerSaveMode#POWER_SAVE_MODE_TRIGGER_PERCENTAGE}.
+ @see #AUTOMATIC_POWER_SAVE_MODE
+ @see android.os.PowerManager#getPowerSaveModeTrigger()
+ @hide
+*/
+LOW_POWER_MODE_TRIGGER_LEVEL : &quot;low_power_trigger_level&quot;,
+<span id='android-provider-Settings-Global-property-AUTOMATIC_POWER_SAVE_MODE'>/** Whether battery saver is currently set to trigger based on percentage, dynamic power
+</span> savings trigger, or none. See {@link AutoPowerSaveModeTriggers} for
+ accepted values.
+
+  @hide
+*/
+AUTOMATIC_POWER_SAVE_MODE : &quot;automatic_power_save_mode&quot;,
+<span id='android-provider-Settings-Global-property-DYNAMIC_POWER_SAVINGS_DISABLE_THRESHOLD'>/** The setting that backs the disable threshold for the setPowerSavingsWarning api in
+</span> PowerManager
+
+ @see android.os.PowerManager#setDynamicPowerSaveHint(boolean, int)
+ @hide
+*/
+DYNAMIC_POWER_SAVINGS_DISABLE_THRESHOLD : &quot;dynamic_power_savings_disable_threshold&quot;,
+<span id='android-provider-Settings-Global-property-DYNAMIC_POWER_SAVINGS_ENABLED'>/** The setting which backs the setDynamicPowerSaveHint api in PowerManager.
+</span>
+ @see android.os.PowerManager#setDynamicPowerSaveHint(boolean, int)
+ @hide
+*/
+DYNAMIC_POWER_SAVINGS_ENABLED : &quot;dynamic_power_savings_enabled&quot;,
+<span id='android-provider-Settings-Global-property-TIME_REMAINING_ESTIMATE_MILLIS'>/** A long value indicating how much longer the system battery is estimated to last in
+</span> millis. See {@link #BATTERY_ESTIMATES_LAST_UPDATE_TIME} for the last time this value
+ was updated.
+
+ @hide
+*/
+TIME_REMAINING_ESTIMATE_MILLIS : &quot;time_remaining_estimate_millis&quot;,
+<span id='android-provider-Settings-Global-property-TIME_REMAINING_ESTIMATE_BASED_ON_USAGE'>/** A boolean indicating whether {@link #TIME_REMAINING_ESTIMATE_MILLIS} is based customized
+</span> to the devices usage or using global models. See
+ {@link #BATTERY_ESTIMATES_LAST_UPDATE_TIME} for the last time this value was updated.
+
+ @hide
+*/
+TIME_REMAINING_ESTIMATE_BASED_ON_USAGE : &quot;time_remaining_estimate_based_on_usage&quot;,
+<span id='android-provider-Settings-Global-property-AVERAGE_TIME_TO_DISCHARGE'>/** A long value indicating how long the system battery takes to deplete from 100% to 0% on
+</span> average based on historical drain rates. See {@link #BATTERY_ESTIMATES_LAST_UPDATE_TIME}
+ for the last time this value was updated.
+
+ @hide
+*/
+AVERAGE_TIME_TO_DISCHARGE : &quot;average_time_to_discharge&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_ESTIMATES_LAST_UPDATE_TIME'>/** A long indicating the epoch time in milliseconds when
+</span> {@link #TIME_REMAINING_ESTIMATE_MILLIS}, {@link #TIME_REMAINING_ESTIMATE_BASED_ON_USAGE},
+ and {@link #AVERAGE_TIME_TO_DISCHARGE} were last updated.
+
+ @hide
+*/
+BATTERY_ESTIMATES_LAST_UPDATE_TIME : &quot;battery_estimates_last_update_time&quot;,
+<span id='android-provider-Settings-Global-property-LOW_POWER_MODE_TRIGGER_LEVEL_MAX'>/** The max value for {@link #LOW_POWER_MODE_TRIGGER_LEVEL}. If this setting is not set
+</span> or the value is 0, the default max will be used.
+
+ @hide
+*/
+LOW_POWER_MODE_TRIGGER_LEVEL_MAX : &quot;low_power_trigger_level_max&quot;,
+<span id='android-provider-Settings-Global-property-LOW_POWER_MODE_SUGGESTION_PARAMS'>/** See com.android.settingslib.fuelgauge.BatterySaverUtils.
+</span> @hide
+*/
+LOW_POWER_MODE_SUGGESTION_PARAMS : &quot;low_power_mode_suggestion_params&quot;,
+<span id='android-provider-Settings-Global-property-ALWAYS_FINISH_ACTIVITIES'>/** If not 0, the activity manager will aggressively finish activities and
+</span> processes as soon as they are no longer needed.  If 0, the normal
+ extended lifetime is used.
+*/
+ALWAYS_FINISH_ACTIVITIES : &quot;always_finish_activities&quot;,
+<span id='android-provider-Settings-Global-property-HIDE_ERROR_DIALOGS'>/** If nonzero, all system error dialogs will be hidden.  For example, the
+</span> crash and ANR dialogs will not be shown, and the system will just proceed
+ as if they had been accepted by the user.
+ @hide
+*/
+HIDE_ERROR_DIALOGS : &quot;hide_error_dialogs&quot;,
+<span id='android-provider-Settings-Global-property-DOCK_AUDIO_MEDIA_ENABLED'>/** Use Dock audio output for media:
+</span>      0 = disabled
+      1 = enabled
+ @hide
+*/
+DOCK_AUDIO_MEDIA_ENABLED : &quot;dock_audio_media_enabled&quot;,
+<span id='android-provider-Settings-Global-property-ENCODED_SURROUND_OUTPUT_AUTO'>/** The surround sound formats AC3, DTS or IEC61937 are
+</span> available for use if they are detected.
+ This is the default mode.
+
+ Note that AUTO is equivalent to ALWAYS for Android TVs and other
+ devices that have an S/PDIF output. This is because S/PDIF
+ is unidirectional and the TV cannot know if a decoder is
+ connected. So it assumes they are always available.
+ @hide
+*/
+ENCODED_SURROUND_OUTPUT_AUTO : &quot;0&quot;,
+<span id='android-provider-Settings-Global-property-ENCODED_SURROUND_OUTPUT_NEVER'>/** AC3, DTS or IEC61937 are NEVER available, even if they
+</span> are detected by the hardware. Those formats will not be
+ reported.
+
+ An example use case would be an AVR reports that it is capable of
+ surround sound decoding but is broken. If NEVER is chosen
+ then apps must use PCM output instead of encoded output.
+ @hide
+*/
+ENCODED_SURROUND_OUTPUT_NEVER : &quot;1&quot;,
+<span id='android-provider-Settings-Global-property-ENCODED_SURROUND_OUTPUT_ALWAYS'>/** AC3, DTS or IEC61937 are ALWAYS available, even if they
+</span> are not detected by the hardware. Those formats will be
+ reported as part of the HDMI output capability. Applications
+ are then free to use either PCM or encoded output.
+
+ An example use case would be a when TV was connected over
+ TOS-link to an AVR. But the TV could not see it because TOS-link
+ is unidirectional.
+ @hide
+*/
+ENCODED_SURROUND_OUTPUT_ALWAYS : &quot;2&quot;,
+<span id='android-provider-Settings-Global-property-ENCODED_SURROUND_OUTPUT_MANUAL'>/** Surround sound formats are available according to the choice
+</span> of user, even if they are not detected by the hardware. Those
+ formats will be reported as part of the HDMI output capability.
+ Applications are then free to use either PCM or encoded output.
+
+ An example use case would be an AVR that doesn't report a surround
+ format while the user knows the AVR does support it.
+ @hide
+*/
+ENCODED_SURROUND_OUTPUT_MANUAL : &quot;3&quot;,
+<span id='android-provider-Settings-Global-property-ENCODED_SURROUND_OUTPUT'>/** Set to ENCODED_SURROUND_OUTPUT_AUTO,
+</span> ENCODED_SURROUND_OUTPUT_NEVER,
+ ENCODED_SURROUND_OUTPUT_ALWAYS or
+ ENCODED_SURROUND_OUTPUT_MANUAL
+ @hide
+*/
+ENCODED_SURROUND_OUTPUT : &quot;encoded_surround_output&quot;,
+<span id='android-provider-Settings-Global-property-ENCODED_SURROUND_OUTPUT_ENABLED_FORMATS'>/** Surround sounds formats that are enabled when ENCODED_SURROUND_OUTPUT is set to
+</span> ENCODED_SURROUND_OUTPUT_MANUAL. Encoded as comma separated list. Allowed values
+ are the format constants defined in AudioFormat.java. Ex:
+
+ &quot;5,6&quot;
+
+ @hide
+*/
+ENCODED_SURROUND_OUTPUT_ENABLED_FORMATS : &quot;encoded_surround_output_enabled_formats&quot;,
+<span id='android-provider-Settings-Global-property-AUDIO_SAFE_VOLUME_STATE'>/** Persisted safe headphone volume management state by AudioService
+</span> @hide
+*/
+AUDIO_SAFE_VOLUME_STATE : &quot;audio_safe_volume_state&quot;,
+<span id='android-provider-Settings-Global-property-TZINFO_UPDATE_CONTENT_URL'>/** URL for tzinfo (time zone) updates
+</span> @hide
+*/
+TZINFO_UPDATE_CONTENT_URL : &quot;tzinfo_content_url&quot;,
+<span id='android-provider-Settings-Global-property-TZINFO_UPDATE_METADATA_URL'>/** URL for tzinfo (time zone) update metadata
+</span> @hide
+*/
+TZINFO_UPDATE_METADATA_URL : &quot;tzinfo_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-SELINUX_UPDATE_CONTENT_URL'>/** URL for selinux (mandatory access control) updates
+</span> @hide
+*/
+SELINUX_UPDATE_CONTENT_URL : &quot;selinux_content_url&quot;,
+<span id='android-provider-Settings-Global-property-SELINUX_UPDATE_METADATA_URL'>/** URL for selinux (mandatory access control) update metadata
+</span> @hide
+*/
+SELINUX_UPDATE_METADATA_URL : &quot;selinux_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-SMS_SHORT_CODES_UPDATE_CONTENT_URL'>/** URL for sms short code updates
+</span> @hide
+*/
+SMS_SHORT_CODES_UPDATE_CONTENT_URL : &quot;sms_short_codes_content_url&quot;,
+<span id='android-provider-Settings-Global-property-SMS_SHORT_CODES_UPDATE_METADATA_URL'>/** URL for sms short code update metadata
+</span> @hide
+*/
+SMS_SHORT_CODES_UPDATE_METADATA_URL : &quot;sms_short_codes_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-APN_DB_UPDATE_CONTENT_URL'>/** URL for apn_db updates
+</span> @hide
+*/
+APN_DB_UPDATE_CONTENT_URL : &quot;apn_db_content_url&quot;,
+<span id='android-provider-Settings-Global-property-APN_DB_UPDATE_METADATA_URL'>/** URL for apn_db update metadata
+</span> @hide
+*/
+APN_DB_UPDATE_METADATA_URL : &quot;apn_db_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-CERT_PIN_UPDATE_CONTENT_URL'>/** URL for cert pinlist updates
+</span> @hide
+*/
+CERT_PIN_UPDATE_CONTENT_URL : &quot;cert_pin_content_url&quot;,
+<span id='android-provider-Settings-Global-property-CERT_PIN_UPDATE_METADATA_URL'>/** URL for cert pinlist updates
+</span> @hide
+*/
+CERT_PIN_UPDATE_METADATA_URL : &quot;cert_pin_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-INTENT_FIREWALL_UPDATE_CONTENT_URL'>/** URL for intent firewall updates
+</span> @hide
+*/
+INTENT_FIREWALL_UPDATE_CONTENT_URL : &quot;intent_firewall_content_url&quot;,
+<span id='android-provider-Settings-Global-property-INTENT_FIREWALL_UPDATE_METADATA_URL'>/** URL for intent firewall update metadata
+</span> @hide
+*/
+INTENT_FIREWALL_UPDATE_METADATA_URL : &quot;intent_firewall_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-LANG_ID_UPDATE_CONTENT_URL'>/** URL for lang id model updates
+</span> @hide
+*/
+LANG_ID_UPDATE_CONTENT_URL : &quot;lang_id_content_url&quot;,
+<span id='android-provider-Settings-Global-property-LANG_ID_UPDATE_METADATA_URL'>/** URL for lang id model update metadata
+</span> @hide
+*/
+LANG_ID_UPDATE_METADATA_URL : &quot;lang_id_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-SMART_SELECTION_UPDATE_CONTENT_URL'>/** URL for smart selection model updates
+</span> @hide
+*/
+SMART_SELECTION_UPDATE_CONTENT_URL : &quot;smart_selection_content_url&quot;,
+<span id='android-provider-Settings-Global-property-SMART_SELECTION_UPDATE_METADATA_URL'>/** URL for smart selection model update metadata
+</span> @hide
+*/
+SMART_SELECTION_UPDATE_METADATA_URL : &quot;smart_selection_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-CONVERSATION_ACTIONS_UPDATE_CONTENT_URL'>/** URL for conversation actions model updates
+</span> @hide
+*/
+CONVERSATION_ACTIONS_UPDATE_CONTENT_URL : &quot;conversation_actions_content_url&quot;,
+<span id='android-provider-Settings-Global-property-CONVERSATION_ACTIONS_UPDATE_METADATA_URL'>/** URL for conversation actions model update metadata
+</span> @hide
+*/
+CONVERSATION_ACTIONS_UPDATE_METADATA_URL : &quot;conversation_actions_metadata_url&quot;,
+<span id='android-provider-Settings-Global-property-SELINUX_STATUS'>/** SELinux enforcement status. If 0, permissive; if 1, enforcing.
+</span> @hide
+*/
+SELINUX_STATUS : &quot;selinux_status&quot;,
+<span id='android-provider-Settings-Global-property-DEVELOPMENT_FORCE_RTL'>/** Developer setting to force RTL layout.
+</span> @hide
+*/
+DEVELOPMENT_FORCE_RTL : &quot;debug.force_rtl&quot;,
+<span id='android-provider-Settings-Global-property-LOW_BATTERY_SOUND_TIMEOUT'>/** Milliseconds after screen-off after which low battery sounds will be silenced.
+</span>
+ If zero, battery sounds will always play.
+ Defaults to @integer/def_low_battery_sound_timeout in SettingsProvider.
+
+ @hide
+*/
+LOW_BATTERY_SOUND_TIMEOUT : &quot;low_battery_sound_timeout&quot;,
+<span id='android-provider-Settings-Global-property-WIFI_BOUNCE_DELAY_OVERRIDE_MS'>/** Milliseconds to wait before bouncing Wi-Fi after settings is restored. Note that after
+</span> the caller is done with this, they should call {@link ContentResolver#delete} to
+ clean up any value that they may have written.
+
+ @hide
+*/
+WIFI_BOUNCE_DELAY_OVERRIDE_MS : &quot;wifi_bounce_delay_override_ms&quot;,
+<span id='android-provider-Settings-Global-property-POLICY_CONTROL'>/** Defines global runtime overrides to window policy.
+</span>
+ See {@link com.android.server.wm.PolicyControl} for value format.
+
+ @hide
+*/
+POLICY_CONTROL : &quot;policy_control&quot;,
+<span id='android-provider-Settings-Global-property-EMULATE_DISPLAY_CUTOUT'>/** {@link android.view.DisplayCutout DisplayCutout} emulation mode.
+</span>
+ @hide
+*/
+EMULATE_DISPLAY_CUTOUT : &quot;emulate_display_cutout&quot;,
+<span id='android-provider-Settings-Global-property-EMULATE_DISPLAY_CUTOUT_OFF'>/**@hide */
+</span>EMULATE_DISPLAY_CUTOUT_OFF : &quot;0&quot;,
+<span id='android-provider-Settings-Global-property-EMULATE_DISPLAY_CUTOUT_ON'>/**@hide */
+</span>EMULATE_DISPLAY_CUTOUT_ON : &quot;1&quot;,
+<span id='android-provider-Settings-Global-property-BLOCKED_SLICES'>/** A colon separated list of keys for Settings Slices.
+</span>
+ @hide
+*/
+BLOCKED_SLICES : &quot;blocked_slices&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_MODE'>/** Defines global zen mode.  ZEN_MODE_OFF, ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+</span> or ZEN_MODE_NO_INTERRUPTIONS.
+
+ @hide
+*/
+ZEN_MODE : &quot;zen_mode&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_MODE_OFF'>/**@hide */
+</span>ZEN_MODE_OFF : &quot;0&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_MODE_IMPORTANT_INTERRUPTIONS'>/**@hide */
+</span>ZEN_MODE_IMPORTANT_INTERRUPTIONS : &quot;1&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_MODE_NO_INTERRUPTIONS'>/**@hide */
+</span>ZEN_MODE_NO_INTERRUPTIONS : &quot;2&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_MODE_ALARMS'>/**@hide */
+</span>ZEN_MODE_ALARMS : &quot;3&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_MODE_RINGER_LEVEL'>/** Value of the ringer before entering zen mode.
+</span>
+ @hide
+*/
+ZEN_MODE_RINGER_LEVEL : &quot;zen_mode_ringer_level&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_MODE_CONFIG_ETAG'>/** Opaque value, changes when persisted zen mode configuration changes.
+</span>
+ @hide
+*/
+ZEN_MODE_CONFIG_ETAG : &quot;zen_mode_config_etag&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_DURATION'>/** @deprecated Use {@link android.provider.Settings.Secure#ZEN_DURATION} instead
+</span> @hide
+*/
+ZEN_DURATION : &quot;zen_duration&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_DURATION_PROMPT'>/** @deprecated Use {@link android.provider.Settings.Secure#ZEN_DURATION_PROMPT} instead
+</span> @hide
+*/
+ZEN_DURATION_PROMPT : &quot;-1&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_DURATION_FOREVER'>/** @deprecated Use {@link android.provider.Settings.Secure#ZEN_DURATION_FOREVER} instead
+</span> @hide
+*/
+ZEN_DURATION_FOREVER : &quot;0&quot;,
+<span id='android-provider-Settings-Global-property-HEADS_UP_NOTIFICATIONS_ENABLED'>/** Defines global heads up toggle.  One of HEADS_UP_OFF, HEADS_UP_ON.
+</span>
+ @hide
+*/
+HEADS_UP_NOTIFICATIONS_ENABLED : &quot;heads_up_notifications_enabled&quot;,
+<span id='android-provider-Settings-Global-property-HEADS_UP_OFF'>/**@hide */
+</span>HEADS_UP_OFF : &quot;0&quot;,
+<span id='android-provider-Settings-Global-property-HEADS_UP_ON'>/**@hide */
+</span>HEADS_UP_ON : &quot;1&quot;,
+<span id='android-provider-Settings-Global-property-DEVICE_NAME'>/** The name of the device
+</span>*/
+DEVICE_NAME : &quot;device_name&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_SCORING_PROVISIONED'>/** Whether the NetworkScoringService has been first initialized.
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+ @hide
+*/
+NETWORK_SCORING_PROVISIONED : &quot;network_scoring_provisioned&quot;,
+<span id='android-provider-Settings-Global-property-REQUIRE_PASSWORD_TO_DECRYPT'>/** Indicates whether the user wants to be prompted for password to decrypt the device on
+</span> boot. This only matters if the storage is encrypted.
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+REQUIRE_PASSWORD_TO_DECRYPT : &quot;require_password_to_decrypt&quot;,
+<span id='android-provider-Settings-Global-property-ENHANCED_4G_MODE_ENABLED'>/** Whether the Volte is enabled. If this setting is not set then we use the Carrier Config
+</span> value {@link CarrierConfigManager#KEY_ENHANCED_4G_LTE_ON_BY_DEFAULT_BOOL}.
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+ @hide
+ @deprecated Use {@link android.telephony.SubscriptionManager#ENHANCED_4G_MODE_ENABLED}
+ instead.
+*/
+ENHANCED_4G_MODE_ENABLED : &quot;volte_vt_enabled&quot;,
+<span id='android-provider-Settings-Global-property-VT_IMS_ENABLED'>/** Whether VT (Video Telephony over IMS) is enabled
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+ @deprecated Use {@link android.telephony.SubscriptionManager#VT_IMS_ENABLED} instead.
+*/
+VT_IMS_ENABLED : &quot;vt_ims_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WFC_IMS_ENABLED'>/** Whether WFC is enabled
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+ @deprecated Use {@link android.telephony.SubscriptionManager#WFC_IMS_ENABLED} instead.
+*/
+WFC_IMS_ENABLED : &quot;wfc_ims_enabled&quot;,
+<span id='android-provider-Settings-Global-property-WFC_IMS_MODE'>/** WFC mode on home/non-roaming network.
+</span> &lt;p&gt;
+ Type: int - 2=Wi-Fi preferred, 1=Cellular preferred, 0=Wi-Fi only
+
+ @hide
+ @deprecated Use {@link android.telephony.SubscriptionManager#WFC_IMS_MODE} instead.
+*/
+WFC_IMS_MODE : &quot;wfc_ims_mode&quot;,
+<span id='android-provider-Settings-Global-property-WFC_IMS_ROAMING_MODE'>/** WFC mode on roaming network.
+</span> &lt;p&gt;
+ Type: int - see {@link #WFC_IMS_MODE} for values
+
+ @hide
+ @deprecated Use {@link android.telephony.SubscriptionManager#WFC_IMS_ROAMING_MODE}
+ instead.
+*/
+WFC_IMS_ROAMING_MODE : &quot;wfc_ims_roaming_mode&quot;,
+<span id='android-provider-Settings-Global-property-WFC_IMS_ROAMING_ENABLED'>/** Whether WFC roaming is enabled
+</span> &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+ @deprecated Use {@link android.telephony.SubscriptionManager#WFC_IMS_ROAMING_ENABLED}
+ instead
+*/
+WFC_IMS_ROAMING_ENABLED : &quot;wfc_ims_roaming_enabled&quot;,
+<span id='android-provider-Settings-Global-property-LTE_SERVICE_FORCED'>/** Whether user can enable/disable LTE as a preferred network. A carrier might control
+</span> this via gservices, OMA-DM, carrier app, etc.
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+ @hide
+*/
+LTE_SERVICE_FORCED : &quot;lte_service_forced&quot;,
+<span id='android-provider-Settings-Global-property-LID_BEHAVIOR'>/** Specifies the behaviour the lid triggers when closed
+</span> &lt;p&gt;
+ See WindowManagerPolicy.WindowManagerFuncs
+ @hide
+*/
+LID_BEHAVIOR : &quot;lid_behavior&quot;,
+<span id='android-provider-Settings-Global-property-EPHEMERAL_COOKIE_MAX_SIZE_BYTES'>/** Ephemeral app cookie max size in bytes.
+</span> &lt;p&gt;
+ Type: int
+ @hide
+*/
+EPHEMERAL_COOKIE_MAX_SIZE_BYTES : &quot;ephemeral_cookie_max_size_bytes&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_EPHEMERAL_FEATURE'>/** Toggle to enable/disable the entire ephemeral feature. By default, ephemeral is
+</span> enabled. Set to zero to disable.
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+ENABLE_EPHEMERAL_FEATURE : &quot;enable_ephemeral_feature&quot;,
+<span id='android-provider-Settings-Global-property-INSTANT_APP_DEXOPT_ENABLED'>/** Toggle to enable/disable dexopt for instant applications. The default is for dexopt
+</span> to be disabled.
+ &lt;p&gt;
+ Type: int (0 to disable, 1 to enable)
+
+ @hide
+*/
+INSTANT_APP_DEXOPT_ENABLED : &quot;instant_app_dexopt_enabled&quot;,
+<span id='android-provider-Settings-Global-property-INSTALLED_INSTANT_APP_MIN_CACHE_PERIOD'>/** The min period for caching installed instant apps in milliseconds.
+</span> &lt;p&gt;
+ Type: long
+ @hide
+*/
+INSTALLED_INSTANT_APP_MIN_CACHE_PERIOD : &quot;installed_instant_app_min_cache_period&quot;,
+<span id='android-provider-Settings-Global-property-INSTALLED_INSTANT_APP_MAX_CACHE_PERIOD'>/** The max period for caching installed instant apps in milliseconds.
+</span> &lt;p&gt;
+ Type: long
+ @hide
+*/
+INSTALLED_INSTANT_APP_MAX_CACHE_PERIOD : &quot;installed_instant_app_max_cache_period&quot;,
+<span id='android-provider-Settings-Global-property-UNINSTALLED_INSTANT_APP_MIN_CACHE_PERIOD'>/** The min period for caching uninstalled instant apps in milliseconds.
+</span> &lt;p&gt;
+ Type: long
+ @hide
+*/
+UNINSTALLED_INSTANT_APP_MIN_CACHE_PERIOD : &quot;uninstalled_instant_app_min_cache_period&quot;,
+<span id='android-provider-Settings-Global-property-UNINSTALLED_INSTANT_APP_MAX_CACHE_PERIOD'>/** The max period for caching uninstalled instant apps in milliseconds.
+</span> &lt;p&gt;
+ Type: long
+ @hide
+*/
+UNINSTALLED_INSTANT_APP_MAX_CACHE_PERIOD : &quot;uninstalled_instant_app_max_cache_period&quot;,
+<span id='android-provider-Settings-Global-property-UNUSED_STATIC_SHARED_LIB_MIN_CACHE_PERIOD'>/** The min period for caching unused static shared libs in milliseconds.
+</span> &lt;p&gt;
+ Type: long
+ @hide
+*/
+UNUSED_STATIC_SHARED_LIB_MIN_CACHE_PERIOD : &quot;unused_static_shared_lib_min_cache_period&quot;,
+<span id='android-provider-Settings-Global-property-ALLOW_USER_SWITCHING_WHEN_SYSTEM_USER_LOCKED'>/** Allows switching users when system user is locked.
+</span> &lt;p&gt;
+ Type: int
+ @hide
+*/
+ALLOW_USER_SWITCHING_WHEN_SYSTEM_USER_LOCKED : &quot;allow_user_switching_when_system_user_locked&quot;,
+<span id='android-provider-Settings-Global-property-BOOT_COUNT'>/** Boot count since the device starts running API level 24.
+</span> &lt;p&gt;
+ Type: int
+*/
+BOOT_COUNT : &quot;boot_count&quot;,
+<span id='android-provider-Settings-Global-property-SAFE_BOOT_DISALLOWED'>/** Whether the safe boot is disallowed.
+</span>
+ &lt;p&gt;This setting should have the identical value as the corresponding user restriction.
+ The purpose of the setting is to make the restriction available in early boot stages
+ before the user restrictions are loaded.
+ @hide
+*/
+SAFE_BOOT_DISALLOWED : &quot;safe_boot_disallowed&quot;,
+<span id='android-provider-Settings-Global-property-DEVICE_DEMO_MODE'>/** Indicates whether this device is currently in retail demo mode. If true, the device
+</span> usage is severely limited.
+ &lt;p&gt;
+ Type: int (0 for false, 1 for true)
+
+ @hide
+*/
+DEVICE_DEMO_MODE : &quot;device_demo_mode&quot;,
+<span id='android-provider-Settings-Global-property-NETWORK_ACCESS_TIMEOUT_MS'>/** Indicates the maximum time that an app is blocked for the network rules to get updated.
+</span>
+ Type: long
+
+ @hide
+*/
+NETWORK_ACCESS_TIMEOUT_MS : &quot;network_access_timeout_ms&quot;,
+<span id='android-provider-Settings-Global-property-DATABASE_DOWNGRADE_REASON'>/** The reason for the settings database being downgraded. This is only for
+</span> troubleshooting purposes and its value should not be interpreted in any way.
+
+ Type: string
+
+ @hide
+*/
+DATABASE_DOWNGRADE_REASON : &quot;database_downgrade_reason&quot;,
+<span id='android-provider-Settings-Global-property-DATABASE_CREATION_BUILDID'>/** The build id of when the settings database was first created (or re-created due it
+</span> being missing).
+
+ Type: string
+
+ @hide
+*/
+DATABASE_CREATION_BUILDID : &quot;database_creation_buildid&quot;,
+<span id='android-provider-Settings-Global-property-CONTACTS_DATABASE_WAL_ENABLED'>/** Flag to toggle journal mode WAL on or off for the contacts database. WAL is enabled by
+</span> default. Set to 0 to disable.
+
+ @hide
+*/
+CONTACTS_DATABASE_WAL_ENABLED : &quot;contacts_database_wal_enabled&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED'>/** Flag to enable the link to location permissions in location setting. Set to 0 to disable.
+</span>
+ @hide
+*/
+LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED : &quot;location_settings_link_to_permissions_enabled&quot;,
+<span id='android-provider-Settings-Global-property-EUICC_FACTORY_RESET_TIMEOUT_MILLIS'>/** Flag to set the waiting time for euicc factory reset inside System &gt; Settings
+</span> Type: long
+
+ @hide
+*/
+EUICC_FACTORY_RESET_TIMEOUT_MILLIS : &quot;euicc_factory_reset_timeout_millis&quot;,
+<span id='android-provider-Settings-Global-property-STORAGE_SETTINGS_CLOBBER_THRESHOLD'>/** Flag to set the timeout for when to refresh the storage settings cached data.
+</span> Type: long
+
+ @hide
+*/
+STORAGE_SETTINGS_CLOBBER_THRESHOLD : &quot;storage_settings_clobber_threshold&quot;,
+<span id='android-provider-Settings-Global-property-LOCATION_GLOBAL_KILL_SWITCH'>/** If set to 1, {@link android.provider.Settings.Secure#LOCATION_MODE} will be set to {@link android.provider.Settings.Secure#LOCATION_MODE_OFF}
+</span> temporarily for all users.
+
+ @hide
+*/
+LOCATION_GLOBAL_KILL_SWITCH : &quot;location_global_kill_switch&quot;,
+<span id='android-provider-Settings-Global-property-OVERRIDE_SETTINGS_PROVIDER_RESTORE_ANY_VERSION'>/** If set to 1, SettingsProvider's restoreAnyVersion=&quot;true&quot; attribute will be ignored
+</span> and restoring to lower version of platform API will be skipped.
+
+ @hide
+*/
+OVERRIDE_SETTINGS_PROVIDER_RESTORE_ANY_VERSION : &quot;override_settings_provider_restore_any_version&quot;,
+<span id='android-provider-Settings-Global-property-CHAINED_BATTERY_ATTRIBUTION_ENABLED'>/** Flag to toggle whether system services report attribution chains when they attribute
+</span> battery use via a {@code WorkSource}.
+
+ Type: int (0 to disable, 1 to enable)
+
+ @hide
+*/
+CHAINED_BATTERY_ATTRIBUTION_ENABLED : &quot;chained_battery_attribution_enabled&quot;,
+<span id='android-provider-Settings-Global-property-AUTOFILL_COMPAT_MODE_ALLOWED_PACKAGES'>/** The packages whitelisted to be run in autofill compatibility mode. The list
+</span> of packages is {@code &quot;:&quot;} colon delimited, and each entry has the name of the
+ package and an optional list of url bar resource ids (the list is delimited by
+ brackets&amp;mdash{@code [} and {@code ]}&amp;mdash and is also comma delimited).
+
+ &lt;p&gt;For example, a list with 3 packages {@code p1}, {@code p2}, and {@code p3}, where
+ package {@code p1} have one id ({@code url_bar}, {@code p2} has none, and {@code p3 }
+ have 2 ids {@code url_foo} and {@code url_bas}) would be
+ {@code p1[url_bar]:p2:p3[url_foo,url_bas]}
+
+ @hide
+*/
+AUTOFILL_COMPAT_MODE_ALLOWED_PACKAGES : &quot;autofill_compat_mode_allowed_packages&quot;,
+<span id='android-provider-Settings-Global-property-AUTOFILL_LOGGING_LEVEL'>/** Level of autofill logging.
+</span>
+ &lt;p&gt;Valid values are
+ {@link android.view.autofill.AutofillManager#NO_LOGGING},
+ {@link android.view.autofill.AutofillManager#FLAG_ADD_CLIENT_DEBUG}, or
+ {@link android.view.autofill.AutofillManager#FLAG_ADD_CLIENT_VERBOSE}.
+
+ @hide
+*/
+AUTOFILL_LOGGING_LEVEL : &quot;autofill_logging_level&quot;,
+<span id='android-provider-Settings-Global-property-AUTOFILL_MAX_PARTITIONS_SIZE'>/** Maximum number of partitions that can be allowed in an autofill session.
+</span>
+ @hide
+*/
+AUTOFILL_MAX_PARTITIONS_SIZE : &quot;autofill_max_partitions_size&quot;,
+<span id='android-provider-Settings-Global-property-AUTOFILL_MAX_VISIBLE_DATASETS'>/** Maximum number of visible datasets in the Autofill dataset picker UI, or {@code 0} to use
+</span> the default value from resources.
+
+ @hide
+*/
+AUTOFILL_MAX_VISIBLE_DATASETS : &quot;autofill_max_visible_datasets&quot;,
+<span id='android-provider-Settings-Global-property-HIDDEN_API_BLACKLIST_EXEMPTIONS'>/** Exemptions to the hidden API blacklist.
+</span>
+ @hide
+*/
+HIDDEN_API_BLACKLIST_EXEMPTIONS : &quot;hidden_api_blacklist_exemptions&quot;,
+<span id='android-provider-Settings-Global-property-HIDDEN_API_POLICY'>/** Hidden API enforcement policy for apps.
+</span>
+ Values correspond to @{@link android.content.pm.ApplicationInfo.HiddenApiEnforcementPolicy}
+
+ @hide
+*/
+HIDDEN_API_POLICY : &quot;hidden_api_policy&quot;,
+<span id='android-provider-Settings-Global-property-SIGNED_CONFIG_VERSION'>/** Current version of signed configuration applied.
+</span>
+ @hide
+*/
+SIGNED_CONFIG_VERSION : &quot;signed_config_version&quot;,
+<span id='android-provider-Settings-Global-property-SOUND_TRIGGER_DETECTION_SERVICE_OP_TIMEOUT'>/** Timeout for a single {@link android.media.soundtrigger.SoundTriggerDetectionService}
+</span> operation (in ms).
+
+ @hide
+*/
+SOUND_TRIGGER_DETECTION_SERVICE_OP_TIMEOUT : &quot;sound_trigger_detection_service_op_timeout&quot;,
+<span id='android-provider-Settings-Global-property-MAX_SOUND_TRIGGER_DETECTION_SERVICE_OPS_PER_DAY'>/** Maximum number of {@link android.media.soundtrigger.SoundTriggerDetectionService}
+</span> operations per day.
+
+ @hide
+*/
+MAX_SOUND_TRIGGER_DETECTION_SERVICE_OPS_PER_DAY : &quot;max_sound_trigger_detection_service_ops_per_day&quot;,
+<span id='android-provider-Settings-Global-property-ISOLATED_STORAGE_LOCAL'>/**{@hide} */
+</span>ISOLATED_STORAGE_LOCAL : &quot;isolated_storage_local&quot;,
+<span id='android-provider-Settings-Global-property-ISOLATED_STORAGE_REMOTE'>/**{@hide} */
+</span>ISOLATED_STORAGE_REMOTE : &quot;isolated_storage_remote&quot;,
+<span id='android-provider-Settings-Global-property-AWARE_ALLOWED'>/** Indicates whether aware is available in the current location.
+</span> @hide
+*/
+AWARE_ALLOWED : &quot;aware_allowed&quot;,
+<span id='android-provider-Settings-Global-property-POWER_BUTTON_LONG_PRESS'>/** Overrides internal R.integer.config_longPressOnPowerBehavior.
+</span> Allowable values detailed in frameworks/base/core/res/res/values/config.xml.
+ Used by PhoneWindowManager.
+ @hide
+*/
+POWER_BUTTON_LONG_PRESS : &quot;power_button_long_press&quot;,
+<span id='android-provider-Settings-Global-property-POWER_BUTTON_VERY_LONG_PRESS'>/** Overrides internal R.integer.config_veryLongPressOnPowerBehavior.
+</span> Allowable values detailed in frameworks/base/core/res/res/values/config.xml.
+ Used by PhoneWindowManager.
+ @hide
+*/
+POWER_BUTTON_VERY_LONG_PRESS : &quot;power_button_very_long_press&quot;,
+<span id='android-provider-Settings-Global-property-SETTINGS_TO_BACKUP'>/** Settings to backup. This is here so that it's in the same place as the settings
+</span> keys and easy to update.
+
+ These keys may be mentioned in the SETTINGS_TO_BACKUP arrays in System
+ and Secure as well.  This is because those tables drive both backup and
+ restore, and restore needs to properly whitelist keys that used to live
+ in those namespaces.  The keys will only actually be backed up / restored
+ if they are also mentioned in this table (Global.SETTINGS_TO_BACKUP).
+
+ NOTE: Settings are backed up and restored in the order they appear
+       in this array. If you have one setting depending on another,
+       make sure that they are ordered appropriately.
+
+ @hide
+*/
+SETTINGS_TO_BACKUP : &quot;null&quot;,
+<span id='android-provider-Settings-Global-property-VALIDATORS'>/** All settings in {@link SETTINGS_TO_BACKUP} array *must* have a non-null validator,
+</span> otherwise they won't be restored.
+
+ @hide
+*/
+VALIDATORS : &quot;null&quot;,
+<span id='android-provider-Settings-Global-property-TRANSIENT_SETTINGS'>/** Global settings that shouldn't be persisted.
+</span>
+ @hide
+*/
+TRANSIENT_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-Global-property-LEGACY_RESTORE_SETTINGS'>/** Keys we no longer back up under the current schema, but want to continue to
+</span> process when restoring historical backup datasets.
+
+ All settings in {@link LEGACY_RESTORE_SETTINGS} array *must* have a non-null validator,
+ otherwise they won't be restored.
+
+ @hide
+*/
+LEGACY_RESTORE_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-Global-property-MULTI_SIM_VOICE_CALL_SUBSCRIPTION'>/** Subscription to be used for voice call on a multi sim device. The supported values
+</span> are 0 = SUB1, 1 = SUB2 and etc.
+ @hide
+*/
+MULTI_SIM_VOICE_CALL_SUBSCRIPTION : &quot;multi_sim_voice_call&quot;,
+<span id='android-provider-Settings-Global-property-MULTI_SIM_VOICE_PROMPT'>/** Used to provide option to user to select subscription during dial.
+</span> The supported values are 0 = disable or 1 = enable prompt.
+ @hide
+*/
+MULTI_SIM_VOICE_PROMPT : &quot;multi_sim_voice_prompt&quot;,
+<span id='android-provider-Settings-Global-property-MULTI_SIM_DATA_CALL_SUBSCRIPTION'>/** Subscription to be used for data call on a multi sim device. The supported values
+</span> are 0 = SUB1, 1 = SUB2 and etc.
+ @hide
+*/
+MULTI_SIM_DATA_CALL_SUBSCRIPTION : &quot;multi_sim_data_call&quot;,
+<span id='android-provider-Settings-Global-property-MULTI_SIM_SMS_SUBSCRIPTION'>/** Subscription to be used for SMS on a multi sim device. The supported values
+</span> are 0 = SUB1, 1 = SUB2 and etc.
+ @hide
+*/
+MULTI_SIM_SMS_SUBSCRIPTION : &quot;multi_sim_sms&quot;,
+<span id='android-provider-Settings-Global-property-MULTI_SIM_SMS_PROMPT'>/** Used to provide option to user to select subscription during send SMS.
+</span> The value 1 - enable, 0 - disable
+ @hide
+*/
+MULTI_SIM_SMS_PROMPT : &quot;multi_sim_sms_prompt&quot;,
+<span id='android-provider-Settings-Global-property-MULTI_SIM_USER_PREFERRED_SUBS'>/**User preferred subscriptions setting.
+</span> This holds the details of the user selected subscription from the card and
+ the activation status. Each settings string have the comma separated values
+ iccId,appType,appId,activationStatus,3gppIndex,3gpp2Index
+ @hide
+*/
+MULTI_SIM_USER_PREFERRED_SUBS : &quot;null&quot;,
+<span id='android-provider-Settings-Global-property-ENABLED_SUBSCRIPTION_FOR_SLOT'>/** Which subscription is enabled for a physical slot.
+</span> @hide
+*/
+ENABLED_SUBSCRIPTION_FOR_SLOT : &quot;enabled_subscription_for_slot&quot;,
+<span id='android-provider-Settings-Global-property-MODEM_STACK_ENABLED_FOR_SLOT'>/** Whether corresponding logical modem is enabled for a physical slot.
+</span> The value 1 - enable, 0 - disable
+ @hide
+*/
+MODEM_STACK_ENABLED_FOR_SLOT : &quot;modem_stack_enabled_for_slot&quot;,
+<span id='android-provider-Settings-Global-property-NEW_CONTACT_AGGREGATOR'>/** Whether to enable new contacts aggregator or not.
+</span> The value 1 - enable, 0 - disable
+ @hide
+*/
+NEW_CONTACT_AGGREGATOR : &quot;new_contact_aggregator&quot;,
+<span id='android-provider-Settings-Global-property-CONTACT_METADATA_SYNC'>/** Whether to enable contacts metadata syncing or not
+</span> The value 1 - enable, 0 - disable
+
+ @removed
+*/
+CONTACT_METADATA_SYNC : &quot;contact_metadata_sync&quot;,
+<span id='android-provider-Settings-Global-property-CONTACT_METADATA_SYNC_ENABLED'>/** Whether to enable contacts metadata syncing or not
+</span> The value 1 - enable, 0 - disable
+*/
+CONTACT_METADATA_SYNC_ENABLED : &quot;contact_metadata_sync_enabled&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_CELLULAR_ON_BOOT'>/** Whether to enable cellular on boot.
+</span> The value 1 - enable, 0 - disable
+ @hide
+*/
+ENABLE_CELLULAR_ON_BOOT : &quot;enable_cellular_on_boot&quot;,
+<span id='android-provider-Settings-Global-property-MAX_NOTIFICATION_ENQUEUE_RATE'>/** The maximum allowed notification enqueue rate in Hertz.
+</span>
+ Should be a float, and includes updates only.
+ @hide
+*/
+MAX_NOTIFICATION_ENQUEUE_RATE : &quot;max_notification_enqueue_rate&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_NOTIFICATION_CHANNEL_WARNINGS'>/** Displays toasts when an app posts a notification that does not specify a valid channel.
+</span>
+ The value 1 - enable, 0 - disable
+ @hide
+*/
+SHOW_NOTIFICATION_CHANNEL_WARNINGS : &quot;show_notification_channel_warnings&quot;,
+<span id='android-provider-Settings-Global-property-CELL_ON'>/** Whether cell is enabled/disabled
+</span> @hide
+*/
+CELL_ON : &quot;cell_on&quot;,
+<span id='android-provider-Settings-Global-property-INSTANT_APP_SETTINGS'>/** Global settings which can be accessed by instant apps.
+</span> @hide
+*/
+INSTANT_APP_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_TEMPERATURE_WARNING'>/** Whether to show the high temperature warning notification.
+</span> @hide
+*/
+SHOW_TEMPERATURE_WARNING : &quot;show_temperature_warning&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_USB_TEMPERATURE_ALARM'>/** Whether to show the usb high temperature alarm notification.
+</span> @hide
+*/
+SHOW_USB_TEMPERATURE_ALARM : &quot;show_usb_temperature_alarm&quot;,
+<span id='android-provider-Settings-Global-property-WARNING_TEMPERATURE'>/** Temperature at which the high temperature warning notification should be shown.
+</span> @hide
+*/
+WARNING_TEMPERATURE : &quot;warning_temperature&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_DISKSTATS_LOGGING'>/** Whether the diskstats logging task is enabled/disabled.
+</span> @hide
+*/
+ENABLE_DISKSTATS_LOGGING : &quot;enable_diskstats_logging&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_CACHE_QUOTA_CALCULATION'>/** Whether the cache quota calculation task is enabled/disabled.
+</span> @hide
+*/
+ENABLE_CACHE_QUOTA_CALCULATION : &quot;enable_cache_quota_calculation&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_DELETION_HELPER_NO_THRESHOLD_TOGGLE'>/** Whether the Deletion Helper no threshold toggle is available.
+</span> @hide
+*/
+ENABLE_DELETION_HELPER_NO_THRESHOLD_TOGGLE : &quot;enable_deletion_helper_no_threshold_toggle&quot;,
+<span id='android-provider-Settings-Global-property-NOTIFICATION_SNOOZE_OPTIONS'>/** The list of snooze options for notifications
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;default=60,options_array=15:30:60:120&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ default               (int)
+ options_array         (int[])
+ &lt;/pre&gt;
+
+ All delays in integer minutes. Array order is respected.
+ Options will be used in order up to the maximum allowed by the UI.
+ @hide
+*/
+NOTIFICATION_SNOOZE_OPTIONS : &quot;notification_snooze_options&quot;,
+<span id='android-provider-Settings-Global-property-BLOCKING_HELPER_DISMISS_TO_VIEW_RATIO_LIMIT'>/** Settings key for the ratio of notification dismissals to notification views - one of the
+</span> criteria for showing the notification blocking helper.
+
+ &lt;p&gt;The value is a float ranging from 0.0 to 1.0 (the closer to 0.0, the more intrusive
+ the blocking helper will be).
+
+ @hide
+*/
+BLOCKING_HELPER_DISMISS_TO_VIEW_RATIO_LIMIT : &quot;blocking_helper_dismiss_to_view_ratio&quot;,
+<span id='android-provider-Settings-Global-property-BLOCKING_HELPER_STREAK_LIMIT'>/** Settings key for the longest streak of dismissals  - one of the criteria for showing the
+</span> notification blocking helper.
+
+ &lt;p&gt;The value is an integer greater than 0.
+
+ @hide
+*/
+BLOCKING_HELPER_STREAK_LIMIT : &quot;blocking_helper_streak_limit&quot;,
+<span id='android-provider-Settings-Global-property-SQLITE_COMPATIBILITY_WAL_FLAGS'>/** Configuration flags for SQLite Compatibility WAL. Encoded as a key-value list, separated
+</span> by commas. E.g.: compatibility_wal_supported=true, wal_syncmode=OFF
+
+ Supported keys:&lt;br/&gt;
+ &lt;li&gt;
+ &lt;ul&gt; {@code legacy_compatibility_wal_enabled} : A {code boolean} flag that determines
+ whether or not &quot;compatibility WAL&quot; mode is enabled by default. This is a legacy flag
+ and is honoured on Android Q and higher. This flag will be removed in a future release.
+ &lt;/ul&gt;
+ &lt;ul&gt; {@code wal_syncmode} : A {@code String} representing the synchronization mode to use
+ when WAL is enabled, either via {@code legacy_compatibility_wal_enabled} or using the
+ obsolete {@code compatibility_wal_supported} flag.
+ &lt;/ul&gt;
+ &lt;ul&gt; {@code truncate_size} : A {@code int} flag that specifies the truncate size of the
+ WAL journal.
+ &lt;/ul&gt;
+ &lt;ul&gt; {@code compatibility_wal_supported} : A {code boolean} flag that specifies whether
+ the legacy &quot;compatibility WAL&quot; mode is enabled by default. This flag is obsolete and is
+ only supported on Android Pie.
+ &lt;/ul&gt;
+ &lt;/li&gt;
+
+ @hide
+*/
+SQLITE_COMPATIBILITY_WAL_FLAGS : &quot;sqlite_compatibility_wal_flags&quot;,
+<span id='android-provider-Settings-Global-property-ENABLE_GNSS_RAW_MEAS_FULL_TRACKING'>/** Enable GNSS Raw Measurements Full Tracking?
+</span> 0 = no
+ 1 = yes
+ @hide
+*/
+ENABLE_GNSS_RAW_MEAS_FULL_TRACKING : &quot;enable_gnss_raw_meas_full_tracking&quot;,
+<span id='android-provider-Settings-Global-property-INSTALL_CARRIER_APP_NOTIFICATION_PERSISTENT'>/** Whether the notification should be ongoing (persistent) when a carrier app install is
+</span> required.
+
+ The value is a boolean (1 or 0).
+ @hide
+*/
+INSTALL_CARRIER_APP_NOTIFICATION_PERSISTENT : &quot;install_carrier_app_notification_persistent&quot;,
+<span id='android-provider-Settings-Global-property-INSTALL_CARRIER_APP_NOTIFICATION_SLEEP_MILLIS'>/** The amount of time (ms) to hide the install carrier app notification after the user has
+</span> ignored it. After this time passes, the notification will be shown again
+
+ The value is a long
+ @hide
+*/
+INSTALL_CARRIER_APP_NOTIFICATION_SLEEP_MILLIS : &quot;install_carrier_app_notification_sleep_millis&quot;,
+<span id='android-provider-Settings-Global-property-ZRAM_ENABLED'>/** Whether we've enabled zram on this device. Takes effect on
+</span> reboot. The value &quot;1&quot; enables zram; &quot;0&quot; disables it, and
+ everything else is unspecified.
+ @hide
+*/
+ZRAM_ENABLED : &quot;zram_enabled&quot;,
+<span id='android-provider-Settings-Global-property-SMART_REPLIES_IN_NOTIFICATIONS_FLAGS'>/** Configuration flags for smart replies in notifications.
+</span> This is encoded as a key=value list, separated by commas. Ex:
+
+ &quot;enabled=1,max_squeeze_remeasure_count=3&quot;
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ enabled                           (boolean)
+ requires_targeting_p              (boolean)
+ max_squeeze_remeasure_attempts    (int)
+ edit_choices_before_sending       (boolean)
+ show_in_heads_up                  (boolean)
+ min_num_system_generated_replies  (int)
+ max_num_actions                   (int)
+ &lt;/pre&gt;
+ @see com.android.systemui.statusbar.policy.SmartReplyConstants
+ @hide
+*/
+SMART_REPLIES_IN_NOTIFICATIONS_FLAGS : &quot;smart_replies_in_notifications_flags&quot;,
+<span id='android-provider-Settings-Global-property-SMART_SUGGESTIONS_IN_NOTIFICATIONS_FLAGS'>/** Configuration flags for the automatic generation of smart replies and smart actions in
+</span> notifications. This is encoded as a key=value list, separated by commas. Ex:
+ &quot;generate_replies=false,generate_actions=true&quot;.
+
+ The following keys are supported:
+
+ &lt;pre&gt;
+ generate_replies                 (boolean)
+ generate_actions                 (boolean)
+ &lt;/pre&gt;
+ @hide
+*/
+SMART_SUGGESTIONS_IN_NOTIFICATIONS_FLAGS : &quot;smart_suggestions_in_notifications_flags&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_FIRST_CRASH_DIALOG'>/** If nonzero, crashes in foreground processes will bring up a dialog.
+</span> Otherwise, the process will be silently killed.
+ @hide
+*/
+SHOW_FIRST_CRASH_DIALOG : &quot;show_first_crash_dialog&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_RESTART_IN_CRASH_DIALOG'>/** If nonzero, crash dialogs will show an option to restart the app.
+</span> @hide
+*/
+SHOW_RESTART_IN_CRASH_DIALOG : &quot;show_restart_in_crash_dialog&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_MUTE_IN_CRASH_DIALOG'>/** If nonzero, crash dialogs will show an option to mute all future crash dialogs for
+</span> this app.
+ @hide
+*/
+SHOW_MUTE_IN_CRASH_DIALOG : &quot;show_mute_in_crash_dialog&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_ZEN_UPGRADE_NOTIFICATION'>/** If nonzero, will show the zen upgrade notification when the user toggles DND on/off.
+</span> @hide
+ @deprecated - Use {@link android.provider.Settings.Secure#SHOW_ZEN_UPGRADE_NOTIFICATION}
+*/
+SHOW_ZEN_UPGRADE_NOTIFICATION : &quot;show_zen_upgrade_notification&quot;,
+<span id='android-provider-Settings-Global-property-SHOW_ZEN_SETTINGS_SUGGESTION'>/** If nonzero, will show the zen update settings suggestion.
+</span> @hide
+ @deprecated - Use {@link android.provider.Settings.Secure#SHOW_ZEN_SETTINGS_SUGGESTION}
+*/
+SHOW_ZEN_SETTINGS_SUGGESTION : &quot;show_zen_settings_suggestion&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_SETTINGS_UPDATED'>/** If nonzero, zen has not been updated to reflect new changes.
+</span> @deprecated - Use {@link android.provider.Settings.Secure#ZEN_SETTINGS_UPDATED}
+ @hide
+*/
+ZEN_SETTINGS_UPDATED : &quot;zen_settings_updated&quot;,
+<span id='android-provider-Settings-Global-property-ZEN_SETTINGS_SUGGESTION_VIEWED'>/** If nonzero, zen setting suggestion has been viewed by user
+</span> @hide
+ @deprecated - Use {@link android.provider.Settings.Secure#ZEN_SETTINGS_SUGGESTION_VIEWED}
+*/
+ZEN_SETTINGS_SUGGESTION_VIEWED : &quot;zen_settings_suggestion_viewed&quot;,
+<span id='android-provider-Settings-Global-property-BACKUP_AGENT_TIMEOUT_PARAMETERS'>/** Backup and restore agent timeout parameters.
+</span> These parameters are represented by a comma-delimited key-value list.
+
+ The following strings are supported as keys:
+ &lt;pre&gt;
+     kv_backup_agent_timeout_millis         (long)
+     full_backup_agent_timeout_millis       (long)
+     shared_backup_agent_timeout_millis     (long)
+     restore_agent_timeout_millis           (long)
+     restore_agent_finished_timeout_millis  (long)
+ &lt;/pre&gt;
+
+ They map to milliseconds represented as longs.
+
+ Ex: &quot;kv_backup_agent_timeout_millis=30000,full_backup_agent_timeout_millis=300000&quot;
+
+ @hide
+*/
+BACKUP_AGENT_TIMEOUT_PARAMETERS : &quot;backup_agent_timeout_parameters&quot;,
+<span id='android-provider-Settings-Global-property-BACKUP_MULTI_USER_ENABLED'>/** Whether the backup system service supports multiple users (0 = disabled, 1 = enabled). If
+</span> disabled, the service will only be active for the system user.
+
+ @hide
+*/
+BACKUP_MULTI_USER_ENABLED : &quot;backup_multi_user_enabled&quot;,
+<span id='android-provider-Settings-Global-property-GNSS_SATELLITE_BLACKLIST'>/** Blacklist of GNSS satellites.
+</span>
+ This is a list of integers separated by commas to represent pairs of (constellation,
+ svid). Thus, the number of integers should be even.
+
+ E.g.: &quot;3,0,5,24&quot; denotes (constellation=3, svid=0) and (constellation=5, svid=24) are
+ blacklisted. Note that svid=0 denotes all svids in the
+ constellation are blacklisted.
+
+ @hide
+*/
+GNSS_SATELLITE_BLACKLIST : &quot;gnss_satellite_blacklist&quot;,
+<span id='android-provider-Settings-Global-property-GNSS_HAL_LOCATION_REQUEST_DURATION_MILLIS'>/** Duration of updates in millisecond for GNSS location request from HAL to framework.
+</span>
+ If zero, the GNSS location request feature is disabled.
+
+ The value is a non-negative long.
+
+ @hide
+*/
+GNSS_HAL_LOCATION_REQUEST_DURATION_MILLIS : &quot;gnss_hal_location_request_duration_millis&quot;,
+<span id='android-provider-Settings-Global-property-BINDER_CALLS_STATS'>/** Binder call stats settings.
+</span>
+ The following strings are supported as keys:
+ &lt;pre&gt;
+     enabled              (boolean)
+     detailed_tracking    (boolean)
+     upload_data          (boolean)
+     sampling_interval    (int)
+ &lt;/pre&gt;
+
+ @hide
+*/
+BINDER_CALLS_STATS : &quot;binder_calls_stats&quot;,
+<span id='android-provider-Settings-Global-property-LOOPER_STATS'>/** Looper stats settings.
+</span>
+ The following strings are supported as keys:
+ &lt;pre&gt;
+     enabled              (boolean)
+     sampling_interval    (int)
+ &lt;/pre&gt;
+
+ @hide
+*/
+LOOPER_STATS : &quot;looper_stats&quot;,
+<span id='android-provider-Settings-Global-property-KERNEL_CPU_THREAD_READER'>/** Settings for collecting statistics on CPU usage per thread
+</span>
+ The following strings are supported as keys:
+ &lt;pre&gt;
+     num_buckets          (int)
+     collected_uids       (string)
+     minimum_total_cpu_usage_millis (int)
+ &lt;/pre&gt;
+
+ @hide
+*/
+KERNEL_CPU_THREAD_READER : &quot;kernel_cpu_thread_reader&quot;,
+<span id='android-provider-Settings-Global-property-DEFAULT_USER_ID_TO_BOOT_INTO'>/** Default user id to boot into. They map to user ids, for example, 10, 11, 12.
+</span>
+ @hide
+*/
+DEFAULT_USER_ID_TO_BOOT_INTO : &quot;default_boot_into_user_id&quot;,
+<span id='android-provider-Settings-Global-property-LAST_ACTIVE_USER_ID'>/** Persistent user id that is last logged in to.
+</span>
+ They map to user ids, for example, 10, 11, 12.
+
+ @hide
+*/
+LAST_ACTIVE_USER_ID : &quot;last_active_persistent_user_id&quot;,
+<span id='android-provider-Settings-Global-property-NATIVE_FLAGS_HEALTH_CHECK_ENABLED'>/** Whether we've enabled native flags health check on this device. Takes effect on
+</span> reboot. The value &quot;1&quot; enables native flags health check; otherwise it's disabled.
+ @hide
+*/
+NATIVE_FLAGS_HEALTH_CHECK_ENABLED : &quot;native_flags_health_check_enabled&quot;,
+<span id='android-provider-Settings-Global-property-APPOP_HISTORY_MODE'>/** Parameter for {@link #APPOP_HISTORY_PARAMETERS} that controls the mode
+</span> in which the historical registry operates.
+
+ @hide
+*/
+APPOP_HISTORY_MODE : &quot;mode&quot;,
+<span id='android-provider-Settings-Global-property-APPOP_HISTORY_BASE_INTERVAL_MILLIS'>/** Parameter for {@link #APPOP_HISTORY_PARAMETERS} that controls how long
+</span> is the interval between snapshots in the base case i.e. the most recent
+ part of the history.
+
+ @hide
+*/
+APPOP_HISTORY_BASE_INTERVAL_MILLIS : &quot;baseIntervalMillis&quot;,
+<span id='android-provider-Settings-Global-property-APPOP_HISTORY_INTERVAL_MULTIPLIER'>/** Parameter for {@link #APPOP_HISTORY_PARAMETERS} that controls the base
+</span> for the logarithmic step when building app op history.
+
+ @hide
+*/
+APPOP_HISTORY_INTERVAL_MULTIPLIER : &quot;intervalMultiplier&quot;,
+<span id='android-provider-Settings-Global-property-APPOP_HISTORY_PARAMETERS'>/** Appop history parameters. These parameters are represented by
+</span> a comma-delimited key-value list.
+
+ The following strings are supported as keys:
+ &lt;pre&gt;
+     mode                  (int)
+     baseIntervalMillis    (long)
+     intervalMultiplier    (int)
+ &lt;/pre&gt;
+
+ Ex: &quot;mode=HISTORICAL_MODE_ENABLED_ACTIVE,baseIntervalMillis=1000,intervalMultiplier=10&quot;
+
+ @see #APPOP_HISTORY_MODE
+ @see #APPOP_HISTORY_BASE_INTERVAL_MILLIS
+ @see #APPOP_HISTORY_INTERVAL_MULTIPLIER
+
+ @hide
+*/
+APPOP_HISTORY_PARAMETERS : &quot;appop_history_parameters&quot;,
+<span id='android-provider-Settings-Global-property-BATTERY_CHARGING_STATE_UPDATE_DELAY'>/** Delay for sending ACTION_CHARGING after device is plugged in.
+</span> This is used as an override for constants defined in BatteryStatsImpl for
+ ease of experimentation.
+
+ @see com.android.internal.os.BatteryStatsImpl.Constants.KEY_BATTERY_CHARGED_DELAY_MS
+ @hide
+*/
+BATTERY_CHARGING_STATE_UPDATE_DELAY : &quot;battery_charging_state_update_delay&quot;,
+<span id='android-provider-Settings-Global-property-TEXT_CLASSIFIER_ACTION_MODEL_PARAMS'>/** A serialized string of params that will be loaded into a text classifier action model.
+</span>
+ @hide
+*/
+TEXT_CLASSIFIER_ACTION_MODEL_PARAMS : &quot;text_classifier_action_model_params&quot;,
+<span id='android-provider-Settings-Global-property-POWER_BUTTON_SUPPRESSION_DELAY_AFTER_GESTURE_WAKE'>/** The amount of time to suppress &quot;power-off&quot; from the power button after the device has
+</span> woken due to a gesture (lifting the phone).  Since users have learned to hit the power
+ button immediately when lifting their device, it can cause the device to turn off if a
+ gesture has just woken the device. This value tells us the milliseconds to wait after
+ a gesture before &quot;power-off&quot; via power-button is functional again. A value of 0 is no
+ delay, and reverts to the old behavior.
+
+ @hide
+*/
+POWER_BUTTON_SUPPRESSION_DELAY_AFTER_GESTURE_WAKE : &quot;power_button_suppression_delay_after_gesture_wake&quot;,
+<span id='android-provider-Settings-Global-method-getBluetoothHeadsetPriorityKey'>/**Get the key that retrieves a bluetooth headset's priority.
+</span>@hide 
+*/
+getBluetoothHeadsetPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothA2dpSinkPriorityKey'>/**Get the key that retrieves a bluetooth a2dp sink's priority.
+</span>@hide 
+*/
+getBluetoothA2dpSinkPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothA2dpSrcPriorityKey'>/**Get the key that retrieves a bluetooth a2dp src's priority.
+</span>@hide 
+*/
+getBluetoothA2dpSrcPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothA2dpSupportsOptionalCodecsKey'>/**Get the key that retrieves a bluetooth a2dp device's ability to support optional codecs.
+</span>@hide 
+*/
+getBluetoothA2dpSupportsOptionalCodecsKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothA2dpOptionalCodecsEnabledKey'>/**Get the key that retrieves whether a bluetooth a2dp device should have optional codecs
+</span> enabled.
+@hide 
+*/
+getBluetoothA2dpOptionalCodecsEnabledKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothHidHostPriorityKey'>/**Get the key that retrieves a bluetooth Input Device's priority.
+</span>@hide 
+*/
+getBluetoothHidHostPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothPanPriorityKey'>/**Get the key that retrieves a bluetooth pan client priority.
+</span>@hide 
+*/
+getBluetoothPanPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothHearingAidPriorityKey'>/**Get the key that retrieves a bluetooth hearing aid priority.
+</span>@hide 
+*/
+getBluetoothHearingAidPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothMapPriorityKey'>/**Get the key that retrieves a bluetooth map priority.
+</span>@hide 
+*/
+getBluetoothMapPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothMapClientPriorityKey'>/**Get the key that retrieves a bluetooth map client priority.
+</span>@hide 
+*/
+getBluetoothMapClientPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothPbapClientPriorityKey'>/**Get the key that retrieves a bluetooth pbap client priority.
+</span>@hide 
+*/
+getBluetoothPbapClientPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getBluetoothSapPriorityKey'>/**Get the key that retrieves a bluetooth sap priority.
+</span>@hide 
+*/
+getBluetoothSapPriorityKey : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-zenModeToString'>/**
+</span>@hide 
+*/
+zenModeToString : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-isValidZenMode'>/**
+</span>@hide 
+*/
+isValidZenMode : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getMovedToSecureSettings'>/**
+</span>@hide 
+*/
+getMovedToSecureSettings : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-clearProviderForTest'>/**
+</span>@hide 
+*/
+clearProviderForTest : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getString'>/**Look up a name in the database.
+</span>@param {Object {ContentResolver}} resolver to access the database with
+@param {String} name to look up in the table
+@return {String} the corresponding value, or null if not present
+*/
+getString : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getStringForUser'>/**
+</span>@hide 
+*/
+getStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-putString'>/**Store a name/value pair into the database.
+</span>@param {Object {ContentResolver}} resolver to access the database with
+@param {String} name to store
+@param {String} value to associate with the name
+@return {Boolean} true if the value was set, false on database errors
+*/
+putString : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-putString'>/**Store a name/value pair into the database.
+</span> &lt;p&gt;
+ The method takes an optional tag to associate with the setting
+ which can be used to clear only settings made by your package and
+ associated with this tag by passing the tag to {@link #resetToDefaults(ContentResolver, String)}. Anyone can override
+ the current tag. Also if another package changes the setting
+ then the tag will be set to the one specified in the set call
+ which can be null. Also any of the settings setters that do not
+ take a tag as an argument effectively clears the tag.
+ &lt;/p&gt;&lt;p&gt;
+ For example, if you set settings A and B with tags T1 and T2 and
+ another app changes setting A (potentially to the same value), it
+ can assign to it a tag T3 (note that now the package that changed
+ the setting is not yours). Now if you reset your changes for T1 and
+ T2 only setting B will be reset and A not (as it was changed by
+ another package) but since A did not change you are in the desired
+ initial state. Now if the other app changes the value of A (assuming
+ you registered an observer in the beginning) you would detect that
+ the setting was changed by another app and handle this appropriately
+ (ignore, set back to some value, etc).
+ &lt;/p&gt;&lt;p&gt;
+ Also the method takes an argument whether to make the value the
+ default for this setting. If the system already specified a default
+ value, then the one passed in here will &lt;strong&gt;not&lt;/strong&gt;
+ be set as the default.
+ &lt;/p&gt;
+@param {Object {ContentResolver}} resolver to access the database with.
+@param {String} name to store.
+@param {String} value to associate with the name.
+@param {String} tag to associated with the setting.
+@param {Boolean} makeDefault whether to make the value the default one.
+@return {Boolean} true if the value was set, false on database errors.
+@see #resetToDefaults(ContentResolver, String)
+@hide 
+*/
+putString : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-resetToDefaults'>/**Reset the settings to their defaults. This would reset &lt;strong&gt;only&lt;/strong&gt;
+</span> settings set by the caller's package. Think of it of a way to undo your own
+ changes to the secure settings. Passing in the optional tag will reset only
+ settings changed by your package and associated with this tag.
+@param {Object {ContentResolver}} resolver Handle to the content resolver.
+@param {String} tag Optional tag which should be associated with the settings to reset.
+@see #putString(ContentResolver, String, String, String, boolean)
+@hide 
+*/
+resetToDefaults : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-resetToDefaultsAsUser'>/**Reset the settings to their defaults for a given user with a specific mode. The
+</span> optional tag argument is valid only for {@link #RESET_MODE_PACKAGE_DEFAULTS}
+ allowing resetting the settings made by a package and associated with the tag.
+@param {Object {ContentResolver}} resolver Handle to the content resolver.
+@param {String} tag Optional tag which should be associated with the settings to reset.
+@param {Number} mode The reset mode.
+@param {Number} userHandle The user for which to reset to defaults.
+@see #RESET_MODE_PACKAGE_DEFAULTS
+@see #RESET_MODE_UNTRUSTED_DEFAULTS
+@see #RESET_MODE_UNTRUSTED_CHANGES
+@see #RESET_MODE_TRUSTED_DEFAULTS
+@hide 
+*/
+resetToDefaultsAsUser : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-putStringForUser'>/**
+</span>@hide 
+*/
+putStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-putStringForUser'>/**
+</span>@hide 
+*/
+putStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getUriFor'>/**Construct the content URI for a particular name/value pair,
+</span> useful for monitoring changes with a ContentObserver.
+@param {String} name to look up in the table
+@return {Object {android.net.Uri}} the corresponding content URI, or null if not present
+*/
+getUriFor : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getInt'>/**Convenience function for retrieving a single secure settings value
+</span> as an integer.  Note that internally setting values are always
+ stored as strings; this function converts the string to an integer
+ for you.  The default value will be returned if the setting is
+ not defined or not an integer.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid integer.
+*/
+getInt : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getInt'>/**Convenience function for retrieving a single secure settings value
+</span> as an integer.  Note that internally setting values are always
+ stored as strings; this function converts the string to an integer
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not an integer.
+@return {Number} The setting's current value.
+*/
+getInt : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-putInt'>/**Convenience function for updating a single settings value as an
+</span> integer. This will either create a new entry in the table if the
+ given name does not exist, or modify the value of the existing row
+ with that name.  Note that internally setting values are always
+ stored as strings, so this function converts the given value to a
+ string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putInt : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getLong'>/**Convenience function for retrieving a single secure settings value
+</span> as a {@code long}.  Note that internally setting values are always
+ stored as strings; this function converts the string to a {@code long}
+ for you.  The default value will be returned if the setting is
+ not defined or not a {@code long}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid {@code long}.
+*/
+getLong : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getLong'>/**Convenience function for retrieving a single secure settings value
+</span> as a {@code long}.  Note that internally setting values are always
+ stored as strings; this function converts the string to a {@code long}
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@return {Number} The setting's current value.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not an integer.
+*/
+getLong : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-putLong'>/**Convenience function for updating a secure settings value as a long
+</span> integer. This will either create a new entry in the table if the
+ given name does not exist, or modify the value of the existing row
+ with that name.  Note that internally setting values are always
+ stored as strings, so this function converts the given value to a
+ string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putLong : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getFloat'>/**Convenience function for retrieving a single secure settings value
+</span> as a floating point number.  Note that internally setting values are
+ always stored as strings; this function converts the string to an
+ float for you. The default value will be returned if the setting
+ is not defined or not a valid float.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid float.
+*/
+getFloat : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-getFloat'>/**Convenience function for retrieving a single secure settings value
+</span> as a float.  Note that internally setting values are always
+ stored as strings; this function converts the string to a float
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not a float.
+@return {Number} The setting's current value.
+*/
+getFloat : function(  ) {},
+
+<span id='android-provider-Settings-Global-method-putFloat'>/**Convenience function for updating a single settings value as a
+</span> floating point number. This will either create a new entry in the
+ table if the given name does not exist, or modify the value of the
+ existing row with that name.  Note that internally setting values
+ are always stored as strings, so this function converts the given
+ value to a string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putFloat : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

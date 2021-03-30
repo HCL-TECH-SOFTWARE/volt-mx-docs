@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Trace'>/**@class android.os.Trace
+</span>@extends java.lang.Object
+
+ Writes trace events to the system trace buffer.  These trace events can be
+ collected and visualized using the Systrace tool.
+
+ &lt;p&gt;This tracing mechanism is independent of the method tracing mechanism
+ offered by {@link android.os.Debug#startMethodTracing}.  In particular, it enables
+ tracing of events that occur across multiple processes.
+ &lt;p&gt;For information about using the Systrace tool, read &lt;a
+ href=&quot;{@docRoot}tools/debugging/systrace.html&quot;&gt;Analyzing Display and Performance
+ with Systrace&lt;/a&gt;.
+*/
+var Trace = {
+
+<span id='android-os-Trace-property-TRACE_TAG_NEVER'>/**@hide */
+</span>TRACE_TAG_NEVER : &quot;0&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_ALWAYS'>/**@hide */
+</span>TRACE_TAG_ALWAYS : &quot;1&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_GRAPHICS'>/**@hide */
+</span>TRACE_TAG_GRAPHICS : &quot;2&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_INPUT'>/**@hide */
+</span>TRACE_TAG_INPUT : &quot;4&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_VIEW'>/**@hide */
+</span>TRACE_TAG_VIEW : &quot;8&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_WEBVIEW'>/**@hide */
+</span>TRACE_TAG_WEBVIEW : &quot;16&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_WINDOW_MANAGER'>/**@hide */
+</span>TRACE_TAG_WINDOW_MANAGER : &quot;32&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_ACTIVITY_MANAGER'>/**@hide */
+</span>TRACE_TAG_ACTIVITY_MANAGER : &quot;64&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_SYNC_MANAGER'>/**@hide */
+</span>TRACE_TAG_SYNC_MANAGER : &quot;128&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_AUDIO'>/**@hide */
+</span>TRACE_TAG_AUDIO : &quot;256&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_VIDEO'>/**@hide */
+</span>TRACE_TAG_VIDEO : &quot;512&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_CAMERA'>/**@hide */
+</span>TRACE_TAG_CAMERA : &quot;1024&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_HAL'>/**@hide */
+</span>TRACE_TAG_HAL : &quot;2048&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_APP'>/**@hide */
+</span>TRACE_TAG_APP : &quot;4096&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_RESOURCES'>/**@hide */
+</span>TRACE_TAG_RESOURCES : &quot;8192&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_DALVIK'>/**@hide */
+</span>TRACE_TAG_DALVIK : &quot;16384&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_RS'>/**@hide */
+</span>TRACE_TAG_RS : &quot;32768&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_BIONIC'>/**@hide */
+</span>TRACE_TAG_BIONIC : &quot;65536&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_POWER'>/**@hide */
+</span>TRACE_TAG_POWER : &quot;131072&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_PACKAGE_MANAGER'>/**@hide */
+</span>TRACE_TAG_PACKAGE_MANAGER : &quot;262144&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_SYSTEM_SERVER'>/**@hide */
+</span>TRACE_TAG_SYSTEM_SERVER : &quot;524288&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_DATABASE'>/**@hide */
+</span>TRACE_TAG_DATABASE : &quot;1048576&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_NETWORK'>/**@hide */
+</span>TRACE_TAG_NETWORK : &quot;2097152&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_ADB'>/**@hide */
+</span>TRACE_TAG_ADB : &quot;4194304&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_VIBRATOR'>/**@hide */
+</span>TRACE_TAG_VIBRATOR : &quot;8388608&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_AIDL'>/**@hide */
+</span>TRACE_TAG_AIDL : &quot;16777216&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_NNAPI'>/**@hide */
+</span>TRACE_TAG_NNAPI : &quot;33554432&quot;,
+<span id='android-os-Trace-property-TRACE_TAG_RRO'>/**@hide */
+</span>TRACE_TAG_RRO : &quot;67108864&quot;,
+<span id='android-os-Trace-method-isTagEnabled'>/**Returns true if a trace tag is enabled.
+</span>@param {Number} traceTag The trace tag to check.
+@return {Boolean} True if the trace tag is valid.
+@hide 
+*/
+isTagEnabled : function(  ) {},
+
+<span id='android-os-Trace-method-traceCounter'>/**Writes trace message to indicate the value of a given counter.
+</span>@param {Number} traceTag The trace tag.
+@param {String} counterName The counter name to appear in the trace.
+@param {Number} counterValue The counter value.
+@hide 
+*/
+traceCounter : function(  ) {},
+
+<span id='android-os-Trace-method-setAppTracingAllowed'>/**Set whether application tracing is allowed for this process.  This is intended to be set
+</span> once at application start-up time based on whether the application is debuggable.
+@hide 
+*/
+setAppTracingAllowed : function(  ) {},
+
+<span id='android-os-Trace-method-setTracingEnabled'>/**Set whether tracing is enabled in this process.  Tracing is disabled shortly after Zygote
+</span> initializes and re-enabled after processes fork from Zygote.  This is done because Zygote
+ has no way to be notified about changes to the tracing tags, and if Zygote ever reads and
+ caches the tracing tags, forked processes will inherit those stale tags.
+@hide 
+*/
+setTracingEnabled : function(  ) {},
+
+<span id='android-os-Trace-method-traceBegin'>/**Writes a trace message to indicate that a given section of code has
+</span> begun. Must be followed by a call to {@link #traceEnd} using the same
+ tag.
+@param {Number} traceTag The trace tag.
+@param {String} methodName The method name to appear in the trace.
+@hide 
+*/
+traceBegin : function(  ) {},
+
+<span id='android-os-Trace-method-traceEnd'>/**Writes a trace message to indicate that the current method has ended.
+</span> Must be called exactly once for each call to {@link #traceBegin} using the same tag.
+@param {Number} traceTag The trace tag.
+@hide 
+*/
+traceEnd : function(  ) {},
+
+<span id='android-os-Trace-method-asyncTraceBegin'>/**Writes a trace message to indicate that a given section of code has
+</span> begun. Must be followed by a call to {@link #asyncTraceEnd} using the same
+ tag. Unlike {@link #traceBegin(long, String)} and {@link #traceEnd}(long),
+ asynchronous events do not need to be nested. The name and cookie used to
+ begin an event must be used to end it.
+@param {Number} traceTag The trace tag.
+@param {String} methodName The method name to appear in the trace.
+@param {Number} cookie Unique identifier for distinguishing simultaneous events
+@hide 
+*/
+asyncTraceBegin : function(  ) {},
+
+<span id='android-os-Trace-method-asyncTraceEnd'>/**Writes a trace message to indicate that the current method has ended.
+</span> Must be called exactly once for each call to {@link #asyncTraceBegin(long, String, int)}
+ using the same tag, name and cookie.
+@param {Number} traceTag The trace tag.
+@param {String} methodName The method name to appear in the trace.
+@param {Number} cookie Unique identifier for distinguishing simultaneous events
+@hide 
+*/
+asyncTraceEnd : function(  ) {},
+
+<span id='android-os-Trace-method-isEnabled'>/**Checks whether or not tracing is currently enabled. This is useful to avoid intermediate
+</span> string creation for trace sections that require formatting. It is not necessary
+ to guard all Trace method calls as they internally already check this. However it is
+ recommended to use this to prevent creating any temporary objects that would then be
+ passed to those methods to reduce runtime cost when tracing isn't enabled.
+@return {Boolean} true if tracing is currently enabled, false otherwise
+*/
+isEnabled : function(  ) {},
+
+<span id='android-os-Trace-method-beginSection'>/**Writes a trace message to indicate that a given section of code has begun. This call must
+</span> be followed by a corresponding call to {@link #endSection}() on the same thread.
+
+ &lt;p class=&quot;note&quot;&gt; At this time the vertical bar character '|', newline character '\n', and
+ null character '\0' are used internally by the tracing mechanism.  If sectionName contains
+ these characters they will be replaced with a space character in the trace.
+@param {String} sectionName The name of the code section to appear in the trace.  This may be at
+ most 127 Unicode code units long.
+*/
+beginSection : function(  ) {},
+
+<span id='android-os-Trace-method-endSection'>/**Writes a trace message to indicate that a given section of code has ended. This call must
+</span> be preceeded by a corresponding call to {@link #beginSection}(String). Calling this method
+ will mark the end of the most recently begun section of code, so care must be taken to
+ ensure that beginSection / endSection pairs are properly nested and called from the same
+ thread.
+*/
+endSection : function(  ) {},
+
+<span id='android-os-Trace-method-beginAsyncSection'>/**Writes a trace message to indicate that a given section of code has
+</span> begun. Must be followed by a call to {@link #endAsyncSection(String, int)} with the same
+ methodName and cookie. Unlike {@link #beginSection}(String) and {@link #endSection}(),
+ asynchronous events do not need to be nested. The name and cookie used to
+ begin an event must be used to end it.
+@param {String} methodName The method name to appear in the trace.
+@param {Number} cookie Unique identifier for distinguishing simultaneous events
+*/
+beginAsyncSection : function(  ) {},
+
+<span id='android-os-Trace-method-endAsyncSection'>/**Writes a trace message to indicate that the current method has ended.
+</span> Must be called exactly once for each call to {@link #beginAsyncSection(String, int)}
+ using the same name and cookie.
+@param {String} methodName The method name to appear in the trace.
+@param {Number} cookie Unique identifier for distinguishing simultaneous events
+*/
+endAsyncSection : function(  ) {},
+
+<span id='android-os-Trace-method-setCounter'>/**Writes trace message to indicate the value of a given counter.
+</span>@param {String} counterName The counter name to appear in the trace.
+@param {Number} counterValue The counter value.
+*/
+setCounter : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

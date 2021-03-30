@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-RetryManager'>/**@class com.android.internal.telephony.RetryManager
+</span>@extends java.lang.Object
+
+ Retry manager allows a simple way to declare a series of
+ retry timeouts. After creating a RetryManager the configure
+ method is used to define the sequence. A simple linear series
+ may be initialized using configure with three integer parameters
+ The other configure method allows a series to be declared using
+ a string.
+&lt;p&gt;
+ The format of the configuration string is the apn type followed by a series of parameters
+ separated by a comma. There are two name value pair parameters plus a series
+ of delay times. The units of of these delay times is unspecified.
+ The name value pairs which may be specified are:
+&lt;ul&gt;
+&lt;li&gt;max_retries=&lt;value&gt;
+&lt;li&gt;default_randomizationTime=&lt;value&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+ apn type specifies the APN type that the retry pattern will apply for. &quot;others&quot; is for all other
+ APN types not specified in the config.
+
+ max_retries is the number of times that incrementRetryCount
+ maybe called before isRetryNeeded will return false. if value
+ is infinite then isRetryNeeded will always return true.
+
+ default_randomizationTime will be used as the randomizationTime
+ for delay times which have no supplied randomizationTime. If
+ default_randomizationTime is not defined it defaults to 0.
+&lt;p&gt;
+ The other parameters define The series of delay times and each
+ may have an optional randomization value separated from the
+ delay time by a colon.
+&lt;p&gt;
+ Examples:
+ &lt;ul&gt;
+ &lt;li&gt;3 retries for mms with no randomization value which means its 0:
+ &lt;ul&gt;&lt;li&gt;&lt;code&gt;&quot;mms:1000, 2000, 3000&quot;&lt;/code&gt;&lt;/ul&gt;
+
+ &lt;li&gt;10 retries for default APN with a 500 default randomization value for each and
+ the 4..10 retries all using 3000 as the delay:
+ &lt;ul&gt;&lt;li&gt;&lt;code&gt;&quot;default:max_retries=10, default_randomization=500, 1000, 2000, 3000&quot;&lt;/code&gt;&lt;/ul&gt;
+
+ &lt;li&gt;4 retries for supl APN with a 100 as the default randomization value for the first 2 values
+ and the other two having specified values of 500:
+ &lt;ul&gt;&lt;li&gt;&lt;code&gt;&quot;supl:default_randomization=100, 1000, 2000, 4000:500, 5000:500&quot;&lt;/code&gt;&lt;/ul&gt;
+
+ &lt;li&gt;Infinite number of retries for all other APNs with the first one at 1000, the second at 2000
+ all others will be at 3000.
+ &lt;ul&gt;&lt;li&gt;&lt;code&gt;&quot;others:max_retries=infinite,1000,2000,3000&lt;/code&gt;&lt;/ul&gt;
+ &lt;/ul&gt;
+
+ {@hide}
+*/
+var RetryManager = {
+
+<span id='com-android-internal-telephony-RetryManager-property-LOG_TAG'>/***/
+</span>LOG_TAG : &quot;RetryManager&quot;,
+<span id='com-android-internal-telephony-RetryManager-property-DBG'>/***/
+</span>DBG : &quot;true&quot;,
+<span id='com-android-internal-telephony-RetryManager-property-VDBG'>/***/
+</span>VDBG : &quot;false&quot;,
+<span id='com-android-internal-telephony-RetryManager-property-NO_RETRY'>/** The value indicating no retry is needed
+</span>*/
+NO_RETRY : &quot;-1&quot;,
+<span id='com-android-internal-telephony-RetryManager-property-NO_SUGGESTED_RETRY_DELAY'>/** The value indicating modem did not suggest any retry delay
+</span>*/
+NO_SUGGESTED_RETRY_DELAY : &quot;-2&quot;,
+<span id='com-android-internal-telephony-RetryManager-method-getNextApnSetting'>/**Get the next APN setting for data call setup.
+</span>@return {Object {android.telephony.data.ApnSetting}} APN setting to try
+*/
+getNextApnSetting : function(  ) {},
+
+<span id='com-android-internal-telephony-RetryManager-method-getDelayForNextApn'>/**Get the delay for trying the next waiting APN from the list.
+</span>@param {Boolean} failFastEnabled True if fail fast mode enabled. In this case we'll use a shorter
+                        delay.
+@return {Number} delay in milliseconds
+*/
+getDelayForNextApn : function(  ) {},
+
+<span id='com-android-internal-telephony-RetryManager-method-markApnPermanentFailed'>/**Mark the APN setting permanently failed.
+</span>@param {Object {ApnSetting}} apn APN setting to be marked as permanently failed
+*/
+markApnPermanentFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-RetryManager-method-setWaitingApns'>/**Set waiting APNs for retrying in case needed.
+</span>@param {Object {java.util.ArrayList}} waitingApns Waiting APN list
+*/
+setWaitingApns : function(  ) {},
+
+<span id='com-android-internal-telephony-RetryManager-method-getWaitingApns'>/**Get the list of waiting APNs.
+</span>@return {Object {java.util.ArrayList}} the list of waiting APNs
+*/
+getWaitingApns : function(  ) {},
+
+<span id='com-android-internal-telephony-RetryManager-method-setModemSuggestedDelay'>/**Save the modem suggested delay for retrying the current APN.
+</span> This method is called when we get the suggested delay from RIL.
+@param {Number} delay The delay in milliseconds
+*/
+setModemSuggestedDelay : function(  ) {},
+
+<span id='com-android-internal-telephony-RetryManager-method-getRetryAfterDisconnectDelay'>/**Get the delay in milliseconds for APN retry after disconnect
+</span>@return {Number} The delay in milliseconds
+*/
+getRetryAfterDisconnectDelay : function(  ) {},
+
+<span id='com-android-internal-telephony-RetryManager-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

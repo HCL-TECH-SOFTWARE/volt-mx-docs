@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-LinearLayoutManager'>/**@class com.android.internal.widget.LinearLayoutManager
+</span> implements com.android.internal.widget.helper.ItemTouchHelper.ViewDropHandler
+
+ implements com.android.internal.widget.RecyclerView.SmoothScroller.ScrollVectorProvider
+
+@extends com.android.internal.widget.RecyclerView.LayoutManager
+
+ A {@link com.android.internal.widget.RecyclerView.LayoutManager} implementation which provides
+ similar functionality to {@link android.widget.ListView}.
+*/
+var LinearLayoutManager = {
+
+<span id='com-android-internal-widget-LinearLayoutManager-property-HORIZONTAL'>/***/
+</span>HORIZONTAL : &quot;0&quot;,
+<span id='com-android-internal-widget-LinearLayoutManager-property-VERTICAL'>/***/
+</span>VERTICAL : &quot;1&quot;,
+<span id='com-android-internal-widget-LinearLayoutManager-property-INVALID_OFFSET'>/***/
+</span>INVALID_OFFSET : &quot;-2147483648&quot;,
+<span id='com-android-internal-widget-LinearLayoutManager-method-generateDefaultLayoutParams'>/**{@inheritDoc}
+</span>*/
+generateDefaultLayoutParams : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-getRecycleChildrenOnDetach'>/**Returns whether LayoutManager will recycle its children when it is detached from
+</span> RecyclerView.
+@return {Boolean} true if LayoutManager will recycle its children when it is detached from
+ RecyclerView.
+*/
+getRecycleChildrenOnDetach : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-setRecycleChildrenOnDetach'>/**Set whether LayoutManager will recycle its children when it is detached from
+</span> RecyclerView.
+ &lt;p&gt;
+ If you are using a {@link com.android.internal.widget.RecyclerView.RecycledViewPool}, it might be a good idea to set
+ this flag to &lt;code&gt;true&lt;/code&gt; so that views will be available to other RecyclerViews
+ immediately.
+ &lt;p&gt;
+ Note that, setting this flag will result in a performance drop if RecyclerView
+ is restored.
+@param {Boolean} recycleChildrenOnDetach Whether children should be recycled in detach or not.
+*/
+setRecycleChildrenOnDetach : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-onDetachedFromWindow'>/**
+</span>*/
+onDetachedFromWindow : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-onInitializeAccessibilityEvent'>/**
+</span>*/
+onInitializeAccessibilityEvent : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-onRestoreInstanceState'>/**
+</span>*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-canScrollHorizontally'>/**
+</span>@return {Boolean} true if {@link #getOrientation()} is {@link #HORIZONTAL}
+*/
+canScrollHorizontally : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-canScrollVertically'>/**
+</span>@return {Boolean} true if {@link #getOrientation()} is {@link #VERTICAL}
+*/
+canScrollVertically : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-setStackFromEnd'>/**Compatibility support for {@link android.widget.AbsListView#setStackFromBottom(boolean)}
+</span>*/
+setStackFromEnd : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-getStackFromEnd'>/**
+</span>*/
+getStackFromEnd : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-getOrientation'>/**Returns the current orientation of the layout.
+</span>@return {Number} Current orientation,  either {@link #HORIZONTAL} or {@link #VERTICAL}
+@see #setOrientation(int)
+*/
+getOrientation : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-setOrientation'>/**Sets the orientation of the layout. {@link com.android.internal.widget.LinearLayoutManager}
+</span> will do its best to keep scroll position.
+@param {Number} orientation {@link #HORIZONTAL} or {@link #VERTICAL}
+*/
+setOrientation : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-getReverseLayout'>/**Returns if views are laid out from the opposite direction of the layout.
+</span>@return {Boolean} If layout is reversed or not.
+@see #setReverseLayout(boolean)
+*/
+getReverseLayout : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-setReverseLayout'>/**Used to reverse item traversal and layout order.
+</span> This behaves similar to the layout change for RTL views. When set to true, first item is
+ laid out at the end of the UI, second item is laid out before it etc.
+
+ For horizontal layouts, it depends on the layout direction.
+ When set to true, If {@link com.android.internal.widget.RecyclerView} is LTR, than it will
+ layout from RTL, if {@link com.android.internal.widget.RecyclerView}} is RTL, it will layout
+ from LTR.
+
+ If you are looking for the exact same behavior of
+ {@link android.widget.AbsListView#setStackFromBottom(boolean)}, use
+ {@link #setStackFromEnd}(boolean)
+*/
+setReverseLayout : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-findViewByPosition'>/**{@inheritDoc}
+</span>*/
+findViewByPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-smoothScrollToPosition'>/**
+</span>*/
+smoothScrollToPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-computeScrollVectorForPosition'>/**
+</span>*/
+computeScrollVectorForPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-onLayoutChildren'>/**{@inheritDoc}
+</span>*/
+onLayoutChildren : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-onLayoutCompleted'>/**
+</span>*/
+onLayoutCompleted : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-scrollToPosition'>/**&lt;p&gt;Scroll the RecyclerView to make the position visible.&lt;/p&gt;
+</span>
+ &lt;p&gt;RecyclerView will scroll the minimum amount that is necessary to make the
+ target position visible. If you are looking for a similar behavior to
+ {@link android.widget.ListView#setSelection(int)} or
+ {@link android.widget.ListView#setSelectionFromTop(int, int)}, use
+ {@link #scrollToPositionWithOffset(int, int)}.&lt;/p&gt;
+
+ &lt;p&gt;Note that scroll position change will not be reflected until the next layout call.&lt;/p&gt;
+@param {Number} position Scroll to this adapter position
+@see #scrollToPositionWithOffset(int, int)
+*/
+scrollToPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-scrollToPositionWithOffset'>/**Scroll to the specified adapter position with the given offset from resolved layout
+</span> start. Resolved layout start depends on {@link #getReverseLayout}(),
+ {@link View#getLayoutDirection()} and {@link #getStackFromEnd}().
+ &lt;p&gt;
+ For example, if layout is {@link #VERTICAL} and {@link #getStackFromEnd}() is true, calling
+ &lt;code&gt;scrollToPositionWithOffset(10, 20)&lt;/code&gt; will layout such that
+ &lt;code&gt;item[10]&lt;/code&gt;'s bottom is 20 pixels above the RecyclerView's bottom.
+ &lt;p&gt;
+ Note that scroll position change will not be reflected until the next layout call.
+ &lt;p&gt;
+ If you are just trying to make a position visible, use {@link #scrollToPosition}(int).
+@param {Number} position Index (starting at 0) of the reference item.
+@param {Number} offset   The distance (in pixels) between the start edge of the item view and
+                 start edge of the RecyclerView.
+@see #setReverseLayout(boolean)
+@see #scrollToPosition(int)
+*/
+scrollToPositionWithOffset : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-scrollHorizontallyBy'>/**{@inheritDoc}
+</span>*/
+scrollHorizontallyBy : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-scrollVerticallyBy'>/**{@inheritDoc}
+</span>*/
+scrollVerticallyBy : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-computeHorizontalScrollOffset'>/**
+</span>*/
+computeHorizontalScrollOffset : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-computeVerticalScrollOffset'>/**
+</span>*/
+computeVerticalScrollOffset : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-computeHorizontalScrollExtent'>/**
+</span>*/
+computeHorizontalScrollExtent : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-computeVerticalScrollExtent'>/**
+</span>*/
+computeVerticalScrollExtent : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-computeHorizontalScrollRange'>/**
+</span>*/
+computeHorizontalScrollRange : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-computeVerticalScrollRange'>/**
+</span>*/
+computeVerticalScrollRange : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-setSmoothScrollbarEnabled'>/**When smooth scrollbar is enabled, the position and size of the scrollbar thumb is computed
+</span> based on the number of visible pixels in the visible items. This however assumes that all
+ list items have similar or equal widths or heights (depending on list orientation).
+ If you use a list in which items have different dimensions, the scrollbar will change
+ appearance as the user scrolls through the list. To avoid this issue,  you need to disable
+ this property.
+
+ When smooth scrollbar is disabled, the position and size of the scrollbar thumb is based
+ solely on the number of items in the adapter and the position of the visible items inside
+ the adapter. This provides a stable scrollbar as the user navigates through a list of items
+ with varying widths / heights.
+@param {Boolean} enabled Whether or not to enable smooth scrollbar.
+@see #setSmoothScrollbarEnabled(boolean)
+*/
+setSmoothScrollbarEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-isSmoothScrollbarEnabled'>/**Returns the current state of the smooth scrollbar feature. It is enabled by default.
+</span>@return {Boolean} True if smooth scrollbar is enabled, false otherwise.
+@see #setSmoothScrollbarEnabled(boolean)
+*/
+isSmoothScrollbarEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-collectInitialPrefetchPositions'>/**
+</span>*/
+collectInitialPrefetchPositions : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-setInitialPrefetchItemCount'>/**Sets the number of items to prefetch in
+</span> {@link #collectInitialPrefetchPositions(int, com.android.internal.widget.LayoutManager.LayoutPrefetchRegistry)}, which defines
+ how many inner items should be prefetched when this LayoutManager's RecyclerView
+ is nested inside another RecyclerView.
+
+ &lt;p&gt;Set this value to the number of items this inner LayoutManager will display when it is
+ first scrolled into the viewport. RecyclerView will attempt to prefetch that number of items
+ so they are ready, avoiding jank as the inner RecyclerView is scrolled into the viewport.&lt;/p&gt;
+
+ &lt;p&gt;For example, take a vertically scrolling RecyclerView with horizontally scrolling inner
+ RecyclerViews. The rows always have 4 items visible in them (or 5 if not aligned). Passing
+ &lt;code&gt;4&lt;/code&gt; to this method for each inner RecyclerView's LinearLayoutManager will enable
+ RecyclerView's prefetching feature to do create/bind work for 4 views within a row early,
+ before it is scrolled on screen, instead of just the default 2.&lt;/p&gt;
+
+ &lt;p&gt;Calling this method does nothing unless the LayoutManager is in a RecyclerView
+ nested in another RecyclerView.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting this value to be larger than the number of
+ views that will be visible in this view can incur unnecessary bind work, and an increase to
+ the number of Views created and in active use.&lt;/p&gt;
+@param {Number} itemCount Number of items to prefetch
+@see #isItemPrefetchEnabled()
+@see #getInitialItemPrefetchCount()
+@see #collectInitialPrefetchPositions(int, LayoutPrefetchRegistry)
+*/
+setInitialPrefetchItemCount : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-getInitialItemPrefetchCount'>/**Gets the number of items to prefetch in
+</span> {@link #collectInitialPrefetchPositions(int, com.android.internal.widget.LayoutManager.LayoutPrefetchRegistry)}, which defines
+ how many inner items should be prefetched when this LayoutManager's RecyclerView
+ is nested inside another RecyclerView.
+@see #isItemPrefetchEnabled()
+@see #setInitialPrefetchItemCount(int)
+@see #collectInitialPrefetchPositions(int, LayoutPrefetchRegistry)
+@return {Number} number of items to prefetch.
+*/
+getInitialItemPrefetchCount : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-collectAdjacentPrefetchPositions'>/**
+</span>*/
+collectAdjacentPrefetchPositions : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-assertNotInLayoutOrScroll'>/**
+</span>*/
+assertNotInLayoutOrScroll : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-findFirstVisibleItemPosition'>/**Returns the adapter position of the first visible view. This position does not include
+</span> adapter changes that were dispatched after the last layout pass.
+ &lt;p&gt;
+ Note that, this value is not affected by layout orientation or item order traversal.
+ ({@link #setReverseLayout}(boolean)). Views are sorted by their positions in the adapter,
+ not in the layout.
+ &lt;p&gt;
+ If RecyclerView has item decorators, they will be considered in calculations as well.
+ &lt;p&gt;
+ LayoutManager may pre-cache some views that are not necessarily visible. Those views
+ are ignored in this method.
+@return {Number} The adapter position of the first visible item or {@link RecyclerView#NO_POSITION} if
+ there aren't any visible items.
+@see #findFirstCompletelyVisibleItemPosition()
+@see #findLastVisibleItemPosition()
+*/
+findFirstVisibleItemPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-findFirstCompletelyVisibleItemPosition'>/**Returns the adapter position of the first fully visible view. This position does not include
+</span> adapter changes that were dispatched after the last layout pass.
+ &lt;p&gt;
+ Note that bounds check is only performed in the current orientation. That means, if
+ LayoutManager is horizontal, it will only check the view's left and right edges.
+@return {Number} The adapter position of the first fully visible item or
+ {@link RecyclerView#NO_POSITION} if there aren't any visible items.
+@see #findFirstVisibleItemPosition()
+@see #findLastCompletelyVisibleItemPosition()
+*/
+findFirstCompletelyVisibleItemPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-findLastVisibleItemPosition'>/**Returns the adapter position of the last visible view. This position does not include
+</span> adapter changes that were dispatched after the last layout pass.
+ &lt;p&gt;
+ Note that, this value is not affected by layout orientation or item order traversal.
+ ({@link #setReverseLayout}(boolean)). Views are sorted by their positions in the adapter,
+ not in the layout.
+ &lt;p&gt;
+ If RecyclerView has item decorators, they will be considered in calculations as well.
+ &lt;p&gt;
+ LayoutManager may pre-cache some views that are not necessarily visible. Those views
+ are ignored in this method.
+@return {Number} The adapter position of the last visible view or {@link RecyclerView#NO_POSITION} if
+ there aren't any visible items.
+@see #findLastCompletelyVisibleItemPosition()
+@see #findFirstVisibleItemPosition()
+*/
+findLastVisibleItemPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-findLastCompletelyVisibleItemPosition'>/**Returns the adapter position of the last fully visible view. This position does not include
+</span> adapter changes that were dispatched after the last layout pass.
+ &lt;p&gt;
+ Note that bounds check is only performed in the current orientation. That means, if
+ LayoutManager is horizontal, it will only check the view's left and right edges.
+@return {Number} The adapter position of the last fully visible view or
+ {@link RecyclerView#NO_POSITION} if there aren't any visible items.
+@see #findLastVisibleItemPosition()
+@see #findFirstCompletelyVisibleItemPosition()
+*/
+findLastCompletelyVisibleItemPosition : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-onFocusSearchFailed'>/**
+</span>*/
+onFocusSearchFailed : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-supportsPredictiveItemAnimations'>/**
+</span>*/
+supportsPredictiveItemAnimations : function(  ) {},
+
+<span id='com-android-internal-widget-LinearLayoutManager-method-prepareForDrop'>/**
+</span>@hide This method should be called by ItemTouchHelper only.
+*/
+prepareForDrop : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-NetworkStats'>/**@class android.net.NetworkStats
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Collection of active network statistics. Can contain summary details across
+ all interfaces, or details with per-UID granularity. Internally stores data
+ as a large table, closely matching {@code /proc/} data format. This structure
+ optimizes for rapid in-memory comparison, but consider using
+ {@link android.net.NetworkStatsHistory} when persisting.
+
+ @hide
+*/
+var NetworkStats = {
+
+<span id='android-net-NetworkStats-property-IFACE_ALL'>/**{@link #iface} value when interface details unavailable. */
+</span>IFACE_ALL : &quot;null&quot;,
+<span id='android-net-NetworkStats-property-UID_ALL'>/**{@link #uid} value when UID details unavailable. */
+</span>UID_ALL : &quot;-1&quot;,
+<span id='android-net-NetworkStats-property-TAG_ALL'>/**{@link #tag} value matching any tag. */
+</span>TAG_ALL : &quot;-1&quot;,
+<span id='android-net-NetworkStats-property-SET_ALL'>/**{@link #set} value for all sets combined, not including debug sets. */
+</span>SET_ALL : &quot;-1&quot;,
+<span id='android-net-NetworkStats-property-SET_DEFAULT'>/**{@link #set} value where background data is accounted. */
+</span>SET_DEFAULT : &quot;0&quot;,
+<span id='android-net-NetworkStats-property-SET_FOREGROUND'>/**{@link #set} value where foreground data is accounted. */
+</span>SET_FOREGROUND : &quot;1&quot;,
+<span id='android-net-NetworkStats-property-SET_DEBUG_START'>/**All {@link #set} value greater than SET_DEBUG_START are debug {@link #set} values. */
+</span>SET_DEBUG_START : &quot;1000&quot;,
+<span id='android-net-NetworkStats-property-SET_DBG_VPN_IN'>/**Debug {@link #set} value when the VPN stats are moved in. */
+</span>SET_DBG_VPN_IN : &quot;1001&quot;,
+<span id='android-net-NetworkStats-property-SET_DBG_VPN_OUT'>/**Debug {@link #set} value when the VPN stats are moved out of a vpn UID. */
+</span>SET_DBG_VPN_OUT : &quot;1002&quot;,
+<span id='android-net-NetworkStats-property-INTERFACES_ALL'>/**Include all interfaces when filtering */
+</span>INTERFACES_ALL : &quot;null&quot;,
+<span id='android-net-NetworkStats-property-TAG_NONE'>/**{@link #tag} value for total data across all tags. */
+</span>TAG_NONE : &quot;0&quot;,
+<span id='android-net-NetworkStats-property-METERED_ALL'>/**{@link #metered} value to account for all metered states. */
+</span>METERED_ALL : &quot;-1&quot;,
+<span id='android-net-NetworkStats-property-METERED_NO'>/**{@link #metered} value where native, unmetered data is accounted. */
+</span>METERED_NO : &quot;0&quot;,
+<span id='android-net-NetworkStats-property-METERED_YES'>/**{@link #metered} value where metered data is accounted. */
+</span>METERED_YES : &quot;1&quot;,
+<span id='android-net-NetworkStats-property-ROAMING_ALL'>/**{@link #roaming} value to account for all roaming states. */
+</span>ROAMING_ALL : &quot;-1&quot;,
+<span id='android-net-NetworkStats-property-ROAMING_NO'>/**{@link #roaming} value where native, non-roaming data is accounted. */
+</span>ROAMING_NO : &quot;0&quot;,
+<span id='android-net-NetworkStats-property-ROAMING_YES'>/**{@link #roaming} value where roaming data is accounted. */
+</span>ROAMING_YES : &quot;1&quot;,
+<span id='android-net-NetworkStats-property-DEFAULT_NETWORK_ALL'>/**{@link #onDefaultNetwork} value to account for all default network states. */
+</span>DEFAULT_NETWORK_ALL : &quot;-1&quot;,
+<span id='android-net-NetworkStats-property-DEFAULT_NETWORK_NO'>/**{@link #onDefaultNetwork} value to account for usage while not the default network. */
+</span>DEFAULT_NETWORK_NO : &quot;0&quot;,
+<span id='android-net-NetworkStats-property-DEFAULT_NETWORK_YES'>/**{@link #onDefaultNetwork} value to account for usage while the default network. */
+</span>DEFAULT_NETWORK_YES : &quot;1&quot;,
+<span id='android-net-NetworkStats-property-STATS_PER_IFACE'>/**Denotes a request for stats at the interface level. */
+</span>STATS_PER_IFACE : &quot;0&quot;,
+<span id='android-net-NetworkStats-property-STATS_PER_UID'>/**Denotes a request for stats at the interface and UID level. */
+</span>STATS_PER_UID : &quot;1&quot;,
+<span id='android-net-NetworkStats-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-NetworkStats-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-NetworkStats-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+<span id='android-net-NetworkStats-method-clear'>/**Clear all data stored in this object.
+</span>*/
+clear : function(  ) {},
+
+<span id='android-net-NetworkStats-method-addIfaceValues'>/**
+</span>*/
+addIfaceValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-addValues'>/**
+</span>*/
+addValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-addValues'>/**
+</span>*/
+addValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-addValues'>/**Add new stats entry, copying from given {@link android.net.NetworkStats.Entry}. The {@link android.net.NetworkStats.Entry}
+</span> object can be recycled across multiple calls.
+*/
+addValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getValues'>/**Return specific stats entry.
+</span>*/
+getValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getElapsedRealtime'>/**
+</span>*/
+getElapsedRealtime : function(  ) {},
+
+<span id='android-net-NetworkStats-method-setElapsedRealtime'>/**
+</span>*/
+setElapsedRealtime : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getElapsedRealtimeAge'>/**Return age of this {@link android.net.NetworkStats} object with respect to
+</span> {@link SystemClock#elapsedRealtime()}.
+*/
+getElapsedRealtimeAge : function(  ) {},
+
+<span id='android-net-NetworkStats-method-size'>/**
+</span>*/
+size : function(  ) {},
+
+<span id='android-net-NetworkStats-method-internalSize'>/**
+</span>*/
+internalSize : function(  ) {},
+
+<span id='android-net-NetworkStats-method-combineValues'>/**
+</span>*/
+combineValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-combineValues'>/**
+</span>*/
+combineValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-combineValues'>/**Combine given values with an existing row, or create a new row if
+</span> {@link #findIndex(String, int, int, int, int)} is unable to find match. Can
+ also be used to subtract values from existing rows.
+*/
+combineValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-combineAllValues'>/**Combine all values from another {@link android.net.NetworkStats} into this object.
+</span>*/
+combineAllValues : function(  ) {},
+
+<span id='android-net-NetworkStats-method-findIndex'>/**Find first stats index that matches the requested parameters.
+</span>*/
+findIndex : function(  ) {},
+
+<span id='android-net-NetworkStats-method-findIndexHinted'>/**Find first stats index that matches the requested parameters, starting
+</span> search around the hinted index as an optimization.
+*/
+findIndexHinted : function(  ) {},
+
+<span id='android-net-NetworkStats-method-spliceOperationsFrom'>/**Splice in {@link #operations} from the given {@link android.net.NetworkStats} based
+</span> on matching {@link #uid} and {@link #tag} rows. Ignores {@link #iface},
+ since operation counts are at data layer.
+*/
+spliceOperationsFrom : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getUniqueIfaces'>/**Return list of unique interfaces known by this data structure.
+</span>*/
+getUniqueIfaces : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getUniqueUids'>/**Return list of unique UIDs known by this data structure.
+</span>*/
+getUniqueUids : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getTotalBytes'>/**Return total bytes represented by this snapshot object, usually used when
+</span> checking if a {@link #subtract}(NetworkStats) delta passes a threshold.
+*/
+getTotalBytes : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getTotal'>/**Return total of all fields represented by this snapshot object.
+</span>*/
+getTotal : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getTotal'>/**Return total of all fields represented by this snapshot object matching
+</span> the requested {@link #uid}.
+*/
+getTotal : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getTotal'>/**Return total of all fields represented by this snapshot object matching
+</span> the requested {@link #iface}.
+*/
+getTotal : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getTotalIncludingTags'>/**
+</span>*/
+getTotalIncludingTags : function(  ) {},
+
+<span id='android-net-NetworkStats-method-getTotalPackets'>/**Fast path for battery stats.
+</span>*/
+getTotalPackets : function(  ) {},
+
+<span id='android-net-NetworkStats-method-subtract'>/**Subtract the given {@link android.net.NetworkStats}, effectively leaving the delta
+</span> between two snapshots in time. Assumes that statistics rows collect over
+ time, and that none of them have disappeared.
+*/
+subtract : function(  ) {},
+
+<span id='android-net-NetworkStats-method-subtract'>/**Subtract the two given {@link android.net.NetworkStats} objects, returning the delta
+</span> between two snapshots in time. Assumes that statistics rows collect over
+ time, and that none of them have disappeared.
+ &lt;p&gt;
+ If counters have rolled backwards, they are clamped to {@code 0} and
+ reported to the given {@link android.net.NetworkStats.NonMonotonicObserver}.
+*/
+subtract : function(  ) {},
+
+<span id='android-net-NetworkStats-method-subtract'>/**Subtract the two given {@link android.net.NetworkStats} objects, returning the delta
+</span> between two snapshots in time. Assumes that statistics rows collect over
+ time, and that none of them have disappeared.
+ &lt;p&gt;
+ If counters have rolled backwards, they are clamped to {@code 0} and
+ reported to the given {@link android.net.NetworkStats.NonMonotonicObserver}.
+ &lt;p&gt;
+ If &lt;var&gt;recycle&lt;/var&gt; is supplied, this NetworkStats object will be
+ reused (and returned) as the result if it is large enough to contain
+ the data.
+*/
+subtract : function(  ) {},
+
+<span id='android-net-NetworkStats-method-apply464xlatAdjustments'>/**Calculate and apply adjustments to captured statistics for 464xlat traffic counted twice.
+</span>
+ &lt;p&gt;This mutates both base and stacked traffic stats, to account respectively for
+ double-counted traffic and IPv4/IPv6 header size difference.
+
+ &lt;p&gt;For 464xlat traffic, xt_qtaguid sees every IPv4 packet twice, once as a native IPv4
+ packet on the stacked interface, and once as translated to an IPv6 packet on the
+ base interface. For correct stats accounting on the base interface, if using xt_qtaguid,
+ every rx 464xlat packet needs to be subtracted from the root UID on the base interface
+ (http://b/12249687, http:/b/33681750), and every tx 464xlat packet which was counted onto
+ clat uid should be ignored.
+
+ As for eBPF, the per uid stats is collected by different hook, the rx packets on base
+ interface will not be counted. Thus, the adjustment on root uid is not needed. However, the
+ tx traffic counted in the same way xt_qtaguid does, so the traffic on clat uid still
+ needs to be ignored.
+
+ &lt;p&gt;This method will behave fine if {@code stackedIfaces} is an non-synchronized but add-only
+ {@code ConcurrentHashMap}
+@param {Object {NetworkStats}} baseTraffic Traffic on the base interfaces. Will be mutated.
+@param {Object {NetworkStats}} stackedTraffic Stats with traffic stacked on top of our ifaces. Will also be mutated.
+@param {Object {java.util.Map}} stackedIfaces Mapping ipv6if -&gt; ipv4if interface where traffic is counted on both.
+@param {Boolean} useBpfStats True if eBPF is in use.
+*/
+apply464xlatAdjustments : function(  ) {},
+
+<span id='android-net-NetworkStats-method-apply464xlatAdjustments'>/**Calculate and apply adjustments to captured statistics for 464xlat traffic counted twice.
+</span>
+ &lt;p&gt;This mutates the object this method is called on. Equivalent to calling
+ {@link #apply464xlatAdjustments(android.net.NetworkStats, android.net.NetworkStats, Map)} with {@code this} as
+ base and stacked traffic.
+@param {Object {java.util.Map}} stackedIfaces Mapping ipv6if -&gt; ipv4if interface where traffic is counted on both.
+*/
+apply464xlatAdjustments : function(  ) {},
+
+<span id='android-net-NetworkStats-method-groupedByIface'>/**Return total statistics grouped by {@link #iface}; doesn't mutate the
+</span> original structure.
+*/
+groupedByIface : function(  ) {},
+
+<span id='android-net-NetworkStats-method-groupedByUid'>/**Return total statistics grouped by {@link #uid}; doesn't mutate the
+</span> original structure.
+*/
+groupedByUid : function(  ) {},
+
+<span id='android-net-NetworkStats-method-removeUids'>/**Remove all rows that match one of specified UIDs.
+</span>*/
+removeUids : function(  ) {},
+
+<span id='android-net-NetworkStats-method-filter'>/**Only keep entries that match all specified filters.
+</span>
+ &lt;p&gt;This mutates the original structure in place. After this method is called,
+ size is the number of matching entries, and capacity is the previous capacity.
+@param {Number} limitUid UID to filter for, or {@link #UID_ALL}.
+@param {Object {java.lang.String[]}} limitIfaces Interfaces to filter for, or {@link #INTERFACES_ALL}.
+@param {Number} limitTag Tag to filter for, or {@link #TAG_ALL}.
+*/
+filter : function(  ) {},
+
+<span id='android-net-NetworkStats-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-net-NetworkStats-method-setToString'>/**Return text description of {@link #set} value.
+</span>*/
+setToString : function(  ) {},
+
+<span id='android-net-NetworkStats-method-setToCheckinString'>/**Return text description of {@link #set} value.
+</span>*/
+setToCheckinString : function(  ) {},
+
+<span id='android-net-NetworkStats-method-setMatches'>/**
+</span>@return {Boolean} true if the querySet matches the dataSet.
+*/
+setMatches : function(  ) {},
+
+<span id='android-net-NetworkStats-method-tagToString'>/**Return text description of {@link #tag} value.
+</span>*/
+tagToString : function(  ) {},
+
+<span id='android-net-NetworkStats-method-meteredToString'>/**Return text description of {@link #metered} value.
+</span>*/
+meteredToString : function(  ) {},
+
+<span id='android-net-NetworkStats-method-roamingToString'>/**Return text description of {@link #roaming} value.
+</span>*/
+roamingToString : function(  ) {},
+
+<span id='android-net-NetworkStats-method-defaultNetworkToString'>/**Return text description of {@link #defaultNetwork} value.
+</span>*/
+defaultNetworkToString : function(  ) {},
+
+<span id='android-net-NetworkStats-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-NetworkStats-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-NetworkStats-method-migrateTun'>/**VPN accounting. Move some VPN's underlying traffic to other UIDs that use tun0 iface.
+</span>
+ This method should only be called on delta NetworkStats. Do not call this method on a
+ snapshot {@link android.net.NetworkStats} object because the tunUid and/or the underlyingIface may
+ change over time.
+
+ This method performs adjustments for one active VPN package and one VPN iface at a time.
+
+ It is possible for the VPN software to use multiple underlying networks. This method
+ only migrates traffic for the primary underlying network.
+@param {Number} tunUid uid of the VPN application
+@param {String} tunIface iface of the vpn tunnel
+@param {String} underlyingIface the primary underlying network iface used by the VPN application
+@return {Boolean} true if it successfully adjusts the accounting for VPN, false otherwise
+*/
+migrateTun : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

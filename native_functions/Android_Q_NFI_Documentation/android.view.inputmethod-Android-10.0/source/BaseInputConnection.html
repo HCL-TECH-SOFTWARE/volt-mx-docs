@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-inputmethod-BaseInputConnection'>/**@class android.view.inputmethod.BaseInputConnection
+</span> implements android.view.inputmethod.InputConnection
+
+@extends java.lang.Object
+
+ Base class for implementors of the InputConnection interface, taking care
+ of most of the common behavior for providing a connection to an Editable.
+ Implementors of this class will want to be sure to implement
+ {@link #getEditable} to provide access to their own editable object, and
+ to refer to the documentation in {@link android.view.inputmethod.InputConnection}.
+*/
+var BaseInputConnection = {
+
+<span id='android-view-inputmethod-BaseInputConnection-method-removeComposingSpans'>/**
+</span>*/
+removeComposingSpans : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-setComposingSpans'>/**
+</span>*/
+setComposingSpans : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-setComposingSpans'>/**
+</span>@hide 
+*/
+setComposingSpans : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getComposingSpanStart'>/**
+</span>*/
+getComposingSpanStart : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getComposingSpanEnd'>/**
+</span>*/
+getComposingSpanEnd : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getEditable'>/**Return the target of edit operations.  The default implementation
+</span> returns its own fake editable that is just used for composing text;
+ subclasses that are real text editors should override this and
+ supply their own.
+*/
+getEditable : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-beginBatchEdit'>/**Default implementation does nothing.
+</span>*/
+beginBatchEdit : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-endBatchEdit'>/**Default implementation does nothing.
+</span>*/
+endBatchEdit : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-closeConnection'>/**Default implementation calls {@link #finishComposingText}().
+</span>*/
+closeConnection : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-clearMetaKeyStates'>/**Default implementation uses
+</span> {@link MetaKeyKeyListener#clearMetaKeyState(long, int)
+ MetaKeyKeyListener.clearMetaKeyState(long, int)} to clear the state.
+*/
+clearMetaKeyStates : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-commitCompletion'>/**Default implementation does nothing and returns false.
+</span>*/
+commitCompletion : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-commitCorrection'>/**Default implementation does nothing and returns false.
+</span>*/
+commitCorrection : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-commitText'>/**Default implementation replaces any existing composing text with
+</span> the given text.  In addition, only if dummy mode, a key event is
+ sent for the new text and the current editable buffer cleared.
+*/
+commitText : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-deleteSurroundingText'>/**The default implementation performs the deletion around the current selection position of the
+</span> editable text.
+@param {Number} beforeLength The number of characters before the cursor to be deleted, in code unit.
+        If this is greater than the number of existing characters between the beginning of the
+        text and the cursor, then this method does not fail but deletes all the characters in
+        that range.
+@param {Number} afterLength The number of characters after the cursor to be deleted, in code unit.
+        If this is greater than the number of existing characters between the cursor and
+        the end of the text, then this method does not fail but deletes all the characters in
+        that range.
+*/
+deleteSurroundingText : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-deleteSurroundingTextInCodePoints'>/**The default implementation performs the deletion around the current selection position of the
+</span> editable text.
+@param {Number} beforeLength The number of characters before the cursor to be deleted, in code points.
+        If this is greater than the number of existing characters between the beginning of the
+        text and the cursor, then this method does not fail but deletes all the characters in
+        that range.
+@param {Number} afterLength The number of characters after the cursor to be deleted, in code points.
+        If this is greater than the number of existing characters between the cursor and
+        the end of the text, then this method does not fail but deletes all the characters in
+        that range.
+*/
+deleteSurroundingTextInCodePoints : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-finishComposingText'>/**The default implementation removes the composing state from the
+</span> current editable text.  In addition, only if dummy mode, a key event is
+ sent for the new text and the current editable buffer cleared.
+*/
+finishComposingText : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getCursorCapsMode'>/**The default implementation uses TextUtils.getCapsMode to get the
+</span> cursor caps mode for the current selection position in the editable
+ text, unless in dummy mode in which case 0 is always returned.
+*/
+getCursorCapsMode : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getExtractedText'>/**The default implementation always returns null.
+</span>*/
+getExtractedText : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getTextBeforeCursor'>/**The default implementation returns the given amount of text from the
+</span> current cursor position in the buffer.
+*/
+getTextBeforeCursor : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getSelectedText'>/**The default implementation returns the text currently selected, or null if none is
+</span> selected.
+*/
+getSelectedText : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getTextAfterCursor'>/**The default implementation returns the given amount of text from the
+</span> current cursor position in the buffer.
+*/
+getTextAfterCursor : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-performEditorAction'>/**The default implementation turns this into the enter key.
+</span>*/
+performEditorAction : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-performContextMenuAction'>/**The default implementation does nothing.
+</span>*/
+performContextMenuAction : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-performPrivateCommand'>/**The default implementation does nothing.
+</span>*/
+performPrivateCommand : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-requestCursorUpdates'>/**The default implementation does nothing.
+</span>*/
+requestCursorUpdates : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-getHandler'>/**
+</span>*/
+getHandler : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-setComposingText'>/**The default implementation places the given text into the editable,
+</span> replacing any existing composing text.  The new text is marked as
+ in a composing state with the composing style.
+*/
+setComposingText : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-setComposingRegion'>/**
+</span>*/
+setComposingRegion : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-setSelection'>/**The default implementation changes the selection position in the
+</span> current editable text.
+*/
+setSelection : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-sendKeyEvent'>/**Provides standard implementation for sending a key event to the window
+</span> attached to the input connection's view.
+*/
+sendKeyEvent : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-reportFullscreenMode'>/**Updates InputMethodManager with the current fullscreen mode.
+</span>*/
+reportFullscreenMode : function(  ) {},
+
+<span id='android-view-inputmethod-BaseInputConnection-method-commitContent'>/**The default implementation does nothing.
+</span>*/
+commitContent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

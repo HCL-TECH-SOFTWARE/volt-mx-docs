@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-PhoneSwitcher'>/**@class com.android.internal.telephony.PhoneSwitcher
+</span>@extends android.os.Handler
+
+ Utility singleton to monitor subscription changes and incoming NetworkRequests
+ and determine which phone/phones are active.
+
+ Manages the ALLOW_DATA calls to modems and notifies phones about changes to
+ the active phones.  Note we don't wait for data attach (which may not happen anyway).
+*/
+var PhoneSwitcher = {
+
+<span id='com-android-internal-telephony-PhoneSwitcher-property-ECBM_DEFAULT_DATA_SWITCH_BASE_TIME_MS'>/***/
+</span>ECBM_DEFAULT_DATA_SWITCH_BASE_TIME_MS : &quot;null&quot;,
+<span id='com-android-internal-telephony-PhoneSwitcher-property-DEFAULT_DATA_OVERRIDE_TIMEOUT_MS'>/***/
+</span>DEFAULT_DATA_OVERRIDE_TIMEOUT_MS : &quot;null&quot;,
+<span id='com-android-internal-telephony-PhoneSwitcher-property-mPhoneStateListener'>/***/
+</span>mPhoneStateListener : &quot;null&quot;,
+<span id='com-android-internal-telephony-PhoneSwitcher-property-mValidationCallback'>/***/
+</span>mValidationCallback : &quot;null&quot;,
+<span id='com-android-internal-telephony-PhoneSwitcher-property-EVENT_PRECISE_CALL_STATE_CHANGED'>/***/
+</span>EVENT_PRECISE_CALL_STATE_CHANGED : &quot;109&quot;,
+<span id='com-android-internal-telephony-PhoneSwitcher-property-EVENT_DATA_ENABLED_CHANGED'>/***/
+</span>EVENT_DATA_ENABLED_CHANGED : &quot;114&quot;,
+<span id='com-android-internal-telephony-PhoneSwitcher-method-getInstance'>/**Method to get singleton instance.
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-make'>/**Method to create singleton instance.
+</span>*/
+make : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-handleMessage'>/**
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-onRadioCapChanged'>/**Used when the modem may have been rebooted and we
+</span> want to resend setDataAllowed or setPreferredDataSubscriptionId
+*/
+onRadioCapChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-overrideDefaultDataForEmergency'>/**Switch the Default data for the context of an outgoing emergency call.
+</span>
+ In some cases, we need to try to switch the Default Data subscription before placing the
+ emergency call on DSDS devices. This includes the following situation:
+ - The modem does not support processing GNSS SUPL requests on the non-default data
+ subscription. For some carriers that do not provide a control plane fallback mechanism, the
+ SUPL request will be dropped and we will not be able to get the user's location for the
+ emergency call. In this case, we need to swap default data temporarily.
+@param {Number} phoneId The phone to use to evaluate whether or not the default data should be moved
+                to this subscription.
+@param {Number} overrideTimeSec The amount of time to override the default data setting for after the
+                       emergency call ends.
+@param {Object {java.util.concurrent.CompletableFuture}} dataSwitchResult A {@link CompletableFuture} to be called with a {@link Boolean}
+                         result when the default data switch has either completed (true) or
+                         failed (false).
+*/
+overrideDefaultDataForEmergency : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-shouldApplyNetworkRequest'>/**
+</span>*/
+shouldApplyNetworkRequest : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-registerForActivePhoneSwitch'>/**If preferred phone changes, or phone activation status changes, registrants
+</span> will be notified.
+*/
+registerForActivePhoneSwitch : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-unregisterForActivePhoneSwitch'>/**
+</span>*/
+unregisterForActivePhoneSwitch : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-trySetOpportunisticDataSubscription'>/**Notify PhoneSwitcher to try to switch data to an opportunistic subscription.
+</span>
+ Set opportunistic data subscription. It's an indication to switch Internet data to this
+ subscription. It has to be an active subscription, and PhoneSwitcher will try to validate
+ it first if needed. If subId is DEFAULT_SUBSCRIPTION_ID, it means we are un-setting
+ opportunistic data sub and switch data back to primary sub.
+@param {Number} subId the opportunistic data subscription to switch to. pass DEFAULT_SUBSCRIPTION_ID
+              if un-setting it.
+@param {Boolean} needValidation whether Telephony will wait until the network is validated by
+              connectivity service before switching data to it. More details see
+              {@link NetworkCapabilities#NET_CAPABILITY_VALIDATED}.
+@param {Object {ISetOpportunisticDataCallback}} callback Callback will be triggered once it succeeds or failed.
+                 Pass null if don't care about the result.
+*/
+trySetOpportunisticDataSubscription : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-getOpportunisticDataSubscriptionId'>/**
+</span>*/
+getOpportunisticDataSubscriptionId : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-getPreferredDataPhoneId'>/**
+</span>*/
+getPreferredDataPhoneId : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneSwitcher-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

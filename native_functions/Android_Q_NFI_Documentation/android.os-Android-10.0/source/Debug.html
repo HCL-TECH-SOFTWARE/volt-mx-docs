@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Debug'>/**@class android.os.Debug
+</span>@extends java.lang.Object
+
+ Provides various debugging methods for Android applications, including
+ tracing and allocation counts.
+ &lt;p&gt;&lt;strong&gt;Logging Trace Files&lt;/strong&gt;&lt;/p&gt;
+ &lt;p&gt;Debug can create log files that give details about an application, such as
+ a call stack and start/stop times for any running methods. See &lt;a
+ href=&quot;{@docRoot}studio/profile/traceview.html&quot;&gt;Inspect Trace Logs with
+ Traceview&lt;/a&gt; for information about reading trace files. To start logging
+ trace files, call one of the startMethodTracing() methods. To stop tracing,
+ call {@link #stopMethodTracing}().
+*/
+var Debug = {
+
+<span id='android-os-Debug-property-TRACE_COUNT_ALLOCS'>/** Flags for startMethodTracing().  These can be ORed together.
+</span>
+ TRACE_COUNT_ALLOCS adds the results from startAllocCounting to the
+ trace key file.
+
+ @deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+TRACE_COUNT_ALLOCS : &quot;null&quot;,
+<span id='android-os-Debug-property-SHOW_FULL_DETAIL'>/** Flags for printLoadedClasses().  Default behavior is to only show
+</span> the class name.
+*/
+SHOW_FULL_DETAIL : &quot;1&quot;,
+<span id='android-os-Debug-property-SHOW_CLASSLOADER'>/***/
+</span>SHOW_CLASSLOADER : &quot;2&quot;,
+<span id='android-os-Debug-property-SHOW_INITIALIZED'>/***/
+</span>SHOW_INITIALIZED : &quot;4&quot;,
+<span id='android-os-Debug-property-MEMINFO_TOTAL'>/**@hide */
+</span>MEMINFO_TOTAL : &quot;0&quot;,
+<span id='android-os-Debug-property-MEMINFO_FREE'>/**@hide */
+</span>MEMINFO_FREE : &quot;1&quot;,
+<span id='android-os-Debug-property-MEMINFO_BUFFERS'>/**@hide */
+</span>MEMINFO_BUFFERS : &quot;2&quot;,
+<span id='android-os-Debug-property-MEMINFO_CACHED'>/**@hide */
+</span>MEMINFO_CACHED : &quot;3&quot;,
+<span id='android-os-Debug-property-MEMINFO_SHMEM'>/**@hide */
+</span>MEMINFO_SHMEM : &quot;4&quot;,
+<span id='android-os-Debug-property-MEMINFO_SLAB'>/**@hide */
+</span>MEMINFO_SLAB : &quot;5&quot;,
+<span id='android-os-Debug-property-MEMINFO_SLAB_RECLAIMABLE'>/**@hide */
+</span>MEMINFO_SLAB_RECLAIMABLE : &quot;6&quot;,
+<span id='android-os-Debug-property-MEMINFO_SLAB_UNRECLAIMABLE'>/**@hide */
+</span>MEMINFO_SLAB_UNRECLAIMABLE : &quot;7&quot;,
+<span id='android-os-Debug-property-MEMINFO_SWAP_TOTAL'>/**@hide */
+</span>MEMINFO_SWAP_TOTAL : &quot;8&quot;,
+<span id='android-os-Debug-property-MEMINFO_SWAP_FREE'>/**@hide */
+</span>MEMINFO_SWAP_FREE : &quot;9&quot;,
+<span id='android-os-Debug-property-MEMINFO_ZRAM_TOTAL'>/**@hide */
+</span>MEMINFO_ZRAM_TOTAL : &quot;10&quot;,
+<span id='android-os-Debug-property-MEMINFO_MAPPED'>/**@hide */
+</span>MEMINFO_MAPPED : &quot;11&quot;,
+<span id='android-os-Debug-property-MEMINFO_VM_ALLOC_USED'>/**@hide */
+</span>MEMINFO_VM_ALLOC_USED : &quot;12&quot;,
+<span id='android-os-Debug-property-MEMINFO_PAGE_TABLES'>/**@hide */
+</span>MEMINFO_PAGE_TABLES : &quot;13&quot;,
+<span id='android-os-Debug-property-MEMINFO_KERNEL_STACK'>/**@hide */
+</span>MEMINFO_KERNEL_STACK : &quot;14&quot;,
+<span id='android-os-Debug-property-MEMINFO_COUNT'>/**@hide */
+</span>MEMINFO_COUNT : &quot;15&quot;,
+<span id='android-os-Debug-method-waitForDebugger'>/**Wait until a debugger attaches.  As soon as the debugger attaches,
+</span> this returns, so you will need to place a breakpoint after the
+ waitForDebugger() call if you want to start tracing immediately.
+*/
+waitForDebugger : function(  ) {},
+
+<span id='android-os-Debug-method-waitingForDebugger'>/**Returns &quot;true&quot; if one or more threads is waiting for a debugger
+</span> to attach.
+*/
+waitingForDebugger : function(  ) {},
+
+<span id='android-os-Debug-method-isDebuggerConnected'>/**Determine if a debugger is currently attached.
+</span>*/
+isDebuggerConnected : function(  ) {},
+
+<span id='android-os-Debug-method-getVmFeatureList'>/**Returns an array of strings that identify VM features.  This is
+</span> used by DDMS to determine what sorts of operations the VM can
+ perform.
+@hide 
+*/
+getVmFeatureList : function(  ) {},
+
+<span id='android-os-Debug-method-changeDebugPort'>/**Change the JDWP port.
+</span>@deprecated no longer needed or useful
+*/
+changeDebugPort : function(  ) {},
+
+<span id='android-os-Debug-method-startNativeTracing'>/**Enable qemu tracing. For this to work requires running everything inside
+</span> the qemu emulator; otherwise, this method will have no effect. The trace
+ file is specified on the command line when the emulator is started. For
+ example, the following command line &lt;br /&gt;
+ &lt;code&gt;emulator -trace foo&lt;/code&gt;&lt;br /&gt;
+ will start running the emulator and create a trace file named &quot;foo&quot;. This
+ method simply enables writing the trace records to the trace file.
+
+ &lt;p&gt;
+ The main differences between this and {@link #startMethodTracing}() are
+ that tracing in the qemu emulator traces every cpu instruction of every
+ process, including kernel code, so we have more complete information,
+ including all context switches. We can also get more detailed information
+ such as cache misses. The sequence of calls is determined by
+ post-processing the instruction trace. The qemu tracing is also done
+ without modifying the application or perturbing the timing of calls
+ because no instrumentation is added to the application being traced.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ One limitation of using this method compared to using
+ {@link #startMethodTracing}() on the real device is that the emulator
+ does not model all of the real hardware effects such as memory and
+ bus contention.  The emulator also has a simple cache model and cannot
+ capture all the complexities of a real cache.
+ &lt;/p&gt;
+*/
+startNativeTracing : function(  ) {},
+
+<span id='android-os-Debug-method-stopNativeTracing'>/**Stop qemu tracing.  See {@link #startNativeTracing}() to start tracing.
+</span>
+ &lt;p&gt;Tracing can be started and stopped as many times as desired.  When
+ the qemu emulator itself is stopped then the buffered trace records
+ are flushed and written to the trace file.  In fact, it is not necessary
+ to call this method at all; simply killing qemu is sufficient.  But
+ starting and stopping a trace is useful for examining a specific
+ region of code.&lt;/p&gt;
+*/
+stopNativeTracing : function(  ) {},
+
+<span id='android-os-Debug-method-enableEmulatorTraceOutput'>/**Enable &quot;emulator traces&quot;, in which information about the current
+</span> method is made available to the &quot;emulator -trace&quot; feature.  There
+ is no corresponding &quot;disable&quot; call -- this is intended for use by
+ the framework when tracing should be turned on and left that way, so
+ that traces captured with F9/F10 will include the necessary data.
+
+ This puts the VM into &quot;profile&quot; mode, which has performance
+ consequences.
+
+ To temporarily enable tracing, use {@link #startNativeTracing}().
+*/
+enableEmulatorTraceOutput : function(  ) {},
+
+<span id='android-os-Debug-method-startMethodTracing'>/**Start method tracing with default log name and buffer size.
+</span> &lt;p&gt;
+ By default, the trace file is called &quot;dmtrace.trace&quot; and it's placed
+ under your package-specific directory on primary shared/external storage,
+ as returned by {@link Context#getExternalFilesDir(String)}.
+ &lt;p&gt;
+ See &lt;a href=&quot;{@docRoot}studio/profile/traceview.html&quot;&gt;Inspect Trace Logs
+ with Traceview&lt;/a&gt; for information about reading trace files.
+ &lt;p class=&quot;note&quot;&gt;
+ When method tracing is enabled, the VM will run more slowly than usual,
+ so the timings from the trace files should only be considered in relative
+ terms (e.g. was run #1 faster than run #2). The times for native methods
+ will not change, so don't try to use this to compare the performance of
+ interpreted and native implementations of the same method. As an
+ alternative, consider using sampling-based method tracing via
+ {@link #startMethodTracingSampling(String, int, int)} or &quot;native&quot; tracing
+ in the emulator via {@link #startNativeTracing}().
+ &lt;/p&gt;
+*/
+startMethodTracing : function(  ) {},
+
+<span id='android-os-Debug-method-startMethodTracing'>/**Start method tracing, specifying the trace log file path.
+</span> &lt;p&gt;
+ When a relative file path is given, the trace file will be placed under
+ your package-specific directory on primary shared/external storage, as
+ returned by {@link Context#getExternalFilesDir(String)}.
+ &lt;p&gt;
+ See &lt;a href=&quot;{@docRoot}studio/profile/traceview.html&quot;&gt;Inspect Trace Logs
+ with Traceview&lt;/a&gt; for information about reading trace files.
+ &lt;p class=&quot;note&quot;&gt;
+ When method tracing is enabled, the VM will run more slowly than usual,
+ so the timings from the trace files should only be considered in relative
+ terms (e.g. was run #1 faster than run #2). The times for native methods
+ will not change, so don't try to use this to compare the performance of
+ interpreted and native implementations of the same method. As an
+ alternative, consider using sampling-based method tracing via
+ {@link #startMethodTracingSampling(String, int, int)} or &quot;native&quot; tracing
+ in the emulator via {@link #startNativeTracing}().
+ &lt;/p&gt;
+@param {String} tracePath Path to the trace log file to create. If {@code null},
+            this will default to &quot;dmtrace.trace&quot;. If the file already
+            exists, it will be truncated. If the path given does not end
+            in &quot;.trace&quot;, it will be appended for you.
+*/
+startMethodTracing : function(  ) {},
+
+<span id='android-os-Debug-method-startMethodTracing'>/**Start method tracing, specifying the trace log file name and the buffer
+</span> size.
+ &lt;p&gt;
+ When a relative file path is given, the trace file will be placed under
+ your package-specific directory on primary shared/external storage, as
+ returned by {@link Context#getExternalFilesDir(String)}.
+ &lt;p&gt;
+ See &lt;a href=&quot;{@docRoot}studio/profile/traceview.html&quot;&gt;Inspect Trace Logs
+ with Traceview&lt;/a&gt; for information about reading trace files.
+ &lt;p class=&quot;note&quot;&gt;
+ When method tracing is enabled, the VM will run more slowly than usual,
+ so the timings from the trace files should only be considered in relative
+ terms (e.g. was run #1 faster than run #2). The times for native methods
+ will not change, so don't try to use this to compare the performance of
+ interpreted and native implementations of the same method. As an
+ alternative, consider using sampling-based method tracing via
+ {@link #startMethodTracingSampling(String, int, int)} or &quot;native&quot; tracing
+ in the emulator via {@link #startNativeTracing}().
+ &lt;/p&gt;
+@param {String} tracePath Path to the trace log file to create. If {@code null},
+            this will default to &quot;dmtrace.trace&quot;. If the file already
+            exists, it will be truncated. If the path given does not end
+            in &quot;.trace&quot;, it will be appended for you.
+@param {Number} bufferSize The maximum amount of trace data we gather. If not
+            given, it defaults to 8MB.
+*/
+startMethodTracing : function(  ) {},
+
+<span id='android-os-Debug-method-startMethodTracing'>/**Start method tracing, specifying the trace log file name, the buffer
+</span> size, and flags.
+ &lt;p&gt;
+ When a relative file path is given, the trace file will be placed under
+ your package-specific directory on primary shared/external storage, as
+ returned by {@link Context#getExternalFilesDir(String)}.
+ &lt;p&gt;
+ See &lt;a href=&quot;{@docRoot}studio/profile/traceview.html&quot;&gt;Inspect Trace Logs
+ with Traceview&lt;/a&gt; for information about reading trace files.
+ &lt;p class=&quot;note&quot;&gt;
+ When method tracing is enabled, the VM will run more slowly than usual,
+ so the timings from the trace files should only be considered in relative
+ terms (e.g. was run #1 faster than run #2). The times for native methods
+ will not change, so don't try to use this to compare the performance of
+ interpreted and native implementations of the same method. As an
+ alternative, consider using sampling-based method tracing via
+ {@link #startMethodTracingSampling(String, int, int)} or &quot;native&quot; tracing
+ in the emulator via {@link #startNativeTracing}().
+ &lt;/p&gt;
+@param {String} tracePath Path to the trace log file to create. If {@code null},
+            this will default to &quot;dmtrace.trace&quot;. If the file already
+            exists, it will be truncated. If the path given does not end
+            in &quot;.trace&quot;, it will be appended for you.
+@param {Number} bufferSize The maximum amount of trace data we gather. If not
+            given, it defaults to 8MB.
+@param {Number} flags Flags to control method tracing. The only one that is
+            currently defined is {@link #TRACE_COUNT_ALLOCS}.
+*/
+startMethodTracing : function(  ) {},
+
+<span id='android-os-Debug-method-startMethodTracingSampling'>/**Start sampling-based method tracing, specifying the trace log file name,
+</span> the buffer size, and the sampling interval.
+ &lt;p&gt;
+ When a relative file path is given, the trace file will be placed under
+ your package-specific directory on primary shared/external storage, as
+ returned by {@link Context#getExternalFilesDir(String)}.
+ &lt;p&gt;
+ See &lt;a href=&quot;{@docRoot}studio/profile/traceview.html&quot;&gt;Inspect Trace Logs
+ with Traceview&lt;/a&gt; for information about reading trace files.
+@param {String} tracePath Path to the trace log file to create. If {@code null},
+            this will default to &quot;dmtrace.trace&quot;. If the file already
+            exists, it will be truncated. If the path given does not end
+            in &quot;.trace&quot;, it will be appended for you.
+@param {Number} bufferSize The maximum amount of trace data we gather. If not
+            given, it defaults to 8MB.
+@param {Number} intervalUs The amount of time between each sample in microseconds.
+*/
+startMethodTracingSampling : function(  ) {},
+
+<span id='android-os-Debug-method-startMethodTracing'>/**Like startMethodTracing(String, int, int), but taking an already-opened
+</span> FileDescriptor in which the trace is written.  The file name is also
+ supplied simply for logging.  Makes a dup of the file descriptor.
+
+ Not exposed in the SDK unless we are really comfortable with supporting
+ this and find it would be useful.
+@hide 
+*/
+startMethodTracing : function(  ) {},
+
+<span id='android-os-Debug-method-startMethodTracingDdms'>/**Starts method tracing without a backing file.  When stopMethodTracing
+</span> is called, the result is sent directly to DDMS.  (If DDMS is not
+ attached when tracing ends, the profiling data will be discarded.)
+@hide 
+*/
+startMethodTracingDdms : function(  ) {},
+
+<span id='android-os-Debug-method-getMethodTracingMode'>/**Determine whether method tracing is currently active and what type is
+</span> active.
+@hide 
+*/
+getMethodTracingMode : function(  ) {},
+
+<span id='android-os-Debug-method-stopMethodTracing'>/**Stop method tracing.
+</span>*/
+stopMethodTracing : function(  ) {},
+
+<span id='android-os-Debug-method-threadCpuTimeNanos'>/**Get an indication of thread CPU usage.  The value returned
+</span> indicates the amount of time that the current thread has spent
+ executing code or waiting for certain types of I/O.
+
+ The time is expressed in nanoseconds, and is only meaningful
+ when compared to the result from an earlier call.  Note that
+ nanosecond resolution does not imply nanosecond accuracy.
+
+ On system which don't support this operation, the call returns -1.
+*/
+threadCpuTimeNanos : function(  ) {},
+
+<span id='android-os-Debug-method-startAllocCounting'>/**Start counting the number and aggregate size of memory allocations.
+</span>
+ &lt;p&gt;The {@link #startAllocCounting() start} method resets the counts and enables counting.
+ The {@link #stopAllocCounting() stop} method disables the counting so that the analysis
+ code doesn't cause additional allocations.  The various &lt;code&gt;get&lt;/code&gt; methods return
+ the specified value. And the various &lt;code&gt;reset&lt;/code&gt; methods reset the specified
+ count.&lt;/p&gt;
+
+ &lt;p&gt;Counts are kept for the system as a whole (global) and for each thread.
+ The per-thread counts for threads other than the current thread
+ are not cleared by the &quot;reset&quot; or &quot;start&quot; calls.&lt;/p&gt;
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+startAllocCounting : function(  ) {},
+
+<span id='android-os-Debug-method-stopAllocCounting'>/**Stop counting the number and aggregate size of memory allocations.
+</span>@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+stopAllocCounting : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalAllocCount'>/**Returns the global count of objects allocated by the runtime between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getGlobalAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalAllocCount'>/**Clears the global count of objects allocated.
+</span>@see #getGlobalAllocCount()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetGlobalAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalAllocSize'>/**Returns the global size, in bytes, of objects allocated by the runtime between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getGlobalAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalAllocSize'>/**Clears the global size of objects allocated.
+</span>@see #getGlobalAllocSize()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetGlobalAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalFreedCount'>/**Returns the global count of objects freed by the runtime between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getGlobalFreedCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalFreedCount'>/**Clears the global count of objects freed.
+</span>@see #getGlobalFreedCount()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetGlobalFreedCount : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalFreedSize'>/**Returns the global size, in bytes, of objects freed by the runtime between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getGlobalFreedSize : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalFreedSize'>/**Clears the global size of objects freed.
+</span>@see #getGlobalFreedSize()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetGlobalFreedSize : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalGcInvocationCount'>/**Returns the number of non-concurrent GC invocations between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getGlobalGcInvocationCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalGcInvocationCount'>/**Clears the count of non-concurrent GC invocations.
+</span>@see #getGlobalGcInvocationCount()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetGlobalGcInvocationCount : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalClassInitCount'>/**Returns the number of classes successfully initialized (ie those that executed without
+</span> throwing an exception) between a {@link #startAllocCounting() start} and
+ {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getGlobalClassInitCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalClassInitCount'>/**Clears the count of classes initialized.
+</span>@see #getGlobalClassInitCount()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetGlobalClassInitCount : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalClassInitTime'>/**Returns the time spent successfully initializing classes between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getGlobalClassInitTime : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalClassInitTime'>/**Clears the count of time spent initializing classes.
+</span>@see #getGlobalClassInitTime()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetGlobalClassInitTime : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalExternalAllocCount'>/**This method exists for compatibility and always returns 0.
+</span>@deprecated This method is now obsolete.
+*/
+getGlobalExternalAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalExternalAllocSize'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+resetGlobalExternalAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalExternalAllocCount'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+resetGlobalExternalAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalExternalAllocSize'>/**This method exists for compatibility and always returns 0.
+</span>@deprecated This method is now obsolete.
+*/
+getGlobalExternalAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalExternalFreedCount'>/**This method exists for compatibility and always returns 0.
+</span>@deprecated This method is now obsolete.
+*/
+getGlobalExternalFreedCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalExternalFreedCount'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+resetGlobalExternalFreedCount : function(  ) {},
+
+<span id='android-os-Debug-method-getGlobalExternalFreedSize'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+getGlobalExternalFreedSize : function(  ) {},
+
+<span id='android-os-Debug-method-resetGlobalExternalFreedSize'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+resetGlobalExternalFreedSize : function(  ) {},
+
+<span id='android-os-Debug-method-getThreadAllocCount'>/**Returns the thread-local count of objects allocated by the runtime between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getThreadAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetThreadAllocCount'>/**Clears the thread-local count of objects allocated.
+</span>@see #getThreadAllocCount()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetThreadAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-getThreadAllocSize'>/**Returns the thread-local size of objects allocated by the runtime between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@return {Number} The allocated size in bytes.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getThreadAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-resetThreadAllocSize'>/**Clears the thread-local count of objects allocated.
+</span>@see #getThreadAllocSize()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetThreadAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-getThreadExternalAllocCount'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+getThreadExternalAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetThreadExternalAllocCount'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+resetThreadExternalAllocCount : function(  ) {},
+
+<span id='android-os-Debug-method-getThreadExternalAllocSize'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+getThreadExternalAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-resetThreadExternalAllocSize'>/**This method exists for compatibility and has no effect.
+</span>@deprecated This method is now obsolete.
+*/
+resetThreadExternalAllocSize : function(  ) {},
+
+<span id='android-os-Debug-method-getThreadGcInvocationCount'>/**Returns the number of thread-local non-concurrent GC invocations between a
+</span> {@link #startAllocCounting() start} and {@link #stopAllocCounting() stop}.
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+getThreadGcInvocationCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetThreadGcInvocationCount'>/**Clears the thread-local count of non-concurrent GC invocations.
+</span>@see #getThreadGcInvocationCount()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetThreadGcInvocationCount : function(  ) {},
+
+<span id='android-os-Debug-method-resetAllCounts'>/**Clears all the global and thread-local memory allocation counters.
+</span>@see #startAllocCounting()
+@deprecated Accurate counting is a burden on the runtime and may be removed.
+*/
+resetAllCounts : function(  ) {},
+
+<span id='android-os-Debug-method-getRuntimeStat'>/**Returns the value of a particular runtime statistic or {@code null} if no
+</span> such runtime statistic exists.
+
+ &lt;p&gt;The following table lists the runtime statistics that the runtime supports.
+ Note runtime statistics may be added or removed in a future API level.&lt;/p&gt;
+
+ &lt;table&gt;
+     &lt;thead&gt;
+         &lt;tr&gt;
+             &lt;th&gt;Runtime statistic name&lt;/th&gt;
+             &lt;th&gt;Meaning&lt;/th&gt;
+             &lt;th&gt;Example&lt;/th&gt;
+             &lt;th&gt;Supported (API Levels)&lt;/th&gt;
+         &lt;/tr&gt;
+     &lt;/thead&gt;
+     &lt;tbody&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.gc-count&lt;/td&gt;
+             &lt;td&gt;The number of garbage collection runs.&lt;/td&gt;
+             &lt;td&gt;{@code 164}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.gc-time&lt;/td&gt;
+             &lt;td&gt;The total duration of garbage collection runs in ms.&lt;/td&gt;
+             &lt;td&gt;{@code 62364}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.bytes-allocated&lt;/td&gt;
+             &lt;td&gt;The total number of bytes that the application allocated.&lt;/td&gt;
+             &lt;td&gt;{@code 1463948408}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.bytes-freed&lt;/td&gt;
+             &lt;td&gt;The total number of bytes that garbage collection reclaimed.&lt;/td&gt;
+             &lt;td&gt;{@code 1313493084}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.blocking-gc-count&lt;/td&gt;
+             &lt;td&gt;The number of blocking garbage collection runs.&lt;/td&gt;
+             &lt;td&gt;{@code 2}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.blocking-gc-time&lt;/td&gt;
+             &lt;td&gt;The total duration of blocking garbage collection runs in ms.&lt;/td&gt;
+             &lt;td&gt;{@code 804}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.gc-count-rate-histogram&lt;/td&gt;
+             &lt;td&gt;Every 10 seconds, the gc-count-rate is computed as the number of garbage
+                 collection runs that have occurred over the last 10
+                 seconds. art.gc.gc-count-rate-histogram is a histogram of the gc-count-rate
+                 samples taken since the process began. The histogram can be used to identify
+                 instances of high rates of garbage collection runs. For example, a histogram
+                 of &quot;0:34503,1:45350,2:11281,3:8088,4:43,5:8&quot; shows that most of the time
+                 there are between 0 and 2 garbage collection runs every 10 seconds, but there
+                 were 8 distinct 10-second intervals in which 5 garbage collection runs
+                 occurred.&lt;/td&gt;
+             &lt;td&gt;{@code 0:34503,1:45350,2:11281,3:8088,4:43,5:8}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+             &lt;td&gt;art.gc.blocking-gc-count-rate-histogram&lt;/td&gt;
+             &lt;td&gt;Every 10 seconds, the blocking-gc-count-rate is computed as the number of
+                 blocking garbage collection runs that have occurred over the last 10
+                 seconds. art.gc.blocking-gc-count-rate-histogram is a histogram of the
+                 blocking-gc-count-rate samples taken since the process began. The histogram
+                 can be used to identify instances of high rates of blocking garbage
+                 collection runs. For example, a histogram of &quot;0:99269,1:1,2:1&quot; shows that
+                 most of the time there are zero blocking garbage collection runs every 10
+                 seconds, but there was one 10-second interval in which one blocking garbage
+                 collection run occurred, and there was one interval in which two blocking
+                 garbage collection runs occurred.&lt;/td&gt;
+             &lt;td&gt;{@code 0:99269,1:1,2:1}&lt;/td&gt;
+             &lt;td&gt;23&lt;/td&gt;
+         &lt;/tr&gt;
+     &lt;/tbody&gt;
+ &lt;/table&gt;
+@param {String} statName
+            the name of the runtime statistic to look up.
+@return {String} the value of the specified runtime statistic or {@code null} if the
+         runtime statistic doesn't exist.
+*/
+getRuntimeStat : function(  ) {},
+
+<span id='android-os-Debug-method-getRuntimeStats'>/**Returns a map of the names/values of the runtime statistics
+</span> that {@link #getRuntimeStat}(String) supports.
+@return {Object {java.util.Map}} a map of the names/values of the supported runtime statistics.
+*/
+getRuntimeStats : function(  ) {},
+
+<span id='android-os-Debug-method-getNativeHeapSize'>/**Returns the size of the native heap.
+</span>@return {Number} The size of the native heap in bytes.
+*/
+getNativeHeapSize : function(  ) {},
+
+<span id='android-os-Debug-method-getNativeHeapAllocatedSize'>/**Returns the amount of allocated memory in the native heap.
+</span>@return {Number} The allocated size in bytes.
+*/
+getNativeHeapAllocatedSize : function(  ) {},
+
+<span id='android-os-Debug-method-getNativeHeapFreeSize'>/**Returns the amount of free memory in the native heap.
+</span>@return {Number} The freed size in bytes.
+*/
+getNativeHeapFreeSize : function(  ) {},
+
+<span id='android-os-Debug-method-getMemoryInfo'>/**Retrieves information about this processes memory usages. This information is broken down by
+</span> how much is in use by dalvik, the native heap, and everything else.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this method directly retrieves memory information for the given process
+ from low-level data available to it.  It may not be able to retrieve information about
+ some protected allocations, such as graphics.  If you want to be sure you can see
+ all information about allocations by the process, use
+ {@link android.app.ActivityManager#getProcessMemoryInfo(int[])} instead.&lt;/p&gt;
+*/
+getMemoryInfo : function(  ) {},
+
+<span id='android-os-Debug-method-getMemoryInfo'>/**Note: currently only works when the requested pid has the same UID
+</span> as the caller.
+@hide 
+*/
+getMemoryInfo : function(  ) {},
+
+<span id='android-os-Debug-method-getPss'>/**Retrieves the PSS memory used by the process as given by the
+</span> smaps.
+*/
+getPss : function(  ) {},
+
+<span id='android-os-Debug-method-getPss'>/**Retrieves the PSS memory used by the process as given by the smaps. Optionally supply a long
+</span> array of up to 3 entries to also receive (up to 3 values in order): the Uss and SwapPss and
+ Rss (only filled in as of {@link android.os.Build.VERSION_CODES#P}) of the process, and
+ another array to also retrieve the separate memtrack size.
+@hide 
+*/
+getPss : function(  ) {},
+
+<span id='android-os-Debug-method-getMemInfo'>/**Retrieves /proc/meminfo.  outSizes is filled with fields
+</span> as defined by MEMINFO_* offsets.
+@hide 
+*/
+getMemInfo : function(  ) {},
+
+<span id='android-os-Debug-method-setAllocationLimit'>/**Establish an object allocation limit in the current thread.
+</span> This feature was never enabled in release builds.  The
+ allocation limits feature was removed in Honeycomb.  This
+ method exists for compatibility and always returns -1 and has
+ no effect.
+@deprecated This method is now obsolete.
+*/
+setAllocationLimit : function(  ) {},
+
+<span id='android-os-Debug-method-setGlobalAllocationLimit'>/**Establish a global object allocation limit.  This feature was
+</span> never enabled in release builds.  The allocation limits feature
+ was removed in Honeycomb.  This method exists for compatibility
+ and always returns -1 and has no effect.
+@deprecated This method is now obsolete.
+*/
+setGlobalAllocationLimit : function(  ) {},
+
+<span id='android-os-Debug-method-printLoadedClasses'>/**Dump a list of all currently loaded class to the log file.
+</span>@param {Number} flags See constants above.
+*/
+printLoadedClasses : function(  ) {},
+
+<span id='android-os-Debug-method-getLoadedClassCount'>/**Get the number of loaded classes.
+</span>@return {Number} the number of loaded classes.
+*/
+getLoadedClassCount : function(  ) {},
+
+<span id='android-os-Debug-method-dumpHprofData'>/**Dump &quot;hprof&quot; data to the specified file.  This may cause a GC.
+</span>@param {String} fileName Full pathname of output file (e.g. &quot;/sdcard/dump.hprof&quot;).
+@throws UnsupportedOperationException if the VM was built without
+         HPROF support.
+@throws IOException if an error occurs while opening or writing files.
+*/
+dumpHprofData : function(  ) {},
+
+<span id='android-os-Debug-method-dumpHprofData'>/**Like dumpHprofData(String), but takes an already-opened
+</span> FileDescriptor to which the trace is written.  The file name is also
+ supplied simply for logging.  Makes a dup of the file descriptor.
+
+ Primarily for use by the &quot;am&quot; shell command.
+@hide 
+*/
+dumpHprofData : function(  ) {},
+
+<span id='android-os-Debug-method-dumpHprofDataDdms'>/**Collect &quot;hprof&quot; and send it to DDMS.  This may cause a GC.
+</span>@throws UnsupportedOperationException if the VM was built without
+         HPROF support.
+@hide 
+*/
+dumpHprofDataDdms : function(  ) {},
+
+<span id='android-os-Debug-method-dumpNativeHeap'>/**Writes native heap data to the specified file descriptor.
+</span>@hide 
+*/
+dumpNativeHeap : function(  ) {},
+
+<span id='android-os-Debug-method-dumpNativeMallocInfo'>/**Writes malloc info data to the specified file descriptor.
+</span>@hide 
+*/
+dumpNativeMallocInfo : function(  ) {},
+
+<span id='android-os-Debug-method-countInstancesOfClass'>/**Returns a count of the extant instances of a class.
+</span>@hide 
+*/
+countInstancesOfClass : function(  ) {},
+
+<span id='android-os-Debug-method-getBinderSentTransactions'>/**Returns the number of sent transactions from this process.
+</span>@return {Number} The number of sent transactions or -1 if it could not read t.
+*/
+getBinderSentTransactions : function(  ) {},
+
+<span id='android-os-Debug-method-getBinderReceivedTransactions'>/**Returns the number of received transactions from the binder driver.
+</span>@return {Number} The number of received transactions or -1 if it could not read the stats.
+*/
+getBinderReceivedTransactions : function(  ) {},
+
+<span id='android-os-Debug-method-getBinderLocalObjectCount'>/**Returns the number of active local Binder objects that exist in the
+</span> current process.
+*/
+getBinderLocalObjectCount : function(  ) {},
+
+<span id='android-os-Debug-method-getBinderProxyObjectCount'>/**Returns the number of references to remote proxy Binder objects that
+</span> exist in the current process.
+*/
+getBinderProxyObjectCount : function(  ) {},
+
+<span id='android-os-Debug-method-getBinderDeathObjectCount'>/**Returns the number of death notification links to Binder objects that
+</span> exist in the current process.
+*/
+getBinderDeathObjectCount : function(  ) {},
+
+<span id='android-os-Debug-method-cacheRegisterMap'>/**Primes the register map cache.
+</span>
+ Only works for classes in the bootstrap class loader.  Does not
+ cause classes to be loaded if they're not already present.
+
+ The classAndMethodDesc argument is a concatentation of the VM-internal
+ class descriptor, method name, and method descriptor.  Examples:
+     Landroid/os/Looper;.loop:()V
+     Landroid/app/ActivityThread;.main:([Ljava/lang/String;)V
+@param {String} classAndMethodDesc the method to prepare
+@hide 
+*/
+cacheRegisterMap : function(  ) {},
+
+<span id='android-os-Debug-method-dumpReferenceTables'>/**Dumps the contents of VM reference tables (e.g. JNI locals and
+</span> globals) to the log file.
+@hide 
+*/
+dumpReferenceTables : function(  ) {},
+
+<span id='android-os-Debug-method-setFieldsOn'>/**Equivalent to &lt;code&gt;setFieldsOn(cl, false)&lt;/code&gt;.
+</span>@see #setFieldsOn(Class, boolean)
+@hide 
+*/
+setFieldsOn : function(  ) {},
+
+<span id='android-os-Debug-method-setFieldsOn'>/**Reflectively sets static fields of a class based on internal debugging
+</span> properties.  This method is a no-op if false is
+ false.
+ &lt;p&gt;
+ &lt;strong&gt;NOTE TO APPLICATION DEVELOPERS&lt;/strong&gt;: false will
+ always be false in release builds.  This API is typically only useful
+ for platform developers.
+ &lt;/p&gt;
+ Class setup: define a class whose only fields are non-final, static
+ primitive types (except for &quot;char&quot;) or Strings.  In a static block
+ after the field definitions/initializations, pass the class to
+ this method, Debug.setFieldsOn(). Example:
+ &lt;pre&gt;
+ package com.example;
+
+ import android.os.Debug;
+
+ public class MyDebugVars {
+    public static String s = &quot;a string&quot;;
+    public static String s2 = &quot;second string&quot;;
+    public static String ns = null;
+    public static boolean b = false;
+    public static int i = 5;
+@param {Object {java.lang.Class}} cl The class to (possibly) modify
+@param {Boolean} partial If false, sets all static fields, otherwise, only set
+        fields with the {@link android.os.Debug.DebugProperty}
+        annotation
+@param cl The class to (possibly) modify
+@param partial If false, sets all static fields, otherwise, only set
+        fields with the {@link android.os.Debug.DebugProperty}
+        annotation
+@throws IllegalArgumentException if any fields are final or non-static,
+         or if the type of the field does not match the type of
+         the internal debugging property value.
+*/
+setFieldsOn : function(  ) {},
+
+<span id='android-os-Debug-method-dumpService'>/**Get a debugging dump of a system service by name.
+</span>
+ &lt;p&gt;Most services require the caller to hold android.permission.DUMP.
+@param {String} name of the service to dump
+@param {Object {FileDescriptor}} fd to write dump output to (usually an output log file)
+@param {Object {java.lang.String[]}} args to pass to the service's dump method, may be null
+@return {Boolean} true if the service was dumped successfully, false if
+     the service could not be found or had an error while dumping
+*/
+dumpService : function(  ) {},
+
+<span id='android-os-Debug-method-dumpJavaBacktraceToFileTimeout'>/**Append the Java stack traces of a given native process to a specified file.
+</span>@param {Number} pid pid to dump.
+@param {String} file path of file to append dump to.
+@param {Number} timeoutSecs time to wait in seconds, or 0 to wait forever.
+@hide 
+*/
+dumpJavaBacktraceToFileTimeout : function(  ) {},
+
+<span id='android-os-Debug-method-dumpNativeBacktraceToFileTimeout'>/**Append the native stack traces of a given process to a specified file.
+</span>@param {Number} pid pid to dump.
+@param {String} file path of file to append dump to.
+@param {Number} timeoutSecs time to wait in seconds, or 0 to wait forever.
+@hide 
+*/
+dumpNativeBacktraceToFileTimeout : function(  ) {},
+
+<span id='android-os-Debug-method-getUnreachableMemory'>/**Get description of unreachable native memory.
+</span>@param {Number} limit the number of leaks to provide info on, 0 to only get a summary.
+@param {Boolean} contents true to include a hex dump of the contents of unreachable memory.
+@return {String} the String containing a description of unreachable memory.
+@hide 
+*/
+getUnreachableMemory : function(  ) {},
+
+<span id='android-os-Debug-method-getCallers'>/**Return a string consisting of methods and locations at multiple call stack levels.
+</span>@param {Number} depth the number of levels to return, starting with the immediate caller.
+@return {String} a string describing the call stack.
+ {@hide}
+*/
+getCallers : function(  ) {},
+
+<span id='android-os-Debug-method-getCallers'>/**Return a string consisting of methods and locations at multiple call stack levels.
+</span>@param {Number} depth the number of levels to return, starting with the immediate caller.
+@return {String} a string describing the call stack.
+ {@hide}
+*/
+getCallers : function(  ) {},
+
+<span id='android-os-Debug-method-getCallers'>/**Like {@link #getCallers}(int), but each location is append to the string
+</span> as a new line with &lt;var&gt;linePrefix&lt;/var&gt; in front of it.
+@param {Number} depth the number of levels to return, starting with the immediate caller.
+@param {String} linePrefix prefix to put in front of each location.
+@return {String} a string describing the call stack.
+ {@hide}
+*/
+getCallers : function(  ) {},
+
+<span id='android-os-Debug-method-getCaller'>/**
+</span>@return {String} a String describing the immediate caller of the calling method.
+ {@hide}
+*/
+getCaller : function(  ) {},
+
+<span id='android-os-Debug-method-attachJvmtiAgent'>/**Attach a library as a jvmti agent to the current runtime, with the given classloader
+</span> determining the library search path.
+ &lt;p&gt;
+ Note: agents may only be attached to debuggable apps. Otherwise, this function will
+ throw a SecurityException.
+@param {String} library the library containing the agent.
+@param {String} options the options passed to the agent.
+@param {Object {ClassLoader}} classLoader the classloader determining the library search path.
+@throws IOException if the agent could not be attached.
+@throws SecurityException if the app is not debuggable.
+*/
+attachJvmtiAgent : function(  ) {},
+
+<span id='android-os-Debug-method-getZramFreeKb'>/**Return the current free ZRAM usage in kilobytes.
+</span>@hide 
+*/
+getZramFreeKb : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-Canvas'>/**@class android.graphics.Canvas
+</span>@extends android.graphics.BaseCanvas
+
+ The Canvas class holds the &quot;draw&quot; calls. To draw something, you need
+ 4 basic components: A Bitmap to hold the pixels, a Canvas to host
+ the draw calls (writing into the bitmap), a drawing primitive (e.g. Rect,
+ Path, text, Bitmap), and a paint (to describe the colors and styles for the
+ drawing).
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about how to use Canvas, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/graphics/2d-graphics.html&quot;&gt;
+ Canvas and Drawables&lt;/a&gt; developer guide.&lt;/p&gt;&lt;/div&gt;
+*/
+var Canvas = {
+
+<span id='android-graphics-Canvas-property-sCompatibilityRestore'>/**@hide */
+</span>sCompatibilityRestore : &quot;null&quot;,
+<span id='android-graphics-Canvas-property-sCompatibilitySetBitmap'>/**@hide */
+</span>sCompatibilitySetBitmap : &quot;null&quot;,
+<span id='android-graphics-Canvas-property-MATRIX_SAVE_FLAG'>/** Restore the current matrix when restore() is called.
+</span> @removed
+ @deprecated Use the flagless version of {@link #save}(), {@link #saveLayer(RectF, android.graphics.Paint)} or
+             {@link #saveLayerAlpha(RectF, int)}. For saveLayer() calls the matrix
+             was always restored for {@link #isHardwareAccelerated() Hardware accelerated}
+             canvases and as of API level {@value Build.VERSION_CODES#O} that is the default
+             behavior for all canvas types.
+*/
+MATRIX_SAVE_FLAG : &quot;1&quot;,
+<span id='android-graphics-Canvas-property-CLIP_SAVE_FLAG'>/** Restore the current clip when restore() is called.
+</span>
+ @removed
+ @deprecated Use the flagless version of {@link #save}(), {@link #saveLayer(RectF, android.graphics.Paint)} or
+             {@link #saveLayerAlpha(RectF, int)}. For saveLayer() calls the clip
+             was always restored for {@link #isHardwareAccelerated() Hardware accelerated}
+             canvases and as of API level {@value Build.VERSION_CODES#O} that is the default
+             behavior for all canvas types.
+*/
+CLIP_SAVE_FLAG : &quot;2&quot;,
+<span id='android-graphics-Canvas-property-HAS_ALPHA_LAYER_SAVE_FLAG'>/** The layer requires a per-pixel alpha channel.
+</span>
+ @removed
+ @deprecated This flag is ignored. Use the flagless version of {@link #saveLayer(RectF, android.graphics.Paint)}
+             {@link #saveLayerAlpha(RectF, int)}.
+*/
+HAS_ALPHA_LAYER_SAVE_FLAG : &quot;4&quot;,
+<span id='android-graphics-Canvas-property-FULL_COLOR_LAYER_SAVE_FLAG'>/** The layer requires full 8-bit precision for each color channel.
+</span>
+ @removed
+ @deprecated This flag is ignored. Use the flagless version of {@link #saveLayer(RectF, android.graphics.Paint)}
+             {@link #saveLayerAlpha(RectF, int)}.
+*/
+FULL_COLOR_LAYER_SAVE_FLAG : &quot;8&quot;,
+<span id='android-graphics-Canvas-property-CLIP_TO_LAYER_SAVE_FLAG'>/** Clip drawing to the bounds of the offscreen layer, omit at your own peril.
+</span> &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; it is strongly recommended to not
+ omit this flag for any call to &lt;code&gt;saveLayer()&lt;/code&gt; and
+ &lt;code&gt;saveLayerAlpha()&lt;/code&gt; variants. Not passing this flag generally
+ triggers extremely poor performance with hardware accelerated rendering.
+
+ @removed
+ @deprecated This flag results in poor performance and the same effect can be achieved with
+             a single layer or multiple draw commands with different clips.
+
+*/
+CLIP_TO_LAYER_SAVE_FLAG : &quot;16&quot;,
+<span id='android-graphics-Canvas-property-ALL_SAVE_FLAG'>/** Restore everything when restore() is called (standard save flags).
+</span> &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; for performance reasons, it is
+ strongly recommended to pass this - the complete set of flags - to any
+ call to &lt;code&gt;saveLayer()&lt;/code&gt; and &lt;code&gt;saveLayerAlpha()&lt;/code&gt;
+ variants.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; all methods that accept this flag
+ have flagless versions that are equivalent to passing this flag.
+*/
+ALL_SAVE_FLAG : &quot;31&quot;,
+<span id='android-graphics-Canvas-method-getNativeCanvasWrapper'>/**
+</span>@hide 
+*/
+getNativeCanvasWrapper : function(  ) {},
+
+<span id='android-graphics-Canvas-method-isRecordingFor'>/**
+</span>@hide 
+*/
+isRecordingFor : function(  ) {},
+
+<span id='android-graphics-Canvas-method-isHardwareAccelerated'>/**Indicates whether this Canvas uses hardware acceleration.
+</span>
+ Note that this method does not define what type of hardware acceleration
+ may or may not be used.
+@return {Boolean} True if drawing operations are hardware accelerated,
+         false otherwise.
+*/
+isHardwareAccelerated : function(  ) {},
+
+<span id='android-graphics-Canvas-method-setBitmap'>/**Specify a bitmap for the canvas to draw into. All canvas state such as
+</span> layers, filters, and the save/restore stack are reset. Additionally,
+ the canvas' target density is updated to match that of the bitmap.
+
+ Prior to API level {@value Build.VERSION_CODES#O} the current matrix and
+ clip stack were preserved.
+@param {Object {Bitmap}} bitmap Specifies a mutable bitmap for the canvas to draw into.
+@see #setDensity(int)
+@see #getDensity()
+*/
+setBitmap : function(  ) {},
+
+<span id='android-graphics-Canvas-method-insertReorderBarrier'>/**
+</span>@deprecated use {@link #enableZ()} instead
+@hide 
+*/
+insertReorderBarrier : function(  ) {},
+
+<span id='android-graphics-Canvas-method-insertInorderBarrier'>/**
+</span>@deprecated use {@link #disableZ()} instead
+@hide 
+*/
+insertInorderBarrier : function(  ) {},
+
+<span id='android-graphics-Canvas-method-enableZ'>/**&lt;p&gt;Enables Z support which defaults to disabled. This allows for RenderNodes drawn with
+</span> {@link #drawRenderNode}(RenderNode) to be re-arranged based off of their
+ {@link android.graphics.RenderNode#getElevation()} and {@link android.graphics.RenderNode#getTranslationZ()}
+ values. It also enables rendering of shadows for RenderNodes with an elevation or
+ translationZ.&lt;/p&gt;
+
+ &lt;p&gt;Any draw reordering will not be moved before this call. A typical usage of this might
+ look something like:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     void draw(Canvas canvas) {
+         // Draw any background content
+         canvas.drawColor(backgroundColor);
+
+         // Begin drawing that may be reordered based off of Z
+         canvas.enableZ();
+         for (RenderNode child : children) {
+             canvas.drawRenderNode(child);
+         }
+         // End drawing that may be reordered based off of Z
+         canvas.disableZ();
+
+         // Draw any overlays
+         canvas.drawText(&quot;I'm on top of everything!&quot;, 0, 0, paint);
+     }
+ &lt;/pre&gt;
+ &lt;/p&gt;
+
+ Note: This is not impacted by any {@link #save}() or {@link #restore}() calls as it is not
+ considered to be part of the current matrix or clip.
+
+ See {@link #disableZ}()
+*/
+enableZ : function(  ) {},
+
+<span id='android-graphics-Canvas-method-disableZ'>/**Disables Z support, preventing any RenderNodes drawn after this point from being
+</span> visually reordered or having shadows rendered.
+
+ Note: This is not impacted by any {@link #save}() or {@link #restore}() calls as it is not
+ considered to be part of the current matrix or clip.
+
+ See {@link #enableZ}()
+*/
+disableZ : function(  ) {},
+
+<span id='android-graphics-Canvas-method-isOpaque'>/**Return true if the device that the current layer draws into is opaque
+</span> (i.e. does not support per-pixel alpha).
+@return {Boolean} true if the device that the current layer draws into is opaque
+*/
+isOpaque : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getWidth'>/**Returns the width of the current drawing layer
+</span>@return {Number} the width of the current drawing layer
+*/
+getWidth : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getHeight'>/**Returns the height of the current drawing layer
+</span>@return {Number} the height of the current drawing layer
+*/
+getHeight : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getDensity'>/**&lt;p&gt;Returns the target density of the canvas.  The default density is
+</span> derived from the density of its backing bitmap, or
+ {@link android.graphics.Bitmap#DENSITY_NONE} if there is not one.&lt;/p&gt;
+@return {Number} Returns the current target density of the canvas, which is used
+ to determine the scaling factor when drawing a bitmap into it.
+@see #setDensity(int)
+@see Bitmap#getDensity()
+*/
+getDensity : function(  ) {},
+
+<span id='android-graphics-Canvas-method-setDensity'>/**&lt;p&gt;Specifies the density for this Canvas' backing bitmap.  This modifies
+</span> the target density of the canvas itself, as well as the density of its
+ backing bitmap via {@link android.graphics.Bitmap#setDensity(int) android.graphics.Bitmap.setDensity(int)}.
+@param {Number} density The new target density of the canvas, which is used
+ to determine the scaling factor when drawing a bitmap into it.  Use
+ {@link Bitmap#DENSITY_NONE} to disable bitmap scaling.
+@see #getDensity()
+@see Bitmap#setDensity(int)
+*/
+setDensity : function(  ) {},
+
+<span id='android-graphics-Canvas-method-setScreenDensity'>/**
+</span>@hide 
+*/
+setScreenDensity : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getMaximumBitmapWidth'>/**Returns the maximum allowed width for bitmaps drawn with this canvas.
+</span> Attempting to draw with a bitmap wider than this value will result
+ in an error.
+@see #getMaximumBitmapHeight()
+*/
+getMaximumBitmapWidth : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getMaximumBitmapHeight'>/**Returns the maximum allowed height for bitmaps drawn with this canvas.
+</span> Attempting to draw with a bitmap taller than this value will result
+ in an error.
+@see #getMaximumBitmapWidth()
+*/
+getMaximumBitmapHeight : function(  ) {},
+
+<span id='android-graphics-Canvas-method-save'>/**Saves the current matrix and clip onto a private stack.
+</span> &lt;p&gt;
+ Subsequent calls to translate,scale,rotate,skew,concat or clipRect,
+ clipPath will all operate as usual, but when the balancing call to
+ restore() is made, those calls will be forgotten, and the settings that
+ existed before the save() will be reinstated.
+@return {Number} The value to pass to restoreToCount() to balance this save()
+*/
+save : function(  ) {},
+
+<span id='android-graphics-Canvas-method-save'>/**Based on saveFlags, can save the current matrix and clip onto a private
+</span> stack.
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; if possible, use the
+ parameter-less save(). It is simpler and faster than individually
+ disabling the saving of matrix or clip with this method.
+ &lt;p&gt;
+ Subsequent calls to translate,scale,rotate,skew,concat or clipRect,
+ clipPath will all operate as usual, but when the balancing call to
+ restore() is made, those calls will be forgotten, and the settings that
+ existed before the save() will be reinstated.
+@param {Number} saveFlags flag bits that specify which parts of the Canvas state
+                  to save/restore
+@deprecated Use {@link #save()} instead.
+@param saveFlags flag bits that specify which parts of the Canvas state
+                  to save/restore
+@return {Number} The value to pass to restoreToCount() to balance this save()
+*/
+save : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayer'>/**This behaves the same as save(), but in addition it allocates and
+</span> redirects drawing to an offscreen bitmap.
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; this method is very expensive,
+ incurring more than double rendering cost for contained content. Avoid
+ using this method, especially if the bounds provided are large. It is
+ recommended to use a {@link android.view.View#LAYER_TYPE_HARDWARE hardware layer} on a View
+ to apply an xfermode, color filter, or alpha, as it will perform much
+ better than this method.
+ &lt;p&gt;
+ All drawing calls are directed to a newly allocated offscreen bitmap.
+ Only when the balancing call to restore() is made, is that offscreen
+ buffer drawn back to the current target of the Canvas (either the
+ screen, it's target Bitmap, or the previous layer).
+ &lt;p&gt;
+ Attributes of the Paint - {@link android.graphics.Paint#getAlpha() alpha},
+ {@link Paint#getandroid.graphics.Xfermode() android.graphics.Xfermode}, and
+ {@link Paint#getandroid.graphics.ColorFilter() android.graphics.ColorFilter} are applied when the
+ offscreen bitmap is drawn back when restore() is called.
+
+ As of API Level API level {@value Build.VERSION_CODES#P} the only valid
+ {@code saveFlags} is {@link #ALL_SAVE_FLAG}.  All other flags are ignored.
+@param {Object {RectF}} bounds May be null. The maximum size the offscreen bitmap
+               needs to be (in local coordinates)
+@param {Object {Paint}} paint  This is copied, and is applied to the offscreen when
+               restore() is called.
+@param {Number} saveFlags see _SAVE_FLAG constants, generally {@link #ALL_SAVE_FLAG} is recommended
+               for performance reasons.
+@param saveFlags see _SAVE_FLAG constants, generally {@link #ALL_SAVE_FLAG} is recommended
+               for performance reasons.
+@return {Number} value to pass to restoreToCount() to balance this save()
+*/
+saveLayer : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayer'>/**This behaves the same as save(), but in addition it allocates and
+</span> redirects drawing to an offscreen rendering target.
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; this method is very expensive,
+ incurring more than double rendering cost for contained content. Avoid
+ using this method when possible and instead use a
+ {@link android.view.View#LAYER_TYPE_HARDWARE hardware layer} on a View
+ to apply an xfermode, color filter, or alpha, as it will perform much
+ better than this method.
+ &lt;p&gt;
+ All drawing calls are directed to a newly allocated offscreen rendering target.
+ Only when the balancing call to restore() is made, is that offscreen
+ buffer drawn back to the current target of the Canvas (which can potentially be a previous
+ layer if these calls are nested).
+ &lt;p&gt;
+ Attributes of the Paint - {@link android.graphics.Paint#getAlpha() alpha},
+ {@link Paint#getandroid.graphics.Xfermode() android.graphics.Xfermode}, and
+ {@link Paint#getandroid.graphics.ColorFilter() android.graphics.ColorFilter} are applied when the
+ offscreen rendering target is drawn back when restore() is called.
+@param {Object {RectF}} bounds May be null. The maximum size the offscreen render target
+               needs to be (in local coordinates)
+@param {Object {Paint}} paint  This is copied, and is applied to the offscreen when
+               restore() is called.
+@return {Number} value to pass to restoreToCount() to balance this save()
+*/
+saveLayer : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveUnclippedLayer'>/**
+</span>@hide 
+*/
+saveUnclippedLayer : function(  ) {},
+
+<span id='android-graphics-Canvas-method-restoreUnclippedLayer'>/**
+</span>@param {Number} saveCount The save level to restore to.
+@param {Object {Paint}} paint     This is copied and is applied to the area within the unclipped layer's
+                  bounds (i.e. equivalent to a drawPaint()) before restore() is called.
+@param paint     This is copied and is applied to the area within the unclipped layer's
+                  bounds (i.e. equivalent to a drawPaint()) before restore() is called.
+*/
+restoreUnclippedLayer : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayer'>/**Helper version of saveLayer() that takes 4 values rather than a RectF.
+</span>
+ As of API Level API level {@value Build.VERSION_CODES#P} the only valid
+ {@code saveFlags} is {@link #ALL_SAVE_FLAG}.  All other flags are ignored.
+@deprecated Use {@link #saveLayer(float, float, float, float, Paint)} instead.
+*/
+saveLayer : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayer'>/**Convenience for {@link #saveLayer(RectF, android.graphics.Paint)} that takes the four float coordinates of the
+</span> bounds rectangle.
+*/
+saveLayer : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayerAlpha'>/**This behaves the same as save(), but in addition it allocates and
+</span> redirects drawing to an offscreen bitmap.
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; this method is very expensive,
+ incurring more than double rendering cost for contained content. Avoid
+ using this method, especially if the bounds provided are large. It is
+ recommended to use a {@link android.view.View#LAYER_TYPE_HARDWARE hardware layer} on a View
+ to apply an xfermode, color filter, or alpha, as it will perform much
+ better than this method.
+ &lt;p&gt;
+ All drawing calls are directed to a newly allocated offscreen bitmap.
+ Only when the balancing call to restore() is made, is that offscreen
+ buffer drawn back to the current target of the Canvas (either the
+ screen, it's target Bitmap, or the previous layer).
+ &lt;p&gt;
+ The {@code alpha} parameter is applied when the offscreen bitmap is
+ drawn back when restore() is called.
+
+ As of API Level API level {@value Build.VERSION_CODES#P} the only valid
+ {@code saveFlags} is {@link #ALL_SAVE_FLAG}.  All other flags are ignored.
+@param {Object {RectF}} bounds    The maximum size the offscreen bitmap needs to be
+                  (in local coordinates)
+@param {Number} alpha     The alpha to apply to the offscreen when it is
+                        drawn during restore()
+@param {Number} saveFlags see _SAVE_FLAG constants, generally {@link #ALL_SAVE_FLAG} is recommended
+                  for performance reasons.
+@param saveFlags see _SAVE_FLAG constants, generally {@link #ALL_SAVE_FLAG} is recommended
+                  for performance reasons.
+@return {Number} value to pass to restoreToCount() to balance this call
+*/
+saveLayerAlpha : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayerAlpha'>/**Convenience for {@link #saveLayer(RectF, android.graphics.Paint)} but instead of taking a entire Paint object
+</span> it takes only the {@code alpha} parameter.
+@param {Object {RectF}} bounds    The maximum size the offscreen bitmap needs to be
+                  (in local coordinates)
+@param {Number} alpha     The alpha to apply to the offscreen when it is
+                        drawn during restore()
+*/
+saveLayerAlpha : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayerAlpha'>/**Helper for saveLayerAlpha() that takes 4 values instead of a RectF.
+</span>
+ As of API Level API level {@value Build.VERSION_CODES#P} the only valid
+ {@code saveFlags} is {@link #ALL_SAVE_FLAG}.  All other flags are ignored.
+@deprecated Use {@link #saveLayerAlpha(float, float, float, float, int)} instead.
+*/
+saveLayerAlpha : function(  ) {},
+
+<span id='android-graphics-Canvas-method-saveLayerAlpha'>/**Convenience for {@link #saveLayerAlpha(RectF, int)} that takes the four float coordinates of
+</span> the bounds rectangle.
+*/
+saveLayerAlpha : function(  ) {},
+
+<span id='android-graphics-Canvas-method-restore'>/**This call balances a previous call to save(), and is used to remove all
+</span> modifications to the matrix/clip state since the last save call. It is
+ an error to call restore() more times than save() was called.
+*/
+restore : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getSaveCount'>/**Returns the number of matrix/clip states on the Canvas' private stack.
+</span> This will equal # save() calls - # restore() calls.
+*/
+getSaveCount : function(  ) {},
+
+<span id='android-graphics-Canvas-method-restoreToCount'>/**Efficient way to pop any calls to save() that happened after the save
+</span> count reached saveCount. It is an error for saveCount to be less than 1.
+
+ Example:
+    int count = canvas.save();
+    ... // more calls potentially to save()
+    canvas.restoreToCount(count);
+    // now the canvas is back in the same state it was before the initial
+    // call to save().
+@param {Number} saveCount The save level to restore to.
+*/
+restoreToCount : function(  ) {},
+
+<span id='android-graphics-Canvas-method-translate'>/**Preconcat the current matrix with the specified translation
+</span>@param {Number} dx The distance to translate in X
+@param {Number} dy The distance to translate in Y
+*/
+translate : function(  ) {},
+
+<span id='android-graphics-Canvas-method-scale'>/**Preconcat the current matrix with the specified scale.
+</span>@param {Number} sx The amount to scale in X
+@param {Number} sy The amount to scale in Y
+*/
+scale : function(  ) {},
+
+<span id='android-graphics-Canvas-method-scale'>/**Preconcat the current matrix with the specified scale.
+</span>@param {Number} sx The amount to scale in X
+@param {Number} sy The amount to scale in Y
+@param {Number} px The x-coord for the pivot point (unchanged by the scale)
+@param {Number} py The y-coord for the pivot point (unchanged by the scale)
+*/
+scale : function(  ) {},
+
+<span id='android-graphics-Canvas-method-rotate'>/**Preconcat the current matrix with the specified rotation.
+</span>@param {Number} degrees The amount to rotate, in degrees
+*/
+rotate : function(  ) {},
+
+<span id='android-graphics-Canvas-method-rotate'>/**Preconcat the current matrix with the specified rotation.
+</span>@param {Number} degrees The amount to rotate, in degrees
+@param {Number} px The x-coord for the pivot point (unchanged by the rotation)
+@param {Number} py The y-coord for the pivot point (unchanged by the rotation)
+*/
+rotate : function(  ) {},
+
+<span id='android-graphics-Canvas-method-skew'>/**Preconcat the current matrix with the specified skew.
+</span>@param {Number} sx The amount to skew in X
+@param {Number} sy The amount to skew in Y
+*/
+skew : function(  ) {},
+
+<span id='android-graphics-Canvas-method-concat'>/**Preconcat the current matrix with the specified matrix. If the specified
+</span> matrix is null, this method does nothing.
+@param {Object {Matrix}} matrix The matrix to preconcatenate with the current matrix
+*/
+concat : function(  ) {},
+
+<span id='android-graphics-Canvas-method-setMatrix'>/**Completely replace the current matrix with the specified matrix. If the
+</span> matrix parameter is null, then the current matrix is reset to identity.
+
+ &lt;strong&gt;Note:&lt;/strong&gt; it is recommended to use {@link #concat}(Matrix),
+ {@link #scale(float, float)}, {@link #translate(float, float)} and
+ {@link #rotate}(float) instead of this method.
+@param {Object {Matrix}} matrix The matrix to replace the current matrix with. If it is
+               null, set the current matrix to identity.
+@see #concat(Matrix)
+*/
+setMatrix : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getMatrix'>/**Return, in ctm, the current transformation matrix. This does not alter
+</span> the matrix in the canvas, but just returns a copy of it.
+@deprecated {@link #isHardwareAccelerated() Hardware accelerated} canvases may have any
+ matrix when passed to a View or Drawable, as it is implementation defined where in the
+ hierarchy such canvases are created. It is recommended in such cases to either draw contents
+ irrespective of the current matrix, or to track relevant transform state outside of the
+ canvas.
+*/
+getMatrix : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getMatrix'>/**Return a new matrix with a copy of the canvas' current transformation
+</span> matrix.
+@deprecated {@link #isHardwareAccelerated() Hardware accelerated} canvases may have any
+ matrix when passed to a View or Drawable, as it is implementation defined where in the
+ hierarchy such canvases are created. It is recommended in such cases to either draw contents
+ irrespective of the current matrix, or to track relevant transform state outside of the
+ canvas.
+*/
+getMatrix : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRect'>/**Modify the current clip with the specified rectangle.
+</span>@param {Object {RectF}} rect The rect to intersect with the current clip
+@param {Object {Region.Op}} op How the clip is modified
+@return {Boolean} true if the resulting clip is non-empty
+@deprecated Region.Op values other than {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} have the ability to expand the clip. The canvas clipping APIs
+ are intended to only expand the clip as a result of a restore operation. This enables a view
+ parent to clip a canvas to clearly define the maximal drawing area of its children. The
+ recommended alternative calls are {@link #clipRect(RectF)} and {@link #clipOutRect(RectF)};
+
+ As of API Level API level {@value Build.VERSION_CODES#P} only {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} are valid Region.Op parameters.
+*/
+clipRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRect'>/**Modify the current clip with the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Object {Rect}} rect The rectangle to intersect with the current clip.
+@param {Object {Region.Op}} op How the clip is modified
+@return {Boolean} true if the resulting clip is non-empty
+@deprecated Region.Op values other than {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} have the ability to expand the clip. The canvas clipping APIs
+ are intended to only expand the clip as a result of a restore operation. This enables a view
+ parent to clip a canvas to clearly define the maximal drawing area of its children. The
+ recommended alternative calls are {@link #clipRect(Rect)} and {@link #clipOutRect(Rect)};
+
+ As of API Level API level {@value Build.VERSION_CODES#P} only {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} are valid Region.Op parameters.
+*/
+clipRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRectUnion'>/**DON'T USE THIS METHOD.  It exists only to support a particular legacy behavior in
+</span> the view system and will be removed as soon as that code is refactored to no longer
+ depend on this behavior.
+@hide 
+*/
+clipRectUnion : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRect'>/**Intersect the current clip with the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Object {RectF}} rect The rectangle to intersect with the current clip.
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipOutRect'>/**Set the clip to the difference of the current clip and the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Object {RectF}} rect The rectangle to perform a difference op with the current clip.
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipOutRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRect'>/**Intersect the current clip with the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Object {Rect}} rect The rectangle to intersect with the current clip.
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipOutRect'>/**Set the clip to the difference of the current clip and the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Object {Rect}} rect The rectangle to perform a difference op with the current clip.
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipOutRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRect'>/**Modify the current clip with the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Number} left   The left side of the rectangle to intersect with the
+               current clip
+@param {Number} top    The top of the rectangle to intersect with the current
+               clip
+@param {Number} right  The right side of the rectangle to intersect with the
+               current clip
+@param {Number} bottom The bottom of the rectangle to intersect with the current
+               clip
+@param {Object {Region.Op}} op     How the clip is modified
+@return {Boolean} true if the resulting clip is non-empty
+@deprecated Region.Op values other than {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} have the ability to expand the clip. The canvas clipping APIs
+ are intended to only expand the clip as a result of a restore operation. This enables a view
+ parent to clip a canvas to clearly define the maximal drawing area of its children. The
+ recommended alternative calls are {@link #clipRect(float,float,float,float)} and
+ {@link #clipOutRect(float,float,float,float)};
+
+ As of API Level API level {@value Build.VERSION_CODES#P} only {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} are valid Region.Op parameters.
+*/
+clipRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRect'>/**Intersect the current clip with the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Number} left   The left side of the rectangle to intersect with the
+               current clip
+@param {Number} top    The top of the rectangle to intersect with the current clip
+@param {Number} right  The right side of the rectangle to intersect with the
+               current clip
+@param {Number} bottom The bottom of the rectangle to intersect with the current
+               clip
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipOutRect'>/**Set the clip to the difference of the current clip and the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Number} left   The left side of the rectangle used in the difference operation
+@param {Number} top    The top of the rectangle used in the difference operation
+@param {Number} right  The right side of the rectangle used in the difference operation
+@param {Number} bottom The bottom of the rectangle used in the difference operation
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipOutRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRect'>/**Intersect the current clip with the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Number} left   The left side of the rectangle to intersect with the
+               current clip
+@param {Number} top    The top of the rectangle to intersect with the current clip
+@param {Number} right  The right side of the rectangle to intersect with the
+               current clip
+@param {Number} bottom The bottom of the rectangle to intersect with the current
+               clip
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipOutRect'>/**Set the clip to the difference of the current clip and the specified rectangle, which is
+</span> expressed in local coordinates.
+@param {Number} left   The left side of the rectangle used in the difference operation
+@param {Number} top    The top of the rectangle used in the difference operation
+@param {Number} right  The right side of the rectangle used in the difference operation
+@param {Number} bottom The bottom of the rectangle used in the difference operation
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipOutRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipPath'>/**Modify the current clip with the specified path.
+</span>@param {Object {Path}} path The path to operate on the current clip
+@param {Object {Region.Op}} op   How the clip is modified
+@return {Boolean} true if the resulting is non-empty
+@deprecated Region.Op values other than {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} have the ability to expand the clip. The canvas clipping APIs
+ are intended to only expand the clip as a result of a restore operation. This enables a view
+ parent to clip a canvas to clearly define the maximal drawing area of its children. The
+ recommended alternative calls are {@link #clipPath(Path)} and
+ {@link #clipOutPath(Path)};
+
+ As of API Level API level {@value Build.VERSION_CODES#P} only {@link Region.Op#INTERSECT} and
+ {@link Region.Op#DIFFERENCE} are valid Region.Op parameters.
+*/
+clipPath : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipPath'>/**Intersect the current clip with the specified path.
+</span>@param {Object {Path}} path The path to intersect with the current clip
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipPath : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipOutPath'>/**Set the clip to the difference of the current clip and the specified path.
+</span>@param {Object {Path}} path The path used in the difference operation
+@return {Boolean} true if the resulting clip is non-empty
+*/
+clipOutPath : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRegion'>/**Modify the current clip with the specified region. Note that unlike
+</span> clipRect() and clipPath() which transform their arguments by the
+ current matrix, clipRegion() assumes its argument is already in the
+ coordinate system of the current layer's bitmap, and so not
+ transformation is performed.
+@param {Object {Region}} region The region to operate on the current clip, based on op
+@param {Object {Region.Op}} op How the clip is modified
+@return {Boolean} true if the resulting is non-empty
+@removed 
+@deprecated Unlike all other clip calls this API does not respect the
+             current matrix. Use {@link #clipRect(Rect)} as an alternative.
+*/
+clipRegion : function(  ) {},
+
+<span id='android-graphics-Canvas-method-clipRegion'>/**Intersect the current clip with the specified region. Note that unlike
+</span> clipRect() and clipPath() which transform their arguments by the
+ current matrix, clipRegion() assumes its argument is already in the
+ coordinate system of the current layer's bitmap, and so not
+ transformation is performed.
+@param {Object {Region}} region The region to operate on the current clip, based on op
+@return {Boolean} true if the resulting is non-empty
+@removed 
+@deprecated Unlike all other clip calls this API does not respect the
+             current matrix. Use {@link #clipRect(Rect)} as an alternative.
+*/
+clipRegion : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getDrawFilter'>/**
+</span>*/
+getDrawFilter : function(  ) {},
+
+<span id='android-graphics-Canvas-method-setDrawFilter'>/**
+</span>*/
+setDrawFilter : function(  ) {},
+
+<span id='android-graphics-Canvas-method-quickReject'>/**Return true if the specified rectangle, after being transformed by the
+</span> current matrix, would lie completely outside of the current clip. Call
+ this to check if an area you intend to draw into is clipped out (and
+ therefore you can skip making the draw calls).
+@param {Object {RectF}} rect  the rect to compare with the current clip
+@param {Object {Canvas.EdgeType}} type  {@link Canvas.EdgeType#AA} if the path should be considered antialiased,
+              since that means it may affect a larger area (more pixels) than
+              non-antialiased ({@link Canvas.EdgeType#BW}).
+@return {Boolean} true if the rect (transformed by the canvas' matrix)
+              does not intersect with the canvas' clip
+*/
+quickReject : function(  ) {},
+
+<span id='android-graphics-Canvas-method-quickReject'>/**Return true if the specified path, after being transformed by the
+</span> current matrix, would lie completely outside of the current clip. Call
+ this to check if an area you intend to draw into is clipped out (and
+ therefore you can skip making the draw calls). Note: for speed it may
+ return false even if the path itself might not intersect the clip
+ (i.e. the bounds of the path intersects, but the path does not).
+@param {Object {Path}} path        The path to compare with the current clip
+@param {Object {Canvas.EdgeType}} type        {@link Canvas.EdgeType#AA} if the path should be considered antialiased,
+                    since that means it may affect a larger area (more pixels) than
+                    non-antialiased ({@link Canvas.EdgeType#BW}).
+@return {Boolean} true if the path (transformed by the canvas' matrix)
+                    does not intersect with the canvas' clip
+*/
+quickReject : function(  ) {},
+
+<span id='android-graphics-Canvas-method-quickReject'>/**Return true if the specified rectangle, after being transformed by the
+</span> current matrix, would lie completely outside of the current clip. Call
+ this to check if an area you intend to draw into is clipped out (and
+ therefore you can skip making the draw calls).
+@param {Number} left        The left side of the rectangle to compare with the
+                    current clip
+@param {Number} top         The top of the rectangle to compare with the current
+                    clip
+@param {Number} right       The right side of the rectangle to compare with the
+                    current clip
+@param {Number} bottom      The bottom of the rectangle to compare with the
+                    current clip
+@param {Object {Canvas.EdgeType}} type        {@link Canvas.EdgeType#AA} if the path should be considered antialiased,
+                    since that means it may affect a larger area (more pixels) than
+                    non-antialiased ({@link Canvas.EdgeType#BW}).
+@return {Boolean} true if the rect (transformed by the canvas' matrix)
+                    does not intersect with the canvas' clip
+*/
+quickReject : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getClipBounds'>/**Return the bounds of the current clip (in local coordinates) in the
+</span> bounds parameter, and return true if it is non-empty. This can be useful
+ in a way similar to quickReject, in that it tells you that drawing
+ outside of these bounds will be clipped out.
+@param {Object {Rect}} bounds Return the clip bounds here. If it is null, ignore it but
+               still return true if the current clip is non-empty.
+@return {Boolean} true if the current clip is non-empty.
+*/
+getClipBounds : function(  ) {},
+
+<span id='android-graphics-Canvas-method-getClipBounds'>/**Retrieve the bounds of the current clip (in local coordinates).
+</span>@return {Object {android.graphics.Rect}} the clip bounds, or [0, 0, 0, 0] if the clip is empty.
+*/
+getClipBounds : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPicture'>/**Save the canvas state, draw the picture, and restore the canvas state.
+</span> This differs from picture.draw(canvas), which does not perform any
+ save/restore.
+
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; This forces the picture to internally call
+ {@link android.graphics.Picture#endRecording} in order to prepare for playback.
+@param {Object {Picture}} picture  The picture to be drawn
+*/
+drawPicture : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPicture'>/**Draw the picture, stretched to fit into the dst rectangle.
+</span>*/
+drawPicture : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPicture'>/**Draw the picture, stretched to fit into the dst rectangle.
+</span>*/
+drawPicture : function(  ) {},
+
+<span id='android-graphics-Canvas-method-release'>/**Releases the resources associated with this canvas.
+</span>@hide 
+*/
+release : function(  ) {},
+
+<span id='android-graphics-Canvas-method-freeCaches'>/**Free up as much memory as possible from private caches (e.g. fonts, images)
+</span>@hide 
+*/
+freeCaches : function(  ) {},
+
+<span id='android-graphics-Canvas-method-freeTextLayoutCaches'>/**Free up text layout caches
+</span>@hide 
+*/
+freeTextLayoutCaches : function(  ) {},
+
+<span id='android-graphics-Canvas-method-setCompatibilityVersion'>/**
+</span>@hide 
+*/
+setCompatibilityVersion : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawArc'>/**&lt;p&gt;
+</span> Draw the specified arc, which will be scaled to fit inside the specified oval.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the start angle is negative or &gt;= 360, the start angle is treated as start angle modulo
+ 360.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the sweep angle is &gt;= 360, then the oval is drawn completely. Note that this differs
+ slightly from SkPath::arcTo, which treats the sweep angle modulo 360. If the sweep angle is
+ negative, the sweep angle is treated as sweep angle modulo 360
+ &lt;/p&gt;
+ &lt;p&gt;
+ The arc is drawn clockwise. An angle of 0 degrees correspond to the geometric angle of 0
+ degrees (3 o'clock on a watch.)
+ &lt;/p&gt;
+@param {Object {RectF}} oval The bounds of oval used to define the shape and size of the arc
+@param {Number} startAngle Starting angle (in degrees) where the arc begins
+@param {Number} sweepAngle Sweep angle (in degrees) measured clockwise
+@param {Boolean} useCenter If true, include the center of the oval in the arc, and close it if it is
+            being stroked. This will draw a wedge
+@param {Object {Paint}} paint The paint used to draw the arc
+*/
+drawArc : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawArc'>/**&lt;p&gt;
+</span> Draw the specified arc, which will be scaled to fit inside the specified oval.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the start angle is negative or &gt;= 360, the start angle is treated as start angle modulo
+ 360.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the sweep angle is &gt;= 360, then the oval is drawn completely. Note that this differs
+ slightly from SkPath::arcTo, which treats the sweep angle modulo 360. If the sweep angle is
+ negative, the sweep angle is treated as sweep angle modulo 360
+ &lt;/p&gt;
+ &lt;p&gt;
+ The arc is drawn clockwise. An angle of 0 degrees correspond to the geometric angle of 0
+ degrees (3 o'clock on a watch.)
+ &lt;/p&gt;
+@param {Number} startAngle Starting angle (in degrees) where the arc begins
+@param {Number} sweepAngle Sweep angle (in degrees) measured clockwise
+@param {Number} useCenter If true, include the center of the oval in the arc, and close it if it is
+            being stroked. This will draw a wedge
+@param {Number} paint The paint used to draw the arc
+*/
+drawArc : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawARGB'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified ARGB
+</span> color, using srcover porterduff mode.
+@param {Number} a alpha component (0..255) of the color to draw onto the canvas
+@param {Number} r red component (0..255) of the color to draw onto the canvas
+@param {Number} g green component (0..255) of the color to draw onto the canvas
+@param {Number} b blue component (0..255) of the color to draw onto the canvas
+*/
+drawARGB : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawBitmap'>/**Draw the specified bitmap, with its top/left corner at (x,y), using the specified paint,
+</span> transformed by the current matrix.
+ &lt;p&gt;
+ Note: if the paint contains a maskfilter that generates a mask which extends beyond the
+ bitmap's original width/height (e.g. BlurMaskFilter), then the bitmap will be drawn as if it
+ were in a Shader with CLAMP mode. Thus the color outside of the original width/height will be
+ the edge color replicated.
+ &lt;p&gt;
+ If the bitmap and canvas have different densities, this function will take care of
+ automatically scaling the bitmap to draw at the same density as the canvas.
+@param {Object {Bitmap}} bitmap The bitmap to be drawn
+@param {Number} left The position of the left side of the bitmap being drawn
+@param {Number} top The position of the top side of the bitmap being drawn
+@param {Object {Paint}} paint The paint used to draw the bitmap (may be null)
+*/
+drawBitmap : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawBitmap'>/**Draw the specified bitmap, scaling/translating automatically to fill the destination
+</span> rectangle. If the source rectangle is not null, it specifies the subset of the bitmap to
+ draw.
+ &lt;p&gt;
+ Note: if the paint contains a maskfilter that generates a mask which extends beyond the
+ bitmap's original width/height (e.g. BlurMaskFilter), then the bitmap will be drawn as if it
+ were in a Shader with CLAMP mode. Thus the color outside of the original width/height will be
+ the edge color replicated.
+ &lt;p&gt;
+ This function &lt;em&gt;ignores the density associated with the bitmap&lt;/em&gt;. This is because the
+ source and destination rectangle coordinate spaces are in their respective densities, so must
+ already have the appropriate scaling factor applied.
+@param {Object {Bitmap}} bitmap The bitmap to be drawn
+@param {Object {Rect}} src May be null. The subset of the bitmap to be drawn
+@param {Object {RectF}} dst The rectangle that the bitmap will be scaled/translated to fit into
+@param {Object {Paint}} paint May be null. The paint used to draw the bitmap
+*/
+drawBitmap : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawBitmap'>/**Draw the specified bitmap, scaling/translating automatically to fill the destination
+</span> rectangle. If the source rectangle is not null, it specifies the subset of the bitmap to
+ draw.
+ &lt;p&gt;
+ Note: if the paint contains a maskfilter that generates a mask which extends beyond the
+ bitmap's original width/height (e.g. BlurMaskFilter), then the bitmap will be drawn as if it
+ were in a Shader with CLAMP mode. Thus the color outside of the original width/height will be
+ the edge color replicated.
+ &lt;p&gt;
+ This function &lt;em&gt;ignores the density associated with the bitmap&lt;/em&gt;. This is because the
+ source and destination rectangle coordinate spaces are in their respective densities, so must
+ already have the appropriate scaling factor applied.
+@param {Object {Bitmap}} bitmap The bitmap to be drawn
+@param {Object {Rect}} src May be null. The subset of the bitmap to be drawn
+@param {Object {Rect}} dst The rectangle that the bitmap will be scaled/translated to fit into
+@param {Object {Paint}} paint May be null. The paint used to draw the bitmap
+*/
+drawBitmap : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawBitmap'>/**Treat the specified array of colors as a bitmap, and draw it. This gives the same result as
+</span> first creating a bitmap from the array, and then drawing it, but this method avoids
+ explicitly creating a bitmap object which can be more efficient if the colors are changing
+ often.
+@param {Object {int[]}} colors Array of colors representing the pixels of the bitmap
+@param {Number} offset Offset into the array of colors for the first pixel
+@param {Number} stride The number of colors in the array between rows (must be &gt;= width or &lt;= -width).
+@param {Number} x The X coordinate for where to draw the bitmap
+@param {Number} y The Y coordinate for where to draw the bitmap
+@param {Number} width The width of the bitmap
+@param {Number} height The height of the bitmap
+@param {Boolean} hasAlpha True if the alpha channel of the colors contains valid values. If false, the
+            alpha byte is ignored (assumed to be 0xFF for every pixel).
+@param {Object {Paint}} paint May be null. The paint used to draw the bitmap
+@deprecated Usage with a {@link #isHardwareAccelerated() hardware accelerated} canvas
+             requires an internal copy of color buffer contents every time this method is
+             called. Using a Bitmap avoids this copy, and allows the application to more
+             explicitly control the lifetime and copies of pixel data.
+*/
+drawBitmap : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawBitmap'>/**Legacy version of drawBitmap(int[] colors, ...) that took ints for x,y
+</span>@deprecated Usage with a {@link #isHardwareAccelerated() hardware accelerated} canvas
+             requires an internal copy of color buffer contents every time this method is
+             called. Using a Bitmap avoids this copy, and allows the application to more
+             explicitly control the lifetime and copies of pixel data.
+*/
+drawBitmap : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawBitmap'>/**Draw the bitmap using the specified matrix.
+</span>@param {Object {Bitmap}} bitmap The bitmap to draw
+@param {Object {Matrix}} matrix The matrix used to transform the bitmap when it is drawn
+@param {Object {Paint}} paint May be null. The paint used to draw the bitmap
+*/
+drawBitmap : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawBitmapMesh'>/**Draw the bitmap through the mesh, where mesh vertices are evenly distributed across the
+</span> bitmap. There are meshWidth+1 vertices across, and meshHeight+1 vertices down. The verts
+ array is accessed in row-major order, so that the first meshWidth+1 vertices are distributed
+ across the top of the bitmap from left to right. A more general version of this method is
+ drawVertices().
+
+ Prior to API level {@value Build.VERSION_CODES#P} vertOffset and colorOffset were ignored,
+ effectively treating them as zeros. In API level {@value Build.VERSION_CODES#P} and above
+ these parameters will be respected.
+@param {Object {Bitmap}} bitmap The bitmap to draw using the mesh
+@param {Number} meshWidth The number of columns in the mesh. Nothing is drawn if this is 0
+@param {Number} meshHeight The number of rows in the mesh. Nothing is drawn if this is 0
+@param {Object {float[]}} verts Array of x,y pairs, specifying where the mesh should be drawn. There must be at
+            least (meshWidth+1) * (meshHeight+1) * 2 + vertOffset values in the array
+@param {Number} vertOffset Number of verts elements to skip before drawing
+@param {Object {int[]}} colors May be null. Specifies a color at each vertex, which is interpolated across the
+            cell, and whose values are multiplied by the corresponding bitmap colors. If not
+            null, there must be at least (meshWidth+1) * (meshHeight+1) + colorOffset values
+            in the array.
+@param {Number} colorOffset Number of color elements to skip before drawing
+@param {Object {Paint}} paint May be null. The paint used to draw the bitmap
+*/
+drawBitmapMesh : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawCircle'>/**Draw the specified circle using the specified paint. If radius is &lt;= 0, then nothing will be
+</span> drawn. The circle will be filled or framed based on the Style in the paint.
+@param {Number} cx The x-coordinate of the center of the circle to be drawn
+@param {Number} cy The y-coordinate of the center of the circle to be drawn
+@param {Number} radius The radius of the circle to be drawn
+@param {Object {Paint}} paint The paint used to draw the circle
+*/
+drawCircle : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawColor'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified color,
+</span> using srcover porterduff mode.
+@param {Number} color the color to draw onto the canvas
+*/
+drawColor : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawColor'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified color,
+</span> using srcover porterduff mode.
+@param {Number} color the {@code ColorLong} to draw onto the canvas. See the {@link Color}
+              class for details about {@code ColorLong}s.
+@throws IllegalArgumentException if the color space encoded in the {@code ColorLong}
+                                  is invalid or unknown.
+*/
+drawColor : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawColor'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified color and
+</span> porter-duff xfermode.
+@param {Number} color the color to draw onto the canvas
+@param {Object {PorterDuff.Mode}} mode the porter-duff mode to apply to the color
+*/
+drawColor : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawColor'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified color and
+</span> blendmode.
+@param {Number} color the color to draw onto the canvas
+@param {Object {BlendMode}} mode the blendmode to apply to the color
+*/
+drawColor : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawColor'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified color and
+</span> blendmode.
+@param {Number} color the {@code ColorLong} to draw onto the canvas. See the {@link Color}
+              class for details about {@code ColorLong}s.
+@param {Object {BlendMode}} mode the blendmode to apply to the color
+@throws IllegalArgumentException if the color space encoded in the {@code ColorLong}
+                                  is invalid or unknown.
+*/
+drawColor : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawLine'>/**Draw a line segment with the specified start and stop x,y coordinates, using the specified
+</span> paint.
+ &lt;p&gt;
+ Note that since a line is always &quot;framed&quot;, the Style is ignored in the paint.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Degenerate lines (length is 0) will not be drawn.
+ &lt;/p&gt;
+@param {Number} startX The x-coordinate of the start point of the line
+@param {Number} startY The y-coordinate of the start point of the line
+@param {Number} paint The paint used to draw the line
+*/
+drawLine : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawLines'>/**Draw a series of lines. Each line is taken from 4 consecutive values in the pts array. Thus
+</span> to draw 1 line, the array must contain at least 4 values. This is logically the same as
+ drawing the array as follows: drawLine(pts[0], pts[1], pts[2], pts[3]) followed by
+ drawLine(pts[4], pts[5], pts[6], pts[7]) and so on.
+@param {Object {float[]}} pts Array of points to draw [x0 y0 x1 y1 x2 y2 ...]
+@param {Number} offset Number of values in the array to skip before drawing.
+@param {Number} count The number of values in the array to process, after skipping &quot;offset&quot; of them.
+            Since each line uses 4 values, the number of &quot;lines&quot; that are drawn is really
+            (count &gt;&gt; 2).
+@param {Object {Paint}} paint The paint used to draw the points
+*/
+drawLines : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawLines'>/**
+</span>*/
+drawLines : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawOval'>/**Draw the specified oval using the specified paint. The oval will be filled or framed based on
+</span> the Style in the paint.
+@param {Object {RectF}} oval The rectangle bounds of the oval to be drawn
+*/
+drawOval : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawOval'>/**Draw the specified oval using the specified paint. The oval will be filled or framed based on
+</span> the Style in the paint.
+*/
+drawOval : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPaint'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified paint.
+</span> This is equivalent (but faster) to drawing an infinitely large rectangle with the specified
+ paint.
+@param {Object {Paint}} paint The paint used to draw onto the canvas
+*/
+drawPaint : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPatch'>/**Draws the specified bitmap as an N-patch (most often, a 9-patches.)
+</span>@param {Object {NinePatch}} patch The ninepatch object to render
+@param {Object {Rect}} dst The destination rectangle.
+@param {Object {Paint}} paint The paint to draw the bitmap with. may be null
+@hide 
+*/
+drawPatch : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPatch'>/**Draws the specified bitmap as an N-patch (most often, a 9-patches.)
+</span>@param {Object {NinePatch}} patch The ninepatch object to render
+@param {Object {RectF}} dst The destination rectangle.
+@param {Object {Paint}} paint The paint to draw the bitmap with. may be null
+@hide 
+*/
+drawPatch : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPath'>/**Draw the specified path using the specified paint. The path will be filled or framed based on
+</span> the Style in the paint.
+@param {Object {Path}} path The path to be drawn
+@param {Object {Paint}} paint The paint used to draw the path
+*/
+drawPath : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPoint'>/**Helper for drawPoints() for drawing a single point.
+</span>*/
+drawPoint : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPoints'>/**Draw a series of points. Each point is centered at the coordinate specified by pts[], and its
+</span> diameter is specified by the paint's stroke width (as transformed by the canvas' CTM), with
+ special treatment for a stroke width of 0, which always draws exactly 1 pixel (or at most 4
+ if antialiasing is enabled). The shape of the point is controlled by the paint's Cap type.
+ The shape is a square, unless the cap type is Round, in which case the shape is a circle.
+@param {Object {float[]}} pts Array of points to draw [x0 y0 x1 y1 x2 y2 ...]
+@param {Number} offset Number of values to skip before starting to draw.
+@param {Number} count The number of values to process, after skipping offset of them. Since one point
+            uses two values, the number of &quot;points&quot; that are drawn is really (count &gt;&gt; 1).
+@param {Object {Paint}} paint The paint used to draw the points
+*/
+drawPoints : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPoints'>/**Helper for drawPoints() that assumes you want to draw the entire array
+</span>*/
+drawPoints : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPosText'>/**Draw the text in the array, with each character's origin specified by the pos array.
+</span>@param {Object {char[]}} text The text to be drawn
+@param {Number} index The index of the first character to draw
+@param {Number} count The number of characters to draw, starting from index.
+@param {Object {float[]}} pos Array of [x,y] positions, used to position each character
+@param {Object {Paint}} paint The paint used for the text (e.g. color, size, style)
+@deprecated This method does not support glyph composition and decomposition and should
+             therefore not be used to render complex scripts. It also doesn't handle
+             supplementary characters (eg emoji).
+*/
+drawPosText : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawPosText'>/**Draw the text in the array, with each character's origin specified by the pos array.
+</span>@param {String} text The text to be drawn
+@param {Object {float[]}} pos Array of [x,y] positions, used to position each character
+@param {Object {Paint}} paint The paint used for the text (e.g. color, size, style)
+@deprecated This method does not support glyph composition and decomposition and should
+             therefore not be used to render complex scripts. It also doesn't handle
+             supplementary characters (eg emoji).
+*/
+drawPosText : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawRect'>/**Draw the specified Rect using the specified paint. The rectangle will be filled or framed
+</span> based on the Style in the paint.
+@param {Object {RectF}} rect The rect to be drawn
+@param {Object {Paint}} paint The paint used to draw the rect
+*/
+drawRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawRect'>/**Draw the specified Rect using the specified Paint. The rectangle will be filled or framed
+</span> based on the Style in the paint.
+@param {Object {Rect}} r The rectangle to be drawn.
+@param {Object {Paint}} paint The paint used to draw the rectangle
+*/
+drawRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawRect'>/**Draw the specified Rect using the specified paint. The rectangle will be filled or framed
+</span> based on the Style in the paint.
+@param {Number} left The left side of the rectangle to be drawn
+@param {Number} top The top side of the rectangle to be drawn
+@param {Number} right The right side of the rectangle to be drawn
+@param {Number} bottom The bottom side of the rectangle to be drawn
+@param {Object {Paint}} paint The paint used to draw the rect
+*/
+drawRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawRGB'>/**Fill the entire canvas' bitmap (restricted to the current clip) with the specified RGB color,
+</span> using srcover porterduff mode.
+@param {Number} r red component (0..255) of the color to draw onto the canvas
+@param {Number} g green component (0..255) of the color to draw onto the canvas
+@param {Number} b blue component (0..255) of the color to draw onto the canvas
+*/
+drawRGB : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawRoundRect'>/**Draw the specified round-rect using the specified paint. The roundrect will be filled or
+</span> framed based on the Style in the paint.
+@param {Object {RectF}} rect The rectangular bounds of the roundRect to be drawn
+@param {Number} rx The x-radius of the oval used to round the corners
+@param {Number} ry The y-radius of the oval used to round the corners
+@param {Object {Paint}} paint The paint used to draw the roundRect
+*/
+drawRoundRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawRoundRect'>/**Draw the specified round-rect using the specified paint. The roundrect will be filled or
+</span> framed based on the Style in the paint.
+@param {Number} rx The x-radius of the oval used to round the corners
+@param {Number} ry The y-radius of the oval used to round the corners
+@param {Number} paint The paint used to draw the roundRect
+*/
+drawRoundRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawDoubleRoundRect'>/**Draws a double rounded rectangle using the specified paint. The resultant round rect
+</span> will be filled in the area defined between the outer and inner rectangular bounds if
+ the {@link android.graphics.Paint} configured with {@link android.graphics.Paint.Style#FILL}.
+ Otherwise if {@link android.graphics.Paint.Style#STROKE} is used, then 2 rounded rect strokes will
+ be drawn at the outer and inner rounded rectangles
+@param {Object {RectF}} outer The outer rectangular bounds of the roundRect to be drawn
+@param {Number} outerRx The x-radius of the oval used to round the corners on the outer rectangle
+@param {Number} outerRy The y-radius of the oval used to round the corners on the outer rectangle
+@param {Object {RectF}} inner The inner rectangular bounds of the roundRect to be drawn
+@param {Number} innerRx The x-radius of the oval used to round the corners on the inner rectangle
+@param {Number} innerRy The y-radius of the oval used to round the corners on the outer rectangle
+@param {Object {Paint}} paint The paint used to draw the double roundRect
+*/
+drawDoubleRoundRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawDoubleRoundRect'>/**Draws a double rounded rectangle using the specified paint. The resultant round rect
+</span> will be filled in the area defined between the outer and inner rectangular bounds if
+ the {@link android.graphics.Paint} configured with {@link android.graphics.Paint.Style#FILL}.
+ Otherwise if {@link android.graphics.Paint.Style#STROKE} is used, then 2 rounded rect strokes will
+ be drawn at the outer and inner rounded rectangles
+@param {Object {RectF}} outer The outer rectangular bounds of the roundRect to be drawn
+@param {Object {float[]}} outerRadii Array of 8 float representing the x, y corner radii for top left,
+                   top right, bottom right, bottom left corners respectively on the outer
+                   rounded rectangle
+@param {Object {RectF}} inner The inner rectangular bounds of the roundRect to be drawn
+@param {Object {float[]}} innerRadii Array of 8 float representing the x, y corner radii for top left,
+                   top right, bottom right, bottom left corners respectively on the
+                   outer rounded rectangle
+@param {Object {Paint}} paint The paint used to draw the double roundRect
+*/
+drawDoubleRoundRect : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawText'>/**Draw the text, with origin at (x,y), using the specified paint. The origin is interpreted
+</span> based on the Align setting in the paint.
+@param {Object {char[]}} text The text to be drawn
+@param {Number} x The x-coordinate of the origin of the text being drawn
+@param {Number} y The y-coordinate of the baseline of the text being drawn
+@param {Number} paint The paint used for the text (e.g. color, size, style)
+*/
+drawText : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawText'>/**Draw the text, with origin at (x,y), using the specified paint. The origin is interpreted
+</span> based on the Align setting in the paint.
+@param {String} text The text to be drawn
+@param {Number} x The x-coordinate of the origin of the text being drawn
+@param {Number} y The y-coordinate of the baseline of the text being drawn
+@param {Object {Paint}} paint The paint used for the text (e.g. color, size, style)
+*/
+drawText : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawText'>/**Draw the text, with origin at (x,y), using the specified paint. The origin is interpreted
+</span> based on the Align setting in the paint.
+@param {String} text The text to be drawn
+@param {Number} start The index of the first character in text to draw
+@param {Number} end (end - 1) is the index of the last character in text to draw
+@param {Number} x The x-coordinate of the origin of the text being drawn
+@param {Number} y The y-coordinate of the baseline of the text being drawn
+@param {Object {Paint}} paint The paint used for the text (e.g. color, size, style)
+*/
+drawText : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawText'>/**Draw the specified range of text, specified by start/end, with its origin at (x,y), in the
+</span> specified Paint. The origin is interpreted based on the Align setting in the Paint.
+@param {Object {CharSequence}} text The text to be drawn
+@param {Number} start The index of the first character in text to draw
+@param {Number} end (end - 1) is the index of the last character in text to draw
+@param {Number} x The x-coordinate of origin for where to draw the text
+@param {Number} y The y-coordinate of origin for where to draw the text
+@param {Object {Paint}} paint The paint used for the text (e.g. color, size, style)
+*/
+drawText : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawTextOnPath'>/**Draw the text, with origin at (x,y), using the specified paint, along the specified path. The
+</span> paint's Align setting determins where along the path to start the text.
+@param {Object {char[]}} text The text to be drawn
+@param {Number} path The path the text should follow for its baseline
+@param {Number} hOffset The distance along the path to add to the text's starting position
+@param {Object {Path}} vOffset The distance above(-) or below(+) the path to position the text
+@param {Number} paint The paint used for the text (e.g. color, size, style)
+*/
+drawTextOnPath : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawTextOnPath'>/**Draw the text, with origin at (x,y), using the specified paint, along the specified path. The
+</span> paint's Align setting determins where along the path to start the text.
+@param {String} text The text to be drawn
+@param {Object {Path}} path The path the text should follow for its baseline
+@param {Number} hOffset The distance along the path to add to the text's starting position
+@param {Number} vOffset The distance above(-) or below(+) the path to position the text
+@param {Object {Paint}} paint The paint used for the text (e.g. color, size, style)
+*/
+drawTextOnPath : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawTextRun'>/**Draw a run of text, all in a single direction, with optional context for complex text
+</span> shaping.
+ &lt;p&gt;
+ See {@link #drawTextRun(CharSequence, int, int, int, int, float, float, boolean, android.graphics.Paint)} for
+ more details. This method uses a character array rather than CharSequence to represent the
+ string. Also, to be consistent with the pattern established in {@link #drawText}, in this
+ method {@code count} and {@code contextCount} are used rather than offsets of the end
+ position; {@code count = end - start, contextCount = contextEnd -
+ contextStart}.
+@param {Object {char[]}} text the text to render
+@param {Number} index the start of the text to render
+@param {Number} count the count of chars to render
+@param {Number} contextIndex the start of the context for shaping. Must be no greater than index.
+@param {Number} contextCount the number of characters in the context for shaping. contexIndex +
+            contextCount must be no less than index + count.
+@param {Number} x the x position at which to draw the text
+@param {Number} y the y position at which to draw the text
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Object {Paint}} paint the paint
+*/
+drawTextRun : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawTextRun'>/**Draw a run of text, all in a single direction, with optional context for complex text
+</span> shaping.
+ &lt;p&gt;
+ The run of text includes the characters from {@code start} to {@code end} in the text. In
+ addition, the range {@code contextStart} to {@code contextEnd} is used as context for the
+ purpose of complex text shaping, such as Arabic text potentially shaped differently based on
+ the text next to it.
+ &lt;p&gt;
+ All text outside the range {@code contextStart..contextEnd} is ignored. The text between
+ {@code start} and {@code end} will be laid out and drawn. The context range is useful for
+ contextual shaping, e.g. Kerning, Arabic contextural form.
+ &lt;p&gt;
+ The direction of the run is explicitly specified by {@code isRtl}. Thus, this method is
+ suitable only for runs of a single direction. Alignment of the text is as determined by the
+ Paint's TextAlign value. Further, {@code 0 &lt;= contextStart &lt;= start &lt;= end &lt;= contextEnd
+ &lt;= text.length} must hold on entry.
+ &lt;p&gt;
+ Also see {@link android.graphics.Paint#getRunAdvance} for a corresponding method to measure
+ the text; the advance width of the text drawn matches the value obtained from that method.
+@param {Object {CharSequence}} text the text to render
+@param {Number} start the start of the text to render. Data before this position can be used for
+            shaping context.
+@param {Number} end the end of the text to render. Data at or after this position can be used for
+            shaping context.
+@param {Number} contextStart the index of the start of the shaping context
+@param {Number} contextEnd the index of the end of the shaping context
+@param {Number} x the x position at which to draw the text
+@param {Number} y the y position at which to draw the text
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Object {Paint}} paint the paint
+@see #drawTextRun(char[], int, int, int, int, float, float, boolean, Paint)
+*/
+drawTextRun : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawTextRun'>/**Draw a run of text, all in a single direction, with optional context for complex text
+</span> shaping.
+ &lt;p&gt;
+ See {@link #drawTextRun(CharSequence, int, int, int, int, float, float, boolean, android.graphics.Paint)} for
+ more details. This method uses a {@link MeasuredText} rather than CharSequence to represent
+ the string.
+@param {Object {MeasuredText}} text the text to render
+@param {Number} start the start of the text to render. Data before this position can be used for
+            shaping context.
+@param {Number} end the end of the text to render. Data at or after this position can be used for
+            shaping context.
+@param {Number} contextStart the index of the start of the shaping context
+@param {Number} contextEnd the index of the end of the shaping context
+@param {Number} x the x position at which to draw the text
+@param {Number} y the y position at which to draw the text
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Object {Paint}} paint the paint
+*/
+drawTextRun : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawVertices'>/**Draw the array of vertices, interpreted as triangles (based on mode). The verts array is
+</span> required, and specifies the x,y pairs for each vertex. If texs is non-null, then it is used
+ to specify the coordinate in shader coordinates to use at each vertex (the paint must have a
+ shader in this case). If there is no texs array, but there is a color array, then each color
+ is interpolated across its corresponding triangle in a gradient. If both texs and colors
+ arrays are present, then they behave as before, but the resulting color at each pixels is the
+ result of multiplying the colors from the shader and the color-gradient together. The indices
+ array is optional, but if it is present, then it is used to specify the index of each
+ triangle, rather than just walking through the arrays in order.
+@param {Object {Canvas.VertexMode}} mode How to interpret the array of vertices
+@param {Number} vertexCount The number of values in the vertices array (and corresponding texs and
+            colors arrays if non-null). Each logical vertex is two values (x, y), vertexCount
+            must be a multiple of 2.
+@param {Object {float[]}} verts Array of vertices for the mesh
+@param {Number} vertOffset Number of values in the verts to skip before drawing.
+@param {Object {float[]}} texs May be null. If not null, specifies the coordinates to sample into the current
+            shader (e.g. bitmap tile or gradient)
+@param {Number} texOffset Number of values in texs to skip before drawing.
+@param {Object {int[]}} colors May be null. If not null, specifies a color for each vertex, to be interpolated
+            across the triangle.
+@param {Number} colorOffset Number of values in colors to skip before drawing.
+@param {Object {short[]}} indices If not null, array of indices to reference into the vertex (texs, colors)
+            array.
+@param {Number} indexCount number of entries in the indices array (if not null).
+@param {Number} paint Specifies the shader to use if the texs array is non-null.
+*/
+drawVertices : function(  ) {},
+
+<span id='android-graphics-Canvas-method-drawRenderNode'>/**Draws the given RenderNode. This is only supported in hardware rendering, which can be
+</span> verified by asserting that {@link #isHardwareAccelerated}() is true. If
+ {@link #isHardwareAccelerated}() is false then this throws an exception.
+
+ See {@link android.graphics.RenderNode} for more information on what a RenderNode is and how to use it.
+@param {Object {RenderNode}} renderNode The RenderNode to draw, must be non-null.
+*/
+drawRenderNode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-AutoScrollHelper'>/**@class com.android.internal.widget.AutoScrollHelper
+</span> implements android.view.View.OnTouchListener
+
+@extends java.lang.Object
+
+ AutoScrollHelper is a utility class for adding automatic edge-triggered
+ scrolling to Views.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt; Implementing classes are responsible for overriding the
+ {@link #scrollTargetBy}, {@link #canTargetScrollHorizontally}, and
+ {@link #canTargetScrollVertically} methods. See
+ {@link com.android.internal.widget.AutoScrollHelper.AbsListViewAutoScroller} for an {@link android.widget.AbsListView}
+ -specific implementation.
+ &lt;p&gt;
+ &lt;h1&gt;Activation&lt;/h1&gt; Automatic scrolling starts when the user touches within
+ an activation area. By default, activation areas are defined as the top,
+ left, right, and bottom 20% of the host view's total area. Touching within
+ the top activation area scrolls up, left scrolls to the left, and so on.
+ &lt;p&gt;
+ As the user touches closer to the extreme edge of the activation area,
+ scrolling accelerates up to a maximum velocity. When using the default edge
+ type, {@link #EDGE_TYPE_INSIDE_EXTEND}, moving outside of the view bounds
+ will scroll at the maximum velocity.
+ &lt;p&gt;
+ The following activation properties may be configured:
+ &lt;ul&gt;
+ &lt;li&gt;Delay after entering activation area before auto-scrolling begins, see
+ {@link #setActivationDelay}. Default value is
+ {@link ViewConfiguration#getTapTimeout()} to avoid conflicting with taps.
+ &lt;li&gt;Location of activation areas, see {@link #setEdgeType}. Default value is
+ {@link #EDGE_TYPE_INSIDE_EXTEND}.
+ &lt;li&gt;Size of activation areas relative to view size, see
+ {@link #setRelativeEdges}. Default value is 20% for both vertical and
+ horizontal edges.
+ &lt;li&gt;Maximum size used to constrain relative size, see
+ {@link #setMaximumEdges}. Default value is {@link #NO_MAX}.
+ &lt;/ul&gt;
+ &lt;h1&gt;Scrolling&lt;/h1&gt; When automatic scrolling is active, the helper will
+ repeatedly call {@link #scrollTargetBy} to apply new scrolling offsets.
+ &lt;p&gt;
+ The following scrolling properties may be configured:
+ &lt;ul&gt;
+ &lt;li&gt;Acceleration ramp-up duration, see {@link #setRampUpDuration}. Default
+ value is 500 milliseconds.
+ &lt;li&gt;Acceleration ramp-down duration, see {@link #setRampDownDuration}.
+ Default value is 500 milliseconds.
+ &lt;li&gt;Target velocity relative to view size, see {@link #setRelativeVelocity}.
+ Default value is 100% per second for both vertical and horizontal.
+ &lt;li&gt;Minimum velocity used to constrain relative velocity, see
+ {@link #setMinimumVelocity}. When set, scrolling will accelerate to the
+ larger of either this value or the relative target value. Default value is
+ approximately 5 centimeters or 315 dips per second.
+ &lt;li&gt;Maximum velocity used to constrain relative velocity, see
+ {@link #setMaximumVelocity}. Default value is approximately 25 centimeters or
+ 1575 dips per second.
+ &lt;/ul&gt;
+*/
+var AutoScrollHelper = {
+
+<span id='com-android-internal-widget-AutoScrollHelper-property-RELATIVE_UNSPECIFIED'>/** Constant passed to {@link #setRelativeEdges} or
+</span> {@link #setRelativeVelocity}. Using this value ensures that the computed
+ relative value is ignored and the absolute maximum value is always used.
+*/
+RELATIVE_UNSPECIFIED : &quot;0.0&quot;,
+<span id='com-android-internal-widget-AutoScrollHelper-property-NO_MAX'>/** Constant passed to {@link #setMaximumEdges}, {@link #setMaximumVelocity},
+</span> or {@link #setMinimumVelocity}. Using this value ensures that the
+ computed relative value is always used without constraining to a
+ particular minimum or maximum value.
+*/
+NO_MAX : &quot;3.4028235E38&quot;,
+<span id='com-android-internal-widget-AutoScrollHelper-property-NO_MIN'>/** Constant passed to {@link #setMaximumEdges}, or
+</span> {@link #setMaximumVelocity}, or {@link #setMinimumVelocity}. Using this
+ value ensures that the computed relative value is always used without
+ constraining to a particular minimum or maximum value.
+*/
+NO_MIN : &quot;0.0&quot;,
+<span id='com-android-internal-widget-AutoScrollHelper-property-EDGE_TYPE_INSIDE'>/** Edge type that specifies an activation area starting at the view bounds
+</span> and extending inward. Moving outside the view bounds will stop scrolling.
+
+ @see #setEdgeType
+*/
+EDGE_TYPE_INSIDE : &quot;0&quot;,
+<span id='com-android-internal-widget-AutoScrollHelper-property-EDGE_TYPE_INSIDE_EXTEND'>/** Edge type that specifies an activation area starting at the view bounds
+</span> and extending inward. After activation begins, moving outside the view
+ bounds will continue scrolling.
+
+ @see #setEdgeType
+*/
+EDGE_TYPE_INSIDE_EXTEND : &quot;1&quot;,
+<span id='com-android-internal-widget-AutoScrollHelper-property-EDGE_TYPE_OUTSIDE'>/** Edge type that specifies an activation area starting at the view bounds
+</span> and extending outward. Moving inside the view bounds will stop scrolling.
+
+ @see #setEdgeType
+*/
+EDGE_TYPE_OUTSIDE : &quot;2&quot;,
+<span id='com-android-internal-widget-AutoScrollHelper-method-setEnabled'>/**Sets whether the scroll helper is enabled and should respond to touch
+</span> events.
+@param {Boolean} enabled Whether the scroll helper is enabled.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-isEnabled'>/**
+</span>@return {Boolean} True if this helper is enabled and responding to touch events.
+*/
+isEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setExclusive'>/**Enables or disables exclusive handling of touch events during scrolling.
+</span> By default, exclusive handling is disabled and the target view receives
+ all touch events.
+ &lt;p&gt;
+ When enabled, {@link #onTouch} will return true if the helper is
+ currently scrolling and false otherwise.
+@param {Boolean} exclusive True to exclusively handle touch events during scrolling,
+            false to allow the target view to receive all touch events.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setExclusive : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-isExclusive'>/**Indicates whether the scroll helper handles touch events exclusively
+</span> during scrolling.
+@return {Boolean} True if exclusive handling of touch events during scrolling is
+         enabled, false otherwise.
+@see #setExclusive(boolean)
+*/
+isExclusive : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setMaximumVelocity'>/**Sets the absolute maximum scrolling velocity.
+</span> &lt;p&gt;
+ If relative velocity is not specified, scrolling will always reach the
+ same maximum velocity. If both relative and maximum velocities are
+ specified, the maximum velocity will be used to clamp the calculated
+ relative velocity.
+@param {Number} horizontalMax The maximum horizontal scrolling velocity, or
+            {@link #NO_MAX} to leave the relative value unconstrained.
+@param {Number} verticalMax The maximum vertical scrolling velocity, or
+            {@link #NO_MAX} to leave the relative value unconstrained.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setMaximumVelocity : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setMinimumVelocity'>/**Sets the absolute minimum scrolling velocity.
+</span> &lt;p&gt;
+ If both relative and minimum velocities are specified, the minimum
+ velocity will be used to clamp the calculated relative velocity.
+@param {Number} horizontalMin The minimum horizontal scrolling velocity, or
+            {@link #NO_MIN} to leave the relative value unconstrained.
+@param {Number} verticalMin The minimum vertical scrolling velocity, or
+            {@link #NO_MIN} to leave the relative value unconstrained.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setMinimumVelocity : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setRelativeVelocity'>/**Sets the target scrolling velocity relative to the host view's
+</span> dimensions.
+ &lt;p&gt;
+ If both relative and maximum velocities are specified, the maximum
+ velocity will be used to clamp the calculated relative velocity.
+@param {Number} horizontal The target horizontal velocity as a fraction of the
+            host view width per second, or {@link #RELATIVE_UNSPECIFIED}
+            to ignore.
+@param {Number} vertical The target vertical velocity as a fraction of the host
+            view height per second, or {@link #RELATIVE_UNSPECIFIED} to
+            ignore.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setRelativeVelocity : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setEdgeType'>/**Sets the activation edge type, one of:
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link #EDGE_TYPE_INSIDE} for edges that respond to touches inside
+ the bounds of the host view. If touch moves outside the bounds, scrolling
+ will stop.
+ &lt;li&gt;{@link #EDGE_TYPE_INSIDE_EXTEND} for inside edges that continued to
+ scroll when touch moves outside the bounds of the host view.
+ &lt;li&gt;{@link #EDGE_TYPE_OUTSIDE} for edges that only respond to touches
+ that move outside the bounds of the host view.
+ &lt;/ul&gt;
+@param {Number} type The type of edge to use.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setEdgeType : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setRelativeEdges'>/**Sets the activation edge size relative to the host view's dimensions.
+</span> &lt;p&gt;
+ If both relative and maximum edges are specified, the maximum edge will
+ be used to constrain the calculated relative edge size.
+@param {Number} horizontal The horizontal edge size as a fraction of the host view
+            width, or {@link #RELATIVE_UNSPECIFIED} to always use the
+            maximum value.
+@param {Number} vertical The vertical edge size as a fraction of the host view
+            height, or {@link #RELATIVE_UNSPECIFIED} to always use the
+            maximum value.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setRelativeEdges : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setMaximumEdges'>/**Sets the absolute maximum edge size.
+</span> &lt;p&gt;
+ If relative edge size is not specified, activation edges will always be
+ the maximum edge size. If both relative and maximum edges are specified,
+ the maximum edge will be used to constrain the calculated relative edge
+ size.
+@param {Number} horizontalMax The maximum horizontal edge size in pixels, or
+            {@link #NO_MAX} to use the unconstrained calculated relative
+            value.
+@param {Number} verticalMax The maximum vertical edge size in pixels, or
+            {@link #NO_MAX} to use the unconstrained calculated relative
+            value.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setMaximumEdges : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setActivationDelay'>/**Sets the delay after entering an activation edge before activation of
+</span> auto-scrolling. By default, the activation delay is set to
+ {@link ViewConfiguration#getTapTimeout()}.
+ &lt;p&gt;
+ Specifying a delay of zero will start auto-scrolling immediately after
+ the touch position enters an activation edge.
+@param {Number} delayMillis The activation delay in milliseconds.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setActivationDelay : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setRampUpDuration'>/**Sets the amount of time after activation of auto-scrolling that is takes
+</span> to reach target velocity for the current touch position.
+ &lt;p&gt;
+ Specifying a duration greater than zero prevents sudden jumps in
+ velocity.
+@param {Number} durationMillis The ramp-up duration in milliseconds.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setRampUpDuration : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-setRampDownDuration'>/**Sets the amount of time after de-activation of auto-scrolling that is
+</span> takes to slow to a stop.
+ &lt;p&gt;
+ Specifying a duration greater than zero prevents sudden jumps in
+ velocity.
+@param {Number} durationMillis The ramp-down duration in milliseconds.
+@return {Object {com.android.internal.widget.AutoScrollHelper}} The scroll helper, which may used to chain setter calls.
+*/
+setRampDownDuration : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-onTouch'>/**Handles touch events by activating automatic scrolling, adjusting scroll
+</span> velocity, or stopping.
+ &lt;p&gt;
+ If {@link #isExclusive}() is false, always returns false so that
+ the host view may handle touch events. Otherwise, returns true when
+ automatic scrolling is active and false otherwise.
+*/
+onTouch : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-scrollTargetBy'>/**Override this method to scroll the target view by the specified number of
+</span> pixels.
+@param {Number} deltaX The number of pixels to scroll by horizontally.
+@param {Number} deltaY The number of pixels to scroll by vertically.
+*/
+scrollTargetBy : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-canTargetScrollHorizontally'>/**Override this method to return whether the target view can be scrolled
+</span> horizontally in a certain direction.
+@param {Number} direction Negative to check scrolling left, positive to check
+            scrolling right.
+@return {Boolean} true if the target view is able to horizontally scroll in the
+         specified direction.
+*/
+canTargetScrollHorizontally : function(  ) {},
+
+<span id='com-android-internal-widget-AutoScrollHelper-method-canTargetScrollVertically'>/**Override this method to return whether the target view can be scrolled
+</span> vertically in a certain direction.
+@param {Number} direction Negative to check scrolling up, positive to check
+            scrolling down.
+@return {Boolean} true if the target view is able to vertically scroll in the
+         specified direction.
+*/
+canTargetScrollVertically : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

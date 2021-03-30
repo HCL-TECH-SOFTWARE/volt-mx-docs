@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions'>/**@class com.android.bitmap.drawable.ExtendedBitmapDrawable.ExtendedOptions
+</span>@extends java.lang.Object
+
+ This class contains the features a client can specify, and arguments to those features.
+ Clients can later retrieve the ExtendedOptions from an ExtendedBitmapDrawable and change the
+ parameters, which will be reflected immediately.
+*/
+var ExtendedOptions = {
+
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-FEATURE_ORDERED_DISPLAY'>/** Summary:
+</span> This feature enables you to draw decoded bitmap in order on the screen, to give the
+ visual effect of a single decode thread.
+
+ &lt;p/&gt;
+ Explanation:
+ Since DecodeTasks are asynchronous, multiple tasks may finish decoding at different
+ times. To have a smooth user experience, provide a shared {@link DecodeAggregator} to all
+ the ExtendedBitmapDrawables, and the decode aggregator will hold finished decodes so they
+ come back in order.
+
+ &lt;p/&gt;
+ Pros:
+ Visual consistency. Images are not popping up randomly all over the place.
+
+ &lt;p/&gt;
+ Cons:
+ Artificial delay. Images are not drawn as soon as they are decoded. They must wait
+ for their turn.
+
+ &lt;p/&gt;
+ Requirements:
+ Set {@link #decodeAggregator} to a shared {@link DecodeAggregator}.
+*/
+FEATURE_ORDERED_DISPLAY : &quot;1&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-FEATURE_PARALLAX'>/** Summary:
+</span> This feature enables the image to move in parallax as the user scrolls, to give visual
+ flair to your images.
+
+ &lt;p/&gt;
+ Explanation:
+ When the user scrolls D pixels in the vertical direction, this ExtendedBitmapDrawable
+ shifts its Bitmap f(D) pixels in the vertical direction before drawing to the screen.
+ Depending on the function f, the parallax effect can give varying interesting results.
+
+ &lt;p/&gt;
+ Pros:
+ Visual pop and playfulness. Feeling of movement. Pleasantly surprise your users.
+
+ &lt;p/&gt;
+ Cons:
+ Some users report motion sickness with certain speed multiplier values. Decode height
+ must be greater than visual bounds to account for the parallax. This uses more memory and
+ decoding time.
+
+ &lt;p/&gt;
+ Requirements:
+ Set {@link #parallaxSpeedMultiplier} to the ratio between the decoded height and the
+ visual bound height. Call {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#setDecodeDimensions(int, int)}
+ with the height multiplied by {@link #parallaxSpeedMultiplier}.
+ Call {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#setParallaxFraction(float)} when the user scrolls.
+*/
+FEATURE_PARALLAX : &quot;2&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-FEATURE_STATE_CHANGES'>/** Summary:
+</span> This feature enables fading in between multiple decode states, to give smooth transitions
+ to and from the placeholder, progress bars, and decoded image.
+
+ &lt;p/&gt;
+ Explanation:
+ The states are: {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#LOAD_STATE_UNINITIALIZED},
+ {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#LOAD_STATE_NOT_YET_LOADED},
+ {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#LOAD_STATE_LOADING},
+ {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#LOAD_STATE_LOADED}, and
+ {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#LOAD_STATE_FAILED}. These states affect whether the
+ placeholder and/or the progress bar is showing and animating. We first show the
+ pulsating placeholder when an image begins decoding. After 2 seconds, we fade in a
+ spinning progress bar. When the decode completes, we fade in the image.
+
+ &lt;p/&gt;
+ Pros:
+ Smooth, beautiful transitions avoid perceived jank. Progress indicator informs users that
+ work is being done and the app is not stalled.
+
+ &lt;p/&gt;
+ Cons:
+ Very fast decodes' short decode time would be eclipsed by the animation duration. Static
+ placeholder could be accomplished by {@link com.android.bitmap.drawable.BasicBitmapDrawable} without the added
+ complexity of states.
+
+ &lt;p/&gt;
+ Requirements:
+ Set {@link #backgroundColor} to the color used for the background of the placeholder and
+ progress bar. Use the alternative constructor to populate {@link #placeholder} and
+ {@link #progressBar}. Optionally set {@link #placeholderAnimationDuration}.
+*/
+FEATURE_STATE_CHANGES : &quot;4&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-features'>/** Non-changeable bit field describing the features you want the
+</span> {@link com.android.bitmap.drawable.ExtendedBitmapDrawable} to support.
+
+ &lt;p/&gt;
+ Example:
+ &lt;code&gt;
+ opts.features = FEATURE_ORDERED_DISPLAY | FEATURE_PARALLAX | FEATURE_STATE_CHANGES;
+ &lt;/code&gt;
+*/
+features : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-decodeHorizontalCenter'>/** Optional field for general decoding.
+</span>
+ This field determines which section of the source image to decode from. A value of 0
+ indicates a preference for the far left of the source, while a value of 1 indicates a
+ preference for the far right of the source. A value of .5 will result in the center
+ of the source being decoded.
+*/
+decodeHorizontalCenter : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-decodeVerticalCenter'>/** Optional field for general decoding.
+</span>
+ This field determines which section of the source image to decode from. A value of 0
+ indicates a preference for the very top of the source, while a value of 1 indicates a
+ preference for the very bottom of the source. A value of .5 will result in the center
+ of the source being decoded.
+
+ This should not be confused with {@link #setParallaxFraction}(float). This field
+ determines the general section for decode. The parallax fraction then determines the
+ slice from within that section for display.
+*/
+decodeVerticalCenter : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-decodeAggregator'>/** Required field if {@link #FEATURE_ORDERED_DISPLAY} is supported.
+</span>*/
+decodeAggregator : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-parallaxSpeedMultiplier'>/** Required field if {@link #FEATURE_PARALLAX} is supported.
+</span>
+ A value of 1.5f gives a subtle parallax, and is a good value to
+ start with. 2.0f gives a more obvious parallax, arguably exaggerated. Some users report
+ motion sickness with 2.0f. A value of 1.0f is synonymous with no parallax. Be careful not
+ to set too high a value, since we will start cropping the widths if the image's height is
+ not sufficient.
+*/
+parallaxSpeedMultiplier : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-backgroundColor'>/** Optional field if {@link #FEATURE_STATE_CHANGES} is supported. Must be an opaque color.
+</span>
+ See {@link android.graphics.Color}.
+*/
+backgroundColor : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-placeholder'>/** Optional field if {@link #FEATURE_STATE_CHANGES} is supported.
+</span>
+ If you modify this field you must call
+ {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#onOptsChanged(Resources, ExtendedOptions)} on the
+ appropriate ExtendedBitmapDrawable.
+*/
+placeholder : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-placeholderAnimationDuration'>/** Optional field if {@link #FEATURE_STATE_CHANGES} is supported.
+</span>
+ Special value 0 means default animation duration. Special value -1 means disable the
+ animation (placeholder will be at maximum alpha always). Any value &gt; 0 defines the
+ duration in milliseconds.
+*/
+placeholderAnimationDuration : &quot;null&quot;,
+<span id='com-android-bitmap-drawable-ExtendedBitmapDrawable-ExtendedOptions-property-progressBar'>/** Optional field if {@link #FEATURE_STATE_CHANGES} is supported.
+</span>
+ If you modify this field you must call
+ {@link com.android.bitmap.drawable.ExtendedBitmapDrawable#onOptsChanged(Resources, ExtendedOptions)} on the
+ appropriate ExtendedBitmapDrawable.
+*/
+progressBar : &quot;null&quot;,
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-WifiConfiguration'>/**@class android.net.wifi.WifiConfiguration
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class representing a configured Wi-Fi network, including the
+ security configuration.
+
+ @deprecated Use {@link android.net.wifi.WifiNetworkSpecifier.Builder} to create {@link NetworkSpecifier} and
+ {@link android.net.wifi.WifiNetworkSuggestion.Builder} to create {@link android.net.wifi.WifiNetworkSuggestion}. This will become a
+ system use only object in the future.
+*/
+var WifiConfiguration = {
+
+<span id='android-net-wifi-WifiConfiguration-property-ssidVarName'>/**{@hide} */
+</span>ssidVarName : &quot;ssid&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-bssidVarName'>/**{@hide} */
+</span>bssidVarName : &quot;bssid&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-pskVarName'>/**{@hide} */
+</span>pskVarName : &quot;psk&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-wepKeyVarNames'>/**{@hide} */
+</span>wepKeyVarNames : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-wepTxKeyIdxVarName'>/**{@hide} */
+</span>wepTxKeyIdxVarName : &quot;wep_tx_keyidx&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-priorityVarName'>/**{@hide} */
+</span>priorityVarName : &quot;priority&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-hiddenSSIDVarName'>/**{@hide} */
+</span>hiddenSSIDVarName : &quot;scan_ssid&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-pmfVarName'>/**{@hide} */
+</span>pmfVarName : &quot;ieee80211w&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-updateIdentiferVarName'>/**{@hide} */
+</span>updateIdentiferVarName : &quot;update_identifier&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-INVALID_NETWORK_ID'>/**{@hide} */
+</span>INVALID_NETWORK_ID : &quot;-1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-LOCAL_ONLY_NETWORK_ID'>/**{@hide} */
+</span>LOCAL_ONLY_NETWORK_ID : &quot;-2&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SECURITY_TYPE_OPEN'>/**@hide */
+</span>SECURITY_TYPE_OPEN : &quot;0&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SECURITY_TYPE_WEP'>/**@hide */
+</span>SECURITY_TYPE_WEP : &quot;1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SECURITY_TYPE_PSK'>/**@hide */
+</span>SECURITY_TYPE_PSK : &quot;2&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SECURITY_TYPE_EAP'>/**@hide */
+</span>SECURITY_TYPE_EAP : &quot;3&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SECURITY_TYPE_SAE'>/**@hide */
+</span>SECURITY_TYPE_SAE : &quot;4&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SECURITY_TYPE_EAP_SUITE_B'>/**@hide */
+</span>SECURITY_TYPE_EAP_SUITE_B : &quot;5&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SECURITY_TYPE_OWE'>/**@hide */
+</span>SECURITY_TYPE_OWE : &quot;6&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-UNKNOWN_UID'>/**@hide */
+</span>UNKNOWN_UID : &quot;-1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-networkId'>/** The ID number that the supplicant uses to identify this
+</span> network configuration entry. This must be passed as an argument
+ to most calls into the supplicant.
+*/
+networkId : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-status'>/** The current status of this network configuration entry.
+</span> @see Status
+*/
+status : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-SSID'>/** The network's SSID. Can either be a UTF-8 string,
+</span> which must be enclosed in double quotation marks
+ (e.g., {@code &quot;MyNetwork&quot;}), or a string of
+ hex digits, which are not enclosed in quotes
+ (e.g., {@code 01a243f405}).
+*/
+SSID : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-BSSID'>/** When set, this network configuration entry should only be used when
+</span> associating with the AP having the specified BSSID. The value is
+ a string in the format of an Ethernet MAC address, e.g.,
+ &lt;code&gt;XX:XX:XX:XX:XX:XX&lt;/code&gt; where each &lt;code&gt;X&lt;/code&gt; is a hex digit.
+*/
+BSSID : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-AP_BAND_2GHZ'>/** 2GHz band.
+</span> @hide
+*/
+AP_BAND_2GHZ : &quot;0&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-AP_BAND_5GHZ'>/** 5GHz band.
+</span> @hide
+*/
+AP_BAND_5GHZ : &quot;1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-AP_BAND_ANY'>/** Device is allowed to choose the optimal band (2Ghz or 5Ghz) based on device capability,
+</span> operating country code and current radio conditions.
+ @hide
+*/
+AP_BAND_ANY : &quot;-1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-apBand'>/** The band which AP resides on
+</span> -1:Any 0:2G 1:5G
+ By default, 2G is chosen
+ @hide
+*/
+apBand : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-apChannel'>/** The channel which AP resides on,currently, US only
+</span> 2G  1-11
+ 5G  36,40,44,48,149,153,157,161,165
+ 0 - find a random available channel according to the apBand
+ @hide
+*/
+apChannel : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-preSharedKey'>/** Pre-shared key for use with WPA-PSK. Either an ASCII string enclosed in
+</span> double quotation marks (e.g., {@code &quot;abcdefghij&quot;} for PSK passphrase or
+ a string of 64 hex digits for raw PSK.
+ &lt;p/&gt;
+ When the value of this key is read, the actual key is
+ not returned, just a &quot;*&quot; if the key has a value, or the null
+ string otherwise.
+*/
+preSharedKey : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-wepKeys'>/** Four WEP keys. For each of the four values, provide either an ASCII
+</span> string enclosed in double quotation marks (e.g., {@code &quot;abcdef&quot;}),
+ a string of hex digits (e.g., {@code 0102030405}), or an empty string
+ (e.g., {@code &quot;&quot;}).
+ &lt;p/&gt;
+ When the value of one of these keys is read, the actual key is
+ not returned, just a &quot;*&quot; if the key has a value, or the null
+ string otherwise.
+ @deprecated Due to security and performance limitations, use of WEP networks
+ is discouraged.
+*/
+wepKeys : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-wepTxKeyIndex'>/**Default WEP key index, ranging from 0 to 3.
+</span> @deprecated Due to security and performance limitations, use of WEP networks
+ is discouraged. */
+wepTxKeyIndex : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-priority'>/** Priority determines the preference given to a network by {@code wpa_supplicant}
+</span> when choosing an access point with which to associate.
+ @deprecated This field does not exist anymore.
+*/
+priority : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-hiddenSSID'>/** This is a network that does not broadcast its SSID, so an
+</span> SSID-specific probe request must be used for scans.
+*/
+hiddenSSID : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-requirePMF'>/** This is a network that requries Protected Management Frames (PMF).
+</span> @hide
+*/
+requirePMF : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-updateIdentifier'>/** Update identifier, for Passpoint network.
+</span> @hide
+*/
+updateIdentifier : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-allowedKeyManagement'>/** The set of key management protocols supported by this configuration.
+</span> See {@link android.net.wifi.WifiConfiguration.KeyMgmt} for descriptions of the values.
+ Defaults to WPA-PSK WPA-EAP.
+*/
+allowedKeyManagement : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-allowedProtocols'>/** The set of security protocols supported by this configuration.
+</span> See {@link android.net.wifi.WifiConfiguration.Protocol} for descriptions of the values.
+ Defaults to WPA RSN.
+*/
+allowedProtocols : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-allowedAuthAlgorithms'>/** The set of authentication protocols supported by this configuration.
+</span> See {@link android.net.wifi.WifiConfiguration.AuthAlgorithm} for descriptions of the values.
+ Defaults to automatic selection.
+*/
+allowedAuthAlgorithms : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-allowedPairwiseCiphers'>/** The set of pairwise ciphers for WPA supported by this configuration.
+</span> See {@link android.net.wifi.WifiConfiguration.PairwiseCipher} for descriptions of the values.
+ Defaults to CCMP TKIP.
+*/
+allowedPairwiseCiphers : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-allowedGroupCiphers'>/** The set of group ciphers supported by this configuration.
+</span> See {@link android.net.wifi.WifiConfiguration.GroupCipher} for descriptions of the values.
+ Defaults to CCMP TKIP WEP104 WEP40.
+*/
+allowedGroupCiphers : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-allowedGroupManagementCiphers'>/** The set of group management ciphers supported by this configuration.
+</span> See {@link android.net.wifi.WifiConfiguration.GroupMgmtCipher} for descriptions of the values.
+*/
+allowedGroupManagementCiphers : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-allowedSuiteBCiphers'>/** The set of SuiteB ciphers supported by this configuration.
+</span> To be used for WPA3-Enterprise mode.
+ See {@link android.net.wifi.WifiConfiguration.SuiteBCipher} for descriptions of the values.
+*/
+allowedSuiteBCiphers : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-enterpriseConfig'>/** The enterprise configuration details specifying the EAP method,
+</span> certificates and other settings associated with the EAP.
+*/
+enterpriseConfig : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-FQDN'>/** Fully qualified domain name of a Passpoint configuration
+</span>*/
+FQDN : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-providerFriendlyName'>/** Name of Passpoint credential provider
+</span>*/
+providerFriendlyName : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-isHomeProviderNetwork'>/** Flag indicating if this network is provided by a home Passpoint provider or a roaming
+</span> Passpoint provider.  This flag will be {@code true} if this network is provided by
+ a home Passpoint provider and {@code false} if is provided by a roaming Passpoint provider
+ or is a non-Passpoint network.
+*/
+isHomeProviderNetwork : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-roamingConsortiumIds'>/** Roaming Consortium Id list for Passpoint credential; identifies a set of networks where
+</span> Passpoint credential will be considered valid
+*/
+roamingConsortiumIds : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-shared'>/** @hide
+</span> This network configuration is visible to and usable by other users on the
+ same device.
+*/
+shared : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-dhcpServer'>/** @hide
+</span> dhcp server MAC address if known
+*/
+dhcpServer : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-defaultGwMacAddress'>/** @hide
+</span> default Gateway MAC address if known
+*/
+defaultGwMacAddress : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-validatedInternetAccess'>/** @hide
+</span> last time we connected, this configuration had validated internet access
+*/
+validatedInternetAccess : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-dtimInterval'>/** @hide
+</span> The number of beacon intervals between Delivery Traffic Indication Maps (DTIM)
+ This value is populated from scan results that contain Beacon Frames, which are infrequent.
+ The value is not guaranteed to be set or current (Although it SHOULDNT change once set)
+ Valid values are from 1 - 255. Initialized here as 0, use this to check if set.
+*/
+dtimInterval : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-isLegacyPasspointConfig'>/** Flag indicating if this configuration represents a legacy Passpoint configuration
+</span> (Release N or older).  This is used for migrating Passpoint configuration from N to O.
+ This will no longer be needed after O.
+ @hide
+*/
+isLegacyPasspointConfig : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-creatorUid'>/** @hide
+</span> Uid of app creating the configuration
+*/
+creatorUid : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-lastConnectUid'>/** @hide
+</span> Uid of last app issuing a connection related command
+*/
+lastConnectUid : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-lastUpdateUid'>/** @hide
+</span> Uid of last app modifying the configuration
+*/
+lastUpdateUid : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-creatorName'>/** @hide
+</span> Universal name for app creating the configuration
+    see {@link PackageManager#getNameForUid(int)}
+*/
+creatorName : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-lastUpdateName'>/** @hide
+</span> Universal name for app updating the configuration
+    see {@link PackageManager#getNameForUid(int)}
+*/
+lastUpdateName : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-userApproved'>/** @hide
+</span> Status of user approval for connection
+*/
+userApproved : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-INVALID_RSSI'>/**@hide */
+</span>INVALID_RSSI : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-USER_UNSPECIFIED'>/** @hide
+</span> User hasn't specified if connection is okay
+*/
+USER_UNSPECIFIED : &quot;0&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-USER_APPROVED'>/** @hide
+</span> User has approved this for connection
+*/
+USER_APPROVED : &quot;1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-USER_BANNED'>/** @hide
+</span> User has banned this from connection
+*/
+USER_BANNED : &quot;2&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-USER_PENDING'>/** @hide
+</span> Waiting for user input
+*/
+USER_PENDING : &quot;3&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-numNoInternetAccessReports'>/** @hide
+</span> Number of reports indicating no Internet Access
+*/
+numNoInternetAccessReports : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-updateTime'>/** @hide
+</span> For debug: date at which the config was last updated
+*/
+updateTime : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-creationTime'>/** @hide
+</span> For debug: date at which the config was last updated
+*/
+creationTime : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-noInternetAccessExpected'>/** The WiFi configuration is expected not to have Internet access (e.g., a wireless printer, a
+</span> Chromecast hotspot, etc.). This will be set if the user explicitly confirms a connection to
+ this configuration and selects &quot;don't ask again&quot;.
+ @hide
+*/
+noInternetAccessExpected : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-osu'>/** This Wifi configuration is expected for OSU(Online Sign Up) of Passpoint Release 2.
+</span> @hide
+*/
+osu : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-lastConnected'>/** @hide
+</span> Last time the system was connected to this configuration.
+*/
+lastConnected : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-lastDisconnected'>/** @hide
+</span> Last time the system was disconnected to this configuration.
+*/
+lastDisconnected : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-selfAdded'>/** Set if the configuration was self added by the framework
+</span> This boolean is cleared if we get a connect/save/ update or
+ any wifiManager command that indicate the user interacted with the configuration
+ since we will now consider that the configuration belong to him.
+ @hide
+*/
+selfAdded : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-didSelfAdd'>/** Set if the configuration was self added by the framework
+</span> This boolean is set once and never cleared. It is used
+ so as we never loose track of who created the
+ configuration in the first place.
+ @hide
+*/
+didSelfAdd : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-peerWifiConfiguration'>/** Peer WifiConfiguration this WifiConfiguration was added for
+</span> @hide
+*/
+peerWifiConfiguration : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-ephemeral'>/** @hide
+</span> Indicate that a WifiConfiguration is temporary and should not be saved
+ nor considered by AutoJoin.
+*/
+ephemeral : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-trusted'>/** Indicate whther the network is trusted or not. Networks are considered trusted
+</span> if the user explicitly allowed this network connection.
+ @hide
+*/
+trusted : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-fromWifiNetworkSuggestion'>/** This Wifi configuration is created from a {@link android.net.wifi.WifiNetworkSuggestion}
+</span> @hide
+*/
+fromWifiNetworkSuggestion : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-fromWifiNetworkSpecifier'>/** This Wifi configuration is created from a {@link android.net.wifi.WifiNetworkSpecifier}
+</span> @hide
+*/
+fromWifiNetworkSpecifier : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-meteredHint'>/** Indicates if the creator of this configuration has expressed that it
+</span> should be considered metered.
+
+ @see #isMetered(WifiConfiguration, WifiInfo)
+ @hide
+*/
+meteredHint : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-METERED_OVERRIDE_NONE'>/**{@hide} */
+</span>METERED_OVERRIDE_NONE : &quot;0&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-METERED_OVERRIDE_METERED'>/**{@hide} */
+</span>METERED_OVERRIDE_METERED : &quot;1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-METERED_OVERRIDE_NOT_METERED'>/**{@hide} */
+</span>METERED_OVERRIDE_NOT_METERED : &quot;2&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-meteredOverride'>/** Indicates if the end user has expressed an explicit opinion about the
+</span> meteredness of this network, such as through the Settings app.
+ &lt;p&gt;
+ This should always override any values from {@link #meteredHint} or
+ {@link android.net.wifi.WifiInfo#getMeteredHint()}.
+
+ @see #isMetered(WifiConfiguration, WifiInfo)
+ @hide
+*/
+meteredOverride : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-useExternalScores'>/** @hide
+</span> Setting this value will force scan results associated with this configuration to
+ be included in the bucket of networks that are externally scored.
+ If not set, associated scan results will be treated as legacy saved networks and
+ will take precedence over networks in the scored category.
+*/
+useExternalScores : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-numScorerOverride'>/** @hide
+</span> Number of time the scorer overrode a the priority based choice, when comparing two
+ WifiConfigurations, note that since comparing WifiConfiguration happens very often
+ potentially at every scan, this number might become very large, even on an idle
+ system.
+*/
+numScorerOverride : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-numScorerOverrideAndSwitchedNetwork'>/** @hide
+</span> Number of time the scorer overrode a the priority based choice, and the comparison
+ triggered a network switch
+*/
+numScorerOverrideAndSwitchedNetwork : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-numAssociation'>/** @hide
+</span> Number of time we associated to this configuration.
+*/
+numAssociation : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-RANDOMIZATION_NONE'>/** @hide
+</span> Use factory MAC when connecting to this network
+*/
+RANDOMIZATION_NONE : &quot;0&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-RANDOMIZATION_PERSISTENT'>/** @hide
+</span> Generate a randomized MAC once and reuse it for all connections to this network
+*/
+RANDOMIZATION_PERSISTENT : &quot;1&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-macRandomizationSetting'>/** @hide
+</span> Level of MAC randomization for this network
+*/
+macRandomizationSetting : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-HOME_NETWORK_RSSI_BOOST'>/**@hide
+</span> Boost given to RSSI on a home network for the purpose of calculating the score
+ This adds stickiness to home networks, as defined by:
+ - less than 4 known BSSIDs
+ - PSK only
+ - TODO: add a test to verify that all BSSIDs are behind same gateway
+*/
+HOME_NETWORK_RSSI_BOOST : &quot;5&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-recentFailure'>/** @hide
+</span> RecentFailure member
+*/
+recentFailure : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-linkedConfigurations'>/** @hide
+</span> Linked Configurations: represent the set of Wificonfigurations that are equivalent
+ regarding roaming and auto-joining.
+ The linked configuration may or may not have same SSID, and may or may not have same
+ credentials.
+ For instance, linked configurations will have same defaultGwMacAddress or same dhcp server.
+*/
+linkedConfigurations : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-property-CREATOR'>/**Implement the Parcelable interface {@hide} */
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-wifi-WifiConfiguration-method-setSecurityParams'>/**
+</span>@param {Number} securityType One of the security types from {@link SecurityType}.
+@param securityType One of the security types from {@link SecurityType}.
+*/
+setSecurityParams : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-hasNoInternetAccess'>/**
+</span>@hide The WiFi configuration is considered to have no internet access for purpose of autojoining
+ if there has been a report of it having no internet access, and, it never have had
+ internet access in the past.
+*/
+hasNoInternetAccess : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isNoInternetAccessExpected'>/**The WiFi configuration is expected not to have Internet access (e.g., a wireless printer, a
+</span> Chromecast hotspot, etc.). This will be set if the user explicitly confirms a connection to
+ this configuration and selects &quot;don't ask again&quot;.
+@hide 
+*/
+isNoInternetAccessExpected : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isEphemeral'>/**
+</span>@hide Indicate that a WifiConfiguration is temporary and should not be saved
+ nor considered by AutoJoin.
+*/
+isEphemeral : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isMetered'>/**Blend together all the various opinions to decide if the given network
+</span> should be considered metered or not.
+@hide 
+*/
+isMetered : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isOpenNetwork'>/**
+</span>@hide Returns true if this WiFi config is for an open network.
+*/
+isOpenNetwork : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isValidMacAddressForRandomization'>/**
+</span>@param {Object {MacAddress}} mac MacAddress to check
+@param mac MacAddress to check
+@return {Boolean} true if mac is good to use
+*/
+isValidMacAddressForRandomization : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getOrCreateRandomizedMacAddress'>/**
+</span>@hide Returns Randomized MAC address to use with the network.
+ If it is not set/valid, creates a new randomized address.
+ If it can't generate a valid mac, returns the default MAC.
+*/
+getOrCreateRandomizedMacAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getRandomizedMacAddress'>/**Returns MAC address set to be the local randomized MAC address.
+</span> Depending on user preference, the device may or may not use the returned MAC address for
+ connections to this network.
+ &lt;p&gt;
+ Information is restricted to Device Owner, Profile Owner, and Carrier apps
+ (which will only obtain addresses for configurations which they create). Other callers
+ will receive a default &quot;02:00:00:00:00:00&quot; MAC address.
+*/
+getRandomizedMacAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setRandomizedMacAddress'>/**
+</span>@param {Object {MacAddress}} mac MacAddress to change into
+@param mac MacAddress to change into
+*/
+setRandomizedMacAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getNetworkSelectionStatus'>/**
+</span>@hide 
+@return {Object {android.net.wifi.WifiConfiguration.NetworkSelectionStatus}} network selection status
+*/
+getNetworkSelectionStatus : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setNetworkSelectionStatus'>/**Set the network selection status
+</span>@hide 
+*/
+setNetworkSelectionStatus : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isPasspoint'>/**Identify if this configuration represents a Passpoint network
+</span>*/
+isPasspoint : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isLinked'>/**Helper function, identify if a configuration is linked
+</span>@hide 
+*/
+isLinked : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-isEnterprise'>/**Helper function, idenfity if a configuration should be treated as an enterprise network
+</span>@hide 
+*/
+isEnterprise : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getPrintableSsid'>/**{@hide}
+</span>*/
+getPrintableSsid : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-userApprovedAsString'>/**
+</span>@hide 
+*/
+userApprovedAsString : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getKeyIdForCredentials'>/**Get an identifier for associating credentials with this config
+</span>@param {Object {WifiConfiguration}} current configuration contains values for additional fields
+                that are not part of this configuration. Used
+                when a config with some fields is passed by an application.
+@throws IllegalStateException if config is invalid for key id generation
+@hide 
+*/
+getKeyIdForCredentials : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getAuthType'>/**
+</span>@hide 
+*/
+getAuthType : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-configKey'>/**
+</span>@hide return the string used to calculate the hash in WifiConfigStore
+  and uniquely identify this WifiConfiguration
+*/
+configKey : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getSsidAndSecurityTypeString'>/**
+</span>@hide return the SSID + security type in String format.
+*/
+getSsidAndSecurityTypeString : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-configKey'>/**
+</span>@hide get configKey, force calculating the config string
+*/
+configKey : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getIpConfiguration'>/**
+</span>@hide 
+*/
+getIpConfiguration : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setIpConfiguration'>/**
+</span>@hide 
+*/
+setIpConfiguration : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getStaticIpConfiguration'>/**
+</span>@hide 
+*/
+getStaticIpConfiguration : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setStaticIpConfiguration'>/**
+</span>@hide 
+*/
+setStaticIpConfiguration : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getIpAssignment'>/**
+</span>@hide 
+*/
+getIpAssignment : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setIpAssignment'>/**
+</span>@hide 
+*/
+setIpAssignment : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getProxySettings'>/**
+</span>@hide 
+*/
+getProxySettings : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setProxySettings'>/**
+</span>@hide 
+*/
+setProxySettings : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getHttpProxy'>/**Returns the HTTP proxy used by this object.
+</span>@return {Object {android.net.ProxyInfo}} a {@link ProxyInfo httpProxy} representing the proxy specified by this
+                  WifiConfiguration, or {@code null} if no proxy is specified.
+*/
+getHttpProxy : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setHttpProxy'>/**Set the {@link ProxyInfo} for this WifiConfiguration. This method should only be used by a
+</span> device owner or profile owner. When other apps attempt to save a {@link android.net.wifi.WifiConfiguration}
+ with modified proxy settings, the methods {@link android.net.wifi.WifiManager#addNetwork} and
+ {@link android.net.wifi.WifiManager#updateNetwork} fail and return {@code -1}.
+@param {Object {ProxyInfo}} httpProxy {@link ProxyInfo} representing the httpProxy to be used by this
+                  WifiConfiguration. Setting this to {@code null} will explicitly set no
+                  proxy, removing any proxy that was previously set.
+@exception IllegalArgumentException for invalid httpProxy
+*/
+setHttpProxy : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setProxy'>/**
+</span>@hide 
+*/
+setProxy : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-describeContents'>/**Implement the Parcelable interface {@hide}
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-setPasspointManagementObjectTree'>/**
+</span>@hide 
+*/
+setPasspointManagementObjectTree : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getMoTree'>/**
+</span>@hide 
+*/
+getMoTree : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-writeToParcel'>/**Implement the Parcelable interface {@hide}
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getBytesForBackup'>/**Serializes the object for backup
+</span>@hide 
+*/
+getBytesForBackup : function(  ) {},
+
+<span id='android-net-wifi-WifiConfiguration-method-getWifiConfigFromBackup'>/**Deserializes a byte array into the WiFiConfiguration Object
+</span>@hide 
+*/
+getWifiConfigFromBackup : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

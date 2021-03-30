@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-SaveCallback'>/**@class android.service.autofill.SaveCallback
+</span>@extends java.lang.Object
+
+ Handles save requests from the {@link android.service.autofill.AutofillService} into the {@link Activity} being
+ autofilled.
+*/
+var SaveCallback = {
+
+<span id='android-service-autofill-SaveCallback-method-onSuccess'>/**Notifies the Android System that an
+</span> {@link android.service.autofill.AutofillService#onSaveRequest(SaveRequest, SaveCallback)} was successfully handled
+ by the service.
+@throws IllegalStateException if this method, {@link #onSuccess(IntentSender)}, or
+ {@link #onFailure(CharSequence)} was already called.
+*/
+onSuccess : function(  ) {},
+
+<span id='android-service-autofill-SaveCallback-method-onSuccess'>/**Notifies the Android System that an
+</span> {@link android.service.autofill.AutofillService#onSaveRequest(SaveRequest, SaveCallback)} was successfully handled
+ by the service.
+
+ &lt;p&gt;This method is useful when the service requires extra work&amp;mdash;for example, launching an
+ activity asking the user to authenticate first &amp;mdash;before it can process the request,
+ as the intent will be launched from the context of the activity being autofilled and hence
+ will be part of that activity's stack.
+@param {Object {IntentSender}} intentSender intent that will be launched from the context of activity being
+ autofilled.
+@throws IllegalStateException if this method, {@link #onSuccess()},
+ or {@link #onFailure(CharSequence)} was already called.
+*/
+onSuccess : function(  ) {},
+
+<span id='android-service-autofill-SaveCallback-method-onFailure'>/**Notifies the Android System that an
+</span> {@link android.service.autofill.AutofillService#onSaveRequest(SaveRequest, SaveCallback)} could not be handled
+ by the service.
+
+ &lt;p&gt;This method is just used for logging purposes, the Android System won't call the service
+ again in case of failures&amp;mdash;if you need to recover from the failure, just save the
+ {@link android.service.autofill.SaveRequest} and try again later.
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;for apps targeting {@link android.os.Build.VERSION_CODES#Q} or higher, this
+ method just logs the message on {@code logcat}; for apps targetting older SDKs, it also
+ displays the message to user using a {@link android.widget.Toast}.
+@param {Object {CharSequence}} message error message. &lt;b&gt;Note: &lt;/b&gt; this message should &lt;b&gt;not&lt;/b&gt; contain PII
+ (Personally Identifiable Information, such as username or email address).
+@throws IllegalStateException if this method, {@link #onSuccess()},
+ or {@link #onSuccess(IntentSender)} was already called.
+*/
+onFailure : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

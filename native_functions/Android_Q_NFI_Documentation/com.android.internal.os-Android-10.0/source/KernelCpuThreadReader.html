@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-KernelCpuThreadReader'>/**@class com.android.internal.os.KernelCpuThreadReader
+</span>@extends java.lang.Object
+
+ Iterates over processes, and all threads owned by those processes, and return the CPU usage for
+ each thread. The CPU usage statistics contain the amount of time spent in a frequency band. CPU
+ usage is collected using {@link com.android.internal.os.Uid.ProcTimeInStateReader}.
+
+ &lt;p&gt;We only collect CPU data for processes and threads that are owned by certain UIDs. These UIDs
+ are configured via {@link #setUidPredicate}.
+
+ &lt;p&gt;Frequencies are bucketed together to reduce the amount of data created. This means that we
+ return less frequencies than provided by {@link com.android.internal.os.Uid.ProcTimeInStateReader}. The number of frequencies
+ is configurable by {@link #setNumBuckets}. Frequencies are reported as the lowest frequency in
+ that range. Frequencies are spread as evenly as possible across the buckets. The buckets do not
+ cross over the little/big frequencies reported.
+
+ &lt;p&gt;N.B.: In order to bucket across little/big frequencies correctly, we assume that the {@code
+ time_in_state} file contains every little core frequency in ascending order, followed by every
+ big core frequency in ascending order. This assumption might not hold for devices with different
+ kernel implementations of the {@code time_in_state} file generation.
+*/
+var KernelCpuThreadReader = {
+
+<span id='com-android-internal-os-KernelCpuThreadReader-method-create'>/**Create the reader and handle exceptions during creation
+</span>@return {Object {com.android.internal.os.KernelCpuThreadReader}} the reader, null if an exception was thrown during creation
+*/
+create : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuThreadReader-method-getProcessCpuUsage'>/**Get the per-thread CPU usage of all processes belonging to a set of UIDs
+</span>
+ &lt;p&gt;This function will crawl through all process {@code proc} directories found by the pattern
+ {@code /proc/[0-9]*}, and then check the UID using {@code /proc/$PID/status}. This takes
+ approximately 500ms on a 2017 device. Therefore, this method can be computationally
+ expensive, and should not be called more than once an hour.
+
+ &lt;p&gt;Data is only collected for UIDs passing the predicate supplied in {@link #setUidPredicate}.
+*/
+getProcessCpuUsage : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuThreadReader-method-getCpuFrequenciesKhz'>/**Get the CPU frequencies that correspond to the times reported in {@link com.android.internal.os.KernelCpuThreadReader.ThreadCpuUsage#usageTimesMillis}
+</span>*/
+getCpuFrequenciesKhz : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

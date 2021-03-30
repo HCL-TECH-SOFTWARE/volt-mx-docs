@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvView'>/**@class android.media.tv.TvView
+</span>@extends android.view.ViewGroup
+
+ Displays TV contents. The TvView class provides a high level interface for applications to show
+ TV programs from various TV sources that implement {@link android.media.tv.TvInputService}. (Note that the list of
+ TV inputs available on the system can be obtained by calling
+ {@link android.media.tv.TvInputManager#getTvInputList() android.media.tv.TvInputManager.getTvInputList()}.)
+
+ &lt;p&gt;Once the application supplies the URI for a specific TV channel to {@link #tune}
+ method, it takes care of underlying service binding (and unbinding if the current TvView is
+ already bound to a service) and automatically allocates/deallocates resources needed. In addition
+ to a few essential methods to control how the contents are presented, it also provides a way to
+ dispatch input events to the connected TvInputService in order to enable custom key actions for
+ the TV input.
+*/
+var TvView = {
+
+<span id='android-media-tv-TvView-method-setCallback'>/**Sets the callback to be invoked when an event is dispatched to this TvView.
+</span>@param {Object {TvView.TvInputCallback}} callback The callback to receive events. A value of {@code null} removes the existing
+            callback.
+*/
+setCallback : function(  ) {},
+
+<span id='android-media-tv-TvView-method-setMain'>/**Sets this as the main {@link android.media.tv.TvView}.
+</span>
+ &lt;p&gt;The main {@link android.media.tv.TvView} is a {@link android.media.tv.TvView} whose corresponding TV input determines the
+ HDMI-CEC active source device. For an HDMI port input, one of source devices that is
+ connected to that HDMI port becomes the active source. For an HDMI-CEC logical device input,
+ the corresponding HDMI-CEC logical device becomes the active source. For any non-HDMI input
+ (including the tuner, composite, S-Video, etc.), the internal device (= TV itself) becomes
+ the active source.
+
+ &lt;p&gt;First tuned {@link android.media.tv.TvView} becomes main automatically, and keeps to be main until either
+ {@link #reset} is called for the main {@link android.media.tv.TvView} or {@code setMain()} is called for other
+ {@link android.media.tv.TvView}.
+@hide 
+*/
+setMain : function(  ) {},
+
+<span id='android-media-tv-TvView-method-setZOrderMediaOverlay'>/**Controls whether the TvView's surface is placed on top of another regular surface view in the
+</span> window (but still behind the window itself).
+ This is typically used to place overlays on top of an underlying TvView.
+
+ &lt;p&gt;Note that this must be set before the TvView's containing window is attached to the
+ window manager.
+
+ &lt;p&gt;Calling this overrides any previous call to {@link #setZOrderOnTop}.
+@param {Boolean} isMediaOverlay {@code true} to be on top of another regular surface, {@code false}
+            otherwise.
+*/
+setZOrderMediaOverlay : function(  ) {},
+
+<span id='android-media-tv-TvView-method-setZOrderOnTop'>/**Controls whether the TvView's surface is placed on top of its window. Normally it is placed
+</span> behind the window, to allow it to (for the most part) appear to composite with the views in
+ the hierarchy.  By setting this, you cause it to be placed above the window. This means that
+ none of the contents of the window this TvView is in will be visible on top of its surface.
+
+ &lt;p&gt;Note that this must be set before the TvView's containing window is attached to the window
+ manager.
+
+ &lt;p&gt;Calling this overrides any previous call to {@link #setZOrderMediaOverlay}.
+@param {Boolean} onTop {@code true} to be on top of its window, {@code false} otherwise.
+*/
+setZOrderOnTop : function(  ) {},
+
+<span id='android-media-tv-TvView-method-setStreamVolume'>/**Sets the relative stream volume of this TvView.
+</span>
+ &lt;p&gt;This method is primarily used to handle audio focus changes or mute a specific TvView when
+ multiple views are displayed. If the method has not yet been called, the TvView assumes the
+ default value of {@code 1.0f}.
+@param {Number} volume A volume value between {@code 0.0f} to {@code 1.0f}.
+*/
+setStreamVolume : function(  ) {},
+
+<span id='android-media-tv-TvView-method-tune'>/**Tunes to a given channel.
+</span>@param {String} inputId The ID of the TV input for the given channel.
+@param {Object {Uri}} channelUri The URI of a channel.
+*/
+tune : function(  ) {},
+
+<span id='android-media-tv-TvView-method-tune'>/**Tunes to a given channel. This can be used to provide domain-specific features that are only
+</span> known between certain clients and their TV inputs.
+@param {String} inputId The ID of TV input for the given channel.
+@param {Object {Uri}} channelUri The URI of a channel.
+@param {Object {Bundle}} params Domain-specific data for this tune request. Keys &lt;em&gt;must&lt;/em&gt; be a scoped
+            name, i.e. prefixed with a package name you own, so that different developers will
+            not create conflicting keys.
+*/
+tune : function(  ) {},
+
+<span id='android-media-tv-TvView-method-reset'>/**Resets this TvView.
+</span>
+ &lt;p&gt;This method is primarily used to un-tune the current TvView.
+*/
+reset : function(  ) {},
+
+<span id='android-media-tv-TvView-method-requestUnblockContent'>/**Requests to unblock TV content according to the given rating.
+</span>
+ &lt;p&gt;This notifies TV input that blocked content is now OK to play.
+@param {Object {TvContentRating}} unblockedRating A TvContentRating to unblock.
+@see TvInputService.Session#notifyContentBlocked(TvContentRating)
+@removed 
+*/
+requestUnblockContent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-unblockContent'>/**Requests to unblock TV content according to the given rating.
+</span>
+ &lt;p&gt;This notifies TV input that blocked content is now OK to play.
+@param {Object {TvContentRating}} unblockedRating A TvContentRating to unblock.
+@see TvInputService.Session#notifyContentBlocked(TvContentRating)
+@hide 
+*/
+unblockContent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-setCaptionEnabled'>/**Enables or disables the caption in this TvView.
+</span>
+ &lt;p&gt;Note that this method does not take any effect unless the current TvView is tuned.
+@param {Boolean} enabled {@code true} to enable, {@code false} to disable.
+*/
+setCaptionEnabled : function(  ) {},
+
+<span id='android-media-tv-TvView-method-selectTrack'>/**Selects a track.
+</span>@param {Number} type The type of the track to select. The type can be {@link TvTrackInfo#TYPE_AUDIO},
+            {@link TvTrackInfo#TYPE_VIDEO} or {@link TvTrackInfo#TYPE_SUBTITLE}.
+@param {String} trackId The ID of the track to select. {@code null} means to unselect the current
+            track for a given type.
+@see #getTracks
+@see #getSelectedTrack
+*/
+selectTrack : function(  ) {},
+
+<span id='android-media-tv-TvView-method-getTracks'>/**Returns the list of tracks. Returns {@code null} if the information is not available.
+</span>@param {Number} type The type of the tracks. The type can be {@link TvTrackInfo#TYPE_AUDIO},
+            {@link TvTrackInfo#TYPE_VIDEO} or {@link TvTrackInfo#TYPE_SUBTITLE}.
+@see #selectTrack
+@see #getSelectedTrack
+*/
+getTracks : function(  ) {},
+
+<span id='android-media-tv-TvView-method-getSelectedTrack'>/**Returns the ID of the selected track for a given type. Returns {@code null} if the
+</span> information is not available or the track is not selected.
+@param {Number} type The type of the selected tracks. The type can be {@link TvTrackInfo#TYPE_AUDIO},
+            {@link TvTrackInfo#TYPE_VIDEO} or {@link TvTrackInfo#TYPE_SUBTITLE}.
+@see #selectTrack
+@see #getTracks
+*/
+getSelectedTrack : function(  ) {},
+
+<span id='android-media-tv-TvView-method-timeShiftPlay'>/**Plays a given recorded TV program.
+</span>@param {String} inputId The ID of the TV input that created the given recorded program.
+@param {Object {Uri}} recordedProgramUri The URI of a recorded program.
+*/
+timeShiftPlay : function(  ) {},
+
+<span id='android-media-tv-TvView-method-timeShiftPause'>/**Pauses playback. No-op if it is already paused. Call {@link #timeShiftResume} to resume.
+</span>*/
+timeShiftPause : function(  ) {},
+
+<span id='android-media-tv-TvView-method-timeShiftResume'>/**Resumes playback. No-op if it is already resumed. Call {@link #timeShiftPause} to pause.
+</span>*/
+timeShiftResume : function(  ) {},
+
+<span id='android-media-tv-TvView-method-timeShiftSeekTo'>/**Seeks to a specified time position. {@code timeMs} must be equal to or greater than the start
+</span> position returned by {@link android.media.tv.TvView.TimeShiftPositionCallback#onTimeShiftStartPositionChanged} and
+ equal to or less than the current time.
+@param {Number} timeMs The time position to seek to, in milliseconds since the epoch.
+*/
+timeShiftSeekTo : function(  ) {},
+
+<span id='android-media-tv-TvView-method-timeShiftSetPlaybackParams'>/**Sets playback rate using {@link android.media.PlaybackParams}.
+</span>@param {Object {PlaybackParams}} params The playback params.
+*/
+timeShiftSetPlaybackParams : function(  ) {},
+
+<span id='android-media-tv-TvView-method-setTimeShiftPositionCallback'>/**Sets the callback to be invoked when the time shift position is changed.
+</span>@param {Object {TvView.TimeShiftPositionCallback}} callback The callback to receive time shift position changes. A value of {@code null}
+            removes the existing callback.
+*/
+setTimeShiftPositionCallback : function(  ) {},
+
+<span id='android-media-tv-TvView-method-sendAppPrivateCommand'>/**Sends a private command to the underlying TV input. This can be used to provide
+</span> domain-specific features that are only known between certain clients and their TV inputs.
+@param {String} action The name of the private command to send. This &lt;em&gt;must&lt;/em&gt; be a scoped name,
+            i.e. prefixed with a package name you own, so that different developers will not
+            create conflicting commands.
+@param {Object {Bundle}} data An optional bundle to send with the command.
+*/
+sendAppPrivateCommand : function(  ) {},
+
+<span id='android-media-tv-TvView-method-dispatchUnhandledInputEvent'>/**Dispatches an unhandled input event to the next receiver.
+</span>
+ &lt;p&gt;Except system keys, TvView always consumes input events in the normal flow. This is called
+ asynchronously from where the event is dispatched. It gives the host application a chance to
+ dispatch the unhandled input events.
+@param {Object {InputEvent}} event The input event.
+@return {Boolean} {@code true} if the event was handled by the view, {@code false} otherwise.
+*/
+dispatchUnhandledInputEvent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-onUnhandledInputEvent'>/**Called when an unhandled input event also has not been handled by the user provided
+</span> callback. This is the last chance to handle the unhandled input event in the TvView.
+@param {Object {InputEvent}} event The input event.
+@return {Boolean} If you handled the event, return {@code true}. If you want to allow the event to be
+         handled by the next receiver, return {@code false}.
+*/
+onUnhandledInputEvent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-setOnUnhandledInputEventListener'>/**Registers a callback to be invoked when an input event is not handled by the bound TV input.
+</span>@param {Object {TvView.OnUnhandledInputEventListener}} listener The callback to be invoked when the unhandled input event is received.
+*/
+setOnUnhandledInputEventListener : function(  ) {},
+
+<span id='android-media-tv-TvView-method-dispatchKeyEvent'>/**
+</span>*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-dispatchTouchEvent'>/**
+</span>*/
+dispatchTouchEvent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-dispatchTrackballEvent'>/**
+</span>*/
+dispatchTrackballEvent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-dispatchGenericMotionEvent'>/**
+</span>*/
+dispatchGenericMotionEvent : function(  ) {},
+
+<span id='android-media-tv-TvView-method-dispatchWindowFocusChanged'>/**
+</span>*/
+dispatchWindowFocusChanged : function(  ) {},
+
+<span id='android-media-tv-TvView-method-gatherTransparentRegion'>/**
+</span>*/
+gatherTransparentRegion : function(  ) {},
+
+<span id='android-media-tv-TvView-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

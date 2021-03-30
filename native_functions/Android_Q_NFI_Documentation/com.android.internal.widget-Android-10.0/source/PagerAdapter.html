@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-PagerAdapter'>/**@class com.android.internal.widget.PagerAdapter
+</span>@extends java.lang.Object
+
+ Base class providing the adapter to populate pages inside of
+ a {@link android.support.v4.view.ViewPager}.  You will most likely want to use a more
+ specific implementation of this, such as
+ {@link android.support.v4.app.FragmentPagerAdapter} or
+ {@link android.support.v4.app.FragmentStatePagerAdapter}.
+
+ &lt;p&gt;When you implement a PagerAdapter, you must override the following methods
+ at minimum:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link #instantiateItem(android.view.ViewGroup, int)}&lt;/li&gt;
+ &lt;li&gt;{@link #destroyItem(android.view.ViewGroup, int, Object)}&lt;/li&gt;
+ &lt;li&gt;{@link #getCount}()&lt;/li&gt;
+ &lt;li&gt;{@link #isViewFromObject(android.view.View, Object)}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;PagerAdapter is more general than the adapters used for
+ {@link android.widget.com.android.internal.widget.RecyclerView.AdapterView com.android.internal.widget.RecyclerView.AdapterViews}. Instead of providing a
+ View recycling mechanism directly ViewPager uses callbacks to indicate the
+ steps taken during an update. A PagerAdapter may implement a form of View
+ recycling if desired or use a more sophisticated method of managing page
+ Views such as Fragment transactions where each page is represented by its
+ own Fragment.&lt;/p&gt;
+
+ &lt;p&gt;ViewPager associates each page with a key Object instead of working with
+ Views directly. This key is used to track and uniquely identify a given page
+ independent of its position in the adapter. A call to the PagerAdapter method
+ {@link #startUpdate(android.view.ViewGroup)} indicates that the contents of the ViewPager
+ are about to change. One or more calls to {@link #instantiateItem(android.view.ViewGroup, int)}
+ and/or {@link #destroyItem(android.view.ViewGroup, int, Object)} will follow, and the end
+ of an update will be signaled by a call to {@link #finishUpdate(android.view.ViewGroup)}.
+ By the time {@link #finishUpdate(android.view.ViewGroup) finishUpdate} returns the views
+ associated with the key objects returned by
+ {@link #instantiateItem(android.view.ViewGroup, int) instantiateItem} should be added to
+ the parent ViewGroup passed to these methods and the views associated with
+ the keys passed to {@link #destroyItem(android.view.ViewGroup, int, Object) destroyItem}
+ should be removed. The method {@link #isViewFromObject(android.view.View, Object)} identifies
+ whether a page View is associated with a given key object.&lt;/p&gt;
+
+ &lt;p&gt;A very simple PagerAdapter may choose to use the page Views themselves
+ as key objects, returning them from {@link #instantiateItem(android.view.ViewGroup, int)}
+ after creation and adding them to the parent ViewGroup. A matching
+ {@link #destroyItem(android.view.ViewGroup, int, Object)} implementation would remove the
+ View from the parent ViewGroup and {@link #isViewFromObject(android.view.View, Object)}
+ could be implemented as &lt;code&gt;return view == object;&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;PagerAdapter supports data set changes. Data set changes must occur on the
+ main thread and must end with a call to {@link #notifyDataSetChanged}() similar
+ to AdapterView adapters derived from {@link android.widget.BaseAdapter}. A data
+ set change may involve pages being added, removed, or changing position. The
+ ViewPager will keep the current page active provided the adapter implements
+ the method {@link #getItemPosition}(Object).&lt;/p&gt;
+*/
+var PagerAdapter = {
+
+<span id='com-android-internal-widget-PagerAdapter-property-POSITION_UNCHANGED'>/***/
+</span>POSITION_UNCHANGED : &quot;-1&quot;,
+<span id='com-android-internal-widget-PagerAdapter-property-POSITION_NONE'>/***/
+</span>POSITION_NONE : &quot;-2&quot;,
+<span id='com-android-internal-widget-PagerAdapter-method-getCount'>/**Return the number of views available.
+</span>*/
+getCount : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-startUpdate'>/**Called when a change in the shown pages is going to start being made.
+</span>@param {Object {ViewGroup}} container The containing View which is displaying this adapter's
+ page views.
+*/
+startUpdate : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-instantiateItem'>/**Create the page for the given position.  The adapter is responsible
+</span> for adding the view to the container given here, although it only
+ must ensure this is done by the time it returns from
+ {@link #finishUpdate(android.view.ViewGroup)}.
+@param {Object {ViewGroup}} container The containing View in which the page will be shown.
+@param {Number} position The page position to be instantiated.
+@return {Object {java.lang.Object}} Returns an Object representing the new page.  This does not
+ need to be a View, but can be some other container of the page.
+*/
+instantiateItem : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-destroyItem'>/**Remove a page for the given position.  The adapter is responsible
+</span> for removing the view from its container, although it only must ensure
+ this is done by the time it returns from {@link #finishUpdate(android.view.ViewGroup)}.
+@param {Object {ViewGroup}} container The containing View from which the page will be removed.
+@param {Number} position The page position to be removed.
+@param {Object {Object}} object The same object that was returned by
+ {@link #instantiateItem(android.view.View, int)}.
+*/
+destroyItem : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-setPrimaryItem'>/**Called to inform the adapter of which item is currently considered to
+</span> be the &quot;primary&quot;, that is the one show to the user as the current page.
+@param {Object {ViewGroup}} container The containing View from which the page will be removed.
+@param {Number} position The page position that is now the primary.
+@param {Object {Object}} object The same object that was returned by
+ {@link #instantiateItem(android.view.View, int)}.
+*/
+setPrimaryItem : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-finishUpdate'>/**Called when the a change in the shown pages has been completed.  At this
+</span> point you must ensure that all of the pages have actually been added or
+ removed from the container as appropriate.
+@param {Object {ViewGroup}} container The containing View which is displaying this adapter's
+ page views.
+*/
+finishUpdate : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-startUpdate'>/**Called when a change in the shown pages is going to start being made.
+</span>@param {Object {View}} container The containing View which is displaying this adapter's
+ page views.
+@deprecated Use {@link #startUpdate(android.view.ViewGroup)}
+*/
+startUpdate : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-instantiateItem'>/**Create the page for the given position.  The adapter is responsible
+</span> for adding the view to the container given here, although it only
+ must ensure this is done by the time it returns from
+ {@link #finishUpdate(android.view.ViewGroup)}.
+@param {Object {View}} container The containing View in which the page will be shown.
+@param {Number} position The page position to be instantiated.
+@return {Object {java.lang.Object}} Returns an Object representing the new page.  This does not
+ need to be a View, but can be some other container of the page.
+@deprecated Use {@link #instantiateItem(android.view.ViewGroup, int)}
+*/
+instantiateItem : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-destroyItem'>/**Remove a page for the given position.  The adapter is responsible
+</span> for removing the view from its container, although it only must ensure
+ this is done by the time it returns from {@link #finishUpdate(android.view.View)}.
+@param {Object {View}} container The containing View from which the page will be removed.
+@param {Number} position The page position to be removed.
+@param {Object {Object}} object The same object that was returned by
+ {@link #instantiateItem(android.view.View, int)}.
+@deprecated Use {@link #destroyItem(android.view.ViewGroup, int, Object)}
+*/
+destroyItem : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-setPrimaryItem'>/**Called to inform the adapter of which item is currently considered to
+</span> be the &quot;primary&quot;, that is the one show to the user as the current page.
+@param {Object {View}} container The containing View from which the page will be removed.
+@param {Number} position The page position that is now the primary.
+@param {Object {Object}} object The same object that was returned by
+ {@link #instantiateItem(android.view.View, int)}.
+@deprecated Use {@link #setPrimaryItem(android.view.ViewGroup, int, Object)}
+*/
+setPrimaryItem : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-finishUpdate'>/**Called when the a change in the shown pages has been completed.  At this
+</span> point you must ensure that all of the pages have actually been added or
+ removed from the container as appropriate.
+@param {Object {View}} container The containing View which is displaying this adapter's
+ page views.
+@deprecated Use {@link #finishUpdate(android.view.ViewGroup)}
+*/
+finishUpdate : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-isViewFromObject'>/**Determines whether a page View is associated with a specific key object
+</span> as returned by {@link #instantiateItem(android.view.ViewGroup, int)}. This method is
+ required for a PagerAdapter to function properly.
+@param {Object {View}} view Page View to check for association with &lt;code&gt;object&lt;/code&gt;
+@param {Object {Object}} object Object to check for association with &lt;code&gt;view&lt;/code&gt;
+@return {Boolean} true if &lt;code&gt;view&lt;/code&gt; is associated with the key object &lt;code&gt;object&lt;/code&gt;
+*/
+isViewFromObject : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-saveState'>/**Save any instance state associated with this adapter and its pages that should be
+</span> restored if the current UI state needs to be reconstructed.
+@return {Object {android.os.Parcelable}} Saved state for this adapter
+*/
+saveState : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-restoreState'>/**Restore any instance state associated with this adapter and its pages
+</span> that was previously saved by {@link #saveState}().
+@param {Object {Parcelable}} state State previously saved by a call to {@link #saveState()}
+@param {Object {ClassLoader}} loader A ClassLoader that should be used to instantiate any restored objects
+*/
+restoreState : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-getItemPosition'>/**Called when the host view is attempting to determine if an item's position
+</span> has changed. Returns {@link #POSITION_UNCHANGED} if the position of the given
+ item has not changed or {@link #POSITION_NONE} if the item is no longer present
+ in the adapter.
+
+ &lt;p&gt;The default implementation assumes that items will never
+ change position and always returns {@link #POSITION_UNCHANGED}.
+@param {Object {Object}} object Object representing an item, previously returned by a call to
+               {@link #instantiateItem(android.view.View, int)}.
+@return {Number} object's new position index from [0, {@link #getCount()}),
+         {@link #POSITION_UNCHANGED} if the object's position has not changed,
+         or {@link #POSITION_NONE} if the item is no longer present.
+*/
+getItemPosition : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-notifyDataSetChanged'>/**This method should be called by the application if the data backing this adapter has changed
+</span> and associated views should update.
+*/
+notifyDataSetChanged : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-registerDataSetObserver'>/**Register an observer to receive callbacks related to the adapter's data changing.
+</span>@param {Object {DataSetObserver}} observer The {@link android.database.DataSetObserver} which will receive callbacks.
+*/
+registerDataSetObserver : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-unregisterDataSetObserver'>/**Unregister an observer from callbacks related to the adapter's data changing.
+</span>@param {Object {DataSetObserver}} observer The {@link android.database.DataSetObserver} which will be unregistered.
+*/
+unregisterDataSetObserver : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-getPageTitle'>/**This method may be called by the ViewPager to obtain a title string
+</span> to describe the specified page. This method may return null
+ indicating no title for this page. The default implementation returns
+ null.
+@param {Number} position The position of the title requested
+@return {Object {java.lang.CharSequence}} A title for the requested page
+*/
+getPageTitle : function(  ) {},
+
+<span id='com-android-internal-widget-PagerAdapter-method-getPageWidth'>/**Returns the proportional width of a given page as a percentage of the
+</span> ViewPager's measured width from (0.f-1.f]
+@param {Number} position The position of the page requested
+@return {Number} Proportional width for the given page position
+*/
+getPageWidth : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

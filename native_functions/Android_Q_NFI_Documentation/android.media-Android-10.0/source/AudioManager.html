@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-AudioManager'>/**@class android.media.AudioManager
+</span>@extends java.lang.Object
+
+ AudioManager provides access to volume and ringer mode control.
+*/
+var AudioManager = {
+
+<span id='android-media-AudioManager-property-ACTION_AUDIO_BECOMING_NOISY'>/** Broadcast intent, a hint for applications that audio is about to become
+</span> 'noisy' due to a change in audio outputs. For example, this intent may
+ be sent when a wired headset is unplugged, or when an A2DP audio
+ sink is disconnected, and the audio system is about to automatically
+ switch audio route to the speaker. Applications that are controlling
+ audio streams may consider pausing, reducing volume or some other action
+ on receipt of this intent so as not to surprise the user with audio
+ from the speaker.
+*/
+ACTION_AUDIO_BECOMING_NOISY : &quot;android.media.AUDIO_BECOMING_NOISY&quot;,
+<span id='android-media-AudioManager-property-RINGER_MODE_CHANGED_ACTION'>/** Sticky broadcast intent action indicating that the ringer mode has
+</span> changed. Includes the new ringer mode.
+
+ @see #EXTRA_RINGER_MODE
+*/
+RINGER_MODE_CHANGED_ACTION : &quot;android.media.RINGER_MODE_CHANGED&quot;,
+<span id='android-media-AudioManager-property-INTERNAL_RINGER_MODE_CHANGED_ACTION'>/** @hide
+</span> Sticky broadcast intent action indicating that the internal ringer mode has
+ changed. Includes the new ringer mode.
+
+ @see #EXTRA_RINGER_MODE
+*/
+INTERNAL_RINGER_MODE_CHANGED_ACTION : &quot;android.media.INTERNAL_RINGER_MODE_CHANGED_ACTION&quot;,
+<span id='android-media-AudioManager-property-EXTRA_RINGER_MODE'>/** The new ringer mode.
+</span>
+ @see #RINGER_MODE_CHANGED_ACTION
+ @see #RINGER_MODE_NORMAL
+ @see #RINGER_MODE_SILENT
+ @see #RINGER_MODE_VIBRATE
+*/
+EXTRA_RINGER_MODE : &quot;android.media.EXTRA_RINGER_MODE&quot;,
+<span id='android-media-AudioManager-property-VIBRATE_SETTING_CHANGED_ACTION'>/** Broadcast intent action indicating that the vibrate setting has
+</span> changed. Includes the vibrate type and its new setting.
+
+ @see #EXTRA_VIBRATE_TYPE
+ @see #EXTRA_VIBRATE_SETTING
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode and listen to {@link #RINGER_MODE_CHANGED_ACTION} instead.
+*/
+VIBRATE_SETTING_CHANGED_ACTION : &quot;android.media.VIBRATE_SETTING_CHANGED&quot;,
+<span id='android-media-AudioManager-property-VOLUME_CHANGED_ACTION'>/** @hide Broadcast intent when the volume for a particular stream type changes.
+</span> Includes the stream, the new volume and previous volumes.
+ Notes:
+  - for internal platform use only, do not make public,
+  - never used for &quot;remote&quot; volume changes
+
+ @see #EXTRA_VOLUME_STREAM_TYPE
+ @see #EXTRA_VOLUME_STREAM_VALUE
+ @see #EXTRA_PREV_VOLUME_STREAM_VALUE
+*/
+VOLUME_CHANGED_ACTION : &quot;android.media.VOLUME_CHANGED_ACTION&quot;,
+<span id='android-media-AudioManager-property-STREAM_DEVICES_CHANGED_ACTION'>/** @hide Broadcast intent when the devices for a particular stream type changes.
+</span> Includes the stream, the new devices and previous devices.
+ Notes:
+  - for internal platform use only, do not make public,
+  - never used for &quot;remote&quot; volume changes
+
+ @see #EXTRA_VOLUME_STREAM_TYPE
+ @see #EXTRA_VOLUME_STREAM_DEVICES
+ @see #EXTRA_PREV_VOLUME_STREAM_DEVICES
+ @see #getDevicesForStream
+*/
+STREAM_DEVICES_CHANGED_ACTION : &quot;android.media.STREAM_DEVICES_CHANGED_ACTION&quot;,
+<span id='android-media-AudioManager-property-STREAM_MUTE_CHANGED_ACTION'>/** @hide Broadcast intent when a stream mute state changes.
+</span> Includes the stream that changed and the new mute state
+
+ @see #EXTRA_VOLUME_STREAM_TYPE
+ @see #EXTRA_STREAM_VOLUME_MUTED
+*/
+STREAM_MUTE_CHANGED_ACTION : &quot;android.media.STREAM_MUTE_CHANGED_ACTION&quot;,
+<span id='android-media-AudioManager-property-MASTER_MUTE_CHANGED_ACTION'>/** @hide Broadcast intent when the master mute state changes.
+</span> Includes the the new volume
+
+ @see #EXTRA_MASTER_VOLUME_MUTED
+*/
+MASTER_MUTE_CHANGED_ACTION : &quot;android.media.MASTER_MUTE_CHANGED_ACTION&quot;,
+<span id='android-media-AudioManager-property-EXTRA_VIBRATE_SETTING'>/** The new vibrate setting for a particular type.
+</span>
+ @see #VIBRATE_SETTING_CHANGED_ACTION
+ @see #EXTRA_VIBRATE_TYPE
+ @see #VIBRATE_SETTING_ON
+ @see #VIBRATE_SETTING_OFF
+ @see #VIBRATE_SETTING_ONLY_SILENT
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode and listen to {@link #RINGER_MODE_CHANGED_ACTION} instead.
+*/
+EXTRA_VIBRATE_SETTING : &quot;android.media.EXTRA_VIBRATE_SETTING&quot;,
+<span id='android-media-AudioManager-property-EXTRA_VIBRATE_TYPE'>/** The vibrate type whose setting has changed.
+</span>
+ @see #VIBRATE_SETTING_CHANGED_ACTION
+ @see #VIBRATE_TYPE_NOTIFICATION
+ @see #VIBRATE_TYPE_RINGER
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode and listen to {@link #RINGER_MODE_CHANGED_ACTION} instead.
+*/
+EXTRA_VIBRATE_TYPE : &quot;android.media.EXTRA_VIBRATE_TYPE&quot;,
+<span id='android-media-AudioManager-property-EXTRA_VOLUME_STREAM_TYPE'>/** @hide The stream type for the volume changed intent.
+</span>*/
+EXTRA_VOLUME_STREAM_TYPE : &quot;android.media.EXTRA_VOLUME_STREAM_TYPE&quot;,
+<span id='android-media-AudioManager-property-EXTRA_VOLUME_STREAM_TYPE_ALIAS'>/** @hide
+</span> The stream type alias for the volume changed intent.
+ For instance the intent may indicate a change of the {@link #STREAM_NOTIFICATION} stream
+ type (as indicated by the {@link #EXTRA_VOLUME_STREAM_TYPE} extra), but this is also
+ reflected by a change of the volume of its alias, {@link #STREAM_RING} on some devices,
+ {@link #STREAM_MUSIC} on others (e.g. a television).
+*/
+EXTRA_VOLUME_STREAM_TYPE_ALIAS : &quot;android.media.EXTRA_VOLUME_STREAM_TYPE_ALIAS&quot;,
+<span id='android-media-AudioManager-property-EXTRA_VOLUME_STREAM_VALUE'>/** @hide The volume associated with the stream for the volume changed intent.
+</span>*/
+EXTRA_VOLUME_STREAM_VALUE : &quot;android.media.EXTRA_VOLUME_STREAM_VALUE&quot;,
+<span id='android-media-AudioManager-property-EXTRA_PREV_VOLUME_STREAM_VALUE'>/** @hide The previous volume associated with the stream for the volume changed intent.
+</span>*/
+EXTRA_PREV_VOLUME_STREAM_VALUE : &quot;android.media.EXTRA_PREV_VOLUME_STREAM_VALUE&quot;,
+<span id='android-media-AudioManager-property-EXTRA_VOLUME_STREAM_DEVICES'>/** @hide The devices associated with the stream for the stream devices changed intent.
+</span>*/
+EXTRA_VOLUME_STREAM_DEVICES : &quot;android.media.EXTRA_VOLUME_STREAM_DEVICES&quot;,
+<span id='android-media-AudioManager-property-EXTRA_PREV_VOLUME_STREAM_DEVICES'>/** @hide The previous devices associated with the stream for the stream devices changed intent.
+</span>*/
+EXTRA_PREV_VOLUME_STREAM_DEVICES : &quot;android.media.EXTRA_PREV_VOLUME_STREAM_DEVICES&quot;,
+<span id='android-media-AudioManager-property-EXTRA_MASTER_VOLUME_MUTED'>/** @hide The new master volume mute state for the master mute changed intent.
+</span> Value is boolean
+*/
+EXTRA_MASTER_VOLUME_MUTED : &quot;android.media.EXTRA_MASTER_VOLUME_MUTED&quot;,
+<span id='android-media-AudioManager-property-EXTRA_STREAM_VOLUME_MUTED'>/** @hide The new stream volume mute state for the stream mute changed intent.
+</span> Value is boolean
+*/
+EXTRA_STREAM_VOLUME_MUTED : &quot;android.media.EXTRA_STREAM_VOLUME_MUTED&quot;,
+<span id='android-media-AudioManager-property-ACTION_HEADSET_PLUG'>/** Broadcast Action: Wired Headset plugged in or unplugged.
+</span>
+ You &lt;em&gt;cannot&lt;/em&gt; receive this through components declared
+ in manifests, only by explicitly registering for it with
+ {@link Context#registerReceiver(BroadcastReceiver, IntentFilter)
+ Context.registerReceiver()}.
+
+ &lt;p&gt;The intent will have the following extra values:
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;state&lt;/em&gt; - 0 for unplugged, 1 for plugged. &lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;name&lt;/em&gt; - Headset type, human readable string &lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;microphone&lt;/em&gt; - 1 if headset has a microphone, 0 otherwise &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/ul&gt;
+*/
+ACTION_HEADSET_PLUG : &quot;android.intent.action.HEADSET_PLUG&quot;,
+<span id='android-media-AudioManager-property-ACTION_HDMI_AUDIO_PLUG'>/** Broadcast Action: A sticky broadcast indicating an HDMI cable was plugged or unplugged.
+</span>
+ The intent will have the following extra values: {@link #EXTRA_AUDIO_PLUG_STATE},
+ {@link #EXTRA_MAX_CHANNEL_COUNT}, {@link #EXTRA_ENCODINGS}.
+ &lt;p&gt;It can only be received by explicitly registering for it with
+ {@link Context#registerReceiver(BroadcastReceiver, IntentFilter)}.
+*/
+ACTION_HDMI_AUDIO_PLUG : &quot;android.media.action.HDMI_AUDIO_PLUG&quot;,
+<span id='android-media-AudioManager-property-EXTRA_AUDIO_PLUG_STATE'>/** Extra used in {@link #ACTION_HDMI_AUDIO_PLUG} to communicate whether HDMI is plugged in
+</span> or unplugged.
+ An integer value of 1 indicates a plugged-in state, 0 is unplugged.
+*/
+EXTRA_AUDIO_PLUG_STATE : &quot;android.media.extra.AUDIO_PLUG_STATE&quot;,
+<span id='android-media-AudioManager-property-EXTRA_MAX_CHANNEL_COUNT'>/** Extra used in {@link #ACTION_HDMI_AUDIO_PLUG} to define the maximum number of channels
+</span> supported by the HDMI device.
+ The corresponding integer value is only available when the device is plugged in (as expressed
+ by {@link #EXTRA_AUDIO_PLUG_STATE}).
+*/
+EXTRA_MAX_CHANNEL_COUNT : &quot;android.media.extra.MAX_CHANNEL_COUNT&quot;,
+<span id='android-media-AudioManager-property-EXTRA_ENCODINGS'>/** Extra used in {@link #ACTION_HDMI_AUDIO_PLUG} to define the audio encodings supported by
+</span> the connected HDMI device.
+ The corresponding array of encoding values is only available when the device is plugged in
+ (as expressed by {@link #EXTRA_AUDIO_PLUG_STATE}). Encoding values are defined in
+ {@link android.media.AudioFormat} (for instance see {@link android.media.AudioFormat#ENCODING_PCM_16BIT}). Use
+ {@link android.content.Intent#getIntArrayExtra(String)} to retrieve the encoding values.
+*/
+EXTRA_ENCODINGS : &quot;android.media.extra.ENCODINGS&quot;,
+<span id='android-media-AudioManager-property-STREAM_VOICE_CALL'>/**Used to identify the volume of audio streams for phone calls */
+</span>STREAM_VOICE_CALL : &quot;0&quot;,
+<span id='android-media-AudioManager-property-STREAM_SYSTEM'>/**Used to identify the volume of audio streams for system sounds */
+</span>STREAM_SYSTEM : &quot;1&quot;,
+<span id='android-media-AudioManager-property-STREAM_RING'>/**Used to identify the volume of audio streams for the phone ring */
+</span>STREAM_RING : &quot;2&quot;,
+<span id='android-media-AudioManager-property-STREAM_MUSIC'>/**Used to identify the volume of audio streams for music playback */
+</span>STREAM_MUSIC : &quot;3&quot;,
+<span id='android-media-AudioManager-property-STREAM_ALARM'>/**Used to identify the volume of audio streams for alarms */
+</span>STREAM_ALARM : &quot;4&quot;,
+<span id='android-media-AudioManager-property-STREAM_NOTIFICATION'>/**Used to identify the volume of audio streams for notifications */
+</span>STREAM_NOTIFICATION : &quot;5&quot;,
+<span id='android-media-AudioManager-property-STREAM_BLUETOOTH_SCO'>/**@hide Used to identify the volume of audio streams for phone calls when connected
+</span>        to bluetooth */
+STREAM_BLUETOOTH_SCO : &quot;6&quot;,
+<span id='android-media-AudioManager-property-STREAM_SYSTEM_ENFORCED'>/**@hide Used to identify the volume of audio streams for enforced system sounds
+</span>        in certain countries (e.g camera in Japan) */
+STREAM_SYSTEM_ENFORCED : &quot;7&quot;,
+<span id='android-media-AudioManager-property-STREAM_DTMF'>/**Used to identify the volume of audio streams for DTMF Tones */
+</span>STREAM_DTMF : &quot;8&quot;,
+<span id='android-media-AudioManager-property-STREAM_TTS'>/**@hide Used to identify the volume of audio streams exclusively transmitted through the
+</span>        speaker (TTS) of the device */
+STREAM_TTS : &quot;9&quot;,
+<span id='android-media-AudioManager-property-STREAM_ACCESSIBILITY'>/**Used to identify the volume of audio streams for accessibility prompts */
+</span>STREAM_ACCESSIBILITY : &quot;10&quot;,
+<span id='android-media-AudioManager-property-NUM_STREAMS'>/** @deprecated Do not iterate on volume stream type values.
+</span>*/
+NUM_STREAMS : &quot;5&quot;,
+<span id='android-media-AudioManager-property-ADJUST_RAISE'>/** Increase the ringer volume.
+</span>
+ @see #adjustVolume(int, int)
+ @see #adjustStreamVolume(int, int, int)
+*/
+ADJUST_RAISE : &quot;1&quot;,
+<span id='android-media-AudioManager-property-ADJUST_LOWER'>/** Decrease the ringer volume.
+</span>
+ @see #adjustVolume(int, int)
+ @see #adjustStreamVolume(int, int, int)
+*/
+ADJUST_LOWER : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-ADJUST_SAME'>/** Maintain the previous ringer volume. This may be useful when needing to
+</span> show the volume toast without actually modifying the volume.
+
+ @see #adjustVolume(int, int)
+ @see #adjustStreamVolume(int, int, int)
+*/
+ADJUST_SAME : &quot;0&quot;,
+<span id='android-media-AudioManager-property-ADJUST_MUTE'>/** Mute the volume. Has no effect if the stream is already muted.
+</span>
+ @see #adjustVolume(int, int)
+ @see #adjustStreamVolume(int, int, int)
+*/
+ADJUST_MUTE : &quot;-100&quot;,
+<span id='android-media-AudioManager-property-ADJUST_UNMUTE'>/** Unmute the volume. Has no effect if the stream is not muted.
+</span>
+ @see #adjustVolume(int, int)
+ @see #adjustStreamVolume(int, int, int)
+*/
+ADJUST_UNMUTE : &quot;100&quot;,
+<span id='android-media-AudioManager-property-ADJUST_TOGGLE_MUTE'>/** Toggle the mute state. If muted the stream will be unmuted. If not muted
+</span> the stream will be muted.
+
+ @see #adjustVolume(int, int)
+ @see #adjustStreamVolume(int, int, int)
+*/
+ADJUST_TOGGLE_MUTE : &quot;101&quot;,
+<span id='android-media-AudioManager-property-FLAG_SHOW_UI'>/** Show a toast containing the current volume.
+</span>
+ @see #adjustStreamVolume(int, int, int)
+ @see #adjustVolume(int, int)
+ @see #setStreamVolume(int, int, int)
+ @see #setRingerMode(int)
+*/
+FLAG_SHOW_UI : &quot;1&quot;,
+<span id='android-media-AudioManager-property-FLAG_ALLOW_RINGER_MODES'>/** Whether to include ringer modes as possible options when changing volume.
+</span> For example, if true and volume level is 0 and the volume is adjusted
+ with {@link #ADJUST_LOWER}, then the ringer mode may switch the silent or
+ vibrate mode.
+ &lt;p&gt;
+ By default this is on for the ring stream. If this flag is included,
+ this behavior will be present regardless of the stream type being
+ affected by the ringer mode.
+
+ @see #adjustVolume(int, int)
+ @see #adjustStreamVolume(int, int, int)
+*/
+FLAG_ALLOW_RINGER_MODES : &quot;2&quot;,
+<span id='android-media-AudioManager-property-FLAG_PLAY_SOUND'>/** Whether to play a sound when changing the volume.
+</span> &lt;p&gt;
+ If this is given to {@link #adjustVolume(int, int)} or
+ {@link #adjustSuggestedStreamVolume(int, int, int)}, it may be ignored
+ in some cases (for example, the decided stream type is not
+ {@link android.media.AudioManager#STREAM_RING}, or the volume is being adjusted
+ downward).
+
+ @see #adjustStreamVolume(int, int, int)
+ @see #adjustVolume(int, int)
+ @see #setStreamVolume(int, int, int)
+*/
+FLAG_PLAY_SOUND : &quot;4&quot;,
+<span id='android-media-AudioManager-property-FLAG_REMOVE_SOUND_AND_VIBRATE'>/** Removes any sounds/vibrate that may be in the queue, or are playing (related to
+</span> changing volume).
+*/
+FLAG_REMOVE_SOUND_AND_VIBRATE : &quot;8&quot;,
+<span id='android-media-AudioManager-property-FLAG_VIBRATE'>/** Whether to vibrate if going into the vibrate ringer mode.
+</span>*/
+FLAG_VIBRATE : &quot;16&quot;,
+<span id='android-media-AudioManager-property-FLAG_FIXED_VOLUME'>/** Indicates to VolumePanel that the volume slider should be disabled as user
+</span> cannot change the stream volume
+ @hide
+*/
+FLAG_FIXED_VOLUME : &quot;32&quot;,
+<span id='android-media-AudioManager-property-FLAG_BLUETOOTH_ABS_VOLUME'>/** Indicates the volume set/adjust call is for Bluetooth absolute volume
+</span> @hide
+*/
+FLAG_BLUETOOTH_ABS_VOLUME : &quot;64&quot;,
+<span id='android-media-AudioManager-property-FLAG_SHOW_SILENT_HINT'>/** Adjusting the volume was prevented due to silent mode, display a hint in the UI.
+</span> @hide
+*/
+FLAG_SHOW_SILENT_HINT : &quot;128&quot;,
+<span id='android-media-AudioManager-property-FLAG_HDMI_SYSTEM_AUDIO_VOLUME'>/** Indicates the volume call is for Hdmi Cec system audio volume
+</span> @hide
+*/
+FLAG_HDMI_SYSTEM_AUDIO_VOLUME : &quot;256&quot;,
+<span id='android-media-AudioManager-property-FLAG_ACTIVE_MEDIA_ONLY'>/** Indicates that this should only be handled if media is actively playing.
+</span> @hide
+*/
+FLAG_ACTIVE_MEDIA_ONLY : &quot;512&quot;,
+<span id='android-media-AudioManager-property-FLAG_SHOW_UI_WARNINGS'>/** Like FLAG_SHOW_UI, but only dialog warnings and confirmations, no sliders.
+</span> @hide
+*/
+FLAG_SHOW_UI_WARNINGS : &quot;1024&quot;,
+<span id='android-media-AudioManager-property-FLAG_SHOW_VIBRATE_HINT'>/** Adjusting the volume down from vibrated was prevented, display a hint in the UI.
+</span> @hide
+*/
+FLAG_SHOW_VIBRATE_HINT : &quot;2048&quot;,
+<span id='android-media-AudioManager-property-FLAG_FROM_KEY'>/** Adjusting the volume due to a hardware key press.
+</span> This flag can be used in the places in order to denote (or check) that a volume adjustment
+ request is from a hardware key press. (e.g. {@link MediaController}).
+ @hide
+*/
+FLAG_FROM_KEY : &quot;4096&quot;,
+<span id='android-media-AudioManager-property-RINGER_MODE_SILENT'>/** Ringer mode that will be silent and will not vibrate. (This overrides the
+</span> vibrate setting.)
+
+ @see #setRingerMode(int)
+ @see #getRingerMode()
+*/
+RINGER_MODE_SILENT : &quot;0&quot;,
+<span id='android-media-AudioManager-property-RINGER_MODE_VIBRATE'>/** Ringer mode that will be silent and will vibrate. (This will cause the
+</span> phone ringer to always vibrate, but the notification vibrate to only
+ vibrate if set.)
+
+ @see #setRingerMode(int)
+ @see #getRingerMode()
+*/
+RINGER_MODE_VIBRATE : &quot;1&quot;,
+<span id='android-media-AudioManager-property-RINGER_MODE_NORMAL'>/** Ringer mode that may be audible and may vibrate. It will be audible if
+</span> the volume before changing out of this mode was audible. It will vibrate
+ if the vibrate setting is on.
+
+ @see #setRingerMode(int)
+ @see #getRingerMode()
+*/
+RINGER_MODE_NORMAL : &quot;2&quot;,
+<span id='android-media-AudioManager-property-RINGER_MODE_MAX'>/** Maximum valid ringer mode value. Values must start from 0 and be contiguous.
+</span> @hide
+*/
+RINGER_MODE_MAX : &quot;2&quot;,
+<span id='android-media-AudioManager-property-VIBRATE_TYPE_RINGER'>/** Vibrate type that corresponds to the ringer.
+</span>
+ @see #setVibrateSetting(int, int)
+ @see #getVibrateSetting(int)
+ @see #shouldVibrate(int)
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode}().
+*/
+VIBRATE_TYPE_RINGER : &quot;0&quot;,
+<span id='android-media-AudioManager-property-VIBRATE_TYPE_NOTIFICATION'>/** Vibrate type that corresponds to notifications.
+</span>
+ @see #setVibrateSetting(int, int)
+ @see #getVibrateSetting(int)
+ @see #shouldVibrate(int)
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode}().
+*/
+VIBRATE_TYPE_NOTIFICATION : &quot;1&quot;,
+<span id='android-media-AudioManager-property-VIBRATE_SETTING_OFF'>/** Vibrate setting that suggests to never vibrate.
+</span>
+ @see #setVibrateSetting(int, int)
+ @see #getVibrateSetting(int)
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode}().
+*/
+VIBRATE_SETTING_OFF : &quot;0&quot;,
+<span id='android-media-AudioManager-property-VIBRATE_SETTING_ON'>/** Vibrate setting that suggests to vibrate when possible.
+</span>
+ @see #setVibrateSetting(int, int)
+ @see #getVibrateSetting(int)
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode}().
+*/
+VIBRATE_SETTING_ON : &quot;1&quot;,
+<span id='android-media-AudioManager-property-VIBRATE_SETTING_ONLY_SILENT'>/** Vibrate setting that suggests to only vibrate when in the vibrate ringer
+</span> mode.
+
+ @see #setVibrateSetting(int, int)
+ @see #getVibrateSetting(int)
+ @deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode}().
+*/
+VIBRATE_SETTING_ONLY_SILENT : &quot;2&quot;,
+<span id='android-media-AudioManager-property-USE_DEFAULT_STREAM_TYPE'>/** Suggests using the default stream type. This may not be used in all
+</span> places a stream type is needed.
+*/
+USE_DEFAULT_STREAM_TYPE : &quot;-2147483648&quot;,
+<span id='android-media-AudioManager-property-ACTION_SCO_AUDIO_STATE_CHANGED'>/** Sticky broadcast intent action indicating that the Bluetooth SCO audio
+</span> connection state has changed. The intent contains on extra {@link #EXTRA_SCO_AUDIO_STATE}
+ indicating the new state which is either {@link #SCO_AUDIO_STATE_DISCONNECTED}
+ or {@link #SCO_AUDIO_STATE_CONNECTED}
+
+ @see #startBluetoothSco()
+ @deprecated Use  {@link #ACTION_SCO_AUDIO_STATE_UPDATED} instead
+*/
+ACTION_SCO_AUDIO_STATE_CHANGED : &quot;android.media.SCO_AUDIO_STATE_CHANGED&quot;,
+<span id='android-media-AudioManager-property-ACTION_SCO_AUDIO_STATE_UPDATED'>/** Sticky broadcast intent action indicating that the Bluetooth SCO audio
+</span> connection state has been updated.
+ &lt;p&gt;This intent has two extras:
+ &lt;ul&gt;
+   &lt;li&gt; {@link #EXTRA_SCO_AUDIO_STATE} - The new SCO audio state. &lt;/li&gt;
+   &lt;li&gt; {@link #EXTRA_SCO_AUDIO_PREVIOUS_STATE}- The previous SCO audio state. &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; EXTRA_SCO_AUDIO_STATE or EXTRA_SCO_AUDIO_PREVIOUS_STATE can be any of:
+ &lt;ul&gt;
+   &lt;li&gt; {@link #SCO_AUDIO_STATE_DISCONNECTED}, &lt;/li&gt;
+   &lt;li&gt; {@link #SCO_AUDIO_STATE_CONNECTING} or &lt;/li&gt;
+   &lt;li&gt; {@link #SCO_AUDIO_STATE_CONNECTED}, &lt;/li&gt;
+ &lt;/ul&gt;
+ @see #startBluetoothSco()
+*/
+ACTION_SCO_AUDIO_STATE_UPDATED : &quot;android.media.ACTION_SCO_AUDIO_STATE_UPDATED&quot;,
+<span id='android-media-AudioManager-property-EXTRA_SCO_AUDIO_STATE'>/** Extra for intent {@link #ACTION_SCO_AUDIO_STATE_CHANGED} or
+</span> {@link #ACTION_SCO_AUDIO_STATE_UPDATED} containing the new bluetooth SCO connection state.
+*/
+EXTRA_SCO_AUDIO_STATE : &quot;android.media.extra.SCO_AUDIO_STATE&quot;,
+<span id='android-media-AudioManager-property-EXTRA_SCO_AUDIO_PREVIOUS_STATE'>/** Extra for intent {@link #ACTION_SCO_AUDIO_STATE_UPDATED} containing the previous
+</span> bluetooth SCO connection state.
+*/
+EXTRA_SCO_AUDIO_PREVIOUS_STATE : &quot;android.media.extra.SCO_AUDIO_PREVIOUS_STATE&quot;,
+<span id='android-media-AudioManager-property-SCO_AUDIO_STATE_DISCONNECTED'>/** Value for extra EXTRA_SCO_AUDIO_STATE or EXTRA_SCO_AUDIO_PREVIOUS_STATE
+</span> indicating that the SCO audio channel is not established
+*/
+SCO_AUDIO_STATE_DISCONNECTED : &quot;0&quot;,
+<span id='android-media-AudioManager-property-SCO_AUDIO_STATE_CONNECTED'>/** Value for extra {@link #EXTRA_SCO_AUDIO_STATE} or {@link #EXTRA_SCO_AUDIO_PREVIOUS_STATE}
+</span> indicating that the SCO audio channel is established
+*/
+SCO_AUDIO_STATE_CONNECTED : &quot;1&quot;,
+<span id='android-media-AudioManager-property-SCO_AUDIO_STATE_CONNECTING'>/** Value for extra EXTRA_SCO_AUDIO_STATE or EXTRA_SCO_AUDIO_PREVIOUS_STATE
+</span> indicating that the SCO audio channel is being established
+*/
+SCO_AUDIO_STATE_CONNECTING : &quot;2&quot;,
+<span id='android-media-AudioManager-property-SCO_AUDIO_STATE_ERROR'>/** Value for extra EXTRA_SCO_AUDIO_STATE indicating that
+</span> there was an error trying to obtain the state
+*/
+SCO_AUDIO_STATE_ERROR : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-ACTION_MICROPHONE_MUTE_CHANGED'>/** Broadcast Action: microphone muting state changed.
+</span>
+ You &lt;em&gt;cannot&lt;/em&gt; receive this through components declared
+ in manifests, only by explicitly registering for it with
+ {@link Context#registerReceiver(BroadcastReceiver, IntentFilter)
+ Context.registerReceiver()}.
+
+ &lt;p&gt;The intent has no extra values, use {@link #isMicrophoneMute} to check whether the
+ microphone is muted.
+*/
+ACTION_MICROPHONE_MUTE_CHANGED : &quot;android.media.action.MICROPHONE_MUTE_CHANGED&quot;,
+<span id='android-media-AudioManager-property-ACTION_SPEAKERPHONE_STATE_CHANGED'>/** Broadcast Action: speakerphone state changed.
+</span>
+ You &lt;em&gt;cannot&lt;/em&gt; receive this through components declared
+ in manifests, only by explicitly registering for it with
+ {@link Context#registerReceiver(BroadcastReceiver, IntentFilter)
+ Context.registerReceiver()}.
+
+ &lt;p&gt;The intent has no extra values, use {@link #isSpeakerphoneOn} to check whether the
+ speakerphone functionality is enabled or not.
+*/
+ACTION_SPEAKERPHONE_STATE_CHANGED : &quot;android.media.action.SPEAKERPHONE_STATE_CHANGED&quot;,
+<span id='android-media-AudioManager-property-MODE_INVALID'>/** Invalid audio mode.
+</span>*/
+MODE_INVALID : &quot;-2&quot;,
+<span id='android-media-AudioManager-property-MODE_CURRENT'>/** Current audio mode. Used to apply audio routing to current mode.
+</span>*/
+MODE_CURRENT : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-MODE_NORMAL'>/** Normal audio mode: not ringing and no call established.
+</span>*/
+MODE_NORMAL : &quot;0&quot;,
+<span id='android-media-AudioManager-property-MODE_RINGTONE'>/** Ringing audio mode. An incoming is being signaled.
+</span>*/
+MODE_RINGTONE : &quot;1&quot;,
+<span id='android-media-AudioManager-property-MODE_IN_CALL'>/** In call audio mode. A telephony call is established.
+</span>*/
+MODE_IN_CALL : &quot;2&quot;,
+<span id='android-media-AudioManager-property-MODE_IN_COMMUNICATION'>/** In communication audio mode. An audio/video chat or VoIP call is established.
+</span>*/
+MODE_IN_COMMUNICATION : &quot;3&quot;,
+<span id='android-media-AudioManager-property-ROUTE_EARPIECE'>/** Routing audio output to earpiece
+</span> @deprecated   Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+ROUTE_EARPIECE : &quot;1&quot;,
+<span id='android-media-AudioManager-property-ROUTE_SPEAKER'>/** Routing audio output to speaker
+</span> @deprecated   Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+ROUTE_SPEAKER : &quot;2&quot;,
+<span id='android-media-AudioManager-property-ROUTE_BLUETOOTH'>/** @deprecated use {@link #ROUTE_BLUETOOTH_SCO}
+</span> @deprecated   Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+ROUTE_BLUETOOTH : &quot;4&quot;,
+<span id='android-media-AudioManager-property-ROUTE_BLUETOOTH_SCO'>/** Routing audio output to bluetooth SCO
+</span> @deprecated   Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+ROUTE_BLUETOOTH_SCO : &quot;4&quot;,
+<span id='android-media-AudioManager-property-ROUTE_HEADSET'>/** Routing audio output to headset
+</span> @deprecated   Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+ROUTE_HEADSET : &quot;8&quot;,
+<span id='android-media-AudioManager-property-ROUTE_BLUETOOTH_A2DP'>/** Routing audio output to bluetooth A2DP
+</span> @deprecated   Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+ROUTE_BLUETOOTH_A2DP : &quot;16&quot;,
+<span id='android-media-AudioManager-property-ROUTE_ALL'>/** Used for mask parameter of {@link #setRouting(int,int,int)}.
+</span> @deprecated   Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+ROUTE_ALL : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-AUDIO_SESSION_ID_GENERATE'>/** A special audio session ID to indicate that the audio session ID isn't known and the
+</span> framework should generate a new value. This can be used when building a new
+ {@link android.media.AudioTrack} instance with
+ {@link AudioTrack#AudioTrack(AudioAttributes, android.media.AudioFormat, int, int, int)}.
+*/
+AUDIO_SESSION_ID_GENERATE : &quot;0&quot;,
+<span id='android-media-AudioManager-property-FX_KEY_CLICK'>/** Keyboard and direction pad click sound
+</span> @see #playSoundEffect(int)
+*/
+FX_KEY_CLICK : &quot;0&quot;,
+<span id='android-media-AudioManager-property-FX_FOCUS_NAVIGATION_UP'>/** Focus has moved up
+</span> @see #playSoundEffect(int)
+*/
+FX_FOCUS_NAVIGATION_UP : &quot;1&quot;,
+<span id='android-media-AudioManager-property-FX_FOCUS_NAVIGATION_DOWN'>/** Focus has moved down
+</span> @see #playSoundEffect(int)
+*/
+FX_FOCUS_NAVIGATION_DOWN : &quot;2&quot;,
+<span id='android-media-AudioManager-property-FX_FOCUS_NAVIGATION_LEFT'>/** Focus has moved left
+</span> @see #playSoundEffect(int)
+*/
+FX_FOCUS_NAVIGATION_LEFT : &quot;3&quot;,
+<span id='android-media-AudioManager-property-FX_FOCUS_NAVIGATION_RIGHT'>/** Focus has moved right
+</span> @see #playSoundEffect(int)
+*/
+FX_FOCUS_NAVIGATION_RIGHT : &quot;4&quot;,
+<span id='android-media-AudioManager-property-FX_KEYPRESS_STANDARD'>/** IME standard keypress sound
+</span> @see #playSoundEffect(int)
+*/
+FX_KEYPRESS_STANDARD : &quot;5&quot;,
+<span id='android-media-AudioManager-property-FX_KEYPRESS_SPACEBAR'>/** IME spacebar keypress sound
+</span> @see #playSoundEffect(int)
+*/
+FX_KEYPRESS_SPACEBAR : &quot;6&quot;,
+<span id='android-media-AudioManager-property-FX_KEYPRESS_DELETE'>/** IME delete keypress sound
+</span> @see #playSoundEffect(int)
+*/
+FX_KEYPRESS_DELETE : &quot;7&quot;,
+<span id='android-media-AudioManager-property-FX_KEYPRESS_RETURN'>/** IME return_keypress sound
+</span> @see #playSoundEffect(int)
+*/
+FX_KEYPRESS_RETURN : &quot;8&quot;,
+<span id='android-media-AudioManager-property-FX_KEYPRESS_INVALID'>/** Invalid keypress sound
+</span> @see #playSoundEffect(int)
+*/
+FX_KEYPRESS_INVALID : &quot;9&quot;,
+<span id='android-media-AudioManager-property-NUM_SOUND_EFFECTS'>/** @hide Number of sound effects
+</span>*/
+NUM_SOUND_EFFECTS : &quot;10&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_NONE'>/** Used to indicate no audio focus has been gained or lost, or requested.
+</span>*/
+AUDIOFOCUS_NONE : &quot;0&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_GAIN'>/** Used to indicate a gain of audio focus, or a request of audio focus, of unknown duration.
+</span> @see OnAudioFocusChangeListener#onAudioFocusChange(int)
+ @see #requestAudioFocus(OnAudioFocusChangeListener, int, int)
+*/
+AUDIOFOCUS_GAIN : &quot;1&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_GAIN_TRANSIENT'>/** Used to indicate a temporary gain or request of audio focus, anticipated to last a short
+</span> amount of time. Examples of temporary changes are the playback of driving directions, or an
+ event notification.
+ @see OnAudioFocusChangeListener#onAudioFocusChange(int)
+ @see #requestAudioFocus(OnAudioFocusChangeListener, int, int)
+*/
+AUDIOFOCUS_GAIN_TRANSIENT : &quot;2&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK'>/** Used to indicate a temporary request of audio focus, anticipated to last a short
+</span> amount of time, and where it is acceptable for other audio applications to keep playing
+ after having lowered their output level (also referred to as &quot;ducking&quot;).
+ Examples of temporary changes are the playback of driving directions where playback of music
+ in the background is acceptable.
+ @see OnAudioFocusChangeListener#onAudioFocusChange(int)
+ @see #requestAudioFocus(OnAudioFocusChangeListener, int, int)
+*/
+AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK : &quot;3&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE'>/** Used to indicate a temporary request of audio focus, anticipated to last a short
+</span> amount of time, during which no other applications, or system components, should play
+ anything. Examples of exclusive and transient audio focus requests are voice
+ memo recording and speech recognition, during which the system shouldn't play any
+ notifications, and media playback should have paused.
+ @see #requestAudioFocus(OnAudioFocusChangeListener, int, int)
+*/
+AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE : &quot;4&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_LOSS'>/** Used to indicate a loss of audio focus of unknown duration.
+</span> @see OnAudioFocusChangeListener#onAudioFocusChange(int)
+*/
+AUDIOFOCUS_LOSS : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_LOSS_TRANSIENT'>/** Used to indicate a transient loss of audio focus.
+</span> @see OnAudioFocusChangeListener#onAudioFocusChange(int)
+*/
+AUDIOFOCUS_LOSS_TRANSIENT : &quot;-2&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK'>/** Used to indicate a transient loss of audio focus where the loser of the audio focus can
+</span> lower its output volume if it wants to continue playing (also referred to as &quot;ducking&quot;), as
+ the new focus owner doesn't require others to be silent.
+ @see OnAudioFocusChangeListener#onAudioFocusChange(int)
+*/
+AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK : &quot;-3&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_REQUEST_FAILED'>/** A failed focus change request.
+</span>*/
+AUDIOFOCUS_REQUEST_FAILED : &quot;0&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_REQUEST_GRANTED'>/** A successful focus change request.
+</span>*/
+AUDIOFOCUS_REQUEST_GRANTED : &quot;1&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_REQUEST_DELAYED'>/** A focus change request whose granting is delayed: the request was successful, but the
+</span> requester will only be granted audio focus once the condition that prevented immediate
+ granting has ended.
+ See {@link #requestAudioFocus}(AudioFocusRequest) and
+ {@link android.media.AudioFocusRequest.Builder#setAcceptsDelayedFocusGain(boolean)}
+*/
+AUDIOFOCUS_REQUEST_DELAYED : &quot;2&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_REQUEST_WAITING_FOR_EXT_POLICY'>/** @hide
+</span> code returned when a synchronous focus request on the client-side is to be blocked
+ until the external audio focus policy decides on the response for the client
+*/
+AUDIOFOCUS_REQUEST_WAITING_FOR_EXT_POLICY : &quot;100&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_FLAG_DELAY_OK'>/** @hide
+</span> Use this flag when requesting audio focus to indicate it is ok for the requester to not be
+ granted audio focus immediately (as indicated by {@link #AUDIOFOCUS_REQUEST_DELAYED}) when
+ the system is in a state where focus cannot change, but be granted focus later when
+ this condition ends.
+*/
+AUDIOFOCUS_FLAG_DELAY_OK : &quot;1&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_FLAG_PAUSES_ON_DUCKABLE_LOSS'>/** @hide
+</span> Use this flag when requesting audio focus to indicate that the requester
+ will pause its media playback (if applicable) when losing audio focus with
+ {@link #AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK}, rather than ducking.
+ &lt;br&gt;On some platforms, the ducking may be handled without the application being aware of it
+ (i.e. it will not transiently lose focus). For applications that for instance play spoken
+ content, such as audio book or podcast players, ducking may never be acceptable, and will
+ thus always pause. This flag enables them to be declared as such whenever they request focus.
+*/
+AUDIOFOCUS_FLAG_PAUSES_ON_DUCKABLE_LOSS : &quot;2&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_FLAG_LOCK'>/** @hide
+</span> Use this flag to lock audio focus so granting is temporarily disabled.
+ &lt;br&gt;This flag can only be used by owners of a registered
+ {@link android.media.audiopolicy.AudioPolicy} in
+ {@link #requestAudioFocus(OnAudioFocusChangeListener, android.media.AudioAttributes, int, int, AudioPolicy)}
+*/
+AUDIOFOCUS_FLAG_LOCK : &quot;4&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_FLAGS_APPS'>/**@hide */
+</span>AUDIOFOCUS_FLAGS_APPS : &quot;3&quot;,
+<span id='android-media-AudioManager-property-AUDIOFOCUS_FLAGS_SYSTEM'>/**@hide */
+</span>AUDIOFOCUS_FLAGS_SYSTEM : &quot;7&quot;,
+<span id='android-media-AudioManager-property-RECORD_CONFIG_EVENT_NONE'>/**@hide */
+</span>RECORD_CONFIG_EVENT_NONE : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-RECORD_CONFIG_EVENT_START'>/**@hide */
+</span>RECORD_CONFIG_EVENT_START : &quot;0&quot;,
+<span id='android-media-AudioManager-property-RECORD_CONFIG_EVENT_STOP'>/**@hide */
+</span>RECORD_CONFIG_EVENT_STOP : &quot;1&quot;,
+<span id='android-media-AudioManager-property-RECORD_CONFIG_EVENT_UPDATE'>/**@hide */
+</span>RECORD_CONFIG_EVENT_UPDATE : &quot;2&quot;,
+<span id='android-media-AudioManager-property-RECORD_CONFIG_EVENT_RELEASE'>/**@hide */
+</span>RECORD_CONFIG_EVENT_RELEASE : &quot;3&quot;,
+<span id='android-media-AudioManager-property-RECORD_RIID_INVALID'>/**@hide */
+</span>RECORD_RIID_INVALID : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-RECORDER_STATE_STARTED'>/**@hide */
+</span>RECORDER_STATE_STARTED : &quot;0&quot;,
+<span id='android-media-AudioManager-property-RECORDER_STATE_STOPPED'>/**@hide */
+</span>RECORDER_STATE_STOPPED : &quot;1&quot;,
+<span id='android-media-AudioManager-property-DEVICE_NONE'>/**@hide
+</span> The audio device code for representing &quot;no device.&quot; */
+DEVICE_NONE : &quot;0&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_EARPIECE'>/**@hide
+</span>  The audio output device code for the small speaker at the front of the device used
+  when placing calls.  Does not refer to an in-ear headphone without attached microphone,
+  such as earbuds, earphones, or in-ear monitors (IEM). Those would be handled as a
+  {@link #DEVICE_OUT_WIRED_HEADPHONE}.
+*/
+DEVICE_OUT_EARPIECE : &quot;1&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_SPEAKER'>/**@hide
+</span>  The audio output device code for the built-in speaker */
+DEVICE_OUT_SPEAKER : &quot;2&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_WIRED_HEADSET'>/**@hide
+</span> The audio output device code for a wired headset with attached microphone */
+DEVICE_OUT_WIRED_HEADSET : &quot;4&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_WIRED_HEADPHONE'>/**@hide
+</span> The audio output device code for a wired headphone without attached microphone */
+DEVICE_OUT_WIRED_HEADPHONE : &quot;8&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_USB_HEADSET'>/**@hide
+</span> The audio output device code for a USB headphone with attached microphone */
+DEVICE_OUT_USB_HEADSET : &quot;67108864&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_BLUETOOTH_SCO'>/**@hide
+</span> The audio output device code for generic Bluetooth SCO, for voice */
+DEVICE_OUT_BLUETOOTH_SCO : &quot;16&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_BLUETOOTH_SCO_HEADSET'>/**@hide
+</span> The audio output device code for Bluetooth SCO Headset Profile (HSP) and
+ Hands-Free Profile (HFP), for voice
+*/
+DEVICE_OUT_BLUETOOTH_SCO_HEADSET : &quot;32&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_BLUETOOTH_SCO_CARKIT'>/**@hide
+</span> The audio output device code for Bluetooth SCO car audio, for voice */
+DEVICE_OUT_BLUETOOTH_SCO_CARKIT : &quot;64&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_BLUETOOTH_A2DP'>/**@hide
+</span> The audio output device code for generic Bluetooth A2DP, for music */
+DEVICE_OUT_BLUETOOTH_A2DP : &quot;128&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES'>/**@hide
+</span> The audio output device code for Bluetooth A2DP headphones, for music */
+DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES : &quot;256&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER'>/**@hide
+</span> The audio output device code for Bluetooth A2DP external speaker, for music */
+DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER : &quot;512&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_AUX_DIGITAL'>/**@hide
+</span> The audio output device code for S/PDIF (legacy) or HDMI
+ Deprecated: replaced by {@link #DEVICE_OUT_HDMI} */
+DEVICE_OUT_AUX_DIGITAL : &quot;1024&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_HDMI'>/**@hide
+</span> The audio output device code for HDMI */
+DEVICE_OUT_HDMI : &quot;1024&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_ANLG_DOCK_HEADSET'>/**@hide
+</span> The audio output device code for an analog wired headset attached via a
+  docking station
+*/
+DEVICE_OUT_ANLG_DOCK_HEADSET : &quot;2048&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_DGTL_DOCK_HEADSET'>/**@hide
+</span> The audio output device code for a digital wired headset attached via a
+  docking station
+*/
+DEVICE_OUT_DGTL_DOCK_HEADSET : &quot;4096&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_USB_ACCESSORY'>/**@hide
+</span> The audio output device code for a USB audio accessory. The accessory is in USB host
+ mode and the Android device in USB device mode
+*/
+DEVICE_OUT_USB_ACCESSORY : &quot;8192&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_USB_DEVICE'>/**@hide
+</span> The audio output device code for a USB audio device. The device is in USB device
+ mode and the Android device in USB host mode
+*/
+DEVICE_OUT_USB_DEVICE : &quot;16384&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_REMOTE_SUBMIX'>/**@hide
+</span> The audio output device code for projection output.
+*/
+DEVICE_OUT_REMOTE_SUBMIX : &quot;32768&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_TELEPHONY_TX'>/**@hide
+</span> The audio output device code the telephony voice TX path.
+*/
+DEVICE_OUT_TELEPHONY_TX : &quot;65536&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_LINE'>/**@hide
+</span> The audio output device code for an analog jack with line impedance detected.
+*/
+DEVICE_OUT_LINE : &quot;131072&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_HDMI_ARC'>/**@hide
+</span> The audio output device code for HDMI Audio Return Channel.
+*/
+DEVICE_OUT_HDMI_ARC : &quot;262144&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_SPDIF'>/**@hide
+</span> The audio output device code for S/PDIF digital connection.
+*/
+DEVICE_OUT_SPDIF : &quot;524288&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_FM'>/**@hide
+</span> The audio output device code for built-in FM transmitter.
+*/
+DEVICE_OUT_FM : &quot;1048576&quot;,
+<span id='android-media-AudioManager-property-DEVICE_OUT_DEFAULT'>/**@hide
+</span> This is not used as a returned value from {@link #getDevicesForStream}, but could be
+  used in the future in a set method to select whatever default device is chosen by the
+  platform-specific implementation.
+*/
+DEVICE_OUT_DEFAULT : &quot;1073741824&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_BUILTIN_MIC'>/**@hide
+</span> The audio input device code for default built-in microphone
+*/
+DEVICE_IN_BUILTIN_MIC : &quot;-2147483644&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_BLUETOOTH_SCO_HEADSET'>/**@hide
+</span> The audio input device code for a Bluetooth SCO headset
+*/
+DEVICE_IN_BLUETOOTH_SCO_HEADSET : &quot;-2147483640&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_WIRED_HEADSET'>/**@hide
+</span> The audio input device code for wired headset microphone
+*/
+DEVICE_IN_WIRED_HEADSET : &quot;-2147483632&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_HDMI'>/**@hide
+</span> The audio input device code for HDMI
+*/
+DEVICE_IN_HDMI : &quot;-2147483616&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_HDMI_ARC'>/**@hide
+</span> The audio input device code for HDMI ARC
+*/
+DEVICE_IN_HDMI_ARC : &quot;-2013265920&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_TELEPHONY_RX'>/**@hide
+</span> The audio input device code for telephony voice RX path
+*/
+DEVICE_IN_TELEPHONY_RX : &quot;-2147483584&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_BACK_MIC'>/**@hide
+</span> The audio input device code for built-in microphone pointing to the back
+*/
+DEVICE_IN_BACK_MIC : &quot;-2147483520&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_ANLG_DOCK_HEADSET'>/**@hide
+</span> The audio input device code for analog from a docking station
+*/
+DEVICE_IN_ANLG_DOCK_HEADSET : &quot;-2147483136&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_DGTL_DOCK_HEADSET'>/**@hide
+</span> The audio input device code for digital from a docking station
+*/
+DEVICE_IN_DGTL_DOCK_HEADSET : &quot;-2147482624&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_USB_ACCESSORY'>/**@hide
+</span> The audio input device code for a USB audio accessory. The accessory is in USB host
+ mode and the Android device in USB device mode
+*/
+DEVICE_IN_USB_ACCESSORY : &quot;-2147481600&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_USB_DEVICE'>/**@hide
+</span> The audio input device code for a USB audio device. The device is in USB device
+ mode and the Android device in USB host mode
+*/
+DEVICE_IN_USB_DEVICE : &quot;-2147479552&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_FM_TUNER'>/**@hide
+</span> The audio input device code for a FM radio tuner
+*/
+DEVICE_IN_FM_TUNER : &quot;-2147475456&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_TV_TUNER'>/**@hide
+</span> The audio input device code for a TV tuner
+*/
+DEVICE_IN_TV_TUNER : &quot;-2147467264&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_LINE'>/**@hide
+</span> The audio input device code for an analog jack with line impedance detected
+*/
+DEVICE_IN_LINE : &quot;-2147450880&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_SPDIF'>/**@hide
+</span> The audio input device code for a S/PDIF digital connection
+*/
+DEVICE_IN_SPDIF : &quot;-2147418112&quot;,
+<span id='android-media-AudioManager-property-DEVICE_IN_LOOPBACK'>/**@hide
+</span> The audio input device code for audio loopback
+*/
+DEVICE_IN_LOOPBACK : &quot;-2147221504&quot;,
+<span id='android-media-AudioManager-property-PROPERTY_OUTPUT_SAMPLE_RATE'>/** Used as a key for {@link #getProperty} to request the native or optimal output sample rate
+</span> for this device's low latency output stream, in decimal Hz.  Latency-sensitive apps
+ should use this value as a default, and offer the user the option to override it.
+ The low latency output stream is typically either the device's primary output stream,
+ or another output stream with smaller buffers.
+*/
+PROPERTY_OUTPUT_SAMPLE_RATE : &quot;android.media.property.OUTPUT_SAMPLE_RATE&quot;,
+<span id='android-media-AudioManager-property-PROPERTY_OUTPUT_FRAMES_PER_BUFFER'>/** Used as a key for {@link #getProperty} to request the native or optimal output buffer size
+</span> for this device's low latency output stream, in decimal PCM frames.  Latency-sensitive apps
+ should use this value as a minimum, and offer the user the option to override it.
+ The low latency output stream is typically either the device's primary output stream,
+ or another output stream with smaller buffers.
+*/
+PROPERTY_OUTPUT_FRAMES_PER_BUFFER : &quot;android.media.property.OUTPUT_FRAMES_PER_BUFFER&quot;,
+<span id='android-media-AudioManager-property-PROPERTY_SUPPORT_MIC_NEAR_ULTRASOUND'>/** Used as a key for {@link #getProperty} to determine if the default microphone audio source
+</span> supports near-ultrasound frequencies (range of 18 - 21 kHz).
+*/
+PROPERTY_SUPPORT_MIC_NEAR_ULTRASOUND : &quot;android.media.property.SUPPORT_MIC_NEAR_ULTRASOUND&quot;,
+<span id='android-media-AudioManager-property-PROPERTY_SUPPORT_SPEAKER_NEAR_ULTRASOUND'>/** Used as a key for {@link #getProperty} to determine if the default speaker audio path
+</span> supports near-ultrasound frequencies (range of 18 - 21 kHz).
+*/
+PROPERTY_SUPPORT_SPEAKER_NEAR_ULTRASOUND : &quot;android.media.property.SUPPORT_SPEAKER_NEAR_ULTRASOUND&quot;,
+<span id='android-media-AudioManager-property-PROPERTY_SUPPORT_AUDIO_SOURCE_UNPROCESSED'>/** Used as a key for {@link #getProperty} to determine if the unprocessed audio source is
+</span> available and supported with the expected frequency range and level response.
+*/
+PROPERTY_SUPPORT_AUDIO_SOURCE_UNPROCESSED : &quot;android.media.property.SUPPORT_AUDIO_SOURCE_UNPROCESSED&quot;,
+<span id='android-media-AudioManager-property-SUCCESS'>/**@hide */
+</span>SUCCESS : &quot;0&quot;,
+<span id='android-media-AudioManager-property-ERROR'>/** A default error code.
+</span>*/
+ERROR : &quot;-1&quot;,
+<span id='android-media-AudioManager-property-ERROR_BAD_VALUE'>/**@hide
+</span> CANDIDATE FOR PUBLIC API
+*/
+ERROR_BAD_VALUE : &quot;-2&quot;,
+<span id='android-media-AudioManager-property-ERROR_INVALID_OPERATION'>/**@hide
+</span>*/
+ERROR_INVALID_OPERATION : &quot;-3&quot;,
+<span id='android-media-AudioManager-property-ERROR_PERMISSION_DENIED'>/**@hide
+</span>*/
+ERROR_PERMISSION_DENIED : &quot;-4&quot;,
+<span id='android-media-AudioManager-property-ERROR_NO_INIT'>/**@hide
+</span>*/
+ERROR_NO_INIT : &quot;-5&quot;,
+<span id='android-media-AudioManager-property-ERROR_DEAD_OBJECT'>/** An error code indicating that the object reporting it is no longer valid and needs to
+</span> be recreated.
+*/
+ERROR_DEAD_OBJECT : &quot;-6&quot;,
+<span id='android-media-AudioManager-property-GET_DEVICES_INPUTS'>/** Specifies to the {@link android.media.AudioManager#getDevices(int)} method to include
+</span> source (i.e. input) audio devices.
+*/
+GET_DEVICES_INPUTS : &quot;1&quot;,
+<span id='android-media-AudioManager-property-GET_DEVICES_OUTPUTS'>/** Specifies to the {@link android.media.AudioManager#getDevices(int)} method to include
+</span> sink (i.e. output) audio devices.
+*/
+GET_DEVICES_OUTPUTS : &quot;2&quot;,
+<span id='android-media-AudioManager-property-GET_DEVICES_ALL'>/** Specifies to the {@link android.media.AudioManager#getDevices(int)} method to include both
+</span> source and sink devices.
+*/
+GET_DEVICES_ALL : &quot;3&quot;,
+<span id='android-media-AudioManager-method-adjustToString'>/**
+</span>@hide 
+*/
+adjustToString : function(  ) {},
+
+<span id='android-media-AudioManager-method-flagsToString'>/**
+</span>@hide 
+*/
+flagsToString : function(  ) {},
+
+<span id='android-media-AudioManager-method-dispatchMediaKeyEvent'>/**Sends a simulated key event for a media button.
+</span> To simulate a key press, you must first send a KeyEvent built with a
+ {@link KeyEvent#ACTION_DOWN} action, then another event with the {@link KeyEvent#ACTION_UP}
+ action.
+ &lt;p&gt;The key event will be sent to the current media key event consumer which registered with
+ {@link android.media.AudioManager#registerMediaButtonEventReceiver(PendingIntent)}.
+@param {Object {KeyEvent}} keyEvent a {@link KeyEvent} instance whose key code is one of
+     {@link KeyEvent#KEYCODE_MUTE},
+     {@link KeyEvent#KEYCODE_HEADSETHOOK},
+     {@link KeyEvent#KEYCODE_MEDIA_PLAY},
+     {@link KeyEvent#KEYCODE_MEDIA_PAUSE},
+     {@link KeyEvent#KEYCODE_MEDIA_PLAY_PAUSE},
+     {@link KeyEvent#KEYCODE_MEDIA_STOP},
+     {@link KeyEvent#KEYCODE_MEDIA_NEXT},
+     {@link KeyEvent#KEYCODE_MEDIA_PREVIOUS},
+     {@link KeyEvent#KEYCODE_MEDIA_REWIND},
+     {@link KeyEvent#KEYCODE_MEDIA_RECORD},
+     {@link KeyEvent#KEYCODE_MEDIA_FAST_FORWARD},
+     {@link KeyEvent#KEYCODE_MEDIA_CLOSE},
+     {@link KeyEvent#KEYCODE_MEDIA_EJECT},
+     or {@link KeyEvent#KEYCODE_MEDIA_AUDIO_TRACK}.
+*/
+dispatchMediaKeyEvent : function(  ) {},
+
+<span id='android-media-AudioManager-method-preDispatchKeyEvent'>/**
+</span>@hide 
+*/
+preDispatchKeyEvent : function(  ) {},
+
+<span id='android-media-AudioManager-method-isVolumeFixed'>/**Indicates if the device implements a fixed volume policy.
+</span> &lt;p&gt;Some devices may not have volume control and may operate at a fixed volume,
+ and may not enable muting or changing the volume of audio streams.
+ This method will return true on such devices.
+ &lt;p&gt;The following APIs have no effect when volume is fixed:
+ &lt;ul&gt;
+   &lt;li&gt; {@link #adjustVolume(int, int)}
+   &lt;li&gt; {@link #adjustSuggestedStreamVolume(int, int, int)}
+   &lt;li&gt; {@link #adjustStreamVolume(int, int, int)}
+   &lt;li&gt; {@link #setStreamVolume(int, int, int)}
+   &lt;li&gt; {@link #setRingerMode}(int)
+   &lt;li&gt; {@link #setStreamSolo(int, boolean)}
+   &lt;li&gt; {@link #setStreamMute(int, boolean)}
+ &lt;/ul&gt;
+*/
+isVolumeFixed : function(  ) {},
+
+<span id='android-media-AudioManager-method-adjustStreamVolume'>/**Adjusts the volume of a particular stream by one step in a direction.
+</span> &lt;p&gt;
+ This method should only be used by applications that replace the platform-wide
+ management of audio settings or the main telephony application.
+ &lt;p&gt;This method has no effect if the device implements a fixed volume policy
+ as indicated by {@link #isVolumeFixed}().
+ &lt;p&gt;From N onward, ringer mode adjustments that would toggle Do Not Disturb are not allowed
+ unless the app has been granted Do Not Disturb Access.
+ See {@link NotificationManager#isNotificationPolicyAccessGranted()}.
+@param {Number} streamType The stream type to adjust. One of {@link #STREAM_VOICE_CALL},
+ {@link #STREAM_SYSTEM}, {@link #STREAM_RING}, {@link #STREAM_MUSIC},
+ {@link #STREAM_ALARM} or {@link #STREAM_ACCESSIBILITY}.
+@param {Number} direction The direction to adjust the volume. One of
+            {@link #ADJUST_LOWER}, {@link #ADJUST_RAISE}, or
+            {@link #ADJUST_SAME}.
+@param {Number} flags One or more flags.
+@see #adjustVolume(int, int)
+@see #setStreamVolume(int, int, int)
+@throws SecurityException if the adjustment triggers a Do Not Disturb change
+   and the caller is not granted notification policy access.
+*/
+adjustStreamVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-adjustVolume'>/**Adjusts the volume of the most relevant stream. For example, if a call is
+</span> active, it will have the highest priority regardless of if the in-call
+ screen is showing. Another example, if music is playing in the background
+ and a call is not active, the music stream will be adjusted.
+ &lt;p&gt;
+ This method should only be used by applications that replace the
+ platform-wide management of audio settings or the main telephony
+ application.
+ &lt;p&gt;
+ This method has no effect if the device implements a fixed volume policy
+ as indicated by {@link #isVolumeFixed}().
+@param {Number} direction The direction to adjust the volume. One of
+            {@link #ADJUST_LOWER}, {@link #ADJUST_RAISE},
+            {@link #ADJUST_SAME}, {@link #ADJUST_MUTE},
+            {@link #ADJUST_UNMUTE}, or {@link #ADJUST_TOGGLE_MUTE}.
+@param {Number} flags One or more flags.
+@see #adjustSuggestedStreamVolume(int, int, int)
+@see #adjustStreamVolume(int, int, int)
+@see #setStreamVolume(int, int, int)
+@see #isVolumeFixed()
+*/
+adjustVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-adjustSuggestedStreamVolume'>/**Adjusts the volume of the most relevant stream, or the given fallback
+</span> stream.
+ &lt;p&gt;
+ This method should only be used by applications that replace the
+ platform-wide management of audio settings or the main telephony
+ application.
+ &lt;p&gt;
+ This method has no effect if the device implements a fixed volume policy
+ as indicated by {@link #isVolumeFixed}().
+@param {Number} direction The direction to adjust the volume. One of
+            {@link #ADJUST_LOWER}, {@link #ADJUST_RAISE},
+            {@link #ADJUST_SAME}, {@link #ADJUST_MUTE},
+            {@link #ADJUST_UNMUTE}, or {@link #ADJUST_TOGGLE_MUTE}.
+@param {Number} suggestedStreamType The stream type that will be used if there
+            isn't a relevant stream. {@link #USE_DEFAULT_STREAM_TYPE} is
+            valid here.
+@param {Number} flags One or more flags.
+@see #adjustVolume(int, int)
+@see #adjustStreamVolume(int, int, int)
+@see #setStreamVolume(int, int, int)
+@see #isVolumeFixed()
+*/
+adjustSuggestedStreamVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-setMasterMute'>/**
+</span>@hide 
+*/
+setMasterMute : function(  ) {},
+
+<span id='android-media-AudioManager-method-getRingerMode'>/**Returns the current ringtone mode.
+</span>@return {Number} The current ringtone mode, one of {@link #RINGER_MODE_NORMAL},
+         {@link #RINGER_MODE_SILENT}, or {@link #RINGER_MODE_VIBRATE}.
+@see #setRingerMode(int)
+*/
+getRingerMode : function(  ) {},
+
+<span id='android-media-AudioManager-method-isValidRingerMode'>/**Checks valid ringer mode values.
+</span>@return {Boolean} true if the ringer mode indicated is valid, false otherwise.
+@see #setRingerMode(int)
+@hide 
+*/
+isValidRingerMode : function(  ) {},
+
+<span id='android-media-AudioManager-method-getStreamMaxVolume'>/**Returns the maximum volume index for a particular stream.
+</span>@param {Number} streamType The stream type whose maximum volume index is returned.
+@return {Number} The maximum valid volume index for the stream.
+@see #getStreamVolume(int)
+*/
+getStreamMaxVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-getStreamMinVolume'>/**Returns the minimum volume index for a particular stream.
+</span>@param {Number} streamType The stream type whose minimum volume index is returned. Must be one of
+     {@link #STREAM_VOICE_CALL}, {@link #STREAM_SYSTEM},
+     {@link #STREAM_RING}, {@link #STREAM_MUSIC}, {@link #STREAM_ALARM},
+     {@link #STREAM_NOTIFICATION}, {@link #STREAM_DTMF} or {@link #STREAM_ACCESSIBILITY}.
+@return {Number} The minimum valid volume index for the stream.
+@see #getStreamVolume(int)
+*/
+getStreamMinVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-getStreamMinVolumeInt'>/**
+</span>@param {Number} streamType The stream type whose minimum volume index is returned.
+@param streamType The stream type whose minimum volume index is returned.
+@return {Number} The minimum valid volume index for the stream.
+@see #getStreamVolume(int)
+*/
+getStreamMinVolumeInt : function(  ) {},
+
+<span id='android-media-AudioManager-method-getStreamVolume'>/**Returns the current volume index for a particular stream.
+</span>@param {Number} streamType The stream type whose volume index is returned.
+@return {Number} The current volume index for the stream.
+@see #getStreamMaxVolume(int)
+@see #setStreamVolume(int, int, int)
+*/
+getStreamVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-getStreamVolumeDb'>/**Returns the volume in dB (decibel) for the given stream type at the given volume index, on
+</span> the given type of audio output device.
+@param {Number} streamType stream type for which the volume is queried.
+@param {Number} index the volume index for which the volume is queried. The index value must be
+     between the minimum and maximum index values for the given stream type (see
+     {@link #getStreamMinVolume(int)} and {@link #getStreamMaxVolume(int)}).
+@param {Number} deviceType the type of audio output device for which volume is queried.
+@return {Number} a volume expressed in dB.
+     A negative value indicates the audio signal is attenuated. A typical maximum value
+     at the maximum volume index is 0 dB (no attenuation nor amplification). Muting is
+     reflected by a value of {@link Float#NEGATIVE_INFINITY}.
+*/
+getStreamVolumeDb : function(  ) {},
+
+<span id='android-media-AudioManager-method-getLastAudibleStreamVolume'>/**Get last audible volume before stream was muted.
+</span>@hide 
+*/
+getLastAudibleStreamVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-getUiSoundsStreamType'>/**Get the stream type whose volume is driving the UI sounds volume.
+</span> UI sounds are screen lock/unlock, camera shutter, key clicks...
+ It is assumed that this stream type is also tied to ringer mode changes.
+@hide 
+*/
+getUiSoundsStreamType : function(  ) {},
+
+<span id='android-media-AudioManager-method-setRingerMode'>/**Sets the ringer mode.
+</span> &lt;p&gt;
+ Silent mode will mute the volume and will not vibrate. Vibrate mode will
+ mute the volume and vibrate. Normal mode will be audible and may vibrate
+ according to user settings.
+ &lt;p&gt;This method has no effect if the device implements a fixed volume policy
+ as indicated by {@link #isVolumeFixed}().
+ * &lt;p&gt;From N onward, ringer mode adjustments that would toggle Do Not Disturb are not allowed
+ unless the app has been granted Do Not Disturb Access.
+ See {@link NotificationManager#isNotificationPolicyAccessGranted()}.
+@param {Number} ringerMode The ringer mode, one of {@link #RINGER_MODE_NORMAL},
+            {@link #RINGER_MODE_SILENT}, or {@link #RINGER_MODE_VIBRATE}.
+@see #getRingerMode()
+@see #isVolumeFixed()
+*/
+setRingerMode : function(  ) {},
+
+<span id='android-media-AudioManager-method-setStreamVolume'>/**Sets the volume index for a particular stream.
+</span> &lt;p&gt;This method has no effect if the device implements a fixed volume policy
+ as indicated by {@link #isVolumeFixed}().
+ &lt;p&gt;From N onward, volume adjustments that would toggle Do Not Disturb are not allowed unless
+ the app has been granted Do Not Disturb Access.
+ See {@link NotificationManager#isNotificationPolicyAccessGranted()}.
+@param {Number} streamType The stream whose volume index should be set.
+@param {Number} index The volume index to set. See
+            {@link #getStreamMaxVolume(int)} for the largest valid value.
+@param {Number} flags One or more flags.
+@see #getStreamMaxVolume(int)
+@see #getStreamVolume(int)
+@see #isVolumeFixed()
+@throws SecurityException if the volume change triggers a Do Not Disturb change
+   and the caller is not granted notification policy access.
+*/
+setStreamVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-setVolumeIndexForAttributes'>/**Sets the volume index for a particular {@link android.media.AudioAttributes}.
+</span>@param {Object {AudioAttributes}} attr The {@link AudioAttributes} whose volume index should be set.
+@param {Number} index The volume index to set. See
+          {@link #getMaxVolumeIndexForAttributes(AudioAttributes)} for the largest valid value
+          {@link #getMinVolumeIndexForAttributes(AudioAttributes)} for the lowest valid value.
+@param {Number} flags One or more flags.
+@see #getMaxVolumeIndexForAttributes(AudioAttributes)
+@see #getMinVolumeIndexForAttributes(AudioAttributes)
+@see #isVolumeFixed()
+@hide 
+*/
+setVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioManager-method-getVolumeIndexForAttributes'>/**Returns the current volume index for a particular {@link android.media.AudioAttributes}.
+</span>@param {Object {AudioAttributes}} attr The {@link AudioAttributes} whose volume index is returned.
+@return {Number} The current volume index for the stream.
+@see #getMaxVolumeIndexForAttributes(AudioAttributes)
+@see #getMinVolumeIndexForAttributes(AudioAttributes)
+@see #setVolumeForAttributes(AudioAttributes, int, int)
+@hide 
+*/
+getVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioManager-method-getMaxVolumeIndexForAttributes'>/**Returns the maximum volume index for a particular {@link android.media.AudioAttributes}.
+</span>@param {Object {AudioAttributes}} attr The {@link AudioAttributes} whose maximum volume index is returned.
+@return {Number} The maximum valid volume index for the {@link AudioAttributes}.
+@see #getVolumeIndexForAttributes(AudioAttributes)
+@hide 
+*/
+getMaxVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioManager-method-getMinVolumeIndexForAttributes'>/**Returns the minimum volume index for a particular {@link android.media.AudioAttributes}.
+</span>@param {Object {AudioAttributes}} attr The {@link AudioAttributes} whose minimum volume index is returned.
+@return {Number} The minimum valid volume index for the {@link AudioAttributes}.
+@see #getVolumeIndexForAttributes(AudioAttributes)
+@hide 
+*/
+getMinVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioManager-method-setStreamSolo'>/**Solo or unsolo a particular stream.
+</span> &lt;p&gt;
+ Do not use. This method has been deprecated and is now a no-op.
+ {@link #requestAudioFocus} should be used for exclusive audio playback.
+@param {Number} streamType The stream to be soloed/unsoloed.
+@param {Boolean} state The required solo state: true for solo ON, false for solo
+            OFF
+@see #isVolumeFixed()
+@deprecated Do not use. If you need exclusive audio playback use
+             {@link #requestAudioFocus}.
+*/
+setStreamSolo : function(  ) {},
+
+<span id='android-media-AudioManager-method-setStreamMute'>/**Mute or unmute an audio stream.
+</span> &lt;p&gt;
+ This method should only be used by applications that replace the
+ platform-wide management of audio settings or the main telephony
+ application.
+ &lt;p&gt;
+ This method has no effect if the device implements a fixed volume policy
+ as indicated by {@link #isVolumeFixed}().
+ &lt;p&gt;
+ This method was deprecated in API level 22. Prior to API level 22 this
+ method had significantly different behavior and should be used carefully.
+ The following applies only to pre-22 platforms:
+ &lt;ul&gt;
+ &lt;li&gt;The mute command is protected against client process death: if a
+ process with an active mute request on a stream dies, this stream will be
+ unmuted automatically.&lt;/li&gt;
+ &lt;li&gt;The mute requests for a given stream are cumulative: the AudioManager
+ can receive several mute requests from one or more clients and the stream
+ will be unmuted only when the same number of unmute requests are
+ received.&lt;/li&gt;
+ &lt;li&gt;For a better user experience, applications MUST unmute a muted stream
+ in onPause() and mute is again in onResume() if appropriate.&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} streamType The stream to be muted/unmuted.
+@param {Boolean} state The required mute state: true for mute ON, false for mute
+            OFF
+@see #isVolumeFixed()
+@deprecated Use {@link #adjustStreamVolume(int, int, int)} with
+             {@link #ADJUST_MUTE} or {@link #ADJUST_UNMUTE} instead.
+*/
+setStreamMute : function(  ) {},
+
+<span id='android-media-AudioManager-method-isStreamMute'>/**Returns the current mute state for a particular stream.
+</span>@param {Number} streamType The stream to get mute state for.
+@return {Boolean} The mute state for the given stream.
+@see #adjustStreamVolume(int, int, int)
+*/
+isStreamMute : function(  ) {},
+
+<span id='android-media-AudioManager-method-isMasterMute'>/**get master mute state.
+</span>@hide 
+*/
+isMasterMute : function(  ) {},
+
+<span id='android-media-AudioManager-method-forceVolumeControlStream'>/**forces the stream controlled by hard volume keys
+</span> specifying streamType == -1 releases control to the
+ logic.
+@hide 
+*/
+forceVolumeControlStream : function(  ) {},
+
+<span id='android-media-AudioManager-method-shouldVibrate'>/**Returns whether a particular type should vibrate according to user
+</span> settings and the current ringer mode.
+ &lt;p&gt;
+ This shouldn't be needed by most clients that use notifications to
+ vibrate. The notification manager will not vibrate if the policy doesn't
+ allow it, so the client should always set a vibrate pattern and let the
+ notification manager control whether or not to actually vibrate.
+@param {Number} vibrateType The type of vibrate. One of
+            {@link #VIBRATE_TYPE_NOTIFICATION} or
+            {@link #VIBRATE_TYPE_RINGER}.
+@return {Boolean} Whether the type should vibrate at the instant this method is
+         called.
+@see #setVibrateSetting(int, int)
+@see #getVibrateSetting(int)
+@deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode()}.
+*/
+shouldVibrate : function(  ) {},
+
+<span id='android-media-AudioManager-method-getVibrateSetting'>/**Returns whether the user's vibrate setting for a vibrate type.
+</span> &lt;p&gt;
+ This shouldn't be needed by most clients that want to vibrate, instead
+ see {@link #shouldVibrate}(int).
+@param {Number} vibrateType The type of vibrate. One of
+            {@link #VIBRATE_TYPE_NOTIFICATION} or
+            {@link #VIBRATE_TYPE_RINGER}.
+@return {Number} The vibrate setting, one of {@link #VIBRATE_SETTING_ON},
+         {@link #VIBRATE_SETTING_OFF}, or
+         {@link #VIBRATE_SETTING_ONLY_SILENT}.
+@see #setVibrateSetting(int, int)
+@see #shouldVibrate(int)
+@deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode()}.
+*/
+getVibrateSetting : function(  ) {},
+
+<span id='android-media-AudioManager-method-setVibrateSetting'>/**Sets the setting for when the vibrate type should vibrate.
+</span> &lt;p&gt;
+ This method should only be used by applications that replace the platform-wide
+ management of audio settings or the main telephony application.
+@param {Number} vibrateType The type of vibrate. One of
+            {@link #VIBRATE_TYPE_NOTIFICATION} or
+            {@link #VIBRATE_TYPE_RINGER}.
+@param {Number} vibrateSetting The vibrate setting, one of
+            {@link #VIBRATE_SETTING_ON},
+            {@link #VIBRATE_SETTING_OFF}, or
+            {@link #VIBRATE_SETTING_ONLY_SILENT}.
+@see #getVibrateSetting(int)
+@see #shouldVibrate(int)
+@deprecated Applications should maintain their own vibrate policy based on
+ current ringer mode that can be queried via {@link #getRingerMode()}.
+*/
+setVibrateSetting : function(  ) {},
+
+<span id='android-media-AudioManager-method-setSpeakerphoneOn'>/**Sets the speakerphone on or off.
+</span> &lt;p&gt;
+ This method should only be used by applications that replace the platform-wide
+ management of audio settings or the main telephony application.
+@param {Boolean} on set &lt;var&gt;true&lt;/var&gt; to turn on speakerphone;
+           &lt;var&gt;false&lt;/var&gt; to turn it off
+*/
+setSpeakerphoneOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-isSpeakerphoneOn'>/**Checks whether the speakerphone is on or off.
+</span>@return {Boolean} true if speakerphone is on, false if it's off
+*/
+isSpeakerphoneOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-setAllowedCapturePolicy'>/**Specifies whether the audio played by this app may or may not be captured by other apps or
+</span> the system.
+
+ The default is {@link android.media.AudioAttributes#ALLOW_CAPTURE_BY_ALL}.
+
+ There are multiple ways to set this policy:
+ &lt;ul&gt;
+ &lt;li&gt; for each track independently, see
+    {@link android.media.AudioAttributes.Builder#setAllowedCapturePolicy(int)} &lt;/li&gt;
+ &lt;li&gt; application-wide at runtime, with this method &lt;/li&gt;
+ &lt;li&gt; application-wide at build time, see {@code allowAudioPlaybackCapture} in the application
+       manifest. &lt;/li&gt;
+ &lt;/ul&gt;
+ The most restrictive policy is always applied.
+
+ See {@link android.media.AudioPlaybackCaptureConfiguration} for more details on
+ which audio signals can be captured.
+@param {Number} capturePolicy one of
+     {@link AudioAttributes#ALLOW_CAPTURE_BY_ALL},
+     {@link AudioAttributes#ALLOW_CAPTURE_BY_SYSTEM},
+     {@link AudioAttributes#ALLOW_CAPTURE_BY_NONE}.
+@throws IllegalArgumentException if the argument is not a valid value.
+*/
+setAllowedCapturePolicy : function(  ) {},
+
+<span id='android-media-AudioManager-method-getAllowedCapturePolicy'>/**Return the capture policy.
+</span>@return {Number} the capture policy set by {@link #setAllowedCapturePolicy(int)} or
+         the default if it was not called.
+*/
+getAllowedCapturePolicy : function(  ) {},
+
+<span id='android-media-AudioManager-method-isOffloadedPlaybackSupported'>/**Returns whether offloaded playback of an audio format is supported on the device.
+</span> &lt;p&gt;Offloaded playback is the feature where the decoding and playback of an audio stream
+ is not competing with other software resources. In general, it is supported by dedicated
+ hardware, such as audio DSPs.
+ &lt;p&gt;Note that this query only provides information about the support of an audio format,
+ it does not indicate whether the resources necessary for the offloaded playback are
+ available at that instant.
+@param {Object {AudioFormat}} format the audio format (codec, sample rate, channels) being checked.
+@param {Object {AudioAttributes}} attributes the {@link AudioAttributes} to be used for playback
+@return {Boolean} true if the given audio format can be offloaded.
+*/
+isOffloadedPlaybackSupported : function(  ) {},
+
+<span id='android-media-AudioManager-method-isBluetoothScoAvailableOffCall'>/**Indicates if current platform supports use of SCO for off call use cases.
+</span> Application wanted to use bluetooth SCO audio when the phone is not in call
+ must first call this method to make sure that the platform supports this
+ feature.
+@return {Boolean} true if bluetooth SCO can be used for audio when not in call
+         false otherwise
+@see #startBluetoothSco()
+*/
+isBluetoothScoAvailableOffCall : function(  ) {},
+
+<span id='android-media-AudioManager-method-startBluetoothSco'>/**Start bluetooth SCO audio connection.
+</span> &lt;p&gt;Requires Permission:
+   {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS}.
+ &lt;p&gt;This method can be used by applications wanting to send and received audio
+ to/from a bluetooth SCO headset while the phone is not in call.
+ &lt;p&gt;As the SCO connection establishment can take several seconds,
+ applications should not rely on the connection to be available when the method
+ returns but instead register to receive the intent {@link #ACTION_SCO_AUDIO_STATE_UPDATED}
+ and wait for the state to be {@link #SCO_AUDIO_STATE_CONNECTED}.
+ &lt;p&gt;As the ACTION_SCO_AUDIO_STATE_UPDATED intent is sticky, the application can check the SCO
+ audio state before calling startBluetoothSco() by reading the intent returned by the receiver
+ registration. If the state is already CONNECTED, no state change will be received via the
+ intent after calling startBluetoothSco(). It is however useful to call startBluetoothSco()
+ so that the connection stays active in case the current initiator stops the connection.
+ &lt;p&gt;Unless the connection is already active as described above, the state will always
+ transition from DISCONNECTED to CONNECTING and then either to CONNECTED if the connection
+ succeeds or back to DISCONNECTED if the connection fails (e.g no headset is connected).
+ &lt;p&gt;When finished with the SCO connection or if the establishment fails, the application must
+ call {@link #stopBluetoothSco}() to clear the request and turn down the bluetooth connection.
+ &lt;p&gt;Even if a SCO connection is established, the following restrictions apply on audio
+ output streams so that they can be routed to SCO headset:
+ &lt;ul&gt;
+   &lt;li&gt; the stream type must be {@link #STREAM_VOICE_CALL} &lt;/li&gt;
+   &lt;li&gt; the format must be mono &lt;/li&gt;
+   &lt;li&gt; the sampling must be 16kHz or 8kHz &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;The following restrictions apply on input streams:
+ &lt;ul&gt;
+   &lt;li&gt; the format must be mono &lt;/li&gt;
+   &lt;li&gt; the sampling must be 8kHz &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;Note that the phone application always has the priority on the usage of the SCO
+ connection for telephony. If this method is called while the phone is in call
+ it will be ignored. Similarly, if a call is received or sent while an application
+ is using the SCO connection, the connection will be lost for the application and NOT
+ returned automatically when the call ends.
+ &lt;p&gt;NOTE: up to and including API version
+ {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR1}, this method initiates a virtual
+ voice call to the bluetooth headset.
+ After API version {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2} only a raw SCO audio
+ connection is established.
+@see #stopBluetoothSco()
+@see #ACTION_SCO_AUDIO_STATE_UPDATED
+*/
+startBluetoothSco : function(  ) {},
+
+<span id='android-media-AudioManager-method-startBluetoothScoVirtualCall'>/**
+</span>@hide Start bluetooth SCO audio connection in virtual call mode.
+ &lt;p&gt;Requires Permission:
+   {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS}.
+ &lt;p&gt;Similar to {@link #startBluetoothSco()} with explicit selection of virtual call mode.
+ Telephony and communication applications (VoIP, Video Chat) should preferably select
+ virtual call mode.
+ Applications using voice input for search or commands should first try raw audio connection
+ with {@link #startBluetoothSco()} and fall back to startBluetoothScoVirtualCall() in case of
+ failure.
+@see #startBluetoothSco()
+@see #stopBluetoothSco()
+@see #ACTION_SCO_AUDIO_STATE_UPDATED
+*/
+startBluetoothScoVirtualCall : function(  ) {},
+
+<span id='android-media-AudioManager-method-stopBluetoothSco'>/**Stop bluetooth SCO audio connection.
+</span> &lt;p&gt;Requires Permission:
+   {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS}.
+ &lt;p&gt;This method must be called by applications having requested the use of
+ bluetooth SCO audio with {@link #startBluetoothSco}() when finished with the SCO
+ connection or if connection fails.
+@see #startBluetoothSco()
+*/
+stopBluetoothSco : function(  ) {},
+
+<span id='android-media-AudioManager-method-setBluetoothScoOn'>/**Request use of Bluetooth SCO headset for communications.
+</span> &lt;p&gt;
+ This method should only be used by applications that replace the platform-wide
+ management of audio settings or the main telephony application.
+@param {Boolean} on set &lt;var&gt;true&lt;/var&gt; to use bluetooth SCO for communications;
+               &lt;var&gt;false&lt;/var&gt; to not use bluetooth SCO for communications
+*/
+setBluetoothScoOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-isBluetoothScoOn'>/**Checks whether communications use Bluetooth SCO.
+</span>@return {Boolean} true if SCO is used for communications;
+         false if otherwise
+*/
+isBluetoothScoOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-setBluetoothA2dpOn'>/**
+</span>@param {Boolean} on set &lt;var&gt;true&lt;/var&gt; to route A2DP audio to/from Bluetooth
+           headset; &lt;var&gt;false&lt;/var&gt; disable A2DP audio
+@deprecated Do not use.
+*/
+setBluetoothA2dpOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-isBluetoothA2dpOn'>/**Checks whether a Bluetooth A2DP audio peripheral is connected or not.
+</span>@return {Boolean} true if a Bluetooth A2DP peripheral is connected
+         false if otherwise
+@deprecated Use {@link AudioManager#getDevices(int)} instead to list available audio devices.
+*/
+isBluetoothA2dpOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-setWiredHeadsetOn'>/**Sets audio routing to the wired headset on or off.
+</span>@param {Boolean} on set &lt;var&gt;true&lt;/var&gt; to route audio to/from wired
+           headset; &lt;var&gt;false&lt;/var&gt; disable wired headset audio
+@deprecated Do not use.
+*/
+setWiredHeadsetOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-isWiredHeadsetOn'>/**Checks whether a wired headset is connected or not.
+</span> &lt;p&gt;This is not a valid indication that audio playback is
+ actually over the wired headset as audio routing depends on other conditions.
+@return {Boolean} true if a wired headset is connected.
+         false if otherwise
+@deprecated Use {@link AudioManager#getDevices(int)} instead to list available audio devices.
+*/
+isWiredHeadsetOn : function(  ) {},
+
+<span id='android-media-AudioManager-method-setMicrophoneMute'>/**Sets the microphone mute on or off.
+</span> &lt;p&gt;
+ This method should only be used by applications that replace the platform-wide
+ management of audio settings or the main telephony application.
+@param {Boolean} on set &lt;var&gt;true&lt;/var&gt; to mute the microphone;
+           &lt;var&gt;false&lt;/var&gt; to turn mute off
+*/
+setMicrophoneMute : function(  ) {},
+
+<span id='android-media-AudioManager-method-isMicrophoneMute'>/**Checks whether the microphone mute is on or off.
+</span>@return {Boolean} true if microphone is muted, false if it's not
+*/
+isMicrophoneMute : function(  ) {},
+
+<span id='android-media-AudioManager-method-setMode'>/**Sets the audio mode.
+</span> &lt;p&gt;
+ The audio mode encompasses audio routing AND the behavior of
+ the telephony layer. Therefore this method should only be used by applications that
+ replace the platform-wide management of audio settings or the main telephony application.
+ In particular, the {@link #MODE_IN_CALL} mode should only be used by the telephony
+ application when it places a phone call, as it will cause signals from the radio layer
+ to feed the platform mixer.
+@param {Number} mode  the requested audio mode ({@link #MODE_NORMAL}, {@link #MODE_RINGTONE},
+              {@link #MODE_IN_CALL} or {@link #MODE_IN_COMMUNICATION}).
+              Informs the HAL about the current audio state so that
+              it can route the audio appropriately.
+*/
+setMode : function(  ) {},
+
+<span id='android-media-AudioManager-method-getMode'>/**Returns the current audio mode.
+</span>@return {Number} the current audio mode ({@link #MODE_NORMAL}, {@link #MODE_RINGTONE},
+              {@link #MODE_IN_CALL} or {@link #MODE_IN_COMMUNICATION}).
+              Returns the current current audio state from the HAL.
+*/
+getMode : function(  ) {},
+
+<span id='android-media-AudioManager-method-setRouting'>/**Sets the audio routing for a specified mode
+</span>@param {Number} mode   audio mode to change route. E.g., MODE_RINGTONE.
+@param {Number} routes bit vector of routes requested, created from one or
+               more of ROUTE_xxx types. Set bits indicate that route should be on
+@param {Number} mask   bit vector of routes to change, created from one or more of
+ ROUTE_xxx types. Unset bits indicate the route should be left unchanged
+@deprecated Do not set audio routing directly, use setSpeakerphoneOn(),
+ setBluetoothScoOn() methods instead.
+*/
+setRouting : function(  ) {},
+
+<span id='android-media-AudioManager-method-getRouting'>/**Returns the current audio routing bit vector for a specified mode.
+</span>@param {Number} mode audio mode to get route (e.g., MODE_RINGTONE)
+@return {Number} an audio route bit vector that can be compared with ROUTE_xxx
+ bits
+@deprecated Do not query audio routing directly, use isSpeakerphoneOn(),
+ isBluetoothScoOn(), isBluetoothA2dpOn() and isWiredHeadsetOn() methods instead.
+*/
+getRouting : function(  ) {},
+
+<span id='android-media-AudioManager-method-isMusicActive'>/**Checks whether any music is active.
+</span>@return {Boolean} true if any music tracks are active.
+*/
+isMusicActive : function(  ) {},
+
+<span id='android-media-AudioManager-method-isMusicActiveRemotely'>/**
+</span>@hide Checks whether any music or media is actively playing on a remote device (e.g. wireless
+   display). Note that BT audio sinks are not considered remote devices.
+@return {Boolean} true if {@link AudioManager#STREAM_MUSIC} is active on a remote device
+*/
+isMusicActiveRemotely : function(  ) {},
+
+<span id='android-media-AudioManager-method-isAudioFocusExclusive'>/**
+</span>@hide Checks whether the current audio focus is exclusive.
+@return {Boolean} true if the top of the audio focus stack requested focus
+     with {@link #AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE}
+*/
+isAudioFocusExclusive : function(  ) {},
+
+<span id='android-media-AudioManager-method-generateAudioSessionId'>/**Return a new audio session identifier not associated with any player or effect.
+</span> An audio session identifier is a system wide unique identifier for a set of audio streams
+ (one or more mixed together).
+ &lt;p&gt;The primary use of the audio session ID is to associate audio effects to audio players,
+ such as {@link android.media.MediaPlayer} or {@link android.media.AudioTrack}: all audio effects sharing the same audio
+ session ID will be applied to the mixed audio content of the players that share the same
+ audio session.
+ &lt;p&gt;This method can for instance be used when creating one of the
+ {@link android.media.audiofx.AudioEffect} objects to define the audio session of the effect,
+ or to specify a session for a speech synthesis utterance
+ in {@link android.speech.tts.TextToSpeech.Engine}.
+@return {Number} a new unclaimed and unused audio session identifier, or {@link #ERROR} when the
+   system failed to generate a new session, a condition in which audio playback or recording
+   will subsequently fail as well.
+*/
+generateAudioSessionId : function(  ) {},
+
+<span id='android-media-AudioManager-method-setParameter'>/**
+</span>@hide 
+@deprecated Use {@link #setParameters(String)} instead
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-AudioManager-method-setParameters'>/**Sets a variable number of parameter values to audio hardware.
+</span>@param {String} keyValuePairs list of parameters key value pairs in the form:
+    key1=value1;key2=value2;...
+*/
+setParameters : function(  ) {},
+
+<span id='android-media-AudioManager-method-getParameters'>/**Gets a variable number of parameter values from audio hardware.
+</span>@param {String} keys list of parameters
+@return {String} list of parameters key value pairs in the form:
+    key1=value1;key2=value2;...
+*/
+getParameters : function(  ) {},
+
+<span id='android-media-AudioManager-method-playSoundEffect'>/**Plays a sound effect (Key clicks, lid open/close...)
+</span>@param {Number} effectType The type of sound effect. One of
+            {@link #FX_KEY_CLICK},
+            {@link #FX_FOCUS_NAVIGATION_UP},
+            {@link #FX_FOCUS_NAVIGATION_DOWN},
+            {@link #FX_FOCUS_NAVIGATION_LEFT},
+            {@link #FX_FOCUS_NAVIGATION_RIGHT},
+            {@link #FX_KEYPRESS_STANDARD},
+            {@link #FX_KEYPRESS_SPACEBAR},
+            {@link #FX_KEYPRESS_DELETE},
+            {@link #FX_KEYPRESS_RETURN},
+            {@link #FX_KEYPRESS_INVALID},
+ NOTE: This version uses the UI settings to determine
+ whether sounds are heard or not.
+*/
+playSoundEffect : function(  ) {},
+
+<span id='android-media-AudioManager-method-playSoundEffect'>/**Plays a sound effect (Key clicks, lid open/close...)
+</span>@param {Number} effectType The type of sound effect. One of
+            {@link #FX_KEY_CLICK},
+            {@link #FX_FOCUS_NAVIGATION_UP},
+            {@link #FX_FOCUS_NAVIGATION_DOWN},
+            {@link #FX_FOCUS_NAVIGATION_LEFT},
+            {@link #FX_FOCUS_NAVIGATION_RIGHT},
+            {@link #FX_KEYPRESS_STANDARD},
+            {@link #FX_KEYPRESS_SPACEBAR},
+            {@link #FX_KEYPRESS_DELETE},
+            {@link #FX_KEYPRESS_RETURN},
+            {@link #FX_KEYPRESS_INVALID},
+@param {Number} userId The current user to pull sound settings from
+ NOTE: This version uses the UI settings to determine
+ whether sounds are heard or not.
+@hide 
+*/
+playSoundEffect : function(  ) {},
+
+<span id='android-media-AudioManager-method-playSoundEffect'>/**Plays a sound effect (Key clicks, lid open/close...)
+</span>@param {Number} effectType The type of sound effect. One of
+            {@link #FX_KEY_CLICK},
+            {@link #FX_FOCUS_NAVIGATION_UP},
+            {@link #FX_FOCUS_NAVIGATION_DOWN},
+            {@link #FX_FOCUS_NAVIGATION_LEFT},
+            {@link #FX_FOCUS_NAVIGATION_RIGHT},
+            {@link #FX_KEYPRESS_STANDARD},
+            {@link #FX_KEYPRESS_SPACEBAR},
+            {@link #FX_KEYPRESS_DELETE},
+            {@link #FX_KEYPRESS_RETURN},
+            {@link #FX_KEYPRESS_INVALID},
+@param {Number} volume Sound effect volume.
+ The volume value is a raw scalar so UI controls should be scaled logarithmically.
+ If a volume of -1 is specified, the AudioManager.STREAM_MUSIC stream volume minus 3dB will be used.
+ NOTE: This version is for applications that have their own
+ settings panel for enabling and controlling volume.
+*/
+playSoundEffect : function(  ) {},
+
+<span id='android-media-AudioManager-method-loadSoundEffects'>/**Load Sound effects.
+</span>  This method must be called when sound effects are enabled.
+*/
+loadSoundEffects : function(  ) {},
+
+<span id='android-media-AudioManager-method-unloadSoundEffects'>/**Unload Sound effects.
+</span>  This method can be called to free some memory when
+  sound effects are disabled.
+*/
+unloadSoundEffects : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerAudioFocusRequest'>/**
+</span>@param {Object {AudioFocusRequest}} afr the full request parameters
+@param afr the full request parameters
+*/
+registerAudioFocusRequest : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterAudioFocusRequest'>/**
+</span>@param {Object {AudioManager.OnAudioFocusChangeListener}} l the listener to unregister.
+@param l the listener to unregister.
+*/
+unregisterAudioFocusRequest : function(  ) {},
+
+<span id='android-media-AudioManager-method-requestAudioFocus'>/**Request audio focus.
+</span>  Send a request to obtain the audio focus
+@param {Object {AudioManager.OnAudioFocusChangeListener}} l the listener to be notified of audio focus changes
+@param {Number} streamType the main audio stream type affected by the focus request
+@param {Number} durationHint use {@link #AUDIOFOCUS_GAIN_TRANSIENT} to indicate this focus request
+      is temporary, and focus will be abandonned shortly. Examples of transient requests are
+      for the playback of driving directions, or notifications sounds.
+      Use {@link #AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK} to indicate also that it's ok for
+      the previous focus owner to keep playing if it ducks its audio output.
+      Alternatively use {@link #AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE} for a temporary request
+      that benefits from the system not playing disruptive sounds like notifications, for
+      usecases such as voice memo recording, or speech recognition.
+      Use {@link #AUDIOFOCUS_GAIN} for a focus request of unknown duration such
+      as the playback of a song or a video.
+@return {Number} {@link #AUDIOFOCUS_REQUEST_FAILED} or {@link #AUDIOFOCUS_REQUEST_GRANTED}
+@deprecated use {@link #requestAudioFocus(AudioFocusRequest)}
+*/
+requestAudioFocus : function(  ) {},
+
+<span id='android-media-AudioManager-method-requestAudioFocus'>/**Request audio focus.
+</span> See the {@link android.media.AudioFocusRequest} for information about the options available to configure
+ your request, and notification of focus gain and loss.
+@param {Object {AudioFocusRequest}} focusRequest a {@link AudioFocusRequest} instance used to configure how focus is
+   requested.
+@return {Number} {@link #AUDIOFOCUS_REQUEST_FAILED}, {@link #AUDIOFOCUS_REQUEST_GRANTED}
+     or {@link #AUDIOFOCUS_REQUEST_DELAYED}.
+     &lt;br&gt;Note that the return value is never {@link #AUDIOFOCUS_REQUEST_DELAYED} when focus
+     is requested without building the {@link AudioFocusRequest} with
+     {@link AudioFocusRequest.Builder#setAcceptsDelayedFocusGain(boolean)} set to
+     {@code true}.
+@throws NullPointerException if passed a null argument
+*/
+requestAudioFocus : function(  ) {},
+
+<span id='android-media-AudioManager-method-abandonAudioFocusRequest'>/**Abandon audio focus. Causes the previous focus owner, if any, to receive focus.
+</span>@param {Object {AudioFocusRequest}} focusRequest the {@link AudioFocusRequest} that was used when requesting focus
+      with {@link #requestAudioFocus(AudioFocusRequest)}.
+@return {Number} {@link #AUDIOFOCUS_REQUEST_FAILED} or {@link #AUDIOFOCUS_REQUEST_GRANTED}
+@throws IllegalArgumentException if passed a null argument
+*/
+abandonAudioFocusRequest : function(  ) {},
+
+<span id='android-media-AudioManager-method-requestAudioFocus'>/**
+</span>@param {Object {AudioManager.OnAudioFocusChangeListener}} l the listener to be notified of audio focus changes. It is not allowed to be null
+     when the request is flagged with {@link #AUDIOFOCUS_FLAG_DELAY_OK}.
+@param {Object {AudioAttributes}} requestAttributes non null {@link AudioAttributes} describing the main reason for
+     requesting audio focus.
+@param {Number} durationHint use {@link #AUDIOFOCUS_GAIN_TRANSIENT} to indicate this focus request
+      is temporary, and focus will be abandonned shortly. Examples of transient requests are
+      for the playback of driving directions, or notifications sounds.
+      Use {@link #AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK} to indicate also that it's ok for
+      the previous focus owner to keep playing if it ducks its audio output.
+      Alternatively use {@link #AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE} for a temporary request
+      that benefits from the system not playing disruptive sounds like notifications, for
+      usecases such as voice memo recording, or speech recognition.
+      Use {@link #AUDIOFOCUS_GAIN} for a focus request of unknown duration such
+      as the playback of a song or a video.
+@param {Number} flags 0 or a combination of {link #AUDIOFOCUS_FLAG_DELAY_OK},
+     {@link #AUDIOFOCUS_FLAG_PAUSES_ON_DUCKABLE_LOSS} and {@link #AUDIOFOCUS_FLAG_LOCK}.
+     &lt;br&gt;Use 0 when not using any flags for the request, which behaves like
+     {@link #requestAudioFocus(OnAudioFocusChangeListener, int, int)}, where either audio
+     focus is granted immediately, or the grant request fails because the system is in a
+     state where focus cannot change (e.g. a phone call).
+@param flags 0 or a combination of {link #AUDIOFOCUS_FLAG_DELAY_OK},
+     {@link #AUDIOFOCUS_FLAG_PAUSES_ON_DUCKABLE_LOSS} and {@link #AUDIOFOCUS_FLAG_LOCK}.
+     &lt;br&gt;Use 0 when not using any flags for the request, which behaves like
+     {@link #requestAudioFocus(OnAudioFocusChangeListener, int, int)}, where either audio
+     focus is granted immediately, or the grant request fails because the system is in a
+     state where focus cannot change (e.g. a phone call).
+@return {Number} {@link #AUDIOFOCUS_REQUEST_FAILED}, {@link #AUDIOFOCUS_REQUEST_GRANTED}
+     or {@link #AUDIOFOCUS_REQUEST_DELAYED}.
+     The return value is never {@link #AUDIOFOCUS_REQUEST_DELAYED} when focus is requested
+     without the {@link #AUDIOFOCUS_FLAG_DELAY_OK} flag.
+@throws IllegalArgumentException
+*/
+requestAudioFocus : function(  ) {},
+
+<span id='android-media-AudioManager-method-requestAudioFocus'>/**
+</span>@param {Object {AudioManager.OnAudioFocusChangeListener}} l see the description of the same parameter in
+     {@link #requestAudioFocus(OnAudioFocusChangeListener, AudioAttributes, int, int)}
+@param {Object {AudioAttributes}} requestAttributes non null {@link AudioAttributes} describing the main reason for
+     requesting audio focus.
+@param {Number} durationHint see the description of the same parameter in
+     {@link #requestAudioFocus(OnAudioFocusChangeListener, AudioAttributes, int, int)}
+@param {Number} flags 0 or a combination of {link #AUDIOFOCUS_FLAG_DELAY_OK},
+     {@link #AUDIOFOCUS_FLAG_PAUSES_ON_DUCKABLE_LOSS}, and {@link #AUDIOFOCUS_FLAG_LOCK}.
+     &lt;br&gt;Use 0 when not using any flags for the request, which behaves like
+     {@link #requestAudioFocus(OnAudioFocusChangeListener, int, int)}, where either audio
+     focus is granted immediately, or the grant request fails because the system is in a
+     state where focus cannot change (e.g. a phone call).
+@param {Object {AudioPolicy}} ap a registered {@link android.media.audiopolicy.AudioPolicy} instance when locking
+     focus, or null.
+@param ap a registered {@link android.media.audiopolicy.AudioPolicy} instance when locking
+     focus, or null.
+@return {Number} see the description of the same return value in
+     {@link #requestAudioFocus(OnAudioFocusChangeListener, AudioAttributes, int, int)}
+@throws IllegalArgumentException
+@deprecated use {@link #requestAudioFocus(AudioFocusRequest, AudioPolicy)}
+*/
+requestAudioFocus : function(  ) {},
+
+<span id='android-media-AudioManager-method-requestAudioFocus'>/**
+</span>@param {Object {AudioFocusRequest}} afr see the description of the same parameter in
+     {@link #requestAudioFocus(AudioFocusRequest)}
+@param {Object {AudioPolicy}} ap a registered {@link android.media.audiopolicy.AudioPolicy} instance when locking
+     focus, or null.
+@param ap a registered {@link android.media.audiopolicy.AudioPolicy} instance when locking
+     focus, or null.
+@return {Number} {@link #AUDIOFOCUS_REQUEST_FAILED}, {@link #AUDIOFOCUS_REQUEST_GRANTED}
+     or {@link #AUDIOFOCUS_REQUEST_DELAYED}.
+@throws NullPointerException if the AudioFocusRequest is null
+@throws IllegalArgumentException when trying to lock focus without an AudioPolicy
+*/
+requestAudioFocus : function(  ) {},
+
+<span id='android-media-AudioManager-method-requestAudioFocusForCall'>/**
+</span>@param {Number} streamType use STREAM_RING for focus requests when ringing, VOICE_CALL for
+    the establishment of the call
+@param {Number} durationHint the type of focus request. AUDIOFOCUS_GAIN_TRANSIENT is recommended so
+    media applications resume after a call
+@param durationHint the type of focus request. AUDIOFOCUS_GAIN_TRANSIENT is recommended so
+    media applications resume after a call
+*/
+requestAudioFocusForCall : function(  ) {},
+
+<span id='android-media-AudioManager-method-getFocusRampTimeMs'>/**
+</span>@param {Number} focusGain
+@param {Object {AudioAttributes}} attr
+@param attr
+@return {Number} 
+*/
+getFocusRampTimeMs : function(  ) {},
+
+<span id='android-media-AudioManager-method-setFocusRequestResult'>/**
+</span>@param {Object {AudioFocusInfo}} afi the information about the focus requester
+@param {Number} requestResult the result to the focus request to be passed to the requester
+@param {Object {AudioPolicy}} ap a valid registered {@link AudioPolicy} configured as a focus policy.
+@param ap a valid registered {@link AudioPolicy} configured as a focus policy.
+*/
+setFocusRequestResult : function(  ) {},
+
+<span id='android-media-AudioManager-method-dispatchAudioFocusChange'>/**
+</span>@param {Object {AudioFocusInfo}} afi the recipient of the focus change, that has previously requested audio focus, and
+     that was received by the {@code AudioPolicy} through
+     {@link AudioPolicy.AudioPolicyFocusListener#onAudioFocusRequest(AudioFocusInfo, int)}.
+@param {Number} focusChange one of focus gain types ({@link #AUDIOFOCUS_GAIN},
+     {@link #AUDIOFOCUS_GAIN_TRANSIENT}, {@link #AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK} or
+     {@link #AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE})
+     or one of the focus loss types ({@link AudioManager#AUDIOFOCUS_LOSS},
+     {@link AudioManager#AUDIOFOCUS_LOSS_TRANSIENT},
+     or {@link AudioManager#AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK}).
+     &lt;br&gt;For the focus gain, the change type should be the same as the app requested.
+@param {Object {AudioPolicy}} ap a valid registered {@link AudioPolicy} configured as a focus policy.
+@param ap a valid registered {@link AudioPolicy} configured as a focus policy.
+@return {Number} {@link #AUDIOFOCUS_REQUEST_GRANTED} if the dispatch was successfully sent, or
+     {@link #AUDIOFOCUS_REQUEST_FAILED} if the focus client didn't have a listener, or
+     if there was an error sending the request.
+@throws NullPointerException if the {@link AudioFocusInfo} or {@link AudioPolicy} are null.
+*/
+dispatchAudioFocusChange : function(  ) {},
+
+<span id='android-media-AudioManager-method-abandonAudioFocusForCall'>/**
+</span>@hide Used internally by telephony package to abandon audio focus, typically after a call or
+ when ringing ends and the call is rejected or not answered.
+ Should match one or more calls to {@link #requestAudioFocusForCall(int, int)}.
+*/
+abandonAudioFocusForCall : function(  ) {},
+
+<span id='android-media-AudioManager-method-abandonAudioFocus'>/**Abandon audio focus. Causes the previous focus owner, if any, to receive focus.
+</span>@param {Object {AudioManager.OnAudioFocusChangeListener}} l the listener with which focus was requested.
+@return {Number} {@link #AUDIOFOCUS_REQUEST_FAILED} or {@link #AUDIOFOCUS_REQUEST_GRANTED}
+@deprecated use {@link #abandonAudioFocusRequest(AudioFocusRequest)}
+*/
+abandonAudioFocus : function(  ) {},
+
+<span id='android-media-AudioManager-method-abandonAudioFocus'>/**
+</span>@param {Object {AudioManager.OnAudioFocusChangeListener}} l the listener with which focus was requested.
+@param {Object {AudioAttributes}} aa the {@link AudioAttributes} with which audio focus was requested
+@param aa the {@link AudioAttributes} with which audio focus was requested
+@return {Number} {@link #AUDIOFOCUS_REQUEST_FAILED} or {@link #AUDIOFOCUS_REQUEST_GRANTED}
+@deprecated use {@link #abandonAudioFocusRequest(AudioFocusRequest)}
+*/
+abandonAudioFocus : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerMediaButtonEventReceiver'>/**Register a component to be the sole receiver of MEDIA_BUTTON intents.
+</span>@param {Object {ComponentName}} eventReceiver identifier of a {@link android.content.BroadcastReceiver}
+      that will receive the media button intent. This broadcast receiver must be declared
+      in the application manifest. The package of the component must match that of
+      the context you're registering from.
+@deprecated Use {@link MediaSession#setMediaButtonReceiver(PendingIntent)} instead.
+*/
+registerMediaButtonEventReceiver : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerMediaButtonEventReceiver'>/**Register a component to be the sole receiver of MEDIA_BUTTON intents.  This is like
+</span> {@link #registerMediaButtonEventReceiver(android.content.ComponentName)}, but allows
+ the buttons to go to any PendingIntent.  Note that you should only use this form if
+ you know you will continue running for the full time until unregistering the
+ PendingIntent.
+@param {Object {PendingIntent}} eventReceiver target that will receive media button intents.  The PendingIntent
+ will be sent an {@link Intent#ACTION_MEDIA_BUTTON} event when a media button action
+ occurs, with {@link Intent#EXTRA_KEY_EVENT} added and holding the key code of the
+ media button that was pressed.
+@deprecated Use {@link MediaSession#setMediaButtonReceiver(PendingIntent)} instead.
+*/
+registerMediaButtonEventReceiver : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerMediaButtonIntent'>/**
+</span>@hide no-op if (pi == null) or (eventReceiver == null)
+*/
+registerMediaButtonIntent : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterMediaButtonEventReceiver'>/**Unregister the receiver of MEDIA_BUTTON intents.
+</span>@param {Object {ComponentName}} eventReceiver identifier of a {@link android.content.BroadcastReceiver}
+      that was registered with {@link #registerMediaButtonEventReceiver(ComponentName)}.
+@deprecated Use {@link MediaSession} instead.
+*/
+unregisterMediaButtonEventReceiver : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterMediaButtonEventReceiver'>/**Unregister the receiver of MEDIA_BUTTON intents.
+</span>@param {Object {PendingIntent}} eventReceiver same PendingIntent that was registed with
+      {@link #registerMediaButtonEventReceiver(PendingIntent)}.
+@deprecated Use {@link MediaSession} instead.
+*/
+unregisterMediaButtonEventReceiver : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterMediaButtonIntent'>/**
+</span>@hide 
+*/
+unregisterMediaButtonIntent : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerRemoteControlClient'>/**Registers the remote control client for providing information to display on the remote
+</span> controls.
+@param {Object {RemoteControlClient}} rcClient The remote control client from which remote controls will receive
+      information to display.
+@see RemoteControlClient
+@deprecated Use {@link MediaSession} instead.
+*/
+registerRemoteControlClient : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterRemoteControlClient'>/**Unregisters the remote control client that was providing information to display on the
+</span> remote controls.
+@param {Object {RemoteControlClient}} rcClient The remote control client to unregister.
+@see #registerRemoteControlClient(RemoteControlClient)
+@deprecated Use {@link MediaSession} instead.
+*/
+unregisterRemoteControlClient : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerRemoteController'>/**Registers a {@link android.media.RemoteController} instance for it to receive media
+</span> metadata updates and playback state information from applications using
+ {@link android.media.RemoteControlClient}, and control their playback.
+ &lt;p&gt;
+ Registration requires the {@link android.media.RemoteController.OnClientUpdateListener} listener to be
+ one of the enabled notification listeners (see
+ {@link android.service.notification.NotificationListenerService}).
+@param {Object {RemoteController}} rctlr the object to register.
+@return {Boolean} true if the {@link RemoteController} was successfully registered,
+         false if an error occurred, due to an internal system error, or
+         insufficient permissions.
+@deprecated Use
+             {@link MediaSessionManager#addOnActiveSessionsChangedListener(android.media.session.MediaSessionManager.OnActiveSessionsChangedListener, ComponentName)}
+             and {@link MediaController} instead.
+*/
+registerRemoteController : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterRemoteController'>/**Unregisters a {@link android.media.RemoteController}, causing it to no longer receive
+</span> media metadata and playback state information, and no longer be capable
+ of controlling playback.
+@param {Object {RemoteController}} rctlr the object to unregister.
+@deprecated Use
+             {@link MediaSessionManager#removeOnActiveSessionsChangedListener(android.media.session.MediaSessionManager.OnActiveSessionsChangedListener)}
+             instead.
+*/
+unregisterRemoteController : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerAudioPolicy'>/**
+</span>@param {Object {AudioPolicy}} policy the non-null {@link AudioPolicy} to register.
+@param policy the non-null {@link AudioPolicy} to register.
+@return {Number} {@link #ERROR} if there was an error communicating with the registration service
+    or if the user doesn't have the required
+    {@link android.Manifest.permission#MODIFY_AUDIO_ROUTING} permission,
+    {@link #SUCCESS} otherwise.
+*/
+registerAudioPolicy : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterAudioPolicyAsync'>/**
+</span>@param {Object {AudioPolicy}} policy the non-null {@link AudioPolicy} to unregister.
+@param policy the non-null {@link AudioPolicy} to unregister.
+*/
+unregisterAudioPolicyAsync : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterAudioPolicy'>/**
+</span>@param {Object {AudioPolicy}} policy the non-null {@link AudioPolicy} to unregister.
+@param policy the non-null {@link AudioPolicy} to unregister.
+*/
+unregisterAudioPolicy : function(  ) {},
+
+<span id='android-media-AudioManager-method-hasRegisteredDynamicPolicy'>/**
+</span>@hide 
+@return {Boolean} true if an AudioPolicy was previously registered
+*/
+hasRegisteredDynamicPolicy : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerAudioPlaybackCallback'>/**Register a callback to be notified of audio playback changes through
+</span> {@link android.media.AudioManager.AudioPlaybackCallback}
+@param {Object {AudioManager.AudioPlaybackCallback}} cb non-null callback to register
+@param {Object {Handler}} handler the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the {@link Handler} associated with the main
+ {@link Looper} will be used.
+*/
+registerAudioPlaybackCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterAudioPlaybackCallback'>/**Unregister an audio playback callback previously registered with
+</span> {@link #registerAudioPlaybackCallback(AudioPlaybackCallback, Handler)}.
+@param {Object {AudioManager.AudioPlaybackCallback}} cb non-null callback to unregister
+*/
+unregisterAudioPlaybackCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-getActivePlaybackConfigurations'>/**Returns the current active audio playback configurations of the device
+</span>@return {Object {java.util.List}} a non-null list of playback configurations. An empty list indicates there is no
+     playback active when queried.
+@see AudioPlaybackConfiguration
+*/
+getActivePlaybackConfigurations : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerAudioRecordingCallback'>/**Register a callback to be notified of audio recording changes through
+</span> {@link android.media.AudioRecordingCallback}
+@param {Object {AudioManager.AudioRecordingCallback}} cb non-null callback to register
+@param {Object {Handler}} handler the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the {@link Handler} associated with the main
+ {@link Looper} will be used.
+*/
+registerAudioRecordingCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterAudioRecordingCallback'>/**Unregister an audio recording callback previously registered with
+</span> {@link #registerAudioRecordingCallback(AudioRecordingCallback, Handler)}.
+@param {Object {AudioManager.AudioRecordingCallback}} cb non-null callback to unregister
+*/
+unregisterAudioRecordingCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-getActiveRecordingConfigurations'>/**Returns the current active audio recording configurations of the device.
+</span>@return {Object {java.util.List}} a non-null list of recording configurations. An empty list indicates there is
+     no recording active when queried.
+@see AudioRecordingConfiguration
+*/
+getActiveRecordingConfigurations : function(  ) {},
+
+<span id='android-media-AudioManager-method-reloadAudioSettings'>/**
+</span>@hide Reload audio settings. This method is called by Settings backup
+  agent when audio settings are restored and causes the AudioService
+  to read and apply restored settings.
+*/
+reloadAudioSettings : function(  ) {},
+
+<span id='android-media-AudioManager-method-avrcpSupportsAbsoluteVolume'>/**
+</span>@hide Notifies AudioService that it is connected to an A2DP device that supports absolute volume,
+ so that AudioService can send volume change events to the A2DP device, rather than handling
+ them.
+*/
+avrcpSupportsAbsoluteVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-isSilentMode'>/**Checks whether the phone is in silent mode, with or without vibrate.
+</span>@return {Boolean} true if phone is in silent mode, with or without vibrate.
+@see #getRingerMode()
+@hide pending API Council approval
+*/
+isSilentMode : function(  ) {},
+
+<span id='android-media-AudioManager-method-isOutputDevice'>/**Return true if the device code corresponds to an output device.
+</span>@hide 
+*/
+isOutputDevice : function(  ) {},
+
+<span id='android-media-AudioManager-method-isInputDevice'>/**Return true if the device code corresponds to an input device.
+</span>@hide 
+*/
+isInputDevice : function(  ) {},
+
+<span id='android-media-AudioManager-method-getDevicesForStream'>/**Return the enabled devices for the specified output stream type.
+</span>@param {Number} streamType The stream type to query. One of
+            {@link #STREAM_VOICE_CALL},
+            {@link #STREAM_SYSTEM},
+            {@link #STREAM_RING},
+            {@link #STREAM_MUSIC},
+            {@link #STREAM_ALARM},
+            {@link #STREAM_NOTIFICATION},
+            {@link #STREAM_DTMF},
+            {@link #STREAM_ACCESSIBILITY}.
+@return {Number} The bit-mask &quot;or&quot; of audio output device codes for all enabled devices on this
+         stream. Zero or more of
+            {@link #DEVICE_OUT_EARPIECE},
+            {@link #DEVICE_OUT_SPEAKER},
+            {@link #DEVICE_OUT_WIRED_HEADSET},
+            {@link #DEVICE_OUT_WIRED_HEADPHONE},
+            {@link #DEVICE_OUT_BLUETOOTH_SCO},
+            {@link #DEVICE_OUT_BLUETOOTH_SCO_HEADSET},
+            {@link #DEVICE_OUT_BLUETOOTH_SCO_CARKIT},
+            {@link #DEVICE_OUT_BLUETOOTH_A2DP},
+            {@link #DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES},
+            {@link #DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER},
+            {@link #DEVICE_OUT_HDMI},
+            {@link #DEVICE_OUT_ANLG_DOCK_HEADSET},
+            {@link #DEVICE_OUT_DGTL_DOCK_HEADSET}.
+            {@link #DEVICE_OUT_USB_ACCESSORY}.
+            {@link #DEVICE_OUT_USB_DEVICE}.
+            {@link #DEVICE_OUT_REMOTE_SUBMIX}.
+            {@link #DEVICE_OUT_TELEPHONY_TX}.
+            {@link #DEVICE_OUT_LINE}.
+            {@link #DEVICE_OUT_HDMI_ARC}.
+            {@link #DEVICE_OUT_SPDIF}.
+            {@link #DEVICE_OUT_FM}.
+            {@link #DEVICE_OUT_DEFAULT} is not used here.
+
+ The implementation may support additional device codes beyond those listed, so
+ the application should ignore any bits which it does not recognize.
+ Note that the information may be imprecise when the implementation
+ cannot distinguish whether a particular device is enabled.
+
+ {@hide}
+*/
+getDevicesForStream : function(  ) {},
+
+<span id='android-media-AudioManager-method-setWiredDeviceConnectionState'>/**Indicate wired accessory connection state change.
+</span>@param {Number} device type of device connected/disconnected (AudioManager.DEVICE_OUT_xxx)
+@param {Number} state  new connection state: 1 connected, 0 disconnected
+@param {String} name   device name
+ {@hide}
+*/
+setWiredDeviceConnectionState : function(  ) {},
+
+<span id='android-media-AudioManager-method-setBluetoothHearingAidDeviceConnectionState'>/**Indicate Hearing Aid connection state change and eventually suppress
+</span> the {@link android.media.AudioManager.ACTION_AUDIO_BECOMING_NOISY} intent.
+ This operation is asynchronous but its execution will still be sequentially scheduled
+ relative to calls to {@link #setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent(
+ * BluetoothDevice, int, int, boolean, int)} and
+ and {@link #handleBluetoothA2dpDeviceConfigChange(BluetoothDevice)}.
+@param {Object {BluetoothDevice}} device Bluetooth device connected/disconnected
+@param {Number} state new connection state (BluetoothProfile.STATE_xxx)
+@param {Boolean} musicDevice Default get system volume for the connecting device.
+ (either {@link android.bluetooth.BluetoothProfile.hearingaid} or
+ {@link android.bluetooth.BluetoothProfile.HEARING_AID})
+@param {Number} suppressNoisyIntent if true the
+ {@link AudioManager.ACTION_AUDIO_BECOMING_NOISY} intent will not be sent.
+ {@hide}
+*/
+setBluetoothHearingAidDeviceConnectionState : function(  ) {},
+
+<span id='android-media-AudioManager-method-setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent'>/**Indicate A2DP source or sink connection state change and eventually suppress
+</span> the {@link android.media.AudioManager.ACTION_AUDIO_BECOMING_NOISY} intent.
+ This operation is asynchronous but its execution will still be sequentially scheduled
+ relative to calls to {@link #setBluetoothHearingAidDeviceConnectionState(BluetoothDevice,
+ int, boolean, int)} and
+ {@link #handleBluetoothA2dpDeviceConfigChange(BluetoothDevice)}.
+@param {Object {BluetoothDevice}} device Bluetooth device connected/disconnected
+@param {Number} state  new connection state, {@link BluetoothProfile#STATE_CONNECTED}
+     or {@link BluetoothProfile#STATE_DISCONNECTED}
+@param {Number} profile profile for the A2DP device
+@param {Boolean} a2dpVolume New volume for the connecting device. Does nothing if disconnecting.
+ (either {@link android.bluetooth.BluetoothProfile.A2DP} or
+ {@link android.bluetooth.BluetoothProfile.A2DP_SINK})
+@param {Number} suppressNoisyIntent if true the
+ {@link AudioManager.ACTION_AUDIO_BECOMING_NOISY} intent will not be sent.
+ {@hide}
+*/
+setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent : function(  ) {},
+
+<span id='android-media-AudioManager-method-handleBluetoothA2dpDeviceConfigChange'>/**Indicate A2DP device configuration has changed.
+</span> This operation is asynchronous but its execution will still be sequentially scheduled
+ relative to calls to
+ {@link #setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent(BluetoothDevice, int, int,
+ boolean, int)} and
+ {@link #setBluetoothHearingAidDeviceConnectionState(BluetoothDevice, int, boolean, int)}
+@param {Object {BluetoothDevice}} device Bluetooth device whose configuration has changed.
+ {@hide}
+*/
+handleBluetoothA2dpDeviceConfigChange : function(  ) {},
+
+<span id='android-media-AudioManager-method-getRingtonePlayer'>/**{@hide}
+</span>*/
+getRingtonePlayer : function(  ) {},
+
+<span id='android-media-AudioManager-method-getProperty'>/**Returns the value of the property with the specified key.
+</span>@param {String} key One of the strings corresponding to a property key: either
+            {@link #PROPERTY_OUTPUT_SAMPLE_RATE},
+            {@link #PROPERTY_OUTPUT_FRAMES_PER_BUFFER},
+            {@link #PROPERTY_SUPPORT_MIC_NEAR_ULTRASOUND},
+            {@link #PROPERTY_SUPPORT_SPEAKER_NEAR_ULTRASOUND}, or
+            {@link #PROPERTY_SUPPORT_AUDIO_SOURCE_UNPROCESSED}.
+@return {String} A string representing the associated value for that property key,
+         or null if there is no value for that key.
+*/
+getProperty : function(  ) {},
+
+<span id='android-media-AudioManager-method-getOutputLatency'>/**Returns the estimated latency for the given stream type in milliseconds.
+</span>
+ DO NOT UNHIDE. The existing approach for doing A/V sync has too many problems. We need
+ a better solution.
+@hide 
+*/
+getOutputLatency : function(  ) {},
+
+<span id='android-media-AudioManager-method-setVolumeController'>/**Registers a global volume controller interface.  Currently limited to SystemUI.
+</span>@hide 
+*/
+setVolumeController : function(  ) {},
+
+<span id='android-media-AudioManager-method-notifyVolumeControllerVisible'>/**Notify audio manager about volume controller visibility changes.
+</span> Currently limited to SystemUI.
+@hide 
+*/
+notifyVolumeControllerVisible : function(  ) {},
+
+<span id='android-media-AudioManager-method-isStreamAffectedByRingerMode'>/**Only useful for volume controllers.
+</span>@hide 
+*/
+isStreamAffectedByRingerMode : function(  ) {},
+
+<span id='android-media-AudioManager-method-isStreamAffectedByMute'>/**Only useful for volume controllers.
+</span>@hide 
+*/
+isStreamAffectedByMute : function(  ) {},
+
+<span id='android-media-AudioManager-method-disableSafeMediaVolume'>/**Only useful for volume controllers.
+</span>@hide 
+*/
+disableSafeMediaVolume : function(  ) {},
+
+<span id='android-media-AudioManager-method-setRingerModeInternal'>/**Only useful for volume controllers.
+</span>@hide 
+*/
+setRingerModeInternal : function(  ) {},
+
+<span id='android-media-AudioManager-method-getRingerModeInternal'>/**Only useful for volume controllers.
+</span>@hide 
+*/
+getRingerModeInternal : function(  ) {},
+
+<span id='android-media-AudioManager-method-setVolumePolicy'>/**Only useful for volume controllers.
+</span>@hide 
+*/
+setVolumePolicy : function(  ) {},
+
+<span id='android-media-AudioManager-method-setHdmiSystemAudioSupported'>/**Set Hdmi Cec system audio mode.
+</span>@param {Boolean} on whether to be on system audio mode
+@return {Number} output device type. 0 (DEVICE_NONE) if failed to set device.
+@hide 
+*/
+setHdmiSystemAudioSupported : function(  ) {},
+
+<span id='android-media-AudioManager-method-isHdmiSystemAudioSupported'>/**Returns true if Hdmi Cec system audio mode is supported.
+</span>@hide 
+*/
+isHdmiSystemAudioSupported : function(  ) {},
+
+<span id='android-media-AudioManager-method-listAudioPorts'>/**Returns a list of descriptors for all audio ports managed by the audio framework.
+</span> Audio ports are nodes in the audio framework or audio hardware that can be configured
+ or connected and disconnected with createAudioPatch() or releaseAudioPatch().
+ See AudioPort for a list of attributes of each audio port.
+@param {Object {java.util.ArrayList}} ports An AudioPort ArrayList where the list will be returned.
+@hide 
+*/
+listAudioPorts : function(  ) {},
+
+<span id='android-media-AudioManager-method-listPreviousAudioPorts'>/**Returns a list of descriptors for all audio ports managed by the audio framework as
+</span> it was before the last update calback.
+@param {Object {java.util.ArrayList}} ports An AudioPort ArrayList where the list will be returned.
+@hide 
+*/
+listPreviousAudioPorts : function(  ) {},
+
+<span id='android-media-AudioManager-method-listAudioDevicePorts'>/**Specialized version of listAudioPorts() listing only audio devices (AudioDevicePort)
+</span>@see listAudioPorts(ArrayList&lt;AudioPort&gt;)
+@hide 
+*/
+listAudioDevicePorts : function(  ) {},
+
+<span id='android-media-AudioManager-method-listPreviousAudioDevicePorts'>/**Specialized version of listPreviousAudioPorts() listing only audio devices (AudioDevicePort)
+</span>@see listPreviousAudioPorts(ArrayList&lt;AudioPort&gt;)
+@hide 
+*/
+listPreviousAudioDevicePorts : function(  ) {},
+
+<span id='android-media-AudioManager-method-createAudioPatch'>/**Create a connection between two or more devices. The framework will reject the request if
+</span> device types are not compatible or the implementation does not support the requested
+ configuration.
+ NOTE: current implementation is limited to one source and one sink per patch.
+@param {Object {android.media.AudioPatch[]}} patch AudioPatch array where the newly created patch will be returned.
+              As input, if patch[0] is not null, the specified patch will be replaced by the
+              new patch created. This avoids calling releaseAudioPatch() when modifying a
+              patch and allows the implementation to optimize transitions.
+@param {Object {android.media.AudioPortConfig[]}} sources List of source audio ports. All must be AudioPort.ROLE_SOURCE.
+@param {Object {android.media.AudioPortConfig[]}} sinks   List of sink audio ports. All must be AudioPort.ROLE_SINK.
+@return {Number} - {@link #SUCCESS} if connection is successful.
+         - {@link #ERROR_BAD_VALUE} if incompatible device types are passed.
+         - {@link #ERROR_INVALID_OPERATION} if the requested connection is not supported.
+         - {@link #ERROR_PERMISSION_DENIED} if the client does not have permission to create
+         a patch.
+         - {@link #ERROR_DEAD_OBJECT} if the server process is dead
+         - {@link #ERROR} if patch cannot be connected for any other reason.
+
+         patch[0] contains the newly created patch
+@hide 
+*/
+createAudioPatch : function(  ) {},
+
+<span id='android-media-AudioManager-method-releaseAudioPatch'>/**Releases an existing audio patch connection.
+</span>@param {Object {AudioPatch}} patch The audio patch to disconnect.
+@return {Number} - {@link #SUCCESS} if disconnection is successful.
+         - {@link #ERROR_BAD_VALUE} if the specified patch does not exist.
+         - {@link #ERROR_PERMISSION_DENIED} if the client does not have permission to release
+         a patch.
+         - {@link #ERROR_DEAD_OBJECT} if the server process is dead
+         - {@link #ERROR} if patch cannot be released for any other reason.
+@hide 
+*/
+releaseAudioPatch : function(  ) {},
+
+<span id='android-media-AudioManager-method-listAudioPatches'>/**List all existing connections between audio ports.
+</span>@param {Object {java.util.ArrayList}} patches An AudioPatch array where the list will be returned.
+@hide 
+*/
+listAudioPatches : function(  ) {},
+
+<span id='android-media-AudioManager-method-setAudioPortGain'>/**Set the gain on the specified AudioPort. The AudioGainConfig config is build by
+</span> AudioGain.buildConfig()
+@hide 
+*/
+setAudioPortGain : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerAudioPortUpdateListener'>/**Register an audio port list update listener.
+</span>@hide 
+*/
+registerAudioPortUpdateListener : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterAudioPortUpdateListener'>/**Unregister an audio port list update listener.
+</span>@hide 
+*/
+unregisterAudioPortUpdateListener : function(  ) {},
+
+<span id='android-media-AudioManager-method-getDevices'>/**Returns an array of {@link android.media.AudioDeviceInfo} objects corresponding to the audio devices
+</span> currently connected to the system and meeting the criteria specified in the
+ &lt;code&gt;flags&lt;/code&gt; parameter.
+@param {Number} flags A set of bitflags specifying the criteria to test.
+@see #GET_DEVICES_OUTPUTS
+@see #GET_DEVICES_INPUTS
+@see #GET_DEVICES_ALL
+@return {Object {android.media.AudioDeviceInfo}} A (possibly zero-length) array of AudioDeviceInfo objects.
+*/
+getDevices : function(  ) {},
+
+<span id='android-media-AudioManager-method-getDevicesStatic'>/**Generates a list of AudioDeviceInfo objects corresponding to the audio devices currently
+</span> connected to the system and meeting the criteria specified in the &lt;code&gt;flags&lt;/code&gt;
+ parameter.
+ This is an internal function. The public API front is getDevices(int).
+@param {Number} flags A set of bitflags specifying the criteria to test.
+@see #GET_DEVICES_OUTPUTS
+@see #GET_DEVICES_INPUTS
+@see #GET_DEVICES_ALL
+@return {Object {android.media.AudioDeviceInfo}} A (possibly zero-length) array of AudioDeviceInfo objects.
+@hide 
+*/
+getDevicesStatic : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerAudioDeviceCallback'>/**Registers an {@link android.media.AudioDeviceCallback} object to receive notifications of changes
+</span> to the set of connected audio devices.
+@param {Object {AudioDeviceCallback}} callback The {@link AudioDeviceCallback} object to receive connect/disconnect
+ notifications.
+@param {Object {Handler}} handler Specifies the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the {@link Handler} associated with the main
+ {@link Looper} will be used.
+*/
+registerAudioDeviceCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterAudioDeviceCallback'>/**Unregisters an {@link android.media.AudioDeviceCallback} object which has been previously registered
+</span> to receive notifications of changes to the set of connected audio devices.
+@param {Object {AudioDeviceCallback}} callback The {@link AudioDeviceCallback} object that was previously registered
+ with {@link AudioManager#registerAudioDeviceCallback} to be unregistered.
+*/
+unregisterAudioDeviceCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-setPortIdForMicrophones'>/**Set port id for microphones by matching device type and address.
+</span>@hide 
+*/
+setPortIdForMicrophones : function(  ) {},
+
+<span id='android-media-AudioManager-method-microphoneInfoFromAudioDeviceInfo'>/**Convert {@link android.media.AudioDeviceInfo} to {@link android.media.MicrophoneInfo}.
+</span>@hide 
+*/
+microphoneInfoFromAudioDeviceInfo : function(  ) {},
+
+<span id='android-media-AudioManager-method-getMicrophones'>/**Returns a list of {@link android.media.MicrophoneInfo} that corresponds to the characteristics
+</span> of all available microphones. The list is empty when no microphones are available
+ on the device. An error during the query will result in an IOException being thrown.
+@return {Object {java.util.List}} a list that contains all microphones' characteristics
+@throws IOException if an error occurs.
+*/
+getMicrophones : function(  ) {},
+
+<span id='android-media-AudioManager-method-getHwOffloadEncodingFormatsSupportedForA2DP'>/**Returns a list of audio formats that corresponds to encoding formats
+</span> supported on offload path for A2DP playback.
+@return {Object {java.util.List}} a list of {@link BluetoothCodecConfig} objects containing encoding formats
+ supported for offload A2DP playback
+@hide 
+*/
+getHwOffloadEncodingFormatsSupportedForA2DP : function(  ) {},
+
+<span id='android-media-AudioManager-method-setAudioServerStateCallback'>/**
+</span>@param {Object {Executor}} executor {@link Executor} to handle the callbacks
+@param {Object {AudioManager.AudioServerStateCallback}} stateCallback the callback to receive the audio server state changes
+        To remove the callabck, pass a null reference for both executor and stateCallback.
+@param stateCallback the callback to receive the audio server state changes
+        To remove the callabck, pass a null reference for both executor and stateCallback.
+*/
+setAudioServerStateCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-clearAudioServerStateCallback'>/**
+</span>@hide Unregisters the callback for notification of audio server state changes.
+*/
+clearAudioServerStateCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-isAudioServerRunning'>/**
+</span>@hide Checks if native audioservice is running or not.
+@return {Boolean} true if native audioservice runs, false otherwise.
+*/
+isAudioServerRunning : function(  ) {},
+
+<span id='android-media-AudioManager-method-getSurroundFormats'>/**
+</span>@hide Returns all surround formats.
+@return {Object {java.util.Map}} a map where the key is a surround format and
+ the value indicates the surround format is enabled or not
+*/
+getSurroundFormats : function(  ) {},
+
+<span id='android-media-AudioManager-method-setSurroundFormatEnabled'>/**
+</span>@param {Number} audioFormat a surround format, the value is one of
+        {@link AudioFormat#ENCODING_AC3}, {@link AudioFormat#ENCODING_E_AC3},
+        {@link AudioFormat#ENCODING_DTS}, {@link AudioFormat#ENCODING_DTS_HD},
+        {@link AudioFormat#ENCODING_AAC_LC}, {@link AudioFormat#ENCODING_DOLBY_TRUEHD},
+        {@link AudioFormat#ENCODING_E_AC3_JOC}. Once {@link AudioFormat#ENCODING_AAC_LC} is
+        set as enabled, {@link AudioFormat#ENCODING_AAC_LC},
+        {@link AudioFormat#ENCODING_AAC_HE_V1}, {@link AudioFormat#ENCODING_AAC_HE_V2},
+        {@link AudioFormat#ENCODING_AAC_ELD}, {@link AudioFormat#ENCODING_AAC_XHE} are
+        all enabled.
+@param {Boolean} enabled the required surround format state, true for enabled, false for disabled
+@param enabled the required surround format state, true for enabled, false for disabled
+@return {Boolean} true if successful, otherwise false
+*/
+setSurroundFormatEnabled : function(  ) {},
+
+<span id='android-media-AudioManager-method-getReportedSurroundFormats'>/**
+</span>@hide Returns all surround formats that are reported by the connected HDMI device.
+ The keys are not affected by calling setSurroundFormatEnabled(), and the values
+ are not affected by calling setSurroundFormatEnabled() when in AUTO mode.
+ This information can used to show the AUTO setting for SurroundSound.
+@return {Object {java.util.Map}} a map where the key is a surround format and
+ the value indicates the surround format is enabled or not
+*/
+getReportedSurroundFormats : function(  ) {},
+
+<span id='android-media-AudioManager-method-isHapticPlaybackSupported'>/**Return if audio haptic coupled playback is supported or not.
+</span>@return {Boolean} whether audio haptic playback supported.
+*/
+isHapticPlaybackSupported : function(  ) {},
+
+<span id='android-media-AudioManager-method-getAudioProductStrategies'>/**
+</span>@hide Introspection API to retrieve audio product strategies.
+ When implementing {Car|Oem}AudioManager, use this method  to retrieve the collection of
+ audio product strategies, which is indexed by a weakly typed index in order to be extended
+ by OEM without any needs of AOSP patches.
+ The {Car|Oem}AudioManager can expose API to build {@link AudioAttributes} for a given product
+ strategy refered either by its index or human readable string. It will allow clients
+ application to start streaming data using these {@link AudioAttributes} on the selected
+ device by Audio Policy Engine.
+@return {Object {java.util.List}} a (possibly zero-length) array of
+         {@see android.media.audiopolicy.AudioProductStrategy} objects.
+*/
+getAudioProductStrategies : function(  ) {},
+
+<span id='android-media-AudioManager-method-getAudioVolumeGroups'>/**
+</span>@hide Introspection API to retrieve audio volume groups.
+ When implementing {Car|Oem}AudioManager, use this method  to retrieve the collection of
+ audio volume groups.
+@return {Object {java.util.List}} a (possibly zero-length) List of
+         {@see android.media.audiopolicy.AudioVolumeGroup} objects.
+*/
+getAudioVolumeGroups : function(  ) {},
+
+<span id='android-media-AudioManager-method-registerVolumeGroupCallback'>/**
+</span>@param {Object {Executor}} callback the {@link VolumeGroupCallback} to register
+@param callback the {@link VolumeGroupCallback} to register
+*/
+registerVolumeGroupCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-unregisterVolumeGroupCallback'>/**
+</span>@param {Object {AudioManager.VolumeGroupCallback}} callback the {@link VolumeGroupCallback} to unregister
+@param callback the {@link VolumeGroupCallback} to unregister
+*/
+unregisterVolumeGroupCallback : function(  ) {},
+
+<span id='android-media-AudioManager-method-hasHapticChannels'>/**Return if an asset contains haptic channels or not.
+</span>@param {Object {Uri}} uri the {@link Uri} of the asset.
+@return {Boolean} true if the assert contains haptic channels.
+@hide 
+*/
+hasHapticChannels : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

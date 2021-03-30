@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-RssiCurve'>/**@class android.net.RssiCurve
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A curve defining the network score over a range of RSSI values.
+
+ &lt;p&gt;For each RSSI bucket, the score may be any byte. Scores have no absolute meaning and are only
+ considered relative to other scores assigned by the same scorer. Networks with no score are
+ treated equivalently to a network with score {@link Byte#MIN_VALUE}, and will not be used.
+
+ &lt;p&gt;For example, consider a curve starting at -110 dBm with a bucket width of 10 and the
+ following buckets: {@code [-20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]}.
+ This represents a linear curve between -110 dBm and 30 dBm. It scores progressively higher at
+ stronger signal strengths.
+
+ &lt;p&gt;A network can be assigned a fixed score independent of RSSI by setting
+ {@link #rssiBuckets} to a one-byte array whose element is the fixed score. {@link #start}
+ should be set to the lowest RSSI value at which this fixed score should apply, and
+ {@link #bucketWidth} should be set such that {@code start + bucketWidth} is equal to the
+ highest RSSI value at which this fixed score should apply.
+
+ &lt;p&gt;Note that RSSI values below -110 dBm or above 30 dBm are unlikely to cause any difference
+ in connectivity behavior from those endpoints. That is, the connectivity framework will treat
+ a network with a -120 dBm signal exactly as it would treat one with a -110 dBm signal.
+ Therefore, graphs which specify scores outside this range may be truncated to this range by
+ the system.
+
+ @see ScoredNetwork
+ @hide
+*/
+var RssiCurve = {
+
+<span id='android-net-RssiCurve-property-start'>/**The starting dBm of the curve. */
+</span>start : &quot;null&quot;,
+<span id='android-net-RssiCurve-property-bucketWidth'>/**The width of each RSSI bucket, in dBm. */
+</span>bucketWidth : &quot;null&quot;,
+<span id='android-net-RssiCurve-property-rssiBuckets'>/**The score for each RSSI bucket. */
+</span>rssiBuckets : &quot;null&quot;,
+<span id='android-net-RssiCurve-property-activeNetworkRssiBoost'>/** The RSSI boost to give this network when active, in dBm.
+</span>
+ &lt;p&gt;When the system is connected to this network, it will pretend that the network has this
+ much higher of an RSSI. This is to avoid switching networks when another network has only a
+ slightly higher score.
+*/
+activeNetworkRssiBoost : &quot;null&quot;,
+<span id='android-net-RssiCurve-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-RssiCurve-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-RssiCurve-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-RssiCurve-method-lookupScore'>/**Lookup the score for a given RSSI value.
+</span>@param {Number} rssi The RSSI to lookup. If the RSSI falls below the start of the curve, the score at
+         the start of the curve will be returned. If it falls after the end of the curve, the
+         score at the end of the curve will be returned.
+@return {Number} the score for the given RSSI.
+*/
+lookupScore : function(  ) {},
+
+<span id='android-net-RssiCurve-method-lookupScore'>/**Lookup the score for a given RSSI value.
+</span>@param {Number} rssi The RSSI to lookup. If the RSSI falls below the start of the curve, the score at
+         the start of the curve will be returned. If it falls after the end of the curve, the
+         score at the end of the curve will be returned.
+@param {Boolean} isActiveNetwork Whether this network is currently active.
+@return {Number} the score for the given RSSI.
+*/
+lookupScore : function(  ) {},
+
+<span id='android-net-RssiCurve-method-equals'>/**Determine if two RSSI curves are defined in the same way.
+</span>
+ &lt;p&gt;Note that two curves can be equivalent but defined differently, e.g. if one bucket in one
+ curve is split into two buckets in another. For the purpose of this method, these curves are
+ not considered equal to each other.
+*/
+equals : function(  ) {},
+
+<span id='android-net-RssiCurve-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-net-RssiCurve-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

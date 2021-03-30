@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-CaptureRequest-Builder'>/**@class android.hardware.camera2.CaptureRequest.Builder
+</span>@extends java.lang.Object
+
+ A builder for capture requests.
+
+ &lt;p&gt;To obtain a builder instance, use the
+ {@link android.hardware.camera2.CameraDevice#createCaptureRequest} method, which initializes the
+ request fields to one of the templates defined in {@link android.hardware.camera2.CameraDevice}.
+
+ @see CameraDevice#createCaptureRequest
+ @see CameraDevice#TEMPLATE_PREVIEW
+ @see CameraDevice#TEMPLATE_RECORD
+ @see CameraDevice#TEMPLATE_STILL_CAPTURE
+ @see CameraDevice#TEMPLATE_VIDEO_SNAPSHOT
+ @see CameraDevice#TEMPLATE_MANUAL
+*/
+var Builder = {
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-addTarget'>/**&lt;p&gt;Add a surface to the list of targets for this request&lt;/p&gt;
+</span>
+ &lt;p&gt;The Surface added must be one of the surfaces included in the most
+ recent call to {@link android.hardware.camera2.CameraDevice#createCaptureSession}, when the
+ request is given to the camera device.&lt;/p&gt;
+
+ &lt;p&gt;Adding a target more than once has no effect.&lt;/p&gt;
+@param {Object {Surface}} outputTarget Surface to use as an output target for this request
+*/
+addTarget : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-removeTarget'>/**&lt;p&gt;Remove a surface from the list of targets for this request.&lt;/p&gt;
+</span>
+ &lt;p&gt;Removing a target that is not currently added has no effect.&lt;/p&gt;
+@param {Object {Surface}} outputTarget Surface to use as an output target for this request
+*/
+removeTarget : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-set'>/**Set a capture request field to a value. The field definitions can be
+</span> found in {@link android.hardware.camera2.CaptureRequest}.
+
+ &lt;p&gt;Setting a field to {@code null} will remove that field from the capture request.
+ Unless the field is optional, removing it will likely produce an error from the camera
+ device when the request is submitted.&lt;/p&gt;
+@param {Object {android.hardware.camera2.CaptureRequest.Key}} key The metadata field to write.
+@param {Object {Object}} value The value to set the field to, which must be of a matching
+ type to the key.
+*/
+set : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-get'>/**Get a capture request field value. The field definitions can be
+</span> found in {@link android.hardware.camera2.CaptureRequest}.
+@param {Object {android.hardware.camera2.CaptureRequest.Key}} key The metadata field to read.
+@param key The metadata field to read.
+@return {Object {java.lang.Object}} The value of that key, or {@code null} if the field is not set.
+*/
+get : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-setPhysicalCameraKey'>/**Set a capture request field to a value. The field definitions can be
+</span> found in {@link android.hardware.camera2.CaptureRequest}.
+
+ &lt;p&gt;Setting a field to {@code null} will remove that field from the capture request.
+ Unless the field is optional, removing it will likely produce an error from the camera
+ device when the request is submitted.&lt;/p&gt;
+
+&lt;p&gt;This method can be called for logical camera devices, which are devices that have
+ REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA capability and calls to
+ {@link android.hardware.camera2.CameraCharacteristics#getPhysicalCameraIds} return a non-empty set of
+ physical devices that are backing the logical camera. The camera Id included in the
+ 'physicalCameraId' argument selects an individual physical device that will receive
+ the customized capture request field.&lt;/p&gt;
+@param {Object {android.hardware.camera2.CaptureRequest.Key}} key The metadata field to write.
+@param {Object {Object}} value The value to set the field to, which must be of a matching
+@param {String} physicalCameraId A valid physical camera Id. The valid camera Ids can be obtained
+                         via calls to {@link CameraCharacteristics#getPhysicalCameraIds}.
+@param physicalCameraId A valid physical camera Id. The valid camera Ids can be obtained
+                         via calls to {@link CameraCharacteristics#getPhysicalCameraIds}.
+@return {Object {android.hardware.camera2.CaptureRequest.Builder}} The builder object.
+ type to the key.
+*/
+setPhysicalCameraKey : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-getPhysicalCameraKey'>/**Get a capture request field value for a specific physical camera Id. The field
+</span> definitions can be found in {@link android.hardware.camera2.CaptureRequest}.
+
+&lt;p&gt;This method can be called for logical camera devices, which are devices that have
+ REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA capability and calls to
+ {@link android.hardware.camera2.CameraCharacteristics#getPhysicalCameraIds} return a non-empty list of
+ physical devices that are backing the logical camera. The camera Id included in the
+ 'physicalCameraId' argument selects an individual physical device and returns
+ its specific capture request field.&lt;/p&gt;
+@param {Object {android.hardware.camera2.CaptureRequest.Key}} key The metadata field to read.
+@param {String} physicalCameraId A valid physical camera Id. The valid camera Ids can be obtained
+                         via calls to {@link CameraCharacteristics#getPhysicalCameraIds}.
+@param physicalCameraId A valid physical camera Id. The valid camera Ids can be obtained
+                         via calls to {@link CameraCharacteristics#getPhysicalCameraIds}.
+@return {Object {java.lang.Object}} The value of that key, or {@code null} if the field is not set.
+*/
+getPhysicalCameraKey : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-setTag'>/**Set a tag for this request.
+</span>
+ &lt;p&gt;This tag is not used for anything by the camera device, but can be
+ used by an application to easily identify a CaptureRequest when it is
+ returned by
+ {@link android.hardware.camera2.CameraCaptureSession.CaptureCallback#onCaptureCompleted CaptureCallback.onCaptureCompleted}
+@param {Object {Object}} tag an arbitrary Object to store with this request
+@see CaptureRequest#getTag
+*/
+setTag : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-setPartOfCHSRequestList'>/**&lt;p&gt;Mark this request as part of a constrained high speed request list created by
+</span> {@link android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession#createHighSpeedRequestList}.
+ A constrained high speed request list contains some constrained high speed capture
+ requests with certain interleaved pattern that is suitable for high speed preview/video
+ streaming.&lt;/p&gt;
+@hide 
+*/
+setPartOfCHSRequestList : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-build'>/**Build a request using the current target Surfaces and settings.
+</span> &lt;p&gt;Note that, although it is possible to create a {@code CaptureRequest} with no target
+ {@link Surface}s, passing such a request into {@link android.hardware.camera2.CameraCaptureSession#capture},
+ {@link android.hardware.camera2.CameraCaptureSession#captureBurst},
+ {@link android.hardware.camera2.CameraCaptureSession#setRepeatingBurst}, or
+ {@link android.hardware.camera2.CameraCaptureSession#setRepeatingRequest} will cause that method to throw an
+ {@link IllegalArgumentException}.&lt;/p&gt;
+@return {Object {android.hardware.camera2.CaptureRequest}} A new capture request instance, ready for submission to the
+ camera device.
+*/
+build : function(  ) {},
+
+<span id='android-hardware-camera2-CaptureRequest-Builder-method-isEmpty'>/**
+</span>@hide 
+*/
+isEmpty : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

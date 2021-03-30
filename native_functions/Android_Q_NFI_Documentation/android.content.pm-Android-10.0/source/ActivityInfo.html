@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-ActivityInfo'>/**@class android.content.pm.ActivityInfo
+</span> implements android.os.Parcelable
+
+@extends android.content.pm.ComponentInfo
+
+ Information you can retrieve about a particular application
+ activity or receiver. This corresponds to information collected
+ from the AndroidManifest.xml's &amp;lt;activity&amp;gt; and
+ &amp;lt;receiver&amp;gt; tags.
+*/
+var ActivityInfo = {
+
+<span id='android-content-pm-ActivityInfo-property-theme'>/** A style resource identifier (in the package's resources) of this
+</span> activity's theme.  From the &quot;theme&quot; attribute or, if not set, 0.
+*/
+theme : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-LAUNCH_MULTIPLE'>/** Constant corresponding to &lt;code&gt;standard&lt;/code&gt; in
+</span> the {@link android.R.attr#launchMode} attribute.
+*/
+LAUNCH_MULTIPLE : &quot;0&quot;,
+<span id='android-content-pm-ActivityInfo-property-LAUNCH_SINGLE_TOP'>/** Constant corresponding to &lt;code&gt;singleTop&lt;/code&gt; in
+</span> the {@link android.R.attr#launchMode} attribute.
+*/
+LAUNCH_SINGLE_TOP : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-LAUNCH_SINGLE_TASK'>/** Constant corresponding to &lt;code&gt;singleTask&lt;/code&gt; in
+</span> the {@link android.R.attr#launchMode} attribute.
+*/
+LAUNCH_SINGLE_TASK : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-LAUNCH_SINGLE_INSTANCE'>/** Constant corresponding to &lt;code&gt;singleInstance&lt;/code&gt; in
+</span> the {@link android.R.attr#launchMode} attribute.
+*/
+LAUNCH_SINGLE_INSTANCE : &quot;3&quot;,
+<span id='android-content-pm-ActivityInfo-property-launchMode'>/** The launch mode style requested by the activity.  From the
+</span> {@link android.R.attr#launchMode} attribute, one of
+ {@link #LAUNCH_MULTIPLE},
+ {@link #LAUNCH_SINGLE_TOP}, {@link #LAUNCH_SINGLE_TASK}, or
+ {@link #LAUNCH_SINGLE_INSTANCE}.
+*/
+launchMode : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-DOCUMENT_LAUNCH_NONE'>/** Constant corresponding to &lt;code&gt;none&lt;/code&gt; in
+</span> the {@link android.R.attr#documentLaunchMode} attribute.
+*/
+DOCUMENT_LAUNCH_NONE : &quot;0&quot;,
+<span id='android-content-pm-ActivityInfo-property-DOCUMENT_LAUNCH_INTO_EXISTING'>/** Constant corresponding to &lt;code&gt;intoExisting&lt;/code&gt; in
+</span> the {@link android.R.attr#documentLaunchMode} attribute.
+*/
+DOCUMENT_LAUNCH_INTO_EXISTING : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-DOCUMENT_LAUNCH_ALWAYS'>/** Constant corresponding to &lt;code&gt;always&lt;/code&gt; in
+</span> the {@link android.R.attr#documentLaunchMode} attribute.
+*/
+DOCUMENT_LAUNCH_ALWAYS : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-DOCUMENT_LAUNCH_NEVER'>/** Constant corresponding to &lt;code&gt;never&lt;/code&gt; in
+</span> the {@link android.R.attr#documentLaunchMode} attribute.
+*/
+DOCUMENT_LAUNCH_NEVER : &quot;3&quot;,
+<span id='android-content-pm-ActivityInfo-property-documentLaunchMode'>/** The document launch mode style requested by the activity. From the
+</span> {@link android.R.attr#documentLaunchMode} attribute, one of
+ {@link #DOCUMENT_LAUNCH_NONE}, {@link #DOCUMENT_LAUNCH_INTO_EXISTING},
+ {@link #DOCUMENT_LAUNCH_ALWAYS}.
+
+ &lt;p&gt;Modes DOCUMENT_LAUNCH_ALWAYS
+ and DOCUMENT_LAUNCH_INTO_EXISTING are equivalent to {@link android.content.Intent#FLAG_ACTIVITY_NEW_DOCUMENT
+ Intent.FLAG_ACTIVITY_NEW_DOCUMENT} with and without {@link android.content.Intent#FLAG_ACTIVITY_MULTIPLE_TASK
+ Intent.FLAG_ACTIVITY_MULTIPLE_TASK} respectively.
+*/
+documentLaunchMode : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-PERSIST_ROOT_ONLY'>/** Constant corresponding to &lt;code&gt;persistRootOnly&lt;/code&gt; in
+</span> the {@link android.R.attr#persistableMode} attribute.
+*/
+PERSIST_ROOT_ONLY : &quot;0&quot;,
+<span id='android-content-pm-ActivityInfo-property-PERSIST_NEVER'>/** Constant corresponding to &lt;code&gt;doNotPersist&lt;/code&gt; in
+</span> the {@link android.R.attr#persistableMode} attribute.
+*/
+PERSIST_NEVER : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-PERSIST_ACROSS_REBOOTS'>/** Constant corresponding to &lt;code&gt;persistAcrossReboots&lt;/code&gt; in
+</span> the {@link android.R.attr#persistableMode} attribute.
+*/
+PERSIST_ACROSS_REBOOTS : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-persistableMode'>/** Value indicating how this activity is to be persisted across
+</span> reboots for restoring in the Recents list.
+ {@link android.R.attr#persistableMode}
+*/
+persistableMode : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-maxRecents'>/** The maximum number of tasks rooted at this activity that can be in the recent task list.
+</span> Refer to {@link android.R.attr#maxRecents}.
+*/
+maxRecents : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-permission'>/** Optional name of a permission required to be able to access this
+</span> Activity.  From the &quot;permission&quot; attribute.
+*/
+permission : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-taskAffinity'>/** The affinity this activity has for another task in the system.  The
+</span> string here is the name of the task, often the package name of the
+ overall package.  If null, the activity has no affinity.  Set from the
+ {@link android.R.attr#taskAffinity} attribute.
+*/
+taskAffinity : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-targetActivity'>/** If this is an activity alias, this is the real activity class to run
+</span> for it.  Otherwise, this is null.
+*/
+targetActivity : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-launchToken'>/** Token used to string together multiple events within a single launch action.
+</span> @hide
+*/
+launchToken : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_UNRESIZEABLE'>/** Activity can not be resized and always occupies the fullscreen area with all windows fully
+</span> visible.
+ @hide
+*/
+RESIZE_MODE_UNRESIZEABLE : &quot;0&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION'>/** Activity didn't explicitly request to be resizeable, but we are making it resizeable because
+</span> of the SDK version it targets. Only affects apps with target SDK &gt;= N where the app is
+ implied to be resizeable if it doesn't explicitly set the attribute to any value.
+ @hide
+*/
+RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_RESIZEABLE'>/** Activity explicitly requested to be resizeable.
+</span> @hide
+*/
+RESIZE_MODE_RESIZEABLE : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_RESIZEABLE_AND_PIPABLE_DEPRECATED'>/** Activity is resizeable and supported picture-in-picture mode.  This flag is now deprecated
+</span> since activities do not need to be resizeable to support picture-in-picture.
+ See {@link #FLAG_SUPPORTS_PICTURE_IN_PICTURE}.
+
+ @hide
+ @deprecated
+*/
+RESIZE_MODE_RESIZEABLE_AND_PIPABLE_DEPRECATED : &quot;3&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_FORCE_RESIZEABLE'>/** Activity does not support resizing, but we are forcing it to be resizeable. Only affects
+</span> certain pre-N apps where we force them to be resizeable.
+ @hide
+*/
+RESIZE_MODE_FORCE_RESIZEABLE : &quot;4&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_FORCE_RESIZABLE_LANDSCAPE_ONLY'>/** Activity does not support resizing, but we are forcing it to be resizeable as long
+</span> as the size remains landscape.
+ @hide
+*/
+RESIZE_MODE_FORCE_RESIZABLE_LANDSCAPE_ONLY : &quot;5&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_FORCE_RESIZABLE_PORTRAIT_ONLY'>/** Activity does not support resizing, but we are forcing it to be resizeable as long
+</span> as the size remains portrait.
+ @hide
+*/
+RESIZE_MODE_FORCE_RESIZABLE_PORTRAIT_ONLY : &quot;6&quot;,
+<span id='android-content-pm-ActivityInfo-property-RESIZE_MODE_FORCE_RESIZABLE_PRESERVE_ORIENTATION'>/** Activity does not support resizing, but we are forcing it to be resizeable as long
+</span> as the bounds remain in the same orientation as they are.
+ @hide
+*/
+RESIZE_MODE_FORCE_RESIZABLE_PRESERVE_ORIENTATION : &quot;7&quot;,
+<span id='android-content-pm-ActivityInfo-property-resizeMode'>/** Value indicating if the resizing mode the activity supports.
+</span> See {@link android.R.attr#resizeableActivity}.
+ @hide
+*/
+resizeMode : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-maxAspectRatio'>/** Value indicating the maximum aspect ratio the activity supports.
+</span> &lt;p&gt;
+ 0 means unset.
+ @See {@link android.R.attr#maxAspectRatio}.
+ @hide
+*/
+maxAspectRatio : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-minAspectRatio'>/** Value indicating the minimum aspect ratio the activity supports.
+</span> &lt;p&gt;
+ 0 means unset.
+ @See {@link android.R.attr#minAspectRatio}.
+ @hide
+*/
+minAspectRatio : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-requestedVrComponent'>/** Name of the VrListenerService component to run for this activity.
+</span> @see android.R.attr#enableVrMode
+ @hide
+*/
+requestedVrComponent : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-COLOR_MODE_DEFAULT'>/** Value for {@link #colorMode} indicating that the activity should use the
+</span> default color mode (sRGB, low dynamic range).
+
+ @see android.R.attr#colorMode
+*/
+COLOR_MODE_DEFAULT : &quot;0&quot;,
+<span id='android-content-pm-ActivityInfo-property-COLOR_MODE_WIDE_COLOR_GAMUT'>/** Value of {@link #colorMode} indicating that the activity should use a
+</span> wide color gamut if the presentation display supports it.
+
+ @see android.R.attr#colorMode
+*/
+COLOR_MODE_WIDE_COLOR_GAMUT : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-COLOR_MODE_HDR'>/** Value of {@link #colorMode} indicating that the activity should use a
+</span> high dynamic range if the presentation display supports it.
+
+ @see android.R.attr#colorMode
+*/
+COLOR_MODE_HDR : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-colorMode'>/** The color mode requested by this activity. The target display may not be
+</span> able to honor the request.
+*/
+colorMode : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_MULTIPROCESS'>/** Bit in {@link #flags} indicating whether this activity is able to
+</span> run in multiple processes.  If
+ true, the system may instantiate it in the some process as the
+ process starting it in order to conserve resources.  If false, the
+ default, it always runs in {@link #processName}.  Set from the
+ {@link android.R.attr#multiprocess} attribute.
+*/
+FLAG_MULTIPROCESS : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_FINISH_ON_TASK_LAUNCH'>/** Bit in {@link #flags} indicating that, when the activity's task is
+</span> relaunched from home, this activity should be finished.
+ Set from the
+ {@link android.R.attr#finishOnTaskLaunch} attribute.
+*/
+FLAG_FINISH_ON_TASK_LAUNCH : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_CLEAR_TASK_ON_LAUNCH'>/** Bit in {@link #flags} indicating that, when the activity is the root
+</span> of a task, that task's stack should be cleared each time the user
+ re-launches it from home.  As a result, the user will always
+ return to the original activity at the top of the task.
+ This flag only applies to activities that
+ are used to start the root of a new task.  Set from the
+ {@link android.R.attr#clearTaskOnLaunch} attribute.
+*/
+FLAG_CLEAR_TASK_ON_LAUNCH : &quot;4&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_ALWAYS_RETAIN_TASK_STATE'>/** Bit in {@link #flags} indicating that, when the activity is the root
+</span> of a task, that task's stack should never be cleared when it is
+ relaunched from home.  Set from the
+ {@link android.R.attr#alwaysRetainTaskState} attribute.
+*/
+FLAG_ALWAYS_RETAIN_TASK_STATE : &quot;8&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_STATE_NOT_NEEDED'>/** Bit in {@link #flags} indicating that the activity's state
+</span> is not required to be saved, so that if there is a failure the
+ activity will not be removed from the activity stack.  Set from the
+ {@link android.R.attr#stateNotNeeded} attribute.
+*/
+FLAG_STATE_NOT_NEEDED : &quot;16&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_EXCLUDE_FROM_RECENTS'>/** Bit in {@link #flags} that indicates that the activity should not
+</span> appear in the list of recently launched activities.  Set from the
+ {@link android.R.attr#excludeFromRecents} attribute.
+*/
+FLAG_EXCLUDE_FROM_RECENTS : &quot;32&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_ALLOW_TASK_REPARENTING'>/** Bit in {@link #flags} that indicates that the activity can be moved
+</span> between tasks based on its task affinity.  Set from the
+ {@link android.R.attr#allowTaskReparenting} attribute.
+*/
+FLAG_ALLOW_TASK_REPARENTING : &quot;64&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_NO_HISTORY'>/** Bit in {@link #flags} indicating that, when the user navigates away
+</span> from an activity, it should be finished.
+ Set from the
+ {@link android.R.attr#noHistory} attribute.
+*/
+FLAG_NO_HISTORY : &quot;128&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_FINISH_ON_CLOSE_SYSTEM_DIALOGS'>/** Bit in {@link #flags} indicating that, when a request to close system
+</span> windows happens, this activity is finished.
+ Set from the
+ {@link android.R.attr#finishOnCloseSystemDialogs} attribute.
+*/
+FLAG_FINISH_ON_CLOSE_SYSTEM_DIALOGS : &quot;256&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_HARDWARE_ACCELERATED'>/** Value for {@link #flags}: true when the application's rendering should
+</span> be hardware accelerated.
+*/
+FLAG_HARDWARE_ACCELERATED : &quot;512&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_SHOW_FOR_ALL_USERS'>/** Value for {@link #flags}: true when the application can be displayed for all users
+</span> regardless of if the user of the application is the current user. Set from the
+ {@link android.R.attr#showForAllUsers} attribute.
+ @hide
+*/
+FLAG_SHOW_FOR_ALL_USERS : &quot;1024&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_IMMERSIVE'>/** Bit in {@link #flags} corresponding to an immersive activity
+</span> that wishes not to be interrupted by notifications.
+ Applications that hide the system notification bar with
+ {@link android.view.WindowManager.LayoutParams#FLAG_FULLSCREEN}
+ may still be interrupted by high-priority notifications; for example, an
+ incoming phone call may use
+ {@link android.app.Notification#fullScreenIntent fullScreenIntent}
+ to present a full-screen in-call activity to the user, pausing the
+ current activity as a side-effect. An activity with
+ {@link #FLAG_IMMERSIVE} set, however, will not be interrupted; the
+ notification may be shown in some other way (such as a small floating
+ &quot;toast&quot; window).
+
+ Note that this flag will always reflect the Activity's
+ &lt;code&gt;android:immersive&lt;/code&gt; manifest definition, even if the Activity's
+ immersive state is changed at runtime via
+ {@link android.app.Activity#setImmersive(boolean)}.
+
+ @see android.app.Notification#FLAG_HIGH_PRIORITY
+ @see android.app.Activity#setImmersive(boolean)
+*/
+FLAG_IMMERSIVE : &quot;2048&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_RELINQUISH_TASK_IDENTITY'>/** Bit in {@link #flags}: If set, a task rooted at this activity will have its
+</span> baseIntent replaced by the activity immediately above this. Each activity may further
+ relinquish its identity to the activity above it using this flag. Set from the
+ {@link android.R.attr#relinquishTaskIdentity} attribute.
+*/
+FLAG_RELINQUISH_TASK_IDENTITY : &quot;4096&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_AUTO_REMOVE_FROM_RECENTS'>/** Bit in {@link #flags} indicating that tasks started with this activity are to be
+</span> removed from the recent list of tasks when the last activity in the task is finished.
+ Corresponds to {@link android.R.attr#autoRemoveFromRecents}
+*/
+FLAG_AUTO_REMOVE_FROM_RECENTS : &quot;8192&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_RESUME_WHILE_PAUSING'>/** Bit in {@link #flags} indicating that this activity can start is creation/resume
+</span> while the previous activity is still pausing.  Corresponds to
+ {@link android.R.attr#resumeWhilePausing}
+*/
+FLAG_RESUME_WHILE_PAUSING : &quot;16384&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_ENABLE_VR_MODE'>/** Bit in {@link #flags} indicating that this activity should be run with VR mode enabled.
+</span>
+ @see android.app.Activity#setVrModeEnabled(boolean, ComponentName)
+*/
+FLAG_ENABLE_VR_MODE : &quot;32768&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_ALWAYS_FOCUSABLE'>/** Bit in {@link #flags} indicating if the activity is always focusable regardless of if it is
+</span> in a task/stack whose activities are normally not focusable.
+ See android.R.attr#alwaysFocusable.
+ @hide
+*/
+FLAG_ALWAYS_FOCUSABLE : &quot;262144&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_VISIBLE_TO_INSTANT_APP'>/** Bit in {@link #flags} indicating if the activity is visible to instant
+</span> applications. The activity is visible if it's either implicitly or
+ explicitly exposed.
+ @hide
+*/
+FLAG_VISIBLE_TO_INSTANT_APP : &quot;1048576&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_IMPLICITLY_VISIBLE_TO_INSTANT_APP'>/** Bit in {@link #flags} indicating if the activity is implicitly visible
+</span> to instant applications. Implicitly visible activities are those that
+ implement certain intent-filters:
+ &lt;ul&gt;
+ &lt;li&gt;action {@link Intent#CATEGORY_BROWSABLE}&lt;/li&gt;
+ &lt;li&gt;action {@link Intent#ACTION_SEND}&lt;/li&gt;
+ &lt;li&gt;action {@link Intent#ACTION_SENDTO}&lt;/li&gt;
+ &lt;li&gt;action {@link Intent#ACTION_SEND_MULTIPLE}&lt;/li&gt;
+ &lt;/ul&gt;
+ @hide
+*/
+FLAG_IMPLICITLY_VISIBLE_TO_INSTANT_APP : &quot;2097152&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_SUPPORTS_PICTURE_IN_PICTURE'>/** Bit in {@link #flags} indicating if the activity supports picture-in-picture mode.
+</span> See {@link android.R.attr#supportsPictureInPicture}.
+ @hide
+*/
+FLAG_SUPPORTS_PICTURE_IN_PICTURE : &quot;4194304&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_SHOW_WHEN_LOCKED'>/** Bit in {@link #flags} indicating if the activity should be shown when locked.
+</span> See {@link android.R.attr#showWhenLocked}
+ @hide
+*/
+FLAG_SHOW_WHEN_LOCKED : &quot;8388608&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_TURN_SCREEN_ON'>/** Bit in {@link #flags} indicating if the screen should turn on when starting the activity.
+</span> See {@link android.R.attr#turnScreenOn}
+ @hide
+*/
+FLAG_TURN_SCREEN_ON : &quot;16777216&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_SYSTEM_USER_ONLY'>/** @hide Bit in {@link #flags}: If set, this component will only be seen
+</span> by the system user.  Only works with broadcast receivers.  Set from the
+ android.R.attr#systemUserOnly attribute.
+*/
+FLAG_SYSTEM_USER_ONLY : &quot;536870912&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_SINGLE_USER'>/** Bit in {@link #flags}: If set, a single instance of the receiver will
+</span> run for all users on the device.  Set from the
+ {@link android.R.attr#singleUser} attribute.  Note that this flag is
+ only relevant for ActivityInfo structures that are describing receiver
+ components; it is not applied to activities.
+*/
+FLAG_SINGLE_USER : &quot;1073741824&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_ALLOW_EMBEDDED'>/** @hide Bit in {@link #flags}: If set, this activity may be launched into an
+</span> owned ActivityContainer such as that within an ActivityView. If not set and
+ this activity is launched into such a container a SecurityException will be
+ thrown. Set from the {@link android.R.attr#allowEmbedded} attribute.
+*/
+FLAG_ALLOW_EMBEDDED : &quot;-2147483648&quot;,
+<span id='android-content-pm-ActivityInfo-property-flags'>/** Options that have been set in the activity declaration in the
+</span> manifest.
+ These include:
+ {@link #FLAG_MULTIPROCESS},
+ {@link #FLAG_FINISH_ON_TASK_LAUNCH}, {@link #FLAG_CLEAR_TASK_ON_LAUNCH},
+ {@link #FLAG_ALWAYS_RETAIN_TASK_STATE},
+ {@link #FLAG_STATE_NOT_NEEDED}, {@link #FLAG_EXCLUDE_FROM_RECENTS},
+ {@link #FLAG_ALLOW_TASK_REPARENTING}, {@link #FLAG_NO_HISTORY},
+ {@link #FLAG_FINISH_ON_CLOSE_SYSTEM_DIALOGS},
+ {@link #FLAG_HARDWARE_ACCELERATED}, {@link #FLAG_SINGLE_USER}.
+*/
+flags : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-FLAG_INHERIT_SHOW_WHEN_LOCKED'>/** Bit in {@link #privateFlags} indicating if the activity should be shown when locked in case
+</span> an activity behind this can also be shown when locked.
+ See {@link android.R.attr#inheritShowWhenLocked}.
+ @hide
+*/
+FLAG_INHERIT_SHOW_WHEN_LOCKED : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-privateFlags'>/** Options that have been set in the activity declaration in the manifest.
+</span> These include:
+ {@link #FLAG_INHERIT_SHOW_WHEN_LOCKED}.
+ @hide
+*/
+privateFlags : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_UNSET'>/** Internal constant used to indicate that the app didn't set a specific orientation value.
+</span> Different from {@link #SCREEN_ORIENTATION_UNSPECIFIED} below as the app can set its
+ orientation to {@link #SCREEN_ORIENTATION_UNSPECIFIED} while this means that the app didn't
+ set anything. The system will mostly treat this similar to
+ {@link #SCREEN_ORIENTATION_UNSPECIFIED}.
+ @hide
+*/
+SCREEN_ORIENTATION_UNSET : &quot;-2&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_UNSPECIFIED'>/** Constant corresponding to &lt;code&gt;unspecified&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_UNSPECIFIED : &quot;-1&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_LANDSCAPE'>/** Constant corresponding to &lt;code&gt;landscape&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_LANDSCAPE : &quot;0&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_PORTRAIT'>/** Constant corresponding to &lt;code&gt;portrait&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_PORTRAIT : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_USER'>/** Constant corresponding to &lt;code&gt;user&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_USER : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_BEHIND'>/** Constant corresponding to &lt;code&gt;behind&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_BEHIND : &quot;3&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_SENSOR'>/** Constant corresponding to &lt;code&gt;sensor&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_SENSOR : &quot;4&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_NOSENSOR'>/** Constant corresponding to &lt;code&gt;nosensor&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_NOSENSOR : &quot;5&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_SENSOR_LANDSCAPE'>/** Constant corresponding to &lt;code&gt;sensorLandscape&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_SENSOR_LANDSCAPE : &quot;6&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_SENSOR_PORTRAIT'>/** Constant corresponding to &lt;code&gt;sensorPortrait&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_SENSOR_PORTRAIT : &quot;7&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_REVERSE_LANDSCAPE'>/** Constant corresponding to &lt;code&gt;reverseLandscape&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_REVERSE_LANDSCAPE : &quot;8&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_REVERSE_PORTRAIT'>/** Constant corresponding to &lt;code&gt;reversePortrait&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_REVERSE_PORTRAIT : &quot;9&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_FULL_SENSOR'>/** Constant corresponding to &lt;code&gt;fullSensor&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_FULL_SENSOR : &quot;10&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_USER_LANDSCAPE'>/** Constant corresponding to &lt;code&gt;userLandscape&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_USER_LANDSCAPE : &quot;11&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_USER_PORTRAIT'>/** Constant corresponding to &lt;code&gt;userPortrait&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_USER_PORTRAIT : &quot;12&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_FULL_USER'>/** Constant corresponding to &lt;code&gt;fullUser&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_FULL_USER : &quot;13&quot;,
+<span id='android-content-pm-ActivityInfo-property-SCREEN_ORIENTATION_LOCKED'>/** Constant corresponding to &lt;code&gt;locked&lt;/code&gt; in
+</span> the {@link android.R.attr#screenOrientation} attribute.
+*/
+SCREEN_ORIENTATION_LOCKED : &quot;14&quot;,
+<span id='android-content-pm-ActivityInfo-property-screenOrientation'>/** The preferred screen orientation this activity would like to run in.
+</span> From the {@link android.R.attr#screenOrientation} attribute, one of
+ {@link #SCREEN_ORIENTATION_UNSPECIFIED},
+ {@link #SCREEN_ORIENTATION_LANDSCAPE},
+ {@link #SCREEN_ORIENTATION_PORTRAIT},
+ {@link #SCREEN_ORIENTATION_USER},
+ {@link #SCREEN_ORIENTATION_BEHIND},
+ {@link #SCREEN_ORIENTATION_SENSOR},
+ {@link #SCREEN_ORIENTATION_NOSENSOR},
+ {@link #SCREEN_ORIENTATION_SENSOR_LANDSCAPE},
+ {@link #SCREEN_ORIENTATION_SENSOR_PORTRAIT},
+ {@link #SCREEN_ORIENTATION_REVERSE_LANDSCAPE},
+ {@link #SCREEN_ORIENTATION_REVERSE_PORTRAIT},
+ {@link #SCREEN_ORIENTATION_FULL_SENSOR},
+ {@link #SCREEN_ORIENTATION_USER_LANDSCAPE},
+ {@link #SCREEN_ORIENTATION_USER_PORTRAIT},
+ {@link #SCREEN_ORIENTATION_FULL_USER},
+ {@link #SCREEN_ORIENTATION_LOCKED},
+*/
+screenOrientation : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_MCC'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the IMSI MCC.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_MCC : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_MNC'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the IMSI MNC.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_MNC : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_LOCALE'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the locale.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_LOCALE : &quot;4&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_TOUCHSCREEN'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the touchscreen type.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_TOUCHSCREEN : &quot;8&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_KEYBOARD'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the keyboard type.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_KEYBOARD : &quot;16&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_KEYBOARD_HIDDEN'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the keyboard or navigation being hidden/exposed.
+ Note that inspite of the name, this applies to the changes to any
+ hidden states: keyboard or navigation.
+ Set from the {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_KEYBOARD_HIDDEN : &quot;32&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_NAVIGATION'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the navigation type.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_NAVIGATION : &quot;64&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_ORIENTATION'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the screen orientation.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_ORIENTATION : &quot;128&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_SCREEN_LAYOUT'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the screen layout.  Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_SCREEN_LAYOUT : &quot;256&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_UI_MODE'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle the ui mode. Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_UI_MODE : &quot;512&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_SCREEN_SIZE'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle the screen size. Set from the
+ {@link android.R.attr#configChanges} attribute.  This will be
+ set by default for applications that target an earlier version
+ than {@link android.os.Build.VERSION_CODES#HONEYCOMB_MR2}...
+ &lt;b&gt;however&lt;/b&gt;, you will not see the bit set here becomes some
+ applications incorrectly compare {@link #configChanges} against
+ an absolute value rather than correctly masking out the bits
+ they are interested in.  Please don't do that, thanks.
+*/
+CONFIG_SCREEN_SIZE : &quot;1024&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_SMALLEST_SCREEN_SIZE'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle the smallest screen size. Set from the
+ {@link android.R.attr#configChanges} attribute.  This will be
+ set by default for applications that target an earlier version
+ than {@link android.os.Build.VERSION_CODES#HONEYCOMB_MR2}...
+ &lt;b&gt;however&lt;/b&gt;, you will not see the bit set here becomes some
+ applications incorrectly compare {@link #configChanges} against
+ an absolute value rather than correctly masking out the bits
+ they are interested in.  Please don't do that, thanks.
+*/
+CONFIG_SMALLEST_SCREEN_SIZE : &quot;2048&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_DENSITY'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle density changes. Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_DENSITY : &quot;4096&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_LAYOUT_DIRECTION'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle the change to layout direction. Set from the
+ {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_LAYOUT_DIRECTION : &quot;8192&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_COLOR_MODE'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle the change to the display color gamut or dynamic
+ range. Set from the {@link android.R.attr#configChanges} attribute.
+*/
+CONFIG_COLOR_MODE : &quot;16384&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_ASSETS_PATHS'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle asset path changes.  Set from the {@link android.R.attr#configChanges}
+ attribute. This is not a core resource configuration, but a higher-level value, so its
+ constant starts at the high bits.
+ @hide We do not want apps handling this yet, but we do need some kind of bit for diffs.
+*/
+CONFIG_ASSETS_PATHS : &quot;-2147483648&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_FONT_SCALE'>/** Bit in {@link #configChanges} that indicates that the activity
+</span> can itself handle changes to the font scaling factor.  Set from the
+ {@link android.R.attr#configChanges} attribute.  This is
+ not a core resource configuration, but a higher-level value, so its
+ constant starts at the high bits.
+*/
+CONFIG_FONT_SCALE : &quot;1073741824&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_WINDOW_CONFIGURATION'>/** Bit indicating changes to window configuration that isn't exposed to apps.
+</span> This is for internal use only and apps don't handle it.
+ @hide
+ {@link android.content.pm.ActivityInfo.Configuration}.
+*/
+CONFIG_WINDOW_CONFIGURATION : &quot;536870912&quot;,
+<span id='android-content-pm-ActivityInfo-property-CONFIG_NATIVE_BITS'>/**@hide
+</span> Unfortunately the constants for config changes in native code are
+ different from ActivityInfo. :(  Here are the values we should use for the
+ native side given the bit we have assigned in ActivityInfo.
+*/
+CONFIG_NATIVE_BITS : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-configChanges'>/** Bit mask of kinds of configuration changes that this activity
+</span> can handle itself (without being restarted by the system).
+ Contains any combination of {@link #CONFIG_FONT_SCALE},
+ {@link #CONFIG_MCC}, {@link #CONFIG_MNC},
+ {@link #CONFIG_LOCALE}, {@link #CONFIG_TOUCHSCREEN},
+ {@link #CONFIG_KEYBOARD}, {@link #CONFIG_NAVIGATION},
+ {@link #CONFIG_ORIENTATION}, {@link #CONFIG_SCREEN_LAYOUT},
+ {@link #CONFIG_DENSITY}, {@link #CONFIG_LAYOUT_DIRECTION} and
+ {@link #CONFIG_COLOR_MODE}.
+ Set from the {@link android.R.attr#configChanges} attribute.
+*/
+configChanges : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-softInputMode'>/** The desired soft input mode for this activity's main window.
+</span> Set from the {@link android.R.attr#windowSoftInputMode} attribute
+ in the activity's manifest.  May be any of the same values allowed
+ for {@link android.view.WindowManager.LayoutParams#softInputMode
+ WindowManager.LayoutParams.softInputMode}.  If 0 (unspecified),
+ the mode from the theme will be used.
+*/
+softInputMode : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-uiOptions'>/** The desired extra UI options for this activity and its main window.
+</span> Set from the {@link android.R.attr#uiOptions} attribute in the
+ activity's manifest.
+*/
+uiOptions : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW'>/** Flag for use with {@link #uiOptions}.
+</span> Indicates that the action bar should put all action items in a separate bar when
+ the screen is narrow.
+ &lt;p&gt;This value corresponds to &quot;splitActionBarWhenNarrow&quot; for the {@link #uiOptions} XML
+ attribute.
+*/
+UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-parentActivityName'>/** If defined, the activity named here is the logical parent of this activity.
+</span>*/
+parentActivityName : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-rotationAnimation'>/** Screen rotation animation desired by the activity, with values as defined
+</span> for {@link android.view.WindowManager.LayoutParams#rotationAnimation}.
+
+ -1 means to use the system default.
+
+ @hide
+*/
+rotationAnimation : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-LOCK_TASK_LAUNCH_MODE_DEFAULT'>/**@hide */
+</span>LOCK_TASK_LAUNCH_MODE_DEFAULT : &quot;0&quot;,
+<span id='android-content-pm-ActivityInfo-property-LOCK_TASK_LAUNCH_MODE_NEVER'>/**@hide */
+</span>LOCK_TASK_LAUNCH_MODE_NEVER : &quot;1&quot;,
+<span id='android-content-pm-ActivityInfo-property-LOCK_TASK_LAUNCH_MODE_ALWAYS'>/**@hide */
+</span>LOCK_TASK_LAUNCH_MODE_ALWAYS : &quot;2&quot;,
+<span id='android-content-pm-ActivityInfo-property-LOCK_TASK_LAUNCH_MODE_IF_WHITELISTED'>/**@hide */
+</span>LOCK_TASK_LAUNCH_MODE_IF_WHITELISTED : &quot;3&quot;,
+<span id='android-content-pm-ActivityInfo-property-lockTaskLaunchMode'>/** Value indicating if the activity is to be locked at startup. Takes on the values from
+</span> {@link android.R.attr#lockTaskMode}.
+ @hide
+*/
+lockTaskLaunchMode : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-windowLayout'>/** Information about desired position and size of activity on the display when
+</span> it is first started.
+*/
+windowLayout : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-ActivityInfo-method-activityInfoConfigJavaToNative'>/**Convert Java change bits to native.
+</span>@hide 
+*/
+activityInfoConfigJavaToNative : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-activityInfoConfigNativeToJava'>/**Convert native change bits to Java.
+</span>@hide 
+*/
+activityInfoConfigNativeToJava : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-getRealConfigChanged'>/**
+</span>@hide Unfortunately some developers (OpenFeint I am looking at you) have
+ compared the configChanges bit field against absolute values, so if we
+ introduce a new bit they break.  To deal with that, we will make sure
+ the public field will not have a value that breaks them, and let the
+ framework call here to get the real value.
+*/
+getRealConfigChanged : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-lockTaskLaunchModeToString'>/**
+</span>@hide 
+*/
+lockTaskLaunchModeToString : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-getThemeResource'>/**Return the theme resource identifier to use for this activity.  If
+</span> the activity defines a theme, that is used; else, the application
+ theme is used.
+@return {Number} The theme associated with this activity.
+*/
+getThemeResource : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-hasFixedAspectRatio'>/**Returns true if the activity has maximum or minimum aspect ratio.
+</span>@hide 
+*/
+hasFixedAspectRatio : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-isFixedOrientation'>/**Returns true if the activity's orientation is fixed.
+</span>@hide 
+*/
+isFixedOrientation : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-isFixedOrientationLandscape'>/**Returns true if the activity's orientation is fixed to landscape.
+</span>@hide 
+*/
+isFixedOrientationLandscape : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-isFixedOrientationPortrait'>/**Returns true if the activity's orientation is fixed to portrait.
+</span>@hide 
+*/
+isFixedOrientationPortrait : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-supportsPictureInPicture'>/**Returns true if the activity supports picture-in-picture.
+</span>@hide 
+*/
+supportsPictureInPicture : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-isResizeableMode'>/**
+</span>@hide 
+*/
+isResizeableMode : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-isPreserveOrientationMode'>/**
+</span>@hide 
+*/
+isPreserveOrientationMode : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-resizeModeToString'>/**
+</span>@hide 
+*/
+resizeModeToString : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-isTranslucentOrFloating'>/**Determines whether the {@link android.content.pm.PackageParser.Activity} is considered translucent or floating.
+</span>@hide 
+*/
+isTranslucentOrFloating : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-screenOrientationToString'>/**Convert the screen orientation constant to a human readable format.
+</span>@hide 
+*/
+screenOrientationToString : function(  ) {},
+
+<span id='android-content-pm-ActivityInfo-method-colorModeToString'>/**
+</span>@hide 
+*/
+colorModeToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

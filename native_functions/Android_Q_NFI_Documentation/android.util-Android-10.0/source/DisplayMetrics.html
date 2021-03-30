@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-DisplayMetrics'>/**@class android.util.DisplayMetrics
+</span>@extends java.lang.Object
+
+ A structure describing general information about a display, such as its
+ size, density, and font scaling.
+ &lt;p&gt;To access the DisplayMetrics members, initialize an object like this:&lt;/p&gt;
+ &lt;pre&gt; DisplayMetrics metrics = new DisplayMetrics();
+ getWindowManager().getDefaultDisplay().getMetrics(metrics);&lt;/pre&gt;
+*/
+var DisplayMetrics = {
+
+<span id='android-util-DisplayMetrics-property-DENSITY_LOW'>/** Standard quantized DPI for low-density screens.
+</span>*/
+DENSITY_LOW : &quot;120&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_140'>/** Intermediate density for screens that sit between {@link #DENSITY_LOW} (120dpi) and
+</span> {@link #DENSITY_MEDIUM} (160dpi). This is not a density that applications should target,
+ instead relying on the system to scale their {@link #DENSITY_MEDIUM} assets for them.
+*/
+DENSITY_140 : &quot;140&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_MEDIUM'>/** Standard quantized DPI for medium-density screens.
+</span>*/
+DENSITY_MEDIUM : &quot;160&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_180'>/** Intermediate density for screens that sit between {@link #DENSITY_MEDIUM} (160dpi) and
+</span> {@link #DENSITY_HIGH} (240dpi). This is not a density that applications should target,
+ instead relying on the system to scale their {@link #DENSITY_HIGH} assets for them.
+*/
+DENSITY_180 : &quot;180&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_200'>/** Intermediate density for screens that sit between {@link #DENSITY_MEDIUM} (160dpi) and
+</span> {@link #DENSITY_HIGH} (240dpi). This is not a density that applications should target,
+ instead relying on the system to scale their {@link #DENSITY_HIGH} assets for them.
+*/
+DENSITY_200 : &quot;200&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_TV'>/** This is a secondary density, added for some common screen configurations.
+</span> It is recommended that applications not generally target this as a first
+ class density -- that is, don't supply specific graphics for this
+ density, instead allow the platform to scale from other densities
+ (typically {@link #DENSITY_HIGH}) as
+ appropriate.  In most cases (such as using bitmaps in
+ {@link android.graphics.drawable.Drawable}) the platform
+ can perform this scaling at load time, so the only cost is some slight
+ startup runtime overhead.
+
+ &lt;p&gt;This density was original introduced to correspond with a
+ 720p TV screen: the density for 1080p televisions is
+ {@link #DENSITY_XHIGH}, and the value here provides the same UI
+ size for a TV running at 720p.  It has also found use in 7&quot; tablets,
+ when these devices have 1280x720 displays.
+*/
+DENSITY_TV : &quot;213&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_220'>/** Intermediate density for screens that sit between {@link #DENSITY_MEDIUM} (160dpi) and
+</span> {@link #DENSITY_HIGH} (240dpi). This is not a density that applications should target,
+ instead relying on the system to scale their {@link #DENSITY_HIGH} assets for them.
+*/
+DENSITY_220 : &quot;220&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_HIGH'>/** Standard quantized DPI for high-density screens.
+</span>*/
+DENSITY_HIGH : &quot;240&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_260'>/** Intermediate density for screens that sit between {@link #DENSITY_HIGH} (240dpi) and
+</span> {@link #DENSITY_XHIGH} (320dpi). This is not a density that applications should target,
+ instead relying on the system to scale their {@link #DENSITY_XHIGH} assets for them.
+*/
+DENSITY_260 : &quot;260&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_280'>/** Intermediate density for screens that sit between {@link #DENSITY_HIGH} (240dpi) and
+</span> {@link #DENSITY_XHIGH} (320dpi). This is not a density that applications should target,
+ instead relying on the system to scale their {@link #DENSITY_XHIGH} assets for them.
+*/
+DENSITY_280 : &quot;280&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_300'>/** Intermediate density for screens that sit between {@link #DENSITY_HIGH} (240dpi) and
+</span> {@link #DENSITY_XHIGH} (320dpi). This is not a density that applications should target,
+ instead relying on the system to scale their {@link #DENSITY_XHIGH} assets for them.
+*/
+DENSITY_300 : &quot;300&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_XHIGH'>/** Standard quantized DPI for extra-high-density screens.
+</span>*/
+DENSITY_XHIGH : &quot;320&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_340'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XHIGH} (320 dpi) and {@link #DENSITY_XXHIGH} (480 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXHIGH} assets for them.
+*/
+DENSITY_340 : &quot;340&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_360'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XHIGH} (320 dpi) and {@link #DENSITY_XXHIGH} (480 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXHIGH} assets for them.
+*/
+DENSITY_360 : &quot;360&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_400'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XHIGH} (320 dpi) and {@link #DENSITY_XXHIGH} (480 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXHIGH} assets for them.
+*/
+DENSITY_400 : &quot;400&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_420'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XHIGH} (320 dpi) and {@link #DENSITY_XXHIGH} (480 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXHIGH} assets for them.
+*/
+DENSITY_420 : &quot;420&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_440'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XHIGH} (320 dpi) and {@link #DENSITY_XXHIGH} (480 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXHIGH} assets for them.
+*/
+DENSITY_440 : &quot;440&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_450'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XHIGH} (320 dpi) and {@link #DENSITY_XXHIGH} (480 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXHIGH} assets for them.
+*/
+DENSITY_450 : &quot;450&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_XXHIGH'>/** Standard quantized DPI for extra-extra-high-density screens.
+</span>*/
+DENSITY_XXHIGH : &quot;480&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_560'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XXHIGH} (480 dpi) and {@link #DENSITY_XXXHIGH} (640 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXXHIGH} assets for them.
+*/
+DENSITY_560 : &quot;560&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_600'>/** Intermediate density for screens that sit somewhere between
+</span> {@link #DENSITY_XXHIGH} (480 dpi) and {@link #DENSITY_XXXHIGH} (640 dpi).
+ This is not a density that applications should target, instead relying
+ on the system to scale their {@link #DENSITY_XXXHIGH} assets for them.
+*/
+DENSITY_600 : &quot;600&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_XXXHIGH'>/** Standard quantized DPI for extra-extra-extra-high-density screens.  Applications
+</span> should not generally worry about this density; relying on XHIGH graphics
+ being scaled up to it should be sufficient for almost all cases.  A typical
+ use of this density would be 4K television screens -- 3840x2160, which
+ is 2x a traditional HD 1920x1080 screen which runs at DENSITY_XHIGH.
+*/
+DENSITY_XXXHIGH : &quot;640&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_DEFAULT'>/** The reference density used throughout the system.
+</span>*/
+DENSITY_DEFAULT : &quot;160&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_DEFAULT_SCALE'>/** Scaling factor to convert a density in DPI units to the density scale.
+</span> @hide
+*/
+DENSITY_DEFAULT_SCALE : &quot;0.00625&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_DEVICE'>/** The device's current density.
+</span> &lt;p&gt;
+ This value reflects any changes made to the device density. To obtain
+ the device's stable density, use {@link #DENSITY_DEVICE_STABLE}.
+
+ @hide This value should not be used.
+ @deprecated Use {@link #DENSITY_DEVICE_STABLE} to obtain the stable
+             device density or {@link #densityDpi} to obtain the current
+             density for a specific display.
+*/
+DENSITY_DEVICE : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-DENSITY_DEVICE_STABLE'>/** The device's stable density.
+</span> &lt;p&gt;
+ This value is constant at run time and may not reflect the current
+ display density. To obtain the current density for a specific display,
+ use {@link #densityDpi}.
+*/
+DENSITY_DEVICE_STABLE : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-widthPixels'>/** The absolute width of the available display size in pixels.
+</span>*/
+widthPixels : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-heightPixels'>/** The absolute height of the available display size in pixels.
+</span>*/
+heightPixels : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-density'>/** The logical density of the display.  This is a scaling factor for the
+</span> Density Independent Pixel unit, where one DIP is one pixel on an
+ approximately 160 dpi screen (for example a 240x320, 1.5&quot;x2&quot; screen), 
+ providing the baseline of the system's display. Thus on a 160dpi screen 
+ this density value will be 1; on a 120 dpi screen it would be .75; etc.
+  
+ &lt;p&gt;This value does not exactly follow the real screen size (as given by 
+ {@link #xdpi} and {@link #ydpi}, but rather is used to scale the size of
+ the overall UI in steps based on gross changes in the display dpi.  For 
+ example, a 240x320 screen will have a density of 1 even if its width is 
+ 1.8&quot;, 1.3&quot;, etc. However, if the screen resolution is increased to 
+ 320x480 but the screen size remained 1.5&quot;x2&quot; then the density would be 
+ increased (probably to 1.5).
+
+ @see #DENSITY_DEFAULT
+*/
+density : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-densityDpi'>/** The screen density expressed as dots-per-inch.  May be either
+</span> {@link #DENSITY_LOW}, {@link #DENSITY_MEDIUM}, or {@link #DENSITY_HIGH}.
+*/
+densityDpi : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-scaledDensity'>/** A scaling factor for fonts displayed on the display.  This is the same
+</span> as {@link #density}, except that it may be adjusted in smaller
+ increments at runtime based on a user preference for the font size.
+*/
+scaledDensity : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-xdpi'>/** The exact physical pixels per inch of the screen in the X dimension.
+</span>*/
+xdpi : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-ydpi'>/** The exact physical pixels per inch of the screen in the Y dimension.
+</span>*/
+ydpi : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-noncompatWidthPixels'>/** The reported display width prior to any compatibility mode scaling
+</span> being applied.
+ @hide
+*/
+noncompatWidthPixels : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-noncompatHeightPixels'>/** The reported display height prior to any compatibility mode scaling
+</span> being applied.
+ @hide
+*/
+noncompatHeightPixels : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-noncompatDensity'>/** The reported display density prior to any compatibility mode scaling
+</span> being applied.
+ @hide
+*/
+noncompatDensity : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-noncompatDensityDpi'>/** The reported display density prior to any compatibility mode scaling
+</span> being applied.
+ @hide
+*/
+noncompatDensityDpi : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-noncompatScaledDensity'>/** The reported scaled density prior to any compatibility mode scaling
+</span> being applied.
+ @hide
+*/
+noncompatScaledDensity : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-noncompatXdpi'>/** The reported display xdpi prior to any compatibility mode scaling
+</span> being applied.
+ @hide
+*/
+noncompatXdpi : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-property-noncompatYdpi'>/** The reported display ydpi prior to any compatibility mode scaling
+</span> being applied.
+ @hide
+*/
+noncompatYdpi : &quot;null&quot;,
+<span id='android-util-DisplayMetrics-method-setTo'>/**
+</span>*/
+setTo : function(  ) {},
+
+<span id='android-util-DisplayMetrics-method-setToDefaults'>/**
+</span>*/
+setToDefaults : function(  ) {},
+
+<span id='android-util-DisplayMetrics-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-util-DisplayMetrics-method-equals'>/**Returns true if these display metrics equal the other display metrics.
+</span>@param {Object {DisplayMetrics}} other The display metrics with which to compare.
+@return {Boolean} True if the display metrics are equal.
+*/
+equals : function(  ) {},
+
+<span id='android-util-DisplayMetrics-method-equalsPhysical'>/**Returns true if the physical aspects of the two display metrics
+</span> are equal.  This ignores the scaled density, which is a logical
+ attribute based on the current desired font size.
+@param {Object {DisplayMetrics}} other The display metrics with which to compare.
+@return {Boolean} True if the display metrics are equal.
+@hide 
+*/
+equalsPhysical : function(  ) {},
+
+<span id='android-util-DisplayMetrics-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-util-DisplayMetrics-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

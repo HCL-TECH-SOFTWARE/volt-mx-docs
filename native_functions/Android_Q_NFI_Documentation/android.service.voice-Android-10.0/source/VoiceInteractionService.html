@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-voice-VoiceInteractionService'>/**@class android.service.voice.VoiceInteractionService
+</span>@extends android.app.Service
+
+ Top-level service of the current global voice interactor, which is providing
+ support for hotwording, the back-end of a {@link android.app.VoiceInteractor}, etc.
+ The current VoiceInteractionService that has been selected by the user is kept
+ always running by the system, to allow it to do things like listen for hotwords
+ in the background to instigate voice interactions.
+
+ &lt;p&gt;Because this service is always running, it should be kept as lightweight as
+ possible.  Heavy-weight operations (including showing UI) should be implemented
+ in the associated {@link android.service.voice.VoiceInteractionSessionService} when
+ an actual voice interaction is taking place, and that service should run in a
+ separate process from this one.
+*/
+var VoiceInteractionService = {
+
+<span id='android-service-voice-VoiceInteractionService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span> To be supported, the service must also require the
+ {@link android.Manifest.permission#BIND_VOICE_INTERACTION} permission so
+ that other applications can not abuse it.
+*/
+SERVICE_INTERFACE : &quot;android.service.voice.VoiceInteractionService&quot;,
+<span id='android-service-voice-VoiceInteractionService-property-SERVICE_META_DATA'>/** Name under which a VoiceInteractionService component publishes information about itself.
+</span> This meta-data should reference an XML resource containing a
+ &lt;code&gt;&amp;lt;{@link android.R.styleable#VoiceInteractionService voice-interaction-service}&amp;gt;&lt;/code&gt; tag.
+*/
+SERVICE_META_DATA : &quot;android.voice_interaction&quot;,
+<span id='android-service-voice-VoiceInteractionService-method-onLaunchVoiceAssistFromKeyguard'>/**Called when a user has activated an affordance to launch voice assist from the Keyguard.
+</span>
+ &lt;p&gt;This method will only be called if the VoiceInteractionService has set
+ {@link android.R.attr#supportsLaunchVoiceAssistFromKeyguard} and the Keyguard is showing.&lt;/p&gt;
+
+ &lt;p&gt;A valid implementation must start a new activity that should use {@link android.view.WindowManager.LayoutParams#FLAG_SHOW_WHEN_LOCKED} to display
+ on top of the lock screen.&lt;/p&gt;
+*/
+onLaunchVoiceAssistFromKeyguard : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-isActiveService'>/**Check whether the given service component is the currently active
+</span> VoiceInteractionService.
+*/
+isActiveService : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-setDisabledShowContext'>/**Set contextual options you would always like to have disabled when a session
+</span> is shown.  The flags may be any combination of
+ {@link android.service.voice.VoiceInteractionSession#SHOW_WITH_ASSIST android.service.voice.VoiceInteractionSession.SHOW_WITH_ASSIST} and
+ {@link android.service.voice.VoiceInteractionSession#SHOW_WITH_SCREENSHOT
+ android.service.voice.VoiceInteractionSession.SHOW_WITH_SCREENSHOT}.
+*/
+setDisabledShowContext : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-getDisabledShowContext'>/**Return the value set by {@link #setDisabledShowContext}.
+</span>*/
+getDisabledShowContext : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-showSession'>/**Request that the associated {@link android.service.voice.VoiceInteractionSession} be
+</span> shown to the user, starting it if necessary.
+@param {Object {Bundle}} args Arbitrary arguments that will be propagated to the session.
+@param {Number} flags Indicates additional optional behavior that should be performed.  May
+ be any combination of
+ {@link VoiceInteractionSession#SHOW_WITH_ASSIST VoiceInteractionSession.SHOW_WITH_ASSIST} and
+ {@link VoiceInteractionSession#SHOW_WITH_SCREENSHOT
+ VoiceInteractionSession.SHOW_WITH_SCREENSHOT}
+ to request that the system generate and deliver assist data on the current foreground
+ app as part of showing the session UI.
+*/
+showSession : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-onGetSupportedVoiceActions'>/**Request to query for what extended voice actions this service supports. This method will
+</span> be called when the system checks the supported actions of this
+ {@link android.service.voice.VoiceInteractionService}. Supported actions may be delivered to
+ {@link android.service.voice.VoiceInteractionSession} later to request a session to perform an action.
+
+ &lt;p&gt;Voice actions are defined in support libraries and could vary based on platform context.
+ For example, car related voice actions will be defined in car support libraries.
+@param {Object {java.util.Set}} voiceActions A set of checked voice actions.
+@return {Object {java.util.Set}} Returns a subset of checked voice actions. Additional voice actions in the
+ returned set will be ignored. Returns empty set if no actions are supported.
+*/
+onGetSupportedVoiceActions : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-onReady'>/**Called during service initialization to tell you when the system is ready
+</span> to receive interaction from it. You should generally do initialization here
+ rather than in {@link #onCreate}. Methods such as {@link #showSession} and
+ {@link #createAlwaysOnHotwordDetector}
+ will not be operational until this point.
+*/
+onReady : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-onShutdown'>/**Called during service de-initialization to tell you when the system is shutting the
+</span> service down.
+ At this point this service may no longer be the active {@link android.service.voice.VoiceInteractionService}.
+*/
+onShutdown : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-createAlwaysOnHotwordDetector'>/**Creates an {@link android.service.voice.AlwaysOnHotwordDetector} for the given keyphrase and locale.
+</span> This instance must be retained and used by the client.
+ Calling this a second time invalidates the previously created hotword detector
+ which can no longer be used to manage recognition.
+@param {String} keyphrase The keyphrase that's being used, for example &quot;Hello Android&quot;.
+@param {Object {Locale}} locale The locale for which the enrollment needs to be performed.
+@param {Object {AlwaysOnHotwordDetector.Callback}} callback The callback to notify of detection events.
+@return {Object {android.service.voice.AlwaysOnHotwordDetector}} An always-on hotword detector for the given keyphrase and locale.
+*/
+createAlwaysOnHotwordDetector : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-isKeyphraseAndLocaleSupportedForHotword'>/**Checks if a given keyphrase and locale are supported to create an
+</span> {@link android.service.voice.AlwaysOnHotwordDetector}.
+@return {Boolean} true if the keyphrase and locale combination is supported, false otherwise.
+@hide 
+*/
+isKeyphraseAndLocaleSupportedForHotword : function(  ) {},
+
+<span id='android-service-voice-VoiceInteractionService-method-setUiHints'>/**Provide hints to be reflected in the system UI.
+</span>@param {Object {Bundle}} hints Arguments used to show UI.
+*/
+setUiHints : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

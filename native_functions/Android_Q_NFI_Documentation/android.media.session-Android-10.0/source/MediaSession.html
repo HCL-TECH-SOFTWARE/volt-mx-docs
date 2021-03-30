@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-session-MediaSession'>/**@class android.media.session.MediaSession
+</span>@extends java.lang.Object
+
+ Allows interaction with media controllers, volume keys, media buttons, and
+ transport controls.
+ &lt;p&gt;
+ A MediaSession should be created when an app wants to publish media playback
+ information or handle media keys. In general an app only needs one session
+ for all playback, though multiple sessions can be created to provide finer
+ grain controls of media.
+ &lt;p&gt;
+ Once a session is created the owner of the session may pass its
+ {@link #getSessionToken() session token} to other processes to allow them to
+ create a {@link android.media.session.MediaController} to interact with the session.
+ &lt;p&gt;
+ To receive commands, media keys, and other events a {@link android.media.session.MediaController.Callback} must be
+ set with {@link #setCallback}(Callback) and {@link #setActive(boolean)
+ setActive(true)} must be called.
+ &lt;p&gt;
+ When an app is finished performing playback it must call {@link #release}()
+ to clean up the session and notify any controllers.
+ &lt;p&gt;
+ MediaSession objects are thread safe.
+*/
+var MediaSession = {
+
+<span id='android-media-session-MediaSession-property-FLAG_HANDLES_MEDIA_BUTTONS'>/** Set this flag on the session to indicate that it can handle media button
+</span> events.
+ @deprecated This flag is no longer used. All media sessions are expected to handle media
+ button events now.
+*/
+FLAG_HANDLES_MEDIA_BUTTONS : &quot;1&quot;,
+<span id='android-media-session-MediaSession-property-FLAG_HANDLES_TRANSPORT_CONTROLS'>/** Set this flag on the session to indicate that it handles transport
+</span> control commands through its {@link android.media.session.MediaController.Callback}.
+ @deprecated This flag is no longer used. All media sessions are expected to handle transport
+ controls now.
+*/
+FLAG_HANDLES_TRANSPORT_CONTROLS : &quot;2&quot;,
+<span id='android-media-session-MediaSession-property-FLAG_EXCLUSIVE_GLOBAL_PRIORITY'>/** System only flag for a session that needs to have priority over all other
+</span> sessions. This flag ensures this session will receive media button events
+ regardless of the current ordering in the system.
+
+ @hide
+*/
+FLAG_EXCLUSIVE_GLOBAL_PRIORITY : &quot;65536&quot;,
+<span id='android-media-session-MediaSession-property-INVALID_UID'>/** @hide
+</span>*/
+INVALID_UID : &quot;-1&quot;,
+<span id='android-media-session-MediaSession-property-INVALID_PID'>/** @hide
+</span>*/
+INVALID_PID : &quot;-1&quot;,
+<span id='android-media-session-MediaSession-method-setCallback'>/**Set the callback to receive updates for the MediaSession. This includes
+</span> media button events and transport controls. The caller's thread will be
+ used to post updates.
+ &lt;p&gt;
+ Set the callback to null to stop receiving updates.
+@param {Object {MediaSession.Callback}} callback The callback object
+*/
+setCallback : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setCallback'>/**Set the callback to receive updates for the MediaSession. This includes
+</span> media button events and transport controls.
+ &lt;p&gt;
+ Set the callback to null to stop receiving updates.
+@param {Object {MediaSession.Callback}} callback The callback to receive updates on.
+@param {Object {Handler}} handler The handler that events should be posted on.
+*/
+setCallback : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setSessionActivity'>/**Set an intent for launching UI for this Session. This can be used as a
+</span> quick link to an ongoing media screen. The intent should be for an
+ activity that may be started using {@link Activity#startActivity(Intent)}.
+@param {Object {PendingIntent}} pi The intent to launch to show UI for this Session.
+*/
+setSessionActivity : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setMediaButtonReceiver'>/**Set a pending intent for your media button receiver to allow restarting
+</span> playback after the session has been stopped. If your app is started in
+ this way an {@link Intent#ACTION_MEDIA_BUTTON} intent will be sent via
+ the pending intent.
+@param {Object {PendingIntent}} mbr The {@link PendingIntent} to send the media button event to.
+*/
+setMediaButtonReceiver : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setFlags'>/**Set any flags for the session.
+</span>@param {Number} flags The flags to set for this session.
+*/
+setFlags : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setPlaybackToLocal'>/**Set the attributes for this session's audio. This will affect the
+</span> system's volume handling for this session. If
+ {@link #setPlaybackToRemote} was previously called it will stop receiving
+ volume commands and the system will begin sending volume changes to the
+ appropriate stream.
+ &lt;p&gt;
+ By default sessions use attributes for media.
+@param {Object {AudioAttributes}} attributes The {@link AudioAttributes} for this session's audio.
+*/
+setPlaybackToLocal : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setPlaybackToRemote'>/**Configure this session to use remote volume handling. This must be called
+</span> to receive volume button events, otherwise the system will adjust the
+ appropriate stream volume for this session. If
+ {@link #setPlaybackToLocal} was previously called the system will stop
+ handling volume changes for this session and pass them to the volume
+ provider instead.
+@param {Object {VolumeProvider}} volumeProvider The provider that will handle volume changes. May
+            not be null.
+*/
+setPlaybackToRemote : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setActive'>/**Set if this session is currently active and ready to receive commands. If
+</span> set to false your session's controller may not be discoverable. You must
+ set the session to active before it can start receiving media button
+ events or transport commands.
+@param {Boolean} active Whether this session is active or not.
+*/
+setActive : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-isActive'>/**Get the current active state of this session.
+</span>@return {Boolean} True if the session is active, false otherwise.
+*/
+isActive : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-sendSessionEvent'>/**Send a proprietary event to all MediaControllers listening to this
+</span> Session. It's up to the Controller/Session owner to determine the meaning
+ of any events.
+@param {String} event The name of the event to send
+@param {Object {Bundle}} extras Any extras included with the event
+*/
+sendSessionEvent : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-release'>/**This must be called when an app has finished performing playback. If
+</span> playback is expected to start again shortly the session can be left open,
+ but it must be released if your activity or service is being destroyed.
+*/
+release : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-getSessionToken'>/**Retrieve a token object that can be used by apps to create a
+</span> {@link android.media.session.MediaController} for interacting with this session. The owner of
+ the session is responsible for deciding how to distribute these tokens.
+@return {Object {android.media.session.MediaSession.Token}} A token that can be used to create a MediaController for this
+         session
+*/
+getSessionToken : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-getController'>/**Get a controller for this session. This is a convenience method to avoid
+</span> having to cache your own controller in process.
+@return {Object {android.media.session.MediaController}} A controller for this session.
+*/
+getController : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setPlaybackState'>/**Update the current playback state.
+</span>@param {Object {PlaybackState}} state The current state of playback
+*/
+setPlaybackState : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setMetadata'>/**Update the current metadata. New metadata can be created using
+</span> {@link android.media.MediaMetadata.Builder}. This operation may take time proportional to
+ the size of the bitmap to replace large bitmaps with a scaled down copy.
+@param {Object {MediaMetadata}} metadata The new metadata
+@see android.media.MediaMetadata.Builder#putBitmap
+*/
+setMetadata : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setQueue'>/**Update the list of items in the play queue. It is an ordered list and
+</span> should contain the current item, and previous or upcoming items if they
+ exist. Specify null if there is no current play queue.
+ &lt;p&gt;
+ The queue should be of reasonable size. If the play queue is unbounded
+ within your app, it is better to send a reasonable amount in a sliding
+ window instead.
+@param {Object {java.util.List}} queue A list of items in the play queue.
+*/
+setQueue : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setQueueTitle'>/**Set the title of the play queue. The UI should display this title along
+</span> with the play queue itself.
+ e.g. &quot;Play Queue&quot;, &quot;Now Playing&quot;, or an album name.
+@param {Object {CharSequence}} title The title of the play queue.
+*/
+setQueueTitle : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setRatingType'>/**Set the style of rating used by this session. Apps trying to set the
+</span> rating should use this style. Must be one of the following:
+ &lt;ul&gt;
+ &lt;li&gt;{@link Rating#RATING_NONE}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_3_STARS}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_4_STARS}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_5_STARS}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_HEART}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_PERCENTAGE}&lt;/li&gt;
+ &lt;li&gt;{@link Rating#RATING_THUMB_UP_DOWN}&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setRatingType : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-setExtras'>/**Set some extras that can be associated with the {@link android.media.session.MediaSession}. No assumptions should
+</span> be made as to how a {@link android.media.session.MediaController} will handle these extras.
+ Keys should be fully qualified (e.g. com.example.MY_EXTRA) to avoid conflicts.
+@param {Object {Bundle}} extras The extras associated with the {@link MediaSession}.
+*/
+setExtras : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-getCurrentControllerInfo'>/**Gets the controller information who sent the current request.
+</span> &lt;p&gt;
+ Note: This is only valid while in a request callback, such as {@link android.media.session.MediaController.Callback#onPlay}.
+@throws IllegalStateException If this method is called outside of {@link Callback} methods.
+@see MediaSessionManager#isTrustedForMediaControl(RemoteUserInfo)
+*/
+getCurrentControllerInfo : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-notifyRemoteVolumeChanged'>/**Notify the system that the remote volume changed.
+</span>@param {Object {VolumeProvider}} provider The provider that is handling volume changes.
+@hide 
+*/
+notifyRemoteVolumeChanged : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-getCallingPackage'>/**Returns the name of the package that sent the last media button, transport control, or
+</span> command from controllers and the system. This is only valid while in a request callback, such
+ as {@link android.media.session.MediaController.Callback#onPlay}.
+@hide 
+*/
+getCallingPackage : function(  ) {},
+
+<span id='android-media-session-MediaSession-method-isActiveState'>/**Return true if this is considered an active playback state.
+</span>@hide 
+*/
+isActiveState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

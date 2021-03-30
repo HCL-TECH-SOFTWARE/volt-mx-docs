@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-health-UidHealthStats'>/**@class android.os.health.UidHealthStats
+</span>@extends java.lang.Object
+
+ Keys for {@link android.os.health.HealthStats} returned from
+ {@link android.os.health.SystemHealthManager#takeUidSnapshot(int) android.os.health.SystemHealthManager.takeUidSnapshot(int)},
+ {@link android.os.health.SystemHealthManager#takeMyUidSnapshot() android.os.health.SystemHealthManager.takeMyUidSnapshot()}, and
+ {@link android.os.health.SystemHealthManager#takeUidSnapshots(int[]) android.os.health.SystemHealthManager.takeUidSnapshots(int[])}.
+*/
+var UidHealthStats = {
+
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_REALTIME_BATTERY_MS'>/** How many milliseconds this statistics report covers in wall-clock time while the
+</span> device was on battery including both screen-on and screen-off time.
+*/
+MEASUREMENT_REALTIME_BATTERY_MS : &quot;10001&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_UPTIME_BATTERY_MS'>/** How many milliseconds this statistics report covers that the CPU was running while the
+</span> device was on battery including both screen-on and screen-off time.
+*/
+MEASUREMENT_UPTIME_BATTERY_MS : &quot;10002&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_REALTIME_SCREEN_OFF_BATTERY_MS'>/** How many milliseconds this statistics report covers in wall-clock time while the
+</span> device was on battery including both screen-on and screen-off time.
+*/
+MEASUREMENT_REALTIME_SCREEN_OFF_BATTERY_MS : &quot;10003&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_UPTIME_SCREEN_OFF_BATTERY_MS'>/** How many milliseconds this statistics report covers that the CPU was running while the
+</span> device was on battery including both screen-on and screen-off time.
+*/
+MEASUREMENT_UPTIME_SCREEN_OFF_BATTERY_MS : &quot;10004&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMERS_WAKELOCKS_FULL'>/** Key for a TimerStat for the times a
+</span> {@link android.os.PowerManager#FULL_WAKE_LOCK full wake lock}
+ was acquired for this uid.
+*/
+TIMERS_WAKELOCKS_FULL : &quot;10005&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMERS_WAKELOCKS_PARTIAL'>/** Key for a TimerStat for the times a
+</span> {@link android.os.PowerManager#PARTIAL_WAKE_LOCK full wake lock}
+ was acquired for this uid.
+*/
+TIMERS_WAKELOCKS_PARTIAL : &quot;10006&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMERS_WAKELOCKS_WINDOW'>/***/
+</span>TIMERS_WAKELOCKS_WINDOW : &quot;10007&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMERS_WAKELOCKS_DRAW'>/** Key for a TimerStat for the times a system-defined wakelock was acquired
+</span> to allow the application to draw when it otherwise would not be able to
+ (e.g. on the lock screen or doze screen).
+*/
+TIMERS_WAKELOCKS_DRAW : &quot;10008&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMERS_SYNCS'>/** Key for a map of Timers for the sync adapter syncs that were done for
+</span> this uid.
+*/
+TIMERS_SYNCS : &quot;10009&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMERS_JOBS'>/** Key for a map of Timers for the {@link android.app.job.JobScheduler} jobs for
+</span> this uid.
+*/
+TIMERS_JOBS : &quot;10010&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_GPS_SENSOR'>/** Key for a timer for the applications use of the GPS sensor.
+</span>*/
+TIMER_GPS_SENSOR : &quot;10011&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMERS_SENSORS'>/** Key for a map of the sensor usage for this uid. The keys are a
+</span> string representation of the handle for the sensor.
+*/
+TIMERS_SENSORS : &quot;10012&quot;,
+<span id='android-os-health-UidHealthStats-property-STATS_PIDS'>/** Key for a HealthStats with {@link android.os.health.PidHealthStats} keys for each of the
+</span> currently running processes for this uid.
+*/
+STATS_PIDS : &quot;10013&quot;,
+<span id='android-os-health-UidHealthStats-property-STATS_PROCESSES'>/** Key for a HealthStats with {@link android.os.health.ProcessHealthStats} keys for each of the
+</span> named processes for this uid.
+*/
+STATS_PROCESSES : &quot;10014&quot;,
+<span id='android-os-health-UidHealthStats-property-STATS_PACKAGES'>/** Key for a HealthStats with {@link android.os.health.PackageHealthStats} keys for each of the
+</span> APKs that share this uid.
+*/
+STATS_PACKAGES : &quot;10015&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_IDLE_MS'>/** Key for a measurement of number of millseconds the wifi controller was
+</span> idle but turned on on behalf of this uid.
+*/
+MEASUREMENT_WIFI_IDLE_MS : &quot;10016&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_RX_MS'>/** Key for a measurement of number of millseconds the wifi transmitter was
+</span> receiving data for this uid.
+*/
+MEASUREMENT_WIFI_RX_MS : &quot;10017&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_TX_MS'>/** Key for a measurement of number of millseconds the wifi transmitter was
+</span> transmitting data for this uid.
+*/
+MEASUREMENT_WIFI_TX_MS : &quot;10018&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_POWER_MAMS'>/** Key for a measurement of the estimated number of mA*ms used by this uid
+</span> for wifi, that is to say the number of milliseconds of wifi activity
+ times the mA current during that period.
+*/
+MEASUREMENT_WIFI_POWER_MAMS : &quot;10019&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_IDLE_MS'>/** Key for a measurement of number of millseconds the bluetooth controller was
+</span> idle but turned on on behalf of this uid.
+*/
+MEASUREMENT_BLUETOOTH_IDLE_MS : &quot;10020&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_RX_MS'>/** Key for a measurement of number of millseconds the bluetooth transmitter was
+</span> receiving data for this uid.
+*/
+MEASUREMENT_BLUETOOTH_RX_MS : &quot;10021&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_TX_MS'>/** Key for a measurement of number of millseconds the bluetooth transmitter was
+</span> transmitting data for this uid.
+*/
+MEASUREMENT_BLUETOOTH_TX_MS : &quot;10022&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_POWER_MAMS'>/** Key for a measurement of the estimated number of mA*ms used by this uid
+</span> for bluetooth, that is to say the number of milliseconds of activity
+ times the mA current during that period.
+*/
+MEASUREMENT_BLUETOOTH_POWER_MAMS : &quot;10023&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_IDLE_MS'>/** Key for a measurement of number of millseconds the mobile radio controller was
+</span> idle but turned on on behalf of this uid.
+*/
+MEASUREMENT_MOBILE_IDLE_MS : &quot;10024&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_RX_MS'>/** Key for a measurement of number of millseconds the mobile radio transmitter was
+</span> receiving data for this uid.
+*/
+MEASUREMENT_MOBILE_RX_MS : &quot;10025&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_TX_MS'>/** Key for a measurement of number of millseconds the mobile radio transmitter was
+</span> transmitting data for this uid.
+*/
+MEASUREMENT_MOBILE_TX_MS : &quot;10026&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_POWER_MAMS'>/** Key for a measurement of the estimated number of mA*ms used by this uid
+</span> for mobile data, that is to say the number of milliseconds of activity
+ times the mA current during that period.
+*/
+MEASUREMENT_MOBILE_POWER_MAMS : &quot;10027&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_RUNNING_MS'>/** Key for a measurement of number of millseconds the wifi controller was
+</span> active on behalf of this uid.
+*/
+MEASUREMENT_WIFI_RUNNING_MS : &quot;10028&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_FULL_LOCK_MS'>/** Key for a measurement of number of millseconds that this uid held a full wifi lock.
+</span>*/
+MEASUREMENT_WIFI_FULL_LOCK_MS : &quot;10029&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_WIFI_SCAN'>/** Key for a timer for the count and duration of wifi scans done by this uid.
+</span>*/
+TIMER_WIFI_SCAN : &quot;10030&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_MULTICAST_MS'>/** Key for a measurement of number of millseconds that this uid was performing
+</span> multicast wifi traffic.
+*/
+MEASUREMENT_WIFI_MULTICAST_MS : &quot;10031&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_AUDIO'>/** Key for a timer for the count and duration of audio playback done by this uid.
+</span>*/
+TIMER_AUDIO : &quot;10032&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_VIDEO'>/** Key for a timer for the count and duration of video playback done by this uid.
+</span>*/
+TIMER_VIDEO : &quot;10033&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_FLASHLIGHT'>/** Key for a timer for the count and duration this uid had the flashlight turned on.
+</span>*/
+TIMER_FLASHLIGHT : &quot;10034&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_CAMERA'>/** Key for a timer for the count and duration this uid had the camera turned on.
+</span>*/
+TIMER_CAMERA : &quot;10035&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_FOREGROUND_ACTIVITY'>/** Key for a timer for the count and duration of when an activity from this uid
+</span> was the foreground activitiy.
+*/
+TIMER_FOREGROUND_ACTIVITY : &quot;10036&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_BLUETOOTH_SCAN'>/** Key for a timer for the count and duration of when this uid was doing bluetooth scans.
+</span>*/
+TIMER_BLUETOOTH_SCAN : &quot;10037&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_PROCESS_STATE_TOP_MS'>/** Key for a timer for the count and duration of when this uid was in the &quot;top&quot; process state.
+</span>*/
+TIMER_PROCESS_STATE_TOP_MS : &quot;10038&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_PROCESS_STATE_FOREGROUND_SERVICE_MS'>/** Key for a timer for the count and duration of when this uid was in the &quot;foreground service&quot;
+</span> process state.
+*/
+TIMER_PROCESS_STATE_FOREGROUND_SERVICE_MS : &quot;10039&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_PROCESS_STATE_TOP_SLEEPING_MS'>/** Key for a timer for the count and duration of when this uid was in the &quot;top sleeping&quot;
+</span> process state.
+*/
+TIMER_PROCESS_STATE_TOP_SLEEPING_MS : &quot;10040&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_PROCESS_STATE_FOREGROUND_MS'>/** Key for a timer for the count and duration of when this uid was in the &quot;foreground&quot;
+</span> process state.
+*/
+TIMER_PROCESS_STATE_FOREGROUND_MS : &quot;10041&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_PROCESS_STATE_BACKGROUND_MS'>/** Key for a timer for the count and duration of when this uid was in the &quot;background&quot;
+</span> process state.
+*/
+TIMER_PROCESS_STATE_BACKGROUND_MS : &quot;10042&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_PROCESS_STATE_CACHED_MS'>/** Key for a timer for the count and duration of when this uid was in the &quot;cached&quot; process
+</span> state.
+*/
+TIMER_PROCESS_STATE_CACHED_MS : &quot;10043&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_VIBRATOR'>/** Key for a timer for the count and duration this uid had the vibrator turned on.
+</span>*/
+TIMER_VIBRATOR : &quot;10044&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_OTHER_USER_ACTIVITY_COUNT'>/** Key for a measurement of number of software-generated user activity events caused
+</span> by the UID.  Calls to userActivity() reset the user activity countdown timer and
+ keep the screen on for the user's preferred screen-on setting.
+*/
+MEASUREMENT_OTHER_USER_ACTIVITY_COUNT : &quot;10045&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BUTTON_USER_ACTIVITY_COUNT'>/** Key for a measurement of number of user activity events due to physical button presses caused
+</span> by the UID.  Calls to userActivity() reset the user activity countdown timer and
+ keep the screen on for the user's preferred screen-on setting.
+*/
+MEASUREMENT_BUTTON_USER_ACTIVITY_COUNT : &quot;10046&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_TOUCH_USER_ACTIVITY_COUNT'>/** Key for a measurement of number of user activity events due to touch events caused
+</span> by the UID.  Calls to userActivity() reset the user activity countdown timer and
+ keep the screen on for the user's preferred screen-on setting.
+*/
+MEASUREMENT_TOUCH_USER_ACTIVITY_COUNT : &quot;10047&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_RX_BYTES'>/** Key for a measurement of number of bytes received for this uid by the mobile radio.
+</span>*/
+MEASUREMENT_MOBILE_RX_BYTES : &quot;10048&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_TX_BYTES'>/** Key for a measurement of number of bytes transmitted for this uid by the mobile radio.
+</span>*/
+MEASUREMENT_MOBILE_TX_BYTES : &quot;10049&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_RX_BYTES'>/** Key for a measurement of number of bytes received for this uid by the wifi radio.
+</span>*/
+MEASUREMENT_WIFI_RX_BYTES : &quot;10050&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_TX_BYTES'>/** Key for a measurement of number of bytes transmitted for this uid by the wifi radio.
+</span>*/
+MEASUREMENT_WIFI_TX_BYTES : &quot;10051&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_RX_BYTES'>/** Key for a measurement of number of bytes received for this uid by the bluetooth radio.
+</span>*/
+MEASUREMENT_BLUETOOTH_RX_BYTES : &quot;10052&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_TX_BYTES'>/** Key for a measurement of number of bytes transmitted for this uid by the bluetooth radio.
+</span>*/
+MEASUREMENT_BLUETOOTH_TX_BYTES : &quot;10053&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_RX_PACKETS'>/** Key for a measurement of number of packets received for this uid by the mobile radio.
+</span>*/
+MEASUREMENT_MOBILE_RX_PACKETS : &quot;10054&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_MOBILE_TX_PACKETS'>/** Key for a measurement of number of packets transmitted for this uid by the mobile radio.
+</span>*/
+MEASUREMENT_MOBILE_TX_PACKETS : &quot;10055&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_RX_PACKETS'>/** Key for a measurement of number of packets received for this uid by the wifi radio.
+</span>*/
+MEASUREMENT_WIFI_RX_PACKETS : &quot;10056&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_WIFI_TX_PACKETS'>/** Key for a measurement of number of packets transmitted for this uid by the wifi radio.
+</span>*/
+MEASUREMENT_WIFI_TX_PACKETS : &quot;10057&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_RX_PACKETS'>/** Key for a measurement of number of packets received for this uid by the bluetooth radio.
+</span>*/
+MEASUREMENT_BLUETOOTH_RX_PACKETS : &quot;10058&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_BLUETOOTH_TX_PACKETS'>/** Key for a measurement of number of packets transmitted for this uid by the bluetooth radio.
+</span>*/
+MEASUREMENT_BLUETOOTH_TX_PACKETS : &quot;10059&quot;,
+<span id='android-os-health-UidHealthStats-property-TIMER_MOBILE_RADIO_ACTIVE'>/** Key for a timer for the count and duration the mobile radio was turned on for this uid.
+</span>*/
+TIMER_MOBILE_RADIO_ACTIVE : &quot;10061&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_USER_CPU_TIME_MS'>/** Key for a measurement of the number of milliseconds spent by the CPU running user space
+</span> code for this uid.
+*/
+MEASUREMENT_USER_CPU_TIME_MS : &quot;10062&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_SYSTEM_CPU_TIME_MS'>/** Key for a measurement of the number of milliseconds spent by the CPU running kernel
+</span> code for this uid.
+*/
+MEASUREMENT_SYSTEM_CPU_TIME_MS : &quot;10063&quot;,
+<span id='android-os-health-UidHealthStats-property-MEASUREMENT_CPU_POWER_MAMS'>/** An estimate of the number of milliamp-microsends used by this uid.
+</span>
+ @deprecated this measurement is vendor-dependent and not reliable.
+*/
+MEASUREMENT_CPU_POWER_MAMS : &quot;10064&quot;,
+<span id='android-os-health-UidHealthStats-property-CONSTANTS'>/** @hide
+</span>*/
+CONSTANTS : &quot;null&quot;,
+
+};</pre>
+</body>
+</html>

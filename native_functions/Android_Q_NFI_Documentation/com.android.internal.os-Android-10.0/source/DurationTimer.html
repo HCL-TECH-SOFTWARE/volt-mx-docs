@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-BatteryStatsImpl-DurationTimer'>/**@class com.android.internal.os.BatteryStatsImpl.DurationTimer
+</span>@extends com.android.internal.os.BatteryStatsImpl.StopwatchTimer
+
+ A StopwatchTimer that also tracks the total and max individual
+ time spent active according to the given timebase.  Whereas
+ StopwatchTimer apportions the time amongst all in the pool,
+ the total and max durations are not apportioned.
+*/
+var DurationTimer = {
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-writeSummaryFromParcelLocked'>/**Write the summary to the parcel.
+</span>
+ Since the time base is probably meaningless after we come back, reading
+ from this will have the effect of stopping the timer. So here all we write
+ is the max and total durations.
+*/
+writeSummaryFromParcelLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-readSummaryFromParcelLocked'>/**Read the summary parcel.
+</span>
+ Has the side effect of stopping the timer.
+*/
+readSummaryFromParcelLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-onTimeStarted'>/**The TimeBase time started (again).
+</span>
+ If the timer is also running, store the start time.
+*/
+onTimeStarted : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-onTimeStopped'>/**The TimeBase stopped running.
+</span>
+ If the timer is running, add the duration into mCurrentDurationMs.
+*/
+onTimeStopped : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-logState'>/**
+</span>*/
+logState : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-startRunningLocked'>/**
+</span>*/
+startRunningLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-stopRunningLocked'>/**Decrements the mNesting ref-count on this timer.
+</span>
+ If it actually stopped (mNesting went to 0), then possibly update
+ mMaxDuration if the current duration was the longest ever.
+*/
+stopRunningLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-reset'>/**
+</span>*/
+reset : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-getMaxDurationMsLocked'>/**Returns the max duration that this timer has ever seen.
+</span>
+ Note that this time is NOT split between the timers in the timer group that
+ this timer is attached to.  It is the TOTAL time.
+*/
+getMaxDurationMsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-getCurrentDurationMsLocked'>/**Returns the time since the timer was started.
+</span> Returns 0 if the timer is not currently running.
+
+ Note that this time is NOT split between the timers in the timer group that
+ this timer is attached to.  It is the TOTAL time.
+
+ Note that if running timer is parceled and unparceled, this method will return
+ current duration value at the time of parceling even though timer may not be
+ currently running.
+*/
+getCurrentDurationMsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-DurationTimer-method-getTotalDurationMsLocked'>/**Returns the total cumulative duration that this timer has been on since reset().
+</span> If mTimerPool == null, this should be the same
+ as getTotalTimeLocked(elapsedRealtimeMs*1000, STATS_SINCE_CHARGED)/1000.
+
+ Note that this time is NOT split between the timers in the timer group that
+ this timer is attached to.  It is the TOTAL time. For this reason, if mTimerPool != null,
+ the result will not be equivalent to getTotalTimeLocked.
+*/
+getTotalDurationMsLocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

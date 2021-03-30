@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-RemoteController'>/**@class android.media.RemoteController
+</span>@extends java.lang.Object
+
+ The RemoteController class is used to control media playback, display and update media metadata
+ and playback status, published by applications using the {@link android.media.RemoteControlClient} class.
+ &lt;p&gt;
+ A RemoteController shall be registered through
+ {@link android.media.AudioManager#registerRemoteController(RemoteController)} in order for the system to send
+ media event updates to the {@link android.media.RemoteController.OnClientUpdateListener} listener set in the class constructor.
+ Implement the methods of the interface to receive the information published by the active
+ {@link android.media.RemoteControlClient} instances.
+ &lt;br&gt;By default an {@link android.media.RemoteController.OnClientUpdateListener} implementation will not receive bitmaps for
+ album art. Use {@link #setArtworkConfiguration(int, int)} to receive images as well.
+ &lt;p&gt;
+ Registration requires the {@link android.media.RemoteController.OnClientUpdateListener} listener to be one of the enabled
+ notification listeners (see {@link android.service.notification.NotificationListenerService}).
+
+ @deprecated Use {@link MediaController} instead.
+*/
+var RemoteController = {
+
+<span id='android-media-RemoteController-property-POSITION_SYNCHRONIZATION_NONE'>/** Default playback position synchronization mode where the RemoteControlClient is not
+</span> asked regularly for its playback position to see if it has drifted from the estimated
+ position.
+*/
+POSITION_SYNCHRONIZATION_NONE : &quot;0&quot;,
+<span id='android-media-RemoteController-property-POSITION_SYNCHRONIZATION_CHECK'>/** The playback position synchronization mode where the RemoteControlClient instances which
+</span> expose their playback position to the framework, will be regularly polled to check
+ whether any drift has been noticed between their estimated position and the one they report.
+ Note that this mode should only ever be used when needing to display very accurate playback
+ position, as regularly polling a RemoteControlClient for its position may have an impact
+ on battery life (if applicable) when this query will trigger network transactions in the
+ case of remote playback.
+*/
+POSITION_SYNCHRONIZATION_CHECK : &quot;1&quot;,
+<span id='android-media-RemoteController-method-getEstimatedMediaPosition'>/**Return the estimated playback position of the current media track or a negative value
+</span> if not available.
+
+ &lt;p&gt;The value returned is estimated by the current process and may not be perfect.
+ The time returned by this method is calculated from the last state change time based
+ on the current play position at that time and the last known playback speed.
+ An application may call {@link #setSynchronizationMode}(int) to apply
+ a synchronization policy that will periodically re-sync the estimated position
+ with the RemoteControlClient.&lt;/p&gt;
+@return {Number} the current estimated playback position in milliseconds or a negative value
+         if not available
+@see OnClientUpdateListener#onClientPlaybackStateUpdate(int, long, long, float)
+*/
+getEstimatedMediaPosition : function(  ) {},
+
+<span id='android-media-RemoteController-method-sendMediaKeyEvent'>/**Send a simulated key event for a media button to be received by the current client.
+</span> To simulate a key press, you must first send a KeyEvent built with
+ a {@link KeyEvent#ACTION_DOWN} action, then another event with the {@link KeyEvent#ACTION_UP}
+ action.
+ &lt;p&gt;The key event will be sent to the registered receiver
+ (see {@link android.media.AudioManager#registerMediaButtonEventReceiver(PendingIntent)}) whose associated
+ {@link android.media.RemoteControlClient}'s metadata and playback state is published (there may be
+ none under some circumstances).
+@param {Object {KeyEvent}} keyEvent a {@link KeyEvent} instance whose key code is one of
+     {@link KeyEvent#KEYCODE_MUTE},
+     {@link KeyEvent#KEYCODE_HEADSETHOOK},
+     {@link KeyEvent#KEYCODE_MEDIA_PLAY},
+     {@link KeyEvent#KEYCODE_MEDIA_PAUSE},
+     {@link KeyEvent#KEYCODE_MEDIA_PLAY_PAUSE},
+     {@link KeyEvent#KEYCODE_MEDIA_STOP},
+     {@link KeyEvent#KEYCODE_MEDIA_NEXT},
+     {@link KeyEvent#KEYCODE_MEDIA_PREVIOUS},
+     {@link KeyEvent#KEYCODE_MEDIA_REWIND},
+     {@link KeyEvent#KEYCODE_MEDIA_RECORD},
+     {@link KeyEvent#KEYCODE_MEDIA_FAST_FORWARD},
+     {@link KeyEvent#KEYCODE_MEDIA_CLOSE},
+     {@link KeyEvent#KEYCODE_MEDIA_EJECT},
+     or {@link KeyEvent#KEYCODE_MEDIA_AUDIO_TRACK}.
+@return {Boolean} true if the event was successfully sent, false otherwise.
+@throws IllegalArgumentException
+*/
+sendMediaKeyEvent : function(  ) {},
+
+<span id='android-media-RemoteController-method-seekTo'>/**Sets the new playback position.
+</span> This method can only be called on a registered RemoteController.
+@param {Number} timeMs a 0 or positive value for the new playback position, expressed in ms.
+@return {Boolean} true if the command to set the playback position was successfully sent.
+@throws IllegalArgumentException
+*/
+seekTo : function(  ) {},
+
+<span id='android-media-RemoteController-method-setArtworkConfiguration'>/**
+</span>@param {Boolean} wantBitmap
+@param {Number} width
+@param {Number} height
+@param height
+@return {Boolean} true if successful
+@throws IllegalArgumentException
+*/
+setArtworkConfiguration : function(  ) {},
+
+<span id='android-media-RemoteController-method-setArtworkConfiguration'>/**Set the maximum artwork image dimensions to be received in the metadata.
+</span> No bitmaps will be received unless this has been specified.
+@param {Number} width the maximum width in pixels
+@param {Number} height  the maximum height in pixels
+@return {Boolean} true if the artwork dimension was successfully set.
+@throws IllegalArgumentException
+*/
+setArtworkConfiguration : function(  ) {},
+
+<span id='android-media-RemoteController-method-clearArtworkConfiguration'>/**Prevents this RemoteController from receiving artwork images.
+</span>@return {Boolean} true if receiving artwork images was successfully disabled.
+*/
+clearArtworkConfiguration : function(  ) {},
+
+<span id='android-media-RemoteController-method-setSynchronizationMode'>/**Set the playback position synchronization mode.
+</span> Must be called on a registered RemoteController.
+@param {Number} sync {@link #POSITION_SYNCHRONIZATION_NONE} or {@link #POSITION_SYNCHRONIZATION_CHECK}
+@return {Boolean} true if the synchronization mode was successfully set.
+@throws IllegalArgumentException
+*/
+setSynchronizationMode : function(  ) {},
+
+<span id='android-media-RemoteController-method-editMetadata'>/**Creates a {@link android.media.MetadataEditor} for updating metadata values of the editable keys of
+</span> the current {@link android.media.RemoteControlClient}.
+ This method can only be called on a registered RemoteController.
+@return {Object {android.media.RemoteController.MetadataEditor}} a new MetadataEditor instance.
+*/
+editMetadata : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

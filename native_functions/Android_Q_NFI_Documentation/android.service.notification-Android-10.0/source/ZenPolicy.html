@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-notification-ZenPolicy'>/**@class android.service.notification.ZenPolicy
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ ZenPolicy determines whether to allow certain notifications and their corresponding sounds to
+ play when a device is in Do Not Disturb mode.
+ ZenPolicy also dictates the visual effects of notifications that are intercepted when
+ a device is in Do Not Disturb mode.
+*/
+var ZenPolicy = {
+
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_REMINDERS'>/**@hide */
+</span>PRIORITY_CATEGORY_REMINDERS : &quot;0&quot;,
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_EVENTS'>/**@hide */
+</span>PRIORITY_CATEGORY_EVENTS : &quot;1&quot;,
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_MESSAGES'>/**@hide */
+</span>PRIORITY_CATEGORY_MESSAGES : &quot;2&quot;,
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_CALLS'>/**@hide */
+</span>PRIORITY_CATEGORY_CALLS : &quot;3&quot;,
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_REPEAT_CALLERS'>/**@hide */
+</span>PRIORITY_CATEGORY_REPEAT_CALLERS : &quot;4&quot;,
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_ALARMS'>/**@hide */
+</span>PRIORITY_CATEGORY_ALARMS : &quot;5&quot;,
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_MEDIA'>/**@hide */
+</span>PRIORITY_CATEGORY_MEDIA : &quot;6&quot;,
+<span id='android-service-notification-ZenPolicy-property-PRIORITY_CATEGORY_SYSTEM'>/**@hide */
+</span>PRIORITY_CATEGORY_SYSTEM : &quot;7&quot;,
+<span id='android-service-notification-ZenPolicy-property-VISUAL_EFFECT_FULL_SCREEN_INTENT'>/**@hide */
+</span>VISUAL_EFFECT_FULL_SCREEN_INTENT : &quot;0&quot;,
+<span id='android-service-notification-ZenPolicy-property-VISUAL_EFFECT_LIGHTS'>/**@hide */
+</span>VISUAL_EFFECT_LIGHTS : &quot;1&quot;,
+<span id='android-service-notification-ZenPolicy-property-VISUAL_EFFECT_PEEK'>/**@hide */
+</span>VISUAL_EFFECT_PEEK : &quot;2&quot;,
+<span id='android-service-notification-ZenPolicy-property-VISUAL_EFFECT_STATUS_BAR'>/**@hide */
+</span>VISUAL_EFFECT_STATUS_BAR : &quot;3&quot;,
+<span id='android-service-notification-ZenPolicy-property-VISUAL_EFFECT_BADGE'>/**@hide */
+</span>VISUAL_EFFECT_BADGE : &quot;4&quot;,
+<span id='android-service-notification-ZenPolicy-property-VISUAL_EFFECT_AMBIENT'>/**@hide */
+</span>VISUAL_EFFECT_AMBIENT : &quot;5&quot;,
+<span id='android-service-notification-ZenPolicy-property-VISUAL_EFFECT_NOTIFICATION_LIST'>/**@hide */
+</span>VISUAL_EFFECT_NOTIFICATION_LIST : &quot;6&quot;,
+<span id='android-service-notification-ZenPolicy-property-PEOPLE_TYPE_UNSET'>/** Used to indicate no preference for the type of people that can bypass dnd for either
+</span> calls or messages.
+*/
+PEOPLE_TYPE_UNSET : &quot;0&quot;,
+<span id='android-service-notification-ZenPolicy-property-PEOPLE_TYPE_ANYONE'>/** Used to indicate all calls or messages can bypass dnd.
+</span>*/
+PEOPLE_TYPE_ANYONE : &quot;1&quot;,
+<span id='android-service-notification-ZenPolicy-property-PEOPLE_TYPE_CONTACTS'>/** Used to indicate calls or messages from contacts can bypass dnd.
+</span>*/
+PEOPLE_TYPE_CONTACTS : &quot;2&quot;,
+<span id='android-service-notification-ZenPolicy-property-PEOPLE_TYPE_STARRED'>/** Used to indicate calls or messages from starred contacts can bypass dnd.
+</span>*/
+PEOPLE_TYPE_STARRED : &quot;3&quot;,
+<span id='android-service-notification-ZenPolicy-property-PEOPLE_TYPE_NONE'>/** Used to indicate no calls or messages can bypass dnd.
+</span>*/
+PEOPLE_TYPE_NONE : &quot;4&quot;,
+<span id='android-service-notification-ZenPolicy-property-STATE_UNSET'>/** Indicates no preference for whether a type of sound or visual effect is or isn't allowed
+</span> to play/show when DND is active.  Will default to the current set policy.
+*/
+STATE_UNSET : &quot;0&quot;,
+<span id='android-service-notification-ZenPolicy-property-STATE_ALLOW'>/** Indicates a type of sound or visual effect is allowed to play/show when DND is active.
+</span>*/
+STATE_ALLOW : &quot;1&quot;,
+<span id='android-service-notification-ZenPolicy-property-STATE_DISALLOW'>/** Indicates a type of sound or visual effect is not allowed to play/show when DND is active.
+</span>*/
+STATE_DISALLOW : &quot;2&quot;,
+<span id='android-service-notification-ZenPolicy-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-service-notification-ZenPolicy-method-getPriorityMessageSenders'>/**Message senders that can bypass DND.
+</span>@return {Number} {@link #PEOPLE_TYPE_UNSET}, {@link #PEOPLE_TYPE_ANYONE},
+ {@link #PEOPLE_TYPE_CONTACTS}, {@link #PEOPLE_TYPE_STARRED} or {@link #PEOPLE_TYPE_NONE}
+*/
+getPriorityMessageSenders : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCallSenders'>/**Callers that can bypass DND.
+</span>@return {Number} {@link #PEOPLE_TYPE_UNSET}, {@link #PEOPLE_TYPE_ANYONE},
+ {@link #PEOPLE_TYPE_CONTACTS}, {@link #PEOPLE_TYPE_STARRED} or {@link #PEOPLE_TYPE_NONE}
+*/
+getPriorityCallSenders : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategoryReminders'>/**Whether this policy wants to allow notifications with category
+</span> {@link Notification#CATEGORY_REMINDER} to play sounds and visually appear
+ or to intercept them when DND is active.
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategoryReminders : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategoryEvents'>/**Whether this policy wants to allow notifications with category
+</span> {@link Notification#CATEGORY_EVENT} to play sounds and visually appear
+ or to intercept them when DND is active.
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategoryEvents : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategoryMessages'>/**Whether this policy wants to allow notifications with category
+</span> {@link Notification#CATEGORY_MESSAGE} to play sounds and visually appear
+ or to intercept them when DND is active.  Types of message senders that are allowed
+ are specified by {@link #getPriorityMessageSenders}.
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategoryMessages : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategoryCalls'>/**Whether this policy wants to allow notifications with category
+</span> {@link Notification#CATEGORY_CALL} to play sounds and visually appear
+ or to intercept them when DND is active.  Types of callers that are allowed
+ are specified by {@link #getPriorityCallSenders}().
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategoryCalls : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategoryRepeatCallers'>/**Whether this policy wants to allow repeat callers (notifications with category
+</span> {@link Notification#CATEGORY_CALL} that have recently called) to play sounds and
+ visually appear or to intercept them when DND is active.
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategoryRepeatCallers : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategoryAlarms'>/**Whether this policy wants to allow notifications with category
+</span> {@link Notification#CATEGORY_ALARM} to play sounds and visually appear
+ or to intercept them when DND is active.
+ When alarms are {@link #STATE_DISALLOW disallowed}, the alarm stream will be muted when DND
+ is active.
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategoryAlarms : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategoryMedia'>/**Whether this policy wants to allow media notifications to play sounds and visually appear
+</span> or to intercept them when DND is active.
+ When media is {@link #STATE_DISALLOW disallowed}, the media stream will be muted when DND is
+ active.
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategoryMedia : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getPriorityCategorySystem'>/**Whether this policy wants to allow system sounds when DND is active.
+</span> When system is {@link #STATE_DISALLOW}, the system stream will be muted when DND is active.
+@return {Number} {@link #STATE_UNSET}, {@link #STATE_ALLOW} or {@link #STATE_DISALLOW}
+*/
+getPriorityCategorySystem : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getVisualEffectFullScreenIntent'>/**Whether this policy allows {@link Notification#fullScreenIntent full screen intents} from
+</span> notifications intercepted by DND.
+*/
+getVisualEffectFullScreenIntent : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getVisualEffectLights'>/**Whether this policy allows {@link NotificationChannel#shouldShowLights() notification
+</span> lights} from notifications intercepted by DND.
+*/
+getVisualEffectLights : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getVisualEffectPeek'>/**Whether this policy allows peeking from notifications intercepted by DND.
+</span>*/
+getVisualEffectPeek : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getVisualEffectStatusBar'>/**Whether this policy allows notifications intercepted by DND from appearing in the status bar
+</span> on devices that support status bars.
+*/
+getVisualEffectStatusBar : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getVisualEffectBadge'>/**Whether this policy allows {@link NotificationChannel#canShowBadge() badges} from
+</span> notifications intercepted by DND on devices that support badging.
+*/
+getVisualEffectBadge : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getVisualEffectAmbient'>/**Whether this policy allows notifications intercepted by DND from appearing on ambient
+</span> displays on devices that support ambient display.
+*/
+getVisualEffectAmbient : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-getVisualEffectNotificationList'>/**Whether this policy allows notifications intercepted by DND from appearing in notification
+</span> list views like the notification shade or lockscreen on devices that support those
+ views.
+*/
+getVisualEffectNotificationList : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-shouldHideAllVisualEffects'>/**Whether this policy hides all visual effects
+</span>@hide 
+*/
+shouldHideAllVisualEffects : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-shouldShowAllVisualEffects'>/**Whether this policy shows all visual effects
+</span>@hide 
+*/
+shouldShowAllVisualEffects : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-isCategoryAllowed'>/**
+</span>@hide 
+*/
+isCategoryAllowed : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-isVisualEffectAllowed'>/**
+</span>@hide 
+*/
+isVisualEffectAllowed : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-apply'>/**Applies another policy on top of this policy
+</span>@hide 
+*/
+apply : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+<span id='android-service-notification-ZenPolicy-method-copy'>/**Makes deep copy of this ZenPolicy.
+</span>@hide 
+*/
+copy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

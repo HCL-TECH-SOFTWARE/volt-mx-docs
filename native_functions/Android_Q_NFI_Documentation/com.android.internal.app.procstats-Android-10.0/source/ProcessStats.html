@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-app-procstats-ProcessStats'>/**@class com.android.internal.app.procstats.ProcessStats
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+*/
+var ProcessStats = {
+
+<span id='com-android-internal-app-procstats-ProcessStats-property-TAG'>/***/
+</span>TAG : &quot;ProcessStats&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SERVICE_NAME'>/***/
+</span>SERVICE_NAME : &quot;procstats&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-COMMIT_PERIOD'>/***/
+</span>COMMIT_PERIOD : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-COMMIT_UPTIME_PERIOD'>/***/
+</span>COMMIT_UPTIME_PERIOD : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_NOTHING'>/***/
+</span>STATE_NOTHING : &quot;-1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_PERSISTENT'>/***/
+</span>STATE_PERSISTENT : &quot;0&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_TOP'>/***/
+</span>STATE_TOP : &quot;1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_IMPORTANT_FOREGROUND'>/***/
+</span>STATE_IMPORTANT_FOREGROUND : &quot;2&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_IMPORTANT_BACKGROUND'>/***/
+</span>STATE_IMPORTANT_BACKGROUND : &quot;3&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_BACKUP'>/***/
+</span>STATE_BACKUP : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_SERVICE'>/***/
+</span>STATE_SERVICE : &quot;5&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_SERVICE_RESTARTING'>/***/
+</span>STATE_SERVICE_RESTARTING : &quot;6&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_RECEIVER'>/***/
+</span>STATE_RECEIVER : &quot;7&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_HEAVY_WEIGHT'>/***/
+</span>STATE_HEAVY_WEIGHT : &quot;8&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_HOME'>/***/
+</span>STATE_HOME : &quot;9&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_LAST_ACTIVITY'>/***/
+</span>STATE_LAST_ACTIVITY : &quot;10&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_CACHED_ACTIVITY'>/***/
+</span>STATE_CACHED_ACTIVITY : &quot;11&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_CACHED_ACTIVITY_CLIENT'>/***/
+</span>STATE_CACHED_ACTIVITY_CLIENT : &quot;12&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_CACHED_EMPTY'>/***/
+</span>STATE_CACHED_EMPTY : &quot;13&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-STATE_COUNT'>/***/
+</span>STATE_COUNT : &quot;14&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_SAMPLE_COUNT'>/***/
+</span>PSS_SAMPLE_COUNT : &quot;0&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_MINIMUM'>/***/
+</span>PSS_MINIMUM : &quot;1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_AVERAGE'>/***/
+</span>PSS_AVERAGE : &quot;2&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_MAXIMUM'>/***/
+</span>PSS_MAXIMUM : &quot;3&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_USS_MINIMUM'>/***/
+</span>PSS_USS_MINIMUM : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_USS_AVERAGE'>/***/
+</span>PSS_USS_AVERAGE : &quot;5&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_USS_MAXIMUM'>/***/
+</span>PSS_USS_MAXIMUM : &quot;6&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_RSS_MINIMUM'>/***/
+</span>PSS_RSS_MINIMUM : &quot;7&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_RSS_AVERAGE'>/***/
+</span>PSS_RSS_AVERAGE : &quot;8&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_RSS_MAXIMUM'>/***/
+</span>PSS_RSS_MAXIMUM : &quot;9&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-PSS_COUNT'>/***/
+</span>PSS_COUNT : &quot;10&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_SAMPLE_COUNT'>/***/
+</span>SYS_MEM_USAGE_SAMPLE_COUNT : &quot;0&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_CACHED_MINIMUM'>/***/
+</span>SYS_MEM_USAGE_CACHED_MINIMUM : &quot;1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_CACHED_AVERAGE'>/***/
+</span>SYS_MEM_USAGE_CACHED_AVERAGE : &quot;2&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_CACHED_MAXIMUM'>/***/
+</span>SYS_MEM_USAGE_CACHED_MAXIMUM : &quot;3&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_FREE_MINIMUM'>/***/
+</span>SYS_MEM_USAGE_FREE_MINIMUM : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_FREE_AVERAGE'>/***/
+</span>SYS_MEM_USAGE_FREE_AVERAGE : &quot;5&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_FREE_MAXIMUM'>/***/
+</span>SYS_MEM_USAGE_FREE_MAXIMUM : &quot;6&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_ZRAM_MINIMUM'>/***/
+</span>SYS_MEM_USAGE_ZRAM_MINIMUM : &quot;7&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_ZRAM_AVERAGE'>/***/
+</span>SYS_MEM_USAGE_ZRAM_AVERAGE : &quot;8&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_ZRAM_MAXIMUM'>/***/
+</span>SYS_MEM_USAGE_ZRAM_MAXIMUM : &quot;9&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_KERNEL_MINIMUM'>/***/
+</span>SYS_MEM_USAGE_KERNEL_MINIMUM : &quot;10&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_KERNEL_AVERAGE'>/***/
+</span>SYS_MEM_USAGE_KERNEL_AVERAGE : &quot;11&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_KERNEL_MAXIMUM'>/***/
+</span>SYS_MEM_USAGE_KERNEL_MAXIMUM : &quot;12&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_NATIVE_MINIMUM'>/***/
+</span>SYS_MEM_USAGE_NATIVE_MINIMUM : &quot;13&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_NATIVE_AVERAGE'>/***/
+</span>SYS_MEM_USAGE_NATIVE_AVERAGE : &quot;14&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_NATIVE_MAXIMUM'>/***/
+</span>SYS_MEM_USAGE_NATIVE_MAXIMUM : &quot;15&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-SYS_MEM_USAGE_COUNT'>/***/
+</span>SYS_MEM_USAGE_COUNT : &quot;16&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_NOTHING'>/***/
+</span>ADJ_NOTHING : &quot;-1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_MEM_FACTOR_NORMAL'>/***/
+</span>ADJ_MEM_FACTOR_NORMAL : &quot;0&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_MEM_FACTOR_MODERATE'>/***/
+</span>ADJ_MEM_FACTOR_MODERATE : &quot;1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_MEM_FACTOR_LOW'>/***/
+</span>ADJ_MEM_FACTOR_LOW : &quot;2&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_MEM_FACTOR_CRITICAL'>/***/
+</span>ADJ_MEM_FACTOR_CRITICAL : &quot;3&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_MEM_FACTOR_COUNT'>/***/
+</span>ADJ_MEM_FACTOR_COUNT : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_SCREEN_MOD'>/***/
+</span>ADJ_SCREEN_MOD : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_SCREEN_OFF'>/***/
+</span>ADJ_SCREEN_OFF : &quot;0&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_SCREEN_ON'>/***/
+</span>ADJ_SCREEN_ON : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADJ_COUNT'>/***/
+</span>ADJ_COUNT : &quot;8&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-FLAG_COMPLETE'>/***/
+</span>FLAG_COMPLETE : &quot;1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-FLAG_SHUTDOWN'>/***/
+</span>FLAG_SHUTDOWN : &quot;2&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-FLAG_SYSPROPS'>/***/
+</span>FLAG_SYSPROPS : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADD_PSS_INTERNAL_SINGLE'>/***/
+</span>ADD_PSS_INTERNAL_SINGLE : &quot;0&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADD_PSS_INTERNAL_ALL_MEM'>/***/
+</span>ADD_PSS_INTERNAL_ALL_MEM : &quot;1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADD_PSS_INTERNAL_ALL_POLL'>/***/
+</span>ADD_PSS_INTERNAL_ALL_POLL : &quot;2&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADD_PSS_EXTERNAL'>/***/
+</span>ADD_PSS_EXTERNAL : &quot;3&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ADD_PSS_EXTERNAL_SLOW'>/***/
+</span>ADD_PSS_EXTERNAL_SLOW : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ALL_MEM_ADJ'>/***/
+</span>ALL_MEM_ADJ : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ALL_SCREEN_ADJ'>/***/
+</span>ALL_SCREEN_ADJ : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-NON_CACHED_PROC_STATES'>/***/
+</span>NON_CACHED_PROC_STATES : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-BACKGROUND_PROC_STATES'>/***/
+</span>BACKGROUND_PROC_STATES : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-ALL_PROC_STATES'>/***/
+</span>ALL_PROC_STATES : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-REPORT_PROC_STATS'>/***/
+</span>REPORT_PROC_STATS : &quot;1&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-REPORT_PKG_PROC_STATS'>/***/
+</span>REPORT_PKG_PROC_STATS : &quot;2&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-REPORT_PKG_SVC_STATS'>/***/
+</span>REPORT_PKG_SVC_STATS : &quot;4&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-REPORT_PKG_ASC_STATS'>/***/
+</span>REPORT_PKG_ASC_STATS : &quot;8&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-REPORT_PKG_STATS'>/***/
+</span>REPORT_PKG_STATS : &quot;14&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-REPORT_ALL'>/***/
+</span>REPORT_ALL : &quot;15&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-OPTIONS'>/***/
+</span>OPTIONS : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-OPTIONS_STR'>/***/
+</span>OPTIONS_STR : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mReadError'>/***/
+</span>mReadError : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTimePeriodStartClockStr'>/***/
+</span>mTimePeriodStartClockStr : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mFlags'>/***/
+</span>mFlags : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mPackages'>/***/
+</span>mPackages : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mProcesses'>/***/
+</span>mProcesses : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTrackingAssociations'>/***/
+</span>mTrackingAssociations : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mMemFactorDurations'>/***/
+</span>mMemFactorDurations : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mMemFactor'>/***/
+</span>mMemFactor : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mStartTime'>/***/
+</span>mStartTime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTimePeriodStartClock'>/***/
+</span>mTimePeriodStartClock : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTimePeriodStartRealtime'>/***/
+</span>mTimePeriodStartRealtime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTimePeriodEndRealtime'>/***/
+</span>mTimePeriodEndRealtime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTimePeriodStartUptime'>/***/
+</span>mTimePeriodStartUptime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTimePeriodEndUptime'>/***/
+</span>mTimePeriodEndUptime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mInternalSinglePssCount'>/***/
+</span>mInternalSinglePssCount : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mInternalSinglePssTime'>/***/
+</span>mInternalSinglePssTime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mInternalAllMemPssCount'>/***/
+</span>mInternalAllMemPssCount : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mInternalAllMemPssTime'>/***/
+</span>mInternalAllMemPssTime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mInternalAllPollPssCount'>/***/
+</span>mInternalAllPollPssCount : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mInternalAllPollPssTime'>/***/
+</span>mInternalAllPollPssTime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mExternalPssCount'>/***/
+</span>mExternalPssCount : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mExternalPssTime'>/***/
+</span>mExternalPssTime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mExternalSlowPssCount'>/***/
+</span>mExternalSlowPssCount : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mExternalSlowPssTime'>/***/
+</span>mExternalSlowPssTime : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mTableData'>/***/
+</span>mTableData : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mSysMemUsageArgs'>/***/
+</span>mSysMemUsageArgs : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-mSysMemUsage'>/***/
+</span>mSysMemUsage : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='com-android-internal-app-procstats-ProcessStats-method-add'>/**
+</span>*/
+add : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-addSysMemUsage'>/**
+</span>*/
+addSysMemUsage : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-computeTotalMemoryUse'>/**
+</span>*/
+computeTotalMemoryUse : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-reset'>/**
+</span>*/
+reset : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-resetSafely'>/**
+</span>*/
+resetSafely : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-evaluateSystemProperties'>/**
+</span>*/
+evaluateSystemProperties : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-updateFragmentation'>/**Load the system's memory fragmentation info.
+</span>*/
+updateFragmentation : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-writeToParcel'>/**
+</span>@hide 
+*/
+writeToParcel : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-read'>/**
+</span>*/
+read : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-readFromParcel'>/**
+</span>*/
+readFromParcel : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-getPackageStateLocked'>/**
+</span>*/
+getPackageStateLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-getProcessStateLocked'>/**
+</span>*/
+getProcessStateLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-getProcessStateLocked'>/**
+</span>*/
+getProcessStateLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-getServiceStateLocked'>/**
+</span>*/
+getServiceStateLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-getAssociationStateLocked'>/**
+</span>*/
+getAssociationStateLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-updateTrackingAssociationsLocked'>/**
+</span>*/
+updateTrackingAssociationsLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-dumpLocked'>/**
+</span>*/
+dumpLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-dumpSummaryLocked'>/**
+</span>*/
+dumpSummaryLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-collectProcessesLocked'>/**
+</span>*/
+collectProcessesLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-dumpCheckinLocked'>/**Prints checkin style stats dump.
+</span>*/
+dumpCheckinLocked : function(  ) {},
+
+<span id='com-android-internal-app-procstats-ProcessStats-method-writeToProto'>/**Writes to ProtoOutputStream.
+</span>*/
+writeToProto : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

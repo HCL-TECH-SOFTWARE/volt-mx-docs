@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-renderscript-RenderScript'>/**@class android.renderscript.RenderScript
+</span>@extends java.lang.Object
+
+ This class provides access to a RenderScript context, which controls RenderScript
+ initialization, resource management, and teardown. An instance of the RenderScript
+ class must be created before any other RS objects can be created.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about creating an application that uses RenderScript, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/renderscript/index.html&quot;&gt;RenderScript&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var RenderScript = {
+
+<span id='android-renderscript-RenderScript-property-CREATE_FLAG_NONE'>/***/
+</span>CREATE_FLAG_NONE : &quot;0&quot;,
+<span id='android-renderscript-RenderScript-property-CREATE_FLAG_LOW_LATENCY'>/***/
+</span>CREATE_FLAG_LOW_LATENCY : &quot;2&quot;,
+<span id='android-renderscript-RenderScript-property-CREATE_FLAG_LOW_POWER'>/***/
+</span>CREATE_FLAG_LOW_POWER : &quot;4&quot;,
+<span id='android-renderscript-RenderScript-property-CREATE_FLAG_WAIT_FOR_ATTACH'>/** @hide
+</span> Context creation flag which instructs the implementation to wait for
+ a debugger to be attached before continuing execution.
+*/
+CREATE_FLAG_WAIT_FOR_ATTACH : &quot;8&quot;,
+<span id='android-renderscript-RenderScript-method-getMinorID'>/**
+</span>@hide Only exist to be compatible with old version RenderScript Support lib.
+ Will eventually be removed.
+@return {Number} Always return 1
+*/
+getMinorID : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-getMinorVersion'>/**Returns an identifier that can be used to identify a particular
+</span> minor version of RS.
+@return {Number} The minor RenderScript version number
+*/
+getMinorVersion : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-setMessageHandler'>/**
+</span>*/
+setMessageHandler : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-getMessageHandler'>/**
+</span>*/
+getMessageHandler : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-sendMessage'>/**Place a message into the message queue to be sent back to the message
+</span> handler once all previous commands have been executed.
+@param {Number} id
+@param {Object {int[]}} data
+*/
+sendMessage : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-setErrorHandler'>/**
+</span>*/
+setErrorHandler : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-getErrorHandler'>/**
+</span>*/
+getErrorHandler : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-setPriority'>/**Change the priority of the worker threads for this context.
+</span>@param {Object {RenderScript.Priority}} p New priority to be set.
+*/
+setPriority : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-getApplicationContext'>/**Gets the application context associated with the RenderScript context.
+</span>@return {Object {android.content.Context}} The application context.
+*/
+getApplicationContext : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-create'>/**calls create(ctx, ContextType.NORMAL, CREATE_FLAG_NONE)
+</span>
+ See documentation for @create for details
+@param {Object {Context}} ctx The context.
+@return {Object {android.renderscript.RenderScript}} RenderScript
+*/
+create : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-create'>/**calls create(ctx, ct, CREATE_FLAG_NONE)
+</span>
+ See documentation for @create for details
+@param {Object {Context}} ctx The context.
+@param {Object {RenderScript.ContextType}} ct The type of context to be created.
+@return {Object {android.renderscript.RenderScript}} RenderScript
+*/
+create : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-create'>/**Gets or creates a RenderScript context of the specified type.
+</span>
+ The returned context will be cached for future reuse within
+ the process. When an application is finished using
+ RenderScript it should call releaseAllContexts()
+
+ A process context is a context designed for easy creation and
+ lifecycle management.  Multiple calls to this function will
+ return the same object provided they are called with the same
+ options.  This allows it to be used any time a RenderScript
+ context is needed.
+
+ Prior to API 23 this always created a new context.
+@param {Object {Context}} ctx The context.
+@param {Object {RenderScript.ContextType}} ct The type of context to be created.
+@param {Number} flags The OR of the CREATE_FLAG_* options desired
+@return {Object {android.renderscript.RenderScript}} RenderScript
+*/
+create : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-create'>/**calls create(ctx, sdkVersion, ContextType.NORMAL, CREATE_FLAG_NONE)
+</span>
+ Used by the RenderScriptThunker to maintain backward compatibility.
+@param {Object {Context}} ctx The context.
+@param {Number} sdkVersion The target SDK Version.
+@param sdkVersion The target SDK Version.
+@return {Object {android.renderscript.RenderScript}} RenderScript
+*/
+create : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-releaseAllContexts'>/**Releases all the process contexts.  This is the same as
+</span> calling .destroy() on each unique context retreived with
+ create(...). If no contexts have been created this
+ function does nothing.
+
+ Typically you call this when your application is losing focus
+ and will not be using a context for some time.
+
+ This has no effect on a context created with
+ createMultiContext()
+*/
+releaseAllContexts : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-createMultiContext'>/**Create a RenderScript context.
+</span>
+ This is an advanced function intended for applications which
+ need to create more than one RenderScript context to be used
+ at the same time.
+
+ If you need a single context please use create()
+@param {Object {Context}} ctx The context.
+@return {Object {android.renderscript.RenderScript}} RenderScript
+*/
+createMultiContext : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-contextDump'>/**Print the currently available debugging information about the state of
+</span> the RS context to the log.
+*/
+contextDump : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-finish'>/**Wait for any pending asynchronous opeations (such as copies to a RS
+</span> allocation or RS script executions) to complete.
+*/
+finish : function(  ) {},
+
+<span id='android-renderscript-RenderScript-method-destroy'>/**Destroys this RenderScript context.  Once this function is called,
+</span> using this context or any objects belonging to this context is
+ illegal.
+
+ API 23+, this function is a NOP if the context was created
+ with create().  Please use releaseAllContexts() to clean up
+ contexts created with the create function.
+*/
+destroy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

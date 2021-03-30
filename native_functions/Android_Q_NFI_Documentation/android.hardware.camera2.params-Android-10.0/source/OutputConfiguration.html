@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-params-OutputConfiguration'>/**@class android.hardware.camera2.params.OutputConfiguration
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class for describing camera output, which contains a {@link Surface} and its specific
+ configuration for creating capture session.
+
+ &lt;p&gt;There are several ways to instantiate, modify and use OutputConfigurations. The most common
+ and recommended usage patterns are summarized in the following list:&lt;/p&gt;
+&lt;ul&gt;
+ &lt;li&gt;Passing a {@link Surface} to the constructor and using the OutputConfiguration instance as
+ argument to {@link CameraDevice#createCaptureSessionByOutputConfigurations}. This is the most
+ frequent usage and clients should consider it first before other more complicated alternatives.
+ &lt;/li&gt;
+
+ &lt;li&gt;Passing only a surface source class as an argument to the constructor. This is usually
+ followed by a call to create a capture session
+ (see {@link CameraDevice#createCaptureSessionByOutputConfigurations} and a {@link Surface} add
+ call {@link #addSurface} with a valid {@link Surface}. The sequence completes with
+ {@link CameraCaptureSession#finalizeOutputConfigurations}. This is the deferred usage case which
+ aims to enhance performance by allowing the resource-intensive capture session create call to
+ execute in parallel with any {@link Surface} initialization, such as waiting for a
+ {@link android.view.SurfaceView} to be ready as part of the UI initialization.&lt;/li&gt;
+
+ &lt;li&gt;The third and most complex usage pattern involves surface sharing. Once instantiated an
+ OutputConfiguration can be enabled for surface sharing via {@link #enableSurfaceSharing}. This
+ must be done before creating a new capture session and enables calls to
+ {@link CameraCaptureSession#updateOutputConfiguration}. An OutputConfiguration with enabled
+ surface sharing can be modified via {@link #addSurface} or {@link #removeSurface}. The updates
+ to this OutputConfiguration will only come into effect after
+ {@link CameraCaptureSession#updateOutputConfiguration} returns without throwing exceptions.
+ Such updates can be done as long as the session is active. Clients should always consider the
+ additional requirements and limitations placed on the output surfaces (for more details see
+ {@link #enableSurfaceSharing}, {@link #addSurface}, {@link #removeSurface},
+ {@link CameraCaptureSession#updateOutputConfiguration}). A trade-off exists between additional
+ complexity and flexibility. If exercised correctly surface sharing can switch between different
+ output surfaces without interrupting any ongoing repeating capture requests. This saves time and
+ can significantly improve the user experience.&lt;/li&gt;
+
+ &lt;li&gt;Surface sharing can be used in combination with deferred surfaces. The rules from both cases
+ are combined and clients must call {@link #enableSurfaceSharing} before creating a capture
+ session. Attach and/or remove output surfaces via  {@link #addSurface}/{@link #removeSurface} and
+ finalize the configuration using {@link CameraCaptureSession#finalizeOutputConfigurations}.
+ {@link CameraCaptureSession#updateOutputConfiguration} can be called after the configuration
+ finalize method returns without exceptions.&lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;p&gt; As of {@link android.os.Build.VERSION_CODES#P Android P}, all formats except
+ {@link ImageFormat#JPEG} and {@link ImageFormat#RAW_PRIVATE} can be used for sharing, subject to
+ device support. On prior API levels, only {@link ImageFormat#PRIVATE} format may be used.&lt;/p&gt;
+
+ @see CameraDevice#createCaptureSessionByOutputConfigurations
+
+*/
+var OutputConfiguration = {
+
+<span id='android-hardware-camera2-params-OutputConfiguration-property-ROTATION_0'>/** Rotation constant: 0 degree rotation (no rotation)
+</span>
+ @hide
+*/
+ROTATION_0 : &quot;0&quot;,
+<span id='android-hardware-camera2-params-OutputConfiguration-property-ROTATION_90'>/** Rotation constant: 90 degree counterclockwise rotation.
+</span>
+ @hide
+*/
+ROTATION_90 : &quot;1&quot;,
+<span id='android-hardware-camera2-params-OutputConfiguration-property-ROTATION_180'>/** Rotation constant: 180 degree counterclockwise rotation.
+</span>
+ @hide
+*/
+ROTATION_180 : &quot;2&quot;,
+<span id='android-hardware-camera2-params-OutputConfiguration-property-ROTATION_270'>/** Rotation constant: 270 degree counterclockwise rotation.
+</span>
+ @hide
+*/
+ROTATION_270 : &quot;3&quot;,
+<span id='android-hardware-camera2-params-OutputConfiguration-property-SURFACE_GROUP_ID_NONE'>/** Invalid surface group ID.
+</span>
+&lt;p&gt;An {@link android.hardware.camera2.params.OutputConfiguration} with this value indicates that the included surface
+doesn't belong to any surface group.&lt;/p&gt;
+*/
+SURFACE_GROUP_ID_NONE : &quot;-1&quot;,
+<span id='android-hardware-camera2-params-OutputConfiguration-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-hardware-camera2-params-OutputConfiguration-method-enableSurfaceSharing'>/**Enable multiple surfaces sharing the same OutputConfiguration
+</span>
+ &lt;p&gt;For advanced use cases, a camera application may require more streams than the combination
+ guaranteed by {@link CameraDevice#createCaptureSession}. In this case, more than one
+ compatible surface can be attached to an OutputConfiguration so that they map to one
+ camera stream, and the outputs share memory buffers when possible. Due to buffer sharing
+ clients should be careful when adding surface outputs that modify their input data. If such
+ case exists, camera clients should have an additional mechanism to synchronize read and write
+ access between individual consumers.&lt;/p&gt;
+
+ &lt;p&gt;Two surfaces are compatible in the below cases:&lt;/p&gt;
+
+ &lt;li&gt; Surfaces with the same size, format, dataSpace, and Surface source class. In this case,
+ {@link CameraDevice#createCaptureSessionByOutputConfigurations} is guaranteed to succeed.
+
+ &lt;li&gt; Surfaces with the same size, format, and dataSpace, but different Surface source classes
+ that are generally not compatible. However, on some devices, the underlying camera device is
+ able to use the same buffer layout for both surfaces. The only way to discover if this is the
+ case is to create a capture session with that output configuration. For example, if the
+ camera device uses the same private buffer format between a SurfaceView/SurfaceTexture and a
+ MediaRecorder/MediaCodec, {@link CameraDevice#createCaptureSessionByOutputConfigurations}
+ will succeed. Otherwise, it fails with {@link CameraCaptureSession.StateCallback#onConfigureFailed}.
+ &lt;/ol&gt;
+
+ &lt;p&gt;To enable surface sharing, this function must be called before {@link CameraDevice#createCaptureSessionByOutputConfigurations} or {@link CameraDevice#createReprocessableCaptureSessionByConfigurations}. Calling this function after
+ {@link CameraDevice#createCaptureSessionByOutputConfigurations} has no effect.&lt;/p&gt;
+
+ &lt;p&gt;Up to {@link #getMaxSharedSurfaceCount} surfaces can be shared for an OutputConfiguration.
+ The supported surfaces for sharing must be of type SurfaceTexture, SurfaceView,
+ MediaRecorder, MediaCodec, or implementation defined ImageReader.&lt;/p&gt;
+*/
+enableSurfaceSharing : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-setPhysicalCameraId'>/**Set the id of the physical camera for this OutputConfiguration
+</span>
+ &lt;p&gt;In the case one logical camera is made up of multiple physical cameras, it could be
+ desirable for the camera application to request streams from individual physical cameras.
+ This call achieves it by mapping the OutputConfiguration to the physical camera id.&lt;/p&gt;
+
+ &lt;p&gt;The valid physical camera ids can be queried by {@link android.hardware.camera2.CameraCharacteristics#getPhysicalCameraIds}.
+ &lt;/p&gt;
+
+ &lt;p&gt;Passing in a null physicalCameraId means that the OutputConfiguration is for a logical
+ stream.&lt;/p&gt;
+
+ &lt;p&gt;This function must be called before {@link CameraDevice#createCaptureSessionByOutputConfigurations} or {@link CameraDevice#createReprocessableCaptureSessionByConfigurations}. Calling this function
+ after {@link CameraDevice#createCaptureSessionByOutputConfigurations} or {@link CameraDevice#createReprocessableCaptureSessionByConfigurations} has no effect.&lt;/p&gt;
+
+ &lt;p&gt;The surface belonging to a physical camera OutputConfiguration must not be used as input
+ or output of a reprocessing request. &lt;/p&gt;
+*/
+setPhysicalCameraId : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-isForPhysicalCamera'>/**Check if this configuration is for a physical camera.
+</span>
+ &lt;p&gt;This returns true if the output configuration was for a physical camera making up a
+ logical multi camera via {@link android.hardware.camera2.params.OutputConfiguration#setPhysicalCameraId}.&lt;/p&gt;
+@hide 
+*/
+isForPhysicalCamera : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-isDeferredConfiguration'>/**Check if this configuration has deferred configuration.
+</span>
+ &lt;p&gt;This will return true if the output configuration was constructed with surface deferred by
+ {@link android.hardware.camera2.params.OutputConfiguration#android.hardware.camera2.params.OutputConfiguration(Size, Class)}. It will return true even after
+ the deferred surface is added later by {@link android.hardware.camera2.params.OutputConfiguration#addSurface}.&lt;/p&gt;
+@return {Boolean} true if this configuration has deferred surface.
+@hide 
+*/
+isDeferredConfiguration : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-addSurface'>/**Add a surface to this OutputConfiguration.
+</span>
+ &lt;p&gt; This function can be called before or after {@link CameraDevice#createCaptureSessionByOutputConfigurations}. If it's called after,
+ the application must finalize the capture session with
+ {@link CameraCaptureSession#finalizeOutputConfigurations}. It is possible to call this method
+ after the output configurations have been finalized only in cases of enabled surface sharing
+ see {@link #enableSurfaceSharing}. The modified output configuration must be updated with
+ {@link CameraCaptureSession#updateOutputConfiguration}.&lt;/p&gt;
+
+ &lt;p&gt; If the OutputConfiguration was constructed with a deferred surface by {@link android.hardware.camera2.params.OutputConfiguration#android.hardware.camera2.params.OutputConfiguration(Size, Class)}, the added surface must be obtained
+ from {@link android.view.SurfaceView} by calling {@link android.view.SurfaceHolder#getSurface},
+ or from {@link android.graphics.SurfaceTexture} via
+ {@link android.view.Surface#Surface(android.graphics.SurfaceTexture)}).&lt;/p&gt;
+
+ &lt;p&gt; If the OutputConfiguration was constructed by other constructors, the added
+ surface must be compatible with the existing surface. See {@link #enableSurfaceSharing} for
+ details of compatible surfaces.&lt;/p&gt;
+
+ &lt;p&gt; If the OutputConfiguration already contains a Surface, {@link #enableSurfaceSharing} must
+ be called before calling this function to add a new Surface.&lt;/p&gt;
+@param {Object {Surface}} surface The surface to be added.
+@throws IllegalArgumentException if the Surface is invalid, the Surface's
+         dataspace/format doesn't match, or adding the Surface would exceed number of
+         shared surfaces supported.
+@throws IllegalStateException if the Surface was already added to this OutputConfiguration,
+         or if the OutputConfiguration is not shared and it already has a surface associated
+         with it.
+*/
+addSurface : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-removeSurface'>/**Remove a surface from this OutputConfiguration.
+</span>
+ &lt;p&gt; Surfaces added via calls to {@link #addSurface} can also be removed from the
+  OutputConfiguration. The only notable exception is the surface associated with
+  the OutputConfigration see {@link #getSurface} which was passed as part of the constructor
+  or was added first in the deferred case
+  {@link android.hardware.camera2.params.OutputConfiguration#android.hardware.camera2.params.OutputConfiguration(Size, Class)}.&lt;/p&gt;
+@param {Object {Surface}} surface The surface to be removed.
+@throws IllegalArgumentException If the surface is associated with this OutputConfiguration
+                                  (see {@link #getSurface}) or the surface didn't get added
+                                  with {@link #addSurface}.
+*/
+removeSurface : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-getMaxSharedSurfaceCount'>/**Get the maximum supported shared {@link Surface} count.
+</span>@return {Number} the maximum number of surfaces that can be added per each OutputConfiguration.
+@see #enableSurfaceSharing
+*/
+getMaxSharedSurfaceCount : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-getSurface'>/**Get the {@link Surface} associated with this {@link android.hardware.camera2.params.OutputConfiguration}.
+</span>
+ If more than one surface is associated with this {@link android.hardware.camera2.params.OutputConfiguration}, return the
+ first one as specified in the constructor or {@link android.hardware.camera2.params.OutputConfiguration#addSurface}.
+*/
+getSurface : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-getSurfaces'>/**Get the immutable list of surfaces associated with this {@link android.hardware.camera2.params.OutputConfiguration}.
+</span>@return {Object {java.util.List}} the list of surfaces associated with this {@link OutputConfiguration} as specified in
+ the constructor and {@link OutputConfiguration#addSurface}. The list should not be modified.
+*/
+getSurfaces : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-getRotation'>/**Get the rotation associated with this {@link android.hardware.camera2.params.OutputConfiguration}.
+</span>@return {Number} the rotation associated with this {@link OutputConfiguration}.
+         Value will be one of ROTATION_[0, 90, 180, 270]
+@hide 
+*/
+getRotation : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-getSurfaceGroupId'>/**Get the surface group ID associated with this {@link android.hardware.camera2.params.OutputConfiguration}.
+</span>@return {Number} the surface group ID associated with this {@link OutputConfiguration}.
+         The default value is {@value #SURFACE_GROUP_ID_NONE}.
+*/
+getSurfaceGroupId : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-equals'>/**Check if this {@link android.hardware.camera2.params.OutputConfiguration} is equal to another {@link android.hardware.camera2.params.OutputConfiguration}.
+</span>
+ &lt;p&gt;Two output configurations are only equal if and only if the underlying surfaces, surface
+ properties (width, height, format, dataspace) when the output configurations are created,
+ and all other configuration parameters are equal. &lt;/p&gt;
+@return {Boolean} {@code true} if the objects were equal, {@code false} otherwise
+*/
+equals : function(  ) {},
+
+<span id='android-hardware-camera2-params-OutputConfiguration-method-hashCode'>/**{@inheritDoc}
+</span>*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

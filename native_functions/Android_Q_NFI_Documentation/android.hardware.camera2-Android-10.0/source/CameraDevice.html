@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-CameraDevice'>/**@class android.hardware.camera2.CameraDevice
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ &lt;p&gt;The CameraDevice class is a representation of a single camera connected to an
+ Android device, allowing for fine-grain control of image capture and
+ post-processing at high frame rates.&lt;/p&gt;
+
+ &lt;p&gt;Your application must declare the
+ {@link android.Manifest.permission#CAMERA Camera} permission in its manifest
+ in order to access camera devices.&lt;/p&gt;
+
+ &lt;p&gt;A given camera device may provide support at one of several levels defined
+ in {@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}.
+ If a device supports {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY LEGACY} level,
+ the camera device is running in backward compatibility mode and has minimum camera2 API support.
+ If a device supports the {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED}
+ level, then Camera2 exposes a feature set that is roughly equivalent to the older
+ {@link android.hardware.Camera Camera} API, although with a cleaner and more
+ efficient interface.
+ If a device supports the {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_EXTERNAL EXTERNAL}
+ level, then the device is a removable camera that provides similar but slightly less features
+ as the {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED} level.
+ Devices that implement the {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL} or
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_3 LEVEL3} level of support
+ provide substantially improved capabilities over the older camera
+ API. If your application requires a full-level device for
+ proper operation, declare the &quot;android.hardware.camera.level.full&quot; feature in your
+ manifest.&lt;/p&gt;
+
+ @see CameraManager#openCamera
+ @see android.Manifest.permission#CAMERA
+ @see CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL
+*/
+var CameraDevice = {
+
+<span id='android-hardware-camera2-CameraDevice-property-TEMPLATE_PREVIEW'>/** Create a request suitable for a camera preview window. Specifically, this
+</span> means that high frame rate is given priority over the highest-quality
+ post-processing. These requests would normally be used with the
+ {@link android.hardware.camera2.CameraCaptureSession#setRepeatingRequest} method.
+ This template is guaranteed to be supported on all camera devices.
+
+ @see #createCaptureRequest
+*/
+TEMPLATE_PREVIEW : &quot;1&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-TEMPLATE_STILL_CAPTURE'>/** Create a request suitable for still image capture. Specifically, this
+</span> means prioritizing image quality over frame rate. These requests would
+ commonly be used with the {@link android.hardware.camera2.CameraCaptureSession#capture} method.
+ This template is guaranteed to be supported on all camera devices except
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_DEPTH_OUTPUT DEPTH_OUTPUT} devices
+ that are not {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE
+ BACKWARD_COMPATIBLE}.
+ @see #createCaptureRequest
+*/
+TEMPLATE_STILL_CAPTURE : &quot;2&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-TEMPLATE_RECORD'>/** Create a request suitable for video recording. Specifically, this means
+</span> that a stable frame rate is used, and post-processing is set for
+ recording quality. These requests would commonly be used with the
+ {@link android.hardware.camera2.CameraCaptureSession#setRepeatingRequest} method.
+ This template is guaranteed to be supported on all camera devices except
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_DEPTH_OUTPUT DEPTH_OUTPUT} devices
+ that are not {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE
+ BACKWARD_COMPATIBLE}.
+
+ @see #createCaptureRequest
+*/
+TEMPLATE_RECORD : &quot;3&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-TEMPLATE_VIDEO_SNAPSHOT'>/** Create a request suitable for still image capture while recording
+</span> video. Specifically, this means maximizing image quality without
+ disrupting the ongoing recording. These requests would commonly be used
+ with the {@link android.hardware.camera2.CameraCaptureSession#capture} method while a request based on
+ {@link #TEMPLATE_RECORD} is is in use with {@link android.hardware.camera2.CameraCaptureSession#setRepeatingRequest}.
+ This template is guaranteed to be supported on all camera devices except
+ legacy devices ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY LEGACY}) and
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_DEPTH_OUTPUT DEPTH_OUTPUT} devices
+ that are not {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE
+ BACKWARD_COMPATIBLE}.
+
+ @see #createCaptureRequest
+*/
+TEMPLATE_VIDEO_SNAPSHOT : &quot;4&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-TEMPLATE_ZERO_SHUTTER_LAG'>/** Create a request suitable for zero shutter lag still capture. This means
+</span> means maximizing image quality without compromising preview frame rate.
+ AE/AWB/AF should be on auto mode. This is intended for application-operated ZSL. For
+ device-operated ZSL, use {@link android.hardware.camera2.CaptureRequest#CONTROL_ENABLE_ZSL} if available.
+ This template is guaranteed to be supported on camera devices that support the
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_PRIVATE_REPROCESSING PRIVATE_REPROCESSING}
+ capability or the
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_YUV_REPROCESSING YUV_REPROCESSING}
+ capability.
+
+ @see #createCaptureRequest
+ @see CaptureRequest#CONTROL_ENABLE_ZSL
+*/
+TEMPLATE_ZERO_SHUTTER_LAG : &quot;5&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-TEMPLATE_MANUAL'>/** A basic template for direct application control of capture
+</span> parameters. All automatic control is disabled (auto-exposure, auto-white
+ balance, auto-focus), and post-processing parameters are set to preview
+ quality. The manual capture parameters (exposure, sensitivity, and so on)
+ are set to reasonable defaults, but should be overriden by the
+ application depending on the intended use case.
+ This template is guaranteed to be supported on camera devices that support the
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_MANUAL_SENSOR MANUAL_SENSOR}
+ capability.
+
+ @see #createCaptureRequest
+*/
+TEMPLATE_MANUAL : &quot;6&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-SESSION_OPERATION_MODE_NORMAL'>/** Standard camera operation mode.
+</span>
+ @see #createCustomCaptureSession
+ @hide
+*/
+SESSION_OPERATION_MODE_NORMAL : &quot;0&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-SESSION_OPERATION_MODE_CONSTRAINED_HIGH_SPEED'>/** Constrained high-speed operation mode.
+</span>
+ @see #createCustomCaptureSession
+ @hide
+*/
+SESSION_OPERATION_MODE_CONSTRAINED_HIGH_SPEED : &quot;1&quot;,
+<span id='android-hardware-camera2-CameraDevice-property-SESSION_OPERATION_MODE_VENDOR_START'>/** First vendor-specific operating mode
+</span>
+ @see #createCustomCaptureSession
+ @hide
+*/
+SESSION_OPERATION_MODE_VENDOR_START : &quot;32768&quot;,
+<span id='android-hardware-camera2-CameraDevice-method-getId'>/**Get the ID of this camera device.
+</span>
+ &lt;p&gt;This matches the ID given to {@link android.hardware.camera2.CameraManager#openCamera} to instantiate this
+ this camera device.&lt;/p&gt;
+
+ &lt;p&gt;This ID can be used to query the camera device's {@link android.hardware.camera2.CameraCharacteristics fixed properties} with {@link android.hardware.camera2.CameraManager#getCameraCharacteristics}.&lt;/p&gt;
+
+ &lt;p&gt;This method can be called even if the device has been closed or has encountered
+ a serious error.&lt;/p&gt;
+@return {String} the ID for this camera device
+@see CameraManager#getCameraCharacteristics
+@see CameraManager#getCameraIdList
+*/
+getId : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createCaptureSession'>/**&lt;p&gt;Create a new camera capture session by providing the target output set of Surfaces to the
+</span> camera device.&lt;/p&gt;
+
+ &lt;p&gt;The active capture session determines the set of potential output Surfaces for
+ the camera device for each capture request. A given request may use all
+ or only some of the outputs. Once the CameraCaptureSession is created, requests can be
+ submitted with {@link android.hardware.camera2.CameraCaptureSession#capture capture},
+ {@link android.hardware.camera2.CameraCaptureSession#captureBurst captureBurst},
+ {@link android.hardware.camera2.CameraCaptureSession#setRepeatingRequest setRepeatingRequest}, or
+ {@link android.hardware.camera2.CameraCaptureSession#setRepeatingBurst setRepeatingBurst}.&lt;/p&gt;
+
+ &lt;p&gt;Surfaces suitable for inclusion as a camera output can be created for
+ various use cases and targets:&lt;/p&gt;
+
+ &lt;ul&gt;
+
+ &lt;li&gt;For drawing to a {@link android.view.SurfaceView SurfaceView}: Once the SurfaceView's
+   Surface is {@link android.view.SurfaceHolder.Callback#surfaceCreated created}, set the size
+   of the Surface with {@link android.view.SurfaceHolder#setFixedSize} to be one of the sizes
+   returned by {@link StreamConfigurationMap#getOutputSizes(Class)
+   getOutputSizes(SurfaceHolder.class)} and then obtain the Surface by calling {@link android.view.SurfaceHolder#getSurface}. If the size is not set by the application, it will
+   be rounded to the nearest supported size less than 1080p, by the camera device.&lt;/li&gt;
+
+ &lt;li&gt;For accessing through an OpenGL texture via a {@link android.graphics.SurfaceTexture
+   SurfaceTexture}: Set the size of the SurfaceTexture with {@link android.graphics.SurfaceTexture#setDefaultBufferSize} to be one of the sizes returned by
+   {@link StreamConfigurationMap#getOutputSizes(Class) getOutputSizes(SurfaceTexture.class)}
+   before creating a Surface from the SurfaceTexture with {@link Surface#Surface}. If the size
+   is not set by the application, it will be set to be the smallest supported size less than
+   1080p, by the camera device.&lt;/li&gt;
+
+ &lt;li&gt;For recording with {@link android.media.MediaCodec}: Call
+   {@link android.media.MediaCodec#createInputSurface} after configuring
+   the media codec to use one of the sizes returned by
+   {@link StreamConfigurationMap#getOutputSizes(Class) getOutputSizes(MediaCodec.class)}
+   &lt;/li&gt;
+
+ &lt;li&gt;For recording with {@link android.media.MediaRecorder}: Call
+   {@link android.media.MediaRecorder#getSurface} after configuring the media recorder to use
+   one of the sizes returned by
+   {@link StreamConfigurationMap#getOutputSizes(Class) getOutputSizes(MediaRecorder.class)},
+   or configuring it to use one of the supported
+   {@link android.media.CamcorderProfile CamcorderProfiles}.&lt;/li&gt;
+
+ &lt;li&gt;For efficient YUV processing with {@link android.renderscript}:
+   Create a RenderScript
+   {@link android.renderscript.Allocation Allocation} with a supported YUV
+   type, the IO_INPUT flag, and one of the sizes returned by
+   {@link StreamConfigurationMap#getOutputSizes(Class) getOutputSizes(Allocation.class)},
+   Then obtain the Surface with
+   {@link android.renderscript.Allocation#getSurface}.&lt;/li&gt;
+
+ &lt;li&gt;For access to RAW, uncompressed YUV, or compressed JPEG data in the application: Create an
+   {@link android.media.ImageReader} object with one of the supported output formats given by
+   {@link StreamConfigurationMap#getOutputFormats()}, setting its size to one of the
+   corresponding supported sizes by passing the chosen output format into
+   {@link StreamConfigurationMap#getOutputSizes(int)}. Then obtain a
+   {@link android.view.Surface} from it with {@link android.media.ImageReader#getSurface()}.
+   If the ImageReader size is not set to a supported size, it will be rounded to a supported
+   size less than 1080p by the camera device.
+   &lt;/li&gt;
+
+ &lt;/ul&gt;
+
+ &lt;p&gt;The camera device will query each Surface's size and formats upon this
+ call, so they must be set to a valid setting at this time.&lt;/p&gt;
+
+ &lt;p&gt;It can take several hundred milliseconds for the session's configuration to complete,
+ since camera hardware may need to be powered on or reconfigured. Once the configuration is
+ complete and the session is ready to actually capture data, the provided
+ {@link android.hardware.camera2.CameraCaptureSession.StateCallback}'s
+ {@link android.hardware.camera2.CameraCaptureSession.StateCallback#onConfigured} callback will be called.&lt;/p&gt;
+
+ &lt;p&gt;If a prior CameraCaptureSession already exists when this method is called, the previous
+ session will no longer be able to accept new capture requests and will be closed. Any
+ in-progress capture requests made on the prior session will be completed before it's closed.
+ {@link android.hardware.camera2.CameraCaptureSession.StateCallback#onConfigured} for the new session may be invoked
+ before {@link android.hardware.camera2.CameraCaptureSession.StateCallback#onClosed} is invoked for the prior
+ session. Once the new session is {@link android.hardware.camera2.CameraCaptureSession.StateCallback#onConfigured
+ configured}, it is able to start capturing its own requests. To minimize the transition time,
+ the {@link android.hardware.camera2.CameraCaptureSession#abortCaptures} call can be used to discard the remaining
+ requests for the prior capture session before a new one is created. Note that once the new
+ session is created, the old one can no longer have its captures aborted.&lt;/p&gt;
+
+ &lt;p&gt;Using larger resolution outputs, or more outputs, can result in slower
+ output rate from the device.&lt;/p&gt;
+
+ &lt;p&gt;Configuring a session with an empty or null list will close the current session, if
+ any. This can be used to release the current session's target surfaces for another use.&lt;/p&gt;
+
+ &lt;p&gt;While any of the sizes from {@link StreamConfigurationMap#getOutputSizes} can be used when
+ a single output stream is configured, a given camera device may not be able to support all
+ combination of sizes, formats, and targets when multiple outputs are configured at once.  The
+ tables below list the maximum guaranteed resolutions for combinations of streams and targets,
+ given the capabilities of the camera device.&lt;/p&gt;
+
+ &lt;p&gt;If an application tries to create a session using a set of targets that exceed the limits
+ described in the below tables, one of three possibilities may occur. First, the session may
+ be successfully created and work normally. Second, the session may be successfully created,
+ but the camera device won't meet the frame rate guarantees as described in
+ {@link StreamConfigurationMap#getOutputMinFrameDuration}. Or third, if the output set
+ cannot be used at all, session creation will fail entirely, with
+ {@link android.hardware.camera2.CameraCaptureSession.StateCallback#onConfigureFailed} being invoked.&lt;/p&gt;
+
+ &lt;p&gt;For the type column, {@code PRIV} refers to any target whose available sizes are found
+ using {@link StreamConfigurationMap#getOutputSizes(Class)} with no direct application-visible
+ format, {@code YUV} refers to a target Surface using the
+ {@link android.graphics.ImageFormat#YUV_420_888} format, {@code JPEG} refers to the
+ {@link android.graphics.ImageFormat#JPEG} format, and {@code RAW} refers to the
+ {@link android.graphics.ImageFormat#RAW_SENSOR} format.&lt;/p&gt;
+
+ &lt;p&gt;For the maximum size column, {@code PREVIEW} refers to the best size match to the
+ device's screen resolution, or to 1080p ({@code 1920x1080}), whichever is
+ smaller. {@code RECORD} refers to the camera device's maximum supported recording resolution,
+ as determined by {@link android.media.CamcorderProfile}. And {@code MAXIMUM} refers to the
+ camera device's maximum output resolution for that format or target from
+ {@link StreamConfigurationMap#getOutputSizes}.&lt;/p&gt;
+
+ &lt;p&gt;To use these tables, determine the number and the formats/targets of outputs needed, and
+ find the row(s) of the table with those targets. The sizes indicate the maximum set of sizes
+ that can be used; it is guaranteed that for those targets, the listed sizes and anything
+ smaller from the list given by {@link StreamConfigurationMap#getOutputSizes} can be
+ successfully used to create a session.  For example, if a row indicates that a 8 megapixel
+ (MP) YUV_420_888 output can be used together with a 2 MP {@code PRIV} output, then a session
+ can be created with targets {@code [8 MP YUV, 2 MP PRIV]} or targets {@code [2 MP YUV, 2 MP
+ PRIV]}; but a session with targets {@code [8 MP YUV, 4 MP PRIV]}, targets {@code [4 MP YUV, 4
+ MP PRIV]}, or targets {@code [8 MP PRIV, 2 MP YUV]} would not be guaranteed to work, unless
+ some other row of the table lists such a combination.&lt;/p&gt;
+
+ &lt;style scoped&gt;
+  #rb { border-right-width: thick; }
+ &lt;/style&gt;
+ &lt;p&gt;Legacy devices ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY LEGACY}) support at
+ least the following stream combinations:
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;7&quot;&gt;LEGACY-level guaranteed configurations&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt; &lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt; &lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;  &lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt; &lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt; &lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt; &lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Simple preview, GPU video processing, or no-preview video recording.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;No-viewfinder still image capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;In-application video/image processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Standard still imaging.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;In-app processing plus still capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Standard recording.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Preview plus in-app processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Still capture plus in-app processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;Limited-level ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED}) devices
+ support at least the following stream combinations in addition to those for
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY LEGACY} devices:
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;7&quot;&gt;LIMITED-level additional guaranteed configurations&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt; &lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD }&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;High-resolution video recording with preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD }&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;High-resolution in-app video processing with preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD }&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Two-input in-app video processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD }&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD }&lt;/td&gt; &lt;td&gt;High-resolution recording with video snapshot.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD }&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD }&lt;/td&gt; &lt;td&gt;High-resolution in-app processing with video snapshot.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Two-input in-app processing with still capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;FULL-level ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL}) devices
+ support at least the following stream combinations in addition to those for
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED} devices:
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;7&quot;&gt;FULL-level additional guaranteed configurations&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt; &lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Maximum-resolution GPU processing with preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Maximum-resolution in-app processing with preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Maximum-resolution two-input in-app processsing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Video recording with maximum-size video snapshot&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code 640x480}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Standard video recording plus maximum-resolution in-app processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code 640x480}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Preview plus two-input maximum-resolution in-app processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;RAW-capability ({@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES} includes
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_RAW RAW}) devices additionally support
+ at least the following stream combinations on both
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL} and
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED} devices:
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;7&quot;&gt;RAW-capability additional guaranteed configurations&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt; &lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;No-preview DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Standard DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td colspan=&quot;2&quot; id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;In-app processing plus DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Video recording with DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Preview with in-app processing and DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Two-input in-app processing plus DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Still capture with simultaneous JPEG and DNG.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code RAW }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;In-app processing with simultaneous JPEG and DNG.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;BURST-capability ({@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES} includes
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_BURST_CAPTURE BURST_CAPTURE}) devices
+ support at least the below stream combinations in addition to those for
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED} devices. Note that all
+ FULL-level devices support the BURST capability, and the below list is a strict subset of the
+ list for FULL-level devices, so this table is only relevant for LIMITED-level devices that
+ support the BURST_CAPTURE capability.
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;5&quot;&gt;BURST-capability additional guaranteed configurations&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Maximum-resolution GPU processing with preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Maximum-resolution in-app processing with preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV }&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Maximum-resolution two-input in-app processsing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;LEVEL-3 ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_3 LEVEL_3})
+ support at least the following stream combinations in addition to the combinations for
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL} and for
+ RAW capability ({@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES} includes
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_RAW RAW}):
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;11&quot;&gt;LEVEL-3 additional guaranteed configurations&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 4&lt;/th&gt;&lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code 640x480}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;In-app viewfinder analysis with dynamic selection of output format.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code 640x480}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;In-app viewfinder analysis with dynamic selection of output format.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;MONOCHROME-capability ({@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES}
+ includes {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_MONOCHROME MONOCHROME}) devices
+ supporting {@link android.graphics.ImageFormat#Y8 Y8} support substituting {@code YUV}
+ streams with {@code Y8} in all guaranteed stream combinations for the device's hardware level
+ and capabilities.&lt;/p&gt;
+
+ &lt;p&gt;Devices capable of outputting HEIC formats ({@link StreamConfigurationMap#getOutputFormats}
+ contains {@link android.graphics.ImageFormat#HEIC}) will support substituting {@code JPEG}
+ streams with {@code HEIC} in all guaranteed stream combinations for the device's hardware
+ level and capabilities. Calling createCaptureSession with both JPEG and HEIC outputs is not
+ supported.&lt;/p&gt;
+
+ &lt;p&gt;Clients can access the above mandatory stream combination tables via
+ {@link android.hardware.camera2.params.MandatoryStreamCombination}.&lt;/p&gt;
+
+ &lt;p&gt;Since the capabilities of camera devices vary greatly, a given camera device may support
+ target combinations with sizes outside of these guarantees, but this can only be tested for
+ by calling {@link #isSessionConfigurationSupported} or attempting to create a session with
+ such targets.&lt;/p&gt;
+
+ &lt;p&gt;Exception on 176x144 (QCIF) resolution:
+ Camera devices usually have a fixed capability for downscaling from larger resolution to
+ smaller, and the QCIF resolution sometimes is not fully supported due to this
+ limitation on devices with high-resolution image sensors. Therefore, trying to configure a
+ QCIF resolution stream together with any other stream larger than 1920x1080 resolution
+ (either width or height) might not be supported, and capture session creation will fail if it
+ is not.&lt;/p&gt;
+@param {Object {java.util.List}} outputs The new set of Surfaces that should be made available as
+                targets for captured image data.
+@param {Object {CameraCaptureSession.StateCallback}} callback The callback to notify about the status of the new capture session.
+@param {Object {Handler}} handler The handler on which the callback should be invoked, or {@code null} to use
+                the current thread's {@link android.os.Looper looper}.
+@throws IllegalArgumentException if the set of output Surfaces do not meet the requirements,
+                                  the callback is null, or the handler is null but the current
+                                  thread has no looper.
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+@see CameraCaptureSession
+@see StreamConfigurationMap#getOutputFormats()
+@see StreamConfigurationMap#getOutputSizes(int)
+@see StreamConfigurationMap#getOutputSizes(Class)
+*/
+createCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createCaptureSessionByOutputConfigurations'>/**&lt;p&gt;Create a new camera capture session by providing the target output set of Surfaces and
+</span> its corresponding surface configuration to the camera device.&lt;/p&gt;
+@see #createCaptureSession
+@see OutputConfiguration
+*/
+createCaptureSessionByOutputConfigurations : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createReprocessableCaptureSession'>/**Create a new reprocessable camera capture session by providing the desired reprocessing
+</span> input Surface configuration and the target output set of Surfaces to the camera device.
+
+ &lt;p&gt;If a camera device supports YUV reprocessing
+ ({@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES_YUV_REPROCESSING}) or PRIVATE
+ reprocessing
+ ({@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES_PRIVATE_REPROCESSING}), besides
+ the capture session created via {@link #createCaptureSession createCaptureSession}, the
+ application can also create a reprocessable capture session to submit reprocess capture
+ requests in addition to regular capture requests. A reprocess capture request takes the next
+ available buffer from the session's input Surface, and sends it through the camera device's
+ processing pipeline again, to produce buffers for the request's target output Surfaces. No
+ new image data is captured for a reprocess request. However the input buffer provided by
+ the application must be captured previously by the same camera device in the same session
+ directly (e.g. for Zero-Shutter-Lag use case) or indirectly (e.g. combining multiple output
+ images).&lt;/p&gt;
+
+ &lt;p&gt;The active reprocessable capture session determines an input {@link Surface} and the set
+ of potential output Surfaces for the camera devices for each capture request. The application
+ can use {@link #createCaptureRequest createCaptureRequest} to create regular capture requests
+ to capture new images from the camera device, and use {@link #createReprocessCaptureRequest
+ createReprocessCaptureRequest} to create reprocess capture requests to process buffers from
+ the input {@link Surface}. Some combinations of output Surfaces in a session may not be used
+ in a request simultaneously. The guaranteed combinations of output Surfaces that can be used
+ in a request simultaneously are listed in the tables under {@link #createCaptureSession
+ createCaptureSession}. All the output Surfaces in one capture request will come from the
+ same source, either from a new capture by the camera device, or from the input Surface
+ depending on if the request is a reprocess capture request.&lt;/p&gt;
+
+ &lt;p&gt;Input formats and sizes supported by the camera device can be queried via
+ {@link StreamConfigurationMap#getInputFormats} and
+ {@link StreamConfigurationMap#getInputSizes}. For each supported input format, the camera
+ device supports a set of output formats and sizes for reprocessing that can be queried via
+ {@link StreamConfigurationMap#getValidOutputFormatsForInput} and
+ {@link StreamConfigurationMap#getOutputSizes}. While output Surfaces with formats that
+ aren't valid reprocess output targets for the input configuration can be part of a session,
+ they cannot be used as targets for a reprocessing request.&lt;/p&gt;
+
+ &lt;p&gt;Since the application cannot access {@link android.graphics.ImageFormat#PRIVATE} images
+ directly, an output Surface created by {@link android.media.ImageReader#newInstance} with
+ {@link android.graphics.ImageFormat#PRIVATE} as the format will be considered as intended to
+ be used for reprocessing input and thus the {@link android.media.ImageReader} size must
+ match one of the supported input sizes for {@link android.graphics.ImageFormat#PRIVATE}
+ format. Otherwise, creating a reprocessable capture session will fail.&lt;/p&gt;
+
+ &lt;p&gt;The guaranteed stream configurations listed in
+ {@link #createCaptureSession createCaptureSession} are also guaranteed to work for
+ {@link #createReprocessableCaptureSession createReprocessableCaptureSession}. In addition,
+ the configurations in the tables below are also guaranteed for creating a reprocessable
+ capture session if the camera device supports YUV reprocessing or PRIVATE reprocessing.
+ However, not all output targets used to create a reprocessable session may be used in a
+ {@link android.hardware.camera2.CaptureRequest} simultaneously. For devices that support only 1 output target in a
+ reprocess {@link android.hardware.camera2.CaptureRequest}, submitting a reprocess {@link android.hardware.camera2.CaptureRequest} with multiple
+ output targets will result in a {@link android.hardware.camera2.CaptureFailure}. For devices that support multiple
+ output targets in a reprocess {@link android.hardware.camera2.CaptureRequest}, the guaranteed output targets that can
+ be included in a {@link android.hardware.camera2.CaptureRequest} simultaneously are listed in the tables under
+ {@link #createCaptureSession createCaptureSession}. For example, with a FULL-capability
+ ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL} {@code == }
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL}) device that supports PRIVATE
+ reprocessing, an application can create a reprocessable capture session with 1 input,
+ ({@code PRIV}, {@code MAXIMUM}), and 3 outputs, ({@code PRIV}, {@code MAXIMUM}),
+ ({@code PRIV}, {@code PREVIEW}), and ({@code YUV}, {@code MAXIMUM}). However, it's not
+ guaranteed that an application can submit a regular or reprocess capture with ({@code PRIV},
+ {@code MAXIMUM}) and ({@code YUV}, {@code MAXIMUM}) outputs based on the table listed under
+ {@link #createCaptureSession createCaptureSession}. In other words, use the tables below to
+ determine the guaranteed stream configurations for creating a reprocessable capture session,
+ and use the tables under {@link #createCaptureSession createCaptureSession} to determine the
+ guaranteed output targets that can be submitted in a regular or reprocess
+ {@link android.hardware.camera2.CaptureRequest} simultaneously.&lt;/p&gt;
+
+ &lt;style scoped&gt;
+  #rb { border-right-width: thick; }
+ &lt;/style&gt;
+
+ &lt;p&gt;LIMITED-level ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED}) devices
+ support at least the following stream combinations for creating a reprocessable capture
+ session in addition to those listed in {@link #createCaptureSession createCaptureSession} for
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED} devices:
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;11&quot;&gt;LIMITED-level additional guaranteed configurations for creating a reprocessable capture session&lt;br&gt;({@code PRIV} input is guaranteed only if PRIVATE reprocessing is supported. {@code YUV} input is guaranteed only if YUV reprocessing is supported)&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Input&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 4&lt;/th&gt;&lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;No-viewfinder still image reprocessing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;ZSL(Zero-Shutter-Lag) still imaging.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;ZSL still and in-app processing imaging.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;ZSL in-app processing with still capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;FULL-level ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL}) devices
+ support at least the following stream combinations for creating a reprocessable capture
+ session in addition to those for
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED} devices:
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;11&quot;&gt;FULL-level additional guaranteed configurations for creating a reprocessable capture session&lt;br&gt;({@code PRIV} input is guaranteed only if PRIVATE reprocessing is supported. {@code YUV} input is guaranteed only if YUV reprocessing is supported)&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Input&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 4&lt;/th&gt;&lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Maximum-resolution multi-frame image fusion in-app processing with regular preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Maximum-resolution multi-frame image fusion two-input in-app processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code RECORD}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;High-resolution ZSL in-app video processing with regular preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Maximum-resolution ZSL in-app processing with regular preview.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Maximum-resolution two-input ZSL in-app processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;ZSL still capture and in-app processing.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;RAW-capability ({@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES} includes
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_RAW RAW}) devices additionally support
+ at least the following stream combinations for creating a reprocessable capture session
+ on both {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL} and
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED LIMITED} devices
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;11&quot;&gt;RAW-capability additional guaranteed configurations for creating a reprocessable capture session&lt;br&gt;({@code PRIV} input is guaranteed only if PRIVATE reprocessing is supported. {@code YUV} input is guaranteed only if YUV reprocessing is supported)&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Input&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 4&lt;/th&gt;&lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;Mutually exclusive ZSL in-app processing and DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Mutually exclusive ZSL in-app processing and preview with DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Mutually exclusive ZSL two-input in-app processing and DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Mutually exclusive ZSL still capture and preview with DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Mutually exclusive ZSL in-app processing with still capture and DNG capture.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;LEVEL-3 ({@link android.hardware.camera2.CameraCharacteristics#INFO_SUPPORTED_HARDWARE_LEVEL}
+ {@code == }{@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_3 LEVEL_3}) devices
+ support at least the following stream combinations for creating a reprocessable capture
+ session in addition to those for
+ {@link android.hardware.camera2.CameraMetadata#INFO_SUPPORTED_HARDWARE_LEVEL_FULL FULL} devices. Note that while
+ the second configuration allows for configuring {@code MAXIMUM} {@code YUV} and {@code JPEG}
+ outputs at the same time, that configuration is not listed for regular capture sessions, and
+ therefore simultaneous output to both targets is not allowed.
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;13&quot;&gt;LEVEL-3 additional guaranteed configurations for creating a reprocessable capture session&lt;br&gt;({@code PRIV} input is guaranteed only if PRIVATE reprocessing is supported. {@code YUV} input is always guaranteed.&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Input&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 1&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 2&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 3&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 4&lt;/th&gt;&lt;th colspan=&quot;2&quot; id=&quot;rb&quot;&gt;Target 5&lt;/th&gt;&lt;th rowspan=&quot;2&quot;&gt;Sample use case(s)&lt;/th&gt; &lt;/tr&gt;
+ &lt;tr&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th id=&quot;rb&quot;&gt;Max size&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code 640x480}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;&lt;/td&gt; &lt;td&gt;In-app viewfinder analysis with ZSL and RAW.&lt;/td&gt; &lt;/tr&gt;
+ &lt;tr&gt; &lt;td&gt;{@code PRIV}/{@code YUV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;Same as input&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code PREVIEW}&lt;/td&gt; &lt;td&gt;{@code PRIV}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code 640x480}&lt;/td&gt; &lt;td&gt;{@code RAW}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt; &lt;td&gt;{@code JPEG}&lt;/td&gt;&lt;td id=&quot;rb&quot;&gt;{@code MAXIMUM}&lt;/td&gt;&lt;td&gt;In-app viewfinder analysis with ZSL, RAW, and JPEG reprocessing output.&lt;/td&gt; &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;Clients can access the above mandatory stream combination tables via
+ {@link android.hardware.camera2.params.MandatoryStreamCombination}.&lt;/p&gt;
+@param {Object {InputConfiguration}} inputConfig The configuration for the input {@link Surface}
+@param {Object {java.util.List}} outputs The new set of Surfaces that should be made available as
+                targets for captured image data.
+@param {Object {CameraCaptureSession.StateCallback}} callback The callback to notify about the status of the new capture session.
+@param {Object {Handler}} handler The handler on which the callback should be invoked, or {@code null} to use
+                the current thread's {@link android.os.Looper looper}.
+@throws IllegalArgumentException if the input configuration is null or not supported, the set
+                                  of output Surfaces do not meet the requirements, the
+                                  callback is null, or the handler is null but the current
+                                  thread has no looper.
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+@see #createCaptureSession
+@see CameraCaptureSession
+@see StreamConfigurationMap#getInputFormats
+@see StreamConfigurationMap#getInputSizes
+@see StreamConfigurationMap#getValidOutputFormatsForInput
+@see StreamConfigurationMap#getOutputSizes
+@see android.media.ImageWriter
+@see android.media.ImageReader
+*/
+createReprocessableCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createReprocessableCaptureSessionByConfigurations'>/**Create a new reprocessable camera capture session by providing the desired reprocessing
+</span> input configuration and output {@link OutputConfiguration}
+ to the camera device.
+@see #createReprocessableCaptureSession
+@see OutputConfiguration
+*/
+createReprocessableCaptureSessionByConfigurations : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createConstrainedHighSpeedCaptureSession'>/**&lt;p&gt;Create a new constrained high speed capture session.&lt;/p&gt;
+</span>
+ &lt;p&gt;The application can use normal capture session (created via {@link #createCaptureSession})
+ for high speed capture if the desired high speed FPS ranges are advertised by
+ {@link android.hardware.camera2.CameraCharacteristics#CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES}, in which case all API
+ semantics associated with normal capture sessions applies.&lt;/p&gt;
+
+ &lt;p&gt;The method creates a specialized capture session that is only targeted at high speed
+ video recording (&gt;=120fps) use case if the camera device supports high speed video
+ capability (i.e., {@link android.hardware.camera2.CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES} contains
+ {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_CONSTRAINED_HIGH_SPEED_VIDEO}).
+ Therefore, it has special characteristics compared with a normal capture session:&lt;/p&gt;
+
+ &lt;ul&gt;
+
+ &lt;li&gt;In addition to the output target Surface requirements specified by the
+   {@link #createCaptureSession} method, an active high speed capture session will support up
+   to 2 output Surfaces, though the application might choose to configure just one Surface
+   (e.g., preview only). All Surfaces must be either video encoder surfaces (acquired by
+   {@link android.media.MediaRecorder#getSurface} or
+   {@link android.media.MediaCodec#createInputSurface}) or preview surfaces (obtained from
+   {@link android.view.SurfaceView}, {@link android.graphics.SurfaceTexture} via
+   {@link android.view.Surface#Surface(android.graphics.SurfaceTexture)}). The Surface sizes
+   must be one of the sizes reported by {@link StreamConfigurationMap#getHighSpeedVideoSizes}.
+   When multiple Surfaces are configured, their size must be same.&lt;/li&gt;
+
+ &lt;li&gt;An active high speed capture session only accepts request lists created via
+   {@link android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession#createHighSpeedRequestList}, and the
+   request list can only be submitted to this session via
+   {@link android.hardware.camera2.CameraCaptureSession#captureBurst captureBurst}, or
+   {@link android.hardware.camera2.CameraCaptureSession#setRepeatingBurst setRepeatingBurst}.&lt;/li&gt;
+
+ &lt;li&gt;The FPS ranges being requested to this session must be selected from
+   {@link StreamConfigurationMap#getHighSpeedVideoFpsRangesFor}. The application can still use
+   {@link android.hardware.camera2.CaptureRequest#CONTROL_AE_TARGET_FPS_RANGE} to control the desired FPS range.
+   Switching to an FPS range that has different
+   {@link android.util.Range#getUpper() maximum FPS} may trigger some camera device
+   reconfigurations, which may introduce extra latency. It is recommended that the
+   application avoids unnecessary maximum target FPS changes as much as possible during high
+   speed streaming.&lt;/li&gt;
+
+ &lt;li&gt;For the request lists submitted to this session, the camera device will override the
+   {@link android.hardware.camera2.CaptureRequest#CONTROL_MODE control mode}, auto-exposure (AE), auto-white balance
+   (AWB) and auto-focus (AF) to {@link android.hardware.camera2.CameraMetadata#CONTROL_MODE_AUTO},
+   {@link android.hardware.camera2.CameraMetadata#CONTROL_AE_MODE_ON}, {@link android.hardware.camera2.CameraMetadata#CONTROL_AWB_MODE_AUTO}
+   and {@link android.hardware.camera2.CameraMetadata#CONTROL_AF_MODE_CONTINUOUS_VIDEO}, respectively. All
+   post-processing block mode controls will be overridden to be FAST. Therefore, no manual
+   control of capture and post-processing parameters is possible. Beside these, only a subset
+   of controls will work, see
+   {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_CONSTRAINED_HIGH_SPEED_VIDEO} for
+   more details.&lt;/li&gt;
+
+ &lt;/ul&gt;
+@param {Object {java.util.List}} outputs The new set of Surfaces that should be made available as
+                targets for captured high speed image data.
+@param {Object {CameraCaptureSession.StateCallback}} callback The callback to notify about the status of the new capture session.
+@param {Object {Handler}} handler The handler on which the callback should be invoked, or {@code null} to use
+                the current thread's {@link android.os.Looper looper}.
+@throws IllegalArgumentException if the set of output Surfaces do not meet the requirements,
+                                  the callback is null, or the handler is null but the current
+                                  thread has no looper, or the camera device doesn't support
+                                  high speed video capability.
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+@see #createCaptureSession
+@see CaptureRequest#CONTROL_AE_TARGET_FPS_RANGE
+@see StreamConfigurationMap#getHighSpeedVideoSizes
+@see StreamConfigurationMap#getHighSpeedVideoFpsRangesFor
+@see CameraCharacteristics#REQUEST_AVAILABLE_CAPABILITIES
+@see CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_CONSTRAINED_HIGH_SPEED_VIDEO
+@see CameraCaptureSession#captureBurst
+@see CameraCaptureSession#setRepeatingBurst
+@see CameraConstrainedHighSpeedCaptureSession#createHighSpeedRequestList
+*/
+createConstrainedHighSpeedCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createCustomCaptureSession'>/**Create a new camera capture session with a custom operating mode.
+</span>@param {Object {InputConfiguration}} inputConfig The configuration for the input {@link Surface} if a reprocessing session
+                is desired, or {@code null} otherwise.
+@param {Object {java.util.List}} outputs The new set of {@link OutputConfiguration OutputConfigurations} that should be
+                made available as targets for captured image data.
+@param {Number} operatingMode The custom operating mode to use; a nonnegative value, either a custom
+                vendor value or one of the SESSION_OPERATION_MODE_* values.
+@param {Object {CameraCaptureSession.StateCallback}} callback The callback to notify about the status of the new capture session.
+@param {Object {Handler}} handler The handler on which the callback should be invoked, or {@code null} to use
+                the current thread's {@link android.os.Looper looper}.
+@throws IllegalArgumentException if the input configuration is null or not supported, the set
+                                  of output Surfaces do not meet the requirements, the
+                                  callback is null, or the handler is null but the current
+                                  thread has no looper.
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+@see #createCaptureSession
+@see #createReprocessableCaptureSession
+@see CameraCaptureSession
+@see OutputConfiguration
+@hide 
+*/
+createCustomCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createCaptureSession'>/**&lt;p&gt;Create a new {@link android.hardware.camera2.CameraCaptureSession} using a {@link SessionConfiguration} helper
+</span> object that aggregates all supported parameters.&lt;/p&gt;
+@param {Object {SessionConfiguration}} config A session configuration (see {@link SessionConfiguration}).
+@throws IllegalArgumentException In case the session configuration is invalid; or the output
+                                  configurations are empty; or the session configuration
+                                  executor is invalid.
+@throws CameraAccessException In case the camera device is no longer connected or has
+                               encountered a fatal error.
+@see #createCaptureSession(List, CameraCaptureSession.StateCallback, Handler)
+@see #createCaptureSessionByOutputConfigurations
+@see #createReprocessableCaptureSession
+@see #createConstrainedHighSpeedCaptureSession
+*/
+createCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createCaptureRequest'>/**&lt;p&gt;Create a {@link android.hardware.camera2.CaptureRequest.Builder} for new capture requests,
+</span> initialized with template for a target use case. The settings are chosen
+ to be the best options for the specific camera device, so it is not
+ recommended to reuse the same request for a different camera device;
+ create a builder specific for that device and template and override the
+ settings as desired, instead.&lt;/p&gt;
+@param {Number} templateType An enumeration selecting the use case for this request. Not all template
+ types are supported on every device. See the documentation for each template type for
+ details.
+@return {Object {android.hardware.camera2.CaptureRequest.Builder}} a builder for a capture request, initialized with default
+ settings for that template, and no output streams
+@throws IllegalArgumentException if the templateType is not supported by
+ this device.
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+*/
+createCaptureRequest : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createCaptureRequest'>/**&lt;p&gt;Create a {@link android.hardware.camera2.CaptureRequest.Builder} for new capture requests,
+</span> initialized with template for a target use case. This methods allows
+ clients to pass physical camera ids which can be used to customize the
+ request for a specific physical camera. The settings are chosen
+ to be the best options for the specific logical camera device. If
+ additional physical camera ids are passed, then they will also use the
+ same settings template. Clients can further modify individual camera
+ settings by calling {@link android.hardware.camera2.CaptureRequest.Builder#setPhysicalCameraKey}.&lt;/p&gt;
+
+ &lt;p&gt;Individual physical camera settings will only be honored for camera session
+ that was initialiazed with corresponding physical camera id output configuration
+ {@link OutputConfiguration#setPhysicalCameraId} and the same output targets are
+ also attached in the request by {@link android.hardware.camera2.CaptureRequest.Builder#addTarget}.&lt;/p&gt;
+
+ &lt;p&gt;The output is undefined for any logical camera streams in case valid physical camera
+ settings are attached.&lt;/p&gt;
+@param {Number} templateType An enumeration selecting the use case for this request. Not all template
+ types are supported on every device. See the documentation for each template type for
+ details.
+@param {Object {java.util.Set}} physicalCameraIdSet A set of physical camera ids that can be used to customize
+                            the request for a specific physical camera.
+@return {Object {android.hardware.camera2.CaptureRequest.Builder}} a builder for a capture request, initialized with default
+ settings for that template, and no output streams
+@throws IllegalArgumentException if the templateType is not supported by
+ this device, or one of the physical id arguments matches with logical camera id.
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+@see #TEMPLATE_PREVIEW
+@see #TEMPLATE_RECORD
+@see #TEMPLATE_STILL_CAPTURE
+@see #TEMPLATE_VIDEO_SNAPSHOT
+@see #TEMPLATE_MANUAL
+@see CaptureRequest.Builder#setPhysicalCameraKey
+@see CaptureRequest.Builder#getPhysicalCameraKey
+*/
+createCaptureRequest : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-createReprocessCaptureRequest'>/**&lt;p&gt;Create a {@link android.hardware.camera2.CaptureRequest.Builder} for a new reprocess {@link android.hardware.camera2.CaptureRequest} from a
+</span> {@link android.hardware.camera2.TotalCaptureResult}.
+
+ &lt;p&gt;Each reprocess {@link android.hardware.camera2.CaptureRequest} processes one buffer from
+ {@link android.hardware.camera2.CameraCaptureSession}'s input {@link Surface} to all output {@link Surface Surfaces}
+ included in the reprocess capture request. The reprocess input images must be generated from
+ one or multiple output images captured from the same camera device. The application can
+ provide input images to camera device via {@link android.media.ImageWriter#queueInputImage}.
+ The application must use the capture result of one of those output images to create a
+ reprocess capture request so that the camera device can use the information to achieve
+ optimal reprocess image quality. For camera devices that support only 1 output
+ {@link Surface}, submitting a reprocess {@link android.hardware.camera2.CaptureRequest} with multiple
+ output targets will result in a {@link android.hardware.camera2.CaptureFailure}.
+@param {Object {TotalCaptureResult}} inputResult The capture result of the output image or one of the output images used
+                       to generate the reprocess input image for this capture request.
+@throws IllegalArgumentException if inputResult is null.
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+@see CaptureRequest.Builder
+@see TotalCaptureResult
+@see CameraDevice#createReprocessableCaptureSession
+@see android.media.ImageWriter
+*/
+createReprocessCaptureRequest : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-close'>/**Close the connection to this camera device as quickly as possible.
+</span>
+ &lt;p&gt;Immediately after this call, all calls to the camera device or active session interface
+ will throw a {@link IllegalStateException}, except for calls to close(). Once the device has
+ fully shut down, the {@link android.hardware.camera2.CameraCaptureSession.StateCallback#onClosed} callback will be called, and the camera
+ is free to be re-opened.&lt;/p&gt;
+
+ &lt;p&gt;Immediately after this call, besides the final {@link android.hardware.camera2.CameraCaptureSession.StateCallback#onClosed} calls, no
+ further callbacks from the device or the active session will occur, and any remaining
+ submitted capture requests will be discarded, as if
+ {@link android.hardware.camera2.CameraCaptureSession#abortCaptures} had been called, except that no success or failure
+ callbacks will be invoked.&lt;/p&gt;
+*/
+close : function(  ) {},
+
+<span id='android-hardware-camera2-CameraDevice-method-isSessionConfigurationSupported'>/**Checks whether a particular {@link SessionConfiguration} is supported by the camera device.
+</span>
+ &lt;p&gt;This method performs a runtime check of a given {@link SessionConfiguration}. The result
+ confirms whether or not the passed session configuration can be successfully used to
+ create a camera capture session using
+ {@link android.hardware.camera2.CameraDevice#createCaptureSession(SessionConfiguration)}.
+ &lt;/p&gt;
+
+ &lt;p&gt;The method can be called at any point before, during and after active capture session.
+ It must not impact normal camera behavior in any way and must complete significantly
+ faster than creating a regular or constrained capture session.&lt;/p&gt;
+
+ &lt;p&gt;Although this method is faster than creating a new capture session, it is not intended
+ to be used for exploring the entire space of supported stream combinations. The available
+ mandatory stream combinations
+ {@link android.hardware.camera2.params.MandatoryStreamCombination} are better suited for this
+ purpose.&lt;/p&gt;
+
+ &lt;p&gt;Note that session parameters will be ignored and calls to
+ {@link SessionConfiguration#setSessionParameters} are not required.&lt;/p&gt;
+@return {Boolean} {@code true} if the given session configuration is supported by the camera device
+         {@code false} otherwise.
+@throws UnsupportedOperationException if the query operation is not supported by the camera
+                                       device
+@throws IllegalArgumentException if the session configuration is invalid
+@throws CameraAccessException if the camera device is no longer connected or has
+                               encountered a fatal error
+@throws IllegalStateException if the camera device has been closed
+*/
+isSessionConfigurationSupported : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

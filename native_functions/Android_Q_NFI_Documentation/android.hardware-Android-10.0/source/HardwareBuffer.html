@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-HardwareBuffer'>/**@class android.hardware.HardwareBuffer
+</span> implements android.os.Parcelable
+
+ implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ HardwareBuffer wraps a native &lt;code&gt;AHardwareBuffer&lt;/code&gt; object, which is a low-level object
+ representing a memory buffer accessible by various hardware units. HardwareBuffer allows sharing
+ buffers across different application processes. In particular, HardwareBuffers may be mappable
+ to memory accessibly to various hardware systems, such as the GPU, a sensor or context hub, or
+ other auxiliary processing units.
+
+ For more information, see the NDK documentation for &lt;code&gt;AHardwareBuffer&lt;/code&gt;.
+*/
+var HardwareBuffer = {
+
+<span id='android-hardware-HardwareBuffer-property-RGBA_8888'>/***/
+</span>RGBA_8888 : &quot;1&quot;,
+<span id='android-hardware-HardwareBuffer-property-RGBX_8888'>/**Format: 8 bits each red, green, blue, alpha, alpha is always 0xFF */
+</span>RGBX_8888 : &quot;2&quot;,
+<span id='android-hardware-HardwareBuffer-property-RGB_888'>/**Format: 8 bits each red, green, blue, no alpha */
+</span>RGB_888 : &quot;3&quot;,
+<span id='android-hardware-HardwareBuffer-property-RGB_565'>/**Format: 5 bits each red and blue, 6 bits green, no alpha */
+</span>RGB_565 : &quot;4&quot;,
+<span id='android-hardware-HardwareBuffer-property-RGBA_FP16'>/**Format: 16 bits each red, green, blue, alpha */
+</span>RGBA_FP16 : &quot;22&quot;,
+<span id='android-hardware-HardwareBuffer-property-RGBA_1010102'>/**Format: 10 bits each red, green, blue, 2 bits alpha */
+</span>RGBA_1010102 : &quot;43&quot;,
+<span id='android-hardware-HardwareBuffer-property-BLOB'>/**Format: opaque format used for raw data transfer; must have a height of 1 */
+</span>BLOB : &quot;33&quot;,
+<span id='android-hardware-HardwareBuffer-property-D_16'>/**Format: 16 bits depth */
+</span>D_16 : &quot;48&quot;,
+<span id='android-hardware-HardwareBuffer-property-D_24'>/**Format: 24 bits depth */
+</span>D_24 : &quot;49&quot;,
+<span id='android-hardware-HardwareBuffer-property-DS_24UI8'>/**Format: 24 bits depth, 8 bits stencil */
+</span>DS_24UI8 : &quot;50&quot;,
+<span id='android-hardware-HardwareBuffer-property-D_FP32'>/**Format: 32 bits depth */
+</span>D_FP32 : &quot;51&quot;,
+<span id='android-hardware-HardwareBuffer-property-DS_FP32UI8'>/**Format: 32 bits depth, 8 bits stencil */
+</span>DS_FP32UI8 : &quot;52&quot;,
+<span id='android-hardware-HardwareBuffer-property-S_UI8'>/**Format: 8 bits stencil */
+</span>S_UI8 : &quot;53&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_CPU_READ_RARELY'>/***/
+</span>USAGE_CPU_READ_RARELY : &quot;2&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_CPU_READ_OFTEN'>/**Usage: The buffer will often be read by the CPU */
+</span>USAGE_CPU_READ_OFTEN : &quot;3&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_CPU_WRITE_RARELY'>/**Usage: The buffer will sometimes be written to by the CPU */
+</span>USAGE_CPU_WRITE_RARELY : &quot;32&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_CPU_WRITE_OFTEN'>/**Usage: The buffer will often be written to by the CPU */
+</span>USAGE_CPU_WRITE_OFTEN : &quot;48&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_GPU_SAMPLED_IMAGE'>/**Usage: The buffer will be read from by the GPU */
+</span>USAGE_GPU_SAMPLED_IMAGE : &quot;256&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_GPU_COLOR_OUTPUT'>/**Usage: The buffer will be written to by the GPU */
+</span>USAGE_GPU_COLOR_OUTPUT : &quot;512&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_PROTECTED_CONTENT'>/**Usage: The buffer must not be used outside of a protected hardware path */
+</span>USAGE_PROTECTED_CONTENT : &quot;16384&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_VIDEO_ENCODE'>/**Usage: The buffer will be read by a hardware video encoder */
+</span>USAGE_VIDEO_ENCODE : &quot;65536&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_SENSOR_DIRECT_DATA'>/**Usage: The buffer will be used for sensor direct data */
+</span>USAGE_SENSOR_DIRECT_DATA : &quot;8388608&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_GPU_DATA_BUFFER'>/**Usage: The buffer will be used as a shader storage or uniform buffer object */
+</span>USAGE_GPU_DATA_BUFFER : &quot;16777216&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_GPU_CUBE_MAP'>/**Usage: The buffer will be used as a cube map texture */
+</span>USAGE_GPU_CUBE_MAP : &quot;33554432&quot;,
+<span id='android-hardware-HardwareBuffer-property-USAGE_GPU_MIPMAP_COMPLETE'>/**Usage: The buffer contains a complete mipmap hierarchy */
+</span>USAGE_GPU_MIPMAP_COMPLETE : &quot;67108864&quot;,
+<span id='android-hardware-HardwareBuffer-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-hardware-HardwareBuffer-method-create'>/**Creates a new &lt;code&gt;HardwareBuffer&lt;/code&gt; instance.
+</span>
+ &lt;p&gt;Calling this method will throw an &lt;code&gt;IllegalStateException&lt;/code&gt; if
+ format is not a supported Format type.&lt;/p&gt;
+@param {Number} width The width in pixels of the buffer
+@param {Number} height The height in pixels of the buffer
+@param {Number} format The @Format of each pixel
+@param {Number} layers The number of layers in the buffer
+@param {Number} usage The @Usage flags describing how the buffer will be used
+@return {Object {android.hardware.HardwareBuffer}} A &lt;code&gt;HardwareBuffer&lt;/code&gt; instance if successful, or throws an
+     IllegalArgumentException if the dimensions passed are invalid (either zero, negative, or
+     too large to allocate), if the format is not supported, if the requested number of layers
+     is less than one or not supported, or if the passed usage flags are not a supported set.
+*/
+create : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-isSupported'>/**Queries whether the given buffer description is supported by the system. If this returns
+</span> true, then the allocation may succeed until resource exhaustion occurs. If this returns
+ false then this combination will never succeed.
+@param {Number} width The width in pixels of the buffer
+@param {Number} height The height in pixels of the buffer
+@param {Number} format The @Format of each pixel
+@param {Number} layers The number of layers in the buffer
+@param {Number} usage The @Usage flags describing how the buffer will be used
+@return {Boolean} True if the combination is supported, false otherwise.
+*/
+isSupported : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-createFromGraphicBuffer'>/**
+</span>@param {Object {GraphicBuffer}} graphicBuffer A GraphicBuffer to be wrapped as HardwareBuffer
+@param graphicBuffer A GraphicBuffer to be wrapped as HardwareBuffer
+@return {Object {android.hardware.HardwareBuffer}} A &lt;code&gt;HardwareBuffer&lt;/code&gt; instance.
+*/
+createFromGraphicBuffer : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-getWidth'>/**Returns the width of this buffer in pixels.
+</span>*/
+getWidth : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-getHeight'>/**Returns the height of this buffer in pixels.
+</span>*/
+getHeight : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-getFormat'>/**Returns the @Format of this buffer.
+</span>*/
+getFormat : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-getLayers'>/**Returns the number of layers in this buffer.
+</span>*/
+getLayers : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-getUsage'>/**Returns the usage flags of the usage hints set on this buffer.
+</span>*/
+getUsage : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-destroy'>/**
+</span>@removed replaced by {@link #close()}
+*/
+destroy : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-isDestroyed'>/**
+</span>@removed replaced by {@link #isClosed()}
+*/
+isDestroyed : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-close'>/**Destroys this buffer immediately. Calling this method frees up any
+</span> underlying native resources. After calling this method, this buffer
+ must not be used in any way.
+@see #isClosed()
+*/
+close : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-isClosed'>/**Indicates whether this buffer has been closed. A closed buffer cannot
+</span> be used in any way: the buffer cannot be written to a parcel, etc.
+@return {Boolean} True if this &lt;code&gt;HardwareBuffer&lt;/code&gt; is in a closed state,
+         false otherwise.
+@see #close()
+*/
+isClosed : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-hardware-HardwareBuffer-method-writeToParcel'>/**Flatten this object in to a Parcel.
+</span>
+ &lt;p&gt;Calling this method will throw an &lt;code&gt;IllegalStateException&lt;/code&gt; if
+ {@link #close}() has been previously called.&lt;/p&gt;
+@param {Object {Parcel}} dest The Parcel in which the object should be written.
+@param {Number} flags Additional flags about how the object should be written.
+              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

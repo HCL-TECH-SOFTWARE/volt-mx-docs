@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ex-photo-PhotoViewController'>/**@class com.android.ex.photo.PhotoViewController
+</span> implements com.android.ex.photo.PhotoViewPager.OnInterceptTouchListener
+
+ implements com.android.ex.photo.ActionBarInterface.OnMenuVisibilityListener
+
+ implements com.android.ex.photo.PhotoViewCallbacks
+
+@extends java.lang.Object
+
+ This class implements all the logic of the photo view activity. An activity should use this class
+ calling through from relevant activity methods to the methods of the same name here.
+
+ To customize the photo viewer activity, you should subclass this and implement your
+ customizations here. Then subclass {@link com.android.ex.photo.PhotoViewActivity} and override just
+ {@link com.android.ex.photo.PhotoViewActivity#createController createController} to instantiate your controller
+ subclass.
+*/
+var PhotoViewController = {
+
+<span id='com-android-ex-photo-PhotoViewController-property-LOADER_PHOTO_LIST'>/***/
+</span>LOADER_PHOTO_LIST : &quot;100&quot;,
+<span id='com-android-ex-photo-PhotoViewController-property-ALBUM_COUNT_UNKNOWN'>/**Count used when the real photo count is unknown [but, may be determined] */
+</span>ALBUM_COUNT_UNKNOWN : &quot;-1&quot;,
+<span id='com-android-ex-photo-PhotoViewController-property-ENTER_ANIMATION_DURATION_MS'>/***/
+</span>ENTER_ANIMATION_DURATION_MS : &quot;250&quot;,
+<span id='com-android-ex-photo-PhotoViewController-property-EXIT_ANIMATION_DURATION_MS'>/***/
+</span>EXIT_ANIMATION_DURATION_MS : &quot;250&quot;,
+<span id='com-android-ex-photo-PhotoViewController-property-KEY_MESSAGE'>/**Argument key for the dialog message */
+</span>KEY_MESSAGE : &quot;dialog_message&quot;,
+<span id='com-android-ex-photo-PhotoViewController-property-sMemoryClass'>/***/
+</span>sMemoryClass : &quot;null&quot;,
+<span id='com-android-ex-photo-PhotoViewController-property-sMaxPhotoSize'>/***/
+</span>sMaxPhotoSize : &quot;null&quot;,
+<span id='com-android-ex-photo-PhotoViewController-method-createPhotoPagerAdapter'>/**
+</span>*/
+createPhotoPagerAdapter : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-getActivity'>/**
+</span>*/
+getActivity : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onCreateOptionsMenu'>/**
+</span>*/
+onCreateOptionsMenu : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onPrepareOptionsMenu'>/**
+</span>*/
+onPrepareOptionsMenu : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onActivityResult'>/**
+</span>*/
+onActivityResult : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onResume'>/**
+</span>*/
+onResume : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onPause'>/**
+</span>*/
+onPause : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onStop'>/**
+</span>*/
+onStop : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onBackPressed'>/**
+</span>*/
+onBackPressed : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onOptionsItemSelected'>/**
+</span>*/
+onOptionsItemSelected : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-addScreenListener'>/**
+</span>*/
+addScreenListener : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-removeScreenListener'>/**
+</span>*/
+removeScreenListener : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-addCursorListener'>/**
+</span>*/
+addCursorListener : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-removeCursorListener'>/**
+</span>*/
+removeCursorListener : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-isFragmentFullScreen'>/**
+</span>*/
+isFragmentFullScreen : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-toggleFullScreen'>/**
+</span>*/
+toggleFullScreen : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onPhotoRemoved'>/**
+</span>*/
+onPhotoRemoved : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onCreateLoader'>/**
+</span>*/
+onCreateLoader : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onCreateBitmapLoader'>/**
+</span>*/
+onCreateBitmapLoader : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onLoadFinished'>/**
+</span>*/
+onLoadFinished : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onLoaderReset'>/**
+</span>*/
+onLoaderReset : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-updateActionItems'>/**
+</span>*/
+updateActionItems : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onPageScrolled'>/**
+</span>*/
+onPageScrolled : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onPageSelected'>/**
+</span>*/
+onPageSelected : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onPageScrollStateChanged'>/**
+</span>*/
+onPageScrollStateChanged : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-isFragmentActive'>/**
+</span>*/
+isFragmentActive : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onFragmentVisible'>/**
+</span>*/
+onFragmentVisible : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onTouchIntercept'>/**
+</span>*/
+onTouchIntercept : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-setViewActivated'>/**
+</span>*/
+setViewActivated : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-updateActionBar'>/**Adjusts the activity title and subtitle to reflect the photo name and count.
+</span>*/
+updateActionBar : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-getCursorAtProperPosition'>/**Utility method that will return the cursor that contains the data
+</span> at the current position so that it refers to the current image on screen.
+@return {Object {android.database.Cursor}} the cursor at the current position or
+ null if no cursor exists or if the {@link PhotoViewPager} is null.
+*/
+getCursorAtProperPosition : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-getCursor'>/**
+</span>*/
+getCursor : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onMenuVisibilityChanged'>/**
+</span>*/
+onMenuVisibilityChanged : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onNewPhotoLoaded'>/**
+</span>*/
+onNewPhotoLoaded : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onFragmentPhotoLoadComplete'>/**
+</span>*/
+onFragmentPhotoLoadComplete : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onCursorChanged'>/**
+</span>*/
+onCursorChanged : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-getAdapter'>/**
+</span>*/
+getAdapter : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-onEnterAnimationComplete'>/**
+</span>*/
+onEnterAnimationComplete : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-showActionBar'>/**
+</span>*/
+showActionBar : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-hideActionBar'>/**
+</span>*/
+hideActionBar : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-isScaleAnimationEnabled'>/**
+</span>*/
+isScaleAnimationEnabled : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-isEnterAnimationFinished'>/**
+</span>*/
+isEnterAnimationFinished : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-getRootView'>/**
+</span>*/
+getRootView : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-setImmersiveMode'>/**
+</span>*/
+setImmersiveMode : function(  ) {},
+
+<span id='com-android-ex-photo-PhotoViewController-method-getSystemUiVisibilityChangeListener'>/**Note: This should only be called when API level is 11 or above.
+</span>*/
+getSystemUiVisibilityChangeListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

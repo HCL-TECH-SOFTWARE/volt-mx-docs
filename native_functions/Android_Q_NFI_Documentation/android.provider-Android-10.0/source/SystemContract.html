@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-BlockedNumberContract-SystemContract'>/**@class android.provider.BlockedNumberContract.SystemContract
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ The contract between the blockednumber provider and the system.
+ &lt;/p&gt;
+ &lt;p&gt;This is a wrapper over {@link android.provider.BlockedNumberContract} that also manages the blocking
+ behavior when the user contacts emergency services. See
+ {@link #notifyEmergencyContact}(Context) for details. All methods are protected by
+ {@link android.Manifest.permission#READ_BLOCKED_NUMBERS} and
+ {@link android.Manifest.permission#WRITE_BLOCKED_NUMBERS} appropriately which ensure that
+ only system can access the methods defined here.
+ &lt;/p&gt;
+ @hide
+*/
+var SystemContract = {
+
+<span id='android-provider-BlockedNumberContract-SystemContract-property-ACTION_BLOCK_SUPPRESSION_STATE_CHANGED'>/** A protected broadcast intent action for letting components with
+</span> {@link android.Manifest.permission#READ_BLOCKED_NUMBERS} know that the block suppression
+ status as returned by {@link #getBlockSuppressionStatus}(Context) has been updated.
+*/
+ACTION_BLOCK_SUPPRESSION_STATE_CHANGED : &quot;android.provider.action.BLOCK_SUPPRESSION_STATE_CHANGED&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-METHOD_NOTIFY_EMERGENCY_CONTACT'>/***/
+</span>METHOD_NOTIFY_EMERGENCY_CONTACT : &quot;notify_emergency_contact&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-METHOD_END_BLOCK_SUPPRESSION'>/***/
+</span>METHOD_END_BLOCK_SUPPRESSION : &quot;end_block_suppression&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-METHOD_SHOULD_SYSTEM_BLOCK_NUMBER'>/***/
+</span>METHOD_SHOULD_SYSTEM_BLOCK_NUMBER : &quot;should_system_block_number&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-METHOD_GET_BLOCK_SUPPRESSION_STATUS'>/***/
+</span>METHOD_GET_BLOCK_SUPPRESSION_STATUS : &quot;get_block_suppression_status&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-METHOD_SHOULD_SHOW_EMERGENCY_CALL_NOTIFICATION'>/***/
+</span>METHOD_SHOULD_SHOW_EMERGENCY_CALL_NOTIFICATION : &quot;should_show_emergency_call_notification&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-RES_IS_BLOCKING_SUPPRESSED'>/***/
+</span>RES_IS_BLOCKING_SUPPRESSED : &quot;blocking_suppressed&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-RES_BLOCKING_SUPPRESSED_UNTIL_TIMESTAMP'>/***/
+</span>RES_BLOCKING_SUPPRESSED_UNTIL_TIMESTAMP : &quot;blocking_suppressed_until_timestamp&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-METHOD_GET_ENHANCED_BLOCK_SETTING'>/***/
+</span>METHOD_GET_ENHANCED_BLOCK_SETTING : &quot;get_enhanced_block_setting&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-METHOD_SET_ENHANCED_BLOCK_SETTING'>/***/
+</span>METHOD_SET_ENHANCED_BLOCK_SETTING : &quot;set_enhanced_block_setting&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-ENHANCED_SETTING_KEY_BLOCK_UNREGISTERED'>/***/
+</span>ENHANCED_SETTING_KEY_BLOCK_UNREGISTERED : &quot;block_numbers_not_in_contacts_setting&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-ENHANCED_SETTING_KEY_BLOCK_PRIVATE'>/***/
+</span>ENHANCED_SETTING_KEY_BLOCK_PRIVATE : &quot;block_private_number_calls_setting&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-ENHANCED_SETTING_KEY_BLOCK_PAYPHONE'>/***/
+</span>ENHANCED_SETTING_KEY_BLOCK_PAYPHONE : &quot;block_payphone_calls_setting&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-ENHANCED_SETTING_KEY_BLOCK_UNKNOWN'>/***/
+</span>ENHANCED_SETTING_KEY_BLOCK_UNKNOWN : &quot;block_unknown_calls_setting&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-property-ENHANCED_SETTING_KEY_SHOW_EMERGENCY_CALL_NOTIFICATION'>/***/
+</span>ENHANCED_SETTING_KEY_SHOW_EMERGENCY_CALL_NOTIFICATION : &quot;show_emergency_call_notification&quot;,
+<span id='android-provider-BlockedNumberContract-SystemContract-method-notifyEmergencyContact'>/**Notifies the provider that emergency services were contacted by the user.
+</span> &lt;p&gt; This results in {@link #shouldSystemBlockNumber} returning {@code false} independent
+ of the contents of the provider for a duration defined by
+ {@link android.telephony.CarrierConfigManager#KEY_DURATION_BLOCKING_DISABLED_AFTER_EMERGENCY_INT}
+ the provider unless {@link #endBlockSuppression}(Context) is called.
+*/
+notifyEmergencyContact : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-SystemContract-method-endBlockSuppression'>/**Notifies the provider to disable suppressing blocking. If emergency services were not
+</span> contacted recently at all, calling this method is a no-op.
+*/
+endBlockSuppression : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-SystemContract-method-shouldSystemBlockNumber'>/**Returns {@code true} if {@code phoneNumber} is blocked taking
+</span> {@link #notifyEmergencyContact}(Context) into consideration. If emergency services
+ have not been contacted recently and enhanced call blocking not been enabled, this
+ method is equivalent to {@link #isBlocked(Context, String)}.
+@param {Object {Context}} context the context of the caller.
+@param {String} phoneNumber the number to check.
+@param {Object {Bundle}} extras the extra attribute of the number.
+@return {Number} result code indicating if the number should be blocked, and if so why.
+         Valid values are: {@link #STATUS_NOT_BLOCKED}, {@link #STATUS_BLOCKED_IN_LIST},
+         {@link #STATUS_BLOCKED_NOT_IN_CONTACTS}, {@link #STATUS_BLOCKED_PAYPHONE},
+         {@link #STATUS_BLOCKED_RESTRICTED}, {@link #STATUS_BLOCKED_UNKNOWN_NUMBER}.
+*/
+shouldSystemBlockNumber : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-SystemContract-method-getBlockSuppressionStatus'>/**Returns the current status of block suppression.
+</span>*/
+getBlockSuppressionStatus : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-SystemContract-method-shouldShowEmergencyCallNotification'>/**Check whether should show the emergency call notification.
+</span>@param {Object {Context}} context the context of the caller.
+@return {Boolean} {@code true} if should show emergency call notification. {@code false} otherwise.
+*/
+shouldShowEmergencyCallNotification : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-SystemContract-method-getEnhancedBlockSetting'>/**Check whether the enhanced block setting is enabled.
+</span>@param {Object {Context}} context the context of the caller.
+@param {String} key the key of the setting to check, can be
+        {@link #ENHANCED_SETTING_KEY_BLOCK_UNREGISTERED}
+        {@link #ENHANCED_SETTING_KEY_BLOCK_PRIVATE}
+        {@link #ENHANCED_SETTING_KEY_BLOCK_PAYPHONE}
+        {@link #ENHANCED_SETTING_KEY_BLOCK_UNKNOWN}
+        {@link #ENHANCED_SETTING_KEY_EMERGENCY_CALL_NOTIFICATION_SHOWING}
+@return {Boolean} {@code true} if the setting is enabled. {@code false} otherwise.
+*/
+getEnhancedBlockSetting : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-SystemContract-method-setEnhancedBlockSetting'>/**Set the enhanced block setting enabled status.
+</span>@param {Object {Context}} context the context of the caller.
+@param {String} key the key of the setting to set, can be
+        {@link #ENHANCED_SETTING_KEY_BLOCK_UNREGISTERED}
+        {@link #ENHANCED_SETTING_KEY_BLOCK_PRIVATE}
+        {@link #ENHANCED_SETTING_KEY_BLOCK_PAYPHONE}
+        {@link #ENHANCED_SETTING_KEY_BLOCK_UNKNOWN}
+        {@link #ENHANCED_SETTING_KEY_EMERGENCY_CALL_NOTIFICATION_SHOWING}
+@param {Boolean} value the enabled statue of the setting to set.
+*/
+setEnhancedBlockSetting : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-SystemContract-method-blockStatusToString'>/**Converts a block status constant to a string equivalent for logging.
+</span>@hide 
+*/
+blockStatusToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

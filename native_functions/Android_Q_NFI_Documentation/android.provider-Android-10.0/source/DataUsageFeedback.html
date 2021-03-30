@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-DataUsageFeedback'>/**@class android.provider.ContactsContract.DataUsageFeedback
+</span>@extends java.lang.Object
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Caution: &lt;/b&gt;As of January 7, 2019, this class is obsolete. For
+ more information, see the
+ &lt;a href=&quot;/guide/topics/providers/contacts-provider#ObsoleteData&quot;&gt;Contacts Provider&lt;/a&gt;
+ page.
+ &lt;/p&gt;
+ &lt;p&gt;
+ API allowing applications to send usage information for each {@link android.provider.ContactsContract.Data} row to the
+ Contacts Provider.  Applications can also clear all usage information.
+ &lt;/p&gt;
+ &lt;p&gt;
+ With the feedback, Contacts Provider may return more contextually appropriate results for
+ Data listing, typically supplied with
+ {@link android.provider.ContactsContract.Contacts#CONTENT_FILTER_URI},
+ {@link android.provider.ContactsContract.CommonDataKinds.Email#CONTENT_FILTER_URI},
+ {@link android.provider.ContactsContract.CommonDataKinds.Phone#CONTENT_FILTER_URI}, and users can benefit
+ from better ranked (sorted) lists in applications that show auto-complete list.
+ &lt;/p&gt;
+ &lt;p&gt;
+ There is no guarantee for how this feedback is used, or even whether it is used at all.
+ The ranking algorithm will make best efforts to use the feedback data, but the exact
+ implementation, the storage data structures as well as the resulting sort order is device
+ and version specific and can change over time.
+ &lt;/p&gt;
+ &lt;p&gt;
+ When updating usage information, users of this API need to use
+ {@link ContentResolver#update(Uri, ContentValues, String, String[])} with a Uri constructed
+ from {@link android.provider.ContactsContract.DataUsageFeedback#FEEDBACK_URI}. The Uri must contain one or more data id(s) as
+ its last path. They also need to append a query parameter to the Uri, to specify the type of
+ the communication, which enables the Contacts Provider to differentiate between kinds of
+ interactions using the same contact data field (for example a phone number can be used to
+ make phone calls or send SMS).
+ &lt;/p&gt;
+ &lt;p&gt;
+ Selection and selectionArgs are ignored and must be set to null. To get data ids,
+ you may need to call {@link ContentResolver#query(Uri, String[], String, String[], String)}
+ toward {@link android.provider.ContactsContract.Data#CONTENT_URI}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ {@link ContentResolver#update(Uri, ContentValues, String, String[])} returns a positive
+ integer when successful, and returns 0 if no contact with that id was found.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Example:
+ &lt;pre&gt;
+ Uri uri = DataUsageFeedback.FEEDBACK_URI.buildUpon()
+         .appendPath(TextUtils.join(&quot;,&quot;, dataIds))
+         .appendQueryParameter(DataUsageFeedback.USAGE_TYPE,
+                 DataUsageFeedback.USAGE_TYPE_CALL)
+         .build();
+ boolean successful = resolver.update(uri, new ContentValues(), null, null) &gt; 0;
+ &lt;/pre&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ Applications can also clear all usage information with:
+ &lt;pre&gt;
+ boolean successful = resolver.delete(DataUsageFeedback.DELETE_USAGE_URI, null, null) &gt; 0;
+ &lt;/pre&gt;
+ &lt;/p&gt;
+
+ @deprecated Contacts affinity information is no longer supported as of
+ Android version {@link android.os.Build.VERSION_CODES#Q}.
+ Both update and delete calls are always ignored.
+*/
+var DataUsageFeedback = {
+
+<span id='android-provider-ContactsContract-DataUsageFeedback-property-FEEDBACK_URI'>/** The content:// style URI for sending usage feedback.
+</span> Must be used with {@link ContentResolver#update(Uri, ContentValues, String, String[])}.
+*/
+FEEDBACK_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-DataUsageFeedback-property-DELETE_USAGE_URI'>/** The content:// style URI for deleting all usage information.
+</span> Must be used with {@link ContentResolver#delete(Uri, String, String[])}.
+ The {@code where} and {@code selectionArgs} parameters are ignored.
+*/
+DELETE_USAGE_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-DataUsageFeedback-property-USAGE_TYPE'>/** &lt;p&gt;
+</span> Name for query parameter specifying the type of data usage.
+ &lt;/p&gt;
+*/
+USAGE_TYPE : &quot;type&quot;,
+<span id='android-provider-ContactsContract-DataUsageFeedback-property-USAGE_TYPE_CALL'>/** &lt;p&gt;
+</span> Type of usage for voice interaction, which includes phone call, voice chat, and
+ video chat.
+ &lt;/p&gt;
+*/
+USAGE_TYPE_CALL : &quot;call&quot;,
+<span id='android-provider-ContactsContract-DataUsageFeedback-property-USAGE_TYPE_LONG_TEXT'>/** &lt;p&gt;
+</span> Type of usage for text interaction involving longer messages, which includes email.
+ &lt;/p&gt;
+*/
+USAGE_TYPE_LONG_TEXT : &quot;long_text&quot;,
+<span id='android-provider-ContactsContract-DataUsageFeedback-property-USAGE_TYPE_SHORT_TEXT'>/** &lt;p&gt;
+</span> Type of usage for text interaction involving shorter messages, which includes SMS,
+ text chat with email addresses.
+ &lt;/p&gt;
+*/
+USAGE_TYPE_SHORT_TEXT : &quot;short_text&quot;,
+
+};</pre>
+</body>
+</html>

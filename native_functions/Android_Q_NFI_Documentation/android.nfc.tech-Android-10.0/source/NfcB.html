@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-NfcB'>/**@class android.nfc.tech.NfcB
+</span>@extends android.nfc.tech.BasicTagTechnology
+
+ Provides access to NFC-B (ISO 14443-3B) properties and I/O operations on a {@link Tag}.
+
+ &lt;p&gt;Acquire a {@link android.nfc.tech.NfcB} object using {@link #get}.
+ &lt;p&gt;The primary NFC-B I/O operation is {@link #transceive}. Applications must
+ implement their own protocol stack on top of {@link #transceive}.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Methods that perform I/O operations
+ require the {@link android.Manifest.permission#NFC} permission.
+*/
+var NfcB = {
+
+<span id='android-nfc-tech-NfcB-property-EXTRA_APPDATA'>/**@hide */
+</span>EXTRA_APPDATA : &quot;appdata&quot;,
+<span id='android-nfc-tech-NfcB-property-EXTRA_PROTINFO'>/**@hide */
+</span>EXTRA_PROTINFO : &quot;protinfo&quot;,
+<span id='android-nfc-tech-NfcB-method-get'>/**Get an instance of {@link android.nfc.tech.NfcB} for the given tag.
+</span> &lt;p&gt;Returns null if {@link android.nfc.tech.NfcB} was not enumerated in {@link Tag#getTechList}.
+ This indicates the tag does not support NFC-B.
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@param {Object {Tag}} tag an NFC-B compatible tag
+@return {Object {android.nfc.tech.NfcB}} NFC-B object
+*/
+get : function(  ) {},
+
+<span id='android-nfc-tech-NfcB-method-getApplicationData'>/**Return the Application Data bytes from ATQB/SENSB_RES at tag discovery.
+</span>
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} Application Data bytes from ATQB/SENSB_RES bytes
+*/
+getApplicationData : function(  ) {},
+
+<span id='android-nfc-tech-NfcB-method-getProtocolInfo'>/**Return the Protocol Info bytes from ATQB/SENSB_RES at tag discovery.
+</span>
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} Protocol Info bytes from ATQB/SENSB_RES bytes
+*/
+getProtocolInfo : function(  ) {},
+
+<span id='android-nfc-tech-NfcB-method-transceive'>/**Send raw NFC-B commands to the tag and receive the response.
+</span>
+ &lt;p&gt;Applications must not append the EoD (CRC) to the payload,
+ it will be automatically calculated.
+ &lt;p&gt;Applications must not send commands that manage the polling
+ loop and initialization (SENSB_REQ, SLOT_MARKER etc).
+
+ &lt;p&gt;Use {@link #getMaxTransceiveLength} to retrieve the maximum number of bytes
+ that can be sent with {@link #transceive}.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Object {byte[]}} data bytes to send
+@return {Number} bytes received in response
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or this operation is canceled
+*/
+transceive : function(  ) {},
+
+<span id='android-nfc-tech-NfcB-method-getMaxTransceiveLength'>/**Return the maximum number of bytes that can be sent with {@link #transceive}.
+</span>@return {Number} the maximum number of bytes that can be sent with {@link #transceive}.
+*/
+getMaxTransceiveLength : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

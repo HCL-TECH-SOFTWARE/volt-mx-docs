@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-Drawable-Callback'>/**@class android.graphics.drawable.Drawable.Callback
+</span> Implement this interface if you want to create an animated drawable that
+ extends {@link android.graphics.drawable.Drawable Drawable}.
+ Upon retrieving a drawable, use
+ {@link Drawable#setCallback(android.graphics.drawable.Drawable.Callback)}
+ to supply your implementation of the interface to the drawable; it uses
+ this interface to schedule and execute animation changes.
+*/
+var Callback = {
+
+<span id='android-graphics-drawable-Drawable-Callback-method-invalidateDrawable'>/**Called when the drawable needs to be redrawn.  A view at this point
+</span> should invalidate itself (or at least the part of itself where the
+ drawable appears).
+@param {Object {Drawable}} who The drawable that is requesting the update.
+*/
+invalidateDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-Callback-method-scheduleDrawable'>/**A Drawable can call this to schedule the next frame of its
+</span> animation.  An implementation can generally simply call
+ {@link android.os.Handler#postAtTime(Runnable, Object, long)} with
+ the parameters &lt;var&gt;(what, who, when)&lt;/var&gt; to perform the
+ scheduling.
+@param {Object {Drawable}} who The drawable being scheduled.
+@param {Object {Runnable}} what The action to execute.
+@param {Number} when The time (in milliseconds) to run.  The timebase is
+             {@link android.os.SystemClock#uptimeMillis}
+*/
+scheduleDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-Drawable-Callback-method-unscheduleDrawable'>/**A Drawable can call this to unschedule an action previously
+</span> scheduled with {@link #scheduleDrawable}.  An implementation can
+ generally simply call
+ {@link android.os.Handler#removeCallbacks(Runnable, Object)} with
+ the parameters &lt;var&gt;(what, who)&lt;/var&gt; to unschedule the drawable.
+@param {Object {Drawable}} who The drawable being unscheduled.
+@param {Object {Runnable}} what The action being unscheduled.
+*/
+unscheduleDrawable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

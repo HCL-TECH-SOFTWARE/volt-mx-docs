@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-radio-RadioManager-ModuleProperties'>/**@class android.hardware.radio.RadioManager.ModuleProperties
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Lists properties, options and radio bands supported by a given broadcast radio module.
+ Each module has a unique ID used to address it when calling RadioManager APIs.
+ Module properties are returned by {@link #listModules(List &lt;ModuleProperties&gt;)} method.
+*/
+var ModuleProperties = {
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getId'>/**Unique module identifier provided by the native service.
+</span> For use with {@link #openTuner(int, android.hardware.radio.RadioManager.BandConfig, boolean, android.hardware.radio.RadioTuner.Callback, Handler)}.
+@return {Number} the radio module unique identifier.
+*/
+getId : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getServiceName'>/**Module service (driver) name as registered with HIDL.
+</span>@return {String} the module service name.
+*/
+getServiceName : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getClassId'>/**Module class identifier: {@link #CLASS_AM_FM}, {@link #CLASS_SAT}, {@link #CLASS_DT}
+</span>@return {Number} the radio module class identifier.
+*/
+getClassId : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getImplementor'>/**Human readable broadcast radio module implementor
+</span>@return {String} the name of the radio module implementator.
+*/
+getImplementor : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getProduct'>/**Human readable broadcast radio module product name
+</span>@return {String} the radio module product name.
+*/
+getProduct : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getVersion'>/**Human readable broadcast radio module version number
+</span>@return {String} the radio module version.
+*/
+getVersion : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getSerial'>/**Radio module serial number.
+</span> Can be used for subscription services.
+@return {String} the radio module serial number.
+*/
+getSerial : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getNumTuners'>/**Number of tuners available.
+</span> This is the number of tuners that can be open simultaneously.
+@return {Number} the number of tuners supported.
+*/
+getNumTuners : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getNumAudioSources'>/**Number tuner audio sources available. Must be less or equal to getNumTuners().
+</span> When more than one tuner is supported, one is usually for playback and has one
+ associated audio source and the other is for pre scanning and building a
+ program list.
+@return {Number} the number of audio sources available.
+*/
+getNumAudioSources : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-isInitializationRequired'>/**Checks, if BandConfig initialization (after {@link android.hardware.radio.RadioManager#openTuner})
+</span> is required to be done before other operations or not.
+
+ If it is, the client has to wait for {@link android.hardware.radio.RadioTuner.Callback#onConfigurationChanged}
+ callback before executing any other operations. Otherwise, such operation will fail
+ returning {@link android.hardware.radio.RadioManager#STATUS_INVALID_OPERATION} error code.
+*/
+isInitializationRequired : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-isCaptureSupported'>/**{@code true} if audio capture is possible from radio tuner output.
+</span> This indicates if routing to audio devices not connected to the same HAL as the FM radio
+ is possible (e.g. to USB) or DAR (Digital Audio Recorder) feature can be implemented.
+@return {Boolean} {@code true} if audio capture is possible, {@code false} otherwise.
+*/
+isCaptureSupported : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-isBackgroundScanningSupported'>/**{@code true} if the module supports background scanning. At the given time it may not
+</span> be available though, see {@link android.hardware.radio.RadioTuner#startBackgroundScan()}.
+@return {Boolean} {@code true} if background scanning is supported (not necessary available
+ at a given time), {@code false} otherwise.
+*/
+isBackgroundScanningSupported : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-isProgramTypeSupported'>/**Checks, if a given program type is supported by this tuner.
+</span>
+ If a program type is supported by radio module, it means it can tune
+ to ProgramSelector of a given type.
+@return {Boolean} {@code true} if a given program type is supported.
+*/
+isProgramTypeSupported : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-isProgramIdentifierSupported'>/**Checks, if a given program identifier is supported by this tuner.
+</span>
+ If an identifier is supported by radio module, it means it can use it for
+ tuning to ProgramSelector with either primary or secondary Identifier of
+ a given type.
+@return {Boolean} {@code true} if a given program type is supported.
+*/
+isProgramIdentifierSupported : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getDabFrequencyTable'>/**A frequency table for Digital Audio Broadcasting (DAB).
+</span>
+ The key is a channel name, i.e. 5A, 7B.
+
+ The value is a frequency, in kHz.
+@return {Object {java.util.Map}} a frequency table, or {@code null} if the module doesn't support DAB
+*/
+getDabFrequencyTable : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getVendorInfo'>/**A map of vendor-specific opaque strings, passed from HAL without changes.
+</span> Format of these strings can vary across vendors.
+
+ It may be used for extra features, that's not supported by a platform,
+ for example: preset-slots=6; ultra-hd-capable=false.
+
+ Keys must be prefixed with unique vendor Java-style namespace,
+ eg. 'com.somecompany.parameter1'.
+*/
+getVendorInfo : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-getBands'>/**List of descriptors for all bands supported by this module.
+</span>@return {Object {android.hardware.radio.RadioManager.BandDescriptor}} an array of {@link BandDescriptor}.
+*/
+getBands : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-ModuleProperties-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

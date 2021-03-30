@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-VoicemailContract'>/**@class android.provider.VoicemailContract
+</span>@extends java.lang.Object
+
+ The contract between the voicemail provider and applications. Contains
+ definitions for the supported URIs and columns.
+
+ &lt;P&gt;The content providers exposes two tables through this interface:
+ &lt;ul&gt;
+   &lt;li&gt; Voicemails table: This stores the actual voicemail records. The
+   columns and URIs for accessing this table are defined by the
+   {@link android.provider.VoicemailContract.Voicemails} class.
+   &lt;/li&gt;
+   &lt;li&gt; Status table: This provides a way for the voicemail source application
+   to convey its current state to the system. The columns and URIS for
+   accessing this table are defined by the {@link android.provider.VoicemailContract.Status} class.
+   &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;P&gt; The minimum permission needed to access this content provider is
+ {@link android.Manifest.permission#ADD_VOICEMAIL} or carrier privileges (see
+ {@link android.telephony.TelephonyManager#hasCarrierPrivileges}).
+
+ &lt;P&gt;Voicemails are inserted by what is called as a &quot;voicemail source&quot;
+ application, which is responsible for syncing voicemail data between a remote
+ server and the local voicemail content provider. &quot;voicemail source&quot;
+ application should always set the {@link #PARAM_KEY_SOURCE_PACKAGE} in the
+ URI to identify its package.
+
+ &lt;P&gt;In addition to the {@link ContentObserver} notifications the voicemail
+ provider also generates broadcast intents to notify change for applications
+ that are not active and therefore cannot listen to ContentObserver
+ notifications. Broadcast intents with following actions are generated:
+ &lt;ul&gt;
+   &lt;li&gt; {@link #ACTION_NEW_VOICEMAIL} is generated for each new voicemail
+   inserted.
+   &lt;/li&gt;
+   &lt;li&gt; {@link Intent#ACTION_PROVIDER_CHANGED} is generated for any change
+    made into the database, including new voicemail.
+   &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var VoicemailContract = {
+
+<span id='android-provider-VoicemailContract-property-AUTHORITY'>/**The authority used by the voicemail provider. */
+</span>AUTHORITY : &quot;com.android.voicemail&quot;,
+<span id='android-provider-VoicemailContract-property-PARAM_KEY_SOURCE_PACKAGE'>/** Parameter key used in the URI to specify the voicemail source package name.
+</span> &lt;p&gt; This field must be set in all requests that originate from a voicemail source.
+*/
+PARAM_KEY_SOURCE_PACKAGE : &quot;source_package&quot;,
+<span id='android-provider-VoicemailContract-property-ACTION_NEW_VOICEMAIL'>/**Broadcast intent when a new voicemail record is inserted. */
+</span>ACTION_NEW_VOICEMAIL : &quot;android.intent.action.NEW_VOICEMAIL&quot;,
+<span id='android-provider-VoicemailContract-property-ACTION_FETCH_VOICEMAIL'>/** Broadcast intent to request a voicemail source to fetch voicemail content of a specific
+</span> voicemail from the remote server. The voicemail to fetch is specified by the data uri
+ of the intent.
+ &lt;p&gt;
+ All voicemail sources are expected to handle this event. After storing the content
+ the application should also set {@link android.provider.VoicemailContract.Voicemails#HAS_CONTENT} to 1;
+*/
+ACTION_FETCH_VOICEMAIL : &quot;android.intent.action.FETCH_VOICEMAIL&quot;,
+<span id='android-provider-VoicemailContract-property-ACTION_SYNC_VOICEMAIL'>/** Broadcast intent to request all voicemail sources to perform a sync with the remote server.
+</span>*/
+ACTION_SYNC_VOICEMAIL : &quot;android.provider.action.SYNC_VOICEMAIL&quot;,
+<span id='android-provider-VoicemailContract-property-ACTION_VOICEMAIL_SMS_RECEIVED'>/** Broadcast intent to inform a new visual voicemail SMS has been received. This intent will
+</span> only be delivered to the telephony service.
+
+ @see #EXTRA_VOICEMAIL_SMS
+ @see #EXTRA_TARGET_PACKAGE
+
+ @hide */
+ACTION_VOICEMAIL_SMS_RECEIVED : &quot;com.android.internal.provider.action.VOICEMAIL_SMS_RECEIVED&quot;,
+<span id='android-provider-VoicemailContract-property-EXTRA_VOICEMAIL_SMS'>/** Extra in {@link #ACTION_VOICEMAIL_SMS_RECEIVED} indicating the content of the SMS.
+</span>
+ @hide
+*/
+EXTRA_VOICEMAIL_SMS : &quot;android.provider.extra.VOICEMAIL_SMS&quot;,
+<span id='android-provider-VoicemailContract-property-EXTRA_TARGET_PACKAGE'>/** Extra in {@link #ACTION_VOICEMAIL_SMS_RECEIVED} indicating the target package to bind {@link android.telephony.VisualVoicemailService}.
+</span>
+ &lt;p&gt;This extra should be set to android.telephony.VisualVoicemailSmsFilterSettings#packageName
+ while performing filtering. Since the default dialer might change between the filter sending
+ it and telephony binding to the service, this ensures the service will not receive SMS
+ filtered by the previous app.
+
+ @hide
+*/
+EXTRA_TARGET_PACKAGE : &quot;android.provider.extra.TARGET_PACAKGE&quot;,
+<span id='android-provider-VoicemailContract-property-EXTRA_SELF_CHANGE'>/** Extra included in {@link Intent#ACTION_PROVIDER_CHANGED} broadcast intents to indicate if the
+</span> receiving package made this change.
+*/
+EXTRA_SELF_CHANGE : &quot;com.android.voicemail.extra.SELF_CHANGE&quot;,
+<span id='android-provider-VoicemailContract-property-EXTRA_PHONE_ACCOUNT_HANDLE'>/** Extra included in {@link #ACTION_SYNC_VOICEMAIL} broadcast intents to indicate which {@link android.provider.CommonDataKinds.PhoneAccountHandle} to sync.
+</span>*/
+EXTRA_PHONE_ACCOUNT_HANDLE : &quot;android.provider.extra.PHONE_ACCOUNT_HANDLE&quot;,
+<span id='android-provider-VoicemailContract-property-SOURCE_PACKAGE_FIELD'>/** Name of the source package field, which must be same across all voicemail related tables.
+</span> This is an internal field.
+ @hide
+*/
+SOURCE_PACKAGE_FIELD : &quot;source_package&quot;,
+
+};</pre>
+</body>
+</html>

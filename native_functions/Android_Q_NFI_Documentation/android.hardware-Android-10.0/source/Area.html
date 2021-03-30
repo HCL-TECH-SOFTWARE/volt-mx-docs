@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-Camera-Area'>/**@class android.hardware.Camera.Area
+</span>@extends java.lang.Object
+
+ &lt;p&gt;The Area class is used for choosing specific metering and focus areas for
+ the camera to use when calculating auto-exposure, auto-white balance, and
+ auto-focus.&lt;/p&gt;
+
+ &lt;p&gt;To find out how many simultaneous areas a given camera supports, use
+ {@link android.hardware.Camera.Parameters#getMaxNumMeteringAreas()} and
+ {@link android.hardware.Camera.Parameters#getMaxNumFocusAreas()}. If metering or focusing area
+ selection is unsupported, these methods will return 0.&lt;/p&gt;
+
+ &lt;p&gt;Each Area consists of a rectangle specifying its bounds, and a weight
+ that determines its importance. The bounds are relative to the camera's
+ current field of view. The coordinates are mapped so that (-1000, -1000)
+ is always the top-left corner of the current field of view, and (1000,
+ 1000) is always the bottom-right corner of the current field of
+ view. Setting Areas with bounds outside that range is not allowed. Areas
+ with zero or negative width or height are not allowed.&lt;/p&gt;
+
+ &lt;p&gt;The weight must range from 1 to 1000, and represents a weight for
+ every pixel in the area. This means that a large metering area with
+ the same weight as a smaller area will have more effect in the
+ metering result.  Metering areas can overlap and the driver
+ will add the weights in the overlap region.&lt;/p&gt;
+
+ @see Parameters#setFocusAreas(List)
+ @see Parameters#getFocusAreas()
+ @see Parameters#getMaxNumFocusAreas()
+ @see Parameters#setMeteringAreas(List)
+ @see Parameters#getMeteringAreas()
+ @see Parameters#getMaxNumMeteringAreas()
+
+ @deprecated We recommend using the new {@link android.hardware.camera2} API for new
+             applications.
+*/
+var Area = {
+
+<span id='android-hardware-Camera-Area-property-rect'>/** Bounds of the area. (-1000, -1000) represents the top-left of the
+</span> camera field of view, and (1000, 1000) represents the bottom-right of
+ the field of view. Setting bounds outside that range is not
+ allowed. Bounds with zero or negative width or height are not
+ allowed.
+
+ @see Parameters#getFocusAreas()
+ @see Parameters#getMeteringAreas()
+*/
+rect : &quot;null&quot;,
+<span id='android-hardware-Camera-Area-property-weight'>/** Weight of the area. The weight must range from 1 to 1000, and
+</span> represents a weight for every pixel in the area. This means that a
+ large metering area with the same weight as a smaller area will have
+ more effect in the metering result.  Metering areas can overlap and
+ the driver will add the weights in the overlap region.
+
+ @see Parameters#getFocusAreas()
+ @see Parameters#getMeteringAreas()
+*/
+weight : &quot;null&quot;,
+<span id='android-hardware-Camera-Area-method-equals'>/**Compares {@code obj} to this area.
+</span>@param {Object {Object}} obj the object to compare this area with.
+@return {Boolean} {@code true} if the rectangle and weight of {@code obj} is
+         the same as those of this area. {@code false} otherwise.
+*/
+equals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

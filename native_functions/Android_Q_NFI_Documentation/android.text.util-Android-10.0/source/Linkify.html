@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-util-Linkify'>/**@class android.text.util.Linkify
+</span>@extends java.lang.Object
+
+  Linkify take a piece of text and a regular expression and turns all of the
+  regex matches in the text into clickable links.  This is particularly
+  useful for matching things like email addresses, web URLs, etc. and making
+  them actionable.
+
+  Alone with the pattern that is to be matched, a URL scheme prefix is also
+  required.  Any pattern match that does not begin with the supplied scheme
+  will have the scheme prepended to the matched text when the clickable URL
+  is created.  For instance, if you are matching web URLs you would supply
+  the scheme &lt;code&gt;http://&lt;/code&gt;. If the pattern matches example.com, which
+  does not have a URL scheme prefix, the supplied scheme will be prepended to
+  create &lt;code&gt;http://example.com&lt;/code&gt; when the clickable URL link is
+  created.
+
+  &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; When using {@link #MAP_ADDRESSES} or {@link #ALL}
+  to match street addresses on API level {@link android.os.Build.VERSION_CODES#O_MR1}
+  and earlier, methods in this class may throw
+  {@link android.util.AndroidRuntimeException} or other exceptions if the
+  device's WebView implementation is currently being updated, because
+  {@link android.webkit.WebView#findAddress} is required to match street
+  addresses.
+
+ @see MatchFilter
+ @see TransformFilter
+*/
+var Linkify = {
+
+<span id='android-text-util-Linkify-property-WEB_URLS'>/**  Bit field indicating that web URLs should be matched in methods that
+</span>  take an options mask
+*/
+WEB_URLS : &quot;1&quot;,
+<span id='android-text-util-Linkify-property-EMAIL_ADDRESSES'>/**  Bit field indicating that email addresses should be matched in methods
+</span>  that take an options mask
+*/
+EMAIL_ADDRESSES : &quot;2&quot;,
+<span id='android-text-util-Linkify-property-PHONE_NUMBERS'>/**  Bit field indicating that phone numbers should be matched in methods that
+</span>  take an options mask
+*/
+PHONE_NUMBERS : &quot;4&quot;,
+<span id='android-text-util-Linkify-property-MAP_ADDRESSES'>/**  Bit field indicating that street addresses should be matched in methods that
+</span>  take an options mask. Note that this should be avoided, as it uses the
+  {@link android.webkit.WebView#findAddress(String)} method, which has various
+  limitations and has been deprecated: see the documentation for
+  {@link android.webkit.WebView#findAddress(String)} for more information.
+
+  @deprecated use {@link android.view.textclassifier.TextClassifier#generateLinks(
+  TextLinks.Request)} instead and avoid it even when targeting API levels where no alternative
+  is available.
+*/
+MAP_ADDRESSES : &quot;8&quot;,
+<span id='android-text-util-Linkify-property-ALL'>/**  Bit mask indicating that all available patterns should be matched in
+</span>  methods that take an options mask
+  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt; {@link #MAP_ADDRESSES} is deprecated.
+  Use {@link android.view.textclassifier.TextClassifier#generateLinks(TextLinks.Request)}
+  instead and avoid it even when targeting API levels where no alternative is available.
+*/
+ALL : &quot;15&quot;,
+<span id='android-text-util-Linkify-property-sUrlMatchFilter'>/**  Filters out web URL matches that occur after an at-sign (@).  This is
+</span>  to prevent turning the domain name in an email address into a web link.
+*/
+sUrlMatchFilter : &quot;null&quot;,
+<span id='android-text-util-Linkify-property-sPhoneNumberMatchFilter'>/**  Filters out URL matches that don't have enough digits to be a
+</span>  phone number.
+*/
+sPhoneNumberMatchFilter : &quot;null&quot;,
+<span id='android-text-util-Linkify-property-sPhoneNumberTransformFilter'>/**  Transforms matched phone number text into something suitable
+</span>  to be used in a tel: URL.  It does this by removing everything
+  but the digits and plus signs.  For instance:
+  &amp;apos;+1 (919) 555-1212&amp;apos;
+  becomes &amp;apos;+19195551212&amp;apos;
+*/
+sPhoneNumberTransformFilter : &quot;null&quot;,
+<span id='android-text-util-Linkify-method-addLinks'>/**Scans the text of the provided Spannable and turns all occurrences
+</span>  of the link types indicated in the mask into clickable links.
+  If the mask is nonzero, it also removes any existing URLSpans
+  attached to the Spannable, to avoid problems if you call it
+  repeatedly on the same text.
+@param {Object {Spannable}} text Spannable whose text is to be marked-up with links
+@param {Number} mask Mask to define which kinds of links will be searched.
+@return {Boolean} True if at least one link is found and applied.
+@see #addLinks(Spannable, int, Function)
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Scans the text of the provided Spannable and turns all occurrences
+</span>  of the link types indicated in the mask into clickable links.
+  If the mask is nonzero, it also removes any existing URLSpans
+  attached to the Spannable, to avoid problems if you call it
+  repeatedly on the same text.
+@param {Object {Spannable}} text Spannable whose text is to be marked-up with links
+@param {Number} mask mask to define which kinds of links will be searched
+@param {Object {java.util.function.Function}} urlSpanFactory function used to create {@link URLSpan}s
+@return {Boolean} True if at least one link is found and applied.
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-containsUnsupportedCharacters'>/**Returns true if the specified text contains at least one unsupported character for applying
+</span> links. Also logs the error.
+@param {String} text the text to apply links to
+@hide 
+*/
+containsUnsupportedCharacters : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Scans the text of the provided TextView and turns all occurrences of
+</span>  the link types indicated in the mask into clickable links.  If matches
+  are found the movement method for the TextView is set to
+  LinkMovementMethod.
+@param {Object {TextView}} text TextView whose text is to be marked-up with links
+@param {Number} mask Mask to define which kinds of links will be searched.
+@return {Boolean} True if at least one link is found and applied.
+@see #addLinks(Spannable, int, Function)
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Applies a regex to the text of a TextView turning the matches into
+</span>  links.  If links are found then UrlSpans are applied to the link
+  text match areas, and the movement method for the text is changed
+  to LinkMovementMethod.
+@param {Object {TextView}} text         TextView whose text is to be marked-up with links
+@param {Object {Pattern}} pattern      Regex pattern to be used for finding links
+@param {String} scheme       URL scheme string (eg &lt;code&gt;http://&lt;/code&gt;) to be
+                      prepended to the links that do not start with this scheme.
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Applies a regex to the text of a TextView turning the matches into
+</span>  links.  If links are found then UrlSpans are applied to the link
+  text match areas, and the movement method for the text is changed
+  to LinkMovementMethod.
+@param {Object {TextView}} text         TextView whose text is to be marked-up with links
+@param {Object {Pattern}} pattern      Regex pattern to be used for finding links
+@param {String} scheme       URL scheme string (eg &lt;code&gt;http://&lt;/code&gt;) to be
+                      prepended to the links that do not start with this scheme.
+@param {Object {Linkify.MatchFilter}} matchFilter  The filter that is used to allow the client code
+                      additional control over which pattern matches are
+                      to be converted into links.
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Applies a regex to the text of a TextView turning the matches into
+</span>  links.  If links are found then UrlSpans are applied to the link
+  text match areas, and the movement method for the text is changed
+  to LinkMovementMethod.
+@param {Object {TextView}} text TextView whose text is to be marked-up with links.
+@param {Object {Pattern}} pattern Regex pattern to be used for finding links.
+@param {String} defaultScheme The default scheme to be prepended to links if the link does not
+                       start with one of the &lt;code&gt;schemes&lt;/code&gt; given.
+@param {Object {java.lang.String[]}} schemes Array of schemes (eg &lt;code&gt;http://&lt;/code&gt;) to check if the link found
+                 contains a scheme. Passing a null or empty value means prepend defaultScheme
+                 to all links.
+@param {Object {Linkify.MatchFilter}} matchFilter  The filter that is used to allow the client code additional control
+                      over which pattern matches are to be converted into links.
+@param {Object {Linkify.TransformFilter}} transformFilter Filter to allow the client code to update the link found.
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Applies a regex to a Spannable turning the matches into
+</span>  links.
+@param {Object {Spannable}} text         Spannable whose text is to be marked-up with links
+@param {Object {Pattern}} pattern      Regex pattern to be used for finding links
+@param {String} scheme       URL scheme string (eg &lt;code&gt;http://&lt;/code&gt;) to be
+                      prepended to the links that do not start with this scheme.
+@see #addLinks(Spannable, Pattern, String, String[], MatchFilter, TransformFilter, Function)
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Applies a regex to a Spannable turning the matches into
+</span> links.
+@param {Object {Spannable}} spannable    Spannable whose text is to be marked-up with links
+@param {Object {Pattern}} pattern      Regex pattern to be used for finding links
+@param {String} scheme       URL scheme string (eg &lt;code&gt;http://&lt;/code&gt;) to be
+                     prepended to the links that do not start with this scheme.
+@param {Object {Linkify.MatchFilter}} matchFilter  The filter that is used to allow the client code
+                     additional control over which pattern matches are
+                     to be converted into links.
+@param {Object {Linkify.TransformFilter}} transformFilter Filter to allow the client code to update the link found.
+@return {Boolean} True if at least one link is found and applied.
+@see #addLinks(Spannable, Pattern, String, String[], MatchFilter, TransformFilter, Function)
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Applies a regex to a Spannable turning the matches into links.
+</span>@param {Object {Spannable}} spannable Spannable whose text is to be marked-up with links.
+@param {Object {Pattern}} pattern Regex pattern to be used for finding links.
+@param {String} defaultScheme The default scheme to be prepended to links if the link does not
+                      start with one of the &lt;code&gt;schemes&lt;/code&gt; given.
+@param {Object {java.lang.String[]}} schemes Array of schemes (eg &lt;code&gt;http://&lt;/code&gt;) to check if the link found
+                contains a scheme. Passing a null or empty value means prepend defaultScheme
+                to all links.
+@param {Object {Linkify.MatchFilter}} matchFilter  The filter that is used to allow the client code additional control
+                     over which pattern matches are to be converted into links.
+@param {Object {Linkify.TransformFilter}} transformFilter Filter to allow the client code to update the link found.
+@return {Boolean} True if at least one link is found and applied.
+@see #addLinks(Spannable, Pattern, String, String[], MatchFilter, TransformFilter, Function)
+*/
+addLinks : function(  ) {},
+
+<span id='android-text-util-Linkify-method-addLinks'>/**Applies a regex to a Spannable turning the matches into links.
+</span>@param {Object {Spannable}} spannable       spannable whose text is to be marked-up with links.
+@param {Object {Pattern}} pattern         regex pattern to be used for finding links.
+@param {String} defaultScheme   the default scheme to be prepended to links if the link does not
+                        start with one of the &lt;code&gt;schemes&lt;/code&gt; given.
+@param {Object {java.lang.String[]}} schemes         array of schemes (eg &lt;code&gt;http://&lt;/code&gt;) to check if the link found
+                        contains a scheme. Passing a null or empty value means prepend
+                        defaultScheme
+                        to all links.
+@param {Object {Linkify.MatchFilter}} matchFilter     the filter that is used to allow the client code additional control
+                        over which pattern matches are to be converted into links.
+@param {Object {Linkify.TransformFilter}} transformFilter filter to allow the client code to update the link found.
+@param {Object {java.util.function.Function}} urlSpanFactory  function used to create {@link URLSpan}s
+@return {Boolean} True if at least one link is found and applied.
+*/
+addLinks : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

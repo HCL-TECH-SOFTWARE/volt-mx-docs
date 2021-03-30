@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ike-ikev2-IkeSocket'>/**@class com.android.ike.ikev2.IkeSocket
+</span> implements java.lang.AutoCloseable
+
+@extends PacketReader
+
+ IkeSocket sends and receives IKE packets via the user provided {@link UdpEncapsulationSocket}.
+
+ &lt;p&gt;One UdpEncapsulationSocket instance can only be bound to one IkeSocket instance. IkeSocket
+ maintains a static map to cache all bound UdpEncapsulationSockets and their IkeSocket instances.
+ It returns the existing IkeSocket when it has been bound with user provided {@link UdpEncapsulationSocket}.
+
+ &lt;p&gt;As a packet receiver, IkeSocket registers a file descriptor with a thread's Looper and handles
+ read events (and errors). Users can expect a call life-cycle like the following:
+
+ &lt;pre&gt;
+ [1] when user gets a new initiated IkeSocket, start() is called and followed by createFd().
+ [2] yield, waiting for a read event which will invoke handlePacket()
+ [3] when user closes this IkeSocket, its reference count decreases. Then stop() is called when
+     there is no reference of this instance.
+ &lt;/pre&gt;
+
+ &lt;p&gt;IkeSocket is constructed and called only on a single IKE working thread by {@link com.android.ike.ikev2.IkeSessionStateMachine}. Since all {@link com.android.ike.ikev2.IkeSessionStateMachine}s run on the same working
+ thread, there will not be concurrent modification problems.
+*/
+var IkeSocket = {
+
+<span id='com-android-ike-ikev2-IkeSocket-method-getIkeSocket'>/**Get an IkeSocket instance.
+</span>
+ &lt;p&gt;Return the existing IkeSocket instance if it has been created for the input
+ udpEncapSocket. Otherwise, create and return a new IkeSocket instance.
+@param {Object {IpSecManager.UdpEncapsulationSocket}} udpEncapSocket user provided UdpEncapsulationSocket
+@return {Object {com.android.ike.ikev2.IkeSocket}} an IkSocket instance
+*/
+getIkeSocket : function(  ) {},
+
+<span id='com-android-ike-ikev2-IkeSocket-method-sendIkePacket'>/**Send encoded IKE packet to destination address
+</span>@param {Object {byte[]}} ikePacket encoded IKE packet
+@param {Object {InetAddress}} serverAddress IP address of remote server
+*/
+sendIkePacket : function(  ) {},
+
+<span id='com-android-ike-ikev2-IkeSocket-method-registerIke'>/**Register new created IKE SA
+</span>@param {Number} spi the locally generated IKE SPI
+@param {Object {IkeSessionStateMachine}} ikeSession the IKE session this IKE SA belongs to
+*/
+registerIke : function(  ) {},
+
+<span id='com-android-ike-ikev2-IkeSocket-method-unregisterIke'>/**Unregister a deleted IKE SA
+</span>@param {Number} spi the locally generated IKE SPI
+*/
+unregisterIke : function(  ) {},
+
+<span id='com-android-ike-ikev2-IkeSocket-method-releaseReference'>/**Release reference of current IkeSocket when the IKE session is closed.
+</span>*/
+releaseReference : function(  ) {},
+
+<span id='com-android-ike-ikev2-IkeSocket-method-close'>/**Implement {@link AutoCloseable#close()}
+</span>*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

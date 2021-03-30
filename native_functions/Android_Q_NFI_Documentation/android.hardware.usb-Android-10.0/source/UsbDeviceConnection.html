@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-usb-UsbDeviceConnection'>/**@class android.hardware.usb.UsbDeviceConnection
+</span>@extends java.lang.Object
+
+ This class is used for sending and receiving data and control messages to a USB device.
+ Instances of this class are created by {@link android.hardware.usb.UsbManager#openDevice}.
+*/
+var UsbDeviceConnection = {
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-getContext'>/**
+</span>@return {Object {android.content.Context}} The application context the connection was created for.
+@hide 
+*/
+getContext : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-close'>/**Releases all system resources related to the device.
+</span> Once the object is closed it cannot be used again.
+ The client must call {@link android.hardware.usb.UsbManager#openDevice} again
+ to retrieve a new instance to reestablish communication with the device.
+*/
+close : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-getFileDescriptor'>/**Returns the native file descriptor for the device, or
+</span> -1 if the device is not opened.
+ This is intended for passing to native code to access the device.
+@return {Number} the native file descriptor
+*/
+getFileDescriptor : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-getRawDescriptors'>/**Returns the raw USB descriptors for the device.
+</span> This can be used to access descriptors not supported directly
+ via the higher level APIs.
+@return {Number} raw USB descriptors
+*/
+getRawDescriptors : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-claimInterface'>/**Claims exclusive access to a {@link android.hardware.usb.UsbInterface}.
+</span> This must be done before sending or receiving data on any
+ {@link android.hardware.usb.UsbEndpoint}s belonging to the interface.
+@param {Object {UsbInterface}} intf the interface to claim
+@param {Boolean} force true to disconnect kernel driver if necessary
+@return {Boolean} true if the interface was successfully claimed
+*/
+claimInterface : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-releaseInterface'>/**Releases exclusive access to a {@link android.hardware.usb.UsbInterface}.
+</span>@return {Boolean} true if the interface was successfully released
+*/
+releaseInterface : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-setInterface'>/**Sets the current {@link android.hardware.usb.UsbInterface}.
+</span> Used to select between two interfaces with the same ID but different alternate setting.
+@return {Boolean} true if the interface was successfully selected
+*/
+setInterface : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-setConfiguration'>/**Sets the device's current {@link android.hardware.usb.UsbConfiguration}.
+</span>@return {Boolean} true if the configuration was successfully set
+*/
+setConfiguration : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-controlTransfer'>/**Performs a control transaction on endpoint zero for this device.
+</span> The direction of the transfer is determined by the request type.
+ If requestType &amp; {@link android.hardware.usb.UsbConstants#USB_ENDPOINT_DIR_MASK} is
+ {@link android.hardware.usb.UsbConstants#USB_DIR_OUT}, then the transfer is a write,
+ and if it is {@link android.hardware.usb.UsbConstants#USB_DIR_IN}, then the transfer
+ is a read.
+ &lt;p&gt;
+ This method transfers data starting from index 0 in the buffer.
+ To specify a different offset, use
+ {@link #controlTransfer(int, int, int, int, byte[], int, int, int)}.
+ &lt;/p&gt;
+@param {Number} requestType request type for this transaction
+@param {Number} request request ID for this transaction
+@param {Number} value value field for this transaction
+@param {Number} index index field for this transaction
+@param {Object {byte[]}} buffer buffer for data portion of transaction,
+ or null if no data needs to be sent or received
+@param {Number} length the length of the data to send or receive
+@param {Number} timeout in milliseconds
+@return {Number} length of data transferred (or zero) for success,
+ or negative value for failure
+*/
+controlTransfer : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-controlTransfer'>/**Performs a control transaction on endpoint zero for this device.
+</span> The direction of the transfer is determined by the request type.
+ If requestType &amp; {@link android.hardware.usb.UsbConstants#USB_ENDPOINT_DIR_MASK} is
+ {@link android.hardware.usb.UsbConstants#USB_DIR_OUT}, then the transfer is a write,
+ and if it is {@link android.hardware.usb.UsbConstants#USB_DIR_IN}, then the transfer
+ is a read.
+@param {Number} requestType request type for this transaction
+@param {Number} request request ID for this transaction
+@param {Number} value value field for this transaction
+@param {Number} index index field for this transaction
+@param {Object {byte[]}} buffer buffer for data portion of transaction,
+ or null if no data needs to be sent or received
+@param {Number} offset the index of the first byte in the buffer to send or receive
+@param {Number} length the length of the data to send or receive
+@param {Number} timeout in milliseconds
+@return {Number} length of data transferred (or zero) for success,
+ or negative value for failure
+*/
+controlTransfer : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-bulkTransfer'>/**Performs a bulk transaction on the given endpoint.
+</span> The direction of the transfer is determined by the direction of the endpoint.
+ &lt;p&gt;
+ This method transfers data starting from index 0 in the buffer.
+ To specify a different offset, use
+ {@link #bulkTransfer(UsbEndpoint, byte[], int, int, int)}.
+ &lt;/p&gt;
+@param {Object {UsbEndpoint}} endpoint the endpoint for this transaction
+@param {Object {byte[]}} buffer buffer for data to send or receive; can be {@code null} to wait for next
+               transaction without reading data
+@param {Number} length the length of the data to send or receive. Before
+               {@value Build.VERSION_CODES#P}, a value larger than 16384 bytes
+               would be truncated down to 16384. In API {@value Build.VERSION_CODES#P}
+               and after, any value of length is valid.
+@param {Number} timeout in milliseconds, 0 is infinite
+@return {Number} length of data transferred (or zero) for success,
+ or negative value for failure
+*/
+bulkTransfer : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-bulkTransfer'>/**Performs a bulk transaction on the given endpoint.
+</span> The direction of the transfer is determined by the direction of the endpoint.
+@param {Object {UsbEndpoint}} endpoint the endpoint for this transaction
+@param {Object {byte[]}} buffer buffer for data to send or receive
+@param {Number} offset the index of the first byte in the buffer to send or receive
+@param {Number} length the length of the data to send or receive. Before
+               {@value Build.VERSION_CODES#P}, a value larger than 16384 bytes
+               would be truncated down to 16384. In API {@value Build.VERSION_CODES#P}
+               and after, any value of length is valid.
+@param {Number} timeout in milliseconds, 0 is infinite
+@return {Number} length of data transferred (or zero) for success,
+ or negative value for failure
+*/
+bulkTransfer : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-resetDevice'>/**Reset USB port for the connected device.
+</span>@return {Boolean} true if reset succeeds.
+@hide 
+*/
+resetDevice : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-requestWait'>/**Waits for the result of a {@link android.hardware.usb.UsbRequest#queue} operation
+</span> &lt;p&gt;Note that this may return requests queued on multiple
+ {@link android.hardware.usb.UsbEndpoint}s. When multiple endpoints are in use,
+ {@link android.hardware.usb.UsbRequest#getEndpoint} and {@link android.hardware.usb.UsbRequest#getClientData} can be useful in determining how to process
+ the result of this function.&lt;/p&gt;
+@return {Object {android.hardware.usb.UsbRequest}} a completed USB request, or null if an error occurred
+@throws IllegalArgumentException Before API {@value Build.VERSION_CODES#O}: if the number of
+                                  bytes read or written is more than the limit of the
+                                  request's buffer. The number of bytes is determined by the
+                                  {@code length} parameter of
+                                  {@link UsbRequest#queue(ByteBuffer, int)}
+@throws BufferOverflowException In API {@value Build.VERSION_CODES#O} and after: if the
+                                 number of bytes read or written is more than the limit of the
+                                 request's buffer. The number of bytes is determined by the
+                                 {@code length} parameter of
+                                 {@link UsbRequest#queue(ByteBuffer, int)}
+*/
+requestWait : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-requestWait'>/**Waits for the result of a {@link android.hardware.usb.UsbRequest#queue} operation
+</span> &lt;p&gt;Note that this may return requests queued on multiple
+ {@link android.hardware.usb.UsbEndpoint}s. When multiple endpoints are in use,
+ {@link android.hardware.usb.UsbRequest#getEndpoint} and {@link android.hardware.usb.UsbRequest#getClientData} can be useful in determining how to process
+ the result of this function.&lt;/p&gt;
+ &lt;p&gt;Android processes {@link android.hardware.usb.UsbRequest android.hardware.usb.UsbRequests} asynchronously. Hence it is not
+ guaranteed that {@link #requestWait(long) requestWait(0)} returns a request that has been
+ queued right before even if the request could have been processed immediately.&lt;/p&gt;
+@param {Number} timeout timeout in milliseconds. If 0 this method does not wait.
+@return {Object {android.hardware.usb.UsbRequest}} a completed USB request, or {@code null} if an error occurred
+@throws BufferOverflowException if the number of bytes read or written is more than the
+                                 limit of the request's buffer. The number of bytes is
+                                 determined by the {@code length} parameter of
+                                 {@link UsbRequest#queue(ByteBuffer, int)}
+@throws TimeoutException if no request was received in {@code timeout} milliseconds.
+*/
+requestWait : function(  ) {},
+
+<span id='android-hardware-usb-UsbDeviceConnection-method-getSerial'>/**Returns the serial number for the device.
+</span> This will return null if the device has not been opened.
+@return {String} the device serial number
+*/
+getSerial : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

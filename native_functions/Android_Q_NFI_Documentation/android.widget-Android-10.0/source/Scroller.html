@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-Scroller'>/**@class android.widget.Scroller
+</span>@extends java.lang.Object
+
+ &lt;p&gt;This class encapsulates scrolling. You can use scrollers ({@link android.widget.Scroller}
+ or {@link android.widget.OverScroller}) to collect the data you need to produce a scrolling
+ animation&amp;mdash;for example, in response to a fling gesture. Scrollers track
+ scroll offsets for you over time, but they don't automatically apply those
+ positions to your view. It's your responsibility to get and apply new
+ coordinates at a rate that will make the scrolling animation look smooth.&lt;/p&gt;
+
+ &lt;p&gt;Here is a simple example:&lt;/p&gt;
+
+ &lt;pre&gt; private Scroller mScroller = new Scroller(context);
+ ...
+ public void zoomIn() {
+     // Revert any animation currently in progress
+     mScroller.forceFinished(true);
+     // Start scrolling by providing a starting point and
+     // the distance to travel
+     mScroller.startScroll(0, 0, 100, 0);
+     // Invalidate to request a redraw
+     invalidate();
+ }&lt;/pre&gt;
+
+ &lt;p&gt;To track the changing positions of the x/y coordinates, use
+ {@link #computeScrollOffset}. The method returns a boolean to indicate
+ whether the scroller is finished. If it isn't, it means that a fling or
+ programmatic pan operation is still in progress. You can use this method to
+ find the current offsets of the x and y coordinates, for example:&lt;/p&gt;
+
+ &lt;pre&gt;if (mScroller.computeScrollOffset()) {
+     // Get current x and y positions
+     int currX = mScroller.getCurrX();
+     int currY = mScroller.getCurrY();
+    ...
+ }&lt;/pre&gt;
+*/
+var Scroller = {
+
+<span id='android-widget-Scroller-method-setFriction'>/**The amount of friction applied to flings. The default value
+</span> is {@link ViewConfiguration#getScrollFriction}.
+@param {Number} friction A scalar dimension-less value representing the coefficient of
+         friction.
+*/
+setFriction : function(  ) {},
+
+<span id='android-widget-Scroller-method-isFinished'>/**Returns whether the scroller has finished scrolling.
+</span>@return {Boolean} True if the scroller has finished scrolling, false otherwise.
+*/
+isFinished : function(  ) {},
+
+<span id='android-widget-Scroller-method-forceFinished'>/**Force the finished field to a particular value.
+</span>@param {Boolean} finished The new finished value.
+*/
+forceFinished : function(  ) {},
+
+<span id='android-widget-Scroller-method-getDuration'>/**Returns how long the scroll event will take, in milliseconds.
+</span>@return {Number} The duration of the scroll in milliseconds.
+*/
+getDuration : function(  ) {},
+
+<span id='android-widget-Scroller-method-getCurrX'>/**Returns the current X offset in the scroll.
+</span>@return {Number} The new X offset as an absolute distance from the origin.
+*/
+getCurrX : function(  ) {},
+
+<span id='android-widget-Scroller-method-getCurrY'>/**Returns the current Y offset in the scroll.
+</span>@return {Number} The new Y offset as an absolute distance from the origin.
+*/
+getCurrY : function(  ) {},
+
+<span id='android-widget-Scroller-method-getCurrVelocity'>/**Returns the current velocity.
+</span>@return {Number} The original velocity less the deceleration. Result may be
+ negative.
+*/
+getCurrVelocity : function(  ) {},
+
+<span id='android-widget-Scroller-method-getStartX'>/**Returns the start X offset in the scroll.
+</span>@return {Number} The start X offset as an absolute distance from the origin.
+*/
+getStartX : function(  ) {},
+
+<span id='android-widget-Scroller-method-getStartY'>/**Returns the start Y offset in the scroll.
+</span>@return {Number} The start Y offset as an absolute distance from the origin.
+*/
+getStartY : function(  ) {},
+
+<span id='android-widget-Scroller-method-getFinalX'>/**Returns where the scroll will end. Valid only for &quot;fling&quot; scrolls.
+</span>@return {Number} The final X offset as an absolute distance from the origin.
+*/
+getFinalX : function(  ) {},
+
+<span id='android-widget-Scroller-method-getFinalY'>/**Returns where the scroll will end. Valid only for &quot;fling&quot; scrolls.
+</span>@return {Number} The final Y offset as an absolute distance from the origin.
+*/
+getFinalY : function(  ) {},
+
+<span id='android-widget-Scroller-method-computeScrollOffset'>/**Call this when you want to know the new location.  If it returns true,
+</span> the animation is not yet finished.
+*/
+computeScrollOffset : function(  ) {},
+
+<span id='android-widget-Scroller-method-startScroll'>/**Start scrolling by providing a starting point and the distance to travel.
+</span> The scroll will use the default value of 250 milliseconds for the
+ duration.
+@param {Number} startX Starting horizontal scroll offset in pixels. Positive
+        numbers will scroll the content to the left.
+@param {Number} startY Starting vertical scroll offset in pixels. Positive numbers
+        will scroll the content up.
+@param {Number} dx Horizontal distance to travel. Positive numbers will scroll the
+        content to the left.
+@param {Number} dy Vertical distance to travel. Positive numbers will scroll the
+        content up.
+*/
+startScroll : function(  ) {},
+
+<span id='android-widget-Scroller-method-startScroll'>/**Start scrolling by providing a starting point, the distance to travel,
+</span> and the duration of the scroll.
+@param {Number} startX Starting horizontal scroll offset in pixels. Positive
+        numbers will scroll the content to the left.
+@param {Number} startY Starting vertical scroll offset in pixels. Positive numbers
+        will scroll the content up.
+@param {Number} dx Horizontal distance to travel. Positive numbers will scroll the
+        content to the left.
+@param {Number} dy Vertical distance to travel. Positive numbers will scroll the
+        content up.
+@param {Number} duration Duration of the scroll in milliseconds.
+*/
+startScroll : function(  ) {},
+
+<span id='android-widget-Scroller-method-fling'>/**Start scrolling based on a fling gesture. The distance travelled will
+</span> depend on the initial velocity of the fling.
+@param {Number} startX Starting point of the scroll (X)
+@param {Number} startY Starting point of the scroll (Y)
+@param {Number} velocityX Initial velocity of the fling (X) measured in pixels per
+        second.
+@param {Number} velocityY Initial velocity of the fling (Y) measured in pixels per
+        second
+@param {Number} minX Minimum X value. The scroller will not scroll past this
+        point.
+@param {Number} maxX Maximum X value. The scroller will not scroll past this
+        point.
+@param {Number} minY Minimum Y value. The scroller will not scroll past this
+        point.
+@param {Number} maxY Maximum Y value. The scroller will not scroll past this
+        point.
+*/
+fling : function(  ) {},
+
+<span id='android-widget-Scroller-method-abortAnimation'>/**Stops the animation. Contrary to {@link #forceFinished}(boolean),
+</span> aborting the animating cause the scroller to move to the final x and y
+ position
+@see #forceFinished(boolean)
+*/
+abortAnimation : function(  ) {},
+
+<span id='android-widget-Scroller-method-extendDuration'>/**Extend the scroll animation. This allows a running animation to scroll
+</span> further and longer, when used with {@link #setFinalX}(int) or {@link #setFinalY}(int).
+@param {Number} extend Additional time to scroll in milliseconds.
+@see #setFinalX(int)
+@see #setFinalY(int)
+*/
+extendDuration : function(  ) {},
+
+<span id='android-widget-Scroller-method-timePassed'>/**Returns the time elapsed since the beginning of the scrolling.
+</span>@return {Number} The elapsed time in milliseconds.
+*/
+timePassed : function(  ) {},
+
+<span id='android-widget-Scroller-method-setFinalX'>/**Sets the final position (X) for this scroller.
+</span>@param {Number} newX The new X offset as an absolute distance from the origin.
+@see #extendDuration(int)
+@see #setFinalY(int)
+*/
+setFinalX : function(  ) {},
+
+<span id='android-widget-Scroller-method-setFinalY'>/**Sets the final position (Y) for this scroller.
+</span>@param {Number} newY The new Y offset as an absolute distance from the origin.
+@see #extendDuration(int)
+@see #setFinalX(int)
+*/
+setFinalY : function(  ) {},
+
+<span id='android-widget-Scroller-method-isScrollingInDirection'>/**
+</span>@hide 
+*/
+isScrollingInDirection : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

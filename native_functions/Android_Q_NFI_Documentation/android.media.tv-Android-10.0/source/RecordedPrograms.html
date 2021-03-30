@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvContract-RecordedPrograms'>/**@class android.media.tv.TvContract.RecordedPrograms
+</span> implements android.media.tv.TvContract.BaseTvColumns
+
+ implements android.media.tv.TvContract.ProgramColumns
+
+@extends java.lang.Object
+
+ Column definitions for the recorded TV programs table.
+
+ &lt;p&gt;By default, the query results will be sorted by {@link #COLUMN_START_TIME_UTC_MILLIS} in
+ ascending order.
+*/
+var RecordedPrograms = {
+
+<span id='android-media-tv-TvContract-RecordedPrograms-property-CONTENT_URI'>/** The content:// style URI for this table.
+</span>
+ &lt;p&gt;SQL selection is not supported for {@link ContentResolver#query},
+ {@link ContentResolver#update} and {@link ContentResolver#delete} operations.
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-CONTENT_TYPE'>/**The MIME type of a directory of recorded TV programs. */
+</span>CONTENT_TYPE : &quot;vnd.android.cursor.dir/recorded_program&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-CONTENT_ITEM_TYPE'>/**The MIME type of a single recorded TV program. */
+</span>CONTENT_ITEM_TYPE : &quot;vnd.android.cursor.item/recorded_program&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_CHANNEL_ID'>/** The ID of the TV channel that provides this recorded program.
+</span>
+ &lt;p&gt;This is a part of the channel URI and matches to {@link BaseColumns#_ID}.
+
+ &lt;p&gt;Type: INTEGER (long)
+*/
+COLUMN_CHANNEL_ID : &quot;channel_id&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_INPUT_ID'>/** The ID of the TV input service that is associated with this recorded program.
+</span>
+ &lt;p&gt;Use {@link #buildInputId} to build the ID.
+
+ &lt;p&gt;This is a required field.
+
+ &lt;p&gt;Type: TEXT
+*/
+COLUMN_INPUT_ID : &quot;input_id&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_START_TIME_UTC_MILLIS'>/** The start time of the original TV program, in milliseconds since the epoch.
+</span>
+ &lt;p&gt;Type: INTEGER (long)
+ @see Programs#COLUMN_START_TIME_UTC_MILLIS
+*/
+COLUMN_START_TIME_UTC_MILLIS : &quot;start_time_utc_millis&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_END_TIME_UTC_MILLIS'>/** The end time of the original TV program, in milliseconds since the epoch.
+</span>
+ &lt;p&gt;Type: INTEGER (long)
+ @see Programs#COLUMN_END_TIME_UTC_MILLIS
+*/
+COLUMN_END_TIME_UTC_MILLIS : &quot;end_time_utc_millis&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_BROADCAST_GENRE'>/** The comma-separated genre string of this recorded TV program.
+</span>
+ &lt;p&gt;Use the same language appeared in the underlying broadcast standard, if applicable.
+ (For example, one can refer to the genre strings used in Genre Descriptor of ATSC A/65 or
+ Content Descriptor of ETSI EN 300 468, if appropriate.) Otherwise, leave empty. Use
+ {@link android.media.tv.Programs.Genres#encode android.media.tv.Programs.Genres.encode()} to create a text that can be stored in this column.
+ Use {@link android.media.tv.Programs.Genres#decode android.media.tv.Programs.Genres.decode()} to get the broadcast genre strings from the
+ text stored in the column.
+
+ &lt;p&gt;Type: TEXT
+ @see Programs#COLUMN_BROADCAST_GENRE
+*/
+COLUMN_BROADCAST_GENRE : &quot;broadcast_genre&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_RECORDING_DATA_URI'>/** The URI of the recording data for this recorded program.
+</span>
+ &lt;p&gt;Together with {@link #COLUMN_RECORDING_DATA_BYTES}, applications can use this
+ information to manage recording storage. The URI should indicate a file or directory with
+ the scheme {@link android.content.ContentResolver#SCHEME_FILE}.
+
+ &lt;p&gt;Type: TEXT
+ @see #COLUMN_RECORDING_DATA_BYTES
+*/
+COLUMN_RECORDING_DATA_URI : &quot;recording_data_uri&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_RECORDING_DATA_BYTES'>/** The data size (in bytes) for this recorded program.
+</span>
+ &lt;p&gt;Together with {@link #COLUMN_RECORDING_DATA_URI}, applications can use this
+ information to manage recording storage.
+
+ &lt;p&gt;Type: INTEGER (long)
+ @see #COLUMN_RECORDING_DATA_URI
+*/
+COLUMN_RECORDING_DATA_BYTES : &quot;recording_data_bytes&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_RECORDING_DURATION_MILLIS'>/** The duration (in milliseconds) of this recorded program.
+</span>
+ &lt;p&gt;The actual duration of the recorded program can differ from the one calculated by
+ {@link #COLUMN_END_TIME_UTC_MILLIS} - {@link #COLUMN_START_TIME_UTC_MILLIS} as program
+ recording can be interrupted in the middle for some reason, resulting in a partially
+ recorded program, which is still playable.
+
+ &lt;p&gt;Type: INTEGER
+*/
+COLUMN_RECORDING_DURATION_MILLIS : &quot;recording_duration_millis&quot;,
+<span id='android-media-tv-TvContract-RecordedPrograms-property-COLUMN_RECORDING_EXPIRE_TIME_UTC_MILLIS'>/** The expiration time for this recorded program, in milliseconds since the epoch.
+</span>
+ &lt;p&gt;Recorded TV programs do not expire by default unless explicitly requested by the user
+ or the user allows applications to delete them in order to free up disk space for future
+ recording. However, some TV content can have expiration date set by the content provider
+ when recorded. This field is used to indicate such a restriction.
+
+ &lt;p&gt;Can be empty.
+
+ &lt;p&gt;Type: INTEGER (long)
+*/
+COLUMN_RECORDING_EXPIRE_TIME_UTC_MILLIS : &quot;recording_expire_time_utc_millis&quot;,
+
+};</pre>
+</body>
+</html>

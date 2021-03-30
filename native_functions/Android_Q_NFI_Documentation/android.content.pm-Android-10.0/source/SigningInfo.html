@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-SigningInfo'>/**@class android.content.pm.SigningInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Information pertaining to the signing certificates used to sign a package.
+*/
+var SigningInfo = {
+
+<span id='android-content-pm-SigningInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-SigningInfo-method-hasMultipleSigners'>/**Although relatively uncommon, packages may be signed by more than one signer, in which case
+</span> their identity is viewed as being the set of all signers, not just any one.
+*/
+hasMultipleSigners : function(  ) {},
+
+<span id='android-content-pm-SigningInfo-method-hasPastSigningCertificates'>/**APK Signature Scheme v3 enables packages to provide a proof-of-rotation record that the
+</span> platform verifies, and uses, to allow the use of new signing certificates.  This is only
+ available to packages that are not signed by multiple signers.  In the event of a change to a
+ new signing certificate, the package's past signing certificates are presented as well.  Any
+ check of a package's signing certificate should also include a search through its entire
+ signing history, since it could change to a new signing certificate at any time.
+*/
+hasPastSigningCertificates : function(  ) {},
+
+<span id='android-content-pm-SigningInfo-method-getSigningCertificateHistory'>/**Returns the signing certificates this package has proven it is authorized to use. This
+</span> includes both the signing certificate associated with the signer of the package and the past
+ signing certificates it included as its proof of signing certificate rotation.  This method
+ is the preferred replacement for the {@code GET_SIGNATURES} flag used with {@link android.content.pm.PackageParser.PackageManager#getandroid.content.pm.PackageParser.PackageInfo(String, int)}.  When determining if a package is signed by a
+ desired certificate, the returned array should be checked to determine if it is one of the
+ entries.
+
+ &lt;note&gt;
+     This method returns null if the package is signed by multiple signing certificates, as
+     opposed to being signed by one current signer and also providing the history of past
+     signing certificates.  {@link #hasMultipleSigners}() may be used to determine if this
+     package is signed by multiple signers.  Packages which are signed by multiple signers
+     cannot change their signing certificates and their {@code Signature} array should be
+     checked to make sure that every entry matches the looked-for signing certificates.
+ &lt;/note&gt;
+*/
+getSigningCertificateHistory : function(  ) {},
+
+<span id='android-content-pm-SigningInfo-method-getApkContentsSigners'>/**Returns the signing certificates used to sign the APK contents of this application.  Not
+</span> including any past signing certificates the package proved it is authorized to use.
+ &lt;note&gt;
+     This method should not be used unless {@link #hasMultipleSigners}() returns true,
+     indicating that {@link #getSigningCertificateHistory}() cannot be used, otherwise {@link #getSigningCertificateHistory}() should be preferred.
+ &lt;/note&gt;
+*/
+getApkContentsSigners : function(  ) {},
+
+<span id='android-content-pm-SigningInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-SigningInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

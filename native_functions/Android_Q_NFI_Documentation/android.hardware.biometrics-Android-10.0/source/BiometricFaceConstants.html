@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-biometrics-BiometricFaceConstants'>/**@class android.hardware.biometrics.BiometricFaceConstants
+</span> Interface containing all of the face-specific constants.
+
+ NOTE: The error messages must be consistent between BiometricConstants, Biometric*Constants,
+       and the frameworks/support/biometric/.../BiometricConstants files.
+
+ @hide
+*/
+var BiometricFaceConstants = {
+
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FEATURE_REQUIRE_ATTENTION'>/** Require the user to look at the device during enrollment and
+</span> authentication. Note this is to accommodate people who have limited
+ vision.
+*/
+FEATURE_REQUIRE_ATTENTION : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FEATURE_REQUIRE_REQUIRE_DIVERSITY'>/** Require a diverse set of poses during enrollment. Note this is to
+</span> accommodate people with limited mobility.
+*/
+FEATURE_REQUIRE_REQUIRE_DIVERSITY : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_HW_UNAVAILABLE'>/** The hardware is unavailable. Try again later.
+</span>*/
+FACE_ERROR_HW_UNAVAILABLE : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_UNABLE_TO_PROCESS'>/** Error state returned when the sensor was unable to process the current image.
+</span>*/
+FACE_ERROR_UNABLE_TO_PROCESS : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_TIMEOUT'>/** Error state returned when the current request has been running too long. This is intended to
+</span> prevent programs from waiting for the face authentication sensor indefinitely. The timeout is
+ platform and sensor-specific, but is generally on the order of 30 seconds.
+*/
+FACE_ERROR_TIMEOUT : &quot;3&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_NO_SPACE'>/** Error state returned for operations like enrollment; the operation cannot be completed
+</span> because there's not enough storage remaining to complete the operation.
+*/
+FACE_ERROR_NO_SPACE : &quot;4&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_CANCELED'>/** The operation was canceled because the face authentication sensor is unavailable. For
+</span> example, this may happen when the user is switched, the device is locked or another pending
+ operation prevents or disables it.
+*/
+FACE_ERROR_CANCELED : &quot;5&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_UNABLE_TO_REMOVE'>/** The {@link FaceManager#remove} call failed. Typically this will happen when the
+</span> provided face id was incorrect.
+
+ @hide
+*/
+FACE_ERROR_UNABLE_TO_REMOVE : &quot;6&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_LOCKOUT'>/** The operation was canceled because the API is locked out due to too many attempts.
+</span> This occurs after 5 failed attempts, and lasts for 30 seconds.
+*/
+FACE_ERROR_LOCKOUT : &quot;7&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_VENDOR'>/** Hardware vendors may extend this list if there are conditions that do not fall under one of
+</span> the above categories. Vendors are responsible for providing error strings for these errors.
+ These messages are typically reserved for internal operations such as enrollment, but may be
+ used to express vendor errors not covered by the ones in HAL h file. Applications are
+ expected to show the error message string if they happen, but are advised not to rely on the
+ message id since they will be device and vendor-specific
+*/
+FACE_ERROR_VENDOR : &quot;8&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_LOCKOUT_PERMANENT'>/** The operation was canceled because FACE_ERROR_LOCKOUT occurred too many times.
+</span> Face authentication is disabled until the user unlocks with strong authentication
+ (PIN/Pattern/Password)
+*/
+FACE_ERROR_LOCKOUT_PERMANENT : &quot;9&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_USER_CANCELED'>/** The user canceled the operation. Upon receiving this, applications should use alternate
+</span> authentication (e.g. a password). The application should also provide the means to return
+ to face authentication, such as a &quot;use face authentication&quot; button.
+*/
+FACE_ERROR_USER_CANCELED : &quot;10&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_NOT_ENROLLED'>/** The user does not have a face enrolled.
+</span>*/
+FACE_ERROR_NOT_ENROLLED : &quot;11&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_HW_NOT_PRESENT'>/** The device does not have a face sensor. This message will propagate if the calling app
+</span> ignores the result from PackageManager.hasFeature(FEATURE_FACE) and calls
+ this API anyway. Apps should always check for the feature before calling this API.
+*/
+FACE_ERROR_HW_NOT_PRESENT : &quot;12&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_NEGATIVE_BUTTON'>/** The user pressed the negative button. This is a placeholder that is currently only used
+</span> by the support library.
+ @hide
+*/
+FACE_ERROR_NEGATIVE_BUTTON : &quot;13&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL'>/** The device does not have pin, pattern, or password set up. See
+</span> {@link android.hardware.biometrics.BiometricPrompt.Builder#setDeviceCredentialAllowed(boolean)} and
+ {@link KeyguardManager#isDeviceSecure()}
+*/
+BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL : &quot;14&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ERROR_VENDOR_BASE'>/** @hide
+</span>*/
+FACE_ERROR_VENDOR_BASE : &quot;1000&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_GOOD'>/** The image acquired was good.
+</span>*/
+FACE_ACQUIRED_GOOD : &quot;0&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_INSUFFICIENT'>/** The face image was not good enough to process due to a detected condition.
+</span> (See {@link #FACE_ACQUIRED_TOO_BRIGHT or @link #FACE_ACQUIRED_TOO_DARK}).
+*/
+FACE_ACQUIRED_INSUFFICIENT : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_BRIGHT'>/** The face image was too bright due to too much ambient light.
+</span> For example, it's reasonable to return this after multiple
+ {@link #FACE_ACQUIRED_INSUFFICIENT}
+ The user is expected to take action to retry in better lighting conditions
+ when this is returned.
+*/
+FACE_ACQUIRED_TOO_BRIGHT : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_DARK'>/** The face image was too dark due to illumination light obscured.
+</span> For example, it's reasonable to return this after multiple
+ {@link #FACE_ACQUIRED_INSUFFICIENT}
+ The user is expected to take action to retry in better lighting conditions
+ when this is returned.
+*/
+FACE_ACQUIRED_TOO_DARK : &quot;3&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_CLOSE'>/** The detected face is too close to the sensor, and the image can't be processed.
+</span> The user should be informed to move farther from the sensor when this is returned.
+*/
+FACE_ACQUIRED_TOO_CLOSE : &quot;4&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_FAR'>/** The detected face is too small, as the user might be too far from the sensor.
+</span> The user should be informed to move closer to the sensor when this is returned.
+*/
+FACE_ACQUIRED_TOO_FAR : &quot;5&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_HIGH'>/** Only the upper part of the face was detected. The sensor field of view is too high.
+</span> The user should be informed to move up with respect to the sensor when this is returned.
+*/
+FACE_ACQUIRED_TOO_HIGH : &quot;6&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_LOW'>/** Only the lower part of the face was detected. The sensor field of view is too low.
+</span> The user should be informed to move down with respect to the sensor when this is returned.
+*/
+FACE_ACQUIRED_TOO_LOW : &quot;7&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_RIGHT'>/** Only the right part of the face was detected. The sensor field of view is too far right.
+</span> The user should be informed to move to the right with respect to the sensor
+ when this is returned.
+*/
+FACE_ACQUIRED_TOO_RIGHT : &quot;8&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_LEFT'>/** Only the left part of the face was detected. The sensor field of view is too far left.
+</span> The user should be informed to move to the left with respect to the sensor
+ when this is returned.
+*/
+FACE_ACQUIRED_TOO_LEFT : &quot;9&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_POOR_GAZE'>/** The user's eyes have strayed away from the sensor. If this message is sent, the user should
+</span> be informed to look at the device. If the user can't be found in the frame, one of the other
+ acquisition messages should be sent, e.g. FACE_ACQUIRED_NOT_DETECTED.
+*/
+FACE_ACQUIRED_POOR_GAZE : &quot;10&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_NOT_DETECTED'>/** No face was detected in front of the sensor.
+</span> The user should be informed to point the sensor to a face when this is returned.
+*/
+FACE_ACQUIRED_NOT_DETECTED : &quot;11&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_MUCH_MOTION'>/** Too much motion was detected.
+</span> The user should be informed to keep their face steady relative to the
+ sensor.
+*/
+FACE_ACQUIRED_TOO_MUCH_MOTION : &quot;12&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_RECALIBRATE'>/** The sensor needs to be re-calibrated. This is an unexpected condition, and should only be
+</span> sent if a serious, uncorrectable, and unrecoverable calibration issue is detected which
+ requires user intervention, e.g. re-enrolling. The expected response to this message is to
+ direct the user to re-enroll.
+*/
+FACE_ACQUIRED_RECALIBRATE : &quot;13&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_DIFFERENT'>/** The face is too different from a previous acquisition. This condition
+</span> only applies to enrollment. This can happen if the user passes the
+ device to someone else in the middle of enrollment.
+*/
+FACE_ACQUIRED_TOO_DIFFERENT : &quot;14&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TOO_SIMILAR'>/** The face is too similar to a previous acquisition. This condition only
+</span> applies to enrollment. The user should change their pose.
+*/
+FACE_ACQUIRED_TOO_SIMILAR : &quot;15&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_PAN_TOO_EXTREME'>/** The magnitude of the pan angle of the user’s face with respect to the sensor’s
+</span> capture plane is too high.
+
+ The pan angle is defined as the angle swept out by the user’s face turning
+ their neck left and right. The pan angle would be zero if the user faced the
+ camera directly.
+
+ The user should be informed to look more directly at the camera.
+*/
+FACE_ACQUIRED_PAN_TOO_EXTREME : &quot;16&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_TILT_TOO_EXTREME'>/** The magnitude of the tilt angle of the user’s face with respect to the sensor’s
+</span> capture plane is too high.
+
+ The tilt angle is defined as the angle swept out by the user’s face looking up
+ and down. The tilt angle would be zero if the user faced the camera directly.
+
+ The user should be informed to look more directly at the camera.
+*/
+FACE_ACQUIRED_TILT_TOO_EXTREME : &quot;17&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_ROLL_TOO_EXTREME'>/** The magnitude of the roll angle of the user’s face with respect to the sensor’s
+</span> capture plane is too high.
+
+ The roll angle is defined as the angle swept out by the user’s face tilting their head
+ towards their shoulders to the left and right. The roll angle would be zero if the user's
+ head is vertically aligned with the camera.
+
+ The user should be informed to look more directly at the camera.
+*/
+FACE_ACQUIRED_ROLL_TOO_EXTREME : &quot;18&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_FACE_OBSCURED'>/** The user’s face has been obscured by some object.
+</span>
+ The user should be informed to remove any objects from the line of sight from
+ the sensor to the user’s face.
+*/
+FACE_ACQUIRED_FACE_OBSCURED : &quot;19&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_START'>/** This message represents the earliest message sent at the beginning of the authentication
+</span> pipeline. It is expected to be used to measure latency. For example, in a camera-based
+ authentication system it's expected to be sent prior to camera initialization. Note this
+ should be sent whenever authentication is restarted (see IBiometricsFace#userActivity).
+ The framework will measure latency based on the time between the last START message and the
+ onAuthenticated callback.
+*/
+FACE_ACQUIRED_START : &quot;20&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_SENSOR_DIRTY'>/** The sensor is dirty. The user should be informed to clean the sensor.
+</span>*/
+FACE_ACQUIRED_SENSOR_DIRTY : &quot;21&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_VENDOR'>/** Hardware vendors may extend this list if there are conditions that do not fall under one of
+</span> the above categories. Vendors are responsible for providing error strings for these errors.
+
+ @hide
+*/
+FACE_ACQUIRED_VENDOR : &quot;22&quot;,
+<span id='android-hardware-biometrics-BiometricFaceConstants-property-FACE_ACQUIRED_VENDOR_BASE'>/** @hide
+</span>*/
+FACE_ACQUIRED_VENDOR_BASE : &quot;1000&quot;,
+
+};</pre>
+</body>
+</html>

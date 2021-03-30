@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-speech-RecognizerResultsIntent'>/**@class android.speech.RecognizerResultsIntent
+</span>@extends java.lang.Object
+
+ Constants for intents related to showing speech recognition results.
+ 
+ These constants should not be needed for normal utilization of speech recognition. They
+ would only be called if you wanted to trigger a view of voice search results in your
+ application, or implemented if you wanted to offer a different view for voice search results
+ with your application.
+ 
+ The standard behavior here for someone receiving an {@link #ACTION_VOICE_SEARCH_RESULTS} is to
+ first retrieve the list of {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS}, and use any provided
+ HTML for that result in {@link #EXTRA_VOICE_SEARCH_RESULT_HTML}, if available, to display
+ the search results. If that is not available, then the corresponding url for that result in
+ {@link #EXTRA_VOICE_SEARCH_RESULT_URLS} should be used. And if even that is not available,
+ then a search url should be constructed from the actual recognition result string.
+*/
+var RecognizerResultsIntent = {
+
+<span id='android-speech-RecognizerResultsIntent-property-ACTION_VOICE_SEARCH_RESULTS'>/** Intent that can be sent by implementations of voice search to display the results of
+</span> a search in, for example, a web browser.
+ 
+ This intent should always be accompanied by at least
+ {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS}, and optionally but recommended,
+ {@link #EXTRA_VOICE_SEARCH_RESULT_URLS}, and sometimes
+ {@link #EXTRA_VOICE_SEARCH_RESULT_HTML} and
+ {@link #EXTRA_VOICE_SEARCH_RESULT_HTML_BASE_URLS}.
+ 
+ These are parallel arrays, where a recognition result string at index N of
+ {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS} should be accompanied by a url to use for
+ searching based on that string at index N of {@link #EXTRA_VOICE_SEARCH_RESULT_URLS},
+ and, possibly, the full html to display for that result at index N of
+ {@link #EXTRA_VOICE_SEARCH_RESULT_HTML}. If full html is provided, a base url (or
+ list of base urls) should be provided with {@link #EXTRA_VOICE_SEARCH_RESULT_HTML_BASE_URLS}.
+*/
+ACTION_VOICE_SEARCH_RESULTS : &quot;android.speech.action.VOICE_SEARCH_RESULTS&quot;,
+<span id='android-speech-RecognizerResultsIntent-property-EXTRA_VOICE_SEARCH_RESULT_STRINGS'>/** The key to an extra {@link ArrayList} of {@link String}s that contains the list of
+</span> recognition alternates from voice search, in order from highest to lowest confidence.
+*/
+EXTRA_VOICE_SEARCH_RESULT_STRINGS : &quot;android.speech.extras.VOICE_SEARCH_RESULT_STRINGS&quot;,
+<span id='android-speech-RecognizerResultsIntent-property-EXTRA_VOICE_SEARCH_RESULT_URLS'>/** The key to an extra {@link ArrayList} of {@link String}s that contains the search urls
+</span> to use, if available, for the recognition alternates provided in
+ {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS}. This list should always be the same size as the
+ one provided in {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS} - if a result cannot provide a
+ search url, that entry in this ArrayList should be &lt;code&gt;null&lt;/code&gt;, and the implementor of
+ {@link #ACTION_VOICE_SEARCH_RESULTS} should execute a search of its own choosing,
+ based on the recognition result string.
+*/
+EXTRA_VOICE_SEARCH_RESULT_URLS : &quot;android.speech.extras.VOICE_SEARCH_RESULT_URLS&quot;,
+<span id='android-speech-RecognizerResultsIntent-property-EXTRA_VOICE_SEARCH_RESULT_HTML'>/** The key to an extra {@link ArrayList} of {@link String}s that contains the html content to
+</span> use, if available, for the recognition alternates provided in
+ {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS}. This list should always be the same size as the
+ one provided in {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS} - if a result cannot provide
+ html, that entry in this list should be &lt;code&gt;null&lt;/code&gt;, and the implementor of
+ {@link #ACTION_VOICE_SEARCH_RESULTS} should back off to the corresponding url provided in
+ {@link #EXTRA_VOICE_SEARCH_RESULT_URLS}, if available, or else should execute a search of
+ its own choosing, based on the recognition result string.
+ 
+ Currently this html content should be expected in the form of a uri with scheme
+ {@link #URI_SCHEME_INLINE} for the Browser. In the future this may change to a &quot;content://&quot;
+ uri or some other identifier. Anyone who reads this extra should confirm that a result is
+ in fact an &quot;inline:&quot; uri and back off to the urls or strings gracefully if it is not, thus
+ maintaining future backwards compatibility if this changes.
+*/
+EXTRA_VOICE_SEARCH_RESULT_HTML : &quot;android.speech.extras.VOICE_SEARCH_RESULT_HTML&quot;,
+<span id='android-speech-RecognizerResultsIntent-property-EXTRA_VOICE_SEARCH_RESULT_HTML_BASE_URLS'>/** The key to an extra {@link ArrayList} of {@link String}s that contains the base url to
+</span> assume when interpreting html provided in {@link #EXTRA_VOICE_SEARCH_RESULT_HTML}.
+ 
+ A list of size 1 may be provided to apply the same base url to all html results.
+ A list of the same size as {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS} may be provided
+ to apply different base urls to each different html result in the
+ {@link #EXTRA_VOICE_SEARCH_RESULT_HTML} list.
+*/
+EXTRA_VOICE_SEARCH_RESULT_HTML_BASE_URLS : &quot;android.speech.extras.VOICE_SEARCH_RESULT_HTML_BASE_URLS&quot;,
+<span id='android-speech-RecognizerResultsIntent-property-EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS'>/** The key to an extra {@link ArrayList} of {@link Bundle}s that contains key/value pairs.
+</span> All the values and the keys are {@link String}s. Each key/value pair represents an extra HTTP
+ header. The keys can't be the standard HTTP headers as they are set by the WebView.
+
+ A list of size 1 may be provided to apply the same HTTP headers to all web results. A
+ list of the same size as {@link #EXTRA_VOICE_SEARCH_RESULT_STRINGS} may be provided to
+ apply different HTTP headers to each different web result in the list. These headers will
+ only be used in the case that the url for a particular web result (from
+ {@link #EXTRA_VOICE_SEARCH_RESULT_URLS}) is loaded.
+*/
+EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS : &quot;android.speech.extras.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS&quot;,
+<span id='android-speech-RecognizerResultsIntent-property-URI_SCHEME_INLINE'>/** The scheme used currently for html content in {@link #EXTRA_VOICE_SEARCH_RESULT_HTML}.
+</span> Note that this should only be used in tandem with this particular extra; it should
+ NOT be used for generic URIs such as those found in the data field of an Intent.
+*/
+URI_SCHEME_INLINE : &quot;inline&quot;,
+
+};</pre>
+</body>
+</html>

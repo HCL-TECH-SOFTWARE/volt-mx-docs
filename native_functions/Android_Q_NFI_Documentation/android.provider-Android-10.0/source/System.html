@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Settings-System'>/**@class android.provider.Settings.System
+</span>@extends android.provider.Settings.NameValueTable
+
+ System settings, containing miscellaneous system preferences.  This
+ table holds simple name/value pairs.  There are convenience
+ functions for accessing individual settings entries.
+*/
+var System = {
+
+<span id='android-provider-Settings-System-property-CONTENT_URI'>/** The content:// style URL for this table
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-STAY_ON_WHILE_PLUGGED_IN'>/** @deprecated Use {@link android.provider.Settings.Global#STAY_ON_WHILE_PLUGGED_IN} instead
+</span>*/
+STAY_ON_WHILE_PLUGGED_IN : &quot;stay_on_while_plugged_in&quot;,
+<span id='android-provider-Settings-System-property-END_BUTTON_BEHAVIOR'>/** What happens when the user presses the end call button if they're not
+</span> on a call.&lt;br/&gt;
+ &lt;b&gt;Values:&lt;/b&gt;&lt;br/&gt;
+ 0 - The end button does nothing.&lt;br/&gt;
+ 1 - The end button goes to the home screen.&lt;br/&gt;
+ 2 - The end button puts the device to sleep and locks the keyguard.&lt;br/&gt;
+ 3 - The end button goes to the home screen.  If the user is already on the
+ home screen, it puts the device to sleep.
+*/
+END_BUTTON_BEHAVIOR : &quot;end_button_behavior&quot;,
+<span id='android-provider-Settings-System-property-END_BUTTON_BEHAVIOR_HOME'>/** END_BUTTON_BEHAVIOR value for &quot;go home&quot;.
+</span> @hide
+*/
+END_BUTTON_BEHAVIOR_HOME : &quot;1&quot;,
+<span id='android-provider-Settings-System-property-END_BUTTON_BEHAVIOR_SLEEP'>/** END_BUTTON_BEHAVIOR value for &quot;go to sleep&quot;.
+</span> @hide
+*/
+END_BUTTON_BEHAVIOR_SLEEP : &quot;2&quot;,
+<span id='android-provider-Settings-System-property-END_BUTTON_BEHAVIOR_DEFAULT'>/** END_BUTTON_BEHAVIOR default value.
+</span> @hide
+*/
+END_BUTTON_BEHAVIOR_DEFAULT : &quot;2&quot;,
+<span id='android-provider-Settings-System-property-ADVANCED_SETTINGS'>/** Is advanced settings mode turned on. 0 == no, 1 == yes
+</span> @hide
+*/
+ADVANCED_SETTINGS : &quot;advanced_settings&quot;,
+<span id='android-provider-Settings-System-property-ADVANCED_SETTINGS_DEFAULT'>/** ADVANCED_SETTINGS default value.
+</span> @hide
+*/
+ADVANCED_SETTINGS_DEFAULT : &quot;0&quot;,
+<span id='android-provider-Settings-System-property-AIRPLANE_MODE_ON'>/** @deprecated Use {@link android.provider.Settings.Global#AIRPLANE_MODE_ON} instead
+</span>*/
+AIRPLANE_MODE_ON : &quot;airplane_mode_on&quot;,
+<span id='android-provider-Settings-System-property-RADIO_BLUETOOTH'>/** @deprecated Use {@link android.provider.Settings.Global#RADIO_BLUETOOTH} instead
+</span>*/
+RADIO_BLUETOOTH : &quot;bluetooth&quot;,
+<span id='android-provider-Settings-System-property-RADIO_WIFI'>/** @deprecated Use {@link android.provider.Settings.Global#RADIO_WIFI} instead
+</span>*/
+RADIO_WIFI : &quot;wifi&quot;,
+<span id='android-provider-Settings-System-property-RADIO_WIMAX'>/** @deprecated Use {@link android.provider.Settings.Global#RADIO_WIMAX} instead
+</span> {@hide}
+*/
+RADIO_WIMAX : &quot;wimax&quot;,
+<span id='android-provider-Settings-System-property-RADIO_CELL'>/** @deprecated Use {@link android.provider.Settings.Global#RADIO_CELL} instead
+</span>*/
+RADIO_CELL : &quot;cell&quot;,
+<span id='android-provider-Settings-System-property-RADIO_NFC'>/** @deprecated Use {@link android.provider.Settings.Global#RADIO_NFC} instead
+</span>*/
+RADIO_NFC : &quot;nfc&quot;,
+<span id='android-provider-Settings-System-property-AIRPLANE_MODE_RADIOS'>/** @deprecated Use {@link android.provider.Settings.Global#AIRPLANE_MODE_RADIOS} instead
+</span>*/
+AIRPLANE_MODE_RADIOS : &quot;airplane_mode_radios&quot;,
+<span id='android-provider-Settings-System-property-AIRPLANE_MODE_TOGGLEABLE_RADIOS'>/** @deprecated Use {@link android.provider.Settings.Global#AIRPLANE_MODE_TOGGLEABLE_RADIOS} instead
+</span>
+ {@hide}
+*/
+AIRPLANE_MODE_TOGGLEABLE_RADIOS : &quot;airplane_mode_toggleable_radios&quot;,
+<span id='android-provider-Settings-System-property-WIFI_SLEEP_POLICY'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_SLEEP_POLICY} instead
+</span>*/
+WIFI_SLEEP_POLICY : &quot;wifi_sleep_policy&quot;,
+<span id='android-provider-Settings-System-property-WIFI_SLEEP_POLICY_DEFAULT'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_SLEEP_POLICY_DEFAULT} instead
+</span>*/
+WIFI_SLEEP_POLICY_DEFAULT : &quot;0&quot;,
+<span id='android-provider-Settings-System-property-WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED} instead
+</span>*/
+WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED : &quot;1&quot;,
+<span id='android-provider-Settings-System-property-WIFI_SLEEP_POLICY_NEVER'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_SLEEP_POLICY_NEVER} instead
+</span>*/
+WIFI_SLEEP_POLICY_NEVER : &quot;2&quot;,
+<span id='android-provider-Settings-System-property-MODE_RINGER'>/** @deprecated Use {@link android.provider.Settings.Global#MODE_RINGER} instead
+</span>*/
+MODE_RINGER : &quot;mode_ringer&quot;,
+<span id='android-provider-Settings-System-property-WIFI_USE_STATIC_IP'>/** Whether to use static IP and other static network attributes.
+</span> &lt;p&gt;
+ Set to 1 for true and 0 for false.
+
+ @deprecated Use {@link WifiManager} instead
+*/
+WIFI_USE_STATIC_IP : &quot;wifi_use_static_ip&quot;,
+<span id='android-provider-Settings-System-property-WIFI_STATIC_IP'>/** The static IP address.
+</span> &lt;p&gt;
+ Example: &quot;192.168.1.51&quot;
+
+ @deprecated Use {@link WifiManager} instead
+*/
+WIFI_STATIC_IP : &quot;wifi_static_ip&quot;,
+<span id='android-provider-Settings-System-property-WIFI_STATIC_GATEWAY'>/** If using static IP, the gateway's IP address.
+</span> &lt;p&gt;
+ Example: &quot;192.168.1.1&quot;
+
+ @deprecated Use {@link WifiManager} instead
+*/
+WIFI_STATIC_GATEWAY : &quot;wifi_static_gateway&quot;,
+<span id='android-provider-Settings-System-property-WIFI_STATIC_NETMASK'>/** If using static IP, the net mask.
+</span> &lt;p&gt;
+ Example: &quot;255.255.255.0&quot;
+
+ @deprecated Use {@link WifiManager} instead
+*/
+WIFI_STATIC_NETMASK : &quot;wifi_static_netmask&quot;,
+<span id='android-provider-Settings-System-property-WIFI_STATIC_DNS1'>/** If using static IP, the primary DNS's IP address.
+</span> &lt;p&gt;
+ Example: &quot;192.168.1.1&quot;
+
+ @deprecated Use {@link WifiManager} instead
+*/
+WIFI_STATIC_DNS1 : &quot;wifi_static_dns1&quot;,
+<span id='android-provider-Settings-System-property-WIFI_STATIC_DNS2'>/** If using static IP, the secondary DNS's IP address.
+</span> &lt;p&gt;
+ Example: &quot;192.168.1.2&quot;
+
+ @deprecated Use {@link WifiManager} instead
+*/
+WIFI_STATIC_DNS2 : &quot;wifi_static_dns2&quot;,
+<span id='android-provider-Settings-System-property-BLUETOOTH_DISCOVERABILITY'>/** Determines whether remote devices may discover and/or connect to
+</span> this device.
+ &lt;P&gt;Type: INT&lt;/P&gt;
+ 2 -- discoverable and connectable
+ 1 -- connectable but not discoverable
+ 0 -- neither connectable nor discoverable
+*/
+BLUETOOTH_DISCOVERABILITY : &quot;bluetooth_discoverability&quot;,
+<span id='android-provider-Settings-System-property-BLUETOOTH_DISCOVERABILITY_TIMEOUT'>/** Bluetooth discoverability timeout.  If this value is nonzero, then
+</span> Bluetooth becomes discoverable for a certain number of seconds,
+ after which is becomes simply connectable.  The value is in seconds.
+*/
+BLUETOOTH_DISCOVERABILITY_TIMEOUT : &quot;bluetooth_discoverability_timeout&quot;,
+<span id='android-provider-Settings-System-property-LOCK_PATTERN_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Secure#LOCK_PATTERN_ENABLED}
+</span> instead
+*/
+LOCK_PATTERN_ENABLED : &quot;lock_pattern_autolock&quot;,
+<span id='android-provider-Settings-System-property-LOCK_PATTERN_VISIBLE'>/** @deprecated Use {@link android.provider.Settings.Secure#LOCK_PATTERN_VISIBLE}
+</span> instead
+*/
+LOCK_PATTERN_VISIBLE : &quot;lock_pattern_visible_pattern&quot;,
+<span id='android-provider-Settings-System-property-LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED'>/** @deprecated Use
+</span> {@link android.provider.Settings.Secure#LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED}
+ instead
+*/
+LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED : &quot;lock_pattern_tactile_feedback_enabled&quot;,
+<span id='android-provider-Settings-System-property-NEXT_ALARM_FORMATTED'>/** A formatted string of the next alarm that is set, or the empty string
+</span> if there is no alarm set.
+
+ @deprecated Use {@link android.app.AlarmManager#getNextAlarmClock()}.
+*/
+NEXT_ALARM_FORMATTED : &quot;next_alarm_formatted&quot;,
+<span id='android-provider-Settings-System-property-FONT_SCALE'>/** Scaling factor for fonts, float.
+</span>*/
+FONT_SCALE : &quot;font_scale&quot;,
+<span id='android-provider-Settings-System-property-SYSTEM_LOCALES'>/** The serialized system locale value.
+</span>
+ Do not use this value directory.
+ To get system locale, use {@link LocaleList#getDefault} instead.
+ To update system locale, use {@link com.android.internal.app.LocalePicker#updateLocales}
+ instead.
+ @hide
+*/
+SYSTEM_LOCALES : &quot;system_locales&quot;,
+<span id='android-provider-Settings-System-property-DEBUG_APP'>/** Name of an application package to be debugged.
+</span>
+ @deprecated Use {@link android.provider.Settings.Global#DEBUG_APP} instead
+*/
+DEBUG_APP : &quot;debug_app&quot;,
+<span id='android-provider-Settings-System-property-WAIT_FOR_DEBUGGER'>/** If 1, when launching DEBUG_APP it will wait for the debugger before
+</span> starting user code.  If 0, it will run normally.
+
+ @deprecated Use {@link android.provider.Settings.Global#WAIT_FOR_DEBUGGER} instead
+*/
+WAIT_FOR_DEBUGGER : &quot;wait_for_debugger&quot;,
+<span id='android-provider-Settings-System-property-DIM_SCREEN'>/** Whether or not to dim the screen. 0=no  1=yes
+</span> @deprecated This setting is no longer used.
+*/
+DIM_SCREEN : &quot;dim_screen&quot;,
+<span id='android-provider-Settings-System-property-DISPLAY_COLOR_MODE'>/** The display color mode.
+</span> @hide
+*/
+DISPLAY_COLOR_MODE : &quot;display_color_mode&quot;,
+<span id='android-provider-Settings-System-property-PEAK_REFRESH_RATE'>/** The user selected peak refresh rate in frames per second.
+</span>
+ If this isn't set, the system falls back to a device specific default.
+ @hide
+*/
+PEAK_REFRESH_RATE : &quot;peak_refresh_rate&quot;,
+<span id='android-provider-Settings-System-property-SCREEN_OFF_TIMEOUT'>/** The amount of time in milliseconds before the device goes to sleep or begins
+</span> to dream after a period of inactivity.  This value is also known as the
+ user activity timeout period since the screen isn't necessarily turned off
+ when it expires.
+
+ &lt;p&gt;
+ This value is bounded by maximum timeout set by
+ {@link android.app.admin.DevicePolicyManager#setMaximumTimeToLock(ComponentName, long)}.
+*/
+SCREEN_OFF_TIMEOUT : &quot;screen_off_timeout&quot;,
+<span id='android-provider-Settings-System-property-SCREEN_BRIGHTNESS'>/** The screen backlight brightness between 0 and 255.
+</span>*/
+SCREEN_BRIGHTNESS : &quot;screen_brightness&quot;,
+<span id='android-provider-Settings-System-property-SCREEN_BRIGHTNESS_FOR_VR'>/** The screen backlight brightness between 0 and 255.
+</span> @hide
+*/
+SCREEN_BRIGHTNESS_FOR_VR : &quot;screen_brightness_for_vr&quot;,
+<span id='android-provider-Settings-System-property-SCREEN_BRIGHTNESS_MODE'>/** Control whether to enable automatic brightness mode.
+</span>*/
+SCREEN_BRIGHTNESS_MODE : &quot;screen_brightness_mode&quot;,
+<span id='android-provider-Settings-System-property-SCREEN_AUTO_BRIGHTNESS_ADJ'>/** Adjustment to auto-brightness to make it generally more (&gt;0.0 &lt;1.0)
+</span> or less (&lt;0.0 &gt;-1.0) bright.
+ @hide
+*/
+SCREEN_AUTO_BRIGHTNESS_ADJ : &quot;screen_auto_brightness_adj&quot;,
+<span id='android-provider-Settings-System-property-SCREEN_BRIGHTNESS_MODE_MANUAL'>/** SCREEN_BRIGHTNESS_MODE value for manual mode.
+</span>*/
+SCREEN_BRIGHTNESS_MODE_MANUAL : &quot;0&quot;,
+<span id='android-provider-Settings-System-property-SCREEN_BRIGHTNESS_MODE_AUTOMATIC'>/** SCREEN_BRIGHTNESS_MODE value for automatic mode.
+</span>*/
+SCREEN_BRIGHTNESS_MODE_AUTOMATIC : &quot;1&quot;,
+<span id='android-provider-Settings-System-property-ADAPTIVE_SLEEP'>/** Control whether to enable adaptive sleep mode.
+</span> @hide
+*/
+ADAPTIVE_SLEEP : &quot;adaptive_sleep&quot;,
+<span id='android-provider-Settings-System-property-SHOW_PROCESSES'>/** Control whether the process CPU usage meter should be shown.
+</span>
+ @deprecated This functionality is no longer available as of
+ {@link android.os.Build.VERSION_CODES#N_MR1}.
+*/
+SHOW_PROCESSES : &quot;show_processes&quot;,
+<span id='android-provider-Settings-System-property-ALWAYS_FINISH_ACTIVITIES'>/** If 1, the activity manager will aggressively finish activities and
+</span> processes as soon as they are no longer needed.  If 0, the normal
+ extended lifetime is used.
+
+ @deprecated Use {@link android.provider.Settings.Global#ALWAYS_FINISH_ACTIVITIES} instead
+*/
+ALWAYS_FINISH_ACTIVITIES : &quot;always_finish_activities&quot;,
+<span id='android-provider-Settings-System-property-MODE_RINGER_STREAMS_AFFECTED'>/** Determines which streams are affected by ringer and zen mode changes. The
+</span> stream type's bit should be set to 1 if it should be muted when going
+ into an inaudible ringer mode.
+*/
+MODE_RINGER_STREAMS_AFFECTED : &quot;mode_ringer_streams_affected&quot;,
+<span id='android-provider-Settings-System-property-MUTE_STREAMS_AFFECTED'>/** Determines which streams are affected by mute. The
+</span> stream type's bit should be set to 1 if it should be muted when a mute request
+ is received.
+*/
+MUTE_STREAMS_AFFECTED : &quot;mute_streams_affected&quot;,
+<span id='android-provider-Settings-System-property-VIBRATE_ON'>/** Whether vibrate is on for different events. This is used internally,
+</span> changing this value will not change the vibrate. See AudioManager.
+*/
+VIBRATE_ON : &quot;vibrate_on&quot;,
+<span id='android-provider-Settings-System-property-VIBRATE_INPUT_DEVICES'>/** If 1, redirects the system vibrator to all currently attached input devices
+</span> that support vibration.  If there are no such input devices, then the system
+ vibrator is used instead.
+ If 0, does not register the system vibrator.
+
+ This setting is mainly intended to provide a compatibility mechanism for
+ applications that only know about the system vibrator and do not use the
+ input device vibrator API.
+
+ @hide
+*/
+VIBRATE_INPUT_DEVICES : &quot;vibrate_input_devices&quot;,
+<span id='android-provider-Settings-System-property-NOTIFICATION_VIBRATION_INTENSITY'>/** The intensity of notification vibrations, if configurable.
+</span>
+ Not all devices are capable of changing their vibration intensity; on these devices
+ there will likely be no difference between the various vibration intensities except for
+ intensity 0 (off) and the rest.
+
+ &lt;b&gt;Values:&lt;/b&gt;&lt;br/&gt;
+ 0 - Vibration is disabled&lt;br/&gt;
+ 1 - Weak vibrations&lt;br/&gt;
+ 2 - Medium vibrations&lt;br/&gt;
+ 3 - Strong vibrations
+ @hide
+*/
+NOTIFICATION_VIBRATION_INTENSITY : &quot;notification_vibration_intensity&quot;,
+<span id='android-provider-Settings-System-property-RING_VIBRATION_INTENSITY'>/** The intensity of ringtone vibrations, if configurable.
+</span>
+ Not all devices are capable of changing their vibration intensity; on these devices
+ there will likely be no difference between the various vibration intensities except for
+ intensity 0 (off) and the rest.
+
+ &lt;b&gt;Values:&lt;/b&gt;&lt;br/&gt;
+ 0 - Vibration is disabled&lt;br/&gt;
+ 1 - Weak vibrations&lt;br/&gt;
+ 2 - Medium vibrations&lt;br/&gt;
+ 3 - Strong vibrations
+ @hide
+*/
+RING_VIBRATION_INTENSITY : &quot;ring_vibration_intensity&quot;,
+<span id='android-provider-Settings-System-property-HAPTIC_FEEDBACK_INTENSITY'>/** The intensity of haptic feedback vibrations, if configurable.
+</span>
+ Not all devices are capable of changing their feedback intensity; on these devices
+ there will likely be no difference between the various vibration intensities except for
+ intensity 0 (off) and the rest.
+
+ &lt;b&gt;Values:&lt;/b&gt;&lt;br/&gt;
+ 0 - Vibration is disabled&lt;br/&gt;
+ 1 - Weak vibrations&lt;br/&gt;
+ 2 - Medium vibrations&lt;br/&gt;
+ 3 - Strong vibrations
+ @hide
+*/
+HAPTIC_FEEDBACK_INTENSITY : &quot;haptic_feedback_intensity&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_RING'>/** Ringer volume. This is used internally, changing this value will not
+</span> change the volume. See AudioManager.
+
+ @removed Not used by anything since API 2.
+*/
+VOLUME_RING : &quot;volume_ring&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_SYSTEM'>/** System/notifications volume. This is used internally, changing this
+</span> value will not change the volume. See AudioManager.
+
+ @removed Not used by anything since API 2.
+*/
+VOLUME_SYSTEM : &quot;volume_system&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_VOICE'>/** Voice call volume. This is used internally, changing this value will
+</span> not change the volume. See AudioManager.
+
+ @removed Not used by anything since API 2.
+*/
+VOLUME_VOICE : &quot;volume_voice&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_MUSIC'>/** Music/media/gaming volume. This is used internally, changing this
+</span> value will not change the volume. See AudioManager.
+
+ @removed Not used by anything since API 2.
+*/
+VOLUME_MUSIC : &quot;volume_music&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_ALARM'>/** Alarm volume. This is used internally, changing this
+</span> value will not change the volume. See AudioManager.
+
+ @removed Not used by anything since API 2.
+*/
+VOLUME_ALARM : &quot;volume_alarm&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_NOTIFICATION'>/** Notification volume. This is used internally, changing this
+</span> value will not change the volume. See AudioManager.
+
+ @removed Not used by anything since API 2.
+*/
+VOLUME_NOTIFICATION : &quot;volume_notification&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_BLUETOOTH_SCO'>/** Bluetooth Headset volume. This is used internally, changing this value will
+</span> not change the volume. See AudioManager.
+
+ @removed Not used by anything since API 2.
+*/
+VOLUME_BLUETOOTH_SCO : &quot;volume_bluetooth_sco&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_ACCESSIBILITY'>/** @hide
+</span> Acessibility volume. This is used internally, changing this
+ value will not change the volume.
+*/
+VOLUME_ACCESSIBILITY : &quot;volume_a11y&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_MASTER'>/** Master volume (float in the range 0.0f to 1.0f).
+</span>
+ @hide
+*/
+VOLUME_MASTER : &quot;volume_master&quot;,
+<span id='android-provider-Settings-System-property-MASTER_MONO'>/** Master mono (int 1 = mono, 0 = normal).
+</span>
+ @hide
+*/
+MASTER_MONO : &quot;master_mono&quot;,
+<span id='android-provider-Settings-System-property-MASTER_BALANCE'>/** Master balance (float -1.f = 100% left, 0.f = dead center, 1.f = 100% right).
+</span>
+ @hide
+*/
+MASTER_BALANCE : &quot;master_balance&quot;,
+<span id='android-provider-Settings-System-property-NOTIFICATIONS_USE_RING_VOLUME'>/** Whether the notifications should use the ring volume (value of 1) or
+</span> a separate notification volume (value of 0). In most cases, users
+ will have this enabled so the notification and ringer volumes will be
+ the same. However, power users can disable this and use the separate
+ notification volume control.
+ &lt;p&gt;
+ Note: This is a one-off setting that will be removed in the future
+ when there is profile support. For this reason, it is kept hidden
+ from the public APIs.
+
+ @hide
+ @deprecated
+*/
+NOTIFICATIONS_USE_RING_VOLUME : &quot;notifications_use_ring_volume&quot;,
+<span id='android-provider-Settings-System-property-VIBRATE_IN_SILENT'>/** Whether silent mode should allow vibration feedback. This is used
+</span> internally in AudioService and the Sound settings activity to
+ coordinate decoupling of vibrate and silent modes. This setting
+ will likely be removed in a future release with support for
+ audio/vibe feedback profiles.
+
+ Not used anymore. On devices with vibrator, the user explicitly selects
+ silent or vibrate mode.
+ Kept for use by legacy database upgrade code in DatabaseHelper.
+ @hide
+*/
+VIBRATE_IN_SILENT : &quot;vibrate_in_silent&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_SETTINGS'>/** The mapping of stream type (integer) to its setting.
+</span>
+ @removed  Not used by anything since API 2.
+*/
+VOLUME_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-VOLUME_SETTINGS_INT'>/** @hide
+</span> The mapping of stream type (integer) to its setting.
+ Unlike the VOLUME_SETTINGS array, this one contains as many entries as
+ AudioSystem.NUM_STREAM_TYPES, and has empty strings for stream types whose volumes
+ are never persisted.
+*/
+VOLUME_SETTINGS_INT : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-APPEND_FOR_LAST_AUDIBLE'>/** Appended to various volume related settings to record the previous
+</span> values before they the settings were affected by a silent/vibrate
+ ringer mode change.
+
+ @removed  Not used by anything since API 2.
+*/
+APPEND_FOR_LAST_AUDIBLE : &quot;_last_audible&quot;,
+<span id='android-provider-Settings-System-property-RINGTONE'>/** Persistent store for the system-wide default ringtone URI.
+</span> &lt;p&gt;
+ If you need to play the default ringtone at any given time, it is recommended
+ you give {@link #DEFAULT_RINGTONE_URI} to the media player.  It will resolve
+ to the set default ringtone at the time of playing.
+
+ @see #DEFAULT_RINGTONE_URI
+*/
+RINGTONE : &quot;ringtone&quot;,
+<span id='android-provider-Settings-System-property-DEFAULT_RINGTONE_URI'>/** A {@link Uri} that will point to the current default ringtone at any
+</span> given time.
+ &lt;p&gt;
+ If the current default ringtone is in the DRM provider and the caller
+ does not have permission, the exception will be a
+ FileNotFoundException.
+*/
+DEFAULT_RINGTONE_URI : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-RINGTONE_CACHE'>/**{@hide} */
+</span>RINGTONE_CACHE : &quot;ringtone_cache&quot;,
+<span id='android-provider-Settings-System-property-RINGTONE_CACHE_URI'>/**{@hide} */
+</span>RINGTONE_CACHE_URI : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-NOTIFICATION_SOUND'>/** Persistent store for the system-wide default notification sound.
+</span>
+ @see #RINGTONE
+ @see #DEFAULT_NOTIFICATION_URI
+*/
+NOTIFICATION_SOUND : &quot;notification_sound&quot;,
+<span id='android-provider-Settings-System-property-DEFAULT_NOTIFICATION_URI'>/** A {@link Uri} that will point to the current default notification
+</span> sound at any given time.
+
+ @see #DEFAULT_RINGTONE_URI
+*/
+DEFAULT_NOTIFICATION_URI : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-NOTIFICATION_SOUND_CACHE'>/**{@hide} */
+</span>NOTIFICATION_SOUND_CACHE : &quot;notification_sound_cache&quot;,
+<span id='android-provider-Settings-System-property-NOTIFICATION_SOUND_CACHE_URI'>/**{@hide} */
+</span>NOTIFICATION_SOUND_CACHE_URI : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-ALARM_ALERT'>/** Persistent store for the system-wide default alarm alert.
+</span>
+ @see #RINGTONE
+ @see #DEFAULT_ALARM_ALERT_URI
+*/
+ALARM_ALERT : &quot;alarm_alert&quot;,
+<span id='android-provider-Settings-System-property-DEFAULT_ALARM_ALERT_URI'>/** A {@link Uri} that will point to the current default alarm alert at
+</span> any given time.
+
+ @see #DEFAULT_ALARM_ALERT_URI
+*/
+DEFAULT_ALARM_ALERT_URI : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-ALARM_ALERT_CACHE'>/**{@hide} */
+</span>ALARM_ALERT_CACHE : &quot;alarm_alert_cache&quot;,
+<span id='android-provider-Settings-System-property-ALARM_ALERT_CACHE_URI'>/**{@hide} */
+</span>ALARM_ALERT_CACHE_URI : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-MEDIA_BUTTON_RECEIVER'>/** Persistent store for the system default media button event receiver.
+</span>
+ @hide
+*/
+MEDIA_BUTTON_RECEIVER : &quot;media_button_receiver&quot;,
+<span id='android-provider-Settings-System-property-TEXT_AUTO_REPLACE'>/** Setting to enable Auto Replace (AutoText) in text editors. 1 = On, 0 = Off
+</span>*/
+TEXT_AUTO_REPLACE : &quot;auto_replace&quot;,
+<span id='android-provider-Settings-System-property-TEXT_AUTO_CAPS'>/** Setting to enable Auto Caps in text editors. 1 = On, 0 = Off
+</span>*/
+TEXT_AUTO_CAPS : &quot;auto_caps&quot;,
+<span id='android-provider-Settings-System-property-TEXT_AUTO_PUNCTUATE'>/** Setting to enable Auto Punctuate in text editors. 1 = On, 0 = Off. This
+</span> feature converts two spaces to a &quot;.&quot; and space.
+*/
+TEXT_AUTO_PUNCTUATE : &quot;auto_punctuate&quot;,
+<span id='android-provider-Settings-System-property-TEXT_SHOW_PASSWORD'>/** Setting to showing password characters in text editors. 1 = On, 0 = Off
+</span>*/
+TEXT_SHOW_PASSWORD : &quot;show_password&quot;,
+<span id='android-provider-Settings-System-property-SHOW_GTALK_SERVICE_STATUS'>/***/
+</span>SHOW_GTALK_SERVICE_STATUS : &quot;SHOW_GTALK_SERVICE_STATUS&quot;,
+<span id='android-provider-Settings-System-property-WALLPAPER_ACTIVITY'>/** Name of activity to use for wallpaper on the home screen.
+</span>
+ @deprecated Use {@link WallpaperManager} instead.
+*/
+WALLPAPER_ACTIVITY : &quot;wallpaper_activity&quot;,
+<span id='android-provider-Settings-System-property-AUTO_TIME'>/** @deprecated Use {@link android.provider.Settings.Global#AUTO_TIME}
+</span> instead
+*/
+AUTO_TIME : &quot;auto_time&quot;,
+<span id='android-provider-Settings-System-property-AUTO_TIME_ZONE'>/** @deprecated Use {@link android.provider.Settings.Global#AUTO_TIME_ZONE}
+</span> instead
+*/
+AUTO_TIME_ZONE : &quot;auto_time_zone&quot;,
+<span id='android-provider-Settings-System-property-TIME_12_24'>/** Display times as 12 or 24 hours
+</span>   12
+   24
+*/
+TIME_12_24 : &quot;time_12_24&quot;,
+<span id='android-provider-Settings-System-property-TIME_12_24_VALIDATOR'>/**@hide */
+</span>TIME_12_24_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-DATE_FORMAT'>/** Date format string
+</span>   mm/dd/yyyy
+   dd/mm/yyyy
+   yyyy/mm/dd
+*/
+DATE_FORMAT : &quot;date_format&quot;,
+<span id='android-provider-Settings-System-property-DATE_FORMAT_VALIDATOR'>/**@hide */
+</span>DATE_FORMAT_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SETUP_WIZARD_HAS_RUN'>/** Whether the setup wizard has been run before (on first boot), or if
+</span> it still needs to be run.
+
+ nonzero = it has been run in the past
+ 0 = it has not been run in the past
+*/
+SETUP_WIZARD_HAS_RUN : &quot;setup_wizard_has_run&quot;,
+<span id='android-provider-Settings-System-property-SETUP_WIZARD_HAS_RUN_VALIDATOR'>/**@hide */
+</span>SETUP_WIZARD_HAS_RUN_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-WINDOW_ANIMATION_SCALE'>/** Scaling factor for normal window animations. Setting to 0 will disable window
+</span> animations.
+
+ @deprecated Use {@link android.provider.Settings.Global#WINDOW_ANIMATION_SCALE} instead
+*/
+WINDOW_ANIMATION_SCALE : &quot;window_animation_scale&quot;,
+<span id='android-provider-Settings-System-property-TRANSITION_ANIMATION_SCALE'>/** Scaling factor for activity transition animations. Setting to 0 will disable window
+</span> animations.
+
+ @deprecated Use {@link android.provider.Settings.Global#TRANSITION_ANIMATION_SCALE} instead
+*/
+TRANSITION_ANIMATION_SCALE : &quot;transition_animation_scale&quot;,
+<span id='android-provider-Settings-System-property-ANIMATOR_DURATION_SCALE'>/** Scaling factor for Animator-based animations. This affects both the start delay and
+</span> duration of all such animations. Setting to 0 will cause animations to end immediately.
+ The default value is 1.
+
+ @deprecated Use {@link android.provider.Settings.Global#ANIMATOR_DURATION_SCALE} instead
+*/
+ANIMATOR_DURATION_SCALE : &quot;animator_duration_scale&quot;,
+<span id='android-provider-Settings-System-property-ACCELEROMETER_ROTATION'>/** Control whether the accelerometer will be used to change screen
+</span> orientation.  If 0, it will not be used unless explicitly requested
+ by the application; if 1, it will be used by default unless explicitly
+ disabled by the application.
+*/
+ACCELEROMETER_ROTATION : &quot;accelerometer_rotation&quot;,
+<span id='android-provider-Settings-System-property-ACCELEROMETER_ROTATION_VALIDATOR'>/**@hide */
+</span>ACCELEROMETER_ROTATION_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-USER_ROTATION'>/** Default screen rotation when no other policy applies.
+</span> When {@link #ACCELEROMETER_ROTATION} is zero and no on-screen Activity expresses a
+ preference, this rotation value will be used. Must be one of the
+ {@link android.view.Surface#ROTATION_0 Surface rotation constants}.
+
+ @see android.view.Display#getRotation
+*/
+USER_ROTATION : &quot;user_rotation&quot;,
+<span id='android-provider-Settings-System-property-USER_ROTATION_VALIDATOR'>/**@hide */
+</span>USER_ROTATION_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY'>/** Control whether the rotation lock toggle in the System UI should be hidden.
+</span> Typically this is done for accessibility purposes to make it harder for
+ the user to accidentally toggle the rotation lock while the display rotation
+ has been locked for accessibility.
+
+ If 0, then rotation lock toggle is not hidden for accessibility (although it may be
+ unavailable for other reasons).  If 1, then the rotation lock toggle is hidden.
+
+ @hide
+*/
+HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY : &quot;hide_rotation_lock_toggle_for_accessibility&quot;,
+<span id='android-provider-Settings-System-property-HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY_VALIDATOR'>/**@hide */
+</span>HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-VIBRATE_WHEN_RINGING'>/** Whether the phone vibrates when it is ringing due to an incoming call. This will
+</span> be used by Phone and Setting apps; it shouldn't affect other apps.
+ The value is boolean (1 or 0).
+
+ Note: this is not same as &quot;vibrate on ring&quot;, which had been available until ICS.
+ It was about AudioManager's setting and thus affected all the applications which
+ relied on the setting, while this is purely about the vibration setting for incoming
+ calls.
+*/
+VIBRATE_WHEN_RINGING : &quot;vibrate_when_ringing&quot;,
+<span id='android-provider-Settings-System-property-VIBRATE_WHEN_RINGING_VALIDATOR'>/**@hide */
+</span>VIBRATE_WHEN_RINGING_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-DEBUG_ENABLE_ENHANCED_CALL_BLOCKING'>/** When {@code 1}, Telecom enhanced call blocking functionality is enabled.  When
+</span> {@code 0}, enhanced call blocking functionality is disabled.
+ @hide
+*/
+DEBUG_ENABLE_ENHANCED_CALL_BLOCKING : &quot;debug.enable_enhanced_calling&quot;,
+<span id='android-provider-Settings-System-property-DTMF_TONE_WHEN_DIALING'>/** Whether the audible DTMF tones are played by the dialer when dialing. The value is
+</span> boolean (1 or 0).
+*/
+DTMF_TONE_WHEN_DIALING : &quot;dtmf_tone&quot;,
+<span id='android-provider-Settings-System-property-DTMF_TONE_WHEN_DIALING_VALIDATOR'>/**@hide */
+</span>DTMF_TONE_WHEN_DIALING_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-DTMF_TONE_TYPE_WHEN_DIALING'>/** CDMA only settings
+</span> DTMF tone type played by the dialer when dialing.
+                 0 = Normal
+                 1 = Long
+*/
+DTMF_TONE_TYPE_WHEN_DIALING : &quot;dtmf_tone_type&quot;,
+<span id='android-provider-Settings-System-property-DTMF_TONE_TYPE_WHEN_DIALING_VALIDATOR'>/**@hide */
+</span>DTMF_TONE_TYPE_WHEN_DIALING_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-HEARING_AID'>/** Whether the hearing aid is enabled. The value is
+</span> boolean (1 or 0).
+ @hide
+*/
+HEARING_AID : &quot;hearing_aid&quot;,
+<span id='android-provider-Settings-System-property-HEARING_AID_VALIDATOR'>/**@hide */
+</span>HEARING_AID_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-TTY_MODE'>/** CDMA only settings
+</span> TTY Mode
+ 0 = OFF
+ 1 = FULL
+ 2 = VCO
+ 3 = HCO
+ @hide
+*/
+TTY_MODE : &quot;tty_mode&quot;,
+<span id='android-provider-Settings-System-property-TTY_MODE_VALIDATOR'>/**@hide */
+</span>TTY_MODE_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SOUND_EFFECTS_ENABLED'>/** Whether the sounds effects (key clicks, lid open ...) are enabled. The value is
+</span> boolean (1 or 0).
+*/
+SOUND_EFFECTS_ENABLED : &quot;sound_effects_enabled&quot;,
+<span id='android-provider-Settings-System-property-SOUND_EFFECTS_ENABLED_VALIDATOR'>/**@hide */
+</span>SOUND_EFFECTS_ENABLED_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-HAPTIC_FEEDBACK_ENABLED'>/** Whether haptic feedback (Vibrate on tap) is enabled. The value is
+</span> boolean (1 or 0).
+*/
+HAPTIC_FEEDBACK_ENABLED : &quot;haptic_feedback_enabled&quot;,
+<span id='android-provider-Settings-System-property-HAPTIC_FEEDBACK_ENABLED_VALIDATOR'>/**@hide */
+</span>HAPTIC_FEEDBACK_ENABLED_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SHOW_WEB_SUGGESTIONS'>/** @deprecated Each application that shows web suggestions should have its own
+</span> setting for this.
+*/
+SHOW_WEB_SUGGESTIONS : &quot;show_web_suggestions&quot;,
+<span id='android-provider-Settings-System-property-SHOW_WEB_SUGGESTIONS_VALIDATOR'>/**@hide */
+</span>SHOW_WEB_SUGGESTIONS_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-NOTIFICATION_LIGHT_PULSE'>/** Whether the notification LED should repeatedly flash when a notification is
+</span> pending. The value is boolean (1 or 0).
+ @hide
+*/
+NOTIFICATION_LIGHT_PULSE : &quot;notification_light_pulse&quot;,
+<span id='android-provider-Settings-System-property-NOTIFICATION_LIGHT_PULSE_VALIDATOR'>/**@hide */
+</span>NOTIFICATION_LIGHT_PULSE_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-POINTER_LOCATION'>/** Show pointer location on screen?
+</span> 0 = no
+ 1 = yes
+ @hide
+*/
+POINTER_LOCATION : &quot;pointer_location&quot;,
+<span id='android-provider-Settings-System-property-POINTER_LOCATION_VALIDATOR'>/**@hide */
+</span>POINTER_LOCATION_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SHOW_TOUCHES'>/** Show touch positions on screen?
+</span> 0 = no
+ 1 = yes
+ @hide
+*/
+SHOW_TOUCHES : &quot;show_touches&quot;,
+<span id='android-provider-Settings-System-property-SHOW_TOUCHES_VALIDATOR'>/**@hide */
+</span>SHOW_TOUCHES_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-WINDOW_ORIENTATION_LISTENER_LOG'>/** Log raw orientation data from
+</span> {@link com.android.server.policy.WindowOrientationListener} for use with the
+ orientationplot.py tool.
+ 0 = no
+ 1 = yes
+ @hide
+*/
+WINDOW_ORIENTATION_LISTENER_LOG : &quot;window_orientation_listener_log&quot;,
+<span id='android-provider-Settings-System-property-WINDOW_ORIENTATION_LISTENER_LOG_VALIDATOR'>/**@hide */
+</span>WINDOW_ORIENTATION_LISTENER_LOG_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-POWER_SOUNDS_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Global#POWER_SOUNDS_ENABLED}
+</span> instead
+ @hide
+*/
+POWER_SOUNDS_ENABLED : &quot;power_sounds_enabled&quot;,
+<span id='android-provider-Settings-System-property-DOCK_SOUNDS_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Global#DOCK_SOUNDS_ENABLED}
+</span> instead
+ @hide
+*/
+DOCK_SOUNDS_ENABLED : &quot;dock_sounds_enabled&quot;,
+<span id='android-provider-Settings-System-property-LOCKSCREEN_SOUNDS_ENABLED'>/** Whether to play sounds when the keyguard is shown and dismissed.
+</span> @hide
+*/
+LOCKSCREEN_SOUNDS_ENABLED : &quot;lockscreen_sounds_enabled&quot;,
+<span id='android-provider-Settings-System-property-LOCKSCREEN_SOUNDS_ENABLED_VALIDATOR'>/**@hide */
+</span>LOCKSCREEN_SOUNDS_ENABLED_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-LOCKSCREEN_DISABLED'>/** Whether the lockscreen should be completely disabled.
+</span> @hide
+*/
+LOCKSCREEN_DISABLED : &quot;lockscreen.disabled&quot;,
+<span id='android-provider-Settings-System-property-LOCKSCREEN_DISABLED_VALIDATOR'>/**@hide */
+</span>LOCKSCREEN_DISABLED_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-LOW_BATTERY_SOUND'>/** @deprecated Use {@link android.provider.Settings.Global#LOW_BATTERY_SOUND}
+</span> instead
+ @hide
+*/
+LOW_BATTERY_SOUND : &quot;low_battery_sound&quot;,
+<span id='android-provider-Settings-System-property-DESK_DOCK_SOUND'>/** @deprecated Use {@link android.provider.Settings.Global#DESK_DOCK_SOUND}
+</span> instead
+ @hide
+*/
+DESK_DOCK_SOUND : &quot;desk_dock_sound&quot;,
+<span id='android-provider-Settings-System-property-DESK_UNDOCK_SOUND'>/** @deprecated Use {@link android.provider.Settings.Global#DESK_UNDOCK_SOUND}
+</span> instead
+ @hide
+*/
+DESK_UNDOCK_SOUND : &quot;desk_undock_sound&quot;,
+<span id='android-provider-Settings-System-property-CAR_DOCK_SOUND'>/** @deprecated Use {@link android.provider.Settings.Global#CAR_DOCK_SOUND}
+</span> instead
+ @hide
+*/
+CAR_DOCK_SOUND : &quot;car_dock_sound&quot;,
+<span id='android-provider-Settings-System-property-CAR_UNDOCK_SOUND'>/** @deprecated Use {@link android.provider.Settings.Global#CAR_UNDOCK_SOUND}
+</span> instead
+ @hide
+*/
+CAR_UNDOCK_SOUND : &quot;car_undock_sound&quot;,
+<span id='android-provider-Settings-System-property-LOCK_SOUND'>/** @deprecated Use {@link android.provider.Settings.Global#LOCK_SOUND}
+</span> instead
+ @hide
+*/
+LOCK_SOUND : &quot;lock_sound&quot;,
+<span id='android-provider-Settings-System-property-UNLOCK_SOUND'>/** @deprecated Use {@link android.provider.Settings.Global#UNLOCK_SOUND}
+</span> instead
+ @hide
+*/
+UNLOCK_SOUND : &quot;unlock_sound&quot;,
+<span id='android-provider-Settings-System-property-SIP_RECEIVE_CALLS'>/** Receive incoming SIP calls?
+</span> 0 = no
+ 1 = yes
+ @hide
+*/
+SIP_RECEIVE_CALLS : &quot;sip_receive_calls&quot;,
+<span id='android-provider-Settings-System-property-SIP_RECEIVE_CALLS_VALIDATOR'>/**@hide */
+</span>SIP_RECEIVE_CALLS_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SIP_CALL_OPTIONS'>/** Call Preference String.
+</span> &quot;SIP_ALWAYS&quot; : Always use SIP with network access
+ &quot;SIP_ADDRESS_ONLY&quot; : Only if destination is a SIP address
+ @hide
+*/
+SIP_CALL_OPTIONS : &quot;sip_call_options&quot;,
+<span id='android-provider-Settings-System-property-SIP_CALL_OPTIONS_VALIDATOR'>/**@hide */
+</span>SIP_CALL_OPTIONS_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SIP_ALWAYS'>/** One of the sip call options: Always use SIP with network access.
+</span> @hide
+*/
+SIP_ALWAYS : &quot;SIP_ALWAYS&quot;,
+<span id='android-provider-Settings-System-property-SIP_ALWAYS_VALIDATOR'>/**@hide */
+</span>SIP_ALWAYS_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SIP_ADDRESS_ONLY'>/** One of the sip call options: Only if destination is a SIP address.
+</span> @hide
+*/
+SIP_ADDRESS_ONLY : &quot;SIP_ADDRESS_ONLY&quot;,
+<span id='android-provider-Settings-System-property-SIP_ADDRESS_ONLY_VALIDATOR'>/**@hide */
+</span>SIP_ADDRESS_ONLY_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SIP_ASK_ME_EACH_TIME'>/** @deprecated Use SIP_ALWAYS or SIP_ADDRESS_ONLY instead.  Formerly used to indicate that
+</span> the user should be prompted each time a call is made whether it should be placed using
+ SIP.  The {@link com.android.providers.settings.DatabaseHelper} replaces this with
+ SIP_ADDRESS_ONLY.
+ @hide
+*/
+SIP_ASK_ME_EACH_TIME : &quot;SIP_ASK_ME_EACH_TIME&quot;,
+<span id='android-provider-Settings-System-property-SIP_ASK_ME_EACH_TIME_VALIDATOR'>/**@hide */
+</span>SIP_ASK_ME_EACH_TIME_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-POINTER_SPEED'>/** Pointer speed setting.
+</span> This is an integer value in a range between -7 and +7, so there are 15 possible values.
+   -7 = slowest
+    0 = default speed
+   +7 = fastest
+ @hide
+*/
+POINTER_SPEED : &quot;pointer_speed&quot;,
+<span id='android-provider-Settings-System-property-POINTER_SPEED_VALIDATOR'>/**@hide */
+</span>POINTER_SPEED_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-LOCK_TO_APP_ENABLED'>/** Whether lock-to-app will be triggered by long-press on recents.
+</span> @hide
+*/
+LOCK_TO_APP_ENABLED : &quot;lock_to_app_enabled&quot;,
+<span id='android-provider-Settings-System-property-LOCK_TO_APP_ENABLED_VALIDATOR'>/**@hide */
+</span>LOCK_TO_APP_ENABLED_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-EGG_MODE'>/** I am the lolrus.
+</span> &lt;p&gt;
+ Nonzero values indicate that the user has a bukkit.
+ Backward-compatible with &lt;code&gt;PrefGetPreference(prefAllowEasterEggs)&lt;/code&gt;.
+ @hide
+*/
+EGG_MODE : &quot;egg_mode&quot;,
+<span id='android-provider-Settings-System-property-EGG_MODE_VALIDATOR'>/**@hide */
+</span>EGG_MODE_VALIDATOR : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-SHOW_BATTERY_PERCENT'>/** Setting to determine whether or not to show the battery percentage in the status bar.
+</span>    0 - Don't show percentage
+    1 - Show percentage
+ @hide
+*/
+SHOW_BATTERY_PERCENT : &quot;status_bar_show_battery_percent&quot;,
+<span id='android-provider-Settings-System-property-SETTINGS_TO_BACKUP'>/** Settings to backup. This is here so that it's in the same place as the settings
+</span> keys and easy to update.
+
+ NOTE: Settings are backed up and restored in the order they appear
+       in this array. If you have one setting depending on another,
+       make sure that they are ordered appropriately.
+
+ @hide
+*/
+SETTINGS_TO_BACKUP : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-LEGACY_RESTORE_SETTINGS'>/** Keys we no longer back up under the current schema, but want to continue to
+</span> process when restoring historical backup datasets.
+
+ All settings in {@link LEGACY_RESTORE_SETTINGS} array *must* have a non-null validator,
+ otherwise they won't be restored.
+
+ @hide
+*/
+LEGACY_RESTORE_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-PUBLIC_SETTINGS'>/** These are all public system settings
+</span>
+ @hide
+*/
+PUBLIC_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-PRIVATE_SETTINGS'>/** These are all hidden system settings.
+</span>
+ @hide
+*/
+PRIVATE_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-VALIDATORS'>/** These are all public system settings
+</span>
+ All settings in {@link SETTINGS_TO_BACKUP} array *must* have a non-null validator,
+ otherwise they won't be restored.
+
+ @hide
+*/
+VALIDATORS : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-CLONE_FROM_PARENT_ON_VALUE'>/** These entries should be cloned from this profile's parent only if the dependency's
+</span> value is true (&quot;1&quot;)
+
+ Note: the dependencies must be Secure settings
+
+ @hide
+*/
+CLONE_FROM_PARENT_ON_VALUE : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-INSTANT_APP_SETTINGS'>/** System settings which can be accessed by instant apps.
+</span> @hide
+*/
+INSTANT_APP_SETTINGS : &quot;null&quot;,
+<span id='android-provider-Settings-System-property-WHEN_TO_MAKE_WIFI_CALLS'>/** When to use Wi-Fi calling
+</span>
+ @see android.telephony.TelephonyManager.WifiCallingChoices
+ @hide
+*/
+WHEN_TO_MAKE_WIFI_CALLS : &quot;when_to_make_wifi_calls&quot;,
+<span id='android-provider-Settings-System-property-ADB_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Global#ADB_ENABLED}
+</span> instead
+*/
+ADB_ENABLED : &quot;adb_enabled&quot;,
+<span id='android-provider-Settings-System-property-ANDROID_ID'>/** @deprecated Use {@link android.provider.Settings.Secure#ANDROID_ID} instead
+</span>*/
+ANDROID_ID : &quot;android_id&quot;,
+<span id='android-provider-Settings-System-property-BLUETOOTH_ON'>/** @deprecated Use {@link android.provider.Settings.Global#BLUETOOTH_ON} instead
+</span>*/
+BLUETOOTH_ON : &quot;bluetooth_on&quot;,
+<span id='android-provider-Settings-System-property-DATA_ROAMING'>/** @deprecated Use {@link android.provider.Settings.Global#DATA_ROAMING} instead
+</span>*/
+DATA_ROAMING : &quot;data_roaming&quot;,
+<span id='android-provider-Settings-System-property-DEVICE_PROVISIONED'>/** @deprecated Use {@link android.provider.Settings.Global#DEVICE_PROVISIONED} instead
+</span>*/
+DEVICE_PROVISIONED : &quot;device_provisioned&quot;,
+<span id='android-provider-Settings-System-property-HTTP_PROXY'>/** @deprecated Use {@link android.provider.Settings.Global#HTTP_PROXY} instead
+</span>*/
+HTTP_PROXY : &quot;http_proxy&quot;,
+<span id='android-provider-Settings-System-property-INSTALL_NON_MARKET_APPS'>/** @deprecated Use {@link android.provider.Settings.Secure#INSTALL_NON_MARKET_APPS} instead
+</span>*/
+INSTALL_NON_MARKET_APPS : &quot;install_non_market_apps&quot;,
+<span id='android-provider-Settings-System-property-LOCATION_PROVIDERS_ALLOWED'>/** @deprecated Use {@link android.provider.Settings.Secure#LOCATION_PROVIDERS_ALLOWED}
+</span> instead
+*/
+LOCATION_PROVIDERS_ALLOWED : &quot;location_providers_allowed&quot;,
+<span id='android-provider-Settings-System-property-LOGGING_ID'>/** @deprecated Use {@link android.provider.Settings.Secure#LOGGING_ID} instead
+</span>*/
+LOGGING_ID : &quot;logging_id&quot;,
+<span id='android-provider-Settings-System-property-NETWORK_PREFERENCE'>/** @deprecated Use {@link android.provider.Settings.Global#NETWORK_PREFERENCE} instead
+</span>*/
+NETWORK_PREFERENCE : &quot;network_preference&quot;,
+<span id='android-provider-Settings-System-property-PARENTAL_CONTROL_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Secure#PARENTAL_CONTROL_ENABLED}
+</span> instead
+*/
+PARENTAL_CONTROL_ENABLED : &quot;parental_control_enabled&quot;,
+<span id='android-provider-Settings-System-property-PARENTAL_CONTROL_LAST_UPDATE'>/** @deprecated Use {@link android.provider.Settings.Secure#PARENTAL_CONTROL_LAST_UPDATE}
+</span> instead
+*/
+PARENTAL_CONTROL_LAST_UPDATE : &quot;parental_control_last_update&quot;,
+<span id='android-provider-Settings-System-property-PARENTAL_CONTROL_REDIRECT_URL'>/** @deprecated Use {@link android.provider.Settings.Secure#PARENTAL_CONTROL_REDIRECT_URL}
+</span> instead
+*/
+PARENTAL_CONTROL_REDIRECT_URL : &quot;parental_control_redirect_url&quot;,
+<span id='android-provider-Settings-System-property-SETTINGS_CLASSNAME'>/** @deprecated Use {@link android.provider.Settings.Secure#SETTINGS_CLASSNAME} instead
+</span>*/
+SETTINGS_CLASSNAME : &quot;settings_classname&quot;,
+<span id='android-provider-Settings-System-property-USB_MASS_STORAGE_ENABLED'>/** @deprecated Use {@link android.provider.Settings.Global#USB_MASS_STORAGE_ENABLED} instead
+</span>*/
+USB_MASS_STORAGE_ENABLED : &quot;usb_mass_storage_enabled&quot;,
+<span id='android-provider-Settings-System-property-USE_GOOGLE_MAIL'>/** @deprecated Use {@link android.provider.Settings.Global#USE_GOOGLE_MAIL} instead
+</span>*/
+USE_GOOGLE_MAIL : &quot;use_google_mail&quot;,
+<span id='android-provider-Settings-System-property-WIFI_MAX_DHCP_RETRY_COUNT'>/** @deprecated Use
+</span> {@link android.provider.Settings.Global#WIFI_MAX_DHCP_RETRY_COUNT} instead
+*/
+WIFI_MAX_DHCP_RETRY_COUNT : &quot;wifi_max_dhcp_retry_count&quot;,
+<span id='android-provider-Settings-System-property-WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS'>/** @deprecated Use
+</span> {@link android.provider.Settings.Global#WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS} instead
+*/
+WIFI_MOBILE_DATA_TRANSITION_WAKELOCK_TIMEOUT_MS : &quot;wifi_mobile_data_transition_wakelock_timeout_ms&quot;,
+<span id='android-provider-Settings-System-property-WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON'>/** @deprecated Use
+</span> {@link android.provider.Settings.Global#WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON} instead
+*/
+WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON : &quot;wifi_networks_available_notification_on&quot;,
+<span id='android-provider-Settings-System-property-WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY'>/** @deprecated Use
+</span> {@link android.provider.Settings.Global#WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY} instead
+*/
+WIFI_NETWORKS_AVAILABLE_REPEAT_DELAY : &quot;wifi_networks_available_repeat_delay&quot;,
+<span id='android-provider-Settings-System-property-WIFI_NUM_OPEN_NETWORKS_KEPT'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_NUM_OPEN_NETWORKS_KEPT}
+</span> instead
+*/
+WIFI_NUM_OPEN_NETWORKS_KEPT : &quot;wifi_num_open_networks_kept&quot;,
+<span id='android-provider-Settings-System-property-WIFI_ON'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_ON} instead
+</span>*/
+WIFI_ON : &quot;wifi_on&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_ACCEPTABLE_PACKET_LOSS_PERCENTAGE'>/** @deprecated Use
+</span> {@link android.provider.Settings.Secure#WIFI_WATCHDOG_ACCEPTABLE_PACKET_LOSS_PERCENTAGE}
+ instead
+*/
+WIFI_WATCHDOG_ACCEPTABLE_PACKET_LOSS_PERCENTAGE : &quot;wifi_watchdog_acceptable_packet_loss_percentage&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_AP_COUNT'>/** @deprecated Use {@link android.provider.Settings.Secure#WIFI_WATCHDOG_AP_COUNT} instead
+</span>*/
+WIFI_WATCHDOG_AP_COUNT : &quot;wifi_watchdog_ap_count&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_BACKGROUND_CHECK_DELAY_MS'>/** @deprecated Use
+</span> {@link android.provider.Settings.Secure#WIFI_WATCHDOG_BACKGROUND_CHECK_DELAY_MS} instead
+*/
+WIFI_WATCHDOG_BACKGROUND_CHECK_DELAY_MS : &quot;wifi_watchdog_background_check_delay_ms&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_BACKGROUND_CHECK_ENABLED'>/** @deprecated Use
+</span> {@link android.provider.Settings.Secure#WIFI_WATCHDOG_BACKGROUND_CHECK_ENABLED} instead
+*/
+WIFI_WATCHDOG_BACKGROUND_CHECK_ENABLED : &quot;wifi_watchdog_background_check_enabled&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_BACKGROUND_CHECK_TIMEOUT_MS'>/** @deprecated Use
+</span> {@link android.provider.Settings.Secure#WIFI_WATCHDOG_BACKGROUND_CHECK_TIMEOUT_MS}
+ instead
+*/
+WIFI_WATCHDOG_BACKGROUND_CHECK_TIMEOUT_MS : &quot;wifi_watchdog_background_check_timeout_ms&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_INITIAL_IGNORED_PING_COUNT'>/** @deprecated Use
+</span> {@link android.provider.Settings.Secure#WIFI_WATCHDOG_INITIAL_IGNORED_PING_COUNT} instead
+*/
+WIFI_WATCHDOG_INITIAL_IGNORED_PING_COUNT : &quot;wifi_watchdog_initial_ignored_ping_count&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_MAX_AP_CHECKS'>/** @deprecated Use {@link android.provider.Settings.Secure#WIFI_WATCHDOG_MAX_AP_CHECKS}
+</span> instead
+*/
+WIFI_WATCHDOG_MAX_AP_CHECKS : &quot;wifi_watchdog_max_ap_checks&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_ON'>/** @deprecated Use {@link android.provider.Settings.Global#WIFI_WATCHDOG_ON} instead
+</span>*/
+WIFI_WATCHDOG_ON : &quot;wifi_watchdog_on&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_PING_COUNT'>/** @deprecated Use {@link android.provider.Settings.Secure#WIFI_WATCHDOG_PING_COUNT} instead
+</span>*/
+WIFI_WATCHDOG_PING_COUNT : &quot;wifi_watchdog_ping_count&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_PING_DELAY_MS'>/** @deprecated Use {@link android.provider.Settings.Secure#WIFI_WATCHDOG_PING_DELAY_MS}
+</span> instead
+*/
+WIFI_WATCHDOG_PING_DELAY_MS : &quot;wifi_watchdog_ping_delay_ms&quot;,
+<span id='android-provider-Settings-System-property-WIFI_WATCHDOG_PING_TIMEOUT_MS'>/** @deprecated Use {@link android.provider.Settings.Secure#WIFI_WATCHDOG_PING_TIMEOUT_MS}
+</span> instead
+*/
+WIFI_WATCHDOG_PING_TIMEOUT_MS : &quot;wifi_watchdog_ping_timeout_ms&quot;,
+<span id='android-provider-Settings-System-method-getMovedToGlobalSettings'>/**
+</span>@hide 
+*/
+getMovedToGlobalSettings : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getMovedToSecureSettings'>/**
+</span>@hide 
+*/
+getMovedToSecureSettings : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getNonLegacyMovedKeys'>/**
+</span>@hide 
+*/
+getNonLegacyMovedKeys : function(  ) {},
+
+<span id='android-provider-Settings-System-method-clearProviderForTest'>/**
+</span>@hide 
+*/
+clearProviderForTest : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getString'>/**Look up a name in the database.
+</span>@param {Object {ContentResolver}} resolver to access the database with
+@param {String} name to look up in the table
+@return {String} the corresponding value, or null if not present
+*/
+getString : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getStringForUser'>/**
+</span>@hide 
+*/
+getStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putString'>/**Store a name/value pair into the database.
+</span>@param {Object {ContentResolver}} resolver to access the database with
+@param {String} name to store
+@param {String} value to associate with the name
+@return {Boolean} true if the value was set, false on database errors
+*/
+putString : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putStringForUser'>/**
+</span>@hide 
+*/
+putStringForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getUriFor'>/**Construct the content URI for a particular name/value pair,
+</span> useful for monitoring changes with a ContentObserver.
+@param {String} name to look up in the table
+@return {Object {android.net.Uri}} the corresponding content URI, or null if not present
+*/
+getUriFor : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getInt'>/**Convenience function for retrieving a single system settings value
+</span> as an integer.  Note that internally setting values are always
+ stored as strings; this function converts the string to an integer
+ for you.  The default value will be returned if the setting is
+ not defined or not an integer.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid integer.
+*/
+getInt : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getIntForUser'>/**
+</span>@hide 
+*/
+getIntForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getInt'>/**Convenience function for retrieving a single system settings value
+</span> as an integer.  Note that internally setting values are always
+ stored as strings; this function converts the string to an integer
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not an integer.
+@return {Number} The setting's current value.
+*/
+getInt : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getIntForUser'>/**
+</span>@hide 
+*/
+getIntForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putInt'>/**Convenience function for updating a single settings value as an
+</span> integer. This will either create a new entry in the table if the
+ given name does not exist, or modify the value of the existing row
+ with that name.  Note that internally setting values are always
+ stored as strings, so this function converts the given value to a
+ string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putInt : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putIntForUser'>/**
+</span>@hide 
+*/
+putIntForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getLong'>/**Convenience function for retrieving a single system settings value
+</span> as a {@code long}.  Note that internally setting values are always
+ stored as strings; this function converts the string to a {@code long}
+ for you.  The default value will be returned if the setting is
+ not defined or not a {@code long}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid {@code long}.
+*/
+getLong : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getLongForUser'>/**
+</span>@hide 
+*/
+getLongForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getLong'>/**Convenience function for retrieving a single system settings value
+</span> as a {@code long}.  Note that internally setting values are always
+ stored as strings; this function converts the string to a {@code long}
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@return {Number} The setting's current value.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not an integer.
+*/
+getLong : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getLongForUser'>/**
+</span>@hide 
+*/
+getLongForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putLong'>/**Convenience function for updating a single settings value as a long
+</span> integer. This will either create a new entry in the table if the
+ given name does not exist, or modify the value of the existing row
+ with that name.  Note that internally setting values are always
+ stored as strings, so this function converts the given value to a
+ string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putLong : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putLongForUser'>/**
+</span>@hide 
+*/
+putLongForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getFloat'>/**Convenience function for retrieving a single system settings value
+</span> as a floating point number.  Note that internally setting values are
+ always stored as strings; this function converts the string to an
+ float for you. The default value will be returned if the setting
+ is not defined or not a valid float.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@param {Number} def Value to return if the setting is not defined.
+@return {Number} The setting's current value, or 'def' if it is not defined
+ or not a valid float.
+*/
+getFloat : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getFloatForUser'>/**
+</span>@hide 
+*/
+getFloatForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getFloat'>/**Convenience function for retrieving a single system settings value
+</span> as a float.  Note that internally setting values are always
+ stored as strings; this function converts the string to a float
+ for you.
+ &lt;p&gt;
+ This version does not take a default value.  If the setting has not
+ been set, or the string value is not a number,
+ it throws {@link android.provider.Settings.SettingNotFoundException}.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to retrieve.
+@throws SettingNotFoundException Thrown if a setting by the given
+ name can't be found or the setting value is not a float.
+@return {Number} The setting's current value.
+*/
+getFloat : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getFloatForUser'>/**
+</span>@hide 
+*/
+getFloatForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putFloat'>/**Convenience function for updating a single settings value as a
+</span> floating point number. This will either create a new entry in the
+ table if the given name does not exist, or modify the value of the
+ existing row with that name.  Note that internally setting values
+ are always stored as strings, so this function converts the given
+ value to a string before storing it.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {String} name The name of the setting to modify.
+@param {Number} value The new value for the setting.
+@return {Boolean} true if the value was set, false on database errors
+*/
+putFloat : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putFloatForUser'>/**
+</span>@hide 
+*/
+putFloatForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getConfiguration'>/**Convenience function to read all of the current
+</span> configuration-related settings into a
+ {@link android.provider.Settings.Configuration} object.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {Object {Configuration}} outConfig Where to place the configuration settings.
+*/
+getConfiguration : function(  ) {},
+
+<span id='android-provider-Settings-System-method-adjustConfigurationForUser'>/**
+</span>@hide 
+*/
+adjustConfigurationForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-clearConfiguration'>/**
+</span>@hide Erase the fields in the Configuration that should be applied
+ by the settings.
+*/
+clearConfiguration : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putConfiguration'>/**Convenience function to write a batch of configuration-related
+</span> settings from a {@link android.provider.Settings.Configuration} object.
+@param {Object {ContentResolver}} cr The ContentResolver to access.
+@param {Object {Configuration}} config The settings to write.
+@return {Boolean} true if the values were set, false on database errors
+*/
+putConfiguration : function(  ) {},
+
+<span id='android-provider-Settings-System-method-putConfigurationForUser'>/**
+</span>@hide 
+*/
+putConfigurationForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-hasInterestingConfigurationChanges'>/**
+</span>@hide 
+*/
+hasInterestingConfigurationChanges : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getShowGTalkServiceStatus'>/**
+</span>@deprecated - Do not use
+*/
+getShowGTalkServiceStatus : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getShowGTalkServiceStatusForUser'>/**
+</span>@hide 
+@deprecated - Do not use
+*/
+getShowGTalkServiceStatusForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-setShowGTalkServiceStatus'>/**
+</span>@deprecated - Do not use
+*/
+setShowGTalkServiceStatus : function(  ) {},
+
+<span id='android-provider-Settings-System-method-setShowGTalkServiceStatusForUser'>/**
+</span>@hide 
+@deprecated - Do not use
+*/
+setShowGTalkServiceStatusForUser : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getCloneToManagedProfileSettings'>/**
+</span>@hide 
+*/
+getCloneToManagedProfileSettings : function(  ) {},
+
+<span id='android-provider-Settings-System-method-getCloneFromParentOnValueSettings'>/**
+</span>@hide 
+*/
+getCloneFromParentOnValueSettings : function(  ) {},
+
+<span id='android-provider-Settings-System-method-canWrite'>/**Checks if the specified app can modify system settings. As of API
+</span> level 23, an app cannot modify system settings unless it declares the
+ {@link android.Manifest.permission#WRITE_SETTINGS}
+ permission in its manifest, &lt;em&gt;and&lt;/em&gt; the user specifically grants
+ the app this capability. To prompt the user to grant this approval,
+ the app must send an intent with the action {@link android.provider.Settings#ACTION_MANAGE_WRITE_SETTINGS}, which causes
+ the system to display a permission management screen.
+@param {Object {Context}} context App context.
+@return {Boolean} true if the calling app can write to system settings, false otherwise
+*/
+canWrite : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

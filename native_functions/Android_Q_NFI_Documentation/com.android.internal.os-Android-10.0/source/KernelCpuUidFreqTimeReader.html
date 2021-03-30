@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-KernelCpuUidTimeReader-KernelCpuUidFreqTimeReader'>/**@class com.android.internal.os.KernelCpuUidTimeReader.KernelCpuUidFreqTimeReader
+</span>@extends com.android.internal.os.KernelCpuUidTimeReader
+
+ Reads /proc/uid_time_in_state which has the format:
+
+ uid: [freq1] [freq2] [freq3] ...
+ [uid1]: [time in freq1] [time in freq2] [time in freq3] ...
+ [uid2]: [time in freq1] [time in freq2] [time in freq3] ...
+ ...
+
+ This provides the times a UID's processes spent executing at each different cpu frequency.
+ The file contains a monotonically increasing count of time for a single boot. This class
+ maintains the previous results of a call to {@link #readDelta} in order to provide a proper
+ delta.
+*/
+var KernelCpuUidFreqTimeReader = {
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-KernelCpuUidFreqTimeReader-method-perClusterTimesAvailable'>/**
+</span>@return {Boolean} Whether per-cluster times are available.
+*/
+perClusterTimesAvailable : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-KernelCpuUidFreqTimeReader-method-allUidTimesAvailable'>/**
+</span>@return {Boolean} Whether all-UID times are available.
+*/
+allUidTimesAvailable : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-KernelCpuUidFreqTimeReader-method-getAllUidCpuFreqTimeMs'>/**
+</span>@return {Object {android.util.SparseArray}} A map of all UIDs to their CPU time-in-state array in milliseconds.
+*/
+getAllUidCpuFreqTimeMs : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-KernelCpuUidFreqTimeReader-method-readFreqs'>/**Reads a list of CPU frequencies from /proc/uid_time_in_state. Uses a given PowerProfile
+</span> to determine if per-cluster times are available.
+@param {Object {PowerProfile}} powerProfile The PowerProfile to compare against.
+@return {Number} A long[] of CPU frequencies in Hz.
+*/
+readFreqs : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

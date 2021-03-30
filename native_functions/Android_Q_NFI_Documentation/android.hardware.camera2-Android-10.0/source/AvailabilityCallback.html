@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-CameraManager-AvailabilityCallback'>/**@class android.hardware.camera2.CameraManager.AvailabilityCallback
+</span>@extends java.lang.Object
+
+ A callback for camera devices becoming available or unavailable to open.
+
+ &lt;p&gt;Cameras become available when they are no longer in use, or when a new
+ removable camera is connected. They become unavailable when some
+ application or service starts using a camera, or when a removable camera
+ is disconnected.&lt;/p&gt;
+
+ &lt;p&gt;Extend this callback and pass an instance of the subclass to
+ {@link android.hardware.camera2.CameraManager#registerAvailabilityCallback} to be notified of such availability
+ changes.&lt;/p&gt;
+
+ @see #registerAvailabilityCallback
+*/
+var AvailabilityCallback = {
+
+<span id='android-hardware-camera2-CameraManager-AvailabilityCallback-method-onCameraAvailable'>/**A new camera has become available to use.
+</span>
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {String} cameraId The unique identifier of the new camera.
+*/
+onCameraAvailable : function(  ) {},
+
+<span id='android-hardware-camera2-CameraManager-AvailabilityCallback-method-onCameraUnavailable'>/**A previously-available camera has become unavailable for use.
+</span>
+ &lt;p&gt;If an application had an active CameraDevice instance for the
+ now-disconnected camera, that application will receive a
+ {@link android.hardware.camera2.CameraDevice.StateCallback#onDisconnected disconnection error}.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {String} cameraId The unique identifier of the disconnected camera.
+*/
+onCameraUnavailable : function(  ) {},
+
+<span id='android-hardware-camera2-CameraManager-AvailabilityCallback-method-onCameraAccessPrioritiesChanged'>/**Called whenever camera access priorities change.
+</span>
+ &lt;p&gt;Notification that camera access priorities have changed and the camera may
+ now be openable. An application that was previously denied camera access due to
+ a higher-priority user already using the camera, or that was disconnected from an
+ active camera session due to a higher-priority user trying to open the camera,
+ should try to open the camera again if it still wants to use it.  Note that
+ multiple applications may receive this callback at the same time, and only one of
+ them will succeed in opening the camera in practice, depending on exact access
+ priority levels and timing. This method is useful in cases where multiple
+ applications may be in the resumed state at the same time, and the user switches
+ focus between them, or if the current camera-using application moves between
+ full-screen and Picture-in-Picture (PiP) states. In such cases, the camera
+ available/unavailable callbacks will not be invoked, but another application may
+ now have higher priority for camera access than the current camera-using
+ application.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+*/
+onCameraAccessPrioritiesChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

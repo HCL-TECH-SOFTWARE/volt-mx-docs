@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-BatteryStatsImpl'>/**@class com.android.internal.os.BatteryStatsImpl
+</span>@extends android.os.BatteryStats
+
+ All information we are collecting about things that can happen that impact
+ battery life.  All times are represented in microseconds except where indicated
+ otherwise.
+*/
+var BatteryStatsImpl = {
+
+<span id='com-android-internal-os-BatteryStatsImpl-property-DEBUG_ENERGY'>/***/
+</span>DEBUG_ENERGY : &quot;false&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-WAKE_LOCK_WEIGHT'>/** Holding a wakelock costs more than just using the cpu.
+</span> Currently, we assign only half the cpu time to an app that is running but
+ not holding a wakelock. The apps holding wakelocks get the rest of the blame.
+ If no app is holding a wakelock, then the distribution is normal.
+*/
+WAKE_LOCK_WEIGHT : &quot;50&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-mCheckinFile'>/***/
+</span>mCheckinFile : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-mDailyFile'>/***/
+</span>mDailyFile : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-mPerProcStateCpuTimesAvailable'>/***/
+</span>mPerProcStateCpuTimesAvailable : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-mRailEnergyDataCallback'>/***/
+</span>mRailEnergyDataCallback : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-mHandler'>/***/
+</span>mHandler : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-mRecordAllHistory'>/***/
+</span>mRecordAllHistory : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-BATTERY_PLUGGED_NONE'>/***/
+</span>BATTERY_PLUGGED_NONE : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='com-android-internal-os-BatteryStatsImpl-method-getKernelMemoryStats'>/**
+</span>*/
+getKernelMemoryStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-postBatteryNeedsCpuUpdateMsg'>/**
+</span>*/
+postBatteryNeedsCpuUpdateMsg : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateProcStateCpuTimes'>/**Update per-freq cpu times for all the uids in {@link #mPendingUids}.
+</span>*/
+updateProcStateCpuTimes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-clearPendingRemovedUids'>/**
+</span>*/
+clearPendingRemovedUids : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-copyFromAllUidsCpuTimes'>/**
+</span>*/
+copyFromAllUidsCpuTimes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-copyFromAllUidsCpuTimes'>/**When the battery/screen state changes, we don't attribute the cpu times to any process
+</span> but we still need to snapshots of all uids to get correct deltas later on. Since we
+ already read this data for updating per-freq cpu times, we can use the same data for
+ per-procstate cpu times.
+*/
+copyFromAllUidsCpuTimes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-addCpuTimes'>/**
+</span>*/
+addCpuTimes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getRpmStats'>/**
+</span>*/
+getRpmStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenOffRpmStats'>/**
+</span>*/
+getScreenOffRpmStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getKernelWakelockStats'>/**
+</span>*/
+getKernelWakelockStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWakeupReasonStats'>/**
+</span>*/
+getWakeupReasonStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getUahDischarge'>/**
+</span>*/
+getUahDischarge : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getUahDischargeScreenOff'>/**
+</span>*/
+getUahDischargeScreenOff : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getUahDischargeScreenDoze'>/**
+</span>*/
+getUahDischargeScreenDoze : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getUahDischargeLightDoze'>/**
+</span>*/
+getUahDischargeLightDoze : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getUahDischargeDeepDoze'>/**
+</span>*/
+getUahDischargeDeepDoze : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getEstimatedBatteryCapacity'>/**
+</span>*/
+getEstimatedBatteryCapacity : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMinLearnedBatteryCapacity'>/**
+</span>*/
+getMinLearnedBatteryCapacity : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMaxLearnedBatteryCapacity'>/**
+</span>*/
+getMaxLearnedBatteryCapacity : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getRpmTimerLocked'>/**Get Resource Power Manager stats. Create a new one if it doesn't already exist.
+</span>*/
+getRpmTimerLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenOffRpmTimerLocked'>/**Get Screen-off Resource Power Manager stats. Create new one if it doesn't already exist.
+</span>*/
+getScreenOffRpmTimerLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWakeupReasonTimerLocked'>/**
+</span>*/
+getWakeupReasonTimerLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getKernelWakelockTimerLocked'>/**
+</span>*/
+getKernelWakelockTimerLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getKernelMemoryTimerLocked'>/**
+</span>*/
+getKernelMemoryTimerLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-writeHistoryDelta'>/**
+</span>*/
+writeHistoryDelta : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readHistoryDelta'>/**
+</span>*/
+readHistoryDelta : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-commitCurrentHistoryBatchLocked'>/**
+</span>*/
+commitCurrentHistoryBatchLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-createFakeHistoryEvents'>/**
+</span>*/
+createFakeHistoryEvents : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-addHistoryEventLocked'>/**
+</span>*/
+addHistoryEventLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateTimeBasesLocked'>/**
+</span>*/
+updateTimeBasesLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-addIsolatedUidLocked'>/**
+</span>*/
+addIsolatedUidLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-scheduleRemoveIsolatedUidLocked'>/**Schedules a read of the latest cpu times before removing the isolated UID.
+</span>@see #removeIsolatedUidLocked(int)
+*/
+scheduleRemoveIsolatedUidLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-removeIsolatedUidLocked'>/**This should only be called after the cpu times have been read.
+</span>@see #scheduleRemoveIsolatedUidLocked(int, int)
+*/
+removeIsolatedUidLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-mapUid'>/**
+</span>*/
+mapUid : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteEventLocked'>/**
+</span>*/
+noteEventLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteCurrentTimeChangedLocked'>/**
+</span>*/
+noteCurrentTimeChangedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteProcessStartLocked'>/**
+</span>*/
+noteProcessStartLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteProcessCrashLocked'>/**
+</span>*/
+noteProcessCrashLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteProcessAnrLocked'>/**
+</span>*/
+noteProcessAnrLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteUidProcessStateLocked'>/**
+</span>*/
+noteUidProcessStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteProcessFinishLocked'>/**
+</span>*/
+noteProcessFinishLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteSyncStartLocked'>/**
+</span>*/
+noteSyncStartLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteSyncFinishLocked'>/**
+</span>*/
+noteSyncFinishLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteJobStartLocked'>/**
+</span>*/
+noteJobStartLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteJobFinishLocked'>/**
+</span>*/
+noteJobFinishLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteJobsDeferredLocked'>/**
+</span>*/
+noteJobsDeferredLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteAlarmStartLocked'>/**
+</span>*/
+noteAlarmStartLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteAlarmFinishLocked'>/**
+</span>*/
+noteAlarmFinishLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWakupAlarmLocked'>/**
+</span>*/
+noteWakupAlarmLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setRecordAllHistoryLocked'>/**
+</span>*/
+setRecordAllHistoryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setNoAutoReset'>/**
+</span>*/
+setNoAutoReset : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setPretendScreenOff'>/**
+</span>*/
+setPretendScreenOff : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteStartWakeLocked'>/**
+</span>*/
+noteStartWakeLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteStopWakeLocked'>/**
+</span>*/
+noteStopWakeLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteStartWakeFromSourceLocked'>/**
+</span>*/
+noteStartWakeFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteChangeWakelockFromSourceLocked'>/**
+</span>*/
+noteChangeWakelockFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteStopWakeFromSourceLocked'>/**
+</span>*/
+noteStopWakeFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteLongPartialWakelockStart'>/**
+</span>*/
+noteLongPartialWakelockStart : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteLongPartialWakelockStartFromSource'>/**
+</span>*/
+noteLongPartialWakelockStartFromSource : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteLongPartialWakelockFinish'>/**
+</span>*/
+noteLongPartialWakelockFinish : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteLongPartialWakelockFinishFromSource'>/**
+</span>*/
+noteLongPartialWakelockFinishFromSource : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWakeupReasonLocked'>/**
+</span>*/
+noteWakeupReasonLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-startAddingCpuLocked'>/**
+</span>*/
+startAddingCpuLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-finishAddingCpuLocked'>/**
+</span>*/
+finishAddingCpuLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteProcessDiedLocked'>/**
+</span>*/
+noteProcessDiedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getProcessWakeTime'>/**
+</span>*/
+getProcessWakeTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-reportExcessiveCpuLocked'>/**
+</span>*/
+reportExcessiveCpuLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteStartSensorLocked'>/**
+</span>*/
+noteStartSensorLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteStopSensorLocked'>/**
+</span>*/
+noteStopSensorLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteGpsChangedLocked'>/**
+</span>*/
+noteGpsChangedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteGpsSignalQualityLocked'>/**
+</span>*/
+noteGpsSignalQualityLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteScreenStateLocked'>/**
+</span>*/
+noteScreenStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteScreenBrightnessLocked'>/**
+</span>*/
+noteScreenBrightnessLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteUserActivityLocked'>/**
+</span>*/
+noteUserActivityLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWakeUpLocked'>/**
+</span>*/
+noteWakeUpLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteInteractiveLocked'>/**
+</span>*/
+noteInteractiveLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteConnectivityChangedLocked'>/**
+</span>*/
+noteConnectivityChangedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteMobileRadioPowerStateLocked'>/**Updates the radio power state and returns true if an external stats collection should occur.
+</span>*/
+noteMobileRadioPowerStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePowerSaveModeLocked'>/**
+</span>*/
+notePowerSaveModeLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteDeviceIdleModeLocked'>/**
+</span>*/
+noteDeviceIdleModeLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePackageInstalledLocked'>/**
+</span>*/
+notePackageInstalledLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePackageUninstalledLocked'>/**
+</span>*/
+notePackageUninstalledLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePhoneOnLocked'>/**
+</span>*/
+notePhoneOnLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePhoneOffLocked'>/**
+</span>*/
+notePhoneOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePhoneStateLocked'>/**Telephony stack updates the phone state.
+</span>@param {Number} state phone state from ServiceState.getState()
+*/
+notePhoneStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePhoneSignalStrengthLocked'>/**
+</span>*/
+notePhoneSignalStrengthLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-notePhoneDataConnectionStateLocked'>/**
+</span>*/
+notePhoneDataConnectionStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiOnLocked'>/**
+</span>*/
+noteWifiOnLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiOffLocked'>/**
+</span>*/
+noteWifiOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteAudioOnLocked'>/**
+</span>*/
+noteAudioOnLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteAudioOffLocked'>/**
+</span>*/
+noteAudioOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteVideoOnLocked'>/**
+</span>*/
+noteVideoOnLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteVideoOffLocked'>/**
+</span>*/
+noteVideoOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteResetAudioLocked'>/**
+</span>*/
+noteResetAudioLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteResetVideoLocked'>/**
+</span>*/
+noteResetVideoLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteActivityResumedLocked'>/**
+</span>*/
+noteActivityResumedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteActivityPausedLocked'>/**
+</span>*/
+noteActivityPausedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteVibratorOnLocked'>/**
+</span>*/
+noteVibratorOnLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteVibratorOffLocked'>/**
+</span>*/
+noteVibratorOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteFlashlightOnLocked'>/**
+</span>*/
+noteFlashlightOnLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteFlashlightOffLocked'>/**
+</span>*/
+noteFlashlightOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteCameraOnLocked'>/**
+</span>*/
+noteCameraOnLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteCameraOffLocked'>/**
+</span>*/
+noteCameraOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteResetCameraLocked'>/**
+</span>*/
+noteResetCameraLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteResetFlashlightLocked'>/**
+</span>*/
+noteResetFlashlightLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteBluetoothScanStartedFromSourceLocked'>/**
+</span>*/
+noteBluetoothScanStartedFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteBluetoothScanStoppedFromSourceLocked'>/**
+</span>*/
+noteBluetoothScanStoppedFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteResetBluetoothScanLocked'>/**
+</span>*/
+noteResetBluetoothScanLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteBluetoothScanResultsFromSourceLocked'>/**
+</span>*/
+noteBluetoothScanResultsFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiRadioPowerState'>/**
+</span>*/
+noteWifiRadioPowerState : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiRunningLocked'>/**
+</span>*/
+noteWifiRunningLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiRunningChangedLocked'>/**
+</span>*/
+noteWifiRunningChangedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiStoppedLocked'>/**
+</span>*/
+noteWifiStoppedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiStateLocked'>/**
+</span>*/
+noteWifiStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiSupplicantStateChangedLocked'>/**
+</span>*/
+noteWifiSupplicantStateChangedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiRssiChangedLocked'>/**
+</span>*/
+noteWifiRssiChangedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteFullWifiLockAcquiredLocked'>/**
+</span>*/
+noteFullWifiLockAcquiredLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteFullWifiLockReleasedLocked'>/**
+</span>*/
+noteFullWifiLockReleasedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiScanStartedLocked'>/**
+</span>*/
+noteWifiScanStartedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiScanStoppedLocked'>/**
+</span>*/
+noteWifiScanStoppedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiBatchedScanStartedLocked'>/**
+</span>*/
+noteWifiBatchedScanStartedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiBatchedScanStoppedLocked'>/**
+</span>*/
+noteWifiBatchedScanStoppedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiMulticastEnabledLocked'>/**
+</span>*/
+noteWifiMulticastEnabledLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiMulticastDisabledLocked'>/**
+</span>*/
+noteWifiMulticastDisabledLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteFullWifiLockAcquiredFromSourceLocked'>/**
+</span>*/
+noteFullWifiLockAcquiredFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteFullWifiLockReleasedFromSourceLocked'>/**
+</span>*/
+noteFullWifiLockReleasedFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiScanStartedFromSourceLocked'>/**
+</span>*/
+noteWifiScanStartedFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiScanStoppedFromSourceLocked'>/**
+</span>*/
+noteWifiScanStoppedFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiBatchedScanStartedFromSourceLocked'>/**
+</span>*/
+noteWifiBatchedScanStartedFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteWifiBatchedScanStoppedFromSourceLocked'>/**
+</span>*/
+noteWifiBatchedScanStoppedFromSourceLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-noteNetworkInterfaceTypeLocked'>/**
+</span>*/
+noteNetworkInterfaceTypeLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiIfaces'>/**
+</span>*/
+getWifiIfaces : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMobileIfaces'>/**
+</span>*/
+getMobileIfaces : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenOnTime'>/**
+</span>*/
+getScreenOnTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenOnCount'>/**
+</span>*/
+getScreenOnCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenDozeTime'>/**
+</span>*/
+getScreenDozeTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenDozeCount'>/**
+</span>*/
+getScreenDozeCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenBrightnessTime'>/**
+</span>*/
+getScreenBrightnessTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getScreenBrightnessTimer'>/**
+</span>*/
+getScreenBrightnessTimer : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getInteractiveTime'>/**
+</span>*/
+getInteractiveTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPowerSaveModeEnabledTime'>/**
+</span>*/
+getPowerSaveModeEnabledTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPowerSaveModeEnabledCount'>/**
+</span>*/
+getPowerSaveModeEnabledCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDeviceIdleModeTime'>/**
+</span>*/
+getDeviceIdleModeTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDeviceIdleModeCount'>/**
+</span>*/
+getDeviceIdleModeCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getLongestDeviceIdleModeTime'>/**
+</span>*/
+getLongestDeviceIdleModeTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDeviceIdlingTime'>/**
+</span>*/
+getDeviceIdlingTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDeviceIdlingCount'>/**
+</span>*/
+getDeviceIdlingCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getNumConnectivityChange'>/**
+</span>*/
+getNumConnectivityChange : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getGpsSignalQualityTime'>/**
+</span>*/
+getGpsSignalQualityTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getGpsBatteryDrainMaMs'>/**
+</span>*/
+getGpsBatteryDrainMaMs : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneOnTime'>/**
+</span>*/
+getPhoneOnTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneOnCount'>/**
+</span>*/
+getPhoneOnCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneSignalStrengthTime'>/**
+</span>*/
+getPhoneSignalStrengthTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneSignalScanningTime'>/**
+</span>*/
+getPhoneSignalScanningTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneSignalScanningTimer'>/**
+</span>*/
+getPhoneSignalScanningTimer : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneSignalStrengthCount'>/**
+</span>*/
+getPhoneSignalStrengthCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneSignalStrengthTimer'>/**
+</span>*/
+getPhoneSignalStrengthTimer : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneDataConnectionTime'>/**
+</span>*/
+getPhoneDataConnectionTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneDataConnectionCount'>/**
+</span>*/
+getPhoneDataConnectionCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPhoneDataConnectionTimer'>/**
+</span>*/
+getPhoneDataConnectionTimer : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMobileRadioActiveTime'>/**
+</span>*/
+getMobileRadioActiveTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMobileRadioActiveCount'>/**
+</span>*/
+getMobileRadioActiveCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMobileRadioActiveAdjustedTime'>/**
+</span>*/
+getMobileRadioActiveAdjustedTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMobileRadioActiveUnknownTime'>/**
+</span>*/
+getMobileRadioActiveUnknownTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getMobileRadioActiveUnknownCount'>/**
+</span>*/
+getMobileRadioActiveUnknownCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiMulticastWakelockTime'>/**
+</span>*/
+getWifiMulticastWakelockTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiMulticastWakelockCount'>/**
+</span>*/
+getWifiMulticastWakelockCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiOnTime'>/**
+</span>*/
+getWifiOnTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiActiveTime'>/**
+</span>*/
+getWifiActiveTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getGlobalWifiRunningTime'>/**
+</span>*/
+getGlobalWifiRunningTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiStateTime'>/**
+</span>*/
+getWifiStateTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiStateCount'>/**
+</span>*/
+getWifiStateCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiStateTimer'>/**
+</span>*/
+getWifiStateTimer : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiSupplStateTime'>/**
+</span>*/
+getWifiSupplStateTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiSupplStateCount'>/**
+</span>*/
+getWifiSupplStateCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiSupplStateTimer'>/**
+</span>*/
+getWifiSupplStateTimer : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiSignalStrengthTime'>/**
+</span>*/
+getWifiSignalStrengthTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiSignalStrengthCount'>/**
+</span>*/
+getWifiSignalStrengthCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiSignalStrengthTimer'>/**
+</span>*/
+getWifiSignalStrengthTimer : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getBluetoothControllerActivity'>/**
+</span>*/
+getBluetoothControllerActivity : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiControllerActivity'>/**
+</span>*/
+getWifiControllerActivity : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getModemControllerActivity'>/**
+</span>*/
+getModemControllerActivity : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-hasBluetoothActivityReporting'>/**
+</span>*/
+hasBluetoothActivityReporting : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-hasWifiActivityReporting'>/**
+</span>*/
+hasWifiActivityReporting : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-hasModemActivityReporting'>/**
+</span>*/
+hasModemActivityReporting : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getFlashlightOnTime'>/**
+</span>*/
+getFlashlightOnTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getFlashlightOnCount'>/**
+</span>*/
+getFlashlightOnCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getCameraOnTime'>/**
+</span>*/
+getCameraOnTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getBluetoothScanTime'>/**
+</span>*/
+getBluetoothScanTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getNetworkActivityBytes'>/**
+</span>*/
+getNetworkActivityBytes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getNetworkActivityPackets'>/**
+</span>*/
+getNetworkActivityPackets : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getStartClockTime'>/**
+</span>*/
+getStartClockTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getStartPlatformVersion'>/**
+</span>*/
+getStartPlatformVersion : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getEndPlatformVersion'>/**
+</span>*/
+getEndPlatformVersion : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getParcelVersion'>/**
+</span>*/
+getParcelVersion : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getIsOnBattery'>/**
+</span>*/
+getIsOnBattery : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getUidStats'>/**
+</span>*/
+getUidStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getCpuFreqs'>/**
+</span>*/
+getCpuFreqs : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setPowerProfileLocked'>/**
+</span>*/
+setPowerProfileLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setCallback'>/**
+</span>*/
+setCallback : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setRadioScanningTimeoutLocked'>/**
+</span>*/
+setRadioScanningTimeoutLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setExternalStatsSyncLocked'>/**
+</span>*/
+setExternalStatsSyncLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateDailyDeadlineLocked'>/**
+</span>*/
+updateDailyDeadlineLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-recordDailyStatsIfNeededLocked'>/**
+</span>*/
+recordDailyStatsIfNeededLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-recordDailyStatsLocked'>/**
+</span>*/
+recordDailyStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readDailyStatsLocked'>/**
+</span>*/
+readDailyStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDailyItemLocked'>/**
+</span>*/
+getDailyItemLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getCurrentDailyStartTime'>/**
+</span>*/
+getCurrentDailyStartTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getNextMinDailyDeadline'>/**
+</span>*/
+getNextMinDailyDeadline : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getNextMaxDailyDeadline'>/**
+</span>*/
+getNextMaxDailyDeadline : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-startIteratingOldHistoryLocked'>/**
+</span>*/
+startIteratingOldHistoryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getNextOldHistoryLocked'>/**
+</span>*/
+getNextOldHistoryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-finishIteratingOldHistoryLocked'>/**
+</span>*/
+finishIteratingOldHistoryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHistoryTotalSize'>/**
+</span>*/
+getHistoryTotalSize : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHistoryUsedSize'>/**
+</span>*/
+getHistoryUsedSize : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-startIteratingHistoryLocked'>/**
+</span>*/
+startIteratingHistoryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHistoryStringPoolSize'>/**
+</span>*/
+getHistoryStringPoolSize : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHistoryStringPoolBytes'>/**
+</span>*/
+getHistoryStringPoolBytes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHistoryTagPoolString'>/**
+</span>*/
+getHistoryTagPoolString : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHistoryTagPoolUid'>/**
+</span>*/
+getHistoryTagPoolUid : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getNextHistoryLocked'>/**
+</span>*/
+getNextHistoryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-finishIteratingHistoryLocked'>/**
+</span>*/
+finishIteratingHistoryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHistoryBaseTime'>/**
+</span>*/
+getHistoryBaseTime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getStartCount'>/**
+</span>*/
+getStartCount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isOnBattery'>/**
+</span>*/
+isOnBattery : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isCharging'>/**
+</span>*/
+isCharging : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isScreenOn'>/**
+</span>*/
+isScreenOn : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isScreenOff'>/**
+</span>*/
+isScreenOff : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isScreenDoze'>/**
+</span>*/
+isScreenDoze : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-resetAllStatsCmdLocked'>/**
+</span>*/
+resetAllStatsCmdLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-pullPendingStateUpdatesLocked'>/**
+</span>*/
+pullPendingStateUpdatesLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateWifiState'>/**Distribute WiFi energy info and network traffic to apps.
+</span>@param {Object {WifiActivityEnergyInfo}} info The energy information from the WiFi controller.
+*/
+updateWifiState : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateMobileRadioState'>/**Distribute Cell radio energy info and network traffic to apps.
+</span>*/
+updateMobileRadioState : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateBluetoothStateLocked'>/**Distribute Bluetooth energy info and network traffic to apps.
+</span>@param {Object {BluetoothActivityEnergyInfo}} info The energy information from the bluetooth controller.
+*/
+updateBluetoothStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateRpmStatsLocked'>/**Read and record Resource Power Manager (RPM) state and voter times.
+</span> If RPM stats were fetched more recently than RPM_STATS_UPDATE_FREQ_MS ago, uses the old data
+ instead of fetching it anew.
+*/
+updateRpmStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateRailStatsLocked'>/**Read and record Rail Energy data.
+</span>*/
+updateRailStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateKernelWakelocksLocked'>/**Read and distribute kernel wake lock use across apps.
+</span>*/
+updateKernelWakelocksLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateKernelMemoryBandwidthLocked'>/**Reads the newest memory stats from the kernel.
+</span>*/
+updateKernelMemoryBandwidthLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isOnBatteryLocked'>/**
+</span>*/
+isOnBatteryLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isOnBatteryScreenOffLocked'>/**
+</span>*/
+isOnBatteryScreenOffLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateCpuTimeLocked'>/**Read and distribute CPU usage across apps. If their are partial wakelocks being held
+</span> and we are on battery with screen off, we give more of the cpu time to those apps holding
+ wakelocks. If the screen is on, we just assign the actual cpu time an app used.
+ It's possible this will be invoked after the internal battery/screen states are updated, so
+ passing the appropriate battery/screen states to try attribute the cpu times to correct
+ buckets.
+*/
+updateCpuTimeLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-markPartialTimersAsEligible'>/**Mark the current partial timers as gone through a collection so that they will be
+</span> considered in the next cpu times distribution to wakelock holders.
+*/
+markPartialTimersAsEligible : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-updateClusterSpeedTimes'>/**Take snapshot of cpu times (aggregated over all uids) at different frequencies and
+</span> calculate cpu times spent by each uid at different frequencies.
+@param {Object {SparseLongArray}} updatedUids The uids for which times spent at different frequencies are calculated.
+*/
+updateClusterSpeedTimes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readKernelUidCpuTimesLocked'>/**Take a snapshot of the cpu times spent by each uid and update the corresponding counters.
+</span> If {@param partialTimers} is not null and empty, then we assign a portion of cpu times to
+ wakelock holders.
+@param {Object {java.util.ArrayList}} partialTimers The wakelock holders among which the cpu times will be distributed.
+@param {Object {SparseLongArray}} updatedUids If not null, then the uids found in the snapshot will be added to this.
+*/
+readKernelUidCpuTimesLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readKernelUidCpuFreqTimesLocked'>/**Take a snapshot of the cpu times spent by each uid in each freq and update the
+</span> corresponding counters.
+@param {Object {java.util.ArrayList}} partialTimers The wakelock holders among which the cpu freq times will be distributed.
+*/
+readKernelUidCpuFreqTimesLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readKernelUidCpuActiveTimesLocked'>/**Take a snapshot of the cpu active times spent by each uid and update the corresponding
+</span> counters.
+*/
+readKernelUidCpuActiveTimesLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readKernelUidCpuClusterTimesLocked'>/**Take a snapshot of the cpu cluster times spent by each uid and update the corresponding
+</span> counters.
+*/
+readKernelUidCpuClusterTimesLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-setBatteryStateLocked'>/**
+</span>*/
+setBatteryStateLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-isOnBattery'>/**
+</span>*/
+isOnBattery : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getAwakeTimeBattery'>/**
+</span>*/
+getAwakeTimeBattery : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getAwakeTimePlugged'>/**
+</span>*/
+getAwakeTimePlugged : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeUptime'>/**
+</span>*/
+computeUptime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeRealtime'>/**
+</span>*/
+computeRealtime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeBatteryUptime'>/**
+</span>*/
+computeBatteryUptime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeBatteryRealtime'>/**
+</span>*/
+computeBatteryRealtime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeBatteryScreenOffUptime'>/**
+</span>*/
+computeBatteryScreenOffUptime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeBatteryScreenOffRealtime'>/**
+</span>*/
+computeBatteryScreenOffRealtime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeBatteryTimeRemaining'>/**
+</span>*/
+computeBatteryTimeRemaining : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeLevelStepTracker'>/**
+</span>*/
+getDischargeLevelStepTracker : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDailyDischargeLevelStepTracker'>/**
+</span>*/
+getDailyDischargeLevelStepTracker : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-computeChargeTimeRemaining'>/**
+</span>*/
+computeChargeTimeRemaining : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getCellularBatteryStats'>/**
+</span>*/
+getCellularBatteryStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getWifiBatteryStats'>/**
+</span>*/
+getWifiBatteryStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getGpsBatteryStats'>/**
+</span>*/
+getGpsBatteryStats : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getChargeLevelStepTracker'>/**
+</span>*/
+getChargeLevelStepTracker : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDailyChargeLevelStepTracker'>/**
+</span>*/
+getDailyChargeLevelStepTracker : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDailyPackageChanges'>/**
+</span>*/
+getDailyPackageChanges : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getBatteryUptime'>/**
+</span>*/
+getBatteryUptime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getBatteryRealtime'>/**
+</span>*/
+getBatteryRealtime : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeStartLevel'>/**
+</span>*/
+getDischargeStartLevel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeStartLevelLocked'>/**
+</span>*/
+getDischargeStartLevelLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeCurrentLevel'>/**
+</span>*/
+getDischargeCurrentLevel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeCurrentLevelLocked'>/**
+</span>*/
+getDischargeCurrentLevelLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getLowDischargeAmountSinceCharge'>/**
+</span>*/
+getLowDischargeAmountSinceCharge : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getHighDischargeAmountSinceCharge'>/**
+</span>*/
+getHighDischargeAmountSinceCharge : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeAmount'>/**
+</span>*/
+getDischargeAmount : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeAmountScreenOn'>/**
+</span>*/
+getDischargeAmountScreenOn : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeAmountScreenOnSinceCharge'>/**
+</span>*/
+getDischargeAmountScreenOnSinceCharge : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeAmountScreenOff'>/**
+</span>*/
+getDischargeAmountScreenOff : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeAmountScreenOffSinceCharge'>/**
+</span>*/
+getDischargeAmountScreenOffSinceCharge : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeAmountScreenDoze'>/**
+</span>*/
+getDischargeAmountScreenDoze : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getDischargeAmountScreenDozeSinceCharge'>/**
+</span>*/
+getDischargeAmountScreenDozeSinceCharge : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getUidStatsLocked'>/**Retrieve the statistics object for a particular uid, creating if needed.
+</span>*/
+getUidStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getAvailableUidStatsLocked'>/**Retrieve the statistics object for a particular uid. Returns null if the object is not
+</span> available.
+*/
+getAvailableUidStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-onCleanupUserLocked'>/**
+</span>*/
+onCleanupUserLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-onUserRemovedLocked'>/**
+</span>*/
+onUserRemovedLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-removeUidStatsLocked'>/**Remove the statistics object for a particular uid.
+</span>*/
+removeUidStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getProcessStatsLocked'>/**Retrieve the statistics object for a particular process, creating
+</span> if needed.
+*/
+getProcessStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getPackageStatsLocked'>/**Retrieve the statistics object for a particular process, creating
+</span> if needed.
+*/
+getPackageStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getServiceStatsLocked'>/**Retrieve the statistics object for a particular service, creating
+</span> if needed.
+*/
+getServiceStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-shutdownLocked'>/**
+</span>*/
+shutdownLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-trackPerProcStateCpuTimes'>/**
+</span>*/
+trackPerProcStateCpuTimes : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-systemServicesReady'>/**
+</span>*/
+systemServicesReady : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-getExternalStatsCollectionRateLimitMs'>/**
+</span>*/
+getExternalStatsCollectionRateLimitMs : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-dumpConstantsLocked'>/**
+</span>*/
+dumpConstantsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-dumpCpuStatsLocked'>/**
+</span>*/
+dumpCpuStatsLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-writeAsyncLocked'>/**
+</span>*/
+writeAsyncLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-writeSyncLocked'>/**
+</span>*/
+writeSyncLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readLocked'>/**
+</span>*/
+readLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readSummaryFromParcel'>/**
+</span>*/
+readSummaryFromParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-writeSummaryToParcel'>/**Writes a summary of the statistics to a Parcel, in a format suitable to be written to
+</span> disk.  This format does not allow a lossless round-trip.
+@param {Object {Parcel}} out the Parcel to be written to.
+*/
+writeSummaryToParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-readFromParcel'>/**
+</span>*/
+readFromParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-writeToParcelWithoutUids'>/**
+</span>*/
+writeToParcelWithoutUids : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-prepareForDumpLocked'>/**
+</span>*/
+prepareForDumpLocked : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsImpl-method-dumpLocked'>/**
+</span>*/
+dumpLocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

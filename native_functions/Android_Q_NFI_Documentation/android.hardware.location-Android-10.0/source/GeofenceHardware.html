@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-location-GeofenceHardware'>/**@class android.hardware.location.GeofenceHardware
+</span>@extends java.lang.Object
+
+ This class handles geofences managed by various hardware subsystems. It contains
+ the public APIs that is needed to accomplish the task.
+
+ &lt;p&gt;The APIs should not be called directly by the app developers. A higher level api
+ which abstracts the hardware should be used instead. All the checks are done by the higher
+ level public API. Any needed locking should be handled by the higher level API.
+
+ &lt;p&gt; There are 3 states associated with a Geofence: Inside, Outside, Unknown.
+ There are 3 transitions: {@link #GEOFENCE_ENTERED}, {@link #GEOFENCE_EXITED},
+ {@link #GEOFENCE_UNCERTAIN}. The APIs only expose the transitions.
+
+ &lt;p&gt; Inside state: The hardware subsystem is reasonably confident that the user is inside
+ the geofence. Outside state: The hardware subsystem is reasonably confident that the user
+ is outside the geofence Unknown state: Unknown state can be interpreted as a state in which the
+ monitoring subsystem isn't confident enough that the user is either inside or
+ outside the Geofence. If the accuracy does not improve for a sufficient period of time,
+ the {@link #GEOFENCE_UNCERTAIN} transition would be triggered. If the accuracy improves later,
+ an appropriate transition would be triggered. The &quot;reasonably confident&quot; parameter
+ depends on the hardware system and the positioning algorithms used.
+ For instance, {@link #MONITORING_TYPE_GPS_HARDWARE} uses 95% as a confidence level.
+
+ @hide
+*/
+var GeofenceHardware = {
+
+<span id='android-hardware-location-GeofenceHardware-property-MONITORING_TYPE_GPS_HARDWARE'>/** Constant for geofence monitoring done by the GPS hardware.
+</span>*/
+MONITORING_TYPE_GPS_HARDWARE : &quot;0&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-MONITORING_TYPE_FUSED_HARDWARE'>/** Constant for geofence monitoring done by the Fused hardware.
+</span>*/
+MONITORING_TYPE_FUSED_HARDWARE : &quot;1&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-MONITOR_CURRENTLY_AVAILABLE'>/** Constant to indicate that the monitoring system is currently
+</span> available for monitoring geofences.
+*/
+MONITOR_CURRENTLY_AVAILABLE : &quot;0&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-MONITOR_CURRENTLY_UNAVAILABLE'>/** Constant to indicate that the monitoring system is currently
+</span> unavailable for monitoring geofences.
+*/
+MONITOR_CURRENTLY_UNAVAILABLE : &quot;1&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-MONITOR_UNSUPPORTED'>/** Constant to indicate that the monitoring system is unsupported
+</span> for hardware geofence monitoring.
+*/
+MONITOR_UNSUPPORTED : &quot;2&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_ENTERED'>/** The constant to indicate that the user has entered the geofence.
+</span>*/
+GEOFENCE_ENTERED : &quot;1&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_EXITED'>/** The constant to indicate that the user has exited the geofence.
+</span>*/
+GEOFENCE_EXITED : &quot;2&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_UNCERTAIN'>/** The constant to indicate that the user is uncertain with respect to a
+</span> geofence.
+*/
+GEOFENCE_UNCERTAIN : &quot;4&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_SUCCESS'>/** The constant used to indicate success of the particular geofence call
+</span>*/
+GEOFENCE_SUCCESS : &quot;0&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_ERROR_TOO_MANY_GEOFENCES'>/** The constant used to indicate that too many geofences have been registered.
+</span>*/
+GEOFENCE_ERROR_TOO_MANY_GEOFENCES : &quot;1&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_ERROR_ID_EXISTS'>/** The constant used to indicate that the geofence id already exists.
+</span>*/
+GEOFENCE_ERROR_ID_EXISTS : &quot;2&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_ERROR_ID_UNKNOWN'>/** The constant used to indicate that the geofence id is unknown.
+</span>*/
+GEOFENCE_ERROR_ID_UNKNOWN : &quot;3&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_ERROR_INVALID_TRANSITION'>/** The constant used to indicate that the transition requested for the geofence is invalid.
+</span>*/
+GEOFENCE_ERROR_INVALID_TRANSITION : &quot;4&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_FAILURE'>/** The constant used to indicate that the geofence operation has failed.
+</span>*/
+GEOFENCE_FAILURE : &quot;5&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-GEOFENCE_ERROR_INSUFFICIENT_MEMORY'>/** The constant used to indicate that the operation failed due to insufficient memory.
+</span>*/
+GEOFENCE_ERROR_INSUFFICIENT_MEMORY : &quot;6&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-SOURCE_TECHNOLOGY_GNSS'>/** The constant used to indicate that the monitoring system supports GNSS.
+</span>*/
+SOURCE_TECHNOLOGY_GNSS : &quot;1&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-SOURCE_TECHNOLOGY_WIFI'>/** The constant used to indicate that the monitoring system supports WiFi.
+</span>*/
+SOURCE_TECHNOLOGY_WIFI : &quot;2&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-SOURCE_TECHNOLOGY_SENSORS'>/** The constant used to indicate that the monitoring system supports Sensors.
+</span>*/
+SOURCE_TECHNOLOGY_SENSORS : &quot;4&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-SOURCE_TECHNOLOGY_CELL'>/** The constant used to indicate that the monitoring system supports Cell.
+</span>*/
+SOURCE_TECHNOLOGY_CELL : &quot;8&quot;,
+<span id='android-hardware-location-GeofenceHardware-property-SOURCE_TECHNOLOGY_BLUETOOTH'>/** The constant used to indicate that the monitoring system supports Bluetooth.
+</span>*/
+SOURCE_TECHNOLOGY_BLUETOOTH : &quot;16&quot;,
+<span id='android-hardware-location-GeofenceHardware-method-getMonitoringTypes'>/**Returns all the hardware geofence monitoring systems which are supported
+</span>
+ &lt;p&gt; Call {@link #getStatusOfMonitoringType}(int) to know the current state
+ of a monitoring system.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#LOCATION_HARDWARE} permission to access
+ geofencing in hardware.
+@return {Number} An array of all the monitoring types.
+         An array of length 0 is returned in case of errors.
+*/
+getMonitoringTypes : function(  ) {},
+
+<span id='android-hardware-location-GeofenceHardware-method-getStatusOfMonitoringType'>/**Returns current status of a hardware geofence monitoring system.
+</span>
+ &lt;p&gt;Status can be one of {@link #MONITOR_CURRENTLY_AVAILABLE},
+ {@link #MONITOR_CURRENTLY_UNAVAILABLE} or {@link #MONITOR_UNSUPPORTED}
+
+ &lt;p&gt; Some supported hardware monitoring systems might not be available
+ for monitoring geofences in certain scenarios. For example, when a user
+ enters a building, the GPS hardware subsystem might not be able monitor
+ geofences and will change from {@link #MONITOR_CURRENTLY_AVAILABLE} to
+ {@link #MONITOR_CURRENTLY_UNAVAILABLE}.
+@param {Number} monitoringType
+@return {Number} Current status of the monitoring type.
+*/
+getStatusOfMonitoringType : function(  ) {},
+
+<span id='android-hardware-location-GeofenceHardware-method-addGeofence'>/**Creates a circular geofence which is monitored by subsystems in the hardware.
+</span>
+ &lt;p&gt; When the device detects that is has entered, exited or is uncertain
+ about the area specified by the geofence, the given callback will be called.
+
+ &lt;p&gt; If this call returns true, it means that the geofence has been sent to the hardware.
+ {@link android.hardware.location.GeofenceHardwareCallback#onGeofenceAdd} will be called with the result of the
+ add call from the hardware. The {@link android.hardware.location.GeofenceHardwareCallback#onGeofenceAdd} will be
+ called with the following parameters when a transition event occurs.
+ &lt;ul&gt;
+ &lt;li&gt; The geofence Id
+ &lt;li&gt; The location object indicating the last known location.
+ &lt;li&gt; The transition associated with the geofence. One of
+      {@link #GEOFENCE_ENTERED}, {@link #GEOFENCE_EXITED}, {@link #GEOFENCE_UNCERTAIN}
+ &lt;li&gt; The timestamp when the geofence transition occured.
+ &lt;li&gt; The monitoring type ({@link #MONITORING_TYPE_GPS_HARDWARE} is one such example)
+      that was used.
+ &lt;/ul&gt;
+
+ &lt;p&gt; The geofence will be monitored by the subsystem specified by monitoring_type parameter.
+ The application does not need to hold a wakelock when the monitoring
+ is being done by the underlying hardware subsystem. If the same geofence Id is being
+ monitored by two different monitoring systems, the same id can be used for both calls, as
+ long as the same callback object is used.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#ACCESS_FINE_LOCATION} permission when
+ {@link #MONITORING_TYPE_GPS_HARDWARE} is used.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#LOCATION_HARDWARE} permission to access
+ geofencing in hardware.
+
+ &lt;p&gt;This API should not be called directly by the app developers. A higher level api
+ which abstracts the hardware should be used instead. All the checks are done by the higher
+ level public API. Any needed locking should be handled by the higher level API.
+
+ &lt;p&gt; Create a geofence request object using the methods in {@link android.hardware.location.GeofenceHardwareRequest} to
+ set all the characteristics of the geofence. Use the created GeofenceHardwareRequest object
+ in this call.
+@param {Number} geofenceId The id associated with the geofence.
+@param {Number} monitoringType The type of the hardware subsystem that should be used
+        to monitor the geofence.
+@param {Object {GeofenceHardwareRequest}} geofenceRequest The {@link GeofenceHardwareRequest} object associated with the
+        geofence.
+@param {Object {GeofenceHardwareCallback}} callback {@link GeofenceHardwareCallback} that will be use to notify the
+        transition.
+@return {Boolean} true when the geofence is successfully sent to the hardware for addition.
+@throws IllegalArgumentException when the geofence request type is not supported.
+*/
+addGeofence : function(  ) {},
+
+<span id='android-hardware-location-GeofenceHardware-method-removeGeofence'>/**Removes a geofence added by {@link #addGeofence} call.
+</span>
+ &lt;p&gt; If this call returns true, it means that the geofence has been sent to the hardware.
+ {@link android.hardware.location.GeofenceHardwareCallback#onGeofenceRemove} will be called with the result of the
+ remove call from the hardware.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#ACCESS_FINE_LOCATION} permission when
+ {@link #MONITORING_TYPE_GPS_HARDWARE} is used.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#LOCATION_HARDWARE} permission to access
+ geofencing in hardware.
+
+ &lt;p&gt;This API should not be called directly by the app developers. A higher level api
+ which abstracts the hardware should be used instead. All the checks are done by the higher
+ level public API. Any needed locking should be handled by the higher level API.
+@param {Number} geofenceId The id of the geofence.
+@param {Number} monitoringType The type of the hardware subsystem that should be used
+        to monitor the geofence.
+@return {Boolean} true when the geofence is successfully sent to the hardware for removal.                     .
+*/
+removeGeofence : function(  ) {},
+
+<span id='android-hardware-location-GeofenceHardware-method-pauseGeofence'>/**Pauses the monitoring of a geofence added by {@link #addGeofence} call.
+</span>
+ &lt;p&gt; If this call returns true, it means that the geofence has been sent to the hardware.
+ {@link android.hardware.location.GeofenceHardwareCallback#onGeofencePause} will be called with the result of the
+ pause call from the hardware.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#ACCESS_FINE_LOCATION} permission when
+ {@link #MONITORING_TYPE_GPS_HARDWARE} is used.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#LOCATION_HARDWARE} permission to access
+ geofencing in hardware.
+
+ &lt;p&gt;This API should not be called directly by the app developers. A higher level api
+ which abstracts the hardware should be used instead. All the checks are done by the higher
+ level public API. Any needed locking should be handled by the higher level API.
+@param {Number} geofenceId The id of the geofence.
+@param {Number} monitoringType The type of the hardware subsystem that should be used
+        to monitor the geofence.
+@return {Boolean} true when the geofence is successfully sent to the hardware for pausing.
+*/
+pauseGeofence : function(  ) {},
+
+<span id='android-hardware-location-GeofenceHardware-method-resumeGeofence'>/**Resumes the monitoring of a geofence added by {@link #pauseGeofence} call.
+</span>
+ &lt;p&gt; If this call returns true, it means that the geofence has been sent to the hardware.
+ {@link android.hardware.location.GeofenceHardwareCallback#onGeofenceResume} will be called with the result of the
+ resume call from the hardware.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#ACCESS_FINE_LOCATION} permission when
+ {@link #MONITORING_TYPE_GPS_HARDWARE} is used.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#LOCATION_HARDWARE} permission to access
+ geofencing in hardware.
+
+ &lt;p&gt;This API should not be called directly by the app developers. A higher level api
+ which abstracts the hardware should be used instead. All the checks are done by the higher
+ level public API. Any needed locking should be handled by the higher level API.
+@param {Number} geofenceId The id of the geofence.
+@param {Number} monitoringType The type of the hardware subsystem that should be used
+        to monitor the geofence.
+@param {Number} monitorTransition Bitwise OR of {@link #GEOFENCE_ENTERED},
+        {@link #GEOFENCE_EXITED}, {@link #GEOFENCE_UNCERTAIN}
+@return {Boolean} true when the geofence is successfully sent to the hardware for resumption.
+*/
+resumeGeofence : function(  ) {},
+
+<span id='android-hardware-location-GeofenceHardware-method-registerForMonitorStateChangeCallback'>/**Register the callback to be notified when the state of a hardware geofence
+</span> monitoring system changes. For instance, it can change from
+ {@link #MONITOR_CURRENTLY_AVAILABLE} to {@link #MONITOR_CURRENTLY_UNAVAILABLE}
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#ACCESS_FINE_LOCATION} permission when
+ {@link #MONITORING_TYPE_GPS_HARDWARE} is used.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#LOCATION_HARDWARE} permission to access
+ geofencing in hardware.
+
+ &lt;p&gt;This API should not be called directly by the app developers. A higher level api
+ which abstracts the hardware should be used instead. All the checks are done by the higher
+ level public API. Any needed locking should be handled by the higher level API.
+
+ &lt;p&gt; The same callback object can be used to be informed of geofence transitions
+ and state changes of the underlying hardware subsystem.
+@param {Number} monitoringType Type of the monitor
+@param {Object {GeofenceHardwareMonitorCallback}} callback Callback that will be called.
+@return {Boolean} true on success
+*/
+registerForMonitorStateChangeCallback : function(  ) {},
+
+<span id='android-hardware-location-GeofenceHardware-method-unregisterForMonitorStateChangeCallback'>/**Unregister the callback that was used with {@link #registerForMonitorStateChangeCallback}
+</span> to notify when the state of the hardware geofence monitoring system changes.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#ACCESS_FINE_LOCATION} permission when
+ {@link #MONITORING_TYPE_GPS_HARDWARE} is used.
+
+ &lt;p&gt; Requires {@link android.Manifest.permission#LOCATION_HARDWARE} permission to access
+ geofencing in hardware.
+
+ &lt;p&gt;This API should not be called directly by the app developers. A higher level api
+ which abstracts the hardware should be used instead. All the checks are done by the higher
+ level public API. Any needed locking should be handled by the higher level API.
+@param {Number} monitoringType Type of the monitor
+@param {Object {GeofenceHardwareMonitorCallback}} callback Callback that will be called.
+@return {Boolean} true on success
+*/
+unregisterForMonitorStateChangeCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

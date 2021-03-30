@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-Rational'>/**@class android.util.Rational
+</span> implements java.lang.Comparable
+
+@extends java.lang.Number
+
+ &lt;p&gt;An immutable data type representation a rational number.&lt;/p&gt;
+
+ &lt;p&gt;Contains a pair of {@code int}s representing the numerator and denominator of a
+ Rational number. &lt;/p&gt;
+*/
+var Rational = {
+
+<span id='android-util-Rational-property-NaN'>/** Constant for the &lt;em&gt;Not-a-Number (NaN)&lt;/em&gt; value of the {@code Rational} type.
+</span>
+ &lt;p&gt;A {@code NaN} value is considered to be equal to itself (that is {@code NaN.equals(NaN)}
+ will return {@code true}; it is always greater than any non-{@code NaN} value (that is
+ {@code NaN.compareTo(notNaN)} will return a number greater than {@code 0}).&lt;/p&gt;
+
+ &lt;p&gt;Equivalent to constructing a new rational with both the numerator and denominator
+ equal to {@code 0}.&lt;/p&gt;
+*/
+NaN : &quot;null&quot;,
+<span id='android-util-Rational-property-POSITIVE_INFINITY'>/** Constant for the positive infinity value of the {@code Rational} type.
+</span>
+ &lt;p&gt;Equivalent to constructing a new rational with a positive numerator and a denominator
+ equal to {@code 0}.&lt;/p&gt;
+*/
+POSITIVE_INFINITY : &quot;null&quot;,
+<span id='android-util-Rational-property-NEGATIVE_INFINITY'>/** Constant for the negative infinity value of the {@code Rational} type.
+</span>
+ &lt;p&gt;Equivalent to constructing a new rational with a negative numerator and a denominator
+ equal to {@code 0}.&lt;/p&gt;
+*/
+NEGATIVE_INFINITY : &quot;null&quot;,
+<span id='android-util-Rational-property-ZERO'>/** Constant for the zero value of the {@code Rational} type.
+</span>
+ &lt;p&gt;Equivalent to constructing a new rational with a numerator equal to {@code 0} and
+ any non-zero denominator.&lt;/p&gt;
+*/
+ZERO : &quot;null&quot;,
+<span id='android-util-Rational-method-getNumerator'>/**Gets the numerator of the rational.
+</span>
+ &lt;p&gt;The numerator will always return {@code 1} if this rational represents
+ infinity (that is, the denominator is {@code 0}).&lt;/p&gt;
+*/
+getNumerator : function(  ) {},
+
+<span id='android-util-Rational-method-getDenominator'>/**Gets the denominator of the rational
+</span>
+ &lt;p&gt;The denominator may return {@code 0}, in which case the rational may represent
+ positive infinity (if the numerator was positive), negative infinity (if the numerator
+ was negative), or {@code NaN} (if the numerator was {@code 0}).&lt;/p&gt;
+
+ &lt;p&gt;The denominator will always return {@code 1} if the numerator is {@code 0}.
+*/
+getDenominator : function(  ) {},
+
+<span id='android-util-Rational-method-isNaN'>/**Indicates whether this rational is a &lt;em&gt;Not-a-Number (NaN)&lt;/em&gt; value.
+</span>
+ &lt;p&gt;A {@code NaN} value occurs when both the numerator and the denominator are {@code 0}.&lt;/p&gt;
+@return {Boolean} {@code true} if this rational is a &lt;em&gt;Not-a-Number (NaN)&lt;/em&gt; value;
+         {@code false} if this is a (potentially infinite) number value
+*/
+isNaN : function(  ) {},
+
+<span id='android-util-Rational-method-isInfinite'>/**Indicates whether this rational represents an infinite value.
+</span>
+ &lt;p&gt;An infinite value occurs when the denominator is {@code 0} (but the numerator is not).&lt;/p&gt;
+@return {Boolean} {@code true} if this rational is a (positive or negative) infinite value;
+         {@code false} if this is a finite number value (or {@code NaN})
+*/
+isInfinite : function(  ) {},
+
+<span id='android-util-Rational-method-isFinite'>/**Indicates whether this rational represents a finite value.
+</span>
+ &lt;p&gt;A finite value occurs when the denominator is not {@code 0}; in other words
+ the rational is neither infinity or {@code NaN}.&lt;/p&gt;
+@return {Boolean} {@code true} if this rational is a (positive or negative) infinite value;
+         {@code false} if this is a finite number value (or {@code NaN})
+*/
+isFinite : function(  ) {},
+
+<span id='android-util-Rational-method-isZero'>/**Indicates whether this rational represents a zero value.
+</span>
+ &lt;p&gt;A zero value is a {@link #isFinite finite} rational with a numerator of {@code 0}.&lt;/p&gt;
+@return {Boolean} {@code true} if this rational is finite zero value;
+         {@code false} otherwise
+*/
+isZero : function(  ) {},
+
+<span id='android-util-Rational-method-equals'>/**&lt;p&gt;Compare this Rational to another object and see if they are equal.&lt;/p&gt;
+</span>
+ &lt;p&gt;A Rational object can only be equal to another Rational object (comparing against any
+ other type will return {@code false}).&lt;/p&gt;
+
+ &lt;p&gt;A Rational object is considered equal to another Rational object if and only if one of
+ the following holds:&lt;/p&gt;
+ &lt;ul&gt;&lt;li&gt;Both are {@code NaN}&lt;/li&gt;
+     &lt;li&gt;Both are infinities of the same sign&lt;/li&gt;
+     &lt;li&gt;Both have the same numerator and denominator in their reduced form&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;A reduced form of a Rational is calculated by dividing both the numerator and the
+ denominator by their greatest common divisor.&lt;/p&gt;
+
+ &lt;pre&gt;{@code
+ (new Rational(1, 2)).equals(new Rational(1, 2)) == true   // trivially true
+ (new Rational(2, 3)).equals(new Rational(1, 2)) == false  // trivially false
+ (new Rational(1, 2)).equals(new Rational(2, 4)) == true   // true after reduction
+ (new Rational(0, 0)).equals(new Rational(0, 0)) == true   // NaN.equals(NaN)
+ (new Rational(1, 0)).equals(new Rational(5, 0)) == true   // both are +infinity
+ (new Rational(1, 0)).equals(new Rational(-1, 0)) == false // +infinity != -infinity
+ }&lt;/pre&gt;
+@param {Object {Object}} obj a reference to another object
+@return {Boolean} A boolean that determines whether or not the two Rational objects are equal.
+*/
+equals : function(  ) {},
+
+<span id='android-util-Rational-method-toString'>/**Return a string representation of this rational, e.g. {@code &quot;1/2&quot;}.
+</span>
+ &lt;p&gt;The following rules of conversion apply:
+ &lt;ul&gt;
+ &lt;li&gt;{@code NaN} values will return {@code &quot;NaN&quot;}
+ &lt;li&gt;Positive infinity values will return {@code &quot;Infinity&quot;}
+ &lt;li&gt;Negative infinity values will return {@code &quot;-Infinity&quot;}
+ &lt;li&gt;All other values will return {@code &quot;numerator/denominator&quot;} where {@code numerator}
+ and {@code denominator} are substituted with the appropriate numerator and denominator
+ values.
+ &lt;/ul&gt;&lt;/p&gt;
+*/
+toString : function(  ) {},
+
+<span id='android-util-Rational-method-toFloat'>/**&lt;p&gt;Convert to a floating point representation.&lt;/p&gt;
+</span>@return {Number} The floating point representation of this rational number.
+@hide 
+*/
+toFloat : function(  ) {},
+
+<span id='android-util-Rational-method-hashCode'>/**{@inheritDoc}
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-util-Rational-method-gcd'>/**Calculates the greatest common divisor using Euclid's algorithm.
+</span>
+ &lt;p&gt;&lt;em&gt;Visible for testing only.&lt;/em&gt;&lt;/p&gt;
+@param {Number} numerator the numerator in a fraction
+@param {Number} denominator the denominator in a fraction
+@return {Number} An int value representing the gcd. Always positive.
+@hide 
+*/
+gcd : function(  ) {},
+
+<span id='android-util-Rational-method-doubleValue'>/**Returns the value of the specified number as a {@code double}.
+</span>
+ &lt;p&gt;The {@code double} is calculated by converting both the numerator and denominator
+ to a {@code double}; then returning the result of dividing the numerator by the
+ denominator.&lt;/p&gt;
+@return {Number} the divided value of the numerator and denominator as a {@code double}.
+*/
+doubleValue : function(  ) {},
+
+<span id='android-util-Rational-method-floatValue'>/**Returns the value of the specified number as a {@code float}.
+</span>
+ &lt;p&gt;The {@code float} is calculated by converting both the numerator and denominator
+ to a {@code float}; then returning the result of dividing the numerator by the
+ denominator.&lt;/p&gt;
+@return {Number} the divided value of the numerator and denominator as a {@code float}.
+*/
+floatValue : function(  ) {},
+
+<span id='android-util-Rational-method-intValue'>/**Returns the value of the specified number as a {@code int}.
+</span>
+ &lt;p&gt;{@link #isInfinite Finite} rationals are converted to an {@code int} value
+ by dividing the numerator by the denominator; conversion for non-finite values happens
+ identically to casting a floating point value to an {@code int}, in particular:
+
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Positive infinity saturates to the largest maximum integer
+ {@link Integer#MAX_VALUE}&lt;/li&gt;
+ &lt;li&gt;Negative infinity saturates to the smallest maximum integer
+ {@link Integer#MIN_VALUE}&lt;/li&gt;
+ &lt;li&gt;&lt;em&gt;Not-A-Number (NaN)&lt;/em&gt; returns {@code 0}.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+@return {Number} the divided value of the numerator and denominator as a {@code int}.
+*/
+intValue : function(  ) {},
+
+<span id='android-util-Rational-method-longValue'>/**Returns the value of the specified number as a {@code long}.
+</span>
+ &lt;p&gt;{@link #isInfinite Finite} rationals are converted to an {@code long} value
+ by dividing the numerator by the denominator; conversion for non-finite values happens
+ identically to casting a floating point value to a {@code long}, in particular:
+
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Positive infinity saturates to the largest maximum long
+ {@link Long#MAX_VALUE}&lt;/li&gt;
+ &lt;li&gt;Negative infinity saturates to the smallest maximum long
+ {@link Long#MIN_VALUE}&lt;/li&gt;
+ &lt;li&gt;&lt;em&gt;Not-A-Number (NaN)&lt;/em&gt; returns {@code 0}.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+@return {Number} the divided value of the numerator and denominator as a {@code long}.
+*/
+longValue : function(  ) {},
+
+<span id='android-util-Rational-method-shortValue'>/**Returns the value of the specified number as a {@code short}.
+</span>
+ &lt;p&gt;{@link #isInfinite Finite} rationals are converted to a {@code short} value
+ identically to {@link #intValue}; the {@code int} result is then truncated to a
+ {@code short} before returning the value.&lt;/p&gt;
+@return {Number} the divided value of the numerator and denominator as a {@code short}.
+*/
+shortValue : function(  ) {},
+
+<span id='android-util-Rational-method-compareTo'>/**Compare this rational to the specified rational to determine their natural order.
+</span>
+ &lt;p&gt;{@link #NaN} is considered to be equal to itself and greater than all other
+ {@code Rational} values. Otherwise, if the objects are not {@link #equals equal}, then
+ the following rules apply:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;Positive infinity is greater than any other finite number (or negative infinity)
+ &lt;li&gt;Negative infinity is less than any other finite number (or positive infinity)
+ &lt;li&gt;The finite number represented by this rational is checked numerically
+ against the other finite number by converting both rationals to a common denominator multiple
+ and comparing their numerators.
+ &lt;/ul&gt;
+@param {Object {Rational}} another the rational to be compared
+@return {Number} a negative integer, zero, or a positive integer as this object is less than,
+         equal to, or greater than the specified rational.
+@throws NullPointerException if {@code another} was {@code null}
+*/
+compareTo : function(  ) {},
+
+<span id='android-util-Rational-method-parseRational'>/**Parses the specified string as a rational value.
+</span> &lt;p&gt;The ASCII characters {@code \}{@code u003a} (':') and
+ {@code \}{@code u002f} ('/') are recognized as separators between
+ the numerator and denumerator.&lt;/p&gt;
+ &lt;p&gt;
+ For any {@code Rational r}: {@code Rational.parseRational(r.toString()).equals(r)}.
+ However, the method also handles rational numbers expressed in the
+ following forms:&lt;/p&gt;
+ &lt;p&gt;
+ &quot;&lt;i&gt;num&lt;/i&gt;{@code /}&lt;i&gt;den&lt;/i&gt;&quot; or
+ &quot;&lt;i&gt;num&lt;/i&gt;{@code :}&lt;i&gt;den&lt;/i&gt;&quot; {@code =&gt; new Rational(num, den);},
+ where &lt;i&gt;num&lt;/i&gt; and &lt;i&gt;den&lt;/i&gt; are string integers potentially
+ containing a sign, such as &quot;-10&quot;, &quot;+7&quot; or &quot;5&quot;.&lt;/p&gt;
+
+ &lt;pre&gt;{@code
+ Rational.parseRational(&quot;3:+6&quot;).equals(new Rational(1, 2)) == true
+ Rational.parseRational(&quot;-3/-6&quot;).equals(new Rational(1, 2)) == true
+ Rational.parseRational(&quot;4.56&quot;) =&gt; throws NumberFormatException
+ }&lt;/pre&gt;
+@param {String} string the string representation of a rational value.
+@return {Object {android.util.Rational}} the rational value represented by {@code string}.
+@throws NumberFormatException if {@code string} cannot be parsed
+ as a rational value.
+@throws NullPointerException if {@code string} was {@code null}
+*/
+parseRational : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

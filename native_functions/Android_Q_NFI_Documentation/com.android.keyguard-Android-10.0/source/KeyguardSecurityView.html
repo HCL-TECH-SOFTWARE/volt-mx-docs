@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-keyguard-KeyguardSecurityView'>/**@class com.android.keyguard.KeyguardSecurityView
+</span>*/
+var KeyguardSecurityView = {
+
+<span id='com-android-keyguard-KeyguardSecurityView-property-SCREEN_ON'>/***/
+</span>SCREEN_ON : &quot;1&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-property-VIEW_REVEALED'>/***/
+</span>VIEW_REVEALED : &quot;2&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-property-PROMPT_REASON_NONE'>/***/
+</span>PROMPT_REASON_NONE : &quot;0&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-property-PROMPT_REASON_RESTART'>/** Strong auth is required because the device has just booted.
+</span>*/
+PROMPT_REASON_RESTART : &quot;1&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-property-PROMPT_REASON_TIMEOUT'>/** Strong auth is required because the user hasn't used strong auth since a while.
+</span>*/
+PROMPT_REASON_TIMEOUT : &quot;2&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-property-PROMPT_REASON_DEVICE_ADMIN'>/** Strong auth is required because a device admin requested it.
+</span>*/
+PROMPT_REASON_DEVICE_ADMIN : &quot;3&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-property-PROMPT_REASON_USER_REQUEST'>/** Some auth is required because the user force locked.
+</span>*/
+PROMPT_REASON_USER_REQUEST : &quot;4&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-property-PROMPT_REASON_AFTER_LOCKOUT'>/** Some auth is required because too many wrong credentials led to a lockout.
+</span>*/
+PROMPT_REASON_AFTER_LOCKOUT : &quot;5&quot;,
+<span id='com-android-keyguard-KeyguardSecurityView-method-setKeyguardCallback'>/**Interface back to keyguard to tell it when security
+</span>@param {Object {KeyguardSecurityCallback}} callback
+*/
+setKeyguardCallback : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-setLockPatternUtils'>/**Set {@link LockPatternUtils} object. Useful for providing a mock interface.
+</span>@param {Object {LockPatternUtils}} utils
+*/
+setLockPatternUtils : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-reset'>/**Reset the view and prepare to take input. This should do things like clearing the
+</span> password or pattern and clear error messages.
+*/
+reset : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-onPause'>/**Emulate activity life cycle within the view. When called, the view should clean up
+</span> and prepare to be removed.
+*/
+onPause : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-onResume'>/**Emulate activity life cycle within this view.  When called, the view should prepare itself
+</span> to be shown.
+@param {Number} reason the root cause of the event.
+*/
+onResume : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-needsInput'>/**Inquire whether this view requires IME (keyboard) interaction.
+</span>@return {Boolean} true if IME interaction is required.
+*/
+needsInput : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-getCallback'>/**Get {@link com.android.keyguard.KeyguardSecurityCallback} for the given object
+</span>@return {Object {com.android.keyguard.KeyguardSecurityCallback}} KeyguardSecurityCallback
+*/
+getCallback : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-showPromptReason'>/**Show a string explaining why the security view needs to be solved.
+</span>@param {Number} reason a flag indicating which string should be shown, see {@link #PROMPT_REASON_NONE}
+               and {@link #PROMPT_REASON_RESTART}
+*/
+showPromptReason : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-showMessage'>/**Show a message on the security view with a specified color
+</span>@param {Object {CharSequence}} message the message to show
+@param {Object {ColorStateList}} colorState the color to use
+*/
+showMessage : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-showUsabilityHint'>/**Instruct the view to show usability hints, if any.
+</span>*/
+showUsabilityHint : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-startAppearAnimation'>/**Starts the animation which should run when the security view appears.
+</span>*/
+startAppearAnimation : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-startDisappearAnimation'>/**Starts the animation which should run when the security view disappears.
+</span>@param {Object {Runnable}} finishRunnable the runnable to be run when the animation ended
+@return {Boolean} true if an animation started and {@code finishRunnable} will be run, false if no
+         animation started and {@code finishRunnable} will not be run
+*/
+startDisappearAnimation : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-getTitle'>/**The localized name of the security view, provided to accessibility. This may be the content
+</span> description, but content descriptions have other implications, so the title is kept separate.
+@return {Object {java.lang.CharSequence}} The View's title.
+*/
+getTitle : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardSecurityView-method-disallowInterceptTouch'>/**If the parent should not be allowed to intercept touch events.
+</span>@param {Object {MotionEvent}} event A touch event.
+@return {Boolean} {@code true} if touch should be passed forward.
+@see android.view.ViewGroup#requestDisallowInterceptTouchEvent(boolean)
+*/
+disallowInterceptTouch : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

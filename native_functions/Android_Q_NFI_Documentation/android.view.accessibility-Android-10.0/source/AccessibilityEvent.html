@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-accessibility-AccessibilityEvent'>/**@class android.view.accessibility.AccessibilityEvent
+</span> implements android.os.Parcelable
+
+@extends android.view.accessibility.AccessibilityRecord
+
+ &lt;p&gt;
+ This class represents accessibility events that are sent by the system when
+ something notable happens in the user interface. For example, when a
+ {@link android.widget.Button} is clicked, a {@link android.view.View} is focused, etc.
+ &lt;/p&gt;
+ &lt;p&gt;
+ An accessibility event is fired by an individual view which populates the event with
+ data for its state and requests from its parent to send the event to interested
+ parties. The parent can optionally modify or even block the event based on its broader
+ understanding of the user interface's context.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The main purpose of an accessibility event is to communicate changes in the UI to an
+ {@link android.accessibilityservice.AccessibilityService}. The service may then inspect,
+ if needed the user interface by examining the View hierarchy, as represented by a tree of
+ {@link android.view.accessibility.AccessibilityNodeInfo}s (snapshot of a View state)
+ which can be used for exploring the window content. Note that the privilege for accessing
+ an event's source, thus the window content, has to be explicitly requested. For more
+ details refer to {@link android.accessibilityservice.AccessibilityService}. If an
+ accessibility service has not requested to retrieve the window content the event will
+ not contain reference to its source. Also for events of type
+ {@link #TYPE_NOTIFICATION_STATE_CHANGED} the source is never available.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This class represents various semantically different accessibility event
+ types. Each event type has an associated set of related properties. In other
+ words, each event type is characterized via a subset of the properties exposed
+ by this class. For each event type there is a corresponding constant defined
+ in this class. Follows a specification of the event types and their associated properties:
+ &lt;/p&gt;
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about creating and processing AccessibilityEvents, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/accessibility/index.html&quot;&gt;Accessibility&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+ &lt;p&gt;
+ &lt;b&gt;VIEW TYPES&lt;/b&gt;&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View clicked&lt;/b&gt; - represents the event of clicking on a {@link android.view.View}
+ like {@link android.widget.Button}, {@link android.widget.CompoundButton}, etc.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt;{@link #TYPE_VIEW_CLICKED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View long clicked&lt;/b&gt; - represents the event of long clicking on a {@link android.view.View}
+ like {@link android.widget.Button}, {@link android.widget.CompoundButton}, etc &lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt;{@link #TYPE_VIEW_LONG_CLICKED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View selected&lt;/b&gt; - represents the event of selecting an item usually in
+ the context of an {@link android.widget.AdapterView}.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_SELECTED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View focused&lt;/b&gt; - represents the event of focusing a
+ {@link android.view.View}.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_FOCUSED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View text changed&lt;/b&gt; - represents the event of changing the text of an
+ {@link android.widget.EditText}.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_TEXT_CHANGED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+   &lt;li&gt;{@link #getText}() - The new text of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getBeforeText}() - The text of the source before the change.&lt;/li&gt;
+   &lt;li&gt;{@link #getFromIndex}() - The text change start index.&lt;/li&gt;
+   &lt;li&gt;{@link #getAddedCount}() - The number of added characters.&lt;/li&gt;
+   &lt;li&gt;{@link #getRemovedCount}() - The number of removed characters.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View text selection changed&lt;/b&gt; - represents the event of changing the text
+ selection of an {@link android.widget.EditText}.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_TEXT_SELECTION_CHANGED} &lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;b&gt;View text traversed at movement granularity&lt;/b&gt; - represents the event of traversing the
+ text of a view at a given granularity. For example, moving to the next word.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY} &lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+   &lt;li&gt;{@link #getMovementGranularity}() - Sets the granularity at which a view's text
+       was traversed.&lt;/li&gt;
+   &lt;li&gt;{@link #getText}() -  The text of the source's sub-tree.&lt;/li&gt;
+   &lt;li&gt;{@link #getFromIndex}() - The start the text that was skipped over in this movement.
+       This is the starting point when moving forward through the text, but not when moving
+       back.&lt;/li&gt;
+   &lt;li&gt;{@link #getToIndex}() - The end of the text that was skipped over in this movement.
+       This is the ending point when moving forward through the text, but not when moving
+       back.&lt;/li&gt;
+   &lt;li&gt;{@link #getAction}() - Gets traversal action which specifies the direction.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View scrolled&lt;/b&gt; - represents the event of scrolling a view. &lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_SCROLLED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+   &lt;li&gt;{@link #getScrollDeltaX}() - The difference in the horizontal position.&lt;/li&gt;
+   &lt;li&gt;{@link #getScrollDeltaY}() - The difference in the vertical position.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;TRANSITION TYPES&lt;/b&gt;&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Window state changed&lt;/b&gt; - represents the event of a change to a section of
+ the user interface that is visually distinct. Should be sent from either the
+ root view of a window or from a view that is marked as a pane
+ {@link android.view.View#setAccessibilityPaneTitle(CharSequence)}. Not that changes
+ to true windows are represented by {@link #TYPE_WINDOWS_CHANGED}.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_WINDOW_STATE_CHANGED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getContentChangeTypes}() - The type of state changes.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+   &lt;li&gt;{@link #getText}() - The text of the source's sub-tree, including the pane titles.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Window content changed&lt;/b&gt; - represents the event of change in the
+ content of a window. This change can be adding/removing view, changing
+ a view size, etc.&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_WINDOW_CONTENT_CHANGED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getContentChangeTypes}() - The type of content changes.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Windows changed&lt;/b&gt; - represents a change in the windows shown on
+ the screen such as a window appeared, a window disappeared, a window size changed,
+ a window layer changed, etc. These events should only come from the system, which is responsible
+ for managing windows. The list of windows is available from
+ {@link android.accessibilityservice.AccessibilityService#getWindows()}.
+ For regions of the user interface that are presented as windows but are
+ controlled by an app's process, use {@link #TYPE_WINDOW_STATE_CHANGED}.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_WINDOWS_CHANGED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}() - The event time.&lt;/li&gt;
+   &lt;li&gt;{@link #getWindowChanges}()&lt;/li&gt; - The specific change to the source window
+ &lt;/ul&gt;
+ &lt;em&gt;Note:&lt;/em&gt; You can retrieve the {@link android.view.accessibility.AccessibilityWindowInfo} for the window
+ source of the event by looking through the list returned by
+ {@link android.accessibilityservice.AccessibilityService#getWindows()} for the window whose ID
+ matches {@link #getWindowId}().
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;NOTIFICATION TYPES&lt;/b&gt;&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Notification state changed&lt;/b&gt; - represents the event showing a transient piece of information
+ to the user. This information may be a {@link android.app.Notification} or
+ {@link android.widget.Toast}.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_NOTIFICATION_STATE_CHANGED}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+   &lt;li&gt;{@link #getParcelableData}() - The posted {@link android.app.Notification}, if
+   applicable.&lt;/li&gt;
+   &lt;li&gt;{@link #getText}() - Displayed text of the {@link android.widget.Toast}, if applicable,
+   or may contain text from the {@link android.app.Notification}, although
+   {@link #getParcelableData}() is a richer set of data for {@link android.app.Notification}.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;EXPLORATION TYPES&lt;/b&gt;&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;View hover enter&lt;/b&gt; - represents the event of beginning to hover
+ over a {@link android.view.View}. The hover may be generated via
+ exploring the screen by touch or via a pointing device.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_HOVER_ENTER}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;b&gt;View hover exit&lt;/b&gt; - represents the event of stopping to hover
+ over a {@link android.view.View}. The hover may be generated via
+ exploring the screen by touch or via a pointing device.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_VIEW_HOVER_EXIT}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Touch interaction start&lt;/b&gt; - represents the event of starting a touch
+ interaction, which is the user starts touching the screen.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_TOUCH_INTERACTION_START}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;em&gt;Note:&lt;/em&gt; This event is fired only by the system and is not passed to the
+ view tree to be populated.&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Touch interaction end&lt;/b&gt; - represents the event of ending a touch
+ interaction, which is the user stops touching the screen.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_TOUCH_INTERACTION_END}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;em&gt;Note:&lt;/em&gt; This event is fired only by the system and is not passed to the
+ view tree to be populated.&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Touch exploration gesture start&lt;/b&gt; - represents the event of starting a touch
+ exploring gesture.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_TOUCH_EXPLORATION_GESTURE_START}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;em&gt;Note:&lt;/em&gt; This event is fired only by the system and is not passed to the
+ view tree to be populated.&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Touch exploration gesture end&lt;/b&gt; - represents the event of ending a touch
+ exploring gesture.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_TOUCH_EXPLORATION_GESTURE_END}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;em&gt;Note:&lt;/em&gt; This event is fired only by the system and is not passed to the
+ view tree to be populated.&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Touch gesture detection start&lt;/b&gt; - represents the event of starting a user
+ gesture detection.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_GESTURE_DETECTION_START}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;em&gt;Note:&lt;/em&gt; This event is fired only by the system and is not passed to the
+ view tree to be populated.&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Touch gesture detection end&lt;/b&gt; - represents the event of ending a user
+ gesture detection.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_GESTURE_DETECTION_END}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;em&gt;Note:&lt;/em&gt; This event is fired only by the system and is not passed to the
+ view tree to be populated.&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;MISCELLANEOUS TYPES&lt;/b&gt;&lt;/br&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;b&gt;Announcement&lt;/b&gt; - represents the event of an application requesting a screen reader to make
+ an announcement. Because the event carries no semantic meaning, this event is appropriate only
+ in exceptional situations where additional screen reader output is needed but other types of
+ accessibility services do not need to be aware of the change.&lt;/br&gt;
+ &lt;em&gt;Type:&lt;/em&gt; {@link #TYPE_ANNOUNCEMENT}&lt;/br&gt;
+ &lt;em&gt;Properties:&lt;/em&gt;&lt;/br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link #getEventType}() - The type of the event.&lt;/li&gt;
+   &lt;li&gt;{@link #getSource}() - The source info (for registered clients).&lt;/li&gt;
+   &lt;li&gt;{@link #getClassName}() - The class name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getPackageName}() - The package name of the source.&lt;/li&gt;
+   &lt;li&gt;{@link #getEventTime}()  - The event time.&lt;/li&gt;
+   &lt;li&gt;{@link #getText}() - The text of the announcement.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+
+ @see android.view.accessibility.AccessibilityManager
+ @see android.accessibilityservice.AccessibilityService
+ @see AccessibilityNodeInfo
+*/
+var AccessibilityEvent = {
+
+<span id='android-view-accessibility-AccessibilityEvent-property-DEBUG_ORIGIN'>/**@hide */
+</span>DEBUG_ORIGIN : &quot;false&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-INVALID_POSITION'>/** Invalid selection/focus position.
+</span>
+ @see #getCurrentItemIndex()
+*/
+INVALID_POSITION : &quot;-1&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-MAX_TEXT_LENGTH'>/** Maximum length of the text fields.
+</span>
+ @see #getBeforeText()
+ @see #getText()
+ &lt;/br&gt;
+ Note: This constant is no longer needed since there
+       is no limit on the length of text that is contained
+       in an accessibility event anymore.
+*/
+MAX_TEXT_LENGTH : &quot;500&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_CLICKED'>/** Represents the event of clicking on a {@link android.view.View} like
+</span> {@link android.widget.Button}, {@link android.widget.CompoundButton}, etc.
+*/
+TYPE_VIEW_CLICKED : &quot;1&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_LONG_CLICKED'>/** Represents the event of long clicking on a {@link android.view.View} like
+</span> {@link android.widget.Button}, {@link android.widget.CompoundButton}, etc.
+*/
+TYPE_VIEW_LONG_CLICKED : &quot;2&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_SELECTED'>/** Represents the event of selecting an item usually in the context of an
+</span> {@link android.widget.AdapterView}.
+*/
+TYPE_VIEW_SELECTED : &quot;4&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_FOCUSED'>/** Represents the event of setting input focus of a {@link android.view.View}.
+</span>*/
+TYPE_VIEW_FOCUSED : &quot;8&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_TEXT_CHANGED'>/** Represents the event of changing the text of an {@link android.widget.EditText}.
+</span>*/
+TYPE_VIEW_TEXT_CHANGED : &quot;16&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_WINDOW_STATE_CHANGED'>/** Represents the event of a change to a visually distinct section of the user interface.
+</span> These events should only be dispatched from {@link android.view.View}s that have
+ accessibility pane titles, and replaces {@link #TYPE_WINDOW_CONTENT_CHANGED} for those
+ sources. Details about the change are available from {@link #getContentChangeTypes}().
+*/
+TYPE_WINDOW_STATE_CHANGED : &quot;32&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_NOTIFICATION_STATE_CHANGED'>/** Represents the event showing a {@link android.app.Notification}.
+</span>*/
+TYPE_NOTIFICATION_STATE_CHANGED : &quot;64&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_HOVER_ENTER'>/** Represents the event of a hover enter over a {@link android.view.View}.
+</span>*/
+TYPE_VIEW_HOVER_ENTER : &quot;128&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_HOVER_EXIT'>/** Represents the event of a hover exit over a {@link android.view.View}.
+</span>*/
+TYPE_VIEW_HOVER_EXIT : &quot;256&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_TOUCH_EXPLORATION_GESTURE_START'>/** Represents the event of starting a touch exploration gesture.
+</span>*/
+TYPE_TOUCH_EXPLORATION_GESTURE_START : &quot;512&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_TOUCH_EXPLORATION_GESTURE_END'>/** Represents the event of ending a touch exploration gesture.
+</span>*/
+TYPE_TOUCH_EXPLORATION_GESTURE_END : &quot;1024&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_WINDOW_CONTENT_CHANGED'>/** Represents the event of changing the content of a window and more
+</span> specifically the sub-tree rooted at the event's source.
+*/
+TYPE_WINDOW_CONTENT_CHANGED : &quot;2048&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_SCROLLED'>/** Represents the event of scrolling a view. This event type is generally not sent directly.
+</span> @see android.view.View#onScrollChanged(int, int, int, int)
+*/
+TYPE_VIEW_SCROLLED : &quot;4096&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_TEXT_SELECTION_CHANGED'>/** Represents the event of changing the selection in an {@link android.widget.EditText}.
+</span>*/
+TYPE_VIEW_TEXT_SELECTION_CHANGED : &quot;8192&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_ANNOUNCEMENT'>/** Represents the event of an application making an announcement.
+</span>*/
+TYPE_ANNOUNCEMENT : &quot;16384&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_ACCESSIBILITY_FOCUSED'>/** Represents the event of gaining accessibility focus.
+</span>*/
+TYPE_VIEW_ACCESSIBILITY_FOCUSED : &quot;32768&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED'>/** Represents the event of clearing accessibility focus.
+</span>*/
+TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED : &quot;65536&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY'>/** Represents the event of traversing the text of a view at a given movement granularity.
+</span>*/
+TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY : &quot;131072&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_GESTURE_DETECTION_START'>/** Represents the event of beginning gesture detection.
+</span>*/
+TYPE_GESTURE_DETECTION_START : &quot;262144&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_GESTURE_DETECTION_END'>/** Represents the event of ending gesture detection.
+</span>*/
+TYPE_GESTURE_DETECTION_END : &quot;524288&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_TOUCH_INTERACTION_START'>/** Represents the event of the user starting to touch the screen.
+</span>*/
+TYPE_TOUCH_INTERACTION_START : &quot;1048576&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_TOUCH_INTERACTION_END'>/** Represents the event of the user ending to touch the screen.
+</span>*/
+TYPE_TOUCH_INTERACTION_END : &quot;2097152&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_WINDOWS_CHANGED'>/** Represents the event change in the system windows shown on the screen. This event type should
+</span> only be dispatched by the system.
+*/
+TYPE_WINDOWS_CHANGED : &quot;4194304&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_VIEW_CONTEXT_CLICKED'>/** Represents the event of a context click on a {@link android.view.View}.
+</span>*/
+TYPE_VIEW_CONTEXT_CLICKED : &quot;8388608&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPE_ASSIST_READING_CONTEXT'>/** Represents the event of the assistant currently reading the users screen context.
+</span>*/
+TYPE_ASSIST_READING_CONTEXT : &quot;16777216&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CONTENT_CHANGE_TYPE_UNDEFINED'>/** Change type for {@link #TYPE_WINDOW_CONTENT_CHANGED} event:
+</span> The type of change is not defined.
+*/
+CONTENT_CHANGE_TYPE_UNDEFINED : &quot;0&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CONTENT_CHANGE_TYPE_SUBTREE'>/** Change type for {@link #TYPE_WINDOW_CONTENT_CHANGED} event:
+</span> One or more content changes occurred in the the subtree rooted at the source node,
+ or the subtree's structure changed when a node was added or removed.
+*/
+CONTENT_CHANGE_TYPE_SUBTREE : &quot;1&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CONTENT_CHANGE_TYPE_TEXT'>/** Change type for {@link #TYPE_WINDOW_CONTENT_CHANGED} event:
+</span> The node's text changed.
+*/
+CONTENT_CHANGE_TYPE_TEXT : &quot;2&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION'>/** Change type for {@link #TYPE_WINDOW_CONTENT_CHANGED} event:
+</span> The node's content description changed.
+*/
+CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION : &quot;4&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CONTENT_CHANGE_TYPE_PANE_TITLE'>/** Change type for {@link #TYPE_WINDOW_STATE_CHANGED} event:
+</span> The node's pane title changed.
+*/
+CONTENT_CHANGE_TYPE_PANE_TITLE : &quot;8&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CONTENT_CHANGE_TYPE_PANE_APPEARED'>/** Change type for {@link #TYPE_WINDOW_STATE_CHANGED} event:
+</span> The node has a pane title, and either just appeared or just was assigned a title when it
+ had none before.
+*/
+CONTENT_CHANGE_TYPE_PANE_APPEARED : &quot;16&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CONTENT_CHANGE_TYPE_PANE_DISAPPEARED'>/** Change type for {@link #TYPE_WINDOW_STATE_CHANGED} event:
+</span> Can mean one of two slightly different things. The primary meaning is that the node has
+ a pane title, and was removed from the node hierarchy. It will also be sent if the pane
+ title is set to {@code null} after it contained a title.
+ No source will be returned if the node is no longer on the screen. To make the change more
+ clear for the user, the first entry in {@link #getText}() will return the value that would
+ have been returned by {@code getSource().getPaneTitle()}.
+*/
+CONTENT_CHANGE_TYPE_PANE_DISAPPEARED : &quot;32&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_ADDED'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window was added.
+*/
+WINDOWS_CHANGE_ADDED : &quot;1&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_REMOVED'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> A window was removed.
+*/
+WINDOWS_CHANGE_REMOVED : &quot;2&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_TITLE'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's title changed.
+*/
+WINDOWS_CHANGE_TITLE : &quot;4&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_BOUNDS'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's bounds changed.
+*/
+WINDOWS_CHANGE_BOUNDS : &quot;8&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_LAYER'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's layer changed.
+*/
+WINDOWS_CHANGE_LAYER : &quot;16&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_ACTIVE'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's {@link android.view.accessibility.AccessibilityWindowInfo#isActive()} changed.
+*/
+WINDOWS_CHANGE_ACTIVE : &quot;32&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_FOCUSED'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's {@link android.view.accessibility.AccessibilityWindowInfo#isFocused()} changed.
+*/
+WINDOWS_CHANGE_FOCUSED : &quot;64&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_ACCESSIBILITY_FOCUSED'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's {@link android.view.accessibility.AccessibilityWindowInfo#isAccessibilityFocused()} changed.
+*/
+WINDOWS_CHANGE_ACCESSIBILITY_FOCUSED : &quot;128&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_PARENT'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's parent changed.
+*/
+WINDOWS_CHANGE_PARENT : &quot;256&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_CHILDREN'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window's children changed.
+*/
+WINDOWS_CHANGE_CHILDREN : &quot;512&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-WINDOWS_CHANGE_PIP'>/** Change type for {@link #TYPE_WINDOWS_CHANGED} event:
+</span> The window either entered or exited picture-in-picture mode.
+*/
+WINDOWS_CHANGE_PIP : &quot;1024&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-TYPES_ALL_MASK'>/** Mask for {@link android.view.accessibility.AccessibilityEvent} all types.
+</span>
+ @see #TYPE_VIEW_CLICKED
+ @see #TYPE_VIEW_LONG_CLICKED
+ @see #TYPE_VIEW_SELECTED
+ @see #TYPE_VIEW_FOCUSED
+ @see #TYPE_VIEW_TEXT_CHANGED
+ @see #TYPE_WINDOW_STATE_CHANGED
+ @see #TYPE_NOTIFICATION_STATE_CHANGED
+ @see #TYPE_VIEW_HOVER_ENTER
+ @see #TYPE_VIEW_HOVER_EXIT
+ @see #TYPE_TOUCH_EXPLORATION_GESTURE_START
+ @see #TYPE_TOUCH_EXPLORATION_GESTURE_END
+ @see #TYPE_WINDOW_CONTENT_CHANGED
+ @see #TYPE_VIEW_SCROLLED
+ @see #TYPE_VIEW_TEXT_SELECTION_CHANGED
+ @see #TYPE_ANNOUNCEMENT
+ @see #TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY
+ @see #TYPE_GESTURE_DETECTION_START
+ @see #TYPE_GESTURE_DETECTION_END
+ @see #TYPE_TOUCH_INTERACTION_START
+ @see #TYPE_TOUCH_INTERACTION_END
+ @see #TYPE_WINDOWS_CHANGED
+ @see #TYPE_VIEW_CONTEXT_CLICKED
+*/
+TYPES_ALL_MASK : &quot;-1&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-originStackTrace'>/** The stack trace describing where this event originated from on the app side.
+</span> Only populated if {@link #DEBUG_ORIGIN} is enabled
+ Can be inspected(e.g. printed) from an
+ {@link android.accessibilityservice.AccessibilityService} to trace where particular events
+ are being dispatched from.
+
+ @hide
+*/
+originStackTrace : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-property-CREATOR'>/** @see Parcelable.Creator
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityEvent-method-setSealed'>/**Sets if this instance is sealed.
+</span>@param {Boolean} sealed Whether is sealed.
+@hide 
+*/
+setSealed : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getRecordCount'>/**Gets the number of records contained in the event.
+</span>@return {Number} The number of records.
+*/
+getRecordCount : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-appendRecord'>/**Appends an {@link android.view.accessibility.AccessibilityRecord} to the end of event records.
+</span>@param {Object {AccessibilityRecord}} record The record to append.
+@throws IllegalStateException If called from an AccessibilityService.
+*/
+appendRecord : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getRecord'>/**Gets the record at a given index.
+</span>@param {Number} index The index.
+@return {Object {android.view.accessibility.AccessibilityRecord}} The record at the specified index.
+*/
+getRecord : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getEventType'>/**Gets the event type.
+</span>@return {Number} The event type.
+*/
+getEventType : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getContentChangeTypes'>/**Gets the bit mask of change types signaled by a
+</span> {@link #TYPE_WINDOW_CONTENT_CHANGED} event or {@link #TYPE_WINDOW_STATE_CHANGED}. A single
+ event may represent multiple change types.
+@return {Number} The bit mask of change types. One or more of:
+         &lt;ul&gt;
+         &lt;li&gt;{@link #CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION}
+         &lt;li&gt;{@link #CONTENT_CHANGE_TYPE_SUBTREE}
+         &lt;li&gt;{@link #CONTENT_CHANGE_TYPE_TEXT}
+         &lt;li&gt;{@link #CONTENT_CHANGE_TYPE_PANE_TITLE}
+         &lt;li&gt;{@link #CONTENT_CHANGE_TYPE_UNDEFINED}
+         &lt;li&gt;{@link #CONTENT_CHANGE_TYPE_PANE_APPEARED}
+         &lt;li&gt;{@link #CONTENT_CHANGE_TYPE_PANE_DISAPPEARED}
+         &lt;/ul&gt;
+*/
+getContentChangeTypes : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-setContentChangeTypes'>/**Sets the bit mask of node tree changes signaled by an
+</span> {@link #TYPE_WINDOW_CONTENT_CHANGED} event.
+@param {Number} changeTypes The bit mask of change types.
+@throws IllegalStateException If called from an AccessibilityService.
+@see #getContentChangeTypes()
+*/
+setContentChangeTypes : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getWindowChanges'>/**Get the bit mask of change types signaled by a {@link #TYPE_WINDOWS_CHANGED} event. A
+</span> single event may represent multiple change types.
+@return {Number} The bit mask of change types.
+*/
+getWindowChanges : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-setWindowChanges'>/**
+</span>@hide 
+*/
+setWindowChanges : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-setEventType'>/**Sets the event type.
+</span>@param {Number} eventType The event type.
+@throws IllegalStateException If called from an AccessibilityService.
+*/
+setEventType : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getEventTime'>/**Gets the time in which this event was sent.
+</span>@return {Number} The event time.
+*/
+getEventTime : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-setEventTime'>/**Sets the time in which this event was sent.
+</span>@param {Number} eventTime The event time.
+@throws IllegalStateException If called from an AccessibilityService.
+*/
+setEventTime : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getPackageName'>/**Gets the package name of the source.
+</span>@return {Object {java.lang.CharSequence}} The package name.
+*/
+getPackageName : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-setPackageName'>/**Sets the package name of the source.
+</span>@param {Object {CharSequence}} packageName The package name.
+@throws IllegalStateException If called from an AccessibilityService.
+*/
+setPackageName : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-setMovementGranularity'>/**Sets the movement granularity that was traversed.
+</span>@param {Number} granularity The granularity.
+@throws IllegalStateException If called from an AccessibilityService.
+*/
+setMovementGranularity : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getMovementGranularity'>/**Gets the movement granularity that was traversed.
+</span>@return {Number} The granularity.
+*/
+getMovementGranularity : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-setAction'>/**Sets the performed action that triggered this event.
+</span> &lt;p&gt;
+ Valid actions are defined in {@link android.view.accessibility.AccessibilityNodeInfo}:
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ACCESSIBILITY_FOCUS}
+ &lt;li&gt;{@link android.view.accessibility.AccessibilityNodeInfo#ACTION_CLEAR_ACCESSIBILITY_FOCUS}
+ &lt;li&gt;{@link android.view.accessibility.AccessibilityNodeInfo#ACTION_CLEAR_FOCUS}
+ &lt;li&gt;{@link android.view.accessibility.AccessibilityNodeInfo#ACTION_CLEAR_SELECTION}
+ &lt;li&gt;{@link android.view.accessibility.AccessibilityNodeInfo#ACTION_CLICK}
+ &lt;li&gt;etc.
+ &lt;/ul&gt;
+@param {Number} action The action.
+@throws IllegalStateException If called from an AccessibilityService.
+@see AccessibilityNodeInfo#performAction(int)
+*/
+setAction : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-getAction'>/**Gets the performed action that triggered this event.
+</span>@return {Number} The action.
+*/
+getAction : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-obtainWindowsChangedEvent'>/**Convenience method to obtain a {@link #TYPE_WINDOWS_CHANGED} event for a specific window and
+</span> change set.
+@param {Number} windowId The ID of the window that changed
+@param {Number} windowChangeTypes The changes to populate
+@return {Object {android.view.accessibility.AccessibilityEvent}} An instance of a TYPE_WINDOWS_CHANGED, populated with the requested fields and with
+         importantForAccessibility set to {@code true}.
+@hide 
+*/
+obtainWindowsChangedEvent : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-obtain'>/**Returns a cached instance if such is available or a new one is
+</span> instantiated with its type property set.
+@param {Number} eventType The event type.
+@return {Object {android.view.accessibility.AccessibilityEvent}} An instance.
+*/
+obtain : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-obtain'>/**Returns a cached instance if such is available or a new one is
+</span> created. The returned instance is initialized from the given
+ &lt;code&gt;event&lt;/code&gt;.
+@param {Object {AccessibilityEvent}} event The other event.
+@return {Object {android.view.accessibility.AccessibilityEvent}} An instance.
+*/
+obtain : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-obtain'>/**Returns a cached instance if such is available or a new one is
+</span> instantiated.
+@return {Object {android.view.accessibility.AccessibilityEvent}} An instance.
+*/
+obtain : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-recycle'>/**Recycles an instance back to be reused.
+</span> &lt;p&gt;
+   &lt;b&gt;Note: You must not touch the object after calling this function.&lt;/b&gt;
+ &lt;/p&gt;
+@throws IllegalStateException If the event is already recycled.
+*/
+recycle : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-initFromParcel'>/**Creates a new instance from a {@link Parcel}.
+</span>@param {Object {Parcel}} parcel A parcel containing the state of a {@link AccessibilityEvent}.
+*/
+initFromParcel : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-writeToParcel'>/**{@inheritDoc}
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-describeContents'>/**{@inheritDoc}
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityEvent-method-eventTypeToString'>/**Returns the string representation of an event type. For example,
+</span> {@link #TYPE_VIEW_CLICKED} is represented by the string TYPE_VIEW_CLICKED.
+@param {Number} eventType The event type
+@return {String} The string representation.
+*/
+eventTypeToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

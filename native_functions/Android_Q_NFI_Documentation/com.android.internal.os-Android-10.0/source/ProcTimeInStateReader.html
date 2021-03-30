@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-ProcTimeInStateReader'>/**@class com.android.internal.os.ProcTimeInStateReader
+</span>@extends java.lang.Object
+
+ Reads and parses {@code time_in_state} files in the {@code proc} filesystem.
+
+ Every line in a {@code time_in_state} file contains two numbers, separated by a single space
+ character. The first number is the frequency of the CPU used in kilohertz. The second number is
+ the time spent in this frequency. In the {@code time_in_state} file, this is given in 10s of
+ milliseconds, but this class returns in milliseconds. This can be per user, process, or thread
+ depending on which {@code time_in_state} file is used.
+
+ For example, a {@code time_in_state} file would look like this:
+ &lt;pre&gt;
+   300000 3
+   364800 0
+   ...
+   1824000 0
+   1900800 1
+ &lt;/pre&gt;
+
+ This file would indicate that the CPU has spent 30 milliseconds at frequency 300,000KHz (300Mhz)
+ and 10 milliseconds at frequency 1,900,800KHz (1.9GHz).
+
+ &lt;p&gt;This class will also read {@code time_in_state} files with headers, such as:
+ &lt;pre&gt;
+   cpu0
+   300000 3
+   364800 0
+   ...
+   cpu4
+   300000 1
+   364800 4
+ &lt;/pre&gt;
+*/
+var ProcTimeInStateReader = {
+
+<span id='com-android-internal-os-ProcTimeInStateReader-method-getUsageTimesMillis'>/**Read the CPU usages from a file
+</span>@param {Object {Path}} timeInStatePath path where the CPU usages are read from
+@return {Number} list of CPU usage times from the file. These correspond to the CPU frequencies given
+ by {@link ProcTimeInStateReader#getFrequenciesKhz}
+*/
+getUsageTimesMillis : function(  ) {},
+
+<span id='com-android-internal-os-ProcTimeInStateReader-method-getFrequenciesKhz'>/**Get the frequencies found in each {@code time_in_state} file
+</span>@return {Number} list of CPU frequencies. These correspond to the CPU times given by {@link
+ ProcTimeInStateReader#getUsageTimesMillis(Path)}()}.
+*/
+getFrequenciesKhz : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

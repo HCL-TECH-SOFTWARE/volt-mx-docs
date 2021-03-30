@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-TypedProperties'>/**@class com.android.internal.util.TypedProperties
+</span>@extends java.util.HashMap
+
+ A {@code Map} that publishes a set of typed properties, defined by
+ zero or more {@code Reader}s containing textual definitions and assignments.
+*/
+var TypedProperties = {
+
+<span id='com-android-internal-util-TypedProperties-property-STRING_TYPE_MISMATCH'>/***/
+</span>STRING_TYPE_MISMATCH : &quot;-2&quot;,
+<span id='com-android-internal-util-TypedProperties-property-STRING_NOT_SET'>/***/
+</span>STRING_NOT_SET : &quot;-1&quot;,
+<span id='com-android-internal-util-TypedProperties-property-STRING_NULL'>/***/
+</span>STRING_NULL : &quot;0&quot;,
+<span id='com-android-internal-util-TypedProperties-property-STRING_SET'>/***/
+</span>STRING_SET : &quot;1&quot;,
+<span id='com-android-internal-util-TypedProperties-method-load'>/**Loads zero or more properties from the specified Reader.
+</span> Properties that have already been loaded are preserved unless
+ the new Reader overrides or unsets earlier values for the
+ same properties.
+ &lt;p&gt;
+ File syntax:
+ &lt;blockquote&gt;
+     &lt;tt&gt;
+     &amp;lt;type&amp;gt; &amp;lt;property-name&amp;gt; = &amp;lt;value&amp;gt; ;
+     &lt;br /&gt;
+     unset ( &amp;lt;property-name&amp;gt; ) ;
+     &lt;/tt&gt;
+     &lt;p&gt;
+     &quot;//&quot; comments everything until the end of the line.
+     &quot;/&amp;#2a;&quot; comments everything until the next appearance of &quot;&amp;#2a;/&quot;.
+     &lt;p&gt;
+     Blank lines are ignored.
+     &lt;p&gt;
+     The only required whitespace is between the type and
+     the property name.
+     &lt;p&gt;
+     &amp;lt;type&amp;gt; is one of {boolean, byte, short, int, long,
+     float, double, String}, and is case-sensitive.
+     &lt;p&gt;
+     &amp;lt;property-name&amp;gt; is a valid fully-qualified class name
+     (one or more valid identifiers separated by dot characters).
+     &lt;p&gt;
+     &amp;lt;value&amp;gt; depends on the type:
+     &lt;ul&gt;
+     &lt;li&gt; boolean: one of {true, false} (case-sensitive)
+     &lt;li&gt; byte, short, int, long: a valid Java integer constant
+          (including non-base-10 constants like 0xabc and 074)
+          whose value does not overflow the type.  NOTE: these are
+          interpreted as Java integer values, so they are all signed.
+     &lt;li&gt; float, double: a valid Java floating-point constant.
+          If the type is float, the value must fit in 32 bits.
+     &lt;li&gt; String: a double-quoted string value, or the word {@code null}.
+          NOTE: the contents of the string must be 7-bit clean ASCII;
+          C-style octal escapes are recognized, but Unicode escapes are not.
+     &lt;/ul&gt;
+     &lt;p&gt;
+     Passing a property-name to {@code unset()} will unset the property,
+     removing its value and type information, as if it had never been
+     defined.
+ &lt;/blockquote&gt;
+@param {Object {Reader}} r The Reader to load properties from
+@throws IOException if an error occurs when reading the data
+@throws IllegalArgumentException if the data is malformed
+*/
+load : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-get'>/**
+</span>*/
+get : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getBoolean'>/**Returns the value of a boolean property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {Boolean} def The default value to return if the property is not set
+@return {Boolean} the value of the property
+@throws TypeException if the property is set and is not a boolean
+*/
+getBoolean : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getByte'>/**Returns the value of a byte property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {Number} def The default value to return if the property is not set
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a byte
+*/
+getByte : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getShort'>/**Returns the value of a short property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {Number} def The default value to return if the property is not set
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a short
+*/
+getShort : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getInt'>/**Returns the value of an integer property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {Number} def The default value to return if the property is not set
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not an integer
+*/
+getInt : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getLong'>/**Returns the value of a long property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {Number} def The default value to return if the property is not set
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a long
+*/
+getLong : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getFloat'>/**Returns the value of a float property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {Number} def The default value to return if the property is not set
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a float
+*/
+getFloat : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getDouble'>/**Returns the value of a double property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {Number} def The default value to return if the property is not set
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a double
+*/
+getDouble : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getString'>/**Returns the value of a string property, or the default if the property
+</span> has not been defined.
+@param {String} property The name of the property to return
+@param {String} def The default value to return if the property is not set
+@return {String} the value of the property
+@throws TypeException if the property is set and is not a string
+*/
+getString : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getBoolean'>/**Returns the value of a boolean property, or false
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {Boolean} the value of the property
+@throws TypeException if the property is set and is not a boolean
+*/
+getBoolean : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getByte'>/**Returns the value of a byte property, or 0
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a byte
+*/
+getByte : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getShort'>/**Returns the value of a short property, or 0
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a short
+*/
+getShort : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getInt'>/**Returns the value of an integer property, or 0
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not an integer
+*/
+getInt : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getLong'>/**Returns the value of a long property, or 0
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a long
+*/
+getLong : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getFloat'>/**Returns the value of a float property, or 0.0
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a float
+*/
+getFloat : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getDouble'>/**Returns the value of a double property, or 0.0
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {Number} the value of the property
+@throws TypeException if the property is set and is not a double
+*/
+getDouble : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getString'>/**Returns the value of a String property, or &quot;&quot;
+</span> if the property has not been defined.
+@param {String} property The name of the property to return
+@return {String} the value of the property
+@throws TypeException if the property is set and is not a string
+*/
+getString : function(  ) {},
+
+<span id='com-android-internal-util-TypedProperties-method-getStringInfo'>/**Provides string type information about a property.
+</span>@param {String} property the property to check
+@return {Number} STRING_SET if the property is a string and is non-null.
+         STRING_NULL if the property is a string and is null.
+         STRING_NOT_SET if the property is not set (no type or value).
+         STRING_TYPE_MISMATCH if the property is set but is not a string.
+*/
+getStringInfo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

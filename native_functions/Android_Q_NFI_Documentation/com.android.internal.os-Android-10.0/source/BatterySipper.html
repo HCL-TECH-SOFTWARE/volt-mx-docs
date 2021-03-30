@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-BatterySipper'>/**@class com.android.internal.os.BatterySipper
+</span> implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ Contains power usage of an application, system service, or hardware type.
+*/
+var BatterySipper = {
+
+<span id='com-android-internal-os-BatterySipper-property-userId'>/***/
+</span>userId : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-uidObj'>/***/
+</span>uidObj : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-drainType'>/***/
+</span>drainType : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-screenPowerMah'>/** Smeared power from screen usage.
+</span> We split the screen usage power and smear them among apps, based on activity time.
+*/
+screenPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-proportionalSmearMah'>/** Smeared power using proportional method.
+</span>
+ we smear power usage from hidden sippers to all apps proportionally.(except for screen usage)
+
+ @see BatteryStatsHelper#shouldHideSipper(BatterySipper)
+ @see BatteryStatsHelper#removeHiddenBatterySippers(List)
+*/
+proportionalSmearMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-totalSmearedPowerMah'>/** Total power that adding the smeared power.
+</span>
+ @see #sumPower()
+*/
+totalSmearedPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-totalPowerMah'>/** Total power before smearing
+</span>*/
+totalPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-shouldHide'>/** Whether we should hide this sipper
+</span>
+ @see BatteryStatsHelper#shouldHideSipper(BatterySipper)
+*/
+shouldHide : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-usageTimeMs'>/** Generic usage time in milliseconds.
+</span>*/
+usageTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-usagePowerMah'>/** Generic power usage in mAh.
+</span>*/
+usagePowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-audioTimeMs'>/***/
+</span>audioTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-bluetoothRunningTimeMs'>/***/
+</span>bluetoothRunningTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-cameraTimeMs'>/***/
+</span>cameraTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-cpuFgTimeMs'>/***/
+</span>cpuFgTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-cpuTimeMs'>/***/
+</span>cpuTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-flashlightTimeMs'>/***/
+</span>flashlightTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-gpsTimeMs'>/***/
+</span>gpsTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-videoTimeMs'>/***/
+</span>videoTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wakeLockTimeMs'>/***/
+</span>wakeLockTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wifiRunningTimeMs'>/***/
+</span>wifiRunningTimeMs : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobileRxPackets'>/***/
+</span>mobileRxPackets : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobileTxPackets'>/***/
+</span>mobileTxPackets : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobileActive'>/***/
+</span>mobileActive : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobileActiveCount'>/***/
+</span>mobileActiveCount : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobilemspp'>/***/
+</span>mobilemspp : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wifiRxPackets'>/***/
+</span>wifiRxPackets : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wifiTxPackets'>/***/
+</span>wifiTxPackets : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobileRxBytes'>/***/
+</span>mobileRxBytes : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobileTxBytes'>/***/
+</span>mobileTxBytes : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wifiRxBytes'>/***/
+</span>wifiRxBytes : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wifiTxBytes'>/***/
+</span>wifiTxBytes : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-btRxBytes'>/***/
+</span>btRxBytes : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-btTxBytes'>/***/
+</span>btTxBytes : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-percent'>/***/
+</span>percent : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-noCoveragePercent'>/***/
+</span>noCoveragePercent : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mPackages'>/***/
+</span>mPackages : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-packageWithHighestDrain'>/***/
+</span>packageWithHighestDrain : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-audioPowerMah'>/***/
+</span>audioPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-bluetoothPowerMah'>/***/
+</span>bluetoothPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-cameraPowerMah'>/***/
+</span>cameraPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-cpuPowerMah'>/***/
+</span>cpuPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-flashlightPowerMah'>/***/
+</span>flashlightPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-gpsPowerMah'>/***/
+</span>gpsPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-mobileRadioPowerMah'>/***/
+</span>mobileRadioPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-sensorPowerMah'>/***/
+</span>sensorPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-videoPowerMah'>/***/
+</span>videoPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wakeLockPowerMah'>/***/
+</span>wakeLockPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-property-wifiPowerMah'>/***/
+</span>wifiPowerMah : &quot;null&quot;,
+<span id='com-android-internal-os-BatterySipper-method-computeMobilemspp'>/**
+</span>*/
+computeMobilemspp : function(  ) {},
+
+<span id='com-android-internal-os-BatterySipper-method-compareTo'>/**
+</span>*/
+compareTo : function(  ) {},
+
+<span id='com-android-internal-os-BatterySipper-method-getPackages'>/**Gets a list of packages associated with the current user
+</span>*/
+getPackages : function(  ) {},
+
+<span id='com-android-internal-os-BatterySipper-method-getUid'>/**
+</span>*/
+getUid : function(  ) {},
+
+<span id='com-android-internal-os-BatterySipper-method-add'>/**Add stats from other to this BatterySipper.
+</span>*/
+add : function(  ) {},
+
+<span id='com-android-internal-os-BatterySipper-method-sumPower'>/**Sum all the powers and store the value into `value`.
+</span> Also sum the {@code smearedTotalPowerMah} by adding smeared powerMah.
+@return {Number} the sum of all the power in this BatterySipper.
+*/
+sumPower : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

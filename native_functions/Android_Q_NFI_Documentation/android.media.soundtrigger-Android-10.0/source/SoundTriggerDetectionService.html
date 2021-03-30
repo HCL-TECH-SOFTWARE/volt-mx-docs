@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-soundtrigger-SoundTriggerDetectionService'>/**@class android.media.soundtrigger.SoundTriggerDetectionService
+</span>@extends android.app.Service
+
+ A service that allows interaction with the actual sound trigger detection on the system.
+
+ &lt;p&gt; Sound trigger detection refers to detectors that match generic sound patterns that are
+ not voice-based. The voice-based recognition models should utilize the {@link android.service.voice.VoiceInteractionService} instead. Access to this class needs to be
+ protected by the {@value android.Manifest.permission.BIND_SOUND_TRIGGER_DETECTION_SERVICE}
+ permission granted only to the system.
+
+ &lt;p&gt;This service has to be explicitly started by an app, the system does not scan for and start
+ these services.
+
+ &lt;p&gt;If an operation ({@link #onGenericRecognitionEvent}, {@link #onError},
+ {@link #onRecognitionPaused}, {@link #onRecognitionResumed}) is triggered the service is
+ considered as running in the foreground. Once the operation is processed the service should call
+ {@link #operationFinished(UUID, int)}. If this does not happen in
+ {@link android.media.soundtrigger.SoundTriggerManager#getDetectionServiceOperationsTimeout()} milliseconds
+ {@link #onStopOperation(UUID, Bundle, int)} is called and the service is unbound.
+
+ &lt;p&gt;The total amount of operations per day might be limited.
+
+ @hide
+*/
+var SoundTriggerDetectionService = {
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-onConnected'>/**The system has connected to this service for the recognition registered for the model
+</span> {@code uuid}.
+
+ &lt;p&gt; This is called before any operations are delivered.
+@param {Object {UUID}} uuid   The {@code uuid} of the model the recognitions is registered for
+@param {Object {Bundle}} params The {@code params} passed when the recognition was started
+*/
+onConnected : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-onDisconnected'>/**The system has disconnected from this service for the recognition registered for the model
+</span> {@code uuid}.
+
+ &lt;p&gt;Once this is called {@link #operationFinished} cannot be called anymore for
+ {@code uuid}.
+
+ &lt;p&gt; {@link #onConnected(UUID, Bundle)} is called before any further operations are delivered.
+@param {Object {UUID}} uuid   The {@code uuid} of the model the recognitions is registered for
+@param {Object {Bundle}} params The {@code params} passed when the recognition was started
+*/
+onDisconnected : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-onGenericRecognitionEvent'>/**A new generic sound trigger event has been detected.
+</span>@param {Object {UUID}} uuid   The {@code uuid} of the model the recognition is registered for
+@param {Object {Bundle}} params The {@code params} passed when the recognition was started
+@param {Number} opId The id of this operation. Once the operation is done, this service needs to call
+             {@link #operationFinished(UUID, int)}
+@param {Object {SoundTrigger.RecognitionEvent}} event The event that has been detected
+*/
+onGenericRecognitionEvent : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-onError'>/**A error has been detected.
+</span>@param {Object {UUID}} uuid   The {@code uuid} of the model the recognition is registered for
+@param {Object {Bundle}} params The {@code params} passed when the recognition was started
+@param {Number} opId The id of this operation. Once the operation is done, this service needs to call
+             {@link #operationFinished(UUID, int)}
+@param {Number} status The error code detected
+*/
+onError : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-onStopOperation'>/**An operation took too long and should be stopped.
+</span>@param {Object {UUID}} uuid   The {@code uuid} of the model the recognition is registered for
+@param {Object {Bundle}} params The {@code params} passed when the recognition was started
+@param {Number} opId The id of the operation that took too long
+*/
+onStopOperation : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-operationFinished'>/**Tell that the system that an operation has been fully processed.
+</span>@param {Object {UUID}} uuid The {@code uuid} of the model the recognition is registered for
+@param {Number} opId The id of the operation that is processed
+*/
+operationFinished : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-onBind'>/**
+</span>@hide 
+*/
+onBind : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerDetectionService-method-onUnbind'>/**
+</span>*/
+onUnbind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

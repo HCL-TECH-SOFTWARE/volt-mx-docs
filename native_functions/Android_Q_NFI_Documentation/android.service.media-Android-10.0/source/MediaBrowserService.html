@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-media-MediaBrowserService'>/**@class android.service.media.MediaBrowserService
+</span>@extends android.app.Service
+
+ Base class for media browser services.
+ &lt;p&gt;
+ Media browser services enable applications to browse media content provided by an application
+ and ask the application to start playing it. They may also be used to control content that
+ is already playing by way of a {@link MediaSession}.
+ &lt;/p&gt;
+
+ To extend this class, you must declare the service in your manifest file with
+ an intent filter with the {@link #SERVICE_INTERFACE} action.
+
+ For example:
+ &lt;/p&gt;&lt;pre&gt;
+ &amp;lt;service android:name=&quot;.MyMediaBrowserService&quot;
+          android:label=&quot;&amp;#64;string/service_name&quot; &gt;
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.media.browse.MediaBrowserService&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+ &amp;lt;/service&gt;
+ &lt;/pre&gt;
+
+*/
+var MediaBrowserService = {
+
+<span id='android-service-media-MediaBrowserService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.media.browse.MediaBrowserService&quot;,
+<span id='android-service-media-MediaBrowserService-property-KEY_MEDIA_ITEM'>/** A key for passing the MediaItem to the ResultReceiver in getItem.
+</span> @hide
+*/
+KEY_MEDIA_ITEM : &quot;media_item&quot;,
+<span id='android-service-media-MediaBrowserService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-onGetRoot'>/**Called to get the root information for browsing by a particular client.
+</span> &lt;p&gt;
+ The implementation should verify that the client package has permission
+ to access browse media information before returning the root id; it
+ should return null if the client is not allowed to access this
+ information.
+ &lt;/p&gt;
+@param {String} clientPackageName The package name of the application which is
+            requesting access to browse media.
+@param {Number} clientUid The uid of the application which is requesting access to
+            browse media.
+@param {Object {Bundle}} rootHints An optional bundle of service-specific arguments to send
+            to the media browser service when connecting and retrieving the
+            root id for browsing, or null if none. The contents of this
+            bundle may affect the information returned when browsing.
+@return {Object {android.service.media.MediaBrowserService.BrowserRoot}} The {@link BrowserRoot} for accessing this app's content or null.
+@see BrowserRoot#EXTRA_RECENT
+@see BrowserRoot#EXTRA_OFFLINE
+@see BrowserRoot#EXTRA_SUGGESTED
+*/
+onGetRoot : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-onLoadChildren'>/**Called to get information about the children of a media item.
+</span> &lt;p&gt;
+ Implementations must call {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result}
+ with the list of children. If loading the children will be an expensive
+ operation that should be performed on another thread,
+ {@link android.service.media.MediaBrowserService.Result#detach result.detach} may be called before returning from
+ this function, and then {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result}
+ called when the loading is complete.
+ &lt;/p&gt;&lt;p&gt;
+ In case the media item does not have any children, call {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result}
+ with an empty list. When the given {@code parentId} is invalid, implementations must
+ call {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result} with {@code null}, which will invoke
+ {@link MediaBrowser.SubscriptionCallback#onError}.
+ &lt;/p&gt;
+@param {String} parentId The id of the parent media item whose children are to be
+            queried.
+@param {Object {android.service.media.MediaBrowserService.Result}} result The Result to send the list of children to.
+*/
+onLoadChildren : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-onLoadChildren'>/**Called to get information about the children of a media item.
+</span> &lt;p&gt;
+ Implementations must call {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result}
+ with the list of children. If loading the children will be an expensive
+ operation that should be performed on another thread,
+ {@link android.service.media.MediaBrowserService.Result#detach result.detach} may be called before returning from
+ this function, and then {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result}
+ called when the loading is complete.
+ &lt;/p&gt;&lt;p&gt;
+ In case the media item does not have any children, call {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result}
+ with an empty list. When the given {@code parentId} is invalid, implementations must
+ call {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result} with {@code null}, which will invoke
+ {@link MediaBrowser.SubscriptionCallback#onError}.
+ &lt;/p&gt;
+@param {String} parentId The id of the parent media item whose children are to be
+            queried.
+@param {Object {android.service.media.MediaBrowserService.Result}} result The Result to send the list of children to.
+@param {Object {Bundle}} options The bundle of service-specific arguments sent from the media
+            browser. The information returned through the result should be
+            affected by the contents of this bundle.
+*/
+onLoadChildren : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-onLoadItem'>/**Called to get information about a specific media item.
+</span> &lt;p&gt;
+ Implementations must call {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result}. If
+ loading the item will be an expensive operation {@link android.service.media.MediaBrowserService.Result#detach
+ result.detach} may be called before returning from this function, and
+ then {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result} called when the item has
+ been loaded.
+ &lt;/p&gt;&lt;p&gt;
+ When the given {@code itemId} is invalid, implementations must call
+ {@link android.service.media.MediaBrowserService.Result#sendandroid.service.media.MediaBrowserService.Result result.sendandroid.service.media.MediaBrowserService.Result} with {@code null}.
+ &lt;/p&gt;&lt;p&gt;
+ The default implementation will invoke {@link MediaBrowser.ItemCallback#onError}.
+ &lt;/p&gt;
+@param {String} itemId The id for the specific
+            {@link android.media.browse.MediaBrowser.MediaItem}.
+@param {Object {android.service.media.MediaBrowserService.Result}} result The Result to send the item to.
+*/
+onLoadItem : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-setSessionToken'>/**Call to set the media session.
+</span> &lt;p&gt;
+ This should be called as soon as possible during the service's startup.
+ It may only be called once.
+@param {Object {MediaSession.Token}} token The token for the service's {@link MediaSession}.
+*/
+setSessionToken : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-getSessionToken'>/**Gets the session token, or null if it has not yet been created
+</span> or if it has been destroyed.
+*/
+getSessionToken : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-getBrowserRootHints'>/**Gets the root hints sent from the currently connected {@link MediaBrowser}.
+</span> The root hints are service-specific arguments included in an optional bundle sent to the
+ media browser service when connecting and retrieving the root id for browsing, or null if
+ none. The contents of this bundle may affect the information returned when browsing.
+@throws IllegalStateException If this method is called outside of {@link #onGetRoot} or
+             {@link #onLoadChildren} or {@link #onLoadItem}.
+@see MediaBrowserService.BrowserRoot#EXTRA_RECENT
+@see MediaBrowserService.BrowserRoot#EXTRA_OFFLINE
+@see MediaBrowserService.BrowserRoot#EXTRA_SUGGESTED
+*/
+getBrowserRootHints : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-getCurrentBrowserInfo'>/**Gets the browser information who sent the current request.
+</span>@throws IllegalStateException If this method is called outside of {@link #onGetRoot} or
+             {@link #onLoadChildren} or {@link #onLoadItem}.
+@see MediaSessionManager#isTrustedForMediaControl(RemoteUserInfo)
+*/
+getCurrentBrowserInfo : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-notifyChildrenChanged'>/**Notifies all connected media browsers that the children of
+</span> the specified parent id have changed in some way.
+ This will cause browsers to fetch subscribed content again.
+@param {String} parentId The id of the parent media item whose
+ children changed.
+*/
+notifyChildrenChanged : function(  ) {},
+
+<span id='android-service-media-MediaBrowserService-method-notifyChildrenChanged'>/**Notifies all connected media browsers that the children of
+</span> the specified parent id have changed in some way.
+ This will cause browsers to fetch subscribed content again.
+@param {String} parentId The id of the parent media item whose
+            children changed.
+@param {Object {Bundle}} options The bundle of service-specific arguments to send
+            to the media browser. The contents of this bundle may
+            contain the information about the change.
+*/
+notifyChildrenChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

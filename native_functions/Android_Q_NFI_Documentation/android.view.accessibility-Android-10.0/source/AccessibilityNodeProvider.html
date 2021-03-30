@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-accessibility-AccessibilityNodeProvider'>/**@class android.view.accessibility.AccessibilityNodeProvider
+</span>@extends java.lang.Object
+
+ This class is the contract a client should implement to enable support of a
+ virtual view hierarchy rooted at a given view for accessibility purposes. A virtual
+ view hierarchy is a tree of imaginary Views that is reported as a part of the view
+ hierarchy when an {@link AccessibilityService} explores the window content.
+ Since the virtual View tree does not exist this class is responsible for
+ managing the {@link android.view.accessibility.AccessibilityNodeInfo}s describing that tree to accessibility
+ services.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The main use case of these APIs is to enable a custom view that draws complex content,
+ for example a monthly calendar grid, to be presented as a tree of logical nodes,
+ for example month days each containing events, thus conveying its logical structure.
+ &lt;p&gt;
+ &lt;p&gt;
+ A typical use case is to override {@link View#getAccessibilityNodeProvider()} of the
+ View that is a root of a virtual View hierarchy to return an instance of this class.
+ In such a case this instance is responsible for managing {@link android.view.accessibility.AccessibilityNodeInfo}s
+ describing the virtual sub-tree rooted at the View including the one representing the
+ View itself. Similarly the returned instance is responsible for performing accessibility
+ actions on any virtual view or the root view itself. For example:
+ &lt;/p&gt;
+ &lt;pre&gt;
+     getAccessibilityNodeProvider(
+         if (mAccessibilityNodeProvider == null) {
+             mAccessibilityNodeProvider = new AccessibilityNodeProvider() {
+                 public boolean performAction(int action, int virtualDescendantId) {
+                     // Implementation.
+                     return false;
+                 }
+
+                 public List&lt;AccessibilityNodeInfo&gt; findAccessibilityNodeInfosByText(String text,
+                         int virtualDescendantId) {
+                     // Implementation.
+                     return null;
+                 }
+
+                 public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualDescendantId) {
+                     // Implementation.
+                     return null;
+                 }
+             });
+     return mAccessibilityNodeProvider;
+ &lt;/pre&gt;
+*/
+var AccessibilityNodeProvider = {
+
+<span id='android-view-accessibility-AccessibilityNodeProvider-property-HOST_VIEW_ID'>/** The virtual id for the hosting View.
+</span>*/
+HOST_VIEW_ID : &quot;-1&quot;,
+<span id='android-view-accessibility-AccessibilityNodeProvider-method-createAccessibilityNodeInfo'>/**Returns an {@link android.view.accessibility.AccessibilityNodeInfo} representing a virtual view,
+</span> such as a descendant of the host View, with the given &lt;code&gt;virtualViewId&lt;/code&gt;
+ or the host View itself if &lt;code&gt;virtualViewId&lt;/code&gt; equals to {@link #HOST_VIEW_ID}.
+ &lt;p&gt;
+ A virtual descendant is an imaginary View that is reported as a part of the view
+ hierarchy for accessibility purposes. This enables custom views that draw complex
+ content to report them selves as a tree of virtual views, thus conveying their
+ logical structure.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The implementer is responsible for obtaining an accessibility node info from the
+ pool of reusable instances and setting the desired properties of the node info
+ before returning it.
+ &lt;/p&gt;
+@param {Number} virtualViewId A client defined virtual view id.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} A populated {@link AccessibilityNodeInfo} for a virtual descendant or the
+     host View.
+@see View#createAccessibilityNodeInfo()
+@see AccessibilityNodeInfo
+*/
+createAccessibilityNodeInfo : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeProvider-method-addExtraDataToAccessibilityNodeInfo'>/**Adds extra data to an {@link android.view.accessibility.AccessibilityNodeInfo} based on an explicit request for the
+</span> additional data.
+ &lt;p&gt;
+ This method only needs to be implemented if a virtual view offers to provide additional
+ data.
+ &lt;/p&gt;
+@param {Number} virtualViewId The virtual view id used to create the node
+@param {Object {AccessibilityNodeInfo}} info The info to which to add the extra data
+@param {String} extraDataKey A key specifying the type of extra data to add to the info. The
+                     extra data should be added to the {@link Bundle} returned by
+                     the info's {@link AccessibilityNodeInfo#getExtras} method.
+@param {Object {Bundle}} arguments A {@link Bundle} holding any arguments relevant for this request.
+@see AccessibilityNodeInfo#setAvailableExtraData(List)
+*/
+addExtraDataToAccessibilityNodeInfo : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeProvider-method-performAction'>/**Performs an accessibility action on a virtual view, such as a descendant of the
+</span> host View, with the given &lt;code&gt;virtualViewId&lt;/code&gt; or the host View itself
+ if &lt;code&gt;virtualViewId&lt;/code&gt; equals to {@link #HOST_VIEW_ID}.
+@param {Number} virtualViewId A client defined virtual view id.
+@param {Number} action The action to perform.
+@param {Object {Bundle}} arguments Optional action arguments.
+@return {Boolean} True if the action was performed.
+@see View#performAccessibilityAction(int, Bundle)
+@see #createAccessibilityNodeInfo(int)
+@see AccessibilityNodeInfo
+*/
+performAction : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeProvider-method-findAccessibilityNodeInfosByText'>/**Finds {@link android.view.accessibility.AccessibilityNodeInfo}s by text. The match is case insensitive
+</span> containment. The search is relative to the virtual view, i.e. a descendant of the
+ host View, with the given &lt;code&gt;virtualViewId&lt;/code&gt; or the host View itself
+ &lt;code&gt;virtualViewId&lt;/code&gt; equals to {@link #HOST_VIEW_ID}.
+@param {String} virtualViewId A client defined virtual view id which defined
+     the root of the tree in which to perform the search.
+@param {Number} text The searched text.
+@return {Object {java.util.List}} A list of node info.
+@see #createAccessibilityNodeInfo(int)
+@see AccessibilityNodeInfo
+*/
+findAccessibilityNodeInfosByText : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeProvider-method-findFocus'>/**Find the virtual view, such as a descendant of the host View, that has the
+</span> specified focus type.
+@param {Number} focus The focus to find. One of
+            {@link AccessibilityNodeInfo#FOCUS_INPUT} or
+            {@link AccessibilityNodeInfo#FOCUS_ACCESSIBILITY}.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The node info of the focused view or null.
+@see AccessibilityNodeInfo#FOCUS_INPUT
+@see AccessibilityNodeInfo#FOCUS_ACCESSIBILITY
+*/
+findFocus : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-uicc-UiccController'>/**@class com.android.internal.telephony.uicc.UiccController
+</span>@extends android.os.Handler
+
+ This class is responsible for keeping all knowledge about
+ Universal Integrated Circuit Card (UICC), also know as SIM's,
+ in the system. It is also used as API to get appropriate
+ applications to pass them to phone and service trackers.
+
+ UiccController is created with the call to make() function.
+ UiccController is a singleton and make() must only be called once
+ and throws an exception if called multiple times.
+
+ Once created UiccController registers with RIL for &quot;on&quot; and &quot;unsol_sim_status_changed&quot;
+ notifications. When such notification arrives UiccController will call
+ getIccCardStatus (GET_SIM_STATUS). Based on the response of GET_SIM_STATUS
+ request appropriate tree of uicc objects will be created.
+
+ Following is class diagram for uicc classes:
+
+                       UiccController
+                            #
+                            |
+                        UiccSlot[]
+                            #
+                            |
+                        UiccCard
+                            #
+                            |
+                       UiccProfile
+                          #   #
+                          |   ------------------
+                    UiccCardApplication    CatService
+                      #            #
+                      |            |
+                 IccRecords    IccFileHandler
+                 ^ ^ ^           ^ ^ ^ ^ ^
+    SIMRecords---- | |           | | | | ---SIMFileHandler
+    RuimRecords----- |           | | | ----RuimFileHandler
+    IsimUiccRecords---           | | -----UsimFileHandler
+                                 | ------CsimFileHandler
+                                 ----IsimFileHandler
+
+ Legend: # stands for Composition
+         ^ stands for Generalization
+
+ See also {@link com.android.internal.telephony.IccCard}
+*/
+var UiccController = {
+
+<span id='com-android-internal-telephony-uicc-UiccController-property-INVALID_SLOT_ID'>/***/
+</span>INVALID_SLOT_ID : &quot;-1&quot;,
+<span id='com-android-internal-telephony-uicc-UiccController-property-APP_FAM_3GPP'>/***/
+</span>APP_FAM_3GPP : &quot;1&quot;,
+<span id='com-android-internal-telephony-uicc-UiccController-property-APP_FAM_3GPP2'>/***/
+</span>APP_FAM_3GPP2 : &quot;2&quot;,
+<span id='com-android-internal-telephony-uicc-UiccController-property-APP_FAM_IMS'>/***/
+</span>APP_FAM_IMS : &quot;3&quot;,
+<span id='com-android-internal-telephony-uicc-UiccController-property-mUiccSlots'>/***/
+</span>mUiccSlots : &quot;null&quot;,
+<span id='com-android-internal-telephony-uicc-UiccController-property-mContext'>/***/
+</span>mContext : &quot;null&quot;,
+<span id='com-android-internal-telephony-uicc-UiccController-method-make'>/**
+</span>*/
+make : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getPhoneIdFromSlotId'>/**Given the slot index, return the phone ID, or -1 if no phone is associated with the given
+</span> slot.
+@param {Number} slotId the slot index to check
+@return {Number} the associated phone ID or -1
+*/
+getPhoneIdFromSlotId : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getSlotIdFromPhoneId'>/**Return the physical slot id associated with the given phoneId, or INVALID_SLOT_ID.
+</span>@param {Number} phoneId the phoneId to check
+*/
+getSlotIdFromPhoneId : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccCard'>/**
+</span>*/
+getUiccCard : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccCardForSlot'>/**API to get UiccCard corresponding to given physical slot index
+</span>@param {Number} slotId index of physical slot on the device
+@return {Object {com.android.internal.telephony.uicc.UiccCard}} UiccCard object corresponting to given physical slot index; null if card is
+ absent
+*/
+getUiccCardForSlot : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccCardForPhone'>/**API to get UiccCard corresponding to given phone id
+</span>@return {Object {com.android.internal.telephony.uicc.UiccCard}} UiccCard object corresponding to given phone id; null if there is no card present for
+ the phone id
+*/
+getUiccCardForPhone : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccProfileForPhone'>/**API to get UiccProfile corresponding to given phone id
+</span>@return {Object {com.android.internal.telephony.uicc.UiccProfile}} UiccProfile object corresponding to given phone id; null if there is no card/profile
+ present for the phone id
+*/
+getUiccProfileForPhone : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccSlots'>/**API to get all the UICC slots.
+</span>@return {Object {com.android.internal.telephony.uicc.UiccSlot}} UiccSlots array.
+*/
+getUiccSlots : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-switchSlots'>/**Map logicalSlot to physicalSlot, and activate the physicalSlot if it is inactive.
+</span>*/
+switchSlots : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccSlot'>/**API to get UiccSlot object for a specific physical slot index on the device
+</span>@return {Object {com.android.internal.telephony.uicc.UiccSlot}} UiccSlot object for the given physical slot index
+*/
+getUiccSlot : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccSlotForPhone'>/**API to get UiccSlot object for a given phone id
+</span>@return {Object {com.android.internal.telephony.uicc.UiccSlot}} UiccSlot object for the given phone id
+*/
+getUiccSlotForPhone : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccSlotForCardId'>/**API to get UiccSlot object for a given cardId
+</span>@param {String} cardId Identifier for a SIM. This can be an ICCID, or an EID in case of an eSIM.
+@return {Number} int Index of UiccSlot for the given cardId if one is found, {@link #INVALID_SLOT_ID}
+ otherwise
+*/
+getUiccSlotForCardId : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getIccRecords'>/**
+</span>*/
+getIccRecords : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getIccFileHandler'>/**
+</span>*/
+getIccFileHandler : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-registerForIccChanged'>/**
+</span>*/
+registerForIccChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-unregisterForIccChanged'>/**
+</span>*/
+unregisterForIccChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-handleMessage'>/**
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getUiccCardApplication'>/**
+</span>*/
+getUiccCardApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-convertToPublicCardId'>/**Converts the card string (the ICCID/EID, formerly named card ID) to the public int cardId.
+</span> If the given cardString is an ICCID, trailing Fs will be automatically stripped before trying
+ to match to a card ID.
+@return {Number} the matching cardId, or UNINITIALIZED_CARD_ID if the card string does not map to a
+ currently loaded cardId, or UNSUPPORTED_CARD_ID if the device does not support card IDs
+*/
+convertToPublicCardId : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getAllUiccCardInfos'>/**Returns the UiccCardInfo of all currently inserted UICCs and embedded eUICCs.
+</span>*/
+getAllUiccCardInfos : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-getCardIdForDefaultEuicc'>/**Get the card ID of the default eUICC.
+</span>*/
+getCardIdForDefaultEuicc : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-isCdmaSupported'>/**static method to return whether CDMA is supported on the device
+</span>@param {Object {Context}} context object representative of the application that is calling this method
+@return {Boolean} true if CDMA is supported by the device
+*/
+isCdmaSupported : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-addCardLog'>/**
+</span>*/
+addCardLog : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-UiccController-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

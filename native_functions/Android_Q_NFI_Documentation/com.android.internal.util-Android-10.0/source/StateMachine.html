@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-StateMachine'>/**@class com.android.internal.util.StateMachine
+</span>@extends java.lang.Object
+
+ {@hide}
+
+ &lt;p&gt;The state machine defined here is a hierarchical state machine which processes messages
+ and can have states arranged hierarchically.&lt;/p&gt;
+
+ &lt;p&gt;A state is a &lt;code&gt;State&lt;/code&gt; object and must implement
+ &lt;code&gt;processMessage&lt;/code&gt; and optionally &lt;code&gt;enter/exit/getName&lt;/code&gt;.
+ The enter/exit methods are equivalent to the construction and destruction
+ in Object Oriented programming and are used to perform initialization and
+ cleanup of the state respectively. The &lt;code&gt;getName&lt;/code&gt; method returns the
+ name of the state; the default implementation returns the class name. It may be
+ desirable to have &lt;code&gt;getName&lt;/code&gt; return the the state instance name instead,
+ in particular if a particular state class has multiple instances.&lt;/p&gt;
+
+ &lt;p&gt;When a state machine is created, &lt;code&gt;addState&lt;/code&gt; is used to build the
+ hierarchy and &lt;code&gt;setInitialState&lt;/code&gt; is used to identify which of these
+ is the initial state. After construction the programmer calls &lt;code&gt;start&lt;/code&gt;
+ which initializes and starts the state machine. The first action the StateMachine
+ is to the invoke &lt;code&gt;enter&lt;/code&gt; for all of the initial state's hierarchy,
+ starting at its eldest parent. The calls to enter will be done in the context
+ of the StateMachine's Handler, not in the context of the call to start, and they
+ will be invoked before any messages are processed. For example, given the simple
+ state machine below, mP1.enter will be invoked and then mS1.enter. Finally,
+ messages sent to the state machine will be processed by the current state;
+ in our simple state machine below that would initially be mS1.processMessage.&lt;/p&gt;
+&lt;pre&gt;
+        mP1
+       /   \
+      mS2   mS1 ----&amp;gt; initial state
+&lt;/pre&gt;
+ &lt;p&gt;After the state machine is created and started, messages are sent to a state
+ machine using &lt;code&gt;sendMessage&lt;/code&gt; and the messages are created using
+ &lt;code&gt;obtainMessage&lt;/code&gt;. When the state machine receives a message the
+ current state's &lt;code&gt;processMessage&lt;/code&gt; is invoked. In the above example
+ mS1.processMessage will be invoked first. The state may use &lt;code&gt;transitionTo&lt;/code&gt;
+ to change the current state to a new state.&lt;/p&gt;
+
+ &lt;p&gt;Each state in the state machine may have a zero or one parent states. If
+ a child state is unable to handle a message it may have the message processed
+ by its parent by returning false or NOT_HANDLED. If a message is not handled by
+ a child state or any of its ancestors, &lt;code&gt;unhandledMessage&lt;/code&gt; will be invoked
+ to give one last chance for the state machine to process the message.&lt;/p&gt;
+
+ &lt;p&gt;When all processing is completed a state machine may choose to call
+ &lt;code&gt;transitionToHaltingState&lt;/code&gt;. When the current &lt;code&gt;processingMessage&lt;/code&gt;
+ returns the state machine will transfer to an internal &lt;code&gt;HaltingState&lt;/code&gt;
+ and invoke &lt;code&gt;halting&lt;/code&gt;. Any message subsequently received by the state
+ machine will cause &lt;code&gt;haltedProcessMessage&lt;/code&gt; to be invoked.&lt;/p&gt;
+
+ &lt;p&gt;If it is desirable to completely stop the state machine call &lt;code&gt;quit&lt;/code&gt; or
+ &lt;code&gt;quitNow&lt;/code&gt;. These will call &lt;code&gt;exit&lt;/code&gt; of the current state and its parents,
+ call &lt;code&gt;onQuitting&lt;/code&gt; and then exit Thread/Loopers.&lt;/p&gt;
+
+ &lt;p&gt;In addition to &lt;code&gt;processMessage&lt;/code&gt; each &lt;code&gt;State&lt;/code&gt; has
+ an &lt;code&gt;enter&lt;/code&gt; method and &lt;code&gt;exit&lt;/code&gt; method which may be overridden.&lt;/p&gt;
+
+ &lt;p&gt;Since the states are arranged in a hierarchy transitioning to a new state
+ causes current states to be exited and new states to be entered. To determine
+ the list of states to be entered/exited the common parent closest to
+ the current state is found. We then exit from the current state and its
+ parent's up to but not including the common parent state and then enter all
+ of the new states below the common parent down to the destination state.
+ If there is no common parent all states are exited and then the new states
+ are entered.&lt;/p&gt;
+
+ &lt;p&gt;Two other methods that states can use are &lt;code&gt;deferMessage&lt;/code&gt; and
+ &lt;code&gt;sendMessageAtFrontOfQueue&lt;/code&gt;. The &lt;code&gt;sendMessageAtFrontOfQueue&lt;/code&gt; sends
+ a message but places it on the front of the queue rather than the back. The
+ &lt;code&gt;deferMessage&lt;/code&gt; causes the message to be saved on a list until a
+ transition is made to a new state. At which time all of the deferred messages
+ will be put on the front of the state machine queue with the oldest message
+ at the front. These will then be processed by the new current state before
+ any other messages that are on the queue or might be added later. Both of
+ these are protected and may only be invoked from within a state machine.&lt;/p&gt;
+
+ &lt;p&gt;To illustrate some of these properties we'll use state machine with an 8
+ state hierarchy:&lt;/p&gt;
+&lt;pre&gt;
+          mP0
+         /   \
+        mP1   mS0
+       /   \
+      mS2   mS1
+     /  \    \
+    mS3  mS4  mS5  ---&amp;gt; initial state
+&lt;/pre&gt;
+ &lt;p&gt;After starting mS5 the list of active states is mP0, mP1, mS1 and mS5.
+ So the order of calling processMessage when a message is received is mS5,
+ mS1, mP1, mP0 assuming each processMessage indicates it can't handle this
+ message by returning false or NOT_HANDLED.&lt;/p&gt;
+
+ &lt;p&gt;Now assume mS5.processMessage receives a message it can handle, and during
+ the handling determines the machine should change states. It could call
+ transitionTo(mS4) and return true or HANDLED. Immediately after returning from
+ processMessage the state machine runtime will find the common parent,
+ which is mP1. It will then call mS5.exit, mS1.exit, mS2.enter and then
+ mS4.enter. The new list of active states is mP0, mP1, mS2 and mS4. So
+ when the next message is received mS4.processMessage will be invoked.&lt;/p&gt;
+
+ &lt;p&gt;Now for some concrete examples, here is the canonical HelloWorld as a state machine.
+ It responds with &quot;Hello World&quot; being printed to the log for every message.&lt;/p&gt;
+&lt;pre&gt;
+class HelloWorld extends StateMachine {
+    HelloWorld(String name) {
+        super(name);
+        addState(mState1);
+        setInitialState(mState1);
+    }
+
+    public static HelloWorld makeHelloWorld() {
+        HelloWorld hw = new HelloWorld(&quot;hw&quot;);
+        hw.start();
+        return hw;
+    }
+
+    class State1 extends State {
+        &amp;#64;Override public boolean processMessage(Message message) {
+            log(&quot;Hello World&quot;);
+            return HANDLED;
+        }
+    }
+    State1 mState1 = new State1();
+}
+
+void testHelloWorld() {
+    HelloWorld hw = makeHelloWorld();
+    hw.sendMessage(hw.obtainMessage());
+}
+&lt;/pre&gt;
+ &lt;p&gt;A more interesting state machine is one with four states
+ with two independent parent states.&lt;/p&gt;
+&lt;pre&gt;
+        mP1      mP2
+       /   \
+      mS2   mS1
+&lt;/pre&gt;
+ &lt;p&gt;Here is a description of this state machine using pseudo code.&lt;/p&gt;
+ &lt;pre&gt;
+state mP1 {
+     enter { log(&quot;mP1.enter&quot;); }
+     exit { log(&quot;mP1.exit&quot;);  }
+     on msg {
+         CMD_2 {
+             send(CMD_3);
+             defer(msg);
+             transitionTo(mS2);
+             return HANDLED;
+         }
+         return NOT_HANDLED;
+     }
+}
+
+INITIAL
+state mS1 parent mP1 {
+     enter { log(&quot;mS1.enter&quot;); }
+     exit  { log(&quot;mS1.exit&quot;);  }
+     on msg {
+         CMD_1 {
+             transitionTo(mS1);
+             return HANDLED;
+         }
+         return NOT_HANDLED;
+     }
+}
+
+state mS2 parent mP1 {
+     enter { log(&quot;mS2.enter&quot;); }
+     exit  { log(&quot;mS2.exit&quot;);  }
+     on msg {
+         CMD_2 {
+             send(CMD_4);
+             return HANDLED;
+         }
+         CMD_3 {
+             defer(msg);
+             transitionTo(mP2);
+             return HANDLED;
+         }
+         return NOT_HANDLED;
+     }
+}
+
+state mP2 {
+     enter {
+         log(&quot;mP2.enter&quot;);
+         send(CMD_5);
+     }
+     exit { log(&quot;mP2.exit&quot;); }
+     on msg {
+         CMD_3, CMD_4 { return HANDLED; }
+         CMD_5 {
+             transitionTo(HaltingState);
+             return HANDLED;
+         }
+         return NOT_HANDLED;
+     }
+}
+&lt;/pre&gt;
+ &lt;p&gt;The implementation is below and also in StateMachineTest:&lt;/p&gt;
+&lt;pre&gt;
+class Hsm1 extends StateMachine {
+    public static final int CMD_1 = 1;
+    public static final int CMD_2 = 2;
+    public static final int CMD_3 = 3;
+    public static final int CMD_4 = 4;
+    public static final int CMD_5 = 5;
+
+    public static Hsm1 makeHsm1() {
+        log(&quot;makeHsm1 E&quot;);
+        Hsm1 sm = new Hsm1(&quot;hsm1&quot;);
+        sm.start();
+        log(&quot;makeHsm1 X&quot;);
+        return sm;
+    }
+
+    Hsm1(String name) {
+        super(name);
+        log(&quot;ctor E&quot;);
+
+        // Add states, use indentation to show hierarchy
+        addState(mP1);
+            addState(mS1, mP1);
+            addState(mS2, mP1);
+        addState(mP2);
+
+        // Set the initial state
+        setInitialState(mS1);
+        log(&quot;ctor X&quot;);
+    }
+
+    class P1 extends State {
+        &amp;#64;Override public void enter() {
+            log(&quot;mP1.enter&quot;);
+        }
+        &amp;#64;Override public boolean processMessage(Message message) {
+            boolean retVal;
+            log(&quot;mP1.processMessage what=&quot; + message.what);
+            switch(message.what) {
+            case CMD_2:
+                // CMD_2 will arrive in mS2 before CMD_3
+                sendMessage(obtainMessage(CMD_3));
+                deferMessage(message);
+                transitionTo(mS2);
+                retVal = HANDLED;
+                break;
+            default:
+                // Any message we don't understand in this state invokes unhandledMessage
+                retVal = NOT_HANDLED;
+                break;
+            }
+            return retVal;
+        }
+        &amp;#64;Override public void exit() {
+            log(&quot;mP1.exit&quot;);
+        }
+    }
+
+    class S1 extends State {
+        &amp;#64;Override public void enter() {
+            log(&quot;mS1.enter&quot;);
+        }
+        &amp;#64;Override public boolean processMessage(Message message) {
+            log(&quot;S1.processMessage what=&quot; + message.what);
+            if (message.what == CMD_1) {
+                // Transition to ourself to show that enter/exit is called
+                transitionTo(mS1);
+                return HANDLED;
+            } else {
+                // Let parent process all other messages
+                return NOT_HANDLED;
+            }
+        }
+        &amp;#64;Override public void exit() {
+            log(&quot;mS1.exit&quot;);
+        }
+    }
+
+    class S2 extends State {
+        &amp;#64;Override public void enter() {
+            log(&quot;mS2.enter&quot;);
+        }
+        &amp;#64;Override public boolean processMessage(Message message) {
+            boolean retVal;
+            log(&quot;mS2.processMessage what=&quot; + message.what);
+            switch(message.what) {
+            case(CMD_2):
+                sendMessage(obtainMessage(CMD_4));
+                retVal = HANDLED;
+                break;
+            case(CMD_3):
+                deferMessage(message);
+                transitionTo(mP2);
+                retVal = HANDLED;
+                break;
+            default:
+                retVal = NOT_HANDLED;
+                break;
+            }
+            return retVal;
+        }
+        &amp;#64;Override public void exit() {
+            log(&quot;mS2.exit&quot;);
+        }
+    }
+
+    class P2 extends State {
+        &amp;#64;Override public void enter() {
+            log(&quot;mP2.enter&quot;);
+            sendMessage(obtainMessage(CMD_5));
+        }
+        &amp;#64;Override public boolean processMessage(Message message) {
+            log(&quot;P2.processMessage what=&quot; + message.what);
+            switch(message.what) {
+            case(CMD_3):
+                break;
+            case(CMD_4):
+                break;
+            case(CMD_5):
+                transitionToHaltingState();
+                break;
+            }
+            return HANDLED;
+        }
+        &amp;#64;Override public void exit() {
+            log(&quot;mP2.exit&quot;);
+        }
+    }
+
+    &amp;#64;Override
+    void onHalting() {
+        log(&quot;halting&quot;);
+        synchronized (this) {
+            this.notifyAll();
+        }
+    }
+
+    P1 mP1 = new P1();
+    S1 mS1 = new S1();
+    S2 mS2 = new S2();
+    P2 mP2 = new P2();
+}
+&lt;/pre&gt;
+ &lt;p&gt;If this is executed by sending two messages CMD_1 and CMD_2
+ (Note the synchronize is only needed because we use hsm.wait())&lt;/p&gt;
+&lt;pre&gt;
+Hsm1 hsm = makeHsm1();
+synchronize(hsm) {
+     hsm.sendMessage(obtainMessage(hsm.CMD_1));
+     hsm.sendMessage(obtainMessage(hsm.CMD_2));
+     try {
+          // wait for the messages to be handled
+          hsm.wait();
+     } catch (InterruptedException e) {
+          loge(&quot;exception while waiting &quot; + e.getMessage());
+     }
+}
+&lt;/pre&gt;
+ &lt;p&gt;The output is:&lt;/p&gt;
+&lt;pre&gt;
+D/hsm1    ( 1999): makeHsm1 E
+D/hsm1    ( 1999): ctor E
+D/hsm1    ( 1999): ctor X
+D/hsm1    ( 1999): mP1.enter
+D/hsm1    ( 1999): mS1.enter
+D/hsm1    ( 1999): makeHsm1 X
+D/hsm1    ( 1999): mS1.processMessage what=1
+D/hsm1    ( 1999): mS1.exit
+D/hsm1    ( 1999): mS1.enter
+D/hsm1    ( 1999): mS1.processMessage what=2
+D/hsm1    ( 1999): mP1.processMessage what=2
+D/hsm1    ( 1999): mS1.exit
+D/hsm1    ( 1999): mS2.enter
+D/hsm1    ( 1999): mS2.processMessage what=2
+D/hsm1    ( 1999): mS2.processMessage what=3
+D/hsm1    ( 1999): mS2.exit
+D/hsm1    ( 1999): mP1.exit
+D/hsm1    ( 1999): mP2.enter
+D/hsm1    ( 1999): mP2.processMessage what=3
+D/hsm1    ( 1999): mP2.processMessage what=4
+D/hsm1    ( 1999): mP2.processMessage what=5
+D/hsm1    ( 1999): mP2.exit
+D/hsm1    ( 1999): halting
+&lt;/pre&gt;
+*/
+var StateMachine = {
+
+<span id='com-android-internal-util-StateMachine-property-HANDLED'>/** Convenience constant that maybe returned by processMessage
+</span> to indicate the the message was processed and is not to be
+ processed by parent states
+*/
+HANDLED : &quot;true&quot;,
+<span id='com-android-internal-util-StateMachine-property-NOT_HANDLED'>/** Convenience constant that maybe returned by processMessage
+</span> to indicate the the message was NOT processed and is to be
+ processed by parent states
+*/
+NOT_HANDLED : &quot;false&quot;,
+<span id='com-android-internal-util-StateMachine-method-addState'>/**Add a new state to the state machine
+</span>@param {Object {State}} state the state to add
+@param {Object {State}} parent the parent of state
+*/
+addState : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-addState'>/**Add a new state to the state machine, parent will be null
+</span>@param {Object {State}} state to add
+*/
+addState : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-removeState'>/**Removes a state from the state machine, unless it is currently active or if it has children.
+</span>@param {Object {State}} state state to remove
+*/
+removeState : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-setInitialState'>/**Set the initial state. This must be invoked before
+</span> and messages are sent to the state machine.
+@param {Object {State}} initialState is the state which will receive the first message.
+*/
+setInitialState : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getCurrentMessage'>/**
+</span>@return {Object {android.os.Message}} current message
+*/
+getCurrentMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getCurrentState'>/**
+</span>@return {Object {com.android.internal.util.IState}} current state
+*/
+getCurrentState : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-transitionTo'>/**transition to destination state. Upon returning
+</span> from processMessage the current state's exit will
+ be executed and upon the next message arriving
+ destState.enter will be invoked.
+
+ this function can also be called inside the enter function of the
+ previous transition target, but the behavior is undefined when it is
+ called mid-way through a previous transition (for example, calling this
+ in the enter() routine of a intermediate node when the current transition
+ target is one of the nodes descendants).
+@param {Object {IState}} destState will be the state that receives the next message.
+*/
+transitionTo : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-transitionToHaltingState'>/**transition to halt state. Upon returning
+</span> from processMessage we will exit all current
+ states, execute the onHalting() method and then
+ for all subsequent messages haltedProcessMessage
+ will be called.
+*/
+transitionToHaltingState : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-deferMessage'>/**Defer this message until next state transition.
+</span> Upon transitioning all deferred messages will be
+ placed on the queue and reprocessed in the original
+ order. (i.e. The next state the oldest messages will
+ be processed first)
+@param {Object {Message}} msg is deferred until the next transition.
+*/
+deferMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getName'>/**
+</span>@return {String} the name
+*/
+getName : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-setLogRecSize'>/**Set number of log records to maintain and clears all current records.
+</span>@param {Number} maxSize number of messages to maintain at anyone time.
+*/
+setLogRecSize : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-setLogOnlyTransitions'>/**Set to log only messages that cause a state transition
+</span>@param {Boolean} enable {@code true} to enable, {@code false} to disable
+*/
+setLogOnlyTransitions : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getLogRecSize'>/**
+</span>@return {Number} the number of log records currently readable
+*/
+getLogRecSize : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getLogRecMaxSize'>/**
+</span>@return {Number} the number of log records we can store
+*/
+getLogRecMaxSize : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getLogRecCount'>/**
+</span>@return {Number} the total number of records processed
+*/
+getLogRecCount : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getLogRec'>/**
+</span>@return {Object {com.android.internal.util.StateMachine.LogRec}} a log record, or null if index is out of range
+*/
+getLogRec : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-copyLogRecs'>/**
+</span>@return {Object {java.util.Collection}} a copy of LogRecs as a collection
+*/
+copyLogRecs : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-addLogRec'>/**Add the string to LogRecords.
+</span>@param {String} string
+*/
+addLogRec : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-getHandler'>/**
+</span>@return {Object {android.os.Handler}} Handler, maybe null if state machine has quit.
+*/
+getHandler : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-obtainMessage'>/**Get a message and set Message.target state machine handler.
+</span>
+ Note: The handler can be null if the state machine has quit,
+ which means target will be null and may cause a AndroidRuntimeException
+ in MessageQueue#enqueMessage if sent directly or if sent using
+ StateMachine#sendMessage the message will just be ignored.
+@return {Object {android.os.Message}} A Message object from the global pool
+*/
+obtainMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-obtainMessage'>/**Get a message and set Message.target state machine handler, what.
+</span>
+ Note: The handler can be null if the state machine has quit,
+ which means target will be null and may cause a AndroidRuntimeException
+ in MessageQueue#enqueMessage if sent directly or if sent using
+ StateMachine#sendMessage the message will just be ignored.
+@param {Number} what is the assigned to Message.what.
+@return {Object {android.os.Message}} A Message object from the global pool
+*/
+obtainMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-obtainMessage'>/**Get a message and set Message.target state machine handler,
+</span> what and obj.
+
+ Note: The handler can be null if the state machine has quit,
+ which means target will be null and may cause a AndroidRuntimeException
+ in MessageQueue#enqueMessage if sent directly or if sent using
+ StateMachine#sendMessage the message will just be ignored.
+@param {Number} what is the assigned to Message.what.
+@param {Object {Object}} obj is assigned to Message.obj.
+@return {Object {android.os.Message}} A Message object from the global pool
+*/
+obtainMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-obtainMessage'>/**Get a message and set Message.target state machine handler,
+</span> what, arg1 and arg2
+
+ Note: The handler can be null if the state machine has quit,
+ which means target will be null and may cause a AndroidRuntimeException
+ in MessageQueue#enqueMessage if sent directly or if sent using
+ StateMachine#sendMessage the message will just be ignored.
+@param {Number} what  is assigned to Message.what
+@param {Number} arg1  is assigned to Message.arg1
+@return {Object {android.os.Message}} A Message object from the global pool
+*/
+obtainMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-obtainMessage'>/**Get a message and set Message.target state machine handler,
+</span> what, arg1 and arg2
+
+ Note: The handler can be null if the state machine has quit,
+ which means target will be null and may cause a AndroidRuntimeException
+ in MessageQueue#enqueMessage if sent directly or if sent using
+ StateMachine#sendMessage the message will just be ignored.
+@param {Number} what  is assigned to Message.what
+@param {Number} arg1  is assigned to Message.arg1
+@param {Number} arg2  is assigned to Message.arg2
+@return {Object {android.os.Message}} A Message object from the global pool
+*/
+obtainMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-obtainMessage'>/**Get a message and set Message.target state machine handler,
+</span> what, arg1, arg2 and obj
+
+ Note: The handler can be null if the state machine has quit,
+ which means target will be null and may cause a AndroidRuntimeException
+ in MessageQueue#enqueMessage if sent directly or if sent using
+ StateMachine#sendMessage the message will just be ignored.
+@param {Number} what  is assigned to Message.what
+@param {Number} arg1  is assigned to Message.arg1
+@param {Number} arg2  is assigned to Message.arg2
+@param {Object {Object}} obj is assigned to Message.obj
+@return {Object {android.os.Message}} A Message object from the global pool
+*/
+obtainMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessage'>/**Enqueue a message to this state machine.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessage'>/**Enqueue a message to this state machine.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessage'>/**Enqueue a message to this state machine.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessage'>/**Enqueue a message to this state machine.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessage'>/**Enqueue a message to this state machine.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessage'>/**Enqueue a message to this state machine.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessageDelayed'>/**Enqueue a message to this state machine after a delay.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessageDelayed : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessageDelayed'>/**Enqueue a message to this state machine after a delay.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessageDelayed : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessageDelayed'>/**Enqueue a message to this state machine after a delay.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessageDelayed : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessageDelayed'>/**Enqueue a message to this state machine after a delay.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessageDelayed : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessageDelayed'>/**Enqueue a message to this state machine after a delay.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessageDelayed : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-sendMessageDelayed'>/**Enqueue a message to this state machine after a delay.
+</span>
+ Message is ignored if state machine has quit.
+*/
+sendMessageDelayed : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-quit'>/**Quit the state machine after all currently queued up messages are processed.
+</span>*/
+quit : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-quitNow'>/**Quit the state machine immediately all currently queued messages will be discarded.
+</span>*/
+quitNow : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-isDbg'>/**
+</span>@return {Boolean} if debugging is enabled
+*/
+isDbg : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-setDbg'>/**Set debug enable/disabled.
+</span>@param {Boolean} dbg is true to enable debugging.
+*/
+setDbg : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-start'>/**Start the state machine.
+</span>*/
+start : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-dump'>/**Dump the current state.
+</span>@param {Object {FileDescriptor}} fd
+@param {Object {PrintWriter}} pw
+@param {Object {java.lang.String[]}} args
+*/
+dump : function(  ) {},
+
+<span id='com-android-internal-util-StateMachine-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

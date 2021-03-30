@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-CrossProcessCursor'>/**@class android.database.CrossProcessCursor
+</span> implements android.database.Cursor
+
+ A cross process cursor is an extension of a {@link android.database.Cursor} that also supports
+ usage from remote processes.
+ &lt;p&gt;
+ The contents of a cross process cursor are marshalled to the remote process by
+ filling {@link android.database.CursorWindow} objects using {@link #fillWindow}.  As an optimization,
+ the cursor can provide a pre-filled window to use via {@link #getWindow} thereby
+ obviating the need to copy the data to yet another cursor window.
+*/
+var CrossProcessCursor = {
+
+<span id='android-database-CrossProcessCursor-method-getWindow'>/**Returns a pre-filled window that contains the data within this cursor.
+</span> &lt;p&gt;
+ In particular, the window contains the row indicated by {@link android.database.Cursor#getPosition}.
+ The window's contents are automatically scrolled whenever the current
+ row moved outside the range covered by the window.
+ &lt;/p&gt;
+@return {Object {android.database.CursorWindow}} The pre-filled window, or null if none.
+*/
+getWindow : function(  ) {},
+
+<span id='android-database-CrossProcessCursor-method-fillWindow'>/**Copies cursor data into the window.
+</span> &lt;p&gt;
+ Clears the window and fills it with data beginning at the requested
+ row position until all of the data in the cursor is exhausted
+ or the window runs out of space.
+ &lt;/p&gt;&lt;p&gt;
+ The filled window uses the same row indices as the original cursor.
+ For example, if you fill a window starting from row 5 from the cursor,
+ you can query the contents of row 5 from the window just by asking it
+ for row 5 because there is a direct correspondence between the row indices
+ used by the cursor and the window.
+ &lt;/p&gt;&lt;p&gt;
+ The current position of the cursor, as returned by {@link #getPosition},
+ is not changed by this method.
+ &lt;/p&gt;
+@param {Number} position The zero-based index of the first row to copy into the window.
+@param {Object {CursorWindow}} window The window to fill.
+*/
+fillWindow : function(  ) {},
+
+<span id='android-database-CrossProcessCursor-method-onMove'>/**This function is called every time the cursor is successfully scrolled
+</span> to a new position, giving the subclass a chance to update any state it
+ may have.  If it returns false the move function will also do so and the
+ cursor will scroll to the beforeFirst position.
+ &lt;p&gt;
+ This function should be called by methods such as {@link #moveToPosition}(int),
+ so it will typically not be called from outside of the cursor class itself.
+ &lt;/p&gt;
+@param {Number} oldPosition The position that we're moving from.
+@param {Number} newPosition The position that we're moving to.
+@return {Boolean} True if the move is successful, false otherwise.
+*/
+onMove : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

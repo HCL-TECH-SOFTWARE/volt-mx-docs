@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-gallery3d-exif-ExifInterface'>/**@class com.android.gallery3d.exif.ExifInterface
+</span>@extends java.lang.Object
+
+ This class provides methods and constants for reading and writing jpeg file
+ metadata. It contains a collection of ExifTags, and a collection of
+ definitions for creating valid ExifTags. The collection of ExifTags can be
+ updated by: reading new ones from a file, deleting or adding existing ones,
+ or building new ExifTags from a tag definition. These ExifTags can be written
+ to a valid jpeg image as exif metadata.
+ &lt;p&gt;
+ Each ExifTag has a tag ID (TID) and is stored in a specific image file
+ directory (IFD) as specified by the exif standard. A tag definition can be
+ looked up with a constant that is a combination of TID and IFD. This
+ definition has information about the type, number of components, and valid
+ IFDs for a tag.
+
+ @see ExifTag
+*/
+var ExifInterface = {
+
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_NULL'>/***/
+</span>TAG_NULL : &quot;-1&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-IFD_NULL'>/***/
+</span>IFD_NULL : &quot;-1&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-DEFINITION_NULL'>/***/
+</span>DEFINITION_NULL : &quot;0&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_IMAGE_WIDTH'>/** Tag constants for Jeita EXIF 2.2
+</span>*/
+TAG_IMAGE_WIDTH : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_IMAGE_LENGTH'>/***/
+</span>TAG_IMAGE_LENGTH : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_BITS_PER_SAMPLE'>/***/
+</span>TAG_BITS_PER_SAMPLE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_COMPRESSION'>/***/
+</span>TAG_COMPRESSION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_PHOTOMETRIC_INTERPRETATION'>/***/
+</span>TAG_PHOTOMETRIC_INTERPRETATION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_IMAGE_DESCRIPTION'>/***/
+</span>TAG_IMAGE_DESCRIPTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_MAKE'>/***/
+</span>TAG_MAKE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_MODEL'>/***/
+</span>TAG_MODEL : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_STRIP_OFFSETS'>/***/
+</span>TAG_STRIP_OFFSETS : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_ORIENTATION'>/***/
+</span>TAG_ORIENTATION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SAMPLES_PER_PIXEL'>/***/
+</span>TAG_SAMPLES_PER_PIXEL : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_ROWS_PER_STRIP'>/***/
+</span>TAG_ROWS_PER_STRIP : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_STRIP_BYTE_COUNTS'>/***/
+</span>TAG_STRIP_BYTE_COUNTS : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_X_RESOLUTION'>/***/
+</span>TAG_X_RESOLUTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_Y_RESOLUTION'>/***/
+</span>TAG_Y_RESOLUTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_PLANAR_CONFIGURATION'>/***/
+</span>TAG_PLANAR_CONFIGURATION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_RESOLUTION_UNIT'>/***/
+</span>TAG_RESOLUTION_UNIT : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_TRANSFER_FUNCTION'>/***/
+</span>TAG_TRANSFER_FUNCTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SOFTWARE'>/***/
+</span>TAG_SOFTWARE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_DATE_TIME'>/***/
+</span>TAG_DATE_TIME : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_ARTIST'>/***/
+</span>TAG_ARTIST : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_WHITE_POINT'>/***/
+</span>TAG_WHITE_POINT : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_PRIMARY_CHROMATICITIES'>/***/
+</span>TAG_PRIMARY_CHROMATICITIES : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_Y_CB_CR_COEFFICIENTS'>/***/
+</span>TAG_Y_CB_CR_COEFFICIENTS : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_Y_CB_CR_SUB_SAMPLING'>/***/
+</span>TAG_Y_CB_CR_SUB_SAMPLING : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_Y_CB_CR_POSITIONING'>/***/
+</span>TAG_Y_CB_CR_POSITIONING : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_REFERENCE_BLACK_WHITE'>/***/
+</span>TAG_REFERENCE_BLACK_WHITE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_COPYRIGHT'>/***/
+</span>TAG_COPYRIGHT : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_EXIF_IFD'>/***/
+</span>TAG_EXIF_IFD : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_IFD'>/***/
+</span>TAG_GPS_IFD : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_JPEG_INTERCHANGE_FORMAT'>/***/
+</span>TAG_JPEG_INTERCHANGE_FORMAT : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_JPEG_INTERCHANGE_FORMAT_LENGTH'>/***/
+</span>TAG_JPEG_INTERCHANGE_FORMAT_LENGTH : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_EXPOSURE_TIME'>/***/
+</span>TAG_EXPOSURE_TIME : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_F_NUMBER'>/***/
+</span>TAG_F_NUMBER : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_EXPOSURE_PROGRAM'>/***/
+</span>TAG_EXPOSURE_PROGRAM : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SPECTRAL_SENSITIVITY'>/***/
+</span>TAG_SPECTRAL_SENSITIVITY : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_ISO_SPEED_RATINGS'>/***/
+</span>TAG_ISO_SPEED_RATINGS : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_OECF'>/***/
+</span>TAG_OECF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_EXIF_VERSION'>/***/
+</span>TAG_EXIF_VERSION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_DATE_TIME_ORIGINAL'>/***/
+</span>TAG_DATE_TIME_ORIGINAL : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_DATE_TIME_DIGITIZED'>/***/
+</span>TAG_DATE_TIME_DIGITIZED : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_COMPONENTS_CONFIGURATION'>/***/
+</span>TAG_COMPONENTS_CONFIGURATION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_COMPRESSED_BITS_PER_PIXEL'>/***/
+</span>TAG_COMPRESSED_BITS_PER_PIXEL : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SHUTTER_SPEED_VALUE'>/***/
+</span>TAG_SHUTTER_SPEED_VALUE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_APERTURE_VALUE'>/***/
+</span>TAG_APERTURE_VALUE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_BRIGHTNESS_VALUE'>/***/
+</span>TAG_BRIGHTNESS_VALUE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_EXPOSURE_BIAS_VALUE'>/***/
+</span>TAG_EXPOSURE_BIAS_VALUE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_MAX_APERTURE_VALUE'>/***/
+</span>TAG_MAX_APERTURE_VALUE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SUBJECT_DISTANCE'>/***/
+</span>TAG_SUBJECT_DISTANCE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_METERING_MODE'>/***/
+</span>TAG_METERING_MODE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_LIGHT_SOURCE'>/***/
+</span>TAG_LIGHT_SOURCE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FLASH'>/***/
+</span>TAG_FLASH : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FOCAL_LENGTH'>/***/
+</span>TAG_FOCAL_LENGTH : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SUBJECT_AREA'>/***/
+</span>TAG_SUBJECT_AREA : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_MAKER_NOTE'>/***/
+</span>TAG_MAKER_NOTE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_USER_COMMENT'>/***/
+</span>TAG_USER_COMMENT : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SUB_SEC_TIME'>/***/
+</span>TAG_SUB_SEC_TIME : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SUB_SEC_TIME_ORIGINAL'>/***/
+</span>TAG_SUB_SEC_TIME_ORIGINAL : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SUB_SEC_TIME_DIGITIZED'>/***/
+</span>TAG_SUB_SEC_TIME_DIGITIZED : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FLASHPIX_VERSION'>/***/
+</span>TAG_FLASHPIX_VERSION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_COLOR_SPACE'>/***/
+</span>TAG_COLOR_SPACE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_PIXEL_X_DIMENSION'>/***/
+</span>TAG_PIXEL_X_DIMENSION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_PIXEL_Y_DIMENSION'>/***/
+</span>TAG_PIXEL_Y_DIMENSION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_RELATED_SOUND_FILE'>/***/
+</span>TAG_RELATED_SOUND_FILE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_INTEROPERABILITY_IFD'>/***/
+</span>TAG_INTEROPERABILITY_IFD : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FLASH_ENERGY'>/***/
+</span>TAG_FLASH_ENERGY : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SPATIAL_FREQUENCY_RESPONSE'>/***/
+</span>TAG_SPATIAL_FREQUENCY_RESPONSE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FOCAL_PLANE_X_RESOLUTION'>/***/
+</span>TAG_FOCAL_PLANE_X_RESOLUTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FOCAL_PLANE_Y_RESOLUTION'>/***/
+</span>TAG_FOCAL_PLANE_Y_RESOLUTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FOCAL_PLANE_RESOLUTION_UNIT'>/***/
+</span>TAG_FOCAL_PLANE_RESOLUTION_UNIT : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SUBJECT_LOCATION'>/***/
+</span>TAG_SUBJECT_LOCATION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_EXPOSURE_INDEX'>/***/
+</span>TAG_EXPOSURE_INDEX : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SENSING_METHOD'>/***/
+</span>TAG_SENSING_METHOD : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FILE_SOURCE'>/***/
+</span>TAG_FILE_SOURCE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SCENE_TYPE'>/***/
+</span>TAG_SCENE_TYPE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_CFA_PATTERN'>/***/
+</span>TAG_CFA_PATTERN : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_CUSTOM_RENDERED'>/***/
+</span>TAG_CUSTOM_RENDERED : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_EXPOSURE_MODE'>/***/
+</span>TAG_EXPOSURE_MODE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_WHITE_BALANCE'>/***/
+</span>TAG_WHITE_BALANCE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_DIGITAL_ZOOM_RATIO'>/***/
+</span>TAG_DIGITAL_ZOOM_RATIO : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_FOCAL_LENGTH_IN_35_MM_FILE'>/***/
+</span>TAG_FOCAL_LENGTH_IN_35_MM_FILE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SCENE_CAPTURE_TYPE'>/***/
+</span>TAG_SCENE_CAPTURE_TYPE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GAIN_CONTROL'>/***/
+</span>TAG_GAIN_CONTROL : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_CONTRAST'>/***/
+</span>TAG_CONTRAST : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SATURATION'>/***/
+</span>TAG_SATURATION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SHARPNESS'>/***/
+</span>TAG_SHARPNESS : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_DEVICE_SETTING_DESCRIPTION'>/***/
+</span>TAG_DEVICE_SETTING_DESCRIPTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_SUBJECT_DISTANCE_RANGE'>/***/
+</span>TAG_SUBJECT_DISTANCE_RANGE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_IMAGE_UNIQUE_ID'>/***/
+</span>TAG_IMAGE_UNIQUE_ID : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_VERSION_ID'>/***/
+</span>TAG_GPS_VERSION_ID : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_LATITUDE_REF'>/***/
+</span>TAG_GPS_LATITUDE_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_LATITUDE'>/***/
+</span>TAG_GPS_LATITUDE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_LONGITUDE_REF'>/***/
+</span>TAG_GPS_LONGITUDE_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_LONGITUDE'>/***/
+</span>TAG_GPS_LONGITUDE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_ALTITUDE_REF'>/***/
+</span>TAG_GPS_ALTITUDE_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_ALTITUDE'>/***/
+</span>TAG_GPS_ALTITUDE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_TIME_STAMP'>/***/
+</span>TAG_GPS_TIME_STAMP : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_SATTELLITES'>/***/
+</span>TAG_GPS_SATTELLITES : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_STATUS'>/***/
+</span>TAG_GPS_STATUS : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_MEASURE_MODE'>/***/
+</span>TAG_GPS_MEASURE_MODE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DOP'>/***/
+</span>TAG_GPS_DOP : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_SPEED_REF'>/***/
+</span>TAG_GPS_SPEED_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_SPEED'>/***/
+</span>TAG_GPS_SPEED : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_TRACK_REF'>/***/
+</span>TAG_GPS_TRACK_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_TRACK'>/***/
+</span>TAG_GPS_TRACK : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_IMG_DIRECTION_REF'>/***/
+</span>TAG_GPS_IMG_DIRECTION_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_IMG_DIRECTION'>/***/
+</span>TAG_GPS_IMG_DIRECTION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_MAP_DATUM'>/***/
+</span>TAG_GPS_MAP_DATUM : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_LATITUDE_REF'>/***/
+</span>TAG_GPS_DEST_LATITUDE_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_LATITUDE'>/***/
+</span>TAG_GPS_DEST_LATITUDE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_LONGITUDE_REF'>/***/
+</span>TAG_GPS_DEST_LONGITUDE_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_LONGITUDE'>/***/
+</span>TAG_GPS_DEST_LONGITUDE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_BEARING_REF'>/***/
+</span>TAG_GPS_DEST_BEARING_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_BEARING'>/***/
+</span>TAG_GPS_DEST_BEARING : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_DISTANCE_REF'>/***/
+</span>TAG_GPS_DEST_DISTANCE_REF : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DEST_DISTANCE'>/***/
+</span>TAG_GPS_DEST_DISTANCE : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_PROCESSING_METHOD'>/***/
+</span>TAG_GPS_PROCESSING_METHOD : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_AREA_INFORMATION'>/***/
+</span>TAG_GPS_AREA_INFORMATION : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DATE_STAMP'>/***/
+</span>TAG_GPS_DATE_STAMP : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_GPS_DIFFERENTIAL'>/***/
+</span>TAG_GPS_DIFFERENTIAL : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-TAG_INTEROPERABILITY_INDEX'>/***/
+</span>TAG_INTEROPERABILITY_INDEX : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-property-DEFAULT_BYTE_ORDER'>/***/
+</span>DEFAULT_BYTE_ORDER : &quot;null&quot;,
+<span id='com-android-gallery3d-exif-ExifInterface-method-defineTag'>/**Returns the constant representing a tag with a given TID and default IFD.
+</span>*/
+defineTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTrueTagKey'>/**Returns the TID for a tag constant.
+</span>*/
+getTrueTagKey : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTrueIfd'>/**Returns the default IFD for a tag constant.
+</span>*/
+getTrueIfd : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-readExif'>/**Reads the exif tags from a byte array, clearing this ExifInterface
+</span> object's existing exif tags.
+@param {Object {byte[]}} jpeg a byte array containing a jpeg compressed image.
+@throws IOException
+*/
+readExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-readExif'>/**Reads the exif tags from an InputStream, clearing this ExifInterface
+</span> object's existing exif tags.
+@param {Object {InputStream}} inStream an InputStream containing a jpeg compressed image.
+@throws IOException
+*/
+readExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-readExif'>/**Reads the exif tags from a file, clearing this ExifInterface object's
+</span> existing exif tags.
+@param {String} inFileName a string representing the filepath to jpeg file.
+@throws FileNotFoundException
+@throws IOException
+*/
+readExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setExif'>/**Sets the exif tags, clearing this ExifInterface object's existing exif
+</span> tags.
+@param {Object {java.util.Collection}} tags a collection of exif tags to set.
+*/
+setExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-clearExif'>/**Clears this ExifInterface object's existing exif tags.
+</span>*/
+clearExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-writeExif'>/**Writes the tags from this ExifInterface object into a jpeg image,
+</span> removing prior exif tags.
+@param {Object {byte[]}} jpeg a byte array containing a jpeg compressed image.
+@param {Object {OutputStream}} exifOutStream an OutputStream to which the jpeg image with added
+            exif tags will be written.
+@throws IOException
+*/
+writeExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-writeExif'>/**Writes the tags from this ExifInterface object into a jpeg compressed
+</span> bitmap, removing prior exif tags.
+@param {Object {Bitmap}} bmap a bitmap to compress and write exif into.
+@param {Object {OutputStream}} exifOutStream the OutputStream to which the jpeg image with added
+            exif tags will be written.
+@throws IOException
+*/
+writeExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-writeExif'>/**Writes the tags from this ExifInterface object into a jpeg stream,
+</span> removing prior exif tags.
+@param {Object {InputStream}} jpegStream an InputStream containing a jpeg compressed image.
+@param {Object {OutputStream}} exifOutStream an OutputStream to which the jpeg image with added
+            exif tags will be written.
+@throws IOException
+*/
+writeExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-writeExif'>/**Writes the tags from this ExifInterface object into a jpeg image,
+</span> removing prior exif tags.
+@param {Object {byte[]}} jpeg a byte array containing a jpeg compressed image.
+@param {String} exifOutFileName a String containing the filepath to which the jpeg
+            image with added exif tags will be written.
+@throws FileNotFoundException
+@throws IOException
+*/
+writeExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-writeExif'>/**Writes the tags from this ExifInterface object into a jpeg compressed
+</span> bitmap, removing prior exif tags.
+@param {Object {Bitmap}} bmap a bitmap to compress and write exif into.
+@param {String} exifOutFileName a String containing the filepath to which the jpeg
+            image with added exif tags will be written.
+@throws FileNotFoundException
+@throws IOException
+*/
+writeExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-writeExif'>/**Writes the tags from this ExifInterface object into a jpeg stream,
+</span> removing prior exif tags.
+@param {Object {InputStream}} jpegStream an InputStream containing a jpeg compressed image.
+@param {String} exifOutFileName a String containing the filepath to which the jpeg
+            image with added exif tags will be written.
+@throws FileNotFoundException
+@throws IOException
+*/
+writeExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-writeExif'>/**Writes the tags from this ExifInterface object into a jpeg file, removing
+</span> prior exif tags.
+@param {String} jpegFileName a String containing the filepath for a jpeg file.
+@param {String} exifOutFileName a String containing the filepath to which the jpeg
+            image with added exif tags will be written.
+@throws FileNotFoundException
+@throws IOException
+*/
+writeExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getExifWriterStream'>/**Wraps an OutputStream object with an ExifOutputStream. Exif tags in this
+</span> ExifInterface object will be added to a jpeg image written to this
+ stream, removing prior exif tags. Other methods of this ExifInterface
+ object should not be called until the returned OutputStream has been
+ closed.
+@param {Object {OutputStream}} outStream an OutputStream to wrap.
+@return {Object {java.io.OutputStream}} an OutputStream that wraps the outStream parameter, and adds exif
+         metadata. A jpeg image should be written to this stream.
+*/
+getExifWriterStream : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getExifWriterStream'>/**Returns an OutputStream object that writes to a file. Exif tags in this
+</span> ExifInterface object will be added to a jpeg image written to this
+ stream, removing prior exif tags. Other methods of this ExifInterface
+ object should not be called until the returned OutputStream has been
+ closed.
+@param {String} exifOutFileName an String containing a filepath for a jpeg file.
+@return {Object {java.io.OutputStream}} an OutputStream that writes to the exifOutFileName file, and adds
+         exif metadata. A jpeg image should be written to this stream.
+@throws FileNotFoundException
+*/
+getExifWriterStream : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-rewriteExif'>/**Attempts to do an in-place rewrite the exif metadata in a file for the
+</span> given tags. If tags do not exist or do not have the same size as the
+ existing exif tags, this method will fail.
+@param {String} filename a String containing a filepath for a jpeg file with exif
+            tags to rewrite.
+@param {Object {java.util.Collection}} tags tags that will be written into the jpeg file over existing
+            tags if possible.
+@return {Boolean} true if success, false if could not overwrite. If false, no
+         changes are made to the file.
+@throws FileNotFoundException
+@throws IOException
+*/
+rewriteExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-rewriteExif'>/**Attempts to do an in-place rewrite the exif metadata in a ByteBuffer for
+</span> the given tags. If tags do not exist or do not have the same size as the
+ existing exif tags, this method will fail.
+@param {Object {ByteBuffer}} buf a ByteBuffer containing a jpeg file with existing exif tags to
+            rewrite.
+@param {Object {java.util.Collection}} tags tags that will be written into the jpeg ByteBuffer over
+            existing tags if possible.
+@return {Boolean} true if success, false if could not overwrite. If false, no
+         changes are made to the ByteBuffer.
+@throws IOException
+*/
+rewriteExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-forceRewriteExif'>/**Attempts to do an in-place rewrite of the exif metadata. If this fails,
+</span> fall back to overwriting file. This preserves tags that are not being
+ rewritten.
+@param {String} filename a String containing a filepath for a jpeg file.
+@param {Object {java.util.Collection}} tags tags that will be written into the jpeg file over existing
+            tags if possible.
+@throws FileNotFoundException
+@throws IOException
+@see #rewriteExif
+*/
+forceRewriteExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-forceRewriteExif'>/**Attempts to do an in-place rewrite of the exif metadata using the tags in
+</span> this ExifInterface object. If this fails, fall back to overwriting file.
+ This preserves tags that are not being rewritten.
+@param {String} filename a String containing a filepath for a jpeg file.
+@throws FileNotFoundException
+@throws IOException
+@see #rewriteExif
+*/
+forceRewriteExif : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getAllTags'>/**Get the exif tags in this ExifInterface object or null if none exist.
+</span>@return {Object {java.util.List}} a List of {@link ExifTag}s.
+*/
+getAllTags : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagsForTagId'>/**Returns a list of ExifTags that share a TID (which can be obtained by
+</span> calling {@link #getTrueTagKey} on a defined tag constant) or null if none
+ exist.
+@param {Number} tagId a TID as defined in the exif standard (or with
+            {@link #defineTag}).
+@return {Object {java.util.List}} a List of {@link ExifTag}s.
+*/
+getTagsForTagId : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagsForIfdId'>/**Returns a list of ExifTags that share an IFD (which can be obtained by
+</span> calling {@link #getTrueIFD} on a defined tag constant) or null if none
+ exist.
+@param {Number} ifdId an IFD as defined in the exif standard (or with
+            {@link #defineTag}).
+@return {Object {java.util.List}} a List of {@link ExifTag}s.
+*/
+getTagsForIfdId : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTag'>/**Gets an ExifTag for an IFD other than the tag's default.
+</span>@see #getTag
+*/
+getTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTag'>/**Returns the ExifTag in that tag's default IFD for a defined tag constant
+</span> or null if none exists.
+@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@return {Object {com.android.gallery3d.exif.ExifTag}} an {@link ExifTag} or null if none exists.
+*/
+getTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagValue'>/**Gets a tag value for an IFD other than the tag's default.
+</span>@see #getTagValue
+*/
+getTagValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagValue'>/**Returns the value of the ExifTag in that tag's default IFD for a defined
+</span> tag constant or null if none exists or the value could not be cast into
+ the return type.
+@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@return {Object {java.lang.Object}} the value of the ExifTag or null if none exists.
+*/
+getTagValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagStringValue'>/**
+</span>@see #getTagValue
+*/
+getTagStringValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagStringValue'>/**
+</span>@see #getTagValue
+*/
+getTagStringValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagLongValue'>/**
+</span>@see #getTagValue
+*/
+getTagLongValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagLongValue'>/**
+</span>@see #getTagValue
+*/
+getTagLongValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagIntValue'>/**
+</span>@see #getTagValue
+*/
+getTagIntValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagIntValue'>/**
+</span>@see #getTagValue
+*/
+getTagIntValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagByteValue'>/**
+</span>@see #getTagValue
+*/
+getTagByteValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagByteValue'>/**
+</span>@see #getTagValue
+*/
+getTagByteValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagRationalValue'>/**
+</span>@see #getTagValue
+*/
+getTagRationalValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagRationalValue'>/**
+</span>@see #getTagValue
+*/
+getTagRationalValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagLongValues'>/**
+</span>@see #getTagValue
+*/
+getTagLongValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagLongValues'>/**
+</span>@see #getTagValue
+*/
+getTagLongValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagIntValues'>/**
+</span>@see #getTagValue
+*/
+getTagIntValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagIntValues'>/**
+</span>@see #getTagValue
+*/
+getTagIntValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagByteValues'>/**
+</span>@see #getTagValue
+*/
+getTagByteValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagByteValues'>/**
+</span>@see #getTagValue
+*/
+getTagByteValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagRationalValues'>/**
+</span>@see #getTagValue
+*/
+getTagRationalValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getTagRationalValues'>/**
+</span>@see #getTagValue
+*/
+getTagRationalValues : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-isTagCountDefined'>/**Checks whether a tag has a defined number of elements.
+</span>@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@return {Boolean} true if the tag has a defined number of elements.
+*/
+isTagCountDefined : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getDefinedTagCount'>/**Gets the defined number of elements for a tag.
+</span>@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@return {Number} the number of elements or {@link ExifTag#SIZE_UNDEFINED} if the
+         tag or the number of elements is not defined.
+*/
+getDefinedTagCount : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getActualTagCount'>/**Gets the number of elements for an ExifTag in a given IFD.
+</span>@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@param {Number} ifdId the IFD containing the ExifTag to check.
+@return {Number} the number of elements in the ExifTag, if the tag's size is
+         undefined this will return the actual number of elements that is
+         in the ExifTag's value.
+*/
+getActualTagCount : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getDefinedTagDefaultIfd'>/**Gets the default IFD for a tag.
+</span>@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@return {Number} the default IFD for a tag definition or {@link #IFD_NULL} if no
+         definition exists.
+*/
+getDefinedTagDefaultIfd : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getDefinedTagType'>/**Gets the defined type for a tag.
+</span>@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@return {Number} the type.
+@see ExifTag#getDataType()
+*/
+getDefinedTagType : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-buildTag'>/**Creates a tag for a defined tag constant in a given IFD if that IFD is
+</span> allowed for the tag.  This method will fail anytime the appropriate
+ {@link com.android.gallery3d.exif.ExifTag#setValue} for this tag's datatype would fail.
+@param {Number} tagId a tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@param {Number} ifdId the IFD that the tag should be in.
+@param {Object {Object}} val the value of the tag to set.
+@return {Object {com.android.gallery3d.exif.ExifTag}} an ExifTag object or null if one could not be constructed.
+@see #buildTag
+*/
+buildTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-buildTag'>/**Creates a tag for a defined tag constant in the tag's default IFD.
+</span>@param {Number} tagId a tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@param {Object {Object}} val the tag's value.
+@return {Object {com.android.gallery3d.exif.ExifTag}} an ExifTag object.
+*/
+buildTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setTagValue'>/**Sets the value of an ExifTag if it exists in the given IFD. The value
+</span> must be the correct type and length for that ExifTag.
+@param {Number} tagId a tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@param {Number} ifdId the IFD that the ExifTag is in.
+@param {Object {Object}} val the value to set.
+@return {Boolean} true if success, false if the ExifTag doesn't exist or the value
+         is the wrong type/length.
+@see #setTagValue
+*/
+setTagValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setTagValue'>/**Sets the value of an ExifTag if it exists it's default IFD. The value
+</span> must be the correct type and length for that ExifTag.
+@param {Number} tagId a tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@param {Object {Object}} val the value to set.
+@return {Boolean} true if success, false if the ExifTag doesn't exist or the value
+         is the wrong type/length.
+*/
+setTagValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setTag'>/**Puts an ExifTag into this ExifInterface object's tags, removing a
+</span> previous ExifTag with the same TID and IFD. The IFD it is put into will
+ be the one the tag was created with in {@link #buildTag}.
+@param {Object {ExifTag}} tag an ExifTag to put into this ExifInterface's tags.
+@return {Object {com.android.gallery3d.exif.ExifTag}} the previous ExifTag with the same TID and IFD or null if none
+         exists.
+*/
+setTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setTags'>/**Puts a collection of ExifTags into this ExifInterface objects's tags. Any
+</span> previous ExifTags with the same TID and IFDs will be removed.
+@param {Object {java.util.Collection}} tags a Collection of ExifTags.
+@see #setTag
+*/
+setTags : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-deleteTag'>/**Removes the ExifTag for a tag constant from the given IFD.
+</span>@param {Number} tagId a tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+@param {Number} ifdId the IFD of the ExifTag to remove.
+*/
+deleteTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-deleteTag'>/**Removes the ExifTag for a tag constant from that tag's default IFD.
+</span>@param {Number} tagId a tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+*/
+deleteTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setTagDefinition'>/**Creates a new tag definition in this ExifInterface object for a given TID
+</span> and default IFD. Creating a definition with the same TID and default IFD
+ as a previous definition will override it.
+@param {Number} tagId the TID for the tag.
+@param {Number} defaultIfd the default IFD for the tag.
+@param {Number} tagType the type of the tag (see {@link ExifTag#getDataType()}).
+@param {Number} defaultComponentCount the number of elements of this tag's type in
+            the tags value.
+@param {Object {int[]}} allowedIfds the IFD's this tag is allowed to be put in.
+@return {Number} the defined tag constant (e.g. {@link #TAG_IMAGE_WIDTH}) or
+         {@link #TAG_NULL} if the definition could not be made.
+*/
+setTagDefinition : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-removeTagDefinition'>/**Removes a tag definition for given defined tag constant.
+</span>@param {Number} tagId a defined tag constant, e.g. {@link #TAG_IMAGE_WIDTH}.
+*/
+removeTagDefinition : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-resetTagDefinitions'>/**Resets tag definitions to the default ones.
+</span>*/
+resetTagDefinitions : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getThumbnailBitmap'>/**Returns the thumbnail from IFD1 as a bitmap, or null if none exists.
+</span>@return {Object {android.graphics.Bitmap}} the thumbnail as a bitmap.
+*/
+getThumbnailBitmap : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getThumbnailBytes'>/**Returns the thumbnail from IFD1 as a byte array, or null if none exists.
+</span> The bytes may either be an uncompressed strip as specified in the exif
+ standard or a jpeg compressed image.
+@return {Number} the thumbnail as a byte array.
+*/
+getThumbnailBytes : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getThumbnail'>/**Returns the thumbnail if it is jpeg compressed, or null if none exists.
+</span>@return {Number} the thumbnail as a byte array.
+*/
+getThumbnail : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-isThumbnailCompressed'>/**Check if thumbnail is compressed.
+</span>@return {Boolean} true if the thumbnail is compressed.
+*/
+isThumbnailCompressed : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-hasThumbnail'>/**Check if thumbnail exists.
+</span>@return {Boolean} true if a compressed thumbnail exists.
+*/
+hasThumbnail : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setCompressedThumbnail'>/**Sets the thumbnail to be a jpeg compressed image. Clears any prior
+</span> thumbnail.
+@param {Object {byte[]}} thumb a byte array containing a jpeg compressed image.
+@return {Boolean} true if the thumbnail was set.
+*/
+setCompressedThumbnail : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-setCompressedThumbnail'>/**Sets the thumbnail to be a jpeg compressed bitmap. Clears any prior
+</span> thumbnail.
+@param {Object {Bitmap}} thumb a bitmap to compress to a jpeg thumbnail.
+@return {Boolean} true if the thumbnail was set.
+*/
+setCompressedThumbnail : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-removeCompressedThumbnail'>/**Clears the compressed thumbnail if it exists.
+</span>*/
+removeCompressedThumbnail : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getUserComment'>/**Decodes the user comment tag into string as specified in the EXIF
+</span> standard. Returns null if decoding failed.
+*/
+getUserComment : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getOrientationValueForRotation'>/**Returns the Orientation ExifTag value for a given number of degrees.
+</span>@param {Number} degrees the amount an image is rotated in degrees.
+*/
+getOrientationValueForRotation : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getRotationForOrientationValue'>/**Returns the rotation degrees corresponding to an ExifTag Orientation
+</span> value.
+@param {Number} orientation the ExifTag Orientation value.
+*/
+getRotationForOrientationValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-convertLatOrLongToDouble'>/**Gets the double representation of the GPS latitude or longitude
+</span> coordinate.
+@param {Object {com.android.gallery3d.exif.Rational[]}} coordinate an array of 3 Rationals representing the degrees,
+            minutes, and seconds of the GPS location as defined in the
+            exif specification.
+@param {String} reference a GPS reference reperesented by a String containing &quot;N&quot;,
+            &quot;S&quot;, &quot;E&quot;, or &quot;W&quot;.
+@return {Number} the GPS coordinate represented as degrees + minutes/60 +
+         seconds/3600
+*/
+convertLatOrLongToDouble : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-getLatLongAsDoubles'>/**Gets the GPS latitude and longitude as a pair of doubles from this
+</span> ExifInterface object's tags, or null if the necessary tags do not exist.
+@return {Number} an array of 2 doubles containing the latitude, and longitude
+         respectively.
+@see #convertLatOrLongToDouble
+*/
+getLatLongAsDoubles : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-addDateTimeStampTag'>/**Creates, formats, and sets the DateTimeStamp tag for one of:
+</span> {@link #TAG_DATE_TIME}, {@link #TAG_DATE_TIME_DIGITIZED},
+ {@link #TAG_DATE_TIME_ORIGINAL}.
+@param {Number} tagId one of the DateTimeStamp tags.
+@param {Number} timestamp a timestamp to format.
+@param {Object {TimeZone}} timezone a TimeZone object.
+@return {Boolean} true if success, false if the tag could not be set.
+*/
+addDateTimeStampTag : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-addGpsTags'>/**Creates and sets all to the GPS tags for a give latitude and longitude.
+</span>@param {Number} latitude a GPS latitude coordinate.
+@param {Number} longitude a GPS longitude coordinate.
+@return {Boolean} true if success, false if they could not be created or set.
+*/
+addGpsTags : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifInterface-method-addGpsDateTimeStampTag'>/**Creates and sets the GPS timestamp tag.
+</span>@param {Number} timestamp a GPS timestamp.
+@return {Boolean} true if success, false if could not be created or set.
+*/
+addGpsDateTimeStampTag : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

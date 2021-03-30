@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageInstaller-SessionCallback'>/**@class android.content.pm.PackageInstaller.SessionCallback
+</span>@extends java.lang.Object
+
+ Events for observing session lifecycle.
+ &lt;p&gt;
+ A typical session lifecycle looks like this:
+ &lt;ul&gt;
+ &lt;li&gt;An installer creates a session to indicate pending app delivery. All
+ install details are available at this point.
+ &lt;li&gt;The installer opens the session to deliver APK data. Note that a
+ session may be opened and closed multiple times as network connectivity
+ changes. The installer may deliver periodic progress updates.
+ &lt;li&gt;The installer commits or abandons the session, resulting in the
+ session being finished.
+ &lt;/ul&gt;
+*/
+var SessionCallback = {
+
+<span id='android-content-pm-PackageInstaller-SessionCallback-method-onCreated'>/**New session has been created. Details about the session can be
+</span> obtained from {@link android.content.pm.PackageParser.PackageInstaller#getSessionInfo(int)}.
+*/
+onCreated : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionCallback-method-onBadgingChanged'>/**Badging details for an existing session has changed. For example, the
+</span> app icon or label has been updated.
+*/
+onBadgingChanged : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionCallback-method-onActiveChanged'>/**Active state for session has been changed.
+</span> &lt;p&gt;
+ A session is considered active whenever there is ongoing forward
+ progress being made, such as the installer holding an open
+ {@link android.content.pm.PackageInstaller.Session} instance while streaming data into place, or the
+ system optimizing code as the result of
+ {@link android.content.pm.PackageInstaller.Session#commit(IntentSender)}.
+ &lt;p&gt;
+ If the installer closes the {@link android.content.pm.PackageInstaller.Session} without committing, the
+ session is considered inactive until the installer opens the session
+ again.
+*/
+onActiveChanged : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionCallback-method-onProgressChanged'>/**Progress for given session has been updated.
+</span> &lt;p&gt;
+ Note that this progress may not directly correspond to the value
+ reported by
+ {@link android.content.pm.PackageParser.PackageInstaller.Session#setStagingProgress(float)}, as the
+ system may carve out a portion of the overall progress to represent
+ its own internal installation work.
+*/
+onProgressChanged : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionCallback-method-onFinished'>/**Session has completely finished, either with success or failure.
+</span>*/
+onFinished : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

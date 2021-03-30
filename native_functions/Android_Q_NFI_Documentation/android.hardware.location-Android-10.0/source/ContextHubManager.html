@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-location-ContextHubManager'>/**@class android.hardware.location.ContextHubManager
+</span>@extends java.lang.Object
+
+ A class that exposes the Context hubs on a device to applications.
+
+ Please note that this class is not expected to be used by unbundled applications. Also, calling
+ applications are expected to have LOCATION_HARDWARE permissions to use this class.
+
+ @hide
+*/
+var ContextHubManager = {
+
+<span id='android-hardware-location-ContextHubManager-property-EXTRA_CONTEXT_HUB_INFO'>/** An extra of type {@link android.hardware.location.ContextHubInfo} describing the source of the event.
+</span>*/
+EXTRA_CONTEXT_HUB_INFO : &quot;android.hardware.location.extra.CONTEXT_HUB_INFO&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EXTRA_EVENT_TYPE'>/** An extra of type {@link android.hardware.location.ContextHubManager.Event} describing the event type.
+</span>*/
+EXTRA_EVENT_TYPE : &quot;android.hardware.location.extra.EVENT_TYPE&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EXTRA_NANOAPP_ID'>/** An extra of type long describing the ID of the nanoapp an event is for.
+</span>*/
+EXTRA_NANOAPP_ID : &quot;android.hardware.location.extra.NANOAPP_ID&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EXTRA_NANOAPP_ABORT_CODE'>/** An extra of type int describing the nanoapp-specific abort code.
+</span>*/
+EXTRA_NANOAPP_ABORT_CODE : &quot;android.hardware.location.extra.NANOAPP_ABORT_CODE&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EXTRA_MESSAGE'>/** An extra of type {@link android.hardware.location.NanoAppMessage} describing contents of a message from a nanoapp.
+</span>*/
+EXTRA_MESSAGE : &quot;android.hardware.location.extra.MESSAGE&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EVENT_NANOAPP_LOADED'>/** An event describing that a nanoapp has been loaded. Contains the EXTRA_NANOAPP_ID extra.
+</span>*/
+EVENT_NANOAPP_LOADED : &quot;0&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EVENT_NANOAPP_UNLOADED'>/** An event describing that a nanoapp has been unloaded. Contains the EXTRA_NANOAPP_ID extra.
+</span>*/
+EVENT_NANOAPP_UNLOADED : &quot;1&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EVENT_NANOAPP_ENABLED'>/** An event describing that a nanoapp has been enabled. Contains the EXTRA_NANOAPP_ID extra.
+</span>*/
+EVENT_NANOAPP_ENABLED : &quot;2&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EVENT_NANOAPP_DISABLED'>/** An event describing that a nanoapp has been disabled. Contains the EXTRA_NANOAPP_ID extra.
+</span>*/
+EVENT_NANOAPP_DISABLED : &quot;3&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EVENT_NANOAPP_ABORTED'>/** An event describing that a nanoapp has aborted. Contains the EXTRA_NANOAPP_ID and
+</span> EXTRA_NANOAPP_ABORT_CODE extras.
+*/
+EVENT_NANOAPP_ABORTED : &quot;4&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EVENT_NANOAPP_MESSAGE'>/** An event containing a message sent from a nanoapp. Contains the EXTRA_NANOAPP_ID and
+</span> EXTRA_NANOAPP_MESSAGE extras.
+*/
+EVENT_NANOAPP_MESSAGE : &quot;5&quot;,
+<span id='android-hardware-location-ContextHubManager-property-EVENT_HUB_RESET'>/** An event describing that the Context Hub has reset.
+</span>*/
+EVENT_HUB_RESET : &quot;6&quot;,
+<span id='android-hardware-location-ContextHubManager-method-getContextHubHandles'>/**Get a handle to all the context hubs in the system
+</span>@return {Number} array of context hub handles
+@deprecated Use {@link #getContextHubs()} instead. The use of handles are deprecated in the
+             new APIs.
+*/
+getContextHubHandles : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-getContextHubInfo'>/**Get more information about a specific hub.
+</span>@param {Number} hubHandle Handle (system-wide unique identifier) of a context hub.
+@return {Object {android.hardware.location.ContextHubInfo}} ContextHubInfo Information about the requested context hub.
+@see ContextHubInfo
+@deprecated Use {@link #getContextHubs()} instead. The use of handles are deprecated in the
+             new APIs.
+*/
+getContextHubInfo : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-loadNanoApp'>/**Load a nano app on a specified context hub.
+</span>
+ Note that loading is asynchronous.  When we return from this method,
+ the nano app (probably) hasn't loaded yet.  Assuming a return of 0
+ from this method, then the final success/failure for the load, along
+ with the &quot;handle&quot; for the nanoapp, is all delivered in a byte
+ string via a call to Callback.onMessageReceipt.
+
+ TODO(b/30784270): Provide a better success/failure and &quot;handle&quot; delivery.
+@param {Number} hubHandle handle of context hub to load the app on.
+@param {Object {NanoApp}} app the nanoApp to load on the hub
+@return {Number} 0 if the command for loading was sent to the context hub;
+         -1 otherwise
+@see NanoApp
+@deprecated Use {@link #loadNanoApp(ContextHubInfo, NanoAppBinary)} instead.
+*/
+loadNanoApp : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-unloadNanoApp'>/**Unload a specified nanoApp
+</span>
+ Note that unloading is asynchronous.  When we return from this method,
+ the nano app (probably) hasn't unloaded yet.  Assuming a return of 0
+ from this method, then the final success/failure for the unload is
+ delivered in a byte string via a call to Callback.onMessageReceipt.
+
+ TODO(b/30784270): Provide a better success/failure delivery.
+@param {Number} nanoAppHandle handle of the nanoApp to unload
+@return {Number} 0 if the command for unloading was sent to the context hub;
+         -1 otherwise
+@deprecated Use {@link #unloadNanoApp(ContextHubInfo, long)} instead.
+*/
+unloadNanoApp : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-getNanoAppInstanceInfo'>/**get information about the nano app instance
+</span>
+ NOTE: The returned NanoAppInstanceInfo does _not_ contain correct
+ information for several fields, specifically:
+ - getName()
+ - getPublisher()
+ - getNeededExecMemBytes()
+ - getNeededReadMemBytes()
+ - getNeededWriteMemBytes()
+
+ For example, say you call loadNanoApp() with a NanoApp that has
+ getName() returning &quot;My Name&quot;.  Later, if you call getNanoAppInstanceInfo
+ for that nanoapp, the returned NanoAppInstanceInfo's getName()
+ method will claim &quot;Preloaded app, unknown&quot;, even though you would
+ have expected &quot;My Name&quot;.  For now, as the user, you'll need to
+ separately track the above fields if they are of interest to you.
+
+ TODO(b/30943489): Have the returned NanoAppInstanceInfo contain the
+     correct information.
+@param {Number} nanoAppHandle handle of the nanoapp instance
+@return {Object {android.hardware.location.NanoAppInstanceInfo}} NanoAppInstanceInfo the NanoAppInstanceInfo of the nanoapp, or null if the nanoapp
+                             does not exist
+@see NanoAppInstanceInfo
+@deprecated Use {@link #queryNanoApps(ContextHubInfo)} instead to explicitly query the hub
+             for loaded nanoapps.
+*/
+getNanoAppInstanceInfo : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-findNanoAppOnHub'>/**Find a specified nano app on the system
+</span>@param {Number} hubHandle handle of hub to search for nano app
+@param {Object {NanoAppFilter}} filter filter specifying the search criteria for app
+@see NanoAppFilter
+@return {Number} int[] Array of handles to any found nano apps
+@deprecated Use {@link #queryNanoApps(ContextHubInfo)} instead to explicitly query the hub
+             for loaded nanoapps.
+*/
+findNanoAppOnHub : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-sendMessage'>/**Send a message to a specific nano app instance on a context hub.
+</span>
+ Note that the return value of this method only speaks of success
+ up to the point of sending this to the Context Hub.  It is not
+ an assurance that the Context Hub successfully sent this message
+ on to the nanoapp.  If assurance is desired, a protocol should be
+ established between your code and the nanoapp, with the nanoapp
+ sending a confirmation message (which will be reported via
+ Callback.onMessageReceipt).
+@param {Number} hubHandle handle of the hub to send the message to
+@param {Number} nanoAppHandle  handle of the nano app to send to
+@param {Object {ContextHubMessage}} message Message to be sent
+@see ContextHubMessage
+@return {Number} int 0 on success, -1 otherwise
+@deprecated Use {@link android.hardware.location.ContextHubClient#sendMessageToNanoApp(
+             NanoAppMessage)} instead, after creating a
+             {@link android.hardware.location.ContextHubClient} with
+             {@link #createClient(ContextHubInfo, ContextHubClientCallback, Executor)}
+             or {@link #createClient(ContextHubInfo, ContextHubClientCallback)}.
+*/
+sendMessage : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-getContextHubs'>/**Returns the list of ContextHubInfo objects describing the available Context Hubs.
+</span>@return {Object {java.util.List}} the list of ContextHubInfo objects
+@see ContextHubInfo
+*/
+getContextHubs : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-loadNanoApp'>/**Loads a nanoapp at the specified Context Hub.
+</span>
+ After the nanoapp binary is successfully loaded at the specified hub, the nanoapp will be in
+ the enabled state.
+@param {Object {ContextHubInfo}} hubInfo the hub to load the nanoapp on
+@param {Object {NanoAppBinary}} appBinary The app binary to load
+@return {Object {android.hardware.location.ContextHubTransaction}} the ContextHubTransaction of the request
+@throws NullPointerException if hubInfo or NanoAppBinary is null
+@see NanoAppBinary
+*/
+loadNanoApp : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-unloadNanoApp'>/**Unloads a nanoapp at the specified Context Hub.
+</span>@param {Object {ContextHubInfo}} hubInfo the hub to unload the nanoapp from
+@param {Number} nanoAppId the app to unload
+@return {Object {android.hardware.location.ContextHubTransaction}} the ContextHubTransaction of the request
+@throws NullPointerException if hubInfo is null
+*/
+unloadNanoApp : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-enableNanoApp'>/**Enables a nanoapp at the specified Context Hub.
+</span>@param {Object {ContextHubInfo}} hubInfo the hub to enable the nanoapp on
+@param {Number} nanoAppId the app to enable
+@return {Object {android.hardware.location.ContextHubTransaction}} the ContextHubTransaction of the request
+@throws NullPointerException if hubInfo is null
+*/
+enableNanoApp : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-disableNanoApp'>/**Disables a nanoapp at the specified Context Hub.
+</span>@param {Object {ContextHubInfo}} hubInfo the hub to disable the nanoapp on
+@param {Number} nanoAppId the app to disable
+@return {Object {android.hardware.location.ContextHubTransaction}} the ContextHubTransaction of the request
+@throws NullPointerException if hubInfo is null
+*/
+disableNanoApp : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-queryNanoApps'>/**Requests a query for nanoapps loaded at the specified Context Hub.
+</span>@param {Object {ContextHubInfo}} hubInfo the hub to query a list of nanoapps from
+@return {Object {android.hardware.location.ContextHubTransaction}} the ContextHubTransaction of the request
+@throws NullPointerException if hubInfo is null
+*/
+queryNanoApps : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-registerCallback'>/**Set a callback to receive messages from the context hub
+</span>@param {Object {ContextHubManager.Callback}} callback Callback object
+@see Callback
+@return {Number} int 0 on success, -1 otherwise
+@deprecated Use {@link #createClient(ContextHubInfo, ContextHubClientCallback, Executor)}
+             or {@link #createClient(ContextHubInfo, ContextHubClientCallback)} instead to
+             register a {@link android.hardware.location.ContextHubClientCallback}.
+*/
+registerCallback : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-registerCallback'>/**
+</span>@deprecated Use {@link #registerCallback(Callback)} instead.
+@hide 
+*/
+registerCallback : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-registerCallback'>/**Set a callback to receive messages from the context hub
+</span>@param {Object {ContextHubManager.Callback}} callback Callback object
+@param {Object {Handler}} handler Handler object, if null uses the Handler of the main Looper
+@see Callback
+@return {Number} int 0 on success, -1 otherwise
+@deprecated Use {@link #createClient(ContextHubInfo, ContextHubClientCallback, Executor)}
+             or {@link #createClient(ContextHubInfo, ContextHubClientCallback)} instead to
+             register a {@link android.hardware.location.ContextHubClientCallback}.
+*/
+registerCallback : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-createClient'>/**Creates and registers a client and its callback with the Context Hub Service.
+</span>
+ A client is registered with the Context Hub Service for a specified Context Hub. When the
+ registration succeeds, the client can send messages to nanoapps through the returned
+ {@link android.hardware.location.ContextHubClient} object, and receive notifications through the provided callback.
+@param {Object {ContextHubInfo}} hubInfo  the hub to attach this client to
+@param {Object {ContextHubClientCallback}} callback the notification callback to register
+@param {Object {Executor}} executor the executor to invoke the callback
+@return {Object {android.hardware.location.ContextHubClient}} the registered client object
+@throws IllegalArgumentException if hubInfo does not represent a valid hub
+@throws IllegalStateException    if there were too many registered clients at the service
+@throws NullPointerException     if callback, hubInfo, or executor is null
+@see ContextHubClientCallback
+*/
+createClient : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-createClient'>/**Equivalent to {@link #createClient(ContextHubInfo, android.hardware.location.ContextHubClientCallback, Executor)}
+</span> with the executor using the main thread's Looper.
+@param {Object {ContextHubInfo}} hubInfo  the hub to attach this client to
+@param {Object {ContextHubClientCallback}} callback the notification callback to register
+@return {Object {android.hardware.location.ContextHubClient}} the registered client object
+@throws IllegalArgumentException if hubInfo does not represent a valid hub
+@throws IllegalStateException    if there were too many registered clients at the service
+@throws NullPointerException     if callback or hubInfo is null
+@see ContextHubClientCallback
+*/
+createClient : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-createClient'>/**Creates a ContextHubClient that will receive notifications based on Intent events.
+</span>
+ This method should be used instead of {@link #createClient(ContextHubInfo,
+ android.hardware.location.ContextHubClientCallback)} or {@link #createClient(ContextHubInfo, android.hardware.location.ContextHubClientCallback,
+ Executor)} if the caller wants to preserve the messaging endpoint of a ContextHubClient, even
+ after a process exits. If the PendingIntent with the provided nanoapp has already been
+ registered at the service, then the same ContextHubClient will be regenerated without
+ creating a new client connection at the service. Note that the PendingIntent, nanoapp, and
+ Context Hub must all match in identifying a previously registered ContextHubClient.
+ If a client is regenerated, the host endpoint identifier attached to messages sent to the
+ nanoapp remains consistent, even if the original process has exited.
+
+ If registered successfully, intents will be delivered regarding events or messages from the
+ specified nanoapp from the attached Context Hub. The intent will have an extra
+ {@link android.hardware.location.ContextHubManager.EXTRA_CONTEXT_HUB_INFO} of type {@link android.hardware.location.ContextHubInfo}, which
+ describes the Context Hub the intent event was for. The intent will also have an extra
+ {@link android.hardware.location.ContextHubManager.EXTRA_EVENT_TYPE} of type {@link android.hardware.location.ContextHubManager.Event}, which
+ will contain the type of the event. See {@link android.hardware.location.ContextHubManager.Event} for description of
+ each event type, along with event-specific extra fields. The client can also use
+ {@link android.hardware.location.ContextHubIntentEvent.fromIntent(Intent)} to parse the Intent generated by the event.
+
+ Intent events will be delivered until {@link android.hardware.location.ContextHubClient.close()} is called. Note that
+ the registration of this ContextHubClient at the Context Hub Service will be maintained until
+ {@link android.hardware.location.ContextHubClient.close()} is called. If {@link PendingIntent.cancel()} is called
+ on the provided PendingIntent, then the client will be automatically unregistered by the
+ service.
+@param {Object {ContextHubInfo}} hubInfo       the hub to attach this client to
+@param {Object {PendingIntent}} pendingIntent the PendingIntent to register to the client
+@param {Number} nanoAppId     the ID of the nanoapp that Intent events will be generated for
+@return {Object {android.hardware.location.ContextHubClient}} the registered client object
+@throws IllegalArgumentException if hubInfo does not represent a valid hub
+@throws IllegalStateException    if there were too many registered clients at the service
+@throws NullPointerException     if pendingIntent or hubInfo is null
+*/
+createClient : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-unregisterCallback'>/**Unregister a callback for receive messages from the context hub.
+</span>@param {Object {ContextHubManager.Callback}} callback method to deregister
+@param callback method to deregister
+@return {Number} int 0 on success, -1 otherwise
+@deprecated Use {@link android.hardware.location.ContextHubClient#close()} to unregister
+             a {@link android.hardware.location.ContextHubClientCallback}.
+*/
+unregisterCallback : function(  ) {},
+
+<span id='android-hardware-location-ContextHubManager-method-unregisterCallback'>/**
+</span>@deprecated Use {@link #unregisterCallback(Callback)} instead.
+@hide 
+*/
+unregisterCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

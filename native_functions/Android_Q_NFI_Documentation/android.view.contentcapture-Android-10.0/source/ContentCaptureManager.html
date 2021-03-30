@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-contentcapture-ContentCaptureManager'>/**@class android.view.contentcapture.ContentCaptureManager
+</span>@extends java.lang.Object
+
+ Content capture is mechanism used to let apps notify the Android system of events associated with
+ views.
+
+ &lt;p&gt;Before using this manager, you should check if it's available. Example:
+ &lt;pre&gt;&lt;code&gt;
+  ContentCaptureManager mgr = context.getSystemService(ContentCaptureManager.class);
+  if (mgr != null &amp;&amp; mgr.isContentCaptureEnabled()) {
+    // ...
+  }
+  &lt;/code&gt;&lt;/pre&gt;
+
+ &lt;p&gt;To support content capture, you must notifiy the Android system of the following events:
+
+ &lt;ul&gt;
+   &lt;li&gt;When a visible view is laid out, call
+   {@link android.view.contentcapture.ContentCaptureSession#notifyViewAppeared(ViewStructure)}.
+   &lt;li&gt;When a view becomes invisible or is removed from the view hierarchy, call
+   {@link android.view.contentcapture.ContentCaptureSession#notifyViewDisappeared(android.view.autofill.AutofillId)}.
+   &lt;li&gt;When the view represents text and the text value changed, call {@link android.view.contentcapture.ContentCaptureSession#notifyViewTextChanged(android.view.autofill.AutofillId, CharSequence)}.
+ &lt;/ul&gt;
+
+ &lt;p&gt;You can get a blank content capture structure using
+ {@link android.view.contentcapture.ContentCaptureSession#newViewStructure(View)}, then populate its relevant fields.
+ Here's an example of the relevant methods for an {@code EditText}-like view:
+
+ &lt;pre&gt;&lt;code&gt;
+ public class MyEditText extends View {
+
+ private void populateContentCaptureStructure(@NonNull ViewStructure structure) {
+   structure.setText(getText(), getSelectionStart(), getSelectionEnd());
+   structure.setHint(getHint());
+   structure.setInputType(getInputType());
+   // set other properties like setTextIdEntry(), setTextLines(), setTextStyle(),
+   // setMinTextEms(), setMaxTextEms(), setMaxTextLength()
+ }
+
+ private void onTextChanged() {
+   if (isLaidOut() &amp;&amp; isTextEditable()) {
+     ContentCaptureManager mgr = mContext.getSystemService(ContentCaptureManager.class);
+     if (cm != null &amp;&amp; cm.isContentCaptureEnabled()) {
+        ContentCaptureSession session = getContentCaptureSession();
+        if (session != null) {
+          session.notifyViewTextChanged(getAutofillId(), getText());
+        }
+   }
+ }
+ &lt;/code&gt;&lt;/pre&gt;
+
+ &lt;p&gt;The main integration point with content capture is the {@link android.view.contentcapture.ContentCaptureSession}. A &quot;main&quot;
+ session is automatically created by the Android system when content capture is enabled for the
+ activity. The session could have a {@link android.view.contentcapture.ContentCaptureContext} to provide more contextual info
+ about it, such as the locus associated with the view hierarchy
+ (see {@link android.content.LocusId} for more info about locus). By default, the main session
+ doesn't have a {@code ContentCaptureContext}, but you can change it after its created. Example:
+
+ &lt;pre&gt;&lt;code&gt;
+ protected void onCreate(Bundle savedInstanceState) {
+   // Initialize view structure
+   ContentCaptureSession session = rootView.getContentCaptureSession();
+   if (session != null) {
+     session.setContentCaptureContext(ContentCaptureContext.forLocusId(&quot;chat_UserA_UserB&quot;));
+   }
+ }
+ &lt;/code&gt;&lt;/pre&gt;
+
+ &lt;p&gt;If your activity contains view hierarchies with a different contextual meaning, you should
+ created child sessions for each view hierarchy root. For example, if your activity is a browser,
+ you could use the main session for the main URL being rendered, then child sessions for each
+ {@code IFRAME}:
+
+ &lt;pre&gt;&lt;code&gt;
+ ContentCaptureSession mMainSession;
+
+ protected void onCreate(Bundle savedInstanceState) {
+    // Initialize view structure...
+    mMainSession = rootView.getContentCaptureSession();
+    if (mMainSession != null) {
+      mMainSession.setContentCaptureContext(
+          ContentCaptureContext.forLocusId(&quot;https://example.com&quot;));
+    }
+ }
+
+ private void loadIFrame(View iframeRootView, String url) {
+   if (mMainSession != null) {
+      ContentCaptureSession iFrameSession = mMainSession.newChild(
+          ContentCaptureContext.forLocusId(url));
+      }
+      iframeRootView.setContentCaptureSession(iFrameSession);
+   }
+   // Load iframe...
+ }
+ &lt;/code&gt;&lt;/pre&gt;
+
+*/
+var ContentCaptureManager = {
+
+<span id='android-view-contentcapture-ContentCaptureManager-property-RESULT_CODE_OK'>/**@hide */
+</span>RESULT_CODE_OK : &quot;0&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-RESULT_CODE_TRUE'>/**@hide */
+</span>RESULT_CODE_TRUE : &quot;1&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-RESULT_CODE_FALSE'>/**@hide */
+</span>RESULT_CODE_FALSE : &quot;2&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-RESULT_CODE_SECURITY_EXCEPTION'>/**@hide */
+</span>RESULT_CODE_SECURITY_EXCEPTION : &quot;-1&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEVICE_CONFIG_PROPERTY_SERVICE_EXPLICITLY_ENABLED'>/** DeviceConfig property used by {@code com.android.server.SystemServer} on start to decide
+</span> whether the content capture service should be created or not
+
+ &lt;p&gt;By default it should *NOT* be set (or set to {@code &quot;default&quot;}, so the decision is based
+ on whether the OEM provides an implementation for the service), but it can be overridden to:
+
+ &lt;ul&gt;
+   &lt;li&gt;Provide a &quot;kill switch&quot; so OEMs can disable it remotely in case of emergency (when
+   it's set to {@code &quot;false&quot;}).
+   &lt;li&gt;Enable the CTS tests to be run on AOSP builds (when it's set to {@code &quot;true&quot;}).
+ &lt;/ul&gt;
+
+ @hide
+*/
+DEVICE_CONFIG_PROPERTY_SERVICE_EXPLICITLY_ENABLED : &quot;service_explicitly_enabled&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEVICE_CONFIG_PROPERTY_MAX_BUFFER_SIZE'>/** Maximum number of events that are buffered before sent to the app.
+</span>
+ @hide
+*/
+DEVICE_CONFIG_PROPERTY_MAX_BUFFER_SIZE : &quot;max_buffer_size&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEVICE_CONFIG_PROPERTY_IDLE_FLUSH_FREQUENCY'>/** Frequency (in ms) of buffer flushes when no events are received.
+</span>
+ @hide
+*/
+DEVICE_CONFIG_PROPERTY_IDLE_FLUSH_FREQUENCY : &quot;idle_flush_frequency&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEVICE_CONFIG_PROPERTY_TEXT_CHANGE_FLUSH_FREQUENCY'>/** Frequency (in ms) of buffer flushes when no events are received and the last one was a
+</span> text change event.
+
+ @hide
+*/
+DEVICE_CONFIG_PROPERTY_TEXT_CHANGE_FLUSH_FREQUENCY : &quot;text_change_flush_frequency&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEVICE_CONFIG_PROPERTY_LOG_HISTORY_SIZE'>/** Size of events that are logging on {@code dump}.
+</span>
+ &lt;p&gt;Set it to {@code 0} or less to disable history.
+
+ @hide
+*/
+DEVICE_CONFIG_PROPERTY_LOG_HISTORY_SIZE : &quot;log_history_size&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEVICE_CONFIG_PROPERTY_LOGGING_LEVEL'>/** Sets the logging level for {@code logcat} statements.
+</span>
+ &lt;p&gt;Valid values are: {@link #LOGGING_LEVEL_OFF}, {@value #LOGGING_LEVEL_DEBUG}, and
+ {@link #LOGGING_LEVEL_VERBOSE}.
+
+ @hide
+*/
+DEVICE_CONFIG_PROPERTY_LOGGING_LEVEL : &quot;logging_level&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEVICE_CONFIG_PROPERTY_IDLE_UNBIND_TIMEOUT'>/** Sets how long (in ms) the service is bound while idle.
+</span>
+ &lt;p&gt;Use {@code 0} to keep it permanently bound.
+
+ @hide
+*/
+DEVICE_CONFIG_PROPERTY_IDLE_UNBIND_TIMEOUT : &quot;idle_unbind_timeout&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-LOGGING_LEVEL_OFF'>/**@hide */
+</span>LOGGING_LEVEL_OFF : &quot;0&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-LOGGING_LEVEL_DEBUG'>/**@hide */
+</span>LOGGING_LEVEL_DEBUG : &quot;1&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-LOGGING_LEVEL_VERBOSE'>/**@hide */
+</span>LOGGING_LEVEL_VERBOSE : &quot;2&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEFAULT_MAX_BUFFER_SIZE'>/**@hide */
+</span>DEFAULT_MAX_BUFFER_SIZE : &quot;100&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEFAULT_IDLE_FLUSHING_FREQUENCY_MS'>/**@hide */
+</span>DEFAULT_IDLE_FLUSHING_FREQUENCY_MS : &quot;5000&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEFAULT_TEXT_CHANGE_FLUSHING_FREQUENCY_MS'>/**@hide */
+</span>DEFAULT_TEXT_CHANGE_FLUSHING_FREQUENCY_MS : &quot;1000&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-property-DEFAULT_LOG_HISTORY_SIZE'>/**@hide */
+</span>DEFAULT_LOG_HISTORY_SIZE : &quot;10&quot;,
+<span id='android-view-contentcapture-ContentCaptureManager-method-getMainContentCaptureSession'>/**Gets the main session associated with the context.
+</span>
+ &lt;p&gt;By default there's just one (associated with the activity lifecycle), but apps could
+ explicitly add more using
+ {@link android.view.contentcapture.ContentCaptureSession#createandroid.view.contentcapture.ContentCaptureSession(ContentCaptureContext)}.
+@hide 
+*/
+getMainContentCaptureSession : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-onActivityCreated'>/**
+</span>@hide 
+*/
+onActivityCreated : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-onActivityResumed'>/**
+</span>@hide 
+*/
+onActivityResumed : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-onActivityPaused'>/**
+</span>@hide 
+*/
+onActivityPaused : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-onActivityDestroyed'>/**
+</span>@hide 
+*/
+onActivityDestroyed : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-flush'>/**Flushes the content of all sessions.
+</span>
+ &lt;p&gt;Typically called by {@code Activity} when it's paused / resumed.
+@hide 
+*/
+flush : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-getServiceComponentName'>/**Returns the component name of the system service that is consuming the captured events for
+</span> the current user.
+*/
+getServiceComponentName : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-getServiceSettingsComponentName'>/**Gets the (optional) intent used to launch the service-specific settings.
+</span>
+ &lt;p&gt;This method is static because it's called by Settings, which might not be whitelisted
+ for content capture (in which case the ContentCaptureManager on its context would be null).
+@hide 
+*/
+getServiceSettingsComponentName : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-isContentCaptureEnabled'>/**Checks whether content capture is enabled for this activity.
+</span>*/
+isContentCaptureEnabled : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-getContentCaptureConditions'>/**Gets the list of conditions for when content capture should be allowed.
+</span>
+ &lt;p&gt;This method is typically used by web browsers so they don't generate unnecessary content
+ capture events for some websites.
+@return {Object {java.util.Set}} list of conditions, or {@code null} if there isn't any restriction
+ (in which case content capture events should always be generated). If the list is empty,
+ then it should not generate any event at all.
+*/
+getContentCaptureConditions : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-setContentCaptureEnabled'>/**Called by apps to explicitly enable or disable content capture.
+</span>
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt; this call is not persisted accross reboots, so apps should typically call
+ it on {@link android.app.Activity#onCreate(android.os.Bundle, android.os.PersistableBundle)}.
+*/
+setContentCaptureEnabled : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-updateWindowAttributes'>/**Called by apps to update flag secure when window attributes change.
+</span>@hide 
+*/
+updateWindowAttributes : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-isContentCaptureFeatureEnabled'>/**Gets whether content capture is enabled for the given user.
+</span>
+ &lt;p&gt;This method is typically used by the content capture service settings page, so it can
+ provide a toggle to enable / disable it.
+@throws SecurityException if caller is not the app that owns the content capture service
+ associated with the user.
+@hide 
+*/
+isContentCaptureFeatureEnabled : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-removeData'>/**Called by the app to remove content capture data associated with some context.
+</span>@param {Object {DataRemovalRequest}} request object specifying what data should be removed.
+*/
+removeData : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureManager-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

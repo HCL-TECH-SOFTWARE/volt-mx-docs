@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ims-ImsUtInterface'>/**@class com.android.ims.ImsUtInterface
+</span> Provides APIs for the supplementary service settings using IMS (Ut interface).
+ It is created from 3GPP TS 24.623 (XCAP(XML Configuration Access Protocol)
+ over the Ut interface for manipulating supplementary services).
+
+ @hide
+*/
+var ImsUtInterface = {
+
+<span id='com-android-ims-ImsUtInterface-property-ACTION_DEACTIVATION'>/** Actions
+</span> @hide
+*/
+ACTION_DEACTIVATION : &quot;0&quot;,
+<span id='com-android-ims-ImsUtInterface-property-ACTION_ACTIVATION'>/***/
+</span>ACTION_ACTIVATION : &quot;1&quot;,
+<span id='com-android-ims-ImsUtInterface-property-ACTION_REGISTRATION'>/***/
+</span>ACTION_REGISTRATION : &quot;3&quot;,
+<span id='com-android-ims-ImsUtInterface-property-ACTION_ERASURE'>/***/
+</span>ACTION_ERASURE : &quot;4&quot;,
+<span id='com-android-ims-ImsUtInterface-property-ACTION_INTERROGATION'>/***/
+</span>ACTION_INTERROGATION : &quot;5&quot;,
+<span id='com-android-ims-ImsUtInterface-property-OIR_DEFAULT'>/** OIR (Originating Identification Restriction, 3GPP TS 24.607)
+</span> OIP (Originating Identification Presentation, 3GPP TS 24.607)
+ TIR (Terminating Identification Restriction, 3GPP TS 24.608)
+ TIP (Terminating Identification Presentation, 3GPP TS 24.608)
+*/
+OIR_DEFAULT : &quot;0&quot;,
+<span id='com-android-ims-ImsUtInterface-property-OIR_PRESENTATION_RESTRICTED'>/***/
+</span>OIR_PRESENTATION_RESTRICTED : &quot;1&quot;,
+<span id='com-android-ims-ImsUtInterface-property-OIR_PRESENTATION_NOT_RESTRICTED'>/***/
+</span>OIR_PRESENTATION_NOT_RESTRICTED : &quot;2&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CDIV_CF_UNCONDITIONAL'>/** CDIV (Communication Diversion, 3GPP TS 24.604)
+</span>     actions: target, no reply timer
+*/
+CDIV_CF_UNCONDITIONAL : &quot;0&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CDIV_CF_BUSY'>/***/
+</span>CDIV_CF_BUSY : &quot;1&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CDIV_CF_NO_REPLY'>/***/
+</span>CDIV_CF_NO_REPLY : &quot;2&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CDIV_CF_NOT_REACHABLE'>/***/
+</span>CDIV_CF_NOT_REACHABLE : &quot;3&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CDIV_CF_ALL'>/***/
+</span>CDIV_CF_ALL : &quot;4&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CDIV_CF_ALL_CONDITIONAL'>/***/
+</span>CDIV_CF_ALL_CONDITIONAL : &quot;5&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CDIV_CF_NOT_LOGGED_IN'>/***/
+</span>CDIV_CF_NOT_LOGGED_IN : &quot;6&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BAIC'>/** CB (Communication Barring, 3GPP TS 24.611)
+</span>*/
+CB_BAIC : &quot;1&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BAOC'>/***/
+</span>CB_BAOC : &quot;2&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BOIC'>/***/
+</span>CB_BOIC : &quot;3&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BOIC_EXHC'>/***/
+</span>CB_BOIC_EXHC : &quot;4&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BIC_WR'>/***/
+</span>CB_BIC_WR : &quot;5&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BIC_ACR'>/***/
+</span>CB_BIC_ACR : &quot;6&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BA_ALL'>/***/
+</span>CB_BA_ALL : &quot;7&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BA_MO'>/***/
+</span>CB_BA_MO : &quot;8&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BA_MT'>/***/
+</span>CB_BA_MT : &quot;9&quot;,
+<span id='com-android-ims-ImsUtInterface-property-CB_BS_MT'>/***/
+</span>CB_BS_MT : &quot;10&quot;,
+<span id='com-android-ims-ImsUtInterface-property-INVALID'>/** Invalid result value.
+</span>*/
+INVALID : &quot;-1&quot;,
+<span id='com-android-ims-ImsUtInterface-method-queryCallBarring'>/**Retrieves the configuration of the call barring.
+</span> The return value of ((AsyncResult)result.obj) is an array of {@link ImsSsInfo}.
+*/
+queryCallBarring : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-queryCallBarring'>/**Retrieves the configuration of the call barring for specified service class.
+</span> The return value of ((AsyncResult)result.obj) is an array of {@link ImsSsInfo}.
+*/
+queryCallBarring : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-queryCallForward'>/**Retrieves the configuration of the call forward.
+</span> The return value of ((AsyncResult)result.obj) is an array of {@link com.android.ims.ImsCallForwardInfo}.
+*/
+queryCallForward : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-queryCallWaiting'>/**Retrieves the configuration of the call waiting.
+</span> The return value of ((AsyncResult)result.obj) is an array of {@link ImsSsInfo}.
+*/
+queryCallWaiting : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-queryCLIR'>/**Retrieves the default CLIR setting.
+</span>*/
+queryCLIR : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-queryCLIP'>/**Retrieves the CLIP call setting.
+</span>*/
+queryCLIP : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-queryCOLR'>/**Retrieves the COLR call setting.
+</span>*/
+queryCOLR : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-queryCOLP'>/**Retrieves the COLP call setting.
+</span>*/
+queryCOLP : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCallBarring'>/**Modifies the configuration of the call barring.
+</span>*/
+updateCallBarring : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCallBarring'>/**Modifies the configuration of the call barring for specified service class.
+</span>*/
+updateCallBarring : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCallForward'>/**Modifies the configuration of the call forward.
+</span>*/
+updateCallForward : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCallWaiting'>/**Modifies the configuration of the call waiting.
+</span>*/
+updateCallWaiting : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCLIR'>/**Updates the configuration of the CLIR supplementary service.
+</span>*/
+updateCLIR : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCLIP'>/**Updates the configuration of the CLIP supplementary service.
+</span>*/
+updateCLIP : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCOLR'>/**Updates the configuration of the COLR supplementary service.
+</span>*/
+updateCOLR : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-updateCOLP'>/**Updates the configuration of the COLP supplementary service.
+</span>*/
+updateCOLP : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-registerForSuppServiceIndication'>/**Register for UNSOL_ON_SS indications.
+</span>@param {Object {Handler}} handler the {@link Handler} that is notified when there is an ss indication.
+@param {Number} event  Supplimentary service indication event.
+@param {Object {Object}} Object user object.
+*/
+registerForSuppServiceIndication : function(  ) {},
+
+<span id='com-android-ims-ImsUtInterface-method-unregisterForSuppServiceIndication'>/**Deregister for UNSOL_ON_SS indications.
+</span>@param {Object {Handler}} handler the {@link Handler} that is notified when there is an ss indication.
+*/
+unregisterForSuppServiceIndication : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

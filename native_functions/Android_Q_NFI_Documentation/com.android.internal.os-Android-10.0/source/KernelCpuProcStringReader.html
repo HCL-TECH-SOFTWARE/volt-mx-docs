@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-KernelCpuProcStringReader'>/**@class com.android.internal.os.KernelCpuProcStringReader
+</span>@extends java.lang.Object
+
+ Reads human-readable cpu time proc files.
+
+ It is implemented as singletons for built-in kernel proc files. Get___Instance() method will
+ return corresponding reader instance. In order to prevent frequent GC, it reuses the same char[]
+ to store data read from proc files.
+
+ A KernelCpuProcStringReader instance keeps an error counter. When the number of read errors
+ within that instance accumulates to 5, this instance will reject all further read requests.
+
+ Data fetched within last 500ms is considered fresh, since the reading lifecycle can take up to
+ 100ms. KernelCpuProcStringReader always tries to use cache if it is fresh and valid, but it can
+ be disabled through a parameter.
+
+ A KernelCpuProcReader instance is thread-safe. It acquires a write lock when reading the proc
+ file, releases it right after, then acquires a read lock before returning a ProcFileIterator.
+ Caller is responsible for closing ProcFileIterator (also auto-closable) after reading, otherwise
+ deadlock will occur.
+*/
+var KernelCpuProcStringReader = {
+
+<span id='com-android-internal-os-KernelCpuProcStringReader-method-open'>/**
+</span>@see #open(boolean) Default behavior is trying to use cache.
+*/
+open : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuProcStringReader-method-open'>/**Opens the proc file and buffers all its content, which can be traversed through a
+</span> ProcFileIterator.
+
+ This method will tolerate at most 5 errors. After that, it will always return null. This is
+ to save resources and to prevent log spam.
+
+ This method is thread-safe. It first checks if there are other threads holding read/write
+ lock. If there are, it assumes data is fresh and reuses the data.
+
+ A read lock is automatically acquired when a valid ProcFileIterator is returned. Caller MUST
+ call {@link com.android.internal.os.Uid.ProcFileIterator#close()} when it is done to release the lock.
+@param {Boolean} ignoreCache If true, ignores the cache and refreshes the data anyway.
+@return {Object {com.android.internal.os.KernelCpuProcStringReader.ProcFileIterator}} A {@link ProcFileIterator} to iterate through the file content, or null if there is
+ error.
+*/
+open : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuProcStringReader-method-asLongs'>/**Converts all numbers in the CharBuffer into longs, and puts into the given long[].
+</span>
+ Space and colon are treated as delimiters. All other chars are not allowed. All numbers
+ are non-negative. To avoid GC, caller should try to use the same array for all calls.
+
+ This method also resets the given buffer to the original position before return so that
+ it can be read again.
+@param {Object {CharBuffer}} buf   The char buffer to be converted.
+@param {Object {long[]}} array An array to store the parsed numbers.
+@return {Number} The number of elements written to the given array. -1 if buf is null, -2 if buf
+ contains invalid char, -3 if any number overflows.
+*/
+asLongs : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

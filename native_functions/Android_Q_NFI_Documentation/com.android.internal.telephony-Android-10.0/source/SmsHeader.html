@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-SmsHeader'>/**@class com.android.internal.telephony.SmsHeader
+</span>@extends java.lang.Object
+
+ SMS user data header, as specified in TS 23.040 9.2.3.24.
+*/
+var SmsHeader = {
+
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_CONCATENATED_8_BIT_REFERENCE'>/**SMS user data header information element identifiers.
+</span> (see TS 23.040 9.2.3.24)
+*/
+ELT_ID_CONCATENATED_8_BIT_REFERENCE : &quot;0&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_SPECIAL_SMS_MESSAGE_INDICATION'>/***/
+</span>ELT_ID_SPECIAL_SMS_MESSAGE_INDICATION : &quot;1&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_APPLICATION_PORT_ADDRESSING_8_BIT'>/***/
+</span>ELT_ID_APPLICATION_PORT_ADDRESSING_8_BIT : &quot;4&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_APPLICATION_PORT_ADDRESSING_16_BIT'>/***/
+</span>ELT_ID_APPLICATION_PORT_ADDRESSING_16_BIT : &quot;5&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_SMSC_CONTROL_PARAMS'>/***/
+</span>ELT_ID_SMSC_CONTROL_PARAMS : &quot;6&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_UDH_SOURCE_INDICATION'>/***/
+</span>ELT_ID_UDH_SOURCE_INDICATION : &quot;7&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_CONCATENATED_16_BIT_REFERENCE'>/***/
+</span>ELT_ID_CONCATENATED_16_BIT_REFERENCE : &quot;8&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_WIRELESS_CTRL_MSG_PROTOCOL'>/***/
+</span>ELT_ID_WIRELESS_CTRL_MSG_PROTOCOL : &quot;9&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_TEXT_FORMATTING'>/***/
+</span>ELT_ID_TEXT_FORMATTING : &quot;10&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_PREDEFINED_SOUND'>/***/
+</span>ELT_ID_PREDEFINED_SOUND : &quot;11&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_USER_DEFINED_SOUND'>/***/
+</span>ELT_ID_USER_DEFINED_SOUND : &quot;12&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_PREDEFINED_ANIMATION'>/***/
+</span>ELT_ID_PREDEFINED_ANIMATION : &quot;13&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_LARGE_ANIMATION'>/***/
+</span>ELT_ID_LARGE_ANIMATION : &quot;14&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_SMALL_ANIMATION'>/***/
+</span>ELT_ID_SMALL_ANIMATION : &quot;15&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_LARGE_PICTURE'>/***/
+</span>ELT_ID_LARGE_PICTURE : &quot;16&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_SMALL_PICTURE'>/***/
+</span>ELT_ID_SMALL_PICTURE : &quot;17&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_VARIABLE_PICTURE'>/***/
+</span>ELT_ID_VARIABLE_PICTURE : &quot;18&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_USER_PROMPT_INDICATOR'>/***/
+</span>ELT_ID_USER_PROMPT_INDICATOR : &quot;19&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_EXTENDED_OBJECT'>/***/
+</span>ELT_ID_EXTENDED_OBJECT : &quot;20&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_REUSED_EXTENDED_OBJECT'>/***/
+</span>ELT_ID_REUSED_EXTENDED_OBJECT : &quot;21&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_COMPRESSION_CONTROL'>/***/
+</span>ELT_ID_COMPRESSION_CONTROL : &quot;22&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_OBJECT_DISTR_INDICATOR'>/***/
+</span>ELT_ID_OBJECT_DISTR_INDICATOR : &quot;23&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_STANDARD_WVG_OBJECT'>/***/
+</span>ELT_ID_STANDARD_WVG_OBJECT : &quot;24&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_CHARACTER_SIZE_WVG_OBJECT'>/***/
+</span>ELT_ID_CHARACTER_SIZE_WVG_OBJECT : &quot;25&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_EXTENDED_OBJECT_DATA_REQUEST_CMD'>/***/
+</span>ELT_ID_EXTENDED_OBJECT_DATA_REQUEST_CMD : &quot;26&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_RFC_822_EMAIL_HEADER'>/***/
+</span>ELT_ID_RFC_822_EMAIL_HEADER : &quot;32&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_HYPERLINK_FORMAT_ELEMENT'>/***/
+</span>ELT_ID_HYPERLINK_FORMAT_ELEMENT : &quot;33&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_REPLY_ADDRESS_ELEMENT'>/***/
+</span>ELT_ID_REPLY_ADDRESS_ELEMENT : &quot;34&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_ENHANCED_VOICE_MAIL_INFORMATION'>/***/
+</span>ELT_ID_ENHANCED_VOICE_MAIL_INFORMATION : &quot;35&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_NATIONAL_LANGUAGE_SINGLE_SHIFT'>/***/
+</span>ELT_ID_NATIONAL_LANGUAGE_SINGLE_SHIFT : &quot;36&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-ELT_ID_NATIONAL_LANGUAGE_LOCKING_SHIFT'>/***/
+</span>ELT_ID_NATIONAL_LANGUAGE_LOCKING_SHIFT : &quot;37&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-PORT_WAP_PUSH'>/***/
+</span>PORT_WAP_PUSH : &quot;2948&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-PORT_WAP_WSP'>/***/
+</span>PORT_WAP_WSP : &quot;9200&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-portAddrs'>/***/
+</span>portAddrs : &quot;null&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-concatRef'>/***/
+</span>concatRef : &quot;null&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-specialSmsMsgList'>/***/
+</span>specialSmsMsgList : &quot;null&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-miscEltList'>/***/
+</span>miscEltList : &quot;null&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-languageTable'>/**7 bit national language locking shift table, or 0 for GSM default 7 bit alphabet. */
+</span>languageTable : &quot;null&quot;,
+<span id='com-android-internal-telephony-SmsHeader-property-languageShiftTable'>/**7 bit national language single shift table, or 0 for GSM default 7 bit extension table. */
+</span>languageShiftTable : &quot;null&quot;,
+<span id='com-android-internal-telephony-SmsHeader-method-fromByteArray'>/**Create structured SmsHeader object from serialized byte array representation.
+</span> (see TS 23.040 9.2.3.24)
+@param {Object {byte[]}} data is user data header bytes
+@return {Object {com.android.internal.telephony.SmsHeader}} SmsHeader object
+*/
+fromByteArray : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsHeader-method-toByteArray'>/**Create serialized byte array representation from structured SmsHeader object.
+</span> (see TS 23.040 9.2.3.24)
+@return {Number} Byte array representing the SmsHeader
+*/
+toByteArray : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsHeader-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

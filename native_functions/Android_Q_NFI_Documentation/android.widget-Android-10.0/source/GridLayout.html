@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-GridLayout'>/**@class android.widget.GridLayout
+</span>@extends android.view.ViewGroup
+
+ A layout that places its children in a rectangular &lt;em&gt;grid&lt;/em&gt;.
+ &lt;p&gt;
+ The grid is composed of a set of infinitely thin lines that separate the
+ viewing area into &lt;em&gt;cells&lt;/em&gt;. Throughout the API, grid lines are referenced
+ by grid &lt;em&gt;indices&lt;/em&gt;. A grid with {@code N} columns
+ has {@code N + 1} grid indices that run from {@code 0}
+ through {@code N} inclusive. Regardless of how GridLayout is
+ configured, grid index {@code 0} is fixed to the leading edge of the
+ container and grid index {@code N} is fixed to its trailing edge
+ (after padding is taken into account).
+
+ &lt;h4&gt;Row and Column Specs&lt;/h4&gt;
+
+ Children occupy one or more contiguous cells, as defined
+ by their {@link android.widget.GridLayout.LayoutParams#rowSpec rowSpec} and
+ {@link android.widget.GridLayout.LayoutParams#columnSpec columnSpec} layout parameters.
+ Each spec defines the set of rows or columns that are to be
+ occupied; and how children should be aligned within the resulting group of cells.
+ Although cells do not normally overlap in a GridLayout, GridLayout does
+ not prevent children being defined to occupy the same cell or group of cells.
+ In this case however, there is no guarantee that children will not themselves
+ overlap after the layout operation completes.
+
+ &lt;h4&gt;Default Cell Assignment&lt;/h4&gt;
+
+ If a child does not specify the row and column indices of the cell it
+ wishes to occupy, GridLayout assigns cell locations automatically using its:
+ {@link android.widget.GridLayout#setOrientation(int) orientation},
+ {@link android.widget.GridLayout#setRowCount(int) rowCount} and
+ {@link android.widget.GridLayout#setColumnCount(int) columnCount} properties.
+
+ &lt;h4&gt;Space&lt;/h4&gt;
+
+ Space between children may be specified either by using instances of the
+ dedicated {@link android.widget.Space} view or by setting the
+
+ {@link ViewGroup.MarginLayoutParams#leftMargin leftMargin},
+ {@link ViewGroup.MarginLayoutParams#topMargin topMargin},
+ {@link ViewGroup.MarginLayoutParams#rightMargin rightMargin} and
+ {@link ViewGroup.MarginLayoutParams#bottomMargin bottomMargin}
+
+ layout parameters. When the
+ {@link android.widget.GridLayout#setUseDefaultMargins(boolean) useDefaultMargins}
+ property is set, default margins around children are automatically
+ allocated based on the prevailing UI style guide for the platform.
+ Each of the margins so defined may be independently overridden by an assignment
+ to the appropriate layout parameter.
+ Default values will generally produce a reasonable spacing between components
+ but values may change between different releases of the platform.
+
+ &lt;h4&gt;Excess Space Distribution&lt;/h4&gt;
+
+ As of API 21, GridLayout's distribution of excess space accomodates the principle of weight.
+ In the event that no weights are specified, the previous conventions are respected and
+ columns and rows are taken as flexible if their views specify some form of alignment
+ within their groups.
+ &lt;p&gt;
+ The flexibility of a view is therefore influenced by its alignment which is,
+ in turn, typically defined by setting the
+ {@link android.widget.AbsListView.LayoutParams#setGravity(int) gravity} property of the child's layout parameters.
+ If either a weight or alignment were defined along a given axis then the component
+ is taken as &lt;em&gt;flexible&lt;/em&gt; in that direction. If no weight or alignment was set,
+ the component is instead assumed to be &lt;em&gt;inflexible&lt;/em&gt;.
+ &lt;p&gt;
+ Multiple components in the same row or column group are
+ considered to act in &lt;em&gt;parallel&lt;/em&gt;. Such a
+ group is flexible only if &lt;em&gt;all&lt;/em&gt; of the components
+ within it are flexible. Row and column groups that sit either side of a common boundary
+ are instead considered to act in &lt;em&gt;series&lt;/em&gt;. The composite group made of these two
+ elements is flexible if &lt;em&gt;one&lt;/em&gt; of its elements is flexible.
+ &lt;p&gt;
+ To make a column stretch, make sure all of the components inside it define a
+ weight or a gravity. To prevent a column from stretching, ensure that one of the components
+ in the column does not define a weight or a gravity.
+ &lt;p&gt;
+ When the principle of flexibility does not provide complete disambiguation,
+ GridLayout's algorithms favour rows and columns that are closer to its &lt;em&gt;right&lt;/em&gt;
+ and &lt;em&gt;bottom&lt;/em&gt; edges. To be more precise, GridLayout treats each of its layout
+ parameters as a constraint in the a set of variables that define the grid-lines along a
+ given axis. During layout, GridLayout solves the constraints so as to return the unique
+ solution to those constraints for which all variables are less-than-or-equal-to
+ the corresponding value in any other valid solution.
+
+ &lt;h4&gt;Interpretation of GONE&lt;/h4&gt;
+
+ For layout purposes, GridLayout treats views whose visibility status is
+ {@link View#GONE GONE}, as having zero width and height. This is subtly different from
+ the policy of ignoring views that are marked as GONE outright. If, for example, a gone-marked
+ view was alone in a column, that column would itself collapse to zero width if and only if
+ no gravity was defined on the view. If gravity was defined, then the gone-marked
+ view has no effect on the layout and the container should be laid out as if the view
+ had never been added to it. GONE views are taken to have zero weight during excess space
+ distribution.
+ &lt;p&gt;
+ These statements apply equally to rows as well as columns, and to groups of rows or columns.
+
+ &lt;p&gt;
+ See {@link android.widget.GridLayout.LayoutParams} for a full description of the
+ layout parameters used by GridLayout.
+
+ @attr ref android.R.styleable#GridLayout_orientation
+ @attr ref android.R.styleable#GridLayout_rowCount
+ @attr ref android.R.styleable#GridLayout_columnCount
+ @attr ref android.R.styleable#GridLayout_useDefaultMargins
+ @attr ref android.R.styleable#GridLayout_rowOrderPreserved
+ @attr ref android.R.styleable#GridLayout_columnOrderPreserved
+*/
+var GridLayout = {
+
+<span id='android-widget-GridLayout-property-HORIZONTAL'>/** The horizontal orientation.
+</span>*/
+HORIZONTAL : &quot;0&quot;,
+<span id='android-widget-GridLayout-property-VERTICAL'>/** The vertical orientation.
+</span>*/
+VERTICAL : &quot;1&quot;,
+<span id='android-widget-GridLayout-property-UNDEFINED'>/** The constant used to indicate that a value is undefined.
+</span> Fields can use this value to indicate that their values
+ have not yet been set. Similarly, methods can return this value
+ to indicate that there is no suitable value that the implementation
+ can return.
+ The value used for the constant (currently {@link Integer#MIN_VALUE}) is
+ intended to avoid confusion between valid values whose sign may not be known.
+*/
+UNDEFINED : &quot;-2147483648&quot;,
+<span id='android-widget-GridLayout-property-ALIGN_BOUNDS'>/** This constant is an {@link #setAlignmentMode(int) alignmentMode}.
+</span> When the {@code alignmentMode} is set to {@link #ALIGN_BOUNDS}, alignment
+ is made between the edges of each component's raw
+ view boundary: i.e. the area delimited by the component's:
+ {@link android.view.View#getTop() top},
+ {@link android.view.View#getLeft() left},
+ {@link android.view.View#getBottom() bottom} and
+ {@link android.view.View#getRight() right} properties.
+ &lt;p&gt;
+ For example, when {@code GridLayout} is in {@link #ALIGN_BOUNDS} mode,
+ children that belong to a row group that uses {@link #TOP} alignment will
+ all return the same value when their {@link android.view.View#getTop()}
+ method is called.
+
+ @see #setAlignmentMode(int)
+*/
+ALIGN_BOUNDS : &quot;0&quot;,
+<span id='android-widget-GridLayout-property-ALIGN_MARGINS'>/** This constant is an {@link #setAlignmentMode(int) alignmentMode}.
+</span> When the {@code alignmentMode} is set to {@link #ALIGN_MARGINS},
+ the bounds of each view are extended outwards, according
+ to their margins, before the edges of the resulting rectangle are aligned.
+ &lt;p&gt;
+ For example, when {@code GridLayout} is in {@link #ALIGN_MARGINS} mode,
+ the quantity {@code top - layoutParams.topMargin} is the same for all children that
+ belong to a row group that uses {@link #TOP} alignment.
+
+ @see #setAlignmentMode(int)
+*/
+ALIGN_MARGINS : &quot;1&quot;,
+<span id='android-widget-GridLayout-property-TOP'>/** Indicates that a view should be aligned with the &lt;em&gt;top&lt;/em&gt;
+</span> edges of the other views in its cell group.
+*/
+TOP : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-BOTTOM'>/** Indicates that a view should be aligned with the &lt;em&gt;bottom&lt;/em&gt;
+</span> edges of the other views in its cell group.
+*/
+BOTTOM : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-START'>/** Indicates that a view should be aligned with the &lt;em&gt;start&lt;/em&gt;
+</span> edges of the other views in its cell group.
+*/
+START : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-END'>/** Indicates that a view should be aligned with the &lt;em&gt;end&lt;/em&gt;
+</span> edges of the other views in its cell group.
+*/
+END : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-LEFT'>/** Indicates that a view should be aligned with the &lt;em&gt;left&lt;/em&gt;
+</span> edges of the other views in its cell group.
+*/
+LEFT : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-RIGHT'>/** Indicates that a view should be aligned with the &lt;em&gt;right&lt;/em&gt;
+</span> edges of the other views in its cell group.
+*/
+RIGHT : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-CENTER'>/** Indicates that a view should be &lt;em&gt;centered&lt;/em&gt; with the other views in its cell group.
+</span> This constant may be used in both {@link android.widget.AbsListView.LayoutParams#rowSpec rowSpecs} and {@link android.widget.AbsListView.LayoutParams#columnSpec columnSpecs}.
+*/
+CENTER : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-BASELINE'>/** Indicates that a view should be aligned with the &lt;em&gt;baselines&lt;/em&gt;
+</span> of the other views in its cell group.
+ This constant may only be used as an alignment in {@link android.widget.AbsListView.LayoutParams#rowSpec rowSpecs}.
+
+ @see View#getBaseline()
+*/
+BASELINE : &quot;null&quot;,
+<span id='android-widget-GridLayout-property-FILL'>/** Indicates that a view should expanded to fit the boundaries of its cell group.
+</span> This constant may be used in both {@link android.widget.AbsListView.LayoutParams#rowSpec rowSpecs} and
+ {@link android.widget.AbsListView.LayoutParams#columnSpec columnSpecs}.
+*/
+FILL : &quot;null&quot;,
+<span id='android-widget-GridLayout-method-getOrientation'>/**Returns the current orientation.
+</span>@return {Number} either {@link #HORIZONTAL} or {@link #VERTICAL}
+@see #setOrientation(int)
+@attr ref android.R.styleable#GridLayout_orientation
+*/
+getOrientation : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setOrientation'>/**GridLayout uses the orientation property for two purposes:
+</span> &lt;ul&gt;
+  &lt;li&gt;
+      To control the 'direction' in which default row/column indices are generated
+      when they are not specified in a component's layout parameters.
+  &lt;/li&gt;
+  &lt;li&gt;
+      To control which axis should be processed first during the layout operation:
+      when orientation is {@link #HORIZONTAL} the horizontal axis is laid out first.
+  &lt;/li&gt;
+ &lt;/ul&gt;
+
+ The order in which axes are laid out is important if, for example, the height of
+ one of GridLayout's children is dependent on its width - and its width is, in turn,
+ dependent on the widths of other components.
+ &lt;p&gt;
+ If your layout contains a {@link android.widget.TextView} (or derivative:
+ {@code Button}, {@code EditText}, {@code CheckBox}, etc.) which is
+ in multi-line mode (the default) it is normally best to leave GridLayout's
+ orientation as {@code HORIZONTAL} - because {@code TextView} is capable of
+ deriving its height for a given width, but not the other way around.
+ &lt;p&gt;
+ Other than the effects above, orientation does not affect the actual layout operation of
+ GridLayout, so it's fine to leave GridLayout in {@code HORIZONTAL} mode even if
+ the height of the intended layout greatly exceeds its width.
+ &lt;p&gt;
+ The default value of this property is {@link #HORIZONTAL}.
+@param {Number} orientation either {@link #HORIZONTAL} or {@link #VERTICAL}
+@see #getOrientation()
+@attr ref android.R.styleable#GridLayout_orientation
+*/
+setOrientation : function(  ) {},
+
+<span id='android-widget-GridLayout-method-getRowCount'>/**Returns the current number of rows. This is either the last value that was set
+</span> with {@link #setRowCount}(int) or, if no such value was set, the maximum
+ value of each the upper bounds defined in {@link android.widget.AbsListView.LayoutParams#rowSpec}.
+@return {Number} the current number of rows
+@see #setRowCount(int)
+@see LayoutParams#rowSpec
+@attr ref android.R.styleable#GridLayout_rowCount
+*/
+getRowCount : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setRowCount'>/**RowCount is used only to generate default row/column indices when
+</span> they are not specified by a component's layout parameters.
+@param {Number} rowCount the number of rows
+@see #getRowCount()
+@see LayoutParams#rowSpec
+@attr ref android.R.styleable#GridLayout_rowCount
+*/
+setRowCount : function(  ) {},
+
+<span id='android-widget-GridLayout-method-getColumnCount'>/**Returns the current number of columns. This is either the last value that was set
+</span> with {@link #setColumnCount}(int) or, if no such value was set, the maximum
+ value of each the upper bounds defined in {@link android.widget.AbsListView.LayoutParams#columnSpec}.
+@return {Number} the current number of columns
+@see #setColumnCount(int)
+@see LayoutParams#columnSpec
+@attr ref android.R.styleable#GridLayout_columnCount
+*/
+getColumnCount : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setColumnCount'>/**ColumnCount is used only to generate default column/column indices when
+</span> they are not specified by a component's layout parameters.
+@param {Number} columnCount the number of columns.
+@see #getColumnCount()
+@see LayoutParams#columnSpec
+@attr ref android.R.styleable#GridLayout_columnCount
+*/
+setColumnCount : function(  ) {},
+
+<span id='android-widget-GridLayout-method-getUseDefaultMargins'>/**Returns whether or not this GridLayout will allocate default margins when no
+</span> corresponding layout parameters are defined.
+@return {Boolean} {@code true} if default margins should be allocated
+@see #setUseDefaultMargins(boolean)
+@attr ref android.R.styleable#GridLayout_useDefaultMargins
+*/
+getUseDefaultMargins : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setUseDefaultMargins'>/**When {@code true}, GridLayout allocates default margins around children
+</span> based on the child's visual characteristics. Each of the
+ margins so defined may be independently overridden by an assignment
+ to the appropriate layout parameter.
+ &lt;p&gt;
+ When {@code false}, the default value of all margins is zero.
+ &lt;p&gt;
+ When setting to {@code true}, consider setting the value of the
+ {@link #setAlignmentMode(int) alignmentMode}
+ property to {@link #ALIGN_BOUNDS}.
+ &lt;p&gt;
+ The default value of this property is {@code false}.
+@param {Boolean} useDefaultMargins use {@code true} to make GridLayout allocate default margins
+@see #getUseDefaultMargins()
+@see #setAlignmentMode(int)
+@see ViewGroup.MarginLayoutParams#leftMargin
+@see ViewGroup.MarginLayoutParams#topMargin
+@see ViewGroup.MarginLayoutParams#rightMargin
+@see ViewGroup.MarginLayoutParams#bottomMargin
+@attr ref android.R.styleable#GridLayout_useDefaultMargins
+*/
+setUseDefaultMargins : function(  ) {},
+
+<span id='android-widget-GridLayout-method-getAlignmentMode'>/**Returns the alignment mode.
+</span>@return {Number} the alignment mode; either {@link #ALIGN_BOUNDS} or {@link #ALIGN_MARGINS}
+@see #ALIGN_BOUNDS
+@see #ALIGN_MARGINS
+@see #setAlignmentMode(int)
+@attr ref android.R.styleable#GridLayout_alignmentMode
+*/
+getAlignmentMode : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setAlignmentMode'>/**Sets the alignment mode to be used for all of the alignments between the
+</span> children of this container.
+ &lt;p&gt;
+ The default value of this property is {@link #ALIGN_MARGINS}.
+@param {Number} alignmentMode either {@link #ALIGN_BOUNDS} or {@link #ALIGN_MARGINS}
+@see #ALIGN_BOUNDS
+@see #ALIGN_MARGINS
+@see #getAlignmentMode()
+@attr ref android.R.styleable#GridLayout_alignmentMode
+*/
+setAlignmentMode : function(  ) {},
+
+<span id='android-widget-GridLayout-method-isRowOrderPreserved'>/**Returns whether or not row boundaries are ordered by their grid indices.
+</span>@return {Boolean} {@code true} if row boundaries must appear in the order of their indices,
+         {@code false} otherwise
+@see #setRowOrderPreserved(boolean)
+@attr ref android.R.styleable#GridLayout_rowOrderPreserved
+*/
+isRowOrderPreserved : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setRowOrderPreserved'>/**When this property is {@code true}, GridLayout is forced to place the row boundaries
+</span> so that their associated grid indices are in ascending order in the view.
+ &lt;p&gt;
+ When this property is {@code false} GridLayout is at liberty to place the vertical row
+ boundaries in whatever order best fits the given constraints.
+ &lt;p&gt;
+ The default value of this property is {@code true}.
+@param {Boolean} rowOrderPreserved {@code true} to force GridLayout to respect the order
+        of row boundaries
+@see #isRowOrderPreserved()
+@attr ref android.R.styleable#GridLayout_rowOrderPreserved
+*/
+setRowOrderPreserved : function(  ) {},
+
+<span id='android-widget-GridLayout-method-isColumnOrderPreserved'>/**Returns whether or not column boundaries are ordered by their grid indices.
+</span>@return {Boolean} {@code true} if column boundaries must appear in the order of their indices,
+         {@code false} otherwise
+@see #setColumnOrderPreserved(boolean)
+@attr ref android.R.styleable#GridLayout_columnOrderPreserved
+*/
+isColumnOrderPreserved : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setColumnOrderPreserved'>/**When this property is {@code true}, GridLayout is forced to place the column boundaries
+</span> so that their associated grid indices are in ascending order in the view.
+ &lt;p&gt;
+ When this property is {@code false} GridLayout is at liberty to place the horizontal column
+ boundaries in whatever order best fits the given constraints.
+ &lt;p&gt;
+ The default value of this property is {@code true}.
+@param {Boolean} columnOrderPreserved use {@code true} to force GridLayout to respect the order
+        of column boundaries.
+@see #isColumnOrderPreserved()
+@attr ref android.R.styleable#GridLayout_columnOrderPreserved
+*/
+setColumnOrderPreserved : function(  ) {},
+
+<span id='android-widget-GridLayout-method-getPrinter'>/**Return the printer that will log diagnostics from this layout.
+</span>@see #setPrinter(android.util.Printer)
+@return {Object {android.util.Printer}} the printer associated with this view
+@hide 
+*/
+getPrinter : function(  ) {},
+
+<span id='android-widget-GridLayout-method-setPrinter'>/**Set the printer that will log diagnostics from this layout.
+</span> The default value is created by {@link android.util.LogPrinter}.
+@param {Object {Printer}} printer the printer associated with this layout
+@see #getPrinter()
+@hide 
+*/
+setPrinter : function(  ) {},
+
+<span id='android-widget-GridLayout-method-generateLayoutParams'>/**
+</span>*/
+generateLayoutParams : function(  ) {},
+
+<span id='android-widget-GridLayout-method-onViewAdded'>/**
+</span>*/
+onViewAdded : function(  ) {},
+
+<span id='android-widget-GridLayout-method-onViewRemoved'>/**
+</span>*/
+onViewRemoved : function(  ) {},
+
+<span id='android-widget-GridLayout-method-requestLayout'>/**
+</span>*/
+requestLayout : function(  ) {},
+
+<span id='android-widget-GridLayout-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Return a Spec, {@code spec}, where:
+</span> &lt;ul&gt;
+     &lt;li&gt; {@code spec.span = [start, start + size]} &lt;/li&gt;
+     &lt;li&gt; {@code spec.alignment = alignment} &lt;/li&gt;
+     &lt;li&gt; {@code spec.weight = weight} &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ To leave the start index undefined, use the value {@link #UNDEFINED}.
+@param {Number} start     the start
+@param {Number} size      the size
+@param {Object {GridLayout.Alignment}} alignment the alignment
+@param {Number} weight    the weight
+*/
+spec : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Equivalent to: {@code spec(start, 1, alignment, weight)}.
+</span>@param {Number} start     the start
+@param {Object {GridLayout.Alignment}} alignment the alignment
+@param {Number} weight    the weight
+*/
+spec : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Equivalent to: {@code spec(start, 1, default_alignment, weight)} -
+</span> where {@code default_alignment} is specified in
+ {@link android.widget.GridLayout.LayoutParams}.
+@param {Number} start  the start
+@param {Number} size   the size
+@param {Number} weight the weight
+*/
+spec : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Equivalent to: {@code spec(start, 1, weight)}.
+</span>@param {Number} start  the start
+@param {Number} weight the weight
+*/
+spec : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Equivalent to: {@code spec(start, size, alignment, 0f)}.
+</span>@param {Number} start     the start
+@param {Number} size      the size
+@param {Object {GridLayout.Alignment}} alignment the alignment
+*/
+spec : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Return a Spec, {@code spec}, where:
+</span> &lt;ul&gt;
+     &lt;li&gt; {@code spec.span = [start, start + 1]} &lt;/li&gt;
+     &lt;li&gt; {@code spec.alignment = alignment} &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ To leave the start index undefined, use the value {@link #UNDEFINED}.
+@param {Number} start     the start index
+@param {Object {GridLayout.Alignment}} alignment the alignment
+@see #spec(int, int, Alignment)
+*/
+spec : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Return a Spec, {@code spec}, where:
+</span> &lt;ul&gt;
+     &lt;li&gt; {@code spec.span = [start, start + size]} &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ To leave the start index undefined, use the value {@link #UNDEFINED}.
+@param {Number} start     the start
+@param {Number} size      the size
+@see #spec(int, Alignment)
+*/
+spec : function(  ) {},
+
+<span id='android-widget-GridLayout-method-spec'>/**Return a Spec, {@code spec}, where:
+</span> &lt;ul&gt;
+     &lt;li&gt; {@code spec.span = [start, start + 1]} &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ To leave the start index undefined, use the value {@link #UNDEFINED}.
+@param {Number} start     the start index
+@see #spec(int, int)
+*/
+spec : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

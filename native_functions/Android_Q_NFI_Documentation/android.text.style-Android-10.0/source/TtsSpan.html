@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-style-TtsSpan'>/**@class android.text.style.TtsSpan
+</span> implements android.text.ParcelableSpan
+
+@extends java.lang.Object
+
+ A span that supplies additional meta-data for the associated text intended
+ for text-to-speech engines. If the text is being processed by a
+ text-to-speech engine, the engine may use the data in this span in addition
+ to or instead of its associated text.
+
+ Each instance of a TtsSpan has a type, for example {@link #TYPE_DATE}
+ or {@link #TYPE_MEASURE}. And a list of arguments, provided as
+ key-value pairs in a bundle.
+
+ The inner classes are there for convenience and provide builders for each
+ TtsSpan type.
+*/
+var TtsSpan = {
+
+<span id='android-text-style-TtsSpan-property-TYPE_TEXT'>/** This span type can be used to add morphosyntactic features to the text it
+</span> spans over, or synthesize a something else than the spanned text. Use
+ the argument {@link #ARG_TEXT} to set a different text.
+ Accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and
+ {@link #ARG_CASE}.
+*/
+TYPE_TEXT : &quot;android.type.text&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_CARDINAL'>/** The text associated with this span is a cardinal. Must include the
+</span> number to be synthesized with {@link #ARG_NUMBER}.
+ Also accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and
+ {@link #ARG_CASE}.
+*/
+TYPE_CARDINAL : &quot;android.type.cardinal&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_ORDINAL'>/** The text associated with this span is an ordinal. Must include the
+</span> number to be synthesized with {@link #ARG_NUMBER}.
+ Also accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and
+ {@link #ARG_CASE}.
+*/
+TYPE_ORDINAL : &quot;android.type.ordinal&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_DECIMAL'>/** The text associated with this span is a decimal number. Must include the
+</span> number to be synthesized with {@link #ARG_INTEGER_PART} and
+ {@link #ARG_FRACTIONAL_PART}.
+ Also accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and
+ {@link #ARG_CASE}.
+*/
+TYPE_DECIMAL : &quot;android.type.decimal&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_FRACTION'>/** The text associated with this span is a fractional number. Must include
+</span> the number to be synthesized with {@link #ARG_NUMERATOR} and
+ {@link #ARG_DENOMINATOR}. {@link #ARG_INTEGER_PART} is optional
+ Also accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and
+ {@link #ARG_CASE}.
+*/
+TYPE_FRACTION : &quot;android.type.fraction&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_MEASURE'>/** The text associated with this span is a measure, consisting of a number
+</span> and a unit. The number can be a cardinal, decimal or a fraction. Set the
+ number with the same arguments as {@link #TYPE_CARDINAL},
+ {@link #TYPE_DECIMAL} or {@link #TYPE_FRACTION}. The unit can be
+ specified with {@link #ARG_UNIT}.
+ Also accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and
+ {@link #ARG_CASE}.
+*/
+TYPE_MEASURE : &quot;android.type.measure&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_TIME'>/** The text associated with this span is a time, consisting of a number of
+</span> hours and minutes, specified with {@link #ARG_HOURS} and
+ {@link #ARG_MINUTES}.
+ Also accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and
+ {@link #ARG_CASE}.
+*/
+TYPE_TIME : &quot;android.type.time&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_DATE'>/** The text associated with this span is a date. At least one of the
+</span> arguments {@link #ARG_MONTH} and {@link #ARG_YEAR} has to be provided.
+ The argument {@link #ARG_DAY} is optional if {@link #ARG_MONTH} is set.
+ The argument {@link #ARG_WEEKDAY} is optional if {@link #ARG_DAY} is set.
+ Also accepts the arguments {@link #ARG_GENDER}, {@link #ARG_ANIMACY},
+ {@link #ARG_MULTIPLICITY} and {@link #ARG_CASE}.
+*/
+TYPE_DATE : &quot;android.type.date&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_TELEPHONE'>/** The text associated with this span is a telephone number. The argument
+</span> {@link #ARG_NUMBER_PARTS} is required. {@link #ARG_COUNTRY_CODE} and
+ {@link #ARG_EXTENSION} are optional.
+ Also accepts the arguments {@link #ARG_GENDER}, {@link #ARG_ANIMACY},
+ {@link #ARG_MULTIPLICITY} and {@link #ARG_CASE}.
+*/
+TYPE_TELEPHONE : &quot;android.type.telephone&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_ELECTRONIC'>/** The text associated with this span is a URI (can be used for URLs and
+</span> email addresses). The full schema for URLs, which email addresses can
+ effectively be seen as a subset of, is:
+ protocol://username:password@domain:port/path?query_string#fragment_id
+ Hence populating just username and domain will read as an email address.
+ All arguments are optional, but at least one has to be provided:
+ {@link #ARG_PROTOCOL}, {@link #ARG_USERNAME}, {@link #ARG_PASSWORD},
+ {@link #ARG_DOMAIN}, {@link #ARG_PORT}, {@link #ARG_PATH},
+ {@link #ARG_QUERY_STRING} and {@link #ARG_FRAGMENT_ID}.
+ Also accepts the arguments {@link #ARG_GENDER}, {@link #ARG_ANIMACY},
+ {@link #ARG_MULTIPLICITY} and {@link #ARG_CASE}.
+*/
+TYPE_ELECTRONIC : &quot;android.type.electronic&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_MONEY'>/** The text associated with this span is an amount of money. Set the amount
+</span> with the same arguments as {@link #TYPE_DECIMAL}.
+ {@link #ARG_CURRENCY} is used to set the currency. {@link #ARG_QUANTITY}
+ is optional.
+ Also accepts the arguments {@link #ARG_GENDER}, {@link #ARG_ANIMACY},
+ {@link #ARG_MULTIPLICITY} and {@link #ARG_CASE}.
+*/
+TYPE_MONEY : &quot;android.type.money&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_DIGITS'>/** The text associated with this span is a series of digits that have to be
+</span> read sequentially. The digits can be set with {@link #ARG_DIGITS}.
+ Also accepts the arguments {@link #ARG_GENDER}, {@link #ARG_ANIMACY},
+ {@link #ARG_MULTIPLICITY} and {@link #ARG_CASE}.
+*/
+TYPE_DIGITS : &quot;android.type.digits&quot;,
+<span id='android-text-style-TtsSpan-property-TYPE_VERBATIM'>/** The text associated with this span is a series of characters that have to
+</span> be read verbatim. The engine will attempt to read out any character like
+ punctuation but excluding whitespace. {@link #ARG_VERBATIM} is required.
+ Also accepts the arguments {@link #ARG_GENDER},
+ {@link #ARG_ANIMACY}, {@link #ARG_MULTIPLICITY} and {@link #ARG_CASE}.
+*/
+TYPE_VERBATIM : &quot;android.type.verbatim&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_GENDER'>/** String argument supplying gender information. Can be any of
+</span> {@link #GENDER_NEUTRAL}, {@link #GENDER_MALE} and
+ {@link #GENDER_FEMALE}.
+*/
+ARG_GENDER : &quot;android.arg.gender&quot;,
+<span id='android-text-style-TtsSpan-property-GENDER_NEUTRAL'>/***/
+</span>GENDER_NEUTRAL : &quot;android.neutral&quot;,
+<span id='android-text-style-TtsSpan-property-GENDER_MALE'>/***/
+</span>GENDER_MALE : &quot;android.male&quot;,
+<span id='android-text-style-TtsSpan-property-GENDER_FEMALE'>/***/
+</span>GENDER_FEMALE : &quot;android.female&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_ANIMACY'>/** String argument supplying animacy information. Can be
+</span> {@link #ANIMACY_ANIMATE} or
+ {@link #ANIMACY_INANIMATE}
+*/
+ARG_ANIMACY : &quot;android.arg.animacy&quot;,
+<span id='android-text-style-TtsSpan-property-ANIMACY_ANIMATE'>/***/
+</span>ANIMACY_ANIMATE : &quot;android.animate&quot;,
+<span id='android-text-style-TtsSpan-property-ANIMACY_INANIMATE'>/***/
+</span>ANIMACY_INANIMATE : &quot;android.inanimate&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_MULTIPLICITY'>/** String argument supplying multiplicity information. Can be any of
+</span> {@link #MULTIPLICITY_SINGLE}, {@link #MULTIPLICITY_DUAL} and
+ {@link #MULTIPLICITY_PLURAL}
+*/
+ARG_MULTIPLICITY : &quot;android.arg.multiplicity&quot;,
+<span id='android-text-style-TtsSpan-property-MULTIPLICITY_SINGLE'>/***/
+</span>MULTIPLICITY_SINGLE : &quot;android.single&quot;,
+<span id='android-text-style-TtsSpan-property-MULTIPLICITY_DUAL'>/***/
+</span>MULTIPLICITY_DUAL : &quot;android.dual&quot;,
+<span id='android-text-style-TtsSpan-property-MULTIPLICITY_PLURAL'>/***/
+</span>MULTIPLICITY_PLURAL : &quot;android.plural&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_CASE'>/** String argument supplying case information. Can be any of
+</span> {@link #CASE_NOMINATIVE}, {@link #CASE_ACCUSATIVE}, {@link #CASE_DATIVE},
+ {@link #CASE_ABLATIVE}, {@link #CASE_GENITIVE}, {@link #CASE_VOCATIVE},
+ {@link #CASE_LOCATIVE} and {@link #CASE_INSTRUMENTAL}
+*/
+ARG_CASE : &quot;android.arg.case&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_NOMINATIVE'>/***/
+</span>CASE_NOMINATIVE : &quot;android.nominative&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_ACCUSATIVE'>/***/
+</span>CASE_ACCUSATIVE : &quot;android.accusative&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_DATIVE'>/***/
+</span>CASE_DATIVE : &quot;android.dative&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_ABLATIVE'>/***/
+</span>CASE_ABLATIVE : &quot;android.ablative&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_GENITIVE'>/***/
+</span>CASE_GENITIVE : &quot;android.genitive&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_VOCATIVE'>/***/
+</span>CASE_VOCATIVE : &quot;android.vocative&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_LOCATIVE'>/***/
+</span>CASE_LOCATIVE : &quot;android.locative&quot;,
+<span id='android-text-style-TtsSpan-property-CASE_INSTRUMENTAL'>/***/
+</span>CASE_INSTRUMENTAL : &quot;android.instrumental&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_TEXT'>/** String supplying the text to be synthesized. The synthesizer is free
+</span> to decide how to interpret the text.
+ Can be used with {@link #TYPE_TEXT}.
+*/
+ARG_TEXT : &quot;android.arg.text&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_NUMBER'>/** Argument used to specify a whole number. The value can be a string of
+</span> digits of any size optionally prefixed with a - or +.
+ Can be used with {@link #TYPE_CARDINAL} and {@link #TYPE_ORDINAL}.
+*/
+ARG_NUMBER : &quot;android.arg.number&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_INTEGER_PART'>/** Argument used to specify the integer part of a decimal or fraction. The
+</span> value can be a string of digits of any size optionally prefixed with
+ a - or +.
+ Can be used with {@link #TYPE_DECIMAL} and {@link #TYPE_FRACTION}.
+*/
+ARG_INTEGER_PART : &quot;android.arg.integer_part&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_FRACTIONAL_PART'>/** Argument used to specify the fractional part of a decimal. The value can
+</span> be a string of digits of any size.
+ Can be used with {@link #TYPE_DECIMAL}.
+*/
+ARG_FRACTIONAL_PART : &quot;android.arg.fractional_part&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_QUANTITY'>/** Argument used to choose the suffix (thousand, million, etc) that is used
+</span> to pronounce large amounts of money. For example it can be used to
+ disambiguate between &quot;two thousand five hundred dollars&quot; and
+ &quot;two point five thousand dollars&quot;.
+ If implemented, engines should support at least &quot;1000&quot;, &quot;1000000&quot;,
+ &quot;1000000000&quot; and &quot;1000000000000&quot;.
+ Example: if the {@link #ARG_INTEGER_PART} argument is &quot;10&quot;, the
+ {@link #ARG_FRACTIONAL_PART} argument is &quot;4&quot;, the {@link #ARG_QUANTITY}
+ argument is &quot;1000&quot; and the {@link #ARG_CURRENCY} argument is &quot;usd&quot;, the
+ TTS engine may pronounce the span as &quot;ten point four thousand dollars&quot;.
+ With the same example but with the quantity set as &quot;1000000&quot; the TTS
+ engine may pronounce the span as &quot;ten point four million dollars&quot;.
+ Can be used with {@link #TYPE_MONEY}.
+*/
+ARG_QUANTITY : &quot;android.arg.quantity&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_NUMERATOR'>/** Argument used to specify the numerator of a fraction. The value can be a
+</span> string of digits of any size optionally prefixed with a - or +.
+ Can be used with {@link #TYPE_FRACTION}.
+*/
+ARG_NUMERATOR : &quot;android.arg.numerator&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_DENOMINATOR'>/** Argument used to specify the denominator of a fraction. The value can be
+</span> a string of digits of any size optionally prefixed with a + or -.
+ Can be used with {@link #TYPE_FRACTION}.
+*/
+ARG_DENOMINATOR : &quot;android.arg.denominator&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_UNIT'>/** Argument used to specify the unit of a measure. The unit should always be
+</span> specified in English singular form. Prefixes may be used. Engines will do
+ their best to pronounce them correctly in the language used. Engines are
+ expected to at least support the most common ones like &quot;meter&quot;, &quot;second&quot;,
+ &quot;degree celsius&quot; and &quot;degree fahrenheit&quot; with some common prefixes like
+ &quot;milli&quot; and &quot;kilo&quot;.
+ Can be used with {@link #TYPE_MEASURE}.
+*/
+ARG_UNIT : &quot;android.arg.unit&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_HOURS'>/** Argument used to specify the hours of a time. The hours should be
+</span> provided as an integer in the range from 0 up to and including 24.
+ Can be used with {@link #TYPE_TIME}.
+*/
+ARG_HOURS : &quot;android.arg.hours&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_MINUTES'>/** Argument used to specify the minutes of a time. The hours should be
+</span> provided as an integer in the range from 0 up to and including 59.
+ Can be used with {@link #TYPE_TIME}.
+*/
+ARG_MINUTES : &quot;android.arg.minutes&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_WEEKDAY'>/** Argument used to specify the weekday of a date. The value should be
+</span> provided as an integer and can be any of {@link #WEEKDAY_SUNDAY},
+ {@link #WEEKDAY_MONDAY}, {@link #WEEKDAY_TUESDAY},
+ {@link #WEEKDAY_WEDNESDAY}, {@link #WEEKDAY_THURSDAY},
+ {@link #WEEKDAY_FRIDAY} and {@link #WEEKDAY_SATURDAY}.
+ Can be used with {@link #TYPE_DATE}.
+*/
+ARG_WEEKDAY : &quot;android.arg.weekday&quot;,
+<span id='android-text-style-TtsSpan-property-WEEKDAY_SUNDAY'>/***/
+</span>WEEKDAY_SUNDAY : &quot;1&quot;,
+<span id='android-text-style-TtsSpan-property-WEEKDAY_MONDAY'>/***/
+</span>WEEKDAY_MONDAY : &quot;2&quot;,
+<span id='android-text-style-TtsSpan-property-WEEKDAY_TUESDAY'>/***/
+</span>WEEKDAY_TUESDAY : &quot;3&quot;,
+<span id='android-text-style-TtsSpan-property-WEEKDAY_WEDNESDAY'>/***/
+</span>WEEKDAY_WEDNESDAY : &quot;4&quot;,
+<span id='android-text-style-TtsSpan-property-WEEKDAY_THURSDAY'>/***/
+</span>WEEKDAY_THURSDAY : &quot;5&quot;,
+<span id='android-text-style-TtsSpan-property-WEEKDAY_FRIDAY'>/***/
+</span>WEEKDAY_FRIDAY : &quot;6&quot;,
+<span id='android-text-style-TtsSpan-property-WEEKDAY_SATURDAY'>/***/
+</span>WEEKDAY_SATURDAY : &quot;7&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_DAY'>/** Argument used to specify the day of the month of a date. The value should
+</span> be provided as an integer in the range from 1 up to and including 31.
+ Can be used with {@link #TYPE_DATE}.
+*/
+ARG_DAY : &quot;android.arg.day&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_MONTH'>/** Argument used to specify the month of a date. The value should be
+</span> provided as an integer and can be any of {@link #MONTH_JANUARY},
+ {@link #MONTH_FEBRUARY},  {@link #MONTH_MARCH}, {@link #MONTH_APRIL},
+ {@link #MONTH_MAY}, {@link #MONTH_JUNE}, {@link #MONTH_JULY},
+ {@link #MONTH_AUGUST}, {@link #MONTH_SEPTEMBER}, {@link #MONTH_OCTOBER},
+ {@link #MONTH_NOVEMBER} and {@link #MONTH_DECEMBER}.
+ Can be used with {@link #TYPE_DATE}.
+*/
+ARG_MONTH : &quot;android.arg.month&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_JANUARY'>/***/
+</span>MONTH_JANUARY : &quot;0&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_FEBRUARY'>/***/
+</span>MONTH_FEBRUARY : &quot;1&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_MARCH'>/***/
+</span>MONTH_MARCH : &quot;2&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_APRIL'>/***/
+</span>MONTH_APRIL : &quot;3&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_MAY'>/***/
+</span>MONTH_MAY : &quot;4&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_JUNE'>/***/
+</span>MONTH_JUNE : &quot;5&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_JULY'>/***/
+</span>MONTH_JULY : &quot;6&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_AUGUST'>/***/
+</span>MONTH_AUGUST : &quot;7&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_SEPTEMBER'>/***/
+</span>MONTH_SEPTEMBER : &quot;8&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_OCTOBER'>/***/
+</span>MONTH_OCTOBER : &quot;9&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_NOVEMBER'>/***/
+</span>MONTH_NOVEMBER : &quot;10&quot;,
+<span id='android-text-style-TtsSpan-property-MONTH_DECEMBER'>/***/
+</span>MONTH_DECEMBER : &quot;11&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_YEAR'>/** Argument used to specify the year of a date. The value should be provided
+</span> as a positive integer.
+ Can be used with {@link #TYPE_DATE}.
+*/
+ARG_YEAR : &quot;android.arg.year&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_COUNTRY_CODE'>/** Argument used to specify the country code of a telephone number. Can be
+</span> a string of digits optionally prefixed with a &quot;+&quot;.
+ Can be used with {@link #TYPE_TELEPHONE}.
+*/
+ARG_COUNTRY_CODE : &quot;android.arg.country_code&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_NUMBER_PARTS'>/** Argument used to specify the main number part of a telephone number. Can
+</span> be a string of digits where the different parts of the telephone number
+ can be separated with a space, '-', '/' or '.'.
+ Can be used with {@link #TYPE_TELEPHONE}.
+*/
+ARG_NUMBER_PARTS : &quot;android.arg.number_parts&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_EXTENSION'>/** Argument used to specify the extension part of a telephone number. Can be
+</span> a string of digits.
+ Can be used with {@link #TYPE_TELEPHONE}.
+*/
+ARG_EXTENSION : &quot;android.arg.extension&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_PROTOCOL'>/** Argument used to specify the protocol of a URI. Examples are &quot;http&quot; and
+</span> &quot;ftp&quot;.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_PROTOCOL : &quot;android.arg.protocol&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_USERNAME'>/** Argument used to specify the username part of a URI. Should be set as a
+</span> string.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_USERNAME : &quot;android.arg.username&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_PASSWORD'>/** Argument used to specify the password part of a URI. Should be set as a
+</span> string.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_PASSWORD : &quot;android.arg.password&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_DOMAIN'>/** Argument used to specify the domain part of a URI. For example
+</span> &quot;source.android.com&quot;.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_DOMAIN : &quot;android.arg.domain&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_PORT'>/** Argument used to specify the port number of a URI. Should be specified as
+</span> an integer.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_PORT : &quot;android.arg.port&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_PATH'>/** Argument used to specify the path part of a URI. For example
+</span> &quot;source/index.html&quot;.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_PATH : &quot;android.arg.path&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_QUERY_STRING'>/** Argument used to specify the query string of a URI. For example
+</span> &quot;arg=value&amp;argtwo=value&quot;.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_QUERY_STRING : &quot;android.arg.query_string&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_FRAGMENT_ID'>/** Argument used to specify the fragment id of a URI. Should be specified as
+</span> a string.
+ Can be used with {@link #TYPE_ELECTRONIC}.
+*/
+ARG_FRAGMENT_ID : &quot;android.arg.fragment_id&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_CURRENCY'>/** Argument used to specify the currency. Should be a ISO4217 currency code,
+</span> e.g. &quot;USD&quot;.
+ Can be used with {@link #TYPE_MONEY}.
+*/
+ARG_CURRENCY : &quot;android.arg.money&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_DIGITS'>/** Argument used to specify a string of digits.
+</span> Can be used with {@link #TYPE_DIGITS}.
+*/
+ARG_DIGITS : &quot;android.arg.digits&quot;,
+<span id='android-text-style-TtsSpan-property-ARG_VERBATIM'>/** Argument used to specify a string where the characters are read verbatim,
+</span> except whitespace.
+ Can be used with {@link #TYPE_VERBATIM}.
+*/
+ARG_VERBATIM : &quot;android.arg.verbatim&quot;,
+<span id='android-text-style-TtsSpan-method-getType'>/**Returns the type.
+</span>@return {String} The type of this instance.
+*/
+getType : function(  ) {},
+
+<span id='android-text-style-TtsSpan-method-getArgs'>/**Returns a bundle of the arguments set.
+</span>@return {Object {android.os.PersistableBundle}} The bundle of the arguments set.
+*/
+getArgs : function(  ) {},
+
+<span id='android-text-style-TtsSpan-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-text-style-TtsSpan-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-text-style-TtsSpan-method-writeToParcelInternal'>/**
+</span>@hide 
+*/
+writeToParcelInternal : function(  ) {},
+
+<span id='android-text-style-TtsSpan-method-getSpanTypeId'>/**
+</span>*/
+getSpanTypeId : function(  ) {},
+
+<span id='android-text-style-TtsSpan-method-getSpanTypeIdInternal'>/**
+</span>@hide 
+*/
+getSpanTypeIdInternal : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

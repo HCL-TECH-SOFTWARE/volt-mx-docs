@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-inputmethod-InputMethodManager'>/**@class android.view.inputmethod.InputMethodManager
+</span>@extends java.lang.Object
+
+ Central system API to the overall input method framework (IMF) architecture,
+ which arbitrates interaction between applications and the current input method.
+
+ &lt;p&gt;Topics covered here:
+ &lt;ol&gt;
+ &lt;li&gt;&lt;a href=&quot;#ArchitectureOverview&quot;&gt;Architecture Overview&lt;/a&gt;
+ &lt;li&gt;&lt;a href=&quot;#Applications&quot;&gt;Applications&lt;/a&gt;
+ &lt;li&gt;&lt;a href=&quot;#InputMethods&quot;&gt;Input Methods&lt;/a&gt;
+ &lt;li&gt;&lt;a href=&quot;#Security&quot;&gt;Security&lt;/a&gt;
+ &lt;/ol&gt;
+
+ &lt;a name=&quot;ArchitectureOverview&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Architecture Overview&lt;/h3&gt;
+
+ &lt;p&gt;There are three primary parties involved in the input method
+ framework (IMF) architecture:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt; The &lt;strong&gt;input method manager&lt;/strong&gt; as expressed by this class
+ is the central point of the system that manages interaction between all
+ other parts.  It is expressed as the client-side API here which exists
+ in each application context and communicates with a global system service
+ that manages the interaction across all processes.
+ &lt;li&gt; An &lt;strong&gt;input method (IME)&lt;/strong&gt; implements a particular
+ interaction model allowing the user to generate text.  The system binds
+ to the current input method that is in use, causing it to be created and run,
+ and tells it when to hide and show its UI.  Only one IME is running at a time.
+ &lt;li&gt; Multiple &lt;strong&gt;client applications&lt;/strong&gt; arbitrate with the input
+ method manager for input focus and control over the state of the IME.  Only
+ one such client is ever active (working with the IME) at a time.
+ &lt;/ul&gt;
+
+
+ &lt;a name=&quot;Applications&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Applications&lt;/h3&gt;
+
+ &lt;p&gt;In most cases, applications that are using the standard
+ {@link android.widget.TextView} or its subclasses will have little they need
+ to do to work well with soft input methods.  The main things you need to
+ be aware of are:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt; Properly set the {@link android.R.attr#inputType} in your editable
+ text views, so that the input method will have enough context to help the
+ user in entering text into them.
+ &lt;li&gt; Deal well with losing screen space when the input method is
+ displayed.  Ideally an application should handle its window being resized
+ smaller, but it can rely on the system performing panning of the window
+ if needed.  You should set the {@link android.R.attr#windowSoftInputMode}
+ attribute on your activity or the corresponding values on windows you
+ create to help the system determine whether to pan or resize (it will
+ try to determine this automatically but may get it wrong).
+ &lt;li&gt; You can also control the preferred soft input state (open, closed, etc)
+ for your window using the same {@link android.R.attr#windowSoftInputMode}
+ attribute.
+ &lt;/ul&gt;
+
+ &lt;p&gt;More finer-grained control is available through the APIs here to directly
+ interact with the IMF and its IME -- either showing or hiding the input
+ area, letting the user pick an input method, etc.&lt;/p&gt;
+
+ &lt;p&gt;For the rare people amongst us writing their own text editors, you
+ will need to implement {@link android.view.View#onCreateInputConnection}
+ to return a new instance of your own {@link android.view.inputmethod.InputConnection} interface
+ allowing the IME to interact with your editor.&lt;/p&gt;
+
+
+ &lt;a name=&quot;InputMethods&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Input Methods&lt;/h3&gt;
+
+ &lt;p&gt;An input method (IME) is implemented
+ as a {@link android.app.Service}, typically deriving from
+ {@link android.inputmethodservice.InputMethodService}.  It must provide
+ the core {@link android.view.inputmethod.InputMethod} interface, though this is normally handled by
+ {@link android.inputmethodservice.InputMethodService} and implementors will
+ only need to deal with the higher-level API there.&lt;/p&gt;
+
+ See the {@link android.inputmethodservice.InputMethodService} class for
+ more information on implementing IMEs.
+
+
+ &lt;a name=&quot;Security&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Security&lt;/h3&gt;
+
+ &lt;p&gt;There are a lot of security issues associated with input methods,
+ since they essentially have freedom to completely drive the UI and monitor
+ everything the user enters.  The Android input method framework also allows
+ arbitrary third party IMEs, so care must be taken to restrict their
+ selection and interactions.&lt;/p&gt;
+
+ &lt;p&gt;Here are some key points about the security architecture behind the
+ IMF:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt; &lt;p&gt;Only the system is allowed to directly access an IME's
+ {@link android.view.inputmethod.InputMethod} interface, via the
+ {@link android.Manifest.permission#BIND_INPUT_METHOD} permission.  This is
+ enforced in the system by not binding to an input method service that does
+ not require this permission, so the system can guarantee no other untrusted
+ clients are accessing the current input method outside of its control.&lt;/p&gt;
+
+ &lt;li&gt; &lt;p&gt;There may be many client processes of the IMF, but only one may
+ be active at a time.  The inactive clients can not interact with key
+ parts of the IMF through the mechanisms described below.&lt;/p&gt;
+
+ &lt;li&gt; &lt;p&gt;Clients of an input method are only given access to its
+ {@link android.view.inputmethod.InputMethodSession} interface.  One instance of this interface is
+ created for each client, and only calls from the session associated with
+ the active client will be processed by the current IME.  This is enforced
+ by {@link android.inputmethodservice.AbstractInputMethodService} for normal
+ IMEs, but must be explicitly handled by an IME that is customizing the
+ raw {@link android.view.inputmethod.InputMethodSession} implementation.&lt;/p&gt;
+
+ &lt;li&gt; &lt;p&gt;Only the active client's {@link android.view.inputmethod.InputConnection} will accept
+ operations.  The IMF tells each client process whether it is active, and
+ the framework enforces that in inactive processes calls on to the current
+ InputConnection will be ignored.  This ensures that the current IME can
+ only deliver events and text edits to the UI that the user sees as
+ being in focus.&lt;/p&gt;
+
+ &lt;li&gt; &lt;p&gt;An IME can never interact with an {@link android.view.inputmethod.InputConnection} while
+ the screen is off.  This is enforced by making all clients inactive while
+ the screen is off, and prevents bad IMEs from driving the UI when the user
+ can not be aware of its behavior.&lt;/p&gt;
+
+ &lt;li&gt; &lt;p&gt;A client application can ask that the system let the user pick a
+ new IME, but can not programmatically switch to one itself.  This avoids
+ malicious applications from switching the user to their own IME, which
+ remains running when the user navigates away to another application.  An
+ IME, on the other hand, &lt;em&gt;is&lt;/em&gt; allowed to programmatically switch
+ the system to another IME, since it already has full control of user
+ input.&lt;/p&gt;
+
+ &lt;li&gt; &lt;p&gt;The user must explicitly enable a new IME in settings before
+ they can switch to it, to confirm with the system that they know about it
+ and want to make it available for use.&lt;/p&gt;
+ &lt;/ul&gt;
+*/
+var InputMethodManager = {
+
+<span id='android-view-inputmethod-InputMethodManager-property-DISPATCH_IN_PROGRESS'>/**@hide */
+</span>DISPATCH_IN_PROGRESS : &quot;-1&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-DISPATCH_NOT_HANDLED'>/**@hide */
+</span>DISPATCH_NOT_HANDLED : &quot;0&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-DISPATCH_HANDLED'>/**@hide */
+</span>DISPATCH_HANDLED : &quot;1&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-SHOW_IM_PICKER_MODE_AUTO'>/**@hide */
+</span>SHOW_IM_PICKER_MODE_AUTO : &quot;0&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-SHOW_IM_PICKER_MODE_INCLUDE_AUXILIARY_SUBTYPES'>/**@hide */
+</span>SHOW_IM_PICKER_MODE_INCLUDE_AUXILIARY_SUBTYPES : &quot;1&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-SHOW_IM_PICKER_MODE_EXCLUDE_AUXILIARY_SUBTYPES'>/**@hide */
+</span>SHOW_IM_PICKER_MODE_EXCLUDE_AUXILIARY_SUBTYPES : &quot;2&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-SHOW_IMPLICIT'>/** Flag for {@link #showSoftInput} to indicate that this is an implicit
+</span> request to show the input window, not as the result of a direct request
+ by the user.  The window may not be shown in this case.
+*/
+SHOW_IMPLICIT : &quot;1&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-SHOW_FORCED'>/** Flag for {@link #showSoftInput} to indicate that the user has forced
+</span> the input method open (such as by long-pressing menu) so it should
+ not be closed until they explicitly do so.
+*/
+SHOW_FORCED : &quot;2&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-RESULT_UNCHANGED_SHOWN'>/** Flag for the {@link ResultReceiver} result code from
+</span> {@link #showSoftInput(View, int, ResultReceiver)} and
+ {@link #hideSoftInputFromWindow(IBinder, int, ResultReceiver)}: the
+ state of the soft input window was unchanged and remains shown.
+*/
+RESULT_UNCHANGED_SHOWN : &quot;0&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-RESULT_UNCHANGED_HIDDEN'>/** Flag for the {@link ResultReceiver} result code from
+</span> {@link #showSoftInput(View, int, ResultReceiver)} and
+ {@link #hideSoftInputFromWindow(IBinder, int, ResultReceiver)}: the
+ state of the soft input window was unchanged and remains hidden.
+*/
+RESULT_UNCHANGED_HIDDEN : &quot;1&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-RESULT_SHOWN'>/** Flag for the {@link ResultReceiver} result code from
+</span> {@link #showSoftInput(View, int, ResultReceiver)} and
+ {@link #hideSoftInputFromWindow(IBinder, int, ResultReceiver)}: the
+ state of the soft input window changed from hidden to shown.
+*/
+RESULT_SHOWN : &quot;2&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-RESULT_HIDDEN'>/** Flag for the {@link ResultReceiver} result code from
+</span> {@link #showSoftInput(View, int, ResultReceiver)} and
+ {@link #hideSoftInputFromWindow(IBinder, int, ResultReceiver)}: the
+ state of the soft input window changed from shown to hidden.
+*/
+RESULT_HIDDEN : &quot;3&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-HIDE_IMPLICIT_ONLY'>/** Flag for {@link #hideSoftInputFromWindow} and {@link android.view.inputmethod.InputMethodService#requestHideSelf(int)}
+</span> to indicate that the soft input window should only be hidden if it was not explicitly shown
+ by the user.
+*/
+HIDE_IMPLICIT_ONLY : &quot;1&quot;,
+<span id='android-view-inputmethod-InputMethodManager-property-HIDE_NOT_ALWAYS'>/** Flag for {@link #hideSoftInputFromWindow} and {@link android.view.inputmethod.InputMethodService#requestShowSelf(int)}
+</span> to indicate that the soft input window should normally be hidden, unless it was originally
+ shown with {@link #SHOW_FORCED}.
+*/
+HIDE_NOT_ALWAYS : &quot;2&quot;,
+<span id='android-view-inputmethod-InputMethodManager-method-ensureDefaultInstanceForDefaultDisplayIfNecessary'>/**Ensures that {@link #sInstance} becomes non-{@code null} for application that have directly
+</span> or indirectly relied on {@link #sInstance} via reflection or something like that.
+
+ &lt;p&gt;Here are scenarios we know and there could be more scenarios we are not
+ aware of right know.&lt;/p&gt;
+
+ &lt;ul&gt;
+     &lt;li&gt;Apps that directly access {@link #sInstance} via reflection, which is currently
+     allowed because of {@link UnsupportedAppUsage} annotation.  Currently
+     {@link android.view.WindowManagerGlobal#getWindowSession()} is likely to guarantee that
+     {@link #sInstance} is not {@code null} when such an app is accessing it, but removing
+     that code from {@link android.view.WindowManagerGlobal#getWindowSession()} can reveal
+     untested code paths in their apps, which probably happen in an early startup time of that
+     app.&lt;/li&gt;
+     &lt;li&gt;Apps that directly access {@link #peekInstance}() via reflection, which is currently
+     allowed because of {@link UnsupportedAppUsage} annotation.  Currently
+     {@link android.view.WindowManagerGlobal#getWindowSession()} is likely to guarantee that
+     {@link #peekInstance}() returns non-{@code null} object when such an app is calling
+     {@link #peekInstance}(), but removing that code from
+     {@link android.view.WindowManagerGlobal#getWindowSession()} can reveal untested code
+     paths in their apps, which probably happen in an early startup time of that app. The good
+     news is that unlike {@link #sInstance}'s case we can at least work around this scenario
+     by changing the semantics of {@link #peekInstance}(), which is currently defined as
+     &quot;retrieve the global {@link android.view.inputmethod.InputMethodManager} instance, if it exists&quot; to something that
+     always returns non-{@code null} {@link android.view.inputmethod.InputMethodManager}.  However, introducing such an
+     workaround can also trigger different compatibility issues if {@link #peekInstance}() was
+     called before {@link android.view.WindowManagerGlobal#getWindowSession()} and it expected
+     {@link #peekInstance}() to return {@code null} as written in the JavaDoc.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Since this is purely a compatibility hack, this method must be used only from
+ {@link android.view.WindowManagerGlobal#getWindowSession()} and {@link #getInstance}().&lt;/p&gt;
+
+ &lt;p&gt;TODO(Bug 116157766): Remove this method once we clean up {@link UnsupportedAppUsage}.&lt;/p&gt;
+@hide 
+*/
+ensureDefaultInstanceForDefaultDisplayIfNecessary : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-forContext'>/**Retrieve an instance for the given {@link Context}, creating it if it doesn't already exist.
+</span>@param {Object {Context}} context {@link Context} for which IME APIs need to work
+@return {Object {android.view.inputmethod.InputMethodManager}} {@link InputMethodManager} instance
+@hide 
+*/
+forContext : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getInstance'>/**Deprecated. Do not use.
+</span>@return {Object {android.view.inputmethod.InputMethodManager}} global {@link InputMethodManager} instance
+@deprecated Use {@link Context#getSystemService(Class)} instead. This method cannot fully
+             support multi-display scenario.
+@hide 
+*/
+getInstance : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-peekInstance'>/**Deprecated. Do not use.
+</span>@return {Object {android.view.inputmethod.InputMethodManager}} {@link #sInstance}
+@deprecated Use {@link Context#getSystemService(Class)} instead. This method cannot fully
+             support multi-display scenario.
+@hide 
+*/
+peekInstance : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getClient'>/**
+</span>@hide 
+*/
+getClient : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getInputContext'>/**
+</span>@hide 
+*/
+getInputContext : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getInputMethodList'>/**Returns the list of installed input methods.
+</span>
+ &lt;p&gt;On multi user environment, this API returns a result for the calling process user.&lt;/p&gt;
+@return {Object {java.util.List}} {@link List} of {@link InputMethodInfo}.
+*/
+getInputMethodList : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getInputMethodListAsUser'>/**Returns the list of installed input methods for the specified user.
+</span>@param {Number} userId user ID to query
+@return {Object {java.util.List}} {@link List} of {@link InputMethodInfo}.
+@hide 
+*/
+getInputMethodListAsUser : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getEnabledInputMethodList'>/**Returns the list of enabled input methods.
+</span>
+ &lt;p&gt;On multi user environment, this API returns a result for the calling process user.&lt;/p&gt;
+@return {Object {java.util.List}} {@link List} of {@link InputMethodInfo}.
+*/
+getEnabledInputMethodList : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getEnabledInputMethodListAsUser'>/**Returns the list of enabled input methods for the specified user.
+</span>@param {Number} userId user ID to query
+@return {Object {java.util.List}} {@link List} of {@link InputMethodInfo}.
+@hide 
+*/
+getEnabledInputMethodListAsUser : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getEnabledInputMethodSubtypeList'>/**Returns a list of enabled input method subtypes for the specified input method info.
+</span>
+ &lt;p&gt;On multi user environment, this API returns a result for the calling process user.&lt;/p&gt;
+@param {Object {InputMethodInfo}} imi An input method info whose subtypes list will be returned.
+@param {Boolean} allowsImplicitlySelectedSubtypes A boolean flag to allow to return the implicitly
+ selected subtypes. If an input method info doesn't have enabled subtypes, the framework
+ will implicitly enable subtypes according to the current system language.
+*/
+getEnabledInputMethodSubtypeList : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showStatusIcon'>/**
+</span>@deprecated Use {@link InputMethodService#showStatusIcon(int)} instead. This method was
+ intended for IME developers who should be accessing APIs through the service. APIs in this
+ class are intended for app developers interacting with the IME.
+*/
+showStatusIcon : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-hideStatusIcon'>/**
+</span>@deprecated Use {@link InputMethodService#hideStatusIcon()} instead. This method was
+ intended for IME developers who should be accessing APIs through the service. APIs in
+ this class are intended for app developers interacting with the IME.
+*/
+hideStatusIcon : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-registerSuggestionSpansForNotification'>/**This hidden API is deprecated in {@link android.os.Build.VERSION_CODES#Q}. Does nothing.
+</span>@param {Object {android.text.style.SuggestionSpan[]}} spans will be ignored.
+@deprecated Do not use.
+@hide 
+*/
+registerSuggestionSpansForNotification : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-notifySuggestionPicked'>/**This hidden API is deprecated in {@link android.os.Build.VERSION_CODES#Q}. Does nothing.
+</span>@deprecated Do not use.
+@hide 
+*/
+notifySuggestionPicked : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-isFullscreenMode'>/**Allows you to discover whether the attached input method is running
+</span> in fullscreen mode.  Return true if it is fullscreen, entirely covering
+ your UI, else returns false.
+*/
+isFullscreenMode : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-isActive'>/**Return true if the given view is the currently active view for the
+</span> input method.
+*/
+isActive : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-isActive'>/**Return true if any view is currently active in the input method.
+</span>*/
+isActive : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-isAcceptingText'>/**Return true if the currently served view is accepting full text edits.
+</span> If false, it has no input connection, so can only handle raw key events.
+*/
+isAcceptingText : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-displayCompletions'>/**
+</span>*/
+displayCompletions : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-updateExtractedText'>/**
+</span>*/
+updateExtractedText : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showSoftInput'>/**Synonym for {@link #showSoftInput(View, int, ResultReceiver)} without
+</span> a result receiver: explicitly request that the current input method's
+ soft input area be shown to the user, if needed.
+@param {Object {View}} view The currently focused view, which would like to receive
+ soft keyboard input.
+@param {Number} flags Provides additional operating flags.  Currently may be
+ 0 or have the {@link #SHOW_IMPLICIT} bit set.
+*/
+showSoftInput : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showSoftInput'>/**Explicitly request that the current input method's soft input area be
+</span> shown to the user, if needed.  Call this if the user interacts with
+ your view in such a way that they have expressed they would like to
+ start performing input into it.
+
+ &lt;p&gt;&lt;strong&gt;Caveat:&lt;/strong&gt; {@link ResultReceiver} instance passed to
+ this method can be a long-lived object, because it may not be
+ garbage-collected until all the corresponding {@link ResultReceiver}
+ objects transferred to different processes get garbage-collected.
+ Follow the general patterns to avoid memory leaks in Android.
+ Consider to use {@link java.lang.ref.WeakReference} so that application
+ logic objects such as {@link android.app.Activity} and {@link Context}
+ can be garbage collected regardless of the lifetime of
+ {@link ResultReceiver}.
+@param {Object {View}} view The currently focused view, which would like to receive
+ soft keyboard input.
+@param {Number} flags Provides additional operating flags.  Currently may be
+ 0 or have the {@link #SHOW_IMPLICIT} bit set.
+@param {Object {ResultReceiver}} resultReceiver If non-null, this will be called by the IME when
+ it has processed your request to tell you what it has done.  The result
+ code you receive may be either {@link #RESULT_UNCHANGED_SHOWN},
+ {@link #RESULT_UNCHANGED_HIDDEN}, {@link #RESULT_SHOWN}, or
+ {@link #RESULT_HIDDEN}.
+*/
+showSoftInput : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showSoftInputUnchecked'>/**This method is still kept for a while until android.support.v7.widget.SearchView ver. 26.0
+</span> is publicly released because previous implementations of that class had relied on this method
+ via reflection.
+@deprecated This is a hidden API. You should never use this.
+@hide 
+*/
+showSoftInputUnchecked : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-hideSoftInputFromWindow'>/**Synonym for {@link #hideSoftInputFromWindow(IBinder, int, ResultReceiver)}
+</span> without a result: request to hide the soft input window from the
+ context of the window that is currently accepting input.
+@param {Object {IBinder}} windowToken The token of the window that is making the request,
+ as returned by {@link View#getWindowToken() View.getWindowToken()}.
+@param {Number} flags Provides additional operating flags.  Currently may be
+ 0 or have the {@link #HIDE_IMPLICIT_ONLY} bit set.
+*/
+hideSoftInputFromWindow : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-hideSoftInputFromWindow'>/**Request to hide the soft input window from the context of the window
+</span> that is currently accepting input.  This should be called as a result
+ of the user doing some actually than fairly explicitly requests to
+ have the input window hidden.
+
+ &lt;p&gt;&lt;strong&gt;Caveat:&lt;/strong&gt; {@link ResultReceiver} instance passed to
+ this method can be a long-lived object, because it may not be
+ garbage-collected until all the corresponding {@link ResultReceiver}
+ objects transferred to different processes get garbage-collected.
+ Follow the general patterns to avoid memory leaks in Android.
+ Consider to use {@link java.lang.ref.WeakReference} so that application
+ logic objects such as {@link android.app.Activity} and {@link Context}
+ can be garbage collected regardless of the lifetime of
+ {@link ResultReceiver}.
+@param {Object {IBinder}} windowToken The token of the window that is making the request,
+ as returned by {@link View#getWindowToken() View.getWindowToken()}.
+@param {Number} flags Provides additional operating flags.  Currently may be
+ 0 or have the {@link #HIDE_IMPLICIT_ONLY} bit set.
+@param {Object {ResultReceiver}} resultReceiver If non-null, this will be called by the IME when
+ it has processed your request to tell you what it has done.  The result
+ code you receive may be either {@link #RESULT_UNCHANGED_SHOWN},
+ {@link #RESULT_UNCHANGED_HIDDEN}, {@link #RESULT_SHOWN}, or
+ {@link #RESULT_HIDDEN}.
+*/
+hideSoftInputFromWindow : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-toggleSoftInputFromWindow'>/**This method toggles the input method window display.
+</span> If the input window is already displayed, it gets hidden.
+ If not the input window will be displayed.
+@param {Object {IBinder}} windowToken The token of the window that is making the request,
+ as returned by {@link View#getWindowToken() View.getWindowToken()}.
+@param {Number} showFlags Provides additional operating flags.  May be
+ 0 or have the {@link #SHOW_IMPLICIT},
+ {@link #SHOW_FORCED} bit set.
+@param {Number} hideFlags Provides additional operating flags.  May be
+ 0 or have the {@link #HIDE_IMPLICIT_ONLY},
+ {@link #HIDE_NOT_ALWAYS} bit set.
+*/
+toggleSoftInputFromWindow : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-toggleSoftInput'>/**This method toggles the input method window display.
+</span>
+ If the input window is already displayed, it gets hidden.
+ If not the input window will be displayed.
+@param {Number} showFlags Provides additional operating flags.  May be
+ 0 or have the {@link #SHOW_IMPLICIT},
+ {@link #SHOW_FORCED} bit set.
+@param {Number} hideFlags Provides additional operating flags.  May be
+ 0 or have the {@link #HIDE_IMPLICIT_ONLY},
+ {@link #HIDE_NOT_ALWAYS} bit set.
+*/
+toggleSoftInput : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-restartInput'>/**If the input method is currently connected to the given view,
+</span> restart it with its new contents.  You should call this when the text
+ within your view changes outside of the normal input method or key
+ input flow, such as when an application calls TextView.setText().
+@param {Object {View}} view The view whose text has changed.
+*/
+restartInput : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-windowDismissed'>/**When the focused window is dismissed, this method is called to finish the
+</span> input method started before.
+@hide 
+*/
+windowDismissed : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-focusIn'>/**Call this when a view receives focus.
+</span>@hide 
+*/
+focusIn : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-focusOut'>/**Call this when a view loses focus.
+</span>@hide 
+*/
+focusOut : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-onViewDetachedFromWindow'>/**Call this when a view is being detached from a {@link android.view.Window}.
+</span>@hide 
+*/
+onViewDetachedFromWindow : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-checkFocus'>/**
+</span>@hide 
+*/
+checkFocus : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-onPostWindowFocus'>/**Called by ViewAncestor when its window gets input focus.
+</span>@hide 
+*/
+onPostWindowFocus : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-onPreWindowFocus'>/**
+</span>@hide 
+*/
+onPreWindowFocus : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-registerImeConsumer'>/**Register for IME state callbacks and applying visibility in
+</span> {@link android.view.ImeInsetsSourceConsumer}.
+@hide 
+*/
+registerImeConsumer : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-unregisterImeConsumer'>/**Unregister for IME state callbacks and applying visibility in
+</span> {@link android.view.ImeInsetsSourceConsumer}.
+@hide 
+*/
+unregisterImeConsumer : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-requestImeShow'>/**Call showSoftInput with currently focused view.
+</span>@return {Boolean} {@code true} if IME can be shown.
+@hide 
+*/
+requestImeShow : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-notifyImeHidden'>/**Notify IME directly that it is no longer visible.
+</span>@hide 
+*/
+notifyImeHidden : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-updateSelection'>/**Report the current selection range.
+</span>
+ &lt;p&gt;&lt;strong&gt;Editor authors&lt;/strong&gt;, you need to call this method whenever
+ the cursor moves in your editor. Remember that in addition to doing this, your
+ editor needs to always supply current cursor values in
+ {@link android.view.inputmethod.EditorInfo#initialSelStart} and {@link android.view.inputmethod.EditorInfo#initialSelEnd} every
+ time {@link android.view.View#onCreateInputConnection(EditorInfo)} is
+ called, which happens whenever the keyboard shows up or the focus changes
+ to a text field, among other cases.&lt;/p&gt;
+*/
+updateSelection : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-viewClicked'>/**Notify the event when the user tapped or clicked the text view.
+</span>@param {Object {View}} view {@link View} which is being clicked.
+@see InputMethodService#onViewClicked(boolean)
+@deprecated The semantics of this method can never be defined well for composite {@link View}
+             that works as a giant &quot;Canvas&quot;, which can host its own UI hierarchy and sub focus
+             state. {@link android.webkit.WebView} is a good example. Application / IME
+             developers should not rely on this method.
+*/
+viewClicked : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-isWatchingCursor'>/**Return true if the current input method wants to watch the location
+</span> of the input editor's cursor in its window.
+@deprecated Use {@link InputConnection#requestCursorUpdates(int)} instead.
+*/
+isWatchingCursor : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-isCursorAnchorInfoEnabled'>/**Return true if the current input method wants to be notified when cursor/anchor location
+</span> is changed.
+@hide 
+*/
+isCursorAnchorInfoEnabled : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-setUpdateCursorAnchorInfoMode'>/**Set the requested mode for {@link #updateandroid.view.inputmethod.CursorAnchorInfo(View, android.view.inputmethod.CursorAnchorInfo)}.
+</span>@hide 
+*/
+setUpdateCursorAnchorInfoMode : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-updateCursor'>/**Report the current cursor location in its window.
+</span>@deprecated Use {@link #updateCursorAnchorInfo(View, CursorAnchorInfo)} instead.
+*/
+updateCursor : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-updateCursorAnchorInfo'>/**Report positional change of the text insertion point and/or characters in the composition
+</span> string.
+*/
+updateCursorAnchorInfo : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-sendAppPrivateCommand'>/**Call {@link android.view.inputmethod.InputMethodSession#appPrivateCommand(String, Bundle)
+</span> android.view.inputmethod.InputMethodSession.appPrivateCommand()} on the current Input Method.
+@param {Object {View}} view Optional View that is sending the command, or null if
+ you want to send the command regardless of the view that is attached
+ to the input method.
+@param {String} action Name of the command to be performed.  This &lt;em&gt;must&lt;/em&gt;
+ be a scoped name, i.e. prefixed with a package name you own, so that
+ different developers will not create conflicting commands.
+@param {Object {Bundle}} data Any data to include with the command.
+*/
+sendAppPrivateCommand : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-setInputMethod'>/**Force switch to a new input method component. This can only be called
+</span> from an application or a service which has a token of the currently active input method.
+
+ &lt;p&gt;On Android {@link Build.VERSION_CODES#Q} and later devices, the undocumented behavior that
+ token can be {@code null} when the caller has
+ {@link android.Manifest.permission#WRITE_SECURE_SETTINGS} is deprecated. Instead, update
+ {@link android.provider.Settings.Secure#DEFAULT_INPUT_METHOD} and
+ {@link android.provider.Settings.Secure#SELECTED_INPUT_METHOD_SUBTYPE} directly.&lt;/p&gt;
+@param {Object {IBinder}} token Supplies the identifying token given to an input method
+ when it was started, which allows it to perform this operation on
+ itself.
+@param {String} id The unique identifier for the new input method to be switched to.
+@deprecated Use {@link InputMethodService#switchInputMethod(String)}
+ instead. This method was intended for IME developers who should be accessing APIs through
+ the service. APIs in this class are intended for app developers interacting with the IME.
+*/
+setInputMethod : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-setInputMethodAndSubtype'>/**Force switch to a new input method and subtype. This can only be called
+</span> from an application or a service which has a token of the currently active input method.
+
+ &lt;p&gt;On Android {@link Build.VERSION_CODES#Q} and later devices, {@code token} cannot be
+ {@code null} even with {@link android.Manifest.permission#WRITE_SECURE_SETTINGS}. Instead,
+ update {@link android.provider.Settings.Secure#DEFAULT_INPUT_METHOD} and
+ {@link android.provider.Settings.Secure#SELECTED_INPUT_METHOD_SUBTYPE} directly.&lt;/p&gt;
+@param {Object {IBinder}} token Supplies the identifying token given to an input method
+ when it was started, which allows it to perform this operation on
+ itself.
+@param {String} id The unique identifier for the new input method to be switched to.
+@param {Object {InputMethodSubtype}} subtype The new subtype of the new input method to be switched to.
+@deprecated Use
+ {@link InputMethodService#switchInputMethod(String, InputMethodSubtype)}
+ instead. This method was intended for IME developers who should be accessing APIs through
+ the service. APIs in this class are intended for app developers interacting with the IME.
+*/
+setInputMethodAndSubtype : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-hideSoftInputFromInputMethod'>/**Close/hide the input method's soft input area, so the user no longer
+</span> sees it or can interact with it.  This can only be called
+ from the currently active input method, as validated by the given token.
+@param {Object {IBinder}} token Supplies the identifying token given to an input method
+ when it was started, which allows it to perform this operation on
+ itself.
+@param {Number} flags Provides additional operating flags.  Currently may be
+ 0 or have the {@link #HIDE_IMPLICIT_ONLY},
+ {@link #HIDE_NOT_ALWAYS} bit set.
+@deprecated Use {@link InputMethodService#requestHideSelf(int)} instead. This method was
+ intended for IME developers who should be accessing APIs through the service. APIs in this
+ class are intended for app developers interacting with the IME.
+*/
+hideSoftInputFromInputMethod : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showSoftInputFromInputMethod'>/**Show the input method's soft input area, so the user
+</span> sees the input method window and can interact with it.
+ This can only be called from the currently active input method,
+ as validated by the given token.
+@param {Object {IBinder}} token Supplies the identifying token given to an input method
+ when it was started, which allows it to perform this operation on
+ itself.
+@param {Number} flags Provides additional operating flags.  Currently may be
+ 0 or have the {@link #SHOW_IMPLICIT} or
+ {@link #SHOW_FORCED} bit set.
+@deprecated Use {@link InputMethodService#requestShowSelf(int)} instead. This method was
+ intended for IME developers who should be accessing APIs through the service. APIs in this
+ class are intended for app developers interacting with the IME.
+*/
+showSoftInputFromInputMethod : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-dispatchInputEvent'>/**Dispatches an input event to the IME.
+</span>
+ Returns {@link #DISPATCH_HANDLED} if the event was handled.
+ Returns {@link #DISPATCH_NOT_HANDLED} if the event was not handled.
+ Returns {@link #DISPATCH_IN_PROGRESS} if the event is in progress and the
+ callback will be invoked later.
+@hide 
+*/
+dispatchInputEvent : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-dispatchKeyEventFromInputMethod'>/**Provides the default implementation of {@link android.view.inputmethod.InputConnection#sendKeyEvent(KeyEvent)}, which
+</span> is expected to dispatch an keyboard event sent from the IME to an appropriate event target
+ depending on the given {@link View} and the current focus state.
+
+ &lt;p&gt;CAUTION: This method is provided only for the situation where
+ {@link android.view.inputmethod.InputConnection#sendKeyEvent(KeyEvent)} needs to be implemented without relying on
+ {@link android.view.inputmethod.BaseInputConnection}. Do not use this API for anything else.&lt;/p&gt;
+@param {Object {View}} targetView the default target view. If {@code null} is specified, then this method
+ tries to find a good event target based on the current focus state.
+@param {Object {KeyEvent}} event the key event to be dispatched.
+*/
+dispatchKeyEventFromInputMethod : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showInputMethodPicker'>/**Show IME picker popup window.
+</span>
+ &lt;p&gt;Requires the {@link PackageManager#FEATURE_INPUT_METHODS} feature which can be detected
+ using {@link PackageManager#hasSystemFeature(String)}.
+*/
+showInputMethodPicker : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showInputMethodPickerFromSystem'>/**Shows the input method chooser dialog from system.
+</span>@param {Boolean} showAuxiliarySubtypes Set true to show auxiliary input methods.
+@param {Number} displayId The ID of the display where the chooser dialog should be shown.
+@hide 
+*/
+showInputMethodPickerFromSystem : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-isInputMethodPickerShown'>/**A test API for CTS to make sure that {@link #showInputMethodPicker}() works as expected.
+</span>
+ &lt;p&gt;When customizing the implementation of {@link #showInputMethodPicker}() API, make sure
+ that this test API returns when and only while and only while
+ {@link #showInputMethodPicker}() is showing UI. Otherwise your OS implementation may not
+ pass CTS.&lt;/p&gt;
+@return {Boolean} {@code true} while and only while {@link #showInputMethodPicker()} is showing UI.
+@hide 
+*/
+isInputMethodPickerShown : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-showInputMethodAndSubtypeEnabler'>/**Show the settings for enabling subtypes of the specified input method.
+</span>@param {String} imiId An input method, whose subtypes settings will be shown. If imiId is null,
+ subtypes of all input methods will be shown.
+*/
+showInputMethodAndSubtypeEnabler : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getCurrentInputMethodSubtype'>/**Returns the current input method subtype. This subtype is one of the subtypes in
+</span> the current input method. This method returns null when the current input method doesn't
+ have any input method subtype.
+*/
+getCurrentInputMethodSubtype : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-setCurrentInputMethodSubtype'>/**Switch to a new input method subtype of the current input method.
+</span>@param {Object {InputMethodSubtype}} subtype A new input method subtype to switch.
+@return {Boolean} true if the current subtype was successfully switched. When the specified subtype is
+ null, this method returns false.
+@deprecated If the calling process is an IME, use
+             {@link InputMethodService#switchInputMethod(String, InputMethodSubtype)}, which
+             does not require any permission as long as the caller is the current IME.
+             If the calling process is some privileged app that already has
+             {@link android.Manifest.permission#WRITE_SECURE_SETTINGS} permission, just
+             directly update {@link Settings.Secure#SELECTED_INPUT_METHOD_SUBTYPE}.
+*/
+setCurrentInputMethodSubtype : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-notifyUserAction'>/**Notify that a user took some action with this input method.
+</span>@deprecated Just kept to avoid possible app compat issue.
+@hide 
+*/
+notifyUserAction : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getShortcutInputMethodsAndSubtypes'>/**Returns a map of all shortcut input method info and their subtypes.
+</span>*/
+getShortcutInputMethodsAndSubtypes : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getInputMethodWindowVisibleHeight'>/**This is kept due to {@link android.annotation.UnsupportedAppUsage}.
+</span>
+ &lt;p&gt;TODO(Bug 113914148): Check if we can remove this.  We have accidentally exposed
+ WindowManagerInternal#getInputMethodWindowVisibleHeight to app developers and some of them
+ started relying on it.&lt;/p&gt;
+@return {Number} Something that is not well-defined.
+@hide 
+*/
+getInputMethodWindowVisibleHeight : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-reportActivityView'>/**An internal API for {@link android.app.ActivityView} to report where its embedded virtual
+</span> display is placed.
+@param {Number} childDisplayId Display ID of the embedded virtual display.
+@param {Object {Matrix}} matrix {@link Matrix} to convert virtual display screen coordinates to
+               the host screen coordinates. {@code null} to clear the relationship.
+@hide 
+*/
+reportActivityView : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-switchToLastInputMethod'>/**Force switch to the last used input method and subtype. If the last input method didn't have
+</span> any subtypes, the framework will simply switch to the last input method with no subtype
+ specified.
+@param {Object {IBinder}} imeToken Supplies the identifying token given to an input method when it was started,
+ which allows it to perform this operation on itself.
+@return {Boolean} true if the current input method and subtype was successfully switched to the last
+ used input method and subtype.
+@deprecated Use {@link InputMethodService#switchToPreviousInputMethod()} instead. This method
+ was intended for IME developers who should be accessing APIs through the service. APIs in
+ this class are intended for app developers interacting with the IME.
+*/
+switchToLastInputMethod : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-switchToNextInputMethod'>/**Force switch to the next input method and subtype. If there is no IME enabled except
+</span> current IME and subtype, do nothing.
+@param {Object {IBinder}} imeToken Supplies the identifying token given to an input method when it was started,
+ which allows it to perform this operation on itself.
+@param {Boolean} onlyCurrentIme if true, the framework will find the next subtype which
+ belongs to the current IME
+@return {Boolean} true if the current input method and subtype was successfully switched to the next
+ input method and subtype.
+@deprecated Use {@link InputMethodService#switchToNextInputMethod(boolean)} instead. This
+ method was intended for IME developers who should be accessing APIs through the service.
+ APIs in this class are intended for app developers interacting with the IME.
+*/
+switchToNextInputMethod : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-shouldOfferSwitchingToNextInputMethod'>/**Returns true if the current IME needs to offer the users ways to switch to a next input
+</span> method (e.g. a globe key.).
+ When an IME sets supportsSwitchingToNextInputMethod and this method returns true,
+ the IME has to offer ways to to invoke {@link #switchToNextInputMethod} accordingly.
+ &lt;p&gt; Note that the system determines the most appropriate next input method
+ and subtype in order to provide the consistent user experience in switching
+ between IMEs and subtypes.
+@param {Object {IBinder}} imeToken Supplies the identifying token given to an input method when it was started,
+ which allows it to perform this operation on itself.
+@deprecated Use {@link InputMethodService#shouldOfferSwitchingToNextInputMethod()}
+ instead. This method was intended for IME developers who should be accessing APIs through
+ the service. APIs in this class are intended for app developers interacting with the IME.
+*/
+shouldOfferSwitchingToNextInputMethod : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-setAdditionalInputMethodSubtypes'>/**Set additional input method subtypes. Only a process which shares the same uid with the IME
+</span> can add additional input method subtypes to the IME.
+ Please note that a subtype's status is stored in the system.
+ For example, enabled subtypes are remembered by the framework even after they are removed
+ by using this method. If you re-add the same subtypes again,
+ they will just get enabled. If you want to avoid such conflicts, for instance, you may
+ want to create a &quot;different&quot; new subtype even with the same locale and mode,
+ by changing its extra value. The different subtype won't get affected by the stored past
+ status. (You may want to take a look at {@link android.view.inputmethod.InputMethodSubtype#hashCode()} to refer
+ to the current implementation.)
+
+ &lt;p&gt;NOTE: If the same subtype exists in both the manifest XML file and additional subtypes
+ specified by {@code subtypes}, those multiple instances are automatically merged into one
+ instance.&lt;/p&gt;
+
+ &lt;p&gt;CAVEAT: In API Level 23 and prior, the system may do nothing if an empty
+ {@link android.view.inputmethod.InputMethodSubtype} is specified in {@code subtypes}, which prevents you from removing
+ the last one entry of additional subtypes. If your IME statically defines one or more
+ subtypes in the manifest XML file, you may be able to work around this limitation by
+ specifying one of those statically defined subtypes in {@code subtypes}.&lt;/p&gt;
+@param {String} imiId Id of InputMethodInfo which additional input method subtypes will be added to.
+@param {Object {android.view.inputmethod.InputMethodSubtype[]}} subtypes subtypes will be added as additional subtypes of the current input method.
+@deprecated For IMEs that have already implemented features like customizable/downloadable
+             keyboard layouts/languages, please start migration to other approaches. One idea
+             would be exposing only one unified {@link InputMethodSubtype} then implement
+             IME's own language switching mechanism within that unified subtype. The support
+             of &quot;Additional Subtype&quot; may be completely dropped in a future version of Android.
+*/
+setAdditionalInputMethodSubtypes : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getLastInputMethodSubtype'>/**
+</span>*/
+getLastInputMethodSubtype : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodManager-method-getDisplayId'>/**&lt;p&gt;This is used for CTS test only. Do not use this method outside of CTS package.&lt;p/&gt;
+</span>@return {Number} the ID of this display which this {@link InputMethodManager} resides
+@hide 
+*/
+getDisplayId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

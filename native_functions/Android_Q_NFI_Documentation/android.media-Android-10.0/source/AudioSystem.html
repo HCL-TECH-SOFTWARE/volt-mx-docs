@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-AudioSystem'>/**@class android.media.AudioSystem
+</span>@extends java.lang.Object
+
+ @hide
+*/
+var AudioSystem = {
+
+<span id='android-media-AudioSystem-property-STREAM_DEFAULT'>/**Used to identify the default audio stream volume */
+</span>STREAM_DEFAULT : &quot;-1&quot;,
+<span id='android-media-AudioSystem-property-STREAM_VOICE_CALL'>/**Used to identify the volume of audio streams for phone calls */
+</span>STREAM_VOICE_CALL : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-STREAM_SYSTEM'>/**Used to identify the volume of audio streams for system sounds */
+</span>STREAM_SYSTEM : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-STREAM_RING'>/**Used to identify the volume of audio streams for the phone ring and message alerts */
+</span>STREAM_RING : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-STREAM_MUSIC'>/**Used to identify the volume of audio streams for music playback */
+</span>STREAM_MUSIC : &quot;3&quot;,
+<span id='android-media-AudioSystem-property-STREAM_ALARM'>/**Used to identify the volume of audio streams for alarms */
+</span>STREAM_ALARM : &quot;4&quot;,
+<span id='android-media-AudioSystem-property-STREAM_NOTIFICATION'>/**Used to identify the volume of audio streams for notifications */
+</span>STREAM_NOTIFICATION : &quot;5&quot;,
+<span id='android-media-AudioSystem-property-STREAM_BLUETOOTH_SCO'>/**Used to identify the volume of audio streams for phone calls when connected on bluetooth */
+</span>STREAM_BLUETOOTH_SCO : &quot;6&quot;,
+<span id='android-media-AudioSystem-property-STREAM_SYSTEM_ENFORCED'>/**Used to identify the volume of audio streams for enforced system sounds in certain
+</span> countries (e.g camera in Japan) */
+STREAM_SYSTEM_ENFORCED : &quot;7&quot;,
+<span id='android-media-AudioSystem-property-STREAM_DTMF'>/**Used to identify the volume of audio streams for DTMF tones */
+</span>STREAM_DTMF : &quot;8&quot;,
+<span id='android-media-AudioSystem-property-STREAM_TTS'>/**Used to identify the volume of audio streams exclusively transmitted through the
+</span>  speaker (TTS) of the device */
+STREAM_TTS : &quot;9&quot;,
+<span id='android-media-AudioSystem-property-STREAM_ACCESSIBILITY'>/**Used to identify the volume of audio streams for accessibility prompts */
+</span>STREAM_ACCESSIBILITY : &quot;10&quot;,
+<span id='android-media-AudioSystem-property-NUM_STREAMS'>/** @deprecated Use {@link #numStreamTypes() instead}
+</span>*/
+NUM_STREAMS : &quot;5&quot;,
+<span id='android-media-AudioSystem-property-OUT_CHANNEL_COUNT_MAX'>/**Maximum value for AudioTrack channel count
+</span> @hide public for MediaCode only, do not un-hide or change to a numeric literal
+*/
+OUT_CHANNEL_COUNT_MAX : &quot;null&quot;,
+<span id='android-media-AudioSystem-property-STREAM_NAMES'>/***/
+</span>STREAM_NAMES : &quot;null&quot;,
+<span id='android-media-AudioSystem-property-MODE_INVALID'>/***/
+</span>MODE_INVALID : &quot;-2&quot;,
+<span id='android-media-AudioSystem-property-MODE_CURRENT'>/***/
+</span>MODE_CURRENT : &quot;-1&quot;,
+<span id='android-media-AudioSystem-property-MODE_NORMAL'>/***/
+</span>MODE_NORMAL : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-MODE_RINGTONE'>/***/
+</span>MODE_RINGTONE : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-MODE_IN_CALL'>/***/
+</span>MODE_IN_CALL : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-MODE_IN_COMMUNICATION'>/***/
+</span>MODE_IN_COMMUNICATION : &quot;3&quot;,
+<span id='android-media-AudioSystem-property-NUM_MODES'>/***/
+</span>NUM_MODES : &quot;4&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_FORMAT_INVALID'>/***/
+</span>AUDIO_FORMAT_INVALID : &quot;-1&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_FORMAT_DEFAULT'>/***/
+</span>AUDIO_FORMAT_DEFAULT : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_FORMAT_AAC'>/***/
+</span>AUDIO_FORMAT_AAC : &quot;67108864&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_FORMAT_SBC'>/***/
+</span>AUDIO_FORMAT_SBC : &quot;520093696&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_FORMAT_APTX'>/***/
+</span>AUDIO_FORMAT_APTX : &quot;536870912&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_FORMAT_APTX_HD'>/***/
+</span>AUDIO_FORMAT_APTX_HD : &quot;553648128&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_FORMAT_LDAC'>/***/
+</span>AUDIO_FORMAT_LDAC : &quot;587202560&quot;,
+<span id='android-media-AudioSystem-property-ROUTE_EARPIECE'>/**@deprecated */
+</span>ROUTE_EARPIECE : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-ROUTE_SPEAKER'>/**@deprecated */
+</span>ROUTE_SPEAKER : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-ROUTE_BLUETOOTH'>/**@deprecated use {@link #ROUTE_BLUETOOTH_SCO} */
+</span>ROUTE_BLUETOOTH : &quot;4&quot;,
+<span id='android-media-AudioSystem-property-ROUTE_BLUETOOTH_SCO'>/**@deprecated */
+</span>ROUTE_BLUETOOTH_SCO : &quot;4&quot;,
+<span id='android-media-AudioSystem-property-ROUTE_HEADSET'>/**@deprecated */
+</span>ROUTE_HEADSET : &quot;8&quot;,
+<span id='android-media-AudioSystem-property-ROUTE_BLUETOOTH_A2DP'>/**@deprecated */
+</span>ROUTE_BLUETOOTH_A2DP : &quot;16&quot;,
+<span id='android-media-AudioSystem-property-ROUTE_ALL'>/**@deprecated */
+</span>ROUTE_ALL : &quot;-1&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_SESSION_ALLOCATE'>/***/
+</span>AUDIO_SESSION_ALLOCATE : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_STATUS_OK'>/***/
+</span>AUDIO_STATUS_OK : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_STATUS_ERROR'>/***/
+</span>AUDIO_STATUS_ERROR : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_STATUS_SERVER_DIED'>/***/
+</span>AUDIO_STATUS_SERVER_DIED : &quot;100&quot;,
+<span id='android-media-AudioSystem-property-SUCCESS'>/***/
+</span>SUCCESS : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-ERROR'>/***/
+</span>ERROR : &quot;-1&quot;,
+<span id='android-media-AudioSystem-property-BAD_VALUE'>/***/
+</span>BAD_VALUE : &quot;-2&quot;,
+<span id='android-media-AudioSystem-property-INVALID_OPERATION'>/***/
+</span>INVALID_OPERATION : &quot;-3&quot;,
+<span id='android-media-AudioSystem-property-PERMISSION_DENIED'>/***/
+</span>PERMISSION_DENIED : &quot;-4&quot;,
+<span id='android-media-AudioSystem-property-NO_INIT'>/***/
+</span>NO_INIT : &quot;-5&quot;,
+<span id='android-media-AudioSystem-property-DEAD_OBJECT'>/***/
+</span>DEAD_OBJECT : &quot;-6&quot;,
+<span id='android-media-AudioSystem-property-WOULD_BLOCK'>/***/
+</span>WOULD_BLOCK : &quot;-7&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_NONE'>/***/
+</span>DEVICE_NONE : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_BIT_IN'>/***/
+</span>DEVICE_BIT_IN : &quot;-2147483648&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_BIT_DEFAULT'>/***/
+</span>DEVICE_BIT_DEFAULT : &quot;1073741824&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_EARPIECE'>/***/
+</span>DEVICE_OUT_EARPIECE : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_SPEAKER'>/***/
+</span>DEVICE_OUT_SPEAKER : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_WIRED_HEADSET'>/***/
+</span>DEVICE_OUT_WIRED_HEADSET : &quot;4&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_WIRED_HEADPHONE'>/***/
+</span>DEVICE_OUT_WIRED_HEADPHONE : &quot;8&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_SCO'>/***/
+</span>DEVICE_OUT_BLUETOOTH_SCO : &quot;16&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_SCO_HEADSET'>/***/
+</span>DEVICE_OUT_BLUETOOTH_SCO_HEADSET : &quot;32&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_SCO_CARKIT'>/***/
+</span>DEVICE_OUT_BLUETOOTH_SCO_CARKIT : &quot;64&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_A2DP'>/***/
+</span>DEVICE_OUT_BLUETOOTH_A2DP : &quot;128&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES'>/***/
+</span>DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES : &quot;256&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER'>/***/
+</span>DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER : &quot;512&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_AUX_DIGITAL'>/***/
+</span>DEVICE_OUT_AUX_DIGITAL : &quot;1024&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_HDMI'>/***/
+</span>DEVICE_OUT_HDMI : &quot;1024&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_ANLG_DOCK_HEADSET'>/***/
+</span>DEVICE_OUT_ANLG_DOCK_HEADSET : &quot;2048&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_DGTL_DOCK_HEADSET'>/***/
+</span>DEVICE_OUT_DGTL_DOCK_HEADSET : &quot;4096&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_USB_ACCESSORY'>/***/
+</span>DEVICE_OUT_USB_ACCESSORY : &quot;8192&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_USB_DEVICE'>/***/
+</span>DEVICE_OUT_USB_DEVICE : &quot;16384&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_REMOTE_SUBMIX'>/***/
+</span>DEVICE_OUT_REMOTE_SUBMIX : &quot;32768&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_TELEPHONY_TX'>/***/
+</span>DEVICE_OUT_TELEPHONY_TX : &quot;65536&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_LINE'>/***/
+</span>DEVICE_OUT_LINE : &quot;131072&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_HDMI_ARC'>/***/
+</span>DEVICE_OUT_HDMI_ARC : &quot;262144&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_SPDIF'>/***/
+</span>DEVICE_OUT_SPDIF : &quot;524288&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_FM'>/***/
+</span>DEVICE_OUT_FM : &quot;1048576&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_AUX_LINE'>/***/
+</span>DEVICE_OUT_AUX_LINE : &quot;2097152&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_SPEAKER_SAFE'>/***/
+</span>DEVICE_OUT_SPEAKER_SAFE : &quot;4194304&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_IP'>/***/
+</span>DEVICE_OUT_IP : &quot;8388608&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BUS'>/***/
+</span>DEVICE_OUT_BUS : &quot;16777216&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_PROXY'>/***/
+</span>DEVICE_OUT_PROXY : &quot;33554432&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_USB_HEADSET'>/***/
+</span>DEVICE_OUT_USB_HEADSET : &quot;67108864&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_HEARING_AID'>/***/
+</span>DEVICE_OUT_HEARING_AID : &quot;134217728&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_DEFAULT'>/***/
+</span>DEVICE_OUT_DEFAULT : &quot;1073741824&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_ALL'>/***/
+</span>DEVICE_OUT_ALL : &quot;1342177279&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_ALL_A2DP'>/***/
+</span>DEVICE_OUT_ALL_A2DP : &quot;896&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_ALL_SCO'>/***/
+</span>DEVICE_OUT_ALL_SCO : &quot;112&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_ALL_USB'>/***/
+</span>DEVICE_OUT_ALL_USB : &quot;67133440&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_ALL_HDMI_SYSTEM_AUDIO'>/***/
+</span>DEVICE_OUT_ALL_HDMI_SYSTEM_AUDIO : &quot;2883584&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_ALL_HDMI_SYSTEM_AUDIO_AND_SPEAKER'>/***/
+</span>DEVICE_ALL_HDMI_SYSTEM_AUDIO_AND_SPEAKER : &quot;2883586&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_COMMUNICATION'>/***/
+</span>DEVICE_IN_COMMUNICATION : &quot;-2147483647&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_AMBIENT'>/***/
+</span>DEVICE_IN_AMBIENT : &quot;-2147483646&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BUILTIN_MIC'>/***/
+</span>DEVICE_IN_BUILTIN_MIC : &quot;-2147483644&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BLUETOOTH_SCO_HEADSET'>/***/
+</span>DEVICE_IN_BLUETOOTH_SCO_HEADSET : &quot;-2147483640&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_WIRED_HEADSET'>/***/
+</span>DEVICE_IN_WIRED_HEADSET : &quot;-2147483632&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_AUX_DIGITAL'>/***/
+</span>DEVICE_IN_AUX_DIGITAL : &quot;-2147483616&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_HDMI'>/***/
+</span>DEVICE_IN_HDMI : &quot;-2147483616&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_VOICE_CALL'>/***/
+</span>DEVICE_IN_VOICE_CALL : &quot;-2147483584&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_TELEPHONY_RX'>/***/
+</span>DEVICE_IN_TELEPHONY_RX : &quot;-2147483584&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BACK_MIC'>/***/
+</span>DEVICE_IN_BACK_MIC : &quot;-2147483520&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_REMOTE_SUBMIX'>/***/
+</span>DEVICE_IN_REMOTE_SUBMIX : &quot;-2147483392&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_ANLG_DOCK_HEADSET'>/***/
+</span>DEVICE_IN_ANLG_DOCK_HEADSET : &quot;-2147483136&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_DGTL_DOCK_HEADSET'>/***/
+</span>DEVICE_IN_DGTL_DOCK_HEADSET : &quot;-2147482624&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_USB_ACCESSORY'>/***/
+</span>DEVICE_IN_USB_ACCESSORY : &quot;-2147481600&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_USB_DEVICE'>/***/
+</span>DEVICE_IN_USB_DEVICE : &quot;-2147479552&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_FM_TUNER'>/***/
+</span>DEVICE_IN_FM_TUNER : &quot;-2147475456&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_TV_TUNER'>/***/
+</span>DEVICE_IN_TV_TUNER : &quot;-2147467264&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_LINE'>/***/
+</span>DEVICE_IN_LINE : &quot;-2147450880&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_SPDIF'>/***/
+</span>DEVICE_IN_SPDIF : &quot;-2147418112&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BLUETOOTH_A2DP'>/***/
+</span>DEVICE_IN_BLUETOOTH_A2DP : &quot;-2147352576&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_LOOPBACK'>/***/
+</span>DEVICE_IN_LOOPBACK : &quot;-2147221504&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_IP'>/***/
+</span>DEVICE_IN_IP : &quot;-2146959360&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BUS'>/***/
+</span>DEVICE_IN_BUS : &quot;-2146435072&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_PROXY'>/***/
+</span>DEVICE_IN_PROXY : &quot;-2130706432&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_USB_HEADSET'>/***/
+</span>DEVICE_IN_USB_HEADSET : &quot;-2113929216&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BLUETOOTH_BLE'>/***/
+</span>DEVICE_IN_BLUETOOTH_BLE : &quot;-2080374784&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_HDMI_ARC'>/***/
+</span>DEVICE_IN_HDMI_ARC : &quot;-2013265920&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_ECHO_REFERENCE'>/***/
+</span>DEVICE_IN_ECHO_REFERENCE : &quot;-1879048192&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_DEFAULT'>/***/
+</span>DEVICE_IN_DEFAULT : &quot;-1073741824&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_ALL'>/***/
+</span>DEVICE_IN_ALL : &quot;-551550977&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_ALL_SCO'>/***/
+</span>DEVICE_IN_ALL_SCO : &quot;-2147483640&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_ALL_USB'>/***/
+</span>DEVICE_IN_ALL_USB : &quot;-2113923072&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_STATE_UNAVAILABLE'>/***/
+</span>DEVICE_STATE_UNAVAILABLE : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_STATE_AVAILABLE'>/***/
+</span>DEVICE_STATE_AVAILABLE : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_EARPIECE_NAME'>/***/
+</span>DEVICE_OUT_EARPIECE_NAME : &quot;earpiece&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_SPEAKER_NAME'>/***/
+</span>DEVICE_OUT_SPEAKER_NAME : &quot;speaker&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_WIRED_HEADSET_NAME'>/***/
+</span>DEVICE_OUT_WIRED_HEADSET_NAME : &quot;headset&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_WIRED_HEADPHONE_NAME'>/***/
+</span>DEVICE_OUT_WIRED_HEADPHONE_NAME : &quot;headphone&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_SCO_NAME'>/***/
+</span>DEVICE_OUT_BLUETOOTH_SCO_NAME : &quot;bt_sco&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_SCO_HEADSET_NAME'>/***/
+</span>DEVICE_OUT_BLUETOOTH_SCO_HEADSET_NAME : &quot;bt_sco_hs&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_SCO_CARKIT_NAME'>/***/
+</span>DEVICE_OUT_BLUETOOTH_SCO_CARKIT_NAME : &quot;bt_sco_carkit&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_A2DP_NAME'>/***/
+</span>DEVICE_OUT_BLUETOOTH_A2DP_NAME : &quot;bt_a2dp&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES_NAME'>/***/
+</span>DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES_NAME : &quot;bt_a2dp_hp&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER_NAME'>/***/
+</span>DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER_NAME : &quot;bt_a2dp_spk&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_AUX_DIGITAL_NAME'>/***/
+</span>DEVICE_OUT_AUX_DIGITAL_NAME : &quot;aux_digital&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_HDMI_NAME'>/***/
+</span>DEVICE_OUT_HDMI_NAME : &quot;hdmi&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_ANLG_DOCK_HEADSET_NAME'>/***/
+</span>DEVICE_OUT_ANLG_DOCK_HEADSET_NAME : &quot;analog_dock&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_DGTL_DOCK_HEADSET_NAME'>/***/
+</span>DEVICE_OUT_DGTL_DOCK_HEADSET_NAME : &quot;digital_dock&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_USB_ACCESSORY_NAME'>/***/
+</span>DEVICE_OUT_USB_ACCESSORY_NAME : &quot;usb_accessory&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_USB_DEVICE_NAME'>/***/
+</span>DEVICE_OUT_USB_DEVICE_NAME : &quot;usb_device&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_REMOTE_SUBMIX_NAME'>/***/
+</span>DEVICE_OUT_REMOTE_SUBMIX_NAME : &quot;remote_submix&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_TELEPHONY_TX_NAME'>/***/
+</span>DEVICE_OUT_TELEPHONY_TX_NAME : &quot;telephony_tx&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_LINE_NAME'>/***/
+</span>DEVICE_OUT_LINE_NAME : &quot;line&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_HDMI_ARC_NAME'>/***/
+</span>DEVICE_OUT_HDMI_ARC_NAME : &quot;hmdi_arc&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_SPDIF_NAME'>/***/
+</span>DEVICE_OUT_SPDIF_NAME : &quot;spdif&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_FM_NAME'>/***/
+</span>DEVICE_OUT_FM_NAME : &quot;fm_transmitter&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_AUX_LINE_NAME'>/***/
+</span>DEVICE_OUT_AUX_LINE_NAME : &quot;aux_line&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_SPEAKER_SAFE_NAME'>/***/
+</span>DEVICE_OUT_SPEAKER_SAFE_NAME : &quot;speaker_safe&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_IP_NAME'>/***/
+</span>DEVICE_OUT_IP_NAME : &quot;ip&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_BUS_NAME'>/***/
+</span>DEVICE_OUT_BUS_NAME : &quot;bus&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_PROXY_NAME'>/***/
+</span>DEVICE_OUT_PROXY_NAME : &quot;proxy&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_USB_HEADSET_NAME'>/***/
+</span>DEVICE_OUT_USB_HEADSET_NAME : &quot;usb_headset&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_OUT_HEARING_AID_NAME'>/***/
+</span>DEVICE_OUT_HEARING_AID_NAME : &quot;hearing_aid_out&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_COMMUNICATION_NAME'>/***/
+</span>DEVICE_IN_COMMUNICATION_NAME : &quot;communication&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_AMBIENT_NAME'>/***/
+</span>DEVICE_IN_AMBIENT_NAME : &quot;ambient&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BUILTIN_MIC_NAME'>/***/
+</span>DEVICE_IN_BUILTIN_MIC_NAME : &quot;mic&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BLUETOOTH_SCO_HEADSET_NAME'>/***/
+</span>DEVICE_IN_BLUETOOTH_SCO_HEADSET_NAME : &quot;bt_sco_hs&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_WIRED_HEADSET_NAME'>/***/
+</span>DEVICE_IN_WIRED_HEADSET_NAME : &quot;headset&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_AUX_DIGITAL_NAME'>/***/
+</span>DEVICE_IN_AUX_DIGITAL_NAME : &quot;aux_digital&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_TELEPHONY_RX_NAME'>/***/
+</span>DEVICE_IN_TELEPHONY_RX_NAME : &quot;telephony_rx&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BACK_MIC_NAME'>/***/
+</span>DEVICE_IN_BACK_MIC_NAME : &quot;back_mic&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_REMOTE_SUBMIX_NAME'>/***/
+</span>DEVICE_IN_REMOTE_SUBMIX_NAME : &quot;remote_submix&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_ANLG_DOCK_HEADSET_NAME'>/***/
+</span>DEVICE_IN_ANLG_DOCK_HEADSET_NAME : &quot;analog_dock&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_DGTL_DOCK_HEADSET_NAME'>/***/
+</span>DEVICE_IN_DGTL_DOCK_HEADSET_NAME : &quot;digital_dock&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_USB_ACCESSORY_NAME'>/***/
+</span>DEVICE_IN_USB_ACCESSORY_NAME : &quot;usb_accessory&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_USB_DEVICE_NAME'>/***/
+</span>DEVICE_IN_USB_DEVICE_NAME : &quot;usb_device&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_FM_TUNER_NAME'>/***/
+</span>DEVICE_IN_FM_TUNER_NAME : &quot;fm_tuner&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_TV_TUNER_NAME'>/***/
+</span>DEVICE_IN_TV_TUNER_NAME : &quot;tv_tuner&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_LINE_NAME'>/***/
+</span>DEVICE_IN_LINE_NAME : &quot;line&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_SPDIF_NAME'>/***/
+</span>DEVICE_IN_SPDIF_NAME : &quot;spdif&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BLUETOOTH_A2DP_NAME'>/***/
+</span>DEVICE_IN_BLUETOOTH_A2DP_NAME : &quot;bt_a2dp&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_LOOPBACK_NAME'>/***/
+</span>DEVICE_IN_LOOPBACK_NAME : &quot;loopback&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_IP_NAME'>/***/
+</span>DEVICE_IN_IP_NAME : &quot;ip&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BUS_NAME'>/***/
+</span>DEVICE_IN_BUS_NAME : &quot;bus&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_PROXY_NAME'>/***/
+</span>DEVICE_IN_PROXY_NAME : &quot;proxy&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_USB_HEADSET_NAME'>/***/
+</span>DEVICE_IN_USB_HEADSET_NAME : &quot;usb_headset&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_BLUETOOTH_BLE_NAME'>/***/
+</span>DEVICE_IN_BLUETOOTH_BLE_NAME : &quot;bt_ble&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_ECHO_REFERENCE_NAME'>/***/
+</span>DEVICE_IN_ECHO_REFERENCE_NAME : &quot;echo_reference&quot;,
+<span id='android-media-AudioSystem-property-DEVICE_IN_HDMI_ARC_NAME'>/***/
+</span>DEVICE_IN_HDMI_ARC_NAME : &quot;hdmi_arc&quot;,
+<span id='android-media-AudioSystem-property-PHONE_STATE_OFFCALL'>/***/
+</span>PHONE_STATE_OFFCALL : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-PHONE_STATE_RINGING'>/***/
+</span>PHONE_STATE_RINGING : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-PHONE_STATE_INCALL'>/***/
+</span>PHONE_STATE_INCALL : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-FORCE_NONE'>/***/
+</span>FORCE_NONE : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-FORCE_SPEAKER'>/***/
+</span>FORCE_SPEAKER : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-FORCE_HEADPHONES'>/***/
+</span>FORCE_HEADPHONES : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-FORCE_BT_SCO'>/***/
+</span>FORCE_BT_SCO : &quot;3&quot;,
+<span id='android-media-AudioSystem-property-FORCE_BT_A2DP'>/***/
+</span>FORCE_BT_A2DP : &quot;4&quot;,
+<span id='android-media-AudioSystem-property-FORCE_WIRED_ACCESSORY'>/***/
+</span>FORCE_WIRED_ACCESSORY : &quot;5&quot;,
+<span id='android-media-AudioSystem-property-FORCE_BT_CAR_DOCK'>/***/
+</span>FORCE_BT_CAR_DOCK : &quot;6&quot;,
+<span id='android-media-AudioSystem-property-FORCE_BT_DESK_DOCK'>/***/
+</span>FORCE_BT_DESK_DOCK : &quot;7&quot;,
+<span id='android-media-AudioSystem-property-FORCE_ANALOG_DOCK'>/***/
+</span>FORCE_ANALOG_DOCK : &quot;8&quot;,
+<span id='android-media-AudioSystem-property-FORCE_DIGITAL_DOCK'>/***/
+</span>FORCE_DIGITAL_DOCK : &quot;9&quot;,
+<span id='android-media-AudioSystem-property-FORCE_NO_BT_A2DP'>/***/
+</span>FORCE_NO_BT_A2DP : &quot;10&quot;,
+<span id='android-media-AudioSystem-property-FORCE_SYSTEM_ENFORCED'>/***/
+</span>FORCE_SYSTEM_ENFORCED : &quot;11&quot;,
+<span id='android-media-AudioSystem-property-FORCE_HDMI_SYSTEM_AUDIO_ENFORCED'>/***/
+</span>FORCE_HDMI_SYSTEM_AUDIO_ENFORCED : &quot;12&quot;,
+<span id='android-media-AudioSystem-property-FORCE_ENCODED_SURROUND_NEVER'>/***/
+</span>FORCE_ENCODED_SURROUND_NEVER : &quot;13&quot;,
+<span id='android-media-AudioSystem-property-FORCE_ENCODED_SURROUND_ALWAYS'>/***/
+</span>FORCE_ENCODED_SURROUND_ALWAYS : &quot;14&quot;,
+<span id='android-media-AudioSystem-property-FORCE_ENCODED_SURROUND_MANUAL'>/***/
+</span>FORCE_ENCODED_SURROUND_MANUAL : &quot;15&quot;,
+<span id='android-media-AudioSystem-property-NUM_FORCE_CONFIG'>/***/
+</span>NUM_FORCE_CONFIG : &quot;16&quot;,
+<span id='android-media-AudioSystem-property-FORCE_DEFAULT'>/***/
+</span>FORCE_DEFAULT : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-FOR_COMMUNICATION'>/***/
+</span>FOR_COMMUNICATION : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-FOR_MEDIA'>/***/
+</span>FOR_MEDIA : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-FOR_RECORD'>/***/
+</span>FOR_RECORD : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-FOR_DOCK'>/***/
+</span>FOR_DOCK : &quot;3&quot;,
+<span id='android-media-AudioSystem-property-FOR_SYSTEM'>/***/
+</span>FOR_SYSTEM : &quot;4&quot;,
+<span id='android-media-AudioSystem-property-FOR_HDMI_SYSTEM_AUDIO'>/***/
+</span>FOR_HDMI_SYSTEM_AUDIO : &quot;5&quot;,
+<span id='android-media-AudioSystem-property-FOR_ENCODED_SURROUND'>/***/
+</span>FOR_ENCODED_SURROUND : &quot;6&quot;,
+<span id='android-media-AudioSystem-property-FOR_VIBRATE_RINGING'>/***/
+</span>FOR_VIBRATE_RINGING : &quot;7&quot;,
+<span id='android-media-AudioSystem-property-SYNC_EVENT_NONE'>/***/
+</span>SYNC_EVENT_NONE : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-SYNC_EVENT_PRESENTATION_COMPLETE'>/***/
+</span>SYNC_EVENT_PRESENTATION_COMPLETE : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-AUDIO_HW_SYNC_INVALID'>/***/
+</span>AUDIO_HW_SYNC_INVALID : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-PLAY_SOUND_DELAY'>/** The delay before playing a sound. This small period exists so the user
+</span> can press another key (non-volume keys, too) to have it NOT be audible.
+ &lt;p&gt;
+ PhoneWindow will implement this part.
+*/
+PLAY_SOUND_DELAY : &quot;300&quot;,
+<span id='android-media-AudioSystem-property-IN_VOICE_COMM_FOCUS_ID'>/** Constant to identify a focus stack entry that is used to hold the focus while the phone
+</span> is ringing or during a call. Used by com.android.internal.telephony.CallManager when
+ entering and exiting calls.
+*/
+IN_VOICE_COMM_FOCUS_ID : &quot;AudioFocus_For_Phone_Ring_And_Calls&quot;,
+<span id='android-media-AudioSystem-property-DEFAULT_STREAM_VOLUME'>/***/
+</span>DEFAULT_STREAM_VOLUME : &quot;null&quot;,
+<span id='android-media-AudioSystem-property-PLATFORM_DEFAULT'>/**The platform has no specific capabilities */
+</span>PLATFORM_DEFAULT : &quot;0&quot;,
+<span id='android-media-AudioSystem-property-PLATFORM_VOICE'>/**The platform is voice call capable (a phone) */
+</span>PLATFORM_VOICE : &quot;1&quot;,
+<span id='android-media-AudioSystem-property-PLATFORM_TELEVISION'>/**The platform is a television or a set-top box */
+</span>PLATFORM_TELEVISION : &quot;2&quot;,
+<span id='android-media-AudioSystem-property-DEFAULT_MUTE_STREAMS_AFFECTED'>/***/
+</span>DEFAULT_MUTE_STREAMS_AFFECTED : &quot;111&quot;,
+<span id='android-media-AudioSystem-method-getNumStreamTypes'>/**
+</span>*/
+getNumStreamTypes : function(  ) {},
+
+<span id='android-media-AudioSystem-method-muteMicrophone'>/**
+</span>*/
+muteMicrophone : function(  ) {},
+
+<span id='android-media-AudioSystem-method-isMicrophoneMuted'>/**
+</span>*/
+isMicrophoneMuted : function(  ) {},
+
+<span id='android-media-AudioSystem-method-modeToString'>/**
+</span>*/
+modeToString : function(  ) {},
+
+<span id='android-media-AudioSystem-method-audioFormatToBluetoothSourceCodec'>/**Convert audio format enum values to Bluetooth codec values
+</span>*/
+audioFormatToBluetoothSourceCodec : function(  ) {},
+
+<span id='android-media-AudioSystem-method-isStreamActive'>/**
+</span>*/
+isStreamActive : function(  ) {},
+
+<span id='android-media-AudioSystem-method-isStreamActiveRemotely'>/**
+</span>*/
+isStreamActiveRemotely : function(  ) {},
+
+<span id='android-media-AudioSystem-method-isSourceActive'>/**
+</span>*/
+isSourceActive : function(  ) {},
+
+<span id='android-media-AudioSystem-method-newAudioSessionId'>/**
+</span>*/
+newAudioSessionId : function(  ) {},
+
+<span id='android-media-AudioSystem-method-newAudioPlayerId'>/**
+</span>*/
+newAudioPlayerId : function(  ) {},
+
+<span id='android-media-AudioSystem-method-newAudioRecorderId'>/**Returns a new unused audio recorder ID
+</span>*/
+newAudioRecorderId : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setParameters'>/**
+</span>*/
+setParameters : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getParameters'>/**
+</span>*/
+getParameters : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setErrorCallback'>/**
+</span>*/
+setErrorCallback : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setDynamicPolicyCallback'>/**
+</span>*/
+setDynamicPolicyCallback : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setRecordingCallback'>/**
+</span>*/
+setRecordingCallback : function(  ) {},
+
+<span id='android-media-AudioSystem-method-deviceStateToString'>/**
+</span>*/
+deviceStateToString : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getOutputDeviceName'>/**
+</span>*/
+getOutputDeviceName : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getInputDeviceName'>/**
+</span>*/
+getInputDeviceName : function(  ) {},
+
+<span id='android-media-AudioSystem-method-forceUseConfigToString'>/**
+</span>*/
+forceUseConfigToString : function(  ) {},
+
+<span id='android-media-AudioSystem-method-forceUseUsageToString'>/**
+</span>*/
+forceUseUsageToString : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setStreamVolumeIndexAS'>/**Wrapper for native methods called from AudioService
+</span>*/
+setStreamVolumeIndexAS : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setDeviceConnectionState'>/**
+</span>@return {Number} command completion status, one of {@link #AUDIO_STATUS_OK},
+     {@link #AUDIO_STATUS_ERROR} or {@link #AUDIO_STATUS_SERVER_DIED}
+*/
+setDeviceConnectionState : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getDeviceConnectionState'>/**
+</span>*/
+getDeviceConnectionState : function(  ) {},
+
+<span id='android-media-AudioSystem-method-handleDeviceConfigChange'>/**
+</span>*/
+handleDeviceConfigChange : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setPhoneState'>/**
+</span>*/
+setPhoneState : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setForceUse'>/**
+</span>*/
+setForceUse : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getForceUse'>/**
+</span>*/
+getForceUse : function(  ) {},
+
+<span id='android-media-AudioSystem-method-initStreamVolume'>/**
+</span>*/
+initStreamVolume : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getStreamVolumeIndex'>/**
+</span>*/
+getStreamVolumeIndex : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setVolumeIndexForAttributes'>/**
+</span>@param {Object {AudioAttributes}} attributes the {@link AudioAttributes} to be considered
+@param {Number} index to be applied
+@param {Number} device the volume device to be considered
+@param device the volume device to be considered
+@return {Number} command completion status.
+*/
+setVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getVolumeIndexForAttributes'>/**
+</span>@param {Object {AudioAttributes}} attributes the {@link AudioAttributes} to be considered
+@param {Number} device the volume device to be considered
+@param device the volume device to be considered
+@return {Number} volume index for the given {@link AudioAttributes} and volume device.
+*/
+getVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getMinVolumeIndexForAttributes'>/**
+</span>@param {Object {AudioAttributes}} attributes the {@link AudioAttributes} to be considered
+@param attributes the {@link AudioAttributes} to be considered
+@return {Number} minimum volume index for the given {@link AudioAttributes}.
+*/
+getMinVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getMaxVolumeIndexForAttributes'>/**
+</span>@param {Object {AudioAttributes}} attributes the {@link AudioAttributes} to be considered
+@param attributes the {@link AudioAttributes} to be considered
+@return {Number} maximum volume index for the given {@link AudioAttributes}.
+*/
+getMaxVolumeIndexForAttributes : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setMasterVolume'>/**
+</span>*/
+setMasterVolume : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getMasterVolume'>/**
+</span>*/
+getMasterVolume : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setMasterMute'>/**
+</span>*/
+setMasterMute : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getMasterMute'>/**
+</span>*/
+getMasterMute : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getDevicesForStream'>/**
+</span>*/
+getDevicesForStream : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getMasterMono'>/**
+</span>@hide returns true if master mono is enabled.
+*/
+getMasterMono : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setMasterMono'>/**
+</span>@hide enables or disables the master mono mode.
+*/
+setMasterMono : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setRttEnabled'>/**
+</span>@hide enables or disables the RTT mode.
+*/
+setRttEnabled : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getMasterBalance'>/**
+</span>@hide returns master balance value in range -1.f -&gt; 1.f, where 0.f is dead center.
+*/
+getMasterBalance : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setMasterBalance'>/**
+</span>@hide changes the audio balance of the device.
+*/
+setMasterBalance : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getPrimaryOutputSamplingRate'>/**
+</span>*/
+getPrimaryOutputSamplingRate : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getPrimaryOutputFrameCount'>/**
+</span>*/
+getPrimaryOutputFrameCount : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getOutputLatency'>/**
+</span>*/
+getOutputLatency : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setLowRamDevice'>/**
+</span>*/
+setLowRamDevice : function(  ) {},
+
+<span id='android-media-AudioSystem-method-checkAudioFlinger'>/**
+</span>*/
+checkAudioFlinger : function(  ) {},
+
+<span id='android-media-AudioSystem-method-listAudioPorts'>/**
+</span>*/
+listAudioPorts : function(  ) {},
+
+<span id='android-media-AudioSystem-method-createAudioPatch'>/**
+</span>*/
+createAudioPatch : function(  ) {},
+
+<span id='android-media-AudioSystem-method-releaseAudioPatch'>/**
+</span>*/
+releaseAudioPatch : function(  ) {},
+
+<span id='android-media-AudioSystem-method-listAudioPatches'>/**
+</span>*/
+listAudioPatches : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setAudioPortConfig'>/**
+</span>*/
+setAudioPortConfig : function(  ) {},
+
+<span id='android-media-AudioSystem-method-startAudioSource'>/**
+</span>*/
+startAudioSource : function(  ) {},
+
+<span id='android-media-AudioSystem-method-stopAudioSource'>/**
+</span>*/
+stopAudioSource : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getAudioHwSyncForSession'>/**
+</span>*/
+getAudioHwSyncForSession : function(  ) {},
+
+<span id='android-media-AudioSystem-method-registerPolicyMixes'>/**
+</span>*/
+registerPolicyMixes : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setUidDeviceAffinities'>/**see AudioPolicy.setUidDeviceAffinities()
+</span>*/
+setUidDeviceAffinities : function(  ) {},
+
+<span id='android-media-AudioSystem-method-removeUidDeviceAffinities'>/**see AudioPolicy.removeUidDeviceAffinities()
+</span>*/
+removeUidDeviceAffinities : function(  ) {},
+
+<span id='android-media-AudioSystem-method-systemReady'>/**
+</span>*/
+systemReady : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getStreamVolumeDB'>/**
+</span>*/
+getStreamVolumeDB : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setAllowedCapturePolicy'>/**
+</span>@see AudioManager#setAllowedCapturePolicy()
+*/
+setAllowedCapturePolicy : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getMicrophones'>/**
+</span>*/
+getMicrophones : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getSurroundFormats'>/**
+</span>*/
+getSurroundFormats : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getHwOffloadEncodingFormatsSupportedForA2DP'>/**Returns a list of audio formats (codec) supported on the A2DP offload path.
+</span>*/
+getHwOffloadEncodingFormatsSupportedForA2DP : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setSurroundFormatEnabled'>/**
+</span>*/
+setSurroundFormatEnabled : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setAssistantUid'>/**Communicate UID of active assistant to audio policy service.
+</span>*/
+setAssistantUid : function(  ) {},
+
+<span id='android-media-AudioSystem-method-setA11yServicesUids'>/**Communicate UIDs of active accessibility services to audio policy service.
+</span>*/
+setA11yServicesUids : function(  ) {},
+
+<span id='android-media-AudioSystem-method-isHapticPlaybackSupported'>/**
+</span>@see AudioManager#isHapticPlaybackSupported()
+*/
+isHapticPlaybackSupported : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getValueForVibrateSetting'>/**
+</span>@see AudioManager#setVibrateSetting(int, int)
+*/
+getValueForVibrateSetting : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getDefaultStreamVolume'>/**
+</span>*/
+getDefaultStreamVolume : function(  ) {},
+
+<span id='android-media-AudioSystem-method-streamToString'>/**
+</span>*/
+streamToString : function(  ) {},
+
+<span id='android-media-AudioSystem-method-getPlatformType'>/**Return the platform type that this is running on. One of:
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link #PLATFORM_VOICE}&lt;/li&gt;
+ &lt;li&gt;{@link #PLATFORM_TELEVISION}&lt;/li&gt;
+ &lt;li&gt;{@link #PLATFORM_DEFAULT}&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+getPlatformType : function(  ) {},
+
+<span id='android-media-AudioSystem-method-isSingleVolume'>/**
+</span>@hide 
+@return {Boolean} whether the system uses a single volume stream.
+*/
+isSingleVolume : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-method-MetaKeyKeyListener'>/**@class android.text.method.MetaKeyKeyListener
+</span>@extends java.lang.Object
+
+ This base class encapsulates the behavior for tracking the state of
+ meta keys such as SHIFT, ALT and SYM as well as the pseudo-meta state of selecting text.
+ &lt;p&gt;
+ Key listeners that care about meta state should inherit from this class;
+ you should not instantiate this class directly in a client.
+ &lt;/p&gt;&lt;p&gt;
+ This class provides two mechanisms for tracking meta state that can be used
+ together or independently.
+ &lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Methods such as {@link #handleKeyDown(long, int, KeyEvent)} and
+ {@link #getMetaState}(long) operate on a meta key state bit mask.&lt;/li&gt;
+ &lt;li&gt;Methods such as {@link #onKeyDown(View, Editable, int, KeyEvent)} and
+ {@link #getMetaState(CharSequence, int)} operate on meta key state flags stored
+ as spans in an {@link Editable} text buffer.  The spans only describe the current
+ meta key state of the text editor; they do not carry any positional information.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ The behavior of this class varies according to the keyboard capabilities
+ described by the {@link KeyCharacterMap} of the keyboard device such as
+ the {@link KeyCharacterMap#getModifierBehavior() key modifier behavior}.
+ &lt;/p&gt;&lt;p&gt;
+ {@link android.text.method.MetaKeyKeyListener} implements chorded and toggled key modifiers.
+ When key modifiers are toggled into a latched or locked state, the state
+ of the modifier is stored in the {@link Editable} text buffer or in a
+ meta state integer managed by the client.  These latched or locked modifiers
+ should be considered to be held &lt;b&gt;in addition to&lt;/b&gt; those that the
+ keyboard already reported as being pressed in {@link KeyEvent#getMetaState()}.
+ In other words, the {@link android.text.method.MetaKeyKeyListener} augments the meta state
+ provided by the keyboard; it does not replace it.  This distinction is important
+ to ensure that meta keys not handled by {@link android.text.method.MetaKeyKeyListener} such as
+ {@link KeyEvent#KEYCODE_CAPS_LOCK} or {@link KeyEvent#KEYCODE_NUM_LOCK} are
+ taken into consideration.
+ &lt;/p&gt;&lt;p&gt;
+ To ensure correct meta key behavior, the following pattern should be used
+ when mapping key codes to characters:
+ &lt;/p&gt;
+ &lt;code&gt;
+ private char getUnicodeChar(TextKeyListener listener, KeyEvent event, Editable textBuffer) {
+     // Use the combined meta states from the event and the key listener.
+     int metaState = event.getMetaState() | listener.getMetaState(textBuffer);
+     return event.getUnicodeChar(metaState);
+ }
+ &lt;/code&gt;
+*/
+var MetaKeyKeyListener = {
+
+<span id='android-text-method-MetaKeyKeyListener-property-META_SHIFT_ON'>/** Flag that indicates that the SHIFT key is on.
+</span> Value equals {@link KeyEvent#META_SHIFT_ON}.
+*/
+META_SHIFT_ON : &quot;1&quot;,
+<span id='android-text-method-MetaKeyKeyListener-property-META_ALT_ON'>/** Flag that indicates that the ALT key is on.
+</span> Value equals {@link KeyEvent#META_ALT_ON}.
+*/
+META_ALT_ON : &quot;2&quot;,
+<span id='android-text-method-MetaKeyKeyListener-property-META_SYM_ON'>/** Flag that indicates that the SYM key is on.
+</span> Value equals {@link KeyEvent#META_SYM_ON}.
+*/
+META_SYM_ON : &quot;4&quot;,
+<span id='android-text-method-MetaKeyKeyListener-property-META_CAP_LOCKED'>/** Flag that indicates that the SHIFT key is locked in CAPS mode.
+</span>*/
+META_CAP_LOCKED : &quot;256&quot;,
+<span id='android-text-method-MetaKeyKeyListener-property-META_ALT_LOCKED'>/** Flag that indicates that the ALT key is locked.
+</span>*/
+META_ALT_LOCKED : &quot;512&quot;,
+<span id='android-text-method-MetaKeyKeyListener-property-META_SYM_LOCKED'>/** Flag that indicates that the SYM key is locked.
+</span>*/
+META_SYM_LOCKED : &quot;1024&quot;,
+<span id='android-text-method-MetaKeyKeyListener-property-META_SELECTING'>/** @hide pending API review
+</span>*/
+META_SELECTING : &quot;2048&quot;,
+<span id='android-text-method-MetaKeyKeyListener-method-resetMetaState'>/**Resets all meta state to inactive.
+</span>*/
+resetMetaState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-getMetaState'>/**Gets the state of the meta keys.
+</span>@param {Object {CharSequence}} text the buffer in which the meta key would have been pressed.
+@return {Number} an integer in which each bit set to one represents a pressed
+         or locked meta key.
+*/
+getMetaState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-getMetaState'>/**Gets the state of the meta keys for a specific key event.
+</span>
+ For input devices that use toggled key modifiers, the `toggled' state
+ is stored into the text buffer. This method retrieves the meta state
+ for this event, accounting for the stored state. If the event has been
+ created by a device that does not support toggled key modifiers, like
+ a virtual device for example, the stored state is ignored.
+@param {Object {CharSequence}} text the buffer in which the meta key would have been pressed.
+@param {Object {KeyEvent}} event the event for which to evaluate the meta state.
+@return {Number} an integer in which each bit set to one represents a pressed
+         or locked meta key.
+*/
+getMetaState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-getMetaState'>/**Gets the state of a particular meta key.
+</span>@param {Object {CharSequence}} meta META_SHIFT_ON, META_ALT_ON, META_SYM_ON
+@param {Number} text the buffer in which the meta key would have been pressed.
+@return {Number} 0 if inactive, 1 if active, 2 if locked.
+*/
+getMetaState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-getMetaState'>/**Gets the state of a particular meta key to use with a particular key event.
+</span>
+ If the key event has been created by a device that does not support toggled
+ key modifiers, like a virtual keyboard for example, only the meta state in
+ the key event is considered.
+@param {Object {CharSequence}} meta META_SHIFT_ON, META_ALT_ON, META_SYM_ON
+@param {Number} text the buffer in which the meta key would have been pressed.
+@param {Object {KeyEvent}} event the event for which to evaluate the meta state.
+@return {Number} 0 if inactive, 1 if active, 2 if locked.
+*/
+getMetaState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-adjustMetaAfterKeypress'>/**Call this method after you handle a keypress so that the meta
+</span> state will be reset to unshifted (if it is not still down)
+ or primed to be reset to unshifted (once it is released).
+*/
+adjustMetaAfterKeypress : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-isMetaTracker'>/**Returns true if this object is one that this class would use to
+</span> keep track of any meta state in the specified text.
+*/
+isMetaTracker : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-isSelectingMetaTracker'>/**Returns true if this object is one that this class would use to
+</span> keep track of the selecting meta state in the specified text.
+*/
+isSelectingMetaTracker : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-onKeyDown'>/**Handles presses of the meta keys.
+</span>*/
+onKeyDown : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-startSelecting'>/**Start selecting text.
+</span>@hide pending API review
+*/
+startSelecting : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-stopSelecting'>/**Stop selecting text.  This does not actually collapse the selection;
+</span> call {@link android.text.Selection#setSelection} too.
+@hide pending API review
+*/
+stopSelecting : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-onKeyUp'>/**Handles release of the meta keys.
+</span>*/
+onKeyUp : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-clearMetaKeyState'>/**
+</span>*/
+clearMetaKeyState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-clearMetaKeyState'>/**
+</span>*/
+clearMetaKeyState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-resetLockedMeta'>/**Call this if you are a method that ignores the locked meta state
+</span> (arrow keys, for example) and you handle a key.
+*/
+resetLockedMeta : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-getMetaState'>/**Gets the state of the meta keys.
+</span>@param {Number} state the current meta state bits.
+@return {Number} an integer in which each bit set to one represents a pressed
+         or locked meta key.
+*/
+getMetaState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-getMetaState'>/**Gets the state of a particular meta key.
+</span>@param {Number} state the current state bits.
+@param {Number} meta META_SHIFT_ON, META_ALT_ON, or META_SYM_ON
+@return {Number} 0 if inactive, 1 if active, 2 if locked.
+*/
+getMetaState : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-adjustMetaAfterKeypress'>/**Call this method after you handle a keypress so that the meta
+</span> state will be reset to unshifted (if it is not still down)
+ or primed to be reset to unshifted (once it is released).  Takes
+ the current state, returns the new state.
+*/
+adjustMetaAfterKeypress : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-handleKeyDown'>/**Handles presses of the meta keys.
+</span>*/
+handleKeyDown : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-handleKeyUp'>/**Handles release of the meta keys.
+</span>*/
+handleKeyUp : function(  ) {},
+
+<span id='android-text-method-MetaKeyKeyListener-method-clearMetaKeyState'>/**Clears the state of the specified meta key if it is locked.
+</span>@param {Number} state the meta key state
+@param {Number} which meta keys to clear, may be a combination of {@link #META_SHIFT_ON},
+ {@link #META_ALT_ON} or {@link #META_SYM_ON}.
+*/
+clearMetaKeyState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

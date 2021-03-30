@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-JournaledFile'>/**@class com.android.internal.util.JournaledFile
+</span>@extends java.lang.Object
+
+ @deprecated Use {@code AtomicFile} instead.  It would
+ be nice to update all existing uses of this to switch to AtomicFile, but since
+ their on-file semantics are slightly different that would run the risk of losing
+ data if at the point of the platform upgrade to the new code it would need to
+ roll back to the backup file.  This can be solved...  but is it worth it and
+ all of the testing needed to make sure it is correct?
+*/
+var JournaledFile = {
+
+<span id='com-android-internal-util-JournaledFile-method-chooseForRead'>/**Returns the file for you to read.
+</span>@more Prefers the real file.  If it doesn't exist, uses the temp one, and then copies
+ it to the real one.  If there is both a real file and a temp one, assumes that the
+ temp one isn't fully written and deletes it.
+*/
+chooseForRead : function(  ) {},
+
+<span id='com-android-internal-util-JournaledFile-method-chooseForWrite'>/**Returns a file for you to write.
+</span>@more If a write is already happening, throws.  In other words, you must provide your
+ own locking.
+ &lt;p&gt;
+ Call {@link #commit} to commit the changes, or {@link #rollback} to forget the changes.
+*/
+chooseForWrite : function(  ) {},
+
+<span id='com-android-internal-util-JournaledFile-method-commit'>/**Commit changes.
+</span>*/
+commit : function(  ) {},
+
+<span id='com-android-internal-util-JournaledFile-method-rollback'>/**Roll back changes.
+</span>*/
+rollback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

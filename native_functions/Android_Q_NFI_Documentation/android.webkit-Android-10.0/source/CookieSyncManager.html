@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-webkit-CookieSyncManager'>/**@class android.webkit.CookieSyncManager
+</span>@extends android.webkit.WebSyncManager
+
+ The CookieSyncManager is used to synchronize the browser cookie store
+ between RAM and permanent storage. To get the best performance, browser cookies are
+ saved in RAM. A separate thread saves the cookies between, driven by a timer.
+ &lt;p&gt;
+
+ To use the CookieSyncManager, the host application has to call the following
+ when the application starts:
+ &lt;p&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;CookieSyncManager.createInstance(context)&lt;/pre&gt;&lt;p&gt;
+
+ To set up for sync, the host application has to call&lt;p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;CookieSyncManager.getInstance().startSync()&lt;/pre&gt;&lt;p&gt;
+
+ in Activity.onResume(), and call
+ &lt;p&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ CookieSyncManager.getInstance().stopSync()
+ &lt;/pre&gt;&lt;p&gt;
+
+ in Activity.onPause().&lt;p&gt;
+
+ To get instant sync instead of waiting for the timer to trigger, the host can
+ call
+ &lt;p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;CookieSyncManager.getInstance().sync()&lt;/pre&gt;&lt;p&gt;
+
+ The sync interval is 5 minutes, so you will want to force syncs
+ manually anyway, for instance in {@link android.webkit.WebViewClient#onPageFinished}. Note that even sync() happens
+ asynchronously, so don't do it just as your activity is shutting
+ down.
+
+ @deprecated The WebView now automatically syncs cookies as necessary.
+             You no longer need to create or use the CookieSyncManager.
+             To manually force a sync you can use the CookieManager
+             method {@link android.webkit.CookieManager#flush} which is a synchronous
+             replacement for {@link #sync}.
+*/
+var CookieSyncManager = {
+
+<span id='android-webkit-CookieSyncManager-method-getInstance'>/**Singleton access to a {@link android.webkit.CookieSyncManager}. An
+</span> IllegalStateException will be thrown if
+ {@link android.webkit.CookieSyncManager#createInstance(Context)} is not called before.
+@return {Object {android.webkit.CookieSyncManager}} CookieSyncManager
+*/
+getInstance : function(  ) {},
+
+<span id='android-webkit-CookieSyncManager-method-createInstance'>/**Create a singleton CookieSyncManager within a context
+</span>@param {Object {Context}} context
+@return {Object {android.webkit.CookieSyncManager}} CookieSyncManager
+*/
+createInstance : function(  ) {},
+
+<span id='android-webkit-CookieSyncManager-method-sync'>/**sync() forces sync manager to sync now
+</span>@deprecated Use {@link CookieManager#flush} instead.
+*/
+sync : function(  ) {},
+
+<span id='android-webkit-CookieSyncManager-method-resetSync'>/**resetSync() resets sync manager's timer.
+</span>@deprecated Calling resetSync is no longer necessary as the WebView automatically
+             syncs cookies.
+*/
+resetSync : function(  ) {},
+
+<span id='android-webkit-CookieSyncManager-method-startSync'>/**startSync() requests sync manager to start sync.
+</span>@deprecated Calling startSync is no longer necessary as the WebView automatically
+             syncs cookies.
+*/
+startSync : function(  ) {},
+
+<span id='android-webkit-CookieSyncManager-method-stopSync'>/**stopSync() requests sync manager to stop sync. remove any SYNC_MESSAGE in
+</span> the queue to break the sync loop
+@deprecated Calling stopSync is no longer useful as the WebView
+             automatically syncs cookies.
+*/
+stopSync : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-PostProcessor'>/**@class android.graphics.PostProcessor
+</span>  Helper interface for adding custom processing to an image.
+
+  &lt;p&gt;The image being processed may be a {@link Drawable}, a {@link android.graphics.Bitmap}, or
+  a frame of an {@link AnimatedImageDrawable} produced by {@link android.graphics.ImageDecoder}.
+  This is called before the requested object is returned.&lt;/p&gt;
+
+  &lt;p&gt;This custom processing can even be applied to images that will be returned
+  as immutable objects, such as a {@link android.graphics.Bitmap} with {@code Config}
+  {@link android.graphics.Bitmap.Config#HARDWARE} returned by {@link android.graphics.ImageDecoder}.&lt;/p&gt;
+
+  &lt;p&gt;On an {@link AnimatedImageDrawable}, the callback will only be called once,
+  but the drawing commands will be applied to each frame, as if the {@link android.graphics.Canvas}
+  had been returned by {@link android.graphics.Picture#beginRecording android.graphics.Picture.beginRecording}.&lt;p&gt;
+
+  &lt;p&gt;Supplied to ImageDecoder via {@link android.graphics.ImageDecoder#setPostProcessor setPostProcessor}.&lt;/p&gt;
+*/
+var PostProcessor = {
+
+<span id='android-graphics-PostProcessor-method-onPostProcess'>/**Do any processing after (for example) decoding.
+</span>
+  &lt;p&gt;Drawing to the {@link android.graphics.Canvas} will behave as if the initial processing
+  (e.g. decoding) already exists in the Canvas. An implementation can draw
+  effects on top of this, or it can even draw behind it using
+  {@link android.graphics.PorterDuff.Mode#DST_OVER android.graphics.PorterDuff.Mode.DST_OVER}. A common
+  effect is to add transparency to the corners to achieve rounded corners.
+  That can be done with the following code:&lt;/p&gt;
+
+  &lt;pre class=&quot;prettyprint&quot;&gt;
+  Path path = new Path();
+  path.setFillType(Path.FillType.INVERSE_EVEN_ODD);
+  int width = canvas.getWidth();
+  int height = canvas.getHeight();
+  path.addRoundRect(0, 0, width, height, 20, 20, Path.Direction.CW);
+  Paint paint = new Paint();
+  paint.setAntiAlias(true);
+  paint.setColor(Color.TRANSPARENT);
+  paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
+  canvas.drawPath(path, paint);
+  return PixelFormat.TRANSLUCENT;
+  &lt;/pre&gt;
+@param {Object {Canvas}} canvas The {@link Canvas} to draw to.
+@return {Number} Opacity of the result after drawing.
+      {@link PixelFormat#UNKNOWN PixelFormat.UNKNOWN} means that the
+      implementation did not change whether the image has alpha. Return
+      this unless you added transparency (e.g. with the code above, in
+      which case you should return
+      {@link PixelFormat#TRANSLUCENT PixelFormat.TRANSLUCENT}) or you
+      forced the image to be opaque (e.g. by drawing everywhere with an
+      opaque color and {@link PorterDuff.Mode#DST_OVER PorterDuff.Mode.DST_OVER},
+      in which case you should return {@link PixelFormat#OPAQUE PixelFormat.OPAQUE}).
+      {@link PixelFormat#TRANSLUCENT PixelFormat.TRANSLUCENT} means that
+      the implementation added transparency. This is safe to return even
+      if the image already had transparency. This is also safe to return
+      if the result is opaque, though it may draw more slowly.
+      {@link PixelFormat#OPAQUE PixelFormat.OPAQUE} means that the
+      implementation forced the image to be opaque. This is safe to return
+      even if the image was already opaque.
+      {@link PixelFormat#TRANSPARENT PixelFormat.TRANSPARENT} (or any other
+      integer) is not allowed, and will result in throwing an
+      {@link java.lang.IllegalArgumentException}.
+*/
+onPostProcess : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

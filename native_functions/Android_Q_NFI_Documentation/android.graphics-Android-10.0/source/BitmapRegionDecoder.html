@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-BitmapRegionDecoder'>/**@class android.graphics.BitmapRegionDecoder
+</span>@extends java.lang.Object
+
+ BitmapRegionDecoder can be used to decode a rectangle region from an image.
+ BitmapRegionDecoder is particularly useful when an original image is large and
+ you only need parts of the image.
+
+ &lt;p&gt;To create a BitmapRegionDecoder, call newInstance(...).
+ Given a BitmapRegionDecoder, users can call decodeRegion() repeatedly
+ to get a decoded Bitmap of the specified region.
+
+*/
+var BitmapRegionDecoder = {
+
+<span id='android-graphics-BitmapRegionDecoder-method-newInstance'>/**Create a BitmapRegionDecoder from the specified byte array.
+</span> Currently only the JPEG and PNG formats are supported.
+@param {Object {byte[]}} data byte array of compressed image data.
+@param {Number} offset offset into data for where the decoder should begin
+               parsing.
+@param {Number} length the number of bytes, beginning at offset, to parse
+@param {Boolean} isShareable If this is true, then the BitmapRegionDecoder may keep a
+                    shallow reference to the input. If this is false,
+                    then the BitmapRegionDecoder will explicitly make a copy of the
+                    input data, and keep that. Even if sharing is allowed,
+                    the implementation may still decide to make a deep
+                    copy of the input data. If an image is progressively encoded,
+                    allowing sharing may degrade the decoding speed.
+@return {Object {android.graphics.BitmapRegionDecoder}} BitmapRegionDecoder, or null if the image data could not be decoded.
+@throws IOException if the image format is not supported or can not be decoded.
+*/
+newInstance : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-newInstance'>/**Create a BitmapRegionDecoder from the file descriptor.
+</span> The position within the descriptor will not be changed when
+ this returns, so the descriptor can be used again as is.
+ Currently only the JPEG and PNG formats are supported.
+@param {Object {FileDescriptor}} fd The file descriptor containing the data to decode
+@param {Boolean} isShareable If this is true, then the BitmapRegionDecoder may keep a
+                    shallow reference to the input. If this is false,
+                    then the BitmapRegionDecoder will explicitly make a copy of the
+                    input data, and keep that. Even if sharing is allowed,
+                    the implementation may still decide to make a deep
+                    copy of the input data. If an image is progressively encoded,
+                    allowing sharing may degrade the decoding speed.
+@return {Object {android.graphics.BitmapRegionDecoder}} BitmapRegionDecoder, or null if the image data could not be decoded.
+@throws IOException if the image format is not supported or can not be decoded.
+*/
+newInstance : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-newInstance'>/**Create a BitmapRegionDecoder from an input stream.
+</span> The stream's position will be where ever it was after the encoded data
+ was read.
+ Currently only the JPEG and PNG formats are supported.
+@param {Object {InputStream}} is The input stream that holds the raw data to be decoded into a
+           BitmapRegionDecoder.
+@param {Boolean} isShareable If this is true, then the BitmapRegionDecoder may keep a
+                    shallow reference to the input. If this is false,
+                    then the BitmapRegionDecoder will explicitly make a copy of the
+                    input data, and keep that. Even if sharing is allowed,
+                    the implementation may still decide to make a deep
+                    copy of the input data. If an image is progressively encoded,
+                    allowing sharing may degrade the decoding speed.
+@return {Object {android.graphics.BitmapRegionDecoder}} BitmapRegionDecoder, or null if the image data could not be decoded.
+@throws IOException if the image format is not supported or can not be decoded.
+
+ &lt;p class=&quot;note&quot;&gt;Prior to {@link android.os.Build.VERSION_CODES#KITKAT},
+ if {@link InputStream#markSupported is.markSupported()} returns true,
+ &lt;code&gt;is.mark(1024)&lt;/code&gt; would be called. As of
+ {@link android.os.Build.VERSION_CODES#KITKAT}, this is no longer the case.&lt;/p&gt;
+*/
+newInstance : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-newInstance'>/**Create a BitmapRegionDecoder from a file path.
+</span> Currently only the JPEG and PNG formats are supported.
+@param {String} pathName complete path name for the file to be decoded.
+@param {Boolean} isShareable If this is true, then the BitmapRegionDecoder may keep a
+                    shallow reference to the input. If this is false,
+                    then the BitmapRegionDecoder will explicitly make a copy of the
+                    input data, and keep that. Even if sharing is allowed,
+                    the implementation may still decide to make a deep
+                    copy of the input data. If an image is progressively encoded,
+                    allowing sharing may degrade the decoding speed.
+@return {Object {android.graphics.BitmapRegionDecoder}} BitmapRegionDecoder, or null if the image data could not be decoded.
+@throws IOException if the image format is not supported or can not be decoded.
+*/
+newInstance : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-decodeRegion'>/**Decodes a rectangle region in the image specified by rect.
+</span>@param {Object {Rect}} rect The rectangle that specified the region to be decode.
+@param {Object {BitmapFactory.Options}} options null-ok; Options that control downsampling.
+             inPurgeable is not supported.
+@return {Object {android.graphics.Bitmap}} The decoded bitmap, or null if the image data could not be
+         decoded.
+@throws IllegalArgumentException if {@link BitmapFactory.Options#inPreferredConfig}
+         is {@link android.graphics.Bitmap.Config#HARDWARE}
+         and {@link BitmapFactory.Options#inMutable} is set, if the specified color space
+         is not {@link ColorSpace.Model#RGB RGB}, or if the specified color space's transfer
+         function is not an {@link ColorSpace.Rgb.TransferParameters ICC parametric curve}
+*/
+decodeRegion : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-getWidth'>/**Returns the original image's width
+</span>*/
+getWidth : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-getHeight'>/**Returns the original image's height
+</span>*/
+getHeight : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-recycle'>/**Frees up the memory associated with this region decoder, and mark the
+</span> region decoder as &quot;dead&quot;, meaning it will throw an exception if decodeRegion(),
+ getWidth() or getHeight() is called.
+
+ &lt;p&gt;This operation cannot be reversed, so it should only be called if you are
+ sure there are no further uses for the region decoder. This is an advanced call,
+ and normally need not be called, since the normal GC process will free up this
+ memory when there are no more references to this region decoder.
+*/
+recycle : function(  ) {},
+
+<span id='android-graphics-BitmapRegionDecoder-method-isRecycled'>/**Returns true if this region decoder has been recycled.
+</span> If so, then it is an error to try use its method.
+@return {Boolean} true if the region decoder has been recycled
+*/
+isRecycled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

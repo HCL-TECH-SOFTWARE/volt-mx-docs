@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-hdmi-HdmiTvClient'>/**@class android.hardware.hdmi.HdmiTvClient
+</span>@extends android.hardware.hdmi.HdmiClient
+
+ HdmiTvClient represents HDMI-CEC logical device of type TV in the Android system
+ which acts as TV/Display.
+
+ &lt;p&gt;HdmiTvClient provides methods that manage, interact with other devices on the CEC bus.
+
+ @hide
+*/
+var HdmiTvClient = {
+
+<span id='android-hardware-hdmi-HdmiTvClient-property-VENDOR_DATA_SIZE'>/** Size of MHL register for vendor command
+</span>*/
+VENDOR_DATA_SIZE : &quot;16&quot;,
+<span id='android-hardware-hdmi-HdmiTvClient-method-getDeviceType'>/**
+</span>*/
+getDeviceType : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-deviceSelect'>/**Selects a CEC logical device to be a new active source.
+</span>@param {Number} logicalAddress logical address of the device to select
+@param {Object {HdmiTvClient.SelectCallback}} callback callback to get the result with
+@throws {@link IllegalArgumentException} if the {@code callback} is null
+*/
+deviceSelect : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-portSelect'>/**Selects a HDMI port to be a new route path.
+</span>@param {Number} portId HDMI port to select
+@param {Object {HdmiTvClient.SelectCallback}} callback callback to get the result with
+@throws {@link IllegalArgumentException} if the {@code callback} is null
+*/
+portSelect : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-setInputChangeListener'>/**Sets the listener used to get informed of the input change event.
+</span>@param {Object {HdmiTvClient.InputChangeListener}} listener listener object
+*/
+setInputChangeListener : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-getDeviceList'>/**Returns all the CEC devices connected to TV.
+</span>@return {Object {java.util.List}} list of {@link HdmiDeviceInfo} for connected CEC devices.
+         Empty list is returned if there is none.
+*/
+getDeviceList : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-setSystemAudioMode'>/**Sets system audio mode.
+</span>@param {Boolean} enabled set to {@code true} to enable the mode; otherwise {@code false}
+@param {Object {HdmiTvClient.SelectCallback}} callback callback to get the result with
+@throws {@link IllegalArgumentException} if the {@code callback} is null
+*/
+setSystemAudioMode : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-setSystemAudioVolume'>/**Sets system audio volume.
+</span>@param {Number} oldIndex current volume index
+@param {Number} newIndex volume index to be set
+@param {Number} maxIndex maximum volume index
+*/
+setSystemAudioVolume : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-setSystemAudioMute'>/**Sets system audio mute status.
+</span>@param {Boolean} mute {@code true} if muted; otherwise, {@code false}
+*/
+setSystemAudioMute : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-setRecordListener'>/**Sets record listener.
+</span>@param {Object {HdmiRecordListener}} listener
+*/
+setRecordListener : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-sendStandby'>/**Sends a &amp;lt;Standby&amp;gt; command to other device.
+</span>@param {Number} deviceId device id to send the command to
+*/
+sendStandby : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-startOneTouchRecord'>/**Starts one touch recording with the given recorder address and recorder source.
+</span> &lt;p&gt;
+ Usage
+ &lt;pre&gt;
+ HdmiTvClient tvClient = ....;
+ // for own source.
+ OwnSource ownSource = HdmiRecordSources.ofOwnSource();
+ tvClient.startOneTouchRecord(recorderAddress, ownSource);
+ &lt;/pre&gt;
+*/
+startOneTouchRecord : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-stopOneTouchRecord'>/**Stops one touch record.
+</span>@param {Number} recorderAddress recorder address where recoding will be stopped
+*/
+stopOneTouchRecord : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-startTimerRecording'>/**Starts timer recording with the given recoder address and recorder source.
+</span> &lt;p&gt;
+ Usage
+ &lt;pre&gt;
+ HdmiTvClient tvClient = ....;
+ // create timer info
+ TimerInfo timerInfo = HdmiTimerRecourdSources.timerInfoOf(...);
+ // for digital source.
+ DigitalServiceSource recordSource = HdmiRecordSources.ofDigitalService(...);
+ // create timer recording source.
+ TimerRecordSource source = HdmiTimerRecourdSources.ofDigitalSource(timerInfo, recordSource);
+ tvClient.startTimerRecording(recorderAddress, source);
+ &lt;/pre&gt;
+@param {Number} recorderAddress target recorder address
+@param {Number} sourceType type of record source. It should be one of
+          {@link HdmiControlManager#TIMER_RECORDING_TYPE_DIGITAL},
+          {@link HdmiControlManager#TIMER_RECORDING_TYPE_ANALOGUE},
+          {@link HdmiControlManager#TIMER_RECORDING_TYPE_EXTERNAL}.
+@param {Object {HdmiTimerRecordSources.TimerRecordSource}} source record source to be used
+*/
+startTimerRecording : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-clearTimerRecording'>/**Clears timer recording with the given recorder address and recording source.
+</span> For more details, please refer {@link #startandroid.hardware.hdmi.HdmiTimerRecordSources.TimerRecording(int, int, android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource)}.
+*/
+clearTimerRecording : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-setHdmiMhlVendorCommandListener'>/**Sets {@link android.hardware.hdmi.HdmiTvClient.HdmiMhlVendorCommandListener} to get incoming MHL vendor command.
+</span>@param {Object {HdmiTvClient.HdmiMhlVendorCommandListener}} listener to receive incoming MHL vendor command
+*/
+setHdmiMhlVendorCommandListener : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTvClient-method-sendMhlVendorCommand'>/**Sends MHL vendor command to the device connected to a port of the given portId.
+</span>@param {Number} portId id of port to send MHL vendor command
+@param {Number} offset offset in the in given data
+@param {Number} length length of data. offset + length should be bound to length of data.
+@param {Object {byte[]}} data container for vendor command data. It should be 16 bytes.
+@throws IllegalArgumentException if the given parameters are invalid
+*/
+sendMhlVendorCommand : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

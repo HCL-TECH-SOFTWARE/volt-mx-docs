@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-LauncherApps-PinItemRequest'>/**@class android.content.pm.LauncherApps.PinItemRequest
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Represents a &quot;pin shortcut&quot; or a &quot;pin appwidget&quot; request made by an app, which is sent with
+ an {@link #ACTION_CONFIRM_PIN_SHORTCUT} or {@link #ACTION_CONFIRM_PIN_APPWIDGET} intent
+ respectively to the default launcher app.
+
+ &lt;h3&gt;Request of the {@link #REQUEST_TYPE_SHORTCUT} type.
+
+ &lt;p&gt;A {@link #REQUEST_TYPE_SHORTCUT} request represents a request to pin a
+ {@link android.content.pm.ShortcutInfo}.  If the launcher accepts a request, call {@link #accept}(),
+ or {@link #accept}(Bundle) with a null or empty Bundle.  No options are defined for
+ pin-shortcuts requests.
+
+ &lt;p&gt;{@link #getShortcutInfo}() always returns a non-null {@link android.content.pm.ShortcutInfo} for this type.
+
+ &lt;p&gt;The launcher may receive a request with a {@link android.content.pm.ShortcutInfo} that is already pinned, in
+ which case {@link android.content.pm.ShortcutInfo#isPinned()} returns true.  This means the user wants to create
+ another pinned shortcut for a shortcut that's already pinned.  If the launcher accepts it,
+ {@link #accept}() must still be called even though the shortcut is already pinned, and
+ create a new pinned shortcut icon for it.
+
+ &lt;p&gt;See also {@link android.content.pm.ShortcutManager} for more details.
+
+ &lt;h3&gt;Request of the {@link #REQUEST_TYPE_APPWIDGET} type.
+
+ &lt;p&gt;A {@link #REQUEST_TYPE_SHORTCUT} request represents a request to pin a
+ an AppWidget.  If the launcher accepts a request, call {@link #accept}(Bundle) with
+ the appwidget integer ID set to the
+ {@link android.appwidget.AppWidgetManager#EXTRA_APPWIDGET_ID} extra.
+
+ &lt;p&gt;{@link #getAppWidgetProviderInfo}(Context) always returns a non-null
+ {@link AppWidgetProviderInfo} for this type.
+
+ &lt;p&gt;See also {@link AppWidgetManager} for more details.
+
+ @see #EXTRA_PIN_ITEM_REQUEST
+ @see #getPinItemRequest(Intent)
+*/
+var PinItemRequest = {
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-property-REQUEST_TYPE_SHORTCUT'>/**This is a request to pin shortcut. */
+</span>REQUEST_TYPE_SHORTCUT : &quot;1&quot;,
+<span id='android-content-pm-LauncherApps-PinItemRequest-property-REQUEST_TYPE_APPWIDGET'>/**This is a request to pin app widget. */
+</span>REQUEST_TYPE_APPWIDGET : &quot;2&quot;,
+<span id='android-content-pm-LauncherApps-PinItemRequest-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-getRequestType'>/**Represents the type of a request, which is one of the {@code REQUEST_TYPE_} constants.
+</span>@return {Number} one of the {@code REQUEST_TYPE_} constants.
+*/
+getRequestType : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-getShortcutInfo'>/**{@link android.content.pm.ShortcutInfo} sent by the requesting app.
+</span> Always non-null for a {@link #REQUEST_TYPE_SHORTCUT} request, and always null for a
+ different request type.
+@return {Object {android.content.pm.ShortcutInfo}} requested {@link ShortcutInfo} when a request is of the
+ {@link #REQUEST_TYPE_SHORTCUT} type.  Null otherwise.
+*/
+getShortcutInfo : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-getAppWidgetProviderInfo'>/**{@link AppWidgetProviderInfo} sent by the requesting app.
+</span> Always non-null for a {@link #REQUEST_TYPE_APPWIDGET} request, and always null for a
+ different request type.
+
+ &lt;p&gt;Launcher should not show any configuration activity associated with the provider, and
+ assume that the widget is already fully configured. Upon accepting the widget, it should
+ pass the widgetId in {@link #accept}(Bundle).
+@return {Object {android.appwidget.AppWidgetProviderInfo}} requested {@link AppWidgetProviderInfo} when a request is of the
+ {@link #REQUEST_TYPE_APPWIDGET} type.  Null otherwise.
+*/
+getAppWidgetProviderInfo : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-getExtras'>/**Any extras sent by the requesting app.
+</span>@return {Object {android.os.Bundle}} For a shortcut request, this method always return null.  For an AppWidget
+ request, this method returns the extras passed to the
+ {@link android.appwidget.AppWidgetManager#requestPinAppWidget(
+ ComponentName, Bundle, PendingIntent)} API.  See {@link AppWidgetManager} for details.
+*/
+getExtras : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-isValid'>/**Return whether a request is still valid.
+</span>@return {Boolean} {@code TRUE} if a request is valid and {@link #accept(Bundle)} may be called.
+*/
+isValid : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-accept'>/**Called by the receiving launcher app when the user accepts the request.
+</span>@param {Object {Bundle}} options must be set for a {@link #REQUEST_TYPE_APPWIDGET} request.
+@return {Boolean} {@code TRUE} if the shortcut or the AppWidget has actually been pinned.
+ {@code FALSE} if the item hasn't been pinned, for example, because the request had
+ already been canceled, in which case the launcher must not pin the requested item.
+*/
+accept : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-accept'>/**Called by the receiving launcher app when the user accepts the request, with no options.
+</span>@return {Boolean} {@code TRUE} if the shortcut or the AppWidget has actually been pinned.
+ {@code FALSE} if the item hasn't been pinned, for example, because the request had
+ already been canceled, in which case the launcher must not pin the requested item.
+*/
+accept : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-PinItemRequest-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

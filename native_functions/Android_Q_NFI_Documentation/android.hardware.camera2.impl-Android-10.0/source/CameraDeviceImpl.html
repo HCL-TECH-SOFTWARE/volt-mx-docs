@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-impl-CameraDeviceImpl'>/**@class android.hardware.camera2.impl.CameraDeviceImpl
+</span> implements android.os.IBinder.DeathRecipient
+
+@extends android.hardware.camera2.CameraDevice
+
+ HAL2.1+ implementation of CameraDevice. Use CameraManager#open to instantiate
+*/
+var CameraDeviceImpl = {
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-getCallbacks'>/**
+</span>*/
+getCallbacks : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-setRemoteDevice'>/**Set remote device, which triggers initial onOpened/onUnconfigured callbacks
+</span>
+ &lt;p&gt;This function may post onDisconnected and throw CAMERA_DISCONNECTED if remoteDevice dies
+ during setup.&lt;/p&gt;
+*/
+setRemoteDevice : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-setRemoteFailure'>/**Call to indicate failed connection to a remote camera device.
+</span>
+ &lt;p&gt;This places the camera device in the error state and informs the callback.
+ Use in place of setRemoteDevice() when startup fails.&lt;/p&gt;
+*/
+setRemoteFailure : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-getId'>/**
+</span>*/
+getId : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-configureOutputs'>/**
+</span>*/
+configureOutputs : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-configureStreamsChecked'>/**Attempt to configure the input and outputs; the device goes to idle and then configures the
+</span> new input and outputs if possible.
+
+ &lt;p&gt;The configuration may gracefully fail, if input configuration is not supported,
+ if there are too many outputs, if the formats are not supported, or if the sizes for that
+ format is not supported. In this case this function will return {@code false} and the
+ unconfigured callback will be fired.&lt;/p&gt;
+
+ &lt;p&gt;If the configuration succeeds (with 1 or more outputs with or without an input),
+ then the idle callback is fired. Unconfiguring the device always fires the idle callback.&lt;/p&gt;
+@param {Object {InputConfiguration}} inputConfig input configuration or {@code null} for no input
+@param {Object {java.util.List}} outputs a list of one or more surfaces, or {@code null} to unconfigure
+@param {Number} operatingMode If the stream configuration is for a normal session,
+     a constrained high speed session, or something else.
+@param {Object {CaptureRequest}} sessionParams Session parameters.
+@return {Boolean} whether or not the configuration was successful
+@throws CameraAccessException if there were any unexpected problems during configuration
+*/
+configureStreamsChecked : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createCaptureSession'>/**
+</span>*/
+createCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createCaptureSessionByOutputConfigurations'>/**
+</span>*/
+createCaptureSessionByOutputConfigurations : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createReprocessableCaptureSession'>/**
+</span>*/
+createReprocessableCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createReprocessableCaptureSessionByConfigurations'>/**
+</span>*/
+createReprocessableCaptureSessionByConfigurations : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createConstrainedHighSpeedCaptureSession'>/**
+</span>*/
+createConstrainedHighSpeedCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createCustomCaptureSession'>/**
+</span>*/
+createCustomCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createCaptureSession'>/**
+</span>*/
+createCaptureSession : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-isSessionConfigurationSupported'>/**
+</span>*/
+isSessionConfigurationSupported : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-setSessionListener'>/**For use by backwards-compatibility code only.
+</span>*/
+setSessionListener : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createCaptureRequest'>/**
+</span>*/
+createCaptureRequest : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createCaptureRequest'>/**
+</span>*/
+createCaptureRequest : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-createReprocessCaptureRequest'>/**
+</span>*/
+createReprocessCaptureRequest : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-prepare'>/**
+</span>*/
+prepare : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-prepare'>/**
+</span>*/
+prepare : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-updateOutputConfiguration'>/**
+</span>*/
+updateOutputConfiguration : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-tearDown'>/**
+</span>*/
+tearDown : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-finalizeOutputConfigs'>/**
+</span>*/
+finalizeOutputConfigs : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-capture'>/**
+</span>*/
+capture : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-captureBurst'>/**
+</span>*/
+captureBurst : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-setRepeatingRequest'>/**
+</span>*/
+setRepeatingRequest : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-setRepeatingBurst'>/**
+</span>*/
+setRepeatingBurst : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-stopRepeating'>/**
+</span>*/
+stopRepeating : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-flush'>/**
+</span>*/
+flush : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-checkExecutor'>/**Default executor management.
+</span>
+ &lt;p&gt;If the callback isn't null, check the executor, otherwise pass it through.&lt;/p&gt;
+*/
+checkExecutor : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-checkAndWrapHandler'>/**Wrap Handler in Executor.
+</span>
+ &lt;p&gt;
+ If handler is null, get the current thread's
+ Looper to create a Executor with. If no looper exists, throw
+ {@code IllegalArgumentException}.
+ &lt;/p&gt;
+*/
+checkAndWrapHandler : function(  ) {},
+
+<span id='android-hardware-camera2-impl-CameraDeviceImpl-method-binderDied'>/**Listener for binder death.
+</span>
+ &lt;p&gt; Handle binder death for ICameraDeviceUser. Trigger onError.&lt;/p&gt;
+*/
+binderDied : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-mbms-vendor-VendorUtils'>/**@class android.telephony.mbms.vendor.VendorUtils
+</span>@extends java.lang.Object
+
+ Contains constants and utility methods for MBMS Download middleware apps to communicate with
+ frontend apps.
+ @hide
+*/
+var VendorUtils = {
+
+<span id='android-telephony-mbms-vendor-VendorUtils-property-ACTION_DOWNLOAD_RESULT_INTERNAL'>/** The MBMS middleware should send this when a download of single file has completed or
+</span> failed. The only mandatory extra is
+ {@link MbmsDownloadSession#EXTRA_MBMS_DOWNLOAD_RESULT}
+ and the following are required when the download has completed:
+ {@link MbmsDownloadSession#EXTRA_MBMS_FILE_INFO}
+ {@link MbmsDownloadSession#EXTRA_MBMS_DOWNLOAD_REQUEST}
+ {@link #EXTRA_TEMP_LIST}
+ {@link #EXTRA_FINAL_URI}
+*/
+ACTION_DOWNLOAD_RESULT_INTERNAL : &quot;android.telephony.mbms.action.DOWNLOAD_RESULT_INTERNAL&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-ACTION_FILE_DESCRIPTOR_REQUEST'>/** The MBMS middleware should send this when it wishes to request {@code content://} URIs to
+</span> serve as temp files for downloads or when it wishes to resume paused downloads. Mandatory
+ extras are
+ {@link #EXTRA_SERVICE_ID}
+
+ Optional extras are
+ {@link #EXTRA_FD_COUNT} (0 if not present)
+ {@link #EXTRA_PAUSED_LIST} (empty if not present)
+*/
+ACTION_FILE_DESCRIPTOR_REQUEST : &quot;android.telephony.mbms.action.FILE_DESCRIPTOR_REQUEST&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-ACTION_CLEANUP'>/** The MBMS middleware should send this when it wishes to clean up temp  files in the app's
+</span> filesystem. Mandatory extras are:
+ {@link #EXTRA_TEMP_FILES_IN_USE}
+*/
+ACTION_CLEANUP : &quot;android.telephony.mbms.action.CLEANUP&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_TEMP_LIST'>/** Extra containing a {@link List} of {@link Uri}s that were used as temp files for this
+</span> completed file. These {@link Uri}s should have scheme {@code file://}, and the temp
+ files will be deleted upon receipt of the intent.
+ May be null.
+*/
+EXTRA_TEMP_LIST : &quot;android.telephony.mbms.extra.TEMP_LIST&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_FD_COUNT'>/** Extra containing an integer indicating the number of temp files requested.
+</span>*/
+EXTRA_FD_COUNT : &quot;android.telephony.mbms.extra.FD_COUNT&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_PAUSED_LIST'>/** Extra containing a list of {@link Uri}s that the middleware is requesting access to via
+</span> {@link #ACTION_FILE_DESCRIPTOR_REQUEST} in order to resume downloading. These {@link Uri}s
+ should have scheme {@code file://}.
+*/
+EXTRA_PAUSED_LIST : &quot;android.telephony.mbms.extra.PAUSED_LIST&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_FREE_URI_LIST'>/** Extra containing a list of {@link android.telephony.mbms.UriPathPair}s, used in the
+</span> response to {@link #ACTION_FILE_DESCRIPTOR_REQUEST}. These are temp files that are meant
+ to be used for new file downloads.
+*/
+EXTRA_FREE_URI_LIST : &quot;android.telephony.mbms.extra.FREE_URI_LIST&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_PAUSED_URI_LIST'>/** Extra containing a list of {@link android.telephony.mbms.UriPathPair}s, used in the
+</span> response to {@link #ACTION_FILE_DESCRIPTOR_REQUEST}. These
+ {@link android.telephony.mbms.UriPathPair}s contain {@code content://} URIs that provide
+ access to previously paused downloads.
+*/
+EXTRA_PAUSED_URI_LIST : &quot;android.telephony.mbms.extra.PAUSED_URI_LIST&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_TEMP_FILE_ROOT'>/** Extra containing a string that points to the middleware's knowledge of where the temp file
+</span> root for the app is. The path should be a canonical path as returned by
+ {@link File#getCanonicalPath()}
+*/
+EXTRA_TEMP_FILE_ROOT : &quot;android.telephony.mbms.extra.TEMP_FILE_ROOT&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_TEMP_FILES_IN_USE'>/** Extra containing a list of {@link Uri}s indicating temp files which the middleware is
+</span> still using.
+*/
+EXTRA_TEMP_FILES_IN_USE : &quot;android.telephony.mbms.extra.TEMP_FILES_IN_USE&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_FINAL_URI'>/** Extra containing a single {@link Uri} indicating the path to the temp file in which the
+</span> decoded downloaded file resides. Must not be null.
+*/
+EXTRA_FINAL_URI : &quot;android.telephony.mbms.extra.FINAL_URI&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-property-EXTRA_SERVICE_ID'>/** Extra containing a String representing a service ID, used by
+</span> file-descriptor requests and cleanup requests to specify which service they want to
+ request temp files or clean up temp files for, respectively.
+*/
+EXTRA_SERVICE_ID : &quot;android.telephony.mbms.extra.SERVICE_ID&quot;,
+<span id='android-telephony-mbms-vendor-VendorUtils-method-getAppReceiverFromPackageName'>/**Retrieves the {@link ComponentName} for the {@link android.content.BroadcastReceiver} that
+</span> the various intents from the middleware should be targeted towards.
+@param {Object {Context}} packageName The package name of the app.
+@return {Object {android.content.ComponentName}} The component name of the receiver that the middleware should send its intents to,
+ or null if the app didn't declare it in the manifest.
+*/
+getAppReceiverFromPackageName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

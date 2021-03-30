@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-sax-RootElement'>/**@class android.sax.RootElement
+</span>@extends android.sax.Element
+
+ The root XML element. The entry point for this API. Not safe for concurrent
+ use.
+
+ &lt;p&gt;For example, passing this XML:
+
+ &lt;pre&gt;
+ &amp;lt;feed xmlns='http://www.w3.org/2005/Atom'&gt;
+   &amp;lt;entry&gt;
+     &amp;lt;id&gt;bob&amp;lt;/id&gt;
+   &amp;lt;/entry&gt;
+ &amp;lt;/feed&gt;
+ &lt;/pre&gt;
+
+ to this code:
+
+ &lt;pre&gt;
+ static final String ATOM_NAMESPACE = &quot;http://www.w3.org/2005/Atom&quot;;
+
+ ...
+ 
+ RootElement root = new RootElement(ATOM_NAMESPACE, &quot;feed&quot;);
+ Element entry = root.getChild(ATOM_NAMESPACE, &quot;entry&quot;);
+ entry.getChild(ATOM_NAMESPACE, &quot;id&quot;).setEndTextElementListener(
+   new EndTextElementListener() {
+     public void end(String body) {
+       System.out.println(&quot;Entry ID: &quot; + body);
+     }
+   });
+
+ XMLReader reader = ...;
+ reader.setContentHandler(root.getContentHandler());
+ reader.parse(...);
+ &lt;/pre&gt;
+
+ would output:
+
+ &lt;pre&gt;
+ Entry ID: bob
+ &lt;/pre&gt;
+*/
+var RootElement = {
+
+<span id='android-sax-RootElement-method-getContentHandler'>/**Gets the SAX {@code ContentHandler}. Pass this to your SAX parser.
+</span>*/
+getContentHandler : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

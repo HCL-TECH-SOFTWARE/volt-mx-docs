@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-effect-EffectContext'>/**@class android.media.effect.EffectContext
+</span>@extends java.lang.Object
+
+ &lt;p&gt;An EffectContext keeps all necessary state information to run Effects within a Open GL ES 2.0
+ context.&lt;/p&gt;
+
+ &lt;p&gt;Every EffectContext is bound to one GL context. The application is responsible for creating
+ this EGL context, and making it current before applying any effect. If your EGL context is
+ destroyed, the EffectContext becomes invalid and any effects bound to this context can no longer
+ be used. If you switch to another EGL context, you must create a new EffectContext. Each Effect
+ is bound to a single EffectContext, and can only be executed in that context.&lt;/p&gt;
+*/
+var EffectContext = {
+
+<span id='android-media-effect-EffectContext-method-createWithCurrentGlContext'>/**Creates a context within the current GL context.
+</span>
+ &lt;p&gt;Binds the EffectContext to the current OpenGL context. All subsequent calls to the
+ EffectContext must be made in the GL context that was active during creation.
+ When you have finished using a context, you must call {@link #release}(). to dispose of all
+ resources associated with this context.&lt;/p&gt;
+*/
+createWithCurrentGlContext : function(  ) {},
+
+<span id='android-media-effect-EffectContext-method-getFactory'>/**Returns the EffectFactory for this context.
+</span>
+ &lt;p&gt;The EffectFactory returned from this method allows instantiating new effects within this
+ context.&lt;/p&gt;
+@return {Object {android.media.effect.EffectFactory}} The EffectFactory instance for this context.
+*/
+getFactory : function(  ) {},
+
+<span id='android-media-effect-EffectContext-method-release'>/**Releases the context.
+</span>
+ &lt;p&gt;Releases all the resources and effects associated with the EffectContext. This renders the
+ context and all the effects bound to this context invalid. You must no longer use the context
+ or any of its bound effects after calling release().&lt;/p&gt;
+
+ &lt;p&gt;Note that this method must be called with the proper EGL context made current, as the
+ EffectContext and its effects may release internal GL resources.&lt;/p&gt;
+*/
+release : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

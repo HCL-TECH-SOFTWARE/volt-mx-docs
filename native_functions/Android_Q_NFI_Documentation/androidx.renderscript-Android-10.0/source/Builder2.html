@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='androidx-renderscript-ScriptGroup-Builder2'>/**@class androidx.renderscript.ScriptGroup.Builder2
+</span>@extends java.lang.Object
+
+ The builder class for creating script groups
+ &lt;p&gt;
+ A script group is created using closures (see class {@link androidx.renderscript.ScriptGroup.Closure}).
+ A closure is a function call to a kernel or
+ invocable function. Each function argument or global variable accessed inside
+ the function is bound to 1) a known value, 2) a script group input
+ (see class {@link androidx.renderscript.ScriptGroup.Input}), or 3) a
+ future (see class {@link androidx.renderscript.ScriptGroup.Future}).
+ A future is the output of a closure, either the return value of the
+ function or a global variable written by that function.
+ &lt;p&gt;
+ Closures are created using the {@link #addKernel} or {@link #addInvoke}
+ methods.
+ When a closure is created, futures from previously created closures
+ can be used as its inputs.
+ External script group inputs can be used as inputs to individual closures as well.
+ An external script group input is created using the {@link #addInput} method.
+ A script group is created by a call to the {@link #create} method, which
+ accepts an array of futures as the outputs for the script group.
+ &lt;p&gt;
+ Closures in a script group can be evaluated in any order as long as the
+ following conditions are met:
+ 1) a closure must be evaluated before any other closures that take its
+ futures as inputs;
+ 2) all closures added before an invoke closure must be evaluated
+ before it;
+ and 3) all closures added after an invoke closure must be evaluated after
+ it.
+ As a special case, the order that the closures are added is a legal
+ evaluation order. However, other evaluation orders are possible, including
+ concurrently evaluating independent closures.
+*/
+var Builder2 = {
+
+<span id='androidx-renderscript-ScriptGroup-Builder2-method-addInput'>/**Adds a script group input
+</span>@return {Object {androidx.renderscript.ScriptGroup.Input}} a script group input, which can be used as an argument or a value to
+     a global variable for creating closures
+*/
+addInput : function(  ) {},
+
+<span id='androidx-renderscript-ScriptGroup-Builder2-method-addKernel'>/**Adds a closure for a kernel
+</span>@param {Object {Script.KernelID}} k Kernel ID for the kernel function
+@param {Object {Type}} argsAndBindings arguments followed by bindings for global variables
+@return {Object {androidx.renderscript.ScriptGroup.Closure}} a closure
+*/
+addKernel : function(  ) {},
+
+<span id='androidx-renderscript-ScriptGroup-Builder2-method-addInvoke'>/**Adds a closure for an invocable function
+</span>@param {Object {Script.InvokeID}} invoke Invoke ID for the invocable function
+@param {Object {java.lang.Object[]}} argsAndBindings arguments followed by bindings for global variables
+@return {Object {androidx.renderscript.ScriptGroup.Closure}} a closure
+*/
+addInvoke : function(  ) {},
+
+<span id='androidx-renderscript-ScriptGroup-Builder2-method-create'>/**Creates a script group
+</span>@param {String} name name for the script group. Legal names can only contain letters, digits,
+        '-', or '_'. The name can be no longer than 100 characters.
+@param {Object {androidx.renderscript.ScriptGroup.Future[]}} outputs futures intended as outputs of the script group
+@return {Object {androidx.renderscript.ScriptGroup}} a script group
+*/
+create : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

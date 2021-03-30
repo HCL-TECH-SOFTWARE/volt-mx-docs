@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-EdgeEffect'>/**@class android.widget.EdgeEffect
+</span>@extends java.lang.Object
+
+ This class performs the graphical effect used at the edges of scrollable widgets
+ when the user scrolls beyond the content bounds in 2D space.
+
+ &lt;p&gt;EdgeEffect is stateful. Custom widgets using EdgeEffect should create an
+ instance for each edge that should show the effect, feed it input data using
+ the methods {@link #onAbsorb}(int), {@link #onPull}(float), and {@link #onRelease}(),
+ and draw the effect using {@link #draw}(Canvas) in the widget's overridden
+ {@link android.view.View#draw(Canvas)} method. If {@link #isFinished}() returns
+ false after drawing, the edge effect's animation is not yet complete and the widget
+ should schedule another drawing pass to continue the animation.&lt;/p&gt;
+
+ &lt;p&gt;When drawing, widgets should draw their main content and child views first,
+ usually by invoking &lt;code&gt;super.draw(canvas)&lt;/code&gt; from an overridden &lt;code&gt;draw&lt;/code&gt;
+ method. (This will invoke onDraw and dispatch drawing to child views as needed.)
+ The edge effect may then be drawn on top of the view's content using the
+ {@link #draw}(Canvas) method.&lt;/p&gt;
+*/
+var EdgeEffect = {
+
+<span id='android-widget-EdgeEffect-property-DEFAULT_BLEND_MODE'>/** The default blend mode used by {@link android.widget.EdgeEffect}.
+</span>*/
+DEFAULT_BLEND_MODE : &quot;null&quot;,
+<span id='android-widget-EdgeEffect-method-setSize'>/**Set the size of this edge effect in pixels.
+</span>@param {Number} width Effect width in pixels
+@param {Number} height Effect height in pixels
+*/
+setSize : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-isFinished'>/**Reports if this EdgeEffect's animation is finished. If this method returns false
+</span> after a call to {@link #draw}(Canvas) the host widget should schedule another
+ drawing pass to continue the animation.
+@return {Boolean} true if animation is finished, false if drawing should continue on the next frame.
+*/
+isFinished : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-finish'>/**Immediately finish the current animation.
+</span> After this call {@link #isFinished}() will return true.
+*/
+finish : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-onPull'>/**A view should call this when content is pulled away from an edge by the user.
+</span> This will update the state of the current visual effect and its associated animation.
+ The host view should always {@link android.view.View#invalidate()} after this
+ and draw the results accordingly.
+
+ &lt;p&gt;Views using EdgeEffect should favor {@link #onPull(float, float)} when the displacement
+ of the pull point is known.&lt;/p&gt;
+@param {Number} deltaDistance Change in distance since the last call. Values may be 0 (no change) to
+                      1.f (full length of the view) or negative values to express change
+                      back toward the edge reached to initiate the effect.
+*/
+onPull : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-onPull'>/**A view should call this when content is pulled away from an edge by the user.
+</span> This will update the state of the current visual effect and its associated animation.
+ The host view should always {@link android.view.View#invalidate()} after this
+ and draw the results accordingly.
+@param {Number} deltaDistance Change in distance since the last call. Values may be 0 (no change) to
+                      1.f (full length of the view) or negative values to express change
+                      back toward the edge reached to initiate the effect.
+@param {Number} displacement The displacement from the starting side of the effect of the point
+                     initiating the pull. In the case of touch this is the finger position.
+                     Values may be from 0-1.
+*/
+onPull : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-onRelease'>/**Call when the object is released after being pulled.
+</span> This will begin the &quot;decay&quot; phase of the effect. After calling this method
+ the host view should {@link android.view.View#invalidate()} and thereby
+ draw the results accordingly.
+*/
+onRelease : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-onAbsorb'>/**Call when the effect absorbs an impact at the given velocity.
+</span> Used when a fling reaches the scroll boundary.
+
+ &lt;p&gt;When using a {@link android.widget.Scroller} or {@link android.widget.OverScroller},
+ the method &lt;code&gt;getCurrVelocity&lt;/code&gt; will provide a reasonable approximation
+ to use here.&lt;/p&gt;
+@param {Number} velocity Velocity at impact in pixels per second.
+*/
+onAbsorb : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-setColor'>/**Set the color of this edge effect in argb.
+</span>@param {Number} color Color in argb
+*/
+setColor : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-setBlendMode'>/**Set or clear the blend mode. A blend mode defines how source pixels
+</span> (generated by a drawing command) are composited with the destination pixels
+ (content of the render target).
+ &lt;p /&gt;
+ Pass null to clear any previous blend mode.
+ &lt;p /&gt;
+@param {Object {BlendMode}} blendmode May be null. The blend mode to be installed in the paint
+@param blendmode May be null. The blend mode to be installed in the paint
+*/
+setBlendMode : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-getColor'>/**Return the color of this edge effect in argb.
+</span>@return {Number} The color of this edge effect in argb
+*/
+getColor : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-getBlendMode'>/**Returns the blend mode. A blend mode defines how source pixels
+</span> (generated by a drawing command) are composited with the destination pixels
+ (content of the render target).
+ &lt;p /&gt;
+@return {Object {android.graphics.BlendMode}} BlendMode
+*/
+getBlendMode : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-draw'>/**Draw into the provided canvas. Assumes that the canvas has been rotated
+</span> accordingly and the size has been set. The effect will be drawn the full
+ width of X=0 to X=width, beginning from Y=0 and extending to some factor &lt;
+ 1.f of height.
+@param {Object {Canvas}} canvas Canvas to draw into
+@return {Boolean} true if drawing should continue beyond this frame to continue the
+         animation
+*/
+draw : function(  ) {},
+
+<span id='android-widget-EdgeEffect-method-getMaxHeight'>/**Return the maximum height that the edge effect will be drawn at given the original
+</span> {@link #setSize(int, int) input size}.
+@return {Number} The maximum height of the edge effect
+*/
+getMaxHeight : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

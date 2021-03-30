@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Message'>/**@class android.os.Message
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+
+ Defines a message containing a description and arbitrary data object that can be
+ sent to a {@link android.os.Handler}.  This object contains two extra int fields and an
+ extra object field that allow you to not do allocations in many cases.
+
+ &lt;p class=&quot;note&quot;&gt;While the constructor of Message is public, the best way to get
+ one of these is to call {@link #obtain android.os.Message.obtain()} or one of the
+ {@link android.os.Handler#obtainMessage android.os.Handler.obtainMessage()} methods, which will pull
+ them from a pool of recycled objects.&lt;/p&gt;
+*/
+var Message = {
+
+<span id='android-os-Message-property-what'>/** User-defined message code so that the recipient can identify
+</span> what this message is about. Each {@link android.os.Handler} has its own name-space
+ for message codes, so you do not need to worry about yours conflicting
+ with other handlers.
+*/
+what : &quot;null&quot;,
+<span id='android-os-Message-property-arg1'>/** arg1 and arg2 are lower-cost alternatives to using
+</span> {@link #setData(Bundle) setData()} if you only need to store a
+ few integer values.
+*/
+arg1 : &quot;null&quot;,
+<span id='android-os-Message-property-arg2'>/** arg1 and arg2 are lower-cost alternatives to using
+</span> {@link #setData(Bundle) setData()} if you only need to store a
+ few integer values.
+*/
+arg2 : &quot;null&quot;,
+<span id='android-os-Message-property-obj'>/** An arbitrary object to send to the recipient.  When using
+</span> {@link android.os.Messenger} to send the message across processes this can only
+ be non-null if it contains a Parcelable of a framework class (not one
+ implemented by the application).   For other data transfer use
+ {@link #setData}.
+
+ &lt;p&gt;Note that Parcelable objects here are not supported prior to
+ the {@link android.os.Build.VERSION_CODES#FROYO} release.
+*/
+obj : &quot;null&quot;,
+<span id='android-os-Message-property-replyTo'>/** Optional Messenger where replies to this message can be sent.  The
+</span> semantics of exactly how this is used are up to the sender and
+ receiver.
+*/
+replyTo : &quot;null&quot;,
+<span id='android-os-Message-property-UID_NONE'>/** Indicates that the uid is not set;
+</span>
+ @hide Only for use within the system server.
+*/
+UID_NONE : &quot;-1&quot;,
+<span id='android-os-Message-property-sendingUid'>/** Optional field indicating the uid that sent the message.  This is
+</span> only valid for messages posted by a {@link android.os.Messenger}; otherwise,
+ it will be -1.
+*/
+sendingUid : &quot;null&quot;,
+<span id='android-os-Message-property-workSourceUid'>/** Optional field indicating the uid that caused this message to be enqueued.
+</span>
+ @hide Only for use within the system server.
+*/
+workSourceUid : &quot;null&quot;,
+<span id='android-os-Message-property-when'>/** The targeted delivery time of this message. The time-base is
+</span> {@link android.os.SystemClock#uptimeMillis}.
+ @hide Only for use within the tests.
+*/
+when : &quot;null&quot;,
+<span id='android-os-Message-property-sPoolSync'>/**@hide */
+</span>sPoolSync : &quot;null&quot;,
+<span id='android-os-Message-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-os-Message-method-obtain'>/**Return a new Message instance from the global pool. Allows us to
+</span> avoid allocating new objects in many cases.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-obtain'>/**Same as {@link #obtain}(), but copies the values of an existing
+</span> message (including its target) into the new one.
+@param {Object {Message}} orig Original message to copy.
+@return {Object {android.os.Message}} A Message object from the global pool.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-obtain'>/**Same as {@link #obtain}(), but sets the value for the &lt;em&gt;target&lt;/em&gt; member on the Message returned.
+</span>@param {Object {Handler}} h  Handler to assign to the returned Message object's &lt;em&gt;target&lt;/em&gt; member.
+@return {Object {android.os.Message}} A Message object from the global pool.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-obtain'>/**Same as {@link #obtain}(Handler), but assigns a callback Runnable on
+</span> the Message that is returned.
+@param {Object {Handler}} h  Handler to assign to the returned Message object's &lt;em&gt;target&lt;/em&gt; member.
+@param {Object {Runnable}} callback Runnable that will execute when the message is handled.
+@return {Object {android.os.Message}} A Message object from the global pool.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-obtain'>/**Same as {@link #obtain}(), but sets the values for both &lt;em&gt;target&lt;/em&gt; and
+</span> &lt;em&gt;what&lt;/em&gt; members on the Message.
+@param {Object {Handler}} h  Value to assign to the &lt;em&gt;target&lt;/em&gt; member.
+@param {Number} what  Value to assign to the &lt;em&gt;what&lt;/em&gt; member.
+@return {Object {android.os.Message}} A Message object from the global pool.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-obtain'>/**Same as {@link #obtain}(), but sets the values of the &lt;em&gt;target&lt;/em&gt;, &lt;em&gt;what&lt;/em&gt;, and &lt;em&gt;obj&lt;/em&gt;
+</span> members.
+@param {Object {Handler}} h  The &lt;em&gt;target&lt;/em&gt; value to set.
+@param {Number} what  The &lt;em&gt;what&lt;/em&gt; value to set.
+@param {Object {Object}} obj  The &lt;em&gt;object&lt;/em&gt; method to set.
+@return {Object {android.os.Message}} A Message object from the global pool.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-obtain'>/**Same as {@link #obtain}(), but sets the values of the &lt;em&gt;target&lt;/em&gt;, &lt;em&gt;what&lt;/em&gt;,
+</span> &lt;em&gt;arg1&lt;/em&gt;, and &lt;em&gt;arg2&lt;/em&gt; members.
+@param {Object {Handler}} h  The &lt;em&gt;target&lt;/em&gt; value to set.
+@param {Number} what  The &lt;em&gt;what&lt;/em&gt; value to set.
+@param {Number} arg1  The &lt;em&gt;arg1&lt;/em&gt; value to set.
+@param {Number} arg2  The &lt;em&gt;arg2&lt;/em&gt; value to set.
+@return {Object {android.os.Message}} A Message object from the global pool.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-obtain'>/**Same as {@link #obtain}(), but sets the values of the &lt;em&gt;target&lt;/em&gt;, &lt;em&gt;what&lt;/em&gt;,
+</span> &lt;em&gt;arg1&lt;/em&gt;, &lt;em&gt;arg2&lt;/em&gt;, and &lt;em&gt;obj&lt;/em&gt; members.
+@param {Object {Handler}} h  The &lt;em&gt;target&lt;/em&gt; value to set.
+@param {Number} what  The &lt;em&gt;what&lt;/em&gt; value to set.
+@param {Number} arg1  The &lt;em&gt;arg1&lt;/em&gt; value to set.
+@param {Number} arg2  The &lt;em&gt;arg2&lt;/em&gt; value to set.
+@param {Object {Object}} obj  The &lt;em&gt;obj&lt;/em&gt; value to set.
+@return {Object {android.os.Message}} A Message object from the global pool.
+*/
+obtain : function(  ) {},
+
+<span id='android-os-Message-method-updateCheckRecycle'>/**
+</span>@hide 
+*/
+updateCheckRecycle : function(  ) {},
+
+<span id='android-os-Message-method-recycle'>/**Return a Message instance to the global pool.
+</span> &lt;p&gt;
+ You MUST NOT touch the Message after calling this function because it has
+ effectively been freed.  It is an error to recycle a message that is currently
+ enqueued or that is in the process of being delivered to a Handler.
+ &lt;/p&gt;
+*/
+recycle : function(  ) {},
+
+<span id='android-os-Message-method-copyFrom'>/**Make this message like o.  Performs a shallow copy of the data field.
+</span> Does not copy the linked list fields, nor the timestamp or
+ target/callback of the original message.
+*/
+copyFrom : function(  ) {},
+
+<span id='android-os-Message-method-getWhen'>/**Return the targeted delivery time of this message, in milliseconds.
+</span>*/
+getWhen : function(  ) {},
+
+<span id='android-os-Message-method-setTarget'>/**
+</span>*/
+setTarget : function(  ) {},
+
+<span id='android-os-Message-method-getTarget'>/**Retrieve the {@link android.os.Handler Handler} implementation that
+</span> will receive this message. The object must implement
+ {@link android.os.Handler#handleMessage(android.os.Message)
+ Handler.handleMessage()}. Each Handler has its own name-space for
+ message codes, so you do not need to
+ worry about yours conflicting with other handlers.
+*/
+getTarget : function(  ) {},
+
+<span id='android-os-Message-method-getCallback'>/**Retrieve callback object that will execute when this message is handled.
+</span> This object must implement Runnable. This is called by
+ the &lt;em&gt;target&lt;/em&gt; {@link android.os.Handler} that is receiving this Message to
+ dispatch it.  If
+ not set, the message will be dispatched to the receiving Handler's
+ {@link android.os.Handler#handleMessage(Message)}.
+*/
+getCallback : function(  ) {},
+
+<span id='android-os-Message-method-setCallback'>/**
+</span>@hide 
+*/
+setCallback : function(  ) {},
+
+<span id='android-os-Message-method-getData'>/**Obtains a Bundle of arbitrary data associated with this
+</span> event, lazily creating it if necessary. Set this value by calling
+ {@link #setData}(Bundle).  Note that when transferring data across
+ processes via {@link android.os.Messenger}, you will need to set your ClassLoader
+ on the Bundle via {@link android.os.Bundle#setClassLoader(ClassLoader)
+ android.os.Bundle.setClassLoader()} so that it can instantiate your objects when
+ you retrieve them.
+@see #peekData()
+@see #setData(Bundle)
+*/
+getData : function(  ) {},
+
+<span id='android-os-Message-method-peekData'>/**Like getData(), but does not lazily create the Bundle.  A null
+</span> is returned if the Bundle does not already exist.  See
+ {@link #getData} for further information on this.
+@see #getData()
+@see #setData(Bundle)
+*/
+peekData : function(  ) {},
+
+<span id='android-os-Message-method-setData'>/**Sets a Bundle of arbitrary data values. Use arg1 and arg2 members
+</span> as a lower cost way to send a few simple integer values, if you can.
+@see #getData()
+@see #peekData()
+*/
+setData : function(  ) {},
+
+<span id='android-os-Message-method-setWhat'>/**Chainable setter for {@link #what}
+</span>@hide 
+*/
+setWhat : function(  ) {},
+
+<span id='android-os-Message-method-sendToTarget'>/**Sends this Message to the Handler specified by {@link #getTarget}.
+</span> Throws a null pointer exception if this field has not been set.
+*/
+sendToTarget : function(  ) {},
+
+<span id='android-os-Message-method-isAsynchronous'>/**Returns true if the message is asynchronous, meaning that it is not
+</span> subject to {@link android.os.Looper} synchronization barriers.
+@return {Boolean} True if the message is asynchronous.
+@see #setAsynchronous(boolean)
+*/
+isAsynchronous : function(  ) {},
+
+<span id='android-os-Message-method-setAsynchronous'>/**Sets whether the message is asynchronous, meaning that it is not
+</span> subject to {@link android.os.Looper} synchronization barriers.
+ &lt;p&gt;
+ Certain operations, such as view invalidation, may introduce synchronization
+ barriers into the {@link android.os.Looper}'s message queue to prevent subsequent messages
+ from being delivered until some condition is met.  In the case of view invalidation,
+ messages which are posted after a call to {@link android.view.View#invalidate}
+ are suspended by means of a synchronization barrier until the next frame is
+ ready to be drawn.  The synchronization barrier ensures that the invalidation
+ request is completely handled before resuming.
+ &lt;/p&gt;&lt;p&gt;
+ Asynchronous messages are exempt from synchronization barriers.  They typically
+ represent interrupts, input events, and other signals that must be handled independently
+ even while other work has been suspended.
+ &lt;/p&gt;&lt;p&gt;
+ Note that asynchronous messages may be delivered out of order with respect to
+ synchronous messages although they are always delivered in order among themselves.
+ If the relative order of these messages matters then they probably should not be
+ asynchronous in the first place.  Use with caution.
+ &lt;/p&gt;
+@param {Boolean} async True if the message is asynchronous.
+@see #isAsynchronous()
+*/
+setAsynchronous : function(  ) {},
+
+<span id='android-os-Message-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-os-Message-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-os-Message-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

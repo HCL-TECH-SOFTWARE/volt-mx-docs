@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-ArraySet'>/**@class android.util.ArraySet
+</span> implements java.util.Collection
+
+ implements java.util.Set
+
+@extends java.lang.Object
+
+ ArraySet is a generic set data structure that is designed to be more memory efficient than a
+ traditional {@link java.util.HashSet}.  The design is very similar to
+ {@link android.util.ArrayMap}, with all of the caveats described there.  This implementation is
+ separate from ArrayMap, however, so the Object array contains only one item for each
+ entry in the set (instead of a pair for a mapping).
+
+ &lt;p&gt;Note that this implementation is not intended to be appropriate for data structures
+ that may contain large numbers of items.  It is generally slower than a traditional
+ HashSet, since lookups require a binary search and adds and removes require inserting
+ and deleting entries in the array.  For containers holding up to hundreds of items,
+ the performance difference is not significant, less than 50%.&lt;/p&gt;
+
+ &lt;p&gt;Because this container is intended to better balance memory use, unlike most other
+ standard Java containers it will shrink its array as items are removed from it.  Currently
+ you have no control over this shrinking -- if you set a capacity and then remove an
+ item, it may reduce the capacity to better match the current size.  In the future an
+ explicit call to set the capacity should turn off this aggressive shrinking behavior.&lt;/p&gt;
+*/
+var ArraySet = {
+
+<span id='android-util-ArraySet-method-clear'>/**Make the array map empty.  All storage is released.
+</span>*/
+clear : function(  ) {},
+
+<span id='android-util-ArraySet-method-ensureCapacity'>/**Ensure the array map can hold at least &lt;var&gt;minimumCapacity&lt;/var&gt;
+</span> items.
+*/
+ensureCapacity : function(  ) {},
+
+<span id='android-util-ArraySet-method-contains'>/**Check whether a value exists in the set.
+</span>@param {Object {Object}} key The value to search for.
+@return {Boolean} Returns true if the value exists, else false.
+*/
+contains : function(  ) {},
+
+<span id='android-util-ArraySet-method-indexOf'>/**Returns the index of a value in the set.
+</span>@param {Object {Object}} key The value to search for.
+@return {Number} Returns the index of the value if it exists, else a negative integer.
+*/
+indexOf : function(  ) {},
+
+<span id='android-util-ArraySet-method-valueAt'>/**Return the value at the given index in the array.
+</span>
+ &lt;p&gt;For indices outside of the range &lt;code&gt;0...size()-1&lt;/code&gt;, the behavior is undefined for
+ apps targeting {@link android.os.Build.VERSION_CODES#P} and earlier, and an
+ {@link ArrayIndexOutOfBoundsException} is thrown for apps targeting
+ {@link android.os.Build.VERSION_CODES#Q} and later.&lt;/p&gt;
+@param {Number} index The desired index, must be between 0 and {@link #size()}-1.
+@return {Object {java.lang.Object}} Returns the value stored at the given index.
+*/
+valueAt : function(  ) {},
+
+<span id='android-util-ArraySet-method-valueAtUnchecked'>/**Returns the value at the given index in the array without checking that the index is within
+</span> bounds. This allows testing values at the end of the internal array, outside of the
+ [0, mSize) bounds.
+@hide 
+*/
+valueAtUnchecked : function(  ) {},
+
+<span id='android-util-ArraySet-method-isEmpty'>/**Return true if the array map contains no items.
+</span>*/
+isEmpty : function(  ) {},
+
+<span id='android-util-ArraySet-method-add'>/**Adds the specified object to this set. The set is not modified if it
+</span> already contains the object.
+@param {Object {Object}} value the object to add.
+@return {Boolean} {@code true} if this set is modified, {@code false} otherwise.
+@throws ClassCastException
+             when the class of the object is inappropriate for this set.
+*/
+add : function(  ) {},
+
+<span id='android-util-ArraySet-method-append'>/**Special fast path for appending items to the end of the array without validation.
+</span> The array must already be large enough to contain the item.
+@hide 
+*/
+append : function(  ) {},
+
+<span id='android-util-ArraySet-method-addAll'>/**Perform a {@link #add}(Object) of all values in &lt;var&gt;array&lt;/var&gt;
+</span>@param {Object {android.util.ArraySet}} array The array whose contents are to be retrieved.
+*/
+addAll : function(  ) {},
+
+<span id='android-util-ArraySet-method-remove'>/**Removes the specified object from this set.
+</span>@param {Object {Object}} object the object to remove.
+@return {Boolean} {@code true} if this set was modified, {@code false} otherwise.
+*/
+remove : function(  ) {},
+
+<span id='android-util-ArraySet-method-removeAt'>/**Remove the key/value mapping at the given index.
+</span>
+ &lt;p&gt;For indices outside of the range &lt;code&gt;0...size()-1&lt;/code&gt;, the behavior is undefined for
+ apps targeting {@link android.os.Build.VERSION_CODES#P} and earlier, and an
+ {@link ArrayIndexOutOfBoundsException} is thrown for apps targeting
+ {@link android.os.Build.VERSION_CODES#Q} and later.&lt;/p&gt;
+@param {Number} index The desired index, must be between 0 and {@link #size()}-1.
+@return {Object {java.lang.Object}} Returns the value that was stored at this index.
+*/
+removeAt : function(  ) {},
+
+<span id='android-util-ArraySet-method-removeAll'>/**Perform a {@link #remove}(Object) of all values in &lt;var&gt;array&lt;/var&gt;
+</span>@param {Object {android.util.ArraySet}} array The array whose contents are to be removed.
+*/
+removeAll : function(  ) {},
+
+<span id='android-util-ArraySet-method-removeIf'>/**Removes all values that satisfy the predicate. This implementation avoids using the
+</span> {@link #iterator}().
+@param {Object {java.util.function.Predicate}} filter A predicate which returns true for elements to be removed
+*/
+removeIf : function(  ) {},
+
+<span id='android-util-ArraySet-method-size'>/**Return the number of items in this array map.
+</span>*/
+size : function(  ) {},
+
+<span id='android-util-ArraySet-method-toArray'>/**
+</span>*/
+toArray : function(  ) {},
+
+<span id='android-util-ArraySet-method-toArray'>/**
+</span>*/
+toArray : function(  ) {},
+
+<span id='android-util-ArraySet-method-equals'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;This implementation returns false if the object is not a set, or
+ if the sets have different sizes.  Otherwise, for each value in this
+ set, it checks to make sure the value also exists in the other set.
+ If any value doesn't exist, the method returns false; otherwise, it
+ returns true.
+*/
+equals : function(  ) {},
+
+<span id='android-util-ArraySet-method-hashCode'>/**{@inheritDoc}
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-util-ArraySet-method-toString'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;This implementation composes a string by iterating over its values. If
+ this set contains itself as a value, the string &quot;(this Set)&quot;
+ will appear in its place.
+*/
+toString : function(  ) {},
+
+<span id='android-util-ArraySet-method-iterator'>/**Return an {@link java.util.Iterator} over all values in the set.
+</span>
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; this is a fairly inefficient way to access the array contents, it
+ requires generating a number of temporary objects and allocates additional state
+ information associated with the container that will remain for the life of the container.&lt;/p&gt;
+*/
+iterator : function(  ) {},
+
+<span id='android-util-ArraySet-method-containsAll'>/**Determine if the array set contains all of the values in the given collection.
+</span>@param {Object {java.util.Collection}} collection The collection whose contents are to be checked against.
+@return {Boolean} Returns true if this array set contains a value for every entry
+ in &lt;var&gt;collection&lt;/var&gt;, else returns false.
+*/
+containsAll : function(  ) {},
+
+<span id='android-util-ArraySet-method-addAll'>/**Perform an {@link #add}(Object) of all values in &lt;var&gt;collection&lt;/var&gt;
+</span>@param {Object {java.util.Collection}} collection The collection whose contents are to be retrieved.
+*/
+addAll : function(  ) {},
+
+<span id='android-util-ArraySet-method-removeAll'>/**Remove all values in the array set that exist in the given collection.
+</span>@param {Object {java.util.Collection}} collection The collection whose contents are to be used to remove values.
+@return {Boolean} Returns true if any values were removed from the array set, else false.
+*/
+removeAll : function(  ) {},
+
+<span id='android-util-ArraySet-method-retainAll'>/**Remove all values in the array set that do &lt;b&gt;not&lt;/b&gt; exist in the given collection.
+</span>@param {Object {java.util.Collection}} collection The collection whose contents are to be used to determine which
+ values to keep.
+@return {Boolean} Returns true if any values were removed from the array set, else false.
+*/
+retainAll : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

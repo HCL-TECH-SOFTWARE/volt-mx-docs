@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-RecyclerView-Recycler'>/**@class com.android.internal.widget.RecyclerView.Recycler
+</span>@extends java.lang.Object
+
+ A Recycler is responsible for managing scrapped or detached item views for reuse.
+
+ &lt;p&gt;A &quot;scrapped&quot; view is a view that is still attached to its parent RecyclerView but
+ that has been marked for removal or reuse.&lt;/p&gt;
+
+ &lt;p&gt;Typical use of a Recycler by a {@link com.android.internal.widget.RecyclerView.LayoutManager} will be to obtain views for
+ an adapter's data set representing the data at a given position or item ID.
+ If the view to be reused is considered &quot;dirty&quot; the adapter will be asked to rebind it.
+ If not, the view can be quickly reused by the LayoutManager with no further work.
+ Clean views that have not {@link android.view.View#isLayoutRequested() requested layout}
+ may be repositioned by a LayoutManager without remeasurement.&lt;/p&gt;
+*/
+var Recycler = {
+
+<span id='com-android-internal-widget-RecyclerView-Recycler-method-clear'>/**Clear scrap views out of this recycler. Detached views contained within a
+</span> recycled view pool will remain.
+*/
+clear : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Recycler-method-setViewCacheSize'>/**Set the maximum number of detached, valid views we should retain for later use.
+</span>@param {Number} viewCount Number of views to keep before sending views to the shared pool
+*/
+setViewCacheSize : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Recycler-method-getScrapList'>/**Returns an unmodifiable list of ViewHolders that are currently in the scrap list.
+</span>@return {Object {java.util.List}} List of ViewHolders in the scrap list.
+*/
+getScrapList : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Recycler-method-bindViewToPosition'>/**Binds the given View to the position. The View can be a View previously retrieved via
+</span> {@link #getViewForPosition}(int) or created by
+ {@link com.android.internal.widget.RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)}.
+ &lt;p&gt;
+ Generally, a LayoutManager should acquire its views via {@link #getViewForPosition}(int)
+ and let the RecyclerView handle caching. This is a helper method for LayoutManager who
+ wants to handle its own recycling logic.
+ &lt;p&gt;
+ Note that, {@link #getViewForPosition}(int) already binds the View to the position so
+ you don't need to call this method unless you want to bind this View to another position.
+@param {Object {View}} view The view to update.
+@param {Number} position The position of the item to bind to this View.
+*/
+bindViewToPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Recycler-method-convertPreLayoutPositionToPostLayout'>/**RecyclerView provides artificial position range (item count) in pre-layout state and
+</span> automatically maps these positions to {@link com.android.internal.widget.RecyclerView.Adapter} positions when
+ {@link #getViewForPosition}(int) or {@link #bindViewToPosition(View, int)} is called.
+ &lt;p&gt;
+ Usually, LayoutManager does not need to worry about this. However, in some cases, your
+ LayoutManager may need to call some custom component with item positions in which
+ case you need the actual adapter position instead of the pre layout position. You
+ can use this method to convert a pre-layout position to adapter (post layout) position.
+ &lt;p&gt;
+ Note that if the provided position belongs to a deleted ViewHolder, this method will
+ return -1.
+ &lt;p&gt;
+ Calling this method in post-layout state returns the same value back.
+@param {Number} position The pre-layout position to convert. Must be greater or equal to 0 and
+                 less than {@link State#getItemCount()}.
+*/
+convertPreLayoutPositionToPostLayout : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Recycler-method-getViewForPosition'>/**Obtain a view initialized for the given position.
+</span>
+ This method should be used by {@link com.android.internal.widget.RecyclerView.LayoutManager} implementations to obtain
+ views to represent data from an {@link com.android.internal.widget.RecyclerView.Adapter}.
+ &lt;p&gt;
+ The Recycler may reuse a scrap or detached view from a shared pool if one is
+ available for the correct view type. If the adapter has not indicated that the
+ data at the given position has changed, the Recycler will attempt to hand back
+ a scrap view that was previously initialized for that data without rebinding.
+@param {Number} position Position to obtain a view for
+@return {Object {android.view.View}} A view representing the data at &lt;code&gt;position&lt;/code&gt; from &lt;code&gt;adapter&lt;/code&gt;
+*/
+getViewForPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-Recycler-method-recycleView'>/**Recycle a detached view. The specified view will be added to a pool of views
+</span> for later rebinding and reuse.
+
+ &lt;p&gt;A view must be fully detached (removed from parent) before it may be recycled. If the
+ View is scrapped, it will be removed from scrap list.&lt;/p&gt;
+@param {Object {View}} view Removed view for recycling
+@see LayoutManager#removeAndRecycleView(View, Recycler)
+*/
+recycleView : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

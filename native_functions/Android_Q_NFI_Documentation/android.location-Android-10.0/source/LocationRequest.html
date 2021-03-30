@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-LocationRequest'>/**@class android.location.LocationRequest
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A data object that contains quality of service parameters for requests
+ to the {@link android.location.LocationManager}.
+
+ &lt;p&gt;LocationRequest objects are used to request a quality of service
+ for location updates from the Location Manager.
+
+ &lt;p&gt;For example, if your application wants high accuracy location
+ it should create a location request with {@link #setQuality} set to
+ {@link #ACCURACY_FINE} or {@link #POWER_HIGH}, and it should set
+ {@link #setInterval} to less than one second. This would be
+ appropriate for mapping applications that are showing your location
+ in real-time.
+
+ &lt;p&gt;At the other extreme, if you want negligible power
+ impact, but to still receive location updates when available, then use
+ {@link #setQuality} with {@link #POWER_NONE}. With this request your
+ application will not trigger (and therefore will not receive any
+ power blame) any location updates, but will receive locations
+ triggered by other applications. This would be appropriate for
+ applications that have no firm requirement for location, but can
+ take advantage when available.
+
+ &lt;p&gt;In between these two extremes is a very common use-case, where
+ applications definitely want to receive
+ updates at a specified interval, and can receive them faster when
+ available, but still want a low power impact. These applications
+ should consider {@link #POWER_LOW} combined with a faster
+ {@link #setFastestInterval} (such as 1 minute) and a slower
+ {@link #setInterval} (such as 60 minutes). They will only be assigned
+ power blame for the interval set by {@link #setInterval}, but can
+ still receive locations triggered by other applications at a rate up
+ to {@link #setFastestInterval}. This style of request is appropriate for
+ many location aware applications, including background usage. Do be
+ careful to also throttle {@link #setFastestInterval} if you perform
+ heavy-weight work after receiving an update - such as using the network.
+
+ &lt;p&gt;Activities should strongly consider removing all location
+ request when entering the background
+ (for example at {@link android.app.Activity#onPause}), or
+ at least swap the request to a larger interval and lower quality.
+ Future version of the location manager may automatically perform background
+ throttling on behalf of applications.
+
+ &lt;p&gt;Applications cannot specify the exact location sources that are
+ used by Android's &lt;em&gt;Fusion Engine&lt;/em&gt;. In fact, the system
+ may have multiple location sources (providers) running and may
+ fuse the results from several sources into a single Location object.
+
+ &lt;p&gt;Location requests from applications with
+ {@link android.Manifest.permission#ACCESS_COARSE_LOCATION} and not
+ {@link android.Manifest.permission#ACCESS_FINE_LOCATION} will
+ be automatically throttled to a slower interval, and the location
+ object will be obfuscated to only show a coarse level of accuracy.
+
+ &lt;p&gt;All location requests are considered hints, and you may receive
+ locations that are more accurate, less accurate, and slower
+ than requested.
+
+ @hide
+*/
+var LocationRequest = {
+
+<span id='android-location-LocationRequest-property-ACCURACY_FINE'>/** Used with {@link #setQuality} to request the most accurate locations available.
+</span>
+ &lt;p&gt;This may be up to 1 meter accuracy, although this is implementation dependent.
+*/
+ACCURACY_FINE : &quot;100&quot;,
+<span id='android-location-LocationRequest-property-ACCURACY_BLOCK'>/** Used with {@link #setQuality} to request &quot;block&quot; level accuracy.
+</span>
+ &lt;p&gt;Block level accuracy is considered to be about 100 meter accuracy,
+ although this is implementation dependent. Using a coarse accuracy
+ such as this often consumes less power.
+*/
+ACCURACY_BLOCK : &quot;102&quot;,
+<span id='android-location-LocationRequest-property-ACCURACY_CITY'>/** Used with {@link #setQuality} to request &quot;city&quot; level accuracy.
+</span>
+ &lt;p&gt;City level accuracy is considered to be about 10km accuracy,
+ although this is implementation dependent. Using a coarse accuracy
+ such as this often consumes less power.
+*/
+ACCURACY_CITY : &quot;104&quot;,
+<span id='android-location-LocationRequest-property-POWER_NONE'>/** Used with {@link #setQuality} to require no direct power impact (passive locations).
+</span>
+ &lt;p&gt;This location request will not trigger any active location requests,
+ but will receive locations triggered by other applications. Your application
+ will not receive any direct power blame for location work.
+*/
+POWER_NONE : &quot;200&quot;,
+<span id='android-location-LocationRequest-property-POWER_LOW'>/** Used with {@link #setQuality} to request low power impact.
+</span>
+ &lt;p&gt;This location request will avoid high power location work where
+ possible.
+*/
+POWER_LOW : &quot;201&quot;,
+<span id='android-location-LocationRequest-property-POWER_HIGH'>/** Used with {@link #setQuality} to allow high power consumption for location.
+</span>
+ &lt;p&gt;This location request will allow high power location work.
+*/
+POWER_HIGH : &quot;203&quot;,
+<span id='android-location-LocationRequest-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-location-LocationRequest-method-create'>/**Create a location request with default parameters.
+</span>
+ &lt;p&gt;Default parameters are for a low power, slowly updated location.
+ It can then be adjusted as required by the applications before passing
+ to the {@link android.location.LocationManager}
+@return {Object {android.location.LocationRequest}} a new location request
+*/
+create : function(  ) {},
+
+<span id='android-location-LocationRequest-method-createFromDeprecatedProvider'>/**
+</span>@hide 
+*/
+createFromDeprecatedProvider : function(  ) {},
+
+<span id='android-location-LocationRequest-method-createFromDeprecatedCriteria'>/**
+</span>@hide 
+*/
+createFromDeprecatedCriteria : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setQuality'>/**Set the quality of the request.
+</span>
+ &lt;p&gt;Use with a accuracy constant such as {@link #ACCURACY_FINE}, or a power
+ constant such as {@link #POWER_LOW}. You cannot request both accuracy and
+ power, only one or the other can be specified. The system will then
+ maximize accuracy or minimize power as appropriate.
+
+ &lt;p&gt;The quality of the request is a strong hint to the system for which
+ location sources to use. For example, {@link #ACCURACY_FINE} is more likely
+ to use GPS, and {@link #POWER_LOW} is more likely to use WIFI &amp; Cell tower
+ positioning, but it also depends on many other factors (such as which sources
+ are available) and is implementation dependent.
+
+ &lt;p&gt;{@link #setQuality} and {@link #setInterval} are the most important parameters
+ on a location request.
+@param {Number} quality an accuracy or power constant
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+@throws IllegalArgumentException if the quality constant is not valid
+*/
+setQuality : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getQuality'>/**Get the quality of the request.
+</span>@return {Number} an accuracy or power constant
+*/
+getQuality : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setInterval'>/**Set the desired interval for active location updates, in milliseconds.
+</span>
+ &lt;p&gt;The location manager will actively try to obtain location updates
+ for your application at this interval, so it has a
+ direct influence on the amount of power used by your application.
+ Choose your interval wisely.
+
+ &lt;p&gt;This interval is inexact. You may not receive updates at all (if
+ no location sources are available), or you may receive them
+ slower than requested. You may also receive them faster than
+ requested (if other applications are requesting location at a
+ faster interval). The fastest rate that you will receive
+ updates can be controlled with {@link #setFastestInterval}.
+
+ &lt;p&gt;Applications with only the coarse location permission may have their
+ interval silently throttled.
+
+ &lt;p&gt;An interval of 0 is allowed, but not recommended, since
+ location updates may be extremely fast on future implementations.
+
+ &lt;p&gt;{@link #setQuality} and {@link #setInterval} are the most important parameters
+ on a location request.
+@param {Number} millis desired interval in millisecond, inexact
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+@throws IllegalArgumentException if the interval is less than zero
+*/
+setInterval : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getInterval'>/**Get the desired interval of this request, in milliseconds.
+</span>@return {Number} desired interval in milliseconds, inexact
+*/
+getInterval : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setLowPowerMode'>/**Requests the GNSS chipset to run in a low power mode and make strong tradeoffs to
+</span> substantially restrict power.
+
+ &lt;p&gt;In this mode, the GNSS chipset will not, on average, run power hungry operations like RF &amp;
+ signal searches for more than one second per interval (specified by
+ {@link #setInterval}(long)).
+@param {Boolean} enabled Enable or disable low power mode
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+@hide 
+*/
+setLowPowerMode : function(  ) {},
+
+<span id='android-location-LocationRequest-method-isLowPowerMode'>/**Returns true if low power mode is enabled.
+</span>@hide 
+*/
+isLowPowerMode : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setLocationSettingsIgnored'>/**Requests that user location settings be ignored in order to satisfy this request. This API
+</span> is only for use in extremely rare scenarios where it is appropriate to ignore user location
+ settings, such as a user initiated emergency (dialing 911 for instance).
+@param {Boolean} locationSettingsIgnored Whether to ignore location settings
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+*/
+setLocationSettingsIgnored : function(  ) {},
+
+<span id='android-location-LocationRequest-method-isLocationSettingsIgnored'>/**Returns true if location settings will be ignored in order to satisfy this request.
+</span>*/
+isLocationSettingsIgnored : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setFastestInterval'>/**Explicitly set the fastest interval for location updates, in
+</span> milliseconds.
+
+ &lt;p&gt;This controls the fastest rate at which your application will
+ receive location updates, which might be faster than
+ {@link #setInterval} in some situations (for example, if other
+ applications are triggering location updates).
+
+ &lt;p&gt;This allows your application to passively acquire locations
+ at a rate faster than it actively acquires locations, saving power.
+
+ &lt;p&gt;Unlike {@link #setInterval}, this parameter is exact. Your
+ application will never receive updates faster than this value.
+
+ &lt;p&gt;If you don't call this method, a fastest interval
+ will be selected for you. It will be a value faster than your
+ active interval ({@link #setInterval}).
+
+ &lt;p&gt;An interval of 0 is allowed, but not recommended, since
+ location updates may be extremely fast on future implementations.
+
+ &lt;p&gt;If {@link #setFastestInterval} is set slower than {@link #setInterval},
+ then your effective fastest interval is {@link #setInterval}.
+@param {Number} millis fastest interval for updates in milliseconds, exact
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+@throws IllegalArgumentException if the interval is less than zero
+*/
+setFastestInterval : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getFastestInterval'>/**Get the fastest interval of this request, in milliseconds.
+</span>
+ &lt;p&gt;The system will never provide location updates faster
+ than the minimum of {@link #getFastestInterval} and
+ {@link #getInterval}.
+@return {Number} fastest interval in milliseconds, exact
+*/
+getFastestInterval : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setExpireIn'>/**Set the duration of this request, in milliseconds.
+</span>
+ &lt;p&gt;The duration begins immediately (and not when the request
+ is passed to the location manager), so call this method again
+ if the request is re-used at a later time.
+
+ &lt;p&gt;The location manager will automatically stop updates after
+ the request expires.
+
+ &lt;p&gt;The duration includes suspend time. Values less than 0
+ are allowed, but indicate that the request has already expired.
+@param {Number} millis duration of request in milliseconds
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+*/
+setExpireIn : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setExpireAt'>/**Set the request expiration time, in millisecond since boot.
+</span>
+ &lt;p&gt;This expiration time uses the same time base as {@link SystemClock#elapsedRealtime}.
+
+ &lt;p&gt;The location manager will automatically stop updates after
+ the request expires.
+
+ &lt;p&gt;The duration includes suspend time. Values before {@link SystemClock#elapsedRealtime}
+ are allowed,  but indicate that the request has already expired.
+@param {Number} millis expiration time of request, in milliseconds since boot including suspend
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+*/
+setExpireAt : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getExpireAt'>/**Get the request expiration time, in milliseconds since boot.
+</span>
+ &lt;p&gt;This value can be compared to {@link SystemClock#elapsedRealtime} to determine
+ the time until expiration.
+@return {Number} expiration time of request, in milliseconds since boot including suspend
+*/
+getExpireAt : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setNumUpdates'>/**Set the number of location updates.
+</span>
+ &lt;p&gt;By default locations are continuously updated until the request is explicitly
+ removed, however you can optionally request a set number of updates.
+ For example, if your application only needs a single fresh location,
+ then call this method with a value of 1 before passing the request
+ to the location manager.
+@param {Number} numUpdates the number of location updates requested
+@return {Object {android.location.LocationRequest}} the same object, so that setters can be chained
+@throws IllegalArgumentException if numUpdates is 0 or less
+*/
+setNumUpdates : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getNumUpdates'>/**Get the number of updates requested.
+</span>
+ &lt;p&gt;By default this is {@link Integer#MAX_VALUE}, which indicates that
+ locations are updated until the request is explicitly removed.
+@return {Number} number of updates
+*/
+getNumUpdates : function(  ) {},
+
+<span id='android-location-LocationRequest-method-decrementNumUpdates'>/**
+</span>@hide 
+*/
+decrementNumUpdates : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setProvider'>/**Sets the provider to use for this location request.
+</span>*/
+setProvider : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getProvider'>/**
+</span>@hide 
+*/
+getProvider : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setSmallestDisplacement'>/**
+</span>@hide 
+*/
+setSmallestDisplacement : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getSmallestDisplacement'>/**
+</span>@hide 
+*/
+getSmallestDisplacement : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setWorkSource'>/**Sets the WorkSource to use for power blaming of this location request.
+</span>
+ &lt;p&gt;No permissions are required to make this call, however the LocationManager
+ will throw a SecurityException when requesting location updates if the caller
+ doesn't have the {@link android.Manifest.permission#UPDATE_DEVICE_STATS} permission.
+@param {Object {WorkSource}} workSource WorkSource defining power blame for this location request.
+@hide 
+*/
+setWorkSource : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getWorkSource'>/**
+</span>@hide 
+*/
+getWorkSource : function(  ) {},
+
+<span id='android-location-LocationRequest-method-setHideFromAppOps'>/**Sets whether or not this location request should be hidden from AppOps.
+</span>
+ &lt;p&gt;Hiding a location request from AppOps will remove user visibility in the UI as to this
+ request's existence.  It does not affect power blaming in the Battery page.
+
+ &lt;p&gt;No permissions are required to make this call, however the LocationManager
+ will throw a SecurityException when requesting location updates if the caller
+ doesn't have the {@link android.Manifest.permission#UPDATE_APP_OPS_STATS} permission.
+@param {Boolean} hideFromAppOps If true AppOps won't keep track of this location request.
+@hide 
+@see android.app.AppOpsManager
+*/
+setHideFromAppOps : function(  ) {},
+
+<span id='android-location-LocationRequest-method-getHideFromAppOps'>/**
+</span>@hide 
+*/
+getHideFromAppOps : function(  ) {},
+
+<span id='android-location-LocationRequest-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-location-LocationRequest-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-location-LocationRequest-method-qualityToString'>/**
+</span>@hide 
+*/
+qualityToString : function(  ) {},
+
+<span id='android-location-LocationRequest-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

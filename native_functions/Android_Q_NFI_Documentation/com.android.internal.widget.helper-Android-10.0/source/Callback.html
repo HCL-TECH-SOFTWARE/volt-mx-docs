@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-helper-ItemTouchHelper-Callback'>/**@class com.android.internal.widget.helper.ItemTouchHelper.Callback
+</span>@extends java.lang.Object
+
+ This class is the contract between ItemTouchHelper and your application. It lets you control
+ which touch behaviors are enabled per each ViewHolder and also receive callbacks when user
+ performs these actions.
+ &lt;p&gt;
+ To control which actions user can take on each view, you should override
+ {@link #getMovementFlags(RecyclerView, ViewHolder)} and return appropriate set
+ of direction flags. ({@link #LEFT}, {@link #RIGHT}, {@link #START}, {@link #END},
+ {@link #UP}, {@link #DOWN}). You can use
+ {@link #makeMovementFlags(int, int)} to easily construct it. Alternatively, you can use
+ {@link com.android.internal.widget.helper.ItemTouchHelper.SimpleCallback}.
+ &lt;p&gt;
+ If user drags an item, ItemTouchHelper will call
+ {@link com.android.internal.widget.helper.ItemTouchHelper.Callback#onMove(RecyclerView, ViewHolder, ViewHolder)
+ onMove(recyclerView, dragged, target)}.
+ Upon receiving this callback, you should move the item from the old position
+ ({@code dragged.getAdapterPosition()}) to new position ({@code target.getAdapterPosition()})
+ in your adapter and also call {@link RecyclerView.Adapter#notifyItemMoved(int, int)}.
+ To control where a View can be dropped, you can override
+ {@link #canDropOver(RecyclerView, ViewHolder, ViewHolder)}. When a
+ dragging View overlaps multiple other views, Callback chooses the closest View with which
+ dragged View might have changed positions. Although this approach works for many use cases,
+ if you have a custom LayoutManager, you can override
+ {@link #chooseDropTarget(ViewHolder, java.util.List, int, int)} to select a
+ custom drop target.
+ &lt;p&gt;
+ When a View is swiped, ItemTouchHelper animates it until it goes out of bounds, then calls
+ {@link #onSwiped(ViewHolder, int)}. At this point, you should update your
+ adapter (e.g. remove the item) and call related Adapter#notify event.
+*/
+var Callback = {
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-property-DEFAULT_DRAG_ANIMATION_DURATION'>/***/
+</span>DEFAULT_DRAG_ANIMATION_DURATION : &quot;200&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-property-DEFAULT_SWIPE_ANIMATION_DURATION'>/***/
+</span>DEFAULT_SWIPE_ANIMATION_DURATION : &quot;250&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getDefaultUIUtil'>/**Returns the {@link com.android.internal.widget.helper.ItemTouchUIUtil} that is used by the {@link com.android.internal.widget.helper.ItemTouchHelper.Callback} class for
+</span> visual
+ changes on Views in response to user interactions. {@link com.android.internal.widget.helper.ItemTouchUIUtil} has different
+ implementations for different platform versions.
+ &lt;p&gt;
+ By default, {@link com.android.internal.widget.helper.ItemTouchHelper.Callback} applies these changes on
+ {@link RecyclerView.ViewHolder#itemView}.
+ &lt;p&gt;
+ For example, if you have a use case where you only want the text to move when user
+ swipes over the view, you can do the following:
+ &lt;pre&gt;
+     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder){
+         getDefaultUIUtil().clearView(((ItemTouchViewHolder) viewHolder).textView);
+     }
+     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+         if (viewHolder != null){
+             getDefaultUIUtil().onSelected(((ItemTouchViewHolder) viewHolder).textView);
+         }
+     }
+     public void onChildDraw(Canvas c, RecyclerView recyclerView,
+             RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState,
+             boolean isCurrentlyActive) {
+         getDefaultUIUtil().onDraw(c, recyclerView,
+                 ((ItemTouchViewHolder) viewHolder).textView, dX, dY,
+                 actionState, isCurrentlyActive);
+         return true;
+     }
+     public void onChildDrawOver(Canvas c, RecyclerView recyclerView,
+             RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState,
+             boolean isCurrentlyActive) {
+         getDefaultUIUtil().onDrawOver(c, recyclerView,
+                 ((ItemTouchViewHolder) viewHolder).textView, dX, dY,
+                 actionState, isCurrentlyActive);
+         return true;
+     }
+ &lt;/pre&gt;
+@return {Object {com.android.internal.widget.helper.ItemTouchUIUtil}} The {@link ItemTouchUIUtil} instance that is used by the {@link Callback}
+*/
+getDefaultUIUtil : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-convertToRelativeDirection'>/**Replaces a movement direction with its relative version by taking layout direction into
+</span> account.
+@param {Number} flags           The flag value that include any number of movement flags.
+@param {Number} layoutDirection The layout direction of the View. Can be obtained from
+                        {@link View#getLayoutDirection()}.
+@return {Number} Updated flags which uses relative flags ({@link #START}, {@link #END}) instead
+ of {@link #LEFT}, {@link #RIGHT}.
+@see #convertToAbsoluteDirection(int, int)
+*/
+convertToRelativeDirection : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-makeMovementFlags'>/**Convenience method to create movement flags.
+</span> &lt;p&gt;
+ For instance, if you want to let your items be drag &amp; dropped vertically and swiped
+ left to be dismissed, you can call this method with:
+ &lt;code&gt;makeMovementFlags(UP | DOWN, LEFT);&lt;/code&gt;
+@param {Number} dragFlags  The directions in which the item can be dragged.
+@param {Number} swipeFlags The directions in which the item can be swiped.
+@return {Number} Returns an integer composed of the given drag and swipe flags.
+*/
+makeMovementFlags : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-makeFlag'>/**Shifts the given direction flags to the offset of the given action state.
+</span>@param {Number} actionState The action state you want to get flags in. Should be one of
+                    {@link #ACTION_STATE_IDLE}, {@link #ACTION_STATE_SWIPE} or
+                    {@link #ACTION_STATE_DRAG}.
+@param {Number} directions  The direction flags. Can be composed from {@link #UP}, {@link #DOWN},
+                    {@link #RIGHT}, {@link #LEFT} {@link #START} and {@link #END}.
+@return {Number} And integer that represents the given directions in the provided actionState.
+*/
+makeFlag : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getMovementFlags'>/**Should return a composite flag which defines the enabled move directions in each state
+</span> (idle, swiping, dragging).
+ &lt;p&gt;
+ Instead of composing this flag manually, you can use {@link #makeMovementFlags(int,
+ int)}
+ or {@link #makeFlag(int, int)}.
+ &lt;p&gt;
+ This flag is composed of 3 sets of 8 bits, where first 8 bits are for IDLE state, next
+ 8 bits are for SWIPE state and third 8 bits are for DRAG state.
+ Each 8 bit sections can be constructed by simply OR'ing direction flags defined in
+ {@link com.android.internal.widget.helper.ItemTouchHelper}.
+ &lt;p&gt;
+ For example, if you want it to allow swiping LEFT and RIGHT but only allow starting to
+ swipe by swiping RIGHT, you can return:
+ &lt;pre&gt;
+      makeFlag(ACTION_STATE_IDLE, RIGHT) | makeFlag(ACTION_STATE_SWIPE, LEFT | RIGHT);
+ &lt;/pre&gt;
+ This means, allow right movement while IDLE and allow right and left movement while
+ swiping.
+@param {Object {RecyclerView}} recyclerView The RecyclerView to which ItemTouchHelper is attached.
+@param {Object {RecyclerView.ViewHolder}} viewHolder   The ViewHolder for which the movement information is necessary.
+@return {Number} flags specifying which movements are allowed on this ViewHolder.
+@see #makeMovementFlags(int, int)
+@see #makeFlag(int, int)
+*/
+getMovementFlags : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-convertToAbsoluteDirection'>/**Converts a given set of flags to absolution direction which means {@link #START} and
+</span> {@link #END} are replaced with {@link #LEFT} and {@link #RIGHT} depending on the layout
+ direction.
+@param {Number} flags           The flag value that include any number of movement flags.
+@param {Number} layoutDirection The layout direction of the RecyclerView.
+@return {Number} Updated flags which includes only absolute direction values.
+*/
+convertToAbsoluteDirection : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-canDropOver'>/**Return true if the current ViewHolder can be dropped over the the target ViewHolder.
+</span> &lt;p&gt;
+ This method is used when selecting drop target for the dragged View. After Views are
+ eliminated either via bounds check or via this method, resulting set of views will be
+ passed to {@link #chooseDropTarget(ViewHolder, java.util.List, int, int)}.
+ &lt;p&gt;
+ Default implementation returns true.
+@param {Object {RecyclerView}} recyclerView The RecyclerView to which ItemTouchHelper is attached to.
+@param {Object {RecyclerView.ViewHolder}} current      The ViewHolder that user is dragging.
+@param {Object {RecyclerView.ViewHolder}} target       The ViewHolder which is below the dragged ViewHolder.
+@return {Boolean} True if the dragged ViewHolder can be replaced with the target ViewHolder, false
+ otherwise.
+*/
+canDropOver : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-onMove'>/**Called when ItemTouchHelper wants to move the dragged item from its old position to
+</span> the new position.
+ &lt;p&gt;
+ If this method returns true, ItemTouchHelper assumes {@code viewHolder} has been moved
+ to the adapter position of {@code target} ViewHolder
+ ({@link ViewHolder#getAdapterPosition()
+ ViewHolder#getAdapterPosition()}).
+ &lt;p&gt;
+ If you don't support drag &amp; drop, this method will never be called.
+@param {Object {RecyclerView}} recyclerView The RecyclerView to which ItemTouchHelper is attached to.
+@param {Object {RecyclerView.ViewHolder}} viewHolder   The ViewHolder which is being dragged by the user.
+@param {Object {RecyclerView.ViewHolder}} target       The ViewHolder over which the currently active item is being
+                     dragged.
+@return {Boolean} True if the {@code viewHolder} has been moved to the adapter position of
+ {@code target}.
+@see #onMoved(RecyclerView, ViewHolder, int, ViewHolder, int, int, int)
+*/
+onMove : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-isLongPressDragEnabled'>/**Returns whether ItemTouchHelper should start a drag and drop operation if an item is
+</span> long pressed.
+ &lt;p&gt;
+ Default value returns true but you may want to disable this if you want to start
+ dragging on a custom view touch using {@link #startDrag}(ViewHolder).
+@return {Boolean} True if ItemTouchHelper should start dragging an item when it is long pressed,
+ false otherwise. Default value is &lt;code&gt;true&lt;/code&gt;.
+@see #startDrag(ViewHolder)
+*/
+isLongPressDragEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-isItemViewSwipeEnabled'>/**Returns whether ItemTouchHelper should start a swipe operation if a pointer is swiped
+</span> over the View.
+ &lt;p&gt;
+ Default value returns true but you may want to disable this if you want to start
+ swiping on a custom view touch using {@link #startSwipe}(ViewHolder).
+@return {Boolean} True if ItemTouchHelper should start swiping an item when user swipes a pointer
+ over the View, false otherwise. Default value is &lt;code&gt;true&lt;/code&gt;.
+@see #startSwipe(ViewHolder)
+*/
+isItemViewSwipeEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getBoundingBoxMargin'>/**When finding views under a dragged view, by default, ItemTouchHelper searches for views
+</span> that overlap with the dragged View. By overriding this method, you can extend or shrink
+ the search box.
+@return {Number} The extra margin to be added to the hit box of the dragged View.
+*/
+getBoundingBoxMargin : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getSwipeThreshold'>/**Returns the fraction that the user should move the View to be considered as swiped.
+</span> The fraction is calculated with respect to RecyclerView's bounds.
+ &lt;p&gt;
+ Default value is .5f, which means, to swipe a View, user must move the View at least
+ half of RecyclerView's width or height, depending on the swipe direction.
+@param {Object {RecyclerView.ViewHolder}} viewHolder The ViewHolder that is being dragged.
+@return {Number} A float value that denotes the fraction of the View size. Default value
+ is .5f .
+*/
+getSwipeThreshold : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getMoveThreshold'>/**Returns the fraction that the user should move the View to be considered as it is
+</span> dragged. After a view is moved this amount, ItemTouchHelper starts checking for Views
+ below it for a possible drop.
+@param {Object {RecyclerView.ViewHolder}} viewHolder The ViewHolder that is being dragged.
+@return {Number} A float value that denotes the fraction of the View size. Default value is
+ .5f .
+*/
+getMoveThreshold : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getSwipeEscapeVelocity'>/**Defines the minimum velocity which will be considered as a swipe action by the user.
+</span> &lt;p&gt;
+ You can increase this value to make it harder to swipe or decrease it to make it easier.
+ Keep in mind that ItemTouchHelper also checks the perpendicular velocity and makes sure
+ current direction velocity is larger then the perpendicular one. Otherwise, user's
+ movement is ambiguous. You can change the threshold by overriding
+ {@link #getSwipeVelocityThreshold}(float).
+ &lt;p&gt;
+ The velocity is calculated in pixels per second.
+ &lt;p&gt;
+ The default framework value is passed as a parameter so that you can modify it with a
+ multiplier.
+@param {Number} defaultValue The default value (in pixels per second) used by the
+                     ItemTouchHelper.
+@return {Number} The minimum swipe velocity. The default implementation returns the
+ &lt;code&gt;defaultValue&lt;/code&gt; parameter.
+@see #getSwipeVelocityThreshold(float)
+@see #getSwipeThreshold(ViewHolder)
+*/
+getSwipeEscapeVelocity : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getSwipeVelocityThreshold'>/**Defines the maximum velocity ItemTouchHelper will ever calculate for pointer movements.
+</span> &lt;p&gt;
+ To consider a movement as swipe, ItemTouchHelper requires it to be larger than the
+ perpendicular movement. If both directions reach to the max threshold, none of them will
+ be considered as a swipe because it is usually an indication that user rather tried to
+ scroll then swipe.
+ &lt;p&gt;
+ The velocity is calculated in pixels per second.
+ &lt;p&gt;
+ You can customize this behavior by changing this method. If you increase the value, it
+ will be easier for the user to swipe diagonally and if you decrease the value, user will
+ need to make a rather straight finger movement to trigger a swipe.
+@param {Number} defaultValue The default value(in pixels per second) used by the ItemTouchHelper.
+@return {Number} The velocity cap for pointer movements. The default implementation returns the
+ &lt;code&gt;defaultValue&lt;/code&gt; parameter.
+@see #getSwipeEscapeVelocity(float)
+*/
+getSwipeVelocityThreshold : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-chooseDropTarget'>/**Called by ItemTouchHelper to select a drop target from the list of ViewHolders that
+</span> are under the dragged View.
+ &lt;p&gt;
+ Default implementation filters the View with which dragged item have changed position
+ in the drag direction. For instance, if the view is dragged UP, it compares the
+ &lt;code&gt;view.getTop()&lt;/code&gt; of the two views before and after drag started. If that value
+ is different, the target view passes the filter.
+ &lt;p&gt;
+ Among these Views which pass the test, the one closest to the dragged view is chosen.
+ &lt;p&gt;
+ This method is called on the main thread every time user moves the View. If you want to
+ override it, make sure it does not do any expensive operations.
+@param {Object {RecyclerView.ViewHolder}} selected    The ViewHolder being dragged by the user.
+@param {Object {java.util.List}} dropTargets The list of ViewHolder that are under the dragged View and
+                    candidate as a drop.
+@param {Number} curX        The updated left value of the dragged View after drag translations
+                    are applied. This value does not include margins added by
+                    {@link RecyclerView.ItemDecoration}s.
+@param {Number} curY        The updated top value of the dragged View after drag translations
+                    are applied. This value does not include margins added by
+                    {@link RecyclerView.ItemDecoration}s.
+@return {Object {com.android.internal.widget.RecyclerView.ViewHolder}} A ViewHolder to whose position the dragged ViewHolder should be
+ moved to.
+*/
+chooseDropTarget : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-onSwiped'>/**Called when a ViewHolder is swiped by the user.
+</span> &lt;p&gt;
+ If you are returning relative directions ({@link #START} , {@link #END}) from the
+ {@link #getMovementFlags(RecyclerView, ViewHolder)} method, this method
+ will also use relative directions. Otherwise, it will use absolute directions.
+ &lt;p&gt;
+ If you don't support swiping, this method will never be called.
+ &lt;p&gt;
+ ItemTouchHelper will keep a reference to the View until it is detached from
+ RecyclerView.
+ As soon as it is detached, ItemTouchHelper will call
+ {@link #clearView(RecyclerView, ViewHolder)}.
+@param {Object {RecyclerView.ViewHolder}} viewHolder The ViewHolder which has been swiped by the user.
+@param {Number} direction  The direction to which the ViewHolder is swiped. It is one of
+                   {@link #UP}, {@link #DOWN},
+                   {@link #LEFT} or {@link #RIGHT}. If your
+                   {@link #getMovementFlags(RecyclerView, ViewHolder)}
+                   method
+                   returned relative flags instead of {@link #LEFT} / {@link #RIGHT};
+                   `direction` will be relative as well. ({@link #START} or {@link
+                   #END}).
+*/
+onSwiped : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-onSelectedChanged'>/**Called when the ViewHolder swiped or dragged by the ItemTouchHelper is changed.
+</span> &lt;p/&gt;
+ If you override this method, you should call super.
+@param {Object {RecyclerView.ViewHolder}} viewHolder  The new ViewHolder that is being swiped or dragged. Might be null if
+                    it is cleared.
+@param {Number} actionState One of {@link ItemTouchHelper#ACTION_STATE_IDLE},
+                    {@link ItemTouchHelper#ACTION_STATE_SWIPE} or
+                    {@link ItemTouchHelper#ACTION_STATE_DRAG}.
+@see #clearView(RecyclerView, RecyclerView.ViewHolder)
+*/
+onSelectedChanged : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-onMoved'>/**Called when {@link #onMove(RecyclerView, ViewHolder, ViewHolder)} returns true.
+</span> &lt;p&gt;
+ ItemTouchHelper does not create an extra Bitmap or View while dragging, instead, it
+ modifies the existing View. Because of this reason, it is important that the View is
+ still part of the layout after it is moved. This may not work as intended when swapped
+ Views are close to RecyclerView bounds or there are gaps between them (e.g. other Views
+ which were not eligible for dropping over).
+ &lt;p&gt;
+ This method is responsible to give necessary hint to the LayoutManager so that it will
+ keep the View in visible area. For example, for LinearLayoutManager, this is as simple
+ as calling {@link LinearLayoutManager#scrollToPositionWithOffset(int, int)}.
+
+ Default implementation calls {@link RecyclerView#scrollToPosition(int)} if the View's
+ new position is likely to be out of bounds.
+ &lt;p&gt;
+ It is important to ensure the ViewHolder will stay visible as otherwise, it might be
+ removed by the LayoutManager if the move causes the View to go out of bounds. In that
+ case, drag will end prematurely.
+@param {Object {RecyclerView}} recyclerView The RecyclerView controlled by the ItemTouchHelper.
+@param {Object {RecyclerView.ViewHolder}} viewHolder   The ViewHolder under user's control.
+@param {Number} fromPos      The previous adapter position of the dragged item (before it was
+                     moved).
+@param {Object {RecyclerView.ViewHolder}} target       The ViewHolder on which the currently active item has been dropped.
+@param {Number} toPos        The new adapter position of the dragged item.
+@param {Number} x            The updated left value of the dragged View after drag translations
+                     are applied. This value does not include margins added by
+                     {@link RecyclerView.ItemDecoration}s.
+@param {Number} y            The updated top value of the dragged View after drag translations
+                     are applied. This value does not include margins added by
+                     {@link RecyclerView.ItemDecoration}s.
+*/
+onMoved : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-clearView'>/**Called by the ItemTouchHelper when the user interaction with an element is over and it
+</span> also completed its animation.
+ &lt;p&gt;
+ This is a good place to clear all changes on the View that was done in
+ {@link #onSelectedChanged(RecyclerView.ViewHolder, int)},
+ {@link #onChildDraw(Canvas, RecyclerView, ViewHolder, float, float, int,
+ boolean)} or
+ {@link #onChildDrawOver(Canvas, RecyclerView, ViewHolder, float, float, int, boolean)}.
+@param {Object {RecyclerView}} recyclerView The RecyclerView which is controlled by the ItemTouchHelper.
+@param {Object {RecyclerView.ViewHolder}} viewHolder   The View that was interacted by the user.
+*/
+clearView : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-onChildDraw'>/**Called by ItemTouchHelper on RecyclerView's onDraw callback.
+</span> &lt;p&gt;
+ If you would like to customize how your View's respond to user interactions, this is
+ a good place to override.
+ &lt;p&gt;
+ Default implementation translates the child by the given &lt;code&gt;dX&lt;/code&gt;,
+ &lt;code&gt;dY&lt;/code&gt;.
+ ItemTouchHelper also takes care of drawing the child after other children if it is being
+ dragged. This is done using child re-ordering mechanism. On platforms prior to L, this
+ is
+ achieved via {@link android.view.ViewGroup#getChildDrawingOrder(int, int)} and on L
+ and after, it changes View's elevation value to be greater than all other children.)
+@param {Object {Canvas}} c                 The canvas which RecyclerView is drawing its children
+@param {Object {RecyclerView}} recyclerView      The RecyclerView to which ItemTouchHelper is attached to
+@param {Object {RecyclerView.ViewHolder}} viewHolder        The ViewHolder which is being interacted by the User or it was
+                          interacted and simply animating to its original position
+@param {Number} dX                The amount of horizontal displacement caused by user's action
+@param {Number} dY                The amount of vertical displacement caused by user's action
+@param {Number} actionState       The type of interaction on the View. Is either {@link
+                          #ACTION_STATE_DRAG} or {@link #ACTION_STATE_SWIPE}.
+@param {Boolean} isCurrentlyActive True if this view is currently being controlled by the user or
+                          false it is simply animating back to its original state.
+@see #onChildDrawOver(Canvas, RecyclerView, ViewHolder, float, float, int,
+ boolean)
+*/
+onChildDraw : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-onChildDrawOver'>/**Called by ItemTouchHelper on RecyclerView's onDraw callback.
+</span> &lt;p&gt;
+ If you would like to customize how your View's respond to user interactions, this is
+ a good place to override.
+ &lt;p&gt;
+ Default implementation translates the child by the given &lt;code&gt;dX&lt;/code&gt;,
+ &lt;code&gt;dY&lt;/code&gt;.
+ ItemTouchHelper also takes care of drawing the child after other children if it is being
+ dragged. This is done using child re-ordering mechanism. On platforms prior to L, this
+ is
+ achieved via {@link android.view.ViewGroup#getChildDrawingOrder(int, int)} and on L
+ and after, it changes View's elevation value to be greater than all other children.)
+@param {Object {Canvas}} c                 The canvas which RecyclerView is drawing its children
+@param {Object {RecyclerView}} recyclerView      The RecyclerView to which ItemTouchHelper is attached to
+@param {Object {RecyclerView.ViewHolder}} viewHolder        The ViewHolder which is being interacted by the User or it was
+                          interacted and simply animating to its original position
+@param {Number} dX                The amount of horizontal displacement caused by user's action
+@param {Number} dY                The amount of vertical displacement caused by user's action
+@param {Number} actionState       The type of interaction on the View. Is either {@link
+                          #ACTION_STATE_DRAG} or {@link #ACTION_STATE_SWIPE}.
+@param {Boolean} isCurrentlyActive True if this view is currently being controlled by the user or
+                          false it is simply animating back to its original state.
+@see #onChildDrawOver(Canvas, RecyclerView, ViewHolder, float, float, int,
+ boolean)
+*/
+onChildDrawOver : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-getAnimationDuration'>/**Called by the ItemTouchHelper when user action finished on a ViewHolder and now the View
+</span> will be animated to its final position.
+ &lt;p&gt;
+ Default implementation uses ItemAnimator's duration values. If
+ &lt;code&gt;animationType&lt;/code&gt; is {@link #ANIMATION_TYPE_DRAG}, it returns
+ {@link RecyclerView.ItemAnimator#getMoveDuration()}, otherwise, it returns
+ {@link RecyclerView.ItemAnimator#getRemoveDuration()}. If RecyclerView does not have
+ any {@link RecyclerView.ItemAnimator} attached, this method returns
+ {@code DEFAULT_DRAG_ANIMATION_DURATION} or {@code DEFAULT_SWIPE_ANIMATION_DURATION}
+ depending on the animation type.
+@param {Object {RecyclerView}} recyclerView  The RecyclerView to which the ItemTouchHelper is attached to.
+@param {Number} animationType The type of animation. Is one of {@link #ANIMATION_TYPE_DRAG},
+                      {@link #ANIMATION_TYPE_SWIPE_CANCEL} or
+                      {@link #ANIMATION_TYPE_SWIPE_SUCCESS}.
+@param {Number} animateDx     The horizontal distance that the animation will offset
+@param {Number} animateDy     The vertical distance that the animation will offset
+@return {Number} The duration for the animation
+*/
+getAnimationDuration : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-Callback-method-interpolateOutOfBoundsScroll'>/**Called by the ItemTouchHelper when user is dragging a view out of bounds.
+</span> &lt;p&gt;
+ You can override this method to decide how much RecyclerView should scroll in response
+ to this action. Default implementation calculates a value based on the amount of View
+ out of bounds and the time it spent there. The longer user keeps the View out of bounds,
+ the faster the list will scroll. Similarly, the larger portion of the View is out of
+ bounds, the faster the RecyclerView will scroll.
+@param {Object {RecyclerView}} recyclerView        The RecyclerView instance to which ItemTouchHelper is
+                            attached to.
+@param {Number} viewSize            The total size of the View in scroll direction, excluding
+                            item decorations.
+@param {Number} viewSizeOutOfBounds The total size of the View that is out of bounds. This value
+                            is negative if the View is dragged towards left or top edge.
+@param {Number} totalSize           The total size of RecyclerView in the scroll direction.
+@param {Number} msSinceStartScroll  The time passed since View is kept out of bounds.
+@return {Number} The amount that RecyclerView should scroll. Keep in mind that this value will
+ be passed to {@link RecyclerView#scrollBy(int, int)} method.
+*/
+interpolateOutOfBoundsScroll : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

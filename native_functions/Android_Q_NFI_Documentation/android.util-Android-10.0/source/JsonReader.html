@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-JsonReader'>/**@class android.util.JsonReader
+</span> implements java.io.Closeable
+
+@extends java.lang.Object
+
+ Reads a JSON (&lt;a href=&quot;http://www.ietf.org/rfc/rfc4627.txt&quot;&gt;RFC 4627&lt;/a&gt;)
+ encoded value as a stream of tokens. This stream includes both literal
+ values (strings, numbers, booleans, and nulls) as well as the begin and
+ end delimiters of objects and arrays. The tokens are traversed in
+ depth-first order, the same order that they appear in the JSON document.
+ Within JSON objects, name/value pairs are represented by a single token.
+
+ &lt;h3&gt;Parsing JSON&lt;/h3&gt;
+ To create a recursive descent parser for your own JSON streams, first create
+ an entry point method that creates a {@code JsonReader}.
+
+ &lt;p&gt;Next, create handler methods for each structure in your JSON text. You'll
+ need a method for each object type and for each array type.
+ &lt;ul&gt;
+   &lt;li&gt;Within &lt;strong&gt;array handling&lt;/strong&gt; methods, first call {@link #beginArray} to consume the array's opening bracket. Then create a
+       while loop that accumulates values, terminating when {@link #hasNext}
+       is false. Finally, read the array's closing bracket by calling {@link #endArray}.
+   &lt;li&gt;Within &lt;strong&gt;object handling&lt;/strong&gt; methods, first call {@link #beginObject} to consume the object's opening brace. Then create a
+       while loop that assigns values to local variables based on their name.
+       This loop should terminate when {@link #hasNext} is false. Finally,
+       read the object's closing brace by calling {@link #endObject}.
+ &lt;/ul&gt;
+ &lt;p&gt;When a nested object or array is encountered, delegate to the
+ corresponding handler method.
+
+ &lt;p&gt;When an unknown name is encountered, strict parsers should fail with an
+ exception. Lenient parsers should call {@link #skipValue}() to recursively
+ skip the value's nested tokens, which may otherwise conflict.
+
+ &lt;p&gt;If a value may be null, you should first check using {@link #peek}().
+ Null literals can be consumed using either {@link #nextNull}() or {@link #skipValue}().
+
+ &lt;h3&gt;Example&lt;/h3&gt;
+ Suppose we'd like to parse a stream of messages such as the following: &lt;pre&gt; {@code
+ [
+   {
+     &quot;id&quot;: 912345678901,
+     &quot;text&quot;: &quot;How do I read JSON on Android?&quot;,
+     &quot;geo&quot;: null,
+     &quot;user&quot;: {
+       &quot;name&quot;: &quot;android_newb&quot;,
+       &quot;followers_count&quot;: 41
+      }
+   },
+   {
+     &quot;id&quot;: 912345678902,
+     &quot;text&quot;: &quot;@android_newb just use android.util.JsonReader!&quot;,
+     &quot;geo&quot;: [50.454722, -104.606667],
+     &quot;user&quot;: {
+       &quot;name&quot;: &quot;jesse&quot;,
+       &quot;followers_count&quot;: 2
+     }
+   }
+ ]}&lt;/pre&gt;
+ This code implements the parser for the above structure: &lt;pre&gt;   {@code
+
+   public List&lt;Message&gt; readJsonStream(InputStream in) throws IOException {
+     JsonReader reader = new JsonReader(new InputStreamReader(in, &quot;UTF-8&quot;));
+     try {
+       return readMessagesArray(reader);
+     } finally {
+       reader.close();
+     }
+   }
+
+   public List&lt;Message&gt; readMessagesArray(JsonReader reader) throws IOException {
+     List&lt;Message&gt; messages = new ArrayList&lt;Message&gt;();
+
+     reader.beginArray();
+     while (reader.hasNext()) {
+       messages.add(readMessage(reader));
+     }
+     reader.endArray();
+     return messages;
+   }
+
+   public Message readMessage(JsonReader reader) throws IOException {
+     long id = -1;
+     String text = null;
+     User user = null;
+     List&lt;Double&gt; geo = null;
+
+     reader.beginObject();
+     while (reader.hasNext()) {
+       String name = reader.nextName();
+       if (name.equals(&quot;id&quot;)) {
+         id = reader.nextLong();
+       } else if (name.equals(&quot;text&quot;)) {
+         text = reader.nextString();
+       } else if (name.equals(&quot;geo&quot;) &amp;&amp; reader.peek() != JsonToken.NULL) {
+         geo = readDoublesArray(reader);
+       } else if (name.equals(&quot;user&quot;)) {
+         user = readUser(reader);
+       } else {
+         reader.skipValue();
+       }
+     }
+     reader.endObject();
+     return new Message(id, text, user, geo);
+   }
+
+   public List&lt;Double&gt; readDoublesArray(JsonReader reader) throws IOException {
+     List&lt;Double&gt; doubles = new ArrayList&lt;Double&gt;();
+
+     reader.beginArray();
+     while (reader.hasNext()) {
+       doubles.add(reader.nextDouble());
+     }
+     reader.endArray();
+     return doubles;
+   }
+
+   public User readUser(JsonReader reader) throws IOException {
+     String username = null;
+     int followersCount = -1;
+
+     reader.beginObject();
+     while (reader.hasNext()) {
+       String name = reader.nextName();
+       if (name.equals(&quot;name&quot;)) {
+         username = reader.nextString();
+       } else if (name.equals(&quot;followers_count&quot;)) {
+         followersCount = reader.nextInt();
+       } else {
+         reader.skipValue();
+       }
+     }
+     reader.endObject();
+     return new User(username, followersCount);
+   }}&lt;/pre&gt;
+
+ &lt;h3&gt;Number Handling&lt;/h3&gt;
+ This reader permits numeric values to be read as strings and string values to
+ be read as numbers. For example, both elements of the JSON array {@code
+ [1, &quot;1&quot;]} may be read using either {@link #nextInt} or {@link #nextString}.
+ This behavior is intended to prevent lossy numeric conversions: double is
+ JavaScript's only numeric type and very large values like {@code
+ 9007199254740993} cannot be represented exactly on that platform. To minimize
+ precision loss, extremely large values should be written and read as strings
+ in JSON.
+
+ &lt;p&gt;Each {@code JsonReader} may be used to read a single JSON stream. Instances
+ of this class are not thread safe.
+*/
+var JsonReader = {
+
+<span id='android-util-JsonReader-method-setLenient'>/**Configure this parser to be  be liberal in what it accepts. By default,
+</span> this parser is strict and only accepts JSON as specified by &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc4627.txt&quot;&gt;RFC 4627&lt;/a&gt;. Setting the
+ parser to lenient causes it to ignore the following syntax errors:
+
+ &lt;ul&gt;
+   &lt;li&gt;End of line comments starting with {@code //} or {@code #} and
+       ending with a newline character.
+   &lt;li&gt;C-style comments starting with {@code /*} and ending with
+       {@code *}{@code /}. Such comments may not be nested.
+   &lt;li&gt;Names that are unquoted or {@code 'single quoted'}.
+   &lt;li&gt;Strings that are unquoted or {@code 'single quoted'}.
+   &lt;li&gt;Array elements separated by {@code ;} instead of {@code ,}.
+   &lt;li&gt;Unnecessary array separators. These are interpreted as if null
+       was the omitted value.
+   &lt;li&gt;Names and values separated by {@code =} or {@code =&gt;} instead of
+       {@code :}.
+   &lt;li&gt;Name/value pairs separated by {@code ;} instead of {@code ,}.
+ &lt;/ul&gt;
+*/
+setLenient : function(  ) {},
+
+<span id='android-util-JsonReader-method-isLenient'>/**Returns true if this parser is liberal in what it accepts.
+</span>*/
+isLenient : function(  ) {},
+
+<span id='android-util-JsonReader-method-beginArray'>/**Consumes the next token from the JSON stream and asserts that it is the
+</span> beginning of a new array.
+*/
+beginArray : function(  ) {},
+
+<span id='android-util-JsonReader-method-endArray'>/**Consumes the next token from the JSON stream and asserts that it is the
+</span> end of the current array.
+*/
+endArray : function(  ) {},
+
+<span id='android-util-JsonReader-method-beginObject'>/**Consumes the next token from the JSON stream and asserts that it is the
+</span> beginning of a new object.
+*/
+beginObject : function(  ) {},
+
+<span id='android-util-JsonReader-method-endObject'>/**Consumes the next token from the JSON stream and asserts that it is the
+</span> end of the current object.
+*/
+endObject : function(  ) {},
+
+<span id='android-util-JsonReader-method-hasNext'>/**Returns true if the current array or object has another element.
+</span>*/
+hasNext : function(  ) {},
+
+<span id='android-util-JsonReader-method-peek'>/**Returns the type of the next token without consuming it.
+</span>*/
+peek : function(  ) {},
+
+<span id='android-util-JsonReader-method-nextName'>/**Returns the next token, a {@link android.util.JsonToken#NAME property name}, and
+</span> consumes it.
+@throws IOException if the next token in the stream is not a property
+     name.
+*/
+nextName : function(  ) {},
+
+<span id='android-util-JsonReader-method-nextString'>/**Returns the {@link android.util.JsonToken#STRING string} value of the next token,
+</span> consuming it. If the next token is a number, this method will return its
+ string form.
+@throws IllegalStateException if the next token is not a string or if
+     this reader is closed.
+*/
+nextString : function(  ) {},
+
+<span id='android-util-JsonReader-method-nextBoolean'>/**Returns the {@link android.util.JsonToken#BOOLEAN boolean} value of the next token,
+</span> consuming it.
+@throws IllegalStateException if the next token is not a boolean or if
+     this reader is closed.
+*/
+nextBoolean : function(  ) {},
+
+<span id='android-util-JsonReader-method-nextNull'>/**Consumes the next token from the JSON stream and asserts that it is a
+</span> literal null.
+@throws IllegalStateException if the next token is not null or if this
+     reader is closed.
+*/
+nextNull : function(  ) {},
+
+<span id='android-util-JsonReader-method-nextDouble'>/**Returns the {@link android.util.JsonToken#NUMBER double} value of the next token,
+</span> consuming it. If the next token is a string, this method will attempt to
+ parse it as a double using {@link Double#parseDouble(String)}.
+@throws IllegalStateException if the next token is not a literal value.
+*/
+nextDouble : function(  ) {},
+
+<span id='android-util-JsonReader-method-nextLong'>/**Returns the {@link android.util.JsonToken#NUMBER long} value of the next token,
+</span> consuming it. If the next token is a string, this method will attempt to
+ parse it as a long. If the next token's numeric value cannot be exactly
+ represented by a Java {@code long}, this method throws.
+@throws IllegalStateException if the next token is not a literal value.
+@throws NumberFormatException if the next literal value cannot be parsed
+     as a number, or exactly represented as a long.
+*/
+nextLong : function(  ) {},
+
+<span id='android-util-JsonReader-method-nextInt'>/**Returns the {@link android.util.JsonToken#NUMBER int} value of the next token,
+</span> consuming it. If the next token is a string, this method will attempt to
+ parse it as an int. If the next token's numeric value cannot be exactly
+ represented by a Java {@code int}, this method throws.
+@throws IllegalStateException if the next token is not a literal value.
+@throws NumberFormatException if the next literal value cannot be parsed
+     as a number, or exactly represented as an int.
+*/
+nextInt : function(  ) {},
+
+<span id='android-util-JsonReader-method-close'>/**Closes this JSON reader and the underlying {@link Reader}.
+</span>*/
+close : function(  ) {},
+
+<span id='android-util-JsonReader-method-skipValue'>/**Skips the next value recursively. If it is an object or array, all nested
+</span> elements are skipped. This method is intended for use when the JSON token
+ stream contains unrecognized or unhandled values.
+*/
+skipValue : function(  ) {},
+
+<span id='android-util-JsonReader-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

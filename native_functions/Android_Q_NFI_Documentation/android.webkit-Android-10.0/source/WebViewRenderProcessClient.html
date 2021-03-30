@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-webkit-WebViewRenderProcessClient'>/**@class android.webkit.WebViewRenderProcessClient
+</span>@extends java.lang.Object
+
+ Used to receive callbacks on {@link android.webkit.WebView} renderer events.
+
+ WebViewRenderProcessClient instances may be set or retrieved via {@link android.webkit.WebView#setandroid.webkit.WebViewRenderProcessClient(android.webkit.WebViewRenderProcessClient)} and {@link android.webkit.WebView#getandroid.webkit.WebViewRenderProcessClient()}.
+
+ Instances may be attached to multiple WebViews, and thus a single renderer event may cause
+ a callback to be called multiple times with different WebView parameters.
+*/
+var WebViewRenderProcessClient = {
+
+<span id='android-webkit-WebViewRenderProcessClient-method-onRenderProcessUnresponsive'>/**Called when the renderer currently associated with {@code view} becomes unresponsive as a
+</span> result of a long running blocking task such as the execution of JavaScript.
+
+ &lt;p&gt;If a WebView fails to process an input event, or successfully navigate to a new URL within
+ a reasonable time frame, the renderer is considered to be unresponsive, and this callback
+ will be called.
+
+ &lt;p&gt;This callback will continue to be called at regular intervals as long as the renderer
+ remains unresponsive. If the renderer becomes responsive again, {@link android.webkit.WebViewRenderProcessClient#onRenderProcessResponsive} will be called once, and this method
+ will not subsequently be called unless another period of unresponsiveness is detected.
+
+ &lt;p&gt;The minimum interval between successive calls to {@code onRenderProcessUnresponsive} is 5
+ seconds.
+
+ &lt;p&gt;No action is taken by WebView as a result of this method call. Applications may
+ choose to terminate the associated renderer via the object that is passed to this callback,
+ if in multiprocess mode, however this must be accompanied by correctly handling
+ {@link android.webkit.WebViewClient#onRenderProcessGone} for this WebView, and all other WebViews associated
+ with the same renderer. Failure to do so will result in application termination.
+@param {Object {WebView}} view The {@link WebView} for which unresponsiveness was detected.
+@param {Object {WebViewRenderProcess}} renderer The {@link WebViewRenderProcess} that has become unresponsive,
+ or {@code null} if WebView is running in single process mode.
+*/
+onRenderProcessUnresponsive : function(  ) {},
+
+<span id='android-webkit-WebViewRenderProcessClient-method-onRenderProcessResponsive'>/**Called once when an unresponsive renderer currently associated with {@code view} becomes
+</span> responsive.
+
+ &lt;p&gt;After a WebView renderer becomes unresponsive, which is notified to the application by
+ {@link android.webkit.WebViewRenderProcessClient#onRenderProcessUnresponsive}, it is possible for the
+ blocking renderer task to complete, returning the renderer to a responsive state. In that
+ case, this method is called once to indicate responsiveness.
+
+ &lt;p&gt;No action is taken by WebView as a result of this method call.
+@param {Object {WebView}} view The {@link WebView} for which responsiveness was detected.
+@param {Object {WebViewRenderProcess}} renderer The {@link WebViewRenderProcess} that has become responsive, or {@code null}
+                 if WebView is running in single process mode.
+*/
+onRenderProcessResponsive : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap'>/**@class android.hardware.camera2.params.RecommendedStreamConfigurationMap
+</span>@extends java.lang.Object
+
+ Immutable class to store the recommended stream configurations to set up
+ {@link android.view.Surface Surfaces} for creating a
+ {@link android.hardware.camera2.CameraCaptureSession capture session} with
+ {@link android.hardware.camera2.CameraDevice#createCaptureSession}.
+
+ &lt;p&gt;The recommended list does not replace or deprecate the exhaustive complete list found in
+ {@link android.hardware.camera2.params.StreamConfigurationMap}. It is a suggestion about available power and performance
+ efficient stream configurations for a specific use case. Per definition it is only a subset
+ of {@link android.hardware.camera2.params.StreamConfigurationMap} and can be considered by developers for optimization
+ purposes.&lt;/p&gt;
+
+ &lt;p&gt;This also duplicates the minimum frame durations and stall durations from the
+ {@link android.hardware.camera2.params.StreamConfigurationMap} for each format/size combination that can be used to calculate
+ effective frame rate when submitting multiple captures.
+ &lt;/p&gt;
+
+ &lt;p&gt;An instance of this object is available by invoking
+ {@link CameraCharacteristics#getRecommendedStreamConfigurationMap} and passing a respective
+ usecase id. For more information about supported use case constants see
+ {@link #USECASE_PREVIEW}.&lt;/p&gt;
+
+ &lt;pre&gt;&lt;code&gt;{@code
+ CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
+ RecommendedStreamConfigurationMap configs = characteristics.getRecommendedStreamConfigurationMap(
+         RecommendedStreamConfigurationMap.USECASE_PREVIEW);
+ }&lt;/code&gt;&lt;/pre&gt;
+
+ @see CameraCharacteristics#getRecommendedStreamConfigurationMap
+ @see CameraDevice#createCaptureSession
+*/
+var RecommendedStreamConfigurationMap = {
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-MAX_USECASE_COUNT'>/**@hide */
+</span>MAX_USECASE_COUNT : &quot;32&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_PREVIEW'>/** The recommended stream configuration map for use case preview must contain a subset of
+</span> efficient, non-stalling configurations that must include both
+ {@link android.graphics.ImageFormat#PRIVATE} and
+ {@link android.graphics.ImageFormat#YUV_420_888} output formats. Even if available for the
+ camera device, high speed or input configurations will be absent.
+*/
+USECASE_PREVIEW : &quot;0&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_RECORD'>/** The recommended stream configuration map for recording must contain a subset of efficient
+</span> video configurations that include {@link android.graphics.ImageFormat#PRIVATE}
+ output format for at least all supported {@link android.media.CamcorderProfile profiles}.
+ High speed configurations if supported will be available as well. Even if available for the
+ camera device, input configurations will be absent.
+*/
+USECASE_RECORD : &quot;1&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_VIDEO_SNAPSHOT'>/** The recommended stream configuration map for use case video snapshot must only contain a
+</span> subset of efficient liveshot configurations that include
+ {@link android.graphics.ImageFormat#JPEG} output format. The sizes will match at least
+ the maximum resolution of usecase record and will not cause any preview glitches. Even
+ if available for the camera device, high speed or input configurations will be absent.
+*/
+USECASE_VIDEO_SNAPSHOT : &quot;2&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_SNAPSHOT'>/** The recommended stream configuration map for use case snapshot must contain a subset of
+</span> efficient still capture configurations that must include
+ {@link android.graphics.ImageFormat#JPEG} output format and at least one configuration with
+ size approximately equal to the sensor pixel array size
+ {@link CameraCharacteristics#SENSOR_INFO_ACTIVE_ARRAY_SIZE}.
+ Even if available for the camera device, high speed or input configurations will be absent.
+*/
+USECASE_SNAPSHOT : &quot;3&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_ZSL'>/** In case the device supports
+</span> {@link CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_YUV_REPROCESSING} and/or
+ {@link CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_PRIVATE_REPROCESSING},
+ the recommended stream configuration map for use case ZSL must contain a subset of efficient
+ configurations that include the suggested input and output format mappings. Even if
+ available for the camera device, high speed configurations will be absent.
+*/
+USECASE_ZSL : &quot;4&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_RAW'>/** In case the device supports
+</span> {@link android.hardware.camera2.CameraMetadata#REQUEST_AVAILABLE_CAPABILITIES_RAW}, the
+ recommended stream configuration map for use case RAW must contain a subset of efficient
+ configurations that include the {@link android.graphics.ImageFormat#RAW_SENSOR} and other
+ RAW output formats. Even if available for the camera device, high speed and input
+ configurations will be absent.
+*/
+USECASE_RAW : &quot;5&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_LOW_LATENCY_SNAPSHOT'>/** The recommended stream configuration map for use case low latency snapshot must contain
+</span> subset of configurations with end-to-end latency that does not exceed 200 ms. under standard
+ operating conditions (reasonable light levels, not loaded system). The expected output format
+ will be primarily {@link android.graphics.ImageFormat#JPEG} however other image formats can
+ be present as well.  Even if available for the camera device, high speed and input
+ configurations will be absent. This suggested configuration map may be absent on some devices
+ that can not support any low latency requests.
+*/
+USECASE_LOW_LATENCY_SNAPSHOT : &quot;6&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-property-USECASE_VENDOR_START'>/** Device specific use cases.
+</span> @hide
+*/
+USECASE_VENDOR_START : &quot;24&quot;,
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getRecommendedUseCase'>/**Get the use case value for the recommended stream configurations.
+</span>@return {Number} Use case id.
+*/
+getRecommendedUseCase : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getOutputFormats'>/**Get the image {@code format} output formats in this stream configuration.
+</span>
+ &lt;p&gt;
+ For more information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getOutputFormats}.
+ &lt;/p&gt;
+@return {Object {java.util.Set}} a non-modifiable set of Integer formats
+*/
+getOutputFormats : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getValidOutputFormatsForInput'>/**Get the image {@code format} output formats for a reprocessing input format.
+</span>
+ &lt;p&gt;
+ For more information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getValidOutputFormatsForInput}.
+ &lt;/p&gt;
+@return {Object {java.util.Set}} a non-modifiable set of Integer formats
+*/
+getValidOutputFormatsForInput : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getInputFormats'>/**Get the image {@code format} input formats in this stream configuration.
+</span>
+ &lt;p&gt;All image formats returned by this function will be defined in either {@link ImageFormat}
+ or in {@link PixelFormat} (and there is no possibility of collision).&lt;/p&gt;
+@return {Object {java.util.Set}} a non-modifiable set of Integer formats
+*/
+getInputFormats : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getInputSizes'>/**Get the supported input sizes for this input format.
+</span>
+ &lt;p&gt;The format must have come from {@link #getInputFormats}; otherwise
+ {@code null} is returned.&lt;/p&gt;
+@param {Number} format a format from {@link #getInputFormats}
+@return {Object {java.util.Set}} a non-modifiable set of sizes, or {@code null} if the format was not available.
+*/
+getInputSizes : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-isOutputSupportedFor'>/**Determine whether or not output surfaces with a particular user-defined format can be passed
+</span> {@link CameraDevice#createCaptureSession createCaptureSession}.
+
+ &lt;p&gt;
+ For further information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#isOutputSupportedFor}.
+ &lt;/p&gt;
+@param {Number} format an image format from either {@link ImageFormat} or {@link PixelFormat}
+@return {Boolean} {@code true} if using a {@code surface} with this {@code format} will be
+          supported with {@link CameraDevice#createCaptureSession}
+@throws IllegalArgumentException
+          if the image format was not a defined named constant
+          from either {@link ImageFormat} or {@link PixelFormat}
+*/
+isOutputSupportedFor : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getOutputSizes'>/**Get a list of sizes compatible with the requested image {@code format}.
+</span>
+ &lt;p&gt;
+ For more information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getOutputSizes}.
+ &lt;/p&gt;
+@param {Number} format an image format from {@link ImageFormat} or {@link PixelFormat}
+@return {Object {java.util.Set}} a non-modifiable set of supported sizes,
+          or {@code null} if the {@code format} is not a supported output
+*/
+getOutputSizes : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getHighSpeedVideoSizes'>/**Get a list of supported high speed video recording sizes.
+</span> &lt;p&gt;
+ For more information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getHighSpeedVideoSizes}.
+ &lt;/p&gt;
+@return {Object {java.util.Set}} a non-modifiable set of supported high speed video recording sizes
+*/
+getHighSpeedVideoSizes : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getHighSpeedVideoFpsRangesFor'>/**Get the frame per second ranges (fpsMin, fpsMax) for input high speed video size.
+</span>
+ &lt;p&gt;
+ For further information refer to
+ {@link android.hardware.camera2.params.StreamConfigurationMap#getHighSpeedVideoFpsRangesFor}.
+ &lt;/p&gt;
+@param {Object {Size}} size one of the sizes returned by {@link #getHighSpeedVideoSizes()}
+@return {Object {java.util.Set}} a non-modifiable set of supported high speed video recording FPS ranges The upper
+         bound of returned ranges is guaranteed to be greater than or equal to 120.
+@throws IllegalArgumentException if input size does not exist in the return value of
+             getHighSpeedVideoSizes
+*/
+getHighSpeedVideoFpsRangesFor : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getHighSpeedVideoFpsRanges'>/**Get a list of supported high speed video recording FPS ranges.
+</span> &lt;p&gt;
+ For further information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getHighSpeedVideoFpsRanges}.
+ &lt;/p&gt;
+@return {Object {java.util.Set}} a non-modifiable set of supported high speed video recording FPS ranges The upper
+         bound of returned ranges is guaranteed to be larger or equal to 120.
+*/
+getHighSpeedVideoFpsRanges : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getHighSpeedVideoSizesFor'>/**Get the supported video sizes for an input high speed FPS range.
+</span>
+ &lt;p&gt;
+ For further information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getHighSpeedVideoSizesFor}.
+ &lt;/p&gt;
+@param {Object {android.util.Range}} fpsRange one of the FPS ranges returned by {@link #getHighSpeedVideoFpsRanges()}
+@return {Object {java.util.Set}} A non-modifiable set of video sizes to create high speed capture sessions for high
+         speed streaming use cases.
+@throws IllegalArgumentException if input FPS range does not exist in the return value of
+         getHighSpeedVideoFpsRanges
+*/
+getHighSpeedVideoSizesFor : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getHighResolutionOutputSizes'>/**Get a list of supported high resolution sizes, which cannot operate at full BURST_CAPTURE
+</span> rate.
+
+ &lt;p&gt;
+ For further information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getHighResolutionOutputSizes}.
+ &lt;/p&gt;
+@return {Object {java.util.Set}} a non-modifiable set of supported slower high-resolution sizes, or {@code null} if
+         the BURST_CAPTURE capability is not supported
+*/
+getHighResolutionOutputSizes : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getOutputMinFrameDuration'>/**Get the minimum
+</span> {@link android.hardware.camera2.CaptureRequest#SENSOR_FRAME_DURATION frame duration}
+ for the format/size combination (in nanoseconds).
+
+ &lt;p&gt;
+ For further information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getOutputMinFrameDuration}.
+ &lt;/p&gt;
+@param {Number} format an image format from {@link ImageFormat} or {@link PixelFormat}
+@param {Object {Size}} size an output-compatible size
+@return {Number} a minimum frame duration {@code &gt;} 0 in nanoseconds, or
+          0 if the minimum frame duration is not available.
+@throws IllegalArgumentException if {@code format} or {@code size} was not supported
+*/
+getOutputMinFrameDuration : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getOutputStallDuration'>/**Get the stall duration for the format/size combination (in nanoseconds).
+</span>
+ &lt;p&gt;
+ For further information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getOutputStallDuration}.
+ &lt;/p&gt;
+@param {Number} format an image format from {@link ImageFormat} or {@link PixelFormat}
+@param {Object {Size}} size an output-compatible size
+@return {Number} a stall duration {@code &gt;=} 0 in nanoseconds
+@throws IllegalArgumentException if {@code format} or {@code size} was not supported
+*/
+getOutputStallDuration : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getOutputSizes'>/**Get a list of sizes compatible with {@code klass} to use as an output.
+</span>
+ &lt;p&gt;For further information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#getOutputSizes(Class)}.
+ &lt;/p&gt;
+@param {Object {java.lang.Class}} klass
+          a {@link Class} object reference
+@return {Object {java.util.Set}} a non-modifiable set of supported sizes for {@link ImageFormat#PRIVATE} format,
+          or {@code null} if the {@code klass} is not a supported output.
+*/
+getOutputSizes : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getOutputMinFrameDuration'>/**Get the minimum {@link CaptureRequest#SENSOR_FRAME_DURATION frame duration}
+</span> for the class/size combination (in nanoseconds).
+
+ &lt;p&gt;For more information refer to
+ {@link android.hardware.camera2.params.StreamConfigurationMap#getOutputMinFrameDuration(Class, Size)}.&lt;/p&gt;
+@param {Object {java.lang.Class}} klass
+          a class which has a non-empty array returned by {@link #getOutputSizes(Class)}
+@param {Object {Size}} size an output-compatible size
+@return {Number} a minimum frame duration {@code &gt;} 0 in nanoseconds, or
+          0 if the minimum frame duration is not available.
+@throws IllegalArgumentException if {@code klass} or {@code size} was not supported
+*/
+getOutputMinFrameDuration : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-getOutputStallDuration'>/**Get the stall duration for the class/size combination (in nanoseconds).
+</span>
+ &lt;p&gt;For more information refer to
+ {@link android.hardware.camera2.params.StreamConfigurationMap#getOutputStallDuration(Class, Size)}.
+@param {Object {java.lang.Class}} klass
+          a class which has a non-empty array returned by {@link #getOutputSizes(Class)}.
+@param {Object {Size}} size an output-compatible size
+@return {Number} a minimum frame duration {@code &gt;} 0 in nanoseconds, or 0 if the stall duration is
+         not available.
+@throws IllegalArgumentException if {@code klass} or {@code size} was not supported
+*/
+getOutputStallDuration : function(  ) {},
+
+<span id='android-hardware-camera2-params-RecommendedStreamConfigurationMap-method-isOutputSupportedFor'>/**Determine whether or not the {@code surface} in its current state is suitable to be included
+</span> in a {@link CameraDevice#createCaptureSession capture session} as an output.
+
+ &lt;p&gt;For more information refer to {@link android.hardware.camera2.params.StreamConfigurationMap#isOutputSupportedFor}.
+ &lt;/p&gt;
+@param {Object {Surface}} surface a {@link Surface} object reference
+@return {Boolean} {@code true} if this is supported, {@code false} otherwise
+@throws IllegalArgumentException if the Surface endpoint is no longer valid
+*/
+isOutputSupportedFor : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiofx-Virtualizer'>/**@class android.media.audiofx.Virtualizer
+</span>@extends android.media.audiofx.AudioEffect
+
+ An audio virtualizer is a general name for an effect to spatialize audio channels. The exact
+ behavior of this effect is dependent on the number of audio input channels and the types and
+ number of audio output channels of the device. For example, in the case of a stereo input and
+ stereo headphone output, a stereo widening effect is used when this effect is turned on.
+ &lt;p&gt;An application creates a Virtualizer object to instantiate and control a virtualizer engine
+ in the audio framework.
+ &lt;p&gt;The methods, parameter types and units exposed by the Virtualizer implementation are directly
+ mapping those defined by the OpenSL ES 1.0.1 Specification (http://www.khronos.org/opensles/)
+ for the SLVirtualizerItf interface. Please refer to this specification for more details.
+ &lt;p&gt;To attach the Virtualizer to a particular AudioTrack or MediaPlayer, specify the audio session
+ ID of this AudioTrack or MediaPlayer when constructing the Virtualizer.
+ &lt;p&gt;NOTE: attaching a Virtualizer to the global audio output mix by use of session 0 is
+ deprecated.
+ &lt;p&gt;See {@link android.media.MediaPlayer#getAudioSessionId()} for details on audio sessions.
+ &lt;p&gt;See {@link android.media.audiofx.AudioEffect} class for more details on controlling
+ audio effects.
+*/
+var Virtualizer = {
+
+<span id='android-media-audiofx-Virtualizer-property-PARAM_STRENGTH_SUPPORTED'>/** Is strength parameter supported by virtualizer engine. Parameter ID for getParameter().
+</span>*/
+PARAM_STRENGTH_SUPPORTED : &quot;0&quot;,
+<span id='android-media-audiofx-Virtualizer-property-PARAM_STRENGTH'>/** Virtualizer effect strength. Parameter ID for
+</span> {@link android.media.audiofx.Virtualizer.OnParameterChangeListener}
+*/
+PARAM_STRENGTH : &quot;1&quot;,
+<span id='android-media-audiofx-Virtualizer-property-PARAM_VIRTUAL_SPEAKER_ANGLES'>/** @hide
+</span> Parameter ID to query the virtual speaker angles for a channel mask / device configuration.
+*/
+PARAM_VIRTUAL_SPEAKER_ANGLES : &quot;2&quot;,
+<span id='android-media-audiofx-Virtualizer-property-PARAM_FORCE_VIRTUALIZATION_MODE'>/** @hide
+</span> Parameter ID to force the virtualization mode to be that of a specific device
+*/
+PARAM_FORCE_VIRTUALIZATION_MODE : &quot;3&quot;,
+<span id='android-media-audiofx-Virtualizer-property-PARAM_VIRTUALIZATION_MODE'>/** @hide
+</span> Parameter ID to query the current virtualization mode.
+*/
+PARAM_VIRTUALIZATION_MODE : &quot;4&quot;,
+<span id='android-media-audiofx-Virtualizer-property-VIRTUALIZATION_MODE_OFF'>/** A virtualization mode indicating virtualization processing is not active.
+</span> See {@link #getVirtualizationMode}() as one of the possible return value.
+*/
+VIRTUALIZATION_MODE_OFF : &quot;0&quot;,
+<span id='android-media-audiofx-Virtualizer-property-VIRTUALIZATION_MODE_AUTO'>/** A virtualization mode used to indicate the virtualizer effect must stop forcing the
+</span> processing to a particular mode in {@link #forceVirtualizationMode}(int).
+*/
+VIRTUALIZATION_MODE_AUTO : &quot;1&quot;,
+<span id='android-media-audiofx-Virtualizer-property-VIRTUALIZATION_MODE_BINAURAL'>/** A virtualization mode typically used over headphones.
+</span> Binaural virtualization describes an audio processing configuration for virtualization
+ where the left and right channels are respectively reaching the left and right ear of the
+ user, without also feeding the opposite ear (as is the case when listening over speakers).
+ &lt;p&gt;Such a mode is therefore meant to be used when audio is playing over stereo wired
+ headphones or headsets, but also stereo headphones through a wireless A2DP Bluetooth link.
+ &lt;p&gt;See {@link #canVirtualize(int, int)} to verify this mode is supported by this Virtualizer.
+*/
+VIRTUALIZATION_MODE_BINAURAL : &quot;2&quot;,
+<span id='android-media-audiofx-Virtualizer-property-VIRTUALIZATION_MODE_TRANSAURAL'>/** A virtualization mode typically used over speakers.
+</span> Transaural virtualization describes an audio processing configuration that differs from
+ binaural (as described in {@link #VIRTUALIZATION_MODE_BINAURAL} in that cross-talk is
+ present, i.e. audio played from the left channel also reaches the right ear of the user,
+ and vice-versa.
+ &lt;p&gt;When supported, such a mode is therefore meant to be used when audio is playing over the
+ built-in stereo speakers of a device, if they are featured.
+ &lt;p&gt;See {@link #canVirtualize(int, int)} to verify this mode is supported by this Virtualizer.
+*/
+VIRTUALIZATION_MODE_TRANSAURAL : &quot;3&quot;,
+<span id='android-media-audiofx-Virtualizer-method-getStrengthSupported'>/**Indicates whether setting strength is supported. If this method returns false, only one
+</span> strength is supported and the setStrength() method always rounds to that value.
+@return {Boolean} true is strength parameter is supported, false otherwise
+*/
+getStrengthSupported : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-setStrength'>/**Sets the strength of the virtualizer effect. If the implementation does not support per mille
+</span> accuracy for setting the strength, it is allowed to round the given strength to the nearest
+ supported value. You can use the {@link #getRoundedStrength}() method to query the
+ (possibly rounded) value that was actually set.
+@param {Number} strength strength of the effect. The valid range for strength strength is [0, 1000],
+ where 0 per mille designates the mildest effect and 1000 per mille designates the strongest.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setStrength : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-getRoundedStrength'>/**Gets the current strength of the effect.
+</span>@return {Number} the strength of the effect. The valid range for strength is [0, 1000], where 0 per
+ mille designates the mildest effect and 1000 per mille the strongest
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getRoundedStrength : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-canVirtualize'>/**Checks if the combination of a channel mask and virtualization mode is supported by this
+</span> virtualizer.
+ Some virtualizer implementations may only support binaural processing (i.e. only support
+ headphone output, see {@link #VIRTUALIZATION_MODE_BINAURAL}), some may support transaural
+ processing (i.e. for speaker output, see {@link #VIRTUALIZATION_MODE_TRANSAURAL}) for the
+ built-in speakers. Use this method to query the virtualizer implementation capabilities.
+@param {Number} inputChannelMask the channel mask of the content to virtualize.
+@param {Number} virtualizationMode the mode for which virtualization processing is to be performed,
+    one of {@link #VIRTUALIZATION_MODE_BINAURAL}, {@link #VIRTUALIZATION_MODE_TRANSAURAL}.
+@return {Boolean} true if the combination of channel mask and virtualization mode is supported, false
+    otherwise.
+    &lt;br&gt;An indication that a certain channel mask is not supported doesn't necessarily mean
+    you cannot play content with that channel mask, it more likely implies the content will
+    be downmixed before being virtualized. For instance a virtualizer that only supports a
+    mask such as {@link AudioFormat#CHANNEL_OUT_STEREO}
+    will still be able to process content with a mask of
+    {@link AudioFormat#CHANNEL_OUT_5POINT1}, but will downmix the content to stereo first, and
+    then will virtualize, as opposed to virtualizing each channel individually.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+canVirtualize : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-getSpeakerAngles'>/**Queries the virtual speaker angles (azimuth and elevation) for a combination of a channel
+</span> mask and virtualization mode.
+ If the virtualization configuration (mask and mode) is supported (see
+ {@link #canVirtualize(int, int)}, the array angles will contain upon return the
+ definition of each virtual speaker and its azimuth and elevation angles relative to the
+ listener.
+ &lt;br&gt;Note that in some virtualizer implementations, the angles may be strength-dependent.
+@param {Number} inputChannelMask the channel mask of the content to virtualize.
+@param {Number} virtualizationMode the mode for which virtualization processing is to be performed,
+    one of {@link #VIRTUALIZATION_MODE_BINAURAL}, {@link #VIRTUALIZATION_MODE_TRANSAURAL}.
+@param {Object {int[]}} angles a non-null array whose length is 3 times the number of channels in the channel
+    mask.
+    If the method indicates the configuration is supported, the array will contain upon return
+    triplets of values: for each channel &lt;code&gt;i&lt;/code&gt; among the channels of the mask:
+    &lt;ul&gt;
+      &lt;li&gt;the element at index &lt;code&gt;3*i&lt;/code&gt; in the array contains the speaker
+          identification (e.g. {@link AudioFormat#CHANNEL_OUT_FRONT_LEFT}),&lt;/li&gt;
+      &lt;li&gt;the element at index &lt;code&gt;3*i+1&lt;/code&gt; contains its corresponding azimuth angle
+          expressed in degrees, where 0 is the direction the listener faces, 180 is behind
+          the listener, and -90 is to her/his left,&lt;/li&gt;
+      &lt;li&gt;the element at index &lt;code&gt;3*i+2&lt;/code&gt; contains its corresponding elevation angle
+          where +90 is directly above the listener, 0 is the horizontal plane, and -90 is
+          directly below the listener.&lt;/li&gt;
+@return {Boolean} true if the combination of channel mask and virtualization mode is supported, false
+    otherwise.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getSpeakerAngles : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-forceVirtualizationMode'>/**Forces the virtualizer effect to use the given processing mode.
+</span> The effect must be enabled for the forced mode to be applied.
+@param {Number} virtualizationMode one of {@link #VIRTUALIZATION_MODE_BINAURAL},
+     {@link #VIRTUALIZATION_MODE_TRANSAURAL} to force a particular processing mode, or
+     {@value #VIRTUALIZATION_MODE_AUTO} to stop forcing a mode.
+@return {Boolean} true if the processing mode is supported, and it is successfully set, or
+     forcing was successfully disabled, false otherwise.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+forceVirtualizationMode : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-getVirtualizationMode'>/**Return the virtualization mode being used, if any.
+</span>@return {Number} the virtualization mode being used.
+     If virtualization is not active, the virtualization mode will be
+     {@link #VIRTUALIZATION_MODE_OFF}. Otherwise the value will be
+     {@link #VIRTUALIZATION_MODE_BINAURAL} or {@link #VIRTUALIZATION_MODE_TRANSAURAL}.
+     Virtualization may not be active either because the effect is not enabled or
+     because the current output device is not compatible with this virtualization
+     implementation.
+@throws IllegalStateException
+@throws UnsupportedOperationException
+*/
+getVirtualizationMode : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-setParameterListener'>/**Registers an OnParameterChangeListener interface.
+</span>@param {Object {Virtualizer.OnParameterChangeListener}} listener OnParameterChangeListener interface registered
+*/
+setParameterListener : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-getProperties'>/**Gets the virtualizer properties. This method is useful when a snapshot of current
+</span> virtualizer settings must be saved by the application.
+@return {Object {android.media.audiofx.Virtualizer.Settings}} a Virtualizer.Settings object containing all current parameters values
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getProperties : function(  ) {},
+
+<span id='android-media-audiofx-Virtualizer-method-setProperties'>/**Sets the virtualizer properties. This method is useful when virtualizer settings have to
+</span> be applied from a previous backup.
+@param {Object {Virtualizer.Settings}} settings a Virtualizer.Settings object containing the properties to apply
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setProperties : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-speech-tts-TextToSpeechService'>/**@class android.speech.tts.TextToSpeechService
+</span>@extends android.app.Service
+
+ Abstract base class for TTS engine implementations. The following methods
+ need to be implemented:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #onIsLanguageAvailable}&lt;/li&gt;
+ &lt;li&gt;{@link #onLoadLanguage}&lt;/li&gt;
+ &lt;li&gt;{@link #onGetLanguage}&lt;/li&gt;
+ &lt;li&gt;{@link #onSynthesizeText}&lt;/li&gt;
+ &lt;li&gt;{@link #onStop}&lt;/li&gt;
+ &lt;/ul&gt;
+ The first three deal primarily with language management, and are used to
+ query the engine for it's support for a given language and indicate to it
+ that requests in a given language are imminent.
+
+ {@link #onSynthesizeText} is central to the engine implementation. The
+ implementation should synthesize text as per the request parameters and
+ return synthesized data via the supplied callback. This class and its helpers
+ will then consume that data, which might mean queuing it for playback or writing
+ it to a file or similar. All calls to this method will be on a single thread,
+ which will be different from the main thread of the service. Synthesis must be
+ synchronous which means the engine must NOT hold on to the callback or call any
+ methods on it after the method returns.
+
+ {@link #onStop} tells the engine that it should stop
+ all ongoing synthesis, if any. Any pending data from the current synthesis
+ will be discarded.
+
+ {@link #onGetLanguage} is not required as of JELLYBEAN_MR2 (API 18) and later, it is only
+ called on earlier versions of Android.
+
+ API Level 20 adds support for Voice objects. Voices are an abstraction that allow the TTS
+ service to expose multiple backends for a single locale. Each one of them can have a different
+ features set. In order to fully take advantage of voices, an engine should implement
+ the following methods:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #onGetVoices}()&lt;/li&gt;
+ &lt;li&gt;{@link #onIsValidVoiceName}(String)&lt;/li&gt;
+ &lt;li&gt;{@link #onLoadVoice}(String)&lt;/li&gt;
+ &lt;li&gt;{@link #onGetDefaultVoiceNameFor(String, String, String)}&lt;/li&gt;
+ &lt;/ul&gt;
+ The first three methods are siblings of the {@link #onGetLanguage},
+ {@link #onIsLanguageAvailable} and {@link #onLoadLanguage} methods. The last one,
+ {@link #onGetDefaultVoiceNameFor(String, String, String)} is a link between locale and voice
+ based methods. Since API level 21 {@link android.speech.tts.TextToSpeech#setLanguage} is implemented by
+ calling {@link android.speech.tts.TextToSpeech#setVoice} with the voice returned by
+ {@link #onGetDefaultVoiceNameFor(String, String, String)}.
+
+ If the client uses a voice instead of a locale, {@link android.speech.tts.SynthesisRequest} will contain the
+ requested voice name.
+
+ The default implementations of Voice-related methods implement them using the
+ pre-existing locale-based implementation.
+*/
+var TextToSpeechService = {
+
+<span id='android-speech-tts-TextToSpeechService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeechService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeechService-method-onGetVoices'>/**Queries the service for a set of supported voices.
+</span>
+ Can be called on multiple threads.
+
+ The default implementation tries to enumerate all available locales, pass them to
+ {@link #onIsLanguageAvailable(String, String, String)} and create Voice instances (using
+ the locale's BCP-47 language tag as the voice name) for the ones that are supported.
+ Note, that this implementation is suitable only for engines that don't have multiple voices
+ for a single locale. Also, this implementation won't work with Locales not listed in the
+ set returned by the {@link Locale#getAvailableLocales()} method.
+@return {Object {java.util.List}} A list of voices supported.
+*/
+onGetVoices : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeechService-method-onGetDefaultVoiceNameFor'>/**Return a name of the default voice for a given locale.
+</span>
+ This method provides a mapping between locales and available voices. This method is
+ used in {@link android.speech.tts.TextToSpeech#setLanguage}, which calls this method and then calls
+ {@link android.speech.tts.TextToSpeech#setVoice} with the voice returned by this method.
+
+ Also, it's used by {@link android.speech.tts.TextToSpeech#getDefaultVoice()} to find a default voice for
+ the default locale.
+@param {String} lang ISO-3 language code.
+@param {String} country ISO-3 country code. May be empty or null.
+@param {String} variant Language variant. May be empty or null.
+@return {String} A name of the default voice for a given locale.
+*/
+onGetDefaultVoiceNameFor : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeechService-method-onLoadVoice'>/**Notifies the engine that it should load a speech synthesis voice. There is no guarantee
+</span> that this method is always called before the voice is used for synthesis. It is merely
+ a hint to the engine that it will probably get some synthesis requests for this voice
+ at some point in the future.
+
+ Will be called only on synthesis thread.
+
+ The default implementation creates a Locale from the voice name (by interpreting the name as
+ a BCP-47 tag for the locale), and passes it to
+ {@link #onLoadLanguage(String, String, String)}.
+@param {String} voiceName Name of the voice.
+@return {Number} {@link TextToSpeech#ERROR} or {@link TextToSpeech#SUCCESS}.
+*/
+onLoadVoice : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeechService-method-onIsValidVoiceName'>/**Checks whether the engine supports a voice with a given name.
+</span>
+ Can be called on multiple threads.
+
+ The default implementation treats the voice name as a language tag, creating a Locale from
+ the voice name, and passes it to {@link #onIsLanguageAvailable(String, String, String)}.
+@param {String} voiceName Name of the voice.
+@return {Number} {@link TextToSpeech#ERROR} or {@link TextToSpeech#SUCCESS}.
+*/
+onIsValidVoiceName : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeechService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

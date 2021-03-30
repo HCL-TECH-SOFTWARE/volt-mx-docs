@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-KernelCpuThreadReader-FrequencyBucketCreator'>/**@class com.android.internal.os.KernelCpuThreadReader.FrequencyBucketCreator
+</span>@extends java.lang.Object
+
+ Quantizes a list of N frequencies into a list of M frequencies (where M&lt;=N)
+
+ &lt;p&gt;In order to reduce data sent from the device, we discard precise frequency information for
+ an approximation. This is done by putting groups of adjacent frequencies into the same
+ bucket, and then reporting that bucket under the minimum frequency in that bucket.
+
+ &lt;p&gt;Many devices have multiple core clusters. We do not want to report frequencies from
+ different clusters under the same bucket, so some complication arises.
+
+ &lt;p&gt;Buckets are allocated evenly across all core clusters, i.e. they all have the same number
+ of buckets regardless of how many frequencies they contain. This is done to reduce code
+ complexity, and in practice the number of frequencies doesn't vary too much between core
+ clusters.
+
+ &lt;p&gt;If the number of buckets is not a factor of the number of frequencies, the remainder of
+ the frequencies are placed into the last bucket.
+
+ &lt;p&gt;It is possible to have less buckets than asked for, so any calling code can't assume that
+ initializing with N buckets will use return N values. This happens in two scenarios:
+
+ &lt;ul&gt;
+   &lt;li&gt;There are less frequencies available than buckets asked for.
+   &lt;li&gt;There are less frequencies in a core cluster than buckets allocated to that core
+       cluster.
+ &lt;/ul&gt;
+*/
+var FrequencyBucketCreator = {
+
+<span id='com-android-internal-os-KernelCpuThreadReader-FrequencyBucketCreator-method-bucketValues'>/**Put an array of values into buckets. This takes a {@code long[]} and returns {@code
+</span> int[]} as everywhere this method is used will have to do the conversion anyway, so we
+ save time by doing it here instead
+@param {Object {long[]}} values the values to bucket
+@return {Number} the bucketed usage times
+*/
+bucketValues : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuThreadReader-FrequencyBucketCreator-method-bucketFrequencies'>/**Get the minimum frequency in each bucket
+</span>*/
+bucketFrequencies : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

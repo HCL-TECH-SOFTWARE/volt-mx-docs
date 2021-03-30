@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-webkit-WebChromeClient'>/**@class android.webkit.WebChromeClient
+</span>@extends java.lang.Object
+
+*/
+var WebChromeClient = {
+
+<span id='android-webkit-WebChromeClient-method-onProgressChanged'>/**Tell the host application the current progress of loading a page.
+</span>@param {Object {WebView}} view The WebView that initiated the callback.
+@param {Number} newProgress Current page loading progress, represented by
+                    an integer between 0 and 100.
+*/
+onProgressChanged : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onReceivedTitle'>/**Notify the host application of a change in the document title.
+</span>@param {Object {WebView}} view The WebView that initiated the callback.
+@param {String} title A String containing the new title of the document.
+*/
+onReceivedTitle : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onReceivedIcon'>/**Notify the host application of a new favicon for the current page.
+</span>@param {Object {WebView}} view The WebView that initiated the callback.
+@param {Object {Bitmap}} icon A Bitmap containing the favicon for the current page.
+*/
+onReceivedIcon : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onReceivedTouchIconUrl'>/**Notify the host application of the url for an apple-touch-icon.
+</span>@param {Object {WebView}} view The WebView that initiated the callback.
+@param {String} url The icon url.
+@param {Boolean} precomposed {@code true} if the url is for a precomposed touch icon.
+*/
+onReceivedTouchIconUrl : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onShowCustomView'>/**Notify the host application that the current page has entered full
+</span> screen mode. The host application must show the custom View which
+ contains the web contents &amp;mdash; video or other HTML content &amp;mdash;
+ in full screen mode. Also see &quot;Full screen support&quot; documentation on
+ {@link android.webkit.WebView}.
+@param {Object {View}} view is the View object to be shown.
+@param {Object {WebChromeClient.CustomViewCallback}} callback invoke this callback to request the page to exit
+ full screen mode.
+*/
+onShowCustomView : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onShowCustomView'>/**Notify the host application that the current page would
+</span> like to show a custom View in a particular orientation.
+@param {Object {View}} view is the View object to be shown.
+@param {Number} requestedOrientation An orientation constant as used in
+ {@link ActivityInfo#screenOrientation ActivityInfo.screenOrientation}.
+@param {Object {WebChromeClient.CustomViewCallback}} callback is the callback to be invoked if and when the view
+ is dismissed.
+@deprecated This method supports the obsolete plugin mechanism,
+ and will not be invoked in future
+*/
+onShowCustomView : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onHideCustomView'>/**Notify the host application that the current page has exited full
+</span> screen mode. The host application must hide the custom View, ie. the
+ View passed to {@link #onShowCustomView} when the content entered fullscreen.
+ Also see &quot;Full screen support&quot; documentation on {@link android.webkit.WebView}.
+*/
+onHideCustomView : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onCreateWindow'>/**Request the host application to create a new window. If the host
+</span> application chooses to honor this request, it should return {@code true} from
+ this method, create a new WebView to host the window, insert it into the
+ View system and send the supplied resultMsg message to its target with
+ the new WebView as an argument. If the host application chooses not to
+ honor the request, it should return {@code false} from this method. The default
+ implementation of this method does nothing and hence returns {@code false}.
+ &lt;p&gt;
+ Applications should typically not allow windows to be created when the
+ {@code isUserGesture} flag is false, as this may be an unwanted popup.
+ &lt;p&gt;
+ Applications should be careful how they display the new window: don't simply
+ overlay it over the existing WebView as this may mislead the user about which
+ site they are viewing. If your application displays the URL of the main page,
+ make sure to also display the URL of the new window in a similar fashion. If
+ your application does not display URLs, consider disallowing the creation of
+ new windows entirely.
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; There is no trustworthy way to tell which page
+ requested the new window: the request might originate from a third-party iframe
+ inside the WebView.
+@param {Object {WebView}} view The WebView from which the request for a new window
+             originated.
+@param {Boolean} isDialog {@code true} if the new window should be a dialog, rather than
+                 a full-size window.
+@param {Boolean} isUserGesture {@code true} if the request was initiated by a user gesture,
+                      such as the user clicking a link.
+@param {Object {Message}} resultMsg The message to send when once a new WebView has been
+                  created. resultMsg.obj is a
+                  {@link WebView.WebViewTransport} object. This should be
+                  used to transport the new WebView, by calling
+                  {@link WebView.WebViewTransport#setWebView(WebView)
+                  WebView.WebViewTransport.setWebView(WebView)}.
+@return {Boolean} This method should return {@code true} if the host application will
+         create a new window, in which case resultMsg should be sent to
+         its target. Otherwise, this method should return {@code false}. Returning
+         {@code false} from this method but also sending resultMsg will result in
+         undefined behavior.
+*/
+onCreateWindow : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onRequestFocus'>/**Request display and focus for this WebView. This may happen due to
+</span> another WebView opening a link in this WebView and requesting that this
+ WebView be displayed.
+@param {Object {WebView}} view The WebView that needs to be focused.
+*/
+onRequestFocus : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onCloseWindow'>/**Notify the host application to close the given WebView and remove it
+</span> from the view system if necessary. At this point, WebCore has stopped
+ any loading in this window and has removed any cross-scripting ability
+ in javascript.
+ &lt;p&gt;
+ As with {@link #onCreateWindow}, the application should ensure that any
+ URL or security indicator displayed is updated so that the user can tell
+ that the page they were interacting with has been closed.
+@param {Object {WebView}} window The WebView that needs to be closed.
+*/
+onCloseWindow : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onJsAlert'>/**Tell the client to display a javascript alert dialog.  If the client
+</span> returns {@code true}, WebView will assume that the client will handle the
+ dialog.  If the client returns {@code false}, it will continue execution.
+@param {Object {WebView}} view The WebView that initiated the callback.
+@param {String} url The url of the page requesting the dialog.
+@param {String} message Message to be displayed in the window.
+@param {Object {JsResult}} result A JsResult to confirm that the user hit enter.
+@return {Boolean} boolean Whether the client will handle the alert dialog.
+*/
+onJsAlert : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onJsConfirm'>/**Tell the client to display a confirm dialog to the user. If the client
+</span> returns {@code true}, WebView will assume that the client will handle the
+ confirm dialog and call the appropriate JsResult method. If the
+ client returns false, a default value of {@code false} will be returned to
+ javascript. The default behavior is to return {@code false}.
+@param {Object {WebView}} view The WebView that initiated the callback.
+@param {String} url The url of the page requesting the dialog.
+@param {String} message Message to be displayed in the window.
+@param {Object {JsResult}} result A JsResult used to send the user's response to
+               javascript.
+@return {Boolean} boolean Whether the client will handle the confirm dialog.
+*/
+onJsConfirm : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onJsPrompt'>/**Tell the client to display a prompt dialog to the user. If the client
+</span> returns {@code true}, WebView will assume that the client will handle the
+ prompt dialog and call the appropriate JsPromptResult method. If the
+ client returns false, a default value of {@code false} will be returned to to
+ javascript. The default behavior is to return {@code false}.
+@param {Object {WebView}} view The WebView that initiated the callback.
+@param {String} url The url of the page requesting the dialog.
+@param {String} message Message to be displayed in the window.
+@param {String} defaultValue The default value displayed in the prompt dialog.
+@param {Object {JsPromptResult}} result A JsPromptResult used to send the user's reponse to
+               javascript.
+@return {Boolean} boolean Whether the client will handle the prompt dialog.
+*/
+onJsPrompt : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onJsBeforeUnload'>/**Tell the client to display a dialog to confirm navigation away from the
+</span> current page. This is the result of the onbeforeunload javascript event.
+ If the client returns {@code true}, WebView will assume that the client will
+ handle the confirm dialog and call the appropriate JsResult method. If
+ the client returns {@code false}, a default value of {@code true} will be returned to
+ javascript to accept navigation away from the current page. The default
+ behavior is to return {@code false}. Setting the JsResult to {@code true} will navigate
+ away from the current page, {@code false} will cancel the navigation.
+@param {Object {WebView}} view The WebView that initiated the callback.
+@param {String} url The url of the page requesting the dialog.
+@param {String} message Message to be displayed in the window.
+@param {Object {JsResult}} result A JsResult used to send the user's response to
+               javascript.
+@return {Boolean} boolean Whether the client will handle the confirm dialog.
+*/
+onJsBeforeUnload : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onExceededDatabaseQuota'>/**Tell the client that the quota has been exceeded for the Web SQL Database
+</span> API for a particular origin and request a new quota. The client must
+ respond by invoking the
+ {@link android.webkit.WebStorage.QuotaUpdater#updateQuota(long) updateQuota(long)}
+ method of the supplied {@link android.webkit.WebStorage.QuotaUpdater} instance. The
+ minimum value that can be set for the new quota is the current quota. The
+ default implementation responds with the current quota, so the quota will
+ not be increased.
+@param {String} url The URL of the page that triggered the notification
+@param {String} databaseIdentifier The identifier of the database where the quota
+                           was exceeded.
+@param {Number} quota The quota for the origin, in bytes
+@param {Number} estimatedDatabaseSize The estimated size of the offending
+                              database, in bytes
+@param {Number} totalQuota The total quota for all origins, in bytes
+@param {Object {WebStorage.QuotaUpdater}} quotaUpdater An instance of {@link WebStorage.QuotaUpdater} which
+                     must be used to inform the WebView of the new quota.
+@deprecated This method is no longer called; WebView now uses the HTML5 / JavaScript Quota
+             Management API.
+*/
+onExceededDatabaseQuota : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onReachedMaxAppCacheSize'>/**Notify the host application that the Application Cache has reached the
+</span> maximum size. The client must respond by invoking the
+ {@link android.webkit.WebStorage.QuotaUpdater#updateQuota(long) updateQuota(long)}
+ method of the supplied {@link android.webkit.WebStorage.QuotaUpdater} instance. The
+ minimum value that can be set for the new quota is the current quota. The
+ default implementation responds with the current quota, so the quota will
+ not be increased.
+@param {Number} requiredStorage The amount of storage required by the Application
+                        Cache operation that triggered this notification,
+                        in bytes.
+@param {Number} quota the current maximum Application Cache size, in bytes
+@param {Object {WebStorage.QuotaUpdater}} quotaUpdater An instance of {@link WebStorage.QuotaUpdater} which
+                     must be used to inform the WebView of the new quota.
+@deprecated This method is no longer called; WebView now uses the HTML5 / JavaScript Quota
+             Management API.
+*/
+onReachedMaxAppCacheSize : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onGeolocationPermissionsShowPrompt'>/**Notify the host application that web content from the specified origin
+</span> is attempting to use the Geolocation API, but no permission state is
+ currently set for that origin. The host application should invoke the
+ specified callback with the desired permission state. See
+ {@link android.webkit.GeolocationPermissions} for details.
+
+ &lt;p&gt;Note that for applications targeting Android N and later SDKs
+ (API level &gt; {@link android.os.Build.VERSION_CODES#M})
+ this method is only called for requests originating from secure
+ origins such as https. On non-secure origins geolocation requests
+ are automatically denied.
+@param {String} origin The origin of the web content attempting to use the
+               Geolocation API.
+@param {Object {GeolocationPermissions.Callback}} callback The callback to use to set the permission state for the
+                 origin.
+*/
+onGeolocationPermissionsShowPrompt : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onGeolocationPermissionsHidePrompt'>/**Notify the host application that a request for Geolocation permissions,
+</span> made with a previous call to
+ {@link #onGeolocationPermissionsShowPrompt(String,GeolocationPermissions.Callback) onGeolocationPermissionsShowPrompt()}
+ has been canceled. Any related UI should therefore be hidden.
+*/
+onGeolocationPermissionsHidePrompt : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onPermissionRequest'>/**Notify the host application that web content is requesting permission to
+</span> access the specified resources and the permission currently isn't granted
+ or denied. The host application must invoke {@link android.webkit.PermissionRequest#grant(String[])}
+ or {@link android.webkit.PermissionRequest#deny()}.
+
+ If this method isn't overridden, the permission is denied.
+@param {Object {PermissionRequest}} request the PermissionRequest from current web content.
+*/
+onPermissionRequest : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onPermissionRequestCanceled'>/**Notify the host application that the given permission request
+</span> has been canceled. Any related UI should therefore be hidden.
+@param {Object {PermissionRequest}} request the PermissionRequest that needs be canceled.
+*/
+onPermissionRequestCanceled : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onJsTimeout'>/**Tell the client that a JavaScript execution timeout has occured. And the
+</span> client may decide whether or not to interrupt the execution. If the
+ client returns {@code true}, the JavaScript will be interrupted. If the client
+ returns {@code false}, the execution will continue. Note that in the case of
+ continuing execution, the timeout counter will be reset, and the callback
+ will continue to occur if the script does not finish at the next check
+ point.
+@return {Boolean} boolean Whether the JavaScript execution should be interrupted.
+@deprecated This method is no longer supported and will not be invoked.
+*/
+onJsTimeout : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onConsoleMessage'>/**Report a JavaScript error message to the host application. The ChromeClient
+</span> should override this to process the log message as they see fit.
+@param {String} message The error message to report.
+@param {Number} lineNumber The line number of the error.
+@param {String} sourceID The name of the source file that caused the error.
+@deprecated Use {@link #onConsoleMessage(ConsoleMessage) onConsoleMessage(ConsoleMessage)}
+      instead.
+*/
+onConsoleMessage : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onConsoleMessage'>/**Report a JavaScript console message to the host application. The ChromeClient
+</span> should override this to process the log message as they see fit.
+@param {Object {ConsoleMessage}} consoleMessage Object containing details of the console message.
+@return {Boolean} {@code true} if the message is handled by the client.
+*/
+onConsoleMessage : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-getDefaultVideoPoster'>/**When not playing, video elements are represented by a 'poster' image. The
+</span> image to use can be specified by the poster attribute of the video tag in
+ HTML. If the attribute is absent, then a default poster will be used. This
+ method allows the ChromeClient to provide that default image.
+@return {Object {android.graphics.Bitmap}} Bitmap The image to use as a default poster, or {@code null} if no such image is
+ available.
+*/
+getDefaultVideoPoster : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-getVideoLoadingProgressView'>/**Obtains a View to be displayed while buffering of full screen video is taking
+</span> place. The host application can override this method to provide a View
+ containing a spinner or similar.
+@return {Object {android.view.View}} View The View to be displayed whilst the video is loading.
+*/
+getVideoLoadingProgressView : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-getVisitedHistory'>/**Obtains a list of all visited history items, used for link coloring
+</span>*/
+getVisitedHistory : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-onShowFileChooser'>/**Tell the client to show a file chooser.
+</span>
+ This is called to handle HTML forms with 'file' input type, in response to the
+ user pressing the &quot;Select File&quot; button.
+ To cancel the request, call &lt;code&gt;filePathCallback.onReceiveValue(null)&lt;/code&gt; and
+ return {@code true}.
+@param {Object {WebView}} webView The WebView instance that is initiating the request.
+@param {Object {android.webkit.ValueCallback}} filePathCallback Invoke this callback to supply the list of paths to files to upload,
+                         or {@code null} to cancel. Must only be called if the
+                         {@link #onShowFileChooser} implementation returns {@code true}.
+@param {Object {WebChromeClient.FileChooserParams}} fileChooserParams Describes the mode of file chooser to be opened, and options to be
+                          used with it.
+@return {Boolean} {@code true} if filePathCallback will be invoked, {@code false} to use default
+         handling.
+@see FileChooserParams
+*/
+onShowFileChooser : function(  ) {},
+
+<span id='android-webkit-WebChromeClient-method-openFileChooser'>/**Tell the client to open a file chooser.
+</span>@param {Object {android.webkit.ValueCallback}} uploadFile A ValueCallback to set the URI of the file to upload.
+      onReceiveValue must be called to wake up the thread.a
+@param {String} acceptType The value of the 'accept' attribute of the input tag
+         associated with this file picker.
+@param {String} capture The value of the 'capture' attribute of the input tag
+         associated with this file picker.
+@deprecated Use {@link #onShowFileChooser} instead.
+@hide This method was not published in any SDK version.
+*/
+openFileChooser : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

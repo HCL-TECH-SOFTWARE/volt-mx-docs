@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-transition-TransitionManager'>/**@class android.transition.TransitionManager
+</span>@extends java.lang.Object
+
+ This class manages the set of transitions that fire when there is a
+ change of {@link android.transition.Scene}. To use the manager, add scenes along with
+ transition objects with calls to {@link #setandroid.transition.Transition(Scene, android.transition.Transition)}
+ or {@link #setTransition(android.transition.Scene, android.transition.Scene, Transition)}. Setting specific
+ transitions for scene changes is not required; by default, a Scene change
+ will use {@link android.transition.AutoTransition} to do something reasonable for most
+ situations. Specifying other transitions for particular scene changes is
+ only necessary if the application wants different transition behavior
+ in these situations.
+
+ &lt;p&gt;TransitionManagers can be declared in XML resource files inside the
+ &lt;code&gt;res/transition&lt;/code&gt; directory. TransitionManager resources consist of
+ the &lt;code&gt;transitionManager&lt;/code&gt;tag name, containing one or more
+ &lt;code&gt;transition&lt;/code&gt; tags, each of which describe the relationship of
+ that transition to the from/to scene information in that tag.
+ For example, here is a resource file that declares several scene
+ transitions:&lt;/p&gt;
+
+ {@sample development/samples/ApiDemos/res/transition/transitions_mgr.xml TransitionManager}
+
+ &lt;p&gt;For each of the &lt;code&gt;fromScene&lt;/code&gt; and &lt;code&gt;toScene&lt;/code&gt; attributes,
+ there is a reference to a standard XML layout file. This is equivalent to
+ creating a scene from a layout in code by calling
+ {@link android.transition.Scene#getandroid.transition.SceneForLayout(ViewGroup, int, Context)}. For the
+ &lt;code&gt;transition&lt;/code&gt; attribute, there is a reference to a resource
+ file in the &lt;code&gt;res/transition&lt;/code&gt; directory which describes that
+ transition.&lt;/p&gt;
+
+ Information on XML resource descriptions for transitions can be found for
+ {@link android.R.styleable#Transition}, {@link android.R.styleable#TransitionSet},
+ {@link android.R.styleable#TransitionTarget}, {@link android.R.styleable#Fade},
+ and {@link android.R.styleable#TransitionManager}.
+*/
+var TransitionManager = {
+
+<span id='android-transition-TransitionManager-method-setDefaultTransition'>/**Sets the transition to be used for any scene change for which no
+</span> other transition is explicitly set. The initial value is
+ an {@link android.transition.AutoTransition} instance.
+@param {Object {Transition}} transition The default transition to be used for scene changes.
+@hide pending later changes
+*/
+setDefaultTransition : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-getDefaultTransition'>/**Gets the current default transition. The initial value is an {@link android.transition.AutoTransition} instance.
+</span>@return {Object {android.transition.Transition}} The current default transition.
+@see #setDefaultTransition(Transition)
+@hide pending later changes
+*/
+getDefaultTransition : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-setTransition'>/**Sets a specific transition to occur when the given scene is entered.
+</span>@param {Object {Scene}} scene The scene which, when applied, will cause the given
+ transition to run.
+@param {Object {Transition}} transition The transition that will play when the given scene is
+ entered. A value of null will result in the default behavior of
+ using the default transition instead.
+*/
+setTransition : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-setTransition'>/**Sets a specific transition to occur when the given pair of scenes is
+</span> exited/entered.
+@param {Object {Scene}} fromScene The scene being exited when the given transition will
+ be run
+@param {Object {Scene}} toScene The scene being entered when the given transition will
+ be run
+@param {Object {Transition}} transition The transition that will play when the given scene is
+ entered. A value of null will result in the default behavior of
+ using the default transition instead.
+*/
+setTransition : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-getTransition'>/**Returns the Transition for the given scene being entered. The result
+</span> depends not only on the given scene, but also the scene which the
+ {@link android.transition.Scene#getandroid.transition.SceneRoot() sceneRoot} of the Scene is currently in.
+@param {Object {Scene}} scene The scene being entered
+@return {Object {android.transition.Transition}} The Transition to be used for the given scene change. If no
+ Transition was specified for this scene change, the default transition
+ will be used instead.
+@hide 
+*/
+getTransition : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-transitionTo'>/**Change to the given scene, using the
+</span> appropriate transition for this particular scene change
+ (as specified to the TransitionManager, or the default
+ if no such transition exists).
+@param {Object {Scene}} scene The Scene to change to
+*/
+transitionTo : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-go'>/**Convenience method to simply change to the given scene using
+</span> the default transition for TransitionManager.
+@param {Object {Scene}} scene The Scene to change to
+*/
+go : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-go'>/**Convenience method to simply change to the given scene using
+</span> the given transition.
+
+ &lt;p&gt;Passing in &lt;code&gt;null&lt;/code&gt; for the transition parameter will
+ result in the scene changing without any transition running, and is
+ equivalent to calling {@link android.transition.Scene#exit()} on the scene root's
+ current scene, followed by {@link android.transition.Scene#enter()} on the scene
+ specified by the &lt;code&gt;scene&lt;/code&gt; parameter.&lt;/p&gt;
+@param {Object {Scene}} scene The Scene to change to
+@param {Object {Transition}} transition The transition to use for this scene change. A
+ value of null causes the scene change to happen with no transition.
+*/
+go : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-beginDelayedTransition'>/**Convenience method to animate, using the default transition,
+</span> to a new scene defined by all changes within the given scene root between
+ calling this method and the next rendering frame.
+ Equivalent to calling {@link #beginDelayedandroid.transition.Transition(ViewGroup, android.transition.Transition)}
+ with a value of &lt;code&gt;null&lt;/code&gt; for the &lt;code&gt;transition&lt;/code&gt; parameter.
+@param {Object {ViewGroup}} sceneRoot The root of the View hierarchy to run the transition on.
+*/
+beginDelayedTransition : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-beginDelayedTransition'>/**Convenience method to animate to a new scene defined by all changes within
+</span> the given scene root between calling this method and the next rendering frame.
+ Calling this method causes TransitionManager to capture current values in the
+ scene root and then post a request to run a transition on the next frame.
+ At that time, the new values in the scene root will be captured and changes
+ will be animated. There is no need to create a Scene; it is implied by
+ changes which take place between calling this method and the next frame when
+ the transition begins.
+
+ &lt;p&gt;Calling this method several times before the next frame (for example, if
+ unrelated code also wants to make dynamic changes and run a transition on
+ the same scene root), only the first call will trigger capturing values
+ and exiting the current scene. Subsequent calls to the method with the
+ same scene root during the same frame will be ignored.&lt;/p&gt;
+
+ &lt;p&gt;Passing in &lt;code&gt;null&lt;/code&gt; for the transition parameter will
+ cause the TransitionManager to use its default transition.&lt;/p&gt;
+@param {Object {ViewGroup}} sceneRoot The root of the View hierarchy to run the transition on.
+@param {Object {Transition}} transition The transition to use for this change. A
+ value of null causes the TransitionManager to use the default transition.
+*/
+beginDelayedTransition : function(  ) {},
+
+<span id='android-transition-TransitionManager-method-endTransitions'>/**Ends all pending and ongoing transitions on the specified scene root.
+</span>@param {Object {ViewGroup}} sceneRoot The root of the View hierarchy to end transitions on.
+*/
+endTransitions : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Binder'>/**@class android.os.Binder
+</span> implements android.os.IBinder
+
+@extends java.lang.Object
+
+ Base class for a remotable object, the core part of a lightweight
+ remote procedure call mechanism defined by {@link android.os.IBinder}.
+ This class is an implementation of IBinder that provides
+ standard local implementation of such an object.
+
+ &lt;p&gt;Most developers will not implement this class directly, instead using the
+ &lt;a href=&quot;{@docRoot}guide/components/aidl.html&quot;&gt;aidl&lt;/a&gt; tool to describe the desired
+ interface, having it generate the appropriate Binder subclass.  You can,
+ however, derive directly from Binder to implement your own custom RPC
+ protocol or simply instantiate a raw Binder object directly to use as a
+ token that can be shared across processes.
+
+ &lt;p&gt;This class is just a basic IPC primitive; it has no impact on an application's
+ lifecycle, and is valid only as long as the process that created it continues to run.
+ To use this correctly, you must be doing so within the context of a top-level
+ application component (a {@link android.app.Service}, {@link android.app.Activity},
+ or {@link android.content.ContentProvider}) that lets the system know your process
+ should remain running.&lt;/p&gt;
+
+ &lt;p&gt;You must keep in mind the situations in which your process
+ could go away, and thus require that you later re-create a new Binder and re-attach
+ it when the process starts again.  For example, if you are using this within an
+ {@link android.app.Activity}, your activity's process may be killed any time the
+ activity is not started; if the activity is later re-created you will need to
+ create a new Binder and hand it back to the correct place again; you need to be
+ aware that your process may be started for another reason (for example to receive
+ a broadcast) that will not involve re-creating the activity and thus run its code
+ to create a new Binder.&lt;/p&gt;
+
+ @see IBinder
+*/
+var Binder = {
+
+<span id='android-os-Binder-property-CHECK_PARCEL_SIZE'>/**@hide */
+</span>CHECK_PARCEL_SIZE : &quot;false&quot;,
+<span id='android-os-Binder-property-LOG_RUNTIME_EXCEPTION'>/**@hide */
+</span>LOG_RUNTIME_EXCEPTION : &quot;null&quot;,
+<span id='android-os-Binder-property-UNSET_WORKSOURCE'>/** Value to represents that a calling work source is not set.
+</span>
+ This constatnt needs to be kept in sync with IPCThreadState::kUnsetWorkSource.
+
+ @hide
+*/
+UNSET_WORKSOURCE : &quot;-1&quot;,
+<span id='android-os-Binder-method-enableTracing'>/**Enable Binder IPC tracing.
+</span>@hide 
+*/
+enableTracing : function(  ) {},
+
+<span id='android-os-Binder-method-disableTracing'>/**Disable Binder IPC tracing.
+</span>@hide 
+*/
+disableTracing : function(  ) {},
+
+<span id='android-os-Binder-method-isTracingEnabled'>/**Check if binder transaction tracing is enabled.
+</span>@hide 
+*/
+isTracingEnabled : function(  ) {},
+
+<span id='android-os-Binder-method-getTransactionTracker'>/**Get the binder transaction tracker for this process.
+</span>@hide 
+*/
+getTransactionTracker : function(  ) {},
+
+<span id='android-os-Binder-method-setObserver'>/**Get the binder transaction observer for this process.
+</span>@hide 
+*/
+setObserver : function(  ) {},
+
+<span id='android-os-Binder-method-setWarnOnBlocking'>/**Warn if any blocking binder transactions are made out from this process.
+</span> This is typically only useful for the system process, to prevent it from
+ blocking on calls to external untrusted code. Instead, all outgoing calls
+ that require a result must be sent as {@link android.os.IBinder#FLAG_ONEWAY} calls
+ which deliver results through a callback interface.
+@hide 
+*/
+setWarnOnBlocking : function(  ) {},
+
+<span id='android-os-Binder-method-allowBlocking'>/**Allow blocking calls on the given interface, overriding the requested
+</span> value of {@link #setWarnOnBlocking}(boolean).
+ &lt;p&gt;
+ This should only be rarely called when you are &lt;em&gt;absolutely sure&lt;/em&gt;
+ the remote interface is a built-in system component that can never be
+ upgraded. In particular, this &lt;em&gt;must never&lt;/em&gt; be called for
+ interfaces hosted by package that could be upgraded or replaced,
+ otherwise you risk system instability if that remote interface wedges.
+@hide 
+*/
+allowBlocking : function(  ) {},
+
+<span id='android-os-Binder-method-defaultBlocking'>/**Reset the given interface back to the default blocking behavior,
+</span> reverting any changes made by {@link #allowBlocking}(IBinder).
+@hide 
+*/
+defaultBlocking : function(  ) {},
+
+<span id='android-os-Binder-method-copyAllowBlocking'>/**Inherit the current {@link #allowBlocking}(IBinder) value from one given
+</span> interface to another.
+@hide 
+*/
+copyAllowBlocking : function(  ) {},
+
+<span id='android-os-Binder-method-getCallingPid'>/**Return the ID of the process that sent you the current transaction
+</span> that is being processed.  This pid can be used with higher-level
+ system services to determine its identity and check permissions.
+ If the current thread is not currently executing an incoming transaction,
+ then its own pid is returned.
+*/
+getCallingPid : function(  ) {},
+
+<span id='android-os-Binder-method-getCallingUid'>/**Return the Linux uid assigned to the process that sent you the
+</span> current transaction that is being processed.  This uid can be used with
+ higher-level system services to determine its identity and check
+ permissions.  If the current thread is not currently executing an
+ incoming transaction, then its own uid is returned.
+*/
+getCallingUid : function(  ) {},
+
+<span id='android-os-Binder-method-isHandlingTransaction'>/**Returns {@code true} if the current thread is currently executing an
+</span> incoming transaction.
+@hide 
+*/
+isHandlingTransaction : function(  ) {},
+
+<span id='android-os-Binder-method-getCallingUidOrThrow'>/**Return the Linux uid assigned to the process that sent the transaction
+</span> currently being processed.
+@throws IllegalStateException if the current thread is not currently
+        executing an incoming transaction.
+*/
+getCallingUidOrThrow : function(  ) {},
+
+<span id='android-os-Binder-method-getCallingUserHandle'>/**Return the UserHandle assigned to the process that sent you the
+</span> current transaction that is being processed.  This is the user
+ of the caller.  It is distinct from {@link #getCallingUid}() in that a
+ particular user will have multiple distinct apps running under it each
+ with their own uid.  If the current thread is not currently executing an
+ incoming transaction, then its own UserHandle is returned.
+*/
+getCallingUserHandle : function(  ) {},
+
+<span id='android-os-Binder-method-clearCallingIdentity'>/**Reset the identity of the incoming IPC on the current thread.  This can
+</span> be useful if, while handling an incoming call, you will be calling
+ on interfaces of other objects that may be local to your process and
+ need to do permission checks on the calls coming into them (so they
+ will check the permission of your own local process, and not whatever
+ process originally called you).
+@return {Number} Returns an opaque token that can be used to restore the
+ original calling identity by passing it to
+ {@link #restoreCallingIdentity(long)}.
+@see #getCallingPid()
+@see #getCallingUid()
+@see #restoreCallingIdentity(long)
+*/
+clearCallingIdentity : function(  ) {},
+
+<span id='android-os-Binder-method-restoreCallingIdentity'>/**Restore the identity of the incoming IPC on the current thread
+</span> back to a previously identity that was returned by {@link #clearCallingIdentity}.
+@param {Number} token The opaque token that was previously returned by
+ {@link #clearCallingIdentity}.
+@see #clearCallingIdentity
+*/
+restoreCallingIdentity : function(  ) {},
+
+<span id='android-os-Binder-method-withCleanCallingIdentity'>/**Convenience method for running the provided action enclosed in
+</span> {@link #clearCallingIdentity}/{@link #restoreCallingIdentity}
+
+ Any exception thrown by the given action will be caught and rethrown after the call to
+ {@link #restoreCallingIdentity}
+@hide 
+*/
+withCleanCallingIdentity : function(  ) {},
+
+<span id='android-os-Binder-method-withCleanCallingIdentity'>/**Convenience method for running the provided action enclosed in
+</span> {@link #clearCallingIdentity}/{@link #restoreCallingIdentity} returning the result
+
+ Any exception thrown by the given action will be caught and rethrown after the call to
+ {@link #restoreCallingIdentity}
+@hide 
+*/
+withCleanCallingIdentity : function(  ) {},
+
+<span id='android-os-Binder-method-setThreadStrictModePolicy'>/**Sets the native thread-local StrictMode policy mask.
+</span>
+ &lt;p&gt;The StrictMode settings are kept in two places: a Java-level
+ threadlocal for libcore/Dalvik, and a native threadlocal (set
+ here) for propagation via Binder calls.  This is a little
+ unfortunate, but necessary to break otherwise more unfortunate
+ dependencies either of Dalvik on Android, or Android
+ native-only code on Dalvik.
+@see StrictMode
+@hide 
+*/
+setThreadStrictModePolicy : function(  ) {},
+
+<span id='android-os-Binder-method-getThreadStrictModePolicy'>/**Gets the current native thread-local StrictMode policy mask.
+</span>@see #setThreadStrictModePolicy
+@hide 
+*/
+getThreadStrictModePolicy : function(  ) {},
+
+<span id='android-os-Binder-method-setCallingWorkSourceUid'>/**Sets the work source for this thread.
+</span>
+ &lt;p&gt;All the following binder calls on this thread will use the provided work source. If this
+ is called during an on-going binder transaction, all the following binder calls will use the
+ work source until the end of the transaction.
+
+ &lt;p&gt;The concept of worksource is similar to {@link android.os.WorkSource}. However, for performance
+ reasons, we only support one UID. This UID represents the original user responsible for the
+ binder calls.
+
+ &lt;p&gt;{@link android.os.Binder#restoreCallingWorkSource(long)} must always be called after setting the
+ worksource.
+
+ &lt;p&gt;A typical use case would be
+ &lt;pre&gt;
+ long token = Binder.setCallingWorkSourceUid(uid);
+ try {
+   // Call an API.
+ } finally {
+   Binder.restoreCallingWorkSource(token);
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;The work source will be propagated for future outgoing binder transactions
+ executed on this thread.
+@param {Number} workSource The original UID responsible for the binder call.
+@return {Number} token to restore original work source.
+*/
+setCallingWorkSourceUid : function(  ) {},
+
+<span id='android-os-Binder-method-getCallingWorkSourceUid'>/**Returns the work source set by the caller.
+</span>
+ Unlike {@link android.os.Binder#getCallingUid()}, this result of this method cannot be trusted. The
+ caller can set the value to whatever they want. Only use this value if you trust the calling
+ uid.
+@return {Number} The original UID responsible for the binder transaction.
+*/
+getCallingWorkSourceUid : function(  ) {},
+
+<span id='android-os-Binder-method-clearCallingWorkSource'>/**Clears the work source on this thread.
+</span>
+ &lt;p&gt;The work source will be propagated for future outgoing binder transactions
+ executed on this thread.
+
+ &lt;p&gt;{@link android.os.Binder#restoreCallingWorkSource(long)} must always be called after clearing the
+ worksource.
+
+ &lt;p&gt;A typical use case would be
+ &lt;pre&gt;
+ long token = Binder.clearCallingWorkSource();
+ try {
+   // Call an API.
+ } finally {
+   Binder.restoreCallingWorkSource(token);
+ }
+ &lt;/pre&gt;
+@return {Number} token to restore original work source.
+*/
+clearCallingWorkSource : function(  ) {},
+
+<span id='android-os-Binder-method-restoreCallingWorkSource'>/**Restores the work source on this thread using a token returned by
+</span> {@link #setCallingWorkSourceUid(int) or {@link clearCallingWorkSource}().
+
+ &lt;p&gt;A typical use case would be
+ &lt;pre&gt;
+ long token = Binder.setCallingWorkSourceUid(uid);
+ try {
+   // Call an API.
+ } finally {
+   Binder.restoreCallingWorkSource(token);
+ }
+ &lt;/pre&gt;
+*/
+restoreCallingWorkSource : function(  ) {},
+
+<span id='android-os-Binder-method-flushPendingCommands'>/**Flush any Binder commands pending in the current thread to the kernel
+</span> driver.  This can be
+ useful to call before performing an operation that may block for a long
+ time, to ensure that any pending object references have been released
+ in order to prevent the process from holding on to objects longer than
+ it needs to.
+*/
+flushPendingCommands : function(  ) {},
+
+<span id='android-os-Binder-method-joinThreadPool'>/**Add the calling thread to the IPC thread pool.  This function does
+</span> not return until the current process is exiting.
+*/
+joinThreadPool : function(  ) {},
+
+<span id='android-os-Binder-method-isProxy'>/**Returns true if the specified interface is a proxy.
+</span>@hide 
+*/
+isProxy : function(  ) {},
+
+<span id='android-os-Binder-method-blockUntilThreadAvailable'>/**Call blocks until the number of executing binder threads is less
+</span> than the maximum number of binder threads allowed for this process.
+@hide 
+*/
+blockUntilThreadAvailable : function(  ) {},
+
+<span id='android-os-Binder-method-attachInterface'>/**Convenience method for associating a specific interface with the Binder.
+</span> After calling, queryLocalInterface() will be implemented for you
+ to return the given owner IInterface when the corresponding
+ descriptor is requested.
+*/
+attachInterface : function(  ) {},
+
+<span id='android-os-Binder-method-getInterfaceDescriptor'>/**Default implementation returns an empty interface name.
+</span>*/
+getInterfaceDescriptor : function(  ) {},
+
+<span id='android-os-Binder-method-pingBinder'>/**Default implementation always returns true -- if you got here,
+</span> the object is alive.
+*/
+pingBinder : function(  ) {},
+
+<span id='android-os-Binder-method-isBinderAlive'>/**{@inheritDoc}
+</span>
+ Note that if you're calling on a local binder, this always returns true
+ because your process is alive if you're calling it.
+*/
+isBinderAlive : function(  ) {},
+
+<span id='android-os-Binder-method-queryLocalInterface'>/**Use information supplied to attachInterface() to return the
+</span> associated IInterface if it matches the requested
+ descriptor.
+*/
+queryLocalInterface : function(  ) {},
+
+<span id='android-os-Binder-method-setDumpDisabled'>/**Control disabling of dump calls in this process.  This is used by the system
+</span> process watchdog to disable incoming dump calls while it has detecting the system
+ is hung and is reporting that back to the activity controller.  This is to
+ prevent the controller from getting hung up on bug reports at this point.
+@param {String} msg The message to show instead of the dump; if null, dumps are
+ re-enabled.
+@param msg The message to show instead of the dump; if null, dumps are
+ re-enabled.
+*/
+setDumpDisabled : function(  ) {},
+
+<span id='android-os-Binder-method-setProxyTransactListener'>/**Sets a listener for the transact method on the proxy-side.
+</span>
+ &lt;li&gt;The listener is global. Only fast operations should be done to avoid thread
+ contentions.
+ &lt;li&gt;The listener implementation needs to handle synchronization if needed. The methods on the
+ listener can be called concurrently.
+ &lt;li&gt;Listener set will be used for new transactions. On-going transaction will still use the
+ previous listener (if already set).
+ &lt;li&gt;The listener is called on the critical path of the binder transaction so be careful about
+ performance.
+ &lt;li&gt;Never execute another binder transaction inside the listener.
+@hide 
+*/
+setProxyTransactListener : function(  ) {},
+
+<span id='android-os-Binder-method-getTransactionName'>/**Resolves a transaction code to a human readable name.
+</span>
+ &lt;p&gt;Default implementation is a stub that returns null.
+ &lt;p&gt;AIDL generated code will return the original method name.
+@param {Number} transactionCode The code to resolve.
+@return {String} A human readable name.
+@hide 
+*/
+getTransactionName : function(  ) {},
+
+<span id='android-os-Binder-method-dump'>/**Implemented to call the more convenient version
+</span> {@link #dump(FileDescriptor, PrintWriter, String[])}.
+*/
+dump : function(  ) {},
+
+<span id='android-os-Binder-method-dumpAsync'>/**Like {@link #dump(FileDescriptor, String[])}, but ensures the target
+</span> executes asynchronously.
+*/
+dumpAsync : function(  ) {},
+
+<span id='android-os-Binder-method-shellCommand'>/**
+</span>@param {Object {FileDescriptor}} in The raw file descriptor that an input data stream can be read from.
+@param {Object {FileDescriptor}} out The raw file descriptor that normal command messages should be written to.
+@param {Object {FileDescriptor}} err The raw file descriptor that command error messages should be written to.
+@param {Object {java.lang.String[]}} args Command-line arguments.
+@param {Object {ShellCallback}} callback Callback through which to interact with the invoking shell.
+@param {Object {ResultReceiver}} resultReceiver Called when the command has finished executing, with the result code.
+@throws RemoteException
+@hide 
+*/
+shellCommand : function(  ) {},
+
+<span id='android-os-Binder-method-onShellCommand'>/**Handle a call to {@link #shellCommand}.  The default implementation simply prints
+</span> an error message.  Override and replace with your own.
+ &lt;p class=&quot;caution&quot;&gt;Note: no permission checking is done before calling this method; you must
+ apply any security checks as appropriate for the command being executed.
+ Consider using {@link android.os.ShellCommand} to help in the implementation.&lt;/p&gt;
+@hide 
+*/
+onShellCommand : function(  ) {},
+
+<span id='android-os-Binder-method-transact'>/**Default implementation rewinds the parcels and calls onTransact.  On
+</span> the remote side, transact calls into the binder to do the IPC.
+*/
+transact : function(  ) {},
+
+<span id='android-os-Binder-method-linkToDeath'>/**Local implementation is a no-op.
+</span>*/
+linkToDeath : function(  ) {},
+
+<span id='android-os-Binder-method-unlinkToDeath'>/**Local implementation is a no-op.
+</span>*/
+unlinkToDeath : function(  ) {},
+
+<span id='android-os-Binder-method-setWorkSourceProvider'>/**Sets the work source provider.
+</span>
+ &lt;li&gt;The callback is global. Only fast operations should be done to avoid thread
+ contentions.
+ &lt;li&gt;The callback implementation needs to handle synchronization if needed. The methods on the
+ callback can be called concurrently.
+ &lt;li&gt;The callback is called on the critical path of the binder transaction so be careful about
+ performance.
+ &lt;li&gt;Never execute another binder transaction inside the callback.
+@hide 
+*/
+setWorkSourceProvider : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

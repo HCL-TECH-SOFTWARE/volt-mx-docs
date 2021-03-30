@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiopolicy-AudioPolicy'>/**@class android.media.audiopolicy.AudioPolicy
+</span>@extends java.lang.Object
+
+ @hide
+ AudioPolicy provides access to the management of audio routing and audio focus.
+*/
+var AudioPolicy = {
+
+<span id='android-media-audiopolicy-AudioPolicy-property-POLICY_STATUS_UNREGISTERED'>/** The status of an audio policy that is valid but cannot be used because it is not registered.
+</span>*/
+POLICY_STATUS_UNREGISTERED : &quot;1&quot;,
+<span id='android-media-audiopolicy-AudioPolicy-property-POLICY_STATUS_REGISTERED'>/** The status of an audio policy that is valid, successfully registered and thus active.
+</span>*/
+POLICY_STATUS_REGISTERED : &quot;2&quot;,
+<span id='android-media-audiopolicy-AudioPolicy-property-FOCUS_POLICY_DUCKING_IN_APP'>/** The behavior of a policy with regards to audio focus where it relies on the application
+</span> to do the ducking, the is the legacy and default behavior.
+*/
+FOCUS_POLICY_DUCKING_IN_APP : &quot;0&quot;,
+<span id='android-media-audiopolicy-AudioPolicy-property-FOCUS_POLICY_DUCKING_DEFAULT'>/***/
+</span>FOCUS_POLICY_DUCKING_DEFAULT : &quot;0&quot;,
+<span id='android-media-audiopolicy-AudioPolicy-property-FOCUS_POLICY_DUCKING_IN_POLICY'>/** The behavior of a policy with regards to audio focus where it handles ducking instead
+</span> of the application losing focus and being signaled it can duck (as communicated by
+ {@link android.media.AudioManager#AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK}).
+ &lt;br&gt;Can only be used after having set a listener with
+ {@link android.media.audiopolicy.AudioPolicy#setandroid.media.audiopolicy.AudioPolicyFocusListener(android.media.audiopolicy.AudioPolicyFocusListener)}.
+*/
+FOCUS_POLICY_DUCKING_IN_POLICY : &quot;1&quot;,
+<span id='android-media-audiopolicy-AudioPolicy-method-getConfig'>/**
+</span>@hide 
+*/
+getConfig : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-hasFocusListener'>/**
+</span>@hide 
+*/
+hasFocusListener : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-isFocusPolicy'>/**
+</span>@hide 
+*/
+isFocusPolicy : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-isTestFocusPolicy'>/**
+</span>@hide 
+*/
+isTestFocusPolicy : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-isVolumeController'>/**
+</span>@hide 
+*/
+isVolumeController : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-getMediaProjection'>/**
+</span>@hide 
+*/
+getMediaProjection : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-attachMixes'>/**Update the current configuration of the set of audio mixes by adding new ones, while
+</span> keeping the policy registered.
+ This method can only be called on a registered policy.
+@param {Object {java.util.List}} mixes the list of {@link AudioMix} to add
+@return {Number} {@link AudioManager#SUCCESS} if the change was successful, {@link AudioManager#ERROR}
+    otherwise.
+*/
+attachMixes : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-detachMixes'>/**Update the current configuration of the set of audio mixes by removing some, while
+</span> keeping the policy registered.
+ This method can only be called on a registered policy.
+@param {Object {java.util.List}} mixes the list of {@link AudioMix} to remove
+@return {Number} {@link AudioManager#SUCCESS} if the change was successful, {@link AudioManager#ERROR}
+    otherwise.
+*/
+detachMixes : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-setUidDeviceAffinity'>/**
+</span>@param {Number} uid UID of the application to affect.
+@param {Object {java.util.List}} devices list of devices to which the audio stream of the application may be routed.
+@param devices list of devices to which the audio stream of the application may be routed.
+@return {Boolean} true if the change was successful, false otherwise.
+*/
+setUidDeviceAffinity : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-removeUidDeviceAffinity'>/**
+</span>@param {Number} uid UID of the application affected.
+@param uid UID of the application affected.
+@return {Boolean} true if the change was successful, false otherwise.
+*/
+removeUidDeviceAffinity : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-setRegistration'>/**
+</span>*/
+setRegistration : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-getFocusDuckingBehavior'>/**Returns the current behavior for audio focus-related ducking.
+</span>@return {Number} {@link #FOCUS_POLICY_DUCKING_IN_APP} or {@link #FOCUS_POLICY_DUCKING_IN_POLICY}
+*/
+getFocusDuckingBehavior : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-setFocusDuckingBehavior'>/**Sets the behavior for audio focus-related ducking.
+</span> There must be a focus listener if this policy is to handle ducking.
+@param {Number} behavior {@link #FOCUS_POLICY_DUCKING_IN_APP} or
+     {@link #FOCUS_POLICY_DUCKING_IN_POLICY}
+@return {Number} {@link AudioManager#SUCCESS} or {@link AudioManager#ERROR} (for instance if there
+     is already an audio policy that handles ducking).
+@throws IllegalArgumentException
+@throws IllegalStateException
+*/
+setFocusDuckingBehavior : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-createAudioRecordSink'>/**Create an {@link AudioRecord} instance that is associated with the given {@link android.media.audiopolicy.AudioMix}.
+</span> Audio buffers recorded through the created instance will contain the mix of the audio
+ streams that fed the given mixer.
+@param {Object {AudioMix}} mix a non-null {@link AudioMix} instance whose routing flags was defined with
+     {@link AudioMix#ROUTE_FLAG_LOOP_BACK}, previously added to this policy.
+@return {Object {android.media.AudioRecord}} a new {@link AudioRecord} instance whose data format is the one defined in the
+     {@link AudioMix}, or null if this policy was not successfully registered
+     with {@link AudioManager#registerAudioPolicy(AudioPolicy)}.
+@throws IllegalArgumentException
+*/
+createAudioRecordSink : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-createAudioTrackSource'>/**Create an {@link AudioTrack} instance that is associated with the given {@link android.media.audiopolicy.AudioMix}.
+</span> Audio buffers played through the created instance will be sent to the given mix
+ to be recorded through the recording APIs.
+@param {Object {AudioMix}} mix a non-null {@link AudioMix} instance whose routing flags was defined with
+     {@link AudioMix#ROUTE_FLAG_LOOP_BACK}, previously added to this policy.
+@return {Object {android.media.AudioTrack}} a new {@link AudioTrack} instance whose data format is the one defined in the
+     {@link AudioMix}, or null if this policy was not successfully registered
+     with {@link AudioManager#registerAudioPolicy(AudioPolicy)}.
+@throws IllegalArgumentException
+*/
+createAudioTrackSource : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-invalidateCaptorsAndInjectors'>/**
+</span>@hide 
+*/
+invalidateCaptorsAndInjectors : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-getStatus'>/**
+</span>*/
+getStatus : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-cb'>/**
+</span>@hide 
+*/
+cb : function(  ) {},
+
+<span id='android-media-audiopolicy-AudioPolicy-method-toLogFriendlyString'>/**
+</span>*/
+toLogFriendlyString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

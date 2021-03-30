@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ike-ikev2-ChildSessionStateMachine'>/**@class com.android.ike.ikev2.ChildSessionStateMachine
+</span>@extends com.android.internal.util.StateMachine
+
+ ChildSessionStateMachine tracks states and manages exchanges of this Child Session.
+
+ &lt;p&gt;ChildSessionStateMachine has two types of states. One type are states where there is no
+ ongoing procedure affecting Child Session (non-procedure state), including Initial, Closed, Idle
+ and Receiving. All other states are &quot;procedure&quot; states which are named as follows:
+
+ &lt;pre&gt;
+ State Name = [Procedure Type] + [Exchange Initiator] + [Exchange Type].
+ - An IKE procedure consists of one or two IKE exchanges:
+      Procedure Type = {CreateChild | DeleteChild | Info | RekeyChild | SimulRekeyChild}.
+ - Exchange Initiator indicates whether local or remote peer is the exchange initiator:
+      Exchange Initiator = {Local | Remote}
+ - Exchange type defines the function of this exchange.
+      Exchange Type = {Create | Delete}
+ &lt;/pre&gt;
+*/
+var ChildSessionStateMachine = {
+
+<span id='com-android-ike-ikev2-ChildSessionStateMachine-method-handleFirstChildExchange'>/**Receive requesting and responding payloads for negotiating first Child SA.
+</span>
+ &lt;p&gt;This method is called synchronously from IkeStateMachine. It proxies the synchronous call
+ as an asynchronous job to the ChildStateMachine handler.
+@param {Object {java.util.List}} reqPayloads SA negotiation related payloads in IKE_AUTH request.
+@param {Object {java.util.List}} respPayloads SA negotiation related payloads in IKE_AUTH response.
+@param {Object {IkeSessionStateMachine.IChildSessionCallback}} callback callback for notifying IkeSessionStateMachine the negotiation result.
+*/
+handleFirstChildExchange : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

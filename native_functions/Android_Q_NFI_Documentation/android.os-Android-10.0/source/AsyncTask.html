@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-AsyncTask'>/**@class android.os.AsyncTask
+</span>@extends java.lang.Object
+
+ &lt;p&gt;AsyncTask enables proper and easy use of the UI thread. This class allows you
+ to perform background operations and publish results on the UI thread without
+ having to manipulate threads and/or handlers.&lt;/p&gt;
+
+ &lt;p&gt;AsyncTask is designed to be a helper class around {@link Thread} and {@link android.os.Handler}
+ and does not constitute a generic threading framework. AsyncTasks should ideally be
+ used for short operations (a few seconds at the most.) If you need to keep threads
+ running for long periods of time, it is highly recommended you use the various APIs
+ provided by the &lt;code&gt;java.util.concurrent&lt;/code&gt; package such as {@link Executor},
+ {@link ThreadPoolExecutor} and {@link FutureTask}.&lt;/p&gt;
+
+ &lt;p&gt;An asynchronous task is defined by a computation that runs on a background thread and
+ whose result is published on the UI thread. An asynchronous task is defined by 3 generic
+ types, called &lt;code&gt;Params&lt;/code&gt;, &lt;code&gt;Progress&lt;/code&gt; and &lt;code&gt;Result&lt;/code&gt;,
+ and 4 steps, called &lt;code&gt;onPreExecute&lt;/code&gt;, &lt;code&gt;doInBackground&lt;/code&gt;,
+ &lt;code&gt;onProgressUpdate&lt;/code&gt; and &lt;code&gt;onPostExecute&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using tasks and threads, read the
+ &lt;a href=&quot;{@docRoot}guide/components/processes-and-threads.html&quot;&gt;Processes and
+ Threads&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;h2&gt;Usage&lt;/h2&gt;
+ &lt;p&gt;AsyncTask must be subclassed to be used. The subclass will override at least
+ one method ({@link #doInBackground}), and most often will override a
+ second one ({@link #onPostExecute}.)&lt;/p&gt;
+
+ &lt;p&gt;Here is an example of subclassing:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ private class DownloadFilesTask extends AsyncTask&amp;lt;URL, Integer, Long&amp;gt; {
+     protected Long doInBackground(URL... urls) {
+         int count = urls.length;
+         long totalSize = 0;
+         for (int i = 0; i &amp;lt; count; i++) {
+             totalSize += Downloader.downloadFile(urls[i]);
+             publishProgress((int) ((i / (float) count) * 100));
+             // Escape early if cancel() is called
+             if (isCancelled()) break;
+         }
+         return totalSize;
+     }
+
+     protected void onProgressUpdate(Integer... progress) {
+         setProgressPercent(progress[0]);
+     }
+
+     protected void onPostExecute(Long result) {
+         showDialog(&quot;Downloaded &quot; + result + &quot; bytes&quot;);
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;Once created, a task is executed very simply:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ new DownloadFilesTask().execute(url1, url2, url3);
+ &lt;/pre&gt;
+
+ &lt;h2&gt;AsyncTask's generic types&lt;/h2&gt;
+ &lt;p&gt;The three types used by an asynchronous task are the following:&lt;/p&gt;
+ &lt;ol&gt;
+     &lt;li&gt;&lt;code&gt;Params&lt;/code&gt;, the type of the parameters sent to the task upon
+     execution.&lt;/li&gt;
+     &lt;li&gt;&lt;code&gt;Progress&lt;/code&gt;, the type of the progress units published during
+     the background computation.&lt;/li&gt;
+     &lt;li&gt;&lt;code&gt;Result&lt;/code&gt;, the type of the result of the background
+     computation.&lt;/li&gt;
+ &lt;/ol&gt;
+ &lt;p&gt;Not all types are always used by an asynchronous task. To mark a type as unused,
+ simply use the type {@link Void}:&lt;/p&gt;
+ &lt;pre&gt;
+ private class MyTask extends AsyncTask&amp;lt;Void, Void, Void&amp;gt; { ... }
+ &lt;/pre&gt;
+
+ &lt;h2&gt;The 4 steps&lt;/h2&gt;
+ &lt;p&gt;When an asynchronous task is executed, the task goes through 4 steps:&lt;/p&gt;
+ &lt;ol&gt;
+     &lt;li&gt;{@link #onPreExecute}(), invoked on the UI thread before the task
+     is executed. This step is normally used to setup the task, for instance by
+     showing a progress bar in the user interface.&lt;/li&gt;
+     &lt;li&gt;{@link #doInBackground}, invoked on the background thread
+     immediately after {@link #onPreExecute}() finishes executing. This step is used
+     to perform background computation that can take a long time. The parameters
+     of the asynchronous task are passed to this step. The result of the computation must
+     be returned by this step and will be passed back to the last step. This step
+     can also use {@link #publishProgress} to publish one or more units
+     of progress. These values are published on the UI thread, in the
+     {@link #onProgressUpdate} step.&lt;/li&gt;
+     &lt;li&gt;{@link #onProgressUpdate}, invoked on the UI thread after a
+     call to {@link #publishProgress}. The timing of the execution is
+     undefined. This method is used to display any form of progress in the user
+     interface while the background computation is still executing. For instance,
+     it can be used to animate a progress bar or show logs in a text field.&lt;/li&gt;
+     &lt;li&gt;{@link #onPostExecute}, invoked on the UI thread after the background
+     computation finishes. The result of the background computation is passed to
+     this step as a parameter.&lt;/li&gt;
+ &lt;/ol&gt;
+ 
+ &lt;h2&gt;Cancelling a task&lt;/h2&gt;
+ &lt;p&gt;A task can be cancelled at any time by invoking {@link #cancel}(boolean). Invoking
+ this method will cause subsequent calls to {@link #isCancelled}() to return true.
+ After invoking this method, {@link #onCancelled}(Object), instead of
+ {@link #onPostExecute}(Object) will be invoked after {@link #doInBackground(Object[])}
+ returns. To ensure that a task is cancelled as quickly as possible, you should always
+ check the return value of {@link #isCancelled}() periodically from
+ {@link #doInBackground(Object[])}, if possible (inside a loop for instance.)&lt;/p&gt;
+
+ &lt;h2&gt;Threading rules&lt;/h2&gt;
+ &lt;p&gt;There are a few threading rules that must be followed for this class to
+ work properly:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;The AsyncTask class must be loaded on the UI thread. This is done
+     automatically as of {@link android.os.Build.VERSION_CODES#JELLY_BEAN}.&lt;/li&gt;
+     &lt;li&gt;The task instance must be created on the UI thread.&lt;/li&gt;
+     &lt;li&gt;{@link #execute} must be invoked on the UI thread.&lt;/li&gt;
+     &lt;li&gt;Do not call {@link #onPreExecute}(), {@link #onPostExecute},
+     {@link #doInBackground}, {@link #onProgressUpdate} manually.&lt;/li&gt;
+     &lt;li&gt;The task can be executed only once (an exception will be thrown if
+     a second execution is attempted.)&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;h2&gt;Memory observability&lt;/h2&gt;
+ &lt;p&gt;AsyncTask guarantees that all callback calls are synchronized to ensure the following
+ without explicit synchronizations.&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;The memory effects of {@link #onPreExecute}, and anything else
+     executed before the call to {@link #execute}, including the construction
+     of the AsyncTask object, are visible to {@link #doInBackground}.
+     &lt;li&gt;The memory effects of {@link #doInBackground} are visible to
+     {@link #onPostExecute}.
+     &lt;li&gt;Any memory effects of {@link #doInBackground} preceding a call
+     to {@link #publishProgress} are visible to the corresponding
+     {@link #onProgressUpdate} call. (But {@link #doInBackground} continues to
+     run, and care needs to be taken that later updates in {@link #doInBackground}
+     do not interfere with an in-progress {@link #onProgressUpdate} call.)
+     &lt;li&gt;Any memory effects preceding a call to {@link #cancel} are visible
+     after a call to {@link #isCancelled} that returns true as a result, or
+     during and after a resulting call to {@link #onCancelled}.
+ &lt;/ul&gt;
+
+ &lt;h2&gt;Order of execution&lt;/h2&gt;
+ &lt;p&gt;When first introduced, AsyncTasks were executed serially on a single background
+ thread. Starting with {@link android.os.Build.VERSION_CODES#DONUT}, this was changed
+ to a pool of threads allowing multiple tasks to operate in parallel. Starting with
+ {@link android.os.Build.VERSION_CODES#HONEYCOMB}, tasks are executed on a single
+ thread to avoid common application errors caused by parallel execution.&lt;/p&gt;
+ &lt;p&gt;If you truly want parallel execution, you can invoke
+ {@link #executeOnExecutor(java.util.concurrent.Executor, Object[])} with
+ {@link #THREAD_POOL_EXECUTOR}.&lt;/p&gt;
+*/
+var AsyncTask = {
+
+<span id='android-os-AsyncTask-property-THREAD_POOL_EXECUTOR'>/** An {@link Executor} that can be used to execute tasks in parallel.
+</span>*/
+THREAD_POOL_EXECUTOR : &quot;null&quot;,
+<span id='android-os-AsyncTask-property-SERIAL_EXECUTOR'>/** An {@link Executor} that executes tasks one at a time in serial
+</span> order.  This serialization is global to a particular process.
+*/
+SERIAL_EXECUTOR : &quot;null&quot;,
+<span id='android-os-AsyncTask-method-setDefaultExecutor'>/**
+</span>@hide 
+*/
+setDefaultExecutor : function(  ) {},
+
+<span id='android-os-AsyncTask-method-getStatus'>/**Returns the current status of this task.
+</span>@return {Object {android.os.AsyncTask.Status}} The current status.
+*/
+getStatus : function(  ) {},
+
+<span id='android-os-AsyncTask-method-isCancelled'>/**Returns &lt;tt&gt;true&lt;/tt&gt; if this task was cancelled before it completed
+</span> normally. If you are calling {@link #cancel}(boolean) on the task,
+ the value returned by this method should be checked periodically from
+ {@link #doInBackground(Object[])} to end the task as soon as possible.
+@return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if task was cancelled before it completed
+@see #cancel(boolean)
+*/
+isCancelled : function(  ) {},
+
+<span id='android-os-AsyncTask-method-cancel'>/**&lt;p&gt;Attempts to cancel execution of this task.  This attempt will
+</span> fail if the task has already completed, already been cancelled,
+ or could not be cancelled for some other reason. If successful,
+ and this task has not started when &lt;tt&gt;cancel&lt;/tt&gt; is called,
+ this task should never run. If the task has already started,
+ then the &lt;tt&gt;mayInterruptIfRunning&lt;/tt&gt; parameter determines
+ whether the thread executing this task should be interrupted in
+ an attempt to stop the task.&lt;/p&gt;
+ 
+ &lt;p&gt;Calling this method will result in {@link #onCancelled}(Object) being
+ invoked on the UI thread after {@link #doInBackground(Object[])} returns.
+ Calling this method guarantees that onPostExecute(Object) is never
+ subsequently invoked, even if &lt;tt&gt;cancel&lt;/tt&gt; returns false, but
+ {@link #onPostExecute} has not yet run.  To finish the
+ task as early as possible, check {@link #isCancelled}() periodically from
+ {@link #doInBackground(Object[])}.&lt;/p&gt;
+
+ &lt;p&gt;This only requests cancellation. It never waits for a running
+ background task to terminate, even if &lt;tt&gt;mayInterruptIfRunning&lt;/tt&gt; is
+ true.&lt;/p&gt;
+@param {Boolean} mayInterruptIfRunning &lt;tt&gt;true&lt;/tt&gt; if the thread executing this
+        task should be interrupted; otherwise, in-progress tasks are allowed
+        to complete.
+@return {Boolean} &lt;tt&gt;false&lt;/tt&gt; if the task could not be cancelled,
+         typically because it has already completed normally;
+         &lt;tt&gt;true&lt;/tt&gt; otherwise
+@see #isCancelled()
+@see #onCancelled(Object)
+*/
+cancel : function(  ) {},
+
+<span id='android-os-AsyncTask-method-get'>/**Waits if necessary for the computation to complete, and then
+</span> retrieves its result.
+@return {Object {java.lang.Object}} The computed result.
+@throws CancellationException If the computation was cancelled.
+@throws ExecutionException If the computation threw an exception.
+@throws InterruptedException If the current thread was interrupted
+         while waiting.
+*/
+get : function(  ) {},
+
+<span id='android-os-AsyncTask-method-get'>/**Waits if necessary for at most the given time for the computation
+</span> to complete, and then retrieves its result.
+@param {Number} timeout Time to wait before cancelling the operation.
+@param {Object {TimeUnit}} unit The time unit for the timeout.
+@return {Object {java.lang.Object}} The computed result.
+@throws CancellationException If the computation was cancelled.
+@throws ExecutionException If the computation threw an exception.
+@throws InterruptedException If the current thread was interrupted
+         while waiting.
+@throws TimeoutException If the wait timed out.
+*/
+get : function(  ) {},
+
+<span id='android-os-AsyncTask-method-execute'>/**Executes the task with the specified parameters. The task returns
+</span> itself (this) so that the caller can keep a reference to it.
+ 
+ &lt;p&gt;Note: this function schedules the task on a queue for a single background
+ thread or pool of threads depending on the platform version.  When first
+ introduced, AsyncTasks were executed serially on a single background thread.
+ Starting with {@link android.os.Build.VERSION_CODES#DONUT}, this was changed
+ to a pool of threads allowing multiple tasks to operate in parallel. Starting
+ {@link android.os.Build.VERSION_CODES#HONEYCOMB}, tasks are back to being
+ executed on a single thread to avoid common application errors caused
+ by parallel execution.  If you truly want parallel execution, you can use
+ the {@link #executeOnExecutor} version of this method
+ with {@link #THREAD_POOL_EXECUTOR}; however, see commentary there for warnings
+ on its use.
+
+ &lt;p&gt;This method must be invoked on the UI thread.
+@param {Object {java.lang.Object[]}} params The parameters of the task.
+@return {Object {android.os.AsyncTask}} This instance of AsyncTask.
+@throws IllegalStateException If {@link #getStatus()} returns either
+         {@link AsyncTask.Status#RUNNING} or {@link AsyncTask.Status#FINISHED}.
+@see #executeOnExecutor(java.util.concurrent.Executor, Object[])
+@see #execute(Runnable)
+*/
+execute : function(  ) {},
+
+<span id='android-os-AsyncTask-method-executeOnExecutor'>/**Executes the task with the specified parameters. The task returns
+</span> itself (this) so that the caller can keep a reference to it.
+ 
+ &lt;p&gt;This method is typically used with {@link #THREAD_POOL_EXECUTOR} to
+ allow multiple tasks to run in parallel on a pool of threads managed by
+ AsyncTask, however you can also use your own {@link Executor} for custom
+ behavior.
+ 
+ &lt;p&gt;&lt;em&gt;Warning:&lt;/em&gt; Allowing multiple tasks to run in parallel from
+ a thread pool is generally &lt;em&gt;not&lt;/em&gt; what one wants, because the order
+ of their operation is not defined.  For example, if these tasks are used
+ to modify any state in common (such as writing a file due to a button click),
+ there are no guarantees on the order of the modifications.
+ Without careful work it is possible in rare cases for the newer version
+ of the data to be over-written by an older one, leading to obscure data
+ loss and stability issues.  Such changes are best
+ executed in serial; to guarantee such work is serialized regardless of
+ platform version you can use this function with {@link #SERIAL_EXECUTOR}.
+
+ &lt;p&gt;This method must be invoked on the UI thread.
+@param {Object {Executor}} exec The executor to use.  {@link #THREAD_POOL_EXECUTOR} is available as a
+              convenient process-wide thread pool for tasks that are loosely coupled.
+@param {Object {java.lang.Object[]}} params The parameters of the task.
+@return {Object {android.os.AsyncTask}} This instance of AsyncTask.
+@throws IllegalStateException If {@link #getStatus()} returns either
+         {@link AsyncTask.Status#RUNNING} or {@link AsyncTask.Status#FINISHED}.
+@see #execute(Object[])
+*/
+executeOnExecutor : function(  ) {},
+
+<span id='android-os-AsyncTask-method-execute'>/**Convenience version of {@link #execute(Object...)} for use with
+</span> a simple Runnable object. See {@link #execute(Object[])} for more
+ information on the order of execution.
+@see #execute(Object[])
+@see #executeOnExecutor(java.util.concurrent.Executor, Object[])
+*/
+execute : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

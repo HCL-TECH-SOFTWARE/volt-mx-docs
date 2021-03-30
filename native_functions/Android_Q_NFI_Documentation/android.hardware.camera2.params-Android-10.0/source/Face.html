@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-params-Face'>/**@class android.hardware.camera2.params.Face
+</span>@extends java.lang.Object
+
+ Describes a face detected in an image.
+*/
+var Face = {
+
+<span id='android-hardware-camera2-params-Face-property-ID_UNSUPPORTED'>/** The ID is {@code -1} when the optional set of fields is unsupported.
+</span>
+ @see #getId()
+*/
+ID_UNSUPPORTED : &quot;-1&quot;,
+<span id='android-hardware-camera2-params-Face-property-SCORE_MIN'>/** The minimum possible value for the confidence level.
+</span>
+ @see #getScore()
+*/
+SCORE_MIN : &quot;1&quot;,
+<span id='android-hardware-camera2-params-Face-property-SCORE_MAX'>/** The maximum possible value for the confidence level.
+</span>
+ @see #getScore()
+*/
+SCORE_MAX : &quot;100&quot;,
+<span id='android-hardware-camera2-params-Face-method-getBounds'>/**Bounds of the face.
+</span>
+ &lt;p&gt;A rectangle relative to the sensor's
+ {@link CameraCharacteristics#SENSOR_INFO_ACTIVE_ARRAY_SIZE}, with (0,0)
+ representing the top-left corner of the active array rectangle.&lt;/p&gt;
+
+ &lt;p&gt;There is no constraints on the the Rectangle value other than it
+ is not-{@code null}.&lt;/p&gt;
+*/
+getBounds : function(  ) {},
+
+<span id='android-hardware-camera2-params-Face-method-getScore'>/**The confidence level for the detection of the face.
+</span>
+ &lt;p&gt;The range is {@value #SCORE_MIN} to {@value #SCORE_MAX}.
+ {@value #SCORE_MAX} is the highest confidence.&lt;/p&gt;
+
+ &lt;p&gt;Depending on the device, even very low-confidence faces may be
+ listed, so applications should filter out faces with low confidence,
+ depending on the use case. For a typical point-and-shoot camera
+ application that wishes to display rectangles around detected faces,
+ filtering out faces with confidence less than half of {@value #SCORE_MAX}
+ is recommended.&lt;/p&gt;
+@see #SCORE_MAX
+@see #SCORE_MIN
+*/
+getScore : function(  ) {},
+
+<span id='android-hardware-camera2-params-Face-method-getId'>/**An unique id per face while the face is visible to the tracker.
+</span>
+ &lt;p&gt;
+ If the face leaves the field-of-view and comes back, it will get a new
+ id.&lt;/p&gt;
+
+ &lt;p&gt;This is an optional field, may not be supported on all devices.
+ If the id is {@value #ID_UNSUPPORTED} then the leftEyePosition, rightEyePosition, and
+ mouthPositions are guaranteed to be {@code null}. Otherwise, each of leftEyePosition,
+ rightEyePosition, and mouthPosition may be independently null or not-null. When devices
+ report the value of key {@link CaptureResult#STATISTICS_FACE_DETECT_MODE} as
+ {@link CameraMetadata#STATISTICS_FACE_DETECT_MODE_SIMPLE} in {@link CaptureResult},
+ the face id of each face is expected to be {@value #ID_UNSUPPORTED}.&lt;/p&gt;
+
+ &lt;p&gt;This value will either be {@value #ID_UNSUPPORTED} or
+ otherwise greater than {@code 0}.&lt;/p&gt;
+@see #ID_UNSUPPORTED
+*/
+getId : function(  ) {},
+
+<span id='android-hardware-camera2-params-Face-method-getLeftEyePosition'>/**The coordinates of the center of the left eye.
+</span>
+ &lt;p&gt;The coordinates are in
+ the same space as the ones for {@link #getBounds}. This is an
+ optional field, may not be supported on all devices. If not
+ supported, the value will always be set to null.
+ This value will  always be null only if {@link #getId}() returns
+ {@value #ID_UNSUPPORTED}.&lt;/p&gt;
+@return {Object {android.graphics.Point}} The left eye position, or {@code null} if unknown.
+*/
+getLeftEyePosition : function(  ) {},
+
+<span id='android-hardware-camera2-params-Face-method-getRightEyePosition'>/**The coordinates of the center of the right eye.
+</span>
+ &lt;p&gt;The coordinates are
+ in the same space as the ones for {@link #getBounds}.This is an
+ optional field, may not be supported on all devices. If not
+ supported, the value will always be set to null.
+ This value will  always be null only if {@link #getId}() returns
+ {@value #ID_UNSUPPORTED}.&lt;/p&gt;
+@return {Object {android.graphics.Point}} The right eye position, or {@code null} if unknown.
+*/
+getRightEyePosition : function(  ) {},
+
+<span id='android-hardware-camera2-params-Face-method-getMouthPosition'>/**The coordinates of the center of the mouth.
+</span>
+ &lt;p&gt;The coordinates are in
+ the same space as the ones for {@link #getBounds}. This is an optional
+ field, may not be supported on all devices. If not
+ supported, the value will always be set to null.
+ This value will  always be null only if {@link #getId}() returns
+ {@value #ID_UNSUPPORTED}.&lt;/p&gt;
+ &lt;/p&gt;
+@return {Object {android.graphics.Point}} The mouth position, or {@code null} if unknown.
+*/
+getMouthPosition : function(  ) {},
+
+<span id='android-hardware-camera2-params-Face-method-toString'>/**Represent the Face as a string for debugging purposes.
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

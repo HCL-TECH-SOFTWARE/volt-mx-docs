@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ex-camera2-utils-StateWaiter'>/**@class com.android.ex.camera2.utils.StateWaiter
+</span>@extends java.lang.Object
+
+ Block until a specific state change occurs.
+
+ &lt;p&gt;Provides wait calls that block until the next unobserved state of the
+ requested type arrives. Unobserved states are states that have occurred since
+ the last wait, or that will be received from the camera device in the
+ future.&lt;/p&gt;
+
+ &lt;p&gt;Thread interruptions are not supported; interrupting a thread that is either
+ waiting with {@link #waitForState} / {@link #waitForAnyOfStates} or is currently in
+ {@link com.android.ex.camera2.utils.StateChangeListener#onStateChanged} (provided by {@link #getListener}) will result in an
+ {@link UnsupportedOperationException} being raised on that thread.&lt;/p&gt;
+*/
+var StateWaiter = {
+
+<span id='com-android-ex-camera2-utils-StateWaiter-method-getListener'>/**
+</span>*/
+getListener : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-StateWaiter-method-waitForState'>/**Wait until the desired state is observed, checking all state
+</span> transitions since the last time a state was waited on.
+
+ &lt;p&gt;Any intermediate state transitions that is not {@code state} are ignored.&lt;/p&gt;
+
+ &lt;p&gt;Note: Only one waiter allowed at a time!&lt;/p&gt;
+@param {Number} state state to observe a transition to
+@param {Number} timeoutMs how long to wait in milliseconds
+@throws IllegalArgumentException if {@code state} was out of range
+@throws TimeoutRuntimeException if the desired state is not observed before timeout.
+@throws IllegalStateException if another thread is already waiting for a state transition
+*/
+waitForState : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-StateWaiter-method-waitForAnyOfStates'>/**Wait until the one of the desired {@code states} is observed, checking all
+</span> state transitions since the last time a state was waited on.
+
+ &lt;p&gt;Any intermediate state transitions that are not in {@code states} are ignored.&lt;/p&gt;
+
+ &lt;p&gt;Note: Only one waiter allowed at a time!&lt;/p&gt;
+@param {Object {java.util.Collection}} states Set of desired states to observe a transition to.
+@param {Number} timeoutMs how long to wait in milliseconds
+@return {Number} the state reached
+@throws IllegalArgumentException if {@code state} was out of range
+@throws TimeoutRuntimeException if none of the states is observed before timeout.
+@throws IllegalStateException if another thread is already waiting for a state transition
+*/
+waitForAnyOfStates : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-StateWaiter-method-getStateName'>/**Convert state integer to a String
+</span>*/
+getStateName : function(  ) {},
+
+<span id='com-android-ex-camera2-utils-StateWaiter-method-appendStateNames'>/**Append all states to string
+</span>*/
+appendStateNames : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

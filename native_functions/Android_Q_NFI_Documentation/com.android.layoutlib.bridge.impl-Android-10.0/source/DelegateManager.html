@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-layoutlib-bridge-impl-DelegateManager'>/**@class com.android.layoutlib.bridge.impl.DelegateManager
+</span>@extends java.lang.Object
+
+ Manages native delegates.
+
+ This is used in conjunction with layoublib_create: certain Android java classes are mere
+ wrappers around a heavily native based implementation, and we need a way to run these classes
+ in our Android Studio rendering framework without bringing all the native code from the Android
+ platform.
+
+ Thus we instruct layoutlib_create to modify the bytecode of these classes to replace their
+ native methods by &quot;delegate calls&quot;.
+
+ For example, a native method android.graphics.Matrix.init(...) will actually become
+ a call to android.graphics.Matrix_Delegate.init(...).
+
+ The Android java classes that use native code uses an int (Java side) to reference native
+ objects. This int is generally directly the pointer to the C structure counterpart.
+ Typically a creation method will return such an int, and then this int will be passed later
+ to a Java method to identify the C object to manipulate.
+
+ Since we cannot use the Java object reference as the int directly, DelegateManager manages the
+ int -&gt; Delegate class link.
+
+ Native methods usually always have the int as parameters. The first thing the delegate method
+ will do is call {@link #getDelegate}(long) to get the Java object matching the int.
+
+ Typical native init methods are returning a new int back to the Java class, so
+ {@link #addNewDelegate}(Object) does the same.
+
+ The JNI references are counted, so we do the same through a {@link WeakReference}. Because
+ the Java object needs to count as a reference (even though it only holds an int), we use the
+ following mechanism:
+
+ - {@link #addNewDelegate}(Object) and {@link #removeJavaReferenceFor}(long) adds and removes
+   the delegate to/from a set. This set holds the reference and prevents the GC from reclaiming
+   the delegate.
+
+ - {@link #addNewDelegate}(Object) also adds the delegate to a {@link SparseArray} that holds a
+   {@link WeakReference} to the delegate. This allows the delegate to be deleted automatically
+   when nothing references it. This means that any class that holds a delegate (except for the
+   Java main class) must not use the int but the Delegate class instead. The integers must
+   only be used in the API between the main Java class and the Delegate.
+
+ @param &lt;T&gt; the delegate class to manage
+*/
+var DelegateManager = {
+
+<span id='com-android-layoutlib-bridge-impl-DelegateManager-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-DelegateManager-method-getDelegate'>/**Returns the delegate from the given native int.
+</span> &lt;p&gt;
+ If the int is zero, then this will always return null.
+ &lt;p&gt;
+ If the int is non zero and the delegate is not found, this will throw an assert.
+@param {Number} native_object the native int.
+@return {Object {java.lang.Object}} the delegate or null if not found.
+*/
+getDelegate : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-DelegateManager-method-addNewDelegate'>/**Adds a delegate to the manager and returns the native int used to identify it.
+</span>@param {Object {Object}} newDelegate the delegate to add
+@return {Number} a unique native int to identify the delegate
+*/
+addNewDelegate : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-DelegateManager-method-removeJavaReferenceFor'>/**Removes the main reference on the given delegate.
+</span>@param {Number} native_object the native integer representing the delegate.
+*/
+removeJavaReferenceFor : function(  ) {},
+
+<span id='com-android-layoutlib-bridge-impl-DelegateManager-method-markAsNativeAllocation'>/**This method marks the given native_object as a native allocation of the passed referent.
+</span> This means that the lifecycle of the native_object can now be attached to the referent and
+ if the referent is disposed, we can safely dispose the delegate.
+ This method is called by the {@link NativeAllocationRegistry_Delegate} and allows the
+ DelegateManager to remove the strong reference to the delegate.
+*/
+markAsNativeAllocation : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

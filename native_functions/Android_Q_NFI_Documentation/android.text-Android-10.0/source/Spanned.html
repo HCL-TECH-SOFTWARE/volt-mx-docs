@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-Spanned'>/**@class android.text.Spanned
+</span> implements java.lang.CharSequence
+
+ This is the interface for text that has markup objects attached to
+ ranges of it.  Not all text classes have mutable markup or text;
+ see {@link android.text.Spannable} for mutable markup and {@link android.text.Editable} for
+ mutable text.
+*/
+var Spanned = {
+
+<span id='android-text-Spanned-property-SPAN_POINT_MARK_MASK'>/** Bitmask of bits that are relevent for controlling point/mark behavior
+</span> of spans.
+
+ MARK and POINT are conceptually located &lt;i&gt;between&lt;/i&gt; two adjacent characters.
+ A MARK is &quot;attached&quot; to the character before, while a POINT will stick to the character
+ after. The insertion cursor is conceptually located between the MARK and the POINT.
+
+ As a result, inserting a new character between a MARK and a POINT will leave the MARK
+ unchanged, while the POINT will be shifted, now located after the inserted character and
+ still glued to the same character after it.
+
+ Depending on whether the insertion happens at the beginning or the end of a span, the span
+ will hence be expanded to &lt;i&gt;include&lt;/i&gt; the new character (when the span is using a MARK at
+ its beginning or a POINT at its end) or it will be &lt;i&gt;excluded&lt;/i&gt;.
+
+ Note that &lt;i&gt;before&lt;/i&gt; and &lt;i&gt;after&lt;/i&gt; here refer to offsets in the String, which are
+ independent from the visual representation of the text (left-to-right or right-to-left).
+*/
+SPAN_POINT_MARK_MASK : &quot;51&quot;,
+<span id='android-text-Spanned-property-SPAN_MARK_MARK'>/** 0-length spans with type SPAN_MARK_MARK behave like text marks:
+</span> they remain at their original offset when text is inserted
+ at that offset. Conceptually, the text is added after the mark.
+*/
+SPAN_MARK_MARK : &quot;17&quot;,
+<span id='android-text-Spanned-property-SPAN_MARK_POINT'>/** SPAN_MARK_POINT is a synonym for {@link #SPAN_INCLUSIVE_INCLUSIVE}.
+</span>*/
+SPAN_MARK_POINT : &quot;18&quot;,
+<span id='android-text-Spanned-property-SPAN_POINT_MARK'>/** SPAN_POINT_MARK is a synonym for {@link #SPAN_EXCLUSIVE_EXCLUSIVE}.
+</span>*/
+SPAN_POINT_MARK : &quot;33&quot;,
+<span id='android-text-Spanned-property-SPAN_POINT_POINT'>/** 0-length spans with type SPAN_POINT_POINT behave like cursors:
+</span> they are pushed forward by the length of the insertion when text
+ is inserted at their offset.
+ The text is conceptually inserted before the point.
+*/
+SPAN_POINT_POINT : &quot;34&quot;,
+<span id='android-text-Spanned-property-SPAN_PARAGRAPH'>/** SPAN_PARAGRAPH behaves like SPAN_INCLUSIVE_EXCLUSIVE
+</span> (SPAN_MARK_MARK), except that if either end of the span is
+ at the end of the buffer, that end behaves like _POINT
+ instead (so SPAN_INCLUSIVE_INCLUSIVE if it starts in the
+ middle and ends at the end, or SPAN_EXCLUSIVE_INCLUSIVE
+ if it both starts and ends at the end).
+ &lt;p&gt;
+ Its endpoints must be the start or end of the buffer or
+ immediately after a \n character, and if the \n
+ that anchors it is deleted, the endpoint is pulled to the
+ next \n that follows in the buffer (or to the end of
+ the buffer). If a span with SPAN_PARAGRAPH flag is pasted
+ into another text and the paragraph boundary constraint
+ is not satisfied, the span is discarded.
+*/
+SPAN_PARAGRAPH : &quot;51&quot;,
+<span id='android-text-Spanned-property-SPAN_INCLUSIVE_EXCLUSIVE'>/** Non-0-length spans of type SPAN_INCLUSIVE_EXCLUSIVE expand
+</span> to include text inserted at their starting point but not at their
+ ending point.  When 0-length, they behave like marks.
+*/
+SPAN_INCLUSIVE_EXCLUSIVE : &quot;17&quot;,
+<span id='android-text-Spanned-property-SPAN_INCLUSIVE_INCLUSIVE'>/** Spans of type SPAN_INCLUSIVE_INCLUSIVE expand
+</span> to include text inserted at either their starting or ending point.
+*/
+SPAN_INCLUSIVE_INCLUSIVE : &quot;18&quot;,
+<span id='android-text-Spanned-property-SPAN_EXCLUSIVE_EXCLUSIVE'>/** Spans of type SPAN_EXCLUSIVE_EXCLUSIVE do not expand
+</span> to include text inserted at either their starting or ending point.
+ They can never have a length of 0 and are automatically removed
+ from the buffer if all the text they cover is removed.
+*/
+SPAN_EXCLUSIVE_EXCLUSIVE : &quot;33&quot;,
+<span id='android-text-Spanned-property-SPAN_EXCLUSIVE_INCLUSIVE'>/** Non-0-length spans of type SPAN_EXCLUSIVE_INCLUSIVE expand
+</span> to include text inserted at their ending point but not at their
+ starting point.  When 0-length, they behave like points.
+*/
+SPAN_EXCLUSIVE_INCLUSIVE : &quot;34&quot;,
+<span id='android-text-Spanned-property-SPAN_COMPOSING'>/** This flag is set on spans that are being used to apply temporary
+</span> styling information on the composing text of an input method, so that
+ they can be found and removed when the composing text is being
+ replaced.
+*/
+SPAN_COMPOSING : &quot;256&quot;,
+<span id='android-text-Spanned-property-SPAN_INTERMEDIATE'>/** This flag will be set for intermediate span changes, meaning there
+</span> is guaranteed to be another change following it.  Typically it is
+ used for {@link android.text.Selection} which automatically uses this with the first
+ offset it sets when updating the selection.
+*/
+SPAN_INTERMEDIATE : &quot;512&quot;,
+<span id='android-text-Spanned-property-SPAN_USER_SHIFT'>/** The bits numbered SPAN_USER_SHIFT and above are available
+</span> for callers to use to store scalar data associated with their
+ span object.
+*/
+SPAN_USER_SHIFT : &quot;24&quot;,
+<span id='android-text-Spanned-property-SPAN_USER'>/** The bits specified by the SPAN_USER bitfield are available
+</span> for callers to use to store scalar data associated with their
+ span object.
+*/
+SPAN_USER : &quot;-16777216&quot;,
+<span id='android-text-Spanned-property-SPAN_PRIORITY_SHIFT'>/** The bits numbered just above SPAN_PRIORITY_SHIFT determine the order
+</span> of change notifications -- higher numbers go first.  You probably
+ don't need to set this; it is used so that when text changes, the
+ text layout gets the chance to update itself before any other
+ callbacks can inquire about the layout of the text.
+*/
+SPAN_PRIORITY_SHIFT : &quot;16&quot;,
+<span id='android-text-Spanned-property-SPAN_PRIORITY'>/** The bits specified by the SPAN_PRIORITY bitmap determine the order
+</span> of change notifications -- higher numbers go first.  You probably
+ don't need to set this; it is used so that when text changes, the
+ text layout gets the chance to update itself before any other
+ callbacks can inquire about the layout of the text.
+*/
+SPAN_PRIORITY : &quot;16711680&quot;,
+<span id='android-text-Spanned-method-getSpans'>/**Return an array of the markup objects attached to the specified
+</span> slice of this CharSequence and whose type is the specified type
+ or a subclass of it.  Specify Object.class for the type if you
+ want all the objects regardless of type.
+*/
+getSpans : function(  ) {},
+
+<span id='android-text-Spanned-method-getSpanStart'>/**Return the beginning of the range of text to which the specified
+</span> markup object is attached, or -1 if the object is not attached.
+*/
+getSpanStart : function(  ) {},
+
+<span id='android-text-Spanned-method-getSpanEnd'>/**Return the end of the range of text to which the specified
+</span> markup object is attached, or -1 if the object is not attached.
+*/
+getSpanEnd : function(  ) {},
+
+<span id='android-text-Spanned-method-getSpanFlags'>/**Return the flags that were specified when {@link android.text.Spannable#setSpan} was
+</span> used to attach the specified markup object, or 0 if the specified
+ object has not been attached.
+*/
+getSpanFlags : function(  ) {},
+
+<span id='android-text-Spanned-method-nextSpanTransition'>/**Return the first offset greater than &lt;code&gt;start&lt;/code&gt; where a markup
+</span> object of class &lt;code&gt;type&lt;/code&gt; begins or ends, or &lt;code&gt;limit&lt;/code&gt;
+ if there are no starts or ends greater than &lt;code&gt;start&lt;/code&gt; but less
+ than &lt;code&gt;limit&lt;/code&gt;. Specify &lt;code&gt;null&lt;/code&gt; or Object.class for
+ the type if you want every transition regardless of type.
+*/
+nextSpanTransition : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

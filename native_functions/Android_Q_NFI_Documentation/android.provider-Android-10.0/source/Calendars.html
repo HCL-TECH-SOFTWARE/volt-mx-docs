@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-CalendarContract-Calendars'>/**@class android.provider.CalendarContract.Calendars
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.CalendarContract.SyncColumns
+
+ implements android.provider.CalendarContract.CalendarColumns
+
+@extends java.lang.Object
+
+ Constants and helpers for the Calendars table, which contains details for
+ individual calendars. &lt;h3&gt;Operations&lt;/h3&gt; All operations can be done
+ either as an app or as a sync adapter. To perform an operation as a sync
+ adapter {@link #CALLER_IS_SYNCADAPTER} should be set to true and
+ {@link #ACCOUNT_NAME} and {@link #ACCOUNT_TYPE} must be set in the Uri
+ parameters. See
+ {@link Uri.Builder#appendQueryParameter(java.lang.String, java.lang.String)}
+ for details on adding parameters. Sync adapters have write access to more
+ columns but are restricted to a single account at a time. Calendars are
+ designed to be primarily managed by a sync adapter and inserting new
+ calendars should be done as a sync adapter. For the most part, apps
+ should only update calendars (such as changing the color or display
+ name). If a local calendar is required an app can do so by inserting as a
+ sync adapter and using an {@link #ACCOUNT_TYPE} of
+ {@link #ACCOUNT_TYPE_LOCAL} .
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;b&gt;Insert&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;When inserting a new calendar the following fields must be included:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ACCOUNT_NAME}&lt;/li&gt;
+ &lt;li&gt;{@link #ACCOUNT_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #NAME}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_DISPLAY_NAME}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_COLOR}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_ACCESS_LEVEL}&lt;/li&gt;
+ &lt;li&gt;{@link #OWNER_ACCOUNT}&lt;/li&gt;
+ &lt;/ul&gt;
+ The following fields are not required when inserting a Calendar but are
+ generally a good idea to include:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #SYNC_EVENTS} set to 1&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_TIME_ZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #ALLOWED_REMINDERS}&lt;/li&gt;
+ &lt;li&gt;{@link #ALLOWED_AVAILABILITY}&lt;/li&gt;
+ &lt;li&gt;{@link #ALLOWED_ATTENDEE_TYPES}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;dt&gt;&lt;b&gt;Update&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;To perform an update on a calendar the {@link #_ID} of the calendar
+ should be provided either as an appended id to the Uri (
+ {@link ContentUris#withAppendedId}) or as the first selection item--the
+ selection should start with &quot;_id=?&quot; and the first selectionArg should be
+ the _id of the calendar. Calendars may also be updated using a selection
+ without the id. In general, the {@link #ACCOUNT_NAME} and
+ {@link #ACCOUNT_TYPE} should not be changed after a calendar is created
+ as this can cause issues for sync adapters.
+ &lt;dt&gt;&lt;b&gt;Delete&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;Calendars can be deleted either by the {@link #_ID} as an appended id
+ on the Uri or using any standard selection. Deleting a calendar should
+ generally be handled by a sync adapter as it will remove the calendar
+ from the database and all associated data (aka events).&lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Query&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;Querying the Calendars table will get you all information about a set
+ of calendars. There will be one row returned for each calendar that
+ matches the query selection, or at most a single row if the {@link #_ID}
+ is appended to the Uri.&lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;h3&gt;Calendar Columns&lt;/h3&gt; The following Calendar columns are writable by
+ both an app and a sync adapter.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #NAME}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_DISPLAY_NAME}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_EVENTS}&lt;/li&gt;
+ &lt;/ul&gt;
+ The following Calendars columns are writable only by a sync adapter
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ACCOUNT_NAME}&lt;/li&gt;
+ &lt;li&gt;{@link #ACCOUNT_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_COLOR}&lt;/li&gt;
+ &lt;li&gt;{@link #_SYNC_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #DIRTY}&lt;/li&gt;
+ &lt;li&gt;{@link #MUTATORS}&lt;/li&gt;
+ &lt;li&gt;{@link #OWNER_ACCOUNT}&lt;/li&gt;
+ &lt;li&gt;{@link #MAX_REMINDERS}&lt;/li&gt;
+ &lt;li&gt;{@link #ALLOWED_REMINDERS}&lt;/li&gt;
+ &lt;li&gt;{@link #ALLOWED_AVAILABILITY}&lt;/li&gt;
+ &lt;li&gt;{@link #ALLOWED_ATTENDEE_TYPES}&lt;/li&gt;
+ &lt;li&gt;{@link #CAN_MODIFY_TIME_ZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #CAN_ORGANIZER_RESPOND}&lt;/li&gt;
+ &lt;li&gt;{@link #CAN_PARTIALLY_UPDATE}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_LOCATION}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_TIME_ZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_ACCESS_LEVEL}&lt;/li&gt;
+ &lt;li&gt;{@link #DELETED}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC1}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC2}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC3}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC4}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC5}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC6}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC7}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC8}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC9}&lt;/li&gt;
+ &lt;li&gt;{@link #CAL_SYNC10}&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var Calendars = {
+
+<span id='android-provider-CalendarContract-Calendars-property-CONTENT_URI'>/** The content:// style URL for accessing Calendars
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Calendars-property-ENTERPRISE_CONTENT_URI'>/** The content:// style URL for querying Calendars table in the managed profile. Appending
+</span> a calendar id using {@link ContentUris#withAppendedId(Uri, long)} specifies
+ a single calendar.
+
+ &lt;p&gt;The following columns are allowed to be queried via this uri:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_COLOR}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_LOCATION}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_TIME_ZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #IS_PRIMARY}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link IllegalArgumentException} is thrown if there exists columns in the
+ projection of the query to this uri that are not contained in the above list.
+
+ &lt;p&gt;This uri returns an empty cursor if the calling user is not a parent profile
+ of a managed profile, or the managed profile is disabled, or cross-profile calendar is
+ disabled in Settings, or this uri is queried from a package that is not allowed by
+ the profile owner of the managed profile via
+ {@link DevicePolicyManager#setCrossProfileCalendarPackages(ComponentName, Set)}.
+
+ &lt;p&gt;Apps can register a {@link android.database.ContentObserver} for this URI to listen
+ to changes.
+
+ @see DevicePolicyManager#getCrossProfileCalendarPackages(ComponentName)
+ @see Settings.Secure#CROSS_PROFILE_CALENDAR_ENABLED
+*/
+ENTERPRISE_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Calendars-property-DEFAULT_SORT_ORDER'>/** The default sort order for this table
+</span>*/
+DEFAULT_SORT_ORDER : &quot;calendar_displayName&quot;,
+<span id='android-provider-CalendarContract-Calendars-property-NAME'>/** The name of the calendar. Column name.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+NAME : &quot;name&quot;,
+<span id='android-provider-CalendarContract-Calendars-property-CALENDAR_LOCATION'>/** The default location for the calendar. Column name.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CALENDAR_LOCATION : &quot;calendar_location&quot;,
+<span id='android-provider-CalendarContract-Calendars-property-SYNC_WRITABLE_COLUMNS'>/** These fields are only writable by a sync adapter. To modify them the
+</span> caller must include {@link #CALLER_IS_SYNCADAPTER},
+ {@link #ACCOUNT_NAME}, and {@link #ACCOUNT_TYPE} in the Uri's query
+ parameters. TODO move to provider
+
+ @hide
+*/
+SYNC_WRITABLE_COLUMNS : &quot;null&quot;,
+
+};</pre>
+</body>
+</html>

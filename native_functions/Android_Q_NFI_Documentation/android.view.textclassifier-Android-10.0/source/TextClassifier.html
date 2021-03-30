@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-textclassifier-TextClassifier'>/**@class android.view.textclassifier.TextClassifier
+</span> Interface for providing text classification related features.
+ &lt;p&gt;
+ The TextClassifier may be used to understand the meaning of text, as well as generating predicted
+ next actions based on the text.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;Unless otherwise stated, methods of this interface are blocking
+ operations. Call on a worker thread.
+*/
+var TextClassifier = {
+
+<span id='android-view-textclassifier-TextClassifier-property-DEFAULT_LOG_TAG'>/**@hide */
+</span>DEFAULT_LOG_TAG : &quot;androidtc&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-LOCAL'>/**Specifies a TextClassifier that runs locally in the app's process. @hide */
+</span>LOCAL : &quot;0&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-SYSTEM'>/**Specifies a TextClassifier that runs in the system process and serves all apps. @hide */
+</span>SYSTEM : &quot;1&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_UNKNOWN'>/**The TextClassifier failed to run. */
+</span>TYPE_UNKNOWN : &quot;&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_OTHER'>/**The classifier ran, but didn't recognize a known entity. */
+</span>TYPE_OTHER : &quot;other&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_EMAIL'>/**E-mail address (e.g. &quot;noreply@android.com&quot;). */
+</span>TYPE_EMAIL : &quot;email&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_PHONE'>/**Phone number (e.g. &quot;555-123 456&quot;). */
+</span>TYPE_PHONE : &quot;phone&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_ADDRESS'>/**Physical address. */
+</span>TYPE_ADDRESS : &quot;address&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_URL'>/**Web URL. */
+</span>TYPE_URL : &quot;url&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_DATE'>/**Time reference that is no more specific than a date. May be absolute such as &quot;01/01/2000&quot; or
+</span> relative like &quot;tomorrow&quot;. */
+TYPE_DATE : &quot;date&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_DATE_TIME'>/**Time reference that includes a specific time. May be absolute such as &quot;01/01/2000 5:30pm&quot; or
+</span> relative like &quot;tomorrow at 5:30pm&quot;. */
+TYPE_DATE_TIME : &quot;datetime&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_FLIGHT_NUMBER'>/**Flight number in IATA format. */
+</span>TYPE_FLIGHT_NUMBER : &quot;flight&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-TYPE_DICTIONARY'>/** Word that users may be interested to look up for meaning.
+</span> @hide
+*/
+TYPE_DICTIONARY : &quot;dictionary&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-HINT_TEXT_IS_EDITABLE'>/**Designates that the text in question is editable. */
+</span>HINT_TEXT_IS_EDITABLE : &quot;android.text_is_editable&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-HINT_TEXT_IS_NOT_EDITABLE'>/**Designates that the text in question is not editable. */
+</span>HINT_TEXT_IS_NOT_EDITABLE : &quot;android.text_is_not_editable&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_TEXTVIEW'>/**The widget involved in the text classification context is a standard
+</span> {@link android.widget.TextView}. */
+WIDGET_TYPE_TEXTVIEW : &quot;textview&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_EDITTEXT'>/**The widget involved in the text classification context is a standard
+</span> {@link android.widget.EditText}. */
+WIDGET_TYPE_EDITTEXT : &quot;edittext&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_UNSELECTABLE_TEXTVIEW'>/**The widget involved in the text classification context is a standard non-selectable
+</span> {@link android.widget.TextView}. */
+WIDGET_TYPE_UNSELECTABLE_TEXTVIEW : &quot;nosel-textview&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_WEBVIEW'>/**The widget involved in the text classification context is a standard
+</span> {@link android.webkit.WebView}. */
+WIDGET_TYPE_WEBVIEW : &quot;webview&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_EDIT_WEBVIEW'>/**The widget involved in the text classification context is a standard editable
+</span> {@link android.webkit.WebView}. */
+WIDGET_TYPE_EDIT_WEBVIEW : &quot;edit-webview&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_CUSTOM_TEXTVIEW'>/**The widget involved in the text classification context is a custom text widget. */
+</span>WIDGET_TYPE_CUSTOM_TEXTVIEW : &quot;customview&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_CUSTOM_EDITTEXT'>/**The widget involved in the text classification context is a custom editable text widget. */
+</span>WIDGET_TYPE_CUSTOM_EDITTEXT : &quot;customedit&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_CUSTOM_UNSELECTABLE_TEXTVIEW'>/**The widget involved in the text classification context is a custom non-selectable text
+</span> widget. */
+WIDGET_TYPE_CUSTOM_UNSELECTABLE_TEXTVIEW : &quot;nosel-customview&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_NOTIFICATION'>/**The widget involved in the text classification context is a notification */
+</span>WIDGET_TYPE_NOTIFICATION : &quot;notification&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-WIDGET_TYPE_UNKNOWN'>/**The widget involved in the text classification context is of an unknown/unspecified type. */
+</span>WIDGET_TYPE_UNKNOWN : &quot;unknown&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-NO_OP'>/** No-op TextClassifier.
+</span> This may be used to turn off TextClassifier features.
+*/
+NO_OP : &quot;null&quot;,
+<span id='android-view-textclassifier-TextClassifier-property-EXTRA_FROM_TEXT_CLASSIFIER'>/** Extra that is included on activity intents coming from a TextClassifier when
+</span> it suggests actions to its caller.
+ &lt;p&gt;
+ All {@link android.view.textclassifier.TextClassifier} implementations should make sure this extra exists in their
+ generated intents.
+*/
+EXTRA_FROM_TEXT_CLASSIFIER : &quot;android.view.textclassifier.extra.FROM_TEXT_CLASSIFIER&quot;,
+<span id='android-view-textclassifier-TextClassifier-method-suggestSelection'>/**Returns suggested text selection start and end indices, recognized entity types, and their
+</span> associated confidence scores. The entity types are ordered from highest to lowest scoring.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;Call on a worker thread.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+@param {Object {TextSelection.Request}} request the text selection request
+*/
+suggestSelection : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-suggestSelection'>/**Returns suggested text selection start and end indices, recognized entity types, and their
+</span> associated confidence scores. The entity types are ordered from highest to lowest scoring.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;Call on a worker thread.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Do not implement. The default implementation of this method calls
+ {@link #suggestSelection(TextSelection.Request)}. If that method calls this method,
+ a stack overflow error will happen.
+@param {Object {CharSequence}} text text providing context for the selected text (which is specified
+      by the sub sequence starting at selectionStartIndex and ending at selectionEndIndex)
+@param {Number} selectionStartIndex start index of the selected part of text
+@param {Number} selectionEndIndex end index of the selected part of text
+@param {Object {LocaleList}} defaultLocales ordered list of locale preferences that may be used to
+      disambiguate the provided text. If no locale preferences exist, set this to null
+      or an empty locale list.
+@throws IllegalArgumentException if text is null; selectionStartIndex is negative;
+      selectionEndIndex is greater than text.length() or not greater than selectionStartIndex
+@see #suggestSelection(TextSelection.Request)
+*/
+suggestSelection : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-classifyText'>/**Classifies the specified text and returns a {@link android.view.textclassifier.TextClassification} object that can be
+</span> used to generate a widget for handling the classified text.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;Call on a worker thread.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+@param {Object {TextClassification.Request}} request the text classification request
+*/
+classifyText : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-classifyText'>/**Classifies the specified text and returns a {@link android.view.textclassifier.TextClassification} object that can be
+</span> used to generate a widget for handling the classified text.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;Call on a worker thread.
+
+ &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Do not implement. The default implementation of this method calls
+ {@link #classifyText(TextClassification.Request)}. If that method calls this method,
+ a stack overflow error will happen.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+@param {Object {CharSequence}} text text providing context for the text to classify (which is specified
+      by the sub sequence starting at startIndex and ending at endIndex)
+@param {Number} startIndex start index of the text to classify
+@param {Number} endIndex end index of the text to classify
+@param {Object {LocaleList}} defaultLocales ordered list of locale preferences that may be used to
+      disambiguate the provided text. If no locale preferences exist, set this to null
+      or an empty locale list.
+@throws IllegalArgumentException if text is null; startIndex is negative;
+      endIndex is greater than text.length() or not greater than startIndex
+@see #classifyText(TextClassification.Request)
+*/
+classifyText : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-generateLinks'>/**Generates and returns a {@link android.view.textclassifier.TextLinks.TextLinks} that may be applied to the text to annotate it with
+</span> links information.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;Call on a worker thread.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+@param {Object {TextLinks.Request}} request the text links request
+@see #getMaxGenerateLinksTextLength()
+*/
+generateLinks : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-getMaxGenerateLinksTextLength'>/**Returns the maximal length of text that can be processed by generateLinks.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+@see #generateLinks(TextLinks.Request)
+*/
+getMaxGenerateLinksTextLength : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-detectLanguage'>/**Detects the language of the text in the given request.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;Call on a worker thread.
+
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+@param {Object {TextLanguage.Request}} request the {@link TextLanguage} request.
+@return {Object {android.view.textclassifier.TextLanguage}} the {@link TextLanguage} result.
+*/
+detectLanguage : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-suggestConversationActions'>/**Suggests and returns a list of actions according to the given conversation.
+</span>*/
+suggestConversationActions : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-onSelectionEvent'>/**&lt;strong&gt;NOTE: &lt;/strong&gt;Use {@link #onTextClassifierEvent}(TextClassifierEvent) instead.
+</span> &lt;p&gt;
+ Reports a selection event.
+
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to this method should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+*/
+onSelectionEvent : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-onTextClassifierEvent'>/**Reports a text classifier event.
+</span> &lt;p&gt;
+ &lt;strong&gt;NOTE: &lt;/strong&gt;Call on a worker thread.
+@throws IllegalStateException if this TextClassifier has been destroyed.
+@see #isDestroyed()
+*/
+onTextClassifierEvent : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-destroy'>/**Destroys this TextClassifier.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, calls to its methods should
+ throw an {@link IllegalStateException}. See {@link #isDestroyed}().
+
+ &lt;p&gt;Subsequent calls to this method are no-ops.
+*/
+destroy : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-isDestroyed'>/**Returns whether or not this TextClassifier has been destroyed.
+</span>
+ &lt;p&gt;&lt;strong&gt;NOTE: &lt;/strong&gt;If a TextClassifier has been destroyed, caller should not interact
+ with the classifier and an attempt to do so would throw an {@link IllegalStateException}.
+ However, this method should never throw an {@link IllegalStateException}.
+@see #destroy()
+*/
+isDestroyed : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifier-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

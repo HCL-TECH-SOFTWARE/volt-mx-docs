@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-Authorization'>/**@class android.provider.ContactsContract.Authorization
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ API for obtaining a pre-authorized version of a URI that normally requires special
+ permission (beyond READ_CONTACTS) to read.  The caller obtaining the pre-authorized URI
+ must already have the necessary permissions to access the URI; otherwise a
+ {@link SecurityException} will be thrown. Unlike {@link Context#grantUriPermission},
+ this can be used to grant permissions that aren't explicitly required for the URI inside
+ AndroidManifest.xml. For example, permissions that are only required when reading URIs
+ that refer to the user's profile.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The authorized URI returned in the bundle contains an expiring token that allows the
+ caller to execute the query without having the special permissions that would normally
+ be required. The token expires in five minutes.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This API does not access disk, and should be safe to invoke from the UI thread.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Example usage:
+ &lt;pre&gt;
+ Uri profileUri = ContactsContract.Profile.CONTENT_VCARD_URI;
+ Bundle uriBundle = new Bundle();
+ uriBundle.putParcelable(ContactsContract.Authorization.KEY_URI_TO_AUTHORIZE, uri);
+ Bundle authResponse = getContext().getContentResolver().call(
+         ContactsContract.AUTHORITY_URI,
+         ContactsContract.Authorization.AUTHORIZATION_METHOD,
+         null, // String arg, not used.
+         uriBundle);
+ if (authResponse != null) {
+     Uri preauthorizedProfileUri = (Uri) authResponse.getParcelable(
+             ContactsContract.Authorization.KEY_AUTHORIZED_URI);
+     // This pre-authorized URI can be queried by a caller without READ_PROFILE
+     // permission.
+ }
+ &lt;/pre&gt;
+ &lt;/p&gt;
+
+ @hide
+*/
+var Authorization = {
+
+<span id='android-provider-ContactsContract-Authorization-property-AUTHORIZATION_METHOD'>/** The method to invoke to create a pre-authorized URI out of the input argument.
+</span>*/
+AUTHORIZATION_METHOD : &quot;authorize&quot;,
+<span id='android-provider-ContactsContract-Authorization-property-KEY_URI_TO_AUTHORIZE'>/** The key to set in the outbound Bundle with the URI that should be authorized.
+</span>*/
+KEY_URI_TO_AUTHORIZE : &quot;uri_to_authorize&quot;,
+<span id='android-provider-ContactsContract-Authorization-property-KEY_AUTHORIZED_URI'>/** The key to retrieve from the returned Bundle to obtain the pre-authorized URI.
+</span>*/
+KEY_AUTHORIZED_URI : &quot;authorized_uri&quot;,
+
+};</pre>
+</body>
+</html>

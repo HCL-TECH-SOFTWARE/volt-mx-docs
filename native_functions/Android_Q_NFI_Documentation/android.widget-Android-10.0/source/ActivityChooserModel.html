@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-ActivityChooserModel'>/**@class android.widget.ActivityChooserModel
+</span>@extends android.database.DataSetObservable
+
+ &lt;p&gt;
+ This class represents a data model for choosing a component for handing a
+ given {@link Intent}. The model is responsible for querying the system for
+ activities that can handle the given intent and order found activities
+ based on historical data of previous choices. The historical data is stored
+ in an application private file. If a client does not want to have persistent
+ choice history the file can be omitted, thus the activities will be ordered
+ based on historical usage for the current session.
+ &lt;p&gt;
+ &lt;/p&gt;
+ For each backing history file there is a singleton instance of this class. Thus,
+ several clients that specify the same history file will share the same model. Note
+ that if multiple clients are sharing the same model they should implement semantically
+ equivalent functionality since setting the model intent will change the found
+ activities and they may be inconsistent with the functionality of some of the clients.
+ For example, choosing a share activity can be implemented by a single backing
+ model and two different views for performing the selection. If however, one of the
+ views is used for sharing but the other for importing, for example, then each
+ view should be backed by a separate model.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The way clients interact with this class is as follows:
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;pre&gt;
+ &lt;code&gt;
+  // Get a model and set it to a couple of clients with semantically similar function.
+  ActivityChooserModel dataModel =
+      ActivityChooserModel.get(context, &quot;task_specific_history_file_name.xml&quot;);
+
+  ActivityChooserModelClient modelClient1 = getActivityChooserModelClient1();
+  modelClient1.setActivityChooserModel(dataModel);
+
+  ActivityChooserModelClient modelClient2 = getActivityChooserModelClient2();
+  modelClient2.setActivityChooserModel(dataModel);
+
+  // Set an intent to choose a an activity for.
+  dataModel.setIntent(intent);
+ &lt;pre&gt;
+ &lt;code&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; This class is thread safe.
+ &lt;/p&gt;
+
+ @hide
+*/
+var ActivityChooserModel = {
+
+<span id='android-widget-ActivityChooserModel-property-DEFAULT_HISTORY_FILE_NAME'>/** The default name of the choice history file.
+</span>*/
+DEFAULT_HISTORY_FILE_NAME : &quot;activity_choser_model_history.xml&quot;,
+<span id='android-widget-ActivityChooserModel-property-DEFAULT_HISTORY_MAX_LENGTH'>/** The default maximal length of the choice history.
+</span>*/
+DEFAULT_HISTORY_MAX_LENGTH : &quot;50&quot;,
+<span id='android-widget-ActivityChooserModel-method-get'>/**Gets the data model backed by the contents of the provided file with historical data.
+</span> Note that only one data model is backed by a given file, thus multiple calls with
+ the same file name will return the same model instance. If no such instance is present
+ it is created.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; To use the default historical data file clients should explicitly
+ pass as file name {@link #DEFAULT_HISTORY_FILE_NAME}. If no persistence of the choice
+ history is desired clients should pass &lt;code&gt;null&lt;/code&gt; for the file name. In such
+ case a new model is returned for each invocation.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ &lt;strong&gt;Always use difference historical data files for semantically different actions.
+ For example, sharing is different from importing.&lt;/strong&gt;
+ &lt;/p&gt;
+@param {Object {Context}} context Context for loading resources.
+@param {String} historyFileName File name with choice history, &lt;code&gt;null&lt;/code&gt;
+        if the model should not be backed by a file. In this case the activities
+        will be ordered only by data from the current session.
+@return {Object {android.widget.ActivityChooserModel}} The model.
+*/
+get : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-setIntent'>/**Sets an intent for which to choose a activity.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Clients must set only semantically similar
+ intents for each data model.
+ &lt;p&gt;
+@param {Object {Intent}} intent The intent.
+*/
+setIntent : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-getIntent'>/**Gets the intent for which a activity is being chosen.
+</span>@return {Object {android.content.Intent}} The intent.
+*/
+getIntent : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-getActivityCount'>/**Gets the number of activities that can handle the intent.
+</span>@return {Number} The activity count.
+@see #setIntent(Intent)
+*/
+getActivityCount : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-getActivity'>/**Gets an activity at a given index.
+</span>@return {Object {android.content.pm.ResolveInfo}} The activity.
+@see ActivityResolveInfo
+@see #setIntent(Intent)
+*/
+getActivity : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-getActivityIndex'>/**Gets the index of a the given activity.
+</span>@param {Object {ResolveInfo}} activity The activity index.
+@return {Number} The index if found, -1 otherwise.
+*/
+getActivityIndex : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-chooseActivity'>/**Chooses a activity to handle the current intent. This will result in
+</span> adding a historical record for that action and construct intent with
+ its component name set such that it can be immediately started by the
+ client.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; By calling this method the client guarantees
+ that the returned intent will be started. This intent is returned to
+ the client solely to let additional customization before the start.
+ &lt;/p&gt;
+@return {Object {android.content.Intent}} An {@link Intent} for launching the activity or null if the
+         policy has consumed the intent or there is not current intent
+         set via {@link #setIntent(Intent)}.
+@see HistoricalRecord
+@see OnChooseActivityListener
+*/
+chooseActivity : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-setOnChooseActivityListener'>/**Sets the listener for choosing an activity.
+</span>@param {Object {ActivityChooserModel.OnChooseActivityListener}} listener The listener.
+*/
+setOnChooseActivityListener : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-getDefaultActivity'>/**Gets the default activity, The default activity is defined as the one
+</span> with highest rank i.e. the first one in the list of activities that can
+ handle the intent.
+@return {Object {android.content.pm.ResolveInfo}} The default activity, &lt;code&gt;null&lt;/code&gt; id not activities.
+@see #getActivity(int)
+*/
+getDefaultActivity : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-setDefaultActivity'>/**Sets the default activity. The default activity is set by adding a
+</span> historical record with weight high enough that this activity will
+ become the highest ranked. Such a strategy guarantees that the default
+ will eventually change if not used. Also the weight of the record for
+ setting a default is inflated with a constant amount to guarantee that
+ it will stay as default for awhile.
+@param {Number} index The index of the activity to set as default.
+*/
+setDefaultActivity : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-setActivitySorter'>/**Sets the sorter for ordering activities based on historical data and an intent.
+</span>@param {Object {ActivityChooserModel.ActivitySorter}} activitySorter The sorter.
+@see ActivitySorter
+*/
+setActivitySorter : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-setHistoryMaxSize'>/**Sets the maximal size of the historical data. Defaults to
+</span> {@link #DEFAULT_HISTORY_MAX_LENGTH}
+ &lt;p&gt;
+   &lt;strong&gt;Note:&lt;/strong&gt; Setting this property will immediately
+   enforce the specified max history size by dropping enough old
+   historical records to enforce the desired size. Thus, any
+   records that exceed the history size will be discarded and
+   irreversibly lost.
+ &lt;/p&gt;
+@param {Number} historyMaxSize The max history size.
+*/
+setHistoryMaxSize : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-getHistoryMaxSize'>/**Gets the history max size.
+</span>@return {Number} The history max size.
+*/
+getHistoryMaxSize : function(  ) {},
+
+<span id='android-widget-ActivityChooserModel-method-getHistorySize'>/**Gets the history size.
+</span>@return {Number} The history size.
+*/
+getHistorySize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

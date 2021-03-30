@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-PrecomputedText'>/**@class android.text.PrecomputedText
+</span> implements android.text.Spannable
+
+@extends java.lang.Object
+
+ A text which has the character metrics data.
+
+ A text object that contains the character metrics data and can be used to improve the performance
+ of text layout operations. When a PrecomputedText is created with a given {@link CharSequence},
+ it will measure the text metrics during the creation. This PrecomputedText instance can be set on
+ {@link android.widget.TextView} or {@link android.text.StaticLayout}. Since the text layout information will
+ be included in this instance, {@link android.widget.TextView} or {@link android.text.StaticLayout} will not
+ have to recalculate this information.
+
+ Note that the {@link android.text.PrecomputedText} created from different parameters of the target {@link android.widget.TextView} will be rejected internally and compute the text layout again with the
+ current {@link android.widget.TextView} parameters.
+
+ &lt;pre&gt;
+ An example usage is:
+ &lt;code&gt;
+  static void asyncSetText(TextView textView, final String longString, Executor bgExecutor) {
+      // construct precompute related parameters using the TextView that we will set the text on.
+      final PrecomputedText.Params params = textView.getTextMetricsParams();
+      final Reference textViewRef = new WeakReference&lt;&gt;(textView);
+      bgExecutor.submit(() -&gt; {
+          TextView textView = textViewRef.get();
+          if (textView == null) return;
+          final PrecomputedText precomputedText = PrecomputedText.create(longString, params);
+          textView.post(() -&gt; {
+              TextView textView = textViewRef.get();
+              if (textView == null) return;
+              textView.setText(precomputedText);
+          });
+      });
+  }
+ &lt;/code&gt;
+ &lt;/pre&gt;
+
+ Note that the {@link android.text.PrecomputedText} created from different parameters of the target
+ {@link android.widget.TextView} will be rejected.
+
+ Note that any {@link android.text.NoCopySpan} attached to the original text won't be passed to
+ PrecomputedText.
+*/
+var PrecomputedText = {
+
+<span id='android-text-PrecomputedText-method-create'>/**Create a new {@link android.text.PrecomputedText} which will pre-compute text measurement and glyph
+</span> positioning information.
+ &lt;p&gt;
+ This can be expensive, so computing this on a background thread before your text will be
+ presented can save work on the UI thread.
+ &lt;/p&gt;
+
+ Note that any {@link android.text.NoCopySpan} attached to the text won't be passed to the
+ created PrecomputedText.
+@param {Object {CharSequence}} text the text to be measured
+@param {Object {PrecomputedText.Params}} params parameters that define how text will be precomputed
+@return {Object {android.text.PrecomputedText}} A {@link PrecomputedText}
+*/
+create : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-createMeasuredParagraphs'>/**
+</span>@hide 
+*/
+createMeasuredParagraphs : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getText'>/**Return the underlying text.
+</span>@hide 
+*/
+getText : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getStart'>/**Returns the inclusive start offset of measured region.
+</span>@hide 
+*/
+getStart : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getEnd'>/**Returns the exclusive end offset of measured region.
+</span>@hide 
+*/
+getEnd : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getParams'>/**Returns the layout parameters used to measure this text.
+</span>*/
+getParams : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getParagraphCount'>/**Returns the count of paragraphs.
+</span>*/
+getParagraphCount : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getParagraphStart'>/**Returns the paragraph start offset of the text.
+</span>*/
+getParagraphStart : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getParagraphEnd'>/**Returns the paragraph end offset of the text.
+</span>*/
+getParagraphEnd : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getMeasuredParagraph'>/**
+</span>@hide 
+*/
+getMeasuredParagraph : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getParagraphInfo'>/**
+</span>@hide 
+*/
+getParagraphInfo : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-checkResultUsable'>/**Returns true if the given TextPaint gives the same result of text layout for this text.
+</span>@hide 
+*/
+checkResultUsable : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-findParaIndex'>/**
+</span>@hide 
+*/
+findParaIndex : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getWidth'>/**Returns text width for the given range.
+</span> Both {@code start} and {@code end} offset need to be in the same paragraph, otherwise
+ IllegalArgumentException will be thrown.
+@param {Number} start the inclusive start offset in the text
+@param {Number} end the exclusive end offset in the text
+@return {Number} the text width
+@throws IllegalArgumentException if start and end offset are in the different paragraph.
+*/
+getWidth : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getBounds'>/**Retrieves the text bounding box for the given range.
+</span> Both {@code start} and {@code end} offset need to be in the same paragraph, otherwise
+ IllegalArgumentException will be thrown.
+@param {Number} start the inclusive start offset in the text
+@param {Number} end the exclusive end offset in the text
+@param {Object {Rect}} bounds the output rectangle
+@throws IllegalArgumentException if start and end offset are in the different paragraph.
+*/
+getBounds : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getCharWidthAt'>/**Returns a width of a character at offset
+</span>@param {Number} offset an offset of the text.
+@return {Number} a width of the character.
+@hide 
+*/
+getCharWidthAt : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getMemoryUsage'>/**Returns the size of native PrecomputedText memory usage.
+</span>
+ Note that this is not guaranteed to be accurate. Must be used only for testing purposes.
+@hide 
+*/
+getMemoryUsage : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-setSpan'>/**
+</span>@throws IllegalArgumentException if {@link MetricAffectingSpan} is specified.
+*/
+setSpan : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-removeSpan'>/**
+</span>@throws IllegalArgumentException if {@link MetricAffectingSpan} is specified.
+*/
+removeSpan : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getSpans'>/**
+</span>*/
+getSpans : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getSpanStart'>/**
+</span>*/
+getSpanStart : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getSpanEnd'>/**
+</span>*/
+getSpanEnd : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-getSpanFlags'>/**
+</span>*/
+getSpanFlags : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-nextSpanTransition'>/**
+</span>*/
+nextSpanTransition : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-length'>/**
+</span>*/
+length : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-charAt'>/**
+</span>*/
+charAt : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-subSequence'>/**
+</span>*/
+subSequence : function(  ) {},
+
+<span id='android-text-PrecomputedText-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

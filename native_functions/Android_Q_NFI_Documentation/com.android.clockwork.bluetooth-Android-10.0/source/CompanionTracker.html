@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-clockwork-bluetooth-CompanionTracker'>/**@class com.android.clockwork.bluetooth.CompanionTracker
+</span>@extends java.lang.Object
+
+ This class monitors and maintains the mapping to the currently paired Companion device.
+
+ This class expects the PairingHandler in ClockworkHome to set the Companion address
+ under Settings.BLUETOOTH_URI when the user initiates a successful pairing to the watch
+ from the Companion app.
+
+ For the legacy case of there being a previously-paired device with no Companion address
+ written in Settings, CompanionTracker will infer the Companion device and store its address
+ into the same Settings location.
+
+ Design doc:
+ https://docs.google.com/document/d/1E9-wBGZqHCB5Y7hJ-JI6ktb84tlG3e25AIazGOp7kEI/edit#
+*/
+var CompanionTracker = {
+
+<span id='com-android-clockwork-bluetooth-CompanionTracker-property-TAG'>/***/
+</span>TAG : &quot;WearBluetooth&quot;,
+<span id='com-android-clockwork-bluetooth-CompanionTracker-method-addListener'>/**
+</span>*/
+addListener : function(  ) {},
+
+<span id='com-android-clockwork-bluetooth-CompanionTracker-method-getCompanion'>/**Returns the BluetoothDevice object associated with the Companion device,
+</span> or null if no Companion device is paired.
+*/
+getCompanion : function(  ) {},
+
+<span id='com-android-clockwork-bluetooth-CompanionTracker-method-getCompanionName'>/**Returns the BluetoothDevice name associated with the Companion device,
+</span> or null if no Companion device is paired.
+*/
+getCompanionName : function(  ) {},
+
+<span id='com-android-clockwork-bluetooth-CompanionTracker-method-isCompanionBle'>/**Returns true iff the currently paired Companion device is an LE or DUAL device.
+</span>
+ Normally, we should just check the device type of mCompanion. But b/62355127 revealed that
+ BluetoothDevice.getType() can return LE/DUAL even for an Android device (particularly
+ when bonding is unexpectedly lost and re-established).  To workaround this, we rely on the
+ KEY_BLUETOOTH_MODE setting written by ConnectionSetupHelper in Setup, which during the
+ initial pairing process correctly identifies the device type.
+
+ BluetoothDevice.getType() is used as a fallback only if for some reason the
+ KEY_BLUETOOTH_MODE setting has not been populated.
+*/
+isCompanionBle : function(  ) {},
+
+<span id='com-android-clockwork-bluetooth-CompanionTracker-method-onBluetoothAdapterReady'>/**This needs to be called once per reboot in order to guarantee that CompanionTracker
+</span> will have the correct Companion Device retrieved from persistent storage and the Bluetooth
+ adapter.
+*/
+onBluetoothAdapterReady : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-IccCard'>/**@class com.android.internal.telephony.IccCard
+</span>@extends java.lang.Object
+
+ {@hide}
+ @Deprecated use UiccController.getUiccCard instead.
+
+ Integrated Circuit Card (ICC) interface
+ An object of a class implementing this interface is used by external
+ apps (specifically PhoneApp) to perform icc card related functionality.
+
+ Apps (those that have access to Phone object) can retrieve this object
+ by calling phone.getIccCard()
+
+ This interface is implemented by UiccProfile and the object PhoneApp
+ gets when it calls getIccCard is UiccProfile.
+*/
+var IccCard = {
+
+<span id='com-android-internal-telephony-IccCard-method-getState'>/**
+</span>@return {Object {com.android.internal.telephony.IccCardConstants.State}} combined Card and current App state
+*/
+getState : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-getIccRecords'>/**
+</span>@return {Object {com.android.internal.telephony.uicc.IccRecords}} IccRecords object belonging to current UiccCardApplication
+*/
+getIccRecords : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-registerForNetworkLocked'>/**Notifies handler of any transition into IccCardConstants.State.NETWORK_LOCKED
+</span>*/
+registerForNetworkLocked : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-unregisterForNetworkLocked'>/**Unregister for networkLocked state change.
+</span>*/
+unregisterForNetworkLocked : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-supplyPin'>/**Supply the ICC PIN to the ICC
+</span>
+ When the operation is complete, onComplete will be sent to its
+ Handler.
+
+ onComplete.obj will be an AsyncResult
+
+ ((AsyncResult)onComplete.obj).exception == null on success
+ ((AsyncResult)onComplete.obj).exception != null on fail
+
+ If the supplied PIN is incorrect:
+ ((AsyncResult)onComplete.obj).exception != null
+ &amp;&amp; ((AsyncResult)onComplete.obj).exception
+       instanceof com.android.internal.telephony.gsm.CommandException)
+ &amp;&amp; ((CommandException)(((AsyncResult)onComplete.obj).exception))
+          .getCommandError() == CommandException.Error.PASSWORD_INCORRECT
+*/
+supplyPin : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-supplyPuk'>/**Supply the ICC PUK to the ICC
+</span>*/
+supplyPuk : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-supplyPin2'>/**Supply the ICC PIN2 to the ICC
+</span>*/
+supplyPin2 : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-supplyPuk2'>/**Supply the ICC PUK2 to the ICC
+</span>*/
+supplyPuk2 : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-supplyNetworkDepersonalization'>/**Supply Network depersonalization code to the RIL
+</span>*/
+supplyNetworkDepersonalization : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-getIccLockEnabled'>/**Check whether ICC pin lock is enabled
+</span> This is a sync call which returns the cached pin enabled state
+@return {Boolean} true for ICC locked enabled
+         false for ICC locked disabled
+*/
+getIccLockEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-getIccFdnAvailable'>/**Check whether fdn (fixed dialing number) service is available.
+</span>@return {Boolean} true if ICC fdn service available
+         false if ICC fdn service not available
+*/
+getIccFdnAvailable : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-getIccFdnEnabled'>/**Check whether ICC fdn (fixed dialing number) is enabled
+</span> This is a sync call which returns the cached pin enabled state
+@return {Boolean} true for ICC fdn enabled
+         false for ICC fdn disabled
+*/
+getIccFdnEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-setIccLockEnabled'>/**Set the ICC pin lock enabled or disabled
+</span> When the operation is complete, onComplete will be sent to its handler
+@param {Boolean} enabled &quot;true&quot; for locked &quot;false&quot; for unlocked.
+@param {String} password needed to change the ICC pin state, aka. Pin1
+@param {Object {Message}} onComplete
+        onComplete.obj will be an AsyncResult
+        ((AsyncResult)onComplete.obj).exception == null on success
+        ((AsyncResult)onComplete.obj).exception != null on fail
+*/
+setIccLockEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-setIccFdnEnabled'>/**Set the ICC fdn enabled or disabled
+</span> When the operation is complete, onComplete will be sent to its handler
+@param {Boolean} enabled &quot;true&quot; for locked &quot;false&quot; for unlocked.
+@param {String} password needed to change the ICC fdn enable, aka Pin2
+@param {Object {Message}} onComplete
+        onComplete.obj will be an AsyncResult
+        ((AsyncResult)onComplete.obj).exception == null on success
+        ((AsyncResult)onComplete.obj).exception != null on fail
+*/
+setIccFdnEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-changeIccLockPassword'>/**Change the ICC password used in ICC pin lock
+</span> When the operation is complete, onComplete will be sent to its handler
+@param {String} oldPassword is the old password
+@param {String} newPassword is the new password
+@param {Object {Message}} onComplete
+        onComplete.obj will be an AsyncResult
+        ((AsyncResult)onComplete.obj).exception == null on success
+        ((AsyncResult)onComplete.obj).exception != null on fail
+*/
+changeIccLockPassword : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-changeIccFdnPassword'>/**Change the ICC password used in ICC fdn enable
+</span> When the operation is complete, onComplete will be sent to its handler
+@param {String} oldPassword is the old password
+@param {String} newPassword is the new password
+@param {Object {Message}} onComplete
+        onComplete.obj will be an AsyncResult
+        ((AsyncResult)onComplete.obj).exception == null on success
+        ((AsyncResult)onComplete.obj).exception != null on fail
+*/
+changeIccFdnPassword : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-getServiceProviderName'>/**Returns service provider name stored in ICC card.
+</span> If there is no service provider name associated or the record is not
+ yet available, null will be returned &lt;p&gt;
+
+ Please use this value when display Service Provider Name in idle mode &lt;p&gt;
+
+ Usage of this provider name in the UI is a common carrier requirement.
+
+ Also available via Android property &quot;gsm.sim.operator.alpha&quot;
+@return {String} Service Provider Name stored in ICC card
+         null if no service provider name associated or the record is not
+         yet available
+*/
+getServiceProviderName : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-isApplicationOnIcc'>/**Checks if an Application of specified type present on the card
+</span>@param {Object {IccCardApplicationStatus.AppType}} type is AppType to look for
+*/
+isApplicationOnIcc : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-hasIccCard'>/**
+</span>@return {Boolean} true if a ICC card is present
+*/
+hasIccCard : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-getIccPin2Blocked'>/**
+</span>@return {Boolean} true if ICC card is PIN2 blocked
+*/
+getIccPin2Blocked : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-getIccPuk2Blocked'>/**
+</span>@return {Boolean} true if ICC card is PUK2 blocked
+*/
+getIccPuk2Blocked : function(  ) {},
+
+<span id='com-android-internal-telephony-IccCard-method-isEmptyProfile'>/**
+</span>@return {Boolean} whether the card is an empty profile, meaning there's no UiccCardApplication,
+ and that we don't need to wait for LOADED state.
+*/
+isEmptyProfile : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

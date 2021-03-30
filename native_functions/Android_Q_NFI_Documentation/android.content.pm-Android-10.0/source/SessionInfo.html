@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageInstaller-SessionInfo'>/**@class android.content.pm.PackageInstaller.SessionInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Details for an active install session.
+*/
+var SessionInfo = {
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-INVALID_ID'>/** A session ID that does not exist or is invalid.
+</span>*/
+INVALID_ID : &quot;-1&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-STAGED_SESSION_NO_ERROR'>/** Constant indicating that no error occurred during the preparation or the activation of
+</span> this staged session.
+*/
+STAGED_SESSION_NO_ERROR : &quot;0&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-STAGED_SESSION_VERIFICATION_FAILED'>/** Constant indicating that an error occurred during the verification phase (pre-reboot) of
+</span> this staged session.
+*/
+STAGED_SESSION_VERIFICATION_FAILED : &quot;1&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-STAGED_SESSION_ACTIVATION_FAILED'>/** Constant indicating that an error occurred during the activation phase (post-reboot) of
+</span> this staged session.
+*/
+STAGED_SESSION_ACTIVATION_FAILED : &quot;2&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-STAGED_SESSION_UNKNOWN'>/** Constant indicating that an unknown error occurred while processing this staged session.
+</span>*/
+STAGED_SESSION_UNKNOWN : &quot;3&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-sessionId'>/**{@hide} */
+</span>sessionId : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-userId'>/**{@hide} */
+</span>userId : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-installerPackageName'>/**{@hide} */
+</span>installerPackageName : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-resolvedBaseCodePath'>/**{@hide} */
+</span>resolvedBaseCodePath : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-progress'>/**{@hide} */
+</span>progress : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-sealed'>/**{@hide} */
+</span>sealed : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-active'>/**{@hide} */
+</span>active : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-mode'>/**{@hide} */
+</span>mode : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-installReason'>/**{@hide} */
+</span>installReason : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-sizeBytes'>/**{@hide} */
+</span>sizeBytes : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-appPackageName'>/**{@hide} */
+</span>appPackageName : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-appIcon'>/**{@hide} */
+</span>appIcon : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-appLabel'>/**{@hide} */
+</span>appLabel : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-installLocation'>/**{@hide} */
+</span>installLocation : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-originatingUri'>/**{@hide} */
+</span>originatingUri : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-originatingUid'>/**{@hide} */
+</span>originatingUid : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-referrerUri'>/**{@hide} */
+</span>referrerUri : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-grantedRuntimePermissions'>/**{@hide} */
+</span>grantedRuntimePermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-whitelistedRestrictedPermissions'>/**{@hide}*/
+</span>whitelistedRestrictedPermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-installFlags'>/**{@hide} */
+</span>installFlags : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-isMultiPackage'>/**{@hide} */
+</span>isMultiPackage : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-isStaged'>/**{@hide} */
+</span>isStaged : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-parentSessionId'>/**{@hide} */
+</span>parentSessionId : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-childSessionIds'>/**{@hide} */
+</span>childSessionIds : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-isStagedSessionApplied'>/**{@hide} */
+</span>isStagedSessionApplied : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-isStagedSessionReady'>/**{@hide} */
+</span>isStagedSessionReady : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-isStagedSessionFailed'>/**{@hide} */
+</span>isStagedSessionFailed : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-isCommitted'>/**{@hide} */
+</span>isCommitted : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-updatedMillis'>/**{@hide} */
+</span>updatedMillis : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getSessionId'>/**Return the ID for this session.
+</span>*/
+getSessionId : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getUser'>/**Return the user associated with this session.
+</span>*/
+getUser : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getInstallerPackageName'>/**Return the package name of the app that owns this session.
+</span>*/
+getInstallerPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getProgress'>/**Return current overall progress of this session, between 0 and 1.
+</span> &lt;p&gt;
+ Note that this progress may not directly correspond to the value
+ reported by
+ {@link android.content.pm.PackageParser.PackageInstaller.Session#setStagingProgress(float)}, as the
+ system may carve out a portion of the overall progress to represent
+ its own internal installation work.
+*/
+getProgress : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isActive'>/**Return if this session is currently active.
+</span> &lt;p&gt;
+ A session is considered active whenever there is ongoing forward
+ progress being made, such as the installer holding an open
+ {@link android.content.pm.PackageInstaller.Session} instance while streaming data into place, or the
+ system optimizing code as the result of
+ {@link android.content.pm.PackageInstaller.Session#commit(IntentSender)}.
+ &lt;p&gt;
+ If the installer closes the {@link android.content.pm.PackageInstaller.Session} without committing, the
+ session is considered inactive until the installer opens the session
+ again.
+*/
+isActive : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isSealed'>/**Return if this session is sealed.
+</span> &lt;p&gt;
+ Once sealed, no further changes may be made to the session. A session
+ is sealed the moment {@link android.content.pm.PackageInstaller.Session#commit(IntentSender)} is called.
+*/
+isSealed : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getInstallReason'>/**Return the reason for installing this package.
+</span>@return {Number} The install reason.
+*/
+getInstallReason : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isOpen'>/**{@hide}
+</span>*/
+isOpen : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getAppPackageName'>/**Return the package name this session is working with. May be {@code null}
+</span> if unknown.
+*/
+getAppPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getAppIcon'>/**Return an icon representing the app being installed. May be {@code null}
+</span> if unavailable.
+*/
+getAppIcon : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getAppLabel'>/**Return a label representing the app being installed. May be {@code null}
+</span> if unavailable.
+*/
+getAppLabel : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-createDetailsIntent'>/**Return an Intent that can be started to view details about this install
+</span> session. This may surface actions such as pause, resume, or cancel.
+ &lt;p&gt;
+ In some cases, a matching Activity may not exist, so ensure you safeguard
+ against this.
+@see PackageInstaller#ACTION_SESSION_DETAILS
+*/
+createDetailsIntent : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getMode'>/**Get the mode of the session as set in the constructor of the {@link android.content.pm.PackageInstaller.SessionParams}.
+</span>@return {Number} One of {@link SessionParams#MODE_FULL_INSTALL}
+         or {@link SessionParams#MODE_INHERIT_EXISTING}
+*/
+getMode : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getInstallLocation'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setInstallLocation(int)}.
+</span>*/
+getInstallLocation : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getSize'>/**Get the value as set in {@link android.content.pm.PackageInstaller.SessionParams#setSize(long)}.
+</span>
+ &lt;p&gt;The value is a hint and does not have to match the actual size.
+*/
+getSize : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getOriginatingUri'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setOriginatingUri(Uri)}.
+</span>*/
+getOriginatingUri : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getOriginatingUid'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setOriginatingUid(int)}.
+</span>*/
+getOriginatingUid : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getReferrerUri'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setReferrerUri(Uri)}
+</span>*/
+getReferrerUri : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getGrantedRuntimePermissions'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setGrantedRuntimePermissions(String[])}.
+</span>@hide 
+*/
+getGrantedRuntimePermissions : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getWhitelistedRestrictedPermissions'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setWhitelistedRestrictedPermissions(Set)}.
+</span> Note that if all permissions are whitelisted this method returns {@link android.content.pm.PackageInstaller.SessionParams#RESTRICTED_PERMISSIONS_ALL}.
+@hide 
+*/
+getWhitelistedRestrictedPermissions : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getAllowDowngrade'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setAllowDowngrade(boolean)}.
+</span>@deprecated use {@link #getRequestDowngrade()}.
+@hide 
+*/
+getAllowDowngrade : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getRequestDowngrade'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setRequestDowngrade(boolean)}.
+</span>@hide 
+*/
+getRequestDowngrade : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getDontKillApp'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setDontKillApp(boolean)}.
+</span>@hide 
+*/
+getDontKillApp : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getInstallAsInstantApp'>/**If {@link android.content.pm.PackageInstaller.SessionParams#setInstallAsInstantApp(boolean)} was called with {@code true},
+</span> return true. If it was called with {@code false} or if it was not called return false.
+@hide 
+@see #getInstallAsFullApp
+*/
+getInstallAsInstantApp : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getInstallAsFullApp'>/**If {@link android.content.pm.PackageInstaller.SessionParams#setInstallAsInstantApp(boolean)} was called with {@code false},
+</span> return true. If it was called with {@code true} or if it was not called return false.
+@hide 
+@see #getInstallAsInstantApp
+*/
+getInstallAsFullApp : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getInstallAsVirtualPreload'>/**Get if {@link android.content.pm.PackageInstaller.SessionParams#setInstallAsVirtualPreload()} was called.
+</span>@hide 
+*/
+getInstallAsVirtualPreload : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getEnableRollback'>/**Return whether rollback is enabled or disabled for the given upgrade.
+</span>@hide 
+*/
+getEnableRollback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getAllocateAggressive'>/**Get the value set in {@link android.content.pm.PackageInstaller.SessionParams#setAllocateAggressive(boolean)}.
+</span>@hide 
+*/
+getAllocateAggressive : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getDetailsIntent'>/**{@hide}
+</span>*/
+getDetailsIntent : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isMultiPackage'>/**Returns true if this session is a multi-package session containing references to other
+</span> sessions.
+*/
+isMultiPackage : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isStaged'>/**Returns true if this session is a staged session which will be applied at next reboot.
+</span>*/
+isStaged : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getParentSessionId'>/**Returns the parent multi-package session ID if this session belongs to one,
+</span> {@link #INVALID_ID} otherwise.
+*/
+getParentSessionId : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getChildSessionIds'>/**Returns the set of session IDs that will be committed when this session is commited if
+</span> this session is a multi-package session.
+*/
+getChildSessionIds : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isStagedSessionApplied'>/**Whether the staged session has been applied successfully, meaning that all of its
+</span> packages have been activated and no further action is required.
+ Only meaningful if {@code isStaged} is true.
+*/
+isStagedSessionApplied : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isStagedSessionReady'>/**Whether the staged session is ready to be applied at next reboot. Only meaningful if
+</span> {@code isStaged} is true.
+*/
+isStagedSessionReady : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isStagedSessionFailed'>/**Whether something went wrong and the staged session is declared as failed, meaning that
+</span> it will be ignored at next reboot. Only meaningful if {@code isStaged} is true.
+*/
+isStagedSessionFailed : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getStagedSessionErrorCode'>/**If something went wrong with a staged session, clients can check this error code to
+</span> understand which kind of failure happened. Only meaningful if {@code isStaged} is true.
+*/
+getStagedSessionErrorCode : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getStagedSessionErrorMessage'>/**Text description of the error code returned by {@code getStagedSessionErrorCode}, or
+</span> empty string if no error was encountered.
+*/
+getStagedSessionErrorMessage : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-setStagedSessionErrorCode'>/**{@hide}
+</span>*/
+setStagedSessionErrorCode : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-isCommitted'>/**Returns {@code true} if {@link android.content.pm.PackageInstaller.Session#commit(IntentSender)}} was called for this
+</span> session.
+*/
+isCommitted : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-getUpdatedMillis'>/**The timestamp of the last update that occurred to the session, including changing of
+</span> states in case of staged sessions.
+*/
+getUpdatedMillis : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-SessionInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

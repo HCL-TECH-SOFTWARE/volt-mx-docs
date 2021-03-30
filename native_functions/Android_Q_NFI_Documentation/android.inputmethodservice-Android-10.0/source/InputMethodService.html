@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-inputmethodservice-InputMethodService'>/**@class android.inputmethodservice.InputMethodService
+</span>@extends android.inputmethodservice.AbstractInputMethodService
+
+ InputMethodService provides a standard implementation of an InputMethod,
+ which final implementations can derive from and customize.  See the
+ base class {@link android.inputmethodservice.AbstractInputMethodService} and the {@link InputMethod}
+ interface for more information on the basics of writing input methods.
+ 
+ &lt;p&gt;In addition to the normal Service lifecycle methods, this class
+ introduces some new specific callbacks that most subclasses will want
+ to make use of:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt; {@link #onInitializeInterface}() for user-interface initialization,
+ in particular to deal with configuration changes while the service is
+ running.
+ &lt;li&gt; {@link #onBindInput} to find out about switching to a new client.
+ &lt;li&gt; {@link #onStartInput} to deal with an input session starting with
+ the client.
+ &lt;li&gt; {@link #onCreateInputView}(), {@link #onCreateCandidatesView}(),
+ and {@link #onCreateExtractTextView}() for non-demand generation of the UI.
+ &lt;li&gt; {@link #onStartInputView(EditorInfo, boolean)} to deal with input
+ starting within the input area of the IME.
+ &lt;/ul&gt;
+ 
+ &lt;p&gt;An input method has significant discretion in how it goes about its
+ work: the {@link android.inputmethodservice.InputMethodService} provides
+ a basic framework for standard UI elements (input view, candidates view,
+ and running in fullscreen mode), but it is up to a particular implementor
+ to decide how to use them.  For example, one input method could implement
+ an input area with a keyboard, another could allow the user to draw text,
+ while a third could have no input area (and thus not be visible to the
+ user) but instead listen to audio and perform text to speech conversion.&lt;/p&gt;
+ 
+ &lt;p&gt;In the implementation provided here, all of these elements are placed
+ together in a single window managed by the InputMethodService.  It will
+ execute callbacks as it needs information about them, and provides APIs for
+ programmatic control over them.  They layout of these elements is explicitly
+ defined:&lt;/p&gt;
+ 
+ &lt;ul&gt;
+ &lt;li&gt;The soft input view, if available, is placed at the bottom of the
+ screen.
+ &lt;li&gt;The candidates view, if currently shown, is placed above the soft
+ input view.
+ &lt;li&gt;If not running fullscreen, the application is moved or resized to be
+ above these views; if running fullscreen, the window will completely cover
+ the application and its top part will contain the extract text of what is
+ currently being edited by the application.
+ &lt;/ul&gt;
+ 
+ 
+ &lt;a name=&quot;SoftInputView&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Soft Input View&lt;/h3&gt;
+ 
+ &lt;p&gt;Central to most input methods is the soft input view.  This is where most
+ user interaction occurs: pressing on soft keys, drawing characters, or
+ however else your input method wants to generate text.  Most implementations
+ will simply have their own view doing all of this work, and return a new
+ instance of it when {@link #onCreateInputView}() is called.  At that point,
+ as long as the input view is visible, you will see user interaction in
+ that view and can call back on the InputMethodService to interact with the
+ application as appropriate.&lt;/p&gt;
+ 
+ &lt;p&gt;There are some situations where you want to decide whether or not your
+ soft input view should be shown to the user.  This is done by implementing
+ the {@link #onEvaluateInputViewShown}() to return true or false based on
+ whether it should be shown in the current environment.  If any of your
+ state has changed that may impact this, call
+ {@link #updateInputViewShown}() to have it re-evaluated.  The default
+ implementation always shows the input view unless there is a hard
+ keyboard available, which is the appropriate behavior for most input
+ methods.&lt;/p&gt;
+ 
+ 
+ &lt;a name=&quot;CandidatesView&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Candidates View&lt;/h3&gt;
+ 
+ &lt;p&gt;Often while the user is generating raw text, an input method wants to
+ provide them with a list of possible interpretations of that text that can
+ be selected for use.  This is accomplished with the candidates view, and
+ like the soft input view you implement {@link #onCreateCandidatesView}()
+ to instantiate your own view implementing your candidates UI.&lt;/p&gt;
+ 
+ &lt;p&gt;Management of the candidates view is a little different than the input
+ view, because the candidates view tends to be more transient, being shown
+ only when there are possible candidates for the current text being entered
+ by the user.  To control whether the candidates view is shown, you use
+ {@link #setCandidatesViewShown}(boolean).  Note that because the candidate
+ view tends to be shown and hidden a lot, it does not impact the application
+ UI in the same way as the soft input view: it will never cause application
+ windows to resize, only cause them to be panned if needed for the user to
+ see the current focus.&lt;/p&gt;
+ 
+ 
+ &lt;a name=&quot;FullscreenMode&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Fullscreen Mode&lt;/h3&gt;
+ 
+ &lt;p&gt;Sometimes your input method UI is too large to integrate with the
+ application UI, so you just want to take over the screen.  This is
+ accomplished by switching to full-screen mode, causing the input method
+ window to fill the entire screen and add its own &quot;extracted text&quot; editor
+ showing the user the text that is being typed.  Unlike the other UI elements,
+ there is a standard implementation for the extract editor that you should
+ not need to change.  The editor is placed at the top of the IME, above the
+ input and candidates views.&lt;/p&gt;
+ 
+ &lt;p&gt;Similar to the input view, you control whether the IME is running in
+ fullscreen mode by implementing {@link #onEvaluateFullscreenMode}()
+ to return true or false based on
+ whether it should be fullscreen in the current environment.  If any of your
+ state has changed that may impact this, call
+ {@link #updateFullscreenMode}() to have it re-evaluated.  The default
+ implementation selects fullscreen mode when the screen is in a landscape
+ orientation, which is appropriate behavior for most input methods that have
+ a significant input area.&lt;/p&gt;
+ 
+ &lt;p&gt;When in fullscreen mode, you have some special requirements because the
+ user can not see the application UI.  In particular, you should implement
+ {@link #onDisplayCompletions(CompletionInfo[])} to show completions
+ generated by your application, typically in your candidates view like you
+ would normally show candidates.
+ 
+ 
+ &lt;a name=&quot;GeneratingText&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Generating Text&lt;/h3&gt;
+ 
+ &lt;p&gt;The key part of an IME is of course generating text for the application.
+ This is done through calls to the
+ {@link android.view.inputmethod.InputConnection} interface to the
+ application, which can be retrieved from {@link #getCurrentInputConnection}().
+ This interface allows you to generate raw key events or, if the target
+ supports it, directly edit in strings of candidates and committed text.&lt;/p&gt;
+ 
+ &lt;p&gt;Information about what the target is expected and supports can be found
+ through the {@link android.view.inputmethod.EditorInfo} class, which is
+ retrieved with {@link #getCurrentInputEditorInfo}() method.  The most
+ important part of this is {@link android.view.inputmethod.EditorInfo#inputType
+ EditorInfo.inputType}; in particular, if this is
+ {@link android.view.inputmethod.EditorInfo#TYPE_NULL EditorInfo.TYPE_NULL},
+ then the target does not support complex edits and you need to only deliver
+ raw key events to it.  An input method will also want to look at other
+ values here, to for example detect password mode, auto complete text views,
+ phone number entry, etc.&lt;/p&gt;
+ 
+ &lt;p&gt;When the user switches between input targets, you will receive calls to
+ {@link #onFinishInput}() and {@link #onStartInput(EditorInfo, boolean)}.
+ You can use these to reset and initialize your input state for the current
+ target.  For example, you will often want to clear any input state, and
+ update a soft keyboard to be appropriate for the new inputType.&lt;/p&gt;
+ 
+ @attr ref android.R.styleable#InputMethodService_imeFullscreenBackground
+ @attr ref android.R.styleable#InputMethodService_imeExtractEnterAnimation
+ @attr ref android.R.styleable#InputMethodService_imeExtractExitAnimation
+*/
+var InputMethodService = {
+
+<span id='android-inputmethodservice-InputMethodService-property-BACK_DISPOSITION_DEFAULT'>/** Allows the system to optimize the back button affordance based on the presence of software
+</span> keyboard.
+
+ &lt;p&gt;For instance, on devices that have navigation bar and software-rendered back button, the
+ system may use a different icon while {@link #isInputViewShown}() returns {@code true}, to
+ indicate that the back button has &quot;dismiss&quot; affordance.&lt;/p&gt;
+
+ &lt;p&gt;Note that {@link android.inputmethodservice.Keyboard.KeyEvent#KEYCODE_BACK} events continue to be sent to
+ {@link #onandroid.inputmethodservice.Keyboard.KeyDown(int, android.inputmethodservice.Keyboard.KeyEvent)} even when this mode is specified. The default
+ implementation of {@link #onandroid.inputmethodservice.Keyboard.KeyDown(int, android.inputmethodservice.Keyboard.KeyEvent)} for {@link android.inputmethodservice.Keyboard.KeyEvent#KEYCODE_BACK} does
+ not take this mode into account.&lt;/p&gt;
+
+ &lt;p&gt;For API level {@link android.os.Build.VERSION_CODES#O_MR1} and lower devices, this is the
+ only mode you can safely specify without worrying about the compatibility.&lt;/p&gt;
+
+ @see #setBackDisposition(int)
+*/
+BACK_DISPOSITION_DEFAULT : &quot;0&quot;,
+<span id='android-inputmethodservice-InputMethodService-property-BACK_DISPOSITION_WILL_NOT_DISMISS'>/** Deprecated flag.
+</span>
+ &lt;p&gt;To avoid compatibility issues, IME developers should not use this flag.&lt;/p&gt;
+
+ @deprecated on {@link android.os.Build.VERSION_CODES#P} and later devices, this flag is
+             handled as a synonym of {@link #BACK_DISPOSITION_DEFAULT}. On
+             {@link android.os.Build.VERSION_CODES#O_MR1} and prior devices, expected behavior
+             of this mode had not been well defined. Most likely the end result would be the
+             same as {@link #BACK_DISPOSITION_DEFAULT}. Either way it is not recommended to
+             use this mode
+ @see #setBackDisposition(int)
+*/
+BACK_DISPOSITION_WILL_NOT_DISMISS : &quot;1&quot;,
+<span id='android-inputmethodservice-InputMethodService-property-BACK_DISPOSITION_WILL_DISMISS'>/** Deprecated flag.
+</span>
+ &lt;p&gt;To avoid compatibility issues, IME developers should not use this flag.&lt;/p&gt;
+
+ @deprecated on {@link android.os.Build.VERSION_CODES#P} and later devices, this flag is
+             handled as a synonym of {@link #BACK_DISPOSITION_DEFAULT}. On
+             {@link android.os.Build.VERSION_CODES#O_MR1} and prior devices, expected behavior
+             of this mode had not been well defined. In AOSP implementation running on devices
+             that have navigation bar, specifying this flag could change the software back
+             button to &quot;Dismiss&quot; icon no matter whether the software keyboard is shown or not,
+             but there would be no easy way to restore the icon state even after IME lost the
+             connection to the application. To avoid user confusions, do not specify this mode
+             anyway
+ @see #setBackDisposition(int)
+*/
+BACK_DISPOSITION_WILL_DISMISS : &quot;2&quot;,
+<span id='android-inputmethodservice-InputMethodService-property-BACK_DISPOSITION_ADJUST_NOTHING'>/** Asks the system to not adjust the back button affordance even when the software keyboard is
+</span> shown.
+
+ &lt;p&gt;This mode is useful for UI modes where IME's main soft input window is used for some
+ supplemental UI, such as floating candidate window for languages such as Chinese and
+ Japanese, where users expect the back button is, or at least looks to be, handled by the
+ target application rather than the UI shown by the IME even while {@link #isInputViewShown}()
+ returns {@code true}.&lt;/p&gt;
+
+ &lt;p&gt;Note that {@link android.inputmethodservice.Keyboard.KeyEvent#KEYCODE_BACK} events continue to be sent to
+ {@link #onandroid.inputmethodservice.Keyboard.KeyDown(int, android.inputmethodservice.Keyboard.KeyEvent)} even when this mode is specified. The default
+ implementation of {@link #onandroid.inputmethodservice.Keyboard.KeyDown(int, android.inputmethodservice.Keyboard.KeyEvent)} for {@link android.inputmethodservice.Keyboard.KeyEvent#KEYCODE_BACK} does
+ not take this mode into account.&lt;/p&gt;
+
+ @see #setBackDisposition(int)
+*/
+BACK_DISPOSITION_ADJUST_NOTHING : &quot;3&quot;,
+<span id='android-inputmethodservice-InputMethodService-property-IME_ACTIVE'>/** @hide
+</span> The IME is active.  It may or may not be visible.
+*/
+IME_ACTIVE : &quot;1&quot;,
+<span id='android-inputmethodservice-InputMethodService-property-IME_VISIBLE'>/** @hide
+</span> The IME is visible.
+*/
+IME_VISIBLE : &quot;2&quot;,
+<span id='android-inputmethodservice-InputMethodService-property-IME_INVISIBLE'>/** @hide
+</span> The IME is active and ready with views but set invisible.
+ This flag cannot be combined with {@link #IME_VISIBLE}.
+*/
+IME_INVISIBLE : &quot;4&quot;,
+<span id='android-inputmethodservice-InputMethodService-method-setTheme'>/**You can call this to customize the theme used by your IME's window.
+</span> This theme should typically be one that derives from
+ {@link android.R.style#Theme_InputMethod}, which is the default theme
+ you will get.  This must be set before {@link #onCreate}, so you
+ will typically call it in your constructor with the resource ID
+ of your custom theme.
+*/
+setTheme : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-enableHardwareAcceleration'>/**You can call this to try to enable accelerated drawing for your IME. This must be set before
+</span> {@link #onCreate}(), so you will typically call it in your constructor.  It is not always
+ possible to use hardware accelerated drawing in an IME (for example on low-end devices that
+ do not have the resources to support this), so the call {@code true} if it succeeds otherwise
+ {@code false} if you will need to draw in software.  You must be able to handle either case.
+
+ &lt;p&gt;In API 21 and later, system may automatically enable hardware accelerated drawing for your
+ IME on capable devices even if this method is not explicitly called. Make sure that your IME
+ is able to handle either case.&lt;/p&gt;
+@return {Boolean} {@code true} if accelerated drawing is successfully enabled otherwise {@code false}.
+         On API 21 and later devices the return value is basically just a hint and your IME
+         does not need to change the behavior based on the it
+@deprecated Starting in API 21, hardware acceleration is always enabled on capable devices
+*/
+enableHardwareAcceleration : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onInitializeInterface'>/**This is a hook that subclasses can use to perform initialization of
+</span> their interface.  It is called for you prior to any of your UI objects
+ being created, both after the service is first created and after a
+ configuration change happens.
+*/
+onInitializeInterface : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onConfigurationChanged'>/**Take care of handling configuration changes.  Subclasses of
+</span> InputMethodService generally don't need to deal directly with
+ this on their own; the standard implementation here takes care of
+ regenerating the input method UI as a result of the configuration
+ change, so you can rely on your {@link #onCreateInputView} and
+ other methods being called as appropriate due to a configuration change.
+ 
+ &lt;p&gt;When a configuration change does happen,
+ {@link #onInitializeInterface}() is guaranteed to be called the next
+ time prior to any of the other input or UI creation callbacks.  The
+ following will be called immediately depending if appropriate for current 
+ state: {@link #onStartInput} if input is active, and
+ {@link #onCreateInputView} and {@link #onStartInputView} and related
+ appropriate functions if the UI is displayed.
+*/
+onConfigurationChanged : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onCreateInputMethodInterface'>/**Implement to return our standard {@link android.inputmethodservice.InputMethodService.InputMethodImpl}.  Subclasses
+</span> can override to provide their own customized version.
+*/
+onCreateInputMethodInterface : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onCreateInputMethodSessionInterface'>/**Implement to return our standard {@link android.inputmethodservice.InputMethodService.InputMethodSessionImpl}.  Subclasses
+</span> can override to provide their own customized version.
+*/
+onCreateInputMethodSessionInterface : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getLayoutInflater'>/**
+</span>*/
+getLayoutInflater : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getWindow'>/**
+</span>*/
+getWindow : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-setBackDisposition'>/**Sets the disposition mode that indicates the expected affordance for the back button.
+</span>
+ &lt;p&gt;Keep in mind that specifying this flag does not change the the default behavior of
+ {@link #onandroid.inputmethodservice.Keyboard.KeyDown(int, android.inputmethodservice.Keyboard.KeyEvent)}.  It is IME developers' responsibility for making sure that
+ their custom implementation of {@link #onandroid.inputmethodservice.Keyboard.KeyDown(int, android.inputmethodservice.Keyboard.KeyEvent)} is consistent with the mode
+ specified to this API.&lt;/p&gt;
+@param {Number} disposition disposition mode to be set
+@param disposition disposition mode to be set
+*/
+setBackDisposition : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getBackDisposition'>/**Retrieves the current disposition mode that indicates the expected back button affordance.
+</span>@see #setBackDisposition(int)
+@return {Number} currently selected disposition mode
+*/
+getBackDisposition : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getMaxWidth'>/**Return the maximum width, in pixels, available the input method.
+</span> Input methods are positioned at the bottom of the screen and, unless
+ running in fullscreen, will generally want to be as short as possible
+ so should compute their height based on their contents.  However, they
+ can stretch as much as needed horizontally.  The function returns to
+ you the maximum amount of space available horizontally, which you can
+ use if needed for UI placement.
+ 
+ &lt;p&gt;In many cases this is not needed, you can just rely on the normal
+ view layout mechanisms to position your views within the full horizontal
+ space given to the input method.
+ 
+ &lt;p&gt;Note that this value can change dynamically, in particular when the
+ screen orientation changes.
+*/
+getMaxWidth : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getCurrentInputBinding'>/**Return the currently active InputBinding for the input method, or
+</span> null if there is none.
+*/
+getCurrentInputBinding : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getCurrentInputConnection'>/**Retrieve the currently active InputConnection that is bound to
+</span> the input method, or null if there is none.
+*/
+getCurrentInputConnection : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-switchToPreviousInputMethod'>/**Force switch to the last used input method and subtype. If the last input method didn't have
+</span> any subtypes, the framework will simply switch to the last input method with no subtype
+ specified.
+@return {Boolean} true if the current input method and subtype was successfully switched to the last
+ used input method and subtype.
+*/
+switchToPreviousInputMethod : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-switchToNextInputMethod'>/**Force switch to the next input method and subtype. If there is no IME enabled except
+</span> current IME and subtype, do nothing.
+@param {Boolean} onlyCurrentIme if true, the framework will find the next subtype which
+ belongs to the current IME
+@return {Boolean} true if the current input method and subtype was successfully switched to the next
+ input method and subtype.
+*/
+switchToNextInputMethod : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-shouldOfferSwitchingToNextInputMethod'>/**Returns true if the current IME needs to offer the users ways to switch to a next input
+</span> method (e.g. a globe key.).
+ When an IME sets supportsSwitchingToNextInputMethod and this method returns true,
+ the IME has to offer ways to to invoke {@link #switchToNextInputMethod} accordingly.
+ &lt;p&gt; Note that the system determines the most appropriate next input method
+ and subtype in order to provide the consistent user experience in switching
+ between IMEs and subtypes.
+*/
+shouldOfferSwitchingToNextInputMethod : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getCurrentInputStarted'>/**
+</span>*/
+getCurrentInputStarted : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getCurrentInputEditorInfo'>/**
+</span>*/
+getCurrentInputEditorInfo : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-updateFullscreenMode'>/**Re-evaluate whether the input method should be running in fullscreen
+</span> mode, and update its UI if this has changed since the last time it
+ was evaluated.  This will call {@link #onEvaluateFullscreenMode}() to
+ determine whether it should currently run in fullscreen mode.  You
+ can use {@link #isFullscreenMode}() to determine if the input method
+ is currently running in fullscreen mode.
+*/
+updateFullscreenMode : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onConfigureWindow'>/**Update the given window's parameters for the given mode.  This is called
+</span> when the window is first displayed and each time the fullscreen or
+ candidates only mode changes.
+ 
+ &lt;p&gt;The default implementation makes the layout for the window
+ MATCH_PARENT x MATCH_PARENT when in fullscreen mode, and
+ MATCH_PARENT x WRAP_CONTENT when in non-fullscreen mode.
+@param {Object {Window}} win The input method's window.
+@param {Boolean} isFullscreen If true, the window is running in fullscreen mode
+ and intended to cover the entire application display.
+@param {Boolean} isCandidatesOnly If true, the window is only showing the
+ candidates view and none of the rest of its UI.  This is mutually
+ exclusive with fullscreen mode.
+*/
+onConfigureWindow : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-isFullscreenMode'>/**Return whether the input method is &lt;em&gt;currently&lt;/em&gt; running in
+</span> fullscreen mode.  This is the mode that was last determined and
+ applied by {@link #updateFullscreenMode}().
+*/
+isFullscreenMode : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onEvaluateFullscreenMode'>/**Override this to control when the input method should run in
+</span> fullscreen mode.  The default implementation runs in fullsceen only
+ when the screen is in landscape mode.  If you change what
+ this returns, you will need to call {@link #updateFullscreenMode}()
+ yourself whenever the returned value may have changed to have it
+ re-evaluated and applied.
+*/
+onEvaluateFullscreenMode : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-setExtractViewShown'>/**Controls the visibility of the extracted text area.  This only applies
+</span> when the input method is in fullscreen mode, and thus showing extracted
+ text.  When false, the extracted text will not be shown, allowing some
+ of the application to be seen behind.  This is normally set for you
+ by {@link #onUpdateExtractingVisibility}.  This controls the visibility
+ of both the extracted text and candidate view; the latter since it is
+ not useful if there is no text to see.
+*/
+setExtractViewShown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-isExtractViewShown'>/**Return whether the fullscreen extract view is shown.  This will only
+</span> return true if {@link #isFullscreenMode}() returns true, and in that
+ case its value depends on the last call to
+ {@link #setExtractViewShown}(boolean).  This effectively lets you
+ determine if the application window is entirely covered (when this
+ returns true) or if some part of it may be shown (if this returns
+ false, though if {@link #isFullscreenMode}() returns true in that case
+ then it is probably only a sliver of the application).
+*/
+isExtractViewShown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onComputeInsets'>/**Compute the interesting insets into your UI.  The default implementation
+</span> uses the top of the candidates frame for the visible insets, and the
+ top of the input frame for the content insets.  The default touchable
+ insets are {@link android.inputmethodservice.InputMethodService.Insets#TOUCHABLE_INSETS_VISIBLE}.
+ 
+ &lt;p&gt;Note that this method is not called when
+ {@link #isExtractViewShown} returns true, since
+ in that case the application is left as-is behind the input method and
+ not impacted by anything in its UI.
+@param {Object {InputMethodService.Insets}} outInsets Fill in with the current UI insets.
+*/
+onComputeInsets : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-updateInputViewShown'>/**Re-evaluate whether the soft input area should currently be shown, and
+</span> update its UI if this has changed since the last time it
+ was evaluated.  This will call {@link #onEvaluateInputViewShown}() to
+ determine whether the input view should currently be shown.  You
+ can use {@link #isInputViewShown}() to determine if the input view
+ is currently shown.
+*/
+updateInputViewShown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-isShowInputRequested'>/**Returns true if we have been asked to show our input view.
+</span>*/
+isShowInputRequested : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-isInputViewShown'>/**Return whether the soft input view is &lt;em&gt;currently&lt;/em&gt; shown to the
+</span> user.  This is the state that was last determined and
+ applied by {@link #updateInputViewShown}().
+*/
+isInputViewShown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onEvaluateInputViewShown'>/**Override this to control when the soft input area should be shown to the user.  The default
+</span> implementation returns {@code false} when there is no hard keyboard or the keyboard is hidden
+ unless the user shows an intention to use software keyboard.  If you change what this
+ returns, you will need to call {@link #updateInputViewShown}() yourself whenever the returned
+ value may have changed to have it re-evaluated and applied.
+
+ &lt;p&gt;When you override this method, it is recommended to call
+ {@code super.onEvaluateInputViewShown()} and return {@code true} when {@code true} is
+ returned.&lt;/p&gt;
+*/
+onEvaluateInputViewShown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-setCandidatesViewShown'>/**Controls the visibility of the candidates display area.  By default
+</span> it is hidden.
+*/
+setCandidatesViewShown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getCandidatesHiddenVisibility'>/**Returns the visibility mode (either {@link View#INVISIBLE View.INVISIBLE}
+</span> or {@link View#GONE View.GONE}) of the candidates view when it is not
+ shown.  The default implementation returns GONE when
+ {@link #isExtractViewShown} returns true,
+ otherwise VISIBLE.  Be careful if you change this to return GONE in
+ other situations -- if showing or hiding the candidates view causes
+ your window to resize, this can cause temporary drawing artifacts as
+ the resize takes place.
+*/
+getCandidatesHiddenVisibility : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-showStatusIcon'>/**
+</span>*/
+showStatusIcon : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-hideStatusIcon'>/**
+</span>*/
+hideStatusIcon : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-switchInputMethod'>/**Force switch to a new input method, as identified by &lt;var&gt;id&lt;/var&gt;.  This
+</span> input method will be destroyed, and the requested one started on the
+ current input field.
+@param {String} id Unique identifier of the new input method to start.
+*/
+switchInputMethod : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-switchInputMethod'>/**Force switch to a new input method, as identified by {@code id}.  This
+</span> input method will be destroyed, and the requested one started on the
+ current input field.
+@param {String} id Unique identifier of the new input method to start.
+@param {Object {InputMethodSubtype}} subtype The new subtype of the new input method to be switched to.
+*/
+switchInputMethod : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-setExtractView'>/**
+</span>*/
+setExtractView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-setCandidatesView'>/**Replaces the current candidates view with a new one.  You only need to
+</span> call this when dynamically changing the view; normally, you should
+ implement {@link #onCreateCandidatesView}() and create your view when
+ first needed by the input method.
+*/
+setCandidatesView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-setInputView'>/**Replaces the current input view with a new one.  You only need to
+</span> call this when dynamically changing the view; normally, you should
+ implement {@link #onCreateInputView}() and create your view when
+ first needed by the input method.
+*/
+setInputView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onCreateExtractTextView'>/**Called by the framework to create the layout for showing extacted text.
+</span> Only called when in fullscreen mode.  The returned view hierarchy must
+ have an {@link android.inputmethodservice.ExtractEditText} whose ID is 
+ {@link android.R.id#inputExtractEditText}.
+*/
+onCreateExtractTextView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onCreateCandidatesView'>/**Create and return the view hierarchy used to show candidates.  This will
+</span> be called once, when the candidates are first displayed.  You can return
+ null to have no candidates view; the default implementation returns null.
+ 
+ &lt;p&gt;To control when the candidates view is displayed, use
+ {@link #setCandidatesViewShown}(boolean).
+ To change the candidates view after the first one is created by this
+ function, use {@link #setCandidatesView}(View).
+*/
+onCreateCandidatesView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onCreateInputView'>/**Create and return the view hierarchy used for the input area (such as
+</span> a soft keyboard).  This will be called once, when the input area is
+ first displayed.  You can return null to have no input area; the default
+ implementation returns null.
+ 
+ &lt;p&gt;To control when the input view is displayed, implement
+ {@link #onEvaluateInputViewShown}().
+ To change the input view after the first one is created by this
+ function, use {@link #setInputView}(View).
+*/
+onCreateInputView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onStartInputView'>/**Called when the input view is being shown and input has started on
+</span> a new editor.  This will always be called after {@link #onStartInput},
+ allowing you to do your general setup there and just view-specific
+ setup here.  You are guaranteed that {@link #onCreateInputView}() will
+ have been called some time before this function is called.
+@param {Object {EditorInfo}} info Description of the type of text being edited.
+@param {Boolean} restarting Set to true if we are restarting input on the
+ same text field as before.
+*/
+onStartInputView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onFinishInputView'>/**Called when the input view is being hidden from the user.  This will
+</span> be called either prior to hiding the window, or prior to switching to
+ another target for editing.
+ 
+ &lt;p&gt;The default
+ implementation uses the InputConnection to clear any active composing
+ text; you can override this (not calling the base class implementation)
+ to perform whatever behavior you would like.
+@param {Boolean} finishingInput If true, {@link #onFinishInput} will be
+ called immediately after.
+*/
+onFinishInputView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onStartCandidatesView'>/**Called when only the candidates view has been shown for showing
+</span> processing as the user enters text through a hard keyboard.
+ This will always be called after {@link #onStartInput},
+ allowing you to do your general setup there and just view-specific
+ setup here.  You are guaranteed that {@link #onCreateCandidatesView}()
+ will have been called some time before this function is called.
+ 
+ &lt;p&gt;Note that this will &lt;em&gt;not&lt;/em&gt; be called when the input method
+ is running in full editing mode, and thus receiving
+ {@link #onStartInputView} to initiate that operation.  This is only
+ for the case when candidates are being shown while the input method
+ editor is hidden but wants to show its candidates UI as text is
+ entered through some other mechanism.
+@param {Object {EditorInfo}} info Description of the type of text being edited.
+@param {Boolean} restarting Set to true if we are restarting input on the
+ same text field as before.
+*/
+onStartCandidatesView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onFinishCandidatesView'>/**Called when the candidates view is being hidden from the user.  This will
+</span> be called either prior to hiding the window, or prior to switching to
+ another target for editing.
+ 
+ &lt;p&gt;The default
+ implementation uses the InputConnection to clear any active composing
+ text; you can override this (not calling the base class implementation)
+ to perform whatever behavior you would like.
+@param {Boolean} finishingInput If true, {@link #onFinishInput} will be
+ called immediately after.
+*/
+onFinishCandidatesView : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onShowInputRequested'>/**The system has decided that it may be time to show your input method.
+</span> This is called due to a corresponding call to your
+ {@link InputMethod#showSoftInput InputMethod.showSoftInput()}
+ method.  The default implementation uses
+ {@link #onEvaluateInputViewShown}(), {@link #onEvaluateFullscreenMode}(),
+ and the current configuration to decide whether the input view should
+ be shown at this point.
+@param {Number} flags Provides additional information about the show request,
+ as per {@link InputMethod#showSoftInput InputMethod.showSoftInput()}.
+@param {Boolean} configChange This is true if we are re-showing due to a
+ configuration change.
+@return {Boolean} Returns true to indicate that the window should be shown.
+*/
+onShowInputRequested : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-showWindow'>/**
+</span>*/
+showWindow : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-hideWindow'>/**
+</span>*/
+hideWindow : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onWindowShown'>/**Called immediately before the input method window is shown to the user.
+</span> You could override this to prepare for the window to be shown
+ (update view structure etc).
+*/
+onWindowShown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onWindowHidden'>/**Called when the input method window has been hidden from the user,
+</span> after previously being visible.
+*/
+onWindowHidden : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onBindInput'>/**Called when a new client has bound to the input method.  This
+</span> may be followed by a series of {@link #onStartInput(EditorInfo, boolean)}
+ and {@link #onFinishInput}() calls as the user navigates through its
+ UI.  Upon this call you know that {@link #getCurrentInputBinding}
+ and {@link #getCurrentInputConnection} return valid objects.
+*/
+onBindInput : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onUnbindInput'>/**Called when the previous bound client is no longer associated
+</span> with the input method.  After returning {@link #getCurrentInputBinding}
+ and {@link #getCurrentInputConnection} will no longer return
+ valid objects.
+*/
+onUnbindInput : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onStartInput'>/**Called to inform the input method that text input has started in an
+</span> editor.  You should use this callback to initialize the state of your
+ input to match the state of the editor given to it.
+@param {Object {EditorInfo}} attribute The attributes of the editor that input is starting
+ in.
+@param {Boolean} restarting Set to true if input is restarting in the same
+ editor such as because the application has changed the text in
+ the editor.  Otherwise will be false, indicating this is a new
+ session with the editor.
+*/
+onStartInput : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onFinishInput'>/**Called to inform the input method that text input has finished in
+</span> the last editor.  At this point there may be a call to
+ {@link #onStartInput(EditorInfo, boolean)} to perform input in a
+ new editor, or the input method may be left idle.  This method is
+ &lt;em&gt;not&lt;/em&gt; called when input restarts in the same editor.
+ 
+ &lt;p&gt;The default
+ implementation uses the InputConnection to clear any active composing
+ text; you can override this (not calling the base class implementation)
+ to perform whatever behavior you would like.
+*/
+onFinishInput : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onDisplayCompletions'>/**Called when the application has reported auto-completion candidates that
+</span> it would like to have the input method displayed.  Typically these are
+ only used when an input method is running in full-screen mode, since
+ otherwise the user can see and interact with the pop-up window of
+ completions shown by the application.
+ 
+ &lt;p&gt;The default implementation here does nothing.
+*/
+onDisplayCompletions : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onUpdateExtractedText'>/**Called when the application has reported new extracted text to be shown
+</span> due to changes in its current text state.  The default implementation
+ here places the new text in the extract edit text, when the input
+ method is running in fullscreen mode.
+*/
+onUpdateExtractedText : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onUpdateSelection'>/**Called when the application has reported a new selection region of
+</span> the text.  This is called whether or not the input method has requested
+ extracted text updates, although if so it will not receive this call
+ if the extracted text has changed as well.
+
+ &lt;p&gt;Be careful about changing the text in reaction to this call with
+ methods such as setComposingText, commitText or
+ deleteSurroundingText. If the cursor moves as a result, this method
+ will be called again, which may result in an infinite loop.
+ 
+ &lt;p&gt;The default implementation takes care of updating the cursor in
+ the extract text, if it is being shown.
+*/
+onUpdateSelection : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onViewClicked'>/**Called when the user tapped or clicked a text view.
+</span> IMEs can't rely on this method being called because this was not part of the original IME
+ protocol, so applications with custom text editing written before this method appeared will
+ not call to inform the IME of this interaction.
+@param {Boolean} focusChanged true if the user changed the focused view by this click.
+@see InputMethodManager#viewClicked(View)
+@deprecated The method may not be called for composite {@link View} that works as a giant
+             &quot;Canvas&quot;, which can host its own UI hierarchy and sub focus state.
+             {@link android.webkit.WebView} is a good example. Application / IME developers
+             should not rely on this method. If your goal is just being notified when an
+             on-going input is interrupted, simply monitor {@link #onFinishInput()}.
+*/
+onViewClicked : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onUpdateCursor'>/**Called when the application has reported a new location of its text
+</span> cursor.  This is only called if explicitly requested by the input method.
+ The default implementation does nothing.
+@deprecated Use {@link #onUpdateCursorAnchorInfo(CursorAnchorInfo)} instead.
+*/
+onUpdateCursor : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onUpdateCursorAnchorInfo'>/**Called when the application has reported a new location of its text insertion point and
+</span> characters in the composition string.  This is only called if explicitly requested by the
+ input method. The default implementation does nothing.
+@param {Object {CursorAnchorInfo}} cursorAnchorInfo The positional information of the text insertion point and the
+ composition string.
+*/
+onUpdateCursorAnchorInfo : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-requestHideSelf'>/**Close this input method's soft input area, removing it from the display.
+</span>
+ The input method will continue running, but the user can no longer use it to generate input
+ by touching the screen.
+@param {Number} flags Provides additional operating flags.
+@see InputMethodManager#HIDE_NOT_ALWAYS
+@param flags Provides additional operating flags.
+*/
+requestHideSelf : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-requestShowSelf'>/**Show the input method's soft input area, so the user sees the input method window and can
+</span> interact with it.
+@param {Number} flags Provides additional operating flags.
+@see InputMethodManager#SHOW_FORCED
+@param flags Provides additional operating flags.
+*/
+requestShowSelf : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onKeyDown'>/**Called back when a {@link android.inputmethodservice.Keyboard.KeyEvent} is forwarded from the target application.
+</span>
+ &lt;p&gt;The default implementation intercepts {@link android.inputmethodservice.Keyboard.KeyEvent#KEYCODE_BACK} if the IME is
+ currently shown , to possibly hide it when the key goes up (if not canceled or long pressed).
+ In addition, in fullscreen mode only, it will consume DPAD movement events to move the cursor
+ in the extracted text view, not allowing them to perform navigation in the underlying
+ application.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation does not take flags specified to
+ {@link #setBackDisposition}(int) into account, even on API version
+ {@link android.os.Build.VERSION_CODES#P} and later devices.  IME developers are responsible
+ for making sure that their special handling for {@link android.inputmethodservice.Keyboard.KeyEvent#KEYCODE_BACK} are consistent
+ with the flag they specified to {@link #setBackDisposition}(int).&lt;/p&gt;
+@param {Number} keyCode The value in {@code event.getKeyCode()}
+@param {Object {KeyEvent}} event Description of the key event
+@return {Boolean} {@code true} if the event is consumed by the IME and the application no longer needs
+         to consume it.  Return {@code false} when the event should be handled as if the IME
+         had not seen the event at all.
+*/
+onKeyDown : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onKeyLongPress'>/**Default implementation of {@link android.inputmethodservice.Keyboard.KeyEvent.Callback#onandroid.inputmethodservice.Keyboard.KeyLongPress(int, android.inputmethodservice.Keyboard.KeyEvent)
+</span> android.inputmethodservice.Keyboard.KeyEvent.Callback.onandroid.inputmethodservice.Keyboard.KeyLongPress()}: always returns false (doesn't handle
+ the event).
+*/
+onKeyLongPress : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onKeyMultiple'>/**Override this to intercept special key multiple events before they are
+</span> processed by the
+ application.  If you return true, the application will not itself
+ process the event.  If you return false, the normal application processing
+ will occur as if the IME had not seen the event at all.
+ 
+ &lt;p&gt;The default implementation always returns false, except when
+ in fullscreen mode, where it will consume DPAD movement
+ events to move the cursor in the extracted text view, not allowing
+ them to perform navigation in the underlying application.
+*/
+onKeyMultiple : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onKeyUp'>/**Override this to intercept key up events before they are processed by the
+</span> application.  If you return true, the application will not itself
+ process the event.  If you return false, the normal application processing
+ will occur as if the IME had not seen the event at all.
+ 
+ &lt;p&gt;The default implementation intercepts {@link android.inputmethodservice.Keyboard.KeyEvent#KEYCODE_BACK
+ android.inputmethodservice.Keyboard.KeyEvent.KEYCODE_BACK} to hide the current IME UI if it is shown.  In
+ addition, in fullscreen mode only, it will consume DPAD movement
+ events to move the cursor in the extracted text view, not allowing
+ them to perform navigation in the underlying application.
+*/
+onKeyUp : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onTrackballEvent'>/**Override this to intercept trackball motion events before they are
+</span> processed by the application.
+ If you return true, the application will not itself process the event.
+ If you return false, the normal application processing will occur as if
+ the IME had not seen the event at all.
+*/
+onTrackballEvent : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onGenericMotionEvent'>/**Override this to intercept generic motion events before they are
+</span> processed by the application.
+ If you return true, the application will not itself process the event.
+ If you return false, the normal application processing will occur as if
+ the IME had not seen the event at all.
+*/
+onGenericMotionEvent : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onAppPrivateCommand'>/**
+</span>*/
+onAppPrivateCommand : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-sendDownUpKeyEvents'>/**Send the given key event code (as defined by {@link android.inputmethodservice.Keyboard.KeyEvent}) to the
+</span> current input connection is a key down + key up event pair.  The sent
+ events have {@link android.inputmethodservice.Keyboard.KeyEvent#FLAG_SOFT_KEYBOARD android.inputmethodservice.Keyboard.KeyEvent.FLAG_SOFT_KEYBOARD}
+ set, so that the recipient can identify them as coming from a software
+ input method, and
+ {@link android.inputmethodservice.Keyboard.KeyEvent#FLAG_KEEP_TOUCH_MODE android.inputmethodservice.Keyboard.KeyEvent.FLAG_KEEP_TOUCH_MODE}, so
+ that they don't impact the current touch mode of the UI.
+
+ &lt;p&gt;Note that it's discouraged to send such key events in normal operation;
+ this is mainly for use with {@link android.text.InputType#TYPE_NULL} type
+ text fields, or for non-rich input methods. A reasonably capable software
+ input method should use the
+ {@link android.view.inputmethod.InputConnection#commitText} family of methods
+ to send text to an application, rather than sending key events.&lt;/p&gt;
+@param {Number} keyEventCode The raw key code to send, as defined by
+ {@link KeyEvent}.
+*/
+sendDownUpKeyEvents : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-sendDefaultEditorAction'>/**Ask the input target to execute its default action via
+</span> {@link InputConnection#performEditorAction
+ InputConnection.performEditorAction()}.
+@param {Boolean} fromEnterKey If true, this will be executed as if the user had
+ pressed an enter key on the keyboard, that is it will &lt;em&gt;not&lt;/em&gt;
+ be done if the editor has set {@link EditorInfo#IME_FLAG_NO_ENTER_ACTION
+ EditorInfo.IME_FLAG_NO_ENTER_ACTION}.  If false, the action will be
+ sent regardless of how the editor has set that flag.
+@return {Boolean} Returns a boolean indicating whether an action has been sent.
+ If false, either the editor did not specify a default action or it
+ does not want an action from the enter key.  If true, the action was
+ sent (or there was no input connection at all).
+*/
+sendDefaultEditorAction : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-sendKeyChar'>/**Send the given UTF-16 character to the current input connection.  Most
+</span> characters will be delivered simply by calling
+ {@link InputConnection#commitText InputConnection.commitText()} with
+ the character; some, however, may be handled different.  In particular,
+ the enter character ('\n') will either be delivered as an action code
+ or a raw key event, as appropriate.  Consider this as a convenience
+ method for IMEs that do not have a full implementation of actions; a
+ fully complying IME will decide of the right action for each event and
+ will likely never call this method except maybe to handle events coming
+ from an actual hardware keyboard.
+@param {String} charCode The UTF-16 character code to send.
+*/
+sendKeyChar : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractedSelectionChanged'>/**This is called when the user has moved the cursor in the extracted
+</span> text view, when running in fullsreen mode.  The default implementation
+ performs the corresponding selection change on the underlying text
+ editor.
+*/
+onExtractedSelectionChanged : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractedDeleteText'>/**
+</span>@hide 
+*/
+onExtractedDeleteText : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractedReplaceText'>/**
+</span>@hide 
+*/
+onExtractedReplaceText : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractedSetSpan'>/**
+</span>@hide 
+*/
+onExtractedSetSpan : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractedTextClicked'>/**This is called when the user has clicked on the extracted text view,
+</span> when running in fullscreen mode.  The default implementation hides
+ the candidates view when this happens, but only if the extracted text
+ editor has a vertical scroll bar because its text doesn't fit.
+ Re-implement this to provide whatever behavior you want.
+*/
+onExtractedTextClicked : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractedCursorMovement'>/**This is called when the user has performed a cursor movement in the
+</span> extracted text view, when it is running in fullscreen mode.  The default
+ implementation hides the candidates view when a vertical movement
+ happens, but only if the extracted text editor has a vertical scroll bar
+ because its text doesn't fit.
+ Re-implement this to provide whatever behavior you want.
+@param {Number} dx The amount of cursor movement in the x dimension.
+@param {Number} dy The amount of cursor movement in the y dimension.
+*/
+onExtractedCursorMovement : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractTextContextMenuItem'>/**This is called when the user has selected a context menu item from the
+</span> extracted text view, when running in fullscreen mode.  The default
+ implementation sends this action to the current InputConnection's
+ {@link InputConnection#performContextMenuAction(int)}, for it
+ to be processed in underlying &quot;real&quot; editor.  Re-implement this to
+ provide whatever behavior you want.
+*/
+onExtractTextContextMenuItem : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getTextForImeAction'>/**Return text that can be used as a button label for the given
+</span> {@link EditorInfo#imeOptions EditorInfo.imeOptions}.  Returns null
+ if there is no action requested.  Note that there is no guarantee that
+ the returned text will be relatively short, so you probably do not
+ want to use it as text on a soft keyboard key label.
+@param {Number} imeOptions The value from {@link EditorInfo#imeOptions EditorInfo.imeOptions}.
+@return {Object {java.lang.CharSequence}} Returns a label to use, or null if there is no action.
+*/
+getTextForImeAction : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onUpdateExtractingVisibility'>/**Called when the fullscreen-mode extracting editor info has changed,
+</span> to determine whether the extracting (extract text and candidates) portion
+ of the UI should be shown.  The standard implementation hides or shows
+ the extract area depending on whether it makes sense for the
+ current editor.  In particular, a {@link InputType#TYPE_NULL}
+ input type or {@link EditorInfo#IME_FLAG_NO_EXTRACT_UI} flag will
+ turn off the extract area since there is no text to be shown.
+*/
+onUpdateExtractingVisibility : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onUpdateExtractingViews'>/**Called when the fullscreen-mode extracting editor info has changed,
+</span> to update the state of its UI such as the action buttons shown.
+ You do not need to deal with this if you are using the standard
+ full screen extract UI.  If replacing it, you will need to re-implement
+ this to put the appropriate action button in your own UI and handle it,
+ and perform any other changes.
+ 
+ &lt;p&gt;The standard implementation turns on or off its accessory area
+ depending on whether there is an action button, and hides or shows
+ the entire extract area depending on whether it makes sense for the
+ current editor.  In particular, a {@link InputType#TYPE_NULL} or 
+ {@link InputType#TYPE_TEXT_VARIATION_FILTER} input type will turn off the
+ extract area since there is no text to be shown.
+*/
+onUpdateExtractingViews : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-onExtractingInputChanged'>/**This is called when, while currently displayed in extract mode, the
+</span> current input target changes.  The default implementation will
+ auto-hide the IME if the new target is not a full editor, since this
+ can be a confusing experience for the user.
+*/
+onExtractingInputChanged : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-getInputMethodWindowRecommendedHeight'>/**Aimed to return the previous input method's {@link android.inputmethodservice.InputMethodService.Insets#contentTopandroid.inputmethodservice.InputMethodService.Insets}, but its actual
+</span> semantics has never been well defined.
+
+ &lt;p&gt;Note that the previous document clearly mentioned that this method could return {@code 0}
+ at any time for whatever reason.  Now this method is just always returning {@code 0}.&lt;/p&gt;
+@return {Number} on Android {@link android.os.Build.VERSION_CODES#Q} and later devices this method
+         always returns {@code 0}
+@deprecated the actual behavior of this method has never been well defined.  You cannot use
+             this method in a reliable and predictable way
+*/
+getInputMethodWindowRecommendedHeight : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-exposeContent'>/**Allow the receiver of {@link InputContentInfo} to obtain a temporary read-only access
+</span> permission to the content.
+@param {Object {InputContentInfo}} inputContentInfo Content to be temporarily exposed from the input method to the
+ application.
+ This cannot be {@code null}.
+@param {Object {InputConnection}} inputConnection {@link InputConnection} with which
+ {@link InputConnection#commitContent(InputContentInfo, int, Bundle)} will be called.
+@hide 
+*/
+exposeContent : function(  ) {},
+
+<span id='android-inputmethodservice-InputMethodService-method-notifyUserActionIfNecessary'>/**{@inheritDoc}
+</span>@hide 
+*/
+notifyUserActionIfNecessary : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

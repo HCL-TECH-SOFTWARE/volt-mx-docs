@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-textservice-SpellCheckerService-Session'>/**@class android.service.textservice.SpellCheckerService.Session
+</span>@extends java.lang.Object
+
+ This abstract class should be overridden by a concrete implementation of a spell checker.
+*/
+var Session = {
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-setInternalISpellCheckerSession'>/**
+</span>@hide 
+*/
+setInternalISpellCheckerSession : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-onCreate'>/**This is called after the class is initialized, at which point it knows it can call
+</span> getLocale() etc...
+*/
+onCreate : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-onGetSuggestions'>/**Get suggestions for specified text in TextInfo.
+</span> This function will run on the incoming IPC thread.
+ So, this is not called on the main thread,
+ but will be called in series on another thread.
+@param {Object {TextInfo}} textInfo the text metadata
+@param {Number} suggestionsLimit the maximum number of suggestions to be returned
+@return {Object {android.view.textservice.SuggestionsInfo}} SuggestionsInfo which contains suggestions for textInfo
+*/
+onGetSuggestions : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-onGetSuggestionsMultiple'>/**A batch process of onGetSuggestions.
+</span> This function will run on the incoming IPC thread.
+ So, this is not called on the main thread,
+ but will be called in series on another thread.
+@param {Object {android.view.textservice.TextInfo[]}} textInfos an array of the text metadata
+@param {Number} suggestionsLimit the maximum number of suggestions to be returned
+@param {Boolean} sequentialWords true if textInfos can be treated as sequential words.
+@return {Object {android.view.textservice.SuggestionsInfo}} an array of {@link SentenceSuggestionsInfo} returned by
+ {@link SpellCheckerService.Session#onGetSuggestions(TextInfo, int)}
+*/
+onGetSuggestionsMultiple : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-onGetSentenceSuggestionsMultiple'>/**Get sentence suggestions for specified texts in an array of TextInfo.
+</span> The default implementation splits the input text to words and returns
+ {@link SentenceSuggestionsInfo} which contains suggestions for each word.
+ This function will run on the incoming IPC thread.
+ So, this is not called on the main thread,
+ but will be called in series on another thread.
+ When you override this method, make sure that suggestionsLimit is applied to suggestions
+ that share the same start position and length.
+@param {Object {android.view.textservice.TextInfo[]}} textInfos an array of the text metadata
+@param {Number} suggestionsLimit the maximum number of suggestions to be returned
+@return {Object {android.view.textservice.SentenceSuggestionsInfo}} an array of {@link SentenceSuggestionsInfo} returned by
+ {@link SpellCheckerService.Session#onGetSuggestions(TextInfo, int)}
+*/
+onGetSentenceSuggestionsMultiple : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-onCancel'>/**Request to abort all tasks executed in SpellChecker.
+</span> This function will run on the incoming IPC thread.
+ So, this is not called on the main thread,
+ but will be called in series on another thread.
+*/
+onCancel : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-onClose'>/**Request to close this session.
+</span> This function will run on the incoming IPC thread.
+ So, this is not called on the main thread,
+ but will be called in series on another thread.
+*/
+onClose : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-getLocale'>/**
+</span>@return {String} Locale for this session
+*/
+getLocale : function(  ) {},
+
+<span id='android-service-textservice-SpellCheckerService-Session-method-getBundle'>/**
+</span>@return {Object {android.os.Bundle}} Bundle for this session
+*/
+getBundle : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

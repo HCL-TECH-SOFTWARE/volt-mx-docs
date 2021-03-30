@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-ImsCallSessionListener'>/**@class android.telephony.ims.ImsCallSessionListener
+</span>@extends java.lang.Object
+
+ Listener interface for notifying the Framework's {@link android.telephony.ims.ImsCallSession} for updates to an ongoing
+ IMS call.
+
+ @hide
+*/
+var ImsCallSessionListener = {
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionProgressing'>/**A request has been sent out to initiate a new IMS call session and a 1xx response has been
+</span> received from the network.
+*/
+callSessionProgressing : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionInitiated'>/**The IMS call session has been initiated.
+</span>@param {Object {ImsCallProfile}} profile the associated {@link ImsCallProfile}.
+*/
+callSessionInitiated : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionInitiatedFailed'>/**The IMS call session establishment has failed.
+</span>@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} detailing the reason of the IMS call session
+ establishment failure.
+*/
+callSessionInitiatedFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionTerminated'>/**The IMS call session has been terminated.
+</span>@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} detailing the reason of the session termination.
+*/
+callSessionTerminated : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionHeld'>/**The IMS call session has started the process of holding the call. If it fails,
+</span> {@link #callSessionHoldFailed}(ImsReasonInfo) should be called.
+
+ If the IMS call session is resumed, call {@link #callSessionResumed}(ImsCallProfile).
+@param {Object {ImsCallProfile}} profile The associated {@link ImsCallProfile} of the call session that has been put
+ on hold.
+*/
+callSessionHeld : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionHoldFailed'>/**The IMS call session has failed to be held.
+</span>@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} detailing the reason of the session hold failure.
+*/
+callSessionHoldFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionHoldReceived'>/**This IMS Call session has been put on hold by the remote party.
+</span>@param {Object {ImsCallProfile}} profile The {@link ImsCallProfile} associated with this IMS call session.
+*/
+callSessionHoldReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionResumed'>/**The IMS call session has started the process of resuming the call. If the process of resuming
+</span> the call fails, call {@link #callSessionResumeFailed}(ImsReasonInfo).
+@param {Object {ImsCallProfile}} profile The {@link ImsCallProfile} associated with this IMS call session.
+*/
+callSessionResumed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionResumeFailed'>/**The IMS call session resume has failed.
+</span>@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} containing the detailed reason of the session resume
+ failure.
+*/
+callSessionResumeFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionResumeReceived'>/**The remote party has resumed this IMS call session.
+</span>@param {Object {ImsCallProfile}} profile {@link ImsCallProfile} associated with the IMS call session.
+*/
+callSessionResumeReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionMergeStarted'>/**The IMS call session merge has been started.  At this point, the {@code newSession}
+</span> represents the IMS call session which represents the new merged conference and has been
+ initiated to the IMS conference server.
+@param {Object {ImsCallSessionImplBase}} newSession the {@link ImsCallSessionImplBase} that represents the merged active &amp; held
+ sessions.
+@param {Object {ImsCallProfile}} profile The {@link ImsCallProfile} associated with this IMS call session.
+*/
+callSessionMergeStarted : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionMergeStarted'>/**Compatibility method for older implementations.
+</span> See {@link #callSessionMergeStarted(ImsCallSessionImplBase, android.telephony.ims.ImsCallProfile)}.
+@hide 
+*/
+callSessionMergeStarted : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionMergeComplete'>/**The session merge is successful and the merged {@link android.telephony.ims.ImsCallSession} is active.
+</span>@param {Object {ImsCallSessionImplBase}} newSession the new {@link ImsCallSessionImplBase}
+                  that represents the conference IMS call
+ session.
+*/
+callSessionMergeComplete : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionMergeComplete'>/**Compatibility method for older implementations of ImsService.
+</span>
+ See {@link #callSessionMergeComplete}(ImsCallSessionImplBase)}.
+@hide 
+*/
+callSessionMergeComplete : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionMergeFailed'>/**The IMS call session merge has failed.
+</span>@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} contining the reason for the call merge failure.
+*/
+callSessionMergeFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionUpdated'>/**The IMS call session profile has been updated. Does not include holding or resuming a call.
+</span>@param {Object {ImsCallProfile}} profile The {@link ImsCallProfile} associated with the updated IMS call session.
+*/
+callSessionUpdated : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionUpdateFailed'>/**The IMS call session profile update has failed.
+</span>@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} containing a reason for the session update failure.
+*/
+callSessionUpdateFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionUpdateReceived'>/**The IMS call session profile has received an update from the remote user.
+</span>@param {Object {ImsCallProfile}} profile The new {@link ImsCallProfile} associated with the update.
+*/
+callSessionUpdateReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionConferenceExtended'>/**Called when the session has been extended to a conference session.
+</span>
+ If the conference extension fails, call
+ {@link #callSessionConferenceExtendFailed}(ImsReasonInfo).
+@param {Object {ImsCallSessionImplBase}} newSession the session object that is extended to the conference from the active
+ IMS Call session.
+@param {Object {ImsCallProfile}} profile The {@link ImsCallProfile} associated with the IMS call session.
+*/
+callSessionConferenceExtended : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionConferenceExtended'>/**Compatibility method to interface with older versions of ImsService.
+</span> See {@link #callSessionConferenceExtended(ImsCallSessionImplBase, android.telephony.ims.ImsCallProfile)}.
+@hide 
+*/
+callSessionConferenceExtended : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionConferenceExtendFailed'>/**The previous conference extension has failed.
+</span>@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} containing the detailed reason of the conference
+ extension failure.
+*/
+callSessionConferenceExtendFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionConferenceExtendReceived'>/**A conference extension has been received received from the remote party.
+</span>@param {Object {ImsCallSessionImplBase}} newSession An {@link ImsCallSessionImplBase}
+                   representing the extended IMS call session.
+@param {Object {ImsCallProfile}} profile The {@link ImsCallProfile} associated with the new IMS call session.
+*/
+callSessionConferenceExtendReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionConferenceExtendReceived'>/**Compatibility method to interface with older versions of ImsService.
+</span> See {@link #callSessionConferenceExtendReceived(ImsCallSessionImplBase, android.telephony.ims.ImsCallProfile)}.
+@hide 
+*/
+callSessionConferenceExtendReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionInviteParticipantsRequestDelivered'>/**The request to invite participants to the conference has been delivered to the conference
+</span> server.
+*/
+callSessionInviteParticipantsRequestDelivered : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionInviteParticipantsRequestFailed'>/**The previous request to invite participants to the conference (see
+</span> {@link #callSessionInviteParticipantsRequestDelivered}()) has failed.
+@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} detailing the reason forthe conference invitation
+ failure.
+*/
+callSessionInviteParticipantsRequestFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionRemoveParticipantsRequestDelivered'>/**The request to remove participants from the conference has been delivered to the conference
+</span> server.
+*/
+callSessionRemoveParticipantsRequestDelivered : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionRemoveParticipantsRequestFailed'>/**The previous request to remove participants from the conference (see
+</span> {@link #callSessionRemoveParticipantsRequestDelivered}()) has failed.
+@param {Object {ImsReasonInfo}} reasonInfo {@link ImsReasonInfo} detailing the reason for the conference removal
+ failure.
+*/
+callSessionRemoveParticipantsRequestFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionConferenceStateUpdated'>/**The IMS call session's conference state has changed.
+</span>@param {Object {ImsConferenceState}} state The new {@link ImsConferenceState} associated with the conference.
+*/
+callSessionConferenceStateUpdated : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionUssdMessageReceived'>/**The IMS call session has received a Ussd message.
+</span>@param {Number} mode The mode of the USSD message, either
+ {@link ImsCallSessionImplBase#USSD_MODE_NOTIFY} or
+ {@link ImsCallSessionImplBase#USSD_MODE_REQUEST}.
+@param {String} ussdMessage The USSD message.
+*/
+callSessionUssdMessageReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionMayHandover'>/**An {@link android.telephony.ims.ImsCallSession} may potentially handover from one radio
+</span> technology to another.
+@param {Number} srcAccessTech The source radio access technology; one of the access technology
+ constants defined in {@link android.telephony.ServiceState}. For example
+ {@link android.telephony.ServiceState#RIL_RADIO_TECHNOLOGY_LTE}.
+@param {Number} targetAccessTech The target radio access technology; one of the access technology
+ constants defined in {@link android.telephony.ServiceState}. For example
+ {@link android.telephony.ServiceState#RIL_RADIO_TECHNOLOGY_LTE}.
+*/
+callSessionMayHandover : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionHandover'>/**The IMS call session's access technology has changed.
+</span>@param {Number} srcAccessTech original access technology, defined in
+ {@link android.telephony.ServiceState}.
+@param {Number} targetAccessTech new access technology, defined in
+ {@link android.telephony.ServiceState}.
+@param {Object {ImsReasonInfo}} reasonInfo The {@link ImsReasonInfo} associated with this handover.
+*/
+callSessionHandover : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionHandoverFailed'>/**The IMS call session's access technology change has failed..
+</span>@param {Number} srcAccessTech original access technology
+@param {Number} targetAccessTech new access technology
+@param {Object {ImsReasonInfo}} reasonInfo An {@link ImsReasonInfo} detailing the reason for the failure.
+*/
+callSessionHandoverFailed : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionTtyModeReceived'>/**The TTY mode has been changed by the remote party.
+</span>@param {Number} mode one of the following: -
+             {@link com.android.internal.telephony.Phone#TTY_MODE_OFF} -
+             {@link com.android.internal.telephony.Phone#TTY_MODE_FULL} -
+             {@link com.android.internal.telephony.Phone#TTY_MODE_HCO} -
+             {@link com.android.internal.telephony.Phone#TTY_MODE_VCO}
+*/
+callSessionTtyModeReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionMultipartyStateChanged'>/**The multiparty state has been changed for this {@code ImsCallSession}.
+</span>@param {Boolean} isMultiParty {@code true} if the session became multiparty, {@code false} otherwise.
+*/
+callSessionMultipartyStateChanged : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionSuppServiceReceived'>/**Supplementary service information has been received for the current IMS call session.
+</span>@param {Object {ImsSuppServiceNotification}} suppSrvNotification The {@link ImsSuppServiceNotification} containing the change.
+*/
+callSessionSuppServiceReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionRttModifyRequestReceived'>/**An RTT modify request has been received from the remote party.
+</span>@param {Object {ImsCallProfile}} callProfile An {@link ImsCallProfile} with the updated attributes
+*/
+callSessionRttModifyRequestReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionRttModifyResponseReceived'>/**An RTT modify response has been received.
+</span>@param {Number} status the received response for RTT modify request.
+*/
+callSessionRttModifyResponseReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionRttMessageReceived'>/**An RTT message has been received from the remote party.
+</span>@param {String} rttMessage The RTT message that has been received.
+*/
+callSessionRttMessageReceived : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callSessionRttAudioIndicatorChanged'>/**While in call, there has been a change in RTT audio indicator.
+</span>@param {Object {ImsStreamMediaProfile}} profile updated ImsStreamMediaProfile
+*/
+callSessionRttAudioIndicatorChanged : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallSessionListener-method-callQualityChanged'>/**The call quality has changed.
+</span>@param {Object {CallQuality}} callQuality The new call quality
+*/
+callQualityChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

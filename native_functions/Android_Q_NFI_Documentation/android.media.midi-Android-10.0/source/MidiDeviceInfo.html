@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-midi-MidiDeviceInfo'>/**@class android.media.midi.MidiDeviceInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class contains information to describe a MIDI device.
+ For now we only have information that can be retrieved easily for USB devices,
+ but we will probably expand this in the future.
+
+ This class is just an immutable object to encapsulate the MIDI device description.
+ Use the MidiDevice class to actually communicate with devices.
+*/
+var MidiDeviceInfo = {
+
+<span id='android-media-midi-MidiDeviceInfo-property-TYPE_USB'>/** Constant representing USB MIDI devices for {@link #getType}
+</span>*/
+TYPE_USB : &quot;1&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-TYPE_VIRTUAL'>/** Constant representing virtual (software based) MIDI devices for {@link #getType}
+</span>*/
+TYPE_VIRTUAL : &quot;2&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-TYPE_BLUETOOTH'>/** Constant representing Bluetooth MIDI devices for {@link #getType}
+</span>*/
+TYPE_BLUETOOTH : &quot;3&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_NAME'>/** Bundle key for the device's user visible name property.
+</span> The value for this property is of type {@link java.lang.String}.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}.
+ For USB devices, this is a concatenation of the manufacturer and product names.
+*/
+PROPERTY_NAME : &quot;name&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_MANUFACTURER'>/** Bundle key for the device's manufacturer name property.
+</span> The value for this property is of type {@link java.lang.String}.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}.
+ Matches the USB device manufacturer name string for USB MIDI devices.
+*/
+PROPERTY_MANUFACTURER : &quot;manufacturer&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_PRODUCT'>/** Bundle key for the device's product name property.
+</span> The value for this property is of type {@link java.lang.String}.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+ Matches the USB device product name string for USB MIDI devices.
+*/
+PROPERTY_PRODUCT : &quot;product&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_VERSION'>/** Bundle key for the device's version property.
+</span> The value for this property is of type {@link java.lang.String}.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+ Matches the USB device version number for USB MIDI devices.
+*/
+PROPERTY_VERSION : &quot;version&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_SERIAL_NUMBER'>/** Bundle key for the device's serial number property.
+</span> The value for this property is of type {@link java.lang.String}.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+ Matches the USB device serial number for USB MIDI devices.
+*/
+PROPERTY_SERIAL_NUMBER : &quot;serial_number&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_USB_DEVICE'>/** Bundle key for the device's corresponding USB device.
+</span> The value for this property is of type {@link android.hardware.usb.UsbDevice}.
+ Only set for USB MIDI devices.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+*/
+PROPERTY_USB_DEVICE : &quot;usb_device&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_BLUETOOTH_DEVICE'>/** Bundle key for the device's corresponding Bluetooth device.
+</span> The value for this property is of type {@link android.bluetooth.BluetoothDevice}.
+ Only set for Bluetooth MIDI devices.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+*/
+PROPERTY_BLUETOOTH_DEVICE : &quot;bluetooth_device&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_ALSA_CARD'>/** Bundle key for the device's ALSA card number.
+</span> The value for this property is an integer.
+ Only set for USB MIDI devices.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+
+ @hide
+*/
+PROPERTY_ALSA_CARD : &quot;alsa_card&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_ALSA_DEVICE'>/** Bundle key for the device's ALSA device number.
+</span> The value for this property is an integer.
+ Only set for USB MIDI devices.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+
+ @hide
+*/
+PROPERTY_ALSA_DEVICE : &quot;alsa_device&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-PROPERTY_SERVICE_INFO'>/** ServiceInfo for the service hosting the device implementation.
+</span> The value for this property is of type {@link android.content.pm.ServiceInfo}.
+ Only set for Virtual MIDI devices.
+ Used with the {@link android.os.Bundle} returned by {@link #getProperties}
+
+ @hide
+*/
+PROPERTY_SERVICE_INFO : &quot;service_info&quot;,
+<span id='android-media-midi-MidiDeviceInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-media-midi-MidiDeviceInfo-method-getType'>/**Returns the type of the device.
+</span>@return {Number} the device's type
+*/
+getType : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-getId'>/**Returns the ID of the device.
+</span> This ID is generated by the MIDI service and is not persistent across device unplugs.
+@return {Number} the device's ID
+*/
+getId : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-getInputPortCount'>/**Returns the device's number of input ports.
+</span>@return {Number} the number of input ports
+*/
+getInputPortCount : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-getOutputPortCount'>/**Returns the device's number of output ports.
+</span>@return {Number} the number of output ports
+*/
+getOutputPortCount : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-getPorts'>/**Returns information about the device's ports.
+</span> The ports are in unspecified order.
+@return {Object {android.media.midi.MidiDeviceInfo.PortInfo}} array of {@link PortInfo}
+*/
+getPorts : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-getProperties'>/**Returns the {@link android.os.Bundle} containing the device's properties.
+</span>@return {Object {android.os.Bundle}} the device's properties
+*/
+getProperties : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-isPrivate'>/**Returns true if the device is private.  Private devices are only visible and accessible
+</span> to clients with the same UID as the application that is hosting the device.
+@return {Boolean} true if the device is private
+*/
+isPrivate : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

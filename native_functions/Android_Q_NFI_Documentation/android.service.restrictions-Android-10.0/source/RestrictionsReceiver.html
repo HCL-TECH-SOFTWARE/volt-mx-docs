@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-restrictions-RestrictionsReceiver'>/**@class android.service.restrictions.RestrictionsReceiver
+</span>@extends android.content.BroadcastReceiver
+
+ Abstract implementation of a Restrictions Provider BroadcastReceiver. To implement a
+ Restrictions Provider, extend from this class and implement the abstract methods.
+ Export this receiver in the manifest. A profile owner device admin can then register this
+ component as a Restrictions Provider using
+ {@link DevicePolicyManager#setRestrictionsProvider(ComponentName, ComponentName)}.
+ &lt;p&gt;
+ The function of a Restrictions Provider is to transport permission requests from apps on this
+ device to an administrator (most likely on a remote device or computer) and deliver back
+ responses. The response should be sent back to the app via
+ {@link RestrictionsManager#notifyPermissionResponse(String, PersistableBundle)}.
+
+ @see RestrictionsManager
+*/
+var RestrictionsReceiver = {
+
+<span id='android-service-restrictions-RestrictionsReceiver-method-onRequestPermission'>/**An asynchronous permission request made by an application for an operation that requires
+</span> authorization by a local or remote administrator other than the user. The Restrictions
+ Provider should transfer the request to the administrator and deliver back a response, when
+ available. The calling application is aware that the response could take an indefinite
+ amount of time.
+ &lt;p&gt;
+ If the request bundle contains the key {@link RestrictionsManager#REQUEST_KEY_NEW_REQUEST},
+ then a new request must be sent. Otherwise the provider can look up any previous response
+ to the same requestId and return the cached response.
+@param {Object {Context}} packageName the application requesting permission.
+@param {String} requestType the type of request, which determines the content and presentation of
+ the request data.
+@param {String} request the request data bundle containing at a minimum a request id.
+@see RestrictionsManager#REQUEST_TYPE_APPROVAL
+@see RestrictionsManager#REQUEST_KEY_ID
+*/
+onRequestPermission : function(  ) {},
+
+<span id='android-service-restrictions-RestrictionsReceiver-method-onReceive'>/**Intercept standard Restrictions Provider broadcasts.  Implementations
+</span> should not override this method; it is better to implement the
+ convenience callbacks for each action.
+*/
+onReceive : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

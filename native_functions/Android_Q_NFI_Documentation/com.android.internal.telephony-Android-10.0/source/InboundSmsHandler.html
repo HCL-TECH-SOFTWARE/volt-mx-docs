@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-InboundSmsHandler'>/**@class com.android.internal.telephony.InboundSmsHandler
+</span>@extends com.android.internal.util.StateMachine
+
+ This class broadcasts incoming SMS messages to interested apps after storing them in
+ the SmsProvider &quot;raw&quot; table and ACKing them to the SMSC. After each message has been
+ broadcast, its parts are removed from the raw table. If the device crashes after ACKing
+ but before the broadcast completes, the pending messages will be rebroadcast on the next boot.
+
+ &lt;p&gt;The state machine starts in {@link IdleState} state. When the {@link com.android.internal.telephony.SMSDispatcher} receives a
+ new SMS from the radio, it calls {@link #dispatchNormalMessage},
+ which sends a message to the state machine, causing the wakelock to be acquired in
+ {@link #haltedProcessMessage}, which transitions to {@link DeliveringState} state, where the message
+ is saved to the raw table, then acknowledged via the {@link com.android.internal.telephony.SMSDispatcher} which called us.
+
+ &lt;p&gt;After saving the SMS, if the message is complete (either single-part or the final segment
+ of a multi-part SMS), we broadcast the completed PDUs as an ordered broadcast, then transition to
+ {@link WaitingState} state to wait for the broadcast to complete. When the local
+ {@link BroadcastReceiver} is called with the result, it sends {@link #EVENT_BROADCAST_COMPLETE}
+ to the state machine, causing us to either broadcast the next pending message (if one has
+ arrived while waiting for the broadcast to complete), or to transition back to the halted state
+ after all messages are processed. Then the wakelock is released and we wait for the next SMS.
+*/
+var InboundSmsHandler = {
+
+<span id='com-android-internal-telephony-InboundSmsHandler-property-PDU_COLUMN'>/***/
+</span>PDU_COLUMN : &quot;0&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-SEQUENCE_COLUMN'>/***/
+</span>SEQUENCE_COLUMN : &quot;1&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-DESTINATION_PORT_COLUMN'>/***/
+</span>DESTINATION_PORT_COLUMN : &quot;2&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-DATE_COLUMN'>/***/
+</span>DATE_COLUMN : &quot;3&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-REFERENCE_NUMBER_COLUMN'>/***/
+</span>REFERENCE_NUMBER_COLUMN : &quot;4&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-COUNT_COLUMN'>/***/
+</span>COUNT_COLUMN : &quot;5&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-ADDRESS_COLUMN'>/***/
+</span>ADDRESS_COLUMN : &quot;6&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-ID_COLUMN'>/***/
+</span>ID_COLUMN : &quot;7&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-MESSAGE_BODY_COLUMN'>/***/
+</span>MESSAGE_BODY_COLUMN : &quot;8&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-DISPLAY_ADDRESS_COLUMN'>/***/
+</span>DISPLAY_ADDRESS_COLUMN : &quot;9&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-DELETED_FLAG_COLUMN'>/***/
+</span>DELETED_FLAG_COLUMN : &quot;10&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-SELECT_BY_ID'>/***/
+</span>SELECT_BY_ID : &quot;_id=?&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-EVENT_NEW_SMS'>/**New SMS received as an AsyncResult. */
+</span>EVENT_NEW_SMS : &quot;1&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-EVENT_BROADCAST_SMS'>/**Message type containing a {@link com.android.internal.telephony.InboundSmsTracker} ready to broadcast to listeners. */
+</span>EVENT_BROADCAST_SMS : &quot;2&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-EVENT_START_ACCEPTING_SMS'>/**Sent by {@link com.android.internal.telephony.SmsBroadcastUndelivered} after cleaning the raw table. */
+</span>EVENT_START_ACCEPTING_SMS : &quot;6&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-EVENT_INJECT_SMS'>/**New SMS received as an AsyncResult. */
+</span>EVENT_INJECT_SMS : &quot;7&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-property-EVENT_UPDATE_TRACKER'>/**Update the sms tracker */
+</span>EVENT_UPDATE_TRACKER : &quot;8&quot;,
+<span id='com-android-internal-telephony-InboundSmsHandler-method-dispose'>/**Tell the state machine to quit after processing all messages.
+</span>*/
+dispose : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsHandler-method-getPhone'>/**
+</span>*/
+getPhone : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsHandler-method-dispatchIntent'>/**Dispatch the intent with the specified permission, appOp, and result receiver, using
+</span> this state machine's handler thread to run the result receiver.
+@param {Object {Intent}} intent the intent to broadcast
+@param {String} permission receivers are required to have this permission
+@param {Number} appOp app op that is being performed when dispatching to a receiver
+@param {Object {Bundle}} user user to deliver the intent to
+*/
+dispatchIntent : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsHandler-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsHandler-method-getWakeLock'>/**
+</span>*/
+getWakeLock : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsHandler-method-getWakeLockTimeout'>/**
+</span>*/
+getWakeLockTimeout : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-hotspot2-ProvisioningCallback'>/**@class android.net.wifi.hotspot2.ProvisioningCallback
+</span>@extends java.lang.Object
+
+ Base class for provisioning callbacks. Should be extended by applications and set when calling
+ {@link WifiManager#startSubscriptionProvisioning(OsuProvider, android.net.wifi.hotspot2.ProvisioningCallback, Handler)}.
+
+ @hide
+*/
+var ProvisioningCallback = {
+
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_AP_CONNECTION'>/** The reason code for Provisioning Failure due to connection failure to OSU AP.
+</span>*/
+OSU_FAILURE_AP_CONNECTION : &quot;1&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_SERVER_URL_INVALID'>/** The reason code for invalid server URL address.
+</span>*/
+OSU_FAILURE_SERVER_URL_INVALID : &quot;2&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_SERVER_CONNECTION'>/** The reason code for provisioning failure due to connection failure to the server.
+</span>*/
+OSU_FAILURE_SERVER_CONNECTION : &quot;3&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_SERVER_VALIDATION'>/** The reason code for provisioning failure due to invalid server certificate.
+</span>*/
+OSU_FAILURE_SERVER_VALIDATION : &quot;4&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_SERVICE_PROVIDER_VERIFICATION'>/** The reason code for provisioning failure due to invalid service provider.
+</span>*/
+OSU_FAILURE_SERVICE_PROVIDER_VERIFICATION : &quot;5&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_PROVISIONING_ABORTED'>/** The reason code for provisioning failure when a provisioning flow is aborted.
+</span>*/
+OSU_FAILURE_PROVISIONING_ABORTED : &quot;6&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_PROVISIONING_NOT_AVAILABLE'>/** The reason code for provisioning failure when a provisioning flow is not possible.
+</span>*/
+OSU_FAILURE_PROVISIONING_NOT_AVAILABLE : &quot;7&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_INVALID_URL_FORMAT_FOR_OSU'>/** The reason code for provisioning failure due to invalid web url format for an OSU web page.
+</span>*/
+OSU_FAILURE_INVALID_URL_FORMAT_FOR_OSU : &quot;8&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_UNEXPECTED_COMMAND_TYPE'>/** The reason code for provisioning failure when a command received is not the expected command
+</span> type.
+*/
+OSU_FAILURE_UNEXPECTED_COMMAND_TYPE : &quot;9&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_UNEXPECTED_SOAP_MESSAGE_TYPE'>/** The reason code for provisioning failure when a SOAP message is not the expected message
+</span> type.
+*/
+OSU_FAILURE_UNEXPECTED_SOAP_MESSAGE_TYPE : &quot;10&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_SOAP_MESSAGE_EXCHANGE'>/** The reason code for provisioning failure when a SOAP message exchange fails.
+</span>*/
+OSU_FAILURE_SOAP_MESSAGE_EXCHANGE : &quot;11&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_START_REDIRECT_LISTENER'>/** The reason code for provisioning failure when a redirect listener fails to start.
+</span>*/
+OSU_FAILURE_START_REDIRECT_LISTENER : &quot;12&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_TIMED_OUT_REDIRECT_LISTENER'>/** The reason code for provisioning failure when a redirect listener timed out to receive a HTTP
+</span> redirect response.
+*/
+OSU_FAILURE_TIMED_OUT_REDIRECT_LISTENER : &quot;13&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_NO_OSU_ACTIVITY_FOUND'>/** The reason code for provisioning failure when there is no OSU activity to listen to
+</span> {@link WifiManager#ACTION_PASSPOINT_LAUNCH_OSU_VIEW} intent.
+*/
+OSU_FAILURE_NO_OSU_ACTIVITY_FOUND : &quot;14&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_UNEXPECTED_SOAP_MESSAGE_STATUS'>/** The reason code for provisioning failure when the status of a SOAP message is not the
+</span> expected message status.
+*/
+OSU_FAILURE_UNEXPECTED_SOAP_MESSAGE_STATUS : &quot;15&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_NO_PPS_MO'>/** The reason code for provisioning failure when there is no PPS MO.
+</span> MO.
+*/
+OSU_FAILURE_NO_PPS_MO : &quot;16&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_NO_AAA_SERVER_TRUST_ROOT_NODE'>/** The reason code for provisioning failure when there is no AAAServerTrustRoot node in a PPS
+</span> MO.
+*/
+OSU_FAILURE_NO_AAA_SERVER_TRUST_ROOT_NODE : &quot;17&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_NO_REMEDIATION_SERVER_TRUST_ROOT_NODE'>/** The reason code for provisioning failure when there is no TrustRoot node for remediation
+</span> server in a PPS MO.
+*/
+OSU_FAILURE_NO_REMEDIATION_SERVER_TRUST_ROOT_NODE : &quot;18&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_NO_POLICY_SERVER_TRUST_ROOT_NODE'>/** The reason code for provisioning failure when there is no TrustRoot node for policy server in
+</span> a PPS MO.
+*/
+OSU_FAILURE_NO_POLICY_SERVER_TRUST_ROOT_NODE : &quot;19&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_RETRIEVE_TRUST_ROOT_CERTIFICATES'>/** The reason code for provisioning failure when failing to retrieve trust root certificates
+</span> used for validating server certificate for AAA, Remediation and Policy server.
+*/
+OSU_FAILURE_RETRIEVE_TRUST_ROOT_CERTIFICATES : &quot;20&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_NO_AAA_TRUST_ROOT_CERTIFICATE'>/** The reason code for provisioning failure when there is no trust root certificate for AAA
+</span> server.
+*/
+OSU_FAILURE_NO_AAA_TRUST_ROOT_CERTIFICATE : &quot;21&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_ADD_PASSPOINT_CONFIGURATION'>/** The reason code for provisioning failure when a {@link android.net.wifi.hotspot2.PasspointConfiguration} is failed to
+</span> install.
+*/
+OSU_FAILURE_ADD_PASSPOINT_CONFIGURATION : &quot;22&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_FAILURE_OSU_PROVIDER_NOT_FOUND'>/** The reason code for provisioning failure when an {@link android.net.wifi.hotspot2.OsuProvider} is not found for
+</span> provisioning.
+*/
+OSU_FAILURE_OSU_PROVIDER_NOT_FOUND : &quot;23&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_AP_CONNECTING'>/** The status code for provisioning flow to indicate connecting to OSU AP
+</span>*/
+OSU_STATUS_AP_CONNECTING : &quot;1&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_AP_CONNECTED'>/** The status code for provisioning flow to indicate the OSU AP is connected.
+</span>*/
+OSU_STATUS_AP_CONNECTED : &quot;2&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_SERVER_CONNECTING'>/** The status code for provisioning flow to indicate connecting to the server.
+</span>*/
+OSU_STATUS_SERVER_CONNECTING : &quot;3&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_SERVER_VALIDATED'>/** The status code for provisioning flow to indicate the server certificate is validated.
+</span>*/
+OSU_STATUS_SERVER_VALIDATED : &quot;4&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_SERVER_CONNECTED'>/** The status code for provisioning flow to indicate the server is connected
+</span>*/
+OSU_STATUS_SERVER_CONNECTED : &quot;5&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_INIT_SOAP_EXCHANGE'>/** The status code for provisioning flow to indicate starting the first SOAP exchange.
+</span>*/
+OSU_STATUS_INIT_SOAP_EXCHANGE : &quot;6&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_WAITING_FOR_REDIRECT_RESPONSE'>/** The status code for provisioning flow to indicate waiting for a HTTP redirect response.
+</span>*/
+OSU_STATUS_WAITING_FOR_REDIRECT_RESPONSE : &quot;7&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_REDIRECT_RESPONSE_RECEIVED'>/** The status code for provisioning flow to indicate a HTTP redirect response is received.
+</span>*/
+OSU_STATUS_REDIRECT_RESPONSE_RECEIVED : &quot;8&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_SECOND_SOAP_EXCHANGE'>/** The status code for provisioning flow to indicate starting the second SOAP exchange.
+</span>*/
+OSU_STATUS_SECOND_SOAP_EXCHANGE : &quot;9&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_THIRD_SOAP_EXCHANGE'>/** The status code for provisioning flow to indicate starting the third SOAP exchange.
+</span>*/
+OSU_STATUS_THIRD_SOAP_EXCHANGE : &quot;10&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-property-OSU_STATUS_RETRIEVING_TRUST_ROOT_CERTS'>/** The status code for provisioning flow to indicate starting a step retrieving trust root
+</span> certs.
+*/
+OSU_STATUS_RETRIEVING_TRUST_ROOT_CERTS : &quot;11&quot;,
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-method-onProvisioningFailure'>/**Provisioning status for OSU failure
+</span>@param {Number} status indicates error condition
+*/
+onProvisioningFailure : function(  ) {},
+
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-method-onProvisioningStatus'>/**Provisioning status when OSU is in progress
+</span>@param {Number} status indicates status of OSU flow
+*/
+onProvisioningStatus : function(  ) {},
+
+<span id='android-net-wifi-hotspot2-ProvisioningCallback-method-onProvisioningComplete'>/**Provisioning complete when provisioning/remediation flow completes
+</span>*/
+onProvisioningComplete : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

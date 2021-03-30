@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-InboundSmsTracker'>/**@class com.android.internal.telephony.InboundSmsTracker
+</span>@extends java.lang.Object
+
+ Tracker for an incoming SMS message ready to broadcast to listeners.
+ This is similar to {@link com.android.internal.telephony.SMSDispatcher.SmsTracker} used for
+ outgoing messages.
+*/
+var InboundSmsTracker = {
+
+<span id='com-android-internal-telephony-InboundSmsTracker-property-DEST_PORT_FLAG_NO_PORT'>/***/
+</span>DEST_PORT_FLAG_NO_PORT : &quot;65536&quot;,
+<span id='com-android-internal-telephony-InboundSmsTracker-property-DEST_PORT_FLAG_3GPP2'>/***/
+</span>DEST_PORT_FLAG_3GPP2 : &quot;262144&quot;,
+<span id='com-android-internal-telephony-InboundSmsTracker-property-DEST_PORT_FLAG_3GPP2_WAP_PDU'>/***/
+</span>DEST_PORT_FLAG_3GPP2_WAP_PDU : &quot;524288&quot;,
+<span id='com-android-internal-telephony-InboundSmsTracker-property-SELECT_BY_REFERENCE'>/***/
+</span>SELECT_BY_REFERENCE : &quot;address=? AND reference_number=? AND count=? AND (destination_port &amp; 524288=0) AND deleted=0&quot;,
+<span id='com-android-internal-telephony-InboundSmsTracker-property-SELECT_BY_REFERENCE_3GPP2WAP'>/***/
+</span>SELECT_BY_REFERENCE_3GPP2WAP : &quot;address=? AND reference_number=? AND count=? AND (destination_port &amp; 524288=524288) AND deleted=0&quot;,
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getContentValues'>/**
+</span>*/
+getContentValues : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getRealDestPort'>/**Get the port number, or -1 if there is no destination port.
+</span>@param {Number} destPort the destination port value, with flags
+@return {Number} the real destination port, or -1 for no port
+*/
+getRealDestPort : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-setDeleteWhere'>/**Update the values to delete all rows of the message from raw table.
+</span>@param {String} deleteWhere the selection to use
+@param {Object {java.lang.String[]}} deleteWhereArgs the selection args to use
+*/
+setDeleteWhere : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getPdu'>/**
+</span>*/
+getPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getTimestamp'>/**
+</span>*/
+getTimestamp : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getDestPort'>/**
+</span>*/
+getDestPort : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-is3gpp2'>/**
+</span>*/
+is3gpp2 : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-isClass0'>/**
+</span>*/
+isClass0 : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getFormat'>/**
+</span>*/
+getFormat : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getQueryForSegments'>/**
+</span>*/
+getQueryForSegments : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getExactMatchDupDetectQuery'>/**Get the query to find the exact same message/message segment in the db.
+</span>@return {Object {android.util.Pair}} Pair with where as Pair.first and whereArgs as Pair.second
+*/
+getExactMatchDupDetectQuery : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getInexactMatchDupDetectQuery'>/**The key differences here compared to exact match are:
+</span> - this is applicable only for multi-part message segments
+ - this does not match date or message_body
+ - this matches deleted=0 (undeleted segments)
+ The only difference as compared to getQueryForSegments() is that this checks for sequence as
+ well.
+@return {Object {android.util.Pair}} Pair with where as Pair.first and whereArgs as Pair.second
+*/
+getInexactMatchDupDetectQuery : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getIndexOffset'>/**Sequence numbers for concatenated messages start at 1. The exception is CDMA WAP PDU
+</span> messages, which use a 0-based index.
+@return {Number} the offset to use to convert between mIndex and the sequence number
+*/
+getIndexOffset : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getAddress'>/**
+</span>*/
+getAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getDisplayAddress'>/**
+</span>*/
+getDisplayAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getMessageBody'>/**
+</span>*/
+getMessageBody : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getReferenceNumber'>/**
+</span>*/
+getReferenceNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getSequenceNumber'>/**
+</span>*/
+getSequenceNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getMessageCount'>/**
+</span>*/
+getMessageCount : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getDeleteWhere'>/**
+</span>*/
+getDeleteWhere : function(  ) {},
+
+<span id='com-android-internal-telephony-InboundSmsTracker-method-getDeleteWhereArgs'>/**
+</span>*/
+getDeleteWhereArgs : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

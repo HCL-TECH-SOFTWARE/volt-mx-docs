@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-sqlite-SQLiteConnectionPool'>/**@class android.database.sqlite.SQLiteConnectionPool
+</span> implements java.io.Closeable
+
+@extends java.lang.Object
+
+ Maintains a pool of active SQLite database connections.
+ &lt;p&gt;
+ At any given time, a connection is either owned by the pool, or it has been
+ acquired by a {@link android.database.sqlite.SQLiteSession}.  When the {@link android.database.sqlite.SQLiteSession} is
+ finished with the connection it is using, it must return the connection
+ back to the pool.
+ &lt;/p&gt;&lt;p&gt;
+ The pool holds strong references to the connections it owns.  However,
+ it only holds &lt;em&gt;weak references&lt;/em&gt; to the connections that sessions
+ have acquired from it.  Using weak references in the latter case ensures
+ that the connection pool can detect when connections have been improperly
+ abandoned so that it can create new connections to replace them if needed.
+ &lt;/p&gt;&lt;p&gt;
+ The connection pool is thread-safe (but the connections themselves are not).
+ &lt;/p&gt;
+
+ &lt;h2&gt;Exception safety&lt;/h2&gt;
+ &lt;p&gt;
+ This code attempts to maintain the invariant that opened connections are
+ always owned.  Unfortunately that means it needs to handle exceptions
+ all over to ensure that broken connections get cleaned up.  Most
+ operations invokving SQLite can throw {@link android.database.sqlite.SQLiteException} or other
+ runtime exceptions.  This is a bit of a pain to deal with because the compiler
+ cannot help us catch missing exception handling code.
+ &lt;/p&gt;&lt;p&gt;
+ The general rule for this file: If we are making calls out to
+ {@link android.database.sqlite.SQLiteConnection} then we must be prepared to handle any
+ runtime exceptions it might throw at us.  Note that out-of-memory
+ is an {@link Error}, not a {@link RuntimeException}.  We don't trouble ourselves
+ handling out of memory because it is hard to do anything at all sensible then
+ and most likely the VM is about to crash.
+ &lt;/p&gt;
+
+ @hide
+*/
+var SQLiteConnectionPool = {
+
+<span id='android-database-sqlite-SQLiteConnectionPool-property-CONNECTION_FLAG_READ_ONLY'>/** Connection flag: Read-only.
+</span> &lt;p&gt;
+ This flag indicates that the connection will only be used to
+ perform read-only operations.
+ &lt;/p&gt;
+*/
+CONNECTION_FLAG_READ_ONLY : &quot;1&quot;,
+<span id='android-database-sqlite-SQLiteConnectionPool-property-CONNECTION_FLAG_PRIMARY_CONNECTION_AFFINITY'>/** Connection flag: Primary connection affinity.
+</span> &lt;p&gt;
+ This flag indicates that the primary connection is required.
+ This flag helps support legacy applications that expect most data modifying
+ operations to be serialized by locking the primary database connection.
+ Setting this flag essentially implements the old &quot;db lock&quot; concept by preventing
+ an operation from being performed until it can obtain exclusive access to
+ the primary connection.
+ &lt;/p&gt;
+*/
+CONNECTION_FLAG_PRIMARY_CONNECTION_AFFINITY : &quot;2&quot;,
+<span id='android-database-sqlite-SQLiteConnectionPool-property-CONNECTION_FLAG_INTERACTIVE'>/** Connection flag: Connection is being used interactively.
+</span> &lt;p&gt;
+ This flag indicates that the connection is needed by the UI thread.
+ The connection pool can use this flag to elevate the priority
+ of the database connection request.
+ &lt;/p&gt;
+*/
+CONNECTION_FLAG_INTERACTIVE : &quot;4&quot;,
+<span id='android-database-sqlite-SQLiteConnectionPool-method-open'>/**Opens a connection pool for the specified database.
+</span>@param {Object {SQLiteDatabaseConfiguration}} configuration The database configuration.
+@return {Object {android.database.sqlite.SQLiteConnectionPool}} The connection pool.
+@throws SQLiteException if a database error occurs.
+*/
+open : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-close'>/**Closes the connection pool.
+</span> &lt;p&gt;
+ When the connection pool is closed, it will refuse all further requests
+ to acquire connections.  All connections that are currently available in
+ the pool are closed immediately.  Any connections that are still in use
+ will be closed as soon as they are returned to the pool.
+ &lt;/p&gt;
+@throws IllegalStateException if the pool has been closed.
+*/
+close : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-reconfigure'>/**Reconfigures the database configuration of the connection pool and all of its
+</span> connections.
+ &lt;p&gt;
+ Configuration changes are propagated down to connections immediately if
+ they are available or as soon as they are released.  This includes changes
+ that affect the size of the pool.
+ &lt;/p&gt;
+@param {Object {SQLiteDatabaseConfiguration}} configuration The new configuration.
+@throws IllegalStateException if the pool has been closed.
+*/
+reconfigure : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-acquireConnection'>/**Acquires a connection from the pool.
+</span> &lt;p&gt;
+ The caller must call {@link #releaseConnection} to release the connection
+ back to the pool when it is finished.  Failure to do so will result
+ in much unpleasantness.
+ &lt;/p&gt;
+@param {String} sql If not null, try to find a connection that already has
+ the specified SQL statement in its prepared statement cache.
+@param {Number} connectionFlags The connection request flags.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Object {android.database.sqlite.SQLiteConnection}} The connection that was acquired, never null.
+@throws IllegalStateException if the pool has been closed.
+@throws SQLiteException if a database error occurs.
+@throws OperationCanceledException if the operation was canceled.
+*/
+acquireConnection : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-releaseConnection'>/**Releases a connection back to the pool.
+</span> &lt;p&gt;
+ It is ok to call this method after the pool has closed, to release
+ connections that were still in use at the time of closure.
+ &lt;/p&gt;
+@param {Object {SQLiteConnection}} connection The connection to release.  Must not be null.
+@throws IllegalStateException if the connection was not acquired
+ from this pool or if it has already been released.
+*/
+releaseConnection : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-shouldYieldConnection'>/**Returns true if the session should yield the connection due to
+</span> contention over available database connections.
+@param {Object {SQLiteConnection}} connection The connection owned by the session.
+@param {Number} connectionFlags The connection request flags.
+@return {Boolean} True if the session should yield its connection.
+@throws IllegalStateException if the connection was not acquired
+ from this pool or if it has already been released.
+*/
+shouldYieldConnection : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-collectDbStats'>/**Collects statistics about database connection memory usage.
+</span>@param {Object {java.util.ArrayList}} dbStatsList The list to populate.
+*/
+collectDbStats : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-setupIdleConnectionHandler'>/**Set up the handler based on the provided looper and timeout.
+</span>*/
+setupIdleConnectionHandler : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-dump'>/**Dumps debugging information about this connection pool.
+</span>@param {Object {Printer}} printer The printer to receive the dump, not null.
+@param {Boolean} verbose True to dump more verbose information.
+*/
+dump : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnectionPool-method-getPath'>/**
+</span>*/
+getPath : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

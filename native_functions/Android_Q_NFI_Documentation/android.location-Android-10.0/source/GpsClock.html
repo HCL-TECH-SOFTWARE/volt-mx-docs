@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-GpsClock'>/**@class android.location.GpsClock
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class containing a GPS clock timestamp.
+ It represents a measurement of the GPS receiver's clock.
+
+ @hide
+*/
+var GpsClock = {
+
+<span id='android-location-GpsClock-property-TYPE_UNKNOWN'>/** The type of the time stored is not available or it is unknown.
+</span>*/
+TYPE_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GpsClock-property-TYPE_LOCAL_HW_TIME'>/** The source of the time value reported by this class is the 'Local Hardware Clock'.
+</span>*/
+TYPE_LOCAL_HW_TIME : &quot;1&quot;,
+<span id='android-location-GpsClock-property-TYPE_GPS_TIME'>/** The source of the time value reported by this class is the 'GPS time' derived from
+</span> satellites (epoch = Jan 6, 1980).
+*/
+TYPE_GPS_TIME : &quot;2&quot;,
+<span id='android-location-GpsClock-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-location-GpsClock-method-set'>/**Sets all contents to the values stored in the provided object.
+</span>*/
+set : function(  ) {},
+
+<span id='android-location-GpsClock-method-reset'>/**Resets all the contents to its original state.
+</span>*/
+reset : function(  ) {},
+
+<span id='android-location-GpsClock-method-getType'>/**Gets the type of time reported by {@link #getTimeInNs}().
+</span>*/
+getType : function(  ) {},
+
+<span id='android-location-GpsClock-method-setType'>/**Sets the type of time reported.
+</span>*/
+setType : function(  ) {},
+
+<span id='android-location-GpsClock-method-hasLeapSecond'>/**Returns true if {@link #getLeapSecond}() is available, false otherwise.
+</span>*/
+hasLeapSecond : function(  ) {},
+
+<span id='android-location-GpsClock-method-getLeapSecond'>/**Gets the leap second associated with the clock's time.
+</span> The sign of the value is defined by the following equation:
+      utc_time_ns = time_ns + (full_bias_ns + bias_ns) - leap_second * 1,000,000,000
+
+ The value is only available if {@link #hasLeapSecond}() is true.
+*/
+getLeapSecond : function(  ) {},
+
+<span id='android-location-GpsClock-method-setLeapSecond'>/**Sets the leap second associated with the clock's time.
+</span>*/
+setLeapSecond : function(  ) {},
+
+<span id='android-location-GpsClock-method-resetLeapSecond'>/**Resets the leap second associated with the clock's time.
+</span>*/
+resetLeapSecond : function(  ) {},
+
+<span id='android-location-GpsClock-method-getTimeInNs'>/**Gets the GPS receiver internal clock value in nanoseconds.
+</span> This can be either the 'local hardware clock' value ({@link #TYPE_LOCAL_HW_TIME}), or the
+ current GPS time derived inside GPS receiver ({@link #TYPE_GPS_TIME}).
+ {@link #getType}() defines the time reported.
+
+ For 'local hardware clock' this value is expected to be monotonically increasing during the
+ reporting session. The real GPS time can be derived by compensating
+ {@link #getFullBiasInNs}() (when it is available) from this value.
+
+ For 'GPS time' this value is expected to be the best estimation of current GPS time that GPS
+ receiver can achieve. {@link #getTimeUncertaintyInNs}() should be available when GPS time is
+ specified.
+
+ Sub-nanosecond accuracy can be provided by means of {@link #getBiasInNs}().
+ The reported time includes {@link #getTimeUncertaintyInNs}().
+*/
+getTimeInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-setTimeInNs'>/**Sets the GPS receiver internal clock in nanoseconds.
+</span>*/
+setTimeInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-hasTimeUncertaintyInNs'>/**Returns true if {@link #getTimeUncertaintyInNs}() is available, false otherwise.
+</span>*/
+hasTimeUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-getTimeUncertaintyInNs'>/**Gets the clock's time Uncertainty (1-Sigma) in nanoseconds.
+</span> The uncertainty is represented as an absolute (single sided) value.
+
+ The value is only available if {@link #hasTimeUncertaintyInNs}() is true.
+*/
+getTimeUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-setTimeUncertaintyInNs'>/**Sets the clock's Time Uncertainty (1-Sigma) in nanoseconds.
+</span>*/
+setTimeUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-resetTimeUncertaintyInNs'>/**Resets the clock's Time Uncertainty (1-Sigma) in nanoseconds.
+</span>*/
+resetTimeUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-hasFullBiasInNs'>/**Returns true if {@link @getFullBiasInNs()} is available, false otherwise.
+</span>*/
+hasFullBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-getFullBiasInNs'>/**Gets the difference between hardware clock ({@link #getTimeInNs}()) inside GPS receiver and
+</span> the true GPS time since 0000Z, January 6, 1980, in nanoseconds.
+
+ This value is available if {@link #TYPE_LOCAL_HW_TIME} is set, and GPS receiver has solved
+ the clock for GPS time.
+ {@link #getBiasUncertaintyInNs}() should be used for quality check.
+
+ The sign of the value is defined by the following equation:
+      true time (GPS time) = time_ns + (full_bias_ns + bias_ns)
+
+ The reported full bias includes {@link #getBiasUncertaintyInNs}().
+ The value is onl available if {@link #hasFullBiasInNs}() is true.
+*/
+getFullBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-setFullBiasInNs'>/**Sets the full bias in nanoseconds.
+</span>*/
+setFullBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-resetFullBiasInNs'>/**Resets the full bias in nanoseconds.
+</span>*/
+resetFullBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-hasBiasInNs'>/**Returns true if {@link #getBiasInNs}() is available, false otherwise.
+</span>*/
+hasBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-getBiasInNs'>/**Gets the clock's sub-nanosecond bias.
+</span> The reported bias includes {@link #getBiasUncertaintyInNs}().
+
+ The value is only available if {@link #hasBiasInNs}() is true.
+*/
+getBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-setBiasInNs'>/**Sets the sub-nanosecond bias.
+</span>*/
+setBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-resetBiasInNs'>/**Resets the clock's Bias in nanoseconds.
+</span>*/
+resetBiasInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-hasBiasUncertaintyInNs'>/**Returns true if {@link #getBiasUncertaintyInNs}() is available, false otherwise.
+</span>*/
+hasBiasUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-getBiasUncertaintyInNs'>/**Gets the clock's Bias Uncertainty (1-Sigma) in nanoseconds.
+</span>
+ The value is only available if {@link #hasBiasUncertaintyInNs}() is true.
+*/
+getBiasUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-setBiasUncertaintyInNs'>/**Sets the clock's Bias Uncertainty (1-Sigma) in nanoseconds.
+</span>*/
+setBiasUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-resetBiasUncertaintyInNs'>/**Resets the clock's Bias Uncertainty (1-Sigma) in nanoseconds.
+</span>*/
+resetBiasUncertaintyInNs : function(  ) {},
+
+<span id='android-location-GpsClock-method-hasDriftInNsPerSec'>/**Returns true if {@link #getDriftInNsPerSec}() is available, false otherwise.
+</span>*/
+hasDriftInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-getDriftInNsPerSec'>/**Gets the clock's Drift in nanoseconds per second.
+</span> A positive value indicates that the frequency is higher than the nominal frequency.
+ The reported drift includes {@link #getDriftUncertaintyInNsPerSec}().
+
+ The value is only available if {@link #hasDriftInNsPerSec}() is true.
+*/
+getDriftInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-setDriftInNsPerSec'>/**Sets the clock's Drift in nanoseconds per second.
+</span>*/
+setDriftInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-resetDriftInNsPerSec'>/**Resets the clock's Drift in nanoseconds per second.
+</span>*/
+resetDriftInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-hasDriftUncertaintyInNsPerSec'>/**Returns true if {@link #getDriftUncertaintyInNsPerSec}() is available, false otherwise.
+</span>*/
+hasDriftUncertaintyInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-getDriftUncertaintyInNsPerSec'>/**Gets the clock's Drift Uncertainty (1-Sigma) in nanoseconds per second.
+</span>
+ The value is only available if {@link #hasDriftUncertaintyInNsPerSec}() is true.
+*/
+getDriftUncertaintyInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-setDriftUncertaintyInNsPerSec'>/**Sets the clock's Drift Uncertainty (1-Sigma) in nanoseconds per second.
+</span>*/
+setDriftUncertaintyInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-resetDriftUncertaintyInNsPerSec'>/**Resets the clock's Drift Uncertainty (1-Sigma) in nanoseconds per second.
+</span>*/
+resetDriftUncertaintyInNsPerSec : function(  ) {},
+
+<span id='android-location-GpsClock-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-location-GpsClock-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-location-GpsClock-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

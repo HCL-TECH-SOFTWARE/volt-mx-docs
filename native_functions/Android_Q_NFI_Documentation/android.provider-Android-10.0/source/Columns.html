@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-FontsContract-Columns'>/**@class android.provider.FontsContract.Columns
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+ Defines the constants used in a response from a Font Provider. The cursor returned from the
+ query should have the ID column populated with the content uri ID for the resulting font.
+ This should point to a real file or shared memory, as the client will mmap the given file
+ descriptor. Pipes, sockets and other non-mmap-able file descriptors will fail to load in the
+ client application.
+*/
+var Columns = {
+
+<span id='android-provider-FontsContract-Columns-property-FILE_ID'>/** Constant used to request data from a font provider. The cursor returned from the query
+</span> may populate this column with a long for the font file ID. The client will request a file
+ descriptor to &quot;file/FILE_ID&quot; with this ID immediately under the top-level content URI. If
+ not present, the client will request a file descriptor to the top-level URI with the
+ given base font ID. Note that several results may return the same file ID, e.g. for TTC
+ files with different indices.
+*/
+FILE_ID : &quot;file_id&quot;,
+<span id='android-provider-FontsContract-Columns-property-TTC_INDEX'>/** Constant used to request data from a font provider. The cursor returned from the query
+</span> should have this column populated with an int for the ttc index for the resulting font.
+*/
+TTC_INDEX : &quot;font_ttc_index&quot;,
+<span id='android-provider-FontsContract-Columns-property-VARIATION_SETTINGS'>/** Constant used to request data from a font provider. The cursor returned from the query
+</span> may populate this column with the font variation settings String information for the
+ font.
+*/
+VARIATION_SETTINGS : &quot;font_variation_settings&quot;,
+<span id='android-provider-FontsContract-Columns-property-WEIGHT'>/** Constant used to request data from a font provider. The cursor returned from the query
+</span> should have this column populated with the int weight for the resulting font. This value
+ should be between 100 and 900. The most common values are 400 for regular weight and 700
+ for bold weight.
+*/
+WEIGHT : &quot;font_weight&quot;,
+<span id='android-provider-FontsContract-Columns-property-ITALIC'>/** Constant used to request data from a font provider. The cursor returned from the query
+</span> should have this column populated with the int italic for the resulting font. This should
+ be 0 for regular style and 1 for italic.
+*/
+ITALIC : &quot;font_italic&quot;,
+<span id='android-provider-FontsContract-Columns-property-RESULT_CODE'>/** Constant used to request data from a font provider. The cursor returned from the query
+</span> should have this column populated to indicate the result status of the
+ query. This will be checked before any other data in the cursor. Possible values are
+ {@link #RESULT_CODE_OK}, {@link #RESULT_CODE_FONT_NOT_FOUND},
+ {@link #RESULT_CODE_MALFORMED_QUERY} and {@link #RESULT_CODE_FONT_UNAVAILABLE} for system
+ defined values. You may also define your own values in the 0x000010000..0xFFFF0000 range.
+ If not present, {@link #RESULT_CODE_OK} will be assumed.
+*/
+RESULT_CODE : &quot;result_code&quot;,
+<span id='android-provider-FontsContract-Columns-property-RESULT_CODE_OK'>/** Constant used to represent a result was retrieved successfully. The given fonts will be
+</span> attempted to retrieve immediately via
+ {@link android.content.ContentProvider#openFile(Uri, String)}. See {@link #RESULT_CODE}.
+*/
+RESULT_CODE_OK : &quot;0&quot;,
+<span id='android-provider-FontsContract-Columns-property-RESULT_CODE_FONT_NOT_FOUND'>/** Constant used to represent a result was not found. See {@link #RESULT_CODE}.
+</span>*/
+RESULT_CODE_FONT_NOT_FOUND : &quot;1&quot;,
+<span id='android-provider-FontsContract-Columns-property-RESULT_CODE_FONT_UNAVAILABLE'>/** Constant used to represent a result was found, but cannot be provided at this moment. Use
+</span> this to indicate, for example, that a font needs to be fetched from the network. See
+ {@link #RESULT_CODE}.
+*/
+RESULT_CODE_FONT_UNAVAILABLE : &quot;2&quot;,
+<span id='android-provider-FontsContract-Columns-property-RESULT_CODE_MALFORMED_QUERY'>/** Constant used to represent that the query was not in a supported format by the provider.
+</span> See {@link #RESULT_CODE}.
+*/
+RESULT_CODE_MALFORMED_QUERY : &quot;3&quot;,
+
+};</pre>
+</body>
+</html>

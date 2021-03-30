@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-Property'>/**@class android.util.Property
+</span>@extends java.lang.Object
+
+ A property is an abstraction that can be used to represent a &lt;emb&gt;mutable&lt;/em&gt; value that is held
+ in a &lt;em&gt;host&lt;/em&gt; object. The Property's {@link #set(Object, Object)} or {@link #get}(Object)
+ methods can be implemented in terms of the private fields of the host object, or via &quot;setter&quot; and
+ &quot;getter&quot; methods or by some other mechanism, as appropriate.
+
+ @param &lt;T&gt; The class on which the property is declared.
+ @param &lt;V&gt; The type that this property represents.
+*/
+var Property = {
+
+<span id='android-util-Property-method-of'>/**This factory method creates and returns a Property given the &lt;code&gt;class&lt;/code&gt; and
+</span> &lt;code&gt;name&lt;/code&gt; parameters, where the &lt;code&gt;&quot;name&quot;&lt;/code&gt; parameter represents either:
+ &lt;ul&gt;
+     &lt;li&gt;a public &lt;code&gt;getName()&lt;/code&gt; method on the class which takes no arguments, plus an
+     optional public &lt;code&gt;setName()&lt;/code&gt; method which takes a value of the same type
+     returned by &lt;code&gt;getName()&lt;/code&gt;
+     &lt;li&gt;a public &lt;code&gt;isName()&lt;/code&gt; method on the class which takes no arguments, plus an
+     optional public &lt;code&gt;setName()&lt;/code&gt; method which takes a value of the same type
+     returned by &lt;code&gt;isName()&lt;/code&gt;
+     &lt;li&gt;a public &lt;code&gt;name&lt;/code&gt; field on the class
+ &lt;/ul&gt;
+
+ &lt;p&gt;If either of the get/is method alternatives is found on the class, but an appropriate
+ &lt;code&gt;setName()&lt;/code&gt; method is not found, the &lt;code&gt;Property&lt;/code&gt; will be
+ {@link #isReadOnly() readOnly}. Calling the {@link #set(Object, Object)} method on such
+ a property is allowed, but will have no effect.&lt;/p&gt;
+
+ &lt;p&gt;If neither the methods nor the field are found on the class a
+ {@link android.util.NoSuchPropertyException} exception will be thrown.&lt;/p&gt;
+*/
+of : function(  ) {},
+
+<span id='android-util-Property-method-isReadOnly'>/**Returns true if the {@link #set(Object, Object)} method does not set the value on the target
+</span> object (in which case the {@link #set(Object, Object) set()} method should throw a {@link android.util.NoSuchPropertyException} exception). This may happen if the Property wraps functionality that
+ allows querying the underlying value but not setting it. For example, the {@link #of(Class,
+ Class, String)} factory method may return a Property with name &quot;foo&quot; for an object that has
+ only a &lt;code&gt;getFoo()&lt;/code&gt; or &lt;code&gt;isFoo()&lt;/code&gt; method, but no matching
+ &lt;code&gt;setFoo()&lt;/code&gt; method.
+*/
+isReadOnly : function(  ) {},
+
+<span id='android-util-Property-method-set'>/**Sets the value on &lt;code&gt;object&lt;/code&gt; which this property represents. If the method is unable
+</span> to set the value on the target object it will throw an {@link UnsupportedOperationException}
+ exception.
+*/
+set : function(  ) {},
+
+<span id='android-util-Property-method-get'>/**Returns the current value that this property represents on the given &lt;code&gt;object&lt;/code&gt;.
+</span>*/
+get : function(  ) {},
+
+<span id='android-util-Property-method-getName'>/**Returns the name for this property.
+</span>*/
+getName : function(  ) {},
+
+<span id='android-util-Property-method-getType'>/**Returns the type for this property.
+</span>*/
+getType : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

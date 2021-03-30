@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-ProgressBar'>/**@class android.widget.ProgressBar
+</span>@extends android.view.View
+
+ &lt;p&gt;
+ A user interface element that indicates the progress of an operation.
+ Progress bar supports two modes to represent progress: determinate, and indeterminate. For
+ a visual overview of the difference between determinate and indeterminate progress modes, see
+ &lt;a href=&quot;https://material.io/guidelines/components/progress-activity.html#progress-activity-types-of-indicators&quot;&gt;
+ Progress &amp; activity&lt;/a&gt;.
+ Display progress bars to a user in a non-interruptive way.
+ Show the progress bar in your app's user interface or in a notification
+ instead of within a dialog.
+ &lt;/p&gt;
+ &lt;h3&gt;Indeterminate Progress&lt;/h3&gt;
+ &lt;p&gt;
+ Use indeterminate mode for the progress bar when you do not know how long an
+ operation will take.
+ Indeterminate mode is the default for progress bar and shows a cyclic animation without a
+ specific amount of progress indicated.
+ The following example shows an indeterminate progress bar:
+ &lt;pre&gt;
+ &amp;lt;ProgressBar
+      android:id=&quot;@+id/indeterminateBar&quot;
+      android:layout_width=&quot;wrap_content&quot;
+      android:layout_height=&quot;wrap_content&quot;
+      /&amp;gt;
+ &lt;/pre&gt;
+ &lt;/p&gt;
+ &lt;h3&gt;Determinate Progress&lt;/h3&gt;
+ &lt;p&gt;
+ Use determinate mode for the progress bar when you want to show that a specific quantity of
+ progress has occurred.
+ For example, the percent remaining of a file being retrieved, the amount records in
+ a batch written to database, or the percent remaining of an audio file that is playing.
+ &lt;p&gt;
+ &lt;p&gt;
+ To indicate determinate progress, you set the style of the progress bar to
+ {@link android.R.style#Widget_ProgressBar_Horizontal} and set the amount of progress.
+ The following example shows a determinate progress bar that is 25% complete:
+ &lt;pre&gt;
+ &amp;lt;ProgressBar
+      android:id=&quot;@+id/determinateBar&quot;
+      style=&quot;@android:style/Widget.ProgressBar.Horizontal&quot;
+      android:layout_width=&quot;wrap_content&quot;
+      android:layout_height=&quot;wrap_content&quot;
+      android:progress=&quot;25&quot;/&amp;gt;
+ &lt;/pre&gt;
+ You can update the percentage of progress displayed by using the
+ {@link #setProgress}(int) method, or by calling
+ {@link #incrementProgressBy}(int) to increase the current progress completed
+ by a specified amount.
+ By default, the progress bar is full when the progress value reaches 100.
+ You can adjust this default by setting the
+ {@link android.R.styleable#ProgressBar_max android:max} attribute.
+ &lt;/p&gt;
+ &lt;p&gt;Other progress bar styles provided by the system include:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.R.style#Widget_ProgressBar_Horizontal Widget.ProgressBar.Horizontal}&lt;/li&gt;
+ &lt;li&gt;{@link android.R.style#Widget_ProgressBar_Small Widget.ProgressBar.Small}&lt;/li&gt;
+ &lt;li&gt;{@link android.R.style#Widget_ProgressBar_Large Widget.ProgressBar.Large}&lt;/li&gt;
+ &lt;li&gt;{@link android.R.style#Widget_ProgressBar_Inverse Widget.ProgressBar.Inverse}&lt;/li&gt;
+ &lt;li&gt;{@link android.R.style#Widget_ProgressBar_Small_Inverse
+ Widget.ProgressBar.Small.Inverse}&lt;/li&gt;
+ &lt;li&gt;{@link android.R.style#Widget_ProgressBar_Large_Inverse
+ Widget.ProgressBar.Large.Inverse}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;The &quot;inverse&quot; styles provide an inverse color scheme for the spinner, which may be necessary
+ if your application uses a light colored theme (a white background).&lt;/p&gt;
+
+ &lt;p&gt;&lt;strong&gt;XML attributes&lt;/b&gt;&lt;/strong&gt;
+ &lt;p&gt;
+ See {@link android.R.styleable#android.widget.ProgressBar android.widget.ProgressBar Attributes},
+ {@link android.R.styleable#View View Attributes}
+ &lt;/p&gt;
+
+ @attr ref android.R.styleable#ProgressBar_animationResolution
+ @attr ref android.R.styleable#ProgressBar_indeterminate
+ @attr ref android.R.styleable#ProgressBar_indeterminateBehavior
+ @attr ref android.R.styleable#ProgressBar_indeterminateDrawable
+ @attr ref android.R.styleable#ProgressBar_indeterminateDuration
+ @attr ref android.R.styleable#ProgressBar_indeterminateOnly
+ @attr ref android.R.styleable#ProgressBar_interpolator
+ @attr ref android.R.styleable#ProgressBar_min
+ @attr ref android.R.styleable#ProgressBar_max
+ @attr ref android.R.styleable#ProgressBar_maxHeight
+ @attr ref android.R.styleable#ProgressBar_maxWidth
+ @attr ref android.R.styleable#ProgressBar_minHeight
+ @attr ref android.R.styleable#ProgressBar_minWidth
+ @attr ref android.R.styleable#ProgressBar_mirrorForRtl
+ @attr ref android.R.styleable#ProgressBar_progress
+ @attr ref android.R.styleable#ProgressBar_progressDrawable
+ @attr ref android.R.styleable#ProgressBar_secondaryProgress
+*/
+var ProgressBar = {
+
+<span id='android-widget-ProgressBar-method-setMinWidth'>/**Sets the minimum width the progress bar can have.
+</span>@param {Number} minWidth the minimum width to be set, in pixels
+@attr ref android.R.styleable#ProgressBar_minWidth
+*/
+setMinWidth : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getMinWidth'>/**
+</span>@return {Number} the minimum width the progress bar can have, in pixels
+*/
+getMinWidth : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setMaxWidth'>/**Sets the maximum width the progress bar can have.
+</span>@param {Number} maxWidth the maximum width to be set, in pixels
+@attr ref android.R.styleable#ProgressBar_maxWidth
+*/
+setMaxWidth : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getMaxWidth'>/**
+</span>@return {Number} the maximum width the progress bar can have, in pixels
+*/
+getMaxWidth : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setMinHeight'>/**Sets the minimum height the progress bar can have.
+</span>@param {Number} minHeight the minimum height to be set, in pixels
+@attr ref android.R.styleable#ProgressBar_minHeight
+*/
+setMinHeight : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getMinHeight'>/**
+</span>@return {Number} the minimum height the progress bar can have, in pixels
+*/
+getMinHeight : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setMaxHeight'>/**Sets the maximum height the progress bar can have.
+</span>@param {Number} maxHeight the maximum height to be set, in pixels
+@attr ref android.R.styleable#ProgressBar_maxHeight
+*/
+setMaxHeight : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getMaxHeight'>/**
+</span>@return {Number} the maximum height the progress bar can have, in pixels
+*/
+getMaxHeight : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-isIndeterminate'>/**&lt;p&gt;Indicate whether this progress bar is in indeterminate mode.&lt;/p&gt;
+</span>@return {Boolean} true if the progress bar is in indeterminate mode
+*/
+isIndeterminate : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setIndeterminate'>/**&lt;p&gt;Change the indeterminate mode for this progress bar. In indeterminate
+</span> mode, the progress is ignored and the progress bar shows an infinite
+ animation instead.&lt;/p&gt;
+
+ If this progress bar's style only supports indeterminate mode (such as the circular
+ progress bars), then this will be ignored.
+@param {Boolean} indeterminate true to enable the indeterminate mode
+*/
+setIndeterminate : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getIndeterminateDrawable'>/**&lt;p&gt;Get the drawable used to draw the progress bar in
+</span> indeterminate mode.&lt;/p&gt;
+@return {Object {android.graphics.drawable.Drawable}} a {@link android.graphics.drawable.Drawable} instance
+@see #setIndeterminateDrawable(android.graphics.drawable.Drawable)
+@see #setIndeterminate(boolean)
+*/
+getIndeterminateDrawable : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setIndeterminateDrawable'>/**Define the drawable used to draw the progress bar in indeterminate mode.
+</span>
+ &lt;p&gt;For the Drawable to animate, it must implement {@link Animatable}, or override
+ {@link Drawable#onLevelChange(int)}.  A Drawable that implements Animatable will be animated
+ via that interface and therefore provides the greatest amount of customization. A Drawable
+ that only overrides onLevelChange(int) is animated directly by ProgressBar and only the
+ animation {@link android.R.styleable#ProgressBar_indeterminateDuration duration},
+ {@link android.R.styleable#ProgressBar_indeterminateBehavior repeating behavior}, and
+ {@link #setInterpolator(Interpolator) interpolator} can be modified, and only before the
+ indeterminate animation begins.
+@param {Object {Drawable}} d the new drawable
+@attr ref android.R.styleable#ProgressBar_indeterminateDrawable
+@see #getIndeterminateDrawable()
+@see #setIndeterminate(boolean)
+*/
+setIndeterminateDrawable : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setIndeterminateTintList'>/**Applies a tint to the indeterminate drawable. Does not modify the
+</span> current tint mode, which is {@link PorterDuff.Mode#SRC_IN} by default.
+ &lt;p&gt;
+ Subsequent calls to {@link #setIndeterminateDrawable}(Drawable) will
+ automatically mutate the drawable and apply the specified tint and
+ tint mode using
+ {@link Drawable#setTintList(ColorStateList)}.
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_indeterminateTint
+@see #getIndeterminateTintList()
+@see Drawable#setTintList(ColorStateList)
+*/
+setIndeterminateTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getIndeterminateTintList'>/**
+</span>@return {Object {android.content.res.ColorStateList}} the tint applied to the indeterminate drawable
+@attr ref android.R.styleable#ProgressBar_indeterminateTint
+@see #setIndeterminateTintList(ColorStateList)
+*/
+getIndeterminateTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setIndeterminateTintMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setIndeterminateTintList}(ColorStateList) to the indeterminate
+ drawable. The default mode is {@link PorterDuff.Mode#SRC_IN}.
+@param {Object {PorterDuff.Mode}} tintMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_indeterminateTintMode
+@see #setIndeterminateTintList(ColorStateList)
+@see Drawable#setTintMode(PorterDuff.Mode)
+*/
+setIndeterminateTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setIndeterminateTintBlendMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setIndeterminateTintList}(ColorStateList) to the indeterminate
+ drawable. The default mode is {@link PorterDuff.Mode#SRC_IN}.
+@param {Object {BlendMode}} blendMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_indeterminateTintMode
+@see #setIndeterminateTintList(ColorStateList)
+@see Drawable#setTintBlendMode(BlendMode)
+*/
+setIndeterminateTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getIndeterminateTintMode'>/**Returns the blending mode used to apply the tint to the indeterminate
+</span> drawable, if specified.
+@return {Object {android.graphics.PorterDuff.Mode}} the blending mode used to apply the tint to the indeterminate
+         drawable
+@attr ref android.R.styleable#ProgressBar_indeterminateTintMode
+@see #setIndeterminateTintMode(PorterDuff.Mode)
+*/
+getIndeterminateTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getIndeterminateTintBlendMode'>/**Returns the blending mode used to apply the tint to the indeterminate
+</span> drawable, if specified.
+@return {Object {android.graphics.BlendMode}} the blending mode used to apply the tint to the indeterminate
+         drawable
+@attr ref android.R.styleable#ProgressBar_indeterminateTintMode
+@see #setIndeterminateTintBlendMode(BlendMode)
+*/
+getIndeterminateTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setIndeterminateDrawableTiled'>/**Define the tileable drawable used to draw the progress bar in
+</span> indeterminate mode.
+ &lt;p&gt;
+ If the drawable is a BitmapDrawable or contains BitmapDrawables, a
+ tiled copy will be generated for display as a progress bar.
+@param {Object {Drawable}} d the new drawable
+@see #getIndeterminateDrawable()
+@see #setIndeterminate(boolean)
+*/
+setIndeterminateDrawableTiled : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgressDrawable'>/**&lt;p&gt;Get the drawable used to draw the progress bar in
+</span> progress mode.&lt;/p&gt;
+@return {Object {android.graphics.drawable.Drawable}} a {@link android.graphics.drawable.Drawable} instance
+@see #setProgressDrawable(android.graphics.drawable.Drawable)
+@see #setIndeterminate(boolean)
+*/
+getProgressDrawable : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressDrawable'>/**Define the drawable used to draw the progress bar in progress mode.
+</span>@param {Object {Drawable}} d the new drawable
+@see #getProgressDrawable()
+@see #setIndeterminate(boolean)
+*/
+setProgressDrawable : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getMirrorForRtl'>/**
+</span>@hide 
+*/
+getMirrorForRtl : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressTintList'>/**Applies a tint to the progress indicator, if one exists, or to the
+</span> entire progress drawable otherwise. Does not modify the current tint
+ mode, which is {@link PorterDuff.Mode#SRC_IN} by default.
+ &lt;p&gt;
+ The progress indicator should be specified as a layer with
+ id {@link android.R.id#progress} in a {@link LayerDrawable}
+ used as the progress drawable.
+ &lt;p&gt;
+ Subsequent calls to {@link #setProgressDrawable}(Drawable) will
+ automatically mutate the drawable and apply the specified tint and
+ tint mode using
+ {@link Drawable#setTintList(ColorStateList)}.
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_progressTint
+@see #getProgressTintList()
+@see Drawable#setTintList(ColorStateList)
+*/
+setProgressTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgressTintList'>/**Returns the tint applied to the progress drawable, if specified.
+</span>@return {Object {android.content.res.ColorStateList}} the tint applied to the progress drawable
+@attr ref android.R.styleable#ProgressBar_progressTint
+@see #setProgressTintList(ColorStateList)
+*/
+getProgressTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressTintMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setProgressTintList}(ColorStateList)} to the progress
+ indicator. The default mode is {@link PorterDuff.Mode#SRC_IN}.
+@param {Object {PorterDuff.Mode}} tintMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_progressTintMode
+@see #getProgressTintMode()
+@see Drawable#setTintMode(PorterDuff.Mode)
+*/
+setProgressTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressTintBlendMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setProgressTintList}(ColorStateList)} to the progress
+ indicator. The default mode is {@link PorterDuff.Mode#SRC_IN}.
+@param {Object {BlendMode}} blendMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_progressTintMode
+@see #getProgressTintMode()
+@see Drawable#setTintBlendMode(BlendMode)
+*/
+setProgressTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgressTintMode'>/**Returns the blending mode used to apply the tint to the progress
+</span> drawable, if specified.
+@return {Object {android.graphics.PorterDuff.Mode}} the blending mode used to apply the tint to the progress
+         drawable
+@attr ref android.R.styleable#ProgressBar_progressTintMode
+@see #setProgressTintMode(PorterDuff.Mode)
+*/
+getProgressTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgressTintBlendMode'>/**Returns the blending mode used to apply the tint to the progress
+</span> drawable, if specified.
+@return {Object {android.graphics.BlendMode}} the blending mode used to apply the tint to the progress
+         drawable
+@attr ref android.R.styleable#ProgressBar_progressTintMode
+@see #setProgressTintBlendMode(BlendMode)
+*/
+getProgressTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressBackgroundTintList'>/**Applies a tint to the progress background, if one exists. Does not
+</span> modify the current tint mode, which is
+ {@link PorterDuff.Mode#SRC_ATOP} by default.
+ &lt;p&gt;
+ The progress background must be specified as a layer with
+ id {@link android.R.id#background} in a {@link LayerDrawable}
+ used as the progress drawable.
+ &lt;p&gt;
+ Subsequent calls to {@link #setProgressDrawable}(Drawable) where the
+ drawable contains a progress background will automatically mutate the
+ drawable and apply the specified tint and tint mode using
+ {@link Drawable#setTintList(ColorStateList)}.
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_progressBackgroundTint
+@see #getProgressBackgroundTintList()
+@see Drawable#setTintList(ColorStateList)
+*/
+setProgressBackgroundTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgressBackgroundTintList'>/**Returns the tint applied to the progress background, if specified.
+</span>@return {Object {android.content.res.ColorStateList}} the tint applied to the progress background
+@attr ref android.R.styleable#ProgressBar_progressBackgroundTint
+@see #setProgressBackgroundTintList(ColorStateList)
+*/
+getProgressBackgroundTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressBackgroundTintMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setProgressBackgroundTintList}(ColorStateList)} to the progress
+ background. The default mode is {@link PorterDuff.Mode#SRC_IN}.
+@param {Object {PorterDuff.Mode}} tintMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_progressBackgroundTintMode
+@see #setProgressBackgroundTintList(ColorStateList)
+@see Drawable#setTintMode(PorterDuff.Mode)
+*/
+setProgressBackgroundTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressBackgroundTintBlendMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setProgressBackgroundTintList}(ColorStateList)} to the progress
+ background. The default mode is {@link BlendMode#SRC_IN}.
+@param {Object {BlendMode}} blendMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_progressBackgroundTintMode
+@see #setProgressBackgroundTintList(ColorStateList)
+@see Drawable#setTintBlendMode(BlendMode)
+*/
+setProgressBackgroundTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgressBackgroundTintMode'>/**
+</span>@return {Object {android.graphics.PorterDuff.Mode}} the blending mode used to apply the tint to the progress
+         background
+@attr ref android.R.styleable#ProgressBar_progressBackgroundTintMode
+@see #setProgressBackgroundTintMode(PorterDuff.Mode)
+*/
+getProgressBackgroundTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgressBackgroundTintBlendMode'>/**
+</span>@return {Object {android.graphics.BlendMode}} the blending mode used to apply the tint to the progress
+         background
+@attr ref android.R.styleable#ProgressBar_progressBackgroundTintMode
+@see #setProgressBackgroundTintBlendMode(BlendMode)
+*/
+getProgressBackgroundTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setSecondaryProgressTintList'>/**Applies a tint to the secondary progress indicator, if one exists.
+</span> Does not modify the current tint mode, which is
+ {@link PorterDuff.Mode#SRC_ATOP} by default.
+ &lt;p&gt;
+ The secondary progress indicator must be specified as a layer with
+ id {@link android.R.id#secondaryProgress} in a {@link LayerDrawable}
+ used as the progress drawable.
+ &lt;p&gt;
+ Subsequent calls to {@link #setProgressDrawable}(Drawable) where the
+ drawable contains a secondary progress indicator will automatically
+ mutate the drawable and apply the specified tint and tint mode using
+ {@link Drawable#setTintList(ColorStateList)}.
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_secondaryProgressTint
+@see #getSecondaryProgressTintList()
+@see Drawable#setTintList(ColorStateList)
+*/
+setSecondaryProgressTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getSecondaryProgressTintList'>/**Returns the tint applied to the secondary progress drawable, if
+</span> specified.
+@return {Object {android.content.res.ColorStateList}} the tint applied to the secondary progress drawable
+@attr ref android.R.styleable#ProgressBar_secondaryProgressTint
+@see #setSecondaryProgressTintList(ColorStateList)
+*/
+getSecondaryProgressTintList : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setSecondaryProgressTintMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setSecondaryProgressTintList}(ColorStateList)} to the secondary
+ progress indicator. The default mode is
+ {@link PorterDuff.Mode#SRC_ATOP}.
+@param {Object {PorterDuff.Mode}} tintMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_secondaryProgressTintMode
+@see #setSecondaryProgressTintList(ColorStateList)
+@see Drawable#setTintMode(PorterDuff.Mode)
+*/
+setSecondaryProgressTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setSecondaryProgressTintBlendMode'>/**Specifies the blending mode used to apply the tint specified by
+</span> {@link #setSecondaryProgressTintList}(ColorStateList)} to the secondary
+ progress indicator. The default mode is
+ {@link PorterDuff.Mode#SRC_ATOP}.
+@param {Object {BlendMode}} blendMode the blending mode used to apply the tint, may be
+                 {@code null} to clear tint
+@attr ref android.R.styleable#ProgressBar_secondaryProgressTintMode
+@see #setSecondaryProgressTintList(ColorStateList)
+@see Drawable#setTintBlendMode(BlendMode)
+*/
+setSecondaryProgressTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getSecondaryProgressTintMode'>/**Returns the blending mode used to apply the tint to the secondary
+</span> progress drawable, if specified.
+@return {Object {android.graphics.PorterDuff.Mode}} the blending mode used to apply the tint to the secondary
+         progress drawable
+@attr ref android.R.styleable#ProgressBar_secondaryProgressTintMode
+@see #setSecondaryProgressTintMode(PorterDuff.Mode)
+*/
+getSecondaryProgressTintMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getSecondaryProgressTintBlendMode'>/**Returns the blending mode used to apply the tint to the secondary
+</span> progress drawable, if specified.
+@return {Object {android.graphics.BlendMode}} the blending mode used to apply the tint to the secondary
+         progress drawable
+@attr ref android.R.styleable#ProgressBar_secondaryProgressTintMode
+@see #setSecondaryProgressTintBlendMode(BlendMode)
+*/
+getSecondaryProgressTintBlendMode : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgressDrawableTiled'>/**Define the tileable drawable used to draw the progress bar in
+</span> progress mode.
+ &lt;p&gt;
+ If the drawable is a BitmapDrawable or contains BitmapDrawables, a
+ tiled copy will be generated for display as a progress bar.
+@param {Object {Drawable}} d the new drawable
+@see #getProgressDrawable()
+@see #setIndeterminate(boolean)
+*/
+setProgressDrawableTiled : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getCurrentDrawable'>/**Returns the drawable currently used to draw the progress bar. This will be
+</span> either {@link #getProgressDrawable}() or {@link #getIndeterminateDrawable}()
+ depending on whether the progress bar is in determinate or indeterminate mode.
+@return {Object {android.graphics.drawable.Drawable}} the drawable currently used to draw the progress bar
+*/
+getCurrentDrawable : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-jumpDrawablesToCurrentState'>/**
+</span>*/
+jumpDrawablesToCurrentState : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-onResolveDrawables'>/**
+</span>@hide 
+*/
+onResolveDrawables : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-postInvalidate'>/**
+</span>*/
+postInvalidate : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgress'>/**Sets the current progress to the specified value. Does not do anything
+</span> if the progress bar is in indeterminate mode.
+ &lt;p&gt;
+ This method will immediately update the visual position of the progress
+ indicator. To animate the visual position to the target value, use
+ {@link #setProgress(int, boolean)}}.
+@param {Number} progress the new progress, between {@link #getMin()} and {@link #getMax()}
+@see #setIndeterminate(boolean)
+@see #isIndeterminate()
+@see #getProgress()
+@see #incrementProgressBy(int)
+*/
+setProgress : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setProgress'>/**Sets the current progress to the specified value, optionally animating
+</span> the visual position between the current and target values.
+ &lt;p&gt;
+ Animation does not affect the result of {@link #getProgress}(), which
+ will return the target value immediately after this method is called.
+@param {Number} progress the new progress value, between {@link #getMin()} and {@link #getMax()}
+@param {Boolean} animate {@code true} to animate between the current and target
+                values or {@code false} to not animate
+*/
+setProgress : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setSecondaryProgress'>/**&lt;p&gt;
+</span> Set the current secondary progress to the specified value. Does not do
+ anything if the progress bar is in indeterminate mode.
+ &lt;/p&gt;
+@param {Number} secondaryProgress the new secondary progress, between {@link #getMin()} and
+ {@link #getMax()}
+@see #setIndeterminate(boolean)
+@see #isIndeterminate()
+@see #getSecondaryProgress()
+@see #incrementSecondaryProgressBy(int)
+*/
+setSecondaryProgress : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getProgress'>/**&lt;p&gt;Get the progress bar's current level of progress. Return 0 when the
+</span> progress bar is in indeterminate mode.&lt;/p&gt;
+@return {Number} the current progress, between {@link #getMin()} and {@link #getMax()}
+@see #setIndeterminate(boolean)
+@see #isIndeterminate()
+@see #setProgress(int)
+@see #setMax(int)
+@see #getMax()
+*/
+getProgress : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getSecondaryProgress'>/**&lt;p&gt;Get the progress bar's current level of secondary progress. Return 0 when the
+</span> progress bar is in indeterminate mode.&lt;/p&gt;
+@return {Number} the current secondary progress, between {@link #getMin()} and {@link #getMax()}
+@see #setIndeterminate(boolean)
+@see #isIndeterminate()
+@see #setSecondaryProgress(int)
+@see #setMax(int)
+@see #getMax()
+*/
+getSecondaryProgress : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getMin'>/**&lt;p&gt;Return the lower limit of this progress bar's range.&lt;/p&gt;
+</span>@return {Number} a positive integer
+@see #setMin(int)
+@see #getProgress()
+@see #getSecondaryProgress()
+*/
+getMin : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getMax'>/**&lt;p&gt;Return the upper limit of this progress bar's range.&lt;/p&gt;
+</span>@return {Number} a positive integer
+@see #setMax(int)
+@see #getProgress()
+@see #getSecondaryProgress()
+*/
+getMax : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setMin'>/**&lt;p&gt;Set the lower range of the progress bar to &lt;tt&gt;min&lt;/tt&gt;.&lt;/p&gt;
+</span>@param {Number} min the lower range of this progress bar
+@see #getMin()
+@see #setProgress(int)
+@see #setSecondaryProgress(int)
+*/
+setMin : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setMax'>/**&lt;p&gt;Set the upper range of the progress bar &lt;tt&gt;max&lt;/tt&gt;.&lt;/p&gt;
+</span>@param {Number} max the upper range of this progress bar
+@see #getMax()
+@see #setProgress(int)
+@see #setSecondaryProgress(int)
+*/
+setMax : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-incrementProgressBy'>/**&lt;p&gt;Increase the progress bar's progress by the specified amount.&lt;/p&gt;
+</span>@param {Number} diff the amount by which the progress must be increased
+@see #setProgress(int)
+*/
+incrementProgressBy : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-incrementSecondaryProgressBy'>/**&lt;p&gt;Increase the progress bar's secondary progress by the specified amount.&lt;/p&gt;
+</span>@param {Number} diff the amount by which the secondary progress must be increased
+@see #setSecondaryProgress(int)
+*/
+incrementSecondaryProgressBy : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setInterpolator'>/**Sets the acceleration curve for the indeterminate animation.
+</span>
+ &lt;p&gt;The interpolator is loaded as a resource from the specified context. Defaults to a linear
+ interpolation.
+
+ &lt;p&gt;The interpolator only affects the indeterminate animation if the
+ {@link #setIndeterminateDrawable(Drawable) supplied indeterminate drawable} does not
+ implement {@link Animatable}.
+
+ &lt;p&gt;This call must be made before the indeterminate animation starts for it to have an affect.
+@param {Object {Context}} context The application environment
+@param {Number} resID The resource identifier of the interpolator to load
+@attr ref android.R.styleable#ProgressBar_interpolator
+@see #setInterpolator(Interpolator)
+@see #getInterpolator()
+*/
+setInterpolator : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-setInterpolator'>/**Sets the acceleration curve for the indeterminate animation.
+</span> Defaults to a linear interpolation.
+
+ &lt;p&gt;The interpolator only affects the indeterminate animation if the
+ {@link #setIndeterminateDrawable(Drawable) supplied indeterminate drawable} does not
+ implement {@link Animatable}.
+
+ &lt;p&gt;This call must be made before the indeterminate animation starts for it to have
+ an affect.
+@param {Object {Interpolator}} interpolator The interpolator which defines the acceleration curve
+@attr ref android.R.styleable#ProgressBar_interpolator
+@see #setInterpolator(Context, int)
+@see #getInterpolator()
+*/
+setInterpolator : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getInterpolator'>/**Gets the acceleration curve type for the indeterminate animation.
+</span>@return {Object {android.view.animation.Interpolator}} the {@link Interpolator} associated to this animation
+@attr ref android.R.styleable#ProgressBar_interpolator
+@see #setInterpolator(Context, int)
+@see #setInterpolator(Interpolator)
+*/
+getInterpolator : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-onVisibilityAggregated'>/**
+</span>*/
+onVisibilityAggregated : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-invalidateDrawable'>/**
+</span>*/
+invalidateDrawable : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-drawableHotspotChanged'>/**
+</span>*/
+drawableHotspotChanged : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-onRestoreInstanceState'>/**
+</span>*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-onInitializeAccessibilityEventInternal'>/**
+</span>@hide 
+*/
+onInitializeAccessibilityEventInternal : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-onInitializeAccessibilityNodeInfoInternal'>/**
+</span>@hide 
+*/
+onInitializeAccessibilityNodeInfoInternal : function(  ) {},
+
+<span id='android-widget-ProgressBar-method-isAnimating'>/**Returns whether the ProgressBar is animating or not. This is essentially the same
+</span> as whether the ProgressBar is {@link #isIndeterminate() indeterminate} and visible,
+ as indeterminate ProgressBars are always animating, and non-indeterminate
+ ProgressBars are not animating.
+@return {Boolean} true if the ProgressBar is animating, false otherwise.
+*/
+isAnimating : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

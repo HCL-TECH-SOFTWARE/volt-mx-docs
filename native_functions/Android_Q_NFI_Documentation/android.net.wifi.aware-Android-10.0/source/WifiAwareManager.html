@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-aware-WifiAwareManager'>/**@class android.net.wifi.aware.WifiAwareManager
+</span>@extends java.lang.Object
+
+ This class provides the primary API for managing Wi-Fi Aware operations:
+ discovery and peer-to-peer data connections.
+ &lt;p&gt;
+ The class provides access to:
+ &lt;ul&gt;
+ &lt;li&gt;Initialize a Aware cluster (peer-to-peer synchronization). Refer to
+ {@link #attach(AttachCallback, Handler)}.
+ &lt;li&gt;Create discovery sessions (publish or subscribe sessions). Refer to
+ {@link WifiAwareSession#publish(PublishConfig, android.net.wifi.aware.DiscoverySessionCallback, Handler)} and
+ {@link WifiAwareSession#subscribe(SubscribeConfig, android.net.wifi.aware.DiscoverySessionCallback, Handler)}.
+ &lt;li&gt;Create a Aware network specifier to be used with
+ {@link ConnectivityManager#requestNetwork(NetworkRequest, ConnectivityManager.NetworkCallback)}
+ to set-up a Aware connection with a peer. Refer to {@link android.net.wifi.aware.WifiAwareNetworkSpecifier.Builder}.
+ &lt;/ul&gt;
+ &lt;p&gt;
+     Aware may not be usable when Wi-Fi is disabled (and other conditions). To validate that
+     the functionality is available use the {@link #isAvailable}() function. To track
+     changes in Aware usability register for the {@link #ACTION_WIFI_AWARE_STATE_CHANGED}
+     broadcast. Note that this broadcast is not sticky - you should register for it and then
+     check the above API to avoid a race condition.
+ &lt;p&gt;
+     An application must use {@link #attach(AttachCallback, Handler)} to initialize a
+     Aware cluster - before making any other Aware operation. Aware cluster membership is a
+     device-wide operation - the API guarantees that the device is in a cluster or joins a
+     Aware cluster (or starts one if none can be found). Information about attach success (or
+     failure) are returned in callbacks of {@link android.net.wifi.aware.AttachCallback}. Proceed with Aware
+     discovery or connection setup only after receiving confirmation that Aware attach
+     succeeded - {@link android.net.wifi.aware.AttachCallback#onAttached(WifiAwareSession)}. When an
+     application is finished using Aware it &lt;b&gt;must&lt;/b&gt; use the
+     {@link android.net.wifi.aware.WifiAwareSession#close()} API to indicate to the Aware service that the device
+     may detach from the Aware cluster. The device will actually disable Aware once the last
+     application detaches.
+ &lt;p&gt;
+     Once a Aware attach is confirmed use the
+     {@link WifiAwareSession#publish(PublishConfig, android.net.wifi.aware.DiscoverySessionCallback, Handler)}
+     or
+     {@link WifiAwareSession#subscribe(SubscribeConfig, android.net.wifi.aware.DiscoverySessionCallback,
+     Handler)} to create publish or subscribe Aware discovery sessions. Events are called on the
+     provided callback object {@link android.net.wifi.aware.DiscoverySessionCallback}. Specifically, the
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onPublishStarted(Publishandroid.net.wifi.aware.DiscoverySession)}
+     and
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onSubscribeStarted(
+Subscribeandroid.net.wifi.aware.DiscoverySession)}
+     return {@link android.net.wifi.aware.PublishDiscoverySession} and
+     {@link android.net.wifi.aware.SubscribeDiscoverySession}
+     objects respectively on which additional session operations can be performed, e.g. updating
+     the session {@link android.net.wifi.aware.PublishDiscoverySession#updatePublish(PublishConfig)} and
+     {@link android.net.wifi.aware.SubscribeDiscoverySession#updateSubscribe(SubscribeConfig)}. Sessions can
+     also be used to send messages using the
+     {@link android.net.wifi.aware.DiscoverySession#sendMessage(PeerHandle, int, byte[])} APIs. When an
+     application is finished with a discovery session it &lt;b&gt;must&lt;/b&gt; terminate it using the
+     {@link android.net.wifi.aware.DiscoverySession#close()} API.
+ &lt;p&gt;
+    Creating connections between Aware devices is managed by the standard
+    {@link ConnectivityManager#requestNetwork(NetworkRequest,
+    ConnectivityManager.NetworkCallback)}.
+    The {@link NetworkRequest} object should be constructed with:
+    &lt;ul&gt;
+        &lt;li&gt;{@link NetworkRequest.Builder#addTransportType(int)} of
+        {@link android.net.NetworkCapabilities#TRANSPORT_WIFI_AWARE}.
+        &lt;li&gt;{@link NetworkRequest.Builder#setNetworkSpecifier(String)} using
+        {@link android.net.wifi.aware.WifiAwareNetworkSpecifier.Builder}.
+    &lt;/ul&gt;
+*/
+var WifiAwareManager = {
+
+<span id='android-net-wifi-aware-WifiAwareManager-property-ACTION_WIFI_AWARE_STATE_CHANGED'>/** Broadcast intent action to indicate that the state of Wi-Fi Aware availability has changed.
+</span> Use the {@link #isAvailable}() to query the current status.
+ This broadcast is &lt;b&gt;not&lt;/b&gt; sticky, use the {@link #isAvailable}() API after registering
+ the broadcast to check the current state of Wi-Fi Aware.
+ &lt;p&gt;Note: The broadcast is only delivered to registered receivers - no manifest registered
+ components will be launched.
+*/
+ACTION_WIFI_AWARE_STATE_CHANGED : &quot;android.net.wifi.aware.action.WIFI_AWARE_STATE_CHANGED&quot;,
+<span id='android-net-wifi-aware-WifiAwareManager-property-WIFI_AWARE_DATA_PATH_ROLE_INITIATOR'>/** Connection creation role is that of INITIATOR. Used to create a network specifier string
+</span> when requesting a Aware network.
+
+ @see WifiAwareSession#createNetworkSpecifierOpen(int, byte[])
+ @see WifiAwareSession#createNetworkSpecifierPassphrase(int, byte[], String)
+*/
+WIFI_AWARE_DATA_PATH_ROLE_INITIATOR : &quot;0&quot;,
+<span id='android-net-wifi-aware-WifiAwareManager-property-WIFI_AWARE_DATA_PATH_ROLE_RESPONDER'>/** Connection creation role is that of RESPONDER. Used to create a network specifier string
+</span> when requesting a Aware network.
+
+ @see WifiAwareSession#createNetworkSpecifierOpen(int, byte[])
+ @see WifiAwareSession#createNetworkSpecifierPassphrase(int, byte[], String)
+*/
+WIFI_AWARE_DATA_PATH_ROLE_RESPONDER : &quot;1&quot;,
+<span id='android-net-wifi-aware-WifiAwareManager-method-isAvailable'>/**Returns the current status of Aware API: whether or not Aware is available. To track
+</span> changes in the state of Aware API register for the
+ {@link #ACTION_WIFI_AWARE_STATE_CHANGED} broadcast.
+@return {Boolean} A boolean indicating whether the app can use the Aware API at this time (true) or
+ not (false).
+*/
+isAvailable : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-getCharacteristics'>/**Returns the characteristics of the Wi-Fi Aware interface: a set of parameters which specify
+</span> limitations on configurations, e.g. the maximum service name length.
+@return {Object {android.net.wifi.aware.Characteristics}} An object specifying configuration limitations of Aware.
+*/
+getCharacteristics : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-attach'>/**Attach to the Wi-Fi Aware service - enabling the application to create discovery sessions or
+</span> create connections to peers. The device will attach to an existing cluster if it can find
+ one or create a new cluster (if it is the first to enable Aware in its vicinity). Results
+ (e.g. successful attach to a cluster) are provided to the {@code attachCallback} object.
+ An application &lt;b&gt;must&lt;/b&gt; call {@link android.net.wifi.aware.WifiAwareSession#close()} when done with the
+ Wi-Fi Aware object.
+ &lt;p&gt;
+ Note: a Aware cluster is a shared resource - if the device is already attached to a cluster
+ then this function will simply indicate success immediately using the same {@code
+ attachCallback}.
+@param {Object {AttachCallback}} attachCallback A callback for attach events, extended from
+ {@link AttachCallback}.
+@param {Object {Handler}} handler The Handler on whose thread to execute the callbacks of the {@code
+ attachCallback} object. If a null is provided then the application's main thread will be
+                used.
+*/
+attach : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-attach'>/**Attach to the Wi-Fi Aware service - enabling the application to create discovery sessions or
+</span> create connections to peers. The device will attach to an existing cluster if it can find
+ one or create a new cluster (if it is the first to enable Aware in its vicinity). Results
+ (e.g. successful attach to a cluster) are provided to the {@code attachCallback} object.
+ An application &lt;b&gt;must&lt;/b&gt; call {@link android.net.wifi.aware.WifiAwareSession#close()} when done with the
+ Wi-Fi Aware object.
+ &lt;p&gt;
+ Note: a Aware cluster is a shared resource - if the device is already attached to a cluster
+ then this function will simply indicate success immediately using the same {@code
+ attachCallback}.
+ &lt;p&gt;
+ This version of the API attaches a listener to receive the MAC address of the Aware interface
+ on startup and whenever it is updated (it is randomized at regular intervals for privacy).
+ The application must have the {@link android.Manifest.permission#ACCESS_FINE_LOCATION}
+ permission to execute this attach request. Otherwise, use the
+ {@link #attach(AttachCallback, Handler)} version. Note that aside from permission
+ requirements this listener will wake up the host at regular intervals causing higher power
+ consumption, do not use it unless the information is necessary (e.g. for OOB discovery).
+@param {Object {AttachCallback}} attachCallback A callback for attach events, extended from
+ {@link AttachCallback}.
+@param {Object {IdentityChangedListener}} identityChangedListener A listener for changed identity, extended from
+ {@link IdentityChangedListener}.
+@param {Object {Handler}} handler The Handler on whose thread to execute the callbacks of the {@code
+ attachCallback} and {@code identityChangedListener} objects. If a null is provided then the
+                application's main thread will be used.
+*/
+attach : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-attach'>/**
+</span>@hide 
+*/
+attach : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-disconnect'>/**
+</span>@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-publish'>/**
+</span>@hide 
+*/
+publish : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-updatePublish'>/**
+</span>@hide 
+*/
+updatePublish : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-subscribe'>/**
+</span>@hide 
+*/
+subscribe : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-updateSubscribe'>/**
+</span>@hide 
+*/
+updateSubscribe : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-terminateSession'>/**
+</span>@hide 
+*/
+terminateSession : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-sendMessage'>/**
+</span>@hide 
+*/
+sendMessage : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-createNetworkSpecifier'>/**
+</span>@hide 
+*/
+createNetworkSpecifier : function(  ) {},
+
+<span id='android-net-wifi-aware-WifiAwareManager-method-createNetworkSpecifier'>/**
+</span>@hide 
+*/
+createNetworkSpecifier : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

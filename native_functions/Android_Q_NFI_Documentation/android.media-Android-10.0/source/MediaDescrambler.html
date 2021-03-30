@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaDescrambler'>/**@class android.media.MediaDescrambler
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ MediaDescrambler class can be used in conjunction with {@link android.media.MediaCodec}
+ and {@link android.media.MediaExtractor} to decode media data scrambled by conditional
+ access (CA) systems such as those in the ISO/IEC13818-1.
+
+ A MediaDescrambler object is initialized from a session opened by a MediaCas object,
+ and can be used to descramble media streams scrambled with that session's keys.
+
+ Scrambling schemes are identified by 16-bit unsigned integer as in CA_system_id.
+
+*/
+var MediaDescrambler = {
+
+<span id='android-media-MediaDescrambler-property-SCRAMBLE_CONTROL_UNSCRAMBLED'>/** Scramble control value indicating that the samples are not scrambled.
+</span> @see #descramble(ByteBuffer, ByteBuffer, android.media.MediaCodec.CryptoInfo)
+*/
+SCRAMBLE_CONTROL_UNSCRAMBLED : &quot;0&quot;,
+<span id='android-media-MediaDescrambler-property-SCRAMBLE_CONTROL_RESERVED'>/** Scramble control value reserved and shouldn't be used currently.
+</span> @see #descramble(ByteBuffer, ByteBuffer, android.media.MediaCodec.CryptoInfo)
+*/
+SCRAMBLE_CONTROL_RESERVED : &quot;1&quot;,
+<span id='android-media-MediaDescrambler-property-SCRAMBLE_CONTROL_EVEN_KEY'>/** Scramble control value indicating that the even key is used.
+</span> @see #descramble(ByteBuffer, ByteBuffer, android.media.MediaCodec.CryptoInfo)
+*/
+SCRAMBLE_CONTROL_EVEN_KEY : &quot;2&quot;,
+<span id='android-media-MediaDescrambler-property-SCRAMBLE_CONTROL_ODD_KEY'>/** Scramble control value indicating that the odd key is used.
+</span> @see #descramble(ByteBuffer, ByteBuffer, android.media.MediaCodec.CryptoInfo)
+*/
+SCRAMBLE_CONTROL_ODD_KEY : &quot;3&quot;,
+<span id='android-media-MediaDescrambler-property-SCRAMBLE_FLAG_PES_HEADER'>/** Scramble flag for a hint indicating that the descrambling request is for
+</span> retrieving the PES header info only.
+
+ @see #descramble(ByteBuffer, ByteBuffer, android.media.MediaCodec.CryptoInfo)
+*/
+SCRAMBLE_FLAG_PES_HEADER : &quot;1&quot;,
+<span id='android-media-MediaDescrambler-method-requiresSecureDecoderComponent'>/**Query if the scrambling scheme requires the use of a secure decoder
+</span> to decode data of the given mime type.
+@param {String} mime The mime type of the media data
+@throws IllegalStateException if the descrambler instance is not valid.
+*/
+requiresSecureDecoderComponent : function(  ) {},
+
+<span id='android-media-MediaDescrambler-method-setMediaCasSession'>/**Associate a MediaCas session with this MediaDescrambler instance.
+</span> The MediaCas session is used to securely load decryption keys for
+ the descrambler. The crypto keys loaded through the MediaCas session
+ may be selected for use during the descrambling operation performed
+ by {@link android.media.MediaExtractor or @link android.media.MediaCodec#queueSecureInputBuffer} by specifying even
+ or odd key in the {@link android.media.MediaCodec.CryptoInfo#key} field.
+@param {Object {MediaCas.Session}} session the MediaCas session to associate with this
+ MediaDescrambler instance.
+@throws IllegalStateException if the descrambler instance is not valid.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+setMediaCasSession : function(  ) {},
+
+<span id='android-media-MediaDescrambler-method-descramble'>/**Descramble a ByteBuffer of data described by a
+</span> {@link android.media.MediaCodec.CryptoInfo} structure.
+@param {Object {ByteBuffer}} srcBuf ByteBuffer containing the scrambled data, which starts at
+ srcBuf.position().
+@param {Object {ByteBuffer}} dstBuf ByteBuffer to hold the descrambled data, which starts at
+ dstBuf.position().
+@param {Object {MediaCodec.CryptoInfo}} cryptoInfo a {@link android.media.MediaCodec.CryptoInfo} structure
+ describing the subsamples contained in srcBuf. The iv and mode fields in
+ CryptoInfo are not used. key[0] contains the MPEG2TS scrambling control bits
+ (as defined in ETSI TS 100 289 (2011): &quot;Digital Video Broadcasting (DVB);
+ Support for use of the DVB Scrambling Algorithm version 3 within digital
+ broadcasting systems&quot;), and the value must be one of {@link #SCRAMBLE_CONTROL_UNSCRAMBLED},
+ {@link #SCRAMBLE_CONTROL_RESERVED}, {@link #SCRAMBLE_CONTROL_EVEN_KEY} or
+ {@link #SCRAMBLE_CONTROL_ODD_KEY}. key[1] is a set of bit flags, with the
+ only possible bit being {@link #SCRAMBLE_FLAG_PES_HEADER} currently.
+ key[2~15] are not used.
+@return {Number} number of bytes that have been successfully descrambled, with negative
+ values indicating errors.
+@throws IllegalStateException if the descrambler instance is not valid.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+descramble : function(  ) {},
+
+<span id='android-media-MediaDescrambler-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

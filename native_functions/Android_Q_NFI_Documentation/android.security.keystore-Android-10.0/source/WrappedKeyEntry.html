@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-security-keystore-WrappedKeyEntry'>/**@class android.security.keystore.WrappedKeyEntry
+</span> implements java.security.KeyStore.Entry
+
+@extends java.lang.Object
+
+ An {@link Entry} that holds a wrapped key. Wrapped keys contain encrypted key data and
+ description information that can be used to securely import key material into a hardware-backed
+ Keystore.
+
+ &lt;p&gt;
+   The wrapped key is in DER-encoded ASN.1 format, specified by the following schema:
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+     KeyDescription ::= SEQUENCE(
+         keyFormat INTEGER,                   # Values from KeyFormat enum.
+         keyParams AuthorizationList,
+     )
+
+     SecureKeyWrapper ::= SEQUENCE(
+         version INTEGER,                     # Contains value 0
+         encryptedTransportKey OCTET_STRING,
+         initializationVector OCTET_STRING,
+         keyDescription KeyDescription,
+         encryptedKey OCTET_STRING,
+         tag OCTET_STRING
+     )
+ &lt;/pre&gt;
+ &lt;ul&gt;
+     &lt;li&gt;keyFormat is an integer from the KeyFormat enum, defining the format of the plaintext
+       key material.
+     &lt;/li&gt;
+     &lt;li&gt;keyParams is the characteristics of the key to be imported (as with generateKey or
+       importKey).  If the secure import is successful, these characteristics must be
+       associated with the key exactly as if the key material had been insecurely imported
+       with importKey. See &lt;a href=&quot;https://developer.android.com/training/articles/security-key-attestation.html#certificate_schema&quot;&gt;Key Attestation&lt;/a&gt; for the AuthorizationList format.
+     &lt;/li&gt;
+     &lt;li&gt;encryptedTransportKey is a 256-bit AES key, XORed with a masking key and then encrypted
+       in RSA-OAEP mode (SHA-256 digest, SHA-1 MGF1 digest) with the wrapping key specified by
+       wrappingKeyBlob.
+     &lt;/li&gt;
+     &lt;li&gt;keyDescription is a KeyDescription, above.
+     &lt;/li&gt;
+     &lt;li&gt;encryptedKey is the key material of the key to be imported, in format keyFormat, and
+       encrypted with encryptedEphemeralKey in AES-GCM mode, with the DER-encoded
+       representation of keyDescription provided as additional authenticated data.
+     &lt;/li&gt;
+     &lt;li&gt;tag is the tag produced by the AES-GCM encryption of encryptedKey.
+     &lt;/li&gt;
+&lt;/ul&gt;
+
+ &lt;p&gt;
+     Imported wrapped keys will have KeymasterDefs.KM_ORIGIN_SECURELY_IMPORTED
+ &lt;/p&gt;
+*/
+var WrappedKeyEntry = {
+
+<span id='android-security-keystore-WrappedKeyEntry-method-getWrappedKeyBytes'>/**
+</span>*/
+getWrappedKeyBytes : function(  ) {},
+
+<span id='android-security-keystore-WrappedKeyEntry-method-getWrappingKeyAlias'>/**
+</span>*/
+getWrappingKeyAlias : function(  ) {},
+
+<span id='android-security-keystore-WrappedKeyEntry-method-getTransformation'>/**
+</span>*/
+getTransformation : function(  ) {},
+
+<span id='android-security-keystore-WrappedKeyEntry-method-getAlgorithmParameterSpec'>/**
+</span>*/
+getAlgorithmParameterSpec : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

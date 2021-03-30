@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-ConnectivityManager'>/**@class android.net.ConnectivityManager
+</span>@extends java.lang.Object
+
+ Class that answers queries about the state of network connectivity. It also
+ notifies applications when network connectivity changes.
+ &lt;p&gt;
+ The primary responsibilities of this class are to:
+ &lt;ol&gt;
+ &lt;li&gt;Monitor network connections (Wi-Fi, GPRS, UMTS, etc.)&lt;/li&gt;
+ &lt;li&gt;Send broadcast intents when network connectivity changes&lt;/li&gt;
+ &lt;li&gt;Attempt to &quot;fail over&quot; to another network when connectivity to a network
+ is lost&lt;/li&gt;
+ &lt;li&gt;Provide an API that allows applications to query the coarse-grained or fine-grained
+ state of the available networks&lt;/li&gt;
+ &lt;li&gt;Provide an API that allows applications to request and select networks for their data
+ traffic&lt;/li&gt;
+ &lt;/ol&gt;
+*/
+var ConnectivityManager = {
+
+<span id='android-net-ConnectivityManager-property-CONNECTIVITY_ACTION'>/** A change in network connectivity has occurred. A default connection has either
+</span> been established or lost. The NetworkInfo for the affected network is
+ sent as an extra; it should be consulted to see what kind of
+ connectivity event occurred.
+ &lt;p/&gt;
+ Apps targeting Android 7.0 (API level 24) and higher do not receive this
+ broadcast if they declare the broadcast receiver in their manifest. Apps
+ will still receive broadcasts if they register their
+ {@link android.content.BroadcastReceiver} with
+ {@link android.content.Context#registerReceiver Context.registerReceiver()}
+ and that context is still valid.
+ &lt;p/&gt;
+ If this is a connection that was the result of failing over from a
+ disconnected network, then the FAILOVER_CONNECTION boolean extra is
+ set to true.
+ &lt;p/&gt;
+ For a loss of connectivity, if the connectivity manager is attempting
+ to connect (or has already connected) to another network, the
+ NetworkInfo for the new network is also passed as an extra. This lets
+ any receivers of the broadcast know that they should not necessarily
+ tell the user that no data traffic will be possible. Instead, the
+ receiver should expect another broadcast soon, indicating either that
+ the failover attempt succeeded (and so there is still overall data
+ connectivity), or that the failover attempt failed, meaning that all
+ connectivity has been lost.
+ &lt;p/&gt;
+ For a disconnect event, the boolean extra EXTRA_NO_CONNECTIVITY
+ is set to {@code true} if there are no connected networks at all.
+
+ @deprecated apps should use the more versatile {@link #requestNetwork},
+             {@link #registerNetworkCallback} or {@link #registerDefaultNetworkCallback}
+             functions instead for faster and more detailed updates about the network
+             changes they care about.
+*/
+CONNECTIVITY_ACTION : &quot;android.net.conn.CONNECTIVITY_CHANGE&quot;,
+<span id='android-net-ConnectivityManager-property-CONNECTIVITY_ACTION_SUPL'>/** A temporary hack until SUPL system can get off the legacy APIS.
+</span> They do too many network requests and the long list of apps listening
+ and waking due to the CONNECTIVITY_ACTION broadcast makes it expensive.
+ Use this broadcast intent instead for SUPL requests.
+ @hide
+*/
+CONNECTIVITY_ACTION_SUPL : &quot;android.net.conn.CONNECTIVITY_CHANGE_SUPL&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_CAPTIVE_PORTAL_SIGN_IN'>/** The device has connected to a network that has presented a captive
+</span> portal, which is blocking Internet connectivity. The user was presented
+ with a notification that network sign in is required,
+ and the user invoked the notification's action indicating they
+ desire to sign in to the network. Apps handling this activity should
+ facilitate signing in to the network. This action includes a
+ {@link android.net.Network} typed extra called {@link #EXTRA_NETWORK} that represents
+ the network presenting the captive portal; all communication with the
+ captive portal must be done using this {@code Network} object.
+ &lt;p/&gt;
+ This activity includes a {@link android.net.CaptivePortal} extra named
+ {@link #EXTRA_CAPTIVE_PORTAL} that can be used to indicate different
+ outcomes of the captive portal sign in to the system:
+ &lt;ul&gt;
+ &lt;li&gt; When the app handling this action believes the user has signed in to
+ the network and the captive portal has been dismissed, the app should
+ call {@link android.net.CaptivePortal#reportandroid.net.CaptivePortalDismissed} so the system can
+ reevaluate the network. If reevaluation finds the network no longer
+ subject to a captive portal, the network may become the default active
+ data network.&lt;/li&gt;
+ &lt;li&gt; When the app handling this action believes the user explicitly wants
+ to ignore the captive portal and the network, the app should call
+ {@link android.net.CaptivePortal#ignoreNetwork}. &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_CAPTIVE_PORTAL_SIGN_IN : &quot;android.net.conn.CAPTIVE_PORTAL&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_NETWORK_INFO'>/** The lookup key for a {@link android.net.NetworkInfo} object. Retrieve with
+</span> {@link android.content.Intent#getParcelableExtra(String)}.
+
+ @deprecated The {@link android.net.NetworkInfo} object is deprecated, as many of its properties
+             can't accurately represent modern network characteristics.
+             Please obtain information about networks from the {@link android.net.NetworkCapabilities}
+             or {@link android.net.LinkProperties} objects instead.
+*/
+EXTRA_NETWORK_INFO : &quot;networkInfo&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_NETWORK_TYPE'>/** Network type which triggered a {@link #CONNECTIVITY_ACTION} broadcast.
+</span>
+ @see android.content.Intent#getIntExtra(String, int)
+ @deprecated The network type is not rich enough to represent the characteristics
+             of modern networks. Please use {@link android.net.NetworkCapabilities} instead,
+             in particular the transports.
+*/
+EXTRA_NETWORK_TYPE : &quot;networkType&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_IS_FAILOVER'>/** The lookup key for a boolean that indicates whether a connect event
+</span> is for a network to which the connectivity manager was failing over
+ following a disconnect on another network.
+ Retrieve it with {@link android.content.Intent#getBooleanExtra(String,boolean)}.
+
+ @deprecated See {@link android.net.NetworkInfo}.
+*/
+EXTRA_IS_FAILOVER : &quot;isFailover&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_OTHER_NETWORK_INFO'>/** The lookup key for a {@link android.net.NetworkInfo} object. This is supplied when
+</span> there is another network that it may be possible to connect to. Retrieve with
+ {@link android.content.Intent#getParcelableExtra(String)}.
+
+ @deprecated See {@link android.net.NetworkInfo}.
+*/
+EXTRA_OTHER_NETWORK_INFO : &quot;otherNetwork&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_NO_CONNECTIVITY'>/** The lookup key for a boolean that indicates whether there is a
+</span> complete lack of connectivity, i.e., no network is available.
+ Retrieve it with {@link android.content.Intent#getBooleanExtra(String,boolean)}.
+*/
+EXTRA_NO_CONNECTIVITY : &quot;noConnectivity&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_REASON'>/** The lookup key for a string that indicates why an attempt to connect
+</span> to a network failed. The string has no particular structure. It is
+ intended to be used in notifications presented to users. Retrieve
+ it with {@link android.content.Intent#getStringExtra(String)}.
+*/
+EXTRA_REASON : &quot;reason&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_EXTRA_INFO'>/** The lookup key for a string that provides optionally supplied
+</span> extra information about the network state. The information
+ may be passed up from the lower networking layers, and its
+ meaning may be specific to a particular network type. Retrieve
+ it with {@link android.content.Intent#getStringExtra(String)}.
+
+ @deprecated See {@link android.net.NetworkInfo#getExtraInfo()}.
+*/
+EXTRA_EXTRA_INFO : &quot;extraInfo&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_INET_CONDITION'>/** The lookup key for an int that provides information about
+</span> our connection to the internet at large.  0 indicates no connection,
+ 100 indicates a great connection.  Retrieve it with
+ {@link android.content.Intent#getIntExtra(String, int)}.
+ {@hide}
+*/
+EXTRA_INET_CONDITION : &quot;inetCondition&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_CAPTIVE_PORTAL'>/** The lookup key for a {@link android.net.CaptivePortal} object included with the
+</span> {@link #ACTION_CAPTIVE_PORTAL_SIGN_IN} intent.  The {@code CaptivePortal}
+ object can be used to either indicate to the system that the captive
+ portal has been dismissed or that the user does not want to pursue
+ signing in to captive portal.  Retrieve it with
+ {@link android.content.Intent#getParcelableExtra(String)}.
+*/
+EXTRA_CAPTIVE_PORTAL : &quot;android.net.extra.CAPTIVE_PORTAL&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_CAPTIVE_PORTAL_URL'>/** Key for passing a URL to the captive portal login activity.
+</span>*/
+EXTRA_CAPTIVE_PORTAL_URL : &quot;android.net.extra.CAPTIVE_PORTAL_URL&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_CAPTIVE_PORTAL_PROBE_SPEC'>/** Key for passing a {@link android.net.captiveportal.CaptivePortalProbeSpec} to the captive
+</span> portal login activity.
+ {@hide}
+*/
+EXTRA_CAPTIVE_PORTAL_PROBE_SPEC : &quot;android.net.extra.CAPTIVE_PORTAL_PROBE_SPEC&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_CAPTIVE_PORTAL_USER_AGENT'>/** Key for passing a user agent string to the captive portal login activity.
+</span> {@hide}
+*/
+EXTRA_CAPTIVE_PORTAL_USER_AGENT : &quot;android.net.extra.CAPTIVE_PORTAL_USER_AGENT&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_DATA_ACTIVITY_CHANGE'>/** Broadcast action to indicate the change of data activity status
+</span> (idle or active) on a network in a recent period.
+ The network becomes active when data transmission is started, or
+ idle if there is no data transmission for a period of time.
+ {@hide}
+*/
+ACTION_DATA_ACTIVITY_CHANGE : &quot;android.net.conn.DATA_ACTIVITY_CHANGE&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_DEVICE_TYPE'>/** The lookup key for an enum that indicates the network device type on which this data activity
+</span> change happens.
+ {@hide}
+*/
+EXTRA_DEVICE_TYPE : &quot;deviceType&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_IS_ACTIVE'>/** The lookup key for a boolean that indicates the device is active or not. {@code true} means
+</span> it is actively sending or receiving data and {@code false} means it is idle.
+ {@hide}
+*/
+EXTRA_IS_ACTIVE : &quot;isActive&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_REALTIME_NS'>/** The lookup key for a long that contains the timestamp (nanos) of the radio state change.
+</span> {@hide}
+*/
+EXTRA_REALTIME_NS : &quot;tsNanos&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_BACKGROUND_DATA_SETTING_CHANGED'>/** Broadcast Action: The setting for background data usage has changed
+</span> values. Use {@link #getBackgroundDataSetting}() to get the current value.
+ &lt;p&gt;
+ If an application uses the network in the background, it should listen
+ for this broadcast and stop using the background data if the value is
+ {@code false}.
+ &lt;p&gt;
+
+ @deprecated As of {@link VERSION_CODES#ICE_CREAM_SANDWICH}, availability
+             of background data depends on several combined factors, and
+             this broadcast is no longer sent. Instead, when background
+             data is unavailable, {@link #getActiveNetworkInfo}() will now
+             appear disconnected. During first boot after a platform
+             upgrade, this broadcast will be sent once if
+             {@link #getBackgroundDataSetting}() was {@code false} before
+             the upgrade.
+*/
+ACTION_BACKGROUND_DATA_SETTING_CHANGED : &quot;android.net.conn.BACKGROUND_DATA_SETTING_CHANGED&quot;,
+<span id='android-net-ConnectivityManager-property-INET_CONDITION_ACTION'>/** Broadcast Action: The network connection may not be good
+</span> uses {@code ConnectivityManager.EXTRA_INET_CONDITION} and
+ {@code ConnectivityManager.EXTRA_NETWORK_INFO} to specify
+ the network and it's condition.
+ @hide
+*/
+INET_CONDITION_ACTION : &quot;android.net.conn.INET_CONDITION_ACTION&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_TETHER_STATE_CHANGED'>/** Broadcast Action: A tetherable connection has come or gone.
+</span> Uses {@code ConnectivityManager.EXTRA_AVAILABLE_TETHER},
+ {@code ConnectivityManager.EXTRA_ACTIVE_LOCAL_ONLY},
+ {@code ConnectivityManager.EXTRA_ACTIVE_TETHER}, and
+ {@code ConnectivityManager.EXTRA_ERRORED_TETHER} to indicate
+ the current state of tethering.  Each include a list of
+ interface names in that state (may be empty).
+ @hide
+*/
+ACTION_TETHER_STATE_CHANGED : &quot;android.net.conn.TETHER_STATE_CHANGED&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_AVAILABLE_TETHER'>/** @hide
+</span> gives a String[] listing all the interfaces configured for
+ tethering and currently available for tethering.
+*/
+EXTRA_AVAILABLE_TETHER : &quot;availableArray&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_ACTIVE_LOCAL_ONLY'>/** @hide
+</span> gives a String[] listing all the interfaces currently in local-only
+ mode (ie, has DHCPv4+IPv6-ULA support and no packet forwarding)
+*/
+EXTRA_ACTIVE_LOCAL_ONLY : &quot;localOnlyArray&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_ACTIVE_TETHER'>/** @hide
+</span> gives a String[] listing all the interfaces currently tethered
+ (ie, has DHCPv4 support and packets potentially forwarded/NATed)
+*/
+EXTRA_ACTIVE_TETHER : &quot;tetherArray&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_ERRORED_TETHER'>/** @hide
+</span> gives a String[] listing all the interfaces we tried to tether and
+ failed.  Use {@link #getLastTetherError} to find the error code
+ for any interfaces listed here.
+*/
+EXTRA_ERRORED_TETHER : &quot;erroredArray&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_CAPTIVE_PORTAL_TEST_COMPLETED'>/** Broadcast Action: The captive portal tracker has finished its test.
+</span> Sent only while running Setup Wizard, in lieu of showing a user
+ notification.
+ @hide
+*/
+ACTION_CAPTIVE_PORTAL_TEST_COMPLETED : &quot;android.net.conn.CAPTIVE_PORTAL_TEST_COMPLETED&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_IS_CAPTIVE_PORTAL'>/** The lookup key for a boolean that indicates whether a captive portal was detected.
+</span> Retrieve it with {@link android.content.Intent#getBooleanExtra(String,boolean)}.
+ @hide
+*/
+EXTRA_IS_CAPTIVE_PORTAL : &quot;captivePortal&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_PROMPT_UNVALIDATED'>/** Action used to display a dialog that asks the user whether to connect to a network that is
+</span> not validated. This intent is used to start the dialog in settings via startActivity.
+
+ @hide
+*/
+ACTION_PROMPT_UNVALIDATED : &quot;android.net.conn.PROMPT_UNVALIDATED&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_PROMPT_LOST_VALIDATION'>/** Action used to display a dialog that asks the user whether to avoid a network that is no
+</span> longer validated. This intent is used to start the dialog in settings via startActivity.
+
+ @hide
+*/
+ACTION_PROMPT_LOST_VALIDATION : &quot;android.net.conn.PROMPT_LOST_VALIDATION&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_PROMPT_PARTIAL_CONNECTIVITY'>/** Action used to display a dialog that asks the user whether to stay connected to a network
+</span> that has not validated. This intent is used to start the dialog in settings via
+ startActivity.
+
+ @hide
+*/
+ACTION_PROMPT_PARTIAL_CONNECTIVITY : &quot;android.net.conn.PROMPT_PARTIAL_CONNECTIVITY&quot;,
+<span id='android-net-ConnectivityManager-property-TETHERING_INVALID'>/** Invalid tethering type.
+</span> @see #startTethering(int, boolean, OnStartTetheringCallback)
+ @hide
+*/
+TETHERING_INVALID : &quot;-1&quot;,
+<span id='android-net-ConnectivityManager-property-TETHERING_WIFI'>/** Wifi tethering type.
+</span> @see #startTethering(int, boolean, OnStartTetheringCallback)
+ @hide
+*/
+TETHERING_WIFI : &quot;0&quot;,
+<span id='android-net-ConnectivityManager-property-TETHERING_USB'>/** USB tethering type.
+</span> @see #startTethering(int, boolean, OnStartTetheringCallback)
+ @hide
+*/
+TETHERING_USB : &quot;1&quot;,
+<span id='android-net-ConnectivityManager-property-TETHERING_BLUETOOTH'>/** Bluetooth tethering type.
+</span> @see #startTethering(int, boolean, OnStartTetheringCallback)
+ @hide
+*/
+TETHERING_BLUETOOTH : &quot;2&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_ADD_TETHER_TYPE'>/** Extra used for communicating with the TetherService. Includes the type of tethering to
+</span> enable if any.
+ @hide
+*/
+EXTRA_ADD_TETHER_TYPE : &quot;extraAddTetherType&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_REM_TETHER_TYPE'>/** Extra used for communicating with the TetherService. Includes the type of tethering for
+</span> which to cancel provisioning.
+ @hide
+*/
+EXTRA_REM_TETHER_TYPE : &quot;extraRemTetherType&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_SET_ALARM'>/** Extra used for communicating with the TetherService. True to schedule a recheck of tether
+</span> provisioning.
+ @hide
+*/
+EXTRA_SET_ALARM : &quot;extraSetAlarm&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_RUN_PROVISION'>/** Tells the TetherService to run a provision check now.
+</span> @hide
+*/
+EXTRA_RUN_PROVISION : &quot;extraRunProvision&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_PROVISION_CALLBACK'>/** Extra used for communicating with the TetherService. Contains the {@link ResultReceiver}
+</span> which will receive provisioning results. Can be left empty.
+ @hide
+*/
+EXTRA_PROVISION_CALLBACK : &quot;extraProvisionCallback&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_NONE'>/** The absence of a connection type.
+</span> @hide
+*/
+TYPE_NONE : &quot;-1&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE'>/** A Mobile data connection. Devices may support more than one.
+</span>
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasTransport} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request an
+         appropriate network. {@see NetworkCapabilities} for supported transports.
+*/
+TYPE_MOBILE : &quot;0&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_WIFI'>/** A WIFI data connection. Devices may support more than one.
+</span>
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasTransport} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request an
+         appropriate network. {@see NetworkCapabilities} for supported transports.
+*/
+TYPE_WIFI : &quot;1&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_MMS'>/** An MMS-specific Mobile data connection.  This network type may use the
+</span> same network interface as {@link #TYPE_MOBILE} or it may use a different
+ one.  This is used by applications needing to talk to the carrier's
+ Multimedia Messaging Service servers.
+
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasCapability} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request a network that
+         provides the {@link android.net.NetworkCapabilities#NET_CAPABILITY_MMS} capability.
+*/
+TYPE_MOBILE_MMS : &quot;2&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_SUPL'>/** A SUPL-specific Mobile data connection.  This network type may use the
+</span> same network interface as {@link #TYPE_MOBILE} or it may use a different
+ one.  This is used by applications needing to talk to the carrier's
+ Secure User Plane Location servers for help locating the device.
+
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasCapability} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request a network that
+         provides the {@link android.net.NetworkCapabilities#NET_CAPABILITY_SUPL} capability.
+*/
+TYPE_MOBILE_SUPL : &quot;3&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_DUN'>/** A DUN-specific Mobile data connection.  This network type may use the
+</span> same network interface as {@link #TYPE_MOBILE} or it may use a different
+ one.  This is sometimes by the system when setting up an upstream connection
+ for tethering so that the carrier is aware of DUN traffic.
+
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasCapability} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request a network that
+         provides the {@link android.net.NetworkCapabilities#NET_CAPABILITY_DUN} capability.
+*/
+TYPE_MOBILE_DUN : &quot;4&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_HIPRI'>/** A High Priority Mobile data connection.  This network type uses the
+</span> same network interface as {@link #TYPE_MOBILE} but the routing setup
+ is different.
+
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasTransport} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request an
+         appropriate network. {@see NetworkCapabilities} for supported transports.
+*/
+TYPE_MOBILE_HIPRI : &quot;5&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_WIMAX'>/** A WiMAX data connection.
+</span>
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasTransport} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request an
+         appropriate network. {@see NetworkCapabilities} for supported transports.
+*/
+TYPE_WIMAX : &quot;6&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_BLUETOOTH'>/** A Bluetooth data connection.
+</span>
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasTransport} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request an
+         appropriate network. {@see NetworkCapabilities} for supported transports.
+*/
+TYPE_BLUETOOTH : &quot;7&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_DUMMY'>/** Dummy data connection.  This should not be used on shipping devices.
+</span> @deprecated This is not used any more.
+*/
+TYPE_DUMMY : &quot;8&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_ETHERNET'>/** An Ethernet data connection.
+</span>
+ @deprecated Applications should instead use {@link android.net.NetworkCapabilities#hasTransport} or
+         {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} to request an
+         appropriate network. {@see NetworkCapabilities} for supported transports.
+*/
+TYPE_ETHERNET : &quot;9&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_FOTA'>/** Over the air Administration.
+</span> @deprecated Use {@link android.net.NetworkCapabilities} instead.
+ {@hide}
+*/
+TYPE_MOBILE_FOTA : &quot;10&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_IMS'>/** IP Multimedia Subsystem.
+</span> @deprecated Use {@link android.net.NetworkCapabilities#NET_CAPABILITY_IMS} instead.
+ {@hide}
+*/
+TYPE_MOBILE_IMS : &quot;11&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_CBS'>/** Carrier Branded Services.
+</span> @deprecated Use {@link android.net.NetworkCapabilities#NET_CAPABILITY_CBS} instead.
+ {@hide}
+*/
+TYPE_MOBILE_CBS : &quot;12&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_WIFI_P2P'>/** A Wi-Fi p2p connection. Only requesting processes will have access to
+</span> the peers connected.
+ @deprecated Use {@link android.net.NetworkCapabilities#NET_CAPABILITY_WIFI_P2P} instead.
+ {@hide}
+*/
+TYPE_WIFI_P2P : &quot;13&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_IA'>/** The network to use for initially attaching to the network
+</span> @deprecated Use {@link android.net.NetworkCapabilities#NET_CAPABILITY_IA} instead.
+ {@hide}
+*/
+TYPE_MOBILE_IA : &quot;14&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_MOBILE_EMERGENCY'>/** Emergency PDN connection for emergency services.  This
+</span> may include IMS and MMS in emergency situations.
+ @deprecated Use {@link android.net.NetworkCapabilities#NET_CAPABILITY_EIMS} instead.
+ {@hide}
+*/
+TYPE_MOBILE_EMERGENCY : &quot;15&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_PROXY'>/** The network that uses proxy to achieve connectivity.
+</span> @deprecated Use {@link android.net.NetworkCapabilities} instead.
+ {@hide}
+*/
+TYPE_PROXY : &quot;16&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_VPN'>/** A virtual network using one or more native bearers.
+</span> It may or may not be providing security services.
+ @deprecated Applications should use {@link android.net.NetworkCapabilities#TRANSPORT_VPN} instead.
+*/
+TYPE_VPN : &quot;17&quot;,
+<span id='android-net-ConnectivityManager-property-TYPE_TEST'>/** A network that is exclusively meant to be used for testing
+</span>
+ @deprecated Use {@link android.net.NetworkCapabilities} instead.
+ @hide
+*/
+TYPE_TEST : &quot;18&quot;,
+<span id='android-net-ConnectivityManager-property-MAX_RADIO_TYPE'>/**{@hide} */
+</span>MAX_RADIO_TYPE : &quot;18&quot;,
+<span id='android-net-ConnectivityManager-property-MAX_NETWORK_TYPE'>/**{@hide} */
+</span>MAX_NETWORK_TYPE : &quot;18&quot;,
+<span id='android-net-ConnectivityManager-property-DEFAULT_NETWORK_PREFERENCE'>/** If you want to set the default network preference,you can directly
+</span> change the networkAttributes array in framework's config.xml.
+
+ @deprecated Since we support so many more networks now, the single
+             network default network preference can't really express
+             the hierarchy.  Instead, the default is defined by the
+             networkAttributes in config.xml.  You can determine
+             the current value by calling {@link #getNetworkPreference}()
+             from an App.
+*/
+DEFAULT_NETWORK_PREFERENCE : &quot;1&quot;,
+<span id='android-net-ConnectivityManager-property-REQUEST_ID_UNSET'>/** @hide
+</span>*/
+REQUEST_ID_UNSET : &quot;0&quot;,
+<span id='android-net-ConnectivityManager-property-NETID_UNSET'>/** A NetID indicating no Network is selected.
+</span> Keep in sync with bionic/libc/dns/include/resolv_netid.h
+ @hide
+*/
+NETID_UNSET : &quot;0&quot;,
+<span id='android-net-ConnectivityManager-property-PRIVATE_DNS_MODE_OFF'>/** @hide
+</span>*/
+PRIVATE_DNS_MODE_OFF : &quot;off&quot;,
+<span id='android-net-ConnectivityManager-property-PRIVATE_DNS_MODE_OPPORTUNISTIC'>/** @hide
+</span>*/
+PRIVATE_DNS_MODE_OPPORTUNISTIC : &quot;opportunistic&quot;,
+<span id='android-net-ConnectivityManager-property-PRIVATE_DNS_MODE_PROVIDER_HOSTNAME'>/** @hide
+</span>*/
+PRIVATE_DNS_MODE_PROVIDER_HOSTNAME : &quot;hostname&quot;,
+<span id='android-net-ConnectivityManager-property-PRIVATE_DNS_DEFAULT_MODE_FALLBACK'>/** The default Private DNS mode.
+</span>
+ This may change from release to release or may become dependent upon
+ the capabilities of the underlying platform.
+
+ @hide
+*/
+PRIVATE_DNS_DEFAULT_MODE_FALLBACK : &quot;opportunistic&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_NO_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_NO_ERROR : &quot;0&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_UNKNOWN_IFACE'>/**{@hide} */
+</span>TETHER_ERROR_UNKNOWN_IFACE : &quot;1&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_SERVICE_UNAVAIL'>/**{@hide} */
+</span>TETHER_ERROR_SERVICE_UNAVAIL : &quot;2&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_UNSUPPORTED'>/**{@hide} */
+</span>TETHER_ERROR_UNSUPPORTED : &quot;3&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_UNAVAIL_IFACE'>/**{@hide} */
+</span>TETHER_ERROR_UNAVAIL_IFACE : &quot;4&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_MASTER_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_MASTER_ERROR : &quot;5&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_TETHER_IFACE_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_TETHER_IFACE_ERROR : &quot;6&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_UNTETHER_IFACE_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_UNTETHER_IFACE_ERROR : &quot;7&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_ENABLE_NAT_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_ENABLE_NAT_ERROR : &quot;8&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_DISABLE_NAT_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_DISABLE_NAT_ERROR : &quot;9&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_IFACE_CFG_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_IFACE_CFG_ERROR : &quot;10&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_PROVISION_FAILED'>/**{@hide} */
+</span>TETHER_ERROR_PROVISION_FAILED : &quot;11&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_DHCPSERVER_ERROR'>/**{@hide} */
+</span>TETHER_ERROR_DHCPSERVER_ERROR : &quot;12&quot;,
+<span id='android-net-ConnectivityManager-property-TETHER_ERROR_ENTITLEMENT_UNKONWN'>/**{@hide} */
+</span>TETHER_ERROR_ENTITLEMENT_UNKONWN : &quot;13&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_PRECHECK'>/**@hide */
+</span>CALLBACK_PRECHECK : &quot;524289&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_AVAILABLE'>/**@hide */
+</span>CALLBACK_AVAILABLE : &quot;524290&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_LOSING'>/**@hide arg1 = TTL */
+</span>CALLBACK_LOSING : &quot;524291&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_LOST'>/**@hide */
+</span>CALLBACK_LOST : &quot;524292&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_UNAVAIL'>/**@hide */
+</span>CALLBACK_UNAVAIL : &quot;524293&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_CAP_CHANGED'>/**@hide */
+</span>CALLBACK_CAP_CHANGED : &quot;524294&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_IP_CHANGED'>/**@hide */
+</span>CALLBACK_IP_CHANGED : &quot;524295&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_SUSPENDED'>/**@hide */
+</span>CALLBACK_SUSPENDED : &quot;524297&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_RESUMED'>/**@hide */
+</span>CALLBACK_RESUMED : &quot;524298&quot;,
+<span id='android-net-ConnectivityManager-property-CALLBACK_BLK_CHANGED'>/**@hide */
+</span>CALLBACK_BLK_CHANGED : &quot;524299&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_NETWORK'>/** The lookup key for a {@link android.net.Network} object included with the intent after
+</span> successfully finding a network for the applications request.  Retrieve it with
+ {@link android.content.Intent#getParcelableExtra(String)}.
+ &lt;p&gt;
+ Note that if you intend to invoke {@link android.net.Network#openConnection(java.net.URL)}
+ then you must get a ConnectivityManager instance before doing so.
+*/
+EXTRA_NETWORK : &quot;android.net.extra.NETWORK&quot;,
+<span id='android-net-ConnectivityManager-property-EXTRA_NETWORK_REQUEST'>/** The lookup key for a {@link android.net.NetworkRequest} object included with the intent after
+</span> successfully finding a network for the applications request.  Retrieve it with
+ {@link android.content.Intent#getParcelableExtra(String)}.
+*/
+EXTRA_NETWORK_REQUEST : &quot;android.net.extra.NETWORK_REQUEST&quot;,
+<span id='android-net-ConnectivityManager-property-MULTIPATH_PREFERENCE_HANDOVER'>/** It is acceptable to briefly use multipath data to provide seamless connectivity for
+</span> time-sensitive user-facing operations when the system default network is temporarily
+ unresponsive. The amount of data should be limited (less than one megabyte for every call to
+ this method), and the operation should be infrequent to ensure that data usage is limited.
+
+ An example of such an operation might be a time-sensitive foreground activity, such as a
+ voice command, that the user is performing while walking out of range of a Wi-Fi network.
+*/
+MULTIPATH_PREFERENCE_HANDOVER : &quot;1&quot;,
+<span id='android-net-ConnectivityManager-property-MULTIPATH_PREFERENCE_RELIABILITY'>/** It is acceptable to use small amounts of multipath data on an ongoing basis to provide
+</span> a backup channel for traffic that is primarily going over another network.
+
+ An example might be maintaining backup connections to peers or servers for the purpose of
+ fast fallback if the default network is temporarily unresponsive or disconnects. The traffic
+ on backup paths should be negligible compared to the traffic on the main path.
+*/
+MULTIPATH_PREFERENCE_RELIABILITY : &quot;2&quot;,
+<span id='android-net-ConnectivityManager-property-MULTIPATH_PREFERENCE_PERFORMANCE'>/** It is acceptable to use metered data to improve network latency and performance.
+</span>*/
+MULTIPATH_PREFERENCE_PERFORMANCE : &quot;4&quot;,
+<span id='android-net-ConnectivityManager-property-MULTIPATH_PREFERENCE_UNMETERED'>/** Return value to use for unmetered networks. On such networks we currently set all the flags
+</span> to true.
+ @hide
+*/
+MULTIPATH_PREFERENCE_UNMETERED : &quot;7&quot;,
+<span id='android-net-ConnectivityManager-property-RESTRICT_BACKGROUND_STATUS_DISABLED'>/** Device is not restricting metered network activity while application is running on
+</span> background.
+*/
+RESTRICT_BACKGROUND_STATUS_DISABLED : &quot;1&quot;,
+<span id='android-net-ConnectivityManager-property-RESTRICT_BACKGROUND_STATUS_WHITELISTED'>/** Device is restricting metered network activity while application is running on background,
+</span> but application is allowed to bypass it.
+ &lt;p&gt;
+ In this state, application should take action to mitigate metered network access.
+ For example, a music streaming application should switch to a low-bandwidth bitrate.
+*/
+RESTRICT_BACKGROUND_STATUS_WHITELISTED : &quot;2&quot;,
+<span id='android-net-ConnectivityManager-property-RESTRICT_BACKGROUND_STATUS_ENABLED'>/** Device is restricting metered network activity while application is running on background.
+</span> &lt;p&gt;
+ In this state, application should not try to use the network while running on background,
+ because it would be denied.
+*/
+RESTRICT_BACKGROUND_STATUS_ENABLED : &quot;3&quot;,
+<span id='android-net-ConnectivityManager-property-ACTION_RESTRICT_BACKGROUND_CHANGED'>/** A change in the background metered network activity restriction has occurred.
+</span> &lt;p&gt;
+ Applications should call {@link #getRestrictBackgroundStatus}() to check if the restriction
+ applies to them.
+ &lt;p&gt;
+ This is only sent to registered receivers, not manifest receivers.
+*/
+ACTION_RESTRICT_BACKGROUND_CHANGED : &quot;android.net.conn.RESTRICT_BACKGROUND_CHANGED&quot;,
+<span id='android-net-ConnectivityManager-method-isNetworkTypeValid'>/**Tests if a given integer represents a valid network type.
+</span>@param {Number} networkType the type to be tested
+@return {Boolean} a boolean.  {@code true} if the type is valid, else {@code false}
+@deprecated All APIs accepting a network type are deprecated. There should be no need to
+             validate a network type.
+*/
+isNetworkTypeValid : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkTypeName'>/**Returns a non-localized string representing a given network type.
+</span> ONLY used for debugging output.
+@param {Number} type the type needing naming
+@return {String} a String for the given type, or a string version of the type (&quot;87&quot;)
+ if no name is known.
+@deprecated Types are deprecated. Use {@link NetworkCapabilities} instead.
+ {@hide}
+*/
+getNetworkTypeName : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isNetworkTypeMobile'>/**Checks if a given type uses the cellular data connection.
+</span> This should be replaced in the future by a network property.
+@param {Number} networkType the type to check
+@return {Boolean} a boolean - {@code true} if uses cellular network, else {@code false}
+@deprecated Types are deprecated. Use {@link NetworkCapabilities} instead.
+ {@hide}
+*/
+isNetworkTypeMobile : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isNetworkTypeWifi'>/**Checks if the given network type is backed by a Wi-Fi radio.
+</span>@deprecated Types are deprecated. Use {@link NetworkCapabilities} instead.
+@hide 
+*/
+isNetworkTypeWifi : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setNetworkPreference'>/**Specifies the preferred network type.  When the device has more
+</span> than one type available the preferred network type will be used.
+@param {Number} preference the network type to prefer over all others.  It is
+         unspecified what happens to the old preferred network in the
+         overall ordering.
+@deprecated Functionality has been removed as it no longer makes sense,
+             with many more than two networks - we'd need an array to express
+             preference.  Instead we use dynamic network properties of
+             the networks to describe their precedence.
+*/
+setNetworkPreference : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkPreference'>/**Retrieves the current preferred network type.
+</span>@return {Number} an integer representing the preferred network type
+@deprecated Functionality has been removed as it no longer makes sense,
+             with many more than two networks - we'd need an array to express
+             preference.  Instead we use dynamic network properties of
+             the networks to describe their precedence.
+*/
+getNetworkPreference : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveNetworkInfo'>/**Returns details about the currently active default data network. When
+</span> connected, this network is the default route for outgoing connections.
+ You should always check {@link android.net.NetworkInfo#isConnected()} before initiating
+ network traffic. This may return {@code null} when there is no default
+ network.
+ Note that if the default network is a VPN, this method will return the
+ NetworkInfo for one of its underlying networks instead, or null if the
+ VPN agent did not specify any. Apps interested in learning about VPNs
+ should use {@link #getNetworkInfo(android.net.Network)} instead.
+@return {Object {android.net.NetworkInfo}} a {@link NetworkInfo} object for the current default network
+        or {@code null} if no default network is currently active
+@deprecated See {@link NetworkInfo}.
+*/
+getActiveNetworkInfo : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveNetwork'>/**Returns a {@link android.net.Network} object corresponding to the currently active
+</span> default data network.  In the event that the current active default data
+ network disconnects, the returned {@code Network} object will no longer
+ be usable.  This will return {@code null} when there is no default
+ network.
+@return {Object {android.net.Network}} a {@link Network} object for the current default network or
+        {@code null} if no default network is currently active
+*/
+getActiveNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveNetworkForUid'>/**Returns a {@link android.net.Network} object corresponding to the currently active
+</span> default data network for a specific UID.  In the event that the default data
+ network disconnects, the returned {@code Network} object will no longer
+ be usable.  This will return {@code null} when there is no default
+ network for the UID.
+@return {Object {android.net.Network}} a {@link Network} object for the current default network for the
+         given UID or {@code null} if no default network is currently active
+@hide 
+*/
+getActiveNetworkForUid : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveNetworkForUid'>/**{@hide}
+</span>*/
+getActiveNetworkForUid : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isAlwaysOnVpnPackageSupportedForUser'>/**Checks if a VPN app supports always-on mode.
+</span>
+ In order to support the always-on feature, an app has to
+ &lt;ul&gt;
+     &lt;li&gt;target {@link VERSION_CODES#N API 24} or above, and
+     &lt;li&gt;not opt out through the {@link android.net.VpnService#SERVICE_META_DATA_SUPPORTS_ALWAYS_ON}
+         meta-data field.
+ &lt;/ul&gt;
+@param {Number} userId The identifier of the user for whom the VPN app is installed.
+@param {String} vpnPackage The canonical package name of the VPN app.
+@return {Boolean} {@code true} if and only if the VPN app exists and supports always-on mode.
+@hide 
+*/
+isAlwaysOnVpnPackageSupportedForUser : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setAlwaysOnVpnPackageForUser'>/**Configures an always-on VPN connection through a specific application.
+</span> This connection is automatically granted and persisted after a reboot.
+
+ &lt;p&gt;The designated package should declare a {@link android.net.VpnService} in its
+    manifest guarded by {@link android.Manifest.permission.BIND_VPN_SERVICE},
+    otherwise the call will fail.
+@param {Number} userId The identifier of the user to set an always-on VPN for.
+@param {String} vpnPackage The package name for an installed VPN app on the device, or {@code null}
+                   to remove an existing always-on VPN configuration.
+@param {Boolean} lockdownEnabled {@code true} to disallow networking when the VPN is not connected or
+        {@code false} otherwise.
+@param {Object {java.util.List}} lockdownWhitelist The list of packages that are allowed to access network directly
+         when VPN is in lockdown mode but is not running. Non-existent packages are ignored so
+         this method must be called when a package that should be whitelisted is installed or
+         uninstalled.
+@return {Boolean} {@code true} if the package is set as always-on VPN controller;
+         {@code false} otherwise.
+@hide 
+*/
+setAlwaysOnVpnPackageForUser : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getAlwaysOnVpnPackageForUser'>/**Returns the package name of the currently set always-on VPN application.
+</span> If there is no always-on VPN set, or the VPN is provided by the system instead
+ of by an app, {@code null} will be returned.
+@return {String} Package name of VPN controller responsible for always-on VPN,
+         or {@code null} if none is set.
+@hide 
+*/
+getAlwaysOnVpnPackageForUser : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isVpnLockdownEnabled'>/**
+</span>@return {Boolean} whether always-on VPN is in lockdown mode.
+@hide 
+*/
+isVpnLockdownEnabled : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getVpnLockdownWhitelist'>/**
+</span>@return {Object {java.util.List}} the list of packages that are allowed to access network when always-on VPN is in
+ lockdown mode but not connected. Returns {@code null} when VPN lockdown is not active.
+@hide 
+*/
+getVpnLockdownWhitelist : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveNetworkInfoForUid'>/**Returns details about the currently active default data network
+</span> for a given uid.  This is for internal use only to avoid spying
+ other apps.
+@return {Object {android.net.NetworkInfo}} a {@link NetworkInfo} object for the current default network
+        for the given uid or {@code null} if no default network is
+        available for the specified uid.
+
+ {@hide}
+*/
+getActiveNetworkInfoForUid : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveNetworkInfoForUid'>/**{@hide}
+</span>*/
+getActiveNetworkInfoForUid : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkInfo'>/**Returns connection status information about a particular
+</span> network type.
+@param {Number} networkType integer specifying which networkType in
+        which you're interested.
+@return {Object {android.net.NetworkInfo}} a {@link NetworkInfo} object for the requested
+        network type or {@code null} if the type is not
+        supported by the device. If {@code networkType} is
+        TYPE_VPN and a VPN is active for the calling app,
+        then this method will try to return one of the
+        underlying networks for the VPN or null if the
+        VPN agent didn't specify any.
+@deprecated This method does not support multiple connected networks
+             of the same type. Use {@link #getAllNetworks} and
+             {@link #getNetworkInfo(android.net.Network)} instead.
+*/
+getNetworkInfo : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkInfo'>/**Returns connection status information about a particular
+</span> Network.
+@param {Object {Network}} network {@link Network} specifying which network
+        in which you're interested.
+@return {Object {android.net.NetworkInfo}} a {@link NetworkInfo} object for the requested
+        network or {@code null} if the {@code Network}
+        is not valid.
+@deprecated See {@link NetworkInfo}.
+*/
+getNetworkInfo : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkInfoForUid'>/**{@hide}
+</span>*/
+getNetworkInfoForUid : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getAllNetworkInfo'>/**Returns connection status information about all network
+</span> types supported by the device.
+@return {Object {android.net.NetworkInfo}} an array of {@link NetworkInfo} objects.  Check each
+ {@link NetworkInfo#getType} for which type each applies.
+@deprecated This method does not support multiple connected networks
+             of the same type. Use {@link #getAllNetworks} and
+             {@link #getNetworkInfo(android.net.Network)} instead.
+*/
+getAllNetworkInfo : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkForType'>/**Returns the {@link android.net.Network} object currently serving a given type, or
+</span> null if the given type is not connected.
+@hide 
+@deprecated This method does not support multiple connected networks
+             of the same type. Use {@link #getAllNetworks} and
+             {@link #getNetworkInfo(android.net.Network)} instead.
+*/
+getNetworkForType : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getAllNetworks'>/**Returns an array of all {@link android.net.Network} currently tracked by the
+</span> framework.
+@return {Object {android.net.Network}} an array of {@link Network} objects.
+*/
+getAllNetworks : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getDefaultNetworkCapabilitiesForUser'>/**Returns an array of {@link android.net.NetworkCapabilities} objects, representing
+</span> the Networks that applications run by the given user will use by default.
+@hide 
+*/
+getDefaultNetworkCapabilitiesForUser : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveLinkProperties'>/**Returns the IP information for the current default network.
+</span>@return {Object {android.net.LinkProperties}} a {@link LinkProperties} object describing the IP info
+        for the current default network, or {@code null} if there
+        is no current default network.
+
+ {@hide}
+@deprecated please use {@link #getLinkProperties(Network)} on the return
+             value of {@link #getActiveNetwork()} instead. In particular,
+             this method will return non-null LinkProperties even if the
+             app is blocked by policy from using this network.
+*/
+getActiveLinkProperties : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getLinkProperties'>/**Returns the IP information for a given network type.
+</span>@param {Number} networkType the network type of interest.
+@return {Object {android.net.LinkProperties}} a {@link LinkProperties} object describing the IP info
+        for the given networkType, or {@code null} if there is
+        no current default network.
+
+ {@hide}
+@deprecated This method does not support multiple connected networks
+             of the same type. Use {@link #getAllNetworks},
+             {@link #getNetworkInfo(android.net.Network)}, and
+             {@link #getLinkProperties(android.net.Network)} instead.
+*/
+getLinkProperties : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getLinkProperties'>/**Get the {@link android.net.LinkProperties} for the given {@link android.net.Network}.  This
+</span> will return {@code null} if the network is unknown.
+@param {Object {Network}} network The {@link Network} object identifying the network in question.
+@return {Object {android.net.LinkProperties}} The {@link LinkProperties} for the network, or {@code null}.
+*/
+getLinkProperties : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkCapabilities'>/**Get the {@link android.net.NetworkCapabilities} for the given {@link android.net.Network}.  This
+</span> will return {@code null} if the network is unknown.
+@param {Object {Network}} network The {@link Network} object identifying the network in question.
+@return {Object {android.net.NetworkCapabilities}} The {@link android.net.NetworkCapabilities} for the network, or {@code null}.
+*/
+getNetworkCapabilities : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getCaptivePortalServerUrl'>/**Gets a URL that can be used for resolving whether a captive portal is present.
+</span> 1. This URL should respond with a 204 response to a GET request to indicate no captive
+    portal is present.
+ 2. This URL must be HTTP as redirect responses are used to find captive portal
+    sign-in pages. Captive portals cannot respond to HTTPS requests with redirects.
+
+ The system network validation may be using different strategies to detect captive portals,
+ so this method does not necessarily return a URL used by the system. It only returns a URL
+ that may be relevant for other components trying to detect captive portals.
+@hide 
+*/
+getCaptivePortalServerUrl : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-startUsingNetworkFeature'>/**Tells the underlying networking system that the caller wants to
+</span> begin using the named feature. The interpretation of {@code feature}
+ is completely up to each networking implementation.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Number} networkType specifies which network the request pertains to
+@param {String} feature the name of the feature to be used
+@return {Number} an integer value representing the outcome of the request.
+ The interpretation of this value is specific to each networking
+ implementation+feature combination, except that the value {@code -1}
+ always indicates failure.
+@deprecated Deprecated in favor of the cleaner
+             {@link #requestNetwork(NetworkRequest, NetworkCallback)} API.
+             In {@link VERSION_CODES#M}, and above, this method is unsupported and will
+             throw {@code UnsupportedOperationException} if called.
+@removed 
+*/
+startUsingNetworkFeature : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-stopUsingNetworkFeature'>/**Tells the underlying networking system that the caller is finished
+</span> using the named feature. The interpretation of {@code feature}
+ is completely up to each networking implementation.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Number} networkType specifies which network the request pertains to
+@param {String} feature the name of the feature that is no longer needed
+@return {Number} an integer value representing the outcome of the request.
+ The interpretation of this value is specific to each networking
+ implementation+feature combination, except that the value {@code -1}
+ always indicates failure.
+@deprecated Deprecated in favor of the cleaner
+             {@link #unregisterNetworkCallback(NetworkCallback)} API.
+             In {@link VERSION_CODES#M}, and above, this method is unsupported and will
+             throw {@code UnsupportedOperationException} if called.
+@removed 
+*/
+stopUsingNetworkFeature : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-networkCapabilitiesForType'>/**Given a legacy type (TYPE_WIFI, ...) returns a NetworkCapabilities
+</span> instance suitable for registering a request or callback.  Throws an
+ IllegalArgumentException if no mapping from the legacy type to
+ NetworkCapabilities is known.
+@deprecated Types are deprecated. Use {@link NetworkCallback} or {@link NetworkRequest}
+     to find the network instead.
+@hide 
+*/
+networkCapabilitiesForType : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-startNattKeepalive'>/**Starts an IPsec NAT-T keepalive packet with the specified parameters.
+</span>@deprecated Use {@link #createSocketKeepalive} instead.
+@hide 
+*/
+startNattKeepalive : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-createSocketKeepalive'>/**Request that keepalives be started on a IPsec NAT-T socket.
+</span>@param {Object {Network}} network The {@link Network} the socket is on.
+@param {Object {IpSecManager.UdpEncapsulationSocket}} socket The socket that needs to be kept alive.
+@param {Object {InetAddress}} source The source address of the {@link UdpEncapsulationSocket}.
+@param {Object {InetAddress}} destination The destination address of the {@link UdpEncapsulationSocket}.
+@param {Object {Executor}} executor The executor on which callback will be invoked. The provided {@link Executor}
+                 must run callback sequentially, otherwise the order of callbacks cannot be
+                 guaranteed.
+@param {Object {SocketKeepalive.Callback}} callback A {@link SocketKeepalive.Callback}. Used for notifications about keepalive
+        changes. Must be extended by applications that use this API.
+@return {Object {android.net.SocketKeepalive}} A {@link SocketKeepalive} object that can be used to control the keepalive on the
+         given socket.
+*/
+createSocketKeepalive : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-createNattKeepalive'>/**Request that keepalives be started on a IPsec NAT-T socket file descriptor. Directly called
+</span> by system apps which don't use IpSecService to create {@link android.net.IpSecManager.UdpEncapsulationSocket}.
+@param {Object {Network}} network The {@link Network} the socket is on.
+@param {Object {ParcelFileDescriptor}} pfd The {@link ParcelFileDescriptor} that needs to be kept alive. The provided
+        {@link ParcelFileDescriptor} must be bound to a port and the keepalives will be sent
+        from that port.
+@param {Object {InetAddress}} source The source address of the {@link UdpEncapsulationSocket}.
+@param {Object {InetAddress}} destination The destination address of the {@link UdpEncapsulationSocket}. The
+        keepalive packets will always be sent to port 4500 of the given {@code destination}.
+@param {Object {Executor}} executor The executor on which callback will be invoked. The provided {@link Executor}
+                 must run callback sequentially, otherwise the order of callbacks cannot be
+                 guaranteed.
+@param {Object {SocketKeepalive.Callback}} callback A {@link SocketKeepalive.Callback}. Used for notifications about keepalive
+        changes. Must be extended by applications that use this API.
+@return {Object {android.net.SocketKeepalive}} A {@link SocketKeepalive} object that can be used to control the keepalive on the
+         given socket.
+@hide 
+*/
+createNattKeepalive : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-createSocketKeepalive'>/**Request that keepalives be started on a TCP socket.
+</span> The socket must be established.
+@param {Object {Network}} network The {@link Network} the socket is on.
+@param {Object {Socket}} socket The socket that needs to be kept alive.
+@param {Object {Executor}} executor The executor on which callback will be invoked. This implementation assumes
+                 the provided {@link Executor} runs the callbacks in sequence with no
+                 concurrency. Failing this, no guarantee of correctness can be made. It is
+                 the responsibility of the caller to ensure the executor provides this
+                 guarantee. A simple way of creating such an executor is with the standard
+                 tool {@code Executors.newSingleThreadExecutor}.
+@param {Object {SocketKeepalive.Callback}} callback A {@link SocketKeepalive.Callback}. Used for notifications about keepalive
+        changes. Must be extended by applications that use this API.
+@return {Object {android.net.SocketKeepalive}} A {@link SocketKeepalive} object that can be used to control the keepalive on the
+         given socket.
+@hide 
+*/
+createSocketKeepalive : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestRouteToHost'>/**Ensure that a network route exists to deliver traffic to the specified
+</span> host via the specified network interface. An attempt to add a route that
+ already exists is ignored, but treated as successful.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Number} networkType the type of the network over which traffic to the specified
+ host is to be routed
+@param {Number} hostAddress the IP address of the host to which the route is desired
+@return {Boolean} {@code true} on success, {@code false} on failure
+@deprecated Deprecated in favor of the
+             {@link #requestNetwork(NetworkRequest, NetworkCallback)},
+             {@link #bindProcessToNetwork} and {@link Network#getSocketFactory} API.
+             In {@link VERSION_CODES#M}, and above, this method is unsupported and will
+             throw {@code UnsupportedOperationException} if called.
+@removed 
+*/
+requestRouteToHost : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestRouteToHostAddress'>/**Ensure that a network route exists to deliver traffic to the specified
+</span> host via the specified network interface. An attempt to add a route that
+ already exists is ignored, but treated as successful.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Number} networkType the type of the network over which traffic to the specified
+ host is to be routed
+@param {Object {InetAddress}} hostAddress the IP address of the host to which the route is desired
+@return {Boolean} {@code true} on success, {@code false} on failure
+@hide 
+@deprecated Deprecated in favor of the {@link #requestNetwork} and
+             {@link #bindProcessToNetwork} API.
+*/
+requestRouteToHostAddress : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getBackgroundDataSetting'>/**Returns the value of the setting for background data usage. If false,
+</span> applications should not use the network if the application is not in the
+ foreground. Developers should respect this setting, and check the value
+ of this before performing any background data operations.
+ &lt;p&gt;
+ All applications that have background services that use the network
+ should listen to {@link #ACTION_BACKGROUND_DATA_SETTING_CHANGED}.
+ &lt;p&gt;
+@deprecated As of {@link VERSION_CODES#ICE_CREAM_SANDWICH}, availability of
+ background data depends on several combined factors, and this method will
+ always return {@code true}. Instead, when background data is unavailable,
+ {@link #getActiveNetworkInfo()} will now appear disconnected.
+@return {Boolean} Whether background data usage is allowed.
+*/
+getBackgroundDataSetting : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setBackgroundDataSetting'>/**Sets the value of the setting for background data usage.
+</span>@param {Boolean} allowBackgroundData Whether an application should use data while
+            it is in the background.
+@attr ref android.Manifest.permission#CHANGE_BACKGROUND_DATA_SETTING
+@see #getBackgroundDataSetting()
+@hide 
+*/
+setBackgroundDataSetting : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getActiveNetworkQuotaInfo'>/**{@hide}
+</span>*/
+getActiveNetworkQuotaInfo : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getMobileDataEnabled'>/**
+</span>@hide 
+@deprecated Talk to TelephonyManager directly
+*/
+getMobileDataEnabled : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-addDefaultNetworkActiveListener'>/**Start listening to reports when the system's default data network is active, meaning it is
+</span> a good time to perform network traffic.  Use {@link #isDefaultNetworkActive}()
+ to determine the current state of the system's default network after registering the
+ listener.
+ &lt;p&gt;
+ If the process default network has been set with
+ {@link android.net.ConnectivityManager#bindProcessToNetwork} this function will not
+ reflect the process's default, but the system default.
+@param {Object {ConnectivityManager.OnNetworkActiveListener}} l The listener to be told when the network is active.
+*/
+addDefaultNetworkActiveListener : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-removeDefaultNetworkActiveListener'>/**Remove network active listener previously registered with
+</span> {@link #addDefaultNetworkActiveListener}.
+@param {Object {ConnectivityManager.OnNetworkActiveListener}} l Previously registered listener.
+*/
+removeDefaultNetworkActiveListener : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isDefaultNetworkActive'>/**Return whether the data network is currently active.  An active network means that
+</span> it is currently in a high power state for performing data transmission.  On some
+ types of networks, it may be expensive to move and stay in such a state, so it is
+ more power efficient to batch network traffic together when the radio is already in
+ this state.  This method tells you whether right now is currently a good time to
+ initiate network traffic, as the network is already active.
+*/
+isDefaultNetworkActive : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-from'>/**{@hide}
+</span>*/
+from : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getDefaultRequest'>/**
+</span>@hide 
+*/
+getDefaultRequest : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-enforceChangePermission'>/**{@hide}
+</span>*/
+enforceChangePermission : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-enforceTetherChangePermission'>/**{@hide}
+</span>*/
+enforceTetherChangePermission : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getTetherableIfaces'>/**Get the set of tetherable, available interfaces.  This list is limited by
+</span> device configuration and current interface existence.
+@return {String} an array of 0 or more Strings of tetherable interface names.
+
+ {@hide}
+*/
+getTetherableIfaces : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getTetheredIfaces'>/**Get the set of tethered interfaces.
+</span>@return {String} an array of 0 or more String of currently tethered interface names.
+
+ {@hide}
+*/
+getTetheredIfaces : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getTetheringErroredIfaces'>/**Get the set of interface names which attempted to tether but
+</span> failed.  Re-attempting to tether may cause them to reset to the Tethered
+ state.  Alternatively, causing the interface to be destroyed and recreated
+ may cause them to reset to the available state.
+ {@link android.net.ConnectivityManager#getLastTetherError} can be used to get more
+ information on the cause of the errors.
+@return {String} an array of 0 or more String indicating the interface names
+        which failed to tether.
+
+ {@hide}
+*/
+getTetheringErroredIfaces : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getTetheredDhcpRanges'>/**Get the set of tethered dhcp ranges.
+</span>@return {String} an array of 0 or more {@code String} of tethered dhcp ranges.
+ {@hide}
+*/
+getTetheredDhcpRanges : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-tether'>/**Attempt to tether the named interface.  This will setup a dhcp server
+</span> on the interface, forward and NAT IP packets and forward DNS requests
+ to the best active upstream network interface.  Note that if no upstream
+ IP network interface is available, dhcp will still run and traffic will be
+ allowed between the tethered devices and this device, though upstream net
+ access will of course fail until an upstream network interface becomes
+ active.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+
+ &lt;p&gt;WARNING: New clients should not use this function. The only usages should be in PanService
+ and WifiStateMachine which need direct access. All other clients should use
+ {@link #startTethering} and {@link #stopTethering} which encapsulate proper provisioning
+ logic.&lt;/p&gt;
+@param {String} iface the interface name to tether.
+@return {Number} error a {@code TETHER_ERROR} value indicating success or failure type
+
+ {@hide}
+*/
+tether : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-untether'>/**Stop tethering the named interface.
+</span>
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+
+ &lt;p&gt;WARNING: New clients should not use this function. The only usages should be in PanService
+ and WifiStateMachine which need direct access. All other clients should use
+ {@link #startTethering} and {@link #stopTethering} which encapsulate proper provisioning
+ logic.&lt;/p&gt;
+@param {String} iface the interface name to untether.
+@return {Number} error a {@code TETHER_ERROR} value indicating success or failure type
+
+ {@hide}
+*/
+untether : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isTetheringSupported'>/**Check if the device allows for tethering.  It may be disabled via
+</span> {@code ro.tether.denied} system property, Settings.TETHER_SUPPORTED or
+ due to device configuration.
+
+ &lt;p&gt;If this app does not have permission to use this API, it will always
+ return false rather than throw an exception.&lt;/p&gt;
+
+ &lt;p&gt;If the device has a hotspot provisioning app, the caller is required to hold the
+ {@link android.Manifest.permission.TETHER_PRIVILEGED} permission.&lt;/p&gt;
+
+ &lt;p&gt;Otherwise, this method requires the caller to hold the ability to modify system
+ settings as determined by {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@return {Boolean} a boolean - {@code true} indicating Tethering is supported.
+
+ {@hide}
+*/
+isTetheringSupported : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-startTethering'>/**Convenient overload for
+</span> {@link #startTethering(int, boolean, android.net.ConnectivityManager.OnStartTetheringCallback, Handler)} which passes a null
+ handler to run on the current thread's {@link Looper}.
+@hide 
+*/
+startTethering : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-startTethering'>/**Runs tether provisioning for the given type if needed and then starts tethering if
+</span> the check succeeds. If no carrier provisioning is required for tethering, tethering is
+ enabled immediately. If provisioning fails, tethering will not be enabled. It also
+ schedules tether provisioning re-checks if appropriate.
+@param {Number} type The type of tethering to start. Must be one of
+         {@link ConnectivityManager.TETHERING_WIFI},
+         {@link ConnectivityManager.TETHERING_USB}, or
+         {@link ConnectivityManager.TETHERING_BLUETOOTH}.
+@param {Boolean} showProvisioningUi a boolean indicating to show the provisioning app UI if there
+         is one. This should be true the first time this function is called and also any time
+         the user can see this UI. It gives users information from their carrier about the
+         check failing and how they can sign up for tethering if possible.
+@param {Object {ConnectivityManager.OnStartTetheringCallback}} callback an {@link OnStartTetheringCallback} which will be called to notify the caller
+         of the result of trying to tether.
+@param {Object {Handler}} handler {@link Handler} to specify the thread upon which the callback will be invoked.
+@hide 
+*/
+startTethering : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-stopTethering'>/**Stops tethering for the given type. Also cancels any provisioning rechecks for that type if
+</span> applicable.
+@param {Number} type The type of tethering to stop. Must be one of
+         {@link ConnectivityManager.TETHERING_WIFI},
+         {@link ConnectivityManager.TETHERING_USB}, or
+         {@link ConnectivityManager.TETHERING_BLUETOOTH}.
+@hide 
+*/
+stopTethering : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerTetheringEventCallback'>/**Start listening to tethering change events. Any new added callback will receive the last
+</span> tethering status right away. If callback is registered when tethering has no upstream or
+ disabled, {@link android.net.ConnectivityManager.OnTetheringEventCallback#onUpstreamChanged} will immediately be called
+ with a null argument. The same callback object cannot be registered twice.
+@param {Object {Executor}} executor the executor on which callback will be invoked.
+@param {Object {ConnectivityManager.OnTetheringEventCallback}} callback the callback to be called when tethering has change events.
+@hide 
+*/
+registerTetheringEventCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-unregisterTetheringEventCallback'>/**Remove tethering event callback previously registered with
+</span> {@link #registerTetheringEventCallback}.
+@param {Object {ConnectivityManager.OnTetheringEventCallback}} callback previously registered callback.
+@hide 
+*/
+unregisterTetheringEventCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getTetherableUsbRegexs'>/**Get the list of regular expressions that define any tetherable
+</span> USB network interfaces.  If USB tethering is not supported by the
+ device, this list should be empty.
+@return {String} an array of 0 or more regular expression Strings defining
+        what interfaces are considered tetherable usb interfaces.
+
+ {@hide}
+*/
+getTetherableUsbRegexs : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getTetherableWifiRegexs'>/**Get the list of regular expressions that define any tetherable
+</span> Wifi network interfaces.  If Wifi tethering is not supported by the
+ device, this list should be empty.
+@return {String} an array of 0 or more regular expression Strings defining
+        what interfaces are considered tetherable wifi interfaces.
+
+ {@hide}
+*/
+getTetherableWifiRegexs : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getTetherableBluetoothRegexs'>/**Get the list of regular expressions that define any tetherable
+</span> Bluetooth network interfaces.  If Bluetooth tethering is not supported by the
+ device, this list should be empty.
+@return {String} an array of 0 or more regular expression Strings defining
+        what interfaces are considered tetherable bluetooth interfaces.
+
+ {@hide}
+*/
+getTetherableBluetoothRegexs : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setUsbTethering'>/**Attempt to both alter the mode of USB and Tethering of USB.  A
+</span> utility method to deal with some of the complexity of USB - will
+ attempt to switch to Rndis and subsequently tether the resulting
+ interface on {@code true} or turn off tethering and switch off
+ Rndis on {@code false}.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Boolean} enable a boolean - {@code true} to enable tethering
+@return {Number} error a {@code TETHER_ERROR} value indicating success or failure type
+
+ {@hide}
+*/
+setUsbTethering : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getLastTetherError'>/**Get a more detailed error code after a Tethering or Untethering
+</span> request asynchronously failed.
+@param {String} iface The name of the interface of interest
+@return {Number} error The error code of the last error tethering or untethering the named
+               interface
+
+ {@hide}
+*/
+getLastTetherError : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getLatestTetheringEntitlementResult'>/**Get the last value of the entitlement check on this downstream. If the cached value is
+</span> {@link #TETHER_ERROR_NO_ERROR} or showEntitlementUi argument is false, it just return the
+ cached value. Otherwise, a UI-based entitlement check would be performed. It is not
+ guaranteed that the UI-based entitlement check will complete in any specific time period
+ and may in fact never complete. Any successful entitlement check the platform performs for
+ any reason will update the cached value.
+@param {Number} type the downstream type of tethering. Must be one of
+         {@link #TETHERING_WIFI},
+         {@link #TETHERING_USB}, or
+         {@link #TETHERING_BLUETOOTH}.
+@param {Boolean} showEntitlementUi a boolean indicating whether to run UI-based entitlement check.
+@param {Object {Executor}} executor the executor on which callback will be invoked.
+@param {Object {ConnectivityManager.OnTetheringEntitlementResultListener}} listener an {@link OnTetheringEntitlementResultListener} which will be called to
+         notify the caller of the result of entitlement check. The listener may be called zero
+         or one time.
+ {@hide}
+*/
+getLatestTetheringEntitlementResult : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-reportInetCondition'>/**Report network connectivity status.  This is currently used only
+</span> to alter status bar UI.
+ &lt;p&gt;This method requires the caller to hold the permission
+ {@link android.Manifest.permission#STATUS_BAR}.
+@param {Number} networkType The type of network you want to report on
+@param {Number} percentage The quality of the connection 0 is bad, 100 is good
+@deprecated Types are deprecated. Use {@link #reportNetworkConnectivity} instead.
+ {@hide}
+*/
+reportInetCondition : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-reportBadNetwork'>/**Report a problem network to the framework.  This provides a hint to the system
+</span> that there might be connectivity problems on this network and may cause
+ the framework to re-evaluate network connectivity and/or switch to another
+ network.
+@param {Object {Network}} network The {@link Network} the application was attempting to use
+                or {@code null} to indicate the current default network.
+@deprecated Use {@link #reportNetworkConnectivity} which allows reporting both
+             working and non-working connectivity.
+*/
+reportBadNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-reportNetworkConnectivity'>/**Report to the framework whether a network has working connectivity.
+</span> This provides a hint to the system that a particular network is providing
+ working connectivity or not.  In response the framework may re-evaluate
+ the network's connectivity and might take further action thereafter.
+@param {Object {Network}} network The {@link Network} the application was attempting to use
+                or {@code null} to indicate the current default network.
+@param {Boolean} hasConnectivity {@code true} if the application was able to successfully access the
+                        Internet using {@code network} or {@code false} if not.
+*/
+reportNetworkConnectivity : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setGlobalProxy'>/**Set a network-independent global http proxy.  This is not normally what you want
+</span> for typical HTTP proxies - they are general network dependent.  However if you're
+ doing something unusual like general internal filtering this may be useful.  On
+ a private network where the proxy is not accessible, you may break HTTP using this.
+@param {Object {ProxyInfo}} p A {@link ProxyInfo} object defining the new global
+        HTTP proxy.  A {@code null} value will clear the global HTTP proxy.
+@hide 
+*/
+setGlobalProxy : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getGlobalProxy'>/**Retrieve any network-independent global HTTP proxy.
+</span>@return {Object {android.net.ProxyInfo}} {@link ProxyInfo} for the current global HTTP proxy or {@code null}
+        if no global HTTP proxy is set.
+@hide 
+*/
+getGlobalProxy : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getProxyForNetwork'>/**Retrieve the global HTTP proxy, or if no global HTTP proxy is set, a
+</span> network-specific HTTP proxy.  If {@code network} is null, the
+ network-specific proxy returned is the proxy of the default active
+ network.
+@return {Object {android.net.ProxyInfo}} {@link ProxyInfo} for the current global HTTP proxy, or if no
+         global HTTP proxy is set, {@code ProxyInfo} for {@code network},
+         or when {@code network} is {@code null},
+         the {@code ProxyInfo} for the default active network.  Returns
+         {@code null} when no proxy applies or the caller doesn't have
+         permission to use {@code network}.
+@hide 
+*/
+getProxyForNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getDefaultProxy'>/**Get the current default HTTP proxy settings.  If a global proxy is set it will be returned,
+</span> otherwise if this process is bound to a {@link android.net.Network} using
+ {@link #bindProcessToNetwork} then that {@code Network}'s proxy is returned, otherwise
+ the default network's proxy is returned.
+@return {Object {android.net.ProxyInfo}} the {@link ProxyInfo} for the current HTTP proxy, or {@code null} if no
+        HTTP proxy is active.
+*/
+getDefaultProxy : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isNetworkSupported'>/**Returns true if the hardware supports the given network type
+</span> else it returns false.  This doesn't indicate we have coverage
+ or are authorized onto a network, just whether or not the
+ hardware supports it.  For example a GSM phone without a SIM
+ should still return {@code true} for mobile data, but a wifi only
+ tablet would return {@code false}.
+@param {Number} networkType The network type we'd like to check
+@return {Boolean} {@code true} if supported, else {@code false}
+@deprecated Types are deprecated. Use {@link NetworkCapabilities} instead.
+@hide 
+*/
+isNetworkSupported : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-isActiveNetworkMetered'>/**Returns if the currently active data network is metered. A network is
+</span> classified as metered when the user is sensitive to heavy data usage on
+ that connection due to monetary costs, data limitations or
+ battery/performance issues. You should check this before doing large
+ data transfers, and warn the user or delay the operation until another
+ network is available.
+@return {Boolean} {@code true} if large transfers should be avoided, otherwise
+        {@code false}.
+*/
+isActiveNetworkMetered : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-updateLockdownVpn'>/**If the LockdownVpn mechanism is enabled, updates the vpn
+</span> with a reload of its profile.
+@return {Boolean} a boolean with {@code} indicating success
+
+ &lt;p&gt;This method can only be called by the system UID
+ {@hide}
+*/
+updateLockdownVpn : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-checkMobileProvisioning'>/**Check mobile provisioning.
+</span>@param {Number} suggestedTimeOutMs, timeout in milliseconds
+@return {Number} time out that will be used, maybe less that suggestedTimeOutMs
+ -1 if an error.
+
+ {@hide}
+*/
+checkMobileProvisioning : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getMobileProvisioningUrl'>/**Get the mobile provisioning url.
+</span> {@hide}
+*/
+getMobileProvisioningUrl : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setProvisioningNotificationVisible'>/**Set sign in error notification to visible or in visible
+</span>
+ {@hide}
+@deprecated Doesn't properly deal with multiple connected networks of the same type.
+*/
+setProvisioningNotificationVisible : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setAirplaneMode'>/**Set the value for enabling/disabling airplane mode
+</span>@param {Boolean} enable whether to enable airplane mode or not
+@hide 
+*/
+setAirplaneMode : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerNetworkFactory'>/**{@hide} - returns the factory serial number
+</span>*/
+registerNetworkFactory : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-unregisterNetworkFactory'>/**{@hide}
+</span>*/
+unregisterNetworkFactory : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerNetworkAgent'>/**
+</span>@hide Register a NetworkAgent with ConnectivityService.
+@return {Number} NetID corresponding to NetworkAgent.
+*/
+registerNetworkAgent : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerNetworkAgent'>/**
+</span>@hide Register a NetworkAgent with ConnectivityService.
+@return {Number} NetID corresponding to NetworkAgent.
+*/
+registerNetworkAgent : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getCallbackName'>/**
+</span>@hide 
+*/
+getCallbackName : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestNetwork'>/**Helper function to request a network with a particular legacy type.
+</span>
+ This is temporarily public @hide so it can be called by system code that uses the
+ NetworkRequest API to request networks but relies on CONNECTIVITY_ACTION broadcasts for
+ instead network notifications.
+
+ TODO: update said system code to rely on NetworkCallbacks and make this method private.
+@hide 
+*/
+requestNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestNetwork'>/**Request a network to satisfy a set of {@link android.net.NetworkCapabilities}.
+</span>
+ This {@link android.net.NetworkRequest} will live until released via
+ {@link #unregisterNetworkCallback}(NetworkCallback) or the calling application exits. A
+ version of the method which takes a timeout is
+ {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback, int)}.
+ Status of the request can be followed by listening to the various
+ callbacks described in {@link android.net.NetworkCallback}.  The {@link android.net.Network}
+ can be used to direct traffic to the network.
+ &lt;p&gt;It is presently unsupported to request a network with mutable
+ {@link android.net.NetworkCapabilities} such as
+ {@link android.net.NetworkCapabilities#NET_CAPABILITY_VALIDATED} or
+ {@link android.net.NetworkCapabilities#NET_CAPABILITY_CAPTIVE_PORTAL}
+ as these {@code NetworkCapabilities} represent states that a particular
+ network may never attain, and whether a network will attain these states
+ is unknown prior to bringing up the network so the framework does not
+ know how to go about satisfing a request with these capabilities.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} to be utilized for this request. Note
+                        the callback must not be shared - it uniquely specifies this request.
+                        The callback is invoked on the default internal Handler.
+@throws IllegalArgumentException if {@code request} contains invalid network capabilities.
+@throws SecurityException if missing the appropriate permissions.
+@throws RuntimeException if request limit per UID is exceeded.
+*/
+requestNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestNetwork'>/**Request a network to satisfy a set of {@link android.net.NetworkCapabilities}.
+</span>
+ This {@link android.net.NetworkRequest} will live until released via
+ {@link #unregisterNetworkCallback}(NetworkCallback) or the calling application exits. A
+ version of the method which takes a timeout is
+ {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback, int)}.
+ Status of the request can be followed by listening to the various
+ callbacks described in {@link android.net.NetworkCallback}.  The {@link android.net.Network}
+ can be used to direct traffic to the network.
+ &lt;p&gt;It is presently unsupported to request a network with mutable
+ {@link android.net.NetworkCapabilities} such as
+ {@link android.net.NetworkCapabilities#NET_CAPABILITY_VALIDATED} or
+ {@link android.net.NetworkCapabilities#NET_CAPABILITY_CAPTIVE_PORTAL}
+ as these {@code NetworkCapabilities} represent states that a particular
+ network may never attain, and whether a network will attain these states
+ is unknown prior to bringing up the network so the framework does not
+ know how to go about satisfying a request with these capabilities.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} to be utilized for this request. Note
+                        the callback must not be shared - it uniquely specifies this request.
+@param {Object {Handler}} handler {@link Handler} to specify the thread upon which the callback will be invoked.
+@throws IllegalArgumentException if {@code request} contains invalid network capabilities.
+@throws SecurityException if missing the appropriate permissions.
+@throws RuntimeException if request limit per UID is exceeded.
+*/
+requestNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestNetwork'>/**Request a network to satisfy a set of {@link android.net.NetworkCapabilities}, limited
+</span> by a timeout.
+
+ This function behaves identically to the non-timed-out version
+ {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)}, but if a suitable network
+ is not found within the given time (in milliseconds) the
+ {@link android.net.NetworkCallback#onUnavailable()} callback is called. The request can still be
+ released normally by calling {@link #unregisterNetworkCallback}(NetworkCallback) but does
+ not have to be released if timed-out (it is automatically released). Unregistering a
+ request that timed out is not an error.
+
+ &lt;p&gt;Do not use this method to poll for the existence of specific networks (e.g. with a small
+ timeout) - {@link #registerandroid.net.NetworkCallback(android.net.NetworkRequest, android.net.NetworkCallback)} is provided
+ for that purpose. Calling this method will attempt to bring up the requested network.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} to be utilized for this request. Note
+                        the callback must not be shared - it uniquely specifies this request.
+@param {Number} timeoutMs The time in milliseconds to attempt looking for a suitable network
+                  before {@link NetworkCallback#onUnavailable()} is called. The timeout must
+                  be a positive value (i.e. &gt;0).
+@throws IllegalArgumentException if {@code request} contains invalid network capabilities.
+@throws SecurityException if missing the appropriate permissions.
+@throws RuntimeException if request limit per UID is exceeded.
+*/
+requestNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestNetwork'>/**Request a network to satisfy a set of {@link android.net.NetworkCapabilities}, limited
+</span> by a timeout.
+
+ This function behaves identically to the version without timeout, but if a suitable
+ network is not found within the given time (in milliseconds) the
+ {@link android.net.NetworkCallback#onUnavailable} callback is called. The request can still be
+ released normally by calling {@link #unregisterNetworkCallback}(NetworkCallback) but does
+ not have to be released if timed-out (it is automatically released). Unregistering a
+ request that timed out is not an error.
+
+ &lt;p&gt;Do not use this method to poll for the existence of specific networks (e.g. with a small
+ timeout) - {@link #registerandroid.net.NetworkCallback(android.net.NetworkRequest, android.net.NetworkCallback)} is provided
+ for that purpose. Calling this method will attempt to bring up the requested network.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} to be utilized for this request. Note
+                        the callback must not be shared - it uniquely specifies this request.
+@param {Object {Handler}} handler {@link Handler} to specify the thread upon which the callback will be invoked.
+@param {Number} timeoutMs The time in milliseconds to attempt looking for a suitable network
+                  before {@link NetworkCallback#onUnavailable} is called.
+@throws IllegalArgumentException if {@code request} contains invalid network capabilities.
+@throws SecurityException if missing the appropriate permissions.
+@throws RuntimeException if request limit per UID is exceeded.
+*/
+requestNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestNetwork'>/**Request a network to satisfy a set of {@link android.net.NetworkCapabilities}.
+</span>
+ This function behaves identically to the version that takes a NetworkCallback, but instead
+ of {@link android.net.NetworkCallback} a {@link PendingIntent} is used.  This means
+ the request may outlive the calling application and get called back when a suitable
+ network is found.
+ &lt;p&gt;
+ The operation is an Intent broadcast that goes to a broadcast receiver that
+ you registered with {@link Context#registerReceiver} or through the
+ &amp;lt;receiver&amp;gt; tag in an AndroidManifest.xml file
+ &lt;p&gt;
+ The operation Intent is delivered with two extras, a {@link android.net.Network} typed
+ extra called {@link #EXTRA_NETWORK} and a {@link android.net.NetworkRequest}
+ typed extra called {@link #EXTRA_NETWORK_REQUEST} containing
+ the original requests parameters.  It is important to create a new,
+ {@link android.net.NetworkCallback} based request before completing the processing of the
+ Intent to reserve the network or it will be released shortly after the Intent
+ is processed.
+ &lt;p&gt;
+ If there is already a request for this Intent registered (with the equality of
+ two Intents defined by {@link Intent#filterEquals}), then it will be removed and
+ replaced by this one, effectively releasing the previous {@link android.net.NetworkRequest}.
+ &lt;p&gt;
+ The request may be released normally by calling
+ {@link #releaseNetworkRequest(android.app.PendingIntent)}.
+ &lt;p&gt;It is presently unsupported to request a network with either
+ {@link android.net.NetworkCapabilities#NET_CAPABILITY_VALIDATED} or
+ {@link android.net.NetworkCapabilities#NET_CAPABILITY_CAPTIVE_PORTAL}
+ as these {@code NetworkCapabilities} represent states that a particular
+ network may never attain, and whether a network will attain these states
+ is unknown prior to bringing up the network so the framework does not
+ know how to go about satisfying a request with these capabilities.
+
+ &lt;p&gt;This method requires the caller to hold either the
+ {@link android.Manifest.permission#CHANGE_NETWORK_STATE} permission
+ or the ability to modify system settings as determined by
+ {@link android.provider.Settings.System#canWrite}.&lt;/p&gt;
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {PendingIntent}} operation Action to perform when the network is available (corresponds
+                  to the {@link NetworkCallback#onAvailable} call.  Typically
+                  comes from {@link PendingIntent#getBroadcast}. Cannot be null.
+@throws IllegalArgumentException if {@code request} contains invalid network capabilities.
+@throws SecurityException if missing the appropriate permissions.
+@throws RuntimeException if request limit per UID is exceeded.
+*/
+requestNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-releaseNetworkRequest'>/**Removes a request made via {@link #requestNetwork(NetworkRequest, android.app.PendingIntent)}
+</span> &lt;p&gt;
+ This method has the same behavior as
+ {@link #unregisterNetworkCallback(android.app.PendingIntent)} with respect to
+ releasing network resources and disconnecting.
+@param {Object {PendingIntent}} operation A PendingIntent equal (as defined by {@link Intent#filterEquals}) to the
+                  PendingIntent passed to
+                  {@link #requestNetwork(NetworkRequest, android.app.PendingIntent)} with the
+                  corresponding NetworkRequest you'd like to remove. Cannot be null.
+*/
+releaseNetworkRequest : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerNetworkCallback'>/**Registers to receive notifications about all networks which satisfy the given
+</span> {@link android.net.NetworkRequest}.  The callbacks will continue to be called until
+ either the application exits or {@link #unregisterNetworkCallback}(NetworkCallback) is
+ called.
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} that the system will call as suitable
+                        networks change state.
+                        The callback is invoked on the default internal Handler.
+*/
+registerNetworkCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerNetworkCallback'>/**Registers to receive notifications about all networks which satisfy the given
+</span> {@link android.net.NetworkRequest}.  The callbacks will continue to be called until
+ either the application exits or {@link #unregisterNetworkCallback}(NetworkCallback) is
+ called.
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} that the system will call as suitable
+                        networks change state.
+@param {Object {Handler}} handler {@link Handler} to specify the thread upon which the callback will be invoked.
+*/
+registerNetworkCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerNetworkCallback'>/**Registers a PendingIntent to be sent when a network is available which satisfies the given
+</span> {@link android.net.NetworkRequest}.
+
+ This function behaves identically to the version that takes a NetworkCallback, but instead
+ of {@link android.net.NetworkCallback} a {@link PendingIntent} is used.  This means
+ the request may outlive the calling application and get called back when a suitable
+ network is found.
+ &lt;p&gt;
+ The operation is an Intent broadcast that goes to a broadcast receiver that
+ you registered with {@link Context#registerReceiver} or through the
+ &amp;lt;receiver&amp;gt; tag in an AndroidManifest.xml file
+ &lt;p&gt;
+ The operation Intent is delivered with two extras, a {@link android.net.Network} typed
+ extra called {@link #EXTRA_NETWORK} and a {@link android.net.NetworkRequest}
+ typed extra called {@link #EXTRA_NETWORK_REQUEST} containing
+ the original requests parameters.
+ &lt;p&gt;
+ If there is already a request for this Intent registered (with the equality of
+ two Intents defined by {@link Intent#filterEquals}), then it will be removed and
+ replaced by this one, effectively releasing the previous {@link android.net.NetworkRequest}.
+ &lt;p&gt;
+ The request may be released normally by calling
+ {@link #unregisterNetworkCallback(android.app.PendingIntent)}.
+@param {Object {NetworkRequest}} request {@link NetworkRequest} describing this request.
+@param {Object {PendingIntent}} operation Action to perform when the network is available (corresponds
+                  to the {@link NetworkCallback#onAvailable} call.  Typically
+                  comes from {@link PendingIntent#getBroadcast}. Cannot be null.
+*/
+registerNetworkCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerDefaultNetworkCallback'>/**Registers to receive notifications about changes in the system default network. The callbacks
+</span> will continue to be called until either the application exits or
+ {@link #unregisterNetworkCallback}(NetworkCallback) is called.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} that the system will call as the
+                        system default network changes.
+                        The callback is invoked on the default internal Handler.
+*/
+registerDefaultNetworkCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-registerDefaultNetworkCallback'>/**Registers to receive notifications about changes in the system default network. The callbacks
+</span> will continue to be called until either the application exits or
+ {@link #unregisterNetworkCallback}(NetworkCallback) is called.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} that the system will call as the
+                        system default network changes.
+@param {Object {Handler}} handler {@link Handler} to specify the thread upon which the callback will be invoked.
+*/
+registerDefaultNetworkCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-requestBandwidthUpdate'>/**Requests bandwidth update for a given {@link android.net.Network} and returns whether the update request
+</span> is accepted by ConnectivityService. Once accepted, ConnectivityService will poll underlying
+ network connection for updated bandwidth information. The caller will be notified via
+ {@link android.net.ConnectivityManager.NetworkCallback} if there is an update. Notice that this
+ method assumes that the caller has previously called
+ {@link #registerandroid.net.NetworkCallback(android.net.NetworkRequest, android.net.NetworkCallback)} to listen for network
+ changes.
+@param {Object {Network}} network {@link Network} specifying which network you're interested.
+@return {Boolean} {@code true} on success, {@code false} if the {@link Network} is no longer valid.
+*/
+requestBandwidthUpdate : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-unregisterNetworkCallback'>/**Unregisters a {@code NetworkCallback} and possibly releases networks originating from
+</span> {@link #requestandroid.net.Network(android.net.NetworkRequest, android.net.NetworkCallback)} and
+ {@link #registerandroid.net.NetworkCallback(android.net.NetworkRequest, android.net.NetworkCallback)} calls.
+ If the given {@code NetworkCallback} had previously been used with
+ {@code #requestNetwork}, any networks that had been connected to only to satisfy that request
+ will be disconnected.
+
+ Notifications that would have triggered that {@code NetworkCallback} will immediately stop
+ triggering it as soon as this call returns.
+@param {Object {ConnectivityManager.NetworkCallback}} networkCallback The {@link NetworkCallback} used when making the request.
+*/
+unregisterNetworkCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-unregisterNetworkCallback'>/**Unregisters a callback previously registered via
+</span> {@link #registerNetworkCallback(NetworkRequest, android.app.PendingIntent)}.
+@param {Object {PendingIntent}} operation A PendingIntent equal (as defined by {@link Intent#filterEquals}) to the
+                  PendingIntent passed to
+                  {@link #registerNetworkCallback(NetworkRequest, android.app.PendingIntent)}.
+                  Cannot be null.
+*/
+unregisterNetworkCallback : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setAcceptUnvalidated'>/**Informs the system whether it should switch to {@code network} regardless of whether it is
+</span> validated or not. If {@code accept} is true, and the network was explicitly selected by the
+ user (e.g., by selecting a Wi-Fi network in the Settings app), then the network will become
+ the system default network regardless of any other network that's currently connected. If
+ {@code always} is true, then the choice is remembered, so that the next time the user
+ connects to this network, the system will switch to it.
+@param {Object {Network}} network The network to accept.
+@param {Boolean} accept Whether to accept the network even if unvalidated.
+@param {Boolean} always Whether to remember this choice in the future.
+@hide 
+*/
+setAcceptUnvalidated : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setAcceptPartialConnectivity'>/**Informs the system whether it should consider the network as validated even if it only has
+</span> partial connectivity. If {@code accept} is true, then the network will be considered as
+ validated even if connectivity is only partial. If {@code always} is true, then the choice
+ is remembered, so that the next time the user connects to this network, the system will
+ switch to it.
+@param {Object {Network}} network The network to accept.
+@param {Boolean} accept Whether to consider the network as validated even if it has partial
+               connectivity.
+@param {Boolean} always Whether to remember this choice in the future.
+@hide 
+*/
+setAcceptPartialConnectivity : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setAvoidUnvalidated'>/**Informs the system to penalize {@code network}'s score when it becomes unvalidated. This is
+</span> only meaningful if the system is configured not to penalize such networks, e.g., if the
+ {@code config_networkAvoidBadWifi} configuration variable is set to 0 and the {@code
+ NETWORK_AVOID_BAD_WIFI setting is unset}.
+@param {Object {Network}} network The network to accept.
+@hide 
+*/
+setAvoidUnvalidated : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-startCaptivePortalApp'>/**Requests that the system open the captive portal app on the specified network.
+</span>@param {Object {Network}} network The network to log into.
+@hide 
+*/
+startCaptivePortalApp : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-startCaptivePortalApp'>/**Requests that the system open the captive portal app with the specified extras.
+</span>
+ &lt;p&gt;This endpoint is exclusively for use by the NetworkStack and is protected by the
+ corresponding permission.
+@param {Object {Network}} network Network on which the captive portal was detected.
+@param {Object {Bundle}} appExtras Extras to include in the app start intent.
+@hide 
+*/
+startCaptivePortalApp : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-shouldAvoidBadWifi'>/**Determine whether the device is configured to avoid bad wifi.
+</span>@hide 
+*/
+shouldAvoidBadWifi : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getMultipathPreference'>/**Provides a hint to the calling application on whether it is desirable to use the
+</span> multinetwork APIs (e.g., {@link android.net.Network#openConnection}, {@link android.net.Network#bindSocket}, etc.)
+ for multipath data transfer on this network when it is not the system default network.
+ Applications desiring to use multipath network protocols should call this method before
+ each such operation.
+@param {Object {Network}} network The network on which the application desires to use multipath data.
+                If {@code null}, this method will return the a preference that will generally
+                apply to metered networks.
+@return {Number} a bitwise OR of zero or more of the  {@code MULTIPATH_PREFERENCE_*} constants.
+*/
+getMultipathPreference : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-factoryReset'>/**Resets all connectivity manager settings back to factory defaults.
+</span>@hide 
+*/
+factoryReset : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-bindProcessToNetwork'>/**Binds the current process to {@code network}.  All Sockets created in the future
+</span> (and not explicitly bound via a bound SocketFactory from
+ {@link android.net.Network#getSocketFactory() android.net.Network.getSocketFactory()}) will be bound to
+ {@code network}.  All host name resolutions will be limited to {@code network} as well.
+ Note that if {@code network} ever disconnects, all Sockets created in this way will cease to
+ work and all host name resolutions will fail.  This is by design so an application doesn't
+ accidentally use Sockets it thinks are still bound to a particular {@link android.net.Network}.
+ To clear binding pass {@code null} for {@code network}.  Using individually bound
+ Sockets created by Network.getSocketFactory().createSocket() and
+ performing network-specific host name resolutions via
+ {@link android.net.Network#getAllByName android.net.Network.getAllByName} is preferred to calling
+ {@code bindProcessToNetwork}.
+@param {Object {Network}} network The {@link Network} to bind the current process to, or {@code null} to clear
+                the current binding.
+@return {Boolean} {@code true} on success, {@code false} if the {@link Network} is no longer valid.
+*/
+bindProcessToNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setProcessDefaultNetwork'>/**Binds the current process to {@code network}.  All Sockets created in the future
+</span> (and not explicitly bound via a bound SocketFactory from
+ {@link android.net.Network#getSocketFactory() android.net.Network.getSocketFactory()}) will be bound to
+ {@code network}.  All host name resolutions will be limited to {@code network} as well.
+ Note that if {@code network} ever disconnects, all Sockets created in this way will cease to
+ work and all host name resolutions will fail.  This is by design so an application doesn't
+ accidentally use Sockets it thinks are still bound to a particular {@link android.net.Network}.
+ To clear binding pass {@code null} for {@code network}.  Using individually bound
+ Sockets created by Network.getSocketFactory().createSocket() and
+ performing network-specific host name resolutions via
+ {@link android.net.Network#getAllByName android.net.Network.getAllByName} is preferred to calling
+ {@code setProcessDefaultNetwork}.
+@param {Object {Network}} network The {@link Network} to bind the current process to, or {@code null} to clear
+                the current binding.
+@return {Boolean} {@code true} on success, {@code false} if the {@link Network} is no longer valid.
+@deprecated This function can throw {@link IllegalStateException}.  Use
+             {@link #bindProcessToNetwork} instead.  {@code bindProcessToNetwork}
+             is a direct replacement.
+*/
+setProcessDefaultNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getBoundNetworkForProcess'>/**Returns the {@link android.net.Network} currently bound to this process via
+</span> {@link #bindProcessToNetwork}, or {@code null} if no {@link android.net.Network} is explicitly bound.
+@return {Object {android.net.Network}} {@code Network} to which this process is bound, or {@code null}.
+*/
+getBoundNetworkForProcess : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getProcessDefaultNetwork'>/**Returns the {@link android.net.Network} currently bound to this process via
+</span> {@link #bindProcessToNetwork}, or {@code null} if no {@link android.net.Network} is explicitly bound.
+@return {Object {android.net.Network}} {@code Network} to which this process is bound, or {@code null}.
+@deprecated Using this function can lead to other functions throwing
+             {@link IllegalStateException}.  Use {@link #getBoundNetworkForProcess} instead.
+             {@code getBoundNetworkForProcess} is a direct replacement.
+*/
+getProcessDefaultNetwork : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-setProcessDefaultNetworkForHostResolution'>/**Binds host resolutions performed by this process to {@code network}.
+</span> {@link #bindProcessToNetwork} takes precedence over this setting.
+@param {Object {Network}} network The {@link Network} to bind host resolutions from the current process to, or
+                {@code null} to clear the current binding.
+@return {Boolean} {@code true} on success, {@code false} if the {@link Network} is no longer valid.
+@hide 
+@deprecated This is strictly for legacy usage to support {@link #startUsingNetworkFeature}.
+*/
+setProcessDefaultNetworkForHostResolution : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getRestrictBackgroundStatus'>/**Determines if the calling application is subject to metered network restrictions while
+</span> running on background.
+@return {Number} {@link #RESTRICT_BACKGROUND_STATUS_DISABLED},
+ {@link #RESTRICT_BACKGROUND_STATUS_ENABLED},
+ or {@link #RESTRICT_BACKGROUND_STATUS_WHITELISTED}
+*/
+getRestrictBackgroundStatus : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getNetworkWatchlistConfigHash'>/**The network watchlist is a list of domains and IP addresses that are associated with
+</span> potentially harmful apps. This method returns the SHA-256 of the watchlist config file
+ currently used by the system for validation purposes.
+@return {Number} Hash of network watchlist config file. Null if config does not exist.
+*/
+getNetworkWatchlistConfigHash : function(  ) {},
+
+<span id='android-net-ConnectivityManager-method-getConnectionOwnerUid'>/**Returns the {@code uid} of the owner of a network connection.
+</span>@param {Number} protocol The protocol of the connection. Only {@code IPPROTO_TCP} and
+ {@code IPPROTO_UDP} currently supported.
+@param {Object {InetSocketAddress}} local The local {@link InetSocketAddress} of a connection.
+@param {Object {InetSocketAddress}} remote The remote {@link InetSocketAddress} of a connection.
+@return {Number} {@code uid} if the connection is found and the app has permission to observe it
+ (e.g., if it is associated with the calling VPN app's tunnel) or
+ {@link android.os.Process#INVALID_UID} if the connection is not found.
+ Throws {@link SecurityException} if the caller is not the active VPN for the current user.
+ Throws {@link IllegalArgumentException} if an unsupported protocol is requested.
+*/
+getConnectionOwnerUid : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

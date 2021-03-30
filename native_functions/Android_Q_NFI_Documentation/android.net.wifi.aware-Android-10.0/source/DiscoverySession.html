@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-aware-DiscoverySession'>/**@class android.net.wifi.aware.DiscoverySession
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ A class representing a single publish or subscribe Aware session. This object
+ will not be created directly - only its child classes are available:
+ {@link android.net.wifi.aware.PublishDiscoverySession} and {@link android.net.wifi.aware.SubscribeDiscoverySession}. This
+ class provides functionality common to both publish and subscribe discovery sessions:
+ &lt;ul&gt;
+      &lt;li&gt;Sending messages: {@link #sendMessage(PeerHandle, int, byte[])} method.
+      &lt;li&gt;Creating a network-specifier when requesting a Aware connection using
+      {@link android.net.wifi.aware.WifiAwareNetworkSpecifier.Builder}.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ The {@link #close}() method must be called to destroy discovery sessions once they are
+ no longer needed.
+*/
+var DiscoverySession = {
+
+<span id='android-net-wifi-aware-DiscoverySession-method-getMaxSendRetryCount'>/**Return the maximum permitted retry count when sending messages using
+</span> {@link #sendMessage(PeerHandle, int, byte[], int)}.
+@return {Number} Maximum retry count when sending messages.
+@hide 
+*/
+getMaxSendRetryCount : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-close'>/**Destroy the publish or subscribe session - free any resources, and stop
+</span> transmitting packets on-air (for an active session) or listening for
+ matches (for a passive session). The session may not be used for any
+ additional operations after its destruction.
+ &lt;p&gt;
+     This operation must be done on a session which is no longer needed. Otherwise system
+     resources will continue to be utilized until the application exits. The only
+     exception is a session for which we received a termination callback,
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onSessionTerminated()}.
+*/
+close : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-setTerminated'>/**Sets the status of the session to terminated - i.e. an indication that
+</span> already terminated rather than executing a termination.
+@hide 
+*/
+setTerminated : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-getClientId'>/**Access the client ID of the Aware session.
+</span>
+ Note: internal visibility for testing.
+@return {Number} The internal client ID.
+@hide 
+*/
+getClientId : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-getSessionId'>/**Access the discovery session ID of the Aware session.
+</span>
+ Note: internal visibility for testing.
+@return {Number} The internal discovery session ID.
+@hide 
+*/
+getSessionId : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-sendMessage'>/**Sends a message to the specified destination. Aware messages are transmitted in the context
+</span> of a discovery session - executed subsequent to a publish/subscribe
+ {@link android.net.wifi.aware.DiscoverySessionCallback#onServiceDiscovered(PeerHandle,
+ byte[], java.util.List)} event.
+ &lt;p&gt;
+     Aware messages are not guaranteed delivery. Callbacks on
+     {@link android.net.wifi.aware.DiscoverySessionCallback} indicate message was transmitted successfully,
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onMessageSendSucceeded(int)}, or transmission
+     failed (possibly after several retries) -
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onMessageSendFailed(int)}.
+ &lt;p&gt;
+     The peer will get a callback indicating a message was received using
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onMessageReceived(PeerHandle,
+     byte[])}.
+@param {Object {PeerHandle}} peerHandle The peer's handle for the message. Must be a result of an
+ {@link DiscoverySessionCallback#onServiceDiscovered(PeerHandle,
+ byte[], java.util.List)} or
+ {@link DiscoverySessionCallback#onMessageReceived(PeerHandle,
+ byte[])} events.
+@param {Number} messageId An arbitrary integer used by the caller to identify the message. The same
+            integer ID will be returned in the callbacks indicating message send success or
+            failure. The {@code messageId} is not used internally by the Aware service - it
+                  can be arbitrary and non-unique.
+@param {Object {byte[]}} message The message to be transmitted.
+@param {Number} retryCount An integer specifying how many additional service-level (as opposed to PHY
+            or MAC level) retries should be attempted if there is no ACK from the receiver
+            (note: no retransmissions are attempted in other failure cases). A value of 0
+            indicates no retries. Max permitted value is {@link #getMaxSendRetryCount()}.
+@hide 
+*/
+sendMessage : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-sendMessage'>/**Sends a message to the specified destination. Aware messages are transmitted in the context
+</span> of a discovery session - executed subsequent to a publish/subscribe
+ {@link android.net.wifi.aware.DiscoverySessionCallback#onServiceDiscovered(PeerHandle,
+ byte[], java.util.List)} event.
+ &lt;p&gt;
+     Aware messages are not guaranteed delivery. Callbacks on
+     {@link android.net.wifi.aware.DiscoverySessionCallback} indicate message was transmitted successfully,
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onMessageSendSucceeded(int)}, or transmission
+     failed (possibly after several retries) -
+     {@link android.net.wifi.aware.DiscoverySessionCallback#onMessageSendFailed(int)}.
+ &lt;p&gt;
+ The peer will get a callback indicating a message was received using
+ {@link android.net.wifi.aware.DiscoverySessionCallback#onMessageReceived(PeerHandle,
+ byte[])}.
+@param {Object {PeerHandle}} peerHandle The peer's handle for the message. Must be a result of an
+ {@link DiscoverySessionCallback#onServiceDiscovered(PeerHandle,
+ byte[], java.util.List)} or
+ {@link DiscoverySessionCallback#onMessageReceived(PeerHandle,
+ byte[])} events.
+@param {Number} messageId An arbitrary integer used by the caller to identify the message. The same
+            integer ID will be returned in the callbacks indicating message send success or
+            failure. The {@code messageId} is not used internally by the Aware service - it
+                  can be arbitrary and non-unique.
+@param {Object {byte[]}} message The message to be transmitted.
+*/
+sendMessage : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-createNetworkSpecifierOpen'>/**Create a {@link android.net.NetworkRequest.Builder#setNetworkSpecifier(NetworkSpecifier)} for
+</span> an unencrypted WiFi Aware connection (link) to the specified peer. The
+ {@link android.net.NetworkRequest.Builder#addTransportType(int)} should be set to
+ {@link android.net.NetworkCapabilities#TRANSPORT_WIFI_AWARE}.
+ &lt;p&gt;
+ This method should be used when setting up a connection with a peer discovered through Aware
+ discovery or communication (in such scenarios the MAC address of the peer is shielded by
+ an opaque peer ID handle). If an Aware connection is needed to a peer discovered using other
+ OOB (out-of-band) mechanism then use the alternative
+ {@link android.net.wifi.aware.WifiAwareSession#createNetworkSpecifierOpen(int, byte[])} method - which uses the
+ peer's MAC address.
+ &lt;p&gt;
+ Note: per the Wi-Fi Aware specification the roles are fixed - a Subscriber is an INITIATOR
+ and a Publisher is a RESPONDER.
+ &lt;p&gt;
+ To set up an encrypted link use the
+ {@link #createNetworkSpecifierPassphrase(PeerHandle, String)} API.
+@param {Object {PeerHandle}} peerHandle The peer's handle obtained through
+ {@link DiscoverySessionCallback#onServiceDiscovered(PeerHandle, byte[], java.util.List)}
+                   or
+                   {@link DiscoverySessionCallback#onMessageReceived(PeerHandle, byte[])}.
+                   On a RESPONDER this value is used to gate the acceptance of a connection
+                   request from only that peer.
+@param peerHandle The peer's handle obtained through
+ {@link DiscoverySessionCallback#onServiceDiscovered(PeerHandle, byte[], java.util.List)}
+                   or
+                   {@link DiscoverySessionCallback#onMessageReceived(PeerHandle, byte[])}.
+                   On a RESPONDER this value is used to gate the acceptance of a connection
+                   request from only that peer.
+@return {Object {android.net.NetworkSpecifier}} A {@link NetworkSpecifier} to be used to construct
+ {@link android.net.NetworkRequest.Builder#setNetworkSpecifier(NetworkSpecifier)} to pass to
+ {@link android.net.ConnectivityManager#requestNetwork(android.net.NetworkRequest,
+ android.net.ConnectivityManager.NetworkCallback)}
+ [or other varieties of that API].
+*/
+createNetworkSpecifierOpen : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-createNetworkSpecifierPassphrase'>/**Create a {@link android.net.NetworkRequest.Builder#setNetworkSpecifier(NetworkSpecifier)} for
+</span> an encrypted WiFi Aware connection (link) to the specified peer. The
+ {@link android.net.NetworkRequest.Builder#addTransportType(int)} should be set to
+ {@link android.net.NetworkCapabilities#TRANSPORT_WIFI_AWARE}.
+ &lt;p&gt;
+ This method should be used when setting up a connection with a peer discovered through Aware
+ discovery or communication (in such scenarios the MAC address of the peer is shielded by
+ an opaque peer ID handle). If an Aware connection is needed to a peer discovered using other
+ OOB (out-of-band) mechanism then use the alternative
+ {@link android.net.wifi.aware.WifiAwareSession#createNetworkSpecifierPassphrase(int, byte[], String)} method -
+ which uses the peer's MAC address.
+ &lt;p&gt;
+ Note: per the Wi-Fi Aware specification the roles are fixed - a Subscriber is an INITIATOR
+ and a Publisher is a RESPONDER.
+@param {Object {PeerHandle}} peerHandle The peer's handle obtained through
+ {@link DiscoverySessionCallback#onServiceDiscovered(PeerHandle,
+ byte[], java.util.List)} or
+ {@link DiscoverySessionCallback#onMessageReceived(PeerHandle,
+ byte[])}. On a RESPONDER this value is used to gate the acceptance of a connection request
+                   from only that peer.
+@param {String} passphrase The passphrase to be used to encrypt the link. The PMK is generated from
+                   the passphrase. Use the
+                   {@link #createNetworkSpecifierOpen(PeerHandle)} API to
+                   specify an open (unencrypted) link.
+@param passphrase The passphrase to be used to encrypt the link. The PMK is generated from
+                   the passphrase. Use the
+                   {@link #createNetworkSpecifierOpen(PeerHandle)} API to
+                   specify an open (unencrypted) link.
+@return {Object {android.net.NetworkSpecifier}} A {@link NetworkSpecifier} to be used to construct
+ {@link android.net.NetworkRequest.Builder#setNetworkSpecifier(NetworkSpecifier)} to pass to
+ {@link android.net.ConnectivityManager#requestNetwork(android.net.NetworkRequest,
+ android.net.ConnectivityManager.NetworkCallback)}
+ [or other varieties of that API].
+*/
+createNetworkSpecifierPassphrase : function(  ) {},
+
+<span id='android-net-wifi-aware-DiscoverySession-method-createNetworkSpecifierPmk'>/**Create a {@link android.net.NetworkRequest.Builder#setNetworkSpecifier(NetworkSpecifier)} for
+</span> an encrypted WiFi Aware connection (link) to the specified peer. The
+ {@link android.net.NetworkRequest.Builder#addTransportType(int)} should be set to
+ {@link android.net.NetworkCapabilities#TRANSPORT_WIFI_AWARE}.
+ &lt;p&gt;
+ This method should be used when setting up a connection with a peer discovered through Aware
+ discovery or communication (in such scenarios the MAC address of the peer is shielded by
+ an opaque peer ID handle). If an Aware connection is needed to a peer discovered using other
+ OOB (out-of-band) mechanism then use the alternative
+ {@link android.net.wifi.aware.WifiAwareSession#createNetworkSpecifierPmk(int, byte[], byte[])} method - which uses
+ the peer's MAC address.
+ &lt;p&gt;
+ Note: per the Wi-Fi Aware specification the roles are fixed - a Subscriber is an INITIATOR
+ and a Publisher is a RESPONDER.
+@param {Object {PeerHandle}} peerHandle The peer's handle obtained through
+ {@link DiscoverySessionCallback#onServiceDiscovered(PeerHandle,
+ byte[], java.util.List)} or
+ {@link DiscoverySessionCallback#onMessageReceived(PeerHandle,
+ byte[])}. On a RESPONDER this value is used to gate the acceptance of a connection request
+                   from only that peer.
+@param {Object {byte[]}} pmk A PMK (pairwise master key, see IEEE 802.11i) specifying the key to use for
+            encrypting the data-path. Use the
+            {@link #createNetworkSpecifierPassphrase(PeerHandle, String)} to specify a
+            Passphrase or {@link #createNetworkSpecifierOpen(PeerHandle)} to specify an
+            open (unencrypted) link.
+@param pmk A PMK (pairwise master key, see IEEE 802.11i) specifying the key to use for
+            encrypting the data-path. Use the
+            {@link #createNetworkSpecifierPassphrase(PeerHandle, String)} to specify a
+            Passphrase or {@link #createNetworkSpecifierOpen(PeerHandle)} to specify an
+            open (unencrypted) link.
+@return {Object {android.net.NetworkSpecifier}} A {@link NetworkSpecifier} to be used to construct
+ {@link android.net.NetworkRequest.Builder#setNetworkSpecifier(NetworkSpecifier)} to pass to
+ {@link android.net.ConnectivityManager#requestNetwork(android.net.NetworkRequest,
+ android.net.ConnectivityManager.NetworkCallback)}
+ [or other varieties of that API].
+@hide 
+*/
+createNetworkSpecifierPmk : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

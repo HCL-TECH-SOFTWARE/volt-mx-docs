@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-speech-tts-TextToSpeech-Engine'>/**@class android.speech.tts.TextToSpeech.Engine
+</span>@extends java.lang.Object
+
+ Constants and parameter names for controlling text-to-speech. These include:
+
+ &lt;ul&gt;
+     &lt;li&gt;
+         Intents to ask engine to install data or check its data and
+         extras for a TTS engine's check data activity.
+     &lt;/li&gt;
+     &lt;li&gt;
+         Keys for the parameters passed with speak commands, e.g.
+         {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID}, {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_STREAM}.
+     &lt;/li&gt;
+     &lt;li&gt;
+         A list of feature strings that engines might support, e.g
+         {@link android.speech.tts.TextToSpeech.Engine#KEY_FEATURE_NETWORK_SYNTHESIS}. These values may be passed in to
+         {@link android.speech.tts.TextToSpeech#speak} and {@link android.speech.tts.TextToSpeech#synthesizeToFile} to modify
+         engine behaviour. The engine can be queried for the set of features it supports
+         through {@link android.speech.tts.TextToSpeech#getFeatures(java.util.Locale)}.
+     &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var Engine = {
+
+<span id='android-speech-tts-TextToSpeech-Engine-property-DEFAULT_RATE'>/** Default speech rate.
+</span> @hide
+*/
+DEFAULT_RATE : &quot;100&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-DEFAULT_PITCH'>/** Default pitch.
+</span> @hide
+*/
+DEFAULT_PITCH : &quot;100&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-DEFAULT_VOLUME'>/** Default volume.
+</span> @hide
+*/
+DEFAULT_VOLUME : &quot;1.0&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-DEFAULT_PAN'>/** Default pan (centered).
+</span> @hide
+*/
+DEFAULT_PAN : &quot;0.0&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-USE_DEFAULTS'>/** Default value for {@link Settings.Secure#TTS_USE_DEFAULTS}.
+</span> @hide
+*/
+USE_DEFAULTS : &quot;0&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-DEFAULT_ENGINE'>/** Package name of the default TTS engine.
+</span>
+ @hide
+ @deprecated No longer in use, the default engine is determined by
+         the sort order defined in {@link android.speech.tts.TtsEngines}. Note that
+         this doesn't &quot;break&quot; anything because there is no guarantee that
+         the engine specified below is installed on a given build, let
+         alone be the default.
+*/
+DEFAULT_ENGINE : &quot;com.svox.pico&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-DEFAULT_STREAM'>/** Default audio stream used when playing synthesized speech.
+</span>*/
+DEFAULT_STREAM : &quot;3&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-CHECK_VOICE_DATA_PASS'>/** Indicates success when checking the installation status of the resources used by the
+</span> TextToSpeech engine with the {@link #ACTION_CHECK_TTS_DATA} intent.
+*/
+CHECK_VOICE_DATA_PASS : &quot;1&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-CHECK_VOICE_DATA_FAIL'>/** Indicates failure when checking the installation status of the resources used by the
+</span> TextToSpeech engine with the {@link #ACTION_CHECK_TTS_DATA} intent.
+*/
+CHECK_VOICE_DATA_FAIL : &quot;0&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-CHECK_VOICE_DATA_BAD_DATA'>/** Indicates erroneous data when checking the installation status of the resources used by
+</span> the TextToSpeech engine with the {@link #ACTION_CHECK_TTS_DATA} intent.
+
+ @deprecated Use CHECK_VOICE_DATA_FAIL instead.
+*/
+CHECK_VOICE_DATA_BAD_DATA : &quot;-1&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-CHECK_VOICE_DATA_MISSING_DATA'>/** Indicates missing resources when checking the installation status of the resources used
+</span> by the TextToSpeech engine with the {@link #ACTION_CHECK_TTS_DATA} intent.
+
+ @deprecated Use CHECK_VOICE_DATA_FAIL instead.
+*/
+CHECK_VOICE_DATA_MISSING_DATA : &quot;-2&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-CHECK_VOICE_DATA_MISSING_VOLUME'>/** Indicates missing storage volume when checking the installation status of the resources
+</span> used by the TextToSpeech engine with the {@link #ACTION_CHECK_TTS_DATA} intent.
+
+ @deprecated Use CHECK_VOICE_DATA_FAIL instead.
+*/
+CHECK_VOICE_DATA_MISSING_VOLUME : &quot;-3&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-INTENT_ACTION_TTS_SERVICE'>/** Intent for starting a TTS service. Services that handle this intent must
+</span> extend {@link android.speech.tts.TextToSpeechService}. Normal applications should not use this intent
+ directly, instead they should talk to the TTS service using the the methods in this
+ class.
+*/
+INTENT_ACTION_TTS_SERVICE : &quot;android.intent.action.TTS_SERVICE&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-SERVICE_META_DATA'>/** Name under which a text to speech engine publishes information about itself.
+</span> This meta-data should reference an XML resource containing a
+ &lt;code&gt;&amp;lt;{@link android.R.styleable#TextToSpeechEngine tts-engine}&amp;gt;&lt;/code&gt;
+ tag.
+*/
+SERVICE_META_DATA : &quot;android.speech.tts&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-ACTION_INSTALL_TTS_DATA'>/** Activity Action: Triggers the platform TextToSpeech engine to
+</span> start the activity that installs the resource files on the device
+ that are required for TTS to be operational. Since the installation
+ of the data can be interrupted or declined by the user, the application
+ shouldn't expect successful installation upon return from that intent,
+ and if need be, should check installation status with
+ {@link #ACTION_CHECK_TTS_DATA}.
+*/
+ACTION_INSTALL_TTS_DATA : &quot;android.speech.tts.engine.INSTALL_TTS_DATA&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-ACTION_TTS_DATA_INSTALLED'>/** Broadcast Action: broadcast to signal the change in the list of available
+</span> languages or/and their features.
+*/
+ACTION_TTS_DATA_INSTALLED : &quot;android.speech.tts.engine.TTS_DATA_INSTALLED&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-ACTION_CHECK_TTS_DATA'>/** Activity Action: Starts the activity from the platform TextToSpeech
+</span> engine to verify the proper installation and availability of the
+ resource files on the system. Upon completion, the activity will
+ return one of the following codes:
+ {@link #CHECK_VOICE_DATA_PASS},
+ {@link #CHECK_VOICE_DATA_FAIL},
+ &lt;p&gt; Moreover, the data received in the activity result will contain the following
+ fields:
+ &lt;ul&gt;
+   &lt;li&gt;{@link #EXTRA_AVAILABLE_VOICES} which contains an ArrayList&lt;String&gt; of all the
+   available voices. The format of each voice is: lang-COUNTRY-variant where COUNTRY and
+   variant are optional (ie, &quot;eng&quot; or &quot;eng-USA&quot; or &quot;eng-USA-FEMALE&quot;).&lt;/li&gt;
+   &lt;li&gt;{@link #EXTRA_UNAVAILABLE_VOICES} which contains an ArrayList&lt;String&gt; of all the
+   unavailable voices (ones that user can install). The format of each voice is:
+   lang-COUNTRY-variant where COUNTRY and variant are optional (ie, &quot;eng&quot; or
+   &quot;eng-USA&quot; or &quot;eng-USA-FEMALE&quot;).&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_CHECK_TTS_DATA : &quot;android.speech.tts.engine.CHECK_TTS_DATA&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-ACTION_GET_SAMPLE_TEXT'>/** Activity intent for getting some sample text to use for demonstrating TTS. Specific
+</span> locale have to be requested by passing following extra parameters:
+ &lt;ul&gt;
+   &lt;li&gt;language&lt;/li&gt;
+   &lt;li&gt;country&lt;/li&gt;
+   &lt;li&gt;variant&lt;/li&gt;
+ &lt;/ul&gt;
+
+ Upon completion, the activity result may contain the following fields:
+ &lt;ul&gt;
+   &lt;li&gt;{@link #EXTRA_SAMPLE_TEXT} which contains an String with sample text.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_GET_SAMPLE_TEXT : &quot;android.speech.tts.engine.GET_SAMPLE_TEXT&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_SAMPLE_TEXT'>/** Extra information received with the {@link #ACTION_GET_SAMPLE_TEXT} intent result where
+</span> the TextToSpeech engine returns an String with sample text for requested voice
+*/
+EXTRA_SAMPLE_TEXT : &quot;sampleText&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_AVAILABLE_VOICES'>/** Extra information received with the {@link #ACTION_CHECK_TTS_DATA} intent result where
+</span> the TextToSpeech engine returns an ArrayList&lt;String&gt; of all the available voices.
+ The format of each voice is: lang-COUNTRY-variant where COUNTRY and variant are
+ optional (ie, &quot;eng&quot; or &quot;eng-USA&quot; or &quot;eng-USA-FEMALE&quot;).
+*/
+EXTRA_AVAILABLE_VOICES : &quot;availableVoices&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_UNAVAILABLE_VOICES'>/** Extra information received with the {@link #ACTION_CHECK_TTS_DATA} intent result where
+</span> the TextToSpeech engine returns an ArrayList&lt;String&gt; of all the unavailable voices.
+ The format of each voice is: lang-COUNTRY-variant where COUNTRY and variant are
+ optional (ie, &quot;eng&quot; or &quot;eng-USA&quot; or &quot;eng-USA-FEMALE&quot;).
+*/
+EXTRA_UNAVAILABLE_VOICES : &quot;unavailableVoices&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_VOICE_DATA_ROOT_DIRECTORY'>/** Extra information received with the {@link #ACTION_CHECK_TTS_DATA} intent result where
+</span> the TextToSpeech engine specifies the path to its resources.
+
+ It may be used by language packages to find out where to put their data.
+
+ @deprecated TTS engine implementation detail, this information has no use for
+ text-to-speech API client.
+*/
+EXTRA_VOICE_DATA_ROOT_DIRECTORY : &quot;dataRoot&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_VOICE_DATA_FILES'>/** Extra information received with the {@link #ACTION_CHECK_TTS_DATA} intent result where
+</span> the TextToSpeech engine specifies the file names of its resources under the
+ resource path.
+
+ @deprecated TTS engine implementation detail, this information has no use for
+ text-to-speech API client.
+*/
+EXTRA_VOICE_DATA_FILES : &quot;dataFiles&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_VOICE_DATA_FILES_INFO'>/** Extra information received with the {@link #ACTION_CHECK_TTS_DATA} intent result where
+</span> the TextToSpeech engine specifies the locale associated with each resource file.
+
+ @deprecated TTS engine implementation detail, this information has no use for
+ text-to-speech API client.
+*/
+EXTRA_VOICE_DATA_FILES_INFO : &quot;dataFilesInfo&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_CHECK_VOICE_DATA_FOR'>/** Extra information sent with the {@link #ACTION_CHECK_TTS_DATA} intent where the
+</span> caller indicates to the TextToSpeech engine which specific sets of voice data to
+ check for by sending an ArrayList&lt;String&gt; of the voices that are of interest.
+ The format of each voice is: lang-COUNTRY-variant where COUNTRY and variant are
+ optional (ie, &quot;eng&quot; or &quot;eng-USA&quot; or &quot;eng-USA-FEMALE&quot;).
+
+ @deprecated Redundant functionality, checking for existence of specific sets of voice
+ data can be done on client side.
+*/
+EXTRA_CHECK_VOICE_DATA_FOR : &quot;checkVoiceDataFor&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-EXTRA_TTS_DATA_INSTALLED'>/** Extra information received with the {@link #ACTION_TTS_DATA_INSTALLED} intent result.
+</span> It indicates whether the data files for the synthesis engine were successfully
+ installed. The installation was initiated with the  {@link #ACTION_INSTALL_TTS_DATA}
+ intent. The possible values for this extra are
+ {@link android.speech.tts.TextToSpeech#SUCCESS} and {@link android.speech.tts.TextToSpeech#ERROR}.
+
+ @deprecated No longer in use. If client is interested in information about what
+ changed, it should use the ACTION_CHECK_TTS_DATA
+ intent to discover available voices.
+*/
+EXTRA_TTS_DATA_INSTALLED : &quot;dataInstalled&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_RATE'>/** @hide
+</span>*/
+KEY_PARAM_RATE : &quot;rate&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_VOICE_NAME'>/** @hide
+</span>*/
+KEY_PARAM_VOICE_NAME : &quot;voiceName&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_LANGUAGE'>/** @hide
+</span>*/
+KEY_PARAM_LANGUAGE : &quot;language&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_COUNTRY'>/** @hide
+</span>*/
+KEY_PARAM_COUNTRY : &quot;country&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_VARIANT'>/** @hide
+</span>*/
+KEY_PARAM_VARIANT : &quot;variant&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_ENGINE'>/** @hide
+</span>*/
+KEY_PARAM_ENGINE : &quot;engine&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_PITCH'>/** @hide
+</span>*/
+KEY_PARAM_PITCH : &quot;pitch&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_STREAM'>/** Parameter key to specify the audio stream type to be used when speaking text
+</span> or playing back a file. The value should be one of the STREAM_ constants
+ defined in {@link AudioManager}.
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#playEarcon(String, int, HashMap)
+*/
+KEY_PARAM_STREAM : &quot;streamType&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_AUDIO_ATTRIBUTES'>/** Parameter key to specify the audio attributes to be used when
+</span> speaking text or playing back a file. The value should be set
+ using {@link android.speech.tts.TextToSpeech#setAudioAttributes(AudioAttributes)}.
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#playEarcon(String, int, HashMap)
+ @hide
+*/
+KEY_PARAM_AUDIO_ATTRIBUTES : &quot;audioAttributes&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_UTTERANCE_ID'>/** Parameter key to identify an utterance in the
+</span> {@link android.speech.tts.TextToSpeech.OnUtteranceCompletedListener} after text has been
+ spoken, a file has been played back or a silence duration has elapsed.
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#playEarcon(String, int, HashMap)
+ @see TextToSpeech#synthesizeToFile(String, HashMap, String)
+*/
+KEY_PARAM_UTTERANCE_ID : &quot;utteranceId&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_VOLUME'>/** Parameter key to specify the speech volume relative to the current stream type
+</span> volume used when speaking text. Volume is specified as a float ranging from 0 to 1
+ where 0 is silence, and 1 is the maximum volume (the default behavior).
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#playEarcon(String, int, HashMap)
+*/
+KEY_PARAM_VOLUME : &quot;volume&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_PAN'>/** Parameter key to specify how the speech is panned from left to right when speaking text.
+</span> Pan is specified as a float ranging from -1 to +1 where -1 maps to a hard-left pan,
+ 0 to center (the default behavior), and +1 to hard-right.
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#playEarcon(String, int, HashMap)
+*/
+KEY_PARAM_PAN : &quot;pan&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_FEATURE_NETWORK_SYNTHESIS'>/** Feature key for network synthesis. See {@link android.speech.tts.TextToSpeech#getFeatures(Locale)}
+</span> for a description of how feature keys work. If set (and supported by the engine
+ as per {@link android.speech.tts.TextToSpeech#getFeatures(Locale)}, the engine must
+ use network based synthesis.
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#synthesizeToFile(String, java.util.HashMap, String)
+ @see TextToSpeech#getFeatures(java.util.Locale)
+
+ @deprecated Starting from API level 21, to select network synthesis, call
+ {@link android.speech.tts.TextToSpeech#getVoices()}, find a suitable network voice
+ ({@link android.speech.tts.Voice#isNetworkConnectionRequired()}) and pass it
+ to {@link android.speech.tts.TextToSpeech#setVoice(Voice)}.
+*/
+KEY_FEATURE_NETWORK_SYNTHESIS : &quot;networkTts&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_FEATURE_EMBEDDED_SYNTHESIS'>/** Feature key for embedded synthesis. See {@link android.speech.tts.TextToSpeech#getFeatures(Locale)}
+</span> for a description of how feature keys work. If set and supported by the engine
+ as per {@link android.speech.tts.TextToSpeech#getFeatures(Locale)}, the engine must synthesize
+ text on-device (without making network requests).
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#synthesizeToFile(String, java.util.HashMap, String)
+ @see TextToSpeech#getFeatures(java.util.Locale)
+
+ @deprecated Starting from API level 21, to select embedded synthesis, call
+ ({@link android.speech.tts.TextToSpeech#getVoices()}, find a suitable embedded voice
+ ({@link android.speech.tts.Voice#isNetworkConnectionRequired()}) and pass it
+ to {@link android.speech.tts.TextToSpeech#setVoice(Voice)}).
+*/
+KEY_FEATURE_EMBEDDED_SYNTHESIS : &quot;embeddedTts&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_PARAM_SESSION_ID'>/** Parameter key to specify an audio session identifier (obtained from
+</span> {@link AudioManager#generateAudioSessionId()}) that will be used by the request audio
+ output. It can be used to associate one of the {@link android.media.audiofx.AudioEffect}
+ objects with the synthesis (or earcon) output.
+
+ @see TextToSpeech#speak(CharSequence, int, Bundle, String)
+ @see TextToSpeech#playEarcon(String, int, HashMap)
+*/
+KEY_PARAM_SESSION_ID : &quot;sessionId&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_FEATURE_NOT_INSTALLED'>/** Feature key that indicates that the voice may need to download additional data to be fully
+</span> functional. The download will be triggered by calling
+ {@link android.speech.tts.TextToSpeech#setVoice(Voice)} or {@link android.speech.tts.TextToSpeech#setLanguage(Locale)}.
+ Until download is complete, each synthesis request will either report
+ {@link android.speech.tts.TextToSpeech#ERROR_NOT_INSTALLED_YET} error, or use a different voice to synthesize
+ the request. This feature should NOT be used as a key of a request parameter.
+
+ @see TextToSpeech#getFeatures(java.util.Locale)
+ @see Voice#getFeatures()
+*/
+KEY_FEATURE_NOT_INSTALLED : &quot;notInstalled&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_FEATURE_NETWORK_TIMEOUT_MS'>/** Feature key that indicate that a network timeout can be set for the request. If set and
+</span> supported as per {@link android.speech.tts.TextToSpeech#getFeatures(Locale)} or {@link android.speech.tts.Voice#getFeatures()},
+ it can be used as request parameter to set the maximum allowed time for a single
+ request attempt, in milliseconds, before synthesis fails. When used as a key of
+ a request parameter, its value should be a string with an integer value.
+
+ @see TextToSpeech#getFeatures(java.util.Locale)
+ @see Voice#getFeatures()
+*/
+KEY_FEATURE_NETWORK_TIMEOUT_MS : &quot;networkTimeoutMs&quot;,
+<span id='android-speech-tts-TextToSpeech-Engine-property-KEY_FEATURE_NETWORK_RETRIES_COUNT'>/** Feature key that indicates that network request retries count can be set for the request.
+</span> If set and supported as per {@link android.speech.tts.TextToSpeech#getFeatures(Locale)} or
+ {@link android.speech.tts.Voice#getFeatures()}, it can be used as a request parameter to set the
+ number of network request retries that are attempted in case of failure. When used as
+ a key of a request parameter, its value should be a string with an integer value.
+
+ @see TextToSpeech#getFeatures(java.util.Locale)
+ @see Voice#getFeatures()
+*/
+KEY_FEATURE_NETWORK_RETRIES_COUNT : &quot;networkRetriesCount&quot;,
+
+};</pre>
+</body>
+</html>

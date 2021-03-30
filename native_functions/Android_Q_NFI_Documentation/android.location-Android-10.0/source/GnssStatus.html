@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-GnssStatus'>/**@class android.location.GnssStatus
+</span>@extends java.lang.Object
+
+ This class represents the current state of the GNSS engine.
+ This class is used in conjunction with the {@link android.location.GnssStatus.Callback}.
+*/
+var GnssStatus = {
+
+<span id='android-location-GnssStatus-property-CONSTELLATION_UNKNOWN'>/**Unknown constellation type. */
+</span>CONSTELLATION_UNKNOWN : &quot;0&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_GPS'>/**Constellation type constant for GPS. */
+</span>CONSTELLATION_GPS : &quot;1&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_SBAS'>/**Constellation type constant for SBAS. */
+</span>CONSTELLATION_SBAS : &quot;2&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_GLONASS'>/**Constellation type constant for Glonass. */
+</span>CONSTELLATION_GLONASS : &quot;3&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_QZSS'>/**Constellation type constant for QZSS. */
+</span>CONSTELLATION_QZSS : &quot;4&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_BEIDOU'>/**Constellation type constant for Beidou. */
+</span>CONSTELLATION_BEIDOU : &quot;5&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_GALILEO'>/**Constellation type constant for Galileo. */
+</span>CONSTELLATION_GALILEO : &quot;6&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_IRNSS'>/**Constellation type constant for IRNSS. */
+</span>CONSTELLATION_IRNSS : &quot;7&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_COUNT'>/**@hide */
+</span>CONSTELLATION_COUNT : &quot;8&quot;,
+<span id='android-location-GnssStatus-property-GNSS_SV_FLAGS_NONE'>/**@hide */
+</span>GNSS_SV_FLAGS_NONE : &quot;0&quot;,
+<span id='android-location-GnssStatus-property-GNSS_SV_FLAGS_HAS_EPHEMERIS_DATA'>/**@hide */
+</span>GNSS_SV_FLAGS_HAS_EPHEMERIS_DATA : &quot;1&quot;,
+<span id='android-location-GnssStatus-property-GNSS_SV_FLAGS_HAS_ALMANAC_DATA'>/**@hide */
+</span>GNSS_SV_FLAGS_HAS_ALMANAC_DATA : &quot;2&quot;,
+<span id='android-location-GnssStatus-property-GNSS_SV_FLAGS_USED_IN_FIX'>/**@hide */
+</span>GNSS_SV_FLAGS_USED_IN_FIX : &quot;4&quot;,
+<span id='android-location-GnssStatus-property-GNSS_SV_FLAGS_HAS_CARRIER_FREQUENCY'>/**@hide */
+</span>GNSS_SV_FLAGS_HAS_CARRIER_FREQUENCY : &quot;8&quot;,
+<span id='android-location-GnssStatus-property-SVID_SHIFT_WIDTH'>/**@hide */
+</span>SVID_SHIFT_WIDTH : &quot;8&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_TYPE_SHIFT_WIDTH'>/**@hide */
+</span>CONSTELLATION_TYPE_SHIFT_WIDTH : &quot;4&quot;,
+<span id='android-location-GnssStatus-property-CONSTELLATION_TYPE_MASK'>/**@hide */
+</span>CONSTELLATION_TYPE_MASK : &quot;15&quot;,
+<span id='android-location-GnssStatus-method-getSatelliteCount'>/**Gets the total number of satellites in satellite list.
+</span>*/
+getSatelliteCount : function(  ) {},
+
+<span id='android-location-GnssStatus-method-getConstellationType'>/**Retrieves the constellation type of the satellite at the specified index.
+</span>@param {Number} satIndex the index of the satellite in the list.
+*/
+getConstellationType : function(  ) {},
+
+<span id='android-location-GnssStatus-method-getSvid'>/**Gets the identification number for the satellite at the specific index.
+</span>
+ &lt;p&gt;This svid is pseudo-random number for most constellations. It is FCN &amp;amp; OSN number for
+ Glonass.
+
+ &lt;p&gt;The distinction is made by looking at constellation field
+ {@link #getConstellationType}(int) Expected values are in the range of:
+
+ &lt;ul&gt;
+ &lt;li&gt;GPS: 1-32&lt;/li&gt;
+ &lt;li&gt;SBAS: 120-151, 183-192&lt;/li&gt;
+ &lt;li&gt;GLONASS: One of: OSN, or FCN+100
+ &lt;ul&gt;
+   &lt;li&gt;1-24 as the orbital slot number (OSN) (preferred, if known)&lt;/li&gt;
+   &lt;li&gt;93-106 as the frequency channel number (FCN) (-7 to +6) plus 100.
+   i.e. encode FCN of -7 as 93, 0 as 100, and +6 as 106&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;QZSS: 193-200&lt;/li&gt;
+ &lt;li&gt;Galileo: 1-36&lt;/li&gt;
+ &lt;li&gt;Beidou: 1-37&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} satIndex the index of the satellite in the list.
+*/
+getSvid : function(  ) {},
+
+<span id='android-location-GnssStatus-method-getCn0DbHz'>/**Retrieves the carrier-to-noise density at the antenna of the satellite at the specified index
+</span> in dB-Hz.
+@param {Number} satIndex the index of the satellite in the list.
+*/
+getCn0DbHz : function(  ) {},
+
+<span id='android-location-GnssStatus-method-getElevationDegrees'>/**Retrieves the elevation of the satellite at the specified index.
+</span>@param {Number} satIndex the index of the satellite in the list.
+*/
+getElevationDegrees : function(  ) {},
+
+<span id='android-location-GnssStatus-method-getAzimuthDegrees'>/**Retrieves the azimuth the satellite at the specified index.
+</span>@param {Number} satIndex the index of the satellite in the list.
+*/
+getAzimuthDegrees : function(  ) {},
+
+<span id='android-location-GnssStatus-method-hasEphemerisData'>/**Reports whether the satellite at the specified index has ephemeris data.
+</span>@param {Number} satIndex the index of the satellite in the list.
+*/
+hasEphemerisData : function(  ) {},
+
+<span id='android-location-GnssStatus-method-hasAlmanacData'>/**Reports whether the satellite at the specified index has almanac data.
+</span>@param {Number} satIndex the index of the satellite in the list.
+*/
+hasAlmanacData : function(  ) {},
+
+<span id='android-location-GnssStatus-method-usedInFix'>/**Reports whether the satellite at the specified index was used in the calculation of the most
+</span> recent position fix.
+@param {Number} satIndex the index of the satellite in the list.
+*/
+usedInFix : function(  ) {},
+
+<span id='android-location-GnssStatus-method-hasCarrierFrequencyHz'>/**Reports whether a valid {@link #getCarrierFrequencyHz}(int satIndex) is available.
+</span>@param {Number} satIndex the index of the satellite in the list.
+*/
+hasCarrierFrequencyHz : function(  ) {},
+
+<span id='android-location-GnssStatus-method-getCarrierFrequencyHz'>/**Gets the carrier frequency of the signal tracked.
+</span>
+ &lt;p&gt;For example it can be the GPS central frequency for L1 = 1575.45 MHz, or L2 = 1227.60 MHz,
+ L5 = 1176.45 MHz, varying GLO channels, etc. If the field is not set, it is the primary
+ common use central frequency, e.g. L1 = 1575.45 MHz for GPS.
+
+ For an L1, L5 receiver tracking a satellite on L1 and L5 at the same time, two measurements
+ will be reported for this same satellite, in one all the values related to L1 will be filled,
+ and in the other all of the values related to L5 will be filled.
+
+ &lt;p&gt;The value is only available if {@link #hasCarrierFrequencyHz}(int satIndex) is {@code true}.
+@param {Number} satIndex the index of the satellite in the list.
+@return {Number} the carrier frequency of the signal tracked in Hz.
+*/
+getCarrierFrequencyHz : function(  ) {},
+
+<span id='android-location-GnssStatus-method-constellationTypeToString'>/**Returns the string representation of a constellation type. For example,
+</span> {@link #CONSTELLATION_GPS} is represented by the string GPS.
+@param {Number} constellationType the constellation type.
+@return {String} the string representation.
+@hide 
+*/
+constellationTypeToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

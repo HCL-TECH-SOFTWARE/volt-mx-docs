@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-ImageDecoder'>/**@class android.graphics.ImageDecoder
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+  Class for decoding images as {@link android.graphics.Bitmap}s or {@link Drawable}s.
+*/
+var ImageDecoder = {
+
+<span id='android-graphics-ImageDecoder-property-ERROR_SOURCE_EXCEPTION'>/**  An Exception was thrown reading the {@link android.graphics.ImageDecoder.Source}.
+</span>*/
+ERROR_SOURCE_EXCEPTION : &quot;1&quot;,
+<span id='android-graphics-ImageDecoder-property-ERROR_SOURCE_INCOMPLETE'>/**  The encoded data was incomplete.
+</span>*/
+ERROR_SOURCE_INCOMPLETE : &quot;2&quot;,
+<span id='android-graphics-ImageDecoder-property-ERROR_SOURCE_ERROR'>/**  The encoded data contained an error.
+</span>*/
+ERROR_SOURCE_ERROR : &quot;3&quot;,
+<span id='android-graphics-ImageDecoder-property-ALLOCATOR_DEFAULT'>/**  Use the default allocation for the pixel memory.
+</span>
+  Will typically result in a {@link android.graphics.Bitmap.Config#HARDWARE}
+  allocation, but may be software for small images. In addition, this will
+  switch to software when HARDWARE is incompatible, e.g.
+  {@link #setMutable}, {@link #setAsAlphaMask}.
+*/
+ALLOCATOR_DEFAULT : &quot;0&quot;,
+<span id='android-graphics-ImageDecoder-property-ALLOCATOR_SOFTWARE'>/**  Use a software allocation for the pixel memory.
+</span>
+  Useful for drawing to a software {@link android.graphics.Canvas} or for
+  accessing the pixels on the final output.
+*/
+ALLOCATOR_SOFTWARE : &quot;1&quot;,
+<span id='android-graphics-ImageDecoder-property-ALLOCATOR_SHARED_MEMORY'>/**  Use shared memory for the pixel memory.
+</span>
+  Useful for sharing across processes.
+*/
+ALLOCATOR_SHARED_MEMORY : &quot;2&quot;,
+<span id='android-graphics-ImageDecoder-property-ALLOCATOR_HARDWARE'>/**  Require a {@link android.graphics.Bitmap.Config#HARDWARE} {@link android.graphics.Bitmap}.
+</span>
+  When this is combined with incompatible options, like
+  {@link #setMutable} or {@link #setAsAlphaMask}, {@link #decodeDrawable}
+  / {@link #decodeBitmap} will throw an
+  {@link java.lang.IllegalStateException}.
+*/
+ALLOCATOR_HARDWARE : &quot;3&quot;,
+<span id='android-graphics-ImageDecoder-method-createSource'>/**Create a new {@link android.graphics.ImageDecoder.Source} from an asset.
+</span>@param {Object {Resources}} res the {@link Resources} object containing the image data.
+@param {Number} resId resource ID of the image data.
+      // FIXME: Can be an @DrawableRes?
+@param resId resource ID of the image data.
+      // FIXME: Can be an @DrawableRes?
+@return {Object {android.graphics.ImageDecoder.Source}} a new Source object, which can be passed to
+      {@link #decodeDrawable} or {@link #decodeBitmap}.
+*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-createSource'>/**Create a new {@link android.graphics.ImageDecoder.Source} from a {@link android.net.Uri}.
+</span>@param {Object {ContentResolver}} cr to retrieve from.
+@param {Object {Uri}} uri of the image file.
+@return {Object {android.graphics.ImageDecoder.Source}} a new Source object, which can be passed to
+      {@link #decodeDrawable} or {@link #decodeBitmap}.
+*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-createSource'>/**Create a new {@link android.graphics.ImageDecoder.Source} from a byte array.
+</span>@param {Object {byte[]}} data byte array of compressed image data.
+@param {Number} offset offset into data for where the decoder should begin
+      parsing.
+@param {Number} length number of bytes, beginning at offset, to parse.
+@throws NullPointerException if data is null.
+@throws ArrayIndexOutOfBoundsException if offset and length are
+      not within data.
+@hide 
+*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-createSource'>/**See {@link #createSource(byte[], int, int).
+</span>@hide 
+*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-createSource'>/**Create a new {@link android.graphics.ImageDecoder.Source} from a {@link java.nio.ByteBuffer}.
+</span>
+ &lt;p&gt;The returned {@link android.graphics.ImageDecoder.Source} effectively takes ownership of the
+ {@link java.nio.ByteBuffer}; i.e. no other code should modify it after
+ this call.&lt;/p&gt;
+
+ Decoding will start from {@link java.nio.ByteBuffer#position()}. The
+ position after decoding is undefined.
+*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-createSource'>/**Internal API used to generate bitmaps for use by Drawables (i.e. BitmapDrawable)
+</span>@hide 
+*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-createSource'>/**Internal API used to generate bitmaps for use by Drawables (i.e. BitmapDrawable)
+</span>@hide 
+*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-createSource'>/**Create a new {@link android.graphics.ImageDecoder.Source} from a {@link java.io.File}.
+</span>*/
+createSource : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-getSampledSize'>/**Return the width and height of a given sample size.
+</span>
+  &lt;p&gt;This takes an input that functions like
+  {@link android.graphics.BitmapFactory.Options#inSampleSize}. It returns a width and
+  height that can be acheived by sampling the encoded image. Other widths
+  and heights may be supported, but will require an additional (internal)
+  scaling step. Such internal scaling is *not* supported with
+  {@link #setRequireUnpremultiplied} set to {@code true}.&lt;/p&gt;
+@param {Number} sampleSize Sampling rate of the encoded image.
+@return {Object {android.util.Size}} {@link android.util.Size} of the width and height after
+      sampling.
+*/
+getSampledSize : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setResize'>/**Resize the output to have the following size.
+</span>@param {Number} width must be greater than 0.
+@param {Number} height must be greater than 0.
+*/
+setResize : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setResize'>/**Resize based on a sample size.
+</span>
+  &lt;p&gt;This has the same effect as passing the result of
+  {@link #getSampledSize} to {@link #setResize(int, int)}.&lt;/p&gt;
+@param {Number} sampleSize Sampling rate of the encoded image.
+*/
+setResize : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setAllocator'>/**Choose the backing for the pixel memory.
+</span>
+  This is ignored for animated drawables.
+@param {Number} allocator Type of allocator to use.
+*/
+setAllocator : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setRequireUnpremultiplied'>/**Specify whether the {@link android.graphics.Bitmap} should have unpremultiplied pixels.
+</span>
+  By default, ImageDecoder will create a {@link android.graphics.Bitmap} with
+  premultiplied pixels, which is required for drawing with the
+  {@link android.view.View} system (i.e. to a {@link android.graphics.Canvas}). Calling
+  this method with a value of {@code true} will result in
+  {@link #decodeBitmap} returning a {@link android.graphics.Bitmap} with unpremultiplied
+  pixels. See {@link android.graphics.Bitmap#isPremultiplied}. This is incompatible with
+  {@link #decodeDrawable}; attempting to decode an unpremultiplied
+  {@link Drawable} will throw an {@link java.lang.IllegalStateException}.
+*/
+setRequireUnpremultiplied : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setPostProcessor'>/**Modify the image after decoding and scaling.
+</span>
+  &lt;p&gt;This allows adding effects prior to returning a {@link Drawable} or
+  {@link android.graphics.Bitmap}. For a {@code Drawable} or an immutable {@code Bitmap},
+  this is the only way to process the image after decoding.&lt;/p&gt;
+
+  &lt;p&gt;If set on a nine-patch image, the nine-patch data is ignored.&lt;/p&gt;
+
+  &lt;p&gt;For an animated image, the drawing commands drawn on the
+  {@link android.graphics.Canvas} will be recorded immediately and then applied to each
+  frame.&lt;/p&gt;
+*/
+setPostProcessor : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setOnPartialImageListener'>/**Set (replace) the {@link android.graphics.ImageDecoder.OnPartialImageListener} on this object.
+</span>
+  Will be called if there is an error in the input. Without one, a
+  partial {@link android.graphics.Bitmap} will be created.
+*/
+setOnPartialImageListener : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setCrop'>/**Crop the output to {@code subset} of the (possibly) scaled image.
+</span>
+  &lt;p&gt;{@code subset} must be contained within the size set by
+  {@link #setResize} or the bounds of the image if setResize was not
+  called. Otherwise an {@link IllegalStateException} will be thrown by
+  {@link #decodeDrawable}/{@link #decodeBitmap}.&lt;/p&gt;
+
+  &lt;p&gt;NOT intended as a replacement for
+  {@link android.graphics.BitmapRegionDecoder#decodeRegion}. This supports all formats,
+  but merely crops the output.&lt;/p&gt;
+*/
+setCrop : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setOutPaddingRect'>/**Set a Rect for retrieving nine patch padding.
+</span>
+  If the image is a nine patch, this Rect will be set to the padding
+  rectangle during decode. Otherwise it will not be modified.
+@hide 
+*/
+setOutPaddingRect : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setMutable'>/**Specify whether the {@link android.graphics.Bitmap} should be mutable.
+</span>
+  &lt;p&gt;By default, a {@link android.graphics.Bitmap} created will be immutable, but that can
+  be changed with this call.&lt;/p&gt;
+
+  &lt;p&gt;Mutable Bitmaps are incompatible with {@link #ALLOCATOR_HARDWARE},
+  because {@link android.graphics.Bitmap.Config#HARDWARE} Bitmaps cannot be mutable.
+  Attempting to combine them will throw an
+  {@link java.lang.IllegalStateException}.&lt;/p&gt;
+
+  &lt;p&gt;Mutable Bitmaps are also incompatible with {@link #decodeDrawable},
+  which would require retrieving the Bitmap from the returned Drawable in
+  order to modify. Attempting to decode a mutable {@link Drawable} will
+  throw an {@link java.lang.IllegalStateException}.&lt;/p&gt;
+*/
+setMutable : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setPreferRamOverQuality'>/**Specify whether to potentially save RAM at the expense of quality.
+</span>
+  Setting this to {@code true} may result in a {@link android.graphics.Bitmap} with a
+  denser {@link android.graphics.Bitmap.Config}, depending on the image. For example, for
+  an opaque {@link android.graphics.Bitmap}, this may result in a {@link android.graphics.Bitmap.Config}
+  with no alpha information.
+*/
+setPreferRamOverQuality : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-setAsAlphaMask'>/**Specify whether to potentially treat the output as an alpha mask.
+</span>
+  &lt;p&gt;If this is set to {@code true} and the image is encoded in a format
+  with only one channel, treat that channel as alpha. Otherwise this call has
+  no effect.&lt;/p&gt;
+
+  &lt;p&gt;setAsAlphaMask is incompatible with {@link #ALLOCATOR_HARDWARE}. Trying to
+  combine them will result in {@link #decodeDrawable}/
+  {@link #decodeBitmap} throwing an
+  {@link java.lang.IllegalStateException}.&lt;/p&gt;
+*/
+setAsAlphaMask : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-decodeDrawable'>/**Create a {@link Drawable} from a {@code Source}.
+</span>@param {Object {ImageDecoder.Source}} src representing the encoded image.
+@param {Object {ImageDecoder.OnHeaderDecodedListener}} listener for learning the {@link ImageInfo} and changing any
+      default settings on the {@code ImageDecoder}. If not {@code null},
+      this will be called on the same thread as {@code decodeDrawable}
+      before that method returns.
+@return {Object {android.graphics.drawable.Drawable}} Drawable for displaying the image.
+@throws IOException if {@code src} is not found, is an unsupported
+      format, or cannot be decoded for any reason.
+*/
+decodeDrawable : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-decodeDrawable'>/**See {@link #decodeDrawable(Source, android.graphics.ImageDecoder.OnHeaderDecodedListener)}.
+</span>*/
+decodeDrawable : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-decodeBitmap'>/**Create a {@link android.graphics.Bitmap} from a {@code Source}.
+</span>@param {Object {ImageDecoder.Source}} src representing the encoded image.
+@param {Object {ImageDecoder.OnHeaderDecodedListener}} listener for learning the {@link ImageInfo} and changing any
+      default settings on the {@code ImageDecoder}. If not {@code null},
+      this will be called on the same thread as {@code decodeBitmap}
+      before that method returns.
+@return {Object {android.graphics.Bitmap}} Bitmap containing the image.
+@throws IOException if {@code src} is not found, is an unsupported
+      format, or cannot be decoded for any reason.
+*/
+decodeBitmap : function(  ) {},
+
+<span id='android-graphics-ImageDecoder-method-decodeBitmap'>/**See {@link #decodeBitmap(Source, android.graphics.ImageDecoder.OnHeaderDecodedListener)}.
+</span>*/
+decodeBitmap : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-AsyncChannel'>/**@class com.android.internal.util.AsyncChannel
+</span>@extends java.lang.Object
+
+ &lt;p&gt;An asynchronous channel between two handlers.&lt;/p&gt;
+
+ &lt;p&gt;The handlers maybe in the same process or in another process. There
+ are two protocol styles that can be used with an AysncChannel. The
+ first is a simple request/reply protocol where the server does
+ not need to know which client is issuing the request.&lt;/p&gt;
+
+ &lt;p&gt;In a simple request/reply protocol the client/source sends requests to the
+ server/destination. And the server uses the replyToMessage methods.
+ In this usage model there is no need for the destination to
+ use the connect methods. The typical sequence of operations is:&lt;/p&gt;
+&lt;ol&gt;
+   &lt;li&gt;Client calls AsyncChannel#connectSync or Asynchronously:&lt;/li&gt;
+      &lt;ol&gt;For an asynchronous half connection client calls AsyncChannel#connect.&lt;/ol&gt;
+          &lt;li&gt;Client receives CMD_CHANNEL_HALF_CONNECTED from AsyncChannel&lt;/li&gt;
+      &lt;/ol&gt;
+   &lt;li&gt;&lt;code&gt;comm-loop:&lt;/code&gt;&lt;/li&gt;
+   &lt;li&gt;Client calls AsyncChannel#sendMessage&lt;/li&gt;
+   &lt;li&gt;Server processes messages and optionally replies using AsyncChannel#replyToMessage
+   &lt;li&gt;Loop to &lt;code&gt;comm-loop&lt;/code&gt; until done&lt;/li&gt;
+   &lt;li&gt;When done Client calls {@link com.android.internal.util.AsyncChannel#disconnect}&lt;/li&gt;
+   &lt;li&gt;Client/Server receives CMD_CHANNEL_DISCONNECTED from AsyncChannel&lt;/li&gt;
+&lt;/ol&gt;
+&lt;br/&gt;
+ &lt;p&gt;A second usage model is where the server/destination needs to know
+ which client it's connected too. For example the server needs to
+ send unsolicited messages back to the client. Or the server keeps
+ different state for each client. In this model the server will also
+ use the connect methods. The typical sequence of operation is:&lt;/p&gt;
+&lt;ol&gt;
+   &lt;li&gt;Client calls AsyncChannel#fullyConnectSync or Asynchronously:&lt;li&gt;
+      &lt;ol&gt;For an asynchronous full connection it calls AsyncChannel#connect&lt;/li&gt;
+          &lt;li&gt;Client receives CMD_CHANNEL_HALF_CONNECTED from AsyncChannel&lt;/li&gt;
+          &lt;li&gt;Client calls AsyncChannel#sendMessage(CMD_CHANNEL_FULL_CONNECTION)&lt;/li&gt;
+      &lt;/ol&gt;
+   &lt;li&gt;Server receives CMD_CHANNEL_FULL_CONNECTION&lt;/li&gt;
+   &lt;li&gt;Server calls AsyncChannel#connected&lt;/li&gt;
+   &lt;li&gt;Server sends AsyncChannel#sendMessage(CMD_CHANNEL_FULLY_CONNECTED)&lt;/li&gt;
+   &lt;li&gt;Client receives CMD_CHANNEL_FULLY_CONNECTED&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;comm-loop:&lt;/code&gt;&lt;/li&gt;
+   &lt;li&gt;Client/Server uses AsyncChannel#sendMessage/replyToMessage
+       to communicate and perform work&lt;/li&gt;
+   &lt;li&gt;Loop to &lt;code&gt;comm-loop&lt;/code&gt; until done&lt;/li&gt;
+   &lt;li&gt;When done Client/Server calls {@link com.android.internal.util.AsyncChannel#disconnect}&lt;/li&gt;
+   &lt;li&gt;Client/Server receives CMD_CHANNEL_DISCONNECTED from AsyncChannel&lt;/li&gt;
+&lt;/ol&gt;
+
+ TODO: Consider simplifying where we have connect and fullyConnect with only one response
+ message RSP_CHANNEL_CONNECT instead of two, CMD_CHANNEL_HALF_CONNECTED and
+ CMD_CHANNEL_FULLY_CONNECTED. We'd also change CMD_CHANNEL_FULL_CONNECTION to REQ_CHANNEL_CONNECT.
+*/
+var AsyncChannel = {
+
+<span id='com-android-internal-util-AsyncChannel-property-CMD_CHANNEL_HALF_CONNECTED'>/** Command sent when the channel is half connected. Half connected
+</span> means that the channel can be used to send commends to the destination
+ but the destination is unaware that the channel exists. The first
+ command sent to the destination is typically CMD_CHANNEL_FULL_CONNECTION if
+ it is desired to establish a long term connection, but any command maybe
+ sent.
+
+ msg.arg1 == 0 : STATUS_SUCCESSFUL
+             1 : STATUS_BINDING_UNSUCCESSFUL
+ msg.obj  == the AsyncChannel
+ msg.replyTo == dstMessenger if successful
+*/
+CMD_CHANNEL_HALF_CONNECTED : &quot;69632&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-CMD_CHANNEL_FULL_CONNECTION'>/** Command typically sent when after receiving the CMD_CHANNEL_HALF_CONNECTED.
+</span> This is used to initiate a long term connection with the destination and
+ typically the destination will reply with CMD_CHANNEL_FULLY_CONNECTED.
+
+ msg.replyTo = srcMessenger.
+*/
+CMD_CHANNEL_FULL_CONNECTION : &quot;69633&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-CMD_CHANNEL_FULLY_CONNECTED'>/** Command typically sent after the destination receives a CMD_CHANNEL_FULL_CONNECTION.
+</span> This signifies the acceptance or rejection of the channel by the sender.
+
+ msg.arg1 == 0 : Accept connection
+               : All other values signify the destination rejected the connection
+                 and {@link com.android.internal.util.AsyncChannel#disconnect} would typically be called.
+*/
+CMD_CHANNEL_FULLY_CONNECTED : &quot;69634&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-CMD_CHANNEL_DISCONNECT'>/** Command sent when one side or the other wishes to disconnect. The sender
+</span> may or may not be able to receive a reply depending upon the protocol and
+ the state of the connection. The receiver should call {@link com.android.internal.util.AsyncChannel#disconnect}
+ to close its side of the channel and it will receive a CMD_CHANNEL_DISCONNECTED
+ when the channel is closed.
+
+ msg.replyTo = messenger that is disconnecting
+*/
+CMD_CHANNEL_DISCONNECT : &quot;69635&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-CMD_CHANNEL_DISCONNECTED'>/** Command sent when the channel becomes disconnected. This is sent when the
+</span> channel is forcibly disconnected by the system or as a reply to CMD_CHANNEL_DISCONNECT.
+
+ msg.arg1 == 0 : STATUS_SUCCESSFUL
+             1 : STATUS_BINDING_UNSUCCESSFUL
+             2 : STATUS_SEND_UNSUCCESSFUL
+               : All other values signify failure and the channel state is indeterminate
+ msg.obj  == the AsyncChannel
+ msg.replyTo = messenger disconnecting or null if it was never connected.
+*/
+CMD_CHANNEL_DISCONNECTED : &quot;69636&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-STATUS_SUCCESSFUL'>/**Successful status always 0, !0 is an unsuccessful status */
+</span>STATUS_SUCCESSFUL : &quot;0&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-STATUS_BINDING_UNSUCCESSFUL'>/**Error attempting to bind on a connect */
+</span>STATUS_BINDING_UNSUCCESSFUL : &quot;1&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-STATUS_SEND_UNSUCCESSFUL'>/**Error attempting to send a message */
+</span>STATUS_SEND_UNSUCCESSFUL : &quot;2&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-STATUS_FULL_CONNECTION_REFUSED_ALREADY_CONNECTED'>/**CMD_FULLY_CONNECTED refused because a connection already exists*/
+</span>STATUS_FULL_CONNECTION_REFUSED_ALREADY_CONNECTED : &quot;3&quot;,
+<span id='com-android-internal-util-AsyncChannel-property-STATUS_REMOTE_DISCONNECTION'>/**Error indicating abnormal termination of destination messenger */
+</span>STATUS_REMOTE_DISCONNECTION : &quot;4&quot;,
+<span id='com-android-internal-util-AsyncChannel-method-connectSrcHandlerToPackageSync'>/**Connect handler to named package/class synchronously.
+</span>@param {Object {Context}} srcContext is the context of the source
+@param {Object {Handler}} srcHandler is the hander to receive CONNECTED &amp; DISCONNECTED
+            messages
+@param {String} dstPackageName is the destination package name
+@param {String} dstClassName is the fully qualified class name (i.e. contains
+            package name)
+@return {Number} STATUS_SUCCESSFUL on success any other value is an error.
+*/
+connectSrcHandlerToPackageSync : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connectSync'>/**Connect a handler to Messenger synchronously.
+</span>@param {Object {Context}} srcContext is the context of the source
+@param {Object {Handler}} srcHandler is the hander to receive CONNECTED &amp; DISCONNECTED
+            messages
+@param {Object {Messenger}} dstMessenger is the hander to send messages to.
+@return {Number} STATUS_SUCCESSFUL on success any other value is an error.
+*/
+connectSync : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connectSync'>/**connect two local Handlers synchronously.
+</span>@param {Object {Context}} srcContext is the context of the source
+@param {Object {Handler}} srcHandler is the hander to receive CONNECTED &amp; DISCONNECTED
+            messages
+@param {Object {Handler}} dstHandler is the hander to send messages to.
+@return {Number} STATUS_SUCCESSFUL on success any other value is an error.
+*/
+connectSync : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-fullyConnectSync'>/**Fully connect two local Handlers synchronously.
+</span>@param {Object {Context}} srcContext is the context of the source
+@param {Object {Handler}} srcHandler is the hander to receive CONNECTED &amp; DISCONNECTED
+            messages
+@param {Object {Handler}} dstHandler is the hander to send messages to.
+@return {Number} STATUS_SUCCESSFUL on success any other value is an error.
+*/
+fullyConnectSync : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connect'>/**Connect handler to named package/class.
+</span>
+ Sends a CMD_CHANNEL_HALF_CONNECTED message to srcHandler when complete.
+      msg.arg1 = status
+      msg.obj = the AsyncChannel
+@param {Object {Context}} srcContext is the context of the source
+@param {Object {Handler}} srcHandler is the hander to receive CONNECTED &amp; DISCONNECTED
+            messages
+@param {String} dstPackageName is the destination package name
+@param {String} dstClassName is the fully qualified class name (i.e. contains
+            package name)
+*/
+connect : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connect'>/**Connect handler to a class
+</span>
+ Sends a CMD_CHANNEL_HALF_CONNECTED message to srcHandler when complete.
+      msg.arg1 = status
+      msg.obj = the AsyncChannel
+@param {Object {Context}} srcContext
+@param {Object {Handler}} srcHandler
+@param {Object {java.lang.Class}} klass is the class to send messages to.
+*/
+connect : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connect'>/**Connect handler and messenger.
+</span>
+ Sends a CMD_CHANNEL_HALF_CONNECTED message to srcHandler when complete.
+      msg.arg1 = status
+      msg.obj = the AsyncChannel
+@param {Object {Context}} srcContext
+@param {Object {Handler}} srcHandler
+@param {Object {Messenger}} dstMessenger
+*/
+connect : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connected'>/**Connect handler to messenger. This method is typically called
+</span> when a server receives a CMD_CHANNEL_FULL_CONNECTION request
+ and initializes the internal instance variables to allow communication
+ with the dstMessenger.
+@param {Object {Context}} srcContext
+@param {Object {Handler}} srcHandler
+@param {Object {Messenger}} dstMessenger
+*/
+connected : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connect'>/**Connect two local Handlers.
+</span>@param {Object {Context}} srcContext is the context of the source
+@param {Object {Handler}} srcHandler is the hander to receive CONNECTED &amp; DISCONNECTED
+            messages
+@param {Object {Handler}} dstHandler is the hander to send messages to.
+*/
+connect : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-connect'>/**Connect service and messenger.
+</span>
+ Sends a CMD_CHANNEL_HALF_CONNECTED message to srcAsyncService when complete.
+      msg.arg1 = status
+      msg.obj = the AsyncChannel
+@param {Object {AsyncService}} srcAsyncService
+@param {Object {Messenger}} dstMessenger
+*/
+connect : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-disconnected'>/**To close the connection call when handler receives CMD_CHANNEL_DISCONNECTED
+</span>*/
+disconnected : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-disconnect'>/**Disconnect
+</span>*/
+disconnect : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessage'>/**Send a message to the destination handler.
+</span>@param {Object {Message}} msg
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessage'>/**Send a message to the destination handler
+</span>@param {Number} what
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessage'>/**Send a message to the destination handler
+</span>@param {Number} what
+@param {Number} arg1
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessage'>/**Send a message to the destination handler
+</span>@param {Number} what
+@param {Number} arg1
+@param {Number} arg2
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessage'>/**Send a message to the destination handler
+</span>@param {Number} what
+@param {Number} arg1
+@param {Number} arg2
+@param {Object {Object}} obj
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessage'>/**Send a message to the destination handler
+</span>@param {Number} what
+@param {Object {Object}} obj
+*/
+sendMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-replyToMessage'>/**Reply to srcMsg sending dstMsg
+</span>@param {Object {Message}} srcMsg
+@param {Object {Message}} dstMsg
+*/
+replyToMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-replyToMessage'>/**Reply to srcMsg
+</span>@param {Object {Message}} srcMsg
+@param {Number} what
+*/
+replyToMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-replyToMessage'>/**Reply to srcMsg
+</span>@param {Object {Message}} srcMsg
+@param {Number} what
+@param {Number} arg1
+*/
+replyToMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-replyToMessage'>/**Reply to srcMsg
+</span>@param {Object {Message}} srcMsg
+@param {Number} what
+@param {Number} arg1
+@param {Number} arg2
+*/
+replyToMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-replyToMessage'>/**Reply to srcMsg
+</span>@param {Object {Message}} srcMsg
+@param {Number} what
+@param {Number} arg1
+@param {Number} arg2
+@param {Object {Object}} obj
+*/
+replyToMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-replyToMessage'>/**Reply to srcMsg
+</span>@param {Object {Message}} srcMsg
+@param {Number} what
+@param {Object {Object}} obj
+*/
+replyToMessage : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessageSynchronously'>/**Send the Message synchronously.
+</span>@param {Object {Message}} msg to send
+@return {Object {android.os.Message}} reply message or null if an error.
+*/
+sendMessageSynchronously : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessageSynchronously'>/**Send the Message synchronously.
+</span>@param {Number} what
+@return {Object {android.os.Message}} reply message or null if an error.
+*/
+sendMessageSynchronously : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessageSynchronously'>/**Send the Message synchronously.
+</span>@param {Number} what
+@param {Number} arg1
+@return {Object {android.os.Message}} reply message or null if an error.
+*/
+sendMessageSynchronously : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessageSynchronously'>/**Send the Message synchronously.
+</span>@param {Number} what
+@param {Number} arg1
+@param {Number} arg2
+@return {Object {android.os.Message}} reply message or null if an error.
+*/
+sendMessageSynchronously : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessageSynchronously'>/**Send the Message synchronously.
+</span>@param {Number} what
+@param {Number} arg1
+@param {Number} arg2
+@param {Object {Object}} obj
+@return {Object {android.os.Message}} reply message or null if an error.
+*/
+sendMessageSynchronously : function(  ) {},
+
+<span id='com-android-internal-util-AsyncChannel-method-sendMessageSynchronously'>/**Send the Message synchronously.
+</span>@param {Number} what
+@param {Object {Object}} obj
+@return {Object {android.os.Message}} reply message or null if an error.
+*/
+sendMessageSynchronously : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

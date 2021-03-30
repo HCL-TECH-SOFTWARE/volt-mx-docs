@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-feature-MmTelFeature'>/**@class android.telephony.ims.feature.MmTelFeature
+</span>@extends android.telephony.ims.feature.ImsFeature
+
+ Base implementation for Voice and SMS (IR-92) and Video (IR-94) IMS support.
+
+ Any class wishing to use MmTelFeature should extend this class and implement all methods that the
+ service supports.
+ @hide
+*/
+var MmTelFeature = {
+
+<span id='android-telephony-ims-feature-MmTelFeature-property-PROCESS_CALL_IMS'>/** To be returned by {@link #shouldProcessCall(String[])} when the ImsService should process the
+</span> outgoing call as IMS.
+*/
+PROCESS_CALL_IMS : &quot;0&quot;,
+<span id='android-telephony-ims-feature-MmTelFeature-property-PROCESS_CALL_CSFB'>/** To be returned by {@link #shouldProcessCall(String[])} when the telephony framework should
+</span> not process the outgoing call as IMS and should instead use circuit switch.
+*/
+PROCESS_CALL_CSFB : &quot;1&quot;,
+<span id='android-telephony-ims-feature-MmTelFeature-method-queryCapabilityStatus'>/**The current capability status that this MmTelFeature has defined is available. This
+</span> configuration will be used by the platform to figure out which capabilities are CURRENTLY
+ available to be used.
+
+ Should be a subset of the capabilities that are enabled by the framework in
+ {@link #changeEnabledCapabilities}.
+@return {Object {android.telephony.ims.feature.MmTelFeature.MmTelCapabilities}} A copy of the current MmTelFeature capability status.
+*/
+queryCapabilityStatus : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-notifyCapabilitiesStatusChanged'>/**Notify the framework that the status of the Capabilities has changed. Even though the
+</span> MmTelFeature capability may be enabled by the framework, the status may be disabled due to
+ the feature being unavailable from the network.
+@param {Object {MmTelFeature.MmTelCapabilities}} c The current capability status of the MmTelFeature. If a capability is disabled, then
+ the status of that capability is disabled. This can happen if the network does not currently
+ support the capability that is enabled. A capability that is disabled by the framework (via
+ {@link #changeEnabledCapabilities}) should also show the status as disabled.
+*/
+notifyCapabilitiesStatusChanged : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-notifyIncomingCall'>/**Notify the framework of an incoming call.
+</span>@param {Object {ImsCallSessionImplBase}} c The {@link ImsCallSessionImplBase} of the new incoming call.
+*/
+notifyIncomingCall : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-notifyRejectedCall'>/**Notify the framework that a call has been implicitly rejected by this MmTelFeature
+</span> during call setup.
+@param {Object {ImsCallProfile}} callProfile The {@link ImsCallProfile} IMS call profile with details.
+        This can be null if no call information is available for the rejected call.
+@param {Object {ImsReasonInfo}} reason The {@link ImsReasonInfo} call rejection reason.
+*/
+notifyRejectedCall : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-notifyIncomingCallSession'>/**
+</span>@hide 
+*/
+notifyIncomingCallSession : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-notifyVoiceMessageCountUpdate'>/**Notify the framework of a change in the Voice Message count.
+</span>@link count the new Voice Message count.
+*/
+notifyVoiceMessageCountUpdate : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-queryCapabilityConfiguration'>/**Provides the MmTelFeature with the ability to return the framework Capability Configuration
+</span> for a provided Capability. If the framework calls {@link #changeEnabledCapabilities} and
+ includes a capability A to enable or disable, this method should return the correct enabled
+ status for capability A.
+@param {Number} capability The capability that we are querying the configuration for.
+@return {Boolean} true if the capability is enabled, false otherwise.
+*/
+queryCapabilityConfiguration : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-changeEnabledCapabilities'>/**The MmTelFeature should override this method to handle the enabling/disabling of
+</span> MmTel Features, defined in {@link android.telephony.ims.feature.MmTelFeature.MmTelCapabilities.MmTelCapability}. The framework assumes
+ the {@link android.telephony.ims.feature.CapabilityChangeRequest} was processed successfully. If a subset of capabilities
+ could not be set to their new values,
+ {@link CapabilityCallbackProxy#onChangeCapabilityConfigurationError} must be called
+ individually for each capability whose processing resulted in an error.
+
+ Enabling/Disabling a capability here indicates that the capability should be registered or
+ deregistered (depending on the capability change) and become available or unavailable to
+ the framework.
+*/
+changeEnabledCapabilities : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-createCallProfile'>/**Creates a {@link ImsCallProfile} from the service capabilities &amp; IMS registration state.
+</span>@param {Number} callSessionType a service type that is specified in {@link ImsCallProfile}
+        {@link ImsCallProfile#SERVICE_TYPE_NONE}
+        {@link ImsCallProfile#SERVICE_TYPE_NORMAL}
+        {@link ImsCallProfile#SERVICE_TYPE_EMERGENCY}
+@param {Number} callType a call type that is specified in {@link ImsCallProfile}
+        {@link ImsCallProfile#CALL_TYPE_VOICE}
+        {@link ImsCallProfile#CALL_TYPE_VT}
+        {@link ImsCallProfile#CALL_TYPE_VT_TX}
+        {@link ImsCallProfile#CALL_TYPE_VT_RX}
+        {@link ImsCallProfile#CALL_TYPE_VT_NODIR}
+        {@link ImsCallProfile#CALL_TYPE_VS}
+        {@link ImsCallProfile#CALL_TYPE_VS_TX}
+        {@link ImsCallProfile#CALL_TYPE_VS_RX}
+@return {Object {android.telephony.ims.ImsCallProfile}} a {@link ImsCallProfile} object
+*/
+createCallProfile : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-createCallSessionInterface'>/**
+</span>@hide 
+*/
+createCallSessionInterface : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-createCallSession'>/**Creates an {@link ImsCallSession} with the specified call profile.
+</span> Use other methods, if applicable, instead of interacting with
+ {@link ImsCallSession} directly.
+@param {Object {ImsCallProfile}} profile a call profile to make the call
+*/
+createCallSession : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-shouldProcessCall'>/**Called by the framework to determine if the outgoing call, designated by the outgoing
+</span> {@link String}s, should be processed as an IMS call or CSFB call. If this method's
+ functionality is not overridden, the platform will process every call as IMS as long as the
+ MmTelFeature reports that the {@link android.telephony.ims.feature.MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VOICE} capability is
+ available.
+@param {Object {java.lang.String[]}} numbers An array of {@link String}s that will be used for placing the call. There can
+         be multiple {@link String}s listed in the case when we want to place an outgoing
+         call as a conference.
+@return {Number} a {@link ProcessCallResult} to the framework, which will be used to determine if the
+        call will be placed over IMS or via CSFB.
+*/
+shouldProcessCall : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-getMultiEndpointInterface'>/**
+</span>@hide 
+*/
+getMultiEndpointInterface : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-getUt'>/**
+</span>@return {Object {android.telephony.ims.stub.ImsUtImplBase}} The {@link ImsUtImplBase} Ut interface implementation for the supplementary service
+ configuration.
+*/
+getUt : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-getEcbm'>/**
+</span>@return {Object {android.telephony.ims.stub.ImsEcbmImplBase}} The {@link ImsEcbmImplBase} Emergency call-back mode interface for emergency VoLTE
+ calls that support it.
+*/
+getEcbm : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-getMultiEndpoint'>/**
+</span>@return {Object {android.telephony.ims.stub.ImsMultiEndpointImplBase}} The {@link ImsMultiEndpointImplBase} implementation for implementing Dialog event
+ package processing for multi-endpoint.
+*/
+getMultiEndpoint : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-setUiTtyMode'>/**Sets the current UI TTY mode for the MmTelFeature.
+</span>@param {Number} mode An integer containing the new UI TTY Mode, can consist of
+         {@link TelecomManager#TTY_MODE_OFF},
+         {@link TelecomManager#TTY_MODE_FULL},
+         {@link TelecomManager#TTY_MODE_HCO},
+         {@link TelecomManager#TTY_MODE_VCO}
+@param {Object {Message}} onCompleteMessage If non-null, this MmTelFeature should call this {@link Message} when
+         the operation is complete by using the associated {@link android.os.Messenger} in
+         {@link Message#replyTo}. For example:
+ {@code
+     // Set UI TTY Mode and other operations...
+     try {
+         // Notify framework that the mode was changed.
+         Messenger uiMessenger = onCompleteMessage.replyTo;
+         uiMessenger.send(onCompleteMessage);
+     } catch (RemoteException e) {
+         // Remote side is dead
+     }
+ }
+*/
+setUiTtyMode : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-getSmsImplementation'>/**Must be overridden by IMS Provider to be able to support SMS over IMS. Otherwise a default
+</span> non-functional implementation is returned.
+@return {Object {android.telephony.ims.stub.ImsSmsImplBase}} an instance of {@link ImsSmsImplBase} which should be implemented by the IMS
+ Provider.
+*/
+getSmsImplementation : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-onFeatureRemoved'>/**{@inheritDoc}
+</span>*/
+onFeatureRemoved : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-onFeatureReady'>/**{@inheritDoc}
+</span>*/
+onFeatureReady : function(  ) {},
+
+<span id='android-telephony-ims-feature-MmTelFeature-method-getBinder'>/**
+</span>@hide 
+*/
+getBinder : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

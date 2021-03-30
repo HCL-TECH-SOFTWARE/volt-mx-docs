@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-FillRequest'>/**@class android.service.autofill.FillRequest
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class represents a request to an autofill service
+ to interpret the screen and provide information to the system which views are
+ interesting for saving and what are the possible ways to fill the inputs on
+ the screen if applicable.
+
+ @see AutofillService#onFillRequest(FillRequest, android.os.CancellationSignal, FillCallback)
+*/
+var FillRequest = {
+
+<span id='android-service-autofill-FillRequest-property-FLAG_MANUAL_REQUEST'>/** Indicates autofill was explicitly requested by the user.
+</span>
+ &lt;p&gt;Users typically make an explicit request to autofill a screen in two situations:
+ &lt;ul&gt;
+   &lt;li&gt;The app disabled autofill (using {@link View#setImportantForAutofill(int)}.
+   &lt;li&gt;The service could not figure out how to autofill a screen (but the user knows the
+       service has data for that app).
+ &lt;/ul&gt;
+
+ &lt;p&gt;This flag is particularly useful for the second case. For example, the service could offer
+ a complex UI where the user can map which screen views belong to each user data, or it could
+ offer a simpler UI where the user picks the data for just the view used to trigger the
+ request (that would be the view whose
+ {@link android.app.assist.AssistStructure.ViewNode#isFocused()} method returns {@code true}).
+
+ &lt;p&gt;An explicit autofill request is triggered when the
+ {@link android.view.autofill.AutofillManager#requestAutofill(View)} or
+ {@link android.view.autofill.AutofillManager#requestAutofill(View, int, android.graphics.Rect)}
+ is called. For example, standard {@link android.widget.TextView} views show an
+ {@code AUTOFILL} option in the overflow menu that triggers such request.
+*/
+FLAG_MANUAL_REQUEST : &quot;1&quot;,
+<span id='android-service-autofill-FillRequest-property-FLAG_COMPATIBILITY_MODE_REQUEST'>/** Indicates this request was made using
+</span> &lt;a href=&quot;AutofillService.html#CompatibilityMode&quot;&gt;compatibility mode&lt;/a&gt;.
+*/
+FLAG_COMPATIBILITY_MODE_REQUEST : &quot;2&quot;,
+<span id='android-service-autofill-FillRequest-property-INVALID_REQUEST_ID'>/**@hide */
+</span>INVALID_REQUEST_ID : &quot;-2147483648&quot;,
+<span id='android-service-autofill-FillRequest-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-service-autofill-FillRequest-method-getId'>/**Gets the unique id of this request.
+</span>*/
+getId : function(  ) {},
+
+<span id='android-service-autofill-FillRequest-method-getFlags'>/**Gets the flags associated with this request.
+</span>@return {Number} any combination of {@link #FLAG_MANUAL_REQUEST} and
+         {@link #FLAG_COMPATIBILITY_MODE_REQUEST}.
+*/
+getFlags : function(  ) {},
+
+<span id='android-service-autofill-FillRequest-method-getFillContexts'>/**Gets the contexts associated with each previous fill request.
+</span>
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Starting on Android {@link android.os.Build.VERSION_CODES#Q}, it could also
+ include contexts from requests whose {@link android.service.autofill.SaveInfo} had the
+ {@link android.service.autofill.SaveInfo#FLAG_DELAY_SAVE} flag.
+*/
+getFillContexts : function(  ) {},
+
+<span id='android-service-autofill-FillRequest-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-service-autofill-FillRequest-method-getClientState'>/**Gets the latest client state bundle set by the service in a
+</span> {@link android.service.autofill.FillResponse.Builder#setClientState(Bundle) fill response}.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Prior to Android {@link android.os.Build.VERSION_CODES#P}, only client state
+ bundles set by {@link android.service.autofill.FillResponse.Builder#setClientState(Bundle)} were considered. On
+ Android {@link android.os.Build.VERSION_CODES#P} and higher, bundles set in the result of
+ an authenticated request through the
+ {@link android.view.autofill.AutofillManager#EXTRA_CLIENT_STATE} extra are
+ also considered (and take precedence when set).
+@return {Object {android.os.Bundle}} The client state.
+*/
+getClientState : function(  ) {},
+
+<span id='android-service-autofill-FillRequest-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-service-autofill-FillRequest-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

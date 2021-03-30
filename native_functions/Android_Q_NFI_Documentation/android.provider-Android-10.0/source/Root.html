@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-DocumentsContract-Root'>/**@class android.provider.DocumentsContract.Root
+</span>@extends java.lang.Object
+
+ Constants related to a root of documents, including {@link Cursor} column
+ names and flags. A root is the start of a tree of documents, such as a
+ physical storage device, or an account. Each root starts at the directory
+ referenced by {@link android.provider.DocumentsContract.Root#COLUMN_DOCUMENT_ID}, which can recursively
+ contain both documents and directories.
+ &lt;p&gt;
+ All columns are &lt;em&gt;read-only&lt;/em&gt; to client applications.
+*/
+var Root = {
+
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_ROOT_ID'>/** Unique ID of a root. This ID is both provided by and interpreted by a
+</span> {@link android.provider.DocumentsContract.DocumentsProvider}, and should be treated as an opaque value
+ by client applications. This column is required.
+ &lt;p&gt;
+ Type: STRING
+*/
+COLUMN_ROOT_ID : &quot;root_id&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_FLAGS'>/** Flags that apply to a root. This column is required.
+</span> &lt;p&gt;
+ Type: INTEGER (int)
+
+ @see #FLAG_LOCAL_ONLY
+ @see #FLAG_SUPPORTS_CREATE
+ @see #FLAG_SUPPORTS_RECENTS
+ @see #FLAG_SUPPORTS_SEARCH
+*/
+COLUMN_FLAGS : &quot;flags&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_ICON'>/** Icon resource ID for a root. This column is required.
+</span> &lt;p&gt;
+ Type: INTEGER (int)
+*/
+COLUMN_ICON : &quot;icon&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_TITLE'>/** Title for a root, which will be shown to a user. This column is
+</span> required. For a single storage service surfacing multiple accounts as
+ different roots, this title should be the name of the service.
+ &lt;p&gt;
+ Type: STRING
+*/
+COLUMN_TITLE : &quot;title&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_SUMMARY'>/** Summary for this root, which may be shown to a user. This column is
+</span> optional, and may be {@code null}. For a single storage service
+ surfacing multiple accounts as different roots, this summary should
+ be the name of the account.
+ &lt;p&gt;
+ Type: STRING
+*/
+COLUMN_SUMMARY : &quot;summary&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_DOCUMENT_ID'>/** Document which is a directory that represents the top directory of
+</span> this root. This column is required.
+ &lt;p&gt;
+ Type: STRING
+
+ @see Document#COLUMN_DOCUMENT_ID
+*/
+COLUMN_DOCUMENT_ID : &quot;document_id&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_AVAILABLE_BYTES'>/** Number of bytes available in this root. This column is optional, and
+</span> may be {@code null} if unknown or unbounded.
+ &lt;p&gt;
+ Type: INTEGER (long)
+*/
+COLUMN_AVAILABLE_BYTES : &quot;available_bytes&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_CAPACITY_BYTES'>/** Capacity of a root in bytes. This column is optional, and may be
+</span> {@code null} if unknown or unbounded.
+ &lt;p&gt;
+ Type: INTEGER (long)
+*/
+COLUMN_CAPACITY_BYTES : &quot;capacity_bytes&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_MIME_TYPES'>/** MIME types supported by this root. This column is optional, and if
+</span> {@code null} the root is assumed to support all MIME types. Multiple
+ MIME types can be separated by a newline. For example, a root
+ supporting audio might return &quot;audio/*\napplication/x-flac&quot;.
+ &lt;p&gt;
+ Type: STRING
+*/
+COLUMN_MIME_TYPES : &quot;mime_types&quot;,
+<span id='android-provider-DocumentsContract-Root-property-COLUMN_QUERY_ARGS'>/** Query arguments supported by this root. This column is optional
+</span> and related to {@link #COLUMN_FLAGS} and {@link #FLAG_SUPPORTS_SEARCH}.
+ If the flags include {@link #FLAG_SUPPORTS_SEARCH}, and the column is
+ {@code null}, the root is assumed to support {@link #QUERY_ARG_DISPLAY_NAME}
+ search of {@link android.provider.DocumentsContract.Document#COLUMN_DISPLAY_NAME}. Multiple query arguments
+ can be separated by a newline. For example, a root supporting
+ {@link #QUERY_ARG_MIME_TYPES} and {@link #QUERY_ARG_DISPLAY_NAME} might
+ return &quot;android:query-arg-mime-types\nandroid:query-arg-display-name&quot;.
+ &lt;p&gt;
+ Type: STRING
+ @see #COLUMN_FLAGS
+ @see #FLAG_SUPPORTS_SEARCH
+ @see #QUERY_ARG_DISPLAY_NAME
+ @see #QUERY_ARG_FILE_SIZE_OVER
+ @see #QUERY_ARG_LAST_MODIFIED_AFTER
+ @see #QUERY_ARG_MIME_TYPES
+ @see DocumentsProvider#querySearchDocuments(String, String[],
+      Bundle)
+*/
+COLUMN_QUERY_ARGS : &quot;query_args&quot;,
+<span id='android-provider-DocumentsContract-Root-property-MIME_TYPE_ITEM'>/** MIME type for a root.
+</span>*/
+MIME_TYPE_ITEM : &quot;vnd.android.document/root&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_SUPPORTS_CREATE'>/** Flag indicating that at least one directory under this root supports
+</span> creating content. Roots with this flag will be shown when an
+ application interacts with {@link Intent#ACTION_CREATE_DOCUMENT}.
+
+ @see #COLUMN_FLAGS
+*/
+FLAG_SUPPORTS_CREATE : &quot;1&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_LOCAL_ONLY'>/** Flag indicating that this root offers content that is strictly local
+</span> on the device. That is, no network requests are made for the content.
+
+ @see #COLUMN_FLAGS
+ @see Intent#EXTRA_LOCAL_ONLY
+*/
+FLAG_LOCAL_ONLY : &quot;2&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_SUPPORTS_RECENTS'>/** Flag indicating that this root can be queried to provide recently
+</span> modified documents.
+
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#buildRecentDocumentsUri(String, String)
+ @see DocumentsProvider#queryRecentDocuments(String, String[])
+*/
+FLAG_SUPPORTS_RECENTS : &quot;4&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_SUPPORTS_SEARCH'>/** Flag indicating that this root supports search.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#buildSearchDocumentsUri(String, String,
+      String)
+ @see DocumentsProvider#querySearchDocuments(String, String,
+      String[])
+ @see DocumentsProvider#querySearchDocuments(String, String[],
+      Bundle)
+*/
+FLAG_SUPPORTS_SEARCH : &quot;8&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_SUPPORTS_IS_CHILD'>/** Flag indicating that this root supports testing parent child
+</span> relationships.
+
+ @see #COLUMN_FLAGS
+ @see DocumentsProvider#isChildDocument(String, String)
+*/
+FLAG_SUPPORTS_IS_CHILD : &quot;16&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_SUPPORTS_EJECT'>/** Flag indicating that this root can be ejected.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#ejectRoot(ContentInterface, Uri)
+ @see DocumentsProvider#ejectRoot(String)
+*/
+FLAG_SUPPORTS_EJECT : &quot;32&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_EMPTY'>/** Flag indicating that this root is currently empty. This may be used
+</span> to hide the root when opening documents, but the root will still be
+ shown when creating documents and {@link #FLAG_SUPPORTS_CREATE} is
+ also set. If the value of this flag changes, such as when a root
+ becomes non-empty, you must send a content changed notification for
+ {@link android.provider.DocumentsContract.DocumentsContract#buildRootsUri(String)}.
+
+ @see #COLUMN_FLAGS
+ @see ContentResolver#notifyChange(Uri,
+      android.database.ContentObserver, boolean)
+*/
+FLAG_EMPTY : &quot;64&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_ADVANCED'>/** Flag indicating that this root should only be visible to advanced
+</span> users.
+
+ @see #COLUMN_FLAGS
+ {@hide}
+*/
+FLAG_ADVANCED : &quot;65536&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_HAS_SETTINGS'>/** Flag indicating that this root has settings.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#ACTION_DOCUMENT_ROOT_SETTINGS
+ {@hide}
+*/
+FLAG_HAS_SETTINGS : &quot;131072&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_REMOVABLE_SD'>/** Flag indicating that this root is on removable SD card storage.
+</span>
+ @see #COLUMN_FLAGS
+ {@hide}
+*/
+FLAG_REMOVABLE_SD : &quot;262144&quot;,
+<span id='android-provider-DocumentsContract-Root-property-FLAG_REMOVABLE_USB'>/** Flag indicating that this root is on removable USB storage.
+</span>
+ @see #COLUMN_FLAGS
+ {@hide}
+*/
+FLAG_REMOVABLE_USB : &quot;524288&quot;,
+
+};</pre>
+</body>
+</html>

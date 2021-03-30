@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-uicc-IccUtils'>/**@class com.android.internal.telephony.uicc.IccUtils
+</span>@extends java.lang.Object
+
+ Various methods, useful for dealing with SIM data.
+*/
+var IccUtils = {
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bcdToString'>/**Many fields in GSM SIM's are stored as nibble-swizzled BCD
+</span>
+ Assumes left-justified field that may be padded right with 0xf
+ values.
+
+ Stops on invalid BCD value, returning string so far
+*/
+bcdToString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bcdToString'>/**Converts a bcd byte array to String with offset 0 and byte array length.
+</span>*/
+bcdToString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bcdToBytes'>/**Converts BCD string to bytes.
+</span>@param {String} bcd This should have an even length. If not, an &quot;0&quot; will be appended to the string.
+*/
+bcdToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bcdToBytes'>/**Converts BCD string to bytes and put it into the given byte array.
+</span>@param {String} bcd This should have an even length. If not, an &quot;0&quot; will be appended to the string.
+@param {Object {byte[]}} bytes If the array size is less than needed, the rest of the BCD string isn't be
+     converted. If the array size is more than needed, the rest of array remains unchanged.
+*/
+bcdToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bcdToBytes'>/**Converts BCD string to bytes and put it into the given byte array.
+</span>@param {String} bcd This should have an even length. If not, an &quot;0&quot; will be appended to the string.
+@param {Object {byte[]}} bytes If the array size is less than needed, the rest of the BCD string isn't be
+     converted. If the array size is more than needed, the rest of array remains unchanged.
+@param {Number} offset the offset into the bytes[] to fill the data
+*/
+bcdToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bcdPlmnToString'>/**PLMN (MCC/MNC) is encoded as per 24.008 10.5.1.3
+</span> Returns a concatenated string of MCC+MNC, stripping
+ all invalid character 'F'
+*/
+bcdPlmnToString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-stringToBcdPlmn'>/**Convert a 5 or 6 - digit PLMN string to a nibble-swizzled encoding as per 24.008 10.5.1.3
+</span>@param {String} plmn the PLMN to convert
+@param {Object {byte[]}} data a byte array for the output
+@param {Number} offset the offset into data to start writing
+*/
+stringToBcdPlmn : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bchToString'>/**Some fields (like ICC ID) in GSM SIMs are stored as nibble-swizzled BCH
+</span>*/
+bchToString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-cdmaBcdToString'>/**Decode cdma byte into String.
+</span>*/
+cdmaBcdToString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-gsmBcdByteToInt'>/**Decodes a GSM-style BCD byte, returning an int ranging from 0-99.
+</span>
+ In GSM land, the least significant BCD digit is stored in the most
+ significant nibble.
+
+ Out-of-range digits are treated as 0 for the sake of the time stamp,
+ because of this:
+
+ TS 23.040 section 9.2.3.11
+ &quot;if the MS receives a non-integer value in the SCTS, it shall
+ assume the digit is set to 0 but shall store the entire field
+ exactly as received&quot;
+*/
+gsmBcdByteToInt : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-cdmaBcdByteToInt'>/**Decodes a CDMA style BCD byte like {@link #gsmBcdByteToInt}, but
+</span> opposite nibble format. The least significant BCD digit
+ is in the least significant nibble and the most significant
+ is in the most significant nibble.
+*/
+cdmaBcdByteToInt : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-adnStringFieldToString'>/**Decodes a string field that's formatted like the EF[ADN] alpha
+</span> identifier
+
+ From TS 51.011 10.5.1:
+   Coding:
+       this alpha tagging shall use either
+      -    the SMS default 7 bit coded alphabet as defined in
+          TS 23.038 [12] with bit 8 set to 0. The alpha identifier
+          shall be left justified. Unused bytes shall be set to 'FF'; or
+      -    one of the UCS2 coded options as defined in annex B.
+
+ Annex B from TS 11.11 V8.13.0:
+      1)  If the first octet in the alpha string is '80', then the
+          remaining octets are 16 bit UCS2 characters ...
+      2)  if the first octet in the alpha string is '81', then the
+          second octet contains a value indicating the number of
+          characters in the string, and the third octet contains an
+          8 bit number which defines bits 15 to 8 of a 16 bit
+          base pointer, where bit 16 is set to zero and bits 7 to 1
+          are also set to zero.  These sixteen bits constitute a
+          base pointer to a &quot;half page&quot; in the UCS2 code space, to be
+          used with some or all of the remaining octets in the string.
+          The fourth and subsequent octets contain codings as follows:
+          If bit 8 of the octet is set to zero, the remaining 7 bits
+          of the octet contain a GSM Default Alphabet character,
+          whereas if bit 8 of the octet is set to one, then the
+          remaining seven bits are an offset value added to the
+          16 bit base pointer defined earlier...
+      3)  If the first octet of the alpha string is set to '82', then
+          the second octet contains a value indicating the number of
+          characters in the string, and the third and fourth octets
+          contain a 16 bit number which defines the complete 16 bit
+          base pointer to a &quot;half page&quot; in the UCS2 code space...
+*/
+adnStringFieldToString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-hexCharToInt'>/**
+</span>*/
+hexCharToInt : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-hexStringToBytes'>/**Converts a hex String to a byte array.
+</span>@param {String} s A string of hexadecimal characters, must be an even number of
+          chars long
+@return {Number} byte array representation
+@throws RuntimeException on invalid format
+*/
+hexStringToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bytesToHexString'>/**Converts a byte array into a String of hexadecimal characters.
+</span>@param {Object {byte[]}} bytes an array of bytes
+@return {String} hex string representation of bytes array
+*/
+bytesToHexString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-networkNameToString'>/**Convert a TS 24.008 Section 10.5.3.5a Network Name field to a string
+</span> &quot;offset&quot; points to &quot;octet 3&quot;, the coding scheme byte
+ empty string returned on decode error
+*/
+networkNameToString : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-parseToBnW'>/**Convert a TS 131.102 image instance of code scheme '11' into Bitmap
+</span>@param {Object {byte[]}} data The raw data
+@param {Number} length The length of image body
+@return {Object {android.graphics.Bitmap}} The bitmap
+*/
+parseToBnW : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-parseToRGB'>/**a TS 131.102 image instance of code scheme '11' into color Bitmap
+</span>@param {Object {byte[]}} data The raw data
+@param {Number} length the length of image body
+@param {Boolean} transparency with or without transparency
+@return {Object {android.graphics.Bitmap}} The color bitmap
+*/
+parseToRGB : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-getDecimalSubstring'>/**
+</span>*/
+getDecimalSubstring : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bytesToInt'>/**Converts a series of bytes to an integer. This method currently only supports positive 32-bit
+</span> integers.
+@param {Object {byte[]}} src The source bytes.
+@param {Number} offset The position of the first byte of the data to be converted. The data is base
+     256 with the most significant digit first.
+@param {Number} length The length of the data to be converted. It must be &lt;= 4.
+@throws IllegalArgumentException If {@code length} is bigger than 4 or {@code src} cannot be
+     parsed as a positive integer.
+@throws IndexOutOfBoundsException If the range defined by {@code offset} and {@code length}
+     exceeds the bounds of {@code src}.
+*/
+bytesToInt : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-bytesToRawLong'>/**Converts a series of bytes to a raw long variable which can be both positive and negative.
+</span> This method currently only supports 64-bit long variable.
+@param {Object {byte[]}} src The source bytes.
+@param {Number} offset The position of the first byte of the data to be converted. The data is base
+     256 with the most significant digit first.
+@param {Number} length The length of the data to be converted. It must be &lt;= 8.
+@throws IllegalArgumentException If {@code length} is bigger than 8.
+@throws IndexOutOfBoundsException If the range defined by {@code offset} and {@code length}
+     exceeds the bounds of {@code src}.
+*/
+bytesToRawLong : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-unsignedIntToBytes'>/**Converts an integer to a new byte array with base 256 and the most significant digit first.
+</span>@throws IllegalArgumentException If {@code value} is negative.
+*/
+unsignedIntToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-signedIntToBytes'>/**Converts an integer to a new byte array with base 256 and the most significant digit first.
+</span> The first byte's highest bit is used for sign. If the most significant digit is larger than
+ 127, an extra byte (0) will be prepended before it. This method currently doesn't support
+ negative values.
+@throws IllegalArgumentException If {@code value} is negative.
+*/
+signedIntToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-unsignedIntToBytes'>/**Converts an integer to a series of bytes with base 256 and the most significant digit first.
+</span>@param {Number} value The integer to be converted.
+@param {Object {byte[]}} dest The destination byte array.
+@param {Number} offset The start offset of the byte array.
+@return {Number} The number of byte needeed.
+@throws IllegalArgumentException If {@code value} is negative.
+@throws IndexOutOfBoundsException If {@code offset} exceeds the bounds of {@code dest}.
+*/
+unsignedIntToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-signedIntToBytes'>/**Converts an integer to a series of bytes with base 256 and the most significant digit first.
+</span> The first byte's highest bit is used for sign. If the most significant digit is larger than
+ 127, an extra byte (0) will be prepended before it. This method currently doesn't support
+ negative values.
+@throws IllegalArgumentException If {@code value} is negative.
+@throws IndexOutOfBoundsException If {@code offset} exceeds the bounds of {@code dest}.
+*/
+signedIntToBytes : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-byteNumForUnsignedInt'>/**Calculates the number of required bytes to represent {@code value}. The bytes will be base
+</span> 256 with the most significant digit first.
+@throws IllegalArgumentException If {@code value} is negative.
+*/
+byteNumForUnsignedInt : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-byteNumForSignedInt'>/**Calculates the number of required bytes to represent {@code value}. The bytes will be base
+</span> 256 with the most significant digit first. If the most significant digit is larger than 127,
+ an extra byte (0) will be prepended before it. This method currently only supports positive
+ integers.
+@throws IllegalArgumentException If {@code value} is negative.
+*/
+byteNumForSignedInt : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-countTrailingZeros'>/**Counts the number of trailing zero bits of a byte.
+</span>*/
+countTrailingZeros : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-byteToHex'>/**Converts a byte to a hex string.
+</span>*/
+byteToHex : function(  ) {},
+
+<span id='com-android-internal-telephony-uicc-IccUtils-method-stripTrailingFs'>/**Strip all the trailing 'F' characters of a string, e.g., an ICCID.
+</span>*/
+stripTrailingFs : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

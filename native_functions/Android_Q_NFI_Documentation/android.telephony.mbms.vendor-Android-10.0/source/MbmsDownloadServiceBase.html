@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase'>/**@class android.telephony.mbms.vendor.MbmsDownloadServiceBase
+</span>@extends IMbmsDownloadService.Stub
+
+ Base class for MbmsDownloadService. The middleware should return an instance of this object from
+ its {@link android.app.Service#onBind(Intent)} method.
+ @hide
+*/
+var MbmsDownloadServiceBase = {
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-initialize'>/**Initialize the download service for this app and subId, registering the listener.
+</span>
+ May throw an {@link IllegalArgumentException} or an {@link IllegalStateException}, which
+ will be intercepted and passed to the app as
+ {@link MbmsErrors.InitializationErrors#ERROR_UNABLE_TO_INITIALIZE}
+
+ May return any value from {@link MbmsErrors.InitializationErrors}
+ or {@link MbmsErrors#SUCCESS}. Non-successful error codes will be passed to the app via
+ {@link IMbmsDownloadSessionCallback#onError(int, String)}.
+@param {Number} callback The callback to use to communicate with the app.
+@param {Object {MbmsDownloadSessionCallback}} subscriptionId The subscription ID to use.
+*/
+initialize : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-initialize'>/**Actual AIDL implementation -- hides the callback AIDL from the API.
+</span>@hide 
+*/
+initialize : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-requestUpdateFileServices'>/**Registers serviceClasses of interest with the appName/subId key.
+</span> Starts async fetching data on streaming services of matching classes to be reported
+ later via {@link IMbmsDownloadSessionCallback#onFileServicesUpdated(List)}
+
+ Note that subsequent calls with the same uid and subId will replace
+ the service class list.
+
+ May throw an {@link IllegalArgumentException} or an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+@param {Object {java.util.List}} serviceClasses The service classes that the app wishes to get info on. The strings
+                       may contain arbitrary data as negotiated between the app and the
+                       carrier.
+@return {Number} One of {@link MbmsErrors#SUCCESS} or
+         {@link MbmsErrors.GeneralErrors#ERROR_MIDDLEWARE_NOT_YET_READY},
+*/
+requestUpdateFileServices : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-setTempFileRootDirectory'>/**Sets the temp file root directory for this app/subscriptionId combination. The middleware
+</span> should persist {@code rootDirectoryPath} and send it back when sending intents to the
+ app's {@link android.telephony.mbms.MbmsDownloadReceiver}.
+
+ If the calling app (as identified by the calling UID) currently has any pending download
+ requests that have not been canceled, the middleware must return
+ {@link MbmsErrors.DownloadErrors#ERROR_CANNOT_CHANGE_TEMP_FILE_ROOT} here.
+@param {Number} subscriptionId The subscription id the download is operating under.
+@param {String} rootDirectoryPath The path to the app's temp file root directory.
+@return {Number} {@link MbmsErrors#SUCCESS},
+         {@link MbmsErrors.GeneralErrors#ERROR_MIDDLEWARE_NOT_YET_READY} or
+         {@link MbmsErrors.DownloadErrors#ERROR_CANNOT_CHANGE_TEMP_FILE_ROOT}
+*/
+setTempFileRootDirectory : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-download'>/**Issues a request to download a set of files.
+</span>
+ The middleware should expect that {@link #setTempFileRootDirectory(int, String)} has been
+ called for this app between when the app was installed and when this method is called. If
+ this is not the case, an {@link IllegalStateException} may be thrown.
+@param {Object {DownloadRequest}} downloadRequest An object describing the set of files to be downloaded.
+@return {Number} Any error from {@link MbmsErrors.GeneralErrors}
+         or {@link MbmsErrors#SUCCESS}
+*/
+download : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-addStatusListener'>/**Registers a download status listener for the provided {@link DownloadRequest}.
+</span>
+ This method is called by the app when it wants to request updates on the status of
+ the download.
+
+ If the middleware is not aware of a download having been requested with the provided
+ {@link DownloadRequest} in the past,
+ {@link MbmsErrors.DownloadErrors#ERROR_UNKNOWN_DOWNLOAD_REQUEST}
+ must be returned.
+@param {Object {DownloadRequest}} downloadRequest The {@link DownloadRequest} that was used to initiate the download
+                        for which progress updates are being requested.
+@param {Object {DownloadStatusListener}} listener The listener object to use.
+*/
+addStatusListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-addStatusListener'>/**Actual AIDL implementation -- hides the listener AIDL from the API.
+</span>@hide 
+*/
+addStatusListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-removeStatusListener'>/**Un-registers a download status listener for the provided {@link DownloadRequest}.
+</span>
+ This method is called by the app when it no longer wants to request status updates on the
+ download.
+
+ If the middleware is not aware of a download having been requested with the provided
+ {@link DownloadRequest} in the past,
+ {@link MbmsErrors.DownloadErrors#ERROR_UNKNOWN_DOWNLOAD_REQUEST}
+ must be returned.
+@param {Object {DownloadRequest}} downloadRequest The {@link DownloadRequest} that was used to register the callback
+@param {Object {DownloadStatusListener}} listener The callback object that
+                 {@link #addStatusListener(DownloadRequest, DownloadStatusListener)}
+                 was called with.
+*/
+removeStatusListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-removeStatusListener'>/**Actual AIDL implementation -- hides the listener AIDL from the API.
+</span>@hide 
+*/
+removeStatusListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-addProgressListener'>/**Registers a download progress listener for the provided {@link DownloadRequest}.
+</span>
+ This method is called by the app when it wants to request updates on the progress of
+ the download.
+
+ If the middleware is not aware of a download having been requested with the provided
+ {@link DownloadRequest} in the past,
+ {@link MbmsErrors.DownloadErrors#ERROR_UNKNOWN_DOWNLOAD_REQUEST}
+ must be returned.
+@param {Object {DownloadRequest}} downloadRequest The {@link DownloadRequest} that was used to initiate the download
+                        for which progress updates are being requested.
+@param {Object {DownloadProgressListener}} listener The listener object to use.
+*/
+addProgressListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-addProgressListener'>/**Actual AIDL implementation -- hides the listener AIDL from the API.
+</span>@hide 
+*/
+addProgressListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-removeProgressListener'>/**Un-registers a download progress listener for the provided {@link DownloadRequest}.
+</span>
+ This method is called by the app when it no longer wants to request progress updates on the
+ download.
+
+ If the middleware is not aware of a download having been requested with the provided
+ {@link DownloadRequest} in the past,
+ {@link MbmsErrors.DownloadErrors#ERROR_UNKNOWN_DOWNLOAD_REQUEST}
+ must be returned.
+@param {Object {DownloadRequest}} downloadRequest The {@link DownloadRequest} that was used to register the callback
+@param {Object {DownloadProgressListener}} listener The callback object that
+                 {@link #addProgressListener(DownloadRequest, DownloadProgressListener)}
+                 was called with.
+*/
+removeProgressListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-removeProgressListener'>/**Actual AIDL implementation -- hides the listener AIDL from the API.
+</span>@hide 
+*/
+removeProgressListener : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-listPendingDownloads'>/**Returns a list of pending {@link DownloadRequest}s that originated from the calling
+</span> application, identified by its uid. A pending request is one that was issued via
+ {@link #download}(DownloadRequest) but not cancelled through
+ {@link #cancelDownload}(DownloadRequest).
+ The middleware must return a non-null result synchronously or throw an exception
+ inheriting from {@link RuntimeException}.
+@return {Object {java.util.List}} A list, possibly empty, of {@link DownloadRequest}s
+*/
+listPendingDownloads : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-cancelDownload'>/**Issues a request to cancel the specified download request.
+</span>
+ If the middleware is unable to cancel the request for whatever reason, it should return
+ synchronously with an error. If this method returns {@link MbmsErrors#SUCCESS}, the app
+ will no longer be expecting any more file-completed intents from the middleware for this
+ {@link DownloadRequest}.
+@param {Object {DownloadRequest}} downloadRequest The request to cancel
+@return {Number} {@link MbmsErrors#SUCCESS},
+         {@link MbmsErrors.DownloadErrors#ERROR_UNKNOWN_DOWNLOAD_REQUEST},
+         {@link MbmsErrors.GeneralErrors#ERROR_MIDDLEWARE_NOT_YET_READY}
+*/
+cancelDownload : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-requestDownloadState'>/**Requests information about the state of a file pending download.
+</span>
+ If the middleware has no records of the
+ file indicated by {@code fileInfo} being associated with {@code downloadRequest},
+ {@link MbmsErrors.DownloadErrors#ERROR_UNKNOWN_FILE_INFO} must be returned.
+@param {Object {DownloadRequest}} downloadRequest The download request to query.
+@param {Object {FileInfo}} fileInfo The particular file within the request to get information on.
+@return {Number} {@link MbmsErrors#SUCCESS} if the request was successful, an error code otherwise.
+*/
+requestDownloadState : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-resetDownloadKnowledge'>/**Resets the middleware's knowledge of previously-downloaded files in this download request.
+</span>
+ When this method is called, the middleware must attempt to re-download all the files
+ specified by the {@link DownloadRequest}, even if the files have not changed on the server.
+ In addition, current in-progress downloads must not be interrupted.
+
+ If the middleware is not aware of the specified download request, return
+ {@link MbmsErrors.DownloadErrors#ERROR_UNKNOWN_DOWNLOAD_REQUEST}.
+@param {Object {DownloadRequest}} downloadRequest The request to re-download files for.
+*/
+resetDownloadKnowledge : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-dispose'>/**Signals that the app wishes to dispose of the session identified by the
+</span> {@code subscriptionId} argument and the caller's uid. No notification back to the
+ app is required for this operation, and the corresponding callback provided via
+ {@link #initialize(int, IMbmsDownloadSessionCallback)} should no longer be used
+ after this method has been called by the app.
+
+ Any download requests issued by the app should remain in effect until the app calls
+ {@link #cancelDownload}(DownloadRequest) on another session.
+
+ May throw an {@link IllegalStateException}
+@param {Number} subscriptionId The subscription id to use.
+*/
+dispose : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-onAppCallbackDied'>/**Indicates that the app identified by the given UID and subscription ID has died.
+</span>@param {Number} uid the UID of the app, as returned by {@link Binder#getCallingUid()}.
+@param {Number} subscriptionId The subscription ID the app is using.
+*/
+onAppCallbackDied : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-asBinder'>/**
+</span>@hide 
+*/
+asBinder : function(  ) {},
+
+<span id='android-telephony-mbms-vendor-MbmsDownloadServiceBase-method-onTransact'>/**
+</span>@hide 
+*/
+onTransact : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

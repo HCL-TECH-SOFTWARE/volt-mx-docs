@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Handler'>/**@class android.os.Handler
+</span>@extends java.lang.Object
+
+ A Handler allows you to send and process {@link android.os.Message} and Runnable
+ objects associated with a thread's {@link android.os.MessageQueue}.  Each Handler
+ instance is associated with a single thread and that thread's message
+ queue.  When you create a new Handler, it is bound to the thread /
+ message queue of the thread that is creating it -- from that point on,
+ it will deliver messages and runnables to that message queue and execute
+ them as they come out of the message queue.
+ 
+ &lt;p&gt;There are two main uses for a Handler: (1) to schedule messages and
+ runnables to be executed at some point in the future; and (2) to enqueue
+ an action to be performed on a different thread than your own.
+ 
+ &lt;p&gt;Scheduling messages is accomplished with the
+ {@link #post}, {@link #postAtTime(Runnable, long)},
+ {@link #postDelayed}, {@link #sendEmptyMessage},
+ {@link #sendMessage}, {@link #sendMessageAtTime}, and
+ {@link #sendMessageDelayed} methods.  The &lt;em&gt;post&lt;/em&gt; versions allow
+ you to enqueue Runnable objects to be called by the message queue when
+ they are received; the &lt;em&gt;sendMessage&lt;/em&gt; versions allow you to enqueue
+ a {@link android.os.Message} object containing a bundle of data that will be
+ processed by the Handler's {@link #handleMessage} method (requiring that
+ you implement a subclass of Handler).
+ 
+ &lt;p&gt;When posting or sending to a Handler, you can either
+ allow the item to be processed as soon as the message queue is ready
+ to do so, or specify a delay before it gets processed or absolute time for
+ it to be processed.  The latter two allow you to implement timeouts,
+ ticks, and other timing-based behavior.
+ 
+ &lt;p&gt;When a
+ process is created for your application, its main thread is dedicated to
+ running a message queue that takes care of managing the top-level
+ application objects (activities, broadcast receivers, etc) and any windows
+ they create.  You can create your own threads, and communicate back with
+ the main application thread through a Handler.  This is done by calling
+ the same &lt;em&gt;post&lt;/em&gt; or &lt;em&gt;sendMessage&lt;/em&gt; methods as before, but from
+ your new thread.  The given Runnable or Message will then be scheduled
+ in the Handler's message queue and processed when appropriate.
+*/
+var Handler = {
+
+<span id='android-os-Handler-method-handleMessage'>/**Subclasses must implement this to receive messages.
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='android-os-Handler-method-dispatchMessage'>/**Handle system messages here.
+</span>*/
+dispatchMessage : function(  ) {},
+
+<span id='android-os-Handler-method-createAsync'>/**Create a new Handler whose posted messages and runnables are not subject to
+</span> synchronization barriers such as display vsync.
+
+ &lt;p&gt;Messages sent to an async handler are guaranteed to be ordered with respect to one another,
+ but not necessarily with respect to messages from other Handlers.&lt;/p&gt;
+@param {Object {Looper}} looper the Looper that the new Handler should be bound to
+@param looper the Looper that the new Handler should be bound to
+@return {Object {android.os.Handler}} a new async Handler instance
+*/
+createAsync : function(  ) {},
+
+<span id='android-os-Handler-method-createAsync'>/**Create a new Handler whose posted messages and runnables are not subject to
+</span> synchronization barriers such as display vsync.
+
+ &lt;p&gt;Messages sent to an async handler are guaranteed to be ordered with respect to one another,
+ but not necessarily with respect to messages from other Handlers.&lt;/p&gt;
+@param {Object {Looper}} looper the Looper that the new Handler should be bound to
+@param looper the Looper that the new Handler should be bound to
+@return {Object {android.os.Handler}} a new async Handler instance
+*/
+createAsync : function(  ) {},
+
+<span id='android-os-Handler-method-getMain'>/**
+</span>@hide 
+*/
+getMain : function(  ) {},
+
+<span id='android-os-Handler-method-mainIfNull'>/**
+</span>@hide 
+*/
+mainIfNull : function(  ) {},
+
+<span id='android-os-Handler-method-getTraceName'>/**{@hide}
+</span>*/
+getTraceName : function(  ) {},
+
+<span id='android-os-Handler-method-getMessageName'>/**Returns a string representing the name of the specified message.
+</span> The default implementation will either return the class name of the
+ message callback if any, or the hexadecimal representation of the
+ message &quot;what&quot; field.
+@param {Object {Message}} message The message whose name is being queried
+*/
+getMessageName : function(  ) {},
+
+<span id='android-os-Handler-method-obtainMessage'>/**Returns a new {@link android.os.Message Message} from the global message pool. More efficient than
+</span> creating and allocating new instances. The retrieved message has its handler set to this instance (Message.target == this).
+  If you don't want that facility, just call Message.obtain() instead.
+*/
+obtainMessage : function(  ) {},
+
+<span id='android-os-Handler-method-obtainMessage'>/**Same as {@link #obtainMessage}(), except that it also sets the what member of the returned Message.
+</span>@param {Number} what Value to assign to the returned Message.what field.
+@return {Object {android.os.Message}} A Message from the global message pool.
+*/
+obtainMessage : function(  ) {},
+
+<span id='android-os-Handler-method-obtainMessage'>/**Same as {@link #obtainMessage}(), except that it also sets the what and obj members 
+</span> of the returned Message.
+@param {Number} what Value to assign to the returned Message.what field.
+@param {Object {Object}} obj Value to assign to the returned Message.obj field.
+@return {Object {android.os.Message}} A Message from the global message pool.
+*/
+obtainMessage : function(  ) {},
+
+<span id='android-os-Handler-method-obtainMessage'>/**Same as {@link #obtainMessage}(), except that it also sets the what, arg1 and arg2 members of the returned
+</span> Message.
+@param {Number} what Value to assign to the returned Message.what field.
+@param {Number} arg1 Value to assign to the returned Message.arg1 field.
+@param {Number} arg2 Value to assign to the returned Message.arg2 field.
+@return {Object {android.os.Message}} A Message from the global message pool.
+*/
+obtainMessage : function(  ) {},
+
+<span id='android-os-Handler-method-obtainMessage'>/**Same as {@link #obtainMessage}(), except that it also sets the what, obj, arg1,and arg2 values on the 
+</span> returned Message.
+@param {Number} what Value to assign to the returned Message.what field.
+@param {Number} arg1 Value to assign to the returned Message.arg1 field.
+@param {Number} arg2 Value to assign to the returned Message.arg2 field.
+@param {Object {Object}} obj Value to assign to the returned Message.obj field.
+@return {Object {android.os.Message}} A Message from the global message pool.
+*/
+obtainMessage : function(  ) {},
+
+<span id='android-os-Handler-method-post'>/**Causes the Runnable r to be added to the message queue.
+</span> The runnable will be run on the thread to which this handler is 
+ attached.
+@param {Object {Runnable}} r The Runnable that will be executed.
+@return {Boolean} Returns true if the Runnable was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+*/
+post : function(  ) {},
+
+<span id='android-os-Handler-method-postAtTime'>/**Causes the Runnable r to be added to the message queue, to be run
+</span> at a specific time given by &lt;var&gt;uptimeMillis&lt;/var&gt;.
+ &lt;b&gt;The time-base is {@link android.os.SystemClock#uptimeMillis}.&lt;/b&gt;
+ Time spent in deep sleep will add an additional delay to execution.
+ The runnable will be run on the thread to which this handler is attached.
+@param {Object {Runnable}} r The Runnable that will be executed.
+@param {Number} uptimeMillis The absolute time at which the callback should run,
+         using the {@link android.os.SystemClock#uptimeMillis} time-base.
+@return {Boolean} Returns true if the Runnable was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.  Note that a
+         result of true does not mean the Runnable will be processed -- if
+         the looper is quit before the delivery time of the message
+         occurs then the message will be dropped.
+*/
+postAtTime : function(  ) {},
+
+<span id='android-os-Handler-method-postAtTime'>/**Causes the Runnable r to be added to the message queue, to be run
+</span> at a specific time given by &lt;var&gt;uptimeMillis&lt;/var&gt;.
+ &lt;b&gt;The time-base is {@link android.os.SystemClock#uptimeMillis}.&lt;/b&gt;
+ Time spent in deep sleep will add an additional delay to execution.
+ The runnable will be run on the thread to which this handler is attached.
+@param {Object {Runnable}} r The Runnable that will be executed.
+@param {Object {Object}} token An instance which can be used to cancel {@code r} via
+         {@link #removeCallbacksAndMessages}.
+@param {Number} uptimeMillis The absolute time at which the callback should run,
+         using the {@link android.os.SystemClock#uptimeMillis} time-base.
+@return {Boolean} Returns true if the Runnable was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.  Note that a
+         result of true does not mean the Runnable will be processed -- if
+         the looper is quit before the delivery time of the message
+         occurs then the message will be dropped.
+@see android.os.SystemClock#uptimeMillis
+*/
+postAtTime : function(  ) {},
+
+<span id='android-os-Handler-method-postDelayed'>/**Causes the Runnable r to be added to the message queue, to be run
+</span> after the specified amount of time elapses.
+ The runnable will be run on the thread to which this handler
+ is attached.
+ &lt;b&gt;The time-base is {@link android.os.SystemClock#uptimeMillis}.&lt;/b&gt;
+ Time spent in deep sleep will add an additional delay to execution.
+@param {Object {Runnable}} r The Runnable that will be executed.
+@param {Number} delayMillis The delay (in milliseconds) until the Runnable
+        will be executed.
+@return {Boolean} Returns true if the Runnable was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.  Note that a
+         result of true does not mean the Runnable will be processed --
+         if the looper is quit before the delivery time of the message
+         occurs then the message will be dropped.
+*/
+postDelayed : function(  ) {},
+
+<span id='android-os-Handler-method-postDelayed'>/**
+</span>@hide 
+*/
+postDelayed : function(  ) {},
+
+<span id='android-os-Handler-method-postDelayed'>/**Causes the Runnable r to be added to the message queue, to be run
+</span> after the specified amount of time elapses.
+ The runnable will be run on the thread to which this handler
+ is attached.
+ &lt;b&gt;The time-base is {@link android.os.SystemClock#uptimeMillis}.&lt;/b&gt;
+ Time spent in deep sleep will add an additional delay to execution.
+@param {Object {Runnable}} r The Runnable that will be executed.
+@param {Object {Object}} token An instance which can be used to cancel {@code r} via
+         {@link #removeCallbacksAndMessages}.
+@param {Number} delayMillis The delay (in milliseconds) until the Runnable
+        will be executed.
+@return {Boolean} Returns true if the Runnable was successfully placed in to the
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.  Note that a
+         result of true does not mean the Runnable will be processed --
+         if the looper is quit before the delivery time of the message
+         occurs then the message will be dropped.
+*/
+postDelayed : function(  ) {},
+
+<span id='android-os-Handler-method-postAtFrontOfQueue'>/**Posts a message to an object that implements Runnable.
+</span> Causes the Runnable r to executed on the next iteration through the
+ message queue. The runnable will be run on the thread to which this
+ handler is attached.
+ &lt;b&gt;This method is only for use in very special circumstances -- it
+ can easily starve the message queue, cause ordering problems, or have
+ other unexpected side-effects.&lt;/b&gt;
+@param {Object {Runnable}} r The Runnable that will be executed.
+@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+*/
+postAtFrontOfQueue : function(  ) {},
+
+<span id='android-os-Handler-method-runWithScissors'>/**Runs the specified task synchronously.
+</span> &lt;p&gt;
+ If the current thread is the same as the handler thread, then the runnable
+ runs immediately without being enqueued.  Otherwise, posts the runnable
+ to the handler and waits for it to complete before returning.
+ &lt;/p&gt;&lt;p&gt;
+ This method is dangerous!  Improper use can result in deadlocks.
+ Never call this method while any locks are held or use it in a
+ possibly re-entrant manner.
+ &lt;/p&gt;&lt;p&gt;
+ This method is occasionally useful in situations where a background thread
+ must synchronously await completion of a task that must run on the
+ handler's thread.  However, this problem is often a symptom of bad design.
+ Consider improving the design (if possible) before resorting to this method.
+ &lt;/p&gt;&lt;p&gt;
+ One example of where you might want to use this method is when you just
+ set up a Handler thread and need to perform some initialization steps on
+ it before continuing execution.
+ &lt;/p&gt;&lt;p&gt;
+ If timeout occurs then this method returns &lt;code&gt;false&lt;/code&gt; but the runnable
+ will remain posted on the handler and may already be in progress or
+ complete at a later time.
+ &lt;/p&gt;&lt;p&gt;
+ When using this method, be sure to use {@link android.os.Looper#quitSafely} when
+ quitting the looper.  Otherwise {@link #runWithScissors} may hang indefinitely.
+ (TODO: We should fix this by making MessageQueue aware of blocking runnables.)
+ &lt;/p&gt;
+@param {Object {Runnable}} r The Runnable that will be executed synchronously.
+@param {Number} timeout The timeout in milliseconds, or 0 to wait indefinitely.
+@return {Boolean} Returns true if the Runnable was successfully executed.
+         Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+@hide This method is prone to abuse and should probably not be in the API.
+ If we ever do make it part of the API, we might want to rename it to something
+ less funny like runUnsafe().
+*/
+runWithScissors : function(  ) {},
+
+<span id='android-os-Handler-method-removeCallbacks'>/**Remove any pending posts of Runnable r that are in the message queue.
+</span>*/
+removeCallbacks : function(  ) {},
+
+<span id='android-os-Handler-method-removeCallbacks'>/**Remove any pending posts of Runnable &lt;var&gt;r&lt;/var&gt; with Object
+</span> &lt;var&gt;token&lt;/var&gt; that are in the message queue.  If &lt;var&gt;token&lt;/var&gt; is null,
+ all callbacks will be removed.
+*/
+removeCallbacks : function(  ) {},
+
+<span id='android-os-Handler-method-sendMessage'>/**Pushes a message onto the end of the message queue after all pending messages
+</span> before the current time. It will be received in {@link #handleMessage},
+ in the thread attached to this handler.
+@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+*/
+sendMessage : function(  ) {},
+
+<span id='android-os-Handler-method-sendEmptyMessage'>/**Sends a Message containing only the what value.
+</span>@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+*/
+sendEmptyMessage : function(  ) {},
+
+<span id='android-os-Handler-method-sendEmptyMessageDelayed'>/**Sends a Message containing only the what value, to be delivered
+</span> after the specified amount of time elapses.
+@see #sendMessageDelayed(android.os.Message, long)
+@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+*/
+sendEmptyMessageDelayed : function(  ) {},
+
+<span id='android-os-Handler-method-sendEmptyMessageAtTime'>/**Sends a Message containing only the what value, to be delivered 
+</span> at a specific time.
+@see #sendMessageAtTime(android.os.Message, long)
+@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+*/
+sendEmptyMessageAtTime : function(  ) {},
+
+<span id='android-os-Handler-method-sendMessageDelayed'>/**Enqueue a message into the message queue after all pending messages
+</span> before (current time + delayMillis). You will receive it in
+ {@link #handleMessage}, in the thread attached to this handler.
+@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.  Note that a
+         result of true does not mean the message will be processed -- if
+         the looper is quit before the delivery time of the message
+         occurs then the message will be dropped.
+*/
+sendMessageDelayed : function(  ) {},
+
+<span id='android-os-Handler-method-sendMessageAtTime'>/**Enqueue a message into the message queue after all pending messages
+</span> before the absolute time (in milliseconds) &lt;var&gt;uptimeMillis&lt;/var&gt;.
+ &lt;b&gt;The time-base is {@link android.os.SystemClock#uptimeMillis}.&lt;/b&gt;
+ Time spent in deep sleep will add an additional delay to execution.
+ You will receive it in {@link #handleMessage}, in the thread attached
+ to this handler.
+@param {Object {Message}} uptimeMillis The absolute time at which the message should be
+         delivered, using the
+         {@link android.os.SystemClock#uptimeMillis} time-base.
+@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.  Note that a
+         result of true does not mean the message will be processed -- if
+         the looper is quit before the delivery time of the message
+         occurs then the message will be dropped.
+*/
+sendMessageAtTime : function(  ) {},
+
+<span id='android-os-Handler-method-sendMessageAtFrontOfQueue'>/**Enqueue a message at the front of the message queue, to be processed on
+</span> the next iteration of the message loop.  You will receive it in
+ {@link #handleMessage}, in the thread attached to this handler.
+ &lt;b&gt;This method is only for use in very special circumstances -- it
+ can easily starve the message queue, cause ordering problems, or have
+ other unexpected side-effects.&lt;/b&gt;
+@return {Boolean} Returns true if the message was successfully placed in to the 
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+*/
+sendMessageAtFrontOfQueue : function(  ) {},
+
+<span id='android-os-Handler-method-executeOrSendMessage'>/**Executes the message synchronously if called on the same thread this handler corresponds to,
+</span> or {@link #sendMessage pushes it to the queue} otherwise
+@return {Boolean} Returns true if the message was successfully ran or placed in to the
+         message queue.  Returns false on failure, usually because the
+         looper processing the message queue is exiting.
+@hide 
+*/
+executeOrSendMessage : function(  ) {},
+
+<span id='android-os-Handler-method-removeMessages'>/**Remove any pending posts of messages with code 'what' that are in the
+</span> message queue.
+*/
+removeMessages : function(  ) {},
+
+<span id='android-os-Handler-method-removeMessages'>/**Remove any pending posts of messages with code 'what' and whose obj is
+</span> 'object' that are in the message queue.  If &lt;var&gt;object&lt;/var&gt; is null,
+ all messages will be removed.
+*/
+removeMessages : function(  ) {},
+
+<span id='android-os-Handler-method-removeCallbacksAndMessages'>/**Remove any pending posts of callbacks and sent messages whose
+</span> &lt;var&gt;obj&lt;/var&gt; is &lt;var&gt;token&lt;/var&gt;.  If &lt;var&gt;token&lt;/var&gt; is null,
+ all callbacks and messages will be removed.
+*/
+removeCallbacksAndMessages : function(  ) {},
+
+<span id='android-os-Handler-method-hasMessages'>/**Check if there are any pending posts of messages with code 'what' in
+</span> the message queue.
+*/
+hasMessages : function(  ) {},
+
+<span id='android-os-Handler-method-hasMessagesOrCallbacks'>/**Return whether there are any messages or callbacks currently scheduled on this handler.
+</span>@hide 
+*/
+hasMessagesOrCallbacks : function(  ) {},
+
+<span id='android-os-Handler-method-hasMessages'>/**Check if there are any pending posts of messages with code 'what' and
+</span> whose obj is 'object' in the message queue.
+*/
+hasMessages : function(  ) {},
+
+<span id='android-os-Handler-method-hasCallbacks'>/**Check if there are any pending posts of messages with callback r in
+</span> the message queue.
+*/
+hasCallbacks : function(  ) {},
+
+<span id='android-os-Handler-method-getLooper'>/**
+</span>*/
+getLooper : function(  ) {},
+
+<span id='android-os-Handler-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-os-Handler-method-dumpMine'>/**
+</span>@hide 
+*/
+dumpMine : function(  ) {},
+
+<span id='android-os-Handler-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

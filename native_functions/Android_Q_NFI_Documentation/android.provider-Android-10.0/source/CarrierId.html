@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Telephony-CarrierId'>/**@class android.provider.Telephony.CarrierId
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+ Contains carrier identification information for the current subscriptions.
+*/
+var CarrierId = {
+
+<span id='android-provider-Telephony-CarrierId-property-CONTENT_URI'>/** The {@code content://} style URI for this provider.
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Telephony-CarrierId-property-AUTHORITY'>/** The authority string for the CarrierId Provider
+</span> @hide
+*/
+AUTHORITY : &quot;carrier_id&quot;,
+<span id='android-provider-Telephony-CarrierId-property-CARRIER_NAME'>/** A user facing carrier name.
+</span> @see TelephonyManager#getSimCarrierIdName()
+ &lt;P&gt;Type: TEXT &lt;/P&gt;
+*/
+CARRIER_NAME : &quot;carrier_name&quot;,
+<span id='android-provider-Telephony-CarrierId-property-CARRIER_ID'>/** A unique carrier id
+</span> @see TelephonyManager#getSimCarrierId()
+ &lt;P&gt;Type: INTEGER &lt;/P&gt;
+*/
+CARRIER_ID : &quot;carrier_id&quot;,
+<span id='android-provider-Telephony-CarrierId-property-SPECIFIC_CARRIER_ID'>/** A fine-grained carrier id.
+</span> The specific carrier ID would be used for configuration purposes, but apps wishing to
+ know about the carrier itself should use the regular carrier ID returned by
+ {@link android.provider.TelephonyManager#getSimCarrierId()}.
+
+ @see TelephonyManager#getSimSpecificCarrierId()
+ This is not a database column, only used to notify content observers for
+ {@link #getSpecificCarrierIdUriForSubscriptionId}(int)
+*/
+SPECIFIC_CARRIER_ID : &quot;specific_carrier_id&quot;,
+<span id='android-provider-Telephony-CarrierId-property-SPECIFIC_CARRIER_ID_NAME'>/** A user facing carrier name for specific carrier id {@link #SPECIFIC_CARRIER_ID}.
+</span> @see TelephonyManager#getSimSpecificCarrierIdName()
+ This is not a database column, only used to notify content observers for
+ {@link #getSpecificCarrierIdUriForSubscriptionId}(int)
+*/
+SPECIFIC_CARRIER_ID_NAME : &quot;specific_carrier_id_name&quot;,
+<span id='android-provider-Telephony-CarrierId-property-PARENT_CARRIER_ID'>/** A unique parent carrier id. The parent-child
+</span> relationship can be used to further differentiate a single carrier by different networks,
+ by prepaid v.s. postpaid. It's an optional field.
+ A carrier id with a valid parent_carrier_id is considered fine-grained specific carrier
+ ID, will not be returned as {@link #CARRIER_ID} but {@link #SPECIFIC_CARRIER_ID}.
+ &lt;P&gt;Type: INTEGER &lt;/P&gt;
+ @hide
+*/
+PARENT_CARRIER_ID : &quot;parent_carrier_id&quot;,
+<span id='android-provider-Telephony-CarrierId-method-getUriForSubscriptionId'>/**Generates a content {@link Uri} used to receive updates on carrier identity change
+</span> on the given subscriptionId
+ &lt;p&gt;
+ Use this {@link Uri} with a {@link ContentObserver} to be notified of changes to the
+ carrier identity {@link android.provider.TelephonyManager#getSimCarrierId()}
+ while your app is running. You can also use a {@link JobService} to ensure your app
+ is notified of changes to the {@link Uri} even when it is not running.
+ Note, however, that using a {@link JobService} does not guarantee timely delivery of
+ updates to the {@link Uri}.
+@param {Number} subscriptionId the subscriptionId to receive updates on
+@return {Object {android.net.Uri}} the Uri used to observe carrier identity changes
+*/
+getUriForSubscriptionId : function(  ) {},
+
+<span id='android-provider-Telephony-CarrierId-method-getSpecificCarrierIdUriForSubscriptionId'>/**Generates a content {@link Uri} used to receive updates on specific carrier identity
+</span> change on the given subscriptionId returned by
+ {@link android.provider.TelephonyManager#getSimSpecificCarrierId()}.
+@param {Number} subscriptionId the subscriptionId to receive updates on
+@param subscriptionId the subscriptionId to receive updates on
+@return {Object {android.net.Uri}} the Uri used to observe specific carrier identity changes
+*/
+getSpecificCarrierIdUriForSubscriptionId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

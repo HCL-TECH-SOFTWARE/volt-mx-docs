@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-preference-PreferenceManager'>/**@class android.preference.PreferenceManager
+</span>@extends java.lang.Object
+
+ Used to help create {@link android.preference.Preference} hierarchies
+ from activities or XML.
+ &lt;p&gt;
+ In most cases, clients should use
+ {@link android.preference.PreferenceActivity#addPreferencesFromIntent} or
+ {@link android.preference.PreferenceActivity#addPreferencesFromResource(int)}.
+
+ @see PreferenceActivity
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}jetpack/androidx.html&quot;&gt;AndroidX&lt;/a&gt;
+      &lt;a href=&quot;{@docRoot}reference/androidx/preference/package-summary.html&quot;&gt;
+      Preference Library&lt;/a&gt; for consistent behavior across all devices. For more information on
+      using the AndroidX Preference Library see
+      &lt;a href=&quot;{@docRoot}guide/topics/ui/settings.html&quot;&gt;Settings&lt;/a&gt;.
+*/
+var PreferenceManager = {
+
+<span id='android-preference-PreferenceManager-property-METADATA_KEY_PREFERENCES'>/** The Activity meta-data key for its XML preference hierarchy.
+</span>*/
+METADATA_KEY_PREFERENCES : &quot;android.preference&quot;,
+<span id='android-preference-PreferenceManager-property-KEY_HAS_SET_DEFAULT_VALUES'>/***/
+</span>KEY_HAS_SET_DEFAULT_VALUES : &quot;_has_set_default_values&quot;,
+<span id='android-preference-PreferenceManager-method-setPreferenceDataStore'>/**Sets a {@link android.preference.PreferenceDataStore} to be used by all Preferences associated with this manager
+</span> that don't have a custom {@link android.preference.PreferenceDataStore} assigned via
+ {@link android.preference.Preference#setandroid.preference.PreferenceDataStore(android.preference.PreferenceDataStore)}. Also if the data store is
+ set, the child preferences won't use {@link android.content.SharedPreferences} as long as
+ they are assigned to this manager.
+@param {Object {PreferenceDataStore}} dataStore The {@link PreferenceDataStore} to be used by this manager.
+@see Preference#setPreferenceDataStore(PreferenceDataStore)
+*/
+setPreferenceDataStore : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-getPreferenceDataStore'>/**Returns the {@link android.preference.PreferenceDataStore} associated with this manager or {@code null} if
+</span> the default {@link android.content.SharedPreferences} are used instead.
+@return {Object {android.preference.PreferenceDataStore}} The {@link PreferenceDataStore} associated with this manager or {@code null} if none.
+@see #setPreferenceDataStore(PreferenceDataStore)
+*/
+getPreferenceDataStore : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-inflateFromResource'>/**Inflates a preference hierarchy from XML. If a preference hierarchy is
+</span> given, the new preference hierarchies will be merged in.
+@param {Object {Context}} context The context of the resource.
+@param {Number} resId The resource ID of the XML to inflate.
+@param {Object {PreferenceScreen}} rootPreferences Optional existing hierarchy to merge the new
+            hierarchies into.
+@return {Object {android.preference.PreferenceScreen}} The root hierarchy (if one was not provided, the new hierarchy's
+         root).
+@hide 
+*/
+inflateFromResource : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-createPreferenceScreen'>/**
+</span>*/
+createPreferenceScreen : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-getSharedPreferencesName'>/**Returns the current name of the SharedPreferences file that preferences managed by
+</span> this will use.
+@return {String} The name that can be passed to {@link Context#getSharedPreferences(String, int)}.
+@see Context#getSharedPreferences(String, int)
+*/
+getSharedPreferencesName : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-setSharedPreferencesName'>/**Sets the name of the SharedPreferences file that preferences managed by this
+</span> will use.
+
+ &lt;p&gt;If custom {@link android.preference.PreferenceDataStore} is set, this won't override its usage.
+@param {String} sharedPreferencesName The name of the SharedPreferences file.
+@see Context#getSharedPreferences(String, int)
+@see #setPreferenceDataStore(PreferenceDataStore)
+*/
+setSharedPreferencesName : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-getSharedPreferencesMode'>/**Returns the current mode of the SharedPreferences file that preferences managed by
+</span> this will use.
+@return {Number} The mode that can be passed to {@link Context#getSharedPreferences(String, int)}.
+@see Context#getSharedPreferences(String, int)
+*/
+getSharedPreferencesMode : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-setSharedPreferencesMode'>/**Sets the mode of the SharedPreferences file that preferences managed by this
+</span> will use.
+@param {Number} sharedPreferencesMode The mode of the SharedPreferences file.
+@see Context#getSharedPreferences(String, int)
+*/
+setSharedPreferencesMode : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-setStorageDefault'>/**Sets the storage location used internally by this class to be the default
+</span> provided by the hosting {@link Context}.
+*/
+setStorageDefault : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-setStorageDeviceProtected'>/**Explicitly set the storage location used internally by this class to be
+</span> device-protected storage.
+ &lt;p&gt;
+ On devices with direct boot, data stored in this location is encrypted
+ with a key tied to the physical device, and it can be accessed
+ immediately after the device has booted successfully, both
+ &lt;em&gt;before and after&lt;/em&gt; the user has authenticated with their
+ credentials (such as a lock pattern or PIN).
+ &lt;p&gt;
+ Because device-protected data is available without user authentication,
+ you should carefully limit the data you store using this Context. For
+ example, storing sensitive authentication tokens or passwords in the
+ device-protected area is strongly discouraged.
+@see Context#createDeviceProtectedStorageContext()
+*/
+setStorageDeviceProtected : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-setStorageCredentialProtected'>/**Explicitly set the storage location used internally by this class to be
+</span> credential-protected storage. This is the default storage area for apps
+ unless {@code forceDeviceProtectedStorage} was requested.
+ &lt;p&gt;
+ On devices with direct boot, data stored in this location is encrypted
+ with a key tied to user credentials, which can be accessed
+ &lt;em&gt;only after&lt;/em&gt; the user has entered their credentials (such as a
+ lock pattern or PIN).
+@see Context#createCredentialProtectedStorageContext()
+@hide 
+*/
+setStorageCredentialProtected : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-isStorageDefault'>/**Indicates if the storage location used internally by this class is the
+</span> default provided by the hosting {@link Context}.
+@see #setStorageDefault()
+@see #setStorageDeviceProtected()
+*/
+isStorageDefault : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-isStorageDeviceProtected'>/**Indicates if the storage location used internally by this class is backed
+</span> by device-protected storage.
+@see #setStorageDefault()
+@see #setStorageDeviceProtected()
+*/
+isStorageDeviceProtected : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-isStorageCredentialProtected'>/**Indicates if the storage location used internally by this class is backed
+</span> by credential-protected storage.
+@see #setStorageDefault()
+@see #setStorageDeviceProtected()
+@hide 
+*/
+isStorageCredentialProtected : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-getSharedPreferences'>/**Gets a {@link SharedPreferences} instance that preferences managed by this will use.
+</span>@return {Object {android.content.SharedPreferences}} a {@link SharedPreferences} instance pointing to the file that contains the values of
+         preferences that are managed by this PreferenceManager. If a
+         {@link PreferenceDataStore} has been set, this method returns {@code null}.
+*/
+getSharedPreferences : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-getDefaultSharedPreferences'>/**Gets a {@link SharedPreferences} instance that points to the default file that is used by
+</span> the preference framework in the given context.
+@param {Object {Context}} context The context of the preferences whose values are wanted.
+@return {Object {android.content.SharedPreferences}} A {@link SharedPreferences} instance that can be used to retrieve and listen
+         to values of the preferences.
+*/
+getDefaultSharedPreferences : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-getDefaultSharedPreferencesName'>/**Returns the name used for storing default shared preferences.
+</span>@see #getDefaultSharedPreferences(Context)
+*/
+getDefaultSharedPreferencesName : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-findPreference'>/**Finds a {@link android.preference.Preference} based on its key.
+</span>@param {Object {CharSequence}} key the key of the preference to retrieve
+@return {Object {android.preference.Preference}} the {@link Preference} with the key, or {@code null}
+@see PreferenceGroup#findPreference(CharSequence)
+*/
+findPreference : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-setDefaultValues'>/**Sets the default values from an XML preference file by reading the values defined
+</span> by each {@link android.preference.Preference} item's {@code android:defaultValue} attribute. This should
+ be called by the application's main activity.
+ &lt;p&gt;
+@param {Object {Context}} context The context of the shared preferences.
+@param {Number} resId The resource ID of the preference XML file.
+@param {Boolean} readAgain Whether to re-read the default values.
+ If false, this method sets the default values only if this
+ method has never been called in the past (or if the
+ {@link #KEY_HAS_SET_DEFAULT_VALUES} in the default value shared
+ preferences file is false). To attempt to set the default values again
+ bypassing this check, set {@code readAgain} to true.
+            &lt;p class=&quot;note&quot;&gt;
+            Note: this will NOT reset preferences back to their default
+            values. For that functionality, use
+            {@link PreferenceManager#getDefaultSharedPreferences(Context)}
+            and clear it followed by a call to this method with this
+            parameter set to true.
+*/
+setDefaultValues : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-setDefaultValues'>/**Similar to {@link #setDefaultValues(Context, int, boolean)} but allows
+</span> the client to provide the filename and mode of the shared preferences
+ file.
+@param {Object {Context}} context The context of the shared preferences.
+@param {String} sharedPreferencesName A custom name for the shared preferences file.
+@param {Number} sharedPreferencesMode The file creation mode for the shared preferences file, such
+ as {@link android.content.Context#MODE_PRIVATE} or {@link
+ android.content.Context#MODE_PRIVATE}
+@param {Number} resId The resource ID of the preference XML file.
+@param {Boolean} readAgain Whether to re-read the default values.
+ If false, this method will set the default values only if this
+ method has never been called in the past (or if the
+ {@link #KEY_HAS_SET_DEFAULT_VALUES} in the default value shared
+ preferences file is false). To attempt to set the default values again
+ bypassing this check, set {@code readAgain} to true.
+            &lt;p class=&quot;note&quot;&gt;
+            Note: this will NOT reset preferences back to their default
+            values. For that functionality, use
+            {@link PreferenceManager#getDefaultSharedPreferences(Context)}
+            and clear it followed by a call to this method with this
+            parameter set to true.
+@see #setDefaultValues(Context, int, boolean)
+@see #setSharedPreferencesName(String)
+@see #setSharedPreferencesMode(int)
+*/
+setDefaultValues : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-registerOnActivityStopListener'>/**Registers a listener.
+</span>@see OnActivityStopListener
+@hide 
+*/
+registerOnActivityStopListener : function(  ) {},
+
+<span id='android-preference-PreferenceManager-method-unregisterOnActivityStopListener'>/**Unregisters a listener.
+</span>@see OnActivityStopListener
+@hide 
+*/
+unregisterOnActivityStopListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-DocumentsContract'>/**@class android.provider.DocumentsContract
+</span>@extends java.lang.Object
+
+ Defines the contract between a documents provider and the platform.
+ &lt;p&gt;
+ To create a document provider, extend {@link android.provider.DocumentsContract.DocumentsProvider}, which
+ provides a foundational implementation of this contract.
+ &lt;p&gt;
+ All client apps must hold a valid URI permission grant to access documents,
+ typically issued when a user makes a selection through
+ {@link Intent#ACTION_OPEN_DOCUMENT}, {@link Intent#ACTION_CREATE_DOCUMENT},
+ or {@link Intent#ACTION_OPEN_DOCUMENT_TREE}.
+
+ @see DocumentsProvider
+*/
+var DocumentsContract = {
+
+<span id='android-provider-DocumentsContract-property-PROVIDER_INTERFACE'>/** Intent action used to identify {@link android.provider.DocumentsContract.DocumentsProvider} instances. This
+</span> is used in the {@code &lt;intent-filter&gt;} of a {@code &lt;provider&gt;}.
+*/
+PROVIDER_INTERFACE : &quot;android.content.action.DOCUMENTS_PROVIDER&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_PACKAGE_NAME'>/**{@hide} */
+</span>EXTRA_PACKAGE_NAME : &quot;android.intent.extra.PACKAGE_NAME&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_SHOW_ADVANCED'>/** The value is decide whether to show advance mode or not.
+</span> If the value is true, the local/device storage root must be
+ visible in DocumentsUI.
+
+ {@hide}
+*/
+EXTRA_SHOW_ADVANCED : &quot;android.provider.extra.SHOW_ADVANCED&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_TARGET_URI'>/**{@hide} */
+</span>EXTRA_TARGET_URI : &quot;android.content.extra.TARGET_URI&quot;,
+<span id='android-provider-DocumentsContract-property-QUERY_ARG_DISPLAY_NAME'>/** Key for {@link android.provider.DocumentsContract.DocumentsProvider} to query display name is matched.
+</span> The match of display name is partial matching and case-insensitive.
+ Ex: The value is &quot;o&quot;, the display name of the results will contain
+ both &quot;foo&quot; and &quot;Open&quot;.
+
+ @see DocumentsProvider#querySearchDocuments(String, String[],
+      Bundle)
+*/
+QUERY_ARG_DISPLAY_NAME : &quot;android:query-arg-display-name&quot;,
+<span id='android-provider-DocumentsContract-property-QUERY_ARG_MIME_TYPES'>/** Key for {@link android.provider.DocumentsContract.DocumentsProvider} to query mime types is matched.
+</span> The value is a string array, it can support different mime types.
+ Each items will be treated as &quot;OR&quot; condition. Ex: {&quot;image/*&quot; ,
+ &quot;video/*&quot;}. The mime types of the results will contain both image
+ type and video type.
+
+ @see DocumentsProvider#querySearchDocuments(String, String[],
+      Bundle)
+*/
+QUERY_ARG_MIME_TYPES : &quot;android:query-arg-mime-types&quot;,
+<span id='android-provider-DocumentsContract-property-QUERY_ARG_FILE_SIZE_OVER'>/** Key for {@link android.provider.DocumentsContract.DocumentsProvider} to query the file size in bytes is
+</span> larger than the value.
+
+ @see DocumentsProvider#querySearchDocuments(String, String[],
+      Bundle)
+*/
+QUERY_ARG_FILE_SIZE_OVER : &quot;android:query-arg-file-size-over&quot;,
+<span id='android-provider-DocumentsContract-property-QUERY_ARG_LAST_MODIFIED_AFTER'>/** Key for {@link android.provider.DocumentsContract.DocumentsProvider} to query the last modified time
+</span> is newer than the value. The unit is in milliseconds since
+ January 1, 1970 00:00:00.0 UTC.
+
+ @see DocumentsProvider#querySearchDocuments(String, String[],
+      Bundle)
+ @see Document#COLUMN_LAST_MODIFIED
+*/
+QUERY_ARG_LAST_MODIFIED_AFTER : &quot;android:query-arg-last-modified-after&quot;,
+<span id='android-provider-DocumentsContract-property-QUERY_ARG_EXCLUDE_MEDIA'>/** Key for {@link android.provider.DocumentsContract.DocumentsProvider} to decide whether the files that
+</span> have been added to MediaStore should be excluded. If the value is
+ true, exclude them. Otherwise, include them.
+
+ @see DocumentsProvider#querySearchDocuments(String, String[],
+      Bundle)
+*/
+QUERY_ARG_EXCLUDE_MEDIA : &quot;android:query-arg-exclude-media&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_INITIAL_URI'>/** Sets the desired initial location visible to user when file chooser is shown.
+</span>
+ &lt;p&gt;Applicable to {@link Intent} with actions:
+ &lt;ul&gt;
+      &lt;li&gt;{@link Intent#ACTION_OPEN_DOCUMENT}&lt;/li&gt;
+      &lt;li&gt;{@link Intent#ACTION_CREATE_DOCUMENT}&lt;/li&gt;
+      &lt;li&gt;{@link Intent#ACTION_OPEN_DOCUMENT_TREE}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Location should specify a document URI or a tree URI with document ID. If
+ this URI identifies a non-directory, document navigator will attempt to use the parent
+ of the document as the initial location.
+
+ &lt;p&gt;The initial location is system specific if this extra is missing or document navigator
+ failed to locate the desired initial location.
+*/
+EXTRA_INITIAL_URI : &quot;android.provider.extra.INITIAL_URI&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_EXCLUDE_SELF'>/** Set this in a DocumentsUI intent to cause a package's own roots to be
+</span> excluded from the roots list.
+*/
+EXTRA_EXCLUDE_SELF : &quot;android.provider.extra.EXCLUDE_SELF&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_ORIENTATION'>/** An extra number of degrees that an image should be rotated during the
+</span> decode process to be presented correctly.
+
+ @see AssetFileDescriptor#getExtras()
+ @see android.provider.MediaStore.Images.ImageColumns#ORIENTATION
+*/
+EXTRA_ORIENTATION : &quot;android.provider.extra.ORIENTATION&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_PROMPT'>/** Overrides the default prompt text in DocumentsUI when set in an intent.
+</span>*/
+EXTRA_PROMPT : &quot;android.provider.extra.PROMPT&quot;,
+<span id='android-provider-DocumentsContract-property-ACTION_DOCUMENT_SETTINGS'>/** Action of intent issued by DocumentsUI when user wishes to open/configure/manage a particular
+</span> document in the provider application.
+
+ &lt;p&gt;When issued, the intent will include the URI of the document as the intent data.
+
+ &lt;p&gt;A provider wishing to provide support for this action should do two things.
+ &lt;li&gt;Add an {@code &lt;intent-filter&gt;} matching this action.
+ &lt;li&gt;When supplying information in {@link android.provider.DocumentsContract.DocumentsProvider#queryChildandroid.provider.DocumentsContract.Documents}, include
+ {@link android.provider.DocumentsContract.Document#FLAG_SUPPORTS_SETTINGS} in the flags for each document that supports
+ settings.
+*/
+ACTION_DOCUMENT_SETTINGS : &quot;android.provider.action.DOCUMENT_SETTINGS&quot;,
+<span id='android-provider-DocumentsContract-property-ACTION_MANAGE_DOCUMENT'>/** The action to manage document in Downloads root in DocumentsUI.
+</span>  {@hide}
+*/
+ACTION_MANAGE_DOCUMENT : &quot;android.provider.action.MANAGE_DOCUMENT&quot;,
+<span id='android-provider-DocumentsContract-property-ACTION_DOCUMENT_ROOT_SETTINGS'>/** The action to launch the settings of this root.
+</span> {@hide}
+*/
+ACTION_DOCUMENT_ROOT_SETTINGS : &quot;android.provider.action.DOCUMENT_ROOT_SETTINGS&quot;,
+<span id='android-provider-DocumentsContract-property-EXTERNAL_STORAGE_PROVIDER_AUTHORITY'>/**{@hide} */
+</span>EXTERNAL_STORAGE_PROVIDER_AUTHORITY : &quot;com.android.externalstorage.documents&quot;,
+<span id='android-provider-DocumentsContract-property-EXTERNAL_STORAGE_PRIMARY_EMULATED_ROOT_ID'>/**{@hide} */
+</span>EXTERNAL_STORAGE_PRIMARY_EMULATED_ROOT_ID : &quot;primary&quot;,
+<span id='android-provider-DocumentsContract-property-PACKAGE_DOCUMENTS_UI'>/**{@hide} */
+</span>PACKAGE_DOCUMENTS_UI : &quot;com.android.documentsui&quot;,
+<span id='android-provider-DocumentsContract-property-METADATA_TYPES'>/** Get string array identifies the type or types of metadata returned
+</span> using DocumentsContract#getDocumentMetadata.
+
+ @see #getDocumentMetadata(ContentInterface, Uri)
+*/
+METADATA_TYPES : &quot;android:documentMetadataTypes&quot;,
+<span id='android-provider-DocumentsContract-property-METADATA_EXIF'>/** Get Exif information using DocumentsContract#getDocumentMetadata.
+</span>
+ @see #getDocumentMetadata(ContentInterface, Uri)
+*/
+METADATA_EXIF : &quot;android:documentExif&quot;,
+<span id='android-provider-DocumentsContract-property-METADATA_TREE_COUNT'>/** Get total count of all documents currently stored under the given
+</span> directory tree. Only valid for {@link android.provider.DocumentsContract.Document#MIME_TYPE_DIR} documents.
+
+ @see #getDocumentMetadata(ContentInterface, Uri)
+*/
+METADATA_TREE_COUNT : &quot;android:metadataTreeCount&quot;,
+<span id='android-provider-DocumentsContract-property-METADATA_TREE_SIZE'>/** Get total size of all documents currently stored under the given
+</span> directory tree. Only valid for {@link android.provider.DocumentsContract.Document#MIME_TYPE_DIR} documents.
+
+ @see #getDocumentMetadata(ContentInterface, Uri)
+*/
+METADATA_TREE_SIZE : &quot;android:metadataTreeSize&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_LOADING'>/** Optional boolean flag included in a directory {@link Cursor#getExtras()}
+</span> indicating that a document provider is still loading data. For example, a
+ provider has returned some results, but is still waiting on an
+ outstanding network request. The provider must send a content changed
+ notification when loading is finished.
+
+ @see ContentResolver#notifyChange(Uri, android.database.ContentObserver,
+      boolean)
+*/
+EXTRA_LOADING : &quot;loading&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_INFO'>/** Optional string included in a directory {@link Cursor#getExtras()}
+</span> providing an informational message that should be shown to a user. For
+ example, a provider may wish to indicate that not all documents are
+ available.
+*/
+EXTRA_INFO : &quot;info&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_ERROR'>/** Optional string included in a directory {@link Cursor#getExtras()}
+</span> providing an error message that should be shown to a user. For example, a
+ provider may wish to indicate that a network error occurred. The user may
+ choose to retry, resulting in a new query.
+*/
+EXTRA_ERROR : &quot;error&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_RESULT'>/** Optional result (I'm thinking boolean) answer to a question.
+</span> {@hide}
+*/
+EXTRA_RESULT : &quot;result&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_CREATE_DOCUMENT'>/**{@hide} */
+</span>METHOD_CREATE_DOCUMENT : &quot;android:createDocument&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_RENAME_DOCUMENT'>/**{@hide} */
+</span>METHOD_RENAME_DOCUMENT : &quot;android:renameDocument&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_DELETE_DOCUMENT'>/**{@hide} */
+</span>METHOD_DELETE_DOCUMENT : &quot;android:deleteDocument&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_COPY_DOCUMENT'>/**{@hide} */
+</span>METHOD_COPY_DOCUMENT : &quot;android:copyDocument&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_MOVE_DOCUMENT'>/**{@hide} */
+</span>METHOD_MOVE_DOCUMENT : &quot;android:moveDocument&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_IS_CHILD_DOCUMENT'>/**{@hide} */
+</span>METHOD_IS_CHILD_DOCUMENT : &quot;android:isChildDocument&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_REMOVE_DOCUMENT'>/**{@hide} */
+</span>METHOD_REMOVE_DOCUMENT : &quot;android:removeDocument&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_EJECT_ROOT'>/**{@hide} */
+</span>METHOD_EJECT_ROOT : &quot;android:ejectRoot&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_FIND_DOCUMENT_PATH'>/**{@hide} */
+</span>METHOD_FIND_DOCUMENT_PATH : &quot;android:findDocumentPath&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_CREATE_WEB_LINK_INTENT'>/**{@hide} */
+</span>METHOD_CREATE_WEB_LINK_INTENT : &quot;android:createWebLinkIntent&quot;,
+<span id='android-provider-DocumentsContract-property-METHOD_GET_DOCUMENT_METADATA'>/**{@hide} */
+</span>METHOD_GET_DOCUMENT_METADATA : &quot;android:getDocumentMetadata&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_PARENT_URI'>/**{@hide} */
+</span>EXTRA_PARENT_URI : &quot;parentUri&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_URI'>/**{@hide} */
+</span>EXTRA_URI : &quot;uri&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_URI_PERMISSIONS'>/**{@hide} */
+</span>EXTRA_URI_PERMISSIONS : &quot;uriPermissions&quot;,
+<span id='android-provider-DocumentsContract-property-EXTRA_OPTIONS'>/**{@hide} */
+</span>EXTRA_OPTIONS : &quot;options&quot;,
+<span id='android-provider-DocumentsContract-method-buildRootsUri'>/**Build URI representing the roots of a document provider. When queried, a
+</span> provider will return one or more rows with columns defined by
+ {@link android.provider.DocumentsContract.Root}.
+@see DocumentsProvider#queryRoots(String[])
+*/
+buildRootsUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildRootUri'>/**Build URI representing the given {@link android.provider.DocumentsContract.Root#COLUMN_ROOT_ID} in a
+</span> document provider.
+@see #getRootId(Uri)
+*/
+buildRootUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildRecentDocumentsUri'>/**Build URI representing the recently modified documents of a specific root
+</span> in a document provider. When queried, a provider will return zero or more
+ rows with columns defined by {@link android.provider.DocumentsContract.Document}.
+@see DocumentsProvider#queryRecentDocuments(String, String[])
+@see #getRootId(Uri)
+*/
+buildRecentDocumentsUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildTreeDocumentUri'>/**Build URI representing access to descendant documents of the given
+</span> {@link android.provider.DocumentsContract.Document#COLUMN_DOCUMENT_ID}.
+@see #getTreeDocumentId(Uri)
+*/
+buildTreeDocumentUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildDocumentUri'>/**Build URI representing the target {@link android.provider.DocumentsContract.Document#COLUMN_DOCUMENT_ID} in
+</span> a document provider. When queried, a provider will return a single row
+ with columns defined by {@link android.provider.DocumentsContract.Document}.
+@see DocumentsProvider#queryDocument(String, String[])
+@see #getDocumentId(Uri)
+*/
+buildDocumentUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildBaseDocumentUri'>/**{@hide}
+</span>*/
+buildBaseDocumentUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildDocumentUriUsingTree'>/**Build URI representing the target {@link android.provider.DocumentsContract.Document#COLUMN_DOCUMENT_ID} in
+</span> a document provider. When queried, a provider will return a single row
+ with columns defined by {@link android.provider.DocumentsContract.Document}.
+ &lt;p&gt;
+ However, instead of directly accessing the target document, the returned
+ URI will leverage access granted through a subtree URI, typically
+ returned by {@link Intent#ACTION_OPEN_DOCUMENT_TREE}. The target document
+ must be a descendant (child, grandchild, etc) of the subtree.
+ &lt;p&gt;
+ This is typically used to access documents under a user-selected
+ directory tree, since it doesn't require the user to separately confirm
+ each new document access.
+@param {Object {Uri}} treeUri the subtree to leverage to gain access to the target
+            document. The target directory must be a descendant of this
+            subtree.
+@param {String} documentId the target document, which the caller may not have
+            direct access to.
+@see Intent#ACTION_OPEN_DOCUMENT_TREE
+@see DocumentsProvider#isChildDocument(String, String)
+@see #buildDocumentUri(String, String)
+*/
+buildDocumentUriUsingTree : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildDocumentUriMaybeUsingTree'>/**{@hide}
+</span>*/
+buildDocumentUriMaybeUsingTree : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildChildDocumentsUri'>/**Build URI representing the children of the target directory in a document
+</span> provider. When queried, a provider will return zero or more rows with
+ columns defined by {@link android.provider.DocumentsContract.Document}.
+@param {String} parentDocumentId the document to return children for, which must
+            be a directory with MIME type of
+            {@link Document#MIME_TYPE_DIR}.
+@see DocumentsProvider#queryChildDocuments(String, String[], String)
+@see #getDocumentId(Uri)
+*/
+buildChildDocumentsUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildChildDocumentsUriUsingTree'>/**Build URI representing the children of the target directory in a document
+</span> provider. When queried, a provider will return zero or more rows with
+ columns defined by {@link android.provider.DocumentsContract.Document}.
+ &lt;p&gt;
+ However, instead of directly accessing the target directory, the returned
+ URI will leverage access granted through a subtree URI, typically
+ returned by {@link Intent#ACTION_OPEN_DOCUMENT_TREE}. The target
+ directory must be a descendant (child, grandchild, etc) of the subtree.
+ &lt;p&gt;
+ This is typically used to access documents under a user-selected
+ directory tree, since it doesn't require the user to separately confirm
+ each new document access.
+@param {Object {Uri}} treeUri the subtree to leverage to gain access to the target
+            document. The target directory must be a descendant of this
+            subtree.
+@param {String} parentDocumentId the document to return children for, which the
+            caller may not have direct access to, and which must be a
+            directory with MIME type of {@link Document#MIME_TYPE_DIR}.
+@see Intent#ACTION_OPEN_DOCUMENT_TREE
+@see DocumentsProvider#isChildDocument(String, String)
+@see #buildChildDocumentsUri(String, String)
+*/
+buildChildDocumentsUriUsingTree : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-buildSearchDocumentsUri'>/**Build URI representing a search for matching documents under a specific
+</span> root in a document provider. When queried, a provider will return zero or
+ more rows with columns defined by {@link android.provider.DocumentsContract.Document}.
+@see DocumentsProvider#querySearchDocuments(String, String, String[])
+@see #getRootId(Uri)
+@see #getSearchDocumentsQuery(Uri)
+*/
+buildSearchDocumentsUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-matchSearchQueryArguments'>/**Check if the values match the query arguments.
+</span>@param {Object {Bundle}} queryArgs the query arguments
+@param {String} displayName the display time to check against
+@param {String} mimeType the mime type to check against
+@param {Number} lastModified the last modified time to check against
+@param {Number} size the size to check against
+@hide 
+*/
+matchSearchQueryArguments : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getHandledQueryArguments'>/**Get the handled query arguments from the query bundle. The handled arguments are
+</span> {@link android.provider.DocumentsContract.DocumentsContract#QUERY_ARG_EXCLUDE_MEDIA},
+ {@link android.provider.DocumentsContract.DocumentsContract#QUERY_ARG_DISPLAY_NAME},
+ {@link android.provider.DocumentsContract.DocumentsContract#QUERY_ARG_MIME_TYPES},
+ {@link android.provider.DocumentsContract.DocumentsContract#QUERY_ARG_FILE_SIZE_OVER} and
+ {@link android.provider.DocumentsContract.DocumentsContract#QUERY_ARG_LAST_MODIFIED_AFTER}.
+@param {Object {Bundle}} queryArgs the query arguments to be parsed.
+@return {String} the handled query arguments
+@hide 
+*/
+getHandledQueryArguments : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-isDocumentUri'>/**Test if the given URI represents a {@link android.provider.DocumentsContract.Document} backed by a
+</span> {@link android.provider.DocumentsContract.DocumentsProvider}.
+@see #buildDocumentUri(String, String)
+@see #buildDocumentUriUsingTree(Uri, String)
+*/
+isDocumentUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-isRootsUri'>/**Test if the given URI represents all roots of the authority
+</span> backed by {@link android.provider.DocumentsContract.DocumentsProvider}.
+@see #buildRootsUri(String)
+*/
+isRootsUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-isRootUri'>/**Test if the given URI represents specific root backed by {@link android.provider.DocumentsContract.DocumentsProvider}.
+</span>@see #buildRootUri(String, String)
+*/
+isRootUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-isContentUri'>/**{@hide}
+</span>*/
+isContentUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-isTreeUri'>/**Test if the given URI represents a {@link android.provider.DocumentsContract.Document} tree.
+</span>@see #buildTreeDocumentUri(String, String)
+@see #getTreeDocumentId(Uri)
+*/
+isTreeUri : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getRootId'>/**Extract the {@link android.provider.DocumentsContract.Root#COLUMN_ROOT_ID} from the given URI.
+</span>*/
+getRootId : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getDocumentId'>/**Extract the {@link android.provider.DocumentsContract.Document#COLUMN_DOCUMENT_ID} from the given URI.
+</span>@see #isDocumentUri(Context, Uri)
+*/
+getDocumentId : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getTreeDocumentId'>/**Extract the via {@link android.provider.DocumentsContract.Document#COLUMN_DOCUMENT_ID} from the given URI.
+</span>*/
+getTreeDocumentId : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getSearchDocumentsQuery'>/**Extract the search query from a URI built by
+</span> {@link #buildSearchDocumentsUri(String, String, String)}.
+*/
+getSearchDocumentsQuery : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getSearchDocumentsQuery'>/**Extract the search query from a Bundle
+</span> {@link #QUERY_ARG_DISPLAY_NAME}.
+ {@hide}
+*/
+getSearchDocumentsQuery : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-setManageMode'>/**Build URI that append the query parameter {@link PARAM_MANAGE} to
+</span> enable the manage mode.
+@see DocumentsProvider#queryChildDocumentsForManage(String parentDocId, String[], String)
+ {@hide}
+*/
+setManageMode : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-isManageMode'>/**Extract the manage mode from a URI built by
+</span> {@link #setManageMode}(Uri).
+ {@hide}
+*/
+isManageMode : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getDocumentThumbnail'>/**Return thumbnail representing the document at the given URI. Callers are
+</span> responsible for their own in-memory caching.
+@param {Object {ContentResolver}} documentUri document to return thumbnail for, which must have
+            {@link Document#FLAG_SUPPORTS_THUMBNAIL} set.
+@param {Object {Uri}} size optimal thumbnail size desired. A provider may return a
+            thumbnail of a different size, but never more than double the
+            requested size.
+@param {Object {Point}} signal signal used to indicate if caller is no longer interested
+            in the thumbnail.
+@return {Object {android.graphics.Bitmap}} decoded thumbnail, or {@code null} if problem was encountered.
+@see DocumentsProvider#openDocumentThumbnail(String, Point,
+      android.os.CancellationSignal)
+*/
+getDocumentThumbnail : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-createDocument'>/**Create a new document with given MIME type and display name.
+</span>@param {Object {ContentResolver}} parentDocumentUri directory with {@link Document#FLAG_DIR_SUPPORTS_CREATE}
+@param {Object {Uri}} mimeType MIME type of new document
+@param {String} displayName name of new document
+@return {Object {android.net.Uri}} newly created document, or {@code null} if failed
+*/
+createDocument : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-isChildDocument'>/**Test if a document is descendant (child, grandchild, etc) from the given
+</span> parent.
+@param {Object {ContentResolver}} parentDocumentUri parent to verify against.
+@param {Object {Uri}} childDocumentUri child to verify.
+@return {Boolean} if given document is a descendant of the given parent.
+@see Root#FLAG_SUPPORTS_IS_CHILD
+*/
+isChildDocument : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-renameDocument'>/**Change the display name of an existing document.
+</span> &lt;p&gt;
+ If the underlying provider needs to create a new
+ {@link android.provider.DocumentsContract.Document#COLUMN_DOCUMENT_ID} to represent the updated display
+ name, that new document is returned and the original document is no
+ longer valid. Otherwise, the original document is returned.
+@param {Object {ContentResolver}} documentUri document with {@link Document#FLAG_SUPPORTS_RENAME}
+@param {Object {Uri}} displayName updated name for document
+@return {Object {android.net.Uri}} the existing or new document after the rename, or {@code null} if
+         failed.
+*/
+renameDocument : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-deleteDocument'>/**Delete the given document.
+</span>@param {Object {ContentResolver}} documentUri document with {@link Document#FLAG_SUPPORTS_DELETE}
+@return {Boolean} if the document was deleted successfully.
+*/
+deleteDocument : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-copyDocument'>/**Copies the given document.
+</span>@param {Object {ContentResolver}} sourceDocumentUri document with {@link Document#FLAG_SUPPORTS_COPY}
+@param {Object {Uri}} targetParentDocumentUri document which will become a parent of the source
+         document's copy.
+@return {Object {android.net.Uri}} the copied document, or {@code null} if failed.
+*/
+copyDocument : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-moveDocument'>/**Moves the given document under a new parent.
+</span>@param {Object {ContentResolver}} sourceDocumentUri document with {@link Document#FLAG_SUPPORTS_MOVE}
+@param {Object {Uri}} sourceParentDocumentUri parent document of the document to move.
+@param {Object {Uri}} targetParentDocumentUri document which will become a new parent of the source
+         document.
+@return {Object {android.net.Uri}} the moved document, or {@code null} if failed.
+*/
+moveDocument : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-removeDocument'>/**Removes the given document from a parent directory.
+</span>
+ &lt;p&gt;In contrast to {@link #deleteDocument} it requires specifying the parent.
+ This method is especially useful if the document can be in multiple parents.
+@param {Object {ContentResolver}} documentUri document with {@link Document#FLAG_SUPPORTS_REMOVE}
+@param {Object {Uri}} parentDocumentUri parent document of the document to remove.
+@return {Boolean} true if the document was removed successfully.
+*/
+removeDocument : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-ejectRoot'>/**Ejects the given root. It throws {@link IllegalStateException} when ejection failed.
+</span>@param {Object {ContentResolver}} rootUri root with {@link Root#FLAG_SUPPORTS_EJECT} to be ejected
+*/
+ejectRoot : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-getDocumentMetadata'>/**Returns metadata associated with the document. The type of metadata returned
+</span> is specific to the document type. For example the data returned for an image
+ file will likely consist primarily or solely of EXIF metadata.
+
+ &lt;p&gt;The returned {@link Bundle} will contain zero or more entries depending
+ on the type of data supported by the document provider.
+
+ &lt;ol&gt;
+ &lt;li&gt;A {@link android.provider.DocumentsContract.DocumentsContract#METADATA_TYPES} containing a {@code String[]} value.
+     The string array identifies the type or types of metadata returned. Each
+     value in the can be used to access a {@link Bundle} of data
+     containing that type of data.
+ &lt;li&gt;An entry each for each type of returned metadata. Each set of metadata is
+     itself represented as a bundle and accessible via a string key naming
+     the type of data.
+ &lt;/ol&gt;
+
+ &lt;p&gt;Example:
+ &lt;p&gt;&lt;pre&gt;&lt;code&gt;
+     Bundle metadata = DocumentsContract.getDocumentMetadata(client, imageDocUri, tags);
+     if (metadata.containsKey(DocumentsContract.METADATA_EXIF)) {
+         Bundle exif = metadata.getBundle(DocumentsContract.METADATA_EXIF);
+         int imageLength = exif.getInt(ExifInterface.TAG_IMAGE_LENGTH);
+     }
+ &lt;/code&gt;&lt;/pre&gt;
+@param {Object {ContentResolver}} documentUri a Document URI
+@return {Object {android.os.Bundle}} a Bundle of Bundles.
+*/
+getDocumentMetadata : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-findDocumentPath'>/**Finds the canonical path from the top of the document tree.
+</span>
+ The {@link android.provider.DocumentsContract.Path#getandroid.provider.DocumentsContract.Path()} of the return value contains the document ID
+ of all documents along the path from the top the document tree to the
+ requested document, both inclusive.
+
+ The {@link android.provider.DocumentsContract.Path#getRootId()} of the return value returns {@code null}.
+@param {Object {ContentResolver}} treeUri treeUri of the document which path is requested.
+@return {Object {android.provider.DocumentsContract.Path}} the path of the document, or {@code null} if failed.
+@see DocumentsProvider#findDocumentPath(String, String)
+*/
+findDocumentPath : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-createWebLinkIntent'>/**Creates an intent for obtaining a web link for the specified document.
+</span>
+ &lt;p&gt;Note, that due to internal limitations, if there is already a web link
+ intent created for the specified document but with different options,
+ then it may be overridden.
+
+ &lt;p&gt;Providers are required to show confirmation UI for all new permissions granted
+ for the linked document.
+
+ &lt;p&gt;If list of recipients is known, then it should be passed in options as
+ {@link Intent#EXTRA_EMAIL} as a list of email addresses. Note, that
+ this is just a hint for the provider, which can ignore the list. In either
+ case the provider is required to show a UI for letting the user confirm
+ any new permission grants.
+
+ &lt;p&gt;Note, that the entire &lt;code&gt;options&lt;/code&gt; bundle will be sent to the provider
+ backing the passed &lt;code&gt;uri&lt;/code&gt;. Make sure that you trust the provider
+ before passing any sensitive information.
+
+ &lt;p&gt;Since this API may show a UI, it cannot be called from background.
+
+ &lt;p&gt;In order to obtain the Web Link use code like this:
+ &lt;pre&gt;&lt;code&gt;
+ void onSomethingHappened() {
+   IntentSender sender = DocumentsContract.createWebLinkIntent(&lt;i&gt;...&lt;/i&gt;);
+   if (sender != null) {
+     startIntentSenderForResult(
+         sender,
+         WEB_LINK_REQUEST_CODE,
+         null, 0, 0, 0, null);
+   }
+ }
+
+ &lt;i&gt;(...)&lt;/i&gt;
+
+ void onActivityResult(int requestCode, int resultCode, Intent data) {
+   if (requestCode == WEB_LINK_REQUEST_CODE &amp;&amp; resultCode == RESULT_OK) {
+     Uri weblinkUri = data.getData();
+     &lt;i&gt;...&lt;/i&gt;
+   }
+ }
+ &lt;/code&gt;&lt;/pre&gt;
+@param {Object {ContentResolver}} uri uri for the document to create a link to.
+@param {Object {Uri}} options Extra information for generating the link.
+@return {Object {android.content.IntentSender}} an intent sender to obtain the web link, or null if the document
+      is not linkable, or creating the intent sender failed.
+@see DocumentsProvider#createWebLinkIntent(String, Bundle)
+@see Intent#EXTRA_EMAIL
+*/
+createWebLinkIntent : function(  ) {},
+
+<span id='android-provider-DocumentsContract-method-openImageThumbnail'>/**Open the given image for thumbnail purposes, using any embedded EXIF
+</span> thumbnail if available, and providing orientation hints from the parent
+ image.
+@hide 
+*/
+openImageThumbnail : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

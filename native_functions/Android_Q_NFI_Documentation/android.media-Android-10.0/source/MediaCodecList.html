@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaCodecList'>/**@class android.media.MediaCodecList
+</span>@extends java.lang.Object
+
+ Allows you to enumerate available codecs, each specified as a {@link android.media.MediaCodecInfo} object,
+ find a codec supporting a given format and query the capabilities
+ of a given codec.
+ &lt;p&gt;See {@link android.media.MediaCodecInfo} for sample usage.
+*/
+var MediaCodecList = {
+
+<span id='android-media-MediaCodecList-property-REGULAR_CODECS'>/** Use in {@link #MediaCodecList} to enumerate only codecs that are suitable
+</span> for regular (buffer-to-buffer) decoding or encoding.
+
+ &lt;em&gt;NOTE:&lt;/em&gt; These are the codecs that are returned prior to API 21,
+ using the now deprecated static methods.
+*/
+REGULAR_CODECS : &quot;0&quot;,
+<span id='android-media-MediaCodecList-property-ALL_CODECS'>/** Use in {@link #MediaCodecList} to enumerate all codecs, even ones that are
+</span> not suitable for regular (buffer-to-buffer) decoding or encoding.  These
+ include codecs, for example, that only work with special input or output
+ surfaces, such as secure-only or tunneled-only codecs.
+
+ @see MediaCodecInfo.CodecCapabilities#isFormatSupported
+ @see MediaCodecInfo.CodecCapabilities#FEATURE_SecurePlayback
+ @see MediaCodecInfo.CodecCapabilities#FEATURE_TunneledPlayback
+*/
+ALL_CODECS : &quot;1&quot;,
+<span id='android-media-MediaCodecList-method-getCodecCount'>/**Count the number of available (regular) codecs.
+</span>@deprecated Use {@link #getCodecInfos} instead.
+@see #REGULAR_CODECS
+*/
+getCodecCount : function(  ) {},
+
+<span id='android-media-MediaCodecList-method-getCodecInfoAt'>/**Return the {@link android.media.MediaCodecInfo} object for the codec at
+</span> the given {@code index} in the regular list.
+@deprecated Use {@link #getCodecInfos} instead.
+@see #REGULAR_CODECS
+*/
+getCodecInfoAt : function(  ) {},
+
+<span id='android-media-MediaCodecList-method-getInfoFor'>/**
+</span>@hide 
+*/
+getInfoFor : function(  ) {},
+
+<span id='android-media-MediaCodecList-method-getCodecInfos'>/**Returns the list of {@link android.media.MediaCodecInfo} objects for the list
+</span> of media-codecs.
+*/
+getCodecInfos : function(  ) {},
+
+<span id='android-media-MediaCodecList-method-findDecoderForFormat'>/**Find a decoder supporting a given {@link android.media.MediaFormat} in the list
+</span> of media-codecs.
+
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; On {@link android.os.Build.VERSION_CODES#LOLLIPOP},
+ {@code format} must not contain a {@linkplain android.media.MediaFormat#KEY_FRAME_RATE
+ frame rate}. Use
+ &lt;code class=prettyprint&gt;format.setString(MediaFormat.KEY_FRAME_RATE, null)&lt;/code&gt;
+ to clear any existing frame rate setting in the format.
+@param {Object {MediaFormat}} format A decoder media format with optional feature directives.
+@param format A decoder media format with optional feature directives.
+@throws IllegalArgumentException if format is not a valid media format.
+@throws NullPointerException if format is null.
+@return {String} the name of a decoder that supports the given format and feature
+         requests, or {@code null} if no such codec has been found.
+*/
+findDecoderForFormat : function(  ) {},
+
+<span id='android-media-MediaCodecList-method-findEncoderForFormat'>/**Find an encoder supporting a given {@link android.media.MediaFormat} in the list
+</span> of media-codecs.
+
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; On {@link android.os.Build.VERSION_CODES#LOLLIPOP},
+ {@code format} must not contain a {@linkplain android.media.MediaFormat#KEY_FRAME_RATE
+ frame rate}. Use
+ &lt;code class=prettyprint&gt;format.setString(MediaFormat.KEY_FRAME_RATE, null)&lt;/code&gt;
+ to clear any existing frame rate setting in the format.
+@param {Object {MediaFormat}} format An encoder media format with optional feature directives.
+@param format An encoder media format with optional feature directives.
+@throws IllegalArgumentException if format is not a valid media format.
+@throws NullPointerException if format is null.
+@return {String} the name of an encoder that supports the given format and feature
+         requests, or {@code null} if no such codec has been found.
+*/
+findEncoderForFormat : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-TrafficStats'>/**@class android.net.TrafficStats
+</span>@extends java.lang.Object
+
+ Class that provides network traffic statistics. These statistics include
+ bytes transmitted and received and network packets transmitted and received,
+ over all interfaces, over the mobile interface, and on a per-UID basis.
+ &lt;p&gt;
+ These statistics may not be available on all platforms. If the statistics are
+ not supported by this device, {@link #UNSUPPORTED} will be returned.
+ &lt;p&gt;
+ Note that the statistics returned by this class reset and start from zero
+ after every reboot. To access more robust historical network statistics data,
+ use {@link android.net.NetworkStatsManager} instead.
+*/
+var TrafficStats = {
+
+<span id='android-net-TrafficStats-property-UNSUPPORTED'>/** The return value to indicate that the device does not support the statistic.
+</span>*/
+UNSUPPORTED : &quot;-1&quot;,
+<span id='android-net-TrafficStats-property-KB_IN_BYTES'>/**@hide @deprecated use {@link DataUnit} instead to clarify SI-vs-IEC */
+</span>KB_IN_BYTES : &quot;1024&quot;,
+<span id='android-net-TrafficStats-property-MB_IN_BYTES'>/**@hide @deprecated use {@link DataUnit} instead to clarify SI-vs-IEC */
+</span>MB_IN_BYTES : &quot;1048576&quot;,
+<span id='android-net-TrafficStats-property-GB_IN_BYTES'>/**@hide @deprecated use {@link DataUnit} instead to clarify SI-vs-IEC */
+</span>GB_IN_BYTES : &quot;1073741824&quot;,
+<span id='android-net-TrafficStats-property-TB_IN_BYTES'>/**@hide @deprecated use {@link DataUnit} instead to clarify SI-vs-IEC */
+</span>TB_IN_BYTES : &quot;1099511627776&quot;,
+<span id='android-net-TrafficStats-property-PB_IN_BYTES'>/**@hide @deprecated use {@link DataUnit} instead to clarify SI-vs-IEC */
+</span>PB_IN_BYTES : &quot;1125899906842624&quot;,
+<span id='android-net-TrafficStats-property-UID_REMOVED'>/** Special UID value used when collecting {@link android.net.NetworkStatsHistory} for
+</span> removed applications.
+
+ @hide
+*/
+UID_REMOVED : &quot;-4&quot;,
+<span id='android-net-TrafficStats-property-UID_TETHERING'>/** Special UID value used when collecting {@link android.net.NetworkStatsHistory} for
+</span> tethering traffic.
+
+ @hide
+*/
+UID_TETHERING : &quot;-5&quot;,
+<span id='android-net-TrafficStats-property-TAG_NETWORK_STACK_RANGE_START'>/**@hide */
+</span>TAG_NETWORK_STACK_RANGE_START : &quot;-768&quot;,
+<span id='android-net-TrafficStats-property-TAG_NETWORK_STACK_RANGE_END'>/**@hide */
+</span>TAG_NETWORK_STACK_RANGE_END : &quot;-257&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_IMPERSONATION_RANGE_START'>/**@hide */
+</span>TAG_SYSTEM_IMPERSONATION_RANGE_START : &quot;-256&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_IMPERSONATION_RANGE_END'>/**@hide */
+</span>TAG_SYSTEM_IMPERSONATION_RANGE_END : &quot;-241&quot;,
+<span id='android-net-TrafficStats-property-TAG_NETWORK_STACK_IMPERSONATION_RANGE_START'>/**@hide */
+</span>TAG_NETWORK_STACK_IMPERSONATION_RANGE_START : &quot;-128&quot;,
+<span id='android-net-TrafficStats-property-TAG_NETWORK_STACK_IMPERSONATION_RANGE_END'>/**@hide */
+</span>TAG_NETWORK_STACK_IMPERSONATION_RANGE_END : &quot;-113&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_DOWNLOAD'>/** Default tag value for {@link DownloadManager} traffic.
+</span>
+ @hide
+*/
+TAG_SYSTEM_DOWNLOAD : &quot;-255&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_MEDIA'>/** Default tag value for {@link MediaPlayer} traffic.
+</span>
+ @hide
+*/
+TAG_SYSTEM_MEDIA : &quot;-254&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_BACKUP'>/** Default tag value for {@link BackupManager} backup traffic; that is,
+</span> traffic from the device to the storage backend.
+
+ @hide
+*/
+TAG_SYSTEM_BACKUP : &quot;-253&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_RESTORE'>/** Default tag value for {@link BackupManager} restore traffic; that is,
+</span> app data retrieved from the storage backend at install time.
+
+ @hide
+*/
+TAG_SYSTEM_RESTORE : &quot;-252&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_APP'>/** Default tag value for code (typically APKs) downloaded by an app store on
+</span> behalf of the app, such as updates.
+
+ @hide
+*/
+TAG_SYSTEM_APP : &quot;-251&quot;,
+<span id='android-net-TrafficStats-property-TAG_SYSTEM_PROBE'>/**@hide */
+</span>TAG_SYSTEM_PROBE : &quot;-190&quot;,
+<span id='android-net-TrafficStats-method-setThreadStatsTag'>/**Set active tag to use when accounting {@link Socket} traffic originating
+</span> from the current thread. Only one active tag per thread is supported.
+ &lt;p&gt;
+ Changes only take effect during subsequent calls to
+ {@link #tagSocket}(Socket).
+ &lt;p&gt;
+ Tags between {@code 0xFFFFFF00} and {@code 0xFFFFFFFF} are reserved and
+ used internally by system services like {@link DownloadManager} when
+ performing traffic on behalf of an application.
+@see #clearThreadStatsTag()
+*/
+setThreadStatsTag : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getAndSetThreadStatsTag'>/**Set active tag to use when accounting {@link Socket} traffic originating
+</span> from the current thread. Only one active tag per thread is supported.
+ &lt;p&gt;
+ Changes only take effect during subsequent calls to
+ {@link #tagSocket}(Socket).
+ &lt;p&gt;
+ Tags between {@code 0xFFFFFF00} and {@code 0xFFFFFFFF} are reserved and
+ used internally by system services like {@link DownloadManager} when
+ performing traffic on behalf of an application.
+@return {Number} the current tag for the calling thread, which can be used to
+         restore any existing values after a nested operation is finished
+*/
+getAndSetThreadStatsTag : function(  ) {},
+
+<span id='android-net-TrafficStats-method-setThreadStatsTagBackup'>/**Set active tag to use when accounting {@link Socket} traffic originating
+</span> from the current thread. The tag used internally is well-defined to
+ distinguish all backup-related traffic.
+@hide 
+*/
+setThreadStatsTagBackup : function(  ) {},
+
+<span id='android-net-TrafficStats-method-setThreadStatsTagRestore'>/**Set active tag to use when accounting {@link Socket} traffic originating
+</span> from the current thread. The tag used internally is well-defined to
+ distinguish all restore-related traffic.
+@hide 
+*/
+setThreadStatsTagRestore : function(  ) {},
+
+<span id='android-net-TrafficStats-method-setThreadStatsTagApp'>/**Set active tag to use when accounting {@link Socket} traffic originating
+</span> from the current thread. The tag used internally is well-defined to
+ distinguish all code (typically APKs) downloaded by an app store on
+ behalf of the app, such as updates.
+@hide 
+*/
+setThreadStatsTagApp : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getThreadStatsTag'>/**Get the active tag used when accounting {@link Socket} traffic originating
+</span> from the current thread. Only one active tag per thread is supported.
+ {@link #tagSocket}(Socket).
+@see #setThreadStatsTag(int)
+*/
+getThreadStatsTag : function(  ) {},
+
+<span id='android-net-TrafficStats-method-clearThreadStatsTag'>/**Clear any active tag set to account {@link Socket} traffic originating
+</span> from the current thread.
+@see #setThreadStatsTag(int)
+*/
+clearThreadStatsTag : function(  ) {},
+
+<span id='android-net-TrafficStats-method-setThreadStatsUid'>/**Set specific UID to use when accounting {@link Socket} traffic
+</span> originating from the current thread. Designed for use when performing an
+ operation on behalf of another application, or when another application
+ is performing operations on your behalf.
+ &lt;p&gt;
+ Any app can &lt;em&gt;accept&lt;/em&gt; blame for traffic performed on a socket
+ originally created by another app by calling this method with the
+ {@link android.system.Os#getuid()} value. However, only apps holding the
+ {@code android.Manifest.permission#UPDATE_DEVICE_STATS} permission may
+ &lt;em&gt;assign&lt;/em&gt; blame to another UIDs.
+ &lt;p&gt;
+ Changes only take effect during subsequent calls to
+ {@link #tagSocket}(Socket).
+*/
+setThreadStatsUid : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getThreadStatsUid'>/**Get the active UID used when accounting {@link Socket} traffic originating
+</span> from the current thread. Only one active tag per thread is supported.
+ {@link #tagSocket}(Socket).
+@see #setThreadStatsUid(int)
+*/
+getThreadStatsUid : function(  ) {},
+
+<span id='android-net-TrafficStats-method-setThreadStatsUidSelf'>/**Set specific UID to use when accounting {@link Socket} traffic
+</span> originating from the current thread as the calling UID. Designed for use
+ when another application is performing operations on your behalf.
+ &lt;p&gt;
+ Changes only take effect during subsequent calls to
+ {@link #tagSocket}(Socket).
+@removed 
+@deprecated use {@link #setThreadStatsUid(int)} instead.
+*/
+setThreadStatsUidSelf : function(  ) {},
+
+<span id='android-net-TrafficStats-method-clearThreadStatsUid'>/**Clear any active UID set to account {@link Socket} traffic originating
+</span> from the current thread.
+@see #setThreadStatsUid(int)
+*/
+clearThreadStatsUid : function(  ) {},
+
+<span id='android-net-TrafficStats-method-tagSocket'>/**Tag the given {@link Socket} with any statistics parameters active for
+</span> the current thread. Subsequent calls always replace any existing
+ parameters. When finished, call {@link #untagSocket}(Socket) to remove
+ statistics parameters.
+@see #setThreadStatsTag(int)
+*/
+tagSocket : function(  ) {},
+
+<span id='android-net-TrafficStats-method-untagSocket'>/**Remove any statistics parameters from the given {@link Socket}.
+</span> &lt;p&gt;
+ In Android 8.1 (API level 27) and lower, a socket is automatically
+ untagged when it's sent to another process using binder IPC with a
+ {@code ParcelFileDescriptor} container. In Android 9.0 (API level 28)
+ and higher, the socket tag is kept when the socket is sent to another
+ process using binder IPC. You can mimic the previous behavior by
+ calling {@code untagSocket()} before sending the socket to another
+ process.
+*/
+untagSocket : function(  ) {},
+
+<span id='android-net-TrafficStats-method-tagDatagramSocket'>/**Tag the given {@link DatagramSocket} with any statistics parameters
+</span> active for the current thread. Subsequent calls always replace any
+ existing parameters. When finished, call
+ {@link #untagDatagramSocket}(DatagramSocket) to remove statistics
+ parameters.
+@see #setThreadStatsTag(int)
+*/
+tagDatagramSocket : function(  ) {},
+
+<span id='android-net-TrafficStats-method-untagDatagramSocket'>/**Remove any statistics parameters from the given {@link DatagramSocket}.
+</span>*/
+untagDatagramSocket : function(  ) {},
+
+<span id='android-net-TrafficStats-method-tagFileDescriptor'>/**Tag the given {@link FileDescriptor} socket with any statistics
+</span> parameters active for the current thread. Subsequent calls always replace
+ any existing parameters. When finished, call
+ {@link #untagFileDescriptor}(FileDescriptor) to remove statistics
+ parameters.
+@see #setThreadStatsTag(int)
+*/
+tagFileDescriptor : function(  ) {},
+
+<span id='android-net-TrafficStats-method-untagFileDescriptor'>/**Remove any statistics parameters from the given {@link FileDescriptor}
+</span> socket.
+*/
+untagFileDescriptor : function(  ) {},
+
+<span id='android-net-TrafficStats-method-startDataProfiling'>/**Start profiling data usage for current UID. Only one profiling session
+</span> can be active at a time.
+@hide 
+*/
+startDataProfiling : function(  ) {},
+
+<span id='android-net-TrafficStats-method-stopDataProfiling'>/**Stop profiling data usage for current UID.
+</span>@return {Object {android.net.NetworkStats}} Detailed {@link NetworkStats} of data that occurred since last
+         {@link #startDataProfiling(Context)} call.
+@hide 
+*/
+stopDataProfiling : function(  ) {},
+
+<span id='android-net-TrafficStats-method-incrementOperationCount'>/**Increment count of network operations performed under the accounting tag
+</span> currently active on the calling thread. This can be used to derive
+ bytes-per-operation.
+@param {Number} operationCount Number of operations to increment count by.
+*/
+incrementOperationCount : function(  ) {},
+
+<span id='android-net-TrafficStats-method-incrementOperationCount'>/**Increment count of network operations performed under the given
+</span> accounting tag. This can be used to derive bytes-per-operation.
+@param {Number} tag Accounting tag used in {@link #setThreadStatsTag(int)}.
+@param {Number} operationCount Number of operations to increment count by.
+*/
+incrementOperationCount : function(  ) {},
+
+<span id='android-net-TrafficStats-method-closeQuietly'>/**{@hide}
+</span>*/
+closeQuietly : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getMobileTxPackets'>/**Return number of packets transmitted across mobile networks since device
+</span> boot. Counts packets across all mobile network interfaces, and always
+ increases monotonically since device boot. Statistics are measured at the
+ network layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getMobileTxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getMobileRxPackets'>/**Return number of packets received across mobile networks since device
+</span> boot. Counts packets across all mobile network interfaces, and always
+ increases monotonically since device boot. Statistics are measured at the
+ network layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getMobileRxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getMobileTxBytes'>/**Return number of bytes transmitted across mobile networks since device
+</span> boot. Counts packets across all mobile network interfaces, and always
+ increases monotonically since device boot. Statistics are measured at the
+ network layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getMobileTxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getMobileRxBytes'>/**Return number of bytes received across mobile networks since device boot.
+</span> Counts packets across all mobile network interfaces, and always increases
+ monotonically since device boot. Statistics are measured at the network
+ layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getMobileRxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getMobileTcpRxPackets'>/**{@hide}
+</span>*/
+getMobileTcpRxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getMobileTcpTxPackets'>/**{@hide}
+</span>*/
+getMobileTcpTxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getTxPackets'>/**{@hide}
+</span>*/
+getTxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getRxPackets'>/**{@hide}
+</span>*/
+getRxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getTxBytes'>/**{@hide}
+</span>*/
+getTxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getRxBytes'>/**{@hide}
+</span>*/
+getRxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getLoopbackTxPackets'>/**{@hide}
+</span>*/
+getLoopbackTxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getLoopbackRxPackets'>/**{@hide}
+</span>*/
+getLoopbackRxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getLoopbackTxBytes'>/**{@hide}
+</span>*/
+getLoopbackTxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getLoopbackRxBytes'>/**{@hide}
+</span>*/
+getLoopbackRxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getTotalTxPackets'>/**Return number of packets transmitted since device boot. Counts packets
+</span> across all network interfaces, and always increases monotonically since
+ device boot. Statistics are measured at the network layer, so they
+ include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getTotalTxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getTotalRxPackets'>/**Return number of packets received since device boot. Counts packets
+</span> across all network interfaces, and always increases monotonically since
+ device boot. Statistics are measured at the network layer, so they
+ include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getTotalRxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getTotalTxBytes'>/**Return number of bytes transmitted since device boot. Counts packets
+</span> across all network interfaces, and always increases monotonically since
+ device boot. Statistics are measured at the network layer, so they
+ include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getTotalTxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getTotalRxBytes'>/**Return number of bytes received since device boot. Counts packets across
+</span> all network interfaces, and always increases monotonically since device
+ boot. Statistics are measured at the network layer, so they include both
+ TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+*/
+getTotalRxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidTxBytes'>/**Return number of bytes transmitted by the given UID since device boot.
+</span> Counts packets across all network interfaces, and always increases
+ monotonically since device boot. Statistics are measured at the network
+ layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may
+ return {@link #UNSUPPORTED} on devices where statistics aren't available.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#N} this will only
+ report traffic statistics for the calling UID. It will return
+ {@link #UNSUPPORTED} for all other UIDs for privacy reasons. To access
+ historical network statistics belonging to other UIDs, use
+ {@link android.net.NetworkStatsManager}.
+@see android.os.Process#myUid()
+@see android.content.pm.ApplicationInfo#uid
+*/
+getUidTxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidRxBytes'>/**Return number of bytes received by the given UID since device boot.
+</span> Counts packets across all network interfaces, and always increases
+ monotonically since device boot. Statistics are measured at the network
+ layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may return
+ {@link #UNSUPPORTED} on devices where statistics aren't available.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#N} this will only
+ report traffic statistics for the calling UID. It will return
+ {@link #UNSUPPORTED} for all other UIDs for privacy reasons. To access
+ historical network statistics belonging to other UIDs, use
+ {@link android.net.NetworkStatsManager}.
+@see android.os.Process#myUid()
+@see android.content.pm.ApplicationInfo#uid
+*/
+getUidRxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidTxPackets'>/**Return number of packets transmitted by the given UID since device boot.
+</span> Counts packets across all network interfaces, and always increases
+ monotonically since device boot. Statistics are measured at the network
+ layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may return
+ {@link #UNSUPPORTED} on devices where statistics aren't available.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#N} this will only
+ report traffic statistics for the calling UID. It will return
+ {@link #UNSUPPORTED} for all other UIDs for privacy reasons. To access
+ historical network statistics belonging to other UIDs, use
+ {@link android.net.NetworkStatsManager}.
+@see android.os.Process#myUid()
+@see android.content.pm.ApplicationInfo#uid
+*/
+getUidTxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidRxPackets'>/**Return number of packets received by the given UID since device boot.
+</span> Counts packets across all network interfaces, and always increases
+ monotonically since device boot. Statistics are measured at the network
+ layer, so they include both TCP and UDP usage.
+ &lt;p&gt;
+ Before {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}, this may return
+ {@link #UNSUPPORTED} on devices where statistics aren't available.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#N} this will only
+ report traffic statistics for the calling UID. It will return
+ {@link #UNSUPPORTED} for all other UIDs for privacy reasons. To access
+ historical network statistics belonging to other UIDs, use
+ {@link android.net.NetworkStatsManager}.
+@see android.os.Process#myUid()
+@see android.content.pm.ApplicationInfo#uid
+*/
+getUidRxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidTcpTxBytes'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidTxBytes(int)
+*/
+getUidTcpTxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidTcpRxBytes'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidRxBytes(int)
+*/
+getUidTcpRxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidUdpTxBytes'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidTxBytes(int)
+*/
+getUidUdpTxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidUdpRxBytes'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidRxBytes(int)
+*/
+getUidUdpRxBytes : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidTcpTxSegments'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidTxPackets(int)
+*/
+getUidTcpTxSegments : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidTcpRxSegments'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidRxPackets(int)
+*/
+getUidTcpRxSegments : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidUdpTxPackets'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidTxPackets(int)
+*/
+getUidUdpTxPackets : function(  ) {},
+
+<span id='android-net-TrafficStats-method-getUidUdpRxPackets'>/**
+</span>@deprecated Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+@see #getUidRxPackets(int)
+*/
+getUidUdpRxPackets : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

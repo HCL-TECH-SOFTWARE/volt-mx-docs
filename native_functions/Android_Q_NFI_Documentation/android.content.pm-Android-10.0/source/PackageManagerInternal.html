@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageManagerInternal'>/**@class android.content.pm.PackageManagerInternal
+</span>@extends java.lang.Object
+
+ Package manager local system service interface.
+
+ @hide Only for use within the system server.
+*/
+var PackageManagerInternal = {
+
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_SYSTEM'>/***/
+</span>PACKAGE_SYSTEM : &quot;0&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_SETUP_WIZARD'>/***/
+</span>PACKAGE_SETUP_WIZARD : &quot;1&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_INSTALLER'>/***/
+</span>PACKAGE_INSTALLER : &quot;2&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_VERIFIER'>/***/
+</span>PACKAGE_VERIFIER : &quot;3&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_BROWSER'>/***/
+</span>PACKAGE_BROWSER : &quot;4&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_SYSTEM_TEXT_CLASSIFIER'>/***/
+</span>PACKAGE_SYSTEM_TEXT_CLASSIFIER : &quot;5&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_PERMISSION_CONTROLLER'>/***/
+</span>PACKAGE_PERMISSION_CONTROLLER : &quot;6&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_WELLBEING'>/***/
+</span>PACKAGE_WELLBEING : &quot;7&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_DOCUMENTER'>/***/
+</span>PACKAGE_DOCUMENTER : &quot;8&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_CONFIGURATOR'>/***/
+</span>PACKAGE_CONFIGURATOR : &quot;9&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_INCIDENT_REPORT_APPROVER'>/***/
+</span>PACKAGE_INCIDENT_REPORT_APPROVER : &quot;10&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-PACKAGE_APP_PREDICTOR'>/***/
+</span>PACKAGE_APP_PREDICTOR : &quot;11&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-EXTRA_ENABLE_ROLLBACK_TOKEN'>/** Extra field name for the token of a request to enable rollback for a
+</span> package.
+*/
+EXTRA_ENABLE_ROLLBACK_TOKEN : &quot;android.content.pm.extra.ENABLE_ROLLBACK_TOKEN&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-EXTRA_ENABLE_ROLLBACK_INSTALL_FLAGS'>/** Extra field name for the installFlags of a request to enable rollback
+</span> for a package.
+*/
+EXTRA_ENABLE_ROLLBACK_INSTALL_FLAGS : &quot;android.content.pm.extra.ENABLE_ROLLBACK_INSTALL_FLAGS&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-EXTRA_ENABLE_ROLLBACK_INSTALLED_USERS'>/** Extra field name for the set of installed users for a given rollback package.
+</span>*/
+EXTRA_ENABLE_ROLLBACK_INSTALLED_USERS : &quot;android.content.pm.extra.ENABLE_ROLLBACK_INSTALLED_USERS&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-EXTRA_ENABLE_ROLLBACK_USER'>/** Extra field name for the user id an install is associated with when
+</span> enabling rollback.
+*/
+EXTRA_ENABLE_ROLLBACK_USER : &quot;android.content.pm.extra.ENABLE_ROLLBACK_USER&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-ENABLE_ROLLBACK_SUCCEEDED'>/** Used as the {@code enableRollbackCode} argument for
+</span> {@link android.content.pm.PackageManagerInternal#setEnableRollbackCode} to indicate that
+ enabling rollback succeeded.
+*/
+ENABLE_ROLLBACK_SUCCEEDED : &quot;1&quot;,
+<span id='android-content-pm-PackageManagerInternal-property-ENABLE_ROLLBACK_FAILED'>/** Used as the {@code enableRollbackCode} argument for
+</span> {@link android.content.pm.PackageManagerInternal#setEnableRollbackCode} to indicate that
+ enabling rollback failed.
+*/
+ENABLE_ROLLBACK_FAILED : &quot;-1&quot;,
+<span id='android-content-pm-PackageManagerInternal-method-setLocationPackagesProvider'>/**Sets the location provider packages provider.
+</span>@param {Object {PackageManagerInternal.PackagesProvider}} provider The packages provider.
+*/
+setLocationPackagesProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setLocationExtraPackagesProvider'>/**Set the location extra packages provider.
+</span>@param {Object {PackageManagerInternal.PackagesProvider}} provider The packages provider.
+*/
+setLocationExtraPackagesProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setVoiceInteractionPackagesProvider'>/**Sets the voice interaction packages provider.
+</span>@param {Object {PackageManagerInternal.PackagesProvider}} provider The packages provider.
+*/
+setVoiceInteractionPackagesProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setUseOpenWifiAppPackagesProvider'>/**Sets the Use Open Wifi packages provider.
+</span>@param {Object {PackageManagerInternal.PackagesProvider}} provider The packages provider.
+*/
+setUseOpenWifiAppPackagesProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setSyncAdapterPackagesprovider'>/**Sets the sync adapter packages provider.
+</span>@param {Object {PackageManagerInternal.SyncAdapterPackagesProvider}} provider The provider.
+*/
+setSyncAdapterPackagesprovider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-onDefaultSmsAppChanged'>/**Called when the package for the default SMS handler changed
+</span>@param {String} packageName the new sms package
+@param {Number} userId user for which the change was made
+*/
+onDefaultSmsAppChanged : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-onDefaultSimCallManagerAppChanged'>/**Called when the package for the default sim call manager changed
+</span>@param {String} packageName the new sms package
+@param {Number} userId user for which the change was made
+*/
+onDefaultSimCallManagerAppChanged : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-grantDefaultPermissionsToDefaultUseOpenWifiApp'>/**Requests granting of the default permissions to the current default Use Open Wifi app.
+</span>@param {String} packageName The default use open wifi package name.
+@param {Number} userId The user for which to grant the permissions.
+*/
+grantDefaultPermissionsToDefaultUseOpenWifiApp : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setKeepUninstalledPackages'>/**Sets a list of apps to keep in PM's internal data structures and as APKs even if no user has
+</span> currently installed it. The apps are not preloaded.
+@param {Object {java.util.List}} packageList List of package names to keep cached.
+*/
+setKeepUninstalledPackages : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isPermissionsReviewRequired'>/**Gets whether some of the permissions used by this package require a user
+</span> review before any of the app components can run.
+@param {String} packageName The package name for which to check.
+@param {Number} userId The user under which to check.
+@return {Boolean} True a permissions review is required.
+*/
+isPermissionsReviewRequired : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPackageInfo'>/**Retrieve all of the information we know about a particular package/application.
+</span>@param {String} filterCallingUid The results will be filtered in the context of this UID instead
+ of the calling UID.
+@see PackageManager#getPackageInfo(String, int)
+*/
+getPackageInfo : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getInstalledApplications'>/**Return a List of all application packages that are installed on the
+</span> device, for a specific user. If flag GET_UNINSTALLED_PACKAGES has been
+ set, a list of all applications including those deleted with
+ {@code DONT_DELETE_DATA} (partially installed apps with data directory)
+ will be returned.
+@param {Number} flags Additional option flags to modify the data returned.
+@param {Number} userId The user for whom the installed applications are to be
+            listed
+@param {Number} callingUid The uid of the original caller app
+@return {Object {java.util.List}} A List of ApplicationInfo objects, one for each installed
+         application. In the unlikely case there are no installed
+         packages, an empty list is returned. If flag
+         {@code MATCH_UNINSTALLED_PACKAGES} is set, the application
+         information is retrieved from the list of uninstalled
+         applications (which includes installed applications as well as
+         applications with data directory i.e. applications which had been
+         deleted with {@code DONT_DELETE_DATA} flag set).
+*/
+getInstalledApplications : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getSuspendedPackageLauncherExtras'>/**Retrieve launcher extras for a suspended package provided to the system in
+</span> {@link android.content.pm.PackageParser.PackageManager#setandroid.content.pm.PackageParser.PackagesSuspended(String[], boolean, PersistableBundle,
+ PersistableBundle, String)}.
+@param {String} packageName The package for which to return launcher extras.
+@param {Number} userId The user for which to check.
+@return {Object {android.os.Bundle}} The launcher extras.
+@see PackageManager#setPackagesSuspended(String[], boolean, PersistableBundle,
+ PersistableBundle, String)
+@see PackageManager#isPackageSuspended()
+*/
+getSuspendedPackageLauncherExtras : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isPackageSuspended'>/**Internal api to query the suspended state of a package.
+</span>@param {String} packageName The package to check.
+@param {Number} userId The user id to check for.
+@return {Boolean} {@code true} if the package is suspended, {@code false} otherwise.
+@see PackageManager#isPackageSuspended(String)
+*/
+isPackageSuspended : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getSuspendingPackage'>/**Get the name of the package that suspended the given package. Packages can be suspended by
+</span> device administrators or apps holding {@link android.Manifest.permission#MANAGE_USERS} or
+ {@link android.Manifest.permission#SUSPEND_APPS}.
+@param {String} suspendedPackage The package that has been suspended.
+@param {Number} userId The user for which to check.
+@return {String} Name of the package that suspended the given package. Returns {@code null} if the
+ given package is not currently suspended and the platform package name - i.e.
+ {@code &quot;android&quot;} - if the package was suspended by a device admin.
+*/
+getSuspendingPackage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getSuspendedDialogInfo'>/**Get the information describing the dialog to be shown to the user when they try to launch a
+</span> suspended application.
+@param {String} suspendedPackage The package that has been suspended.
+@param {Number} userId The user for which to check.
+@return {Object {android.content.pm.SuspendDialogInfo}} A {@link SuspendDialogInfo} object describing the dialog to be shown.
+*/
+getSuspendedDialogInfo : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getDistractingPackageRestrictions'>/**Gets any distraction flags set via
+</span> {@link android.content.pm.PackageParser.PackageManager#setDistractingandroid.content.pm.PackageParser.PackageRestrictions(String[], int)}
+@param {String} packageName
+@param {Number} userId
+@return {Number} A bitwise OR of any of the {@link PackageManager.DistractionRestriction}
+*/
+getDistractingPackageRestrictions : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPackageUid'>/**Do a straight uid lookup for the given package/application in the given user.
+</span>@see PackageManager#getPackageUidAsUser(String, int, int)
+@return {Number} The app's uid, or &lt; 0 if the package was not found in that user
+*/
+getPackageUid : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getApplicationInfo'>/**Retrieve all of the information we know about a particular package/application.
+</span>@param {String} filterCallingUid The results will be filtered in the context of this UID instead
+ of the calling UID.
+@see PackageManager#getApplicationInfo(String, int)
+*/
+getApplicationInfo : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getActivityInfo'>/**Retrieve all of the information we know about a particular activity class.
+</span>@param {Object {ComponentName}} filterCallingUid The results will be filtered in the context of this UID instead
+ of the calling UID.
+@see PackageManager#getActivityInfo(ComponentName, int)
+*/
+getActivityInfo : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-queryIntentActivities'>/**Retrieve all activities that can be performed for the given intent.
+</span>@param {Object {Intent}} filterCallingUid The results will be filtered in the context of this UID instead
+ of the calling UID.
+@see PackageManager#queryIntentActivities(Intent, int)
+*/
+queryIntentActivities : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-queryIntentServices'>/**Retrieve all services that can be performed for the given intent.
+</span>@see PackageManager#queryIntentServices(Intent, int)
+*/
+queryIntentServices : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getHomeActivitiesAsUser'>/**Interface to {@link com.android.server.pm.PackageManagerService#getHomeActivitiesAsUser}.
+</span>*/
+getHomeActivitiesAsUser : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getDefaultHomeActivity'>/**
+</span>@return {Object {android.content.ComponentName}} The default home activity component name.
+*/
+getDefaultHomeActivity : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setDeviceAndProfileOwnerPackages'>/**Called by DeviceOwnerManagerService to set the package names of device owner and profile
+</span> owners.
+*/
+setDeviceAndProfileOwnerPackages : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isPackageDataProtected'>/**Returns {@code true} if a given package can't be wiped. Otherwise, returns {@code false}.
+</span>*/
+isPackageDataProtected : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isPackageStateProtected'>/**Returns {@code true} if a given package's state is protected, e.g. it cannot be force
+</span> stopped, suspended, disabled or hidden. Otherwise, returns {@code false}.
+*/
+isPackageStateProtected : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isPackageEphemeral'>/**Returns {@code true} if a given package is installed as ephemeral. Otherwise, returns
+</span> {@code false}.
+*/
+isPackageEphemeral : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-wasPackageEverLaunched'>/**Gets whether the package was ever launched.
+</span>@param {String} packageName The package name.
+@param {Number} userId The user for which to check.
+@return {Boolean} Whether was launched.
+@throws IllegalArgumentException if the package is not found
+*/
+wasPackageEverLaunched : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-grantRuntimePermission'>/**Grants a runtime permission
+</span>@param {String} packageName The package name.
+@param {String} name The name of the permission.
+@param {Number} userId The userId for which to grant the permission.
+@param {Boolean} overridePolicy If true, grant this permission even if it is fixed by policy.
+*/
+grantRuntimePermission : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-revokeRuntimePermission'>/**Revokes a runtime permission
+</span>@param {String} packageName The package name.
+@param {String} name The name of the permission.
+@param {Number} userId The userId for which to revoke the permission.
+@param {Boolean} overridePolicy If true, revoke this permission even if it is fixed by policy.
+*/
+revokeRuntimePermission : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getNameForUid'>/**Retrieve the official name associated with a uid. This name is
+</span> guaranteed to never change, though it is possible for the underlying
+ uid to be changed. That is, if you are storing information about
+ uids in persistent storage, you should use the string returned
+ by this function instead of the raw uid.
+@param {Number} uid The uid for which you would like to retrieve a name.
+@return {String} Returns a unique name for the given uid, or null if the
+ uid is not currently assigned.
+*/
+getNameForUid : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-requestInstantAppResolutionPhaseTwo'>/**Request to perform the second phase of ephemeral resolution.
+</span>@param {Object {AuxiliaryResolveInfo}} responseObj The response of the first phase of ephemeral resolution
+@param {Object {Intent}} origIntent The original intent that triggered ephemeral resolution
+@param {String} resolvedType The resolved type of the intent
+@param {String} callingPackage The name of the package requesting the ephemeral application
+@param {Object {Bundle}} verificationBundle Optional bundle to pass to the installer for additional
+ verification
+@param {Number} userId The ID of the user that triggered ephemeral resolution
+*/
+requestInstantAppResolutionPhaseTwo : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-grantEphemeralAccess'>/**Grants access to the package metadata for an ephemeral application.
+</span> &lt;p&gt;
+ When an ephemeral application explicitly tries to interact with a full
+ install application [via an activity, service or provider that has been
+ exposed using the {@code visibleToInstantApp} attribute], the normal
+ application must be able to see metadata about the connecting ephemeral
+ app. If the ephemeral application uses an implicit intent [ie action VIEW,
+ category BROWSABLE], it remains hidden from the launched activity.
+ &lt;p&gt;
+ If the {@code sourceUid} is not for an ephemeral app or {@code targetUid}
+ is not for a fully installed app, this method will be a no-op.
+@param {Number} userId the user
+@param {Object {Intent}} intent the intent that triggered the grant
+@param {Number} targetAppId The app ID of the fully installed application
+@param {Number} ephemeralAppId The app ID of the ephemeral application
+*/
+grantEphemeralAccess : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isInstantAppInstallerComponent'>/**
+</span>*/
+isInstantAppInstallerComponent : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-pruneInstantApps'>/**Prunes instant apps and state associated with uninstalled
+</span> instant apps according to the current platform policy.
+*/
+pruneInstantApps : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getSetupWizardPackageName'>/**
+</span>@return {String} The SetupWizard package name.
+*/
+getSetupWizardPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setExternalSourcesPolicy'>/**
+</span>*/
+setExternalSourcesPolicy : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isPackagePersistent'>/**Return true if the given package is a persistent app process.
+</span>*/
+isPackagePersistent : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isLegacySystemApp'>/**Returns whether or not the given package represents a legacy system application released
+</span> prior to runtime permissions.
+*/
+isLegacySystemApp : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getOverlayPackages'>/**Get all overlay packages for a user.
+</span>@param {Number} userId The user for which to get the overlays.
+@return {Object {java.util.List}} A list of overlay packages. An empty list is returned if the
+         user has no installed overlay packages.
+*/
+getOverlayPackages : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getTargetPackageNames'>/**Get the names of all target packages for a user.
+</span>@param {Number} userId The user for which to get the package names.
+@return {Object {java.util.List}} A list of target package names. This list includes the &quot;android&quot; package.
+*/
+getTargetPackageNames : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setEnabledOverlayPackages'>/**Set which overlay to use for a package.
+</span>@param {Number} userId The user for which to update the overlays.
+@param {String} targetPackageName The package name of the package for which to update the overlays.
+@param {Object {java.util.List}} overlayPackageNames The complete list of overlay packages that should be enabled for
+                            the target. Previously enabled overlays not specified in the list
+                            will be disabled. Pass in null or an empty list to disable
+                            all overlays. The order of the items is significant if several
+                            overlays modify the same resource.
+@return {Boolean} true if all packages names were known by the package manager, false otherwise
+*/
+setEnabledOverlayPackages : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-resolveIntent'>/**Resolves an activity intent, allowing instant apps to be resolved.
+</span>*/
+resolveIntent : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-resolveService'>/**Resolves a service intent, allowing instant apps to be resolved.
+</span>*/
+resolveService : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-resolveContentProvider'>/**Resolves a content provider intent.
+</span>*/
+resolveContentProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-addIsolatedUid'>/**Track the creator of a new isolated uid.
+</span>@param {Number} isolatedUid The newly created isolated uid.
+@param {Number} ownerUid The uid of the app that created the isolated process.
+*/
+addIsolatedUid : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-removeIsolatedUid'>/**Track removal of an isolated uid.
+</span>@param {Number} isolatedUid isolated uid that is no longer being used.
+*/
+removeIsolatedUid : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getUidTargetSdkVersion'>/**Return the taget SDK version for the app with the given UID.
+</span>*/
+getUidTargetSdkVersion : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPackageTargetSdkVersion'>/**Return the taget SDK version for the app with the given package name.
+</span>*/
+getPackageTargetSdkVersion : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-canAccessInstantApps'>/**Whether the binder caller can access instant apps.
+</span>*/
+canAccessInstantApps : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-canAccessComponent'>/**Whether the binder caller can access the given component.
+</span>*/
+canAccessComponent : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-hasInstantApplicationMetadata'>/**Returns {@code true} if a given package has instant application meta-data.
+</span> Otherwise, returns {@code false}. Meta-data is state (eg. cookie, app icon, etc)
+ associated with an instant app. It may be kept after the instant app has been uninstalled.
+*/
+hasInstantApplicationMetadata : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-notifyPackageUse'>/**Updates a package last used time.
+</span>*/
+notifyPackageUse : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPackage'>/**Returns a package object for the given package name.
+</span>*/
+getPackage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPackageList'>/**Returns a list without a change observer.
+</span>@see #getPackageList(PackageListObserver)
+*/
+getPackageList : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPackageList'>/**Returns the list of packages installed at the time of the method call.
+</span> &lt;p&gt;The given observer is notified when the list of installed packages
+ changes [eg. a package was installed or uninstalled]. It will not be
+ notified if a package is updated.
+ &lt;p&gt;The package list will not be updated automatically as packages are
+ installed / uninstalled. Any changes must be handled within the observer.
+*/
+getPackageList : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-removePackageListObserver'>/**Removes the observer.
+</span> &lt;p&gt;Generally not needed. {@link #getPackageList}(PackageListObserver) will automatically
+ remove the observer.
+ &lt;p&gt;Does nothing if the observer isn't currently registered.
+ &lt;p&gt;Observers are notified asynchronously and it's possible for an observer to be
+ invoked after its been removed.
+*/
+removePackageListObserver : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getDisabledSystemPackage'>/**Returns a package object for the disabled system package name.
+</span>*/
+getDisabledSystemPackage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getDisabledSystemPackageName'>/**Returns the package name for the disabled system package.
+</span>
+ This is equivalent to
+ {@link #getDisabledSystemPackage}(String).{@link android.content.pm.PackageParser.Package#packageName}
+*/
+getDisabledSystemPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isResolveActivityComponent'>/**Returns whether or not the component is the resolver activity.
+</span>*/
+isResolveActivityComponent : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getKnownPackageName'>/**Returns the package name for a known package.
+</span>*/
+getKnownPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isInstantApp'>/**Returns whether the package is an instant app.
+</span>*/
+isInstantApp : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getInstantAppPackageName'>/**Returns whether the package is an instant app.
+</span>*/
+getInstantAppPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-filterAppAccess'>/**Returns whether or not access to the application should be filtered.
+</span> &lt;p&gt;
+ Access may be limited based upon whether the calling or target applications
+ are instant applications.
+@see #canAccessInstantApps
+*/
+filterAppAccess : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPermissionFlagsTEMP'>/**Returns the flags for the given permission.
+</span>*/
+getPermissionFlagsTEMP : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-updatePermissionFlagsTEMP'>/**Updates the flags for the given permission.
+</span>*/
+updatePermissionFlagsTEMP : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isPlatformSigned'>/**Returns whether the given package was signed by the platform
+</span>*/
+isPlatformSigned : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isDataRestoreSafe'>/**Returns true if it's still safe to restore data backed up from this app's version
+</span> that was signed with restoringFromSigHash.
+*/
+isDataRestoreSafe : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isDataRestoreSafe'>/**Returns true if it's still safe to restore data backed up from this app's version
+</span> that was signed with restoringFromSig.
+*/
+isDataRestoreSafe : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-hasSignatureCapability'>/**Returns {@code true} if the the signing information for {@code clientUid} is sufficient
+</span> to gain access gated by {@code capability}.  This can happen if the two UIDs have the
+ same signing information, if the signing information {@code clientUid} indicates that
+ it has the signing certificate for {@code serverUid} in its signing history (if it was
+ previously signed by it), or if the signing certificate for {@code clientUid} is in the
+ signing history for {@code serverUid} and with the {@code capability} specified.
+*/
+hasSignatureCapability : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getCheckPermissionDelegate'>/**Get the delegate to influence permission checking.
+</span>@return {Object {android.content.pm.PackageManagerInternal.CheckPermissionDelegate}} The delegate instance or null to clear.
+*/
+getCheckPermissionDelegate : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setCheckPermissionDelegate'>/**Set a delegate to influence permission checking.
+</span>@param {Object {PackageManagerInternal.CheckPermissionDelegate}} delegate A delegate instance or null to clear.
+*/
+setCheckPermissionDelegate : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getAppsWithSharedUserIds'>/**Get appIds of all available apps which specified android:sharedUserId in the manifest.
+</span>@return {Object {android.util.SparseArray}} a SparseArray mapping from appId to it's sharedUserId.
+*/
+getAppsWithSharedUserIds : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getSharedUserIdForPackage'>/**Get the value of attribute android:sharedUserId for the given packageName if specified,
+</span> otherwise {@code null}.
+*/
+getSharedUserIdForPackage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getPackagesForSharedUserId'>/**Get all packages which specified the given sharedUserId as android:sharedUserId attribute
+</span> or an empty array if no package specified it.
+*/
+getPackagesForSharedUserId : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isOnlyCoreApps'>/**Return if device is currently in a &quot;core&quot; boot environment, typically
+</span> used to support full-disk encryption. Only apps marked with
+ {@code coreApp} attribute are available.
+*/
+isOnlyCoreApps : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-freeStorage'>/**Make a best-effort attempt to provide the requested free disk space by
+</span> deleting cached files.
+@throws IOException if the request was unable to be fulfilled.
+*/
+freeStorage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isEnabledAndMatches'>/**Returns {@code true} if the specified component is enabled and matches the given flags.
+</span>*/
+isEnabledAndMatches : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-userNeedsBadging'>/**Returns {@code true} if the given user requires extra badging for icons.
+</span>*/
+userNeedsBadging : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-forEachPackage'>/**Perform the given action for each package.
+</span> Note that packages lock will be held while performin the actions.
+@param {Object {java.util.function.Consumer}} actionLocked action to be performed
+*/
+forEachPackage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-forEachInstalledPackage'>/**Perform the given action for each installed package for a user.
+</span> Note that packages lock will be held while performin the actions.
+*/
+forEachInstalledPackage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getEnabledComponents'>/**Returns the list of enabled components
+</span>*/
+getEnabledComponents : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getDisabledComponents'>/**Returns the list of disabled components
+</span>*/
+getDisabledComponents : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-getApplicationEnabledState'>/**Returns whether the given package is enabled for the given user
+</span>*/
+getApplicationEnabledState : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setEnableRollbackCode'>/**Allows the rollback manager listening to the
+</span> {@link Intent#ACTION_PACKAGE_ENABLE_ROLLBACK enable rollback broadcast}
+ to respond to the package manager. The response must include the
+ {@code enableRollbackCode} which is one of
+ {@link android.content.pm.PackageParser.PackageManager#ENABLE_ROLLBACK_SUCCEEDED} or
+ {@link android.content.pm.PackageParser.PackageManager#ENABLE_ROLLBACK_FAILED}.
+@param {Number} token pending package identifier as passed via the
+            {@link PackageManager#EXTRA_ENABLE_ROLLBACK_TOKEN} Intent extra.
+@param {Number} enableRollbackCode the status code result of enabling rollback
+@throws SecurityException if the caller does not have the
+            PACKAGE_ROLLBACK_AGENT permission.
+*/
+setEnableRollbackCode : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-compileLayouts'>/**Ask the package manager to compile layouts in the given package.
+</span>*/
+compileLayouts : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-finishPackageInstall'>/**
+</span>*/
+finishPackageInstall : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-removeLegacyDefaultBrowserPackageName'>/**Remove the default browser stored in the legacy package settings.
+</span>@param {Number} userId the user id
+@return {String} the package name of the default browser, or {@code null} if none
+*/
+removeLegacyDefaultBrowserPackageName : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setDefaultBrowserProvider'>/**Sets the default browser provider.
+</span>@param {Object {PackageManagerInternal.DefaultBrowserProvider}} provider the provider
+*/
+setDefaultBrowserProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setDefaultDialerProvider'>/**Sets the default dialer provider.
+</span>@param {Object {PackageManagerInternal.DefaultDialerProvider}} provider the provider
+*/
+setDefaultDialerProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setDefaultHomeProvider'>/**Sets the default home provider.
+</span>@param {Object {PackageManagerInternal.DefaultHomeProvider}} provider the provider
+*/
+setDefaultHomeProvider : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-isApexPackage'>/**Returns {@code true} if given {@code packageName} is an apex package.
+</span>*/
+isApexPackage : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-uninstallApex'>/**Uninstalls given {@code packageName}.
+</span>@param {String} packageName apex package to uninstall.
+@param {Number} versionCode version of a package to uninstall.
+@param {Number} userId user to uninstall apex package for. Must be
+               {@link android.os.UserHandle#USER_ALL}, otherwise failure will be reported.
+@param {Object {IntentSender}} intentSender a {@link IntentSender} to send result of an uninstall to.
+*/
+uninstallApex : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-wereDefaultPermissionsGrantedSinceBoot'>/**Whether default permission grants have been performed for a user
+</span> since the device booted.
+@param {Number} userId The user id.
+@return {Boolean} true if default permissions
+*/
+wereDefaultPermissionsGrantedSinceBoot : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-setRuntimePermissionsFingerPrint'>/**Get fingerprint of build that updated the runtime permissions for a user.
+</span>@param {String} userId The user to update
+@param {Number} fingerPrint The fingerprint to set
+*/
+setRuntimePermissionsFingerPrint : function(  ) {},
+
+<span id='android-content-pm-PackageManagerInternal-method-migrateLegacyObbData'>/**Migrates legacy obb data to its new location.
+</span>*/
+migrateLegacyObbData : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

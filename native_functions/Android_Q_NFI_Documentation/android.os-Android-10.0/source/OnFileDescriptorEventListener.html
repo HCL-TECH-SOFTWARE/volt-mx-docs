@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-MessageQueue-OnFileDescriptorEventListener'>/**@class android.os.MessageQueue.OnFileDescriptorEventListener
+</span> A listener which is invoked when file descriptor related events occur.
+*/
+var OnFileDescriptorEventListener = {
+
+<span id='android-os-MessageQueue-OnFileDescriptorEventListener-property-EVENT_INPUT'>/** File descriptor event: Indicates that the file descriptor is ready for input
+</span> operations, such as reading.
+ &lt;p&gt;
+ The listener should read all available data from the file descriptor
+ then return &lt;code&gt;true&lt;/code&gt; to keep the listener active or &lt;code&gt;false&lt;/code&gt;
+ to remove the listener.
+ &lt;/p&gt;&lt;p&gt;
+ In the case of a socket, this event may be generated to indicate
+ that there is at least one incoming connection that the listener
+ should accept.
+ &lt;/p&gt;&lt;p&gt;
+ This event will only be generated if the {@link #EVENT_INPUT} event mask was
+ specified when the listener was added.
+ &lt;/p&gt;
+*/
+EVENT_INPUT : &quot;1&quot;,
+<span id='android-os-MessageQueue-OnFileDescriptorEventListener-property-EVENT_OUTPUT'>/** File descriptor event: Indicates that the file descriptor is ready for output
+</span> operations, such as writing.
+ &lt;p&gt;
+ The listener should write as much data as it needs.  If it could not
+ write everything at once, then it should return &lt;code&gt;true&lt;/code&gt; to
+ keep the listener active.  Otherwise, it should return &lt;code&gt;false&lt;/code&gt;
+ to remove the listener then re-register it later when it needs to write
+ something else.
+ &lt;/p&gt;&lt;p&gt;
+ This event will only be generated if the {@link #EVENT_OUTPUT} event mask was
+ specified when the listener was added.
+ &lt;/p&gt;
+*/
+EVENT_OUTPUT : &quot;2&quot;,
+<span id='android-os-MessageQueue-OnFileDescriptorEventListener-property-EVENT_ERROR'>/** File descriptor event: Indicates that the file descriptor encountered a
+</span> fatal error.
+ &lt;p&gt;
+ File descriptor errors can occur for various reasons.  One common error
+ is when the remote peer of a socket or pipe closes its end of the connection.
+ &lt;/p&gt;&lt;p&gt;
+ This event may be generated at any time regardless of whether the
+ {@link #EVENT_ERROR} event mask was specified when the listener was added.
+ &lt;/p&gt;
+*/
+EVENT_ERROR : &quot;4&quot;,
+<span id='android-os-MessageQueue-OnFileDescriptorEventListener-method-onFileDescriptorEvents'>/**Called when a file descriptor receives events.
+</span>@param {Object {FileDescriptor}} fd The file descriptor.
+@param {Number} events The set of events that occurred: a combination of the
+ {@link #EVENT_INPUT}, {@link #EVENT_OUTPUT}, and {@link #EVENT_ERROR} event masks.
+@return {Number} The new set of events to watch, or 0 to unregister the listener.
+@see #EVENT_INPUT
+@see #EVENT_OUTPUT
+@see #EVENT_ERROR
+*/
+onFileDescriptorEvents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

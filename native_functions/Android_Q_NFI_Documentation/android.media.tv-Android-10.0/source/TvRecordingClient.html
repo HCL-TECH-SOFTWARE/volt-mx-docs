@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvRecordingClient'>/**@class android.media.tv.TvRecordingClient
+</span>@extends java.lang.Object
+
+ The public interface object used to interact with a specific TV input service for TV program
+ recording.
+*/
+var TvRecordingClient = {
+
+<span id='android-media-tv-TvRecordingClient-method-tune'>/**Tunes to a given channel for TV program recording. The first tune request will create a new
+</span> recording session for the corresponding TV input and establish a connection between the
+ application and the session. If recording has already started in the current recording
+ session, this method throws an exception.
+
+ &lt;p&gt;The application may call this method before starting or after stopping recording, but not
+ during recording.
+
+ &lt;p&gt;The recording session will respond by calling
+ {@link android.media.tv.TvRecordingClient.RecordingCallback#onTuned(Uri)} if the tune request was fulfilled, or
+ {@link android.media.tv.TvRecordingClient.RecordingCallback#onError(int)} otherwise.
+@param {String} inputId The ID of the TV input for the given channel.
+@param {Object {Uri}} channelUri The URI of a channel.
+@throws IllegalStateException If recording is already started.
+*/
+tune : function(  ) {},
+
+<span id='android-media-tv-TvRecordingClient-method-tune'>/**Tunes to a given channel for TV program recording. The first tune request will create a new
+</span> recording session for the corresponding TV input and establish a connection between the
+ application and the session. If recording has already started in the current recording
+ session, this method throws an exception. This can be used to provide domain-specific
+ features that are only known between certain client and their TV inputs.
+
+ &lt;p&gt;The application may call this method before starting or after stopping recording, but not
+ during recording.
+
+ &lt;p&gt;The recording session will respond by calling
+ {@link android.media.tv.TvRecordingClient.RecordingCallback#onTuned(Uri)} if the tune request was fulfilled, or
+ {@link android.media.tv.TvRecordingClient.RecordingCallback#onError(int)} otherwise.
+@param {String} inputId The ID of the TV input for the given channel.
+@param {Object {Uri}} channelUri The URI of a channel.
+@param {Object {Bundle}} params Domain-specific data for this tune request. Keys &lt;em&gt;must&lt;/em&gt; be a scoped
+            name, i.e. prefixed with a package name you own, so that different developers will
+            not create conflicting keys.
+@throws IllegalStateException If recording is already started.
+*/
+tune : function(  ) {},
+
+<span id='android-media-tv-TvRecordingClient-method-release'>/**Releases the resources in the current recording session immediately. This may be called at
+</span> any time, however if the session is already released, it does nothing.
+*/
+release : function(  ) {},
+
+<span id='android-media-tv-TvRecordingClient-method-startRecording'>/**Starts TV program recording in the current recording session. Recording is expected to start
+</span> immediately when this method is called. If the current recording session has not yet tuned to
+ any channel, this method throws an exception.
+
+ &lt;p&gt;The application may supply the URI for a TV program for filling in program specific data
+ fields in the {@link android.media.tv.TvContract.RecordedPrograms} table.
+ A non-null {@code programUri} implies the started recording should be of that specific
+ program, whereas null {@code programUri} does not impose such a requirement and the
+ recording can span across multiple TV programs. In either case, the application must call
+ {@link android.media.tv.TvRecordingClient#stopRecording()} to stop the recording.
+
+ &lt;p&gt;The recording session will respond by calling {@link android.media.tv.TvRecordingClient.RecordingCallback#onError(int)} if
+ the start request cannot be fulfilled.
+@param {Object {Uri}} programUri The URI for the TV program to record, built by
+            {@link TvContract#buildProgramUri(long)}. Can be {@code null}.
+@throws IllegalStateException If {@link #tune} request hasn't been handled yet.
+*/
+startRecording : function(  ) {},
+
+<span id='android-media-tv-TvRecordingClient-method-stopRecording'>/**Stops TV program recording in the current recording session. Recording is expected to stop
+</span> immediately when this method is called. If recording has not yet started in the current
+ recording session, this method does nothing.
+
+ &lt;p&gt;The recording session is expected to create a new data entry in the
+ {@link android.media.tv.TvContract.RecordedPrograms} table that describes the newly
+ recorded program and pass the URI to that entry through to
+ {@link android.media.tv.TvRecordingClient.RecordingCallback#onRecordingStopped(Uri)}.
+ If the stop request cannot be fulfilled, the recording session will respond by calling
+ {@link android.media.tv.TvRecordingClient.RecordingCallback#onError(int)}.
+*/
+stopRecording : function(  ) {},
+
+<span id='android-media-tv-TvRecordingClient-method-sendAppPrivateCommand'>/**Sends a private command to the underlying TV input. This can be used to provide
+</span> domain-specific features that are only known between certain clients and their TV inputs.
+@param {String} action The name of the private command to send. This &lt;em&gt;must&lt;/em&gt; be a scoped name,
+            i.e. prefixed with a package name you own, so that different developers will not
+            create conflicting commands.
+@param {Object {Bundle}} data An optional bundle to send with the command.
+*/
+sendAppPrivateCommand : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

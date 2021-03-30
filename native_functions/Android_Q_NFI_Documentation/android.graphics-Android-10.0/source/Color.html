@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-Color'>/**@class android.graphics.Color
+</span>@extends java.lang.Object
+
+ {@usesMathJax}
+
+ &lt;p&gt;The &lt;code&gt;Color&lt;/code&gt; class provides methods for creating, converting and
+ manipulating colors. Colors have three different representations:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;Color ints, the most common representation&lt;/li&gt;
+     &lt;li&gt;Color longs&lt;/li&gt;
+     &lt;li&gt;&lt;code&gt;Color&lt;/code&gt; instances&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;The section below describe each representation in detail.&lt;/p&gt;
+
+ &lt;h3&gt;Color ints&lt;/h3&gt;
+ &lt;p&gt;Color ints are the most common representation of colors on Android and
+ have been used since {@link android.os.Build.VERSION_CODES#BASE API level 1}.&lt;/p&gt;
+
+ &lt;p&gt;A color int always defines a color in the {@link android.graphics.ColorSpace.Named#SRGB sRGB}
+ color space using 4 components packed in a single 32 bit integer value:&lt;/p&gt;
+
+ &lt;table summary=&quot;Color int definition&quot;&gt;
+     &lt;tr&gt;
+         &lt;th&gt;Component&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Size&lt;/th&gt;&lt;th&gt;Range&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alpha&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;R&lt;/td&gt;&lt;td&gt;Red&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;G&lt;/td&gt;&lt;td&gt;Green&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;B&lt;/td&gt;&lt;td&gt;Blue&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;The components in this table are listed in encoding order (see below),
+ which is why color ints are called ARGB colors.&lt;/p&gt;
+
+ &lt;h4&gt;Usage in code&lt;/h4&gt;
+ &lt;p&gt;To avoid confusing color ints with arbitrary integer values, it is a
+ good practice to annotate them with the &lt;code&gt;@ColorInt&lt;/code&gt; annotation
+ found in the Android Support Library.&lt;/p&gt;
+
+ &lt;h4&gt;Encoding&lt;/h4&gt;
+ &lt;p&gt;The four components of a color int are encoded in the following way:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ int color = (A &amp; 0xff) &lt;&lt; 24 | (R &amp; 0xff) &lt;&lt; 16 | (G &amp; 0xff) &lt;&lt; 8 | (B &amp; 0xff);
+ &lt;/pre&gt;
+
+ &lt;p&gt;Because of this encoding, color ints can easily be described as an integer
+ constant in source. For instance, opaque blue is &lt;code&gt;0xff0000ff&lt;/code&gt;
+ and yellow is &lt;code&gt;0xffffff00&lt;/code&gt;.&lt;/p&gt;
+
+ &lt;p&gt;To easily encode color ints, it is recommended to use the static methods
+ {@link #argb(int, int, int, int)} and {@link #rgb(int, int, int)}. The second
+ method omits the alpha component and assumes the color is opaque (alpha is 255).
+ As a convenience this class also offers methods to encode color ints from components
+ defined in the \([0..1]\) range: {@link #argb(float, float, float, float)} and
+ {@link #rgb(float, float, float)}.&lt;/p&gt;
+
+ &lt;p&gt;Color longs (defined below) can be easily converted to color ints by invoking
+ the {@link #toArgb}(long) method. This method performs a color space conversion
+ if needed.&lt;/p&gt;
+
+ &lt;p&gt;It is also possible to create a color int by invoking the method {@link #toArgb}()
+ on a color instance.&lt;/p&gt;
+
+ &lt;h4&gt;Decoding&lt;/h4&gt;
+ &lt;p&gt;The four ARGB components can be individually extracted from a color int
+ using the following expressions:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ int A = (color &gt;&gt; 24) &amp; 0xff; // or color &gt;&gt;&gt; 24
+ int R = (color &gt;&gt; 16) &amp; 0xff;
+ int G = (color &gt;&gt;  8) &amp; 0xff;
+ int B = (color      ) &amp; 0xff;
+ &lt;/pre&gt;
+
+ &lt;p&gt;This class offers convenience methods to easily extract these components:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;{@link #alpha}(int) to extract the alpha component&lt;/li&gt;
+     &lt;li&gt;{@link #red}(int) to extract the red component&lt;/li&gt;
+     &lt;li&gt;{@link #green}(int) to extract the green component&lt;/li&gt;
+     &lt;li&gt;{@link #blue}(int) to extract the blue component&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;h3&gt;Color longs&lt;/h3&gt;
+ &lt;p&gt;Color longs are a representation introduced in
+ {@link android.os.Build.VERSION_CODES#O Android O} to store colors in different
+ {@link android.graphics.ColorSpace color spaces}, with more precision than color ints.&lt;/p&gt;
+
+ &lt;p&gt;A color long always defines a color using 4 components packed in a single
+ 64 bit long value. One of these components is always alpha while the other
+ three components depend on the color space's {@link android.graphics.ColorSpace.Model color model}.
+ The most common color model is the {@link android.graphics.ColorSpace.Model#RGB RGB} model in
+ which the components represent red, green and blue values.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Component ranges:&lt;/b&gt; the ranges defined in the tables
+ below indicate the ranges that can be encoded in a color long. They do not
+ represent the actual ranges as they may differ per color space. For instance,
+ the RGB components of a color in the {@link android.graphics.ColorSpace.Named#DISPLAY_P3 Display P3}
+ color space use the \([0..1]\) range. Please refer to the documentation of the
+ various {@link android.graphics.ColorSpace.Named color spaces} to find their respective ranges.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;Alpha range:&lt;/b&gt; while alpha is encoded in a color long using
+ a 10 bit integer (thus using a range of \([0..1023]\)), it is converted to and
+ from \([0..1]\) float values when decoding and encoding color longs.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;&lt;b&gt;sRGB color space:&lt;/b&gt; for compatibility reasons and ease of
+ use, color longs encoding {@link android.graphics.ColorSpace.Named#SRGB sRGB} colors do not
+ use the same encoding as other color longs.&lt;/p&gt;
+
+ &lt;table summary=&quot;Color long definition&quot;&gt;
+     &lt;tr&gt;
+         &lt;th&gt;Component&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Size&lt;/th&gt;&lt;th&gt;Range&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;{@link android.graphics.ColorSpace.Model#RGB RGB} color model&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;R&lt;/td&gt;&lt;td&gt;Red&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;G&lt;/td&gt;&lt;td&gt;Green&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;B&lt;/td&gt;&lt;td&gt;Blue&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alpha&lt;/td&gt;&lt;td&gt;10 bits&lt;/td&gt;&lt;td&gt;\([0..1023]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;Color space&lt;/td&gt;&lt;td&gt;6 bits&lt;/td&gt;&lt;td&gt;\([0..63]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;{@link android.graphics.ColorSpace.Named#SRGB sRGB} color space&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alpha&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;R&lt;/td&gt;&lt;td&gt;Red&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;G&lt;/td&gt;&lt;td&gt;Green&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;B&lt;/td&gt;&lt;td&gt;Blue&lt;/td&gt;&lt;td&gt;8 bits&lt;/td&gt;&lt;td&gt;\([0..255]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;Unused&lt;/td&gt;&lt;td&gt;32 bits&lt;/td&gt;&lt;td&gt;\(0\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;{@link android.graphics.ColorSpace.Model#XYZ XYZ} color model&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;Y&lt;/td&gt;&lt;td&gt;Y&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;Z&lt;/td&gt;&lt;td&gt;Z&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alpha&lt;/td&gt;&lt;td&gt;10 bits&lt;/td&gt;&lt;td&gt;\([0..1023]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;Color space&lt;/td&gt;&lt;td&gt;6 bits&lt;/td&gt;&lt;td&gt;\([0..63]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;{@link android.graphics.ColorSpace.Model#XYZ Lab} color model&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;L&lt;/td&gt;&lt;td&gt;L&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;a&lt;/td&gt;&lt;td&gt;a&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;b&lt;/td&gt;&lt;td&gt;b&lt;/td&gt;&lt;td&gt;16 bits&lt;/td&gt;&lt;td&gt;\([-65504.0, 65504.0]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;A&lt;/td&gt;&lt;td&gt;Alpha&lt;/td&gt;&lt;td&gt;10 bits&lt;/td&gt;&lt;td&gt;\([0..1023]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;Color space&lt;/td&gt;&lt;td&gt;6 bits&lt;/td&gt;&lt;td&gt;\([0..63]\)&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;{@link android.graphics.ColorSpace.Model#CMYK CMYK} color model&lt;/td&gt;&lt;/tr&gt;
+     &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;Unsupported&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;The components in this table are listed in encoding order (see below),
+ which is why color longs in the RGB model are called RGBA colors (even if
+ this doesn't quite hold for the special case of sRGB colors).&lt;/p&gt;
+
+ &lt;p&gt;The color long encoding relies on half-precision float values (fp16). If you
+ wish to know more about the limitations of half-precision float values, please
+ refer to the documentation of the {@link Half} class.&lt;/p&gt;
+
+ &lt;h4&gt;Usage in code&lt;/h4&gt;
+ &lt;p&gt;To avoid confusing color longs with arbitrary long values, it is a
+ good practice to annotate them with the &lt;code&gt;@ColorLong&lt;/code&gt; annotation
+ found in the Android Support Library.&lt;/p&gt;
+
+ &lt;h4&gt;Encoding&lt;/h4&gt;
+
+ &lt;p&gt;Given the complex nature of color longs, it is strongly encouraged to use
+ the various methods provided by this class to encode them.&lt;/p&gt;
+
+ &lt;p&gt;The most flexible way to encode a color long is to use the method
+ {@link #pack(float, float, float, float, android.graphics.ColorSpace)}. This method allows you
+ to specify three color components (typically RGB), an alpha component and a
+ color space. To encode sRGB colors, use {@link #pack(float, float, float)}
+ and {@link #pack(float, float, float, float)} which are the
+ equivalent of {@link #rgb(int, int, int)} and {@link #argb(int, int, int, int)}
+ for color ints. If you simply need to convert a color int into a color long,
+ use {@link #pack}(int).&lt;/p&gt;
+
+ &lt;p&gt;It is also possible to create a color long value by invoking the method
+ {@link #pack}() on a color instance.&lt;/p&gt;
+
+ &lt;h4&gt;Decoding&lt;/h4&gt;
+
+ &lt;p&gt;This class offers convenience methods to easily extract the components
+ of a color long:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;{@link #alpha}(long) to extract the alpha component&lt;/li&gt;
+     &lt;li&gt;{@link #red}(long) to extract the red/X/L component&lt;/li&gt;
+     &lt;li&gt;{@link #green}(long) to extract the green/Y/a component&lt;/li&gt;
+     &lt;li&gt;{@link #blue}(long) to extract the blue/Z/b component&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The values returned by these methods depend on the color space encoded
+ in the color long. The values are however typically in the \([0..1]\) range
+ for RGB colors. Please refer to the documentation of the various
+ {@link android.graphics.ColorSpace.Named color spaces} for the exact ranges.&lt;/p&gt;
+
+ &lt;h3&gt;Color instances&lt;/h3&gt;
+ &lt;p&gt;Color instances are a representation introduced in
+ {@link android.os.Build.VERSION_CODES#O Android O} to store colors in different
+ {@link android.graphics.ColorSpace color spaces}, with more precision than both color ints and
+ color longs. Color instances also offer the ability to store more than 4
+ components if necessary.&lt;/p&gt;
+
+ &lt;p&gt;Colors instances are immutable and can be created using one of the various
+ &lt;code&gt;valueOf&lt;/code&gt; methods. For instance:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ // sRGB
+ Color opaqueRed = Color.valueOf(0xffff0000); // from a color int
+ Color translucentRed = Color.valueOf(1.0f, 0.0f, 0.0f, 0.5f);
+
+ // Wide gamut color
+ {@literal @}ColorLong long p3 = pack(1.0f, 1.0f, 0.0f, 1.0f, colorSpaceP3);
+ Color opaqueYellow = Color.valueOf(p3); // from a color long
+
+ // CIE L*a*b* color space
+ ColorSpace lab = ColorSpace.get(ColorSpace.Named.LAB);
+ Color green = Color.valueOf(100.0f, -128.0f, 128.0f, 1.0f, lab);
+ &lt;/pre&gt;
+
+ &lt;p&gt;Color instances can be converted to color ints ({@link #toArgb}()) or
+ color longs ({@link #pack}()). They also offer easy access to their various
+ components using the following methods:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;{@link #alpha}(), returns the alpha component value&lt;/li&gt;
+     &lt;li&gt;{@link #red}(), returns the red component value (or first
+     component value in non-RGB models)&lt;/li&gt;
+     &lt;li&gt;{@link #green}(), returns the green component value (or second
+     component value in non-RGB models)&lt;/li&gt;
+     &lt;li&gt;{@link #blue}(), returns the blue component value (or third
+     component value in non-RGB models)&lt;/li&gt;
+     &lt;li&gt;{@link #getComponent}(int), returns a specific component value&lt;/li&gt;
+     &lt;li&gt;{@link #getComponents}(), returns all component values as an array&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;h3&gt;Color space conversions&lt;/h3&gt;
+ &lt;p&gt;You can convert colors from one color space to another using
+ {@link android.graphics.ColorSpace#connect(android.graphics.ColorSpace, android.graphics.ColorSpace)} and its variants. However,
+ the &lt;code&gt;Color&lt;/code&gt; class provides a few convenience methods to simplify
+ the process. Here is a brief description of some of them:&lt;/p&gt;
+ &lt;ul&gt;
+     &lt;li&gt;{@link #convert}(ColorSpace) to convert a color instance in a color
+     space to a new color instance in a different color space&lt;/li&gt;
+     &lt;li&gt;{@link #convert(float, float, float, float, android.graphics.ColorSpace, android.graphics.ColorSpace)} to
+     convert a color from a source color space to a destination color space&lt;/li&gt;
+     &lt;li&gt;{@link #convert(long, android.graphics.ColorSpace)} to convert a color long from its
+     built-in color space to a destination color space&lt;/li&gt;
+     &lt;li&gt;{@link #convert(int, android.graphics.ColorSpace)} to convert a color int from sRGB
+     to a destination color space&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Please refere to the {@link android.graphics.ColorSpace} documentation for more
+ information.&lt;/p&gt;
+
+ &lt;h3&gt;Alpha and transparency&lt;/h3&gt;
+ &lt;p&gt;The alpha component of a color defines the level of transparency of a
+ color. When the alpha component is 0, the color is completely transparent.
+ When the alpha is component is 1 (in the \([0..1]\) range) or 255 (in the
+ \([0..255]\) range), the color is completely opaque.&lt;/p&gt;
+
+ &lt;p&gt;The color representations described above do not use pre-multiplied
+ color components (a pre-multiplied color component is a color component
+ that has been multiplied by the value of the alpha component).
+ For instance, the color int representation of opaque red is
+ &lt;code&gt;0xffff0000&lt;/code&gt;. For semi-transparent (50%) red, the
+ representation becomes &lt;code&gt;0x80ff0000&lt;/code&gt;. The equivalent color
+ instance representations would be &lt;code&gt;(1.0, 0.0, 0.0, 1.0)&lt;/code&gt;
+ and &lt;code&gt;(1.0, 0.0, 0.0, 0.5)&lt;/code&gt;.&lt;/p&gt;
+*/
+var Color = {
+
+<span id='android-graphics-Color-property-BLACK'>/***/
+</span>BLACK : &quot;-16777216&quot;,
+<span id='android-graphics-Color-property-DKGRAY'>/***/
+</span>DKGRAY : &quot;-12303292&quot;,
+<span id='android-graphics-Color-property-GRAY'>/***/
+</span>GRAY : &quot;-7829368&quot;,
+<span id='android-graphics-Color-property-LTGRAY'>/***/
+</span>LTGRAY : &quot;-3355444&quot;,
+<span id='android-graphics-Color-property-WHITE'>/***/
+</span>WHITE : &quot;-1&quot;,
+<span id='android-graphics-Color-property-RED'>/***/
+</span>RED : &quot;-65536&quot;,
+<span id='android-graphics-Color-property-GREEN'>/***/
+</span>GREEN : &quot;-16711936&quot;,
+<span id='android-graphics-Color-property-BLUE'>/***/
+</span>BLUE : &quot;-16776961&quot;,
+<span id='android-graphics-Color-property-YELLOW'>/***/
+</span>YELLOW : &quot;-256&quot;,
+<span id='android-graphics-Color-property-CYAN'>/***/
+</span>CYAN : &quot;-16711681&quot;,
+<span id='android-graphics-Color-property-MAGENTA'>/***/
+</span>MAGENTA : &quot;-65281&quot;,
+<span id='android-graphics-Color-property-TRANSPARENT'>/***/
+</span>TRANSPARENT : &quot;0&quot;,
+<span id='android-graphics-Color-method-getColorSpace'>/**Returns this color's color space.
+</span>@return {Object {android.graphics.ColorSpace}} A non-null instance of {@link ColorSpace}
+*/
+getColorSpace : function(  ) {},
+
+<span id='android-graphics-Color-method-getModel'>/**Returns the color model of this color.
+</span>@return {Object {android.graphics.ColorSpace.Model}} A non-null {@link ColorSpace.Model}
+*/
+getModel : function(  ) {},
+
+<span id='android-graphics-Color-method-isWideGamut'>/**Indicates whether this color color is in a wide-gamut color space.
+</span> See {@link android.graphics.ColorSpace#isWideGamut()} for a definition of a wide-gamut
+ color space.
+@return {Boolean} True if this color is in a wide-gamut color space, false otherwise
+@see #isSrgb()
+@see ColorSpace#isWideGamut()
+*/
+isWideGamut : function(  ) {},
+
+<span id='android-graphics-Color-method-isSrgb'>/**Indicates whether this color is in the {@link android.graphics.ColorSpace.Named#SRGB sRGB}
+</span> color space.
+@return {Boolean} True if this color is in the sRGB color space, false otherwise
+@see #isWideGamut()
+*/
+isSrgb : function(  ) {},
+
+<span id='android-graphics-Color-method-getComponentCount'>/**Returns the number of components that form a color value according
+</span> to this color space's color model, plus one extra component for
+ alpha.
+@return {Number} The integer 4 or 5
+*/
+getComponentCount : function(  ) {},
+
+<span id='android-graphics-Color-method-pack'>/**Packs this color into a color long. See the documentation of this class
+</span> for a description of the color long format.
+@return {Number} A color long
+@throws IllegalArgumentException If this color's color space has the id
+ {@link ColorSpace#MIN_ID} or if this color has more than 4 components
+*/
+pack : function(  ) {},
+
+<span id='android-graphics-Color-method-convert'>/**Converts this color from its color space to the specified color space.
+</span> The conversion is done using the default rendering intent as specified
+ by {@link android.graphics.ColorSpace#connect(android.graphics.ColorSpace, android.graphics.ColorSpace)}.
+@param {Object {ColorSpace}} colorSpace The destination color space, cannot be null
+@return {Object {android.graphics.Color}} A non-null color instance in the specified color space
+*/
+convert : function(  ) {},
+
+<span id='android-graphics-Color-method-toArgb'>/**Converts this color to an ARGB color int. A color int is always in
+</span> the {@link android.graphics.ColorSpace.Named#SRGB sRGB} color space. This implies
+ a color space conversion is applied if needed.
+@return {Number} An ARGB color in the sRGB color space
+*/
+toArgb : function(  ) {},
+
+<span id='android-graphics-Color-method-red'>/**&lt;p&gt;Returns the value of the red component in the range defined by this
+</span> color's color space (see {@link android.graphics.ColorSpace#getMinValue(int)} and
+ {@link android.graphics.ColorSpace#getMaxValue(int)}).&lt;/p&gt;
+
+ &lt;p&gt;If this color's color model is not {@link android.graphics.ColorSpace.Model#RGB RGB},
+ calling this method is equivalent to &lt;code&gt;getComponent(0)&lt;/code&gt;.&lt;/p&gt;
+@see #alpha()
+@see #red()
+@see #green
+@see #getComponents()
+*/
+red : function(  ) {},
+
+<span id='android-graphics-Color-method-green'>/**&lt;p&gt;Returns the value of the green component in the range defined by this
+</span> color's color space (see {@link android.graphics.ColorSpace#getMinValue(int)} and
+ {@link android.graphics.ColorSpace#getMaxValue(int)}).&lt;/p&gt;
+
+ &lt;p&gt;If this color's color model is not {@link android.graphics.ColorSpace.Model#RGB RGB},
+ calling this method is equivalent to &lt;code&gt;getComponent(1)&lt;/code&gt;.&lt;/p&gt;
+@see #alpha()
+@see #red()
+@see #green
+@see #getComponents()
+*/
+green : function(  ) {},
+
+<span id='android-graphics-Color-method-blue'>/**&lt;p&gt;Returns the value of the blue component in the range defined by this
+</span> color's color space (see {@link android.graphics.ColorSpace#getMinValue(int)} and
+ {@link android.graphics.ColorSpace#getMaxValue(int)}).&lt;/p&gt;
+
+ &lt;p&gt;If this color's color model is not {@link android.graphics.ColorSpace.Model#RGB RGB},
+ calling this method is equivalent to &lt;code&gt;getComponent(2)&lt;/code&gt;.&lt;/p&gt;
+@see #alpha()
+@see #red()
+@see #green
+@see #getComponents()
+*/
+blue : function(  ) {},
+
+<span id='android-graphics-Color-method-alpha'>/**Returns the value of the alpha component in the range \([0..1]\).
+</span> Calling this method is equivalent to
+ &lt;code&gt;getComponent(getComponentCount() - 1)&lt;/code&gt;.
+@see #red()
+@see #green()
+@see #blue()
+@see #getComponents()
+@see #getComponent(int)
+*/
+alpha : function(  ) {},
+
+<span id='android-graphics-Color-method-getComponents'>/**Returns this color's components as a new array. The last element of the
+</span> array is always the alpha component.
+@return {Number} A new, non-null array whose size is equal to {@link #getComponentCount()}
+@see #getComponent(int)
+*/
+getComponents : function(  ) {},
+
+<span id='android-graphics-Color-method-getComponents'>/**Copies this color's components in the supplied array. The last element of the
+</span> array is always the alpha component.
+@param {Object {float[]}} components An array of floats whose size must be at least
+                  {@link #getComponentCount()}, can be null
+@return {Number} The array passed as a parameter if not null, or a new array of length
+         {@link #getComponentCount()}
+@see #getComponent(int)
+@throws IllegalArgumentException If the specified array's length is less than
+ {@link #getComponentCount()}
+*/
+getComponents : function(  ) {},
+
+<span id='android-graphics-Color-method-getComponent'>/**&lt;p&gt;Returns the value of the specified component in the range defined by
+</span> this color's color space (see {@link android.graphics.ColorSpace#getMinValue(int)} and
+ {@link android.graphics.ColorSpace#getMaxValue(int)}).&lt;/p&gt;
+
+ &lt;p&gt;If the requested component index is {@link #getComponentCount}(),
+ this method returns the alpha component, always in the range
+ \([0..1]\).&lt;/p&gt;
+@see #getComponents()
+@throws ArrayIndexOutOfBoundsException If the specified component index
+ is &lt; 0 or &gt;= {@link #getComponentCount()}
+*/
+getComponent : function(  ) {},
+
+<span id='android-graphics-Color-method-luminance'>/**&lt;p&gt;Returns the relative luminance of this color.&lt;/p&gt;
+</span>
+ &lt;p&gt;Based on the formula for relative luminance defined in WCAG 2.0,
+ W3C Recommendation 11 December 2008.&lt;/p&gt;
+@return {Number} A value between 0 (darkest black) and 1 (lightest white)
+@throws IllegalArgumentException If the this color's color space
+ does not use the {@link ColorSpace.Model#RGB RGB} color model
+*/
+luminance : function(  ) {},
+
+<span id='android-graphics-Color-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-graphics-Color-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-graphics-Color-method-toString'>/**&lt;p&gt;Returns a string representation of the object. This method returns
+</span> a string equal to the value of:&lt;/p&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ &quot;Color(&quot; + r + &quot;, &quot; + g + &quot;, &quot; + b + &quot;, &quot; + a +
+         &quot;, &quot; + getColorSpace().getName + ')'
+ &lt;/pre&gt;
+
+ &lt;p&gt;For instance, the string representation of opaque black in the sRGB
+ color space is equal to the following value:&lt;/p&gt;
+
+ &lt;pre&gt;
+ Color(0.0, 0.0, 0.0, 1.0, sRGB IEC61966-2.1)
+ &lt;/pre&gt;
+@return {String} A non-null string representation of the object
+*/
+toString : function(  ) {},
+
+<span id='android-graphics-Color-method-colorSpace'>/**Returns the color space encoded in the specified color long.
+</span>@param {Number} color The color long whose color space to extract
+@return {Object {android.graphics.ColorSpace}} A non-null color space instance
+@throws IllegalArgumentException If the encoded color space is invalid or unknown
+@see #red(long)
+@see #green(long)
+@see #blue(long)
+@see #alpha(long)
+*/
+colorSpace : function(  ) {},
+
+<span id='android-graphics-Color-method-red'>/**Returns the red component encoded in the specified color long.
+</span> The range of the returned value depends on the color space
+ associated with the specified color. The color space can be
+ queried by calling {@link #colorSpace}(long).
+@param {Number} color The color long whose red channel to extract
+@return {Number} A float value with a range defined by the specified color's
+ color space
+@see #colorSpace(long)
+@see #green(long)
+@see #blue(long)
+@see #alpha(long)
+*/
+red : function(  ) {},
+
+<span id='android-graphics-Color-method-green'>/**Returns the green component encoded in the specified color long.
+</span> The range of the returned value depends on the color space
+ associated with the specified color. The color space can be
+ queried by calling {@link #colorSpace}(long).
+@param {Number} color The color long whose green channel to extract
+@return {Number} A float value with a range defined by the specified color's
+ color space
+@see #colorSpace(long)
+@see #red(long)
+@see #blue(long)
+@see #alpha(long)
+*/
+green : function(  ) {},
+
+<span id='android-graphics-Color-method-blue'>/**Returns the blue component encoded in the specified color long.
+</span> The range of the returned value depends on the color space
+ associated with the specified color. The color space can be
+ queried by calling {@link #colorSpace}(long).
+@param {Number} color The color long whose blue channel to extract
+@return {Number} A float value with a range defined by the specified color's
+ color space
+@see #colorSpace(long)
+@see #red(long)
+@see #green(long)
+@see #alpha(long)
+*/
+blue : function(  ) {},
+
+<span id='android-graphics-Color-method-alpha'>/**Returns the alpha component encoded in the specified color long.
+</span> The returned value is always in the range \([0..1]\).
+@param {Number} color The color long whose blue channel to extract
+@return {Number} A float value in the range \([0..1]\)
+@see #colorSpace(long)
+@see #red(long)
+@see #green(long)
+@see #blue(long)
+*/
+alpha : function(  ) {},
+
+<span id='android-graphics-Color-method-isSrgb'>/**Indicates whether the specified color is in the
+</span> {@link android.graphics.ColorSpace.Named#SRGB sRGB} color space.
+@param {Number} color The color to test
+@return {Boolean} True if the color is in the sRGB color space, false otherwise
+@throws IllegalArgumentException If the encoded color space is invalid or unknown
+@see #isInColorSpace(long, ColorSpace)
+@see #isWideGamut(long)
+*/
+isSrgb : function(  ) {},
+
+<span id='android-graphics-Color-method-isWideGamut'>/**Indicates whether the specified color is in a wide-gamut color space.
+</span> See {@link android.graphics.ColorSpace#isWideGamut()} for a definition of a wide-gamut
+ color space.
+@param {Number} color The color to test
+@return {Boolean} True if the color is in a wide-gamut color space, false otherwise
+@throws IllegalArgumentException If the encoded color space is invalid or unknown
+@see #isInColorSpace(long, ColorSpace)
+@see #isSrgb(long)
+@see ColorSpace#isWideGamut()
+*/
+isWideGamut : function(  ) {},
+
+<span id='android-graphics-Color-method-isInColorSpace'>/**Indicates whether the specified color is in the specified color space.
+</span>@param {Number} color The color to test
+@param {Object {ColorSpace}} colorSpace The color space to test against
+@return {Boolean} True if the color is in the specified color space, false otherwise
+@see #isSrgb(long)
+@see #isWideGamut(long)
+*/
+isInColorSpace : function(  ) {},
+
+<span id='android-graphics-Color-method-toArgb'>/**Converts the specified color long to an ARGB color int. A color int is
+</span> always in the {@link android.graphics.ColorSpace.Named#SRGB sRGB} color space. This implies
+ a color space conversion is applied if needed.
+@return {Number} An ARGB color in the sRGB color space
+@throws IllegalArgumentException If the encoded color space is invalid or unknown
+*/
+toArgb : function(  ) {},
+
+<span id='android-graphics-Color-method-valueOf'>/**Creates a new &lt;code&gt;Color&lt;/code&gt; instance from an ARGB color int.
+</span> The resulting color is in the {@link android.graphics.ColorSpace.Named#SRGB sRGB}
+ color space.
+@param {Number} color The ARGB color int to create a &lt;code&gt;Color&lt;/code&gt; from
+@return {Object {android.graphics.Color}} A non-null instance of {@link Color}
+*/
+valueOf : function(  ) {},
+
+<span id='android-graphics-Color-method-valueOf'>/**Creates a new &lt;code&gt;Color&lt;/code&gt; instance from a color long.
+</span> The resulting color is in the same color space as the specified color long.
+@param {Number} color The color long to create a &lt;code&gt;Color&lt;/code&gt; from
+@return {Object {android.graphics.Color}} A non-null instance of {@link Color}
+@throws IllegalArgumentException If the encoded color space is invalid or unknown
+*/
+valueOf : function(  ) {},
+
+<span id='android-graphics-Color-method-valueOf'>/**Creates a new opaque &lt;code&gt;Color&lt;/code&gt; in the {@link android.graphics.ColorSpace.Named#SRGB sRGB}
+</span> color space with the specified red, green and blue component values. The component
+ values must be in the range \([0..1]\).
+@param {Number} r The red component of the opaque sRGB color to create, in \([0..1]\)
+@param {Number} g The green component of the opaque sRGB color to create, in \([0..1]\)
+@param {Number} b The blue component of the opaque sRGB color to create, in \([0..1]\)
+@return {Object {android.graphics.Color}} A non-null instance of {@link Color}
+*/
+valueOf : function(  ) {},
+
+<span id='android-graphics-Color-method-valueOf'>/**Creates a new &lt;code&gt;Color&lt;/code&gt; in the {@link android.graphics.ColorSpace.Named#SRGB sRGB}
+</span> color space with the specified red, green, blue and alpha component values.
+ The component values must be in the range \([0..1]\).
+@param {Number} r The red component of the sRGB color to create, in \([0..1]\)
+@param {Number} g The green component of the sRGB color to create, in \([0..1]\)
+@param {Number} b The blue component of the sRGB color to create, in \([0..1]\)
+@param {Number} a The alpha component of the sRGB color to create, in \([0..1]\)
+@return {Object {android.graphics.Color}} A non-null instance of {@link Color}
+*/
+valueOf : function(  ) {},
+
+<span id='android-graphics-Color-method-valueOf'>/**Creates a new &lt;code&gt;Color&lt;/code&gt; in the specified color space with the
+</span> specified red, green, blue and alpha component values. The range of the
+ components is defined by {@link android.graphics.ColorSpace#getMinValue(int)} and
+ {@link android.graphics.ColorSpace#getMaxValue(int)}. The values passed to this method
+ must be in the proper range.
+@param {Number} r The red component of the color to create
+@param {Number} g The green component of the color to create
+@param {Number} b The blue component of the color to create
+@param {Number} a The alpha component of the color to create, in \([0..1]\)
+@param {Object {ColorSpace}} colorSpace The color space of the color to create
+@return {Object {android.graphics.Color}} A non-null instance of {@link Color}
+@throws IllegalArgumentException If the specified color space uses a
+ color model with more than 3 components
+*/
+valueOf : function(  ) {},
+
+<span id='android-graphics-Color-method-valueOf'>/**&lt;p&gt;Creates a new &lt;code&gt;Color&lt;/code&gt; in the specified color space with the
+</span> specified component values. The range of the components is defined by
+ {@link android.graphics.ColorSpace#getMinValue(int)} and {@link android.graphics.ColorSpace#getMaxValue(int)}.
+ The values passed to this method must be in the proper range. The alpha
+ component is always in the range \([0..1]\).&lt;/p&gt;
+
+ &lt;p&gt;The length of the array of components must be at least
+ &lt;code&gt;{@link android.graphics.ColorSpace#getComponentCount()} + 1&lt;/code&gt;. The component at index
+ {@link android.graphics.ColorSpace#getComponentCount()} is always alpha.&lt;/p&gt;
+@param {Object {float[]}} components The components of the color to create, with alpha as the last component
+@param {Object {ColorSpace}} colorSpace The color space of the color to create
+@return {Object {android.graphics.Color}} A non-null instance of {@link Color}
+@throws IllegalArgumentException If the array of components is smaller than
+ required by the color space
+*/
+valueOf : function(  ) {},
+
+<span id='android-graphics-Color-method-pack'>/**Converts the specified ARGB color int to an RGBA color long in the sRGB
+</span> color space. See the documentation of this class for a description of
+ the color long format.
+@param {Number} color The ARGB color int to convert to an RGBA color long in sRGB
+@return {Number} A color long
+*/
+pack : function(  ) {},
+
+<span id='android-graphics-Color-method-pack'>/**Packs the sRGB color defined by the specified red, green and blue component
+</span> values into an RGBA color long in the sRGB color space. The alpha component
+ is set to 1.0. See the documentation of this class for a description of the
+ color long format.
+@param {Number} red The red component of the sRGB color to create, in \([0..1]\)
+@param {Number} green The green component of the sRGB color to create, in \([0..1]\)
+@param {Number} blue The blue component of the sRGB color to create, in \([0..1]\)
+@return {Number} A color long
+*/
+pack : function(  ) {},
+
+<span id='android-graphics-Color-method-pack'>/**Packs the sRGB color defined by the specified red, green, blue and alpha
+</span> component values into an RGBA color long in the sRGB color space. See the
+ documentation of this class for a description of the color long format.
+@param {Number} red The red component of the sRGB color to create, in \([0..1]\)
+@param {Number} green The green component of the sRGB color to create, in \([0..1]\)
+@param {Number} blue The blue component of the sRGB color to create, in \([0..1]\)
+@param {Number} alpha The alpha component of the sRGB color to create, in \([0..1]\)
+@return {Number} A color long
+*/
+pack : function(  ) {},
+
+<span id='android-graphics-Color-method-pack'>/**&lt;p&gt;Packs the 3 component color defined by the specified red, green, blue and
+</span> alpha component values into a color long in the specified color space. See the
+ documentation of this class for a description of the color long format.&lt;/p&gt;
+
+ &lt;p&gt;The red, green and blue components must be in the range defined by the
+ specified color space. See {@link android.graphics.ColorSpace#getMinValue(int)} and
+ {@link android.graphics.ColorSpace#getMaxValue(int)}.&lt;/p&gt;
+@param {Number} red The red component of the color to create
+@param {Number} green The green component of the color to create
+@param {Number} blue The blue component of the color to create
+@param {Number} alpha The alpha component of the color to create, in \([0..1]\)
+@return {Number} A color long
+@throws IllegalArgumentException If the color space's id is {@link ColorSpace#MIN_ID}
+ or if the color space's color model has more than 3 components
+*/
+pack : function(  ) {},
+
+<span id='android-graphics-Color-method-convert'>/**Converts the specified ARGB color int from the {@link android.graphics.ColorSpace.Named#SRGB sRGB}
+</span> color space into the specified destination color space. The resulting color is
+ returned as a color long. See the documentation of this class for a description
+ of the color long format.
+@param {Number} color The sRGB color int to convert
+@param {Object {ColorSpace}} colorSpace The destination color space
+@return {Number} A color long in the destination color space
+*/
+convert : function(  ) {},
+
+<span id='android-graphics-Color-method-convert'>/**&lt;p&gt;Converts the specified color long from its color space into the specified
+</span> destination color space. The resulting color is returned as a color long. See
+ the documentation of this class for a description of the color long format.&lt;/p&gt;
+
+ &lt;p&gt;When converting several colors in a row, it is recommended to use
+ {@link #convert(long, android.graphics.ColorSpace.Connector)} instead to
+ avoid the creation of a {@link android.graphics.ColorSpace.Connector} on every invocation.&lt;/p&gt;
+@param {Number} color The color long to convert
+@param {Object {ColorSpace}} colorSpace The destination color space
+@return {Number} A color long in the destination color space
+@throws IllegalArgumentException If the encoded color space is invalid or unknown
+*/
+convert : function(  ) {},
+
+<span id='android-graphics-Color-method-convert'>/**&lt;p&gt;Converts the specified 3 component color from the source color space to the
+</span> destination color space. The resulting color is returned as a color long. See
+ the documentation of this class for a description of the color long format.&lt;/p&gt;
+
+ &lt;p&gt;When converting multiple colors in a row, it is recommended to use
+ {@link #convert(float, float, float, float, android.graphics.ColorSpace.Connector)} instead to
+ avoid the creation of a {@link android.graphics.ColorSpace.Connector} on every invocation.&lt;/p&gt;
+
+ &lt;p&gt;The red, green and blue components must be in the range defined by the
+ specified color space. See {@link android.graphics.ColorSpace#getMinValue(int)} and
+ {@link android.graphics.ColorSpace#getMaxValue(int)}.&lt;/p&gt;
+@param {Number} r The red component of the color to convert
+@param {Number} g The green component of the color to convert
+@param {Number} b The blue component of the color to convert
+@param {Number} a The alpha component of the color to convert, in \([0..1]\)
+@param {Object {ColorSpace}} source The source color space, cannot be null
+@param {Object {ColorSpace}} destination The destination color space, cannot be null
+@return {Number} A color long in the destination color space
+@see #convert(float, float, float, float, ColorSpace.Connector)
+*/
+convert : function(  ) {},
+
+<span id='android-graphics-Color-method-convert'>/**&lt;p&gt;Converts the specified color long from a color space to another using the
+</span> specified color space {@link android.graphics.ColorSpace.Connector connector}. The resulting
+ color is returned as a color long. See the documentation of this class for a
+ description of the color long format.&lt;/p&gt;
+
+ &lt;p&gt;When converting several colors in a row, this method is preferable to
+ {@link #convert(long, android.graphics.ColorSpace)} as it prevents a new connector from being
+ created on every invocation.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;The connector's source color space should match the color long's
+ color space.&lt;/p&gt;
+@param {Number} color The color long to convert
+@param {Object {ColorSpace.Connector}} connector A color space connector, cannot be null
+@return {Number} A color long in the destination color space of the connector
+*/
+convert : function(  ) {},
+
+<span id='android-graphics-Color-method-convert'>/**&lt;p&gt;Converts the specified 3 component color from a color space to another using
+</span> the specified color space {@link android.graphics.ColorSpace.Connector connector}. The resulting
+ color is returned as a color long. See the documentation of this class for a
+ description of the color long format.&lt;/p&gt;
+
+ &lt;p&gt;When converting several colors in a row, this method is preferable to
+ {@link #convert(float, float, float, float, android.graphics.ColorSpace, android.graphics.ColorSpace)} as
+ it prevents a new connector from being created on every invocation.&lt;/p&gt;
+
+ &lt;p&gt;The red, green and blue components must be in the range defined by the
+ source color space of the connector. See {@link android.graphics.ColorSpace#getMinValue(int)}
+ and {@link android.graphics.ColorSpace#getMaxValue(int)}.&lt;/p&gt;
+@param {Number} r The red component of the color to convert
+@param {Number} g The green component of the color to convert
+@param {Number} b The blue component of the color to convert
+@param {Number} a The alpha component of the color to convert, in \([0..1]\)
+@param {Object {ColorSpace.Connector}} connector A color space connector, cannot be null
+@return {Number} A color long in the destination color space of the connector
+@see #convert(float, float, float, float, ColorSpace, ColorSpace)
+*/
+convert : function(  ) {},
+
+<span id='android-graphics-Color-method-luminance'>/**&lt;p&gt;Returns the relative luminance of a color.&lt;/p&gt;
+</span>
+ &lt;p&gt;Based on the formula for relative luminance defined in WCAG 2.0,
+ W3C Recommendation 11 December 2008.&lt;/p&gt;
+@return {Number} A value between 0 (darkest black) and 1 (lightest white)
+@throws IllegalArgumentException If the specified color's color space
+ is unknown or does not use the {@link ColorSpace.Model#RGB RGB} color model
+*/
+luminance : function(  ) {},
+
+<span id='android-graphics-Color-method-alpha'>/**Return the alpha component of a color int. This is the same as saying
+</span> color &gt;&gt;&gt; 24
+*/
+alpha : function(  ) {},
+
+<span id='android-graphics-Color-method-red'>/**Return the red component of a color int. This is the same as saying
+</span> (color &gt;&gt; 16) &amp; 0xFF
+*/
+red : function(  ) {},
+
+<span id='android-graphics-Color-method-green'>/**Return the green component of a color int. This is the same as saying
+</span> (color &gt;&gt; 8) &amp; 0xFF
+*/
+green : function(  ) {},
+
+<span id='android-graphics-Color-method-blue'>/**Return the blue component of a color int. This is the same as saying
+</span> color &amp; 0xFF
+*/
+blue : function(  ) {},
+
+<span id='android-graphics-Color-method-rgb'>/**Return a color-int from red, green, blue components.
+</span> The alpha component is implicitly 255 (fully opaque).
+ These component values should be \([0..255]\), but there is no
+ range check performed, so if they are out of range, the
+ returned color is undefined.
+@param {Number} red  Red component \([0..255]\) of the color
+@param {Number} green Green component \([0..255]\) of the color
+@param {Number} blue  Blue component \([0..255]\) of the color
+*/
+rgb : function(  ) {},
+
+<span id='android-graphics-Color-method-rgb'>/**Return a color-int from red, green, blue float components
+</span> in the range \([0..1]\). The alpha component is implicitly
+ 1.0 (fully opaque). If the components are out of range, the
+ returned color is undefined.
+@param {Number} red Red component \([0..1]\) of the color
+@param {Number} green Green component \([0..1]\) of the color
+@param {Number} blue Blue component \([0..1]\) of the color
+*/
+rgb : function(  ) {},
+
+<span id='android-graphics-Color-method-argb'>/**Return a color-int from alpha, red, green, blue components.
+</span> These component values should be \([0..255]\), but there is no
+ range check performed, so if they are out of range, the
+ returned color is undefined.
+@param {Number} alpha Alpha component \([0..255]\) of the color
+@param {Number} red Red component \([0..255]\) of the color
+@param {Number} green Green component \([0..255]\) of the color
+@param {Number} blue Blue component \([0..255]\) of the color
+*/
+argb : function(  ) {},
+
+<span id='android-graphics-Color-method-argb'>/**Return a color-int from alpha, red, green, blue float components
+</span> in the range \([0..1]\). If the components are out of range, the
+ returned color is undefined.
+@param {Number} alpha Alpha component \([0..1]\) of the color
+@param {Number} red Red component \([0..1]\) of the color
+@param {Number} green Green component \([0..1]\) of the color
+@param {Number} blue Blue component \([0..1]\) of the color
+*/
+argb : function(  ) {},
+
+<span id='android-graphics-Color-method-luminance'>/**Returns the relative luminance of a color.
+</span> &lt;p&gt;
+ Assumes sRGB encoding. Based on the formula for relative luminance
+ defined in WCAG 2.0, W3C Recommendation 11 December 2008.
+@return {Number} a value between 0 (darkest black) and 1 (lightest white)
+*/
+luminance : function(  ) {},
+
+<span id='android-graphics-Color-method-parseColor'>/**&lt;/p&gt;Parse the color string, and return the corresponding color-int.
+</span> If the string cannot be parsed, throws an IllegalArgumentException
+ exception. Supported formats are:&lt;/p&gt;
+
+ &lt;ul&gt;
+   &lt;li&gt;&lt;code&gt;#RRGGBB&lt;/code&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;#AARRGGBB&lt;/code&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The following names are also accepted: &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;blue&lt;/code&gt;,
+ &lt;code&gt;green&lt;/code&gt;, &lt;code&gt;black&lt;/code&gt;, &lt;code&gt;white&lt;/code&gt;, &lt;code&gt;gray&lt;/code&gt;,
+ &lt;code&gt;cyan&lt;/code&gt;, &lt;code&gt;magenta&lt;/code&gt;, &lt;code&gt;yellow&lt;/code&gt;, &lt;code&gt;lightgray&lt;/code&gt;,
+ &lt;code&gt;darkgray&lt;/code&gt;, &lt;code&gt;grey&lt;/code&gt;, &lt;code&gt;lightgrey&lt;/code&gt;, &lt;code&gt;darkgrey&lt;/code&gt;,
+ &lt;code&gt;aqua&lt;/code&gt;, &lt;code&gt;fuchsia&lt;/code&gt;, &lt;code&gt;lime&lt;/code&gt;, &lt;code&gt;maroon&lt;/code&gt;,
+ &lt;code&gt;navy&lt;/code&gt;, &lt;code&gt;olive&lt;/code&gt;, &lt;code&gt;purple&lt;/code&gt;, &lt;code&gt;silver&lt;/code&gt;,
+ and &lt;code&gt;teal&lt;/code&gt;.&lt;/p&gt;
+*/
+parseColor : function(  ) {},
+
+<span id='android-graphics-Color-method-RGBToHSV'>/**Convert RGB components to HSV.
+</span> &lt;ul&gt;
+   &lt;li&gt;&lt;code&gt;hsv[0]&lt;/code&gt; is Hue \([0..360[\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[1]&lt;/code&gt; is Saturation \([0...1]\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[2]&lt;/code&gt; is Value \([0...1]\)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} red  red component value \([0..255]\)
+@param {Number} green  green component value \([0..255]\)
+@param {Number} blue  blue component value \([0..255]\)
+@param {Object {float[]}} hsv  3 element array which holds the resulting HSV components.
+*/
+RGBToHSV : function(  ) {},
+
+<span id='android-graphics-Color-method-colorToHSV'>/**Convert the ARGB color to its HSV components.
+</span> &lt;ul&gt;
+   &lt;li&gt;&lt;code&gt;hsv[0]&lt;/code&gt; is Hue \([0..360[\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[1]&lt;/code&gt; is Saturation \([0...1]\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[2]&lt;/code&gt; is Value \([0...1]\)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} color the argb color to convert. The alpha component is ignored.
+@param {Object {float[]}} hsv  3 element array which holds the resulting HSV components.
+*/
+colorToHSV : function(  ) {},
+
+<span id='android-graphics-Color-method-HSVToColor'>/**Convert HSV components to an ARGB color. Alpha set to 0xFF.
+</span> &lt;ul&gt;
+   &lt;li&gt;&lt;code&gt;hsv[0]&lt;/code&gt; is Hue \([0..360[\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[1]&lt;/code&gt; is Saturation \([0...1]\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[2]&lt;/code&gt; is Value \([0...1]\)&lt;/li&gt;
+ &lt;/ul&gt;
+ If hsv values are out of range, they are pinned.
+@param {Object {float[]}} hsv  3 element array which holds the input HSV components.
+@return {Number} the resulting argb color
+*/
+HSVToColor : function(  ) {},
+
+<span id='android-graphics-Color-method-HSVToColor'>/**Convert HSV components to an ARGB color. The alpha component is passed
+</span> through unchanged.
+ &lt;ul&gt;
+   &lt;li&gt;&lt;code&gt;hsv[0]&lt;/code&gt; is Hue \([0..360[\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[1]&lt;/code&gt; is Saturation \([0...1]\)&lt;/li&gt;
+   &lt;li&gt;&lt;code&gt;hsv[2]&lt;/code&gt; is Value \([0...1]\)&lt;/li&gt;
+ &lt;/ul&gt;
+ If hsv values are out of range, they are pinned.
+@param {Number} alpha the alpha component of the returned argb color.
+@param {Object {float[]}} hsv  3 element array which holds the input HSV components.
+@return {Number} the resulting argb color
+*/
+HSVToColor : function(  ) {},
+
+<span id='android-graphics-Color-method-getHtmlColor'>/**Converts an HTML color (named or numeric) to an integer RGB value.
+</span>@param {String} color Non-null color string.
+@return {Number} A color value, or {@code -1} if the color string could not be interpreted.
+@hide 
+*/
+getHtmlColor : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

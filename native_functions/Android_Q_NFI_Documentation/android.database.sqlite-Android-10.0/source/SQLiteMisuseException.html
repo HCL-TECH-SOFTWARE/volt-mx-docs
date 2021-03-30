@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-sqlite-SQLiteMisuseException'>/**@class android.database.sqlite.SQLiteMisuseException
+</span>@extends android.database.sqlite.SQLiteException
+
+ This error can occur if the application creates a SQLiteStatement object and allows multiple
+ threads in the application use it at the same time.
+ Sqlite returns this error if bind and execute methods on this object occur at the same time
+ from multiple threads, like so:
+     thread # 1: in execute() method of the SQLiteStatement object
+     while thread # 2: is in bind..() on the same object.
+&lt;/p&gt;
+ FIX this by NEVER sharing the same SQLiteStatement object between threads.
+ Create a local instance of the SQLiteStatement whenever it is needed, use it and close it ASAP.
+ NEVER make it globally available.
+*/
+var SQLiteMisuseException = {
+
+
+};</pre>
+</body>
+</html>

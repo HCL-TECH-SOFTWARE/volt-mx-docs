@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-usb-UsbManager'>/**@class android.hardware.usb.UsbManager
+</span>@extends java.lang.Object
+
+ This class allows you to access the state of USB and communicate with USB devices.
+ Currently only host mode is supported in the public API.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about communicating with USB hardware, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/connectivity/usb/index.html&quot;&gt;USB developer guide&lt;/a&gt;.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var UsbManager = {
+
+<span id='android-hardware-usb-UsbManager-property-ACTION_USB_STATE'>/** Broadcast Action:  A sticky broadcast for USB state change events when in device mode.
+</span>
+ This is a sticky broadcast for clients that includes USB connected/disconnected state,
+ &lt;ul&gt;
+ &lt;li&gt; {@link #USB_CONNECTED} boolean indicating whether USB is connected or disconnected.
+ &lt;li&gt; {@link #USB_HOST_CONNECTED} boolean indicating whether USB is connected or
+     disconnected as host.
+ &lt;li&gt; {@link #USB_CONFIGURED} boolean indicating whether USB is configured.
+ currently zero if not configured, one for configured.
+ &lt;li&gt; {@link #USB_FUNCTION_ADB} boolean extra indicating whether the
+ adb function is enabled
+ &lt;li&gt; {@link #USB_FUNCTION_RNDIS} boolean extra indicating whether the
+ RNDIS ethernet function is enabled
+ &lt;li&gt; {@link #USB_FUNCTION_MTP} boolean extra indicating whether the
+ MTP function is enabled
+ &lt;li&gt; {@link #USB_FUNCTION_PTP} boolean extra indicating whether the
+ PTP function is enabled
+ &lt;li&gt; {@link #USB_FUNCTION_ACCESSORY} boolean extra indicating whether the
+ accessory function is enabled
+ &lt;li&gt; {@link #USB_FUNCTION_AUDIO_SOURCE} boolean extra indicating whether the
+ audio source function is enabled
+ &lt;li&gt; {@link #USB_FUNCTION_MIDI} boolean extra indicating whether the
+ MIDI function is enabled
+ &lt;/ul&gt;
+ If the sticky intent has not been found, that indicates USB is disconnected,
+ USB is not configued, MTP function is enabled, and all the other functions are disabled.
+
+ {@hide}
+*/
+ACTION_USB_STATE : &quot;android.hardware.usb.action.USB_STATE&quot;,
+<span id='android-hardware-usb-UsbManager-property-ACTION_USB_PORT_CHANGED'>/** Broadcast Action: A broadcast for USB port changes.
+</span>
+ This intent is sent when a USB port is added, removed, or changes state.
+
+ @hide
+*/
+ACTION_USB_PORT_CHANGED : &quot;android.hardware.usb.action.USB_PORT_CHANGED&quot;,
+<span id='android-hardware-usb-UsbManager-property-ACTION_USB_DEVICE_ATTACHED'>/** Activity intent sent when user attaches a USB device.
+</span>
+ This intent is sent when a USB device is attached to the USB bus when in host mode.
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_DEVICE} containing the {@link android.hardware.usb.UsbDevice}
+ for the attached device
+ &lt;/ul&gt;
+*/
+ACTION_USB_DEVICE_ATTACHED : &quot;android.hardware.usb.action.USB_DEVICE_ATTACHED&quot;,
+<span id='android-hardware-usb-UsbManager-property-ACTION_USB_DEVICE_DETACHED'>/** Broadcast Action:  A broadcast for USB device detached event.
+</span>
+ This intent is sent when a USB device is detached from the USB bus when in host mode.
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_DEVICE} containing the {@link android.hardware.usb.UsbDevice}
+ for the detached device
+ &lt;/ul&gt;
+*/
+ACTION_USB_DEVICE_DETACHED : &quot;android.hardware.usb.action.USB_DEVICE_DETACHED&quot;,
+<span id='android-hardware-usb-UsbManager-property-ACTION_USB_ACCESSORY_ATTACHED'>/** Activity intent sent when user attaches a USB accessory.
+</span>
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_ACCESSORY} containing the {@link android.hardware.usb.UsbAccessory}
+ for the attached accessory
+ &lt;/ul&gt;
+*/
+ACTION_USB_ACCESSORY_ATTACHED : &quot;android.hardware.usb.action.USB_ACCESSORY_ATTACHED&quot;,
+<span id='android-hardware-usb-UsbManager-property-ACTION_USB_ACCESSORY_DETACHED'>/** Broadcast Action:  A broadcast for USB accessory detached event.
+</span>
+ This intent is sent when a USB accessory is detached.
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_ACCESSORY} containing the {@link android.hardware.usb.UsbAccessory}
+ for the attached accessory that was detached
+ &lt;/ul&gt;
+*/
+ACTION_USB_ACCESSORY_DETACHED : &quot;android.hardware.usb.action.USB_ACCESSORY_DETACHED&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_CONNECTED'>/** Boolean extra indicating whether USB is connected or disconnected.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast.
+
+ {@hide}
+*/
+USB_CONNECTED : &quot;connected&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_HOST_CONNECTED'>/** Boolean extra indicating whether USB is connected or disconnected as host.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast.
+
+ {@hide}
+*/
+USB_HOST_CONNECTED : &quot;host_connected&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_CONFIGURED'>/** Boolean extra indicating whether USB is configured.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast.
+
+ {@hide}
+*/
+USB_CONFIGURED : &quot;configured&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_DATA_UNLOCKED'>/** Boolean extra indicating whether confidential user data, such as photos, should be
+</span> made available on the USB connection. This variable will only be set when the user
+ has explicitly asked for this data to be unlocked.
+ Used in extras for the {@link #ACTION_USB_STATE} broadcast.
+
+ {@hide}
+*/
+USB_DATA_UNLOCKED : &quot;unlocked&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_NONE'>/** A placeholder indicating that no USB function is being specified.
+</span> Used for compatibility with old init scripts to indicate no functions vs. charging function.
+
+ {@hide}
+*/
+USB_FUNCTION_NONE : &quot;none&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_ADB'>/** Name of the adb USB function.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast
+
+ {@hide}
+*/
+USB_FUNCTION_ADB : &quot;adb&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_RNDIS'>/** Name of the RNDIS ethernet USB function.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast
+
+ {@hide}
+*/
+USB_FUNCTION_RNDIS : &quot;rndis&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_MTP'>/** Name of the MTP USB function.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast
+
+ {@hide}
+*/
+USB_FUNCTION_MTP : &quot;mtp&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_PTP'>/** Name of the PTP USB function.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast
+
+ {@hide}
+*/
+USB_FUNCTION_PTP : &quot;ptp&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_AUDIO_SOURCE'>/** Name of the audio source USB function.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast
+
+ {@hide}
+*/
+USB_FUNCTION_AUDIO_SOURCE : &quot;audio_source&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_MIDI'>/** Name of the MIDI USB function.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast
+
+ {@hide}
+*/
+USB_FUNCTION_MIDI : &quot;midi&quot;,
+<span id='android-hardware-usb-UsbManager-property-USB_FUNCTION_ACCESSORY'>/** Name of the Accessory USB function.
+</span> Used in extras for the {@link #ACTION_USB_STATE} broadcast
+
+ {@hide}
+*/
+USB_FUNCTION_ACCESSORY : &quot;accessory&quot;,
+<span id='android-hardware-usb-UsbManager-property-EXTRA_PORT'>/** Name of extra for {@link #ACTION_USB_PORT_CHANGED}
+</span> containing the {@link android.hardware.usb.UsbPort} object for the port.
+
+ @hide
+*/
+EXTRA_PORT : &quot;port&quot;,
+<span id='android-hardware-usb-UsbManager-property-EXTRA_PORT_STATUS'>/** Name of extra for {@link #ACTION_USB_PORT_CHANGED}
+</span> containing the {@link android.hardware.usb.UsbPortStatus} object for the port, or null if the port
+ was removed.
+
+ @hide
+*/
+EXTRA_PORT_STATUS : &quot;portStatus&quot;,
+<span id='android-hardware-usb-UsbManager-property-EXTRA_DEVICE'>/** Name of extra for {@link #ACTION_USB_DEVICE_ATTACHED} and
+</span> {@link #ACTION_USB_DEVICE_DETACHED} broadcasts
+ containing the {@link android.hardware.usb.UsbDevice} object for the device.
+*/
+EXTRA_DEVICE : &quot;device&quot;,
+<span id='android-hardware-usb-UsbManager-property-EXTRA_ACCESSORY'>/** Name of extra for {@link #ACTION_USB_ACCESSORY_ATTACHED} and
+</span> {@link #ACTION_USB_ACCESSORY_DETACHED} broadcasts
+ containing the {@link android.hardware.usb.UsbAccessory} object for the accessory.
+*/
+EXTRA_ACCESSORY : &quot;accessory&quot;,
+<span id='android-hardware-usb-UsbManager-property-EXTRA_PERMISSION_GRANTED'>/** Name of extra added to the {@link android.app.PendingIntent}
+</span> passed into {@link #requestPermission(UsbDevice, PendingIntent)}
+ or {@link #requestPermission(UsbAccessory, PendingIntent)}
+ containing a boolean value indicating whether the user granted permission or not.
+*/
+EXTRA_PERMISSION_GRANTED : &quot;permission&quot;,
+<span id='android-hardware-usb-UsbManager-property-EXTRA_PACKAGE'>/** Name of extra added to start systemui.usb.UsbPermissionActivity
+</span> containing package name of the app which requests USB permission.
+
+ @hide
+*/
+EXTRA_PACKAGE : &quot;android.hardware.usb.extra.PACKAGE&quot;,
+<span id='android-hardware-usb-UsbManager-property-EXTRA_CAN_BE_DEFAULT'>/** Name of extra added to start systemui.usb.UsbPermissionActivity
+</span> containing the whether the app which requests USB permission can be set as default handler
+ for USB device attach event or USB accessory attach event or not.
+
+ @hide
+*/
+EXTRA_CAN_BE_DEFAULT : &quot;android.hardware.usb.extra.CAN_BE_DEFAULT&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_NONE'>/** Code for the charging usb function. Passed into {@link #setCurrentFunctions}(long)
+</span> {@hide}
+*/
+FUNCTION_NONE : &quot;0&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_MTP'>/** Code for the mtp usb function. Passed as a mask into {@link #setCurrentFunctions}(long)
+</span> {@hide}
+*/
+FUNCTION_MTP : &quot;null&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_PTP'>/** Code for the ptp usb function. Passed as a mask into {@link #setCurrentFunctions}(long)
+</span> {@hide}
+*/
+FUNCTION_PTP : &quot;null&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_RNDIS'>/** Code for the rndis usb function. Passed as a mask into {@link #setCurrentFunctions}(long)
+</span> {@hide}
+*/
+FUNCTION_RNDIS : &quot;null&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_MIDI'>/** Code for the midi usb function. Passed as a mask into {@link #setCurrentFunctions}(long)
+</span> {@hide}
+*/
+FUNCTION_MIDI : &quot;null&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_ACCESSORY'>/** Code for the accessory usb function.
+</span> {@hide}
+*/
+FUNCTION_ACCESSORY : &quot;null&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_AUDIO_SOURCE'>/** Code for the audio source usb function.
+</span> {@hide}
+*/
+FUNCTION_AUDIO_SOURCE : &quot;null&quot;,
+<span id='android-hardware-usb-UsbManager-property-FUNCTION_ADB'>/** Code for the adb usb function.
+</span> {@hide}
+*/
+FUNCTION_ADB : &quot;null&quot;,
+<span id='android-hardware-usb-UsbManager-method-getDeviceList'>/**Returns a HashMap containing all USB devices currently attached.
+</span> USB device name is the key for the returned HashMap.
+ The result will be empty if no devices are attached, or if
+ USB host mode is inactive or unsupported.
+@return {Object {java.util.HashMap}} HashMap containing all connected USB devices.
+*/
+getDeviceList : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-openDevice'>/**Opens the device so it can be used to send and receive
+</span> data using {@link android.hardware.usb.UsbRequest}.
+@param {Object {UsbDevice}} device the device to open
+@return {Object {android.hardware.usb.UsbDeviceConnection}} a {@link UsbDeviceConnection}, or {@code null} if open failed
+*/
+openDevice : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-getAccessoryList'>/**Returns a list of currently attached USB accessories.
+</span> (in the current implementation there can be at most one)
+@return {Object {android.hardware.usb.UsbAccessory}} list of USB accessories, or null if none are attached.
+*/
+getAccessoryList : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-openAccessory'>/**Opens a file descriptor for reading and writing data to the USB accessory.
+</span>
+ &lt;p&gt;If data is read from the {@link java.io.InputStream} created from this file descriptor all
+ data of a USB transfer should be read at once. If only a partial request is read the rest of
+ the transfer is dropped.
+@param {Object {UsbAccessory}} accessory the USB accessory to open
+@return {Object {android.os.ParcelFileDescriptor}} file descriptor, or null if the accessory could not be opened.
+*/
+openAccessory : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-getControlFd'>/**Gets the functionfs control file descriptor for the given function, with
+</span> the usb descriptors and strings already written. The file descriptor is used
+ by the function implementation to handle events and control requests.
+@param {Number} function to get control fd for. Currently {@link #FUNCTION_MTP} and
+ {@link #FUNCTION_PTP} are supported.
+@return {Object {android.os.ParcelFileDescriptor}} A ParcelFileDescriptor holding the valid fd, or null if the fd was not found.
+
+ {@hide}
+*/
+getControlFd : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-hasPermission'>/**Returns true if the caller has permission to access the device.
+</span> Permission might have been granted temporarily via
+ {@link #requestPermission(UsbDevice, PendingIntent)} or
+ by the user choosing the caller as the default application for the device.
+ Permission for USB devices of class {@link android.hardware.usb.UsbConstants#USB_CLASS_VIDEO} for clients that
+ target SDK {@link android.os.Build.VERSION_CODES#P} and above can be granted only if they
+ have additionally the {@link android.Manifest.permission#CAMERA} permission.
+@param {Object {UsbDevice}} device to check permissions for
+@return {Boolean} true if caller has permission
+*/
+hasPermission : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-hasPermission'>/**Returns true if the caller has permission to access the accessory.
+</span> Permission might have been granted temporarily via
+ {@link #requestPermission(UsbAccessory, PendingIntent)} or
+ by the user choosing the caller as the default application for the accessory.
+@param {Object {UsbAccessory}} accessory to check permissions for
+@return {Boolean} true if caller has permission
+*/
+hasPermission : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-requestPermission'>/**Requests temporary permission for the given package to access the device.
+</span> This may result in a system dialog being displayed to the user
+ if permission had not already been granted.
+ Success or failure is returned via the {@link android.app.PendingIntent} pi.
+ If successful, this grants the caller permission to access the device only
+ until the device is disconnected.
+
+ The following extras will be added to pi:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_DEVICE} containing the device passed into this call
+ &lt;li&gt; {@link #EXTRA_PERMISSION_GRANTED} containing boolean indicating whether
+ permission was granted by the user
+ &lt;/ul&gt;
+
+ Permission for USB devices of class {@link android.hardware.usb.UsbConstants#USB_CLASS_VIDEO} for clients that
+ target SDK {@link android.os.Build.VERSION_CODES#P} and above can be granted only if they
+ have additionally the {@link android.Manifest.permission#CAMERA} permission.
+@param {Object {UsbDevice}} device to request permissions for
+@param {Object {PendingIntent}} pi PendingIntent for returning result
+*/
+requestPermission : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-requestPermission'>/**Requests temporary permission for the given package to access the accessory.
+</span> This may result in a system dialog being displayed to the user
+ if permission had not already been granted.
+ Success or failure is returned via the {@link android.app.PendingIntent} pi.
+ If successful, this grants the caller permission to access the accessory only
+ until the device is disconnected.
+
+ The following extras will be added to pi:
+ &lt;ul&gt;
+ &lt;li&gt; {@link #EXTRA_ACCESSORY} containing the accessory passed into this call
+ &lt;li&gt; {@link #EXTRA_PERMISSION_GRANTED} containing boolean indicating whether
+ permission was granted by the user
+ &lt;/ul&gt;
+@param {Object {UsbAccessory}} accessory to request permissions for
+@param {Object {PendingIntent}} pi PendingIntent for returning result
+*/
+requestPermission : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-grantPermission'>/**Grants permission for USB device without showing system dialog.
+</span> Only system components can call this function.
+@param {Object {UsbDevice}} device to request permissions for
+
+ {@hide}
+*/
+grantPermission : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-grantPermission'>/**Grants permission for USB device to given uid without showing system dialog.
+</span> Only system components can call this function.
+@param {Object {UsbDevice}} device to request permissions for
+@uid uid to give permission
+
+ {@hide}
+*/
+grantPermission : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-grantPermission'>/**Grants permission to specified package for USB device without showing system dialog.
+</span> Only system components can call this function, as it requires the MANAGE_USB permission.
+@param {Object {UsbDevice}} device to request permissions for
+@param {String} packageName of package to grant permissions
+
+ {@hide}
+*/
+grantPermission : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-isFunctionEnabled'>/**Returns true if the specified USB function is currently enabled when in device mode.
+</span> &lt;p&gt;
+ USB functions represent interfaces which are published to the host to access
+ services offered by the device.
+ &lt;/p&gt;
+@param {String} function name of the USB function
+@param function name of the USB function
+@return {Boolean} true if the USB function is enabled
+
+ {@hide}
+*/
+isFunctionEnabled : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-setCurrentFunctions'>/**Sets the current USB functions when in device mode.
+</span> &lt;p&gt;
+ USB functions represent interfaces which are published to the host to access
+ services offered by the device.
+ &lt;/p&gt;&lt;p&gt;
+ This method is intended to select among primary USB functions.  The system may
+ automatically activate additional functions such as {@link #USB_FUNCTION_ADB}
+ or {@link #USB_FUNCTION_ACCESSORY} based on other settings and states.
+ &lt;/p&gt;&lt;p&gt;
+ An argument of 0 indicates that the device is charging, and can pick any
+ appropriate function for that purpose.
+ &lt;/p&gt;&lt;p&gt;
+ Note: This function is asynchronous and may fail silently without applying
+ the requested changes.
+ &lt;/p&gt;
+@param {Number} functions the USB function(s) to set, as a bitwise mask.
+                  Must satisfy {@link UsbManager#areSettableFunctions}
+
+ {@hide}
+*/
+setCurrentFunctions : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-setCurrentFunction'>/**Sets the current USB functions when in device mode.
+</span>@param {String} functions the USB function(s) to set.
+@param {Boolean} usbDataUnlocked unused
+
+ {@hide}
+@param usbDataUnlocked unused
+
+ {@hide}
+*/
+setCurrentFunction : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-getCurrentFunctions'>/**Returns the current USB functions in device mode.
+</span> &lt;p&gt;
+ This function returns the state of primary USB functions and can return a
+ mask containing any usb function(s) except for ADB.
+ &lt;/p&gt;
+@return {Number} The currently enabled functions, in a bitwise mask.
+ A zero mask indicates that the current function is the charging function.
+
+ {@hide}
+*/
+getCurrentFunctions : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-setScreenUnlockedFunctions'>/**Sets the screen unlocked functions, which are persisted and set as the current functions
+</span> whenever the screen is unlocked.
+ &lt;p&gt;
+ A zero mask has the effect of switching off this feature, so functions
+ no longer change on screen unlock.
+ &lt;/p&gt;&lt;p&gt;
+ Note: When the screen is on, this method will apply given functions as current functions,
+ which is asynchronous and may fail silently without applying the requested changes.
+ &lt;/p&gt;
+@param {Number} functions functions to set, in a bitwise mask.
+                  Must satisfy {@link UsbManager#areSettableFunctions}
+
+ {@hide}
+*/
+setScreenUnlockedFunctions : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-getScreenUnlockedFunctions'>/**Gets the current screen unlocked functions.
+</span>@return {Number} The currently set screen enabled functions.
+ A zero mask indicates that the screen unlocked functions feature is not enabled.
+
+ {@hide}
+*/
+getScreenUnlockedFunctions : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-getPorts'>/**Returns a list of physical USB ports on the device.
+</span> &lt;p&gt;
+ This list is guaranteed to contain all dual-role USB Type C ports but it might
+ be missing other ports depending on whether the kernel USB drivers have been
+ updated to publish all of the device's ports through the new &quot;dual_role_usb&quot;
+ device class (which supports all types of ports despite its name).
+ &lt;/p&gt;
+@return {Object {java.util.List}} The list of USB ports
+@hide 
+*/
+getPorts : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-setUsbDeviceConnectionHandler'>/**Sets the component that will handle USB device connection.
+</span> &lt;p&gt;
+ Setting component allows to specify external USB host manager to handle use cases, where
+ selection dialog for an activity that will handle USB device is undesirable.
+ Only system components can call this function, as it requires the MANAGE_USB permission.
+@param {Object {ComponentName}} usbDeviceConnectionHandler The component to handle usb connections,
+ {@code null} to unset.
+
+ {@hide}
+*/
+setUsbDeviceConnectionHandler : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-areSettableFunctions'>/**Returns whether the given functions are valid inputs to UsbManager.
+</span> Currently the empty functions or any of MTP, PTP, RNDIS, MIDI are accepted.
+@return {Boolean} Whether the mask is settable.
+
+ {@hide}
+*/
+areSettableFunctions : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-usbFunctionsToString'>/**Converts the given function mask to string. Maintains ordering with respect to init scripts.
+</span>@return {String} String representation of given mask
+
+ {@hide}
+*/
+usbFunctionsToString : function(  ) {},
+
+<span id='android-hardware-usb-UsbManager-method-usbFunctionsFromString'>/**Parses a string of usb functions that are comma separated.
+</span>@return {Number} A mask of all valid functions in the string
+
+ {@hide}
+*/
+usbFunctionsFromString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-TimeZoneLookupHelper'>/**@class com.android.internal.telephony.TimeZoneLookupHelper
+</span>@extends java.lang.Object
+
+ An interface to various time zone lookup behaviors.
+*/
+var TimeZoneLookupHelper = {
+
+<span id='com-android-internal-telephony-TimeZoneLookupHelper-method-lookupByNitzCountry'>/**Looks for a time zone for the supplied NITZ and country information.
+</span>
+ &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; When there are multiple matching zones then one of the matching candidates
+ will be returned in the result. If the current device default zone matches it will be
+ returned in preference to other candidates. This method can return {@code null} if no
+ matching time zones are found.
+*/
+lookupByNitzCountry : function(  ) {},
+
+<span id='com-android-internal-telephony-TimeZoneLookupHelper-method-lookupByNitz'>/**Looks for a time zone using only information present in the supplied {@link com.android.internal.telephony.NitzData} object.
+</span>
+ &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Because multiple time zones can have the same offset / DST state at a given
+ time this process is error prone; an arbitrary match is returned when there are multiple
+ candidates. The algorithm can also return a non-exact match by assuming that the DST
+ information provided by NITZ is incorrect. This method can return {@code null} if no matching
+ time zones are found.
+*/
+lookupByNitz : function(  ) {},
+
+<span id='com-android-internal-telephony-TimeZoneLookupHelper-method-lookupByCountry'>/**Returns a time zone ID for the country if possible. For counties that use a single time zone
+</span> this will provide a good choice. For countries with multiple time zones, a time zone is
+ returned if all time zones used in the country currently have the same offset (currently ==
+ according to the device's current system clock time). If this is not the case then
+ {@code null} can be returned.
+*/
+lookupByCountry : function(  ) {},
+
+<span id='com-android-internal-telephony-TimeZoneLookupHelper-method-countryUsesUtc'>/**Returns {@code true} if the supplied (lower-case) ISO country code is for a country known to
+</span> use a raw offset of zero from UTC at the time specified.
+*/
+countryUsesUtc : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

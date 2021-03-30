@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-webkit-WebMessagePort'>/**@class android.webkit.WebMessagePort
+</span>@extends java.lang.Object
+
+ &lt;p&gt;The Java representation of the
+ &lt;a href=&quot;https://html.spec.whatwg.org/multipage/comms.html#messageport&quot;&gt;
+ HTML5 message ports.&lt;/a&gt;
+
+ &lt;p&gt;A Message port represents one endpoint of a Message Channel. In Android
+ webview, there is no separate Message Channel object. When a message channel
+ is created, both ports are tangled to each other and started, and then
+ returned in a MessagePort array, see {@link android.webkit.WebView#createWebMessageChannel}
+ for creating a message channel.
+
+ &lt;p&gt;When a message port is first created or received via transfer, it does not
+ have a WebMessageCallback to receive web messages. The messages are queued until
+ a WebMessageCallback is set.
+
+ &lt;p&gt;A message port should be closed when it is not used by the embedder application
+ anymore. A closed port cannot be transferred or cannot be reopened to send
+ messages. Close can be called multiple times.
+
+ &lt;p&gt;When a port is transferred to JS, it cannot be used to send or receive messages
+ at the Java side anymore. Different from HTML5 Spec, a port cannot be transferred
+ if one of these has ever happened: i. a message callback was set, ii. a message was
+ posted on it. A transferred port cannot be closed by the application, since
+ the ownership is also transferred.
+
+ &lt;p&gt;It is possible to transfer both ports of a channel to JS, for example for
+ communication between subframes.
+*/
+var WebMessagePort = {
+
+<span id='android-webkit-WebMessagePort-method-postMessage'>/**Post a WebMessage to the entangled port.
+</span>@param {Object {WebMessage}} message  the message from Java to JS.
+@throws IllegalStateException If message port is already transferred or closed.
+*/
+postMessage : function(  ) {},
+
+<span id='android-webkit-WebMessagePort-method-close'>/**Close the message port and free any resources associated with it.
+</span>*/
+close : function(  ) {},
+
+<span id='android-webkit-WebMessagePort-method-setWebMessageCallback'>/**Sets a callback to receive message events on the main thread.
+</span>@param {Object {WebMessagePort.WebMessageCallback}} callback  the message callback.
+*/
+setWebMessageCallback : function(  ) {},
+
+<span id='android-webkit-WebMessagePort-method-setWebMessageCallback'>/**Sets a callback to receive message events on the handler that is provided
+</span> by the application.
+@param {Object {WebMessagePort.WebMessageCallback}} callback  the message callback.
+@param {Object {Handler}} handler   the handler to receive the message messages.
+*/
+setWebMessageCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

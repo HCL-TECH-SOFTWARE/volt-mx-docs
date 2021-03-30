@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-FileRotator'>/**@class com.android.internal.util.FileRotator
+</span>@extends java.lang.Object
+
+ Utility that rotates files over time, similar to {@code logrotate}. There is
+ a single &quot;active&quot; file, which is periodically rotated into historical files,
+ and eventually deleted entirely. Files are stored under a specific directory
+ with a well-known prefix.
+ &lt;p&gt;
+ Instead of manipulating files directly, users implement interfaces that
+ perform operations on {@link InputStream} and {@link OutputStream}. This
+ enables atomic rewriting of file contents in
+ {@link #rewriteActive(Rewriter, long)}.
+ &lt;p&gt;
+ Users must periodically call {@link #maybeRotate}(long) to perform actual
+ rotation. Not inherently thread safe.
+*/
+var FileRotator = {
+
+<span id='com-android-internal-util-FileRotator-method-deleteAll'>/**Delete all files managed by this rotator.
+</span>*/
+deleteAll : function(  ) {},
+
+<span id='com-android-internal-util-FileRotator-method-dumpAll'>/**Dump all files managed by this rotator for debugging purposes.
+</span>*/
+dumpAll : function(  ) {},
+
+<span id='com-android-internal-util-FileRotator-method-rewriteActive'>/**Process currently active file, first reading any existing data, then
+</span> writing modified data. Maintains a backup during write, which is restored
+ if the write fails.
+*/
+rewriteActive : function(  ) {},
+
+<span id='com-android-internal-util-FileRotator-method-combineActive'>/**
+</span>*/
+combineActive : function(  ) {},
+
+<span id='com-android-internal-util-FileRotator-method-rewriteAll'>/**Process all files managed by this rotator, usually to rewrite historical
+</span> data. Each file is processed atomically.
+*/
+rewriteAll : function(  ) {},
+
+<span id='com-android-internal-util-FileRotator-method-readMatching'>/**Read any rotated data that overlap the requested time range.
+</span>*/
+readMatching : function(  ) {},
+
+<span id='com-android-internal-util-FileRotator-method-maybeRotate'>/**Examine all files managed by this rotator, renaming or deleting if their
+</span> age matches the configured thresholds.
+*/
+maybeRotate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

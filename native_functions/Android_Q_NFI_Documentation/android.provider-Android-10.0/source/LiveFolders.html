@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-LiveFolders'>/**@class android.provider.LiveFolders
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+ &lt;p&gt;A LiveFolder is a special folder whose content is provided by a
+ {@link android.content.ContentProvider}. To create a live folder, two components
+ are required:&lt;/p&gt;
+ &lt;ul&gt;
+  &lt;li&gt;An activity that can respond to the intent action {@link #ACTION_CREATE_LIVE_FOLDER}. The
+  activity is responsible for creating the live folder.&lt;/li&gt;
+  &lt;li&gt;A {@link android.content.ContentProvider} to provide the live folder items.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;h3&gt;Lifecycle&lt;/h3&gt;
+ &lt;p&gt;When a user wants to create a live folder, the system looks for all activities with the
+ intent filter action {@link #ACTION_CREATE_LIVE_FOLDER} and presents the list to the user.
+ When the user chooses one of the activities, the activity is invoked with the
+ {@link #ACTION_CREATE_LIVE_FOLDER} action. The activity then creates the live folder and
+ passes it back to the system by setting it as an
+ {@link android.app.Activity#setResult(int, android.content.Intent) activity result}. The
+ live folder is described by a content provider URI, a name, an icon and a display mode.
+ Finally, when the user opens the live folder, the system queries the content provider
+ to retrieve the folder's content.&lt;/p&gt;
+
+ &lt;h3&gt;Setting up the live folder activity&lt;/h3&gt;
+ &lt;p&gt;The following code sample shows how to write an activity that creates a live folder:&lt;/p&gt;
+ &lt;pre&gt;
+ public static class MyLiveFolder extends Activity {
+     public static final Uri CONTENT_URI = Uri.parse(&quot;content://my.app/live&quot;);
+
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+
+         final Intent intent = getIntent();
+         final String action = intent.getAction();
+
+         if (LiveFolders.ACTION_CREATE_LIVE_FOLDER.equals(action)) {
+             setResult(RESULT_OK, createLiveFolder(this, CONTENT_URI, &quot;My LiveFolder&quot;,
+                     R.drawable.ic_launcher_contacts_phones));
+         } else {
+             setResult(RESULT_CANCELED);
+         }
+
+         finish();
+     }
+
+     private static Intent createLiveFolder(Context context, Uri uri, String name,
+             int icon) {
+
+         final Intent intent = new Intent();
+
+         intent.setData(uri);
+         intent.putExtra(LiveFolders.EXTRA_LIVE_FOLDER_NAME, name);
+         intent.putExtra(LiveFolders.EXTRA_LIVE_FOLDER_ICON,
+                 Intent.ShortcutIconResource.fromContext(context, icon));
+         intent.putExtra(LiveFolders.EXTRA_LIVE_FOLDER_DISPLAY_MODE, LiveFolders.DISPLAY_MODE_LIST);
+
+         return intent;
+     }
+ }
+ &lt;/pre&gt;
+ &lt;p&gt;The live folder is described by an {@link android.content.Intent} as follows:&lt;/p&gt;
+ &lt;table border=&quot;2&quot; width=&quot;85%&quot; align=&quot;center&quot; frame=&quot;hsides&quot; rules=&quot;rows&quot;&gt;
+     &lt;thead&gt;
+     &lt;tr&gt;&lt;th&gt;Component&lt;/th&gt; &lt;th&gt;Type&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt; &lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;
+     &lt;/thead&gt;
+
+     &lt;tbody&gt;
+     &lt;tr&gt;&lt;th&gt;URI&lt;/th&gt;
+         &lt;td&gt;URI&lt;/td&gt;
+         &lt;td&gt;The ContentProvider URI&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;Yes&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #EXTRA_LIVE_FOLDER_NAME}&lt;/th&gt;
+         &lt;td&gt;Extra String&lt;/td&gt;
+         &lt;td&gt;The name of the live folder&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;Yes&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #EXTRA_LIVE_FOLDER_ICON}&lt;/th&gt;
+         &lt;td&gt;Extra {@link android.content.Intent.ShortcutIconResource}&lt;/td&gt;
+         &lt;td&gt;The icon of the live folder&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;Yes&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #EXTRA_LIVE_FOLDER_DISPLAY_MODE}&lt;/th&gt;
+         &lt;td&gt;Extra int&lt;/td&gt;
+         &lt;td&gt;The display mode of the live folder. The value must be either
+         {@link #DISPLAY_MODE_GRID} or {@link #DISPLAY_MODE_LIST}.&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;Yes&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #EXTRA_LIVE_FOLDER_BASE_INTENT}&lt;/th&gt;
+         &lt;td&gt;Extra Intent&lt;/td&gt;
+         &lt;td&gt;When the user clicks an item inside a live folder, the system will either fire
+         the intent associated with that item or, if present, the live folder's base intent
+         with the id of the item appended to the base intent's URI.&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;No&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;h3&gt;Setting up the content provider&lt;/h3&gt;
+ &lt;p&gt;The live folder's content provider must, upon query, return a {@link android.database.Cursor}
+ whose columns match the following names:&lt;/p&gt;
+ &lt;table border=&quot;2&quot; width=&quot;85%&quot; align=&quot;center&quot; frame=&quot;hsides&quot; rules=&quot;rows&quot;&gt;
+     &lt;thead&gt;
+     &lt;tr&gt;&lt;th&gt;Column&lt;/th&gt; &lt;th&gt;Type&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt; &lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;
+     &lt;/thead&gt;
+
+     &lt;tbody&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #NAME}&lt;/th&gt;
+         &lt;td&gt;String&lt;/td&gt;
+         &lt;td&gt;The name of the item&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;Yes&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #DESCRIPTION}&lt;/th&gt;
+         &lt;td&gt;String&lt;/td&gt;
+         &lt;td&gt;The description of the item. The description is ignored when the live folder's
+         display mode is {@link #DISPLAY_MODE_GRID}.&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;No&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #INTENT}&lt;/th&gt;
+         &lt;td&gt;{@link android.content.Intent}&lt;/td&gt;
+         &lt;td&gt;The intent to fire when the item is clicked. Ignored when the live folder defines
+         a base intent.&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;No&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #ICON_BITMAP}&lt;/th&gt;
+         &lt;td&gt;Bitmap&lt;/td&gt;
+         &lt;td&gt;The icon for the item. When this column value is not null, the values for the
+         columns {@link #ICON_PACKAGE} and {@link #ICON_RESOURCE} must be null.&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;No&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #ICON_PACKAGE}&lt;/th&gt;
+         &lt;td&gt;String&lt;/td&gt;
+         &lt;td&gt;The package of the item's icon. When this value is not null, the value for the
+         column {@link #ICON_RESOURCE} must be specified and the value for the column
+         {@link #ICON_BITMAP} must be null.&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;No&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;&lt;th&gt;{@link #ICON_RESOURCE}&lt;/th&gt;
+         &lt;td&gt;String&lt;/td&gt;
+         &lt;td&gt;The resource name of the item's icon. When this value is not null, the value for the
+         column {@link #ICON_PACKAGE} must be specified and the value for the column
+         {@link #ICON_BITMAP} must be null.&lt;/td&gt;
+         &lt;td align=&quot;center&quot;&gt;No&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;/tbody&gt;
+ &lt;/table&gt;
+ 
+ @deprecated Live folders are no longer supported by Android.  These have been
+ replaced by the new
+ &lt;a href=&quot;{@docRoot}guide/topics/appwidgets/index.html#collections&quot;&gt;AppWidget Collection&lt;/a&gt;
+ APIs introduced in {@link android.os.Build.VERSION_CODES#HONEYCOMB}.  These provide
+ all of the features of live folders plus many more.  The use of live folders is greatly
+ discouraged because of security issues they introduce -- publishing a live folder requires
+ making all data show for the live folder available to all applications with no
+ permissions protecting it.
+*/
+var LiveFolders = {
+
+<span id='android-provider-LiveFolders-property-NAME'>/** &lt;p&gt;Content provider column.&lt;/p&gt;
+</span> &lt;p&gt;Name of the live folder item.&lt;/p&gt;
+ &lt;p&gt;Required.&lt;/p&gt;
+ &lt;p&gt;Type: String.&lt;/p&gt;
+*/
+NAME : &quot;name&quot;,
+<span id='android-provider-LiveFolders-property-DESCRIPTION'>/** &lt;p&gt;Content provider column.&lt;/p&gt;
+</span> &lt;p&gt;Description of the live folder item. This value is ignored if the
+ live folder's display mode is {@link android.provider.LiveFolders#DISPLAY_MODE_GRID}.&lt;/p&gt;
+ &lt;p&gt;Optional.&lt;/p&gt;
+ &lt;p&gt;Type: String.&lt;/p&gt;
+
+ @see LiveFolders#EXTRA_LIVE_FOLDER_DISPLAY_MODE
+*/
+DESCRIPTION : &quot;description&quot;,
+<span id='android-provider-LiveFolders-property-INTENT'>/** &lt;p&gt;Content provider column.&lt;/p&gt;
+</span> &lt;p&gt;Intent of the live folder item.&lt;/p&gt;
+ &lt;p&gt;Optional if the live folder has a base intent.&lt;/p&gt;
+ &lt;p&gt;Type: {@link android.content.Intent}.&lt;/p&gt;
+
+ @see LiveFolders#EXTRA_LIVE_FOLDER_BASE_INTENT
+*/
+INTENT : &quot;intent&quot;,
+<span id='android-provider-LiveFolders-property-ICON_BITMAP'>/** &lt;p&gt;Content provider column.&lt;/p&gt;
+</span> &lt;p&gt;Icon of the live folder item, as a custom bitmap.&lt;/p&gt;
+ &lt;p&gt;Optional.&lt;/p&gt;
+ &lt;p&gt;Type: {@link android.graphics.Bitmap}.&lt;/p&gt;
+*/
+ICON_BITMAP : &quot;icon_bitmap&quot;,
+<span id='android-provider-LiveFolders-property-ICON_PACKAGE'>/** &lt;p&gt;Content provider column.&lt;/p&gt;
+</span> &lt;p&gt;Package where to find the icon of the live folder item. This value can be
+ obtained easily using
+ {@link android.content.Intent.ShortcutIconResource#fromContext(android.content.Context, int)}.&lt;/p&gt;
+ &lt;p&gt;Optional.&lt;/p&gt;
+ &lt;p&gt;Type: String.&lt;/p&gt;
+
+ @see #ICON_RESOURCE
+ @see android.content.Intent.ShortcutIconResource
+*/
+ICON_PACKAGE : &quot;icon_package&quot;,
+<span id='android-provider-LiveFolders-property-ICON_RESOURCE'>/** &lt;p&gt;Content provider column.&lt;/p&gt;
+</span> &lt;p&gt;Resource name of the live folder item. This value can be obtained easily using
+ {@link android.content.Intent.ShortcutIconResource#fromContext(android.content.Context, int)}.&lt;/p&gt;
+ &lt;p&gt;Optional.&lt;/p&gt;
+ &lt;p&gt;Type: String.&lt;/p&gt;
+
+ @see #ICON_PACKAGE
+ @see android.content.Intent.ShortcutIconResource
+*/
+ICON_RESOURCE : &quot;icon_resource&quot;,
+<span id='android-provider-LiveFolders-property-DISPLAY_MODE_GRID'>/** Displays a live folder's content in a grid.
+</span>
+ @see LiveFolders#EXTRA_LIVE_FOLDER_DISPLAY_MODE
+*/
+DISPLAY_MODE_GRID : &quot;1&quot;,
+<span id='android-provider-LiveFolders-property-DISPLAY_MODE_LIST'>/** Displays a live folder's content in a list.
+</span>
+ @see LiveFolders#EXTRA_LIVE_FOLDER_DISPLAY_MODE
+*/
+DISPLAY_MODE_LIST : &quot;2&quot;,
+<span id='android-provider-LiveFolders-property-EXTRA_LIVE_FOLDER_NAME'>/** The name of the extra used to define the name of a live folder.
+</span>
+ @see #ACTION_CREATE_LIVE_FOLDER
+*/
+EXTRA_LIVE_FOLDER_NAME : &quot;android.intent.extra.livefolder.NAME&quot;,
+<span id='android-provider-LiveFolders-property-EXTRA_LIVE_FOLDER_ICON'>/** The name of the extra used to define the icon of a live folder.
+</span>
+ @see #ACTION_CREATE_LIVE_FOLDER
+*/
+EXTRA_LIVE_FOLDER_ICON : &quot;android.intent.extra.livefolder.ICON&quot;,
+<span id='android-provider-LiveFolders-property-EXTRA_LIVE_FOLDER_DISPLAY_MODE'>/** The name of the extra used to define the display mode of a live folder.
+</span>
+ @see #ACTION_CREATE_LIVE_FOLDER
+ @see #DISPLAY_MODE_GRID
+ @see #DISPLAY_MODE_LIST
+*/
+EXTRA_LIVE_FOLDER_DISPLAY_MODE : &quot;android.intent.extra.livefolder.DISPLAY_MODE&quot;,
+<span id='android-provider-LiveFolders-property-EXTRA_LIVE_FOLDER_BASE_INTENT'>/** The name of the extra used to define the base Intent of a live folder.
+</span>
+ @see #ACTION_CREATE_LIVE_FOLDER
+*/
+EXTRA_LIVE_FOLDER_BASE_INTENT : &quot;android.intent.extra.livefolder.BASE_INTENT&quot;,
+<span id='android-provider-LiveFolders-property-ACTION_CREATE_LIVE_FOLDER'>/** Activity Action: Creates a live folder.
+</span> &lt;p&gt;Input: Nothing.&lt;/p&gt;
+ &lt;p&gt;Output: An Intent representing the live folder. The intent must contain four
+ extras: EXTRA_LIVE_FOLDER_NAME (value: String),
+ EXTRA_LIVE_FOLDER_ICON (value: ShortcutIconResource),
+ EXTRA_LIVE_FOLDER_URI (value: String) and
+ EXTRA_LIVE_FOLDER_DISPLAY_MODE (value: int). The Intent can optionnally contain
+ EXTRA_LIVE_FOLDER_BASE_INTENT (value: Intent).&lt;/p&gt;
+
+ @see #EXTRA_LIVE_FOLDER_NAME
+ @see #EXTRA_LIVE_FOLDER_ICON
+ @see #EXTRA_LIVE_FOLDER_DISPLAY_MODE
+ @see #EXTRA_LIVE_FOLDER_BASE_INTENT
+ @see android.content.Intent.ShortcutIconResource
+*/
+ACTION_CREATE_LIVE_FOLDER : &quot;android.intent.action.CREATE_LIVE_FOLDER&quot;,
+
+};</pre>
+</body>
+</html>

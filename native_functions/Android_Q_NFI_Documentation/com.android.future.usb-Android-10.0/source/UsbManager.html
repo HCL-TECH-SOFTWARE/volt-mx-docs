@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-future-usb-UsbManager'>/**@class com.android.future.usb.UsbManager
+</span>@extends java.lang.Object
+
+ This is a wrapper class for the USB Manager to support USB accessories.
+
+ &lt;p&gt;You can obtain an instance of this class by calling {@link #getInstance}
+
+*/
+var UsbManager = {
+
+<span id='com-android-future-usb-UsbManager-property-ACTION_USB_ACCESSORY_ATTACHED'>/** Broadcast Action:  A broadcast for USB accessory attached event.
+</span>
+ This intent is sent when a USB accessory is attached.
+ Call {@link #getAccessory(android.content.Intent)} to retrieve the
+ {@link com.google.android.usb.UsbAccessory} for the attached accessory.
+*/
+ACTION_USB_ACCESSORY_ATTACHED : &quot;android.hardware.usb.action.USB_ACCESSORY_ATTACHED&quot;,
+<span id='com-android-future-usb-UsbManager-property-ACTION_USB_ACCESSORY_DETACHED'>/** Broadcast Action:  A broadcast for USB accessory detached event.
+</span>
+ This intent is sent when a USB accessory is detached.
+ Call {@link #getAccessory(android.content.Intent)} to retrieve the
+ {@link com.google.android.usb.UsbAccessory} for the attached accessory that was detached.
+*/
+ACTION_USB_ACCESSORY_DETACHED : &quot;android.hardware.usb.action.USB_ACCESSORY_DETACHED&quot;,
+<span id='com-android-future-usb-UsbManager-property-EXTRA_PERMISSION_GRANTED'>/** Name of extra added to the {@link android.app.PendingIntent}
+</span> passed into {#requestPermission} or {#requestPermission}
+ containing a boolean value indicating whether the user granted permission or not.
+*/
+EXTRA_PERMISSION_GRANTED : &quot;permission&quot;,
+<span id='com-android-future-usb-UsbManager-method-getInstance'>/**Returns a new instance of this class.
+</span>@param {Object {Context}} context the caller's {@link android.content.Context}
+@return {Object {com.android.future.usb.UsbManager}} UsbManager instance.
+*/
+getInstance : function(  ) {},
+
+<span id='com-android-future-usb-UsbManager-method-getAccessory'>/**Returns the {@link com.google.android.usb.UsbAccessory} for
+</span> a {@link #ACTION_USB_ACCESSORY_ATTACHED} or {@link #ACTION_USB_ACCESSORY_ATTACHED}
+ broadcast Intent. This can also be used to retrieve the accessory from the result
+ of a call to {#requestPermission}.
+@return {Object {com.android.future.usb.UsbAccessory}} UsbAccessory for the intent.
+*/
+getAccessory : function(  ) {},
+
+<span id='com-android-future-usb-UsbManager-method-getAccessoryList'>/**Returns a list of currently attached USB accessories.
+</span> (in the current implementation there can be at most one)
+@return {Object {com.android.future.usb.UsbAccessory}} list of USB accessories, or null if none are attached.
+*/
+getAccessoryList : function(  ) {},
+
+<span id='com-android-future-usb-UsbManager-method-openAccessory'>/**Opens a file descriptor for reading and writing data to the USB accessory.
+</span>@param {Object {UsbAccessory}} accessory the USB accessory to open
+@return {Object {android.os.ParcelFileDescriptor}} file descriptor, or null if the accessor could not be opened.
+*/
+openAccessory : function(  ) {},
+
+<span id='com-android-future-usb-UsbManager-method-hasPermission'>/**Returns true if the caller has permission to access the accessory.
+</span> Permission might have been granted temporarily via
+ {@link #requestPermission} or
+ by the user choosing the caller as the default application for the accessory.
+@param {Object {UsbAccessory}} accessory to check permissions for
+@return {Boolean} true if caller has permission
+*/
+hasPermission : function(  ) {},
+
+<span id='com-android-future-usb-UsbManager-method-requestPermission'>/**Requests temporary permission for the given package to access the accessory.
+</span> This may result in a system dialog being displayed to the user
+ if permission had not already been granted.
+ Success or failure is returned via the {@link android.app.PendingIntent} pi.
+ The boolean extra {@link #EXTRA_PERMISSION_GRANTED} will be attached to the
+ PendingIntent to indicate success or failure.
+ If successful, this grants the caller permission to access the device only
+ until the device is disconnected.
+@param {Object {UsbAccessory}} accessory to request permissions for
+@param {Object {PendingIntent}} pi PendingIntent for returning result
+*/
+requestPermission : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

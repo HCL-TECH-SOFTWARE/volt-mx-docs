@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-rtp-AudioGroup'>/**@class android.net.rtp.AudioGroup
+</span>@extends java.lang.Object
+
+ An AudioGroup is an audio hub for the speaker, the microphone, and
+ {@link android.net.rtp.AudioStream}s. Each of these components can be logically turned on
+ or off by calling {@link #setMode}(int) or {@link android.net.rtp.RtpStream#setMode(int)}.
+ The AudioGroup will go through these components and process them one by one
+ within its execution loop. The loop consists of four steps. First, for each
+ AudioStream not in {@link android.net.rtp.RtpStream#MODE_SEND_ONLY}, decodes its incoming
+ packets and stores in its buffer. Then, if the microphone is enabled,
+ processes the recorded audio and stores in its buffer. Third, if the speaker
+ is enabled, mixes all AudioStream buffers and plays back. Finally, for each
+ AudioStream not in {@link android.net.rtp.RtpStream#MODE_RECEIVE_ONLY}, mixes all other
+ buffers and sends back the encoded packets. An AudioGroup does nothing if
+ there is no AudioStream in it.
+
+ &lt;p&gt;Few things must be noticed before using these classes. The performance is
+ highly related to the system load and the network bandwidth. Usually a
+ simpler {@link android.net.rtp.AudioCodec} costs fewer CPU cycles but requires more network
+ bandwidth, and vise versa. Using two AudioStreams at the same time doubles
+ not only the load but also the bandwidth. The condition varies from one
+ device to another, and developers should choose the right combination in
+ order to get the best result.&lt;/p&gt;
+
+ &lt;p&gt;It is sometimes useful to keep multiple AudioGroups at the same time. For
+ example, a Voice over IP (VoIP) application might want to put a conference
+ call on hold in order to make a new call but still allow people in the
+ conference call talking to each other. This can be done easily using two
+ AudioGroups, but there are some limitations. Since the speaker and the
+ microphone are globally shared resources, only one AudioGroup at a time is
+ allowed to run in a mode other than {@link #MODE_ON_HOLD}. The others will
+ be unable to acquire these resources and fail silently.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;Using this class requires
+ {@link android.Manifest.permission#RECORD_AUDIO} permission. Developers
+ should set the audio mode to {@link AudioManager#MODE_IN_COMMUNICATION}
+ using {@link AudioManager#setMode(int)} and change it back when none of
+ the AudioGroups is in use.&lt;/p&gt;
+
+ @see AudioStream
+*/
+var AudioGroup = {
+
+<span id='android-net-rtp-AudioGroup-property-MODE_ON_HOLD'>/** This mode is similar to {@link #MODE_NORMAL} except the speaker and
+</span> the microphone are both disabled.
+*/
+MODE_ON_HOLD : &quot;0&quot;,
+<span id='android-net-rtp-AudioGroup-property-MODE_MUTED'>/** This mode is similar to {@link #MODE_NORMAL} except the microphone is
+</span> disabled.
+*/
+MODE_MUTED : &quot;1&quot;,
+<span id='android-net-rtp-AudioGroup-property-MODE_NORMAL'>/** This mode indicates that the speaker, the microphone, and all
+</span> {@link android.net.rtp.AudioStream}s in the group are enabled. First, the packets
+ received from the streams are decoded and mixed with the audio recorded
+ from the microphone. Then, the results are played back to the speaker,
+ encoded and sent back to each stream.
+*/
+MODE_NORMAL : &quot;2&quot;,
+<span id='android-net-rtp-AudioGroup-property-MODE_ECHO_SUPPRESSION'>/** This mode is similar to {@link #MODE_NORMAL} except the echo suppression
+</span> is enabled. It should be only used when the speaker phone is on.
+*/
+MODE_ECHO_SUPPRESSION : &quot;3&quot;,
+<span id='android-net-rtp-AudioGroup-method-getStreams'>/**Returns the {@link android.net.rtp.AudioStream}s in this group.
+</span>*/
+getStreams : function(  ) {},
+
+<span id='android-net-rtp-AudioGroup-method-getMode'>/**Returns the current mode.
+</span>*/
+getMode : function(  ) {},
+
+<span id='android-net-rtp-AudioGroup-method-setMode'>/**Changes the current mode. It must be one of {@link #MODE_ON_HOLD},
+</span> {@link #MODE_MUTED}, {@link #MODE_NORMAL}, and
+ {@link #MODE_ECHO_SUPPRESSION}.
+@param {Number} mode The mode to change to.
+@throws IllegalArgumentException if the mode is invalid.
+*/
+setMode : function(  ) {},
+
+<span id='android-net-rtp-AudioGroup-method-sendDtmf'>/**Sends a DTMF digit to every {@link android.net.rtp.AudioStream} in this group. Currently
+</span> only event {@code 0} to {@code 15} are supported.
+@throws IllegalArgumentException if the event is invalid.
+*/
+sendDtmf : function(  ) {},
+
+<span id='android-net-rtp-AudioGroup-method-clear'>/**Removes every {@link android.net.rtp.AudioStream} in this group.
+</span>*/
+clear : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-Contacts-AggregationSuggestions'>/**@class android.provider.ContactsContract.Contacts.AggregationSuggestions
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.ContactsContract.ContactsColumns
+
+ implements android.provider.ContactsContract.ContactOptionsColumns
+
+ implements android.provider.ContactsContract.ContactStatusColumns
+
+@extends java.lang.Object
+
+ &lt;p&gt;
+ A &lt;i&gt;read-only&lt;/i&gt; sub-directory of a single contact aggregate that
+ contains all aggregation suggestions (other contacts). The
+ aggregation suggestions are computed based on approximate data
+ matches with this contact.
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;i&gt;Note: this query may be expensive! If you need to use it in bulk,
+ make sure the user experience is acceptable when the query runs for a
+ long time.&lt;/i&gt;
+ &lt;p&gt;
+ Usage example:
+
+ &lt;pre&gt;
+ Uri uri = Contacts.CONTENT_URI.buildUpon()
+          .appendEncodedPath(String.valueOf(contactId))
+          .appendPath(Contacts.AggregationSuggestions.CONTENT_DIRECTORY)
+          .appendQueryParameter(&amp;quot;limit&amp;quot;, &amp;quot;3&amp;quot;)
+          .build()
+ Cursor cursor = getContentResolver().query(suggestionsUri,
+          new String[] {Contacts.DISPLAY_NAME, Contacts._ID, Contacts.LOOKUP_KEY},
+          null, null, null);
+ &lt;/pre&gt;
+
+ &lt;/p&gt;
+ &lt;p&gt;
+ This directory can be used either with a {@link #CONTENT_URI} or
+ {@link #CONTENT_LOOKUP_URI}.
+ &lt;/p&gt;
+*/
+var AggregationSuggestions = {
+
+<span id='android-provider-ContactsContract-Contacts-AggregationSuggestions-property-CONTENT_DIRECTORY'>/** The directory twig for this sub-table. The URI can be followed by an optional
+</span> type-to-filter, similar to
+ {@link android.provider.ContactsContract.Contacts#CONTENT_FILTER_URI}.
+*/
+CONTENT_DIRECTORY : &quot;suggestions&quot;,
+<span id='android-provider-ContactsContract-Contacts-AggregationSuggestions-property-PARAMETER_MATCH_NAME'>/** Used to specify what kind of data is supplied for the suggestion query.
+</span>
+ @hide
+*/
+PARAMETER_MATCH_NAME : &quot;name&quot;,
+<span id='android-provider-ContactsContract-Contacts-AggregationSuggestions-method-builder'>/**
+</span>@hide 
+*/
+builder : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

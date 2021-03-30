@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-LinkProperties'>/**@class android.net.LinkProperties
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Describes the properties of a network link.
+
+ A link represents a connection to a network.
+ It may have multiple addresses and multiple gateways,
+ multiple dns servers but only one http proxy and one
+ network interface.
+
+ Note that this is just a holder of data.  Modifying it
+ does not affect live networks.
+
+*/
+var LinkProperties = {
+
+<span id='android-net-LinkProperties-property-CREATOR'>/** Implement the Parcelable interface.
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-net-LinkProperties-method-compareProvisioning'>/**Compare the provisioning states of two LinkProperties instances.
+</span>@hide 
+*/
+compareProvisioning : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setInterfaceName'>/**Sets the interface name for this link.  All {@link android.net.RouteInfo} already set for this
+</span> will have their interface changed to match this new value.
+@param {String} iface The name of the network interface used for this link.
+*/
+setInterfaceName : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getInterfaceName'>/**Gets the interface name for this link.  May be {@code null} if not set.
+</span>@return {String} The interface name set for this link or {@code null}.
+*/
+getInterfaceName : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getAllInterfaceNames'>/**
+</span>@hide 
+*/
+getAllInterfaceNames : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getAddresses'>/**Returns all the addresses on this link.  We often think of a link having a single address,
+</span> however, particularly with Ipv6 several addresses are typical.  Note that the
+ {@code LinkProperties} actually contains {@link android.net.LinkAddress} objects which also include
+ prefix lengths for each address.  This is a simplified utility alternative to
+ {@link android.net.LinkProperties#getLinkAddresses}.
+@return {Object {java.util.List}} An unmodifiable {@link List} of {@link InetAddress} for this link.
+@hide 
+*/
+getAddresses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getAllAddresses'>/**Returns all the addresses on this link and all the links stacked above it.
+</span>@hide 
+*/
+getAllAddresses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-addLinkAddress'>/**Adds a {@link android.net.LinkAddress} to this {@code LinkProperties} if a {@link android.net.LinkAddress} of the
+</span> same address/prefix does not already exist.  If it does exist it is replaced.
+@param {Object {LinkAddress}} address The {@code LinkAddress} to add.
+@return {Boolean} true if {@code address} was added or updated, false otherwise.
+@hide 
+*/
+addLinkAddress : function(  ) {},
+
+<span id='android-net-LinkProperties-method-removeLinkAddress'>/**Removes a {@link android.net.LinkAddress} from this {@code LinkProperties}.  Specifically, matches
+</span> and {@link android.net.LinkAddress} with the same address and prefix.
+@param {Object {LinkAddress}} toRemove A {@link LinkAddress} specifying the address to remove.
+@return {Boolean} true if the address was removed, false if it did not exist.
+@hide 
+*/
+removeLinkAddress : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getLinkAddresses'>/**Returns all the {@link android.net.LinkAddress} on this link.  Typically a link will have
+</span> one IPv4 address and one or more IPv6 addresses.
+@return {Object {java.util.List}} An unmodifiable {@link List} of {@link LinkAddress} for this link.
+*/
+getLinkAddresses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getAllLinkAddresses'>/**Returns all the addresses on this link and all the links stacked above it.
+</span>@hide 
+*/
+getAllLinkAddresses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setLinkAddresses'>/**Replaces the {@link android.net.LinkAddress} in this {@code LinkProperties} with
+</span> the given {@link Collection} of {@link android.net.LinkAddress}.
+@param {Object {java.util.Collection}} addresses The {@link Collection} of {@link LinkAddress} to set in this
+                  object.
+*/
+setLinkAddresses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-addDnsServer'>/**Adds the given {@link InetAddress} to the list of DNS servers, if not present.
+</span>@param {Object {InetAddress}} dnsServer The {@link InetAddress} to add to the list of DNS servers.
+@return {Boolean} true if the DNS server was added, false if it was already present.
+@hide 
+*/
+addDnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-removeDnsServer'>/**Removes the given {@link InetAddress} from the list of DNS servers.
+</span>@param {Object {InetAddress}} dnsServer The {@link InetAddress} to remove from the list of DNS servers.
+@return {Boolean} true if the DNS server was removed, false if it did not exist.
+@hide 
+*/
+removeDnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setDnsServers'>/**Replaces the DNS servers in this {@code LinkProperties} with
+</span> the given {@link Collection} of {@link InetAddress} objects.
+@param {Object {java.util.Collection}} dnsServers The {@link Collection} of DNS servers to set in this object.
+*/
+setDnsServers : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getDnsServers'>/**Returns all the {@link InetAddress} for DNS servers on this link.
+</span>@return {Object {java.util.List}} An unmodifiable {@link List} of {@link InetAddress} for DNS servers on
+         this link.
+*/
+getDnsServers : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setUsePrivateDns'>/**Set whether private DNS is currently in use on this network.
+</span>@param {Boolean} usePrivateDns The private DNS state.
+@hide 
+*/
+setUsePrivateDns : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isPrivateDnsActive'>/**Returns whether private DNS is currently in use on this network. When
+</span> private DNS is in use, applications must not send unencrypted DNS
+ queries as doing so could reveal private user information. Furthermore,
+ if private DNS is in use and {@link #getPrivateDnsServerName} is not
+ {@code null}, DNS queries must be sent to the specified DNS server.
+@return {Boolean} {@code true} if private DNS is in use, {@code false} otherwise.
+*/
+isPrivateDnsActive : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setPrivateDnsServerName'>/**Set the name of the private DNS server to which private DNS queries
+</span> should be sent when in strict mode. This value should be {@code null}
+ when private DNS is off or in opportunistic mode.
+@param {String} privateDnsServerName The private DNS server name.
+@hide 
+*/
+setPrivateDnsServerName : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getPrivateDnsServerName'>/**Returns the private DNS server name that is in use. If not {@code null},
+</span> private DNS is in strict mode. In this mode, applications should ensure
+ that all DNS queries are encrypted and sent to this hostname and that
+ queries are only sent if the hostname's certificate is valid. If
+ {@code null} and {@link #isPrivateDnsActive} is {@code true}, private
+ DNS is in opportunistic mode, and applications should ensure that DNS
+ queries are encrypted and sent to a DNS server returned by
+ {@link #getDnsServers}. System DNS will handle each of these cases
+ correctly, but applications implementing their own DNS lookups must make
+ sure to follow these requirements.
+@return {String} The private DNS server name.
+*/
+getPrivateDnsServerName : function(  ) {},
+
+<span id='android-net-LinkProperties-method-addValidatedPrivateDnsServer'>/**Adds the given {@link InetAddress} to the list of validated private DNS servers,
+</span> if not present. This is distinct from the server name in that these are actually
+ resolved addresses.
+@param {Object {InetAddress}} dnsServer The {@link InetAddress} to add to the list of validated private DNS servers.
+@return {Boolean} true if the DNS server was added, false if it was already present.
+@hide 
+*/
+addValidatedPrivateDnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-removeValidatedPrivateDnsServer'>/**Removes the given {@link InetAddress} from the list of validated private DNS servers.
+</span>@param {Object {InetAddress}} dnsServer The {@link InetAddress} to remove from the list of validated private DNS
+        servers.
+@return {Boolean} true if the DNS server was removed, false if it did not exist.
+@hide 
+*/
+removeValidatedPrivateDnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setValidatedPrivateDnsServers'>/**Replaces the validated private DNS servers in this {@code LinkProperties} with
+</span> the given {@link Collection} of {@link InetAddress} objects.
+@param {Object {java.util.Collection}} dnsServers The {@link Collection} of validated private DNS servers to set in this
+        object.
+@hide 
+*/
+setValidatedPrivateDnsServers : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getValidatedPrivateDnsServers'>/**Returns all the {@link InetAddress} for validated private DNS servers on this link.
+</span> These are resolved from the private DNS server name.
+@return {Object {java.util.List}} An unmodifiable {@link List} of {@link InetAddress} for validated private
+         DNS servers on this link.
+@hide 
+*/
+getValidatedPrivateDnsServers : function(  ) {},
+
+<span id='android-net-LinkProperties-method-addPcscfServer'>/**Adds the given {@link InetAddress} to the list of PCSCF servers, if not present.
+</span>@param {Object {InetAddress}} pcscfServer The {@link InetAddress} to add to the list of PCSCF servers.
+@return {Boolean} true if the PCSCF server was added, false otherwise.
+@hide 
+*/
+addPcscfServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-removePcscfServer'>/**Removes the given {@link InetAddress} from the list of PCSCF servers.
+</span>@param {Object {InetAddress}} pcscfServer The {@link InetAddress} to remove from the list of PCSCF servers.
+@return {Boolean} true if the PCSCF server was removed, false otherwise.
+@hide 
+*/
+removePcscfServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setPcscfServers'>/**Replaces the PCSCF servers in this {@code LinkProperties} with
+</span> the given {@link Collection} of {@link InetAddress} objects.
+@param {Object {java.util.Collection}} pcscfServers The {@link Collection} of PCSCF servers to set in this object.
+@hide 
+*/
+setPcscfServers : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getPcscfServers'>/**Returns all the {@link InetAddress} for PCSCF servers on this link.
+</span>@return {Object {java.util.List}} An unmodifiable {@link List} of {@link InetAddress} for PCSCF servers on
+         this link.
+@hide 
+*/
+getPcscfServers : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setDomains'>/**Sets the DNS domain search path used on this link.
+</span>@param {String} domains A {@link String} listing in priority order the comma separated
+                domains to search when resolving host names on this link.
+*/
+setDomains : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getDomains'>/**Get the DNS domains search path set for this link. May be {@code null} if not set.
+</span>@return {String} A {@link String} containing the comma separated domains to search when resolving host
+         names on this link or {@code null}.
+*/
+getDomains : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setMtu'>/**Sets the Maximum Transmission Unit size to use on this link.  This should not be used
+</span> unless the system default (1500) is incorrect.  Values less than 68 or greater than
+ 10000 will be ignored.
+@param {Number} mtu The MTU to use for this link.
+*/
+setMtu : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getMtu'>/**Gets any non-default MTU size set for this link.  Note that if the default is being used
+</span> this will return 0.
+@return {Number} The mtu value set for this link.
+*/
+getMtu : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setTcpBufferSizes'>/**Sets the tcp buffers sizes to be used when this link is the system default.
+</span> Should be of the form &quot;rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max&quot;.
+@param {String} tcpBufferSizes The tcp buffers sizes to use.
+@hide 
+*/
+setTcpBufferSizes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getTcpBufferSizes'>/**Gets the tcp buffer sizes. May be {@code null} if not set.
+</span>@return {String} the tcp buffer sizes to use when this link is the system default or {@code null}.
+@hide 
+*/
+getTcpBufferSizes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-addRoute'>/**Adds a {@link android.net.RouteInfo} to this {@code LinkProperties}, if not present. If the
+</span> {@link android.net.RouteInfo} had an interface name set and that differs from the interface set for this
+ {@code LinkProperties} an {@link IllegalArgumentException} will be thrown.  The proper
+ course is to add either un-named or properly named {@link android.net.RouteInfo}.
+@param {Object {RouteInfo}} route A {@link RouteInfo} to add to this object.
+@return {Boolean} {@code false} if the route was already present, {@code true} if it was added.
+*/
+addRoute : function(  ) {},
+
+<span id='android-net-LinkProperties-method-removeRoute'>/**Removes a {@link android.net.RouteInfo} from this {@code LinkProperties}, if present. The route must
+</span> specify an interface and the interface must match the interface of this
+ {@code LinkProperties}, or it will not be removed.
+@return {Boolean} {@code true} if the route was removed, {@code false} if it was not present.
+@hide 
+*/
+removeRoute : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getRoutes'>/**Returns all the {@link android.net.RouteInfo} set on this link.
+</span>@return {Object {java.util.List}} An unmodifiable {@link List} of {@link RouteInfo} for this link.
+*/
+getRoutes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-ensureDirectlyConnectedRoutes'>/**Make sure this LinkProperties instance contains routes that cover the local subnet
+</span> of its link addresses. Add any route that is missing.
+@hide 
+*/
+ensureDirectlyConnectedRoutes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getAllRoutes'>/**Returns all the routes on this link and all the links stacked above it.
+</span>@hide 
+*/
+getAllRoutes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setHttpProxy'>/**Sets the recommended {@link android.net.ProxyInfo} to use on this link, or {@code null} for none.
+</span> Note that Http Proxies are only a hint - the system recommends their use, but it does
+ not enforce it and applications may ignore them.
+@param {Object {ProxyInfo}} proxy A {@link ProxyInfo} defining the HTTP Proxy to use on this link.
+*/
+setHttpProxy : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getHttpProxy'>/**Gets the recommended {@link android.net.ProxyInfo} (or {@code null}) set on this link.
+</span>@return {Object {android.net.ProxyInfo}} The {@link ProxyInfo} set on this link or {@code null}.
+*/
+getHttpProxy : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getNat64Prefix'>/**Returns the NAT64 prefix in use on this link, if any.
+</span>@return {Object {android.net.IpPrefix}} the NAT64 prefix or {@code null}.
+@hide 
+*/
+getNat64Prefix : function(  ) {},
+
+<span id='android-net-LinkProperties-method-setNat64Prefix'>/**Sets the NAT64 prefix in use on this link.
+</span>
+ Currently, only 96-bit prefixes (i.e., where the 32-bit IPv4 address is at the end of the
+ 128-bit IPv6 address) are supported or {@code null} for no prefix.
+@param {Object {IpPrefix}} prefix the NAT64 prefix.
+@hide 
+*/
+setNat64Prefix : function(  ) {},
+
+<span id='android-net-LinkProperties-method-addStackedLink'>/**Adds a stacked link.
+</span>
+ If there is already a stacked link with the same interface name as link,
+ that link is replaced with link. Otherwise, link is added to the list
+ of stacked links.
+@param {Object {LinkProperties}} link The link to add.
+@return {Boolean} true if the link was stacked, false otherwise.
+@hide 
+*/
+addStackedLink : function(  ) {},
+
+<span id='android-net-LinkProperties-method-removeStackedLink'>/**Removes a stacked link.
+</span>
+ If there is a stacked link with the given interface name, it is
+ removed. Otherwise, nothing changes.
+@param {String} iface The interface name of the link to remove.
+@return {Boolean} true if the link was removed, false otherwise.
+@hide 
+*/
+removeStackedLink : function(  ) {},
+
+<span id='android-net-LinkProperties-method-getStackedLinks'>/**Returns all the links stacked on top of this link.
+</span>@hide 
+*/
+getStackedLinks : function(  ) {},
+
+<span id='android-net-LinkProperties-method-clear'>/**Clears this object to its initial state.
+</span>*/
+clear : function(  ) {},
+
+<span id='android-net-LinkProperties-method-describeContents'>/**Implement the Parcelable interface
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-LinkProperties-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIpv4Address'>/**Returns true if this link has an IPv4 address.
+</span>@return {Boolean} {@code true} if there is an IPv4 address, {@code false} otherwise.
+@hide 
+*/
+hasIpv4Address : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIPv4Address'>/**For backward compatibility.
+</span> This was annotated with @UnsupportedAppUsage in P, so we can't remove the method completely
+ just yet.
+@return {Boolean} {@code true} if there is an IPv4 address, {@code false} otherwise.
+@hide 
+*/
+hasIPv4Address : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasGlobalIpv6Address'>/**Returns true if this link has a global preferred IPv6 address.
+</span>@return {Boolean} {@code true} if there is a global preferred IPv6 address, {@code false} otherwise.
+@hide 
+*/
+hasGlobalIpv6Address : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasGlobalIPv6Address'>/**For backward compatibility.
+</span> This was annotated with @UnsupportedAppUsage in P, so we can't remove the method completely
+ just yet.
+@return {Boolean} {@code true} if there is a global preferred IPv6 address, {@code false} otherwise.
+@hide 
+*/
+hasGlobalIPv6Address : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIpv4DefaultRoute'>/**Returns true if this link has an IPv4 default route.
+</span>@return {Boolean} {@code true} if there is an IPv4 default route, {@code false} otherwise.
+@hide 
+*/
+hasIpv4DefaultRoute : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIPv4DefaultRoute'>/**For backward compatibility.
+</span> This was annotated with @UnsupportedAppUsage in P, so we can't remove the method completely
+ just yet.
+@return {Boolean} {@code true} if there is an IPv4 default route, {@code false} otherwise.
+@hide 
+*/
+hasIPv4DefaultRoute : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIpv6DefaultRoute'>/**Returns true if this link has an IPv6 default route.
+</span>@return {Boolean} {@code true} if there is an IPv6 default route, {@code false} otherwise.
+@hide 
+*/
+hasIpv6DefaultRoute : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIPv6DefaultRoute'>/**For backward compatibility.
+</span> This was annotated with @UnsupportedAppUsage in P, so we can't remove the method completely
+ just yet.
+@return {Boolean} {@code true} if there is an IPv6 default route, {@code false} otherwise.
+@hide 
+*/
+hasIPv6DefaultRoute : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIpv4DnsServer'>/**Returns true if this link has an IPv4 DNS server.
+</span>@return {Boolean} {@code true} if there is an IPv4 DNS server, {@code false} otherwise.
+@hide 
+*/
+hasIpv4DnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIPv4DnsServer'>/**For backward compatibility.
+</span> This was annotated with @UnsupportedAppUsage in P, so we can't remove the method completely
+ just yet.
+@return {Boolean} {@code true} if there is an IPv4 DNS server, {@code false} otherwise.
+@hide 
+*/
+hasIPv4DnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIpv6DnsServer'>/**Returns true if this link has an IPv6 DNS server.
+</span>@return {Boolean} {@code true} if there is an IPv6 DNS server, {@code false} otherwise.
+@hide 
+*/
+hasIpv6DnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIPv6DnsServer'>/**For backward compatibility.
+</span> This was annotated with @UnsupportedAppUsage in P, so we can't remove the method completely
+ just yet.
+@return {Boolean} {@code true} if there is an IPv6 DNS server, {@code false} otherwise.
+@hide 
+*/
+hasIPv6DnsServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIpv4PcscfServer'>/**Returns true if this link has an IPv4 PCSCF server.
+</span>@return {Boolean} {@code true} if there is an IPv4 PCSCF server, {@code false} otherwise.
+@hide 
+*/
+hasIpv4PcscfServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hasIpv6PcscfServer'>/**Returns true if this link has an IPv6 PCSCF server.
+</span>@return {Boolean} {@code true} if there is an IPv6 PCSCF server, {@code false} otherwise.
+@hide 
+*/
+hasIpv6PcscfServer : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIpv4Provisioned'>/**Returns true if this link is provisioned for global IPv4 connectivity.
+</span> This requires an IP address, default route, and DNS server.
+@return {Boolean} {@code true} if the link is provisioned, {@code false} otherwise.
+@hide 
+*/
+isIpv4Provisioned : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIpv6Provisioned'>/**Returns true if this link is provisioned for global IPv6 connectivity.
+</span> This requires an IP address, default route, and DNS server.
+@return {Boolean} {@code true} if the link is provisioned, {@code false} otherwise.
+@hide 
+*/
+isIpv6Provisioned : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIPv6Provisioned'>/**For backward compatibility.
+</span> This was annotated with @UnsupportedAppUsage in P, so we can't remove the method completely
+ just yet.
+@return {Boolean} {@code true} if the link is provisioned, {@code false} otherwise.
+@hide 
+*/
+isIPv6Provisioned : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isProvisioned'>/**Returns true if this link is provisioned for global connectivity,
+</span> for at least one Internet Protocol family.
+@return {Boolean} {@code true} if the link is provisioned, {@code false} otherwise.
+@hide 
+*/
+isProvisioned : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isReachable'>/**Evaluate whether the {@link InetAddress} is considered reachable.
+</span>@return {Boolean} {@code true} if the given {@link InetAddress} is considered reachable,
+         {@code false} otherwise.
+@hide 
+*/
+isReachable : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalInterfaceName'>/**Compares this {@code LinkProperties} interface name against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalInterfaceName : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalAddresses'>/**Compares this {@code LinkProperties} interface addresses against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalAddresses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalDnses'>/**Compares this {@code LinkProperties} DNS addresses against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalDnses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalPrivateDns'>/**Compares this {@code LinkProperties} private DNS settings against the
+</span> target.
+@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalPrivateDns : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalValidatedPrivateDnses'>/**Compares this {@code LinkProperties} validated private DNS addresses against
+</span> the target
+@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalValidatedPrivateDnses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalPcscfs'>/**Compares this {@code LinkProperties} PCSCF addresses against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalPcscfs : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalRoutes'>/**Compares this {@code LinkProperties} Routes against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalRoutes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalHttpProxy'>/**Compares this {@code LinkProperties} HttpProxy against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalHttpProxy : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalStackedLinks'>/**Compares this {@code LinkProperties} stacked links against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalStackedLinks : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalMtu'>/**Compares this {@code LinkProperties} MTU against the target
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalMtu : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalTcpBufferSizes'>/**Compares this {@code LinkProperties} Tcp buffer sizes against the target.
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalTcpBufferSizes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isIdenticalNat64Prefix'>/**Compares this {@code LinkProperties} NAT64 prefix against the target.
+</span>@param {Object {LinkProperties}} target LinkProperties to compare.
+@return {Boolean} {@code true} if both are identical, {@code false} otherwise.
+@hide 
+*/
+isIdenticalNat64Prefix : function(  ) {},
+
+<span id='android-net-LinkProperties-method-equals'>/**Compares this {@code LinkProperties} instance against the target
+</span> LinkProperties in {@code obj}. Two LinkPropertieses are equal if
+ all their fields are equal in values.
+
+ For collection fields, such as mDnses, containsAll() is used to check
+ if two collections contains the same elements, independent of order.
+ There are two thoughts regarding containsAll()
+ 1. Duplicated elements. eg, (A, B, B) and (A, A, B) are equal.
+ 2. Worst case performance is O(n^2).
+@param {Object {Object}} obj the object to be tested for equality.
+@return {Boolean} {@code true} if both objects are equal, {@code false} otherwise.
+*/
+equals : function(  ) {},
+
+<span id='android-net-LinkProperties-method-compareAddresses'>/**Compares the addresses in this LinkProperties with another
+</span> LinkProperties, examining only addresses on the base link.
+@param {Object {LinkProperties}} target a LinkProperties with the new list of addresses
+@return {Object {android.net.LinkProperties.CompareResult}} the differences between the addresses.
+@hide 
+*/
+compareAddresses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-compareDnses'>/**Compares the DNS addresses in this LinkProperties with another
+</span> LinkProperties, examining only DNS addresses on the base link.
+@param {Object {LinkProperties}} target a LinkProperties with the new list of dns addresses
+@return {Object {android.net.LinkProperties.CompareResult}} the differences between the DNS addresses.
+@hide 
+*/
+compareDnses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-compareValidatedPrivateDnses'>/**Compares the validated private DNS addresses in this LinkProperties with another
+</span> LinkProperties.
+@param {Object {LinkProperties}} target a LinkProperties with the new list of validated private dns addresses
+@return {Object {android.net.LinkProperties.CompareResult}} the differences between the DNS addresses.
+@hide 
+*/
+compareValidatedPrivateDnses : function(  ) {},
+
+<span id='android-net-LinkProperties-method-compareAllRoutes'>/**Compares all routes in this LinkProperties with another LinkProperties,
+</span> examining both the the base link and all stacked links.
+@param {Object {LinkProperties}} target a LinkProperties with the new list of routes
+@return {Object {android.net.LinkProperties.CompareResult}} the differences between the routes.
+@hide 
+*/
+compareAllRoutes : function(  ) {},
+
+<span id='android-net-LinkProperties-method-compareAllInterfaceNames'>/**Compares all interface names in this LinkProperties with another
+</span> LinkProperties, examining both the the base link and all stacked links.
+@param {Object {LinkProperties}} target a LinkProperties with the new list of interface names
+@return {Object {android.net.LinkProperties.CompareResult}} the differences between the interface names.
+@hide 
+*/
+compareAllInterfaceNames : function(  ) {},
+
+<span id='android-net-LinkProperties-method-hashCode'>/**Generate hashcode based on significant fields
+</span>
+ Equal objects must produce the same hash code, while unequal objects
+ may have the same hash codes.
+*/
+hashCode : function(  ) {},
+
+<span id='android-net-LinkProperties-method-writeToParcel'>/**Implement the Parcelable interface.
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-LinkProperties-method-isValidMtu'>/**Check the valid MTU range based on IPv4 or IPv6.
+</span>@hide 
+*/
+isValidMtu : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

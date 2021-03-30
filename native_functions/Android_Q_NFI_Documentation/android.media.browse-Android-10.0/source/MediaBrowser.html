@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-browse-MediaBrowser'>/**@class android.media.browse.MediaBrowser
+</span>@extends java.lang.Object
+
+ Browses media content offered by a link MediaBrowserService.
+ &lt;p&gt;
+ This object is not thread-safe. All calls should happen on the thread on which the browser
+ was constructed.
+ &lt;/p&gt;
+ &lt;h3&gt;Standard Extra Data&lt;/h3&gt;
+
+ &lt;p&gt;These are the current standard fields that can be used as extra data via
+ {@link #subscribe(String, Bundle, android.media.browse.MediaBrowser.SubscriptionCallback)},
+ {@link #unsubscribe(String, android.media.browse.MediaBrowser.SubscriptionCallback)}, and
+ {@link android.media.browse.MediaBrowser.SubscriptionCallback#onChildrenLoaded(String, List, Bundle)}.
+
+ &lt;ul&gt;
+     &lt;li&gt; {@link #EXTRA_PAGE}
+     &lt;li&gt; {@link #EXTRA_PAGE_SIZE}
+ &lt;/ul&gt;
+*/
+var MediaBrowser = {
+
+<span id='android-media-browse-MediaBrowser-property-EXTRA_PAGE'>/** Used as an int extra field to denote the page number to subscribe.
+</span> The value of {@code EXTRA_PAGE} should be greater than or equal to 0.
+
+ @see #EXTRA_PAGE_SIZE
+*/
+EXTRA_PAGE : &quot;android.media.browse.extra.PAGE&quot;,
+<span id='android-media-browse-MediaBrowser-property-EXTRA_PAGE_SIZE'>/** Used as an int extra field to denote the number of media items in a page.
+</span> The value of {@code EXTRA_PAGE_SIZE} should be greater than or equal to 1.
+
+ @see #EXTRA_PAGE
+*/
+EXTRA_PAGE_SIZE : &quot;android.media.browse.extra.PAGE_SIZE&quot;,
+<span id='android-media-browse-MediaBrowser-method-connect'>/**Connects to the media browser service.
+</span> &lt;p&gt;
+ The connection callback specified in the constructor will be invoked
+ when the connection completes or fails.
+ &lt;/p&gt;
+*/
+connect : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-disconnect'>/**Disconnects from the media browser service.
+</span> After this, no more callbacks will be received.
+*/
+disconnect : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-isConnected'>/**Returns whether the browser is connected to the service.
+</span>*/
+isConnected : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-getServiceComponent'>/**Gets the service component that the media browser is connected to.
+</span>*/
+getServiceComponent : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-getRoot'>/**Gets the root id.
+</span> &lt;p&gt;
+ Note that the root id may become invalid or change when the
+ browser is disconnected.
+ &lt;/p&gt;
+@throws IllegalStateException if not connected.
+*/
+getRoot : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-getExtras'>/**Gets any extras for the media service.
+</span>@throws IllegalStateException if not connected.
+*/
+getExtras : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-getSessionToken'>/**Gets the media session token associated with the media browser.
+</span> &lt;p&gt;
+ Note that the session token may become invalid or change when the
+ browser is disconnected.
+ &lt;/p&gt;
+@return {Object {android.media.session.MediaSession.Token}} The session token for the browser, never null.
+@throws IllegalStateException if not connected.
+*/
+getSessionToken : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-subscribe'>/**Queries for information about the media items that are contained within
+</span> the specified id and subscribes to receive updates when they change.
+ &lt;p&gt;
+ The list of subscriptions is maintained even when not connected and is
+ restored after the reconnection. It is ok to subscribe while not connected
+ but the results will not be returned until the connection completes.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the id is already subscribed with a different callback then the new
+ callback will replace the previous one and the child data will be
+ reloaded.
+ &lt;/p&gt;
+@param {String} parentId The id of the parent media item whose list of children
+            will be subscribed.
+@param {Object {MediaBrowser.SubscriptionCallback}} callback The callback to receive the list of children.
+*/
+subscribe : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-subscribe'>/**Queries with service-specific arguments for information about the media items
+</span> that are contained within the specified id and subscribes to receive updates
+ when they change.
+ &lt;p&gt;
+ The list of subscriptions is maintained even when not connected and is
+ restored after the reconnection. It is ok to subscribe while not connected
+ but the results will not be returned until the connection completes.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the id is already subscribed with a different callback then the new
+ callback will replace the previous one and the child data will be
+ reloaded.
+ &lt;/p&gt;
+@param {String} parentId The id of the parent media item whose list of children
+            will be subscribed.
+@param {Object {Bundle}} options The bundle of service-specific arguments to send to the media
+            browser service. The contents of this bundle may affect the
+            information returned when browsing.
+@param {Object {MediaBrowser.SubscriptionCallback}} callback The callback to receive the list of children.
+*/
+subscribe : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-unsubscribe'>/**Unsubscribes for changes to the children of the specified media id.
+</span> &lt;p&gt;
+ The query callback will no longer be invoked for results associated with
+ this id once this method returns.
+ &lt;/p&gt;
+@param {String} parentId The id of the parent media item whose list of children
+            will be unsubscribed.
+*/
+unsubscribe : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-unsubscribe'>/**Unsubscribes for changes to the children of the specified media id through a callback.
+</span> &lt;p&gt;
+ The query callback will no longer be invoked for results associated with
+ this id once this method returns.
+ &lt;/p&gt;
+@param {String} parentId The id of the parent media item whose list of children
+            will be unsubscribed.
+@param {Object {MediaBrowser.SubscriptionCallback}} callback A callback sent to the media browser service to subscribe.
+*/
+unsubscribe : function(  ) {},
+
+<span id='android-media-browse-MediaBrowser-method-getItem'>/**Retrieves a specific {@link android.media.browse.MediaBrowser.MediaItem} from the connected service. Not
+</span> all services may support this, so falling back to subscribing to the
+ parent's id should be used when unavailable.
+@param {String} mediaId The id of the item to retrieve.
+@param {Object {MediaBrowser.ItemCallback}} cb The callback to receive the result on.
+*/
+getItem : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

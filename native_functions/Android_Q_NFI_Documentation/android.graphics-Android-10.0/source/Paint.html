@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-Paint'>/**@class android.graphics.Paint
+</span>@extends java.lang.Object
+
+ The Paint class holds the style and color information about how to draw
+ geometries, text and bitmaps.
+*/
+var Paint = {
+
+<span id='android-graphics-Paint-property-mBidiFlags'>/** @hide
+</span>*/
+mBidiFlags : &quot;null&quot;,
+<span id='android-graphics-Paint-property-ANTI_ALIAS_FLAG'>/** Paint flag that enables antialiasing when drawing.
+</span>
+ &lt;p&gt;Enabling this flag will cause all draw operations that support
+ antialiasing to use it.&lt;/p&gt;
+
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+ANTI_ALIAS_FLAG : &quot;1&quot;,
+<span id='android-graphics-Paint-property-FILTER_BITMAP_FLAG'>/** Paint flag that enables bilinear sampling on scaled bitmaps.
+</span>
+ &lt;p&gt;If cleared, scaled bitmaps will be drawn with nearest neighbor
+ sampling, likely resulting in artifacts. This should generally be on
+ when drawing bitmaps, unless performance-bound (rendering to software
+ canvas) or preferring pixelation artifacts to blurriness when scaling
+ significantly.&lt;/p&gt;
+
+ &lt;p&gt;If bitmaps are scaled for device density at creation time (as
+ resource bitmaps often are) the filtering will already have been
+ done.&lt;/p&gt;
+
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+FILTER_BITMAP_FLAG : &quot;2&quot;,
+<span id='android-graphics-Paint-property-DITHER_FLAG'>/** Paint flag that enables dithering when blitting.
+</span>
+ &lt;p&gt;Enabling this flag applies a dither to any blit operation where the
+ target's colour space is more constrained than the source.
+
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+DITHER_FLAG : &quot;4&quot;,
+<span id='android-graphics-Paint-property-UNDERLINE_TEXT_FLAG'>/** Paint flag that applies an underline decoration to drawn text.
+</span>
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+UNDERLINE_TEXT_FLAG : &quot;8&quot;,
+<span id='android-graphics-Paint-property-STRIKE_THRU_TEXT_FLAG'>/** Paint flag that applies a strike-through decoration to drawn text.
+</span>
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+STRIKE_THRU_TEXT_FLAG : &quot;16&quot;,
+<span id='android-graphics-Paint-property-FAKE_BOLD_TEXT_FLAG'>/** Paint flag that applies a synthetic bolding effect to drawn text.
+</span>
+ &lt;p&gt;Enabling this flag will cause text draw operations to apply a
+ simulated bold effect when drawing a {@link android.graphics.Typeface} that is not
+ already bold.&lt;/p&gt;
+
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+FAKE_BOLD_TEXT_FLAG : &quot;32&quot;,
+<span id='android-graphics-Paint-property-LINEAR_TEXT_FLAG'>/** Paint flag that enables smooth linear scaling of text.
+</span>
+ &lt;p&gt;Enabling this flag does not actually scale text, but rather adjusts
+ text draw operations to deal gracefully with smooth adjustment of scale.
+ When this flag is enabled, font hinting is disabled to prevent shape
+ deformation between scale factors, and glyph caching is disabled due to
+ the large number of glyph images that will be generated.&lt;/p&gt;
+
+ &lt;p&gt;{@link #SUBPIXEL_TEXT_FLAG} should be used in conjunction with this
+ flag to prevent glyph positions from snapping to whole pixel values as
+ scale factor is adjusted.&lt;/p&gt;
+
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+LINEAR_TEXT_FLAG : &quot;64&quot;,
+<span id='android-graphics-Paint-property-SUBPIXEL_TEXT_FLAG'>/** Paint flag that enables subpixel positioning of text.
+</span>
+ &lt;p&gt;Enabling this flag causes glyph advances to be computed with subpixel
+ accuracy.&lt;/p&gt;
+
+ &lt;p&gt;This can be used with {@link #LINEAR_TEXT_FLAG} to prevent text from
+ jittering during smooth scale transitions.&lt;/p&gt;
+
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+SUBPIXEL_TEXT_FLAG : &quot;128&quot;,
+<span id='android-graphics-Paint-property-DEV_KERN_TEXT_FLAG'>/**Legacy Paint flag, no longer used. */
+</span>DEV_KERN_TEXT_FLAG : &quot;256&quot;,
+<span id='android-graphics-Paint-property-LCD_RENDER_TEXT_FLAG'>/**@hide bit mask for the flag enabling subpixel glyph rendering for text */
+</span>LCD_RENDER_TEXT_FLAG : &quot;512&quot;,
+<span id='android-graphics-Paint-property-EMBEDDED_BITMAP_TEXT_FLAG'>/** Paint flag that enables the use of bitmap fonts when drawing text.
+</span>
+ &lt;p&gt;Disabling this flag will prevent text draw operations from using
+ embedded bitmap strikes in fonts, causing fonts with both scalable
+ outlines and bitmap strikes to draw only the scalable outlines, and
+ fonts with only bitmap strikes to not draw at all.&lt;/p&gt;
+
+ @see #Paint(int)
+ @see #setFlags(int)
+*/
+EMBEDDED_BITMAP_TEXT_FLAG : &quot;1024&quot;,
+<span id='android-graphics-Paint-property-AUTO_HINTING_TEXT_FLAG'>/**@hide bit mask for the flag forcing freetype's autohinter on for text */
+</span>AUTO_HINTING_TEXT_FLAG : &quot;2048&quot;,
+<span id='android-graphics-Paint-property-VERTICAL_TEXT_FLAG'>/**@hide bit mask for the flag enabling vertical rendering for text */
+</span>VERTICAL_TEXT_FLAG : &quot;4096&quot;,
+<span id='android-graphics-Paint-property-HINTING_OFF'>/** Font hinter option that disables font hinting.
+</span>
+ @see #setHinting(int)
+*/
+HINTING_OFF : &quot;0&quot;,
+<span id='android-graphics-Paint-property-HINTING_ON'>/** Font hinter option that enables font hinting.
+</span>
+ @see #setHinting(int)
+*/
+HINTING_ON : &quot;1&quot;,
+<span id='android-graphics-Paint-property-BIDI_LTR'>/** Bidi flag to set LTR paragraph direction.
+</span>
+ @hide
+*/
+BIDI_LTR : &quot;0&quot;,
+<span id='android-graphics-Paint-property-BIDI_RTL'>/** Bidi flag to set RTL paragraph direction.
+</span>
+ @hide
+*/
+BIDI_RTL : &quot;1&quot;,
+<span id='android-graphics-Paint-property-BIDI_DEFAULT_LTR'>/** Bidi flag to detect paragraph direction via heuristics, defaulting to
+</span> LTR.
+
+ @hide
+*/
+BIDI_DEFAULT_LTR : &quot;2&quot;,
+<span id='android-graphics-Paint-property-BIDI_DEFAULT_RTL'>/** Bidi flag to detect paragraph direction via heuristics, defaulting to
+</span> RTL.
+
+ @hide
+*/
+BIDI_DEFAULT_RTL : &quot;3&quot;,
+<span id='android-graphics-Paint-property-BIDI_FORCE_LTR'>/** Bidi flag to override direction to all LTR (ignore bidi).
+</span>
+ @hide
+*/
+BIDI_FORCE_LTR : &quot;4&quot;,
+<span id='android-graphics-Paint-property-BIDI_FORCE_RTL'>/** Bidi flag to override direction to all RTL (ignore bidi).
+</span>
+ @hide
+*/
+BIDI_FORCE_RTL : &quot;5&quot;,
+<span id='android-graphics-Paint-property-DIRECTION_LTR'>/** Flag for getTextRunAdvances indicating left-to-right run direction.
+</span> @hide
+*/
+DIRECTION_LTR : &quot;0&quot;,
+<span id='android-graphics-Paint-property-DIRECTION_RTL'>/** Flag for getTextRunAdvances indicating right-to-left run direction.
+</span> @hide
+*/
+DIRECTION_RTL : &quot;1&quot;,
+<span id='android-graphics-Paint-property-CURSOR_AFTER'>/** Option for getTextRunCursor.
+</span>
+ Compute the valid cursor after offset or the limit of the context, whichever is less.
+*/
+CURSOR_AFTER : &quot;0&quot;,
+<span id='android-graphics-Paint-property-CURSOR_AT_OR_AFTER'>/** Option for getTextRunCursor.
+</span>
+ Compute the valid cursor at or after the offset or the limit of the context, whichever is
+ less.
+*/
+CURSOR_AT_OR_AFTER : &quot;1&quot;,
+<span id='android-graphics-Paint-property-CURSOR_BEFORE'>/** Option for getTextRunCursor.
+</span>
+ Compute the valid cursor before offset or the start of the context, whichever is greater.
+*/
+CURSOR_BEFORE : &quot;2&quot;,
+<span id='android-graphics-Paint-property-CURSOR_AT_OR_BEFORE'>/** Option for getTextRunCursor.
+</span>
+ Compute the valid cursor at or before offset or the start of the context, whichever is
+ greater.
+*/
+CURSOR_AT_OR_BEFORE : &quot;3&quot;,
+<span id='android-graphics-Paint-property-CURSOR_AT'>/** Option for getTextRunCursor.
+</span>
+ Return offset if the cursor at offset is valid, or -1 if it isn't.
+*/
+CURSOR_AT : &quot;4&quot;,
+<span id='android-graphics-Paint-property-START_HYPHEN_EDIT_NO_EDIT'>/** An integer representing the starting of the line has no modification for hyphenation.
+</span>*/
+START_HYPHEN_EDIT_NO_EDIT : &quot;0&quot;,
+<span id='android-graphics-Paint-property-START_HYPHEN_EDIT_INSERT_HYPHEN'>/** An integer representing the starting of the line has normal hyphen character (U+002D).
+</span>*/
+START_HYPHEN_EDIT_INSERT_HYPHEN : &quot;1&quot;,
+<span id='android-graphics-Paint-property-START_HYPHEN_EDIT_INSERT_ZWJ'>/** An integer representing the starting of the line has Zero-Width-Joiner (U+200D).
+</span>*/
+START_HYPHEN_EDIT_INSERT_ZWJ : &quot;2&quot;,
+<span id='android-graphics-Paint-property-END_HYPHEN_EDIT_NO_EDIT'>/** An integer representing the end of the line has no modification for hyphenation.
+</span>*/
+END_HYPHEN_EDIT_NO_EDIT : &quot;0&quot;,
+<span id='android-graphics-Paint-property-END_HYPHEN_EDIT_REPLACE_WITH_HYPHEN'>/** An integer representing the character at the end of the line is replaced with hyphen
+</span> character (U+002D).
+*/
+END_HYPHEN_EDIT_REPLACE_WITH_HYPHEN : &quot;1&quot;,
+<span id='android-graphics-Paint-property-END_HYPHEN_EDIT_INSERT_HYPHEN'>/** An integer representing the end of the line has normal hyphen character (U+002D).
+</span>*/
+END_HYPHEN_EDIT_INSERT_HYPHEN : &quot;2&quot;,
+<span id='android-graphics-Paint-property-END_HYPHEN_EDIT_INSERT_ARMENIAN_HYPHEN'>/** An integer representing the end of the line has Armentian hyphen (U+058A).
+</span>*/
+END_HYPHEN_EDIT_INSERT_ARMENIAN_HYPHEN : &quot;3&quot;,
+<span id='android-graphics-Paint-property-END_HYPHEN_EDIT_INSERT_MAQAF'>/** An integer representing the end of the line has maqaf (Hebrew hyphen, U+05BE).
+</span>*/
+END_HYPHEN_EDIT_INSERT_MAQAF : &quot;4&quot;,
+<span id='android-graphics-Paint-property-END_HYPHEN_EDIT_INSERT_UCAS_HYPHEN'>/** An integer representing the end of the line has Canadian Syllabics hyphen (U+1400).
+</span>*/
+END_HYPHEN_EDIT_INSERT_UCAS_HYPHEN : &quot;5&quot;,
+<span id='android-graphics-Paint-property-END_HYPHEN_EDIT_INSERT_ZWJ_AND_HYPHEN'>/** An integer representing the end of the line has Zero-Width-Joiner (U+200D) followed by normal
+</span> hyphen character (U+002D).
+*/
+END_HYPHEN_EDIT_INSERT_ZWJ_AND_HYPHEN : &quot;6&quot;,
+<span id='android-graphics-Paint-method-reset'>/**Restores the paint to its default settings.
+</span>*/
+reset : function(  ) {},
+
+<span id='android-graphics-Paint-method-set'>/**Copy the fields from src into this paint. This is equivalent to calling
+</span> get() on all of the src fields, and calling the corresponding set()
+ methods on this.
+*/
+set : function(  ) {},
+
+<span id='android-graphics-Paint-method-setCompatibilityScaling'>/**
+</span>@hide 
+*/
+setCompatibilityScaling : function(  ) {},
+
+<span id='android-graphics-Paint-method-getNativeInstance'>/**Return the pointer to the native object while ensuring that any
+</span> mutable objects that are attached to the paint are also up-to-date.
+@hide 
+*/
+getNativeInstance : function(  ) {},
+
+<span id='android-graphics-Paint-method-getBidiFlags'>/**Return the bidi flags on the paint.
+</span>@return {Number} the bidi flags on the paint
+@hide 
+*/
+getBidiFlags : function(  ) {},
+
+<span id='android-graphics-Paint-method-setBidiFlags'>/**Set the bidi flags on the paint.
+</span>@hide 
+*/
+setBidiFlags : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFlags'>/**Return the paint's flags. Use the Flag enum to test flag values.
+</span>@return {Number} the paint's flags (see enums ending in _Flag for bit masks)
+*/
+getFlags : function(  ) {},
+
+<span id='android-graphics-Paint-method-setFlags'>/**Set the paint's flags. Use the Flag enum to specific flag values.
+</span>@param {Number} flags The new flag bits for the paint
+*/
+setFlags : function(  ) {},
+
+<span id='android-graphics-Paint-method-getHinting'>/**Return the paint's hinting mode.  Returns either
+</span> {@link #HINTING_OFF} or {@link #HINTING_ON}.
+*/
+getHinting : function(  ) {},
+
+<span id='android-graphics-Paint-method-setHinting'>/**Set the paint's hinting mode.  May be either
+</span> {@link #HINTING_OFF} or {@link #HINTING_ON}.
+*/
+setHinting : function(  ) {},
+
+<span id='android-graphics-Paint-method-isAntiAlias'>/**Helper for getFlags(), returning true if ANTI_ALIAS_FLAG bit is set
+</span> AntiAliasing smooths out the edges of what is being drawn, but is has
+ no impact on the interior of the shape. See setDither() and
+ setFilterBitmap() to affect how colors are treated.
+@return {Boolean} true if the antialias bit is set in the paint's flags.
+*/
+isAntiAlias : function(  ) {},
+
+<span id='android-graphics-Paint-method-setAntiAlias'>/**Helper for setFlags(), setting or clearing the ANTI_ALIAS_FLAG bit
+</span> AntiAliasing smooths out the edges of what is being drawn, but is has
+ no impact on the interior of the shape. See setDither() and
+ setFilterBitmap() to affect how colors are treated.
+@param {Boolean} aa true to set the antialias bit in the flags, false to clear it
+*/
+setAntiAlias : function(  ) {},
+
+<span id='android-graphics-Paint-method-isDither'>/**Helper for getFlags(), returning true if DITHER_FLAG bit is set
+</span> Dithering affects how colors that are higher precision than the device
+ are down-sampled. No dithering is generally faster, but higher precision
+ colors are just truncated down (e.g. 8888 -&gt; 565). Dithering tries to
+ distribute the error inherent in this process, to reduce the visual
+ artifacts.
+@return {Boolean} true if the dithering bit is set in the paint's flags.
+*/
+isDither : function(  ) {},
+
+<span id='android-graphics-Paint-method-setDither'>/**Helper for setFlags(), setting or clearing the DITHER_FLAG bit
+</span> Dithering affects how colors that are higher precision than the device
+ are down-sampled. No dithering is generally faster, but higher precision
+ colors are just truncated down (e.g. 8888 -&gt; 565). Dithering tries to
+ distribute the error inherent in this process, to reduce the visual
+ artifacts.
+@param {Boolean} dither true to set the dithering bit in flags, false to clear it
+*/
+setDither : function(  ) {},
+
+<span id='android-graphics-Paint-method-isLinearText'>/**Helper for getFlags(), returning true if LINEAR_TEXT_FLAG bit is set
+</span>@return {Boolean} true if the lineartext bit is set in the paint's flags
+*/
+isLinearText : function(  ) {},
+
+<span id='android-graphics-Paint-method-setLinearText'>/**Helper for setFlags(), setting or clearing the LINEAR_TEXT_FLAG bit
+</span>@param {Boolean} linearText true to set the linearText bit in the paint's flags,
+                   false to clear it.
+*/
+setLinearText : function(  ) {},
+
+<span id='android-graphics-Paint-method-isSubpixelText'>/**Helper for getFlags(), returning true if SUBPIXEL_TEXT_FLAG bit is set
+</span>@return {Boolean} true if the subpixel bit is set in the paint's flags
+*/
+isSubpixelText : function(  ) {},
+
+<span id='android-graphics-Paint-method-setSubpixelText'>/**Helper for setFlags(), setting or clearing the SUBPIXEL_TEXT_FLAG bit
+</span>@param {Boolean} subpixelText true to set the subpixelText bit in the paint's
+                     flags, false to clear it.
+*/
+setSubpixelText : function(  ) {},
+
+<span id='android-graphics-Paint-method-isUnderlineText'>/**Helper for getFlags(), returning true if UNDERLINE_TEXT_FLAG bit is set
+</span>@return {Boolean} true if the underlineText bit is set in the paint's flags.
+@see #getUnderlinePosition()
+@see #getUnderlineThickness()
+@see #setUnderlineText(boolean)
+*/
+isUnderlineText : function(  ) {},
+
+<span id='android-graphics-Paint-method-getUnderlinePosition'>/**Returns the distance from top of the underline to the baseline in pixels.
+</span>
+ The result is positive for positions that are below the baseline.
+ This method returns where the underline should be drawn independent of if the {@link #UNDERLINE_TEXT_FLAG} bit is set.
+@return {Number} the position of the underline in pixels
+@see #isUnderlineText()
+@see #getUnderlineThickness()
+@see #setUnderlineText(boolean)
+*/
+getUnderlinePosition : function(  ) {},
+
+<span id='android-graphics-Paint-method-getUnderlineThickness'>/**Returns the thickness of the underline in pixels.
+</span>@return {Number} the thickness of the underline in pixels
+@see #isUnderlineText()
+@see #getUnderlinePosition()
+@see #setUnderlineText(boolean)
+*/
+getUnderlineThickness : function(  ) {},
+
+<span id='android-graphics-Paint-method-setUnderlineText'>/**Helper for setFlags(), setting or clearing the UNDERLINE_TEXT_FLAG bit
+</span>@param {Boolean} underlineText true to set the underlineText bit in the paint's
+                      flags, false to clear it.
+@see #isUnderlineText()
+@see #getUnderlinePosition()
+@see #getUnderlineThickness()
+*/
+setUnderlineText : function(  ) {},
+
+<span id='android-graphics-Paint-method-isStrikeThruText'>/**Helper for getFlags(), returning true if STRIKE_THRU_TEXT_FLAG bit is set
+</span>@return {Boolean} true if the {@link #STRIKE_THRU_TEXT_FLAG} bit is set in the paint's flags.
+@see #getStrikeThruPosition()
+@see #getStrikeThruThickness()
+@see #setStrikeThruText(boolean)
+*/
+isStrikeThruText : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStrikeThruPosition'>/**Distance from top of the strike-through line to the baseline in pixels.
+</span>
+ The result is negative for positions that are above the baseline.
+ This method returns where the strike-through line should be drawn independent of if the
+ {@link #STRIKE_THRU_TEXT_FLAG} bit is set.
+@return {Number} the position of the strike-through line in pixels
+@see #getStrikeThruThickness()
+@see #setStrikeThruText(boolean)
+@see #isStrikeThruText()
+*/
+getStrikeThruPosition : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStrikeThruThickness'>/**Returns the thickness of the strike-through line in pixels.
+</span>@return {Number} the position of the strike-through line in pixels
+@see #getStrikeThruPosition()
+@see #setStrikeThruText(boolean)
+@see #isStrikeThruText()
+*/
+getStrikeThruThickness : function(  ) {},
+
+<span id='android-graphics-Paint-method-setStrikeThruText'>/**Helper for setFlags(), setting or clearing the STRIKE_THRU_TEXT_FLAG bit
+</span>@param {Boolean} strikeThruText true to set the strikeThruText bit in the paint's
+                       flags, false to clear it.
+@see #getStrikeThruPosition()
+@see #getStrikeThruThickness()
+@see #isStrikeThruText()
+*/
+setStrikeThruText : function(  ) {},
+
+<span id='android-graphics-Paint-method-isFakeBoldText'>/**Helper for getFlags(), returning true if FAKE_BOLD_TEXT_FLAG bit is set
+</span>@return {Boolean} true if the fakeBoldText bit is set in the paint's flags.
+*/
+isFakeBoldText : function(  ) {},
+
+<span id='android-graphics-Paint-method-setFakeBoldText'>/**Helper for setFlags(), setting or clearing the FAKE_BOLD_TEXT_FLAG bit
+</span>@param {Boolean} fakeBoldText true to set the fakeBoldText bit in the paint's
+                     flags, false to clear it.
+*/
+setFakeBoldText : function(  ) {},
+
+<span id='android-graphics-Paint-method-isFilterBitmap'>/**Whether or not the bitmap filter is activated.
+</span> Filtering affects the sampling of bitmaps when they are transformed.
+ Filtering does not affect how the colors in the bitmap are converted into
+ device pixels. That is dependent on dithering and xfermodes.
+@see #setFilterBitmap(boolean) setFilterBitmap()
+*/
+isFilterBitmap : function(  ) {},
+
+<span id='android-graphics-Paint-method-setFilterBitmap'>/**Helper for setFlags(), setting or clearing the FILTER_BITMAP_FLAG bit.
+</span> Filtering affects the sampling of bitmaps when they are transformed.
+ Filtering does not affect how the colors in the bitmap are converted into
+ device pixels. That is dependent on dithering and xfermodes.
+@param {Boolean} filter true to set the FILTER_BITMAP_FLAG bit in the paint's
+               flags, false to clear it.
+*/
+setFilterBitmap : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStyle'>/**Return the paint's style, used for controlling how primitives'
+</span> geometries are interpreted (except for drawBitmap, which always assumes
+ FILL_STYLE).
+@return {Object {android.graphics.Paint.Style}} the paint's style setting (Fill, Stroke, StrokeAndFill)
+*/
+getStyle : function(  ) {},
+
+<span id='android-graphics-Paint-method-setStyle'>/**Set the paint's style, used for controlling how primitives'
+</span> geometries are interpreted (except for drawBitmap, which always assumes
+ Fill).
+@param {Object {Paint.Style}} style The new style to set in the paint
+*/
+setStyle : function(  ) {},
+
+<span id='android-graphics-Paint-method-getColor'>/**Return the paint's color in sRGB. Note that the color is a 32bit value
+</span> containing alpha as well as r,g,b. This 32bit value is not premultiplied,
+ meaning that its alpha can be any value, regardless of the values of
+ r,g,b. See the Color class for more details.
+@return {Number} the paint's color (and alpha).
+*/
+getColor : function(  ) {},
+
+<span id='android-graphics-Paint-method-getColorLong'>/**Return the paint's color. Note that the color is a long with an encoded
+</span> {@link android.graphics.ColorSpace} as well as alpha and r,g,b. These values are not
+ premultiplied, meaning that alpha can be any value, regardless of the
+ values of r,g,b. See the {@link android.graphics.Color} class for more details.
+@return {Number} the paint's color, alpha, and {@code ColorSpace} encoded as a
+      {@code ColorLong}
+*/
+getColorLong : function(  ) {},
+
+<span id='android-graphics-Paint-method-setColor'>/**Set the paint's color. Note that the color is an int containing alpha
+</span> as well as r,g,b. This 32bit value is not premultiplied, meaning that
+ its alpha can be any value, regardless of the values of r,g,b.
+ See the Color class for more details.
+@param {Number} color The new color (including alpha) to set in the paint.
+*/
+setColor : function(  ) {},
+
+<span id='android-graphics-Paint-method-setColor'>/**Set the paint's color with a {@code ColorLong}. Note that the color is
+</span> a long with an encoded {@link android.graphics.ColorSpace} as well as alpha and r,g,b.
+ These values are not premultiplied, meaning that alpha can be any value,
+ regardless of the values of r,g,b. See the {@link android.graphics.Color} class for more
+ details.
+@param {Number} color The new color (including alpha and {@link ColorSpace})
+      to set in the paint.
+@throws IllegalArgumentException if the color space encoded in the
+      {@code ColorLong} is invalid or unknown.
+*/
+setColor : function(  ) {},
+
+<span id='android-graphics-Paint-method-getAlpha'>/**Helper to getColor() that just returns the color's alpha value. This is
+</span> the same as calling getColor() &gt;&gt;&gt; 24. It always returns a value between
+ 0 (completely transparent) and 255 (completely opaque).
+@return {Number} the alpha component of the paint's color.
+*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-Paint-method-setAlpha'>/**Helper to setColor(), that only assigns the color's alpha value,
+</span> leaving its r,g,b values unchanged. Results are undefined if the alpha
+ value is outside of the range [0..255]
+@param {Number} a set the alpha component [0..255] of the paint's color.
+*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-Paint-method-setARGB'>/**Helper to setColor(), that takes a,r,g,b and constructs the color int
+</span>@param {Number} a The new alpha component (0..255) of the paint's color.
+@param {Number} r The new red component (0..255) of the paint's color.
+@param {Number} g The new green component (0..255) of the paint's color.
+@param {Number} b The new blue component (0..255) of the paint's color.
+*/
+setARGB : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStrokeWidth'>/**Return the width for stroking.
+</span> &lt;p /&gt;
+ A value of 0 strokes in hairline mode.
+ Hairlines always draws a single pixel independent of the canva's matrix.
+@return {Number} the paint's stroke width, used whenever the paint's style is
+         Stroke or StrokeAndFill.
+*/
+getStrokeWidth : function(  ) {},
+
+<span id='android-graphics-Paint-method-setStrokeWidth'>/**Set the width for stroking.
+</span> Pass 0 to stroke in hairline mode.
+ Hairlines always draws a single pixel independent of the canva's matrix.
+@param {Number} width set the paint's stroke width, used whenever the paint's
+              style is Stroke or StrokeAndFill.
+*/
+setStrokeWidth : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStrokeMiter'>/**Return the paint's stroke miter value. Used to control the behavior
+</span> of miter joins when the joins angle is sharp.
+@return {Number} the paint's miter limit, used whenever the paint's style is
+         Stroke or StrokeAndFill.
+*/
+getStrokeMiter : function(  ) {},
+
+<span id='android-graphics-Paint-method-setStrokeMiter'>/**Set the paint's stroke miter value. This is used to control the behavior
+</span> of miter joins when the joins angle is sharp. This value must be &gt;= 0.
+@param {Number} miter set the miter limit on the paint, used whenever the paint's
+              style is Stroke or StrokeAndFill.
+*/
+setStrokeMiter : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStrokeCap'>/**Return the paint's Cap, controlling how the start and end of stroked
+</span> lines and paths are treated.
+@return {Object {android.graphics.Paint.Cap}} the line cap style for the paint, used whenever the paint's
+         style is Stroke or StrokeAndFill.
+*/
+getStrokeCap : function(  ) {},
+
+<span id='android-graphics-Paint-method-setStrokeCap'>/**Set the paint's Cap.
+</span>@param {Object {Paint.Cap}} cap set the paint's line cap style, used whenever the paint's
+            style is Stroke or StrokeAndFill.
+*/
+setStrokeCap : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStrokeJoin'>/**Return the paint's stroke join type.
+</span>@return {Object {android.graphics.Paint.Join}} the paint's Join.
+*/
+getStrokeJoin : function(  ) {},
+
+<span id='android-graphics-Paint-method-setStrokeJoin'>/**Set the paint's Join.
+</span>@param {Object {Paint.Join}} join set the paint's Join, used whenever the paint's style is
+             Stroke or StrokeAndFill.
+*/
+setStrokeJoin : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFillPath'>/**Applies any/all effects (patheffect, stroking) to src, returning the
+</span> result in dst. The result is that drawing src with this paint will be
+ the same as drawing dst with a default paint (at least from the
+ geometric perspective).
+@param {Object {Path}} src input path
+@param {Object {Path}} dst output path (may be the same as src)
+@return {Boolean} true if the path should be filled, or false if it should be
+                 drawn with a hairline (width == 0)
+*/
+getFillPath : function(  ) {},
+
+<span id='android-graphics-Paint-method-getShader'>/**Get the paint's shader object.
+</span>@return {Object {android.graphics.Shader}} the paint's shader (or null)
+*/
+getShader : function(  ) {},
+
+<span id='android-graphics-Paint-method-setShader'>/**Set or clear the shader object.
+</span> &lt;p /&gt;
+ Pass null to clear any previous shader.
+ As a convenience, the parameter passed is also returned.
+@param {Object {Shader}} shader May be null. the new shader to be installed in the paint
+@return {Object {android.graphics.Shader}} shader
+*/
+setShader : function(  ) {},
+
+<span id='android-graphics-Paint-method-getColorFilter'>/**Get the paint's colorfilter (maybe be null).
+</span>@return {Object {android.graphics.ColorFilter}} the paint's colorfilter (maybe be null)
+*/
+getColorFilter : function(  ) {},
+
+<span id='android-graphics-Paint-method-setColorFilter'>/**Set or clear the paint's colorfilter, returning the parameter.
+</span>@param {Object {ColorFilter}} filter May be null. The new filter to be installed in the paint
+@return {Object {android.graphics.ColorFilter}} filter
+*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-Paint-method-getXfermode'>/**Get the paint's transfer mode object.
+</span>@return {Object {android.graphics.Xfermode}} the paint's transfer mode (or null)
+*/
+getXfermode : function(  ) {},
+
+<span id='android-graphics-Paint-method-getBlendMode'>/**Get the paint's blend mode object.
+</span>@return {Object {android.graphics.BlendMode}} the paint's blend mode (or null)
+*/
+getBlendMode : function(  ) {},
+
+<span id='android-graphics-Paint-method-setXfermode'>/**Set or clear the transfer mode object. A transfer mode defines how
+</span> source pixels (generate by a drawing command) are composited with
+ the destination pixels (content of the render target).
+ &lt;p /&gt;
+ Pass null to clear any previous transfer mode.
+ As a convenience, the parameter passed is also returned.
+ &lt;p /&gt;
+ {@link android.graphics.PorterDuffXfermode} is the most common transfer mode.
+@param {Object {Xfermode}} xfermode May be null. The xfermode to be installed in the paint
+@return {Object {android.graphics.Xfermode}} xfermode
+*/
+setXfermode : function(  ) {},
+
+<span id='android-graphics-Paint-method-setBlendMode'>/**Set or clear the blend mode. A blend mode defines how source pixels
+</span> (generated by a drawing command) are composited with the destination pixels
+ (content of the render target).
+ &lt;p /&gt;
+ Pass null to clear any previous blend mode.
+ &lt;p /&gt;
+@param {Object {BlendMode}} blendmode May be null. The blend mode to be installed in the paint
+@param blendmode May be null. The blend mode to be installed in the paint
+*/
+setBlendMode : function(  ) {},
+
+<span id='android-graphics-Paint-method-getPathEffect'>/**Get the paint's patheffect object.
+</span>@return {Object {android.graphics.PathEffect}} the paint's patheffect (or null)
+*/
+getPathEffect : function(  ) {},
+
+<span id='android-graphics-Paint-method-setPathEffect'>/**Set or clear the patheffect object.
+</span> &lt;p /&gt;
+ Pass null to clear any previous patheffect.
+ As a convenience, the parameter passed is also returned.
+@param {Object {PathEffect}} effect May be null. The patheffect to be installed in the paint
+@return {Object {android.graphics.PathEffect}} effect
+*/
+setPathEffect : function(  ) {},
+
+<span id='android-graphics-Paint-method-getMaskFilter'>/**Get the paint's maskfilter object.
+</span>@return {Object {android.graphics.MaskFilter}} the paint's maskfilter (or null)
+*/
+getMaskFilter : function(  ) {},
+
+<span id='android-graphics-Paint-method-setMaskFilter'>/**Set or clear the maskfilter object.
+</span> &lt;p /&gt;
+ Pass null to clear any previous maskfilter.
+ As a convenience, the parameter passed is also returned.
+@param {Object {MaskFilter}} maskfilter May be null. The maskfilter to be installed in the
+                   paint
+@return {Object {android.graphics.MaskFilter}} maskfilter
+*/
+setMaskFilter : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTypeface'>/**Get the paint's typeface object.
+</span> &lt;p /&gt;
+ The typeface object identifies which font to use when drawing or
+ measuring text.
+@return {Object {android.graphics.Typeface}} the paint's typeface (or null)
+*/
+getTypeface : function(  ) {},
+
+<span id='android-graphics-Paint-method-setTypeface'>/**Set or clear the typeface object.
+</span> &lt;p /&gt;
+ Pass null to clear any previous typeface.
+ As a convenience, the parameter passed is also returned.
+@param {Object {Typeface}} typeface May be null. The typeface to be installed in the paint
+@return {Object {android.graphics.Typeface}} typeface
+*/
+setTypeface : function(  ) {},
+
+<span id='android-graphics-Paint-method-getRasterizer'>/**Get the paint's rasterizer (or null).
+</span> &lt;p /&gt;
+ The raster controls/modifies how paths/text are turned into alpha masks.
+@return {Object {android.graphics.Rasterizer}} the paint's rasterizer (or null)
+@deprecated Rasterizer is not supported by either the HW or PDF backends.
+@removed 
+*/
+getRasterizer : function(  ) {},
+
+<span id='android-graphics-Paint-method-setRasterizer'>/**Set or clear the rasterizer object.
+</span> &lt;p /&gt;
+ Pass null to clear any previous rasterizer.
+ As a convenience, the parameter passed is also returned.
+@param {Object {Rasterizer}} rasterizer May be null. The new rasterizer to be installed in
+                   the paint.
+@return {Object {android.graphics.Rasterizer}} rasterizer
+@deprecated Rasterizer is not supported by either the HW or PDF backends.
+@removed 
+*/
+setRasterizer : function(  ) {},
+
+<span id='android-graphics-Paint-method-setShadowLayer'>/**This draws a shadow layer below the main layer, with the specified
+</span> offset and color, and blur radius. If radius is 0, then the shadow
+ layer is removed.
+ &lt;p&gt;
+ Can be used to create a blurred shadow underneath text. Support for use
+ with other drawing operations is constrained to the software rendering
+ pipeline.
+ &lt;p&gt;
+ The alpha of the shadow will be the paint's alpha if the shadow color is
+ opaque, or the alpha from the shadow color if not.
+*/
+setShadowLayer : function(  ) {},
+
+<span id='android-graphics-Paint-method-setShadowLayer'>/**This draws a shadow layer below the main layer, with the specified
+</span> offset and color, and blur radius. If radius is 0, then the shadow
+ layer is removed.
+ &lt;p&gt;
+ Can be used to create a blurred shadow underneath text. Support for use
+ with other drawing operations is constrained to the software rendering
+ pipeline.
+ &lt;p&gt;
+ The alpha of the shadow will be the paint's alpha if the shadow color is
+ opaque, or the alpha from the shadow color if not.
+@throws IllegalArgumentException if the color space encoded in the
+      {@code ColorLong} is invalid or unknown.
+*/
+setShadowLayer : function(  ) {},
+
+<span id='android-graphics-Paint-method-clearShadowLayer'>/**Clear the shadow layer.
+</span>*/
+clearShadowLayer : function(  ) {},
+
+<span id='android-graphics-Paint-method-hasShadowLayer'>/**Checks if the paint has a shadow layer attached
+</span>@return {Boolean} true if the paint has a shadow layer attached and false otherwise
+@hide 
+*/
+hasShadowLayer : function(  ) {},
+
+<span id='android-graphics-Paint-method-getShadowLayerRadius'>/**Returns the blur radius of the shadow layer.
+</span>@see #setShadowLayer(float,float,float,int)
+@see #setShadowLayer(float,float,float,long)
+*/
+getShadowLayerRadius : function(  ) {},
+
+<span id='android-graphics-Paint-method-getShadowLayerDx'>/**Returns the x offset of the shadow layer.
+</span>@see #setShadowLayer(float,float,float,int)
+@see #setShadowLayer(float,float,float,long)
+*/
+getShadowLayerDx : function(  ) {},
+
+<span id='android-graphics-Paint-method-getShadowLayerDy'>/**Returns the y offset of the shadow layer.
+</span>@see #setShadowLayer(float,float,float,int)
+@see #setShadowLayer(float,float,float,long)
+*/
+getShadowLayerDy : function(  ) {},
+
+<span id='android-graphics-Paint-method-getShadowLayerColor'>/**Returns the color of the shadow layer.
+</span>@see #setShadowLayer(float,float,float,int)
+@see #setShadowLayer(float,float,float,long)
+*/
+getShadowLayerColor : function(  ) {},
+
+<span id='android-graphics-Paint-method-getShadowLayerColorLong'>/**Returns the color of the shadow layer.
+</span>@return {Number} the shadow layer's color encoded as a {@link ColorLong}.
+@see #setShadowLayer(float,float,float,int)
+@see #setShadowLayer(float,float,float,long)
+@see Color
+*/
+getShadowLayerColorLong : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextAlign'>/**Return the paint's Align value for drawing text. This controls how the
+</span> text is positioned relative to its origin. LEFT align means that all of
+ the text will be drawn to the right of its origin (i.e. the origin
+ specifieds the LEFT edge of the text) and so on.
+@return {Object {android.graphics.Paint.Align}} the paint's Align value for drawing text.
+*/
+getTextAlign : function(  ) {},
+
+<span id='android-graphics-Paint-method-setTextAlign'>/**Set the paint's text alignment. This controls how the
+</span> text is positioned relative to its origin. LEFT align means that all of
+ the text will be drawn to the right of its origin (i.e. the origin
+ specifieds the LEFT edge of the text) and so on.
+@param {Object {Paint.Align}} align set the paint's Align value for drawing text.
+*/
+setTextAlign : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextLocale'>/**Get the text's primary Locale. Note that this is not all of the locale-related information
+</span> Paint has. Use {@link #getTextLocales}() to get the complete list.
+@return {Object {java.util.Locale}} the paint's primary Locale used for drawing text, never null.
+*/
+getTextLocale : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextLocales'>/**Get the text locale list.
+</span>@return {Object {android.os.LocaleList}} the paint's LocaleList used for drawing text, never null or empty.
+*/
+getTextLocales : function(  ) {},
+
+<span id='android-graphics-Paint-method-setTextLocale'>/**Set the text locale list to a one-member list consisting of just the locale.
+</span>
+ See {@link #setTextLocales}(LocaleList) for how the locale list affects
+ the way the text is drawn for some languages.
+@param {Object {Locale}} locale the paint's locale value for drawing text, must not be null.
+*/
+setTextLocale : function(  ) {},
+
+<span id='android-graphics-Paint-method-setTextLocales'>/**Set the text locale list.
+</span>
+ The text locale list affects how the text is drawn for some languages.
+
+ For example, if the locale list contains {@link Locale#CHINESE} or {@link Locale#CHINA},
+ then the text renderer will prefer to draw text using a Chinese font. Likewise,
+ if the locale list contains {@link Locale#JAPANESE} or {@link Locale#JAPAN}, then the text
+ renderer will prefer to draw text using a Japanese font. If the locale list contains both,
+ the order those locales appear in the list is considered for deciding the font.
+
+ This distinction is important because Chinese and Japanese text both use many
+ of the same Unicode code points but their appearance is subtly different for
+ each language.
+
+ By default, the text locale list is initialized to a one-member list just containing the
+ system locales. This assumes that the text to be rendered will most likely be in the user's
+ preferred language.
+
+ If the actual language or languages of the text is/are known, then they can be provided to
+ the text renderer using this method. The text renderer may attempt to guess the
+ language script based on the contents of the text to be drawn independent of
+ the text locale here. Specifying the text locales just helps it do a better
+ job in certain ambiguous cases.
+@param {Object {LocaleList}} locales the paint's locale list for drawing text, must not be null or empty.
+*/
+setTextLocales : function(  ) {},
+
+<span id='android-graphics-Paint-method-isElegantTextHeight'>/**Get the elegant metrics flag.
+</span>@return {Boolean} true if elegant metrics are enabled for text drawing.
+*/
+isElegantTextHeight : function(  ) {},
+
+<span id='android-graphics-Paint-method-setElegantTextHeight'>/**Set the paint's elegant height metrics flag. This setting selects font
+</span> variants that have not been compacted to fit Latin-based vertical
+ metrics, and also increases top and bottom bounds to provide more space.
+@param {Boolean} elegant set the paint's elegant metrics flag for drawing text.
+*/
+setElegantTextHeight : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextSize'>/**Return the paint's text size.
+</span>@return {Number} the paint's text size in pixel units.
+*/
+getTextSize : function(  ) {},
+
+<span id='android-graphics-Paint-method-setTextSize'>/**Set the paint's text size. This value must be &gt; 0
+</span>@param {Number} textSize set the paint's text size in pixel units.
+*/
+setTextSize : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextScaleX'>/**Return the paint's horizontal scale factor for text. The default value
+</span> is 1.0.
+@return {Number} the paint's scale factor in X for drawing/measuring text
+*/
+getTextScaleX : function(  ) {},
+
+<span id='android-graphics-Paint-method-setTextScaleX'>/**Set the paint's horizontal scale factor for text. The default value
+</span> is 1.0. Values &gt; 1.0 will stretch the text wider. Values &lt; 1.0 will
+ stretch the text narrower.
+@param {Number} scaleX set the paint's scale in X for drawing/measuring text.
+*/
+setTextScaleX : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextSkewX'>/**Return the paint's horizontal skew factor for text. The default value
+</span> is 0.
+@return {Number} the paint's skew factor in X for drawing text.
+*/
+getTextSkewX : function(  ) {},
+
+<span id='android-graphics-Paint-method-setTextSkewX'>/**Set the paint's horizontal skew factor for text. The default value
+</span> is 0. For approximating oblique text, use values around -0.25.
+@param {Number} skewX set the paint's skew factor in X for drawing text.
+*/
+setTextSkewX : function(  ) {},
+
+<span id='android-graphics-Paint-method-getLetterSpacing'>/**Return the paint's letter-spacing for text. The default value
+</span> is 0.
+@return {Number} the paint's letter-spacing for drawing text.
+*/
+getLetterSpacing : function(  ) {},
+
+<span id='android-graphics-Paint-method-setLetterSpacing'>/**Set the paint's letter-spacing for text. The default value
+</span> is 0.  The value is in 'EM' units.  Typical values for slight
+ expansion will be around 0.05.  Negative values tighten text.
+@param {Number} letterSpacing set the paint's letter-spacing for drawing text.
+*/
+setLetterSpacing : function(  ) {},
+
+<span id='android-graphics-Paint-method-getWordSpacing'>/**Return the paint's extra word-spacing for text.
+</span>
+ The default value is 0.
+@return {Number} the paint's extra word-spacing for drawing text in pixels.
+@see #setWordSpacing(float)
+*/
+getWordSpacing : function(  ) {},
+
+<span id='android-graphics-Paint-method-setWordSpacing'>/**Set the paint's extra word-spacing for text.
+</span>
+ Increases the white space width between words with the given amount of pixels.
+ The default value is 0.
+@param {Number} wordSpacing set the paint's extra word-spacing for drawing text in pixels.
+@see #getWordSpacing()
+*/
+setWordSpacing : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFontFeatureSettings'>/**Returns the font feature settings. The format is the same as the CSS
+</span> font-feature-settings attribute:
+ &lt;a href=&quot;https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&quot;&gt;
+     https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&lt;/a&gt;
+@return {String} the paint's currently set font feature settings. Default is null.
+@see #setFontFeatureSettings(String)
+*/
+getFontFeatureSettings : function(  ) {},
+
+<span id='android-graphics-Paint-method-setFontFeatureSettings'>/**Set font feature settings.
+</span>
+ The format is the same as the CSS font-feature-settings attribute:
+ &lt;a href=&quot;https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&quot;&gt;
+     https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop&lt;/a&gt;
+@param {String} settings the font feature settings string to use, may be null.
+@param settings the font feature settings string to use, may be null.
+*/
+setFontFeatureSettings : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFontVariationSettings'>/**Returns the font variation settings.
+</span>@return {String} the paint's currently set font variation settings. Default is null.
+@see #setFontVariationSettings(String)
+*/
+getFontVariationSettings : function(  ) {},
+
+<span id='android-graphics-Paint-method-setFontVariationSettings'>/**Sets TrueType or OpenType font variation settings. The settings string is constructed from
+</span> multiple pairs of axis tag and style values. The axis tag must contain four ASCII characters
+ and must be wrapped with single quotes (U+0027) or double quotes (U+0022). Axis strings that
+ are longer or shorter than four characters, or contain characters outside of U+0020..U+007E
+ are invalid. If a specified axis name is not defined in the font, the settings will be
+ ignored.
+
+ Examples,
+ &lt;ul&gt;
+ &lt;li&gt;Set font width to 150.
+ &lt;pre&gt;
+ &lt;code&gt;
+   Paint paint = new Paint();
+   paint.setFontVariationSettings(&quot;'wdth' 150&quot;);
+ &lt;/code&gt;
+ &lt;/pre&gt;
+ &lt;/li&gt;
+
+ &lt;li&gt;Set the font slant to 20 degrees and ask for italic style.
+ &lt;pre&gt;
+ &lt;code&gt;
+   Paint paint = new Paint();
+   paint.setFontVariationSettings(&quot;'slnt' 20, 'ital' 1&quot;);
+ &lt;/code&gt;
+ &lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;/ul&gt;
+@param {String} fontVariationSettings font variation settings. You can pass null or empty string as
+                              no variation settings.
+@return {Boolean} true if the given settings is effective to at least one font file underlying this
+         typeface. This function also returns true for empty settings string. Otherwise
+         returns false
+@throws IllegalArgumentException If given string is not a valid font variation settings
+                                  format
+@see #getFontVariationSettings()
+@see FontVariationAxis
+*/
+setFontVariationSettings : function(  ) {},
+
+<span id='android-graphics-Paint-method-getStartHyphenEdit'>/**Get the current value of start hyphen edit.
+</span>
+ The default value is 0 which is equivalent to {@link #START_HYPHEN_EDIT_NO_EDIT}.
+@return {Number} the current starting hyphen edit value
+@see #setStartHyphenEdit(int)
+*/
+getStartHyphenEdit : function(  ) {},
+
+<span id='android-graphics-Paint-method-getEndHyphenEdit'>/**Get the current value of end hyphen edit.
+</span>
+ The default value is 0 which is equivalent to {@link #END_HYPHEN_EDIT_NO_EDIT}.
+@return {Number} the current starting hyphen edit value
+@see #setStartHyphenEdit(int)
+*/
+getEndHyphenEdit : function(  ) {},
+
+<span id='android-graphics-Paint-method-setStartHyphenEdit'>/**Set a start hyphen edit on the paint.
+</span>
+ By setting start hyphen edit, the measurement and drawing is performed with modifying
+ hyphenation at the start of line. For example, by passing
+ {@link #START_HYPHEN_EDIT_INSERT_HYPHEN} like as follows, HYPHEN(U+2010)
+ character is appended at the start of line.
+
+ &lt;pre&gt;
+ &lt;code&gt;
+   Paint paint = new Paint();
+   paint.setStartHyphenEdit(Paint.START_HYPHEN_EDIT_INSERT_HYPHEN);
+   paint.measureText(&quot;abc&quot;, 0, 3);  // Returns the width of &quot;‐abc&quot;
+   Canvas.drawText(&quot;abc&quot;, 0, 3, 0f, 0f, paint);  // Draws &quot;‐abc&quot;
+ &lt;/code&gt;
+ &lt;/pre&gt;
+
+ The default value is 0 which is equivalent to
+ {@link #START_HYPHEN_EDIT_NO_EDIT}.
+@param {Number} startHyphen a start hyphen edit value.
+@see #getStartHyphenEdit()
+*/
+setStartHyphenEdit : function(  ) {},
+
+<span id='android-graphics-Paint-method-setEndHyphenEdit'>/**Set a end hyphen edit on the paint.
+</span>
+ By setting end hyphen edit, the measurement and drawing is performed with modifying
+ hyphenation at the end of line. For example, by passing
+ {@link #END_HYPHEN_EDIT_INSERT_HYPHEN} like as follows, HYPHEN(U+2010)
+ character is appended at the end of line.
+
+ &lt;pre&gt;
+ &lt;code&gt;
+   Paint paint = new Paint();
+   paint.setEndHyphenEdit(Paint.END_HYPHEN_EDIT_INSERT_HYPHEN);
+   paint.measureText(&quot;abc&quot;, 0, 3);  // Returns the width of &quot;abc‐&quot;
+   Canvas.drawText(&quot;abc&quot;, 0, 3, 0f, 0f, paint);  // Draws &quot;abc‐&quot;
+ &lt;/code&gt;
+ &lt;/pre&gt;
+
+ The default value is 0 which is equivalent to {@link #END_HYPHEN_EDIT_NO_EDIT}.
+@param {Number} endHyphen a end hyphen edit value.
+@see #getEndHyphenEdit()
+*/
+setEndHyphenEdit : function(  ) {},
+
+<span id='android-graphics-Paint-method-ascent'>/**Return the distance above (negative) the baseline (ascent) based on the
+</span> current typeface and text size.
+
+ &lt;p&gt;Note that this is the ascent of the main typeface, and actual text rendered may need a
+ larger ascent because fallback fonts may get used in rendering the text.
+@return {Number} the distance above (negative) the baseline (ascent) based on the
+         current typeface and text size.
+*/
+ascent : function(  ) {},
+
+<span id='android-graphics-Paint-method-descent'>/**Return the distance below (positive) the baseline (descent) based on the
+</span> current typeface and text size.
+
+ &lt;p&gt;Note that this is the descent of the main typeface, and actual text rendered may need a
+ larger descent because fallback fonts may get used in rendering the text.
+@return {Number} the distance below (positive) the baseline (descent) based on
+         the current typeface and text size.
+*/
+descent : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFontMetrics'>/**Return the font's recommended interline spacing, given the Paint's
+</span> settings for typeface, textSize, etc. If metrics is not null, return the
+ fontmetric values in it.
+
+ &lt;p&gt;Note that these are the values for the main typeface, and actual text rendered may need a
+ larger set of values because fallback fonts may get used in rendering the text.
+@param {Object {Paint.FontMetrics}} metrics If this object is not null, its fields are filled with
+                the appropriate values given the paint's text attributes.
+@return {Number} the font's recommended interline spacing.
+*/
+getFontMetrics : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFontMetrics'>/**Allocates a new FontMetrics object, and then calls getFontMetrics(fm)
+</span> with it, returning the object.
+*/
+getFontMetrics : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFontMetricsInt'>/**Return the font's interline spacing, given the Paint's settings for
+</span> typeface, textSize, etc. If metrics is not null, return the fontmetric
+ values in it. Note: all values have been converted to integers from
+ floats, in such a way has to make the answers useful for both spacing
+ and clipping. If you want more control over the rounding, call
+ getFontMetrics().
+
+ &lt;p&gt;Note that these are the values for the main typeface, and actual text rendered may need a
+ larger set of values because fallback fonts may get used in rendering the text.
+@return {Number} the font's interline spacing.
+*/
+getFontMetricsInt : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFontMetricsInt'>/**
+</span>*/
+getFontMetricsInt : function(  ) {},
+
+<span id='android-graphics-Paint-method-getFontSpacing'>/**Return the recommend line spacing based on the current typeface and
+</span> text size.
+
+ &lt;p&gt;Note that this is the value for the main typeface, and actual text rendered may need a
+ larger value because fallback fonts may get used in rendering the text.
+@return {Number} recommend line spacing based on the current typeface and
+          text size.
+*/
+getFontSpacing : function(  ) {},
+
+<span id='android-graphics-Paint-method-measureText'>/**Return the width of the text.
+</span>@param {Object {char[]}} text  The text to measure. Cannot be null.
+@param {Number} index The index of the first character to start measuring
+@param {Number} count THe number of characters to measure, beginning with start
+@return {Number} The width of the text
+*/
+measureText : function(  ) {},
+
+<span id='android-graphics-Paint-method-measureText'>/**Return the width of the text.
+</span>@param {String} text  The text to measure. Cannot be null.
+@param {Number} start The index of the first character to start measuring
+@param {Number} end   1 beyond the index of the last character to measure
+@return {Number} The width of the text
+*/
+measureText : function(  ) {},
+
+<span id='android-graphics-Paint-method-measureText'>/**Return the width of the text.
+</span>@param {String} text  The text to measure. Cannot be null.
+@return {Number} The width of the text
+*/
+measureText : function(  ) {},
+
+<span id='android-graphics-Paint-method-measureText'>/**Return the width of the text.
+</span>@param {Object {CharSequence}} text  The text to measure
+@param {Number} start The index of the first character to start measuring
+@param {Number} end   1 beyond the index of the last character to measure
+@return {Number} The width of the text
+*/
+measureText : function(  ) {},
+
+<span id='android-graphics-Paint-method-breakText'>/**Measure the text, stopping early if the measured width exceeds maxWidth.
+</span> Return the number of chars that were measured, and if measuredWidth is
+ not null, return in it the actual width measured.
+@param {Object {char[]}} text  The text to measure. Cannot be null.
+@param {Number} index The offset into text to begin measuring at
+@param {Number} count The number of maximum number of entries to measure. If count
+              is negative, then the characters are measured in reverse order.
+@param {Number} maxWidth The maximum width to accumulate.
+@param {Object {float[]}} measuredWidth Optional. If not null, returns the actual width
+                     measured.
+@return {Number} The number of chars that were measured. Will always be &lt;=
+         abs(count).
+*/
+breakText : function(  ) {},
+
+<span id='android-graphics-Paint-method-breakText'>/**Measure the text, stopping early if the measured width exceeds maxWidth.
+</span> Return the number of chars that were measured, and if measuredWidth is
+ not null, return in it the actual width measured.
+@param {Object {CharSequence}} text  The text to measure. Cannot be null.
+@param {Number} start The offset into text to begin measuring at
+@param {Number} end   The end of the text slice to measure.
+@param {Boolean} measureForwards If true, measure forwards, starting at start.
+                        Otherwise, measure backwards, starting with end.
+@param {Number} maxWidth The maximum width to accumulate.
+@param {Object {float[]}} measuredWidth Optional. If not null, returns the actual width
+                     measured.
+@return {Number} The number of chars that were measured. Will always be &lt;=
+         abs(end - start).
+*/
+breakText : function(  ) {},
+
+<span id='android-graphics-Paint-method-breakText'>/**Measure the text, stopping early if the measured width exceeds maxWidth.
+</span> Return the number of chars that were measured, and if measuredWidth is
+ not null, return in it the actual width measured.
+@param {String} text  The text to measure. Cannot be null.
+@param {Boolean} measureForwards If true, measure forwards, starting with the
+                        first character in the string. Otherwise,
+                        measure backwards, starting with the
+                        last character in the string.
+@param {Number} maxWidth The maximum width to accumulate.
+@param {Object {float[]}} measuredWidth Optional. If not null, returns the actual width
+                     measured.
+@return {Number} The number of chars that were measured. Will always be &lt;=
+         abs(count).
+*/
+breakText : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextWidths'>/**Return the advance widths for the characters in the string.
+</span>@param {Object {char[]}} text     The text to measure. Cannot be null.
+@param {Number} index    The index of the first char to to measure
+@param {Number} count    The number of chars starting with index to measure
+@param {Object {float[]}} widths   array to receive the advance widths of the characters.
+                 Must be at least a large as count.
+@return {Number} the actual number of widths returned.
+*/
+getTextWidths : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextWidths'>/**Return the advance widths for the characters in the string.
+</span>@param {Object {CharSequence}} text     The text to measure. Cannot be null.
+@param {Number} start    The index of the first char to to measure
+@param {Number} end      The end of the text slice to measure
+@param {Object {float[]}} widths   array to receive the advance widths of the characters.
+                 Must be at least a large as (end - start).
+@return {Number} the actual number of widths returned.
+*/
+getTextWidths : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextWidths'>/**Return the advance widths for the characters in the string.
+</span>@param {String} text   The text to measure. Cannot be null.
+@param {Number} start  The index of the first char to to measure
+@param {Number} end    The end of the text slice to measure
+@param {Object {float[]}} widths array to receive the advance widths of the characters.
+               Must be at least a large as the text.
+@return {Number} the number of code units in the specified text.
+*/
+getTextWidths : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextWidths'>/**Return the advance widths for the characters in the string.
+</span>@param {String} text   The text to measure
+@param {Object {float[]}} widths array to receive the advance widths of the characters.
+               Must be at least a large as the text.
+@return {Number} the number of code units in the specified text.
+*/
+getTextWidths : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextRunAdvances'>/**Retrieve the character advances of the text.
+</span>
+ Returns the total advance width for the characters in the run from {@code index} for
+ {@code count} of chars, and if {@code advances} is not null, the advance assigned to each of
+ these characters (java chars).
+
+ &lt;p&gt;
+ The trailing surrogate in a valid surrogate pair is assigned an advance of 0.  Thus the
+ number of returned advances is always equal to count, not to the number of unicode codepoints
+ represented by the run.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ In the case of conjuncts or combining marks, the total advance is assigned to the first
+ logical character, and the following characters are assigned an advance of 0.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This generates the sum of the advances of glyphs for characters in a reordered cluster as the
+ width of the first logical character in the cluster, and 0 for the widths of all other
+ characters in the cluster.  In effect, such clusters are treated like conjuncts.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ The shaping bounds limit the amount of context available outside start and end that can be
+ used for shaping analysis.  These bounds typically reflect changes in bidi level or font
+ metrics across which shaping does not occur.
+ &lt;/p&gt;
+@param {Object {char[]}} chars the text to measure.
+@param {Number} index the index of the first character to measure
+@param {Number} count the number of characters to measure
+@param {Number} contextIndex the index of the first character to use for shaping context.
+                     Context must cover the measureing target.
+@param {Number} contextCount the number of character to use for shaping context.
+                     Context must cover the measureing target.
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Object {float[]}} advances array to receive the advances, must have room for all advances.
+                 This can be null if only total advance is needed
+@param {Number} advancesIndex the position in advances at which to put the advance corresponding to
+                      the character at start
+@return {Number} the total advance in pixels
+*/
+getTextRunAdvances : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextRunCursor'>/**Returns the next cursor position in the run.
+</span>
+ This avoids placing the cursor between surrogates, between characters that form conjuncts,
+ between base characters and combining marks, or within a reordering cluster.
+
+ &lt;p&gt;
+ ContextStart and offset are relative to the start of text.
+ The context is the shaping context for cursor movement, generally the bounds of the metric
+ span enclosing the cursor in the direction of movement.
+
+ &lt;p&gt;
+ If cursorOpt is {@link #CURSOR_AT} and the offset is not a valid cursor position, this
+ returns -1.  Otherwise this will never return a value before contextStart or after
+ contextStart + contextLength.
+@param {Object {char[]}} text the text
+@param {Number} contextStart the start of the context
+@param {Number} contextLength the length of the context
+@param {Boolean} isRtl true if the paragraph context is RTL, otherwise false
+@param {Number} offset the cursor position to move from
+@param {Number} cursorOpt how to move the cursor
+@return {Number} the offset of the next position, or -1
+*/
+getTextRunCursor : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextRunCursor'>/**Returns the next cursor position in the run.
+</span>
+ This avoids placing the cursor between surrogates, between characters that form conjuncts,
+ between base characters and combining marks, or within a reordering cluster.
+
+ &lt;p&gt;
+ ContextStart, contextEnd, and offset are relative to the start of
+ text.  The context is the shaping context for cursor movement, generally
+ the bounds of the metric span enclosing the cursor in the direction of
+ movement.
+
+ &lt;p&gt;
+ If cursorOpt is {@link #CURSOR_AT} and the offset is not a valid cursor position, this
+ returns -1.  Otherwise this will never return a value before contextStart or after
+ contextEnd.
+@param {Object {CharSequence}} text the text
+@param {Number} contextStart the start of the context
+@param {Number} contextEnd the end of the context
+@param {Boolean} isRtl true if the paragraph context is RTL, otherwise false
+@param {Number} offset the cursor position to move from
+@param {Number} cursorOpt how to move the cursor
+@return {Number} the offset of the next position, or -1
+*/
+getTextRunCursor : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextRunCursor'>/**Returns the next cursor position in the run.
+</span>
+ This avoids placing the cursor between surrogates, between characters that form conjuncts,
+ between base characters and combining marks, or within a reordering cluster.
+
+ &lt;p&gt;
+ ContextStart, contextEnd, and offset are relative to the start of text.  The context is the
+ shaping context for cursor movement, generally the bounds of the metric span enclosing the
+ cursor in the direction of movement.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ If cursorOpt is {@link #CURSOR_AT} and the offset is not a valid cursor position, this
+ returns -1.  Otherwise this will never return a value before contextStart or after
+ contextEnd.
+ &lt;/p&gt;
+@param {String} text the text
+@param {Number} contextStart the start of the context
+@param {Number} contextEnd the end of the context
+@param {Boolean} isRtl true if the paragraph context is RTL, otherwise false.
+@param {Number} offset the cursor position to move from
+@param {Number} cursorOpt how to move the cursor
+@return {Number} the offset of the next position, or -1
+@hide 
+*/
+getTextRunCursor : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextPath'>/**Return the path (outline) for the specified text.
+</span> Note: just like Canvas.drawText, this will respect the Align setting in
+ the paint.
+@param {Object {char[]}} text the text to retrieve the path from
+@param {Number} index the index of the first character in text
+@param {Number} count the number of characters starting with index
+@param {Number} x the x coordinate of the text's origin
+@param {Number} y the y coordinate of the text's origin
+@param {Object {Path}} path the path to receive the data describing the text. Must be allocated by the caller
+*/
+getTextPath : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextPath'>/**Return the path (outline) for the specified text.
+</span> Note: just like Canvas.drawText, this will respect the Align setting
+ in the paint.
+@param {String} text the text to retrieve the path from
+@param {Number} start the first character in the text
+@param {Number} end 1 past the last character in the text
+@param {Number} x the x coordinate of the text's origin
+@param {Number} y the y coordinate of the text's origin
+@param {Object {Path}} path the path to receive the data describing the text. Must be allocated by the caller
+*/
+getTextPath : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextBounds'>/**Retrieve the text boundary box and store to bounds.
+</span>
+ Return in bounds (allocated by the caller) the smallest rectangle that
+ encloses all of the characters, with an implied origin at (0,0).
+@param {String} text string to measure and return its bounds
+@param {Number} start index of the first char in the string to measure
+@param {Number} end 1 past the last char in the string to measure
+@param {Object {Rect}} bounds returns the unioned bounds of all the text. Must be allocated by the caller
+*/
+getTextBounds : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextBounds'>/**Retrieve the text boundary box and store to bounds.
+</span>
+ Return in bounds (allocated by the caller) the smallest rectangle that
+ encloses all of the characters, with an implied origin at (0,0).
+
+ Note that styles are ignored even if you pass {@link android.text.Spanned} instance.
+ Use {@link android.text.StaticLayout} for measuring bounds of {@link android.text.Spanned}.
+@param {Object {CharSequence}} text text to measure and return its bounds
+@param {Number} start index of the first char in the text to measure
+@param {Number} end 1 past the last char in the text to measure
+@param {Object {Rect}} bounds returns the unioned bounds of all the text. Must be allocated by the caller
+*/
+getTextBounds : function(  ) {},
+
+<span id='android-graphics-Paint-method-getTextBounds'>/**Return in bounds (allocated by the caller) the smallest rectangle that
+</span> encloses all of the characters, with an implied origin at (0,0).
+@param {Object {char[]}} text  array of chars to measure and return their unioned bounds
+@param {Number} index index of the first char in the array to measure
+@param {Number} count the number of chars, beginning at index, to measure
+@param {Object {Rect}} bounds returns the unioned bounds of all the text. Must be allocated by the caller
+*/
+getTextBounds : function(  ) {},
+
+<span id='android-graphics-Paint-method-hasGlyph'>/**Determine whether the typeface set on the paint has a glyph supporting the string. The
+</span> simplest case is when the string contains a single character, in which this method
+ determines whether the font has the character. In the case of multiple characters, the
+ method returns true if there is a single glyph representing the ligature. For example, if
+ the input is a pair of regional indicator symbols, determine whether there is an emoji flag
+ for the pair.
+
+ &lt;p&gt;Finally, if the string contains a variation selector, the method only returns true if
+ the fonts contains a glyph specific to that variation.
+
+ &lt;p&gt;Checking is done on the entire fallback chain, not just the immediate font referenced.
+@param {String} string the string to test whether there is glyph support
+@return {Boolean} true if the typeface has a glyph for the string
+*/
+hasGlyph : function(  ) {},
+
+<span id='android-graphics-Paint-method-getRunAdvance'>/**Measure cursor position within a run of text.
+</span>
+ &lt;p&gt;The run of text includes the characters from {@code start} to {@code end} in the text. In
+ addition, the range {@code contextStart} to {@code contextEnd} is used as context for the
+ purpose of complex text shaping, such as Arabic text potentially shaped differently based on
+ the text next to it.
+
+ &lt;p&gt;All text outside the range {@code contextStart..contextEnd} is ignored. The text between
+ {@code start} and {@code end} will be laid out to be measured.
+
+ &lt;p&gt;The returned width measurement is the advance from {@code start} to {@code offset}. It is
+ generally a positive value, no matter the direction of the run. If {@code offset == end},
+ the return value is simply the width of the whole run from {@code start} to {@code end}.
+
+ &lt;p&gt;Ligatures are formed for characters in the range {@code start..end} (but not for
+ {@code start..contextStart} or {@code end..contextEnd}). If {@code offset} points to a
+ character in the middle of such a formed ligature, but at a grapheme cluster boundary, the
+ return value will also reflect an advance in the middle of the ligature. See
+ {@link #getOffsetForAdvance} for more discussion of grapheme cluster boundaries.
+
+ &lt;p&gt;The direction of the run is explicitly specified by {@code isRtl}. Thus, this method is
+ suitable only for runs of a single direction.
+
+ &lt;p&gt;All indices are relative to the start of {@code text}. Further, {@code 0 &lt;= contextStart
+ &lt;= start &lt;= offset &lt;= end &lt;= contextEnd &lt;= text.length} must hold on entry.
+@param {Object {char[]}} text the text to measure. Cannot be null.
+@param {Number} start the index of the start of the range to measure
+@param {Number} end the index + 1 of the end of the range to measure
+@param {Number} contextStart the index of the start of the shaping context
+@param {Number} contextEnd the index + 1 of the end of the shaping context
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Number} offset index of caret position
+@return {Number} width measurement between start and offset
+*/
+getRunAdvance : function(  ) {},
+
+<span id='android-graphics-Paint-method-getRunAdvance'>/**
+</span>@param {Object {CharSequence}} text the text to measure. Cannot be null.
+@param {Number} start the index of the start of the range to measure
+@param {Number} end the index + 1 of the end of the range to measure
+@param {Number} contextStart the index of the start of the shaping context
+@param {Number} contextEnd the index + 1 of the end of the shaping context
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Number} offset index of caret position
+@param offset index of caret position
+@return {Number} width measurement between start and offset
+*/
+getRunAdvance : function(  ) {},
+
+<span id='android-graphics-Paint-method-getOffsetForAdvance'>/**Get the character offset within the string whose position is closest to the specified
+</span> horizontal position.
+
+ &lt;p&gt;The returned value is generally the value of {@code offset} for which
+ {@link #getRunAdvance} yields a result most closely approximating {@code advance},
+ and which is also on a grapheme cluster boundary. As such, it is the preferred method
+ for positioning a cursor in response to a touch or pointer event. The grapheme cluster
+ boundaries are based on
+ &lt;a href=&quot;http://unicode.org/reports/tr29/&quot;&gt;Unicode Standard Annex #29&lt;/a&gt; but with some
+ tailoring for better user experience.
+
+ &lt;p&gt;Note that {@code advance} is a (generally positive) width measurement relative to the start
+ of the run. Thus, for RTL runs it the distance from the point to the right edge.
+
+ &lt;p&gt;All indices are relative to the start of {@code text}. Further, {@code 0 &lt;= contextStart
+ &lt;= start &lt;= end &lt;= contextEnd &lt;= text.length} must hold on entry, and {@code start &lt;= result
+ &lt;= end} will hold on return.
+@param {Object {char[]}} text the text to measure. Cannot be null.
+@param {Number} start the index of the start of the range to measure
+@param {Number} end the index + 1 of the end of the range to measure
+@param {Number} contextStart the index of the start of the shaping context
+@param {Number} contextEnd the index + 1 of the end of the range to measure
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Number} advance width relative to start of run
+@return {Number} index of offset
+*/
+getOffsetForAdvance : function(  ) {},
+
+<span id='android-graphics-Paint-method-getOffsetForAdvance'>/**
+</span>@param {Object {CharSequence}} text the text to measure. Cannot be null.
+@param {Number} start the index of the start of the range to measure
+@param {Number} end the index + 1 of the end of the range to measure
+@param {Number} contextStart the index of the start of the shaping context
+@param {Number} contextEnd the index + 1 of the end of the range to measure
+@param {Boolean} isRtl whether the run is in RTL direction
+@param {Number} advance width relative to start of run
+@param advance width relative to start of run
+@return {Number} index of offset
+*/
+getOffsetForAdvance : function(  ) {},
+
+<span id='android-graphics-Paint-method-equalsForTextMeasurement'>/**Returns true of the passed {@link android.graphics.Paint} will have the same effect on text measurement
+</span>@param {Object {Paint}} other A {@link Paint} object.
+@return {Boolean} true if the other {@link Paint} has the same effect on text measurement.
+*/
+equalsForTextMeasurement : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

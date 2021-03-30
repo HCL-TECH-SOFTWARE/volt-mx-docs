@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-HardwareRenderer-FrameRenderRequest'>/**@class android.graphics.HardwareRenderer.FrameRenderRequest
+</span>@extends java.lang.Object
+
+ Sets the parameters that can be used to control a render request for a
+ {@link android.graphics.HardwareRenderer}. This is not thread-safe and must not be held on to for longer
+ than a single frame request.
+*/
+var FrameRenderRequest = {
+
+<span id='android-graphics-HardwareRenderer-FrameRenderRequest-method-setFrameInfo'>/**
+</span>@hide 
+*/
+setFrameInfo : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-FrameRenderRequest-method-setVsyncTime'>/**Sets the vsync time that represents the start point of this frame. Typically this
+</span> comes from {@link android.view.Choreographer.FrameCallback}. Other compatible time
+ sources include {@link System#nanoTime()}, however if the result is being displayed
+ on-screen then using {@link android.view.Choreographer} is strongly recommended to
+ ensure smooth animations.
+
+ &lt;p&gt;If the clock source is not from a CLOCK_MONOTONIC source then any animations driven
+ directly by RenderThread will not be synchronized properly with the current frame.
+@param {Number} vsyncTime The vsync timestamp for this frame. The timestamp is in nanoseconds
+                  and should come from a CLOCK_MONOTONIC source.
+@return {Object {android.graphics.HardwareRenderer.FrameRenderRequest}} this instance
+*/
+setVsyncTime : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-FrameRenderRequest-method-setFrameCommitCallback'>/**Adds a frame commit callback. This callback will be invoked when the current rendering
+</span> content has been rendered into a frame and submitted to the swap chain. The frame may
+ not currently be visible on the display when this is invoked, but it has been submitted.
+ This callback is useful in combination with {@link PixelCopy} to capture the current
+ rendered content of the UI reliably.
+@param {Object {Executor}} executor The executor to run the callback on. It is strongly recommended that
+                 this executor post to a different thread, as the calling thread is
+                 highly sensitive to being blocked.
+@param {Object {Runnable}} frameCommitCallback The callback to invoke when the frame content has been drawn.
+                            Will be invoked on the given {@link Executor}.
+@return {Object {android.graphics.HardwareRenderer.FrameRenderRequest}} this instance
+*/
+setFrameCommitCallback : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-FrameRenderRequest-method-setWaitForPresent'>/**Sets whether or not {@link #syncAndDraw}() should block until the frame has been
+</span> presented. If this is true and {@link #syncAndDraw}() does not return
+ {@link #SYNC_FRAME_DROPPED} or an error then when {@link #syncAndDraw}() has returned
+ the frame has been submitted to the {@link Surface}. The default and typically
+ recommended value is false, as blocking for present will prevent pipelining from
+ happening, reducing overall throughput. This is useful for situations such as
+ {@link SurfaceHolder.Callback2#surfaceRedrawNeeded(SurfaceHolder)} where it is desired
+ to block until a frame has been presented to ensure first-frame consistency with
+ other Surfaces.
+@param {Boolean} shouldWait If true the next call to {@link #syncAndDraw()} will block until
+                   completion.
+@return {Object {android.graphics.HardwareRenderer.FrameRenderRequest}} this instance
+*/
+setWaitForPresent : function(  ) {},
+
+<span id='android-graphics-HardwareRenderer-FrameRenderRequest-method-syncAndDraw'>/**Syncs the RenderNode tree to the render thread and requests a frame to be drawn. This
+</span> {@link android.graphics.HardwareRenderer.FrameRenderRequest} instance should no longer be used after calling this method.
+ The system internally may reuse instances of {@link android.graphics.HardwareRenderer.FrameRenderRequest} to reduce
+ allocation churn.
+@return {Number} The result of the sync operation.
+*/
+syncAndDraw : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

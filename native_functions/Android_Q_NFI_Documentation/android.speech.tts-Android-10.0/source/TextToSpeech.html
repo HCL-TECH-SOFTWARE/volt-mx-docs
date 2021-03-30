@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-speech-tts-TextToSpeech'>/**@class android.speech.tts.TextToSpeech
+</span>@extends java.lang.Object
+
+
+ Synthesizes speech from text for immediate playback or to create a sound file.
+ &lt;p&gt;A TextToSpeech instance can only be used to synthesize text once it has completed its
+ initialization. Implement the {@link android.speech.tts.TextToSpeech.OnInitListener} to be
+ notified of the completion of the initialization.&lt;br&gt;
+ When you are done using the TextToSpeech instance, call the {@link #shutdown}() method
+ to release the native resources used by the TextToSpeech engine.
+*/
+var TextToSpeech = {
+
+<span id='android-speech-tts-TextToSpeech-property-SUCCESS'>/** Denotes a successful operation.
+</span>*/
+SUCCESS : &quot;0&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR'>/** Denotes a generic operation failure.
+</span>*/
+ERROR : &quot;-1&quot;,
+<span id='android-speech-tts-TextToSpeech-property-STOPPED'>/** Denotes a stop requested by a client. It's used only on the service side of the API,
+</span> client should never expect to see this result code.
+*/
+STOPPED : &quot;-2&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR_SYNTHESIS'>/** Denotes a failure of a TTS engine to synthesize the given input.
+</span>*/
+ERROR_SYNTHESIS : &quot;-3&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR_SERVICE'>/** Denotes a failure of a TTS service.
+</span>*/
+ERROR_SERVICE : &quot;-4&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR_OUTPUT'>/** Denotes a failure related to the output (audio device or a file).
+</span>*/
+ERROR_OUTPUT : &quot;-5&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR_NETWORK'>/** Denotes a failure caused by a network connectivity problems.
+</span>*/
+ERROR_NETWORK : &quot;-6&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR_NETWORK_TIMEOUT'>/** Denotes a failure caused by network timeout.
+</span>*/
+ERROR_NETWORK_TIMEOUT : &quot;-7&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR_INVALID_REQUEST'>/** Denotes a failure caused by an invalid request.
+</span>*/
+ERROR_INVALID_REQUEST : &quot;-8&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ERROR_NOT_INSTALLED_YET'>/** Denotes a failure caused by an unfinished download of the voice data.
+</span> @see Engine#KEY_FEATURE_NOT_INSTALLED
+*/
+ERROR_NOT_INSTALLED_YET : &quot;-9&quot;,
+<span id='android-speech-tts-TextToSpeech-property-QUEUE_FLUSH'>/** Queue mode where all entries in the playback queue (media to be played
+</span> and text to be synthesized) are dropped and replaced by the new entry.
+ Queues are flushed with respect to a given calling app. Entries in the queue
+ from other callees are not discarded.
+*/
+QUEUE_FLUSH : &quot;0&quot;,
+<span id='android-speech-tts-TextToSpeech-property-QUEUE_ADD'>/** Queue mode where the new entry is added at the end of the playback queue.
+</span>*/
+QUEUE_ADD : &quot;1&quot;,
+<span id='android-speech-tts-TextToSpeech-property-LANG_COUNTRY_VAR_AVAILABLE'>/** Denotes the language is available exactly as specified by the locale.
+</span>*/
+LANG_COUNTRY_VAR_AVAILABLE : &quot;2&quot;,
+<span id='android-speech-tts-TextToSpeech-property-LANG_COUNTRY_AVAILABLE'>/** Denotes the language is available for the language and country specified
+</span> by the locale, but not the variant.
+*/
+LANG_COUNTRY_AVAILABLE : &quot;1&quot;,
+<span id='android-speech-tts-TextToSpeech-property-LANG_AVAILABLE'>/** Denotes the language is available for the language by the locale,
+</span> but not the country and variant.
+*/
+LANG_AVAILABLE : &quot;0&quot;,
+<span id='android-speech-tts-TextToSpeech-property-LANG_MISSING_DATA'>/** Denotes the language data is missing.
+</span>*/
+LANG_MISSING_DATA : &quot;-1&quot;,
+<span id='android-speech-tts-TextToSpeech-property-LANG_NOT_SUPPORTED'>/** Denotes the language is not supported.
+</span>*/
+LANG_NOT_SUPPORTED : &quot;-2&quot;,
+<span id='android-speech-tts-TextToSpeech-property-ACTION_TTS_QUEUE_PROCESSING_COMPLETED'>/** Broadcast Action: The TextToSpeech synthesizer has completed processing
+</span> of all the text in the speech queue.
+
+ Note that this notifies callers when the &lt;b&gt;engine&lt;/b&gt; has finished has
+ processing text data. Audio playback might not have completed (or even started)
+ at this point. If you wish to be notified when this happens, see
+ {@link android.speech.tts.TextToSpeech.OnUtteranceCompletedListener}.
+*/
+ACTION_TTS_QUEUE_PROCESSING_COMPLETED : &quot;android.speech.tts.TTS_QUEUE_PROCESSING_COMPLETED&quot;,
+<span id='android-speech-tts-TextToSpeech-method-shutdown'>/**Releases the resources used by the TextToSpeech engine.
+</span> It is good practice for instance to call this method in the onDestroy() method of an Activity
+ so the TextToSpeech engine can be cleanly stopped.
+*/
+shutdown : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-addSpeech'>/**Adds a mapping between a string of text and a sound resource in a
+</span> package. After a call to this method, subsequent calls to
+ {@link #speak(CharSequence, int, Bundle, String)} will play the specified sound resource
+ if it is available, or synthesize the text it is missing.
+@param {String} text
+            The string of text. Example: &lt;code&gt;&quot;south_south_east&quot;&lt;/code&gt;
+@param {String} packagename
+            Pass the packagename of the application that contains the
+            resource. If the resource is in your own application (this is
+            the most common case), then put the packagename of your
+            application here.&lt;br/&gt;
+            Example: &lt;b&gt;&quot;com.google.marvin.compass&quot;&lt;/b&gt;&lt;br/&gt;
+            The packagename can be found in the AndroidManifest.xml of
+            your application.
+            &lt;p&gt;
+            &lt;code&gt;&amp;lt;manifest xmlns:android=&amp;quot;...&amp;quot;
+      package=&amp;quot;&lt;b&gt;com.google.marvin.compass&lt;/b&gt;&amp;quot;&amp;gt;&lt;/code&gt;
+            &lt;/p&gt;
+@param {Number} resourceId
+            Example: &lt;code&gt;R.raw.south_south_east&lt;/code&gt;
+@return {Number} Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}.
+*/
+addSpeech : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-addSpeech'>/**Adds a mapping between a CharSequence (may be spanned with TtsSpans) of text
+</span> and a sound resource in a package. After a call to this method, subsequent calls to
+ {@link #speak(CharSequence, int, Bundle, String)} will play the specified sound resource
+ if it is available, or synthesize the text it is missing.
+@param {Object {CharSequence}} text
+            The string of text. Example: &lt;code&gt;&quot;south_south_east&quot;&lt;/code&gt;
+@param {String} packagename
+            Pass the packagename of the application that contains the
+            resource. If the resource is in your own application (this is
+            the most common case), then put the packagename of your
+            application here.&lt;br/&gt;
+            Example: &lt;b&gt;&quot;com.google.marvin.compass&quot;&lt;/b&gt;&lt;br/&gt;
+            The packagename can be found in the AndroidManifest.xml of
+            your application.
+            &lt;p&gt;
+            &lt;code&gt;&amp;lt;manifest xmlns:android=&amp;quot;...&amp;quot;
+      package=&amp;quot;&lt;b&gt;com.google.marvin.compass&lt;/b&gt;&amp;quot;&amp;gt;&lt;/code&gt;
+            &lt;/p&gt;
+@param {Number} resourceId
+            Example: &lt;code&gt;R.raw.south_south_east&lt;/code&gt;
+@return {Number} Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}.
+*/
+addSpeech : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-addSpeech'>/**Adds a mapping between a string of text and a sound file. Using this, it is possible to
+</span> add custom pronounciations for a string of text. After a call to this method, subsequent
+ calls to {@link #speak(CharSequence, int, Bundle, String)} will play the specified sound
+ resource if it is available, or synthesize the text it is missing.
+@param {String} text
+            The string of text. Example: &lt;code&gt;&quot;south_south_east&quot;&lt;/code&gt;
+@param {String} filename
+            The full path to the sound file (for example:
+            &quot;/sdcard/mysounds/hello.wav&quot;)
+@return {Number} Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}.
+*/
+addSpeech : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-addSpeech'>/**Adds a mapping between a CharSequence (may be spanned with TtsSpans and a sound file.
+</span> Using this, it is possible to add custom pronounciations for a string of text. After a call
+ to this method, subsequent calls to {@link #speak(CharSequence, int, Bundle, String)}
+ will play the specified sound resource if it is available, or synthesize the text it is
+ missing.
+@param {Object {CharSequence}} text
+            The string of text. Example: &lt;code&gt;&quot;south_south_east&quot;&lt;/code&gt;
+@param {Object {File}} file
+            File object pointing to the sound file.
+@return {Number} Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}.
+*/
+addSpeech : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-addEarcon'>/**Adds a mapping between a string of text and a sound resource in a
+</span> package. Use this to add custom earcons.
+@param {String} earcon The name of the earcon.
+            Example: &lt;code&gt;&quot;[tick]&quot;&lt;/code&gt;&lt;br/&gt;
+@param {String} packagename
+            the package name of the application that contains the
+            resource. This can for instance be the package name of your own application.
+            Example: &lt;b&gt;&quot;com.google.marvin.compass&quot;&lt;/b&gt;&lt;br/&gt;
+            The package name can be found in the AndroidManifest.xml of
+            the application containing the resource.
+            &lt;p&gt;
+            &lt;code&gt;&amp;lt;manifest xmlns:android=&amp;quot;...&amp;quot;
+      package=&amp;quot;&lt;b&gt;com.google.marvin.compass&lt;/b&gt;&amp;quot;&amp;gt;&lt;/code&gt;
+            &lt;/p&gt;
+@param {Number} resourceId
+            Example: &lt;code&gt;R.raw.tick_snd&lt;/code&gt;
+@param resourceId
+            Example: &lt;code&gt;R.raw.tick_snd&lt;/code&gt;
+@return {Number} Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}.
+*/
+addEarcon : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-addEarcon'>/**Adds a mapping between a string of text and a sound file.
+</span> Use this to add custom earcons.
+@param {String} earcon
+            The name of the earcon.
+            Example: &lt;code&gt;&quot;[tick]&quot;&lt;/code&gt;
+@param {String} filename
+            The full path to the sound file (for example:
+            &quot;/sdcard/mysounds/tick.wav&quot;)
+@param filename
+            The full path to the sound file (for example:
+            &quot;/sdcard/mysounds/tick.wav&quot;)
+@return {Number} Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}.
+@deprecated As of API level 21, replaced by
+         {@link #addEarcon(String, File)}.
+*/
+addEarcon : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-addEarcon'>/**Adds a mapping between a string of text and a sound file.
+</span> Use this to add custom earcons.
+@param {String} earcon
+            The name of the earcon.
+            Example: &lt;code&gt;&quot;[tick]&quot;&lt;/code&gt;
+@param {Object {File}} file
+            File object pointing to the sound file.
+@param file
+            File object pointing to the sound file.
+@return {Number} Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}.
+*/
+addEarcon : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-speak'>/**Speaks the text using the specified queuing strategy and speech parameters, the text may
+</span> be spanned with TtsSpans.
+ This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}) and using the
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID} parameter.
+@param {Object {CharSequence}} text The string of text to be spoken. No longer than
+            {@link #getMaxSpeechInputLength()} characters.
+@param {Number} queueMode The queuing strategy to use, {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}.
+@param {Object {Bundle}} params Parameters for the request. Can be null.
+            Supported parameter names:
+            {@link Engine#KEY_PARAM_STREAM},
+            {@link Engine#KEY_PARAM_VOLUME},
+            {@link Engine#KEY_PARAM_PAN}.
+            Engine specific parameters may be passed in but the parameter keys
+            must be prefixed by the name of the engine they are intended for. For example
+            the keys &quot;com.svox.pico_foo&quot; and &quot;com.svox.pico:bar&quot; will be passed to the
+            engine named &quot;com.svox.pico&quot; if it is being used.
+@param {String} utteranceId An unique identifier for this request.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the speak operation.
+*/
+speak : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-speak'>/**Speaks the string using the specified queuing strategy and speech parameters.
+</span> This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}) and using the
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID} parameter.
+@param {String} text The string of text to be spoken. No longer than
+            {@link #getMaxSpeechInputLength()} characters.
+@param {Number} queueMode The queuing strategy to use, {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}.
+@param {Object {java.util.HashMap}} params Parameters for the request. Can be null.
+            Supported parameter names:
+            {@link Engine#KEY_PARAM_STREAM},
+            {@link Engine#KEY_PARAM_UTTERANCE_ID},
+            {@link Engine#KEY_PARAM_VOLUME},
+            {@link Engine#KEY_PARAM_PAN}.
+            Engine specific parameters may be passed in but the parameter keys
+            must be prefixed by the name of the engine they are intended for. For example
+            the keys &quot;com.svox.pico_foo&quot; and &quot;com.svox.pico:bar&quot; will be passed to the
+            engine named &quot;com.svox.pico&quot; if it is being used.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the speak operation.
+@deprecated As of API level 21, replaced by
+         {@link #speak(CharSequence, int, Bundle, String)}.
+*/
+speak : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-playEarcon'>/**Plays the earcon using the specified queueing mode and parameters.
+</span> The earcon must already have been added with {@link #addEarcon(String, String)} or
+ {@link #addEarcon(String, String, int)}.
+ This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}) and using the
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID} parameter.
+@param {String} earcon The earcon that should be played
+@param {Number} queueMode {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}.
+@param {Object {Bundle}} params Parameters for the request. Can be null.
+            Supported parameter names:
+            {@link Engine#KEY_PARAM_STREAM},
+            Engine specific parameters may be passed in but the parameter keys
+            must be prefixed by the name of the engine they are intended for. For example
+            the keys &quot;com.svox.pico_foo&quot; and &quot;com.svox.pico:bar&quot; will be passed to the
+            engine named &quot;com.svox.pico&quot; if it is being used.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the playEarcon operation.
+*/
+playEarcon : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-playEarcon'>/**Plays the earcon using the specified queueing mode and parameters.
+</span> The earcon must already have been added with {@link #addEarcon(String, String)} or
+ {@link #addEarcon(String, String, int)}.
+ This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}) and using the
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID} parameter.
+@param {String} earcon The earcon that should be played
+@param {Number} queueMode {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}.
+@param {Object {java.util.HashMap}} params Parameters for the request. Can be null.
+            Supported parameter names:
+            {@link Engine#KEY_PARAM_STREAM},
+            {@link Engine#KEY_PARAM_UTTERANCE_ID}.
+            Engine specific parameters may be passed in but the parameter keys
+            must be prefixed by the name of the engine they are intended for. For example
+            the keys &quot;com.svox.pico_foo&quot; and &quot;com.svox.pico:bar&quot; will be passed to the
+            engine named &quot;com.svox.pico&quot; if it is being used.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the playEarcon operation.
+@deprecated As of API level 21, replaced by
+         {@link #playEarcon(String, int, Bundle, String)}.
+*/
+playEarcon : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-playSilentUtterance'>/**Plays silence for the specified amount of time using the specified
+</span> queue mode.
+ This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}) and using the
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID} parameter.
+@param {Number} durationInMs The duration of the silence.
+@param {Number} queueMode {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}.
+@param {String} utteranceId An unique identifier for this request.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the playSilentUtterance operation.
+*/
+playSilentUtterance : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-playSilence'>/**Plays silence for the specified amount of time using the specified
+</span> queue mode.
+ This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}) and using the
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID} parameter.
+@param {Number} durationInMs The duration of the silence.
+@param {Number} queueMode {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}.
+@param {Object {java.util.HashMap}} params Parameters for the request. Can be null.
+            Supported parameter names:
+            {@link Engine#KEY_PARAM_UTTERANCE_ID}.
+            Engine specific parameters may be passed in but the parameter keys
+            must be prefixed by the name of the engine they are intended for. For example
+            the keys &quot;com.svox.pico_foo&quot; and &quot;com.svox.pico:bar&quot; will be passed to the
+            engine named &quot;com.svox.pico&quot; if it is being used.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the playSilence operation.
+@deprecated As of API level 21, replaced by
+         {@link #playSilentUtterance(long, int, String)}.
+*/
+playSilence : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getFeatures'>/**Queries the engine for the set of features it supports for a given locale.
+</span> Features can either be framework defined, e.g.
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_FEATURE_NETWORK_SYNTHESIS} or engine specific.
+ Engine specific keys must be prefixed by the name of the engine they
+ are intended for. These keys can be used as parameters to
+ {@link android.speech.tts.TextToSpeech#speak(String, int, java.util.HashMap)} and
+ {@link android.speech.tts.TextToSpeech#synthesizeToFile(String, java.util.HashMap, String)}.
+
+ Features values are strings and their values must meet restrictions described in their
+ documentation.
+@param {Object {Locale}} locale The locale to query features for.
+@return {Object {java.util.Set}} Set instance. May return {@code null} on error.
+@deprecated As of API level 21, please use voices. In order to query features of the voice,
+ call {@link #getVoices()} to retrieve the list of available voices and
+ {@link Voice#getFeatures()} to retrieve the set of features.
+*/
+getFeatures : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-isSpeaking'>/**Checks whether the TTS engine is busy speaking. Note that a speech item is
+</span> considered complete once it's audio data has been sent to the audio mixer, or
+ written to a file. There might be a finite lag between this point, and when
+ the audio hardware completes playback.
+@return {Boolean} {@code true} if the TTS engine is speaking.
+*/
+isSpeaking : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-stop'>/**Interrupts the current utterance (whether played or rendered to file) and discards other
+</span> utterances in the queue.
+@return {Number} {@link #ERROR} or {@link #SUCCESS}.
+*/
+stop : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setSpeechRate'>/**Sets the speech rate.
+</span>
+ This has no effect on any pre-recorded speech.
+@param {Number} speechRate Speech rate. {@code 1.0} is the normal speech rate,
+            lower values slow down the speech ({@code 0.5} is half the normal speech rate),
+            greater values accelerate it ({@code 2.0} is twice the normal speech rate).
+@return {Number} {@link #ERROR} or {@link #SUCCESS}.
+*/
+setSpeechRate : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setPitch'>/**Sets the speech pitch for the TextToSpeech engine.
+</span>
+ This has no effect on any pre-recorded speech.
+@param {Number} pitch Speech pitch. {@code 1.0} is the normal pitch,
+            lower values lower the tone of the synthesized voice,
+            greater values increase it.
+@return {Number} {@link #ERROR} or {@link #SUCCESS}.
+*/
+setPitch : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setAudioAttributes'>/**Sets the audio attributes to be used when speaking text or playing
+</span> back a file.
+@param {Object {AudioAttributes}} audioAttributes Valid AudioAttributes instance.
+@return {Number} {@link #ERROR} or {@link #SUCCESS}.
+*/
+setAudioAttributes : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getCurrentEngine'>/**
+</span>@return {String} the engine currently in use by this TextToSpeech instance.
+@hide 
+*/
+getCurrentEngine : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getDefaultLanguage'>/**Returns a Locale instance describing the language currently being used as the default
+</span> Text-to-speech language.
+
+ The locale object returned by this method is NOT a valid one. It has identical form to the
+ one in {@link #getLanguage}(). Please refer to {@link #getLanguage}() for more information.
+@return {Object {java.util.Locale}} language, country (if any) and variant (if any) used by the client stored in a
+     Locale instance, or {@code null} on error.
+@deprecated As of API level 21, use &lt;code&gt;getDefaultVoice().getLocale()&lt;/code&gt; ({@link
+   #getDefaultVoice()})
+*/
+getDefaultLanguage : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setLanguage'>/**Sets the text-to-speech language.
+</span> The TTS engine will try to use the closest match to the specified
+ language as represented by the Locale, but there is no guarantee that the exact same Locale
+ will be used. Use {@link #isLanguageAvailable}(Locale) to check the level of support
+ before choosing the language to use for the next utterances.
+
+ This method sets the current voice to the default one for the given Locale;
+ {@link #getVoice}() can be used to retrieve it.
+@param {Object {Locale}} loc The locale describing the language to be used.
+@return {Number} Code indicating the support status for the locale. See {@link #LANG_AVAILABLE},
+         {@link #LANG_COUNTRY_AVAILABLE}, {@link #LANG_COUNTRY_VAR_AVAILABLE},
+         {@link #LANG_MISSING_DATA} and {@link #LANG_NOT_SUPPORTED}.
+*/
+setLanguage : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getLanguage'>/**Returns a Locale instance describing the language currently being used for synthesis
+</span> requests sent to the TextToSpeech engine.
+
+ In Android 4.2 and before (API &lt;= 17) this function returns the language that is currently
+ being used by the TTS engine. That is the last language set by this or any other
+ client by a {@link android.speech.tts.TextToSpeech#setLanguage} call to the same engine.
+
+ In Android versions after 4.2 this function returns the language that is currently being
+ used for the synthesis requests sent from this client. That is the last language set
+ by a {@link android.speech.tts.TextToSpeech#setLanguage} call on this instance.
+
+ If a voice is set (by {@link #setVoice}(Voice)), getLanguage will return the language of
+ the currently set voice.
+
+ Please note that the Locale object returned by this method is NOT a valid Locale object. Its
+ language field contains a three-letter ISO 639-2/T code (where a proper Locale would use
+ a two-letter ISO 639-1 code), and the country field contains a three-letter ISO 3166 country
+ code (where a proper Locale would use a two-letter ISO 3166-1 code).
+@return {Object {java.util.Locale}} language, country (if any) and variant (if any) used by the client stored in a
+     Locale instance, or {@code null} on error.
+@deprecated As of API level 21, please use &lt;code&gt;getVoice().getLocale()&lt;/code&gt;
+ ({@link #getVoice()}).
+*/
+getLanguage : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getAvailableLanguages'>/**Query the engine about the set of available languages.
+</span>*/
+getAvailableLanguages : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getVoices'>/**Query the engine about the set of available voices.
+</span>
+ Each TTS Engine can expose multiple voices for each locale, each with a different set of
+ features.
+@see #setVoice(Voice)
+@see Voice
+*/
+getVoices : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setVoice'>/**Sets the text-to-speech voice.
+</span>@param {Object {Voice}} voice One of objects returned by {@link #getVoices()}.
+@return {Number} {@link #ERROR} or {@link #SUCCESS}.
+@see #getVoices
+@see Voice
+*/
+setVoice : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getVoice'>/**Returns a Voice instance describing the voice currently being used for synthesis
+</span> requests sent to the TextToSpeech engine.
+@return {Object {android.speech.tts.Voice}} Voice instance used by the client, or {@code null} if not set or on error.
+@see #getVoices
+@see #setVoice
+@see Voice
+*/
+getVoice : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getDefaultVoice'>/**Returns a Voice instance that's the default voice for the default Text-to-speech language.
+</span>@return {Object {android.speech.tts.Voice}} The default voice instance for the default language, or {@code null} if not set or
+     on error.
+*/
+getDefaultVoice : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-isLanguageAvailable'>/**Checks if the specified language as represented by the Locale is available and supported.
+</span>@param {Object {Locale}} loc The Locale describing the language to be used.
+@return {Number} Code indicating the support status for the locale. See {@link #LANG_AVAILABLE},
+         {@link #LANG_COUNTRY_AVAILABLE}, {@link #LANG_COUNTRY_VAR_AVAILABLE},
+         {@link #LANG_MISSING_DATA} and {@link #LANG_NOT_SUPPORTED}.
+*/
+isLanguageAvailable : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-synthesizeToFile'>/**Synthesizes the given text to a file using the specified parameters.
+</span> This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}).
+@param {Object {CharSequence}} text The text that should be synthesized. No longer than
+            {@link #getMaxSpeechInputLength()} characters.
+@param {Object {Bundle}} params Parameters for the request. Can be null.
+            Engine specific parameters may be passed in but the parameter keys
+            must be prefixed by the name of the engine they are intended for. For example
+            the keys &quot;com.svox.pico_foo&quot; and &quot;com.svox.pico:bar&quot; will be passed to the
+            engine named &quot;com.svox.pico&quot; if it is being used.
+@param {Object {File}} file File to write the generated audio data to.
+@param {String} utteranceId An unique identifier for this request.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the synthesizeToFile operation.
+*/
+synthesizeToFile : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-synthesizeToFile'>/**Synthesizes the given text to a file using the specified parameters.
+</span> This method is asynchronous, i.e. the method just adds the request to the queue of TTS
+ requests and then returns. The synthesis might not have finished (or even started!) at the
+ time when this method returns. In order to reliably detect errors during synthesis,
+ we recommend setting an utterance progress listener (see
+ {@link #setOnUtteranceProgressListener}) and using the
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID} parameter.
+@param {String} text The text that should be synthesized. No longer than
+            {@link #getMaxSpeechInputLength()} characters.
+@param {Object {java.util.HashMap}} params Parameters for the request. Can be null.
+            Supported parameter names:
+            {@link Engine#KEY_PARAM_UTTERANCE_ID}.
+            Engine specific parameters may be passed in but the parameter keys
+            must be prefixed by the name of the engine they are intended for. For example
+            the keys &quot;com.svox.pico_foo&quot; and &quot;com.svox.pico:bar&quot; will be passed to the
+            engine named &quot;com.svox.pico&quot; if it is being used.
+@param {String} filename Absolute file filename to write the generated audio data to.It should be
+            something like &quot;/sdcard/myappsounds/mysound.wav&quot;.
+@return {Number} {@link #ERROR} or {@link #SUCCESS} of &lt;b&gt;queuing&lt;/b&gt; the synthesizeToFile operation.
+@deprecated As of API level 21, replaced by
+         {@link #synthesizeToFile(CharSequence, Bundle, File, String)}.
+*/
+synthesizeToFile : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setOnUtteranceCompletedListener'>/**Sets the listener that will be notified when synthesis of an utterance completes.
+</span>@param {Object {TextToSpeech.OnUtteranceCompletedListener}} listener The listener to use.
+@return {Number} {@link #ERROR} or {@link #SUCCESS}.
+@deprecated Use {@link #setOnUtteranceProgressListener(UtteranceProgressListener)}
+        instead.
+*/
+setOnUtteranceCompletedListener : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setOnUtteranceProgressListener'>/**Sets the listener that will be notified of various events related to the
+</span> synthesis of a given utterance.
+
+ See {@link android.speech.tts.UtteranceProgressListener} and
+ {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID}.
+@param {Object {UtteranceProgressListener}} listener the listener to use.
+@return {Number} {@link #ERROR} or {@link #SUCCESS}
+*/
+setOnUtteranceProgressListener : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-setEngineByPackageName'>/**Sets the TTS engine to use.
+</span>@param {String} enginePackageName The package name for the synthesis engine (e.g. &quot;com.svox.pico&quot;)
+@param enginePackageName The package name for the synthesis engine (e.g. &quot;com.svox.pico&quot;)
+@return {Number} {@link #ERROR} or {@link #SUCCESS}.
+*/
+setEngineByPackageName : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getDefaultEngine'>/**Gets the package name of the default speech synthesis engine.
+</span>@return {String} Package name of the TTS engine that the user has chosen
+        as their default.
+*/
+getDefaultEngine : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-areDefaultsEnforced'>/**Checks whether the user's settings should override settings requested
+</span> by the calling application. As of the Ice cream sandwich release,
+ user settings never forcibly override the app's settings.
+*/
+areDefaultsEnforced : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getEngines'>/**Gets a list of all installed TTS engines.
+</span>@return {Object {java.util.List}} A list of engine info objects. The list can be empty, but never {@code null}.
+*/
+getEngines : function(  ) {},
+
+<span id='android-speech-tts-TextToSpeech-method-getMaxSpeechInputLength'>/**Limit of length of input string passed to speak and synthesizeToFile.
+</span>@see #speak
+@see #synthesizeToFile
+*/
+getMaxSpeechInputLength : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

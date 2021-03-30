@@ -1,0 +1,2284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaCodec'>/**@class android.media.MediaCodec
+</span>@extends java.lang.Object
+
+ MediaCodec class can be used to access low-level media codecs, i.e. encoder/decoder components.
+ It is part of the Android low-level multimedia support infrastructure (normally used together
+ with {@link android.media.MediaExtractor}, {@link android.media.MediaSync}, {@link android.media.MediaMuxer}, {@link android.media.MediaCrypto},
+ {@link android.media.MediaDrm}, {@link android.media.Image}, {@link Surface}, and {@link android.media.AudioTrack}.)
+ &lt;p&gt;
+ &lt;center&gt;&lt;object style=&quot;width: 540px; height: 205px;&quot; type=&quot;image/svg+xml&quot;
+   data=&quot;../../../images/media/mediacodec_buffers.svg&quot;&gt;&lt;img
+   src=&quot;../../../images/media/mediacodec_buffers.png&quot; style=&quot;width: 540px; height: 205px&quot;
+   alt=&quot;MediaCodec buffer flow diagram&quot;&gt;&lt;/object&gt;&lt;/center&gt;
+ &lt;p&gt;
+ In broad terms, a codec processes input data to generate output data. It processes data
+ asynchronously and uses a set of input and output buffers. At a simplistic level, you request
+ (or receive) an empty input buffer, fill it up with data and send it to the codec for
+ processing. The codec uses up the data and transforms it into one of its empty output buffers.
+ Finally, you request (or receive) a filled output buffer, consume its contents and release it
+ back to the codec.
+
+ &lt;h3&gt;Data Types&lt;/h3&gt;
+ &lt;p&gt;
+ Codecs operate on three kinds of data: compressed data, raw audio data and raw video data.
+ All three kinds of data can be processed using {@link ByteBuffer ByteBuffers}, but you should use
+ a {@link Surface} for raw video data to improve codec performance. Surface uses native video
+ buffers without mapping or copying them to ByteBuffers; thus, it is much more efficient.
+ You normally cannot access the raw video data when using a Surface, but you can use the
+ {@link android.media.ImageReader} class to access unsecured decoded (raw) video frames. This may still be more
+ efficient than using ByteBuffers, as some native buffers may be mapped into {@linkplain
+ ByteBuffer#isDirect direct} ByteBuffers. When using ByteBuffer mode, you can access raw video
+ frames using the {@link android.media.Image} class and {@link #getInputImage getInput}/{@link #getOutputImage
+ OutputImage(int)}.
+
+ &lt;h4&gt;Compressed Buffers&lt;/h4&gt;
+ &lt;p&gt;
+ Input buffers (for decoders) and output buffers (for encoders) contain compressed data according
+ to the {@linkplain android.media.MediaFormat#KEY_MIME format's type}. For video types this is normally a single
+ compressed video frame. For audio data this is normally a single access unit (an encoded audio
+ segment typically containing a few milliseconds of audio as dictated by the format type), but
+ this requirement is slightly relaxed in that a buffer may contain multiple encoded access units
+ of audio. In either case, buffers do not start or end on arbitrary byte boundaries, but rather on
+ frame/access unit boundaries unless they are flagged with {@link #BUFFER_FLAG_PARTIAL_FRAME}.
+
+ &lt;h4&gt;Raw Audio Buffers&lt;/h4&gt;
+ &lt;p&gt;
+ Raw audio buffers contain entire frames of PCM audio data, which is one sample for each channel
+ in channel order. Each PCM audio sample is either a 16 bit signed integer or a float,
+ in native byte order.
+ Raw audio buffers in the float PCM encoding are only possible
+ if the MediaFormat's {@linkplain android.media.MediaFormat#KEY_PCM_ENCODING}
+ is set to {@linkplain android.media.AudioFormat#ENCODING_PCM_FLOAT} during MediaCodec
+ {@link #configure configure(&amp;hellip;)}
+ and confirmed by {@link #getOutputFormat} for decoders
+ or {@link #getInputFormat} for encoders.
+ A sample method to check for float PCM in the MediaFormat is as follows:
+
+ &lt;pre class=prettyprint&gt;
+ static boolean isPcmFloat(MediaFormat format) {
+   return format.getInteger(MediaFormat.KEY_PCM_ENCODING, AudioFormat.ENCODING_PCM_16BIT)
+       == AudioFormat.ENCODING_PCM_FLOAT;
+ }&lt;/pre&gt;
+
+ In order to extract, in a short array,
+ one channel of a buffer containing 16 bit signed integer audio data,
+ the following code may be used:
+
+ &lt;pre class=prettyprint&gt;
+ // Assumes the buffer PCM encoding is 16 bit.
+ short[] getSamplesForChannel(MediaCodec codec, int bufferId, int channelIx) {
+   ByteBuffer outputBuffer = codec.getOutputBuffer(bufferId);
+   MediaFormat format = codec.getOutputFormat(bufferId);
+   ShortBuffer samples = outputBuffer.order(ByteOrder.nativeOrder()).asShortBuffer();
+   int numChannels = format.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
+   if (channelIx &amp;lt; 0 || channelIx &amp;gt;= numChannels) {
+     return null;
+   }
+   short[] res = new short[samples.remaining() / numChannels];
+   for (int i = 0; i &amp;lt; res.length; ++i) {
+     res[i] = samples.get(i * numChannels + channelIx);
+   }
+   return res;
+ }&lt;/pre&gt;
+
+ &lt;h4&gt;Raw Video Buffers&lt;/h4&gt;
+ &lt;p&gt;
+ In ByteBuffer mode video buffers are laid out according to their {@linkplain
+ android.media.MediaFormat#KEY_COLOR_FORMAT color format}. You can get the supported color formats as an array
+ from {@link #getCodecInfo}{@code .}{@link android.media.MediaCodecInfo#getCapabilitiesForType
+ getCapabilitiesForType(&amp;hellip;)}{@code .}{@link android.media.MediaCodecInfo.CodecCapabilities#colorFormats colorFormats}.
+ Video codecs may support three kinds of color formats:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;strong&gt;native raw video format:&lt;/strong&gt; This is marked by {@link android.media.MediaCodecInfo.CodecCapabilities#COLOR_FormatSurface} and it can be used with an input or output Surface.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;flexible YUV buffers&lt;/strong&gt; (such as {@link android.media.MediaCodecInfo.CodecCapabilities#COLOR_FormatYUV420Flexible}): These can be used with an input/output Surface,
+ as well as in ByteBuffer mode, by using {@link #getInputImage getInput}/{@link #getOutputImage
+ OutputImage(int)}.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;other, specific formats:&lt;/strong&gt; These are normally only supported in ByteBuffer
+ mode. Some color formats are vendor specific. Others are defined in {@link android.media.MediaCodecInfo.CodecCapabilities}.
+ For color formats that are equivalent to a flexible format, you can still use {@link #getInputImage getInput}/{@link #getOutputImage OutputImage(int)}.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ All video codecs support flexible YUV 4:2:0 buffers since {@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}.
+
+ &lt;h4&gt;Accessing Raw Video ByteBuffers on Older Devices&lt;/h4&gt;
+ &lt;p&gt;
+ Prior to {@link android.os.Build.VERSION_CODES#LOLLIPOP} and {@link android.media.Image} support, you need to
+ use the {@link android.media.MediaFormat#KEY_STRIDE} and {@link android.media.MediaFormat#KEY_SLICE_HEIGHT} output format
+ values to understand the layout of the raw output buffers.
+ &lt;p class=note&gt;
+ Note that on some devices the slice-height is advertised as 0. This could mean either that the
+ slice-height is the same as the frame height, or that the slice-height is the frame height
+ aligned to some value (usually a power of 2). Unfortunately, there is no standard and simple way
+ to tell the actual slice height in this case. Furthermore, the vertical stride of the {@code U}
+ plane in planar formats is also not specified or defined, though usually it is half of the slice
+ height.
+ &lt;p&gt;
+ The {@link android.media.MediaFormat#KEY_WIDTH} and {@link android.media.MediaFormat#KEY_HEIGHT} keys specify the size of the
+ video frames; however, for most encondings the video (picture) only occupies a portion of the
+ video frame. This is represented by the 'crop rectangle'.
+ &lt;p&gt;
+ You need to use the following keys to get the crop rectangle of raw output images from the
+ {@linkplain #getOutputFormat output format}. If these keys are not present, the video occupies the
+ entire video frame.The crop rectangle is understood in the context of the output frame
+ &lt;em&gt;before&lt;/em&gt; applying any {@linkplain android.media.MediaFormat#KEY_ROTATION rotation}.
+ &lt;table style=&quot;width: 0%&quot;&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;
+    &lt;th&gt;Format Key&lt;/th&gt;
+    &lt;th&gt;Type&lt;/th&gt;
+    &lt;th&gt;Description&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt;{@code &quot;crop-left&quot;}&lt;/td&gt;
+    &lt;td&gt;Integer&lt;/td&gt;
+    &lt;td&gt;The left-coordinate (x) of the crop rectangle&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@code &quot;crop-top&quot;}&lt;/td&gt;
+    &lt;td&gt;Integer&lt;/td&gt;
+    &lt;td&gt;The top-coordinate (y) of the crop rectangle&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@code &quot;crop-right&quot;}&lt;/td&gt;
+    &lt;td&gt;Integer&lt;/td&gt;
+    &lt;td&gt;The right-coordinate (x) &lt;strong&gt;MINUS 1&lt;/strong&gt; of the crop rectangle&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@code &quot;crop-bottom&quot;}&lt;/td&gt;
+    &lt;td&gt;Integer&lt;/td&gt;
+    &lt;td&gt;The bottom-coordinate (y) &lt;strong&gt;MINUS 1&lt;/strong&gt; of the crop rectangle&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td colspan=3&gt;
+     The right and bottom coordinates can be understood as the coordinates of the right-most
+     valid column/bottom-most valid row of the cropped output image.
+    &lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+ &lt;p&gt;
+ The size of the video frame (before rotation) can be calculated as such:
+ &lt;pre class=prettyprint&gt;
+ MediaFormat format = decoder.getOutputFormat(&amp;hellip;);
+ int width = format.getInteger(MediaFormat.KEY_WIDTH);
+ if (format.containsKey(&quot;crop-left&quot;) &amp;&amp; format.containsKey(&quot;crop-right&quot;)) {
+     width = format.getInteger(&quot;crop-right&quot;) + 1 - format.getInteger(&quot;crop-left&quot;);
+ }
+ int height = format.getInteger(MediaFormat.KEY_HEIGHT);
+ if (format.containsKey(&quot;crop-top&quot;) &amp;&amp; format.containsKey(&quot;crop-bottom&quot;)) {
+     height = format.getInteger(&quot;crop-bottom&quot;) + 1 - format.getInteger(&quot;crop-top&quot;);
+ }
+ &lt;/pre&gt;
+ &lt;p class=note&gt;
+ Also note that the meaning of {@link android.media.MediaCodec.BufferInfo#offset android.media.MediaCodec.BufferInfo.offset} was not consistent across
+ devices. On some devices the offset pointed to the top-left pixel of the crop rectangle, while on
+ most devices it pointed to the top-left pixel of the entire frame.
+
+ &lt;h3&gt;States&lt;/h3&gt;
+ &lt;p&gt;
+ During its life a codec conceptually exists in one of three states: Stopped, Executing or
+ Released. The Stopped collective state is actually the conglomeration of three states:
+ Uninitialized, Configured and Error, whereas the Executing state conceptually progresses through
+ three sub-states: Flushed, Running and End-of-Stream.
+ &lt;p&gt;
+ &lt;center&gt;&lt;object style=&quot;width: 516px; height: 353px;&quot; type=&quot;image/svg+xml&quot;
+   data=&quot;../../../images/media/mediacodec_states.svg&quot;&gt;&lt;img
+   src=&quot;../../../images/media/mediacodec_states.png&quot; style=&quot;width: 519px; height: 356px&quot;
+   alt=&quot;MediaCodec state diagram&quot;&gt;&lt;/object&gt;&lt;/center&gt;
+ &lt;p&gt;
+ When you create a codec using one of the factory methods, the codec is in the Uninitialized
+ state. First, you need to configure it via {@link #configure configure(&amp;hellip;)}, which brings
+ it to the Configured state, then call {@link #start} to move it to the Executing state. In this
+ state you can process data through the buffer queue manipulation described above.
+ &lt;p&gt;
+ The Executing state has three sub-states: Flushed, Running and End-of-Stream. Immediately after
+ {@link #start} the codec is in the Flushed sub-state, where it holds all the buffers. As soon
+ as the first input buffer is dequeued, the codec moves to the Running sub-state, where it spends
+ most of its life. When you queue an input buffer with the {@linkplain #BUFFER_FLAG_END_OF_STREAM
+ end-of-stream marker}, the codec transitions to the End-of-Stream sub-state. In this state the
+ codec no longer accepts further input buffers, but still generates output buffers until the
+ end-of-stream is reached on the output. You can move back to the Flushed sub-state at any time
+ while in the Executing state using {@link #flush}.
+ &lt;p&gt;
+ Call {@link #stop} to return the codec to the Uninitialized state, whereupon it may be configured
+ again. When you are done using a codec, you must release it by calling {@link #release}.
+ &lt;p&gt;
+ On rare occasions the codec may encounter an error and move to the Error state. This is
+ communicated using an invalid return value from a queuing operation, or sometimes via an
+ exception. Call {@link #reset} to make the codec usable again. You can call it from any state to
+ move the codec back to the Uninitialized state. Otherwise, call {@link #release} to move to the
+ terminal Released state.
+
+ &lt;h3&gt;Creation&lt;/h3&gt;
+ &lt;p&gt;
+ Use {@link android.media.MediaCodecList} to create a MediaCodec for a specific {@link android.media.MediaFormat}. When
+ decoding a file or a stream, you can get the desired format from {@link android.media.MediaExtractor#getTrackFormat android.media.MediaExtractor.getTrackFormat}. Inject any specific features that
+ you want to add using {@link android.media.MediaFormat#setFeatureEnabled android.media.MediaFormat.setFeatureEnabled}, then
+ call {@link android.media.MediaCodecList#findDecoderForFormat android.media.MediaCodecList.findDecoderForFormat} to get the
+ name of a codec that can handle that specific media format. Finally, create the codec using
+ {@link #createByCodecName}.
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; On {@link android.os.Build.VERSION_CODES#LOLLIPOP}, the format to
+ {@code MediaCodecList.findDecoder}/{@code EncoderForFormat} must not contain a {@linkplain
+ android.media.MediaFormat#KEY_FRAME_RATE frame rate}. Use
+ &lt;code class=prettyprint&gt;format.setString(MediaFormat.KEY_FRAME_RATE, null)&lt;/code&gt;
+ to clear any existing frame rate setting in the format.
+ &lt;p&gt;
+ You can also create the preferred codec for a specific MIME type using {@link #createDecoderByType createDecoder}/{@link #createEncoderByType EncoderByType(String)}.
+ This, however, cannot be used to inject features, and may create a codec that cannot handle the
+ specific desired media format.
+
+ &lt;h4&gt;Creating secure decoders&lt;/h4&gt;
+ &lt;p&gt;
+ On versions {@link android.os.Build.VERSION_CODES#KITKAT_WATCH} and earlier, secure codecs might
+ not be listed in {@link android.media.MediaCodecList}, but may still be available on the system. Secure codecs
+ that exist can be instantiated by name only, by appending {@code &quot;.secure&quot;} to the name of a
+ regular codec (the name of all secure codecs must end in {@code &quot;.secure&quot;}.) {@link #createByCodecName} will throw an {@code IOException} if the codec is not present on the system.
+ &lt;p&gt;
+ From {@link android.os.Build.VERSION_CODES#LOLLIPOP} onwards, you should use the {@link android.media.MediaCodecInfo.CodecCapabilities#FEATURE_SecurePlayback} feature in the media format to create a secure decoder.
+
+ &lt;h3&gt;Initialization&lt;/h3&gt;
+ &lt;p&gt;
+ After creating the codec, you can set a callback using {@link #setCallback setCallback} if you
+ want to process data asynchronously. Then, {@linkplain #configure configure} the codec using the
+ specific media format. This is when you can specify the output {@link Surface} for video
+ producers &amp;ndash; codecs that generate raw video data (e.g. video decoders). This is also when
+ you can set the decryption parameters for secure codecs (see {@link android.media.MediaCrypto}). Finally, since
+ some codecs can operate in multiple modes, you must specify whether you want it to work as a
+ decoder or an encoder.
+ &lt;p&gt;
+ Since {@link android.os.Build.VERSION_CODES#LOLLIPOP}, you can query the resulting input and
+ output format in the Configured state. You can use this to verify the resulting configuration,
+ e.g. color formats, before starting the codec.
+ &lt;p&gt;
+ If you want to process raw input video buffers natively with a video consumer &amp;ndash; a codec
+ that processes raw video input, such as a video encoder &amp;ndash; create a destination Surface for
+ your input data using {@link #createInputSurface} after configuration. Alternately, set up the
+ codec to use a previously created {@linkplain #createPersistentInputSurface persistent input
+ surface} by calling {@link #setInputSurface}.
+
+ &lt;h4 id=CSD&gt;&lt;a name=&quot;CSD&quot;&gt;&lt;/a&gt;Codec-specific Data&lt;/h4&gt;
+ &lt;p&gt;
+ Some formats, notably AAC audio and MPEG4, H.264 and H.265 video formats require the actual data
+ to be prefixed by a number of buffers containing setup data, or codec specific data. When
+ processing such compressed formats, this data must be submitted to the codec after {@link #start} and before any frame data. Such data must be marked using the flag {@link #BUFFER_FLAG_CODEC_CONFIG} in a call to {@link #queueInputBuffer queueInputBuffer}.
+ &lt;p&gt;
+ Codec-specific data can also be included in the format passed to {@link #configure configure} in
+ ByteBuffer entries with keys &quot;csd-0&quot;, &quot;csd-1&quot;, etc. These keys are always included in the track
+ {@link android.media.MediaFormat} obtained from the {@link android.media.MediaExtractor#getTrackFormat android.media.MediaExtractor}.
+ Codec-specific data in the format is automatically submitted to the codec upon {@link #start};
+ you &lt;strong&gt;MUST NOT&lt;/strong&gt; submit this data explicitly. If the format did not contain codec
+ specific data, you can choose to submit it using the specified number of buffers in the correct
+ order, according to the format requirements. In case of H.264 AVC, you can also concatenate all
+ codec-specific data and submit it as a single codec-config buffer.
+ &lt;p&gt;
+ Android uses the following codec-specific data buffers. These are also required to be set in
+ the track format for proper {@link android.media.MediaMuxer} track configuration. Each parameter set and the
+ codec-specific-data sections marked with (&lt;sup&gt;*&lt;/sup&gt;) must start with a start code of
+ {@code &quot;\x00\x00\x00\x01&quot;}.
+ &lt;p&gt;
+ &lt;style&gt;td.NA { background: #ccc; } .mid &gt; tr &gt; td { vertical-align: middle; }&lt;/style&gt;
+ &lt;table&gt;
+  &lt;thead&gt;
+   &lt;th&gt;Format&lt;/th&gt;
+   &lt;th&gt;CSD buffer #0&lt;/th&gt;
+   &lt;th&gt;CSD buffer #1&lt;/th&gt;
+   &lt;th&gt;CSD buffer #2&lt;/th&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=mid&gt;
+   &lt;tr&gt;
+    &lt;td&gt;AAC&lt;/td&gt;
+    &lt;td&gt;Decoder-specific information from ESDS&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;VORBIS&lt;/td&gt;
+    &lt;td&gt;Identification header&lt;/td&gt;
+    &lt;td&gt;Setup header&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;OPUS&lt;/td&gt;
+    &lt;td&gt;Identification header&lt;/td&gt;
+    &lt;td&gt;Pre-skip in nanosecs&lt;br&gt;
+        (unsigned 64-bit {@linkplain ByteOrder#nativeOrder native-order} integer.)&lt;br&gt;
+        This overrides the pre-skip value in the identification header.&lt;/td&gt;
+    &lt;td&gt;Seek Pre-roll in nanosecs&lt;br&gt;
+        (unsigned 64-bit {@linkplain ByteOrder#nativeOrder native-order} integer.)&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;FLAC&lt;/td&gt;
+    &lt;td&gt;mandatory metadata block (called the STREAMINFO block),&lt;br&gt;
+        optionally followed by any number of other metadata blocks&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;MPEG-4&lt;/td&gt;
+    &lt;td&gt;Decoder-specific information from ESDS&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;H.264 AVC&lt;/td&gt;
+    &lt;td&gt;SPS (Sequence Parameter Sets&lt;sup&gt;*&lt;/sup&gt;)&lt;/td&gt;
+    &lt;td&gt;PPS (Picture Parameter Sets&lt;sup&gt;*&lt;/sup&gt;)&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;H.265 HEVC&lt;/td&gt;
+    &lt;td&gt;VPS (Video Parameter Sets&lt;sup&gt;*&lt;/sup&gt;) +&lt;br&gt;
+     SPS (Sequence Parameter Sets&lt;sup&gt;*&lt;/sup&gt;) +&lt;br&gt;
+     PPS (Picture Parameter Sets&lt;sup&gt;*&lt;/sup&gt;)&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;VP9&lt;/td&gt;
+    &lt;td&gt;VP9 &lt;a href=&quot;http://wiki.webmproject.org/vp9-codecprivate&quot;&gt;CodecPrivate&lt;/a&gt; Data
+        (optional)&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+    &lt;td class=NA&gt;Not Used&lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; care must be taken if the codec is flushed immediately or shortly
+ after start, before any output buffer or output format change has been returned, as the codec
+ specific data may be lost during the flush. You must resubmit the data using buffers marked with
+ {@link #BUFFER_FLAG_CODEC_CONFIG} after such flush to ensure proper codec operation.
+ &lt;p&gt;
+ Encoders (or codecs that generate compressed data) will create and return the codec specific data
+ before any valid output buffer in output buffers marked with the {@linkplain
+ #BUFFER_FLAG_CODEC_CONFIG codec-config flag}. Buffers containing codec-specific-data have no
+ meaningful timestamps.
+
+ &lt;h3&gt;Data Processing&lt;/h3&gt;
+ &lt;p&gt;
+ Each codec maintains a set of input and output buffers that are referred to by a buffer-ID in
+ API calls. After a successful call to {@link #start} the client &quot;owns&quot; neither input nor output
+ buffers. In synchronous mode, call {@link #dequeueInputBuffer dequeueInput}/{@link #dequeueOutputBuffer OutputBuffer(&amp;hellip;)} to obtain (get ownership of) an input or output
+ buffer from the codec. In asynchronous mode, you will automatically receive available buffers via
+ the {@link Callback#onInputBufferAvailable android.media.MediaCodec.Callback.onInput}/{@link android.media.MediaCodec.Callback#onOutputBufferAvailable OutputBufferAvailable(&amp;hellip;)} callbacks.
+ &lt;p&gt;
+ Upon obtaining an input buffer, fill it with data and submit it to the codec using {@link #queueInputBuffer queueInputBuffer} &amp;ndash; or {@link #queueSecureInputBuffer
+ queueSecureInputBuffer} if using decryption. Do not submit multiple input buffers with the same
+ timestamp (unless it is &lt;a href=&quot;#CSD&quot;&gt;codec-specific data&lt;/a&gt; marked as such).
+ &lt;p&gt;
+ The codec in turn will return a read-only output buffer via the {@link android.media.MediaCodec.Callback#onOutputBufferAvailable onOutputBufferAvailable} callback in asynchronous mode, or in
+ response to a {@link #dequeueOutputBuffer dequeueOutputBuffer} call in synchronous mode. After the
+ output buffer has been processed, call one of the {@link #releaseOutputBuffer
+ releaseOutputBuffer} methods to return the buffer to the codec.
+ &lt;p&gt;
+ While you are not required to resubmit/release buffers immediately to the codec, holding onto
+ input and/or output buffers may stall the codec, and this behavior is device dependent.
+ &lt;strong&gt;Specifically, it is possible that a codec may hold off on generating output buffers until
+ &lt;em&gt;all&lt;/em&gt; outstanding buffers have been released/resubmitted.&lt;/strong&gt; Therefore, try to
+ hold onto to available buffers as little as possible.
+ &lt;p&gt;
+ Depending on the API version, you can process data in three ways:
+ &lt;table&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;
+    &lt;th&gt;Processing Mode&lt;/th&gt;
+    &lt;th&gt;API version &lt;= 20&lt;br&gt;Jelly Bean/KitKat&lt;/th&gt;
+    &lt;th&gt;API version &gt;= 21&lt;br&gt;Lollipop and later&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt;Synchronous API using buffer arrays&lt;/td&gt;
+    &lt;td&gt;Supported&lt;/td&gt;
+    &lt;td&gt;Deprecated&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;Synchronous API using buffers&lt;/td&gt;
+    &lt;td class=NA&gt;Not Available&lt;/td&gt;
+    &lt;td&gt;Supported&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;Asynchronous API using buffers&lt;/td&gt;
+    &lt;td class=NA&gt;Not Available&lt;/td&gt;
+    &lt;td&gt;Supported&lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;h4&gt;Asynchronous Processing using Buffers&lt;/h4&gt;
+ &lt;p&gt;
+ Since {@link android.os.Build.VERSION_CODES#LOLLIPOP}, the preferred method is to process data
+ asynchronously by setting a callback before calling {@link #configure configure}. Asynchronous
+ mode changes the state transitions slightly, because you must call {@link #start} after {@link #flush} to transition the codec to the Running sub-state and start receiving input buffers.
+ Similarly, upon an initial call to {@code start} the codec will move directly to the Running
+ sub-state and start passing available input buffers via the callback.
+ &lt;p&gt;
+ &lt;center&gt;&lt;object style=&quot;width: 516px; height: 353px;&quot; type=&quot;image/svg+xml&quot;
+   data=&quot;../../../images/media/mediacodec_async_states.svg&quot;&gt;&lt;img
+   src=&quot;../../../images/media/mediacodec_async_states.png&quot; style=&quot;width: 516px; height: 353px&quot;
+   alt=&quot;MediaCodec state diagram for asynchronous operation&quot;&gt;&lt;/object&gt;&lt;/center&gt;
+ &lt;p&gt;
+ MediaCodec is typically used like this in asynchronous mode:
+ &lt;pre class=prettyprint&gt;
+ MediaCodec codec = MediaCodec.createByCodecName(name);
+ MediaFormat mOutputFormat; // member variable
+ codec.setCallback(new MediaCodec.Callback() {
+   {@literal @Override}
+   void onInputBufferAvailable(MediaCodec mc, int inputBufferId) {
+     ByteBuffer inputBuffer = codec.getInputBuffer(inputBufferId);
+     // fill inputBuffer with valid data
+     &amp;hellip;
+     codec.queueInputBuffer(inputBufferId, &amp;hellip;);
+   }
+
+   {@literal @Override}
+   void onOutputBufferAvailable(MediaCodec mc, int outputBufferId, &amp;hellip;) {
+     ByteBuffer outputBuffer = codec.getOutputBuffer(outputBufferId);
+     MediaFormat bufferFormat = codec.getOutputFormat(outputBufferId); // option A
+     // bufferFormat is equivalent to mOutputFormat
+     // outputBuffer is ready to be processed or rendered.
+     &amp;hellip;
+     codec.releaseOutputBuffer(outputBufferId, &amp;hellip;);
+   }
+
+   {@literal @Override}
+   void onOutputFormatChanged(MediaCodec mc, MediaFormat format) {
+     // Subsequent data will conform to new format.
+     // Can ignore if using getOutputFormat(outputBufferId)
+     mOutputFormat = format; // option B
+   }
+
+   {@literal @Override}
+   void onError(&amp;hellip;) {
+     &amp;hellip;
+   }
+ });
+ codec.configure(format, &amp;hellip;);
+ mOutputFormat = codec.getOutputFormat(); // option B
+ codec.start();
+ // wait for processing to complete
+ codec.stop();
+ codec.release();&lt;/pre&gt;
+
+ &lt;h4&gt;Synchronous Processing using Buffers&lt;/h4&gt;
+ &lt;p&gt;
+ Since {@link android.os.Build.VERSION_CODES#LOLLIPOP}, you should retrieve input and output
+ buffers using {@link #getInputBuffer getInput}/{@link #getOutputBuffer OutputBuffer(int)} and/or
+ {@link #getInputImage getInput}/{@link #getOutputImage OutputImage(int)} even when using the
+ codec in synchronous mode. This allows certain optimizations by the framework, e.g. when
+ processing dynamic content. This optimization is disabled if you call {@link #getInputBuffers
+ getInput}/{@link #getOutputBuffers OutputBuffers()}.
+
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; do not mix the methods of using buffers and buffer arrays at the same
+ time. Specifically, only call {@code getInput}/{@code OutputBuffers} directly after {@link #start} or after having dequeued an output buffer ID with the value of {@link #INFO_OUTPUT_FORMAT_CHANGED}.
+ &lt;p&gt;
+ MediaCodec is typically used like this in synchronous mode:
+ &lt;pre&gt;
+ MediaCodec codec = MediaCodec.createByCodecName(name);
+ codec.configure(format, &amp;hellip;);
+ MediaFormat outputFormat = codec.getOutputFormat(); // option B
+ codec.start();
+ for (;;) {
+   int inputBufferId = codec.dequeueInputBuffer(timeoutUs);
+   if (inputBufferId &amp;gt;= 0) {
+     ByteBuffer inputBuffer = codec.getInputBuffer(&amp;hellip;);
+     // fill inputBuffer with valid data
+     &amp;hellip;
+     codec.queueInputBuffer(inputBufferId, &amp;hellip;);
+   }
+   int outputBufferId = codec.dequeueOutputBuffer(&amp;hellip;);
+   if (outputBufferId &amp;gt;= 0) {
+     ByteBuffer outputBuffer = codec.getOutputBuffer(outputBufferId);
+     MediaFormat bufferFormat = codec.getOutputFormat(outputBufferId); // option A
+     // bufferFormat is identical to outputFormat
+     // outputBuffer is ready to be processed or rendered.
+     &amp;hellip;
+     codec.releaseOutputBuffer(outputBufferId, &amp;hellip;);
+   } else if (outputBufferId == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
+     // Subsequent data will conform to new format.
+     // Can ignore if using getOutputFormat(outputBufferId)
+     outputFormat = codec.getOutputFormat(); // option B
+   }
+ }
+ codec.stop();
+ codec.release();&lt;/pre&gt;
+
+ &lt;h4&gt;Synchronous Processing using Buffer Arrays (deprecated)&lt;/h4&gt;
+ &lt;p&gt;
+ In versions {@link android.os.Build.VERSION_CODES#KITKAT_WATCH} and before, the set of input and
+ output buffers are represented by the {@code ByteBuffer[]} arrays. After a successful call to
+ {@link #start}, retrieve the buffer arrays using {@link #getInputBuffers getInput}/{@link #getOutputBuffers OutputBuffers()}. Use the buffer ID-s as indices into these arrays (when
+ non-negative), as demonstrated in the sample below. Note that there is no inherent correlation
+ between the size of the arrays and the number of input and output buffers used by the system,
+ although the array size provides an upper bound.
+ &lt;pre&gt;
+ MediaCodec codec = MediaCodec.createByCodecName(name);
+ codec.configure(format, &amp;hellip;);
+ codec.start();
+ ByteBuffer[] inputBuffers = codec.getInputBuffers();
+ ByteBuffer[] outputBuffers = codec.getOutputBuffers();
+ for (;;) {
+   int inputBufferId = codec.dequeueInputBuffer(&amp;hellip;);
+   if (inputBufferId &amp;gt;= 0) {
+     // fill inputBuffers[inputBufferId] with valid data
+     &amp;hellip;
+     codec.queueInputBuffer(inputBufferId, &amp;hellip;);
+   }
+   int outputBufferId = codec.dequeueOutputBuffer(&amp;hellip;);
+   if (outputBufferId &amp;gt;= 0) {
+     // outputBuffers[outputBufferId] is ready to be processed or rendered.
+     &amp;hellip;
+     codec.releaseOutputBuffer(outputBufferId, &amp;hellip;);
+   } else if (outputBufferId == MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED) {
+     outputBuffers = codec.getOutputBuffers();
+   } else if (outputBufferId == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
+     // Subsequent data will conform to new format.
+     MediaFormat format = codec.getOutputFormat();
+   }
+ }
+ codec.stop();
+ codec.release();&lt;/pre&gt;
+
+ &lt;h4&gt;End-of-stream Handling&lt;/h4&gt;
+ &lt;p&gt;
+ When you reach the end of the input data, you must signal it to the codec by specifying the
+ {@link #BUFFER_FLAG_END_OF_STREAM} flag in the call to {@link #queueInputBuffer
+ queueInputBuffer}. You can do this on the last valid input buffer, or by submitting an additional
+ empty input buffer with the end-of-stream flag set. If using an empty buffer, the timestamp will
+ be ignored.
+ &lt;p&gt;
+ The codec will continue to return output buffers until it eventually signals the end of the
+ output stream by specifying the same end-of-stream flag in the {@link android.media.MediaCodec.BufferInfo} set in {@link #dequeueOutputBuffer dequeueOutputBuffer} or returned via {@link android.media.MediaCodec.Callback#onOutputBufferAvailable
+ onOutputBufferAvailable}. This can be set on the last valid output buffer, or on an empty buffer
+ after the last valid output buffer. The timestamp of such empty buffer should be ignored.
+ &lt;p&gt;
+ Do not submit additional input buffers after signaling the end of the input stream, unless the
+ codec has been flushed, or stopped and restarted.
+
+ &lt;h4&gt;Using an Output Surface&lt;/h4&gt;
+ &lt;p&gt;
+ The data processing is nearly identical to the ByteBuffer mode when using an output {@link Surface}; however, the output buffers will not be accessible, and are represented as {@code null}
+ values. E.g. {@link #getOutputBuffer getOutputBuffer}/{@link #getOutputandroid.media.Image android.media.Image(int)} will
+ return {@code null} and {@link #getOutputBuffers} will return an array containing only {@code
+ null}-s.
+ &lt;p&gt;
+ When using an output Surface, you can select whether or not to render each output buffer on the
+ surface. You have three choices:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;strong&gt;Do not render the buffer:&lt;/strong&gt; Call {@link #releaseOutputBuffer(int, boolean)
+ releaseOutputBuffer(bufferId, false)}.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;Render the buffer with the default timestamp:&lt;/strong&gt; Call {@link #releaseOutputBuffer(int, boolean) releaseOutputBuffer(bufferId, true)}.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;Render the buffer with a specific timestamp:&lt;/strong&gt; Call {@link #releaseOutputBuffer(int, long) releaseOutputBuffer(bufferId, timestamp)}.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Since {@link android.os.Build.VERSION_CODES#M}, the default timestamp is the {@linkplain
+ android.media.MediaCodec.BufferInfo#presentationTimeUs presentation timestamp} of the buffer (converted to nanoseconds).
+ It was not defined prior to that.
+ &lt;p&gt;
+ Also since {@link android.os.Build.VERSION_CODES#M}, you can change the output Surface
+ dynamically using {@link #setOutputSurface setOutputSurface}.
+ &lt;p&gt;
+ When rendering output to a Surface, the Surface may be configured to drop excessive frames (that
+ are not consumed by the Surface in a timely manner). Or it may be configured to not drop excessive
+ frames. In the latter mode if the Surface is not consuming output frames fast enough, it will
+ eventually block the decoder. Prior to {@link android.os.Build.VERSION_CODES#Q} the exact behavior
+ was undefined, with the exception that View surfaces (SuerfaceView or TextureView) always dropped
+ excessive frames. Since {@link android.os.Build.VERSION_CODES#Q} the default behavior is to drop
+ excessive frames. Applications can opt out of this behavior for non-View surfaces (such as
+ ImageReader or SurfaceTexture) by targeting SDK {@link android.os.Build.VERSION_CODES#Q} and
+ setting the key {@code &quot;allow-frame-drop&quot;} to {@code 0} in their configure format.
+
+ &lt;h4&gt;Transformations When Rendering onto Surface&lt;/h4&gt;
+
+ If the codec is configured into Surface mode, any crop rectangle, {@linkplain
+ android.media.MediaFormat#KEY_ROTATION rotation} and {@linkplain #setVideoScalingMode video scaling
+ mode} will be automatically applied with one exception:
+ &lt;p class=note&gt;
+ Prior to the {@link android.os.Build.VERSION_CODES#M} release, software decoders may not
+ have applied the rotation when being rendered onto a Surface. Unfortunately, there is no standard
+ and simple way to identify software decoders, or if they apply the rotation other than by trying
+ it out.
+ &lt;p&gt;
+ There are also some caveats.
+ &lt;p class=note&gt;
+ Note that the pixel aspect ratio is not considered when displaying the output onto the
+ Surface. This means that if you are using {@link #VIDEO_SCALING_MODE_SCALE_TO_FIT} mode, you
+ must position the output Surface so that it has the proper final display aspect ratio. Conversely,
+ you can only use {@link #VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING} mode for content with
+ square pixels (pixel aspect ratio or 1:1).
+ &lt;p class=note&gt;
+ Note also that as of {@link android.os.Build.VERSION_CODES#N} release, {@link #VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING} mode may not work correctly for videos rotated
+ by 90 or 270 degrees.
+ &lt;p class=note&gt;
+ When setting the video scaling mode, note that it must be reset after each time the output
+ buffers change. Since the {@link #INFO_OUTPUT_BUFFERS_CHANGED} event is deprecated, you can
+ do this after each time the output format changes.
+
+ &lt;h4&gt;Using an Input Surface&lt;/h4&gt;
+ &lt;p&gt;
+ When using an input Surface, there are no accessible input buffers, as buffers are automatically
+ passed from the input surface to the codec. Calling {@link #dequeueInputBuffer
+ dequeueInputBuffer} will throw an {@code IllegalStateException}, and {@link #getInputBuffers}
+ returns a bogus {@code ByteBuffer[]} array that &lt;strong&gt;MUST NOT&lt;/strong&gt; be written into.
+ &lt;p&gt;
+ Call {@link #signalEndOfInputStream} to signal end-of-stream. The input surface will stop
+ submitting data to the codec immediately after this call.
+ &lt;p&gt;
+
+ &lt;h3&gt;Seeking &amp;amp; Adaptive Playback Support&lt;/h3&gt;
+ &lt;p&gt;
+ Video decoders (and in general codecs that consume compressed video data) behave differently
+ regarding seek and format change whether or not they support and are configured for adaptive
+ playback. You can check if a decoder supports {@linkplain
+ android.media.MediaCodecInfo.CodecCapabilities#FEATURE_AdaptivePlayback adaptive playback} via {@link android.media.MediaCodecInfo.CodecCapabilities#isFeatureSupported android.media.MediaCodecInfo.CodecCapabilities.isFeatureSupported(String)}. Adaptive
+ playback support for video decoders is only activated if you configure the codec to decode onto a
+ {@link Surface}.
+
+ &lt;h4 id=KeyFrames&gt;&lt;a name=&quot;KeyFrames&quot;&gt;&lt;/a&gt;Stream Boundary and Key Frames&lt;/h4&gt;
+ &lt;p&gt;
+ It is important that the input data after {@link #start} or {@link #flush} starts at a suitable
+ stream boundary: the first frame must a key frame. A &lt;em&gt;key frame&lt;/em&gt; can be decoded
+ completely on its own (for most codecs this means an I-frame), and no frames that are to be
+ displayed after a key frame refer to frames before the key frame.
+ &lt;p&gt;
+ The following table summarizes suitable key frames for various video formats.
+ &lt;table&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;
+    &lt;th&gt;Format&lt;/th&gt;
+    &lt;th&gt;Suitable key frame&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=mid&gt;
+   &lt;tr&gt;
+    &lt;td&gt;VP9/VP8&lt;/td&gt;
+    &lt;td&gt;a suitable intraframe where no subsequent frames refer to frames prior to this frame.&lt;br&gt;
+      &lt;i&gt;(There is no specific name for such key frame.)&lt;/i&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;H.265 HEVC&lt;/td&gt;
+    &lt;td&gt;IDR or CRA&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;H.264 AVC&lt;/td&gt;
+    &lt;td&gt;IDR&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;MPEG-4&lt;br&gt;H.263&lt;br&gt;MPEG-2&lt;/td&gt;
+    &lt;td&gt;a suitable I-frame where no subsequent frames refer to frames prior to this frame.&lt;br&gt;
+      &lt;i&gt;(There is no specific name for such key frame.)&lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;h4&gt;For decoders that do not support adaptive playback (including when not decoding onto a
+ Surface)&lt;/h4&gt;
+ &lt;p&gt;
+ In order to start decoding data that is not adjacent to previously submitted data (i.e. after a
+ seek) you &lt;strong&gt;MUST&lt;/strong&gt; flush the decoder. Since all output buffers are immediately
+ revoked at the point of the flush, you may want to first signal then wait for the end-of-stream
+ before you call {@code flush}. It is important that the input data after a flush starts at a
+ suitable stream boundary/key frame.
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; the format of the data submitted after a flush must not change; {@link #flush} does not support format discontinuities; for that, a full {@link #stop} - {@link #configure configure(&amp;hellip;)} - {@link #start} cycle is necessary.
+
+ &lt;p class=note&gt;
+ &lt;strong&gt;Also note:&lt;/strong&gt; if you flush the codec too soon after {@link #start} &amp;ndash;
+ generally, before the first output buffer or output format change is received &amp;ndash; you
+ will need to resubmit the codec-specific-data to the codec. See the &lt;a
+ href=&quot;#CSD&quot;&gt;codec-specific-data section&lt;/a&gt; for more info.
+
+ &lt;h4&gt;For decoders that support and are configured for adaptive playback&lt;/h4&gt;
+ &lt;p&gt;
+ In order to start decoding data that is not adjacent to previously submitted data (i.e. after a
+ seek) it is &lt;em&gt;not necessary&lt;/em&gt; to flush the decoder; however, input data after the
+ discontinuity must start at a suitable stream boundary/key frame.
+ &lt;p&gt;
+ For some video formats - namely H.264, H.265, VP8 and VP9 - it is also possible to change the
+ picture size or configuration mid-stream. To do this you must package the entire new
+ codec-specific configuration data together with the key frame into a single buffer (including
+ any start codes), and submit it as a &lt;strong&gt;regular&lt;/strong&gt; input buffer.
+ &lt;p&gt;
+ You will receive an {@link #INFO_OUTPUT_FORMAT_CHANGED} return value from {@link #dequeueOutputBuffer dequeueOutputBuffer} or a {@link android.media.MediaCodec.Callback#onOutputBufferAvailable
+ onOutputFormatChanged} callback just after the picture-size change takes place and before any
+ frames with the new size have been returned.
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; just as the case for codec-specific data, be careful when calling
+ {@link #flush} shortly after you have changed the picture size. If you have not received
+ confirmation of the picture size change, you will need to repeat the request for the new picture
+ size.
+
+ &lt;h3&gt;Error handling&lt;/h3&gt;
+ &lt;p&gt;
+ The factory methods {@link #createByCodecName createByCodecName} and {@link #createDecoderByType
+ createDecoder}/{@link #createEncoderByType EncoderByType} throw {@code IOException} on failure
+ which you must catch or declare to pass up. MediaCodec methods throw {@code
+ IllegalStateException} when the method is called from a codec state that does not allow it; this
+ is typically due to incorrect application API usage. Methods involving secure buffers may throw
+ {@link android.media.MediaCodec.CryptoException}, which has further error information obtainable from {@link android.media.MediaCodec.CryptoException#getErrorCode}.
+ &lt;p&gt;
+ Internal codec errors result in a {@link android.media.MediaCodec.CodecException}, which may be due to media content
+ corruption, hardware failure, resource exhaustion, and so forth, even when the application is
+ correctly using the API. The recommended action when receiving a {@code CodecException}
+ can be determined by calling {@link android.media.MediaCodec.CodecException#isRecoverable} and {@link android.media.MediaCodec.CodecException#isTransient}:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;strong&gt;recoverable errors:&lt;/strong&gt; If {@code isRecoverable()} returns true, then call
+ {@link #stop}, {@link #configure configure(&amp;hellip;)}, and {@link #start} to recover.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;transient errors:&lt;/strong&gt; If {@code isTransient()} returns true, then resources are
+ temporarily unavailable and the method may be retried at a later time.&lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;fatal errors:&lt;/strong&gt; If both {@code isRecoverable()} and {@code isTransient()}
+ return false, then the {@code CodecException} is fatal and the codec must be {@linkplain #reset
+ reset} or {@linkplain #release released}.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Both {@code isRecoverable()} and {@code isTransient()} do not return true at the same time.
+
+ &lt;h2 id=History&gt;&lt;a name=&quot;History&quot;&gt;&lt;/a&gt;Valid API Calls and API History&lt;/h2&gt;
+ &lt;p&gt;
+ This sections summarizes the valid API calls in each state and the API history of the MediaCodec
+ class. For API version numbers, see {@link android.os.Build.VERSION_CODES}.
+
+ &lt;style&gt;
+ .api &gt; tr &gt; th, .api &gt; tr &gt; td { text-align: center; padding: 4px 4px; }
+ .api &gt; tr &gt; th     { vertical-align: bottom; }
+ .api &gt; tr &gt; td     { vertical-align: middle; }
+ .sml &gt; tr &gt; th, .sml &gt; tr &gt; td { text-align: center; padding: 2px 4px; }
+ .fn { text-align: left; }
+ .fn &gt; code &gt; a { font: 14px/19px Roboto Condensed, sans-serif; }
+ .deg45 {
+   white-space: nowrap; background: none; border: none; vertical-align: bottom;
+   width: 30px; height: 83px;
+ }
+ .deg45 &gt; div {
+   transform: skew(-45deg, 0deg) translate(1px, -67px);
+   transform-origin: bottom left 0;
+   width: 30px; height: 20px;
+ }
+ .deg45 &gt; div &gt; div { border: 1px solid #ddd; background: #999; height: 90px; width: 42px; }
+ .deg45 &gt; div &gt; div &gt; div { transform: skew(45deg, 0deg) translate(-55px, 55px) rotate(-45deg); }
+ &lt;/style&gt;
+
+ &lt;table align=&quot;right&quot; style=&quot;width: 0%&quot;&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;&lt;th&gt;Symbol&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=sml&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9679;&lt;/td&gt;&lt;td&gt;Supported&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#8277;&lt;/td&gt;&lt;td&gt;Semantics changed&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9675;&lt;/td&gt;&lt;td&gt;Experimental support&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;[ ]&lt;/td&gt;&lt;td&gt;Deprecated&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9099;&lt;/td&gt;&lt;td&gt;Restricted to surface input mode&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9094;&lt;/td&gt;&lt;td&gt;Restricted to surface output mode&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9639;&lt;/td&gt;&lt;td&gt;Restricted to ByteBuffer input mode&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#8617;&lt;/td&gt;&lt;td&gt;Restricted to synchronous mode&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#8644;&lt;/td&gt;&lt;td&gt;Restricted to asynchronous mode&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;( )&lt;/td&gt;&lt;td&gt;Can be called, but shouldn't&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;table style=&quot;width: 100%;&quot;&gt;
+  &lt;thead class=api&gt;
+   &lt;tr&gt;
+    &lt;th class=deg45&gt;&lt;div&gt;&lt;div style=&quot;background:#4285f4&quot;&gt;&lt;div&gt;Uninitialized&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/th&gt;
+    &lt;th class=deg45&gt;&lt;div&gt;&lt;div style=&quot;background:#f4b400&quot;&gt;&lt;div&gt;Configured&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/th&gt;
+    &lt;th class=deg45&gt;&lt;div&gt;&lt;div style=&quot;background:#e67c73&quot;&gt;&lt;div&gt;Flushed&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/th&gt;
+    &lt;th class=deg45&gt;&lt;div&gt;&lt;div style=&quot;background:#0f9d58&quot;&gt;&lt;div&gt;Running&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/th&gt;
+    &lt;th class=deg45&gt;&lt;div&gt;&lt;div style=&quot;background:#f7cb4d&quot;&gt;&lt;div&gt;End of Stream&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/th&gt;
+    &lt;th class=deg45&gt;&lt;div&gt;&lt;div style=&quot;background:#db4437&quot;&gt;&lt;div&gt;Error&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/th&gt;
+    &lt;th class=deg45&gt;&lt;div&gt;&lt;div style=&quot;background:#666&quot;&gt;&lt;div&gt;Released&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/th&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th colspan=&quot;8&quot;&gt;SDK Version&lt;/th&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;th colspan=&quot;7&quot;&gt;State&lt;/th&gt;
+    &lt;th&gt;Method&lt;/th&gt;
+    &lt;th&gt;16&lt;/th&gt;
+    &lt;th&gt;17&lt;/th&gt;
+    &lt;th&gt;18&lt;/th&gt;
+    &lt;th&gt;19&lt;/th&gt;
+    &lt;th&gt;20&lt;/th&gt;
+    &lt;th&gt;21&lt;/th&gt;
+    &lt;th&gt;22&lt;/th&gt;
+    &lt;th&gt;23&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=api&gt;
+   &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #createByCodecName createByCodecName}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #createDecoderByType createDecoderByType}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #createEncoderByType createEncoderByType}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #createPersistentInputSurface createPersistentInputSurface}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #configure configure}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #createInputSurface createInputSurface}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #dequeueInputBuffer dequeueInputBuffer}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&amp;#9639;&amp;#8617;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&amp;#8617;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&amp;#8617;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #dequeueOutputBuffer dequeueOutputBuffer}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&amp;#8617;&lt;/td&gt;
+    &lt;td&gt;&amp;#8617;&lt;/td&gt;
+    &lt;td&gt;&amp;#8617;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #flush flush}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getCodecInfo getCodecInfo}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getInputBuffer getInputBuffer}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getInputBuffers getInputBuffers}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;[&amp;#8277;&amp;#8617;]&lt;/td&gt;
+    &lt;td&gt;[&amp;#8617;]&lt;/td&gt;
+    &lt;td&gt;[&amp;#8617;]&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getInputFormat getInputFormat}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getInputImage getInputImage}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getName getName}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getOutputBuffer getOutputBuffer}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getOutputBuffers getOutputBuffers}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;[&amp;#8277;&amp;#8617;]&lt;/td&gt;
+    &lt;td&gt;[&amp;#8617;]&lt;/td&gt;
+    &lt;td&gt;[&amp;#8617;]&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getOutputFormat}()&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getOutputFormat}(int)&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;(21+)&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #getOutputImage getOutputImage}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #queueInputBuffer queueInputBuffer}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #queueSecureInputBuffer queueSecureInputBuffer}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #release release}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #releaseOutputBuffer(int, boolean)}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #releaseOutputBuffer(int, long)}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #reset reset}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;21+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #setCallback(Callback) setCallback}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;{@link #setCallback(Callback, Handler) &amp;#8277;}&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #setInputSurface setInputSurface}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;(23+)&lt;/td&gt;
+    &lt;td&gt;(23+)&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #setOnFrameRenderedListener setOnFrameRenderedListener}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675; &amp;#9094;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;23+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #setOutputSurface setOutputSurface}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;19+&lt;/td&gt;
+    &lt;td&gt;19+&lt;/td&gt;
+    &lt;td&gt;19+&lt;/td&gt;
+    &lt;td&gt;19+&lt;/td&gt;
+    &lt;td&gt;19+&lt;/td&gt;
+    &lt;td&gt;(19+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #setParameters setParameters}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;(16+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #setVideoScalingMode setVideoScalingMode}&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+    &lt;td&gt;&amp;#9094;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;(29+)&lt;/td&gt;
+    &lt;td&gt;29+&lt;/td&gt;
+    &lt;td&gt;29+&lt;/td&gt;
+    &lt;td&gt;29+&lt;/td&gt;
+    &lt;td&gt;(29+)&lt;/td&gt;
+    &lt;td&gt;(29+)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #setAudioPresentation setAudioPresentation}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;18+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #signalEndOfInputStream signalEndOfInputStream}&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+    &lt;td&gt;&amp;#9099;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;21+(&amp;#8644;)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #start start}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;16+&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+    &lt;td class=fn&gt;{@link #stop stop}&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+*/
+var MediaCodec = {
+
+<span id='android-media-MediaCodec-property-BUFFER_FLAG_SYNC_FRAME'>/** This indicates that the (encoded) buffer marked as such contains
+</span> the data for a key frame.
+
+ @deprecated Use {@link #BUFFER_FLAG_KEY_FRAME} instead.
+*/
+BUFFER_FLAG_SYNC_FRAME : &quot;1&quot;,
+<span id='android-media-MediaCodec-property-BUFFER_FLAG_KEY_FRAME'>/** This indicates that the (encoded) buffer marked as such contains
+</span> the data for a key frame.
+*/
+BUFFER_FLAG_KEY_FRAME : &quot;1&quot;,
+<span id='android-media-MediaCodec-property-BUFFER_FLAG_CODEC_CONFIG'>/** This indicated that the buffer marked as such contains codec
+</span> initialization / codec specific data instead of media data.
+*/
+BUFFER_FLAG_CODEC_CONFIG : &quot;2&quot;,
+<span id='android-media-MediaCodec-property-BUFFER_FLAG_END_OF_STREAM'>/** This signals the end of stream, i.e. no buffers will be available
+</span> after this, unless of course, {@link #flush} follows.
+*/
+BUFFER_FLAG_END_OF_STREAM : &quot;4&quot;,
+<span id='android-media-MediaCodec-property-BUFFER_FLAG_PARTIAL_FRAME'>/** This indicates that the buffer only contains part of a frame,
+</span> and the decoder should batch the data until a buffer without
+ this flag appears before decoding the frame.
+*/
+BUFFER_FLAG_PARTIAL_FRAME : &quot;8&quot;,
+<span id='android-media-MediaCodec-property-BUFFER_FLAG_MUXER_DATA'>/** This indicates that the buffer contains non-media data for the
+</span> muxer to process.
+
+ All muxer data should start with a FOURCC header that determines the type of data.
+
+ For example, when it contains Exif data sent to a MediaMuxer track of
+ {@link android.media.MediaFormat#MIMETYPE_IMAGE_ANDROID_HEIC} type, the data must start with
+ Exif header (&quot;Exif\0\0&quot;), followed by the TIFF header (See JEITA CP-3451C Section 4.5.2.)
+
+ @hide
+*/
+BUFFER_FLAG_MUXER_DATA : &quot;16&quot;,
+<span id='android-media-MediaCodec-property-CONFIGURE_FLAG_ENCODE'>/** If this codec is to be used as an encoder, pass this flag.
+</span>*/
+CONFIGURE_FLAG_ENCODE : &quot;1&quot;,
+<span id='android-media-MediaCodec-property-CRYPTO_MODE_UNENCRYPTED'>/***/
+</span>CRYPTO_MODE_UNENCRYPTED : &quot;0&quot;,
+<span id='android-media-MediaCodec-property-CRYPTO_MODE_AES_CTR'>/***/
+</span>CRYPTO_MODE_AES_CTR : &quot;1&quot;,
+<span id='android-media-MediaCodec-property-CRYPTO_MODE_AES_CBC'>/***/
+</span>CRYPTO_MODE_AES_CBC : &quot;2&quot;,
+<span id='android-media-MediaCodec-property-INFO_TRY_AGAIN_LATER'>/** If a non-negative timeout had been specified in the call
+</span> to {@link #dequeueOutputBuffer}, indicates that the call timed out.
+*/
+INFO_TRY_AGAIN_LATER : &quot;-1&quot;,
+<span id='android-media-MediaCodec-property-INFO_OUTPUT_FORMAT_CHANGED'>/** The output format has changed, subsequent data will follow the new
+</span> format. {@link #getOutputFormat}() returns the new format.  Note, that
+ you can also use the new {@link #getOutputFormat}(int) method to
+ get the format for a specific output buffer.  This frees you from
+ having to track output format changes.
+*/
+INFO_OUTPUT_FORMAT_CHANGED : &quot;-2&quot;,
+<span id='android-media-MediaCodec-property-INFO_OUTPUT_BUFFERS_CHANGED'>/** The output buffers have changed, the client must refer to the new
+</span> set of output buffers returned by {@link #getOutputBuffers} from
+ this point on.
+
+ &lt;p&gt;Additionally, this event signals that the video scaling mode
+ may have been reset to the default.&lt;/p&gt;
+
+ @deprecated This return value can be ignored as {@link #getOutputBuffers} has been deprecated.  Client should
+ request a current buffer using on of the get-buffer or
+ get-image methods each time one has been dequeued.
+*/
+INFO_OUTPUT_BUFFERS_CHANGED : &quot;-3&quot;,
+<span id='android-media-MediaCodec-property-VIDEO_SCALING_MODE_SCALE_TO_FIT'>/** The content is scaled to the surface dimensions
+</span>*/
+VIDEO_SCALING_MODE_SCALE_TO_FIT : &quot;1&quot;,
+<span id='android-media-MediaCodec-property-VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING'>/** The content is scaled, maintaining its aspect ratio, the whole
+</span> surface area is used, content may be cropped.
+ &lt;p class=note&gt;
+ This mode is only suitable for content with 1:1 pixel aspect ratio as you cannot
+ configure the pixel aspect ratio for a {@link Surface}.
+ &lt;p class=note&gt;
+ As of {@link android.os.Build.VERSION_CODES#N} release, this mode may not work if
+ the video is {@linkplain android.media.MediaFormat#KEY_ROTATION rotated} by 90 or 270 degrees.
+*/
+VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING : &quot;2&quot;,
+<span id='android-media-MediaCodec-property-PARAMETER_KEY_VIDEO_BITRATE'>/** Change a video encoder's target bitrate on the fly. The value is an
+</span> Integer object containing the new bitrate in bps.
+
+ @see #setParameters(Bundle)
+*/
+PARAMETER_KEY_VIDEO_BITRATE : &quot;video-bitrate&quot;,
+<span id='android-media-MediaCodec-property-PARAMETER_KEY_SUSPEND'>/** Temporarily suspend/resume encoding of input data. While suspended
+</span> input data is effectively discarded instead of being fed into the
+ encoder. This parameter really only makes sense to use with an encoder
+ in &quot;surface-input&quot; mode, as the client code has no control over the
+ input-side of the encoder in that case.
+ The value is an Integer object containing the value 1 to suspend
+ or the value 0 to resume.
+
+ @see #setParameters(Bundle)
+*/
+PARAMETER_KEY_SUSPEND : &quot;drop-input-frames&quot;,
+<span id='android-media-MediaCodec-property-PARAMETER_KEY_SUSPEND_TIME'>/** When {@link #PARAMETER_KEY_SUSPEND} is present, the client can also
+</span> optionally use this key to specify the timestamp (in micro-second)
+ at which the suspend/resume operation takes effect.
+
+ Note that the specified timestamp must be greater than or equal to the
+ timestamp of any previously queued suspend/resume operations.
+
+ The value is a long int, indicating the timestamp to suspend/resume.
+
+ @see #setParameters(Bundle)
+*/
+PARAMETER_KEY_SUSPEND_TIME : &quot;drop-start-time-us&quot;,
+<span id='android-media-MediaCodec-property-PARAMETER_KEY_OFFSET_TIME'>/** Specify an offset (in micro-second) to be added on top of the timestamps
+</span> onward. A typical use case is to apply an adjust to the timestamps after
+ a period of pause by the user.
+
+ This parameter can only be used on an encoder in &quot;surface-input&quot; mode.
+
+ The value is a long int, indicating the timestamp offset to be applied.
+
+ @see #setParameters(Bundle)
+*/
+PARAMETER_KEY_OFFSET_TIME : &quot;time-offset-us&quot;,
+<span id='android-media-MediaCodec-property-PARAMETER_KEY_REQUEST_SYNC_FRAME'>/** Request that the encoder produce a sync frame &quot;soon&quot;.
+</span> Provide an Integer with the value 0.
+
+ @see #setParameters(Bundle)
+*/
+PARAMETER_KEY_REQUEST_SYNC_FRAME : &quot;request-sync&quot;,
+<span id='android-media-MediaCodec-property-PARAMETER_KEY_HDR10_PLUS_INFO'>/** Set the HDR10+ metadata on the next queued input frame.
+</span>
+ Provide a byte array of data that's conforming to the
+ user_data_registered_itu_t_t35() syntax of SEI message for ST 2094-40.
+&lt;p&gt;
+ For decoders:
+&lt;p&gt;
+ When a decoder is configured for one of the HDR10+ profiles that uses
+ out-of-band metadata (such as {@link android.media.MediaCodecInfo.CodecProfileLevel#VP9Profile2HDR10Plus} or {@link android.media.MediaCodecInfo.CodecProfileLevel#VP9Profile3HDR10Plus}), this
+ parameter sets the HDR10+ metadata on the next input buffer queued
+ to the decoder. A decoder supporting these profiles must propagate
+ the metadata to the format of the output buffer corresponding to this
+ particular input buffer (under key {@link android.media.MediaFormat#KEY_HDR10_PLUS_INFO}).
+ The metadata should be applied to that output buffer and the buffers
+ following it (in display order), until the next output buffer (in
+ display order) upon which an HDR10+ metadata is set.
+&lt;p&gt;
+ This parameter shouldn't be set if the decoder is not configured for
+ an HDR10+ profile that uses out-of-band metadata. In particular,
+ it shouldn't be set for HDR10+ profiles that uses in-band metadata
+ where the metadata is embedded in the input buffers, for example
+ {@link android.media.MediaCodecInfo.CodecProfileLevel#HEVCProfileMain10HDR10Plus}.
+&lt;p&gt;
+ For encoders:
+&lt;p&gt;
+ When an encoder is configured for one of the HDR10+ profiles and the
+ operates in byte buffer input mode (instead of surface input mode),
+ this parameter sets the HDR10+ metadata on the next input buffer queued
+ to the encoder. For the HDR10+ profiles that uses out-of-band metadata
+ (such as {@link android.media.MediaCodecInfo.CodecProfileLevel#VP9Profile2HDR10Plus},
+ or {@link android.media.MediaCodecInfo.CodecProfileLevel#VP9Profile3HDR10Plus}),
+ the metadata must be propagated to the format of the output buffer
+ corresponding to this particular input buffer (under key {@link android.media.MediaFormat#KEY_HDR10_PLUS_INFO}). For the HDR10+ profiles that uses
+ in-band metadata (such as {@link android.media.MediaCodecInfo.CodecProfileLevel#HEVCProfileMain10HDR10Plus}), the
+ metadata info must be embedded in the corresponding output buffer itself.
+&lt;p&gt;
+ This parameter shouldn't be set if the encoder is not configured for
+ an HDR10+ profile, or if it's operating in surface input mode.
+&lt;p&gt;
+
+ @see MediaFormat#KEY_HDR10_PLUS_INFO
+*/
+PARAMETER_KEY_HDR10_PLUS_INFO : &quot;hdr10-plus-info&quot;,
+<span id='android-media-MediaCodec-method-createDecoderByType'>/**Instantiate the preferred decoder supporting input data of the given mime type.
+</span>
+ The following is a partial list of defined mime types and their semantics:
+ &lt;ul&gt;
+ &lt;li&gt;&quot;video/x-vnd.on2.vp8&quot; - VP8 video (i.e. video in .webm)
+ &lt;li&gt;&quot;video/x-vnd.on2.vp9&quot; - VP9 video (i.e. video in .webm)
+ &lt;li&gt;&quot;video/avc&quot; - H.264/AVC video
+ &lt;li&gt;&quot;video/hevc&quot; - H.265/HEVC video
+ &lt;li&gt;&quot;video/mp4v-es&quot; - MPEG4 video
+ &lt;li&gt;&quot;video/3gpp&quot; - H.263 video
+ &lt;li&gt;&quot;audio/3gpp&quot; - AMR narrowband audio
+ &lt;li&gt;&quot;audio/amr-wb&quot; - AMR wideband audio
+ &lt;li&gt;&quot;audio/mpeg&quot; - MPEG1/2 audio layer III
+ &lt;li&gt;&quot;audio/mp4a-latm&quot; - AAC audio (note, this is raw AAC packets, not packaged in LATM!)
+ &lt;li&gt;&quot;audio/vorbis&quot; - vorbis audio
+ &lt;li&gt;&quot;audio/g711-alaw&quot; - G.711 alaw audio
+ &lt;li&gt;&quot;audio/g711-mlaw&quot; - G.711 ulaw audio
+ &lt;/ul&gt;
+
+ &lt;strong&gt;Note:&lt;/strong&gt; It is preferred to use {@link android.media.MediaCodecList#findDecoderForFormat}
+ and {@link #createByCodecName} to ensure that the resulting codec can handle a
+ given format.
+@param {String} type The mime type of the input data.
+@throws IOException if the codec cannot be created.
+@throws IllegalArgumentException if type is not a valid mime type.
+@throws NullPointerException if type is null.
+*/
+createDecoderByType : function(  ) {},
+
+<span id='android-media-MediaCodec-method-createEncoderByType'>/**Instantiate the preferred encoder supporting output data of the given mime type.
+</span>
+ &lt;strong&gt;Note:&lt;/strong&gt; It is preferred to use {@link android.media.MediaCodecList#findEncoderForFormat}
+ and {@link #createByCodecName} to ensure that the resulting codec can handle a
+ given format.
+@param {String} type The desired mime type of the output data.
+@throws IOException if the codec cannot be created.
+@throws IllegalArgumentException if type is not a valid mime type.
+@throws NullPointerException if type is null.
+*/
+createEncoderByType : function(  ) {},
+
+<span id='android-media-MediaCodec-method-createByCodecName'>/**If you know the exact name of the component you want to instantiate
+</span> use this method to instantiate it. Use with caution.
+ Likely to be used with information obtained from {@link android.media.MediaCodecList}
+@param {String} name The name of the codec to be instantiated.
+@throws IOException if the codec cannot be created.
+@throws IllegalArgumentException if name is not valid.
+@throws NullPointerException if name is null.
+*/
+createByCodecName : function(  ) {},
+
+<span id='android-media-MediaCodec-method-reset'>/**Returns the codec to its initial (Uninitialized) state.
+</span>
+ Call this if an {@link android.media.MediaCodec.CodecException#isRecoverable unrecoverable}
+ error has occured to reset the codec to its initial state after creation.
+@throws CodecException if an unrecoverable error has occured and the codec
+ could not be reset.
+@throws IllegalStateException if in the Released state.
+*/
+reset : function(  ) {},
+
+<span id='android-media-MediaCodec-method-release'>/**Free up resources used by the codec instance.
+</span>
+ Make sure you call this when you're done to free up any opened
+ component instance instead of relying on the garbage collector
+ to do this for you at some point in the future.
+*/
+release : function(  ) {},
+
+<span id='android-media-MediaCodec-method-configure'>/**Configures a component.
+</span>@param {Object {MediaFormat}} format The format of the input data (decoder) or the desired
+               format of the output data (encoder). Passing {@code null}
+               as {@code format} is equivalent to passing an
+               {@link MediaFormat#MediaFormat an empty mediaformat}.
+@param {Object {Surface}} surface Specify a surface on which to render the output of this
+                decoder. Pass {@code null} as {@code surface} if the
+                codec does not generate raw video output (e.g. not a video
+                decoder) and/or if you want to configure the codec for
+                {@link ByteBuffer} output.
+@param {Object {MediaCrypto}} crypto  Specify a crypto object to facilitate secure decryption
+                of the media data. Pass {@code null} as {@code crypto} for
+                non-secure codecs.
+                Please note that {@link MediaCodec} does NOT take ownership
+                of the {@link MediaCrypto} object; it is the application's
+                responsibility to properly cleanup the {@link MediaCrypto} object
+                when not in use.
+@param {Number} flags   Specify {@link #CONFIGURE_FLAG_ENCODE} to configure the
+                component as an encoder.
+@throws IllegalArgumentException if the surface has been released (or is invalid),
+ or the format is unacceptable (e.g. missing a mandatory key),
+ or the flags are not set properly
+ (e.g. missing {@link #CONFIGURE_FLAG_ENCODE} for an encoder).
+@throws IllegalStateException if not in the Uninitialized state.
+@throws CryptoException upon DRM error.
+@throws CodecException upon codec error.
+*/
+configure : function(  ) {},
+
+<span id='android-media-MediaCodec-method-configure'>/**Configure a component to be used with a descrambler.
+</span>@param {Object {MediaFormat}} format The format of the input data (decoder) or the desired
+               format of the output data (encoder). Passing {@code null}
+               as {@code format} is equivalent to passing an
+               {@link MediaFormat#MediaFormat an empty mediaformat}.
+@param {Object {Surface}} surface Specify a surface on which to render the output of this
+                decoder. Pass {@code null} as {@code surface} if the
+                codec does not generate raw video output (e.g. not a video
+                decoder) and/or if you want to configure the codec for
+                {@link ByteBuffer} output.
+@param {Number} flags   Specify {@link #CONFIGURE_FLAG_ENCODE} to configure the
+                component as an encoder.
+@param {Object {MediaDescrambler}} descrambler Specify a descrambler object to facilitate secure
+                descrambling of the media data, or null for non-secure codecs.
+@throws IllegalArgumentException if the surface has been released (or is invalid),
+ or the format is unacceptable (e.g. missing a mandatory key),
+ or the flags are not set properly
+ (e.g. missing {@link #CONFIGURE_FLAG_ENCODE} for an encoder).
+@throws IllegalStateException if not in the Uninitialized state.
+@throws CryptoException upon DRM error.
+@throws CodecException upon codec error.
+*/
+configure : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setOutputSurface'>/**Dynamically sets the output surface of a codec.
+</span>  &lt;p&gt;
+  This can only be used if the codec was configured with an output surface.  The
+  new output surface should have a compatible usage type to the original output surface.
+  E.g. codecs may not support switching from a SurfaceTexture (GPU readable) output
+  to ImageReader (software readable) output.
+@param {Object {Surface}} surface the output surface to use. It must not be {@code null}.
+@throws IllegalStateException if the codec does not support setting the output
+            surface in the current state.
+@throws IllegalArgumentException if the new surface is not of a suitable type for the codec.
+*/
+setOutputSurface : function(  ) {},
+
+<span id='android-media-MediaCodec-method-createPersistentInputSurface'>/**Create a persistent input surface that can be used with codecs that normally have an input
+</span> surface, such as video encoders. A persistent input can be reused by subsequent
+ {@link android.media.MediaCodec} or {@link android.media.MediaRecorder} instances, but can only be used by at
+ most one codec or recorder instance concurrently.
+ &lt;p&gt;
+ The application is responsible for calling release() on the Surface when done.
+@return {Object {android.view.Surface}} an input surface that can be used with {@link #setInputSurface}.
+*/
+createPersistentInputSurface : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setInputSurface'>/**Configures the codec (e.g. encoder) to use a persistent input surface in place of input
+</span> buffers.  This may only be called after {@link #configure} and before {@link #start}, in
+ lieu of {@link #createInputSurface}.
+@param {Object {Surface}} surface a persistent input surface created by {@link #createPersistentInputSurface}
+@throws IllegalStateException if not in the Configured state or does not require an input
+           surface.
+@throws IllegalArgumentException if the surface was not created by
+           {@link #createPersistentInputSurface}.
+*/
+setInputSurface : function(  ) {},
+
+<span id='android-media-MediaCodec-method-createInputSurface'>/**Requests a Surface to use as the input to an encoder, in place of input buffers.  This
+</span> may only be called after {@link #configure} and before {@link #start}.
+ &lt;p&gt;
+ The application is responsible for calling release() on the Surface when
+ done.
+ &lt;p&gt;
+ The Surface must be rendered with a hardware-accelerated API, such as OpenGL ES.
+ {@link android.view.Surface#lockCanvas(android.graphics.Rect)} may fail or produce
+ unexpected results.
+@throws IllegalStateException if not in the Configured state.
+*/
+createInputSurface : function(  ) {},
+
+<span id='android-media-MediaCodec-method-start'>/**After successfully configuring the component, call {@code start}.
+</span> &lt;p&gt;
+ Call {@code start} also if the codec is configured in asynchronous mode,
+ and it has just been flushed, to resume requesting input buffers.
+@throws IllegalStateException if not in the Configured state
+         or just after {@link #flush} for a codec that is configured
+         in asynchronous mode.
+@throws MediaCodec.CodecException upon codec error. Note that some codec errors
+ for start may be attributed to future method calls.
+*/
+start : function(  ) {},
+
+<span id='android-media-MediaCodec-method-stop'>/**Finish the decode/encode session, note that the codec instance
+</span> remains active and ready to be {@link #start}ed again.
+ To ensure that it is available to other client call {@link #release}
+ and don't just rely on garbage collection to eventually do this for you.
+@throws IllegalStateException if in the Released state.
+*/
+stop : function(  ) {},
+
+<span id='android-media-MediaCodec-method-flush'>/**Flush both input and output ports of the component.
+</span> &lt;p&gt;
+ Upon return, all indices previously returned in calls to {@link #dequeueInputBuffer
+ dequeueInputBuffer} and {@link #dequeueOutputBuffer dequeueOutputBuffer} &amp;mdash; or obtained
+ via {@link android.media.MediaCodec.Callback#onInputBufferAvailable onInputBufferAvailable} or
+ {@link android.media.MediaCodec.Callback#onOutputBufferAvailable onOutputBufferAvailable} callbacks &amp;mdash; become
+ invalid, and all buffers are owned by the codec.
+ &lt;p&gt;
+ If the codec is configured in asynchronous mode, call {@link #start}
+ after {@code flush} has returned to resume codec operations. The codec
+ will not request input buffers until this has happened.
+ &lt;strong&gt;Note, however, that there may still be outstanding {@code onOutputBufferAvailable}
+ callbacks that were not handled prior to calling {@code flush}.
+ The indices returned via these callbacks also become invalid upon calling {@code flush} and
+ should be discarded.&lt;/strong&gt;
+ &lt;p&gt;
+ If the codec is configured in synchronous mode, codec will resume
+ automatically if it is configured with an input surface.  Otherwise, it
+ will resume when {@link #dequeueInputBuffer dequeueInputBuffer} is called.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+flush : function(  ) {},
+
+<span id='android-media-MediaCodec-method-queueInputBuffer'>/**After filling a range of the input buffer at the specified index
+</span> submit it to the component. Once an input buffer is queued to
+ the codec, it MUST NOT be used until it is later retrieved by
+ {@link #getInputBuffer} in response to a {@link #dequeueInputBuffer}
+ return value or a {@link android.media.MediaCodec.Callback#onInputBufferAvailable}
+ callback.
+ &lt;p&gt;
+ Many decoders require the actual compressed data stream to be
+ preceded by &quot;codec specific data&quot;, i.e. setup data used to initialize
+ the codec such as PPS/SPS in the case of AVC video or code tables
+ in the case of vorbis audio.
+ The class {@link android.media.MediaExtractor} provides codec
+ specific data as part of
+ the returned track format in entries named &quot;csd-0&quot;, &quot;csd-1&quot; ...
+ &lt;p&gt;
+ These buffers can be submitted directly after {@link #start} or
+ {@link #flush} by specifying the flag {@link #BUFFER_FLAG_CODEC_CONFIG}.  However, if you configure the
+ codec with a {@link android.media.MediaFormat} containing these keys, they
+ will be automatically submitted by MediaCodec directly after
+ start.  Therefore, the use of {@link #BUFFER_FLAG_CODEC_CONFIG} flag is discouraged and is
+ recommended only for advanced users.
+ &lt;p&gt;
+ To indicate that this is the final piece of input data (or rather that
+ no more input data follows unless the decoder is subsequently flushed)
+ specify the flag {@link #BUFFER_FLAG_END_OF_STREAM}.
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Prior to {@link android.os.Build.VERSION_CODES#M},
+ {@code presentationTimeUs} was not propagated to the frame timestamp of (rendered)
+ Surface output buffers, and the resulting frame timestamp was undefined.
+ Use {@link #releaseOutputBuffer(int, long)} to ensure a specific frame timestamp is set.
+ Similarly, since frame timestamps can be used by the destination surface for rendering
+ synchronization, &lt;strong&gt;care must be taken to normalize presentationTimeUs so as to not be
+ mistaken for a system time. (See {@linkplain #releaseOutputBuffer(int, long)
+ SurfaceView specifics}).&lt;/strong&gt;
+@param {Number} index The index of a client-owned input buffer previously returned
+              in a call to {@link #dequeueInputBuffer}.
+@param {Number} offset The byte offset into the input buffer at which the data starts.
+@param {Number} size The number of bytes of valid input data.
+@param {Number} presentationTimeUs The presentation timestamp in microseconds for this
+                           buffer. This is normally the media time at which this
+                           buffer should be presented (rendered). When using an output
+                           surface, this will be propagated as the {@link
+                           SurfaceTexture#getTimestamp timestamp} for the frame (after
+                           conversion to nanoseconds).
+@param {Number} flags A bitmask of flags
+              {@link #BUFFER_FLAG_CODEC_CONFIG} and {@link #BUFFER_FLAG_END_OF_STREAM}.
+              While not prohibited, most codecs do not use the
+              {@link #BUFFER_FLAG_KEY_FRAME} flag for input buffers.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+@throws CryptoException if a crypto object has been specified in
+         {@link #configure}
+*/
+queueInputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-queueSecureInputBuffer'>/**Similar to {@link #queueInputBuffer queueInputBuffer} but submits a buffer that is
+</span> potentially encrypted.
+ &lt;strong&gt;Check out further notes at {@link #queueInputBuffer queueInputBuffer}.&lt;/strong&gt;
+@param {Number} index The index of a client-owned input buffer previously returned
+              in a call to {@link #dequeueInputBuffer}.
+@param {Number} offset The byte offset into the input buffer at which the data starts.
+@param {Object {MediaCodec.CryptoInfo}} info Metadata required to facilitate decryption, the object can be
+             reused immediately after this call returns.
+@param {Number} presentationTimeUs The presentation timestamp in microseconds for this
+                           buffer. This is normally the media time at which this
+                           buffer should be presented (rendered).
+@param {Number} flags A bitmask of flags
+              {@link #BUFFER_FLAG_CODEC_CONFIG} and {@link #BUFFER_FLAG_END_OF_STREAM}.
+              While not prohibited, most codecs do not use the
+              {@link #BUFFER_FLAG_KEY_FRAME} flag for input buffers.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+@throws CryptoException if an error occurs while attempting to decrypt the buffer.
+              An error code associated with the exception helps identify the
+              reason for the failure.
+*/
+queueSecureInputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-dequeueInputBuffer'>/**Returns the index of an input buffer to be filled with valid data
+</span> or -1 if no such buffer is currently available.
+ This method will return immediately if timeoutUs == 0, wait indefinitely
+ for the availability of an input buffer if timeoutUs &amp;lt; 0 or wait up
+ to &quot;timeoutUs&quot; microseconds if timeoutUs &amp;gt; 0.
+@param {Number} timeoutUs The timeout in microseconds, a negative timeout indicates &quot;infinite&quot;.
+@throws IllegalStateException if not in the Executing state,
+         or codec is configured in asynchronous mode.
+@throws MediaCodec.CodecException upon codec error.
+*/
+dequeueInputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-dequeueOutputBuffer'>/**Dequeue an output buffer, block at most &quot;timeoutUs&quot; microseconds.
+</span> Returns the index of an output buffer that has been successfully
+ decoded or one of the INFO_* constants.
+@param {Object {MediaCodec.BufferInfo}} info Will be filled with buffer meta data.
+@param {Number} timeoutUs The timeout in microseconds, a negative timeout indicates &quot;infinite&quot;.
+@throws IllegalStateException if not in the Executing state,
+         or codec is configured in asynchronous mode.
+@throws MediaCodec.CodecException upon codec error.
+*/
+dequeueOutputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-releaseOutputBuffer'>/**If you are done with a buffer, use this call to return the buffer to the codec
+</span> or to render it on the output surface. If you configured the codec with an
+ output surface, setting {@code render} to {@code true} will first send the buffer
+ to that output surface. The surface will release the buffer back to the codec once
+ it is no longer used/displayed.
+
+ Once an output buffer is released to the codec, it MUST NOT
+ be used until it is later retrieved by {@link #getOutputBuffer} in response
+ to a {@link #dequeueOutputBuffer} return value or a
+ {@link android.media.MediaCodec.Callback#onOutputBufferAvailable} callback.
+@param {Number} index The index of a client-owned output buffer previously returned
+              from a call to {@link #dequeueOutputBuffer}.
+@param {Boolean} render If a valid surface was specified when configuring the codec,
+               passing true renders this output buffer to the surface.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+releaseOutputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-releaseOutputBuffer'>/**If you are done with a buffer, use this call to update its surface timestamp
+</span> and return it to the codec to render it on the output surface. If you
+ have not specified an output surface when configuring this video codec,
+ this call will simply return the buffer to the codec.&lt;p&gt;
+
+ The timestamp may have special meaning depending on the destination surface.
+
+ &lt;table&gt;
+ &lt;tr&gt;&lt;th&gt;SurfaceView specifics&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;
+ If you render your buffer on a {@link android.view.SurfaceView},
+ you can use the timestamp to render the buffer at a specific time (at the
+ VSYNC at or after the buffer timestamp).  For this to work, the timestamp
+ needs to be &lt;i&gt;reasonably close&lt;/i&gt; to the current {@link System#nanoTime}.
+ Currently, this is set as within one (1) second. A few notes:
+
+ &lt;ul&gt;
+ &lt;li&gt;the buffer will not be returned to the codec until the timestamp
+ has passed and the buffer is no longer used by the {@link android.view.Surface}.
+ &lt;li&gt;buffers are processed sequentially, so you may block subsequent buffers to
+ be displayed on the {@link android.view.Surface}.  This is important if you
+ want to react to user action, e.g. stop the video or seek.
+ &lt;li&gt;if multiple buffers are sent to the {@link android.view.Surface} to be
+ rendered at the same VSYNC, the last one will be shown, and the other ones
+ will be dropped.
+ &lt;li&gt;if the timestamp is &lt;em&gt;not&lt;/em&gt; &quot;reasonably close&quot; to the current system
+ time, the {@link android.view.Surface} will ignore the timestamp, and
+ display the buffer at the earliest feasible time.  In this mode it will not
+ drop frames.
+ &lt;li&gt;for best performance and quality, call this method when you are about
+ two VSYNCs' time before the desired render time.  For 60Hz displays, this is
+ about 33 msec.
+ &lt;/ul&gt;
+ &lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+
+ Once an output buffer is released to the codec, it MUST NOT
+ be used until it is later retrieved by {@link #getOutputBuffer} in response
+ to a {@link #dequeueOutputBuffer} return value or a
+ {@link android.media.MediaCodec.Callback#onOutputBufferAvailable} callback.
+@param {Number} index The index of a client-owned output buffer previously returned
+              from a call to {@link #dequeueOutputBuffer}.
+@param {Number} renderTimestampNs The timestamp to associate with this buffer when
+              it is sent to the Surface.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+releaseOutputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-signalEndOfInputStream'>/**Signals end-of-stream on input.  Equivalent to submitting an empty buffer with
+</span> {@link #BUFFER_FLAG_END_OF_STREAM} set.  This may only be used with
+ encoders receiving input from a Surface created by {@link #createInputSurface}.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+signalEndOfInputStream : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getOutputFormat'>/**Call this after dequeueOutputBuffer signals a format change by returning
+</span> {@link #INFO_OUTPUT_FORMAT_CHANGED}.
+ You can also call this after {@link #configure} returns
+ successfully to get the output format initially configured
+ for the codec.  Do this to determine what optional
+ configuration parameters were supported by the codec.
+@throws IllegalStateException if not in the Executing or
+                               Configured state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getOutputFormat : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getInputFormat'>/**Call this after {@link #configure} returns successfully to
+</span> get the input format accepted by the codec. Do this to
+ determine what optional configuration parameters were
+ supported by the codec.
+@throws IllegalStateException if not in the Executing or
+                               Configured state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getInputFormat : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getOutputFormat'>/**Returns the output format for a specific output buffer.
+</span>@param {Number} index The index of a client-owned input buffer previously
+              returned from a call to {@link #dequeueInputBuffer}.
+@return {Object {android.media.MediaFormat}} the format for the output buffer, or null if the index
+ is not a dequeued output buffer.
+*/
+getOutputFormat : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getInputBuffers'>/**Retrieve the set of input buffers.  Call this after start()
+</span> returns. After calling this method, any ByteBuffers
+ previously returned by an earlier call to this method MUST no
+ longer be used.
+@deprecated Use the new {@link #getInputBuffer} method instead
+ each time an input buffer is dequeued.
+
+ &lt;b&gt;Note:&lt;/b&gt; As of API 21, dequeued input buffers are
+ automatically {@link java.nio.Buffer#clear cleared}.
+
+ &lt;em&gt;Do not use this method if using an input surface.&lt;/em&gt;
+@throws IllegalStateException if not in the Executing state,
+         or codec is configured in asynchronous mode.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getInputBuffers : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getOutputBuffers'>/**Retrieve the set of output buffers.  Call this after start()
+</span> returns and whenever dequeueOutputBuffer signals an output
+ buffer change by returning {@link #INFO_OUTPUT_BUFFERS_CHANGED}. After calling this method, any
+ ByteBuffers previously returned by an earlier call to this
+ method MUST no longer be used.
+@deprecated Use the new {@link #getOutputBuffer} method instead
+ each time an output buffer is dequeued.  This method is not
+ supported if codec is configured in asynchronous mode.
+
+ &lt;b&gt;Note:&lt;/b&gt; As of API 21, the position and limit of output
+ buffers that are dequeued will be set to the valid data
+ range.
+
+ &lt;em&gt;Do not use this method if using an output surface.&lt;/em&gt;
+@throws IllegalStateException if not in the Executing state,
+         or codec is configured in asynchronous mode.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getOutputBuffers : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getInputBuffer'>/**Returns a {@link java.nio.Buffer#clear cleared}, writable ByteBuffer
+</span> object for a dequeued input buffer index to contain the input data.
+
+ After calling this method any ByteBuffer or Image object
+ previously returned for the same input index MUST no longer
+ be used.
+@param {Number} index The index of a client-owned input buffer previously
+              returned from a call to {@link #dequeueInputBuffer},
+              or received via an onInputBufferAvailable callback.
+@return {Object {java.nio.ByteBuffer}} the input buffer, or null if the index is not a dequeued
+ input buffer, or if the codec is configured for surface input.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getInputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getInputImage'>/**Returns a writable Image object for a dequeued input buffer
+</span> index to contain the raw input video frame.
+
+ After calling this method any ByteBuffer or Image object
+ previously returned for the same input index MUST no longer
+ be used.
+@param {Number} index The index of a client-owned input buffer previously
+              returned from a call to {@link #dequeueInputBuffer},
+              or received via an onInputBufferAvailable callback.
+@return {Object {android.media.Image}} the input image, or null if the index is not a
+ dequeued input buffer, or not a ByteBuffer that contains a
+ raw image.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getInputImage : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getOutputBuffer'>/**Returns a read-only ByteBuffer for a dequeued output buffer
+</span> index. The position and limit of the returned buffer are set
+ to the valid output data.
+
+ After calling this method, any ByteBuffer or Image object
+ previously returned for the same output index MUST no longer
+ be used.
+@param {Number} index The index of a client-owned output buffer previously
+              returned from a call to {@link #dequeueOutputBuffer},
+              or received via an onOutputBufferAvailable callback.
+@return {Object {java.nio.ByteBuffer}} the output buffer, or null if the index is not a dequeued
+ output buffer, or the codec is configured with an output surface.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getOutputBuffer : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getOutputImage'>/**Returns a read-only Image object for a dequeued output buffer
+</span> index that contains the raw video frame.
+
+ After calling this method, any ByteBuffer or Image object previously
+ returned for the same output index MUST no longer be used.
+@param {Number} index The index of a client-owned output buffer previously
+              returned from a call to {@link #dequeueOutputBuffer},
+              or received via an onOutputBufferAvailable callback.
+@return {Object {android.media.Image}} the output image, or null if the index is not a
+ dequeued output buffer, not a raw video frame, or if the codec
+ was configured with an output surface.
+@throws IllegalStateException if not in the Executing state.
+@throws MediaCodec.CodecException upon codec error.
+*/
+getOutputImage : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setVideoScalingMode'>/**If a surface has been specified in a previous call to {@link #configure}
+</span> specifies the scaling mode to use. The default is &quot;scale to fit&quot;.
+ &lt;p class=note&gt;
+ The scaling mode may be reset to the &lt;strong&gt;default&lt;/strong&gt; each time an
+ {@link #INFO_OUTPUT_BUFFERS_CHANGED} event is received from the codec; therefore, the client
+ must call this method after every buffer change event (and before the first output buffer is
+ released for rendering) to ensure consistent scaling mode.
+ &lt;p class=note&gt;
+ Since the {@link #INFO_OUTPUT_BUFFERS_CHANGED} event is deprecated, this can also be done
+ after each {@link #INFO_OUTPUT_FORMAT_CHANGED} event.
+@throws IllegalArgumentException if mode is not recognized.
+@throws IllegalStateException if in the Released state.
+*/
+setVideoScalingMode : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setAudioPresentation'>/**Sets the audio presentation.
+</span>@param {Object {AudioPresentation}} presentation see {@link AudioPresentation}. In particular, id should be set.
+*/
+setAudioPresentation : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getName'>/**Retrieve the codec name.
+</span>
+ If the codec was created by createDecoderByType or createEncoderByType, what component is
+ chosen is not known beforehand. This method returns the name of the codec that was
+ selected by the platform.
+
+ &lt;strong&gt;Note:&lt;/strong&gt; Implementations may provide multiple aliases (codec
+ names) for the same underlying codec, any of which can be used to instantiate the same
+ underlying codec in {@link android.media.MediaCodec#createByCodecName}. This method returns the
+ name used to create the codec in this case.
+@throws IllegalStateException if in the Released state.
+*/
+getName : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getCanonicalName'>/**Retrieve the underlying codec name.
+</span>
+ This method is similar to {@link #getName}, except that it returns the underlying component
+ name even if an alias was used to create this MediaCodec object by name,
+@throws IllegalStateException if in the Released state.
+*/
+getCanonicalName : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getMetrics'>/**Return Metrics data about the current codec instance.
+</span>@return {Object {android.os.PersistableBundle}} a {@link PersistableBundle} containing the set of attributes and values
+ available for the media being handled by this instance of MediaCodec
+ The attributes are descibed in {@link MetricsConstants}.
+
+ Additional vendor-specific fields may also be present in
+ the return value.
+*/
+getMetrics : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setParameters'>/**Communicate additional parameter changes to the component instance.
+</span> &lt;b&gt;Note:&lt;/b&gt; Some of these parameter changes may silently fail to apply.
+@param {Object {Bundle}} params The bundle of parameters to set.
+@throws IllegalStateException if in the Released state.
+*/
+setParameters : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setCallback'>/**Sets an asynchronous callback for actionable MediaCodec events.
+</span>
+ If the client intends to use the component in asynchronous mode,
+ a valid callback should be provided before {@link #configure} is called.
+
+ When asynchronous callback is enabled, the client should not call
+ {@link #getInputBuffers}, {@link #getOutputBuffers},
+ {@link #dequeueInputBuffer}(long) or {@link #dequeueOutputBuffer(BufferInfo, long)}.
+ &lt;p&gt;
+ Also, {@link #flush} behaves differently in asynchronous mode.  After calling
+ {@code flush}, you must call {@link #start} to &quot;resume&quot; receiving input buffers,
+ even if an input surface was created.
+@param {Object {MediaCodec.Callback}} cb The callback that will run.  Use {@code null} to clear a previously
+           set callback (before {@link #configure configure} is called and run
+           in synchronous mode).
+@param {Object {Handler}} handler Callbacks will happen on the handler's thread. If {@code null},
+           callbacks are done on the default thread (the caller's thread or the
+           main thread.)
+*/
+setCallback : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setCallback'>/**Sets an asynchronous callback for actionable MediaCodec events on the default
+</span> looper.
+ &lt;p&gt;
+ Same as {@link #setCallback(Callback, Handler)} with handler set to null.
+@param {Object {MediaCodec.Callback}} cb The callback that will run.  Use {@code null} to clear a previously
+           set callback (before {@link #configure configure} is called and run
+           in synchronous mode).
+@see #setCallback(Callback, Handler)
+*/
+setCallback : function(  ) {},
+
+<span id='android-media-MediaCodec-method-setOnFrameRenderedListener'>/**Registers a callback to be invoked when an output frame is rendered on the output surface.
+</span> &lt;p&gt;
+ This method can be called in any codec state, but will only have an effect in the
+ Executing state for codecs that render buffers to the output surface.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; This callback is for informational purposes only: to get precise
+ render timing samples, and can be significantly delayed and batched. Some frames may have
+ been rendered even if there was no callback generated.
+@param {Object {MediaCodec.OnFrameRenderedListener}} listener the callback that will be run
+@param {Object {Handler}} handler the callback will be run on the handler's thread. If {@code null},
+           the callback will be run on the default thread, which is the looper
+           from which the codec was created, or a new thread if there was none.
+*/
+setOnFrameRenderedListener : function(  ) {},
+
+<span id='android-media-MediaCodec-method-getCodecInfo'>/**Get the codec info. If the codec was created by createDecoderByType
+</span> or createEncoderByType, what component is chosen is not known beforehand,
+ and thus the caller does not have the MediaCodecInfo.
+@throws IllegalStateException if in the Released state.
+*/
+getCodecInfo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaDrm'>/**@class android.media.MediaDrm
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ MediaDrm can be used to obtain keys for decrypting protected media streams, in
+ conjunction with {@link android.media.MediaCrypto}.  The MediaDrm APIs
+ are designed to support the ISO/IEC 23001-7: Common Encryption standard, but
+ may also be used to implement other encryption schemes.
+ &lt;p&gt;
+ Encrypted content is prepared using an encryption server and stored in a content
+ library. The encrypted content is streamed or downloaded from the content library to
+ client devices via content servers.  Licenses to view the content are obtained from
+ a License Server.
+ &lt;p&gt;
+ &lt;p&gt;&lt;img src=&quot;../../../images/mediadrm_overview.png&quot;
+      alt=&quot;MediaDrm Overview diagram&quot;
+      border=&quot;0&quot; /&gt;&lt;/p&gt;
+ &lt;p&gt;
+ Keys are requested from the license server using a key request. The key
+ response is delivered to the client app, which provides the response to the
+ MediaDrm API.
+ &lt;p&gt;
+ A Provisioning server may be required to distribute device-unique credentials to
+ the devices.
+ &lt;p&gt;
+ Enforcing requirements related to the number of devices that may play content
+ simultaneously can be performed either through key renewal or using the secure
+ stop methods.
+ &lt;p&gt;
+ The following sequence diagram shows the interactions between the objects
+ involved while playing back encrypted content:
+ &lt;p&gt;
+ &lt;p&gt;&lt;img src=&quot;../../../images/mediadrm_decryption_sequence.png&quot;
+         alt=&quot;MediaDrm Overview diagram&quot;
+         border=&quot;0&quot; /&gt;&lt;/p&gt;
+ &lt;p&gt;
+ The app first constructs {@link android.media.MediaExtractor} and
+ {@link android.media.MediaCodec} objects. It accesses the DRM-scheme-identifying UUID,
+ typically from metadata in the content, and uses this UUID to construct an instance
+ of a MediaDrm object that is able to support the DRM scheme required by the content.
+ Crypto schemes are assigned 16 byte UUIDs.  The method {@link #isCryptoSchemeSupported}
+ can be used to query if a given scheme is supported on the device.
+ &lt;p&gt;
+ The app calls {@link #openSession} to generate a sessionId that will uniquely identify
+ the session in subsequent interactions. The app next uses the MediaDrm object to
+ obtain a key request message and send it to the license server, then provide
+ the server's response to the MediaDrm object.
+ &lt;p&gt;
+ Once the app has a sessionId, it can construct a MediaCrypto object from the UUID and
+ sessionId.  The MediaCrypto object is registered with the MediaCodec in the
+ {@link android.media.MediaCodec#configure} method to enable the codec to decrypt content.
+ &lt;p&gt;
+ When the app has constructed {@link android.media.MediaExtractor},
+ {@link android.media.MediaCodec} and {@link android.media.MediaCrypto} objects,
+ it proceeds to pull samples from the extractor and queue them into the decoder.  For
+ encrypted content, the samples returned from the extractor remain encrypted, they
+ are only decrypted when the samples are delivered to the decoder.
+ &lt;p&gt;
+ MediaDrm methods throw {@link android.media.MediaDrm.MediaDrmStateException}
+ when a method is called on a MediaDrm object that has had an unrecoverable failure
+ in the DRM plugin or security hardware.
+ {@link android.media.MediaDrm.MediaDrmStateException} extends
+ {@link java.lang.IllegalStateException} with the addition of a developer-readable
+ diagnostic information string associated with the exception.
+ &lt;p&gt;
+ In the event of a mediaserver process crash or restart while a MediaDrm object
+ is active, MediaDrm methods may throw {@link android.media.MediaDrmResetException}.
+ To recover, the app must release the MediaDrm object, then create and initialize
+ a new one.
+ &lt;p&gt;
+ As {@link android.media.MediaDrmResetException} and
+ {@link android.media.MediaDrm.MediaDrmStateException} both extend
+ {@link java.lang.IllegalStateException}, they should be in an earlier catch()
+ block than {@link java.lang.IllegalStateException} if handled separately.
+ &lt;p&gt;
+ &lt;a name=&quot;Callbacks&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Callbacks&lt;/h3&gt;
+ &lt;p&gt;Applications should register for informational events in order
+ to be informed of key state updates during playback or streaming.
+ Registration for these events is done via a call to
+ {@link #setOnEventListener}. In order to receive the respective
+ callback associated with this listener, applications are required to create
+ MediaDrm objects on a thread with its own Looper running (main UI
+ thread by default has a Looper running).
+*/
+var MediaDrm = {
+
+<span id='android-media-MediaDrm-property-CERTIFICATE_TYPE_NONE'>/** Specify no certificate type
+</span>
+ @hide - not part of the public API at this time
+*/
+CERTIFICATE_TYPE_NONE : &quot;0&quot;,
+<span id='android-media-MediaDrm-property-CERTIFICATE_TYPE_X509'>/** Specify X.509 certificate type
+</span>
+ @hide - not part of the public API at this time
+*/
+CERTIFICATE_TYPE_X509 : &quot;1&quot;,
+<span id='android-media-MediaDrm-property-EVENT_PROVISION_REQUIRED'>/** This event type indicates that the app needs to request a certificate from
+</span> the provisioning server.  The request message data is obtained using
+ {@link #getProvisionRequest}
+
+ @deprecated Handle provisioning via {@link android.media.NotProvisionedException}
+ instead.
+*/
+EVENT_PROVISION_REQUIRED : &quot;1&quot;,
+<span id='android-media-MediaDrm-property-EVENT_KEY_REQUIRED'>/** This event type indicates that the app needs to request keys from a license
+</span> server.  The request message data is obtained using {@link #getKeyRequest}.
+*/
+EVENT_KEY_REQUIRED : &quot;2&quot;,
+<span id='android-media-MediaDrm-property-EVENT_KEY_EXPIRED'>/** This event type indicates that the licensed usage duration for keys in a session
+</span> has expired.  The keys are no longer valid.
+ @deprecated Use {@link android.media.MediaDrm.OnKeyStatusChangeListener#onKeyStatusChange}
+ and check for {@link android.media.MediaDrm.KeyStatus#STATUS_EXPIRED} in the {@link android.media.MediaDrm.KeyStatus}
+ instead.
+*/
+EVENT_KEY_EXPIRED : &quot;3&quot;,
+<span id='android-media-MediaDrm-property-EVENT_VENDOR_DEFINED'>/** This event may indicate some specific vendor-defined condition, see your
+</span> DRM provider documentation for details
+*/
+EVENT_VENDOR_DEFINED : &quot;4&quot;,
+<span id='android-media-MediaDrm-property-EVENT_SESSION_RECLAIMED'>/** This event indicates that a session opened by the app has been reclaimed by the resource
+</span> manager.
+*/
+EVENT_SESSION_RECLAIMED : &quot;5&quot;,
+<span id='android-media-MediaDrm-property-KEY_TYPE_STREAMING'>/** This key request type species that the keys will be for online use, they will
+</span> not be saved to the device for subsequent use when the device is not connected
+ to a network.
+*/
+KEY_TYPE_STREAMING : &quot;1&quot;,
+<span id='android-media-MediaDrm-property-KEY_TYPE_OFFLINE'>/** This key request type specifies that the keys will be for offline use, they
+</span> will be saved to the device for use when the device is not connected to a network.
+*/
+KEY_TYPE_OFFLINE : &quot;2&quot;,
+<span id='android-media-MediaDrm-property-KEY_TYPE_RELEASE'>/** This key request type specifies that previously saved offline keys should be released.
+</span>*/
+KEY_TYPE_RELEASE : &quot;3&quot;,
+<span id='android-media-MediaDrm-property-OFFLINE_LICENSE_STATE_UNKNOWN'>/** Offline license state is unknown, an error occurred while trying
+</span> to access it.
+*/
+OFFLINE_LICENSE_STATE_UNKNOWN : &quot;0&quot;,
+<span id='android-media-MediaDrm-property-OFFLINE_LICENSE_STATE_USABLE'>/** Offline license is usable, the keys may be used for decryption.
+</span>*/
+OFFLINE_LICENSE_STATE_USABLE : &quot;1&quot;,
+<span id='android-media-MediaDrm-property-OFFLINE_LICENSE_STATE_RELEASED'>/** Offline license is released, the keys have been marked for
+</span> release using {@link #getKeyRequest} with KEY_TYPE_RELEASE but
+ the key response has not been received.
+*/
+OFFLINE_LICENSE_STATE_RELEASED : &quot;2&quot;,
+<span id='android-media-MediaDrm-property-HDCP_LEVEL_UNKNOWN'>/** The DRM plugin did not report an HDCP level, or an error
+</span> occurred accessing it
+*/
+HDCP_LEVEL_UNKNOWN : &quot;0&quot;,
+<span id='android-media-MediaDrm-property-HDCP_NONE'>/** HDCP is not supported on this device, content is unprotected
+</span>*/
+HDCP_NONE : &quot;1&quot;,
+<span id='android-media-MediaDrm-property-HDCP_V1'>/** HDCP version 1.0
+</span>*/
+HDCP_V1 : &quot;2&quot;,
+<span id='android-media-MediaDrm-property-HDCP_V2'>/** HDCP version 2.0 Type 1.
+</span>*/
+HDCP_V2 : &quot;3&quot;,
+<span id='android-media-MediaDrm-property-HDCP_V2_1'>/** HDCP version 2.1 Type 1.
+</span>*/
+HDCP_V2_1 : &quot;4&quot;,
+<span id='android-media-MediaDrm-property-HDCP_V2_2'>/**  HDCP version 2.2 Type 1.
+</span>*/
+HDCP_V2_2 : &quot;5&quot;,
+<span id='android-media-MediaDrm-property-HDCP_V2_3'>/**  HDCP version 2.3 Type 1.
+</span>*/
+HDCP_V2_3 : &quot;6&quot;,
+<span id='android-media-MediaDrm-property-HDCP_NO_DIGITAL_OUTPUT'>/** No digital output, implicitly secure
+</span>*/
+HDCP_NO_DIGITAL_OUTPUT : &quot;2147483647&quot;,
+<span id='android-media-MediaDrm-property-SECURITY_LEVEL_UNKNOWN'>/** The DRM plugin did not report a security level, or an error occurred
+</span> accessing it
+*/
+SECURITY_LEVEL_UNKNOWN : &quot;0&quot;,
+<span id='android-media-MediaDrm-property-SECURITY_LEVEL_SW_SECURE_CRYPTO'>/** DRM key management uses software-based whitebox crypto.
+</span>*/
+SECURITY_LEVEL_SW_SECURE_CRYPTO : &quot;1&quot;,
+<span id='android-media-MediaDrm-property-SECURITY_LEVEL_SW_SECURE_DECODE'>/** DRM key management and decoding use software-based whitebox crypto.
+</span>*/
+SECURITY_LEVEL_SW_SECURE_DECODE : &quot;2&quot;,
+<span id='android-media-MediaDrm-property-SECURITY_LEVEL_HW_SECURE_CRYPTO'>/** DRM key management and crypto operations are performed within a hardware
+</span> backed trusted execution environment.
+*/
+SECURITY_LEVEL_HW_SECURE_CRYPTO : &quot;3&quot;,
+<span id='android-media-MediaDrm-property-SECURITY_LEVEL_HW_SECURE_DECODE'>/** DRM key management, crypto operations and decoding of content are
+</span> performed within a hardware backed trusted execution environment.
+*/
+SECURITY_LEVEL_HW_SECURE_DECODE : &quot;4&quot;,
+<span id='android-media-MediaDrm-property-SECURITY_LEVEL_HW_SECURE_ALL'>/** DRM key management, crypto operations, decoding of content and all
+</span> handling of the media (compressed and uncompressed) is handled within a
+ hardware backed trusted execution environment.
+*/
+SECURITY_LEVEL_HW_SECURE_ALL : &quot;5&quot;,
+<span id='android-media-MediaDrm-property-SECURITY_LEVEL_MAX'>/** Indicates that the maximum security level supported by the device should
+</span> be used when opening a session. This is the default security level
+ selected when a session is opened.
+ @hide
+*/
+SECURITY_LEVEL_MAX : &quot;6&quot;,
+<span id='android-media-MediaDrm-property-PROPERTY_VENDOR'>/** String property name: identifies the maker of the DRM plugin
+</span>*/
+PROPERTY_VENDOR : &quot;vendor&quot;,
+<span id='android-media-MediaDrm-property-PROPERTY_VERSION'>/** String property name: identifies the version of the DRM plugin
+</span>*/
+PROPERTY_VERSION : &quot;version&quot;,
+<span id='android-media-MediaDrm-property-PROPERTY_DESCRIPTION'>/** String property name: describes the DRM plugin
+</span>*/
+PROPERTY_DESCRIPTION : &quot;description&quot;,
+<span id='android-media-MediaDrm-property-PROPERTY_ALGORITHMS'>/** String property name: a comma-separated list of cipher and mac algorithms
+</span> supported by CryptoSession.  The list may be empty if the DRM
+ plugin does not support CryptoSession operations.
+*/
+PROPERTY_ALGORITHMS : &quot;algorithms&quot;,
+<span id='android-media-MediaDrm-property-PROPERTY_DEVICE_UNIQUE_ID'>/** Byte array property name: the device unique identifier is established during
+</span> device provisioning and provides a means of uniquely identifying each device.
+*/
+PROPERTY_DEVICE_UNIQUE_ID : &quot;deviceUniqueId&quot;,
+<span id='android-media-MediaDrm-method-isCryptoSchemeSupported'>/**Query if the given scheme identified by its UUID is supported on
+</span> this device.
+@param {Object {UUID}} uuid The UUID of the crypto scheme.
+*/
+isCryptoSchemeSupported : function(  ) {},
+
+<span id='android-media-MediaDrm-method-isCryptoSchemeSupported'>/**Query if the given scheme identified by its UUID is supported on
+</span> this device, and whether the DRM plugin is able to handle the
+ media container format specified by mimeType.
+@param {Object {UUID}} uuid The UUID of the crypto scheme.
+@param {String} mimeType The MIME type of the media container, e.g. &quot;video/mp4&quot;
+   or &quot;video/webm&quot;
+*/
+isCryptoSchemeSupported : function(  ) {},
+
+<span id='android-media-MediaDrm-method-isCryptoSchemeSupported'>/**Query if the given scheme identified by its UUID is supported on
+</span> this device, and whether the DRM plugin is able to handle the
+ media container format specified by mimeType at the requested
+ security level.
+@param {Object {UUID}} uuid The UUID of the crypto scheme.
+@param {String} mimeType The MIME type of the media container, e.g. &quot;video/mp4&quot;
+   or &quot;video/webm&quot;
+@param {Number} securityLevel the security level requested
+*/
+isCryptoSchemeSupported : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnExpirationUpdateListener'>/**Register a callback to be invoked when a session expiration update
+</span> occurs.  The app's OnExpirationUpdateListener will be notified
+ when the expiration time of the keys in the session have changed.
+@param {Object {MediaDrm.OnExpirationUpdateListener}} listener the callback that will be run, or {@code null} to unregister the
+     previously registered callback.
+@param {Object {Handler}} handler the handler on which the listener should be invoked, or
+     {@code null} if the listener should be invoked on the calling thread's looper.
+*/
+setOnExpirationUpdateListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnExpirationUpdateListener'>/**Register a callback to be invoked when a session expiration update
+</span> occurs.
+@param {Object {Executor}} executor the executor through which the listener should be invoked
+@param {Object {MediaDrm.OnExpirationUpdateListener}} listener the callback that will be run.
+@param listener the callback that will be run.
+*/
+setOnExpirationUpdateListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-clearOnExpirationUpdateListener'>/**Clear the {@link android.media.MediaDrm.OnExpirationUpdateListener}.
+</span>*/
+clearOnExpirationUpdateListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnKeyStatusChangeListener'>/**Register a callback to be invoked when the state of keys in a session
+</span> change, e.g. when a license update occurs or when a license expires.
+@param {Object {MediaDrm.OnKeyStatusChangeListener}} listener the callback that will be run when key status changes, or
+     {@code null} to unregister the previously registered callback.
+@param {Object {Handler}} handler the handler on which the listener should be invoked, or
+     null if the listener should be invoked on the calling thread's looper.
+*/
+setOnKeyStatusChangeListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnKeyStatusChangeListener'>/**Register a callback to be invoked when the state of keys in a session
+</span> change.
+@param {Object {Executor}} listener the callback that will be run when key status changes.
+@param {Object {MediaDrm.OnKeyStatusChangeListener}} executor the executor on which the listener should be invoked.
+@param executor the executor on which the listener should be invoked.
+*/
+setOnKeyStatusChangeListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-clearOnKeyStatusChangeListener'>/**Clear the {@link android.media.MediaDrm.OnKeyStatusChangeListener}.
+</span>*/
+clearOnKeyStatusChangeListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnSessionLostStateListener'>/**Register a callback to be invoked when session state has been
+</span> lost. This event can occur on devices that are not capable of
+ retaining crypto session state across device suspend/resume
+ cycles.  When this event occurs, the session must be closed and
+ a new session opened to resume operation.
+@param {Object {MediaDrm.OnSessionLostStateListener}} listener the callback that will be run, or {@code null} to unregister the
+     previously registered callback.
+@param {Object {Handler}} handler the handler on which the listener should be invoked, or
+     {@code null} if the listener should be invoked on the calling thread's looper.
+*/
+setOnSessionLostStateListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnSessionLostStateListener'>/**Register a callback to be invoked when session state has been
+</span> lost.
+@param {Object {Executor}} listener the callback that will be run.
+@param {Object {MediaDrm.OnSessionLostStateListener}} executor the executor on which the listener should be invoked.
+@param executor the executor on which the listener should be invoked.
+*/
+setOnSessionLostStateListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-clearOnSessionLostStateListener'>/**Clear the {@link android.media.MediaDrm.OnSessionLostStateListener}.
+</span>*/
+clearOnSessionLostStateListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnEventListener'>/**Register a callback to be invoked when an event occurs
+</span>@param {Object {MediaDrm.OnEventListener}} listener the callback that will be run.  Use {@code null} to
+        stop receiving event callbacks.
+@param listener the callback that will be run.  Use {@code null} to
+        stop receiving event callbacks.
+*/
+setOnEventListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnEventListener'>/**Register a callback to be invoked when an event occurs
+</span>@param {Object {MediaDrm.OnEventListener}} listener the callback that will be run.  Use {@code null} to
+        stop receiving event callbacks.
+@param {Object {Handler}} handler the handler on which the listener should be invoked, or
+        null if the listener should be invoked on the calling thread's looper.
+*/
+setOnEventListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setOnEventListener'>/**Register a callback to be invoked when an event occurs
+</span>@param {Object {Executor}} executor the executor through which the listener should be invoked
+@param {Object {MediaDrm.OnEventListener}} listener the callback that will be run.
+@param listener the callback that will be run.
+*/
+setOnEventListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-clearOnEventListener'>/**Clear the {@link android.media.MediaDrm.OnEventListener}.
+</span>*/
+clearOnEventListener : function(  ) {},
+
+<span id='android-media-MediaDrm-method-openSession'>/**Open a new session with the MediaDrm object. A session ID is returned.
+</span> By default, sessions are opened at the native security level of the device.
+@throws NotProvisionedException if provisioning is needed
+@throws ResourceBusyException if required resources are in use
+*/
+openSession : function(  ) {},
+
+<span id='android-media-MediaDrm-method-openSession'>/**Open a new session at a requested security level. The security level
+</span> represents the robustness of the device's DRM implementation. By default,
+ sessions are opened at the native security level of the device.
+ Overriding the security level is necessary when the decrypted frames need
+ to be manipulated, such as for image compositing. The security level
+ parameter must be lower than the native level. Reducing the security
+ level will typically limit the content to lower resolutions, as
+ determined by the license policy. If the requested level is not
+ supported, the next lower supported security level will be set. The level
+ can be queried using {@link #getSecurityLevel}. A session
+ ID is returned.
+@param {Number} level the new security level
+@throws NotProvisionedException if provisioning is needed
+@throws ResourceBusyException if required resources are in use
+@throws IllegalArgumentException if the requested security level is
+ higher than the native level or lower than the lowest supported level or
+ if the device does not support specifying the security level when opening
+ a session
+*/
+openSession : function(  ) {},
+
+<span id='android-media-MediaDrm-method-closeSession'>/**Close a session on the MediaDrm object that was previously opened
+</span> with {@link #openSession}.
+*/
+closeSession : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getKeyRequest'>/**A key request/response exchange occurs between the app and a license server
+</span> to obtain or release keys used to decrypt encrypted content.
+ &lt;p&gt;
+ getKeyRequest() is used to obtain an opaque key request byte array that is
+ delivered to the license server.  The opaque key request byte array is returned
+ in KeyRequest.data.  The recommended URL to deliver the key request to is
+ returned in KeyRequest.defaultUrl.
+ &lt;p&gt;
+ After the app has received the key request response from the server,
+ it should deliver to the response to the MediaDrm instance using the method
+ {@link #provideKeyResponse}.
+@param {Object {byte[]}} scope may be a sessionId or a keySetId, depending on the specified keyType.
+ When the keyType is KEY_TYPE_STREAMING or KEY_TYPE_OFFLINE,
+ scope should be set to the sessionId the keys will be provided to.  When the keyType
+ is KEY_TYPE_RELEASE, scope should be set to the keySetId of the keys
+ being released. Releasing keys from a device invalidates them for all sessions.
+@param {Object {byte[]}} init container-specific data, its meaning is interpreted based on the
+ mime type provided in the mimeType parameter.  It could contain, for example,
+ the content ID, key ID or other data obtained from the content metadata that is
+ required in generating the key request. May be null when keyType is
+ KEY_TYPE_RELEASE or if the request is a renewal, i.e. not the first key
+ request for the session.
+@param {String} mimeType identifies the mime type of the content. May be null if the
+ keyType is KEY_TYPE_RELEASE or if the request is a renewal, i.e. not the
+ first key request for the session.
+@param {Number} keyType specifes the type of the request. The request may be to acquire
+ keys for streaming or offline content, or to release previously acquired
+ keys, which are identified by a keySetId.
+@param {Object {java.util.HashMap}} optionalParameters are included in the key request message to
+ allow a client application to provide additional message parameters to the server.
+ This may be {@code null} if no additional parameters are to be sent.
+@throws NotProvisionedException if reprovisioning is needed, due to a
+ problem with the certifcate
+*/
+getKeyRequest : function(  ) {},
+
+<span id='android-media-MediaDrm-method-provideKeyResponse'>/**A key response is received from the license server by the app, then it is
+</span> provided to the MediaDrm instance using provideKeyResponse.  When the
+ response is for an offline key request, a keySetId is returned that can be
+ used to later restore the keys to a new session with the method
+ {@link #restoreKeys}.
+ When the response is for a streaming or release request, an empty byte array
+ is returned.
+@param {Object {byte[]}} scope may be a sessionId or keySetId depending on the type of the
+ response.  Scope should be set to the sessionId when the response is for either
+ streaming or offline key requests.  Scope should be set to the keySetId when
+ the response is for a release request.
+@param {Object {byte[]}} response the byte array response from the server
+@return {Number} If the response is for an offline request, the keySetId for the offline
+ keys will be returned. If the response is for a streaming or release request
+ an empty byte array will be returned.
+@throws NotProvisionedException if the response indicates that
+ reprovisioning is required
+@throws DeniedByServerException if the response indicates that the
+ server rejected the request
+*/
+provideKeyResponse : function(  ) {},
+
+<span id='android-media-MediaDrm-method-restoreKeys'>/**Restore persisted offline keys into a new session.  keySetId identifies the
+</span> keys to load, obtained from a prior call to {@link #provideKeyResponse}.
+@param {Object {byte[]}} sessionId the session ID for the DRM session
+@param {Object {byte[]}} keySetId identifies the saved key set to restore
+*/
+restoreKeys : function(  ) {},
+
+<span id='android-media-MediaDrm-method-removeKeys'>/**Remove the current keys from a session.
+</span>@param {Object {byte[]}} sessionId the session ID for the DRM session
+*/
+removeKeys : function(  ) {},
+
+<span id='android-media-MediaDrm-method-queryKeyStatus'>/**Request an informative description of the key status for the session.  The status is
+</span> in the form of {name, value} pairs.  Since DRM license policies vary by vendor,
+ the specific status field names are determined by each DRM vendor.  Refer to your
+ DRM provider documentation for definitions of the field names for a particular
+ DRM plugin.
+@param {Object {byte[]}} sessionId the session ID for the DRM session
+*/
+queryKeyStatus : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getProvisionRequest'>/**A provision request/response exchange occurs between the app and a provisioning
+</span> server to retrieve a device certificate.  If provisionining is required, the
+ EVENT_PROVISION_REQUIRED event will be sent to the event handler.
+ getProvisionRequest is used to obtain the opaque provision request byte array that
+ should be delivered to the provisioning server. The provision request byte array
+ is returned in ProvisionRequest.data. The recommended URL to deliver the provision
+ request to is returned in ProvisionRequest.defaultUrl.
+*/
+getProvisionRequest : function(  ) {},
+
+<span id='android-media-MediaDrm-method-provideProvisionResponse'>/**After a provision response is received by the app, it is provided to the
+</span> MediaDrm instance using this method.
+@param {Object {byte[]}} response the opaque provisioning response byte array to provide to the
+ MediaDrm instance.
+@throws DeniedByServerException if the response indicates that the
+ server rejected the request
+*/
+provideProvisionResponse : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getOfflineLicenseKeySetIds'>/**The keys in an offline license allow protected content to be played even
+</span> if the device is not connected to a network. Offline licenses are stored
+ on the device after a key request/response exchange when the key request
+ KeyType is OFFLINE. Normally each app is responsible for keeping track of
+ the keySetIds it has created. If an app loses the keySetId for any stored
+ licenses that it created, however, it must be able to recover the stored
+ keySetIds so those licenses can be removed when they expire or when the
+ app is uninstalled.
+ &lt;p&gt;
+ This method returns a list of the keySetIds for all offline licenses.
+ The offline license keySetId may be used to query the status of an
+ offline license with {@link #getOfflineLicenseState} or remove it with
+ {@link #removeOfflineLicense}.
+@return {Object {java.util.List}} a list of offline license keySetIds
+*/
+getOfflineLicenseKeySetIds : function(  ) {},
+
+<span id='android-media-MediaDrm-method-removeOfflineLicense'>/**Normally offline licenses are released using a key request/response
+</span> exchange using {@link #getKeyRequest} where the key type is
+ KEY_TYPE_RELEASE, followed by {@link #provideKeyResponse}. This allows
+ the server to cryptographically confirm that the license has been removed
+ and then adjust the count of offline licenses allocated to the device.
+ &lt;p&gt;
+ In some exceptional situations it may be necessary to directly remove
+ offline licenses without notifying the server, which may be performed
+ using this method.
+@param {Object {byte[]}} keySetId the id of the offline license to remove
+@throws IllegalArgumentException if the keySetId does not refer to an
+ offline license.
+*/
+removeOfflineLicense : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getOfflineLicenseState'>/**Request the state of an offline license. An offline license may be usable
+</span> or inactive. The keys in a usable offline license are available for
+ decryption. When the offline license state is inactive, the keys have
+ been marked for release using {@link #getKeyRequest} with
+ KEY_TYPE_RELEASE but the key response has not been received. The keys in
+ an inactive offline license are not usable for decryption.
+@param {Object {byte[]}} keySetId selects the offline license
+@return {Number} the offline license state
+@throws IllegalArgumentException if the keySetId does not refer to an
+ offline license.
+*/
+getOfflineLicenseState : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getSecureStops'>/**Secure stops are a way to enforce limits on the number of concurrent
+</span> streams per subscriber across devices. They provide secure monitoring of
+ the lifetime of content decryption keys in MediaDrm sessions.
+ &lt;p&gt;
+ A secure stop is written to secure persistent memory when keys are loaded
+ into a MediaDrm session. The secure stop state indicates that the keys
+ are available for use. When playback completes and the keys are removed
+ or the session is destroyed, the secure stop state is updated to indicate
+ that keys are no longer usable.
+ &lt;p&gt;
+ After playback, the app can query the secure stop and send it in a
+ message to the license server confirming that the keys are no longer
+ active. The license server returns a secure stop release response
+ message to the app which then deletes the secure stop from persistent
+ memory using {@link #releaseSecureStops}.
+ &lt;p&gt;
+ Each secure stop has a unique ID that can be used to identify it during
+ enumeration, access and removal.
+@return {Object {java.util.List}} a list of all secure stops from secure persistent memory
+*/
+getSecureStops : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getSecureStopIds'>/**Return a list of all secure stop IDs currently in persistent memory.
+</span> The secure stop ID can be used to access or remove the corresponding
+ secure stop.
+@return {Object {java.util.List}} a list of secure stop IDs
+*/
+getSecureStopIds : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getSecureStop'>/**Access a specific secure stop given its secure stop ID.
+</span> Each secure stop has a unique ID.
+@param {Object {byte[]}} ssid the ID of the secure stop to return
+@return {Number} the secure stop identified by ssid
+*/
+getSecureStop : function(  ) {},
+
+<span id='android-media-MediaDrm-method-releaseSecureStops'>/**Process the secure stop server response message ssRelease.  After
+</span> authenticating the message, remove the secure stops identified in the
+ response.
+@param {Object {byte[]}} ssRelease the server response indicating which secure stops to release
+*/
+releaseSecureStops : function(  ) {},
+
+<span id='android-media-MediaDrm-method-removeSecureStop'>/**Remove a specific secure stop without requiring a secure stop release message
+</span> from the license server.
+@param {Object {byte[]}} ssid the ID of the secure stop to remove
+*/
+removeSecureStop : function(  ) {},
+
+<span id='android-media-MediaDrm-method-removeAllSecureStops'>/**Remove all secure stops without requiring a secure stop release message from
+</span> the license server.
+
+ This method was added in API 28. In API versions 18 through 27,
+ {@link #releaseAllSecureStops} should be called instead. There is no need to
+ do anything for API versions prior to 18.
+*/
+removeAllSecureStops : function(  ) {},
+
+<span id='android-media-MediaDrm-method-releaseAllSecureStops'>/**Remove all secure stops without requiring a secure stop release message from
+</span> the license server.
+@deprecated Remove all secure stops using {@link #removeAllSecureStops} instead.
+*/
+releaseAllSecureStops : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getConnectedHdcpLevel'>/**Return the HDCP level negotiated with downstream receivers the
+</span> device is connected to. If multiple HDCP-capable displays are
+ simultaneously connected to separate interfaces, this method
+ returns the lowest negotiated level of all interfaces.
+ &lt;p&gt;
+ This method should only be used for informational purposes, not for
+ enforcing compliance with HDCP requirements. Trusted enforcement of
+ HDCP policies must be handled by the DRM system.
+ &lt;p&gt;
+@return {Number} the connected HDCP level
+*/
+getConnectedHdcpLevel : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getMaxHdcpLevel'>/**Return the maximum supported HDCP level. The maximum HDCP level is a
+</span> constant for a given device, it does not depend on downstream receivers
+ that may be connected. If multiple HDCP-capable interfaces are present,
+ it indicates the highest of the maximum HDCP levels of all interfaces.
+ &lt;p&gt;
+@return {Number} the maximum supported HDCP level
+*/
+getMaxHdcpLevel : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getOpenSessionCount'>/**Return the number of MediaDrm sessions that are currently opened
+</span> simultaneously among all MediaDrm instances for the active DRM scheme.
+@return {Number} the number of open sessions.
+*/
+getOpenSessionCount : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getMaxSessionCount'>/**Return the maximum number of MediaDrm sessions that may be opened
+</span> simultaneosly among all MediaDrm instances for the active DRM
+ scheme. The maximum number of sessions is not affected by any
+ sessions that may have already been opened.
+@return {Number} maximum sessions.
+*/
+getMaxSessionCount : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getMaxSecurityLevel'>/**Returns a value that may be passed as a parameter to {@link #openSession}(int)
+</span> requesting that the session be opened at the maximum security level of
+ the device.
+*/
+getMaxSecurityLevel : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getSecurityLevel'>/**Return the current security level of a session. A session has an initial
+</span> security level determined by the robustness of the DRM system's
+ implementation on the device. The security level may be changed at the
+ time a session is opened using {@link #openSession}.
+@param {Object {byte[]}} sessionId the session to query.
+ &lt;p&gt;
+@return {Number} the security level of the session
+*/
+getSecurityLevel : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getPropertyString'>/**Read a MediaDrm String property value, given the property name string.
+</span> &lt;p&gt;
+ Standard fields names are:
+ {@link #PROPERTY_VENDOR}, {@link #PROPERTY_VERSION},
+ {@link #PROPERTY_DESCRIPTION}, {@link #PROPERTY_ALGORITHMS}
+*/
+getPropertyString : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setPropertyString'>/**Set a MediaDrm String property value, given the property name string
+</span> and new value for the property.
+*/
+setPropertyString : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getPropertyByteArray'>/**Read a MediaDrm byte array property value, given the property name string.
+</span> &lt;p&gt;
+ Standard fields names are {@link #PROPERTY_DEVICE_UNIQUE_ID}
+*/
+getPropertyByteArray : function(  ) {},
+
+<span id='android-media-MediaDrm-method-setPropertyByteArray'>/**Set a MediaDrm byte array property value, given the property name string
+</span> and new value for the property.
+*/
+setPropertyByteArray : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getMetrics'>/**Return Metrics data about the current MediaDrm instance.
+</span>@return {Object {android.os.PersistableBundle}} a {@link PersistableBundle} containing the set of attributes and values
+ available for this instance of MediaDrm.
+ The attributes are described in {@link MetricsConstants}.
+
+ Additional vendor-specific fields may also be present in
+ the return value.
+*/
+getMetrics : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getCryptoSession'>/**Obtain a CryptoSession object which can be used to encrypt, decrypt,
+</span> sign and verify messages or data using the session keys established
+ for the session using methods {@link #getKeyRequest} and
+ {@link #provideKeyResponse} using a session key server.
+@param {Object {byte[]}} sessionId the session ID for the session containing keys
+ to be used for encrypt, decrypt, sign and/or verify
+@param {String} cipherAlgorithm the algorithm to use for encryption and
+ decryption ciphers. The algorithm string conforms to JCA Standard
+ Names for Cipher Transforms and is case insensitive.  For example
+ &quot;AES/CBC/NoPadding&quot;.
+@param {String} macAlgorithm the algorithm to use for sign and verify
+ The algorithm string conforms to JCA Standard Names for Mac
+ Algorithms and is case insensitive.  For example &quot;HmacSHA256&quot;.
+ &lt;p&gt;
+ The list of supported algorithms for a DRM plugin can be obtained
+ using the method {@link #getPropertyString} with the property name
+ &quot;algorithms&quot;.
+*/
+getCryptoSession : function(  ) {},
+
+<span id='android-media-MediaDrm-method-getCertificateRequest'>/**Generate a certificate request, specifying the certificate type
+</span> and authority. The response received should be passed to
+ provideCertificateResponse.
+@param {Number} certType Specifies the certificate type.
+@param {String} certAuthority is passed to the certificate server to specify
+ the chain of authority.
+@hide - not part of the public API at this time
+*/
+getCertificateRequest : function(  ) {},
+
+<span id='android-media-MediaDrm-method-provideCertificateResponse'>/**Process a response from the certificate server.  The response
+</span> is obtained from an HTTP Post to the url provided by getCertificateRequest.
+ &lt;p&gt;
+ The public X509 certificate chain and wrapped private key are returned
+ in the returned Certificate objec.  The certificate chain is in PEM format.
+ The wrapped private key should be stored in application private
+ storage, and used when invoking the signRSA method.
+@param {Object {byte[]}} response the opaque certificate response byte array to provide to the
+ MediaDrm instance.
+@throws DeniedByServerException if the response indicates that the
+ server rejected the request
+@hide - not part of the public API at this time
+*/
+provideCertificateResponse : function(  ) {},
+
+<span id='android-media-MediaDrm-method-signRSA'>/**Sign data using an RSA key
+</span>@param {Object {byte[]}} sessionId a sessionId obtained from openSession on the MediaDrm object
+@param {String} algorithm the signing algorithm to use, e.g. &quot;PKCS1-BlockType1&quot;
+@param {Object {byte[]}} wrappedKey - the wrapped (encrypted) RSA private key obtained
+ from provideCertificateResponse
+@param {Object {byte[]}} message the data for which a signature is to be computed
+@hide - not part of the public API at this time
+*/
+signRSA : function(  ) {},
+
+<span id='android-media-MediaDrm-method-close'>/**Releases resources associated with the current session of
+</span> MediaDrm. It is considered good practice to call this method when
+ the {@link android.media.MediaDrm} object is no longer needed in your
+ application. After this method is called, {@link android.media.MediaDrm} is no
+ longer usable since it has lost all of its required resource.
+
+ This method was added in API 28. In API versions 18 through 27, release()
+ should be called instead. There is no need to do anything for API
+ versions prior to 18.
+*/
+close : function(  ) {},
+
+<span id='android-media-MediaDrm-method-release'>/**
+</span>@deprecated replaced by {@link #close()}.
+*/
+release : function(  ) {},
+
+<span id='android-media-MediaDrm-method-native_release'>/**
+</span>@hide 
+*/
+native_release : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

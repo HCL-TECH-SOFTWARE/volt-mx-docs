@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-Outline'>/**@class android.graphics.Outline
+</span>@extends java.lang.Object
+
+ Defines a simple shape, used for bounding graphical regions.
+ &lt;p&gt;
+ Can be computed for a View, or computed by a Drawable, to drive the shape of
+ shadows cast by a View, or to clip the contents of the View.
+
+ @see android.view.ViewOutlineProvider
+ @see android.view.View#setOutlineProvider(android.view.ViewOutlineProvider)
+ @see Drawable#getOutline(Outline)
+*/
+var Outline = {
+
+<span id='android-graphics-Outline-property-MODE_EMPTY'>/**@hide */
+</span>MODE_EMPTY : &quot;0&quot;,
+<span id='android-graphics-Outline-property-MODE_ROUND_RECT'>/**@hide */
+</span>MODE_ROUND_RECT : &quot;1&quot;,
+<span id='android-graphics-Outline-property-MODE_CONVEX_PATH'>/**@hide */
+</span>MODE_CONVEX_PATH : &quot;2&quot;,
+<span id='android-graphics-Outline-property-mMode'>/**@hide */
+</span>mMode : &quot;null&quot;,
+<span id='android-graphics-Outline-property-mPath'>/** Only guaranteed to be non-null when mode == MODE_CONVEX_PATH
+</span>
+ @hide
+*/
+mPath : &quot;null&quot;,
+<span id='android-graphics-Outline-property-mRect'>/**@hide */
+</span>mRect : &quot;null&quot;,
+<span id='android-graphics-Outline-property-mRadius'>/**@hide */
+</span>mRadius : &quot;null&quot;,
+<span id='android-graphics-Outline-property-mAlpha'>/**@hide */
+</span>mAlpha : &quot;null&quot;,
+<span id='android-graphics-Outline-method-setEmpty'>/**Sets the outline to be empty.
+</span>@see #isEmpty()
+*/
+setEmpty : function(  ) {},
+
+<span id='android-graphics-Outline-method-isEmpty'>/**Returns whether the Outline is empty.
+</span> &lt;p&gt;
+ Outlines are empty when constructed, or if {@link #setEmpty}() is called,
+ until a setter method is called
+@see #setEmpty()
+*/
+isEmpty : function(  ) {},
+
+<span id='android-graphics-Outline-method-canClip'>/**Returns whether the outline can be used to clip a View.
+</span> &lt;p&gt;
+ Currently, only Outlines that can be represented as a rectangle, circle,
+ or round rect support clipping.
+@see android.view.View#setClipToOutline(boolean)
+*/
+canClip : function(  ) {},
+
+<span id='android-graphics-Outline-method-setAlpha'>/**Sets the alpha represented by the Outline - the degree to which the
+</span> producer is guaranteed to be opaque over the Outline's shape.
+ &lt;p&gt;
+ An alpha value of &lt;code&gt;0.0f&lt;/code&gt; either represents completely
+ transparent content, or content that isn't guaranteed to fill the shape
+ it publishes.
+ &lt;p&gt;
+ Content producing a fully opaque (alpha = &lt;code&gt;1.0f&lt;/code&gt;) outline is
+ assumed by the drawing system to fully cover content beneath it,
+ meaning content beneath may be optimized away.
+*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-Outline-method-getAlpha'>/**Returns the alpha represented by the Outline.
+</span>*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-Outline-method-set'>/**Replace the contents of this Outline with the contents of src.
+</span>@param {Object {Outline}} src Source outline to copy from.
+*/
+set : function(  ) {},
+
+<span id='android-graphics-Outline-method-setRect'>/**Sets the Outline to the rounded rect defined by the input rect, and
+</span> corner radius.
+*/
+setRect : function(  ) {},
+
+<span id='android-graphics-Outline-method-setRect'>/**Convenience for {@link #setRect(int, int, int, int)}
+</span>*/
+setRect : function(  ) {},
+
+<span id='android-graphics-Outline-method-setRoundRect'>/**Sets the Outline to the rounded rect defined by the input rect, and corner radius.
+</span> &lt;p&gt;
+ Passing a zero radius is equivalent to calling {@link #setRect(int, int, int, int)}
+*/
+setRoundRect : function(  ) {},
+
+<span id='android-graphics-Outline-method-setRoundRect'>/**Convenience for {@link #setRoundRect(int, int, int, int, float)}
+</span>*/
+setRoundRect : function(  ) {},
+
+<span id='android-graphics-Outline-method-getRect'>/**Populates {@code outBounds} with the outline bounds, if set, and returns
+</span> {@code true}. If no outline bounds are set, or if a path has been set
+ via {@link #setConvexPath}(Path), returns {@code false}.
+@param {Object {Rect}} outRect the rect to populate with the outline bounds, if set
+@return {Boolean} {@code true} if {@code outBounds} was populated with outline
+         bounds, or {@code false} if no outline bounds are set
+*/
+getRect : function(  ) {},
+
+<span id='android-graphics-Outline-method-getRadius'>/**Returns the rounded rect radius, if set, or a value less than 0 if a path has
+</span> been set via {@link #setConvexPath}(Path). A return value of {@code 0}
+ indicates a non-rounded rect.
+@return {Number} the rounded rect radius, or value &lt; 0
+*/
+getRadius : function(  ) {},
+
+<span id='android-graphics-Outline-method-setOval'>/**Sets the outline to the oval defined by input rect.
+</span>*/
+setOval : function(  ) {},
+
+<span id='android-graphics-Outline-method-setOval'>/**Convenience for {@link #setOval(int, int, int, int)}
+</span>*/
+setOval : function(  ) {},
+
+<span id='android-graphics-Outline-method-setConvexPath'>/**Sets the Outline to a
+</span> {@link android.graphics.Path#isConvex() convex path}.
+@param {Object {Path}} convexPath used to construct the Outline. As of
+ {@link android.os.Build.VERSION_CODES#Q}, it is no longer required to be
+ convex.
+*/
+setConvexPath : function(  ) {},
+
+<span id='android-graphics-Outline-method-offset'>/**Offsets the Outline by (dx,dy)
+</span>*/
+offset : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

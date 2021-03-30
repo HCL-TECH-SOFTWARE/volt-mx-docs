@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-watchdog-ExplicitHealthCheckService'>/**@class android.service.watchdog.ExplicitHealthCheckService
+</span>@extends android.app.Service
+
+ A service to provide packages supporting explicit health checks and route checks to these
+ packages on behalf of the package watchdog.
+
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with the
+ {@link android.Manifest.permission#BIND_EXPLICIT_HEALTH_CHECK_SERVICE} permission,
+ and include an intent filter with the {@link #SERVICE_INTERFACE} action. In adddition,
+ your implementation must live in {@link PackageManger#SYSTEM_SHARED_LIBRARY_SERVICES}.
+ For example:&lt;/p&gt;
+ &lt;pre&gt;
+     &amp;lt;service android:name=&quot;.FooExplicitHealthCheckService&quot;
+             android:exported=&quot;true&quot;
+             android:priority=&quot;100&quot;
+             android:permission=&quot;android.permission.BIND_EXPLICIT_HEALTH_CHECK_SERVICE&quot;&amp;gt;
+         &amp;lt;intent-filter&amp;gt;
+             &amp;lt;action android:name=&quot;android.service.watchdog.ExplicitHealthCheckService&quot; /&amp;gt;
+         &amp;lt;/intent-filter&amp;gt;
+     &amp;lt;/service&amp;gt;
+ &lt;/pre&gt;
+ @hide
+*/
+var ExplicitHealthCheckService = {
+
+<span id='android-service-watchdog-ExplicitHealthCheckService-property-EXTRA_SUPPORTED_PACKAGES'>/** {@link Bundle} key for a {@link List} of {@link android.service.watchdog.ExplicitHealthCheckService.PackageConfig} value.
+</span>
+ {@hide}
+*/
+EXTRA_SUPPORTED_PACKAGES : &quot;android.service.watchdog.extra.supported_packages&quot;,
+<span id='android-service-watchdog-ExplicitHealthCheckService-property-EXTRA_REQUESTED_PACKAGES'>/** {@link Bundle} key for a {@link List} of {@link String} value.
+</span>
+ {@hide}
+*/
+EXTRA_REQUESTED_PACKAGES : &quot;android.service.watchdog.extra.requested_packages&quot;,
+<span id='android-service-watchdog-ExplicitHealthCheckService-property-EXTRA_HEALTH_CHECK_PASSED_PACKAGE'>/** {@link Bundle} key for a {@link String} value.
+</span>
+ {@hide}
+*/
+EXTRA_HEALTH_CHECK_PASSED_PACKAGE : &quot;android.service.watchdog.extra.health_check_passed_package&quot;,
+<span id='android-service-watchdog-ExplicitHealthCheckService-property-SERVICE_INTERFACE'>/** The Intent action that a service must respond to. Add it to the intent filter of the service
+</span> in its manifest.
+*/
+SERVICE_INTERFACE : &quot;android.service.watchdog.ExplicitHealthCheckService&quot;,
+<span id='android-service-watchdog-ExplicitHealthCheckService-property-BIND_PERMISSION'>/** The permission that a service must require to ensure that only Android system can bind to it.
+</span> If this permission is not enforced in the AndroidManifest of the service, the system will
+ skip that service.
+*/
+BIND_PERMISSION : &quot;android.permission.BIND_EXPLICIT_HEALTH_CHECK_SERVICE&quot;,
+<span id='android-service-watchdog-ExplicitHealthCheckService-method-onRequestHealthCheck'>/**Called when the system requests an explicit health check for {@code packageName}.
+</span>
+ &lt;p&gt; When {@code packageName} passes the check, implementors should call
+ {@link #notifyHealthCheckPassed} to inform the system.
+
+ &lt;p&gt; It could take many hours before a {@code packageName} passes a check and implementors
+ should never drop requests unless {@link onCancel} is called or the service dies.
+
+ &lt;p&gt; Requests should not be queued and additional calls while expecting a result for
+ {@code packageName} should have no effect.
+*/
+onRequestHealthCheck : function(  ) {},
+
+<span id='android-service-watchdog-ExplicitHealthCheckService-method-onCancelHealthCheck'>/**Called when the system cancels the explicit health check request for {@code packageName}.
+</span> Should do nothing if there are is no active request for {@code packageName}.
+*/
+onCancelHealthCheck : function(  ) {},
+
+<span id='android-service-watchdog-ExplicitHealthCheckService-method-onGetSupportedPackages'>/**Called when the system requests for all the packages supporting explicit health checks. The
+</span> system may request an explicit health check for any of these packages with
+ {@link #onRequestHealthCheck}.
+@return {Object {java.util.List}} all packages supporting explicit health checks
+*/
+onGetSupportedPackages : function(  ) {},
+
+<span id='android-service-watchdog-ExplicitHealthCheckService-method-onGetRequestedPackages'>/**Called when the system requests for all the packages that it has currently requested
+</span> an explicit health check for.
+@return {Object {java.util.List}} all packages expecting an explicit health check result
+*/
+onGetRequestedPackages : function(  ) {},
+
+<span id='android-service-watchdog-ExplicitHealthCheckService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-watchdog-ExplicitHealthCheckService-method-notifyHealthCheckPassed'>/**Implementors should call this to notify the system when explicit health check passes
+</span> for {@code packageName};
+*/
+notifyHealthCheckPassed : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

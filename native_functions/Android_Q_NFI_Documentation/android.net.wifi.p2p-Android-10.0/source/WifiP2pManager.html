@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-p2p-WifiP2pManager'>/**@class android.net.wifi.p2p.WifiP2pManager
+</span>@extends java.lang.Object
+
+ This class provides the API for managing Wi-Fi peer-to-peer connectivity. This lets an
+ application discover available peers, setup connection to peers and query for the list of peers.
+ When a p2p connection is formed over wifi, the device continues to maintain the uplink
+ connection over mobile or any other available network for internet connectivity on the device.
+
+ &lt;p&gt; The API is asynchronous and responses to requests from an application are on listener
+ callbacks provided by the application. The application needs to do an initialization with
+ {@link #initialize} before doing any p2p operation.
+
+ &lt;p&gt; Most application calls need a {@link android.net.wifi.p2p.WifiP2pManager.ActionListener} instance for receiving callbacks
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}. Action callbacks
+ indicate whether the initiation of the action was a success or a failure.
+ Upon failure, the reason of failure can be one of {@link #ERROR}, {@link #P2P_UNSUPPORTED}
+ or {@link #BUSY}.
+
+ &lt;p&gt; An application can initiate discovery of peers with {@link #discoverPeers}. An initiated
+ discovery request from an application stays active until the device starts connecting to a peer
+ ,forms a p2p group or there is an explicit {@link #stopPeerDiscovery}.
+ Applications can listen to {@link #WIFI_P2P_DISCOVERY_CHANGED_ACTION} to know if a peer-to-peer
+ discovery is running or stopped. Additionally, {@link #WIFI_P2P_PEERS_CHANGED_ACTION} indicates
+ if the peer list has changed.
+
+ &lt;p&gt; When an application needs to fetch the current list of peers, it can request the list
+ of peers with {@link #requestPeers}. When the peer list is available
+ {@link android.net.wifi.p2p.WifiP2pManager.PeerListListener#onPeersAvailable} is called with the device list.
+
+ &lt;p&gt; An application can initiate a connection request to a peer through {@link #connect}. See
+ {@link android.net.wifi.p2p.WifiP2pConfig} for details on setting up the configuration. For communication with legacy
+ Wi-Fi devices that do not support p2p, an app can create a group using {@link #createGroup}
+ which creates an access point whose details can be fetched with {@link #requestGroupInfo}.
+
+ &lt;p&gt; After a successful group formation through {@link #createGroup} or through {@link #connect},
+ use {@link #requestConnectionInfo} to fetch the connection details. The connection info
+ {@link android.net.wifi.p2p.WifiP2pInfo} contains the address of the group owner
+ {@link android.net.wifi.p2p.WifiP2pInfo#groupOwnerAddress} and a flag {@link android.net.wifi.p2p.WifiP2pInfo#isGroupOwner} to indicate
+ if the current device is a p2p group owner. A p2p client can thus communicate with
+ the p2p group owner through a socket connection. If the current device is the p2p group owner,
+ {@link android.net.wifi.p2p.WifiP2pInfo#groupOwnerAddress} is anonymized unless the caller holds the
+ {@code android.Manifest.permission#LOCAL_MAC_ADDRESS} permission.
+
+ &lt;p&gt; With peer discovery using {@link #discoverPeers}, an application discovers the neighboring
+ peers, but has no good way to figure out which peer to establish a connection with. For example,
+ if a game application is interested in finding all the neighboring peers that are also running
+ the same game, it has no way to find out until after the connection is setup. Pre-association
+ service discovery is meant to address this issue of filtering the peers based on the running
+ services.
+
+ &lt;p&gt;With pre-association service discovery, an application can advertise a service for a
+ application on a peer device prior to a connection setup between the devices.
+ Currently, DNS based service discovery (Bonjour) and Upnp are the higher layer protocols
+ supported. Get Bonjour resources at dns-sd.org and Upnp resources at upnp.org
+ As an example, a video application can discover a Upnp capable media renderer
+ prior to setting up a Wi-fi p2p connection with the device.
+
+ &lt;p&gt; An application can advertise a Upnp or a Bonjour service with a call to
+ {@link #addLocalService}. After a local service is added,
+ the framework automatically responds to a peer application discovering the service prior
+ to establishing a p2p connection. A call to {@link #removeLocalService} removes a local
+ service and {@link #clearLocalServices} can be used to clear all local services.
+
+ &lt;p&gt; An application that is looking for peer devices that support certain services
+ can do so with a call to  {@link #discoverServices}. Prior to initiating the discovery,
+ application can add service discovery request with a call to {@link #addServiceRequest},
+ remove a service discovery request with a call to {@link #removeServiceRequest} or clear
+ all requests with a call to {@link #clearServiceRequests}. When no service requests remain,
+ a previously running service discovery will stop.
+
+ The application is notified of a result of service discovery request through listener callbacks
+ set through {@link #setDnsSdResponseListeners} for Bonjour or
+ {@link #setUpnpServiceResponseListener} for Upnp.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+ Registering an application handler with {@link #initialize} requires the permissions
+ {@link android.Manifest.permission#ACCESS_WIFI_STATE} and
+ {@link android.Manifest.permission#CHANGE_WIFI_STATE} to perform any further peer-to-peer
+ operations.
+
+ {@see WifiP2pConfig}
+ {@see WifiP2pInfo}
+ {@see WifiP2pGroup}
+ {@see WifiP2pDevice}
+ {@see WifiP2pDeviceList}
+ {@see android.net.wifi.WpsInfo}
+*/
+var WifiP2pManager = {
+
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_STATE_CHANGED_ACTION'>/** Broadcast intent action to indicate whether Wi-Fi p2p is enabled or disabled. An
+</span> extra {@link #EXTRA_WIFI_STATE} provides the state information as int.
+
+ @see #EXTRA_WIFI_STATE
+*/
+WIFI_P2P_STATE_CHANGED_ACTION : &quot;android.net.wifi.p2p.STATE_CHANGED&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_WIFI_STATE'>/** The lookup key for an int that indicates whether Wi-Fi p2p is enabled or disabled.
+</span> Retrieve it with {@link android.content.Intent#getIntExtra(String,int)}.
+
+ @see #WIFI_P2P_STATE_DISABLED
+ @see #WIFI_P2P_STATE_ENABLED
+*/
+EXTRA_WIFI_STATE : &quot;wifi_p2p_state&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_STATE_DISABLED'>/** Wi-Fi p2p is disabled.
+</span>
+ @see #WIFI_P2P_STATE_CHANGED_ACTION
+*/
+WIFI_P2P_STATE_DISABLED : &quot;1&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_STATE_ENABLED'>/** Wi-Fi p2p is enabled.
+</span>
+ @see #WIFI_P2P_STATE_CHANGED_ACTION
+*/
+WIFI_P2P_STATE_ENABLED : &quot;2&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_CONNECTION_CHANGED_ACTION'>/** Broadcast intent action indicating that the state of Wi-Fi p2p connectivity
+</span> has changed. One extra {@link #EXTRA_WIFI_P2P_INFO} provides the p2p connection info in
+ the form of a {@link android.net.wifi.p2p.WifiP2pInfo} object. Another extra {@link #EXTRA_NETWORK_INFO} provides
+ the network info in the form of a {@link android.net.NetworkInfo}. A third extra provides
+ the details of the group.
+
+ All of these permissions are required to receive this broadcast:
+ {@link android.Manifest.permission#ACCESS_FINE_LOCATION} and
+ {@link android.Manifest.permission#ACCESS_WIFI_STATE}
+
+ @see #EXTRA_WIFI_P2P_INFO
+ @see #EXTRA_NETWORK_INFO
+ @see #EXTRA_WIFI_P2P_GROUP
+*/
+WIFI_P2P_CONNECTION_CHANGED_ACTION : &quot;android.net.wifi.p2p.CONNECTION_STATE_CHANGE&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_WIFI_P2P_INFO'>/** The lookup key for a {@link android.net.wifi.p2p.WifiP2pInfo} object
+</span> Retrieve with {@link android.content.Intent#getParcelableExtra(String)}.
+*/
+EXTRA_WIFI_P2P_INFO : &quot;wifiP2pInfo&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_NETWORK_INFO'>/** The lookup key for a {@link android.net.NetworkInfo} object associated with the
+</span> p2p network. Retrieve with
+ {@link android.content.Intent#getParcelableExtra(String)}.
+*/
+EXTRA_NETWORK_INFO : &quot;networkInfo&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_WIFI_P2P_GROUP'>/** The lookup key for a {@link android.net.wifi.p2p.WifiP2pGroup} object
+</span> associated with the p2p network. Retrieve with
+ {@link android.content.Intent#getParcelableExtra(String)}.
+*/
+EXTRA_WIFI_P2P_GROUP : &quot;p2pGroupInfo&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_PEERS_CHANGED_ACTION'>/** Broadcast intent action indicating that the available peer list has changed. This
+</span> can be sent as a result of peers being found, lost or updated.
+
+ All of these permissions are required to receive this broadcast:
+ {@link android.Manifest.permission#ACCESS_FINE_LOCATION} and
+ {@link android.Manifest.permission#ACCESS_WIFI_STATE}
+
+ &lt;p&gt; An extra {@link #EXTRA_P2P_DEVICE_LIST} provides the full list of
+ current peers. The full list of peers can also be obtained any time with
+ {@link #requestPeers}.
+
+ @see #EXTRA_P2P_DEVICE_LIST
+*/
+WIFI_P2P_PEERS_CHANGED_ACTION : &quot;android.net.wifi.p2p.PEERS_CHANGED&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_P2P_DEVICE_LIST'>/** The lookup key for a {@link android.net.wifi.p2p.WifiP2pDeviceList} object representing
+</span> the new peer list when {@link #WIFI_P2P_PEERS_CHANGED_ACTION} broadcast is sent.
+
+ &lt;p&gt;Retrieve with {@link android.content.Intent#getParcelableExtra(String)}.
+*/
+EXTRA_P2P_DEVICE_LIST : &quot;wifiP2pDeviceList&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_DISCOVERY_CHANGED_ACTION'>/** Broadcast intent action indicating that peer discovery has either started or stopped.
+</span> One extra {@link #EXTRA_DISCOVERY_STATE} indicates whether discovery has started
+ or stopped.
+
+ &lt;p&gt;Note that discovery will be stopped during a connection setup. If the application tries
+ to re-initiate discovery during this time, it can fail.
+*/
+WIFI_P2P_DISCOVERY_CHANGED_ACTION : &quot;android.net.wifi.p2p.DISCOVERY_STATE_CHANGE&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_DISCOVERY_STATE'>/** The lookup key for an int that indicates whether p2p discovery has started or stopped.
+</span> Retrieve it with {@link android.content.Intent#getIntExtra(String,int)}.
+
+ @see #WIFI_P2P_DISCOVERY_STARTED
+ @see #WIFI_P2P_DISCOVERY_STOPPED
+*/
+EXTRA_DISCOVERY_STATE : &quot;discoveryState&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_DISCOVERY_STOPPED'>/** p2p discovery has stopped
+</span>
+ @see #WIFI_P2P_DISCOVERY_CHANGED_ACTION
+*/
+WIFI_P2P_DISCOVERY_STOPPED : &quot;1&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_DISCOVERY_STARTED'>/** p2p discovery has started
+</span>
+ @see #WIFI_P2P_DISCOVERY_CHANGED_ACTION
+*/
+WIFI_P2P_DISCOVERY_STARTED : &quot;2&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_THIS_DEVICE_CHANGED_ACTION'>/** Broadcast intent action indicating that this device details have changed.
+</span>
+ &lt;p&gt; An extra {@link #EXTRA_WIFI_P2P_DEVICE} provides this device details.
+ The valid device details can also be obtained with
+ {@link #requestDeviceInfo(Channel, android.net.wifi.p2p.WifiP2pManager.DeviceInfoListener)} when p2p is enabled.
+ To get information notifications on P2P getting enabled refers
+ {@link #WIFI_P2P_STATE_ENABLED}.
+
+ &lt;p&gt; The {@link #EXTRA_WIFI_P2P_DEVICE} extra contains an anonymized version of the device's
+ MAC address. Callers holding the {@code android.Manifest.permission#LOCAL_MAC_ADDRESS}
+ permission can use {@link #requestDeviceInfo} to obtain the actual MAC address of this
+ device.
+
+ All of these permissions are required to receive this broadcast:
+ {@link android.Manifest.permission#ACCESS_FINE_LOCATION} and
+ {@link android.Manifest.permission#ACCESS_WIFI_STATE}
+
+ @see #EXTRA_WIFI_P2P_DEVICE
+*/
+WIFI_P2P_THIS_DEVICE_CHANGED_ACTION : &quot;android.net.wifi.p2p.THIS_DEVICE_CHANGED&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_WIFI_P2P_DEVICE'>/** The lookup key for a {@link android.net.wifi.p2p.WifiP2pDevice} object
+</span> Retrieve with {@link android.content.Intent#getParcelableExtra(String)}.
+*/
+EXTRA_WIFI_P2P_DEVICE : &quot;wifiP2pDevice&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-WIFI_P2P_PERSISTENT_GROUPS_CHANGED_ACTION'>/** Broadcast intent action indicating that remembered persistent groups have changed.
+</span> @hide
+*/
+WIFI_P2P_PERSISTENT_GROUPS_CHANGED_ACTION : &quot;android.net.wifi.p2p.PERSISTENT_GROUPS_CHANGED&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-EXTRA_HANDOVER_MESSAGE'>/** The lookup key for a handover message returned by the WifiP2pService.
+</span> @hide
+*/
+EXTRA_HANDOVER_MESSAGE : &quot;android.net.wifi.p2p.EXTRA_HANDOVER_MESSAGE&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CALLING_PACKAGE'>/** The lookup key for a calling package name from WifiP2pManager
+</span> @hide
+*/
+CALLING_PACKAGE : &quot;android.net.wifi.p2p.CALLING_PACKAGE&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CALLING_BINDER'>/** The lookup key for a calling package binder from WifiP2pManager
+</span> @hide
+*/
+CALLING_BINDER : &quot;android.net.wifi.p2p.CALLING_BINDER&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DISCOVER_PEERS'>/**@hide */
+</span>DISCOVER_PEERS : &quot;139265&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DISCOVER_PEERS_FAILED'>/**@hide */
+</span>DISCOVER_PEERS_FAILED : &quot;139266&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DISCOVER_PEERS_SUCCEEDED'>/**@hide */
+</span>DISCOVER_PEERS_SUCCEEDED : &quot;139267&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-STOP_DISCOVERY'>/**@hide */
+</span>STOP_DISCOVERY : &quot;139268&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-STOP_DISCOVERY_FAILED'>/**@hide */
+</span>STOP_DISCOVERY_FAILED : &quot;139269&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-STOP_DISCOVERY_SUCCEEDED'>/**@hide */
+</span>STOP_DISCOVERY_SUCCEEDED : &quot;139270&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CONNECT'>/**@hide */
+</span>CONNECT : &quot;139271&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CONNECT_FAILED'>/**@hide */
+</span>CONNECT_FAILED : &quot;139272&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CONNECT_SUCCEEDED'>/**@hide */
+</span>CONNECT_SUCCEEDED : &quot;139273&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CANCEL_CONNECT'>/**@hide */
+</span>CANCEL_CONNECT : &quot;139274&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CANCEL_CONNECT_FAILED'>/**@hide */
+</span>CANCEL_CONNECT_FAILED : &quot;139275&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CANCEL_CONNECT_SUCCEEDED'>/**@hide */
+</span>CANCEL_CONNECT_SUCCEEDED : &quot;139276&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CREATE_GROUP'>/**@hide */
+</span>CREATE_GROUP : &quot;139277&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CREATE_GROUP_FAILED'>/**@hide */
+</span>CREATE_GROUP_FAILED : &quot;139278&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CREATE_GROUP_SUCCEEDED'>/**@hide */
+</span>CREATE_GROUP_SUCCEEDED : &quot;139279&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_GROUP'>/**@hide */
+</span>REMOVE_GROUP : &quot;139280&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_GROUP_FAILED'>/**@hide */
+</span>REMOVE_GROUP_FAILED : &quot;139281&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_GROUP_SUCCEEDED'>/**@hide */
+</span>REMOVE_GROUP_SUCCEEDED : &quot;139282&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_PEERS'>/**@hide */
+</span>REQUEST_PEERS : &quot;139283&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_PEERS'>/**@hide */
+</span>RESPONSE_PEERS : &quot;139284&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_CONNECTION_INFO'>/**@hide */
+</span>REQUEST_CONNECTION_INFO : &quot;139285&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_CONNECTION_INFO'>/**@hide */
+</span>RESPONSE_CONNECTION_INFO : &quot;139286&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_GROUP_INFO'>/**@hide */
+</span>REQUEST_GROUP_INFO : &quot;139287&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_GROUP_INFO'>/**@hide */
+</span>RESPONSE_GROUP_INFO : &quot;139288&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-ADD_LOCAL_SERVICE'>/**@hide */
+</span>ADD_LOCAL_SERVICE : &quot;139292&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-ADD_LOCAL_SERVICE_FAILED'>/**@hide */
+</span>ADD_LOCAL_SERVICE_FAILED : &quot;139293&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-ADD_LOCAL_SERVICE_SUCCEEDED'>/**@hide */
+</span>ADD_LOCAL_SERVICE_SUCCEEDED : &quot;139294&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_LOCAL_SERVICE'>/**@hide */
+</span>REMOVE_LOCAL_SERVICE : &quot;139295&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_LOCAL_SERVICE_FAILED'>/**@hide */
+</span>REMOVE_LOCAL_SERVICE_FAILED : &quot;139296&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_LOCAL_SERVICE_SUCCEEDED'>/**@hide */
+</span>REMOVE_LOCAL_SERVICE_SUCCEEDED : &quot;139297&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CLEAR_LOCAL_SERVICES'>/**@hide */
+</span>CLEAR_LOCAL_SERVICES : &quot;139298&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CLEAR_LOCAL_SERVICES_FAILED'>/**@hide */
+</span>CLEAR_LOCAL_SERVICES_FAILED : &quot;139299&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CLEAR_LOCAL_SERVICES_SUCCEEDED'>/**@hide */
+</span>CLEAR_LOCAL_SERVICES_SUCCEEDED : &quot;139300&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-ADD_SERVICE_REQUEST'>/**@hide */
+</span>ADD_SERVICE_REQUEST : &quot;139301&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-ADD_SERVICE_REQUEST_FAILED'>/**@hide */
+</span>ADD_SERVICE_REQUEST_FAILED : &quot;139302&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-ADD_SERVICE_REQUEST_SUCCEEDED'>/**@hide */
+</span>ADD_SERVICE_REQUEST_SUCCEEDED : &quot;139303&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_SERVICE_REQUEST'>/**@hide */
+</span>REMOVE_SERVICE_REQUEST : &quot;139304&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_SERVICE_REQUEST_FAILED'>/**@hide */
+</span>REMOVE_SERVICE_REQUEST_FAILED : &quot;139305&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REMOVE_SERVICE_REQUEST_SUCCEEDED'>/**@hide */
+</span>REMOVE_SERVICE_REQUEST_SUCCEEDED : &quot;139306&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CLEAR_SERVICE_REQUESTS'>/**@hide */
+</span>CLEAR_SERVICE_REQUESTS : &quot;139307&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CLEAR_SERVICE_REQUESTS_FAILED'>/**@hide */
+</span>CLEAR_SERVICE_REQUESTS_FAILED : &quot;139308&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-CLEAR_SERVICE_REQUESTS_SUCCEEDED'>/**@hide */
+</span>CLEAR_SERVICE_REQUESTS_SUCCEEDED : &quot;139309&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DISCOVER_SERVICES'>/**@hide */
+</span>DISCOVER_SERVICES : &quot;139310&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DISCOVER_SERVICES_FAILED'>/**@hide */
+</span>DISCOVER_SERVICES_FAILED : &quot;139311&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DISCOVER_SERVICES_SUCCEEDED'>/**@hide */
+</span>DISCOVER_SERVICES_SUCCEEDED : &quot;139312&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-PING'>/**@hide */
+</span>PING : &quot;139313&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_SERVICE'>/**@hide */
+</span>RESPONSE_SERVICE : &quot;139314&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_DEVICE_NAME'>/**@hide */
+</span>SET_DEVICE_NAME : &quot;139315&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_DEVICE_NAME_FAILED'>/**@hide */
+</span>SET_DEVICE_NAME_FAILED : &quot;139316&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_DEVICE_NAME_SUCCEEDED'>/**@hide */
+</span>SET_DEVICE_NAME_SUCCEEDED : &quot;139317&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DELETE_PERSISTENT_GROUP'>/**@hide */
+</span>DELETE_PERSISTENT_GROUP : &quot;139318&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DELETE_PERSISTENT_GROUP_FAILED'>/**@hide */
+</span>DELETE_PERSISTENT_GROUP_FAILED : &quot;139319&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-DELETE_PERSISTENT_GROUP_SUCCEEDED'>/**@hide */
+</span>DELETE_PERSISTENT_GROUP_SUCCEEDED : &quot;139320&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_PERSISTENT_GROUP_INFO'>/**@hide */
+</span>REQUEST_PERSISTENT_GROUP_INFO : &quot;139321&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_PERSISTENT_GROUP_INFO'>/**@hide */
+</span>RESPONSE_PERSISTENT_GROUP_INFO : &quot;139322&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_WFD_INFO'>/**@hide */
+</span>SET_WFD_INFO : &quot;139323&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_WFD_INFO_FAILED'>/**@hide */
+</span>SET_WFD_INFO_FAILED : &quot;139324&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_WFD_INFO_SUCCEEDED'>/**@hide */
+</span>SET_WFD_INFO_SUCCEEDED : &quot;139325&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-START_WPS'>/**@hide */
+</span>START_WPS : &quot;139326&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-START_WPS_FAILED'>/**@hide */
+</span>START_WPS_FAILED : &quot;139327&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-START_WPS_SUCCEEDED'>/**@hide */
+</span>START_WPS_SUCCEEDED : &quot;139328&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-START_LISTEN'>/**@hide */
+</span>START_LISTEN : &quot;139329&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-START_LISTEN_FAILED'>/**@hide */
+</span>START_LISTEN_FAILED : &quot;139330&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-START_LISTEN_SUCCEEDED'>/**@hide */
+</span>START_LISTEN_SUCCEEDED : &quot;139331&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-STOP_LISTEN'>/**@hide */
+</span>STOP_LISTEN : &quot;139332&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-STOP_LISTEN_FAILED'>/**@hide */
+</span>STOP_LISTEN_FAILED : &quot;139333&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-STOP_LISTEN_SUCCEEDED'>/**@hide */
+</span>STOP_LISTEN_SUCCEEDED : &quot;139334&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_CHANNEL'>/**@hide */
+</span>SET_CHANNEL : &quot;139335&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_CHANNEL_FAILED'>/**@hide */
+</span>SET_CHANNEL_FAILED : &quot;139336&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_CHANNEL_SUCCEEDED'>/**@hide */
+</span>SET_CHANNEL_SUCCEEDED : &quot;139337&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-GET_HANDOVER_REQUEST'>/**@hide */
+</span>GET_HANDOVER_REQUEST : &quot;139339&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-GET_HANDOVER_SELECT'>/**@hide */
+</span>GET_HANDOVER_SELECT : &quot;139340&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_GET_HANDOVER_MESSAGE'>/**@hide */
+</span>RESPONSE_GET_HANDOVER_MESSAGE : &quot;139341&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-INITIATOR_REPORT_NFC_HANDOVER'>/**@hide */
+</span>INITIATOR_REPORT_NFC_HANDOVER : &quot;139342&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONDER_REPORT_NFC_HANDOVER'>/**@hide */
+</span>RESPONDER_REPORT_NFC_HANDOVER : &quot;139343&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REPORT_NFC_HANDOVER_SUCCEEDED'>/**@hide */
+</span>REPORT_NFC_HANDOVER_SUCCEEDED : &quot;139344&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REPORT_NFC_HANDOVER_FAILED'>/**@hide */
+</span>REPORT_NFC_HANDOVER_FAILED : &quot;139345&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-FACTORY_RESET'>/**@hide */
+</span>FACTORY_RESET : &quot;139346&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-FACTORY_RESET_FAILED'>/**@hide */
+</span>FACTORY_RESET_FAILED : &quot;139347&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-FACTORY_RESET_SUCCEEDED'>/**@hide */
+</span>FACTORY_RESET_SUCCEEDED : &quot;139348&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_ONGOING_PEER_CONFIG'>/**@hide */
+</span>REQUEST_ONGOING_PEER_CONFIG : &quot;139349&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_ONGOING_PEER_CONFIG'>/**@hide */
+</span>RESPONSE_ONGOING_PEER_CONFIG : &quot;139350&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_ONGOING_PEER_CONFIG'>/**@hide */
+</span>SET_ONGOING_PEER_CONFIG : &quot;139351&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_ONGOING_PEER_CONFIG_FAILED'>/**@hide */
+</span>SET_ONGOING_PEER_CONFIG_FAILED : &quot;139352&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-SET_ONGOING_PEER_CONFIG_SUCCEEDED'>/**@hide */
+</span>SET_ONGOING_PEER_CONFIG_SUCCEEDED : &quot;139353&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_P2P_STATE'>/**@hide */
+</span>REQUEST_P2P_STATE : &quot;139354&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_P2P_STATE'>/**@hide */
+</span>RESPONSE_P2P_STATE : &quot;139355&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_DISCOVERY_STATE'>/**@hide */
+</span>REQUEST_DISCOVERY_STATE : &quot;139356&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_DISCOVERY_STATE'>/**@hide */
+</span>RESPONSE_DISCOVERY_STATE : &quot;139357&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_NETWORK_INFO'>/**@hide */
+</span>REQUEST_NETWORK_INFO : &quot;139358&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_NETWORK_INFO'>/**@hide */
+</span>RESPONSE_NETWORK_INFO : &quot;139359&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-UPDATE_CHANNEL_INFO'>/**@hide */
+</span>UPDATE_CHANNEL_INFO : &quot;139360&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-REQUEST_DEVICE_INFO'>/**@hide */
+</span>REQUEST_DEVICE_INFO : &quot;139361&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-RESPONSE_DEVICE_INFO'>/**@hide */
+</span>RESPONSE_DEVICE_INFO : &quot;139362&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-ERROR'>/** Passed with {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+</span> Indicates that the operation failed due to an internal error.
+*/
+ERROR : &quot;0&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-P2P_UNSUPPORTED'>/** Passed with {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+</span> Indicates that the operation failed because p2p is unsupported on the device.
+*/
+P2P_UNSUPPORTED : &quot;1&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-BUSY'>/** Passed with {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+</span> Indicates that the operation failed because the framework is busy and
+ unable to service the request
+*/
+BUSY : &quot;2&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-NO_SERVICE_REQUESTS'>/** Passed with {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+</span> Indicates that the {@link #discoverServices} failed because no service
+ requests are added. Use {@link #addServiceRequest} to add a service
+ request.
+*/
+NO_SERVICE_REQUESTS : &quot;3&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-MIRACAST_DISABLED'>/**@hide */
+</span>MIRACAST_DISABLED : &quot;0&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-MIRACAST_SOURCE'>/**@hide */
+</span>MIRACAST_SOURCE : &quot;1&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-property-MIRACAST_SINK'>/**@hide */
+</span>MIRACAST_SINK : &quot;2&quot;,
+<span id='android-net-wifi-p2p-WifiP2pManager-method-initialize'>/**Registers the application with the Wi-Fi framework. This function
+</span> must be the first to be called before any p2p operations are performed.
+@param {Object {Context}} srcContext is the context of the source
+@param {Object {Looper}} srcLooper is the Looper on which the callbacks are receivied
+@param {Object {WifiP2pManager.ChannelListener}} listener for callback at loss of framework communication. Can be null.
+@return {Object {android.net.wifi.p2p.WifiP2pManager.Channel}} Channel instance that is necessary for performing any further p2p operations
+*/
+initialize : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-initializeInternal'>/**Registers the application with the Wi-Fi framework. Enables system-only functionality.
+</span>@hide 
+*/
+initializeInternal : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-discoverPeers'>/**Initiate peer discovery. A discovery process involves scanning for available Wi-Fi peers
+</span> for the purpose of establishing a connection.
+
+ &lt;p&gt; The function call immediately returns after sending a discovery request
+ to the framework. The application is notified of a success or failure to initiate
+ discovery through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt; The discovery remains active until a connection is initiated or
+ a p2p group is formed. Register for {@link #WIFI_P2P_PEERS_CHANGED_ACTION} intent to
+ determine when the framework notifies of a change as peers are discovered.
+
+ &lt;p&gt; Upon receiving a {@link #WIFI_P2P_PEERS_CHANGED_ACTION} intent, an application
+ can request for the list of peers using {@link #requestPeers}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+discoverPeers : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-stopPeerDiscovery'>/**Stop an ongoing peer discovery
+</span>
+ &lt;p&gt; The function call immediately returns after sending a stop request
+ to the framework. The application is notified of a success or failure to initiate
+ stop through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+stopPeerDiscovery : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-connect'>/**Start a p2p connection to a device with the specified configuration.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a connection request
+ to the framework. The application is notified of a success or failure to initiate
+ connect through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt; Register for {@link #WIFI_P2P_CONNECTION_CHANGED_ACTION} intent to
+ determine when the framework notifies of a change in connectivity.
+
+ &lt;p&gt; If the current device is not part of a p2p group, a connect request initiates
+ a group negotiation with the peer.
+
+ &lt;p&gt; If the current device is part of an existing p2p group or has created
+ a p2p group with {@link #createGroup}, an invitation to join the group is sent to
+ the peer device.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pConfig}} config options as described in {@link WifiP2pConfig} class
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+connect : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-cancelConnect'>/**Cancel any ongoing p2p group negotiation
+</span>
+ &lt;p&gt; The function call immediately returns after sending a connection cancellation request
+ to the framework. The application is notified of a success or failure to initiate
+ cancellation through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+cancelConnect : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-createGroup'>/**Create a p2p group with the current device as the group owner. This essentially creates
+</span> an access point that can accept connections from legacy clients as well as other p2p
+ devices.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+ This function would normally not be used unless the current device needs
+ to form a p2p connection with a legacy client
+
+ &lt;p&gt; The function call immediately returns after sending a group creation request
+ to the framework. The application is notified of a success or failure to initiate
+ group creation through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt; Application can request for the group details with {@link #requestGroupInfo}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+createGroup : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-createGroup'>/**Create a p2p group with the current device as the group owner. This essentially creates
+</span> an access point that can accept connections from legacy clients as well as other p2p
+ devices.
+
+ &lt;p&gt; An app should use {@link android.net.wifi.p2p.WifiP2pConfig.Builder} to build the configuration
+ for a group.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+ This function would normally not be used unless the current device needs
+ to form a p2p group as a Group Owner and allow peers to join it as either
+ Group Clients or legacy Wi-Fi STAs.
+
+ &lt;p&gt; The function call immediately returns after sending a group creation request
+ to the framework. The application is notified of a success or failure to initiate
+ group creation through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt; Application can request for the group details with {@link #requestGroupInfo}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}.
+@param {Object {WifiP2pConfig}} config the configuration of a p2p group.
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+createGroup : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-removeGroup'>/**Remove the current p2p group.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a group removal request
+ to the framework. The application is notified of a success or failure to initiate
+ group removal through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+removeGroup : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-listen'>/**Force p2p to enter or exit listen state
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize(Context, Looper, ChannelListener)}
+@param {Boolean} enable enables or disables listening
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+@hide 
+*/
+listen : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setWifiP2pChannels'>/**
+</span>@hide 
+*/
+setWifiP2pChannels : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-startWps'>/**Start a Wi-Fi Protected Setup (WPS) session.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a request to start a
+ WPS session. Currently, this is only valid if the current device is running
+ as a group owner to allow any new clients to join the group. The application
+ is notified of a success or failure to initiate WPS through listener callbacks
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@hide 
+*/
+startWps : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-addLocalService'>/**Register a local service for service discovery. If a local service is registered,
+</span> the framework automatically responds to a service discovery request from a peer.
+
+ &lt;p&gt; The function call immediately returns after sending a request to add a local
+ service to the framework. The application is notified of a success or failure to
+ add service through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt;The service information is set through {@link WifiP2pServiceInfo}.&lt;br&gt;
+ or its subclass calls  {@link WifiP2pUpnpServiceInfo#newInstance} or
+  {@link WifiP2pDnsSdServiceInfo#newInstance} for a Upnp or Bonjour service
+ respectively
+
+ &lt;p&gt;The service information can be cleared with calls to
+  {@link #removeLocalService} or {@link #clearLocalServices}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pServiceInfo}} servInfo is a local service information.
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+addLocalService : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-removeLocalService'>/**Remove a registered local service added with {@link #addLocalService}
+</span>
+ &lt;p&gt; The function call immediately returns after sending a request to remove a
+ local service to the framework. The application is notified of a success or failure to
+ add service through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pServiceInfo}} servInfo is the local service information.
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+removeLocalService : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-clearLocalServices'>/**Clear all registered local services of service discovery.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a request to clear all
+ local services to the framework. The application is notified of a success or failure to
+ add service through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+clearLocalServices : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setServiceResponseListener'>/**Register a callback to be invoked on receiving service discovery response.
+</span> Used only for vendor specific protocol right now. For Bonjour or Upnp, use
+ {@link #setDnsSdResponseListeners} or {@link #setUpnpServiceResponseListener}
+ respectively.
+
+ &lt;p&gt; see {@link #discoverServices} for the detail.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ServiceResponseListener}} listener for callbacks on receiving service discovery response.
+*/
+setServiceResponseListener : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setDnsSdResponseListeners'>/**Register a callback to be invoked on receiving Bonjour service discovery
+</span> response.
+
+ &lt;p&gt; see {@link #discoverServices} for the detail.
+@param {Object {WifiP2pManager.Channel}} c
+@param {Object {WifiP2pManager.DnsSdServiceResponseListener}} servListener is for listening to a Bonjour service response
+@param {Object {WifiP2pManager.DnsSdTxtRecordListener}} txtListener is for listening to a Bonjour TXT record response
+*/
+setDnsSdResponseListeners : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setUpnpServiceResponseListener'>/**Register a callback to be invoked on receiving upnp service discovery
+</span> response.
+
+ &lt;p&gt; see {@link #discoverServices} for the detail.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.UpnpServiceResponseListener}} listener for callbacks on receiving service discovery response.
+*/
+setUpnpServiceResponseListener : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-discoverServices'>/**Initiate service discovery. A discovery process involves scanning for
+</span> requested services for the purpose of establishing a connection to a peer
+ that supports an available service.
+
+ &lt;p&gt; The function call immediately returns after sending a request to start service
+ discovery to the framework. The application is notified of a success or failure to initiate
+ discovery through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt; The services to be discovered are specified with calls to {@link #addServiceRequest}.
+
+ &lt;p&gt;The application is notified of the response against the service discovery request
+ through listener callbacks registered by {@link #setServiceResponseListener} or
+ {@link #setDnsSdResponseListeners}, or {@link #setUpnpServiceResponseListener}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+discoverServices : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-addServiceRequest'>/**Add a service discovery request.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a request to add service
+ discovery request to the framework. The application is notified of a success or failure to
+ add service through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt;After service discovery request is added, you can initiate service discovery by
+ {@link #discoverServices}.
+
+ &lt;p&gt;The added service requests can be cleared with calls to
+ {@link #removeServiceRequest(Channel, WifiP2pServiceRequest, android.net.wifi.p2p.WifiP2pManager.ActionListener)} or
+ {@link #clearServiceRequests(Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pServiceRequest}} req is the service discovery request.
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+addServiceRequest : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-removeServiceRequest'>/**Remove a specified service discovery request added with {@link #addServiceRequest}
+</span>
+ &lt;p&gt; The function call immediately returns after sending a request to remove service
+ discovery request to the framework. The application is notified of a success or failure to
+ add service through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pServiceRequest}} req is the service discovery request.
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+removeServiceRequest : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-clearServiceRequests'>/**Clear all registered service discovery requests.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a request to clear all
+ service discovery requests to the framework. The application is notified of a success
+ or failure to add service through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+*/
+clearServiceRequests : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestPeers'>/**Request the current list of peers.
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.PeerListListener}} listener for callback when peer list is available. Can be null.
+*/
+requestPeers : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestConnectionInfo'>/**Request device connection info.
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.ConnectionInfoListener}} listener for callback when connection info is available. Can be null.
+*/
+requestConnectionInfo : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestGroupInfo'>/**Request p2p group info.
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.GroupInfoListener}} listener for callback when group info is available. Can be null.
+*/
+requestGroupInfo : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setDeviceName'>/**Set p2p device name.
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {String} listener for callback when group info is available. Can be null.
+@param listener for callback when group info is available. Can be null.
+*/
+setDeviceName : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setWFDInfo'>/**
+</span>@hide 
+*/
+setWFDInfo : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-deletePersistentGroup'>/**Delete a stored persistent group from the system settings.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a persistent group removal request
+ to the framework. The application is notified of a success or failure to initiate
+ group removal through listener callbacks {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onSuccess} or
+ {@link android.net.wifi.p2p.WifiP2pManager.ActionListener#onFailure}.
+
+ &lt;p&gt;The persistent p2p group list stored in the system can be obtained by
+ {@link #requestPersistentGroupInfo(Channel, android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener)} and
+  a network id can be obtained by {@link android.net.wifi.p2p.WifiP2pGroup#getNetworkId()}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Number} netId he network id of the p2p group.
+@param {Object {WifiP2pManager.ActionListener}} listener for callbacks on success or failure. Can be null.
+@hide 
+*/
+deletePersistentGroup : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestPersistentGroupInfo'>/**Request a list of all the persistent p2p groups stored in system.
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.PersistentGroupInfoListener}} listener for callback when persistent group info list is available. Can be null.
+@hide 
+*/
+requestPersistentGroupInfo : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setMiracastMode'>/**Internal use only @hide
+</span>*/
+setMiracastMode : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-getMessenger'>/**Get a reference to WifiP2pService handler. This is used to establish
+</span> an AsyncChannel communication with WifiService
+@param {Object {Binder}} binder A binder for the service to associate with this client.
+@return {Object {android.os.Messenger}} Messenger pointing to the WifiP2pService handler
+@hide 
+*/
+getMessenger : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-getP2pStateMachineMessenger'>/**Get a reference to P2pStateMachine handler. This is used to establish
+</span> a priveleged AsyncChannel communication with WifiP2pService.
+@return {Object {android.os.Messenger}} Messenger pointing to the WifiP2pService handler
+@hide 
+*/
+getP2pStateMachineMessenger : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-getNfcHandoverRequest'>/**Get a handover request message for use in WFA NFC Handover transfer.
+</span>@hide 
+*/
+getNfcHandoverRequest : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-getNfcHandoverSelect'>/**Get a handover select message for use in WFA NFC Handover transfer.
+</span>@hide 
+*/
+getNfcHandoverSelect : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-initiatorReportNfcHandover'>/**
+</span>@hide 
+*/
+initiatorReportNfcHandover : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-responderReportNfcHandover'>/**
+</span>@hide 
+*/
+responderReportNfcHandover : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-factoryReset'>/**Removes all saved p2p groups.
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}.
+@param {Object {WifiP2pManager.ActionListener}} listener for callback on success or failure. Can be null.
+@hide 
+*/
+factoryReset : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestOngoingPeerConfig'>/**Request saved WifiP2pConfig which used for an ongoing peer connection
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pManager.OngoingPeerInfoListener}} listener for callback when ongoing peer config updated. Can't be null.
+@hide 
+*/
+requestOngoingPeerConfig : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-setOngoingPeerConfig'>/**Set saved WifiP2pConfig which used for an ongoing peer connection
+</span>@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}
+@param {Object {WifiP2pConfig}} config used for change an ongoing peer connection
+@param {Object {WifiP2pManager.ActionListener}} listener for callback when ongoing peer config updated. Can be null.
+@hide 
+*/
+setOngoingPeerConfig : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestP2pState'>/**Request p2p enabled state.
+</span>
+ &lt;p&gt; This state indicates whether Wi-Fi p2p is enabled or disabled.
+ The valid value is one of {@link #WIFI_P2P_STATE_DISABLED} or
+ {@link #WIFI_P2P_STATE_ENABLED}. The state is returned using the
+ {@link android.net.wifi.p2p.WifiP2pManager.P2pStateListener} listener.
+
+ &lt;p&gt; This state is also included in the {@link #WIFI_P2P_STATE_CHANGED_ACTION}
+ broadcast event with extra {@link #EXTRA_WIFI_STATE}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}.
+@param {Object {WifiP2pManager.P2pStateListener}} listener for callback when p2p state is available..
+*/
+requestP2pState : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestDiscoveryState'>/**Request p2p discovery state.
+</span>
+ &lt;p&gt; This state indicates whether p2p discovery has started or stopped.
+ The valid value is one of {@link #WIFI_P2P_DISCOVERY_STARTED} or
+ {@link #WIFI_P2P_DISCOVERY_STOPPED}. The state is returned using the
+ {@link android.net.wifi.p2p.WifiP2pManager.DiscoveryStateListener} listener.
+
+ &lt;p&gt; This state is also included in the {@link #WIFI_P2P_DISCOVERY_CHANGED_ACTION}
+ broadcast event with extra {@link #EXTRA_DISCOVERY_STATE}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}.
+@param {Object {WifiP2pManager.DiscoveryStateListener}} listener for callback when discovery state is available..
+*/
+requestDiscoveryState : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestNetworkInfo'>/**Request network info.
+</span>
+ &lt;p&gt; This method provides the network info in the form of a {@link android.net.NetworkInfo}.
+ {@link android.net.NetworkInfo#isAvailable()} indicates the p2p availability and
+ {@link android.net.NetworkInfo#getDetailedState()} reports the current fine-grained state
+ of the network. This {@link android.net.NetworkInfo} is returned using the
+ {@link android.net.wifi.p2p.WifiP2pManager.NetworkInfoListener} listener.
+
+ &lt;p&gt; This information is also included in the {@link #WIFI_P2P_CONNECTION_CHANGED_ACTION}
+ broadcast event with extra {@link #EXTRA_NETWORK_INFO}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize}.
+@param {Object {WifiP2pManager.NetworkInfoListener}} listener for callback when network info is available..
+*/
+requestNetworkInfo : function(  ) {},
+
+<span id='android-net-wifi-p2p-WifiP2pManager-method-requestDeviceInfo'>/**Request Device Info
+</span>
+ &lt;p&gt; This method provides the device info
+ in the form of a {@link android.net.wifi.p2p.WifiP2pDevice}.
+ Valid {@link android.net.wifi.p2p.WifiP2pDevice} is returned when p2p is enabled.
+ To get information notifications on P2P getting enabled refers
+ {@link #WIFI_P2P_STATE_ENABLED}.
+
+ &lt;p&gt; This {@link android.net.wifi.p2p.WifiP2pDevice} is returned using the
+ {@link android.net.wifi.p2p.WifiP2pManager.DeviceInfoListener} listener.
+
+ &lt;p&gt; {@link android.net.wifi.p2p.WifiP2pDevice#deviceAddress} is only available if the caller
+ holds the {@code android.Manifest.permission#LOCAL_MAC_ADDRESS} permission, and holds the
+ anonymized MAC address (02:00:00:00:00:00) otherwise.
+
+ &lt;p&gt; This information is also included in the {@link #WIFI_P2P_THIS_DEVICE_CHANGED_ACTION}
+ broadcast event with extra {@link #EXTRA_WIFI_P2P_DEVICE}.
+@param {Object {WifiP2pManager.Channel}} c is the channel created at {@link #initialize(Context, Looper, ChannelListener)}.
+@param {Object {WifiP2pManager.DeviceInfoListener}} listener for callback when network info is available.
+*/
+requestDeviceInfo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

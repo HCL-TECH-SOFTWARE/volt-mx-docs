@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-radio-RadioTuner'>/**@class android.hardware.radio.RadioTuner
+</span>@extends java.lang.Object
+
+ RadioTuner interface provides methods to control a radio tuner on the device: selecting and
+ configuring the active band, muting/unmuting, scanning and tuning, etc...
+
+ Obtain a RadioTuner interface by calling {@link RadioManager#openTuner(int,
+ RadioManager.BandConfig, boolean, android.hardware.radio.RadioTuner.Callback, Handler)}.
+ @hide
+*/
+var RadioTuner = {
+
+<span id='android-hardware-radio-RadioTuner-property-DIRECTION_UP'>/**Scanning direction UP for {@link #step(int, boolean)}, {@link #scan(int, boolean)} */
+</span>DIRECTION_UP : &quot;0&quot;,
+<span id='android-hardware-radio-RadioTuner-property-DIRECTION_DOWN'>/**Scanning directions DOWN for {@link #step(int, boolean)}, {@link #scan(int, boolean)} */
+</span>DIRECTION_DOWN : &quot;1&quot;,
+<span id='android-hardware-radio-RadioTuner-property-ERROR_HARDWARE_FAILURE'>/**Indicates a failure of radio IC or driver.
+</span> The application must close and re open the tuner
+ @deprecated See {@link onError} callback.
+*/
+ERROR_HARDWARE_FAILURE : &quot;0&quot;,
+<span id='android-hardware-radio-RadioTuner-property-ERROR_SERVER_DIED'>/**Indicates a failure of the radio service.
+</span> The application must close and re open the tuner
+ @deprecated See {@link onError} callback.
+*/
+ERROR_SERVER_DIED : &quot;1&quot;,
+<span id='android-hardware-radio-RadioTuner-property-ERROR_CANCELLED'>/**A pending seek or tune operation was cancelled
+</span> @deprecated See {@link onError} callback.
+*/
+ERROR_CANCELLED : &quot;2&quot;,
+<span id='android-hardware-radio-RadioTuner-property-ERROR_SCAN_TIMEOUT'>/**A pending seek or tune operation timed out
+</span> @deprecated See {@link onError} callback.
+*/
+ERROR_SCAN_TIMEOUT : &quot;3&quot;,
+<span id='android-hardware-radio-RadioTuner-property-ERROR_CONFIG'>/**The requested configuration could not be applied
+</span> @deprecated See {@link onError} callback.
+*/
+ERROR_CONFIG : &quot;4&quot;,
+<span id='android-hardware-radio-RadioTuner-property-ERROR_BACKGROUND_SCAN_UNAVAILABLE'>/**Background scan was interrupted due to hardware becoming temporarily unavailable.
+</span> @deprecated See {@link onError} callback.
+*/
+ERROR_BACKGROUND_SCAN_UNAVAILABLE : &quot;5&quot;,
+<span id='android-hardware-radio-RadioTuner-property-ERROR_BACKGROUND_SCAN_FAILED'>/**Background scan failed due to other error, ie. HW failure.
+</span> @deprecated See {@link onError} callback.
+*/
+ERROR_BACKGROUND_SCAN_FAILED : &quot;6&quot;,
+<span id='android-hardware-radio-RadioTuner-method-close'>/**Close the tuner interface. The {@link android.hardware.radio.RadioTuner.Callback} callback will not be called
+</span> anymore and associated resources will be released.
+ Must be called when the tuner is not needed to make hardware resources available to others.
+*/
+close : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-setConfiguration'>/**Set the active band configuration for this module.
+</span> Must be a valid configuration obtained via buildConfig() from a valid BandDescriptor listed
+ in the ModuleProperties of the module with the specified ID.
+@param {Object {RadioManager.BandConfig}} config The desired band configuration (FmBandConfig or AmBandConfig).
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_BAD_VALUE} if parameters are invalid, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+@deprecated Only applicable for HAL 1.x.
+*/
+setConfiguration : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-getConfiguration'>/**Get current configuration.
+</span>@param {Object {android.hardware.radio.RadioManager.BandConfig[]}} config a BandConfig array of lengh 1 where the configuration is returned.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_BAD_VALUE} if parameters are invalid, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+@deprecated Only applicable for HAL 1.x.
+*/
+getConfiguration : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-setMute'>/**Set mute state. When muted, the radio tuner audio source is not available for playback on
+</span> any audio device. when unmuted, the radio tuner audio source is output as a media source
+ and renderd over the audio device selected for media use case.
+ The radio tuner audio source is muted by default when the tuner is first attached.
+ Only effective if the tuner is attached with audio enabled.
+@param {Boolean} mute the requested mute state.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setMute : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-getMute'>/**Get mute state.
+</span>@return {Boolean} {@code true} if the radio tuner audio source is muted or a problem occured
+ retrieving the mute state, {@code false} otherwise.
+*/
+getMute : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-step'>/**Step up or down by one channel spacing.
+</span> The operation is asynchronous and {@link android.hardware.radio.RadioTuner.Callback}
+ onProgramInfoChanged() will be called when step completes or
+ onError() when cancelled or timeout.
+@param {Number} direction {@link #DIRECTION_UP} or {@link #DIRECTION_DOWN}.
+@param {Boolean} skipSubChannel indicates to skip sub channels when the configuration currently
+ selected supports sub channel (e.g HD Radio). N/A otherwise.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_BAD_VALUE} if parameters are invalid, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+step : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-scan'>/**Scan up or down to next valid station.
+</span> The operation is asynchronous and {@link android.hardware.radio.RadioTuner.Callback}
+ onProgramInfoChanged() will be called when scan completes or
+ onError() when cancelled or timeout.
+@param {Number} direction {@link #DIRECTION_UP} or {@link #DIRECTION_DOWN}.
+@param {Boolean} skipSubChannel indicates to skip sub channels when the configuration currently
+ selected supports sub channel (e.g HD Radio). N/A otherwise.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_BAD_VALUE} if parameters are invalid, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+scan : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-tune'>/**Tune to a specific frequency.
+</span> The operation is asynchronous and {@link android.hardware.radio.RadioTuner.Callback}
+ onProgramInfoChanged() will be called when tune completes or
+ onError() when cancelled or timeout.
+@param {Number} channel the specific channel or frequency to tune to.
+@param {Number} subChannel the specific sub-channel to tune to. N/A if the selected configuration
+ does not support cub channels.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_BAD_VALUE} if parameters are invalid, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+@deprecated Use {@link tune(ProgramSelector)} instead.
+*/
+tune : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-tune'>/**Tune to a program.
+</span>
+ The operation is asynchronous and {@link android.hardware.radio.RadioTuner.Callback} onProgramInfoChanged() will be called
+ when tune completes or onError() when cancelled or on timeout.
+@throws IllegalArgumentException if the provided selector is invalid
+*/
+tune : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-cancel'>/**Cancel a pending scan or tune operation.
+</span> If an operation is pending, {@link android.hardware.radio.RadioTuner.Callback} onError() will be called with
+ {@link #ERROR_CANCELLED}.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_BAD_VALUE} if parameters are invalid, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+cancel : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-cancelAnnouncement'>/**Cancels traffic or emergency announcement.
+</span>
+ If there was no announcement to cancel, no action is taken.
+
+ There is a race condition between calling cancelAnnouncement and the actual announcement
+ being finished, so onTrafficAnnouncement / onEmergencyAnnouncement callback should be
+ tracked with proper locking.
+*/
+cancelAnnouncement : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-getProgramInformation'>/**Get current station information.
+</span>@param {Object {android.hardware.radio.RadioManager.ProgramInfo[]}} info a ProgramInfo array of lengh 1 where the information is returned.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_BAD_VALUE} if parameters are invalid, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_INVALID_OPERATION} if the call is out of sequence, &lt;/li&gt;
+  &lt;li&gt;{@link RadioManager#STATUS_DEAD_OBJECT} if the binder transaction to the native
+  service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+@deprecated Use {@link onProgramInfoChanged} callback instead.
+*/
+getProgramInformation : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-getMetadataImage'>/**Retrieves a {@link Bitmap} for the given image ID or null,
+</span> if the image was missing from the tuner.
+
+ This involves doing a call to the tuner, so the bitmap should be cached
+ on the application side.
+
+ If the method returns null for non-zero ID, it means the image was
+ updated on the tuner side. There is a race conditon between fetching
+ image for an old ID and tuner updating the image (and cleaning up the
+ old image). In such case, a new ProgramInfo with updated image id will
+ be sent with a {@link onProgramInfoChanged} callback.
+@param {Number} id The image identifier, retrieved with
+           {@link RadioMetadata#getBitmapId(String)}.
+@return {Object {android.graphics.Bitmap}} A {@link Bitmap} or null.
+@throws IllegalArgumentException if id==0
+@hide This API is not thoroughly elaborated yet
+*/
+getMetadataImage : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-startBackgroundScan'>/**Initiates a background scan to update internally cached program list.
+</span>
+ It may not be necessary to initiate the scan explicitly - the scan MAY be performed on boot.
+
+ The operation is asynchronous and {@link android.hardware.radio.RadioTuner.Callback} backgroundScanComplete or onError will
+ be called if the return value of this call was {@code true}. As result of this call
+ programListChanged may be triggered (if the scanned list differs).
+@return {Boolean} {@code true} if the scan was properly scheduled, {@code false} if the scan feature
+ is unavailable; ie. temporarily due to ongoing foreground playback in single-tuner device
+ or permanently if the feature is not supported
+ (see ModuleProperties#isBackgroundScanningSupported()).
+*/
+startBackgroundScan : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-getProgramList'>/**Get the list of discovered radio stations.
+</span>
+ To get the full list, set filter to null or empty map.
+ Keys must be prefixed with unique vendor Java-style namespace,
+ eg. 'com.somecompany.parameter1'.
+@param {Object {java.util.Map}} vendorFilter vendor-specific selector for radio stations.
+@return {Object {java.util.List}} a list of radio stations.
+@throws IllegalStateException if the scan is in progress or has not been started,
+         startBackgroundScan() call may fix it.
+@throws IllegalArgumentException if the vendorFilter argument is not valid.
+@deprecated Use {@link getDynamicProgramList} instead.
+*/
+getProgramList : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-getDynamicProgramList'>/**Get the dynamic list of discovered radio stations.
+</span>
+ The list object is updated asynchronously; to get the updates register
+ with {@link android.hardware.radio.ProgramList#addListCallback}.
+
+ When the returned object is no longer used, it must be closed.
+@param {Object {ProgramList.Filter}} filter filter for the list, or null to get the full list.
+@return {Object {android.hardware.radio.ProgramList}} the dynamic program list object, close it after use
+         or {@code null} if program list is not supported by the tuner
+*/
+getDynamicProgramList : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-isAnalogForced'>/**Checks, if the analog playback is forced, see setAnalogForced.
+</span>@throws IllegalStateException if the switch is not supported at current
+         configuration.
+@return {Boolean} {@code true} if analog is forced, {@code false} otherwise.
+@deprecated Use {@link isConfigFlagSet(int)} instead.
+*/
+isAnalogForced : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-setAnalogForced'>/**Forces the analog playback for the supporting radio technology.
+</span>
+ User may disable digital playback for FM HD Radio or hybrid FM/DAB with
+ this option. This is purely user choice, ie. does not reflect digital-
+ analog handover managed from the HAL implementation side.
+
+ Some radio technologies may not support this, ie. DAB.
+@param {Boolean} isForced {@code true} to force analog, {@code false} for a default behaviour.
+@throws IllegalStateException if the switch is not supported at current
+         configuration.
+@deprecated Use {@link setConfigFlag(int, boolean)} instead.
+*/
+setAnalogForced : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-isConfigFlagSupported'>/**Checks, if a given config flag is supported
+</span>@param {Number} flag Flag to check.
+@return {Boolean} True, if the flag is supported.
+*/
+isConfigFlagSupported : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-isConfigFlagSet'>/**Fetches the current setting of a given config flag.
+</span>
+ The success/failure result is consistent with isConfigFlagSupported.
+@param {Number} flag Flag to fetch.
+@return {Boolean} The current value of the flag.
+@throws IllegalStateException if the flag is not applicable right now.
+@throws UnsupportedOperationException if the flag is not supported at all.
+*/
+isConfigFlagSet : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-setConfigFlag'>/**Sets the config flag.
+</span>
+ The success/failure result is consistent with isConfigFlagSupported.
+@param {Number} flag Flag to set.
+@param {Boolean} value The new value of a given flag.
+@throws IllegalStateException if the flag is not applicable right now.
+@throws UnsupportedOperationException if the flag is not supported at all.
+*/
+setConfigFlag : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-setParameters'>/**Generic method for setting vendor-specific parameter values.
+</span> The framework does not interpret the parameters, they are passed
+ in an opaque manner between a vendor application and HAL.
+
+ Framework does not make any assumptions on the keys or values, other than
+ ones stated in VendorKeyValue documentation (a requirement of key
+ prefixes).
+ See VendorKeyValue at hardware/interfaces/broadcastradio/2.0/types.hal.
+
+ For each pair in the result map, the key will be one of the keys
+ contained in the input (possibly with wildcards expanded), and the value
+ will be a vendor-specific result status (such as &quot;OK&quot; or an error code).
+ The implementation may choose to return an empty map, or only return
+ a status for a subset of the provided inputs, at its discretion.
+
+ Application and HAL must not use keys with unknown prefix. In particular,
+ it must not place a key-value pair in results vector for unknown key from
+ parameters vector - instead, an unknown key should simply be ignored.
+ In other words, results vector may contain a subset of parameter keys
+ (however, the framework doesn't enforce a strict subset - the only
+ formal requirement is vendor domain prefix for keys).
+@param {Object {java.util.Map}} parameters Vendor-specific key-value pairs.
+@return {Object {java.util.Map}} Operation completion status for parameters being set.
+*/
+setParameters : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-getParameters'>/**Generic method for retrieving vendor-specific parameter values.
+</span> The framework does not interpret the parameters, they are passed
+ in an opaque manner between a vendor application and HAL.
+
+ Framework does not cache set/get requests, so it's possible for
+ getParameter to return a different value than previous setParameter call.
+
+ The syntax and semantics of keys are up to the vendor (as long as prefix
+ rules are obeyed). For instance, vendors may include some form of
+ wildcard support. In such case, result vector may be of different size
+ than requested keys vector. However, wildcards are not recognized by
+ framework and they are passed as-is to the HAL implementation.
+
+ Unknown keys must be ignored and not placed into results vector.
+@param {Object {java.util.List}} keys Parameter keys to fetch.
+@return {Object {java.util.Map}} Vendor-specific key-value pairs.
+*/
+getParameters : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-isAntennaConnected'>/**Get current antenna connection state for current configuration.
+</span> Only valid if a configuration has been applied.
+@return {Boolean} {@code true} if the antenna is connected, {@code false} otherwise.
+@deprecated Use {@link onAntennaState} callback instead
+*/
+isAntennaConnected : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-method-hasControl'>/**Indicates if this client actually controls the tuner.
+</span> Control is always granted after
+ {@link android.hardware.radio.RadioManager#openTuner(int,
+ android.hardware.radio.RadioManager.BandConfig, boolean, android.hardware.radio.RadioTuner.Callback, Handler)}
+ returns a non null tuner interface.
+ Control is lost when another client opens an interface on the same tuner.
+ When this happens, {@link android.hardware.radio.RadioTuner.Callback#onControlChanged(boolean)} is received.
+ The client can either wait for control to be returned (which is indicated by the same
+ callback) or close and reopen the tuner interface.
+@return {Boolean} {@code true} if this interface controls the tuner,
+ {@code false} otherwise or if a problem occured retrieving the state.
+*/
+hasControl : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

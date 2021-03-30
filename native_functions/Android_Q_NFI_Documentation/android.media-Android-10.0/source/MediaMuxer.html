@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaMuxer'>/**@class android.media.MediaMuxer
+</span>@extends java.lang.Object
+
+ MediaMuxer facilitates muxing elementary streams. Currently MediaMuxer supports MP4, Webm
+ and 3GP file as the output. It also supports muxing B-frames in MP4 since Android Nougat.
+ &lt;p&gt;
+ It is generally used like this:
+
+ &lt;pre&gt;
+ MediaMuxer muxer = new MediaMuxer(&quot;temp.mp4&quot;, OutputFormat.MUXER_OUTPUT_MPEG_4);
+ // More often, the MediaFormat will be retrieved from MediaCodec.getOutputFormat()
+ // or MediaExtractor.getTrackFormat().
+ MediaFormat audioFormat = new MediaFormat(...);
+ MediaFormat videoFormat = new MediaFormat(...);
+ int audioTrackIndex = muxer.addTrack(audioFormat);
+ int videoTrackIndex = muxer.addTrack(videoFormat);
+ ByteBuffer inputBuffer = ByteBuffer.allocate(bufferSize);
+ boolean finished = false;
+ BufferInfo bufferInfo = new BufferInfo();
+
+ muxer.start();
+ while(!finished) {
+   // getInputBuffer() will fill the inputBuffer with one frame of encoded
+   // sample from either MediaCodec or MediaExtractor, set isAudioSample to
+   // true when the sample is audio data, set up all the fields of bufferInfo,
+   // and return true if there are no more samples.
+   finished = getInputBuffer(inputBuffer, isAudioSample, bufferInfo);
+   if (!finished) {
+     int currentTrackIndex = isAudioSample ? audioTrackIndex : videoTrackIndex;
+     muxer.writeSampleData(currentTrackIndex, inputBuffer, bufferInfo);
+   }
+ };
+ muxer.stop();
+ muxer.release();
+ &lt;/pre&gt;
+
+
+ &lt;h4&gt;Metadata Track&lt;/h4&gt;
+ &lt;p&gt;
+  Per-frame metadata is useful in carrying extra information that correlated with video or audio to
+  facilitate offline processing, e.g. gyro signals from the sensor could help video stabilization when
+  doing offline processing. Metadata track is only supported in MP4 container. When adding a new
+  metadata track, track's mime format must start with prefix &quot;application/&quot;, e.g. &quot;applicaton/gyro&quot;.
+  Metadata's format/layout will be defined by the application. Writing metadata is nearly the same as
+  writing video/audio data except that the data will not be from mediacodec. Application just needs
+  to pass the bytebuffer that contains the metadata and also the associated timestamp to the
+  {@link #writeSampleData} api. The timestamp must be in the same time base as video and audio. The
+  generated MP4 file uses TextMetaDataSampleEntry defined in section 12.3.3.2 of the ISOBMFF to signal
+  the metadata's mime format. When using{@link android.media.MediaExtractor} to extract the file with
+  metadata track, the mime format of the metadata will be extracted into {@link android.media.MediaFormat}.
+
+ &lt;pre class=prettyprint&gt;
+   MediaMuxer muxer = new MediaMuxer(&quot;temp.mp4&quot;, OutputFormat.MUXER_OUTPUT_MPEG_4);
+   // SetUp Video/Audio Tracks.
+   MediaFormat audioFormat = new MediaFormat(...);
+   MediaFormat videoFormat = new MediaFormat(...);
+   int audioTrackIndex = muxer.addTrack(audioFormat);
+   int videoTrackIndex = muxer.addTrack(videoFormat);
+
+   // Setup Metadata Track
+   MediaFormat metadataFormat = new MediaFormat(...);
+   metadataFormat.setString(KEY_MIME, &quot;application/gyro&quot;);
+   int metadataTrackIndex = muxer.addTrack(metadataFormat);
+
+   muxer.start();
+   while(..) {
+       // Allocate bytebuffer and write gyro data(x,y,z) into it.
+       ByteBuffer metaData = ByteBuffer.allocate(bufferSize);
+       metaData.putFloat(x);
+       metaData.putFloat(y);
+       metaData.putFloat(z);
+       BufferInfo metaInfo = new BufferInfo();
+       // Associate this metadata with the video frame by setting
+       // the same timestamp as the video frame.
+       metaInfo.presentationTimeUs = currentVideoTrackTimeUs;
+       metaInfo.offset = 0;
+       metaInfo.flags = 0;
+       metaInfo.size = bufferSize;
+       muxer.writeSampleData(metadataTrackIndex, metaData, metaInfo);
+   };
+   muxer.stop();
+   muxer.release();
+ }&lt;/pre&gt;
+
+ &lt;h2 id=History&gt;&lt;a name=&quot;History&quot;&gt;&lt;/a&gt;Features and API History&lt;/h2&gt;
+ &lt;p&gt;
+ The following table summarizes the feature support in different API version and containers.
+ For API version numbers, see {@link android.os.Build.VERSION_CODES}.
+
+ &lt;style&gt;
+ .api &gt; tr &gt; th, .api &gt; tr &gt; td { text-align: center; padding: 4px 4px; }
+ .api &gt; tr &gt; th     { vertical-align: bottom; }
+ .api &gt; tr &gt; td     { vertical-align: middle; }
+ .sml &gt; tr &gt; th, .sml &gt; tr &gt; td { text-align: center; padding: 2px 4px; }
+ .fn { text-align: center; }
+ &lt;/style&gt;
+
+ &lt;table align=&quot;right&quot; style=&quot;width: 0%&quot;&gt;
+  &lt;thead&gt;
+   &lt;tbody class=api&gt;
+    &lt;tr&gt;&lt;th&gt;Symbol&lt;/th&gt;
+    &lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;
+   &lt;/tbody&gt;
+  &lt;/thead&gt;
+  &lt;tbody class=sml&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9679;&lt;/td&gt;&lt;td&gt;Supported&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9675;&lt;/td&gt;&lt;td&gt;Not supported&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#9639;&lt;/td&gt;&lt;td&gt;Supported in MP4/WebM/3GP&lt;/td&gt;&lt;/tr&gt;
+   &lt;tr&gt;&lt;td&gt;&amp;#8277;&lt;/td&gt;&lt;td&gt;Only Supported in MP4&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+&lt;table align=&quot;center&quot; style=&quot;width: 100%;&quot;&gt;
+  &lt;thead class=api&gt;
+   &lt;tr&gt;
+    &lt;th rowspan=2&gt;Feature&lt;/th&gt;
+    &lt;th colspan=&quot;24&quot;&gt;SDK Version&lt;/th&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;th&gt;18&lt;/th&gt;
+    &lt;th&gt;19&lt;/th&gt;
+    &lt;th&gt;20&lt;/th&gt;
+    &lt;th&gt;21&lt;/th&gt;
+    &lt;th&gt;22&lt;/th&gt;
+    &lt;th&gt;23&lt;/th&gt;
+    &lt;th&gt;24&lt;/th&gt;
+    &lt;th&gt;25&lt;/th&gt;
+    &lt;th&gt;26+&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+ &lt;tbody class=api&gt;
+   &lt;tr&gt;
+    &lt;td align=&quot;center&quot;&gt;MP4 container&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+    &lt;td align=&quot;center&quot;&gt;WebM container&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+    &lt;td align=&quot;center&quot;&gt;3GP container&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9679;&lt;/td&gt;
+   &lt;/tr&gt;
+    &lt;td align=&quot;center&quot;&gt;Muxing B-Frames(bi-directional predicted frames)&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;/tr&gt;
+    &lt;td align=&quot;center&quot;&gt;Muxing Single Video/Audio Track&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+    &lt;td&gt;&amp;#9639;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;/tr&gt;
+    &lt;td align=&quot;center&quot;&gt;Muxing Multiple Video/Audio Tracks&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;/tr&gt;
+    &lt;td align=&quot;center&quot;&gt;Muxing Metadata Tracks&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#9675;&lt;/td&gt;
+    &lt;td&gt;&amp;#8277;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+*/
+var MediaMuxer = {
+
+<span id='android-media-MediaMuxer-method-setOrientationHint'>/**Sets the orientation hint for output video playback.
+</span> &lt;p&gt;This method should be called before {@link #start}. Calling this
+ method will not rotate the video frame when muxer is generating the file,
+ but add a composition matrix containing the rotation angle in the output
+ video if the output format is
+ {@link android.media.MediaMuxer.OutputFormat#MUXER_OUTPUT_MPEG_4} so that a video player can
+ choose the proper orientation for playback. Note that some video players
+ may choose to ignore the composition matrix in a video during playback.
+ By default, the rotation degree is 0.&lt;/p&gt;
+@param {Number} degrees the angle to be rotated clockwise in degrees.
+ The supported angles are 0, 90, 180, and 270 degrees.
+@throws IllegalArgumentException if degree is not supported.
+@throws IllegalStateException If this method is called after {@link #start}.
+*/
+setOrientationHint : function(  ) {},
+
+<span id='android-media-MediaMuxer-method-setLocation'>/**Set and store the geodata (latitude and longitude) in the output file.
+</span> This method should be called before {@link #start}. The geodata is stored
+ in udta box if the output format is
+ {@link android.media.MediaMuxer.OutputFormat#MUXER_OUTPUT_MPEG_4}, and is ignored for other output
+ formats. The geodata is stored according to ISO-6709 standard.
+@param {Number} latitude Latitude in degrees. Its value must be in the range [-90,
+ 90].
+@param {Number} longitude Longitude in degrees. Its value must be in the range
+ [-180, 180].
+@throws IllegalArgumentException If the given latitude or longitude is out
+ of range.
+@throws IllegalStateException If this method is called after {@link #start}.
+*/
+setLocation : function(  ) {},
+
+<span id='android-media-MediaMuxer-method-start'>/**Starts the muxer.
+</span> &lt;p&gt;Make sure this is called after {@link #addTrack} and before
+ {@link #writeSampleData}.&lt;/p&gt;
+@throws IllegalStateException If this method is called after {@link #start}
+ or Muxer is released
+*/
+start : function(  ) {},
+
+<span id='android-media-MediaMuxer-method-stop'>/**Stops the muxer.
+</span> &lt;p&gt;Once the muxer stops, it can not be restarted.&lt;/p&gt;
+@throws IllegalStateException if muxer is in the wrong state.
+*/
+stop : function(  ) {},
+
+<span id='android-media-MediaMuxer-method-addTrack'>/**Adds a track with the specified format.
+</span> &lt;p&gt;
+ The following table summarizes support for specific format keys across android releases.
+ Keys marked with '+:' are required.
+
+ &lt;table style=&quot;width: 0%&quot;&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;
+    &lt;th rowspan=2&gt;OS Version(s)&lt;/th&gt;
+    &lt;td colspan=3&gt;{@code MediaFormat} keys used for&lt;/th&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;th&gt;All Tracks&lt;/th&gt;
+    &lt;th&gt;Audio Tracks&lt;/th&gt;
+    &lt;th&gt;Video Tracks&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}&lt;/td&gt;
+    &lt;td rowspan=7&gt;+: {@link android.media.MediaFormat#KEY_MIME}&lt;/td&gt;
+    &lt;td rowspan=3&gt;+: {@link android.media.MediaFormat#KEY_SAMPLE_RATE},&lt;br&gt;
+        +: {@link android.media.MediaFormat#KEY_CHANNEL_COUNT},&lt;br&gt;
+        +: &lt;strong&gt;codec-specific data&lt;sup&gt;AAC&lt;/sup&gt;&lt;/strong&gt;&lt;/td&gt;
+    &lt;td rowspan=5&gt;+: {@link android.media.MediaFormat#KEY_WIDTH},&lt;br&gt;
+        +: {@link android.media.MediaFormat#KEY_HEIGHT},&lt;br&gt;
+        no {@code KEY_ROTATION},
+        use {@link #setOrientationHint setOrientationHint()}&lt;sup&gt;.mp4&lt;/sup&gt;,&lt;br&gt;
+        +: &lt;strong&gt;codec-specific data&lt;sup&gt;AVC, MPEG4&lt;/sup&gt;&lt;/strong&gt;&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#KITKAT}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#KITKAT_WATCH}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP}&lt;/td&gt;
+    &lt;td rowspan=4&gt;as above, plus&lt;br&gt;
+        +: &lt;strong&gt;codec-specific data&lt;sup&gt;Vorbis &amp; .webm&lt;/sup&gt;&lt;/strong&gt;&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#M}&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_BIT_RATE}&lt;sup&gt;AAC&lt;/sup&gt;&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#N}&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        &lt;!-- {link MediaFormat#KEY_MAX_BIT_RATE}&lt;sup&gt;AAC, MPEG4&lt;/sup&gt;,&lt;br&gt; --&gt;
+        {@link android.media.MediaFormat#KEY_BIT_RATE}&lt;sup&gt;MPEG4&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_HDR_STATIC_INFO}&lt;sup&gt;#, .webm&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_COLOR_STANDARD}&lt;sup&gt;#&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_COLOR_TRANSFER}&lt;sup&gt;#&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_COLOR_RANGE}&lt;sup&gt;#&lt;/sup&gt;,&lt;br&gt;
+        +: &lt;strong&gt;codec-specific data&lt;sup&gt;HEVC&lt;/sup&gt;&lt;/strong&gt;,&lt;br&gt;
+        codec-specific data&lt;sup&gt;VP9&lt;/sup&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td colspan=4&gt;
+     &lt;p class=note&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;br&gt;
+      #: storing into container metadata.&lt;br&gt;
+      .mp4, .webm&amp;hellip;: for listed containers&lt;br&gt;
+      MPEG4, AAC&amp;hellip;: for listed codecs
+    &lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td colspan=4&gt;
+     &lt;p class=note&gt;Note that the codec-specific data for the track must be specified using
+     this method. Furthermore, codec-specific data must not be passed/specified via the
+     {@link #writeSampleData writeSampleData()} call.
+    &lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;
+ The following table summarizes codec support for containers across android releases:
+
+ &lt;table style=&quot;width: 0%&quot;&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;
+    &lt;th rowspan=2&gt;OS Version(s)&lt;/th&gt;
+    &lt;td colspan=3&gt;Codec support&lt;/th&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;th&gt;{@linkplain android.media.MediaMuxer.OutputFormat#MUXER_OUTPUT_MPEG_4 MP4}&lt;/th&gt;
+    &lt;th&gt;{@linkplain android.media.MediaMuxer.OutputFormat#MUXER_OUTPUT_WEBM WEBM}&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}&lt;/td&gt;
+    &lt;td rowspan=6&gt;{@link android.media.MediaFormat#MIMETYPE_AUDIO_AAC AAC},&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_AUDIO_AMR_NB NB-AMR},&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_AUDIO_AMR_WB WB-AMR},&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_VIDEO_H263 H.263},&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_VIDEO_MPEG4 MPEG-4},&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_VIDEO_AVC AVC} (H.264)&lt;/td&gt;
+    &lt;td rowspan=3&gt;Not supported&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#KITKAT}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#KITKAT_WATCH}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP}&lt;/td&gt;
+    &lt;td rowspan=3&gt;{@link android.media.MediaFormat#MIMETYPE_AUDIO_VORBIS Vorbis},&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_VIDEO_VP8 VP8}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#M}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#N}&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_VIDEO_HEVC HEVC} (H.265)&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#MIMETYPE_VIDEO_VP9 VP9}&lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+@param {Object {MediaFormat}} format The media format for the track.  This must not be an empty
+               MediaFormat.
+@return {Number} The track index for this newly added track, and it should be used
+ in the {@link #writeSampleData}.
+@throws IllegalArgumentException if format is invalid.
+@throws IllegalStateException if muxer is in the wrong state.
+*/
+addTrack : function(  ) {},
+
+<span id='android-media-MediaMuxer-method-writeSampleData'>/**Writes an encoded sample into the muxer.
+</span> &lt;p&gt;The application needs to make sure that the samples are written into
+ the right tracks. Also, it needs to make sure the samples for each track
+ are written in chronological order (e.g. in the order they are provided
+ by the encoder.)&lt;/p&gt;
+@param {Number} byteBuf The encoded sample.
+@param {Object {ByteBuffer}} trackIndex The track index for this sample.
+@param {Object {MediaCodec.BufferInfo}} bufferInfo The buffer information related to this sample.
+@throws IllegalArgumentException if trackIndex, byteBuf or bufferInfo is  invalid.
+@throws IllegalStateException if muxer is in wrong state.
+ MediaMuxer uses the flags provided in {@link MediaCodec.BufferInfo},
+ to signal sync frames.
+*/
+writeSampleData : function(  ) {},
+
+<span id='android-media-MediaMuxer-method-release'>/**Make sure you call this when you're done to free up any resources
+</span> instead of relying on the garbage collector to do this for you at
+ some point in the future.
+*/
+release : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ike-ikev2-message-IkeMessage'>/**@class com.android.ike.ikev2.message.IkeMessage
+</span>@extends java.lang.Object
+
+ IkeMessage represents an IKE message.
+
+ &lt;p&gt;It contains all attributes and provides methods for encoding, decoding, encrypting and
+ decrypting.
+
+ @see &lt;a href=&quot;https://tools.ietf.org/html/rfc7296#section-3&quot;&gt;RFC 7296, Internet Key Exchange
+     Protocol Version 2 (IKEv2)&lt;/a&gt;
+*/
+var IkeMessage = {
+
+<span id='com-android-ike-ikev2-message-IkeMessage-property-PROCEDURE_TYPE_BASE'>/***/
+</span>PROCEDURE_TYPE_BASE : &quot;0&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_IKE_INIT_RESP'>/***/
+</span>MESSAGE_TYPE_IKE_INIT_RESP : &quot;1&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_IKE_AUTH_RESP'>/***/
+</span>MESSAGE_TYPE_IKE_AUTH_RESP : &quot;2&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_DELETE_IKE_REQ'>/***/
+</span>MESSAGE_TYPE_DELETE_IKE_REQ : &quot;3&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_DELETE_IKE_RESP'>/***/
+</span>MESSAGE_TYPE_DELETE_IKE_RESP : &quot;4&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_REKEY_IKE_REQ'>/***/
+</span>MESSAGE_TYPE_REKEY_IKE_REQ : &quot;5&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_REKEY_IKE_RESP'>/***/
+</span>MESSAGE_TYPE_REKEY_IKE_RESP : &quot;6&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-NOTIFICATION_TYPE_BASE'>/***/
+</span>NOTIFICATION_TYPE_BASE : &quot;100&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_UNSUPPORTED_CRITICAL_PAYLOAD'>/***/
+</span>MESSAGE_TYPE_UNSUPPORTED_CRITICAL_PAYLOAD : &quot;101&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_INVALID_MAJOR_VERSION'>/***/
+</span>MESSAGE_TYPE_INVALID_MAJOR_VERSION : &quot;105&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-MESSAGE_TYPE_INVALID_SYNTAX'>/***/
+</span>MESSAGE_TYPE_INVALID_SYNTAX : &quot;107&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-ikeHeader'>/***/
+</span>ikeHeader : &quot;null&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-property-ikePayloadList'>/***/
+</span>ikePayloadList : &quot;null&quot;,
+<span id='com-android-ike-ikev2-message-IkeMessage-method-getSecurityProvider'>/**Get security provider for IKE library
+</span>
+ &lt;p&gt;Use BouncyCastleProvider as the default security provider.
+@return {Object {java.security.Provider}} the security provider of IKE library.
+*/
+getSecurityProvider : function(  ) {},
+
+<span id='com-android-ike-ikev2-message-IkeMessage-method-decode'>/**Decode unencrypted IKE message body and create an instance of IkeMessage.
+</span>
+ &lt;p&gt;This method catches all RuntimeException during decoding incoming IKE packet.
+@param {Object {IkeHeader}} header the IKE header that is decoded but not validated.
+@param {Object {byte[]}} inputPacket the byte array contains the whole IKE message.
+@return {Object {com.android.ike.ikev2.message.IkeMessage}} the IkeMessage instance.
+@throws IkeException if there is any protocol error.
+*/
+decode : function(  ) {},
+
+<span id='com-android-ike-ikev2-message-IkeMessage-method-decode'>/**Decrypt and decode encrypted IKE message body and create an instance of IkeMessage.
+</span>@param {Object {IkeSessionOptions}} ikeSessionOptions IkeSessionOptions that contains cryptographic algorithm set.
+@param {Object {SaRecord.IkeSaRecord}} ikeSaRecord ikeSaRecord where this packet is sent on.
+@param {Object {IkeHeader}} ikeHeader header of IKE packet.
+@param {Object {byte[]}} packet IKE packet as a byte array.
+@return {Object {com.android.ike.ikev2.message.IkeMessage}} decoded IKE message.
+@throws IkeException for decoding errors.
+@throws GeneralSecurityException if there is any error during integrity check or decryption.
+*/
+decode : function(  ) {},
+
+<span id='com-android-ike-ikev2-message-IkeMessage-method-encode'>/**Encode unencrypted IKE message.
+</span>@return {Number} encoded IKE message in byte array.
+*/
+encode : function(  ) {},
+
+<span id='com-android-ike-ikev2-message-IkeMessage-method-encode'>/**Encrypt and encode packet.
+</span>@param {Object {IkeSessionOptions}} ikeSessionOptions IkeSessionOptions that contains cryptographic algorithm set.
+@param {Object {SaRecord.IkeSaRecord}} ikeSaRecord ikeSaRecord where this packet is sent on.
+@return {Number} encoded IKE message in byte array.
+*/
+encode : function(  ) {},
+
+<span id='com-android-ike-ikev2-message-IkeMessage-method-getMessageType'>/**
+</span>*/
+getMessageType : function(  ) {},
+
+<span id='com-android-ike-ikev2-message-IkeMessage-method-setIkeMessageHelper'>/**For setting mocked IIkeMessageHelper for testing
+</span>@param {Object {IkeMessage.IIkeMessageHelper}} helper the mocked IIkeMessageHelper
+*/
+setIkeMessageHelper : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

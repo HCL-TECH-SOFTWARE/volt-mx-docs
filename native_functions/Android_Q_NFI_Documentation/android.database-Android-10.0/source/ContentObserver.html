@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-ContentObserver'>/**@class android.database.ContentObserver
+</span>@extends java.lang.Object
+
+ Receives call backs for changes to content.
+ Must be implemented by objects which are added to a {@link android.database.ContentObservable}.
+*/
+var ContentObserver = {
+
+<span id='android-database-ContentObserver-method-getContentObserver'>/**Gets access to the binder transport object. Not for public consumption.
+</span>
+ {@hide}
+*/
+getContentObserver : function(  ) {},
+
+<span id='android-database-ContentObserver-method-releaseContentObserver'>/**Gets access to the binder transport object, and unlinks the transport object
+</span> from the ContentObserver. Not for public consumption.
+
+ {@hide}
+*/
+releaseContentObserver : function(  ) {},
+
+<span id='android-database-ContentObserver-method-deliverSelfNotifications'>/**Returns true if this observer is interested receiving self-change notifications.
+</span>
+ Subclasses should override this method to indicate whether the observer
+ is interested in receiving notifications for changes that it made to the
+ content itself.
+@return {Boolean} True if self-change notifications should be delivered to the observer.
+*/
+deliverSelfNotifications : function(  ) {},
+
+<span id='android-database-ContentObserver-method-onChange'>/**This method is called when a content change occurs.
+</span> &lt;p&gt;
+ Subclasses should override this method to handle content changes.
+ &lt;/p&gt;
+@param {Boolean} selfChange True if this is a self-change notification.
+*/
+onChange : function(  ) {},
+
+<span id='android-database-ContentObserver-method-onChange'>/**This method is called when a content change occurs.
+</span> Includes the changed content Uri when available.
+ &lt;p&gt;
+ Subclasses should override this method to handle content changes.
+ To ensure correct operation on older versions of the framework that
+ did not provide a Uri argument, applications should also implement
+ the {@link #onChange}(boolean) overload of this method whenever they
+ implement the {@link #onChange(boolean, Uri)} overload.
+ &lt;/p&gt;&lt;p&gt;
+ Example implementation:
+ &lt;pre&gt;&lt;code&gt;
+ // Implement the onChange(boolean) method to delegate the change notification to
+ // the onChange(boolean, Uri) method to ensure correct operation on older versions
+ // of the framework that did not have the onChange(boolean, Uri) method.
+ {@literal @Override}
+ public void onChange(boolean selfChange) {
+     onChange(selfChange, null);
+ }
+
+ // Implement the onChange(boolean, Uri) method to take advantage of the new Uri argument.
+ {@literal @Override}
+ public void onChange(boolean selfChange, Uri uri) {
+     // Handle change.
+ }
+ &lt;/code&gt;&lt;/pre&gt;
+ &lt;/p&gt;
+@param {Boolean} selfChange True if this is a self-change notification.
+@param {Object {Uri}} uri The Uri of the changed content, or null if unknown.
+*/
+onChange : function(  ) {},
+
+<span id='android-database-ContentObserver-method-onChange'>/**Dispatches a change notification to the observer. Includes the changed
+</span> content Uri when available and also the user whose content changed.
+@param {Boolean} selfChange True if this is a self-change notification.
+@param {Object {Uri}} uri The Uri of the changed content, or null if unknown.
+@param {Number} userId The user whose content changed. Can be either a specific
+         user or {@link UserHandle#USER_ALL}.
+@hide 
+*/
+onChange : function(  ) {},
+
+<span id='android-database-ContentObserver-method-dispatchChange'>/**Dispatches a change notification to the observer.
+</span> &lt;p&gt;
+ If a {@link Handler} was supplied to the {@link android.database.ContentObserver} constructor,
+ then a call to the {@link #onChange} method is posted to the handler's message queue.
+ Otherwise, the {@link #onChange} method is invoked immediately on this thread.
+ &lt;/p&gt;
+@param {Boolean} selfChange True if this is a self-change notification.
+@deprecated Use {@link #dispatchChange(boolean, Uri)} instead.
+*/
+dispatchChange : function(  ) {},
+
+<span id='android-database-ContentObserver-method-dispatchChange'>/**Dispatches a change notification to the observer.
+</span> Includes the changed content Uri when available.
+ &lt;p&gt;
+ If a {@link Handler} was supplied to the {@link android.database.ContentObserver} constructor,
+ then a call to the {@link #onChange} method is posted to the handler's message queue.
+ Otherwise, the {@link #onChange} method is invoked immediately on this thread.
+ &lt;/p&gt;
+@param {Boolean} selfChange True if this is a self-change notification.
+@param {Object {Uri}} uri The Uri of the changed content, or null if unknown.
+*/
+dispatchChange : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

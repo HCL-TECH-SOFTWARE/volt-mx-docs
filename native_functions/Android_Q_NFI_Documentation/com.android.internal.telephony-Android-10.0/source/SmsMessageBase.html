@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-SmsMessageBase'>/**@class com.android.internal.telephony.SmsMessageBase
+</span>@extends java.lang.Object
+
+ Base class declaring the specific methods and members for SmsMessage.
+ {@hide}
+*/
+var SmsMessageBase = {
+
+<span id='com-android-internal-telephony-SmsMessageBase-property-mMessageRef'>/**TP-Message-Reference - Message Reference of sent message. @hide */
+</span>mMessageRef : &quot;null&quot;,
+<span id='com-android-internal-telephony-SmsMessageBase-method-getServiceCenterAddress'>/**Returns the address of the SMS service center that relayed this message
+</span> or null if there is none.
+*/
+getServiceCenterAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getOriginatingAddress'>/**Returns the originating address (sender) of this SMS message in String
+</span> form or null if unavailable
+*/
+getOriginatingAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getDisplayOriginatingAddress'>/**Returns the originating address, or email from address if this message
+</span> was from an email gateway. Returns null if originating address
+ unavailable.
+*/
+getDisplayOriginatingAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getMessageBody'>/**Returns the message body as a String, if it exists and is text based.
+</span>@return {String} message body is there is one, otherwise null
+*/
+getMessageBody : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getMessageClass'>/**Returns the class of this message.
+</span>*/
+getMessageClass : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getDisplayMessageBody'>/**Returns the message body, or email message body if this message was from
+</span> an email gateway. Returns null if message body unavailable.
+*/
+getDisplayMessageBody : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getPseudoSubject'>/**Unofficial convention of a subject line enclosed in parens empty string
+</span> if not present
+*/
+getPseudoSubject : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getTimestampMillis'>/**Returns the service centre timestamp in currentTimeMillis() format
+</span>*/
+getTimestampMillis : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isEmail'>/**Returns true if message is an email.
+</span>@return {Boolean} true if this message came through an email gateway and email
+         sender / subject / parsed body are available
+*/
+isEmail : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getEmailBody'>/**
+</span>@return {String} if isEmail() is true, body of the email sent through the gateway.
+         null otherwise
+*/
+getEmailBody : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getEmailFrom'>/**
+</span>@return {String} if isEmail() is true, email from address of email sent through
+         the gateway. null otherwise
+*/
+getEmailFrom : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getProtocolIdentifier'>/**Get protocol identifier.
+</span>*/
+getProtocolIdentifier : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isReplace'>/**See TS 23.040 9.2.3.9 returns true if this is a &quot;replace short message&quot;
+</span> SMS
+*/
+isReplace : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isCphsMwiMessage'>/**Returns true for CPHS MWI toggle message.
+</span>@return {Boolean} true if this is a CPHS MWI toggle message See CPHS 4.2 section
+         B.4.2
+*/
+isCphsMwiMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isMWIClearMessage'>/**returns true if this message is a CPHS voicemail / message waiting
+</span> indicator (MWI) clear message
+*/
+isMWIClearMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isMWISetMessage'>/**returns true if this message is a CPHS voicemail / message waiting
+</span> indicator (MWI) set message
+*/
+isMWISetMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isMwiDontStore'>/**returns true if this message is a &quot;Message Waiting Indication Group:
+</span> Discard Message&quot; notification and should not be stored.
+*/
+isMwiDontStore : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getUserData'>/**returns the user data section minus the user data header if one was
+</span> present.
+*/
+getUserData : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getUserDataHeader'>/**Returns an object representing the user data header
+</span>
+ {@hide}
+*/
+getUserDataHeader : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getPdu'>/**Returns the raw PDU for the message.
+</span>*/
+getPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getStatus'>/**For an SMS-STATUS-REPORT message, this returns the status field from
+</span> the status report.  This field indicates the status of a previously
+ submitted SMS, if requested.  See TS 23.040, 9.2.3.15 TP-Status for a
+ description of values.
+@return {Number} 0 indicates the previously sent message was received.
+         See TS 23.040, 9.9.2.3.15 for a description of other possible
+         values.
+*/
+getStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isStatusReportMessage'>/**Return true iff the message is a SMS-STATUS-REPORT message.
+</span>*/
+isStatusReportMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-isReplyPathPresent'>/**Returns true iff the &lt;code&gt;TP-Reply-Path&lt;/code&gt; bit is set in
+</span> this message.
+*/
+isReplyPathPresent : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getStatusOnIcc'>/**Returns the status of the message on the ICC (read, unread, sent, unsent).
+</span>@return {Number} the status of the message on the ICC.  These are:
+         SmsManager.STATUS_ON_ICC_FREE
+         SmsManager.STATUS_ON_ICC_READ
+         SmsManager.STATUS_ON_ICC_UNREAD
+         SmsManager.STATUS_ON_ICC_SEND
+         SmsManager.STATUS_ON_ICC_UNSENT
+*/
+getStatusOnIcc : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getIndexOnIcc'>/**Returns the record index of the message on the ICC (1-based index).
+</span>@return {Number} the record index of the message on the ICC, or -1 if this
+         SmsMessage was not created from a ICC SMS EF record.
+*/
+getIndexOnIcc : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-findNextUnicodePosition'>/**Find the next position to start a new fragment of a multipart SMS.
+</span>@param {Number} currentPosition current start position of the fragment
+@param {Number} byteLimit maximum number of bytes in the fragment
+@param {Object {CharSequence}} msgBody text of the SMS in UTF-16 encoding
+@return {Number} the position to start the next fragment
+*/
+findNextUnicodePosition : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-calcUnicodeEncodingDetails'>/**Calculate the TextEncodingDetails of a message encoded in Unicode.
+</span>*/
+calcUnicodeEncodingDetails : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsMessageBase-method-getRecipientAddress'>/**{@hide}
+</span> Returns the receiver address of this SMS message in String
+ form or null if unavailable
+*/
+getRecipientAddress : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

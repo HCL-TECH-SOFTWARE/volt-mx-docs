@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Environment'>/**@class android.os.Environment
+</span>@extends java.lang.Object
+
+ Provides access to environment variables.
+*/
+var Environment = {
+
+<span id='android-os-Environment-property-DIR_ANDROID'>/**{@hide} */
+</span>DIR_ANDROID : &quot;Android&quot;,
+<span id='android-os-Environment-property-DIRECTORY_ANDROID'>/**{@hide} */
+</span>DIRECTORY_ANDROID : &quot;Android&quot;,
+<span id='android-os-Environment-property-DIRECTORY_MUSIC'>/** Standard directory in which to place any audio files that should be
+</span> in the regular list of music for the user.
+ This may be combined with
+ {@link #DIRECTORY_PODCASTS}, {@link #DIRECTORY_NOTIFICATIONS},
+ {@link #DIRECTORY_ALARMS}, and {@link #DIRECTORY_RINGTONES} as a series
+ of directories to categories a particular audio file as more than one
+ type.
+*/
+DIRECTORY_MUSIC : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_PODCASTS'>/** Standard directory in which to place any audio files that should be
+</span> in the list of podcasts that the user can select (not as regular
+ music).
+ This may be combined with {@link #DIRECTORY_MUSIC},
+ {@link #DIRECTORY_NOTIFICATIONS},
+ {@link #DIRECTORY_ALARMS}, and {@link #DIRECTORY_RINGTONES} as a series
+ of directories to categories a particular audio file as more than one
+ type.
+*/
+DIRECTORY_PODCASTS : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_RINGTONES'>/** Standard directory in which to place any audio files that should be
+</span> in the list of ringtones that the user can select (not as regular
+ music).
+ This may be combined with {@link #DIRECTORY_MUSIC},
+ {@link #DIRECTORY_PODCASTS}, {@link #DIRECTORY_NOTIFICATIONS}, and
+ {@link #DIRECTORY_ALARMS} as a series
+ of directories to categories a particular audio file as more than one
+ type.
+*/
+DIRECTORY_RINGTONES : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_ALARMS'>/** Standard directory in which to place any audio files that should be
+</span> in the list of alarms that the user can select (not as regular
+ music).
+ This may be combined with {@link #DIRECTORY_MUSIC},
+ {@link #DIRECTORY_PODCASTS}, {@link #DIRECTORY_NOTIFICATIONS},
+ and {@link #DIRECTORY_RINGTONES} as a series
+ of directories to categories a particular audio file as more than one
+ type.
+*/
+DIRECTORY_ALARMS : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_NOTIFICATIONS'>/** Standard directory in which to place any audio files that should be
+</span> in the list of notifications that the user can select (not as regular
+ music).
+ This may be combined with {@link #DIRECTORY_MUSIC},
+ {@link #DIRECTORY_PODCASTS},
+ {@link #DIRECTORY_ALARMS}, and {@link #DIRECTORY_RINGTONES} as a series
+ of directories to categories a particular audio file as more than one
+ type.
+*/
+DIRECTORY_NOTIFICATIONS : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_PICTURES'>/** Standard directory in which to place pictures that are available to
+</span> the user.  Note that this is primarily a convention for the top-level
+ public directory, as the media scanner will find and collect pictures
+ in any directory.
+*/
+DIRECTORY_PICTURES : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_MOVIES'>/** Standard directory in which to place movies that are available to
+</span> the user.  Note that this is primarily a convention for the top-level
+ public directory, as the media scanner will find and collect movies
+ in any directory.
+*/
+DIRECTORY_MOVIES : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_DOWNLOADS'>/** Standard directory in which to place files that have been downloaded by
+</span> the user.  Note that this is primarily a convention for the top-level
+ public directory, you are free to download files anywhere in your own
+ private directories.  Also note that though the constant here is
+ named DIRECTORY_DOWNLOADS (plural), the actual file name is non-plural for
+ backwards compatibility reasons.
+*/
+DIRECTORY_DOWNLOADS : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_DCIM'>/** The traditional location for pictures and videos when mounting the
+</span> device as a camera.  Note that this is primarily a convention for the
+ top-level public directory, as this convention makes no sense elsewhere.
+*/
+DIRECTORY_DCIM : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_DOCUMENTS'>/** Standard directory in which to place documents that have been created by
+</span> the user.
+*/
+DIRECTORY_DOCUMENTS : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_SCREENSHOTS'>/** Standard directory in which to place screenshots that have been taken by
+</span> the user. Typically used as a secondary directory under
+ {@link #DIRECTORY_PICTURES}.
+*/
+DIRECTORY_SCREENSHOTS : &quot;null&quot;,
+<span id='android-os-Environment-property-DIRECTORY_AUDIOBOOKS'>/** Standard directory in which to place any audio files which are
+</span> audiobooks.
+*/
+DIRECTORY_AUDIOBOOKS : &quot;null&quot;,
+<span id='android-os-Environment-property-STANDARD_DIRECTORIES'>/** List of standard storage directories.
+</span> &lt;p&gt;
+ Each of its values have its own constant:
+ &lt;ul&gt;
+   &lt;li&gt;{@link #DIRECTORY_MUSIC}
+   &lt;li&gt;{@link #DIRECTORY_PODCASTS}
+   &lt;li&gt;{@link #DIRECTORY_ALARMS}
+   &lt;li&gt;{@link #DIRECTORY_RINGTONES}
+   &lt;li&gt;{@link #DIRECTORY_NOTIFICATIONS}
+   &lt;li&gt;{@link #DIRECTORY_PICTURES}
+   &lt;li&gt;{@link #DIRECTORY_MOVIES}
+   &lt;li&gt;{@link #DIRECTORY_DOWNLOADS}
+   &lt;li&gt;{@link #DIRECTORY_DCIM}
+   &lt;li&gt;{@link #DIRECTORY_DOCUMENTS}
+   &lt;li&gt;{@link #DIRECTORY_AUDIOBOOKS}
+ &lt;/ul&gt;
+ @hide
+*/
+STANDARD_DIRECTORIES : &quot;null&quot;,
+<span id='android-os-Environment-property-HAS_MUSIC'>/**{@hide} */
+</span>HAS_MUSIC : &quot;1&quot;,
+<span id='android-os-Environment-property-HAS_PODCASTS'>/**{@hide} */
+</span>HAS_PODCASTS : &quot;2&quot;,
+<span id='android-os-Environment-property-HAS_RINGTONES'>/**{@hide} */
+</span>HAS_RINGTONES : &quot;4&quot;,
+<span id='android-os-Environment-property-HAS_ALARMS'>/**{@hide} */
+</span>HAS_ALARMS : &quot;8&quot;,
+<span id='android-os-Environment-property-HAS_NOTIFICATIONS'>/**{@hide} */
+</span>HAS_NOTIFICATIONS : &quot;16&quot;,
+<span id='android-os-Environment-property-HAS_PICTURES'>/**{@hide} */
+</span>HAS_PICTURES : &quot;32&quot;,
+<span id='android-os-Environment-property-HAS_MOVIES'>/**{@hide} */
+</span>HAS_MOVIES : &quot;64&quot;,
+<span id='android-os-Environment-property-HAS_DOWNLOADS'>/**{@hide} */
+</span>HAS_DOWNLOADS : &quot;128&quot;,
+<span id='android-os-Environment-property-HAS_DCIM'>/**{@hide} */
+</span>HAS_DCIM : &quot;256&quot;,
+<span id='android-os-Environment-property-HAS_DOCUMENTS'>/**{@hide} */
+</span>HAS_DOCUMENTS : &quot;512&quot;,
+<span id='android-os-Environment-property-HAS_AUDIOBOOKS'>/**{@hide} */
+</span>HAS_AUDIOBOOKS : &quot;1024&quot;,
+<span id='android-os-Environment-property-HAS_ANDROID'>/**{@hide} */
+</span>HAS_ANDROID : &quot;65536&quot;,
+<span id='android-os-Environment-property-HAS_OTHER'>/**{@hide} */
+</span>HAS_OTHER : &quot;131072&quot;,
+<span id='android-os-Environment-property-MEDIA_UNKNOWN'>/** Unknown storage state, such as when a path isn't backed by known storage
+</span> media.
+
+ @see #getExternalStorageState(File)
+*/
+MEDIA_UNKNOWN : &quot;unknown&quot;,
+<span id='android-os-Environment-property-MEDIA_REMOVED'>/** Storage state if the media is not present.
+</span>
+ @see #getExternalStorageState(File)
+*/
+MEDIA_REMOVED : &quot;removed&quot;,
+<span id='android-os-Environment-property-MEDIA_UNMOUNTED'>/** Storage state if the media is present but not mounted.
+</span>
+ @see #getExternalStorageState(File)
+*/
+MEDIA_UNMOUNTED : &quot;unmounted&quot;,
+<span id='android-os-Environment-property-MEDIA_CHECKING'>/** Storage state if the media is present and being disk-checked.
+</span>
+ @see #getExternalStorageState(File)
+*/
+MEDIA_CHECKING : &quot;checking&quot;,
+<span id='android-os-Environment-property-MEDIA_NOFS'>/** Storage state if the media is present but is blank or is using an
+</span> unsupported filesystem.
+
+ @see #getExternalStorageState(File)
+*/
+MEDIA_NOFS : &quot;nofs&quot;,
+<span id='android-os-Environment-property-MEDIA_MOUNTED'>/** Storage state if the media is present and mounted at its mount point with
+</span> read/write access.
+
+ @see #getExternalStorageState(File)
+*/
+MEDIA_MOUNTED : &quot;mounted&quot;,
+<span id='android-os-Environment-property-MEDIA_MOUNTED_READ_ONLY'>/** Storage state if the media is present and mounted at its mount point with
+</span> read-only access.
+
+ @see #getExternalStorageState(File)
+*/
+MEDIA_MOUNTED_READ_ONLY : &quot;mounted_ro&quot;,
+<span id='android-os-Environment-property-MEDIA_SHARED'>/** Storage state if the media is present not mounted, and shared via USB
+</span> mass storage.
+
+ @see #getExternalStorageState(File)
+*/
+MEDIA_SHARED : &quot;shared&quot;,
+<span id='android-os-Environment-property-MEDIA_BAD_REMOVAL'>/** Storage state if the media was removed before it was unmounted.
+</span>
+ @see #getExternalStorageState(File)
+*/
+MEDIA_BAD_REMOVAL : &quot;bad_removal&quot;,
+<span id='android-os-Environment-property-MEDIA_UNMOUNTABLE'>/** Storage state if the media is present but cannot be mounted. Typically
+</span> this happens if the file system on the media is corrupted.
+
+ @see #getExternalStorageState(File)
+*/
+MEDIA_UNMOUNTABLE : &quot;unmountable&quot;,
+<span id='android-os-Environment-property-MEDIA_EJECTING'>/** Storage state if the media is in the process of being ejected.
+</span>
+ @see #getExternalStorageState(File)
+*/
+MEDIA_EJECTING : &quot;ejecting&quot;,
+<span id='android-os-Environment-method-initForCurrentUser'>/**{@hide}
+</span>*/
+initForCurrentUser : function(  ) {},
+
+<span id='android-os-Environment-method-getRootDirectory'>/**Return root of the &quot;system&quot; partition holding the core Android OS.
+</span> Always present and mounted read-only.
+*/
+getRootDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getStorageDirectory'>/**{@hide}
+</span>*/
+getStorageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getOemDirectory'>/**Return root directory of the &quot;oem&quot; partition holding OEM customizations,
+</span> if any. If present, the partition is mounted read-only.
+@hide 
+*/
+getOemDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getOdmDirectory'>/**Return root directory of the &quot;odm&quot; partition holding ODM customizations,
+</span> if any. If present, the partition is mounted read-only.
+@hide 
+*/
+getOdmDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getVendorDirectory'>/**Return root directory of the &quot;vendor&quot; partition that holds vendor-provided
+</span> software that should persist across simple reflashing of the &quot;system&quot; partition.
+@hide 
+*/
+getVendorDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getProductDirectory'>/**Return root directory of the &quot;product&quot; partition holding product-specific
+</span> customizations if any. If present, the partition is mounted read-only.
+@hide 
+*/
+getProductDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getProductServicesDirectory'>/**Return root directory of the &quot;product_services&quot; partition holding middleware
+</span> services if any. If present, the partition is mounted read-only.
+@hide 
+*/
+getProductServicesDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getUserSystemDirectory'>/**Return the system directory for a user. This is for use by system
+</span> services to store files relating to the user. This directory will be
+ automatically deleted when the user is removed.
+@deprecated This directory is valid and still exists, but but callers
+             should &lt;em&gt;strongly&lt;/em&gt; consider switching to using either
+             {@link #getDataSystemCeDirectory(int)} or
+             {@link #getDataSystemDeDirectory(int)}, both of which support
+             fast user wipe.
+@hide 
+*/
+getUserSystemDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getUserConfigDirectory'>/**Returns the config directory for a user. This is for use by system
+</span> services to store files relating to the user which should be readable by
+ any app running as that user.
+@deprecated This directory is valid and still exists, but callers should
+             &lt;em&gt;strongly&lt;/em&gt; consider switching to
+             {@link #getDataMiscCeDirectory(int)} which is protected with
+             user credentials or {@link #getDataMiscDeDirectory(int)}
+             which supports fast user wipe.
+@hide 
+*/
+getUserConfigDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataDirectory'>/**Return the user data directory.
+</span>*/
+getDataDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataDirectory'>/**{@hide}
+</span>*/
+getDataDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getExpandDirectory'>/**{@hide}
+</span>*/
+getExpandDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataSystemDirectory'>/**{@hide}
+</span>*/
+getDataSystemDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataSystemDeDirectory'>/**Returns the base directory for per-user system directory, device encrypted.
+</span> {@hide}
+*/
+getDataSystemDeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataSystemCeDirectory'>/**Returns the base directory for per-user system directory, credential encrypted.
+</span> {@hide}
+*/
+getDataSystemCeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataSystemCeDirectory'>/**Return the &quot;credential encrypted&quot; system directory for a user. This is
+</span> for use by system services to store files relating to the user. This
+ directory supports fast user wipe, and will be automatically deleted when
+ the user is removed.
+ &lt;p&gt;
+ Data stored under this path is &quot;credential encrypted&quot;, which uses an
+ encryption key that is entangled with user credentials, such as a PIN or
+ password. The contents will only be available once the user has been
+ unlocked, as reported by {@code SystemService.onUnlockUser()}.
+ &lt;p&gt;
+ New code should &lt;em&gt;strongly&lt;/em&gt; prefer storing sensitive data in these
+ credential encrypted areas.
+@hide 
+*/
+getDataSystemCeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataSystemDeDirectory'>/**Return the &quot;device encrypted&quot; system directory for a user. This is for
+</span> use by system services to store files relating to the user. This
+ directory supports fast user wipe, and will be automatically deleted when
+ the user is removed.
+ &lt;p&gt;
+ Data stored under this path is &quot;device encrypted&quot;, which uses an
+ encryption key that is tied to the physical device. The contents will
+ only be available once the device has finished a {@code dm-verity}
+ protected boot.
+ &lt;p&gt;
+ New code should &lt;em&gt;strongly&lt;/em&gt; avoid storing sensitive data in these
+ device encrypted areas.
+@hide 
+*/
+getDataSystemDeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataMiscDirectory'>/**{@hide}
+</span>*/
+getDataMiscDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataMiscCeDirectory'>/**{@hide}
+</span>*/
+getDataMiscCeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataMiscCeDirectory'>/**{@hide}
+</span>*/
+getDataMiscCeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataMiscDeDirectory'>/**{@hide}
+</span>*/
+getDataMiscDeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataVendorCeDirectory'>/**{@hide}
+</span>*/
+getDataVendorCeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataVendorDeDirectory'>/**{@hide}
+</span>*/
+getDataVendorDeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataRefProfilesDePackageDirectory'>/**{@hide}
+</span>*/
+getDataRefProfilesDePackageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataProfilesDePackageDirectory'>/**{@hide}
+</span>*/
+getDataProfilesDePackageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataAppDirectory'>/**{@hide}
+</span>*/
+getDataAppDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataStagingDirectory'>/**{@hide}
+</span>*/
+getDataStagingDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataUserCeDirectory'>/**{@hide}
+</span>*/
+getDataUserCeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataUserCeDirectory'>/**{@hide}
+</span>*/
+getDataUserCeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataUserCePackageDirectory'>/**{@hide}
+</span>*/
+getDataUserCePackageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataUserDeDirectory'>/**{@hide}
+</span>*/
+getDataUserDeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataUserDeDirectory'>/**{@hide}
+</span>*/
+getDataUserDeDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataUserDePackageDirectory'>/**{@hide}
+</span>*/
+getDataUserDePackageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataPreloadsDirectory'>/**Return preloads directory.
+</span> &lt;p&gt;This directory may contain pre-loaded content such as
+ {@link #getDataPreloadsDemoDirectory() demo videos} and
+ {@link #getDataPreloadsAppsDirectory() APK files} .
+ {@hide}
+*/
+getDataPreloadsDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataPreloadsDemoDirectory'>/**
+</span>@see #getDataPreloadsDirectory()
+ {@hide}
+*/
+getDataPreloadsDemoDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataPreloadsAppsDirectory'>/**
+</span>@see #getDataPreloadsDirectory()
+ {@hide}
+*/
+getDataPreloadsAppsDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataPreloadsMediaDirectory'>/**
+</span>@see #getDataPreloadsDirectory()
+ {@hide}
+*/
+getDataPreloadsMediaDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataPreloadsFileCacheDirectory'>/**Returns location of preloaded cache directory for package name
+</span>@see #getDataPreloadsDirectory()
+ {@hide}
+*/
+getDataPreloadsFileCacheDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getDataPreloadsFileCacheDirectory'>/**Returns location of preloaded cache directory.
+</span>@see #getDataPreloadsDirectory()
+ {@hide}
+*/
+getDataPreloadsFileCacheDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getPackageCacheDirectory'>/**Returns location of packages cache directory.
+</span> {@hide}
+*/
+getPackageCacheDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getExternalStorageDirectory'>/**Return the primary shared/external storage directory. This directory may
+</span> not currently be accessible if it has been mounted by the user on their
+ computer, has been removed from the device, or some other problem has
+ happened. You can determine its current state with
+ {@link #getExternalStorageState}().
+ &lt;p&gt;
+ &lt;em&gt;Note: don't be confused by the word &quot;external&quot; here. This directory
+ can better be thought as media/shared storage. It is a filesystem that
+ can hold a relatively large amount of data and that is shared across all
+ applications (does not enforce permissions). Traditionally this is an SD
+ card, but it may also be implemented as built-in storage in a device that
+ is distinct from the protected internal storage and can be mounted as a
+ filesystem on a computer.&lt;/em&gt;
+ &lt;p&gt;
+ On devices with multiple users (as described by {@link android.os.UserManager}),
+ each user has their own isolated shared storage. Applications only have
+ access to the shared storage for the user they're running as.
+ &lt;p&gt;
+ In devices with multiple shared/external storage directories, this
+ directory represents the primary storage that the user will interact
+ with. Access to secondary storage is available through
+ {@link Context#getExternalFilesDirs(String)},
+ {@link Context#getExternalCacheDirs()}, and
+ {@link Context#getExternalMediaDirs()}.
+ &lt;p&gt;
+ Applications should not directly use this top-level directory, in order
+ to avoid polluting the user's root namespace. Any files that are private
+ to the application should be placed in a directory returned by
+ {@link android.content.Context#getExternalFilesDir
+ Context.getExternalFilesDir}, which the system will take care of deleting
+ if the application is uninstalled. Other shared files should be placed in
+ one of the directories returned by
+ {@link #getExternalStoragePublicDirectory}.
+ &lt;p&gt;
+ Writing to this path requires the
+ {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE} permission,
+ and starting in {@link android.os.Build.VERSION_CODES#KITKAT}, read
+ access requires the
+ {@link android.Manifest.permission#READ_EXTERNAL_STORAGE} permission,
+ which is automatically granted if you hold the write permission.
+ &lt;p&gt;
+ Starting in {@link android.os.Build.VERSION_CODES#KITKAT}, if your
+ application only needs to store internal data, consider using
+ {@link Context#getExternalFilesDir(String)},
+ {@link Context#getExternalCacheDir()}, or
+ {@link Context#getExternalMediaDirs()}, which require no permissions to
+ read or write.
+ &lt;p&gt;
+ This path may change between platform versions, so applications should
+ only persist relative paths.
+ &lt;p&gt;
+ Here is an example of typical code to monitor the state of external
+ storage:
+ &lt;p&gt;
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/content/ExternalStorage.java
+ monitor_storage}
+@see #getExternalStorageState()
+@see #isExternalStorageRemovable()
+@deprecated To improve user privacy, direct access to shared/external
+             storage devices is deprecated. When an app targets
+             {@link android.os.Build.VERSION_CODES#Q}, the path returned
+             from this method is no longer directly accessible to apps.
+             Apps can continue to access content stored on shared/external
+             storage by migrating to alternatives such as
+             {@link Context#getExternalFilesDir(String)},
+             {@link MediaStore}, or {@link Intent#ACTION_OPEN_DOCUMENT}.
+*/
+getExternalStorageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getLegacyExternalStorageDirectory'>/**{@hide}
+</span>*/
+getLegacyExternalStorageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getLegacyExternalStorageObbDirectory'>/**{@hide}
+</span>*/
+getLegacyExternalStorageObbDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-isStandardDirectory'>/**
+</span>@hide 
+*/
+isStandardDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-classifyExternalStorageDirectory'>/**Classify the content types present on the given external storage device.
+</span> &lt;p&gt;
+ This is typically useful for deciding if an inserted SD card is empty, or
+ if it contains content like photos that should be preserved.
+@hide 
+*/
+classifyExternalStorageDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getExternalStoragePublicDirectory'>/**Get a top-level shared/external storage directory for placing files of a
+</span> particular type. This is where the user will typically place and manage
+ their own files, so you should be careful about what you put here to
+ ensure you don't erase their files or get in the way of their own
+ organization.
+ &lt;p&gt;
+ On devices with multiple users (as described by {@link android.os.UserManager}),
+ each user has their own isolated shared storage. Applications only have
+ access to the shared storage for the user they're running as.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Here is an example of typical code to manipulate a picture on the public
+ shared storage:
+ &lt;/p&gt;
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/content/ExternalStorage.java
+ public_picture}
+@param {String} type The type of storage directory to return. Should be one of
+            {@link #DIRECTORY_MUSIC}, {@link #DIRECTORY_PODCASTS},
+            {@link #DIRECTORY_RINGTONES}, {@link #DIRECTORY_ALARMS},
+            {@link #DIRECTORY_NOTIFICATIONS}, {@link #DIRECTORY_PICTURES},
+            {@link #DIRECTORY_MOVIES}, {@link #DIRECTORY_DOWNLOADS},
+            {@link #DIRECTORY_DCIM}, or {@link #DIRECTORY_DOCUMENTS}. May not be null.
+@return {Object {java.io.File}} Returns the File path for the directory. Note that this directory
+         may not yet exist, so you must make sure it exists before using
+         it such as with {@link File#mkdirs File.mkdirs()}.
+@deprecated To improve user privacy, direct access to shared/external
+             storage devices is deprecated. When an app targets
+             {@link android.os.Build.VERSION_CODES#Q}, the path returned
+             from this method is no longer directly accessible to apps.
+             Apps can continue to access content stored on shared/external
+             storage by migrating to alternatives such as
+             {@link Context#getExternalFilesDir(String)},
+             {@link MediaStore}, or {@link Intent#ACTION_OPEN_DOCUMENT}.
+*/
+getExternalStoragePublicDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-buildExternalStorageAndroidDataDirs'>/**Returns the path for android-specific data on the SD card.
+</span>@hide 
+*/
+buildExternalStorageAndroidDataDirs : function(  ) {},
+
+<span id='android-os-Environment-method-buildExternalStorageAppDataDirs'>/**Generates the raw path to an application's data
+</span>@hide 
+*/
+buildExternalStorageAppDataDirs : function(  ) {},
+
+<span id='android-os-Environment-method-buildExternalStorageAppMediaDirs'>/**Generates the raw path to an application's media
+</span>@hide 
+*/
+buildExternalStorageAppMediaDirs : function(  ) {},
+
+<span id='android-os-Environment-method-buildExternalStorageAppObbDirs'>/**Generates the raw path to an application's OBB files
+</span>@hide 
+*/
+buildExternalStorageAppObbDirs : function(  ) {},
+
+<span id='android-os-Environment-method-buildExternalStorageAppFilesDirs'>/**Generates the path to an application's files.
+</span>@hide 
+*/
+buildExternalStorageAppFilesDirs : function(  ) {},
+
+<span id='android-os-Environment-method-buildExternalStorageAppCacheDirs'>/**Generates the path to an application's cache.
+</span>@hide 
+*/
+buildExternalStorageAppCacheDirs : function(  ) {},
+
+<span id='android-os-Environment-method-buildExternalStoragePublicDirs'>/**
+</span>@hide 
+*/
+buildExternalStoragePublicDirs : function(  ) {},
+
+<span id='android-os-Environment-method-getDownloadCacheDirectory'>/**Return the download/cache content directory.
+</span>*/
+getDownloadCacheDirectory : function(  ) {},
+
+<span id='android-os-Environment-method-getExternalStorageState'>/**Returns the current state of the primary shared/external storage media.
+</span>@see #getExternalStorageDirectory()
+@return {String} one of {@link #MEDIA_UNKNOWN}, {@link #MEDIA_REMOVED},
+         {@link #MEDIA_UNMOUNTED}, {@link #MEDIA_CHECKING},
+         {@link #MEDIA_NOFS}, {@link #MEDIA_MOUNTED},
+         {@link #MEDIA_MOUNTED_READ_ONLY}, {@link #MEDIA_SHARED},
+         {@link #MEDIA_BAD_REMOVAL}, or {@link #MEDIA_UNMOUNTABLE}.
+*/
+getExternalStorageState : function(  ) {},
+
+<span id='android-os-Environment-method-getStorageState'>/**
+</span>@deprecated use {@link #getExternalStorageState(File)}
+*/
+getStorageState : function(  ) {},
+
+<span id='android-os-Environment-method-getExternalStorageState'>/**Returns the current state of the shared/external storage media at the
+</span> given path.
+@return {String} one of {@link #MEDIA_UNKNOWN}, {@link #MEDIA_REMOVED},
+         {@link #MEDIA_UNMOUNTED}, {@link #MEDIA_CHECKING},
+         {@link #MEDIA_NOFS}, {@link #MEDIA_MOUNTED},
+         {@link #MEDIA_MOUNTED_READ_ONLY}, {@link #MEDIA_SHARED},
+         {@link #MEDIA_BAD_REMOVAL}, or {@link #MEDIA_UNMOUNTABLE}.
+*/
+getExternalStorageState : function(  ) {},
+
+<span id='android-os-Environment-method-isExternalStorageRemovable'>/**Returns whether the primary shared/external storage media is physically
+</span> removable.
+@return {Boolean} true if the storage device can be removed (such as an SD card),
+         or false if the storage device is built in and cannot be
+         physically removed.
+*/
+isExternalStorageRemovable : function(  ) {},
+
+<span id='android-os-Environment-method-isExternalStorageRemovable'>/**Returns whether the shared/external storage media at the given path is
+</span> physically removable.
+@return {Boolean} true if the storage device can be removed (such as an SD card),
+         or false if the storage device is built in and cannot be
+         physically removed.
+@throws IllegalArgumentException if the path is not a valid storage
+             device.
+*/
+isExternalStorageRemovable : function(  ) {},
+
+<span id='android-os-Environment-method-isExternalStorageEmulated'>/**Returns whether the primary shared/external storage media is emulated.
+</span> &lt;p&gt;
+ The contents of emulated storage devices are backed by a private user
+ data partition, which means there is little benefit to apps storing data
+ here instead of the private directories returned by
+ {@link Context#getFilesDir()}, etc.
+ &lt;p&gt;
+ This returns true when emulated storage is backed by either internal
+ storage or an adopted storage device.
+@see DevicePolicyManager#setStorageEncryption(android.content.ComponentName,
+      boolean)
+*/
+isExternalStorageEmulated : function(  ) {},
+
+<span id='android-os-Environment-method-isExternalStorageEmulated'>/**Returns whether the shared/external storage media at the given path is
+</span> emulated.
+ &lt;p&gt;
+ The contents of emulated storage devices are backed by a private user
+ data partition, which means there is little benefit to apps storing data
+ here instead of the private directories returned by
+ {@link Context#getFilesDir()}, etc.
+ &lt;p&gt;
+ This returns true when emulated storage is backed by either internal
+ storage or an adopted storage device.
+@throws IllegalArgumentException if the path is not a valid storage
+             device.
+*/
+isExternalStorageEmulated : function(  ) {},
+
+<span id='android-os-Environment-method-isExternalStorageLegacy'>/**Returns whether the primary shared/external storage media is a legacy
+</span> view that includes files not owned by the app.
+ &lt;p&gt;
+ This value may be different from the value requested by
+ {@code requestLegacyExternalStorage} in the app's manifest, since an app
+ may inherit its legacy state based on when it was first installed.
+ &lt;p&gt;
+ Non-legacy apps can continue to discover and read media belonging to
+ other apps via {@link android.provider.MediaStore}.
+*/
+isExternalStorageLegacy : function(  ) {},
+
+<span id='android-os-Environment-method-isExternalStorageLegacy'>/**Returns whether the shared/external storage media at the given path is a
+</span> legacy view that includes files not owned by the app.
+ &lt;p&gt;
+ This value may be different from the value requested by
+ {@code requestLegacyExternalStorage} in the app's manifest, since an app
+ may inherit its legacy state based on when it was first installed.
+ &lt;p&gt;
+ Non-legacy apps can continue to discover and read media belonging to
+ other apps via {@link android.provider.MediaStore}.
+@throws IllegalArgumentException if the path is not a valid storage
+             device.
+*/
+isExternalStorageLegacy : function(  ) {},
+
+<span id='android-os-Environment-method-setUserRequired'>/**{@hide}
+</span>*/
+setUserRequired : function(  ) {},
+
+<span id='android-os-Environment-method-buildPaths'>/**Append path segments to each given base path, returning result.
+</span>@hide 
+*/
+buildPaths : function(  ) {},
+
+<span id='android-os-Environment-method-buildPath'>/**Append path segments to given base path, returning result.
+</span>@hide 
+*/
+buildPath : function(  ) {},
+
+<span id='android-os-Environment-method-maybeTranslateEmulatedPathToInternal'>/**If the given path exists on emulated external storage, return the
+</span> translated backing path hosted on internal storage. This bypasses any
+ emulation later, improving performance. This is &lt;em&gt;only&lt;/em&gt; suitable
+ for read-only access.
+ &lt;p&gt;
+ Returns original path if given path doesn't meet these criteria. Callers
+ must hold {@link android.Manifest.permission#WRITE_MEDIA_STORAGE}
+ permission.
+@deprecated disabled now that FUSE has been replaced by sdcardfs
+@hide 
+*/
+maybeTranslateEmulatedPathToInternal : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaCodec-CryptoInfo'>/**@class android.media.MediaCodec.CryptoInfo
+</span>@extends java.lang.Object
+
+ Metadata describing the structure of an encrypted input sample.
+ &lt;p&gt;
+ A buffer's data is considered to be partitioned into &quot;subSamples&quot;. Each subSample starts with
+ a run of plain, unencrypted bytes followed by a run of encrypted bytes. Either of these runs
+ may be empty. If pattern encryption applies, each of the encrypted runs is encrypted only
+ partly, according to a repeating pattern of &quot;encrypt&quot; and &quot;skip&quot; blocks.
+ {@link #numBytesOfClearData} can be null to indicate that all data is encrypted, and
+ {@link #numBytesOfEncryptedData} can be null to indicate that all data is clear. At least one
+ of {@link #numBytesOfClearData} and {@link #numBytesOfEncryptedData} must be non-null.
+ &lt;p&gt;
+ This information encapsulates per-sample metadata as outlined in ISO/IEC FDIS 23001-7:2016
+ &quot;Common encryption in ISO base media file format files&quot;.
+ &lt;p&gt;
+ &lt;h3&gt;ISO-CENC Schemes&lt;/h3&gt;
+ ISO/IEC FDIS 23001-7:2016 defines four possible schemes by which media may be encrypted,
+ corresponding to each possible combination of an AES mode with the presence or absence of
+ patterned encryption.
+
+ &lt;table style=&quot;width: 0%&quot;&gt;
+   &lt;thead&gt;
+     &lt;tr&gt;
+       &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+       &lt;th&gt;AES-CTR&lt;/th&gt;
+       &lt;th&gt;AES-CBC&lt;/th&gt;
+     &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+     &lt;tr&gt;
+       &lt;th&gt;Without Patterns&lt;/th&gt;
+       &lt;td&gt;cenc&lt;/td&gt;
+       &lt;td&gt;cbc1&lt;/td&gt;
+     &lt;/tr&gt;&lt;tr&gt;
+       &lt;th&gt;With Patterns&lt;/th&gt;
+       &lt;td&gt;cens&lt;/td&gt;
+       &lt;td&gt;cbcs&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/tbody&gt;
+ &lt;/table&gt;
+
+ For {@code CryptoInfo}, the scheme is selected implicitly by the combination of the
+ {@link #mode} field and the value set with {@link #setPattern}. For the pattern, setting the
+ pattern to all zeroes (that is, both {@code blocksToEncrypt} and {@code blocksToSkip} are
+ zero) is interpreted as turning patterns off completely. A scheme that does not use patterns
+ will be selected, either cenc or cbc1. Setting the pattern to any nonzero value will choose
+ one of the pattern-supporting schemes, cens or cbcs. The default pattern if
+ {@link #setPattern} is never called is all zeroes.
+ &lt;p&gt;
+ &lt;h4&gt;HLS SAMPLE-AES Audio&lt;/h4&gt;
+ HLS SAMPLE-AES audio is encrypted in a manner compatible with the cbcs scheme, except that it
+ does not use patterned encryption. However, if {@link #setPattern} is used to set the pattern
+ to all zeroes, this will be interpreted as selecting the cbc1 scheme. The cbc1 scheme cannot
+ successfully decrypt HLS SAMPLE-AES audio because of differences in how the IVs are handled.
+ For this reason, it is recommended that a pattern of {@code 1} encrypted block and {@code 0}
+ skip blocks be used with HLS SAMPLE-AES audio. This will trigger decryption to use cbcs mode
+ while still decrypting every block.
+*/
+var CryptoInfo = {
+
+<span id='android-media-MediaCodec-CryptoInfo-property-numSubSamples'>/** The number of subSamples that make up the buffer's contents.
+</span>*/
+numSubSamples : &quot;null&quot;,
+<span id='android-media-MediaCodec-CryptoInfo-property-numBytesOfClearData'>/** The number of leading unencrypted bytes in each subSample. If null, all bytes are treated
+</span> as encrypted and {@link #numBytesOfEncryptedData} must be specified.
+*/
+numBytesOfClearData : &quot;null&quot;,
+<span id='android-media-MediaCodec-CryptoInfo-property-numBytesOfEncryptedData'>/** The number of trailing encrypted bytes in each subSample. If null, all bytes are treated
+</span> as clear and {@link #numBytesOfClearData} must be specified.
+*/
+numBytesOfEncryptedData : &quot;null&quot;,
+<span id='android-media-MediaCodec-CryptoInfo-property-key'>/** A 16-byte key id
+</span>*/
+key : &quot;null&quot;,
+<span id='android-media-MediaCodec-CryptoInfo-property-iv'>/** A 16-byte initialization vector
+</span>*/
+iv : &quot;null&quot;,
+<span id='android-media-MediaCodec-CryptoInfo-property-mode'>/** The type of encryption that has been applied,
+</span> see {@link #CRYPTO_MODE_UNENCRYPTED}, {@link #CRYPTO_MODE_AES_CTR}
+ and {@link #CRYPTO_MODE_AES_CBC}
+*/
+mode : &quot;null&quot;,
+<span id='android-media-MediaCodec-CryptoInfo-method-set'>/**Set the subsample count, clear/encrypted sizes, key, IV and mode fields of
+</span> a {@link android.media.MediaCodec.CryptoInfo} instance.
+*/
+set : function(  ) {},
+
+<span id='android-media-MediaCodec-CryptoInfo-method-setPattern'>/**Set the encryption pattern on a {@link android.media.MediaCodec.CryptoInfo} instance.
+</span> See {@link android.media.MediaCodec.CryptoInfo.Pattern}.
+*/
+setPattern : function(  ) {},
+
+<span id='android-media-MediaCodec-CryptoInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

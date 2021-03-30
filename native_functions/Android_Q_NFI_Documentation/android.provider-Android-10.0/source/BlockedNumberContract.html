@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-BlockedNumberContract'>/**@class android.provider.BlockedNumberContract
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ The contract between the blockednumber provider and applications. Contains definitions for
+ the supported URIs and columns.
+ &lt;/p&gt;
+
+ &lt;h3&gt; Overview &lt;/h3&gt;
+ &lt;p&gt;
+ The content provider exposes a table containing blocked numbers. The columns and URIs for
+ accessing this table are defined by the {@link android.provider.BlockedNumberContract.BlockedNumbers} class. Messages, and calls from
+ blocked numbers are discarded by the platform. Notifications upon provider changes can be
+ received using a {@link android.database.ContentObserver}.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The platform will not block messages, and calls from emergency numbers as defined by
+ {@link android.telephony.PhoneNumberUtils#isEmergencyNumber(String)}. If the user contacts
+ emergency services, number blocking is disabled by the platform for a duration defined by
+ {@link android.telephony.CarrierConfigManager#KEY_DURATION_BLOCKING_DISABLED_AFTER_EMERGENCY_INT}.
+ &lt;/p&gt;
+
+ &lt;h3&gt; Permissions &lt;/h3&gt;
+ &lt;p&gt;
+ Only the system, the default SMS application, and the default phone app
+ (See {@link android.telecom.TelecomManager#getDefaultDialerPackage()}), and carrier apps
+ (See {@link android.service.carrier.CarrierService}) can read, and write to the blockednumber
+ provider. However, {@link #canCurrentUserBlockNumbers}(Context) can be accessed by any
+ application.
+ &lt;/p&gt;
+
+ &lt;h3&gt; Data &lt;/h3&gt;
+ &lt;p&gt;
+ Other than regular phone numbers, the blocked number provider can also store addresses (such
+ as email) from which a user can receive messages, and calls. The blocked numbers are stored
+ in the {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_ORIGINAL_NUMBER} column. A normalized version of phone
+ numbers (if normalization is possible) is stored in {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_E164_NUMBER}
+ column. The platform blocks calls, and messages from an address if it is present in in the
+ {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_ORIGINAL_NUMBER} column or if the E164 version of the address
+ matches the {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_E164_NUMBER} column.
+ &lt;/p&gt;
+
+ &lt;h3&gt; Operations &lt;/h3&gt;
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;b&gt;Insert&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;p&gt;
+ {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_ORIGINAL_NUMBER} is a required column that needs to be populated.
+ Apps can optionally provide the {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_E164_NUMBER} which is the phone
+ number's E164 representation. The provider automatically populates this column if the app does
+ not provide it. Note that this column is not populated if normalization fails or if the address
+ is not a phone number (eg: email).
+ &lt;p&gt;
+ Attempting to insert an existing blocked number (same
+ {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_ORIGINAL_NUMBER} column) will result in replacing the existing
+ blocked number.
+ &lt;p&gt;
+ Examples:
+ &lt;pre&gt;
+ ContentValues values = new ContentValues();
+ values.put(BlockedNumbers.COLUMN_ORIGINAL_NUMBER, &quot;1234567890&quot;);
+ Uri uri = getContentResolver().insert(BlockedNumbers.CONTENT_URI, values);
+ &lt;/pre&gt;
+ &lt;pre&gt;
+ ContentValues values = new ContentValues();
+ values.put(BlockedNumbers.COLUMN_ORIGINAL_NUMBER, &quot;1234567890&quot;);
+ values.put(BlockedNumbers.COLUMN_E164_NUMBER, &quot;+11234567890&quot;);
+ Uri uri = getContentResolver().insert(BlockedNumbers.CONTENT_URI, values);
+ &lt;/pre&gt;
+ &lt;pre&gt;
+ ContentValues values = new ContentValues();
+ values.put(BlockedNumbers.COLUMN_ORIGINAL_NUMBER, &quot;12345@abdcde.com&quot;);
+ Uri uri = getContentResolver().insert(BlockedNumbers.CONTENT_URI, values);
+ &lt;/pre&gt;
+ &lt;/p&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Update&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;p&gt;
+ Updates are not supported. Use Delete, and Insert instead.
+ &lt;/p&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Delete&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;p&gt;
+ Deletions can be performed as follows:
+ &lt;pre&gt;
+ ContentValues values = new ContentValues();
+ values.put(BlockedNumbers.COLUMN_ORIGINAL_NUMBER, &quot;1234567890&quot;);
+ Uri uri = getContentResolver().insert(BlockedNumbers.CONTENT_URI, values);
+ getContentResolver().delete(uri, null, null);
+ &lt;/pre&gt;
+ To check if a particular number is blocked, use the method
+ {@link #isBlocked(Context, String)}.
+ &lt;/p&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Query&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;p&gt;
+ All blocked numbers can be enumerated as follows:
+ &lt;pre&gt;
+ Cursor c = getContentResolver().query(BlockedNumbers.CONTENT_URI,
+          new String[]{BlockedNumbers.COLUMN_ID, BlockedNumbers.COLUMN_ORIGINAL_NUMBER,
+          BlockedNumbers.COLUMN_E164_NUMBER}, null, null, null);
+ &lt;/pre&gt;
+ &lt;/p&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Unblock&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;p&gt;
+ Use the method {@link #unblock(Context, String)} to unblock numbers.
+ &lt;/p&gt;
+ &lt;/dd&gt;
+
+ &lt;h3&gt; Multi-user &lt;/h3&gt;
+ &lt;p&gt;
+ Apps must use the method {@link #canCurrentUserBlockNumbers}(Context) before performing any
+ operation on the blocked number provider. If {@link #canCurrentUserBlockNumbers}(Context) returns
+ {@code false}, all operations on the provider will fail with a {@link SecurityException}. The
+ platform will block calls, and messages from numbers in the provider independent of the current
+ user.
+ &lt;/p&gt;
+*/
+var BlockedNumberContract = {
+
+<span id='android-provider-BlockedNumberContract-property-AUTHORITY'>/**The authority for the blocked number provider */
+</span>AUTHORITY : &quot;com.android.blockednumber&quot;,
+<span id='android-provider-BlockedNumberContract-property-AUTHORITY_URI'>/**A content:// style uri to the authority for the blocked number provider */
+</span>AUTHORITY_URI : &quot;null&quot;,
+<span id='android-provider-BlockedNumberContract-property-METHOD_IS_BLOCKED'>/**@hide */
+</span>METHOD_IS_BLOCKED : &quot;is_blocked&quot;,
+<span id='android-provider-BlockedNumberContract-property-METHOD_UNBLOCK'>/**@hide */
+</span>METHOD_UNBLOCK : &quot;unblock&quot;,
+<span id='android-provider-BlockedNumberContract-property-RES_NUMBER_IS_BLOCKED'>/**@hide */
+</span>RES_NUMBER_IS_BLOCKED : &quot;blocked&quot;,
+<span id='android-provider-BlockedNumberContract-property-STATUS_NOT_BLOCKED'>/** Integer reason code used with {@link #RES_BLOCK_STATUS} to indicate that a call was not
+</span> blocked.
+ @hide
+*/
+STATUS_NOT_BLOCKED : &quot;0&quot;,
+<span id='android-provider-BlockedNumberContract-property-STATUS_BLOCKED_IN_LIST'>/** Integer reason code used with {@link #RES_BLOCK_STATUS} to indicate that a call was blocked
+</span> because it is in the list of blocked numbers maintained by the provider.
+ @hide
+*/
+STATUS_BLOCKED_IN_LIST : &quot;1&quot;,
+<span id='android-provider-BlockedNumberContract-property-STATUS_BLOCKED_RESTRICTED'>/** Integer reason code used with {@link #RES_BLOCK_STATUS} to indicate that a call was blocked
+</span> because it is from a restricted number.
+ @hide
+*/
+STATUS_BLOCKED_RESTRICTED : &quot;2&quot;,
+<span id='android-provider-BlockedNumberContract-property-STATUS_BLOCKED_UNKNOWN_NUMBER'>/** Integer reason code used with {@link #RES_BLOCK_STATUS} to indicate that a call was blocked
+</span> because it is from an unknown number.
+ @hide
+*/
+STATUS_BLOCKED_UNKNOWN_NUMBER : &quot;3&quot;,
+<span id='android-provider-BlockedNumberContract-property-STATUS_BLOCKED_PAYPHONE'>/** Integer reason code used with {@link #RES_BLOCK_STATUS} to indicate that a call was blocked
+</span> because it is from a pay phone.
+ @hide
+*/
+STATUS_BLOCKED_PAYPHONE : &quot;4&quot;,
+<span id='android-provider-BlockedNumberContract-property-STATUS_BLOCKED_NOT_IN_CONTACTS'>/** Integer reason code used with {@link #RES_BLOCK_STATUS} to indicate that a call was blocked
+</span> because it is from a number not in the users contacts.
+ @hide
+*/
+STATUS_BLOCKED_NOT_IN_CONTACTS : &quot;5&quot;,
+<span id='android-provider-BlockedNumberContract-property-RES_BLOCK_STATUS'>/** Integer reason indicating whether a call was blocked, and if so why.
+</span> @hide
+*/
+RES_BLOCK_STATUS : &quot;block_status&quot;,
+<span id='android-provider-BlockedNumberContract-property-RES_NUM_ROWS_DELETED'>/**@hide */
+</span>RES_NUM_ROWS_DELETED : &quot;num_deleted&quot;,
+<span id='android-provider-BlockedNumberContract-property-METHOD_CAN_CURRENT_USER_BLOCK_NUMBERS'>/**@hide */
+</span>METHOD_CAN_CURRENT_USER_BLOCK_NUMBERS : &quot;can_current_user_block_numbers&quot;,
+<span id='android-provider-BlockedNumberContract-property-RES_CAN_BLOCK_NUMBERS'>/**@hide */
+</span>RES_CAN_BLOCK_NUMBERS : &quot;can_block&quot;,
+<span id='android-provider-BlockedNumberContract-property-RES_ENHANCED_SETTING_IS_ENABLED'>/**@hide */
+</span>RES_ENHANCED_SETTING_IS_ENABLED : &quot;enhanced_setting_enabled&quot;,
+<span id='android-provider-BlockedNumberContract-property-RES_SHOW_EMERGENCY_CALL_NOTIFICATION'>/**@hide */
+</span>RES_SHOW_EMERGENCY_CALL_NOTIFICATION : &quot;show_emergency_call_notification&quot;,
+<span id='android-provider-BlockedNumberContract-property-EXTRA_ENHANCED_SETTING_KEY'>/**@hide */
+</span>EXTRA_ENHANCED_SETTING_KEY : &quot;extra_enhanced_setting_key&quot;,
+<span id='android-provider-BlockedNumberContract-property-EXTRA_ENHANCED_SETTING_VALUE'>/**@hide */
+</span>EXTRA_ENHANCED_SETTING_VALUE : &quot;extra_enhanced_setting_value&quot;,
+<span id='android-provider-BlockedNumberContract-property-EXTRA_CONTACT_EXIST'>/**@hide */
+</span>EXTRA_CONTACT_EXIST : &quot;extra_contact_exist&quot;,
+<span id='android-provider-BlockedNumberContract-property-EXTRA_CALL_PRESENTATION'>/**@hide */
+</span>EXTRA_CALL_PRESENTATION : &quot;extra_call_presentation&quot;,
+<span id='android-provider-BlockedNumberContract-method-isBlocked'>/**Returns whether a given number is in the blocked list.
+</span>
+ &lt;p&gt; This matches the {@code phoneNumber} against the
+ {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_ORIGINAL_NUMBER} column, and the E164 representation of the
+ {@code phoneNumber} with the {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_E164_NUMBER} column.
+
+ &lt;p&gt; Note that if the {@link #canCurrentUserBlockNumbers} is {@code false} for the user
+ context {@code context}, this method will throw a {@link SecurityException}.
+@return {Boolean} {@code true} if the {@code phoneNumber} is blocked.
+*/
+isBlocked : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-method-unblock'>/**Unblocks the {@code phoneNumber} if it is blocked.
+</span>
+ &lt;p&gt; This deletes all rows where the {@code phoneNumber} matches the
+ {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_ORIGINAL_NUMBER} column or the E164 representation of the
+ {@code phoneNumber} matches the {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_E164_NUMBER} column.
+
+ &lt;p&gt;To delete rows based on exact match with specific columns such as
+ {@link android.provider.BlockedNumberContract.BlockedNumbers#COLUMN_ID} use
+ {@link android.content.ContentProvider#delete(Uri, String, String[])} with
+ {@link android.provider.BlockedNumberContract.BlockedNumbers#CONTENT_URI} URI.
+
+ &lt;p&gt; Note that if the {@link #canCurrentUserBlockNumbers} is {@code false} for the user
+ context {@code context}, this method will throw a {@link SecurityException}.
+@return {Number} the number of rows deleted in the blocked number provider as a result of unblock.
+*/
+unblock : function(  ) {},
+
+<span id='android-provider-BlockedNumberContract-method-canCurrentUserBlockNumbers'>/**Checks if blocking numbers is supported for the current user.
+</span> &lt;p&gt; Typically, blocking numbers is only supported for one user at a time.
+@return {Boolean} {@code true} if the current user can block numbers.
+*/
+canCurrentUserBlockNumbers : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

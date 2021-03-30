@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-ThreadLocalWorkSource'>/**@class android.os.ThreadLocalWorkSource
+</span>@extends java.lang.Object
+
+ Tracks who triggered the work currently executed on this thread.
+
+ &lt;p&gt;ThreadLocalWorkSource is automatically updated inside system server for incoming/outgoing
+ binder calls and messages posted to handler threads.
+
+ &lt;p&gt;ThreadLocalWorkSource can also be set manually if needed to refine the WorkSource.
+
+ &lt;p&gt;Example:
+ &lt;ul&gt;
+ &lt;li&gt;Bluetooth process calls {@link android.os.PowerManager#isInteractive()} API on behalf of app foo.
+ &lt;li&gt;ThreadLocalWorkSource will be automatically set to the UID of foo.
+ &lt;li&gt;Any code on the thread handling {@link android.os.PowerManagerService#isInteractive()} can call
+ {@link android.os.ThreadLocalWorkSource#getUid()} to blame any resource used to handle this call.
+ &lt;li&gt;If a message is posted from the binder thread, the code handling the message can also call
+ {@link android.os.ThreadLocalWorkSource#getUid()} and it will return the UID of foo since the work source is
+ automatically propagated.
+ &lt;/ul&gt;
+
+ @hide Only for use within system server.
+*/
+var ThreadLocalWorkSource = {
+
+<span id='android-os-ThreadLocalWorkSource-property-UID_NONE'>/***/
+</span>UID_NONE : &quot;-1&quot;,
+<span id='android-os-ThreadLocalWorkSource-method-getUid'>/**Returns the UID to blame for the code currently executed on this thread.
+</span>
+ &lt;p&gt;This UID is set automatically by common frameworks (e.g. Binder and Handler frameworks)
+ and automatically propagated inside system server.
+ &lt;p&gt;It can also be set manually using {@link #setUid}(int).
+*/
+getUid : function(  ) {},
+
+<span id='android-os-ThreadLocalWorkSource-method-setUid'>/**Sets the UID to blame for the code currently executed on this thread.
+</span>
+ &lt;p&gt;Inside system server, this UID will be automatically propagated.
+ &lt;p&gt;It will be used to attribute future resources used on this thread (e.g. binder
+ transactions or processing handler messages) and on any other threads the UID is propagated
+ to.
+@return {Number} a token that can be used to restore the state.
+*/
+setUid : function(  ) {},
+
+<span id='android-os-ThreadLocalWorkSource-method-restore'>/**Restores the state using the provided token.
+</span>*/
+restore : function(  ) {},
+
+<span id='android-os-ThreadLocalWorkSource-method-clear'>/**Clears the stored work source uid.
+</span>
+ &lt;p&gt;This method should be used when we do not know who to blame. If the UID to blame is the
+ UID of the current process, it is better to attribute the work to the current process
+ explicitly instead of clearing the work source:
+
+ &lt;pre&gt;
+ ThreadLocalWorkSource.setUid(Process.myUid());
+ &lt;/pre&gt;
+@return {Number} a token that can be used to restore the state.
+*/
+clear : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

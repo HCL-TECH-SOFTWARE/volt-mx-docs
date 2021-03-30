@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-MediaStore-MediaColumns'>/**@class android.provider.MediaStore.MediaColumns
+</span> implements android.provider.BaseColumns
+
+ Common media metadata columns.
+*/
+var MediaColumns = {
+
+<span id='android-provider-MediaStore-MediaColumns-property-DATA'>/** Absolute filesystem path to the media item on disk.
+</span> &lt;p&gt;
+ Note that apps may not have filesystem permissions to directly access
+ this path. Instead of trying to open this path directly, apps should
+ use {@link ContentResolver#openFileDescriptor(Uri, String)} to gain
+ access.
+
+ @deprecated Apps may not have filesystem permissions to directly
+             access this path. Instead of trying to open this path
+             directly, apps should use
+             {@link ContentResolver#openFileDescriptor(Uri, String)}
+             to gain access.
+*/
+DATA : &quot;_data&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-HASH'>/** Hash of the media item on disk.
+</span> &lt;p&gt;
+ Contains a 20-byte binary blob which is the SHA-1 hash of the file as
+ persisted on disk. For performance reasons, the hash may not be
+ immediately available, in which case a {@code NULL} value will be
+ returned. If the underlying file is modified, this value will be
+ cleared and recalculated.
+ &lt;p&gt;
+ If you require the hash of a specific item, you can call
+ {@link ContentResolver#canonicalize(Uri)}, which will block until the
+ hash is calculated.
+
+ @removed
+*/
+HASH : &quot;_hash&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-SIZE'>/** The size of the media item.
+</span>*/
+SIZE : &quot;_size&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-DISPLAY_NAME'>/** The display name of the media item.
+</span> &lt;p&gt;
+ For example, an item stored at
+ {@code /storage/0000-0000/DCIM/Vacation/IMG1024.JPG} would have a
+ display name of {@code IMG1024.JPG}.
+*/
+DISPLAY_NAME : &quot;_display_name&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-TITLE'>/** The title of the media item.
+</span>*/
+TITLE : &quot;title&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-DATE_ADDED'>/** The time the media item was first added.
+</span>*/
+DATE_ADDED : &quot;date_added&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-DATE_MODIFIED'>/** The time the media item was last modified.
+</span>*/
+DATE_MODIFIED : &quot;date_modified&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-DATE_TAKEN'>/** The time the media item was taken.
+</span>*/
+DATE_TAKEN : &quot;datetaken&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-MIME_TYPE'>/** The MIME type of the media item.
+</span> &lt;p&gt;
+ This is typically defined based on the file extension of the media
+ item. However, it may be the value of the {@code format} attribute
+ defined by the &lt;em&gt;Dublin Core Media Initiative&lt;/em&gt; standard,
+ extracted from any XMP metadata contained within this media item.
+ &lt;p class=&quot;note&quot;&gt;
+ Note: the {@code format} attribute may be ignored if the top-level
+ MIME type disagrees with the file extension. For example, it's
+ reasonable for an {@code image/jpeg} file to declare a {@code format}
+ of {@code image/vnd.google.panorama360+jpg}, but declaring a
+ {@code format} of {@code audio/ogg} would be ignored.
+ &lt;p&gt;
+ This is a read-only column that is automatically computed.
+*/
+MIME_TYPE : &quot;mime_type&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-MEDIA_SCANNER_NEW_OBJECT_ID'>/** The MTP object handle of a newly transfered file.
+</span> Used to pass the new file's object handle through the media scanner
+ from MTP to the media provider
+ For internal use only by MTP, media scanner and media provider.
+ @hide
+*/
+MEDIA_SCANNER_NEW_OBJECT_ID : &quot;media_scanner_new_object_id&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-IS_DRM'>/** Non-zero if the media file is drm-protected
+</span> @hide
+*/
+IS_DRM : &quot;is_drm&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-IS_PENDING'>/** Flag indicating if a media item is pending, and still being inserted
+</span> by its owner. While this flag is set, only the owner of the item can
+ open the underlying file; requests from other apps will be rejected.
+
+ @see MediaStore#setIncludePending(Uri)
+*/
+IS_PENDING : &quot;is_pending&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-IS_TRASHED'>/** Flag indicating if a media item is trashed.
+</span>
+ @see MediaColumns#IS_TRASHED
+ @see MediaStore#setIncludeTrashed(Uri)
+ @see MediaStore#trash(Context, Uri)
+ @see MediaStore#untrash(Context, Uri)
+ @removed
+*/
+IS_TRASHED : &quot;is_trashed&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-DATE_EXPIRES'>/** The time the media item should be considered expired. Typically only
+</span> meaningful in the context of {@link #IS_PENDING}.
+*/
+DATE_EXPIRES : &quot;date_expires&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-WIDTH'>/** The width of the media item, in pixels.
+</span>*/
+WIDTH : &quot;width&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-HEIGHT'>/** The height of the media item, in pixels.
+</span>*/
+HEIGHT : &quot;height&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-OWNER_PACKAGE_NAME'>/** Package name that contributed this media. The value may be
+</span> {@code NULL} if ownership cannot be reliably determined.
+*/
+OWNER_PACKAGE_NAME : &quot;owner_package_name&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-VOLUME_NAME'>/** Volume name of the specific storage device where this media item is
+</span> persisted. The value is typically one of the volume names returned
+ from {@link android.provider.MediaStore#getExternalVolumeNames(Context)}.
+ &lt;p&gt;
+ This is a read-only column that is automatically computed.
+*/
+VOLUME_NAME : &quot;volume_name&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-RELATIVE_PATH'>/** Relative path of this media item within the storage device where it
+</span> is persisted. For example, an item stored at
+ {@code /storage/0000-0000/DCIM/Vacation/IMG1024.JPG} would have a
+ path of {@code DCIM/Vacation/}.
+ &lt;p&gt;
+ This value should only be used for organizational purposes, and you
+ should not attempt to construct or access a raw filesystem path using
+ this value. If you need to open a media item, use an API like
+ {@link ContentResolver#openFileDescriptor(Uri, String)}.
+ &lt;p&gt;
+ When this value is set to {@code NULL} during an
+ {@link ContentResolver#insert} operation, the newly created item will
+ be placed in a relevant default location based on the type of media
+ being inserted. For example, a {@code image/jpeg} item will be placed
+ under {@link Environment#DIRECTORY_PICTURES}.
+ &lt;p&gt;
+ You can modify this column during an {@link ContentResolver#update}
+ call, which will move the underlying file on disk.
+ &lt;p&gt;
+ In both cases above, content must be placed under a top-level
+ directory that is relevant to the media type. For example, attempting
+ to place a {@code audio/mpeg} file under
+ {@link Environment#DIRECTORY_PICTURES} will be rejected.
+*/
+RELATIVE_PATH : &quot;relative_path&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-PRIMARY_DIRECTORY'>/** The primary directory name this media exists under. The value may be
+</span> {@code NULL} if the media doesn't have a primary directory name.
+
+ @removed
+ @deprecated Replaced by {@link #RELATIVE_PATH}.
+*/
+PRIMARY_DIRECTORY : &quot;primary_directory&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-SECONDARY_DIRECTORY'>/** The secondary directory name this media exists under. The value may
+</span> be {@code NULL} if the media doesn't have a secondary directory name.
+
+ @removed
+ @deprecated Replaced by {@link #RELATIVE_PATH}.
+*/
+SECONDARY_DIRECTORY : &quot;secondary_directory&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-BUCKET_ID'>/** The primary bucket ID of this media item. This can be useful to
+</span> present the user a first-level clustering of related media items.
+ This is a read-only column that is automatically computed.
+*/
+BUCKET_ID : &quot;bucket_id&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-BUCKET_DISPLAY_NAME'>/** The primary bucket display name of this media item. This can be
+</span> useful to present the user a first-level clustering of related
+ media items. This is a read-only column that is automatically
+ computed.
+*/
+BUCKET_DISPLAY_NAME : &quot;bucket_display_name&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-GROUP_ID'>/** The group ID of this media item. This can be useful to present
+</span> the user a grouping of related media items, such a burst of
+ images, or a {@code JPG} and {@code DNG} version of the same
+ image.
+ &lt;p&gt;
+ This is a read-only column that is automatically computed based
+ on the first portion of the filename. For example,
+ {@code IMG1024.BURST001.JPG} and {@code IMG1024.BURST002.JPG}
+ will have the same {@link #GROUP_ID} because the first portion of
+ their filenames is identical.
+
+ @removed
+*/
+GROUP_ID : &quot;group_id&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-DOCUMENT_ID'>/** The &quot;document ID&quot; GUID as defined by the &lt;em&gt;XMP Media
+</span> Management&lt;/em&gt; standard, extracted from any XMP metadata contained
+ within this media item. The value is {@code null} when no metadata
+ was found.
+ &lt;p&gt;
+ Each &quot;document ID&quot; is created once for each new resource. Different
+ renditions of that resource are expected to have different IDs.
+*/
+DOCUMENT_ID : &quot;document_id&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-INSTANCE_ID'>/** The &quot;instance ID&quot; GUID as defined by the &lt;em&gt;XMP Media
+</span> Management&lt;/em&gt; standard, extracted from any XMP metadata contained
+ within this media item. The value is {@code null} when no metadata
+ was found.
+ &lt;p&gt;
+ This &quot;instance ID&quot; changes with each save operation of a specific
+ &quot;document ID&quot;.
+*/
+INSTANCE_ID : &quot;instance_id&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-ORIGINAL_DOCUMENT_ID'>/** The &quot;original document ID&quot; GUID as defined by the &lt;em&gt;XMP Media
+</span> Management&lt;/em&gt; standard, extracted from any XMP metadata contained
+ within this media item.
+ &lt;p&gt;
+ This &quot;original document ID&quot; links a resource to its original source.
+ For example, when you save a PSD document as a JPEG, then convert the
+ JPEG to GIF format, the &quot;original document ID&quot; of both the JPEG and
+ GIF files is the &quot;document ID&quot; of the original PSD file.
+*/
+ORIGINAL_DOCUMENT_ID : &quot;original_document_id&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-DURATION'>/** The duration of the media item.
+</span>*/
+DURATION : &quot;duration&quot;,
+<span id='android-provider-MediaStore-MediaColumns-property-ORIENTATION'>/** The orientation for the media item, expressed in degrees. For
+</span> example, 0, 90, 180, or 270 degrees.
+*/
+ORIENTATION : &quot;orientation&quot;,
+
+};</pre>
+</body>
+</html>

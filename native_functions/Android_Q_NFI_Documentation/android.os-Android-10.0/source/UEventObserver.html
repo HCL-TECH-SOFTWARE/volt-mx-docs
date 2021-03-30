@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-UEventObserver'>/**@class android.os.UEventObserver
+</span>@extends java.lang.Object
+
+ UEventObserver is an abstract class that receives UEvents from the kernel.&lt;p&gt;
+
+ Subclass UEventObserver, implementing onUEvent(UEvent event), then call
+ startObserving() with a match string. The UEvent thread will then call your
+ onUEvent() method when a UEvent occurs that contains your match string.&lt;p&gt;
+
+ Call stopObserving() to stop receiving UEvents.&lt;p&gt;
+
+ There is only one UEvent thread per process, even if that process has
+ multiple UEventObserver subclass instances. The UEvent thread starts when
+ the startObserving() is called for the first time in that process. Once
+ started the UEvent thread will not stop (although it can stop notifying
+ UEventObserver's via stopObserving()).&lt;p&gt;
+
+ @hide
+*/
+var UEventObserver = {
+
+<span id='android-os-UEventObserver-method-startObserving'>/**Begin observation of UEvents.&lt;p&gt;
+</span> This method will cause the UEvent thread to start if this is the first
+ invocation of startObserving in this process.&lt;p&gt;
+ Once called, the UEvent thread will call onUEvent() when an incoming
+ UEvent matches the specified string.&lt;p&gt;
+ This method can be called multiple times to register multiple matches.
+ Only one call to stopObserving is required even with multiple registered
+ matches.
+@param {String} match A substring of the UEvent to match.  Try to be as specific
+ as possible to avoid incurring unintended additional cost from processing
+ irrelevant messages.  Netlink messages can be moderately high bandwidth and
+ are expensive to parse.  For example, some devices may send one netlink message
+ for each vsync period.
+*/
+startObserving : function(  ) {},
+
+<span id='android-os-UEventObserver-method-stopObserving'>/**End observation of UEvents.&lt;p&gt;
+</span> This process's UEvent thread will never call onUEvent() on this
+ UEventObserver after this call. Repeated calls have no effect.
+*/
+stopObserving : function(  ) {},
+
+<span id='android-os-UEventObserver-method-onUEvent'>/**Subclasses of UEventObserver should override this method to handle
+</span> UEvents.
+*/
+onUEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

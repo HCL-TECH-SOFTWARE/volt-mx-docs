@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-marshal-MarshalHelpers'>/**@class android.hardware.camera2.marshal.MarshalHelpers
+</span>@extends java.lang.Object
+
+ Static functions in order to help implementing various marshaler functionality.
+
+ &lt;p&gt;The intention is to statically import everything from this file into another file when
+ implementing a new marshaler (or marshal queryable).&lt;/p&gt;
+
+ &lt;p&gt;The helpers are centered around providing primitive knowledge of the native types,
+ such as the native size, the managed class wrappers, and various precondition checks.&lt;/p&gt;
+*/
+var MarshalHelpers = {
+
+<span id='android-hardware-camera2-marshal-MarshalHelpers-property-SIZEOF_BYTE'>/***/
+</span>SIZEOF_BYTE : &quot;1&quot;,
+<span id='android-hardware-camera2-marshal-MarshalHelpers-property-SIZEOF_INT32'>/***/
+</span>SIZEOF_INT32 : &quot;4&quot;,
+<span id='android-hardware-camera2-marshal-MarshalHelpers-property-SIZEOF_INT64'>/***/
+</span>SIZEOF_INT64 : &quot;8&quot;,
+<span id='android-hardware-camera2-marshal-MarshalHelpers-property-SIZEOF_FLOAT'>/***/
+</span>SIZEOF_FLOAT : &quot;4&quot;,
+<span id='android-hardware-camera2-marshal-MarshalHelpers-property-SIZEOF_DOUBLE'>/***/
+</span>SIZEOF_DOUBLE : &quot;8&quot;,
+<span id='android-hardware-camera2-marshal-MarshalHelpers-property-SIZEOF_RATIONAL'>/***/
+</span>SIZEOF_RATIONAL : &quot;8&quot;,
+<span id='android-hardware-camera2-marshal-MarshalHelpers-method-getPrimitiveTypeSize'>/**Get the size in bytes for the native camera metadata type.
+</span>
+ &lt;p&gt;This used to determine how many bytes it would take to encode/decode a single value
+ of that {@link nativeType}.&lt;/p&gt;
+@param {Number} nativeType the native type, e.g.
+        {@link android.hardware.camera2.impl.CameraMetadataNative#TYPE_BYTE TYPE_BYTE}.
+@return {Number} size in bytes &gt;= 1
+@throws UnsupportedOperationException if nativeType was not one of the built-in types
+*/
+getPrimitiveTypeSize : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalHelpers-method-checkPrimitiveClass'>/**Ensure that the {@code klass} is one of the metadata-primitive classes.
+</span>@param {Object {java.lang.Class}} klass a non-{@code null} reference
+@return {Object {java.lang.Class}} {@code klass} instance
+@throws UnsupportedOperationException if klass was not one of the built-in classes
+@throws NullPointerException if klass was null
+@see #isPrimitiveClass
+*/
+checkPrimitiveClass : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalHelpers-method-isPrimitiveClass'>/**Checks whether or not {@code klass} is one of the metadata-primitive classes.
+</span>
+ &lt;p&gt;The following types (whether boxed or unboxed) are considered primitive:
+ &lt;ul&gt;
+ &lt;li&gt;byte
+ &lt;li&gt;int
+ &lt;li&gt;float
+ &lt;li&gt;double
+ &lt;li&gt;Rational
+ &lt;/ul&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;This doesn't strictly follow the java understanding of primitive since
+ boxed objects are included, Rational is included, and other types such as char and
+ short are not included.&lt;/p&gt;
+@param {Object {java.lang.Class}} klass a {@link Class} instance; using {@code null} will return {@code false}
+@return {Boolean} {@code true} if primitive, {@code false} otherwise
+*/
+isPrimitiveClass : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalHelpers-method-wrapClassIfPrimitive'>/**Wrap {@code klass} with its wrapper variant if it was a {@code Class} corresponding
+</span> to a Java primitive.
+
+ &lt;p&gt;Non-primitive classes are passed through as-is.&lt;/p&gt;
+
+ &lt;p&gt;For example, for a primitive {@code int.class =&gt; Integer.class},
+ but for a non-primitive {@code Rational.class =&gt; Rational.class}.&lt;/p&gt;
+@param {Object {java.lang.Class}} klass a {@code Class} reference
+@return {Object {java.lang.Class}} wrapped class object, or same class object if non-primitive
+*/
+wrapClassIfPrimitive : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalHelpers-method-toStringNativeType'>/**Return a human-readable representation of the {@code nativeType}, e.g. &quot;TYPE_INT32&quot;
+</span>
+ &lt;p&gt;Out-of-range values return a string with &quot;UNKNOWN&quot; as the prefix.&lt;/p&gt;
+@param {Number} nativeType the native type
+@return {String} human readable type name
+*/
+toStringNativeType : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalHelpers-method-checkNativeType'>/**Ensure that the {@code nativeType} is one of the native types supported
+</span> by {@link CameraMetadataNative}.
+@param {Number} nativeType the native type
+@return {Number} the native type
+@throws UnsupportedOperationException if the native type was invalid
+*/
+checkNativeType : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalHelpers-method-checkNativeTypeEquals'>/**Ensure that the expected and actual native types are equal.
+</span>@param {Number} expectedNativeType the expected native type
+@param {Number} actualNativeType the actual native type
+@return {Number} the actual native type
+@throws UnsupportedOperationException if the types are not equal
+*/
+checkNativeTypeEquals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

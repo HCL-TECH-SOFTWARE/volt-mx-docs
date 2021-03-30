@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-Rating'>/**@class android.media.Rating
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class to encapsulate rating information used as content metadata.
+ A rating is defined by its rating style (see {@link #RATING_HEART},
+ {@link #RATING_THUMB_UP_DOWN}, {@link #RATING_3_STARS}, {@link #RATING_4_STARS},
+ {@link #RATING_5_STARS} or {@link #RATING_PERCENTAGE}) and the actual rating value (which may
+ be defined as &quot;unrated&quot;), both of which are defined when the rating instance is constructed
+ through one of the factory methods.
+*/
+var Rating = {
+
+<span id='android-media-Rating-property-RATING_NONE'>/** Indicates a rating style is not supported. A Rating will never have this
+</span> type, but can be used by other classes to indicate they do not support
+ Rating.
+*/
+RATING_NONE : &quot;0&quot;,
+<span id='android-media-Rating-property-RATING_HEART'>/** A rating style with a single degree of rating, &quot;heart&quot; vs &quot;no heart&quot;. Can be used to
+</span> indicate the content referred to is a favorite (or not).
+*/
+RATING_HEART : &quot;1&quot;,
+<span id='android-media-Rating-property-RATING_THUMB_UP_DOWN'>/** A rating style for &quot;thumb up&quot; vs &quot;thumb down&quot;.
+</span>*/
+RATING_THUMB_UP_DOWN : &quot;2&quot;,
+<span id='android-media-Rating-property-RATING_3_STARS'>/** A rating style with 0 to 3 stars.
+</span>*/
+RATING_3_STARS : &quot;3&quot;,
+<span id='android-media-Rating-property-RATING_4_STARS'>/** A rating style with 0 to 4 stars.
+</span>*/
+RATING_4_STARS : &quot;4&quot;,
+<span id='android-media-Rating-property-RATING_5_STARS'>/** A rating style with 0 to 5 stars.
+</span>*/
+RATING_5_STARS : &quot;5&quot;,
+<span id='android-media-Rating-property-RATING_PERCENTAGE'>/** A rating style expressed as a percentage.
+</span>*/
+RATING_PERCENTAGE : &quot;6&quot;,
+<span id='android-media-Rating-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-media-Rating-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-media-Rating-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-media-Rating-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-media-Rating-method-newUnratedRating'>/**Return a Rating instance with no rating.
+</span> Create and return a new Rating instance with no rating known for the given
+ rating style.
+@param {Number} ratingStyle one of {@link #RATING_HEART}, {@link #RATING_THUMB_UP_DOWN},
+    {@link #RATING_3_STARS}, {@link #RATING_4_STARS}, {@link #RATING_5_STARS},
+    or {@link #RATING_PERCENTAGE}.
+@return {Object {android.media.Rating}} null if an invalid rating style is passed, a new Rating instance otherwise.
+*/
+newUnratedRating : function(  ) {},
+
+<span id='android-media-Rating-method-newHeartRating'>/**Return a Rating instance with a heart-based rating.
+</span> Create and return a new Rating instance with a rating style of {@link #RATING_HEART},
+ and a heart-based rating.
+@param {Boolean} hasHeart true for a &quot;heart selected&quot; rating, false for &quot;heart unselected&quot;.
+@return {Object {android.media.Rating}} a new Rating instance.
+*/
+newHeartRating : function(  ) {},
+
+<span id='android-media-Rating-method-newThumbRating'>/**Return a Rating instance with a thumb-based rating.
+</span> Create and return a new Rating instance with a {@link #RATING_THUMB_UP_DOWN}
+ rating style, and a &quot;thumb up&quot; or &quot;thumb down&quot; rating.
+@param {Boolean} thumbIsUp true for a &quot;thumb up&quot; rating, false for &quot;thumb down&quot;.
+@return {Object {android.media.Rating}} a new Rating instance.
+*/
+newThumbRating : function(  ) {},
+
+<span id='android-media-Rating-method-newStarRating'>/**Return a Rating instance with a star-based rating.
+</span> Create and return a new Rating instance with one of the star-base rating styles
+ and the given integer or fractional number of stars. Non integer values can for instance
+ be used to represent an average rating value, which might not be an integer number of stars.
+@param {Number} starRatingStyle one of {@link #RATING_3_STARS}, {@link #RATING_4_STARS},
+     {@link #RATING_5_STARS}.
+@param {Number} starRating a number ranging from 0.0f to 3.0f, 4.0f or 5.0f according to
+     the rating style.
+@return {Object {android.media.Rating}} null if the rating style is invalid, or the rating is out of range,
+     a new Rating instance otherwise.
+*/
+newStarRating : function(  ) {},
+
+<span id='android-media-Rating-method-newPercentageRating'>/**Return a Rating instance with a percentage-based rating.
+</span> Create and return a new Rating instance with a {@link #RATING_PERCENTAGE}
+ rating style, and a rating of the given percentage.
+@param {Number} percent the value of the rating
+@return {Object {android.media.Rating}} null if the rating is out of range, a new Rating instance otherwise.
+*/
+newPercentageRating : function(  ) {},
+
+<span id='android-media-Rating-method-isRated'>/**Return whether there is a rating value available.
+</span>@return {Boolean} true if the instance was not created with {@link #newUnratedRating(int)}.
+*/
+isRated : function(  ) {},
+
+<span id='android-media-Rating-method-getRatingStyle'>/**Return the rating style.
+</span>@return {Number} one of {@link #RATING_HEART}, {@link #RATING_THUMB_UP_DOWN},
+    {@link #RATING_3_STARS}, {@link #RATING_4_STARS}, {@link #RATING_5_STARS},
+    or {@link #RATING_PERCENTAGE}.
+*/
+getRatingStyle : function(  ) {},
+
+<span id='android-media-Rating-method-hasHeart'>/**Return whether the rating is &quot;heart selected&quot;.
+</span>@return {Boolean} true if the rating is &quot;heart selected&quot;, false if the rating is &quot;heart unselected&quot;,
+    if the rating style is not {@link #RATING_HEART} or if it is unrated.
+*/
+hasHeart : function(  ) {},
+
+<span id='android-media-Rating-method-isThumbUp'>/**Return whether the rating is &quot;thumb up&quot;.
+</span>@return {Boolean} true if the rating is &quot;thumb up&quot;, false if the rating is &quot;thumb down&quot;,
+    if the rating style is not {@link #RATING_THUMB_UP_DOWN} or if it is unrated.
+*/
+isThumbUp : function(  ) {},
+
+<span id='android-media-Rating-method-getStarRating'>/**Return the star-based rating value.
+</span>@return {Number} a rating value greater or equal to 0.0f, or a negative value if the rating style is
+    not star-based, or if it is unrated.
+*/
+getStarRating : function(  ) {},
+
+<span id='android-media-Rating-method-getPercentRating'>/**Return the percentage-based rating value.
+</span>@return {Number} a rating value greater or equal to 0.0f, or a negative value if the rating style is
+    not percentage-based, or if it is unrated.
+*/
+getPercentRating : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-ScanResult'>/**@class android.net.wifi.ScanResult
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Describes information about a detected access point. In addition
+ to the attributes described here, the supplicant keeps track of
+ {@code quality}, {@code noise}, and {@code maxbitrate} attributes,
+ but does not currently report them to external clients.
+*/
+var ScanResult = {
+
+<span id='android-net-wifi-ScanResult-property-SSID'>/** The network name.
+</span>*/
+SSID : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-wifiSsid'>/** Ascii encoded SSID. This will replace SSID when we deprecate it. @hide
+</span>*/
+wifiSsid : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-BSSID'>/** The address of the access point.
+</span>*/
+BSSID : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-hessid'>/** The HESSID from the beacon.
+</span> @hide
+*/
+hessid : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-anqpDomainId'>/** The ANQP Domain ID from the Hotspot 2.0 Indication element, if present.
+</span> @hide
+*/
+anqpDomainId : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-capabilities'>/** Describes the authentication, key management, and encryption schemes
+</span> supported by the access point.
+*/
+capabilities : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-PROTOCOL_NONE'>/** @hide
+</span> No security protocol.
+*/
+PROTOCOL_NONE : &quot;0&quot;,
+<span id='android-net-wifi-ScanResult-property-PROTOCOL_WPA'>/** @hide
+</span> Security protocol type: WPA version 1.
+*/
+PROTOCOL_WPA : &quot;1&quot;,
+<span id='android-net-wifi-ScanResult-property-PROTOCOL_RSN'>/** @hide
+</span> Security protocol type: RSN, for WPA version 2, and version 3.
+*/
+PROTOCOL_RSN : &quot;2&quot;,
+<span id='android-net-wifi-ScanResult-property-PROTOCOL_OSEN'>/** @hide
+</span> Security protocol type:
+ OSU Server-only authenticated layer 2 Encryption Network.
+ Used for Hotspot 2.0.
+*/
+PROTOCOL_OSEN : &quot;3&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_NONE'>/** @hide
+</span> No security key management scheme.
+*/
+KEY_MGMT_NONE : &quot;0&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_PSK'>/** @hide
+</span> Security key management scheme: PSK.
+*/
+KEY_MGMT_PSK : &quot;1&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_EAP'>/** @hide
+</span> Security key management scheme: EAP.
+*/
+KEY_MGMT_EAP : &quot;2&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_FT_PSK'>/** @hide
+</span> Security key management scheme: FT_PSK.
+*/
+KEY_MGMT_FT_PSK : &quot;3&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_FT_EAP'>/** @hide
+</span> Security key management scheme: FT_EAP.
+*/
+KEY_MGMT_FT_EAP : &quot;4&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_PSK_SHA256'>/** @hide
+</span> Security key management scheme: PSK_SHA256
+*/
+KEY_MGMT_PSK_SHA256 : &quot;5&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_EAP_SHA256'>/** @hide
+</span> Security key management scheme: EAP_SHA256.
+*/
+KEY_MGMT_EAP_SHA256 : &quot;6&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_OSEN'>/** @hide
+</span> Security key management scheme: OSEN.
+ Used for Hotspot 2.0.
+*/
+KEY_MGMT_OSEN : &quot;7&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_SAE'>/** @hide
+</span> Security key management scheme: SAE.
+*/
+KEY_MGMT_SAE : &quot;8&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_OWE'>/** @hide
+</span> Security key management scheme: OWE.
+*/
+KEY_MGMT_OWE : &quot;9&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_EAP_SUITE_B_192'>/** @hide
+</span> Security key management scheme: SUITE_B_192.
+*/
+KEY_MGMT_EAP_SUITE_B_192 : &quot;10&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_FT_SAE'>/** @hide
+</span> Security key management scheme: FT_SAE.
+*/
+KEY_MGMT_FT_SAE : &quot;11&quot;,
+<span id='android-net-wifi-ScanResult-property-KEY_MGMT_OWE_TRANSITION'>/** @hide
+</span> Security key management scheme: OWE in transition mode.
+*/
+KEY_MGMT_OWE_TRANSITION : &quot;12&quot;,
+<span id='android-net-wifi-ScanResult-property-CIPHER_NONE'>/** @hide
+</span> No cipher suite.
+*/
+CIPHER_NONE : &quot;0&quot;,
+<span id='android-net-wifi-ScanResult-property-CIPHER_NO_GROUP_ADDRESSED'>/** @hide
+</span> No group addressed, only used for group data cipher.
+*/
+CIPHER_NO_GROUP_ADDRESSED : &quot;1&quot;,
+<span id='android-net-wifi-ScanResult-property-CIPHER_TKIP'>/** @hide
+</span> Cipher suite: TKIP
+*/
+CIPHER_TKIP : &quot;2&quot;,
+<span id='android-net-wifi-ScanResult-property-CIPHER_CCMP'>/** @hide
+</span> Cipher suite: CCMP
+*/
+CIPHER_CCMP : &quot;3&quot;,
+<span id='android-net-wifi-ScanResult-property-CIPHER_GCMP_256'>/** @hide
+</span> Cipher suite: GCMP
+*/
+CIPHER_GCMP_256 : &quot;4&quot;,
+<span id='android-net-wifi-ScanResult-property-level'>/** The detected signal level in dBm, also known as the RSSI.
+</span>
+ &lt;p&gt;Use {@link android.net.wifi.WifiManager#calculateSignalLevel} to convert this number into
+ an absolute signal level which can be displayed to a user.
+*/
+level : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-frequency'>/** The primary 20 MHz frequency (in MHz) of the channel over which the client is communicating
+</span> with the access point.
+*/
+frequency : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-CHANNEL_WIDTH_20MHZ'>/** AP Channel bandwidth is 20 MHZ
+</span>*/
+CHANNEL_WIDTH_20MHZ : &quot;0&quot;,
+<span id='android-net-wifi-ScanResult-property-CHANNEL_WIDTH_40MHZ'>/** AP Channel bandwidth is 40 MHZ
+</span>*/
+CHANNEL_WIDTH_40MHZ : &quot;1&quot;,
+<span id='android-net-wifi-ScanResult-property-CHANNEL_WIDTH_80MHZ'>/** AP Channel bandwidth is 80 MHZ
+</span>*/
+CHANNEL_WIDTH_80MHZ : &quot;2&quot;,
+<span id='android-net-wifi-ScanResult-property-CHANNEL_WIDTH_160MHZ'>/** AP Channel bandwidth is 160 MHZ
+</span>*/
+CHANNEL_WIDTH_160MHZ : &quot;3&quot;,
+<span id='android-net-wifi-ScanResult-property-CHANNEL_WIDTH_80MHZ_PLUS_MHZ'>/** AP Channel bandwidth is 160 MHZ, but 80MHZ + 80MHZ
+</span>*/
+CHANNEL_WIDTH_80MHZ_PLUS_MHZ : &quot;4&quot;,
+<span id='android-net-wifi-ScanResult-property-channelWidth'>/** AP Channel bandwidth; one of {@link #CHANNEL_WIDTH_20MHZ}, {@link #CHANNEL_WIDTH_40MHZ},
+</span> {@link #CHANNEL_WIDTH_80MHZ}, {@link #CHANNEL_WIDTH_160MHZ}
+ or {@link #CHANNEL_WIDTH_80MHZ_PLUS_MHZ}.
+*/
+channelWidth : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-centerFreq0'>/** Not used if the AP bandwidth is 20 MHz
+</span> If the AP use 40, 80 or 160 MHz, this is the center frequency (in MHz)
+ if the AP use 80 + 80 MHz, this is the center frequency of the first segment (in MHz)
+*/
+centerFreq0 : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-centerFreq1'>/** Only used if the AP bandwidth is 80 + 80 MHz
+</span> if the AP use 80 + 80 MHz, this is the center frequency of the second segment (in MHz)
+*/
+centerFreq1 : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-is80211McRTTResponder'>/** @deprecated use is80211mcResponder() instead
+</span> @hide
+*/
+is80211McRTTResponder : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-timestamp'>/** timestamp in microseconds (since boot) when
+</span> this result was last seen.
+*/
+timestamp : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-seen'>/** Timestamp representing date when this result was last seen, in milliseconds from 1970
+</span> {@hide}
+*/
+seen : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-radioChainInfos'>/** Information about the list of the radio chains used to receive this scan result
+</span> (probe response or beacon).
+
+ For Example: On devices with 2 hardware radio chains, this list could hold 1 or 2
+ entries based on whether this scan result was received using one or both the chains.
+ {@hide}
+*/
+radioChainInfos : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-untrusted'>/** Status indicating the scan result does not correspond to a user's saved configuration
+</span> @hide
+ @removed
+*/
+untrusted : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-numUsage'>/** Number of time autojoin used it
+</span> @hide
+*/
+numUsage : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-distanceCm'>/** The approximate distance to the AP in centimeter, if available.  Else
+</span> {@link UNSPECIFIED}.
+ {@hide}
+*/
+distanceCm : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-distanceSdCm'>/** The standard deviation of the distance to the access point, if available.
+</span> Else {@link UNSPECIFIED}.
+ {@hide}
+*/
+distanceSdCm : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-FLAG_PASSPOINT_NETWORK'>/**{@hide} */
+</span>FLAG_PASSPOINT_NETWORK : &quot;1&quot;,
+<span id='android-net-wifi-ScanResult-property-FLAG_80211mc_RESPONDER'>/**{@hide} */
+</span>FLAG_80211mc_RESPONDER : &quot;2&quot;,
+<span id='android-net-wifi-ScanResult-property-flags'>/** Defines flags; such as {@link #FLAG_PASSPOINT_NETWORK}.
+</span> {@hide}
+*/
+flags : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-venueName'>/** Indicates venue name (such as 'San Francisco Airport') published by access point; only
+</span> available on Passpoint network and if published by access point.
+*/
+venueName : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-operatorFriendlyName'>/** Indicates Passpoint operator name published by access point.
+</span>*/
+operatorFriendlyName : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-UNSPECIFIED'>/** {@hide}
+</span>*/
+UNSPECIFIED : &quot;-1&quot;,
+<span id='android-net-wifi-ScanResult-property-anqpLines'>/**  @hide
+</span> anqp lines from supplicant BSS response
+*/
+anqpLines : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-informationElements'>/**information elements found in the beacon
+</span> @hide
+*/
+informationElements : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-anqpElements'>/**ANQP response elements.
+</span> @hide
+*/
+anqpElements : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-isCarrierAp'>/** Flag indicating if this AP is a carrier AP. The determination is based
+</span> on the AP's SSID and if AP is using EAP security.
+
+ @hide
+*/
+isCarrierAp : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-carrierApEapType'>/** The EAP type {@link android.net.wifi.WifiEnterpriseConfig.Eap} associated with this AP if it is a carrier AP.
+</span>
+ @hide
+*/
+carrierApEapType : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-carrierName'>/** The name of the carrier that's associated with this AP if it is a carrier AP.
+</span>
+ @hide
+*/
+carrierName : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-property-CREATOR'>/**Implement the Parcelable interface {@hide} */
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-wifi-ScanResult-method-setFlag'>/**sets a flag in {@link #flags} field
+</span>@param {Number} flag flag to set
+@hide 
+*/
+setFlag : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-clearFlag'>/**clears a flag in {@link #flags} field
+</span>@param {Number} flag flag to set
+@hide 
+*/
+clearFlag : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-is80211mcResponder'>/**
+</span>*/
+is80211mcResponder : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-isPasspointNetwork'>/**
+</span>*/
+isPasspointNetwork : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-is24GHz'>/**
+</span>@hide 
+*/
+is24GHz : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-is24GHz'>/**
+</span>@hide TODO: makes real freq boundaries
+*/
+is24GHz : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-is5GHz'>/**
+</span>@hide 
+*/
+is5GHz : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-is5GHz'>/**
+</span>@hide TODO: makes real freq boundaries
+*/
+is5GHz : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-describeContents'>/**Implement the Parcelable interface {@hide}
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-wifi-ScanResult-method-writeToParcel'>/**Implement the Parcelable interface {@hide}
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

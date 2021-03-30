@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-proto-ProtoStream'>/**@class android.util.proto.ProtoStream
+</span>@extends java.lang.Object
+
+ Abstract base class for both protobuf streams.
+
+ Contains a set of useful constants and methods used by both
+ ProtoOutputStream and ProtoInputStream
+
+ @hide
+*/
+var ProtoStream = {
+
+<span id='android-util-proto-ProtoStream-property-FIELD_ID_SHIFT'>/***/
+</span>FIELD_ID_SHIFT : &quot;3&quot;,
+<span id='android-util-proto-ProtoStream-property-WIRE_TYPE_MASK'>/***/
+</span>WIRE_TYPE_MASK : &quot;7&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_ID_MASK'>/***/
+</span>FIELD_ID_MASK : &quot;-8&quot;,
+<span id='android-util-proto-ProtoStream-property-WIRE_TYPE_VARINT'>/***/
+</span>WIRE_TYPE_VARINT : &quot;0&quot;,
+<span id='android-util-proto-ProtoStream-property-WIRE_TYPE_FIXED64'>/***/
+</span>WIRE_TYPE_FIXED64 : &quot;1&quot;,
+<span id='android-util-proto-ProtoStream-property-WIRE_TYPE_LENGTH_DELIMITED'>/***/
+</span>WIRE_TYPE_LENGTH_DELIMITED : &quot;2&quot;,
+<span id='android-util-proto-ProtoStream-property-WIRE_TYPE_START_GROUP'>/***/
+</span>WIRE_TYPE_START_GROUP : &quot;3&quot;,
+<span id='android-util-proto-ProtoStream-property-WIRE_TYPE_END_GROUP'>/***/
+</span>WIRE_TYPE_END_GROUP : &quot;4&quot;,
+<span id='android-util-proto-ProtoStream-property-WIRE_TYPE_FIXED32'>/***/
+</span>WIRE_TYPE_FIXED32 : &quot;5&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_SHIFT'>/** Position of the field type in a (long) fieldId.
+</span>*/
+FIELD_TYPE_SHIFT : &quot;32&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_MASK'>/** Mask for the field types stored in a fieldId.  Leaves a whole
+</span> byte for future expansion, even though there are currently only 17 types.
+*/
+FIELD_TYPE_MASK : &quot;1095216660480&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_UNKNOWN'>/***/
+</span>FIELD_TYPE_UNKNOWN : &quot;0&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_DOUBLE'>/** The types are copied from external/protobuf/src/google/protobuf/descriptor.h directly,
+</span> so no extra mapping needs to be maintained in this case.
+*/
+FIELD_TYPE_DOUBLE : &quot;4294967296&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_FLOAT'>/***/
+</span>FIELD_TYPE_FLOAT : &quot;8589934592&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_INT64'>/***/
+</span>FIELD_TYPE_INT64 : &quot;12884901888&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_UINT64'>/***/
+</span>FIELD_TYPE_UINT64 : &quot;17179869184&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_INT32'>/***/
+</span>FIELD_TYPE_INT32 : &quot;21474836480&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_FIXED64'>/***/
+</span>FIELD_TYPE_FIXED64 : &quot;25769803776&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_FIXED32'>/***/
+</span>FIELD_TYPE_FIXED32 : &quot;30064771072&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_BOOL'>/***/
+</span>FIELD_TYPE_BOOL : &quot;34359738368&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_STRING'>/***/
+</span>FIELD_TYPE_STRING : &quot;38654705664&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_MESSAGE'>/***/
+</span>FIELD_TYPE_MESSAGE : &quot;47244640256&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_BYTES'>/***/
+</span>FIELD_TYPE_BYTES : &quot;51539607552&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_UINT32'>/***/
+</span>FIELD_TYPE_UINT32 : &quot;55834574848&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_ENUM'>/***/
+</span>FIELD_TYPE_ENUM : &quot;60129542144&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_SFIXED32'>/***/
+</span>FIELD_TYPE_SFIXED32 : &quot;64424509440&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_SFIXED64'>/***/
+</span>FIELD_TYPE_SFIXED64 : &quot;68719476736&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_SINT32'>/***/
+</span>FIELD_TYPE_SINT32 : &quot;73014444032&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_TYPE_SINT64'>/***/
+</span>FIELD_TYPE_SINT64 : &quot;77309411328&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_COUNT_SHIFT'>/***/
+</span>FIELD_COUNT_SHIFT : &quot;40&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_COUNT_MASK'>/***/
+</span>FIELD_COUNT_MASK : &quot;16492674416640&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_COUNT_UNKNOWN'>/***/
+</span>FIELD_COUNT_UNKNOWN : &quot;0&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_COUNT_SINGLE'>/***/
+</span>FIELD_COUNT_SINGLE : &quot;1099511627776&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_COUNT_REPEATED'>/***/
+</span>FIELD_COUNT_REPEATED : &quot;2199023255552&quot;,
+<span id='android-util-proto-ProtoStream-property-FIELD_COUNT_PACKED'>/***/
+</span>FIELD_COUNT_PACKED : &quot;5497558138880&quot;,
+<span id='android-util-proto-ProtoStream-method-getFieldTypeString'>/**Get the developer-usable name of a field type.
+</span>*/
+getFieldTypeString : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getFieldCountString'>/**Get the developer-usable name of a field count.
+</span>*/
+getFieldCountString : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getWireTypeString'>/**Get the developer-usable name of a wire type.
+</span>*/
+getWireTypeString : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getFieldIdString'>/**Get a debug string for a fieldId.
+</span>*/
+getFieldIdString : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-makeFieldId'>/**Combine a fieldId (the field keys in the proto file) and the field flags.
+</span> Mostly useful for testing because the generated code contains the fieldId
+ constants.
+*/
+makeFieldId : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-makeToken'>/**Make a token.
+</span> Bits 61-63 - tag size (So we can go backwards later if the object had not data)
+            - 3 bits, max value 7, max value needed 5
+ Bit  60    - true if the object is repeated (lets us require endObject or endRepeatedObject)
+ Bits 59-51 - depth (For error checking)
+            - 9 bits, max value 512, when checking, value is masked (if we really
+              are more than 512 levels deep)
+ Bits 32-50 - objectId (For error checking)
+            - 19 bits, max value 524,288. that's a lot of objects. IDs will wrap
+              because of the overflow, and only the tokens are compared.
+ Bits  0-31 - offset of interest for the object.
+*/
+makeToken : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getTagSizeFromToken'>/**Get the encoded tag size from the token.
+</span>*/
+getTagSizeFromToken : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getRepeatedFromToken'>/**Get whether this is a call to startObject (false) or startRepeatedObject (true).
+</span>*/
+getRepeatedFromToken : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getDepthFromToken'>/**Get the nesting depth of startObject calls from the token.
+</span>*/
+getDepthFromToken : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getObjectIdFromToken'>/**Get the object ID from the token. The object ID is a serial number for the
+</span> startObject calls that have happened on this object.  The values are truncated
+ to 9 bits, but that is sufficient for error checking.
+*/
+getObjectIdFromToken : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-getOffsetFromToken'>/**Get the location of the offset recorded in the token.
+</span>*/
+getOffsetFromToken : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-convertObjectIdToOrdinal'>/**Convert the object ID to the ordinal value -- the n-th call to startObject.
+</span> The object IDs start at -1 and count backwards, so that the value is unlikely
+ to alias with an actual size field that had been written.
+*/
+convertObjectIdToOrdinal : function(  ) {},
+
+<span id='android-util-proto-ProtoStream-method-token2String'>/**Return a debugging string of a token.
+</span>*/
+token2String : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

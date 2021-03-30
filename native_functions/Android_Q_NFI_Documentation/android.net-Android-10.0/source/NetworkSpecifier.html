@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-NetworkSpecifier'>/**@class android.net.NetworkSpecifier
+</span>@extends java.lang.Object
+
+ Describes specific properties of a requested network for use in a {@link android.net.NetworkRequest}.
+
+ Applications cannot instantiate this class by themselves, but can obtain instances of
+ subclasses of this class via other APIs.
+*/
+var NetworkSpecifier = {
+
+<span id='android-net-NetworkSpecifier-method-satisfiedBy'>/**Returns true if a request with this {@link android.net.NetworkSpecifier} is satisfied by a network
+</span> with the given NetworkSpecifier.
+@hide 
+*/
+satisfiedBy : function(  ) {},
+
+<span id='android-net-NetworkSpecifier-method-assertValidFromUid'>/**Optional method which can be overridden by concrete implementations of NetworkSpecifier to
+</span> check a self-reported UID. A concrete implementation may contain a UID which would be self-
+ reported by the caller (since NetworkSpecifier implementations should be non-mutable). This
+ function is called by ConnectivityService and is passed the actual UID of the caller -
+ allowing the verification of the self-reported UID. In cases of mismatch the implementation
+ should throw a SecurityException.
+@param {Number} requestorUid The UID of the requestor as obtained from its binder.
+@hide 
+*/
+assertValidFromUid : function(  ) {},
+
+<span id='android-net-NetworkSpecifier-method-redact'>/**Optional method which can be overridden by concrete implementations of NetworkSpecifier to
+</span> perform any redaction of information from the NetworkSpecifier, e.g. if it contains
+ sensitive information. The default implementation simply returns the object itself - i.e.
+ no information is redacted. A concrete implementation may return a modified (copy) of the
+ NetworkSpecifier, or even return a null to fully remove all information.
+ &lt;p&gt;
+ This method is relevant to NetworkSpecifier objects used by agents - those are shared with
+ apps by default. Some agents may store sensitive matching information in the specifier,
+ e.g. a Wi-Fi SSID (which should not be shared since it may leak location). Those classes
+ can redact to a null. Other agents use the Network Specifier to share public information
+ with apps - those should not be redacted.
+ &lt;p&gt;
+ The default implementation redacts no information.
+@return {Object {android.net.NetworkSpecifier}} A NetworkSpecifier object to be passed along to the requesting app.
+@hide 
+*/
+redact : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-BatteryManager'>/**@class android.os.BatteryManager
+</span>@extends java.lang.Object
+
+ The BatteryManager class contains strings and constants used for values
+ in the {@link android.content.Intent#ACTION_BATTERY_CHANGED} Intent, and
+ provides a method for querying battery and charging properties.
+*/
+var BatteryManager = {
+
+<span id='android-os-BatteryManager-property-EXTRA_STATUS'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer containing the current status constant.
+*/
+EXTRA_STATUS : &quot;status&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_HEALTH'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer containing the current health constant.
+*/
+EXTRA_HEALTH : &quot;health&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_PRESENT'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> boolean indicating whether a battery is present.
+*/
+EXTRA_PRESENT : &quot;present&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_LEVEL'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer field containing the current battery level, from 0 to
+ {@link #EXTRA_SCALE}.
+*/
+EXTRA_LEVEL : &quot;level&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_BATTERY_LOW'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> Boolean field indicating whether the battery is currently considered to be
+ low, that is whether a {@link Intent#ACTION_BATTERY_LOW} broadcast
+ has been sent.
+*/
+EXTRA_BATTERY_LOW : &quot;battery_low&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_SCALE'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer containing the maximum battery level.
+*/
+EXTRA_SCALE : &quot;scale&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_ICON_SMALL'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer containing the resource ID of a small status bar icon
+ indicating the current battery state.
+*/
+EXTRA_ICON_SMALL : &quot;icon-small&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_PLUGGED'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer indicating whether the device is plugged in to a power
+ source; 0 means it is on battery, other constants are different
+ types of power sources.
+*/
+EXTRA_PLUGGED : &quot;plugged&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_VOLTAGE'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer containing the current battery voltage level.
+*/
+EXTRA_VOLTAGE : &quot;voltage&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_TEMPERATURE'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer containing the current battery temperature.
+*/
+EXTRA_TEMPERATURE : &quot;temperature&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_TECHNOLOGY'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> String describing the technology of the current battery.
+*/
+EXTRA_TECHNOLOGY : &quot;technology&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_INVALID_CHARGER'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> Int value set to nonzero if an unsupported charger is attached
+ to the device.
+ {@hide}
+*/
+EXTRA_INVALID_CHARGER : &quot;invalid_charger&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_MAX_CHARGING_CURRENT'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> Int value set to the maximum charging current supported by the charger in micro amperes.
+ {@hide}
+*/
+EXTRA_MAX_CHARGING_CURRENT : &quot;max_charging_current&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_MAX_CHARGING_VOLTAGE'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> Int value set to the maximum charging voltage supported by the charger in micro volts.
+ {@hide}
+*/
+EXTRA_MAX_CHARGING_VOLTAGE : &quot;max_charging_voltage&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_CHARGE_COUNTER'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> integer containing the charge counter present in the battery.
+ {@hide}
+*/
+EXTRA_CHARGE_COUNTER : &quot;charge_counter&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_SEQUENCE'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_CHANGED}:
+</span> Current int sequence number of the update.
+ {@hide}
+*/
+EXTRA_SEQUENCE : &quot;seq&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_EVENTS'>/** Extra for {@link android.content.Intent#ACTION_BATTERY_LEVEL_CHANGED}:
+</span> Contains list of Bundles representing battery events
+ @hide
+*/
+EXTRA_EVENTS : &quot;android.os.extra.EVENTS&quot;,
+<span id='android-os-BatteryManager-property-EXTRA_EVENT_TIMESTAMP'>/** Extra for event in {@link android.content.Intent#ACTION_BATTERY_LEVEL_CHANGED}:
+</span> Long value representing time when event occurred as returned by
+ {@link android.os.SystemClock#elapsedRealtime()}
+ @hide
+*/
+EXTRA_EVENT_TIMESTAMP : &quot;android.os.extra.EVENT_TIMESTAMP&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_STATUS_UNKNOWN'>/***/
+</span>BATTERY_STATUS_UNKNOWN : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_STATUS_CHARGING'>/***/
+</span>BATTERY_STATUS_CHARGING : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_STATUS_DISCHARGING'>/***/
+</span>BATTERY_STATUS_DISCHARGING : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_STATUS_NOT_CHARGING'>/***/
+</span>BATTERY_STATUS_NOT_CHARGING : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_STATUS_FULL'>/***/
+</span>BATTERY_STATUS_FULL : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_HEALTH_UNKNOWN'>/***/
+</span>BATTERY_HEALTH_UNKNOWN : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_HEALTH_GOOD'>/***/
+</span>BATTERY_HEALTH_GOOD : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_HEALTH_OVERHEAT'>/***/
+</span>BATTERY_HEALTH_OVERHEAT : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_HEALTH_DEAD'>/***/
+</span>BATTERY_HEALTH_DEAD : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_HEALTH_OVER_VOLTAGE'>/***/
+</span>BATTERY_HEALTH_OVER_VOLTAGE : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_HEALTH_UNSPECIFIED_FAILURE'>/***/
+</span>BATTERY_HEALTH_UNSPECIFIED_FAILURE : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_HEALTH_COLD'>/***/
+</span>BATTERY_HEALTH_COLD : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PLUGGED_AC'>/**Power source is an AC charger. */
+</span>BATTERY_PLUGGED_AC : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PLUGGED_USB'>/**Power source is a USB port. */
+</span>BATTERY_PLUGGED_USB : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PLUGGED_WIRELESS'>/**Power source is wireless. */
+</span>BATTERY_PLUGGED_WIRELESS : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PLUGGED_ANY'>/**@hide */
+</span>BATTERY_PLUGGED_ANY : &quot;null&quot;,
+<span id='android-os-BatteryManager-property-ACTION_CHARGING'>/** Sent when the device's battery has started charging (or has reached full charge
+</span> and the device is on power).  This is a good time to do work that you would like to
+ avoid doing while on battery (that is to avoid draining the user's battery due to
+ things they don't care enough about).
+
+ This is paired with {@link #ACTION_DISCHARGING}.  The current state can always
+ be retrieved with {@link #isCharging}().
+*/
+ACTION_CHARGING : &quot;android.os.action.CHARGING&quot;,
+<span id='android-os-BatteryManager-property-ACTION_DISCHARGING'>/** Sent when the device's battery may be discharging, so apps should avoid doing
+</span> extraneous work that would cause it to discharge faster.
+
+ This is paired with {@link #ACTION_CHARGING}.  The current state can always
+ be retrieved with {@link #isCharging}().
+*/
+ACTION_DISCHARGING : &quot;android.os.action.DISCHARGING&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PROPERTY_CHARGE_COUNTER'>/**Battery capacity in microampere-hours, as an integer. */
+</span>BATTERY_PROPERTY_CHARGE_COUNTER : &quot;1&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PROPERTY_CURRENT_NOW'>/** Instantaneous battery current in microamperes, as an integer.  Positive
+</span> values indicate net current entering the battery from a charge source,
+ negative values indicate net current discharging from the battery.
+*/
+BATTERY_PROPERTY_CURRENT_NOW : &quot;2&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PROPERTY_CURRENT_AVERAGE'>/** Average battery current in microamperes, as an integer.  Positive
+</span> values indicate net current entering the battery from a charge source,
+ negative values indicate net current discharging from the battery.
+ The time period over which the average is computed may depend on the
+ fuel gauge hardware and its configuration.
+*/
+BATTERY_PROPERTY_CURRENT_AVERAGE : &quot;3&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PROPERTY_CAPACITY'>/** Remaining battery capacity as an integer percentage of total capacity
+</span> (with no fractional part).
+*/
+BATTERY_PROPERTY_CAPACITY : &quot;4&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PROPERTY_ENERGY_COUNTER'>/** Battery remaining energy in nanowatt-hours, as a long integer.
+</span>*/
+BATTERY_PROPERTY_ENERGY_COUNTER : &quot;5&quot;,
+<span id='android-os-BatteryManager-property-BATTERY_PROPERTY_STATUS'>/** Battery charge status, from a BATTERY_STATUS_* value.
+</span>*/
+BATTERY_PROPERTY_STATUS : &quot;6&quot;,
+<span id='android-os-BatteryManager-method-isCharging'>/**Return true if the battery is currently considered to be charging.  This means that
+</span> the device is plugged in and is supplying sufficient power that the battery level is
+ going up (or the battery is fully charged).  Changes in this state are matched by
+ broadcasts of {@link #ACTION_CHARGING} and {@link #ACTION_DISCHARGING}.
+*/
+isCharging : function(  ) {},
+
+<span id='android-os-BatteryManager-method-getIntProperty'>/**Return the value of a battery property of integer type.
+</span>@param {Number} id identifier of the requested property
+@return {Number} the property value. If the property is not supported or there is any other error,
+    return (a) 0 if {@code targetSdkVersion &lt; VERSION_CODES.P} or (b) Integer.MIN_VALUE
+    if {@code targetSdkVersion &gt;= VERSION_CODES.P}.
+*/
+getIntProperty : function(  ) {},
+
+<span id='android-os-BatteryManager-method-getLongProperty'>/**Return the value of a battery property of long type If the
+</span> platform does not provide the property queried, this value will
+ be Long.MIN_VALUE.
+@param {Number} id identifier of the requested property
+@return {Number} the property value, or Long.MIN_VALUE if not supported.
+*/
+getLongProperty : function(  ) {},
+
+<span id='android-os-BatteryManager-method-isPlugWired'>/**Return true if the plugType given is wired
+</span>@param {Number} plugType {@link #BATTERY_PLUGGED_AC}, {@link #BATTERY_PLUGGED_USB},
+        or {@link #BATTERY_PLUGGED_WIRELESS}
+@return {Boolean} true if plugType is wired
+@hide 
+*/
+isPlugWired : function(  ) {},
+
+<span id='android-os-BatteryManager-method-computeChargeTimeRemaining'>/**Compute an approximation for how much time (in milliseconds) remains until the battery is
+</span> fully charged. Returns -1 if no time can be computed: either there is not enough current
+ data to make a decision or the battery is currently discharging.
+@return {Number} how much time is left, in milliseconds, until the battery is fully charged or -1 if
+         the computation fails
+*/
+computeChargeTimeRemaining : function(  ) {},
+
+<span id='android-os-BatteryManager-method-setChargingStateUpdateDelayMillis'>/**Sets the delay for reporting battery state as charging after device is plugged in.
+</span> This allows machine-learning or heuristics to delay the reporting and the corresponding
+ broadcast, based on battery level, charging rate, and/or other parameters.
+@param {Number} delayMillis the delay in milliseconds, negative value to reset.
+@return {Boolean} True if the delay was set successfully.
+@see ACTION_CHARGING
+@hide 
+*/
+setChargingStateUpdateDelayMillis : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

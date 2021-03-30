@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-ShortcutInfo'>/**@class android.content.pm.ShortcutInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Represents a shortcut that can be published via {@link android.content.pm.ShortcutManager}.
+
+ @see ShortcutManager
+*/
+var ShortcutInfo = {
+
+<span id='android-content-pm-ShortcutInfo-property-RANK_NOT_SET'>/**@hide */
+</span>RANK_NOT_SET : &quot;2147483647&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_DYNAMIC'>/**@hide */
+</span>FLAG_DYNAMIC : &quot;1&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_PINNED'>/**@hide */
+</span>FLAG_PINNED : &quot;2&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_HAS_ICON_RES'>/**@hide */
+</span>FLAG_HAS_ICON_RES : &quot;4&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_HAS_ICON_FILE'>/**@hide */
+</span>FLAG_HAS_ICON_FILE : &quot;8&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_KEY_FIELDS_ONLY'>/**@hide */
+</span>FLAG_KEY_FIELDS_ONLY : &quot;16&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_MANIFEST'>/**@hide */
+</span>FLAG_MANIFEST : &quot;32&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_DISABLED'>/**@hide */
+</span>FLAG_DISABLED : &quot;64&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_STRINGS_RESOLVED'>/**@hide */
+</span>FLAG_STRINGS_RESOLVED : &quot;128&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_IMMUTABLE'>/**@hide */
+</span>FLAG_IMMUTABLE : &quot;256&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_ADAPTIVE_BITMAP'>/**@hide */
+</span>FLAG_ADAPTIVE_BITMAP : &quot;512&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_RETURNED_BY_SERVICE'>/**@hide */
+</span>FLAG_RETURNED_BY_SERVICE : &quot;1024&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_ICON_FILE_PENDING_SAVE'>/**@hide When this is set, the bitmap icon is waiting to be saved. */
+</span>FLAG_ICON_FILE_PENDING_SAVE : &quot;2048&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_SHADOW'>/** &quot;Shadow&quot; shortcuts are the ones that are restored, but the owner package hasn't been
+</span> installed yet.
+ @hide
+*/
+FLAG_SHADOW : &quot;4096&quot;,
+<span id='android-content-pm-ShortcutInfo-property-FLAG_LONG_LIVED'>/**@hide */
+</span>FLAG_LONG_LIVED : &quot;8192&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CLONE_REMOVE_NON_KEY_INFO'>/**@hide */
+</span>CLONE_REMOVE_NON_KEY_INFO : &quot;4&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CLONE_REMOVE_RES_NAMES'>/**@hide */
+</span>CLONE_REMOVE_RES_NAMES : &quot;8&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CLONE_REMOVE_PERSON'>/**@hide */
+</span>CLONE_REMOVE_PERSON : &quot;16&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CLONE_REMOVE_FOR_CREATOR'>/**@hide */
+</span>CLONE_REMOVE_FOR_CREATOR : &quot;9&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CLONE_REMOVE_FOR_LAUNCHER'>/**@hide */
+</span>CLONE_REMOVE_FOR_LAUNCHER : &quot;27&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CLONE_REMOVE_FOR_LAUNCHER_APPROVAL'>/**@hide */
+</span>CLONE_REMOVE_FOR_LAUNCHER_APPROVAL : &quot;26&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CLONE_REMOVE_FOR_APP_PREDICTION'>/**@hide */
+</span>CLONE_REMOVE_FOR_APP_PREDICTION : &quot;9&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_NOT_DISABLED'>/** Shortcut is not disabled.
+</span>*/
+DISABLED_REASON_NOT_DISABLED : &quot;0&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_BY_APP'>/** Shortcut has been disabled by the publisher app with the
+</span> {@link android.content.pm.ShortcutManager#disableShortcuts(List)} API.
+*/
+DISABLED_REASON_BY_APP : &quot;1&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_APP_CHANGED'>/** Shortcut has been disabled due to changes to the publisher app. (e.g. a manifest shortcut
+</span> no longer exists.)
+*/
+DISABLED_REASON_APP_CHANGED : &quot;2&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_UNKNOWN'>/** Shortcut is disabled for an unknown reason.
+</span>*/
+DISABLED_REASON_UNKNOWN : &quot;3&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_VERSION_LOWER'>/** Shortcut has been restored from the previous device, but the publisher app on the current
+</span> device is of a lower version. The shortcut will not be usable until the app is upgraded to
+ the same version or higher.
+*/
+DISABLED_REASON_VERSION_LOWER : &quot;100&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_BACKUP_NOT_SUPPORTED'>/** Shortcut has not been restored because the publisher app does not support backup and restore.
+</span>*/
+DISABLED_REASON_BACKUP_NOT_SUPPORTED : &quot;101&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_SIGNATURE_MISMATCH'>/** Shortcut has not been restored because the publisher app's signature has changed.
+</span>*/
+DISABLED_REASON_SIGNATURE_MISMATCH : &quot;102&quot;,
+<span id='android-content-pm-ShortcutInfo-property-DISABLED_REASON_OTHER_RESTORE_ISSUE'>/** Shortcut has not been restored for unknown reason.
+</span>*/
+DISABLED_REASON_OTHER_RESTORE_ISSUE : &quot;103&quot;,
+<span id='android-content-pm-ShortcutInfo-property-SHORTCUT_CATEGORY_CONVERSATION'>/** Shortcut category for messaging related actions, such as chat.
+</span>*/
+SHORTCUT_CATEGORY_CONVERSATION : &quot;android.shortcut.conversation&quot;,
+<span id='android-content-pm-ShortcutInfo-property-VERSION_CODE_UNKNOWN'>/**@hide */
+</span>VERSION_CODE_UNKNOWN : &quot;-1&quot;,
+<span id='android-content-pm-ShortcutInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-ShortcutInfo-method-getDisabledReasonDebugString'>/**Return a label for disabled reasons, which are *not* supposed to be shown to the user.
+</span>@hide 
+*/
+getDisabledReasonDebugString : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getDisabledReasonForRestoreIssue'>/**Return a label for a disabled reason for shortcuts that are disabled due to a backup and
+</span> restore issue. If the reason is not due to backup &amp; restore, then it'll return null.
+
+ This method returns localized, user-facing strings, which will be returned by
+ {@link #getDisabledMessage}().
+@hide 
+*/
+getDisabledReasonForRestoreIssue : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isDisabledForRestoreIssue'>/**
+</span>@hide 
+*/
+isDisabledForRestoreIssue : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-enforceMandatoryFields'>/**Throws if any of the mandatory fields is not set.
+</span>@hide 
+*/
+enforceMandatoryFields : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-resolveResourceStrings'>/**Load the string resources for the text fields and set them to the actual value fields.
+</span> This will set {@link #FLAG_STRINGS_RESOLVED}.
+@param {Object {Resources}} res {@link Resources} for the publisher.  Must have been loaded with
+ {@link PackageManager#getResourcesForApplicationAsUser}.
+@hide 
+*/
+resolveResourceStrings : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-lookUpResourceName'>/**Look up resource name for a given resource ID.
+</span>@return {String} a simple resource name (e.g. &quot;text_1&quot;) when {@code withType} is false, or with the
+ type (e.g. &quot;string/text_1&quot;).
+@hide 
+*/
+lookUpResourceName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getResourcePackageName'>/**Extract the package name from a fully-donated resource name.
+</span> e.g. &quot;com.android.app1:drawable/icon1&quot; -&gt; &quot;com.android.app1&quot;
+@hide 
+*/
+getResourcePackageName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getResourceTypeName'>/**Extract the type name from a fully-donated resource name.
+</span> e.g. &quot;com.android.app1:drawable/icon1&quot; -&gt; &quot;drawable&quot;
+@hide 
+*/
+getResourceTypeName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getResourceTypeAndEntryName'>/**Extract the type name + the entry name from a fully-donated resource name.
+</span> e.g. &quot;com.android.app1:drawable/icon1&quot; -&gt; &quot;drawable/icon1&quot;
+@hide 
+*/
+getResourceTypeAndEntryName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getResourceEntryName'>/**Extract the entry name from a fully-donated resource name.
+</span> e.g. &quot;com.android.app1:drawable/icon1&quot; -&gt; &quot;icon1&quot;
+@hide 
+*/
+getResourceEntryName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-lookUpResourceId'>/**Return the resource ID for a given resource ID.
+</span>
+ Basically its' a wrapper over {@link Resources#getIdentifier(String, String, String)}, except
+ if {@code resourceName} is an integer then it'll just return its value.  (Which also the
+ aforementioned method would do internally, but not documented, so doing here explicitly.)
+@param {Object {Resources}} res {@link Resources} for the publisher.  Must have been loaded with
+ {@link PackageManager#getResourcesForApplicationAsUser}.
+@hide 
+*/
+lookUpResourceId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-lookupAndFillInResourceNames'>/**Look up resource names from the resource IDs for the icon res and the text fields, and fill
+</span> in the resource name fields.
+@param {Object {Resources}} res {@link Resources} for the publisher.  Must have been loaded with
+ {@link PackageManager#getResourcesForApplicationAsUser}.
+@hide 
+*/
+lookupAndFillInResourceNames : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-lookupAndFillInResourceIds'>/**Look up resource IDs from the resource names for the icon res and the text fields, and fill
+</span> in the resource ID fields.
+
+ This is called when an app is updated.
+@hide 
+*/
+lookupAndFillInResourceIds : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-clone'>/**Copy a {@link android.content.pm.ShortcutInfo}, optionally removing fields.
+</span>@hide 
+*/
+clone : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-ensureUpdatableWith'>/**
+</span>@hide 
+@isUpdating set true if it's &quot;update&quot;, as opposed to &quot;replace&quot;.
+*/
+ensureUpdatableWith : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-copyNonNullFieldsFrom'>/**Copy non-null/zero fields from another {@link android.content.pm.ShortcutInfo}.  Only &quot;public&quot; information
+</span> will be overwritten.  The timestamp will *not* be updated to be consistent with other
+ setters (and also the clock is not injectable in this file).
+
+ - Flags will not change
+ - mBitmapPath will not change
+ - Current time will be set to timestamp
+@throws IllegalStateException if source is not compatible.
+@hide 
+*/
+copyNonNullFieldsFrom : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-validateIcon'>/**
+</span>@hide 
+*/
+validateIcon : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getInvalidIconException'>/**
+</span>@hide 
+*/
+getInvalidIconException : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getId'>/**Returns the ID of a shortcut.
+</span>
+ &lt;p&gt;Shortcut IDs are unique within each publisher app and must be stable across
+ devices so that shortcuts will still be valid when restored on a different device.
+ See {@link android.content.pm.ShortcutManager} for details.
+*/
+getId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getLocusId'>/**Gets the {@link LocusId} associated with this shortcut.
+</span>
+ &lt;p&gt;Used by the Android system to correlate objects (such as
+ {@link Notification} and {@link ContentCaptureContext}).
+*/
+getLocusId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getPackage'>/**Return the package name of the publisher app.
+</span>*/
+getPackage : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getActivity'>/**Return the target activity.
+</span>
+ &lt;p&gt;This has nothing to do with the activity that this shortcut will launch.
+ Launcher apps should show the launcher icon for the returned activity alongside
+ this shortcut.
+@see Builder#setActivity
+*/
+getActivity : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setActivity'>/**
+</span>@hide 
+*/
+setActivity : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getIcon'>/**Returns the shortcut icon.
+</span>@hide 
+*/
+getIcon : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getTitle'>/**
+</span>@hide -- old signature, the internal code still uses it.
+*/
+getTitle : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getTitleResId'>/**
+</span>@hide -- old signature, the internal code still uses it.
+*/
+getTitleResId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getText'>/**
+</span>@hide -- old signature, the internal code still uses it.
+*/
+getText : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getTextResId'>/**
+</span>@hide -- old signature, the internal code still uses it.
+*/
+getTextResId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getShortLabel'>/**Return the short description of a shortcut.
+</span>@see Builder#setShortLabel(CharSequence)
+*/
+getShortLabel : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getShortLabelResourceId'>/**
+</span>@hide 
+*/
+getShortLabelResourceId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getLongLabel'>/**Return the long description of a shortcut.
+</span>@see Builder#setLongLabel(CharSequence)
+*/
+getLongLabel : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getLongLabelResourceId'>/**
+</span>@hide 
+*/
+getLongLabelResourceId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getDisabledMessage'>/**Return the message that should be shown when the user attempts to start a shortcut
+</span> that is disabled.
+@see Builder#setDisabledMessage(CharSequence)
+*/
+getDisabledMessage : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getDisabledMessageResourceId'>/**
+</span>@hide 
+*/
+getDisabledMessageResourceId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setDisabledReason'>/**
+</span>@hide 
+*/
+setDisabledReason : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getDisabledReason'>/**Returns why a shortcut has been disabled.
+</span>*/
+getDisabledReason : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getCategories'>/**Return the shortcut's categories.
+</span>@see Builder#setCategories(Set)
+*/
+getCategories : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getIntent'>/**Returns the intent that is executed when the user selects this shortcut.
+</span> If setIntents() was used, then return the last intent in the array.
+
+ &lt;p&gt;Launcher apps &lt;b&gt;cannot&lt;/b&gt; see the intent.  If a {@link android.content.pm.ShortcutInfo} is
+ obtained via {@link android.content.pm.LauncherApps}, then this method will always return null.
+ Launchers can only start a shortcut intent with {@link android.content.pm.LauncherApps#startShortcut}.
+@see Builder#setIntent(Intent)
+*/
+getIntent : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getIntents'>/**Return the intent set with {@link android.content.pm.SigningDetails.Builder#setIntents(Intent[])}.
+</span>
+ &lt;p&gt;Launcher apps &lt;b&gt;cannot&lt;/b&gt; see the intents.  If a {@link android.content.pm.ShortcutInfo} is
+ obtained via {@link android.content.pm.LauncherApps}, then this method will always return null.
+ Launchers can only start a shortcut intent with {@link android.content.pm.LauncherApps#startShortcut}.
+@see Builder#setIntents(Intent[])
+*/
+getIntents : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getIntentsNoExtras'>/**Return &quot;raw&quot; intents, which is the original intents without the extras.
+</span>@hide 
+*/
+getIntentsNoExtras : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getPersons'>/**Return the Persons set with {@link android.content.pm.SigningDetails.Builder#setPersons(Person[])}.
+</span>@hide 
+*/
+getPersons : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getIntentPersistableExtrases'>/**The extras in the intents.  We convert extras into {@link PersistableBundle} so we can
+</span> persist them.
+@hide 
+*/
+getIntentPersistableExtrases : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getRank'>/**&quot;Rank&quot; of a shortcut, which is a non-negative, sequential value that's unique for each
+</span> {@link #getActivity} for each of the two types of shortcuts (static and dynamic).
+
+ &lt;p&gt;Because static shortcuts and dynamic shortcuts have overlapping ranks,
+ when a launcher app shows shortcuts for an activity, it should first show
+ the static shortcuts, followed by the dynamic shortcuts.  Within each of those categories,
+ shortcuts should be sorted by rank in ascending order.
+
+ &lt;p&gt;&lt;em&gt;Floating shortcuts&lt;/em&gt;, or shortcuts that are neither static nor dynamic, will all
+ have rank 0, because they aren't sorted.
+
+ See the {@link android.content.pm.ShortcutManager}'s class javadoc for details.
+@see Builder#setRank(int)
+*/
+getRank : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasRank'>/**
+</span>@hide 
+*/
+hasRank : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setRank'>/**
+</span>@hide 
+*/
+setRank : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-clearImplicitRankAndRankChangedFlag'>/**
+</span>@hide 
+*/
+clearImplicitRankAndRankChangedFlag : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setImplicitRank'>/**
+</span>@hide 
+*/
+setImplicitRank : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getImplicitRank'>/**
+</span>@hide 
+*/
+getImplicitRank : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setRankChanged'>/**
+</span>@hide 
+*/
+setRankChanged : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isRankChanged'>/**
+</span>@hide 
+*/
+isRankChanged : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getExtras'>/**Extras that the app can set for any purpose.
+</span>@see Builder#setExtras(PersistableBundle)
+*/
+getExtras : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getUserId'>/**
+</span>@hide 
+*/
+getUserId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getUserHandle'>/**{@link UserHandle} on which the publisher created this shortcut.
+</span>*/
+getUserHandle : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getLastChangedTimestamp'>/**Last time when any of the fields was updated.
+</span>*/
+getLastChangedTimestamp : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getFlags'>/**
+</span>@hide 
+*/
+getFlags : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-replaceFlags'>/**
+</span>@hide 
+*/
+replaceFlags : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-addFlags'>/**
+</span>@hide 
+*/
+addFlags : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-clearFlags'>/**
+</span>@hide 
+*/
+clearFlags : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasFlags'>/**
+</span>@hide 
+*/
+hasFlags : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isReturnedByServer'>/**
+</span>@hide 
+*/
+isReturnedByServer : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setReturnedByServer'>/**
+</span>@hide 
+*/
+setReturnedByServer : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isLongLived'>/**
+</span>@hide 
+*/
+isLongLived : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setLongLived'>/**
+</span>@hide 
+*/
+setLongLived : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isDynamic'>/**Return whether a shortcut is dynamic.
+</span>*/
+isDynamic : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isPinned'>/**Return whether a shortcut is pinned.
+</span>*/
+isPinned : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isDeclaredInManifest'>/**Return whether a shortcut is static; that is, whether a shortcut is
+</span> published from AndroidManifest.xml.  If {@code true}, the shortcut is
+ also {@link #isImmutable}().
+
+ &lt;p&gt;When an app is upgraded and a shortcut is no longer published from AndroidManifest.xml,
+ this will be set to {@code false}.  If the shortcut is not pinned, then it'll disappear.
+ However, if it's pinned, it will still be visible, {@link #isEnabled}() will be
+ {@code false} and {@link #isImmutable}() will be {@code true}.
+*/
+isDeclaredInManifest : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isManifestShortcut'>/**
+</span>@hide kept for unit tests
+*/
+isManifestShortcut : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isFloating'>/**
+</span>@return {Boolean} true if pinned but neither static nor dynamic.
+@hide 
+*/
+isFloating : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isOriginallyFromManifest'>/**
+</span>@hide 
+*/
+isOriginallyFromManifest : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isDynamicVisible'>/**
+</span>@hide 
+*/
+isDynamicVisible : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isPinnedVisible'>/**
+</span>@hide 
+*/
+isPinnedVisible : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isManifestVisible'>/**
+</span>@hide 
+*/
+isManifestVisible : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isImmutable'>/**Return if a shortcut is immutable, in which case it cannot be modified with any of
+</span> {@link android.content.pm.ShortcutManager} APIs.
+
+ &lt;p&gt;All static shortcuts are immutable.  When a static shortcut is pinned and is then
+ disabled because it doesn't appear in AndroidManifest.xml for a newer version of the
+ app, {@link #isDeclaredInManifest}() returns {@code false}, but the shortcut
+ is still immutable.
+
+ &lt;p&gt;All shortcuts originally published via the {@link android.content.pm.ShortcutManager} APIs
+ are all mutable.
+*/
+isImmutable : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isEnabled'>/**Returns {@code false} if a shortcut is disabled with
+</span> {@link android.content.pm.ShortcutManager#disableShortcuts}.
+*/
+isEnabled : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isAlive'>/**
+</span>@hide 
+*/
+isAlive : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-usesQuota'>/**
+</span>@hide 
+*/
+usesQuota : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasIconResource'>/**Return whether a shortcut's icon is a resource in the owning package.
+</span>@hide internal/unit tests only
+*/
+hasIconResource : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasStringResources'>/**
+</span>@hide 
+*/
+hasStringResources : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasAnyResources'>/**
+</span>@hide 
+*/
+hasAnyResources : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasIconFile'>/**Return whether a shortcut's icon is stored as a file.
+</span>@hide internal/unit tests only
+*/
+hasIconFile : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasAdaptiveBitmap'>/**Return whether a shortcut's icon is adaptive bitmap following design guideline
+</span> defined in {@link android.graphics.drawable.AdaptiveIconDrawable}.
+@hide internal/unit tests only
+*/
+hasAdaptiveBitmap : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isIconPendingSave'>/**
+</span>@hide 
+*/
+isIconPendingSave : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setIconPendingSave'>/**
+</span>@hide 
+*/
+setIconPendingSave : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-clearIconPendingSave'>/**
+</span>@hide 
+*/
+clearIconPendingSave : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-isVisibleToPublisher'>/**When the system wasn't able to restore a shortcut, it'll still be registered to the system
+</span> but disabled, and such shortcuts will not be visible to the publisher. They're still visible
+ to launchers though.
+@hide 
+*/
+isVisibleToPublisher : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasKeyFieldsOnly'>/**Return whether a shortcut only contains &quot;key&quot; information only or not.  If true, only the
+</span> following fields are available.
+ &lt;ul&gt;
+     &lt;li&gt;{@link #getId}()
+     &lt;li&gt;{@link #getPackage}()
+     &lt;li&gt;{@link #getActivity}()
+     &lt;li&gt;{@link #getLastChangedTimestamp}()
+     &lt;li&gt;{@link #isDynamic}()
+     &lt;li&gt;{@link #isPinned}()
+     &lt;li&gt;{@link #isDeclaredInManifest}()
+     &lt;li&gt;{@link #isImmutable}()
+     &lt;li&gt;{@link #isEnabled}()
+     &lt;li&gt;{@link #getUserHandle}()
+ &lt;/ul&gt;
+
+ &lt;p&gt;For performance reasons, shortcuts passed to
+ {@link android.content.pm.LauncherApps.Callback#onShortcutsChanged(String, List, UserHandle)} as well as those
+ returned from {@link android.content.pm.LauncherApps#getShortcuts(ShortcutQuery, UserHandle)}
+ while using the {@link android.content.pm.LauncherApps.ShortcutQuery#FLAG_GET_KEY_FIELDS_ONLY} option contain only key
+ information.
+*/
+hasKeyFieldsOnly : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-hasStringResourcesResolved'>/**
+</span>@hide 
+*/
+hasStringResourcesResolved : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-updateTimestamp'>/**
+</span>@hide 
+*/
+updateTimestamp : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setTimestamp'>/**
+</span>@hide 
+*/
+setTimestamp : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-clearIcon'>/**
+</span>@hide 
+*/
+clearIcon : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setIconResourceId'>/**
+</span>@hide 
+*/
+setIconResourceId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getIconResourceId'>/**Get the resource ID for the icon, valid only when {@link #hasIconResource}() } is true.
+</span>@hide internal / tests only.
+*/
+getIconResourceId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getBitmapPath'>/**Bitmap path.  Note this will be null even if {@link #hasIconFile}() is set when the save
+</span> is pending.  Use {@link #isIconPendingSave}() to check it.
+@hide 
+*/
+getBitmapPath : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setBitmapPath'>/**
+</span>@hide 
+*/
+setBitmapPath : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setDisabledMessageResId'>/**
+</span>@hide 
+*/
+setDisabledMessageResId : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setDisabledMessage'>/**
+</span>@hide 
+*/
+setDisabledMessage : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getTitleResName'>/**
+</span>@hide 
+*/
+getTitleResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setTitleResName'>/**
+</span>@hide 
+*/
+setTitleResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getTextResName'>/**
+</span>@hide 
+*/
+getTextResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setTextResName'>/**
+</span>@hide 
+*/
+setTextResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getDisabledMessageResName'>/**
+</span>@hide 
+*/
+getDisabledMessageResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setDisabledMessageResName'>/**
+</span>@hide 
+*/
+setDisabledMessageResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-getIconResName'>/**
+</span>@hide 
+*/
+getIconResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setIconResName'>/**
+</span>@hide 
+*/
+setIconResName : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setIntents'>/**Replaces the intent.
+</span>@throws IllegalArgumentException when extra is not compatible with {@link PersistableBundle}.
+@hide 
+*/
+setIntents : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setIntentExtras'>/**
+</span>@hide 
+*/
+setIntentExtras : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-setCategories'>/**Replaces the categories.
+</span>@hide 
+*/
+setCategories : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-toString'>/**Return a string representation, intended for logging.  Some fields will be retracted.
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-toInsecureString'>/**
+</span>@hide 
+*/
+toInsecureString : function(  ) {},
+
+<span id='android-content-pm-ShortcutInfo-method-toDumpString'>/**
+</span>@hide 
+*/
+toDumpString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvInputManager-SessionCallback'>/**@class android.media.tv.TvInputManager.SessionCallback
+</span>@extends java.lang.Object
+
+ Interface used to receive the created session.
+ @hide
+*/
+var SessionCallback = {
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onSessionCreated'>/**This is called after {@link android.media.tv.TvInputManager#createSession} has been processed.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} instance created. This can be
+            {@code null} if the creation request failed.
+*/
+onSessionCreated : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onSessionReleased'>/**This is called when {@link android.media.tv.TvInputManager.Session} is released.
+</span> This typically happens when the process hosting the session has crashed or been killed.
+@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} instance released.
+*/
+onSessionReleased : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onChannelRetuned'>/**This is called when the channel of this session is changed by the underlying TV input
+</span> without any {@link android.media.tv.TvInputManager.Session#tune(Uri)} request.
+@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Object {Uri}} channelUri The URI of a channel.
+*/
+onChannelRetuned : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onTracksChanged'>/**This is called when the track information of the session has been changed.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Object {java.util.List}} tracks A list which includes track information.
+*/
+onTracksChanged : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onTrackSelected'>/**This is called when a track for a given type is selected.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Number} type The type of the selected track. The type can be
+            {@link TvTrackInfo#TYPE_AUDIO}, {@link TvTrackInfo#TYPE_VIDEO} or
+            {@link TvTrackInfo#TYPE_SUBTITLE}.
+@param {String} trackId The ID of the selected track. When {@code null} the currently selected
+            track for a given type should be unselected.
+*/
+onTrackSelected : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onVideoSizeChanged'>/**This is invoked when the video size has been changed. It is also called when the first
+</span> time video size information becomes available after the session is tuned to a specific
+ channel.
+@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Number} width The width of the video.
+@param {Number} height The height of the video.
+*/
+onVideoSizeChanged : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onVideoAvailable'>/**This is called when the video is available, so the TV input starts the playback.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+*/
+onVideoAvailable : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onVideoUnavailable'>/**This is called when the video is not available, so the TV input stops the playback.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Number} reason The reason why the TV input stopped the playback:
+ &lt;ul&gt;
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_UNKNOWN}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_TUNING}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_WEAK_SIGNAL}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_BUFFERING}
+ &lt;li&gt;{@link TvInputManager#VIDEO_UNAVAILABLE_REASON_AUDIO_ONLY}
+ &lt;/ul&gt;
+*/
+onVideoUnavailable : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onContentAllowed'>/**This is called when the current program content turns out to be allowed to watch since
+</span> its content rating is not blocked by parental controls.
+@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+*/
+onContentAllowed : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onContentBlocked'>/**This is called when the current program content turns out to be not allowed to watch
+</span> since its content rating is blocked by parental controls.
+@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Object {TvContentRating}} rating The content ration of the blocked program.
+*/
+onContentBlocked : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onLayoutSurface'>/**This is called when {@link android.media.tv.TvInputService.Session#layoutSurface} is called to change the
+</span> layout of surface.
+@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Number} left Left position.
+@param {Number} top Top position.
+@param {Number} right Right position.
+@param {Number} bottom Bottom position.
+*/
+onLayoutSurface : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onSessionEvent'>/**This is called when a custom event has been sent from this session.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback
+@param {String} eventType The type of the event.
+@param {Object {Bundle}} eventArgs Optional arguments of the event.
+*/
+onSessionEvent : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onTimeShiftStatusChanged'>/**This is called when the time shift status is changed.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Number} status The current time shift status. Should be one of the followings.
+ &lt;ul&gt;
+ &lt;li&gt;{@link TvInputManager#TIME_SHIFT_STATUS_UNSUPPORTED}
+ &lt;li&gt;{@link TvInputManager#TIME_SHIFT_STATUS_UNAVAILABLE}
+ &lt;li&gt;{@link TvInputManager#TIME_SHIFT_STATUS_AVAILABLE}
+ &lt;/ul&gt;
+*/
+onTimeShiftStatusChanged : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onTimeShiftStartPositionChanged'>/**This is called when the start position for time shifting has changed.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Number} timeMs The start position for time shifting, in milliseconds since the epoch.
+*/
+onTimeShiftStartPositionChanged : function(  ) {},
+
+<span id='android-media-tv-TvInputManager-SessionCallback-method-onTimeShiftCurrentPositionChanged'>/**This is called when the current position for time shifting is changed.
+</span>@param {Object {TvInputManager.Session}} session A {@link TvInputManager.Session} associated with this callback.
+@param {Number} timeMs The current position for time shifting, in milliseconds since the epoch.
+*/
+onTimeShiftCurrentPositionChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

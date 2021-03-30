@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-DatabaseUtils'>/**@class android.database.DatabaseUtils
+</span>@extends java.lang.Object
+
+ Static utility methods for dealing with databases and {@link android.database.Cursor}s.
+*/
+var DatabaseUtils = {
+
+<span id='android-database-DatabaseUtils-property-STATEMENT_SELECT'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_SELECT : &quot;1&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_UPDATE'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_UPDATE : &quot;2&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_ATTACH'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_ATTACH : &quot;3&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_BEGIN'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_BEGIN : &quot;4&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_COMMIT'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_COMMIT : &quot;5&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_ABORT'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_ABORT : &quot;6&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_PRAGMA'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_PRAGMA : &quot;7&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_DDL'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_DDL : &quot;8&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_UNPREPARED'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_UNPREPARED : &quot;9&quot;,
+<span id='android-database-DatabaseUtils-property-STATEMENT_OTHER'>/**One of the values returned by {@link #getSqlStatementType}(String). */
+</span>STATEMENT_OTHER : &quot;99&quot;,
+<span id='android-database-DatabaseUtils-method-writeExceptionToParcel'>/**Special function for writing an exception result at the header of
+</span> a parcel, to be used when returning an exception from a transaction.
+ exception will be re-thrown by the function in another process
+@param {Object {Parcel}} reply Parcel to write to
+@param {Object {Exception}} e The Exception to be written.
+@see Parcel#writeNoException
+@see Parcel#writeException
+*/
+writeExceptionToParcel : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-readExceptionFromParcel'>/**Special function for reading an exception result from the header of
+</span> a parcel, to be used after receiving the result of a transaction.  This
+ will throw the exception for you if it had been written to the Parcel,
+ otherwise return and let you read the normal result data from the Parcel.
+@param {Object {Parcel}} reply Parcel to read from
+@see Parcel#writeNoException
+@see Parcel#readException
+*/
+readExceptionFromParcel : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-readExceptionWithFileNotFoundExceptionFromParcel'>/**
+</span>*/
+readExceptionWithFileNotFoundExceptionFromParcel : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-readExceptionWithOperationApplicationExceptionFromParcel'>/**
+</span>*/
+readExceptionWithOperationApplicationExceptionFromParcel : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-bindObjectToProgram'>/**Binds the given Object to the given SQLiteProgram using the proper
+</span> typing. For example, bind numbers as longs/doubles, and everything else
+ as a string by call toString() on it.
+@param {Object {SQLiteProgram}} prog the program to bind the object to
+@param {Number} index the 1-based index to bind at
+@param {Object {Object}} value the value to bind
+*/
+bindObjectToProgram : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-bindSelection'>/**Bind the given selection with the given selection arguments.
+</span> &lt;p&gt;
+ Internally assumes that '?' is only ever used for arguments, and doesn't
+ appear as a literal or escaped value.
+ &lt;p&gt;
+ This method is typically useful for trusted code that needs to cook up a
+ fully-bound selection.
+@hide 
+*/
+bindSelection : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-getTypeOfObject'>/**Returns data type of the given object's value.
+</span>&lt;p&gt;
+ Returned values are
+ &lt;ul&gt;
+   &lt;li&gt;{@link android.database.Cursor#FIELD_TYPE_NULL}&lt;/li&gt;
+   &lt;li&gt;{@link android.database.Cursor#FIELD_TYPE_INTEGER}&lt;/li&gt;
+   &lt;li&gt;{@link android.database.Cursor#FIELD_TYPE_FLOAT}&lt;/li&gt;
+   &lt;li&gt;{@link android.database.Cursor#FIELD_TYPE_STRING}&lt;/li&gt;
+   &lt;li&gt;{@link android.database.Cursor#FIELD_TYPE_BLOB}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+@param {Object {Object}} obj the object whose value type is to be returned
+@return {Number} object value type
+@hide 
+*/
+getTypeOfObject : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorFillWindow'>/**Fills the specified cursor window by iterating over the contents of the cursor.
+</span> The window is filled until the cursor is exhausted or the window runs out
+ of space.
+
+ The original position of the cursor is left unchanged by this operation.
+@param {Object {Cursor}} cursor The cursor that contains the data to put in the window.
+@param {Number} position The start position for filling the window.
+@param {Object {CursorWindow}} window The window to fill.
+@hide 
+*/
+cursorFillWindow : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-appendEscapedSQLString'>/**Appends an SQL string to the given StringBuilder, including the opening
+</span> and closing single quotes. Any single quotes internal to sqlString will
+ be escaped.
+
+ This method is deprecated because we want to encourage everyone
+ to use the &quot;?&quot; binding form.  However, when implementing a
+ ContentProvider, one may want to add WHERE clauses that were
+ not provided by the caller.  Since &quot;?&quot; is a positional form,
+ using it in this case could break the caller because the
+ indexes would be shifted to accomodate the ContentProvider's
+ internal bindings.  In that case, it may be necessary to
+ construct a WHERE clause manually.  This method is useful for
+ those cases.
+@param {Object {StringBuilder}} sb the StringBuilder that the SQL string will be appended to
+@param {String} sqlString the raw string to be appended, which may contain single
+                  quotes
+*/
+appendEscapedSQLString : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-sqlEscapeString'>/**SQL-escape a string.
+</span>*/
+sqlEscapeString : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-appendValueToSql'>/**Appends an Object to an SQL string with the proper escaping, etc.
+</span>*/
+appendValueToSql : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-concatenateWhere'>/**Concatenates two SQL WHERE clauses, handling empty or null values.
+</span>*/
+concatenateWhere : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-getCollationKey'>/**return the collation key
+</span>@param {String} name
+@return {String} the collation key
+*/
+getCollationKey : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-getHexCollationKey'>/**return the collation key in hex format
+</span>@param {String} name
+@return {String} the collation key in hex format
+*/
+getHexCollationKey : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCursor'>/**Prints the contents of a Cursor to System.out. The position is restored
+</span> after printing.
+@param {Object {Cursor}} cursor the cursor to print
+*/
+dumpCursor : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCursor'>/**Prints the contents of a Cursor to a PrintSteam. The position is restored
+</span> after printing.
+@param {Object {Cursor}} cursor the cursor to print
+@param {Object {PrintStream}} stream the stream to print to
+*/
+dumpCursor : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCursor'>/**Prints the contents of a Cursor to a StringBuilder. The position
+</span> is restored after printing.
+@param {Object {Cursor}} cursor the cursor to print
+@param {Object {StringBuilder}} sb the StringBuilder to print to
+*/
+dumpCursor : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCursorToString'>/**Prints the contents of a Cursor to a String. The position is restored
+</span> after printing.
+@param {Object {Cursor}} cursor the cursor to print
+@return {String} a String that contains the dumped cursor
+*/
+dumpCursorToString : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCurrentRow'>/**Prints the contents of a Cursor's current row to System.out.
+</span>@param {Object {Cursor}} cursor the cursor to print from
+*/
+dumpCurrentRow : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCurrentRow'>/**Prints the contents of a Cursor's current row to a PrintSteam.
+</span>@param {Object {Cursor}} cursor the cursor to print
+@param {Object {PrintStream}} stream the stream to print to
+*/
+dumpCurrentRow : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCurrentRow'>/**Prints the contents of a Cursor's current row to a StringBuilder.
+</span>@param {Object {Cursor}} cursor the cursor to print
+@param {Object {StringBuilder}} sb the StringBuilder to print to
+*/
+dumpCurrentRow : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-dumpCurrentRowToString'>/**Dump the contents of a Cursor's current row to a String.
+</span>@param {Object {Cursor}} cursor the cursor to print
+@return {String} a String that contains the dumped cursor row
+*/
+dumpCurrentRowToString : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorStringToContentValues'>/**Reads a String out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The TEXT field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into, with the field as the key
+*/
+cursorStringToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorStringToInsertHelper'>/**Reads a String out of a field in a Cursor and writes it to an InsertHelper.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The TEXT field to read
+@param {Object {DatabaseUtils.InsertHelper}} inserter The InsertHelper to bind into
+@param {Number} index the index of the bind entry in the InsertHelper
+*/
+cursorStringToInsertHelper : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorStringToContentValues'>/**Reads a String out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The TEXT field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into, with the field as the key
+@param {String} key The key to store the value with in the map
+*/
+cursorStringToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorIntToContentValues'>/**Reads an Integer out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The INTEGER field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into, with the field as the key
+*/
+cursorIntToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorIntToContentValues'>/**Reads a Integer out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The INTEGER field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into, with the field as the key
+@param {String} key The key to store the value with in the map
+*/
+cursorIntToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorLongToContentValues'>/**Reads a Long out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The INTEGER field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into, with the field as the key
+*/
+cursorLongToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorLongToContentValues'>/**Reads a Long out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The INTEGER field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into
+@param {String} key The key to store the value with in the map
+*/
+cursorLongToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorDoubleToCursorValues'>/**Reads a Double out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The REAL field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into
+*/
+cursorDoubleToCursorValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorDoubleToContentValues'>/**Reads a Double out of a field in a Cursor and writes it to a Map.
+</span>@param {Object {Cursor}} cursor The cursor to read from
+@param {String} field The REAL field to read
+@param {Object {ContentValues}} values The {@link ContentValues} to put the value into
+@param {String} key The key to store the value with in the map
+*/
+cursorDoubleToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorRowToContentValues'>/**Read the entire contents of a cursor row and store them in a ContentValues.
+</span>@param {Object {Cursor}} cursor the cursor to read from.
+@param {Object {ContentValues}} values the {@link ContentValues} to put the row into.
+*/
+cursorRowToContentValues : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorPickFillWindowStartPosition'>/**Picks a start position for {@link android.database.Cursor#fillWindow} such that the
+</span> window will contain the requested row and a useful range of rows
+ around it.
+
+ When the data set is too large to fit in a cursor window, seeking the
+ cursor can become a very expensive operation since we have to run the
+ query again when we move outside the bounds of the current window.
+
+ We try to choose a start position for the cursor window such that
+ 1/3 of the window's capacity is used to hold rows before the requested
+ position and 2/3 of the window's capacity is used to hold rows after the
+ requested position.
+@param {Number} cursorPosition The row index of the row we want to get.
+@param {Number} cursorWindowCapacity The estimated number of rows that can fit in
+ a cursor window, or 0 if unknown.
+@return {Number} The recommended start position, always less than or equal to
+ the requested row.
+@hide 
+*/
+cursorPickFillWindowStartPosition : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-queryNumEntries'>/**Query the table for the number of rows in the table.
+</span>@param {Object {SQLiteDatabase}} db the database the table is in
+@param {String} table the name of the table to query
+@return {Number} the number of rows in the table
+*/
+queryNumEntries : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-queryNumEntries'>/**Query the table for the number of rows in the table.
+</span>@param {Object {SQLiteDatabase}} db the database the table is in
+@param {String} table the name of the table to query
+@param {String} selection A filter declaring which rows to return,
+              formatted as an SQL WHERE clause (excluding the WHERE itself).
+              Passing null will count all rows for the given table
+@return {Number} the number of rows in the table filtered by the selection
+*/
+queryNumEntries : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-queryNumEntries'>/**Query the table for the number of rows in the table.
+</span>@param {Object {SQLiteDatabase}} db the database the table is in
+@param {String} table the name of the table to query
+@param {String} selection A filter declaring which rows to return,
+              formatted as an SQL WHERE clause (excluding the WHERE itself).
+              Passing null will count all rows for the given table
+@param {Object {java.lang.String[]}} selectionArgs You may include ?s in selection,
+              which will be replaced by the values from selectionArgs,
+              in order that they appear in the selection.
+              The values will be bound as Strings.
+@return {Number} the number of rows in the table filtered by the selection
+*/
+queryNumEntries : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-queryIsEmpty'>/**Query the table to check whether a table is empty or not
+</span>@param {Object {SQLiteDatabase}} db the database the table is in
+@param {String} table the name of the table to query
+@return {Boolean} True if the table is empty
+@hide 
+*/
+queryIsEmpty : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-longForQuery'>/**Utility method to run the query on the db and return the value in the
+</span> first column of the first row.
+*/
+longForQuery : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-longForQuery'>/**Utility method to run the pre-compiled query and return the value in the
+</span> first column of the first row.
+*/
+longForQuery : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-stringForQuery'>/**Utility method to run the query on the db and return the value in the
+</span> first column of the first row.
+*/
+stringForQuery : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-stringForQuery'>/**Utility method to run the pre-compiled query and return the value in the
+</span> first column of the first row.
+*/
+stringForQuery : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-blobFileDescriptorForQuery'>/**Utility method to run the query on the db and return the blob value in the
+</span> first column of the first row.
+@return {Object {android.os.ParcelFileDescriptor}} A read-only file descriptor for a copy of the blob value.
+*/
+blobFileDescriptorForQuery : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-blobFileDescriptorForQuery'>/**Utility method to run the pre-compiled query and return the blob value in the
+</span> first column of the first row.
+@return {Object {android.os.ParcelFileDescriptor}} A read-only file descriptor for a copy of the blob value.
+*/
+blobFileDescriptorForQuery : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorStringToContentValuesIfPresent'>/**Reads a String out of a column in a Cursor and writes it to a ContentValues.
+</span> Adds nothing to the ContentValues if the column isn't present or if its value is null.
+@param {Object {Cursor}} cursor The cursor to read from
+@param {Object {ContentValues}} column The column to read
+@param {String} values The {@link ContentValues} to put the value into
+*/
+cursorStringToContentValuesIfPresent : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorLongToContentValuesIfPresent'>/**Reads a Long out of a column in a Cursor and writes it to a ContentValues.
+</span> Adds nothing to the ContentValues if the column isn't present or if its value is null.
+@param {Object {Cursor}} cursor The cursor to read from
+@param {Object {ContentValues}} column The column to read
+@param {String} values The {@link ContentValues} to put the value into
+*/
+cursorLongToContentValuesIfPresent : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorShortToContentValuesIfPresent'>/**Reads a Short out of a column in a Cursor and writes it to a ContentValues.
+</span> Adds nothing to the ContentValues if the column isn't present or if its value is null.
+@param {Object {Cursor}} cursor The cursor to read from
+@param {Object {ContentValues}} column The column to read
+@param {String} values The {@link ContentValues} to put the value into
+*/
+cursorShortToContentValuesIfPresent : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorIntToContentValuesIfPresent'>/**Reads a Integer out of a column in a Cursor and writes it to a ContentValues.
+</span> Adds nothing to the ContentValues if the column isn't present or if its value is null.
+@param {Object {Cursor}} cursor The cursor to read from
+@param {Object {ContentValues}} column The column to read
+@param {String} values The {@link ContentValues} to put the value into
+*/
+cursorIntToContentValuesIfPresent : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorFloatToContentValuesIfPresent'>/**Reads a Float out of a column in a Cursor and writes it to a ContentValues.
+</span> Adds nothing to the ContentValues if the column isn't present or if its value is null.
+@param {Object {Cursor}} cursor The cursor to read from
+@param {Object {ContentValues}} column The column to read
+@param {String} values The {@link ContentValues} to put the value into
+*/
+cursorFloatToContentValuesIfPresent : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-cursorDoubleToContentValuesIfPresent'>/**Reads a Double out of a column in a Cursor and writes it to a ContentValues.
+</span> Adds nothing to the ContentValues if the column isn't present or if its value is null.
+@param {Object {Cursor}} cursor The cursor to read from
+@param {Object {ContentValues}} column The column to read
+@param {String} values The {@link ContentValues} to put the value into
+*/
+cursorDoubleToContentValuesIfPresent : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-createDbFromSqlStatements'>/**Creates a db and populates it with the sql statements in sqlStatements.
+</span>@param {Object {Context}} context the context to use to create the db
+@param {String} dbName the name of the db to create
+@param {Number} dbVersion the version to set on the db
+@param {String} sqlStatements the statements to use to populate the db. This should be a single string
+   of the form returned by sqlite3's &lt;tt&gt;.dump&lt;/tt&gt; command (statements separated by
+   semicolons)
+*/
+createDbFromSqlStatements : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-getSqlStatementType'>/**Returns one of the following which represent the type of the given SQL statement.
+</span> &lt;ol&gt;
+   &lt;li&gt;{@link #STATEMENT_SELECT}&lt;/li&gt;
+   &lt;li&gt;{@link #STATEMENT_UPDATE}&lt;/li&gt;
+   &lt;li&gt;{@link #STATEMENT_ATTACH}&lt;/li&gt;
+   &lt;li&gt;{@link #STATEMENT_BEGIN}&lt;/li&gt;
+   &lt;li&gt;{@link #STATEMENT_COMMIT}&lt;/li&gt;
+   &lt;li&gt;{@link #STATEMENT_ABORT}&lt;/li&gt;
+   &lt;li&gt;{@link #STATEMENT_OTHER}&lt;/li&gt;
+ &lt;/ol&gt;
+@param {String} sql the SQL statement whose type is returned by this method
+@return {Number} one of the values listed above
+*/
+getSqlStatementType : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-appendSelectionArgs'>/**Appends one set of selection args to another. This is useful when adding a selection
+</span> argument to a user provided set.
+*/
+appendSelectionArgs : function(  ) {},
+
+<span id='android-database-DatabaseUtils-method-findRowIdColumnIndex'>/**Returns column index of &quot;_id&quot; column, or -1 if not found.
+</span>@hide 
+*/
+findRowIdColumnIndex : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

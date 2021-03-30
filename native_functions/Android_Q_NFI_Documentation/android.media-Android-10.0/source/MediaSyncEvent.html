@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaSyncEvent'>/**@class android.media.MediaSyncEvent
+</span>@extends java.lang.Object
+
+ The MediaSyncEvent class defines events that can be used to synchronize playback or capture
+ actions between different players and recorders.
+ &lt;p&gt;For instance, {@link android.media.AudioRecord#startRecording(MediaSyncEvent)} is used to start capture
+ only when the playback on a particular audio session is complete.
+ The audio session ID is retrieved from a player (e.g {@link android.media.MediaPlayer}, {@link android.media.AudioTrack} or
+ {@link android.media.ToneGenerator}) by use of the getAudioSessionId() method.
+*/
+var MediaSyncEvent = {
+
+<span id='android-media-MediaSyncEvent-property-SYNC_EVENT_NONE'>/** No sync event specified. When used with a synchronized playback or capture method, the
+</span> behavior is equivalent to calling the corresponding non synchronized method.
+*/
+SYNC_EVENT_NONE : &quot;0&quot;,
+<span id='android-media-MediaSyncEvent-property-SYNC_EVENT_PRESENTATION_COMPLETE'>/** The corresponding action is triggered only when the presentation is completed
+</span> (meaning the media has been presented to the user) on the specified session.
+ A synchronization of this type requires a source audio session ID to be set via
+ {@link #setAudioSessionId}(int) method.
+*/
+SYNC_EVENT_PRESENTATION_COMPLETE : &quot;1&quot;,
+<span id='android-media-MediaSyncEvent-method-createEvent'>/**Creates a synchronization event of the sepcified type.
+</span>
+ &lt;p&gt;The type specifies which kind of event is monitored.
+ For instance, event {@link #SYNC_EVENT_PRESENTATION_COMPLETE} corresponds to the audio being
+ presented to the user on a particular audio session.
+@param {Number} eventType the synchronization event type.
+@return {Object {android.media.MediaSyncEvent}} the MediaSyncEvent created.
+@throws java.lang.IllegalArgumentException
+*/
+createEvent : function(  ) {},
+
+<span id='android-media-MediaSyncEvent-method-setAudioSessionId'>/**Sets the event source audio session ID.
+</span>
+ &lt;p&gt;The audio session ID specifies on which audio session the synchronization event should be
+ monitored.
+ It is mandatory for certain event types (e.g. {@link #SYNC_EVENT_PRESENTATION_COMPLETE}).
+ For instance, the audio session ID can be retrieved via
+ {@link android.media.MediaPlayer#getAudioSessionId()} when monitoring an event on a particular MediaPlayer.
+@param {Number} audioSessionId the audio session ID of the event source being monitored.
+@return {Object {android.media.MediaSyncEvent}} the MediaSyncEvent the method is called on.
+@throws java.lang.IllegalArgumentException
+*/
+setAudioSessionId : function(  ) {},
+
+<span id='android-media-MediaSyncEvent-method-getType'>/**Gets the synchronization event type.
+</span>@return {Number} the synchronization event type.
+*/
+getType : function(  ) {},
+
+<span id='android-media-MediaSyncEvent-method-getAudioSessionId'>/**Gets the synchronization event audio session ID.
+</span>@return {Number} the synchronization audio session ID. The returned audio session ID is 0 if it has
+ not been set.
+*/
+getAudioSessionId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

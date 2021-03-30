@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-Connection'>/**@class com.android.internal.telephony.Connection
+</span>@extends java.lang.Object
+
+ {@hide}
+*/
+var Connection = {
+
+<span id='com-android-internal-telephony-Connection-property-AUDIO_QUALITY_STANDARD'>/***/
+</span>AUDIO_QUALITY_STANDARD : &quot;1&quot;,
+<span id='com-android-internal-telephony-Connection-property-AUDIO_QUALITY_HIGH_DEFINITION'>/***/
+</span>AUDIO_QUALITY_HIGH_DEFINITION : &quot;2&quot;,
+<span id='com-android-internal-telephony-Connection-property-mListeners'>/***/
+</span>mListeners : &quot;null&quot;,
+<span id='com-android-internal-telephony-Connection-property-mPreHandoverState'>/***/
+</span>mPreHandoverState : &quot;null&quot;,
+<span id='com-android-internal-telephony-Connection-method-getTelecomCallId'>/**
+</span>@return {String} The telecom internal call ID associated with this connection.  Only to be used for
+ debugging purposes.
+*/
+getTelecomCallId : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setTelecomCallId'>/**Sets the telecom call ID associated with this connection.
+</span>@param {String} telecomCallId The telecom call ID.
+*/
+setTelecomCallId : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getAddress'>/**Gets address (e.g. phone number) associated with connection.
+</span> TODO: distinguish reasons for unavailability
+@return {String} address or null if unavailable
+*/
+getAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getCnapName'>/**Gets CNAP name associated with connection.
+</span>@return {String} cnap name or null if unavailable
+*/
+getCnapName : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getOrigDialString'>/**Get original dial string.
+</span>@return {String} original dial string or null if unavailable
+*/
+getOrigDialString : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getCnapNamePresentation'>/**Gets CNAP presentation associated with connection.
+</span>@return {Number} cnap name or null if unavailable
+*/
+getCnapNamePresentation : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getCall'>/**
+</span>@return {Object {com.android.internal.telephony.Call}} Call that owns this Connection, or null if none
+*/
+getCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getCreateTime'>/**Connection create time in currentTimeMillis() format
+</span> Basically, set when object is created.
+ Effectively, when an incoming call starts ringing or an
+ outgoing call starts dialing
+*/
+getCreateTime : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getConnectTime'>/**Connection connect time in currentTimeMillis() format.
+</span> For outgoing calls: Begins at (DIALING|ALERTING) -&gt; ACTIVE transition.
+ For incoming calls: Begins at (INCOMING|WAITING) -&gt; ACTIVE transition.
+ Returns 0 before then.
+*/
+getConnectTime : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setConnectTime'>/**Sets the Connection connect time in currentTimeMillis() format.
+</span>@param {Number} connectTime the new connect time.
+*/
+setConnectTime : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setConnectTimeReal'>/**Sets the Connection connect time in {@link SystemClock#elapsedRealtime()} format.
+</span>@param {Number} connectTimeReal the new connect time.
+*/
+setConnectTimeReal : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getConnectTimeReal'>/**Connection connect time in elapsedRealtime() format.
+</span> For outgoing calls: Begins at (DIALING|ALERTING) -&gt; ACTIVE transition.
+ For incoming calls: Begins at (INCOMING|WAITING) -&gt; ACTIVE transition.
+ Returns 0 before then.
+*/
+getConnectTimeReal : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getDisconnectTime'>/**Disconnect time in currentTimeMillis() format.
+</span> The time when this Connection makes a transition into ENDED or FAIL.
+ Returns 0 before then.
+*/
+getDisconnectTime : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getDurationMillis'>/**Returns the number of milliseconds the call has been connected,
+</span> or 0 if the call has never connected.
+ If the call is still connected, then returns the elapsed
+ time since connect.
+*/
+getDurationMillis : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getHoldingStartTime'>/**The time when this Connection last transitioned into HOLDING
+</span> in elapsedRealtime() format.
+ Returns 0, if it has never made a transition into HOLDING.
+*/
+getHoldingStartTime : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getHoldDurationMillis'>/**If this connection is HOLDING, return the number of milliseconds
+</span> that it has been on hold for (approximately).
+ If this connection is in any other state, return 0.
+*/
+getHoldDurationMillis : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getDisconnectCause'>/**Returns call disconnect cause. Values are defined in
+</span> {@link android.telephony.DisconnectCause}. If the call is not yet
+ disconnected, NOT_DISCONNECTED is returned.
+*/
+getDisconnectCause : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getVendorDisconnectCause'>/**Returns a string disconnect cause which is from vendor.
+</span> Vendors may use this string to explain the underline causes of failed calls.
+ There is no guarantee that it is non-null nor it'll have meaningful stable values.
+ Only use it when getDisconnectCause() returns a value that is not specific enough, like
+ ERROR_UNSPECIFIED.
+*/
+getVendorDisconnectCause : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isIncoming'>/**Returns true of this connection originated elsewhere
+</span> (&quot;MT&quot; or mobile terminated; another party called this terminal)
+ or false if this call originated here (MO or mobile originated).
+*/
+isIncoming : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setIsIncoming'>/**Sets whether this call is an incoming call or not.
+</span>@param {Boolean} isIncoming {@code true} if the call is an incoming call, {@code false} if it is an
+                               outgoing call.
+*/
+setIsIncoming : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isEmergencyCall'>/**Checks if the connection is for an emergency call.
+</span>@return {Boolean} {@code true} if the call is an emergency call
+         or {@code false} otherwise.
+*/
+isEmergencyCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getEmergencyNumberInfo'>/**Get the emergency number info. The value is valid only if {@link #isEmergencyCall}()
+</span> returns {@code true}.
+@return {Object {android.telephony.emergency.EmergencyNumber}} the emergency number info
+*/
+getEmergencyNumberInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-hasKnownUserIntentEmergency'>/**Checks if we have known the user's intent for the call is emergency.
+</span>
+ This is only used to specify when the dialed number is ambiguous, identified as both
+ emergency number and any other non-emergency number; e.g. in some situation, 611 could
+ be both an emergency number in a country and a non-emergency number of a carrier's
+ customer service hotline.
+@return {Boolean} whether the call is from emergency dialer
+*/
+hasKnownUserIntentEmergency : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setEmergencyCallInfo'>/**Set the emergency number information if it is an emergency call.
+</span>@hide 
+*/
+setEmergencyCallInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setHasKnownUserIntentEmergency'>/**Set if we have known the user's intent for the call is emergency.
+</span>
+ This is only used to specify when the dialed number is ambiguous, identified as both
+ emergency number and any other non-emergency number; e.g. in some situation, 611 could
+ be both an emergency number in a country and a non-emergency number of a carrier's
+ customer service hotline.
+@hide 
+*/
+setHasKnownUserIntentEmergency : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getState'>/**If this Connection is connected, then it is associated with
+</span> a Call.
+
+ Returns getCall().getState() or Call.State.IDLE if not
+ connected
+*/
+getState : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getStateBeforeHandover'>/**If this connection went through handover return the state of the
+</span> call that contained this connection before handover.
+*/
+getStateBeforeHandover : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getConferenceParticipants'>/**Get the details of conference participants. Expected to be
+</span> overwritten by the Connection subclasses.
+*/
+getConferenceParticipants : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isAlive'>/**isAlive()
+</span>@return {Boolean} true if the connection isn't disconnected
+ (could be active, holding, ringing, dialing, etc)
+*/
+isAlive : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isRinging'>/**Returns true if Connection is connected and is INCOMING or WAITING
+</span>*/
+isRinging : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getUserData'>/**
+</span>@return {Object {java.lang.Object}} the userdata set in setUserData()
+*/
+getUserData : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setUserData'>/**
+</span>@param {Object {Object}} userdata user can store an any userdata in the Connection object.
+*/
+setUserData : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-deflect'>/**Deflect individual Connection
+</span>*/
+deflect : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-hangup'>/**Hangup individual Connection
+</span>*/
+hangup : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-separate'>/**Separate this call from its owner Call and assigns it to a new Call
+</span> (eg if it is currently part of a Conference call
+ TODO: Throw exception? Does GSM require error display on failure here?
+*/
+separate : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-clearUserData'>/**
+</span>*/
+clearUserData : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-addPostDialListener'>/**
+</span>*/
+addPostDialListener : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-removePostDialListener'>/**
+</span>*/
+removePostDialListener : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getPostDialState'>/**
+</span>*/
+getPostDialState : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getRemainingPostDialString'>/**Returns the portion of the post dial string that has not
+</span> yet been dialed, or &quot;&quot; if none
+*/
+getRemainingPostDialString : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-proceedAfterWaitChar'>/**See Phone.setOnPostDialWaitCharacter()
+</span>*/
+proceedAfterWaitChar : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-proceedAfterWildChar'>/**See Phone.setOnPostDialWildCharacter()
+</span>*/
+proceedAfterWildChar : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-cancelPostDial'>/**Cancel any post
+</span>*/
+cancelPostDial : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onDisconnect'>/**Called when the connection has been disconnected
+</span>*/
+onDisconnect : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getNumberPresentation'>/**Returns the caller id presentation type for incoming and waiting calls
+</span>@return {Number} one of PRESENTATION_*
+*/
+getNumberPresentation : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getUUSInfo'>/**Returns the User to User Signaling (UUS) information associated with
+</span> incoming and waiting calls
+@return {Object {com.android.internal.telephony.UUSInfo}} UUSInfo containing the UUS userdata.
+*/
+getUUSInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getPreciseDisconnectCause'>/**Returns the CallFail reason provided by the RIL with the result of
+</span> RIL_REQUEST_LAST_CALL_FAIL_CAUSE
+*/
+getPreciseDisconnectCause : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getOrigConnection'>/**Returns the original Connection instance associated with
+</span> this Connection
+*/
+getOrigConnection : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isMultiparty'>/**Returns whether the original ImsPhoneConnection was a member
+</span> of a conference call
+@return {Boolean} valid only when getOrigConnection() is not null
+*/
+isMultiparty : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isConferenceHost'>/**Applicable only for IMS Call. Determines if this call is the origin of the conference call
+</span> (i.e. {@code #isConferenceHost()} is {@code true}), or if it is a member of a conference
+ hosted on another device.
+@return {Boolean} {@code true} if this call is the origin of the conference call it is a member of,
+      {@code false} otherwise.
+*/
+isConferenceHost : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isMemberOfPeerConference'>/**Applicable only for IMS Call. Determines if a connection is a member of a conference hosted
+</span> on another device.
+@return {Boolean} {@code true} if the connection is a member of a conference hosted on another device.
+*/
+isMemberOfPeerConference : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-migrateFrom'>/**
+</span>*/
+migrateFrom : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-addListener'>/**Assign a listener to be notified of state changes.
+</span>@param {Object {Connection.Listener}} listener A listener.
+*/
+addListener : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-removeListener'>/**Removes a listener.
+</span>@param {Object {Connection.Listener}} listener A listener.
+*/
+removeListener : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getVideoState'>/**Returns the current video state of the connection.
+</span>@return {Number} The video state of the connection.
+*/
+getVideoState : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getConnectionCapabilities'>/**Called to get Connection capabilities.Returns Capabilities bitmask.
+</span>@See Connection.Capability.
+*/
+getConnectionCapabilities : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-hasCapabilities'>/**
+</span>@return {Boolean} {@code} true if the connection has the specified capabilities.
+*/
+hasCapabilities : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-addCapability'>/**Applies a capability to a capabilities bit-mask.
+</span>@param {Number} capabilities The capabilities bit-mask.
+@param {Number} capability The capability to apply.
+@return {Number} The capabilities bit-mask with the capability applied.
+*/
+addCapability : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-removeCapability'>/**Removes a capability to a capabilities bit-mask.
+</span>@param {Number} capabilities The capabilities bit-mask.
+@param {Number} capability The capability to remove.
+@return {Number} The capabilities bit-mask with the capability removed.
+*/
+removeCapability : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isWifi'>/**Returns whether the connection is using a wifi network.
+</span>@return {Boolean} {@code True} if the connection is using a wifi network.
+*/
+isWifi : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getCallRadioTech'>/**Returns radio technology is used for the connection.
+</span>@return {Number} the RIL Voice Radio Technology used for current connection,
+         see {@code RIL_RADIO_TECHNOLOGY_*} in {@link android.telephony.ServiceState}.
+*/
+getCallRadioTech : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getAudioModeIsVoip'>/**Returns whether the connection uses voip audio mode
+</span>@return {Boolean} {@code True} if the connection uses voip audio mode
+*/
+getAudioModeIsVoip : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getVideoProvider'>/**Returns the {@link android.telecom.Connection.VideoProvider} for the connection.
+</span>@return {Object {android.telecom.Connection.VideoProvider}} The {@link android.telecom.Connection.VideoProvider}.
+*/
+getVideoProvider : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getAudioQuality'>/**Returns the audio-quality for the connection.
+</span>@return {Number} The audio quality for the connection.
+*/
+getAudioQuality : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getCallSubstate'>/**Returns the current call substate of the connection.
+</span>@return {Number} The call substate of the connection.
+*/
+getCallSubstate : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setVideoState'>/**Sets the videoState for the current connection and reports the changes to all listeners.
+</span> Valid video states are defined in {@link android.telecom.VideoProfile}.
+@return {Object {void}} The video state.
+*/
+setVideoState : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setConnectionCapabilities'>/**Called to set Connection capabilities.  This will take Capabilities bitmask as input which is
+</span> converted from Capabilities constants.
+@param {Number} capabilities The Capabilities bitmask.
+@param capabilities The Capabilities bitmask.
+*/
+setConnectionCapabilities : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setCallRadioTech'>/**Sets RIL voice radio technology used for current connection.
+</span>@param {Number} vrat the RIL voice radio technology for current connection,
+             see {@code RIL_RADIO_TECHNOLOGY_*} in {@link android.telephony.ServiceState}.
+*/
+setCallRadioTech : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setAudioModeIsVoip'>/**Set the voip audio mode for the connection
+</span>@param {Boolean} isVoip {@code True} if voip audio mode is being used.
+*/
+setAudioModeIsVoip : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setAudioQuality'>/**Set the audio quality for the connection.
+</span>@param {Number} audioQuality The audio quality.
+*/
+setAudioQuality : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setConnectionExtras'>/**Notifies listeners that connection extras has changed.
+</span>@param {Object {Bundle}} extras New connection extras. This Bundle will be cloned to ensure that any concurrent
+ modifications to the extras Bundle do not affect Bundle operations in the onExtrasChanged
+ listeners.
+*/
+setConnectionExtras : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getConnectionExtras'>/**Retrieves the current connection extras.
+</span>@return {Object {android.os.Bundle}} the connection extras.
+*/
+getConnectionExtras : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isActiveCallDisconnectedOnAnswer'>/**
+</span>@return {Boolean} {@code true} if answering the call will cause the current active call to be
+      disconnected, {@code false} otherwise.
+*/
+isActiveCallDisconnectedOnAnswer : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setActiveCallDisconnectedOnAnswer'>/**Sets whether answering this call will cause the active call to be disconnected.
+</span> &lt;p&gt;
+ Should only be set {@code true} if there is an active call and this call is ringing.
+@param {Boolean} answeringDisconnectsActiveCall {@code true} if answering the call will call the active
+      call to be disconnected.
+*/
+setActiveCallDisconnectedOnAnswer : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-shouldAllowAddCallDuringVideoCall'>/**
+</span>*/
+shouldAllowAddCallDuringVideoCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setAllowAddCallDuringVideoCall'>/**
+</span>*/
+setAllowAddCallDuringVideoCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setIsPulledCall'>/**Sets whether the connection is the result of an external call which was pulled to the local
+</span> device.
+@param {Boolean} isPulledCall {@code true} if this connection is the result of pulling an external call
+      to the local device.
+*/
+setIsPulledCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isPulledCall'>/**
+</span>*/
+isPulledCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setPulledDialogId'>/**For an external call which is being pulled (e.g. {@link #isPulledCall}() is {@code true}),
+</span> sets the dialog Id for the external call.  Used to handle failures to pull a call so that the
+ pulled call can be reconciled with its original external connection.
+@param {Number} pulledDialogId The dialog id associated with a pulled call.
+*/
+setPulledDialogId : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getPulledDialogId'>/**
+</span>*/
+getPulledDialogId : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setCallSubstate'>/**Sets the call substate for the current connection and reports the changes to all listeners.
+</span> Valid call substates are defined in {@link android.telecom.Connection}.
+@return {Object {void}} The call substate.
+*/
+setCallSubstate : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setVideoProvider'>/**Sets the {@link android.telecom.Connection.VideoProvider} for the connection.
+</span>@param {Object {Connection.VideoProvider}} videoProvider The video call provider.
+*/
+setVideoProvider : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setConverted'>/**
+</span>*/
+setConverted : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setAddress'>/**Changes the address and presentation for this call.
+</span>@param {String} newAddress The new address.
+@param {Number} numberPresentation The number presentation for the address.
+*/
+setAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setDialString'>/**
+</span>*/
+setDialString : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-updateConferenceParticipants'>/**Notifies listeners of a change to conference participant(s).
+</span>@param {Object {java.util.List}} conferenceParticipants The participant(s).
+*/
+updateConferenceParticipants : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-updateMultipartyState'>/**Notifies listeners of a change to the multiparty state of the connection.
+</span>@param {Boolean} isMultiparty The participant(s).
+*/
+updateMultipartyState : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onConferenceMergeFailed'>/**Notifies listeners of a failure in merging this connection with the background connection.
+</span>*/
+onConferenceMergeFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onExitedEcmMode'>/**Notifies that the underlying phone has exited ECM mode.
+</span>*/
+onExitedEcmMode : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onCallPullFailed'>/**Notifies the connection that a call to {@link #pullExternalCall}() has failed to pull the
+</span> call to the local device.
+@param {Object {Connection}} externalConnection The original
+      {@link com.android.internal.telephony.imsphone.ImsExternalConnection} from which the
+      pull was initiated.
+*/
+onCallPullFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onOriginalConnectionReplaced'>/**
+</span>*/
+onOriginalConnectionReplaced : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onHandoverToWifiFailed'>/**Notifies the connection that there was a failure while handing over to WIFI.
+</span>*/
+onHandoverToWifiFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onConnectionEvent'>/**Notifies the connection of a connection event.
+</span>*/
+onConnectionEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onDisconnectConferenceParticipant'>/**Notifies this Connection of a request to disconnect a participant of the conference managed
+</span> by the connection.
+@param {Object {Uri}} endpoint the {@link Uri} of the participant to disconnect.
+*/
+onDisconnectConferenceParticipant : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-pullExternalCall'>/**Called by a {@link android.telecom.Connection} to indicate that this call should be pulled
+</span> to the local device.
+*/
+pullExternalCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onRttModifyRequestReceived'>/**
+</span>*/
+onRttModifyRequestReceived : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onRttModifyResponseReceived'>/**
+</span>*/
+onRttModifyResponseReceived : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onRttInitiated'>/**
+</span>*/
+onRttInitiated : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-onRttTerminated'>/**
+</span>*/
+onRttTerminated : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-getPhoneType'>/**
+</span>*/
+getPhoneType : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-resetConnectionTime'>/**Reset the Connection time and Duration
+</span>*/
+resetConnectionTime : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-setIsNetworkIdentifiedEmergencyCall'>/**Sets whether this {@link com.android.internal.telephony.Connection} has been identified by the network as an emergency call.
+</span>@param {Boolean} isNetworkIdentifiedEmergencyCall {@code true} if ecall, {@code false} otherwise.
+*/
+setIsNetworkIdentifiedEmergencyCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-isNetworkIdentifiedEmergencyCall'>/**
+</span>@return {Boolean} Whether this {@link Connection} has been identified by the network as an emergency
+ call.
+*/
+isNetworkIdentifiedEmergencyCall : function(  ) {},
+
+<span id='com-android-internal-telephony-Connection-method-toString'>/**Build a human representation of a connection instance, suitable for debugging.
+</span> Don't log personal stuff unless in debug mode.
+@return {String} a string representing the internal state of this connection.
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

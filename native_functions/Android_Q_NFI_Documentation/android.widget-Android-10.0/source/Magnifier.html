@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-Magnifier'>/**@class android.widget.Magnifier
+</span>@extends java.lang.Object
+
+ Android magnifier widget. Can be used by any view which is attached to a window.
+*/
+var Magnifier = {
+
+<span id='android-widget-Magnifier-property-SOURCE_BOUND_MAX_IN_SURFACE'>/** A source bound that will extend as much as possible, while remaining within the surface
+</span> the content is copied from.
+*/
+SOURCE_BOUND_MAX_IN_SURFACE : &quot;0&quot;,
+<span id='android-widget-Magnifier-property-SOURCE_BOUND_MAX_VISIBLE'>/** A source bound that will extend as much as possible, while remaining within the
+</span> visible region of the magnified view, as determined by
+ {@link View#getGlobalVisibleRect(Rect)}.
+*/
+SOURCE_BOUND_MAX_VISIBLE : &quot;1&quot;,
+<span id='android-widget-Magnifier-method-show'>/**Shows the magnifier on the screen. The method takes the coordinates of the center
+</span> of the content source going to be magnified and copied to the magnifier. The coordinates
+ are relative to the top left corner of the magnified view. The magnifier will be
+ positioned such that its center will be at the default offset from the center of the source.
+ The default offset can be specified using the method
+ {@link android.widget.Magnifier.Builder#setDefaultSourceToMagnifierOffset(int, int)}. If the offset should
+ be different across calls to this method, you should consider to use method
+ {@link #show(float, float, float, float)} instead.
+@param {Number} sourceCenterX horizontal coordinate of the source center, relative to the view
+@param {Number} sourceCenterY vertical coordinate of the source center, relative to the view
+@see Builder#setDefaultSourceToMagnifierOffset(int, int)
+@see Builder#getDefaultHorizontalSourceToMagnifierOffset()
+@see Builder#getDefaultVerticalSourceToMagnifierOffset()
+@see #show(float, float, float, float)
+*/
+show : function(  ) {},
+
+<span id='android-widget-Magnifier-method-show'>/**Shows the magnifier on the screen at a position that is independent from its content
+</span> position. The first two arguments represent the coordinates of the center of the
+ content source going to be magnified and copied to the magnifier. The last two arguments
+ represent the coordinates of the center of the magnifier itself. All four coordinates
+ are relative to the top left corner of the magnified view. If you consider using this
+ method such that the offset between the source center and the magnifier center coordinates
+ remains constant, you should consider using method {@link #show(float, float)} instead.
+@param {Number} sourceCenterX horizontal coordinate of the source center relative to the view
+@param {Number} sourceCenterY vertical coordinate of the source center, relative to the view
+@param {Number} magnifierCenterX horizontal coordinate of the magnifier center, relative to the view
+@param {Number} magnifierCenterY vertical coordinate of the magnifier center, relative to the view
+*/
+show : function(  ) {},
+
+<span id='android-widget-Magnifier-method-dismiss'>/**Dismisses the magnifier from the screen. Calling this on a dismissed magnifier is a no-op.
+</span>*/
+dismiss : function(  ) {},
+
+<span id='android-widget-Magnifier-method-update'>/**Asks the magnifier to update its content. It uses the previous coordinates passed to
+</span> {@link #show(float, float)} or {@link #show(float, float, float, float)}. The
+ method only has effect if the magnifier is currently showing.
+*/
+update : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getWidth'>/**
+</span>@return {Number} the width of the magnifier window, in pixels
+@see Magnifier.Builder#setSize(int, int)
+*/
+getWidth : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getHeight'>/**
+</span>@return {Number} the height of the magnifier window, in pixels
+@see Magnifier.Builder#setSize(int, int)
+*/
+getHeight : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getSourceWidth'>/**
+</span>@return {Number} the initial width of the content magnified and copied to the magnifier, in pixels
+@see Magnifier.Builder#setSize(int, int)
+@see Magnifier.Builder#setInitialZoom(float)
+*/
+getSourceWidth : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getSourceHeight'>/**
+</span>@return {Number} the initial height of the content magnified and copied to the magnifier, in pixels
+@see Magnifier.Builder#setSize(int, int)
+@see Magnifier.Builder#setInitialZoom(float)
+*/
+getSourceHeight : function(  ) {},
+
+<span id='android-widget-Magnifier-method-setZoom'>/**Sets the zoom to be applied to the chosen content before being copied to the magnifier popup.
+</span> The change will become effective at the next #show or #update call.
+@param {Number} zoom the zoom to be set
+*/
+setZoom : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getZoom'>/**Returns the zoom to be applied to the magnified view region copied to the magnifier.
+</span> If the zoom is x and the magnifier window size is (width, height), the original size
+ of the content being magnified will be (width / x, height / x).
+@return {Number} the zoom applied to the content
+@see Magnifier.Builder#setInitialZoom(float)
+*/
+getZoom : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getElevation'>/**
+</span>@return {Number} the elevation set for the magnifier window, in pixels
+@see Magnifier.Builder#setElevation(float)
+*/
+getElevation : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getCornerRadius'>/**
+</span>@return {Number} the corner radius of the magnifier window, in pixels
+@see Magnifier.Builder#setCornerRadius(float)
+*/
+getCornerRadius : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getDefaultHorizontalSourceToMagnifierOffset'>/**Returns the horizontal offset, in pixels, to be applied to the source center position
+</span> to obtain the magnifier center position when {@link #show(float, float)} is called.
+ The value is ignored when {@link #show(float, float, float, float)} is used instead.
+@return {Number} the default horizontal offset between the source center and the magnifier
+@see Magnifier.Builder#setDefaultSourceToMagnifierOffset(int, int)
+@see Magnifier#show(float, float)
+*/
+getDefaultHorizontalSourceToMagnifierOffset : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getDefaultVerticalSourceToMagnifierOffset'>/**Returns the vertical offset, in pixels, to be applied to the source center position
+</span> to obtain the magnifier center position when {@link #show(float, float)} is called.
+ The value is ignored when {@link #show(float, float, float, float)} is used instead.
+@return {Number} the default vertical offset between the source center and the magnifier
+@see Magnifier.Builder#setDefaultSourceToMagnifierOffset(int, int)
+@see Magnifier#show(float, float)
+*/
+getDefaultVerticalSourceToMagnifierOffset : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getOverlay'>/**Returns the overlay to be drawn on the top of the magnifier, or
+</span> {@code null} if no overlay should be drawn.
+@return {Object {android.graphics.drawable.Drawable}} the overlay
+@see Magnifier.Builder#setOverlay(Drawable)
+*/
+getOverlay : function(  ) {},
+
+<span id='android-widget-Magnifier-method-isClippingEnabled'>/**Returns whether the magnifier position will be adjusted such that the magnifier will be
+</span> fully within the bounds of the main application window, by also avoiding any overlap
+ with system insets (such as the one corresponding to the status bar) i.e. whether the
+ area where the magnifier can be positioned will be clipped to the main application window
+ and the system insets.
+@return {Boolean} whether the magnifier position will be adjusted
+@see Magnifier.Builder#setClippingEnabled(boolean)
+*/
+isClippingEnabled : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getPosition'>/**Returns the top left coordinates of the magnifier, relative to the main application
+</span> window. They will be determined by the coordinates of the last {@link #show(float, float)}
+ or {@link #show(float, float, float, float)} call, adjusted to take into account any
+ potential clamping behavior. The method can be used immediately after a #show
+ call to find out where the magnifier will be positioned. However, the position of the
+ magnifier will not be updated visually in the same frame, due to the async nature of
+ the content copying and of the magnifier rendering.
+ The method will return {@code null} if #show has not yet been called, or if the last
+ operation performed was a #dismiss.
+@return {Object {android.graphics.Point}} the top left coordinates of the magnifier
+*/
+getPosition : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getSourcePosition'>/**Returns the top left coordinates of the magnifier source (i.e. the view region going to
+</span> be magnified and copied to the magnifier), relative to the window or surface the content
+ is copied from. The content will be copied:
+ - if the magnified view is a {@link SurfaceView}, from the surface backing it
+ - otherwise, from the surface backing the main application window, and the coordinates
+   returned will be relative to the main application window
+ The method will return {@code null} if #show has not yet been called, or if the last
+ operation performed was a #dismiss.
+@return {Object {android.graphics.Point}} the top left coordinates of the magnifier source
+*/
+getSourcePosition : function(  ) {},
+
+<span id='android-widget-Magnifier-method-setOnOperationCompleteCallback'>/**Sets a callback which will be invoked at the end of the next
+</span> {@link #show(float, float)} or {@link #update}() operation.
+@hide 
+*/
+setOnOperationCompleteCallback : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getContent'>/**
+</span>@return {Object {android.graphics.Bitmap}} the drawing being currently displayed in the magnifier, as bitmap
+@hide 
+*/
+getContent : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getOriginalContent'>/**Returns a bitmap containing the content that was magnified and drew to the
+</span> magnifier, at its original size, without the overlay applied.
+@return {Object {android.graphics.Bitmap}} the content that is magnified, as bitmap
+@hide 
+*/
+getOriginalContent : function(  ) {},
+
+<span id='android-widget-Magnifier-method-getMagnifierDefaultSize'>/**
+</span>@return {Object {android.graphics.PointF}} the size of the magnifier window in dp
+@hide 
+*/
+getMagnifierDefaultSize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-TelephonyPermissions'>/**@class com.android.internal.telephony.TelephonyPermissions
+</span>@extends java.lang.Object
+
+Utility class for Telephony permission enforcement. */
+var TelephonyPermissions = {
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkCallingOrSelfReadPhoneState'>/**Check whether the caller (or self, if not processing an IPC) can read phone state.
+</span>
+ &lt;p&gt;This method behaves in one of the following ways:
+ &lt;ul&gt;
+   &lt;li&gt;return true: if the caller has the READ_PRIVILEGED_PHONE_STATE permission, the
+       READ_PHONE_STATE runtime permission, or carrier privileges on the given subId.
+   &lt;li&gt;throw SecurityException: if the caller didn't declare any of these permissions, or, for
+       apps which support runtime permissions, if the caller does not currently have any of
+       these permissions.
+   &lt;li&gt;return false: if the caller lacks all of these permissions and doesn't support runtime
+       permissions. This implies that the user revoked the ability to read phone state
+       manually (via AppOps). In this case we can't throw as it would break app compatibility,
+       so we return false to indicate that the calling function should return dummy data.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Note: for simplicity, this method always returns false for callers using legacy
+ permissions and who have had READ_PHONE_STATE revoked, even if they are carrier-privileged.
+ Such apps should migrate to runtime permissions or stop requiring READ_PHONE_STATE on P+
+ devices.
+@param {Object {Context}} subId the subId of the relevant subscription; used to check carrier privileges. May be
+              {@link SubscriptionManager#INVALID_SUBSCRIPTION_ID} to skip this check for cases
+              where it isn't relevant (hidden APIs, or APIs which are otherwise okay to leave
+              inaccesible to carrier-privileged apps).
+*/
+checkCallingOrSelfReadPhoneState : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkCallingOrSelfReadPhoneStateNoThrow'>/**Identical to checkCallingOrSelfReadPhoneState but never throws SecurityException
+</span>*/
+checkCallingOrSelfReadPhoneStateNoThrow : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadPhoneState'>/**Check whether the app with the given pid/uid can read phone state.
+</span>
+ &lt;p&gt;This method behaves in one of the following ways:
+ &lt;ul&gt;
+   &lt;li&gt;return true: if the caller has the READ_PRIVILEGED_PHONE_STATE permission, the
+       READ_PHONE_STATE runtime permission, or carrier privileges on the given subId.
+   &lt;li&gt;throw SecurityException: if the caller didn't declare any of these permissions, or, for
+       apps which support runtime permissions, if the caller does not currently have any of
+       these permissions.
+   &lt;li&gt;return false: if the caller lacks all of these permissions and doesn't support runtime
+       permissions. This implies that the user revoked the ability to read phone state
+       manually (via AppOps). In this case we can't throw as it would break app compatibility,
+       so we return false to indicate that the calling function should return dummy data.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Note: for simplicity, this method always returns false for callers using legacy
+ permissions and who have had READ_PHONE_STATE revoked, even if they are carrier-privileged.
+ Such apps should migrate to runtime permissions or stop requiring READ_PHONE_STATE on P+
+ devices.
+*/
+checkReadPhoneState : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkCarrierPrivilegeForSubId'>/**Check whether the calling packages has carrier privileges for the passing subscription.
+</span>@return {Boolean} {@code true} if the caller has carrier privileges, {@false} otherwise.
+*/
+checkCarrierPrivilegeForSubId : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadPhoneState'>/**
+</span>*/
+checkReadPhoneState : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadPhoneStateOnAnyActiveSub'>/**Check whether the app with the given pid/uid can read phone state, or has carrier
+</span> privileges on any active subscription.
+
+ &lt;p&gt;If the app does not have carrier privilege, this method will return {@code false} instead
+ of throwing a SecurityException. Therefore, the callers cannot tell the difference
+ between M+ apps which declare the runtime permission but do not have it, and pre-M apps
+ which declare the static permission but had access revoked via AppOps. Apps in the former
+ category expect SecurityExceptions; apps in the latter don't. So this method is suitable for
+ use only if the behavior in both scenarios is meant to be identical.
+@return {Boolean} {@code true} if the app can read phone state or has carrier privilege;
+         {@code false} otherwise.
+*/
+checkReadPhoneStateOnAnyActiveSub : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadPhoneStateOnAnyActiveSub'>/**
+</span>*/
+checkReadPhoneStateOnAnyActiveSub : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkCallingOrSelfReadDeviceIdentifiers'>/**Check whether the caller (or self, if not processing an IPC) can read device identifiers.
+</span>
+ &lt;p&gt;This method behaves in one of the following ways:
+ &lt;ul&gt;
+   &lt;li&gt;return true: if the caller has the READ_PRIVILEGED_PHONE_STATE permission, the calling
+       package passes a DevicePolicyManager Device Owner / Profile Owner device identifier
+       access check, or the calling package has carrier privileges.
+   &lt;li&gt;throw SecurityException: if the caller does not meet any of the requirements and is
+       targeting Q or is targeting pre-Q and does not have the READ_PHONE_STATE permission.
+   &lt;li&gt;return false: if the caller is targeting pre-Q and does have the READ_PHONE_STATE
+       permission. In this case the caller would expect to have access to the device
+       identifiers so false is returned instead of throwing a SecurityException to indicate
+       the calling function should return dummy data.
+ &lt;/ul&gt;
+*/
+checkCallingOrSelfReadDeviceIdentifiers : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkCallingOrSelfReadDeviceIdentifiers'>/**Check whether the caller (or self, if not processing an IPC) can read device identifiers.
+</span>
+ &lt;p&gt;This method behaves in one of the following ways:
+ &lt;ul&gt;
+   &lt;li&gt;return true: if the caller has the READ_PRIVILEGED_PHONE_STATE permission, the calling
+       package passes a DevicePolicyManager Device Owner / Profile Owner device identifier
+       access check, or the calling package has carrier privileges.
+   &lt;li&gt;throw SecurityException: if the caller does not meet any of the requirements and is
+       targeting Q or is targeting pre-Q and does not have the READ_PHONE_STATE permission
+       or carrier privileges.
+   &lt;li&gt;return false: if the caller is targeting pre-Q and does have the READ_PHONE_STATE
+       permission or carrier privileges. In this case the caller would expect to have access
+       to the device identifiers so false is returned instead of throwing a SecurityException
+       to indicate the calling function should return dummy data.
+ &lt;/ul&gt;
+*/
+checkCallingOrSelfReadDeviceIdentifiers : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkCallingOrSelfReadSubscriberIdentifiers'>/**Check whether the caller (or self, if not processing an IPC) can read subscriber identifiers.
+</span>
+ &lt;p&gt;This method behaves in one of the following ways:
+ &lt;ul&gt;
+   &lt;li&gt;return true: if the caller has the READ_PRIVILEGED_PHONE_STATE permission, the calling
+       package passes a DevicePolicyManager Device Owner / Profile Owner device identifier
+       access check, or the calling package has carrier privileges.
+   &lt;li&gt;throw SecurityException: if the caller does not meet any of the requirements and is
+       targeting Q or is targeting pre-Q and does not have the READ_PHONE_STATE permission.
+   &lt;li&gt;return false: if the caller is targeting pre-Q and does have the READ_PHONE_STATE
+       permission. In this case the caller would expect to have access to the device
+       identifiers so false is returned instead of throwing a SecurityException to indicate
+       the calling function should return dummy data.
+ &lt;/ul&gt;
+*/
+checkCallingOrSelfReadSubscriberIdentifiers : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadDeviceIdentifiers'>/**Checks whether the app with the given pid/uid can read device identifiers.
+</span>@returns true if the caller has the READ_PRIVILEGED_PHONE_STATE permission or the calling
+ package passes a DevicePolicyManager Device Owner / Profile Owner device identifier access
+ check.
+*/
+checkReadDeviceIdentifiers : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadCallLog'>/**Check whether the app with the given pid/uid can read the call log.
+</span>@return {Boolean} {@code true} if the specified app has the read call log permission and AppOpp granted
+      to it, {@code false} otherwise.
+*/
+checkReadCallLog : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadCallLog'>/**
+</span>*/
+checkReadCallLog : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkCallingOrSelfReadPhoneNumber'>/**Returns whether the caller can read phone numbers.
+</span>
+ &lt;p&gt;Besides apps with the ability to read phone state per {@link #checkReadPhoneState}, the
+ default SMS app and apps with READ_SMS or READ_PHONE_NUMBERS can also read phone numbers.
+*/
+checkCallingOrSelfReadPhoneNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-checkReadPhoneNumber'>/**
+</span>*/
+checkReadPhoneNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-enforceCallingOrSelfModifyPermissionOrCarrierPrivilege'>/**Ensure the caller (or self, if not processing an IPC) has MODIFY_PHONE_STATE (and is thus a
+</span> privileged app) or carrier privileges.
+@throws SecurityException if the caller does not have the required permission/privileges
+*/
+enforceCallingOrSelfModifyPermissionOrCarrierPrivilege : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-enforeceCallingOrSelfReadPhoneStatePermissionOrCarrierPrivilege'>/**Ensure the caller (or self, if not processing an IPC) has
+</span> {@link android.Manifest.permission#READ_PHONE_STATE} or carrier privileges.
+@throws SecurityException if the caller does not have the required permission/privileges
+*/
+enforeceCallingOrSelfReadPhoneStatePermissionOrCarrierPrivilege : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-enforeceCallingOrSelfReadPrivilegedPhoneStatePermissionOrCarrierPrivilege'>/**Ensure the caller (or self, if not processing an IPC) has
+</span> {@link android.Manifest.permission#READ_PRIVILEGED_PHONE_STATE} or carrier privileges.
+@throws SecurityException if the caller does not have the required permission/privileges
+*/
+enforeceCallingOrSelfReadPrivilegedPhoneStatePermissionOrCarrierPrivilege : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-enforceCallingOrSelfCarrierPrivilege'>/**Make sure the caller (or self, if not processing an IPC) has carrier privileges.
+</span>@throws SecurityException if the caller does not have the required privileges
+*/
+enforceCallingOrSelfCarrierPrivilege : function(  ) {},
+
+<span id='com-android-internal-telephony-TelephonyPermissions-method-enforceShellOnly'>/**Throws if the caller is not of a shell (or root) UID.
+</span>@param {Number} callingUid pass Binder.callingUid().
+*/
+enforceShellOnly : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

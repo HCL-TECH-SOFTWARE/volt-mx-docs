@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-Image-Plane'>/**@class android.media.Image.Plane
+</span>@extends java.lang.Object
+
+ &lt;p&gt;A single color plane of image data.&lt;/p&gt;
+
+ &lt;p&gt;The number and meaning of the planes in an Image are determined by the
+ format of the Image.&lt;/p&gt;
+
+ &lt;p&gt;Once the Image has been closed, any access to the the plane's
+ ByteBuffer will fail.&lt;/p&gt;
+
+ @see #getFormat
+*/
+var Plane = {
+
+<span id='android-media-Image-Plane-method-getRowStride'>/**&lt;p&gt;The row stride for this color plane, in bytes.&lt;/p&gt;
+</span>
+ &lt;p&gt;This is the distance between the start of two consecutive rows of
+ pixels in the image. Note that row stried is undefined for some formats
+ such as
+ {@link android.graphics.ImageFormat#RAW_PRIVATE RAW_PRIVATE},
+ and calling getRowStride on images of these formats will
+ cause an UnsupportedOperationException being thrown.
+ For formats where row stride is well defined, the row stride
+ is always greater than 0.&lt;/p&gt;
+*/
+getRowStride : function(  ) {},
+
+<span id='android-media-Image-Plane-method-getPixelStride'>/**&lt;p&gt;The distance between adjacent pixel samples, in bytes.&lt;/p&gt;
+</span>
+ &lt;p&gt;This is the distance between two consecutive pixel values in a row
+ of pixels. It may be larger than the size of a single pixel to
+ account for interleaved image data or padded formats.
+ Note that pixel stride is undefined for some formats such as
+ {@link android.graphics.ImageFormat#RAW_PRIVATE RAW_PRIVATE},
+ and calling getPixelStride on images of these formats will
+ cause an UnsupportedOperationException being thrown.
+ For formats where pixel stride is well defined, the pixel stride
+ is always greater than 0.&lt;/p&gt;
+*/
+getPixelStride : function(  ) {},
+
+<span id='android-media-Image-Plane-method-getBuffer'>/**&lt;p&gt;Get a direct {@link java.nio.ByteBuffer ByteBuffer}
+</span> containing the frame data.&lt;/p&gt;
+
+ &lt;p&gt;In particular, the buffer returned will always have
+ {@link java.nio.ByteBuffer#isDirect isDirect} return {@code true}, so
+ the underlying data could be mapped as a pointer in JNI without doing
+ any copies with {@code GetDirectBufferAddress}.&lt;/p&gt;
+
+ &lt;p&gt;For raw formats, each plane is only guaranteed to contain data
+ up to the last pixel in the last row. In other words, the stride
+ after the last row may not be mapped into the buffer. This is a
+ necessary requirement for any interleaved format.&lt;/p&gt;
+@return {Object {java.nio.ByteBuffer}} the byte buffer containing the image data for this plane.
+*/
+getBuffer : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

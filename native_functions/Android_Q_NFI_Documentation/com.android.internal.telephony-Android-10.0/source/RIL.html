@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-RIL'>/**@class com.android.internal.telephony.RIL
+</span> implements com.android.internal.telephony.CommandsInterface
+
+@extends com.android.internal.telephony.BaseCommands
+
+ RIL implementation of the CommandsInterface.
+
+ {@hide}
+*/
+var RIL = {
+
+<span id='com-android-internal-telephony-RIL-property-INVALID_WAKELOCK'>/***/
+</span>INVALID_WAKELOCK : &quot;-1&quot;,
+<span id='com-android-internal-telephony-RIL-property-FOR_WAKELOCK'>/***/
+</span>FOR_WAKELOCK : &quot;0&quot;,
+<span id='com-android-internal-telephony-RIL-property-FOR_ACK_WAKELOCK'>/***/
+</span>FOR_ACK_WAKELOCK : &quot;1&quot;,
+<span id='com-android-internal-telephony-RIL-property-RADIO_HAL_VERSION_UNKNOWN'>/**@hide */
+</span>RADIO_HAL_VERSION_UNKNOWN : &quot;null&quot;,
+<span id='com-android-internal-telephony-RIL-property-RADIO_HAL_VERSION_1_0'>/**@hide */
+</span>RADIO_HAL_VERSION_1_0 : &quot;null&quot;,
+<span id='com-android-internal-telephony-RIL-property-RADIO_HAL_VERSION_1_1'>/**@hide */
+</span>RADIO_HAL_VERSION_1_1 : &quot;null&quot;,
+<span id='com-android-internal-telephony-RIL-property-RADIO_HAL_VERSION_1_2'>/**@hide */
+</span>RADIO_HAL_VERSION_1_2 : &quot;null&quot;,
+<span id='com-android-internal-telephony-RIL-property-RADIO_HAL_VERSION_1_3'>/**@hide */
+</span>RADIO_HAL_VERSION_1_3 : &quot;null&quot;,
+<span id='com-android-internal-telephony-RIL-property-RADIO_HAL_VERSION_1_4'>/**@hide */
+</span>RADIO_HAL_VERSION_1_4 : &quot;null&quot;,
+<span id='com-android-internal-telephony-RIL-method-getTelephonyRILTimingHistograms'>/**
+</span>*/
+getTelephonyRILTimingHistograms : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getRadioBugDetector'>/**Return RadioBugDetector instance for testing.
+</span>*/
+getRadioBugDetector : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getRadioProxy'>/**Returns a {@link IRadio} instance or null if the service is not available.
+</span>*/
+getRadioProxy : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getOemHookProxy'>/**Returns an {@link IOemHook} instance or null if the service is not available.
+</span>*/
+getOemHookProxy : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setOnNITZTime'>/**
+</span>*/
+setOnNITZTime : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getIccCardStatus'>/**
+</span>*/
+getIccCardStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getIccSlotsStatus'>/**
+</span>*/
+getIccSlotsStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setLogicalToPhysicalSlotMapping'>/**
+</span>*/
+setLogicalToPhysicalSlotMapping : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPin'>/**
+</span>*/
+supplyIccPin : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPinForApp'>/**
+</span>*/
+supplyIccPinForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPuk'>/**
+</span>*/
+supplyIccPuk : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPukForApp'>/**
+</span>*/
+supplyIccPukForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPin2'>/**
+</span>*/
+supplyIccPin2 : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPin2ForApp'>/**
+</span>*/
+supplyIccPin2ForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPuk2'>/**
+</span>*/
+supplyIccPuk2 : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyIccPuk2ForApp'>/**
+</span>*/
+supplyIccPuk2ForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-changeIccPin'>/**
+</span>*/
+changeIccPin : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-changeIccPinForApp'>/**
+</span>*/
+changeIccPinForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-changeIccPin2'>/**
+</span>*/
+changeIccPin2 : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-changeIccPin2ForApp'>/**
+</span>*/
+changeIccPin2ForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-supplyNetworkDepersonalization'>/**
+</span>*/
+supplyNetworkDepersonalization : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getCurrentCalls'>/**
+</span>*/
+getCurrentCalls : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-dial'>/**
+</span>*/
+dial : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-enableModem'>/**
+</span>*/
+enableModem : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getModemStatus'>/**
+</span>*/
+getModemStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-dial'>/**
+</span>*/
+dial : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getIMSI'>/**
+</span>*/
+getIMSI : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getIMSIForApp'>/**
+</span>*/
+getIMSIForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-hangupConnection'>/**
+</span>*/
+hangupConnection : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-hangupWaitingOrBackground'>/**
+</span>*/
+hangupWaitingOrBackground : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-hangupForegroundResumeBackground'>/**
+</span>*/
+hangupForegroundResumeBackground : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-switchWaitingOrHoldingAndActive'>/**
+</span>*/
+switchWaitingOrHoldingAndActive : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-conference'>/**
+</span>*/
+conference : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-rejectCall'>/**
+</span>*/
+rejectCall : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getLastCallFailCause'>/**
+</span>*/
+getLastCallFailCause : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getSignalStrength'>/**
+</span>*/
+getSignalStrength : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getVoiceRegistrationState'>/**
+</span>*/
+getVoiceRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getDataRegistrationState'>/**
+</span>*/
+getDataRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getOperator'>/**
+</span>*/
+getOperator : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setRadioPower'>/**
+</span>*/
+setRadioPower : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendDtmf'>/**
+</span>*/
+sendDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendSMS'>/**
+</span>*/
+sendSMS : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendSMSExpectMore'>/**
+</span>*/
+sendSMSExpectMore : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setupDataCall'>/**
+</span>*/
+setupDataCall : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-iccIO'>/**
+</span>*/
+iccIO : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-iccIOForApp'>/**
+</span>*/
+iccIOForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendUSSD'>/**
+</span>*/
+sendUSSD : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-cancelPendingUssd'>/**
+</span>*/
+cancelPendingUssd : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getCLIR'>/**
+</span>*/
+getCLIR : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCLIR'>/**
+</span>*/
+setCLIR : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryCallForwardStatus'>/**
+</span>*/
+queryCallForwardStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCallForward'>/**
+</span>*/
+setCallForward : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryCallWaiting'>/**
+</span>*/
+queryCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCallWaiting'>/**
+</span>*/
+setCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-acknowledgeLastIncomingGsmSms'>/**
+</span>*/
+acknowledgeLastIncomingGsmSms : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-acceptCall'>/**
+</span>*/
+acceptCall : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-deactivateDataCall'>/**
+</span>*/
+deactivateDataCall : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryFacilityLock'>/**
+</span>*/
+queryFacilityLock : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryFacilityLockForApp'>/**
+</span>*/
+queryFacilityLockForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setFacilityLock'>/**
+</span>*/
+setFacilityLock : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setFacilityLockForApp'>/**
+</span>*/
+setFacilityLockForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-changeBarringPassword'>/**
+</span>*/
+changeBarringPassword : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getNetworkSelectionMode'>/**
+</span>*/
+getNetworkSelectionMode : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setNetworkSelectionModeAutomatic'>/**
+</span>*/
+setNetworkSelectionModeAutomatic : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setNetworkSelectionModeManual'>/**
+</span>*/
+setNetworkSelectionModeManual : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getAvailableNetworks'>/**
+</span>*/
+getAvailableNetworks : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-startNetworkScan'>/**
+</span>*/
+startNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-stopNetworkScan'>/**
+</span>*/
+stopNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-startDtmf'>/**
+</span>*/
+startDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-stopDtmf'>/**
+</span>*/
+stopDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-separateConnection'>/**
+</span>*/
+separateConnection : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getBasebandVersion'>/**
+</span>*/
+getBasebandVersion : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setMute'>/**
+</span>*/
+setMute : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getMute'>/**
+</span>*/
+getMute : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryCLIP'>/**
+</span>*/
+queryCLIP : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getPDPContextList'>/**
+</span>@deprecated 
+*/
+getPDPContextList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getDataCallList'>/**
+</span>*/
+getDataCallList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-invokeOemRilRequestRaw'>/**
+</span>*/
+invokeOemRilRequestRaw : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-invokeOemRilRequestStrings'>/**
+</span>*/
+invokeOemRilRequestStrings : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setSuppServiceNotifications'>/**
+</span>*/
+setSuppServiceNotifications : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-writeSmsToSim'>/**
+</span>*/
+writeSmsToSim : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-deleteSmsOnSim'>/**
+</span>*/
+deleteSmsOnSim : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setBandMode'>/**
+</span>*/
+setBandMode : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryAvailableBandMode'>/**
+</span>*/
+queryAvailableBandMode : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendEnvelope'>/**
+</span>*/
+sendEnvelope : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendTerminalResponse'>/**
+</span>*/
+sendTerminalResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendEnvelopeWithStatus'>/**
+</span>*/
+sendEnvelopeWithStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-explicitCallTransfer'>/**
+</span>*/
+explicitCallTransfer : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setPreferredNetworkType'>/**
+</span>*/
+setPreferredNetworkType : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-convertToNetworkTypeBitMask'>/**convert RAF from {@link android.hardware.radio.V1_0.RadioAccessFamily} to
+</span> {@link TelephonyManager.NetworkTypeBitMask}, the bitmask represented by
+ {@link TelephonyManager.NetworkType}.
+@param {Number} raf {@link android.hardware.radio.V1_0.RadioAccessFamily}
+@return {Number} {@link TelephonyManager.NetworkTypeBitMask}
+*/
+convertToNetworkTypeBitMask : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getPreferredNetworkType'>/**
+</span>*/
+getPreferredNetworkType : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setLocationUpdates'>/**
+</span>*/
+setLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCdmaSubscriptionSource'>/**
+</span>*/
+setCdmaSubscriptionSource : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryCdmaRoamingPreference'>/**
+</span>*/
+queryCdmaRoamingPreference : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCdmaRoamingPreference'>/**
+</span>*/
+setCdmaRoamingPreference : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-queryTTYMode'>/**
+</span>*/
+queryTTYMode : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setTTYMode'>/**
+</span>*/
+setTTYMode : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setPreferredVoicePrivacy'>/**
+</span>*/
+setPreferredVoicePrivacy : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getPreferredVoicePrivacy'>/**
+</span>*/
+getPreferredVoicePrivacy : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendCDMAFeatureCode'>/**
+</span>*/
+sendCDMAFeatureCode : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendBurstDtmf'>/**
+</span>*/
+sendBurstDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendCdmaSms'>/**
+</span>*/
+sendCdmaSms : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-acknowledgeLastIncomingCdmaSms'>/**
+</span>*/
+acknowledgeLastIncomingCdmaSms : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getGsmBroadcastConfig'>/**
+</span>*/
+getGsmBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setGsmBroadcastConfig'>/**
+</span>*/
+setGsmBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setGsmBroadcastActivation'>/**
+</span>*/
+setGsmBroadcastActivation : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getCdmaBroadcastConfig'>/**
+</span>*/
+getCdmaBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCdmaBroadcastConfig'>/**
+</span>*/
+setCdmaBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCdmaBroadcastActivation'>/**
+</span>*/
+setCdmaBroadcastActivation : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getCDMASubscription'>/**
+</span>*/
+getCDMASubscription : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-writeSmsToRuim'>/**
+</span>*/
+writeSmsToRuim : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-deleteSmsOnRuim'>/**
+</span>*/
+deleteSmsOnRuim : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getDeviceIdentity'>/**
+</span>*/
+getDeviceIdentity : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-exitEmergencyCallbackMode'>/**
+</span>*/
+exitEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getSmscAddress'>/**
+</span>*/
+getSmscAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setSmscAddress'>/**
+</span>*/
+setSmscAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-reportSmsMemoryStatus'>/**
+</span>*/
+reportSmsMemoryStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-reportStkServiceIsRunning'>/**
+</span>*/
+reportStkServiceIsRunning : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getCdmaSubscriptionSource'>/**
+</span>*/
+getCdmaSubscriptionSource : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-acknowledgeIncomingGsmSmsWithPdu'>/**
+</span>*/
+acknowledgeIncomingGsmSmsWithPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getVoiceRadioTechnology'>/**
+</span>*/
+getVoiceRadioTechnology : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getCellInfoList'>/**
+</span>*/
+getCellInfoList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCellInfoListRate'>/**
+</span>*/
+setCellInfoListRate : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setInitialAttachApn'>/**
+</span>*/
+setInitialAttachApn : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getImsRegistrationState'>/**
+</span>*/
+getImsRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendImsGsmSms'>/**
+</span>*/
+sendImsGsmSms : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendImsCdmaSms'>/**
+</span>*/
+sendImsCdmaSms : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-iccTransmitApduBasicChannel'>/**
+</span>*/
+iccTransmitApduBasicChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-iccOpenLogicalChannel'>/**
+</span>*/
+iccOpenLogicalChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-iccCloseLogicalChannel'>/**
+</span>*/
+iccCloseLogicalChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-iccTransmitApduLogicalChannel'>/**
+</span>*/
+iccTransmitApduLogicalChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-nvReadItem'>/**
+</span>*/
+nvReadItem : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-nvWriteItem'>/**
+</span>*/
+nvWriteItem : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-nvWriteCdmaPrl'>/**
+</span>*/
+nvWriteCdmaPrl : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-nvResetConfig'>/**
+</span>*/
+nvResetConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setUiccSubscription'>/**
+</span>*/
+setUiccSubscription : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setDataAllowed'>/**
+</span>*/
+setDataAllowed : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getHardwareConfig'>/**
+</span>*/
+getHardwareConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-requestIccSimAuthentication'>/**
+</span>*/
+requestIccSimAuthentication : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setDataProfile'>/**
+</span>*/
+setDataProfile : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-requestShutdown'>/**
+</span>*/
+requestShutdown : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getRadioCapability'>/**
+</span>*/
+getRadioCapability : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setRadioCapability'>/**
+</span>*/
+setRadioCapability : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-startLceService'>/**
+</span>*/
+startLceService : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-stopLceService'>/**
+</span>*/
+stopLceService : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-pullLceData'>/**This will only be called if the LCE service is started in PULL mode, which is
+</span> only enabled when using Radio HAL versions 1.1 and earlier.
+
+ It is still possible for vendors to override this behavior and use the 1.1 version
+ of LCE; however, this is strongly discouraged and this functionality will be removed
+ when HAL 1.x support is dropped.
+@deprecated HAL 1.2 and later use an always-on LCE that relies on indications.
+*/
+pullLceData : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getModemActivityInfo'>/**
+</span>*/
+getModemActivityInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-createCarrierRestrictionList'>/**Convert a list of CarrierIdentifier into a list of Carrier defined in 1.0/types.hal.
+</span>@param {Object {java.util.List}} carriers List of CarrierIdentifier
+@return {Object {java.util.ArrayList}} List of converted objects
+*/
+createCarrierRestrictionList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setAllowedCarriers'>/**
+</span>*/
+setAllowedCarriers : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getAllowedCarriers'>/**
+</span>*/
+getAllowedCarriers : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-sendDeviceState'>/**
+</span>*/
+sendDeviceState : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setUnsolResponseFilter'>/**
+</span>*/
+setUnsolResponseFilter : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setSignalStrengthReportingCriteria'>/**
+</span>*/
+setSignalStrengthReportingCriteria : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setLinkCapacityReportingCriteria'>/**
+</span>*/
+setLinkCapacityReportingCriteria : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setSimCardPower'>/**
+</span>*/
+setSimCardPower : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setCarrierInfoForImsiEncryption'>/**
+</span>*/
+setCarrierInfoForImsiEncryption : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-startNattKeepalive'>/**
+</span>*/
+startNattKeepalive : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-stopNattKeepalive'>/**
+</span>*/
+stopNattKeepalive : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getIMEI'>/**
+</span>*/
+getIMEI : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getIMEISV'>/**
+</span>*/
+getIMEISV : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getLastPdpFailCause'>/**
+</span>@deprecated 
+*/
+getLastPdpFailCause : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getLastDataCallFailCause'>/**The preferred new alternative to getLastPdpFailCause
+</span>*/
+getLastDataCallFailCause : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-resetRadio'>/**
+</span>*/
+resetRadio : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-handleCallSetupRequestFromSim'>/**{@inheritDoc}
+</span>*/
+handleCallSetupRequestFromSim : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-processResponse'>/**This is a helper function to be called when a RadioResponse callback is called.
+</span> It takes care of acks, wakelocks, and finds and returns RILRequest corresponding to the
+ response if one is found.
+@param {Object {RadioResponseInfo}} responseInfo RadioResponseInfo received in response callback
+@return {Object {com.android.internal.telephony.RILRequest}} RILRequest corresponding to the response
+*/
+processResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-processResponseDone'>/**This is a helper function to be called at the end of all RadioResponse callbacks.
+</span> It takes care of sending error response, logging, decrementing wakelock if needed, and
+ releases the request from memory pool.
+@param {Object {RILRequest}} rr RILRequest for which response callback was called
+@param {Object {RadioResponseInfo}} responseInfo RadioResponseInfo received in the callback
+@param {Object {Object}} ret object to be returned to request sender
+*/
+processResponseDone : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getWakeLock'>/**Returns the wake lock of the given type.
+</span>*/
+getWakeLock : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getRilHandler'>/**Returns the {@link com.android.internal.telephony.RIL.RilHandler} instance.
+</span>*/
+getRilHandler : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getRilRequestList'>/**Returns the Ril request list.
+</span>*/
+getRilRequestList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-setPhoneType'>/**
+</span>*/
+setPhoneType : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-testingEmergencyCall'>/**
+</span>*/
+testingEmergencyCall : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getClientRequestStats'>/**
+</span>*/
+getClientRequestStats : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-appendPrimitiveArrayToArrayList'>/**Append the data to the end of an ArrayList
+</span>*/
+appendPrimitiveArrayToArrayList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-primitiveArrayToArrayList'>/**
+</span>*/
+primitiveArrayToArrayList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-primitiveArrayToArrayList'>/**Convert a primitive int array to an ArrayList&lt;Integer&gt;.
+</span>*/
+primitiveArrayToArrayList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-arrayListToPrimitiveArray'>/**Convert an ArrayList of Bytes to an exactly-sized primitive array
+</span>*/
+arrayListToPrimitiveArray : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-convertHalCellInfoList'>/**Convert CellInfo defined in 1.0/types.hal to CellInfo type.
+</span>@param {Object {java.util.ArrayList}} records List of CellInfo defined in 1.0/types.hal
+@return {Object {java.util.ArrayList}} List of converted CellInfo object
+*/
+convertHalCellInfoList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-convertHalCellInfoList_1_2'>/**Convert CellInfo defined in 1.2/types.hal to CellInfo type.
+</span>@param {Object {java.util.ArrayList}} records List of CellInfo defined in 1.2/types.hal
+@return {Object {java.util.ArrayList}} List of converted CellInfo object
+*/
+convertHalCellInfoList_1_2 : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-convertHalCellInfoList_1_4'>/**Convert CellInfo defined in 1.4/types.hal to CellInfo type.
+</span>@param {Object {java.util.ArrayList}} records List of CellInfo defined in 1.4/types.hal.
+@return {Object {java.util.ArrayList}} List of converted CellInfo object.
+*/
+convertHalCellInfoList_1_4 : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-convertDataCallResult'>/**Convert SetupDataCallResult defined in 1.0 or 1.4/types.hal into DataCallResponse
+</span>@param {Object {Object}} dcResult setup data call result
+@return {Object {android.telephony.data.DataCallResponse}} converted DataCallResponse object
+*/
+convertDataCallResult : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-convertDataCallResultList'>/**Convert SetupDataCallResult defined in 1.0 or 1.4/types.hal into DataCallResponse
+</span>@param {Object {java.util.List}} dataCallResultList List of SetupDataCallResult defined in 1.0 or 1.4/types.hal
+@return {Object {java.util.ArrayList}} List of converted DataCallResponse object
+*/
+convertDataCallResultList : function(  ) {},
+
+<span id='com-android-internal-telephony-RIL-method-getHalVersion'>/**Get the HAL version.
+</span>@return {Object {com.android.internal.telephony.HalVersion}} the current HalVersion
+*/
+getHalVersion : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

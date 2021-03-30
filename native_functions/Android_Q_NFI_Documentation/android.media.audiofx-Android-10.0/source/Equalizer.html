@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiofx-Equalizer'>/**@class android.media.audiofx.Equalizer
+</span>@extends android.media.audiofx.AudioEffect
+
+ An Equalizer is used to alter the frequency response of a particular music source or of the main
+ output mix.
+ &lt;p&gt;An application creates an Equalizer object to instantiate and control an Equalizer engine
+ in the audio framework. The application can either simply use predefined presets or have a more
+ precise control of the gain in each frequency band controlled by the equalizer.
+ &lt;p&gt;The methods, parameter types and units exposed by the Equalizer implementation are directly
+ mapping those defined by the OpenSL ES 1.0.1 Specification (http://www.khronos.org/opensles/)
+ for the SLEqualizerItf interface. Please refer to this specification for more details.
+ &lt;p&gt;To attach the Equalizer to a particular AudioTrack or MediaPlayer, specify the audio session
+ ID of this AudioTrack or MediaPlayer when constructing the Equalizer.
+ &lt;p&gt;NOTE: attaching an Equalizer to the global audio output mix by use of session 0 is deprecated.
+ &lt;p&gt;See {@link android.media.MediaPlayer#getAudioSessionId()} for details on audio sessions.
+ &lt;p&gt;See {@link android.media.audiofx.AudioEffect} class for more details on controlling audio
+ effects.
+*/
+var Equalizer = {
+
+<span id='android-media-audiofx-Equalizer-property-PARAM_NUM_BANDS'>/** Number of bands. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_NUM_BANDS : &quot;0&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_LEVEL_RANGE'>/** Band level range. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_LEVEL_RANGE : &quot;1&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_BAND_LEVEL'>/** Band level. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_BAND_LEVEL : &quot;2&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_CENTER_FREQ'>/** Band center frequency. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_CENTER_FREQ : &quot;3&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_BAND_FREQ_RANGE'>/** Band frequency range. Parameter ID for
+</span> {@link android.media.audiofx.Equalizer.OnParameterChangeListener}
+*/
+PARAM_BAND_FREQ_RANGE : &quot;4&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_GET_BAND'>/** Band for a given frequency. Parameter ID for OnParameterChangeListener
+</span>
+*/
+PARAM_GET_BAND : &quot;5&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_CURRENT_PRESET'>/** Current preset. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_CURRENT_PRESET : &quot;6&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_GET_NUM_OF_PRESETS'>/** Request number of presets. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_GET_NUM_OF_PRESETS : &quot;7&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_GET_PRESET_NAME'>/** Request preset name. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_GET_PRESET_NAME : &quot;8&quot;,
+<span id='android-media-audiofx-Equalizer-property-PARAM_STRING_SIZE_MAX'>/** Maximum size for preset name
+</span>*/
+PARAM_STRING_SIZE_MAX : &quot;32&quot;,
+<span id='android-media-audiofx-Equalizer-method-getNumberOfBands'>/**Gets the number of frequency bands supported by the Equalizer engine.
+</span>@return {Number} the number of bands
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getNumberOfBands : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getBandLevelRange'>/**Gets the level range for use by {@link #setBandLevel(short,short)}. The level is expressed in
+</span> milliBel.
+@return {Number} the band level range in an array of short integers. The first element is the lower
+ limit of the range, the second element the upper limit.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getBandLevelRange : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-setBandLevel'>/**Sets the given equalizer band to the given gain value.
+</span>@param {Number} band frequency band that will have the new gain. The numbering of the bands starts
+ from 0 and ends at (number of bands - 1).
+@param {Number} level new gain in millibels that will be set to the given band. getBandLevelRange()
+ will define the maximum and minimum values.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+@see #getNumberOfBands()
+*/
+setBandLevel : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getBandLevel'>/**Gets the gain set for the given equalizer band.
+</span>@param {Number} band frequency band whose gain is requested. The numbering of the bands starts
+ from 0 and ends at (number of bands - 1).
+@return {Number} the gain in millibels of the given band.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getBandLevel : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getCenterFreq'>/**Gets the center frequency of the given band.
+</span>@param {Number} band frequency band whose center frequency is requested. The numbering of the bands
+ starts from 0 and ends at (number of bands - 1).
+@return {Number} the center frequency in milliHertz
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getCenterFreq : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getBandFreqRange'>/**Gets the frequency range of the given frequency band.
+</span>@param {Number} band frequency band whose frequency range is requested. The numbering of the bands
+ starts from 0 and ends at (number of bands - 1).
+@return {Number} the frequency range in millHertz in an array of integers. The first element is the
+ lower limit of the range, the second element the upper limit.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getBandFreqRange : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getBand'>/**Gets the band that has the most effect on the given frequency.
+</span>@param {Number} frequency frequency in milliHertz which is to be equalized via the returned band.
+@return {Number} the frequency band that has most effect on the given frequency.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getBand : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getCurrentPreset'>/**Gets current preset.
+</span>@return {Number} the preset that is set at the moment.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getCurrentPreset : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-usePreset'>/**Sets the equalizer according to the given preset.
+</span>@param {Number} preset new preset that will be taken into use. The valid range is [0,
+ number of presets-1].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+@see #getNumberOfPresets()
+*/
+usePreset : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getNumberOfPresets'>/**Gets the total number of presets the equalizer supports. The presets will have indices
+</span> [0, number of presets-1].
+@return {Number} the number of presets the equalizer supports.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getNumberOfPresets : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getPresetName'>/**Gets the preset name based on the index.
+</span>@param {Number} preset index of the preset. The valid range is [0, number of presets-1].
+@return {String} a string containing the name of the given preset.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getPresetName : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-setParameterListener'>/**Registers an OnParameterChangeListener interface.
+</span>@param {Object {Equalizer.OnParameterChangeListener}} listener OnParameterChangeListener interface registered
+*/
+setParameterListener : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-getProperties'>/**Gets the equalizer properties. This method is useful when a snapshot of current
+</span> equalizer settings must be saved by the application.
+@return {Object {android.media.audiofx.Equalizer.Settings}} an Equalizer.Settings object containing all current parameters values
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getProperties : function(  ) {},
+
+<span id='android-media-audiofx-Equalizer-method-setProperties'>/**Sets the equalizer properties. This method is useful when equalizer settings have to
+</span> be applied from a previous backup.
+@param {Object {Equalizer.Settings}} settings an Equalizer.Settings object containing the properties to apply
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setProperties : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

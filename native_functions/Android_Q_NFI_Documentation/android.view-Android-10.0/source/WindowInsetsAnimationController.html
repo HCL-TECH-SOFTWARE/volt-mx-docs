@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-WindowInsetsAnimationController'>/**@class android.view.WindowInsetsAnimationController
+</span> Interface to control a window inset animation frame-by-frame.
+ @hide pending unhide
+*/
+var WindowInsetsAnimationController = {
+
+<span id='android-view-WindowInsetsAnimationController-method-getHiddenStateInsets'>/**Retrieves the {@link Insets} when the windows this animation is controlling are fully hidden.
+</span> &lt;p&gt;
+ If there are any animation listeners registered, this value is the same as
+ {@link android.view.WindowInsetsAnimationListener.InsetsAnimation#getLowerBound()} that will be passed into the callbacks.
+@return {Object {android.graphics.Insets}} Insets when the windows this animation is controlling are fully hidden.
+@see InsetsAnimation#getLowerBound()
+*/
+getHiddenStateInsets : function(  ) {},
+
+<span id='android-view-WindowInsetsAnimationController-method-getShownStateInsets'>/**Retrieves the {@link Insets} when the windows this animation is controlling are fully shown.
+</span> &lt;p&gt;
+ In case the size of a window causing insets is changing in the middle of the animation, we
+ execute that height change after this animation has finished.
+ &lt;p&gt;
+ If there are any animation listeners registered, this value is the same as
+ {@link android.view.WindowInsetsAnimationListener.InsetsAnimation#getUpperBound()} that will be passed into the callbacks.
+@return {Object {android.graphics.Insets}} Insets when the windows this animation is controlling are fully shown.
+@see InsetsAnimation#getUpperBound()
+*/
+getShownStateInsets : function(  ) {},
+
+<span id='android-view-WindowInsetsAnimationController-method-getCurrentInsets'>/**
+</span>@return {Object {android.graphics.Insets}} The current insets on the window. These will follow any animation changes.
+*/
+getCurrentInsets : function(  ) {},
+
+<span id='android-view-WindowInsetsAnimationController-method-getTypes'>/**
+</span>@return {Number} The {@link InsetType}s this object is currently controlling.
+*/
+getTypes : function(  ) {},
+
+<span id='android-view-WindowInsetsAnimationController-method-changeInsets'>/**Modifies the insets by indirectly moving the windows around in the system that are causing
+</span> window insets.
+ &lt;p&gt;
+ Note that this will &lt;b&gt;not&lt;/b&gt; inform the view system of a full inset change via
+ {@link android.view.View#dispatchApplyWindowInsets} in order to avoid a full layout pass during the
+ animation. If you'd like to animate views during a window inset animation, register a
+ {@link android.view.WindowInsetsAnimationListener} by calling
+ {@link android.view.View#setWindowInsetsAnimationListener(WindowInsetsAnimationListener)} that will be
+ notified about any insets change via {@link android.view.WindowInsetsAnimationListener#onProgress} during
+ the animation.
+ &lt;p&gt;
+ {@link android.view.View#dispatchApplyWindowInsets} will instead be called once the animation has
+ finished, i.e. once {@link #finish} has been called.
+@param {Object {Insets}} insets The new insets to apply. Based on the requested insets, the system will
+               calculate the positions of the windows in the system causing insets such that
+               the resulting insets of that configuration will match the passed in parameter.
+               Note that these insets are being clamped to the range from
+               {@link #getHiddenStateInsets} to {@link #getShownStateInsets}
+@see WindowInsetsAnimationListener
+@see View#setWindowInsetsAnimationListener(WindowInsetsAnimationListener)
+*/
+changeInsets : function(  ) {},
+
+<span id='android-view-WindowInsetsAnimationController-method-finish'>/**
+</span>@param {Number} shownTypes The list of windows causing insets that should remain shown after finishing
+                   the animation.
+*/
+finish : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

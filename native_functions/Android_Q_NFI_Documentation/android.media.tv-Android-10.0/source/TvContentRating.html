@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvContentRating'>/**@class android.media.tv.TvContentRating
+</span>@extends java.lang.Object
+
+ A class representing a TV content rating. When a TV input service inserts the content rating
+ information on a program into the database, this class can be used to generate the formatted
+ string for
+ {@link android.media.tv.TvContract.Programs#COLUMN_CONTENT_RATING android.media.tv.TvContract.Programs.COLUMN_CONTENT_RATING}.
+ To create a {@code TvContentRating} object, use the
+ {@link #createRating android.media.tv.TvContentRating.createRating} method with valid rating system string
+ constants.
+
+ &lt;p&gt;It is possible for an application to define its own content rating system by supplying a
+ content rating system definition XML resource (see example below) and declaring a broadcast
+ receiver that filters {@link android.media.tv.TvInputManager#ACTION_QUERY_CONTENT_RATING_SYSTEMS} in its manifest.
+
+ &lt;h3&gt; Example: Rating system definition for the TV Parental Guidelines&lt;/h3&gt;
+ The following XML example shows how the TV Parental Guidelines in the United States can be
+ defined:
+ &lt;p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;
+ {@literal
+ &lt;rating-system-definitions xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     android:versionCode=&quot;1&quot;&gt;
+     &lt;rating-system-definition android:name=&quot;US_TV&quot;
+         android:country=&quot;US&quot;
+         android:description=&quot;@string/description_us_tv&quot;&gt;
+         &lt;sub-rating-definition android:name=&quot;US_TV_D&quot;
+             android:title=&quot;D&quot;
+             android:description=&quot;@string/description_us_tv_d&quot; /&gt;
+         &lt;sub-rating-definition android:name=&quot;US_TV_L&quot;
+             android:title=&quot;L&quot;
+             android:description=&quot;@string/description_us_tv_l&quot; /&gt;
+         &lt;sub-rating-definition android:name=&quot;US_TV_S&quot;
+             android:title=&quot;S&quot;
+             android:description=&quot;@string/description_us_tv_s&quot; /&gt;
+         &lt;sub-rating-definition android:name=&quot;US_TV_V&quot;
+             android:title=&quot;V&quot;
+             android:description=&quot;@string/description_us_tv_v&quot; /&gt;
+         &lt;sub-rating-definition android:name=&quot;US_TV_FV&quot;
+             android:title=&quot;FV&quot;
+             android:description=&quot;@string/description_us_tv_fv&quot; /&gt;
+
+         &lt;rating-definition android:name=&quot;US_TV_Y&quot;
+             android:title=&quot;TV-Y&quot;
+             android:description=&quot;@string/description_us_tv_y&quot;
+             android:icon=&quot;@drawable/icon_us_tv_y&quot;
+             android:contentAgeHint=&quot;0&quot; /&gt;
+         &lt;rating-definition android:name=&quot;US_TV_Y7&quot;
+             android:title=&quot;TV-Y7&quot;
+             android:description=&quot;@string/description_us_tv_y7&quot;
+             android:icon=&quot;@drawable/icon_us_tv_y7&quot;
+             android:contentAgeHint=&quot;7&quot;&gt;
+             &lt;sub-rating android:name=&quot;US_TV_FV&quot; /&gt;
+         &lt;/rating-definition&gt;
+         &lt;rating-definition android:name=&quot;US_TV_G&quot;
+             android:title=&quot;TV-G&quot;
+             android:description=&quot;@string/description_us_tv_g&quot;
+             android:icon=&quot;@drawable/icon_us_tv_g&quot;
+             android:contentAgeHint=&quot;0&quot; /&gt;
+         &lt;rating-definition android:name=&quot;US_TV_PG&quot;
+             android:title=&quot;TV-PG&quot;
+             android:description=&quot;@string/description_us_tv_pg&quot;
+             android:icon=&quot;@drawable/icon_us_tv_pg&quot;
+             android:contentAgeHint=&quot;14&quot;&gt;
+             &lt;sub-rating android:name=&quot;US_TV_D&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_L&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_S&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_V&quot; /&gt;
+         &lt;/rating-definition&gt;
+         &lt;rating-definition android:name=&quot;US_TV_14&quot;
+             android:title=&quot;TV-14&quot;
+             android:description=&quot;@string/description_us_tv_14&quot;
+             android:icon=&quot;@drawable/icon_us_tv_14&quot;
+             android:contentAgeHint=&quot;14&quot;&gt;
+             &lt;sub-rating android:name=&quot;US_TV_D&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_L&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_S&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_V&quot; /&gt;
+         &lt;/rating-definition&gt;
+         &lt;rating-definition android:name=&quot;US_TV_MA&quot;
+             android:title=&quot;TV-MA&quot;
+             android:description=&quot;@string/description_us_tv_ma&quot;
+             android:icon=&quot;@drawable/icon_us_tv_ma&quot;
+             android:contentAgeHint=&quot;17&quot;&gt;
+             &lt;sub-rating android:name=&quot;US_TV_L&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_S&quot; /&gt;
+             &lt;sub-rating android:name=&quot;US_TV_V&quot; /&gt;
+         &lt;/rating-definition&gt;
+         &lt;rating-order&gt;
+             &lt;rating android:name=&quot;US_TV_Y&quot; /&gt;
+             &lt;rating android:name=&quot;US_TV_Y7&quot; /&gt;
+         &lt;/rating-order&gt;
+         &lt;rating-order&gt;
+             &lt;rating android:name=&quot;US_TV_G&quot; /&gt;
+             &lt;rating android:name=&quot;US_TV_PG&quot; /&gt;
+             &lt;rating android:name=&quot;US_TV_14&quot; /&gt;
+             &lt;rating android:name=&quot;US_TV_MA&quot; /&gt;
+         &lt;/rating-order&gt;
+     &lt;/rating-system-definition&gt;
+ &lt;/rating-system-definitions&gt;}&lt;/pre&gt;
+
+ &lt;h3&gt;System defined rating strings&lt;/h3&gt;
+ The following strings are defined by the system to provide a standard way to create
+ {@code TvContentRating} objects.
+
+ &lt;p&gt;For example, to create an object that represents TV-PG rating with suggestive dialogue and
+ coarse language from the TV Parental Guidelines in the United States, one can use the following
+ code snippet:
+
+ &lt;pre&gt;
+ TvContentRating rating = TvContentRating.createRating(
+         &quot;com.android.tv&quot;,
+         &quot;US_TV&quot;,
+         &quot;US_TV_PG&quot;,
+         &quot;US_TV_D&quot;, &quot;US_TV_L&quot;);
+ &lt;/pre&gt;
+ &lt;h4&gt;System defined string for domains&lt;/h4&gt;
+ &lt;table&gt;
+     &lt;tr&gt;
+         &lt;th&gt;Constant Value&lt;/th&gt;
+         &lt;th&gt;Description&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;com.android.tv&lt;/td&gt;
+         &lt;td&gt;Used for creating system defined content ratings&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;h4&gt;System defined strings for rating systems&lt;/h4&gt;
+ &lt;table&gt;
+     &lt;tr&gt;
+         &lt;th&gt;Constant Value&lt;/th&gt;
+         &lt;th&gt;Description&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AR_TV&lt;/td&gt;
+         &lt;td&gt;TV content rating system for Argentina&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV&lt;/td&gt;
+         &lt;td&gt;TV content rating system for Australia&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV&lt;/td&gt;
+         &lt;td&gt;TV content rating system for Brazil&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_EN&lt;/td&gt;
+         &lt;td&gt;TV content rating system for Canada (English)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_FR&lt;/td&gt;
+         &lt;td&gt;TV content rating system for Canada (French)&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB&lt;/td&gt;
+         &lt;td&gt;DVB content rating system&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB&lt;/td&gt;
+         &lt;td&gt;DVB content rating system for Spain&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB&lt;/td&gt;
+         &lt;td&gt;DVB content rating system for France&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB&lt;/td&gt;
+         &lt;td&gt;ISDB content rating system&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;KR_TV&lt;/td&gt;
+         &lt;td&gt;TV content rating system for South Korea&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;SG_TV&lt;/td&gt;
+         &lt;td&gt;TV content rating system for Singapore&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_MV&lt;/td&gt;
+         &lt;td&gt;Movie content rating system for the United States&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV&lt;/td&gt;
+         &lt;td&gt;TV content rating system for the United States&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;h4&gt;System defined strings for ratings&lt;/h4&gt;
+ &lt;table&gt;
+     &lt;tr&gt;
+         &lt;th&gt;Rating System&lt;/th&gt;
+         &lt;th&gt;Constant Value&lt;/th&gt;
+         &lt;th&gt;Description&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;4&quot;&gt;AR_TV&lt;/td&gt;
+         &lt;td&gt;AR_TV_ATP&lt;/td&gt;
+         &lt;td&gt;Suitable for all audiences. Programs may contain mild violence, language and mature
+         situations&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AR_TV_SAM_13&lt;/td&gt;
+         &lt;td&gt;Suitable for ages 13 and up. Programs may contain mild to moderate language and mild
+         violence and sexual references&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AR_TV_SAM_16&lt;/td&gt;
+         &lt;td&gt;Suitable for ages 16 and up. Programs may contain more intensive violence and coarse
+         language, partial nudity and moderate sexual references&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AR_TV_SAM_18&lt;/td&gt;
+         &lt;td&gt;Suitable for mature audiences only. Programs contain strong violence, coarse language
+         and explicit sexual references&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;8&quot;&gt;AU_TV&lt;/td&gt;
+         &lt;td&gt;AU_TV_P&lt;/td&gt;
+         &lt;td&gt;Recommended for younger children aged between 2 and 11 years&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV_C&lt;/td&gt;
+         &lt;td&gt;Recommended for older children aged between 5 and 14 years&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV_G&lt;/td&gt;
+         &lt;td&gt;Recommended for all ages&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV_PG&lt;/td&gt;
+         &lt;td&gt;Parental guidance is recommended for young viewers under 15&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV_M&lt;/td&gt;
+         &lt;td&gt;Recommended for mature audiences aged 15 years and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV_MA&lt;/td&gt;
+         &lt;td&gt;Not suitable for children and teens under 15, due to sexual descriptions, course
+         language, adult themes or drug use&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV_AV&lt;/td&gt;
+         &lt;td&gt;Not suitable for children and teens under 15. This category is used specifically for
+         violent programs&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;AU_TV_R&lt;/td&gt;
+         &lt;td&gt;Not for children under 18. Content may include graphic violence, sexual situations,
+         coarse language and explicit drug use&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;6&quot;&gt;BR_TV&lt;/td&gt;
+         &lt;td&gt;BR_TV_L&lt;/td&gt;
+         &lt;td&gt;Content is suitable for all audiences&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV_10&lt;/td&gt;
+         &lt;td&gt;Content suitable for viewers over the age of 10&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV_12&lt;/td&gt;
+         &lt;td&gt;Content suitable for viewers over the age of 12&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV_14&lt;/td&gt;
+         &lt;td&gt;Content suitable for viewers over the age of 14&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV_16&lt;/td&gt;
+         &lt;td&gt;Content suitable for viewers over the age of 16&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV_18&lt;/td&gt;
+         &lt;td&gt;Content suitable for viewers over the age of 18&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;7&quot;&gt;CA_TV_EN&lt;/td&gt;
+         &lt;td&gt;CA_TV_EN_EXEMPT&lt;/td&gt;
+         &lt;td&gt;Exempt from ratings&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_EN_C&lt;/td&gt;
+         &lt;td&gt;Suitable for children ages 2&amp;#8211;7&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_EN_C8&lt;/td&gt;
+         &lt;td&gt;Suitable for children ages 8 and older&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_EN_G&lt;/td&gt;
+         &lt;td&gt;Suitable for the entire family&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_EN_PG&lt;/td&gt;
+         &lt;td&gt;May contain moderate violence, profanity, nudity, and sexual references&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_EN_14&lt;/td&gt;
+         &lt;td&gt;Intended for viewers ages 14 and older&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_EN_18&lt;/td&gt;
+         &lt;td&gt;Intended for viewers ages 18 and older&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;6&quot;&gt;CA_TV_FR&lt;/td&gt;
+         &lt;td&gt;CA_TV_FR_E&lt;/td&gt;
+         &lt;td&gt;Exempt from ratings&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_FR_G&lt;/td&gt;
+         &lt;td&gt;Appropriate for all ages&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_FR_8&lt;/td&gt;
+         &lt;td&gt;Appropriate for children 8&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_FR_13&lt;/td&gt;
+         &lt;td&gt;Suitable for children 13&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_FR_16&lt;/td&gt;
+         &lt;td&gt;Recommended for children over the age of 16&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;CA_TV_FR_18&lt;/td&gt;
+         &lt;td&gt;Only to be viewed by adults&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;15&quot;&gt;DVB&lt;/td&gt;
+         &lt;td&gt;DVB_4&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 4 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_5&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 5 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_6&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 6 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_7&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 7 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_8&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 8 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_9&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 9 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_10&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 10 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_11&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 11 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_12&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 12 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_13&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 13 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_14&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 14 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_15&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 15 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_16&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 16 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_17&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 17 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;DVB_18&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 18 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;18&quot;&gt;ES_DVB&lt;/td&gt;
+         &lt;td&gt;ES_DVB_ALL&lt;/td&gt;
+         &lt;td&gt;Recommended for all ages&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_C&lt;/td&gt;
+         &lt;td&gt;Recommended for children&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_X&lt;/td&gt;
+         &lt;td&gt;Recommended for adults&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_4&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 4 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_5&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 5 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_6&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 6 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_7&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 7 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_8&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 8 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_9&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 9 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_10&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 10 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_11&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 11 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_12&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 12 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_13&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 13 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_14&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 14 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_15&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 15 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_16&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 16 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_17&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 17 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ES_DVB_18&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 18 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;16&quot;&gt;FR_DVB&lt;/td&gt;
+         &lt;td&gt;FR_DVB_U&lt;/td&gt;
+         &lt;td&gt;Recommended for all ages&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_4&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 4 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_5&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 5 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_6&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 6 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_7&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 7 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_8&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 8 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_9&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 9 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_10&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 10 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_11&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 11 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_12&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 12 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_13&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 13 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_14&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 14 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_15&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 15 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_16&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 16 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_17&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 17 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;FR_DVB_18&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 18 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;17&quot;&gt;ISDB&lt;/td&gt;
+         &lt;td&gt;ISDB_4&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 4 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_5&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 5 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_6&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 6 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_7&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 7 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_8&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 8 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_9&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 9 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_10&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 10 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_11&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 11 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_12&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 12 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_13&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 13 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_14&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 14 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_15&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 15 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_16&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 16 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_17&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 17 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_18&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 18 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_19&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 19 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;ISDB_20&lt;/td&gt;
+         &lt;td&gt;Recommended for ages 20 and over&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;5&quot;&gt;KR_TV&lt;/td&gt;
+         &lt;td&gt;KR_TV_ALL&lt;/td&gt;
+         &lt;td&gt;Appropriate for all ages&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;KR_TV_7&lt;/td&gt;
+         &lt;td&gt;May contain material inappropriate for children younger than 7, and parental
+         discretion should be used&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;KR_TV_12&lt;/td&gt;
+         &lt;td&gt;May deemed inappropriate for those younger than 12, and parental discretion should be
+         used&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;KR_TV_15&lt;/td&gt;
+         &lt;td&gt;May be inappropriate for children under 15, and that parental discretion should be
+         used&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;KR_TV_19&lt;/td&gt;
+         &lt;td&gt;For adults only&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;6&quot;&gt;SG_TV&lt;/td&gt;
+         &lt;td&gt;SG_TV_G&lt;/td&gt;
+         &lt;td&gt;Suitable for all ages&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;SG_TV_PG&lt;/td&gt;
+         &lt;td&gt;Suitable for all but parents should guide their young&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;SG_TV_PG13&lt;/td&gt;
+         &lt;td&gt;Suitable for persons aged 13 and above but parental guidance is advised for children
+         below 13&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;SG_TV_NC16&lt;/td&gt;
+         &lt;td&gt;Suitable for persons aged 16 and above&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;SG_TV_M18&lt;/td&gt;
+         &lt;td&gt;Suitable for persons aged 18 and above&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;SG_TV_R21&lt;/td&gt;
+         &lt;td&gt;Suitable for adults aged 21 and above&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;5&quot;&gt;US_MV&lt;/td&gt;
+         &lt;td&gt;US_MV_G&lt;/td&gt;
+         &lt;td&gt;General audiences&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_MV_PG&lt;/td&gt;
+         &lt;td&gt;Parental guidance suggested&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_MV_PG13&lt;/td&gt;
+         &lt;td&gt;Parents strongly cautioned&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_MV_R&lt;/td&gt;
+         &lt;td&gt;Restricted, under 17 requires accompanying parent or adult guardian&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_MV_NC17&lt;/td&gt;
+         &lt;td&gt;No one 17 and under admitted&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;6&quot;&gt;US_TV&lt;/td&gt;
+         &lt;td&gt;US_TV_Y&lt;/td&gt;
+         &lt;td&gt;This program is designed to be appropriate for all children&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_Y7&lt;/td&gt;
+         &lt;td&gt;This program is designed for children age 7 and above&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_G&lt;/td&gt;
+         &lt;td&gt;Most parents would find this program suitable for all ages&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_PG&lt;/td&gt;
+         &lt;td&gt;This program contains material that parents may find unsuitable for younger children
+         &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_14&lt;/td&gt;
+         &lt;td&gt;This program contains some material that many parents would find unsuitable for
+         children under 14 years of age&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_MA&lt;/td&gt;
+         &lt;td&gt;This program is specifically designed to be viewed by adults and therefore may be
+         unsuitable for children under 17&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;h4&gt;System defined strings for sub-ratings&lt;/h4&gt;
+ &lt;table&gt;
+     &lt;tr&gt;
+         &lt;th&gt;Rating System&lt;/th&gt;
+         &lt;th&gt;Constant Value&lt;/th&gt;
+         &lt;th&gt;Description&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;3&quot;&gt;BR_TV&lt;/td&gt;
+         &lt;td&gt;BR_TV_D&lt;/td&gt;
+         &lt;td&gt;Drugs&lt;br/&gt;Applicable to BR_TV_L, BR_TV_10, BR_TV_12, BR_TV_14, BR_TV_16, and BR_TV_18
+         &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV_S&lt;/td&gt;
+         &lt;td&gt;Sex&lt;br/&gt;Applicable to BR_TV_L, BR_TV_10, BR_TV_12, BR_TV_14, BR_TV_16, and BR_TV_18
+         &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;BR_TV_V&lt;/td&gt;
+         &lt;td&gt;Violence&lt;br/&gt;Applicable to BR_TV_L, BR_TV_10, BR_TV_12, BR_TV_14, BR_TV_16, and
+         BR_TV_18&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td valign=&quot;top&quot; rowspan=&quot;5&quot;&gt;US_TV&lt;/td&gt;
+         &lt;td&gt;US_TV_D&lt;/td&gt;
+         &lt;td&gt;Suggestive dialogue (Usually means talks about sex)&lt;br/&gt;Applicable to US_TV_PG, and
+         US_TV_14&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_L&lt;/td&gt;
+         &lt;td&gt;Coarse language&lt;br/&gt;Applicable to US_TV_PG, US_TV_14, and US_TV_MA&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_S&lt;/td&gt;
+         &lt;td&gt;Sexual content&lt;br/&gt;Applicable to US_TV_PG, US_TV_14, and US_TV_MA&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_V&lt;/td&gt;
+         &lt;td&gt;Violence&lt;br/&gt;Applicable to US_TV_PG, US_TV_14, and US_TV_MA&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;US_TV_FV&lt;/td&gt;
+         &lt;td&gt;Fantasy violence (Children's programming only)&lt;br/&gt;Applicable to US_TV_Y7&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+var TvContentRating = {
+
+<span id='android-media-tv-TvContentRating-property-UNRATED'>/** Rating constant denoting unrated content. Used to handle the case where the content rating
+</span> information is missing.
+
+ &lt;p&gt;TV input services can call {@link android.media.tv.TvInputManager#isRatingBlocked} with this constant to
+ determine whether they should block unrated content. The subsequent call to
+ {@link android.media.tv.TvInputService.Session#notifyContentBlocked} with the same constant notifies
+ applications that the current program content is blocked by parental controls.
+*/
+UNRATED : &quot;null&quot;,
+<span id='android-media-tv-TvContentRating-method-createRating'>/**Creates a {@code TvContentRating} object with predefined content rating strings.
+</span>@param {String} domain The domain string. For example, &quot;com.android.tv&quot;.
+@param {String} ratingSystem The rating system string. For example, &quot;US_TV&quot;.
+@param {String} rating The content rating string. For example, &quot;US_TV_PG&quot;.
+@param {Object {java.lang.String[]}} subRatings The sub-rating strings. For example, &quot;US_TV_D&quot; and &quot;US_TV_L&quot;.
+@return {Object {android.media.tv.TvContentRating}} A {@code TvContentRating} object.
+@throws IllegalArgumentException If {@code domain}, {@code ratingSystem} or {@code rating} is
+             {@code null}.
+*/
+createRating : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-unflattenFromString'>/**Recovers a {@code TvContentRating} object from the string that was previously created from
+</span> {@link #flattenToString}.
+@param {String} ratingString The string returned by {@link #flattenToString}.
+@return {Object {android.media.tv.TvContentRating}} the {@code TvContentRating} object containing the domain, rating system, rating and
+         sub-ratings information encoded in {@code ratingString}.
+@see #flattenToString
+*/
+unflattenFromString : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-getDomain'>/**Returns the domain of this {@code TvContentRating} object.
+</span>*/
+getDomain : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-getRatingSystem'>/**Returns the rating system of this {@code TvContentRating} object.
+</span>*/
+getRatingSystem : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-getMainRating'>/**Returns the main rating of this {@code TvContentRating} object.
+</span>*/
+getMainRating : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-getSubRatings'>/**Returns the unmodifiable sub-rating string {@link List} of this {@code TvContentRating}
+</span> object.
+*/
+getSubRatings : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-flattenToString'>/**Returns a string that unambiguously describes the rating information contained in a
+</span> {@code TvContentRating} object. One can later recover the object from this string through
+ {@link #unflattenFromString}.
+@return {String} a string containing the rating information, which can later be stored in the
+         database.
+@see #unflattenFromString
+*/
+flattenToString : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-contains'>/**Returns {@code true} if this rating has the same main rating as the specified rating and when
+</span> this rating's sub-ratings contain the other's.
+
+ &lt;p&gt;For example, a {@code TvContentRating} object that represents TV-PG with
+ S(Sexual content) and V(Violence) contains TV-PG, TV-PG/S, TV-PG/V and itself.
+@param {Object {TvContentRating}} rating The {@link TvContentRating} to check.
+@return {Boolean} {@code true} if this object contains {@code rating}, {@code false} otherwise.
+*/
+contains : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-media-tv-TvContentRating-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

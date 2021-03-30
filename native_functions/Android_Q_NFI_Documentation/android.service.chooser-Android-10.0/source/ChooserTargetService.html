@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-chooser-ChooserTargetService'>/**@class android.service.chooser.ChooserTargetService
+</span>@extends android.app.Service
+
+ A service that receives calls from the system when the user is asked to choose
+ a target for an intent explicitly by another app. The calling app must have invoked
+ {@link android.content.Intent#ACTION_CHOOSER ACTION_CHOOSER} as handled by the system;
+ applications do not have the ability to query a ChooserTargetService directly.
+
+ &lt;p&gt;Which ChooserTargetServices are queried depends on a system-level policy decision
+ made at the moment the chooser is invoked, including but not limited to user time
+ spent with the app package or associated components in the foreground, recency of usage
+ or frequency of usage. These will generally correlate with the order that app targets
+ are shown in the list of intent handlers shown in the system chooser or resolver.&lt;/p&gt;
+
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with
+ the {@link android.Manifest.permission#BIND_CHOOSER_TARGET_SERVICE} permission
+ and include an intent filter with the {@link #SERVICE_INTERFACE} action. For example:&lt;/p&gt;
+ &lt;pre&gt;
+     &amp;lt;service android:name=&quot;.MyChooserTargetService&quot;
+             android:label=&quot;&amp;#64;string/service_name&quot;
+             android:permission=&quot;android.permission.BIND_CHOOSER_TARGET_SERVICE&quot;&gt;
+         &amp;lt;intent-filter&gt;
+             &amp;lt;action android:name=&quot;android.service.chooser.ChooserTargetService&quot; /&gt;
+         &amp;lt;/intent-filter&gt;
+     &amp;lt;/service&gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;For the system to query your service, you must add a &amp;lt;meta-data&gt; element to the
+ Activity in your manifest that can handle Intents that you would also like to provide
+ optional deep links for. For example, a chat app might offer deep links to recent active
+ conversations instead of invoking a generic picker after the app itself is chosen as a target.
+ &lt;/p&gt;
+
+ &lt;p&gt;The meta-data element should have the name
+ &lt;code&gt;android.service.chooser.chooser_target_service&lt;/code&gt; and a value corresponding to
+ the component name of your service. Example:&lt;/p&gt;
+ &lt;pre&gt;
+     &amp;lt;activity android:name=&quot;.MyShareActivity&quot;
+             android:label=&quot;&amp;#64;string/share_activity_label&quot;&gt;
+         &amp;lt;intent-filter&gt;
+             &amp;lt;action android:name=&quot;android.intent.action.SEND&quot; /&gt;
+         &amp;lt;/intent-filter&gt;
+         &amp;lt;meta-data android:name=&quot;android.service.chooser.chooser_target_service&quot;
+                 android:value=&quot;.MyChooserTargetService&quot; /&gt;
+     &amp;lt;/activity&gt;
+ &lt;/pre&gt;
+*/
+var ChooserTargetService = {
+
+<span id='android-service-chooser-ChooserTargetService-property-SERVICE_INTERFACE'>/** The Intent action that a ChooserTargetService must respond to
+</span>*/
+SERVICE_INTERFACE : &quot;android.service.chooser.ChooserTargetService&quot;,
+<span id='android-service-chooser-ChooserTargetService-property-META_DATA_NAME'>/** The name of the &lt;code&gt;meta-data&lt;/code&gt; element that must be present on an
+</span> &lt;code&gt;activity&lt;/code&gt; element in a manifest to link it to a ChooserTargetService
+*/
+META_DATA_NAME : &quot;android.service.chooser.chooser_target_service&quot;,
+<span id='android-service-chooser-ChooserTargetService-property-BIND_PERMISSION'>/** The permission that a ChooserTargetService must require in order to bind to it.
+</span> If this permission is not enforced the system will skip that ChooserTargetService.
+*/
+BIND_PERMISSION : &quot;android.permission.BIND_CHOOSER_TARGET_SERVICE&quot;,
+<span id='android-service-chooser-ChooserTargetService-method-onGetChooserTargets'>/**Called by the system to retrieve a set of deep-link {@link android.service.chooser.ChooserTarget targets} that
+</span> can handle an intent.
+
+ &lt;p&gt;The returned list should be sorted such that the most relevant targets appear first.
+ The score for each ChooserTarget will be combined with the system's score for the original
+ target Activity to sort and filter targets presented to the user.&lt;/p&gt;
+
+ &lt;p&gt;&lt;em&gt;Important:&lt;/em&gt; Calls to this method from other applications will occur on
+ a binder thread, not on your app's main thread. Make sure that access to relevant data
+ within your app is thread-safe.&lt;/p&gt;
+@param {Object {ComponentName}} targetActivityName the ComponentName of the matched activity that referred the system
+                           to this ChooserTargetService
+@param {Object {IntentFilter}} matchedFilter the specific IntentFilter on the component that was matched
+@return {Object {java.util.List}} a list of deep-link targets to fulfill the intent match, sorted by relevance
+*/
+onGetChooserTargets : function(  ) {},
+
+<span id='android-service-chooser-ChooserTargetService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

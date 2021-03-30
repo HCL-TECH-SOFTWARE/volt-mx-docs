@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-mediadrm-signer-MediaDrmSigner'>/**@class com.android.mediadrm.signer.MediaDrmSigner
+</span>@extends java.lang.Object
+
+ Provides certificate request generation, response handling and
+ signing APIs
+*/
+var MediaDrmSigner = {
+
+<span id='com-android-mediadrm-signer-MediaDrmSigner-property-CERTIFICATE_TYPE_X509'>/** Specify X.509 certificate type
+</span>*/
+CERTIFICATE_TYPE_X509 : &quot;1&quot;,
+<span id='com-android-mediadrm-signer-MediaDrmSigner-method-getCertificateRequest'>/**Generate a certificate request, specifying the certificate type
+</span> and authority. The response received should be passed to
+ provideCertificateResponse.
+@param {Object {MediaDrm}} drm the MediaDrm object
+@param {Number} certType Specifies the certificate type.
+@param {String} certAuthority is passed to the certificate server to specify
+ the chain of authority.
+*/
+getCertificateRequest : function(  ) {},
+
+<span id='com-android-mediadrm-signer-MediaDrmSigner-method-provideCertificateResponse'>/**Process a response from the provisioning server.  The response
+</span> is obtained from an HTTP Post to the url provided by getCertificateRequest.
+
+ The public X509 certificate chain and wrapped private key are returned
+ in the returned Certificate objec.  The certificate chain is in BIO serialized
+ PEM format.  The wrapped private key should be stored in application private
+ storage, and used when invoking the signRSA method.
+@param {Object {MediaDrm}} drm the MediaDrm object
+@param {Object {byte[]}} response the opaque certificate response byte array to provide to the
+ DRM engine plugin.
+@throws android.media.DeniedByServerException if the response indicates that the
+ server rejected the request
+*/
+provideCertificateResponse : function(  ) {},
+
+<span id='com-android-mediadrm-signer-MediaDrmSigner-method-signRSA'>/**Sign data using an RSA key
+</span>@param {Object {MediaDrm}} drm the MediaDrm object
+@param {Object {byte[]}} sessionId a sessionId obtained from openSession on the MediaDrm object
+@param {String} algorithm the signing algorithm to use, e.g. &quot;PKCS1-BlockType1&quot;
+@param {Object {byte[]}} wrappedKey - the wrapped (encrypted) RSA private key obtained
+ from provideCertificateResponse
+@param {Object {byte[]}} message the data for which a signature is to be computed
+*/
+signRSA : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

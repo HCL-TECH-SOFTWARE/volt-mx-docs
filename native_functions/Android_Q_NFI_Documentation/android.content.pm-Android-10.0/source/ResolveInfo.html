@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-ResolveInfo'>/**@class android.content.pm.ResolveInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Information that is returned from resolving an intent
+ against an IntentFilter. This partially corresponds to
+ information collected from the AndroidManifest.xml's
+ &amp;lt;intent&amp;gt; tags.
+*/
+var ResolveInfo = {
+
+<span id='android-content-pm-ResolveInfo-property-activityInfo'>/** The activity or broadcast receiver that corresponds to this resolution
+</span> match, if this resolution is for an activity or broadcast receiver.
+ Exactly one of {@link #activityInfo}, {@link #serviceInfo}, or
+ {@link #providerInfo} will be non-null.
+*/
+activityInfo : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-serviceInfo'>/** The service that corresponds to this resolution match, if this resolution
+</span> is for a service. Exactly one of {@link #activityInfo},
+ {@link #serviceInfo}, or {@link #providerInfo} will be non-null.
+*/
+serviceInfo : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-providerInfo'>/** The provider that corresponds to this resolution match, if this
+</span> resolution is for a provider. Exactly one of {@link #activityInfo},
+ {@link #serviceInfo}, or {@link #providerInfo} will be non-null.
+*/
+providerInfo : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-auxiliaryInfo'>/** An auxiliary response that may modify the resolved information. This is
+</span> only set under certain circumstances; such as when resolving instant apps
+ or components defined in un-installed splits.
+ @hide
+*/
+auxiliaryInfo : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-isInstantAppAvailable'>/** Whether or not an instant app is available for the resolved intent.
+</span>*/
+isInstantAppAvailable : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-instantAppAvailable'>/**@removed */
+</span>instantAppAvailable : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-filter'>/** The IntentFilter that was matched for this ResolveInfo.
+</span>*/
+filter : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-priority'>/** The declared priority of this match.  Comes from the &quot;priority&quot;
+</span> attribute or, if not set, defaults to 0.  Higher values are a higher
+ priority.
+*/
+priority : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-preferredOrder'>/** Order of result according to the user's preference.  If the user
+</span> has not set a preference for this result, the value is 0; higher
+ values are a higher priority.
+*/
+preferredOrder : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-match'>/** The system's evaluation of how well the activity matches the
+</span> IntentFilter.  This is a match constant, a combination of
+ {@link IntentFilter#MATCH_CATEGORY_MASK IntentFilter.MATCH_CATEGORY_MASK}
+ and {@link IntentFilter#MATCH_ADJUSTMENT_MASK IntentFiler.MATCH_ADJUSTMENT_MASK}.
+*/
+match : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-specificIndex'>/** Only set when returned by
+</span> {@link android.content.pm.PackageParser.PackageManager#queryIntentActivityOptions}, this tells you
+ which of the given specific intents this result came from.  0 is the
+ first in the list, &lt; 0 means it came from the generic Intent query.
+*/
+specificIndex : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-isDefault'>/** This filter has specified the Intent.CATEGORY_DEFAULT, meaning it
+</span> would like to be considered a default action that the user can
+ perform on this data.
+*/
+isDefault : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-labelRes'>/** A string resource identifier (in the package's resources) of this
+</span> match's label.  From the &quot;label&quot; attribute or, if not set, 0.
+*/
+labelRes : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-nonLocalizedLabel'>/** The actual string retrieve from &lt;var&gt;labelRes&lt;/var&gt; or null if none
+</span> was provided.
+*/
+nonLocalizedLabel : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-icon'>/** A drawable resource identifier (in the package's resources) of this
+</span> match's icon.  From the &quot;icon&quot; attribute or, if not set, 0. It is
+ set only if the icon can be obtained by resource id alone.
+*/
+icon : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-resolvePackageName'>/** Optional -- if non-null, the {@link #labelRes} and {@link #icon}
+</span> resources will be loaded from this package, rather than the one
+ containing the resolved component.
+*/
+resolvePackageName : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-targetUserId'>/** If not equal to UserHandle.USER_CURRENT, then the intent will be forwarded to this user.
+</span> @hide
+*/
+targetUserId : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-noResourceId'>/** Set to true if the icon cannot be obtained by resource ids alone.
+</span> It is set to true for ResolveInfos from the managed profile: They need to
+ have their icon badged, so it cannot be obtained by resource ids alone.
+ @hide
+*/
+noResourceId : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-iconResourceId'>/** Same as {@link #icon} but it will always correspond to &quot;icon&quot; attribute
+</span> regardless of {@link #noResourceId} value.
+ @hide
+*/
+iconResourceId : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-system'>/** @hide Target comes from system process?
+</span>*/
+system : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-handleAllWebDataURI'>/** Will be set to {@code true} if the {@link IntentFilter} responsible for intent
+</span> resolution is classified as a &quot;browser&quot;.
+
+ @hide
+*/
+handleAllWebDataURI : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-ResolveInfo-method-getComponentInfo'>/**{@hide}
+</span>*/
+getComponentInfo : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-loadLabel'>/**Retrieve the current textual label associated with this resolution.  This
+</span> will call back on the given PackageManager to load the label from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the label can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {java.lang.CharSequence}} Returns a CharSequence containing the resolutions's label.  If the
+ item does not have a label, its name is returned.
+*/
+loadLabel : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-resolveLabelResId'>/**
+</span>@return {Number} The resource that would be used when loading
+ the label for this resolve info.
+@hide 
+*/
+resolveLabelResId : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-resolveIconResId'>/**
+</span>@return {Number} The resource that would be used when loading
+ the icon for this resolve info.
+@hide 
+*/
+resolveIconResId : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-loadIcon'>/**Retrieve the current graphical icon associated with this resolution.  This
+</span> will call back on the given PackageManager to load the icon from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the icon can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable containing the resolution's icon.  If the
+ item does not have an icon, the default activity icon is returned.
+*/
+loadIcon : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-getIconResource'>/**Return the icon resource identifier to use for this match.  If the
+</span> match defines an icon, that is used; else if the activity defines
+ an icon, that is used; else, the application icon is used.
+@return {Number} The icon associated with this match.
+*/
+getIconResource : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-ResolveInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

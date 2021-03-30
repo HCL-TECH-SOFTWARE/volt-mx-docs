@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-RttManager-RttParams'>/**@class android.net.wifi.RttManager.RttParams
+</span>@extends java.lang.Object
+
+specifies parameters for RTT request */
+var RttParams = {
+
+<span id='android-net-wifi-RttManager-RttParams-property-deviceType'>/** type of destination device being ranged
+</span> currently only support RTT_PEER_TYPE_AP
+ Range:RTT_PEER_TYPE_xxxx Default value:RTT_PEER_TYPE_AP
+*/
+deviceType : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-requestType'>/** type of RTT measurement method. Need check scan result and RttCapabilities first
+</span> Range: RTT_TYPE_ONE_SIDED or RTT_TYPE_TWO_SIDED
+ Default value: RTT_TYPE_ONE_SIDED
+*/
+requestType : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-secure'>/** Whether the secure RTT protocol needs to be used for ranging this peer device.
+</span>*/
+secure : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-bssid'>/** mac address of the device being ranged
+</span> Default value: null
+*/
+bssid : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-frequency'>/** The primary control channel over which the client is
+</span> communicating with the AP.Same as ScanResult.frequency
+ Default value: 0
+*/
+frequency : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-channelWidth'>/** channel width of the destination AP. Same as ScanResult.channelWidth
+</span> Default value: 0
+*/
+channelWidth : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-centerFreq0'>/** Not used if the AP bandwidth is 20 MHz
+</span> If the AP use 40, 80 or 160 MHz, this is the center frequency
+ if the AP use 80 + 80 MHz, this is the center frequency of the first segment
+ same as ScanResult.centerFreq0
+ Default value: 0
+*/
+centerFreq0 : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-centerFreq1'>/** Only used if the AP bandwidth is 80 + 80 MHz
+</span> if the AP use 80 + 80 MHz, this is the center frequency of the second segment
+ same as ScanResult.centerFreq1
+ Default value: 0
+*/
+centerFreq1 : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-num_samples'>/** number of samples to be taken
+</span> @deprecated Use the new {@link android.net.wifi.RttManager.RttParams#numSamplesPerBurst}
+*/
+num_samples : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-num_retries'>/** number of retries if a sample fails
+</span> @deprecated
+ Use {@link android.net.wifi.RttManager.RttParams#numRetriesPerMeasurementFrame} API.
+*/
+num_retries : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-numberBurst'>/**Number of burst in exp , 2^x. 0 means single shot measurement, range 0-15
+</span> Currently only single shot is supported
+ Default value: 0
+*/
+numberBurst : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-interval'>/** valid only if numberBurst &gt; 1, interval between burst(100ms).
+</span> Range : 0-31, 0--means no specific
+ Default value: 0
+*/
+interval : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-numSamplesPerBurst'>/** number of samples to be taken in one burst
+</span> Range: 1-31
+ Default value: 8
+*/
+numSamplesPerBurst : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-numRetriesPerMeasurementFrame'>/**number of retries for each measurement frame if a sample fails
+</span>  Only used by single side RTT,
+  Range 0 - 3 Default value: 0
+*/
+numRetriesPerMeasurementFrame : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-numRetriesPerFTMR'>/** number of retries for FTMR frame (control frame) if it fails.
+</span> Only used by 80211MC double side RTT
+ Range: 0-3  Default Value : 0
+*/
+numRetriesPerFTMR : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-LCIRequest'>/** Request LCI information, only available when choose double side RTT measurement
+</span> need check RttCapabilties first.
+ Default value: false
+ */
+LCIRequest : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-LCRRequest'>/** Request LCR information, only available when choose double side RTT measurement
+</span> need check RttCapabilties first.
+ Default value: false
+ */
+LCRRequest : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-burstTimeout'>/** Timeout for each burst, (250 * 2^x) us,
+</span> Range 1-11 and 15. 15 means no control Default value: 15
+ */
+burstTimeout : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-preamble'>/**preamble used for RTT measurement
+</span>  Range: PREAMBLE_LEGACY, PREAMBLE_HT, PREAMBLE_VHT
+  Default value: PREAMBLE_HT
+*/
+preamble : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-property-bandwidth'>/**bandWidth used for RTT measurement.User need verify the highest BW the destination
+</span> support (from scan result etc) before set this value. Wider channels result usually give
+ better accuracy. However, the frame loss can increase too.
+ should be one of RTT_BW_5_SUPPORT to RTT_BW_160_SUPPORT. However, need check
+ RttCapabilities firstto verify HW support this bandwidth.
+ Default value:RTT_BW_20_SUPPORT
+*/
+bandwidth : &quot;null&quot;,
+<span id='android-net-wifi-RttManager-RttParams-method-toString'>/**{@hide}
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

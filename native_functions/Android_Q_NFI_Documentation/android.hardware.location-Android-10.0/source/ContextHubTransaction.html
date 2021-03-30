@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-location-ContextHubTransaction'>/**@class android.hardware.location.ContextHubTransaction
+</span>@extends java.lang.Object
+
+ A class describing a request sent to the Context Hub Service.
+
+ This object is generated as a result of an asynchronous request sent to the Context Hub
+ through the ContextHubManager APIs. The caller can either retrieve the result
+ synchronously through a blocking call ({@link #waitForResponse(long, TimeUnit)}) or
+ asynchronously through a user-defined listener
+ ({@link #setOnCompleteListener(OnCompleteListener, Executor)} )}).
+
+ @param &lt;T&gt; the type of the contents in the transaction response
+
+ @hide
+*/
+var ContextHubTransaction = {
+
+<span id='android-hardware-location-ContextHubTransaction-property-TYPE_LOAD_NANOAPP'>/***/
+</span>TYPE_LOAD_NANOAPP : &quot;0&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-TYPE_UNLOAD_NANOAPP'>/***/
+</span>TYPE_UNLOAD_NANOAPP : &quot;1&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-TYPE_ENABLE_NANOAPP'>/***/
+</span>TYPE_ENABLE_NANOAPP : &quot;2&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-TYPE_DISABLE_NANOAPP'>/***/
+</span>TYPE_DISABLE_NANOAPP : &quot;3&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-TYPE_QUERY_NANOAPPS'>/***/
+</span>TYPE_QUERY_NANOAPPS : &quot;4&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_SUCCESS'>/***/
+</span>RESULT_SUCCESS : &quot;0&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_UNKNOWN'>/** Generic failure mode.
+</span>*/
+RESULT_FAILED_UNKNOWN : &quot;1&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_BAD_PARAMS'>/** Failure mode when the request parameters were not valid.
+</span>*/
+RESULT_FAILED_BAD_PARAMS : &quot;2&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_UNINITIALIZED'>/** Failure mode when the Context Hub is not initialized.
+</span>*/
+RESULT_FAILED_UNINITIALIZED : &quot;3&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_BUSY'>/** Failure mode when there are too many transactions pending.
+</span>*/
+RESULT_FAILED_BUSY : &quot;4&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_AT_HUB'>/** Failure mode when the request went through, but failed asynchronously at the hub.
+</span>*/
+RESULT_FAILED_AT_HUB : &quot;5&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_TIMEOUT'>/** Failure mode when the transaction has timed out.
+</span>*/
+RESULT_FAILED_TIMEOUT : &quot;6&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_SERVICE_INTERNAL_FAILURE'>/** Failure mode when the transaction has failed internally at the service.
+</span>*/
+RESULT_FAILED_SERVICE_INTERNAL_FAILURE : &quot;7&quot;,
+<span id='android-hardware-location-ContextHubTransaction-property-RESULT_FAILED_HAL_UNAVAILABLE'>/** Failure mode when the Context Hub HAL was not available.
+</span>*/
+RESULT_FAILED_HAL_UNAVAILABLE : &quot;8&quot;,
+<span id='android-hardware-location-ContextHubTransaction-method-typeToString'>/**Converts a transaction type to a human-readable string
+</span>@param {Number} type the type of a transaction
+@param {Boolean} upperCase {@code true} if upper case the first letter, {@code false} otherwise
+@return {String} a string describing the transaction
+*/
+typeToString : function(  ) {},
+
+<span id='android-hardware-location-ContextHubTransaction-method-getType'>/**
+</span>@return {Number} the type of the transaction
+*/
+getType : function(  ) {},
+
+<span id='android-hardware-location-ContextHubTransaction-method-waitForResponse'>/**Waits to receive the asynchronous transaction result.
+</span>
+ This function blocks until the Context Hub Service has received a response
+ for the transaction represented by this object by the Context Hub, or a
+ specified timeout period has elapsed.
+
+ If the specified timeout has passed, a TimeoutException will be thrown and the caller may
+ retry the invocation of this method at a later time.
+@param {Number} timeout the timeout duration
+@param {Object {TimeUnit}} unit the unit of the timeout
+@return {Object {android.hardware.location.ContextHubTransaction.Response}} the transaction response
+@throws InterruptedException if the current thread is interrupted while waiting for response
+@throws TimeoutException if the timeout period has passed
+*/
+waitForResponse : function(  ) {},
+
+<span id='android-hardware-location-ContextHubTransaction-method-setOnCompleteListener'>/**Sets the listener to be invoked invoked when the transaction completes.
+</span>
+ This function provides an asynchronous approach to retrieve the result of the
+ transaction. When the transaction response has been provided by the Context Hub,
+ the given listener will be invoked.
+
+ If the transaction has already completed at the time of invocation, the listener
+ will be immediately invoked. If the transaction has been invalidated,
+ the listener will never be invoked.
+
+ A transaction can be invalidated if the process owning the transaction is no longer active
+ and the reference to this object is lost.
+
+ This method or {@link #setOnCompleteListener(ContextHubTransaction.OnCompleteListener)} can
+ only be invoked once, or an IllegalStateException will be thrown.
+@param {Object {android.hardware.location.ContextHubTransaction.OnCompleteListener}} listener the listener to be invoked upon completion
+@param {Object {Executor}} executor the executor to invoke the callback
+@throws IllegalStateException if this method is called multiple times
+@throws NullPointerException if the callback or handler is null
+*/
+setOnCompleteListener : function(  ) {},
+
+<span id='android-hardware-location-ContextHubTransaction-method-setOnCompleteListener'>/**Sets the listener to be invoked invoked when the transaction completes.
+</span>
+ Equivalent to {@link #setOnCompleteListener(ContextHubTransaction.OnCompleteListener,
+ Executor)} with the executor using the main thread's Looper.
+
+ This method or {@link #setOnCompleteListener(ContextHubTransaction.OnCompleteListener,
+ Executor)} can only be invoked once, or an IllegalStateException will be thrown.
+@param {Object {android.hardware.location.ContextHubTransaction.OnCompleteListener}} listener the listener to be invoked upon completion
+@throws IllegalStateException if this method is called multiple times
+@throws NullPointerException if the callback is null
+*/
+setOnCompleteListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-params-LensShadingMap'>/**@class android.hardware.camera2.params.LensShadingMap
+</span>@extends java.lang.Object
+
+ Immutable class for describing a {@code 4 x N x M} lens shading map of floats.
+
+ @see CaptureResult#STATISTICS_LENS_SHADING_CORRECTION_MAP
+*/
+var LensShadingMap = {
+
+<span id='android-hardware-camera2-params-LensShadingMap-property-MINIMUM_GAIN_FACTOR'>/** The smallest gain factor in this map.
+</span>
+ &lt;p&gt;All values in this map will be at least this large.&lt;/p&gt;
+*/
+MINIMUM_GAIN_FACTOR : &quot;1.0&quot;,
+<span id='android-hardware-camera2-params-LensShadingMap-method-getRowCount'>/**Get the number of rows in this map.
+</span>*/
+getRowCount : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-getColumnCount'>/**Get the number of columns in this map.
+</span>*/
+getColumnCount : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-getGainFactorCount'>/**Get the total number of gain factors in this map.
+</span>
+ &lt;p&gt;A single gain factor contains exactly one color channel.
+ Use with {@link #copyGainFactors} to allocate a large-enough array.&lt;/p&gt;
+*/
+getGainFactorCount : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-getGainFactor'>/**Get a single color channel gain factor from this lens shading map by its row and column.
+</span>
+ &lt;p&gt;The rows must be within the range [0, {@link #getRowCount}),
+ the column must be within the range [0, {@link #getColumnCount}),
+ and the color channel must be within the range [0, {@value RggbChannelVector#COUNT}).&lt;/p&gt;
+
+ &lt;p&gt;The channel order is {@code [R, Geven, Godd, B]}, where
+ {@code Geven} is the green channel for the even rows of a Bayer pattern, and
+ {@code Godd} is the odd rows.
+ &lt;/p&gt;
+@param {Number} colorChannel color channel from {@code [R, Geven, Godd, B]}
+@param {Number} column within the range [0, {@link #getColumnCount})
+@param {Number} row within the range [0, {@link #getRowCount})
+@return {Number} a gain factor &gt;= {@value #MINIMUM_GAIN_FACTOR}
+@throws IllegalArgumentException if any of the parameters was out of range
+@see RggbChannelVector#RED
+@see RggbChannelVector#GREEN_EVEN
+@see RggbChannelVector#GREEN_ODD
+@see RggbChannelVector#BLUE
+@see #getRowCount
+@see #getColumnCount
+*/
+getGainFactor : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-getGainFactorVector'>/**Get a gain factor vector from this lens shading map by its row and column.
+</span>
+ &lt;p&gt;The rows must be within the range [0, {@link #getRowCount}),
+ the column must be within the range [0, {@link #getColumnCount}).&lt;/p&gt;
+@param {Number} column within the range [0, {@link #getColumnCount})
+@param {Number} row within the range [0, {@link #getRowCount})
+@return {Object {android.hardware.camera2.params.RggbChannelVector}} an {@link RggbChannelVector} where each gain factor &gt;= {@value #MINIMUM_GAIN_FACTOR}
+@throws IllegalArgumentException if any of the parameters was out of range
+@see #getRowCount
+@see #getColumnCount
+*/
+getGainFactorVector : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-copyGainFactors'>/**Copy all gain factors in row-major order from this lens shading map into the destination.
+</span>
+ &lt;p&gt;Each gain factor will be &gt;= {@link #MINIMUM_GAIN_FACTOR}.&lt;/p&gt;
+@param {Object {float[]}} destination
+          an array big enough to hold at least {@link RggbChannelVector#COUNT}
+          elements after the {@code offset}
+@param {Number} offset
+          a non-negative offset into the array
+@throws NullPointerException
+          If {@code destination} was {@code null}
+@throws IllegalArgumentException
+          If offset was negative
+@throws ArrayIndexOutOfBoundsException
+          If there's not enough room to write the elements at the specified destination and
+          offset.
+@see CaptureResult#STATISTICS_LENS_SHADING_CORRECTION_MAP
+*/
+copyGainFactors : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-equals'>/**Check if this LensShadingMap is equal to another LensShadingMap.
+</span>
+ &lt;p&gt;Two lens shading maps are equal if and only if they have the same rows/columns,
+ and all of their elements are {@link Object#equals equal}.&lt;/p&gt;
+@return {Boolean} {@code true} if the objects were equal, {@code false} otherwise
+*/
+equals : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-hashCode'>/**{@inheritDoc}
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-hardware-camera2-params-LensShadingMap-method-toString'>/**Return the LensShadingMap as a string representation.
+</span>
+ &lt;p&gt; {@code &quot;LensShadingMap{R:([%f, %f, ... %f], ... [%f, %f, ... %f]), G_even:([%f, %f, ...
+  %f], ... [%f, %f, ... %f]), G_odd:([%f, %f, ... %f], ... [%f, %f, ... %f]), B:([%f, %f, ...
+  %f], ... [%f, %f, ... %f])}&quot;},
+ where each {@code %f} represents one gain factor and each {@code [%f, %f, ... %f]} represents
+ a row of the lens shading map&lt;/p&gt;
+@return {String} string representation of {@link LensShadingMap}
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

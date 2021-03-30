@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-gsm-SmsMessage'>/**@class com.android.internal.telephony.gsm.SmsMessage
+</span>@extends com.android.internal.telephony.SmsMessageBase
+
+ A Short Message Service message.
+
+*/
+var SmsMessage = {
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-createFromPdu'>/**Create an SmsMessage from a raw PDU.
+</span>*/
+createFromPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isTypeZero'>/**3GPP TS 23.040 9.2.3.9 specifies that Type Zero messages are indicated
+</span> by TP_PID field set to value 0x40
+*/
+isTypeZero : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-newFromCMT'>/**TS 27.005 3.4.1 lines[0] and lines[1] are the two lines read from the
+</span> +CMT unsolicited response (PDU mode, of course)
+  +CMT: [&amp;lt;alpha&gt;],&lt;length&gt;&lt;CR&gt;&lt;LF&gt;&lt;pdu&gt;
+
+ Only public for debugging
+
+ {@hide}
+*/
+newFromCMT : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-newFromCDS'>/**
+</span>@hide 
+*/
+newFromCDS : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-createFromEfRecord'>/**Create an SmsMessage from an SMS EF record.
+</span>@param {Number} index Index of SMS record. This should be index in ArrayList
+              returned by SmsManager.getAllMessagesFromSim + 1.
+@param {Object {byte[]}} data Record data.
+@return {Object {com.android.internal.telephony.gsm.SmsMessage}} An SmsMessage representing the record.
+@hide 
+*/
+createFromEfRecord : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getTPLayerLengthForPDU'>/**Get the TP-Layer-Length for the given SMS-SUBMIT PDU Basically, the
+</span> length in bytes (not hex chars) less the SMSC header
+*/
+getTPLayerLengthForPDU : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getRelativeValidityPeriod'>/**Get Encoded Relative Validty Period Value from Validity period in mins.
+</span>@param {Number} validityPeriod Validity period in mins.
+
+ Refer specification 3GPP TS 23.040 V6.8.1 section 9.2.3.12.1.
+ ||relValidityPeriod (TP-VP)  ||                 ||  validityPeriod   ||
+
+      0 to 143                            ---&gt;       (TP-VP + 1) x 5 minutes
+
+      144 to 167                         ---&gt;        12 hours + ((TP-VP -143) x 30 minutes)
+
+      168 to 196                         ---&gt;        (TP-VP - 166) x 1 day
+
+      197 to 255                         ---&gt;        (TP-VP - 192) x 1 week
+@return {Number} relValidityPeriod Encoded Relative Validity Period Value.
+@hide 
+*/
+getRelativeValidityPeriod : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getSubmitPdu'>/**Get an SMS-SUBMIT PDU for a destination address and a message
+</span>@param {String} scAddress Service Centre address.  Null means use default.
+@return {Object {com.android.internal.telephony.gsm.SmsMessage.SubmitPdu}} a &lt;code&gt;SubmitPdu&lt;/code&gt; containing the encoded SC
+         address, if applicable, and the encoded message.
+         Returns null on encode error.
+@hide 
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getSubmitPdu'>/**Get an SMS-SUBMIT PDU for a destination address and a message using the
+</span> specified encoding.
+@param {String} scAddress Service Centre address.  Null means use default.
+@param {String} encoding Encoding defined by constants in
+        com.android.internal.telephony.SmsConstants.ENCODING_*
+@param {String} languageTable
+@param {Boolean} languageShiftTable
+@return {Object {com.android.internal.telephony.gsm.SmsMessage.SubmitPdu}} a &lt;code&gt;SubmitPdu&lt;/code&gt; containing the encoded SC
+         address, if applicable, and the encoded message.
+         Returns null on encode error.
+@hide 
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getSubmitPdu'>/**Get an SMS-SUBMIT PDU for a destination address and a message using the
+</span> specified encoding.
+@param {String} scAddress Service Centre address.  Null means use default.
+@param {String} encoding Encoding defined by constants in
+        com.android.internal.telephony.SmsConstants.ENCODING_*
+@param {String} languageTable
+@param {Boolean} languageShiftTable
+@param {Object {byte[]}} validityPeriod Validity Period of the message in Minutes.
+@return {Object {com.android.internal.telephony.gsm.SmsMessage.SubmitPdu}} a &lt;code&gt;SubmitPdu&lt;/code&gt; containing the encoded SC
+         address, if applicable, and the encoded message.
+         Returns null on encode error.
+@hide 
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getSubmitPdu'>/**Get an SMS-SUBMIT PDU for a destination address and a message
+</span>@param {String} scAddress Service Centre address.  Null means use default.
+@return {Object {com.android.internal.telephony.gsm.SmsMessage.SubmitPdu}} a &lt;code&gt;SubmitPdu&lt;/code&gt; containing the encoded SC
+         address, if applicable, and the encoded message.
+         Returns null on encode error.
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getSubmitPdu'>/**Get an SMS-SUBMIT PDU for a destination address and a message
+</span>@param {String} scAddress Service Centre address.  Null means use default.
+@param {String} destinationAddress the address of the destination for the message
+@param {String} statusReportRequested staus report of the message Requested
+@param {Boolean} validityPeriod Validity Period of the message in Minutes.
+@return {Object {com.android.internal.telephony.gsm.SmsMessage.SubmitPdu}} a &lt;code&gt;SubmitPdu&lt;/code&gt; containing the encoded SC
+         address, if applicable, and the encoded message.
+         Returns null on encode error.
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getSubmitPdu'>/**Get an SMS-SUBMIT PDU for a data message to a destination address &amp;amp; port
+</span>@param {String} scAddress Service Centre address. null == use default
+@param {String} destinationAddress the address of the destination for the message
+@param {Number} destinationPort the port to deliver the message to at the
+        destination
+@param {Object {byte[]}} data the data for the message
+@return {Object {com.android.internal.telephony.gsm.SmsMessage.SubmitPdu}} a &lt;code&gt;SubmitPdu&lt;/code&gt; containing the encoded SC
+         address, if applicable, and the encoded message.
+         Returns null on encode error.
+*/
+getSubmitPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-calculateLength'>/**Calculates the number of SMS's required to encode the message body and
+</span> the number of characters remaining until the next message.
+@param {Object {CharSequence}} msgBody the message to encode
+@param {Boolean} use7bitOnly ignore (but still count) illegal characters if true
+@return {Object {com.android.internal.telephony.GsmAlphabet.TextEncodingDetails}} TextEncodingDetails
+*/
+calculateLength : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getProtocolIdentifier'>/**{@inheritDoc}
+</span>*/
+getProtocolIdentifier : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isReplace'>/**{@inheritDoc}
+</span>*/
+isReplace : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isCphsMwiMessage'>/**{@inheritDoc}
+</span>*/
+isCphsMwiMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isMWIClearMessage'>/**{@inheritDoc}
+</span>*/
+isMWIClearMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isMWISetMessage'>/**{@inheritDoc}
+</span>*/
+isMWISetMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isMwiDontStore'>/**{@inheritDoc}
+</span>*/
+isMwiDontStore : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getStatus'>/**{@inheritDoc}
+</span>*/
+getStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isStatusReportMessage'>/**{@inheritDoc}
+</span>*/
+isStatusReportMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-isReplyPathPresent'>/**{@inheritDoc}
+</span>*/
+isReplyPathPresent : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getMessageClass'>/**{@inheritDoc}
+</span>*/
+getMessageClass : function(  ) {},
+
+<span id='com-android-internal-telephony-gsm-SmsMessage-method-getNumOfVoicemails'>/**
+</span>*/
+getNumOfVoicemails : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-feature-ImsFeature'>/**@class android.telephony.ims.feature.ImsFeature
+</span>@extends java.lang.Object
+
+ Base class for all IMS features that are supported by the framework. Use a concrete subclass
+ of {@link android.telephony.ims.feature.ImsFeature}, such as {@link android.telephony.ims.feature.MmTelFeature} or {@link android.telephony.ims.feature.RcsFeature}.
+
+ @hide
+*/
+var ImsFeature = {
+
+<span id='android-telephony-ims-feature-ImsFeature-property-ACTION_IMS_SERVICE_UP'>/** Action to broadcast when ImsService is up.
+</span> Internal use only.
+ Only defined here separately for compatibility purposes with the old ImsService.
+
+ @hide
+*/
+ACTION_IMS_SERVICE_UP : &quot;com.android.ims.IMS_SERVICE_UP&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-ACTION_IMS_SERVICE_DOWN'>/** Action to broadcast when ImsService is down.
+</span> Internal use only.
+ Only defined here separately for compatibility purposes with the old ImsService.
+
+ @hide
+*/
+ACTION_IMS_SERVICE_DOWN : &quot;com.android.ims.IMS_SERVICE_DOWN&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-EXTRA_PHONE_ID'>/** Part of the ACTION_IMS_SERVICE_UP or _DOWN intents.
+</span> A long value; the phone ID corresponding to the IMS service coming up or down.
+ Only defined here separately for compatibility purposes with the old ImsService.
+
+ @hide
+*/
+EXTRA_PHONE_ID : &quot;android:phone_id&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-FEATURE_INVALID'>/** Invalid feature value
+</span> @hide
+*/
+FEATURE_INVALID : &quot;-1&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-FEATURE_EMERGENCY_MMTEL'>/** This feature supports emergency calling over MMTEL. If defined, the framework will try to
+</span> place an emergency call over IMS first. If it is not defined, the framework will only use
+ CSFB for emergency calling.
+*/
+FEATURE_EMERGENCY_MMTEL : &quot;0&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-FEATURE_MMTEL'>/** This feature supports the MMTEL feature.
+</span>*/
+FEATURE_MMTEL : &quot;1&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-FEATURE_RCS'>/** This feature supports the RCS feature.
+</span>*/
+FEATURE_RCS : &quot;2&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-FEATURE_MAX'>/** Total number of features defined
+</span> @hide
+*/
+FEATURE_MAX : &quot;3&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-STATE_UNAVAILABLE'>/** This {@link android.telephony.ims.feature.ImsFeature}'s state is unavailable and should not be communicated with.
+</span>*/
+STATE_UNAVAILABLE : &quot;0&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-STATE_INITIALIZING'>/** This {@link android.telephony.ims.feature.ImsFeature} state is initializing and should not be communicated with.
+</span>*/
+STATE_INITIALIZING : &quot;1&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-STATE_READY'>/** This {@link android.telephony.ims.feature.ImsFeature} is ready for communication.
+</span>*/
+STATE_READY : &quot;2&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-CAPABILITY_ERROR_GENERIC'>/** The capability was unable to be changed.
+</span>*/
+CAPABILITY_ERROR_GENERIC : &quot;-1&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-property-CAPABILITY_SUCCESS'>/** The capability was able to be changed.
+</span>*/
+CAPABILITY_SUCCESS : &quot;0&quot;,
+<span id='android-telephony-ims-feature-ImsFeature-method-initialize'>/**
+</span>@hide 
+*/
+initialize : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-getFeatureState'>/**
+</span>@return {Number} The current state of the feature, defined as {@link #STATE_UNAVAILABLE},
+ {@link #STATE_INITIALIZING}, or {@link #STATE_READY}.
+@hide 
+*/
+getFeatureState : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-setFeatureState'>/**Set the state of the ImsFeature. The state is used as a signal to the framework to start or
+</span> stop communication, depending on the state sent.
+@param {Number} state The ImsFeature's state, defined as {@link #STATE_UNAVAILABLE},
+ {@link #STATE_INITIALIZING}, or {@link #STATE_READY}.
+*/
+setFeatureState : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-addImsFeatureStatusCallback'>/**Not final for testing, but shouldn't be extended!
+</span>@hide 
+*/
+addImsFeatureStatusCallback : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-removeImsFeatureStatusCallback'>/**Not final for testing, but shouldn't be extended!
+</span>@hide 
+*/
+removeImsFeatureStatusCallback : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-addCapabilityCallback'>/**
+</span>@hide 
+*/
+addCapabilityCallback : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-removeCapabilityCallback'>/**
+</span>@hide 
+*/
+removeCapabilityCallback : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-queryCapabilityStatus'>/**
+</span>@return {Object {android.telephony.ims.feature.ImsFeature.Capabilities}} the cached capabilities status for this feature.
+@hide 
+*/
+queryCapabilityStatus : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-requestChangeEnabledCapabilities'>/**Called internally to request the change of enabled capabilities.
+</span>@hide 
+*/
+requestChangeEnabledCapabilities : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-changeEnabledCapabilities'>/**Features should override this method to receive Capability preference change requests from
+</span> the framework using the provided {@link android.telephony.ims.feature.CapabilityChangeRequest}. If any of the capabilities
+ in the {@link android.telephony.ims.feature.CapabilityChangeRequest} are not able to be completed due to an error,
+ {@link CapabilityCallbackProxy#onChangeCapabilityConfigurationError} should be called for
+ each failed capability.
+@param {Object {CapabilityChangeRequest}} request A {@link CapabilityChangeRequest} containing requested capabilities to
+     enable/disable.
+@param {Object {ImsFeature.CapabilityCallbackProxy}} c A {@link CapabilityCallbackProxy}, which will be used to call back to the framework
+ setting a subset of these capabilities fail, using
+ {@link CapabilityCallbackProxy#onChangeCapabilityConfigurationError}.
+*/
+changeEnabledCapabilities : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-onFeatureRemoved'>/**Called when the framework is removing this feature and it needs to be cleaned up.
+</span>*/
+onFeatureRemoved : function(  ) {},
+
+<span id='android-telephony-ims-feature-ImsFeature-method-onFeatureReady'>/**Called when the feature has been initialized and communication with the framework is set up.
+</span> Any attempt by this feature to access the framework before this method is called will return
+ with an {@link IllegalStateException}.
+ The IMS provider should use this method to trigger registration for this feature on the IMS
+ network, if needed.
+*/
+onFeatureReady : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

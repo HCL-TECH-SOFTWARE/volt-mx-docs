@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-SoundPool'>/**@class android.media.SoundPool
+</span>@extends android.media.PlayerBase
+
+ The SoundPool class manages and plays audio resources for applications.
+
+ &lt;p&gt;A SoundPool is a collection of samples that can be loaded into memory
+ from a resource inside the APK or from a file in the file system. The
+ SoundPool library uses the MediaPlayer service to decode the audio
+ into a raw 16-bit PCM mono or stereo stream. This allows applications
+ to ship with compressed streams without having to suffer the CPU load
+ and latency of decompressing during playback.&lt;/p&gt;
+
+ &lt;p&gt;In addition to low-latency playback, SoundPool can also manage the number
+ of audio streams being rendered at once. When the SoundPool object is
+ constructed, the maxStreams parameter sets the maximum number of streams
+ that can be played at a time from this single SoundPool. SoundPool tracks
+ the number of active streams. If the maximum number of streams is exceeded,
+ SoundPool will automatically stop a previously playing stream based first
+ on priority and then by age within that priority. Limiting the maximum
+ number of streams helps to cap CPU loading and reducing the likelihood that
+ audio mixing will impact visuals or UI performance.&lt;/p&gt;
+
+ &lt;p&gt;Sounds can be looped by setting a non-zero loop value. A value of -1
+ causes the sound to loop forever. In this case, the application must
+ explicitly call the stop() function to stop the sound. Any other non-zero
+ value will cause the sound to repeat the specified number of times, e.g.
+ a value of 3 causes the sound to play a total of 4 times.&lt;/p&gt;
+
+ &lt;p&gt;The playback rate can also be changed. A playback rate of 1.0 causes
+ the sound to play at its original frequency (resampled, if necessary,
+ to the hardware output frequency). A playback rate of 2.0 causes the
+ sound to play at twice its original frequency, and a playback rate of
+ 0.5 causes it to play at half its original frequency. The playback
+ rate range is 0.5 to 2.0.&lt;/p&gt;
+
+ &lt;p&gt;Priority runs low to high, i.e. higher numbers are higher priority.
+ Priority is used when a call to play() would cause the number of active
+ streams to exceed the value established by the maxStreams parameter when
+ the SoundPool was created. In this case, the stream allocator will stop
+ the lowest priority stream. If there are multiple streams with the same
+ low priority, it will choose the oldest stream to stop. In the case
+ where the priority of the new stream is lower than all the active
+ streams, the new sound will not play and the play() function will return
+ a streamID of zero.&lt;/p&gt;
+
+ &lt;p&gt;Let's examine a typical use case: A game consists of several levels of
+ play. For each level, there is a set of unique sounds that are used only
+ by that level. In this case, the game logic should create a new SoundPool
+ object when the first level is loaded. The level data itself might contain
+ the list of sounds to be used by this level. The loading logic iterates
+ through the list of sounds calling the appropriate SoundPool.load()
+ function. This should typically be done early in the process to allow time
+ for decompressing the audio to raw PCM format before they are needed for
+ playback.&lt;/p&gt;
+
+ &lt;p&gt;Once the sounds are loaded and play has started, the application can
+ trigger sounds by calling SoundPool.play(). Playing streams can be
+ paused or resumed, and the application can also alter the pitch by
+ adjusting the playback rate in real-time for doppler or synthesis
+ effects.&lt;/p&gt;
+
+ &lt;p&gt;Note that since streams can be stopped due to resource constraints, the
+ streamID is a reference to a particular instance of a stream. If the stream
+ is stopped to allow a higher priority stream to play, the stream is no
+ longer valid. However, the application is allowed to call methods on
+ the streamID without error. This may help simplify program logic since
+ the application need not concern itself with the stream lifecycle.&lt;/p&gt;
+
+ &lt;p&gt;In our example, when the player has completed the level, the game
+ logic should call SoundPool.release() to release all the native resources
+ in use and then set the SoundPool reference to null. If the player starts
+ another level, a new SoundPool is created, sounds are loaded, and play
+ resumes.&lt;/p&gt;
+*/
+var SoundPool = {
+
+<span id='android-media-SoundPool-method-release'>/**Release the SoundPool resources.
+</span>
+ Release all memory and native resources used by the SoundPool
+ object. The SoundPool can no longer be used and the reference
+ should be set to null.
+*/
+release : function(  ) {},
+
+<span id='android-media-SoundPool-method-load'>/**Load the sound from the specified path.
+</span>@param {String} path the path to the audio file
+@param {Number} priority the priority of the sound. Currently has no effect. Use
+                 a value of 1 for future compatibility.
+@return {Number} a sound ID. This value can be used to play or unload the sound.
+*/
+load : function(  ) {},
+
+<span id='android-media-SoundPool-method-load'>/**Load the sound from the specified APK resource.
+</span>
+ Note that the extension is dropped. For example, if you want to load
+ a sound from the raw resource file &quot;explosion.mp3&quot;, you would specify
+ &quot;R.raw.explosion&quot; as the resource ID. Note that this means you cannot
+ have both an &quot;explosion.wav&quot; and an &quot;explosion.mp3&quot; in the res/raw
+ directory.
+@param {Object {Context}} context the application context
+@param {Number} resId the resource ID
+@param {Number} priority the priority of the sound. Currently has no effect. Use
+                 a value of 1 for future compatibility.
+@return {Number} a sound ID. This value can be used to play or unload the sound.
+*/
+load : function(  ) {},
+
+<span id='android-media-SoundPool-method-load'>/**Load the sound from an asset file descriptor.
+</span>@param {Object {AssetFileDescriptor}} afd an asset file descriptor
+@param {Number} priority the priority of the sound. Currently has no effect. Use
+                 a value of 1 for future compatibility.
+@return {Number} a sound ID. This value can be used to play or unload the sound.
+*/
+load : function(  ) {},
+
+<span id='android-media-SoundPool-method-load'>/**Load the sound from a FileDescriptor.
+</span>
+ This version is useful if you store multiple sounds in a single
+ binary. The offset specifies the offset from the start of the file
+ and the length specifies the length of the sound within the file.
+@param {Object {FileDescriptor}} fd a FileDescriptor object
+@param {Number} offset offset to the start of the sound
+@param {Number} length length of the sound
+@param {Number} priority the priority of the sound. Currently has no effect. Use
+                 a value of 1 for future compatibility.
+@return {Number} a sound ID. This value can be used to play or unload the sound.
+*/
+load : function(  ) {},
+
+<span id='android-media-SoundPool-method-unload'>/**Unload a sound from a sound ID.
+</span>
+ Unloads the sound specified by the soundID. This is the value
+ returned by the load() function. Returns true if the sound is
+ successfully unloaded, false if the sound was already unloaded.
+@param {Number} soundID a soundID returned by the load() function
+@return {Boolean} true if just unloaded, false if previously unloaded
+*/
+unload : function(  ) {},
+
+<span id='android-media-SoundPool-method-play'>/**Play a sound from a sound ID.
+</span>
+ Play the sound specified by the soundID. This is the value
+ returned by the load() function. Returns a non-zero streamID
+ if successful, zero if it fails. The streamID can be used to
+ further control playback. Note that calling play() may cause
+ another sound to stop playing if the maximum number of active
+ streams is exceeded. A loop value of -1 means loop forever,
+ a value of 0 means don't loop, other values indicate the
+ number of repeats, e.g. a value of 1 plays the audio twice.
+ The playback rate allows the application to vary the playback
+ rate (pitch) of the sound. A value of 1.0 means play back at
+ the original frequency. A value of 2.0 means play back twice
+ as fast, and a value of 0.5 means playback at half speed.
+@param {Number} soundID a soundID returned by the load() function
+@param {Number} leftVolume left volume value (range = 0.0 to 1.0)
+@param {Number} rightVolume right volume value (range = 0.0 to 1.0)
+@param {Number} priority stream priority (0 = lowest priority)
+@param {Number} loop loop mode (0 = no loop, -1 = loop forever)
+@param {Number} rate playback rate (1.0 = normal playback, range 0.5 to 2.0)
+@return {Number} non-zero streamID if successful, zero if failed
+*/
+play : function(  ) {},
+
+<span id='android-media-SoundPool-method-pause'>/**Pause a playback stream.
+</span>
+ Pause the stream specified by the streamID. This is the
+ value returned by the play() function. If the stream is
+ playing, it will be paused. If the stream is not playing
+ (e.g. is stopped or was previously paused), calling this
+ function will have no effect.
+@param {Number} streamID a streamID returned by the play() function
+*/
+pause : function(  ) {},
+
+<span id='android-media-SoundPool-method-resume'>/**Resume a playback stream.
+</span>
+ Resume the stream specified by the streamID. This
+ is the value returned by the play() function. If the stream
+ is paused, this will resume playback. If the stream was not
+ previously paused, calling this function will have no effect.
+@param {Number} streamID a streamID returned by the play() function
+*/
+resume : function(  ) {},
+
+<span id='android-media-SoundPool-method-autoPause'>/**Pause all active streams.
+</span>
+ Pause all streams that are currently playing. This function
+ iterates through all the active streams and pauses any that
+ are playing. It also sets a flag so that any streams that
+ are playing can be resumed by calling autoResume().
+*/
+autoPause : function(  ) {},
+
+<span id='android-media-SoundPool-method-autoResume'>/**Resume all previously active streams.
+</span>
+ Automatically resumes all streams that were paused in previous
+ calls to autoPause().
+*/
+autoResume : function(  ) {},
+
+<span id='android-media-SoundPool-method-stop'>/**Stop a playback stream.
+</span>
+ Stop the stream specified by the streamID. This
+ is the value returned by the play() function. If the stream
+ is playing, it will be stopped. It also releases any native
+ resources associated with this stream. If the stream is not
+ playing, it will have no effect.
+@param {Number} streamID a streamID returned by the play() function
+*/
+stop : function(  ) {},
+
+<span id='android-media-SoundPool-method-setVolume'>/**Set stream volume.
+</span>
+ Sets the volume on the stream specified by the streamID.
+ This is the value returned by the play() function. The
+ value must be in the range of 0.0 to 1.0. If the stream does
+ not exist, it will have no effect.
+@param {Number} streamID a streamID returned by the play() function
+@param {Number} leftVolume left volume value (range = 0.0 to 1.0)
+@param {Number} rightVolume right volume value (range = 0.0 to 1.0)
+*/
+setVolume : function(  ) {},
+
+<span id='android-media-SoundPool-method-setVolume'>/**Similar, except set volume of all channels to same value.
+</span>@hide 
+*/
+setVolume : function(  ) {},
+
+<span id='android-media-SoundPool-method-setPriority'>/**Change stream priority.
+</span>
+ Change the priority of the stream specified by the streamID.
+ This is the value returned by the play() function. Affects the
+ order in which streams are re-used to play new sounds. If the
+ stream does not exist, it will have no effect.
+@param {Number} streamID a streamID returned by the play() function
+*/
+setPriority : function(  ) {},
+
+<span id='android-media-SoundPool-method-setLoop'>/**Set loop mode.
+</span>
+ Change the loop mode. A loop value of -1 means loop forever,
+ a value of 0 means don't loop, other values indicate the
+ number of repeats, e.g. a value of 1 plays the audio twice.
+ If the stream does not exist, it will have no effect.
+@param {Number} streamID a streamID returned by the play() function
+@param {Number} loop loop mode (0 = no loop, -1 = loop forever)
+*/
+setLoop : function(  ) {},
+
+<span id='android-media-SoundPool-method-setRate'>/**Change playback rate.
+</span>
+ The playback rate allows the application to vary the playback
+ rate (pitch) of the sound. A value of 1.0 means playback at
+ the original frequency. A value of 2.0 means playback twice
+ as fast, and a value of 0.5 means playback at half speed.
+ If the stream does not exist, it will have no effect.
+@param {Number} streamID a streamID returned by the play() function
+@param {Number} rate playback rate (1.0 = normal playback, range 0.5 to 2.0)
+*/
+setRate : function(  ) {},
+
+<span id='android-media-SoundPool-method-setOnLoadCompleteListener'>/**Sets the callback hook for the OnLoadCompleteListener.
+</span>*/
+setOnLoadCompleteListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

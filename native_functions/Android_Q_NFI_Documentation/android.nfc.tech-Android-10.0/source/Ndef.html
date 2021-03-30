@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-Ndef'>/**@class android.nfc.tech.Ndef
+</span>@extends android.nfc.tech.BasicTagTechnology
+
+ Provides access to NDEF content and operations on a {@link Tag}.
+
+ &lt;p&gt;Acquire a {@link android.nfc.tech.Ndef} object using {@link #get}.
+
+ &lt;p&gt;NDEF is an NFC Forum data format. The data formats are implemented in
+ {@link android.nfc.NdefMessage} and
+ {@link android.nfc.NdefRecord}. This class provides methods to
+ retrieve and modify the {@link android.nfc.NdefMessage}
+ on a tag.
+
+ &lt;p&gt;There are currently four NFC Forum standardized tag types that can be
+ formatted to contain NDEF data.
+ &lt;ul&gt;
+ &lt;li&gt;NFC Forum Type 1 Tag ({@link #NFC_FORUM_TYPE_1}), such as the Innovision Topaz
+ &lt;li&gt;NFC Forum Type 2 Tag ({@link #NFC_FORUM_TYPE_2}), such as the NXP MIFARE Ultralight
+ &lt;li&gt;NFC Forum Type 3 Tag ({@link #NFC_FORUM_TYPE_3}), such as Sony Felica
+ &lt;li&gt;NFC Forum Type 4 Tag ({@link #NFC_FORUM_TYPE_4}), such as NXP MIFARE Desfire
+ &lt;/ul&gt;
+ It is mandatory for all Android devices with NFC to correctly enumerate
+ {@link android.nfc.tech.Ndef} on NFC Forum Tag Types 1-4, and implement all NDEF operations
+ as defined in this class.
+
+ &lt;p&gt;Some vendors have their own well defined specifications for storing NDEF data
+ on tags that do not fall into the above categories. Android devices with NFC
+ should enumerate and implement {@link android.nfc.tech.Ndef} under these vendor specifications
+ where possible, but it is not mandatory. {@link #getType} returns a String
+ describing this specification, for example {@link #MIFARE_CLASSIC} is
+ &lt;code&gt;com.nxp.ndef.mifareclassic&lt;/code&gt;.
+
+ &lt;p&gt;Android devices that support MIFARE Classic must also correctly
+ implement {@link android.nfc.tech.Ndef} on MIFARE Classic tags formatted to NDEF.
+
+ &lt;p&gt;For guaranteed compatibility across all Android devices with NFC, it is
+ recommended to use NFC Forum Types 1-4 in new deployments of NFC tags
+ with NDEF payload. Vendor NDEF formats will not work on all Android devices.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Methods that perform I/O operations
+ require the {@link android.Manifest.permission#NFC} permission.
+*/
+var Ndef = {
+
+<span id='android-nfc-tech-Ndef-property-NDEF_MODE_READ_ONLY'>/**@hide */
+</span>NDEF_MODE_READ_ONLY : &quot;1&quot;,
+<span id='android-nfc-tech-Ndef-property-NDEF_MODE_READ_WRITE'>/**@hide */
+</span>NDEF_MODE_READ_WRITE : &quot;2&quot;,
+<span id='android-nfc-tech-Ndef-property-NDEF_MODE_UNKNOWN'>/**@hide */
+</span>NDEF_MODE_UNKNOWN : &quot;3&quot;,
+<span id='android-nfc-tech-Ndef-property-EXTRA_NDEF_MSG'>/**@hide */
+</span>EXTRA_NDEF_MSG : &quot;ndefmsg&quot;,
+<span id='android-nfc-tech-Ndef-property-EXTRA_NDEF_MAXLENGTH'>/**@hide */
+</span>EXTRA_NDEF_MAXLENGTH : &quot;ndefmaxlength&quot;,
+<span id='android-nfc-tech-Ndef-property-EXTRA_NDEF_CARDSTATE'>/**@hide */
+</span>EXTRA_NDEF_CARDSTATE : &quot;ndefcardstate&quot;,
+<span id='android-nfc-tech-Ndef-property-EXTRA_NDEF_TYPE'>/**@hide */
+</span>EXTRA_NDEF_TYPE : &quot;ndeftype&quot;,
+<span id='android-nfc-tech-Ndef-property-TYPE_OTHER'>/**@hide */
+</span>TYPE_OTHER : &quot;-1&quot;,
+<span id='android-nfc-tech-Ndef-property-TYPE_1'>/**@hide */
+</span>TYPE_1 : &quot;1&quot;,
+<span id='android-nfc-tech-Ndef-property-TYPE_2'>/**@hide */
+</span>TYPE_2 : &quot;2&quot;,
+<span id='android-nfc-tech-Ndef-property-TYPE_3'>/**@hide */
+</span>TYPE_3 : &quot;3&quot;,
+<span id='android-nfc-tech-Ndef-property-TYPE_4'>/**@hide */
+</span>TYPE_4 : &quot;4&quot;,
+<span id='android-nfc-tech-Ndef-property-TYPE_MIFARE_CLASSIC'>/**@hide */
+</span>TYPE_MIFARE_CLASSIC : &quot;101&quot;,
+<span id='android-nfc-tech-Ndef-property-TYPE_ICODE_SLI'>/**@hide */
+</span>TYPE_ICODE_SLI : &quot;102&quot;,
+<span id='android-nfc-tech-Ndef-property-UNKNOWN'>/**@hide */
+</span>UNKNOWN : &quot;android.ndef.unknown&quot;,
+<span id='android-nfc-tech-Ndef-property-NFC_FORUM_TYPE_1'>/**NFC Forum Tag Type 1 */
+</span>NFC_FORUM_TYPE_1 : &quot;org.nfcforum.ndef.type1&quot;,
+<span id='android-nfc-tech-Ndef-property-NFC_FORUM_TYPE_2'>/**NFC Forum Tag Type 2 */
+</span>NFC_FORUM_TYPE_2 : &quot;org.nfcforum.ndef.type2&quot;,
+<span id='android-nfc-tech-Ndef-property-NFC_FORUM_TYPE_3'>/**NFC Forum Tag Type 4 */
+</span>NFC_FORUM_TYPE_3 : &quot;org.nfcforum.ndef.type3&quot;,
+<span id='android-nfc-tech-Ndef-property-NFC_FORUM_TYPE_4'>/**NFC Forum Tag Type 4 */
+</span>NFC_FORUM_TYPE_4 : &quot;org.nfcforum.ndef.type4&quot;,
+<span id='android-nfc-tech-Ndef-property-MIFARE_CLASSIC'>/**NDEF on MIFARE Classic */
+</span>MIFARE_CLASSIC : &quot;com.nxp.ndef.mifareclassic&quot;,
+<span id='android-nfc-tech-Ndef-property-ICODE_SLI'>/** NDEF on iCODE SLI
+</span> @hide
+*/
+ICODE_SLI : &quot;com.nxp.ndef.icodesli&quot;,
+<span id='android-nfc-tech-Ndef-method-get'>/**Get an instance of {@link android.nfc.tech.Ndef} for the given tag.
+</span>
+ &lt;p&gt;Returns null if {@link android.nfc.tech.Ndef} was not enumerated in {@link Tag#getTechList}.
+ This indicates the tag is not NDEF formatted, or that this tag
+ is NDEF formatted but under a vendor specification that this Android
+ device does not implement.
+
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@param {Object {Tag}} tag an NDEF compatible tag
+@return {Object {android.nfc.tech.Ndef}} Ndef object
+*/
+get : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-getCachedNdefMessage'>/**Get the {@link android.nfc.tech.NdefMessage} that was read from the tag at discovery time.
+</span>
+ &lt;p&gt;If the NDEF Message is modified by an I/O operation then it
+ will not be updated here, this function only returns what was discovered
+ when the tag entered the field.
+ &lt;p&gt;Note that this method may return null if the tag was in the
+ INITIALIZED state as defined by NFC Forum, as in this state the
+ tag is formatted to support NDEF but does not contain a message yet.
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Object {android.nfc.NdefMessage}} NDEF Message read from the tag at discovery time, can be null
+*/
+getCachedNdefMessage : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-getType'>/**Get the NDEF tag type.
+</span>
+ &lt;p&gt;Returns one of {@link #NFC_FORUM_TYPE_1}, {@link #NFC_FORUM_TYPE_2},
+ {@link #NFC_FORUM_TYPE_3}, {@link #NFC_FORUM_TYPE_4},
+ {@link #MIFARE_CLASSIC} or another NDEF tag type that has not yet been
+ formalized in this Android API.
+
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {String} a string representing the NDEF tag type
+*/
+getType : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-getMaxSize'>/**Get the maximum NDEF message size in bytes.
+</span>
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} size in bytes
+*/
+getMaxSize : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-isWritable'>/**Determine if the tag is writable.
+</span>
+ &lt;p&gt;NFC Forum tags can be in read-only or read-write states.
+
+ &lt;p&gt;Does not cause any RF activity and does not block.
+
+ &lt;p&gt;Requires {@link android.Manifest.permission#NFC} permission.
+@return {Boolean} true if the tag is writable
+*/
+isWritable : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-getNdefMessage'>/**Read the current {@link android.nfc.NdefMessage} on this tag.
+</span>
+ &lt;p&gt;This always reads the current NDEF Message stored on the tag.
+
+ &lt;p&gt;Note that this method may return null if the tag was in the
+ INITIALIZED state as defined by NFC Forum, as in that state the
+ tag is formatted to support NDEF but does not contain a message yet.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@return {Object {android.nfc.NdefMessage}} the NDEF Message, can be null
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+@throws FormatException if the NDEF Message on the tag is malformed
+*/
+getNdefMessage : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-writeNdefMessage'>/**Overwrite the {@link android.nfc.tech.NdefMessage} on this tag.
+</span>
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Object {NdefMessage}} msg the NDEF Message to write, must not be null
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+@throws FormatException if the NDEF Message to write is malformed
+*/
+writeNdefMessage : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-canMakeReadOnly'>/**Indicates whether a tag can be made read-only with {@link #makeReadOnly}().
+</span>
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Boolean} true if it is possible to make this tag read-only
+*/
+canMakeReadOnly : function(  ) {},
+
+<span id='android-nfc-tech-Ndef-method-makeReadOnly'>/**Make a tag read-only.
+</span>
+ &lt;p&gt;This sets the CC field to indicate the tag is read-only,
+ and where possible permanently sets the lock bits to prevent
+ any further modification of the memory.
+ &lt;p&gt;This is a one-way process and cannot be reverted!
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@return {Boolean} true on success, false if it is not possible to make this tag read-only
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+makeReadOnly : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-DecorCaptionView'>/**@class com.android.internal.widget.DecorCaptionView
+</span> implements android.view.View.OnTouchListener
+
+ implements android.view.GestureDetector.OnGestureListener
+
+@extends android.view.ViewGroup
+
+ This class represents the special screen elements to control a window on freeform
+ environment.
+ As such this class handles the following things:
+ &lt;ul&gt;
+ &lt;li&gt;The caption, containing the system buttons like maximize, close and such as well as
+ allowing the user to drag the window around.&lt;/li&gt;
+ &lt;/ul&gt;
+ After creating the view, the function {@link #setPhoneWindow} needs to be called to make
+ the connection to it's owning PhoneWindow.
+ Note: At this time the application can change various attributes of the DecorView which
+ will break things (in subtle/unexpected ways):
+ &lt;ul&gt;
+ &lt;li&gt;setOutlineProvider&lt;/li&gt;
+ &lt;li&gt;setSurfaceFormat&lt;/li&gt;
+ &lt;li&gt;..&lt;/li&gt;
+ &lt;/ul&gt;
+
+ Although this ViewGroup has only two direct sub-Views, its behavior is more complex due to
+ overlaying caption on the content and drawing.
+
+ First, no matter where the content View gets added, it will always be the first child and the
+ caption will be the second. This way the caption will always be drawn on top of the content when
+ overlaying is enabled.
+
+ Second, the touch dispatch is customized to handle overlaying. This is what happens when touch
+ is dispatched on the caption area while overlaying it on content:
+ &lt;ul&gt;
+ &lt;li&gt;DecorCaptionView.onInterceptTouchEvent() will try intercepting the touch events if the
+ down action is performed on top close or maximize buttons; the reason for that is we want these
+ buttons to always work.&lt;/li&gt;
+ &lt;li&gt;The content View will receive the touch event. Mind that content is actually underneath the
+ caption, so we need to introduce our own dispatch ordering. We achieve this by overriding
+ {@link #buildTouchDispatchChildList}().&lt;/li&gt;
+ &lt;li&gt;If the touch event is not consumed by the content View, it will go to the caption View
+ and the dragging logic will be executed.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var DecorCaptionView = {
+
+<span id='com-android-internal-widget-DecorCaptionView-method-setPhoneWindow'>/**
+</span>*/
+setPhoneWindow : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onInterceptTouchEvent'>/**
+</span>*/
+onInterceptTouchEvent : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onTouch'>/**
+</span>*/
+onTouch : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-buildTouchDispatchChildList'>/**
+</span>*/
+buildTouchDispatchChildList : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-shouldDelayChildPressedState'>/**
+</span>*/
+shouldDelayChildPressedState : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onConfigurationChanged'>/**The phone window configuration has changed and the caption needs to be updated.
+</span>@param {Boolean} show True if the caption should be shown.
+*/
+onConfigurationChanged : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-addView'>/**
+</span>*/
+addView : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-isCaptionShowing'>/**
+</span>*/
+isCaptionShowing : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-getCaptionHeight'>/**
+</span>*/
+getCaptionHeight : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-removeContentView'>/**
+</span>*/
+removeContentView : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-getCaption'>/**
+</span>*/
+getCaption : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-generateLayoutParams'>/**
+</span>*/
+generateLayoutParams : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onDown'>/**
+</span>*/
+onDown : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onShowPress'>/**
+</span>*/
+onShowPress : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onSingleTapUp'>/**
+</span>*/
+onSingleTapUp : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onScroll'>/**
+</span>*/
+onScroll : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onLongPress'>/**
+</span>*/
+onLongPress : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onFling'>/**
+</span>*/
+onFling : function(  ) {},
+
+<span id='com-android-internal-widget-DecorCaptionView-method-onRootViewScrollYChanged'>/**Called when {@link android.view.ViewRootImpl} scrolls for adjustPan.
+</span>*/
+onRootViewScrollYChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-LayerDrawable'>/**@class android.graphics.drawable.LayerDrawable
+</span> implements android.graphics.drawable.Drawable.Callback
+
+@extends android.graphics.drawable.Drawable
+
+ A Drawable that manages an array of other Drawables. These are drawn in array
+ order, so the element with the largest index will be drawn on top.
+ &lt;p&gt;
+ It can be defined in an XML file with the &lt;code&gt;&amp;lt;layer-list&gt;&lt;/code&gt; element.
+ Each Drawable in the layer is defined in a nested &lt;code&gt;&amp;lt;item&gt;&lt;/code&gt;.
+ &lt;p&gt;
+ For more information, see the guide to
+ &lt;a href=&quot;{@docRoot}guide/topics/resources/drawable-resource.html&quot;&gt;Drawable Resources&lt;/a&gt;.
+
+ @attr ref android.R.styleable#LayerDrawable_paddingMode
+ @attr ref android.R.styleable#LayerDrawableItem_left
+ @attr ref android.R.styleable#LayerDrawableItem_top
+ @attr ref android.R.styleable#LayerDrawableItem_right
+ @attr ref android.R.styleable#LayerDrawableItem_bottom
+ @attr ref android.R.styleable#LayerDrawableItem_start
+ @attr ref android.R.styleable#LayerDrawableItem_end
+ @attr ref android.R.styleable#LayerDrawableItem_width
+ @attr ref android.R.styleable#LayerDrawableItem_height
+ @attr ref android.R.styleable#LayerDrawableItem_gravity
+ @attr ref android.R.styleable#LayerDrawableItem_drawable
+ @attr ref android.R.styleable#LayerDrawableItem_id
+*/
+var LayerDrawable = {
+
+<span id='android-graphics-drawable-LayerDrawable-property-PADDING_MODE_NEST'>/** Padding mode used to nest each layer inside the padding of the previous
+</span> layer.
+
+ @see #setPaddingMode(int)
+*/
+PADDING_MODE_NEST : &quot;0&quot;,
+<span id='android-graphics-drawable-LayerDrawable-property-PADDING_MODE_STACK'>/** Padding mode used to stack each layer directly atop the previous layer.
+</span>
+ @see #setPaddingMode(int)
+*/
+PADDING_MODE_STACK : &quot;1&quot;,
+<span id='android-graphics-drawable-LayerDrawable-property-INSET_UNDEFINED'>/** Value used for undefined start and end insets.
+</span>
+ @see #getLayerInsetStart(int)
+ @see #getLayerInsetEnd(int)
+*/
+INSET_UNDEFINED : &quot;-2147483648&quot;,
+<span id='android-graphics-drawable-LayerDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-applyTheme'>/**
+</span>*/
+applyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-canApplyTheme'>/**
+</span>*/
+canApplyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-isProjected'>/**
+</span>@hide 
+*/
+isProjected : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-addLayer'>/**Adds a new layer containing the specified {@code drawable} to the end of
+</span> the layer list and returns its index.
+@param {Object {Drawable}} dr The drawable to add as a new layer.
+@return {Number} The index of the new layer.
+*/
+addLayer : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-findDrawableByLayerId'>/**Looks for a layer with the given ID and returns its {@link android.graphics.drawable.Drawable}.
+</span> &lt;p&gt;
+ If multiple layers are found for the given ID, returns the
+ {@link android.graphics.drawable.Drawable} for the matching layer at the highest index.
+@param {Number} id The layer ID to search for.
+@return {Object {android.graphics.drawable.Drawable}} The {@link Drawable} for the highest-indexed layer that has the
+         given ID, or null if not found.
+*/
+findDrawableByLayerId : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setId'>/**Sets the ID of a layer.
+</span>@param {Number} index The index of the layer to modify, must be in the range
+              {@code 0...getNumberOfLayers()-1}.
+@param {Number} id The id to assign to the layer.
+@see #getId(int)
+@attr ref android.R.styleable#LayerDrawableItem_id
+*/
+setId : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getId'>/**Returns the ID of the specified layer.
+</span>@param {Number} index The index of the layer, must be in the range
+              {@code 0...getNumberOfLayers()-1}.
+@return {Number} The id of the layer or {@link android.view.View#NO_ID} if the
+         layer has no id.
+@see #setId(int, int)
+@attr ref android.R.styleable#LayerDrawableItem_id
+*/
+getId : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getNumberOfLayers'>/**Returns the number of layers contained within this layer drawable.
+</span>@return {Number} The number of layers.
+*/
+getNumberOfLayers : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setDrawableByLayerId'>/**Replaces the {@link android.graphics.drawable.Drawable} for the layer with the given id.
+</span>@param {Number} id The layer ID to search for.
+@param {Object {Drawable}} drawable The replacement {@link Drawable}.
+@return {Boolean} Whether the {@link Drawable} was replaced (could return false if
+         the id was not found).
+*/
+setDrawableByLayerId : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-findIndexByLayerId'>/**Returns the layer with the specified {@code id}.
+</span> &lt;p&gt;
+ If multiple layers have the same ID, returns the layer with the lowest
+ index.
+@param {Number} id The ID of the layer to return.
+@return {Number} The index of the layer with the specified ID.
+*/
+findIndexByLayerId : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setDrawable'>/**Sets the drawable for the layer at the specified index.
+</span>@param {Number} index The index of the layer to modify, must be in the range
+              {@code 0...getNumberOfLayers()-1}.
+@param {Object {Drawable}} drawable The drawable to set for the layer.
+@see #getDrawable(int)
+@attr ref android.R.styleable#LayerDrawableItem_drawable
+*/
+setDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getDrawable'>/**Returns the drawable for the layer at the specified index.
+</span>@param {Number} index The index of the layer, must be in the range
+              {@code 0...getNumberOfLayers()-1}.
+@return {Object {android.graphics.drawable.Drawable}} The {@link Drawable} at the specified layer index.
+@see #setDrawable(int, Drawable)
+@attr ref android.R.styleable#LayerDrawableItem_drawable
+*/
+getDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerSize'>/**Sets an explicit size for the specified layer.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Setting an explicit layer size changes the
+ default layer gravity behavior. See {@link #setLayerGravity(int, int)}
+ for more information.
+@param {Number} index the index of the layer to adjust
+@param {Number} w width in pixels, or -1 to use the intrinsic width
+@param {Number} h height in pixels, or -1 to use the intrinsic height
+@see #getLayerWidth(int)
+@see #getLayerHeight(int)
+@attr ref android.R.styleable#LayerDrawableItem_width
+@attr ref android.R.styleable#LayerDrawableItem_height
+*/
+setLayerSize : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerWidth'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} w width in pixels, or -1 to use the intrinsic width
+@attr ref android.R.styleable#LayerDrawableItem_width
+*/
+setLayerWidth : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerWidth'>/**
+</span>@param {Number} index the index of the drawable to adjust
+@return {Number} the explicit width of the layer, or -1 if not specified
+@see #setLayerSize(int, int, int)
+@attr ref android.R.styleable#LayerDrawableItem_width
+*/
+getLayerWidth : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerHeight'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} h height in pixels, or -1 to use the intrinsic height
+@attr ref android.R.styleable#LayerDrawableItem_height
+*/
+setLayerHeight : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerHeight'>/**
+</span>@param {Number} index the index of the drawable to adjust
+@return {Number} the explicit height of the layer, or -1 if not specified
+@see #setLayerSize(int, int, int)
+@attr ref android.R.styleable#LayerDrawableItem_height
+*/
+getLayerHeight : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerGravity'>/**Sets the gravity used to position or stretch the specified layer within
+</span> its container. Gravity is applied after any layer insets (see
+ {@link #setLayerInset(int, int, int, int, int)}) or padding (see
+ {@link #setPaddingMode}(int)).
+ &lt;p&gt;
+ If gravity is specified as {@link Gravity#NO_GRAVITY}, the default
+ behavior depends on whether an explicit width or height has been set
+ (see {@link #setLayerSize(int, int, int)}), If a dimension is not set,
+ gravity in that direction defaults to {@link Gravity#FILL_HORIZONTAL} or
+ {@link Gravity#FILL_VERTICAL}; otherwise, gravity in that direction
+ defaults to {@link Gravity#LEFT} or {@link Gravity#TOP}.
+@param {Number} index the index of the drawable to adjust
+@param {Number} gravity the gravity to set for the layer
+@see #getLayerGravity(int)
+@attr ref android.R.styleable#LayerDrawableItem_gravity
+*/
+setLayerGravity : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerGravity'>/**
+</span>@param {Number} index the index of the layer
+@return {Number} the gravity used to position or stretch the specified layer
+         within its container
+@see #setLayerGravity(int, int)
+@attr ref android.R.styleable#LayerDrawableItem_gravity
+*/
+getLayerGravity : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInset'>/**Specifies the insets in pixels for the drawable at the specified index.
+</span>@param {Number} index the index of the drawable to adjust
+@param {Number} l number of pixels to add to the left bound
+@param {Number} t number of pixels to add to the top bound
+@param {Number} r number of pixels to subtract from the right bound
+@param {Number} b number of pixels to subtract from the bottom bound
+@attr ref android.R.styleable#LayerDrawableItem_left
+@attr ref android.R.styleable#LayerDrawableItem_top
+@attr ref android.R.styleable#LayerDrawableItem_right
+@attr ref android.R.styleable#LayerDrawableItem_bottom
+*/
+setLayerInset : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInsetRelative'>/**Specifies the relative insets in pixels for the drawable at the
+</span> specified index.
+@param {Number} index the index of the layer to adjust
+@param {Number} s number of pixels to inset from the start bound
+@param {Number} t number of pixels to inset from the top bound
+@param {Number} e number of pixels to inset from the end bound
+@param {Number} b number of pixels to inset from the bottom bound
+@attr ref android.R.styleable#LayerDrawableItem_start
+@attr ref android.R.styleable#LayerDrawableItem_top
+@attr ref android.R.styleable#LayerDrawableItem_end
+@attr ref android.R.styleable#LayerDrawableItem_bottom
+*/
+setLayerInsetRelative : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInsetLeft'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} l number of pixels to inset from the left bound
+@attr ref android.R.styleable#LayerDrawableItem_left
+*/
+setLayerInsetLeft : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerInsetLeft'>/**
+</span>@param {Number} index the index of the layer
+@return {Number} number of pixels to inset from the left bound
+@attr ref android.R.styleable#LayerDrawableItem_left
+*/
+getLayerInsetLeft : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInsetRight'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} r number of pixels to inset from the right bound
+@attr ref android.R.styleable#LayerDrawableItem_right
+*/
+setLayerInsetRight : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerInsetRight'>/**
+</span>@param {Number} index the index of the layer
+@return {Number} number of pixels to inset from the right bound
+@attr ref android.R.styleable#LayerDrawableItem_right
+*/
+getLayerInsetRight : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInsetTop'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} t number of pixels to inset from the top bound
+@attr ref android.R.styleable#LayerDrawableItem_top
+*/
+setLayerInsetTop : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerInsetTop'>/**
+</span>@param {Number} index the index of the layer
+@return {Number} number of pixels to inset from the top bound
+@attr ref android.R.styleable#LayerDrawableItem_top
+*/
+getLayerInsetTop : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInsetBottom'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} b number of pixels to inset from the bottom bound
+@attr ref android.R.styleable#LayerDrawableItem_bottom
+*/
+setLayerInsetBottom : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerInsetBottom'>/**
+</span>@param {Number} index the index of the layer
+@return {Number} number of pixels to inset from the bottom bound
+@attr ref android.R.styleable#LayerDrawableItem_bottom
+*/
+getLayerInsetBottom : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInsetStart'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} s number of pixels to inset from the start bound
+@attr ref android.R.styleable#LayerDrawableItem_start
+*/
+setLayerInsetStart : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerInsetStart'>/**
+</span>@param {Number} index the index of the layer
+@return {Number} the number of pixels to inset from the start bound, or
+         {@link #INSET_UNDEFINED} if not specified
+@attr ref android.R.styleable#LayerDrawableItem_start
+*/
+getLayerInsetStart : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setLayerInsetEnd'>/**
+</span>@param {Number} index the index of the layer to adjust
+@param {Number} e number of pixels to inset from the end bound, or
+         {@link #INSET_UNDEFINED} if not specified
+@attr ref android.R.styleable#LayerDrawableItem_end
+*/
+setLayerInsetEnd : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLayerInsetEnd'>/**
+</span>@param {Number} index the index of the layer
+@return {Number} number of pixels to inset from the end bound
+@attr ref android.R.styleable#LayerDrawableItem_end
+*/
+getLayerInsetEnd : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setPaddingMode'>/**Specifies how layer padding should affect the bounds of subsequent
+</span> layers. The default value is {@link #PADDING_MODE_NEST}.
+@param {Number} mode padding mode, one of:
+            &lt;ul&gt;
+            &lt;li&gt;{@link #PADDING_MODE_NEST} to nest each layer inside the
+            padding of the previous layer
+            &lt;li&gt;{@link #PADDING_MODE_STACK} to stack each layer directly
+            atop the previous layer
+            &lt;/ul&gt;
+@see #getPaddingMode()
+@attr ref android.R.styleable#LayerDrawable_paddingMode
+*/
+setPaddingMode : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getPaddingMode'>/**
+</span>@return {Number} the current padding mode
+@see #setPaddingMode(int)
+@attr ref android.R.styleable#LayerDrawable_paddingMode
+*/
+getPaddingMode : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-invalidateDrawable'>/**
+</span>*/
+invalidateDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-scheduleDrawable'>/**
+</span>*/
+scheduleDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-unscheduleDrawable'>/**
+</span>*/
+unscheduleDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getChangingConfigurations'>/**
+</span>*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getPadding'>/**
+</span>*/
+getPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setPadding'>/**Sets the absolute padding.
+</span> &lt;p&gt;
+ If padding in a dimension is specified as {@code -1}, the resolved
+ padding will use the value computed according to the padding mode (see
+ {@link #setPaddingMode}(int)).
+ &lt;p&gt;
+ Calling this method clears any relative padding values previously set
+ using {@link #setPaddingRelative(int, int, int, int)}.
+@param {Number} left the left padding in pixels, or -1 to use computed padding
+@param {Number} top the top padding in pixels, or -1 to use computed padding
+@param {Number} right the right padding in pixels, or -1 to use computed padding
+@param {Number} bottom the bottom padding in pixels, or -1 to use computed
+               padding
+@attr ref android.R.styleable#LayerDrawable_paddingLeft
+@attr ref android.R.styleable#LayerDrawable_paddingTop
+@attr ref android.R.styleable#LayerDrawable_paddingRight
+@attr ref android.R.styleable#LayerDrawable_paddingBottom
+@see #setPaddingRelative(int, int, int, int)
+*/
+setPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setPaddingRelative'>/**Sets the relative padding.
+</span> &lt;p&gt;
+ If padding in a dimension is specified as {@code -1}, the resolved
+ padding will use the value computed according to the padding mode (see
+ {@link #setPaddingMode}(int)).
+ &lt;p&gt;
+ Calling this method clears any absolute padding values previously set
+ using {@link #setPadding(int, int, int, int)}.
+@param {Number} start the start padding in pixels, or -1 to use computed padding
+@param {Number} top the top padding in pixels, or -1 to use computed padding
+@param {Number} end the end padding in pixels, or -1 to use computed padding
+@param {Number} bottom the bottom padding in pixels, or -1 to use computed
+               padding
+@attr ref android.R.styleable#LayerDrawable_paddingStart
+@attr ref android.R.styleable#LayerDrawable_paddingTop
+@attr ref android.R.styleable#LayerDrawable_paddingEnd
+@attr ref android.R.styleable#LayerDrawable_paddingBottom
+@see #setPadding(int, int, int, int)
+*/
+setPaddingRelative : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getLeftPadding'>/**Returns the left padding in pixels.
+</span> &lt;p&gt;
+ A return value of {@code -1} means there is no explicit padding set for
+ this dimension. As a result, the value for this dimension returned by
+ {@link #getPadding}(Rect) will be computed from the child layers
+ according to the padding mode (see {@link #getPaddingMode}().
+@return {Number} the left padding in pixels, or -1 if not explicitly specified
+@see #setPadding(int, int, int, int)
+@see #getPadding(Rect)
+*/
+getLeftPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getRightPadding'>/**Returns the right padding in pixels.
+</span> &lt;p&gt;
+ A return value of {@code -1} means there is no explicit padding set for
+ this dimension. As a result, the value for this dimension returned by
+ {@link #getPadding}(Rect) will be computed from the child layers
+ according to the padding mode (see {@link #getPaddingMode}().
+@return {Number} the right padding in pixels, or -1 if not explicitly specified
+@see #setPadding(int, int, int, int)
+@see #getPadding(Rect)
+*/
+getRightPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getStartPadding'>/**Returns the start padding in pixels.
+</span> &lt;p&gt;
+ A return value of {@code -1} means there is no explicit padding set for
+ this dimension. As a result, the value for this dimension returned by
+ {@link #getPadding}(Rect) will be computed from the child layers
+ according to the padding mode (see {@link #getPaddingMode}().
+@return {Number} the start padding in pixels, or -1 if not explicitly specified
+@see #setPaddingRelative(int, int, int, int)
+@see #getPadding(Rect)
+*/
+getStartPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getEndPadding'>/**Returns the end padding in pixels.
+</span> &lt;p&gt;
+ A return value of {@code -1} means there is no explicit padding set for
+ this dimension. As a result, the value for this dimension returned by
+ {@link #getPadding}(Rect) will be computed from the child layers
+ according to the padding mode (see {@link #getPaddingMode}().
+@return {Number} the end padding in pixels, or -1 if not explicitly specified
+@see #setPaddingRelative(int, int, int, int)
+@see #getPadding(Rect)
+*/
+getEndPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getTopPadding'>/**Returns the top padding in pixels.
+</span> &lt;p&gt;
+ A return value of {@code -1} means there is no explicit padding set for
+ this dimension. As a result, the value for this dimension returned by
+ {@link #getPadding}(Rect) will be computed from the child layers
+ according to the padding mode (see {@link #getPaddingMode}().
+@return {Number} the top padding in pixels, or -1 if not explicitly specified
+@see #setPadding(int, int, int, int)
+@see #setPaddingRelative(int, int, int, int)
+@see #getPadding(Rect)
+*/
+getTopPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getBottomPadding'>/**Returns the bottom padding in pixels.
+</span> &lt;p&gt;
+ A return value of {@code -1} means there is no explicit padding set for
+ this dimension. As a result, the value for this dimension returned by
+ {@link #getPadding}(Rect) will be computed from the child layers
+ according to the padding mode (see {@link #getPaddingMode}().
+@return {Number} the bottom padding in pixels, or -1 if not explicitly specified
+@see #setPadding(int, int, int, int)
+@see #setPaddingRelative(int, int, int, int)
+@see #getPadding(Rect)
+*/
+getBottomPadding : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getOutline'>/**Populates &lt;code&gt;outline&lt;/code&gt; with the first available (non-empty) layer outline.
+</span>@param {Object {Outline}} outline Outline in which to place the first available layer outline
+*/
+getOutline : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setHotspot'>/**
+</span>*/
+setHotspot : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setHotspotBounds'>/**
+</span>*/
+setHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getHotspotBounds'>/**
+</span>*/
+getHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setVisible'>/**
+</span>*/
+setVisible : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setDither'>/**
+</span>*/
+setDither : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setAlpha'>/**
+</span>*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getAlpha'>/**
+</span>*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setColorFilter'>/**
+</span>*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setTintList'>/**
+</span>*/
+setTintList : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setTintBlendMode'>/**
+</span>*/
+setTintBlendMode : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setOpacity'>/**Sets the opacity of this drawable directly instead of collecting the
+</span> states from the layers.
+@param {Number} opacity The opacity to use, or {@link PixelFormat#UNKNOWN
+            PixelFormat.UNKNOWN} for the default behavior
+@see PixelFormat#UNKNOWN
+@see PixelFormat#TRANSLUCENT
+@see PixelFormat#TRANSPARENT
+@see PixelFormat#OPAQUE
+*/
+setOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getOpacity'>/**
+</span>*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-setAutoMirrored'>/**
+</span>*/
+setAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-isAutoMirrored'>/**
+</span>*/
+isAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-jumpToCurrentState'>/**
+</span>*/
+jumpToCurrentState : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-isStateful'>/**
+</span>*/
+isStateful : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-hasFocusStateSpecified'>/**
+</span>@hide 
+*/
+hasFocusStateSpecified : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getIntrinsicWidth'>/**
+</span>*/
+getIntrinsicWidth : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getIntrinsicHeight'>/**
+</span>*/
+getIntrinsicHeight : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-getConstantState'>/**
+</span>*/
+getConstantState : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-mutate'>/**
+</span>*/
+mutate : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-clearMutated'>/**
+</span>@hide 
+*/
+clearMutated : function(  ) {},
+
+<span id='android-graphics-drawable-LayerDrawable-method-onLayoutDirectionChanged'>/**
+</span>*/
+onLayoutDirectionChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

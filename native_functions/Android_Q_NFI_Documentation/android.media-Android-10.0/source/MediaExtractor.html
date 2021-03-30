@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaExtractor'>/**@class android.media.MediaExtractor
+</span>@extends java.lang.Object
+
+ MediaExtractor facilitates extraction of demuxed, typically encoded,  media data
+ from a data source.
+ &lt;p&gt;It is generally used like this:
+ &lt;pre&gt;
+ MediaExtractor extractor = new MediaExtractor();
+ extractor.setDataSource(...);
+ int numTracks = extractor.getTrackCount();
+ for (int i = 0; i &amp;lt; numTracks; ++i) {
+   MediaFormat format = extractor.getTrackFormat(i);
+   String mime = format.getString(MediaFormat.KEY_MIME);
+   if (weAreInterestedInThisTrack) {
+     extractor.selectTrack(i);
+   }
+ }
+ ByteBuffer inputBuffer = ByteBuffer.allocate(...)
+ while (extractor.readSampleData(inputBuffer, ...) &amp;gt;= 0) {
+   int trackIndex = extractor.getSampleTrackIndex();
+   long presentationTimeUs = extractor.getSampleTime();
+   ...
+   extractor.advance();
+ }
+
+ extractor.release();
+ extractor = null;
+ &lt;/pre&gt;
+
+ &lt;p&gt;This class requires the {@link android.Manifest.permission#INTERNET} permission
+ when used with network-based content.
+*/
+var MediaExtractor = {
+
+<span id='android-media-MediaExtractor-property-SEEK_TO_PREVIOUS_SYNC'>/** If possible, seek to a sync sample at or before the specified time
+</span>*/
+SEEK_TO_PREVIOUS_SYNC : &quot;0&quot;,
+<span id='android-media-MediaExtractor-property-SEEK_TO_NEXT_SYNC'>/** If possible, seek to a sync sample at or after the specified time
+</span>*/
+SEEK_TO_NEXT_SYNC : &quot;1&quot;,
+<span id='android-media-MediaExtractor-property-SEEK_TO_CLOSEST_SYNC'>/** If possible, seek to the sync sample closest to the specified time
+</span>*/
+SEEK_TO_CLOSEST_SYNC : &quot;2&quot;,
+<span id='android-media-MediaExtractor-property-SAMPLE_FLAG_SYNC'>/** The sample is a sync sample (or in {@link android.media.MediaCodec}'s terminology
+</span> it is a key frame.)
+
+ @see MediaCodec#BUFFER_FLAG_KEY_FRAME
+*/
+SAMPLE_FLAG_SYNC : &quot;1&quot;,
+<span id='android-media-MediaExtractor-property-SAMPLE_FLAG_ENCRYPTED'>/** The sample is (at least partially) encrypted, see also the documentation
+</span> for {@link android.media.MediaCodec#queueSecureInputBuffer}
+*/
+SAMPLE_FLAG_ENCRYPTED : &quot;2&quot;,
+<span id='android-media-MediaExtractor-property-SAMPLE_FLAG_PARTIAL_FRAME'>/** This indicates that the buffer only contains part of a frame,
+</span> and the decoder should batch the data until a buffer without
+ this flag appears before decoding the frame.
+
+ @see MediaCodec#BUFFER_FLAG_PARTIAL_FRAME
+*/
+SAMPLE_FLAG_PARTIAL_FRAME : &quot;4&quot;,
+<span id='android-media-MediaExtractor-method-setDataSource'>/**Sets the data source (MediaDataSource) to use.
+</span>@param {Object {MediaDataSource}} dataSource the MediaDataSource for the media you want to extract from
+@throws IllegalArgumentException if dataSource is invalid.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-setDataSource'>/**Sets the data source as a content Uri.
+</span>@param {Object {Context}} context the Context to use when resolving the Uri
+@param {Object {Uri}} uri the Content URI of the data you want to extract from.
+
+ &lt;p&gt;When &lt;code&gt;uri&lt;/code&gt; refers to a network file the
+ {@link android.Manifest.permission#INTERNET} permission is required.
+@param {Object {java.util.Map}} headers the headers to be sent together with the request for the data.
+        This can be {@code null} if no specific headers are to be sent with the
+        request.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-setDataSource'>/**Sets the data source (file-path or http URL) to use.
+</span>@param {String} path the path of the file, or the http URL
+
+ &lt;p&gt;When &lt;code&gt;path&lt;/code&gt; refers to a network file the
+ {@link android.Manifest.permission#INTERNET} permission is required.
+@param {Object {java.util.Map}} headers the headers associated with the http request for the stream you want to play.
+        This can be {@code null} if no specific headers are to be sent with the
+        request.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-setDataSource'>/**Sets the data source (file-path or http URL) to use.
+</span>@param {String} path the path of the file, or the http URL of the stream
+
+ &lt;p&gt;When &lt;code&gt;path&lt;/code&gt; refers to a local file, the file may actually be opened by a
+ process other than the calling application.  This implies that the pathname
+ should be an absolute path (as any other process runs with unspecified current working
+ directory), and that the pathname should reference a world-readable file.
+ As an alternative, the application could first open the file for reading,
+ and then use the file descriptor form {@link #setDataSource(FileDescriptor)}.
+
+ &lt;p&gt;When &lt;code&gt;path&lt;/code&gt; refers to a network file the
+ {@link android.Manifest.permission#INTERNET} permission is required.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-setDataSource'>/**Sets the data source (AssetFileDescriptor) to use. It is the caller's
+</span> responsibility to close the file descriptor. It is safe to do so as soon
+ as this call returns.
+@param {Object {AssetFileDescriptor}} afd the AssetFileDescriptor for the file you want to extract from.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-setDataSource'>/**Sets the data source (FileDescriptor) to use. It is the caller's responsibility
+</span> to close the file descriptor. It is safe to do so as soon as this call returns.
+@param {Object {FileDescriptor}} fd the FileDescriptor for the file you want to extract from.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-setDataSource'>/**Sets the data source (FileDescriptor) to use.  The FileDescriptor must be
+</span> seekable (N.B. a LocalSocket is not seekable). It is the caller's responsibility
+ to close the file descriptor. It is safe to do so as soon as this call returns.
+@param {Object {FileDescriptor}} fd the FileDescriptor for the file you want to extract from.
+@param {Number} offset the offset into the file where the data to be extracted starts, in bytes
+@param {Number} length the length in bytes of the data to be extracted
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-setMediaCas'>/**Sets the MediaCas instance to use. This should be called after a
+</span> successful setDataSource() if at least one track reports mime type
+ of {@link android.media.MediaFormat#MIMETYPE_AUDIO_SCRAMBLED}
+ or {@link android.media.MediaFormat#MIMETYPE_VIDEO_SCRAMBLED}.
+ Stream parsing will not proceed until a valid MediaCas object
+ is provided.
+@param {Object {MediaCas}} mediaCas the MediaCas object to use.
+*/
+setMediaCas : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getCasInfo'>/**Retrieves the information about the conditional access system used to scramble
+</span> a track.
+@param {Number} index of the track.
+@return {Object {android.media.MediaExtractor.CasInfo}} an {@link CasInfo} object describing the conditional access system.
+*/
+getCasInfo : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-release'>/**Make sure you call this when you're done to free up any resources
+</span> instead of relying on the garbage collector to do this for you at
+ some point in the future.
+*/
+release : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getTrackCount'>/**Count the number of tracks found in the data source.
+</span>*/
+getTrackCount : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getDrmInitData'>/**Extract DRM initialization data if it exists
+</span>@return {Object {android.media.DrmInitData}} DRM initialization data in the content, or {@code null}
+ if no recognizable DRM format is found;
+@see DrmInitData
+*/
+getDrmInitData : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getAudioPresentations'>/**Get the list of available audio presentations for the track.
+</span>@param {Number} trackIndex index of the track.
+@return {Object {java.util.List}} a list of available audio presentations for a given valid audio track index.
+ The list will be empty if the source does not contain any audio presentations.
+*/
+getAudioPresentations : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getPsshInfo'>/**Get the PSSH info if present.
+</span>@return {Object {java.util.Map}} a map of uuid-to-bytes, with the uuid specifying
+ the crypto scheme, and the bytes being the data specific to that scheme.
+ This can be {@code null} if the source does not contain PSSH info.
+*/
+getPsshInfo : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getTrackFormat'>/**Get the track format at the specified index.
+</span>
+ More detail on the representation can be found at {@link android.media.MediaCodec}
+ &lt;p&gt;
+ The following table summarizes support for format keys across android releases:
+
+ &lt;table style=&quot;width: 0%&quot;&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;
+    &lt;th rowspan=2&gt;OS Version(s)&lt;/th&gt;
+    &lt;td colspan=3&gt;{@code MediaFormat} keys used for&lt;/th&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;th&gt;All Tracks&lt;/th&gt;
+    &lt;th&gt;Audio Tracks&lt;/th&gt;
+    &lt;th&gt;Video Tracks&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#JELLY_BEAN}&lt;/td&gt;
+    &lt;td rowspan=8&gt;{@link android.media.MediaFormat#KEY_MIME},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_DURATION},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_MAX_INPUT_SIZE}&lt;/td&gt;
+    &lt;td rowspan=5&gt;{@link android.media.MediaFormat#KEY_SAMPLE_RATE},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_CHANNEL_COUNT},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_CHANNEL_MASK},&lt;br&gt;
+        gapless playback information&lt;sup&gt;.mp3, .mp4&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_IS_ADTS}&lt;sup&gt;AAC if streaming&lt;/sup&gt;,&lt;br&gt;
+        codec-specific data&lt;sup&gt;AAC, Vorbis&lt;/sup&gt;&lt;/td&gt;
+    &lt;td rowspan=2&gt;{@link android.media.MediaFormat#KEY_WIDTH},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_HEIGHT},&lt;br&gt;
+        codec-specific data&lt;sup&gt;AVC, MPEG4&lt;/sup&gt;&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR1}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}&lt;/td&gt;
+    &lt;td rowspan=3&gt;as above, plus&lt;br&gt;
+        Pixel aspect ratio information&lt;sup&gt;AVC, *&lt;/sup&gt;&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#KITKAT}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#KITKAT_WATCH}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP}&lt;/td&gt;
+    &lt;td rowspan=2&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_BIT_RATE}&lt;sup&gt;AAC&lt;/sup&gt;,&lt;br&gt;
+        codec-specific data&lt;sup&gt;Opus&lt;/sup&gt;&lt;/td&gt;
+    &lt;td rowspan=2&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_ROTATION}&lt;sup&gt;.mp4&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_BIT_RATE}&lt;sup&gt;MPEG4&lt;/sup&gt;,&lt;br&gt;
+        codec-specific data&lt;sup&gt;HEVC&lt;/sup&gt;&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#M}&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        gapless playback information&lt;sup&gt;Opus&lt;/sup&gt;&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_FRAME_RATE} (integer)&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#N}&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_TRACK_ID},&lt;br&gt;
+        &lt;!-- {link MediaFormat#KEY_MAX_BIT_RATE}&lt;sup&gt;#, .mp4&lt;/sup&gt;,&lt;br&gt; --&gt;
+        {@link android.media.MediaFormat#KEY_BIT_RATE}&lt;sup&gt;#, .mp4&lt;/sup&gt;&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_PCM_ENCODING},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_PROFILE}&lt;sup&gt;AAC&lt;/sup&gt;&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_HDR_STATIC_INFO}&lt;sup&gt;#, .webm&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_COLOR_STANDARD}&lt;sup&gt;#&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_COLOR_TRANSFER}&lt;sup&gt;#&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_COLOR_RANGE}&lt;sup&gt;#&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_PROFILE}&lt;sup&gt;MPEG2, H.263, MPEG4, AVC, HEVC, VP9&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_LEVEL}&lt;sup&gt;H.263, MPEG4, AVC, HEVC, VP9&lt;/sup&gt;,&lt;br&gt;
+        codec-specific data&lt;sup&gt;VP9&lt;/sup&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td colspan=4&gt;
+     &lt;p class=note&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;br&gt;
+      #: container-specified value only.&lt;br&gt;
+      .mp4, .webm&amp;hellip;: for listed containers&lt;br&gt;
+      MPEG4, AAC&amp;hellip;: for listed codecs
+    &lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td colspan=4&gt;
+     &lt;p class=note&gt;Note that that level information contained in the container many times
+     does not match the level of the actual bitstream. You may want to clear the level using
+     {@code MediaFormat.setString(KEY_LEVEL, null)} before using the track format to find a
+     decoder that can play back a particular track.
+    &lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td colspan=4&gt;
+     &lt;p class=note&gt;&lt;strong&gt;*Pixel (sample) aspect ratio&lt;/strong&gt; is returned in the following
+     keys. The display width can be calculated for example as:
+     &lt;p align=center&gt;
+     display-width = display-height * crop-width / crop-height * sar-width / sar-height
+    &lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;th&gt;Format Key&lt;/th&gt;&lt;th&gt;Value Type&lt;/th&gt;&lt;th colspan=2&gt;Description&lt;/th&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@code &quot;sar-width&quot;}&lt;/td&gt;&lt;td&gt;Integer&lt;/td&gt;&lt;td colspan=2&gt;Pixel aspect ratio width&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@code &quot;sar-height&quot;}&lt;/td&gt;&lt;td&gt;Integer&lt;/td&gt;&lt;td colspan=2&gt;Pixel aspect ratio height&lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+*/
+getTrackFormat : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-selectTrack'>/**Subsequent calls to {@link #readSampleData}, {@link #getSampleTrackIndex} and
+</span> {@link #getSampleTime} only retrieve information for the subset of tracks
+ selected.
+ Selecting the same track multiple times has no effect, the track is
+ only selected once.
+*/
+selectTrack : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-unselectTrack'>/**Subsequent calls to {@link #readSampleData}, {@link #getSampleTrackIndex} and
+</span> {@link #getSampleTime} only retrieve information for the subset of tracks
+ selected.
+*/
+unselectTrack : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-seekTo'>/**All selected tracks seek near the requested time according to the
+</span> specified mode.
+*/
+seekTo : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-advance'>/**Advance to the next sample. Returns false if no more sample data
+</span> is available (end of stream).
+
+ When extracting a local file, the behaviors of {@link #advance} and
+ {@link #readSampleData} are undefined in presence of concurrent
+ writes to the same local file; more specifically, end of stream
+ could be signalled earlier than expected.
+*/
+advance : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-readSampleData'>/**Retrieve the current encoded sample and store it in the byte buffer
+</span> starting at the given offset.
+ &lt;p&gt;
+ &lt;b&gt;Note:&lt;/b&gt;As of API 21, on success the position and limit of
+ {@code byteBuf} is updated to point to the data just read.
+@param {Object {ByteBuffer}} byteBuf the destination byte buffer
+@return {Number} the sample size (or -1 if no more samples are available).
+*/
+readSampleData : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getSampleTrackIndex'>/**Returns the track index the current sample originates from (or -1
+</span> if no more samples are available)
+*/
+getSampleTrackIndex : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getSampleTime'>/**Returns the current sample's presentation time in microseconds.
+</span> or -1 if no more samples are available.
+*/
+getSampleTime : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getSampleSize'>/**
+</span>@return {Number} size of the current sample in bytes or -1 if no more
+ samples are available.
+*/
+getSampleSize : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getSampleFlags'>/**Returns the current sample's flags.
+</span>*/
+getSampleFlags : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getSampleCryptoInfo'>/**If the sample flags indicate that the current sample is at least
+</span> partially encrypted, this call returns relevant information about
+ the structure of the sample data required for decryption.
+@param {Object {MediaCodec.CryptoInfo}} info The android.media.MediaCodec.CryptoInfo structure
+             to be filled in.
+@return {Boolean} true iff the sample flags contain {@link #SAMPLE_FLAG_ENCRYPTED}
+*/
+getSampleCryptoInfo : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getCachedDuration'>/**Returns an estimate of how much data is presently cached in memory
+</span> expressed in microseconds. Returns -1 if that information is unavailable
+ or not applicable (no cache).
+*/
+getCachedDuration : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-hasCacheReachedEndOfStream'>/**Returns true iff we are caching data and the cache has reached the
+</span> end of the data stream (for now, a future seek may of course restart
+ the fetching of data).
+ This API only returns a meaningful result if {@link #getCachedDuration}
+ indicates the presence of a cache, i.e. does NOT return -1.
+*/
+hasCacheReachedEndOfStream : function(  ) {},
+
+<span id='android-media-MediaExtractor-method-getMetrics'>/**Return Metrics data about the current media container.
+</span>@return {Object {android.os.PersistableBundle}} a {@link PersistableBundle} containing the set of attributes and values
+ available for the media container being handled by this instance
+ of MediaExtractor.
+ The attributes are descibed in {@link MetricsConstants}.
+
+  Additional vendor-specific fields may also be present in
+  the return value.
+*/
+getMetrics : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

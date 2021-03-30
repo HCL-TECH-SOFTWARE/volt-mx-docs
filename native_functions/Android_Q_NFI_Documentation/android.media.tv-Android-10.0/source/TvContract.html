@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvContract'>/**@class android.media.tv.TvContract
+</span>@extends java.lang.Object
+
+ The contract between the TV provider and applications. Contains definitions for the supported
+ URIs and columns.
+ &lt;h3&gt;Overview&lt;/h3&gt;
+
+ &lt;p&gt;TvContract defines a basic database of TV content metadata such as channel and program
+ information. The information is stored in {@link android.media.tv.TvContract.Channels} and {@link android.media.tv.TvContract.Programs} tables.
+
+ &lt;ul&gt;
+     &lt;li&gt;A row in the {@link android.media.tv.TvContract.Channels} table represents information about a TV channel. The data
+         format can vary greatly from standard to standard or according to service provider, thus
+         the columns here are mostly comprised of basic entities that are usually seen to users
+         regardless of standard such as channel number and name.&lt;/li&gt;
+     &lt;li&gt;A row in the {@link android.media.tv.TvContract.Programs} table represents a set of data describing a TV program such
+         as program title and start time.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var TvContract = {
+
+<span id='android-media-tv-TvContract-property-AUTHORITY'>/**The authority for the TV provider. */
+</span>AUTHORITY : &quot;android.media.tv&quot;,
+<span id='android-media-tv-TvContract-property-PERMISSION_READ_TV_LISTINGS'>/** Permission to read TV listings. This is required to read all the TV channel and program
+</span> information available on the system.
+ @hide
+*/
+PERMISSION_READ_TV_LISTINGS : &quot;android.permission.READ_TV_LISTINGS&quot;,
+<span id='android-media-tv-TvContract-property-ACTION_CHANNEL_BROWSABLE_REQUESTED'>/** Broadcast Action: sent when an application requests the system to make the given channel
+</span> browsable.  The operation is performed in the background without user interaction. This
+ is only relevant to channels with {@link android.media.tv.TvContract.Channels#TYPE_PREVIEW} type.
+
+ &lt;p&gt;The intent must contain the following bundle parameters:
+ &lt;ul&gt;
+     &lt;li&gt;{@link #EXTRA_CHANNEL_ID}: ID for the {@link android.media.tv.TvContract.Channels#TYPE_PREVIEW} channel as a long
+     integer.&lt;/li&gt;
+     &lt;li&gt;{@link #EXTRA_PACKAGE_NAME}: the package name of the requesting application.&lt;/li&gt;
+ &lt;/ul&gt;
+ @hide
+*/
+ACTION_CHANNEL_BROWSABLE_REQUESTED : &quot;android.media.tv.action.CHANNEL_BROWSABLE_REQUESTED&quot;,
+<span id='android-media-tv-TvContract-property-ACTION_REQUEST_CHANNEL_BROWSABLE'>/** Activity Action: sent by an application telling the system to make the given channel
+</span> browsable with user interaction. The system may show UI to ask user to approve the channel.
+ This is only relevant to channels with {@link android.media.tv.TvContract.Channels#TYPE_PREVIEW} type. Use
+ {@link Activity#startActivityForResult} to get the result of the request.
+
+ &lt;p&gt;The intent must contain the following bundle parameters:
+ &lt;ul&gt;
+     &lt;li&gt;{@link #EXTRA_CHANNEL_ID}: ID for the {@link android.media.tv.TvContract.Channels#TYPE_PREVIEW} channel as a long
+     integer.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_REQUEST_CHANNEL_BROWSABLE : &quot;android.media.tv.action.REQUEST_CHANNEL_BROWSABLE&quot;,
+<span id='android-media-tv-TvContract-property-ACTION_PREVIEW_PROGRAM_BROWSABLE_DISABLED'>/** Broadcast Action: sent by the system to tell the target TV input that one of its preview
+</span> program's browsable state is disabled, i.e., it will no longer be shown to users, which, for
+ example, might be a result of users' interaction with UI. The input is expected to delete the
+ preview program from the content provider.
+
+ &lt;p&gt;The intent must contain the following bundle parameter:
+ &lt;ul&gt;
+     &lt;li&gt;{@link #EXTRA_PREVIEW_PROGRAM_ID}: the disabled preview program ID.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_PREVIEW_PROGRAM_BROWSABLE_DISABLED : &quot;android.media.tv.action.PREVIEW_PROGRAM_BROWSABLE_DISABLED&quot;,
+<span id='android-media-tv-TvContract-property-ACTION_WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED'>/** Broadcast Action: sent by the system to tell the target TV input that one of its &quot;watch next&quot;
+</span> program's browsable state is disabled, i.e., it will no longer be shown to users, which, for
+ example, might be a result of users' interaction with UI. The input is expected to delete the
+ &quot;watch next&quot; program from the content provider.
+
+ &lt;p&gt;The intent must contain the following bundle parameter:
+ &lt;ul&gt;
+     &lt;li&gt;{@link #EXTRA_WATCH_NEXT_PROGRAM_ID}: the disabled &quot;watch next&quot; program ID.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED : &quot;android.media.tv.action.WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED&quot;,
+<span id='android-media-tv-TvContract-property-ACTION_PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT'>/** Broadcast Action: sent by the system to tell the target TV input that one of its existing
+</span> preview programs is added to the watch next programs table by user.
+
+ &lt;p&gt;The intent must contain the following bundle parameters:
+ &lt;ul&gt;
+     &lt;li&gt;{@link #EXTRA_PREVIEW_PROGRAM_ID}: the ID of the existing preview program.&lt;/li&gt;
+     &lt;li&gt;{@link #EXTRA_WATCH_NEXT_PROGRAM_ID}: the ID of the new watch next program.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT : &quot;android.media.tv.action.PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT&quot;,
+<span id='android-media-tv-TvContract-property-ACTION_INITIALIZE_PROGRAMS'>/** Broadcast Action: sent to the target TV input after it is first installed to notify the input
+</span> to initialize its channels and programs to the system content provider.
+
+ &lt;p&gt;Note that this intent is sent only on devices with
+ {@link android.content.pm.PackageManager#FEATURE_LEANBACK} enabled. Besides that, in order
+ to receive this intent, the target TV input must:
+ &lt;ul&gt;
+     &lt;li&gt;Declare a broadcast receiver for this intent in its
+         &lt;code&gt;AndroidManifest.xml&lt;/code&gt;.&lt;/li&gt;
+     &lt;li&gt;Declare appropriate permissions to write channel and program data in its
+         &lt;code&gt;AndroidManifest.xml&lt;/code&gt;.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_INITIALIZE_PROGRAMS : &quot;android.media.tv.action.INITIALIZE_PROGRAMS&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_CHANNEL_ID'>/** The key for a bundle parameter containing a channel ID as a long integer
+</span>*/
+EXTRA_CHANNEL_ID : &quot;android.media.tv.extra.CHANNEL_ID&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_PACKAGE_NAME'>/** The key for a bundle parameter containing a package name as a string.
+</span> @hide
+*/
+EXTRA_PACKAGE_NAME : &quot;android.media.tv.extra.PACKAGE_NAME&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_PREVIEW_PROGRAM_ID'>/**The key for a bundle parameter containing a program ID as a long integer. */
+</span>EXTRA_PREVIEW_PROGRAM_ID : &quot;android.media.tv.extra.PREVIEW_PROGRAM_ID&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_WATCH_NEXT_PROGRAM_ID'>/**The key for a bundle parameter containing a watch next program ID as a long integer. */
+</span>EXTRA_WATCH_NEXT_PROGRAM_ID : &quot;android.media.tv.extra.WATCH_NEXT_PROGRAM_ID&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_RESULT_CODE'>/** The key for a bundle parameter containing the result code of a method call as an integer.
+</span>
+ @see #RESULT_OK
+ @see #RESULT_ERROR_IO
+ @see #RESULT_ERROR_INVALID_ARGUMENT
+ @hide
+*/
+EXTRA_RESULT_CODE : &quot;android.media.tv.extra.RESULT_CODE&quot;,
+<span id='android-media-tv-TvContract-property-RESULT_OK'>/** The result code for a successful execution without error.
+</span> @hide
+*/
+RESULT_OK : &quot;0&quot;,
+<span id='android-media-tv-TvContract-property-RESULT_ERROR_IO'>/** The result code for a failure from I/O operation.
+</span> @hide
+*/
+RESULT_ERROR_IO : &quot;1&quot;,
+<span id='android-media-tv-TvContract-property-RESULT_ERROR_INVALID_ARGUMENT'>/** The result code for a failure from invalid argument.
+</span> @hide
+*/
+RESULT_ERROR_INVALID_ARGUMENT : &quot;2&quot;,
+<span id='android-media-tv-TvContract-property-METHOD_GET_COLUMNS'>/** The method name to get existing columns in the given table of the specified content provider.
+</span>
+ &lt;p&gt;The method caller must provide the following parameter:
+ &lt;ul&gt;
+     &lt;li&gt;{@code arg}: The content URI of the target table as a {@link String}.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;On success, the returned {@link android.os.Bundle} will include existing column names
+ with the key {@link #EXTRA_EXISTING_COLUMN_NAMES}. Otherwise, the return value will be {@code null}.
+
+ @see ContentResolver#call(Uri, String, String, Bundle)
+ @see #EXTRA_EXISTING_COLUMN_NAMES
+ @hide
+*/
+METHOD_GET_COLUMNS : &quot;get_columns&quot;,
+<span id='android-media-tv-TvContract-property-METHOD_ADD_COLUMN'>/** The method name to add a new column in the given table of the specified content provider.
+</span>
+ &lt;p&gt;The method caller must provide the following parameter:
+ &lt;ul&gt;
+     &lt;li&gt;{@code arg}: The content URI of the target table as a {@link String}.&lt;/li&gt;
+     &lt;li&gt;{@code extra}: Name, data type, and default value of the new column in a Bundle:
+         &lt;ul&gt;
+             &lt;li&gt;{@link #EXTRA_COLUMN_NAME} the column name as a {@link String}.&lt;/li&gt;
+             &lt;li&gt;{@link #EXTRA_DATA_TYPE} the data type as a {@link String}.&lt;/li&gt;
+             &lt;li&gt;{@link #EXTRA_DEFAULT_VALUE} the default value as a {@link String}.
+                 (optional)&lt;/li&gt;
+         &lt;/ul&gt;
+     &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;On success, the returned {@link android.os.Bundle} will include current colum names after
+ the addition operation with the key {@link #EXTRA_EXISTING_COLUMN_NAMES}. Otherwise, the
+ return value will be {@code null}.
+
+ @see ContentResolver#call(Uri, String, String, Bundle)
+ @see #EXTRA_COLUMN_NAME
+ @see #EXTRA_DATA_TYPE
+ @see #EXTRA_DEFAULT_VALUE
+ @see #EXTRA_EXISTING_COLUMN_NAMES
+ @hide
+*/
+METHOD_ADD_COLUMN : &quot;add_column&quot;,
+<span id='android-media-tv-TvContract-property-METHOD_GET_BLOCKED_PACKAGES'>/** The method name to get all the blocked packages. When a package is blocked, all the data for
+</span> preview programs/channels and watch next programs belonging to this package in the content
+ provider will be cleared. Once a package is blocked, {@link SecurityException} will be thrown
+ for all the requests to preview programs/channels and watch next programs via
+ {@link android.content.ContentProvider} from it.
+
+ &lt;p&gt;The returned {@link android.os.Bundle} will include all the blocked package names with the
+ key {@link #EXTRA_BLOCKED_PACKAGES}.
+
+ @see ContentResolver#call(Uri, String, String, Bundle)
+ @see #EXTRA_BLOCKED_PACKAGES
+ @see #METHOD_BLOCK_PACKAGE
+ @see #METHOD_UNBLOCK_PACKAGE
+ @hide
+*/
+METHOD_GET_BLOCKED_PACKAGES : &quot;get_blocked_packages&quot;,
+<span id='android-media-tv-TvContract-property-METHOD_BLOCK_PACKAGE'>/** The method name to block the access from the given package. When a package is blocked, all
+</span> the data for preview programs/channels and watch next programs belonging to this package in
+ the content provider will be cleared. Once a package is blocked, {@link SecurityException}
+ will be thrown for all the requests to preview programs/channels and watch next programs via
+ {@link android.content.ContentProvider} from it.
+
+ &lt;p&gt;The method caller must provide the following parameter:
+ &lt;ul&gt;
+     &lt;li&gt;{@code arg}: The package name to be added as blocked package {@link String}.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The returned {@link android.os.Bundle} will include an integer code denoting whether the
+ execution is successful or not with the key {@link #EXTRA_RESULT_CODE}. If {@code arg} is
+ empty, the result code will be {@link #RESULT_ERROR_INVALID_ARGUMENT}. If success, the result
+ code will be {@link #RESULT_OK}. Otherwise, the result code will be {@link #RESULT_ERROR_IO}.
+
+ @see ContentResolver#call(Uri, String, String, Bundle)
+ @see #EXTRA_RESULT_CODE
+ @see #METHOD_GET_BLOCKED_PACKAGES
+ @see #METHOD_UNBLOCK_PACKAGE
+ @hide
+*/
+METHOD_BLOCK_PACKAGE : &quot;block_package&quot;,
+<span id='android-media-tv-TvContract-property-METHOD_UNBLOCK_PACKAGE'>/** The method name to unblock the access from the given package. When a package is blocked, all
+</span> the data for preview programs/channels and watch next programs belonging to this package in
+ the content provider will be cleared. Once a package is blocked, {@link SecurityException}
+ will be thrown for all the requests to preview programs/channels and watch next programs via
+ {@link android.content.ContentProvider} from it.
+
+ &lt;p&gt;The method caller must provide the following parameter:
+ &lt;ul&gt;
+     &lt;li&gt;{@code arg}: The package name to be removed from blocked list as a {@link String}.
+     &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The returned {@link android.os.Bundle} will include an integer code denoting whether the
+ execution is successful or not with the key {@link #EXTRA_RESULT_CODE}. If {@code arg} is
+ empty, the result code will be {@link #RESULT_ERROR_INVALID_ARGUMENT}. If success, the result
+ code will be {@link #RESULT_OK}. Otherwise, the result code will be {@link #RESULT_ERROR_IO}.
+
+ @see ContentResolver#call(Uri, String, String, Bundle)
+ @see #EXTRA_RESULT_CODE
+ @see #METHOD_GET_BLOCKED_PACKAGES
+ @see #METHOD_BLOCK_PACKAGE
+ @hide
+*/
+METHOD_UNBLOCK_PACKAGE : &quot;unblock_package&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_EXISTING_COLUMN_NAMES'>/** The key for a returned {@link Bundle} value containing existing column names in the given
+</span> table as an {@link ArrayList} of {@link String}.
+
+ @see #METHOD_GET_COLUMNS
+ @see #METHOD_ADD_COLUMN
+ @hide
+*/
+EXTRA_EXISTING_COLUMN_NAMES : &quot;android.media.tv.extra.EXISTING_COLUMN_NAMES&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_COLUMN_NAME'>/** The key for a {@link Bundle} parameter containing the new column name to be added in the
+</span> given table as a non-empty {@link CharSequence}.
+
+ @see #METHOD_ADD_COLUMN
+ @hide
+*/
+EXTRA_COLUMN_NAME : &quot;android.media.tv.extra.COLUMN_NAME&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_DATA_TYPE'>/** The key for a {@link Bundle} parameter containing the data type of the new column to be added
+</span> in the given table as a non-empty {@link CharSequence}, which should be one of the following
+ values: {@code &quot;TEXT&quot;}, {@code &quot;INTEGER&quot;}, {@code &quot;REAL&quot;}, or {@code &quot;BLOB&quot;}.
+
+ @see #METHOD_ADD_COLUMN
+ @hide
+*/
+EXTRA_DATA_TYPE : &quot;android.media.tv.extra.DATA_TYPE&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_DEFAULT_VALUE'>/** The key for a {@link Bundle} parameter containing the default value of the new column to be
+</span> added in the given table as a {@link CharSequence}, which represents a valid default value
+ according to the data type provided with {@link #EXTRA_DATA_TYPE}.
+
+ @see #METHOD_ADD_COLUMN
+ @hide
+*/
+EXTRA_DEFAULT_VALUE : &quot;android.media.tv.extra.DEFAULT_VALUE&quot;,
+<span id='android-media-tv-TvContract-property-EXTRA_BLOCKED_PACKAGES'>/** The key for a returned {@link Bundle} value containing all the blocked package names as an
+</span> {@link ArrayList} of {@link String}.
+
+ @see #METHOD_GET_BLOCKED_PACKAGES
+ @hide
+*/
+EXTRA_BLOCKED_PACKAGES : &quot;android.media.tv.extra.BLOCKED_PACKAGES&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_INPUT'>/** An optional query, update or delete URI parameter that allows the caller to specify TV input
+</span> ID to filter channels.
+ @hide
+*/
+PARAM_INPUT : &quot;input&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_CHANNEL'>/** An optional query, update or delete URI parameter that allows the caller to specify channel
+</span> ID to filter programs.
+ @hide
+*/
+PARAM_CHANNEL : &quot;channel&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_START_TIME'>/** An optional query, update or delete URI parameter that allows the caller to specify start
+</span> time (in milliseconds since the epoch) to filter programs.
+ @hide
+*/
+PARAM_START_TIME : &quot;start_time&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_END_TIME'>/** An optional query, update or delete URI parameter that allows the caller to specify end time
+</span> (in milliseconds since the epoch) to filter programs.
+ @hide
+*/
+PARAM_END_TIME : &quot;end_time&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_BROWSABLE_ONLY'>/** A query, update or delete URI parameter that allows the caller to operate on all or
+</span> browsable-only channels. If set to &quot;true&quot;, the rows that contain non-browsable channels are
+ not affected.
+ @hide
+*/
+PARAM_BROWSABLE_ONLY : &quot;browsable_only&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_CANONICAL_GENRE'>/** An optional query, update or delete URI parameter that allows the caller to specify canonical
+</span> genre to filter programs.
+ @hide
+*/
+PARAM_CANONICAL_GENRE : &quot;canonical_genre&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_PREVIEW'>/** A query, update or delete URI parameter that allows the caller to operate only on preview or
+</span> non-preview channels. If set to &quot;true&quot;, the operation affects the rows for preview channels
+ only. If set to &quot;false&quot;, the operation affects the rows for non-preview channels only.
+ @hide
+*/
+PARAM_PREVIEW : &quot;preview&quot;,
+<span id='android-media-tv-TvContract-property-PARAM_PACKAGE'>/** An optional query, update or delete URI parameter that allows the caller to specify package
+</span> name to filter channels.
+ @hide
+*/
+PARAM_PACKAGE : &quot;package&quot;,
+<span id='android-media-tv-TvContract-method-buildInputId'>/**Builds an ID that uniquely identifies a TV input service.
+</span>@param {Object {ComponentName}} name The {@link ComponentName} of the TV input service to build ID for.
+@return {String} the ID for the given TV input service.
+*/
+buildInputId : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildChannelUri'>/**Builds a URI that points to a specific channel.
+</span>@param {Number} channelId The ID of the channel to point to.
+*/
+buildChannelUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildChannelUriForPassthroughInput'>/**Build a special channel URI intended to be used with pass-through inputs. (e.g. HDMI)
+</span>@param {String} inputId The ID of the pass-through input to build a channels URI for.
+@see TvInputInfo#isPassthroughInput()
+*/
+buildChannelUriForPassthroughInput : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildChannelLogoUri'>/**Builds a URI that points to a channel logo. See {@link android.media.tv.TvContract.Channels.Logo}.
+</span>@param {Number} channelId The ID of the channel whose logo is pointed to.
+*/
+buildChannelLogoUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildChannelLogoUri'>/**Builds a URI that points to a channel logo. See {@link android.media.tv.TvContract.Channels.Logo}.
+</span>@param {Object {Uri}} channelUri The URI of the channel whose logo is pointed to.
+*/
+buildChannelLogoUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildChannelsUriForInput'>/**Builds a URI that points to all channels from a given TV input.
+</span>@param {String} inputId The ID of the TV input to build a channels URI for. If {@code null}, builds a
+            URI for all the TV inputs.
+*/
+buildChannelsUriForInput : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildChannelsUriForInput'>/**Builds a URI that points to all or browsable-only channels from a given TV input.
+</span>@param {String} inputId The ID of the TV input to build a channels URI for. If {@code null}, builds a
+            URI for all the TV inputs.
+@param {Boolean} browsableOnly If set to {@code true} the URI points to only browsable channels. If set
+            to {@code false} the URI points to all channels regardless of whether they are
+            browsable or not.
+@hide 
+*/
+buildChannelsUriForInput : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildChannelsUriForInput'>/**Builds a URI that points to all or browsable-only channels which have programs with the given
+</span> genre from the given TV input.
+@param {String} inputId The ID of the TV input to build a channels URI for. If {@code null}, builds a
+            URI for all the TV inputs.
+@param {String} genre {@link Programs.Genres} to search. If {@code null}, builds a URI for all genres.
+@param {Boolean} browsableOnly If set to {@code true} the URI points to only browsable channels. If set
+            to {@code false} the URI points to all channels regardless of whether they are
+            browsable or not.
+@hide 
+*/
+buildChannelsUriForInput : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildProgramUri'>/**Builds a URI that points to a specific program.
+</span>@param {Number} programId The ID of the program to point to.
+*/
+buildProgramUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildProgramsUriForChannel'>/**Builds a URI that points to all programs on a given channel.
+</span>@param {Number} channelId The ID of the channel to return programs for.
+*/
+buildProgramsUriForChannel : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildProgramsUriForChannel'>/**Builds a URI that points to all programs on a given channel.
+</span>@param {Object {Uri}} channelUri The URI of the channel to return programs for.
+*/
+buildProgramsUriForChannel : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildProgramsUriForChannel'>/**Builds a URI that points to programs on a specific channel whose schedules overlap with the
+</span> given time frame.
+@param {Number} channelId The ID of the channel to return programs for.
+@param {Number} startTime The start time used to filter programs. The returned programs will have a
+            {@link Programs#COLUMN_END_TIME_UTC_MILLIS} that is greater than or equal to
+                  {@code startTime}.
+@param {Number} endTime The end time used to filter programs. The returned programs will have
+            {@link Programs#COLUMN_START_TIME_UTC_MILLIS} that is less than or equal to
+            {@code endTime}.
+*/
+buildProgramsUriForChannel : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildProgramsUriForChannel'>/**Builds a URI that points to programs on a specific channel whose schedules overlap with the
+</span> given time frame.
+@param {Object {Uri}} channelUri The URI of the channel to return programs for.
+@param {Number} startTime The start time used to filter programs. The returned programs should have
+            {@link Programs#COLUMN_END_TIME_UTC_MILLIS} that is greater than this time.
+@param {Number} endTime The end time used to filter programs. The returned programs should have
+            {@link Programs#COLUMN_START_TIME_UTC_MILLIS} that is less than this time.
+*/
+buildProgramsUriForChannel : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildRecordedProgramUri'>/**Builds a URI that points to a specific recorded program.
+</span>@param {Number} recordedProgramId The ID of the recorded program to point to.
+*/
+buildRecordedProgramUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildPreviewProgramUri'>/**Builds a URI that points to a specific preview program.
+</span>@param {Number} previewProgramId The ID of the preview program to point to.
+*/
+buildPreviewProgramUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildPreviewProgramsUriForChannel'>/**Builds a URI that points to all preview programs on a given channel.
+</span>@param {Number} channelId The ID of the channel to return preview programs for.
+*/
+buildPreviewProgramsUriForChannel : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildPreviewProgramsUriForChannel'>/**Builds a URI that points to all preview programs on a given channel.
+</span>@param {Object {Uri}} channelUri The URI of the channel to return preview programs for.
+*/
+buildPreviewProgramsUriForChannel : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildWatchNextProgramUri'>/**Builds a URI that points to a specific watch next program.
+</span>@param {Number} watchNextProgramId The ID of the watch next program to point to.
+*/
+buildWatchNextProgramUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-buildWatchedProgramUri'>/**Builds a URI that points to a specific program the user watched.
+</span>@param {Number} watchedProgramId The ID of the watched program to point to.
+@hide 
+*/
+buildWatchedProgramUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-isChannelUri'>/**
+</span>@return {Boolean} {@code true} if {@code uri} is a channel URI.
+*/
+isChannelUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-isChannelUriForTunerInput'>/**
+</span>@return {Boolean} {@code true} if {@code uri} is a channel URI for a tuner input.
+*/
+isChannelUriForTunerInput : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-isChannelUriForPassthroughInput'>/**
+</span>@return {Boolean} {@code true} if {@code uri} is a channel URI for a pass-through input.
+*/
+isChannelUriForPassthroughInput : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-isProgramUri'>/**
+</span>@return {Boolean} {@code true} if {@code uri} is a program URI.
+*/
+isProgramUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-isRecordedProgramUri'>/**
+</span>@return {Boolean} {@code true} if {@code uri} is a recorded program URI.
+*/
+isRecordedProgramUri : function(  ) {},
+
+<span id='android-media-tv-TvContract-method-requestChannelBrowsable'>/**Requests to make a channel browsable.
+</span>
+ &lt;p&gt;Once called, the system will review the request and make the channel browsable based on
+ its policy. The first request from a package is guaranteed to be approved. This is only
+ relevant to channels with {@link android.media.tv.TvContract.Channels#TYPE_PREVIEW} type.
+@param {Object {Context}} context The context for accessing content provider.
+@param {Number} channelId The channel ID to be browsable.
+@see Channels#COLUMN_BROWSABLE
+*/
+requestChannelBrowsable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

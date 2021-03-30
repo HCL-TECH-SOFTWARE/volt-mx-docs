@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-metrics-TelephonyMetrics'>/**@class com.android.internal.telephony.metrics.TelephonyMetrics
+</span>@extends java.lang.Object
+
+ Telephony metrics holds all metrics events and convert it into telephony proto buf.
+ @hide
+*/
+var TelephonyMetrics = {
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-getInstance'>/**Get the singleton instance of telephony metrics.
+</span>@return {Object {com.android.internal.telephony.metrics.TelephonyMetrics}} The instance
+*/
+getInstance : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-dump'>/**Dump the state of various objects, add calls to other objects as desired.
+</span>@param {Object {FileDescriptor}} fd File descriptor
+@param {Object {PrintWriter}} pw Print writer
+@param {Object {java.lang.String[]}} args Arguments
+*/
+dump : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-updateSimState'>/**Update the sim state.
+</span>*/
+updateSimState : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-updateActiveSubscriptionInfoList'>/**Update active subscription info list.
+</span>*/
+updateActiveSubscriptionInfoList : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-updateEnabledModemBitmap'>/**Update the enabled modem bitmap.
+</span>*/
+updateEnabledModemBitmap : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeCarrierKeyEvent'>/**Write the Carrier Key change event
+</span>@param {Number} phoneId Phone id
+@param {Number} keyType type of key
+@param {Boolean} isDownloadSuccessful true if the key was successfully downloaded
+*/
+writeCarrierKeyEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeServiceStateChanged'>/**Write service changed event
+</span>@param {Number} phoneId Phone id
+@param {Object {ServiceState}} serviceState Service state
+*/
+writeServiceStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeDataStallEvent'>/**Write data stall event
+</span>@param {Number} phoneId Phone id
+@param {Number} recoveryAction Data stall recovery action
+*/
+writeDataStallEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeImsSetFeatureValue'>/**Write IMS feature settings changed event
+</span>@param {Number} phoneId Phone id
+@param {Number} feature IMS feature
+@param {Number} network The IMS network type
+@param {Number} value The settings. 0 indicates disabled, otherwise enabled.
+*/
+writeImsSetFeatureValue : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeSetPreferredNetworkType'>/**Write the preferred network settings changed event
+</span>@param {Number} phoneId Phone id
+@param {Number} networkType The preferred network
+*/
+writeSetPreferredNetworkType : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsConnectionState'>/**Write the IMS connection state changed event
+</span>@param {Number} phoneId Phone id
+@param {Number} state IMS connection state
+@param {Object {ImsReasonInfo}} reasonInfo The reason info. Only used for disconnected state.
+*/
+writeOnImsConnectionState : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCapabilities'>/**Write the IMS capabilities changed event
+</span>@param {Number} phoneId Phone id
+@param {Number} capabilities IMS capabilities array
+*/
+writeOnImsCapabilities : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeSetupDataCall'>/**Write setup data call event
+</span>@param {Number} phoneId Phone id
+@param {Number} radioTechnology The data call RAT
+@param {Number} profileId Data profile id
+@param {String} apn APN in string
+@param {Number} protocol Data connection protocol
+*/
+writeSetupDataCall : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilDeactivateDataCall'>/**Write data call deactivate event
+</span>@param {Number} phoneId Phone id
+@param {Number} rilSerial RIL request serial number
+@param {Number} cid call id
+@param {Number} reason Deactivate reason
+*/
+writeRilDeactivateDataCall : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilDataCallEvent'>/**Write data call list event when connected
+</span>@param {Number} phoneId          Phone id
+@param {Number} cid              Context Id, uniquely identifies the call
+@param {Number} apnTypeBitmask   Bitmask of supported APN types
+@param {Number} state            State of the data call event
+*/
+writeRilDataCallEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilCallList'>/**Write CS call list event
+</span>@param {Number} phoneId    Phone id
+@param {Object {java.util.ArrayList}} connections Array of GsmCdmaConnection objects
+*/
+writeRilCallList : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilDial'>/**Write dial event
+</span>@param {Number} phoneId Phone id
+@param {Object {GsmCdmaConnection}} conn Connection object created to track this call
+@param {Number} clirMode CLIR (Calling Line Identification Restriction) mode
+@param {Object {UUSInfo}} uusInfo User-to-User signaling Info
+*/
+writeRilDial : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilCallRing'>/**Write incoming call event
+</span>@param {Number} phoneId Phone id
+@param {Object {char[]}} response Unused today
+*/
+writeRilCallRing : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilHangup'>/**Write call hangup event
+</span>@param {Number} phoneId Phone id
+@param {Object {GsmCdmaConnection}} conn Connection object associated with the call that is being hung-up
+@param {Number} callId Call id
+*/
+writeRilHangup : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilAnswer'>/**Write call answer event
+</span>@param {Number} phoneId Phone id
+@param {Number} rilSerial RIL request serial number
+*/
+writeRilAnswer : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilSrvcc'>/**Write IMS call SRVCC event
+</span>@param {Number} phoneId Phone id
+@param {Number} rilSrvccState SRVCC state
+*/
+writeRilSrvcc : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsServiceSmsSolicitedResponse'>/**Write SMS related solicited response event
+</span>@param {Number} phoneId Phone id
+@param {Number} errorReason Defined in {@link SmsManager} RESULT_XXX.
+*/
+writeOnImsServiceSmsSolicitedResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnRilSolicitedResponse'>/**Write RIL solicited response event
+</span>@param {Number} phoneId Phone id
+@param {Number} rilSerial RIL request serial number
+@param {Number} rilError RIL error
+@param {Number} rilRequest RIL request
+@param {Object {Object}} ret The returned RIL response
+*/
+writeOnRilSolicitedResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeNetworkValidate'>/**Write network validation event.
+</span>@param {Number} networkValidationState the network validation state.
+*/
+writeNetworkValidate : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeDataSwitch'>/**Write data switch event.
+</span>@param {Number} subId data switch to the subscription with this id.
+@param {Object {DataSwitch}} dataSwitch the reason and state of data switch.
+*/
+writeDataSwitch : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnDemandDataSwitch'>/**Write on demand data switch event.
+</span>@param {Object {OnDemandDataSwitch}} onDemandDataSwitch the apn and state of on demand data switch.
+*/
+writeOnDemandDataSwitch : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writePhoneState'>/**Write phone state changed event
+</span>@param {Number} phoneId Phone id
+@param {Object {PhoneConstants.State}} phoneState Phone state. See PhoneConstants.State for the details.
+*/
+writePhoneState : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeImsCallState'>/**Write IMS call state changed event
+</span>@param {Number} phoneId Phone id
+@param {Object {ImsCallSession}} session IMS call session
+@param {Object {Call.State}} callState IMS call state
+*/
+writeImsCallState : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallStart'>/**Write IMS call start event
+</span>@param {Number} phoneId Phone id
+@param {Object {ImsCallSession}} session IMS call session
+*/
+writeOnImsCallStart : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallReceive'>/**Write IMS incoming call event
+</span>@param {Number} phoneId Phone id
+@param {Object {ImsCallSession}} session IMS call session
+*/
+writeOnImsCallReceive : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCommand'>/**Write IMS command event
+</span>@param {Number} phoneId Phone id
+@param {Object {ImsCallSession}} session IMS call session
+@param {Number} command IMS command
+*/
+writeOnImsCommand : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-toCallQualityProto'>/**Convert CallQuality to proto.
+</span>@param {Object {CallQuality}} callQuality call quality to convert
+@return {Object {TelephonyCallSession.Event.CallQuality}} Coverted proto
+*/
+toCallQualityProto : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallTerminated'>/**Write IMS call end event
+</span>@param {Number} phoneId Phone id
+@param {Object {ImsCallSession}} session IMS call session
+@param {Object {ImsReasonInfo}} reasonInfo Call end reason
+*/
+writeOnImsCallTerminated : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallHandoverEvent'>/**Write IMS call hangover event
+</span>@param {Number} phoneId Phone id
+@param {Number} eventType hangover type
+@param {Object {ImsCallSession}} session IMS call session
+@param {Number} srcAccessTech Hangover starting RAT
+@param {Number} targetAccessTech Hangover destination RAT
+@param {Object {ImsReasonInfo}} reasonInfo Hangover reason
+*/
+writeOnImsCallHandoverEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeRilSendSms'>/**Write Send SMS event
+</span>@param {Number} phoneId Phone id
+@param {Number} rilSerial RIL request serial number
+@param {Number} tech SMS RAT
+@param {Number} format SMS format. Either 3GPP or 3GPP2.
+*/
+writeRilSendSms : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeImsServiceSendSms'>/**Write Send SMS event using ImsService. Expecting response from
+</span> {@link #writeOnSmsSolicitedResponse}.
+@param {Number} phoneId Phone id
+@param {String} format SMS format. Either {@link SmsMessage#FORMAT_3GPP} or
+         {@link SmsMessage#FORMAT_3GPP2}.
+@param {Number} resultCode The result of sending the new SMS to the vendor layer to be sent to the
+         carrier network.
+*/
+writeImsServiceSendSms : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeNewCBSms'>/**Write incoming Broadcast SMS event
+</span>@param {Number} phoneId Phone id
+@param {Number} format CB msg format
+@param {Number} priority CB msg priority
+@param {Boolean} isCMAS true if msg is CMAS
+@param {Boolean} isETWS true if msg is ETWS
+@param {Number} serviceCategory Service category of CB msg
+@param {Number} serialNumber Serial number of the message
+@param {Number} deliveredTimestamp Message's delivered timestamp
+*/
+writeNewCBSms : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeDroppedIncomingMultipartSms'>/**Write an incoming multi-part SMS that was discarded because some parts were missing
+</span>@param {Number} phoneId Phone id
+@param {String} format SMS format. Either 3GPP or 3GPP2.
+@param {Number} receivedCount Number of received parts.
+@param {Number} totalCount Total number of parts of the SMS.
+*/
+writeDroppedIncomingMultipartSms : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeIncomingSMSPP'>/**Write an incoming SMS-PP for the USIM
+</span>@param {Number} phoneId Phone id
+@param {String} format SMS format. Either 3GPP or 3GPP2.
+@param {Boolean} success Indicates if the SMS-PP was successfully delivered to the USIM.
+*/
+writeIncomingSMSPP : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeIncomingVoiceMailSms'>/**Write an incoming SMS to update voicemail indicator
+</span>@param {Number} phoneId Phone id
+@param {String} format SMS format. Either 3GPP or 3GPP2.
+*/
+writeIncomingVoiceMailSms : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeIncomingSmsTypeZero'>/**Write an incoming SMS of type 0
+</span>@param {Number} phoneId Phone id
+@param {String} format SMS format. Either 3GPP or 3GPP2.
+*/
+writeIncomingSmsTypeZero : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeIncomingWapPush'>/**Write an incoming WAP-PUSH message.
+</span>@param {Number} phoneId Phone id
+@param {Boolean} smsOverIms true if the SMS was received over SMS, false otherwise
+@param {String} format SMS format. Either 3GPP or 3GPP2.
+@param {Object {long[]}} timestamps array with timestamps of each incoming SMS part. It contains a single
+@param {Boolean} success Indicates if the SMS-PP was successfully delivered to the USIM.
+*/
+writeIncomingWapPush : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeIncomingSmsSession'>/**Write a successful incoming SMS session
+</span>@param {Number} phoneId Phone id
+@param {Boolean} smsOverIms true if the SMS was received over SMS, false otherwise
+@param {String} format SMS format. Either 3GPP or 3GPP2.
+@param {Object {long[]}} timestamps array with timestamps of each incoming SMS part. It contains a single
+@param {Boolean} blocked indicates if the message was blocked or not.
+*/
+writeIncomingSmsSession : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeIncomingSmsError'>/**Write an error incoming SMS
+</span>@param {Number} phoneId Phone id
+@param {Boolean} smsOverIms true if the SMS was received over SMS, false otherwise
+@param {Number} result Indicates the reason of the failure.
+*/
+writeIncomingSmsError : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeNITZEvent'>/**Write NITZ event
+</span>@param {Number} phoneId Phone id
+@param {Number} timestamp NITZ time in milliseconds
+*/
+writeNITZEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeModemRestartEvent'>/**Write Modem Restart event
+</span>@param {Number} phoneId Phone id
+@param {String} reason Reason for the modem reset.
+*/
+writeModemRestartEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeCarrierIdMatchingEvent'>/**Write carrier identification matching event
+</span>@param {Number} phoneId Phone id
+@param {Number} version Carrier table version
+@param {Number} cid Unique Carrier Id
+@param {String} unknownMcmnc MCC and MNC that map to this carrier
+@param {String} unknownGid1 Group id level 1
+@param {Object {CarrierResolver.CarrierMatchingRule}} simInfo Subscription info
+*/
+writeCarrierIdMatchingEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeEmergencyNumberUpdateEvent'>/**Write emergency number update event
+</span>@param {Number} emergencyNumber Updated emergency number
+*/
+writeEmergencyNumberUpdateEvent : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeAudioCodecIms'>/**Write audio codec event
+</span>@param {Number} phoneId Phone id
+@param {Object {ImsCallSession}} session IMS call session
+*/
+writeAudioCodecIms : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeAudioCodecGsmCdma'>/**Write audio codec event
+</span>@param {Number} phoneId Phone id
+@param {Number} audioQuality Audio quality value
+*/
+writeAudioCodecGsmCdma : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallProgressing'>/**
+</span>*/
+writeOnImsCallProgressing : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallStarted'>/**
+</span>*/
+writeOnImsCallStarted : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallStartFailed'>/**
+</span>*/
+writeOnImsCallStartFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallHeld'>/**
+</span>*/
+writeOnImsCallHeld : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallHoldReceived'>/**
+</span>*/
+writeOnImsCallHoldReceived : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallHoldFailed'>/**
+</span>*/
+writeOnImsCallHoldFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallResumed'>/**
+</span>*/
+writeOnImsCallResumed : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallResumeReceived'>/**
+</span>*/
+writeOnImsCallResumeReceived : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnImsCallResumeFailed'>/**
+</span>*/
+writeOnImsCallResumeFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-metrics-TelephonyMetrics-method-writeOnRilTimeoutResponse'>/**
+</span>*/
+writeOnRilTimeoutResponse : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

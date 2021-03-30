@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-opengl-GLES32'>/**@class android.opengl.GLES32
+</span>@extends android.opengl.GLES31
+
+OpenGL ES 3.2
+*/
+var GLES32 = {
+
+<span id='android-opengl-GLES32-property-GL_CONTEXT_FLAG_DEBUG_BIT'>/***/
+</span>GL_CONTEXT_FLAG_DEBUG_BIT : &quot;2&quot;,
+<span id='android-opengl-GLES32-property-GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT'>/***/
+</span>GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT : &quot;4&quot;,
+<span id='android-opengl-GLES32-property-GL_GEOMETRY_SHADER_BIT'>/***/
+</span>GL_GEOMETRY_SHADER_BIT : &quot;4&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_CONTROL_SHADER_BIT'>/***/
+</span>GL_TESS_CONTROL_SHADER_BIT : &quot;8&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_EVALUATION_SHADER_BIT'>/***/
+</span>GL_TESS_EVALUATION_SHADER_BIT : &quot;16&quot;,
+<span id='android-opengl-GLES32-property-GL_QUADS'>/***/
+</span>GL_QUADS : &quot;7&quot;,
+<span id='android-opengl-GLES32-property-GL_LINES_ADJACENCY'>/***/
+</span>GL_LINES_ADJACENCY : &quot;10&quot;,
+<span id='android-opengl-GLES32-property-GL_LINE_STRIP_ADJACENCY'>/***/
+</span>GL_LINE_STRIP_ADJACENCY : &quot;11&quot;,
+<span id='android-opengl-GLES32-property-GL_TRIANGLES_ADJACENCY'>/***/
+</span>GL_TRIANGLES_ADJACENCY : &quot;12&quot;,
+<span id='android-opengl-GLES32-property-GL_TRIANGLE_STRIP_ADJACENCY'>/***/
+</span>GL_TRIANGLE_STRIP_ADJACENCY : &quot;13&quot;,
+<span id='android-opengl-GLES32-property-GL_PATCHES'>/***/
+</span>GL_PATCHES : &quot;14&quot;,
+<span id='android-opengl-GLES32-property-GL_STACK_OVERFLOW'>/***/
+</span>GL_STACK_OVERFLOW : &quot;1283&quot;,
+<span id='android-opengl-GLES32-property-GL_STACK_UNDERFLOW'>/***/
+</span>GL_STACK_UNDERFLOW : &quot;1284&quot;,
+<span id='android-opengl-GLES32-property-GL_CONTEXT_LOST'>/***/
+</span>GL_CONTEXT_LOST : &quot;1287&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BORDER_COLOR'>/***/
+</span>GL_TEXTURE_BORDER_COLOR : &quot;4100&quot;,
+<span id='android-opengl-GLES32-property-GL_VERTEX_ARRAY'>/***/
+</span>GL_VERTEX_ARRAY : &quot;32884&quot;,
+<span id='android-opengl-GLES32-property-GL_CLAMP_TO_BORDER'>/***/
+</span>GL_CLAMP_TO_BORDER : &quot;33069&quot;,
+<span id='android-opengl-GLES32-property-GL_CONTEXT_FLAGS'>/***/
+</span>GL_CONTEXT_FLAGS : &quot;33310&quot;,
+<span id='android-opengl-GLES32-property-GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED'>/***/
+</span>GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED : &quot;33313&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_OUTPUT_SYNCHRONOUS'>/***/
+</span>GL_DEBUG_OUTPUT_SYNCHRONOUS : &quot;33346&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH'>/***/
+</span>GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH : &quot;33347&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_CALLBACK_FUNCTION'>/***/
+</span>GL_DEBUG_CALLBACK_FUNCTION : &quot;33348&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_CALLBACK_USER_PARAM'>/***/
+</span>GL_DEBUG_CALLBACK_USER_PARAM : &quot;33349&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SOURCE_API'>/***/
+</span>GL_DEBUG_SOURCE_API : &quot;33350&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SOURCE_WINDOW_SYSTEM'>/***/
+</span>GL_DEBUG_SOURCE_WINDOW_SYSTEM : &quot;33351&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SOURCE_SHADER_COMPILER'>/***/
+</span>GL_DEBUG_SOURCE_SHADER_COMPILER : &quot;33352&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SOURCE_THIRD_PARTY'>/***/
+</span>GL_DEBUG_SOURCE_THIRD_PARTY : &quot;33353&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SOURCE_APPLICATION'>/***/
+</span>GL_DEBUG_SOURCE_APPLICATION : &quot;33354&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SOURCE_OTHER'>/***/
+</span>GL_DEBUG_SOURCE_OTHER : &quot;33355&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_ERROR'>/***/
+</span>GL_DEBUG_TYPE_ERROR : &quot;33356&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR'>/***/
+</span>GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR : &quot;33357&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR'>/***/
+</span>GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR : &quot;33358&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_PORTABILITY'>/***/
+</span>GL_DEBUG_TYPE_PORTABILITY : &quot;33359&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_PERFORMANCE'>/***/
+</span>GL_DEBUG_TYPE_PERFORMANCE : &quot;33360&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_OTHER'>/***/
+</span>GL_DEBUG_TYPE_OTHER : &quot;33361&quot;,
+<span id='android-opengl-GLES32-property-GL_LOSE_CONTEXT_ON_RESET'>/***/
+</span>GL_LOSE_CONTEXT_ON_RESET : &quot;33362&quot;,
+<span id='android-opengl-GLES32-property-GL_GUILTY_CONTEXT_RESET'>/***/
+</span>GL_GUILTY_CONTEXT_RESET : &quot;33363&quot;,
+<span id='android-opengl-GLES32-property-GL_INNOCENT_CONTEXT_RESET'>/***/
+</span>GL_INNOCENT_CONTEXT_RESET : &quot;33364&quot;,
+<span id='android-opengl-GLES32-property-GL_UNKNOWN_CONTEXT_RESET'>/***/
+</span>GL_UNKNOWN_CONTEXT_RESET : &quot;33365&quot;,
+<span id='android-opengl-GLES32-property-GL_RESET_NOTIFICATION_STRATEGY'>/***/
+</span>GL_RESET_NOTIFICATION_STRATEGY : &quot;33366&quot;,
+<span id='android-opengl-GLES32-property-GL_LAYER_PROVOKING_VERTEX'>/***/
+</span>GL_LAYER_PROVOKING_VERTEX : &quot;33374&quot;,
+<span id='android-opengl-GLES32-property-GL_UNDEFINED_VERTEX'>/***/
+</span>GL_UNDEFINED_VERTEX : &quot;33376&quot;,
+<span id='android-opengl-GLES32-property-GL_NO_RESET_NOTIFICATION'>/***/
+</span>GL_NO_RESET_NOTIFICATION : &quot;33377&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_MARKER'>/***/
+</span>GL_DEBUG_TYPE_MARKER : &quot;33384&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_PUSH_GROUP'>/***/
+</span>GL_DEBUG_TYPE_PUSH_GROUP : &quot;33385&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_TYPE_POP_GROUP'>/***/
+</span>GL_DEBUG_TYPE_POP_GROUP : &quot;33386&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SEVERITY_NOTIFICATION'>/***/
+</span>GL_DEBUG_SEVERITY_NOTIFICATION : &quot;33387&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_DEBUG_GROUP_STACK_DEPTH'>/***/
+</span>GL_MAX_DEBUG_GROUP_STACK_DEPTH : &quot;33388&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_GROUP_STACK_DEPTH'>/***/
+</span>GL_DEBUG_GROUP_STACK_DEPTH : &quot;33389&quot;,
+<span id='android-opengl-GLES32-property-GL_BUFFER'>/***/
+</span>GL_BUFFER : &quot;33504&quot;,
+<span id='android-opengl-GLES32-property-GL_SHADER'>/***/
+</span>GL_SHADER : &quot;33505&quot;,
+<span id='android-opengl-GLES32-property-GL_PROGRAM'>/***/
+</span>GL_PROGRAM : &quot;33506&quot;,
+<span id='android-opengl-GLES32-property-GL_QUERY'>/***/
+</span>GL_QUERY : &quot;33507&quot;,
+<span id='android-opengl-GLES32-property-GL_PROGRAM_PIPELINE'>/***/
+</span>GL_PROGRAM_PIPELINE : &quot;33508&quot;,
+<span id='android-opengl-GLES32-property-GL_SAMPLER'>/***/
+</span>GL_SAMPLER : &quot;33510&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_LABEL_LENGTH'>/***/
+</span>GL_MAX_LABEL_LENGTH : &quot;33512&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_INPUT_COMPONENTS'>/***/
+</span>GL_MAX_TESS_CONTROL_INPUT_COMPONENTS : &quot;34924&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS'>/***/
+</span>GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS : &quot;34925&quot;,
+<span id='android-opengl-GLES32-property-GL_GEOMETRY_SHADER_INVOCATIONS'>/***/
+</span>GL_GEOMETRY_SHADER_INVOCATIONS : &quot;34943&quot;,
+<span id='android-opengl-GLES32-property-GL_GEOMETRY_VERTICES_OUT'>/***/
+</span>GL_GEOMETRY_VERTICES_OUT : &quot;35094&quot;,
+<span id='android-opengl-GLES32-property-GL_GEOMETRY_INPUT_TYPE'>/***/
+</span>GL_GEOMETRY_INPUT_TYPE : &quot;35095&quot;,
+<span id='android-opengl-GLES32-property-GL_GEOMETRY_OUTPUT_TYPE'>/***/
+</span>GL_GEOMETRY_OUTPUT_TYPE : &quot;35096&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_UNIFORM_BLOCKS'>/***/
+</span>GL_MAX_GEOMETRY_UNIFORM_BLOCKS : &quot;35372&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS'>/***/
+</span>GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS : &quot;35378&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS'>/***/
+</span>GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS : &quot;35881&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BUFFER'>/***/
+</span>GL_TEXTURE_BUFFER : &quot;35882&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BUFFER_BINDING'>/***/
+</span>GL_TEXTURE_BUFFER_BINDING : &quot;35882&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TEXTURE_BUFFER_SIZE'>/***/
+</span>GL_MAX_TEXTURE_BUFFER_SIZE : &quot;35883&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BINDING_BUFFER'>/***/
+</span>GL_TEXTURE_BINDING_BUFFER : &quot;35884&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BUFFER_DATA_STORE_BINDING'>/***/
+</span>GL_TEXTURE_BUFFER_DATA_STORE_BINDING : &quot;35885&quot;,
+<span id='android-opengl-GLES32-property-GL_SAMPLE_SHADING'>/***/
+</span>GL_SAMPLE_SHADING : &quot;35894&quot;,
+<span id='android-opengl-GLES32-property-GL_MIN_SAMPLE_SHADING_VALUE'>/***/
+</span>GL_MIN_SAMPLE_SHADING_VALUE : &quot;35895&quot;,
+<span id='android-opengl-GLES32-property-GL_PRIMITIVES_GENERATED'>/***/
+</span>GL_PRIMITIVES_GENERATED : &quot;35975&quot;,
+<span id='android-opengl-GLES32-property-GL_FRAMEBUFFER_ATTACHMENT_LAYERED'>/***/
+</span>GL_FRAMEBUFFER_ATTACHMENT_LAYERED : &quot;36263&quot;,
+<span id='android-opengl-GLES32-property-GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS'>/***/
+</span>GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS : &quot;36264&quot;,
+<span id='android-opengl-GLES32-property-GL_SAMPLER_BUFFER'>/***/
+</span>GL_SAMPLER_BUFFER : &quot;36290&quot;,
+<span id='android-opengl-GLES32-property-GL_INT_SAMPLER_BUFFER'>/***/
+</span>GL_INT_SAMPLER_BUFFER : &quot;36304&quot;,
+<span id='android-opengl-GLES32-property-GL_UNSIGNED_INT_SAMPLER_BUFFER'>/***/
+</span>GL_UNSIGNED_INT_SAMPLER_BUFFER : &quot;36312&quot;,
+<span id='android-opengl-GLES32-property-GL_GEOMETRY_SHADER'>/***/
+</span>GL_GEOMETRY_SHADER : &quot;36313&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_UNIFORM_COMPONENTS'>/***/
+</span>GL_MAX_GEOMETRY_UNIFORM_COMPONENTS : &quot;36319&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_OUTPUT_VERTICES'>/***/
+</span>GL_MAX_GEOMETRY_OUTPUT_VERTICES : &quot;36320&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS'>/***/
+</span>GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS : &quot;36321&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS'>/***/
+</span>GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS : &quot;36382&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS'>/***/
+</span>GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS : &quot;36383&quot;,
+<span id='android-opengl-GLES32-property-GL_FIRST_VERTEX_CONVENTION'>/***/
+</span>GL_FIRST_VERTEX_CONVENTION : &quot;36429&quot;,
+<span id='android-opengl-GLES32-property-GL_LAST_VERTEX_CONVENTION'>/***/
+</span>GL_LAST_VERTEX_CONVENTION : &quot;36430&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_SHADER_INVOCATIONS'>/***/
+</span>GL_MAX_GEOMETRY_SHADER_INVOCATIONS : &quot;36442&quot;,
+<span id='android-opengl-GLES32-property-GL_MIN_FRAGMENT_INTERPOLATION_OFFSET'>/***/
+</span>GL_MIN_FRAGMENT_INTERPOLATION_OFFSET : &quot;36443&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_FRAGMENT_INTERPOLATION_OFFSET'>/***/
+</span>GL_MAX_FRAGMENT_INTERPOLATION_OFFSET : &quot;36444&quot;,
+<span id='android-opengl-GLES32-property-GL_FRAGMENT_INTERPOLATION_OFFSET_BITS'>/***/
+</span>GL_FRAGMENT_INTERPOLATION_OFFSET_BITS : &quot;36445&quot;,
+<span id='android-opengl-GLES32-property-GL_PATCH_VERTICES'>/***/
+</span>GL_PATCH_VERTICES : &quot;36466&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_CONTROL_OUTPUT_VERTICES'>/***/
+</span>GL_TESS_CONTROL_OUTPUT_VERTICES : &quot;36469&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_GEN_MODE'>/***/
+</span>GL_TESS_GEN_MODE : &quot;36470&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_GEN_SPACING'>/***/
+</span>GL_TESS_GEN_SPACING : &quot;36471&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_GEN_VERTEX_ORDER'>/***/
+</span>GL_TESS_GEN_VERTEX_ORDER : &quot;36472&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_GEN_POINT_MODE'>/***/
+</span>GL_TESS_GEN_POINT_MODE : &quot;36473&quot;,
+<span id='android-opengl-GLES32-property-GL_ISOLINES'>/***/
+</span>GL_ISOLINES : &quot;36474&quot;,
+<span id='android-opengl-GLES32-property-GL_FRACTIONAL_ODD'>/***/
+</span>GL_FRACTIONAL_ODD : &quot;36475&quot;,
+<span id='android-opengl-GLES32-property-GL_FRACTIONAL_EVEN'>/***/
+</span>GL_FRACTIONAL_EVEN : &quot;36476&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_PATCH_VERTICES'>/***/
+</span>GL_MAX_PATCH_VERTICES : &quot;36477&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_GEN_LEVEL'>/***/
+</span>GL_MAX_TESS_GEN_LEVEL : &quot;36478&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS'>/***/
+</span>GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS : &quot;36479&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS'>/***/
+</span>GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS : &quot;36480&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS'>/***/
+</span>GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS : &quot;36481&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS'>/***/
+</span>GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS : &quot;36482&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS'>/***/
+</span>GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS : &quot;36483&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_PATCH_COMPONENTS'>/***/
+</span>GL_MAX_TESS_PATCH_COMPONENTS : &quot;36484&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS'>/***/
+</span>GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS : &quot;36485&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS'>/***/
+</span>GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS : &quot;36486&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_EVALUATION_SHADER'>/***/
+</span>GL_TESS_EVALUATION_SHADER : &quot;36487&quot;,
+<span id='android-opengl-GLES32-property-GL_TESS_CONTROL_SHADER'>/***/
+</span>GL_TESS_CONTROL_SHADER : &quot;36488&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS'>/***/
+</span>GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS : &quot;36489&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS'>/***/
+</span>GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS : &quot;36490&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_CUBE_MAP_ARRAY'>/***/
+</span>GL_TEXTURE_CUBE_MAP_ARRAY : &quot;36873&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BINDING_CUBE_MAP_ARRAY'>/***/
+</span>GL_TEXTURE_BINDING_CUBE_MAP_ARRAY : &quot;36874&quot;,
+<span id='android-opengl-GLES32-property-GL_SAMPLER_CUBE_MAP_ARRAY'>/***/
+</span>GL_SAMPLER_CUBE_MAP_ARRAY : &quot;36876&quot;,
+<span id='android-opengl-GLES32-property-GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW'>/***/
+</span>GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW : &quot;36877&quot;,
+<span id='android-opengl-GLES32-property-GL_INT_SAMPLER_CUBE_MAP_ARRAY'>/***/
+</span>GL_INT_SAMPLER_CUBE_MAP_ARRAY : &quot;36878&quot;,
+<span id='android-opengl-GLES32-property-GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY'>/***/
+</span>GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY : &quot;36879&quot;,
+<span id='android-opengl-GLES32-property-GL_IMAGE_BUFFER'>/***/
+</span>GL_IMAGE_BUFFER : &quot;36945&quot;,
+<span id='android-opengl-GLES32-property-GL_IMAGE_CUBE_MAP_ARRAY'>/***/
+</span>GL_IMAGE_CUBE_MAP_ARRAY : &quot;36948&quot;,
+<span id='android-opengl-GLES32-property-GL_INT_IMAGE_BUFFER'>/***/
+</span>GL_INT_IMAGE_BUFFER : &quot;36956&quot;,
+<span id='android-opengl-GLES32-property-GL_INT_IMAGE_CUBE_MAP_ARRAY'>/***/
+</span>GL_INT_IMAGE_CUBE_MAP_ARRAY : &quot;36959&quot;,
+<span id='android-opengl-GLES32-property-GL_UNSIGNED_INT_IMAGE_BUFFER'>/***/
+</span>GL_UNSIGNED_INT_IMAGE_BUFFER : &quot;36967&quot;,
+<span id='android-opengl-GLES32-property-GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY'>/***/
+</span>GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY : &quot;36970&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS'>/***/
+</span>GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS : &quot;37067&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS'>/***/
+</span>GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS : &quot;37068&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_IMAGE_UNIFORMS'>/***/
+</span>GL_MAX_GEOMETRY_IMAGE_UNIFORMS : &quot;37069&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS'>/***/
+</span>GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS : &quot;37079&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS'>/***/
+</span>GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS : &quot;37080&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS'>/***/
+</span>GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS : &quot;37081&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_2D_MULTISAMPLE_ARRAY'>/***/
+</span>GL_TEXTURE_2D_MULTISAMPLE_ARRAY : &quot;37122&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY'>/***/
+</span>GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY : &quot;37125&quot;,
+<span id='android-opengl-GLES32-property-GL_SAMPLER_2D_MULTISAMPLE_ARRAY'>/***/
+</span>GL_SAMPLER_2D_MULTISAMPLE_ARRAY : &quot;37131&quot;,
+<span id='android-opengl-GLES32-property-GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY'>/***/
+</span>GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY : &quot;37132&quot;,
+<span id='android-opengl-GLES32-property-GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY'>/***/
+</span>GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY : &quot;37133&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_INPUT_COMPONENTS'>/***/
+</span>GL_MAX_GEOMETRY_INPUT_COMPONENTS : &quot;37155&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_OUTPUT_COMPONENTS'>/***/
+</span>GL_MAX_GEOMETRY_OUTPUT_COMPONENTS : &quot;37156&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_DEBUG_MESSAGE_LENGTH'>/***/
+</span>GL_MAX_DEBUG_MESSAGE_LENGTH : &quot;37187&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_DEBUG_LOGGED_MESSAGES'>/***/
+</span>GL_MAX_DEBUG_LOGGED_MESSAGES : &quot;37188&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_LOGGED_MESSAGES'>/***/
+</span>GL_DEBUG_LOGGED_MESSAGES : &quot;37189&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SEVERITY_HIGH'>/***/
+</span>GL_DEBUG_SEVERITY_HIGH : &quot;37190&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SEVERITY_MEDIUM'>/***/
+</span>GL_DEBUG_SEVERITY_MEDIUM : &quot;37191&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_SEVERITY_LOW'>/***/
+</span>GL_DEBUG_SEVERITY_LOW : &quot;37192&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BUFFER_OFFSET'>/***/
+</span>GL_TEXTURE_BUFFER_OFFSET : &quot;37277&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BUFFER_SIZE'>/***/
+</span>GL_TEXTURE_BUFFER_SIZE : &quot;37278&quot;,
+<span id='android-opengl-GLES32-property-GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT'>/***/
+</span>GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT : &quot;37279&quot;,
+<span id='android-opengl-GLES32-property-GL_MULTIPLY'>/***/
+</span>GL_MULTIPLY : &quot;37524&quot;,
+<span id='android-opengl-GLES32-property-GL_SCREEN'>/***/
+</span>GL_SCREEN : &quot;37525&quot;,
+<span id='android-opengl-GLES32-property-GL_OVERLAY'>/***/
+</span>GL_OVERLAY : &quot;37526&quot;,
+<span id='android-opengl-GLES32-property-GL_DARKEN'>/***/
+</span>GL_DARKEN : &quot;37527&quot;,
+<span id='android-opengl-GLES32-property-GL_LIGHTEN'>/***/
+</span>GL_LIGHTEN : &quot;37528&quot;,
+<span id='android-opengl-GLES32-property-GL_COLORDODGE'>/***/
+</span>GL_COLORDODGE : &quot;37529&quot;,
+<span id='android-opengl-GLES32-property-GL_COLORBURN'>/***/
+</span>GL_COLORBURN : &quot;37530&quot;,
+<span id='android-opengl-GLES32-property-GL_HARDLIGHT'>/***/
+</span>GL_HARDLIGHT : &quot;37531&quot;,
+<span id='android-opengl-GLES32-property-GL_SOFTLIGHT'>/***/
+</span>GL_SOFTLIGHT : &quot;37532&quot;,
+<span id='android-opengl-GLES32-property-GL_DIFFERENCE'>/***/
+</span>GL_DIFFERENCE : &quot;37534&quot;,
+<span id='android-opengl-GLES32-property-GL_EXCLUSION'>/***/
+</span>GL_EXCLUSION : &quot;37536&quot;,
+<span id='android-opengl-GLES32-property-GL_HSL_HUE'>/***/
+</span>GL_HSL_HUE : &quot;37549&quot;,
+<span id='android-opengl-GLES32-property-GL_HSL_SATURATION'>/***/
+</span>GL_HSL_SATURATION : &quot;37550&quot;,
+<span id='android-opengl-GLES32-property-GL_HSL_COLOR'>/***/
+</span>GL_HSL_COLOR : &quot;37551&quot;,
+<span id='android-opengl-GLES32-property-GL_HSL_LUMINOSITY'>/***/
+</span>GL_HSL_LUMINOSITY : &quot;37552&quot;,
+<span id='android-opengl-GLES32-property-GL_PRIMITIVE_BOUNDING_BOX'>/***/
+</span>GL_PRIMITIVE_BOUNDING_BOX : &quot;37566&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS'>/***/
+</span>GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS : &quot;37581&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS'>/***/
+</span>GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS : &quot;37582&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS'>/***/
+</span>GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS : &quot;37583&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS'>/***/
+</span>GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS : &quot;37587&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS'>/***/
+</span>GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS : &quot;37588&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_GEOMETRY_ATOMIC_COUNTERS'>/***/
+</span>GL_MAX_GEOMETRY_ATOMIC_COUNTERS : &quot;37589&quot;,
+<span id='android-opengl-GLES32-property-GL_DEBUG_OUTPUT'>/***/
+</span>GL_DEBUG_OUTPUT : &quot;37600&quot;,
+<span id='android-opengl-GLES32-property-GL_IS_PER_PATCH'>/***/
+</span>GL_IS_PER_PATCH : &quot;37607&quot;,
+<span id='android-opengl-GLES32-property-GL_REFERENCED_BY_TESS_CONTROL_SHADER'>/***/
+</span>GL_REFERENCED_BY_TESS_CONTROL_SHADER : &quot;37639&quot;,
+<span id='android-opengl-GLES32-property-GL_REFERENCED_BY_TESS_EVALUATION_SHADER'>/***/
+</span>GL_REFERENCED_BY_TESS_EVALUATION_SHADER : &quot;37640&quot;,
+<span id='android-opengl-GLES32-property-GL_REFERENCED_BY_GEOMETRY_SHADER'>/***/
+</span>GL_REFERENCED_BY_GEOMETRY_SHADER : &quot;37641&quot;,
+<span id='android-opengl-GLES32-property-GL_FRAMEBUFFER_DEFAULT_LAYERS'>/***/
+</span>GL_FRAMEBUFFER_DEFAULT_LAYERS : &quot;37650&quot;,
+<span id='android-opengl-GLES32-property-GL_MAX_FRAMEBUFFER_LAYERS'>/***/
+</span>GL_MAX_FRAMEBUFFER_LAYERS : &quot;37655&quot;,
+<span id='android-opengl-GLES32-property-GL_MULTISAMPLE_LINE_WIDTH_RANGE'>/***/
+</span>GL_MULTISAMPLE_LINE_WIDTH_RANGE : &quot;37761&quot;,
+<span id='android-opengl-GLES32-property-GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY'>/***/
+</span>GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY : &quot;37762&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_4x4'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_4x4 : &quot;37808&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_5x4'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_5x4 : &quot;37809&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_5x5'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_5x5 : &quot;37810&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_6x5'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_6x5 : &quot;37811&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_6x6'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_6x6 : &quot;37812&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_8x5'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_8x5 : &quot;37813&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_8x6'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_8x6 : &quot;37814&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_8x8'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_8x8 : &quot;37815&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_10x5'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_10x5 : &quot;37816&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_10x6'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_10x6 : &quot;37817&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_10x8'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_10x8 : &quot;37818&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_10x10'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_10x10 : &quot;37819&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_12x10'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_12x10 : &quot;37820&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_RGBA_ASTC_12x12'>/***/
+</span>GL_COMPRESSED_RGBA_ASTC_12x12 : &quot;37821&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4 : &quot;37840&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4 : &quot;37841&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5 : &quot;37842&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5 : &quot;37843&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6 : &quot;37844&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5 : &quot;37845&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6 : &quot;37846&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8 : &quot;37847&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5 : &quot;37848&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6 : &quot;37849&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8 : &quot;37850&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10 : &quot;37851&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10 : &quot;37852&quot;,
+<span id='android-opengl-GLES32-property-GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12'>/***/
+</span>GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12 : &quot;37853&quot;,
+<span id='android-opengl-GLES32-method-glBlendBarrier'>/**
+</span>*/
+glBlendBarrier : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glCopyImageSubData'>/**
+</span>*/
+glCopyImageSubData : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDebugMessageControl'>/**
+</span>*/
+glDebugMessageControl : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDebugMessageControl'>/**
+</span>*/
+glDebugMessageControl : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDebugMessageInsert'>/**
+</span>*/
+glDebugMessageInsert : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDebugMessageCallback'>/**
+</span>*/
+glDebugMessageCallback : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetDebugMessageLog'>/**
+</span>*/
+glGetDebugMessageLog : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetDebugMessageLog'>/**
+</span>*/
+glGetDebugMessageLog : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetDebugMessageLog'>/**
+</span>*/
+glGetDebugMessageLog : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetDebugMessageLog'>/**
+</span>*/
+glGetDebugMessageLog : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glPushDebugGroup'>/**
+</span>*/
+glPushDebugGroup : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glPopDebugGroup'>/**
+</span>*/
+glPopDebugGroup : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glObjectLabel'>/**
+</span>*/
+glObjectLabel : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetObjectLabel'>/**
+</span>*/
+glGetObjectLabel : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glObjectPtrLabel'>/**
+</span>*/
+glObjectPtrLabel : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetObjectPtrLabel'>/**
+</span>*/
+glGetObjectPtrLabel : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetPointerv'>/**
+</span>*/
+glGetPointerv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glEnablei'>/**
+</span>*/
+glEnablei : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDisablei'>/**
+</span>*/
+glDisablei : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glBlendEquationi'>/**
+</span>*/
+glBlendEquationi : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glBlendEquationSeparatei'>/**
+</span>*/
+glBlendEquationSeparatei : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glBlendFunci'>/**
+</span>*/
+glBlendFunci : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glBlendFuncSeparatei'>/**
+</span>*/
+glBlendFuncSeparatei : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glColorMaski'>/**
+</span>*/
+glColorMaski : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glIsEnabledi'>/**
+</span>*/
+glIsEnabledi : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDrawElementsBaseVertex'>/**
+</span>*/
+glDrawElementsBaseVertex : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDrawRangeElementsBaseVertex'>/**
+</span>*/
+glDrawRangeElementsBaseVertex : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDrawElementsInstancedBaseVertex'>/**
+</span>*/
+glDrawElementsInstancedBaseVertex : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glDrawElementsInstancedBaseVertex'>/**
+</span>*/
+glDrawElementsInstancedBaseVertex : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glFramebufferTexture'>/**
+</span>*/
+glFramebufferTexture : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glPrimitiveBoundingBox'>/**
+</span>*/
+glPrimitiveBoundingBox : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetGraphicsResetStatus'>/**
+</span>*/
+glGetGraphicsResetStatus : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glReadnPixels'>/**
+</span>*/
+glReadnPixels : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetnUniformfv'>/**
+</span>*/
+glGetnUniformfv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetnUniformfv'>/**
+</span>*/
+glGetnUniformfv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetnUniformiv'>/**
+</span>*/
+glGetnUniformiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetnUniformiv'>/**
+</span>*/
+glGetnUniformiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetnUniformuiv'>/**
+</span>*/
+glGetnUniformuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetnUniformuiv'>/**
+</span>*/
+glGetnUniformuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glMinSampleShading'>/**
+</span>*/
+glMinSampleShading : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glPatchParameteri'>/**
+</span>*/
+glPatchParameteri : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glTexParameterIiv'>/**
+</span>*/
+glTexParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glTexParameterIiv'>/**
+</span>*/
+glTexParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glTexParameterIuiv'>/**
+</span>*/
+glTexParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glTexParameterIuiv'>/**
+</span>*/
+glTexParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetTexParameterIiv'>/**
+</span>*/
+glGetTexParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetTexParameterIiv'>/**
+</span>*/
+glGetTexParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetTexParameterIuiv'>/**
+</span>*/
+glGetTexParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetTexParameterIuiv'>/**
+</span>*/
+glGetTexParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glSamplerParameterIiv'>/**
+</span>*/
+glSamplerParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glSamplerParameterIiv'>/**
+</span>*/
+glSamplerParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glSamplerParameterIuiv'>/**
+</span>*/
+glSamplerParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glSamplerParameterIuiv'>/**
+</span>*/
+glSamplerParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetSamplerParameterIiv'>/**
+</span>*/
+glGetSamplerParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetSamplerParameterIiv'>/**
+</span>*/
+glGetSamplerParameterIiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetSamplerParameterIuiv'>/**
+</span>*/
+glGetSamplerParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glGetSamplerParameterIuiv'>/**
+</span>*/
+glGetSamplerParameterIuiv : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glTexBuffer'>/**
+</span>*/
+glTexBuffer : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glTexBufferRange'>/**
+</span>*/
+glTexBufferRange : function(  ) {},
+
+<span id='android-opengl-GLES32-method-glTexStorage3DMultisample'>/**
+</span>*/
+glTexStorage3DMultisample : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

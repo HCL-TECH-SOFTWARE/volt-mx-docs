@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-utils-TaskDrainer'>/**@class android.hardware.camera2.utils.TaskDrainer
+</span>@extends java.lang.Object
+
+ Keep track of multiple concurrent tasks starting and finishing by their key;
+ allow draining existing tasks and figuring out when all tasks have finished
+ (and new ones won't begin).
+
+ &lt;p&gt;The initial state is to allow all tasks to be started and finished. A task may only be started
+ once, after which it must be finished before starting again. Likewise, a task may only be
+ finished once, after which it must be started before finishing again. It is okay to finish a
+ task before starting it due to different threads handling starting and finishing.&lt;/p&gt;
+
+ &lt;p&gt;When draining begins, no more new tasks can be started. This guarantees that at some
+ point when all the tasks are finished there will be no more collective new tasks,
+ at which point the {@link android.hardware.camera2.utils.TaskDrainer.DrainListener#onDrained} callback will be invoked.&lt;/p&gt;
+
+
+ @param &lt;T&gt;
+          a type for the key that will represent tracked tasks;
+          must implement {@code Object#equals}
+*/
+var TaskDrainer = {
+
+<span id='android-hardware-camera2-utils-TaskDrainer-method-taskStarted'>/**Mark an asynchronous task as having started.
+</span>
+ &lt;p&gt;A task cannot be started more than once without first having finished. Once
+ draining begins with {@link #beginDrain}, no new tasks can be started.&lt;/p&gt;
+@param {Object {Object}} task a key to identify a task
+@see #taskFinished
+@see #beginDrain
+@throws IllegalStateException
+          If attempting to start a task which is already started (and not finished),
+          or if attempting to start a task after draining has begun.
+*/
+taskStarted : function(  ) {},
+
+<span id='android-hardware-camera2-utils-TaskDrainer-method-taskFinished'>/**Mark an asynchronous task as having finished.
+</span>
+ &lt;p&gt;A task cannot be finished more than once without first having started.&lt;/p&gt;
+@param {Object {Object}} task a key to identify a task
+@see #taskStarted
+@see #beginDrain
+@throws IllegalStateException
+          If attempting to finish a task which is already finished (and not started),
+*/
+taskFinished : function(  ) {},
+
+<span id='android-hardware-camera2-utils-TaskDrainer-method-beginDrain'>/**Do not allow any more tasks to be started; once all existing started tasks are finished,
+</span> fire the {@link android.hardware.camera2.utils.TaskDrainer.DrainListener#onDrained} callback asynchronously.
+
+ &lt;p&gt;This operation is idempotent; calling it more than once has no effect.&lt;/p&gt;
+*/
+beginDrain : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

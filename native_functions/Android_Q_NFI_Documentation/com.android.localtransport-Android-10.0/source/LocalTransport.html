@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-localtransport-LocalTransport'>/**@class com.android.localtransport.LocalTransport
+</span>@extends android.app.backup.BackupTransport
+
+ Backup transport for stashing stuff into a known location on disk, and
+ later restoring from there.  For testing only.
+*/
+var LocalTransport = {
+
+<span id='com-android-localtransport-LocalTransport-method-name'>/**
+</span>*/
+name : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-configurationIntent'>/**
+</span>*/
+configurationIntent : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-currentDestinationString'>/**
+</span>*/
+currentDestinationString : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-dataManagementIntent'>/**
+</span>*/
+dataManagementIntent : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-dataManagementLabel'>/**
+</span>*/
+dataManagementLabel : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-transportDirName'>/**
+</span>*/
+transportDirName : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-getTransportFlags'>/**
+</span>*/
+getTransportFlags : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-requestBackupTime'>/**
+</span>*/
+requestBackupTime : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-initializeDevice'>/**
+</span>*/
+initializeDevice : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-performBackup'>/**
+</span>*/
+performBackup : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-performBackup'>/**
+</span>*/
+performBackup : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-clearBackupData'>/**
+</span>*/
+clearBackupData : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-finishBackup'>/**
+</span>*/
+finishBackup : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-requestFullBackupTime'>/**
+</span>*/
+requestFullBackupTime : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-checkFullBackupSize'>/**
+</span>*/
+checkFullBackupSize : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-performFullBackup'>/**
+</span>*/
+performFullBackup : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-sendBackupData'>/**
+</span>*/
+sendBackupData : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-cancelFullBackup'>/**
+</span>*/
+cancelFullBackup : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-getAvailableRestoreSets'>/**
+</span>*/
+getAvailableRestoreSets : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-getCurrentRestoreSet'>/**
+</span>*/
+getCurrentRestoreSet : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-startRestore'>/**
+</span>*/
+startRestore : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-nextRestorePackage'>/**
+</span>*/
+nextRestorePackage : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-getRestoreData'>/**
+</span>*/
+getRestoreData : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-finishRestore'>/**
+</span>*/
+finishRestore : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-getNextFullRestoreDataChunk'>/**Ask the transport to provide data for the &quot;current&quot; package being restored.  The
+</span> transport then writes some data to the socket supplied to this call, and returns
+ the number of bytes written.  The system will then read that many bytes and
+ stream them to the application's agent for restore, then will call this method again
+ to receive the next chunk of the archive.  This sequence will be repeated until the
+ transport returns zero indicating that all of the package's data has been delivered
+ (or returns a negative value indicating some sort of hard error condition at the
+ transport level).
+
+ &lt;p&gt;After this method returns zero, the system will then call
+ {@link #getNextFullRestorePackage}() to begin the restore process for the next
+ application, and the sequence begins again.
+@param {Object {ParcelFileDescriptor}} socket The file descriptor that the transport will use for delivering the
+    streamed archive.
+@return {Number} 0 when no more data for the current package is available.  A positive value
+    indicates the presence of that much data to be delivered to the app.  A negative
+    return value is treated as equivalent to {@link BackupTransport#TRANSPORT_ERROR},
+    indicating a fatal error condition that precludes further restore operations
+    on the current dataset.
+*/
+getNextFullRestoreDataChunk : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-abortFullRestore'>/**If the OS encounters an error while processing {@link RestoreDescription#TYPE_FULL_STREAM}
+</span> data for restore, it will invoke this method to tell the transport that it should
+ abandon the data download for the current package.  The OS will then either call
+ {@link #nextRestorePackage}() again to move on to restoring the next package in the
+ set being iterated over, or will call {@link #finishRestore}() to shut down the restore
+ operation.
+@return {Number} {@link #TRANSPORT_OK} if the transport was successful in shutting down the
+    current stream cleanly, or {@link #TRANSPORT_ERROR} to indicate a serious
+    transport-level failure.  If the transport reports an error here, the entire restore
+    operation will immediately be finished with no further attempts to restore app data.
+*/
+abortFullRestore : function(  ) {},
+
+<span id='com-android-localtransport-LocalTransport-method-getBackupQuota'>/**
+</span>*/
+getBackupQuota : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-BatteryStats'>/**@class android.os.BatteryStats
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class providing access to battery usage statistics, including information on
+ wakelocks, processes, packages, and services.  All times are represented in microseconds
+ except where indicated otherwise.
+ @hide
+*/
+var BatteryStats = {
+
+<span id='android-os-BatteryStats-property-SERVICE_NAME'>/**@hide */
+</span>SERVICE_NAME : &quot;batterystats&quot;,
+<span id='android-os-BatteryStats-property-WAKE_TYPE_PARTIAL'>/** A constant indicating a partial wake lock timer.
+</span>*/
+WAKE_TYPE_PARTIAL : &quot;0&quot;,
+<span id='android-os-BatteryStats-property-WAKE_TYPE_FULL'>/** A constant indicating a full wake lock timer.
+</span>*/
+WAKE_TYPE_FULL : &quot;1&quot;,
+<span id='android-os-BatteryStats-property-WAKE_TYPE_WINDOW'>/** A constant indicating a window wake lock timer.
+</span>*/
+WAKE_TYPE_WINDOW : &quot;2&quot;,
+<span id='android-os-BatteryStats-property-SENSOR'>/** A constant indicating a sensor timer.
+</span>*/
+SENSOR : &quot;3&quot;,
+<span id='android-os-BatteryStats-property-WIFI_RUNNING'>/** A constant indicating a a wifi running timer
+</span>*/
+WIFI_RUNNING : &quot;4&quot;,
+<span id='android-os-BatteryStats-property-FULL_WIFI_LOCK'>/** A constant indicating a full wifi lock timer
+</span>*/
+FULL_WIFI_LOCK : &quot;5&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SCAN'>/** A constant indicating a wifi scan
+</span>*/
+WIFI_SCAN : &quot;6&quot;,
+<span id='android-os-BatteryStats-property-WIFI_MULTICAST_ENABLED'>/** A constant indicating a wifi multicast timer
+</span>*/
+WIFI_MULTICAST_ENABLED : &quot;7&quot;,
+<span id='android-os-BatteryStats-property-VIDEO_TURNED_ON'>/** A constant indicating a video turn on timer
+</span>*/
+VIDEO_TURNED_ON : &quot;8&quot;,
+<span id='android-os-BatteryStats-property-VIBRATOR_ON'>/** A constant indicating a vibrator on timer
+</span>*/
+VIBRATOR_ON : &quot;9&quot;,
+<span id='android-os-BatteryStats-property-FOREGROUND_ACTIVITY'>/** A constant indicating a foreground activity timer
+</span>*/
+FOREGROUND_ACTIVITY : &quot;10&quot;,
+<span id='android-os-BatteryStats-property-WIFI_BATCHED_SCAN'>/** A constant indicating a wifi batched scan is active
+</span>*/
+WIFI_BATCHED_SCAN : &quot;11&quot;,
+<span id='android-os-BatteryStats-property-PROCESS_STATE'>/** A constant indicating a process state timer
+</span>*/
+PROCESS_STATE : &quot;12&quot;,
+<span id='android-os-BatteryStats-property-SYNC'>/** A constant indicating a sync timer
+</span>*/
+SYNC : &quot;13&quot;,
+<span id='android-os-BatteryStats-property-JOB'>/** A constant indicating a job timer
+</span>*/
+JOB : &quot;14&quot;,
+<span id='android-os-BatteryStats-property-AUDIO_TURNED_ON'>/** A constant indicating an audio turn on timer
+</span>*/
+AUDIO_TURNED_ON : &quot;15&quot;,
+<span id='android-os-BatteryStats-property-FLASHLIGHT_TURNED_ON'>/** A constant indicating a flashlight turn on timer
+</span>*/
+FLASHLIGHT_TURNED_ON : &quot;16&quot;,
+<span id='android-os-BatteryStats-property-CAMERA_TURNED_ON'>/** A constant indicating a camera turn on timer
+</span>*/
+CAMERA_TURNED_ON : &quot;17&quot;,
+<span id='android-os-BatteryStats-property-WAKE_TYPE_DRAW'>/** A constant indicating a draw wake lock timer.
+</span>*/
+WAKE_TYPE_DRAW : &quot;18&quot;,
+<span id='android-os-BatteryStats-property-BLUETOOTH_SCAN_ON'>/** A constant indicating a bluetooth scan timer.
+</span>*/
+BLUETOOTH_SCAN_ON : &quot;19&quot;,
+<span id='android-os-BatteryStats-property-AGGREGATED_WAKE_TYPE_PARTIAL'>/** A constant indicating an aggregated partial wake lock timer.
+</span>*/
+AGGREGATED_WAKE_TYPE_PARTIAL : &quot;20&quot;,
+<span id='android-os-BatteryStats-property-BLUETOOTH_UNOPTIMIZED_SCAN_ON'>/** A constant indicating a bluetooth scan timer for unoptimized scans.
+</span>*/
+BLUETOOTH_UNOPTIMIZED_SCAN_ON : &quot;21&quot;,
+<span id='android-os-BatteryStats-property-FOREGROUND_SERVICE'>/** A constant indicating a foreground service timer
+</span>*/
+FOREGROUND_SERVICE : &quot;22&quot;,
+<span id='android-os-BatteryStats-property-WIFI_AGGREGATE_MULTICAST_ENABLED'>/** A constant indicating an aggregate wifi multicast timer
+</span>*/
+WIFI_AGGREGATE_MULTICAST_ENABLED : &quot;23&quot;,
+<span id='android-os-BatteryStats-property-STATS_SINCE_CHARGED'>/** Include all of the data in the stats, including previously saved data.
+</span>*/
+STATS_SINCE_CHARGED : &quot;0&quot;,
+<span id='android-os-BatteryStats-property-STATS_CURRENT'>/** Include only the current run in the stats.
+</span>
+ @deprecated As of {@link android.os.Build.VERSION_CODES#Q}, only {@link #STATS_SINCE_CHARGED}
+ is supported.
+*/
+STATS_CURRENT : &quot;1&quot;,
+<span id='android-os-BatteryStats-property-STATS_SINCE_UNPLUGGED'>/** Include only the run since the last time the device was unplugged in the stats.
+</span>
+ @deprecated As of {@link android.os.Build.VERSION_CODES#Q}, only {@link #STATS_SINCE_CHARGED}
+ is supported.
+*/
+STATS_SINCE_UNPLUGGED : &quot;2&quot;,
+<span id='android-os-BatteryStats-property-MILLISECONDS_IN_HOUR'>/***/
+</span>MILLISECONDS_IN_HOUR : &quot;3600000.0&quot;,
+<span id='android-os-BatteryStats-property-RESULT_RECEIVER_CONTROLLER_KEY'>/***/
+</span>RESULT_RECEIVER_CONTROLLER_KEY : &quot;controller_activity&quot;,
+<span id='android-os-BatteryStats-property-UID_TIMES_TYPE_ALL'>/** Indicates times spent by the uid at each cpu frequency in all process states.
+</span>
+ Other types might include times spent in foreground, background etc.
+*/
+UID_TIMES_TYPE_ALL : &quot;A&quot;,
+<span id='android-os-BatteryStats-property-JOB_FRESHNESS_BUCKETS'>/** These are the thresholds for bucketing last time since a job was run for an app
+</span> that just moved to ACTIVE due to a launch. So if the last time a job ran was less
+ than 1 hour ago, then it's reasonably fresh, 2 hours ago, not so fresh and so
+ on.
+*/
+JOB_FRESHNESS_BUCKETS : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-SCREEN_BRIGHTNESS_DARK'>/***/
+</span>SCREEN_BRIGHTNESS_DARK : &quot;0&quot;,
+<span id='android-os-BatteryStats-property-SCREEN_BRIGHTNESS_DIM'>/***/
+</span>SCREEN_BRIGHTNESS_DIM : &quot;1&quot;,
+<span id='android-os-BatteryStats-property-SCREEN_BRIGHTNESS_MEDIUM'>/***/
+</span>SCREEN_BRIGHTNESS_MEDIUM : &quot;2&quot;,
+<span id='android-os-BatteryStats-property-SCREEN_BRIGHTNESS_LIGHT'>/***/
+</span>SCREEN_BRIGHTNESS_LIGHT : &quot;3&quot;,
+<span id='android-os-BatteryStats-property-SCREEN_BRIGHTNESS_BRIGHT'>/***/
+</span>SCREEN_BRIGHTNESS_BRIGHT : &quot;4&quot;,
+<span id='android-os-BatteryStats-property-NUM_SCREEN_BRIGHTNESS_BINS'>/***/
+</span>NUM_SCREEN_BRIGHTNESS_BINS : &quot;5&quot;,
+<span id='android-os-BatteryStats-property-DEVICE_IDLE_MODE_OFF'>/** Constant for device idle mode: not active.
+</span>*/
+DEVICE_IDLE_MODE_OFF : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-DEVICE_IDLE_MODE_LIGHT'>/** Constant for device idle mode: active in lightweight mode.
+</span>*/
+DEVICE_IDLE_MODE_LIGHT : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-DEVICE_IDLE_MODE_DEEP'>/** Constant for device idle mode: active in full mode.
+</span>*/
+DEVICE_IDLE_MODE_DEEP : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-DATA_CONNECTION_NONE'>/***/
+</span>DATA_CONNECTION_NONE : &quot;0&quot;,
+<span id='android-os-BatteryStats-property-DATA_CONNECTION_OTHER'>/***/
+</span>DATA_CONNECTION_OTHER : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-NUM_DATA_CONNECTION_TYPES'>/***/
+</span>NUM_DATA_CONNECTION_TYPES : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_INVALID'>/***/
+</span>WIFI_SUPPL_STATE_INVALID : &quot;0&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_DISCONNECTED'>/***/
+</span>WIFI_SUPPL_STATE_DISCONNECTED : &quot;1&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_INTERFACE_DISABLED'>/***/
+</span>WIFI_SUPPL_STATE_INTERFACE_DISABLED : &quot;2&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_INACTIVE'>/***/
+</span>WIFI_SUPPL_STATE_INACTIVE : &quot;3&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_SCANNING'>/***/
+</span>WIFI_SUPPL_STATE_SCANNING : &quot;4&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_AUTHENTICATING'>/***/
+</span>WIFI_SUPPL_STATE_AUTHENTICATING : &quot;5&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_ASSOCIATING'>/***/
+</span>WIFI_SUPPL_STATE_ASSOCIATING : &quot;6&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_ASSOCIATED'>/***/
+</span>WIFI_SUPPL_STATE_ASSOCIATED : &quot;7&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_FOUR_WAY_HANDSHAKE'>/***/
+</span>WIFI_SUPPL_STATE_FOUR_WAY_HANDSHAKE : &quot;8&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_GROUP_HANDSHAKE'>/***/
+</span>WIFI_SUPPL_STATE_GROUP_HANDSHAKE : &quot;9&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_COMPLETED'>/***/
+</span>WIFI_SUPPL_STATE_COMPLETED : &quot;10&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_DORMANT'>/***/
+</span>WIFI_SUPPL_STATE_DORMANT : &quot;11&quot;,
+<span id='android-os-BatteryStats-property-WIFI_SUPPL_STATE_UNINITIALIZED'>/***/
+</span>WIFI_SUPPL_STATE_UNINITIALIZED : &quot;12&quot;,
+<span id='android-os-BatteryStats-property-NUM_WIFI_SUPPL_STATES'>/***/
+</span>NUM_WIFI_SUPPL_STATES : &quot;13&quot;,
+<span id='android-os-BatteryStats-property-HISTORY_STATE_DESCRIPTIONS'>/***/
+</span>HISTORY_STATE_DESCRIPTIONS : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-HISTORY_STATE2_DESCRIPTIONS'>/***/
+</span>HISTORY_STATE2_DESCRIPTIONS : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-HISTORY_EVENT_NAMES'>/***/
+</span>HISTORY_EVENT_NAMES : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-HISTORY_EVENT_CHECKIN_NAMES'>/***/
+</span>HISTORY_EVENT_CHECKIN_NAMES : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-HISTORY_EVENT_INT_FORMATTERS'>/***/
+</span>HISTORY_EVENT_INT_FORMATTERS : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_OFF'>/***/
+</span>WIFI_STATE_OFF : &quot;0&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_OFF_SCANNING'>/***/
+</span>WIFI_STATE_OFF_SCANNING : &quot;1&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_ON_NO_NETWORKS'>/***/
+</span>WIFI_STATE_ON_NO_NETWORKS : &quot;2&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_ON_DISCONNECTED'>/***/
+</span>WIFI_STATE_ON_DISCONNECTED : &quot;3&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_ON_CONNECTED_STA'>/***/
+</span>WIFI_STATE_ON_CONNECTED_STA : &quot;4&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_ON_CONNECTED_P2P'>/***/
+</span>WIFI_STATE_ON_CONNECTED_P2P : &quot;5&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_ON_CONNECTED_STA_P2P'>/***/
+</span>WIFI_STATE_ON_CONNECTED_STA_P2P : &quot;6&quot;,
+<span id='android-os-BatteryStats-property-WIFI_STATE_SOFT_AP'>/***/
+</span>WIFI_STATE_SOFT_AP : &quot;7&quot;,
+<span id='android-os-BatteryStats-property-NUM_WIFI_STATES'>/***/
+</span>NUM_WIFI_STATES : &quot;8&quot;,
+<span id='android-os-BatteryStats-property-NUM_WIFI_SIGNAL_STRENGTH_BINS'>/***/
+</span>NUM_WIFI_SIGNAL_STRENGTH_BINS : &quot;5&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_MOBILE_RX_DATA'>/***/
+</span>NETWORK_MOBILE_RX_DATA : &quot;0&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_MOBILE_TX_DATA'>/***/
+</span>NETWORK_MOBILE_TX_DATA : &quot;1&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_WIFI_RX_DATA'>/***/
+</span>NETWORK_WIFI_RX_DATA : &quot;2&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_WIFI_TX_DATA'>/***/
+</span>NETWORK_WIFI_TX_DATA : &quot;3&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_BT_RX_DATA'>/***/
+</span>NETWORK_BT_RX_DATA : &quot;4&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_BT_TX_DATA'>/***/
+</span>NETWORK_BT_TX_DATA : &quot;5&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_MOBILE_BG_RX_DATA'>/***/
+</span>NETWORK_MOBILE_BG_RX_DATA : &quot;6&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_MOBILE_BG_TX_DATA'>/***/
+</span>NETWORK_MOBILE_BG_TX_DATA : &quot;7&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_WIFI_BG_RX_DATA'>/***/
+</span>NETWORK_WIFI_BG_RX_DATA : &quot;8&quot;,
+<span id='android-os-BatteryStats-property-NETWORK_WIFI_BG_TX_DATA'>/***/
+</span>NETWORK_WIFI_BG_TX_DATA : &quot;9&quot;,
+<span id='android-os-BatteryStats-property-NUM_NETWORK_ACTIVITY_TYPES'>/***/
+</span>NUM_NETWORK_ACTIVITY_TYPES : &quot;10&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_TIME_MASK'>/***/
+</span>STEP_LEVEL_TIME_MASK : &quot;1099511627775&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_LEVEL_MASK'>/***/
+</span>STEP_LEVEL_LEVEL_MASK : &quot;280375465082880&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_LEVEL_SHIFT'>/***/
+</span>STEP_LEVEL_LEVEL_SHIFT : &quot;40&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_INITIAL_MODE_MASK'>/***/
+</span>STEP_LEVEL_INITIAL_MODE_MASK : &quot;71776119061217280&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_INITIAL_MODE_SHIFT'>/***/
+</span>STEP_LEVEL_INITIAL_MODE_SHIFT : &quot;48&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODIFIED_MODE_MASK'>/***/
+</span>STEP_LEVEL_MODIFIED_MODE_MASK : &quot;-72057594037927936&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODIFIED_MODE_SHIFT'>/***/
+</span>STEP_LEVEL_MODIFIED_MODE_SHIFT : &quot;56&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODE_SCREEN_STATE'>/***/
+</span>STEP_LEVEL_MODE_SCREEN_STATE : &quot;3&quot;,
+<span id='android-os-BatteryStats-property-MAX_TRACKED_SCREEN_STATE'>/***/
+</span>MAX_TRACKED_SCREEN_STATE : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODE_POWER_SAVE'>/***/
+</span>STEP_LEVEL_MODE_POWER_SAVE : &quot;4&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODE_DEVICE_IDLE'>/***/
+</span>STEP_LEVEL_MODE_DEVICE_IDLE : &quot;8&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODES_OF_INTEREST'>/***/
+</span>STEP_LEVEL_MODES_OF_INTEREST : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODE_VALUES'>/***/
+</span>STEP_LEVEL_MODE_VALUES : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-STEP_LEVEL_MODE_LABELS'>/***/
+</span>STEP_LEVEL_MODE_LABELS : &quot;null&quot;,
+<span id='android-os-BatteryStats-property-DUMP_CHARGED_ONLY'>/***/
+</span>DUMP_CHARGED_ONLY : &quot;2&quot;,
+<span id='android-os-BatteryStats-property-DUMP_DAILY_ONLY'>/***/
+</span>DUMP_DAILY_ONLY : &quot;4&quot;,
+<span id='android-os-BatteryStats-property-DUMP_HISTORY_ONLY'>/***/
+</span>DUMP_HISTORY_ONLY : &quot;8&quot;,
+<span id='android-os-BatteryStats-property-DUMP_INCLUDE_HISTORY'>/***/
+</span>DUMP_INCLUDE_HISTORY : &quot;16&quot;,
+<span id='android-os-BatteryStats-property-DUMP_VERBOSE'>/***/
+</span>DUMP_VERBOSE : &quot;32&quot;,
+<span id='android-os-BatteryStats-property-DUMP_DEVICE_WIFI_ONLY'>/***/
+</span>DUMP_DEVICE_WIFI_ONLY : &quot;64&quot;,
+<span id='android-os-BatteryStats-method-mapToInternalProcessState'>/**Maps the ActivityManager procstate into corresponding BatteryStats procstate.
+</span>*/
+mapToInternalProcessState : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDailyItemLocked'>/**
+</span>*/
+getDailyItemLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getCurrentDailyStartTime'>/**
+</span>*/
+getCurrentDailyStartTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getNextMinDailyDeadline'>/**
+</span>*/
+getNextMinDailyDeadline : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getNextMaxDailyDeadline'>/**
+</span>*/
+getNextMaxDailyDeadline : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getCpuFreqs'>/**
+</span>*/
+getCpuFreqs : function(  ) {},
+
+<span id='android-os-BatteryStats-method-commitCurrentHistoryBatchLocked'>/**Don't allow any more batching in to the current history event.  This
+</span> is called when printing partial histories, so to ensure that the next
+ history event will go in to a new batch after what was printed in the
+ last partial history.
+*/
+commitCurrentHistoryBatchLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHistoryTotalSize'>/**
+</span>*/
+getHistoryTotalSize : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHistoryUsedSize'>/**
+</span>*/
+getHistoryUsedSize : function(  ) {},
+
+<span id='android-os-BatteryStats-method-startIteratingHistoryLocked'>/**
+</span>*/
+startIteratingHistoryLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHistoryStringPoolSize'>/**
+</span>*/
+getHistoryStringPoolSize : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHistoryStringPoolBytes'>/**
+</span>*/
+getHistoryStringPoolBytes : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHistoryTagPoolString'>/**
+</span>*/
+getHistoryTagPoolString : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHistoryTagPoolUid'>/**
+</span>*/
+getHistoryTagPoolUid : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getNextHistoryLocked'>/**
+</span>*/
+getNextHistoryLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-finishIteratingHistoryLocked'>/**
+</span>*/
+finishIteratingHistoryLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-startIteratingOldHistoryLocked'>/**
+</span>*/
+startIteratingOldHistoryLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getNextOldHistoryLocked'>/**
+</span>*/
+getNextOldHistoryLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-finishIteratingOldHistoryLocked'>/**
+</span>*/
+finishIteratingOldHistoryLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHistoryBaseTime'>/**Return the base time offset for the battery history.
+</span>*/
+getHistoryBaseTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getStartCount'>/**Returns the number of times the device has been started.
+</span>*/
+getStartCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getScreenOnTime'>/**Returns the time in microseconds that the screen has been on while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getScreenOnTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getScreenOnCount'>/**Returns the number of times the screen was turned on.
+</span>
+ {@hide}
+*/
+getScreenOnCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getScreenDozeTime'>/**Returns the time in microseconds that the screen has been dozing while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getScreenDozeTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getScreenDozeCount'>/**Returns the number of times the screen was turned dozing.
+</span>
+ {@hide}
+*/
+getScreenDozeCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getInteractiveTime'>/**
+</span>*/
+getInteractiveTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getScreenBrightnessTime'>/**Returns the time in microseconds that the screen has been on with
+</span> the given brightness
+
+ {@hide}
+*/
+getScreenBrightnessTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getScreenBrightnessTimer'>/**Returns the {@link android.os.BatteryStats.Timer} object that tracks the given screen brightness.
+</span>
+ {@hide}
+*/
+getScreenBrightnessTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPowerSaveModeEnabledTime'>/**Returns the time in microseconds that power save mode has been enabled while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getPowerSaveModeEnabledTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPowerSaveModeEnabledCount'>/**Returns the number of times that power save mode was enabled.
+</span>
+ {@hide}
+*/
+getPowerSaveModeEnabledCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDeviceIdleModeTime'>/**Returns the time in microseconds that device has been in idle mode while
+</span> running on battery.
+
+ {@hide}
+*/
+getDeviceIdleModeTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDeviceIdleModeCount'>/**Returns the number of times that the devie has gone in to idle mode.
+</span>
+ {@hide}
+*/
+getDeviceIdleModeCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getLongestDeviceIdleModeTime'>/**Return the longest duration we spent in a particular device idle mode (fully in the
+</span> mode, not in idle maintenance etc).
+*/
+getLongestDeviceIdleModeTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDeviceIdlingTime'>/**Returns the time in microseconds that device has been in idling while on
+</span> battery.  This is broader than {@link #getDeviceIdleModeTime} -- it
+ counts all of the time that we consider the device to be idle, whether or not
+ it is currently in the actual device idle mode.
+
+ {@hide}
+*/
+getDeviceIdlingTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDeviceIdlingCount'>/**Returns the number of times that the device has started idling.
+</span>
+ {@hide}
+*/
+getDeviceIdlingCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getNumConnectivityChange'>/**Returns the number of times that connectivity state changed.
+</span>
+ {@hide}
+*/
+getNumConnectivityChange : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getGpsSignalQualityTime'>/**Returns the time in microseconds that the phone has been running with
+</span> the given GPS signal quality level
+
+ {@hide}
+*/
+getGpsSignalQualityTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getGpsBatteryDrainMaMs'>/**Returns the GPS battery drain in mA-ms
+</span>
+ {@hide}
+*/
+getGpsBatteryDrainMaMs : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneOnTime'>/**Returns the time in microseconds that the phone has been on while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getPhoneOnTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneOnCount'>/**Returns the number of times a phone call was activated.
+</span>
+ {@hide}
+*/
+getPhoneOnCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneSignalStrengthTime'>/**Returns the time in microseconds that the phone has been running with
+</span> the given signal strength.
+
+ {@hide}
+*/
+getPhoneSignalStrengthTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneSignalScanningTime'>/**Returns the time in microseconds that the phone has been trying to
+</span> acquire a signal.
+
+ {@hide}
+*/
+getPhoneSignalScanningTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneSignalScanningTimer'>/**Returns the {@link android.os.BatteryStats.Timer} object that tracks how much the phone has been trying to
+</span> acquire a signal.
+
+ {@hide}
+*/
+getPhoneSignalScanningTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneSignalStrengthCount'>/**Returns the number of times the phone has entered the given signal strength.
+</span>
+ {@hide}
+*/
+getPhoneSignalStrengthCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getMobileRadioActiveTime'>/**Returns the time in microseconds that the mobile network has been active
+</span> (in a high power state).
+
+ {@hide}
+*/
+getMobileRadioActiveTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getMobileRadioActiveCount'>/**Returns the number of times that the mobile network has transitioned to the
+</span> active state.
+
+ {@hide}
+*/
+getMobileRadioActiveCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getMobileRadioActiveAdjustedTime'>/**Returns the time in microseconds that is the difference between the mobile radio
+</span> time we saw based on the elapsed timestamp when going down vs. the given time stamp
+ from the radio.
+
+ {@hide}
+*/
+getMobileRadioActiveAdjustedTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getMobileRadioActiveUnknownTime'>/**Returns the time in microseconds that the mobile network has been active
+</span> (in a high power state) but not being able to blame on an app.
+
+ {@hide}
+*/
+getMobileRadioActiveUnknownTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getMobileRadioActiveUnknownCount'>/**Return count of number of times radio was up that could not be blamed on apps.
+</span>
+ {@hide}
+*/
+getMobileRadioActiveUnknownCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneDataConnectionTime'>/**Returns the time in microseconds that the phone has been running with
+</span> the given data connection.
+
+ {@hide}
+*/
+getPhoneDataConnectionTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneDataConnectionCount'>/**Returns the number of times the phone has entered the given data
+</span> connection type.
+
+ {@hide}
+*/
+getPhoneDataConnectionCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getPhoneDataConnectionTimer'>/**Returns the {@link android.os.BatteryStats.Timer} object that tracks the phone's data connection type stats.
+</span>*/
+getPhoneDataConnectionTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiMulticastWakelockTime'>/**Returns total time for WiFi Multicast Wakelock timer.
+</span> Note that this may be different from the sum of per uid timer values.
+
+  {@hide}
+*/
+getWifiMulticastWakelockTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiMulticastWakelockCount'>/**Returns total time for WiFi Multicast Wakelock timer
+</span> Note that this may be different from the sum of per uid timer values.
+
+ {@hide}
+*/
+getWifiMulticastWakelockCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiOnTime'>/**Returns the time in microseconds that wifi has been on while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getWifiOnTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiActiveTime'>/**Returns the time in microseconds that wifi has been active while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getWifiActiveTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getGlobalWifiRunningTime'>/**Returns the time in microseconds that wifi has been on and the driver has
+</span> been in the running state while the device was running on battery.
+
+ {@hide}
+*/
+getGlobalWifiRunningTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiStateTime'>/**Returns the time in microseconds that WiFi has been running in the given state.
+</span>
+ {@hide}
+*/
+getWifiStateTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiStateCount'>/**Returns the number of times that WiFi has entered the given state.
+</span>
+ {@hide}
+*/
+getWifiStateCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiStateTimer'>/**Returns the {@link android.os.BatteryStats.Timer} object that tracks the given WiFi state.
+</span>
+ {@hide}
+*/
+getWifiStateTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiSupplStateTime'>/**Returns the time in microseconds that the wifi supplicant has been
+</span> in a given state.
+
+ {@hide}
+*/
+getWifiSupplStateTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiSupplStateCount'>/**Returns the number of times that the wifi supplicant has transitioned
+</span> to a given state.
+
+ {@hide}
+*/
+getWifiSupplStateCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiSupplStateTimer'>/**Returns the {@link android.os.BatteryStats.Timer} object that tracks the given wifi supplicant state.
+</span>
+ {@hide}
+*/
+getWifiSupplStateTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiSignalStrengthTime'>/**Returns the time in microseconds that WIFI has been running with
+</span> the given signal strength.
+
+ {@hide}
+*/
+getWifiSignalStrengthTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiSignalStrengthCount'>/**Returns the number of times WIFI has entered the given signal strength.
+</span>
+ {@hide}
+*/
+getWifiSignalStrengthCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiSignalStrengthTimer'>/**Returns the {@link android.os.BatteryStats.Timer} object that tracks the given WIFI signal strength.
+</span>
+ {@hide}
+*/
+getWifiSignalStrengthTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getFlashlightOnTime'>/**Returns the time in microseconds that the flashlight has been on while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getFlashlightOnTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getFlashlightOnCount'>/**Returns the number of times that the flashlight has been turned on while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getFlashlightOnCount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getCameraOnTime'>/**Returns the time in microseconds that the camera has been on while the device was
+</span> running on battery.
+
+ {@hide}
+*/
+getCameraOnTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getBluetoothScanTime'>/**Returns the time in microseconds that bluetooth scans were running while the device was
+</span> on battery.
+
+ {@hide}
+*/
+getBluetoothScanTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getNetworkActivityBytes'>/**
+</span>*/
+getNetworkActivityBytes : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getNetworkActivityPackets'>/**
+</span>*/
+getNetworkActivityPackets : function(  ) {},
+
+<span id='android-os-BatteryStats-method-hasWifiActivityReporting'>/**Returns true if the BatteryStats object has detailed WiFi power reports.
+</span> When true, calling {@link #getWifiControllerActivity}() will yield the
+ actual power data.
+*/
+hasWifiActivityReporting : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWifiControllerActivity'>/**Returns a {@link android.os.BatteryStats.ControllerActivityCounter} which is an aggregate of the times spent
+</span> in various radio controller states, such as transmit, receive, and idle.
+@return {Object {android.os.BatteryStats.ControllerActivityCounter}} non-null {@link ControllerActivityCounter}
+*/
+getWifiControllerActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-method-hasBluetoothActivityReporting'>/**Returns true if the BatteryStats object has detailed bluetooth power reports.
+</span> When true, calling {@link #getBluetoothControllerActivity}() will yield the
+ actual power data.
+*/
+hasBluetoothActivityReporting : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getBluetoothControllerActivity'>/**Returns a {@link android.os.BatteryStats.ControllerActivityCounter} which is an aggregate of the times spent
+</span> in various radio controller states, such as transmit, receive, and idle.
+@return {Object {android.os.BatteryStats.ControllerActivityCounter}} non-null {@link ControllerActivityCounter}
+*/
+getBluetoothControllerActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-method-hasModemActivityReporting'>/**Returns true if the BatteryStats object has detailed modem power reports.
+</span> When true, calling {@link #getModemControllerActivity}() will yield the
+ actual power data.
+*/
+hasModemActivityReporting : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getModemControllerActivity'>/**Returns a {@link android.os.BatteryStats.ControllerActivityCounter} which is an aggregate of the times spent
+</span> in various radio controller states, such as transmit, receive, and idle.
+@return {Object {android.os.BatteryStats.ControllerActivityCounter}} non-null {@link ControllerActivityCounter}
+*/
+getModemControllerActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getStartClockTime'>/**Return the wall clock time when battery stats data collection started.
+</span>*/
+getStartClockTime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getStartPlatformVersion'>/**Return platform version tag that we were running in when the battery stats started.
+</span>*/
+getStartPlatformVersion : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getEndPlatformVersion'>/**Return platform version tag that we were running in when the battery stats ended.
+</span>*/
+getEndPlatformVersion : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getParcelVersion'>/**Return the internal version code of the parcelled format.
+</span>*/
+getParcelVersion : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getIsOnBattery'>/**Return whether we are currently running on battery.
+</span>*/
+getIsOnBattery : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getUidStats'>/**Returns a SparseArray containing the statistics for each uid.
+</span>*/
+getUidStats : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getBatteryUptime'>/**Returns the current battery uptime in microseconds.
+</span>@param {Number} curTime the amount of elapsed realtime in microseconds.
+*/
+getBatteryUptime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getBatteryRealtime'>/**Returns the current battery realtime in microseconds.
+</span>@param {Number} curTime the amount of elapsed realtime in microseconds.
+*/
+getBatteryRealtime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeStartLevel'>/**Returns the battery percentage level at the last time the device was unplugged from power, or
+</span> the last time it booted on battery power.
+*/
+getDischargeStartLevel : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeCurrentLevel'>/**Returns the current battery percentage level if we are in a discharge cycle, otherwise
+</span> returns the level at the last plug event.
+*/
+getDischargeCurrentLevel : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getLowDischargeAmountSinceCharge'>/**Get the amount the battery has discharged since the stats were
+</span> last reset after charging, as a lower-end approximation.
+*/
+getLowDischargeAmountSinceCharge : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getHighDischargeAmountSinceCharge'>/**Get the amount the battery has discharged since the stats were
+</span> last reset after charging, as an upper-end approximation.
+*/
+getHighDischargeAmountSinceCharge : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeAmount'>/**Retrieve the discharge amount over the selected discharge period &lt;var&gt;which&lt;/var&gt;.
+</span>*/
+getDischargeAmount : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeAmountScreenOn'>/**Get the amount the battery has discharged while the screen was on,
+</span> since the last time power was unplugged.
+*/
+getDischargeAmountScreenOn : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeAmountScreenOnSinceCharge'>/**Get the amount the battery has discharged while the screen was on,
+</span> since the last time the device was charged.
+*/
+getDischargeAmountScreenOnSinceCharge : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeAmountScreenOff'>/**Get the amount the battery has discharged while the screen was off,
+</span> since the last time power was unplugged.
+*/
+getDischargeAmountScreenOff : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeAmountScreenOffSinceCharge'>/**Get the amount the battery has discharged while the screen was off,
+</span> since the last time the device was charged.
+*/
+getDischargeAmountScreenOffSinceCharge : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeAmountScreenDoze'>/**Get the amount the battery has discharged while the screen was dozing,
+</span> since the last time power was unplugged.
+*/
+getDischargeAmountScreenDoze : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeAmountScreenDozeSinceCharge'>/**Get the amount the battery has discharged while the screen was dozing,
+</span> since the last time the device was charged.
+*/
+getDischargeAmountScreenDozeSinceCharge : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeBatteryUptime'>/**Returns the total, last, or current battery uptime in microseconds.
+</span>@param {Number} curTime the elapsed realtime in microseconds.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+computeBatteryUptime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeBatteryRealtime'>/**Returns the total, last, or current battery realtime in microseconds.
+</span>@param {Number} curTime the current elapsed realtime in microseconds.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+computeBatteryRealtime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeBatteryScreenOffUptime'>/**Returns the total, last, or current battery screen off/doze uptime in microseconds.
+</span>@param {Number} curTime the elapsed realtime in microseconds.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+computeBatteryScreenOffUptime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeBatteryScreenOffRealtime'>/**Returns the total, last, or current battery screen off/doze realtime in microseconds.
+</span>@param {Number} curTime the current elapsed realtime in microseconds.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+computeBatteryScreenOffRealtime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeUptime'>/**Returns the total, last, or current uptime in microseconds.
+</span>@param {Number} curTime the current elapsed realtime in microseconds.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+computeUptime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeRealtime'>/**Returns the total, last, or current realtime in microseconds.
+</span>@param {Number} curTime the current elapsed realtime in microseconds.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+computeRealtime : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeBatteryTimeRemaining'>/**Compute an approximation for how much run time (in microseconds) is remaining on
+</span> the battery.  Returns -1 if no time can be computed: either there is not
+ enough current data to make a decision, or the battery is currently
+ charging.
+@param {Number} curTime The current elepsed realtime in microseconds.
+*/
+computeBatteryTimeRemaining : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getUahDischargeScreenOff'>/**Return the amount of battery discharge while the screen was off, measured in
+</span> micro-Ampere-hours. This will be non-zero only if the device's battery has
+ a coulomb counter.
+*/
+getUahDischargeScreenOff : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getUahDischargeScreenDoze'>/**Return the amount of battery discharge while the screen was in doze mode, measured in
+</span> micro-Ampere-hours. This will be non-zero only if the device's battery has
+ a coulomb counter.
+*/
+getUahDischargeScreenDoze : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getUahDischarge'>/**Return the amount of battery discharge  measured in micro-Ampere-hours. This will be
+</span> non-zero only if the device's battery has a coulomb counter.
+*/
+getUahDischarge : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getUahDischargeLightDoze'>/**
+</span>@return {Number} the amount of battery discharge while the device is in light idle mode, measured in
+ micro-Ampere-hours.
+*/
+getUahDischargeLightDoze : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getUahDischargeDeepDoze'>/**
+</span>@return {Number} the amount of battery discharge while the device is in deep idle mode, measured in
+ micro-Ampere-hours.
+*/
+getUahDischargeDeepDoze : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getEstimatedBatteryCapacity'>/**Returns the estimated real battery capacity, which may be less than the capacity
+</span> declared by the PowerProfile.
+@return {Number} The estimated battery capacity in mAh.
+*/
+getEstimatedBatteryCapacity : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getMinLearnedBatteryCapacity'>/**
+</span>@return {Number} The minimum learned battery capacity in uAh.
+*/
+getMinLearnedBatteryCapacity : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getMaxLearnedBatteryCapacity'>/**
+</span>@return {Number} The maximum learned battery capacity in uAh.
+*/
+getMaxLearnedBatteryCapacity : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDischargeLevelStepTracker'>/**Return the array of discharge step durations.
+</span>*/
+getDischargeLevelStepTracker : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDailyDischargeLevelStepTracker'>/**Return the array of daily discharge step durations.
+</span>*/
+getDailyDischargeLevelStepTracker : function(  ) {},
+
+<span id='android-os-BatteryStats-method-computeChargeTimeRemaining'>/**Compute an approximation for how much time (in microseconds) remains until the battery
+</span> is fully charged.  Returns -1 if no time can be computed: either there is not
+ enough current data to make a decision, or the battery is currently
+ discharging.
+@param {Number} curTime The current elepsed realtime in microseconds.
+*/
+computeChargeTimeRemaining : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getChargeLevelStepTracker'>/**Return the array of charge step durations.
+</span>*/
+getChargeLevelStepTracker : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDailyChargeLevelStepTracker'>/**Return the array of daily charge step durations.
+</span>*/
+getDailyChargeLevelStepTracker : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getDailyPackageChanges'>/**
+</span>*/
+getDailyPackageChanges : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getWakeupReasonStats'>/**
+</span>*/
+getWakeupReasonStats : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getKernelWakelockStats'>/**
+</span>*/
+getKernelWakelockStats : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getRpmStats'>/**Returns Timers tracking the total time of each Resource Power Manager state and voter.
+</span>*/
+getRpmStats : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getScreenOffRpmStats'>/**Returns Timers tracking the screen-off time of each Resource Power Manager state and voter.
+</span>*/
+getScreenOffRpmStats : function(  ) {},
+
+<span id='android-os-BatteryStats-method-getKernelMemoryStats'>/**
+</span>*/
+getKernelMemoryStats : function(  ) {},
+
+<span id='android-os-BatteryStats-method-writeToParcelWithoutUids'>/**
+</span>*/
+writeToParcelWithoutUids : function(  ) {},
+
+<span id='android-os-BatteryStats-method-formatTimeMs'>/**
+</span>*/
+formatTimeMs : function(  ) {},
+
+<span id='android-os-BatteryStats-method-formatTimeMsNoSpace'>/**
+</span>*/
+formatTimeMsNoSpace : function(  ) {},
+
+<span id='android-os-BatteryStats-method-formatRatioLocked'>/**
+</span>*/
+formatRatioLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-dumpCheckinLocked'>/**Temporary for settings.
+</span>*/
+dumpCheckinLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-dumpCheckinLocked'>/**Checkin server version of dump to produce more compact, computer-readable log.
+</span>
+ NOTE: all times are expressed in microseconds, unless specified otherwise.
+*/
+dumpCheckinLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-dumpLocked'>/**Temporary for settings.
+</span>*/
+dumpLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-dumpLocked'>/**
+</span>*/
+dumpLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-prepareForDumpLocked'>/**
+</span>*/
+prepareForDumpLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-dumpLocked'>/**Dumps a human-readable summary of the battery statistics to the given PrintWriter.
+</span>@param {Object {Context}} pw a Printer to receive the dump output.
+*/
+dumpLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-dumpCheckinLocked'>/**
+</span>*/
+dumpCheckinLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-method-dumpProtoLocked'>/**Dump #STATS_SINCE_CHARGED batterystats data to a proto. If the flags include
+</span> DUMP_INCLUDE_HISTORY or DUMP_HISTORY_ONLY, only the history will be dumped.
+@hide 
+*/
+dumpProtoLocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

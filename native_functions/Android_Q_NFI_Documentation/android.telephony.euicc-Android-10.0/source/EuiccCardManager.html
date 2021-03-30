@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-euicc-EuiccCardManager'>/**@class android.telephony.euicc.EuiccCardManager
+</span>@extends java.lang.Object
+
+ EuiccCardManager is the application interface to an eSIM card.
+ @hide
+*/
+var EuiccCardManager = {
+
+<span id='android-telephony-euicc-EuiccCardManager-property-CANCEL_REASON_END_USER_REJECTED'>/** The end user has rejected the download. The profile will be put into the error state and
+</span> cannot be downloaded again without the operator's change.
+*/
+CANCEL_REASON_END_USER_REJECTED : &quot;0&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-CANCEL_REASON_POSTPONED'>/**The download has been postponed and can be restarted later. */
+</span>CANCEL_REASON_POSTPONED : &quot;1&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-CANCEL_REASON_TIMEOUT'>/**The download has been timed out and can be restarted later. */
+</span>CANCEL_REASON_TIMEOUT : &quot;2&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-CANCEL_REASON_PPR_NOT_ALLOWED'>/** The profile to be downloaded cannot be installed due to its policy rule is not allowed by
+</span> the RAT (Rules Authorisation Table) on the eUICC or by other installed profiles. The
+ download can be restarted later.
+*/
+CANCEL_REASON_PPR_NOT_ALLOWED : &quot;3&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-RESET_OPTION_DELETE_OPERATIONAL_PROFILES'>/**Deletes all operational profiles. */
+</span>RESET_OPTION_DELETE_OPERATIONAL_PROFILES : &quot;1&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-RESET_OPTION_DELETE_FIELD_LOADED_TEST_PROFILES'>/**Deletes all field-loaded testing profiles. */
+</span>RESET_OPTION_DELETE_FIELD_LOADED_TEST_PROFILES : &quot;2&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-RESET_OPTION_RESET_DEFAULT_SMDP_ADDRESS'>/**Resets the default SM-DP+ address. */
+</span>RESET_OPTION_RESET_DEFAULT_SMDP_ADDRESS : &quot;4&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-RESULT_OK'>/**Result code of execution with no error. */
+</span>RESULT_OK : &quot;0&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-RESULT_UNKNOWN_ERROR'>/**Result code of an unknown error. */
+</span>RESULT_UNKNOWN_ERROR : &quot;-1&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-RESULT_EUICC_NOT_FOUND'>/**Result code when the eUICC card with the given card Id is not found. */
+</span>RESULT_EUICC_NOT_FOUND : &quot;-2&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-property-RESULT_CALLER_NOT_ALLOWED'>/**Result code indicating the caller is not the active LPA. */
+</span>RESULT_CALLER_NOT_ALLOWED : &quot;-3&quot;,
+<span id='android-telephony-euicc-EuiccCardManager-method-requestAllProfiles'>/**Requests all the profiles on eUicc.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code and all the profiles.
+*/
+requestAllProfiles : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-requestProfile'>/**Requests the profile of the given iccid.
+</span>@param {String} cardId The Id of the eUICC.
+@param {String} iccid The iccid of the profile.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code and profile.
+*/
+requestProfile : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-disableProfile'>/**Disables the profile of the given iccid.
+</span>@param {String} cardId The Id of the eUICC.
+@param {String} iccid The iccid of the profile.
+@param {Boolean} refresh Whether sending the REFRESH command to modem.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code.
+*/
+disableProfile : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-switchToProfile'>/**Switches from the current profile to another profile. The current profile will be disabled
+</span> and the specified profile will be enabled.
+@param {String} cardId The Id of the eUICC.
+@param {String} iccid The iccid of the profile to switch to.
+@param {Boolean} refresh Whether sending the REFRESH command to modem.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code and the EuiccProfileInfo enabled.
+*/
+switchToProfile : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-setNickname'>/**Sets the nickname of the profile of the given iccid.
+</span>@param {String} cardId The Id of the eUICC.
+@param {String} iccid The iccid of the profile.
+@param {String} nickname The nickname of the profile.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code.
+*/
+setNickname : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-deleteProfile'>/**Deletes the profile of the given iccid from eUICC.
+</span>@param {String} cardId The Id of the eUICC.
+@param {String} iccid The iccid of the profile.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code.
+*/
+deleteProfile : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-resetMemory'>/**Resets the eUICC memory.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Number} options Bits of the options of resetting which parts of the eUICC memory. See
+     EuiccCard for details.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code.
+*/
+resetMemory : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-requestDefaultSmdpAddress'>/**Requests the default SM-DP+ address from eUICC.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code and the default SM-DP+ address.
+*/
+requestDefaultSmdpAddress : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-requestSmdsAddress'>/**Requests the SM-DS address from eUICC.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code and the SM-DS address.
+*/
+requestSmdsAddress : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-setDefaultSmdpAddress'>/**Sets the default SM-DP+ address of eUICC.
+</span>@param {String} cardId The Id of the eUICC.
+@param {String} defaultSmdpAddress The default SM-DP+ address to set.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback The callback to get the result code.
+*/
+setDefaultSmdpAddress : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-requestRulesAuthTable'>/**Requests Rules Authorisation Table.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and the rule authorisation table.
+*/
+requestRulesAuthTable : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-requestEuiccChallenge'>/**Requests the eUICC challenge for new profile downloading.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and the challenge.
+*/
+requestEuiccChallenge : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-requestEuiccInfo1'>/**Requests the eUICC info1 defined in GSMA RSP v2.0+ for new profile downloading.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and the info1.
+*/
+requestEuiccInfo1 : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-requestEuiccInfo2'>/**Gets the eUICC info2 defined in GSMA RSP v2.0+ for new profile downloading.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and the info2.
+*/
+requestEuiccInfo2 : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-authenticateServer'>/**Authenticates the SM-DP+ server by the eUICC.
+</span>@param {String} cardId The Id of the eUICC.
+@param {String} matchingId the activation code token defined in GSMA RSP v2.0+ or empty when it is not
+     required.
+@param {Object {byte[]}} serverSigned1 ASN.1 data in byte array signed and returned by the SM-DP+ server.
+@param {Object {byte[]}} serverSignature1 ASN.1 data in byte array indicating a SM-DP+ signature which is
+     returned by SM-DP+ server.
+@param {Object {byte[]}} euiccCiPkIdToBeUsed ASN.1 data in byte array indicating CI Public Key Identifier to be
+     used by the eUICC for signature which is returned by SM-DP+ server. This is defined in
+     GSMA RSP v2.0+.
+@param {Object {byte[]}} serverCertificate ASN.1 data in byte array indicating SM-DP+ Certificate returned by
+     SM-DP+ server.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and a byte array which represents a
+     {@code AuthenticateServerResponse} defined in GSMA RSP v2.0+.
+*/
+authenticateServer : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-prepareDownload'>/**Prepares the profile download request sent to SM-DP+.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {byte[]}} hashCc the hash of confirmation code. It can be null if there is no confirmation code
+     required.
+@param {Object {byte[]}} smdpSigned2 ASN.1 data in byte array indicating the data to be signed by the SM-DP+
+     returned by SM-DP+ server.
+@param {Object {byte[]}} smdpSignature2 ASN.1 data in byte array indicating the SM-DP+ signature returned by
+     SM-DP+ server.
+@param {Object {byte[]}} smdpCertificate ASN.1 data in byte array indicating the SM-DP+ Certificate returned
+     by SM-DP+ server.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and a byte array which represents a
+     {@code PrepareDownloadResponse} defined in GSMA RSP v2.0+
+*/
+prepareDownload : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-loadBoundProfilePackage'>/**Loads a downloaded bound profile package onto the eUICC.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {byte[]}} boundProfilePackage the Bound Profile Package data returned by SM-DP+ server.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and a byte array which represents a
+     {@code LoadBoundProfilePackageResponse} defined in GSMA RSP v2.0+.
+*/
+loadBoundProfilePackage : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-cancelSession'>/**Cancels the current profile download session.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Object {byte[]}} transactionId the transaction ID returned by SM-DP+ server.
+@param {Number} reason the cancel reason.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and an byte[] which represents a
+     {@code CancelSessionResponse} defined in GSMA RSP v2.0+.
+*/
+cancelSession : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-listNotifications'>/**Lists all notifications of the given {@code events}.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Number} events bits of the event types ({@link EuiccNotification.Event}) to list.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and the list of notifications.
+*/
+listNotifications : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-retrieveNotificationList'>/**Retrieves contents of all notification of the given {@code events}.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Number} events bits of the event types ({@link EuiccNotification.Event}) to list.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and the list of notifications.
+*/
+retrieveNotificationList : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-retrieveNotification'>/**Retrieves the content of a notification of the given {@code seqNumber}.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Number} seqNumber the sequence number of the notification.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code and the notification.
+*/
+retrieveNotification : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccCardManager-method-removeNotificationFromList'>/**Removes a notification from eUICC.
+</span>@param {String} cardId The Id of the eUICC.
+@param {Number} seqNumber the sequence number of the notification.
+@param {Object {Executor}} executor The executor through which the callback should be invoked.
+@param {Object {android.telephony.euicc.EuiccCardManager.ResultCallback}} callback the callback to get the result code.
+*/
+removeNotificationFromList : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

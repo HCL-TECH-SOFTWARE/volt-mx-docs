@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-PhoneInternalInterface'>/**@class com.android.internal.telephony.PhoneInternalInterface
+</span> Internal interface used to control the phone; SDK developers cannot
+ obtain this interface.
+
+ {@hide}
+
+*/
+var PhoneInternalInterface = {
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-DEBUG_PHONE'>/**used to enable additional debug messages */
+</span>DEBUG_PHONE : &quot;true&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_MMS'>/***/
+</span>FEATURE_ENABLE_MMS : &quot;enableMMS&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_SUPL'>/***/
+</span>FEATURE_ENABLE_SUPL : &quot;enableSUPL&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_DUN'>/***/
+</span>FEATURE_ENABLE_DUN : &quot;enableDUN&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_HIPRI'>/***/
+</span>FEATURE_ENABLE_HIPRI : &quot;enableHIPRI&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_DUN_ALWAYS'>/***/
+</span>FEATURE_ENABLE_DUN_ALWAYS : &quot;enableDUNAlways&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_FOTA'>/***/
+</span>FEATURE_ENABLE_FOTA : &quot;enableFOTA&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_IMS'>/***/
+</span>FEATURE_ENABLE_IMS : &quot;enableIMS&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_CBS'>/***/
+</span>FEATURE_ENABLE_CBS : &quot;enableCBS&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-FEATURE_ENABLE_EMERGENCY'>/***/
+</span>FEATURE_ENABLE_EMERGENCY : &quot;enableEmergency&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_ROAMING_ON'>/** Optional reasons for disconnect and connect
+</span>*/
+REASON_ROAMING_ON : &quot;roamingOn&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_ROAMING_OFF'>/***/
+</span>REASON_ROAMING_OFF : &quot;roamingOff&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_DISABLED_INTERNAL'>/***/
+</span>REASON_DATA_DISABLED_INTERNAL : &quot;dataDisabledInternal&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_ENABLED'>/***/
+</span>REASON_DATA_ENABLED : &quot;dataEnabled&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_ATTACHED'>/***/
+</span>REASON_DATA_ATTACHED : &quot;dataAttached&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_DETACHED'>/***/
+</span>REASON_DATA_DETACHED : &quot;dataDetached&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_CDMA_DATA_ATTACHED'>/***/
+</span>REASON_CDMA_DATA_ATTACHED : &quot;cdmaDataAttached&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_CDMA_DATA_DETACHED'>/***/
+</span>REASON_CDMA_DATA_DETACHED : &quot;cdmaDataDetached&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_APN_CHANGED'>/***/
+</span>REASON_APN_CHANGED : &quot;apnChanged&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_APN_SWITCHED'>/***/
+</span>REASON_APN_SWITCHED : &quot;apnSwitched&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_APN_FAILED'>/***/
+</span>REASON_APN_FAILED : &quot;apnFailed&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_RESTORE_DEFAULT_APN'>/***/
+</span>REASON_RESTORE_DEFAULT_APN : &quot;restoreDefaultApn&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_RADIO_TURNED_OFF'>/***/
+</span>REASON_RADIO_TURNED_OFF : &quot;radioTurnedOff&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_PDP_RESET'>/***/
+</span>REASON_PDP_RESET : &quot;pdpReset&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_VOICE_CALL_ENDED'>/***/
+</span>REASON_VOICE_CALL_ENDED : &quot;2GVoiceCallEnded&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_VOICE_CALL_STARTED'>/***/
+</span>REASON_VOICE_CALL_STARTED : &quot;2GVoiceCallStarted&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_PS_RESTRICT_ENABLED'>/***/
+</span>REASON_PS_RESTRICT_ENABLED : &quot;psRestrictEnabled&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_PS_RESTRICT_DISABLED'>/***/
+</span>REASON_PS_RESTRICT_DISABLED : &quot;psRestrictDisabled&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_SIM_LOADED'>/***/
+</span>REASON_SIM_LOADED : &quot;simLoaded&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_NW_TYPE_CHANGED'>/***/
+</span>REASON_NW_TYPE_CHANGED : &quot;nwTypeChanged&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_DEPENDENCY_MET'>/***/
+</span>REASON_DATA_DEPENDENCY_MET : &quot;dependencyMet&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_DEPENDENCY_UNMET'>/***/
+</span>REASON_DATA_DEPENDENCY_UNMET : &quot;dependencyUnmet&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_LOST_DATA_CONNECTION'>/***/
+</span>REASON_LOST_DATA_CONNECTION : &quot;lostDataConnection&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_CONNECTED'>/***/
+</span>REASON_CONNECTED : &quot;connected&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_SINGLE_PDN_ARBITRATION'>/***/
+</span>REASON_SINGLE_PDN_ARBITRATION : &quot;SinglePdnArbitration&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_SPECIFIC_DISABLED'>/***/
+</span>REASON_DATA_SPECIFIC_DISABLED : &quot;specificDisabled&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_SIM_NOT_READY'>/***/
+</span>REASON_SIM_NOT_READY : &quot;simNotReady&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_IWLAN_AVAILABLE'>/***/
+</span>REASON_IWLAN_AVAILABLE : &quot;iwlanAvailable&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_CARRIER_CHANGE'>/***/
+</span>REASON_CARRIER_CHANGE : &quot;carrierChange&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_CARRIER_ACTION_DISABLE_METERED_APN'>/***/
+</span>REASON_CARRIER_ACTION_DISABLE_METERED_APN : &quot;carrierActionDisableMeteredApn&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_CSS_INDICATOR_CHANGED'>/***/
+</span>REASON_CSS_INDICATOR_CHANGED : &quot;cssIndicatorChanged&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_RELEASED_BY_CONNECTIVITY_SERVICE'>/***/
+</span>REASON_RELEASED_BY_CONNECTIVITY_SERVICE : &quot;releasedByConnectivityService&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-REASON_DATA_ENABLED_OVERRIDE'>/***/
+</span>REASON_DATA_ENABLED_OVERRIDE : &quot;dataEnabledOverride&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_UNSPECIFIED'>/***/
+</span>BM_UNSPECIFIED : &quot;0&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_EURO_BAND'>/***/
+</span>BM_EURO_BAND : &quot;1&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_US_BAND'>/***/
+</span>BM_US_BAND : &quot;2&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_JPN_BAND'>/***/
+</span>BM_JPN_BAND : &quot;3&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_AUS_BAND'>/***/
+</span>BM_AUS_BAND : &quot;4&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_AUS2_BAND'>/***/
+</span>BM_AUS2_BAND : &quot;5&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_CELL_800'>/***/
+</span>BM_CELL_800 : &quot;6&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_PCS'>/***/
+</span>BM_PCS : &quot;7&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_JTACS'>/***/
+</span>BM_JTACS : &quot;8&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_KOREA_PCS'>/***/
+</span>BM_KOREA_PCS : &quot;9&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_4_450M'>/***/
+</span>BM_4_450M : &quot;10&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_IMT2000'>/***/
+</span>BM_IMT2000 : &quot;11&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_7_700M2'>/***/
+</span>BM_7_700M2 : &quot;12&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_8_1800M'>/***/
+</span>BM_8_1800M : &quot;13&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_9_900M'>/***/
+</span>BM_9_900M : &quot;14&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_10_800M_2'>/***/
+</span>BM_10_800M_2 : &quot;15&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_EURO_PAMR'>/***/
+</span>BM_EURO_PAMR : &quot;16&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_AWS'>/***/
+</span>BM_AWS : &quot;17&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_US_2500M'>/***/
+</span>BM_US_2500M : &quot;18&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-BM_NUM_BAND_MODES'>/***/
+</span>BM_NUM_BAND_MODES : &quot;19&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-PREFERRED_NT_MODE'>/***/
+</span>PREFERRED_NT_MODE : &quot;null&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_RM_HOME'>/***/
+</span>CDMA_RM_HOME : &quot;0&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_RM_AFFILIATED'>/***/
+</span>CDMA_RM_AFFILIATED : &quot;1&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_RM_ANY'>/***/
+</span>CDMA_RM_ANY : &quot;2&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_SUBSCRIPTION_UNKNOWN'>/***/
+</span>CDMA_SUBSCRIPTION_UNKNOWN : &quot;-1&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_SUBSCRIPTION_RUIM_SIM'>/***/
+</span>CDMA_SUBSCRIPTION_RUIM_SIM : &quot;0&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_SUBSCRIPTION_NV'>/***/
+</span>CDMA_SUBSCRIPTION_NV : &quot;1&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-PREFERRED_CDMA_SUBSCRIPTION'>/***/
+</span>PREFERRED_CDMA_SUBSCRIPTION : &quot;0&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-TTY_MODE_OFF'>/***/
+</span>TTY_MODE_OFF : &quot;0&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-TTY_MODE_FULL'>/***/
+</span>TTY_MODE_FULL : &quot;1&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-TTY_MODE_HCO'>/***/
+</span>TTY_MODE_HCO : &quot;2&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-TTY_MODE_VCO'>/***/
+</span>TTY_MODE_VCO : &quot;3&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_SPL_UNLOCKED'>/** CDMA OTA PROVISION STATUS, the same as RIL_CDMA_OTA_Status in ril.h
+</span>*/
+CDMA_OTA_PROVISION_STATUS_SPL_UNLOCKED : &quot;0&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_SPC_RETRIES_EXCEEDED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_SPC_RETRIES_EXCEEDED : &quot;1&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_A_KEY_EXCHANGED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_A_KEY_EXCHANGED : &quot;2&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_SSD_UPDATED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_SSD_UPDATED : &quot;3&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_NAM_DOWNLOADED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_NAM_DOWNLOADED : &quot;4&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_MDN_DOWNLOADED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_MDN_DOWNLOADED : &quot;5&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_IMSI_DOWNLOADED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_IMSI_DOWNLOADED : &quot;6&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_PRL_DOWNLOADED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_PRL_DOWNLOADED : &quot;7&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_COMMITTED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_COMMITTED : &quot;8&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_OTAPA_STARTED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_OTAPA_STARTED : &quot;9&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_OTAPA_STOPPED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_OTAPA_STOPPED : &quot;10&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-property-CDMA_OTA_PROVISION_STATUS_OTAPA_ABORTED'>/***/
+</span>CDMA_OTA_PROVISION_STATUS_OTAPA_ABORTED : &quot;11&quot;,
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getServiceState'>/**Get the current ServiceState. Use
+</span> &lt;code&gt;registerForServiceStateChanged&lt;/code&gt; to be informed of
+ updates.
+*/
+getServiceState : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getDataConnectionState'>/**Get the current DataState. No change notification exists at this
+</span> interface -- use
+ {@link android.telephony.PhoneStateListener} instead.
+@param {String} apnType specify for which apn to get connection state info.
+*/
+getDataConnectionState : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getDataActivityState'>/**Get the current DataActivityState. No change notification exists at this
+</span> interface -- use
+ {@link android.telephony.TelephonyManager} instead.
+*/
+getDataActivityState : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getPendingMmiCodes'>/**Returns a list of MMI codes that are pending. (They have initiated
+</span> but have not yet completed).
+ Presently there is only ever one.
+ Use &lt;code&gt;registerForMmiInitiate&lt;/code&gt;
+ and &lt;code&gt;registerForMmiComplete&lt;/code&gt; for change notification.
+*/
+getPendingMmiCodes : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-sendUssdResponse'>/**Sends user response to a USSD REQUEST message.  An MmiCode instance
+</span> representing this response is sent to handlers registered with
+ registerForMmiInitiate.
+@param {String} ussdMessge    Message to send in the response.
+*/
+sendUssdResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-registerForSuppServiceNotification'>/**Register for Supplementary Service notifications from the network.
+</span> Message.obj will contain an AsyncResult.
+ AsyncResult.result will be a SuppServiceNotification instance.
+@param {Object {Handler}} h Handler that receives the notification message.
+@param {Number} what User-defined message code.
+@param {Object {Object}} obj User object.
+*/
+registerForSuppServiceNotification : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-unregisterForSuppServiceNotification'>/**Unregisters for Supplementary Service notifications.
+</span> Extraneous calls are tolerated silently
+@param {Object {Handler}} h Handler to be removed from the registrant list.
+*/
+unregisterForSuppServiceNotification : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-acceptCall'>/**Answers a ringing or waiting call. Active calls, if any, go on hold.
+</span> Answering occurs asynchronously, and final notification occurs via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+@param {Number} videoState The video state in which to answer the call.
+@exception CallStateException when no call is ringing or waiting
+*/
+acceptCall : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-rejectCall'>/**Reject (ignore) a ringing call. In GSM, this means UDUB
+</span> (User Determined User Busy). Reject occurs asynchronously,
+ and final notification occurs via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+@exception CallStateException when no call is ringing or waiting
+*/
+rejectCall : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-switchHoldingAndActive'>/**Places any active calls on hold, and makes any held calls
+</span>  active. Switch occurs asynchronously and may fail.
+ Final notification occurs via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+@exception CallStateException if a call is ringing, waiting, or
+ dialing/alerting. In these cases, this operation may not be performed.
+*/
+switchHoldingAndActive : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-canConference'>/**Whether or not the phone can conference in the current phone
+</span> state--that is, one call holding and one call active.
+@return {Boolean} true if the phone can conference; false otherwise.
+*/
+canConference : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-conference'>/**Conferences holding and active. Conference occurs asynchronously
+</span> and may fail. Final notification occurs via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+@exception CallStateException if canConference() would return false.
+ In these cases, this operation may not be performed.
+*/
+conference : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-canTransfer'>/**Whether or not the phone can do explicit call transfer in the current
+</span> phone state--that is, one call holding and one call active.
+@return {Boolean} true if the phone can do explicit call transfer; false otherwise.
+*/
+canTransfer : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-explicitCallTransfer'>/**Connects the two calls and disconnects the subscriber from both calls
+</span> Explicit Call Transfer occurs asynchronously
+ and may fail. Final notification occurs via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+@exception CallStateException if canTransfer() would return false.
+ In these cases, this operation may not be performed.
+*/
+explicitCallTransfer : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-clearDisconnected'>/**Clears all DISCONNECTED connections from Call connection lists.
+</span> Calls that were in the DISCONNECTED state become idle. This occurs
+ synchronously.
+*/
+clearDisconnected : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getForegroundCall'>/**Gets the foreground call object, which represents all connections that
+</span> are dialing or active (all connections
+ that have their audio path connected).&lt;p&gt;
+
+ The foreground call is a singleton object. It is constant for the life
+ of this phone. It is never null.&lt;p&gt;
+
+ The foreground call will only ever be in one of these states:
+ IDLE, ACTIVE, DIALING, ALERTING, or DISCONNECTED.
+
+ State change notification is available via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+*/
+getForegroundCall : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getBackgroundCall'>/**Gets the background call object, which represents all connections that
+</span> are holding (all connections that have been accepted or connected, but
+ do not have their audio path connected). &lt;p&gt;
+
+ The background call is a singleton object. It is constant for the life
+ of this phone object . It is never null.&lt;p&gt;
+
+ The background call will only ever be in one of these states:
+ IDLE, HOLDING or DISCONNECTED.
+
+ State change notification is available via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+*/
+getBackgroundCall : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getRingingCall'>/**Gets the ringing call object, which represents an incoming
+</span> connection (if present) that is pending answer/accept. (This connection
+ may be RINGING or WAITING, and there may be only one.)&lt;p&gt;
+
+ The ringing call is a singleton object. It is constant for the life
+ of this phone. It is never null.&lt;p&gt;
+
+ The ringing call will only ever be in one of these states:
+ IDLE, INCOMING, WAITING or DISCONNECTED.
+
+ State change notification is available via
+ {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}.
+*/
+getRingingCall : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-dial'>/**Initiate a new voice connection. This happens asynchronously, so you
+</span> cannot assume the audio path is connected (or a call index has been
+ assigned) until PhoneStateChanged notification has occurred.
+@param {String} dialString The dial string.
+@param {Object {PhoneInternalInterface.DialArgs}} dialArgs Parameters to perform the dial with.
+@exception CallStateException if a new outgoing call is not currently
+                possible because no more call slots exist or a call exists
+                that is dialing, alerting, ringing, or waiting. Other
+                errors are handled asynchronously.
+*/
+dial : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-handlePinMmi'>/**Handles PIN MMI commands (PIN/PIN2/PUK/PUK2), which are initiated
+</span> without SEND (so &lt;code&gt;dial&lt;/code&gt; is not appropriate).
+@param {String} dialString the MMI command to be executed.
+@return {Boolean} true if MMI command is executed.
+*/
+handlePinMmi : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-handleUssdRequest'>/**Handles USSD commands
+</span>@param {String} ussdRequest the USSD command to be executed.
+@param {Object {ResultReceiver}} wrappedCallback receives the callback result.
+*/
+handleUssdRequest : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-handleInCallMmiCommands'>/**Handles in-call MMI commands. While in a call, or while receiving a
+</span> call, use this to execute MMI commands.
+ see 3GPP 20.030, section 6.5.5.1 for specs on the allowed MMI commands.
+@param {String} command the MMI command to be executed.
+@return {Boolean} true if the MMI command is executed.
+@throws CallStateException
+*/
+handleInCallMmiCommands : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-sendDtmf'>/**Play a DTMF tone on the active call. Ignored if there is no active call.
+</span>@param {String} c should be one of 0-9, '*' or '#'. Other values will be
+ silently ignored.
+*/
+sendDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-startDtmf'>/**Start to paly a DTMF tone on the active call. Ignored if there is no active call
+</span> or there is a playing DTMF tone.
+@param {String} c should be one of 0-9, '*' or '#'. Other values will be
+ silently ignored.
+*/
+startDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-stopDtmf'>/**Stop the playing DTMF tone. Ignored if there is no playing DTMF
+</span> tone or no active call.
+*/
+stopDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setRadioPower'>/**Sets the radio power on/off state (off is sometimes
+</span> called &quot;airplane mode&quot;). Current state can be gotten via
+ {@link #getServiceState}().{@link android.telephony.ServiceState#getState() getState()}.
+ &lt;strong&gt;Note: &lt;/strong&gt;This request is asynchronous.
+ getServiceState().getState() will not change immediately after this call.
+ registerForServiceStateChanged() to find out when the
+ request is complete.
+@param {Boolean} power true means &quot;on&quot;, false means &quot;off&quot;.
+*/
+setRadioPower : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getLine1Number'>/**Get the line 1 phone number (MSISDN). For CDMA phones, the MDN is returned
+</span> and {@link #getMsisdn}() will return the MSISDN on CDMA/LTE phones.&lt;p&gt;
+@return {String} phone number. May return null if not
+ available or the SIM is not ready
+*/
+getLine1Number : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getLine1AlphaTag'>/**Returns the alpha tag associated with the msisdn number.
+</span> If there is no alpha tag associated or the record is not yet available,
+ returns a default localized string. &lt;p&gt;
+*/
+getLine1AlphaTag : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setLine1Number'>/**Sets the MSISDN phone number in the SIM card.
+</span>@param {String} alphaTag the alpha tag associated with the MSISDN phone number
+        (see getMsisdnAlphaTag)
+@param {String} number the new MSISDN phone number to be set on the SIM.
+@param {Object {Message}} onComplete a callback message when the action is completed.
+@return {Boolean} true if req is sent, false otherwise. If req is not sent there will be no response,
+ that is, onComplete will never be sent.
+*/
+setLine1Number : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getVoiceMailNumber'>/**Get the voice mail access phone number. Typically dialed when the
+</span> user holds the &quot;1&quot; key in the phone app. May return null if not
+ available or the SIM is not ready.&lt;p&gt;
+*/
+getVoiceMailNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getVoiceMailAlphaTag'>/**Returns the alpha tag associated with the voice mail number.
+</span> If there is no alpha tag associated or the record is not yet available,
+ returns a default localized string. &lt;p&gt;
+
+ Please use this value instead of some other localized string when
+ showing a name for this number in the UI. For example, call log
+ entries should show this alpha tag. &lt;p&gt;
+
+ Usage of this alpha tag in the UI is a common carrier requirement.
+*/
+getVoiceMailAlphaTag : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setVoiceMailNumber'>/**setVoiceMailNumber
+</span> sets the voicemail number in the SIM card.
+@param {String} alphaTag the alpha tag associated with the voice mail number
+        (see getVoiceMailAlphaTag)
+@param {String} voiceMailNumber the new voicemail number to be set on the SIM.
+@param {Object {Message}} onComplete a callback message when the action is completed.
+*/
+setVoiceMailNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getCallForwardingOption'>/**getCallForwardingOptions
+</span> gets a call forwarding option. The return value of
+ ((AsyncResult)onComplete.obj) is an array of CallForwardInfo.
+@param {Number} commandInterfaceCFReason is one of the valid call forwarding
+        CF_REASONS, as defined in
+        &lt;code&gt;com.android.internal.telephony.CommandsInterface.&lt;/code&gt;
+@param {Object {Message}} onComplete a callback message when the action is completed.
+@see com.android.internal.telephony.CallForwardInfo for details.
+*/
+getCallForwardingOption : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setCallForwardingOption'>/**setCallForwardingOptions
+</span> sets a call forwarding option.
+@param {Number} commandInterfaceCFReason is one of the valid call forwarding
+        CF_REASONS, as defined in
+        &lt;code&gt;com.android.internal.telephony.CommandsInterface.&lt;/code&gt;
+@param {Number} commandInterfaceCFAction is one of the valid call forwarding
+        CF_ACTIONS, as defined in
+        &lt;code&gt;com.android.internal.telephony.CommandsInterface.&lt;/code&gt;
+@param {String} dialingNumber is the target phone number to forward calls to
+@param {Number} timerSeconds is used by CFNRy to indicate the timeout before
+        forwarding is attempted.
+@param {Object {Message}} onComplete a callback message when the action is completed.
+*/
+setCallForwardingOption : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getCallBarring'>/**Gets a call barring option. The return value of ((AsyncResult) onComplete.obj) will be an
+</span> Integer representing the sum of enabled serivice classes (sum of SERVICE_CLASS_*)
+@param {String} facility is one of CB_FACILTY_*
+@param {String} password is password or &quot;&quot; if not required
+@param {Object {Message}} serviceClass is a sum of SERVICE_CLASS_*
+@param {Number} onComplete is callback message when the action is completed.
+*/
+getCallBarring : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setCallBarring'>/**Sets a call barring option.
+</span>@param {String} facility is one of CB_FACILTY_*
+@param {Boolean} lockState is true means lock, false means unlock
+@param {String} password is password or &quot;&quot; if not required
+@param {Object {Message}} serviceClass is a sum of SERVICE_CLASS_*
+@param {Number} onComplete is callback message when the action is completed.
+*/
+setCallBarring : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getOutgoingCallerIdDisplay'>/**getOutgoingCallerIdDisplay
+</span> gets outgoing caller id display. The return value of
+ ((AsyncResult)onComplete.obj) is an array of int, with a length of 2.
+@param {Object {Message}} onComplete a callback message when the action is completed.
+@see com.android.internal.telephony.CommandsInterface#getCLIR for details.
+*/
+getOutgoingCallerIdDisplay : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setOutgoingCallerIdDisplay'>/**setOutgoingCallerIdDisplay
+</span> sets a call forwarding option.
+@param {Number} commandInterfaceCLIRMode is one of the valid call CLIR
+        modes, as defined in
+        &lt;code&gt;com.android.internal.telephony.CommandsInterface./code&gt;
+@param {Object {Message}} onComplete a callback message when the action is completed.
+*/
+setOutgoingCallerIdDisplay : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getCallWaiting'>/**getCallWaiting
+</span> gets call waiting activation state. The return value of
+ ((AsyncResult)onComplete.obj) is an array of int, with a length of 1.
+@param {Object {Message}} onComplete a callback message when the action is completed.
+@see com.android.internal.telephony.CommandsInterface#queryCallWaiting for details.
+*/
+getCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setCallWaiting'>/**setCallWaiting
+</span> sets a call forwarding option.
+@param {Boolean} enable is a boolean representing the state that you are
+        requesting, true for enabled, false for disabled.
+@param {Object {Message}} onComplete a callback message when the action is completed.
+*/
+setCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getAvailableNetworks'>/**Scan available networks. This method is asynchronous; .
+</span> On completion, &lt;code&gt;response.obj&lt;/code&gt; is set to an AsyncResult with
+ one of the following members:.&lt;p&gt;
+&lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;response.obj.result&lt;/code&gt; will be a &lt;code&gt;List&lt;/code&gt; of
+ &lt;code&gt;OperatorInfo&lt;/code&gt; objects, or&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;response.obj.exception&lt;/code&gt; will be set with an exception
+ on failure.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+getAvailableNetworks : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-startNetworkScan'>/**Start a network scan. This method is asynchronous; .
+</span> On completion, &lt;code&gt;response.obj&lt;/code&gt; is set to an AsyncResult with
+ one of the following members:.&lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;response.obj.result&lt;/code&gt; will be a &lt;code&gt;NetworkScanResult&lt;/code&gt; object, or&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;response.obj.exception&lt;/code&gt; will be set with an exception
+ on failure.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+startNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-stopNetworkScan'>/**Stop ongoing network scan. This method is asynchronous; .
+</span> On completion, &lt;code&gt;response.obj&lt;/code&gt; is set to an AsyncResult with
+ one of the following members:.&lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;response.obj.result&lt;/code&gt; will be a &lt;code&gt;NetworkScanResult&lt;/code&gt; object, or&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;response.obj.exception&lt;/code&gt; will be set with an exception
+ on failure.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+stopNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setMute'>/**Mutes or unmutes the microphone for the active call. The microphone
+</span> is automatically unmuted if a call is answered, dialed, or resumed
+ from a holding state.
+@param {Boolean} muted true to mute the microphone,
+ false to activate the microphone.
+*/
+setMute : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getMute'>/**Gets current mute status. Use
+</span> {@link #registerForPreciseCallStateChanged(android.os.Handler, int,
+ java.lang.Object) registerForPreciseCallStateChanged()}
+ as a change notifcation, although presently phone state changed is not
+ fired when setMute() is called.
+@return {Boolean} true is muting, false is unmuting
+*/
+getMute : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-updateServiceLocation'>/**Update the ServiceState CellLocation for current network registration.
+</span>*/
+updateServiceLocation : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-enableLocationUpdates'>/**Enable location update notifications.
+</span>*/
+enableLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-disableLocationUpdates'>/**Disable location update notifications.
+</span>*/
+disableLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getDataRoamingEnabled'>/**
+</span>@return {Boolean} true if enable data connection on roaming
+*/
+getDataRoamingEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setDataRoamingEnabled'>/**
+</span>@param {Boolean} enable set true if enable data connection on roaming
+*/
+setDataRoamingEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-isUserDataEnabled'>/**
+</span>@return {Boolean} true if user has enabled data
+*/
+isUserDataEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getDeviceId'>/**Retrieves the unique device ID, e.g., IMEI for GSM phones and MEID for CDMA phones.
+</span>*/
+getDeviceId : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getDeviceSvn'>/**Retrieves the software version number for the device, e.g., IMEI/SV
+</span> for GSM phones.
+*/
+getDeviceSvn : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getSubscriberId'>/**Retrieves the unique subscriber ID, e.g., IMSI for GSM phones.
+</span>*/
+getSubscriberId : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getGroupIdLevel1'>/**Retrieves the Group Identifier Level1 for GSM phones.
+</span>*/
+getGroupIdLevel1 : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getGroupIdLevel2'>/**Retrieves the Group Identifier Level2 for phones.
+</span>*/
+getGroupIdLevel2 : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getEsn'>/**Retrieves the ESN for CDMA phones.
+</span>*/
+getEsn : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getMeid'>/**Retrieves MEID for CDMA phones.
+</span>*/
+getMeid : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getImei'>/**Retrieves IMEI for phones. Returns null if IMEI is not set.
+</span>*/
+getImei : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getIccPhoneBookInterfaceManager'>/**Retrieves the IccPhoneBookInterfaceManager of the Phone
+</span>*/
+getIccPhoneBookInterfaceManager : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-activateCellBroadcastSms'>/**Activate or deactivate cell broadcast SMS.
+</span>@param {Number} activate
+            0 = activate, 1 = deactivate
+@param {Object {Message}} response
+            Callback message is empty on completion
+*/
+activateCellBroadcastSms : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getCellBroadcastSmsConfig'>/**Query the current configuration of cdma cell broadcast SMS.
+</span>@param {Object {Message}} response
+            Callback message is empty on completion
+*/
+getCellBroadcastSmsConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setCellBroadcastSmsConfig'>/**Configure cell broadcast SMS.
+</span>
+ TODO: Change the configValuesArray to a RIL_BroadcastSMSConfig
+@param {Object {int[]}} response
+            Callback message is empty on completion
+*/
+setCellBroadcastSmsConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-setCarrierInfoForImsiEncryption'>/**
+</span>*/
+setCarrierInfoForImsiEncryption : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-getCarrierInfoForImsiEncryption'>/**Returns Carrier specific information that will be used to encrypt the IMSI and IMPI.
+</span>@param {Number} keyType whether the key is being used for WLAN or ePDG.
+@return {Object {android.telephony.ImsiEncryptionInfo}} ImsiEncryptionInfo which includes the Key Type, the Public Key
+        {@link java.security.PublicKey} and the Key Identifier.
+        The keyIdentifier This is used by the server to help it locate the private key to
+        decrypt the permanent identity.
+*/
+getCarrierInfoForImsiEncryption : function(  ) {},
+
+<span id='com-android-internal-telephony-PhoneInternalInterface-method-resetCarrierKeysForImsiEncryption'>/**Resets the Carrier Keys, by deleting them from the database and sending a download intent.
+</span>*/
+resetCarrierKeysForImsiEncryption : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

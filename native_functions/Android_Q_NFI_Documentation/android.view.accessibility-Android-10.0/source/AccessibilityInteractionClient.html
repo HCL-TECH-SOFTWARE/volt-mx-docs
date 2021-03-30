@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-accessibility-AccessibilityInteractionClient'>/**@class android.view.accessibility.AccessibilityInteractionClient
+</span>@extends IAccessibilityInteractionConnectionCallback.Stub
+
+ This class is a singleton that performs accessibility interaction
+ which is it queries remote view hierarchies about snapshots of their
+ views as well requests from these hierarchies to perform certain
+ actions on their views.
+
+ Rationale: The content retrieval APIs are synchronous from a client's
+     perspective but internally they are asynchronous. The client thread
+     calls into the system requesting an action and providing a callback
+     to receive the result after which it waits up to a timeout for that
+     result. The system enforces security and the delegates the request
+     to a given view hierarchy where a message is posted (from a binder
+     thread) describing what to be performed by the main UI thread the
+     result of which it delivered via the mentioned callback. However,
+     the blocked client thread and the main UI thread of the target view
+     hierarchy can be the same thread, for example an accessibility service
+     and an activity run in the same process, thus they are executed on the
+     same main thread. In such a case the retrieval will fail since the UI
+     thread that has to process the message describing the work to be done
+     is blocked waiting for a result is has to compute! To avoid this scenario
+     when making a call the client also passes its process and thread ids so
+     the accessed view hierarchy can detect if the client making the request
+     is running in its main UI thread. In such a case the view hierarchy,
+     specifically the binder thread performing the IPC to it, does not post a
+     message to be run on the UI thread but passes it to the singleton
+     interaction client through which all interactions occur and the latter is
+     responsible to execute the message before starting to wait for the
+     asynchronous result delivered via the callback. In this case the expected
+     result is already received so no waiting is performed.
+
+ @hide
+*/
+var AccessibilityInteractionClient = {
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-property-NO_ID'>/***/
+</span>NO_ID : &quot;-1&quot;,
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-getInstance'>/**
+</span>@return {Object {android.view.accessibility.AccessibilityInteractionClient}} The client for the current thread.
+*/
+getInstance : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-getInstanceForThread'>/**&lt;strong&gt;Note:&lt;/strong&gt; We keep one instance per interrogating thread since
+</span> the instance contains state which can lead to undesired thread interleavings.
+ We do not have a thread local variable since other threads should be able to
+ look up the correct client knowing a thread id. See ViewRootImpl for details.
+@return {Object {android.view.accessibility.AccessibilityInteractionClient}} The client for a given &lt;code&gt;threadId&lt;/code&gt;.
+*/
+getInstanceForThread : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-getConnection'>/**Gets a cached accessibility service connection.
+</span>@param {Number} connectionId The connection id.
+@return {Object {IAccessibilityServiceConnection}} The cached connection if such.
+*/
+getConnection : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-addConnection'>/**Adds a cached accessibility service connection.
+</span>@param {Number} connectionId The connection id.
+@param {Object {IAccessibilityServiceConnection}} connection The connection.
+*/
+addConnection : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-removeConnection'>/**Removes a cached accessibility service connection.
+</span>@param {Number} connectionId The connection id.
+*/
+removeConnection : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-setCache'>/**This method is only for testing. Replacing the cache is a generally terrible idea, but
+</span> tests need to be able to verify this class's interactions with the cache
+*/
+setCache : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-setSameThreadMessage'>/**Sets the message to be processed if the interacted view hierarchy
+</span> and the interacting client are running in the same thread.
+@param {Object {Message}} message The message.
+*/
+setSameThreadMessage : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-getRootInActiveWindow'>/**Gets the root {@link android.view.accessibility.AccessibilityNodeInfo} in the currently active window.
+</span>@param {Number} connectionId The id of a connection for interacting with the system.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The root {@link AccessibilityNodeInfo} if found, null otherwise.
+*/
+getRootInActiveWindow : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-getWindow'>/**Gets the info for a window.
+</span>@param {Number} connectionId The id of a connection for interacting with the system.
+@param {Number} accessibilityWindowId A unique window id. Use
+     {@link android.view.accessibility.AccessibilityWindowInfo#ACTIVE_WINDOW_ID}
+     to query the currently active window.
+@return {Object {android.view.accessibility.AccessibilityWindowInfo}} The {@link AccessibilityWindowInfo}.
+*/
+getWindow : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-getWindows'>/**Gets the info for all windows.
+</span>@param {Number} connectionId The id of a connection for interacting with the system.
+@return {Object {java.util.List}} The {@link AccessibilityWindowInfo} list.
+*/
+getWindows : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-findAccessibilityNodeInfoByAccessibilityId'>/**Finds an {@link android.view.accessibility.AccessibilityNodeInfo} by accessibility id.
+</span>@param {Number} connectionId The id of a connection for interacting with the system.
+@param {Number} accessibilityWindowId A unique window id. Use
+     {@link android.view.accessibility.AccessibilityWindowInfo#ACTIVE_WINDOW_ID}
+     to query the currently active window.
+@param {Number} accessibilityNodeId A unique view id or virtual descendant id from
+     where to start the search. Use
+     {@link android.view.accessibility.AccessibilityNodeInfo#ROOT_NODE_ID}
+     to start from the root.
+@param {Boolean} bypassCache Whether to bypass the cache while looking for the node.
+@param {Number} prefetchFlags flags to guide prefetching.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} An {@link AccessibilityNodeInfo} if found, null otherwise.
+*/
+findAccessibilityNodeInfoByAccessibilityId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-findAccessibilityNodeInfosByViewId'>/**Finds an {@link android.view.accessibility.AccessibilityNodeInfo} by View id. The search is performed in
+</span> the window whose id is specified and starts from the node whose accessibility
+ id is specified.
+@param {Number} connectionId The id of a connection for interacting with the system.
+@param {Number} accessibilityWindowId A unique window id. Use
+     {@link android.view.accessibility.AccessibilityWindowInfo#ACTIVE_WINDOW_ID}
+     to query the currently active window.
+@param {Number} accessibilityNodeId A unique view id or virtual descendant id from
+     where to start the search. Use
+     {@link android.view.accessibility.AccessibilityNodeInfo#ROOT_NODE_ID}
+     to start from the root.
+@param {String} viewId The fully qualified resource name of the view id to find.
+@return {Object {java.util.List}} An list of {@link AccessibilityNodeInfo} if found, empty list otherwise.
+*/
+findAccessibilityNodeInfosByViewId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-findAccessibilityNodeInfosByText'>/**Finds {@link android.view.accessibility.AccessibilityNodeInfo}s by View text. The match is case
+</span> insensitive containment. The search is performed in the window whose
+ id is specified and starts from the node whose accessibility id is
+ specified.
+@param {Number} connectionId The id of a connection for interacting with the system.
+@param {Number} accessibilityWindowId A unique window id. Use
+     {@link android.view.accessibility.AccessibilityWindowInfo#ACTIVE_WINDOW_ID}
+     to query the currently active window.
+@param {Number} accessibilityNodeId A unique view id or virtual descendant id from
+     where to start the search. Use
+     {@link android.view.accessibility.AccessibilityNodeInfo#ROOT_NODE_ID}
+     to start from the root.
+@param {String} text The searched text.
+@return {Object {java.util.List}} A list of found {@link AccessibilityNodeInfo}s.
+*/
+findAccessibilityNodeInfosByText : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-findFocus'>/**Finds the {@link android.view.accessibility.AccessibilityNodeInfo} that has the
+</span> specified focus type. The search is performed in the window whose id is specified
+ and starts from the node whose accessibility id is specified.
+@param {Number} connectionId The id of a connection for interacting with the system.
+@param {Number} accessibilityWindowId A unique window id. Use
+     {@link android.view.accessibility.AccessibilityWindowInfo#ACTIVE_WINDOW_ID}
+     to query the currently active window.
+@param {Number} accessibilityNodeId A unique view id or virtual descendant id from
+     where to start the search. Use
+     {@link android.view.accessibility.AccessibilityNodeInfo#ROOT_NODE_ID}
+     to start from the root.
+@param {Number} focusType The focus type.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The accessibility focused {@link AccessibilityNodeInfo}.
+*/
+findFocus : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-focusSearch'>/**Finds the accessibility focused {@link android.view.accessibility.AccessibilityNodeInfo}.
+</span> The search is performed in the window whose id is specified and starts from the
+ node whose accessibility id is specified.
+@param {Number} connectionId The id of a connection for interacting with the system.
+@param {Number} accessibilityWindowId A unique window id. Use
+     {@link android.view.accessibility.AccessibilityWindowInfo#ACTIVE_WINDOW_ID}
+     to query the currently active window.
+@param {Number} accessibilityNodeId A unique view id or virtual descendant id from
+     where to start the search. Use
+     {@link android.view.accessibility.AccessibilityNodeInfo#ROOT_NODE_ID}
+     to start from the root.
+@param {Number} direction The direction in which to search for focusable.
+@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The accessibility focused {@link AccessibilityNodeInfo}.
+*/
+focusSearch : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-performAccessibilityAction'>/**Performs an accessibility action on an {@link android.view.accessibility.AccessibilityNodeInfo}.
+</span>@param {Number} connectionId The id of a connection for interacting with the system.
+@param {Number} accessibilityWindowId A unique window id. Use
+     {@link android.view.accessibility.AccessibilityWindowInfo#ACTIVE_WINDOW_ID}
+     to query the currently active window.
+@param {Number} accessibilityNodeId A unique view id or virtual descendant id from
+     where to start the search. Use
+     {@link android.view.accessibility.AccessibilityNodeInfo#ROOT_NODE_ID}
+     to start from the root.
+@param {Number} action The action to perform.
+@param {Object {Bundle}} arguments Optional action arguments.
+@return {Boolean} Whether the action was performed.
+*/
+performAccessibilityAction : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-clearCache'>/**
+</span>*/
+clearCache : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-onAccessibilityEvent'>/**
+</span>*/
+onAccessibilityEvent : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-setFindAccessibilityNodeInfoResult'>/**{@inheritDoc}
+</span>*/
+setFindAccessibilityNodeInfoResult : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-setFindAccessibilityNodeInfosResult'>/**{@inheritDoc}
+</span>*/
+setFindAccessibilityNodeInfosResult : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityInteractionClient-method-setPerformAccessibilityActionResult'>/**{@inheritDoc}
+</span>*/
+setPerformAccessibilityActionResult : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

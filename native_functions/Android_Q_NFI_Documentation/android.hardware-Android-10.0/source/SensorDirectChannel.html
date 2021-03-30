@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-SensorDirectChannel'>/**@class android.hardware.SensorDirectChannel
+</span> implements java.nio.channels.Channel
+
+@extends java.lang.Object
+
+ Class representing a sensor direct channel. Use
+ {@link android.hardware.SensorManager#createDirectChannel(android.os.MemoryFile)} or
+ {@link SensorManager#createDirectChannel(android.hardware.HardwareBuffer)}
+ to obtain an object. The channel object can be then configured
+ (see {@link #configure(Sensor, int)})
+ to start delivery of sensor events into shared memory buffer.
+*/
+var SensorDirectChannel = {
+
+<span id='android-hardware-SensorDirectChannel-property-TYPE_MEMORY_FILE'>/** Shared memory type ashmem, wrapped in MemoryFile object.
+</span>
+ @see SensorManager#createDirectChannel(MemoryFile)
+*/
+TYPE_MEMORY_FILE : &quot;1&quot;,
+<span id='android-hardware-SensorDirectChannel-property-TYPE_HARDWARE_BUFFER'>/** Shared memory type wrapped by HardwareBuffer object.
+</span>
+ @see SensorManager#createDirectChannel(HardwareBuffer)
+*/
+TYPE_HARDWARE_BUFFER : &quot;2&quot;,
+<span id='android-hardware-SensorDirectChannel-property-RATE_STOP'>/** Sensor stopped (no event output).
+</span>
+ @see #configure(Sensor, int)
+*/
+RATE_STOP : &quot;0&quot;,
+<span id='android-hardware-SensorDirectChannel-property-RATE_NORMAL'>/** Sensor operates at nominal rate of 50Hz.
+</span>
+ The actual rate is expected to be between 55% to 220% of nominal rate, thus between 27.5Hz to
+ 110Hz.
+
+ @see #configure(Sensor, int)
+*/
+RATE_NORMAL : &quot;1&quot;,
+<span id='android-hardware-SensorDirectChannel-property-RATE_FAST'>/** Sensor operates at nominal rate of 200Hz.
+</span>
+ The actual rate is expected to be between 55% to 220% of nominal rate, thus between 110Hz to
+ 440Hz.
+
+ @see #configure(Sensor, int)
+*/
+RATE_FAST : &quot;2&quot;,
+<span id='android-hardware-SensorDirectChannel-property-RATE_VERY_FAST'>/** Sensor operates at nominal rate of 800Hz.
+</span>
+ The actual rate is expected to be between 55% to 220% of nominal rate, thus between 440Hz to
+ 1760Hz.
+
+ @see #configure(Sensor, int)
+*/
+RATE_VERY_FAST : &quot;3&quot;,
+<span id='android-hardware-SensorDirectChannel-method-isOpen'>/**Determine if a channel is still valid. A channel is invalidated after {@link #close}() is
+</span> called.
+@return {Boolean} &lt;code&gt;true&lt;/code&gt; if channel is valid.
+*/
+isOpen : function(  ) {},
+
+<span id='android-hardware-SensorDirectChannel-method-isValid'>/**
+</span>@removed 
+*/
+isValid : function(  ) {},
+
+<span id='android-hardware-SensorDirectChannel-method-close'>/**Close sensor direct channel.
+</span>
+ Stop all active sensor in the channel and free sensor system resource related to channel.
+ Shared memory used for creating the direct channel need to be closed or freed separately.
+@see SensorManager#createDirectChannel(MemoryFile)
+@see SensorManager#createDirectChannel(HardwareBuffer)
+*/
+close : function(  ) {},
+
+<span id='android-hardware-SensorDirectChannel-method-configure'>/**Configure sensor rate or stop sensor report.
+</span>
+ To start event report of a sensor, or change rate of existing report, call this function with
+ rateLevel other than {@link android.hardware.SensorDirectChannel#RATE_STOP}. Sensor events
+ will be added into a queue formed by the shared memory used in creation of direction channel.
+ Each element of the queue has size of 104 bytes and represents a sensor event. Data
+ structure of an element (all fields in little-endian):
+
+ &lt;pre&gt;
+   offset   type                    name
+ ------------------------------------------------------------------------
+   0x0000   int32_t                 size (always 104)
+   0x0004   int32_t                 sensor report token
+   0x0008   int32_t                 type (see SensorType)
+   0x000C   uint32_t                atomic counter
+   0x0010   int64_t                 timestamp (see Event)
+   0x0018   float[16]/int64_t[8]    data (data type depends on sensor type)
+   0x0058   int32_t[4]              reserved (set to zero)
+ &lt;/pre&gt;
+
+ There are no head or tail pointers. The sequence and frontier of new sensor events is
+ determined by the atomic counter, which counts from 1 after creation of direct channel and
+ increments 1 for each new event. Atomic counter will wrap back to 1 after it reaches
+ UINT32_MAX, skipping value 0 to avoid confusion with uninitialized memory. The writer in
+ sensor system will wrap around from the start of shared memory region when it reaches the
+ end. If size of memory region is not a multiple of size of element (104 bytes), the residual
+ is not used at the end.  Function returns a positive sensor report token on success. This
+ token can be used to differentiate sensor events from multiple sensor of the same type. For
+ example, if there are two accelerometers in the system A and B, it is guaranteed different
+ report tokens will be returned when starting sensor A and B.
+
+ To stop a sensor, call this function with rateLevel equal {@link android.hardware.SensorDirectChannel#RATE_STOP}. If the sensor parameter is left to be null,
+ this will stop all active sensor report associated with the direct channel specified.
+ Function return 1 on success or 0 on failure.
+@param {Object {Sensor}} sensor A {@link android.hardware.Sensor} object to denote sensor to be operated.
+@param {Number} rateLevel rate level defined in {@link android.hardware.SensorDirectChannel}.
+@return {Number} * starting report or changing rate: positive sensor report token on success,
+                                             0 on failure;
+         * stopping report: 1 on success, 0 on failure.
+@throws NullPointerException when channel is null.
+*/
+configure : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-soundtrigger-SoundTriggerManager'>/**@class android.media.soundtrigger.SoundTriggerManager
+</span>@extends java.lang.Object
+
+ This class provides management of non-voice (general sound trigger) based sound recognition
+ models. Usage of this class is restricted to system or signature applications only. This allows
+ OEMs to write apps that can manage non-voice based sound trigger models.
+
+ @hide
+*/
+var SoundTriggerManager = {
+
+<span id='android-media-soundtrigger-SoundTriggerManager-property-FLAG_MESSAGE_TYPE_UNKNOWN'>/** Default message type.
+</span> @hide
+*/
+FLAG_MESSAGE_TYPE_UNKNOWN : &quot;-1&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-property-FLAG_MESSAGE_TYPE_RECOGNITION_EVENT'>/** Contents of EXTRA_MESSAGE_TYPE extra for a RecognitionEvent.
+</span> @hide
+*/
+FLAG_MESSAGE_TYPE_RECOGNITION_EVENT : &quot;0&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-property-FLAG_MESSAGE_TYPE_RECOGNITION_ERROR'>/** Contents of EXTRA_MESSAGE_TYPE extra for recognition error events.
+</span> @hide
+*/
+FLAG_MESSAGE_TYPE_RECOGNITION_ERROR : &quot;1&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-property-FLAG_MESSAGE_TYPE_RECOGNITION_PAUSED'>/** Contents of EXTRA_MESSAGE_TYPE extra for a recognition paused events.
+</span> @hide
+*/
+FLAG_MESSAGE_TYPE_RECOGNITION_PAUSED : &quot;2&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-property-FLAG_MESSAGE_TYPE_RECOGNITION_RESUMED'>/** Contents of EXTRA_MESSAGE_TYPE extra for recognition resumed events.
+</span> @hide
+*/
+FLAG_MESSAGE_TYPE_RECOGNITION_RESUMED : &quot;3&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-property-EXTRA_MESSAGE_TYPE'>/** Extra key in the intent for the type of the message.
+</span> @hide
+*/
+EXTRA_MESSAGE_TYPE : &quot;android.media.soundtrigger.MESSAGE_TYPE&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-property-EXTRA_RECOGNITION_EVENT'>/** Extra key in the intent that holds the RecognitionEvent parcelable.
+</span> @hide
+*/
+EXTRA_RECOGNITION_EVENT : &quot;android.media.soundtrigger.RECOGNITION_EVENT&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-property-EXTRA_STATUS'>/** Extra key in the intent that holds the status in an error message.
+</span> @hide
+*/
+EXTRA_STATUS : &quot;android.media.soundtrigger.STATUS&quot;,
+<span id='android-media-soundtrigger-SoundTriggerManager-method-updateModel'>/**Updates the given sound trigger model.
+</span>*/
+updateModel : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-getModel'>/**Returns the sound trigger model represented by the given UUID. An instance of {@link android.media.soundtrigger.SoundTriggerManager.Model}
+</span> is returned.
+*/
+getModel : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-deleteModel'>/**Deletes the sound model represented by the provided UUID.
+</span>*/
+deleteModel : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-createSoundTriggerDetector'>/**Creates an instance of {@link android.media.soundtrigger.SoundTriggerDetector} which can be used to start/stop
+</span> recognition on the model and register for triggers from the model. Note that this call
+ invalidates any previously returned instances for the same sound model Uuid.
+@param {Object {UUID}} soundModelId UUID of the sound model to create the receiver object for.
+@param {Object {SoundTriggerDetector.Callback}} callback Instance of the {@link SoundTriggerDetector#Callback} object for the
+ callbacks for the given sound model.
+@param {Object {Handler}} handler The Handler to use for the callback operations. A null value will use the
+ current thread's Looper.
+@return {Object {android.media.soundtrigger.SoundTriggerDetector}} Instance of {@link SoundTriggerDetector} or null on error.
+*/
+createSoundTriggerDetector : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-loadSoundModel'>/**Loads a given sound model into the sound trigger. Note the model will be unloaded if there is
+</span> an error/the system service is restarted.
+@hide 
+*/
+loadSoundModel : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-startRecognition'>/**Starts recognition for the given model id. All events from the model will be sent to the
+</span> service.
+
+ &lt;p&gt;This only supports generic sound trigger events. For keyphrase events, please use
+ {@link android.service.voice.VoiceInteractionService}.
+@param {Object {UUID}} soundModelId Id of the sound model
+@param {Object {Bundle}} params Opaque data sent to each service call of the service as the {@code params}
+               argument
+@param {Object {ComponentName}} detectionService The component name of the service that should receive the events.
+                         Needs to subclass {@link SoundTriggerDetectionService}
+@param {Object {SoundTrigger.RecognitionConfig}} config Configures the recognition
+@return {Number} {@link SoundTrigger#STATUS_OK} if the recognition could be started, error code
+         otherwise
+@hide 
+*/
+startRecognition : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-stopRecognition'>/**Stops the given model's recognition.
+</span>@hide 
+*/
+stopRecognition : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-unloadSoundModel'>/**Removes the given model from memory. Will also stop any pending recognitions.
+</span>@hide 
+*/
+unloadSoundModel : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-isRecognitionActive'>/**Returns true if the given model has had detection started on it.
+</span>@hide 
+*/
+isRecognitionActive : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-getDetectionServiceOperationsTimeout'>/**Get the amount of time (in milliseconds) an operation of the
+</span> {@link ISoundTriggerDetectionService} is allowed to ask.
+@return {Number} The amount of time an sound trigger detection service operation is allowed to last
+*/
+getDetectionServiceOperationsTimeout : function(  ) {},
+
+<span id='android-media-soundtrigger-SoundTriggerManager-method-getModelState'>/**Asynchronously get state of the indicated model.  The model state is returned as
+</span> a recognition event in the callback that was registered in the startRecognition
+ method.
+@hide 
+*/
+getModelState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

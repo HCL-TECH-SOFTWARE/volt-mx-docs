@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-RttManager'>/**@class android.net.wifi.RttManager
+</span>@extends java.lang.Object
+
+@hide */
+var RttManager = {
+
+<span id='android-net-wifi-RttManager-property-RTT_TYPE_UNSPECIFIED'>/**@deprecated It is Not supported anymore. */
+</span>RTT_TYPE_UNSPECIFIED : &quot;0&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_TYPE_ONE_SIDED'>/***/
+</span>RTT_TYPE_ONE_SIDED : &quot;1&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_TYPE_TWO_SIDED'>/***/
+</span>RTT_TYPE_TWO_SIDED : &quot;2&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_TYPE_11_V'>/**@deprecated It is not supported anymore. */
+</span>RTT_TYPE_11_V : &quot;2&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_TYPE_11_MC'>/**@deprecated It is not supported anymore. */
+</span>RTT_TYPE_11_MC : &quot;4&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_PEER_TYPE_UNSPECIFIED'>/**@deprecated It is not supported anymore. */
+</span>RTT_PEER_TYPE_UNSPECIFIED : &quot;0&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_PEER_TYPE_AP'>/***/
+</span>RTT_PEER_TYPE_AP : &quot;1&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_PEER_TYPE_STA'>/***/
+</span>RTT_PEER_TYPE_STA : &quot;2&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_PEER_P2P_GO'>/***/
+</span>RTT_PEER_P2P_GO : &quot;3&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_PEER_P2P_CLIENT'>/***/
+</span>RTT_PEER_P2P_CLIENT : &quot;4&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_PEER_NAN'>/***/
+</span>RTT_PEER_NAN : &quot;5&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_20'>/** @deprecated It is not supported anymore.
+</span> Use {@link android.net.wifi.RttManager#RTT_BW_20_SUPPORT} API.
+*/
+RTT_CHANNEL_WIDTH_20 : &quot;0&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_40'>/** @deprecated It is not supported anymore.
+</span> Use {@link android.net.wifi.RttManager#RTT_BW_40_SUPPORT} API.
+*/
+RTT_CHANNEL_WIDTH_40 : &quot;1&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_80'>/** @deprecated It is not supported anymore.
+</span> Use {@link android.net.wifi.RttManager#RTT_BW_80_SUPPORT} API.
+*/
+RTT_CHANNEL_WIDTH_80 : &quot;2&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_160'>/**@deprecated It is not supported anymore.
+</span> Use {@link android.net.wifi.RttManager#RTT_BW_160_SUPPORT} API.
+*/
+RTT_CHANNEL_WIDTH_160 : &quot;3&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_80P80'>/**@deprecated not supported anymore*/
+</span>RTT_CHANNEL_WIDTH_80P80 : &quot;4&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_5'>/**@deprecated It is not supported anymore.
+</span> Use {@link android.net.wifi.RttManager#RTT_BW_5_SUPPORT} API.
+*/
+RTT_CHANNEL_WIDTH_5 : &quot;5&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_10'>/**@deprecated It is not supported anymore.
+</span> Use {@link android.net.wifi.RttManager#RTT_BW_10_SUPPORT} API.
+*/
+RTT_CHANNEL_WIDTH_10 : &quot;6&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_CHANNEL_WIDTH_UNSPECIFIED'>/**@deprecated channel info must be specified. */
+</span>RTT_CHANNEL_WIDTH_UNSPECIFIED : &quot;-1&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_SUCCESS'>/***/
+</span>RTT_STATUS_SUCCESS : &quot;0&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAILURE'>/**General failure*/
+</span>RTT_STATUS_FAILURE : &quot;1&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_NO_RSP'>/**Destination does not respond to RTT request*/
+</span>RTT_STATUS_FAIL_NO_RSP : &quot;2&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_REJECTED'>/**RTT request is rejected by the destination. Double side RTT only*/
+</span>RTT_STATUS_FAIL_REJECTED : &quot;3&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_NOT_SCHEDULED_YET'>/***/
+</span>RTT_STATUS_FAIL_NOT_SCHEDULED_YET : &quot;4&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_TM_TIMEOUT'>/**Timing measurement timeout*/
+</span>RTT_STATUS_FAIL_TM_TIMEOUT : &quot;5&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_AP_ON_DIFF_CHANNEL'>/**Destination is on a different channel from the RTT Request*/
+</span>RTT_STATUS_FAIL_AP_ON_DIFF_CHANNEL : &quot;6&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_NO_CAPABILITY'>/**This type of Ranging is not support by Hardware*/
+</span>RTT_STATUS_FAIL_NO_CAPABILITY : &quot;7&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_ABORTED'>/**Request abort fro uncertain reason*/
+</span>RTT_STATUS_ABORTED : &quot;8&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_INVALID_TS'>/**The T1-T4 or TOD/TOA Timestamp is illegal*/
+</span>RTT_STATUS_FAIL_INVALID_TS : &quot;9&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_PROTOCOL'>/**11mc protocol level failed, eg, unrecognized FTMR/FTM frame*/
+</span>RTT_STATUS_FAIL_PROTOCOL : &quot;10&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_SCHEDULE'>/**Request can not be scheduled by hardware*/
+</span>RTT_STATUS_FAIL_SCHEDULE : &quot;11&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_BUSY_TRY_LATER'>/**destination is busy now, you can try after a specified time from destination*/
+</span>RTT_STATUS_FAIL_BUSY_TRY_LATER : &quot;12&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_INVALID_REQ'>/**Bad Request argument*/
+</span>RTT_STATUS_INVALID_REQ : &quot;13&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_NO_WIFI'>/**Wifi is not enabled*/
+</span>RTT_STATUS_NO_WIFI : &quot;14&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_STATUS_FAIL_FTM_PARAM_OVERRIDE'>/**Responder overrides param info, cannot range with new params 2-side RTT only*/
+</span>RTT_STATUS_FAIL_FTM_PARAM_OVERRIDE : &quot;15&quot;,
+<span id='android-net-wifi-RttManager-property-REASON_UNSPECIFIED'>/***/
+</span>REASON_UNSPECIFIED : &quot;-1&quot;,
+<span id='android-net-wifi-RttManager-property-REASON_NOT_AVAILABLE'>/***/
+</span>REASON_NOT_AVAILABLE : &quot;-2&quot;,
+<span id='android-net-wifi-RttManager-property-REASON_INVALID_LISTENER'>/***/
+</span>REASON_INVALID_LISTENER : &quot;-3&quot;,
+<span id='android-net-wifi-RttManager-property-REASON_INVALID_REQUEST'>/***/
+</span>REASON_INVALID_REQUEST : &quot;-4&quot;,
+<span id='android-net-wifi-RttManager-property-REASON_PERMISSION_DENIED'>/**Do not have required permission */
+</span>REASON_PERMISSION_DENIED : &quot;-5&quot;,
+<span id='android-net-wifi-RttManager-property-REASON_INITIATOR_NOT_ALLOWED_WHEN_RESPONDER_ON'>/**Ranging failed because responder role is enabled in STA mode.*/
+</span>REASON_INITIATOR_NOT_ALLOWED_WHEN_RESPONDER_ON : &quot;-6&quot;,
+<span id='android-net-wifi-RttManager-property-DESCRIPTION_KEY'>/***/
+</span>DESCRIPTION_KEY : &quot;android.net.wifi.RttManager.Description&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_BW_5_SUPPORT'>/** RTT BW supported bit mask, used as RTT param bandWidth too
+</span>*/
+RTT_BW_5_SUPPORT : &quot;1&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_BW_10_SUPPORT'>/***/
+</span>RTT_BW_10_SUPPORT : &quot;2&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_BW_20_SUPPORT'>/***/
+</span>RTT_BW_20_SUPPORT : &quot;4&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_BW_40_SUPPORT'>/***/
+</span>RTT_BW_40_SUPPORT : &quot;8&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_BW_80_SUPPORT'>/***/
+</span>RTT_BW_80_SUPPORT : &quot;16&quot;,
+<span id='android-net-wifi-RttManager-property-RTT_BW_160_SUPPORT'>/***/
+</span>RTT_BW_160_SUPPORT : &quot;32&quot;,
+<span id='android-net-wifi-RttManager-property-PREAMBLE_LEGACY'>/** RTT Preamble Support bit mask
+</span>*/
+PREAMBLE_LEGACY : &quot;1&quot;,
+<span id='android-net-wifi-RttManager-property-PREAMBLE_HT'>/***/
+</span>PREAMBLE_HT : &quot;2&quot;,
+<span id='android-net-wifi-RttManager-property-PREAMBLE_VHT'>/***/
+</span>PREAMBLE_VHT : &quot;4&quot;,
+<span id='android-net-wifi-RttManager-property-BASE'>/***/
+</span>BASE : &quot;160256&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_START_RANGING'>/***/
+</span>CMD_OP_START_RANGING : &quot;160256&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_STOP_RANGING'>/***/
+</span>CMD_OP_STOP_RANGING : &quot;160257&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_FAILED'>/***/
+</span>CMD_OP_FAILED : &quot;160258&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_SUCCEEDED'>/***/
+</span>CMD_OP_SUCCEEDED : &quot;160259&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_ABORTED'>/***/
+</span>CMD_OP_ABORTED : &quot;160260&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_ENABLE_RESPONDER'>/***/
+</span>CMD_OP_ENABLE_RESPONDER : &quot;160261&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_DISABLE_RESPONDER'>/***/
+</span>CMD_OP_DISABLE_RESPONDER : &quot;160262&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_ENALBE_RESPONDER_SUCCEEDED'>/***/
+</span>CMD_OP_ENALBE_RESPONDER_SUCCEEDED : &quot;160263&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_ENALBE_RESPONDER_FAILED'>/***/
+</span>CMD_OP_ENALBE_RESPONDER_FAILED : &quot;160264&quot;,
+<span id='android-net-wifi-RttManager-property-CMD_OP_REG_BINDER'>/**@hide */
+</span>CMD_OP_REG_BINDER : &quot;160265&quot;,
+<span id='android-net-wifi-RttManager-method-getCapabilities'>/**
+</span>@deprecated Use the new {@link android.net.wifi.RttManager#getRttCapabilities()} API.
+*/
+getCapabilities : function(  ) {},
+
+<span id='android-net-wifi-RttManager-method-getRttCapabilities'>/**This method is deprecated. Please use the {@link WifiRttManager} API.
+</span>*/
+getRttCapabilities : function(  ) {},
+
+<span id='android-net-wifi-RttManager-method-startRanging'>/**Request to start an RTT ranging
+</span> &lt;p&gt;
+ This method is deprecated. Please use the
+ {@link WifiRttManager#startRanging(RangingRequest, java.util.concurrent.Executor, RangingResultCallback)}
+ API.
+@param {Object {android.net.wifi.RttManager.RttParams[]}} params  -- RTT request Parameters
+@param {Object {RttManager.RttListener}} listener -- Call back to inform RTT result
+@exception throw IllegalArgumentException when params are illegal
+            throw IllegalStateException when RttCapabilities do not exist
+*/
+startRanging : function(  ) {},
+
+<span id='android-net-wifi-RttManager-method-stopRanging'>/**This method is deprecated and performs no function. Please use the {@link WifiRttManager}
+</span> API.
+*/
+stopRanging : function(  ) {},
+
+<span id='android-net-wifi-RttManager-method-enableResponder'>/**Enable Wi-Fi RTT responder mode on the device. The enabling result will be delivered via
+</span> {@code callback}.
+ &lt;p&gt;
+ Note calling this method with the same callback when the responder is already enabled won't
+ change the responder state, a cached {@link android.net.wifi.RttManager.ResponderConfig} from the last enabling will be
+ returned through the callback.
+ &lt;p&gt;
+ This method is deprecated and will throw an {@link UnsupportedOperationException}
+ exception. Please use the {@link WifiRttManager} API to perform a Wi-Fi Aware peer-to-peer
+ ranging.
+@param {Object {RttManager.ResponderCallback}} callback Callback for responder enabling/disabling result.
+@throws IllegalArgumentException If {@code callback} is null.
+*/
+enableResponder : function(  ) {},
+
+<span id='android-net-wifi-RttManager-method-disableResponder'>/**Disable Wi-Fi RTT responder mode on the device. The {@code callback} needs to be the
+</span> same one used in {@link #enableResponder}(ResponderCallback).
+ &lt;p&gt;
+ Calling this method when responder isn't enabled won't have any effect. The callback can be
+ reused for enabling responder after this method is called.
+ &lt;p&gt;
+ This method is deprecated and will throw an {@link UnsupportedOperationException}
+ exception. Please use the {@link WifiRttManager} API to perform a Wi-Fi Aware peer-to-peer
+ ranging.
+@param {Object {RttManager.ResponderCallback}} callback The same callback used for enabling responder.
+@throws IllegalArgumentException If {@code callback} is null.
+*/
+disableResponder : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

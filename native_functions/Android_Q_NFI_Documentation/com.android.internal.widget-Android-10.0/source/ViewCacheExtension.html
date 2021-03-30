@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-RecyclerView-ViewCacheExtension'>/**@class com.android.internal.widget.RecyclerView.ViewCacheExtension
+</span>@extends java.lang.Object
+
+ ViewCacheExtension is a helper class to provide an additional layer of view caching that can
+ be controlled by the developer.
+ &lt;p&gt;
+ When {@link com.android.internal.widget.RecyclerView.Recycler#getViewForPosition(int)} is called, Recycler checks attached scrap and
+ first level cache to find a matching View. If it cannot find a suitable View, Recycler will
+ call the {@link #getViewForPositionAndType(Recycler, int, int)} before checking
+ {@link com.android.internal.widget.RecyclerView.RecycledViewPool}.
+ &lt;p&gt;
+ Note that, Recycler never sends Views to this method to be cached. It is developers
+ responsibility to decide whether they want to keep their Views in this custom cache or let
+ the default recycling policy handle it.
+*/
+var ViewCacheExtension = {
+
+<span id='com-android-internal-widget-RecyclerView-ViewCacheExtension-method-getViewForPositionAndType'>/**Returns a View that can be binded to the given Adapter position.
+</span> &lt;p&gt;
+ This method should &lt;b&gt;not&lt;/b&gt; create a new View. Instead, it is expected to return
+ an already created View that can be re-used for the given type and position.
+ If the View is marked as ignored, it should first call
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#stopIgnoringView(View)} before returning the View.
+ &lt;p&gt;
+ RecyclerView will re-bind the returned View to the position if necessary.
+@param {Object {RecyclerView.Recycler}} recycler The Recycler that can be used to bind the View
+@param {Number} position The adapter position
+@param {Number} type     The type of the View, defined by adapter
+@return {Object {android.view.View}} A View that is bound to the given position or NULL if there is no View to re-use
+@see LayoutManager#ignoreView(View)
+*/
+getViewForPositionAndType : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-TelephonyProperties'>/**@class com.android.internal.telephony.TelephonyProperties
+</span> Contains a list of string constants used to get or set telephone properties
+ in the system. You can use {@link android.os.SystemProperties os.SystemProperties}
+ to get and set these values.
+ @hide
+*/
+var TelephonyProperties = {
+
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_BASEBAND_VERSION'>/** Baseband version
+</span> Availability: property is available any time radio is on
+*/
+PROPERTY_BASEBAND_VERSION : &quot;gsm.version.baseband&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_RIL_IMPL'>/**Radio Interface Layer (RIL) library implementation. */
+</span>PROPERTY_RIL_IMPL : &quot;gsm.version.ril-impl&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_OPERATOR_ALPHA'>/**Alpha name of current registered operator.&lt;p&gt;
+</span>  Availability: when registered to a network. Result may be unreliable on
+  CDMA networks.
+*/
+PROPERTY_OPERATOR_ALPHA : &quot;gsm.operator.alpha&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_OPERATOR_NUMERIC'>/**Numeric name (MCC+MNC) of current registered operator.&lt;p&gt;
+</span>  Availability: when registered to a network. Result may be unreliable on
+  CDMA networks.
+*/
+PROPERTY_OPERATOR_NUMERIC : &quot;gsm.operator.numeric&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_OPERATOR_ISMANUAL'>/**'true' if the device is on a manually selected network
+</span>
+  Availability: when registered to a network
+*/
+PROPERTY_OPERATOR_ISMANUAL : &quot;operator.ismanual&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_OPERATOR_ISROAMING'>/**'true' if the device is considered roaming on this network for GSM
+</span>  purposes.
+  Availability: when registered to a network
+*/
+PROPERTY_OPERATOR_ISROAMING : &quot;gsm.operator.isroaming&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_OPERATOR_ISO_COUNTRY'>/**The ISO country code equivalent of the current registered operator's
+</span>  MCC (Mobile Country Code)&lt;p&gt;
+  Availability: when registered to a network. Result may be unreliable on
+  CDMA networks.
+*/
+PROPERTY_OPERATOR_ISO_COUNTRY : &quot;gsm.operator.iso-country&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_LTE_ON_CDMA_PRODUCT_TYPE'>/** The contents of this property is the value of the kernel command line
+</span> product_type variable that corresponds to a product that supports LTE on CDMA.
+ {@see BaseCommands#getLteOnCdmaMode()}
+*/
+PROPERTY_LTE_ON_CDMA_PRODUCT_TYPE : &quot;telephony.lteOnCdmaProductType&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_LTE_ON_CDMA_DEVICE'>/** The contents of this property is the one of {@link com.android.internal.telephony.Phone#LTE_ON_CDMA_TRUE} or
+</span> {@link com.android.internal.telephony.Phone#LTE_ON_CDMA_FALSE}. If absent the value will assumed to be false
+ and the {@see #PROPERTY_LTE_ON_CDMA_PRODUCT_TYPE} will be used to determine its
+ final value which could also be {@link com.android.internal.telephony.Phone#LTE_ON_CDMA_FALSE}.
+ {@see BaseCommands#getLteOnCdmaMode()}
+*/
+PROPERTY_LTE_ON_CDMA_DEVICE : &quot;telephony.lteOnCdmaDevice&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-CURRENT_ACTIVE_PHONE'>/***/
+</span>CURRENT_ACTIVE_PHONE : &quot;gsm.current.phone-type&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_SIM_STATE'>/** One of &lt;code&gt;&quot;UNKNOWN&quot;&lt;/code&gt; &lt;code&gt;&quot;ABSENT&quot;&lt;/code&gt; &lt;code&gt;&quot;PIN_REQUIRED&quot;&lt;/code&gt;
+</span> &lt;code&gt;&quot;PUK_REQUIRED&quot;&lt;/code&gt; &lt;code&gt;&quot;NETWORK_LOCKED&quot;&lt;/code&gt; or &lt;code&gt;&quot;READY&quot;&lt;/code&gt;
+*/
+PROPERTY_SIM_STATE : &quot;gsm.sim.state&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_ICC_OPERATOR_NUMERIC'>/**The MCC+MNC (mobile country code+mobile network code) of the
+</span>  provider of the SIM. 5 or 6 decimal digits.
+  Availability: SIM state must be &quot;READY&quot;
+*/
+PROPERTY_ICC_OPERATOR_NUMERIC : &quot;gsm.sim.operator.numeric&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_ICC_OPERATOR_ALPHA'>/**PROPERTY_ICC_OPERATOR_ALPHA is also known as the SPN, or Service Provider Name.
+</span>  Availability: SIM state must be &quot;READY&quot;
+*/
+PROPERTY_ICC_OPERATOR_ALPHA : &quot;gsm.sim.operator.alpha&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_ICC_OPERATOR_ISO_COUNTRY'>/**ISO country code equivalent for the SIM provider's country code*/
+</span>PROPERTY_ICC_OPERATOR_ISO_COUNTRY : &quot;gsm.sim.operator.iso-country&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_DATA_NETWORK_TYPE'>/** Indicates the available radio technology.  Values include: &lt;code&gt;&quot;unknown&quot;&lt;/code&gt;,
+</span> &lt;code&gt;&quot;GPRS&quot;&lt;/code&gt;, &lt;code&gt;&quot;EDGE&quot;&lt;/code&gt; and &lt;code&gt;&quot;UMTS&quot;&lt;/code&gt;.
+*/
+PROPERTY_DATA_NETWORK_TYPE : &quot;gsm.network.type&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_INECM_MODE'>/**Indicate if phone is in emergency callback mode */
+</span>PROPERTY_INECM_MODE : &quot;ril.cdma.inecmmode&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_ECM_EXIT_TIMER'>/**Indicate the timer value for exiting emergency callback mode */
+</span>PROPERTY_ECM_EXIT_TIMER : &quot;ro.cdma.ecmexittimer&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_OPERATOR_IDP_STRING'>/**the international dialing prefix of current operator network */
+</span>PROPERTY_OPERATOR_IDP_STRING : &quot;gsm.operator.idpstring&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_OTASP_NUM_SCHEMA'>/** Defines the schema for the carrier specified OTASP number
+</span>*/
+PROPERTY_OTASP_NUM_SCHEMA : &quot;ro.cdma.otaspnumschema&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_DISABLE_CALL'>/** Disable all calls including Emergency call when it set to true.
+</span>*/
+PROPERTY_DISABLE_CALL : &quot;ro.telephony.disable-call&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_RIL_SENDS_MULTIPLE_CALL_RING'>/** Set to true for vendor RIL's that send multiple UNSOL_CALL_RING notifications.
+</span>*/
+PROPERTY_RIL_SENDS_MULTIPLE_CALL_RING : &quot;ro.telephony.call_ring.multiple&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_CALL_RING_DELAY'>/** The number of milliseconds between CALL_RING notifications.
+</span>*/
+PROPERTY_CALL_RING_DELAY : &quot;ro.telephony.call_ring.delay&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_CDMA_MSG_ID'>/** Track CDMA SMS message id numbers to ensure they increment
+</span> monotonically, regardless of reboots.
+*/
+PROPERTY_CDMA_MSG_ID : &quot;persist.radio.cdma.msgid&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_WAKE_LOCK_TIMEOUT'>/** Property to override DEFAULT_WAKE_LOCK_TIMEOUT
+</span>*/
+PROPERTY_WAKE_LOCK_TIMEOUT : &quot;ro.ril.wake_lock_timeout&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_RESET_ON_RADIO_TECH_CHANGE'>/** Set to true to indicate that the modem needs to be reset
+</span> when there is a radio technology change.
+*/
+PROPERTY_RESET_ON_RADIO_TECH_CHANGE : &quot;persist.radio.reset_on_switch&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_SMS_RECEIVE'>/** Set to false to disable SMS receiving, default is
+</span> the value of config_sms_capable
+*/
+PROPERTY_SMS_RECEIVE : &quot;telephony.sms.receive&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_SMS_SEND'>/** Set to false to disable SMS sending, default is
+</span> the value of config_sms_capable
+*/
+PROPERTY_SMS_SEND : &quot;telephony.sms.send&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_TEST_CSIM'>/** Set to true to indicate a test CSIM card is used in the device.
+</span> This property is for testing purpose only. This should not be defined
+ in commercial configuration.
+*/
+PROPERTY_TEST_CSIM : &quot;persist.radio.test-csim&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_IGNORE_NITZ'>/** Ignore RIL_UNSOL_NITZ_TIME_RECEIVED completely, used for debugging/testing.
+</span>*/
+PROPERTY_IGNORE_NITZ : &quot;telephony.test.ignore.nitz&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_MULTI_SIM_CONFIG'>/** Property to set multi sim feature.
+</span> Type:  String(dsds, dsda)
+*/
+PROPERTY_MULTI_SIM_CONFIG : &quot;persist.radio.multisim.config&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_REBOOT_REQUIRED_ON_MODEM_CHANGE'>/** Property to indicate if reboot is required when changing modems configurations
+</span> Type:  String(true, false) default is false; most devices don't need reboot
+*/
+PROPERTY_REBOOT_REQUIRED_ON_MODEM_CHANGE : &quot;persist.radio.reboot_on_modem_change&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_DEFAULT_SUBSCRIPTION'>/** Property to store default subscription.
+</span>*/
+PROPERTY_DEFAULT_SUBSCRIPTION : &quot;persist.radio.default.sub&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_MMS_TRANSACTION'>/** Property to enable MMS Mode.
+</span> Type: string ( default = silent, enable to = prompt )
+*/
+PROPERTY_MMS_TRANSACTION : &quot;mms.transaction&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_SIM_COUNT'>/** Set to the sim count.
+</span>*/
+PROPERTY_SIM_COUNT : &quot;ro.telephony.sim.count&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-PROPERTY_VIDEOCALL_AUDIO_OUTPUT'>/** Controls audio route for video calls.
+</span> 0 - Use the default audio routing strategy.
+ 1 - Disable the speaker. Route the audio to Headset or Bluetooth
+     or Earpiece, based on the default audio routing strategy.
+*/
+PROPERTY_VIDEOCALL_AUDIO_OUTPUT : &quot;persist.radio.call.audio.output&quot;,
+<span id='com-android-internal-telephony-TelephonyProperties-property-DISPLAY_OPPORTUNISTIC_SUBSCRIPTION_CARRIER_TEXT_PROPERTY_NAME'>/**'true' if the carrier text from opportunistic subscription should be used to display
+</span> on UI.
+
+*/
+DISPLAY_OPPORTUNISTIC_SUBSCRIPTION_CARRIER_TEXT_PROPERTY_NAME : &quot;persist.radio.display_opportunistic_carrier&quot;,
+
+};</pre>
+</body>
+</html>

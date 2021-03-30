@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-sqlite-SQLiteConnection'>/**@class android.database.sqlite.SQLiteConnection
+</span> implements android.os.CancellationSignal.OnCancelListener
+
+@extends java.lang.Object
+
+ Represents a SQLite database connection.
+ Each connection wraps an instance of a native &lt;code&gt;sqlite3&lt;/code&gt; object.
+ &lt;p&gt;
+ When database connection pooling is enabled, there can be multiple active
+ connections to the same database.  Otherwise there is typically only one
+ connection per database.
+ &lt;/p&gt;&lt;p&gt;
+ When the SQLite WAL feature is enabled, multiple readers and one writer
+ can concurrently access the database.  Without WAL, readers and writers
+ are mutually exclusive.
+ &lt;/p&gt;
+
+ &lt;h2&gt;Ownership and concurrency guarantees&lt;/h2&gt;
+ &lt;p&gt;
+ Connection objects are not thread-safe.  They are acquired as needed to
+ perform a database operation and are then returned to the pool.  At any
+ given time, a connection is either owned and used by a {@link android.database.sqlite.SQLiteSession}
+ object or the {@link android.database.sqlite.SQLiteConnectionPool}.  Those classes are
+ responsible for serializing operations to guard against concurrent
+ use of a connection.
+ &lt;/p&gt;&lt;p&gt;
+ The guarantee of having a single owner allows this class to be implemented
+ without locks and greatly simplifies resource management.
+ &lt;/p&gt;
+
+ &lt;h2&gt;Encapsulation guarantees&lt;/h2&gt;
+ &lt;p&gt;
+ The connection object object owns *all* of the SQLite related native
+ objects that are associated with the connection.  What's more, there are
+ no other objects in the system that are capable of obtaining handles to
+ those native objects.  Consequently, when the connection is closed, we do
+ not have to worry about what other components might have references to
+ its associated SQLite state -- there are none.
+ &lt;/p&gt;&lt;p&gt;
+ Encapsulation is what ensures that the connection object's
+ lifecycle does not become a tortured mess of finalizers and reference
+ queues.
+ &lt;/p&gt;
+
+ &lt;h2&gt;Reentrance&lt;/h2&gt;
+ &lt;p&gt;
+ This class must tolerate reentrant execution of SQLite operations because
+ triggers may call custom SQLite functions that perform additional queries.
+ &lt;/p&gt;
+
+ @hide
+*/
+var SQLiteConnection = {
+
+<span id='android-database-sqlite-SQLiteConnection-method-getConnectionId'>/**Gets the unique id of this connection.
+</span>@return {Number} The connection id.
+*/
+getConnectionId : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-isPrimaryConnection'>/**Returns true if this is the primary database connection.
+</span>@return {Boolean} True if this is the primary database connection.
+*/
+isPrimaryConnection : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-prepare'>/**Prepares a statement for execution but does not bind its parameters or execute it.
+</span> &lt;p&gt;
+ This method can be used to check for syntax errors during compilation
+ prior to execution of the statement.  If the {@code outStatementInfo} argument
+ is not null, the provided {@link android.database.sqlite.SQLiteStatementInfo} object is populated
+ with information about the statement.
+ &lt;/p&gt;&lt;p&gt;
+ A prepared statement makes no reference to the arguments that may eventually
+ be bound to it, consequently it it possible to cache certain prepared statements
+ such as SELECT or INSERT/UPDATE statements.  If the statement is cacheable,
+ then it will be stored in the cache for later.
+ &lt;/p&gt;&lt;p&gt;
+ To take advantage of this behavior as an optimization, the connection pool
+ provides a method to acquire a connection that already has a given SQL statement
+ in its prepared statement cache so that it is ready for execution.
+ &lt;/p&gt;
+@param {String} sql The SQL statement to prepare.
+@param {Object {SQLiteStatementInfo}} outStatementInfo The {@link SQLiteStatementInfo} object to populate
+ with information about the statement, or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error.
+*/
+prepare : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-execute'>/**Executes a statement that does not return a result.
+</span>@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+execute : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-executeForLong'>/**Executes a statement that returns a single &lt;code&gt;long&lt;/code&gt; result.
+</span>@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The value of the first column in the first row of the result set
+ as a &lt;code&gt;long&lt;/code&gt;, or zero if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForLong : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-executeForString'>/**Executes a statement that returns a single {@link String} result.
+</span>@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {String} The value of the first column in the first row of the result set
+ as a &lt;code&gt;String&lt;/code&gt;, or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForString : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-executeForBlobFileDescriptor'>/**Executes a statement that returns a single BLOB result as a
+</span> file descriptor to a shared memory region.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Object {android.os.ParcelFileDescriptor}} The file descriptor for a shared memory region that contains
+ the value of the first column in the first row of the result set as a BLOB,
+ or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForBlobFileDescriptor : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-executeForChangedRowCount'>/**Executes a statement that returns a count of the number of rows
+</span> that were changed.  Use for UPDATE or DELETE SQL statements.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The number of rows that were changed.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForChangedRowCount : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-executeForLastInsertedRowId'>/**Executes a statement that returns the row id of the last row inserted
+</span> by the statement.  Use for INSERT SQL statements.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The row id of the last row that was inserted, or 0 if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForLastInsertedRowId : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-executeForCursorWindow'>/**Executes a statement and populates the specified {@link CursorWindow}
+</span> with a range of results.  Returns the number of rows that were counted
+ during query execution.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CursorWindow}} window The cursor window to clear and fill.
+@param {Number} startPos The start position for filling the window.
+@param {Number} requiredPos The position of a row that MUST be in the window.
+ If it won't fit, then the query should discard part of what it filled
+ so that it does.  Must be greater than or equal to &lt;code&gt;startPos&lt;/code&gt;.
+@param {Boolean} countAllRows True to count all rows that the query would return
+ regagless of whether they fit in the window.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The number of rows that were counted during query execution.  Might
+ not be all rows in the result set unless &lt;code&gt;countAllRows&lt;/code&gt; is true.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForCursorWindow : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-onCancel'>/**
+</span>*/
+onCancel : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-dump'>/**Dumps debugging information about this connection.
+</span>@param {Object {Printer}} printer The printer to receive the dump, not null.
+@param {Boolean} verbose True to dump more verbose information.
+*/
+dump : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteConnection-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

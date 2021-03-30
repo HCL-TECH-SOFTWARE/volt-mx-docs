@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-RemoteViews'>/**@class android.widget.RemoteViews
+</span> implements android.os.Parcelable
+
+ implements android.view.LayoutInflater.Filter
+
+@extends java.lang.Object
+
+ A class that describes a view hierarchy that can be displayed in
+ another process. The hierarchy is inflated from a layout resource
+ file, and this class provides some basic operations for modifying
+ the content of the inflated hierarchy.
+
+ &lt;p&gt;{@code RemoteViews} is limited to support for the following layouts:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link android.widget.AdapterViewFlipper}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.FrameLayout}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.GridLayout}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.GridView}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.LinearLayout}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.ListView}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.RelativeLayout}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.StackView}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.ViewFlipper}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;And the following widgets:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;{@link android.widget.AnalogClock}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.Button}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.Chronometer}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.ImageButton}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.ImageView}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.ProgressBar}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.TextClock}&lt;/li&gt;
+   &lt;li&gt;{@link android.widget.TextView}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;Descendants of these classes are not supported.&lt;/p&gt;
+*/
+var RemoteViews = {
+
+<span id='android-widget-RemoteViews-property-EXTRA_SHARED_ELEMENT_BOUNDS'>/** The intent extra that contains the bounds for all shared elements.
+</span>*/
+EXTRA_SHARED_ELEMENT_BOUNDS : &quot;android.widget.extra.SHARED_ELEMENT_BOUNDS&quot;,
+<span id='android-widget-RemoteViews-property-FLAG_REAPPLY_DISALLOWED'>/** Whether reapply is disallowed on this remoteview. This maybe be true if some actions modify
+</span> the layout in a way that isn't recoverable, since views are being removed.
+ @hide
+*/
+FLAG_REAPPLY_DISALLOWED : &quot;1&quot;,
+<span id='android-widget-RemoteViews-property-FLAG_WIDGET_IS_COLLECTION_CHILD'>/** This flag indicates whether this RemoteViews object is being created from a
+</span> RemoteViewsService for use as a child of a widget collection. This flag is used
+ to determine whether or not certain features are available, in particular,
+ setting on click extras and setting on click pending intents. The former is enabled,
+ and the latter disabled when this flag is true.
+ @hide
+*/
+FLAG_WIDGET_IS_COLLECTION_CHILD : &quot;2&quot;,
+<span id='android-widget-RemoteViews-property-FLAG_USE_LIGHT_BACKGROUND_LAYOUT'>/** When this flag is set, the views is inflated with {@link #mLightBackgroundLayoutId} instead
+</span> of {link #mLayoutId}
+ @hide
+*/
+FLAG_USE_LIGHT_BACKGROUND_LAYOUT : &quot;4&quot;,
+<span id='android-widget-RemoteViews-property-mApplication'>/** Application that hosts the remote views.
+</span>
+ @hide
+*/
+mApplication : &quot;null&quot;,
+<span id='android-widget-RemoteViews-property-CREATOR'>/** Parcelable.Creator that instantiates RemoteViews objects
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-widget-RemoteViews-method-setRemoteInputs'>/**
+</span>@hide 
+*/
+setRemoteInputs : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-reduceImageSizes'>/**Reduces all images and ensures that they are all below the given sizes.
+</span>@param {Number} maxWidth the maximum width allowed
+@param {Number} maxHeight the maximum height allowed
+@hide 
+*/
+reduceImageSizes : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-overrideTextColors'>/**Override all text colors in this layout and replace them by the given text color.
+</span>@param {Number} textColor The color to use.
+@hide 
+*/
+overrideTextColors : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setIntTag'>/**Sets an integer tag to the view.
+</span>@hide 
+*/
+setIntTag : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-addFlags'>/**Set that it is disallowed to reapply another remoteview with the same layout as this view.
+</span> This should be done if an action is destroying the view tree of the base layout.
+@hide 
+*/
+addFlags : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-hasFlags'>/**
+</span>@hide 
+*/
+hasFlags : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-mergeRemoteViews'>/**Merges the passed RemoteViews actions with this RemoteViews actions according to
+</span> action-specific merge rules.
+@param {Object {RemoteViews}} newRv
+@hide 
+*/
+mergeRemoteViews : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-visitUris'>/**Note all {@link Uri} that are referenced internally, with the expectation
+</span> that Uri permission grants will need to be issued to ensure the recipient
+ of this object is able to render its contents.
+@hide 
+*/
+visitUris : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-getSourceBounds'>/**
+</span>@hide 
+*/
+getSourceBounds : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-clone'>/**Returns a deep copy of the RemoteViews object. The RemoteView may not be
+</span> attached to another RemoteView -- it must be the root of a hierarchy.
+@deprecated use {@link #RemoteViews(RemoteViews)} instead.
+@throws IllegalStateException if this is not the root of a RemoteView
+         hierarchy
+*/
+clone : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-getPackage'>/**
+</span>*/
+getPackage : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-getLayoutId'>/**Returns the layout id of the root layout associated with this RemoteViews. In the case
+</span> that the RemoteViews has both a landscape and portrait root, this will return the layout
+ id associated with the portrait layout.
+@return {Number} the layout id.
+*/
+getLayoutId : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-estimateMemoryUsage'>/**
+</span>@hide 
+*/
+estimateMemoryUsage : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-addView'>/**Equivalent to calling {@link ViewGroup#addView(View)} after inflating the
+</span> given {@link android.widget.RemoteViews}. This allows users to build &quot;nested&quot;
+ {@link android.widget.RemoteViews}. In cases where consumers of {@link android.widget.RemoteViews} may
+ recycle layouts, use {@link #removeAllViews}(int) to clear any existing
+ children.
+@param {Number} viewId The id of the parent {@link ViewGroup} to add child into.
+@param {Object {RemoteViews}} nestedView {@link RemoteViews} that describes the child.
+*/
+addView : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-addView'>/**Equivalent to calling {@link ViewGroup#addView(View, int)} after inflating the
+</span> given {@link android.widget.RemoteViews}.
+@param {Number} viewId The id of the parent {@link ViewGroup} to add the child into.
+@param {Object {RemoteViews}} nestedView {@link RemoteViews} of the child to add.
+@param {Number} index The position at which to add the child.
+@hide 
+*/
+addView : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-removeAllViews'>/**Equivalent to calling {@link ViewGroup#removeAllViews()}.
+</span>@param {Number} viewId The id of the parent {@link ViewGroup} to remove all
+            children from.
+*/
+removeAllViews : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-removeAllViewsExceptId'>/**Removes all views in the {@link ViewGroup} specified by the {@code viewId} except for any
+</span> child that has the {@code viewIdToKeep} as its id.
+@param {Number} viewId The id of the parent {@link ViewGroup} to remove children from.
+@param {Number} viewIdToKeep The id of a child that should not be removed.
+@hide 
+*/
+removeAllViewsExceptId : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-showNext'>/**Equivalent to calling {@link android.widget.AdapterViewAnimator#showNext()}
+</span>@param {Number} viewId The id of the view on which to call {@link AdapterViewAnimator#showNext()}
+*/
+showNext : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-showPrevious'>/**Equivalent to calling {@link android.widget.AdapterViewAnimator#showPrevious()}
+</span>@param {Number} viewId The id of the view on which to call {@link AdapterViewAnimator#showPrevious()}
+*/
+showPrevious : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setDisplayedChild'>/**Equivalent to calling {@link android.widget.AdapterViewAnimator#setDisplayedChild(int)}
+</span>@param {Number} viewId The id of the view on which to call
+               {@link AdapterViewAnimator#setDisplayedChild(int)}
+*/
+setDisplayedChild : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setViewVisibility'>/**Equivalent to calling {@link View#setVisibility(int)}
+</span>@param {Number} viewId The id of the view whose visibility should change
+@param {Number} visibility The new visibility for the view
+*/
+setViewVisibility : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextViewText'>/**Equivalent to calling {@link android.widget.TextView#setText(CharSequence)}
+</span>@param {Number} viewId The id of the view whose text should change
+@param {Object {CharSequence}} text The new text for the view
+*/
+setTextViewText : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextViewTextSize'>/**Equivalent to calling {@link android.widget.TextView#setTextSize(int, float)}
+</span>@param {Number} viewId The id of the view whose text size should change
+@param {Number} units The units of size (e.g. COMPLEX_UNIT_SP)
+@param {Number} size The size of the text
+*/
+setTextViewTextSize : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextViewCompoundDrawables'>/**Equivalent to calling
+</span> {@link android.widget.TextView#setCompoundDrawablesWithIntrinsicBounds(int, int, int, int)}.
+@param {Number} viewId The id of the view whose text should change
+@param {Number} left The id of a drawable to place to the left of the text, or 0
+@param {Number} top The id of a drawable to place above the text, or 0
+@param {Number} right The id of a drawable to place to the right of the text, or 0
+@param {Number} bottom The id of a drawable to place below the text, or 0
+*/
+setTextViewCompoundDrawables : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextViewCompoundDrawablesRelative'>/**Equivalent to calling {@link android.widget.TextView#setCompoundDrawablesRelativeWithIntrinsicBounds(int, int, int, int)}.
+</span>@param {Number} viewId The id of the view whose text should change
+@param {Number} start The id of a drawable to place before the text (relative to the
+ layout direction), or 0
+@param {Number} top The id of a drawable to place above the text, or 0
+@param {Number} end The id of a drawable to place after the text, or 0
+@param {Number} bottom The id of a drawable to place below the text, or 0
+*/
+setTextViewCompoundDrawablesRelative : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextViewCompoundDrawables'>/**Equivalent to calling {@link android.widget.TextView#setCompoundDrawablesWithIntrinsicBounds(Drawable, Drawable, Drawable, Drawable)}
+</span> using the drawables yielded by {@link Icon#loadDrawable(Context)}.
+@param {Number} viewId The id of the view whose text should change
+@param {Object {Icon}} left an Icon to place to the left of the text, or 0
+@param {Object {Icon}} top an Icon to place above the text, or 0
+@param {Object {Icon}} right an Icon to place to the right of the text, or 0
+@param {Object {Icon}} bottom an Icon to place below the text, or 0
+@hide 
+*/
+setTextViewCompoundDrawables : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextViewCompoundDrawablesRelative'>/**Equivalent to calling {@link android.widget.TextView#setCompoundDrawablesRelativeWithIntrinsicBounds(Drawable, Drawable, Drawable, Drawable)}
+</span> using the drawables yielded by {@link Icon#loadDrawable(Context)}.
+@param {Number} viewId The id of the view whose text should change
+@param {Object {Icon}} start an Icon to place before the text (relative to the
+ layout direction), or 0
+@param {Object {Icon}} top an Icon to place above the text, or 0
+@param {Object {Icon}} end an Icon to place after the text, or 0
+@param {Object {Icon}} bottom an Icon to place below the text, or 0
+@hide 
+*/
+setTextViewCompoundDrawablesRelative : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setImageViewResource'>/**Equivalent to calling {@link android.widget.ImageView#setImageResource(int)}
+</span>@param {Number} viewId The id of the view whose drawable should change
+@param {Number} srcId The new resource id for the drawable
+*/
+setImageViewResource : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setImageViewUri'>/**Equivalent to calling {@link android.widget.ImageView#setImageURI(Uri)}
+</span>@param {Number} viewId The id of the view whose drawable should change
+@param {Object {Uri}} uri The Uri for the image
+*/
+setImageViewUri : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setImageViewBitmap'>/**Equivalent to calling {@link android.widget.ImageView#setImageBitmap(Bitmap)}
+</span>@param {Number} viewId The id of the view whose bitmap should change
+@param {Object {Bitmap}} bitmap The new Bitmap for the drawable
+*/
+setImageViewBitmap : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setImageViewIcon'>/**Equivalent to calling {@link android.widget.ImageView#setImageIcon(Icon)}
+</span>@param {Number} viewId The id of the view whose bitmap should change
+@param {Object {Icon}} icon The new Icon for the ImageView
+*/
+setImageViewIcon : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setEmptyView'>/**Equivalent to calling {@link android.widget.AdapterView#setEmptyView(View)}
+</span>@param {Number} viewId The id of the view on which to set the empty view
+@param {Number} emptyViewId The view id of the empty view
+*/
+setEmptyView : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setChronometer'>/**Equivalent to calling {@link android.widget.Chronometer#setBase android.widget.Chronometer.setBase},
+</span> {@link android.widget.Chronometer#setFormat android.widget.Chronometer.setFormat},
+ and {@link android.widget.Chronometer#start android.widget.Chronometer.start()} or
+ {@link android.widget.Chronometer#stop android.widget.Chronometer.stop()}.
+@param {Number} viewId The id of the {@link Chronometer} to change
+@param {Number} base The time at which the timer would have read 0:00.  This
+             time should be based off of
+             {@link android.os.SystemClock#elapsedRealtime SystemClock.elapsedRealtime()}.
+@param {String} format The Chronometer format string, or null to
+               simply display the timer value.
+@param {Boolean} started True if you want the clock to be started, false if not.
+@see #setChronometerCountDown(int, boolean)
+*/
+setChronometer : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setChronometerCountDown'>/**Equivalent to calling {@link android.widget.Chronometer#setCountDown(boolean) android.widget.Chronometer.setCountDown} on
+</span> the chronometer with the given viewId.
+@param {Number} viewId The id of the {@link Chronometer} to change
+@param {Boolean} isCountDown True if you want the chronometer to count down to base instead of
+                    counting up.
+*/
+setChronometerCountDown : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setProgressBar'>/**Equivalent to calling {@link android.widget.ProgressBar#setMax android.widget.ProgressBar.setMax},
+</span> {@link android.widget.ProgressBar#setProgress android.widget.ProgressBar.setProgress}, and
+ {@link android.widget.ProgressBar#setIndeterminate android.widget.ProgressBar.setIndeterminate}
+
+ If indeterminate is true, then the values for max and progress are ignored.
+@param {Number} viewId The id of the {@link ProgressBar} to change
+@param {Number} max The 100% value for the progress bar
+@param {Number} progress The current value of the progress bar.
+@param {Boolean} indeterminate True if the progress bar is indeterminate,
+                false if not.
+*/
+setProgressBar : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setOnClickPendingIntent'>/**Equivalent to calling
+</span> {@link android.view.View#setOnClickListener(android.view.View.OnClickListener)}
+ to launch the provided {@link PendingIntent}. The source bounds
+ ({@link Intent#getSourceBounds()}) of the intent will be set to the bounds of the clicked
+ view in screen space.
+ Note that any activity options associated with the mPendingIntent may get overridden
+ before starting the intent.
+
+ When setting the on-click action of items within collections (eg. {@link android.widget.ListView},
+ {@link android.widget.StackView} etc.), this method will not work. Instead, use {@link android.widget.RemoteViews#setPendingIntentTemplate(int, PendingIntent)} in conjunction with
+ {@link android.widget.RemoteViews#setOnClickFillInIntent(int, Intent)}.
+@param {Number} viewId The id of the view that will trigger the {@link PendingIntent} when clicked
+@param {Object {PendingIntent}} pendingIntent The {@link PendingIntent} to send when user clicks
+*/
+setOnClickPendingIntent : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setOnClickResponse'>/**Equivalent of calling
+</span> {@link android.view.View#setOnClickListener(android.view.View.OnClickListener)}
+ to launch the provided {@link android.widget.RemoteViews.RemoteResponse}.
+@param {Number} viewId The id of the view that will trigger the {@link RemoteResponse} when clicked
+@param {Object {RemoteViews.RemoteResponse}} response The {@link RemoteResponse} to send when user clicks
+*/
+setOnClickResponse : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setPendingIntentTemplate'>/**When using collections (eg. {@link android.widget.ListView}, {@link android.widget.StackView} etc.) in widgets, it is very
+</span> costly to set PendingIntents on the individual items, and is hence not permitted. Instead
+ this method should be used to set a single PendingIntent template on the collection, and
+ individual items can differentiate their on-click behavior using
+ {@link android.widget.RemoteViews#setOnClickFillInIntent(int, Intent)}.
+@param {Number} viewId The id of the collection who's children will use this PendingIntent template
+          when clicked
+@param {Object {PendingIntent}} pendingIntentTemplate The {@link PendingIntent} to be combined with extras specified
+          by a child of viewId and executed when that child is clicked
+*/
+setPendingIntentTemplate : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setOnClickFillInIntent'>/**When using collections (eg. {@link android.widget.ListView}, {@link android.widget.StackView} etc.) in widgets, it is very
+</span> costly to set PendingIntents on the individual items, and is hence not permitted. Instead
+ a single PendingIntent template can be set on the collection, see {@link android.widget.RemoteViews#setPendingIntentTemplate(int, PendingIntent)}, and the individual on-click
+ action of a given item can be distinguished by setting a fillInIntent on that item. The
+ fillInIntent is then combined with the PendingIntent template in order to determine the final
+ intent which will be executed when the item is clicked. This works as follows: any fields
+ which are left blank in the PendingIntent template, but are provided by the fillInIntent
+ will be overwritten, and the resulting PendingIntent will be used. The rest
+ of the PendingIntent template will then be filled in with the associated fields that are
+ set in fillInIntent. See {@link Intent#fillIn(Intent, int)} for more details.
+@param {Number} viewId The id of the view on which to set the fillInIntent
+@param {Object {Intent}} fillInIntent The intent which will be combined with the parent's PendingIntent
+        in order to determine the on-click behavior of the view specified by viewId
+*/
+setOnClickFillInIntent : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setDrawableTint'>/**
+</span>@param {Number} viewId The id of the view that contains the target
+            {@link Drawable}
+@param {Boolean} targetBackground If true, apply these parameters to the
+            {@link Drawable} returned by
+            {@link android.view.View#getBackground()}. Otherwise, assume
+            the target view is an {@link ImageView} and apply them to
+            {@link ImageView#getDrawable()}.
+@param {Number} colorFilter Specify a color for a
+            {@link android.graphics.ColorFilter} for this drawable. This will be ignored if
+            {@code mode} is {@code null}.
+@param {Object {PorterDuff.Mode}} mode Specify a PorterDuff mode for this drawable, or null to leave
+            unchanged.
+@param mode Specify a PorterDuff mode for this drawable, or null to leave
+            unchanged.
+*/
+setDrawableTint : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setRippleDrawableColor'>/**
+</span>@param {Number} viewId The id of the view that contains the target
+            {@link RippleDrawable}
+@param {Object {ColorStateList}} colorStateList Specify a color for a
+            {@link ColorStateList} for this drawable.
+@param colorStateList Specify a color for a
+            {@link ColorStateList} for this drawable.
+*/
+setRippleDrawableColor : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setProgressTintList'>/**
+</span>@param {Number} viewId The id of the view whose tint should change
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@param tint the tint to apply, may be {@code null} to clear tint
+*/
+setProgressTintList : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setProgressBackgroundTintList'>/**
+</span>@param {Number} viewId The id of the view whose tint should change
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@param tint the tint to apply, may be {@code null} to clear tint
+*/
+setProgressBackgroundTintList : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setProgressIndeterminateTintList'>/**
+</span>@param {Number} viewId The id of the view whose tint should change
+@param {Object {ColorStateList}} tint the tint to apply, may be {@code null} to clear tint
+@param tint the tint to apply, may be {@code null} to clear tint
+*/
+setProgressIndeterminateTintList : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextColor'>/**Equivalent to calling {@link android.widget.TextView#setTextColor(int)}.
+</span>@param {Number} viewId The id of the view whose text color should change
+@param {Number} color Sets the text color for all the states (normal, selected,
+            focused) to be this color.
+*/
+setTextColor : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setTextColor'>/**
+</span>@param {Number} viewId The id of the view whose text color should change
+@param {Object {ColorStateList}} colors the text colors to set
+@param colors the text colors to set
+*/
+setTextColor : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setRemoteAdapter'>/**Equivalent to calling {@link android.widget.AbsListView#setRemoteViewsAdapter(Intent)}.
+</span>@param {Number} appWidgetId The id of the app widget which contains the specified view. (This
+      parameter is ignored in this deprecated method)
+@param {Number} viewId The id of the {@link AdapterView}
+@param {Object {Intent}} intent The intent of the service which will be
+            providing data to the RemoteViewsAdapter
+@deprecated This method has been deprecated. See
+      {@link android.widget.RemoteViews#setRemoteAdapter(int, Intent)}
+*/
+setRemoteAdapter : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setRemoteAdapter'>/**Equivalent to calling {@link android.widget.AbsListView#setRemoteViewsAdapter(Intent)}.
+</span> Can only be used for App Widgets.
+@param {Number} viewId The id of the {@link AdapterView}
+@param {Object {Intent}} intent The intent of the service which will be
+            providing data to the RemoteViewsAdapter
+*/
+setRemoteAdapter : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setRemoteAdapter'>/**Creates a simple Adapter for the viewId specified. The viewId must point to an AdapterView,
+</span> ie. {@link android.widget.ListView}, {@link android.widget.GridView}, {@link android.widget.StackView} or {@link android.widget.AdapterViewAnimator}.
+ This is a simpler but less flexible approach to populating collection widgets. Its use is
+ encouraged for most scenarios, as long as the total memory within the list of RemoteViews
+ is relatively small (ie. doesn't contain large or numerous Bitmaps, see {@link android.widget.RemoteViews#setImageViewBitmap}). In the case of numerous images, the use of API is still
+ possible by setting image URIs instead of Bitmaps, see {@link android.widget.RemoteViews#setImageViewUri}.
+
+ This API is supported in the compatibility library for previous API levels, see
+ RemoteViewsCompat.
+@param {Number} viewId The id of the {@link AdapterView}
+@param {Object {java.util.ArrayList}} list The list of RemoteViews which will populate the view specified by viewId.
+@param {Number} viewTypeCount The maximum number of unique layout id's used to construct the list of
+      RemoteViews. This count cannot change during the life-cycle of a given widget, so this
+      parameter should account for the maximum possible number of types that may appear in the
+      See {@link Adapter#getViewTypeCount()}.
+@hide 
+@deprecated this appears to have no users outside of UnsupportedAppUsage?
+*/
+setRemoteAdapter : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setScrollPosition'>/**Equivalent to calling {@link android.widget.ListView#smoothScrollToPosition(int)}.
+</span>@param {Number} viewId The id of the view to change
+@param {Number} position Scroll to this adapter position
+*/
+setScrollPosition : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setRelativeScrollPosition'>/**Equivalent to calling {@link android.widget.ListView#smoothScrollByOffset(int)}.
+</span>@param {Number} viewId The id of the view to change
+@param {Number} offset Scroll by this adapter position offset
+*/
+setRelativeScrollPosition : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setViewPadding'>/**Equivalent to calling {@link android.view.View#setPadding(int, int, int, int)}.
+</span>@param {Number} viewId The id of the view to change
+@param {Number} left the left padding in pixels
+@param {Number} top the top padding in pixels
+@param {Number} right the right padding in pixels
+@param {Number} bottom the bottom padding in pixels
+*/
+setViewPadding : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setViewLayoutMarginEndDimen'>/**
+</span>@param {Number} viewId The id of the view to change
+@param {Number} endMarginDimen a dimen resource to read the margin from or 0 to clear the margin.
+@param endMarginDimen a dimen resource to read the margin from or 0 to clear the margin.
+*/
+setViewLayoutMarginEndDimen : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setViewLayoutMarginEnd'>/**Equivalent to calling {@link android.view.ViewGroup.MarginLayoutParams#setMarginEnd(int)}.
+</span> Only works if the {@link View#getLayoutParams()} supports margins.
+ Hidden for now since we don't want to support this for all different layout margins yet.
+@param {Number} viewId The id of the view to change
+@param {Number} endMargin a value in pixels for the end margin.
+@hide 
+*/
+setViewLayoutMarginEnd : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setViewLayoutMarginBottomDimen'>/**Equivalent to setting {@link android.view.ViewGroup.MarginLayoutParams#bottomMargin}.
+</span>@param {Number} bottomMarginDimen a dimen resource to read the margin from or 0 to clear the margin.
+@hide 
+*/
+setViewLayoutMarginBottomDimen : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setViewLayoutWidth'>/**Equivalent to setting {@link android.view.ViewGroup.LayoutParams#width}.
+</span>@param {Number} layoutWidth one of 0, MATCH_PARENT or WRAP_CONTENT. Other sizes are not allowed
+                    because they behave poorly when the density changes.
+@hide 
+*/
+setViewLayoutWidth : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setBoolean'>/**Call a method taking one boolean on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Boolean} value The value to pass to the method.
+*/
+setBoolean : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setByte'>/**Call a method taking one byte on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Number} value The value to pass to the method.
+*/
+setByte : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setShort'>/**Call a method taking one short on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Number} value The value to pass to the method.
+*/
+setShort : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setInt'>/**Call a method taking one int on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Number} value The value to pass to the method.
+*/
+setInt : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setColorStateList'>/**Call a method taking one ColorStateList on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Object {ColorStateList}} value The value to pass to the method.
+@hide 
+*/
+setColorStateList : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setLong'>/**Call a method taking one long on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Number} value The value to pass to the method.
+*/
+setLong : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setFloat'>/**Call a method taking one float on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Number} value The value to pass to the method.
+*/
+setFloat : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setDouble'>/**Call a method taking one double on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Number} value The value to pass to the method.
+*/
+setDouble : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setChar'>/**Call a method taking one char on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {String} value The value to pass to the method.
+*/
+setChar : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setString'>/**Call a method taking one String on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {String} value The value to pass to the method.
+*/
+setString : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setCharSequence'>/**Call a method taking one CharSequence on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Object {CharSequence}} value The value to pass to the method.
+*/
+setCharSequence : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setUri'>/**Call a method taking one Uri on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Object {Uri}} value The value to pass to the method.
+*/
+setUri : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setBitmap'>/**Call a method taking one Bitmap on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Object {Bitmap}} value The value to pass to the method.
+@param value The value to pass to the method.
+*/
+setBitmap : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setBundle'>/**Call a method taking one Bundle on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Object {Bundle}} value The value to pass to the method.
+*/
+setBundle : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setIntent'>/**Call a method taking one Intent on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Object {Intent}} value The {@link android.content.Intent} to pass the method.
+*/
+setIntent : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setIcon'>/**Call a method taking one Icon on a view in the layout for this RemoteViews.
+</span>@param {Number} viewId The id of the view on which to call the method.
+@param {String} methodName The name of the method to call.
+@param {Object {Icon}} value The {@link android.graphics.drawable.Icon} to pass the method.
+*/
+setIcon : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setContentDescription'>/**Equivalent to calling View.setContentDescription(CharSequence).
+</span>@param {Number} viewId The id of the view whose content description should change.
+@param {Object {CharSequence}} contentDescription The new content description for the view.
+*/
+setContentDescription : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setAccessibilityTraversalBefore'>/**Equivalent to calling {@link android.view.View#setAccessibilityTraversalBefore(int)}.
+</span>@param {Number} viewId The id of the view whose before view in accessibility traversal to set.
+@param {Number} nextId The id of the next in the accessibility traversal.
+*/
+setAccessibilityTraversalBefore : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setAccessibilityTraversalAfter'>/**Equivalent to calling {@link android.view.View#setAccessibilityTraversalAfter(int)}.
+</span>@param {Number} viewId The id of the view whose after view in accessibility traversal to set.
+@param {Number} nextId The id of the next in the accessibility traversal.
+*/
+setAccessibilityTraversalAfter : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setLabelFor'>/**Equivalent to calling {@link View#setLabelFor(int)}.
+</span>@param {Number} viewId The id of the view whose property to set.
+@param {Number} labeledId The id of a view for which this view serves as a label.
+*/
+setLabelFor : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-setLightBackgroundLayoutId'>/**Provides an alternate layout ID, which can be used to inflate this view. This layout will be
+</span> used by the host when the widgets displayed on a light-background where foreground elements
+ and text can safely draw using a dark color without any additional background protection.
+*/
+setLightBackgroundLayoutId : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-getDarkTextViews'>/**If this view supports dark text versions, creates a copy representing that version,
+</span> otherwise returns itself.
+@hide 
+*/
+getDarkTextViews : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-apply'>/**Inflates the view hierarchy represented by this object and applies
+</span> all of the actions.
+
+ &lt;p&gt;&lt;strong&gt;Caller beware: this may throw&lt;/strong&gt;
+@param {Object {Context}} context Default context to use
+@param {Object {ViewGroup}} parent Parent that the resulting view hierarchy will be attached to. This method
+ does &lt;strong&gt;not&lt;/strong&gt; attach the hierarchy. The caller should do so when appropriate.
+@return {Object {android.view.View}} The inflated view hierarchy
+*/
+apply : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-apply'>/**
+</span>@hide 
+*/
+apply : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-applyWithTheme'>/**
+</span>@hide 
+*/
+applyWithTheme : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-applyAsync'>/**Applies the views asynchronously, moving as much of the task on the background
+</span> thread as possible.
+@param {Object {Context}} context Default context to use
+@param {Object {ViewGroup}} parent Parent that the resulting view hierarchy will be attached to. This method
+ does &lt;strong&gt;not&lt;/strong&gt; attach the hierarchy. The caller should do so when appropriate.
+@param {Object {Executor}} listener the callback to run when all actions have been applied. May be null.
+@param {Object {RemoteViews.OnViewAppliedListener}} executor The executor to use. If null {@link AsyncTask#THREAD_POOL_EXECUTOR} is used.
+@param executor The executor to use. If null {@link AsyncTask#THREAD_POOL_EXECUTOR} is used.
+@return {Object {android.os.CancellationSignal}} CancellationSignal
+@hide 
+*/
+applyAsync : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-applyAsync'>/**
+</span>@hide 
+*/
+applyAsync : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-reapply'>/**Applies all of the actions to the provided view.
+</span>
+ &lt;p&gt;&lt;strong&gt;Caller beware: this may throw&lt;/strong&gt;
+@param {Object {Context}} v The view to apply the actions to.  This should be the result of
+ the {@link #apply(Context,ViewGroup)} call.
+*/
+reapply : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-reapply'>/**
+</span>@hide 
+*/
+reapply : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-reapplyAsync'>/**Applies all the actions to the provided view, moving as much of the task on the background
+</span> thread as possible.
+@param {Object {Context}} context Default context to use
+@param {Object {View}} v The view to apply the actions to.  This should be the result of
+ the {@link #apply(Context,ViewGroup)} call.
+@param {Object {Executor}} listener the callback to run when all actions have been applied. May be null.
+@param {Object {RemoteViews.OnViewAppliedListener}} executor The executor to use. If null {@link AsyncTask#THREAD_POOL_EXECUTOR} is used
+@param executor The executor to use. If null {@link AsyncTask#THREAD_POOL_EXECUTOR} is used
+@return {Object {android.os.CancellationSignal}} CancellationSignal
+@hide 
+*/
+reapplyAsync : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-reapplyAsync'>/**
+</span>@hide 
+*/
+reapplyAsync : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-prefersAsyncApply'>/**Returns true if the RemoteViews contains potentially costly operations and should be
+</span> applied asynchronously.
+@hide 
+*/
+prefersAsyncApply : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-getSequenceNumber'>/**Returns the number of actions in this RemoteViews. Can be used as a sequence number.
+</span>@hide 
+*/
+getSequenceNumber : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-onLoadClass'>/**
+</span>*/
+onLoadClass : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-hasSameAppInfo'>/**Returns true if the {@link #mApplication} is same as the provided info.
+</span>@hide 
+*/
+hasSameAppInfo : function(  ) {},
+
+<span id='android-widget-RemoteViews-method-startPendingIntent'>/**
+</span>@hide 
+*/
+startPendingIntent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

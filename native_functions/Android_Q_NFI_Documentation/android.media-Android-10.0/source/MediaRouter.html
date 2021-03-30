@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaRouter'>/**@class android.media.MediaRouter
+</span>@extends java.lang.Object
+
+ MediaRouter allows applications to control the routing of media channels
+ and streams from the current device to external speakers and destination devices.
+
+ &lt;p&gt;A MediaRouter is retrieved through {@link Context#getSystemService(String)
+ Context.getSystemService()} of a {@link Context#MEDIA_ROUTER_SERVICE
+ Context.MEDIA_ROUTER_SERVICE}.
+
+ &lt;p&gt;The media router API is not thread-safe; all interactions with it must be
+ done from the main thread of the process.&lt;/p&gt;
+*/
+var MediaRouter = {
+
+<span id='android-media-MediaRouter-property-ROUTE_TYPE_LIVE_AUDIO'>/** Route type flag for live audio.
+</span>
+ &lt;p&gt;A device that supports live audio routing will allow the media audio stream
+ to be routed to supported destinations. This can include internal speakers or
+ audio jacks on the device itself, A2DP devices, and more.&lt;/p&gt;
+
+ &lt;p&gt;Once initiated this routing is transparent to the application. All audio
+ played on the media stream will be routed to the selected destination.&lt;/p&gt;
+*/
+ROUTE_TYPE_LIVE_AUDIO : &quot;1&quot;,
+<span id='android-media-MediaRouter-property-ROUTE_TYPE_LIVE_VIDEO'>/** Route type flag for live video.
+</span>
+ &lt;p&gt;A device that supports live video routing will allow a mirrored version
+ of the device's primary display or a customized
+ {@link android.app.Presentation Presentation} to be routed to supported destinations.&lt;/p&gt;
+
+ &lt;p&gt;Once initiated, display mirroring is transparent to the application.
+ While remote routing is active the application may use a
+ {@link android.app.Presentation Presentation} to replace the mirrored view
+ on the external display with different content.&lt;/p&gt;
+
+ @see RouteInfo#getPresentationDisplay()
+ @see android.app.Presentation
+*/
+ROUTE_TYPE_LIVE_VIDEO : &quot;2&quot;,
+<span id='android-media-MediaRouter-property-ROUTE_TYPE_REMOTE_DISPLAY'>/** Temporary interop constant to identify remote displays.
+</span> @hide To be removed when media router API is updated.
+*/
+ROUTE_TYPE_REMOTE_DISPLAY : &quot;4&quot;,
+<span id='android-media-MediaRouter-property-ROUTE_TYPE_USER'>/** Route type flag for application-specific usage.
+</span>
+ &lt;p&gt;Unlike other media route types, user routes are managed by the application.
+ The MediaRouter will manage and dispatch events for user routes, but the application
+ is expected to interpret the meaning of these events and perform the requested
+ routing tasks.&lt;/p&gt;
+*/
+ROUTE_TYPE_USER : &quot;8388608&quot;,
+<span id='android-media-MediaRouter-property-CALLBACK_FLAG_PERFORM_ACTIVE_SCAN'>/** Flag for {@link #addCallback}: Actively scan for routes while this callback
+</span> is registered.
+ &lt;p&gt;
+ When this flag is specified, the media router will actively scan for new
+ routes.  Certain routes, such as wifi display routes, may not be discoverable
+ except when actively scanning.  This flag is typically used when the route picker
+ dialog has been opened by the user to ensure that the route information is
+ up to date.
+ &lt;/p&gt;&lt;p&gt;
+ Active scanning may consume a significant amount of power and may have intrusive
+ effects on wireless connectivity.  Therefore it is important that active scanning
+ only be requested when it is actually needed to satisfy a user request to
+ discover and select a new route.
+ &lt;/p&gt;
+*/
+CALLBACK_FLAG_PERFORM_ACTIVE_SCAN : &quot;1&quot;,
+<span id='android-media-MediaRouter-property-CALLBACK_FLAG_UNFILTERED_EVENTS'>/** Flag for {@link #addCallback}: Do not filter route events.
+</span> &lt;p&gt;
+ When this flag is specified, the callback will be invoked for event that affect any
+ route even if they do not match the callback's filter.
+ &lt;/p&gt;
+*/
+CALLBACK_FLAG_UNFILTERED_EVENTS : &quot;2&quot;,
+<span id='android-media-MediaRouter-property-CALLBACK_FLAG_REQUEST_DISCOVERY'>/** Explicitly requests discovery.
+</span>
+ @hide Future API ported from support library.  Revisit this later.
+*/
+CALLBACK_FLAG_REQUEST_DISCOVERY : &quot;4&quot;,
+<span id='android-media-MediaRouter-property-CALLBACK_FLAG_PASSIVE_DISCOVERY'>/** Requests that discovery be performed but only if there is some other active
+</span> callback already registered.
+
+ @hide Compatibility workaround for the fact that applications do not currently
+ request discovery explicitly (except when using the support library API).
+*/
+CALLBACK_FLAG_PASSIVE_DISCOVERY : &quot;8&quot;,
+<span id='android-media-MediaRouter-property-AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE'>/** Flag for {@link #isRouteAvailable}: Ignore the default route.
+</span> &lt;p&gt;
+ This flag is used to determine whether a matching non-default route is available.
+ This constraint may be used to decide whether to offer the route chooser dialog
+ to the user.  There is no point offering the chooser if there are no
+ non-default choices.
+ &lt;/p&gt;
+
+ @hide Future API ported from support library.  Revisit this later.
+*/
+AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE : &quot;1&quot;,
+<span id='android-media-MediaRouter-property-MIRRORING_GROUP_ID'>/** The route group id used for sharing the selected mirroring device.
+</span> System UI and Settings use this to synchronize their mirroring status.
+ @hide
+*/
+MIRRORING_GROUP_ID : &quot;android.media.mirroring_group&quot;,
+<span id='android-media-MediaRouter-method-getDefaultRoute'>/**Gets the default route for playing media content on the system.
+</span> &lt;p&gt;
+ The system always provides a default route.
+ &lt;/p&gt;
+@return {Object {android.media.MediaRouter.RouteInfo}} The default route, which is guaranteed to never be null.
+*/
+getDefaultRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getFallbackRoute'>/**Returns a Bluetooth route if available, otherwise the default route.
+</span>@hide 
+*/
+getFallbackRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getSystemCategory'>/**
+</span>@hide for use by framework routing UI
+*/
+getSystemCategory : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getSelectedRoute'>/**
+</span>@hide 
+*/
+getSelectedRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getSelectedRoute'>/**Return the currently selected route for any of the given types
+</span>@param {Number} type route types
+@return {Object {android.media.MediaRouter.RouteInfo}} the selected route
+*/
+getSelectedRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-isRouteAvailable'>/**Returns true if there is a route that matches the specified types.
+</span> &lt;p&gt;
+ This method returns true if there are any available routes that match the types
+ regardless of whether they are enabled or disabled.  If the
+ {@link #AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE} flag is specified, then
+ the method will only consider non-default routes.
+ &lt;/p&gt;
+@param {Number} types The types to match.
+@param {Number} flags Flags to control the determination of whether a route may be available.
+ May be zero or {@link #AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE}.
+@return {Boolean} True if a matching route may be available.
+@hide Future API ported from support library.  Revisit this later.
+*/
+isRouteAvailable : function(  ) {},
+
+<span id='android-media-MediaRouter-method-setRouterGroupId'>/**Sets the group ID of the router.
+</span> Media routers with the same ID acts as if they were a single media router.
+ For example, if a media router selects a route, the selected route of routers
+ with the same group ID will be changed automatically.
+
+ Two routers in a group are supposed to use the same route types.
+
+ System UI and Settings use this to synchronize their mirroring status.
+ Do not set the router group id unless it's necessary.
+
+ {@link android.Manifest.permission#CONFIGURE_WIFI_DISPLAY} permission is required to
+ call this method.
+@hide 
+*/
+setRouterGroupId : function(  ) {},
+
+<span id='android-media-MediaRouter-method-addCallback'>/**Add a callback to listen to events about specific kinds of media routes.
+</span> If the specified callback is already registered, its registration will be updated for any
+ additional route types specified.
+ &lt;p&gt;
+ This is a convenience method that has the same effect as calling
+ {@link #addandroid.media.MediaCodec.Callback(int, android.media.MediaCodec.Callback, int)} without flags.
+ &lt;/p&gt;
+@param {Number} types Types of routes this callback is interested in
+@param {Object {MediaRouter.Callback}} cb Callback to add
+*/
+addCallback : function(  ) {},
+
+<span id='android-media-MediaRouter-method-addCallback'>/**Add a callback to listen to events about specific kinds of media routes.
+</span> If the specified callback is already registered, its registration will be updated for any
+ additional route types specified.
+ &lt;p&gt;
+ By default, the callback will only be invoked for events that affect routes
+ that match the specified selector.  The filtering may be disabled by specifying
+ the {@link #CALLBACK_FLAG_UNFILTERED_EVENTS} flag.
+ &lt;/p&gt;
+@param {Number} types Types of routes this callback is interested in
+@param {Object {MediaRouter.Callback}} cb Callback to add
+@param {Number} flags Flags to control the behavior of the callback.
+ May be zero or a combination of {@link #CALLBACK_FLAG_PERFORM_ACTIVE_SCAN} and
+ {@link #CALLBACK_FLAG_UNFILTERED_EVENTS}.
+*/
+addCallback : function(  ) {},
+
+<span id='android-media-MediaRouter-method-removeCallback'>/**Remove the specified callback. It will no longer receive events about media routing.
+</span>@param {Object {MediaRouter.Callback}} cb Callback to remove
+*/
+removeCallback : function(  ) {},
+
+<span id='android-media-MediaRouter-method-selectRoute'>/**Select the specified route to use for output of the given media types.
+</span> &lt;p class=&quot;note&quot;&gt;
+ As API version 18, this function may be used to select any route.
+ In prior versions, this function could only be used to select user
+ routes and would ignore any attempt to select a system route.
+ &lt;/p&gt;
+@param {Number} types type flags indicating which types this route should be used for.
+              The route must support at least a subset.
+@param {Object {MediaRouter.RouteInfo}} route Route to select
+@throws IllegalArgumentException if the given route is {@code null}
+*/
+selectRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-selectRouteInt'>/**
+</span>@hide internal use
+*/
+selectRouteInt : function(  ) {},
+
+<span id='android-media-MediaRouter-method-addUserRoute'>/**Add an app-specified route for media to the MediaRouter.
+</span> App-specified route definitions are created using {@link #createUserRoute}(RouteCategory)
+@param {Object {MediaRouter.UserRouteInfo}} info Definition of the route to add
+@see #createUserRoute(RouteCategory)
+@see #removeUserRoute(UserRouteInfo)
+*/
+addUserRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-addRouteInt'>/**
+</span>@hide Framework use only
+*/
+addRouteInt : function(  ) {},
+
+<span id='android-media-MediaRouter-method-removeUserRoute'>/**Remove an app-specified route for media from the MediaRouter.
+</span>@param {Object {MediaRouter.UserRouteInfo}} info Definition of the route to remove
+@see #addUserRoute(UserRouteInfo)
+*/
+removeUserRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-clearUserRoutes'>/**Remove all app-specified routes from the MediaRouter.
+</span>@see #removeUserRoute(UserRouteInfo)
+*/
+clearUserRoutes : function(  ) {},
+
+<span id='android-media-MediaRouter-method-removeRouteInt'>/**
+</span>@hide internal use only
+*/
+removeRouteInt : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getCategoryCount'>/**Return the number of {@link android.media.MediaRouter.RouteCategory categories} currently
+</span> represented by routes known to this MediaRouter.
+@return {Number} the number of unique categories represented by this MediaRouter's known routes
+*/
+getCategoryCount : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getCategoryAt'>/**Return the {@link android.media.MediaRouter.RouteCategory category} at the given index.
+</span> Valid indices are in the range [0-getCategoryCount).
+@param {Number} index which category to return
+@return {Object {android.media.MediaRouter.RouteCategory}} the category at index
+*/
+getCategoryAt : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getRouteCount'>/**Return the number of {@link android.media.MediaRouter.RouteInfo routes} currently known
+</span> to this MediaRouter.
+@return {Number} the number of routes tracked by this router
+*/
+getRouteCount : function(  ) {},
+
+<span id='android-media-MediaRouter-method-getRouteAt'>/**Return the route at the specified index.
+</span>@param {Number} index index of the route to return
+@return {Object {android.media.MediaRouter.RouteInfo}} the route at index
+*/
+getRouteAt : function(  ) {},
+
+<span id='android-media-MediaRouter-method-createUserRoute'>/**Create a new user route that may be modified and registered for use by the application.
+</span>@param {Object {MediaRouter.RouteCategory}} category The category the new route will belong to
+@return {Object {android.media.MediaRouter.UserRouteInfo}} A new UserRouteInfo for use by the application
+@see #addUserRoute(UserRouteInfo)
+@see #removeUserRoute(UserRouteInfo)
+@see #createRouteCategory(CharSequence, boolean)
+*/
+createUserRoute : function(  ) {},
+
+<span id='android-media-MediaRouter-method-createRouteCategory'>/**Create a new route category. Each route must belong to a category.
+</span>@param {Object {CharSequence}} name Name of the new category
+@param {Boolean} isGroupable true if routes in this category may be grouped with one another
+@return {Object {android.media.MediaRouter.RouteCategory}} the new RouteCategory
+*/
+createRouteCategory : function(  ) {},
+
+<span id='android-media-MediaRouter-method-createRouteCategory'>/**Create a new route category. Each route must belong to a category.
+</span>@param {Number} nameResId Resource ID of the name of the new category
+@param {Boolean} isGroupable true if routes in this category may be grouped with one another
+@return {Object {android.media.MediaRouter.RouteCategory}} the new RouteCategory
+*/
+createRouteCategory : function(  ) {},
+
+<span id='android-media-MediaRouter-method-rebindAsUser'>/**Rebinds the media router to handle routes that belong to the specified user.
+</span> Requires the interact across users permission to access the routes of another user.
+ &lt;p&gt;
+ This method is a complete hack to work around the singleton nature of the
+ media router when running inside of singleton processes like QuickSettings.
+ This mechanism should be burned to the ground when MediaRouter is redesigned.
+ Ideally the current user would be pulled from the Context but we need to break
+ down MediaRouter.Static before we can get there.
+ &lt;/p&gt;
+@hide 
+*/
+rebindAsUser : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

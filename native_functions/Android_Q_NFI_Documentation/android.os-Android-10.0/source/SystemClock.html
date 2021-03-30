@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-SystemClock'>/**@class android.os.SystemClock
+</span>@extends java.lang.Object
+
+ Core timekeeping facilities.
+
+ &lt;p&gt; Three different clocks are available, and they should not be confused:
+
+ &lt;ul&gt;
+     &lt;li&gt; &lt;p&gt; {@link System#currentTimeMillis System.currentTimeMillis()}
+     is the standard &quot;wall&quot; clock (time and date) expressing milliseconds
+     since the epoch.  The wall clock can be set by the user or the phone
+     network (see {@link #setCurrentTimeMillis}), so the time may jump
+     backwards or forwards unpredictably.  This clock should only be used
+     when correspondence with real-world dates and times is important, such
+     as in a calendar or alarm clock application.  Interval or elapsed
+     time measurements should use a different clock.  If you are using
+     System.currentTimeMillis(), consider listening to the
+     {@link android.content.Intent#ACTION_TIME_TICK ACTION_TIME_TICK},
+     {@link android.content.Intent#ACTION_TIME_CHANGED ACTION_TIME_CHANGED}
+     and {@link android.content.Intent#ACTION_TIMEZONE_CHANGED
+     ACTION_TIMEZONE_CHANGED} {@link android.content.Intent Intent}
+     broadcasts to find out when the time changes.
+
+     &lt;li&gt; &lt;p&gt; {@link #uptimeMillis} is counted in milliseconds since the
+     system was booted.  This clock stops when the system enters deep
+     sleep (CPU off, display dark, device waiting for external input),
+     but is not affected by clock scaling, idle, or other power saving
+     mechanisms.  This is the basis for most interval timing
+     such as {@link Thread#sleep(long) Thread.sleep(millls)},
+     {@link Object#wait(long) Object.wait(millis)}, and
+     {@link System#nanoTime System.nanoTime()}.  This clock is guaranteed
+     to be monotonic, and is suitable for interval timing when the
+     interval does not span device sleep.  Most methods that accept a
+     timestamp value currently expect the {@link #uptimeMillis} clock.
+
+     &lt;li&gt; &lt;p&gt; {@link #elapsedRealtime} and {@link #elapsedRealtimeNanos}
+     return the time since the system was booted, and include deep sleep.
+     This clock is guaranteed to be monotonic, and continues to tick even
+     when the CPU is in power saving modes, so is the recommend basis
+     for general purpose interval timing.
+
+ &lt;/ul&gt;
+
+ There are several mechanisms for controlling the timing of events:
+
+ &lt;ul&gt;
+     &lt;li&gt; &lt;p&gt; Standard functions like {@link Thread#sleep(long)
+     Thread.sleep(millis)} and {@link Object#wait(long) Object.wait(millis)}
+     are always available.  These functions use the {@link #uptimeMillis}
+     clock; if the device enters sleep, the remainder of the time will be
+     postponed until the device wakes up.  These synchronous functions may
+     be interrupted with {@link Thread#interrupt Thread.interrupt()}, and
+     you must handle {@link InterruptedException}.
+
+     &lt;li&gt; &lt;p&gt; {@link #sleep android.os.SystemClock.sleep(millis)} is a utility function
+     very similar to {@link Thread#sleep(long) Thread.sleep(millis)}, but it
+     ignores {@link InterruptedException}.  Use this function for delays if
+     you do not use {@link Thread#interrupt Thread.interrupt()}, as it will
+     preserve the interrupted state of the thread.
+
+     &lt;li&gt; &lt;p&gt; The {@link android.os.Handler} class can schedule asynchronous
+     callbacks at an absolute or relative time.  Handler objects also use the
+     {@link #uptimeMillis} clock, and require an {@link android.os.Looper
+     event loop} (normally present in any GUI application).
+
+     &lt;li&gt; &lt;p&gt; The {@link android.app.AlarmManager} can trigger one-time or
+     recurring events which occur even when the device is in deep sleep
+     or your application is not running.  Events may be scheduled with your
+     choice of {@link java.lang.System#currentTimeMillis} (RTC) or
+     {@link #elapsedRealtime} (ELAPSED_REALTIME), and cause an
+     {@link android.content.Intent} broadcast when they occur.
+ &lt;/ul&gt;
+*/
+var SystemClock = {
+
+<span id='android-os-SystemClock-method-sleep'>/**Waits a given number of milliseconds (of uptimeMillis) before returning.
+</span> Similar to {@link java.lang.Thread#sleep(long)}, but does not throw
+ {@link InterruptedException}; {@link Thread#interrupt()} events are
+ deferred until the next interruptible operation.  Does not return until
+ at least the specified number of milliseconds has elapsed.
+@param {Number} ms to sleep before returning, in milliseconds of uptime.
+*/
+sleep : function(  ) {},
+
+<span id='android-os-SystemClock-method-setCurrentTimeMillis'>/**Sets the current wall time, in milliseconds.  Requires the calling
+</span> process to have appropriate permissions.
+@return {Boolean} if the clock was successfully set to the specified time.
+*/
+setCurrentTimeMillis : function(  ) {},
+
+<span id='android-os-SystemClock-method-uptimeMillis'>/**Returns milliseconds since boot, not counting time spent in deep sleep.
+</span>@return {Number} milliseconds of non-sleep uptime since boot.
+*/
+uptimeMillis : function(  ) {},
+
+<span id='android-os-SystemClock-method-uptimeMillisClock'>/**
+</span>@removed 
+*/
+uptimeMillisClock : function(  ) {},
+
+<span id='android-os-SystemClock-method-uptimeClock'>/**Return {@link Clock} that starts at system boot, not counting time spent
+</span> in deep sleep.
+@removed 
+*/
+uptimeClock : function(  ) {},
+
+<span id='android-os-SystemClock-method-elapsedRealtime'>/**Returns milliseconds since boot, including time spent in sleep.
+</span>@return {Number} elapsed milliseconds since boot.
+*/
+elapsedRealtime : function(  ) {},
+
+<span id='android-os-SystemClock-method-elapsedRealtimeClock'>/**Return {@link Clock} that starts at system boot, including time spent in
+</span> sleep.
+@removed 
+*/
+elapsedRealtimeClock : function(  ) {},
+
+<span id='android-os-SystemClock-method-elapsedRealtimeNanos'>/**Returns nanoseconds since boot, including time spent in sleep.
+</span>@return {Number} elapsed nanoseconds since boot.
+*/
+elapsedRealtimeNanos : function(  ) {},
+
+<span id='android-os-SystemClock-method-currentThreadTimeMillis'>/**Returns milliseconds running in the current thread.
+</span>@return {Number} elapsed milliseconds in the thread
+*/
+currentThreadTimeMillis : function(  ) {},
+
+<span id='android-os-SystemClock-method-currentThreadTimeMicro'>/**Returns microseconds running in the current thread.
+</span>@return {Number} elapsed microseconds in the thread
+@hide 
+*/
+currentThreadTimeMicro : function(  ) {},
+
+<span id='android-os-SystemClock-method-currentTimeMicro'>/**Returns current wall time in  microseconds.
+</span>@return {Number} elapsed microseconds in wall time
+@hide 
+*/
+currentTimeMicro : function(  ) {},
+
+<span id='android-os-SystemClock-method-currentNetworkTimeMillis'>/**Returns milliseconds since January 1, 1970 00:00:00.0 UTC, synchronized
+</span> using a remote network source outside the device.
+ &lt;p&gt;
+ While the time returned by {@link System#currentTimeMillis()} can be
+ adjusted by the user, the time returned by this method cannot be adjusted
+ by the user. Note that synchronization may occur using an insecure
+ network protocol, so the returned time should not be used for security
+ purposes.
+ &lt;p&gt;
+ This performs no blocking network operations and returns values based on
+ a recent successful synchronization event; it will either return a valid
+ time or throw.
+@throws DateTimeException when no accurate network time can be provided.
+@hide 
+*/
+currentNetworkTimeMillis : function(  ) {},
+
+<span id='android-os-SystemClock-method-currentNetworkTimeClock'>/**Returns a {@link Clock} that starts at January 1, 1970 00:00:00.0 UTC,
+</span> synchronized using a remote network source outside the device.
+ &lt;p&gt;
+ While the time returned by {@link System#currentTimeMillis()} can be
+ adjusted by the user, the time returned by this method cannot be adjusted
+ by the user. Note that synchronization may occur using an insecure
+ network protocol, so the returned time should not be used for security
+ purposes.
+ &lt;p&gt;
+ This performs no blocking network operations and returns values based on
+ a recent successful synchronization event; it will either return a valid
+ time or throw.
+@throws DateTimeException when no accurate network time can be provided.
+@hide 
+*/
+currentNetworkTimeClock : function(  ) {},
+
+<span id='android-os-SystemClock-method-currentGnssTimeClock'>/**Returns a {@link Clock} that starts at January 1, 1970 00:00:00.0 UTC,
+</span> synchronized using the device's location provider.
+@throws DateTimeException when the location provider has not had a location fix since boot.
+*/
+currentGnssTimeClock : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

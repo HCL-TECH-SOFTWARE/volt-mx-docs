@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvContract-Programs'>/**@class android.media.tv.TvContract.Programs
+</span> implements android.media.tv.TvContract.BaseTvColumns
+
+ implements android.media.tv.TvContract.ProgramColumns
+
+@extends java.lang.Object
+
+ Column definitions for the TV programs table.
+
+ &lt;p&gt;By default, the query results will be sorted by
+ {@link android.media.tv.TvContract.Programs#COLUMN_START_TIME_UTC_MILLIS} in ascending order.
+*/
+var Programs = {
+
+<span id='android-media-tv-TvContract-Programs-property-CONTENT_URI'>/** The content:// style URI for this table.
+</span>
+ &lt;p&gt;SQL selection is not supported for {@link ContentResolver#query},
+ {@link ContentResolver#update} and {@link ContentResolver#delete} operations.
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-media-tv-TvContract-Programs-property-CONTENT_TYPE'>/**The MIME type of a directory of TV programs. */
+</span>CONTENT_TYPE : &quot;vnd.android.cursor.dir/program&quot;,
+<span id='android-media-tv-TvContract-Programs-property-CONTENT_ITEM_TYPE'>/**The MIME type of a single TV program. */
+</span>CONTENT_ITEM_TYPE : &quot;vnd.android.cursor.item/program&quot;,
+<span id='android-media-tv-TvContract-Programs-property-COLUMN_CHANNEL_ID'>/** The ID of the TV channel that provides this TV program.
+</span>
+ &lt;p&gt;This is a part of the channel URI and matches to {@link BaseColumns#_ID}.
+
+ &lt;p&gt;This is a required field.
+
+ &lt;p&gt;Type: INTEGER (long)
+*/
+COLUMN_CHANNEL_ID : &quot;channel_id&quot;,
+<span id='android-media-tv-TvContract-Programs-property-COLUMN_SEASON_NUMBER'>/** The season number of this TV program for episodic TV shows.
+</span>
+ &lt;p&gt;Can be empty.
+
+ &lt;p&gt;Type: INTEGER
+
+ @deprecated Use {@link #COLUMN_SEASON_DISPLAY_NUMBER} instead.
+*/
+COLUMN_SEASON_NUMBER : &quot;season_number&quot;,
+<span id='android-media-tv-TvContract-Programs-property-COLUMN_EPISODE_NUMBER'>/** The episode number of this TV program for episodic TV shows.
+</span>
+ &lt;p&gt;Can be empty.
+
+ &lt;p&gt;Type: INTEGER
+
+ @deprecated Use {@link #COLUMN_EPISODE_DISPLAY_NUMBER} instead.
+*/
+COLUMN_EPISODE_NUMBER : &quot;episode_number&quot;,
+<span id='android-media-tv-TvContract-Programs-property-COLUMN_START_TIME_UTC_MILLIS'>/** The start time of this TV program, in milliseconds since the epoch.
+</span>
+ &lt;p&gt;The value should be equal to or larger than {@link #COLUMN_END_TIME_UTC_MILLIS} of the
+ previous program in the same channel. In practice, start time will usually be the end
+ time of the previous program.
+
+ &lt;p&gt;Can be empty if this program belongs to a {@link android.media.tv.TvContract.Channels#TYPE_PREVIEW} channel.
+
+ &lt;p&gt;Type: INTEGER (long)
+*/
+COLUMN_START_TIME_UTC_MILLIS : &quot;start_time_utc_millis&quot;,
+<span id='android-media-tv-TvContract-Programs-property-COLUMN_END_TIME_UTC_MILLIS'>/** The end time of this TV program, in milliseconds since the epoch.
+</span>
+ &lt;p&gt;The value should be equal to or less than {@link #COLUMN_START_TIME_UTC_MILLIS} of the
+ next program in the same channel. In practice, end time will usually be the start time of
+ the next program.
+
+ &lt;p&gt;Can be empty if this program belongs to a {@link android.media.tv.TvContract.Channels#TYPE_PREVIEW} channel.
+
+ &lt;p&gt;Type: INTEGER (long)
+*/
+COLUMN_END_TIME_UTC_MILLIS : &quot;end_time_utc_millis&quot;,
+<span id='android-media-tv-TvContract-Programs-property-COLUMN_BROADCAST_GENRE'>/** The comma-separated genre string of this TV program.
+</span>
+ &lt;p&gt;Use the same language appeared in the underlying broadcast standard, if applicable.
+ (For example, one can refer to the genre strings used in Genre Descriptor of ATSC A/65 or
+ Content Descriptor of ETSI EN 300 468, if appropriate.) Otherwise, leave empty. Use
+ {@link android.media.tv.Programs.Genres#encode} to create a text that can be stored in this column. Use
+ {@link android.media.tv.Programs.Genres#decode} to get the broadcast genre strings from the text stored in the
+ column.
+
+ &lt;p&gt;Type: TEXT
+ @see Genres#encode
+ @see Genres#decode
+*/
+COLUMN_BROADCAST_GENRE : &quot;broadcast_genre&quot;,
+<span id='android-media-tv-TvContract-Programs-property-COLUMN_RECORDING_PROHIBITED'>/** The flag indicating whether recording of this program is prohibited.
+</span>
+ &lt;p&gt;A value of 1 indicates that recording of this program is prohibited and application
+ will not schedule any recording for this program. A value of 0 indicates that the
+ recording is not prohibited. If not specified, this value is set to 0 (not prohibited) by
+ default.
+
+ &lt;p&gt;Type: INTEGER (boolean)
+*/
+COLUMN_RECORDING_PROHIBITED : &quot;recording_prohibited&quot;,
+
+};</pre>
+</body>
+</html>

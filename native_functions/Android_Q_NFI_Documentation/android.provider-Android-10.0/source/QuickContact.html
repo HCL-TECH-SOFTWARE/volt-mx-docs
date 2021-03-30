@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-QuickContact'>/**@class android.provider.ContactsContract.QuickContact
+</span>@extends java.lang.Object
+
+ Helper methods to display QuickContact dialogs that display all the information belonging to
+ a specific {@link android.provider.Contacts} entry.
+*/
+var QuickContact = {
+
+<span id='android-provider-ContactsContract-QuickContact-property-ACTION_QUICK_CONTACT'>/** Action used to launch the system contacts application and bring up a QuickContact dialog
+</span> for the provided {@link android.provider.Contacts} entry.
+*/
+ACTION_QUICK_CONTACT : &quot;android.provider.action.QUICK_CONTACT&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-EXTRA_TARGET_RECT'>/** Extra used to specify pivot dialog location in screen coordinates.
+</span> @deprecated Use {@link Intent#setSourceBounds(Rect)} instead.
+ @hide
+*/
+EXTRA_TARGET_RECT : &quot;android.provider.extra.TARGET_RECT&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-EXTRA_MODE'>/** Extra used to specify size of QuickContacts. Not all implementations of QuickContacts
+</span> will respect this extra's value.
+
+ One of {@link #MODE_SMALL}, {@link #MODE_MEDIUM}, or {@link #MODE_LARGE}.
+*/
+EXTRA_MODE : &quot;android.provider.extra.MODE&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-EXTRA_PRIORITIZED_MIMETYPE'>/** Extra used to specify which mimetype should be prioritized in the QuickContacts UI.
+</span> For example, passing the value {@link android.provider.ContactsContract.CommonDataKinds.Phone#CONTENT_ITEM_TYPE} can
+ cause phone numbers to be displayed more prominently in QuickContacts.
+*/
+EXTRA_PRIORITIZED_MIMETYPE : &quot;android.provider.extra.PRIORITIZED_MIMETYPE&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-EXTRA_EXCLUDE_MIMES'>/** Extra used to indicate a list of specific MIME-types to exclude and not display in the
+</span> QuickContacts dialog. Stored as a {@link String} array.
+*/
+EXTRA_EXCLUDE_MIMES : &quot;android.provider.extra.EXCLUDE_MIMES&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-MODE_SMALL'>/** Small QuickContact mode, usually presented with minimal actions.
+</span>*/
+MODE_SMALL : &quot;1&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-MODE_MEDIUM'>/** Medium QuickContact mode, includes actions and light summary describing
+</span> the {@link android.provider.Contacts} entry being shown. This may include social
+ status and presence details.
+*/
+MODE_MEDIUM : &quot;2&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-MODE_LARGE'>/** Large QuickContact mode, includes actions and larger, card-like summary
+</span> of the {@link android.provider.Contacts} entry being shown. This may include detailed
+ information, such as a photo.
+*/
+MODE_LARGE : &quot;3&quot;,
+<span id='android-provider-ContactsContract-QuickContact-property-MODE_DEFAULT'>/**@hide */
+</span>MODE_DEFAULT : &quot;3&quot;,
+<span id='android-provider-ContactsContract-QuickContact-method-composeQuickContactsIntent'>/**Constructs the QuickContacts intent with a view's rect.
+</span>@hide 
+*/
+composeQuickContactsIntent : function(  ) {},
+
+<span id='android-provider-ContactsContract-QuickContact-method-composeQuickContactsIntent'>/**Constructs the QuickContacts intent.
+</span>@hide 
+*/
+composeQuickContactsIntent : function(  ) {},
+
+<span id='android-provider-ContactsContract-QuickContact-method-rebuildManagedQuickContactsIntent'>/**Constructs a QuickContacts intent based on an incoming intent for DevicePolicyManager
+</span> to strip off anything not necessary.
+@hide 
+*/
+rebuildManagedQuickContactsIntent : function(  ) {},
+
+<span id='android-provider-ContactsContract-QuickContact-method-showQuickContact'>/**Trigger a dialog that lists the various methods of interacting with
+</span> the requested {@link android.provider.Contacts} entry. This may be based on available
+ {@link android.provider.ContactsContract.Data} rows under that contact, and may also
+ include social status and presence details.
+@param {Object {Context}} context The parent {@link Context} that may be used as the
+            parent for this dialog.
+@param {Object {View}} target Specific {@link View} from your layout that this dialog
+            should be centered around. In particular, if the dialog
+            has a &quot;callout&quot; arrow, it will be pointed and centered
+            around this {@link View}.
+@param {Object {Uri}} lookupUri A {@link ContactsContract.Contacts#CONTENT_LOOKUP_URI} style
+            {@link Uri} that describes a specific contact to feature
+            in this dialog. A work lookup uri is supported here,
+            see {@link CommonDataKinds.Email#ENTERPRISE_CONTENT_LOOKUP_URI} and
+            {@link PhoneLookup#ENTERPRISE_CONTENT_FILTER_URI}.
+@param {Number} mode Any of {@link #MODE_SMALL}, {@link #MODE_MEDIUM}, or
+            {@link #MODE_LARGE}, indicating the desired dialog size,
+            when supported.
+@param {Object {java.lang.String[]}} excludeMimes Optional list of {@link Data#MIMETYPE} MIME-types
+            to exclude when showing this dialog. For example, when
+            already viewing the contact details card, this can be used
+            to omit the details entry from the dialog.
+*/
+showQuickContact : function(  ) {},
+
+<span id='android-provider-ContactsContract-QuickContact-method-showQuickContact'>/**Trigger a dialog that lists the various methods of interacting with
+</span> the requested {@link android.provider.Contacts} entry. This may be based on available
+ {@link android.provider.ContactsContract.Data} rows under that contact, and may also
+ include social status and presence details.
+@param {Object {Context}} context The parent {@link Context} that may be used as the
+            parent for this dialog.
+@param {Object {Rect}} target Specific {@link Rect} that this dialog should be
+            centered around, in screen coordinates. In particular, if
+            the dialog has a &quot;callout&quot; arrow, it will be pointed and
+            centered around this {@link Rect}. If you are running at a
+            non-native density, you need to manually adjust using
+            {@link DisplayMetrics#density} before calling.
+@param {Object {Uri}} lookupUri A
+            {@link ContactsContract.Contacts#CONTENT_LOOKUP_URI} style
+            {@link Uri} that describes a specific contact to feature
+            in this dialog. A work lookup uri is supported here,
+            see {@link CommonDataKinds.Email#ENTERPRISE_CONTENT_LOOKUP_URI} and
+            {@link PhoneLookup#ENTERPRISE_CONTENT_FILTER_URI}.
+@param {Number} mode Any of {@link #MODE_SMALL}, {@link #MODE_MEDIUM}, or
+            {@link #MODE_LARGE}, indicating the desired dialog size,
+            when supported.
+@param {Object {java.lang.String[]}} excludeMimes Optional list of {@link Data#MIMETYPE} MIME-types
+            to exclude when showing this dialog. For example, when
+            already viewing the contact details card, this can be used
+            to omit the details entry from the dialog.
+*/
+showQuickContact : function(  ) {},
+
+<span id='android-provider-ContactsContract-QuickContact-method-showQuickContact'>/**Trigger a dialog that lists the various methods of interacting with
+</span> the requested {@link android.provider.Contacts} entry. This may be based on available
+ {@link android.provider.ContactsContract.Data} rows under that contact, and may also
+ include social status and presence details.
+@param {Object {Context}} context The parent {@link Context} that may be used as the
+            parent for this dialog.
+@param {Object {View}} target Specific {@link View} from your layout that this dialog
+            should be centered around. In particular, if the dialog
+            has a &quot;callout&quot; arrow, it will be pointed and centered
+            around this {@link View}.
+@param {Object {Uri}} lookupUri A
+            {@link ContactsContract.Contacts#CONTENT_LOOKUP_URI} style
+            {@link Uri} that describes a specific contact to feature
+            in this dialog. A work lookup uri is supported here,
+            see {@link CommonDataKinds.Email#ENTERPRISE_CONTENT_LOOKUP_URI} and
+            {@link PhoneLookup#ENTERPRISE_CONTENT_FILTER_URI}.
+@param {Object {java.lang.String[]}} excludeMimes Optional list of {@link Data#MIMETYPE} MIME-types
+            to exclude when showing this dialog. For example, when
+            already viewing the contact details card, this can be used
+            to omit the details entry from the dialog.
+@param {String} prioritizedMimeType This mimetype should be prioritized in the QuickContacts UI.
+             For example, passing the value
+             {@link CommonDataKinds.Phone#CONTENT_ITEM_TYPE} can cause phone numbers to be
+             displayed more prominently in QuickContacts.
+*/
+showQuickContact : function(  ) {},
+
+<span id='android-provider-ContactsContract-QuickContact-method-showQuickContact'>/**Trigger a dialog that lists the various methods of interacting with
+</span> the requested {@link android.provider.Contacts} entry. This may be based on available
+ {@link android.provider.ContactsContract.Data} rows under that contact, and may also
+ include social status and presence details.
+@param {Object {Context}} context The parent {@link Context} that may be used as the
+            parent for this dialog.
+@param {Object {Rect}} target Specific {@link Rect} that this dialog should be
+            centered around, in screen coordinates. In particular, if
+            the dialog has a &quot;callout&quot; arrow, it will be pointed and
+            centered around this {@link Rect}. If you are running at a
+            non-native density, you need to manually adjust using
+            {@link DisplayMetrics#density} before calling.
+@param {Object {Uri}} lookupUri A
+            {@link ContactsContract.Contacts#CONTENT_LOOKUP_URI} style
+            {@link Uri} that describes a specific contact to feature
+            in this dialog. A work lookup uri is supported here,
+            see {@link CommonDataKinds.Email#ENTERPRISE_CONTENT_LOOKUP_URI} and
+            {@link PhoneLookup#ENTERPRISE_CONTENT_FILTER_URI}.
+@param {Object {java.lang.String[]}} excludeMimes Optional list of {@link Data#MIMETYPE} MIME-types
+            to exclude when showing this dialog. For example, when
+            already viewing the contact details card, this can be used
+            to omit the details entry from the dialog.
+@param {String} prioritizedMimeType This mimetype should be prioritized in the QuickContacts UI.
+             For example, passing the value
+             {@link CommonDataKinds.Phone#CONTENT_ITEM_TYPE} can cause phone numbers to be
+             displayed more prominently in QuickContacts.
+*/
+showQuickContact : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

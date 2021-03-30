@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-TestLooperManager'>/**@class android.os.TestLooperManager
+</span>@extends java.lang.Object
+
+ Blocks a looper from executing any messages, and allows the holder of this object
+ to control when and which messages get executed until it is released.
+ &lt;p&gt;
+ A TestLooperManager should be acquired using
+ {@link android.app.Instrumentation#acquireLooperManager}. Until {@link #release}() is called,
+ the Looper thread will not execute any messages except when {@link #execute}(Message) is called.
+ The test code may use {@link #next}() to acquire messages that have been queued to this
+ {@link android.os.Looper}/{@link android.os.MessageQueue} and then {@link #execute} to run any that desires.
+*/
+var TestLooperManager = {
+
+<span id='android-os-TestLooperManager-method-getMessageQueue'>/**Returns the {@link android.os.MessageQueue} this object is wrapping.
+</span>*/
+getMessageQueue : function(  ) {},
+
+<span id='android-os-TestLooperManager-method-getQueue'>/**
+</span>@removed 
+*/
+getQueue : function(  ) {},
+
+<span id='android-os-TestLooperManager-method-next'>/**Returns the next message that should be executed by this queue, may block
+</span> if no messages are ready.
+ &lt;p&gt;
+ Callers should always call {@link #recycle}(Message) on the message when all
+ interactions with it have completed.
+*/
+next : function(  ) {},
+
+<span id='android-os-TestLooperManager-method-release'>/**Releases the looper to continue standard looping and processing of messages,
+</span> no further interactions with TestLooperManager will be allowed after
+ release() has been called.
+*/
+release : function(  ) {},
+
+<span id='android-os-TestLooperManager-method-execute'>/**Executes the given message on the Looper thread this wrapper is
+</span> attached to.
+ &lt;p&gt;
+ Execution will happen on the Looper's thread (whether it is the current thread
+ or not), but all RuntimeExceptions encountered while executing the message will
+ be thrown on the calling thread.
+*/
+execute : function(  ) {},
+
+<span id='android-os-TestLooperManager-method-recycle'>/**Called to indicate that a Message returned by {@link #next}() has been parsed
+</span> and should be recycled.
+*/
+recycle : function(  ) {},
+
+<span id='android-os-TestLooperManager-method-hasMessages'>/**Returns true if there are any queued messages that match the parameters.
+</span>@param {Object {Handler}} h      the value of {@link Message#getTarget()}
+@param {Object {Object}} what   the value of {@link Message#what}
+@param {Number} object the value of {@link Message#obj}, null for any
+*/
+hasMessages : function(  ) {},
+
+<span id='android-os-TestLooperManager-method-hasMessages'>/**Returns true if there are any queued messages that match the parameters.
+</span>@param {Object {Handler}} h      the value of {@link Message#getTarget()}
+@param {Object {Object}} r      the value of {@link Message#getCallback()}
+@param {Object {Runnable}} object the value of {@link Message#obj}, null for any
+*/
+hasMessages : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

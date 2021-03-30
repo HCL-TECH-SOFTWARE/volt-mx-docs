@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-effect-EffectFactory'>/**@class android.media.effect.EffectFactory
+</span>@extends java.lang.Object
+
+ &lt;p&gt;The EffectFactory class defines the list of available Effects, and provides functionality to
+ inspect and instantiate them. Some effects may not be available on all platforms, so before
+ creating a certain effect, the application should confirm that the effect is supported on this
+ platform by calling {@link #isEffectSupported}(String).&lt;/p&gt;
+*/
+var EffectFactory = {
+
+<span id='android-media-effect-EffectFactory-property-EFFECT_IDENTITY'>/** &lt;p&gt;Copies the input texture to the output.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters: None&lt;/p&gt;
+ @hide
+*/
+EFFECT_IDENTITY : &quot;IdentityEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_BRIGHTNESS'>/** &lt;p&gt;Adjusts the brightness of the image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;brightness&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The brightness multiplier.&lt;/td&gt;
+     &lt;td&gt;Positive float. 1.0 means no change;
+               larger values will increase brightness.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_BRIGHTNESS : &quot;android.media.effect.effects.BrightnessEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_CONTRAST'>/** &lt;p&gt;Adjusts the contrast of the image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;contrast&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The contrast multiplier.&lt;/td&gt;
+     &lt;td&gt;Float. 1.0 means no change;
+               larger values will increase contrast.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_CONTRAST : &quot;android.media.effect.effects.ContrastEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_FISHEYE'>/** &lt;p&gt;Applies a fisheye lens distortion to the image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;scale&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The scale of the distortion.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1. Zero means no distortion.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_FISHEYE : &quot;android.media.effect.effects.FisheyeEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_BACKDROPPER'>/** &lt;p&gt;Replaces the background of the input frames with frames from a
+</span> selected video.  Requires an initial learning period with only the
+ background visible before the effect becomes active. The effect will wait
+ until it does not see any motion in the scene before learning the
+ background and starting the effect.&lt;/p&gt;
+
+ &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;source&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;A URI for the background video to use. This parameter must be
+         supplied before calling apply() for the first time.&lt;/td&gt;
+     &lt;td&gt;String, such as from
+         {@link android.net.Uri#toString Uri.toString()}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;p&gt;If the update listener is set for this effect using
+ {@link android.media.effect.Effect#setUpdateListener}, it will be called when the effect has
+ finished learning the background, with a null value for the info
+ parameter.&lt;/p&gt;
+*/
+EFFECT_BACKDROPPER : &quot;android.media.effect.effects.BackDropperEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_AUTOFIX'>/** &lt;p&gt;Attempts to auto-fix the image based on histogram equalization.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;scale&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The scale of the adjustment.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1. Zero means no adjustment, while 1 indicates the maximum
+     amount of adjustment.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_AUTOFIX : &quot;android.media.effect.effects.AutoFixEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_BLACKWHITE'>/** &lt;p&gt;Adjusts the range of minimal and maximal color pixel intensities.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;black&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The value of the minimal pixel.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;white&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The value of the maximal pixel.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_BLACKWHITE : &quot;android.media.effect.effects.BlackWhiteEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_CROP'>/** &lt;p&gt;Crops an upright rectangular area from the image. If the crop region falls outside of
+</span> the image bounds, the results are undefined.&lt;/p&gt;
+ &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;xorigin&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The origin's x-value.&lt;/td&gt;
+     &lt;td&gt;Integer, between 0 and width of the image.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;yorigin&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The origin's y-value.&lt;/td&gt;
+     &lt;td&gt;Integer, between 0 and height of the image.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;width&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The width of the cropped image.&lt;/td&gt;
+     &lt;td&gt;Integer, between 1 and the width of the image minus xorigin.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;height&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The height of the cropped image.&lt;/td&gt;
+     &lt;td&gt;Integer, between 1 and the height of the image minus yorigin.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_CROP : &quot;android.media.effect.effects.CropEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_CROSSPROCESS'>/** &lt;p&gt;Applies a cross process effect on image, in which the red and green channels are
+</span> enhanced while the blue channel is restricted.&lt;/p&gt;
+ &lt;p&gt;Available parameters: None&lt;/p&gt;
+*/
+EFFECT_CROSSPROCESS : &quot;android.media.effect.effects.CrossProcessEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_DOCUMENTARY'>/** &lt;p&gt;Applies black and white documentary style effect on image..&lt;/p&gt;
+</span> &lt;p&gt;Available parameters: None&lt;/p&gt;
+*/
+EFFECT_DOCUMENTARY : &quot;android.media.effect.effects.DocumentaryEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_BITMAPOVERLAY'>/** &lt;p&gt;Overlays a bitmap (with premultiplied alpha channel) onto the input image. The bitmap
+</span> is stretched to fit the input image.&lt;/p&gt;
+ &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;bitmap&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The overlay bitmap.&lt;/td&gt;
+     &lt;td&gt;A non-null Bitmap instance.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_BITMAPOVERLAY : &quot;android.media.effect.effects.BitmapOverlayEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_DUOTONE'>/** &lt;p&gt;Representation of photo using only two color tones.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;first_color&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The first color tone.&lt;/td&gt;
+     &lt;td&gt;Integer, representing an ARGB color with 8 bits per channel. May be created using
+     {@link android.graphics.Color Color} class.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;second_color&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The second color tone.&lt;/td&gt;
+     &lt;td&gt;Integer, representing an ARGB color with 8 bits per channel. May be created using
+     {@link android.graphics.Color Color} class.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_DUOTONE : &quot;android.media.effect.effects.DuotoneEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_FILLLIGHT'>/** &lt;p&gt;Applies back-light filling to the image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;strength&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The strength of the backlight.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1. Zero means no change.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_FILLLIGHT : &quot;android.media.effect.effects.FillLightEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_FLIP'>/** &lt;p&gt;Flips image vertically and/or horizontally.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;vertical&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;Whether to flip image vertically.&lt;/td&gt;
+     &lt;td&gt;Boolean&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;horizontal&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;Whether to flip image horizontally.&lt;/td&gt;
+     &lt;td&gt;Boolean&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_FLIP : &quot;android.media.effect.effects.FlipEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_GRAIN'>/** &lt;p&gt;Applies film grain effect to image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;strength&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The strength of the grain effect.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1. Zero means no change.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_GRAIN : &quot;android.media.effect.effects.GrainEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_GRAYSCALE'>/** &lt;p&gt;Converts image to grayscale.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters: None&lt;/p&gt;
+*/
+EFFECT_GRAYSCALE : &quot;android.media.effect.effects.GrayscaleEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_LOMOISH'>/** &lt;p&gt;Applies lomo-camera style effect to image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters: None&lt;/p&gt;
+*/
+EFFECT_LOMOISH : &quot;android.media.effect.effects.LomoishEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_NEGATIVE'>/** &lt;p&gt;Inverts the image colors.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters: None&lt;/p&gt;
+*/
+EFFECT_NEGATIVE : &quot;android.media.effect.effects.NegativeEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_POSTERIZE'>/** &lt;p&gt;Applies posterization effect to image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters: None&lt;/p&gt;
+*/
+EFFECT_POSTERIZE : &quot;android.media.effect.effects.PosterizeEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_REDEYE'>/** &lt;p&gt;Removes red eyes on specified region.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;centers&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;Multiple center points (x, y) of the red eye regions.&lt;/td&gt;
+     &lt;td&gt;An array of floats, where (f[2*i], f[2*i+1]) specifies the center of the i'th eye.
+     Coordinate values are expected to be normalized between 0 and 1.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_REDEYE : &quot;android.media.effect.effects.RedEyeEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_ROTATE'>/** &lt;p&gt;Rotates the image. The output frame size must be able to fit the rotated version of
+</span> the input image. Note that the rotation snaps to a the closest multiple of 90 degrees.&lt;/p&gt;
+ &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;angle&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The angle of rotation in degrees.&lt;/td&gt;
+     &lt;td&gt;Integer value. This will be rounded to the nearest multiple of 90.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_ROTATE : &quot;android.media.effect.effects.RotateEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_SATURATE'>/** &lt;p&gt;Adjusts color saturation of image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;scale&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The scale of color saturation.&lt;/td&gt;
+     &lt;td&gt;Float, between -1 and 1. 0 means no change, while -1 indicates full desaturation,
+     i.e. grayscale.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_SATURATE : &quot;android.media.effect.effects.SaturateEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_SEPIA'>/** &lt;p&gt;Converts image to sepia tone.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters: None&lt;/p&gt;
+*/
+EFFECT_SEPIA : &quot;android.media.effect.effects.SepiaEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_SHARPEN'>/** &lt;p&gt;Sharpens the image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;scale&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The degree of sharpening.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1. 0 means no change.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_SHARPEN : &quot;android.media.effect.effects.SharpenEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_STRAIGHTEN'>/** &lt;p&gt;Rotates the image according to the specified angle, and crops the image so that no
+</span> non-image portions are visible.&lt;/p&gt;
+ &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;angle&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The angle of rotation.&lt;/td&gt;
+     &lt;td&gt;Float, between -45 and +45.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_STRAIGHTEN : &quot;android.media.effect.effects.StraightenEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_TEMPERATURE'>/** &lt;p&gt;Adjusts color temperature of the image.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;scale&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The value of color temperature.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1, with 0 indicating cool, and 1 indicating warm. A value of
+     of 0.5 indicates no change.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_TEMPERATURE : &quot;android.media.effect.effects.ColorTemperatureEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_TINT'>/** &lt;p&gt;Tints the photo with specified color.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;tint&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The color of the tint.&lt;/td&gt;
+     &lt;td&gt;Integer, representing an ARGB color with 8 bits per channel. May be created using
+     {@link android.graphics.Color Color} class.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_TINT : &quot;android.media.effect.effects.TintEffect&quot;,
+<span id='android-media-effect-EffectFactory-property-EFFECT_VIGNETTE'>/** &lt;p&gt;Adds a vignette effect to image, i.e. fades away the outer image edges.&lt;/p&gt;
+</span> &lt;p&gt;Available parameters:&lt;/p&gt;
+ &lt;table&gt;
+ &lt;tr&gt;&lt;td&gt;Parameter name&lt;/td&gt;&lt;td&gt;Meaning&lt;/td&gt;&lt;td&gt;Valid values&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;&lt;code&gt;scale&lt;/code&gt;&lt;/td&gt;
+     &lt;td&gt;The scale of vignetting.&lt;/td&gt;
+     &lt;td&gt;Float, between 0 and 1. 0 means no change.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+EFFECT_VIGNETTE : &quot;android.media.effect.effects.VignetteEffect&quot;,
+<span id='android-media-effect-EffectFactory-method-createEffect'>/**Instantiate a new effect with the given effect name.
+</span>
+ &lt;p&gt;The effect's parameters will be set to their default values.&lt;/p&gt;
+
+ &lt;p&gt;Note that the EGL context associated with the current EffectContext need not be made
+ current when creating an effect. This allows the host application to instantiate effects
+ before any EGL context has become current.&lt;/p&gt;
+@param {String} effectName The name of the effect to create.
+@return {Object {android.media.effect.Effect}} A new Effect instance.
+@throws IllegalArgumentException if the effect with the specified name is not supported or
+         not known.
+*/
+createEffect : function(  ) {},
+
+<span id='android-media-effect-EffectFactory-method-isEffectSupported'>/**Check if an effect is supported on this platform.
+</span>
+ &lt;p&gt;Some effects may only be available on certain platforms. Use this method before
+ instantiating an effect to make sure it is supported.&lt;/p&gt;
+@param {String} effectName The name of the effect.
+@return {Boolean} true, if the effect is supported on this platform.
+@throws IllegalArgumentException if the effect name is not known.
+*/
+isEffectSupported : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

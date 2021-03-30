@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-CustomDescription'>/**@class android.service.autofill.CustomDescription
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Defines a custom description for the autofill save UI.
+
+ &lt;p&gt;This is useful when the autofill service needs to show a detailed view of what would be saved;
+ for example, when the screen contains a credit card, it could display a logo of the credit card
+ bank, the last four digits of the credit card number, and its expiration number.
+
+ &lt;p&gt;A custom description is made of 2 parts:
+ &lt;ul&gt;
+   &lt;li&gt;A {@link RemoteViews presentation template} containing children views.
+   &lt;li&gt;{@link android.service.autofill.Transformation android.service.autofill.Transformations} to populate the children views.
+ &lt;/ul&gt;
+
+ &lt;p&gt;For the credit card example mentioned above, the (simplified) template would be:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ &amp;lt;LinearLayout&amp;gt;
+   &amp;lt;ImageView android:id=&quot;@+id/templateccLogo&quot;/&amp;gt;
+   &amp;lt;TextView android:id=&quot;@+id/templateCcNumber&quot;/&amp;gt;
+   &amp;lt;TextView android:id=&quot;@+id/templateExpDate&quot;/&amp;gt;
+ &amp;lt;/LinearLayout&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;Which in code translates to:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   CustomDescription.Builder buider = new Builder(new RemoteViews(pgkName, R.layout.cc_template);
+ &lt;/pre&gt;
+
+ &lt;p&gt;Then the value of each of the 3 children would be changed at runtime based on the the value of
+ the screen fields and the {@link android.service.autofill.Transformation android.service.autofill.Transformations}:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ // Image child - different logo for each bank, based on credit card prefix
+ builder.addChild(R.id.templateccLogo,
+   new ImageTransformation.Builder(ccNumberId)
+     .addOption(Pattern.compile(&quot;^4815.*$&quot;), R.drawable.ic_credit_card_logo1)
+     .addOption(Pattern.compile(&quot;^1623.*$&quot;), R.drawable.ic_credit_card_logo2)
+     .addOption(Pattern.compile(&quot;^42.*$&quot;), R.drawable.ic_credit_card_logo3)
+     .build();
+ // Masked credit card number (as .....LAST_4_DIGITS)
+ builder.addChild(R.id.templateCcNumber, new CharSequenceTransformation
+     .Builder(ccNumberId, Pattern.compile(&quot;^.*(\\d\\d\\d\\d)$&quot;), &quot;...$1&quot;)
+     .build();
+ // Expiration date as MM / YYYY:
+ builder.addChild(R.id.templateExpDate, new CharSequenceTransformation
+     .Builder(ccExpMonthId, Pattern.compile(&quot;^(\\d\\d)$&quot;), &quot;Exp: $1&quot;)
+     .addField(ccExpYearId, Pattern.compile(&quot;^(\\d\\d)$&quot;), &quot;/$1&quot;)
+     .build();
+ &lt;/pre&gt;
+
+ &lt;p&gt;See {@link android.service.autofill.ImageTransformation}, {@link android.service.autofill.CharSequenceTransformation} for more info about these
+ transformations.
+*/
+var CustomDescription = {
+
+<span id='android-service-autofill-CustomDescription-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-service-autofill-CustomDescription-method-getPresentation'>/**
+</span>@hide 
+*/
+getPresentation : function(  ) {},
+
+<span id='android-service-autofill-CustomDescription-method-getTransformations'>/**
+</span>@hide 
+*/
+getTransformations : function(  ) {},
+
+<span id='android-service-autofill-CustomDescription-method-getUpdates'>/**
+</span>@hide 
+*/
+getUpdates : function(  ) {},
+
+<span id='android-service-autofill-CustomDescription-method-getActions'>/**
+</span>@hide 
+*/
+getActions : function(  ) {},
+
+<span id='android-service-autofill-CustomDescription-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-service-autofill-CustomDescription-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-service-autofill-CustomDescription-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

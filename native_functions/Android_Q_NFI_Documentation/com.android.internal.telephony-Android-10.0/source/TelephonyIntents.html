@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-TelephonyIntents'>/**@class com.android.internal.telephony.TelephonyIntents
+</span>@extends java.lang.Object
+
+ The intents that the telephony services broadcast.
+
+ &lt;p class=&quot;warning&quot;&gt;
+ THESE ARE NOT THE API!  Use the {@link android.telephony.TelephonyManager} class.
+ DON'T LISTEN TO THESE DIRECTLY.
+*/
+var TelephonyIntents = {
+
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SERVICE_STATE_CHANGED'>/** Broadcast Action: The phone service state has changed. The intent will have the following
+</span> extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;state&lt;/em&gt; - An int with one of the following values:
+          {@link android.telephony.ServiceState#STATE_IN_SERVICE},
+          {@link android.telephony.ServiceState#STATE_OUT_OF_SERVICE},
+          {@link android.telephony.ServiceState#STATE_EMERGENCY_ONLY}
+          or {@link android.telephony.ServiceState#STATE_POWER_OFF}
+   &lt;li&gt;&lt;em&gt;roaming&lt;/em&gt; - A boolean value indicating whether the phone is roaming.&lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;operator-alpha-long&lt;/em&gt; - The carrier name as a string.&lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;operator-alpha-short&lt;/em&gt; - A potentially shortened version of the carrier name,
+          as a string.&lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;operator-numeric&lt;/em&gt; - A number representing the carrier, as a string. This is
+          a five or six digit number consisting of the MCC (Mobile Country Code, 3 digits)
+          and MNC (Mobile Network code, 2-3 digits).&lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;manual&lt;/em&gt; - A boolean, where true indicates that the user has chosen to select
+          the network manually, and false indicates that network selection is handled by the
+          phone.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the READ_PHONE_STATE permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+ @deprecated use {@link Intent#ACTION_SERVICE_STATE}
+*/
+ACTION_SERVICE_STATE_CHANGED : &quot;android.intent.action.SERVICE_STATE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_RADIO_TECHNOLOGY_CHANGED'>/** &lt;p&gt;Broadcast Action: The radio technology has changed. The intent will have the following
+</span> extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;phoneName&lt;/em&gt; - A string version of the new phone name.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ You can &lt;em&gt;not&lt;/em&gt; receive this through components declared
+ in manifests, only by explicitly registering for it with
+ {@link android.content.Context#registerReceiver(android.content.BroadcastReceiver,
+ android.content.IntentFilter) Context.registerReceiver()}.
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires no permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_RADIO_TECHNOLOGY_CHANGED : &quot;android.intent.action.RADIO_TECHNOLOGY&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_EMERGENCY_CALLBACK_MODE_CHANGED'>/** &lt;p&gt;Broadcast Action: The emergency callback mode is changed.
+</span> &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;phoneinECMState&lt;/em&gt; - A boolean value,true=phone in ECM, false=ECM off&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;
+ You can &lt;em&gt;not&lt;/em&gt; receive this through components declared
+ in manifests, only by explicitly registering for it with
+ {@link android.content.Context#registerReceiver(android.content.BroadcastReceiver,
+ android.content.IntentFilter) Context.registerReceiver()}.
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires no permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_EMERGENCY_CALLBACK_MODE_CHANGED : &quot;android.intent.action.EMERGENCY_CALLBACK_MODE_CHANGED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_EMERGENCY_CALL_STATE_CHANGED'>/** &lt;p&gt;Broadcast Action: The emergency call state is changed.
+</span> &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;phoneInEmergencyCall&lt;/em&gt; - A boolean value, true if phone in emergency call,
+   false otherwise&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;
+ You can &lt;em&gt;not&lt;/em&gt; receive this through components declared
+ in manifests, only by explicitly registering for it with
+ {@link android.content.Context#registerReceiver(android.content.BroadcastReceiver,
+ android.content.IntentFilter) Context.registerReceiver()}.
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires no permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_EMERGENCY_CALL_STATE_CHANGED : &quot;android.intent.action.EMERGENCY_CALL_STATE_CHANGED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SIGNAL_STRENGTH_CHANGED'>/** Broadcast Action: The phone's signal strength has changed. The intent will have the
+</span> following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;phoneName&lt;/em&gt; - A string version of the phone name.&lt;/li&gt;
+   &lt;li&gt;&lt;em&gt;asu&lt;/em&gt; - A numeric value for the signal strength.
+          An ASU is 0-31 or -1 if unknown (for GSM, dBm = -113 - 2 * asu).
+          The following special values are defined:
+          &lt;ul&gt;&lt;li&gt;0 means &quot;-113 dBm or less&quot;.&lt;/li&gt;&lt;li&gt;31 means &quot;-51 dBm or greater&quot;.&lt;/li&gt;&lt;/ul&gt;
+   &lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ You can &lt;em&gt;not&lt;/em&gt; receive this through components declared
+ in manifests, only by exlicitly registering for it with
+ {@link android.content.Context#registerReceiver(android.content.BroadcastReceiver,
+ android.content.IntentFilter) Context.registerReceiver()}.
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the READ_PHONE_STATE permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_SIGNAL_STRENGTH_CHANGED : &quot;android.intent.action.SIG_STR&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_ANY_DATA_CONNECTION_STATE_CHANGED'>/** Broadcast Action: The data connection state has changed for any one of the
+</span> phone's mobile data connections (eg, default, MMS or GPS specific connection).
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;dl&gt;
+   &lt;dt&gt;phoneName&lt;/dt&gt;&lt;dd&gt;A string version of the phone name.&lt;/dd&gt;
+   &lt;dt&gt;state&lt;/dt&gt;&lt;dd&gt;One of {@code CONNECTED}, {@code CONNECTING},
+      or {@code DISCONNECTED}.&lt;/dd&gt;
+   &lt;dt&gt;apn&lt;/dt&gt;&lt;dd&gt;A string that is the APN associated with this connection.&lt;/dd&gt;
+   &lt;dt&gt;apnType&lt;/dt&gt;&lt;dd&gt;A string array of APN types associated with this connection.
+      The APN type {@code *} is a special type that means this APN services all types.&lt;/dd&gt;
+ &lt;/dl&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the READ_PHONE_STATE permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_ANY_DATA_CONNECTION_STATE_CHANGED : &quot;android.intent.action.ANY_DATA_STATE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_DATA_CONNECTION_FAILED'>/** Broadcast Action: An attempt to establish a data connection has failed.
+</span> The intent will have the following extra values:&lt;/p&gt;
+ &lt;dl&gt;
+   &lt;dt&gt;phoneName&lt;/dt&gt;&lt;dd&gt;A string version of the phone name.&lt;/dd&gt;
+   &lt;dt&gt;state&lt;/dt&gt;&lt;dd&gt;One of {@code CONNECTED}, {@code CONNECTING}, or {code DISCONNECTED}.&lt;/dd&gt;
+   &lt;dt&gt;reason&lt;/dt&gt;&lt;dd&gt;A string indicating the reason for the failure, if available.&lt;/dd&gt;
+ &lt;/dl&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the READ_PHONE_STATE permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_DATA_CONNECTION_FAILED : &quot;android.intent.action.DATA_CONNECTION_FAILED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SIM_STATE_CHANGED'>/** Broadcast Action: The sim card state has changed.
+</span> The intent will have the following extra values:&lt;/p&gt;
+ &lt;dl&gt;
+   &lt;dt&gt;phoneName&lt;/dt&gt;&lt;dd&gt;A string version of the phone name.&lt;/dd&gt;
+   &lt;dt&gt;ss&lt;/dt&gt;&lt;dd&gt;The sim state. One of:
+     &lt;dl&gt;
+       &lt;dt&gt;{@code ABSENT}&lt;/dt&gt;&lt;dd&gt;SIM card not found&lt;/dd&gt;
+       &lt;dt&gt;{@code LOCKED}&lt;/dt&gt;&lt;dd&gt;SIM card locked (see {@code reason})&lt;/dd&gt;
+       &lt;dt&gt;{@code READY}&lt;/dt&gt;&lt;dd&gt;SIM card ready&lt;/dd&gt;
+       &lt;dt&gt;{@code IMSI}&lt;/dt&gt;&lt;dd&gt;FIXME: what is this state?&lt;/dd&gt;
+       &lt;dt&gt;{@code LOADED}&lt;/dt&gt;&lt;dd&gt;SIM card data loaded&lt;/dd&gt;
+     &lt;/dl&gt;&lt;/dd&gt;
+   &lt;dt&gt;reason&lt;/dt&gt;&lt;dd&gt;The reason why ss is {@code LOCKED}; null otherwise.&lt;/dd&gt;
+   &lt;dl&gt;
+       &lt;dt&gt;{@code PIN}&lt;/dt&gt;&lt;dd&gt;locked on PIN1&lt;/dd&gt;
+       &lt;dt&gt;{@code PUK}&lt;/dt&gt;&lt;dd&gt;locked on PUK1&lt;/dd&gt;
+       &lt;dt&gt;{@code NETWORK}&lt;/dt&gt;&lt;dd&gt;locked on network personalization&lt;/dd&gt;
+   &lt;/dl&gt;
+   &lt;dt&gt;rebroadcastOnUnlock&lt;/dt&gt;
+   &lt;dd&gt;A boolean indicates a rebroadcast on unlock. optional extra, defaults to {@code false}
+   if not specified &lt;/dd&gt;
+ &lt;/dl&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the READ_PHONE_STATE permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_SIM_STATE_CHANGED : &quot;android.intent.action.SIM_STATE_CHANGED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_REBROADCAST_ON_UNLOCK'>/***/
+</span>EXTRA_REBROADCAST_ON_UNLOCK : &quot;rebroadcastOnUnlock&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_NETWORK_SET_TIME'>/** Broadcast Action: The time was set by the carrier (typically by the NITZ string).
+</span> This is a sticky broadcast.
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;time&lt;/em&gt; - The time as a long in UTC milliseconds.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the READ_PHONE_STATE permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_NETWORK_SET_TIME : &quot;android.intent.action.NETWORK_SET_TIME&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_NETWORK_SET_TIMEZONE'>/** Broadcast Action: The timezone was set by the carrier (typically by the NITZ string).
+</span> This is a sticky broadcast.
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;time-zone&lt;/em&gt; - The java.util.TimeZone.getID() value identifying the new time
+          zone.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the READ_PHONE_STATE permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_NETWORK_SET_TIMEZONE : &quot;android.intent.action.NETWORK_SET_TIMEZONE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS'>/** &lt;p&gt;Broadcast Action: It indicates the Emergency callback mode blocks datacall/sms
+</span> &lt;p class=&quot;note&quot;&gt;.
+ This is to pop up a notice to show user that the phone is in emergency callback mode
+ and atacalls and outgoing sms are blocked.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS : &quot;com.android.internal.intent.action.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_FORBIDDEN_NO_SERVICE_AUTHORIZATION'>/** &lt;p&gt;Broadcast Action: Indicates that the action is forbidden by network.
+</span> &lt;p class=&quot;note&quot;&gt;
+ This is for the OEM applications to understand about possible provisioning issues.
+ Used in OMA-DM applications.
+*/
+ACTION_FORBIDDEN_NO_SERVICE_AUTHORIZATION : &quot;com.android.internal.intent.action.ACTION_FORBIDDEN_NO_SERVICE_AUTHORIZATION&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-SECRET_CODE_ACTION'>/** Broadcast Action: A &quot;secret code&quot; has been entered in the dialer. Secret codes are
+</span> of the form {@code *#*#&lt;code&gt;#*#*}. The intent will have the data URI:
+
+ {@code android_secret_code://&lt;code&gt;}
+*/
+SECRET_CODE_ACTION : &quot;android.provider.Telephony.SECRET_CODE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-SPN_STRINGS_UPDATED_ACTION'>/** Broadcast Action: The Service Provider string(s) have been updated.  Activities or
+</span> services that use these strings should update their display.
+ The intent will have the following extra values:&lt;/p&gt;
+
+ &lt;dl&gt;
+   &lt;dt&gt;showPlmn&lt;/dt&gt;&lt;dd&gt;Boolean that indicates whether the PLMN should be shown.&lt;/dd&gt;
+   &lt;dt&gt;plmn&lt;/dt&gt;&lt;dd&gt;The operator name of the registered network, as a string.&lt;/dd&gt;
+   &lt;dt&gt;showSpn&lt;/dt&gt;&lt;dd&gt;Boolean that indicates whether the SPN should be shown.&lt;/dd&gt;
+   &lt;dt&gt;spn&lt;/dt&gt;&lt;dd&gt;The service provider name, as a string.&lt;/dd&gt;
+ &lt;/dl&gt;
+
+ Note that &lt;em&gt;showPlmn&lt;/em&gt; may indicate that &lt;em&gt;plmn&lt;/em&gt; should be displayed, even
+ though the value for &lt;em&gt;plmn&lt;/em&gt; is null.  This can happen, for example, if the phone
+ has not registered to a network yet.  In this case the receiver may substitute an
+ appropriate placeholder string (eg, &quot;No service&quot;).
+
+ It is recommended to display &lt;em&gt;plmn&lt;/em&gt; before / above &lt;em&gt;spn&lt;/em&gt; if
+ both are displayed.
+
+ &lt;p&gt;Note: this is a protected intent that can only be sent by the system.
+*/
+SPN_STRINGS_UPDATED_ACTION : &quot;android.provider.Telephony.SPN_STRINGS_UPDATED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_SHOW_PLMN'>/***/
+</span>EXTRA_SHOW_PLMN : &quot;showPlmn&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_PLMN'>/***/
+</span>EXTRA_PLMN : &quot;plmn&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_SHOW_SPN'>/***/
+</span>EXTRA_SHOW_SPN : &quot;showSpn&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_SPN'>/***/
+</span>EXTRA_SPN : &quot;spn&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_DATA_SPN'>/***/
+</span>EXTRA_DATA_SPN : &quot;spnData&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SUBINFO_CONTENT_CHANGE'>/** &lt;p&gt;Broadcast Action: It indicates one column of a subinfo record has been changed
+</span> &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_SUBINFO_CONTENT_CHANGE : &quot;android.intent.action.ACTION_SUBINFO_CONTENT_CHANGE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SUBINFO_RECORD_UPDATED'>/** &lt;p&gt;Broadcast Action: It indicates subinfo record update is completed
+</span> when SIM inserted state change
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+*/
+ACTION_SUBINFO_RECORD_UPDATED : &quot;android.intent.action.ACTION_SUBINFO_RECORD_UPDATED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_DEFAULT_SUBSCRIPTION_CHANGED'>/** Broadcast Action: The default subscription has changed.  This has the following
+</span> extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;subscription&lt;/em&gt; - A int, the current default subscription.&lt;/li&gt;
+ &lt;/ul&gt;
+ @deprecated Use {@link SubscriptionManager#ACTION_DEFAULT_SUBSCRIPTION_CHANGED}
+*/
+ACTION_DEFAULT_SUBSCRIPTION_CHANGED : &quot;android.telephony.action.DEFAULT_SUBSCRIPTION_CHANGED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED'>/** Broadcast Action: The default data subscription has changed.  This has the following
+</span> extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;subscription&lt;/em&gt; - A int, the current data default subscription.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED : &quot;android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED'>/** Broadcast Action: The default voice subscription has changed.  This has the following
+</span> extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;subscription&lt;/em&gt; - A int, the current voice default subscription.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED : &quot;android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED'>/** Broadcast Action: The default sms subscription has changed.  This has the following
+</span> extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;&lt;em&gt;subscription&lt;/em&gt; - A int, the current sms default subscription.&lt;/li&gt;
+ &lt;/ul&gt;
+ @deprecated Use {@link SubscriptionManager#ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED}
+*/
+ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED : &quot;android.telephony.action.DEFAULT_SMS_SUBSCRIPTION_CHANGED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SET_RADIO_CAPABILITY_DONE'>/***/
+</span>ACTION_SET_RADIO_CAPABILITY_DONE : &quot;android.intent.action.ACTION_SET_RADIO_CAPABILITY_DONE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_RADIO_ACCESS_FAMILY'>/***/
+</span>EXTRA_RADIO_ACCESS_FAMILY : &quot;rafs&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_SET_RADIO_CAPABILITY_FAILED'>/***/
+</span>ACTION_SET_RADIO_CAPABILITY_FAILED : &quot;android.intent.action.ACTION_SET_RADIO_CAPABILITY_FAILED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_CARRIER_SIGNAL_REDIRECTED'>/** &lt;p&gt;Broadcast Action: when data connections get redirected with validation failure.
+</span> intended for sim/account status checks and only sent to the specified carrier app
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;apnType&lt;/li&gt;&lt;dd&gt;A string with the apn type.&lt;/dd&gt;
+   &lt;li&gt;redirectionUrl&lt;/li&gt;&lt;dd&gt;redirection url string&lt;/dd&gt;
+   &lt;li&gt;subId&lt;/li&gt;&lt;dd&gt;Sub Id which associated the data connection failure.&lt;/dd&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system.&lt;/p&gt;
+*/
+ACTION_CARRIER_SIGNAL_REDIRECTED : &quot;com.android.internal.telephony.CARRIER_SIGNAL_REDIRECTED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_CARRIER_SIGNAL_REQUEST_NETWORK_FAILED'>/** &lt;p&gt;Broadcast Action: when data connections setup fails.
+</span> intended for sim/account status checks and only sent to the specified carrier app
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;apnType&lt;/li&gt;&lt;dd&gt;A string with the apn type.&lt;/dd&gt;
+   &lt;li&gt;errorCode&lt;/li&gt;&lt;dd&gt;A integer with dataFailCause.&lt;/dd&gt;
+   &lt;li&gt;subId&lt;/li&gt;&lt;dd&gt;Sub Id which associated the data connection failure.&lt;/dd&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system. &lt;/p&gt;
+*/
+ACTION_CARRIER_SIGNAL_REQUEST_NETWORK_FAILED : &quot;com.android.internal.telephony.CARRIER_SIGNAL_REQUEST_NETWORK_FAILED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_CARRIER_SIGNAL_PCO_VALUE'>/** &lt;p&gt;Broadcast Action: when pco value is available.
+</span> intended for sim/account status checks and only sent to the specified carrier app
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;apnType&lt;/li&gt;&lt;dd&gt;A string with the apn type.&lt;/dd&gt;
+   &lt;li&gt;apnProto&lt;/li&gt;&lt;dd&gt;A string with the protocol of the apn connection (IP,IPV6,
+                        IPV4V6)&lt;/dd&gt;
+   &lt;li&gt;pcoId&lt;/li&gt;&lt;dd&gt;An integer indicating the pco id for the data.&lt;/dd&gt;
+   &lt;li&gt;pcoValue&lt;/li&gt;&lt;dd&gt;A byte array of pco data read from modem.&lt;/dd&gt;
+   &lt;li&gt;subId&lt;/li&gt;&lt;dd&gt;Sub Id which associated the data connection.&lt;/dd&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system. &lt;/p&gt;
+*/
+ACTION_CARRIER_SIGNAL_PCO_VALUE : &quot;com.android.internal.telephony.CARRIER_SIGNAL_PCO_VALUE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_CARRIER_SIGNAL_DEFAULT_NETWORK_AVAILABLE'>/** &lt;p&gt;Broadcast Action: when system default network available/unavailable with
+</span> carrier-disabled mobile data. Intended for carrier apps to set/reset carrier actions when
+ other network becomes system default network, Wi-Fi for example.
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;defaultNetworkAvailable&lt;/li&gt;&lt;dd&gt;A boolean indicates default network available.&lt;/dd&gt;
+   &lt;li&gt;subId&lt;/li&gt;&lt;dd&gt;Sub Id which associated the default data.&lt;/dd&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system. &lt;/p&gt;
+*/
+ACTION_CARRIER_SIGNAL_DEFAULT_NETWORK_AVAILABLE : &quot;com.android.internal.telephony.CARRIER_SIGNAL_DEFAULT_NETWORK_AVAILABLE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_CARRIER_SIGNAL_RESET'>/** &lt;p&gt;Broadcast Action: when framework reset all carrier actions on sim load or absent.
+</span> intended for carrier apps clean up (clear UI e.g.) and only sent to the specified carrier app
+ The intent will have the following extra values:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;subId&lt;/li&gt;&lt;dd&gt;Sub Id which associated the data connection failure.&lt;/dd&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system.&lt;/p&gt;
+*/
+ACTION_CARRIER_SIGNAL_RESET : &quot;com.android.internal.telephony.CARRIER_SIGNAL_RESET&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_REDIRECTION_URL_KEY'>/***/
+</span>EXTRA_REDIRECTION_URL_KEY : &quot;redirectionUrl&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_ERROR_CODE_KEY'>/***/
+</span>EXTRA_ERROR_CODE_KEY : &quot;errorCode&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_APN_TYPE_KEY'>/***/
+</span>EXTRA_APN_TYPE_KEY : &quot;apnType&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_APN_PROTO_KEY'>/***/
+</span>EXTRA_APN_PROTO_KEY : &quot;apnProto&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_PCO_ID_KEY'>/***/
+</span>EXTRA_PCO_ID_KEY : &quot;pcoId&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_PCO_VALUE_KEY'>/***/
+</span>EXTRA_PCO_VALUE_KEY : &quot;pcoValue&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_DEFAULT_NETWORK_AVAILABLE_KEY'>/***/
+</span>EXTRA_DEFAULT_NETWORK_AVAILABLE_KEY : &quot;defaultNetworkAvailable&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_REQUEST_OMADM_CONFIGURATION_UPDATE'>/** Broadcast action to trigger CI OMA-DM Session.
+</span>*/
+ACTION_REQUEST_OMADM_CONFIGURATION_UPDATE : &quot;com.android.omadm.service.CONFIGURATION_UPDATE&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_CARRIER_CERTIFICATE_DOWNLOAD'>/** Broadcast action to trigger the Carrier Certificate download.
+</span>*/
+ACTION_CARRIER_CERTIFICATE_DOWNLOAD : &quot;com.android.internal.telephony.ACTION_CARRIER_CERTIFICATE_DOWNLOAD&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_LINE1_NUMBER_ERROR_DETECTED'>/** Broadcast action to indicate an error related to Line1Number has been detected.
+</span>
+ Requires the READ_PRIVILEGED_PHONE_STATE permission.
+
+ @hide
+*/
+ACTION_LINE1_NUMBER_ERROR_DETECTED : &quot;com.android.internal.telephony.ACTION_LINE1_NUMBER_ERROR_DETECTED&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-ACTION_REPORT_RADIO_BUG'>/** Broadcast action to notify radio bug.
+</span>
+ Requires the READ_PRIVILEGED_PHONE_STATE permission.
+
+ @hide
+*/
+ACTION_REPORT_RADIO_BUG : &quot;com.android.internal.telephony.ACTION_REPORT_RADIO_BUG&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_SLOT_ID'>/***/
+</span>EXTRA_SLOT_ID : &quot;slotId&quot;,
+<span id='com-android-internal-telephony-TelephonyIntents-property-EXTRA_RADIO_BUG_TYPE'>/***/
+</span>EXTRA_RADIO_BUG_TYPE : &quot;radioBugType&quot;,
+
+};</pre>
+</body>
+</html>

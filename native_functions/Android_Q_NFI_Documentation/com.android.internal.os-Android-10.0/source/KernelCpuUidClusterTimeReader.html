@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-KernelCpuUidTimeReader-KernelCpuUidClusterTimeReader'>/**@class com.android.internal.os.KernelCpuUidTimeReader.KernelCpuUidClusterTimeReader
+</span>@extends com.android.internal.os.KernelCpuUidTimeReader
+
+ Reads /proc/uid_concurrent_policy_time and reports CPU cluster times to BatteryStats to
+ compute cluster power. See {@link com.android.internal.os.PowerProfile#getAveragePowerForCpuCluster(int)}.
+
+ /proc/uid_concurrent_policy_time has the following format:
+ policyX: x policyY: y policyZ: z...
+ uid1, time1a, time1b, ..., time1n,
+ uid2, time2a, time2b, ..., time2n,
+ ...
+ The first line lists all policies (i.e. clusters) followed by # cores in each policy.
+ Each uid is followed by x time entries corresponding to the time it spent on clusterX
+ running concurrently with 0, 1, 2, ..., x - 1 other processes, then followed by y, z, ...
+ time entries.
+
+ The file contains a monotonically increasing count of time for a single boot. This class
+ maintains the previous results of a call to {@link #readDelta} in order to provide a
+ proper delta.
+*/
+var KernelCpuUidClusterTimeReader = {
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-dreams-DreamService'>/**@class android.service.dreams.DreamService
+</span> implements android.view.Window.Callback
+
+@extends android.app.Service
+
+ Extend this class to implement a custom dream (available to the user as a &quot;Daydream&quot;).
+
+ &lt;p&gt;Dreams are interactive screensavers launched when a charging device is idle, or docked in a
+ desk dock. Dreams provide another modality for apps to express themselves, tailored for
+ an exhibition/lean-back experience.&lt;/p&gt;
+
+ &lt;p&gt;The {@code DreamService} lifecycle is as follows:&lt;/p&gt;
+ &lt;ol&gt;
+   &lt;li&gt;{@link #onAttachedToWindow}
+     &lt;p&gt;Use this for initial setup, such as calling {@link #setContentView setContentView()}.&lt;/li&gt;
+   &lt;li&gt;{@link #onDreamingStarted}
+     &lt;p&gt;Your dream has started, so you should begin animations or other behaviors here.&lt;/li&gt;
+   &lt;li&gt;{@link #onDreamingStopped}
+     &lt;p&gt;Use this to stop the things you started in {@link #onDreamingStarted}.&lt;/li&gt;
+   &lt;li&gt;{@link #onDetachedFromWindow}
+     &lt;p&gt;Use this to dismantle resources (for example, detach from handlers
+        and listeners).&lt;/li&gt;
+ &lt;/ol&gt;
+
+ &lt;p&gt;In addition, onCreate and onDestroy (from the Service interface) will also be called, but
+ initialization and teardown should be done by overriding the hooks above.&lt;/p&gt;
+
+ &lt;p&gt;To be available to the system, your {@code DreamService} should be declared in the
+ manifest as follows:&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;service
+     android:name=&quot;.MyDream&quot;
+     android:exported=&quot;true&quot;
+     android:icon=&quot;@drawable/my_icon&quot;
+     android:label=&quot;@string/my_dream_label&quot; &gt;
+
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.service.dreams.DreamService&quot; /&gt;
+         &amp;lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+
+     &amp;lt;!-- Point to additional information for this dream (optional) --&gt;
+     &amp;lt;meta-data
+         android:name=&quot;android.service.dream&quot;
+         android:resource=&quot;@xml/my_dream&quot; /&gt;
+ &amp;lt;/service&gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;If specified with the {@code &lt;meta-data&gt;} element,
+ additional information for the dream is defined using the
+ {@link android.R.styleable#Dream &amp;lt;dream&amp;gt;} element in a separate XML file.
+ Currently, the only addtional
+ information you can provide is for a settings activity that allows the user to configure
+ the dream behavior. For example:&lt;/p&gt;
+ &lt;p class=&quot;code-caption&quot;&gt;res/xml/my_dream.xml&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;dream xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     android:settingsActivity=&quot;com.example.app/.MyDreamSettingsActivity&quot; /&gt;
+ &lt;/pre&gt;
+ &lt;p&gt;This makes a Settings button available alongside your dream's listing in the
+ system settings, which when pressed opens the specified activity.&lt;/p&gt;
+
+
+ &lt;p&gt;To specify your dream layout, call {@link #setContentView}, typically during the
+ {@link #onAttachedToWindow} callback. For example:&lt;/p&gt;
+ &lt;pre&gt;
+ public class MyDream extends DreamService {
+
+     &amp;#64;Override
+     public void onAttachedToWindow() {
+         super.onAttachedToWindow();
+
+         // Exit dream upon user touch
+         setInteractive(false);
+         // Hide system UI
+         setFullscreen(true);
+         // Set the dream layout
+         setContentView(R.layout.dream);
+     }
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;When targeting api level 21 and above, you must declare the service in your manifest file
+ with the {@link android.Manifest.permission#BIND_DREAM_SERVICE} permission. For example:&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;service
+     android:name=&quot;.MyDream&quot;
+     android:exported=&quot;true&quot;
+     android:icon=&quot;@drawable/my_icon&quot;
+     android:label=&quot;@string/my_dream_label&quot;
+     android:permission=&quot;android.permission.BIND_DREAM_SERVICE&quot;&gt;
+   &amp;lt;intent-filter&gt;
+     &amp;lt;action android:name=”android.service.dreams.DreamService” /&gt;
+     &amp;lt;category android:name=”android.intent.category.DEFAULT” /&gt;
+   &amp;lt;/intent-filter&gt;
+ &amp;lt;/service&gt;
+ &lt;/pre&gt;
+*/
+var DreamService = {
+
+<span id='android-service-dreams-DreamService-property-DREAM_SERVICE'>/** The name of the dream manager service.
+</span> @hide
+*/
+DREAM_SERVICE : &quot;dreams&quot;,
+<span id='android-service-dreams-DreamService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.service.dreams.DreamService&quot;,
+<span id='android-service-dreams-DreamService-property-DREAM_META_DATA'>/** Name under which a Dream publishes information about itself.
+</span> This meta-data must reference an XML resource containing
+ a &lt;code&gt;&amp;lt;{@link android.R.styleable#Dream dream}&amp;gt;&lt;/code&gt;
+ tag.
+*/
+DREAM_META_DATA : &quot;android.service.dream&quot;,
+<span id='android-service-dreams-DreamService-method-setDebug'>/**
+</span>@hide 
+*/
+setDebug : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-dispatchKeyEvent'>/**{@inheritDoc}
+</span>*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-dispatchKeyShortcutEvent'>/**{@inheritDoc}
+</span>*/
+dispatchKeyShortcutEvent : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-dispatchTouchEvent'>/**{@inheritDoc}
+</span>*/
+dispatchTouchEvent : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-dispatchTrackballEvent'>/**{@inheritDoc}
+</span>*/
+dispatchTrackballEvent : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-dispatchGenericMotionEvent'>/**{@inheritDoc}
+</span>*/
+dispatchGenericMotionEvent : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-dispatchPopulateAccessibilityEvent'>/**{@inheritDoc}
+</span>*/
+dispatchPopulateAccessibilityEvent : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onCreatePanelView'>/**{@inheritDoc}
+</span>*/
+onCreatePanelView : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onCreatePanelMenu'>/**{@inheritDoc}
+</span>*/
+onCreatePanelMenu : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onPreparePanel'>/**{@inheritDoc}
+</span>*/
+onPreparePanel : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onMenuOpened'>/**{@inheritDoc}
+</span>*/
+onMenuOpened : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onMenuItemSelected'>/**{@inheritDoc}
+</span>*/
+onMenuItemSelected : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onWindowAttributesChanged'>/**{@inheritDoc}
+</span>*/
+onWindowAttributesChanged : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onContentChanged'>/**{@inheritDoc}
+</span>*/
+onContentChanged : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onWindowFocusChanged'>/**{@inheritDoc}
+</span>*/
+onWindowFocusChanged : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onAttachedToWindow'>/**{@inheritDoc}
+</span>*/
+onAttachedToWindow : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onDetachedFromWindow'>/**{@inheritDoc}
+</span>*/
+onDetachedFromWindow : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onPanelClosed'>/**{@inheritDoc}
+</span>*/
+onPanelClosed : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onSearchRequested'>/**{@inheritDoc}
+</span>*/
+onSearchRequested : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onSearchRequested'>/**{@inheritDoc}
+</span>*/
+onSearchRequested : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onWindowStartingActionMode'>/**{@inheritDoc}
+</span>*/
+onWindowStartingActionMode : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onWindowStartingActionMode'>/**{@inheritDoc}
+</span>*/
+onWindowStartingActionMode : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onActionModeStarted'>/**{@inheritDoc}
+</span>*/
+onActionModeStarted : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onActionModeFinished'>/**{@inheritDoc}
+</span>*/
+onActionModeFinished : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-getWindowManager'>/**Retrieves the current {@link android.view.WindowManager} for the dream.
+</span> Behaves similarly to {@link android.app.Activity#getWindowManager()}.
+@return {Object {android.view.WindowManager}} The current window manager, or null if the dream is not started.
+*/
+getWindowManager : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-getWindow'>/**Retrieves the current {@link android.view.Window} for the dream.
+</span> Behaves similarly to {@link android.app.Activity#getWindow()}.
+@return {Object {android.view.Window}} The current window, or null if the dream is not started.
+*/
+getWindow : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setContentView'>/**Inflates a layout resource and set it to be the content view for this Dream.
+</span> Behaves similarly to {@link android.app.Activity#setContentView(int)}.
+
+ &lt;p&gt;Note: Requires a window, do not call before {@link #onAttachedToWindow}()&lt;/p&gt;
+@param {Number} layoutResID Resource ID to be inflated.
+@see #setContentView(android.view.View)
+@see #setContentView(android.view.View, android.view.ViewGroup.LayoutParams)
+*/
+setContentView : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setContentView'>/**Sets a view to be the content view for this Dream.
+</span> Behaves similarly to {@link android.app.Activity#setContentView(android.view.View)} in an activity,
+ including using {@link ViewGroup.LayoutParams#MATCH_PARENT} as the layout height and width of the view.
+
+ &lt;p&gt;Note: This requires a window, so you should usually call it during
+ {@link #onAttachedToWindow}() and never earlier (you &lt;strong&gt;cannot&lt;/strong&gt; call it
+ during {@link #onCreate}).&lt;/p&gt;
+@see #setContentView(int)
+@see #setContentView(android.view.View, android.view.ViewGroup.LayoutParams)
+*/
+setContentView : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setContentView'>/**Sets a view to be the content view for this Dream.
+</span> Behaves similarly to
+ {@link android.app.Activity#setContentView(android.view.View, android.view.ViewGroup.LayoutParams)}
+ in an activity.
+
+ &lt;p&gt;Note: This requires a window, so you should usually call it during
+ {@link #onAttachedToWindow}() and never earlier (you &lt;strong&gt;cannot&lt;/strong&gt; call it
+ during {@link #onCreate}).&lt;/p&gt;
+@param {Object {View}} view The desired content to display.
+@param {Object {ViewGroup.LayoutParams}} params Layout parameters for the view.
+@see #setContentView(android.view.View)
+@see #setContentView(int)
+*/
+setContentView : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-addContentView'>/**Adds a view to the Dream's window, leaving other content views in place.
+</span>
+ &lt;p&gt;Note: Requires a window, do not call before {@link #onAttachedToWindow}()&lt;/p&gt;
+@param {Object {View}} view The desired content to display.
+@param {Object {ViewGroup.LayoutParams}} params Layout parameters for the view.
+*/
+addContentView : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-findViewById'>/**Finds a view that was identified by the id attribute from the XML that
+</span> was processed in {@link #onCreate}.
+
+ &lt;p&gt;Note: Requires a window, do not call before {@link #onAttachedToWindow}()&lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In most cases -- depending on compiler support --
+ the resulting view is automatically cast to the target class type. If
+ the target class type is unconstrained, an explicit cast may be
+ necessary.
+@param {Number} id the ID to search for
+@return {Object {android.view.View}} The view if found or null otherwise.
+@see View#findViewById(int)
+@see DreamService#requireViewById(int)
+*/
+findViewById : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-requireViewById'>/**Finds a view that was identified by the id attribute from the XML that was processed in
+</span> {@link #onCreate}, or throws an IllegalArgumentException if the ID is invalid or there is no
+ matching view in the hierarchy.
+
+ &lt;p&gt;Note: Requires a window, do not call before {@link #onAttachedToWindow}()&lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; In most cases -- depending on compiler support --
+ the resulting view is automatically cast to the target class type. If
+ the target class type is unconstrained, an explicit cast may be
+ necessary.
+@param {Number} id the ID to search for
+@return {Object {android.view.View}} a view with given ID
+@see View#requireViewById(int)
+@see DreamService#findViewById(int)
+*/
+requireViewById : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setInteractive'>/**Marks this dream as interactive to receive input events.
+</span>
+ &lt;p&gt;Non-interactive dreams (default) will dismiss on the first input event.&lt;/p&gt;
+
+ &lt;p&gt;Interactive dreams should call {@link #finish}() to dismiss themselves.&lt;/p&gt;
+@param {Boolean} interactive True if this dream will handle input events.
+*/
+setInteractive : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-isInteractive'>/**Returns whether or not this dream is interactive.  Defaults to false.
+</span>@see #setInteractive(boolean)
+*/
+isInteractive : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setLowProfile'>/**Sets View.SYSTEM_UI_FLAG_LOW_PROFILE on the content view.
+</span>@param {Boolean} lowProfile True to set View.SYSTEM_UI_FLAG_LOW_PROFILE
+@hide There is no reason to have this -- dreams can set this flag
+ on their own content view, and from there can actually do the
+ correct interactions with it (seeing when it is cleared etc).
+*/
+setLowProfile : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-isLowProfile'>/**Returns whether or not this dream is in low profile mode. Defaults to true.
+</span>@see #setLowProfile(boolean)
+@hide 
+*/
+isLowProfile : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setFullscreen'>/**Controls {@link android.view.WindowManager.LayoutParams#FLAG_FULLSCREEN}
+</span> on the dream's window.
+@param {Boolean} fullscreen If true, the fullscreen flag will be set; else it
+ will be cleared.
+*/
+setFullscreen : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-isFullscreen'>/**Returns whether or not this dream is in fullscreen mode. Defaults to false.
+</span>@see #setFullscreen(boolean)
+*/
+isFullscreen : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setScreenBright'>/**Marks this dream as keeping the screen bright while dreaming.
+</span>@param {Boolean} screenBright True to keep the screen bright while dreaming.
+*/
+setScreenBright : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-isScreenBright'>/**Returns whether or not this dream keeps the screen bright while dreaming.
+</span> Defaults to false, allowing the screen to dim if necessary.
+@see #setScreenBright(boolean)
+*/
+isScreenBright : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setWindowless'>/**Marks this dream as windowless.  Only available to doze dreams.
+</span>@hide 
+*/
+setWindowless : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-isWindowless'>/**Returns whether or not this dream is windowless.  Only available to doze dreams.
+</span>@hide 
+*/
+isWindowless : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-canDoze'>/**Returns true if this dream is allowed to doze.
+</span> &lt;p&gt;
+ The value returned by this method is only meaningful when the dream has started.
+ &lt;/p&gt;
+@return {Boolean} True if this dream can doze.
+@see #startDozing
+@hide For use by system UI components only.
+*/
+canDoze : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-startDozing'>/**Starts dozing, entering a deep dreamy sleep.
+</span> &lt;p&gt;
+ Dozing enables the system to conserve power while the user is not actively interacting
+ with the device.  While dozing, the display will remain on in a low-power state
+ and will continue to show its previous contents but the application processor and
+ other system components will be allowed to suspend when possible.
+ &lt;/p&gt;&lt;p&gt;
+ While the application processor is suspended, the dream may stop executing code
+ for long periods of time.  Prior to being suspended, the dream may schedule periodic
+ wake-ups to render new content by scheduling an alarm with the {@link AlarmManager}.
+ The dream may also keep the CPU awake by acquiring a
+ {@link android.os.PowerManager#PARTIAL_WAKE_LOCK partial wake lock} when necessary.
+ Note that since the purpose of doze mode is to conserve power (especially when
+ running on battery), the dream should not wake the CPU very often or keep it
+ awake for very long.
+ &lt;/p&gt;&lt;p&gt;
+ It is a good idea to call this method some time after the dream's entry animation
+ has completed and the dream is ready to doze.  It is important to completely
+ finish all of the work needed before dozing since the application processor may
+ be suspended at any moment once this method is called unless other wake locks
+ are being held.
+ &lt;/p&gt;&lt;p&gt;
+ Call {@link #stopDozing} or {@link #finish} to stop dozing.
+ &lt;/p&gt;
+@see #stopDozing
+@hide For use by system UI components only.
+*/
+startDozing : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-stopDozing'>/**Stops dozing, returns to active dreaming.
+</span> &lt;p&gt;
+ This method reverses the effect of {@link #startDozing}.  From this moment onward,
+ the application processor will be kept awake as long as the dream is running
+ or until the dream starts dozing again.
+ &lt;/p&gt;
+@see #startDozing
+@hide For use by system UI components only.
+*/
+stopDozing : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-isDozing'>/**Returns true if the dream will allow the system to enter a low-power state while
+</span> it is running without actually turning off the screen.  Defaults to false,
+ keeping the application processor awake while the dream is running.
+@return {Boolean} True if the dream is dozing.
+@see #setDozing(boolean)
+@hide For use by system UI components only.
+*/
+isDozing : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-getDozeScreenState'>/**Gets the screen state to use while dozing.
+</span>@return {Number} The screen state to use while dozing, such as {@link Display#STATE_ON},
+ {@link Display#STATE_DOZE}, {@link Display#STATE_DOZE_SUSPEND},
+ {@link Display#STATE_ON_SUSPEND}, {@link Display#STATE_OFF}, or {@link Display#STATE_UNKNOWN}
+ for the default behavior.
+@see #setDozeScreenState
+@hide For use by system UI components only.
+*/
+getDozeScreenState : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setDozeScreenState'>/**Sets the screen state to use while dozing.
+</span> &lt;p&gt;
+ The value of this property determines the power state of the primary display
+ once {@link #startDozing} has been called.  The default value is
+ {@link Display#STATE_UNKNOWN} which lets the system decide.
+ The dream may set a different state before starting to doze and may
+ perform transitions between states while dozing to conserve power and
+ achieve various effects.
+ &lt;/p&gt;&lt;p&gt;
+ Some devices will have dedicated hardware (&quot;Sidekick&quot;) to animate
+ the display content while the CPU sleeps. If the dream and the hardware support
+ this, {@link Display#STATE_ON_SUSPEND} or {@link Display#STATE_DOZE_SUSPEND}
+ will switch control to the Sidekick.
+ &lt;/p&gt;&lt;p&gt;
+ If not using Sidekick, it is recommended that the state be set to
+ {@link Display#STATE_DOZE_SUSPEND} once the dream has completely
+ finished drawing and before it releases its wakelock
+ to allow the display hardware to be fully suspended.  While suspended,
+ the display will preserve its on-screen contents.
+ &lt;/p&gt;&lt;p&gt;
+ If the doze suspend state is used, the dream must make sure to set the mode back
+ to {@link Display#STATE_DOZE} or {@link Display#STATE_ON} before drawing again
+ since the display updates may be ignored and not seen by the user otherwise.
+ &lt;/p&gt;&lt;p&gt;
+ The set of available display power states and their behavior while dozing is
+ hardware dependent and may vary across devices.  The dream may therefore
+ need to be modified or configured to correctly support the hardware.
+ &lt;/p&gt;
+@param {Number} state The screen state to use while dozing, such as {@link Display#STATE_ON},
+ {@link Display#STATE_DOZE}, {@link Display#STATE_DOZE_SUSPEND},
+ {@link Display#STATE_ON_SUSPEND}, {@link Display#STATE_OFF}, or {@link Display#STATE_UNKNOWN}
+ for the default behavior.
+@hide For use by system UI components only.
+*/
+setDozeScreenState : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-getDozeScreenBrightness'>/**Gets the screen brightness to use while dozing.
+</span>@return {Number} The screen brightness while dozing as a value between
+ {@link PowerManager#BRIGHTNESS_OFF} (0) and {@link PowerManager#BRIGHTNESS_ON} (255),
+ or {@link PowerManager#BRIGHTNESS_DEFAULT} (-1) to ask the system to apply
+ its default policy based on the screen state.
+@see #setDozeScreenBrightness
+@hide For use by system UI components only.
+*/
+getDozeScreenBrightness : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-setDozeScreenBrightness'>/**Sets the screen brightness to use while dozing.
+</span> &lt;p&gt;
+ The value of this property determines the power state of the primary display
+ once {@link #startDozing} has been called.  The default value is
+ {@link PowerManager#BRIGHTNESS_DEFAULT} which lets the system decide.
+ The dream may set a different brightness before starting to doze and may adjust
+ the brightness while dozing to conserve power and achieve various effects.
+ &lt;/p&gt;&lt;p&gt;
+ Note that dream may specify any brightness in the full 0-255 range, including
+ values that are less than the minimum value for manual screen brightness
+ adjustments by the user.  In particular, the value may be set to 0 which may
+ turn off the backlight entirely while still leaving the screen on although
+ this behavior is device dependent and not guaranteed.
+ &lt;/p&gt;&lt;p&gt;
+ The available range of display brightness values and their behavior while dozing is
+ hardware dependent and may vary across devices.  The dream may therefore
+ need to be modified or configured to correctly support the hardware.
+ &lt;/p&gt;
+@param {Number} brightness The screen brightness while dozing as a value between
+ {@link PowerManager#BRIGHTNESS_OFF} (0) and {@link PowerManager#BRIGHTNESS_ON} (255),
+ or {@link PowerManager#BRIGHTNESS_DEFAULT} (-1) to ask the system to apply
+ its default policy based on the screen state.
+@hide For use by system UI components only.
+*/
+setDozeScreenBrightness : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onCreate'>/**Called when this Dream is constructed.
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onDreamingStarted'>/**Called when the dream's window has been created and is visible and animation may now begin.
+</span>*/
+onDreamingStarted : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onDreamingStopped'>/**Called when this Dream is stopped, either by external request or by calling finish(),
+</span> before the window has been removed.
+*/
+onDreamingStopped : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onWakeUp'>/**Called when the dream is being asked to stop itself and wake.
+</span> &lt;p&gt;
+ The default implementation simply calls {@link #finish} which ends the dream
+ immediately.  Subclasses may override this function to perform a smooth exit
+ transition then call {@link #finish} afterwards.
+ &lt;/p&gt;&lt;p&gt;
+ Note that the dream will only be given a short period of time (currently about
+ five seconds) to wake up.  If the dream does not finish itself in a timely manner
+ then the system will forcibly finish it once the time allowance is up.
+ &lt;/p&gt;
+*/
+onWakeUp : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onBind'>/**{@inheritDoc}
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-finish'>/**Stops the dream and detaches from the window.
+</span> &lt;p&gt;
+ When the dream ends, the system will be allowed to go to sleep fully unless there
+ is a reason for it to be awake such as recent user activity or wake locks being held.
+ &lt;/p&gt;
+*/
+finish : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-wakeUp'>/**Wakes the dream up gently.
+</span> &lt;p&gt;
+ Calls {@link #onWakeUp} to give the dream a chance to perform an exit transition.
+ When the transition is over, the dream should call {@link #finish}.
+ &lt;/p&gt;
+*/
+wakeUp : function(  ) {},
+
+<span id='android-service-dreams-DreamService-method-onDestroy'>/**{@inheritDoc}
+</span>*/
+onDestroy : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

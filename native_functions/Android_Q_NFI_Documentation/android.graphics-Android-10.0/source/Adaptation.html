@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-ColorSpace-Adaptation'>/**@class android.graphics.ColorSpace.Adaptation
+</span>@extends java.lang.Enum
+
+ {@usesMathJax}
+
+ &lt;p&gt;List of adaptation matrices that can be used for chromatic adaptation
+ using the von Kries transform. These matrices are used to convert values
+ in the CIE XYZ space to values in the LMS space (Long Medium Short).&lt;/p&gt;
+
+ &lt;p&gt;Given an adaptation matrix \(A\), the conversion from XYZ to
+ LMS is straightforward:&lt;/p&gt;
+
+ $$\left[ \begin{array}{c} L\\ M\\ S \end{array} \right] =
+ A \left[ \begin{array}{c} X\\ Y\\ Z \end{array} \right]$$
+
+ &lt;p&gt;The complete von Kries transform \(T\) uses a diagonal matrix
+ noted \(D\) to perform the adaptation in LMS space. In addition
+ to \(A\) and \(D\), the source white point \(W1\) and the destination
+ white point \(W2\) must be specified:&lt;/p&gt;
+
+ $$\begin{align*}
+ \left[ \begin{array}{c} L_1\\ M_1\\ S_1 \end{array} \right] &amp;=
+      A \left[ \begin{array}{c} W1_X\\ W1_Y\\ W1_Z \end{array} \right] \\\
+ \left[ \begin{array}{c} L_2\\ M_2\\ S_2 \end{array} \right] &amp;=
+      A \left[ \begin{array}{c} W2_X\\ W2_Y\\ W2_Z \end{array} \right] \\\
+ D &amp;= \left[ \begin{matrix} \frac{L_2}{L_1} &amp; 0 &amp; 0 \\\
+      0 &amp; \frac{M_2}{M_1} &amp; 0 \\\
+      0 &amp; 0 &amp; \frac{S_2}{S_1} \end{matrix} \right] \\\
+ T &amp;= A^{-1}.D.A
+ \end{align*}$$
+
+ &lt;p&gt;As an example, the resulting matrix \(T\) can then be used to
+ perform the chromatic adaptation of sRGB XYZ transform from D65
+ to D50:&lt;/p&gt;
+
+ $$sRGB_{D50} = T.sRGB_{D65}$$
+
+ @see ColorSpace.Connector
+ @see ColorSpace#connect(ColorSpace, ColorSpace)
+*/
+var Adaptation = {
+
+<span id='android-graphics-ColorSpace-Adaptation-property-BRADFORD'>/** Bradford chromatic adaptation transform, as defined in the
+</span> CIECAM97s color appearance model.
+*/
+BRADFORD : &quot;null&quot;,
+<span id='android-graphics-ColorSpace-Adaptation-property-VON_KRIES'>/** von Kries chromatic adaptation transform.
+</span>*/
+VON_KRIES : &quot;null&quot;,
+<span id='android-graphics-ColorSpace-Adaptation-property-CIECAT02'>/** CIECAT02 chromatic adaption transform, as defined in the
+</span> CIECAM02 color appearance model.
+*/
+CIECAT02 : &quot;null&quot;,
+<span id='android-graphics-ColorSpace-Adaptation-method-values'>/**
+</span>*/
+values : function(  ) {},
+
+<span id='android-graphics-ColorSpace-Adaptation-method-valueOf'>/**
+</span>*/
+valueOf : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-attention-AttentionService'>/**@class android.service.attention.AttentionService
+</span>@extends android.app.Service
+
+ Abstract base class for Attention service.
+
+ &lt;p&gt; An attention service provides attention estimation related features to the system.
+ The system's default AttentionService implementation is configured in
+ {@code config_AttentionComponent}. If this config has no value, a stub is returned.
+
+ See: {@link com.android.server.attention.AttentionManagerService}.
+
+ &lt;pre&gt;
+ {@literal
+ &lt;service android:name=&quot;.YourAttentionService&quot;
+          android:permission=&quot;android.permission.BIND_ATTENTION_SERVICE&quot;&gt;
+ &lt;/service&gt;}
+ &lt;/pre&gt;
+
+ @hide
+*/
+var AttentionService = {
+
+<span id='android-service-attention-AttentionService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service. To be supported, the
+</span> service must also require the {@link android.Manifest.permission#BIND_ATTENTION_SERVICE}
+ permission so that other applications can not abuse it.
+*/
+SERVICE_INTERFACE : &quot;android.service.attention.AttentionService&quot;,
+<span id='android-service-attention-AttentionService-property-ATTENTION_SUCCESS_ABSENT'>/**Attention is absent. */
+</span>ATTENTION_SUCCESS_ABSENT : &quot;0&quot;,
+<span id='android-service-attention-AttentionService-property-ATTENTION_SUCCESS_PRESENT'>/**Attention is present. */
+</span>ATTENTION_SUCCESS_PRESENT : &quot;1&quot;,
+<span id='android-service-attention-AttentionService-property-ATTENTION_FAILURE_UNKNOWN'>/**Unknown reasons for failing to determine the attention. */
+</span>ATTENTION_FAILURE_UNKNOWN : &quot;2&quot;,
+<span id='android-service-attention-AttentionService-property-ATTENTION_FAILURE_CANCELLED'>/**Request has been cancelled. */
+</span>ATTENTION_FAILURE_CANCELLED : &quot;3&quot;,
+<span id='android-service-attention-AttentionService-property-ATTENTION_FAILURE_PREEMPTED'>/**Preempted by other client. */
+</span>ATTENTION_FAILURE_PREEMPTED : &quot;4&quot;,
+<span id='android-service-attention-AttentionService-property-ATTENTION_FAILURE_TIMED_OUT'>/**Request timed out. */
+</span>ATTENTION_FAILURE_TIMED_OUT : &quot;5&quot;,
+<span id='android-service-attention-AttentionService-property-ATTENTION_FAILURE_CAMERA_PERMISSION_ABSENT'>/**Camera permission is not granted. */
+</span>ATTENTION_FAILURE_CAMERA_PERMISSION_ABSENT : &quot;6&quot;,
+<span id='android-service-attention-AttentionService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-attention-AttentionService-method-onCheckAttention'>/**Checks the user attention and calls into the provided callback.
+</span>@param {Object {AttentionService.AttentionCallback}} callback the callback to return the result to
+*/
+onCheckAttention : function(  ) {},
+
+<span id='android-service-attention-AttentionService-method-onCancelAttentionCheck'>/**Cancels pending work for a given callback.
+</span>
+ Implementation must call back with a failure code of {@link #ATTENTION_FAILURE_CANCELLED}.
+*/
+onCancelAttentionCheck : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

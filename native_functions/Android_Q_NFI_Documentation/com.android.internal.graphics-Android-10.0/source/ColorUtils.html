@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-graphics-ColorUtils'>/**@class com.android.internal.graphics.ColorUtils
+</span>@extends java.lang.Object
+
+ Copied from: frameworks/support/core-utils/java/android/support/v4/graphics/ColorUtils.java
+
+ A set of color-related utility methods, building upon those available in {@code Color}.
+*/
+var ColorUtils = {
+
+<span id='com-android-internal-graphics-ColorUtils-method-compositeColors'>/**Composite two potentially translucent colors over each other and returns the result.
+</span>*/
+compositeColors : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-calculateLuminance'>/**Returns the luminance of a color as a float between {@code 0.0} and {@code 1.0}.
+</span> &lt;p&gt;Defined as the Y component in the XYZ representation of {@code color}.&lt;/p&gt;
+*/
+calculateLuminance : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-calculateContrast'>/**Returns the contrast ratio between {@code foreground} and {@code background}.
+</span> {@code background} must be opaque.
+ &lt;p&gt;
+ Formula defined
+ &lt;a href=&quot;http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef&quot;&gt;here&lt;/a&gt;.
+*/
+calculateContrast : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-calculateMinimumBackgroundAlpha'>/**Calculates the minimum alpha value which can be applied to {@code background} so that would
+</span> have a contrast value of at least {@code minContrastRatio} when alpha blended to
+ {@code foreground}.
+@param {Number} foreground       the foreground color
+@param {Number} background       the background color, opacity will be ignored
+@param {Number} minContrastRatio the minimum contrast ratio
+@return {Number} the alpha value in the range 0-255, or -1 if no value could be calculated
+*/
+calculateMinimumBackgroundAlpha : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-calculateMinimumAlpha'>/**Calculates the minimum alpha value which can be applied to {@code foreground} so that would
+</span> have a contrast value of at least {@code minContrastRatio} when compared to
+ {@code background}.
+@param {Number} foreground       the foreground color
+@param {Number} background       the opaque background color
+@param {Number} minContrastRatio the minimum contrast ratio
+@return {Number} the alpha value in the range 0-255, or -1 if no value could be calculated
+*/
+calculateMinimumAlpha : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-RGBToHSL'>/**Convert RGB components to HSL (hue-saturation-lightness).
+</span> &lt;ul&gt;
+ &lt;li&gt;outHsl[0] is Hue [0 .. 360)&lt;/li&gt;
+ &lt;li&gt;outHsl[1] is Saturation [0...1]&lt;/li&gt;
+ &lt;li&gt;outHsl[2] is Lightness [0...1]&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} r      red component value [0..255]
+@param {Number} g      green component value [0..255]
+@param {Number} b      blue component value [0..255]
+@param {Object {float[]}} outHsl 3-element array which holds the resulting HSL components
+*/
+RGBToHSL : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-colorToHSL'>/**Convert the ARGB color to its HSL (hue-saturation-lightness) components.
+</span> &lt;ul&gt;
+ &lt;li&gt;outHsl[0] is Hue [0 .. 360)&lt;/li&gt;
+ &lt;li&gt;outHsl[1] is Saturation [0...1]&lt;/li&gt;
+ &lt;li&gt;outHsl[2] is Lightness [0...1]&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} color  the ARGB color to convert. The alpha component is ignored
+@param {Object {float[]}} outHsl 3-element array which holds the resulting HSL components
+*/
+colorToHSL : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-HSLToColor'>/**Convert HSL (hue-saturation-lightness) components to a RGB color.
+</span> &lt;ul&gt;
+ &lt;li&gt;hsl[0] is Hue [0 .. 360)&lt;/li&gt;
+ &lt;li&gt;hsl[1] is Saturation [0...1]&lt;/li&gt;
+ &lt;li&gt;hsl[2] is Lightness [0...1]&lt;/li&gt;
+ &lt;/ul&gt;
+ If hsv values are out of range, they are pinned.
+@param {Object {float[]}} hsl 3-element array which holds the input HSL components
+@return {Number} the resulting RGB color
+*/
+HSLToColor : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-setAlphaComponent'>/**Set the alpha component of {@code color} to be {@code alpha}.
+</span>*/
+setAlphaComponent : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-colorToLAB'>/**Convert the ARGB color to its CIE Lab representative components.
+</span>@param {Number} color  the ARGB color to convert. The alpha component is ignored
+@param {Object {double[]}} outLab 3-element array which holds the resulting LAB components
+*/
+colorToLAB : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-RGBToLAB'>/**Convert RGB components to its CIE Lab representative components.
+</span>
+ &lt;ul&gt;
+ &lt;li&gt;outLab[0] is L [0 ...1)&lt;/li&gt;
+ &lt;li&gt;outLab[1] is a [-128...127)&lt;/li&gt;
+ &lt;li&gt;outLab[2] is b [-128...127)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} r      red component value [0..255]
+@param {Number} g      green component value [0..255]
+@param {Number} b      blue component value [0..255]
+@param {Object {double[]}} outLab 3-element array which holds the resulting LAB components
+*/
+RGBToLAB : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-colorToXYZ'>/**Convert the ARGB color to its CIE XYZ representative components.
+</span>
+ &lt;p&gt;The resulting XYZ representation will use the D65 illuminant and the CIE
+ 2° Standard Observer (1931).&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;outXyz[0] is X [0 ...95.047)&lt;/li&gt;
+ &lt;li&gt;outXyz[1] is Y [0...100)&lt;/li&gt;
+ &lt;li&gt;outXyz[2] is Z [0...108.883)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} color  the ARGB color to convert. The alpha component is ignored
+@param {Object {double[]}} outXyz 3-element array which holds the resulting LAB components
+*/
+colorToXYZ : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-RGBToXYZ'>/**Convert RGB components to its CIE XYZ representative components.
+</span>
+ &lt;p&gt;The resulting XYZ representation will use the D65 illuminant and the CIE
+ 2° Standard Observer (1931).&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;outXyz[0] is X [0 ...95.047)&lt;/li&gt;
+ &lt;li&gt;outXyz[1] is Y [0...100)&lt;/li&gt;
+ &lt;li&gt;outXyz[2] is Z [0...108.883)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} r      red component value [0..255]
+@param {Number} g      green component value [0..255]
+@param {Number} b      blue component value [0..255]
+@param {Object {double[]}} outXyz 3-element array which holds the resulting XYZ components
+*/
+RGBToXYZ : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-XYZToLAB'>/**Converts a color from CIE XYZ to CIE Lab representation.
+</span>
+ &lt;p&gt;This method expects the XYZ representation to use the D65 illuminant and the CIE
+ 2° Standard Observer (1931).&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;outLab[0] is L [0 ...1)&lt;/li&gt;
+ &lt;li&gt;outLab[1] is a [-128...127)&lt;/li&gt;
+ &lt;li&gt;outLab[2] is b [-128...127)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} x      X component value [0...95.047)
+@param {Number} y      Y component value [0...100)
+@param {Number} z      Z component value [0...108.883)
+@param {Object {double[]}} outLab 3-element array which holds the resulting Lab components
+*/
+XYZToLAB : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-LABToXYZ'>/**Converts a color from CIE Lab to CIE XYZ representation.
+</span>
+ &lt;p&gt;The resulting XYZ representation will use the D65 illuminant and the CIE
+ 2° Standard Observer (1931).&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;outXyz[0] is X [0 ...95.047)&lt;/li&gt;
+ &lt;li&gt;outXyz[1] is Y [0...100)&lt;/li&gt;
+ &lt;li&gt;outXyz[2] is Z [0...108.883)&lt;/li&gt;
+ &lt;/ul&gt;
+@param {Number} l      L component value [0...100)
+@param {Number} a      A component value [-128...127)
+@param {Number} b      B component value [-128...127)
+@param {Object {double[]}} outXyz 3-element array which holds the resulting XYZ components
+*/
+LABToXYZ : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-XYZToColor'>/**Converts a color from CIE XYZ to its RGB representation.
+</span>
+ &lt;p&gt;This method expects the XYZ representation to use the D65 illuminant and the CIE
+ 2° Standard Observer (1931).&lt;/p&gt;
+@param {Number} x X component value [0...95.047)
+@param {Number} y Y component value [0...100)
+@param {Number} z Z component value [0...108.883)
+@return {Number} int containing the RGB representation
+*/
+XYZToColor : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-LABToColor'>/**Converts a color from CIE Lab to its RGB representation.
+</span>@param {Number} l L component value [0...100]
+@param {Number} a A component value [-128...127]
+@param {Number} b B component value [-128...127]
+@return {Number} int containing the RGB representation
+*/
+LABToColor : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-distanceEuclidean'>/**Returns the euclidean distance between two LAB colors.
+</span>*/
+distanceEuclidean : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-blendARGB'>/**Blend between two ARGB colors using the given ratio.
+</span>
+ &lt;p&gt;A blend ratio of 0.0 will result in {@code color1}, 0.5 will give an even blend,
+ 1.0 will result in {@code color2}.&lt;/p&gt;
+@param {Number} color1 the first ARGB color
+@param {Number} color2 the second ARGB color
+@param {Number} ratio  the blend ratio of {@code color1} to {@code color2}
+*/
+blendARGB : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-blendHSL'>/**Blend between {@code hsl1} and {@code hsl2} using the given ratio. This will interpolate
+</span> the hue using the shortest angle.
+
+ &lt;p&gt;A blend ratio of 0.0 will result in {@code hsl1}, 0.5 will give an even blend,
+ 1.0 will result in {@code hsl2}.&lt;/p&gt;
+@param {Object {float[]}} hsl1      3-element array which holds the first HSL color
+@param {Object {float[]}} hsl2      3-element array which holds the second HSL color
+@param {Number} ratio     the blend ratio of {@code hsl1} to {@code hsl2}
+@param {Object {float[]}} outResult 3-element array which holds the resulting HSL components
+*/
+blendHSL : function(  ) {},
+
+<span id='com-android-internal-graphics-ColorUtils-method-blendLAB'>/**Blend between two CIE-LAB colors using the given ratio.
+</span>
+ &lt;p&gt;A blend ratio of 0.0 will result in {@code lab1}, 0.5 will give an even blend,
+ 1.0 will result in {@code lab2}.&lt;/p&gt;
+@param {Object {double[]}} lab1      3-element array which holds the first LAB color
+@param {Object {double[]}} lab2      3-element array which holds the second LAB color
+@param {Number} ratio     the blend ratio of {@code lab1} to {@code lab2}
+@param {Object {double[]}} outResult 3-element array which holds the resulting LAB components
+*/
+blendLAB : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

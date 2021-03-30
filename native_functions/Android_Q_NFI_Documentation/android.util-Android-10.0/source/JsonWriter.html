@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-JsonWriter'>/**@class android.util.JsonWriter
+</span> implements java.io.Closeable
+
+@extends java.lang.Object
+
+ Writes a JSON (&lt;a href=&quot;http://www.ietf.org/rfc/rfc4627.txt&quot;&gt;RFC 4627&lt;/a&gt;)
+ encoded value to a stream, one token at a time. The stream includes both
+ literal values (strings, numbers, booleans and nulls) as well as the begin
+ and end delimiters of objects and arrays.
+
+ &lt;h3&gt;Encoding JSON&lt;/h3&gt;
+ To encode your data as JSON, create a new {@code JsonWriter}. Each JSON
+ document must contain one top-level array or object. Call methods on the
+ writer as you walk the structure's contents, nesting arrays and objects as
+ necessary:
+ &lt;ul&gt;
+   &lt;li&gt;To write &lt;strong&gt;arrays&lt;/strong&gt;, first call {@link #beginArray}().
+       Write each of the array's elements with the appropriate {@link #value}
+       methods or by nesting other arrays and objects. Finally close the array
+       using {@link #endArray}().
+   &lt;li&gt;To write &lt;strong&gt;objects&lt;/strong&gt;, first call {@link #beginObject}().
+       Write each of the object's properties by alternating calls to
+       {@link #name} with the property's value. Write property values with the
+       appropriate {@link #value} method or by nesting other objects or arrays.
+       Finally close the object using {@link #endObject}().
+ &lt;/ul&gt;
+
+ &lt;h3&gt;Example&lt;/h3&gt;
+ Suppose we'd like to encode a stream of messages such as the following: &lt;pre&gt; {@code
+ [
+   {
+     &quot;id&quot;: 912345678901,
+     &quot;text&quot;: &quot;How do I write JSON on Android?&quot;,
+     &quot;geo&quot;: null,
+     &quot;user&quot;: {
+       &quot;name&quot;: &quot;android_newb&quot;,
+       &quot;followers_count&quot;: 41
+      }
+   },
+   {
+     &quot;id&quot;: 912345678902,
+     &quot;text&quot;: &quot;@android_newb just use android.util.JsonWriter!&quot;,
+     &quot;geo&quot;: [50.454722, -104.606667],
+     &quot;user&quot;: {
+       &quot;name&quot;: &quot;jesse&quot;,
+       &quot;followers_count&quot;: 2
+     }
+   }
+ ]}&lt;/pre&gt;
+ This code encodes the above structure: &lt;pre&gt;   {@code
+   public void writeJsonStream(OutputStream out, List&lt;Message&gt; messages) throws IOException {
+     JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, &quot;UTF-8&quot;));
+     writer.setIndent(&quot;  &quot;);
+     writeMessagesArray(writer, messages);
+     writer.close();
+   }
+
+   public void writeMessagesArray(JsonWriter writer, List&lt;Message&gt; messages) throws IOException {
+     writer.beginArray();
+     for (Message message : messages) {
+       writeMessage(writer, message);
+     }
+     writer.endArray();
+   }
+
+   public void writeMessage(JsonWriter writer, Message message) throws IOException {
+     writer.beginObject();
+     writer.name(&quot;id&quot;).value(message.getId());
+     writer.name(&quot;text&quot;).value(message.getText());
+     if (message.getGeo() != null) {
+       writer.name(&quot;geo&quot;);
+       writeDoublesArray(writer, message.getGeo());
+     } else {
+       writer.name(&quot;geo&quot;).nullValue();
+     }
+     writer.name(&quot;user&quot;);
+     writeUser(writer, message.getUser());
+     writer.endObject();
+   }
+
+   public void writeUser(JsonWriter writer, User user) throws IOException {
+     writer.beginObject();
+     writer.name(&quot;name&quot;).value(user.getName());
+     writer.name(&quot;followers_count&quot;).value(user.getFollowersCount());
+     writer.endObject();
+   }
+
+   public void writeDoublesArray(JsonWriter writer, List&lt;Double&gt; doubles) throws IOException {
+     writer.beginArray();
+     for (Double value : doubles) {
+       writer.value(value);
+     }
+     writer.endArray();
+   }}&lt;/pre&gt;
+
+ &lt;p&gt;Each {@code JsonWriter} may be used to write a single JSON stream.
+ Instances of this class are not thread safe. Calls that would result in a
+ malformed JSON string will fail with an {@link IllegalStateException}.
+*/
+var JsonWriter = {
+
+<span id='android-util-JsonWriter-method-setIndent'>/**Sets the indentation string to be repeated for each level of indentation
+</span> in the encoded document. If {@code indent.isEmpty()} the encoded document
+ will be compact. Otherwise the encoded document will be more
+ human-readable.
+@param {String} indent a string containing only whitespace.
+*/
+setIndent : function(  ) {},
+
+<span id='android-util-JsonWriter-method-setLenient'>/**Configure this writer to relax its syntax rules. By default, this writer
+</span> only emits well-formed JSON as specified by &lt;a
+ href=&quot;http://www.ietf.org/rfc/rfc4627.txt&quot;&gt;RFC 4627&lt;/a&gt;. Setting the writer
+ to lenient permits the following:
+ &lt;ul&gt;
+   &lt;li&gt;Top-level values of any type. With strict writing, the top-level
+       value must be an object or an array.
+   &lt;li&gt;Numbers may be {@link Double#isNaN() NaNs} or {@link Double#isInfinite() infinities}.
+ &lt;/ul&gt;
+*/
+setLenient : function(  ) {},
+
+<span id='android-util-JsonWriter-method-isLenient'>/**Returns true if this writer has relaxed syntax rules.
+</span>*/
+isLenient : function(  ) {},
+
+<span id='android-util-JsonWriter-method-beginArray'>/**Begins encoding a new array. Each call to this method must be paired with
+</span> a call to {@link #endArray}.
+@return {Object {android.util.JsonWriter}} this writer.
+*/
+beginArray : function(  ) {},
+
+<span id='android-util-JsonWriter-method-endArray'>/**Ends encoding the current array.
+</span>@return {Object {android.util.JsonWriter}} this writer.
+*/
+endArray : function(  ) {},
+
+<span id='android-util-JsonWriter-method-beginObject'>/**Begins encoding a new object. Each call to this method must be paired
+</span> with a call to {@link #endObject}.
+@return {Object {android.util.JsonWriter}} this writer.
+*/
+beginObject : function(  ) {},
+
+<span id='android-util-JsonWriter-method-endObject'>/**Ends encoding the current object.
+</span>@return {Object {android.util.JsonWriter}} this writer.
+*/
+endObject : function(  ) {},
+
+<span id='android-util-JsonWriter-method-name'>/**Encodes the property name.
+</span>@param {String} name the name of the forthcoming value. May not be null.
+@return {Object {android.util.JsonWriter}} this writer.
+*/
+name : function(  ) {},
+
+<span id='android-util-JsonWriter-method-value'>/**Encodes {@code value}.
+</span>@param {String} value the literal string value, or null to encode a null literal.
+@return {Object {android.util.JsonWriter}} this writer.
+*/
+value : function(  ) {},
+
+<span id='android-util-JsonWriter-method-nullValue'>/**Encodes {@code null}.
+</span>@return {Object {android.util.JsonWriter}} this writer.
+*/
+nullValue : function(  ) {},
+
+<span id='android-util-JsonWriter-method-value'>/**Encodes {@code value}.
+</span>@return {Object {android.util.JsonWriter}} this writer.
+*/
+value : function(  ) {},
+
+<span id='android-util-JsonWriter-method-value'>/**Encodes {@code value}.
+</span>@param {Number} value a finite value. May not be {@link Double#isNaN() NaNs} or
+     {@link Double#isInfinite() infinities} unless this writer is lenient.
+@return {Object {android.util.JsonWriter}} this writer.
+*/
+value : function(  ) {},
+
+<span id='android-util-JsonWriter-method-value'>/**Encodes {@code value}.
+</span>@return {Object {android.util.JsonWriter}} this writer.
+*/
+value : function(  ) {},
+
+<span id='android-util-JsonWriter-method-value'>/**Encodes {@code value}.
+</span>@param {Object {Number}} value a finite value. May not be {@link Double#isNaN() NaNs} or
+     {@link Double#isInfinite() infinities} unless this writer is lenient.
+@return {Object {android.util.JsonWriter}} this writer.
+*/
+value : function(  ) {},
+
+<span id='android-util-JsonWriter-method-flush'>/**Ensures all buffered data is written to the underlying {@link Writer}
+</span> and flushes that writer.
+*/
+flush : function(  ) {},
+
+<span id='android-util-JsonWriter-method-close'>/**Flushes and closes this writer and the underlying {@link Writer}.
+</span>@throws IOException if the JSON document is incomplete.
+*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

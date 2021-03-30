@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-inspector-InspectionCompanion'>/**@class android.view.inspector.InspectionCompanion
+</span> An interface for companion objects used to inspect views.
+
+ Inspection companions only need to handle the properties and node name of the specific class
+ they are defined for, not anything from a parent class. At runtime, the inspector instantiates
+ one instance of each inspection companion, and handles visiting them in the correct inheritance
+ order for each type it inspects.
+
+ Properties are read from the top of the type tree to the bottom, so that classes that override
+ a property in their parent class can overwrite it in the reader. In general, properties will
+ cleanly inherit through their getters, and the inspector runtime will read the properties of a
+ parent class via the parent's inspection companion, and the child companion will only read
+ properties added or changed since the parent was defined.
+
+ @param &lt;T&gt; The type of inspectable this is the companion to
+*/
+var InspectionCompanion = {
+
+<span id='android-view-inspector-InspectionCompanion-method-mapProperties'>/**Map the string names of the properties this companion knows about to integer IDs.
+</span>
+ Each companion is responsible for storing the integer IDs of all its properties. This is the
+ only method that is allowed to modify the stored IDs.
+
+ Calling {@link #readProperties(T, android.view.inspector.PropertyReader)} before calling this results in
+ undefined behavior.
+@param {Object {PropertyMapper}} propertyMapper A {@link PropertyMapper} maps string names to IDs.
+*/
+mapProperties : function(  ) {},
+
+<span id='android-view-inspector-InspectionCompanion-method-readProperties'>/**Read the values of an instance of this companion's type into a {@link android.view.inspector.PropertyReader}.
+</span>
+ This method needs to return the property IDs stored by
+ {@link #mapProperties}(PropertyMapper). Implementations should track if their properties
+ have been mapped and throw a {@link android.view.inspector.InspectionCompanion.UninitializedPropertyMapException} if this method is
+ called before {mapProperties}.
+@param {Object {Object}} inspectable A object of type {T} to read the properties of.
+@param {Object {PropertyReader}} propertyReader An object which receives the property IDs and values.
+*/
+readProperties : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

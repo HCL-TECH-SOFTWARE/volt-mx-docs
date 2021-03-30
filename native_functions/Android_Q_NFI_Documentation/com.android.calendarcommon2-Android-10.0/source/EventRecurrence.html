@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-calendarcommon2-EventRecurrence'>/**@class com.android.calendarcommon2.EventRecurrence
+</span>@extends java.lang.Object
+
+ Event recurrence utility functions.
+*/
+var EventRecurrence = {
+
+<span id='com-android-calendarcommon2-EventRecurrence-property-SECONDLY'>/***/
+</span>SECONDLY : &quot;1&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-MINUTELY'>/***/
+</span>MINUTELY : &quot;2&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-HOURLY'>/***/
+</span>HOURLY : &quot;3&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-DAILY'>/***/
+</span>DAILY : &quot;4&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-WEEKLY'>/***/
+</span>WEEKLY : &quot;5&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-MONTHLY'>/***/
+</span>MONTHLY : &quot;6&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-YEARLY'>/***/
+</span>YEARLY : &quot;7&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-SU'>/***/
+</span>SU : &quot;65536&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-MO'>/***/
+</span>MO : &quot;131072&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-TU'>/***/
+</span>TU : &quot;262144&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-WE'>/***/
+</span>WE : &quot;524288&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-TH'>/***/
+</span>TH : &quot;1048576&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-FR'>/***/
+</span>FR : &quot;2097152&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-SA'>/***/
+</span>SA : &quot;4194304&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-startDate'>/***/
+</span>startDate : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-freq'>/***/
+</span>freq : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-until'>/***/
+</span>until : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-count'>/***/
+</span>count : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-interval'>/***/
+</span>interval : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-wkst'>/***/
+</span>wkst : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bysecond'>/***/
+</span>bysecond : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bysecondCount'>/***/
+</span>bysecondCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byminute'>/***/
+</span>byminute : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byminuteCount'>/***/
+</span>byminuteCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byhour'>/***/
+</span>byhour : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byhourCount'>/***/
+</span>byhourCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byday'>/***/
+</span>byday : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bydayNum'>/***/
+</span>bydayNum : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bydayCount'>/***/
+</span>bydayCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bymonthday'>/***/
+</span>bymonthday : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bymonthdayCount'>/***/
+</span>bymonthdayCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byyearday'>/***/
+</span>byyearday : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byyeardayCount'>/***/
+</span>byyeardayCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byweekno'>/***/
+</span>byweekno : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-byweeknoCount'>/***/
+</span>byweeknoCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bymonth'>/***/
+</span>bymonth : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bymonthCount'>/***/
+</span>bymonthCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bysetpos'>/***/
+</span>bysetpos : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-property-bysetposCount'>/***/
+</span>bysetposCount : &quot;null&quot;,
+<span id='com-android-calendarcommon2-EventRecurrence-method-setStartDate'>/**
+</span>*/
+setStartDate : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-calendarDay2Day'>/**Converts one of the Calendar.SUNDAY constants to the SU, MO, etc.
+</span> constants.  btw, I think we should switch to those here too, to
+ get rid of this function, if possible.
+*/
+calendarDay2Day : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-timeDay2Day'>/**
+</span>*/
+timeDay2Day : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-day2TimeDay'>/**
+</span>*/
+day2TimeDay : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-day2CalendarDay'>/**Converts one of the SU, MO, etc. constants to the Calendar.SUNDAY
+</span> constants.  btw, I think we should switch to those here too, to
+ get rid of this function, if possible.
+*/
+day2CalendarDay : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-repeatsOnEveryWeekDay'>/**
+</span>*/
+repeatsOnEveryWeekDay : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-repeatsMonthlyOnDayCount'>/**Determines whether this rule specifies a simple monthly rule by weekday, such as
+</span> &quot;FREQ=MONTHLY;BYDAY=3TU&quot; (the 3rd Tuesday of every month).
+ &lt;p&gt;
+ Negative days, e.g. &quot;FREQ=MONTHLY;BYDAY=-1TU&quot; (the last Tuesday of every month),
+ will cause &quot;false&quot; to be returned.
+ &lt;p&gt;
+ Rules that fire every week, such as &quot;FREQ=MONTHLY;BYDAY=TU&quot; (every Tuesday of every
+ month) will cause &quot;false&quot; to be returned.  (Note these are usually expressed as
+ WEEKLY rules, and hence are uncommon.)
+@return {Boolean} true if this rule is of the appropriate form
+*/
+repeatsMonthlyOnDayCount : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='com-android-calendarcommon2-EventRecurrence-method-parse'>/**Parses an rfc2445 recurrence rule string into its component pieces.  Attempting to parse
+</span> malformed input will result in an EventRecurrence.InvalidFormatException.
+@param {String} recur The recurrence rule to parse (in un-folded form).
+*/
+parse : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

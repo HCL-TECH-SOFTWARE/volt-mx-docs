@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-ims-ImsResolver'>/**@class com.android.internal.telephony.ims.ImsResolver
+</span> implements com.android.internal.telephony.ims.ImsServiceController.ImsServiceControllerCallbacks
+
+@extends java.lang.Object
+
+ Creates a list of ImsServices that are available to bind to based on the Device configuration
+ overlay value &quot;config_ims_package&quot; and Carrier Configuration value
+ &quot;config_ims_package_override_string&quot;.
+ These ImsServices are then bound to in the following order:
+
+ 1. Carrier Config defined override value per SIM.
+ 2. Device overlay default value (including no SIM case).
+
+ ImsManager can then retrieve the binding to the correct ImsService using
+ {@link #getImsServiceControllerAndListen} on a per-slot and per feature basis.
+*/
+var ImsResolver = {
+
+<span id='com-android-internal-telephony-ims-ImsResolver-property-METADATA_EMERGENCY_MMTEL_FEATURE'>/***/
+</span>METADATA_EMERGENCY_MMTEL_FEATURE : &quot;android.telephony.ims.EMERGENCY_MMTEL_FEATURE&quot;,
+<span id='com-android-internal-telephony-ims-ImsResolver-property-METADATA_MMTEL_FEATURE'>/***/
+</span>METADATA_MMTEL_FEATURE : &quot;android.telephony.ims.MMTEL_FEATURE&quot;,
+<span id='com-android-internal-telephony-ims-ImsResolver-property-METADATA_RCS_FEATURE'>/***/
+</span>METADATA_RCS_FEATURE : &quot;android.telephony.ims.RCS_FEATURE&quot;,
+<span id='com-android-internal-telephony-ims-ImsResolver-method-setSubscriptionManagerProxy'>/**
+</span>*/
+setSubscriptionManagerProxy : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-setImsServiceControllerFactory'>/**
+</span>*/
+setImsServiceControllerFactory : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getHandler'>/**
+</span>*/
+getHandler : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-setImsDynamicQueryManagerFactory'>/**
+</span>*/
+setImsDynamicQueryManagerFactory : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-initPopulateCacheAndStartBind'>/**Needs to be called after the constructor to first populate the cache and possibly bind to
+</span> ImsServices.
+*/
+initPopulateCacheAndStartBind : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-enableIms'>/**Notify ImsService to enable IMS for the framework. This will trigger IMS registration and
+</span> trigger ImsFeature status updates.
+*/
+enableIms : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-disableIms'>/**Notify ImsService to disable IMS for the framework. This will trigger IMS de-registration and
+</span> trigger ImsFeature capability status to become false.
+*/
+disableIms : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getMmTelFeatureAndListen'>/**Returns the {@link IImsMmTelFeature} that corresponds to the given slot Id or {@link null} if
+</span> the service is not available. If an IImsMMTelFeature is available, the
+ {@link IImsServiceFeatureCallback} callback is registered as a listener for feature updates.
+@param {Number} slotId The SIM slot that we are requesting the {@link IImsMmTelFeature} for.
+@param {Object {IImsServiceFeatureCallback}} callback Listener that will send updates to ImsManager when there are updates to
+ the feature.
+@return {Object {IImsMmTelFeature}} {@link IImsMmTelFeature} interface or {@link null} if it is unavailable.
+*/
+getMmTelFeatureAndListen : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getRcsFeatureAndListen'>/**Returns the {@link IImsRcsFeature} that corresponds to the given slot Id for emergency
+</span> calling or {@link null} if the service is not available. If an IImsMMTelFeature is
+ available, the {@link IImsServiceFeatureCallback} callback is registered as a listener for
+ feature updates.
+@param {Number} slotId The SIM slot that we are requesting the {@link IImsRcsFeature} for.
+@param {Object {IImsServiceFeatureCallback}} callback listener that will send updates to ImsManager when there are updates to
+ the feature.
+@return {Object {IImsRcsFeature}} {@link IImsRcsFeature} interface or {@link null} if it is unavailable.
+*/
+getRcsFeatureAndListen : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getImsRegistration'>/**Returns the ImsRegistration structure associated with the slotId and feature specified.
+</span>*/
+getImsRegistration : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getImsConfig'>/**Returns the ImsConfig structure associated with the slotId and feature specified.
+</span>*/
+getImsConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getImsServiceController'>/**
+</span>*/
+getImsServiceController : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getImsServiceControllerAndListen'>/**
+</span>*/
+getImsServiceControllerAndListen : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-overrideImsServiceConfiguration'>/**
+</span>*/
+overrideImsServiceConfiguration : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getImsServiceConfiguration'>/**
+</span>*/
+getImsServiceConfiguration : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-imsServiceFeatureCreated'>/**Implementation of
+</span> {@link com.android.internal.telephony.ims.ImsServiceController.com.android.internal.telephony.ims.ImsServiceControllerCallbacks#imsServiceFeatureCreated}, which
+ removes the ImsServiceController from the mBoundImsServicesByFeature structure.
+*/
+imsServiceFeatureCreated : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-imsServiceFeatureRemoved'>/**Implementation of
+</span> {@link com.android.internal.telephony.ims.ImsServiceController.com.android.internal.telephony.ims.ImsServiceControllerCallbacks#imsServiceFeatureRemoved}, which
+ removes the ImsServiceController from the mBoundImsServicesByFeature structure.
+*/
+imsServiceFeatureRemoved : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-imsServiceFeaturesChanged'>/**Implementation of
+</span> {@link ImsServiceController.ImsServiceControllerCallbacks#imsServiceFeaturesChanged, which
+ notify the ImsResolver of a change to the supported ImsFeatures of a connected ImsService.
+*/
+imsServiceFeaturesChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ims-ImsResolver-method-getImsServiceInfoFromCache'>/**Returns the ImsServiceInfo that matches the provided packageName. Visible for testing
+</span> the ImsService caching functionality.
+*/
+getImsServiceInfoFromCache : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

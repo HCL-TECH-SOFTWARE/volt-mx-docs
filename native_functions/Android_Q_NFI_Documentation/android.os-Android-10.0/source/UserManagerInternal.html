@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-UserManagerInternal'>/**@class android.os.UserManagerInternal
+</span>@extends java.lang.Object
+
+ @hide Only for use within the system server.
+*/
+var UserManagerInternal = {
+
+<span id='android-os-UserManagerInternal-property-CAMERA_NOT_DISABLED'>/***/
+</span>CAMERA_NOT_DISABLED : &quot;0&quot;,
+<span id='android-os-UserManagerInternal-property-CAMERA_DISABLED_LOCALLY'>/***/
+</span>CAMERA_DISABLED_LOCALLY : &quot;1&quot;,
+<span id='android-os-UserManagerInternal-property-CAMERA_DISABLED_GLOBALLY'>/***/
+</span>CAMERA_DISABLED_GLOBALLY : &quot;2&quot;,
+<span id='android-os-UserManagerInternal-method-setDevicePolicyUserRestrictions'>/**Called by {@link com.android.server.devicepolicy.DevicePolicyManagerService} to set
+</span> restrictions enforced by the user.
+@param {Number} userId target user id for the local restrictions.
+@param {Object {Bundle}} restrictions a bundle of user restrictions.
+@param {Boolean} isDeviceOwner whether {@code userId} corresponds to device owner user id.
+@param {Number} cameraRestrictionScope is camera disabled and if so what is the scope of restriction.
+        Should be one of {@link #CAMERA_NOT_DISABLED}, {@link #CAMERA_DISABLED_LOCALLY} or
+                               {@link #CAMERA_DISABLED_GLOBALLY}
+*/
+setDevicePolicyUserRestrictions : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-getBaseUserRestrictions'>/**Returns the &quot;base&quot; user restrictions.
+</span>
+ Used by {@link com.android.server.devicepolicy.DevicePolicyManagerService} for upgrading
+ from MNC.
+*/
+getBaseUserRestrictions : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-setBaseUserRestrictionsByDpmsForMigration'>/**Called by {@link com.android.server.devicepolicy.DevicePolicyManagerService} for upgrading
+</span> from MNC.
+*/
+setBaseUserRestrictionsByDpmsForMigration : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-getUserRestriction'>/**Return a user restriction.
+</span>*/
+getUserRestriction : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-addUserRestrictionsListener'>/**Adds a listener to user restriction changes.
+</span>*/
+addUserRestrictionsListener : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-removeUserRestrictionsListener'>/**Remove a {@link android.os.UserManagerInternal.UserRestrictionsListener}.
+</span>*/
+removeUserRestrictionsListener : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-setDeviceManaged'>/**Called by {@link com.android.server.devicepolicy.DevicePolicyManagerService} to update
+</span> whether the device is managed by device owner.
+*/
+setDeviceManaged : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-setUserManaged'>/**Called by {@link com.android.server.devicepolicy.DevicePolicyManagerService} to update
+</span> whether the user is managed by profile owner.
+*/
+setUserManaged : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-setUserIcon'>/**Called by {@link com.android.server.devicepolicy.DevicePolicyManagerService} to omit
+</span> restriction check, because DevicePolicyManager must always be able to set user icon
+ regardless of any restriction.
+ Also called by {@link com.android.server.pm.UserManagerService} because the logic of setting
+ the icon is in this method.
+*/
+setUserIcon : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-setForceEphemeralUsers'>/**Called by {@link com.android.server.devicepolicy.DevicePolicyManagerService} to inform the
+</span> user manager whether all users should be created ephemeral.
+*/
+setForceEphemeralUsers : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-removeAllUsers'>/**Switches to the system user and deletes all other users.
+</span>
+ &lt;p&gt;Called by the {@link com.android.server.devicepolicy.DevicePolicyManagerService} when
+ the force-ephemeral-users policy is toggled on to make sure there are no pre-existing
+ non-ephemeral users left.
+*/
+removeAllUsers : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-onEphemeralUserStop'>/**Called by the activity manager when the ephemeral user goes to background and its removal
+</span> starts as a result.
+
+ &lt;p&gt;It marks the ephemeral user as disabled in order to prevent it from being re-entered
+ before its removal finishes.
+@param {Number} userId the ID of the ephemeral user.
+*/
+onEphemeralUserStop : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-createUserEvenWhenDisallowed'>/**Same as UserManager.createUser(), but bypasses the check for
+</span> {@link android.os.UserManager#DISALLOW_ADD_USER} and {@link android.os.UserManager#DISALLOW_ADD_MANAGED_PROFILE}
+
+ &lt;p&gt;Called by the {@link com.android.server.devicepolicy.DevicePolicyManagerService} when
+ createAndManageUser is called by the device owner.
+*/
+createUserEvenWhenDisallowed : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-removeUserEvenWhenDisallowed'>/**Same as {@link android.os.UserManager#removeUser(int userHandle)}, but bypasses the check for
+</span> {@link android.os.UserManager#DISALLOW_REMOVE_USER} and
+ {@link android.os.UserManager#DISALLOW_REMOVE_MANAGED_PROFILE} and does not require the
+ {@link android.Manifest.permission#MANAGE_USERS} permission.
+*/
+removeUserEvenWhenDisallowed : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-isUserUnlockingOrUnlocked'>/**Return whether the given user is running in an
+</span> {@code UserState.STATE_RUNNING_UNLOCKING} or
+ {@code UserState.STATE_RUNNING_UNLOCKED} state.
+*/
+isUserUnlockingOrUnlocked : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-isUserUnlocked'>/**Return whether the given user is running in an
+</span> {@code UserState.STATE_RUNNING_UNLOCKED} state.
+*/
+isUserUnlocked : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-isUserRunning'>/**Returns whether the given user is running
+</span>*/
+isUserRunning : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-isUserInitialized'>/**Returns whether the given user is initialized
+</span>*/
+isUserInitialized : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-exists'>/**Returns whether the given user exists
+</span>*/
+exists : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-setUserState'>/**Set user's running state
+</span>*/
+setUserState : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-removeUserState'>/**Remove user's running state
+</span>*/
+removeUserState : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-getUserIds'>/**Returns an array of user ids. This array is cached in UserManagerService and passed as a
+</span> reference, so do not modify the returned array.
+@return {Number} the array of user ids.
+*/
+getUserIds : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-isProfileAccessible'>/**Checks if the {@code callingUserId} and {@code targetUserId} are same or in same group
+</span> and that the {@code callingUserId} is not a managed profile and
+ {@code targetUserId} is enabled.
+@return {Boolean} TRUE if the {@code callingUserId} can access {@code targetUserId}. FALSE
+ otherwise
+@throws SecurityException if the calling user and {@code targetUser} are not in the same
+ group and {@code throwSecurityException} is true, otherwise if will simply return false.
+*/
+isProfileAccessible : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-getProfileParentId'>/**If {@code userId} is of a managed profile, return the parent user ID. Otherwise return
+</span> itself.
+*/
+getProfileParentId : function(  ) {},
+
+<span id='android-os-UserManagerInternal-method-isSettingRestrictedForUser'>/**Checks whether changing a setting to a value is prohibited by the corresponding user
+</span> restriction.
+
+ &lt;p&gt;See also {@link com.android.server.pm.UserRestrictionsUtils#applyUserRestriction(
+ Context, int, String, boolean)}, which should be in sync with this method.
+@return {Boolean} {@code true} if the change is prohibited, {@code false} if the change is allowed.
+@hide 
+*/
+isSettingRestrictedForUser : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageInfo'>/**@class android.content.pm.PackageInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Overall information about the contents of a package.  This corresponds
+ to all of the information collected from AndroidManifest.xml.
+*/
+var PackageInfo = {
+
+<span id='android-content-pm-PackageInfo-property-packageName'>/** The name of this package.  From the &amp;lt;manifest&amp;gt; tag's &quot;name&quot;
+</span> attribute.
+*/
+packageName : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-splitNames'>/** The names of any installed split APKs for this package.
+</span>*/
+splitNames : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-versionCode'>/** @deprecated Use {@link #getLongVersionCode}() instead, which includes both
+</span> this and the additional
+ {@link android.R.styleable#AndroidManifest_versionCodeMajor versionCodeMajor} attribute.
+ The version number of this package, as specified by the &amp;lt;manifest&amp;gt;
+ tag's {@link android.R.styleable#AndroidManifest_versionCode versionCode}
+ attribute.
+ @see #getLongVersionCode()
+*/
+versionCode : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-versionCodeMajor'>/** @hide
+</span> The major version number of this package, as specified by the &amp;lt;manifest&amp;gt;
+ tag's {@link android.R.styleable#AndroidManifest_versionCode versionCodeMajor}
+ attribute.
+ @see #getLongVersionCode()
+*/
+versionCodeMajor : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-versionName'>/** The version name of this package, as specified by the &amp;lt;manifest&amp;gt;
+</span> tag's {@link android.R.styleable#AndroidManifest_versionName versionName}
+ attribute.
+*/
+versionName : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-baseRevisionCode'>/** The revision number of the base APK for this package, as specified by the
+</span> &amp;lt;manifest&amp;gt; tag's
+ {@link android.R.styleable#AndroidManifest_revisionCode revisionCode}
+ attribute.
+*/
+baseRevisionCode : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-splitRevisionCodes'>/** The revision number of any split APKs for this package, as specified by
+</span> the &amp;lt;manifest&amp;gt; tag's
+ {@link android.R.styleable#AndroidManifest_revisionCode revisionCode}
+ attribute. Indexes are a 1:1 mapping against {@link #splitNames}.
+*/
+splitRevisionCodes : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-sharedUserId'>/** The shared user ID name of this package, as specified by the &amp;lt;manifest&amp;gt;
+</span> tag's {@link android.R.styleable#AndroidManifest_sharedUserId sharedUserId}
+ attribute.
+*/
+sharedUserId : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-sharedUserLabel'>/** The shared user ID label of this package, as specified by the &amp;lt;manifest&amp;gt;
+</span> tag's {@link android.R.styleable#AndroidManifest_sharedUserLabel sharedUserLabel}
+ attribute.
+*/
+sharedUserLabel : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-applicationInfo'>/** Information collected from the &amp;lt;application&amp;gt; tag, or null if
+</span> there was none.
+*/
+applicationInfo : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-firstInstallTime'>/** The time at which the app was first installed.  Units are as
+</span> per {@link System#currentTimeMillis()}.
+*/
+firstInstallTime : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-lastUpdateTime'>/** The time at which the app was last updated.  Units are as
+</span> per {@link System#currentTimeMillis()}.
+*/
+lastUpdateTime : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-gids'>/** All kernel group-IDs that have been assigned to this package.
+</span> This is only filled in if the flag {@link android.content.pm.PackageParser.PackageManager#GET_GIDS} was set.
+*/
+gids : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-activities'>/** Array of all {@link android.R.styleable#AndroidManifestActivity
+</span> &amp;lt;activity&amp;gt;} tags included under &amp;lt;application&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_ACTIVITIES} was set.
+*/
+activities : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-receivers'>/** Array of all {@link android.R.styleable#AndroidManifestReceiver
+</span> &amp;lt;receiver&amp;gt;} tags included under &amp;lt;application&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_RECEIVERS} was set.
+*/
+receivers : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-services'>/** Array of all {@link android.R.styleable#AndroidManifestService
+</span> &amp;lt;service&amp;gt;} tags included under &amp;lt;application&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_SERVICES} was set.
+*/
+services : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-providers'>/** Array of all {@link android.R.styleable#AndroidManifestProvider
+</span> &amp;lt;provider&amp;gt;} tags included under &amp;lt;application&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_PROVIDERS} was set.
+*/
+providers : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-instrumentation'>/** Array of all {@link android.R.styleable#AndroidManifestInstrumentation
+</span> &amp;lt;instrumentation&amp;gt;} tags included under &amp;lt;manifest&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_INSTRUMENTATION} was set.
+*/
+instrumentation : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-permissions'>/** Array of all {@link android.R.styleable#AndroidManifestPermission
+</span> &amp;lt;permission&amp;gt;} tags included under &amp;lt;manifest&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_PERMISSIONS} was set.
+*/
+permissions : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-requestedPermissions'>/** Array of all {@link android.R.styleable#AndroidManifestUsesPermission
+</span> &amp;lt;uses-permission&amp;gt;} tags included under &amp;lt;manifest&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_PERMISSIONS} was set.  This list includes
+ all permissions requested, even those that were not granted or known
+ by the system at install time.
+*/
+requestedPermissions : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-requestedPermissionsFlags'>/** Array of flags of all {@link android.R.styleable#AndroidManifestUsesPermission
+</span> &amp;lt;uses-permission&amp;gt;} tags included under &amp;lt;manifest&amp;gt;,
+ or null if there were none.  This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_PERMISSIONS} was set.  Each value matches
+ the corresponding entry in {@link #requestedPermissions}, and will have
+ the flag {@link #REQUESTED_PERMISSION_GRANTED} set as appropriate.
+*/
+requestedPermissionsFlags : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-REQUESTED_PERMISSION_REQUIRED'>/** Flag for {@link #requestedPermissionsFlags}: the requested permission
+</span> is required for the application to run; the user can not optionally
+ disable it.  Currently all permissions are required.
+
+ @removed We do not support required permissions.
+*/
+REQUESTED_PERMISSION_REQUIRED : &quot;1&quot;,
+<span id='android-content-pm-PackageInfo-property-REQUESTED_PERMISSION_GRANTED'>/** Flag for {@link #requestedPermissionsFlags}: the requested permission
+</span> is currently granted to the application.
+*/
+REQUESTED_PERMISSION_GRANTED : &quot;2&quot;,
+<span id='android-content-pm-PackageInfo-property-signatures'>/** Array of all signatures read from the package file. This is only filled
+</span> in if the flag {@link android.content.pm.PackageParser.PackageManager#GET_SIGNATURES} was set. A package
+ must be signed with at least one certificate which is at position zero.
+ The package can be signed with additional certificates which appear as
+ subsequent entries.
+
+ &lt;strong&gt;Note:&lt;/strong&gt; Signature ordering is not guaranteed to be
+ stable which means that a package signed with certificates A and B is
+ equivalent to being signed with certificates B and A. This means that
+ in case multiple signatures are reported you cannot assume the one at
+ the first position to be the same across updates.
+
+ &lt;strong&gt;Deprecated&lt;/strong&gt; This has been replaced by the
+ {@link android.content.pm.PackageParser.PackageInfo#signingInfo} field, which takes into
+ account signing certificate rotation.  For backwards compatibility in
+ the event of signing certificate rotation, this will return the oldest
+ reported signing certificate, so that an application will appear to
+ callers as though no rotation occurred.
+
+ @deprecated use {@code signingInfo} instead
+*/
+signatures : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-signingInfo'>/** Signing information read from the package file, potentially
+</span> including past signing certificates no longer used after signing
+ certificate rotation.  This is only filled in if
+ the flag {@link android.content.pm.PackageParser.PackageManager#GET_SIGNING_CERTIFICATES} was set.
+
+ Use this field instead of the deprecated {@code signatures} field.
+ See {@link android.content.pm.SigningInfo} for more information on its contents.
+*/
+signingInfo : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-configPreferences'>/** Application specified preferred configuration
+</span> {@link android.R.styleable#AndroidManifestUsesConfiguration
+ &amp;lt;uses-configuration&amp;gt;} tags included under &amp;lt;manifest&amp;gt;,
+ or null if there were none. This is only filled in if the flag
+ {@link android.content.pm.PackageParser.PackageManager#GET_CONFIGURATIONS} was set.
+*/
+configPreferences : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-reqFeatures'>/** Features that this application has requested.
+</span>
+ @see FeatureInfo#FLAG_REQUIRED
+*/
+reqFeatures : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-featureGroups'>/** Groups of features that this application has requested.
+</span> Each group contains a set of features that are required.
+ A device must match the features listed in {@link #reqFeatures} and one
+ or more FeatureGroups in order to have satisfied the feature requirement.
+
+ @see FeatureInfo#FLAG_REQUIRED
+*/
+featureGroups : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-INSTALL_LOCATION_UNSPECIFIED'>/** Constant corresponding to &lt;code&gt;auto&lt;/code&gt; in
+</span> the {@link android.R.attr#installLocation} attribute.
+ @hide
+*/
+INSTALL_LOCATION_UNSPECIFIED : &quot;-1&quot;,
+<span id='android-content-pm-PackageInfo-property-INSTALL_LOCATION_AUTO'>/** Constant corresponding to &lt;code&gt;auto&lt;/code&gt; in the
+</span> {@link android.R.attr#installLocation} attribute.
+*/
+INSTALL_LOCATION_AUTO : &quot;0&quot;,
+<span id='android-content-pm-PackageInfo-property-INSTALL_LOCATION_INTERNAL_ONLY'>/** Constant corresponding to &lt;code&gt;internalOnly&lt;/code&gt; in the
+</span> {@link android.R.attr#installLocation} attribute.
+*/
+INSTALL_LOCATION_INTERNAL_ONLY : &quot;1&quot;,
+<span id='android-content-pm-PackageInfo-property-INSTALL_LOCATION_PREFER_EXTERNAL'>/** Constant corresponding to &lt;code&gt;preferExternal&lt;/code&gt; in the
+</span> {@link android.R.attr#installLocation} attribute.
+*/
+INSTALL_LOCATION_PREFER_EXTERNAL : &quot;2&quot;,
+<span id='android-content-pm-PackageInfo-property-installLocation'>/** The install location requested by the package. From the
+</span> {@link android.R.attr#installLocation} attribute, one of
+ {@link #INSTALL_LOCATION_AUTO}, {@link #INSTALL_LOCATION_INTERNAL_ONLY},
+ {@link #INSTALL_LOCATION_PREFER_EXTERNAL}
+*/
+installLocation : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-isStub'>/**@hide */
+</span>isStub : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-coreApp'>/**@hide */
+</span>coreApp : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-requiredForAllUsers'>/**@hide */
+</span>requiredForAllUsers : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-restrictedAccountType'>/**@hide */
+</span>restrictedAccountType : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-requiredAccountType'>/**@hide */
+</span>requiredAccountType : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-overlayTarget'>/** What package, if any, this package will overlay.
+</span>
+ Package name of target package, or null.
+ @hide
+*/
+overlayTarget : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-targetOverlayableName'>/** The name of the overlayable set of elements package, if any, this package will overlay.
+</span>
+ Overlayable name defined within the target package, or null.
+ @hide
+*/
+targetOverlayableName : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-overlayCategory'>/** The overlay category, if any, of this package
+</span>
+ @hide
+*/
+overlayCategory : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-overlayPriority'>/**@hide */
+</span>overlayPriority : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-compileSdkVersion'>/** The user-visible SDK version (ex. 26) of the framework against which the application claims
+</span> to have been compiled, or {@code 0} if not specified.
+ &lt;p&gt;
+ This property is the compile-time equivalent of
+ {@link android.os.Build.VERSION#SDK_INT Build.VERSION.SDK_INT}.
+
+ @hide For platform use only; we don't expect developers to need to read this value.
+*/
+compileSdkVersion : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-compileSdkVersionCodename'>/** The development codename (ex. &quot;O&quot;, &quot;REL&quot;) of the framework against which the application
+</span> claims to have been compiled, or {@code null} if not specified.
+ &lt;p&gt;
+ This property is the compile-time equivalent of
+ {@link android.os.Build.VERSION#CODENAME Build.VERSION.CODENAME}.
+
+ @hide For platform use only; we don't expect developers to need to read this value.
+*/
+compileSdkVersionCodename : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-isApex'>/** Whether the package is an APEX package.
+</span>*/
+isApex : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-PackageInfo-method-getLongVersionCode'>/**Return {@link android.R.styleable#AndroidManifest_versionCode versionCode} and
+</span> {@link android.R.styleable#AndroidManifest_versionCodeMajor versionCodeMajor} combined
+ together as a single long value.  The
+ {@link android.R.styleable#AndroidManifest_versionCodeMajor versionCodeMajor} is placed in
+ the upper 32 bits.
+*/
+getLongVersionCode : function(  ) {},
+
+<span id='android-content-pm-PackageInfo-method-setLongVersionCode'>/**Set the full version code in this PackageInfo, updating {@link #versionCode}
+</span> with the lower bits.
+@see #getLongVersionCode()
+*/
+setLongVersionCode : function(  ) {},
+
+<span id='android-content-pm-PackageInfo-method-composeLongVersionCode'>/**
+</span>@hide Internal implementation for composing a minor and major version code in to
+ a single long version code.
+*/
+composeLongVersionCode : function(  ) {},
+
+<span id='android-content-pm-PackageInfo-method-isOverlayPackage'>/**Returns true if the package is a valid Runtime Overlay package.
+</span>@hide 
+*/
+isOverlayPackage : function(  ) {},
+
+<span id='android-content-pm-PackageInfo-method-isStaticOverlayPackage'>/**Returns true if the package is a valid static Runtime Overlay package. Static overlays
+</span> are not updatable outside of a system update and are safe to load in the system process.
+@hide 
+*/
+isStaticOverlayPackage : function(  ) {},
+
+<span id='android-content-pm-PackageInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-PackageInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-PackageInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

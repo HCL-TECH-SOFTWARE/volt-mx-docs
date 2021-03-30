@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-hdmi-HdmiDeviceInfo'>/**@class android.hardware.hdmi.HdmiDeviceInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class to encapsulate device information for HDMI devices including CEC and MHL. In terms of
+ CEC, this container includes basic information such as logical address, physical address and
+ device type, and additional information like vendor id and osd name. In terms of MHL device, this
+ container includes adopter id and device type. Otherwise, it keeps the information of other type
+ devices for which only port ID, physical address are meaningful.
+
+ @hide
+*/
+var HdmiDeviceInfo = {
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_TV'>/**TV device type. */
+</span>DEVICE_TV : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_RECORDER'>/**Recording device type. */
+</span>DEVICE_RECORDER : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_RESERVED'>/**Device type reserved for future usage. */
+</span>DEVICE_RESERVED : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_TUNER'>/**Tuner device type. */
+</span>DEVICE_TUNER : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_PLAYBACK'>/**Playback device type. */
+</span>DEVICE_PLAYBACK : &quot;4&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_AUDIO_SYSTEM'>/**Audio system device type. */
+</span>DEVICE_AUDIO_SYSTEM : &quot;5&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_PURE_CEC_SWITCH'>/**@hide Pure CEC switch device type. */
+</span>DEVICE_PURE_CEC_SWITCH : &quot;6&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_VIDEO_PROCESSOR'>/**@hide Video processor device type. */
+</span>DEVICE_VIDEO_PROCESSOR : &quot;7&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-DEVICE_INACTIVE'>/***/
+</span>DEVICE_INACTIVE : &quot;-1&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-ADDR_INTERNAL'>/** Logical address used to indicate the source comes from internal device. The logical address
+</span> of TV(0) is used.
+*/
+ADDR_INTERNAL : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-PATH_INTERNAL'>/** Physical address used to indicate the source comes from internal device. The physical address
+</span> of TV(0) is used.
+*/
+PATH_INTERNAL : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-PATH_INVALID'>/**Invalid physical address (routing path) */
+</span>PATH_INVALID : &quot;65535&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-PORT_INVALID'>/**Invalid port ID */
+</span>PORT_INVALID : &quot;-1&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-ID_INVALID'>/**Invalid device ID */
+</span>ID_INVALID : &quot;65535&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-INACTIVE_DEVICE'>/**Device info used to indicate an inactivated device. */
+</span>INACTIVE_DEVICE : &quot;null&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-property-CREATOR'>/** A helper class to deserialize {@link android.hardware.hdmi.HdmiDeviceInfo} for a parcel.
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getId'>/**Returns the id of the device.
+</span>*/
+getId : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-idForCecDevice'>/**Returns the id to be used for CEC device.
+</span>@param {Number} address logical address of CEC device
+@return {Number} id for CEC device
+*/
+idForCecDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-idForMhlDevice'>/**Returns the id to be used for MHL device.
+</span>@param {Number} portId port which the MHL device is connected to
+@return {Number} id for MHL device
+*/
+idForMhlDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-idForHardware'>/**Returns the id to be used for hardware port.
+</span>@param {Number} portId port id
+@return {Number} id for hardware port
+*/
+idForHardware : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getLogicalAddress'>/**Returns the CEC logical address of the device.
+</span>*/
+getLogicalAddress : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getPhysicalAddress'>/**Returns the physical address of the device.
+</span>*/
+getPhysicalAddress : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getPortId'>/**Returns the port ID.
+</span>*/
+getPortId : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getDeviceType'>/**Returns CEC type of the device. For more details, refer constants between {@link #DEVICE_TV}
+</span> and {@link #DEVICE_INACTIVE}.
+*/
+getDeviceType : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getDevicePowerStatus'>/**Returns device's power status. It should be one of the following values.
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#POWER_STATUS_ON}
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#POWER_STATUS_STANDBY}
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#POWER_STATUS_TRANSIENT_TO_ON}
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#POWER_STATUS_TRANSIENT_TO_STANDBY}
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#POWER_STATUS_UNKNOWN}
+ &lt;/ul&gt;
+*/
+getDevicePowerStatus : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getDeviceId'>/**Returns MHL device id. Return -1 for non-MHL device.
+</span>*/
+getDeviceId : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getAdopterId'>/**Returns MHL adopter id. Return -1 for non-MHL device.
+</span>*/
+getAdopterId : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-isSourceType'>/**Returns {@code true} if the device is of a type that can be an input source.
+</span>*/
+isSourceType : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-isCecDevice'>/**Returns {@code true} if the device represents an HDMI-CEC device. {@code false} if the device
+</span> is either MHL or other device.
+*/
+isCecDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-isMhlDevice'>/**Returns {@code true} if the device represents an MHL device. {@code false} if the device is
+</span> either CEC or other device.
+*/
+isMhlDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-isInactivated'>/**Return {@code true} if the device represents an inactivated device that relinquishes
+</span> its status as active source by &amp;lt;Active Source&amp;gt; (HDMI-CEC) or Content-off (MHL).
+*/
+isInactivated : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getDisplayName'>/**Returns display (OSD) name of the device.
+</span>*/
+getDisplayName : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-getVendorId'>/**Returns vendor id of the device. Vendor id is used to distinguish devices built by other
+</span> manufactures. This is required for vendor-specific command on CEC standard.
+*/
+getVendorId : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-describeContents'>/**Describes the kinds of special objects contained in this Parcelable's marshalled
+</span> representation.
+*/
+describeContents : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-writeToParcel'>/**Serializes this object into a {@link Parcel}.
+</span>@param {Object {Parcel}} dest The Parcel in which the object should be written.
+@param {Number} flags Additional flags about how the object should be written. May be 0 or
+            {@link Parcelable#PARCELABLE_WRITE_RETURN_VALUE}.
+*/
+writeToParcel : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiDeviceInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

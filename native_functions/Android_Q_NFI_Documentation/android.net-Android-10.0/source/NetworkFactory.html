@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-NetworkFactory'>/**@class android.net.NetworkFactory
+</span>@extends android.os.Handler
+
+ A NetworkFactory is an entity that creates NetworkAgent objects.
+ The bearers register with ConnectivityService using {@link #register} and
+ their factory will start receiving scored NetworkRequests.  NetworkRequests
+ can be filtered 3 ways: by NetworkCapabilities, by score and more complexly by
+ overridden function.  All of these can be dynamic - changing NetworkCapabilities
+ or score forces re-evaluation of all current requests.
+
+ If any requests pass the filter some overrideable functions will be called.
+ If the bearer only cares about very simple start/stopNetwork callbacks, those
+ functions can be overridden.  If the bearer needs more interaction, it can
+ override addNetworkRequest and removeNetworkRequest which will give it each
+ request that passes their current filters.
+ @hide
+*/
+var NetworkFactory = {
+
+<span id='android-net-NetworkFactory-property-CMD_REQUEST_NETWORK'>/** Pass a network request to the bearer.  If the bearer believes it can
+</span> satisfy the request it should connect to the network and create a
+ NetworkAgent.  Once the NetworkAgent is fully functional it will
+ register itself with ConnectivityService using registerNetworkAgent.
+ If the bearer cannot immediately satisfy the request (no network,
+ user disabled the radio, lower-scored network) it should remember
+ any NetworkRequests it may be able to satisfy in the future.  It may
+ disregard any that it will never be able to service, for example
+ those requiring a different bearer.
+ msg.obj = NetworkRequest
+ msg.arg1 = score - the score of the network currently satisfying this
+            request.  If this bearer knows in advance it cannot
+            exceed this score it should not try to connect, holding the request
+            for the future.
+            Note that subsequent events may give a different (lower
+            or higher) score for this request, transmitted to each
+            NetworkFactory through additional CMD_REQUEST_NETWORK msgs
+            with the same NetworkRequest but an updated score.
+            Also, network conditions may change for this bearer
+            allowing for a better score in the future.
+ msg.arg2 = the serial number of the factory currently responsible for the
+            NetworkAgent handling this request, or SerialNumber.NONE if none.
+*/
+CMD_REQUEST_NETWORK : &quot;536576&quot;,
+<span id='android-net-NetworkFactory-property-CMD_CANCEL_REQUEST'>/** Cancel a network request
+</span> msg.obj = NetworkRequest
+*/
+CMD_CANCEL_REQUEST : &quot;536577&quot;,
+<span id='android-net-NetworkFactory-property-EVENT_UNFULFILLABLE_REQUEST'>/** Sent by NetworkFactory to ConnectivityService to indicate that a request is
+</span> unfulfillable.
+ @see #releaseRequestAsUnfulfillableByAnyFactory(NetworkRequest).
+*/
+EVENT_UNFULFILLABLE_REQUEST : &quot;536580&quot;,
+<span id='android-net-NetworkFactory-method-register'>/**
+</span>*/
+register : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-unregister'>/**
+</span>*/
+unregister : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-handleMessage'>/**
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-acceptRequest'>/**Overridable function to provide complex filtering.
+</span> Called for every request every time a new NetworkRequest is seen
+ and whenever the filterScore or filterNetworkCapabilities change.
+
+ acceptRequest can be overridden to provide complex filter behavior
+ for the incoming requests
+
+ For output, this class will call {@link #needNetworkFor} and
+ {@link #releaseNetworkFor} for every request that passes the filters.
+ If you don't need to see every request, you can leave the base
+ implementations of those two functions and instead override
+ {@link #startNetwork} and {@link #stopNetwork}.
+
+ If you want to see every score fluctuation on every request, set
+ your score filter to a very high number and watch {@link #needNetworkFor}.
+@return {Boolean} {@code true} to accept the request.
+*/
+acceptRequest : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-setScoreFilter'>/**
+</span>*/
+setScoreFilter : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-setCapabilityFilter'>/**
+</span>*/
+setCapabilityFilter : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-getSerialNumber'>/**
+</span>*/
+getSerialNumber : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-net-NetworkFactory-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

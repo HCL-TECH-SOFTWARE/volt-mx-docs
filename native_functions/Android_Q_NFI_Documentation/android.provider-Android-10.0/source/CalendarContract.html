@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-CalendarContract'>/**@class android.provider.CalendarContract
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ The contract between the calendar provider and applications. Contains
+ definitions for the supported URIs and data columns.
+ &lt;/p&gt;
+ &lt;h3&gt;Overview&lt;/h3&gt;
+ &lt;p&gt;
+ CalendarContract defines the data model of calendar and event related
+ information. This data is stored in a number of tables:
+ &lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;The {@link android.provider.CalendarContract.Calendars} table holds the calendar specific information. Each
+ row in this table contains the details for a single calendar, such as the
+ name, color, sync info, etc.&lt;/li&gt;
+ &lt;li&gt;The {@link android.provider.CommonDataKinds.Events} table holds the event specific information. Each row
+ in this table has the info for a single event. It contains information such
+ as event title, location, start time, end time, etc. The event can occur
+ one-time or can recur multiple times. Attendees, reminders, and extended
+ properties are stored on separate tables and reference the {@link android.provider.CommonDataKinds.Events#_ID}
+ to link them with the event.&lt;/li&gt;
+ &lt;li&gt;The {@link android.provider.CalendarContract.Instances} table holds the start and end time for occurrences
+ of an event. Each row in this table represents a single occurrence. For
+ one-time events there will be a 1:1 mapping of instances to events. For
+ recurring events, multiple rows will automatically be generated which
+ correspond to multiple occurrences of that event.&lt;/li&gt;
+ &lt;li&gt;The {@link android.provider.CalendarContract.Attendees} table holds the event attendee or guest
+ information. Each row represents a single guest of an event. It specifies the
+ type of guest they are and their attendance response for the event.&lt;/li&gt;
+ &lt;li&gt;The {@link android.provider.CalendarContract.Reminders} table holds the alert/notification data. Each row
+ represents a single alert for an event. An event can have multiple reminders.
+ The number of reminders per event is specified in
+ {@link android.provider.CalendarContract.Calendars#MAX_REMINDERS} which is set by the Sync Adapter that owns
+ the given calendar. Reminders are specified in minutes before the event and
+ have a type.&lt;/li&gt;
+ &lt;li&gt;The {@link android.provider.CalendarContract.ExtendedProperties} table holds opaque data fields used by the
+ sync adapter. The provider takes no action with items in this table except to
+ delete them when their related events are deleted.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Other tables include:
+ &lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;
+ {@link android.provider.BrowserContract.SyncState}, which contains free-form data maintained by the sync
+ adapters&lt;/li&gt;
+ &lt;/ul&gt;
+
+*/
+var CalendarContract = {
+
+<span id='android-provider-CalendarContract-property-ACTION_EVENT_REMINDER'>/** Broadcast Action: This is the intent that gets fired when an alarm
+</span> notification needs to be posted for a reminder.
+
+*/
+ACTION_EVENT_REMINDER : &quot;android.intent.action.EVENT_REMINDER&quot;,
+<span id='android-provider-CalendarContract-property-ACTION_HANDLE_CUSTOM_EVENT'>/** Activity Action: Display the event to the user in the custom app as
+</span> specified in {@link android.provider.CommonDataKinds.EventsColumns#CUSTOM_APP_PACKAGE}. The custom app
+ will be started via {@link Activity#startActivityForResult(Intent, int)}
+ and it should call {@link Activity#setResult(int)} with
+ {@link Activity#RESULT_OK} or {@link Activity#RESULT_CANCELED} to
+ acknowledge whether the action was handled or not.
+
+ The custom app should have an intent filter like the following:
+ &lt;pre&gt;
+ &amp;lt;intent-filter&amp;gt;
+    &amp;lt;action android:name=&quot;android.provider.calendar.action.HANDLE_CUSTOM_EVENT&quot; /&amp;gt;
+    &amp;lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&amp;gt;
+    &amp;lt;data android:mimeType=&quot;vnd.android.cursor.item/event&quot; /&amp;gt;
+ &amp;lt;/intent-filter&amp;gt;&lt;/pre&gt;
+ &lt;p&gt;
+ Input: {@link Intent#getData} has the event URI. The extra
+ {@link #EXTRA_EVENT_BEGIN_TIME} has the start time of the instance. The
+ extra {@link #EXTRA_CUSTOM_APP_URI} will have the
+ {@link android.provider.CommonDataKinds.EventsColumns#CUSTOM_APP_URI}.
+ &lt;p&gt;
+ Output: {@link Activity#RESULT_OK} if this was handled; otherwise
+ {@link Activity#RESULT_CANCELED}.
+*/
+ACTION_HANDLE_CUSTOM_EVENT : &quot;android.provider.calendar.action.HANDLE_CUSTOM_EVENT&quot;,
+<span id='android-provider-CalendarContract-property-ACTION_VIEW_MANAGED_PROFILE_CALENDAR_EVENT'>/** Action used to help apps show calendar events in the managed profile.
+</span>*/
+ACTION_VIEW_MANAGED_PROFILE_CALENDAR_EVENT : &quot;android.provider.calendar.action.VIEW_MANAGED_PROFILE_CALENDAR_EVENT&quot;,
+<span id='android-provider-CalendarContract-property-EXTRA_CUSTOM_APP_URI'>/** Intent Extras key: {@link android.provider.CommonDataKinds.EventsColumns#CUSTOM_APP_URI} for the event in
+</span> the {@link #ACTION_HANDLE_CUSTOM_EVENT} intent
+*/
+EXTRA_CUSTOM_APP_URI : &quot;customAppUri&quot;,
+<span id='android-provider-CalendarContract-property-EXTRA_EVENT_BEGIN_TIME'>/** Intent Extras key: The start time of an event or an instance of a
+</span> recurring event. (milliseconds since epoch)
+*/
+EXTRA_EVENT_BEGIN_TIME : &quot;beginTime&quot;,
+<span id='android-provider-CalendarContract-property-EXTRA_EVENT_END_TIME'>/** Intent Extras key: The end time of an event or an instance of a recurring
+</span> event. (milliseconds since epoch)
+*/
+EXTRA_EVENT_END_TIME : &quot;endTime&quot;,
+<span id='android-provider-CalendarContract-property-EXTRA_EVENT_ALL_DAY'>/** Intent Extras key: When creating an event, set this to true to create an
+</span> all-day event by default
+*/
+EXTRA_EVENT_ALL_DAY : &quot;allDay&quot;,
+<span id='android-provider-CalendarContract-property-EXTRA_EVENT_ID'>/** Intent Extras key: An extra of type {@code long} holding the id of an event.
+</span>*/
+EXTRA_EVENT_ID : &quot;id&quot;,
+<span id='android-provider-CalendarContract-property-AUTHORITY'>/** This authority is used for writing to or querying from the calendar
+</span> provider. Note: This is set at first run and cannot be changed without
+ breaking apps that access the provider.
+*/
+AUTHORITY : &quot;com.android.calendar&quot;,
+<span id='android-provider-CalendarContract-property-CONTENT_URI'>/** The content:// style URL for the top-level calendar authority
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-property-ENTERPRISE_CONTENT_URI'>/** The content:// style URL for the top-level cross-profile calendar uris.
+</span> {@link android.database.ContentObserver} for this URL in the primary profile will be
+ notified when there is a change in the managed profile calendar provider.
+
+ &lt;p&gt;Throw UnsupportedOperationException if another profile doesn't exist or is disabled, or
+ if the calling package is not whitelisted to access cross-profile calendar, or if the
+ feature has been disabled by the user in Settings.
+
+ @see Events#ENTERPRISE_CONTENT_URI
+ @see Calendars#ENTERPRISE_CONTENT_URI
+ @see Instances#ENTERPRISE_CONTENT_URI
+ @see Instances#ENTERPRISE_CONTENT_BY_DAY_URI
+ @see Instances#ENTERPRISE_CONTENT_SEARCH_URI
+ @see Instances#ENTERPRISE_CONTENT_SEARCH_BY_DAY_URI
+ @hide
+*/
+ENTERPRISE_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-property-CALLER_IS_SYNCADAPTER'>/** An optional insert, update or delete URI parameter that allows the caller
+</span> to specify that it is a sync adapter. The default value is false. If set
+ to true, the modified row is not marked as &quot;dirty&quot; (needs to be synced)
+ and when the provider calls
+ {@link ContentResolver#notifyChange(android.net.Uri, android.database.ContentObserver, boolean)}
+ , the third parameter &quot;syncToNetwork&quot; is set to false. Furthermore, if
+ set to true, the caller must also include
+ {@link android.provider.CalendarContract.Calendars#ACCOUNT_NAME} and {@link android.provider.CalendarContract.Calendars#ACCOUNT_TYPE} as
+ query parameters.
+
+ @see Uri.Builder#appendQueryParameter(java.lang.String, java.lang.String)
+*/
+CALLER_IS_SYNCADAPTER : &quot;caller_is_syncadapter&quot;,
+<span id='android-provider-CalendarContract-property-ACCOUNT_TYPE_LOCAL'>/** A special account type for calendars not associated with any account.
+</span> Normally calendars that do not match an account on the device will be
+ removed. Setting the account_type on a calendar to this will prevent it
+ from being wiped if it does not match an existing account.
+
+ @see SyncColumns#ACCOUNT_TYPE
+*/
+ACCOUNT_TYPE_LOCAL : &quot;LOCAL&quot;,
+<span id='android-provider-CalendarContract-method-startViewCalendarEventInManagedProfile'>/**Starts an activity to view calendar events in the managed profile.
+</span>
+ When this API is called, the system will attempt to start an activity
+ in the managed profile with an intent targeting the same caller package.
+ The intent will have its action set to
+ {@link android.provider.CalendarContract#ACTION_VIEW_MANAGED_PROFILE_CALENDAR_EVENT} and contain extras
+ corresponding to the API's arguments. A calendar app intending to support
+ cross-profile events viewing should handle this intent, parse the arguments
+ and show the appropriate UI.
+@param {Object {Context}} context the context.
+@param {Number} eventId the id of the event to be viewed. Will be put into {@link #EXTRA_EVENT_ID}
+                field of the intent.
+@param {Number} startMs the start time of the event in milliseconds since epoch.
+                Will be put into {@link #EXTRA_EVENT_BEGIN_TIME} field of the intent.
+@param {Number} endMs the end time of the event in milliseconds since epoch.
+              Will be put into {@link #EXTRA_EVENT_END_TIME} field of the intent.
+@param {Boolean} allDay if the event is an all-day event. Will be put into
+               {@link #EXTRA_EVENT_ALL_DAY} field of the intent.
+@param {Number} flags flags to be set on the intent via {@link Intent#setFlags}
+@return {Boolean} {@code true} if the activity is started successfully. {@code false} otherwise.
+@see #EXTRA_EVENT_ID
+@see #EXTRA_EVENT_BEGIN_TIME
+@see #EXTRA_EVENT_END_TIME
+@see #EXTRA_EVENT_ALL_DAY
+*/
+startViewCalendarEventInManagedProfile : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

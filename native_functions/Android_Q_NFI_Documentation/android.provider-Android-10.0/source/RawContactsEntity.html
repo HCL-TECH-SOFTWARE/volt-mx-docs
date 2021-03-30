@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-RawContactsEntity'>/**@class android.provider.ContactsContract.RawContactsEntity
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.ContactsContract.DataColumns
+
+ implements android.provider.ContactsContract.RawContactsColumns
+
+@extends java.lang.Object
+
+ &lt;p&gt;
+ Constants for the raw contacts entities table, which can be thought of as
+ an outer join of the raw_contacts table with the data table.  It is a strictly
+ read-only table.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If a raw contact has data rows, the RawContactsEntity cursor will contain
+ a one row for each data row. If the raw contact has no data rows, the
+ cursor will still contain one row with the raw contact-level information
+ and nulls for data columns.
+
+ &lt;pre&gt;
+ Uri entityUri = ContentUris.withAppendedId(RawContactsEntity.CONTENT_URI, rawContactId);
+ Cursor c = getContentResolver().query(entityUri,
+          new String[]{
+              RawContactsEntity.SOURCE_ID,
+              RawContactsEntity.DATA_ID,
+              RawContactsEntity.MIMETYPE,
+              RawContactsEntity.DATA1
+          }, null, null, null);
+ try {
+     while (c.moveToNext()) {
+         String sourceId = c.getString(0);
+         if (!c.isNull(1)) {
+             String mimeType = c.getString(2);
+             String data = c.getString(3);
+             ...
+         }
+     }
+ } finally {
+     c.close();
+ }
+ &lt;/pre&gt;
+
+ &lt;h3&gt;Columns&lt;/h3&gt;
+ RawContactsEntity has a combination of RawContact and Data columns.
+
+ &lt;table class=&quot;jd-sumtable&quot;&gt;
+ &lt;tr&gt;
+ &lt;th colspan='4'&gt;RawContacts&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style=&quot;width: 7em;&quot;&gt;long&lt;/td&gt;
+ &lt;td style=&quot;width: 20em;&quot;&gt;{@link #_ID}&lt;/td&gt;
+ &lt;td style=&quot;width: 5em;&quot;&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Raw contact row ID. See {@link android.provider.ContactsContract.RawContacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #CONTACT_ID}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.RawContacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #AGGREGATION_MODE}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.RawContacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #DELETED}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.RawContacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+
+ &lt;table class=&quot;jd-sumtable&quot;&gt;
+ &lt;tr&gt;
+ &lt;th colspan='4'&gt;Data&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style=&quot;width: 7em;&quot;&gt;long&lt;/td&gt;
+ &lt;td style=&quot;width: 20em;&quot;&gt;{@link #DATA_ID}&lt;/td&gt;
+ &lt;td style=&quot;width: 5em;&quot;&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Data row ID. It will be null if the raw contact has no data rows.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #MIMETYPE}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Data}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #IS_PRIMARY}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Data}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #IS_SUPER_PRIMARY}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Data}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #DATA_VERSION}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Data}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Any type&lt;/td&gt;
+ &lt;td&gt;
+ {@link #DATA1}&lt;br&gt;
+ {@link #DATA2}&lt;br&gt;
+ {@link #DATA3}&lt;br&gt;
+ {@link #DATA4}&lt;br&gt;
+ {@link #DATA5}&lt;br&gt;
+ {@link #DATA6}&lt;br&gt;
+ {@link #DATA7}&lt;br&gt;
+ {@link #DATA8}&lt;br&gt;
+ {@link #DATA9}&lt;br&gt;
+ {@link #DATA10}&lt;br&gt;
+ {@link #DATA11}&lt;br&gt;
+ {@link #DATA12}&lt;br&gt;
+ {@link #DATA13}&lt;br&gt;
+ {@link #DATA14}&lt;br&gt;
+ {@link #DATA15}
+ &lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Data}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Any type&lt;/td&gt;
+ &lt;td&gt;
+ {@link #SYNC1}&lt;br&gt;
+ {@link #SYNC2}&lt;br&gt;
+ {@link #SYNC3}&lt;br&gt;
+ {@link #SYNC4}
+ &lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Data}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+var RawContactsEntity = {
+
+<span id='android-provider-ContactsContract-RawContactsEntity-property-CONTENT_URI'>/** The content:// style URI for this table
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-RawContactsEntity-property-CORP_CONTENT_URI'>/** The content:// style URI for this table in corp profile
+</span>
+ @hide
+*/
+CORP_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-RawContactsEntity-property-PROFILE_CONTENT_URI'>/** The content:// style URI for this table, specific to the user's profile.
+</span>*/
+PROFILE_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-RawContactsEntity-property-CONTENT_TYPE'>/** The MIME type of {@link #CONTENT_URI} providing a directory of raw contact entities.
+</span>*/
+CONTENT_TYPE : &quot;vnd.android.cursor.dir/raw_contact_entity&quot;,
+<span id='android-provider-ContactsContract-RawContactsEntity-property-FOR_EXPORT_ONLY'>/** If {@link #FOR_EXPORT_ONLY} is explicitly set to &quot;1&quot;, returned Cursor toward
+</span> Data.CONTENT_URI contains only exportable data.
+
+ This flag is useful (currently) only for vCard exporter in Contacts app, which
+ needs to exclude &quot;un-exportable&quot; data from available data to export, while
+ Contacts app itself has priviledge to access all data including &quot;un-expotable&quot;
+ ones and providers return all of them regardless of the callers' intention.
+ &lt;P&gt;Type: INTEGER&lt;/p&gt;
+
+ @hide Maybe available only in Eclair and not really ready for public use.
+ TODO: remove, or implement this feature completely. As of now (Eclair),
+ we only use this flag in queryEntities(), not query().
+*/
+FOR_EXPORT_ONLY : &quot;for_export_only&quot;,
+<span id='android-provider-ContactsContract-RawContactsEntity-property-DATA_ID'>/** The ID of the data column. The value will be null if this raw contact has no data rows.
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+DATA_ID : &quot;data_id&quot;,
+
+};</pre>
+</body>
+</html>

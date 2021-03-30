@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-inputmethodservice-AbstractInputMethodService'>/**@class android.inputmethodservice.AbstractInputMethodService
+</span> implements android.view.KeyEvent.Callback
+
+@extends android.app.Service
+
+ AbstractInputMethodService provides a abstract base class for input methods.
+ Normal input method implementations will not derive from this directly,
+ instead building on top of {@link android.inputmethodservice.InputMethodService} or another more
+ complete base class.  Be sure to read {@link InputMethod} for more
+ information on the basics of writing input methods.
+ 
+ &lt;p&gt;This class combines a Service (representing the input method component
+ to the system with the InputMethod interface that input methods must
+ implement.  This base class takes care of reporting your InputMethod from
+ the service when clients bind to it, but provides no standard implementation
+ of the InputMethod interface itself.  Derived classes must implement that
+ interface.
+*/
+var AbstractInputMethodService = {
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-getKeyDispatcherState'>/**Return the global {@link android.inputmethodservice.Keyboard.KeyEvent.DispatcherState android.inputmethodservice.Keyboard.KeyEvent.DispatcherState}
+</span> for used for processing events from the target application.
+ Normally you will not need to use this directly, but
+ just use the standard high-level event callbacks like {@link #onKeyDown}.
+*/
+getKeyDispatcherState : function(  ) {},
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-onCreateInputMethodInterface'>/**Called by the framework during initialization, when the InputMethod
+</span> interface for this service needs to be created.
+*/
+onCreateInputMethodInterface : function(  ) {},
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-onCreateInputMethodSessionInterface'>/**Called by the framework when a new InputMethodSession interface is
+</span> needed for a new client of the input method.
+*/
+onCreateInputMethodSessionInterface : function(  ) {},
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-onTrackballEvent'>/**Implement this to handle trackball events on your input method.
+</span>@param {Object {MotionEvent}} event The motion event being received.
+@return {Boolean} True if the event was handled in this function, false otherwise.
+@see android.view.View#onTrackballEvent(MotionEvent)
+*/
+onTrackballEvent : function(  ) {},
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-onGenericMotionEvent'>/**Implement this to handle generic motion events on your input method.
+</span>@param {Object {MotionEvent}} event The motion event being received.
+@return {Boolean} True if the event was handled in this function, false otherwise.
+@see android.view.View#onGenericMotionEvent(MotionEvent)
+*/
+onGenericMotionEvent : function(  ) {},
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-exposeContent'>/**Allow the receiver of {@link InputContentInfo} to obtain a temporary read-only access
+</span> permission to the content.
+
+ &lt;p&gt;Default implementation does nothing.&lt;/p&gt;
+@param {Object {InputContentInfo}} inputContentInfo Content to be temporarily exposed from the input method to the
+ application.
+ This cannot be {@code null}.
+@param {Object {InputConnection}} inputConnection {@link InputConnection} with which
+ {@link InputConnection#commitContent(InputContentInfo, int, android.os.Bundle)} will be
+ called.
+@return {Object {void}} {@code false} if we cannot allow a temporary access permission.
+@hide 
+*/
+exposeContent : function(  ) {},
+
+<span id='android-inputmethodservice-AbstractInputMethodService-method-notifyUserActionIfNecessary'>/**Called when the user took some actions that should be taken into consideration to update the
+</span> MRU list for input method rotation.
+@hide 
+*/
+notifyUserActionIfNecessary : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

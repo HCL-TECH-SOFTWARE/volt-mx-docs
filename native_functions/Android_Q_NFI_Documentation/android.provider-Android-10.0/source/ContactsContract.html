@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract'>/**@class android.provider.ContactsContract
+</span>@extends java.lang.Object
+
+ &lt;p&gt;
+ The contract between the contacts provider and applications. Contains
+ definitions for the supported URIs and columns. These APIs supersede
+ {@link android.provider.Contacts}.
+ &lt;/p&gt;
+ &lt;h3&gt;Overview&lt;/h3&gt;
+ &lt;p&gt;
+ ContactsContract defines an extensible database of contact-related
+ information. Contact information is stored in a three-tier data model:
+ &lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;
+ A row in the {@link android.provider.ContactsContract.Data} table can store any kind of personal data, such
+ as a phone number or email addresses.  The set of data kinds that can be
+ stored in this table is open-ended. There is a predefined set of common
+ kinds, but any application can add its own data kinds.
+ &lt;/li&gt;
+ &lt;li&gt;
+ A row in the {@link android.provider.ContactsContract.RawContacts} table represents a set of data describing a
+ person and associated with a single account (for example, one of the user's
+ Gmail accounts).
+ &lt;/li&gt;
+ &lt;li&gt;
+ A row in the {@link android.provider.Contacts} table represents an aggregate of one or more
+ RawContacts presumably describing the same person.  When data in or associated with
+ the RawContacts table is changed, the affected aggregate contacts are updated as
+ necessary.
+ &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Other tables include:
+ &lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;
+ {@link android.provider.Contacts.Groups}, which contains information about raw contact groups
+ such as Gmail contact groups.  The
+ current API does not support the notion of groups spanning multiple accounts.
+ &lt;/li&gt;
+ &lt;li&gt;
+ {@link android.provider.VoicemailContract.StatusUpdates}, which contains social status updates including IM
+ availability.
+ &lt;/li&gt;
+ &lt;li&gt;
+ {@link android.provider.ContactsContract.AggregationExceptions}, which is used for manual aggregation and
+ disaggregation of raw contacts
+ &lt;/li&gt;
+ &lt;li&gt;
+ {@link android.provider.BrowserContract.Settings}, which contains visibility and sync settings for accounts
+ and groups.
+ &lt;/li&gt;
+ &lt;li&gt;
+ {@link android.provider.BrowserContract.SyncState}, which contains free-form data maintained on behalf of sync
+ adapters
+ &lt;/li&gt;
+ &lt;li&gt;
+ {@link android.provider.ContactsContract.PhoneLookup}, which is used for quick caller-ID lookup&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var ContactsContract = {
+
+<span id='android-provider-ContactsContract-property-AUTHORITY'>/**The authority for the contacts provider */
+</span>AUTHORITY : &quot;com.android.contacts&quot;,
+<span id='android-provider-ContactsContract-property-AUTHORITY_URI'>/**A content:// style uri to the authority for the contacts provider */
+</span>AUTHORITY_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-property-HIDDEN_COLUMN_PREFIX'>/** Prefix for column names that are not visible to client apps.
+</span> @hide
+*/
+HIDDEN_COLUMN_PREFIX : &quot;x_&quot;,
+<span id='android-provider-ContactsContract-property-CALLER_IS_SYNCADAPTER'>/** An optional URI parameter for insert, update, or delete queries
+</span> that allows the caller
+ to specify that it is a sync adapter. The default value is false. If true
+ {@link android.provider.ContactsContract.RawContacts#DIRTY} is not automatically set and the
+ &quot;syncToNetwork&quot; parameter is set to false when calling
+ {@link ContentResolver#notifyChange(android.net.Uri, android.database.ContentObserver, boolean)}.
+ This prevents an unnecessary extra synchronization, see the discussion of
+ the delete operation in {@link android.provider.ContactsContract.RawContacts}.
+*/
+CALLER_IS_SYNCADAPTER : &quot;caller_is_syncadapter&quot;,
+<span id='android-provider-ContactsContract-property-DIRECTORY_PARAM_KEY'>/** Query parameter that should be used by the client to access a specific
+</span> {@link android.provider.ContactsContract.Directory}. The parameter value should be the _ID of the corresponding
+ directory, e.g.
+ {@code content://com.android.contacts/data/emails/filter/acme?directory=3}
+*/
+DIRECTORY_PARAM_KEY : &quot;directory&quot;,
+<span id='android-provider-ContactsContract-property-LIMIT_PARAM_KEY'>/** A query parameter that limits the number of results returned for supported URIs. The
+</span> parameter value should be an integer.
+
+ &lt;p&gt;This parameter is not supported by all URIs.  Supported URIs include, but not limited to,
+ {@link android.provider.Contacts#CONTENT_URI},
+ {@link android.provider.ContactsContract.RawContacts#CONTENT_URI},
+ {@link android.provider.ContactsContract.Data#CONTENT_URI},
+ {@link android.provider.ContactsContract.CommonDataKinds.Phone#CONTENT_URI},
+ {@link android.provider.ContactsContract.CommonDataKinds.Callable#CONTENT_URI},
+ {@link android.provider.ContactsContract.CommonDataKinds.Email#CONTENT_URI},
+ {@link android.provider.ContactsContract.CommonDataKinds.Contactables#CONTENT_URI},
+
+ &lt;p&gt;In order to limit the number of rows returned by a non-supported URI, you can implement a
+ {@link CursorWrapper} and override the {@link CursorWrapper#getCount()} methods.
+*/
+LIMIT_PARAM_KEY : &quot;limit&quot;,
+<span id='android-provider-ContactsContract-property-PRIMARY_ACCOUNT_NAME'>/** A query parameter specifing a primary account. This parameter should be used with
+</span> {@link #PRIMARY_ACCOUNT_TYPE}. The contacts provider handling a query may rely on
+ this information to optimize its query results.
+
+ For example, in an email composition screen, its implementation can specify an account when
+ obtaining possible recipients, letting the provider know which account is selected during
+ the composition. The provider may use the &quot;primary account&quot; information to optimize
+ the search result.
+*/
+PRIMARY_ACCOUNT_NAME : &quot;name_for_primary_account&quot;,
+<span id='android-provider-ContactsContract-property-PRIMARY_ACCOUNT_TYPE'>/** A query parameter specifing a primary account. This parameter should be used with
+</span> {@link #PRIMARY_ACCOUNT_NAME}. See the doc in {@link #PRIMARY_ACCOUNT_NAME}.
+*/
+PRIMARY_ACCOUNT_TYPE : &quot;type_for_primary_account&quot;,
+<span id='android-provider-ContactsContract-property-STREQUENT_PHONE_ONLY'>/** A boolean parameter for {@link android.provider.Contacts#CONTENT_STREQUENT_URI} and
+</span> {@link android.provider.Contacts#CONTENT_STREQUENT_FILTER_URI}, which requires the ContactsProvider to
+ return only phone-related results.
+*/
+STREQUENT_PHONE_ONLY : &quot;strequent_phone_only&quot;,
+<span id='android-provider-ContactsContract-property-DEFERRED_SNIPPETING'>/** A key to a boolean in the &quot;extras&quot; bundle of the cursor.
+</span> The boolean indicates that the provider did not create a snippet and that the client asking
+ for the snippet should do it (true means the snippeting was deferred to the client).
+
+ @see SearchSnippets
+*/
+DEFERRED_SNIPPETING : &quot;deferred_snippeting&quot;,
+<span id='android-provider-ContactsContract-property-DEFERRED_SNIPPETING_QUERY'>/** Key to retrieve the original deferred snippeting from the cursor on the client side.
+</span>
+ @see SearchSnippets
+ @see #DEFERRED_SNIPPETING
+*/
+DEFERRED_SNIPPETING_QUERY : &quot;deferred_snippeting_query&quot;,
+<span id='android-provider-ContactsContract-property-REMOVE_DUPLICATE_ENTRIES'>/** A boolean parameter for {@link android.provider.ContactsContract.CommonDataKinds.android.provider.CommonDataKinds.Phone#CONTENT_URI android.provider.CommonDataKinds.Phone.CONTENT_URI},
+</span> {@link android.provider.ContactsContract.CommonDataKinds.android.provider.android.provider.ContactsContract.CommonDataKinds.Email#CONTENT_URI android.provider.android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_URI}, and
+ {@link android.provider.ContactsContract.CommonDataKinds.android.provider.CommonDataKinds.StructuredPostal#CONTENT_URI android.provider.CommonDataKinds.StructuredPostal.CONTENT_URI}.
+ This enables a content provider to remove duplicate entries in results.
+*/
+REMOVE_DUPLICATE_ENTRIES : &quot;remove_duplicate_entries&quot;,
+<span id='android-provider-ContactsContract-method-isProfileId'>/**This method can be used to identify whether the given ID is associated with profile
+</span> data.  It does not necessarily indicate that the ID is tied to valid data, merely
+ that accessing data using this ID will result in profile access checks and will only
+ return data from the profile.
+@param {Number} id The ID to check.
+@return {Boolean} Whether the ID is associated with profile data.
+*/
+isProfileId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

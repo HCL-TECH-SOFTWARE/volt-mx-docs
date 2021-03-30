@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ims-ImsManager'>/**@class com.android.ims.ImsManager
+</span>@extends java.lang.Object
+
+ Provides APIs for IMS services, such as initiating IMS calls, and provides access to
+ the operator's IMS network. This class is the starting point for any IMS actions.
+ You can acquire an instance of it with {@link #getInstance getInstance()}.&lt;/p&gt;
+ For internal use ONLY! Use {@link ImsMmTelManager} instead.
+ @hide
+*/
+var ImsManager = {
+
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_VOLTE_AVAIL_OVERRIDE'>/***/
+</span>PROPERTY_DBG_VOLTE_AVAIL_OVERRIDE : &quot;persist.dbg.volte_avail_ovr&quot;,
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_VOLTE_AVAIL_OVERRIDE_DEFAULT'>/***/
+</span>PROPERTY_DBG_VOLTE_AVAIL_OVERRIDE_DEFAULT : &quot;0&quot;,
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_VT_AVAIL_OVERRIDE'>/***/
+</span>PROPERTY_DBG_VT_AVAIL_OVERRIDE : &quot;persist.dbg.vt_avail_ovr&quot;,
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_VT_AVAIL_OVERRIDE_DEFAULT'>/***/
+</span>PROPERTY_DBG_VT_AVAIL_OVERRIDE_DEFAULT : &quot;0&quot;,
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_WFC_AVAIL_OVERRIDE'>/***/
+</span>PROPERTY_DBG_WFC_AVAIL_OVERRIDE : &quot;persist.dbg.wfc_avail_ovr&quot;,
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_WFC_AVAIL_OVERRIDE_DEFAULT'>/***/
+</span>PROPERTY_DBG_WFC_AVAIL_OVERRIDE_DEFAULT : &quot;0&quot;,
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_ALLOW_IMS_OFF_OVERRIDE'>/***/
+</span>PROPERTY_DBG_ALLOW_IMS_OFF_OVERRIDE : &quot;persist.dbg.allow_ims_off&quot;,
+<span id='com-android-ims-ImsManager-property-PROPERTY_DBG_ALLOW_IMS_OFF_OVERRIDE_DEFAULT'>/***/
+</span>PROPERTY_DBG_ALLOW_IMS_OFF_OVERRIDE_DEFAULT : &quot;0&quot;,
+<span id='com-android-ims-ImsManager-property-INCOMING_CALL_RESULT_CODE'>/** The result code to be sent back with the incoming call {@link PendingIntent}.
+</span> @see #open(MmTelFeature.Listener)
+*/
+INCOMING_CALL_RESULT_CODE : &quot;101&quot;,
+<span id='com-android-ims-ImsManager-property-EXTRA_CALL_ID'>/** Key to retrieve the call ID from an incoming call intent.
+</span> @see #open(MmTelFeature.Listener)
+*/
+EXTRA_CALL_ID : &quot;android:imsCallID&quot;,
+<span id='com-android-ims-ImsManager-property-ACTION_IMS_SERVICE_UP'>/** Action to broadcast when ImsService is up.
+</span> Internal use only.
+ @deprecated
+ @hide
+*/
+ACTION_IMS_SERVICE_UP : &quot;com.android.ims.IMS_SERVICE_UP&quot;,
+<span id='com-android-ims-ImsManager-property-ACTION_IMS_SERVICE_DOWN'>/** Action to broadcast when ImsService is down.
+</span> Internal use only.
+ @deprecated
+ @hide
+*/
+ACTION_IMS_SERVICE_DOWN : &quot;com.android.ims.IMS_SERVICE_DOWN&quot;,
+<span id='com-android-ims-ImsManager-property-ACTION_IMS_REGISTRATION_ERROR'>/** Action to broadcast when ImsService registration fails.
+</span> Internal use only.
+ @hide
+*/
+ACTION_IMS_REGISTRATION_ERROR : &quot;com.android.ims.REGISTRATION_ERROR&quot;,
+<span id='com-android-ims-ImsManager-property-EXTRA_PHONE_ID'>/** Part of the ACTION_IMS_SERVICE_UP or _DOWN intents.
+</span> A long value; the phone ID corresponding to the IMS service coming up or down.
+ Internal use only.
+ @hide
+*/
+EXTRA_PHONE_ID : &quot;android:phone_id&quot;,
+<span id='com-android-ims-ImsManager-property-ACTION_IMS_INCOMING_CALL'>/** Action for the incoming call intent for the Phone app.
+</span> Internal use only.
+ @hide
+*/
+ACTION_IMS_INCOMING_CALL : &quot;com.android.ims.IMS_INCOMING_CALL&quot;,
+<span id='com-android-ims-ImsManager-property-EXTRA_SERVICE_ID'>/** Part of the ACTION_IMS_INCOMING_CALL intents.
+</span> An integer value; service identifier obtained from {@link com.android.ims.ImsManager#open}.
+ Internal use only.
+ @hide
+*/
+EXTRA_SERVICE_ID : &quot;android:imsServiceId&quot;,
+<span id='com-android-ims-ImsManager-property-EXTRA_USSD'>/** Part of the ACTION_IMS_INCOMING_CALL intents.
+</span> An boolean value; Flag to indicate that the incoming call is a normal call or call for USSD.
+ The value &quot;true&quot; indicates that the incoming call is for USSD.
+ Internal use only.
+ @hide
+*/
+EXTRA_USSD : &quot;android:ussd&quot;,
+<span id='com-android-ims-ImsManager-property-EXTRA_IS_UNKNOWN_CALL'>/** Part of the ACTION_IMS_INCOMING_CALL intents.
+</span> A boolean value; Flag to indicate whether the call is an unknown
+ dialing call. Such calls are originated by sending commands (like
+ AT commands) directly to modem without Android involvement.
+ Even though they are not incoming calls, they are propagated
+ to Phone app using same ACTION_IMS_INCOMING_CALL intent.
+ Internal use only.
+ @hide
+*/
+EXTRA_IS_UNKNOWN_CALL : &quot;android:isUnknown&quot;,
+<span id='com-android-ims-ImsManager-property-mExecutorFactory'>/***/
+</span>mExecutorFactory : &quot;null&quot;,
+<span id='com-android-ims-ImsManager-property-TRUE'>/***/
+</span>TRUE : &quot;true&quot;,
+<span id='com-android-ims-ImsManager-property-FALSE'>/***/
+</span>FALSE : &quot;false&quot;,
+<span id='com-android-ims-ImsManager-method-getInstance'>/**Gets a manager instance.
+</span>@param {Object {Context}} context application context for creating the manager object
+@param {Number} phoneId the phone ID for the IMS Service
+@return {Object {com.android.ims.ImsManager}} the manager instance corresponding to the phoneId
+*/
+getInstance : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isImsSupportedOnDevice'>/**
+</span>*/
+isImsSupportedOnDevice : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isEnhanced4gLteModeSettingEnabledByUser'>/**Returns the user configuration of Enhanced 4G LTE Mode setting.
+</span>@deprecated Doesn't support MSIM devices. Use
+ {@link #isEnhanced4gLteModeSettingEnabledByUser()} instead.
+*/
+isEnhanced4gLteModeSettingEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isEnhanced4gLteModeSettingEnabledByUser'>/**Returns the user configuration of Enhanced 4G LTE Mode setting for slot. If the option is
+</span> not editable ({@link CarrierConfigManager#KEY_EDITABLE_ENHANCED_4G_LTE_BOOL} is false),
+ hidden ({@link CarrierConfigManager#KEY_HIDE_ENHANCED_4G_LTE_BOOL} is true), or
+ the setting is not initialized, this method will return default value specified by
+ {@link CarrierConfigManager#KEY_ENHANCED_4G_LTE_ON_BY_DEFAULT_BOOL}.
+
+ Note that even if the setting was set, it may no longer be editable. If this is the case we
+ return the default value.
+*/
+isEnhanced4gLteModeSettingEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setEnhanced4gLteModeSetting'>/**Change persistent Enhanced 4G LTE Mode setting.
+</span>@deprecated Doesn't support MSIM devices. Use {@link #setEnhanced4gLteModeSetting(boolean)}
+ instead.
+*/
+setEnhanced4gLteModeSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setEnhanced4gLteModeSetting'>/**Change persistent Enhanced 4G LTE Mode setting. If the option is not editable
+</span> ({@link CarrierConfigManager#KEY_EDITABLE_ENHANCED_4G_LTE_BOOL} is false)
+ or hidden ({@link CarrierConfigManager#KEY_HIDE_ENHANCED_4G_LTE_BOOL} is true),
+ this method will set the setting to the default value specified by
+ {@link CarrierConfigManager#KEY_ENHANCED_4G_LTE_ON_BY_DEFAULT_BOOL}.
+*/
+setEnhanced4gLteModeSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isNonTtyOrTtyOnVolteEnabled'>/**Indicates whether the call is non-TTY or if TTY - whether TTY on VoLTE is
+</span> supported.
+@deprecated Does not support MSIM devices. Please use
+ {@link #isNonTtyOrTtyOnVolteEnabled()} instead.
+*/
+isNonTtyOrTtyOnVolteEnabled : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isNonTtyOrTtyOnVolteEnabled'>/**Indicates whether the call is non-TTY or if TTY - whether TTY on VoLTE is
+</span> supported on a per slot basis.
+*/
+isNonTtyOrTtyOnVolteEnabled : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isTtyOnVoLteCapable'>/**
+</span>*/
+isTtyOnVoLteCapable : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVolteEnabledByPlatform'>/**Returns a platform configuration for VoLTE which may override the user setting.
+</span>@deprecated Does not support MSIM devices. Please use
+ {@link #isVolteEnabledByPlatform()} instead.
+*/
+isVolteEnabledByPlatform : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVolteEnabledByPlatform'>/**Returns a platform configuration for VoLTE which may override the user setting on a per Slot
+</span> basis.
+*/
+isVolteEnabledByPlatform : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVolteProvisionedOnDevice'>/**Indicates whether VoLTE is provisioned on device.
+</span>@deprecated Does not support MSIM devices. Please use
+ {@link #isVolteProvisionedOnDevice()} instead.
+*/
+isVolteProvisionedOnDevice : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVolteProvisionedOnDevice'>/**Indicates whether VoLTE is provisioned on this slot.
+</span>*/
+isVolteProvisionedOnDevice : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcProvisionedOnDevice'>/**Indicates whether VoWifi is provisioned on device.
+</span>
+ When CarrierConfig KEY_CARRIER_VOLTE_OVERRIDE_WFC_PROVISIONING_BOOL is true, and VoLTE is not
+ provisioned on device, this method returns false.
+@deprecated Does not support MSIM devices. Please use
+ {@link #isWfcProvisionedOnDevice()} instead.
+*/
+isWfcProvisionedOnDevice : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcProvisionedOnDevice'>/**Indicates whether VoWifi is provisioned on slot.
+</span>
+ When CarrierConfig KEY_CARRIER_VOLTE_OVERRIDE_WFC_PROVISIONING_BOOL is true, and VoLTE is not
+ provisioned on device, this method returns false.
+*/
+isWfcProvisionedOnDevice : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVtProvisionedOnDevice'>/**Indicates whether VT is provisioned on device
+</span>@deprecated Does not support MSIM devices. Please use
+ {@link #isVtProvisionedOnDevice()} instead.
+*/
+isVtProvisionedOnDevice : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVtProvisionedOnDevice'>/**Indicates whether VT is provisioned on slot.
+</span>*/
+isVtProvisionedOnDevice : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVtEnabledByPlatform'>/**Returns a platform configuration for VT which may override the user setting.
+</span>
+ Note: VT presumes that VoLTE is enabled (these are configuration settings
+ which must be done correctly).
+@deprecated Does not support MSIM devices. Please use
+ {@link #isVtEnabledByPlatform()} instead.
+*/
+isVtEnabledByPlatform : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVtEnabledByPlatform'>/**Returns a platform configuration for VT which may override the user setting.
+</span>
+ Note: VT presumes that VoLTE is enabled (these are configuration settings
+ which must be done correctly).
+*/
+isVtEnabledByPlatform : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVtEnabledByUser'>/**Returns the user configuration of VT setting
+</span>@deprecated Does not support MSIM devices. Please use
+ {@link #isVtEnabledByUser()} instead.
+*/
+isVtEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isVtEnabledByUser'>/**Returns the user configuration of VT setting per slot. If not set, it
+</span> returns true as default value.
+*/
+isVtEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setVtSetting'>/**Change persistent VT enabled setting
+</span>@deprecated Does not support MSIM devices. Please use {@link #setVtSetting(boolean)} instead.
+*/
+setVtSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setVtSetting'>/**Change persistent VT enabled setting for slot.
+</span>*/
+setVtSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcEnabledByUser'>/**Returns the user configuration of WFC setting
+</span>@deprecated Does not support MSIM devices. Please use
+ {@link #isWfcEnabledByUser()} instead.
+*/
+isWfcEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcEnabledByUser'>/**Returns the user configuration of WFC setting for slot. If not set, it
+</span> queries CarrierConfig value as default.
+*/
+isWfcEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcSetting'>/**Change persistent WFC enabled setting.
+</span>@deprecated Does not support MSIM devices. Please use
+ {@link #setWfcSetting} instead.
+*/
+setWfcSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcSetting'>/**Change persistent WFC enabled setting for slot.
+</span>*/
+setWfcSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcNonPersistent'>/**Non-persistently change WFC enabled setting and WFC mode for slot
+</span>@param {Boolean} enabled If true, WFC and WFC while roaming will be enabled for the associated
+                subscription, if supported by the carrier. If false, WFC will be disabled for
+                the associated subscription.
+@param {Number} wfcMode The WFC preference if WFC is enabled
+*/
+setWfcNonPersistent : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getWfcMode'>/**Returns the user configuration of WFC preference setting.
+</span>@deprecated Doesn't support MSIM devices. Use {@link #getWfcMode(boolean roaming)} instead.
+*/
+getWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getWfcMode'>/**Returns the user configuration of WFC preference setting
+</span>@deprecated. Use {@link #getWfcMode(boolean roaming)} instead.
+*/
+getWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcMode'>/**Change persistent WFC preference setting.
+</span>@deprecated Doesn't support MSIM devices. Use {@link #setWfcMode(int)} instead.
+*/
+setWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcMode'>/**Change persistent WFC preference setting for slot when not roaming.
+</span>@deprecated Use {@link #setWfcMode(int, boolean)} instead.
+*/
+setWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getWfcMode'>/**Returns the user configuration of WFC preference setting
+</span>@param {Object {Context}} roaming {@code false} for home network setting, {@code true} for roaming  setting
+@deprecated Doesn't support MSIM devices. Use {@link #getWfcMode(boolean)} instead.
+*/
+getWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getWfcMode'>/**Returns the user configuration of WFC preference setting for slot. If not set, it
+</span> queries CarrierConfig value as default.
+@param {Boolean} roaming {@code false} for home network setting, {@code true} for roaming  setting
+*/
+getWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcMode'>/**Change persistent WFC preference setting
+</span>@param {Object {Context}} roaming {@code false} for home network setting, {@code true} for roaming setting
+@deprecated Doesn't support MSIM devices. Please use {@link #setWfcMode(int, boolean)}
+ instead.
+*/
+setWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcMode'>/**Change persistent WFC preference setting
+</span>@param {Number} roaming {@code false} for home network setting, {@code true} for roaming setting
+*/
+setWfcMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcRoamingEnabledByUser'>/**Returns the user configuration of WFC roaming setting
+</span>@deprecated Does not support MSIM devices. Please use
+ {@link #isWfcRoamingEnabledByUser()} instead.
+*/
+isWfcRoamingEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcRoamingEnabledByUser'>/**Returns the user configuration of WFC roaming setting for slot. If not set, it
+</span> queries CarrierConfig value as default.
+*/
+isWfcRoamingEnabledByUser : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcRoamingSetting'>/**Change persistent WFC roaming enabled setting
+</span>*/
+setWfcRoamingSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcRoamingSetting'>/**Change persistent WFC roaming enabled setting
+</span>*/
+setWfcRoamingSetting : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcEnabledByPlatform'>/**Returns a platform configuration for WFC which may override the user
+</span> setting. Note: WFC presumes that VoLTE is enabled (these are
+ configuration settings which must be done correctly).
+@deprecated Doesn't work for MSIM devices. Use {@link #isWfcEnabledByPlatform()}
+ instead.
+*/
+isWfcEnabledByPlatform : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isWfcEnabledByPlatform'>/**Returns a platform configuration for WFC which may override the user
+</span> setting per slot. Note: WFC presumes that VoLTE is enabled (these are
+ configuration settings which must be done correctly).
+*/
+isWfcEnabledByPlatform : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isSuppServicesOverUtEnabledByPlatform'>/**
+</span>*/
+isSuppServicesOverUtEnabledByPlatform : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-updateImsServiceConfig'>/**Sync carrier config and user settings with ImsConfigImplBase implementation.
+</span>@param {Object {Context}} context for the manager object
+@param {Number} phoneId phone id
+@param {Boolean} force update
+@deprecated Doesn't support MSIM devices. Use {@link #updateImsServiceConfig(boolean)}
+ instead.
+*/
+updateImsServiceConfig : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-updateImsServiceConfig'>/**Sync carrier config and user settings with ImsConfigImplBase implementation.
+</span>@param {Boolean} force update
+*/
+updateImsServiceConfig : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isDynamicBinding'>/**
+</span>@return {Boolean} Whether or not ImsManager is configured to Dynamically bind or not to support legacy
+ devices.
+*/
+isDynamicBinding : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isServiceAvailable'>/**
+</span>*/
+isServiceAvailable : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-isServiceReady'>/**
+</span>*/
+isServiceReady : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-connectIfServiceIsAvailable'>/**If the service is available, try to reconnect.
+</span>*/
+connectIfServiceIsAvailable : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setConfigListener'>/**
+</span>*/
+setConfigListener : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addNotifyStatusChangedCallbackIfAvailable'>/**Adds a callback for status changed events if the binder is already available. If it is not,
+</span> this method will throw an ImsException.
+*/
+addNotifyStatusChangedCallbackIfAvailable : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-open'>/**Opens the IMS service for making calls and/or receiving generic IMS calls.
+</span> The caller may make subsequent calls through {@link #makeCall}.
+ The IMS service will register the device to the operator's network with the credentials
+ (from ISIM) periodically in order to receive calls from the operator's network.
+ When the IMS service receives a new call, it will call
+ {@link MmTelFeature.Listener#onIncomingCall}
+ The listener contains a call ID extra {@link #getCallId} and it can be used to take a call.
+@param {Object {MmTelFeature.Listener}} listener A {@link MmTelFeature.Listener}, which is the interface the
+ {@link MmTelFeature} uses to notify the framework of updates
+@throws NullPointerException if {@code listener} is null
+@throws ImsException if calling the IMS service results in an error
+@see #getCallId
+*/
+open : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addRegistrationListener'>/**Adds registration listener to the IMS service.
+</span>@param {Number} serviceClass a service class specified in {@link ImsServiceClass}
+      For VoLTE service, it MUST be a {@link ImsServiceClass#MMTEL}.
+@param {Object {ImsConnectionStateListener}} listener To listen to IMS registration events; It cannot be null
+@throws NullPointerException if {@code listener} is null
+@throws ImsException if calling the IMS service results in an error
+@deprecated Use {@link #addRegistrationListener(ImsConnectionStateListener)} instead.
+*/
+addRegistrationListener : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addRegistrationListener'>/**Adds registration listener to the IMS service.
+</span>@param {Object {ImsConnectionStateListener}} listener To listen to IMS registration events; It cannot be null
+@throws NullPointerException if {@code listener} is null
+@throws ImsException if calling the IMS service results in an error
+@deprecated use {@link #addRegistrationCallback(ImsMmTelManager.RegistrationCallback)}
+ instead.
+*/
+addRegistrationListener : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addRegistrationCallback'>/**Adds a callback that gets called when IMS registration has changed for the slot ID
+</span> associated with this ImsManager.
+@param {Object {ImsMmTelManager.RegistrationCallback}} callback A {@link ImsMmTelManager.RegistrationCallback} that will notify the caller
+                 when IMS registration status has changed.
+@throws ImsException when the ImsService connection is not available.
+*/
+addRegistrationCallback : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-removeRegistrationListener'>/**Removes a previously added registration callback that was added via
+</span> {@link #addRegistrationCallback(ImsMmTelManager.RegistrationCallback)} .
+@param {Object {ImsMmTelManager.RegistrationCallback}} callback A {@link ImsMmTelManager.RegistrationCallback} that was previously added.
+*/
+removeRegistrationListener : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addRegistrationCallbackForSubscription'>/**Adds a callback that gets called when IMS registration has changed for a specific
+</span> subscription.
+@param {Object {IImsRegistrationCallback}} callback A {@link ImsMmTelManager.RegistrationCallback} that will notify the caller
+                 when IMS registration status has changed.
+@param {Number} subId The subscription ID to register this registration callback for.
+@throws RemoteException when the ImsService connection is not available.
+*/
+addRegistrationCallbackForSubscription : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-removeRegistrationCallbackForSubscription'>/**Removes a previously registered {@link ImsMmTelManager.RegistrationCallback} callback that is
+</span> associated with a specific subscription.
+*/
+removeRegistrationCallbackForSubscription : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addCapabilitiesCallback'>/**Adds a callback that gets called when MMTel capability status has changed, for example when
+</span> Voice over IMS or VT over IMS is not available currently.
+@param {Object {ImsMmTelManager.CapabilityCallback}} callback A {@link ImsMmTelManager.CapabilityCallback} that will notify the caller when
+                 MMTel capability status has changed.
+@throws ImsException when the ImsService connection is not available.
+*/
+addCapabilitiesCallback : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-removeCapabilitiesCallback'>/**Removes a previously registered {@link ImsMmTelManager.CapabilityCallback} callback.
+</span>@throws ImsException when the ImsService connection is not available.
+*/
+removeCapabilitiesCallback : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addCapabilitiesCallbackForSubscription'>/**Adds a callback that gets called when IMS capabilities have changed for a specified
+</span> subscription.
+@param {Object {IImsCapabilityCallback}} callback A {@link ImsMmTelManager.CapabilityCallback} that will notify the caller
+                 when the IMS Capabilities have changed.
+@param {Number} subId The subscription that is associated with the callback.
+@throws RemoteException when the ImsService connection is not available.
+*/
+addCapabilitiesCallbackForSubscription : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-removeCapabilitiesCallbackForSubscription'>/**Removes a previously registered {@link ImsMmTelManager.CapabilityCallback} that was
+</span> associated with a specific subscription.
+*/
+removeCapabilitiesCallbackForSubscription : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-removeRegistrationListener'>/**Removes the registration listener from the IMS service.
+</span>@param {Object {ImsConnectionStateListener}} listener Previously registered listener that will be removed. Can not be null.
+@throws NullPointerException if {@code listener} is null
+@throws ImsException if calling the IMS service results in an error
+ instead.
+*/
+removeRegistrationListener : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-addProvisioningCallbackForSubscription'>/**Adds a callback that gets called when Provisioning has changed for a specified subscription.
+</span>@param {Object {IImsConfigCallback}} callback A {@link ProvisioningManager.Callback} that will notify the caller when
+                 provisioning has changed.
+@param {Number} subId The subscription that is associated with the callback.
+@throws IllegalStateException when the {@link ImsService} connection is not available.
+@throws IllegalArgumentException when the {@link IImsConfigCallback} argument is null.
+*/
+addProvisioningCallbackForSubscription : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-removeProvisioningCallbackForSubscription'>/**Removes a previously registered {@link ProvisioningManager.Callback} that was associated with
+</span> a specific subscription.
+@throws IllegalStateException when the {@link ImsService} connection is not available.
+@throws IllegalArgumentException when the {@link IImsConfigCallback} argument is null.
+*/
+removeProvisioningCallbackForSubscription : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getRegistrationTech'>/**
+</span>*/
+getRegistrationTech : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-close'>/**Closes the connection and removes all active callbacks.
+</span> All the resources that were allocated to the service are also released.
+*/
+close : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getSupplementaryServiceConfiguration'>/**Gets the configuration interface to provision / withdraw the supplementary service settings.
+</span>@return {Object {com.android.ims.ImsUtInterface}} the Ut interface instance
+@throws ImsException if getting the Ut interface results in an error
+*/
+getSupplementaryServiceConfiguration : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-createCallProfile'>/**Creates a {@link com.android.ims.ImsCallProfile} from the service capabilities &amp; IMS registration state.
+</span>@param {Number} serviceType a service type that is specified in {@link ImsCallProfile}
+        {@link ImsCallProfile#SERVICE_TYPE_NONE}
+        {@link ImsCallProfile#SERVICE_TYPE_NORMAL}
+        {@link ImsCallProfile#SERVICE_TYPE_EMERGENCY}
+@param {Number} callType a call type that is specified in {@link ImsCallProfile}
+        {@link ImsCallProfile#CALL_TYPE_VOICE}
+        {@link ImsCallProfile#CALL_TYPE_VT}
+        {@link ImsCallProfile#CALL_TYPE_VT_TX}
+        {@link ImsCallProfile#CALL_TYPE_VT_RX}
+        {@link ImsCallProfile#CALL_TYPE_VT_NODIR}
+        {@link ImsCallProfile#CALL_TYPE_VS}
+        {@link ImsCallProfile#CALL_TYPE_VS_TX}
+        {@link ImsCallProfile#CALL_TYPE_VS_RX}
+@return {Object {android.telephony.ims.ImsCallProfile}} a {@link ImsCallProfile} object
+@throws ImsException if calling the IMS service results in an error
+*/
+createCallProfile : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-makeCall'>/**Creates a {@link com.android.ims.ImsCall} to make a call.
+</span>@param {Object {ImsCallProfile}} profile a call profile to make the call
+      (it contains service type, call type, media information, etc.)
+@param {Object {java.lang.String[]}} callees participants to invite the conference call
+@param {Object {ImsCall.Listener}} listener listen to the call events from {@link ImsCall}
+@return {Object {com.android.ims.ImsCall}} a {@link ImsCall} object
+@throws ImsException if calling the IMS service results in an error
+*/
+makeCall : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-takeCall'>/**Creates a {@link com.android.ims.ImsCall} to take an incoming call.
+</span>@param {Object {IImsCallSession}} sessionId a session id which is obtained from {@link ImsManager#open}
+@param {Object {Bundle}} incomingCallExtras the incoming call broadcast intent
+@param {Object {ImsCall.Listener}} listener to listen to the call events from {@link ImsCall}
+@return {Object {com.android.ims.ImsCall}} a {@link ImsCall} object
+@throws ImsException if calling the IMS service results in an error
+*/
+takeCall : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getConfigInterface'>/**Gets the config interface to get/set service/capability parameters.
+</span>@return {Object {com.android.ims.ImsConfig}} the ImsConfig instance.
+@throws ImsException if getting the setting interface results in an error.
+*/
+getConfigInterface : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-changeMmTelCapability'>/**
+</span>*/
+changeMmTelCapability : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-changeMmTelCapability'>/**
+</span>*/
+changeMmTelCapability : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-updateRttConfigValue'>/**
+</span>*/
+updateRttConfigValue : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-queryMmTelCapability'>/**
+</span>*/
+queryMmTelCapability : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setRttEnabled'>/**
+</span>*/
+setRttEnabled : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setTtyMode'>/**Set the TTY mode. This is the actual tty mode (varies depending on peripheral status)
+</span>*/
+setTtyMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setUiTTYMode'>/**Sets the UI TTY mode. This is the preferred TTY mode that the user sets in the call
+</span> settings screen.
+@param {Object {Context}} uiTtyMode TTY Mode, valid options are:
+         - {@link com.android.internal.telephony.Phone#TTY_MODE_OFF}
+         - {@link com.android.internal.telephony.Phone#TTY_MODE_FULL}
+         - {@link com.android.internal.telephony.Phone#TTY_MODE_HCO}
+         - {@link com.android.internal.telephony.Phone#TTY_MODE_VCO}
+@param {Number} onComplete A Message that will be called by the ImsService when it has completed this
+           operation or null if not waiting for an async response. The Message must contain a
+           valid {@link Message#replyTo} {@link android.os.Messenger}, since it will be passed
+           through Binder to another process.
+*/
+setUiTTYMode : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getRecentImsDisconnectReasons'>/**Get Recent IMS Disconnect Reasons.
+</span>@return {Object {java.util.ArrayList}} ArrayList of ImsReasonInfo objects. MAX size of the arraylist
+ is MAX_RECENT_DISCONNECT_REASONS. The objects are in the
+ chronological order.
+*/
+getRecentImsDisconnectReasons : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getImsServiceState'>/**
+</span>*/
+getImsServiceState : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getEcbmInterface'>/**Gets the ECBM interface to request ECBM exit.
+</span>@return {Object {com.android.ims.ImsEcbm}} the ECBM interface instance
+@throws ImsException if getting the ECBM interface results in an error
+*/
+getEcbmInterface : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-sendSms'>/**
+</span>*/
+sendSms : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-acknowledgeSms'>/**
+</span>*/
+acknowledgeSms : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-acknowledgeSmsReport'>/**
+</span>*/
+acknowledgeSmsReport : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getSmsFormat'>/**
+</span>*/
+getSmsFormat : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setSmsListener'>/**
+</span>*/
+setSmsListener : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-onSmsReady'>/**
+</span>*/
+onSmsReady : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-shouldProcessCall'>/**Determines whether or not a call with the specified numbers should be placed over IMS or over
+</span> CSFB.
+@param {Boolean} isEmergency is at least one call an emergency number.
+@param {Object {java.lang.String[]}} numbers A {@link String} array containing the numbers in the call being placed. Can
+         be multiple numbers in the case of dialing out a conference.
+@return {Number} The result of the query, one of the following values:
+         - {@link MmTelFeature#PROCESS_CALL_IMS}
+         - {@link MmTelFeature#PROCESS_CALL_CSFB}
+@throws ImsException if the ImsService is not available. In this case, we should fall back
+ to CSFB anyway.
+*/
+shouldProcessCall : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-getMultiEndpointInterface'>/**Gets the Multi-Endpoint interface to subscribe to multi-enpoint notifications..
+</span>@return {Object {com.android.ims.ImsMultiEndpoint}} the multi-endpoint interface instance
+@throws ImsException if getting the multi-endpoint interface results in an error
+*/
+getMultiEndpointInterface : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-factoryReset'>/**Resets ImsManager settings back to factory defaults.
+</span>@deprecated Doesn't support MSIM devices. Use {@link #factoryReset()} instead.
+@hide 
+*/
+factoryReset : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-factoryReset'>/**Resets ImsManager settings back to factory defaults.
+</span>@hide 
+*/
+factoryReset : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setVolteProvisioned'>/**
+</span>*/
+setVolteProvisioned : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setWfcProvisioned'>/**
+</span>*/
+setWfcProvisioned : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-setVtProvisioned'>/**
+</span>*/
+setVtProvisioned : function(  ) {},
+
+<span id='com-android-ims-ImsManager-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

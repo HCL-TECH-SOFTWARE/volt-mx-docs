@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaCas'>/**@class android.media.MediaCas
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ MediaCas can be used to obtain keys for descrambling protected media streams, in
+ conjunction with {@link android.media.MediaDescrambler}. The MediaCas APIs are
+ designed to support conditional access such as those in the ISO/IEC13818-1.
+ The CA system is identified by a 16-bit integer CA_system_id. The scrambling
+ algorithms are usually proprietary and implemented by vendor-specific CA plugins
+ installed on the device.
+ &lt;p&gt;
+ The app is responsible for constructing a MediaCas object for the CA system it
+ intends to use. The app can query if a certain CA system is supported using static
+ method {@link #isSystemIdSupported}. It can also obtain the entire list of supported
+ CA systems using static method {@link #enumeratePlugins}.
+ &lt;p&gt;
+ Once the MediaCas object is constructed, the app should properly provision it by
+ using method {@link #provision} and/or {@link #processEmm}. The EMMs (Entitlement
+ management messages) can be distributed out-of-band, or in-band with the stream.
+ &lt;p&gt;
+ To descramble elementary streams, the app first calls {@link #openSession} to
+ generate a {@link android.media.MediaCas.Session} object that will uniquely identify a session. A session
+ provides a context for subsequent key updates and descrambling activities. The ECMs
+ (Entitlement control messages) are sent to the session via method
+ {@link android.media.MediaCas.Session#processEcm}.
+ &lt;p&gt;
+ The app next constructs a MediaDescrambler object, and initializes it with the
+ session using {@link android.media.MediaDescrambler#setMediaCasSession}. This ties the
+ descrambler to the session, and the descrambler can then be used to descramble
+ content secured with the session's key, either during extraction, or during decoding
+ with {@link android.media.MediaCodec}.
+ &lt;p&gt;
+ If the app handles sample extraction using its own extractor, it can use
+ MediaDescrambler to descramble samples into clear buffers (if the session's license
+ doesn't require secure decoders), or descramble a small amount of data to retrieve
+ information necessary for the downstream pipeline to process the sample (if the
+ session's license requires secure decoders).
+ &lt;p&gt;
+ If the session requires a secure decoder, a MediaDescrambler needs to be provided to
+ MediaCodec to descramble samples queued by {@link android.media.MediaCodec#queueSecureInputBuffer}
+ into protected buffers. The app should use {@link android.media.MediaCodec#configure(MediaFormat,
+ android.view.Surface, int, MediaDescrambler)} instead of the normal {@link MediaCodec#configure(MediaFormat, android.view.Surface, android.media.MediaCrypto, int)} method
+ to configure MediaCodec.
+ &lt;p&gt;
+ &lt;h3&gt;Using Android's MediaExtractor&lt;/h3&gt;
+ &lt;p&gt;
+ If the app uses {@link android.media.MediaExtractor}, it can delegate the CAS session
+ management to MediaExtractor by calling {@link android.media.MediaExtractor#setMediaCas}.
+ MediaExtractor will take over and call {@link #openSession}, {@link #processEmm}
+ and/or {@link android.media.MediaCas.Session#processEcm}, etc.. if necessary.
+ &lt;p&gt;
+ When using {@link android.media.MediaExtractor}, the app would still need a MediaDescrambler
+ to use with {@link android.media.MediaCodec} if the licensing requires a secure decoder. The
+ session associated with the descrambler of a track can be retrieved by calling
+ {@link android.media.MediaExtractor#getCasInfo}, and used to initialize a MediaDescrambler
+ object for MediaCodec.
+ &lt;p&gt;
+ &lt;h3&gt;Listeners&lt;/h3&gt;
+ &lt;p&gt;The app may register a listener to receive events from the CA system using
+ method {@link #setEventListener}. The exact format of the event is scheme-specific
+ and is not specified by this API.
+*/
+var MediaCas = {
+
+<span id='android-media-MediaCas-method-isSystemIdSupported'>/**Query if a certain CA system is supported on this device.
+</span>@param {Number} CA_system_id the id of the CA system.
+@return {Boolean} Whether the specified CA system is supported on this device.
+*/
+isSystemIdSupported : function(  ) {},
+
+<span id='android-media-MediaCas-method-enumeratePlugins'>/**List all available CA plugins on the device.
+</span>@return {Object {android.media.MediaCas.PluginDescriptor}} an array of descriptors for the available CA plugins.
+*/
+enumeratePlugins : function(  ) {},
+
+<span id='android-media-MediaCas-method-setEventListener'>/**Set an event listener to receive notifications from the MediaCas instance.
+</span>@param {Object {MediaCas.EventListener}} listener the event listener to be set.
+@param {Object {Handler}} handler the handler whose looper the event listener will be called on.
+ If handler is null, we'll try to use current thread's looper, or the main
+ looper. If neither are available, an internal thread will be created instead.
+*/
+setEventListener : function(  ) {},
+
+<span id='android-media-MediaCas-method-setPrivateData'>/**Send the private data for the CA system.
+</span>@param {Object {byte[]}} data byte array of the private data.
+@throws IllegalStateException if the MediaCas instance is not valid.
+@throws MediaCasException for CAS-specific errors.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+setPrivateData : function(  ) {},
+
+<span id='android-media-MediaCas-method-openSession'>/**Open a session to descramble one or more streams scrambled by the
+</span> conditional access system.
+@return {Object {android.media.MediaCas.Session}} session the newly opened session.
+@throws IllegalStateException if the MediaCas instance is not valid.
+@throws MediaCasException for CAS-specific errors.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+openSession : function(  ) {},
+
+<span id='android-media-MediaCas-method-processEmm'>/**Send a received EMM packet to the CA system.
+</span>@param {Object {byte[]}} data byte array of the EMM data.
+@param {Number} offset position within data where the EMM data begins.
+@param {Number} length length of the data (starting from offset).
+@throws IllegalStateException if the MediaCas instance is not valid.
+@throws MediaCasException for CAS-specific errors.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+processEmm : function(  ) {},
+
+<span id='android-media-MediaCas-method-processEmm'>/**Send a received EMM packet to the CA system. This is similar to
+</span> {@link #processEmm(byte[], int, int)} except that the entire byte
+ array is sent.
+@param {Object {byte[]}} data byte array of the EMM data.
+@throws IllegalStateException if the MediaCas instance is not valid.
+@throws MediaCasException for CAS-specific errors.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+processEmm : function(  ) {},
+
+<span id='android-media-MediaCas-method-sendEvent'>/**Send an event to a CA system. The format of the event is scheme-specific
+</span> and is opaque to the framework.
+@param {Number} event an integer denoting a scheme-specific event to be sent.
+@param {Number} arg a scheme-specific integer argument for the event.
+@param {Object {byte[]}} data a byte array containing scheme-specific data for the event.
+@throws IllegalStateException if the MediaCas instance is not valid.
+@throws MediaCasException for CAS-specific errors.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+sendEvent : function(  ) {},
+
+<span id='android-media-MediaCas-method-provision'>/**Initiate a provisioning operation for a CA system.
+</span>@param {String} provisionString string containing information needed for the
+ provisioning operation, the format of which is scheme and implementation
+ specific.
+@throws IllegalStateException if the MediaCas instance is not valid.
+@throws MediaCasException for CAS-specific errors.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+provision : function(  ) {},
+
+<span id='android-media-MediaCas-method-refreshEntitlements'>/**Notify the CA system to refresh entitlement keys.
+</span>@param {Number} refreshType the type of the refreshment.
+@param {Object {byte[]}} refreshData private data associated with the refreshment.
+@throws IllegalStateException if the MediaCas instance is not valid.
+@throws MediaCasException for CAS-specific errors.
+@throws MediaCasStateException for CAS-specific state exceptions.
+*/
+refreshEntitlements : function(  ) {},
+
+<span id='android-media-MediaCas-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

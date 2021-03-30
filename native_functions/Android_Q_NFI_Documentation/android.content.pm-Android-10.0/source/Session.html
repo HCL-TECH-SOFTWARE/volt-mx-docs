@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageInstaller-Session'>/**@class android.content.pm.PackageInstaller.Session
+</span> implements java.io.Closeable
+
+@extends java.lang.Object
+
+ An installation that is being actively staged. For an install to succeed,
+ all existing and new packages must have identical package names, version
+ codes, and signing certificates.
+ &lt;p&gt;
+ A session may contain any number of split packages. If the application
+ does not yet exist, this session must include a base package.
+ &lt;p&gt;
+ If an APK included in this session is already defined by the existing
+ installation (for example, the same split name), the APK in this session
+ will replace the existing APK.
+ &lt;p&gt;
+ In such a case that multiple packages need to be committed simultaneously,
+ multiple sessions can be referenced by a single multi-package session.
+ This session is created with no package name and calling
+ {@link android.content.pm.PackageInstaller.SessionParams#setMultiPackage()}. The individual session IDs can be
+ added with {@link #addChildSessionId}(int) and commit of the multi-package
+ session will result in all child sessions being committed atomically.
+*/
+var Session = {
+
+<span id='android-content-pm-PackageInstaller-Session-method-setProgress'>/**{@hide}
+</span>*/
+setProgress : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-setStagingProgress'>/**Set current progress of staging this session. Valid values are
+</span> anywhere between 0 and 1.
+ &lt;p&gt;
+ Note that this progress may not directly correspond to the value
+ reported by {@link android.content.pm.PackageInstaller.SessionCallback#onProgressChanged(int, float)}, as
+ the system may carve out a portion of the overall progress to
+ represent its own internal installation work.
+*/
+setStagingProgress : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-addProgress'>/**{@hide}
+</span>*/
+addProgress : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-openWrite'>/**Open a stream to write an APK file into the session.
+</span> &lt;p&gt;
+ The returned stream will start writing data at the requested offset
+ in the underlying file, which can be used to resume a partially
+ written file. If a valid file length is specified, the system will
+ preallocate the underlying disk space to optimize placement on disk.
+ It's strongly recommended to provide a valid file length when known.
+ &lt;p&gt;
+ You can write data into the returned stream, optionally call
+ {@link #fsync}(OutputStream) as needed to ensure bytes have been
+ persisted to disk, and then close when finished. All streams must be
+ closed before calling {@link #commit}(IntentSender).
+@param {String} name arbitrary, unique name of your choosing to identify the
+            APK being written. You can open a file again for
+            additional writes (such as after a reboot) by using the
+            same name. This name is only meaningful within the context
+            of a single install session.
+@param {Number} offsetBytes offset into the file to begin writing at, or 0 to
+            start at the beginning of the file.
+@param {Number} lengthBytes total size of the file being written, used to
+            preallocate the underlying disk space, or -1 if unknown.
+            The system may clear various caches as needed to allocate
+            this space.
+@throws IOException if trouble opening the file for writing, such as
+             lack of disk space or unavailable media.
+@throws SecurityException if called after the session has been
+             sealed or abandoned
+*/
+openWrite : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-write'>/**{@hide}
+</span>*/
+write : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-fsync'>/**Ensure that any outstanding data for given stream has been committed
+</span> to disk. This is only valid for streams returned from
+ {@link #openWrite(String, long, long)}.
+*/
+fsync : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-getNames'>/**Return all APK names contained in this session.
+</span> &lt;p&gt;
+ This returns all names which have been previously written through
+ {@link #openWrite(String, long, long)} as part of this session.
+@throws SecurityException if called after the session has been
+             committed or abandoned.
+*/
+getNames : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-openRead'>/**Open a stream to read an APK file from the session.
+</span> &lt;p&gt;
+ This is only valid for names which have been previously written
+ through {@link #openWrite(String, long, long)} as part of this
+ session. For example, this stream may be used to calculate a
+ {@link MessageDigest} of a written APK before committing.
+@throws SecurityException if called after the session has been
+             committed or abandoned.
+*/
+openRead : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-removeSplit'>/**Removes a split.
+</span> &lt;p&gt;
+ Split removals occur prior to adding new APKs. If upgrading a feature
+ split, it is not expected nor desirable to remove the split prior to
+ upgrading.
+ &lt;p&gt;
+ When split removal is bundled with new APKs, the packageName must be
+ identical.
+*/
+removeSplit : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-commit'>/**Attempt to commit everything staged in this session. This may require
+</span> user intervention, and so it may not happen immediately. The final
+ result of the commit will be reported through the given callback.
+ &lt;p&gt;
+ Once this method is called, the session is sealed and no additional
+ mutations may be performed on the session. If the device reboots
+ before the session has been finalized, you may commit the session again.
+ &lt;p&gt;
+ If the installer is the device owner or the affiliated profile owner, there will be no
+ user intervention.
+@param {Object {IntentSender}} statusReceiver Called when the state of the session changes. Intents
+                       sent to this receiver contain {@link #EXTRA_STATUS}. Refer to the
+                       individual status codes on how to handle them.
+@throws SecurityException if streams opened through
+             {@link #openWrite(String, long, long)} are still open.
+@see android.app.admin.DevicePolicyManager
+*/
+commit : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-commitTransferred'>/**Attempt to commit a session that has been {@link #transfer(String) transferred}.
+</span>
+ &lt;p&gt;If the device reboots before the session has been finalized, you may commit the
+ session again.
+
+ &lt;p&gt;The caller of this method is responsible to ensure the safety of the session. As the
+ session was created by another - usually less trusted - app, it is paramount that before
+ committing &lt;u&gt;all&lt;/u&gt; public and system {@link android.content.pm.PackageInstaller.SessionInfo properties of the session}
+ and &lt;u&gt;all&lt;/u&gt; {@link #openRead(String) APKs} are verified by the caller. It might happen
+ that new properties are added to the session with a new API revision. In this case the
+ callers need to be updated.
+@param {Object {IntentSender}} statusReceiver Called when the state of the session changes. Intents
+                       sent to this receiver contain {@link #EXTRA_STATUS}. Refer to the
+                       individual status codes on how to handle them.
+@hide 
+*/
+commitTransferred : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-transfer'>/**Transfer the session to a new owner.
+</span> &lt;p&gt;
+ Only sessions that update the installing app can be transferred.
+ &lt;p&gt;
+ After the transfer to a package with a different uid all method calls on the session
+ will cause {@link SecurityException}s.
+ &lt;p&gt;
+ Once this method is called, the session is sealed and no additional mutations beside
+ committing it may be performed on the session.
+@param {String} packageName The package of the new owner. Needs to hold the INSTALL_PACKAGES
+                    permission.
+@throws PackageManager.NameNotFoundException if the new owner could not be found.
+@throws SecurityException if called after the session has been committed or abandoned.
+@throws SecurityException if the session does not update the original installer
+@throws SecurityException if streams opened through
+                           {@link #openWrite(String, long, long) are still open.
+*/
+transfer : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-close'>/**Release this session object. You can open the session again if it
+</span> hasn't been finalized.
+*/
+close : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-abandon'>/**Completely abandon this session, destroying all staged data and
+</span> rendering it invalid. Abandoned sessions will be reported to
+ {@link android.content.pm.PackageInstaller.SessionCallback} listeners as failures. This is equivalent to
+ opening the session and calling {@link android.content.pm.PackageInstaller.Session#abandon()}.
+*/
+abandon : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-isMultiPackage'>/**
+</span>@return {Boolean} {@code true} if this session will commit more than one package when it is
+ committed.
+*/
+isMultiPackage : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-isStaged'>/**
+</span>@return {Boolean} {@code true} if this session will be staged and applied at next reboot.
+*/
+isStaged : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-getParentSessionId'>/**
+</span>@return {Number} the session ID of the multi-package session that this belongs to or
+ {@link SessionInfo#INVALID_ID} if it does not belong to a multi-package session.
+*/
+getParentSessionId : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-getChildSessionIds'>/**
+</span>@return {Number} the set of session IDs that will be committed atomically when this session is
+ committed if this is a multi-package session or null if none exist.
+*/
+getChildSessionIds : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-addChildSessionId'>/**Adds a session ID to the set of sessions that will be committed atomically
+</span> when this session is committed.
+
+ &lt;p&gt;If the parent is staged or has rollback enabled, all children must have
+ the same properties.
+@param {Number} sessionId the session ID to add to this multi-package session.
+*/
+addChildSessionId : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-Session-method-removeChildSessionId'>/**Removes a session ID from the set of sessions that will be committed
+</span> atomically when this session is committed.
+@param {Number} sessionId the session ID to remove from this multi-package session.
+*/
+removeChildSessionId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

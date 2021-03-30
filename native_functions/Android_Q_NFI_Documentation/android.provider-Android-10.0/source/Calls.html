@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-CallLog-Calls'>/**@class android.provider.CallLog.Calls
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+ Contains the recent calls.
+*/
+var Calls = {
+
+<span id='android-provider-CallLog-Calls-property-CONTENT_URI'>/** The content:// style URL for this table
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CallLog-Calls-property-SHADOW_CONTENT_URI'>/**@hide */
+</span>SHADOW_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CallLog-Calls-property-CONTENT_FILTER_URI'>/** The content:// style URL for filtering this table on phone numbers
+</span>*/
+CONTENT_FILTER_URI : &quot;null&quot;,
+<span id='android-provider-CallLog-Calls-property-LIMIT_PARAM_KEY'>/** Query parameter used to limit the number of call logs returned.
+</span> &lt;p&gt;
+ TYPE: integer
+*/
+LIMIT_PARAM_KEY : &quot;limit&quot;,
+<span id='android-provider-CallLog-Calls-property-OFFSET_PARAM_KEY'>/** Query parameter used to specify the starting record to return.
+</span> &lt;p&gt;
+ TYPE: integer
+*/
+OFFSET_PARAM_KEY : &quot;offset&quot;,
+<span id='android-provider-CallLog-Calls-property-ALLOW_VOICEMAILS_PARAM_KEY'>/** An optional URI parameter which instructs the provider to allow the operation to be
+</span> applied to voicemail records as well.
+ &lt;p&gt;
+ TYPE: Boolean
+ &lt;p&gt;
+ Using this parameter with a value of {@code true} will result in a security error if the
+ calling package does not have appropriate permissions to access voicemails.
+
+ @hide
+*/
+ALLOW_VOICEMAILS_PARAM_KEY : &quot;allow_voicemails&quot;,
+<span id='android-provider-CallLog-Calls-property-EXTRA_CALL_TYPE_FILTER'>/** An optional extra used with {@link #CONTENT_TYPE android.provider.CallLog.Calls.CONTENT_TYPE} and
+</span> {@link Intent#ACTION_VIEW} to specify that the presented list of calls should be
+ filtered for a particular call type.
+
+ Applications implementing a call log UI should check for this extra, and display a
+ filtered list of calls based on the specified call type. If not applicable within the
+ application's UI, it should be silently ignored.
+
+ &lt;p&gt;
+ The following example brings up the call log, showing only missed calls.
+ &lt;pre&gt;
+ Intent intent = new Intent(Intent.ACTION_VIEW);
+ intent.setType(CallLog.Calls.CONTENT_TYPE);
+ intent.putExtra(CallLog.Calls.EXTRA_CALL_TYPE_FILTER, CallLog.Calls.MISSED_TYPE);
+ startActivity(intent);
+ &lt;/pre&gt;
+ &lt;/p&gt;
+*/
+EXTRA_CALL_TYPE_FILTER : &quot;android.provider.extra.CALL_TYPE_FILTER&quot;,
+<span id='android-provider-CallLog-Calls-property-CONTENT_URI_WITH_VOICEMAIL'>/** Content uri used to access call log entries, including voicemail records. You must have
+</span> the READ_CALL_LOG and WRITE_CALL_LOG permissions to read and write to the call log, as
+ well as READ_VOICEMAIL and WRITE_VOICEMAIL permissions to read and write voicemails.
+*/
+CONTENT_URI_WITH_VOICEMAIL : &quot;null&quot;,
+<span id='android-provider-CallLog-Calls-property-DEFAULT_SORT_ORDER'>/** The default sort order for this table
+</span>*/
+DEFAULT_SORT_ORDER : &quot;date DESC&quot;,
+<span id='android-provider-CallLog-Calls-property-CONTENT_TYPE'>/** The MIME type of {@link #CONTENT_URI} and {@link #CONTENT_FILTER_URI}
+</span> providing a directory of calls.
+*/
+CONTENT_TYPE : &quot;vnd.android.cursor.dir/calls&quot;,
+<span id='android-provider-CallLog-Calls-property-CONTENT_ITEM_TYPE'>/** The MIME type of a {@link #CONTENT_URI} sub-directory of a single
+</span> call.
+*/
+CONTENT_ITEM_TYPE : &quot;vnd.android.cursor.item/calls&quot;,
+<span id='android-provider-CallLog-Calls-property-TYPE'>/** The type of the call (incoming, outgoing or missed).
+</span> &lt;P&gt;Type: INTEGER (int)&lt;/P&gt;
+
+ &lt;p&gt;
+ Allowed values:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #INCOMING_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #OUTGOING_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #MISSED_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #VOICEMAIL_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #REJECTED_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #BLOCKED_TYPE}&lt;/li&gt;
+ &lt;li&gt;{@link #ANSWERED_EXTERNALLY_TYPE}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+*/
+TYPE : &quot;type&quot;,
+<span id='android-provider-CallLog-Calls-property-INCOMING_TYPE'>/**Call log type for incoming calls. */
+</span>INCOMING_TYPE : &quot;1&quot;,
+<span id='android-provider-CallLog-Calls-property-OUTGOING_TYPE'>/**Call log type for outgoing calls. */
+</span>OUTGOING_TYPE : &quot;2&quot;,
+<span id='android-provider-CallLog-Calls-property-MISSED_TYPE'>/**Call log type for missed calls. */
+</span>MISSED_TYPE : &quot;3&quot;,
+<span id='android-provider-CallLog-Calls-property-VOICEMAIL_TYPE'>/**Call log type for voicemails. */
+</span>VOICEMAIL_TYPE : &quot;4&quot;,
+<span id='android-provider-CallLog-Calls-property-REJECTED_TYPE'>/**Call log type for calls rejected by direct user action. */
+</span>REJECTED_TYPE : &quot;5&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCKED_TYPE'>/**Call log type for calls blocked automatically. */
+</span>BLOCKED_TYPE : &quot;6&quot;,
+<span id='android-provider-CallLog-Calls-property-ANSWERED_EXTERNALLY_TYPE'>/** Call log type for a call which was answered on another device.  Used in situations where
+</span> a call rings on multiple devices simultaneously and it ended up being answered on a
+ device other than the current one.
+*/
+ANSWERED_EXTERNALLY_TYPE : &quot;7&quot;,
+<span id='android-provider-CallLog-Calls-property-FEATURES'>/** Bit-mask describing features of the call (e.g. video).
+</span>
+ &lt;P&gt;Type: INTEGER (int)&lt;/P&gt;
+*/
+FEATURES : &quot;features&quot;,
+<span id='android-provider-CallLog-Calls-property-FEATURES_VIDEO'>/**Call had video. */
+</span>FEATURES_VIDEO : &quot;1&quot;,
+<span id='android-provider-CallLog-Calls-property-FEATURES_PULLED_EXTERNALLY'>/**Call was pulled externally. */
+</span>FEATURES_PULLED_EXTERNALLY : &quot;2&quot;,
+<span id='android-provider-CallLog-Calls-property-FEATURES_HD_CALL'>/**Call was HD. */
+</span>FEATURES_HD_CALL : &quot;4&quot;,
+<span id='android-provider-CallLog-Calls-property-FEATURES_WIFI'>/**Call was WIFI call. */
+</span>FEATURES_WIFI : &quot;8&quot;,
+<span id='android-provider-CallLog-Calls-property-FEATURES_ASSISTED_DIALING_USED'>/** Indicates the call underwent Assisted Dialing.
+</span> @hide
+*/
+FEATURES_ASSISTED_DIALING_USED : &quot;16&quot;,
+<span id='android-provider-CallLog-Calls-property-FEATURES_RTT'>/**Call was on RTT at some point */
+</span>FEATURES_RTT : &quot;32&quot;,
+<span id='android-provider-CallLog-Calls-property-NUMBER'>/** The phone number as the user entered it.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+NUMBER : &quot;number&quot;,
+<span id='android-provider-CallLog-Calls-property-NUMBER_PRESENTATION'>/** The number presenting rules set by the network.
+</span>
+ &lt;p&gt;
+ Allowed values:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #PRESENTATION_ALLOWED}&lt;/li&gt;
+ &lt;li&gt;{@link #PRESENTATION_RESTRICTED}&lt;/li&gt;
+ &lt;li&gt;{@link #PRESENTATION_UNKNOWN}&lt;/li&gt;
+ &lt;li&gt;{@link #PRESENTATION_PAYPHONE}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+NUMBER_PRESENTATION : &quot;presentation&quot;,
+<span id='android-provider-CallLog-Calls-property-PRESENTATION_ALLOWED'>/**Number is allowed to display for caller id. */
+</span>PRESENTATION_ALLOWED : &quot;1&quot;,
+<span id='android-provider-CallLog-Calls-property-PRESENTATION_RESTRICTED'>/**Number is blocked by user. */
+</span>PRESENTATION_RESTRICTED : &quot;2&quot;,
+<span id='android-provider-CallLog-Calls-property-PRESENTATION_UNKNOWN'>/**Number is not specified or unknown by network. */
+</span>PRESENTATION_UNKNOWN : &quot;3&quot;,
+<span id='android-provider-CallLog-Calls-property-PRESENTATION_PAYPHONE'>/**Number is a pay phone. */
+</span>PRESENTATION_PAYPHONE : &quot;4&quot;,
+<span id='android-provider-CallLog-Calls-property-COUNTRY_ISO'>/** The ISO 3166-1 two letters country code of the country where the
+</span> user received or made the call.
+ &lt;P&gt;
+ Type: TEXT
+ &lt;/P&gt;
+*/
+COUNTRY_ISO : &quot;countryiso&quot;,
+<span id='android-provider-CallLog-Calls-property-DATE'>/** The date the call occured, in milliseconds since the epoch
+</span> &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+DATE : &quot;date&quot;,
+<span id='android-provider-CallLog-Calls-property-DURATION'>/** The duration of the call in seconds
+</span> &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+DURATION : &quot;duration&quot;,
+<span id='android-provider-CallLog-Calls-property-DATA_USAGE'>/** The data usage of the call in bytes.
+</span> &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+DATA_USAGE : &quot;data_usage&quot;,
+<span id='android-provider-CallLog-Calls-property-NEW'>/** Whether or not the call has been acknowledged
+</span> &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+NEW : &quot;new&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_NAME'>/** The cached name associated with the phone number, if it exists.
+</span>
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CACHED_NAME : &quot;name&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_NUMBER_TYPE'>/** The cached number type (Home, Work, etc) associated with the
+</span> phone number, if it exists.
+
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CACHED_NUMBER_TYPE : &quot;numbertype&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_NUMBER_LABEL'>/** The cached number label, for a custom number type, associated with the
+</span> phone number, if it exists.
+
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CACHED_NUMBER_LABEL : &quot;numberlabel&quot;,
+<span id='android-provider-CallLog-Calls-property-VOICEMAIL_URI'>/** URI of the voicemail entry. Populated only for {@link #VOICEMAIL_TYPE}.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+VOICEMAIL_URI : &quot;voicemail_uri&quot;,
+<span id='android-provider-CallLog-Calls-property-TRANSCRIPTION'>/** Transcription of the call or voicemail entry. This will only be populated for call log
+</span> entries of type {@link #VOICEMAIL_TYPE} that have valid transcriptions.
+*/
+TRANSCRIPTION : &quot;transcription&quot;,
+<span id='android-provider-CallLog-Calls-property-TRANSCRIPTION_STATE'>/** State of voicemail transcription entry. This will only be populated for call log
+</span> entries of type {@link #VOICEMAIL_TYPE}.
+ @hide
+*/
+TRANSCRIPTION_STATE : &quot;transcription_state&quot;,
+<span id='android-provider-CallLog-Calls-property-IS_READ'>/** Whether this item has been read or otherwise consumed by the user.
+</span> &lt;p&gt;
+ Unlike the {@link #NEW} field, which requires the user to have acknowledged the
+ existence of the entry, this implies the user has interacted with the entry.
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+IS_READ : &quot;is_read&quot;,
+<span id='android-provider-CallLog-Calls-property-GEOCODED_LOCATION'>/** A geocoded location for the number associated with this call.
+</span> &lt;p&gt;
+ The string represents a city, state, or country associated with the number.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+GEOCODED_LOCATION : &quot;geocoded_location&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_LOOKUP_URI'>/** The cached URI to look up the contact associated with the phone number, if it exists.
+</span>
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CACHED_LOOKUP_URI : &quot;lookup_uri&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_MATCHED_NUMBER'>/** The cached phone number of the contact which matches this entry, if it exists.
+</span>
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CACHED_MATCHED_NUMBER : &quot;matched_number&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_NORMALIZED_NUMBER'>/** The cached normalized(E164) version of the phone number, if it exists.
+</span>
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CACHED_NORMALIZED_NUMBER : &quot;normalized_number&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_PHOTO_ID'>/** The cached photo id of the picture associated with the phone number, if it exists.
+</span>
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+CACHED_PHOTO_ID : &quot;photo_id&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_PHOTO_URI'>/** The cached photo URI of the picture associated with the phone number, if it exists.
+</span>
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: TEXT (URI)&lt;/P&gt;
+*/
+CACHED_PHOTO_URI : &quot;photo_uri&quot;,
+<span id='android-provider-CallLog-Calls-property-CACHED_FORMATTED_NUMBER'>/** The cached phone number, formatted with formatting rules based on the country the
+</span> user was in when the call was made or received.
+
+ &lt;p&gt;This value is typically filled in by the dialer app for the caching purpose,
+ so it's not guaranteed to be present, and may not be current if the contact
+ information associated with this number has changed.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CACHED_FORMATTED_NUMBER : &quot;formatted_number&quot;,
+<span id='android-provider-CallLog-Calls-property-PHONE_ACCOUNT_COMPONENT_NAME'>/** The component name of the account used to place or receive the call; in string form.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PHONE_ACCOUNT_COMPONENT_NAME : &quot;subscription_component_name&quot;,
+<span id='android-provider-CallLog-Calls-property-PHONE_ACCOUNT_ID'>/** The identifier for the account used to place or receive the call.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PHONE_ACCOUNT_ID : &quot;subscription_id&quot;,
+<span id='android-provider-CallLog-Calls-property-PHONE_ACCOUNT_ADDRESS'>/** The address associated with the account used to place or receive the call; in string
+</span> form. For SIM-based calls, this is the user's own phone number.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+
+ @hide
+*/
+PHONE_ACCOUNT_ADDRESS : &quot;phone_account_address&quot;,
+<span id='android-provider-CallLog-Calls-property-PHONE_ACCOUNT_HIDDEN'>/** Indicates that the entry will be hidden from all queries until the associated
+</span> {@link android.telecom.PhoneAccount} is registered with the system.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+
+ @hide
+*/
+PHONE_ACCOUNT_HIDDEN : &quot;phone_account_hidden&quot;,
+<span id='android-provider-CallLog-Calls-property-SUB_ID'>/** The subscription ID used to place this call.  This is no longer used and has been
+</span> replaced with PHONE_ACCOUNT_COMPONENT_NAME/PHONE_ACCOUNT_ID.
+ For ContactsProvider internal use only.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+
+ @Deprecated
+ @hide
+*/
+SUB_ID : &quot;sub_id&quot;,
+<span id='android-provider-CallLog-Calls-property-POST_DIAL_DIGITS'>/** The post-dial portion of a dialed number, including any digits dialed after a
+</span> {@link TelecomManager#DTMF_CHARACTER_PAUSE} or a {@link TelecomManager#DTMF_CHARACTER_WAIT} and these characters themselves.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+POST_DIAL_DIGITS : &quot;post_dial_digits&quot;,
+<span id='android-provider-CallLog-Calls-property-VIA_NUMBER'>/** For an incoming call, the secondary line number the call was received via.
+</span> When a SIM card has multiple phone numbers associated with it, the via number indicates
+ which of the numbers associated with the SIM was called.
+*/
+VIA_NUMBER : &quot;via_number&quot;,
+<span id='android-provider-CallLog-Calls-property-ADD_FOR_ALL_USERS'>/** Indicates that the entry will be copied from primary user to other users.
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+
+ @hide
+*/
+ADD_FOR_ALL_USERS : &quot;add_for_all_users&quot;,
+<span id='android-provider-CallLog-Calls-property-LAST_MODIFIED'>/** The date the row is last inserted, updated, or marked as deleted, in milliseconds
+</span> since the epoch. Read only.
+ &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+LAST_MODIFIED : &quot;last_modified&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_NOT_BLOCKED'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set as the default value when a call was
+</span> not blocked by a CallScreeningService or any other system call blocking method.
+*/
+BLOCK_REASON_NOT_BLOCKED : &quot;0&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_CALL_SCREENING_SERVICE'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set when {@link android.provider.CallLog.Calls#TYPE} is
+</span> {@link android.provider.CallLog.Calls#BLOCKED_TYPE} to indicate that a call was blocked by a
+ CallScreeningService. The {@link android.provider.CallLog.Calls#CALL_SCREENING_COMPONENT_NAME} and
+ {@link android.provider.CallLog.Calls#CALL_SCREENING_APP_NAME} columns will indicate which call screening
+ service was responsible for blocking the call.
+*/
+BLOCK_REASON_CALL_SCREENING_SERVICE : &quot;1&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_DIRECT_TO_VOICEMAIL'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set when {@link android.provider.CallLog.Calls#TYPE} is
+</span> {@link android.provider.CallLog.Calls#BLOCKED_TYPE} to indicate that a call was blocked because the user
+ configured a contact to be sent directly to voicemail.
+*/
+BLOCK_REASON_DIRECT_TO_VOICEMAIL : &quot;2&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_BLOCKED_NUMBER'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set when {@link android.provider.CallLog.Calls#TYPE} is
+</span> {@link android.provider.CallLog.Calls#BLOCKED_TYPE} to indicate that a call was blocked because it is
+ in the BlockedNumbers provider.
+*/
+BLOCK_REASON_BLOCKED_NUMBER : &quot;3&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_UNKNOWN_NUMBER'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set when {@link android.provider.CallLog.Calls#TYPE} is
+</span> {@link android.provider.CallLog.Calls#BLOCKED_TYPE} to indicate that a call was blocked because the user
+ has chosen to block all calls from unknown numbers.
+*/
+BLOCK_REASON_UNKNOWN_NUMBER : &quot;4&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_RESTRICTED_NUMBER'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set when {@link android.provider.CallLog.Calls#TYPE} is
+</span> {@link android.provider.CallLog.Calls#BLOCKED_TYPE} to indicate that a call was blocked because the user
+ has chosen to block all calls from restricted numbers.
+*/
+BLOCK_REASON_RESTRICTED_NUMBER : &quot;5&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_PAY_PHONE'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set when {@link android.provider.CallLog.Calls#TYPE} is
+</span> {@link android.provider.CallLog.Calls#BLOCKED_TYPE} to indicate that a call was blocked because the user
+ has chosen to block all calls from pay phones.
+*/
+BLOCK_REASON_PAY_PHONE : &quot;6&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON_NOT_IN_CONTACTS'>/** Value for {@link android.provider.CallLog.Calls#BLOCK_REASON}, set when {@link android.provider.CallLog.Calls#TYPE} is
+</span> {@link android.provider.CallLog.Calls#BLOCKED_TYPE} to indicate that a call was blocked because the user
+ has chosen to block all calls from numbers not in their contacts.
+*/
+BLOCK_REASON_NOT_IN_CONTACTS : &quot;7&quot;,
+<span id='android-provider-CallLog-Calls-property-CALL_SCREENING_COMPONENT_NAME'>/** The ComponentName of the CallScreeningService which blocked this call. Will be
+</span> populated when the {@link android.provider.CallLog.Calls#TYPE} is {@link android.provider.CallLog.Calls#BLOCKED_TYPE}.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CALL_SCREENING_COMPONENT_NAME : &quot;call_screening_component_name&quot;,
+<span id='android-provider-CallLog-Calls-property-CALL_SCREENING_APP_NAME'>/** The name of the app which blocked a call. Will be populated when the
+</span> {@link android.provider.CallLog.Calls#TYPE} is {@link android.provider.CallLog.Calls#BLOCKED_TYPE}. Provided as a
+ convenience so that the call log can still indicate which app blocked a call, even if
+ that app is no longer installed.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+CALL_SCREENING_APP_NAME : &quot;call_screening_app_name&quot;,
+<span id='android-provider-CallLog-Calls-property-BLOCK_REASON'>/** Where the {@link android.provider.CallLog.Calls#TYPE} is {@link android.provider.CallLog.Calls#BLOCKED_TYPE},
+</span> indicates the reason why a call is blocked.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+
+ &lt;p&gt;
+ Allowed values:
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_NOT_BLOCKED}&lt;/li&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_CALL_SCREENING_SERVICE}&lt;/li&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_DIRECT_TO_VOICEMAIL}&lt;/li&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_BLOCKED_NUMBER}&lt;/li&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_UNKNOWN_NUMBER}&lt;/li&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_RESTRICTED_NUMBER}&lt;/li&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_PAY_PHONE}&lt;/li&gt;
+ &lt;li&gt;{@link android.provider.CallLog.Calls#BLOCK_REASON_NOT_IN_CONTACTS}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+*/
+BLOCK_REASON : &quot;block_reason&quot;,
+<span id='android-provider-CallLog-Calls-method-addCall'>/**Adds a call to the call log.
+</span>@param {Object {CallerInfo}} ci the CallerInfo object to get the target contact from.  Can be null
+ if the contact is unknown.
+@param {Object {Context}} context the context used to get the ContentResolver
+@param {String} number the phone number to be added to the calls db
+@param {Number} presentation enum value from PhoneConstants.PRESENTATION_xxx, which
+        is set by the network and denotes the number presenting rules for
+        &quot;allowed&quot;, &quot;payphone&quot;, &quot;restricted&quot; or &quot;unknown&quot;
+@param {Number} callType enumerated values for &quot;incoming&quot;, &quot;outgoing&quot;, or &quot;missed&quot;
+@param {Number} features features of the call (e.g. Video).
+@param {Object {PhoneAccountHandle}} accountHandle The accountHandle object identifying the provider of the call
+@param {Number} start time stamp for the call in milliseconds
+@param {Number} duration call duration in seconds
+@param {Number} dataUsage data usage for the call in bytes, null if data usage was not tracked for
+                  the call.
+@result The URI of the call log entry belonging to the user that made or received this
+        call.
+ {@hide}
+*/
+addCall : function(  ) {},
+
+<span id='android-provider-CallLog-Calls-method-addCall'>/**Adds a call to the call log.
+</span>@param {Object {CallerInfo}} ci the CallerInfo object to get the target contact from.  Can be null
+ if the contact is unknown.
+@param {Object {Context}} context the context used to get the ContentResolver
+@param {String} number the phone number to be added to the calls db
+@param {String} viaNumber the secondary number that the incoming call received with. If the
+       call was received with the SIM assigned number, then this field must be ''.
+@param {String} presentation enum value from PhoneConstants.PRESENTATION_xxx, which
+        is set by the network and denotes the number presenting rules for
+        &quot;allowed&quot;, &quot;payphone&quot;, &quot;restricted&quot; or &quot;unknown&quot;
+@param {Number} callType enumerated values for &quot;incoming&quot;, &quot;outgoing&quot;, or &quot;missed&quot;
+@param {Number} features features of the call (e.g. Video).
+@param {Number} accountHandle The accountHandle object identifying the provider of the call
+@param {Object {PhoneAccountHandle}} start time stamp for the call in milliseconds
+@param {Number} duration call duration in seconds
+@param {Number} dataUsage data usage for the call in bytes, null if data usage was not tracked for
+                  the call.
+@param {Number} addForAllUsers If true, the call is added to the call log of all currently
+        running users. The caller must have the MANAGE_USERS permission if this is true.
+@param {Boolean} userToBeInsertedTo {@link UserHandle} of user that the call is going to be
+                           inserted to. null if it is inserted to the current user. The
+                           value is ignored if @{link addForAllUsers} is true.
+@result The URI of the call log entry belonging to the user that made or received this
+        call.
+ {@hide}
+*/
+addCall : function(  ) {},
+
+<span id='android-provider-CallLog-Calls-method-addCall'>/**Adds a call to the call log.
+</span>@param {Object {CallerInfo}} ci the CallerInfo object to get the target contact from.  Can be null
+ if the contact is unknown.
+@param {Object {Context}} context the context used to get the ContentResolver
+@param {String} number the phone number to be added to the calls db
+@param {String} postDialDigits the post-dial digits that were dialed after the number,
+        if it was outgoing. Otherwise it is ''.
+@param {String} viaNumber the secondary number that the incoming call received with. If the
+        call was received with the SIM assigned number, then this field must be ''.
+@param {Number} presentation enum value from PhoneConstants.PRESENTATION_xxx, which
+        is set by the network and denotes the number presenting rules for
+        &quot;allowed&quot;, &quot;payphone&quot;, &quot;restricted&quot; or &quot;unknown&quot;
+@param {Number} callType enumerated values for &quot;incoming&quot;, &quot;outgoing&quot;, or &quot;missed&quot;
+@param {Number} features features of the call (e.g. Video).
+@param {Object {PhoneAccountHandle}} accountHandle The accountHandle object identifying the provider of the call
+@param {Number} start time stamp for the call in milliseconds
+@param {Number} duration call duration in seconds
+@param {Number} dataUsage data usage for the call in bytes, null if data usage was not tracked for
+                  the call.
+@param {Boolean} addForAllUsers If true, the call is added to the call log of all currently
+        running users. The caller must have the MANAGE_USERS permission if this is true.
+@param {Object {UserHandle}} userToBeInsertedTo {@link UserHandle} of user that the call is going to be
+                           inserted to. null if it is inserted to the current user. The
+                           value is ignored if @{link addForAllUsers} is true.
+@param {Boolean} isRead Flag to show if the missed call log has been read by the user or not.
+                Used for call log restore of missed calls.
+@param {Number} callBlockReason The reason why the call is blocked.
+@param {Object {CharSequence}} callScreeningAppName The call screening application name which block the call.
+@param {String} callScreeningComponentName The call screening component name which block the call.
+@result The URI of the call log entry belonging to the user that made or received this
+        call.  This could be of the shadow provider.  Do not return it to non-system apps,
+        as they don't have permissions.
+ {@hide}
+*/
+addCall : function(  ) {},
+
+<span id='android-provider-CallLog-Calls-method-shouldHaveSharedCallLogEntries'>/**
+</span>@hide 
+*/
+shouldHaveSharedCallLogEntries : function(  ) {},
+
+<span id='android-provider-CallLog-Calls-method-getLastOutgoingCall'>/**Query the call log database for the last dialed number.
+</span>@param {Object {Context}} context Used to get the content resolver.
+@return {String} The last phone number dialed (outgoing) or an empty
+ string if none exist yet.
+*/
+getLastOutgoingCall : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

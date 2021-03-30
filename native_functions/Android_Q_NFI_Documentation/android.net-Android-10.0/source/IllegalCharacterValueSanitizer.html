@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer'>/**@class android.net.UrlQuerySanitizer.IllegalCharacterValueSanitizer
+</span> implements android.net.UrlQuerySanitizer.ValueSanitizer
+
+@extends java.lang.Object
+
+ Sanitize values based on which characters they contain. Illegal
+ characters are replaced with either space or '_', depending upon
+ whether space is a legal character or not.
+*/
+var IllegalCharacterValueSanitizer = {
+
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-SPACE_OK'>/** Allow space (' ') characters.
+</span>*/
+SPACE_OK : &quot;1&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-OTHER_WHITESPACE_OK'>/** Allow whitespace characters other than space. The
+</span> other whitespace characters are
+ '\t' '\f' '\n' '\r' and '\0x000b' (vertical tab)
+*/
+OTHER_WHITESPACE_OK : &quot;2&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-NON_7_BIT_ASCII_OK'>/** Allow characters with character codes 128 to 255.
+</span>*/
+NON_7_BIT_ASCII_OK : &quot;4&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-DQUOTE_OK'>/** Allow double quote characters. ('&quot;')
+</span>*/
+DQUOTE_OK : &quot;8&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-SQUOTE_OK'>/** Allow single quote characters. ('\'')
+</span>*/
+SQUOTE_OK : &quot;16&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-LT_OK'>/** Allow less-than characters. ('&lt;')
+</span>*/
+LT_OK : &quot;32&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-GT_OK'>/** Allow greater-than characters. ('&gt;')
+</span>*/
+GT_OK : &quot;64&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-AMP_OK'>/** Allow ampersand characters ('&amp;')
+</span>*/
+AMP_OK : &quot;128&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-PCT_OK'>/** Allow percent-sign characters ('%')
+</span>*/
+PCT_OK : &quot;256&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-NUL_OK'>/** Allow nul characters ('\0')
+</span>*/
+NUL_OK : &quot;512&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-SCRIPT_URL_OK'>/** Allow text to start with a script URL
+</span> such as &quot;javascript:&quot; or &quot;vbscript:&quot;
+*/
+SCRIPT_URL_OK : &quot;1024&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-ALL_OK'>/** Mask with all fields set to OK
+</span>*/
+ALL_OK : &quot;2047&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-ALL_WHITESPACE_OK'>/** Mask with both regular space and other whitespace OK
+</span>*/
+ALL_WHITESPACE_OK : &quot;3&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-ALL_ILLEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Deny all special characters.
+ &lt;li&gt;Deny script URLs.
+ &lt;/ul&gt;
+*/
+ALL_ILLEGAL : &quot;0&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-ALL_BUT_NUL_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow all special characters except Nul. ('\0').
+ &lt;li&gt;Allow script URLs.
+ &lt;/ul&gt;
+*/
+ALL_BUT_NUL_LEGAL : &quot;1535&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-ALL_BUT_WHITESPACE_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow all special characters except for:
+ &lt;ul&gt;
+  &lt;li&gt;whitespace characters
+  &lt;li&gt;Nul ('\0')
+ &lt;/ul&gt;
+ &lt;li&gt;Allow script URLs.
+ &lt;/ul&gt;
+*/
+ALL_BUT_WHITESPACE_LEGAL : &quot;1532&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-URL_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow characters used by encoded URLs.
+ &lt;li&gt;Deny script URLs.
+ &lt;/ul&gt;
+*/
+URL_LEGAL : &quot;404&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-URL_AND_SPACE_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow characters used by encoded URLs.
+ &lt;li&gt;Allow spaces.
+ &lt;li&gt;Deny script URLs.
+ &lt;/ul&gt;
+*/
+URL_AND_SPACE_LEGAL : &quot;405&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-AMP_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow ampersand.
+ &lt;li&gt;Deny script URLs.
+ &lt;/ul&gt;
+*/
+AMP_LEGAL : &quot;128&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-AMP_AND_SPACE_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow ampersand.
+ &lt;li&gt;Allow space.
+ &lt;li&gt;Deny script URLs.
+ &lt;/ul&gt;
+*/
+AMP_AND_SPACE_LEGAL : &quot;129&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-SPACE_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow space.
+ &lt;li&gt;Deny script URLs.
+ &lt;/ul&gt;
+*/
+SPACE_LEGAL : &quot;1&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-property-ALL_BUT_NUL_AND_ANGLE_BRACKETS_LEGAL'>/** &lt;ul&gt;
+</span> &lt;li&gt;Allow all but.
+ &lt;ul&gt;
+  &lt;li&gt;Nul ('\0')
+  &lt;li&gt;Angle brackets ('&lt;', '&gt;')
+ &lt;/ul&gt;
+ &lt;li&gt;Deny script URLs.
+ &lt;/ul&gt;
+*/
+ALL_BUT_NUL_AND_ANGLE_BRACKETS_LEGAL : &quot;1439&quot;,
+<span id='android-net-UrlQuerySanitizer-IllegalCharacterValueSanitizer-method-sanitize'>/**Sanitize a value.
+</span> &lt;ol&gt;
+ &lt;li&gt;If script URLs are not OK, they will be removed.
+ &lt;li&gt;If neither spaces nor other white space is OK, then
+ white space will be trimmed from the beginning and end of
+ the URL. (Just the actual white space characters are trimmed, not
+ other control codes.)
+ &lt;li&gt; Illegal characters will be replaced with
+ either ' ' or '_', depending on whether a space is itself a
+ legal character.
+ &lt;/ol&gt;
+@param {String} value
+@return {String} the sanitized value
+*/
+sanitize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-sqlite-SQLiteQueryBuilder'>/**@class android.database.sqlite.SQLiteQueryBuilder
+</span>@extends java.lang.Object
+
+ This is a convenience class that helps build SQL queries to be sent to
+ {@link android.database.sqlite.SQLiteDatabase} objects.
+*/
+var SQLiteQueryBuilder = {
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-setDistinct'>/**Mark the query as {@code DISTINCT}.
+</span>@param {Boolean} distinct if true the query is {@code DISTINCT}, otherwise it isn't
+*/
+setDistinct : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-isDistinct'>/**Get if the query is marked as {@code DISTINCT}, as last configured by
+</span> {@link #setDistinct}(boolean).
+*/
+isDistinct : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-getTables'>/**Returns the list of tables being queried
+</span>@return {String} the list of tables being queried
+*/
+getTables : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-setTables'>/**Sets the list of tables to query. Multiple tables can be specified to perform a join.
+</span> For example:
+   setTables(&quot;foo, bar&quot;)
+   setTables(&quot;foo LEFT OUTER JOIN bar ON (foo.id = bar.foo_id)&quot;)
+@param {String} inTables the list of tables to query on
+*/
+setTables : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-appendWhere'>/**Append a chunk to the {@code WHERE} clause of the query. All chunks appended are surrounded
+</span> by parenthesis and {@code AND}ed with the selection passed to {@link #query}. The final
+ {@code WHERE} clause looks like:
+ &lt;p&gt;
+ WHERE (&amp;lt;append chunk 1&gt;&amp;lt;append chunk2&gt;) AND (&amp;lt;query() selection parameter&gt;)
+@param {Object {CharSequence}} inWhere the chunk of text to append to the {@code WHERE} clause.
+*/
+appendWhere : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-appendWhereEscapeString'>/**Append a chunk to the {@code WHERE} clause of the query. All chunks appended are surrounded
+</span> by parenthesis and ANDed with the selection passed to {@link #query}. The final
+ {@code WHERE} clause looks like:
+ &lt;p&gt;
+ WHERE (&amp;lt;append chunk 1&gt;&amp;lt;append chunk2&gt;) AND (&amp;lt;query() selection parameter&gt;)
+@param {String} inWhere the chunk of text to append to the {@code WHERE} clause. it will be escaped
+ to avoid SQL injection attacks
+*/
+appendWhereEscapeString : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-appendWhereStandalone'>/**Add a standalone chunk to the {@code WHERE} clause of this query.
+</span> &lt;p&gt;
+ This method differs from {@link #appendWhere}(CharSequence) in that it
+ automatically appends {@code AND} to any existing {@code WHERE} clause
+ already under construction before appending the given standalone
+ expression wrapped in parentheses.
+@param {Object {CharSequence}} inWhere the standalone expression to append to the {@code WHERE}
+            clause. It will be wrapped in parentheses when it's appended.
+*/
+appendWhereStandalone : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-setProjectionMap'>/**Sets the projection map for the query.  The projection map maps
+</span> from column names that the caller passes into query to database
+ column names. This is useful for renaming columns as well as
+ disambiguating column names when doing joins. For example you
+ could map &quot;name&quot; to &quot;people.name&quot;.  If a projection map is set
+ it must contain all column names the user may request, even if
+ the key and value are the same.
+@param {Object {java.util.Map}} columnMap maps from the user column names to the database column names
+*/
+setProjectionMap : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-getProjectionMap'>/**Gets the projection map for the query, as last configured by
+</span> {@link #setProjectionMap}(Map).
+*/
+getProjectionMap : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-setProjectionGreylist'>/**Sets a projection greylist of columns that will be allowed through, even
+</span> when {@link #setStrict}(boolean) is enabled. This provides a way for
+ abusive custom columns like {@code COUNT(*)} to continue working.
+@hide 
+*/
+setProjectionGreylist : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-getProjectionGreylist'>/**Gets the projection greylist for the query, as last configured by
+</span> {@link #setProjectionGreylist}(List).
+@hide 
+*/
+getProjectionGreylist : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-setProjectionAggregationAllowed'>/**{@hide}
+</span>*/
+setProjectionAggregationAllowed : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-isProjectionAggregationAllowed'>/**{@hide}
+</span>*/
+isProjectionAggregationAllowed : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-setCursorFactory'>/**Sets the cursor factory to be used for the query.  You can use
+</span> one factory for all queries on a database but it is normally
+ easier to specify the factory when doing this query.
+@param {Object {SQLiteDatabase.CursorFactory}} factory the factory to use.
+*/
+setCursorFactory : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-getCursorFactory'>/**Gets the cursor factory to be used for the query, as last configured by
+</span> {@link #setCursorFactory(android.database.sqlite.SQLiteDatabase.CursorFactory)}.
+*/
+getCursorFactory : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-setStrict'>/**When set, the selection is verified against malicious arguments.
+</span> When using this class to create a statement using
+ {@link #buildQueryString(boolean, String, String[], String, String, String, String, String)},
+ non-numeric limits will raise an exception. If a projection map is specified, fields
+ not in that map will be ignored.
+ If this class is used to execute the statement directly using
+ {@link #query(SQLiteDatabase, String[], String, String[], String, String, String)}
+ or
+ {@link #query(SQLiteDatabase, String[], String, String[], String, String, String, String)},
+ additionally also parenthesis escaping selection are caught.
+
+ To summarize: To get maximum protection against malicious third party apps (for example
+ content provider consumers), make sure to do the following:
+ &lt;ul&gt;
+ &lt;li&gt;Set this value to true&lt;/li&gt;
+ &lt;li&gt;Use a projection map&lt;/li&gt;
+ &lt;li&gt;Use one of the query overloads instead of getting the statement as a sql string&lt;/li&gt;
+ &lt;/ul&gt;
+ By default, this value is false.
+*/
+setStrict : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-isStrict'>/**Get if the query is marked as strict, as last configured by
+</span> {@link #setStrict}(boolean).
+*/
+isStrict : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildQueryString'>/**Build an SQL query string from the given clauses.
+</span>@param {Boolean} distinct true if you want each row to be unique, false otherwise.
+@param {String} tables The table names to compile the query against.
+@param {Object {java.lang.String[]}} columns A list of which columns to return. Passing null will
+            return all columns, which is discouraged to prevent reading
+            data from storage that isn't going to be used.
+@param {String} where A filter declaring which rows to return, formatted as an SQL
+            {@code WHERE} clause (excluding the {@code WHERE} itself). Passing {@code null} will
+            return all rows for the given URL.
+@param {String} groupBy A filter declaring how to group rows, formatted as an SQL
+            {@code GROUP BY} clause (excluding the {@code GROUP BY} itself). Passing {@code null}
+            will cause the rows to not be grouped.
+@param {String} having A filter declare which row groups to include in the cursor,
+            if row grouping is being used, formatted as an SQL {@code HAVING}
+            clause (excluding the {@code HAVING} itself). Passing null will cause
+            all row groups to be included, and is required when row
+            grouping is not being used.
+@param {String} orderBy How to order the rows, formatted as an SQL {@code ORDER BY} clause
+            (excluding the {@code ORDER BY} itself). Passing null will use the
+            default sort order, which may be unordered.
+@param {String} limit Limits the number of rows returned by the query,
+            formatted as {@code LIMIT} clause. Passing null denotes no {@code LIMIT} clause.
+@return {String} the SQL query string
+*/
+buildQueryString : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-appendColumns'>/**Add the names that are non-null in columns to s, separating
+</span> them with commas.
+*/
+appendColumns : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-query'>/**Perform a query by combining all current settings and the
+</span> information passed into this method.
+@param {Object {SQLiteDatabase}} db the database to query on
+@param {Object {java.lang.String[]}} projectionIn A list of which columns to return. Passing
+   null will return all columns, which is discouraged to prevent
+   reading data from storage that isn't going to be used.
+@param {String} selection A filter declaring which rows to return,
+   formatted as an SQL {@code WHERE} clause (excluding the {@code WHERE}
+   itself). Passing null will return all rows for the given URL.
+@param {Object {java.lang.String[]}} selectionArgs You may include ?s in selection, which
+   will be replaced by the values from selectionArgs, in order
+   that they appear in the selection. The values will be bound
+   as Strings.
+@param {String} groupBy A filter declaring how to group rows, formatted
+   as an SQL {@code GROUP BY} clause (excluding the {@code GROUP BY}
+   itself). Passing null will cause the rows to not be grouped.
+@param {String} having A filter declare which row groups to include in
+   the cursor, if row grouping is being used, formatted as an
+   SQL {@code HAVING} clause (excluding the {@code HAVING} itself).  Passing
+   null will cause all row groups to be included, and is
+   required when row grouping is not being used.
+@param {String} sortOrder How to order the rows, formatted as an SQL
+   {@code ORDER BY} clause (excluding the {@code ORDER BY} itself). Passing null
+   will use the default sort order, which may be unordered.
+@return {Object {android.database.Cursor}} a cursor over the result set
+@see android.content.ContentResolver#query(android.net.Uri, String[],
+      String, String[], String)
+*/
+query : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-query'>/**Perform a query by combining all current settings and the
+</span> information passed into this method.
+@param {Object {SQLiteDatabase}} db the database to query on
+@param {Object {java.lang.String[]}} projectionIn A list of which columns to return. Passing
+   null will return all columns, which is discouraged to prevent
+   reading data from storage that isn't going to be used.
+@param {String} selection A filter declaring which rows to return,
+   formatted as an SQL {@code WHERE} clause (excluding the {@code WHERE}
+   itself). Passing null will return all rows for the given URL.
+@param {Object {java.lang.String[]}} selectionArgs You may include ?s in selection, which
+   will be replaced by the values from selectionArgs, in order
+   that they appear in the selection. The values will be bound
+   as Strings.
+@param {String} groupBy A filter declaring how to group rows, formatted
+   as an SQL {@code GROUP BY} clause (excluding the {@code GROUP BY}
+   itself). Passing null will cause the rows to not be grouped.
+@param {String} having A filter declare which row groups to include in
+   the cursor, if row grouping is being used, formatted as an
+   SQL {@code HAVING} clause (excluding the {@code HAVING} itself).  Passing
+   null will cause all row groups to be included, and is
+   required when row grouping is not being used.
+@param {String} sortOrder How to order the rows, formatted as an SQL
+   {@code ORDER BY} clause (excluding the {@code ORDER BY} itself). Passing null
+   will use the default sort order, which may be unordered.
+@param {String} limit Limits the number of rows returned by the query,
+   formatted as {@code LIMIT} clause. Passing null denotes no {@code LIMIT} clause.
+@return {Object {android.database.Cursor}} a cursor over the result set
+@see android.content.ContentResolver#query(android.net.Uri, String[],
+      String, String[], String)
+*/
+query : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-query'>/**Perform a query by combining all current settings and the
+</span> information passed into this method.
+@param {Object {SQLiteDatabase}} db the database to query on
+@param {Object {java.lang.String[]}} projectionIn A list of which columns to return. Passing
+   null will return all columns, which is discouraged to prevent
+   reading data from storage that isn't going to be used.
+@param {String} selection A filter declaring which rows to return,
+   formatted as an SQL {@code WHERE} clause (excluding the {@code WHERE}
+   itself). Passing null will return all rows for the given URL.
+@param {Object {java.lang.String[]}} selectionArgs You may include ?s in selection, which
+   will be replaced by the values from selectionArgs, in order
+   that they appear in the selection. The values will be bound
+   as Strings.
+@param {String} groupBy A filter declaring how to group rows, formatted
+   as an SQL {@code GROUP BY} clause (excluding the {@code GROUP BY}
+   itself). Passing null will cause the rows to not be grouped.
+@param {String} having A filter declare which row groups to include in
+   the cursor, if row grouping is being used, formatted as an
+   SQL {@code HAVING} clause (excluding the {@code HAVING} itself).  Passing
+   null will cause all row groups to be included, and is
+   required when row grouping is not being used.
+@param {String} sortOrder How to order the rows, formatted as an SQL
+   {@code ORDER BY} clause (excluding the {@code ORDER BY} itself). Passing null
+   will use the default sort order, which may be unordered.
+@param {String} limit Limits the number of rows returned by the query,
+   formatted as {@code LIMIT} clause. Passing null denotes no {@code LIMIT} clause.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+ If the operation is canceled, then {@link OperationCanceledException} will be thrown
+ when the query is executed.
+@return {Object {android.database.Cursor}} a cursor over the result set
+@see android.content.ContentResolver#query(android.net.Uri, String[],
+      String, String[], String)
+*/
+query : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-update'>/**Perform an update by combining all current settings and the
+</span> information passed into this method.
+@param {Object {SQLiteDatabase}} db the database to update on
+@param {Object {ContentValues}} selection A filter declaring which rows to return,
+   formatted as an SQL {@code WHERE} clause (excluding the {@code WHERE}
+   itself). Passing null will return all rows for the given URL.
+@param {String} selectionArgs You may include ?s in selection, which
+   will be replaced by the values from selectionArgs, in order
+   that they appear in the selection. The values will be bound
+   as Strings.
+@return {Number} the number of rows updated
+*/
+update : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-delete'>/**Perform a delete by combining all current settings and the
+</span> information passed into this method.
+@param {Object {SQLiteDatabase}} db the database to delete on
+@param {String} selection A filter declaring which rows to return,
+   formatted as an SQL {@code WHERE} clause (excluding the {@code WHERE}
+   itself). Passing null will return all rows for the given URL.
+@param {Object {java.lang.String[]}} selectionArgs You may include ?s in selection, which
+   will be replaced by the values from selectionArgs, in order
+   that they appear in the selection. The values will be bound
+   as Strings.
+@return {Number} the number of rows deleted
+*/
+delete : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildQuery'>/**Construct a {@code SELECT} statement suitable for use in a group of
+</span> {@code SELECT} statements that will be joined through {@code UNION} operators
+ in buildUnionQuery.
+@param {Object {java.lang.String[]}} projectionIn A list of which columns to return. Passing
+    null will return all columns, which is discouraged to
+    prevent reading data from storage that isn't going to be
+    used.
+@param {String} selection A filter declaring which rows to return,
+   formatted as an SQL {@code WHERE} clause (excluding the {@code WHERE}
+   itself).  Passing null will return all rows for the given
+   URL.
+@param {String} groupBy A filter declaring how to group rows, formatted
+   as an SQL {@code GROUP BY} clause (excluding the {@code GROUP BY} itself).
+   Passing null will cause the rows to not be grouped.
+@param {String} having A filter declare which row groups to include in
+   the cursor, if row grouping is being used, formatted as an
+   SQL {@code HAVING} clause (excluding the {@code HAVING} itself).  Passing
+   null will cause all row groups to be included, and is
+   required when row grouping is not being used.
+@param {String} sortOrder How to order the rows, formatted as an SQL
+   {@code ORDER BY} clause (excluding the {@code ORDER BY} itself). Passing null
+   will use the default sort order, which may be unordered.
+@param {String} limit Limits the number of rows returned by the query,
+   formatted as {@code LIMIT} clause. Passing null denotes no {@code LIMIT} clause.
+@return {String} the resulting SQL {@code SELECT} statement
+*/
+buildQuery : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildQuery'>/**
+</span>@deprecated This method's signature is misleading since no SQL parameter
+ substitution is carried out.  The selection arguments parameter does not get
+ used at all.  To avoid confusion, call
+ {@link #buildQuery(String[], String, String, String, String, String)} instead.
+*/
+buildQuery : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildUpdate'>/**{@hide}
+</span>*/
+buildUpdate : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildDelete'>/**{@hide}
+</span>*/
+buildDelete : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildUnionSubQuery'>/**Construct a {@code SELECT} statement suitable for use in a group of
+</span> {@code SELECT} statements that will be joined through {@code UNION} operators
+ in buildUnionQuery.
+@param {String} typeDiscriminatorColumn the name of the result column
+   whose cells will contain the name of the table from which
+   each row was drawn.
+@param {Object {java.lang.String[]}} unionColumns the names of the columns to appear in the
+   result.  This may include columns that do not appear in the
+   table this {@code SELECT} is querying (i.e. mTables), but that do
+   appear in one of the other tables in the {@code UNION} query that we
+   are constructing.
+@param {Object {java.util.Set}} columnsPresentInTable a Set of the names of the columns
+   that appear in this table (i.e. in the table whose name is
+   mTables).  Since columns in unionColumns include columns that
+   appear only in other tables, we use this array to distinguish
+   which ones actually are present.  Other columns will have
+   NULL values for results from this subquery.
+@param {Number} computedColumnsOffset all columns in unionColumns before
+   this index are included under the assumption that they're
+   computed and therefore won't appear in columnsPresentInTable,
+   e.g. &quot;date * 1000 as normalized_date&quot;
+@param {String} typeDiscriminatorValue the value used for the
+   type-discriminator column in this subquery
+@param {String} selection A filter declaring which rows to return,
+   formatted as an SQL {@code WHERE} clause (excluding the {@code WHERE}
+   itself).  Passing null will return all rows for the given
+   URL.
+@param {String} groupBy A filter declaring how to group rows, formatted
+   as an SQL {@code GROUP BY} clause (excluding the {@code GROUP BY} itself).
+   Passing null will cause the rows to not be grouped.
+@param {String} having A filter declare which row groups to include in
+   the cursor, if row grouping is being used, formatted as an
+   SQL {@code HAVING} clause (excluding the {@code HAVING} itself).  Passing
+   null will cause all row groups to be included, and is
+   required when row grouping is not being used.
+@return {String} the resulting SQL {@code SELECT} statement
+*/
+buildUnionSubQuery : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildUnionSubQuery'>/**
+</span>@deprecated This method's signature is misleading since no SQL parameter
+ substitution is carried out.  The selection arguments parameter does not get
+ used at all.  To avoid confusion, call
+ {@link #buildUnionSubQuery}
+ instead.
+*/
+buildUnionSubQuery : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-buildUnionQuery'>/**Given a set of subqueries, all of which are {@code SELECT} statements,
+</span> construct a query that returns the union of what those
+ subqueries return.
+@param {Object {java.lang.String[]}} subQueries an array of SQL {@code SELECT} statements, all of
+   which must have the same columns as the same positions in
+   their results
+@param {String} sortOrder How to order the rows, formatted as an SQL
+   {@code ORDER BY} clause (excluding the {@code ORDER BY} itself).  Passing
+   null will use the default sort order, which may be unordered.
+@param {String} limit The limit clause, which applies to the entire union result set
+@return {String} the resulting SQL {@code SELECT} statement
+*/
+buildUnionQuery : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-computeProjection'>/**{@hide}
+</span>*/
+computeProjection : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteQueryBuilder-method-computeWhere'>/**{@hide}
+</span>*/
+computeWhere : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

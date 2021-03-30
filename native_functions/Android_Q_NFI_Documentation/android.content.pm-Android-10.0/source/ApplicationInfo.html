@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-ApplicationInfo'>/**@class android.content.pm.ApplicationInfo
+</span> implements android.os.Parcelable
+
+@extends android.content.pm.PackageItemInfo
+
+ Information you can retrieve about a particular application.  This
+ corresponds to information collected from the AndroidManifest.xml's
+ &amp;lt;application&amp;gt; tag.
+*/
+var ApplicationInfo = {
+
+<span id='android-content-pm-ApplicationInfo-property-taskAffinity'>/** Default task affinity of all activities in this application. See 
+</span> {@link android.content.pm.PackageParser.ActivityInfo#taskAffinity} for more information.  This comes 
+ from the &quot;taskAffinity&quot; attribute. 
+*/
+taskAffinity : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-permission'>/** Optional name of a permission required to be able to access this
+</span> application's components.  From the &quot;permission&quot; attribute.
+*/
+permission : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-processName'>/** The name of the process this application should run in.  From the
+</span> &quot;process&quot; attribute or, if not set, the same as
+ &lt;var&gt;packageName&lt;/var&gt;.
+*/
+processName : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-className'>/** Class implementing the Application object.  From the &quot;class&quot;
+</span> attribute.
+*/
+className : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-descriptionRes'>/** A style resource identifier (in the package's resources) of the
+</span> description of an application.  From the &quot;description&quot; attribute
+ or, if not set, 0.
+*/
+descriptionRes : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-theme'>/** A style resource identifier (in the package's resources) of the
+</span> default visual theme of the application.  From the &quot;theme&quot; attribute
+ or, if not set, 0.
+*/
+theme : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-manageSpaceActivityName'>/** Class implementing the Application's manage space
+</span> functionality.  From the &quot;manageSpaceActivity&quot;
+ attribute. This is an optional attribute and will be null if
+ applications don't specify it in their manifest
+*/
+manageSpaceActivityName : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-backupAgentName'>/** Class implementing the Application's backup functionality.  From
+</span> the &quot;backupAgent&quot; attribute.  This is an optional attribute and
+ will be null if the application does not specify it in its manifest.
+ 
+ &lt;p&gt;If android:allowBackup is set to false, this attribute is ignored.
+*/
+backupAgentName : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-fullBackupContent'>/** An optional attribute that indicates the app supports automatic backup of app data.
+</span> &lt;p&gt;0 is the default and means the app's entire data folder + managed external storage will
+ be backed up;
+ Any negative value indicates the app does not support full-data backup, though it may still
+ want to participate via the traditional key/value backup API;
+ A positive number specifies an xml resource in which the application has defined its backup
+ include/exclude criteria.
+ &lt;p&gt;If android:allowBackup is set to false, this attribute is ignored.
+
+ @see android.content.Context#getNoBackupFilesDir()
+ @see #FLAG_ALLOW_BACKUP
+
+ @hide
+*/
+fullBackupContent : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-uiOptions'>/** The default extra UI options for activities in this application.
+</span> Set from the {@link android.R.attr#uiOptions} attribute in the
+ activity's manifest.
+*/
+uiOptions : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SYSTEM'>/** Value for {@link #flags}: if set, this application is installed in the
+</span> device's system image.
+*/
+FLAG_SYSTEM : &quot;1&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_DEBUGGABLE'>/** Value for {@link #flags}: set to true if this application would like to
+</span> allow debugging of its
+ code, even when installed on a non-development system.  Comes
+ from {@link android.R.styleable#AndroidManifestApplication_debuggable
+ android:debuggable} of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_DEBUGGABLE : &quot;2&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_HAS_CODE'>/** Value for {@link #flags}: set to true if this application has code
+</span> associated with it.  Comes
+ from {@link android.R.styleable#AndroidManifestApplication_hasCode
+ android:hasCode} of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_HAS_CODE : &quot;4&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_PERSISTENT'>/** Value for {@link #flags}: set to true if this application is persistent.
+</span> Comes from {@link android.R.styleable#AndroidManifestApplication_persistent
+ android:persistent} of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_PERSISTENT : &quot;8&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_FACTORY_TEST'>/** Value for {@link #flags}: set to true if this application holds the
+</span> {@link android.Manifest.permission#FACTORY_TEST} permission and the
+ device is running in factory test mode.
+*/
+FLAG_FACTORY_TEST : &quot;16&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_ALLOW_TASK_REPARENTING'>/** Value for {@link #flags}: default value for the corresponding ActivityInfo flag.
+</span> Comes from {@link android.R.styleable#AndroidManifestApplication_allowTaskReparenting
+ android:allowTaskReparenting} of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_ALLOW_TASK_REPARENTING : &quot;32&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_ALLOW_CLEAR_USER_DATA'>/** Value for {@link #flags}: default value for the corresponding ActivityInfo flag.
+</span> Comes from {@link android.R.styleable#AndroidManifestApplication_allowClearUserData
+ android:allowClearUserData} of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_ALLOW_CLEAR_USER_DATA : &quot;64&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_UPDATED_SYSTEM_APP'>/** Value for {@link #flags}: this is set if this application has been
+</span> installed as an update to a built-in system application.
+*/
+FLAG_UPDATED_SYSTEM_APP : &quot;128&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_TEST_ONLY'>/** Value for {@link #flags}: this is set if the application has specified
+</span> {@link android.R.styleable#AndroidManifestApplication_testOnly
+ android:testOnly} to be true.
+*/
+FLAG_TEST_ONLY : &quot;256&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SUPPORTS_SMALL_SCREENS'>/** Value for {@link #flags}: true when the application's window can be
+</span> reduced in size for smaller screens.  Corresponds to
+ {@link android.R.styleable#AndroidManifestSupportsScreens_smallScreens
+ android:smallScreens}.
+*/
+FLAG_SUPPORTS_SMALL_SCREENS : &quot;512&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SUPPORTS_NORMAL_SCREENS'>/** Value for {@link #flags}: true when the application's window can be
+</span> displayed on normal screens.  Corresponds to
+ {@link android.R.styleable#AndroidManifestSupportsScreens_normalScreens
+ android:normalScreens}.
+*/
+FLAG_SUPPORTS_NORMAL_SCREENS : &quot;1024&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SUPPORTS_LARGE_SCREENS'>/** Value for {@link #flags}: true when the application's window can be
+</span> increased in size for larger screens.  Corresponds to
+ {@link android.R.styleable#AndroidManifestSupportsScreens_largeScreens
+ android:largeScreens}.
+*/
+FLAG_SUPPORTS_LARGE_SCREENS : &quot;2048&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_RESIZEABLE_FOR_SCREENS'>/** Value for {@link #flags}: true when the application knows how to adjust
+</span> its UI for different screen sizes.  Corresponds to
+ {@link android.R.styleable#AndroidManifestSupportsScreens_resizeable
+ android:resizeable}.
+*/
+FLAG_RESIZEABLE_FOR_SCREENS : &quot;4096&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SUPPORTS_SCREEN_DENSITIES'>/** Value for {@link #flags}: true when the application knows how to
+</span> accommodate different screen densities.  Corresponds to
+ {@link android.R.styleable#AndroidManifestSupportsScreens_anyDensity
+ android:anyDensity}.
+*/
+FLAG_SUPPORTS_SCREEN_DENSITIES : &quot;8192&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_VM_SAFE_MODE'>/** Value for {@link #flags}: set to true if this application would like to
+</span> request the VM to operate under the safe mode. Comes from
+ {@link android.R.styleable#AndroidManifestApplication_vmSafeMode
+ android:vmSafeMode} of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_VM_SAFE_MODE : &quot;16384&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_ALLOW_BACKUP'>/** Value for {@link #flags}: set to &lt;code&gt;false&lt;/code&gt; if the application does not wish
+</span> to permit any OS-driven backups of its data; &lt;code&gt;true&lt;/code&gt; otherwise.
+ 
+ &lt;p&gt;Comes from the
+ {@link android.R.styleable#AndroidManifestApplication_allowBackup android:allowBackup}
+ attribute of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_ALLOW_BACKUP : &quot;32768&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_KILL_AFTER_RESTORE'>/** Value for {@link #flags}: set to &lt;code&gt;false&lt;/code&gt; if the application must be kept
+</span> in memory following a full-system restore operation; &lt;code&gt;true&lt;/code&gt; otherwise.
+ Ordinarily, during a full system restore operation each application is shut down
+ following execution of its agent's onRestore() method.  Setting this attribute to
+ &lt;code&gt;false&lt;/code&gt; prevents this.  Most applications will not need to set this attribute.
+
+ &lt;p&gt;If
+ {@link android.R.styleable#AndroidManifestApplication_allowBackup android:allowBackup}
+ is set to &lt;code&gt;false&lt;/code&gt; or no
+ {@link android.R.styleable#AndroidManifestApplication_backupAgent android:backupAgent}
+ is specified, this flag will be ignored.
+
+ &lt;p&gt;Comes from the
+ {@link android.R.styleable#AndroidManifestApplication_killAfterRestore android:killAfterRestore}
+ attribute of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_KILL_AFTER_RESTORE : &quot;65536&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_RESTORE_ANY_VERSION'>/** Value for {@link #flags}: Set to &lt;code&gt;true&lt;/code&gt; if the application's backup
+</span> agent claims to be able to handle restore data even &quot;from the future,&quot;
+ i.e. from versions of the application with a versionCode greater than
+ the one currently installed on the device.  &lt;i&gt;Use with caution!&lt;/i&gt;  By default
+ this attribute is &lt;code&gt;false&lt;/code&gt; and the Backup Manager will ensure that data
+ from &quot;future&quot; versions of the application are never supplied during a restore operation.
+
+ &lt;p&gt;If
+ {@link android.R.styleable#AndroidManifestApplication_allowBackup android:allowBackup}
+ is set to &lt;code&gt;false&lt;/code&gt; or no
+ {@link android.R.styleable#AndroidManifestApplication_backupAgent android:backupAgent}
+ is specified, this flag will be ignored.
+
+ &lt;p&gt;Comes from the
+ {@link android.R.styleable#AndroidManifestApplication_restoreAnyVersion android:restoreAnyVersion}
+ attribute of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_RESTORE_ANY_VERSION : &quot;131072&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_EXTERNAL_STORAGE'>/** Value for {@link #flags}: Set to true if the application is
+</span> currently installed on external/removable/unprotected storage.  Such
+ applications may not be available if their storage is not currently
+ mounted.  When the storage it is on is not available, it will look like
+ the application has been uninstalled (its .apk is no longer available)
+ but its persistent data is not removed.
+*/
+FLAG_EXTERNAL_STORAGE : &quot;262144&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SUPPORTS_XLARGE_SCREENS'>/** Value for {@link #flags}: true when the application's window can be
+</span> increased in size for extra large screens.  Corresponds to
+ {@link android.R.styleable#AndroidManifestSupportsScreens_xlargeScreens
+ android:xlargeScreens}.
+*/
+FLAG_SUPPORTS_XLARGE_SCREENS : &quot;524288&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_LARGE_HEAP'>/** Value for {@link #flags}: true when the application has requested a
+</span> large heap for its processes.  Corresponds to
+ {@link android.R.styleable#AndroidManifestApplication_largeHeap
+ android:largeHeap}.
+*/
+FLAG_LARGE_HEAP : &quot;1048576&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_STOPPED'>/** Value for {@link #flags}: true if this application's package is in
+</span> the stopped state.
+*/
+FLAG_STOPPED : &quot;2097152&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SUPPORTS_RTL'>/** Value for {@link #flags}: true  when the application is willing to support
+</span> RTL (right to left). All activities will inherit this value.
+
+ Set from the {@link android.R.attr#supportsRtl} attribute in the
+ activity's manifest.
+
+ Default value is false (no support for RTL).
+*/
+FLAG_SUPPORTS_RTL : &quot;4194304&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_INSTALLED'>/** Value for {@link #flags}: true if the application is currently
+</span> installed for the calling user.
+*/
+FLAG_INSTALLED : &quot;8388608&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_IS_DATA_ONLY'>/** Value for {@link #flags}: true if the application only has its
+</span> data installed; the application package itself does not currently
+ exist on the device.
+*/
+FLAG_IS_DATA_ONLY : &quot;16777216&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_IS_GAME'>/** Value for {@link #flags}: true if the application was declared to be a
+</span> game, or false if it is a non-game application.
+
+ @deprecated use {@link #CATEGORY_GAME} instead.
+*/
+FLAG_IS_GAME : &quot;33554432&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_FULL_BACKUP_ONLY'>/** Value for {@link #flags}: {@code true} if the application asks that only
+</span> full-data streaming backups of its data be performed even though it defines
+ a {@link android.app.backup.BackupAgent BackupAgent}, which normally
+ indicates that the app will manage its backed-up data via incremental
+ key/value updates.
+*/
+FLAG_FULL_BACKUP_ONLY : &quot;67108864&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_USES_CLEARTEXT_TRAFFIC'>/** Value for {@link #flags}: {@code true} if the application may use cleartext network traffic
+</span> (e.g., HTTP rather than HTTPS; WebSockets rather than WebSockets Secure; XMPP, IMAP, STMP
+ without STARTTLS or TLS). If {@code false}, the app declares that it does not intend to use
+ cleartext network traffic, in which case platform components (e.g., HTTP stacks,
+ {@code DownloadManager}, {@code MediaPlayer}) will refuse app's requests to use cleartext
+ traffic. Third-party libraries are encouraged to honor this flag as well.
+
+ &lt;p&gt;NOTE: {@code WebView} honors this flag for applications targeting API level 26 and up.
+
+ &lt;p&gt;This flag is ignored on Android N and above if an Android Network Security Config is
+ present.
+
+ &lt;p&gt;This flag comes from
+ {@link android.R.styleable#AndroidManifestApplication_usesCleartextTraffic
+ android:usesCleartextTraffic} of the &amp;lt;application&amp;gt; tag.
+*/
+FLAG_USES_CLEARTEXT_TRAFFIC : &quot;134217728&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_EXTRACT_NATIVE_LIBS'>/** When set installer extracts native libs from .apk files.
+</span>*/
+FLAG_EXTRACT_NATIVE_LIBS : &quot;268435456&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_HARDWARE_ACCELERATED'>/** Value for {@link #flags}: {@code true} when the application's rendering
+</span> should be hardware accelerated.
+*/
+FLAG_HARDWARE_ACCELERATED : &quot;536870912&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_SUSPENDED'>/** Value for {@link #flags}: true if this application's package is in
+</span> the suspended state.
+*/
+FLAG_SUSPENDED : &quot;1073741824&quot;,
+<span id='android-content-pm-ApplicationInfo-property-FLAG_MULTIARCH'>/** Value for {@link #flags}: true if code from this application will need to be
+</span> loaded into other applications' processes. On devices that support multiple
+ instruction sets, this implies the code might be loaded into a process that's
+ using any of the devices supported instruction sets.
+
+ &lt;p&gt; The system might treat such applications specially, for eg., by
+ extracting the application's native libraries for all supported instruction
+ sets or by compiling the application's dex code for all supported instruction
+ sets.
+*/
+FLAG_MULTIARCH : &quot;-2147483648&quot;,
+<span id='android-content-pm-ApplicationInfo-property-flags'>/** Flags associated with the application.  Any combination of
+</span> {@link #FLAG_SYSTEM}, {@link #FLAG_DEBUGGABLE}, {@link #FLAG_HAS_CODE},
+ {@link #FLAG_PERSISTENT}, {@link #FLAG_FACTORY_TEST}, and
+ {@link #FLAG_ALLOW_TASK_REPARENTING}
+ {@link #FLAG_ALLOW_CLEAR_USER_DATA}, {@link #FLAG_UPDATED_SYSTEM_APP},
+ {@link #FLAG_TEST_ONLY}, {@link #FLAG_SUPPORTS_SMALL_SCREENS},
+ {@link #FLAG_SUPPORTS_NORMAL_SCREENS},
+ {@link #FLAG_SUPPORTS_LARGE_SCREENS}, {@link #FLAG_SUPPORTS_XLARGE_SCREENS},
+ {@link #FLAG_RESIZEABLE_FOR_SCREENS},
+ {@link #FLAG_SUPPORTS_SCREEN_DENSITIES}, {@link #FLAG_VM_SAFE_MODE},
+ {@link #FLAG_ALLOW_BACKUP}, {@link #FLAG_KILL_AFTER_RESTORE},
+ {@link #FLAG_RESTORE_ANY_VERSION}, {@link #FLAG_EXTERNAL_STORAGE},
+ {@link #FLAG_LARGE_HEAP}, {@link #FLAG_STOPPED},
+ {@link #FLAG_SUPPORTS_RTL}, {@link #FLAG_INSTALLED},
+ {@link #FLAG_IS_DATA_ONLY}, {@link #FLAG_IS_GAME},
+ {@link #FLAG_FULL_BACKUP_ONLY}, {@link #FLAG_USES_CLEARTEXT_TRAFFIC},
+ {@link #FLAG_MULTIARCH}.
+*/
+flags : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_HIDDEN'>/** Value for {@link #privateFlags}: true if the application is hidden via restrictions and for
+</span> most purposes is considered as not installed.
+ {@hide}
+*/
+PRIVATE_FLAG_HIDDEN : &quot;1&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_CANT_SAVE_STATE'>/** Value for {@link #privateFlags}: set to &lt;code&gt;true&lt;/code&gt; if the application
+</span> has reported that it is heavy-weight, and thus can not participate in
+ the normal application lifecycle.
+
+ &lt;p&gt;Comes from the
+ android.R.styleable#AndroidManifestApplication_cantSaveState
+ attribute of the &amp;lt;application&amp;gt; tag.
+
+ {@hide}
+*/
+PRIVATE_FLAG_CANT_SAVE_STATE : &quot;2&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_PRIVILEGED'>/** Value for {@link #privateFlags}: set to {@code true} if the application
+</span> is permitted to hold privileged permissions.
+
+ {@hide}
+*/
+PRIVATE_FLAG_PRIVILEGED : &quot;8&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_HAS_DOMAIN_URLS'>/** Value for {@link #privateFlags}: {@code true} if the application has any IntentFiler
+</span> with some data URI using HTTP or HTTPS with an associated VIEW action.
+
+ {@hide}
+*/
+PRIVATE_FLAG_HAS_DOMAIN_URLS : &quot;16&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_DEFAULT_TO_DEVICE_PROTECTED_STORAGE'>/** When set, the default data storage directory for this app is pointed at
+</span> the device-protected location.
+
+ @hide
+*/
+PRIVATE_FLAG_DEFAULT_TO_DEVICE_PROTECTED_STORAGE : &quot;32&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_DIRECT_BOOT_AWARE'>/** When set, assume that all components under the given app are direct boot
+</span> aware, unless otherwise specified.
+
+ @hide
+*/
+PRIVATE_FLAG_DIRECT_BOOT_AWARE : &quot;64&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_INSTANT'>/** Value for {@link #privateFlags}: {@code true} if the application is installed
+</span> as instant app.
+
+ @hide
+*/
+PRIVATE_FLAG_INSTANT : &quot;128&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_PARTIALLY_DIRECT_BOOT_AWARE'>/** When set, at least one component inside this application is direct boot
+</span> aware.
+
+ @hide
+*/
+PRIVATE_FLAG_PARTIALLY_DIRECT_BOOT_AWARE : &quot;256&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_REQUIRED_FOR_SYSTEM_USER'>/** When set, signals that the application is required for the system user and should not be
+</span> uninstalled.
+
+ @hide
+*/
+PRIVATE_FLAG_REQUIRED_FOR_SYSTEM_USER : &quot;512&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE'>/** When set, the application explicitly requested that its activities be resizeable by default.
+</span> @see android.R.styleable#AndroidManifestActivity_resizeableActivity
+
+ @hide
+*/
+PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE : &quot;1024&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_UNRESIZEABLE'>/** When set, the application explicitly requested that its activities *not* be resizeable by
+</span> default.
+ @see android.R.styleable#AndroidManifestActivity_resizeableActivity
+
+ @hide
+*/
+PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_UNRESIZEABLE : &quot;2048&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION'>/** The application isn't requesting explicitly requesting for its activities to be resizeable or
+</span> non-resizeable by default. So, we are making it activities resizeable by default based on the
+ target SDK version of the app.
+ @see android.R.styleable#AndroidManifestActivity_resizeableActivity
+
+ NOTE: This only affects apps with target SDK &gt;= N where the resizeableActivity attribute was
+ introduced. It shouldn't be confused with {@link android.content.pm.PackageParser.ActivityInfo#RESIZE_MODE_FORCE_RESIZEABLE}
+ where certain pre-N apps are forced to the resizeable.
+
+ @hide
+*/
+PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION : &quot;4096&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_BACKUP_IN_FOREGROUND'>/** Value for {@link #privateFlags}: {@code true} means the OS should go ahead and
+</span> run full-data backup operations for the app even when it is in a
+ foreground-equivalent run state.  Defaults to {@code false} if unspecified.
+ @hide
+*/
+PRIVATE_FLAG_BACKUP_IN_FOREGROUND : &quot;8192&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_STATIC_SHARED_LIBRARY'>/** Value for {@link #privateFlags}: {@code true} means this application
+</span> contains a static shared library. Defaults to {@code false} if unspecified.
+ @hide
+*/
+PRIVATE_FLAG_STATIC_SHARED_LIBRARY : &quot;16384&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_ISOLATED_SPLIT_LOADING'>/** Value for {@link #privateFlags}: When set, the application will only have its splits loaded
+</span> if they are required to load a component. Splits can be loaded on demand using the
+ {@link Context#createContextForSplit(String)} API.
+ @hide
+*/
+PRIVATE_FLAG_ISOLATED_SPLIT_LOADING : &quot;32768&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_VIRTUAL_PRELOAD'>/** Value for {@link #privateFlags}: When set, the application was installed as
+</span> a virtual preload.
+ @hide
+*/
+PRIVATE_FLAG_VIRTUAL_PRELOAD : &quot;65536&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_OEM'>/** Value for {@link #privateFlags}: whether this app is pre-installed on the
+</span> OEM partition of the system image.
+ @hide
+*/
+PRIVATE_FLAG_OEM : &quot;131072&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_VENDOR'>/** Value for {@link #privateFlags}: whether this app is pre-installed on the
+</span> vendor partition of the system image.
+ @hide
+*/
+PRIVATE_FLAG_VENDOR : &quot;262144&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_PRODUCT'>/** Value for {@link #privateFlags}: whether this app is pre-installed on the
+</span> product partition of the system image.
+ @hide
+*/
+PRIVATE_FLAG_PRODUCT : &quot;524288&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_SIGNED_WITH_PLATFORM_KEY'>/** Value for {@link #privateFlags}: whether this app is signed with the
+</span> platform key.
+ @hide
+*/
+PRIVATE_FLAG_SIGNED_WITH_PLATFORM_KEY : &quot;1048576&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_PRODUCT_SERVICES'>/** Value for {@link #privateFlags}: whether this app is pre-installed on the
+</span> google partition of the system image.
+ @hide
+*/
+PRIVATE_FLAG_PRODUCT_SERVICES : &quot;2097152&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_USES_NON_SDK_API'>/** Indicates whether this package requires access to non-SDK APIs.
+</span> Only system apps and tests are allowed to use this property.
+ @hide
+*/
+PRIVATE_FLAG_USES_NON_SDK_API : &quot;4194304&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_PROFILEABLE_BY_SHELL'>/** Indicates whether this application can be profiled by the shell user,
+</span> even when running on a device that is running in user mode.
+ @hide
+*/
+PRIVATE_FLAG_PROFILEABLE_BY_SHELL : &quot;8388608&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_HAS_FRAGILE_USER_DATA'>/** Indicates whether this package requires access to non-SDK APIs.
+</span> Only system apps and tests are allowed to use this property.
+ @hide
+*/
+PRIVATE_FLAG_HAS_FRAGILE_USER_DATA : &quot;16777216&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_USE_EMBEDDED_DEX'>/** Indicates whether this application wants to use the embedded dex in the APK, rather than
+</span> extracted or locally compiled variants. This keeps the dex code protected by the APK
+ signature. Such apps will always run in JIT mode (same when they are first installed), and
+ the system will never generate ahead-of-time compiled code for them. Depending on the app's
+ workload, there may be some run time performance change, noteably the cold start time.
+
+ @hide
+*/
+PRIVATE_FLAG_USE_EMBEDDED_DEX : &quot;33554432&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_ALLOW_CLEAR_USER_DATA_ON_FAILED_RESTORE'>/** Value for {@link #privateFlags}: indicates whether this application's data will be cleared
+</span> on a failed restore.
+
+ &lt;p&gt;Comes from the
+ android.R.styleable#AndroidManifestApplication_allowClearUserDataOnFailedRestore attribute
+ of the &amp;lt;application&amp;gt; tag.
+
+ @hide
+*/
+PRIVATE_FLAG_ALLOW_CLEAR_USER_DATA_ON_FAILED_RESTORE : &quot;67108864&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_ALLOW_AUDIO_PLAYBACK_CAPTURE'>/** Value for {@link #privateFlags}: true if the application allows its audio playback
+</span> to be captured by other apps.
+
+ @hide
+*/
+PRIVATE_FLAG_ALLOW_AUDIO_PLAYBACK_CAPTURE : &quot;134217728&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_IS_RESOURCE_OVERLAY'>/** Indicates whether this package is in fact a runtime resource overlay.
+</span>
+ @hide
+*/
+PRIVATE_FLAG_IS_RESOURCE_OVERLAY : &quot;268435456&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_REQUEST_LEGACY_EXTERNAL_STORAGE'>/** Value for {@link #privateFlags}: If {@code true} this app requests
+</span> full external storage access. The request may not be honored due to
+ policy or other reasons.
+
+ @hide
+*/
+PRIVATE_FLAG_REQUEST_LEGACY_EXTERNAL_STORAGE : &quot;536870912&quot;,
+<span id='android-content-pm-ApplicationInfo-property-PRIVATE_FLAG_ODM'>/** Value for {@link #privateFlags}: whether this app is pre-installed on the
+</span> ODM partition of the system image.
+ @hide
+*/
+PRIVATE_FLAG_ODM : &quot;1073741824&quot;,
+<span id='android-content-pm-ApplicationInfo-property-privateFlags'>/** Private/hidden flags. See {@code PRIVATE_FLAG_...} constants.
+</span> @hide
+*/
+privateFlags : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-METADATA_PRELOADED_FONTS'>/** @hide
+</span>*/
+METADATA_PRELOADED_FONTS : &quot;preloaded_fonts&quot;,
+<span id='android-content-pm-ApplicationInfo-property-requiresSmallestWidthDp'>/** The required smallest screen width the application can run on.  If 0,
+</span> nothing has been specified.  Comes from
+ {@link android.R.styleable#AndroidManifestSupportsScreens_requiresSmallestWidthDp
+ android:requiresSmallestWidthDp} attribute of the &amp;lt;supports-screens&amp;gt; tag.
+*/
+requiresSmallestWidthDp : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-compatibleWidthLimitDp'>/** The maximum smallest screen width the application is designed for.  If 0,
+</span> nothing has been specified.  Comes from
+ {@link android.R.styleable#AndroidManifestSupportsScreens_compatibleWidthLimitDp
+ android:compatibleWidthLimitDp} attribute of the &amp;lt;supports-screens&amp;gt; tag.
+*/
+compatibleWidthLimitDp : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-largestWidthLimitDp'>/** The maximum smallest screen width the application will work on.  If 0,
+</span> nothing has been specified.  Comes from
+ {@link android.R.styleable#AndroidManifestSupportsScreens_largestWidthLimitDp
+ android:largestWidthLimitDp} attribute of the &amp;lt;supports-screens&amp;gt; tag.
+*/
+largestWidthLimitDp : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-maxAspectRatio'>/** Value indicating the maximum aspect ratio the application supports.
+</span> &lt;p&gt;
+ 0 means unset.
+ @See {@link android.R.attr#maxAspectRatio}.
+ @hide
+*/
+maxAspectRatio : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-minAspectRatio'>/** Value indicating the minimum aspect ratio the application supports.
+</span> &lt;p&gt;
+ 0 means unset.
+ @see {@link android.R.attr#minAspectRatio}.
+ @hide
+*/
+minAspectRatio : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-volumeUuid'>/**@removed */
+</span>volumeUuid : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-storageUuid'>/** UUID of the storage volume on which this application is being hosted. For
+</span> apps hosted on the default internal storage at
+ {@link Environment#getDataDirectory()}, the UUID value is
+ {@link StorageManager#UUID_DEFAULT}.
+*/
+storageUuid : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-scanSourceDir'>/**{@hide} */
+</span>scanSourceDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-scanPublicSourceDir'>/**{@hide} */
+</span>scanPublicSourceDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-sourceDir'>/** Full path to the base APK for this application.
+</span>*/
+sourceDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-publicSourceDir'>/** Full path to the publicly available parts of {@link #sourceDir},
+</span> including resources and manifest. This may be different from
+ {@link #sourceDir} if an application is forward locked.
+*/
+publicSourceDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-splitNames'>/** The names of all installed split APKs, ordered lexicographically.
+</span>*/
+splitNames : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-splitSourceDirs'>/** Full paths to zero or more split APKs, indexed by the same order as {@link #splitNames}.
+</span>*/
+splitSourceDirs : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-splitPublicSourceDirs'>/** Full path to the publicly available parts of {@link #splitSourceDirs},
+</span> including resources and manifest. This may be different from
+ {@link #splitSourceDirs} if an application is forward locked.
+
+ @see #splitSourceDirs
+*/
+splitPublicSourceDirs : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-splitDependencies'>/** Maps the dependencies between split APKs. All splits implicitly depend on the base APK.
+</span>
+ Available since platform version O.
+
+ Only populated if the application opts in to isolated split loading via the
+ {@link android.R.attr.isolatedSplits} attribute in the &amp;lt;manifest&amp;gt; tag of the app's
+ AndroidManifest.xml.
+
+ The keys and values are all indices into the {@link #splitNames}, {@link #splitSourceDirs},
+ and {@link #splitPublicSourceDirs} arrays.
+ Each key represents a split and its value is an array of splits. The first element of this
+ array is the parent split, and the rest are configuration splits. These configuration splits
+ have no dependencies themselves.
+ Cycles do not exist because they are illegal and screened for during installation.
+
+ May be null if no splits are installed, or if no dependencies exist between them.
+
+ NOTE: Any change to the way split dependencies are stored must update the logic that
+       creates the class loader context for dexopt (DexoptUtils#getClassLoaderContexts).
+
+ @hide
+*/
+splitDependencies : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-resourceDirs'>/** Full paths to the locations of extra resource packages (runtime overlays)
+</span> this application uses. This field is only used if there are extra resource
+ packages, otherwise it is null.
+
+ {@hide}
+*/
+resourceDirs : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-seInfo'>/** String retrieved from the seinfo tag found in selinux policy. This value can be set through
+</span> the mac_permissions.xml policy construct. This value is used for setting an SELinux security
+ context on the process as well as its data directory.
+
+ {@hide}
+*/
+seInfo : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-seInfoUser'>/** The seinfo tag generated per-user. This value may change based upon the
+</span> user's configuration. For example, when an instant app is installed for
+ a user. It is an error if this field is ever {@code null} when trying to
+ start a new process.
+ &lt;p&gt;NOTE: We need to separate this out because we modify per-user values
+ multiple times. This needs to be refactored since we're performing more
+ work than necessary and these values should only be set once. When that
+ happens, we can merge the per-user value with the seInfo state above.
+
+ {@hide}
+*/
+seInfoUser : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-sharedLibraryFiles'>/** Paths to all shared libraries this application is linked against.  This
+</span> field is only set if the {@link android.content.pm.PackageParser.PackageManager#GET_SHARED_LIBRARY_FILES
+ android.content.pm.PackageParser.PackageManager.GET_SHARED_LIBRARY_FILES} flag was used when retrieving
+ the structure.
+*/
+sharedLibraryFiles : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-sharedLibraryInfos'>/** List of all shared libraries this application is linked against.  This
+</span> field is only set if the {@link android.content.pm.PackageParser.PackageManager#GET_SHARED_LIBRARY_FILES
+ android.content.pm.PackageParser.PackageManager.GET_SHARED_LIBRARY_FILES} flag was used when retrieving
+ the structure.
+
+ {@hide}
+*/
+sharedLibraryInfos : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-dataDir'>/** Full path to the default directory assigned to the package for its
+</span> persistent data.
+*/
+dataDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-deviceProtectedDataDir'>/** Full path to the device-protected directory assigned to the package for
+</span> its persistent data.
+
+ @see Context#createDeviceProtectedStorageContext()
+*/
+deviceProtectedDataDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-credentialProtectedDataDir'>/** Full path to the credential-protected directory assigned to the package
+</span> for its persistent data.
+
+ @hide
+*/
+credentialProtectedDataDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-nativeLibraryDir'>/** Full path to the directory where native JNI libraries are stored.
+</span>*/
+nativeLibraryDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-secondaryNativeLibraryDir'>/** Full path where unpacked native libraries for {@link #secondaryCpuAbi}
+</span> are stored, if present.
+
+ The main reason this exists is for bundled multi-arch apps, where
+ it's not trivial to calculate the location of libs for the secondary abi
+ given the location of the primary.
+
+ TODO: Change the layout of bundled installs so that we can use
+ nativeLibraryRootDir &amp; nativeLibraryRootRequiresIsa there as well.
+ (e.g {@code [ &quot;/system/app-lib/Foo/arm&quot;, &quot;/system/app-lib/Foo/arm64&quot; ]}
+ instead of {@code [ &quot;/system/lib/Foo&quot;, &quot;/system/lib64/Foo&quot; ]}.
+
+ @hide
+*/
+secondaryNativeLibraryDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-nativeLibraryRootDir'>/** The root path where unpacked native libraries are stored.
+</span> &lt;p&gt;
+ When {@link #nativeLibraryRootRequiresIsa} is set, the libraries are
+ placed in ISA-specific subdirectories under this path, otherwise the
+ libraries are placed directly at this path.
+
+ @hide
+*/
+nativeLibraryRootDir : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-nativeLibraryRootRequiresIsa'>/** Flag indicating that ISA must be appended to
+</span> {@link #nativeLibraryRootDir} to be useful.
+
+ @hide
+*/
+nativeLibraryRootRequiresIsa : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-primaryCpuAbi'>/** The primary ABI that this application requires, This is inferred from the ABIs
+</span> of the native JNI libraries the application bundles. Will be {@code null}
+ if this application does not require any particular ABI.
+
+ If non-null, the application will always be launched with this ABI.
+
+ {@hide}
+*/
+primaryCpuAbi : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-secondaryCpuAbi'>/** The secondary ABI for this application. Might be non-null for multi-arch
+</span> installs. The application itself never uses this ABI, but other applications that
+ use its code might.
+
+ {@hide}
+*/
+secondaryCpuAbi : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-uid'>/** The kernel user-ID that has been assigned to this application;
+</span> currently this is not a unique ID (multiple applications can have
+ the same uid).
+*/
+uid : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-minSdkVersion'>/** The minimum SDK version this application can run on. It will not run
+</span> on earlier versions.
+*/
+minSdkVersion : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-targetSdkVersion'>/** The minimum SDK version this application targets.  It may run on earlier
+</span> versions, but it knows how to work with any new behavior added at this
+ version.  Will be {@link android.os.Build.VERSION_CODES#CUR_DEVELOPMENT}
+ if this is a development build and the app is targeting that.  You should
+ compare that this number is &gt;= the SDK version number at which your
+ behavior was introduced.
+*/
+targetSdkVersion : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-longVersionCode'>/** The app's declared version code.
+</span> @hide
+*/
+longVersionCode : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-versionCode'>/** An integer representation of the app's declared version code. This is being left in place as
+</span> some apps were using reflection to access it before the move to long in
+ {@link android.os.Build.VERSION_CODES#P}
+ @deprecated Use {@link #longVersionCode} instead.
+ @hide
+*/
+versionCode : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-compileSdkVersion'>/** The user-visible SDK version (ex. 26) of the framework against which the application claims
+</span> to have been compiled, or {@code 0} if not specified.
+ &lt;p&gt;
+ This property is the compile-time equivalent of
+ {@link android.os.Build.VERSION#CODENAME Build.VERSION.SDK_INT}.
+
+ @hide For platform use only; we don't expect developers to need to read this value.
+*/
+compileSdkVersion : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-compileSdkVersionCodename'>/** The development codename (ex. &quot;O&quot;, &quot;REL&quot;) of the framework against which the application
+</span> claims to have been compiled, or {@code null} if not specified.
+ &lt;p&gt;
+ This property is the compile-time equivalent of
+ {@link android.os.Build.VERSION#CODENAME Build.VERSION.CODENAME}.
+
+ @hide For platform use only; we don't expect developers to need to read this value.
+*/
+compileSdkVersionCodename : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-enabled'>/** When false, indicates that all components within this application are
+</span> considered disabled, regardless of their individually set enabled status.
+*/
+enabled : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-enabledSetting'>/** For convenient access to the current enabled setting of this app.
+</span> @hide
+*/
+enabledSetting : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-installLocation'>/** For convenient access to package's install location.
+</span> @hide
+*/
+installLocation : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-networkSecurityConfigRes'>/** Resource file providing the application's Network Security Config.
+</span> @hide
+*/
+networkSecurityConfigRes : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-targetSandboxVersion'>/** Version of the sandbox the application wants to run in.
+</span> @hide
+*/
+targetSandboxVersion : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-appComponentFactory'>/** The factory of this package, as specified by the &amp;lt;manifest&amp;gt;
+</span> tag's {@link android.R.styleable#AndroidManifestApplication_appComponentFactory}
+ attribute.
+*/
+appComponentFactory : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-iconRes'>/** Resource id of {@link com.android.internal.R.styleable.AndroidManifestProvider_icon}
+</span> @hide
+*/
+iconRes : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-roundIconRes'>/** Resource id of {@link com.android.internal.R.styleable.AndroidManifestProvider_roundIcon}
+</span> @hide
+*/
+roundIconRes : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-category'>/** The category of this app. Categories are used to cluster multiple apps
+</span> together into meaningful groups, such as when summarizing battery,
+ network, or disk usage. Apps should only define this value when they fit
+ well into one of the specific categories.
+ &lt;p&gt;
+ Set from the {@link android.R.attr#appCategory} attribute in the
+ manifest. If the manifest doesn't define a category, this value may have
+ been provided by the installer via
+ {@link android.content.pm.PackageParser.PackageManager#setApplicationCategoryHint(String, int)}.
+*/
+category : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_UNDEFINED'>/** Value when category is undefined.
+</span>
+ @see #category
+*/
+CATEGORY_UNDEFINED : &quot;-1&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_GAME'>/** Category for apps which are primarily games.
+</span>
+ @see #category
+*/
+CATEGORY_GAME : &quot;0&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_AUDIO'>/** Category for apps which primarily work with audio or music, such as music
+</span> players.
+
+ @see #category
+*/
+CATEGORY_AUDIO : &quot;1&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_VIDEO'>/** Category for apps which primarily work with video or movies, such as
+</span> streaming video apps.
+
+ @see #category
+*/
+CATEGORY_VIDEO : &quot;2&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_IMAGE'>/** Category for apps which primarily work with images or photos, such as
+</span> camera or gallery apps.
+
+ @see #category
+*/
+CATEGORY_IMAGE : &quot;3&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_SOCIAL'>/** Category for apps which are primarily social apps, such as messaging,
+</span> communication, email, or social network apps.
+
+ @see #category
+*/
+CATEGORY_SOCIAL : &quot;4&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_NEWS'>/** Category for apps which are primarily news apps, such as newspapers,
+</span> magazines, or sports apps.
+
+ @see #category
+*/
+CATEGORY_NEWS : &quot;5&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_MAPS'>/** Category for apps which are primarily maps apps, such as navigation apps.
+</span>
+ @see #category
+*/
+CATEGORY_MAPS : &quot;6&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CATEGORY_PRODUCTIVITY'>/** Category for apps which are primarily productivity apps, such as cloud
+</span> storage or workplace apps.
+
+ @see #category
+*/
+CATEGORY_PRODUCTIVITY : &quot;7&quot;,
+<span id='android-content-pm-ApplicationInfo-property-classLoaderName'>/**@hide */
+</span>classLoaderName : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-splitClassLoaderNames'>/**@hide */
+</span>splitClassLoaderNames : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-hiddenUntilInstalled'>/**@hide */
+</span>hiddenUntilInstalled : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-zygotePreloadName'>/**@hide */
+</span>zygotePreloadName : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-property-HIDDEN_API_ENFORCEMENT_DEFAULT'>/** Represents the default policy. The actual policy used will depend on other properties of
+</span> the application, e.g. the target SDK version.
+ @hide
+*/
+HIDDEN_API_ENFORCEMENT_DEFAULT : &quot;-1&quot;,
+<span id='android-content-pm-ApplicationInfo-property-HIDDEN_API_ENFORCEMENT_DISABLED'>/** No API enforcement; the app can access the entire internal private API. Only for use by
+</span> system apps.
+ @hide
+*/
+HIDDEN_API_ENFORCEMENT_DISABLED : &quot;0&quot;,
+<span id='android-content-pm-ApplicationInfo-property-HIDDEN_API_ENFORCEMENT_JUST_WARN'>/** No API enforcement, but enable the detection logic and warnings. Observed behaviour is the
+</span> same as {@link #HIDDEN_API_ENFORCEMENT_DISABLED} but you may see warnings in the log when
+ APIs are accessed.
+ @hide
+ */
+HIDDEN_API_ENFORCEMENT_JUST_WARN : &quot;1&quot;,
+<span id='android-content-pm-ApplicationInfo-property-HIDDEN_API_ENFORCEMENT_ENABLED'>/** Dark grey list enforcement. Enforces the dark grey and black lists
+</span> @hide
+*/
+HIDDEN_API_ENFORCEMENT_ENABLED : &quot;2&quot;,
+<span id='android-content-pm-ApplicationInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-ApplicationInfo-method-getCategoryTitle'>/**Return a concise, localized title for the given
+</span> {@link android.content.pm.ApplicationInfo#category} value, or {@code null} for unknown
+ values such as {@link #CATEGORY_UNDEFINED}.
+@see #category
+*/
+getCategoryTitle : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isValidHiddenApiEnforcementPolicy'>/**
+</span>@hide 
+*/
+isValidHiddenApiEnforcementPolicy : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-writeToProto'>/**{@hide}
+</span>*/
+writeToProto : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-hasRtlSupport'>/**
+</span>@return {Boolean} true if &quot;supportsRtl&quot; has been set to true in the AndroidManifest
+@hide 
+*/
+hasRtlSupport : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-hasCode'>/**{@hide}
+</span>*/
+hasCode : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-loadDescription'>/**Retrieve the textual description of the application.  This
+</span> will call back on the given PackageManager to load the description from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the label can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {java.lang.CharSequence}} Returns a CharSequence containing the application's description.
+ If there is no description, null is returned.
+*/
+loadDescription : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-disableCompatibilityMode'>/**Disable compatibility mode
+</span>@hide 
+*/
+disableCompatibilityMode : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-usesCompatibilityMode'>/**Is using compatibility mode for non densty aware legacy applications.
+</span>@hide 
+*/
+usesCompatibilityMode : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-initForUser'>/**{@hide}
+</span>*/
+initForUser : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-usesNonSdkApi'>/**
+</span>@hide 
+*/
+usesNonSdkApi : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-hasFragileUserData'>/**Whether an app needs to keep the app data on uninstall.
+</span>@return {Boolean} {@code true} if the app indicates that it needs to keep the app data
+@hide 
+*/
+hasFragileUserData : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isAudioPlaybackCaptureAllowed'>/**Whether an app allows its playback audio to be captured by other apps.
+</span>@return {Boolean} {@code true} if the app indicates that its audio can be captured by other apps.
+@hide 
+*/
+isAudioPlaybackCaptureAllowed : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-hasRequestedLegacyExternalStorage'>/**If {@code true} this app requested to run in the legacy storage mode.
+</span>@hide 
+*/
+hasRequestedLegacyExternalStorage : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getHiddenApiEnforcementPolicy'>/**
+</span>@hide 
+*/
+getHiddenApiEnforcementPolicy : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setHiddenApiEnforcementPolicy'>/**
+</span>@hide 
+*/
+setHiddenApiEnforcementPolicy : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-maybeUpdateHiddenApiEnforcementPolicy'>/**Updates the hidden API enforcement policy for this app from the given values, if appropriate.
+</span>
+ This will have no effect if this app is not subject to hidden API enforcement, i.e. if it
+ is on the package whitelist.
+@param {Number} policy configured policy for this app, or {@link #HIDDEN_API_ENFORCEMENT_DEFAULT}
+        if nothing configured.
+@hide 
+*/
+maybeUpdateHiddenApiEnforcementPolicy : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setVersionCode'>/**
+</span>@hide 
+*/
+setVersionCode : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-loadDefaultIcon'>/**
+</span>@hide 
+*/
+loadDefaultIcon : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isDefaultToDeviceProtectedStorage'>/**
+</span>@hide 
+*/
+isDefaultToDeviceProtectedStorage : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isDirectBootAware'>/**
+</span>@hide 
+*/
+isDirectBootAware : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isEncryptionAware'>/**Check whether the application is encryption aware.
+</span>@see #isDirectBootAware()
+@see #isPartiallyDirectBootAware()
+@hide 
+*/
+isEncryptionAware : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isExternal'>/**
+</span>@hide 
+*/
+isExternal : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isInstantApp'>/**True if the application is installed as an instant app.
+</span>@hide 
+*/
+isInstantApp : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isInternal'>/**
+</span>@hide 
+*/
+isInternal : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isOem'>/**
+</span>@hide 
+*/
+isOem : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isOdm'>/**
+</span>@hide 
+*/
+isOdm : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isPartiallyDirectBootAware'>/**
+</span>@hide 
+*/
+isPartiallyDirectBootAware : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isSignedWithPlatformKey'>/**
+</span>@hide 
+*/
+isSignedWithPlatformKey : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isPrivilegedApp'>/**
+</span>@hide 
+*/
+isPrivilegedApp : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isRequiredForSystemUser'>/**
+</span>@hide 
+*/
+isRequiredForSystemUser : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isStaticSharedLibrary'>/**
+</span>@hide 
+*/
+isStaticSharedLibrary : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isSystemApp'>/**
+</span>@hide 
+*/
+isSystemApp : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isUpdatedSystemApp'>/**
+</span>@hide 
+*/
+isUpdatedSystemApp : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isVendor'>/**
+</span>@hide 
+*/
+isVendor : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isProduct'>/**
+</span>@hide 
+*/
+isProduct : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isProductServices'>/**
+</span>@hide 
+*/
+isProductServices : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isEmbeddedDexUsed'>/**
+</span>@hide 
+*/
+isEmbeddedDexUsed : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isVirtualPreload'>/**Returns whether or not this application was installed as a virtual preload.
+</span>*/
+isVirtualPreload : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isProfileableByShell'>/**Returns whether or not this application can be profiled by the shell user,
+</span> even when running on a device that is running in user mode.
+*/
+isProfileableByShell : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-requestsIsolatedSplitLoading'>/**Returns true if the app has declared in its manifest that it wants its split APKs to be
+</span> loaded into isolated Contexts, with their own ClassLoaders and Resources objects.
+@hide 
+*/
+requestsIsolatedSplitLoading : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-isResourceOverlay'>/**Returns true if the package has declared in its manifest that it is a
+</span> runtime resource overlay.
+*/
+isResourceOverlay : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getAllApkPaths'>/**Return all the APK paths that may be required to load this application, including all
+</span> splits, shared libraries, and resource overlays.
+@hide 
+*/
+getAllApkPaths : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setCodePath'>/**{@hide}
+</span>*/
+setCodePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setBaseCodePath'>/**{@hide}
+</span>*/
+setBaseCodePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setSplitCodePaths'>/**{@hide}
+</span>*/
+setSplitCodePaths : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setResourcePath'>/**{@hide}
+</span>*/
+setResourcePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setBaseResourcePath'>/**{@hide}
+</span>*/
+setBaseResourcePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-setSplitResourcePaths'>/**{@hide}
+</span>*/
+setSplitResourcePaths : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getCodePath'>/**{@hide}
+</span>*/
+getCodePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getBaseCodePath'>/**{@hide}
+</span>*/
+getBaseCodePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getSplitCodePaths'>/**{@hide}
+</span>*/
+getSplitCodePaths : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getResourcePath'>/**{@hide}
+</span>*/
+getResourcePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getBaseResourcePath'>/**{@hide}
+</span>*/
+getBaseResourcePath : function(  ) {},
+
+<span id='android-content-pm-ApplicationInfo-method-getSplitResourcePaths'>/**{@hide}
+</span>*/
+getSplitResourcePaths : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-rtt-ResponderLocation'>/**@class android.net.wifi.rtt.ResponderLocation
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ ResponderLocation is both a Location Configuration Information (LCI) decoder and a Location Civic
+ Report (LCR) decoder for information received from a Wi-Fi Access Point (AP) during Wi-Fi RTT
+ ranging process.
+
+ &lt;p&gt;This is based on the IEEE P802.11-REVmc/D8.0 spec section 9.4.2.22, under Measurement Report
+ Element. Subelement location data-fields parsed from separate input LCI and LCR Information
+ Elements are unified in this class.&lt;/p&gt;
+
+ &lt;p&gt;Note: The information provided by this class is broadcast by a responder (usually an Access
+ Point), and passed on as-is. There is no guarantee this information is accurate or correct, and
+ as a result developers should carefully consider how this information should be used and provide
+ corresponding advice to users.&lt;/p&gt;
+*/
+var ResponderLocation = {
+
+<span id='android-net-wifi-rtt-ResponderLocation-property-ALTITUDE_UNDEFINED'>/** Altitude is not defined for the Responder.
+</span> The altitude and altitude uncertainty should not be used: see section 2.4 of IETF RFC 6225.
+*/
+ALTITUDE_UNDEFINED : &quot;0&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-ALTITUDE_METERS'>/**Responder Altitude is measured in meters.  */
+</span>ALTITUDE_METERS : &quot;1&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-ALTITUDE_FLOORS'>/**Responder Altitude is measured in floors. */
+</span>ALTITUDE_FLOORS : &quot;2&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-DATUM_UNDEFINED'>/**Datum is not defined. */
+</span>DATUM_UNDEFINED : &quot;0&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-DATUM_WGS84'>/**Datum used is WGS84. */
+</span>DATUM_WGS84 : &quot;1&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-DATUM_NAD83_NAV88'>/**Datum used is NAD83 NAV88. */
+</span>DATUM_NAD83_NAV88 : &quot;2&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-DATUM_NAD83_MLLW'>/**Datum used is NAD83 MLLW. */
+</span>DATUM_NAD83_MLLW : &quot;3&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-LCI_VERSION_1'>/**Version of the LCI protocol is 1.0, the only defined protocol at this time. */
+</span>LCI_VERSION_1 : &quot;1&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-LOCATION_FIXED'>/**Location of responder is fixed (does not move) */
+</span>LOCATION_FIXED : &quot;0&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-LOCATION_VARIABLE'>/**Location of the responder is variable, and may move */
+</span>LOCATION_VARIABLE : &quot;1&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-LOCATION_MOVEMENT_UNKNOWN'>/**Location of the responder is not known to be either fixed or variable. */
+</span>LOCATION_MOVEMENT_UNKNOWN : &quot;2&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-LOCATION_RESERVED'>/**Location of the responder status is a reserved value */
+</span>LOCATION_RESERVED : &quot;3&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-wifi-rtt-ResponderLocation-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-setCivicLocationSubelementDefaults'>/**Sets the LCR Civic Location subelement field to the default undefined value.
+</span>@hide 
+*/
+setCivicLocationSubelementDefaults : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-isValid'>/**
+</span>@return {Boolean} true if the ResponderLocation object is valid and contains useful information
+ relevant to the location of the Responder. If this is ever false, this object will not be
+ available to developers, and have a null value.
+@hide 
+*/
+isValid : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-isLciSubelementValid'>/**
+</span>@return {Boolean} true if the LCI subelement (containing Latitude, Longitude and Altitude) is valid.
+
+ &lt;p&gt; This method tells us if the responder has provided its Location Configuration
+ Information (LCI) directly, and is useful when an external database of responder locations
+ is not available&lt;/p&gt;
+
+ &lt;p&gt;If isLciSubelementValid() returns true, all the LCI values provided by the corresponding
+ getter methods will have been set as described by the responder, or else if false, they
+ should not be used and will throw an IllegalStateException.&lt;/p&gt;
+*/
+isLciSubelementValid : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getLatitudeUncertainty'>/**
+</span>@return {Number} the latitude uncertainty in degrees.
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+ &lt;/p&gt;
+ &lt;p&gt; An unknown uncertainty is indicated by 0.&lt;/p&gt;
+*/
+getLatitudeUncertainty : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getLatitude'>/**
+</span>@return {Number} the latitude in degrees
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+getLatitude : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getLongitudeUncertainty'>/**
+</span>@return {Number} the Longitude uncertainty in degrees.
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+ &lt;/p&gt;
+ &lt;p&gt; An unknown uncertainty is indicated by 0.&lt;/p&gt;
+*/
+getLongitudeUncertainty : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getLongitude'>/**
+</span>@return {Number} the Longitude in degrees..
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+getLongitude : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getAltitudeType'>/**
+</span>@return {Number} the Altitude type.
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+getAltitudeType : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getAltitudeUncertainty'>/**
+</span>@return {Number} the Altitude uncertainty in meters.
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+ &lt;/p&gt;
+ &lt;p&gt;An unknown uncertainty is indicated by 0.&lt;/p&gt;
+*/
+getAltitudeUncertainty : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getAltitude'>/**
+</span>@return {Number} the Altitude in units defined by the altitude type.
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+getAltitude : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getDatum'>/**
+</span>@return {Number} the Datum used for the LCI positioning information.
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+getDatum : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getRegisteredLocationAgreementIndication'>/**
+</span>@return {Boolean} true if the station is operating within a national policy area or an international
+ agreement area near a national border, otherwise false
+ (see 802.11REVmc Section 11.12.3 - Registered STA Operation).
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+getRegisteredLocationAgreementIndication : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getRegisteredLocationDseIndication'>/**
+</span>@return {Boolean} true indicating this is an enabling station, enabling the operation of nearby STAs
+ with Dynamic Station Enablement (DSE), otherwise false.
+ (see 802.11REVmc Section 11.12.3 - Registered STA Operation).
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+@hide 
+*/
+getRegisteredLocationDseIndication : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getDependentStationIndication'>/**
+</span>@return {Boolean} true indicating this is a dependent station that is operating with the enablement of
+ an enabling station whose LCI is being reported, otherwise false.
+ (see 802.11REVmc Section 11.12.3 - Registered STA Operation).
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+@hide 
+*/
+getDependentStationIndication : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getLciVersion'>/**
+</span>@return {Number} a value greater or equal to 1, indicating the current version number
+ of the LCI protocol.
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+getLciVersion : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-toLocation'>/**
+</span>@return {Object {android.location.Location}} the LCI location represented as a {@link Location} object (best effort).
+ &lt;p&gt;
+ Only valid if {@link #isLciSubelementValid()} returns true, or will throw an exception.
+*/
+toLocation : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-isZaxisSubelementValid'>/**
+</span>@return {Boolean} if the Z subelement (containing mobility, Floor, Height above floor) is valid.
+*/
+isZaxisSubelementValid : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getExpectedToMove'>/**
+</span>@return {Number} an integer representing the mobility of the responder.
+ &lt;p&gt;
+ Only valid if {@link #isZaxisSubelementValid()} returns true, or will throw an exception.
+*/
+getExpectedToMove : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getFloorNumber'>/**
+</span>@return {Number} the Z sub element Floor Number.
+ &lt;p&gt;
+ Only valid if {@link #isZaxisSubelementValid()} returns true, or will throw an exception.
+ &lt;/p&gt;
+ &lt;p&gt;Note: this number can be positive or negative, with value increments of +/- 1/16 of a
+ floor.&lt;/p&gt;.
+*/
+getFloorNumber : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getHeightAboveFloorMeters'>/**
+</span>@return {Number} the Z subelement Height above the floor in meters.
+ &lt;p&gt;
+ Only valid if {@link #isZaxisSubelementValid()} returns true, or will throw an exception.
+ &lt;/p&gt;
+ &lt;p&gt;This value can be positive or negative. &lt;/p&gt;
+*/
+getHeightAboveFloorMeters : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getHeightAboveFloorUncertaintyMeters'>/**
+</span>@return {Number} the Z subelement Height above the floor uncertainty in meters.
+ &lt;p&gt;
+ Only valid if {@link #isZaxisSubelementValid()} returns true, or will throw an exception.
+ &lt;/p&gt;
+ &lt;p&gt;An unknown uncertainty is indicated by 0.&lt;/p&gt;
+*/
+getHeightAboveFloorUncertaintyMeters : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getRetransmitPolicyIndication'>/**
+</span>@return {Boolean} true if the location information received from the responder can be
+ retransmitted to another device, physically separate from the one that received it.
+@hide 
+*/
+getRetransmitPolicyIndication : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getRetentionExpiresIndication'>/**
+</span>@return {Boolean} true if location-data received should expire (and be deleted)
+ by the time provided in the getRelativeExpirationTimeHours() method.
+@hide 
+*/
+getRetentionExpiresIndication : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getExtraInfoOnAssociationIndication'>/**
+</span>@return {Boolean} true if there is extra location info available on association.
+@hide 
+*/
+getExtraInfoOnAssociationIndication : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getColocatedBssids'>/**
+</span>@return {Object {java.util.List}} the Immutable list of colocated BSSIDs at the responder.
+
+ &lt;p&gt; Will return an empty list when there are no bssids listed.
+*/
+getColocatedBssids : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-toCivicLocationAddress'>/**
+</span>@return {Object {android.location.Address}} the civic location represented as an {@link Address} object (best effort).
+
+ &lt;p&gt; Will return a {@code null} when there is no Civic Location defined.
+*/
+toCivicLocationAddress : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-toCivicLocationSparseArray'>/**
+</span>@return {Object {android.util.SparseArray}} the civic location represented as a {@link SparseArray}
+ &lt;p&gt;
+ Valid keys to access the SparseArray can be found in {@code CivicLocationKeys}.
+ &lt;/p&gt;
+ &lt;p&gt; Will return a {@code null} when there is no Civic Location defined.
+*/
+toCivicLocationSparseArray : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getCivicLocationCountryCode'>/**
+</span>@return {String} the civic location two upper-case ASCII character country code defined in ISO 3166.
+
+ &lt;p&gt; Will return a {@code null} when there is no country code defined.
+@hide 
+*/
+getCivicLocationCountryCode : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getCivicLocationElementValue'>/**
+</span>@param {Number} key used to find a corresponding value in the Civic Location Tuple list
+@param key used to find a corresponding value in the Civic Location Tuple list
+@hide 
+*/
+getCivicLocationElementValue : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getMapImageMimeType'>/**
+</span>@return {String} the Map Image file Mime type, referred to by getMapImageUrl().
+*/
+getMapImageMimeType : function(  ) {},
+
+<span id='android-net-wifi-rtt-ResponderLocation-method-getMapImageUri'>/**
+</span>@return {Object {android.net.Uri}} a URI referencing a map-file showing the local floor plan.
+
+ &lt;p&gt; Will return a {@code null} when there is no URI defined.
+*/
+getMapImageUri : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

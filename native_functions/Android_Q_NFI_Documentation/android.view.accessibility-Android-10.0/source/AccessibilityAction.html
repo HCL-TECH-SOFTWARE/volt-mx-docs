@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction'>/**@class android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
+</span>@extends java.lang.Object
+
+ A class defining an action that can be performed on an {@link android.view.accessibility.AccessibilityNodeInfo}.
+ Each action has a unique id that is mandatory and optional data.
+ &lt;p&gt;
+ There are three categories of actions:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;strong&gt;Standard actions&lt;/strong&gt; - These are actions that are reported and
+ handled by the standard UI widgets in the platform. For each standard action
+ there is a static constant defined in this class, e.g. {@link #ACTION_FOCUS}.
+ These actions will have {@code null} labels.
+ &lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;Custom actions action&lt;/strong&gt; - These are actions that are reported
+ and handled by custom widgets. i.e. ones that are not part of the UI toolkit. For
+ example, an application may define a custom action for clearing the user history.
+ &lt;/li&gt;
+ &lt;li&gt;&lt;strong&gt;Overriden standard actions&lt;/strong&gt; - These are actions that override
+ standard actions to customize them. For example, an app may add a label to the
+ standard {@link #ACTION_CLICK} action to indicate to the user that this action clears
+ browsing history.
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ Actions are typically added to an {@link android.view.accessibility.AccessibilityNodeInfo} by using
+ {@link android.view.accessibility.AccessibilityNodeInfo#addAction(AccessibilityAction)} within
+ {@link View#onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)} and are performed
+ within {@link View#performAccessibilityAction(int, Bundle)}.
+ &lt;/p&gt;
+ &lt;p class=&quot;note&quot;&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Views which support these actions should invoke
+ {@link View#setImportantForAccessibility(int)} with
+ {@link View#IMPORTANT_FOR_ACCESSIBILITY_YES} to ensure an {@link AccessibilityService}
+ can discover the set of supported actions.
+ &lt;/p&gt;
+*/
+var AccessibilityAction = {
+
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-sStandardActions'>/**@hide */
+</span>sStandardActions : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_FOCUS'>/** Action that gives input focus to the node.
+</span>*/
+ACTION_FOCUS : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_CLEAR_FOCUS'>/** Action that clears input focus of the node.
+</span>*/
+ACTION_CLEAR_FOCUS : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SELECT'>/**  Action that selects the node.
+</span>*/
+ACTION_SELECT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_CLEAR_SELECTION'>/** Action that deselects the node.
+</span>*/
+ACTION_CLEAR_SELECTION : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_CLICK'>/** Action that clicks on the node info.
+</span>*/
+ACTION_CLICK : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_LONG_CLICK'>/** Action that long clicks on the node.
+</span>*/
+ACTION_LONG_CLICK : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_ACCESSIBILITY_FOCUS'>/** Action that gives accessibility focus to the node.
+</span>*/
+ACTION_ACCESSIBILITY_FOCUS : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_CLEAR_ACCESSIBILITY_FOCUS'>/** Action that clears accessibility focus of the node.
+</span>*/
+ACTION_CLEAR_ACCESSIBILITY_FOCUS : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_NEXT_AT_MOVEMENT_GRANULARITY'>/** Action that requests to go to the next entity in this node's text
+</span> at a given movement granularity. For example, move to the next character,
+ word, etc.
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT},
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN}&lt;br&gt;
+ &lt;strong&gt;Example:&lt;/strong&gt; Move to the previous character and do not extend selection.
+ &lt;code&gt;&lt;pre&gt;&lt;p&gt;
+   Bundle arguments = new Bundle();
+   arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT,
+           AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER);
+   arguments.putBoolean(AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN,
+           false);
+   info.performAction(AccessibilityAction.ACTION_NEXT_AT_MOVEMENT_GRANULARITY.getId(),
+           arguments);
+ &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+ &lt;/p&gt;
+
+ @see AccessibilityNodeInfo#ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT
+  AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT
+ @see AccessibilityNodeInfo#ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
+  AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
+
+ @see AccessibilityNodeInfo#setMovementGranularities(int)
+  AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
+ @see AccessibilityNodeInfo#getMovementGranularities()
+  AccessibilityNodeInfo.getMovementGranularities()
+
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_CHARACTER
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_WORD
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_WORD
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_LINE
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_LINE
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_PARAGRAPH
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PARAGRAPH
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_PAGE
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PAGE
+*/
+ACTION_NEXT_AT_MOVEMENT_GRANULARITY : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY'>/** Action that requests to go to the previous entity in this node's text
+</span> at a given movement granularity. For example, move to the next character,
+ word, etc.
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT},
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN}&lt;br&gt;
+ &lt;strong&gt;Example:&lt;/strong&gt; Move to the next character and do not extend selection.
+ &lt;code&gt;&lt;pre&gt;&lt;p&gt;
+   Bundle arguments = new Bundle();
+   arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT,
+           AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER);
+   arguments.putBoolean(AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN,
+           false);
+   info.performAction(AccessibilityAction.ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY.getId(),
+           arguments);
+ &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+ &lt;/p&gt;
+
+ @see AccessibilityNodeInfo#ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT
+  AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT
+ @see AccessibilityNodeInfo#ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
+  AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
+
+ @see AccessibilityNodeInfo#setMovementGranularities(int)
+   AccessibilityNodeInfo.setMovementGranularities(int)
+ @see AccessibilityNodeInfo#getMovementGranularities()
+  AccessibilityNodeInfo.getMovementGranularities()
+
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_CHARACTER
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_WORD
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_WORD
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_LINE
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_LINE
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_PARAGRAPH
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PARAGRAPH
+ @see AccessibilityNodeInfo#MOVEMENT_GRANULARITY_PAGE
+  AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PAGE
+*/
+ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_NEXT_HTML_ELEMENT'>/** Action to move to the next HTML element of a given type. For example, move
+</span> to the BUTTON, INPUT, TABLE, etc.
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_HTML_ELEMENT_STRING
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_HTML_ELEMENT_STRING}&lt;br&gt;
+ &lt;strong&gt;Example:&lt;/strong&gt;
+ &lt;code&gt;&lt;pre&gt;&lt;p&gt;
+   Bundle arguments = new Bundle();
+   arguments.putString(AccessibilityNodeInfo.ACTION_ARGUMENT_HTML_ELEMENT_STRING, &quot;BUTTON&quot;);
+   info.performAction(AccessibilityAction.ACTION_NEXT_HTML_ELEMENT.getId(), arguments);
+ &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+ &lt;/p&gt;
+*/
+ACTION_NEXT_HTML_ELEMENT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_PREVIOUS_HTML_ELEMENT'>/** Action to move to the previous HTML element of a given type. For example, move
+</span> to the BUTTON, INPUT, TABLE, etc.
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_HTML_ELEMENT_STRING
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_HTML_ELEMENT_STRING}&lt;br&gt;
+ &lt;strong&gt;Example:&lt;/strong&gt;
+ &lt;code&gt;&lt;pre&gt;&lt;p&gt;
+   Bundle arguments = new Bundle();
+   arguments.putString(AccessibilityNodeInfo.ACTION_ARGUMENT_HTML_ELEMENT_STRING, &quot;BUTTON&quot;);
+   info.performAction(AccessibilityAction.ACTION_PREVIOUS_HTML_ELEMENT.getId(), arguments);
+ &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+ &lt;/p&gt;
+*/
+ACTION_PREVIOUS_HTML_ELEMENT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SCROLL_FORWARD'>/** Action to scroll the node content forward.
+</span>*/
+ACTION_SCROLL_FORWARD : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SCROLL_BACKWARD'>/** Action to scroll the node content backward.
+</span>*/
+ACTION_SCROLL_BACKWARD : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_COPY'>/** Action to copy the current selection to the clipboard.
+</span>*/
+ACTION_COPY : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_PASTE'>/** Action to paste the current clipboard content.
+</span>*/
+ACTION_PASTE : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_CUT'>/** Action to cut the current selection and place it to the clipboard.
+</span>*/
+ACTION_CUT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SET_SELECTION'>/** Action to set the selection. Performing this action with no arguments
+</span> clears the selection.
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_SELECTION_START_INT
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT},
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_SELECTION_END_INT
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT}&lt;br&gt;
+ &lt;strong&gt;Example:&lt;/strong&gt;
+ &lt;code&gt;&lt;pre&gt;&lt;p&gt;
+   Bundle arguments = new Bundle();
+   arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, 1);
+   arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, 2);
+   info.performAction(AccessibilityAction.ACTION_SET_SELECTION.getId(), arguments);
+ &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+ &lt;/p&gt;
+
+ @see AccessibilityNodeInfo#ACTION_ARGUMENT_SELECTION_START_INT
+  AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT
+ @see AccessibilityNodeInfo#ACTION_ARGUMENT_SELECTION_END_INT
+  AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT
+*/
+ACTION_SET_SELECTION : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_EXPAND'>/** Action to expand an expandable node.
+</span>*/
+ACTION_EXPAND : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_COLLAPSE'>/** Action to collapse an expandable node.
+</span>*/
+ACTION_COLLAPSE : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_DISMISS'>/** Action to dismiss a dismissable node.
+</span>*/
+ACTION_DISMISS : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SET_TEXT'>/** Action that sets the text of the node. Performing the action without argument,
+</span> using &lt;code&gt; null&lt;/code&gt; or empty {@link CharSequence} will clear the text. This
+ action will also put the cursor at the end of text.
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE
+  android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE}&lt;br&gt;
+ &lt;strong&gt;Example:&lt;/strong&gt;
+ &lt;code&gt;&lt;pre&gt;&lt;p&gt;
+   Bundle arguments = new Bundle();
+   arguments.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE,
+       &quot;android&quot;);
+   info.performAction(AccessibilityAction.ACTION_SET_TEXT.getId(), arguments);
+ &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+*/
+ACTION_SET_TEXT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SHOW_ON_SCREEN'>/** Action that requests the node make its bounding rectangle visible
+</span> on the screen, scrolling if necessary just enough.
+
+ @see View#requestRectangleOnScreen(Rect)
+*/
+ACTION_SHOW_ON_SCREEN : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SCROLL_TO_POSITION'>/** Action that scrolls the node to make the specified collection
+</span> position visible on screen.
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ &lt;ul&gt;
+     &lt;li&gt;{@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_ROW_INT}&lt;/li&gt;
+     &lt;li&gt;{@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_COLUMN_INT}&lt;/li&gt;
+ &lt;ul&gt;
+
+ @see AccessibilityNodeInfo#getCollectionInfo()
+*/
+ACTION_SCROLL_TO_POSITION : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SCROLL_UP'>/** Action to scroll the node content up.
+</span>*/
+ACTION_SCROLL_UP : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SCROLL_LEFT'>/** Action to scroll the node content left.
+</span>*/
+ACTION_SCROLL_LEFT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SCROLL_DOWN'>/** Action to scroll the node content down.
+</span>*/
+ACTION_SCROLL_DOWN : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SCROLL_RIGHT'>/** Action to scroll the node content right.
+</span>*/
+ACTION_SCROLL_RIGHT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_PAGE_UP'>/** Action to move to the page above.
+</span>*/
+ACTION_PAGE_UP : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_PAGE_DOWN'>/** Action to move to the page below.
+</span>*/
+ACTION_PAGE_DOWN : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_PAGE_LEFT'>/** Action to move to the page left.
+</span>*/
+ACTION_PAGE_LEFT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_PAGE_RIGHT'>/** Action to move to the page right.
+</span>*/
+ACTION_PAGE_RIGHT : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_CONTEXT_CLICK'>/** Action that context clicks the node.
+</span>*/
+ACTION_CONTEXT_CLICK : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SET_PROGRESS'>/** Action that sets progress between {@link android.view.accessibility.AccessibilityNodeInfo.RangeInfo#getMin() android.view.accessibility.AccessibilityNodeInfo.RangeInfo.getMin()} and
+</span> {@link android.view.accessibility.AccessibilityNodeInfo.RangeInfo#getMax() android.view.accessibility.AccessibilityNodeInfo.RangeInfo.getMax()}. It should use the same value type as
+ {@link android.view.accessibility.AccessibilityNodeInfo.RangeInfo#getType() android.view.accessibility.AccessibilityNodeInfo.RangeInfo.getType()}
+ &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_PROGRESS_VALUE}
+
+ @see RangeInfo
+*/
+ACTION_SET_PROGRESS : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_MOVE_WINDOW'>/** Action to move a window to a new location.
+</span> &lt;p&gt;
+ &lt;strong&gt;Arguments:&lt;/strong&gt;
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_MOVE_WINDOW_X}
+ {@link android.view.accessibility.AccessibilityNodeInfo#ACTION_ARGUMENT_MOVE_WINDOW_Y}
+*/
+ACTION_MOVE_WINDOW : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_SHOW_TOOLTIP'>/** Action to show a tooltip. A node should expose this action only for views with tooltip
+</span> text that but are not currently showing a tooltip.
+*/
+ACTION_SHOW_TOOLTIP : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-ACTION_HIDE_TOOLTIP'>/** Action to hide a tooltip. A node should expose this action only for views that are
+</span> currently showing a tooltip.
+*/
+ACTION_HIDE_TOOLTIP : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-property-mSerializationFlag'>/**@hide */
+</span>mSerializationFlag : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-method-getId'>/**Gets the id for this action.
+</span>@return {Number} The action id.
+*/
+getId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-method-getLabel'>/**Gets the label for this action. Its purpose is to describe the
+</span> action to user.
+@return {Object {java.lang.CharSequence}} The label.
+*/
+getLabel : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityNodeInfo-AccessibilityAction-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

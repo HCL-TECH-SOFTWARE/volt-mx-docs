@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-storage-VolumeInfo'>/**@class android.os.storage.VolumeInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Information about a storage volume that may be mounted. A volume may be a
+ partition on a physical {@link android.os.storage.DiskInfo}, an emulated volume above some other
+ storage medium, or a standalone container like an ASEC or OBB.
+ &lt;p&gt;
+ Volumes may be mounted with various flags:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #MOUNT_FLAG_PRIMARY} means the volume provides primary external
+ storage, historically found at {@code /sdcard}.
+ &lt;li&gt;{@link #MOUNT_FLAG_VISIBLE} means the volume is visible to third-party
+ apps for direct filesystem access. The system should send out relevant
+ storage broadcasts and index any media on visible volumes. Visible volumes
+ are considered a more stable part of the device, which is why we take the
+ time to index them. In particular, transient volumes like USB OTG devices
+ &lt;em&gt;should not&lt;/em&gt; be marked as visible; their contents should be surfaced
+ to apps through the Storage Access Framework.
+ &lt;/ul&gt;
+
+ @hide
+*/
+var VolumeInfo = {
+
+<span id='android-os-storage-VolumeInfo-property-ACTION_VOLUME_STATE_CHANGED'>/***/
+</span>ACTION_VOLUME_STATE_CHANGED : &quot;android.os.storage.action.VOLUME_STATE_CHANGED&quot;,
+<span id='android-os-storage-VolumeInfo-property-EXTRA_VOLUME_ID'>/***/
+</span>EXTRA_VOLUME_ID : &quot;android.os.storage.extra.VOLUME_ID&quot;,
+<span id='android-os-storage-VolumeInfo-property-EXTRA_VOLUME_STATE'>/***/
+</span>EXTRA_VOLUME_STATE : &quot;android.os.storage.extra.VOLUME_STATE&quot;,
+<span id='android-os-storage-VolumeInfo-property-ID_PRIVATE_INTERNAL'>/**Stub volume representing internal private storage */
+</span>ID_PRIVATE_INTERNAL : &quot;private&quot;,
+<span id='android-os-storage-VolumeInfo-property-ID_EMULATED_INTERNAL'>/**Real volume representing internal emulated storage */
+</span>ID_EMULATED_INTERNAL : &quot;emulated&quot;,
+<span id='android-os-storage-VolumeInfo-property-TYPE_PUBLIC'>/***/
+</span>TYPE_PUBLIC : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-TYPE_PRIVATE'>/***/
+</span>TYPE_PRIVATE : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-TYPE_EMULATED'>/***/
+</span>TYPE_EMULATED : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-TYPE_ASEC'>/***/
+</span>TYPE_ASEC : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-TYPE_OBB'>/***/
+</span>TYPE_OBB : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-TYPE_STUB'>/***/
+</span>TYPE_STUB : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_UNMOUNTED'>/***/
+</span>STATE_UNMOUNTED : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_CHECKING'>/***/
+</span>STATE_CHECKING : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_MOUNTED'>/***/
+</span>STATE_MOUNTED : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_MOUNTED_READ_ONLY'>/***/
+</span>STATE_MOUNTED_READ_ONLY : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_FORMATTING'>/***/
+</span>STATE_FORMATTING : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_EJECTING'>/***/
+</span>STATE_EJECTING : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_UNMOUNTABLE'>/***/
+</span>STATE_UNMOUNTABLE : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_REMOVED'>/***/
+</span>STATE_REMOVED : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-STATE_BAD_REMOVAL'>/***/
+</span>STATE_BAD_REMOVAL : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-MOUNT_FLAG_PRIMARY'>/***/
+</span>MOUNT_FLAG_PRIMARY : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-MOUNT_FLAG_VISIBLE'>/***/
+</span>MOUNT_FLAG_VISIBLE : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-id'>/**vold state */
+</span>id : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-type'>/***/
+</span>type : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-disk'>/***/
+</span>disk : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-partGuid'>/***/
+</span>partGuid : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-mountFlags'>/***/
+</span>mountFlags : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-mountUserId'>/***/
+</span>mountUserId : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-state'>/***/
+</span>state : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-fsType'>/***/
+</span>fsType : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-fsUuid'>/***/
+</span>fsUuid : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-fsLabel'>/***/
+</span>fsLabel : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-path'>/***/
+</span>path : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-internalPath'>/***/
+</span>internalPath : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-os-storage-VolumeInfo-method-getEnvironmentForState'>/**
+</span>*/
+getEnvironmentForState : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getBroadcastForEnvironment'>/**
+</span>*/
+getBroadcastForEnvironment : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getBroadcastForState'>/**
+</span>*/
+getBroadcastForState : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getDescriptionComparator'>/**
+</span>*/
+getDescriptionComparator : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getId'>/**
+</span>*/
+getId : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getDisk'>/**
+</span>*/
+getDisk : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getDiskId'>/**
+</span>*/
+getDiskId : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getType'>/**
+</span>*/
+getType : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getState'>/**
+</span>*/
+getState : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getStateDescription'>/**
+</span>*/
+getStateDescription : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getFsUuid'>/**
+</span>*/
+getFsUuid : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getNormalizedFsUuid'>/**
+</span>*/
+getNormalizedFsUuid : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getMountUserId'>/**
+</span>*/
+getMountUserId : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getDescription'>/**
+</span>*/
+getDescription : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isMountedReadable'>/**
+</span>*/
+isMountedReadable : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isMountedWritable'>/**
+</span>*/
+isMountedWritable : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isPrimary'>/**
+</span>*/
+isPrimary : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isPrimaryPhysical'>/**
+</span>*/
+isPrimaryPhysical : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isVisible'>/**
+</span>*/
+isVisible : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isVisibleForUser'>/**
+</span>*/
+isVisibleForUser : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isVisibleForRead'>/**
+</span>*/
+isVisibleForRead : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-isVisibleForWrite'>/**
+</span>*/
+isVisibleForWrite : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getPath'>/**
+</span>*/
+getPath : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getInternalPath'>/**
+</span>*/
+getInternalPath : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getPathForUser'>/**
+</span>*/
+getPathForUser : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-getInternalPathForUser'>/**Path which is accessible to apps holding
+</span> {@link android.Manifest.permission#WRITE_MEDIA_STORAGE}.
+*/
+getInternalPathForUser : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-buildStorageVolume'>/**
+</span>*/
+buildStorageVolume : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-buildStableMtpStorageId'>/**
+</span>*/
+buildStableMtpStorageId : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-buildBrowseIntent'>/**Build an intent to browse the contents of this volume. Only valid for
+</span> {@link #TYPE_EMULATED} or {@link #TYPE_PUBLIC}.
+*/
+buildBrowseIntent : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-buildBrowseIntentForUser'>/**
+</span>*/
+buildBrowseIntentForUser : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-clone'>/**
+</span>*/
+clone : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-os-storage-VolumeInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

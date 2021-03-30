@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-IpSecTransform'>/**@class android.net.IpSecTransform
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ This class represents a transform, which roughly corresponds to an IPsec Security Association.
+
+ &lt;p&gt;Transforms are created using {@link android.net.IpSecTransform.Builder}. Each {@code IpSecTransform}
+ object encapsulates the properties and state of an IPsec security association. That includes,
+ but is not limited to, algorithm choice, key material, and allocated system resources.
+
+ @see &lt;a href=&quot;https://tools.ietf.org/html/rfc4301&quot;&gt;RFC 4301, Security Architecture for the
+     Internet Protocol&lt;/a&gt;
+*/
+var IpSecTransform = {
+
+<span id='android-net-IpSecTransform-property-MODE_TRANSPORT'>/**@hide */
+</span>MODE_TRANSPORT : &quot;0&quot;,
+<span id='android-net-IpSecTransform-property-MODE_TUNNEL'>/**@hide */
+</span>MODE_TUNNEL : &quot;1&quot;,
+<span id='android-net-IpSecTransform-property-ENCAP_NONE'>/**@hide */
+</span>ENCAP_NONE : &quot;0&quot;,
+<span id='android-net-IpSecTransform-property-ENCAP_ESPINUDP_NON_IKE'>/** IPsec traffic will be encapsulated within UDP, but with 8 zero-value bytes between the UDP
+</span> header and payload. This prevents traffic from being interpreted as ESP or IKEv2.
+
+ @hide
+*/
+ENCAP_ESPINUDP_NON_IKE : &quot;1&quot;,
+<span id='android-net-IpSecTransform-property-ENCAP_ESPINUDP'>/** IPsec traffic will be encapsulated within UDP as per
+</span> &lt;a href=&quot;https://tools.ietf.org/html/rfc3948&quot;&gt;RFC 3498&lt;/a&gt;.
+
+ @hide
+*/
+ENCAP_ESPINUDP : &quot;2&quot;,
+<span id='android-net-IpSecTransform-method-equals'>/**Equals method used for testing
+</span>@hide 
+*/
+equals : function(  ) {},
+
+<span id='android-net-IpSecTransform-method-close'>/**Deactivate this {@code IpSecTransform} and free allocated resources.
+</span>
+ &lt;p&gt;Deactivating a transform while it is still applied to a socket will result in errors on
+ that socket. Make sure to remove transforms by calling {@link android.net.IpSecManager#removeTransportModeTransforms}. Note, removing an {@code IpSecTransform} from a
+ socket will not deactivate it (because one transform may be applied to multiple sockets).
+
+ &lt;p&gt;It is safe to call this method on a transform that has already been deactivated.
+*/
+close : function(  ) {},
+
+<span id='android-net-IpSecTransform-method-getResourceId'>/**
+</span>@hide 
+*/
+getResourceId : function(  ) {},
+
+<span id='android-net-IpSecTransform-method-startNattKeepalive'>/**Start a NAT-T keepalive session for the current transform.
+</span>
+ For a transform that is using UDP encapsulated IPv4, NAT-T offloading provides
+ a power efficient mechanism of sending NAT-T packets at a specified interval.
+@param {Object {IpSecTransform.NattKeepaliveCallback}} userCallback a {@link #NattKeepaliveCallback} to receive asynchronous status
+      information about the requested NAT-T keepalive session.
+@param {Number} intervalSeconds the interval between NAT-T keepalives being sent. The
+      the allowed range is between 20 and 3600 seconds.
+@param {Object {Handler}} handler a handler on which to post callbacks when received.
+@hide 
+*/
+startNattKeepalive : function(  ) {},
+
+<span id='android-net-IpSecTransform-method-stopNattKeepalive'>/**Stop an ongoing NAT-T keepalive session.
+</span>
+ Calling this API will request that an ongoing NAT-T keepalive session be terminated.
+ If this API is not called when a Transform is closed, the underlying NAT-T session will
+ be terminated automatically.
+@hide 
+*/
+stopNattKeepalive : function(  ) {},
+
+<span id='android-net-IpSecTransform-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

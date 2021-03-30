@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-ColorSpace-Renderer'>/**@class android.graphics.ColorSpace.Renderer
+</span>@extends java.lang.Object
+
+ &lt;p&gt;A color space renderer can be used to visualize and compare the gamut and
+ white point of one or more color spaces. The output is an sRGB {@link android.graphics.Bitmap}
+ showing a CIE 1931 xyY or a CIE 1976 UCS chromaticity diagram.&lt;/p&gt;
+
+ &lt;p&gt;The following code snippet shows how to compare the {@link android.graphics.ColorSpace.Named#SRGB}
+ and {@link android.graphics.ColorSpace.Named#DCI_P3} color spaces in a CIE 1931 diagram:&lt;/p&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Bitmap bitmap = ColorSpace.createRenderer()
+     .size(768)
+     .clip(true)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.DCI_P3), 0xffffc845)
+     .render();
+ &lt;/pre&gt;
+ &lt;p&gt;
+     &lt;img style=&quot;display: block; margin: 0 auto;&quot; src=&quot;{@docRoot}reference/android/images/graphics/colorspace_clipped.png&quot; /&gt;
+     &lt;figcaption style=&quot;text-align: center;&quot;&gt;sRGB vs DCI-P3&lt;/figcaption&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;A renderer can also be used to show the location of specific colors,
+ associated with a color space, in the CIE 1931 xyY chromaticity diagram.
+ See {@link #add(ColorSpace, float, float, float, int)} for more information.&lt;/p&gt;
+
+ @see ColorSpace#createRenderer()
+
+ @hide
+*/
+var Renderer = {
+
+<span id='android-graphics-ColorSpace-Renderer-method-clip'>/**&lt;p&gt;Defines whether the chromaticity diagram should be clipped by the first
+</span> registered color space. The default value is false.&lt;/p&gt;
+
+ &lt;p&gt;The following code snippet and image show the default behavior:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Bitmap bitmap = ColorSpace.createRenderer()
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.DCI_P3), 0xffffc845)
+     .render();
+ &lt;/pre&gt;
+ &lt;p&gt;
+     &lt;img style=&quot;display: block; margin: 0 auto;&quot; src=&quot;{@docRoot}reference/android/images/graphics/colorspace_comparison.png&quot; /&gt;
+     &lt;figcaption style=&quot;text-align: center;&quot;&gt;Clipping disabled&lt;/figcaption&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;Here is the same example with clipping enabled:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Bitmap bitmap = ColorSpace.createRenderer()
+     .clip(true)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.DCI_P3), 0xffffc845)
+     .render();
+ &lt;/pre&gt;
+ &lt;p&gt;
+     &lt;img style=&quot;display: block; margin: 0 auto;&quot; src=&quot;{@docRoot}reference/android/images/graphics/colorspace_clipped.png&quot; /&gt;
+     &lt;figcaption style=&quot;text-align: center;&quot;&gt;Clipping enabled&lt;/figcaption&gt;
+ &lt;/p&gt;
+@param {Boolean} clip True to clip the chromaticity diagram to the first registered color space,
+             false otherwise
+@return {Object {android.graphics.ColorSpace.Renderer}} This instance of {@link Renderer}
+*/
+clip : function(  ) {},
+
+<span id='android-graphics-ColorSpace-Renderer-method-uniformChromaticityScale'>/**&lt;p&gt;Defines whether the chromaticity diagram should use the uniform
+</span> chromaticity scale (CIE 1976 UCS). When the uniform chromaticity scale
+ is used, the distance between two points on the diagram is approximately
+ proportional to the perceived color difference.&lt;/p&gt;
+
+ &lt;p&gt;The following code snippet shows how to enable the uniform chromaticity
+ scale. The image below shows the result:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Bitmap bitmap = ColorSpace.createRenderer()
+     .uniformChromaticityScale(true)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.DCI_P3), 0xffffc845)
+     .render();
+ &lt;/pre&gt;
+ &lt;p&gt;
+     &lt;img style=&quot;display: block; margin: 0 auto;&quot; src=&quot;{@docRoot}reference/android/images/graphics/colorspace_ucs.png&quot; /&gt;
+     &lt;figcaption style=&quot;text-align: center;&quot;&gt;CIE 1976 UCS diagram&lt;/figcaption&gt;
+ &lt;/p&gt;
+@param {Boolean} ucs True to render the chromaticity diagram as the CIE 1976 UCS diagram
+@return {Object {android.graphics.ColorSpace.Renderer}} This instance of {@link Renderer}
+*/
+uniformChromaticityScale : function(  ) {},
+
+<span id='android-graphics-ColorSpace-Renderer-method-size'>/**Sets the dimensions (width and height) in pixels of the output bitmap.
+</span> The size must be at least 128px and defaults to 1024px.
+@param {Number} size The size in pixels of the output bitmap
+@return {Object {android.graphics.ColorSpace.Renderer}} This instance of {@link Renderer}
+*/
+size : function(  ) {},
+
+<span id='android-graphics-ColorSpace-Renderer-method-showWhitePoint'>/**Shows or hides the white point of each color space in the output bitmap.
+</span> The default is true.
+@param {Boolean} show True to show the white point of each color space, false
+             otherwise
+@return {Object {android.graphics.ColorSpace.Renderer}} This instance of {@link Renderer}
+*/
+showWhitePoint : function(  ) {},
+
+<span id='android-graphics-ColorSpace-Renderer-method-add'>/**&lt;p&gt;Adds a color space to represent on the output CIE 1931 chromaticity
+</span> diagram. The color space is represented as a triangle showing the
+ footprint of its color gamut and, optionally, the location of its
+ white point.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;Color spaces with a color model that is not RGB are
+ accepted but ignored.&lt;/p&gt;
+
+ &lt;p&gt;The following code snippet and image show an example of calling this
+ method to compare {@link android.graphics.ColorSpace.Named#SRGB sRGB} and {@link android.graphics.ColorSpace.Named#DCI_P3 DCI-P3}:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Bitmap bitmap = ColorSpace.createRenderer()
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.DCI_P3), 0xffffc845)
+     .render();
+ &lt;/pre&gt;
+ &lt;p&gt;
+     &lt;img style=&quot;display: block; margin: 0 auto;&quot; src=&quot;{@docRoot}reference/android/images/graphics/colorspace_comparison.png&quot; /&gt;
+     &lt;figcaption style=&quot;text-align: center;&quot;&gt;sRGB vs DCI-P3&lt;/figcaption&gt;
+ &lt;/p&gt;
+
+ &lt;p&gt;Adding a color space extending beyond the boundaries of the
+ spectral locus will alter the size of the diagram within the output
+ bitmap as shown in this example:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Bitmap bitmap = ColorSpace.createRenderer()
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.DCI_P3), 0xffffc845)
+     .add(ColorSpace.get(ColorSpace.Named.ACES), 0xff097ae9)
+     .add(ColorSpace.get(ColorSpace.Named.EXTENDED_SRGB), 0xff000000)
+     .render();
+ &lt;/pre&gt;
+ &lt;p&gt;
+     &lt;img style=&quot;display: block; margin: 0 auto;&quot; src=&quot;{@docRoot}reference/android/images/graphics/colorspace_comparison2.png&quot; /&gt;
+     &lt;figcaption style=&quot;text-align: center;&quot;&gt;sRGB, DCI-P3, ACES and scRGB&lt;/figcaption&gt;
+ &lt;/p&gt;
+@param {Object {ColorSpace}} colorSpace The color space whose gamut to render on the diagram
+@param {Number} color The sRGB color to use to render the color space's gamut and white point
+@return {Object {android.graphics.ColorSpace.Renderer}} This instance of {@link Renderer}
+@see #clip(boolean)
+@see #showWhitePoint(boolean)
+*/
+add : function(  ) {},
+
+<span id='android-graphics-ColorSpace-Renderer-method-add'>/**&lt;p&gt;Adds a color to represent as a point on the chromaticity diagram.
+</span> The color is associated with a color space which will be used to
+ perform the conversion to CIE XYZ and compute the location of the point
+ on the diagram. The point is rendered as a colored circle.&lt;/p&gt;
+
+ &lt;p&gt;The following code snippet and image show an example of calling this
+ method to render the location of several sRGB colors as white circles:&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ Bitmap bitmap = ColorSpace.createRenderer()
+     .clip(true)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0.1f, 0.0f, 0.1f, 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0.1f, 0.1f, 0.1f, 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0.1f, 0.2f, 0.1f, 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0.1f, 0.3f, 0.1f, 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0.1f, 0.4f, 0.1f, 0xffffffff)
+     .add(ColorSpace.get(ColorSpace.Named.SRGB), 0.1f, 0.5f, 0.1f, 0xffffffff)
+     .render();
+ &lt;/pre&gt;
+ &lt;p&gt;
+     &lt;img style=&quot;display: block; margin: 0 auto;&quot; src=&quot;{@docRoot}reference/android/images/graphics/colorspace_points.png&quot; /&gt;
+     &lt;figcaption style=&quot;text-align: center;&quot;&gt;
+         Locating colors on the chromaticity diagram
+     &lt;/figcaption&gt;
+ &lt;/p&gt;
+@param {Object {ColorSpace}} colorSpace The color space of the color to locate on the diagram
+@param {Number} r The first component of the color to locate on the diagram
+@param {Number} g The second component of the color to locate on the diagram
+@param {Number} b The third component of the color to locate on the diagram
+@param {Number} pointColor The sRGB color to use to render the point on the diagram
+@return {Object {android.graphics.ColorSpace.Renderer}} This instance of {@link Renderer}
+*/
+add : function(  ) {},
+
+<span id='android-graphics-ColorSpace-Renderer-method-render'>/**&lt;p&gt;Renders the {@link #add(ColorSpace, int) color spaces} and
+</span> {@link #add(ColorSpace, float, float, float, int) points} registered
+ with this renderer. The output bitmap is an sRGB image with the
+ dimensions specified by calling {@link #size}(int) (1204x1024px by
+ default).&lt;/p&gt;
+@return {Object {android.graphics.Bitmap}} A new non-null {@link Bitmap} with the dimensions specified
+        by {@link #size(int)} (1024x1024 by default)
+*/
+render : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

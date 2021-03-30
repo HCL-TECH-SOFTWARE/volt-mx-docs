@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-CalendarContract-Events'>/**@class android.provider.CalendarContract.Events
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.CalendarContract.SyncColumns
+
+ implements android.provider.CalendarContract.EventsColumns
+
+ implements android.provider.CalendarContract.CalendarColumns
+
+@extends java.lang.Object
+
+ Constants and helpers for the Events table, which contains details for
+ individual events. &lt;h3&gt;Operations&lt;/h3&gt; All operations can be done either
+ as an app or as a sync adapter. To perform an operation as a sync adapter
+ {@link #CALLER_IS_SYNCADAPTER} should be set to true and
+ {@link #ACCOUNT_NAME} and {@link #ACCOUNT_TYPE} must be set in the Uri
+ parameters. See
+ {@link Uri.Builder#appendQueryParameter(java.lang.String, java.lang.String)}
+ for details on adding parameters. Sync adapters have write access to more
+ columns but are restricted to a single account at a time.
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;b&gt;Insert&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;When inserting a new event the following fields must be included:
+ &lt;ul&gt;
+ &lt;li&gt;dtstart&lt;/li&gt;
+ &lt;li&gt;dtend if the event is non-recurring&lt;/li&gt;
+ &lt;li&gt;duration if the event is recurring&lt;/li&gt;
+ &lt;li&gt;rrule or rdate if the event is recurring&lt;/li&gt;
+ &lt;li&gt;eventTimezone&lt;/li&gt;
+ &lt;li&gt;a calendar_id&lt;/li&gt;
+ &lt;/ul&gt;
+ There are also further requirements when inserting or updating an event.
+ See the section on Writing to Events.&lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Update&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;To perform an update of an Event the {@link android.provider.CommonDataKinds.Events#_ID} of the event
+ should be provided either as an appended id to the Uri (
+ {@link ContentUris#withAppendedId}) or as the first selection item--the
+ selection should start with &quot;_id=?&quot; and the first selectionArg should be
+ the _id of the event. Updates may also be done using a selection and no
+ id. Updating an event must respect the same rules as inserting and is
+ further restricted in the fields that can be written. See the section on
+ Writing to Events.&lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Delete&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;Events can be deleted either by the {@link android.provider.CommonDataKinds.Events#_ID} as an appended
+ id on the Uri or using any standard selection. If an appended id is used
+ a selection is not allowed. There are two versions of delete: as an app
+ and as a sync adapter. An app delete will set the deleted column on an
+ event and remove all instances of that event. A sync adapter delete will
+ remove the event from the database and all associated data.&lt;/dd&gt;
+ &lt;dt&gt;&lt;b&gt;Query&lt;/b&gt;&lt;/dt&gt;
+ &lt;dd&gt;Querying the Events table will get you all information about a set of
+ events except their reminders, attendees, and extended properties. There
+ will be one row returned for each event that matches the query selection,
+ or at most a single row if the {@link android.provider.CommonDataKinds.Events#_ID} is appended to the Uri.
+ Recurring events will only return a single row regardless of the number
+ of times that event repeats.&lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;h3&gt;Writing to Events&lt;/h3&gt; There are further restrictions on all Updates
+ and Inserts in the Events table:
+ &lt;ul&gt;
+ &lt;li&gt;If allDay is set to 1 eventTimezone must be {@link Time#TIMEZONE_UTC}
+ and the time must correspond to a midnight boundary.&lt;/li&gt;
+ &lt;li&gt;Exceptions are not allowed to recur. If rrule or rdate is not empty,
+ original_id and original_sync_id must be empty.&lt;/li&gt;
+ &lt;li&gt;In general a calendar_id should not be modified after insertion. This
+ is not explicitly forbidden but many sync adapters will not behave in an
+ expected way if the calendar_id is modified.&lt;/li&gt;
+ &lt;/ul&gt;
+ The following Events columns are writable by both an app and a sync
+ adapter.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #CALENDAR_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #ORGANIZER}&lt;/li&gt;
+ &lt;li&gt;{@link #TITLE}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_LOCATION}&lt;/li&gt;
+ &lt;li&gt;{@link #DESCRIPTION}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_COLOR}&lt;/li&gt;
+ &lt;li&gt;{@link #DTSTART}&lt;/li&gt;
+ &lt;li&gt;{@link #DTEND}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_TIMEZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_END_TIMEZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #DURATION}&lt;/li&gt;
+ &lt;li&gt;{@link #ALL_DAY}&lt;/li&gt;
+ &lt;li&gt;{@link #RRULE}&lt;/li&gt;
+ &lt;li&gt;{@link #RDATE}&lt;/li&gt;
+ &lt;li&gt;{@link #EXRULE}&lt;/li&gt;
+ &lt;li&gt;{@link #EXDATE}&lt;/li&gt;
+ &lt;li&gt;{@link #ORIGINAL_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #ORIGINAL_SYNC_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #ORIGINAL_INSTANCE_TIME}&lt;/li&gt;
+ &lt;li&gt;{@link #ORIGINAL_ALL_DAY}&lt;/li&gt;
+ &lt;li&gt;{@link #ACCESS_LEVEL}&lt;/li&gt;
+ &lt;li&gt;{@link #AVAILABILITY}&lt;/li&gt;
+ &lt;li&gt;{@link #GUESTS_CAN_MODIFY}&lt;/li&gt;
+ &lt;li&gt;{@link #GUESTS_CAN_INVITE_OTHERS}&lt;/li&gt;
+ &lt;li&gt;{@link #GUESTS_CAN_SEE_GUESTS}&lt;/li&gt;
+ &lt;li&gt;{@link #CUSTOM_APP_PACKAGE}&lt;/li&gt;
+ &lt;li&gt;{@link #CUSTOM_APP_URI}&lt;/li&gt;
+ &lt;li&gt;{@link #UID_2445}&lt;/li&gt;
+ &lt;/ul&gt;
+ The following Events columns are writable only by a sync adapter
+ &lt;ul&gt;
+ &lt;li&gt;{@link #DIRTY}&lt;/li&gt;
+ &lt;li&gt;{@link #MUTATORS}&lt;/li&gt;
+ &lt;li&gt;{@link #_SYNC_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA1}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA2}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA3}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA4}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA5}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA6}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA7}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA8}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA9}&lt;/li&gt;
+ &lt;li&gt;{@link #SYNC_DATA10}&lt;/li&gt;
+ &lt;/ul&gt;
+ The remaining columns are either updated by the provider only or are
+ views into other tables and cannot be changed through the Events table.
+*/
+var Events = {
+
+<span id='android-provider-CalendarContract-Events-property-CONTENT_URI'>/** The content:// style URL for interacting with events. Appending an
+</span> event id using {@link ContentUris#withAppendedId(Uri, long)} will
+ specify a single event.
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Events-property-ENTERPRISE_CONTENT_URI'>/** The content:// style URL for querying Events table in the managed profile. Appending an
+</span> event id using {@link ContentUris#withAppendedId(Uri, long)} specifies a single event.
+
+ &lt;p&gt;The following columns are allowed to be queried via this uri:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #TITLE}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_LOCATION}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_COLOR}&lt;/li&gt;
+ &lt;li&gt;{@link #STATUS}&lt;/li&gt;
+ &lt;li&gt;{@link #DTSTART}&lt;/li&gt;
+ &lt;li&gt;{@link #DTEND}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_TIMEZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_END_TIMEZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #DURATION}&lt;/li&gt;
+ &lt;li&gt;{@link #ALL_DAY}&lt;/li&gt;
+ &lt;li&gt;{@link #AVAILABILITY}&lt;/li&gt;
+ &lt;li&gt;{@link #RRULE}&lt;/li&gt;
+ &lt;li&gt;{@link #RDATE}&lt;/li&gt;
+ &lt;li&gt;{@link #LAST_DATE}&lt;/li&gt;
+ &lt;li&gt;{@link #EXRULE}&lt;/li&gt;
+ &lt;li&gt;{@link #EXDATE}&lt;/li&gt;
+ &lt;li&gt;{@link #SELF_ATTENDEE_STATUS}&lt;/li&gt;
+ &lt;li&gt;{@link #DISPLAY_COLOR}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_COLOR}&lt;/li&gt;
+ &lt;li&gt;{@link #VISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #CALENDAR_TIME_ZONE}&lt;/li&gt;
+ &lt;li&gt;{@link #IS_PRIMARY}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link IllegalArgumentException} is thrown if there exists columns in the
+ projection of the query to this uri that are not contained in the above list.
+
+ &lt;p&gt;This uri returns an empty cursor if the calling user is not a parent profile
+ of a managed profile, or the managed profile is disabled, or cross-profile calendar is
+ disabled in Settings, or this uri is queried from a package that is not allowed by
+ the profile owner of the managed profile via
+ {@link DevicePolicyManager#setCrossProfileCalendarPackages(ComponentName, Set)}.
+
+ &lt;p&gt;Apps can register a {@link android.database.ContentObserver} for this URI to listen
+ to changes.
+
+ @see DevicePolicyManager#getCrossProfileCalendarPackages(ComponentName)
+ @see Settings.Secure#CROSS_PROFILE_CALENDAR_ENABLED
+*/
+ENTERPRISE_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Events-property-CONTENT_EXCEPTION_URI'>/** The content:// style URI for recurring event exceptions.  Insertions require an
+</span> appended event ID.  Deletion of exceptions requires both the original event ID and
+ the exception event ID (see {@link Uri.Builder#appendPath}).
+*/
+CONTENT_EXCEPTION_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Events-property-PROVIDER_WRITABLE_COLUMNS'>/** These are columns that should only ever be updated by the provider,
+</span> either because they are views mapped to another table or because they
+ are used for provider only functionality. TODO move to provider
+
+ @hide
+*/
+PROVIDER_WRITABLE_COLUMNS : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Events-property-SYNC_WRITABLE_COLUMNS'>/** These fields are only writable by a sync adapter. To modify them the
+</span> caller must include CALLER_IS_SYNCADAPTER, _SYNC_ACCOUNT, and
+ _SYNC_ACCOUNT_TYPE in the query parameters. TODO move to provider.
+
+ @hide
+*/
+SYNC_WRITABLE_COLUMNS : &quot;null&quot;,
+
+};</pre>
+</body>
+</html>

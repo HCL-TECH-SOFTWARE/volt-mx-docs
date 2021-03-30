@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-bitmap-util-InputStreamBuffer'>/**@class com.android.bitmap.util.InputStreamBuffer
+</span>@extends java.lang.Object
+
+ Wrapper for {@link InputStream} that allows you to read bytes from it like a byte[]. An
+ internal buffer is kept as small as possible to avoid large unnecessary allocations.
+
+ &lt;p/&gt;
+ Care must be taken so that the internal buffer is kept small. The best practice is to
+ precalculate the maximum buffer size that you will need. For example,
+ say you have a loop that reads bytes from index &lt;code&gt;0&lt;/code&gt; to &lt;code&gt;10&lt;/code&gt;,
+ skips to index &lt;code&gt;N&lt;/code&gt;, reads from index &lt;code&gt;N&lt;/code&gt; to &lt;code&gt;N+10&lt;/code&gt;, etc. Then
+ you know that the internal buffer can have a maximum size of &lt;code&gt;10&lt;/code&gt;,
+ and you should set the &lt;code&gt;bufferSize&lt;/code&gt; parameter to &lt;code&gt;10&lt;/code&gt; in the constructor.
+
+ &lt;p/&gt;
+ Use {@link #advanceTo}(int) to declare that you will not need to access lesser indexes. This
+ helps to keep the internal buffer small. In the above example, after reading bytes from index
+ &lt;code&gt;0&lt;/code&gt; to &lt;code&gt;10&lt;/code&gt;, you should call &lt;code&gt;advanceTo(N)&lt;/code&gt; so that internal
+ buffer becomes filled with bytes from index &lt;code&gt;N&lt;/code&gt; to &lt;code&gt;N+10&lt;/code&gt;.
+
+ &lt;p/&gt;
+ If you know that you are reading bytes from a &lt;strong&gt;strictly&lt;/strong&gt; increasing or equal
+ index, then you should set the &lt;code&gt;autoAdvance&lt;/code&gt; parameter to &lt;code&gt;true&lt;/code&gt; in the
+ constructor. For complicated access patterns, or when you prefer to control the internal
+ buffer yourself, set &lt;code&gt;autoAdvance&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt;. When
+ &lt;code&gt;autoAdvance&lt;/code&gt; is enabled, every time an index is beyond the buffer length,
+ the buffer will be shifted forward such that the index requested becomes the first element in
+ the buffer.
+
+ &lt;p/&gt;
+ All public methods with parameter &lt;code&gt;index&lt;/code&gt; are absolute indexed. The index is from
+ the beginning of the wrapped input stream.
+*/
+var InputStreamBuffer = {
+
+<span id='com-android-bitmap-util-InputStreamBuffer-method-get'>/**Attempt to get byte at the requested index from the wrapped input stream. If the internal
+</span> buffer contains the requested index, return immediately. If the index is less than the
+ head of the buffer, or the index is greater or equal to the size of the wrapped input stream,
+ a runtime exception is thrown.
+
+ &lt;p/&gt;
+ If the index is not in the internal buffer, but it can be requested from the input stream,
+ {@link #fill}(int) will be called first, and the byte at the index returned.
+
+ &lt;p/&gt;
+ You should always call {@link #has}(int) with the same index, unless you are sure that no
+ exceptions will be thrown as described above.
+
+ &lt;p/&gt;
+ Consider calling {@link #advanceTo}(int) if you know that you will never request a lesser
+ index in the future.
+@param {Number} index The requested index.
+@return {Number} The byte at that index.
+*/
+get : function(  ) {},
+
+<span id='com-android-bitmap-util-InputStreamBuffer-method-has'>/**Attempt to return whether the requested index is within the size of the wrapped input
+</span> stream. One side effect is {@link #fill}(int) will be called.
+
+ &lt;p/&gt;
+ If this method returns true, it is guaranteed that {@link #get}(int) with the same index
+ will not fail. That means that if the requested index is within the size of the wrapped
+ input stream, but the index is less than the head of the internal buffer,
+ a runtime exception is thrown.
+
+ &lt;p/&gt;
+ See {@link #get}(int) for caveats. A lot of the same warnings about exceptions and
+ &lt;code&gt;advanceTo()&lt;/code&gt; apply.
+@param {Number} index The requested index.
+@return {Boolean} True if requested index is within the size of the wrapped input stream. False if
+ the index is beyond the size.
+*/
+has : function(  ) {},
+
+<span id='com-android-bitmap-util-InputStreamBuffer-method-advanceTo'>/**Attempts to advance the head of the buffer to the requested index. If the index is less
+</span> than the head of the buffer, the internal state will not be changed.
+
+ &lt;p/&gt;
+ Advancing does not fill the internal buffer. The next {@link #get}(int) or
+ {@link #has}(int) call will fill the buffer.
+*/
+advanceTo : function(  ) {},
+
+<span id='com-android-bitmap-util-InputStreamBuffer-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-bitmap-util-InputStreamBuffer-method-toDebugString'>/**
+</span>*/
+toDebugString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

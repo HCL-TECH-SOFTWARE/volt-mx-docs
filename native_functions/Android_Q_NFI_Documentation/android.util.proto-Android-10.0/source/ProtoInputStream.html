@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-proto-ProtoInputStream'>/**@class android.util.proto.ProtoInputStream
+</span>@extends android.util.proto.ProtoStream
+
+ Class to read to a protobuf stream.
+
+ Each read method takes an ID code from the protoc generated classes
+ and return a value of the field. To read a nested object, call #start
+ and then #end when you are done.
+
+ The ID codes have type information embedded into them, so if you call
+ the incorrect function you will get an IllegalArgumentException.
+
+ nextField will return the field number of the next field, which can be
+ matched to the protoc generated ID code and used to determine how to
+ read the next field.
+
+ It is STRONGLY RECOMMENDED to read from the ProtoInputStream with a switch
+ statement wrapped in a while loop. Additionally, it is worth logging or
+ storing unexpected fields or ones that do not match the expected wire type
+
+ ex:
+ void parseFromProto(ProtoInputStream stream) {
+     while(stream.nextField() != ProtoInputStream.NO_MORE_FIELDS) {
+         try {
+             switch (stream.getFieldNumber()) {
+                 case (int) DummyProto.NAME:
+                     mName = stream.readString(DummyProto.NAME);
+                     break;
+                 case (int) DummyProto.VALUE:
+                     mValue = stream.readInt(DummyProto.VALUE);
+                     break;
+                 default:
+                     LOG(TAG, &quot;Unhandled field in proto!\n&quot;
+                              + ProtoUtils.currentFieldToString(stream));
+             }
+         } catch (WireTypeMismatchException wtme) {
+             LOG(TAG, &quot;Wire Type mismatch in proto!\n&quot; + ProtoUtils.currentFieldToString(stream));
+         }
+     }
+ }
+
+ @hide
+*/
+var ProtoInputStream = {
+
+<span id='android-util-proto-ProtoInputStream-property-NO_MORE_FIELDS'>/***/
+</span>NO_MORE_FIELDS : &quot;-1&quot;,
+<span id='android-util-proto-ProtoInputStream-method-getFieldNumber'>/**Get the field number of the current field.
+</span>*/
+getFieldNumber : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-getWireType'>/**Get the wire type of the current field.
+</span>@return {Number} an int that matches one of the ProtoStream WIRE_TYPE_ constants
+*/
+getWireType : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-getOffset'>/**Get the current offset in the proto binary.
+</span>*/
+getOffset : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-nextField'>/**Reads the tag of the next field from the stream. If previous field value was not read, its
+</span> data will be skipped over.
+@return {Number} the field number of the next field
+@throws IOException if an I/O error occurs
+*/
+nextField : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-isNextField'>/**Attempt to guess the next field. If there is a match, the field data will be ready to read.
+</span> If there is no match, nextField will need to be called to get the field number
+@return {Boolean} true if fieldId matches the next field, false if not
+*/
+isNextField : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-readDouble'>/**Read a single double.
+</span> Will throw if the current wire type is not fixed64
+@param {Number} fieldId - must match the current field number and field type
+*/
+readDouble : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-readFloat'>/**Read a single float.
+</span> Will throw if the current wire type is not fixed32
+@param {Number} fieldId - must match the current field number and field type
+*/
+readFloat : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-readInt'>/**Read a single 32bit or varint proto type field as an int.
+</span> Will throw if the current wire type is not varint or fixed32
+@param {Number} fieldId - must match the current field number and field type
+*/
+readInt : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-readLong'>/**Read a single 64bit or varint proto type field as an long.
+</span>@param {Number} fieldId - must match the current field number
+*/
+readLong : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-readBoolean'>/**Read a single 32bit or varint proto type field as an boolean.
+</span>@param {Number} fieldId - must match the current field number
+*/
+readBoolean : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-readString'>/**Read a string field
+</span>@param {Number} fieldId - must match the current field number
+*/
+readString : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-readBytes'>/**Read a bytes field
+</span>@param {Number} fieldId - must match the current field number
+*/
+readBytes : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-start'>/**Start the read of an embedded Object
+</span>@param {Number} fieldId - must match the current field number
+@return {Number} a token. The token must be handed back when finished reading embedded Object
+*/
+start : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-end'>/**Note the end of a nested object. Must be called to continue streaming the rest of the proto.
+</span> end can be called mid object parse. The offset will be moved to the next field outside the
+ object.
+@param {Number} token - token
+*/
+end : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-decodeZigZag32'>/**Decode a 32 bit ZigZag encoded signed int.
+</span>@param {Number} n - int to decode
+@return {Number} the decoded signed int
+*/
+decodeZigZag32 : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-decodeZigZag64'>/**Decode a 64 bit ZigZag encoded signed long.
+</span>@param {Number} n - long to decode
+@return {Number} the decoded signed long
+*/
+decodeZigZag64 : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-skip'>/**Skips the rest of current field and moves to the start of the next field. This should only be
+</span> called while state is STATE_STARTED_FIELD_READ
+*/
+skip : function(  ) {},
+
+<span id='android-util-proto-ProtoInputStream-method-dumpDebugData'>/**Dump debugging data about the buffer.
+</span>*/
+dumpDebugData : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

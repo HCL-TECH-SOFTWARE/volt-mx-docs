@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-drm-DrmManagerClient'>/**@class android.drm.DrmManagerClient
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ The main programming interface for the DRM framework. An application must instantiate this class
+ to access DRM agents through the DRM framework.
+
+*/
+var DrmManagerClient = {
+
+<span id='android-drm-DrmManagerClient-property-ERROR_NONE'>/** Indicates that a request was successful or that no error occurred.
+</span>*/
+ERROR_NONE : &quot;0&quot;,
+<span id='android-drm-DrmManagerClient-property-ERROR_UNKNOWN'>/** Indicates that an error occurred and the reason is not known.
+</span>*/
+ERROR_UNKNOWN : &quot;-2000&quot;,
+<span id='android-drm-DrmManagerClient-property-INVALID_SESSION'>/**{@hide} */
+</span>INVALID_SESSION : &quot;-1&quot;,
+<span id='android-drm-DrmManagerClient-method-notify'>/**{@hide}
+</span>*/
+notify : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-close'>/**Releases resources associated with the current session of
+</span> DrmManagerClient. It is considered good practice to call this method when
+ the {@link android.drm.DrmManagerClient} object is no longer needed in your
+ application. After this method is called, {@link android.drm.DrmManagerClient} is no
+ longer usable since it has lost all of its required resource.
+
+ This method was added in API 24. In API versions 16 through 23, release()
+ should be called instead. There is no need to do anything for API
+ versions prior to 16.
+*/
+close : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-release'>/**
+</span>@deprecated replaced by {@link #close()}.
+*/
+release : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-setOnInfoListener'>/**Registers an {@link android.drm.DrmManagerClient.OnInfoListener} callback, which is invoked when the 
+</span> DRM framework sends status or warning information during registration or rights acquisition.
+@param {Object {DrmManagerClient.OnInfoListener}} infoListener Interface definition for the callback.
+*/
+setOnInfoListener : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-setOnEventListener'>/**Registers an {@link android.drm.DrmManagerClient.OnEventListener} callback, which is invoked when the 
+</span> DRM framework sends information about DRM processing.
+@param {Object {DrmManagerClient.OnEventListener}} eventListener Interface definition for the callback.
+*/
+setOnEventListener : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-setOnErrorListener'>/**Registers an {@link android.drm.DrmManagerClient.OnErrorListener} callback, which is invoked when 
+</span> the DRM framework sends error information.
+@param {Object {DrmManagerClient.OnErrorListener}} errorListener Interface definition for the callback.
+*/
+setOnErrorListener : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getAvailableDrmEngines'>/**Retrieves information about all the DRM plug-ins (agents) that are registered with
+</span> the DRM framework.
+@return {String} A &lt;code&gt;String&lt;/code&gt; array of DRM plug-in descriptions.
+*/
+getAvailableDrmEngines : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getConstraints'>/**Retrieves constraint information for rights-protected content.
+</span>@param {String} path Path to the content from which you are retrieving DRM constraints.
+@param {Number} action Action defined in {@link DrmStore.Action}.
+@return {Object {android.content.ContentValues}} A {@link android.content.ContentValues} instance that contains
+ key-value pairs representing the constraints. Null in case of failure.
+ The keys are defined in {@link DrmStore.ConstraintsColumns}.
+*/
+getConstraints : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getMetadata'>/**Retrieves metadata information for rights-protected content.
+</span>@param {String} path Path to the content from which you are retrieving metadata information.
+@return {Object {android.content.ContentValues}} A {@link android.content.ContentValues} instance that contains
+ key-value pairs representing the metadata. Null in case of failure.
+*/
+getMetadata : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getConstraints'>/**Retrieves constraint information for rights-protected content.
+</span>@param {Object {Uri}} uri URI for the content from which you are retrieving DRM constraints.
+@param {Number} action Action defined in {@link DrmStore.Action}.
+@return {Object {android.content.ContentValues}} A {@link android.content.ContentValues} instance that contains
+ key-value pairs representing the constraints. Null in case of failure.
+*/
+getConstraints : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getMetadata'>/**Retrieves metadata information for rights-protected content.
+</span>@param {Object {Uri}} uri URI for the content from which you are retrieving metadata information.
+@return {Object {android.content.ContentValues}} A {@link android.content.ContentValues} instance that contains
+ key-value pairs representing the constraints. Null in case of failure.
+*/
+getMetadata : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-saveRights'>/**Saves rights to a specified path and associates that path with the content path.
+</span> 
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; For OMA or WM-DRM, &lt;code&gt;rightsPath&lt;/code&gt; and
+ &lt;code&gt;contentPath&lt;/code&gt; can be null.&lt;/p&gt;
+@param {Object {DrmRights}} drmRights The {@link DrmRights} to be saved.
+@param {String} rightsPath File path where rights will be saved.
+@param {String} contentPath File path where content is saved.
+@return {Number} ERROR_NONE for success; ERROR_UNKNOWN for failure.
+@throws IOException If the call failed to save rights information at the given
+ &lt;code&gt;rightsPath&lt;/code&gt;.
+*/
+saveRights : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-installDrmEngine'>/**Installs a new DRM plug-in (agent) at runtime.
+</span>@param {String} engineFilePath File path to the plug-in file to be installed.
+
+ {@hide}
+*/
+installDrmEngine : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-canHandle'>/**Checks whether the given MIME type or path can be handled.
+</span>@param {String} path Path of the content to be handled.
+@param {String} mimeType MIME type of the object to be handled.
+@return {Boolean} True if the given MIME type or path can be handled; false if they cannot be handled.
+*/
+canHandle : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-canHandle'>/**Checks whether the given MIME type or URI can be handled.
+</span>@param {Object {Uri}} uri URI for the content to be handled.
+@param {String} mimeType MIME type of the object to be handled
+@return {Boolean} True if the given MIME type or URI can be handled; false if they cannot be handled.
+*/
+canHandle : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-processDrmInfo'>/**Processes the given DRM information based on the information type.
+</span>@param {Object {DrmInfo}} drmInfo The {@link DrmInfo} to be processed.
+@return {Number} ERROR_NONE for success; ERROR_UNKNOWN for failure.
+*/
+processDrmInfo : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-acquireDrmInfo'>/**Retrieves information for registering, unregistering, or acquiring rights.
+</span>@param {Object {DrmInfoRequest}} drmInfoRequest The {@link DrmInfoRequest} that specifies the type of DRM
+ information being retrieved.
+@return {Object {android.drm.DrmInfo}} A {@link DrmInfo} instance.
+*/
+acquireDrmInfo : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-acquireRights'>/**Processes a given {@link android.drm.DrmInfoRequest} and returns the rights information asynchronously.
+</span>&lt;p&gt;
+ This is a utility method that consists of an
+ {@link #acquireDrmInfo(DrmInfoRequest) acquireDrmInfo()} and a
+ {@link #processDrmInfo(DrmInfo) processDrmInfo()} method call. This utility method can be 
+ used only if the selected DRM plug-in (agent) supports this sequence of calls. Some DRM
+ agents, such as OMA, do not support this utility method, in which case an application must
+ invoke {@link #acquireDrmInfo(DrmInfoRequest) acquireDrmInfo()} and
+ {@link #processDrmInfo(DrmInfo) processDrmInfo()} separately.
+@param {Object {DrmInfoRequest}} drmInfoRequest The {@link DrmInfoRequest} used to acquire the rights.
+@return {Number} ERROR_NONE for success; ERROR_UNKNOWN for failure.
+*/
+acquireRights : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getDrmObjectType'>/**Retrieves the type of rights-protected object (for example, content object, rights
+</span> object, and so on) using the specified path or MIME type. At least one parameter must
+ be specified to retrieve the DRM object type.
+@param {String} path Path to the content or null.
+@param {String} mimeType MIME type of the content or null.
+@return {Number} An &lt;code&gt;int&lt;/code&gt; that corresponds to a {@link DrmStore.DrmObjectType}.
+*/
+getDrmObjectType : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getDrmObjectType'>/**Retrieves the type of rights-protected object (for example, content object, rights
+</span> object, and so on) using the specified URI or MIME type. At least one parameter must
+ be specified to retrieve the DRM object type.
+@param {Object {Uri}} uri URI for the content or null.
+@param {String} mimeType MIME type of the content or null.
+@return {Number} An &lt;code&gt;int&lt;/code&gt; that corresponds to a {@link DrmStore.DrmObjectType}.
+*/
+getDrmObjectType : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getOriginalMimeType'>/**Retrieves the MIME type embedded in the original content.
+</span>@param {String} path Path to the rights-protected content.
+@return {String} The MIME type of the original content, such as &lt;code&gt;video/mpeg&lt;/code&gt;.
+*/
+getOriginalMimeType : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-getOriginalMimeType'>/**Retrieves the MIME type embedded in the original content.
+</span>@param {Object {Uri}} uri URI of the rights-protected content.
+@return {String} MIME type of the original content, such as &lt;code&gt;video/mpeg&lt;/code&gt;.
+*/
+getOriginalMimeType : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-checkRightsStatus'>/**Checks whether the given content has valid rights.
+</span>@param {String} path Path to the rights-protected content.
+@return {Number} An &lt;code&gt;int&lt;/code&gt; representing the {@link DrmStore.RightsStatus} of the content.
+*/
+checkRightsStatus : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-checkRightsStatus'>/**Check whether the given content has valid rights.
+</span>@param {Object {Uri}} uri URI of the rights-protected content.
+@return {Number} An &lt;code&gt;int&lt;/code&gt; representing the {@link DrmStore.RightsStatus} of the content.
+*/
+checkRightsStatus : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-checkRightsStatus'>/**Checks whether the given rights-protected content has valid rights for the specified
+</span> {@link android.drm.DrmStore.Action}.
+@param {String} path Path to the rights-protected content.
+@param {Number} action The {@link DrmStore.Action} to perform.
+@return {Number} An &lt;code&gt;int&lt;/code&gt; representing the {@link DrmStore.RightsStatus} of the content.
+*/
+checkRightsStatus : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-checkRightsStatus'>/**Checks whether the given rights-protected content has valid rights for the specified
+</span> {@link android.drm.DrmStore.Action}.
+@param {Object {Uri}} uri URI for the rights-protected content.
+@param {Number} action The {@link DrmStore.Action} to perform.
+@return {Number} An &lt;code&gt;int&lt;/code&gt; representing the {@link DrmStore.RightsStatus} of the content.
+*/
+checkRightsStatus : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-removeRights'>/**Removes the rights associated with the given rights-protected content.
+</span>@param {String} path Path to the rights-protected content.
+@return {Number} ERROR_NONE for success; ERROR_UNKNOWN for failure.
+*/
+removeRights : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-removeRights'>/**Removes the rights associated with the given rights-protected content.
+</span>@param {Object {Uri}} uri URI for the rights-protected content.
+@return {Number} ERROR_NONE for success; ERROR_UNKNOWN for failure.
+*/
+removeRights : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-removeAllRights'>/**Removes all the rights information of every DRM plug-in (agent) associated with
+</span> the DRM framework. Will be used during a master reset.
+@return {Number} ERROR_NONE for success; ERROR_UNKNOWN for failure.
+*/
+removeAllRights : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-openConvertSession'>/**Initiates a new conversion session. An application must initiate a conversion session
+</span> with this method each time it downloads a rights-protected file that needs to be converted.
+&lt;p&gt;
+ This method applies only to forward-locking (copy protection) DRM schemes.
+@param {String} mimeType MIME type of the input data packet.
+@return {Number} A convert ID that is used used to maintain the conversion session.
+*/
+openConvertSession : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-convertData'>/**Converts the input data (content) that is part of a rights-protected file. The converted
+</span> data and status is returned in a {@link android.drm.DrmConvertedStatus} object. This method should be
+ called each time there is a new block of data received by the application.
+@param {Number} convertId Handle for the conversion session.
+@param {Object {byte[]}} inputData Input data that needs to be converted.
+@return {Object {android.drm.DrmConvertedStatus}} A {@link DrmConvertedStatus} object that contains the status of the data conversion,
+ the converted data, and offset for the header and body signature. An application can 
+ ignore the offset because it is only relevant to the
+ {@link #closeConvertSession closeConvertSession()} method.
+*/
+convertData : function(  ) {},
+
+<span id='android-drm-DrmManagerClient-method-closeConvertSession'>/**Informs the DRM plug-in (agent) that there is no more data to convert or that an error 
+</span> has occurred. Upon successful conversion of the data, the DRM agent will provide an offset
+ value indicating where the header and body signature should be added. Appending the 
+ signature is necessary to protect the integrity of the converted file.
+@param {Number} convertId Handle for the conversion session.
+@return {Object {android.drm.DrmConvertedStatus}} A {@link DrmConvertedStatus} object that contains the status of the data conversion,
+ the converted data, and the offset for the header and body signature.
+*/
+closeConvertSession : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

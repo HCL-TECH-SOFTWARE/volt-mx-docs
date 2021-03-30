@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-vr-VrListenerService'>/**@class android.service.vr.VrListenerService
+</span>@extends android.app.Service
+
+ A service that is bound from the system while running in virtual reality (VR) mode.
+
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with
+ the {@link android.Manifest.permission#BIND_VR_LISTENER_SERVICE} permission
+ and include an intent filter with the {@link #SERVICE_INTERFACE} action. For example:&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;service android:name=&quot;.VrListener&quot;
+          android:label=&quot;&amp;#64;string/service_name&quot;
+          android:permission=&quot;android.permission.BIND_VR_LISTENER_SERVICE&quot;&gt;
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.service.vr.VrListenerService&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+ &amp;lt;/service&gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;This service is bound when the system enters VR mode and is unbound when the system leaves VR
+ mode.&lt;/p&gt;
+ &lt;p&gt;The system will enter VR mode when an application that has previously called
+ {@link android.app.Activity#setVrModeEnabled} gains user focus.  The system will only start this
+ service if the VR application has specifically targeted this service by specifying
+ its {@link ComponentName} in the call to {@link android.app.Activity#setVrModeEnabled} and if
+ this service is installed and enabled in the current user's settings.&lt;/p&gt;
+
+ @see android.provider.Settings#ACTION_VR_LISTENER_SETTINGS
+ @see android.app.Activity#setVrModeEnabled
+ @see android.R.attr#enableVrMode
+*/
+var VrListenerService = {
+
+<span id='android-service-vr-VrListenerService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.service.vr.VrListenerService&quot;,
+<span id='android-service-vr-VrListenerService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-vr-VrListenerService-method-onCurrentVrActivityChanged'>/**Called when the current activity using VR mode has changed.
+</span>
+ &lt;p&gt;This will be called when this service is initially bound, but is not
+ guaranteed to be called before onUnbind.  In general, this is intended to be used to
+ determine when user focus has transitioned between two VR activities.  If both activities
+ have declared {@link android.R.attr#enableVrMode} with this service (and this
+ service is present and enabled), this service will not be unbound during the activity
+ transition.&lt;/p&gt;
+@param {Object {ComponentName}} component the {@link ComponentName} of the VR activity that the system has
+    switched to, or null if the system is displaying a 2D activity in VR compatibility mode.
+@see android.app.Activity#setVrModeEnabled
+@see android.R.attr#enableVrMode
+*/
+onCurrentVrActivityChanged : function(  ) {},
+
+<span id='android-service-vr-VrListenerService-method-onCurrentVrActivityChanged'>/**An extended version of onCurrentVrActivityChanged
+</span>
+ &lt;p&gt;This will be called when this service is initially bound, but is not
+ guaranteed to be called before onUnbind.  In general, this is intended to be used to
+ determine when user focus has transitioned between two VR activities, or between a
+ VR activity and a 2D activity. This should be overridden instead of the above
+ onCurrentVrActivityChanged as that version is deprecated.&lt;/p&gt;
+@param {Object {ComponentName}} component the {@link ComponentName} of the VR activity or the 2D intent.
+@param {Boolean} running2dInVr true if the component is a 2D component.
+@param {Number} pid the process the component is running in.
+@see android.app.Activity#setVrModeEnabled
+@see android.R.attr#enableVrMode
+@hide 
+*/
+onCurrentVrActivityChanged : function(  ) {},
+
+<span id='android-service-vr-VrListenerService-method-isVrModePackageEnabled'>/**Checks if the given component is enabled in user settings.
+</span>
+ &lt;p&gt;If this component is not enabled in the user's settings, it will not be started when
+ the system enters VR mode.  The user interface for enabling VrListenerService components
+ can be started by sending the {@link android.provider.Settings#ACTION_VR_LISTENER_SETTINGS}
+ intent.&lt;/p&gt;
+@param {Object {Context}} context the {@link Context} to use for looking up the requested component.
+@param {Object {ComponentName}} requestedComponent the name of the component that implements
+ {@link android.service.vr.VrListenerService} to check.
+@return {Boolean} {@code true} if this component is enabled in settings.
+@see android.provider.Settings#ACTION_VR_LISTENER_SETTINGS
+*/
+isVrModePackageEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

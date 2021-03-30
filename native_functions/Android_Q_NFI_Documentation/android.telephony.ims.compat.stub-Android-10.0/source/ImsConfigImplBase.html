@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-compat-stub-ImsConfigImplBase'>/**@class android.telephony.ims.compat.stub.ImsConfigImplBase
+</span>@extends java.lang.Object
+
+ Base implementation of ImsConfig.
+ Override the methods that your implementation of ImsConfig supports.
+
+ DO NOT remove or change the existing APIs, only add new ones to this Base implementation or you
+ will break other implementations of ImsConfig maintained by other ImsServices.
+
+ Provides APIs to get/set the IMS service feature/capability/parameters.
+ The config items include:
+ 1) Items provisioned by the operator.
+ 2) Items configured by user. Mainly service feature class.
+
+ The inner class {@link android.telephony.ims.compat.stub.ImsConfigImplBase.ImsConfigStub} implements methods of IImsConfig AIDL interface.
+ The IImsConfig AIDL interface is called by ImsConfig, which may exist in many other processes.
+ ImsConfigImpl access to the configuration parameters may be arbitrarily slow, especially in
+ during initialization, or times when a lot of configuration parameters are being set/get
+ (such as during boot up or SIM card change). By providing a cache in ImsConfigStub, we can speed
+ up access to these configuration parameters, so a query to the ImsConfigImpl does not have to be
+ performed every time.
+ @hide
+*/
+var ImsConfigImplBase = {
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-getProvisionedValue'>/**Gets the value for ims service/capabilities parameters from the provisioned
+</span> value storage. Synchronous blocking call.
+@param {Number} item, as defined in com.android.ims.ImsConfig#ConfigConstants.
+@return {Number} value in Integer format.
+*/
+getProvisionedValue : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-getProvisionedStringValue'>/**Gets the value for ims service/capabilities parameters from the provisioned
+</span> value storage. Synchronous blocking call.
+@param {Number} item, as defined in com.android.ims.ImsConfig#ConfigConstants.
+@return {String} value in String format.
+*/
+getProvisionedStringValue : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-setProvisionedValue'>/**Sets the value for IMS service/capabilities parameters by the operator device
+</span> management entity. It sets the config item value in the provisioned storage
+ from which the master value is derived. Synchronous blocking call.
+@param {Number} item, as defined in com.android.ims.ImsConfig#ConfigConstants.
+@param {Number} value in Integer format.
+@return {Number} as defined in com.android.ims.ImsConfig#OperationStatusConstants.
+*/
+setProvisionedValue : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-setProvisionedStringValue'>/**Sets the value for IMS service/capabilities parameters by the operator device
+</span> management entity. It sets the config item value in the provisioned storage
+ from which the master value is derived.  Synchronous blocking call.
+@param {Number} item as defined in com.android.ims.ImsConfig#ConfigConstants.
+@param {String} value in String format.
+@return {Number} as defined in com.android.ims.ImsConfig#OperationStatusConstants.
+*/
+setProvisionedStringValue : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-getFeatureValue'>/**Gets the value of the specified IMS feature item for specified network type.
+</span> This operation gets the feature config value from the master storage (i.e. final
+ value). Asynchronous non-blocking call.
+@param {Number} feature as defined in com.android.ims.ImsConfig#FeatureConstants.
+@param {Number} network as defined in android.telephony.TelephonyManager#NETWORK_TYPE_XXX.
+@param {Object {ImsConfigListener}} listener feature value returned asynchronously through listener.
+*/
+getFeatureValue : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-setFeatureValue'>/**Sets the value for IMS feature item for specified network type.
+</span> This operation stores the user setting in setting db from which master db
+ is derived.
+@param {Number} feature as defined in com.android.ims.ImsConfig#FeatureConstants.
+@param {Number} network as defined in android.telephony.TelephonyManager#NETWORK_TYPE_XXX.
+@param {Number} value as defined in com.android.ims.ImsConfig#FeatureValueConstants.
+@param {Object {ImsConfigListener}} listener, provided if caller needs to be notified for set result.
+*/
+setFeatureValue : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-getVolteProvisioned'>/**Gets the value for IMS VoLTE provisioned.
+</span> This should be the same as the operator provisioned value if applies.
+*/
+getVolteProvisioned : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-getVideoQuality'>/**Gets the value for IMS feature item video quality.
+</span>@param {Object {ImsConfigListener}} listener Video quality value returned asynchronously through listener.
+*/
+getVideoQuality : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-setVideoQuality'>/**Sets the value for IMS feature item video quality.
+</span>@param {Number} quality, defines the value of video quality.
+@param {Object {ImsConfigListener}} listener, provided if caller needs to be notified for set result.
+*/
+setVideoQuality : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-getIImsConfig'>/**
+</span>*/
+getIImsConfig : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-notifyProvisionedValueChanged'>/**Updates provisioning value and notifies the framework of the change.
+</span> Doesn't call #setProvisionedValue and assumes the result succeeded.
+ This should only be used by modem when they implicitly changed provisioned values.
+@param {Number} item, as defined in com.android.ims.ImsConfig#ConfigConstants.
+@param {Number} value in Integer format.
+*/
+notifyProvisionedValueChanged : function(  ) {},
+
+<span id='android-telephony-ims-compat-stub-ImsConfigImplBase-method-notifyProvisionedValueChanged'>/**Updates provisioning value and notifies the framework of the change.
+</span> Doesn't call #setProvisionedValue and assumes the result succeeded.
+ This should only be used by modem when they implicitly changed provisioned values.
+@param {Number} item, as defined in com.android.ims.ImsConfig#ConfigConstants.
+@param {String} value in String format.
+*/
+notifyProvisionedValueChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

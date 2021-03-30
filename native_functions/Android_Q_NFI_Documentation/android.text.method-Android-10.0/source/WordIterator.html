@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-method-WordIterator'>/**@class android.text.method.WordIterator
+</span> implements android.text.Selection.PositionIterator
+
+@extends java.lang.Object
+
+ Walks through cursor positions at word boundaries. Internally uses
+ {@link BreakIterator#getWordInstance()}, and caches {@link CharSequence}
+ for performance reasons.
+
+ Also provides methods to determine word boundaries.
+ {@hide}
+*/
+var WordIterator = {
+
+<span id='android-text-method-WordIterator-method-setCharSequence'>/**
+</span>*/
+setCharSequence : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-preceding'>/**{@inheritDoc}
+</span>*/
+preceding : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-following'>/**{@inheritDoc}
+</span>*/
+following : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-isBoundary'>/**{@inheritDoc}
+</span>*/
+isBoundary : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-nextBoundary'>/**Returns the position of next boundary after the given offset. Returns
+</span> {@code DONE} if there is no boundary after the given offset.
+@param {Number} offset the given start position to search from.
+@return {Number} the position of the last boundary preceding the given offset.
+*/
+nextBoundary : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-prevBoundary'>/**Returns the position of boundary preceding the given offset or
+</span> {@code DONE} if the given offset specifies the starting position.
+@param {Number} offset the given start position to search from.
+@return {Number} the position of the last boundary preceding the given offset.
+*/
+prevBoundary : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-getBeginning'>/**If &lt;code&gt;offset&lt;/code&gt; is within a word, returns the index of the first character of that
+</span> word, otherwise returns BreakIterator.DONE.
+
+ The offsets that are considered to be part of a word are the indexes of its characters,
+ &lt;i&gt;as well as&lt;/i&gt; the index of its last character plus one.
+ If offset is the index of a low surrogate character, BreakIterator.DONE will be returned.
+
+ Valid range for offset is [0..textLength] (note the inclusive upper bound).
+ The returned value is within [0..offset] or BreakIterator.DONE.
+@throws IllegalArgumentException is offset is not valid.
+*/
+getBeginning : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-getEnd'>/**If &lt;code&gt;offset&lt;/code&gt; is within a word, returns the index of the last character of that
+</span> word plus one, otherwise returns BreakIterator.DONE.
+
+ The offsets that are considered to be part of a word are the indexes of its characters,
+ &lt;i&gt;as well as&lt;/i&gt; the index of its last character plus one.
+ If offset is the index of a low surrogate character, BreakIterator.DONE will be returned.
+
+ Valid range for offset is [0..textLength] (note the inclusive upper bound).
+ The returned value is within [offset..textLength] or BreakIterator.DONE.
+@throws IllegalArgumentException is offset is not valid.
+*/
+getEnd : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-getPrevWordBeginningOnTwoWordsBoundary'>/**If the &lt;code&gt;offset&lt;/code&gt; is within a word or on a word boundary that can only be
+</span> considered the start of a word (e.g. _word where &quot;_&quot; is any character that would not
+ be considered part of the word) then this returns the index of the first character of
+ that word.
+
+ If the offset is on a word boundary that can be considered the start and end of a
+ word, e.g. AABB (where AA and BB are both words) and the offset is the boundary
+ between AA and BB, this would return the start of the previous word, AA.
+
+ Returns BreakIterator.DONE if there is no previous boundary.
+@throws IllegalArgumentException is offset is not valid.
+*/
+getPrevWordBeginningOnTwoWordsBoundary : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-getNextWordEndOnTwoWordBoundary'>/**If the &lt;code&gt;offset&lt;/code&gt; is within a word or on a word boundary that can only be
+</span> considered the end of a word (e.g. word_ where &quot;_&quot; is any character that would not
+ be considered part of the word) then this returns the index of the last character
+ plus one of that word.
+
+ If the offset is on a word boundary that can be considered the start and end of a
+ word, e.g. AABB (where AA and BB are both words) and the offset is the boundary
+ between AA and BB, this would return the end of the next word, BB.
+
+ Returns BreakIterator.DONE if there is no next boundary.
+@throws IllegalArgumentException is offset is not valid.
+*/
+getNextWordEndOnTwoWordBoundary : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-getPunctuationBeginning'>/**If &lt;code&gt;offset&lt;/code&gt; is within a group of punctuation as defined
+</span> by {@link #isPunctuation}(int), returns the index of the first character
+ of that group, otherwise returns BreakIterator.DONE.
+@param {Number} offset the offset to search from.
+*/
+getPunctuationBeginning : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-getPunctuationEnd'>/**If &lt;code&gt;offset&lt;/code&gt; is within a group of punctuation as defined
+</span> by {@link #isPunctuation}(int), returns the index of the last character
+ of that group plus one, otherwise returns BreakIterator.DONE.
+@param {Number} offset the offset to search from.
+*/
+getPunctuationEnd : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-isAfterPunctuation'>/**Indicates if the provided offset is after a punctuation character
+</span> as defined by {@link #isPunctuation}(int).
+@param {Number} offset the offset to check from.
+@return {Boolean} Whether the offset is after a punctuation character.
+*/
+isAfterPunctuation : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-isOnPunctuation'>/**Indicates if the provided offset is at a punctuation character
+</span> as defined by {@link #isPunctuation}(int).
+@param {Number} offset the offset to check from.
+@return {Boolean} Whether the offset is at a punctuation character.
+*/
+isOnPunctuation : function(  ) {},
+
+<span id='android-text-method-WordIterator-method-isMidWordPunctuation'>/**Indicates if the codepoint is a mid-word-only punctuation.
+</span>
+ At the moment, this is locale-independent, and includes all the characters in
+ the MidLetter, MidNumLet, and Single_Quote class of Unicode word breaking algorithm (see
+ UAX #29 &quot;Unicode Text Segmentation&quot; at http://unicode.org/reports/tr29/). These are all the
+ characters that according to the rules WB6 and WB7 of UAX #29 prevent word breaks if they are
+ in the middle of a word, but they become word breaks if they happen at the end of a word
+ (accroding to rule WB999 that breaks word in any place that is not prohibited otherwise).
+@param {Object {Locale}} locale the locale to consider the codepoint in. Presently ignored.
+@param {Number} codePoint the codepoint to check.
+@return {Boolean} True if the codepoint is a mid-word punctuation.
+*/
+isMidWordPunctuation : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

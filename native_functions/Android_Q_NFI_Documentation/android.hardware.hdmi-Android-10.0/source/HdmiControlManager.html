@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-hdmi-HdmiControlManager'>/**@class android.hardware.hdmi.HdmiControlManager
+</span>@extends java.lang.Object
+
+ The {@link android.hardware.hdmi.HdmiControlManager} class is used to send HDMI control messages
+ to attached CEC devices.
+
+ &lt;p&gt;Provides various HDMI client instances that represent HDMI-CEC logical devices
+ hosted in the system. {@link #getTvClient}(), for instance will return an
+ {@link android.hardware.hdmi.HdmiTvClient} object if the system is configured to host one. Android system
+ can host more than one logical CEC devices. If multiple types are configured they
+ all work as if they were independent logical devices running in the system.
+
+ @hide
+*/
+var HdmiControlManager = {
+
+<span id='android-hardware-hdmi-HdmiControlManager-property-ACTION_OSD_MESSAGE'>/** Broadcast Action: Display OSD message.
+</span> &lt;p&gt;Send when the service has a message to display on screen for events
+ that need user's attention such as ARC status change.
+ &lt;p&gt;Always contains the extra fields {@link #EXTRA_MESSAGE_ID}.
+ &lt;p&gt;Requires {@link android.Manifest.permission#HDMI_CEC} to receive.
+*/
+ACTION_OSD_MESSAGE : &quot;android.hardware.hdmi.action.OSD_MESSAGE&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-OSD_MESSAGE_ARC_CONNECTED_INVALID_PORT'>/** Message that ARC enabled device is connected to invalid port (non-ARC port).
+</span>*/
+OSD_MESSAGE_ARC_CONNECTED_INVALID_PORT : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-OSD_MESSAGE_AVR_VOLUME_CHANGED'>/** Message used by TV to receive volume status from Audio Receiver. It should check volume value
+</span> that is retrieved from extra value with the key {@link #EXTRA_MESSAGE_EXTRA_PARAM1}. If the
+ value is in range of [0,100], it is current volume of Audio Receiver. And there is another
+ value, {@link #AVR_VOLUME_MUTED}, which is used to inform volume mute.
+*/
+OSD_MESSAGE_AVR_VOLUME_CHANGED : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-EXTRA_MESSAGE_ID'>/** Used as an extra field in the intent {@link #ACTION_OSD_MESSAGE}. Contains the ID of
+</span> the message to display on screen.
+*/
+EXTRA_MESSAGE_ID : &quot;android.hardware.hdmi.extra.MESSAGE_ID&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-EXTRA_MESSAGE_EXTRA_PARAM1'>/** Used as an extra field in the intent {@link #ACTION_OSD_MESSAGE}. Contains the extra value
+</span> of the message.
+*/
+EXTRA_MESSAGE_EXTRA_PARAM1 : &quot;android.hardware.hdmi.extra.MESSAGE_EXTRA_PARAM1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-AVR_VOLUME_MUTED'>/** Volume value for mute state.
+</span>*/
+AVR_VOLUME_MUTED : &quot;101&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-POWER_STATUS_UNKNOWN'>/***/
+</span>POWER_STATUS_UNKNOWN : &quot;-1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-POWER_STATUS_ON'>/***/
+</span>POWER_STATUS_ON : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-POWER_STATUS_STANDBY'>/***/
+</span>POWER_STATUS_STANDBY : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-POWER_STATUS_TRANSIENT_TO_ON'>/***/
+</span>POWER_STATUS_TRANSIENT_TO_ON : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-POWER_STATUS_TRANSIENT_TO_STANDBY'>/***/
+</span>POWER_STATUS_TRANSIENT_TO_STANDBY : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_SUCCESS'>/**Control operation is successfully handled by the framework. */
+</span>RESULT_SUCCESS : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_TIMEOUT'>/***/
+</span>RESULT_TIMEOUT : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_SOURCE_NOT_AVAILABLE'>/**Source device that the application is using is not available. */
+</span>RESULT_SOURCE_NOT_AVAILABLE : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_TARGET_NOT_AVAILABLE'>/**Target device that the application is controlling is not available. */
+</span>RESULT_TARGET_NOT_AVAILABLE : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_ALREADY_IN_PROGRESS'>/***/
+</span>RESULT_ALREADY_IN_PROGRESS : &quot;4&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_EXCEPTION'>/***/
+</span>RESULT_EXCEPTION : &quot;5&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_INCORRECT_MODE'>/***/
+</span>RESULT_INCORRECT_MODE : &quot;6&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-RESULT_COMMUNICATION_FAILED'>/***/
+</span>RESULT_COMMUNICATION_FAILED : &quot;7&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-DEVICE_EVENT_ADD_DEVICE'>/***/
+</span>DEVICE_EVENT_ADD_DEVICE : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-DEVICE_EVENT_REMOVE_DEVICE'>/***/
+</span>DEVICE_EVENT_REMOVE_DEVICE : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-DEVICE_EVENT_UPDATE_DEVICE'>/***/
+</span>DEVICE_EVENT_UPDATE_DEVICE : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_RECORDING_CURRENTLY_SELECTED_SOURCE'>/**Recording currently selected source. Indicates the status of a recording. */
+</span>ONE_TOUCH_RECORD_RECORDING_CURRENTLY_SELECTED_SOURCE : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_RECORDING_DIGITAL_SERVICE'>/**Recording Digital Service. Indicates the status of a recording. */
+</span>ONE_TOUCH_RECORD_RECORDING_DIGITAL_SERVICE : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_RECORDING_ANALOGUE_SERVICE'>/**Recording Analogue Service. Indicates the status of a recording. */
+</span>ONE_TOUCH_RECORD_RECORDING_ANALOGUE_SERVICE : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_RECORDING_EXTERNAL_INPUT'>/**Recording External input. Indicates the status of a recording. */
+</span>ONE_TOUCH_RECORD_RECORDING_EXTERNAL_INPUT : &quot;4&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_UNABLE_DIGITAL_SERVICE'>/**No recording – unable to record Digital Service. No suitable tuner. */
+</span>ONE_TOUCH_RECORD_UNABLE_DIGITAL_SERVICE : &quot;5&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_UNABLE_ANALOGUE_SERVICE'>/**No recording – unable to record Analogue Service. No suitable tuner. */
+</span>ONE_TOUCH_RECORD_UNABLE_ANALOGUE_SERVICE : &quot;6&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_UNABLE_SELECTED_SERVICE'>/** No recording – unable to select required service. as suitable tuner, but the requested
+</span> parameters are invalid or out of range for that tuner.
+*/
+ONE_TOUCH_RECORD_UNABLE_SELECTED_SERVICE : &quot;7&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_INVALID_EXTERNAL_PLUG_NUMBER'>/**No recording – invalid External plug number */
+</span>ONE_TOUCH_RECORD_INVALID_EXTERNAL_PLUG_NUMBER : &quot;9&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_INVALID_EXTERNAL_PHYSICAL_ADDRESS'>/**No recording – invalid External Physical Address */
+</span>ONE_TOUCH_RECORD_INVALID_EXTERNAL_PHYSICAL_ADDRESS : &quot;10&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_UNSUPPORTED_CA'>/**No recording – CA system not supported */
+</span>ONE_TOUCH_RECORD_UNSUPPORTED_CA : &quot;11&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_NO_OR_INSUFFICIENT_CA_ENTITLEMENTS'>/**No Recording – No or Insufficient CA Entitlements” */
+</span>ONE_TOUCH_RECORD_NO_OR_INSUFFICIENT_CA_ENTITLEMENTS : &quot;12&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_DISALLOW_TO_COPY'>/**No recording – Not allowed to copy source. Source is “copy never”. */
+</span>ONE_TOUCH_RECORD_DISALLOW_TO_COPY : &quot;13&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_DISALLOW_TO_FUTHER_COPIES'>/**No recording – No further copies allowed */
+</span>ONE_TOUCH_RECORD_DISALLOW_TO_FUTHER_COPIES : &quot;14&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_NO_MEDIA'>/**No recording – No media */
+</span>ONE_TOUCH_RECORD_NO_MEDIA : &quot;16&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_PLAYING'>/**No recording – playing */
+</span>ONE_TOUCH_RECORD_PLAYING : &quot;17&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_ALREADY_RECORDING'>/**No recording – already recording */
+</span>ONE_TOUCH_RECORD_ALREADY_RECORDING : &quot;18&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_MEDIA_PROTECTED'>/**No recording – media protected */
+</span>ONE_TOUCH_RECORD_MEDIA_PROTECTED : &quot;19&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_NO_SOURCE_SIGNAL'>/**No recording – no source signal */
+</span>ONE_TOUCH_RECORD_NO_SOURCE_SIGNAL : &quot;20&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_MEDIA_PROBLEM'>/**No recording – media problem */
+</span>ONE_TOUCH_RECORD_MEDIA_PROBLEM : &quot;21&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_NOT_ENOUGH_SPACE'>/**No recording – not enough space available */
+</span>ONE_TOUCH_RECORD_NOT_ENOUGH_SPACE : &quot;22&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_PARENT_LOCK_ON'>/**No recording – Parental Lock On */
+</span>ONE_TOUCH_RECORD_PARENT_LOCK_ON : &quot;23&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_RECORDING_TERMINATED_NORMALLY'>/**Recording terminated normally */
+</span>ONE_TOUCH_RECORD_RECORDING_TERMINATED_NORMALLY : &quot;26&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_RECORDING_ALREADY_TERMINATED'>/**Recording has already terminated */
+</span>ONE_TOUCH_RECORD_RECORDING_ALREADY_TERMINATED : &quot;27&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_OTHER_REASON'>/**No recording – other reason */
+</span>ONE_TOUCH_RECORD_OTHER_REASON : &quot;31&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_PREVIOUS_RECORDING_IN_PROGRESS'>/**No recording. Previous recording request in progress. */
+</span>ONE_TOUCH_RECORD_PREVIOUS_RECORDING_IN_PROGRESS : &quot;48&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_CHECK_RECORDER_CONNECTION'>/**No recording. Please check recorder and connection. */
+</span>ONE_TOUCH_RECORD_CHECK_RECORDER_CONNECTION : &quot;49&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_FAIL_TO_RECORD_DISPLAYED_SCREEN'>/**Cannot record currently displayed source. */
+</span>ONE_TOUCH_RECORD_FAIL_TO_RECORD_DISPLAYED_SCREEN : &quot;50&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-ONE_TOUCH_RECORD_CEC_DISABLED'>/**CEC is disabled. */
+</span>ONE_TOUCH_RECORD_CEC_DISABLED : &quot;51&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_RECORDING_TYPE_DIGITAL'>/**Timer recording type for digital service source. */
+</span>TIMER_RECORDING_TYPE_DIGITAL : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_RECORDING_TYPE_ANALOGUE'>/**Timer recording type for analogue service source. */
+</span>TIMER_RECORDING_TYPE_ANALOGUE : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_RECORDING_TYPE_EXTERNAL'>/**Timer recording type for external source. */
+</span>TIMER_RECORDING_TYPE_EXTERNAL : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_MEDIA_INFO_PRESENT_NOT_PROTECTED'>/**[Timer Status Data/Media Info] - Media present and not protected. */
+</span>TIMER_STATUS_MEDIA_INFO_PRESENT_NOT_PROTECTED : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_MEDIA_INFO_PRESENT_PROTECTED'>/**[Timer Status Data/Media Info] - Media present, but protected. */
+</span>TIMER_STATUS_MEDIA_INFO_PRESENT_PROTECTED : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_MEDIA_INFO_NOT_PRESENT'>/**[Timer Status Data/Media Info] - Media not present. */
+</span>TIMER_STATUS_MEDIA_INFO_NOT_PRESENT : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_PROGRAMMED_INFO_ENOUGH_SPACE'>/**[Timer Status Data/Programmed Info] - Enough space available for recording. */
+</span>TIMER_STATUS_PROGRAMMED_INFO_ENOUGH_SPACE : &quot;8&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_PROGRAMMED_INFO_NOT_ENOUGH_SPACE'>/**[Timer Status Data/Programmed Info] - Not enough space available for recording. */
+</span>TIMER_STATUS_PROGRAMMED_INFO_NOT_ENOUGH_SPACE : &quot;9&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_PROGRAMMED_INFO_MIGHT_NOT_ENOUGH_SPACE'>/**[Timer Status Data/Programmed Info] - Might not enough space available for recording. */
+</span>TIMER_STATUS_PROGRAMMED_INFO_MIGHT_NOT_ENOUGH_SPACE : &quot;11&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_PROGRAMMED_INFO_NO_MEDIA_INFO'>/**[Timer Status Data/Programmed Info] - No media info available. */
+</span>TIMER_STATUS_PROGRAMMED_INFO_NO_MEDIA_INFO : &quot;10&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_NO_FREE_TIME'>/**[Timer Status Data/Not Programmed Error Info] - No free timer available. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_NO_FREE_TIME : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_DATE_OUT_OF_RANGE'>/**[Timer Status Data/Not Programmed Error Info] - Date out of range. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_DATE_OUT_OF_RANGE : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_INVALID_SEQUENCE'>/**[Timer Status Data/Not Programmed Error Info] - Recording Sequence error. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_INVALID_SEQUENCE : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_INVALID_EXTERNAL_PLUG_NUMBER'>/**[Timer Status Data/Not Programmed Error Info] - Invalid External Plug Number. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_INVALID_EXTERNAL_PLUG_NUMBER : &quot;4&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_INVALID_EXTERNAL_PHYSICAL_NUMBER'>/**[Timer Status Data/Not Programmed Error Info] - Invalid External Physical Address. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_INVALID_EXTERNAL_PHYSICAL_NUMBER : &quot;5&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_CA_NOT_SUPPORTED'>/**[Timer Status Data/Not Programmed Error Info] - CA system not supported. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_CA_NOT_SUPPORTED : &quot;6&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_NO_CA_ENTITLEMENTS'>/**[Timer Status Data/Not Programmed Error Info] - No or insufficient CA Entitlements. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_NO_CA_ENTITLEMENTS : &quot;7&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_UNSUPPORTED_RESOLUTION'>/**[Timer Status Data/Not Programmed Error Info] - Does not support resolution. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_UNSUPPORTED_RESOLUTION : &quot;8&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_PARENTAL_LOCK_ON'>/**[Timer Status Data/Not Programmed Error Info] - Parental Lock On. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_PARENTAL_LOCK_ON : &quot;9&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_CLOCK_FAILURE'>/**[Timer Status Data/Not Programmed Error Info] - Clock Failure. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_CLOCK_FAILURE : &quot;10&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_STATUS_NOT_PROGRAMMED_DUPLICATED'>/**[Timer Status Data/Not Programmed Error Info] - Duplicate: already programmed. */
+</span>TIMER_STATUS_NOT_PROGRAMMED_DUPLICATED : &quot;14&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_RECORDING_RESULT_EXTRA_NO_ERROR'>/**No extra error. */
+</span>TIMER_RECORDING_RESULT_EXTRA_NO_ERROR : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_RECORDING_RESULT_EXTRA_CHECK_RECORDER_CONNECTION'>/**No timer recording - check recorder and connection. */
+</span>TIMER_RECORDING_RESULT_EXTRA_CHECK_RECORDER_CONNECTION : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_RECORDING_RESULT_EXTRA_FAIL_TO_RECORD_SELECTED_SOURCE'>/**No timer recording - cannot record selected source. */
+</span>TIMER_RECORDING_RESULT_EXTRA_FAIL_TO_RECORD_SELECTED_SOURCE : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-TIMER_RECORDING_RESULT_EXTRA_CEC_DISABLED'>/**CEC is disabled. */
+</span>TIMER_RECORDING_RESULT_EXTRA_CEC_DISABLED : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CLEAR_TIMER_STATUS_TIMER_NOT_CLEARED_RECORDING'>/**Timer not cleared – recording. */
+</span>CLEAR_TIMER_STATUS_TIMER_NOT_CLEARED_RECORDING : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CLEAR_TIMER_STATUS_TIMER_NOT_CLEARED_NO_MATCHING'>/**Timer not cleared – no matching. */
+</span>CLEAR_TIMER_STATUS_TIMER_NOT_CLEARED_NO_MATCHING : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CLEAR_TIMER_STATUS_TIMER_NOT_CLEARED_NO_INFO_AVAILABLE'>/**Timer not cleared – no info available. */
+</span>CLEAR_TIMER_STATUS_TIMER_NOT_CLEARED_NO_INFO_AVAILABLE : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CLEAR_TIMER_STATUS_TIMER_CLEARED'>/**Timer cleared. */
+</span>CLEAR_TIMER_STATUS_TIMER_CLEARED : &quot;128&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CLEAR_TIMER_STATUS_CHECK_RECORDER_CONNECTION'>/**Clear timer error - check recorder and connection. */
+</span>CLEAR_TIMER_STATUS_CHECK_RECORDER_CONNECTION : &quot;160&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CLEAR_TIMER_STATUS_FAIL_TO_CLEAR_SELECTED_SOURCE'>/**Clear timer error - cannot clear timer for selected source. */
+</span>CLEAR_TIMER_STATUS_FAIL_TO_CLEAR_SELECTED_SOURCE : &quot;161&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CLEAR_TIMER_STATUS_CEC_DISABLE'>/**Clear timer error - CEC is disabled. */
+</span>CLEAR_TIMER_STATUS_CEC_DISABLE : &quot;162&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CONTROL_STATE_CHANGED_REASON_START'>/**The HdmiControlService is started. */
+</span>CONTROL_STATE_CHANGED_REASON_START : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CONTROL_STATE_CHANGED_REASON_SETTING'>/**The state of HdmiControlService is changed by changing of settings. */
+</span>CONTROL_STATE_CHANGED_REASON_SETTING : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CONTROL_STATE_CHANGED_REASON_WAKEUP'>/**The HdmiControlService is enabled to wake up. */
+</span>CONTROL_STATE_CHANGED_REASON_WAKEUP : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-property-CONTROL_STATE_CHANGED_REASON_STANDBY'>/**The HdmiControlService will be disabled to standby. */
+</span>CONTROL_STATE_CHANGED_REASON_STANDBY : &quot;3&quot;,
+<span id='android-hardware-hdmi-HdmiControlManager-method-getClient'>/**Gets an object that represents an HDMI-CEC logical device of a specified type.
+</span>@param {Number} type CEC device type
+@return {Object {android.hardware.hdmi.HdmiClient}} {@link HdmiClient} instance. {@code null} on failure.
+ See {@link HdmiDeviceInfo#DEVICE_PLAYBACK}
+ See {@link HdmiDeviceInfo#DEVICE_TV}
+ See {@link HdmiDeviceInfo#DEVICE_AUDIO_SYSTEM}
+*/
+getClient : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getPlaybackClient'>/**Gets an object that represents an HDMI-CEC logical device of type playback on the system.
+</span>
+ &lt;p&gt;Used to send HDMI control messages to other devices like TV or audio amplifier through
+ HDMI bus. It is also possible to communicate with other logical devices hosted in the same
+ system if the system is configured to host more than one type of HDMI-CEC logical devices.
+@return {Object {android.hardware.hdmi.HdmiPlaybackClient}} {@link HdmiPlaybackClient} instance. {@code null} on failure.
+*/
+getPlaybackClient : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getTvClient'>/**Gets an object that represents an HDMI-CEC logical device of type TV on the system.
+</span>
+ &lt;p&gt;Used to send HDMI control messages to other devices and manage them through
+ HDMI bus. It is also possible to communicate with other logical devices hosted in the same
+ system if the system is configured to host more than one type of HDMI-CEC logical devices.
+@return {Object {android.hardware.hdmi.HdmiTvClient}} {@link HdmiTvClient} instance. {@code null} on failure.
+*/
+getTvClient : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getAudioSystemClient'>/**Gets an object that represents an HDMI-CEC logical device of type audio system on the system.
+</span>
+ &lt;p&gt;Used to send HDMI control messages to other devices like TV through HDMI bus. It is also
+ possible to communicate with other logical devices hosted in the same system if the system is
+ configured to host more than one type of HDMI-CEC logical devices.
+@return {Object {android.hardware.hdmi.HdmiAudioSystemClient}} {@link HdmiAudioSystemClient} instance. {@code null} on failure.
+
+ TODO(b/110094868): unhide for Q
+@hide 
+*/
+getAudioSystemClient : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getSwitchClient'>/**Gets an object that represents an HDMI-CEC logical device of type switch on the system.
+</span>
+ &lt;p&gt;Used to send HDMI control messages to other devices (e.g. TVs) through HDMI bus.
+ It is also possible to communicate with other logical devices hosted in the same
+ system if the system is configured to host more than one type of HDMI-CEC logical device.
+@return {Object {android.hardware.hdmi.HdmiSwitchClient}} {@link HdmiSwitchClient} instance. {@code null} on failure.
+@hide 
+*/
+getSwitchClient : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getConnectedDevices'>/**Get a snapshot of the real-time status of the devices on the CEC bus.
+</span>
+ &lt;p&gt;This only applies to devices with switch functionality, which are devices with one
+ or more than one HDMI inputs.
+@return {Object {java.util.List}} a list of {@link HdmiDeviceInfo} of the connected CEC devices on the CEC bus. An
+ empty list will be returned if there is none.
+@hide 
+*/
+getConnectedDevices : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getConnectedDevicesList'>/**
+</span>@removed 
+@hide 
+@deprecated Please use {@link #getConnectedDevices()} instead.
+*/
+getConnectedDevicesList : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-powerOffDevice'>/**Power off the target device by sending CEC commands. Note that this device can't be the
+</span> current device itself.
+
+ &lt;p&gt;The target device info can be obtained by calling {@link #getConnectedDevicesList}().
+@param {Object {HdmiDeviceInfo}} deviceInfo {@link HdmiDeviceInfo} of the device to be powered off.
+@hide 
+*/
+powerOffDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-powerOffRemoteDevice'>/**
+</span>@removed 
+@hide 
+@deprecated Please use {@link #powerOffDevice(deviceInfo)} instead.
+*/
+powerOffRemoteDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-powerOnDevice'>/**Power on the target device by sending CEC commands. Note that this device can't be the
+</span> current device itself.
+
+ &lt;p&gt;The target device info can be obtained by calling {@link #getConnectedDevicesList}().
+@param {Object {HdmiDeviceInfo}} deviceInfo {@link HdmiDeviceInfo} of the device to be powered on.
+@hide 
+*/
+powerOnDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-powerOnRemoteDevice'>/**
+</span>@removed 
+@hide 
+@deprecated Please use {@link #powerOnDevice(deviceInfo)} instead.
+*/
+powerOnRemoteDevice : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-setActiveSource'>/**Request the target device to be the new Active Source by sending CEC commands. Note that
+</span> this device can't be the current device itself.
+
+ &lt;p&gt;The target device info can be obtained by calling {@link #getConnectedDevicesList}().
+
+ &lt;p&gt;If the target device responds to the command, the users should see the target device
+ streaming on their TVs.
+@param {Object {HdmiDeviceInfo}} deviceInfo HdmiDeviceInfo of the target device
+@hide 
+*/
+setActiveSource : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-requestRemoteDeviceToBecomeActiveSource'>/**
+</span>@removed 
+@hide 
+@deprecated Please use {@link #setActiveSource(deviceInfo)} instead.
+*/
+requestRemoteDeviceToBecomeActiveSource : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-setStandbyMode'>/**Controls standby mode of the system. It will also try to turn on/off the connected devices if
+</span> necessary.
+@param {Boolean} isStandbyModeOn target status of the system's standby mode
+*/
+setStandbyMode : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getSystemAudioMode'>/**Gets whether the system is in system audio mode.
+</span>@hide 
+*/
+getSystemAudioMode : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-getPhysicalAddress'>/**Get the physical address of the device.
+</span>
+ &lt;p&gt;Physical address needs to be automatically adjusted when devices are phyiscally or
+ electrically added or removed from the device tree. Please see HDMI Specification Version
+ 1.4b 8.7 Physical Address for more details on the address discovery proccess.
+@hide 
+*/
+getPhysicalAddress : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-isDeviceConnected'>/**Check if the target device is connected to the current device.
+</span>
+ &lt;p&gt;The API also returns true if the current device is the target.
+@param {Object {HdmiDeviceInfo}} targetDevice {@link HdmiDeviceInfo} of the target device.
+@return {Boolean} true if {@code targetDevice} is directly or indirectly
+ connected to the current device.
+@hide 
+*/
+isDeviceConnected : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-isRemoteDeviceConnected'>/**
+</span>@removed 
+@hide 
+@deprecated Please use {@link #isDeviceConnected(targetDevice)} instead.
+*/
+isRemoteDeviceConnected : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-addHotplugEventListener'>/**Adds a listener to get informed of {@link android.hardware.hdmi.HdmiHotplugEvent}.
+</span>
+ &lt;p&gt;To stop getting the notification,
+ use {@link #removeHotplugEventListener}(HotplugEventListener).
+@param {Object {HdmiControlManager.HotplugEventListener}} listener {@link HotplugEventListener} instance
+@see HdmiControlManager#removeHotplugEventListener(HotplugEventListener)
+*/
+addHotplugEventListener : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiControlManager-method-removeHotplugEventListener'>/**Removes a listener to stop getting informed of {@link android.hardware.hdmi.HdmiHotplugEvent}.
+</span>@param {Object {HdmiControlManager.HotplugEventListener}} listener {@link HotplugEventListener} instance to be removed
+*/
+removeHotplugEventListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

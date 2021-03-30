@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-NdefFormatable'>/**@class android.nfc.tech.NdefFormatable
+</span>@extends android.nfc.tech.BasicTagTechnology
+
+ Provide access to NDEF format operations on a {@link Tag}.
+
+ &lt;p&gt;Acquire a {@link android.nfc.tech.NdefFormatable} object using {@link #get}.
+
+ &lt;p&gt;Android devices with NFC must only enumerate and implement this
+ class for tags for which it can format to NDEF.
+
+ &lt;p&gt;Unfortunately the procedures to convert unformated tags to NDEF formatted
+ tags are not specified by NFC Forum, and are not generally well-known. So
+ there is no mandatory set of tags for which all Android devices with NFC
+ must support {@link android.nfc.tech.NdefFormatable}.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Methods that perform I/O operations
+ require the {@link android.Manifest.permission#NFC} permission.
+*/
+var NdefFormatable = {
+
+<span id='android-nfc-tech-NdefFormatable-method-get'>/**Get an instance of {@link android.nfc.tech.NdefFormatable} for the given tag.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+ &lt;p&gt;Returns null if {@link android.nfc.tech.NdefFormatable} was not enumerated in {@link Tag#getTechList}.
+ This indicates the tag is not NDEF formatable by this Android device.
+@param {Object {Tag}} tag an NDEF formatable tag
+@return {Object {android.nfc.tech.NdefFormatable}} NDEF formatable object
+*/
+get : function(  ) {},
+
+<span id='android-nfc-tech-NdefFormatable-method-format'>/**Format a tag as NDEF, and write a {@link android.nfc.tech.NdefMessage}.
+</span>
+ &lt;p&gt;This is a multi-step process, an IOException is thrown
+ if any one step fails.
+ &lt;p&gt;The card is left in a read-write state after this operation.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Object {NdefMessage}} firstMessage the NDEF message to write after formatting, can be null
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+@throws FormatException if the NDEF Message to write is malformed
+*/
+format : function(  ) {},
+
+<span id='android-nfc-tech-NdefFormatable-method-formatReadOnly'>/**Formats a tag as NDEF, write a {@link android.nfc.tech.NdefMessage}, and make read-only.
+</span>
+ &lt;p&gt;This is a multi-step process, an IOException is thrown
+ if any one step fails.
+ &lt;p&gt;The card is left in a read-only state if this method returns successfully.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Object {NdefMessage}} firstMessage the NDEF message to write after formatting
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+@throws FormatException if the NDEF Message to write is malformed
+*/
+formatReadOnly : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

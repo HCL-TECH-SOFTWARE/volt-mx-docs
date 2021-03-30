@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-IsoDep'>/**@class android.nfc.tech.IsoDep
+</span>@extends android.nfc.tech.BasicTagTechnology
+
+ Provides access to ISO-DEP (ISO 14443-4) properties and I/O operations on a {@link Tag}.
+
+ &lt;p&gt;Acquire an {@link android.nfc.tech.IsoDep} object using {@link #get}.
+ &lt;p&gt;The primary ISO-DEP I/O operation is {@link #transceive}. Applications must
+ implement their own protocol stack on top of {@link #transceive}.
+ &lt;p&gt;Tags that enumerate the {@link android.nfc.tech.IsoDep} technology in {@link Tag#getTechList}
+ will also enumerate
+ {@link android.nfc.tech.NfcA} or {@link android.nfc.tech.NfcB} (since IsoDep builds on top of either of these).
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Methods that perform I/O operations
+ require the {@link android.Manifest.permission#NFC} permission.
+*/
+var IsoDep = {
+
+<span id='android-nfc-tech-IsoDep-property-EXTRA_HI_LAYER_RESP'>/**@hide */
+</span>EXTRA_HI_LAYER_RESP : &quot;hiresp&quot;,
+<span id='android-nfc-tech-IsoDep-property-EXTRA_HIST_BYTES'>/**@hide */
+</span>EXTRA_HIST_BYTES : &quot;histbytes&quot;,
+<span id='android-nfc-tech-IsoDep-method-get'>/**Get an instance of {@link android.nfc.tech.IsoDep} for the given tag.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+ &lt;p&gt;Returns null if {@link android.nfc.tech.IsoDep} was not enumerated in {@link Tag#getTechList}.
+ This indicates the tag does not support ISO-DEP.
+@param {Object {Tag}} tag an ISO-DEP compatible tag
+@return {Object {android.nfc.tech.IsoDep}} ISO-DEP object
+*/
+get : function(  ) {},
+
+<span id='android-nfc-tech-IsoDep-method-setTimeout'>/**Set the timeout of {@link #transceive} in milliseconds.
+</span> &lt;p&gt;The timeout only applies to ISO-DEP {@link #transceive}, and is
+ reset to a default value when {@link #close} is called.
+ &lt;p&gt;Setting a longer timeout may be useful when performing
+ transactions that require a long processing time on the tag
+ such as key generation.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} timeout timeout value in milliseconds
+*/
+setTimeout : function(  ) {},
+
+<span id='android-nfc-tech-IsoDep-method-getTimeout'>/**Get the current timeout for {@link #transceive} in milliseconds.
+</span>
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@return {Number} timeout value in milliseconds
+*/
+getTimeout : function(  ) {},
+
+<span id='android-nfc-tech-IsoDep-method-getHistoricalBytes'>/**Return the ISO-DEP historical bytes for {@link android.nfc.tech.NfcA} tags.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+ &lt;p&gt;The historical bytes can be used to help identify a tag. They are present
+ only on {@link android.nfc.tech.IsoDep} tags that are based on {@link android.nfc.tech.NfcA} RF technology.
+ If this tag is not {@link android.nfc.tech.NfcA} then null is returned.
+ &lt;p&gt;In ISO 14443-4 terminology, the historical bytes are a subset of the RATS
+ response.
+@return {Number} ISO-DEP historical bytes, or null if this is not a {@link NfcA} tag
+*/
+getHistoricalBytes : function(  ) {},
+
+<span id='android-nfc-tech-IsoDep-method-getHiLayerResponse'>/**Return the higher layer response bytes for {@link android.nfc.tech.NfcB} tags.
+</span> &lt;p&gt;Does not cause any RF activity and does not block.
+ &lt;p&gt;The higher layer response bytes can be used to help identify a tag.
+ They are present only on {@link android.nfc.tech.IsoDep} tags that are based on {@link android.nfc.tech.NfcB}
+ RF technology. If this tag is not {@link android.nfc.tech.NfcB} then null is returned.
+ &lt;p&gt;In ISO 14443-4 terminology, the higher layer bytes are a subset of the
+ ATTRIB response.
+@return {Number} ISO-DEP historical bytes, or null if this is not a {@link NfcB} tag
+*/
+getHiLayerResponse : function(  ) {},
+
+<span id='android-nfc-tech-IsoDep-method-transceive'>/**Send raw ISO-DEP data to the tag and receive the response.
+</span>
+ &lt;p&gt;Applications must only send the INF payload, and not the start of frame and
+ end of frame indicators. Applications do not need to fragment the payload, it
+ will be automatically fragmented and defragmented by {@link #transceive} if
+ it exceeds FSD/FSC limits.
+
+ &lt;p&gt;Use {@link #getMaxTransceiveLength} to retrieve the maximum number of bytes
+ that can be sent with {@link #transceive}.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Object {byte[]}} data command bytes to send, must not be null
+@return {Number} response bytes received, will not be null
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or this operation is canceled
+*/
+transceive : function(  ) {},
+
+<span id='android-nfc-tech-IsoDep-method-getMaxTransceiveLength'>/**Return the maximum number of bytes that can be sent with {@link #transceive}.
+</span>@return {Number} the maximum number of bytes that can be sent with {@link #transceive}.
+*/
+getMaxTransceiveLength : function(  ) {},
+
+<span id='android-nfc-tech-IsoDep-method-isExtendedLengthApduSupported'>/**&lt;p&gt;Standard APDUs have a 1-byte length field, allowing a maximum of
+</span> 255 payload bytes, which results in a maximum APDU length of 261 bytes.
+
+ &lt;p&gt;Extended length APDUs have a 3-byte length field, allowing 65535
+ payload bytes.
+
+ &lt;p&gt;Some NFC adapters, like the one used in the Nexus S and the Galaxy Nexus
+ do not support extended length APDUs. They are expected to be well-supported
+ in the future though. Use this method to check for extended length APDU
+ support.
+@return {Boolean} whether the NFC adapter on this device supports extended length APDUs.
+*/
+isExtendedLengthApduSupported : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

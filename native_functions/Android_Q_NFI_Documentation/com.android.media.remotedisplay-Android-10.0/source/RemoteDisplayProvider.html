@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-media-remotedisplay-RemoteDisplayProvider'>/**@class com.android.media.remotedisplay.RemoteDisplayProvider
+</span>@extends java.lang.Object
+
+ Base class for remote display providers implemented as unbundled services.
+ &lt;p&gt;
+ To implement your remote display provider service, create a subclass of
+ {@link Service} and override the {@link Service#onBind Service.onBind()} method
+ to return the provider's binder when the {@link #SERVICE_INTERFACE} is requested.
+ &lt;/p&gt;
+ &lt;pre&gt;
+   public class SampleRemoteDisplayProviderService extends Service {
+       private SampleProvider mProvider;
+
+       public IBinder onBind(Intent intent) {
+           if (intent.getAction().equals(RemoteDisplayProvider.SERVICE_INTERFACE)) {
+               if (mProvider == null) {
+                   mProvider = new SampleProvider(this);
+               }
+               return mProvider.getBinder();
+           }
+           return null;
+       }
+
+       class SampleProvider extends RemoteDisplayProvider {
+           public SampleProvider() {
+               super(SampleRemoteDisplayProviderService.this);
+           }
+
+           // --- Implementation goes here ---
+       }
+   }
+ &lt;/pre&gt;
+ &lt;p&gt;
+ Declare your remote display provider service in your application manifest
+ like this:
+ &lt;/p&gt;
+ &lt;pre&gt;
+   &amp;lt;application&gt;
+       &amp;lt;uses-library android:name=&quot;com.android.media.remotedisplay&quot; /&gt;
+
+       &amp;lt;service android:name=&quot;.SampleRemoteDisplayProviderService&quot;
+               android:label=&quot;@string/sample_remote_display_provider_service&quot;
+               android:exported=&quot;true&quot;
+               android:permission=&quot;android.permission.BIND_REMOTE_DISPLAY&quot;&gt;
+           &amp;lt;intent-filter&gt;
+               &amp;lt;action android:name=&quot;com.android.media.remotedisplay.RemoteDisplayProvider&quot; /&gt;
+           &amp;lt;/intent-filter&gt;
+       &amp;lt;/service&gt;
+   &amp;lt;/application&gt;
+ &lt;/pre&gt;
+ &lt;p&gt;
+ This object is not thread safe.  It is only intended to be accessed on the
+ {@link Context#getMainLooper main looper thread} of an application.
+ &lt;/p&gt;&lt;p&gt;
+ IMPORTANT: This class is effectively a public API for unbundled applications, and
+ must remain API stable. See README.txt in the root of this package for more information.
+ &lt;/p&gt;
+
+ @hide
+*/
+var RemoteDisplayProvider = {
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span> Put this in your manifest.
+*/
+SERVICE_INTERFACE : &quot;com.android.media.remotedisplay.RemoteDisplayProvider&quot;,
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-property-DISCOVERY_MODE_NONE'>/** Discovery mode: Do not perform any discovery.
+</span>*/
+DISCOVERY_MODE_NONE : &quot;0&quot;,
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-property-DISCOVERY_MODE_PASSIVE'>/** Discovery mode: Passive or low-power periodic discovery.
+</span> &lt;p&gt;
+ This mode indicates that an application is interested in knowing whether there
+ are any remote displays paired or available but doesn't need the latest or
+ most detailed information.  The provider may scan at a lower rate or rely on
+ knowledge of previously paired devices.
+ &lt;/p&gt;
+*/
+DISCOVERY_MODE_PASSIVE : &quot;1&quot;,
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-property-DISCOVERY_MODE_ACTIVE'>/** Discovery mode: Active discovery.
+</span> &lt;p&gt;
+ This mode indicates that the user is actively trying to connect to a route
+ and we should perform continuous scans.  This mode may use significantly more
+ power but is intended to be short-lived.
+ &lt;/p&gt;
+*/
+DISCOVERY_MODE_ACTIVE : &quot;2&quot;,
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-getContext'>/**Gets the context of the remote display provider.
+</span>*/
+getContext : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-getBinder'>/**Gets the Binder associated with the provider.
+</span> &lt;p&gt;
+ This is intended to be used for the onBind() method of a service that implements
+ a remote display provider service.
+ &lt;/p&gt;
+@return {Object {android.os.IBinder}} The IBinder instance associated with the provider.
+*/
+getBinder : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-onDiscoveryModeChanged'>/**Called when the current discovery mode changes.
+</span>@param {Number} mode The new discovery mode.
+*/
+onDiscoveryModeChanged : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-onConnect'>/**Called when the system would like to connect to a display.
+</span>@param {Object {RemoteDisplay}} display The remote display.
+*/
+onConnect : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-onDisconnect'>/**Called when the system would like to disconnect from a display.
+</span>@param {Object {RemoteDisplay}} display The remote display.
+*/
+onDisconnect : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-onSetVolume'>/**Called when the system would like to set the volume of a display.
+</span>@param {Object {RemoteDisplay}} display The remote display.
+@param {Number} volume The desired volume.
+*/
+onSetVolume : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-onAdjustVolume'>/**Called when the system would like to adjust the volume of a display.
+</span>@param {Object {RemoteDisplay}} display The remote display.
+@param {Number} delta An increment to add to the current volume, such as +1 or -1.
+*/
+onAdjustVolume : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-getDiscoveryMode'>/**Gets the current discovery mode.
+</span>@return {Number} The current discovery mode.
+*/
+getDiscoveryMode : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-getDisplays'>/**Gets the current collection of displays.
+</span>@return {Object {java.util.Collection}} The current collection of displays, which must not be modified.
+*/
+getDisplays : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-addDisplay'>/**Adds the specified remote display and notifies the system.
+</span>@param {Object {RemoteDisplay}} display The remote display that was added.
+@throws IllegalStateException if there is already a display with the same id.
+*/
+addDisplay : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-updateDisplay'>/**Updates information about the specified remote display and notifies the system.
+</span>@param {Object {RemoteDisplay}} display The remote display that was added.
+@throws IllegalStateException if the display was n
+*/
+updateDisplay : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-removeDisplay'>/**Removes the specified remote display and tells the system about it.
+</span>@param {Object {RemoteDisplay}} display The remote display that was removed.
+*/
+removeDisplay : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-findRemoteDisplay'>/**Finds the remote display with the specified id, returns null if not found.
+</span>@param {String} id Id of the remote display.
+@return {Object {com.android.media.remotedisplay.RemoteDisplay}} The display, or null if none.
+*/
+findRemoteDisplay : function(  ) {},
+
+<span id='com-android-media-remotedisplay-RemoteDisplayProvider-method-getSettingsPendingIntent'>/**Gets a pending intent to launch the remote display settings activity.
+</span>@return {Object {android.app.PendingIntent}} A pending intent to launch the settings activity.
+*/
+getSettingsPendingIntent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

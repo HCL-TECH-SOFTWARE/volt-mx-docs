@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-logging-MetricsLogger'>/**@class com.android.internal.logging.MetricsLogger
+</span>@extends java.lang.Object
+
+ Writes sysui_multi_event records to the system event log.
+
+ Prefer the methods write(LogMaker), or count() or histogram(). Replace legacy methods with
+ their current equivalents when the opportunity arises.
+
+ This class is a lightweight dependency barrier - it is cheap and easy to construct.
+ Logging is also cheap, so it is not normally necessary to move logging off of the UI thread.
+
+ @hide
+*/
+var MetricsLogger = {
+
+<span id='com-android-internal-logging-MetricsLogger-property-VIEW_UNKNOWN'>/***/
+</span>VIEW_UNKNOWN : &quot;null&quot;,
+<span id='com-android-internal-logging-MetricsLogger-property-LOGTAG'>/***/
+</span>LOGTAG : &quot;null&quot;,
+<span id='com-android-internal-logging-MetricsLogger-method-write'>/**Write an event log record, consisting of content.serialize().
+</span>*/
+write : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-count'>/**Add an integer value to the monotonically increasing counter with the given name.
+</span>*/
+count : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-histogram'>/**Increment the bucket with the integer label on the histogram with the given name.
+</span>*/
+histogram : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-visible'>/**Logs an OPEN event on the category.
+</span>  Equivalent to write(new LogMaker(category).setType(MetricsEvent.TYPE_OPEN))
+*/
+visible : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-hidden'>/**Logs a CLOSE event on the category.
+</span>  Equivalent to write(new LogMaker(category).setType(MetricsEvent.TYPE_CLOSE))
+*/
+hidden : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-visibility'>/**Logs an OPEN or CLOSE event on the category, depending on visible.
+</span>  Equivalent to write(new LogMaker(category)
+                     .setType(visible ? MetricsEvent.TYPE_OPEN : MetricsEvent.TYPE_CLOSE))
+*/
+visibility : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-visibility'>/**Logs an OPEN or CLOSE event on the category, depending on vis.
+</span>  Equivalent to write(new LogMaker(category)
+                           .setType(vis == View.VISIBLE ?
+                                    MetricsEvent.TYPE_OPEN : MetricsEvent.TYPE_CLOSE))
+*/
+visibility : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**Logs an ACTION event on the category.
+</span> Equivalent to write(new LogMaker(category).setType(MetricsEvent.TYPE_ACTION))
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**Logs an ACTION event on the category.
+</span> Equivalent to write(new LogMaker(category).setType(MetricsEvent.TYPE_ACTION)
+                           .setSubtype(value)
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**Logs an ACTION event on the category.
+</span> Equivalent to write(new LogMaker(category).setType(MetricsEvent.TYPE_ACTION)
+                           .setSubtype(value ? 1 : 0)
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**Logs an ACTION event on the category.
+</span> Equivalent to write(new LogMaker(category).setType(MetricsEvent.TYPE_ACTION)
+                           .setPackageName(value ? 1 : 0)
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-visible'>/**
+</span>@deprecated because untestable; use {@link #visible(int)}
+*/
+visible : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-hidden'>/**
+</span>@deprecated because untestable; use {@link #hidden(int)}
+*/
+hidden : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-visibility'>/**
+</span>@deprecated because untestable; use {@link #visibility(int, boolean)}
+*/
+visibility : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-visibility'>/**
+</span>@deprecated because untestable; use {@link #visibility(int, int)}
+*/
+visibility : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**
+</span>@deprecated because untestable; use {@link #action(int)}
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**
+</span>@deprecated because untestable; use {@link #action(int, int)}
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**
+</span>@deprecated because untestable; use {@link #action(int, boolean)}
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**
+</span>@deprecated because untestable; use {@link #write(LogMaker)}
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-action'>/**
+</span>@deprecated because untestable; use {@link #action(int, String)}
+*/
+action : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-count'>/**Add an integer value to the monotonically increasing counter with the given name.
+</span>@deprecated because untestable; use {@link #count(String, int)}
+*/
+count : function(  ) {},
+
+<span id='com-android-internal-logging-MetricsLogger-method-histogram'>/**Increment the bucket with the integer label on the histogram with the given name.
+</span>@deprecated use {@link #histogram(String, int)}
+*/
+histogram : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

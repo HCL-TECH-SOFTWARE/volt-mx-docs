@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-ExploreByTouchHelper'>/**@class com.android.internal.widget.ExploreByTouchHelper
+</span>@extends android.view.View.AccessibilityDelegate
+
+ ExploreByTouchHelper is a utility class for implementing accessibility
+ support in custom {@link android.view.View}s that represent a collection of View-like
+ logical items. It extends {@link android.view.accessibility.AccessibilityNodeProvider} and
+ simplifies many aspects of providing information to accessibility services
+ and managing accessibility focus. This class does not currently support
+ hierarchies of logical items.
+ &lt;p&gt;
+ This should be applied to the parent view using
+ {@link android.view.View#setAccessibilityDelegate}:
+
+ &lt;pre&gt;
+ mAccessHelper = ExploreByTouchHelper.create(someView, mAccessHelperCallback);
+ ViewCompat.setAccessibilityDelegate(someView, mAccessHelper);
+ &lt;/pre&gt;
+*/
+var ExploreByTouchHelper = {
+
+<span id='com-android-internal-widget-ExploreByTouchHelper-property-INVALID_ID'>/**Virtual node identifier value for invalid nodes. */
+</span>INVALID_ID : &quot;-2147483648&quot;,
+<span id='com-android-internal-widget-ExploreByTouchHelper-property-HOST_ID'>/**Virtual node identifier value for the host view's node. */
+</span>HOST_ID : &quot;-1&quot;,
+<span id='com-android-internal-widget-ExploreByTouchHelper-method-getAccessibilityNodeProvider'>/**Returns the {@link android.view.accessibility.AccessibilityNodeProvider} for this helper.
+</span>@param {Object {View}} host View whose logical children are exposed by this helper.
+@return {Object {android.view.accessibility.AccessibilityNodeProvider}} The accessibility node provider for this helper.
+*/
+getAccessibilityNodeProvider : function(  ) {},
+
+<span id='com-android-internal-widget-ExploreByTouchHelper-method-dispatchHoverEvent'>/**Dispatches hover {@link android.view.MotionEvent}s to the virtual view hierarchy when
+</span> the Explore by Touch feature is enabled.
+ &lt;p&gt;
+ This method should be called by overriding
+ {@link View#dispatchHoverEvent}:
+
+ &lt;pre&gt;&amp;#64;Override
+ public boolean dispatchHoverEvent(MotionEvent event) {
+   if (mHelper.dispatchHoverEvent(this, event) {
+     return true;
+   }
+   return super.dispatchHoverEvent(event);
+ }
+ &lt;/pre&gt;
+@param {Object {MotionEvent}} event The hover event to dispatch to the virtual view hierarchy.
+@return {Boolean} Whether the hover event was handled.
+*/
+dispatchHoverEvent : function(  ) {},
+
+<span id='com-android-internal-widget-ExploreByTouchHelper-method-sendEventForVirtualView'>/**Populates an event of the specified type with information about an item
+</span> and attempts to send it up through the view hierarchy.
+ &lt;p&gt;
+ You should call this method after performing a user action that normally
+ fires an accessibility event, such as clicking on an item.
+
+ &lt;pre&gt;public void performItemClick(T item) {
+   ...
+   sendEventForVirtualViewId(item.id, AccessibilityEvent.TYPE_VIEW_CLICKED);
+ }
+ &lt;/pre&gt;
+@param {Number} virtualViewId The virtual view id for which to send an event.
+@param {Number} eventType The type of event to send.
+@return {Boolean} true if the event was sent successfully.
+*/
+sendEventForVirtualView : function(  ) {},
+
+<span id='com-android-internal-widget-ExploreByTouchHelper-method-invalidateRoot'>/**Notifies the accessibility framework that the properties of the parent
+</span> view have changed.
+ &lt;p&gt;
+ You &lt;b&gt;must&lt;/b&gt; call this method after adding or removing items from the
+ parent view.
+*/
+invalidateRoot : function(  ) {},
+
+<span id='com-android-internal-widget-ExploreByTouchHelper-method-invalidateVirtualView'>/**Notifies the accessibility framework that the properties of a particular
+</span> item have changed.
+ &lt;p&gt;
+ You &lt;b&gt;must&lt;/b&gt; call this method after changing any of the properties set
+ in {@link #onPopulateNodeForVirtualView}.
+@param {Number} virtualViewId The virtual view id to invalidate, or
+                      {@link #HOST_ID} to invalidate the root view.
+@see #invalidateVirtualView(int, int)
+*/
+invalidateVirtualView : function(  ) {},
+
+<span id='com-android-internal-widget-ExploreByTouchHelper-method-invalidateVirtualView'>/**Notifies the accessibility framework that the properties of a particular
+</span> item have changed.
+ &lt;p&gt;
+ You &lt;b&gt;must&lt;/b&gt; call this method after changing any of the properties set
+ in {@link #onPopulateNodeForVirtualView}.
+@param {Number} virtualViewId The virtual view id to invalidate, or
+                      {@link #HOST_ID} to invalidate the root view.
+@param {Number} changeTypes The bit mask of change types. May be {@code 0} for the
+                    default (undefined) change type or one or more of:
+         &lt;ul&gt;
+         &lt;li&gt;{@link AccessibilityEvent#CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION}
+         &lt;li&gt;{@link AccessibilityEvent#CONTENT_CHANGE_TYPE_SUBTREE}
+         &lt;li&gt;{@link AccessibilityEvent#CONTENT_CHANGE_TYPE_TEXT}
+         &lt;li&gt;{@link AccessibilityEvent#CONTENT_CHANGE_TYPE_UNDEFINED}
+         &lt;/ul&gt;
+*/
+invalidateVirtualView : function(  ) {},
+
+<span id='com-android-internal-widget-ExploreByTouchHelper-method-getFocusedVirtualView'>/**Returns the virtual view id for the currently focused item,
+</span>@return {Number} A virtual view id, or {@link #INVALID_ID} if no item is
+         currently focused.
+*/
+getFocusedVirtualView : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

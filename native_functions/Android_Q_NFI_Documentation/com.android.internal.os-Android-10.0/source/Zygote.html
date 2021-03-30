@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-Zygote'>/**@class com.android.internal.os.Zygote
+</span>@extends java.lang.Object
+
+@hide */
+var Zygote = {
+
+<span id='com-android-internal-os-Zygote-property-DEBUG_ENABLE_JDWP'>/**enable debugging over JDWP */
+</span>DEBUG_ENABLE_JDWP : &quot;1&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_ENABLE_CHECKJNI'>/**enable JNI checks */
+</span>DEBUG_ENABLE_CHECKJNI : &quot;2&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_ENABLE_ASSERT'>/**enable Java programming language &quot;assert&quot; statements */
+</span>DEBUG_ENABLE_ASSERT : &quot;4&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_ENABLE_SAFEMODE'>/**disable the AOT compiler and JIT */
+</span>DEBUG_ENABLE_SAFEMODE : &quot;8&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_ENABLE_JNI_LOGGING'>/**Enable logging of third-party JNI activity. */
+</span>DEBUG_ENABLE_JNI_LOGGING : &quot;16&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_GENERATE_DEBUG_INFO'>/**Force generation of native debugging information. */
+</span>DEBUG_GENERATE_DEBUG_INFO : &quot;32&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_ALWAYS_JIT'>/**Always use JIT-ed code. */
+</span>DEBUG_ALWAYS_JIT : &quot;64&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_NATIVE_DEBUGGABLE'>/**Make the code native debuggable by turning off some optimizations. */
+</span>DEBUG_NATIVE_DEBUGGABLE : &quot;128&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_JAVA_DEBUGGABLE'>/**Make the code Java debuggable by turning off some optimizations. */
+</span>DEBUG_JAVA_DEBUGGABLE : &quot;256&quot;,
+<span id='com-android-internal-os-Zygote-property-DISABLE_VERIFIER'>/**Turn off the verifier. */
+</span>DISABLE_VERIFIER : &quot;512&quot;,
+<span id='com-android-internal-os-Zygote-property-ONLY_USE_SYSTEM_OAT_FILES'>/**Only use oat files located in /system. Otherwise use dex/jar/apk . */
+</span>ONLY_USE_SYSTEM_OAT_FILES : &quot;1024&quot;,
+<span id='com-android-internal-os-Zygote-property-DEBUG_GENERATE_MINI_DEBUG_INFO'>/**Force generation of native debugging information for backtraces. */
+</span>DEBUG_GENERATE_MINI_DEBUG_INFO : &quot;2048&quot;,
+<span id='com-android-internal-os-Zygote-property-API_ENFORCEMENT_POLICY_MASK'>/** Hidden API access restrictions. This is a mask for bits representing the API enforcement
+</span> policy, defined by {@code @ApplicationInfo.HiddenApiEnforcementPolicy}.
+*/
+API_ENFORCEMENT_POLICY_MASK : &quot;12288&quot;,
+<span id='com-android-internal-os-Zygote-property-API_ENFORCEMENT_POLICY_SHIFT'>/** Bit shift for use with {@link #API_ENFORCEMENT_POLICY_MASK}.
+</span>
+ (flags &amp; API_ENFORCEMENT_POLICY_MASK) &gt;&gt; API_ENFORCEMENT_POLICY_SHIFT gives
+ @ApplicationInfo.ApiEnforcementPolicy values.
+*/
+API_ENFORCEMENT_POLICY_SHIFT : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-PROFILE_SYSTEM_SERVER'>/** Enable system server ART profiling.
+</span>*/
+PROFILE_SYSTEM_SERVER : &quot;16384&quot;,
+<span id='com-android-internal-os-Zygote-property-PROFILE_FROM_SHELL'>/** Enable profiling from shell.
+</span>*/
+PROFILE_FROM_SHELL : &quot;32768&quot;,
+<span id='com-android-internal-os-Zygote-property-USE_APP_IMAGE_STARTUP_CACHE'>/***/
+</span>USE_APP_IMAGE_STARTUP_CACHE : &quot;65536&quot;,
+<span id='com-android-internal-os-Zygote-property-MOUNT_EXTERNAL_NONE'>/**No external storage should be mounted. */
+</span>MOUNT_EXTERNAL_NONE : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-MOUNT_EXTERNAL_DEFAULT'>/**Default external storage should be mounted. */
+</span>MOUNT_EXTERNAL_DEFAULT : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-MOUNT_EXTERNAL_READ'>/**Read-only external storage should be mounted. */
+</span>MOUNT_EXTERNAL_READ : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-MOUNT_EXTERNAL_WRITE'>/**Read-write external storage should be mounted. */
+</span>MOUNT_EXTERNAL_WRITE : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-MOUNT_EXTERNAL_LEGACY'>/** Mount mode for apps that are already installed on the device before the isolated_storage
+</span> feature is enabled.
+*/
+MOUNT_EXTERNAL_LEGACY : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-MOUNT_EXTERNAL_INSTALLER'>/** Mount mode for package installers which should give them access to
+</span> all obb dirs in addition to their package sandboxes
+*/
+MOUNT_EXTERNAL_INSTALLER : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-MOUNT_EXTERNAL_FULL'>/**Read-write external storage should be mounted instead of package sandbox */
+</span>MOUNT_EXTERNAL_FULL : &quot;null&quot;,
+<span id='com-android-internal-os-Zygote-property-USAP_MANAGEMENT_MESSAGE_BYTES'>/**Number of bytes sent to the Zygote over USAP pipes or the pool event FD */
+</span>USAP_MANAGEMENT_MESSAGE_BYTES : &quot;8&quot;,
+<span id='com-android-internal-os-Zygote-property-CHILD_ZYGOTE_SOCKET_NAME_ARG'>/** An extraArg passed when a zygote process is forking a child-zygote, specifying a name
+</span> in the abstract socket namespace. This socket name is what the new child zygote
+ should listen for connections on.
+*/
+CHILD_ZYGOTE_SOCKET_NAME_ARG : &quot;--zygote-socket=&quot;,
+<span id='com-android-internal-os-Zygote-property-CHILD_ZYGOTE_ABI_LIST_ARG'>/** An extraArg passed when a zygote process is forking a child-zygote, specifying the
+</span> requested ABI for the child Zygote.
+*/
+CHILD_ZYGOTE_ABI_LIST_ARG : &quot;--abi-list=&quot;,
+<span id='com-android-internal-os-Zygote-property-CHILD_ZYGOTE_UID_RANGE_START'>/** An extraArg passed when a zygote process is forking a child-zygote, specifying the
+</span> start of the UID range the children of the Zygote may setuid()/setgid() to. This
+ will be enforced with a seccomp filter.
+*/
+CHILD_ZYGOTE_UID_RANGE_START : &quot;--uid-range-start=&quot;,
+<span id='com-android-internal-os-Zygote-property-CHILD_ZYGOTE_UID_RANGE_END'>/** An extraArg passed when a zygote process is forking a child-zygote, specifying the
+</span> end of the UID range the children of the Zygote may setuid()/setgid() to. This
+ will be enforced with a seccomp filter.
+*/
+CHILD_ZYGOTE_UID_RANGE_END : &quot;--uid-range-end=&quot;,
+<span id='com-android-internal-os-Zygote-property-PROPERTY_CHECK_INTERVAL'>/** The duration to wait before re-checking Zygote related system properties.
+</span>
+ One minute in milliseconds.
+*/
+PROPERTY_CHECK_INTERVAL : &quot;60000&quot;,
+<span id='com-android-internal-os-Zygote-property-SOCKET_BUFFER_SIZE'>/** @hide for internal use only
+</span>*/
+SOCKET_BUFFER_SIZE : &quot;256&quot;,
+<span id='com-android-internal-os-Zygote-property-PRIMARY_SOCKET_NAME'>/** @hide for internal use only.
+</span>*/
+PRIMARY_SOCKET_NAME : &quot;zygote&quot;,
+<span id='com-android-internal-os-Zygote-property-SECONDARY_SOCKET_NAME'>/** @hide for internal use only.
+</span>*/
+SECONDARY_SOCKET_NAME : &quot;zygote_secondary&quot;,
+<span id='com-android-internal-os-Zygote-property-USAP_POOL_PRIMARY_SOCKET_NAME'>/** @hide for internal use only
+</span>*/
+USAP_POOL_PRIMARY_SOCKET_NAME : &quot;usap_pool_primary&quot;,
+<span id='com-android-internal-os-Zygote-property-USAP_POOL_SECONDARY_SOCKET_NAME'>/** @hide for internal use only
+</span>*/
+USAP_POOL_SECONDARY_SOCKET_NAME : &quot;usap_pool_secondary&quot;,
+<span id='com-android-internal-os-Zygote-method-forkAndSpecialize'>/**Forks a new VM instance.  The current VM must have been started
+</span> with the -Xzygote flag. &lt;b&gt;NOTE: new instance keeps all
+ root capabilities. The new process is expected to call capset()&lt;/b&gt;.
+@param {Number} uid the UNIX uid that the new process should setuid() to after
+ fork()ing and and before spawning any threads.
+@param {Number} gid the UNIX gid that the new process should setgid() to after
+ fork()ing and and before spawning any threads.
+@param {Object {int[]}} gids null-ok; a list of UNIX gids that the new process should
+ setgroups() to after fork and before spawning any threads.
+@param {Number} runtimeFlags bit flags that enable ART features.
+@param {Object {int[][]}} rlimits null-ok an array of rlimit tuples, with the second
+ dimension having a length of 3 and representing
+ (resource, rlim_cur, rlim_max). These are set via the posix
+ setrlimit(2) call.
+@param {Number} seInfo null-ok a string specifying SELinux information for
+ the new process.
+@param {String} niceName null-ok a string specifying the process name.
+@param {String} fdsToClose an array of ints, holding one or more POSIX
+ file descriptor numbers that are to be closed by the child
+ (and replaced by /dev/null) after forking.  An integer value
+ of -1 in any entry in the array means &quot;ignore this one&quot;.
+@param {Object {int[]}} fdsToIgnore null-ok an array of ints, either null or holding
+ one or more POSIX file descriptor numbers that are to be ignored
+ in the file descriptor table check.
+@param {Object {int[]}} startChildZygote if true, the new child process will itself be a
+ new zygote process.
+@param {Boolean} instructionSet null-ok the instruction set to use.
+@param {String} appDataDir null-ok the data directory of the app.
+@return {Number} 0 if this is the child, pid of the child
+ if this is the parent, or -1 on error.
+*/
+forkAndSpecialize : function(  ) {},
+
+<span id='com-android-internal-os-Zygote-method-specializeAppProcess'>/**Specialize an unspecialized app process.  The current VM must have been started
+</span> with the -Xzygote flag.
+@param {Number} uid  The UNIX uid that the new process should setuid() to before spawning any threads
+@param {Number} gid  The UNIX gid that the new process should setgid() to before spawning any threads
+@param {Object {int[]}} gids null-ok;  A list of UNIX gids that the new process should
+ setgroups() to before spawning any threads
+@param {Number} runtimeFlags  Bit flags that enable ART features
+@param {Object {int[][]}} rlimits null-ok  An array of rlimit tuples, with the second
+ dimension having a length of 3 and representing
+ (resource, rlim_cur, rlim_max). These are set via the posix
+ setrlimit(2) call.
+@param {Number} seInfo null-ok  A string specifying SELinux information for
+ the new process.
+@param {String} niceName null-ok  A string specifying the process name.
+@param {String} startChildZygote  If true, the new child process will itself be a
+ new zygote process.
+@param {Boolean} instructionSet null-ok  The instruction set to use.
+@param {String} appDataDir null-ok  The data directory of the app.
+*/
+specializeAppProcess : function(  ) {},
+
+<span id='com-android-internal-os-Zygote-method-forkSystemServer'>/**Special method to start the system server process. In addition to the
+</span> common actions performed in forkAndSpecialize, the pid of the child
+ process is recorded such that the death of the child process will cause
+ zygote to exit.
+@param {Number} uid the UNIX uid that the new process should setuid() to after
+ fork()ing and and before spawning any threads.
+@param {Number} gid the UNIX gid that the new process should setgid() to after
+ fork()ing and and before spawning any threads.
+@param {Object {int[]}} gids null-ok; a list of UNIX gids that the new process should
+ setgroups() to after fork and before spawning any threads.
+@param {Number} runtimeFlags bit flags that enable ART features.
+@param {Object {int[][]}} rlimits null-ok an array of rlimit tuples, with the second
+ dimension having a length of 3 and representing
+ (resource, rlim_cur, rlim_max). These are set via the posix
+ setrlimit(2) call.
+@param {Number} permittedCapabilities argument for setcap()
+@param {Number} effectiveCapabilities argument for setcap()
+@return {Number} 0 if this is the child, pid of the child
+ if this is the parent, or -1 on error.
+*/
+forkSystemServer : function(  ) {},
+
+<span id='com-android-internal-os-Zygote-method-getConfigurationProperty'>/**Returns the raw string value of a system property.
+</span>
+ Note that Device Config is not available without an application so SystemProperties is used
+ instead.
+
+ TODO (chriswailes): Cache the system property location in native code and then write a JNI
+                     function to fetch it.
+*/
+getConfigurationProperty : function(  ) {},
+
+<span id='com-android-internal-os-Zygote-method-getConfigurationPropertyBoolean'>/**Returns the value of a system property converted to a boolean using specific logic.
+</span>
+ Note that Device Config is not available without an application so SystemProperties is used
+ instead.
+@see SystemProperties.getBoolean
+
+ TODO (chriswailes): Cache the system property location in native code and then write a JNI
+                     function to fetch it.
+ TODO (chriswailes): Move into ZygoteConfig.java once the necessary CL lands (go/ag/6580627)
+*/
+getConfigurationPropertyBoolean : function(  ) {},
+
+<span id='com-android-internal-os-Zygote-method-execShell'>/**Executes &quot;/system/bin/sh -c &amp;lt;command&amp;gt;&quot; using the exec() system call.
+</span> This method throws a runtime exception if exec() failed, otherwise, this
+ method never returns.
+@param {String} command The shell command to execute.
+*/
+execShell : function(  ) {},
+
+<span id='com-android-internal-os-Zygote-method-appendQuotedShellArgs'>/**Appends quotes shell arguments to the specified string builder.
+</span> The arguments are quoted using single-quotes, escaped if necessary,
+ prefixed with a space, and appended to the command.
+@param {Object {StringBuilder}} command A string builder for the shell command being constructed.
+@param {Object {java.lang.String[]}} args An array of argument strings to be quoted and appended to the command.
+@see #execShell(String)
+*/
+appendQuotedShellArgs : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

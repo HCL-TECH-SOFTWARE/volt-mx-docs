@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Parcelable'>/**@class android.os.Parcelable
+</span> Interface for classes whose instances can be written to
+ and restored from a {@link android.os.Parcel}.  Classes implementing the Parcelable
+ interface must also have a non-null static field called &lt;code&gt;CREATOR&lt;/code&gt;
+ of a type that implements the {@link android.os.Parcelable.Creator} interface.
+ 
+ &lt;p&gt;A typical implementation of Parcelable is:&lt;/p&gt;
+ 
+ &lt;pre&gt;
+ public class MyParcelable implements Parcelable {
+     private int mData;
+
+     public int describeContents() {
+         return 0;
+     }
+
+     public void writeToParcel(Parcel out, int flags) {
+         out.writeInt(mData);
+     }
+
+     public static final Parcelable.Creator&amp;lt;MyParcelable&amp;gt; CREATOR
+             = new Parcelable.Creator&amp;lt;MyParcelable&amp;gt;() {
+         public MyParcelable createFromParcel(Parcel in) {
+             return new MyParcelable(in);
+         }
+
+         public MyParcelable[] newArray(int size) {
+             return new MyParcelable[size];
+         }
+     };
+     
+     private MyParcelable(Parcel in) {
+         mData = in.readInt();
+     }
+ }&lt;/pre&gt;
+*/
+var Parcelable = {
+
+<span id='android-os-Parcelable-property-PARCELABLE_WRITE_RETURN_VALUE'>/** Flag for use with {@link #writeToParcel}: the object being written
+</span> is a return value, that is the result of a function such as
+ &quot;&lt;code&gt;Parcelable someFunction()&lt;/code&gt;&quot;,
+ &quot;&lt;code&gt;void someFunction(out Parcelable)&lt;/code&gt;&quot;, or
+ &quot;&lt;code&gt;void someFunction(inout Parcelable)&lt;/code&gt;&quot;.  Some implementations
+ may want to release resources at this point.
+*/
+PARCELABLE_WRITE_RETURN_VALUE : &quot;1&quot;,
+<span id='android-os-Parcelable-property-PARCELABLE_ELIDE_DUPLICATES'>/** Flag for use with {@link #writeToParcel}: a parent object will take
+</span> care of managing duplicate state/data that is nominally replicated
+ across its inner data members.  This flag instructs the inner data
+ types to omit that data during marshaling.  Exact behavior may vary
+ on a case by case basis.
+ @hide
+*/
+PARCELABLE_ELIDE_DUPLICATES : &quot;2&quot;,
+<span id='android-os-Parcelable-property-CONTENTS_FILE_DESCRIPTOR'>/** Descriptor bit used with {@link #describeContents}(): indicates that
+</span> the Parcelable object's flattened representation includes a file descriptor.
+
+ @see #describeContents()
+*/
+CONTENTS_FILE_DESCRIPTOR : &quot;1&quot;,
+<span id='android-os-Parcelable-method-describeContents'>/**Describe the kinds of special objects contained in this Parcelable
+</span> instance's marshaled representation. For example, if the object will
+ include a file descriptor in the output of {@link #writeToParcel(Parcel, int)},
+ the return value of this method must include the
+ {@link #CONTENTS_FILE_DESCRIPTOR} bit.
+@return {Number} a bitmask indicating the set of special object types marshaled
+ by this Parcelable object instance.
+*/
+describeContents : function(  ) {},
+
+<span id='android-os-Parcelable-method-writeToParcel'>/**Flatten this object in to a Parcel.
+</span>@param {Object {Parcel}} dest The Parcel in which the object should be written.
+@param {Number} flags Additional flags about how the object should be written.
+ May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

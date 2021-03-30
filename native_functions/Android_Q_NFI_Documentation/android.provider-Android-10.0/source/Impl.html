@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Downloads-Impl'>/**@class android.provider.Downloads.Impl
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+ Implementation details
+
+ Exposes constants used to interact with the download manager's
+ content provider.
+ The constants URI ... STATUS are the names of columns in the downloads table.
+
+ @hide
+*/
+var Impl = {
+
+<span id='android-provider-Downloads-Impl-property-AUTHORITY'>/***/
+</span>AUTHORITY : &quot;downloads&quot;,
+<span id='android-provider-Downloads-Impl-property-PERMISSION_ACCESS'>/** The permission to access the download manager
+</span>*/
+PERMISSION_ACCESS : &quot;android.permission.ACCESS_DOWNLOAD_MANAGER&quot;,
+<span id='android-provider-Downloads-Impl-property-PERMISSION_ACCESS_ADVANCED'>/** The permission to access the download manager's advanced functions
+</span>*/
+PERMISSION_ACCESS_ADVANCED : &quot;android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED&quot;,
+<span id='android-provider-Downloads-Impl-property-PERMISSION_ACCESS_ALL'>/** The permission to access the all the downloads in the manager.
+</span>*/
+PERMISSION_ACCESS_ALL : &quot;android.permission.ACCESS_ALL_DOWNLOADS&quot;,
+<span id='android-provider-Downloads-Impl-property-PERMISSION_CACHE'>/** The permission to directly access the download manager's cache
+</span> directory
+*/
+PERMISSION_CACHE : &quot;android.permission.ACCESS_CACHE_FILESYSTEM&quot;,
+<span id='android-provider-Downloads-Impl-property-PERMISSION_SEND_INTENTS'>/** The permission to send broadcasts on download completion
+</span>*/
+PERMISSION_SEND_INTENTS : &quot;android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS&quot;,
+<span id='android-provider-Downloads-Impl-property-PERMISSION_CACHE_NON_PURGEABLE'>/** The permission to download files to the cache partition that won't be automatically
+</span> purged when space is needed.
+*/
+PERMISSION_CACHE_NON_PURGEABLE : &quot;android.permission.DOWNLOAD_CACHE_NON_PURGEABLE&quot;,
+<span id='android-provider-Downloads-Impl-property-PERMISSION_NO_NOTIFICATION'>/** The permission to download files without any system notification being shown.
+</span>*/
+PERMISSION_NO_NOTIFICATION : &quot;android.permission.DOWNLOAD_WITHOUT_NOTIFICATION&quot;,
+<span id='android-provider-Downloads-Impl-property-CONTENT_URI'>/** The content:// URI to access downloads owned by the caller's UID.
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Downloads-Impl-property-ALL_DOWNLOADS_CONTENT_URI'>/** The content URI for accessing all downloads across all UIDs (requires the
+</span> ACCESS_ALL_DOWNLOADS permission).
+*/
+ALL_DOWNLOADS_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Downloads-Impl-property-PUBLICLY_ACCESSIBLE_DOWNLOADS_URI_SEGMENT'>/**URI segment to access a publicly accessible downloaded file */
+</span>PUBLICLY_ACCESSIBLE_DOWNLOADS_URI_SEGMENT : &quot;public_downloads&quot;,
+<span id='android-provider-Downloads-Impl-property-PUBLICLY_ACCESSIBLE_DOWNLOADS_URI'>/** The content URI for accessing publicly accessible downloads (i.e., it requires no
+</span> permissions to access this downloaded file)
+*/
+PUBLICLY_ACCESSIBLE_DOWNLOADS_URI : &quot;null&quot;,
+<span id='android-provider-Downloads-Impl-property-ACTION_DOWNLOAD_COMPLETED'>/** Broadcast Action: this is sent by the download manager to the app
+</span> that had initiated a download when that download completes. The
+ download's content: uri is specified in the intent's data.
+*/
+ACTION_DOWNLOAD_COMPLETED : &quot;android.intent.action.DOWNLOAD_COMPLETED&quot;,
+<span id='android-provider-Downloads-Impl-property-ACTION_NOTIFICATION_CLICKED'>/** Broadcast Action: this is sent by the download manager to the app
+</span> that had initiated a download when the user selects the notification
+ associated with that download. The download's content: uri is specified
+ in the intent's data if the click is associated with a single download,
+ or Downloads.CONTENT_URI if the notification is associated with
+ multiple downloads.
+ Note: this is not currently sent for downloads that have completed
+ successfully.
+*/
+ACTION_NOTIFICATION_CLICKED : &quot;android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_URI'>/** The name of the column containing the URI of the data being downloaded.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_URI : &quot;uri&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_APP_DATA'>/** The name of the column containing application-specific data.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read/Write&lt;/P&gt;
+*/
+COLUMN_APP_DATA : &quot;entity&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_NO_INTEGRITY'>/** The name of the column containing the flags that indicates whether
+</span> the initiating application is capable of verifying the integrity of
+ the downloaded file. When this flag is set, the download manager
+ performs downloads and reports success even in some situations where
+ it can't guarantee that the download has completed (e.g. when doing
+ a byte-range request without an ETag, or when it can't determine
+ whether a download fully completed).
+ &lt;P&gt;Type: BOOLEAN&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_NO_INTEGRITY : &quot;no_integrity&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_FILE_NAME_HINT'>/** The name of the column containing the filename that the initiating
+</span> application recommends. When possible, the download manager will attempt
+ to use this filename, or a variation, as the actual name for the file.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_FILE_NAME_HINT : &quot;hint&quot;,
+<span id='android-provider-Downloads-Impl-property-_DATA'>/** The name of the column containing the filename where the downloaded data
+</span> was actually stored.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+_DATA : &quot;_data&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_MIME_TYPE'>/** The name of the column containing the MIME type of the downloaded data.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_MIME_TYPE : &quot;mimetype&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_DESTINATION'>/** The name of the column containing the flag that controls the destination
+</span> of the download. See the DESTINATION_* constants for a list of legal values.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_DESTINATION : &quot;destination&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_VISIBILITY'>/** The name of the column containing the flags that controls whether the
+</span> download is displayed by the UI. See the VISIBILITY_* constants for
+ a list of legal values.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read/Write&lt;/P&gt;
+*/
+COLUMN_VISIBILITY : &quot;visibility&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_CONTROL'>/** The name of the column containing the current control state  of the download.
+</span> Applications can write to this to control (pause/resume) the download.
+ the CONTROL_* constants for a list of legal values.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+COLUMN_CONTROL : &quot;control&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_STATUS'>/** The name of the column containing the current status of the download.
+</span> Applications can read this to follow the progress of each download. See
+ the STATUS_* constants for a list of legal values.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+COLUMN_STATUS : &quot;status&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_LAST_MODIFICATION'>/** The name of the column containing the date at which some interesting
+</span> status changed in the download. Stored as a System.currentTimeMillis()
+ value.
+ &lt;P&gt;Type: BIGINT&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+COLUMN_LAST_MODIFICATION : &quot;lastmod&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_NOTIFICATION_PACKAGE'>/** The name of the column containing the package name of the application
+</span> that initiating the download. The download manager will send
+ notifications to a component in this package when the download completes.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_NOTIFICATION_PACKAGE : &quot;notificationpackage&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_NOTIFICATION_CLASS'>/** The name of the column containing the component name of the class that
+</span> will receive notifications associated with the download. The
+ package/class combination is passed to
+ Intent.setClassName(String,String).
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_NOTIFICATION_CLASS : &quot;notificationclass&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_NOTIFICATION_EXTRAS'>/** If extras are specified when requesting a download they will be provided in the intent that
+</span> is sent to the specified class and package when a download has finished.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_NOTIFICATION_EXTRAS : &quot;notificationextras&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_COOKIE_DATA'>/** The name of the column contain the values of the cookie to be used for
+</span> the download. This is used directly as the value for the Cookie: HTTP
+ header that gets sent with the request.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_COOKIE_DATA : &quot;cookiedata&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_USER_AGENT'>/** The name of the column containing the user agent that the initiating
+</span> application wants the download manager to use for this download.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_USER_AGENT : &quot;useragent&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_REFERER'>/** The name of the column containing the referer (sic) that the initiating
+</span> application wants the download manager to use for this download.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_REFERER : &quot;referer&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_TOTAL_BYTES'>/** The name of the column containing the total size of the file being
+</span> downloaded.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+COLUMN_TOTAL_BYTES : &quot;total_bytes&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_CURRENT_BYTES'>/** The name of the column containing the size of the part of the file that
+</span> has been downloaded so far.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+COLUMN_CURRENT_BYTES : &quot;current_bytes&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_OTHER_UID'>/** The name of the column where the initiating application can provide the
+</span> UID of another application that is allowed to access this download. If
+ multiple applications share the same UID, all those applications will be
+ allowed to access this download. This column can be updated after the
+ download is initiated. This requires the permission
+ android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Init&lt;/P&gt;
+*/
+COLUMN_OTHER_UID : &quot;otheruid&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_TITLE'>/** The name of the column where the initiating application can provided the
+</span> title of this download. The title will be displayed ito the user in the
+ list of downloads.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read/Write&lt;/P&gt;
+*/
+COLUMN_TITLE : &quot;title&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_DESCRIPTION'>/** The name of the column where the initiating application can provide the
+</span> description of this download. The description will be displayed to the
+ user in the list of downloads.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read/Write&lt;/P&gt;
+*/
+COLUMN_DESCRIPTION : &quot;description&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_IS_PUBLIC_API'>/** The name of the column indicating whether the download was requesting through the public
+</span> API.  This controls some differences in behavior.
+ &lt;P&gt;Type: BOOLEAN&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_IS_PUBLIC_API : &quot;is_public_api&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_ALLOWED_NETWORK_TYPES'>/** The name of the column holding a bitmask of allowed network types.  This is only used for
+</span> public API downloads.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_ALLOWED_NETWORK_TYPES : &quot;allowed_network_types&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_ALLOW_ROAMING'>/** The name of the column indicating whether roaming connections can be used.  This is only
+</span> used for public API downloads.
+ &lt;P&gt;Type: BOOLEAN&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_ALLOW_ROAMING : &quot;allow_roaming&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_ALLOW_METERED'>/** The name of the column indicating whether metered connections can be used.  This is only
+</span> used for public API downloads.
+ &lt;P&gt;Type: BOOLEAN&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_ALLOW_METERED : &quot;allow_metered&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI'>/** Whether or not this download should be displayed in the system's Downloads UI.  Defaults
+</span> to true.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;P&gt;Owner can Init/Read&lt;/P&gt;
+*/
+COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI : &quot;is_visible_in_downloads_ui&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_BYPASS_RECOMMENDED_SIZE_LIMIT'>/** If true, the user has confirmed that this download can proceed over the mobile network
+</span> even though it exceeds the recommended maximum size.
+ &lt;P&gt;Type: BOOLEAN&lt;/P&gt;
+*/
+COLUMN_BYPASS_RECOMMENDED_SIZE_LIMIT : &quot;bypass_recommended_size_limit&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_DELETED'>/** Set to true if this download is deleted. It is completely removed from the database
+</span> when MediaProvider database also deletes the metadata asociated with this downloaded file.
+ &lt;P&gt;Type: BOOLEAN&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+COLUMN_DELETED : &quot;deleted&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_MEDIAPROVIDER_URI'>/** The URI to the corresponding entry in MediaProvider for this downloaded entry. It is
+</span> used to delete the entries from MediaProvider database when it is deleted from the
+ downloaded list.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+ &lt;P&gt;Owner can Read&lt;/P&gt;
+*/
+COLUMN_MEDIAPROVIDER_URI : &quot;mediaprovider_uri&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_MEDIASTORE_URI'>/** Similar to {@link #COLUMN_MEDIAPROVIDER_URI}, except this cannot be updated/queried
+</span> by apps and will be the source of truth when updating/deleting download entries in
+ MediaProvider database.
+
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+COLUMN_MEDIASTORE_URI : &quot;mediastore_uri&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_MEDIA_SCANNED'>/** The column that is used to remember whether the media scanner was invoked.
+</span> It can take the values: {@link #MEDIA_NOT_SCANNED}, {@link #MEDIA_SCANNED} or
+ {@link #MEDIA_NOT_SCANNABLE} or {@code null}. If it's value is {@code null}, it will be
+ treated as {@link #MEDIA_NOT_SCANNED}.
+
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+COLUMN_MEDIA_SCANNED : &quot;scanned&quot;,
+<span id='android-provider-Downloads-Impl-property-MEDIA_NOT_SCANNED'>/**Possible values for column {@link #COLUMN_MEDIA_SCANNED} */
+</span>MEDIA_NOT_SCANNED : &quot;0&quot;,
+<span id='android-provider-Downloads-Impl-property-MEDIA_SCANNED'>/***/
+</span>MEDIA_SCANNED : &quot;1&quot;,
+<span id='android-provider-Downloads-Impl-property-MEDIA_NOT_SCANNABLE'>/***/
+</span>MEDIA_NOT_SCANNABLE : &quot;2&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_ERROR_MSG'>/** The column with errorMsg for a failed downloaded.
+</span> Used only for debugging purposes.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+COLUMN_ERROR_MSG : &quot;errorMsg&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_LAST_UPDATESRC'>/**  This column stores the source of the last update to this row.
+</span>  This column is only for internal use.
+  Valid values are indicated by LAST_UPDATESRC_* constants.
+ &lt;P&gt;Type: INT&lt;/P&gt;
+*/
+COLUMN_LAST_UPDATESRC : &quot;lastUpdateSrc&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_FAILED_CONNECTIONS'>/**The column that is used to count retries */
+</span>COLUMN_FAILED_CONNECTIONS : &quot;numfailed&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_ALLOW_WRITE'>/***/
+</span>COLUMN_ALLOW_WRITE : &quot;allow_write&quot;,
+<span id='android-provider-Downloads-Impl-property-FLAG_REQUIRES_CHARGING'>/***/
+</span>FLAG_REQUIRES_CHARGING : &quot;1&quot;,
+<span id='android-provider-Downloads-Impl-property-FLAG_REQUIRES_DEVICE_IDLE'>/***/
+</span>FLAG_REQUIRES_DEVICE_IDLE : &quot;2&quot;,
+<span id='android-provider-Downloads-Impl-property-COLUMN_FLAGS'>/***/
+</span>COLUMN_FLAGS : &quot;flags&quot;,
+<span id='android-provider-Downloads-Impl-property-LAST_UPDATESRC_NOT_RELEVANT'>/** default value for {@link #COLUMN_LAST_UPDATESRC}.
+</span> This value is used when this column's value is not relevant.
+*/
+LAST_UPDATESRC_NOT_RELEVANT : &quot;0&quot;,
+<span id='android-provider-Downloads-Impl-property-LAST_UPDATESRC_DONT_NOTIFY_DOWNLOADSVC'>/** One of the values taken by {@link #COLUMN_LAST_UPDATESRC}.
+</span> This value is used when the update is NOT to be relayed to the DownloadService
+ (and thus spare DownloadService from scanning the database when this change occurs)
+*/
+LAST_UPDATESRC_DONT_NOTIFY_DOWNLOADSVC : &quot;1&quot;,
+<span id='android-provider-Downloads-Impl-property-DESTINATION_EXTERNAL'>/** This download will be saved to the external storage. This is the
+</span> default behavior, and should be used for any file that the user
+ can freely access, copy, delete. Even with that destination,
+ unencrypted DRM files are saved in secure internal storage.
+ Downloads to the external destination only write files for which
+ there is a registered handler. The resulting files are accessible
+ by filename to all applications.
+*/
+DESTINATION_EXTERNAL : &quot;0&quot;,
+<span id='android-provider-Downloads-Impl-property-DESTINATION_CACHE_PARTITION'>/** This download will be saved to the download manager's private
+</span> partition. This is the behavior used by applications that want to
+ download private files that are used and deleted soon after they
+ get downloaded. All file types are allowed, and only the initiating
+ application can access the file (indirectly through a content
+ provider). This requires the
+ android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED permission.
+*/
+DESTINATION_CACHE_PARTITION : &quot;1&quot;,
+<span id='android-provider-Downloads-Impl-property-DESTINATION_CACHE_PARTITION_PURGEABLE'>/** This download will be saved to the download manager's private
+</span> partition and will be purged as necessary to make space. This is
+ for private files (similar to CACHE_PARTITION) that aren't deleted
+ immediately after they are used, and are kept around by the download
+ manager as long as space is available.
+*/
+DESTINATION_CACHE_PARTITION_PURGEABLE : &quot;2&quot;,
+<span id='android-provider-Downloads-Impl-property-DESTINATION_CACHE_PARTITION_NOROAMING'>/** This download will be saved to the download manager's private
+</span> partition, as with DESTINATION_CACHE_PARTITION, but the download
+ will not proceed if the user is on a roaming data connection.
+*/
+DESTINATION_CACHE_PARTITION_NOROAMING : &quot;3&quot;,
+<span id='android-provider-Downloads-Impl-property-DESTINATION_FILE_URI'>/** This download will be saved to the location given by the file URI in
+</span> {@link #COLUMN_FILE_NAME_HINT}.
+*/
+DESTINATION_FILE_URI : &quot;4&quot;,
+<span id='android-provider-Downloads-Impl-property-DESTINATION_SYSTEMCACHE_PARTITION'>/** This download will be saved to the system cache (&quot;/cache&quot;)
+</span> partition. This option is only used by system apps and so it requires
+ android.permission.ACCESS_CACHE_FILESYSTEM permission.
+*/
+DESTINATION_SYSTEMCACHE_PARTITION : &quot;5&quot;,
+<span id='android-provider-Downloads-Impl-property-DESTINATION_NON_DOWNLOADMANAGER_DOWNLOAD'>/** This download was completed by the caller (i.e., NOT downloadmanager)
+</span> and caller wants to have this download displayed in Downloads App.
+*/
+DESTINATION_NON_DOWNLOADMANAGER_DOWNLOAD : &quot;6&quot;,
+<span id='android-provider-Downloads-Impl-property-CONTROL_RUN'>/** This download is allowed to run.
+</span>*/
+CONTROL_RUN : &quot;0&quot;,
+<span id='android-provider-Downloads-Impl-property-CONTROL_PAUSED'>/** This download must pause at the first opportunity.
+</span>*/
+CONTROL_PAUSED : &quot;1&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_PENDING'>/** This download hasn't stated yet
+</span>*/
+STATUS_PENDING : &quot;190&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_RUNNING'>/** This download has started
+</span>*/
+STATUS_RUNNING : &quot;192&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_PAUSED_BY_APP'>/** This download has been paused by the owning app.
+</span>*/
+STATUS_PAUSED_BY_APP : &quot;193&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_WAITING_TO_RETRY'>/** This download encountered some network error and is waiting before retrying the request.
+</span>*/
+STATUS_WAITING_TO_RETRY : &quot;194&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_WAITING_FOR_NETWORK'>/** This download is waiting for network connectivity to proceed.
+</span>*/
+STATUS_WAITING_FOR_NETWORK : &quot;195&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_QUEUED_FOR_WIFI'>/** This download exceeded a size limit for mobile networks and is waiting for a Wi-Fi
+</span> connection to proceed.
+*/
+STATUS_QUEUED_FOR_WIFI : &quot;196&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_INSUFFICIENT_SPACE_ERROR'>/** This download couldn't be completed due to insufficient storage
+</span> space.  Typically, this is because the SD card is full.
+*/
+STATUS_INSUFFICIENT_SPACE_ERROR : &quot;198&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_DEVICE_NOT_FOUND_ERROR'>/** This download couldn't be completed because no external storage
+</span> device was found.  Typically, this is because the SD card is not
+ mounted.
+*/
+STATUS_DEVICE_NOT_FOUND_ERROR : &quot;199&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_SUCCESS'>/** This download has successfully completed.
+</span> Warning: there might be other status values that indicate success
+ in the future.
+ Use isStatusSuccess() to capture the entire category.
+*/
+STATUS_SUCCESS : &quot;200&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_BAD_REQUEST'>/** This request couldn't be parsed. This is also used when processing
+</span> requests with unknown/unsupported URI schemes.
+*/
+STATUS_BAD_REQUEST : &quot;400&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_NOT_ACCEPTABLE'>/** This download can't be performed because the content type cannot be
+</span> handled.
+*/
+STATUS_NOT_ACCEPTABLE : &quot;406&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_LENGTH_REQUIRED'>/** This download cannot be performed because the length cannot be
+</span> determined accurately. This is the code for the HTTP error &quot;Length
+ Required&quot;, which is typically used when making requests that require
+ a content length but don't have one, and it is also used in the
+ client when a response is received whose length cannot be determined
+ accurately (therefore making it impossible to know when a download
+ completes).
+*/
+STATUS_LENGTH_REQUIRED : &quot;411&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_PRECONDITION_FAILED'>/** This download was interrupted and cannot be resumed.
+</span> This is the code for the HTTP error &quot;Precondition Failed&quot;, and it is
+ also used in situations where the client doesn't have an ETag at all.
+*/
+STATUS_PRECONDITION_FAILED : &quot;412&quot;,
+<span id='android-provider-Downloads-Impl-property-MIN_ARTIFICIAL_ERROR_STATUS'>/** The lowest-valued error status that is not an actual HTTP status code.
+</span>*/
+MIN_ARTIFICIAL_ERROR_STATUS : &quot;488&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_FILE_ALREADY_EXISTS_ERROR'>/** The requested destination file already exists.
+</span>*/
+STATUS_FILE_ALREADY_EXISTS_ERROR : &quot;488&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_CANNOT_RESUME'>/** Some possibly transient error occurred, but we can't resume the download.
+</span>*/
+STATUS_CANNOT_RESUME : &quot;489&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_CANCELED'>/** This download was canceled
+</span>*/
+STATUS_CANCELED : &quot;490&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_UNKNOWN_ERROR'>/** This download has completed with an error.
+</span> Warning: there will be other status values that indicate errors in
+ the future. Use isStatusError() to capture the entire category.
+*/
+STATUS_UNKNOWN_ERROR : &quot;491&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_FILE_ERROR'>/** This download couldn't be completed because of a storage issue.
+</span> Typically, that's because the filesystem is missing or full.
+ Use the more specific {@link #STATUS_INSUFFICIENT_SPACE_ERROR}
+ and {@link #STATUS_DEVICE_NOT_FOUND_ERROR} when appropriate.
+*/
+STATUS_FILE_ERROR : &quot;492&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_UNHANDLED_REDIRECT'>/** This download couldn't be completed because of an HTTP
+</span> redirect response that the download manager couldn't
+ handle.
+*/
+STATUS_UNHANDLED_REDIRECT : &quot;493&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_UNHANDLED_HTTP_CODE'>/** This download couldn't be completed because of an
+</span> unspecified unhandled HTTP code.
+*/
+STATUS_UNHANDLED_HTTP_CODE : &quot;494&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_HTTP_DATA_ERROR'>/** This download couldn't be completed because of an
+</span> error receiving or processing data at the HTTP level.
+*/
+STATUS_HTTP_DATA_ERROR : &quot;495&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_HTTP_EXCEPTION'>/** This download couldn't be completed because of an
+</span> HttpException while setting up the request.
+*/
+STATUS_HTTP_EXCEPTION : &quot;496&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_TOO_MANY_REDIRECTS'>/** This download couldn't be completed because there were
+</span> too many redirects.
+*/
+STATUS_TOO_MANY_REDIRECTS : &quot;497&quot;,
+<span id='android-provider-Downloads-Impl-property-STATUS_BLOCKED'>/** This download has failed because requesting application has been
+</span> blocked by {@link NetworkPolicyManager}.
+
+ @hide
+ @deprecated since behavior now uses
+             {@link #STATUS_WAITING_FOR_NETWORK}
+*/
+STATUS_BLOCKED : &quot;498&quot;,
+<span id='android-provider-Downloads-Impl-property-VISIBILITY_VISIBLE'>/** This download is visible but only shows in the notifications
+</span> while it's in progress.
+*/
+VISIBILITY_VISIBLE : &quot;0&quot;,
+<span id='android-provider-Downloads-Impl-property-VISIBILITY_VISIBLE_NOTIFY_COMPLETED'>/** This download is visible and shows in the notifications while
+</span> in progress and after completion.
+*/
+VISIBILITY_VISIBLE_NOTIFY_COMPLETED : &quot;1&quot;,
+<span id='android-provider-Downloads-Impl-property-VISIBILITY_HIDDEN'>/** This download doesn't show in the UI or in the notifications.
+</span>*/
+VISIBILITY_HIDDEN : &quot;2&quot;,
+<span id='android-provider-Downloads-Impl-method-isStatusInformational'>/**Returns whether the status is informational (i.e. 1xx).
+</span>*/
+isStatusInformational : function(  ) {},
+
+<span id='android-provider-Downloads-Impl-method-isStatusSuccess'>/**Returns whether the status is a success (i.e. 2xx).
+</span>*/
+isStatusSuccess : function(  ) {},
+
+<span id='android-provider-Downloads-Impl-method-isStatusError'>/**Returns whether the status is an error (i.e. 4xx or 5xx).
+</span>*/
+isStatusError : function(  ) {},
+
+<span id='android-provider-Downloads-Impl-method-isStatusClientError'>/**Returns whether the status is a client error (i.e. 4xx).
+</span>*/
+isStatusClientError : function(  ) {},
+
+<span id='android-provider-Downloads-Impl-method-isStatusServerError'>/**Returns whether the status is a server error (i.e. 5xx).
+</span>*/
+isStatusServerError : function(  ) {},
+
+<span id='android-provider-Downloads-Impl-method-isNotificationToBeDisplayed'>/**this method determines if a notification should be displayed for a
+</span> given {@link #COLUMN_VISIBILITY} value
+@param {Number} visibility the value of {@link #COLUMN_VISIBILITY}.
+@return {Boolean} true if the notification should be displayed. false otherwise.
+*/
+isNotificationToBeDisplayed : function(  ) {},
+
+<span id='android-provider-Downloads-Impl-method-isStatusCompleted'>/**Returns whether the download has completed (either with success or
+</span> error).
+*/
+isStatusCompleted : function(  ) {},
+
+<span id='android-provider-Downloads-Impl-method-statusToString'>/**{@hide}
+</span>*/
+statusToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

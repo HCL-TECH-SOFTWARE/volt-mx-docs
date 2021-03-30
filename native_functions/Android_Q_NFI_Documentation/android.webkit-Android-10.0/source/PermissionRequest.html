@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-webkit-PermissionRequest'>/**@class android.webkit.PermissionRequest
+</span>@extends java.lang.Object
+
+ This class defines a permission request and is used when web content
+ requests access to protected resources. The permission request related events
+ are delivered via {@link android.webkit.WebChromeClient#onPermissionRequest} and
+ {@link android.webkit.WebChromeClient#onPermissionRequestCanceled}.
+
+ Either {@link #grant(String[]) grant()} or {@link #deny}() must be called in UI
+ thread to respond to the request.
+
+ New protected resources whose names are not defined here may be requested in
+ future versions of WebView, even when running on an older Android release. To
+ avoid unintentionally granting requests for new permissions, you should pass the
+ specific permissions you intend to grant to {@link #grant(String[]) grant()},
+ and avoid writing code like this example:
+ &lt;pre&gt;
+ permissionRequest.grant(permissionRequest.getResources())  // This is wrong!!!
+ &lt;/pre&gt;
+ See the WebView's release notes for information about new protected resources.
+*/
+var PermissionRequest = {
+
+<span id='android-webkit-PermissionRequest-property-RESOURCE_VIDEO_CAPTURE'>/** Resource belongs to video capture device, like camera.
+</span>*/
+RESOURCE_VIDEO_CAPTURE : &quot;android.webkit.resource.VIDEO_CAPTURE&quot;,
+<span id='android-webkit-PermissionRequest-property-RESOURCE_AUDIO_CAPTURE'>/** Resource belongs to audio capture device, like microphone.
+</span>*/
+RESOURCE_AUDIO_CAPTURE : &quot;android.webkit.resource.AUDIO_CAPTURE&quot;,
+<span id='android-webkit-PermissionRequest-property-RESOURCE_PROTECTED_MEDIA_ID'>/** Resource belongs to protected media identifier.
+</span> After the user grants this resource, the origin can use EME APIs to generate the license
+ requests.
+*/
+RESOURCE_PROTECTED_MEDIA_ID : &quot;android.webkit.resource.PROTECTED_MEDIA_ID&quot;,
+<span id='android-webkit-PermissionRequest-property-RESOURCE_MIDI_SYSEX'>/** Resource will allow sysex messages to be sent to or received from MIDI devices. These
+</span> messages are privileged operations, e.g. modifying sound libraries and sampling data, or
+ even updating the MIDI device's firmware.
+
+ Permission may be requested for this resource in API levels 21 and above, if the Android
+ device has been updated to WebView 45 or above.
+*/
+RESOURCE_MIDI_SYSEX : &quot;android.webkit.resource.MIDI_SYSEX&quot;,
+<span id='android-webkit-PermissionRequest-method-getOrigin'>/**Call this method to get the origin of the web page which is trying to access
+</span> the restricted resources.
+@return {Object {android.net.Uri}} the origin of web content which attempt to access the restricted
+         resources.
+*/
+getOrigin : function(  ) {},
+
+<span id='android-webkit-PermissionRequest-method-getResources'>/**Call this method to get the resources the web page is trying to access.
+</span>@return {String} the array of resources the web content wants to access.
+*/
+getResources : function(  ) {},
+
+<span id='android-webkit-PermissionRequest-method-grant'>/**Call this method to grant origin the permission to access the given resources.
+</span> The granted permission is only valid for this WebView.
+@param {Object {java.lang.String[]}} resources the resources granted to be accessed by origin, to grant
+        request, the requested resources returned by {@link #getResources()}
+        must be equals or a subset of granted resources.
+        This parameter is designed to avoid granting permission by accident
+        especially when new resources are requested by web content.
+*/
+grant : function(  ) {},
+
+<span id='android-webkit-PermissionRequest-method-deny'>/**Call this method to deny the request.
+</span>*/
+deny : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

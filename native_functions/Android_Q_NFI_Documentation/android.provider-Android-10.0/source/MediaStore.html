@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-MediaStore'>/**@class android.provider.MediaStore
+</span>@extends java.lang.Object
+
+ The contract between the media provider and applications. Contains
+ definitions for the supported URIs and columns.
+ &lt;p&gt;
+ The media provider provides an indexed collection of common media types, such
+ as {@link android.provider.MediaStore.Audio}, {@link android.provider.MediaStore.Video}, and {@link android.provider.BrowserContract.Images}, from any attached
+ storage devices. Each collection is organized based on the primary MIME type
+ of the underlying content; for example, {@code image/*} content is indexed
+ under {@link android.provider.BrowserContract.Images}. The {@link android.provider.MediaStore.Files} collection provides a broad view
+ across all collections, and does not filter by MIME type.
+*/
+var MediaStore = {
+
+<span id='android-provider-MediaStore-property-AUTHORITY'>/**The authority for the media provider */
+</span>AUTHORITY : &quot;media&quot;,
+<span id='android-provider-MediaStore-property-AUTHORITY_URI'>/**A content:// style uri to the authority for the media provider */
+</span>AUTHORITY_URI : &quot;null&quot;,
+<span id='android-provider-MediaStore-property-VOLUME_INTERNAL'>/** Synthetic volume name that provides a view of all content across the
+</span> &quot;internal&quot; storage of the device.
+ &lt;p&gt;
+ This synthetic volume provides a merged view of all media distributed
+ with the device, such as built-in ringtones and wallpapers.
+ &lt;p&gt;
+ Because this is a synthetic volume, you can't insert new content into
+ this volume.
+*/
+VOLUME_INTERNAL : &quot;internal&quot;,
+<span id='android-provider-MediaStore-property-VOLUME_EXTERNAL'>/** Synthetic volume name that provides a view of all content across the
+</span> &quot;external&quot; storage of the device.
+ &lt;p&gt;
+ This synthetic volume provides a merged view of all media across all
+ currently attached external storage devices.
+ &lt;p&gt;
+ Because this is a synthetic volume, you can't insert new content into
+ this volume. Instead, you can insert content into a specific storage
+ volume obtained from {@link #getExternalVolumeNames}(Context).
+*/
+VOLUME_EXTERNAL : &quot;external&quot;,
+<span id='android-provider-MediaStore-property-VOLUME_EXTERNAL_PRIMARY'>/** Specific volume name that represents the primary external storage device
+</span> at {@link Environment#getExternalStorageDirectory()}.
+ &lt;p&gt;
+ This volume may not always be available, such as when the user has
+ ejected the device. You can find a list of all specific volume names
+ using {@link #getExternalVolumeNames}(Context).
+*/
+VOLUME_EXTERNAL_PRIMARY : &quot;external_primary&quot;,
+<span id='android-provider-MediaStore-property-SCAN_FILE_CALL'>/**{@hide} */
+</span>SCAN_FILE_CALL : &quot;scan_file&quot;,
+<span id='android-provider-MediaStore-property-SCAN_VOLUME_CALL'>/**{@hide} */
+</span>SCAN_VOLUME_CALL : &quot;scan_volume&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_ORIGINATED_FROM_SHELL'>/** Extra used with {@link #SCAN_FILE_CALL} or {@link #SCAN_VOLUME_CALL} to indicate that
+</span> the file path originated from shell.
+
+ {@hide}
+*/
+EXTRA_ORIGINATED_FROM_SHELL : &quot;android.intent.extra.originated_from_shell&quot;,
+<span id='android-provider-MediaStore-property-UNHIDE_CALL'>/** The method name used by the media scanner and mtp to tell the media provider to
+</span> rescan and reclassify that have become unhidden because of renaming folders or
+ removing nomedia files
+ @hide
+*/
+UNHIDE_CALL : &quot;unhide&quot;,
+<span id='android-provider-MediaStore-property-RETRANSLATE_CALL'>/** The method name used by the media scanner service to reload all localized ringtone titles due
+</span> to a locale change.
+ @hide
+*/
+RETRANSLATE_CALL : &quot;update_titles&quot;,
+<span id='android-provider-MediaStore-property-GET_VERSION_CALL'>/**{@hide} */
+</span>GET_VERSION_CALL : &quot;get_version&quot;,
+<span id='android-provider-MediaStore-property-GET_DOCUMENT_URI_CALL'>/**{@hide} */
+</span>GET_DOCUMENT_URI_CALL : &quot;get_document_uri&quot;,
+<span id='android-provider-MediaStore-property-GET_MEDIA_URI_CALL'>/**{@hide} */
+</span>GET_MEDIA_URI_CALL : &quot;get_media_uri&quot;,
+<span id='android-provider-MediaStore-property-GET_CONTRIBUTED_MEDIA_CALL'>/**{@hide} */
+</span>GET_CONTRIBUTED_MEDIA_CALL : &quot;get_contributed_media&quot;,
+<span id='android-provider-MediaStore-property-DELETE_CONTRIBUTED_MEDIA_CALL'>/**{@hide} */
+</span>DELETE_CONTRIBUTED_MEDIA_CALL : &quot;delete_contributed_media&quot;,
+<span id='android-provider-MediaStore-property-PARAM_DELETE_DATA'>/** This is for internal use by the media scanner only.
+</span> Name of the (optional) Uri parameter that determines whether to skip deleting
+ the file pointed to by the _data column, when deleting the database entry.
+ The only appropriate value for this parameter is &quot;false&quot;, in which case the
+ delete will be skipped. Note especially that setting this to true, or omitting
+ the parameter altogether, will perform the default action, which is different
+ for different types of media.
+ @hide
+*/
+PARAM_DELETE_DATA : &quot;deletedata&quot;,
+<span id='android-provider-MediaStore-property-PARAM_INCLUDE_PENDING'>/**{@hide} */
+</span>PARAM_INCLUDE_PENDING : &quot;includePending&quot;,
+<span id='android-provider-MediaStore-property-PARAM_INCLUDE_TRASHED'>/**{@hide} */
+</span>PARAM_INCLUDE_TRASHED : &quot;includeTrashed&quot;,
+<span id='android-provider-MediaStore-property-PARAM_PROGRESS'>/**{@hide} */
+</span>PARAM_PROGRESS : &quot;progress&quot;,
+<span id='android-provider-MediaStore-property-PARAM_REQUIRE_ORIGINAL'>/**{@hide} */
+</span>PARAM_REQUIRE_ORIGINAL : &quot;requireOriginal&quot;,
+<span id='android-provider-MediaStore-property-PARAM_LIMIT'>/**{@hide} */
+</span>PARAM_LIMIT : &quot;limit&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_MUSIC_PLAYER'>/** Activity Action: Launch a music player.
+</span> The activity should be able to play, browse, or manipulate music files stored on the device.
+
+ @deprecated Use {@link android.content.Intent#CATEGORY_APP_MUSIC} instead.
+*/
+INTENT_ACTION_MUSIC_PLAYER : &quot;android.intent.action.MUSIC_PLAYER&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_MEDIA_SEARCH'>/** Activity Action: Perform a search for media.
+</span> Contains at least the {@link android.app.SearchManager#QUERY} extra.
+ May also contain any combination of the following extras:
+ EXTRA_MEDIA_ARTIST, EXTRA_MEDIA_ALBUM, EXTRA_MEDIA_TITLE, EXTRA_MEDIA_FOCUS
+
+ @see android.provider.MediaStore#EXTRA_MEDIA_ARTIST
+ @see android.provider.MediaStore#EXTRA_MEDIA_ALBUM
+ @see android.provider.MediaStore#EXTRA_MEDIA_TITLE
+ @see android.provider.MediaStore#EXTRA_MEDIA_FOCUS
+*/
+INTENT_ACTION_MEDIA_SEARCH : &quot;android.intent.action.MEDIA_SEARCH&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH'>/** An intent to perform a search for music media and automatically play content from the
+</span> result when possible. This can be fired, for example, by the result of a voice recognition
+ command to listen to music.
+ &lt;p&gt;This intent always includes the {@link android.provider.MediaStore#EXTRA_MEDIA_FOCUS}
+ and {@link android.app.SearchManager#QUERY} extras. The
+ {@link android.provider.MediaStore#EXTRA_MEDIA_FOCUS} extra determines the search mode, and
+ the value of the {@link android.app.SearchManager#QUERY} extra depends on the search mode.
+ For more information about the search modes for this intent, see
+ &lt;a href=&quot;{@docRoot}guide/components/intents-common.html#PlaySearch&quot;&gt;Play music based
+ on a search query&lt;/a&gt; in &lt;a href=&quot;{@docRoot}guide/components/intents-common.html&quot;&gt;Common
+ Intents&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;This intent makes the most sense for apps that can support large-scale search of music,
+ such as services connected to an online database of music which can be streamed and played
+ on the device.&lt;/p&gt;
+*/
+INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH : &quot;android.media.action.MEDIA_PLAY_FROM_SEARCH&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_TEXT_OPEN_FROM_SEARCH'>/** An intent to perform a search for readable media and automatically play content from the
+</span> result when possible. This can be fired, for example, by the result of a voice recognition
+ command to read a book or magazine.
+ &lt;p&gt;
+ Contains the {@link android.app.SearchManager#QUERY} extra, which is a string that can
+ contain any type of unstructured text search, like the name of a book or magazine, an author
+ a genre, a publisher, or any combination of these.
+ &lt;p&gt;
+ Because this intent includes an open-ended unstructured search string, it makes the most
+ sense for apps that can support large-scale search of text media, such as services connected
+ to an online database of books and/or magazines which can be read on the device.
+*/
+INTENT_ACTION_TEXT_OPEN_FROM_SEARCH : &quot;android.media.action.TEXT_OPEN_FROM_SEARCH&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH'>/** An intent to perform a search for video media and automatically play content from the
+</span> result when possible. This can be fired, for example, by the result of a voice recognition
+ command to play movies.
+ &lt;p&gt;
+ Contains the {@link android.app.SearchManager#QUERY} extra, which is a string that can
+ contain any type of unstructured video search, like the name of a movie, one or more actors,
+ a genre, or any combination of these.
+ &lt;p&gt;
+ Because this intent includes an open-ended unstructured search string, it makes the most
+ sense for apps that can support large-scale search of video, such as services connected to an
+ online database of videos which can be streamed and played on the device.
+*/
+INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH : &quot;android.media.action.VIDEO_PLAY_FROM_SEARCH&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_MEDIA_ARTIST'>/** The name of the Intent-extra used to define the artist
+</span>*/
+EXTRA_MEDIA_ARTIST : &quot;android.intent.extra.artist&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_MEDIA_ALBUM'>/** The name of the Intent-extra used to define the album
+</span>*/
+EXTRA_MEDIA_ALBUM : &quot;android.intent.extra.album&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_MEDIA_TITLE'>/** The name of the Intent-extra used to define the song title
+</span>*/
+EXTRA_MEDIA_TITLE : &quot;android.intent.extra.title&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_MEDIA_GENRE'>/** The name of the Intent-extra used to define the genre.
+</span>*/
+EXTRA_MEDIA_GENRE : &quot;android.intent.extra.genre&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_MEDIA_PLAYLIST'>/** The name of the Intent-extra used to define the playlist.
+</span>*/
+EXTRA_MEDIA_PLAYLIST : &quot;android.intent.extra.playlist&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_MEDIA_RADIO_CHANNEL'>/** The name of the Intent-extra used to define the radio channel.
+</span>*/
+EXTRA_MEDIA_RADIO_CHANNEL : &quot;android.intent.extra.radio_channel&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_MEDIA_FOCUS'>/** The name of the Intent-extra used to define the search focus. The search focus
+</span> indicates whether the search should be for things related to the artist, album
+ or song that is identified by the other extras.
+*/
+EXTRA_MEDIA_FOCUS : &quot;android.intent.extra.focus&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_SCREEN_ORIENTATION'>/** The name of the Intent-extra used to control the orientation of a ViewImage or a MovieView.
+</span> This is an int property that overrides the activity's requestedOrientation.
+ @see android.content.pm.ActivityInfo#SCREEN_ORIENTATION_UNSPECIFIED
+*/
+EXTRA_SCREEN_ORIENTATION : &quot;android.intent.extra.screenOrientation&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_FULL_SCREEN'>/** The name of an Intent-extra used to control the UI of a ViewImage.
+</span> This is a boolean property that overrides the activity's default fullscreen state.
+*/
+EXTRA_FULL_SCREEN : &quot;android.intent.extra.fullScreen&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_SHOW_ACTION_ICONS'>/** The name of an Intent-extra used to control the UI of a ViewImage.
+</span> This is a boolean property that specifies whether or not to show action icons.
+*/
+EXTRA_SHOW_ACTION_ICONS : &quot;android.intent.extra.showActionIcons&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_FINISH_ON_COMPLETION'>/** The name of the Intent-extra used to control the onCompletion behavior of a MovieView.
+</span> This is a boolean property that specifies whether or not to finish the MovieView activity
+ when the movie completes playing. The default value is true, which means to automatically
+ exit the movie player activity when the movie completes playing.
+*/
+EXTRA_FINISH_ON_COMPLETION : &quot;android.intent.extra.finishOnCompletion&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_STILL_IMAGE_CAMERA'>/** The name of the Intent action used to launch a camera in still image mode.
+</span>*/
+INTENT_ACTION_STILL_IMAGE_CAMERA : &quot;android.media.action.STILL_IMAGE_CAMERA&quot;,
+<span id='android-provider-MediaStore-property-META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE'>/** Name under which an activity handling {@link #INTENT_ACTION_STILL_IMAGE_CAMERA} or
+</span> {@link #INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE} publishes the service name for its prewarm
+ service.
+ &lt;p&gt;
+ This meta-data should reference the fully qualified class name of the prewarm service
+ extending {@link CameraPrewarmService}.
+ &lt;p&gt;
+ The prewarm service will get bound and receive a prewarm signal
+ {@link CameraPrewarmService#onPrewarm()} when a camera launch intent fire might be imminent.
+ An application implementing a prewarm service should do the absolute minimum amount of work
+ to initialize the camera in order to reduce startup time in likely case that shortly after a
+ camera launch intent would be sent.
+*/
+META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE : &quot;android.media.still_image_camera_preview_service&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE'>/** The name of the Intent action used to launch a camera in still image mode
+</span> for use when the device is secured (e.g. with a pin, password, pattern,
+ or face unlock). Applications responding to this intent must not expose
+ any personal content like existing photos or videos on the device. The
+ applications should be careful not to share any photo or video with other
+ applications or internet. The activity should use {@link Activity#setShowWhenLocked} to display
+ on top of the lock screen while secured. There is no activity stack when
+ this flag is used, so launching more than one activity is strongly
+ discouraged.
+*/
+INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE : &quot;android.media.action.STILL_IMAGE_CAMERA_SECURE&quot;,
+<span id='android-provider-MediaStore-property-INTENT_ACTION_VIDEO_CAMERA'>/** The name of the Intent action used to launch a camera in video mode.
+</span>*/
+INTENT_ACTION_VIDEO_CAMERA : &quot;android.media.action.VIDEO_CAMERA&quot;,
+<span id='android-provider-MediaStore-property-ACTION_IMAGE_CAPTURE'>/** Standard Intent action that can be sent to have the camera application
+</span> capture an image and return it.
+ &lt;p&gt;
+ The caller may pass an extra EXTRA_OUTPUT to control where this image will be written.
+ If the EXTRA_OUTPUT is not present, then a small sized image is returned as a Bitmap
+ object in the extra field. This is useful for applications that only need a small image.
+ If the EXTRA_OUTPUT is present, then the full-sized image will be written to the Uri
+ value of EXTRA_OUTPUT.
+ As of {@link android.os.Build.VERSION_CODES#LOLLIPOP}, this uri can also be supplied through
+ {@link android.content.Intent#setClipData(ClipData)}. If using this approach, you still must
+ supply the uri through the EXTRA_OUTPUT field for compatibility with old applications.
+ If you don't set a ClipData, it will be copied there for you when calling
+ {@link Context#startActivity(Intent)}.
+
+ &lt;p&gt;Note: if you app targets {@link android.os.Build.VERSION_CODES#M M} and above
+ and declares as using the {@link android.Manifest.permission#CAMERA} permission which
+ is not granted, then attempting to use this action will result in a {@link java.lang.SecurityException}.
+
+  @see #EXTRA_OUTPUT
+*/
+ACTION_IMAGE_CAPTURE : &quot;android.media.action.IMAGE_CAPTURE&quot;,
+<span id='android-provider-MediaStore-property-ACTION_IMAGE_CAPTURE_SECURE'>/** Intent action that can be sent to have the camera application capture an image and return
+</span> it when the device is secured (e.g. with a pin, password, pattern, or face unlock).
+ Applications responding to this intent must not expose any personal content like existing
+ photos or videos on the device. The applications should be careful not to share any photo
+ or video with other applications or Internet. The activity should use {@link Activity#setShowWhenLocked} to display on top of the
+ lock screen while secured. There is no activity stack when this flag is used, so
+ launching more than one activity is strongly discouraged.
+ &lt;p&gt;
+ The caller may pass an extra EXTRA_OUTPUT to control where this image will be written.
+ If the EXTRA_OUTPUT is not present, then a small sized image is returned as a Bitmap
+ object in the extra field. This is useful for applications that only need a small image.
+ If the EXTRA_OUTPUT is present, then the full-sized image will be written to the Uri
+ value of EXTRA_OUTPUT.
+ As of {@link android.os.Build.VERSION_CODES#LOLLIPOP}, this uri can also be supplied through
+ {@link android.content.Intent#setClipData(ClipData)}. If using this approach, you still must
+ supply the uri through the EXTRA_OUTPUT field for compatibility with old applications.
+ If you don't set a ClipData, it will be copied there for you when calling
+ {@link Context#startActivity(Intent)}.
+
+ @see #ACTION_IMAGE_CAPTURE
+ @see #EXTRA_OUTPUT
+*/
+ACTION_IMAGE_CAPTURE_SECURE : &quot;android.media.action.IMAGE_CAPTURE_SECURE&quot;,
+<span id='android-provider-MediaStore-property-ACTION_VIDEO_CAPTURE'>/** Standard Intent action that can be sent to have the camera application
+</span> capture a video and return it.
+ &lt;p&gt;
+ The caller may pass in an extra EXTRA_VIDEO_QUALITY to control the video quality.
+ &lt;p&gt;
+ The caller may pass in an extra EXTRA_OUTPUT to control
+ where the video is written. If EXTRA_OUTPUT is not present the video will be
+ written to the standard location for videos, and the Uri of that location will be
+ returned in the data field of the Uri.
+ As of {@link android.os.Build.VERSION_CODES#LOLLIPOP}, this uri can also be supplied through
+ {@link android.content.Intent#setClipData(ClipData)}. If using this approach, you still must
+ supply the uri through the EXTRA_OUTPUT field for compatibility with old applications.
+ If you don't set a ClipData, it will be copied there for you when calling
+ {@link Context#startActivity(Intent)}.
+
+ &lt;p&gt;Note: if you app targets {@link android.os.Build.VERSION_CODES#M M} and above
+ and declares as using the {@link android.Manifest.permission#CAMERA} permission which
+ is not granted, then atempting to use this action will result in a {@link java.lang.SecurityException}.
+
+ @see #EXTRA_OUTPUT
+ @see #EXTRA_VIDEO_QUALITY
+ @see #EXTRA_SIZE_LIMIT
+ @see #EXTRA_DURATION_LIMIT
+*/
+ACTION_VIDEO_CAPTURE : &quot;android.media.action.VIDEO_CAPTURE&quot;,
+<span id='android-provider-MediaStore-property-ACTION_REVIEW'>/** Standard action that can be sent to review the given media file.
+</span> &lt;p&gt;
+ The launched application is expected to provide a large-scale view of the
+ given media file, while allowing the user to quickly access other
+ recently captured media files.
+ &lt;p&gt;
+ Input: {@link Intent#getData} is URI of the primary media item to
+ initially display.
+
+ @see #ACTION_REVIEW_SECURE
+ @see #EXTRA_BRIGHTNESS
+*/
+ACTION_REVIEW : &quot;android.provider.action.REVIEW&quot;,
+<span id='android-provider-MediaStore-property-ACTION_REVIEW_SECURE'>/** Standard action that can be sent to review the given media file when the
+</span> device is secured (e.g. with a pin, password, pattern, or face unlock).
+ The applications should be careful not to share any media with other
+ applications or Internet. The activity should use
+ {@link Activity#setShowWhenLocked} to display on top of the lock screen
+ while secured. There is no activity stack when this flag is used, so
+ launching more than one activity is strongly discouraged.
+ &lt;p&gt;
+ The launched application is expected to provide a large-scale view of the
+ given primary media file, while only allowing the user to quickly access
+ other media from an explicit secondary list.
+ &lt;p&gt;
+ Input: {@link Intent#getData} is URI of the primary media item to
+ initially display. {@link Intent#getClipData} is the limited list of
+ secondary media items that the user is allowed to review. If
+ {@link Intent#getClipData} is undefined, then no other media access
+ should be allowed.
+
+ @see #EXTRA_BRIGHTNESS
+*/
+ACTION_REVIEW_SECURE : &quot;android.provider.action.REVIEW_SECURE&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_BRIGHTNESS'>/** When defined, the launched application is requested to set the given
+</span> brightness value via
+ {@link android.view.WindowManager.LayoutParams#screenBrightness} to help
+ ensure a smooth transition when launching {@link #ACTION_REVIEW} or
+ {@link #ACTION_REVIEW_SECURE} intents.
+*/
+EXTRA_BRIGHTNESS : &quot;android.provider.extra.BRIGHTNESS&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_VIDEO_QUALITY'>/** The name of the Intent-extra used to control the quality of a recorded video. This is an
+</span> integer property. Currently value 0 means low quality, suitable for MMS messages, and
+ value 1 means high quality. In the future other quality levels may be added.
+*/
+EXTRA_VIDEO_QUALITY : &quot;android.intent.extra.videoQuality&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_SIZE_LIMIT'>/** Specify the maximum allowed size.
+</span>*/
+EXTRA_SIZE_LIMIT : &quot;android.intent.extra.sizeLimit&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_DURATION_LIMIT'>/** Specify the maximum allowed recording duration in seconds.
+</span>*/
+EXTRA_DURATION_LIMIT : &quot;android.intent.extra.durationLimit&quot;,
+<span id='android-provider-MediaStore-property-EXTRA_OUTPUT'>/** The name of the Intent-extra used to indicate a content resolver Uri to be used to
+</span> store the requested image or video.
+*/
+EXTRA_OUTPUT : &quot;output&quot;,
+<span id='android-provider-MediaStore-property-UNKNOWN_STRING'>/** The string that is used when a media attribute is not known. For example,
+</span> if an audio file does not have any meta data, the artist and album columns
+ will be set to this value.
+*/
+UNKNOWN_STRING : &quot;&lt;unknown&gt;&quot;,
+<span id='android-provider-MediaStore-property-MEDIA_SCANNER_VOLUME'>/** Name of current volume being scanned by the media scanner.
+</span>*/
+MEDIA_SCANNER_VOLUME : &quot;volume&quot;,
+<span id='android-provider-MediaStore-property-MEDIA_IGNORE_FILENAME'>/** Name of the file signaling the media scanner to ignore media in the containing directory
+</span> and its subdirectories. Developers should use this to avoid application graphics showing
+ up in the Gallery and likewise prevent application sounds and music from showing up in
+ the Music app.
+*/
+MEDIA_IGNORE_FILENAME : &quot;.nomedia&quot;,
+<span id='android-provider-MediaStore-method-setIncludePending'>/**Update the given {@link Uri} to also include any pending media items from
+</span> calls such as
+ {@link ContentResolver#query(Uri, String[], Bundle, CancellationSignal)}.
+ By default no pending items are returned.
+@see MediaColumns#IS_PENDING
+@see MediaStore#setIncludePending(Uri)
+*/
+setIncludePending : function(  ) {},
+
+<span id='android-provider-MediaStore-method-setIncludePending'>/**
+</span>@hide 
+*/
+setIncludePending : function(  ) {},
+
+<span id='android-provider-MediaStore-method-setIncludeTrashed'>/**Update the given {@link Uri} to also include any trashed media items from
+</span> calls such as
+ {@link ContentResolver#query(Uri, String[], Bundle, CancellationSignal)}.
+ By default no trashed items are returned.
+@see MediaColumns#IS_TRASHED
+@see MediaStore#setIncludeTrashed(Uri)
+@see MediaStore#trash(Context, Uri)
+@see MediaStore#untrash(Context, Uri)
+@removed 
+*/
+setIncludeTrashed : function(  ) {},
+
+<span id='android-provider-MediaStore-method-setRequireOriginal'>/**Update the given {@link Uri} to indicate that the caller requires the
+</span> original file contents when calling
+ {@link ContentResolver#openFileDescriptor(Uri, String)}.
+ &lt;p&gt;
+ This can be useful when the caller wants to ensure they're backing up the
+ exact bytes of the underlying media, without any Exif redaction being
+ performed.
+ &lt;p&gt;
+ If the original file contents cannot be provided, a
+ {@link UnsupportedOperationException} will be thrown when the returned
+ {@link Uri} is used, such as when the caller doesn't hold
+ {@link android.Manifest.permission#ACCESS_MEDIA_LOCATION}.
+*/
+setRequireOriginal : function(  ) {},
+
+<span id='android-provider-MediaStore-method-createPending'>/**Create a new pending media item using the given parameters. Pending items
+</span> are expected to have a short lifetime, and owners should either
+ {@link android.provider.MediaStore.PendingSession#publish()} or {@link android.provider.MediaStore.PendingSession#abandon()} a
+ pending item within a few hours after first creating it.
+@return {Object {android.net.Uri}} token which can be passed to {@link #openPending(Context, Uri)}
+         to work with this pending item.
+@see MediaColumns#IS_PENDING
+@see MediaStore#setIncludePending(Uri)
+@see MediaStore#createPending(Context, PendingParams)
+@removed 
+*/
+createPending : function(  ) {},
+
+<span id='android-provider-MediaStore-method-openPending'>/**Open a pending media item to make progress on it. You can open a pending
+</span> item multiple times before finally calling either
+ {@link android.provider.MediaStore.PendingSession#publish()} or {@link android.provider.MediaStore.PendingSession#abandon()}.
+@param {Object {Context}} uri token which was previously returned from
+            {@link #createPending(Context, PendingParams)}.
+@removed 
+*/
+openPending : function(  ) {},
+
+<span id='android-provider-MediaStore-method-trash'>/**Mark the given item as being &quot;trashed&quot;, meaning it should be deleted at
+</span> some point in the future. This is a more gentle operation than simply
+ calling {@link ContentResolver#delete(Uri, String, String[])}, which
+ would take effect immediately.
+ &lt;p&gt;
+ This method preserves trashed items for at least 48 hours before erasing
+ them, giving the user a chance to untrash the item.
+@see MediaColumns#IS_TRASHED
+@see MediaStore#setIncludeTrashed(Uri)
+@see MediaStore#trash(Context, Uri)
+@see MediaStore#untrash(Context, Uri)
+@removed 
+*/
+trash : function(  ) {},
+
+<span id='android-provider-MediaStore-method-trash'>/**Mark the given item as being &quot;trashed&quot;, meaning it should be deleted at
+</span> some point in the future. This is a more gentle operation than simply
+ calling {@link ContentResolver#delete(Uri, String, String[])}, which
+ would take effect immediately.
+ &lt;p&gt;
+ This method preserves trashed items for at least the given timeout before
+ erasing them, giving the user a chance to untrash the item.
+@see MediaColumns#IS_TRASHED
+@see MediaStore#setIncludeTrashed(Uri)
+@see MediaStore#trash(Context, Uri)
+@see MediaStore#untrash(Context, Uri)
+@removed 
+*/
+trash : function(  ) {},
+
+<span id='android-provider-MediaStore-method-untrash'>/**Mark the given item as being &quot;untrashed&quot;, meaning it should no longer be
+</span> deleted as previously requested through {@link #trash(Context, Uri)}.
+@see MediaColumns#IS_TRASHED
+@see MediaStore#setIncludeTrashed(Uri)
+@see MediaStore#trash(Context, Uri)
+@see MediaStore#untrash(Context, Uri)
+@removed 
+*/
+untrash : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getVolumeName'>/**{@hide}
+</span>*/
+getVolumeName : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getAllVolumeNames'>/**
+</span>@removed 
+*/
+getAllVolumeNames : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getExternalVolumeNames'>/**Return list of all specific volume names that make up
+</span> {@link #VOLUME_EXTERNAL}. This includes a unique volume name for each
+ shared storage device that is currently attached, which typically
+ includes {@link android.provider.MediaStore#VOLUME_EXTERNAL_PRIMARY}.
+ &lt;p&gt;
+ Each specific volume name can be passed to APIs like
+ {@link android.provider.MediaStore.Images.Media#getContentUri(String)} to interact with
+ media on that storage device.
+*/
+getExternalVolumeNames : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getVolumeName'>/**Return the volume name that the given {@link Uri} references.
+</span>*/
+getVolumeName : function(  ) {},
+
+<span id='android-provider-MediaStore-method-checkArgumentVolumeName'>/**{@hide}
+</span>*/
+checkArgumentVolumeName : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getVolumePath'>/**Return path where the given specific volume is mounted. Not valid for
+</span> {@link #VOLUME_INTERNAL} or {@link #VOLUME_EXTERNAL}, since those are
+ broad collections that cover many paths.
+@hide 
+*/
+getVolumePath : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getVolumePath'>/**{@hide}
+</span>*/
+getVolumePath : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getVolumeScanPaths'>/**Return paths that should be scanned for the given volume.
+</span>@hide 
+*/
+getVolumeScanPaths : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getMediaScannerUri'>/**Uri for querying the state of the media scanner.
+</span>*/
+getMediaScannerUri : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getVersion'>/**Return an opaque version string describing the {@link android.provider.MediaStore} state.
+</span> &lt;p&gt;
+ Applications that import data from {@link android.provider.MediaStore} into their own
+ caches can use this to detect that {@link android.provider.MediaStore} has undergone
+ substantial changes, and that data should be rescanned.
+ &lt;p&gt;
+ No other assumptions should be made about the meaning of the version.
+ &lt;p&gt;
+ This method returns the version for
+ {@link android.provider.MediaStore#VOLUME_EXTERNAL_PRIMARY}; to obtain a version for a
+ different volume, use {@link #getVersion(Context, String)}.
+*/
+getVersion : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getVersion'>/**Return an opaque version string describing the {@link android.provider.MediaStore} state.
+</span> &lt;p&gt;
+ Applications that import data from {@link android.provider.MediaStore} into their own
+ caches can use this to detect that {@link android.provider.MediaStore} has undergone
+ substantial changes, and that data should be rescanned.
+ &lt;p&gt;
+ No other assumptions should be made about the meaning of the version.
+@param {Object {Context}} volumeName specific volume to obtain an opaque version string for.
+            Must be one of the values returned from
+            {@link #getExternalVolumeNames(Context)}.
+*/
+getVersion : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getDocumentUri'>/**Return a {@link android.provider.DocumentsContract.DocumentsProvider} Uri that is an equivalent to the given
+</span> {@link android.provider.MediaStore} Uri.
+ &lt;p&gt;
+ This allows apps with Storage Access Framework permissions to convert
+ between {@link android.provider.MediaStore} and {@link android.provider.DocumentsContract.DocumentsProvider} Uris that refer
+ to the same underlying item. Note that this method doesn't grant any new
+ permissions; callers must already hold permissions obtained with
+ {@link Intent#ACTION_OPEN_DOCUMENT} or related APIs.
+@param {Object {Context}} mediaUri The {@link MediaStore} Uri to convert.
+@return {Object {android.net.Uri}} An equivalent {@link DocumentsProvider} Uri. Returns {@code null}
+         if no equivalent was found.
+@see #getMediaUri(Context, Uri)
+*/
+getDocumentUri : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getMediaUri'>/**Return a {@link android.provider.MediaStore} Uri that is an equivalent to the given
+</span> {@link android.provider.DocumentsContract.DocumentsProvider} Uri.
+ &lt;p&gt;
+ This allows apps with Storage Access Framework permissions to convert
+ between {@link android.provider.MediaStore} and {@link android.provider.DocumentsContract.DocumentsProvider} Uris that refer
+ to the same underlying item. Note that this method doesn't grant any new
+ permissions; callers must already hold permissions obtained with
+ {@link Intent#ACTION_OPEN_DOCUMENT} or related APIs.
+@param {Object {Context}} documentUri The {@link DocumentsProvider} Uri to convert.
+@return {Object {android.net.Uri}} An equivalent {@link MediaStore} Uri. Returns {@code null} if no
+         equivalent was found.
+@see #getDocumentUri(Context, Uri)
+*/
+getMediaUri : function(  ) {},
+
+<span id='android-provider-MediaStore-method-getContributedMediaSize'>/**Calculate size of media contributed by given package under the calling
+</span> user. The meaning of &quot;contributed&quot; means it won't automatically be
+ deleted when the app is uninstalled.
+@hide 
+*/
+getContributedMediaSize : function(  ) {},
+
+<span id='android-provider-MediaStore-method-deleteContributedMedia'>/**Delete all media contributed by given package under the calling user. The
+</span> meaning of &quot;contributed&quot; means it won't automatically be deleted when the
+ app is uninstalled.
+@hide 
+*/
+deleteContributedMedia : function(  ) {},
+
+<span id='android-provider-MediaStore-method-scanFile'>/**
+</span>@hide 
+*/
+scanFile : function(  ) {},
+
+<span id='android-provider-MediaStore-method-scanFileFromShell'>/**
+</span>@hide 
+*/
+scanFileFromShell : function(  ) {},
+
+<span id='android-provider-MediaStore-method-scanVolume'>/**
+</span>@hide 
+*/
+scanVolume : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

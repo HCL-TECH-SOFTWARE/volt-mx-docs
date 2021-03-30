@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageItemInfo'>/**@class android.content.pm.PackageItemInfo
+</span>@extends java.lang.Object
+
+ Base class containing information common to all package items held by
+ the package manager.  This provides a very common basic set of attributes:
+ a label, icon, and meta-data.  This class is not intended
+ to be used by itself; it is simply here to share common definitions
+ between all items returned by the package manager.  As such, it does not
+ itself implement Parcelable, but does provide convenience methods to assist
+ in the implementation of Parcelable in subclasses.
+*/
+var PackageItemInfo = {
+
+<span id='android-content-pm-PackageItemInfo-property-DEFAULT_MAX_LABEL_SIZE_PX'>/**@hide */
+</span>DEFAULT_MAX_LABEL_SIZE_PX : &quot;500.0&quot;,
+<span id='android-content-pm-PackageItemInfo-property-SAFE_LABEL_FLAG_TRIM'>/** Remove {@link Character#isWhitespace(int) whitespace} and non-breaking spaces from the edges
+</span> of the label.
+
+ @see #loadSafeLabel(PackageManager, float, int)
+
+ @deprecated Use {@link TextUtils#SAFE_STRING_FLAG_TRIM} instead
+ @hide
+ @removed
+*/
+SAFE_LABEL_FLAG_TRIM : &quot;1&quot;,
+<span id='android-content-pm-PackageItemInfo-property-SAFE_LABEL_FLAG_SINGLE_LINE'>/** Force entire string into single line of text (no newlines). Cannot be set at the same time as
+</span> {@link #SAFE_LABEL_FLAG_FIRST_LINE}.
+
+ @see #loadSafeLabel(PackageManager, float, int)
+
+ @deprecated Use {@link TextUtils#SAFE_STRING_FLAG_SINGLE_LINE} instead
+ @hide
+ @removed
+*/
+SAFE_LABEL_FLAG_SINGLE_LINE : &quot;2&quot;,
+<span id='android-content-pm-PackageItemInfo-property-SAFE_LABEL_FLAG_FIRST_LINE'>/** Return only first line of text (truncate at first newline). Cannot be set at the same time as
+</span> {@link #SAFE_LABEL_FLAG_SINGLE_LINE}.
+
+ @see #loadSafeLabel(PackageManager, float, int)
+
+ @deprecated Use {@link TextUtils#SAFE_STRING_FLAG_FIRST_LINE} instead
+ @hide
+ @removed
+*/
+SAFE_LABEL_FLAG_FIRST_LINE : &quot;4&quot;,
+<span id='android-content-pm-PackageItemInfo-property-name'>/** Public name of this item. From the &quot;android:name&quot; attribute.
+</span>*/
+name : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-packageName'>/** Name of the package that this item is in.
+</span>*/
+packageName : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-labelRes'>/** A string resource identifier (in the package's resources) of this
+</span> component's label.  From the &quot;label&quot; attribute or, if not set, 0.
+*/
+labelRes : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-nonLocalizedLabel'>/** The string provided in the AndroidManifest file, if any.  You
+</span> probably don't want to use this.  You probably want
+ {@link android.content.pm.PackageParser.PackageManager#getApplicationLabel}
+*/
+nonLocalizedLabel : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-icon'>/** A drawable resource identifier (in the package's resources) of this
+</span> component's icon.  From the &quot;icon&quot; attribute or, if not set, 0.
+*/
+icon : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-banner'>/** A drawable resource identifier (in the package's resources) of this
+</span> component's banner.  From the &quot;banner&quot; attribute or, if not set, 0.
+*/
+banner : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-logo'>/** A drawable resource identifier (in the package's resources) of this
+</span> component's logo. Logos may be larger/wider than icons and are
+ displayed by certain UI elements in place of a name or name/icon
+ combination. From the &quot;logo&quot; attribute or, if not set, 0.
+*/
+logo : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-metaData'>/** Additional meta-data associated with this component.  This field
+</span> will only be filled in if you set the
+ {@link android.content.pm.PackageParser.PackageManager#GET_META_DATA} flag when requesting the info.
+*/
+metaData : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-showUserIcon'>/** If different of UserHandle.USER_NULL, The icon of this item will represent that user.
+</span> @hide
+*/
+showUserIcon : &quot;null&quot;,
+<span id='android-content-pm-PackageItemInfo-property-DUMP_FLAG_DETAILS'>/** @hide Flag for dumping: include all details.
+</span>*/
+DUMP_FLAG_DETAILS : &quot;1&quot;,
+<span id='android-content-pm-PackageItemInfo-property-DUMP_FLAG_APPLICATION'>/** @hide Flag for dumping: include nested ApplicationInfo.
+</span>*/
+DUMP_FLAG_APPLICATION : &quot;2&quot;,
+<span id='android-content-pm-PackageItemInfo-property-DUMP_FLAG_ALL'>/** @hide Flag for dumping: all flags to dump everything.
+</span>*/
+DUMP_FLAG_ALL : &quot;3&quot;,
+<span id='android-content-pm-PackageItemInfo-method-forceSafeLabels'>/**Always use {@link #loadSafeLabel safe labels} when calling {@link #loadLabel}.
+</span>@hide 
+*/
+forceSafeLabels : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadLabel'>/**Retrieve the current textual label associated with this item.  This
+</span> will call back on the given PackageManager to load the label from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the label can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {java.lang.CharSequence}} Returns a CharSequence containing the item's label.  If the
+ item does not have a label, its name is returned.
+*/
+loadLabel : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadUnsafeLabel'>/**{@hide}
+</span>*/
+loadUnsafeLabel : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadSafeLabel'>/**
+</span>@hide 
+@deprecated use loadSafeLabel(PackageManager, float, int) instead
+*/
+loadSafeLabel : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadSafeLabel'>/**Calls {@link TextUtils#makeSafeForPresentation} for the label of this item.
+</span>
+ &lt;p&gt;For parameters see {@link TextUtils#makeSafeForPresentation}.
+@hide 
+*/
+loadSafeLabel : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadIcon'>/**Retrieve the current graphical icon associated with this item.  This
+</span> will call back on the given PackageManager to load the icon from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the icon can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable containing the item's icon.  If the
+ item does not have an icon, the item's default icon is returned
+ such as the default activity icon.
+*/
+loadIcon : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadUnbadgedIcon'>/**Retrieve the current graphical icon associated with this item without
+</span> the addition of a work badge if applicable.
+ This will call back on the given PackageManager to load the icon from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the icon can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable containing the item's icon.  If the
+ item does not have an icon, the item's default icon is returned
+ such as the default activity icon.
+*/
+loadUnbadgedIcon : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadBanner'>/**Retrieve the current graphical banner associated with this item.  This
+</span> will call back on the given PackageManager to load the banner from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the banner can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable containing the item's banner.  If the item
+ does not have a banner, this method will return null.
+*/
+loadBanner : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadDefaultIcon'>/**Retrieve the default graphical icon associated with this item.
+</span>@param {Object {PackageManager}} pm A PackageManager from which the icon can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable containing the item's default icon
+ such as the default activity icon.
+@hide 
+*/
+loadDefaultIcon : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadLogo'>/**Retrieve the current graphical logo associated with this item. This
+</span> will call back on the given PackageManager to load the logo from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the logo can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {android.graphics.drawable.Drawable}} Returns a Drawable containing the item's logo. If the item
+ does not have a logo, this method will return null.
+*/
+loadLogo : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-loadXmlMetaData'>/**Load an XML resource attached to the meta-data of this item.  This will
+</span> retrieved the name meta-data entry, and if defined call back on the
+ given PackageManager to load its XML file from the application.
+@param {Object {PackageManager}} pm A PackageManager from which the XML can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@param {String} name Name of the meta-date you would like to load.
+@return {Object {android.content.res.XmlResourceParser}} Returns an XmlPullParser you can use to parse the XML file
+ assigned as the given meta-data.  If the meta-data name is not defined
+ or the XML resource could not be found, null is returned.
+*/
+loadXmlMetaData : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-pm-PackageItemInfo-method-writeToProto'>/**
+</span>@hide 
+*/
+writeToProto : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

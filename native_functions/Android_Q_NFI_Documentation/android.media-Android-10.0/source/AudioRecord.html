@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-AudioRecord'>/**@class android.media.AudioRecord
+</span> implements android.media.AudioRouting
+
+ implements android.media.MicrophoneDirection
+
+ implements android.media.AudioRecordingMonitor
+
+ implements android.media.AudioRecordingMonitorClient
+
+@extends java.lang.Object
+
+ The AudioRecord class manages the audio resources for Java applications
+ to record audio from the audio input hardware of the platform. This is
+ achieved by &quot;pulling&quot; (reading) the data from the AudioRecord object. The
+ application is responsible for polling the AudioRecord object in time using one of
+ the following three methods:  {@link #read(byte[],int, int)}, {@link #read(short[], int, int)}
+ or {@link #read(ByteBuffer, int)}. The choice of which method to use will be based
+ on the audio data storage format that is the most convenient for the user of AudioRecord.
+ &lt;p&gt;Upon creation, an AudioRecord object initializes its associated audio buffer that it will
+ fill with the new audio data. The size of this buffer, specified during the construction,
+ determines how long an AudioRecord can record before &quot;over-running&quot; data that has not
+ been read yet. Data should be read from the audio hardware in chunks of sizes inferior to
+ the total recording buffer size.
+*/
+var AudioRecord = {
+
+<span id='android-media-AudioRecord-property-STATE_UNINITIALIZED'>/**  indicates AudioRecord state is not successfully initialized.
+</span>*/
+STATE_UNINITIALIZED : &quot;0&quot;,
+<span id='android-media-AudioRecord-property-STATE_INITIALIZED'>/**  indicates AudioRecord state is ready to be used
+</span>*/
+STATE_INITIALIZED : &quot;1&quot;,
+<span id='android-media-AudioRecord-property-RECORDSTATE_STOPPED'>/** indicates AudioRecord recording state is not recording
+</span>*/
+RECORDSTATE_STOPPED : &quot;1&quot;,
+<span id='android-media-AudioRecord-property-RECORDSTATE_RECORDING'>/** indicates AudioRecord recording state is recording
+</span>*/
+RECORDSTATE_RECORDING : &quot;3&quot;,
+<span id='android-media-AudioRecord-property-SUCCESS'>/** Denotes a successful operation.
+</span>*/
+SUCCESS : &quot;0&quot;,
+<span id='android-media-AudioRecord-property-ERROR'>/** Denotes a generic operation failure.
+</span>*/
+ERROR : &quot;-1&quot;,
+<span id='android-media-AudioRecord-property-ERROR_BAD_VALUE'>/** Denotes a failure due to the use of an invalid value.
+</span>*/
+ERROR_BAD_VALUE : &quot;-2&quot;,
+<span id='android-media-AudioRecord-property-ERROR_INVALID_OPERATION'>/** Denotes a failure due to the improper use of a method.
+</span>*/
+ERROR_INVALID_OPERATION : &quot;-3&quot;,
+<span id='android-media-AudioRecord-property-ERROR_DEAD_OBJECT'>/** An error code indicating that the object reporting it is no longer valid and needs to
+</span> be recreated.
+*/
+ERROR_DEAD_OBJECT : &quot;-6&quot;,
+<span id='android-media-AudioRecord-property-SUBMIX_FIXED_VOLUME'>/**@hide */
+</span>SUBMIX_FIXED_VOLUME : &quot;fixedVolume&quot;,
+<span id='android-media-AudioRecord-property-READ_BLOCKING'>/** The read mode indicating the read operation will block until all data
+</span> requested has been read.
+*/
+READ_BLOCKING : &quot;0&quot;,
+<span id='android-media-AudioRecord-property-READ_NON_BLOCKING'>/** The read mode indicating the read operation will return immediately after
+</span> reading as much audio data as possible without blocking.
+*/
+READ_NON_BLOCKING : &quot;1&quot;,
+<span id='android-media-AudioRecord-method-release'>/**Releases the native AudioRecord resources.
+</span> The object can no longer be used and the reference should be set to null
+ after a call to release()
+*/
+release : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getSampleRate'>/**Returns the configured audio sink sample rate in Hz.
+</span> The sink sample rate never changes after construction.
+ If the constructor had a specific sample rate, then the sink sample rate is that value.
+ If the constructor had {@link android.media.AudioFormat#SAMPLE_RATE_UNSPECIFIED},
+ then the sink sample rate is a route-dependent default value based on the source [sic].
+*/
+getSampleRate : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getAudioSource'>/**Returns the audio recording source.
+</span>@see MediaRecorder.AudioSource
+*/
+getAudioSource : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getAudioFormat'>/**Returns the configured audio data encoding. See {@link android.media.AudioFormat#ENCODING_PCM_8BIT},
+</span> {@link android.media.AudioFormat#ENCODING_PCM_16BIT}, and {@link android.media.AudioFormat#ENCODING_PCM_FLOAT}.
+*/
+getAudioFormat : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getChannelConfiguration'>/**Returns the configured channel position mask.
+</span> &lt;p&gt; See {@link android.media.AudioFormat#CHANNEL_IN_MONO}
+ and {@link android.media.AudioFormat#CHANNEL_IN_STEREO}.
+ This method may return {@link android.media.AudioFormat#CHANNEL_INVALID} if
+ a channel index mask is used.
+ Consider {@link #getFormat}() instead, to obtain an {@link android.media.AudioFormat},
+ which contains both the channel position mask and the channel index mask.
+*/
+getChannelConfiguration : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getFormat'>/**Returns the configured &lt;code&gt;AudioRecord&lt;/code&gt; format.
+</span>@return {Object {android.media.AudioFormat}} an {@link AudioFormat} containing the
+ &lt;code&gt;AudioRecord&lt;/code&gt; parameters at the time of configuration.
+*/
+getFormat : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getChannelCount'>/**Returns the configured number of channels.
+</span>*/
+getChannelCount : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getState'>/**Returns the state of the AudioRecord instance. This is useful after the
+</span> AudioRecord instance has been created to check if it was initialized
+ properly. This ensures that the appropriate hardware resources have been
+ acquired.
+@see AudioRecord#STATE_INITIALIZED
+@see AudioRecord#STATE_UNINITIALIZED
+*/
+getState : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getRecordingState'>/**Returns the recording state of the AudioRecord instance.
+</span>@see AudioRecord#RECORDSTATE_STOPPED
+@see AudioRecord#RECORDSTATE_RECORDING
+*/
+getRecordingState : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getBufferSizeInFrames'>/**Returns the frame count of the native &lt;code&gt;AudioRecord&lt;/code&gt; buffer.
+</span>  This is greater than or equal to the bufferSizeInBytes converted to frame units
+  specified in the &lt;code&gt;AudioRecord&lt;/code&gt; constructor or Builder.
+  The native frame count may be enlarged to accommodate the requirements of the
+  source on creation or if the &lt;code&gt;AudioRecord&lt;/code&gt;
+  is subsequently rerouted.
+@return {Number} current size in frames of the &lt;code&gt;AudioRecord&lt;/code&gt; buffer.
+@throws IllegalStateException
+*/
+getBufferSizeInFrames : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getNotificationMarkerPosition'>/**Returns the notification marker position expressed in frames.
+</span>*/
+getNotificationMarkerPosition : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getPositionNotificationPeriod'>/**Returns the notification update period expressed in frames.
+</span>*/
+getPositionNotificationPeriod : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getTimestamp'>/**Poll for an {@link android.media.AudioTimestamp} on demand.
+</span> &lt;p&gt;
+ The AudioTimestamp reflects the frame delivery information at
+ the earliest point available in the capture pipeline.
+ &lt;p&gt;
+ Calling {@link #startRecording}() following a {@link #stop}() will reset
+ the frame count to 0.
+@param {Object {AudioTimestamp}} outTimestamp a caller provided non-null AudioTimestamp instance,
+        which is updated with the AudioRecord frame delivery information upon success.
+@param {Number} timebase one of
+        {@link AudioTimestamp#TIMEBASE_BOOTTIME AudioTimestamp.TIMEBASE_BOOTTIME} or
+        {@link AudioTimestamp#TIMEBASE_MONOTONIC AudioTimestamp.TIMEBASE_MONOTONIC},
+        used to select the clock for the AudioTimestamp time.
+@return {Number} {@link #SUCCESS} if a timestamp is available,
+         or {@link #ERROR_INVALID_OPERATION} if a timestamp not available.
+*/
+getTimestamp : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getMinBufferSize'>/**Returns the minimum buffer size required for the successful creation of an AudioRecord
+</span> object, in byte units.
+ Note that this size doesn't guarantee a smooth recording under load, and higher values
+ should be chosen according to the expected frequency at which the AudioRecord instance
+ will be polled for new data.
+ See {@link #AudioRecord(int, int, int, int, int)} for more information on valid
+ configuration values.
+@param {Number} sampleRateInHz the sample rate expressed in Hertz.
+   {@link AudioFormat#SAMPLE_RATE_UNSPECIFIED} is not permitted.
+@param {Number} channelConfig describes the configuration of the audio channels.
+   See {@link AudioFormat#CHANNEL_IN_MONO} and
+   {@link AudioFormat#CHANNEL_IN_STEREO}
+@param {Number} audioFormat the format in which the audio data is represented.
+   See {@link AudioFormat#ENCODING_PCM_16BIT}.
+@return {Number} {@link #ERROR_BAD_VALUE} if the recording parameters are not supported by the
+  hardware, or an invalid parameter was passed,
+  or {@link #ERROR} if the implementation was unable to query the hardware for its
+  input properties,
+   or the minimum buffer size expressed in bytes.
+@see #AudioRecord(int, int, int, int, int)
+*/
+getMinBufferSize : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getAudioSessionId'>/**Returns the audio session ID.
+</span>@return {Number} the ID of the audio session this AudioRecord belongs to.
+*/
+getAudioSessionId : function(  ) {},
+
+<span id='android-media-AudioRecord-method-startRecording'>/**Starts recording from the AudioRecord instance.
+</span>@throws IllegalStateException
+*/
+startRecording : function(  ) {},
+
+<span id='android-media-AudioRecord-method-startRecording'>/**Starts recording from the AudioRecord instance when the specified synchronization event
+</span> occurs on the specified audio session.
+@param {Object {MediaSyncEvent}} syncEvent event that triggers the capture.
+@param syncEvent event that triggers the capture.
+@see MediaSyncEvent
+*/
+startRecording : function(  ) {},
+
+<span id='android-media-AudioRecord-method-stop'>/**Stops recording.
+</span>@throws IllegalStateException
+*/
+stop : function(  ) {},
+
+<span id='android-media-AudioRecord-method-read'>/**Reads audio data from the audio hardware for recording into a byte array.
+</span> The format specified in the AudioRecord constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_8BIT} to correspond to the data in the array.
+@param {Object {byte[]}} audioData the array to which the recorded audio data is written.
+@param {Number} offsetInBytes index in audioData from which the data is written expressed in bytes.
+@param {Number} sizeInBytes the number of requested bytes.
+@return {Number} zero or the positive number of bytes that were read, or one of the following
+    error codes. The number of bytes will not exceed sizeInBytes.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the object isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the object is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next read()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+read : function(  ) {},
+
+<span id='android-media-AudioRecord-method-read'>/**Reads audio data from the audio hardware for recording into a byte array.
+</span> The format specified in the AudioRecord constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_8BIT} to correspond to the data in the array.
+ The format can be {@link android.media.AudioFormat#ENCODING_PCM_16BIT}, but this is deprecated.
+@param {Object {byte[]}} audioData the array to which the recorded audio data is written.
+@param {Number} offsetInBytes index in audioData to which the data is written expressed in bytes.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInBytes the number of requested bytes.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} readMode one of {@link #READ_BLOCKING}, {@link #READ_NON_BLOCKING}.
+     &lt;br&gt;With {@link #READ_BLOCKING}, the read will block until all the requested data
+     is read.
+     &lt;br&gt;With {@link #READ_NON_BLOCKING}, the read will return immediately after
+     reading as much audio data as possible without blocking.
+@return {Number} zero or the positive number of bytes that were read, or one of the following
+    error codes. The number of bytes will be a multiple of the frame size in bytes
+    not to exceed sizeInBytes.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the object isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the object is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next read()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+read : function(  ) {},
+
+<span id='android-media-AudioRecord-method-read'>/**Reads audio data from the audio hardware for recording into a short array.
+</span> The format specified in the AudioRecord constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_16BIT} to correspond to the data in the array.
+@param {Object {short[]}} audioData the array to which the recorded audio data is written.
+@param {Number} offsetInShorts index in audioData to which the data is written expressed in shorts.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInShorts the number of requested shorts.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@return {Number} zero or the positive number of shorts that were read, or one of the following
+    error codes. The number of shorts will be a multiple of the channel count not to exceed
+    sizeInShorts.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the object isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the object is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next read()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+read : function(  ) {},
+
+<span id='android-media-AudioRecord-method-read'>/**Reads audio data from the audio hardware for recording into a short array.
+</span> The format specified in the AudioRecord constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_16BIT} to correspond to the data in the array.
+@param {Object {short[]}} audioData the array to which the recorded audio data is written.
+@param {Number} offsetInShorts index in audioData from which the data is written expressed in shorts.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInShorts the number of requested shorts.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} readMode one of {@link #READ_BLOCKING}, {@link #READ_NON_BLOCKING}.
+     &lt;br&gt;With {@link #READ_BLOCKING}, the read will block until all the requested data
+     is read.
+     &lt;br&gt;With {@link #READ_NON_BLOCKING}, the read will return immediately after
+     reading as much audio data as possible without blocking.
+@return {Number} zero or the positive number of shorts that were read, or one of the following
+    error codes. The number of shorts will be a multiple of the channel count not to exceed
+    sizeInShorts.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the object isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the object is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next read()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+read : function(  ) {},
+
+<span id='android-media-AudioRecord-method-read'>/**Reads audio data from the audio hardware for recording into a float array.
+</span> The format specified in the AudioRecord constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_FLOAT} to correspond to the data in the array.
+@param {Object {float[]}} audioData the array to which the recorded audio data is written.
+@param {Number} offsetInFloats index in audioData from which the data is written.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInFloats the number of requested floats.
+        Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} readMode one of {@link #READ_BLOCKING}, {@link #READ_NON_BLOCKING}.
+     &lt;br&gt;With {@link #READ_BLOCKING}, the read will block until all the requested data
+     is read.
+     &lt;br&gt;With {@link #READ_NON_BLOCKING}, the read will return immediately after
+     reading as much audio data as possible without blocking.
+@return {Number} zero or the positive number of floats that were read, or one of the following
+    error codes. The number of floats will be a multiple of the channel count not to exceed
+    sizeInFloats.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the object isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the object is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next read()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+read : function(  ) {},
+
+<span id='android-media-AudioRecord-method-read'>/**Reads audio data from the audio hardware for recording into a direct buffer. If this buffer
+</span> is not a direct buffer, this method will always return 0.
+ Note that the value returned by {@link java.nio.Buffer#position()} on this buffer is
+ unchanged after a call to this method.
+ The representation of the data in the buffer will depend on the format specified in
+ the AudioRecord constructor, and will be native endian.
+@param {Object {ByteBuffer}} audioBuffer the direct buffer to which the recorded audio data is written.
+ Data is written to audioBuffer.position().
+@param {Number} sizeInBytes the number of requested bytes. It is recommended but not enforced
+    that the number of bytes requested be a multiple of the frame size (sample size in
+    bytes multiplied by the channel count).
+@return {Number} zero or the positive number of bytes that were read, or one of the following
+    error codes. The number of bytes will not exceed sizeInBytes and will be truncated to be
+    a multiple of the frame size.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the object isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the object is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next read()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+read : function(  ) {},
+
+<span id='android-media-AudioRecord-method-read'>/**Reads audio data from the audio hardware for recording into a direct buffer. If this buffer
+</span> is not a direct buffer, this method will always return 0.
+ Note that the value returned by {@link java.nio.Buffer#position()} on this buffer is
+ unchanged after a call to this method.
+ The representation of the data in the buffer will depend on the format specified in
+ the AudioRecord constructor, and will be native endian.
+@param {Object {ByteBuffer}} audioBuffer the direct buffer to which the recorded audio data is written.
+ Data is written to audioBuffer.position().
+@param {Number} sizeInBytes the number of requested bytes. It is recommended but not enforced
+    that the number of bytes requested be a multiple of the frame size (sample size in
+    bytes multiplied by the channel count).
+@param {Number} readMode one of {@link #READ_BLOCKING}, {@link #READ_NON_BLOCKING}.
+     &lt;br&gt;With {@link #READ_BLOCKING}, the read will block until all the requested data
+     is read.
+     &lt;br&gt;With {@link #READ_NON_BLOCKING}, the read will return immediately after
+     reading as much audio data as possible without blocking.
+@return {Number} zero or the positive number of bytes that were read, or one of the following
+    error codes. The number of bytes will not exceed sizeInBytes and will be truncated to be
+    a multiple of the frame size.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the object isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the object is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next read()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+read : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getMetrics'>/**Return Metrics data about the current AudioTrack instance.
+</span>@return {Object {android.os.PersistableBundle}} a {@link PersistableBundle} containing the set of attributes and values
+ available for the media being handled by this instance of AudioRecord
+ The attributes are descibed in {@link MetricsConstants}.
+
+ Additional vendor-specific fields may also be present in
+ the return value.
+*/
+getMetrics : function(  ) {},
+
+<span id='android-media-AudioRecord-method-setRecordPositionUpdateListener'>/**Sets the listener the AudioRecord notifies when a previously set marker is reached or
+</span> for each periodic record head position update.
+@param {Object {AudioRecord.OnRecordPositionUpdateListener}} listener
+*/
+setRecordPositionUpdateListener : function(  ) {},
+
+<span id='android-media-AudioRecord-method-setRecordPositionUpdateListener'>/**Sets the listener the AudioRecord notifies when a previously set marker is reached or
+</span> for each periodic record head position update.
+ Use this method to receive AudioRecord events in the Handler associated with another
+ thread than the one in which you created the AudioRecord instance.
+@param {Object {AudioRecord.OnRecordPositionUpdateListener}} listener
+@param {Object {Handler}} handler the Handler that will receive the event notification messages.
+*/
+setRecordPositionUpdateListener : function(  ) {},
+
+<span id='android-media-AudioRecord-method-setNotificationMarkerPosition'>/**Sets the marker position at which the listener is called, if set with
+</span> {@link #setRecordPositionUpdateListener}(OnRecordPositionUpdateListener) or
+ {@link #setRecordPositionUpdateListener(OnRecordPositionUpdateListener, Handler)}.
+@param {Number} markerInFrames marker position expressed in frames
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_BAD_VALUE},
+  {@link #ERROR_INVALID_OPERATION}
+*/
+setNotificationMarkerPosition : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getRoutedDevice'>/**Returns an {@link android.media.AudioDeviceInfo} identifying the current routing of this AudioRecord.
+</span> Note: The query is only valid if the AudioRecord is currently recording. If it is not,
+ &lt;code&gt;getRoutedDevice()&lt;/code&gt; will return null.
+*/
+getRoutedDevice : function(  ) {},
+
+<span id='android-media-AudioRecord-method-addOnRoutingChangedListener'>/**Adds an {@link android.media.AudioRouting.OnRoutingChangedListener} to receive notifications of
+</span> routing changes on this AudioRecord.
+@param {Object {AudioRouting.OnRoutingChangedListener}} listener The {@link AudioRouting.OnRoutingChangedListener} interface to receive
+ notifications of rerouting events.
+@param {Object {Handler}} handler  Specifies the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the {@link Handler} associated with the main
+ {@link Looper} will be used.
+*/
+addOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioRecord-method-removeOnRoutingChangedListener'>/**Removes an {@link android.media.AudioRouting.OnRoutingChangedListener} which has been previously added
+</span> to receive rerouting notifications.
+@param {Object {AudioRouting.OnRoutingChangedListener}} listener The previously added {@link AudioRouting.OnRoutingChangedListener} interface
+ to remove.
+*/
+removeOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioRecord-method-addOnRoutingChangedListener'>/**Adds an {@link android.media.AudioRecord.OnRoutingChangedListener} to receive notifications of routing changes
+</span> on this AudioRecord.
+@param {Object {AudioRecord.OnRoutingChangedListener}} listener The {@link OnRoutingChangedListener} interface to receive notifications
+ of rerouting events.
+@param {Object {Handler}} handler  Specifies the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the {@link Handler} associated with the main
+ {@link Looper} will be used.
+@deprecated users should switch to the general purpose
+             {@link AudioRouting.OnRoutingChangedListener} class instead.
+*/
+addOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioRecord-method-removeOnRoutingChangedListener'>/**Removes an {@link android.media.AudioRecord.OnRoutingChangedListener} which has been previously added
+</span> to receive rerouting notifications.
+@param {Object {AudioRecord.OnRoutingChangedListener}} listener The previously added {@link OnRoutingChangedListener} interface to remove.
+@deprecated users should switch to the general purpose
+             {@link AudioRouting.OnRoutingChangedListener} class instead.
+*/
+removeOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioRecord-method-setPositionNotificationPeriod'>/**Sets the period at which the listener is called, if set with
+</span> {@link #setRecordPositionUpdateListener}(OnRecordPositionUpdateListener) or
+ {@link #setRecordPositionUpdateListener(OnRecordPositionUpdateListener, Handler)}.
+ It is possible for notifications to be lost if the period is too small.
+@param {Number} periodInFrames update period expressed in frames
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_INVALID_OPERATION}
+*/
+setPositionNotificationPeriod : function(  ) {},
+
+<span id='android-media-AudioRecord-method-setPreferredDevice'>/**Specifies an audio device (via an {@link android.media.AudioDeviceInfo} object) to route
+</span> the input to this AudioRecord.
+@param {Object {AudioDeviceInfo}} deviceInfo The {@link AudioDeviceInfo} specifying the audio source.
+  If deviceInfo is null, default routing is restored.
+@return {Boolean} true if successful, false if the specified {@link AudioDeviceInfo} is non-null and
+ does not correspond to a valid audio input device.
+*/
+setPreferredDevice : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getPreferredDevice'>/**Returns the selected input specified by {@link #setPreferredDevice}. Note that this
+</span> is not guarenteed to correspond to the actual device being used for recording.
+*/
+getPreferredDevice : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getActiveMicrophones'>/**Returns a lists of {@link android.media.MicrophoneInfo} representing the active microphones.
+</span> By querying channel mapping for each active microphone, developer can know how
+ the microphone is used by each channels or a capture stream.
+ Note that the information about the active microphones may change during a recording.
+ See {@link android.media.AudioManager#registerAudioDeviceCallback} to be notified of changes
+ in the audio devices, querying the active microphones then will return the latest
+ information.
+@return {Object {java.util.List}} a lists of {@link MicrophoneInfo} representing the active microphones.
+@throws IOException if an error occurs
+*/
+getActiveMicrophones : function(  ) {},
+
+<span id='android-media-AudioRecord-method-registerAudioRecordingCallback'>/**Register a callback to be notified of audio capture changes via a
+</span> {@link android.media.AudioManager.AudioRecordingCallback}. A callback is received when the capture path
+ configuration changes (pre-processing, format, sampling rate...) or capture is
+ silenced/unsilenced by the system.
+@param {Object {Executor}} executor {@link Executor} to handle the callbacks.
+@param {Object {AudioManager.AudioRecordingCallback}} cb non-null callback to register
+*/
+registerAudioRecordingCallback : function(  ) {},
+
+<span id='android-media-AudioRecord-method-unregisterAudioRecordingCallback'>/**Unregister an audio recording callback previously registered with
+</span> {@link #registerAudioRecordingCallback(Executor, android.media.AudioManager.AudioRecordingCallback)}.
+@param {Object {AudioManager.AudioRecordingCallback}} cb non-null callback to unregister
+*/
+unregisterAudioRecordingCallback : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getActiveRecordingConfiguration'>/**Returns the current active audio recording for this audio recorder.
+</span>@return {Object {android.media.AudioRecordingConfiguration}} a valid {@link AudioRecordingConfiguration} if this recorder is active
+ or null otherwise.
+@see AudioRecordingConfiguration
+*/
+getActiveRecordingConfiguration : function(  ) {},
+
+<span id='android-media-AudioRecord-method-getPortId'>/**
+</span>@hide 
+*/
+getPortId : function(  ) {},
+
+<span id='android-media-AudioRecord-method-setPreferredMicrophoneDirection'>/**Specifies the logical microphone (for processing). Applications can use this to specify
+</span> which side of the device to optimize capture from. Typically used in conjunction with
+ the camera capturing video.
+@return {Boolean} true if sucessful.
+*/
+setPreferredMicrophoneDirection : function(  ) {},
+
+<span id='android-media-AudioRecord-method-setPreferredMicrophoneFieldDimension'>/**Specifies the zoom factor (i.e. the field dimension) for the selected microphone
+</span> (for processing). The selected microphone is determined by the use-case for the stream.
+@param {Number} zoom the desired field dimension of microphone capture. Range is from -1 (wide angle),
+ though 0 (no zoom) to 1 (maximum zoom).
+@return {Boolean} true if sucessful.
+*/
+setPreferredMicrophoneFieldDimension : function(  ) {},
+
+<span id='android-media-AudioRecord-method-native_release'>/**
+</span>@hide 
+*/
+native_release : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-DocumentsContract-Document'>/**@class android.provider.DocumentsContract.Document
+</span>@extends java.lang.Object
+
+ Constants related to a document, including {@link Cursor} column names
+ and flags.
+ &lt;p&gt;
+ A document can be either an openable stream (with a specific MIME type),
+ or a directory containing additional documents (with the
+ {@link #MIME_TYPE_DIR} MIME type). A directory represents the top of a
+ subtree containing zero or more documents, which can recursively contain
+ even more documents and directories.
+ &lt;p&gt;
+ All columns are &lt;em&gt;read-only&lt;/em&gt; to client applications.
+*/
+var Document = {
+
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_DOCUMENT_ID'>/** Unique ID of a document. This ID is both provided by and interpreted
+</span> by a {@link android.provider.DocumentsContract.DocumentsProvider}, and should be treated as an opaque
+ value by client applications. This column is required.
+ &lt;p&gt;
+ Each document must have a unique ID within a provider, but that
+ single document may be included as a child of multiple directories.
+ &lt;p&gt;
+ A provider must always return durable IDs, since they will be used to
+ issue long-term URI permission grants when an application interacts
+ with {@link Intent#ACTION_OPEN_DOCUMENT} and
+ {@link Intent#ACTION_CREATE_DOCUMENT}.
+ &lt;p&gt;
+ Type: STRING
+*/
+COLUMN_DOCUMENT_ID : &quot;document_id&quot;,
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_MIME_TYPE'>/** Concrete MIME type of a document. For example, &quot;image/png&quot; or
+</span> &quot;application/pdf&quot; for openable files. A document can also be a
+ directory containing additional documents, which is represented with
+ the {@link #MIME_TYPE_DIR} MIME type. This column is required.
+ &lt;p&gt;
+ Type: STRING
+
+ @see #MIME_TYPE_DIR
+*/
+COLUMN_MIME_TYPE : &quot;mime_type&quot;,
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_DISPLAY_NAME'>/** Display name of a document, used as the primary title displayed to a
+</span> user. This column is required.
+ &lt;p&gt;
+ Type: STRING
+*/
+COLUMN_DISPLAY_NAME : &quot;_display_name&quot;,
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_SUMMARY'>/** Summary of a document, which may be shown to a user. This column is
+</span> optional, and may be {@code null}.
+ &lt;p&gt;
+ Type: STRING
+*/
+COLUMN_SUMMARY : &quot;summary&quot;,
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_LAST_MODIFIED'>/** Timestamp when a document was last modified, in milliseconds since
+</span> January 1, 1970 00:00:00.0 UTC. This column is required, and may be
+ {@code null} if unknown. A {@link android.provider.DocumentsContract.DocumentsProvider} can update this
+ field using events from {@link OnCloseListener} or other reliable
+ {@link ParcelFileDescriptor} transports.
+ &lt;p&gt;
+ Type: INTEGER (long)
+
+ @see System#currentTimeMillis()
+*/
+COLUMN_LAST_MODIFIED : &quot;last_modified&quot;,
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_ICON'>/** Specific icon resource ID for a document. This column is optional,
+</span> and may be {@code null} to use a platform-provided default icon based
+ on {@link #COLUMN_MIME_TYPE}.
+ &lt;p&gt;
+ Type: INTEGER (int)
+*/
+COLUMN_ICON : &quot;icon&quot;,
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_FLAGS'>/** Flags that apply to a document. This column is required.
+</span> &lt;p&gt;
+ Type: INTEGER (int)
+
+ @see #FLAG_SUPPORTS_WRITE
+ @see #FLAG_SUPPORTS_DELETE
+ @see #FLAG_SUPPORTS_THUMBNAIL
+ @see #FLAG_DIR_PREFERS_GRID
+ @see #FLAG_DIR_PREFERS_LAST_MODIFIED
+ @see #FLAG_VIRTUAL_DOCUMENT
+ @see #FLAG_SUPPORTS_COPY
+ @see #FLAG_SUPPORTS_MOVE
+ @see #FLAG_SUPPORTS_REMOVE
+*/
+COLUMN_FLAGS : &quot;flags&quot;,
+<span id='android-provider-DocumentsContract-Document-property-COLUMN_SIZE'>/** Size of a document, in bytes, or {@code null} if unknown. This column
+</span> is required.
+ &lt;p&gt;
+ Type: INTEGER (long)
+*/
+COLUMN_SIZE : &quot;_size&quot;,
+<span id='android-provider-DocumentsContract-Document-property-MIME_TYPE_DIR'>/** MIME type of a document which is a directory that may contain
+</span> additional documents.
+
+ @see #COLUMN_MIME_TYPE
+*/
+MIME_TYPE_DIR : &quot;vnd.android.document/directory&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_THUMBNAIL'>/** Flag indicating that a document can be represented as a thumbnail.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#getDocumentThumbnail(ContentInterface, Uri,
+      Point, CancellationSignal)
+ @see DocumentsProvider#openDocumentThumbnail(String, Point,
+      android.os.CancellationSignal)
+*/
+FLAG_SUPPORTS_THUMBNAIL : &quot;1&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_WRITE'>/** Flag indicating that a document supports writing.
+</span> &lt;p&gt;
+ When a document is opened with {@link Intent#ACTION_OPEN_DOCUMENT},
+ the calling application is granted both
+ {@link Intent#FLAG_GRANT_READ_URI_PERMISSION} and
+ {@link Intent#FLAG_GRANT_WRITE_URI_PERMISSION}. However, the actual
+ writability of a document may change over time, for example due to
+ remote access changes. This flag indicates that a document client can
+ expect {@link ContentResolver#openOutputStream(Uri)} to succeed.
+
+ @see #COLUMN_FLAGS
+*/
+FLAG_SUPPORTS_WRITE : &quot;2&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_DELETE'>/** Flag indicating that a document is deletable.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#deleteDocument(ContentInterface, Uri)
+ @see DocumentsProvider#deleteDocument(String)
+*/
+FLAG_SUPPORTS_DELETE : &quot;4&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_DIR_SUPPORTS_CREATE'>/** Flag indicating that a document is a directory that supports creation
+</span> of new files within it. Only valid when {@link #COLUMN_MIME_TYPE} is
+ {@link #MIME_TYPE_DIR}.
+
+ @see #COLUMN_FLAGS
+ @see DocumentsProvider#createDocument(String, String, String)
+*/
+FLAG_DIR_SUPPORTS_CREATE : &quot;8&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_DIR_PREFERS_GRID'>/** Flag indicating that a directory prefers its contents be shown in a
+</span> larger format grid. Usually suitable when a directory contains mostly
+ pictures. Only valid when {@link #COLUMN_MIME_TYPE} is
+ {@link #MIME_TYPE_DIR}.
+
+ @see #COLUMN_FLAGS
+*/
+FLAG_DIR_PREFERS_GRID : &quot;16&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_DIR_PREFERS_LAST_MODIFIED'>/** Flag indicating that a directory prefers its contents be sorted by
+</span> {@link #COLUMN_LAST_MODIFIED}. Only valid when
+ {@link #COLUMN_MIME_TYPE} is {@link #MIME_TYPE_DIR}.
+
+ @see #COLUMN_FLAGS
+*/
+FLAG_DIR_PREFERS_LAST_MODIFIED : &quot;32&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_RENAME'>/** Flag indicating that a document can be renamed.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#renameDocument(ContentInterface, Uri, String)
+ @see DocumentsProvider#renameDocument(String, String)
+*/
+FLAG_SUPPORTS_RENAME : &quot;64&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_COPY'>/** Flag indicating that a document can be copied to another location
+</span> within the same document provider.
+
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#copyDocument(ContentInterface, Uri, Uri)
+ @see DocumentsProvider#copyDocument(String, String)
+*/
+FLAG_SUPPORTS_COPY : &quot;128&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_MOVE'>/** Flag indicating that a document can be moved to another location
+</span> within the same document provider.
+
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#moveDocument(ContentInterface, Uri, Uri, Uri)
+ @see DocumentsProvider#moveDocument(String, String, String)
+*/
+FLAG_SUPPORTS_MOVE : &quot;256&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_VIRTUAL_DOCUMENT'>/** Flag indicating that a document is virtual, and doesn't have byte
+</span> representation in the MIME type specified as {@link #COLUMN_MIME_TYPE}.
+
+ &lt;p&gt;&lt;em&gt;Virtual documents must have at least one alternative streamable
+ format via {@link android.provider.DocumentsContract.DocumentsProvider#openTypedandroid.provider.DocumentsContract.Document}&lt;/em&gt;
+
+ @see #COLUMN_FLAGS
+ @see #COLUMN_MIME_TYPE
+ @see DocumentsProvider#openTypedDocument(String, String, Bundle,
+      android.os.CancellationSignal)
+ @see DocumentsProvider#getDocumentStreamTypes(String, String)
+*/
+FLAG_VIRTUAL_DOCUMENT : &quot;512&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_REMOVE'>/** Flag indicating that a document can be removed from a parent.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#removeDocument(ContentInterface, Uri, Uri)
+ @see DocumentsProvider#removeDocument(String, String)
+*/
+FLAG_SUPPORTS_REMOVE : &quot;1024&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_SETTINGS'>/** Flag indicating that a document has settings that can be configured by user.
+</span>
+ @see #COLUMN_FLAGS
+ @see #ACTION_DOCUMENT_SETTINGS
+*/
+FLAG_SUPPORTS_SETTINGS : &quot;2048&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_WEB_LINKABLE'>/** Flag indicating that a Web link can be obtained for the document.
+</span>
+ @see #COLUMN_FLAGS
+ @see DocumentsProvider#createWebLinkIntent(String, Bundle)
+*/
+FLAG_WEB_LINKABLE : &quot;4096&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_PARTIAL'>/** Flag indicating that a document is not complete, likely its
+</span> contents are being downloaded. Partial files cannot be opened,
+ copied, moved in the UI. But they can be deleted and retried
+ if they represent a failed download.
+
+ @see #COLUMN_FLAGS
+*/
+FLAG_PARTIAL : &quot;8192&quot;,
+<span id='android-provider-DocumentsContract-Document-property-FLAG_SUPPORTS_METADATA'>/** Flag indicating that a document has available metadata that can be read
+</span> using DocumentsContract#getDocumentMetadata
+
+ @see #COLUMN_FLAGS
+ @see DocumentsContract#getDocumentMetadata(ContentInterface, Uri)
+*/
+FLAG_SUPPORTS_METADATA : &quot;16384&quot;,
+
+};</pre>
+</body>
+</html>

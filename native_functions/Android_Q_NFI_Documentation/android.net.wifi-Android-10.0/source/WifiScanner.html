@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-WifiScanner'>/**@class android.net.wifi.WifiScanner
+</span>@extends java.lang.Object
+
+ This class provides a way to scan the Wifi universe around the device
+ @hide
+*/
+var WifiScanner = {
+
+<span id='android-net-wifi-WifiScanner-property-WIFI_BAND_UNSPECIFIED'>/**no band specified; use channel list instead */
+</span>WIFI_BAND_UNSPECIFIED : &quot;0&quot;,
+<span id='android-net-wifi-WifiScanner-property-WIFI_BAND_24_GHZ'>/**2.4 GHz band */
+</span>WIFI_BAND_24_GHZ : &quot;1&quot;,
+<span id='android-net-wifi-WifiScanner-property-WIFI_BAND_5_GHZ'>/**5 GHz band excluding DFS channels */
+</span>WIFI_BAND_5_GHZ : &quot;2&quot;,
+<span id='android-net-wifi-WifiScanner-property-WIFI_BAND_5_GHZ_DFS_ONLY'>/**DFS channels from 5 GHz band only */
+</span>WIFI_BAND_5_GHZ_DFS_ONLY : &quot;4&quot;,
+<span id='android-net-wifi-WifiScanner-property-WIFI_BAND_5_GHZ_WITH_DFS'>/**5 GHz band including DFS channels */
+</span>WIFI_BAND_5_GHZ_WITH_DFS : &quot;6&quot;,
+<span id='android-net-wifi-WifiScanner-property-WIFI_BAND_BOTH'>/**Both 2.4 GHz band and 5 GHz band; no DFS channels */
+</span>WIFI_BAND_BOTH : &quot;3&quot;,
+<span id='android-net-wifi-WifiScanner-property-WIFI_BAND_BOTH_WITH_DFS'>/**Both 2.4 GHz band and 5 GHz band; with DFS channels */
+</span>WIFI_BAND_BOTH_WITH_DFS : &quot;7&quot;,
+<span id='android-net-wifi-WifiScanner-property-MIN_SCAN_PERIOD_MS'>/**Minimum supported scanning period */
+</span>MIN_SCAN_PERIOD_MS : &quot;1000&quot;,
+<span id='android-net-wifi-WifiScanner-property-MAX_SCAN_PERIOD_MS'>/**Maximum supported scanning period */
+</span>MAX_SCAN_PERIOD_MS : &quot;1024000&quot;,
+<span id='android-net-wifi-WifiScanner-property-REASON_SUCCEEDED'>/**No Error */
+</span>REASON_SUCCEEDED : &quot;0&quot;,
+<span id='android-net-wifi-WifiScanner-property-REASON_UNSPECIFIED'>/**Unknown error */
+</span>REASON_UNSPECIFIED : &quot;-1&quot;,
+<span id='android-net-wifi-WifiScanner-property-REASON_INVALID_LISTENER'>/**Invalid listener */
+</span>REASON_INVALID_LISTENER : &quot;-2&quot;,
+<span id='android-net-wifi-WifiScanner-property-REASON_INVALID_REQUEST'>/**Invalid request */
+</span>REASON_INVALID_REQUEST : &quot;-3&quot;,
+<span id='android-net-wifi-WifiScanner-property-REASON_NOT_AUTHORIZED'>/**Invalid request */
+</span>REASON_NOT_AUTHORIZED : &quot;-4&quot;,
+<span id='android-net-wifi-WifiScanner-property-REASON_DUPLICATE_REQEUST'>/**An outstanding request with the same listener hasn't finished yet. */
+</span>REASON_DUPLICATE_REQEUST : &quot;-5&quot;,
+<span id='android-net-wifi-WifiScanner-property-GET_AVAILABLE_CHANNELS_EXTRA'>/**@hide */
+</span>GET_AVAILABLE_CHANNELS_EXTRA : &quot;Channels&quot;,
+<span id='android-net-wifi-WifiScanner-property-REPORT_EVENT_AFTER_BUFFER_FULL'>/** reports {@link android.net.wifi.WifiScanner.ScanListener#onResults} when underlying buffers are full
+</span> this is simply the lack of the {@link #REPORT_EVENT_AFTER_EACH_SCAN} flag
+ @deprecated It is not supported anymore.
+*/
+REPORT_EVENT_AFTER_BUFFER_FULL : &quot;0&quot;,
+<span id='android-net-wifi-WifiScanner-property-REPORT_EVENT_AFTER_EACH_SCAN'>/** reports {@link android.net.wifi.WifiScanner.ScanListener#onResults} after each scan
+</span>*/
+REPORT_EVENT_AFTER_EACH_SCAN : &quot;1&quot;,
+<span id='android-net-wifi-WifiScanner-property-REPORT_EVENT_FULL_SCAN_RESULT'>/** reports {@link android.net.wifi.WifiScanner.ScanListener#onFullResult} whenever each beacon is discovered
+</span>*/
+REPORT_EVENT_FULL_SCAN_RESULT : &quot;2&quot;,
+<span id='android-net-wifi-WifiScanner-property-REPORT_EVENT_NO_BATCH'>/** Do not place scans in the chip's scan history buffer
+</span>*/
+REPORT_EVENT_NO_BATCH : &quot;4&quot;,
+<span id='android-net-wifi-WifiScanner-property-TYPE_LOW_LATENCY'>/**{@hide} */
+</span>TYPE_LOW_LATENCY : &quot;0&quot;,
+<span id='android-net-wifi-WifiScanner-property-TYPE_LOW_POWER'>/**{@hide} */
+</span>TYPE_LOW_POWER : &quot;1&quot;,
+<span id='android-net-wifi-WifiScanner-property-TYPE_HIGH_ACCURACY'>/**{@hide} */
+</span>TYPE_HIGH_ACCURACY : &quot;2&quot;,
+<span id='android-net-wifi-WifiScanner-property-SCAN_PARAMS_SCAN_SETTINGS_KEY'>/**{@hide} */
+</span>SCAN_PARAMS_SCAN_SETTINGS_KEY : &quot;ScanSettings&quot;,
+<span id='android-net-wifi-WifiScanner-property-SCAN_PARAMS_WORK_SOURCE_KEY'>/**{@hide} */
+</span>SCAN_PARAMS_WORK_SOURCE_KEY : &quot;WorkSource&quot;,
+<span id='android-net-wifi-WifiScanner-property-REQUEST_PACKAGE_NAME_KEY'>/**{@hide} */
+</span>REQUEST_PACKAGE_NAME_KEY : &quot;PackageName&quot;,
+<span id='android-net-wifi-WifiScanner-property-PNO_PARAMS_PNO_SETTINGS_KEY'>/**{@hide} */
+</span>PNO_PARAMS_PNO_SETTINGS_KEY : &quot;PnoSettings&quot;,
+<span id='android-net-wifi-WifiScanner-property-PNO_PARAMS_SCAN_SETTINGS_KEY'>/**{@hide} */
+</span>PNO_PARAMS_SCAN_SETTINGS_KEY : &quot;ScanSettings&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_START_BACKGROUND_SCAN'>/**@hide */
+</span>CMD_START_BACKGROUND_SCAN : &quot;159746&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_STOP_BACKGROUND_SCAN'>/**@hide */
+</span>CMD_STOP_BACKGROUND_SCAN : &quot;159747&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_GET_SCAN_RESULTS'>/**@hide */
+</span>CMD_GET_SCAN_RESULTS : &quot;159748&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_SCAN_RESULT'>/**@hide */
+</span>CMD_SCAN_RESULT : &quot;159749&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_OP_SUCCEEDED'>/**@hide */
+</span>CMD_OP_SUCCEEDED : &quot;159761&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_OP_FAILED'>/**@hide */
+</span>CMD_OP_FAILED : &quot;159762&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_FULL_SCAN_RESULT'>/**@hide */
+</span>CMD_FULL_SCAN_RESULT : &quot;159764&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_START_SINGLE_SCAN'>/**@hide */
+</span>CMD_START_SINGLE_SCAN : &quot;159765&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_STOP_SINGLE_SCAN'>/**@hide */
+</span>CMD_STOP_SINGLE_SCAN : &quot;159766&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_SINGLE_SCAN_COMPLETED'>/**@hide */
+</span>CMD_SINGLE_SCAN_COMPLETED : &quot;159767&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_START_PNO_SCAN'>/**@hide */
+</span>CMD_START_PNO_SCAN : &quot;159768&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_STOP_PNO_SCAN'>/**@hide */
+</span>CMD_STOP_PNO_SCAN : &quot;159769&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_PNO_NETWORK_FOUND'>/**@hide */
+</span>CMD_PNO_NETWORK_FOUND : &quot;159770&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_REGISTER_SCAN_LISTENER'>/**@hide */
+</span>CMD_REGISTER_SCAN_LISTENER : &quot;159771&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_DEREGISTER_SCAN_LISTENER'>/**@hide */
+</span>CMD_DEREGISTER_SCAN_LISTENER : &quot;159772&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_GET_SINGLE_SCAN_RESULTS'>/**@hide */
+</span>CMD_GET_SINGLE_SCAN_RESULTS : &quot;159773&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_ENABLE'>/**@hide */
+</span>CMD_ENABLE : &quot;159774&quot;,
+<span id='android-net-wifi-WifiScanner-property-CMD_DISABLE'>/**@hide */
+</span>CMD_DISABLE : &quot;159775&quot;,
+<span id='android-net-wifi-WifiScanner-method-getAvailableChannels'>/**gives you all the possible channels; channel is specified as an
+</span> integer with frequency in MHz i.e. channel 1 is 2412
+@hide 
+*/
+getAvailableChannels : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-setScanningEnabled'>/**Enable/Disable wifi scanning.
+</span>
+ {@hide}
+*/
+setScanningEnabled : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-registerScanListener'>/**Register a listener that will receive results from all single scans
+</span> Either the onSuccess/onFailure will be called once when the listener is registered. After
+ (assuming onSuccess was called) all subsequent single scan results will be delivered to the
+ listener. It is possible that onFullResult will not be called for all results of the first
+ scan if the listener was registered during the scan.
+@param {Object {WifiScanner.ScanListener}} listener specifies the object to report events to. This object is also treated as a
+                 key for this request, and must also be specified to cancel the request.
+                 Multiple requests should also not share this object.
+ {@hide}
+*/
+registerScanListener : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-deregisterScanListener'>/**Deregister a listener for ongoing single scans
+</span>@param {Object {WifiScanner.ScanListener}} listener specifies which scan to cancel; must be same object as passed in {@link
+  #registerScanListener}
+ {@hide}
+*/
+deregisterScanListener : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startBackgroundScan'>/**start wifi scan in background
+</span>@param {Object {WifiScanner.ScanSettings}} settings specifies various parameters for the scan; for more information look at
+ {@link ScanSettings}
+@param {Object {WifiScanner.ScanListener}} listener specifies the object to report events to. This object is also treated as a
+                 key for this scan, and must also be specified to cancel the scan. Multiple
+                 scans should also not share this object.
+*/
+startBackgroundScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startBackgroundScan'>/**start wifi scan in background
+</span>@param {Object {WifiScanner.ScanSettings}} settings specifies various parameters for the scan; for more information look at
+ {@link ScanSettings}
+@param {Object {WifiScanner.ScanListener}} workSource WorkSource to blame for power usage
+@param {Object {WorkSource}} listener specifies the object to report events to. This object is also treated as a
+                 key for this scan, and must also be specified to cancel the scan. Multiple
+                 scans should also not share this object.
+*/
+startBackgroundScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-stopBackgroundScan'>/**stop an ongoing wifi scan
+</span>@param {Object {WifiScanner.ScanListener}} listener specifies which scan to cancel; must be same object as passed in {@link
+  #startBackgroundScan}
+*/
+stopBackgroundScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-getScanResults'>/**reports currently available scan results on appropriate listeners
+</span>@return {Boolean} true if all scan results were reported correctly
+*/
+getScanResults : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startScan'>/**starts a single scan and reports results asynchronously
+</span>@param {Object {WifiScanner.ScanSettings}} settings specifies various parameters for the scan; for more information look at
+ {@link ScanSettings}
+@param {Object {WifiScanner.ScanListener}} listener specifies the object to report events to. This object is also treated as a
+                 key for this scan, and must also be specified to cancel the scan. Multiple
+                 scans should also not share this object.
+*/
+startScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startScan'>/**starts a single scan and reports results asynchronously
+</span>@param {Object {WifiScanner.ScanSettings}} settings specifies various parameters for the scan; for more information look at
+ {@link ScanSettings}
+@param {Object {WifiScanner.ScanListener}} workSource WorkSource to blame for power usage
+@param {Object {WorkSource}} listener specifies the object to report events to. This object is also treated as a
+                 key for this scan, and must also be specified to cancel the scan. Multiple
+                 scans should also not share this object.
+*/
+startScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-stopScan'>/**stops an ongoing single shot scan; only useful after {@link #startScan} if onResults()
+</span> hasn't been called on the listener, ignored otherwise
+@param {Object {WifiScanner.ScanListener}} listener
+*/
+stopScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-getSingleScanResults'>/**Retrieve the most recent scan results from a single scan request.
+</span> {@hide}
+*/
+getSingleScanResults : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startConnectedPnoScan'>/**Start wifi connected PNO scan
+</span>@param {Object {WifiScanner.ScanSettings}} scanSettings specifies various parameters for the scan; for more information look at
+ {@link ScanSettings}
+@param {Object {WifiScanner.PnoSettings}} pnoSettings specifies various parameters for PNO; for more information look at
+ {@link PnoSettings}
+@param {Object {WifiScanner.PnoScanListener}} listener specifies the object to report events to. This object is also treated as a
+                 key for this scan, and must also be specified to cancel the scan. Multiple
+                 scans should also not share this object.
+ {@hide}
+*/
+startConnectedPnoScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startDisconnectedPnoScan'>/**Start wifi disconnected PNO scan
+</span>@param {Object {WifiScanner.ScanSettings}} scanSettings specifies various parameters for the scan; for more information look at
+ {@link ScanSettings}
+@param {Object {WifiScanner.PnoSettings}} pnoSettings specifies various parameters for PNO; for more information look at
+ {@link PnoSettings}
+@param {Object {WifiScanner.PnoScanListener}} listener specifies the object to report events to. This object is also treated as a
+                 key for this scan, and must also be specified to cancel the scan. Multiple
+                 scans should also not share this object.
+ {@hide}
+*/
+startDisconnectedPnoScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-stopPnoScan'>/**Stop an ongoing wifi PNO scan
+</span>@param {Object {WifiScanner.ScanListener}} listener specifies which scan to cancel; must be same object as passed in {@link
+  #startPnoScan}
+ {@hide}
+*/
+stopPnoScan : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-configureWifiChange'>/**configure WifiChange detection
+</span>@param {Number} rssiSampleSize number of samples used for RSSI averaging
+@param {Number} lostApSampleSize number of samples to confirm an access point's loss
+@param {Number} unchangedSampleSize number of samples to confirm there are no changes
+@param {Number} minApsBreachingThreshold minimum number of access points that need to be
+                                 out of range to detect WifiChange
+@param {Number} periodInMs indicates period of scan to find changes
+@param {Object {android.net.wifi.WifiScanner.BssidInfo[]}} bssidInfos access points to watch
+*/
+configureWifiChange : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startTrackingWifiChange'>/**track changes in wifi environment
+</span>@param {Object {WifiScanner.WifiChangeListener}} listener object to report events on; this object must be unique and must also be
+                 provided on {@link #stopTrackingWifiChange}
+*/
+startTrackingWifiChange : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-stopTrackingWifiChange'>/**stop tracking changes in wifi environment
+</span>@param {Object {WifiScanner.WifiChangeListener}} listener object that was provided to report events on {@link
+ #stopTrackingWifiChange}
+*/
+stopTrackingWifiChange : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-configureWifiChange'>/**
+</span>@hide 
+*/
+configureWifiChange : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-startTrackingBssids'>/**set interesting access points to find
+</span>@param {Object {android.net.wifi.WifiScanner.BssidInfo[]}} bssidInfos access points of interest
+@param {Number} apLostThreshold number of scans needed to indicate that AP is lost
+@param {Object {WifiScanner.BssidListener}} listener object provided to report events on; this object must be unique and must
+                 also be provided on {@link #stopTrackingBssids}
+*/
+startTrackingBssids : function(  ) {},
+
+<span id='android-net-wifi-WifiScanner-method-stopTrackingBssids'>/**remove tracking of interesting access points
+</span>@param {Object {WifiScanner.BssidListener}} listener same object provided in {@link #startTrackingBssids}
+*/
+stopTrackingBssids : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

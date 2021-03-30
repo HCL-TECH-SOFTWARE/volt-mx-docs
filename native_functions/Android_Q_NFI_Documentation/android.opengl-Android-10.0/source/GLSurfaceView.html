@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-opengl-GLSurfaceView'>/**@class android.opengl.GLSurfaceView
+</span> implements android.view.SurfaceHolder.Callback2
+
+@extends android.view.SurfaceView
+
+ An implementation of SurfaceView that uses the dedicated surface for
+ displaying OpenGL rendering.
+ &lt;p&gt;
+ A GLSurfaceView provides the following features:
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Manages a surface, which is a special piece of memory that can be
+ composited into the Android view system.
+ &lt;li&gt;Manages an EGL display, which enables OpenGL to render into a surface.
+ &lt;li&gt;Accepts a user-provided Renderer object that does the actual rendering.
+ &lt;li&gt;Renders on a dedicated thread to decouple rendering performance from the
+ UI thread.
+ &lt;li&gt;Supports both on-demand and continuous rendering.
+ &lt;li&gt;Optionally wraps, traces, and/or error-checks the renderer's OpenGL calls.
+ &lt;/ul&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about how to use OpenGL, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/graphics/opengl.html&quot;&gt;OpenGL&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;h3&gt;Using GLSurfaceView&lt;/h3&gt;
+ &lt;p&gt;
+ Typically you use GLSurfaceView by subclassing it and overriding one or more of the
+ View system input event methods. If your application does not need to override event
+ methods then GLSurfaceView can be used as-is. For the most part
+ GLSurfaceView behavior is customized by calling &quot;set&quot; methods rather than by subclassing.
+ For example, unlike a regular View, drawing is delegated to a separate Renderer object which
+ is registered with the GLSurfaceView
+ using the {@link #setRenderer}(Renderer) call.
+ &lt;p&gt;
+ &lt;h3&gt;Initializing GLSurfaceView&lt;/h3&gt;
+ All you have to do to initialize a GLSurfaceView is call {@link #setRenderer}(Renderer).
+ However, if desired, you can modify the default behavior of GLSurfaceView by calling one or
+ more of these methods before calling setRenderer:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #setDebugFlags}(int)
+ &lt;li&gt;{@link #setEGLConfigChooser}(boolean)
+ &lt;li&gt;{@link #setEGLConfigChooser}(EGLConfigChooser)
+ &lt;li&gt;{@link #setEGLConfigChooser(int, int, int, int, int, int)}
+ &lt;li&gt;{@link #setGLWrapper}(GLWrapper)
+ &lt;/ul&gt;
+ &lt;p&gt;
+ &lt;h4&gt;Specifying the android.view.Surface&lt;/h4&gt;
+ By default GLSurfaceView will create a PixelFormat.RGB_888 format surface. If a translucent
+ surface is required, call getHolder().setFormat(PixelFormat.TRANSLUCENT).
+ The exact format of a TRANSLUCENT surface is device dependent, but it will be
+ a 32-bit-per-pixel surface with 8 bits per component.
+ &lt;p&gt;
+ &lt;h4&gt;Choosing an EGL Configuration&lt;/h4&gt;
+ A given Android device may support multiple EGLConfig rendering configurations.
+ The available configurations may differ in how many channels of data are present, as
+ well as how many bits are allocated to each channel. Therefore, the first thing
+ GLSurfaceView has to do when starting to render is choose what EGLConfig to use.
+ &lt;p&gt;
+ By default GLSurfaceView chooses a EGLConfig that has an RGB_888 pixel format,
+ with at least a 16-bit depth buffer and no stencil.
+ &lt;p&gt;
+ If you would prefer a different EGLConfig
+ you can override the default behavior by calling one of the
+ setEGLConfigChooser methods.
+ &lt;p&gt;
+ &lt;h4&gt;Debug Behavior&lt;/h4&gt;
+ You can optionally modify the behavior of GLSurfaceView by calling
+ one or more of the debugging methods {@link #setDebugFlags}(int),
+ and {@link #setGLWrapper}. These methods may be called before and/or after setRenderer, but
+ typically they are called before setRenderer so that they take effect immediately.
+ &lt;p&gt;
+ &lt;h4&gt;Setting a Renderer&lt;/h4&gt;
+ Finally, you must call {@link #setRenderer} to register a {@link android.opengl.GLSurfaceView.Renderer}.
+ The renderer is
+ responsible for doing the actual OpenGL rendering.
+ &lt;p&gt;
+ &lt;h3&gt;Rendering Mode&lt;/h3&gt;
+ Once the renderer is set, you can control whether the renderer draws
+ continuously or on-demand by calling
+ {@link #setRenderMode}. The default is continuous rendering.
+ &lt;p&gt;
+ &lt;h3&gt;Activity Life-cycle&lt;/h3&gt;
+ A GLSurfaceView must be notified when to pause and resume rendering. GLSurfaceView clients
+ are required to call {@link #onPause}() when the activity stops and
+ {@link #onResume}() when the activity starts. These calls allow GLSurfaceView to
+ pause and resume the rendering thread, and also allow GLSurfaceView to release and recreate
+ the OpenGL display.
+ &lt;p&gt;
+ &lt;h3&gt;Handling events&lt;/h3&gt;
+ &lt;p&gt;
+ To handle an event you will typically subclass GLSurfaceView and override the
+ appropriate method, just as you would with any other View. However, when handling
+ the event, you may need to communicate with the Renderer object
+ that's running in the rendering thread. You can do this using any
+ standard Java cross-thread communication mechanism. In addition,
+ one relatively easy way to communicate with your renderer is
+ to call
+ {@link #queueEvent}(Runnable). For example:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ class MyGLSurfaceView extends GLSurfaceView {
+
+     private MyRenderer mMyRenderer;
+
+     public void start() {
+         mMyRenderer = ...;
+         setRenderer(mMyRenderer);
+     }
+
+     public boolean onKeyDown(int keyCode, KeyEvent event) {
+         if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+             queueEvent(new Runnable() {
+                 // This method will be called on the rendering
+                 // thread:
+                 public void run() {
+                     mMyRenderer.handleDpadCenter();
+                 }});
+             return true;
+         }
+         return super.onKeyDown(keyCode, event);
+     }
+ }
+ &lt;/pre&gt;
+
+*/
+var GLSurfaceView = {
+
+<span id='android-opengl-GLSurfaceView-property-RENDERMODE_WHEN_DIRTY'>/** The renderer only renders
+</span> when the surface is created, or when {@link #requestRender} is called.
+
+ @see #getRenderMode()
+ @see #setRenderMode(int)
+ @see #requestRender()
+*/
+RENDERMODE_WHEN_DIRTY : &quot;0&quot;,
+<span id='android-opengl-GLSurfaceView-property-RENDERMODE_CONTINUOUSLY'>/** The renderer is called
+</span> continuously to re-render the scene.
+
+ @see #getRenderMode()
+ @see #setRenderMode(int)
+*/
+RENDERMODE_CONTINUOUSLY : &quot;1&quot;,
+<span id='android-opengl-GLSurfaceView-property-DEBUG_CHECK_GL_ERROR'>/** Check glError() after every GL call and throw an exception if glError indicates
+</span> that an error has occurred. This can be used to help track down which OpenGL ES call
+ is causing an error.
+
+ @see #getDebugFlags
+ @see #setDebugFlags
+*/
+DEBUG_CHECK_GL_ERROR : &quot;1&quot;,
+<span id='android-opengl-GLSurfaceView-property-DEBUG_LOG_GL_CALLS'>/** Log GL calls to the system log at &quot;verbose&quot; level with tag &quot;GLSurfaceView&quot;.
+</span>
+ @see #getDebugFlags
+ @see #setDebugFlags
+*/
+DEBUG_LOG_GL_CALLS : &quot;2&quot;,
+<span id='android-opengl-GLSurfaceView-method-setGLWrapper'>/**Set the glWrapper. If the glWrapper is not null, its
+</span> {@link android.opengl.GLSurfaceView.GLWrapper#wrap(GL)} method is called
+ whenever a surface is created. A GLWrapper can be used to wrap
+ the GL object that's passed to the renderer. Wrapping a GL
+ object enables examining and modifying the behavior of the
+ GL calls made by the renderer.
+ &lt;p&gt;
+ Wrapping is typically used for debugging purposes.
+ &lt;p&gt;
+ The default value is null.
+@param {Object {GLSurfaceView.GLWrapper}} glWrapper the new GLWrapper
+*/
+setGLWrapper : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setDebugFlags'>/**Set the debug flags to a new value. The value is
+</span> constructed by OR-together zero or more
+ of the DEBUG_CHECK_* constants. The debug flags take effect
+ whenever a surface is created. The default value is zero.
+@param {Number} debugFlags the new debug flags
+@see #DEBUG_CHECK_GL_ERROR
+@see #DEBUG_LOG_GL_CALLS
+*/
+setDebugFlags : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-getDebugFlags'>/**Get the current value of the debug flags.
+</span>@return {Number} the current value of the debug flags.
+*/
+getDebugFlags : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setPreserveEGLContextOnPause'>/**Control whether the EGL context is preserved when the GLSurfaceView is paused and
+</span> resumed.
+ &lt;p&gt;
+ If set to true, then the EGL context may be preserved when the GLSurfaceView is paused.
+ &lt;p&gt;
+ Prior to API level 11, whether the EGL context is actually preserved or not
+ depends upon whether the Android device can support an arbitrary number of
+ EGL contexts or not. Devices that can only support a limited number of EGL
+ contexts must release the EGL context in order to allow multiple applications
+ to share the GPU.
+ &lt;p&gt;
+ If set to false, the EGL context will be released when the GLSurfaceView is paused,
+ and recreated when the GLSurfaceView is resumed.
+ &lt;p&gt;
+
+ The default is false.
+@param {Boolean} preserveOnPause preserve the EGL context when paused
+*/
+setPreserveEGLContextOnPause : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-getPreserveEGLContextOnPause'>/**
+</span>@return {Boolean} true if the EGL context will be preserved when paused
+*/
+getPreserveEGLContextOnPause : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setRenderer'>/**Set the renderer associated with this view. Also starts the thread that
+</span> will call the renderer, which in turn causes the rendering to start.
+ &lt;p&gt;This method should be called once and only once in the life-cycle of
+ a GLSurfaceView.
+ &lt;p&gt;The following GLSurfaceView methods can only be called &lt;em&gt;before&lt;/em&gt;
+ setRenderer is called:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #setEGLConfigChooser}(boolean)
+ &lt;li&gt;{@link #setEGLConfigChooser}(EGLConfigChooser)
+ &lt;li&gt;{@link #setEGLConfigChooser(int, int, int, int, int, int)}
+ &lt;/ul&gt;
+ &lt;p&gt;
+ The following GLSurfaceView methods can only be called &lt;em&gt;after&lt;/em&gt;
+ setRenderer is called:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #getRenderMode}()
+ &lt;li&gt;{@link #onPause}()
+ &lt;li&gt;{@link #onResume}()
+ &lt;li&gt;{@link #queueEvent}(Runnable)
+ &lt;li&gt;{@link #requestRender}()
+ &lt;li&gt;{@link #setRenderMode}(int)
+ &lt;/ul&gt;
+@param {Object {GLSurfaceView.Renderer}} renderer the renderer to use to perform OpenGL drawing.
+*/
+setRenderer : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setEGLContextFactory'>/**Install a custom EGLContextFactory.
+</span> &lt;p&gt;If this method is
+ called, it must be called before {@link #setRenderer}(Renderer)
+ is called.
+ &lt;p&gt;
+ If this method is not called, then by default
+ a context will be created with no shared context and
+ with a null attribute list.
+*/
+setEGLContextFactory : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setEGLWindowSurfaceFactory'>/**Install a custom EGLWindowSurfaceFactory.
+</span> &lt;p&gt;If this method is
+ called, it must be called before {@link #setRenderer}(Renderer)
+ is called.
+ &lt;p&gt;
+ If this method is not called, then by default
+ a window surface will be created with a null attribute list.
+*/
+setEGLWindowSurfaceFactory : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setEGLConfigChooser'>/**Install a custom EGLConfigChooser.
+</span> &lt;p&gt;If this method is
+ called, it must be called before {@link #setRenderer}(Renderer)
+ is called.
+ &lt;p&gt;
+ If no setEGLConfigChooser method is called, then by default the
+ view will choose an EGLConfig that is compatible with the current
+ android.view.Surface, with a depth buffer depth of
+ at least 16 bits.
+@param {Object {GLSurfaceView.EGLConfigChooser}} configChooser
+*/
+setEGLConfigChooser : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setEGLConfigChooser'>/**Install a config chooser which will choose a config
+</span> as close to 16-bit RGB as possible, with or without an optional depth
+ buffer as close to 16-bits as possible.
+ &lt;p&gt;If this method is
+ called, it must be called before {@link #setRenderer}(Renderer)
+ is called.
+ &lt;p&gt;
+ If no setEGLConfigChooser method is called, then by default the
+ view will choose an RGB_888 surface with a depth buffer depth of
+ at least 16 bits.
+@param {Boolean} needDepth
+*/
+setEGLConfigChooser : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setEGLConfigChooser'>/**Install a config chooser which will choose a config
+</span> with at least the specified depthSize and stencilSize,
+ and exactly the specified redSize, greenSize, blueSize and alphaSize.
+ &lt;p&gt;If this method is
+ called, it must be called before {@link #setRenderer}(Renderer)
+ is called.
+ &lt;p&gt;
+ If no setEGLConfigChooser method is called, then by default the
+ view will choose an RGB_888 surface with a depth buffer depth of
+ at least 16 bits.
+*/
+setEGLConfigChooser : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setEGLContextClientVersion'>/**Inform the default EGLContextFactory and default EGLConfigChooser
+</span> which EGLContext client version to pick.
+ &lt;p&gt;Use this method to create an OpenGL ES 2.0-compatible context.
+ Example:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     public MyView(Context context) {
+         super(context);
+         setEGLContextClientVersion(2); // Pick an OpenGL ES 2.0 context.
+         setRenderer(new MyRenderer());
+     }
+ &lt;/pre&gt;
+ &lt;p&gt;Note: Activities which require OpenGL ES 2.0 should indicate this by
+ setting @lt;uses-feature android:glEsVersion=&quot;0x00020000&quot; /&gt; in the activity's
+ AndroidManifest.xml file.
+ &lt;p&gt;If this method is called, it must be called before {@link #setRenderer}(Renderer)
+ is called.
+ &lt;p&gt;This method only affects the behavior of the default EGLContexFactory and the
+ default EGLConfigChooser. If
+ {@link #setEGLContextFactory}(EGLContextFactory) has been called, then the supplied
+ EGLContextFactory is responsible for creating an OpenGL ES 2.0-compatible context.
+ If
+ {@link #setEGLConfigChooser}(EGLConfigChooser) has been called, then the supplied
+ EGLConfigChooser is responsible for choosing an OpenGL ES 2.0-compatible config.
+@param {Number} version The EGLContext client version to choose. Use 2 for OpenGL ES 2.0
+*/
+setEGLContextClientVersion : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-setRenderMode'>/**Set the rendering mode. When renderMode is
+</span> RENDERMODE_CONTINUOUSLY, the renderer is called
+ repeatedly to re-render the scene. When renderMode
+ is RENDERMODE_WHEN_DIRTY, the renderer only rendered when the surface
+ is created, or when {@link #requestRender} is called. Defaults to RENDERMODE_CONTINUOUSLY.
+ &lt;p&gt;
+ Using RENDERMODE_WHEN_DIRTY can improve battery life and overall system performance
+ by allowing the GPU and CPU to idle when the view does not need to be updated.
+ &lt;p&gt;
+ This method can only be called after {@link #setRenderer}(Renderer)
+@param {Number} renderMode one of the RENDERMODE_X constants
+@see #RENDERMODE_CONTINUOUSLY
+@see #RENDERMODE_WHEN_DIRTY
+*/
+setRenderMode : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-getRenderMode'>/**Get the current rendering mode. May be called
+</span> from any thread. Must not be called before a renderer has been set.
+@return {Number} the current rendering mode.
+@see #RENDERMODE_CONTINUOUSLY
+@see #RENDERMODE_WHEN_DIRTY
+*/
+getRenderMode : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-requestRender'>/**Request that the renderer render a frame.
+</span> This method is typically used when the render mode has been set to
+ {@link #RENDERMODE_WHEN_DIRTY}, so that frames are only rendered on demand.
+ May be called
+ from any thread. Must not be called before a renderer has been set.
+*/
+requestRender : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-surfaceCreated'>/**This method is part of the SurfaceHolder.Callback interface, and is
+</span> not normally called or subclassed by clients of GLSurfaceView.
+*/
+surfaceCreated : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-surfaceDestroyed'>/**This method is part of the SurfaceHolder.Callback interface, and is
+</span> not normally called or subclassed by clients of GLSurfaceView.
+*/
+surfaceDestroyed : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-surfaceChanged'>/**This method is part of the SurfaceHolder.Callback interface, and is
+</span> not normally called or subclassed by clients of GLSurfaceView.
+*/
+surfaceChanged : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-surfaceRedrawNeededAsync'>/**This method is part of the SurfaceHolder.Callback2 interface, and is
+</span> not normally called or subclassed by clients of GLSurfaceView.
+*/
+surfaceRedrawNeededAsync : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-surfaceRedrawNeeded'>/**This method is part of the SurfaceHolder.Callback2 interface, and is
+</span> not normally called or subclassed by clients of GLSurfaceView.
+*/
+surfaceRedrawNeeded : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-onPause'>/**Pause the rendering thread, optionally tearing down the EGL context
+</span> depending upon the value of {@link #setPreserveEGLContextOnPause}(boolean).
+
+ This method should be called when it is no longer desirable for the
+ GLSurfaceView to continue rendering, such as in response to
+ {@link android.app.Activity#onStop Activity.onStop}.
+
+ Must not be called before a renderer has been set.
+*/
+onPause : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-onResume'>/**Resumes the rendering thread, re-creating the OpenGL context if necessary. It
+</span> is the counterpart to {@link #onPause}().
+
+ This method should typically be called in
+ {@link android.app.Activity#onStart Activity.onStart}.
+
+ Must not be called before a renderer has been set.
+*/
+onResume : function(  ) {},
+
+<span id='android-opengl-GLSurfaceView-method-queueEvent'>/**Queue a runnable to be run on the GL rendering thread. This can be used
+</span> to communicate with the Renderer on the rendering thread.
+ Must not be called before a renderer has been set.
+@param {Object {Runnable}} r the runnable to be run on the GL rendering thread.
+*/
+queueEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

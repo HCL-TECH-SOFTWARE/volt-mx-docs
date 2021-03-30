@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PermissionInfo'>/**@class android.content.pm.PermissionInfo
+</span> implements android.os.Parcelable
+
+@extends android.content.pm.PackageItemInfo
+
+ Information you can retrieve about a particular security permission
+ known to the system.  This corresponds to information collected from the
+ AndroidManifest.xml's &amp;lt;permission&amp;gt; tags.
+*/
+var PermissionInfo = {
+
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_NORMAL'>/** A normal application value for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;normal&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_NORMAL : &quot;0&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_DANGEROUS'>/** Dangerous value for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;dangerous&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_DANGEROUS : &quot;1&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_SIGNATURE'>/** System-level value for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;signature&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_SIGNATURE : &quot;2&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_SIGNATURE_OR_SYSTEM'>/** @deprecated Use {@link #PROTECTION_SIGNATURE}|{@link #PROTECTION_FLAG_PRIVILEGED}
+</span> instead.
+*/
+PROTECTION_SIGNATURE_OR_SYSTEM : &quot;3&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_PRIVILEGED'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;privileged&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_PRIVILEGED : &quot;16&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_SYSTEM'>/** @deprecated Old name for {@link #PROTECTION_FLAG_PRIVILEGED}, which
+</span> is now very confusing because it only applies to privileged apps, not all
+ apps on the system image.
+*/
+PROTECTION_FLAG_SYSTEM : &quot;16&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_DEVELOPMENT'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;development&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_DEVELOPMENT : &quot;32&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_APPOP'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;appop&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_APPOP : &quot;64&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_PRE23'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;pre23&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_PRE23 : &quot;128&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_INSTALLER'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;installer&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_INSTALLER : &quot;256&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_VERIFIER'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;verifier&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_VERIFIER : &quot;512&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_PREINSTALLED'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;preinstalled&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_PREINSTALLED : &quot;1024&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_SETUP'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;setup&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_SETUP : &quot;2048&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_INSTANT'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;instant&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_INSTANT : &quot;4096&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_RUNTIME_ONLY'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;runtime&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+*/
+PROTECTION_FLAG_RUNTIME_ONLY : &quot;8192&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_OEM'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;oem&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_OEM : &quot;16384&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_VENDOR_PRIVILEGED'>/** Additional flag for {${link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;vendorPrivileged&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_VENDOR_PRIVILEGED : &quot;32768&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_SYSTEM_TEXT_CLASSIFIER'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;text_classifier&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_SYSTEM_TEXT_CLASSIFIER : &quot;65536&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_WELLBEING'>/** Additional flag for {${link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;wellbeing&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_WELLBEING : &quot;131072&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_DOCUMENTER'>/** Additional flag for {@link #protectionLevel}, corresponding to the
+</span> {@code documenter} value of {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_DOCUMENTER : &quot;262144&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_CONFIGURATOR'>/** Additional flag for {@link #protectionLevel}, corresponding to the
+</span> {@code configurator} value of {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_CONFIGURATOR : &quot;524288&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_INCIDENT_REPORT_APPROVER'>/** Additional flag for {${link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;incident_report_approver&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_INCIDENT_REPORT_APPROVER : &quot;1048576&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_FLAG_APP_PREDICTOR'>/** Additional flag for {@link #protectionLevel}, corresponding
+</span> to the &lt;code&gt;app_predictor&lt;/code&gt; value of
+ {@link android.R.attr#protectionLevel}.
+
+ @hide
+*/
+PROTECTION_FLAG_APP_PREDICTOR : &quot;2097152&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_MASK_BASE'>/** Mask for {@link #protectionLevel}: the basic protection type.
+</span>
+ @deprecated Use #getProtection() instead.
+*/
+PROTECTION_MASK_BASE : &quot;15&quot;,
+<span id='android-content-pm-PermissionInfo-property-PROTECTION_MASK_FLAGS'>/** Mask for {@link #protectionLevel}: additional flag bits.
+</span>
+ @deprecated Use #getProtectionFlags() instead.
+*/
+PROTECTION_MASK_FLAGS : &quot;65520&quot;,
+<span id='android-content-pm-PermissionInfo-property-protectionLevel'>/** The level of access this permission is protecting, as per
+</span> {@link android.R.attr#protectionLevel}. Consists of
+ a base permission type and zero or more flags. Use the following functions
+ to extract them.
+
+ &lt;pre&gt;
+ int basePermissionType = permissionInfo.getProtection();
+ int permissionFlags = permissionInfo.getProtectionFlags();
+ &lt;/pre&gt;
+
+ &lt;p&gt;&lt;/p&gt;Base permission types are {@link #PROTECTION_NORMAL},
+ {@link #PROTECTION_DANGEROUS}, {@link #PROTECTION_SIGNATURE}
+ and the deprecated {@link #PROTECTION_SIGNATURE_OR_SYSTEM}.
+ Flags are listed under {@link android.R.attr#protectionLevel}.
+
+ @deprecated Use #getProtection() and #getProtectionFlags() instead.
+*/
+protectionLevel : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-property-group'>/** The group this permission is a part of, as per
+</span> {@link android.R.attr#permissionGroup}.
+*/
+group : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-property-FLAG_COSTS_MONEY'>/** Flag for {@link #flags}, corresponding to &lt;code&gt;costsMoney&lt;/code&gt;
+</span> value of {@link android.R.attr#permissionFlags}.
+*/
+FLAG_COSTS_MONEY : &quot;1&quot;,
+<span id='android-content-pm-PermissionInfo-property-FLAG_REMOVED'>/** Flag for {@link #flags}, corresponding to &lt;code&gt;removed&lt;/code&gt;
+</span> value of {@link android.R.attr#permissionFlags}.
+ @hide
+*/
+FLAG_REMOVED : &quot;2&quot;,
+<span id='android-content-pm-PermissionInfo-property-FLAG_HARD_RESTRICTED'>/** Flag for {@link #flags}, corresponding to &lt;code&gt;hardRestricted&lt;/code&gt;
+</span> value of {@link android.R.attr#permissionFlags}.
+
+ &lt;p&gt; This permission is restricted by the platform and it would be
+ grantable only to apps that meet special criteria per platform
+ policy.
+*/
+FLAG_HARD_RESTRICTED : &quot;4&quot;,
+<span id='android-content-pm-PermissionInfo-property-FLAG_SOFT_RESTRICTED'>/** Flag for {@link #flags}, corresponding to &lt;code&gt;softRestricted&lt;/code&gt;
+</span> value of {@link android.R.attr#permissionFlags}.
+
+ &lt;p&gt;This permission is restricted by the platform and it would be
+ grantable in its full form to apps that meet special criteria
+ per platform policy. Otherwise, a weaker form of the permission
+ would be granted. The weak grant depends on the permission.
+*/
+FLAG_SOFT_RESTRICTED : &quot;8&quot;,
+<span id='android-content-pm-PermissionInfo-property-FLAG_IMMUTABLY_RESTRICTED'>/** Flag for {@link #flags}, corresponding to &lt;code&gt;immutablyRestricted&lt;/code&gt;
+</span> value of {@link android.R.attr#permissionFlags}.
+
+ &lt;p&gt;This permission is restricted immutably which means that its
+ restriction state may be specified only on the first install of
+ the app and will stay in this initial whitelist state until
+ the app is uninstalled.
+*/
+FLAG_IMMUTABLY_RESTRICTED : &quot;16&quot;,
+<span id='android-content-pm-PermissionInfo-property-FLAG_INSTALLED'>/** Flag for {@link #flags}, indicating that this permission has been
+</span> installed into the system's globally defined permissions.
+*/
+FLAG_INSTALLED : &quot;1073741824&quot;,
+<span id='android-content-pm-PermissionInfo-property-flags'>/** Additional flags about this permission as given by
+</span> {@link android.R.attr#permissionFlags}.
+*/
+flags : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-property-descriptionRes'>/** A string resource identifier (in the package's resources) of this
+</span> permission's description.  From the &quot;description&quot; attribute or,
+ if not set, 0.
+*/
+descriptionRes : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-property-requestRes'>/** A string resource identifier (in the package's resources) used to request the permissions.
+</span> From the &quot;request&quot; attribute or, if not set, 0.
+
+ @hide
+*/
+requestRes : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-property-backgroundPermission'>/** Some permissions only grant access while the app is in foreground. Some of these permissions
+</span> allow to add background capabilities by adding another permission.
+
+ If this is such a permission, this is the name of the permission adding the background
+ access.
+
+ From the &quot;backgroundPermission&quot; attribute or, if not set null
+
+ @hide
+*/
+backgroundPermission : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-property-nonLocalizedDescription'>/** The description string provided in the AndroidManifest file, if any.  You
+</span> probably don't want to use this, since it will be null if the description
+ is in a resource.  You probably want
+ {@link android.content.pm.PackageParser.PermissionInfo#loadDescription} instead.
+*/
+nonLocalizedDescription : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-content-pm-PermissionInfo-method-fixProtectionLevel'>/**
+</span>@hide 
+*/
+fixProtectionLevel : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-protectionToString'>/**
+</span>@hide 
+*/
+protectionToString : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-loadDescription'>/**Retrieve the textual description of this permission.  This
+</span> will call back on the given PackageManager to load the description from
+ the application.
+@param {Object {PackageManager}} pm A PackageManager from which the label can be loaded; usually
+ the PackageManager from which you originally retrieved this item.
+@return {Object {java.lang.CharSequence}} Returns a CharSequence containing the permission's description.
+ If there is no description, null is returned.
+*/
+loadDescription : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-getProtection'>/**Return the base permission type.
+</span>*/
+getProtection : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-getProtectionFlags'>/**Return the additional flags in {@link #protectionLevel}.
+</span>*/
+getProtectionFlags : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-calculateFootprint'>/**
+</span>@hide 
+*/
+calculateFootprint : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-isHardRestricted'>/**
+</span>@hide 
+*/
+isHardRestricted : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-isSoftRestricted'>/**
+</span>@hide 
+*/
+isSoftRestricted : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-isRestricted'>/**
+</span>@hide 
+*/
+isRestricted : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-isAppOp'>/**
+</span>@hide 
+*/
+isAppOp : function(  ) {},
+
+<span id='android-content-pm-PermissionInfo-method-isRuntime'>/**
+</span>@hide 
+*/
+isRuntime : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

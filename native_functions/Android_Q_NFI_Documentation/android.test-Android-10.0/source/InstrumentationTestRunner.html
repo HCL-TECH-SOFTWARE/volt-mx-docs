@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-test-InstrumentationTestRunner'>/**@class android.test.InstrumentationTestRunner
+</span> implements android.test.TestSuiteProvider
+
+@extends android.app.Instrumentation
+
+ An {@link Instrumentation} that runs various types of {@link junit.framework.TestCase}s against
+ an Android package (application).
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about application testing, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/testing/index.html&quot;&gt;Testing&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ &lt;h3&gt;Typical Usage&lt;/h3&gt;
+ &lt;ol&gt;
+ &lt;li&gt;Write {@link junit.framework.TestCase}s that perform unit, functional, or performance tests
+ against the classes in your package.  Typically these are subclassed from:
+   &lt;ul&gt;&lt;li&gt;{@link android.test.ActivityInstrumentationTestCase2}&lt;/li&gt;
+   &lt;li&gt;{@link android.test.ActivityUnitTestCase}&lt;/li&gt;
+   &lt;li&gt;{@link android.test.AndroidTestCase}&lt;/li&gt;
+   &lt;li&gt;{@link android.test.ApplicationTestCase}&lt;/li&gt;
+   &lt;li&gt;{@link android.test.InstrumentationTestCase}&lt;/li&gt;
+   &lt;li&gt;{@link android.test.ProviderTestCase}&lt;/li&gt;
+   &lt;li&gt;{@link android.test.ServiceTestCase}&lt;/li&gt;
+   &lt;li&gt;{@link android.test.SingleLaunchActivityTestCase}&lt;/li&gt;&lt;/ul&gt;
+ &lt;li&gt;Set the &lt;code&gt;android:targetPackage&lt;/code&gt; attribute of the &lt;code&gt;&amp;lt;instrumentation&amp;gt;&lt;/code&gt;
+ element in the test package's manifest. You should set the attribute value
+ to the package name of the target application under test.
+ &lt;li&gt;Run the instrumentation using &quot;adb shell am instrument -w&quot;,
+ with no optional arguments, to run all tests (except performance tests).
+ &lt;li&gt;Run the instrumentation using &quot;adb shell am instrument -w&quot;,
+ with the argument '-e func true' to run all functional tests. These are tests that derive from
+ {@link android.test.InstrumentationTestCase}.
+ &lt;li&gt;Run the instrumentation using &quot;adb shell am instrument -w&quot;,
+ with the argument '-e unit true' to run all unit tests. These are tests that &lt;i&gt;do not&lt;/i&gt;derive
+ from {@link android.test.InstrumentationTestCase} (and are not performance tests).
+ &lt;li&gt;Run the instrumentation using &quot;adb shell am instrument -w&quot;,
+ with the argument '-e class' set to run an individual {@link junit.framework.TestCase}.
+ &lt;/ol&gt;
+ &lt;p/&gt;
+ &lt;b&gt;Running all tests:&lt;/b&gt; adb shell am instrument -w
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Running all small tests:&lt;/b&gt; adb shell am instrument -w
+ -e size small
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Running all medium tests:&lt;/b&gt; adb shell am instrument -w
+ -e size medium
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Running all large tests:&lt;/b&gt; adb shell am instrument -w
+ -e size large
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Filter test run to tests with given annotation:&lt;/b&gt; adb shell am instrument -w
+ -e annotation com.android.foo.MyAnnotation
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ If used with other options, the resulting test run will contain the union of the two options.
+ e.g. &quot;-e size large -e annotation com.android.foo.MyAnnotation&quot; will run only tests with both
+ the {@link LargeTest} and &quot;com.android.foo.MyAnnotation&quot; annotations.
+ &lt;p/&gt;
+ &lt;b&gt;Filter test run to tests &lt;i&gt;without&lt;/i&gt; given annotation:&lt;/b&gt; adb shell am instrument -w
+ -e notAnnotation com.android.foo.MyAnnotation
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Running a single testcase:&lt;/b&gt; adb shell am instrument -w
+ -e class com.android.foo.FooTest
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Running a single test:&lt;/b&gt; adb shell am instrument -w
+ -e class com.android.foo.FooTest#testFoo
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Running multiple tests:&lt;/b&gt; adb shell am instrument -w
+ -e class com.android.foo.FooTest,com.android.foo.TooTest
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Running all tests in a java package:&lt;/b&gt; adb shell am instrument -w
+ -e package com.android.foo.subpkg
+  com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;Including performance tests:&lt;/b&gt; adb shell am instrument -w
+ -e perf true
+ com.android.foo/android.test.InstrumentationTestRunner
+ &lt;p/&gt;
+ &lt;b&gt;To debug your tests, set a break point in your code and pass:&lt;/b&gt;
+ -e debug true
+ &lt;p/&gt;
+ &lt;b&gt;To run in 'log only' mode&lt;/b&gt;
+ -e log true
+ This option will load and iterate through all test classes and methods, but will bypass actual
+ test execution. Useful for quickly obtaining info on the tests to be executed by an
+ instrumentation command.
+ &lt;p/&gt;
+ &lt;b&gt;To generate EMMA code coverage:&lt;/b&gt;
+ -e coverage true
+ Note: this requires an emma instrumented build. By default, the code coverage results file
+ will be saved in a /data/&lt;app&gt;/coverage.ec file, unless overridden by coverageFile flag (see
+ below)
+ &lt;p/&gt;
+ &lt;b&gt; To specify EMMA code coverage results file path:&lt;/b&gt;
+ -e coverageFile /sdcard/myFile.ec
+ &lt;br/&gt;
+ in addition to the other arguments.
+ @deprecated Use
+ &lt;a href=&quot;{@docRoot}reference/android/support/test/runner/AndroidJUnitRunner.html&quot;&gt;
+ AndroidJUnitRunner&lt;/a&gt; instead. New tests should be written using the
+ &lt;a href=&quot;{@docRoot}tools/testing-support-library/index.html&quot;&gt;Android Testing Support Library&lt;/a&gt;.
+*/
+var InstrumentationTestRunner = {
+
+<span id='android-test-InstrumentationTestRunner-property-REPORT_VALUE_ID'>/** This value, if stored with key {@link android.app.Instrumentation#REPORT_KEY_IDENTIFIER},
+</span> identifies InstrumentationTestRunner as the source of the report.  This is sent with all
+ status messages.
+*/
+REPORT_VALUE_ID : &quot;InstrumentationTestRunner&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_KEY_NUM_TOTAL'>/** If included in the status or final bundle sent to an IInstrumentationWatcher, this key
+</span> identifies the total number of tests that are being run.  This is sent with all status
+ messages.
+*/
+REPORT_KEY_NUM_TOTAL : &quot;numtests&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_KEY_NUM_CURRENT'>/** If included in the status or final bundle sent to an IInstrumentationWatcher, this key
+</span> identifies the sequence number of the current test.  This is sent with any status message
+ describing a specific test being started or completed.
+*/
+REPORT_KEY_NUM_CURRENT : &quot;current&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_KEY_NAME_CLASS'>/** If included in the status or final bundle sent to an IInstrumentationWatcher, this key
+</span> identifies the name of the current test class.  This is sent with any status message
+ describing a specific test being started or completed.
+*/
+REPORT_KEY_NAME_CLASS : &quot;class&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_KEY_NAME_TEST'>/** If included in the status or final bundle sent to an IInstrumentationWatcher, this key
+</span> identifies the name of the current test.  This is sent with any status message
+ describing a specific test being started or completed.
+*/
+REPORT_KEY_NAME_TEST : &quot;test&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_VALUE_RESULT_START'>/** The test is starting.
+</span>*/
+REPORT_VALUE_RESULT_START : &quot;1&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_VALUE_RESULT_OK'>/** The test completed successfully.
+</span>*/
+REPORT_VALUE_RESULT_OK : &quot;0&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_VALUE_RESULT_ERROR'>/** The test completed with an error.
+</span>*/
+REPORT_VALUE_RESULT_ERROR : &quot;-1&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_VALUE_RESULT_FAILURE'>/** The test completed with a failure.
+</span>*/
+REPORT_VALUE_RESULT_FAILURE : &quot;-2&quot;,
+<span id='android-test-InstrumentationTestRunner-property-REPORT_KEY_STACK'>/** If included in the status bundle sent to an IInstrumentationWatcher, this key
+</span> identifies a stack trace describing an error or failure.  This is sent with any status
+ message describing a specific test being completed.
+*/
+REPORT_KEY_STACK : &quot;stack&quot;,
+<span id='android-test-InstrumentationTestRunner-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-test-InstrumentationTestRunner-method-getArguments'>/**Get the arguments passed to this instrumentation.
+</span>@return {Object {android.os.Bundle}} the Bundle object
+*/
+getArguments : function(  ) {},
+
+<span id='android-test-InstrumentationTestRunner-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='android-test-InstrumentationTestRunner-method-getTestSuite'>/**
+</span>*/
+getTestSuite : function(  ) {},
+
+<span id='android-test-InstrumentationTestRunner-method-getAllTests'>/**Override this to define all of the tests to run in your package.
+</span>*/
+getAllTests : function(  ) {},
+
+<span id='android-test-InstrumentationTestRunner-method-getLoader'>/**Override this to provide access to the class loader of your package.
+</span>*/
+getLoader : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

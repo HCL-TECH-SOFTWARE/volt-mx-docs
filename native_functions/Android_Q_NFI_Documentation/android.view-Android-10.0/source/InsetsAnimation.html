@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-WindowInsetsAnimationListener-InsetsAnimation'>/**@class android.view.WindowInsetsAnimationListener.InsetsAnimation
+</span>@extends java.lang.Object
+
+ Class representing an animation of a set of windows that cause insets.
+*/
+var InsetsAnimation = {
+
+<span id='android-view-WindowInsetsAnimationListener-InsetsAnimation-method-getTypeMask'>/**
+</span>@return {Number} The bitmask of {@link WindowInsets.Type.InsetType}s that are animating.
+*/
+getTypeMask : function(  ) {},
+
+<span id='android-view-WindowInsetsAnimationListener-InsetsAnimation-method-getLowerBound'>/**Queries the lower inset bound of the animation. If the animation is about showing or
+</span> hiding a window that cause insets, the lower bound is {@link Insets#NONE} and the upper
+ bound is the same as {@link android.view.WindowInsets#getInsets(int)} for the fully shown state. This
+ is the same as {@link android.view.WindowInsetsAnimationController#getHiddenStateInsets} and
+ {@link android.view.WindowInsetsAnimationController#getShownStateInsets} in case the listener gets
+ invoked because of an animation that originates from
+ {@link android.view.WindowInsetsAnimationController}.
+ &lt;p&gt;
+ However, if the size of a window that causes insets is changing, these are the
+ lower/upper bounds of that size animation.
+ &lt;p&gt;
+ There are no overlapping animations for a specific type, but there may be two animations
+ running at the same time for different inset types.
+@see #getUpperBound()
+@see WindowInsetsAnimationController#getHiddenStateInsets
+ TODO: It's a bit weird that these are global per window but onProgress is hierarchical.
+ TODO: If multiple types are animating, querying the bound per type isn't possible. Should
+ we:
+ 1. Offer bounds by type here?
+ 2. Restrict one animation to one single type only?
+ Returning WindowInsets here isn't feasible in case of overlapping animations: We can't
+ fill in the insets for the types from the other animation into the WindowInsets object
+ as it's changing as well.
+*/
+getLowerBound : function(  ) {},
+
+<span id='android-view-WindowInsetsAnimationListener-InsetsAnimation-method-getUpperBound'>/**
+</span>@see #getLowerBound()
+@see WindowInsetsAnimationController#getShownStateInsets
+*/
+getUpperBound : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

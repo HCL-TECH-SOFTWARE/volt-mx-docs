@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-GraphicBuffer'>/**@class android.graphics.GraphicBuffer
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Simple wrapper for the native GraphicBuffer class.
+
+ @hide
+*/
+var GraphicBuffer = {
+
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_READ_NEVER'>/***/
+</span>USAGE_SW_READ_NEVER : &quot;0&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_READ_RARELY'>/***/
+</span>USAGE_SW_READ_RARELY : &quot;2&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_READ_OFTEN'>/***/
+</span>USAGE_SW_READ_OFTEN : &quot;3&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_READ_MASK'>/***/
+</span>USAGE_SW_READ_MASK : &quot;15&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_WRITE_NEVER'>/***/
+</span>USAGE_SW_WRITE_NEVER : &quot;0&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_WRITE_RARELY'>/***/
+</span>USAGE_SW_WRITE_RARELY : &quot;32&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_WRITE_OFTEN'>/***/
+</span>USAGE_SW_WRITE_OFTEN : &quot;48&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SW_WRITE_MASK'>/***/
+</span>USAGE_SW_WRITE_MASK : &quot;240&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_SOFTWARE_MASK'>/***/
+</span>USAGE_SOFTWARE_MASK : &quot;255&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_PROTECTED'>/***/
+</span>USAGE_PROTECTED : &quot;16384&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_HW_TEXTURE'>/***/
+</span>USAGE_HW_TEXTURE : &quot;256&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_HW_RENDER'>/***/
+</span>USAGE_HW_RENDER : &quot;512&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_HW_2D'>/***/
+</span>USAGE_HW_2D : &quot;1024&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_HW_COMPOSER'>/***/
+</span>USAGE_HW_COMPOSER : &quot;2048&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_HW_VIDEO_ENCODER'>/***/
+</span>USAGE_HW_VIDEO_ENCODER : &quot;65536&quot;,
+<span id='android-graphics-GraphicBuffer-property-USAGE_HW_MASK'>/***/
+</span>USAGE_HW_MASK : &quot;466688&quot;,
+<span id='android-graphics-GraphicBuffer-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-graphics-GraphicBuffer-method-create'>/**Creates new &lt;code&gt;GraphicBuffer&lt;/code&gt; instance. This method will return null
+</span> if the buffer cannot be created.
+@param {Number} width The width in pixels of the buffer
+@param {Number} height The height in pixels of the buffer
+@param {Number} format The format of each pixel as specified in {@link PixelFormat}
+@param {Number} usage Hint indicating how the buffer will be used
+@return {Object {android.graphics.GraphicBuffer}} A &lt;code&gt;GraphicBuffer&lt;/code&gt; instance or null
+*/
+create : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-createFromExisting'>/**For SurfaceControl JNI.
+</span>@hide 
+*/
+createFromExisting : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-getWidth'>/**Returns the width of this buffer in pixels.
+</span>*/
+getWidth : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-getHeight'>/**Returns the height of this buffer in pixels.
+</span>*/
+getHeight : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-getFormat'>/**Returns the pixel format of this buffer. The pixel format must be one of
+</span> the formats defined in {@link android.graphics.PixelFormat}.
+*/
+getFormat : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-getUsage'>/**Returns the usage hint set on this buffer.
+</span>*/
+getUsage : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-lockCanvas'>/**&lt;p&gt;Start editing the pixels in the buffer. A null is returned if the buffer
+</span> cannot be locked for editing.&lt;/p&gt;
+
+ &lt;p&gt;The content of the buffer is preserved between unlockCanvas()
+ and lockCanvas().&lt;/p&gt;
+
+ &lt;p&gt;If this method is called after {@link #destroy}(), the return value will
+ always be null.&lt;/p&gt;
+@return {Object {android.graphics.Canvas}} A Canvas used to draw into the buffer, or null.
+@see #lockCanvas(android.graphics.Rect)
+@see #unlockCanvasAndPost(android.graphics.Canvas)
+@see #isDestroyed()
+*/
+lockCanvas : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-lockCanvas'>/**Just like {@link #lockCanvas}() but allows specification of a dirty
+</span> rectangle.
+
+ &lt;p&gt;If this method is called after {@link #destroy}(), the return value will
+ always be null.&lt;/p&gt;
+@param {Object {Rect}} dirty Area of the buffer that may be modified.
+@return {Object {android.graphics.Canvas}} A Canvas used to draw into the surface, or null.
+@see #lockCanvas()
+@see #unlockCanvasAndPost(android.graphics.Canvas)
+@see #isDestroyed()
+*/
+lockCanvas : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-unlockCanvasAndPost'>/**Finish editing pixels in the buffer.
+</span>
+ &lt;p&gt;This method doesn't do anything if {@link #destroy}() was
+ previously called.&lt;/p&gt;
+@param {Object {Canvas}} canvas The Canvas previously returned by lockCanvas()
+@see #lockCanvas()
+@see #lockCanvas(android.graphics.Rect)
+@see #isDestroyed()
+*/
+unlockCanvasAndPost : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-destroy'>/**Destroyes this buffer immediately. Calling this method frees up any
+</span> underlying native resources. After calling this method, this buffer
+ must not be used in any way ({@link #lockCanvas}() must not be called,
+ etc.)
+@see #isDestroyed()
+*/
+destroy : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-isDestroyed'>/**Indicates whether this buffer has been destroyed. A destroyed buffer
+</span> cannot be used in any way: locking a Canvas will return null, the buffer
+ cannot be written to a parcel, etc.
+@return {Boolean} True if this &lt;code&gt;GraphicBuffer&lt;/code&gt; is in a destroyed state,
+         false otherwise.
+@see #destroy()
+*/
+isDestroyed : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-graphics-GraphicBuffer-method-writeToParcel'>/**Flatten this object in to a Parcel.
+</span>
+ &lt;p&gt;Calling this method will throw an &lt;code&gt;IllegalStateException&lt;/code&gt; if
+ {@link #destroy}() has been previously called.&lt;/p&gt;
+@param {Object {Parcel}} dest The Parcel in which the object should be written.
+@param {Number} flags Additional flags about how the object should be written.
+              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

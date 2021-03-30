@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-carrier-CarrierService'>/**@class android.service.carrier.CarrierService
+</span>@extends android.app.Service
+
+ A service that exposes carrier-specific functionality to the system.
+ &lt;p&gt;
+ To extend this class, you must declare the service in your manifest file to require the
+ {@link android.Manifest.permission#BIND_CARRIER_SERVICES} permission and include an intent
+ filter with the {@link #CARRIER_SERVICE_INTERFACE}. If the service should have a long-lived
+ binding, set &lt;code&gt;android.service.carrier.LONG_LIVED_BINDING&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in the
+ service's metadata. For example:
+ &lt;/p&gt;
+
+ &lt;pre&gt;{@code
+ &lt;service android:name=&quot;.MyCarrierService&quot;
+       android:label=&quot;@string/service_name&quot;
+       android:permission=&quot;android.permission.BIND_CARRIER_SERVICES&quot;&gt;
+  &lt;intent-filter&gt;
+      &lt;action android:name=&quot;android.service.carrier.CarrierService&quot; /&gt;
+  &lt;/intent-filter&gt;
+  &lt;meta-data android:name=&quot;android.service.carrier.LONG_LIVED_BINDING&quot;
+             android:value=&quot;true&quot; /&gt;
+ &lt;/service&gt;
+ }&lt;/pre&gt;
+*/
+var CarrierService = {
+
+<span id='android-service-carrier-CarrierService-property-CARRIER_SERVICE_INTERFACE'>/***/
+</span>CARRIER_SERVICE_INTERFACE : &quot;android.service.carrier.CarrierService&quot;,
+<span id='android-service-carrier-CarrierService-method-onLoadConfig'>/**Override this method to set carrier configuration.
+</span> &lt;p&gt;
+ This method will be called by telephony services to get carrier-specific configuration
+ values. The returned config will be saved by the system until,
+ &lt;ol&gt;
+ &lt;li&gt;The carrier app package is updated, or&lt;/li&gt;
+ &lt;li&gt;The carrier app requests a reload with
+ {@link android.telephony.CarrierConfigManager#notifyConfigChangedForSubId
+ notifyConfigChangedForSubId}.&lt;/li&gt;
+ &lt;/ol&gt;
+ This method can be called after a SIM card loads, which may be before or after boot.
+ &lt;/p&gt;
+ &lt;p&gt;
+ This method should not block for a long time. If expensive operations (e.g. network access)
+ are required, this method can schedule the work and return null. Then, use
+ {@link android.telephony.CarrierConfigManager#notifyConfigChangedForSubId
+ notifyConfigChangedForSubId} to trigger a reload when the config is ready.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Implementations should use the keys defined in {@link android.telephony.CarrierConfigManager
+ CarrierConfigManager}. Any configuration values not set in the returned {@link PersistableBundle} may be overridden by the system's default configuration service.
+ &lt;/p&gt;
+@param {Object {CarrierIdentifier}} id contains details about the current carrier that can be used do decide what
+           configuration values to return. Instead of using details like MCCMNC to decide
+           current carrier, it also contains subscription carrier id
+           {@link android.telephony.TelephonyManager#getSimCarrierId()}, a platform-wide
+           unique identifier for each carrier, CarrierConfigService can directly use carrier
+           id as the key to look up the carrier info.
+@return {Object {android.os.PersistableBundle}} a {@link PersistableBundle} object containing the configuration or null if default
+         values should be used.
+*/
+onLoadConfig : function(  ) {},
+
+<span id='android-service-carrier-CarrierService-method-notifyCarrierNetworkChange'>/**Informs the system of an intentional upcoming carrier network change by
+</span> a carrier app. This call is optional and is only used to allow the
+ system to provide alternative UI while telephony is performing an action
+ that may result in intentional, temporary network lack of connectivity.
+ &lt;p&gt;
+ Based on the active parameter passed in, this method will either show or
+ hide the alternative UI. There is no timeout associated with showing
+ this UX, so a carrier app must be sure to call with active set to false
+ sometime after calling with it set to true.
+ &lt;p&gt;
+ Requires Permission: calling app has carrier privileges.
+@param {Boolean} active Whether the carrier network change is or shortly will be
+               active. Set this value to true to begin showing
+               alternative UI and false to stop.
+@see android.telephony.TelephonyManager#hasCarrierPrivileges
+*/
+notifyCarrierNetworkChange : function(  ) {},
+
+<span id='android-service-carrier-CarrierService-method-onBind'>/**If overriding this method, call through to the super method for any unknown actions.
+</span> {@inheritDoc}
+*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

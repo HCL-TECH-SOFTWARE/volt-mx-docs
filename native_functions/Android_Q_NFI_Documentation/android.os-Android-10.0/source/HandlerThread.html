@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-HandlerThread'>/**@class android.os.HandlerThread
+</span>@extends java.lang.Thread
+
+ A {@link Thread} that has a {@link android.os.Looper}.
+ The {@link android.os.Looper} can then be used to create {@link android.os.Handler}s.
+ &lt;p&gt;
+ Note that just like with a regular {@link Thread}, {@link #start}() must still be called.
+*/
+var HandlerThread = {
+
+<span id='android-os-HandlerThread-method-run'>/**
+</span>*/
+run : function(  ) {},
+
+<span id='android-os-HandlerThread-method-getLooper'>/**This method returns the Looper associated with this thread. If this thread not been started
+</span> or for any reason isAlive() returns false, this method will return null. If this thread
+ has been started, this method will block until the looper has been initialized.
+@return {Object {android.os.Looper}} The looper.
+*/
+getLooper : function(  ) {},
+
+<span id='android-os-HandlerThread-method-getThreadHandler'>/**
+</span>@return {Object {android.os.Handler}} a shared {@link Handler} associated with this thread
+@hide 
+*/
+getThreadHandler : function(  ) {},
+
+<span id='android-os-HandlerThread-method-quit'>/**Quits the handler thread's looper.
+</span> &lt;p&gt;
+ Causes the handler thread's looper to terminate without processing any
+ more messages in the message queue.
+ &lt;/p&gt;&lt;p&gt;
+ Any attempt to post messages to the queue after the looper is asked to quit will fail.
+ For example, the {@link android.os.Handler#sendMessage(Message)} method will return false.
+ &lt;/p&gt;&lt;p class=&quot;note&quot;&gt;
+ Using this method may be unsafe because some messages may not be delivered
+ before the looper terminates.  Consider using {@link #quitSafely} instead to ensure
+ that all pending work is completed in an orderly manner.
+ &lt;/p&gt;
+@return {Boolean} True if the looper looper has been asked to quit or false if the
+ thread had not yet started running.
+@see #quitSafely
+*/
+quit : function(  ) {},
+
+<span id='android-os-HandlerThread-method-quitSafely'>/**Quits the handler thread's looper safely.
+</span> &lt;p&gt;
+ Causes the handler thread's looper to terminate as soon as all remaining messages
+ in the message queue that are already due to be delivered have been handled.
+ Pending delayed messages with due times in the future will not be delivered.
+ &lt;/p&gt;&lt;p&gt;
+ Any attempt to post messages to the queue after the looper is asked to quit will fail.
+ For example, the {@link android.os.Handler#sendMessage(Message)} method will return false.
+ &lt;/p&gt;&lt;p&gt;
+ If the thread has not been started or has finished (that is if
+ {@link #getLooper} returns null), then false is returned.
+ Otherwise the looper is asked to quit and true is returned.
+ &lt;/p&gt;
+@return {Boolean} True if the looper looper has been asked to quit or false if the
+ thread had not yet started running.
+*/
+quitSafely : function(  ) {},
+
+<span id='android-os-HandlerThread-method-getThreadId'>/**Returns the identifier of this thread. See Process.myTid().
+</span>*/
+getThreadId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

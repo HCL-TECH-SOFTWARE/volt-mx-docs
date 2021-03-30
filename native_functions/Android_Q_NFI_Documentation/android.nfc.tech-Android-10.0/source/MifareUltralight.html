@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-nfc-tech-MifareUltralight'>/**@class android.nfc.tech.MifareUltralight
+</span>@extends android.nfc.tech.BasicTagTechnology
+
+ Provides access to MIFARE Ultralight properties and I/O operations on a {@link Tag}.
+
+ &lt;p&gt;Acquire a {@link android.nfc.tech.MifareUltralight} object using {@link #get}.
+
+ &lt;p&gt;MIFARE Ultralight compatible tags have 4 byte pages {@link #PAGE_SIZE}.
+ The primary operations on an Ultralight tag are {@link #readPages} and
+ {@link #writePage}.
+
+ &lt;p&gt;The original MIFARE Ultralight consists of a 64 byte EEPROM. The first
+ 4 pages are for the OTP area, manufacturer data, and locking bits. They are
+ readable and some bits are writable. The final 12 pages are the user
+ read/write area. For more information see the NXP data sheet MF0ICU1.
+
+ &lt;p&gt;The MIFARE Ultralight C consists of a 192 byte EEPROM. The first 4 pages
+ are for OTP, manufacturer data, and locking bits. The next 36 pages are the
+ user read/write area. The next 4 pages are additional locking bits, counters
+ and authentication configuration and are readable. The final 4 pages are for
+ the authentication key and are not readable. For more information see the
+ NXP data sheet MF0ICU2.
+
+ &lt;p&gt;Implementation of this class on a Android NFC device is optional.
+ If it is not implemented, then
+ {@link android.nfc.tech.MifareUltralight} will never be enumerated in {@link Tag#getTechList}.
+ If it is enumerated, then all {@link android.nfc.tech.MifareUltralight} I/O operations will be supported.
+ In either case, {@link android.nfc.tech.NfcA} will also be enumerated on the tag,
+ because all MIFARE Ultralight tags are also {@link android.nfc.tech.NfcA} tags.
+
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Methods that perform I/O operations
+ require the {@link android.Manifest.permission#NFC} permission.
+*/
+var MifareUltralight = {
+
+<span id='android-nfc-tech-MifareUltralight-property-TYPE_UNKNOWN'>/**A MIFARE Ultralight compatible tag of unknown type */
+</span>TYPE_UNKNOWN : &quot;-1&quot;,
+<span id='android-nfc-tech-MifareUltralight-property-TYPE_ULTRALIGHT'>/**A MIFARE Ultralight tag */
+</span>TYPE_ULTRALIGHT : &quot;1&quot;,
+<span id='android-nfc-tech-MifareUltralight-property-TYPE_ULTRALIGHT_C'>/**A MIFARE Ultralight C tag */
+</span>TYPE_ULTRALIGHT_C : &quot;2&quot;,
+<span id='android-nfc-tech-MifareUltralight-property-PAGE_SIZE'>/**Size of a MIFARE Ultralight page in bytes */
+</span>PAGE_SIZE : &quot;4&quot;,
+<span id='android-nfc-tech-MifareUltralight-property-EXTRA_IS_UL_C'>/**@hide */
+</span>EXTRA_IS_UL_C : &quot;isulc&quot;,
+<span id='android-nfc-tech-MifareUltralight-method-get'>/**Get an instance of {@link android.nfc.tech.MifareUltralight} for the given tag.
+</span> &lt;p&gt;Returns null if {@link android.nfc.tech.MifareUltralight} was not enumerated in
+ {@link Tag#getTechList} - this indicates the tag is not MIFARE
+ Ultralight compatible, or that this Android
+ device does not implement MIFARE Ultralight.
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@param {Object {Tag}} tag an MIFARE Ultralight compatible tag
+@return {Object {android.nfc.tech.MifareUltralight}} MIFARE Ultralight object
+*/
+get : function(  ) {},
+
+<span id='android-nfc-tech-MifareUltralight-method-getType'>/**Return the MIFARE Ultralight type of the tag.
+</span> &lt;p&gt;One of {@link #TYPE_ULTRALIGHT} or {@link #TYPE_ULTRALIGHT_C} or
+ {@link #TYPE_UNKNOWN}.
+ &lt;p&gt;Depending on how the tag has been formatted, it can be impossible
+ to accurately classify between original MIFARE Ultralight and
+ Ultralight C. So treat this method as a hint.
+ &lt;p&gt;Does not cause any RF activity and does not block.
+@return {Number} the type
+*/
+getType : function(  ) {},
+
+<span id='android-nfc-tech-MifareUltralight-method-readPages'>/**Read 4 pages (16 bytes).
+</span>
+ &lt;p&gt;The MIFARE Ultralight protocol always reads 4 pages at a time, to
+ reduce the number of commands required to read an entire tag.
+ &lt;p&gt;If a read spans past the last readable block, then the tag will
+ return pages that have been wrapped back to the first blocks. MIFARE
+ Ultralight tags have readable blocks 0x00 through 0x0F. So a read to
+ block offset 0x0E would return blocks 0x0E, 0x0F, 0x00, 0x01. MIFARE
+ Ultralight C tags have readable blocks 0x00 through 0x2B. So a read to
+ block 0x2A would return blocks 0x2A, 0x2B, 0x00, 0x01.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} pageOffset index of first page to read, starting from 0
+@return {Number} 4 pages (16 bytes)
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+readPages : function(  ) {},
+
+<span id='android-nfc-tech-MifareUltralight-method-writePage'>/**Write 1 page (4 bytes).
+</span>
+ &lt;p&gt;The MIFARE Ultralight protocol always writes 1 page at a time, to
+ minimize EEPROM write cycles.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} pageOffset index of page to write, starting from 0
+@param {Object {byte[]}} data 4 bytes to write
+@throws TagLostException if the tag leaves the field
+@throws IOException if there is an I/O failure, or the operation is canceled
+*/
+writePage : function(  ) {},
+
+<span id='android-nfc-tech-MifareUltralight-method-transceive'>/**Send raw NfcA data to a tag and receive the response.
+</span>
+ &lt;p&gt;This is equivalent to connecting to this tag via {@link android.nfc.tech.NfcA}
+ and calling {@link android.nfc.tech.NfcA#transceive}. Note that all MIFARE Classic
+ tags are based on {@link android.nfc.tech.NfcA} technology.
+
+ &lt;p&gt;Use {@link #getMaxTransceiveLength} to retrieve the maximum number of bytes
+ that can be sent with {@link #transceive}.
+
+ &lt;p&gt;This is an I/O operation and will block until complete. It must
+ not be called from the main application thread. A blocked call will be canceled with
+ {@link IOException} if {@link #close} is called from another thread.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@see NfcA#transceive
+*/
+transceive : function(  ) {},
+
+<span id='android-nfc-tech-MifareUltralight-method-getMaxTransceiveLength'>/**Return the maximum number of bytes that can be sent with {@link #transceive}.
+</span>@return {Number} the maximum number of bytes that can be sent with {@link #transceive}.
+*/
+getMaxTransceiveLength : function(  ) {},
+
+<span id='android-nfc-tech-MifareUltralight-method-setTimeout'>/**Set the {@link #transceive} timeout in milliseconds.
+</span>
+ &lt;p&gt;The timeout only applies to {@link #transceive} on this object,
+ and is reset to a default value when {@link #close} is called.
+
+ &lt;p&gt;Setting a longer timeout may be useful when performing
+ transactions that require a long processing time on the tag
+ such as key generation.
+
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@param {Number} timeout timeout value in milliseconds
+*/
+setTimeout : function(  ) {},
+
+<span id='android-nfc-tech-MifareUltralight-method-getTimeout'>/**Get the current {@link #transceive} timeout in milliseconds.
+</span>
+ &lt;p class=&quot;note&quot;&gt;Requires the {@link android.Manifest.permission#NFC} permission.
+@return {Number} timeout value in milliseconds
+*/
+getTimeout : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

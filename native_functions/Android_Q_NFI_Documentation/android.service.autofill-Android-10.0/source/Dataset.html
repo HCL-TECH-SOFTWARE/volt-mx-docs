@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-Dataset'>/**@class android.service.autofill.Dataset
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ &lt;p&gt;A &lt;code&gt;Dataset&lt;/code&gt; object represents a group of fields (key / value pairs) used
+ to autofill parts of a screen.
+
+ &lt;p&gt;For more information about the role of datasets in the autofill workflow, read
+ &lt;a href=&quot;/guide/topics/text/autofill-services&quot;&gt;Build autofill services&lt;/a&gt; and the
+ &lt;code&gt;&lt;a href=&quot;/reference/android/service/autofill/AutofillService&quot;&gt;AutofillService&lt;/a&gt;&lt;/code&gt;
+ documentation.
+
+ &lt;a name=&quot;BasicUsage&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Basic usage&lt;/h3&gt;
+
+ &lt;p&gt;In its simplest form, a dataset contains one or more fields (comprised of
+ an {@link AutofillId id}, a {@link AutofillValue value}, and an optional filter
+ {@link Pattern regex}); and one or more {@link RemoteViews presentations} for these fields
+ (each field could have its own {@link RemoteViews presentation}, or use the default
+ {@link RemoteViews presentation} associated with the whole dataset).
+
+ &lt;p&gt;When an autofill service returns datasets in a {@link android.service.autofill.FillResponse}
+ and the screen input is focused in a view that is present in at least one of these datasets,
+ the Android System displays a UI containing the {@link RemoteViews presentation} of
+ all datasets pairs that have that view's {@link AutofillId}. Then, when the user selects a
+ dataset from the UI, all views in that dataset are autofilled.
+
+ &lt;a name=&quot;Authentication&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Dataset authentication&lt;/h3&gt;
+
+ &lt;p&gt;In a more sophisticated form, the dataset values can be protected until the user authenticates
+ the dataset&amp;mdash;in that case, when a dataset is selected by the user, the Android System
+ launches an intent set by the service to &quot;unlock&quot; the dataset.
+
+ &lt;p&gt;For example, when a data set contains credit card information (such as number,
+ expiration date, and verification code), you could provide a dataset presentation saying
+ &quot;Tap to authenticate&quot;. Then when the user taps that option, you would launch an activity asking
+ the user to enter the credit card code, and if the user enters a valid code, you could then
+ &quot;unlock&quot; the dataset.
+
+ &lt;p&gt;You can also use authenticated datasets to offer an interactive UI for the user. For example,
+ if the activity being autofilled is an account creation screen, you could use an authenticated
+ dataset to automatically generate a random password for the user.
+
+ &lt;p&gt;See {@link android.service.autofill.Dataset.Builder#setAuthentication(IntentSender)} for more details about the dataset
+ authentication mechanism.
+
+ &lt;a name=&quot;Filtering&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Filtering&lt;/h3&gt;
+ &lt;p&gt;The autofill UI automatically changes which values are shown based on value of the view
+ anchoring it, following the rules below:
+ &lt;ol&gt;
+   &lt;li&gt;If the view's {@link android.view.View#getAutofillValue() autofill value} is not
+ {@link AutofillValue#isText() text} or is empty, all datasets are shown.
+   &lt;li&gt;Datasets that have a filter regex (set through
+ {@link android.service.autofill.Dataset.Builder#setValue(AutofillId, AutofillValue, Pattern)} or
+ {@link android.service.autofill.Dataset.Builder#setValue(AutofillId, AutofillValue, Pattern, RemoteViews)}) and whose
+ regex matches the view's text value converted to lower case are shown.
+   &lt;li&gt;Datasets that do not require authentication, have a field value that is
+ {@link AutofillValue#isText() text} and whose {@link AutofillValue#getTextValue() value} starts
+ with the lower case value of the view's text are shown.
+   &lt;li&gt;All other datasets are hidden.
+ &lt;/ol&gt;
+
+*/
+var Dataset = {
+
+<span id='android-service-autofill-Dataset-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-service-autofill-Dataset-method-getFieldIds'>/**
+</span>@hide 
+*/
+getFieldIds : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-getFieldValues'>/**
+</span>@hide 
+*/
+getFieldValues : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-getFieldPresentation'>/**
+</span>@hide 
+*/
+getFieldPresentation : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-getFilter'>/**
+</span>@hide 
+*/
+getFilter : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-getAuthentication'>/**
+</span>@hide 
+*/
+getAuthentication : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-isEmpty'>/**
+</span>@hide 
+*/
+isEmpty : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-getId'>/**Gets the id of this dataset.
+</span>@return {String} The id of this dataset or {@code null} if not set
+@hide 
+*/
+getId : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-service-autofill-Dataset-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

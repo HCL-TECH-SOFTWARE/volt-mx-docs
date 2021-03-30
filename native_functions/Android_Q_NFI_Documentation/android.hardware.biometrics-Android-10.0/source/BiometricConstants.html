@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-biometrics-BiometricConstants'>/**@class android.hardware.biometrics.BiometricConstants
+</span> Interface containing all of the biometric modality agnostic constants.
+
+ NOTE: The error messages must be consistent between BiometricConstants, Biometric*Constants,
+       and the frameworks/support/biometric/.../BiometricConstants files.
+
+ @hide
+*/
+var BiometricConstants = {
+
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_SUCCESS'>/** This was not added here since it would update BiometricPrompt API. But, is used in
+</span> BiometricManager.
+ @hide
+*/
+BIOMETRIC_SUCCESS : &quot;0&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_HW_UNAVAILABLE'>/** The hardware is unavailable. Try again later.
+</span>*/
+BIOMETRIC_ERROR_HW_UNAVAILABLE : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_UNABLE_TO_PROCESS'>/** Error state returned when the sensor was unable to process the current image.
+</span>*/
+BIOMETRIC_ERROR_UNABLE_TO_PROCESS : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_TIMEOUT'>/** Error state returned when the current request has been running too long. This is intended to
+</span> prevent programs from waiting for the biometric sensor indefinitely. The timeout is platform
+ and sensor-specific, but is generally on the order of 30 seconds.
+*/
+BIOMETRIC_ERROR_TIMEOUT : &quot;3&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_NO_SPACE'>/** Error state returned for operations like enrollment; the operation cannot be completed
+</span> because there's not enough storage remaining to complete the operation.
+*/
+BIOMETRIC_ERROR_NO_SPACE : &quot;4&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_CANCELED'>/** The operation was canceled because the biometric sensor is unavailable. For example, this may
+</span> happen when the user is switched, the device is locked or another pending operation prevents
+ or disables it.
+*/
+BIOMETRIC_ERROR_CANCELED : &quot;5&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_UNABLE_TO_REMOVE'>/** The {@link android.hardware.biometrics.BiometricManager#remove} call failed. Typically this will happen when the provided
+</span> biometric id was incorrect.
+
+ @hide
+*/
+BIOMETRIC_ERROR_UNABLE_TO_REMOVE : &quot;6&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_LOCKOUT'>/** The operation was canceled because the API is locked out due to too many attempts.
+</span> This occurs after 5 failed attempts, and lasts for 30 seconds.
+*/
+BIOMETRIC_ERROR_LOCKOUT : &quot;7&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_VENDOR'>/** Hardware vendors may extend this list if there are conditions that do not fall under one of
+</span> the above categories. Vendors are responsible for providing error strings for these errors.
+ These messages are typically reserved for internal operations such as enrollment, but may be
+ used to express vendor errors not otherwise covered. Applications are expected to show the
+ error message string if they happen, but are advised not to rely on the message id since they
+ will be device and vendor-specific
+*/
+BIOMETRIC_ERROR_VENDOR : &quot;8&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_LOCKOUT_PERMANENT'>/** The operation was canceled because BIOMETRIC_ERROR_LOCKOUT occurred too many times.
+</span> Biometric authentication is disabled until the user unlocks with strong authentication
+ (PIN/Pattern/Password)
+*/
+BIOMETRIC_ERROR_LOCKOUT_PERMANENT : &quot;9&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_USER_CANCELED'>/** The user canceled the operation. Upon receiving this, applications should use alternate
+</span> authentication (e.g. a password). The application should also provide the means to return to
+ biometric authentication, such as a &quot;use &lt;biometric&gt;&quot; button.
+*/
+BIOMETRIC_ERROR_USER_CANCELED : &quot;10&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_NO_BIOMETRICS'>/** The user does not have any biometrics enrolled.
+</span>*/
+BIOMETRIC_ERROR_NO_BIOMETRICS : &quot;11&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_HW_NOT_PRESENT'>/** The device does not have a biometric sensor.
+</span>*/
+BIOMETRIC_ERROR_HW_NOT_PRESENT : &quot;12&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_NEGATIVE_BUTTON'>/** The user pressed the negative button. This is a placeholder that is currently only used
+</span> by the support library.
+ @hide
+*/
+BIOMETRIC_ERROR_NEGATIVE_BUTTON : &quot;13&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL'>/** The device does not have pin, pattern, or password set up. See
+</span> {@link android.hardware.biometrics.BiometricPrompt.Builder#setDeviceCredentialAllowed(boolean)} and
+ {@link KeyguardManager#isDeviceSecure()}
+*/
+BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL : &quot;14&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ERROR_VENDOR_BASE'>/** @hide
+</span>*/
+BIOMETRIC_ERROR_VENDOR_BASE : &quot;1000&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_GOOD'>/** The image acquired was good.
+</span>*/
+BIOMETRIC_ACQUIRED_GOOD : &quot;0&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_PARTIAL'>/** Only a partial biometric image was detected. During enrollment, the user should be informed
+</span> on what needs to happen to resolve this problem, e.g. &quot;press firmly on sensor.&quot; (for
+ fingerprint)
+*/
+BIOMETRIC_ACQUIRED_PARTIAL : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_INSUFFICIENT'>/** The biometric image was too noisy to process due to a detected condition or a possibly dirty
+</span> sensor (See {@link #BIOMETRIC_ACQUIRED_IMAGER_DIRTY}).
+*/
+BIOMETRIC_ACQUIRED_INSUFFICIENT : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_IMAGER_DIRTY'>/** The biometric image was too noisy due to suspected or detected dirt on the sensor.  For
+</span> example, it's reasonable return this after multiple {@link #BIOMETRIC_ACQUIRED_INSUFFICIENT}
+ or actual detection of dirt on the sensor (stuck pixels, swaths, etc.). The user is expected
+ to take action to clean the sensor when this is returned.
+*/
+BIOMETRIC_ACQUIRED_IMAGER_DIRTY : &quot;3&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_TOO_SLOW'>/** The biometric image was unreadable due to lack of motion.
+</span>*/
+BIOMETRIC_ACQUIRED_TOO_SLOW : &quot;4&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_TOO_FAST'>/** The biometric image was incomplete due to quick motion. For example, this could also happen
+</span> if the user moved during acquisition. The user should be asked to repeat the operation more
+ slowly.
+*/
+BIOMETRIC_ACQUIRED_TOO_FAST : &quot;5&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_VENDOR'>/** Hardware vendors may extend this list if there are conditions that do not fall under one of
+</span> the above categories. Vendors are responsible for providing error strings for these errors.
+ @hide
+*/
+BIOMETRIC_ACQUIRED_VENDOR : &quot;6&quot;,
+<span id='android-hardware-biometrics-BiometricConstants-property-BIOMETRIC_ACQUIRED_VENDOR_BASE'>/** @hide
+</span>*/
+BIOMETRIC_ACQUIRED_VENDOR_BASE : &quot;1000&quot;,
+
+};</pre>
+</body>
+</html>

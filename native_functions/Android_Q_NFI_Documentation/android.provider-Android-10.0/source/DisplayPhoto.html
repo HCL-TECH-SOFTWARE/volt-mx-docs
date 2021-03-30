@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-DisplayPhoto'>/**@class android.provider.ContactsContract.DisplayPhoto
+</span>@extends java.lang.Object
+
+ Helper class for accessing full-size photos by photo file ID.
+ &lt;p&gt;
+ Usage example:
+ &lt;dl&gt;
+ &lt;dt&gt;Retrieving a full-size photo by photo file ID (see
+ {@link android.provider.ContactsContract.ContactsColumns#PHOTO_FILE_ID})
+ &lt;/dt&gt;
+ &lt;dd&gt;
+ &lt;pre&gt;
+ public InputStream openDisplayPhoto(long photoFileId) {
+     Uri displayPhotoUri = ContentUris.withAppendedId(DisplayPhoto.CONTENT_URI, photoKey);
+     try {
+         AssetFileDescriptor fd = getContentResolver().openAssetFileDescriptor(
+             displayPhotoUri, &quot;r&quot;);
+         return fd.createInputStream();
+     } catch (IOException e) {
+         return null;
+     }
+ }
+ &lt;/pre&gt;
+ &lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;/p&gt;
+*/
+var DisplayPhoto = {
+
+<span id='android-provider-ContactsContract-DisplayPhoto-property-CONTENT_URI'>/** The content:// style URI for this class, which allows access to full-size photos,
+</span> given a key.
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-DisplayPhoto-property-CONTENT_MAX_DIMENSIONS_URI'>/** This URI allows the caller to query for the maximum dimensions of a display photo
+</span> or thumbnail.  Requests to this URI can be performed on the UI thread because
+ they are always unblocking.
+*/
+CONTENT_MAX_DIMENSIONS_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-DisplayPhoto-property-DISPLAY_MAX_DIM'>/** Queries to {@link android.provider.ContactsContract.DisplayPhoto#CONTENT_MAX_DIMENSIONS_URI} will
+</span> contain this column, populated with the maximum height and width (in pixels)
+ that will be stored for a display photo.  Larger photos will be down-sized to
+ fit within a square of this many pixels.
+*/
+DISPLAY_MAX_DIM : &quot;display_max_dim&quot;,
+<span id='android-provider-ContactsContract-DisplayPhoto-property-THUMBNAIL_MAX_DIM'>/** Queries to {@link android.provider.ContactsContract.DisplayPhoto#CONTENT_MAX_DIMENSIONS_URI} will
+</span> contain this column, populated with the height and width (in pixels) for photo
+ thumbnails.
+*/
+THUMBNAIL_MAX_DIM : &quot;thumbnail_max_dim&quot;,
+
+};</pre>
+</body>
+</html>

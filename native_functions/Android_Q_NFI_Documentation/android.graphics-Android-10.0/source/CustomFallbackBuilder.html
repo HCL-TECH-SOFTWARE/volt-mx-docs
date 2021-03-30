@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-Typeface-CustomFallbackBuilder'>/**@class android.graphics.Typeface.CustomFallbackBuilder
+</span>@extends java.lang.Object
+
+ A builder class for creating new Typeface instance.
+
+ There are two font fallback mechanisms, custom font fallback and system font fallback.
+ The custom font fallback is a simple ordered list. The text renderer tries to see if it can
+ render a character with the first font and if that font does not support the character, try
+ next one and so on. It will keep trying until end of the custom fallback chain. The maximum
+ length of the custom fallback chain is 64.
+ The system font fallback is a system pre-defined fallback chain. The system fallback is
+ processed only when no matching font is found in the custom font fallback.
+
+ &lt;p&gt;
+ Examples,
+ 1) Create Typeface from single ttf file.
+ &lt;pre&gt;
+ &lt;code&gt;
+ Font font = new Font.Builder(&quot;your_font_file.ttf&quot;).build();
+ FontFamily family = new FontFamily.Builder(font).build();
+ Typeface typeface = new Typeface.CustomFallbackBuilder(family).build();
+ &lt;/code&gt;
+ &lt;/pre&gt;
+
+ 2) Create Typeface from multiple font files and select bold style by default.
+ &lt;pre&gt;
+ &lt;code&gt;
+ Font regularFont = new Font.Builder(&quot;regular.ttf&quot;).build();
+ Font boldFont = new Font.Builder(&quot;bold.ttf&quot;).build();
+ FontFamily family = new FontFamily.Builder(regularFont)
+     .addFont(boldFont).build();
+ Typeface typeface = new Typeface.CustomFallbackBuilder(family)
+     .setWeight(Font.FONT_WEIGHT_BOLD)  // Set bold style as the default style.
+                                        // If the font family doesn't have bold style font,
+                                        // system will select the closest font.
+     .build();
+ &lt;/code&gt;
+ &lt;/pre&gt;
+
+ 3) Create Typeface from single ttf file and if that font does not have glyph for the
+ characters, use &quot;serif&quot; font family instead.
+ &lt;pre&gt;
+ &lt;code&gt;
+ Font font = new Font.Builder(&quot;your_font_file.ttf&quot;).build();
+ FontFamily family = new FontFamily.Builder(font).build();
+ Typeface typeface = new Typeface.CustomFallbackBuilder(family)
+     .setSystemFallback(&quot;serif&quot;)  // Set serif font family as the fallback.
+     .build();
+ &lt;/code&gt;
+ &lt;/pre&gt;
+ 4) Create Typeface from single ttf file and set another ttf file for the fallback.
+ &lt;pre&gt;
+ &lt;code&gt;
+ Font font = new Font.Builder(&quot;English.ttf&quot;).build();
+ FontFamily family = new FontFamily.Builder(font).build();
+
+ Font fallbackFont = new Font.Builder(&quot;Arabic.ttf&quot;).build();
+ FontFamily fallbackFamily = new FontFamily.Builder(fallbackFont).build();
+ Typeface typeface = new Typeface.CustomFallbackBuilder(family)
+     .addCustomFallback(fallbackFamily)  // Specify fallback family.
+     .setSystemFallback(&quot;serif&quot;)  // Set serif font family as the fallback.
+     .build();
+ &lt;/code&gt;
+ &lt;/pre&gt;
+ &lt;/p&gt;
+*/
+var CustomFallbackBuilder = {
+
+<span id='android-graphics-Typeface-CustomFallbackBuilder-method-getMaxCustomFallbackCount'>/**Returns the maximum capacity of custom fallback families.
+</span>
+ This includes the the first font family passed to the constructor.
+ It is guaranteed that the value will be greater than or equal to 64.
+@return {Number} the maximum number of font families for the custom fallback
+*/
+getMaxCustomFallbackCount : function(  ) {},
+
+<span id='android-graphics-Typeface-CustomFallbackBuilder-method-setSystemFallback'>/**Sets a system fallback by name.
+</span>
+ You can specify generic font familiy names or OEM specific family names. If the system
+ don't have a specified fallback, the default fallback is used instead.
+ For more information about generic font families, see &lt;a
+ href=&quot;https://www.w3.org/TR/css-fonts-4/#generic-font-families&quot;&gt;CSS specification&lt;/a&gt;
+
+ For more information about fallback, see class description.
+@param {String} familyName a family name to be used for fallback if the provided fonts can not be
+                   used
+*/
+setSystemFallback : function(  ) {},
+
+<span id='android-graphics-Typeface-CustomFallbackBuilder-method-setStyle'>/**Sets a font style of the Typeface.
+</span>
+ If the font family doesn't have a font of given style, system will select the closest
+ font from font family. For example, if a font family has fonts of 300 weight and 700
+ weight then setWeight(400) is called, system will select the font of 300 weight.
+@param {Object {FontStyle}} style a font style
+*/
+setStyle : function(  ) {},
+
+<span id='android-graphics-Typeface-CustomFallbackBuilder-method-addCustomFallback'>/**Append a font family to the end of the custom font fallback.
+</span>
+ You can set up to 64 custom fallback families including the first font family you passed
+ to the constructor.
+ For more information about fallback, see class description.
+@param {Object {FontFamily}} family a fallback family
+@throws IllegalArgumentException if you give more than 64 custom fallback families
+*/
+addCustomFallback : function(  ) {},
+
+<span id='android-graphics-Typeface-CustomFallbackBuilder-method-build'>/**Create the Typeface based on the configured values.
+</span>@return {Object {android.graphics.Typeface}} the Typeface object
+*/
+build : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

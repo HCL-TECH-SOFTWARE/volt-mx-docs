@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-ExpandableListView'>/**@class android.widget.ExpandableListView
+</span>@extends android.widget.ListView
+
+ A view that shows items in a vertically scrolling two-level list. This
+ differs from the {@link android.widget.ListView} by allowing two levels: groups which can
+ individually be expanded to show its children. The items come from the
+ {@link android.widget.ExpandableListAdapter} associated with this view.
+ &lt;p&gt;
+ Expandable lists are able to show an indicator beside each item to display
+ the item's current state (the states are usually one of expanded group,
+ collapsed group, child, or last child). Use
+ {@link #setChildIndicator}(Drawable) or {@link #setGroupIndicator}(Drawable)
+ (or the corresponding XML attributes) to set these indicators (see the docs
+ for each method to see additional state that each Drawable can have). The
+ default style for an {@link android.widget.ExpandableListView} provides indicators which
+ will be shown next to Views given to the {@link android.widget.ExpandableListView}. The
+ layouts android.R.layout.simple_expandable_list_item_1 and
+ android.R.layout.simple_expandable_list_item_2 (which should be used with
+ {@link android.widget.SimpleCursorTreeAdapter}) contain the preferred position information
+ for indicators.
+ &lt;p&gt;
+ The context menu information set by an {@link android.widget.ExpandableListView} will be a
+ {@link android.widget.ExpandableListView.ExpandableListContextMenuInfo} object with
+ {@link android.widget.ExpandableListView.ExpandableListContextMenuInfo#packedPosition} being a packed position
+ that can be used with {@link #getPackedPositionType}(long) and the other
+ similar methods.
+ &lt;p&gt;
+ &lt;em&gt;&lt;b&gt;Note:&lt;/b&gt;&lt;/em&gt; You cannot use the value &lt;code&gt;wrap_content&lt;/code&gt;
+ for the &lt;code&gt;android:layout_height&lt;/code&gt; attribute of a
+ ExpandableListView in XML if the parent's size is also not strictly specified
+ (for example, if the parent were ScrollView you could not specify
+ wrap_content since it also can be any length. However, you can use
+ wrap_content if the ExpandableListView parent has a specific size, such as
+ 100 pixels.
+
+ @attr ref android.R.styleable#ExpandableListView_groupIndicator
+ @attr ref android.R.styleable#ExpandableListView_indicatorLeft
+ @attr ref android.R.styleable#ExpandableListView_indicatorRight
+ @attr ref android.R.styleable#ExpandableListView_childIndicator
+ @attr ref android.R.styleable#ExpandableListView_childIndicatorLeft
+ @attr ref android.R.styleable#ExpandableListView_childIndicatorRight
+ @attr ref android.R.styleable#ExpandableListView_childDivider
+ @attr ref android.R.styleable#ExpandableListView_indicatorStart
+ @attr ref android.R.styleable#ExpandableListView_indicatorEnd
+ @attr ref android.R.styleable#ExpandableListView_childIndicatorStart
+ @attr ref android.R.styleable#ExpandableListView_childIndicatorEnd
+*/
+var ExpandableListView = {
+
+<span id='android-widget-ExpandableListView-property-PACKED_POSITION_TYPE_GROUP'>/** The packed position represents a group.
+</span>*/
+PACKED_POSITION_TYPE_GROUP : &quot;0&quot;,
+<span id='android-widget-ExpandableListView-property-PACKED_POSITION_TYPE_CHILD'>/** The packed position represents a child.
+</span>*/
+PACKED_POSITION_TYPE_CHILD : &quot;1&quot;,
+<span id='android-widget-ExpandableListView-property-PACKED_POSITION_TYPE_NULL'>/** The packed position represents a neither/null/no preference.
+</span>*/
+PACKED_POSITION_TYPE_NULL : &quot;2&quot;,
+<span id='android-widget-ExpandableListView-property-PACKED_POSITION_VALUE_NULL'>/** The value for a packed position that represents neither/null/no
+</span> preference. This value is not otherwise possible since a group type
+ (first bit 0) should not have a child position filled.
+*/
+PACKED_POSITION_VALUE_NULL : &quot;4294967295&quot;,
+<span id='android-widget-ExpandableListView-property-CHILD_INDICATOR_INHERIT'>/** Denotes when a child indicator should inherit this bound from the generic
+</span> indicator bounds
+*/
+CHILD_INDICATOR_INHERIT : &quot;-1&quot;,
+<span id='android-widget-ExpandableListView-method-onRtlPropertiesChanged'>/**
+</span>*/
+onRtlPropertiesChanged : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setChildDivider'>/**Sets the drawable that will be drawn adjacent to every child in the list. This will
+</span> be drawn using the same height as the normal divider ({@link #setDivider}(Drawable)) or
+ if it does not have an intrinsic height, the height set by {@link #setDividerHeight}(int).
+@param {Object {Drawable}} childDivider The drawable to use.
+*/
+setChildDivider : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setAdapter'>/**This overloaded method should not be used, instead use
+</span> {@link #setAdapter}(ExpandableListAdapter).
+ &lt;p&gt;
+ {@inheritDoc}
+*/
+setAdapter : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getAdapter'>/**This method should not be used, use {@link #getExpandableListAdapter}().
+</span>*/
+getAdapter : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setOnItemClickListener'>/**Register a callback to be invoked when an item has been clicked and the
+</span> caller prefers to receive a ListView-style position instead of a group
+ and/or child position. In most cases, the caller should use
+ {@link #setOnGroupClickListener} and/or {@link #setOnChildClickListener}.
+ &lt;p /&gt;
+ {@inheritDoc}
+*/
+setOnItemClickListener : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setAdapter'>/**Sets the adapter that provides data to this view.
+</span>@param {Object {ExpandableListAdapter}} adapter The adapter that provides data to this view.
+*/
+setAdapter : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getExpandableListAdapter'>/**Gets the adapter that provides data to this view.
+</span>@return {Object {android.widget.ExpandableListAdapter}} The adapter that provides data to this view.
+*/
+getExpandableListAdapter : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-performItemClick'>/**
+</span>*/
+performItemClick : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-expandGroup'>/**Expand a group in the grouped list view
+</span>@param {Number} groupPos the group to be expanded
+@return {Boolean} True if the group was expanded, false otherwise (if the group
+         was already expanded, this will return false)
+*/
+expandGroup : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-expandGroup'>/**Expand a group in the grouped list view
+</span>@param {Number} groupPos the group to be expanded
+@param {Boolean} animate true if the expanding group should be animated in
+@return {Boolean} True if the group was expanded, false otherwise (if the group
+         was already expanded, this will return false)
+*/
+expandGroup : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-collapseGroup'>/**Collapse a group in the grouped list view
+</span>@param {Number} groupPos position of the group to collapse
+@return {Boolean} True if the group was collapsed, false otherwise (if the group
+         was already collapsed, this will return false)
+*/
+collapseGroup : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setOnGroupCollapseListener'>/**
+</span>*/
+setOnGroupCollapseListener : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setOnGroupExpandListener'>/**
+</span>*/
+setOnGroupExpandListener : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setOnGroupClickListener'>/**
+</span>*/
+setOnGroupClickListener : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setOnChildClickListener'>/**
+</span>*/
+setOnChildClickListener : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getExpandableListPosition'>/**Converts a flat list position (the raw position of an item (child or group)
+</span> in the list) to a group and/or child position (represented in a
+ packed position). This is useful in situations where the caller needs to
+ use the underlying {@link android.widget.ListView}'s methods. Use
+ {@link android.widget.ExpandableListView#getPackedPositionType} ,
+ {@link android.widget.ExpandableListView#getPackedPositionChild},
+ {@link android.widget.ExpandableListView#getPackedPositionGroup} to unpack.
+@param {Number} flatListPosition The flat list position to be converted.
+@return {Number} The group and/or child position for the given flat list position
+         in packed position representation. #PACKED_POSITION_VALUE_NULL if
+         the position corresponds to a header or a footer item.
+*/
+getExpandableListPosition : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getFlatListPosition'>/**Converts a group and/or child position to a flat list position. This is
+</span> useful in situations where the caller needs to use the underlying
+ {@link android.widget.ListView}'s methods.
+@param {Number} packedPosition The group and/or child positions to be converted in
+            packed position representation. Use
+            {@link #getPackedPositionForChild(int, int)} or
+            {@link #getPackedPositionForGroup(int)}.
+@return {Number} The flat list position for the given child or group.
+*/
+getFlatListPosition : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getSelectedPosition'>/**Gets the position of the currently selected group or child (along with
+</span> its type). Can return {@link #PACKED_POSITION_VALUE_NULL} if no selection.
+@return {Number} A packed position containing the currently selected group or
+         child's position and type. #PACKED_POSITION_VALUE_NULL if no selection
+         or if selection is on a header or a footer item.
+*/
+getSelectedPosition : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getSelectedId'>/**Gets the ID of the currently selected group or child. Can return -1 if no
+</span> selection.
+@return {Number} The ID of the currently selected group or child. -1 if no
+         selection.
+*/
+getSelectedId : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setSelectedGroup'>/**Sets the selection to the specified group.
+</span>@param {Number} groupPosition The position of the group that should be selected.
+*/
+setSelectedGroup : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setSelectedChild'>/**Sets the selection to the specified child. If the child is in a collapsed
+</span> group, the group will only be expanded and child subsequently selected if
+ shouldExpandGroup is set to true, otherwise the method will return false.
+@param {Number} groupPosition The position of the group that contains the child.
+@param {Number} childPosition The position of the child within the group.
+@param {Boolean} shouldExpandGroup Whether the child's group should be expanded if
+            it is collapsed.
+@return {Boolean} Whether the selection was successfully set on the child.
+*/
+setSelectedChild : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-isGroupExpanded'>/**Whether the given group is currently expanded.
+</span>@param {Number} groupPosition The group to check.
+@return {Boolean} Whether the group is currently expanded.
+*/
+isGroupExpanded : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getPackedPositionType'>/**Gets the type of a packed position. See
+</span> {@link #getPackedPositionForChild(int, int)}.
+@param {Number} packedPosition The packed position for which to return the type.
+@return {Number} The type of the position contained within the packed position,
+         either {@link #PACKED_POSITION_TYPE_CHILD}, {@link #PACKED_POSITION_TYPE_GROUP}, or
+         {@link #PACKED_POSITION_TYPE_NULL}.
+*/
+getPackedPositionType : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getPackedPositionGroup'>/**Gets the group position from a packed position. See
+</span> {@link #getPackedPositionForChild(int, int)}.
+@param {Number} packedPosition The packed position from which the group position
+            will be returned.
+@return {Number} The group position portion of the packed position. If this does
+         not contain a group, returns -1.
+*/
+getPackedPositionGroup : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getPackedPositionChild'>/**Gets the child position from a packed position that is of
+</span> {@link #PACKED_POSITION_TYPE_CHILD} type (use {@link #getPackedPositionType}(long)).
+ To get the group that this child belongs to, use
+ {@link #getPackedPositionGroup}(long). See
+ {@link #getPackedPositionForChild(int, int)}.
+@param {Number} packedPosition The packed position from which the child position
+            will be returned.
+@return {Number} The child position portion of the packed position. If this does
+         not contain a child, returns -1.
+*/
+getPackedPositionChild : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getPackedPositionForChild'>/**Returns the packed position representation of a child's position.
+</span> &lt;p&gt;
+ In general, a packed position should be used in
+ situations where the position given to/returned from an
+ {@link android.widget.ExpandableListAdapter} or {@link android.widget.ExpandableListView} method can
+ either be a child or group. The two positions are packed into a single
+ long which can be unpacked using
+ {@link #getPackedPositionChild}(long),
+ {@link #getPackedPositionGroup}(long), and
+ {@link #getPackedPositionType}(long).
+@param {Number} groupPosition The child's parent group's position.
+@param {Number} childPosition The child position within the group.
+@return {Number} The packed position representation of the child (and parent group).
+*/
+getPackedPositionForChild : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getPackedPositionForGroup'>/**Returns the packed position representation of a group's position. See
+</span> {@link #getPackedPositionForChild(int, int)}.
+@param {Number} groupPosition The child's parent group's position.
+@return {Number} The packed position representation of the group.
+*/
+getPackedPositionForGroup : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setChildIndicator'>/**Sets the indicator to be drawn next to a child.
+</span>@param {Object {Drawable}} childIndicator The drawable to be used as an indicator. If the
+            child is the last child for a group, the state
+            {@link android.R.attr#state_last} will be set.
+*/
+setChildIndicator : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setChildIndicatorBounds'>/**Sets the drawing bounds for the child indicator. For either, you can
+</span> specify {@link #CHILD_INDICATOR_INHERIT} to use inherit from the general
+ indicator's bounds.
+@param {Number} left The left position (relative to the left bounds of this View)
+            to start drawing the indicator.
+@param {Number} right The right position (relative to the left bounds of this
+            View) to end the drawing of the indicator.
+@param right The right position (relative to the left bounds of this
+            View) to end the drawing of the indicator.
+*/
+setChildIndicatorBounds : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setChildIndicatorBoundsRelative'>/**Sets the relative drawing bounds for the child indicator. For either, you can
+</span> specify {@link #CHILD_INDICATOR_INHERIT} to use inherit from the general
+ indicator's bounds.
+@param {Number} start The start position (relative to the start bounds of this View)
+            to start drawing the indicator.
+@param {Number} end The end position (relative to the end bounds of this
+            View) to end the drawing of the indicator.
+@param end The end position (relative to the end bounds of this
+            View) to end the drawing of the indicator.
+*/
+setChildIndicatorBoundsRelative : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setGroupIndicator'>/**Sets the indicator to be drawn next to a group.
+</span>@param {Object {Drawable}} groupIndicator The drawable to be used as an indicator. If the
+            group is empty, the state {@link android.R.attr#state_empty} will be
+            set. If the group is expanded, the state
+            {@link android.R.attr#state_expanded} will be set.
+*/
+setGroupIndicator : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setIndicatorBounds'>/**Sets the drawing bounds for the indicators (at minimum, the group indicator
+</span> is affected by this; the child indicator is affected by this if the
+ child indicator bounds are set to inherit).
+@param {Number} left The left position (relative to the left bounds of this View)
+            to start drawing the indicator.
+@param {Number} right The right position (relative to the left bounds of this
+            View) to end the drawing of the indicator.
+@param right The right position (relative to the left bounds of this
+            View) to end the drawing of the indicator.
+*/
+setIndicatorBounds : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-setIndicatorBoundsRelative'>/**Sets the relative drawing bounds for the indicators (at minimum, the group indicator
+</span> is affected by this; the child indicator is affected by this if the
+ child indicator bounds are set to inherit).
+@param {Number} start The start position (relative to the start bounds of this View)
+            to start drawing the indicator.
+@param {Number} end The end position (relative to the end bounds of this
+            View) to end the drawing of the indicator.
+@param end The end position (relative to the end bounds of this
+            View) to end the drawing of the indicator.
+*/
+setIndicatorBoundsRelative : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-onRestoreInstanceState'>/**
+</span>*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='android-widget-ExpandableListView-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Process'>/**@class android.os.Process
+</span>@extends java.lang.Object
+
+ Tools for managing OS processes.
+*/
+var Process = {
+
+<span id='android-os-Process-property-INVALID_UID'>/** An invalid UID value.
+</span>*/
+INVALID_UID : &quot;-1&quot;,
+<span id='android-os-Process-property-ROOT_UID'>/** Defines the root UID.
+</span>*/
+ROOT_UID : &quot;0&quot;,
+<span id='android-os-Process-property-SYSTEM_UID'>/** Defines the UID/GID under which system code runs.
+</span>*/
+SYSTEM_UID : &quot;1000&quot;,
+<span id='android-os-Process-property-PHONE_UID'>/** Defines the UID/GID under which the telephony code runs.
+</span>*/
+PHONE_UID : &quot;1001&quot;,
+<span id='android-os-Process-property-SHELL_UID'>/** Defines the UID/GID for the user shell.
+</span>*/
+SHELL_UID : &quot;2000&quot;,
+<span id='android-os-Process-property-LOG_UID'>/** Defines the UID/GID for the log group.
+</span> @hide
+*/
+LOG_UID : &quot;1007&quot;,
+<span id='android-os-Process-property-WIFI_UID'>/** Defines the UID/GID for the WIFI supplicant process.
+</span> @hide
+*/
+WIFI_UID : &quot;1010&quot;,
+<span id='android-os-Process-property-MEDIA_UID'>/** Defines the UID/GID for the mediaserver process.
+</span> @hide
+*/
+MEDIA_UID : &quot;1013&quot;,
+<span id='android-os-Process-property-DRM_UID'>/** Defines the UID/GID for the DRM process.
+</span> @hide
+*/
+DRM_UID : &quot;1019&quot;,
+<span id='android-os-Process-property-VPN_UID'>/** Defines the UID/GID for the group that controls VPN services.
+</span> @hide
+*/
+VPN_UID : &quot;1016&quot;,
+<span id='android-os-Process-property-KEYSTORE_UID'>/** Defines the UID/GID for keystore.
+</span> @hide
+*/
+KEYSTORE_UID : &quot;1017&quot;,
+<span id='android-os-Process-property-NFC_UID'>/** Defines the UID/GID for the NFC service process.
+</span> @hide
+*/
+NFC_UID : &quot;1027&quot;,
+<span id='android-os-Process-property-CLAT_UID'>/** Defines the UID/GID for the clatd process.
+</span> @hide
+ */
+CLAT_UID : &quot;1029&quot;,
+<span id='android-os-Process-property-BLUETOOTH_UID'>/** Defines the UID/GID for the Bluetooth service process.
+</span>*/
+BLUETOOTH_UID : &quot;1002&quot;,
+<span id='android-os-Process-property-MEDIA_RW_GID'>/** Defines the GID for the group that allows write access to the internal media storage.
+</span> @hide
+*/
+MEDIA_RW_GID : &quot;1023&quot;,
+<span id='android-os-Process-property-PACKAGE_INFO_GID'>/** Access to installed package details
+</span> @hide
+*/
+PACKAGE_INFO_GID : &quot;1032&quot;,
+<span id='android-os-Process-property-SHARED_RELRO_UID'>/** Defines the UID/GID for the shared RELRO file updater process.
+</span> @hide
+*/
+SHARED_RELRO_UID : &quot;1037&quot;,
+<span id='android-os-Process-property-AUDIOSERVER_UID'>/** Defines the UID/GID for the audioserver process.
+</span> @hide
+*/
+AUDIOSERVER_UID : &quot;1041&quot;,
+<span id='android-os-Process-property-CAMERASERVER_UID'>/** Defines the UID/GID for the cameraserver process
+</span> @hide
+*/
+CAMERASERVER_UID : &quot;1047&quot;,
+<span id='android-os-Process-property-DNS_TETHER_UID'>/** Defines the UID/GID for the tethering DNS resolver (currently dnsmasq).
+</span> @hide
+*/
+DNS_TETHER_UID : &quot;1052&quot;,
+<span id='android-os-Process-property-WEBVIEW_ZYGOTE_UID'>/** Defines the UID/GID for the WebView zygote process.
+</span> @hide
+*/
+WEBVIEW_ZYGOTE_UID : &quot;1053&quot;,
+<span id='android-os-Process-property-OTA_UPDATE_UID'>/** Defines the UID used for resource tracking for OTA updates.
+</span> @hide
+*/
+OTA_UPDATE_UID : &quot;1061&quot;,
+<span id='android-os-Process-property-INCIDENTD_UID'>/** Defines the UID used for incidentd.
+</span> @hide
+*/
+INCIDENTD_UID : &quot;1067&quot;,
+<span id='android-os-Process-property-SE_UID'>/** Defines the UID/GID for the Secure Element service process.
+</span> @hide
+*/
+SE_UID : &quot;1068&quot;,
+<span id='android-os-Process-property-NETWORK_STACK_UID'>/** Defines the UID/GID for the NetworkStack app.
+</span> @hide
+*/
+NETWORK_STACK_UID : &quot;1073&quot;,
+<span id='android-os-Process-property-NOBODY_UID'>/**{@hide} */
+</span>NOBODY_UID : &quot;9999&quot;,
+<span id='android-os-Process-property-FIRST_APPLICATION_UID'>/** Defines the start of a range of UIDs (and GIDs), going from this
+</span> number to {@link #LAST_APPLICATION_UID} that are reserved for assigning
+ to applications.
+*/
+FIRST_APPLICATION_UID : &quot;10000&quot;,
+<span id='android-os-Process-property-LAST_APPLICATION_UID'>/** Last of application-specific UIDs starting at
+</span> {@link #FIRST_APPLICATION_UID}.
+*/
+LAST_APPLICATION_UID : &quot;19999&quot;,
+<span id='android-os-Process-property-FIRST_APP_ZYGOTE_ISOLATED_UID'>/** First uid used for fully isolated sandboxed processes spawned from an app zygote
+</span> @hide
+*/
+FIRST_APP_ZYGOTE_ISOLATED_UID : &quot;90000&quot;,
+<span id='android-os-Process-property-NUM_UIDS_PER_APP_ZYGOTE'>/** Number of UIDs we allocate per application zygote
+</span> @hide
+*/
+NUM_UIDS_PER_APP_ZYGOTE : &quot;100&quot;,
+<span id='android-os-Process-property-LAST_APP_ZYGOTE_ISOLATED_UID'>/** Last uid used for fully isolated sandboxed processes spawned from an app zygote
+</span> @hide
+*/
+LAST_APP_ZYGOTE_ISOLATED_UID : &quot;98999&quot;,
+<span id='android-os-Process-property-FIRST_ISOLATED_UID'>/** First uid used for fully isolated sandboxed processes (with no permissions of their own)
+</span> @hide
+*/
+FIRST_ISOLATED_UID : &quot;99000&quot;,
+<span id='android-os-Process-property-LAST_ISOLATED_UID'>/** Last uid used for fully isolated sandboxed processes (with no permissions of their own)
+</span> @hide
+*/
+LAST_ISOLATED_UID : &quot;99999&quot;,
+<span id='android-os-Process-property-SHARED_USER_GID'>/** Defines the gid shared by all applications running under the same profile.
+</span> @hide
+*/
+SHARED_USER_GID : &quot;9997&quot;,
+<span id='android-os-Process-property-FIRST_SHARED_APPLICATION_GID'>/** First gid for applications to share resources. Used when forward-locking
+</span> is enabled but all UserHandles need to be able to read the resources.
+ @hide
+*/
+FIRST_SHARED_APPLICATION_GID : &quot;50000&quot;,
+<span id='android-os-Process-property-LAST_SHARED_APPLICATION_GID'>/** Last gid for applications to share resources. Used when forward-locking
+</span> is enabled but all UserHandles need to be able to read the resources.
+ @hide
+*/
+LAST_SHARED_APPLICATION_GID : &quot;59999&quot;,
+<span id='android-os-Process-property-FIRST_APPLICATION_CACHE_GID'>/**{@hide} */
+</span>FIRST_APPLICATION_CACHE_GID : &quot;20000&quot;,
+<span id='android-os-Process-property-LAST_APPLICATION_CACHE_GID'>/**{@hide} */
+</span>LAST_APPLICATION_CACHE_GID : &quot;29999&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_DEFAULT'>/** Standard priority of application threads.
+</span> Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_DEFAULT : &quot;0&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_LOWEST'>/** Lowest available thread priority.  Only for those who really, really
+</span> don't want to run if anything else is happening.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_LOWEST : &quot;19&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_BACKGROUND'>/** Standard priority background threads.  This gives your thread a slightly
+</span> lower than normal priority, so that it will have less chance of impacting
+ the responsiveness of the user interface.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_BACKGROUND : &quot;10&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_FOREGROUND'>/** Standard priority of threads that are currently running a user interface
+</span> that the user is interacting with.  Applications can not normally
+ change to this priority; the system will automatically adjust your
+ application threads as the user moves through the UI.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_FOREGROUND : &quot;-2&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_DISPLAY'>/** Standard priority of system display threads, involved in updating
+</span> the user interface.  Applications can not
+ normally change to this priority.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_DISPLAY : &quot;-4&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_URGENT_DISPLAY'>/** Standard priority of the most important display threads, for compositing
+</span> the screen and retrieving input events.  Applications can not normally
+ change to this priority.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_URGENT_DISPLAY : &quot;-8&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_VIDEO'>/** Standard priority of video threads.  Applications can not normally
+</span> change to this priority.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_VIDEO : &quot;-10&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_AUDIO'>/** Standard priority of audio threads.  Applications can not normally
+</span> change to this priority.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_AUDIO : &quot;-16&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_URGENT_AUDIO'>/** Standard priority of the most important audio threads.
+</span> Applications can not normally change to this priority.
+ Use with {@link #setThreadPriority}(int) and
+ {@link #setThreadPriority(int, int)}, &lt;b&gt;not&lt;/b&gt; with the normal
+ {@link java.lang.Thread} class.
+*/
+THREAD_PRIORITY_URGENT_AUDIO : &quot;-19&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_MORE_FAVORABLE'>/** Minimum increment to make a priority more favorable.
+</span>*/
+THREAD_PRIORITY_MORE_FAVORABLE : &quot;-1&quot;,
+<span id='android-os-Process-property-THREAD_PRIORITY_LESS_FAVORABLE'>/** Minimum increment to make a priority less favorable.
+</span>*/
+THREAD_PRIORITY_LESS_FAVORABLE : &quot;1&quot;,
+<span id='android-os-Process-property-SCHED_OTHER'>/** Default scheduling policy
+</span> @hide
+*/
+SCHED_OTHER : &quot;0&quot;,
+<span id='android-os-Process-property-SCHED_FIFO'>/** First-In First-Out scheduling policy
+</span> @hide
+*/
+SCHED_FIFO : &quot;1&quot;,
+<span id='android-os-Process-property-SCHED_RR'>/** Round-Robin scheduling policy
+</span> @hide
+*/
+SCHED_RR : &quot;2&quot;,
+<span id='android-os-Process-property-SCHED_BATCH'>/** Batch scheduling policy
+</span> @hide
+*/
+SCHED_BATCH : &quot;3&quot;,
+<span id='android-os-Process-property-SCHED_IDLE'>/** Idle scheduling policy
+</span> @hide
+*/
+SCHED_IDLE : &quot;5&quot;,
+<span id='android-os-Process-property-SCHED_RESET_ON_FORK'>/** Reset scheduler choice on fork.
+</span> @hide
+*/
+SCHED_RESET_ON_FORK : &quot;1073741824&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_DEFAULT'>/** Default thread group -
+</span> has meaning with setProcessGroup() only, cannot be used with setThreadGroup().
+ When used with setProcessGroup(), the group of each thread in the process
+ is conditionally changed based on that thread's current priority, as follows:
+ threads with priority numerically less than THREAD_PRIORITY_BACKGROUND
+ are moved to foreground thread group.  All other threads are left unchanged.
+ @hide
+*/
+THREAD_GROUP_DEFAULT : &quot;-1&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_BG_NONINTERACTIVE'>/** Background thread group - All threads in
+</span> this group are scheduled with a reduced share of the CPU.
+ Value is same as constant SP_BACKGROUND of enum SchedPolicy.
+ FIXME rename to THREAD_GROUP_BACKGROUND.
+ @hide
+*/
+THREAD_GROUP_BG_NONINTERACTIVE : &quot;0&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_SYSTEM'>/** System thread group.
+</span> @hide
+*/
+THREAD_GROUP_SYSTEM : &quot;2&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_AUDIO_APP'>/** Application audio thread group.
+</span> @hide
+*/
+THREAD_GROUP_AUDIO_APP : &quot;3&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_AUDIO_SYS'>/** System audio thread group.
+</span> @hide
+*/
+THREAD_GROUP_AUDIO_SYS : &quot;4&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_TOP_APP'>/** Thread group for top foreground app.
+</span> @hide
+*/
+THREAD_GROUP_TOP_APP : &quot;5&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_RT_APP'>/** Thread group for RT app.
+</span> @hide
+*/
+THREAD_GROUP_RT_APP : &quot;6&quot;,
+<span id='android-os-Process-property-THREAD_GROUP_RESTRICTED'>/** Thread group for bound foreground services that should
+</span> have additional CPU restrictions during screen off
+ @hide
+*/
+THREAD_GROUP_RESTRICTED : &quot;7&quot;,
+<span id='android-os-Process-property-SIGNAL_QUIT'>/***/
+</span>SIGNAL_QUIT : &quot;3&quot;,
+<span id='android-os-Process-property-SIGNAL_KILL'>/***/
+</span>SIGNAL_KILL : &quot;9&quot;,
+<span id='android-os-Process-property-SIGNAL_USR1'>/***/
+</span>SIGNAL_USR1 : &quot;10&quot;,
+<span id='android-os-Process-property-ZYGOTE_PROCESS'>/** State associated with the zygote process.
+</span> @hide
+*/
+ZYGOTE_PROCESS : &quot;null&quot;,
+<span id='android-os-Process-property-PROC_TERM_MASK'>/**@hide */
+</span>PROC_TERM_MASK : &quot;255&quot;,
+<span id='android-os-Process-property-PROC_ZERO_TERM'>/**@hide */
+</span>PROC_ZERO_TERM : &quot;0&quot;,
+<span id='android-os-Process-property-PROC_SPACE_TERM'>/**@hide */
+</span>PROC_SPACE_TERM : &quot;32&quot;,
+<span id='android-os-Process-property-PROC_TAB_TERM'>/**@hide */
+</span>PROC_TAB_TERM : &quot;9&quot;,
+<span id='android-os-Process-property-PROC_NEWLINE_TERM'>/**@hide */
+</span>PROC_NEWLINE_TERM : &quot;10&quot;,
+<span id='android-os-Process-property-PROC_COMBINE'>/**@hide */
+</span>PROC_COMBINE : &quot;256&quot;,
+<span id='android-os-Process-property-PROC_PARENS'>/**@hide */
+</span>PROC_PARENS : &quot;512&quot;,
+<span id='android-os-Process-property-PROC_QUOTES'>/**@hide */
+</span>PROC_QUOTES : &quot;1024&quot;,
+<span id='android-os-Process-property-PROC_CHAR'>/**@hide */
+</span>PROC_CHAR : &quot;2048&quot;,
+<span id='android-os-Process-property-PROC_OUT_STRING'>/**@hide */
+</span>PROC_OUT_STRING : &quot;4096&quot;,
+<span id='android-os-Process-property-PROC_OUT_LONG'>/**@hide */
+</span>PROC_OUT_LONG : &quot;8192&quot;,
+<span id='android-os-Process-property-PROC_OUT_FLOAT'>/**@hide */
+</span>PROC_OUT_FLOAT : &quot;16384&quot;,
+<span id='android-os-Process-method-start'>/**Start a new process.
+</span> 
+ &lt;p&gt;If processes are enabled, a new process is created and the
+ static main() function of a &lt;var&gt;processClass&lt;/var&gt; is executed there.
+ The process will continue running after this function returns.
+ 
+ &lt;p&gt;If processes are not enabled, a new thread in the caller's
+ process is created and main() of &lt;var&gt;processClass&lt;/var&gt; called there.
+ 
+ &lt;p&gt;The niceName parameter, if not an empty string, is a custom name to
+ give to the process instead of using processClass.  This allows you to
+ make easily identifyable processes even if you are using the same base
+ &lt;var&gt;processClass&lt;/var&gt; to start them.
+ 
+ When invokeWith is not null, the process will be started as a fresh app
+ and not a zygote fork. Note that this is only allowed for uid 0 or when
+ runtimeFlags contains DEBUG_ENABLE_DEBUGGER.
+@param {String} processClass The class to use as the process's main entry
+                     point.
+@param {String} niceName A more readable name to use for the process.
+@param {Number} uid The user-id under which the process will run.
+@param {Number} gid The group-id under which the process will run.
+@param {Object {int[]}} gids Additional group-ids associated with the process.
+@param {Number} runtimeFlags Additional flags for the runtime.
+@param {Number} targetSdkVersion The target SDK version for the app.
+@param {Number} seInfo null-ok SELinux information for the new process.
+@param {String} abi non-null the ABI this app should be started with.
+@param {String} instructionSet null-ok the instruction set to use.
+@param {String} appDataDir null-ok the data directory of the app.
+@param {String} invokeWith null-ok the command to invoke with.
+@param {String} packageName null-ok the name of the package this process belongs to.
+@param {String} zygoteArgs Additional arguments to supply to the zygote process.
+@return {Object {android.os.Process.ProcessStartResult}} An object that describes the result of the attempt to start the process.
+@throws RuntimeException on fatal start failure
+ 
+ {@hide}
+*/
+start : function(  ) {},
+
+<span id='android-os-Process-method-startWebView'>/**
+</span>@hide 
+*/
+startWebView : function(  ) {},
+
+<span id='android-os-Process-method-getElapsedCpuTime'>/**Returns elapsed milliseconds of the time this process has run.
+</span>@return {Number} Returns the number of milliseconds this process has return.
+*/
+getElapsedCpuTime : function(  ) {},
+
+<span id='android-os-Process-method-getStartElapsedRealtime'>/**Return the {@link android.os.SystemClock#elapsedRealtime()} at which this process was started.
+</span>*/
+getStartElapsedRealtime : function(  ) {},
+
+<span id='android-os-Process-method-getStartUptimeMillis'>/**Return the {@link android.os.SystemClock#uptimeMillis()} at which this process was started.
+</span>*/
+getStartUptimeMillis : function(  ) {},
+
+<span id='android-os-Process-method-setStartTimes'>/**
+</span>@hide 
+*/
+setStartTimes : function(  ) {},
+
+<span id='android-os-Process-method-is64Bit'>/**Returns true if the current process is a 64-bit runtime.
+</span>*/
+is64Bit : function(  ) {},
+
+<span id='android-os-Process-method-myPid'>/**Returns the identifier of this process, which can be used with
+</span> {@link #killProcess} and {@link #sendSignal}.
+*/
+myPid : function(  ) {},
+
+<span id='android-os-Process-method-myPpid'>/**Returns the identifier of this process' parent.
+</span>@hide 
+*/
+myPpid : function(  ) {},
+
+<span id='android-os-Process-method-myTid'>/**Returns the identifier of the calling thread, which be used with
+</span> {@link #setThreadPriority(int, int)}.
+*/
+myTid : function(  ) {},
+
+<span id='android-os-Process-method-myUid'>/**Returns the identifier of this process's uid.  This is the kernel uid
+</span> that the process is running under, which is the identity of its
+ app-specific sandbox.  It is different from {@link #myUserHandle} in that
+ a uid identifies a specific app sandbox in a specific user.
+*/
+myUid : function(  ) {},
+
+<span id='android-os-Process-method-myUserHandle'>/**Returns this process's user handle.  This is the
+</span> user the process is running under.  It is distinct from
+ {@link #myUid}() in that a particular user will have multiple
+ distinct apps running under it each with their own uid.
+*/
+myUserHandle : function(  ) {},
+
+<span id='android-os-Process-method-isCoreUid'>/**Returns whether the given uid belongs to a system core component or not.
+</span>@hide 
+*/
+isCoreUid : function(  ) {},
+
+<span id='android-os-Process-method-isApplicationUid'>/**Returns whether the given uid belongs to an application.
+</span>@param {Number} uid A kernel uid.
+@return {Boolean} Whether the uid corresponds to an application sandbox running in
+     a specific user.
+*/
+isApplicationUid : function(  ) {},
+
+<span id='android-os-Process-method-isIsolated'>/**Returns whether the current process is in an isolated sandbox.
+</span>*/
+isIsolated : function(  ) {},
+
+<span id='android-os-Process-method-isIsolated'>/**{@hide}
+</span>*/
+isIsolated : function(  ) {},
+
+<span id='android-os-Process-method-getUidForName'>/**Returns the UID assigned to a particular user name, or -1 if there is
+</span> none.  If the given string consists of only numbers, it is converted
+ directly to a uid.
+*/
+getUidForName : function(  ) {},
+
+<span id='android-os-Process-method-getGidForName'>/**Returns the GID assigned to a particular user name, or -1 if there is
+</span> none.  If the given string consists of only numbers, it is converted
+ directly to a gid.
+*/
+getGidForName : function(  ) {},
+
+<span id='android-os-Process-method-getUidForPid'>/**Returns a uid for a currently running process.
+</span>@param {Number} pid the process id
+@return {Number} the uid of the process, or -1 if the process is not running.
+@hide pending API council review
+*/
+getUidForPid : function(  ) {},
+
+<span id='android-os-Process-method-getParentPid'>/**Returns the parent process id for a currently running process.
+</span>@param {Number} pid the process id
+@return {Number} the parent process id of the process, or -1 if the process is not running.
+@hide 
+*/
+getParentPid : function(  ) {},
+
+<span id='android-os-Process-method-getThreadGroupLeader'>/**Returns the thread group leader id for a currently running thread.
+</span>@param {Number} tid the thread id
+@return {Number} the thread group leader id of the thread, or -1 if the thread is not running.
+         This is same as what getpid(2) would return if called by tid.
+@hide 
+*/
+getThreadGroupLeader : function(  ) {},
+
+<span id='android-os-Process-method-setThreadPriority'>/**Set the priority of a thread, based on Linux priorities.
+</span>@param {Number} tid The identifier of the thread/process to change.
+@param {Number} priority A Linux priority level, from -20 for highest scheduling
+ priority to 19 for lowest scheduling priority.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist.
+@throws SecurityException Throws SecurityException if your process does
+ not have permission to modify the given thread, or to use the given
+ priority.
+*/
+setThreadPriority : function(  ) {},
+
+<span id='android-os-Process-method-setCanSelfBackground'>/**Call with 'false' to cause future calls to {@link #setThreadPriority}(int) to
+</span> throw an exception if passed a background-level thread priority.  This is only
+ effective if the JNI layer is built with GUARD_THREAD_PRIORITY defined to 1.
+@hide 
+*/
+setCanSelfBackground : function(  ) {},
+
+<span id='android-os-Process-method-setThreadGroup'>/**Sets the scheduling group for a thread.
+</span>@param {Number} tid The identifier of the thread to change.
+@param {Number} group The target group for this thread from THREAD_GROUP_*.
+@param group The target group for this thread from THREAD_GROUP_*.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist.
+@throws SecurityException Throws SecurityException if your process does
+ not have permission to modify the given thread, or to use the given
+ priority.
+ If the thread is a thread group leader, that is it's gettid() == getpid(),
+ then the other threads in the same thread group are _not_ affected.
+
+ Does not set cpuset for some historical reason, just calls
+ libcutils::set_sched_policy().
+*/
+setThreadGroup : function(  ) {},
+
+<span id='android-os-Process-method-setThreadGroupAndCpuset'>/**Sets the scheduling group and the corresponding cpuset group
+</span>@param {Number} tid The identifier of the thread to change.
+@param {Number} group The target group for this thread from THREAD_GROUP_*.
+@param group The target group for this thread from THREAD_GROUP_*.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist.
+@throws SecurityException Throws SecurityException if your process does
+ not have permission to modify the given thread, or to use the given
+ priority.
+*/
+setThreadGroupAndCpuset : function(  ) {},
+
+<span id='android-os-Process-method-setProcessGroup'>/**Sets the scheduling group for a process and all child threads
+</span>@param {Number} pid The identifier of the process to change.
+@param {Number} group The target group for this process from THREAD_GROUP_*.
+@param group The target group for this process from THREAD_GROUP_*.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist.
+@throws SecurityException Throws SecurityException if your process does
+ not have permission to modify the given thread, or to use the given
+ priority.
+
+ group == THREAD_GROUP_DEFAULT means to move all non-background priority
+ threads to the foreground scheduling group, but to leave background
+ priority threads alone.  group == THREAD_GROUP_BG_NONINTERACTIVE moves all
+ threads, regardless of priority, to the background scheduling group.
+ group == THREAD_GROUP_FOREGROUND is not allowed.
+
+ Always sets cpusets.
+*/
+setProcessGroup : function(  ) {},
+
+<span id='android-os-Process-method-getProcessGroup'>/**Return the scheduling group of requested process.
+</span>@hide 
+*/
+getProcessGroup : function(  ) {},
+
+<span id='android-os-Process-method-getExclusiveCores'>/**On some devices, the foreground process may have one or more CPU
+</span> cores exclusively reserved for it. This method can be used to
+ retrieve which cores that are (if any), so the calling process
+ can then use sched_setaffinity() to lock a thread to these cores.
+ Note that the calling process must currently be running in the
+ foreground for this method to return any cores.
+
+ The CPU core(s) exclusively reserved for the foreground process will
+ stay reserved for as long as the process stays in the foreground.
+
+ As soon as a process leaves the foreground, those CPU cores will
+ no longer be reserved for it, and will most likely be reserved for
+ the new foreground process. It's not necessary to change the affinity
+ of your process when it leaves the foreground (if you had previously
+ set it to use a reserved core); the OS will automatically take care
+ of resetting the affinity at that point.
+@return {Number} an array of integers, indicating the CPU cores exclusively
+ reserved for this process. The array will have length zero if no
+ CPU cores are exclusively reserved for this process at this point
+ in time.
+*/
+getExclusiveCores : function(  ) {},
+
+<span id='android-os-Process-method-setThreadPriority'>/**Set the priority of the calling thread, based on Linux priorities.  See
+</span> {@link #setThreadPriority(int, int)} for more information.
+@param {Number} priority A Linux priority level, from -20 for highest scheduling
+ priority to 19 for lowest scheduling priority.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist.
+@throws SecurityException Throws SecurityException if your process does
+ not have permission to modify the given thread, or to use the given
+ priority.
+@see #setThreadPriority(int, int)
+*/
+setThreadPriority : function(  ) {},
+
+<span id='android-os-Process-method-getThreadPriority'>/**Return the current priority of a thread, based on Linux priorities.
+</span>@param {Number} tid The identifier of the thread/process. If tid equals zero, the priority of the
+ calling process/thread will be returned.
+@return {Number} Returns the current priority, as a Linux priority level,
+ from -20 for highest scheduling priority to 19 for lowest scheduling
+ priority.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist.
+*/
+getThreadPriority : function(  ) {},
+
+<span id='android-os-Process-method-getThreadScheduler'>/**Return the current scheduling policy of a thread, based on Linux.
+</span>@param {Number} tid The identifier of the thread/process to get the scheduling policy.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist, or if &lt;var&gt;priority&lt;/var&gt; is out of range for the policy.
+@throws SecurityException Throws SecurityException if your process does
+ not have permission to modify the given thread, or to use the given
+ scheduling policy or priority.
+
+ {@hide}
+*/
+getThreadScheduler : function(  ) {},
+
+<span id='android-os-Process-method-setThreadScheduler'>/**Set the scheduling policy and priority of a thread, based on Linux.
+</span>@param {Number} tid The identifier of the thread/process to change.
+@param {Number} policy A Linux scheduling policy such as SCHED_OTHER etc.
+@param {Number} priority A Linux priority level in a range appropriate for the given policy.
+@throws IllegalArgumentException Throws IllegalArgumentException if
+ &lt;var&gt;tid&lt;/var&gt; does not exist, or if &lt;var&gt;priority&lt;/var&gt; is out of range for the policy.
+@throws SecurityException Throws SecurityException if your process does
+ not have permission to modify the given thread, or to use the given
+ scheduling policy or priority.
+
+ {@hide}
+*/
+setThreadScheduler : function(  ) {},
+
+<span id='android-os-Process-method-supportsProcesses'>/**Determine whether the current environment supports multiple processes.
+</span>@return {Boolean} Returns true if the system can run in multiple processes, else
+ false if everything is running in a single process.
+@deprecated This method always returns true.  Do not use.
+*/
+supportsProcesses : function(  ) {},
+
+<span id='android-os-Process-method-setSwappiness'>/**Adjust the swappiness level for a process.
+</span>@param {Number} pid The process identifier to set.
+@param {Boolean} is_increased Whether swappiness should be increased or default.
+@return {Boolean} Returns true if the underlying system supports this
+         feature, else false.
+
+ {@hide}
+*/
+setSwappiness : function(  ) {},
+
+<span id='android-os-Process-method-setArgV0'>/**Change this process's argv[0] parameter.  This can be useful to show
+</span> more descriptive information in things like the 'ps' command.
+@param {String} text The new name of this process.
+ 
+ {@hide}
+*/
+setArgV0 : function(  ) {},
+
+<span id='android-os-Process-method-killProcess'>/**Kill the process with the given PID.
+</span> Note that, though this API allows us to request to
+ kill any process based on its PID, the kernel will
+ still impose standard restrictions on which PIDs you
+ are actually able to kill.  Typically this means only
+ the process running the caller's packages/application
+ and any additional processes created by that app; packages
+ sharing a common UID will also be able to kill each
+ other's processes.
+*/
+killProcess : function(  ) {},
+
+<span id='android-os-Process-method-setUid'>/**
+</span>@hide 
+*/
+setUid : function(  ) {},
+
+<span id='android-os-Process-method-setGid'>/**
+</span>@hide 
+*/
+setGid : function(  ) {},
+
+<span id='android-os-Process-method-sendSignal'>/**Send a signal to the given process.
+</span>@param {Number} pid The pid of the target process.
+@param {Number} signal The signal to send.
+*/
+sendSignal : function(  ) {},
+
+<span id='android-os-Process-method-killProcessQuiet'>/**
+</span>@hide Private impl for avoiding a log message...  DO NOT USE without doing
+ your own log, or the Android Illuminati will find you some night and
+ beat you up.
+*/
+killProcessQuiet : function(  ) {},
+
+<span id='android-os-Process-method-sendSignalQuiet'>/**
+</span>@hide Private impl for avoiding a log message...  DO NOT USE without doing
+ your own log, or the Android Illuminati will find you some night and
+ beat you up.
+*/
+sendSignalQuiet : function(  ) {},
+
+<span id='android-os-Process-method-getFreeMemory'>/**
+</span>@hide 
+*/
+getFreeMemory : function(  ) {},
+
+<span id='android-os-Process-method-getTotalMemory'>/**
+</span>@hide 
+*/
+getTotalMemory : function(  ) {},
+
+<span id='android-os-Process-method-readProcLines'>/**
+</span>@hide 
+*/
+readProcLines : function(  ) {},
+
+<span id='android-os-Process-method-getPids'>/**
+</span>@hide 
+*/
+getPids : function(  ) {},
+
+<span id='android-os-Process-method-readProcFile'>/**Read and parse a {@code proc} file in the given format.
+</span>
+ &lt;p&gt;The format is a list of integers, where every integer describes a variable in the file. It
+ specifies how the variable is syntactically terminated (e.g. {@link android.os.Process#PROC_SPACE_TERM},
+ {@link android.os.Process#PROC_TAB_TERM}, {@link android.os.Process#PROC_ZERO_TERM}, {@link android.os.Process#PROC_NEWLINE_TERM}).
+
+ &lt;p&gt;If the variable should be parsed and returned to the caller, the termination type should
+ be binary OR'd with the type of output (e.g. {@link android.os.Process#PROC_OUT_STRING}, {@link android.os.Process#PROC_OUT_LONG}, {@link android.os.Process#PROC_OUT_FLOAT}.
+
+ &lt;p&gt;If the variable is wrapped in quotation marks it should be binary OR'd with {@link android.os.Process#PROC_QUOTES}. If the variable is wrapped in parentheses it should be binary OR'd with
+ {@link android.os.Process#PROC_PARENS}.
+
+ &lt;p&gt;If the variable is not formatted as a string and should be cast directly from characters
+ to a long, the {@link android.os.Process#PROC_CHAR} integer should be binary OR'd.
+
+ &lt;p&gt;If the terminating character can be repeated, the {@link android.os.Process#PROC_COMBINE} integer
+ should be binary OR'd.
+@param {String} file the path of the {@code proc} file to read
+@param {Object {int[]}} format the format of the file
+@param {Object {java.lang.String[]}} outStrings the parsed {@code String}s from the file
+@param {Object {long[]}} outLongs the parsed {@code long}s from the file
+@param {Object {float[]}} outFloats the parsed {@code float}s from the file
+@hide 
+*/
+readProcFile : function(  ) {},
+
+<span id='android-os-Process-method-parseProcLine'>/**
+</span>@hide 
+*/
+parseProcLine : function(  ) {},
+
+<span id='android-os-Process-method-getPidsForCommands'>/**
+</span>@hide 
+*/
+getPidsForCommands : function(  ) {},
+
+<span id='android-os-Process-method-getPss'>/**Gets the total Pss value for a given process, in bytes.
+</span>@param {Number} pid the process to the Pss for
+@return {Number} the total Pss value for the given process in bytes,
+  or -1 if the value cannot be determined
+@hide 
+*/
+getPss : function(  ) {},
+
+<span id='android-os-Process-method-getRss'>/**
+</span>@hide 
+*/
+getRss : function(  ) {},
+
+<span id='android-os-Process-method-killProcessGroup'>/**Kill all processes in a process group started for the given
+</span> pid.
+@hide 
+*/
+killProcessGroup : function(  ) {},
+
+<span id='android-os-Process-method-removeAllProcessGroups'>/**Remove all process groups.  Expected to be called when ActivityManager
+</span> is restarted.
+@hide 
+*/
+removeAllProcessGroups : function(  ) {},
+
+<span id='android-os-Process-method-isThreadInProcess'>/**Check to see if a thread belongs to a given process. This may require
+</span> more permissions than apps generally have.
+@return {Boolean} true if this thread belongs to a process
+@hide 
+*/
+isThreadInProcess : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

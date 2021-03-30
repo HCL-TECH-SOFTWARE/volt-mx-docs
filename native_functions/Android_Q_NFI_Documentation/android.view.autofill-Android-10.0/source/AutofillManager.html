@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-autofill-AutofillManager'>/**@class android.view.autofill.AutofillManager
+</span>@extends java.lang.Object
+
+ &lt;p&gt;The {@link android.view.autofill.AutofillManager} class provides ways for apps and custom views to
+ integrate with the Autofill Framework lifecycle.
+
+ &lt;p&gt;To learn about using Autofill in your app, read
+ the &lt;a href=&quot;/guide/topics/text/autofill&quot;&gt;Autofill Framework&lt;/a&gt; guides.
+
+ &lt;h3 id=&quot;autofill-lifecycle&quot;&gt;Autofill lifecycle&lt;/h3&gt;
+
+ &lt;p&gt;The autofill lifecycle starts with the creation of an autofill context associated with an
+ activity context. The autofill context is created when one of the following methods is called for
+ the first time in an activity context, and the current user has an enabled autofill service:
+
+ &lt;ul&gt;
+   &lt;li&gt;{@link #notifyViewEntered}(View)
+   &lt;li&gt;{@link #notifyViewEntered(View, int, Rect)}
+   &lt;li&gt;{@link #requestAutofill}(View)
+ &lt;/ul&gt;
+
+ &lt;p&gt;Typically, the context is automatically created when the first view of the activity is
+ focused because {@code View.onFocusChanged()} indirectly calls
+ {@link #notifyViewEntered}(View). App developers can call {@link #requestAutofill}(View) to
+ explicitly create it (for example, a custom view developer could offer a contextual menu action
+ in a text-field view to let users manually request autofill).
+
+ &lt;p&gt;After the context is created, the Android System creates a {@link android.view.ViewStructure}
+ that represents the view hierarchy by calling
+ {@link View#dispatchProvideAutofillStructure(android.view.ViewStructure, int)} in the root views
+ of all application windows. By default, {@code dispatchProvideAutofillStructure()} results in
+ subsequent calls to {@link View#onProvideAutofillStructure(android.view.ViewStructure, int)} and
+ {@link View#onProvideAutofillVirtualStructure(android.view.ViewStructure, int)} for each view in
+ the hierarchy.
+
+ &lt;p&gt;The resulting {@link android.view.ViewStructure} is then passed to the autofill service, which
+ parses it looking for views that can be autofilled. If the service finds such views, it returns
+ a data structure to the Android System containing the following optional info:
+
+ &lt;ul&gt;
+   &lt;li&gt;Datasets used to autofill subsets of views in the activity.
+   &lt;li&gt;Id of views that the service can save their values for future autofilling.
+ &lt;/ul&gt;
+
+ &lt;p&gt;When the service returns datasets, the Android System displays an autofill dataset picker
+ UI associated with the view, when the view is focused on and is part of a dataset.
+ The application can be notified when the UI is shown by registering an
+ {@link android.view.autofill.AutofillManager.AutofillCallback} through {@link #registerCallback}(AutofillCallback). When the user
+ selects a dataset from the UI, all views present in the dataset are autofilled, through
+ calls to {@link View#autofill(AutofillValue)} or {@link View#autofill(SparseArray)}.
+
+ &lt;p&gt;When the service returns ids of savable views, the Android System keeps track of changes
+ made to these views, so they can be used to determine if the autofill save UI is shown later.
+
+ &lt;p&gt;The context is then finished when one of the following occurs:
+
+ &lt;ul&gt;
+   &lt;li&gt;{@link #commit}() is called or all savable views are gone.
+   &lt;li&gt;{@link #cancel}() is called.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Finally, after the autofill context is commited (i.e., not cancelled), the Android System
+ shows an autofill save UI if the value of savable views have changed. If the user selects the
+ option to Save, the current value of the views is then sent to the autofill service.
+
+ &lt;h3 id=&quot;additional-notes&quot;&gt;Additional notes&lt;/h3&gt;
+
+ &lt;p&gt;It is safe to call &lt;code&gt;AutofillManager&lt;/code&gt; methods from any thread.
+*/
+var AutofillManager = {
+
+<span id='android-view-autofill-AutofillManager-property-EXTRA_ASSIST_STRUCTURE'>/** Intent extra: The assist structure which captures the filled screen.
+</span>
+ &lt;p&gt;
+ Type: {@link android.app.assist.AssistStructure}
+*/
+EXTRA_ASSIST_STRUCTURE : &quot;android.view.autofill.extra.ASSIST_STRUCTURE&quot;,
+<span id='android-view-autofill-AutofillManager-property-EXTRA_AUTHENTICATION_RESULT'>/** Intent extra: The result of an authentication operation. It is
+</span> either a fully populated {@link android.service.autofill.FillResponse}
+ or a fully populated {@link android.service.autofill.Dataset} if
+ a response or a dataset is being authenticated respectively.
+
+ &lt;p&gt;
+ Type: {@link android.service.autofill.FillResponse} or a
+ {@link android.service.autofill.Dataset}
+*/
+EXTRA_AUTHENTICATION_RESULT : &quot;android.view.autofill.extra.AUTHENTICATION_RESULT&quot;,
+<span id='android-view-autofill-AutofillManager-property-EXTRA_CLIENT_STATE'>/** Intent extra: The optional extras provided by the
+</span> {@link android.service.autofill.AutofillService}.
+
+ &lt;p&gt;For example, when the service responds to a {@link android.service.autofill.FillCallback#onSuccess(android.service.autofill.FillResponse)} with
+ a {@code FillResponse} that requires authentication, the Intent that launches the
+ service authentication will contain the Bundle set by
+ {@link android.service.autofill.FillResponse.Builder#setClientState(Bundle)} on this extra.
+
+ &lt;p&gt;On Android {@link android.os.Build.VERSION_CODES#P} and higher, the autofill service
+ can also add this bundle to the {@link Intent} set as the
+ {@link android.app.Activity#setResult(int, Intent) result} for an authentication request,
+ so the bundle can be recovered later on
+ {@link android.service.autofill.SaveRequest#getClientState()}.
+
+ &lt;p&gt;
+ Type: {@link android.os.Bundle}
+*/
+EXTRA_CLIENT_STATE : &quot;android.view.autofill.extra.CLIENT_STATE&quot;,
+<span id='android-view-autofill-AutofillManager-property-EXTRA_RESTORE_SESSION_TOKEN'>/**@hide */
+</span>EXTRA_RESTORE_SESSION_TOKEN : &quot;android.view.autofill.extra.RESTORE_SESSION_TOKEN&quot;,
+<span id='android-view-autofill-AutofillManager-property-EXTRA_AUGMENTED_AUTOFILL_CLIENT'>/** Internal extra used to pass a binder to the {@link IAugmentedAutofillManagerClient}.
+</span>
+ @hide
+*/
+EXTRA_AUGMENTED_AUTOFILL_CLIENT : &quot;android.view.autofill.extra.AUGMENTED_AUTOFILL_CLIENT&quot;,
+<span id='android-view-autofill-AutofillManager-property-ACTION_START_SESSION'>/**@hide */
+</span>ACTION_START_SESSION : &quot;1&quot;,
+<span id='android-view-autofill-AutofillManager-property-ACTION_VIEW_ENTERED'>/**@hide */
+</span>ACTION_VIEW_ENTERED : &quot;2&quot;,
+<span id='android-view-autofill-AutofillManager-property-ACTION_VIEW_EXITED'>/**@hide */
+</span>ACTION_VIEW_EXITED : &quot;3&quot;,
+<span id='android-view-autofill-AutofillManager-property-ACTION_VALUE_CHANGED'>/**@hide */
+</span>ACTION_VALUE_CHANGED : &quot;4&quot;,
+<span id='android-view-autofill-AutofillManager-property-NO_LOGGING'>/**@hide */
+</span>NO_LOGGING : &quot;0&quot;,
+<span id='android-view-autofill-AutofillManager-property-FLAG_ADD_CLIENT_ENABLED'>/**@hide */
+</span>FLAG_ADD_CLIENT_ENABLED : &quot;1&quot;,
+<span id='android-view-autofill-AutofillManager-property-FLAG_ADD_CLIENT_DEBUG'>/**@hide */
+</span>FLAG_ADD_CLIENT_DEBUG : &quot;2&quot;,
+<span id='android-view-autofill-AutofillManager-property-FLAG_ADD_CLIENT_VERBOSE'>/**@hide */
+</span>FLAG_ADD_CLIENT_VERBOSE : &quot;4&quot;,
+<span id='android-view-autofill-AutofillManager-property-FLAG_ADD_CLIENT_ENABLED_FOR_AUGMENTED_AUTOFILL_ONLY'>/**@hide */
+</span>FLAG_ADD_CLIENT_ENABLED_FOR_AUGMENTED_AUTOFILL_ONLY : &quot;8&quot;,
+<span id='android-view-autofill-AutofillManager-property-RECEIVER_FLAG_SESSION_FOR_AUGMENTED_AUTOFILL_ONLY'>/**@hide */
+</span>RECEIVER_FLAG_SESSION_FOR_AUGMENTED_AUTOFILL_ONLY : &quot;1&quot;,
+<span id='android-view-autofill-AutofillManager-property-DEFAULT_LOGGING_LEVEL'>/**@hide */
+</span>DEFAULT_LOGGING_LEVEL : &quot;null&quot;,
+<span id='android-view-autofill-AutofillManager-property-DEFAULT_MAX_PARTITIONS_SIZE'>/**@hide */
+</span>DEFAULT_MAX_PARTITIONS_SIZE : &quot;10&quot;,
+<span id='android-view-autofill-AutofillManager-property-AUTHENTICATION_ID_DATASET_ID_UNDEFINED'>/**@hide The index for an undefined data set */
+</span>AUTHENTICATION_ID_DATASET_ID_UNDEFINED : &quot;65535&quot;,
+<span id='android-view-autofill-AutofillManager-property-PENDING_UI_OPERATION_CANCEL'>/** Used on {@link #onPendingSaveUi(int, IBinder)} to cancel the pending UI.
+</span>
+ @hide
+*/
+PENDING_UI_OPERATION_CANCEL : &quot;1&quot;,
+<span id='android-view-autofill-AutofillManager-property-PENDING_UI_OPERATION_RESTORE'>/** Used on {@link #onPendingSaveUi(int, IBinder)} to restore the pending UI.
+</span>
+ @hide
+*/
+PENDING_UI_OPERATION_RESTORE : &quot;2&quot;,
+<span id='android-view-autofill-AutofillManager-property-STATE_UNKNOWN'>/** Initial state of the autofill context, set when there is no session (i.e., when
+</span> {@link #mSessionId} is {@link #NO_SESSION}).
+
+ &lt;p&gt;In this state, app callbacks (such as {@link #notifyViewEntered}(View)) are notified to
+ the server.
+
+ @hide
+*/
+STATE_UNKNOWN : &quot;0&quot;,
+<span id='android-view-autofill-AutofillManager-property-STATE_ACTIVE'>/** State where the autofill context hasn't been {@link #commit() finished} nor
+</span> {@link #cancel() canceled} yet.
+
+ @hide
+*/
+STATE_ACTIVE : &quot;1&quot;,
+<span id='android-view-autofill-AutofillManager-property-STATE_FINISHED'>/** State where the autofill context was finished by the server because the autofill
+</span> service could not autofill the activity.
+
+ &lt;p&gt;In this state, most apps callback (such as {@link #notifyViewEntered}(View)) are ignored,
+ exception {@link #requestAutofill}(View) (and {@link #requestAutofill(View, int, Rect)}).
+
+ @hide
+*/
+STATE_FINISHED : &quot;2&quot;,
+<span id='android-view-autofill-AutofillManager-property-STATE_SHOWING_SAVE_UI'>/** State where the autofill context has been {@link #commit() finished} but the server still has
+</span> a session because the Save UI hasn't been dismissed yet.
+
+ @hide
+*/
+STATE_SHOWING_SAVE_UI : &quot;3&quot;,
+<span id='android-view-autofill-AutofillManager-property-STATE_DISABLED_BY_SERVICE'>/** State where the autofill is disabled because the service cannot autofill the activity at all.
+</span>
+ &lt;p&gt;In this state, every call is ignored, even {@link #requestAutofill}(View)
+ (and {@link #requestAutofill(View, int, Rect)}).
+
+ @hide
+*/
+STATE_DISABLED_BY_SERVICE : &quot;4&quot;,
+<span id='android-view-autofill-AutofillManager-property-STATE_UNKNOWN_COMPAT_MODE'>/** Same as {@link #STATE_UNKNOWN}, but used on
+</span> {@link android.view.autofill.AutofillManagerClient#setSessionFinished(int, List)} when the session was finished
+ because the URL bar changed on client mode
+
+ @hide
+*/
+STATE_UNKNOWN_COMPAT_MODE : &quot;5&quot;,
+<span id='android-view-autofill-AutofillManager-property-STATE_UNKNOWN_FAILED'>/** Same as {@link #STATE_UNKNOWN}, but used on
+</span> {@link android.view.autofill.AutofillManagerClient#setSessionFinished(int, List)} when the session was finished
+ because the service failed to fullfil a request.
+
+ @hide
+*/
+STATE_UNKNOWN_FAILED : &quot;6&quot;,
+<span id='android-view-autofill-AutofillManager-property-FC_SERVICE_TIMEOUT'>/** Timeout in ms for calls to the field classification service.
+</span> @hide
+*/
+FC_SERVICE_TIMEOUT : &quot;5000&quot;,
+<span id='android-view-autofill-AutofillManager-property-MAX_TEMP_AUGMENTED_SERVICE_DURATION_MS'>/** @hide
+</span>*/
+MAX_TEMP_AUGMENTED_SERVICE_DURATION_MS : &quot;120000&quot;,
+<span id='android-view-autofill-AutofillManager-property-FLAG_SMART_SUGGESTION_OFF'>/** Disables Augmented Autofill.
+</span>
+ @hide
+*/
+FLAG_SMART_SUGGESTION_OFF : &quot;0&quot;,
+<span id='android-view-autofill-AutofillManager-property-FLAG_SMART_SUGGESTION_SYSTEM'>/** Displays the Augment Autofill window using the same mechanism (such as a popup-window
+</span> attached to the focused view) as the standard autofill.
+
+ @hide
+*/
+FLAG_SMART_SUGGESTION_SYSTEM : &quot;1&quot;,
+<span id='android-view-autofill-AutofillManager-property-DEVICE_CONFIG_AUTOFILL_SMART_SUGGESTION_SUPPORTED_MODES'>/** {@code DeviceConfig} property used to set which Smart Suggestion modes for Augmented Autofill
+</span> are available.
+
+ @hide
+*/
+DEVICE_CONFIG_AUTOFILL_SMART_SUGGESTION_SUPPORTED_MODES : &quot;smart_suggestion_supported_modes&quot;,
+<span id='android-view-autofill-AutofillManager-property-DEVICE_CONFIG_AUGMENTED_SERVICE_IDLE_UNBIND_TIMEOUT'>/** Sets how long (in ms) the augmented autofill service is bound while idle.
+</span>
+ &lt;p&gt;Use {@code 0} to keep it permanently bound.
+
+ @hide
+*/
+DEVICE_CONFIG_AUGMENTED_SERVICE_IDLE_UNBIND_TIMEOUT : &quot;augmented_service_idle_unbind_timeout&quot;,
+<span id='android-view-autofill-AutofillManager-property-DEVICE_CONFIG_AUGMENTED_SERVICE_REQUEST_TIMEOUT'>/** Sets how long (in ms) the augmented autofill service request is killed if not replied.
+</span>
+ @hide
+*/
+DEVICE_CONFIG_AUGMENTED_SERVICE_REQUEST_TIMEOUT : &quot;augmented_service_request_timeout&quot;,
+<span id='android-view-autofill-AutofillManager-property-RESULT_OK'>/**@hide */
+</span>RESULT_OK : &quot;0&quot;,
+<span id='android-view-autofill-AutofillManager-property-RESULT_CODE_NOT_SERVICE'>/**@hide */
+</span>RESULT_CODE_NOT_SERVICE : &quot;-1&quot;,
+<span id='android-view-autofill-AutofillManager-property-NO_SESSION'>/** There is currently no session running.
+</span> {@hide}
+*/
+NO_SESSION : &quot;2147483647&quot;,
+<span id='android-view-autofill-AutofillManager-property-SET_STATE_FLAG_ENABLED'>/**@hide */
+</span>SET_STATE_FLAG_ENABLED : &quot;1&quot;,
+<span id='android-view-autofill-AutofillManager-property-SET_STATE_FLAG_RESET_SESSION'>/**@hide */
+</span>SET_STATE_FLAG_RESET_SESSION : &quot;2&quot;,
+<span id='android-view-autofill-AutofillManager-property-SET_STATE_FLAG_RESET_CLIENT'>/**@hide */
+</span>SET_STATE_FLAG_RESET_CLIENT : &quot;4&quot;,
+<span id='android-view-autofill-AutofillManager-property-SET_STATE_FLAG_DEBUG'>/**@hide */
+</span>SET_STATE_FLAG_DEBUG : &quot;8&quot;,
+<span id='android-view-autofill-AutofillManager-property-SET_STATE_FLAG_VERBOSE'>/**@hide */
+</span>SET_STATE_FLAG_VERBOSE : &quot;16&quot;,
+<span id='android-view-autofill-AutofillManager-property-SET_STATE_FLAG_FOR_AUTOFILL_ONLY'>/**@hide */
+</span>SET_STATE_FLAG_FOR_AUTOFILL_ONLY : &quot;32&quot;,
+<span id='android-view-autofill-AutofillManager-method-makeAuthenticationId'>/**Makes an authentication id from a request id and a dataset id.
+</span>@param {Number} requestId The request id.
+@param {Number} datasetId The dataset id.
+@return {Number} The authentication id.
+@hide 
+*/
+makeAuthenticationId : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getRequestIdFromAuthenticationId'>/**Gets the request id from an authentication id.
+</span>@param {Number} authRequestId The authentication id.
+@return {Number} The request id.
+@hide 
+*/
+getRequestIdFromAuthenticationId : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getDatasetIdFromAuthenticationId'>/**Gets the dataset id from an authentication id.
+</span>@param {Number} authRequestId The authentication id.
+@return {Number} The dataset id.
+@hide 
+*/
+getDatasetIdFromAuthenticationId : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-enableCompatibilityMode'>/**
+</span>@hide 
+*/
+enableCompatibilityMode : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-onCreate'>/**Restore state after activity lifecycle
+</span>@param {Object {Bundle}} savedInstanceState The state to be restored
+
+ {@hide}
+*/
+onCreate : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-onVisibleForAutofill'>/**Called once the client becomes visible.
+</span>@see AutofillClient#autofillClientIsVisibleForAutofill()
+
+ {@hide}
+*/
+onVisibleForAutofill : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-onInvisibleForAutofill'>/**Called once the client becomes invisible.
+</span>@see AutofillClient#autofillClientIsVisibleForAutofill()
+
+ {@hide}
+*/
+onInvisibleForAutofill : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-onSaveInstanceState'>/**Save state before activity lifecycle
+</span>@param {Object {Bundle}} outState Place to store the state
+
+ {@hide}
+*/
+onSaveInstanceState : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-isCompatibilityModeEnabledLocked'>/**
+</span>@hide 
+*/
+isCompatibilityModeEnabledLocked : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-isEnabled'>/**Checks whether autofill is enabled for the current user.
+</span>
+ &lt;p&gt;Typically used to determine whether the option to explicitly request autofill should
+ be offered - see {@link #requestAutofill}(View).
+@return {Boolean} whether autofill is enabled for the current user.
+*/
+isEnabled : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getFillEventHistory'>/**Should always be called from {@link AutofillService#getFillEventHistory()}.
+</span>@hide 
+*/
+getFillEventHistory : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-requestAutofill'>/**Explicitly requests a new autofill context.
+</span>
+ &lt;p&gt;Normally, the autofill context is automatically started if necessary when
+ {@link #notifyViewEntered}(View) is called, but this method should be used in the
+ cases where it must be explicitly started. For example, when the view offers an AUTOFILL
+ option on its contextual overflow menu, and the user selects it.
+@param {Object {View}} view view requesting the new autofill context.
+*/
+requestAutofill : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-requestAutofill'>/**Explicitly requests a new autofill context for virtual views.
+</span>
+ &lt;p&gt;Normally, the autofill context is automatically started if necessary when
+ {@link #notifyViewEntered(View, int, Rect)} is called, but this method should be used in the
+ cases where it must be explicitly started. For example, when the virtual view offers an
+ AUTOFILL option on its contextual overflow menu, and the user selects it.
+
+ &lt;p&gt;The virtual view boundaries must be absolute screen coordinates. For example, if the
+ parent view uses {@code bounds} to draw the virtual view inside its Canvas,
+ the absolute bounds could be calculated by:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   int offset[] = new int[2];
+   getLocationOnScreen(offset);
+   Rect absBounds = new Rect(bounds.left + offset[0],
+       bounds.top + offset[1],
+       bounds.right + offset[0], bounds.bottom + offset[1]);
+ &lt;/pre&gt;
+@param {Object {View}} view the virtual view parent.
+@param {Number} virtualId id identifying the virtual child inside the parent view.
+@param {Object {Rect}} absBounds absolute boundaries of the virtual view in the screen.
+*/
+requestAutofill : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewEntered'>/**Called when a {@link View} that supports autofill is entered.
+</span>@param {Object {View}} view {@link View} that was entered.
+*/
+notifyViewEntered : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewExited'>/**Called when a {@link View} that supports autofill is exited.
+</span>@param {Object {View}} view {@link View} that was exited.
+*/
+notifyViewExited : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewVisibilityChanged'>/**Called when a {@link View view's} visibility changed.
+</span>@param {Object {View}} view {@link View} that was exited.
+@param {Boolean} isVisible visible if the view is visible in the view hierarchy.
+*/
+notifyViewVisibilityChanged : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewVisibilityChanged'>/**Called when a virtual view's visibility changed.
+</span>@param {Object {View}} view {@link View} that was exited.
+@param {Number} virtualId id identifying the virtual child inside the parent view.
+@param {Boolean} isVisible visible if the view is visible in the view hierarchy.
+*/
+notifyViewVisibilityChanged : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewEntered'>/**Called when a virtual view that supports autofill is entered.
+</span>
+ &lt;p&gt;The virtual view boundaries must be absolute screen coordinates. For example, if the
+ parent, non-virtual view uses {@code bounds} to draw the virtual view inside its Canvas,
+ the absolute bounds could be calculated by:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+   int offset[] = new int[2];
+   getLocationOnScreen(offset);
+   Rect absBounds = new Rect(bounds.left + offset[0],
+       bounds.top + offset[1],
+       bounds.right + offset[0], bounds.bottom + offset[1]);
+ &lt;/pre&gt;
+@param {Object {View}} view the virtual view parent.
+@param {Number} virtualId id identifying the virtual child inside the parent view.
+@param {Object {Rect}} absBounds absolute boundaries of the virtual view in the screen.
+*/
+notifyViewEntered : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewExited'>/**Called when a virtual view that supports autofill is exited.
+</span>@param {Object {View}} view the virtual view parent.
+@param {Number} virtualId id identifying the virtual child inside the parent view.
+*/
+notifyViewExited : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyValueChanged'>/**Called to indicate the value of an autofillable {@link View} changed.
+</span>@param {Object {View}} view view whose value changed.
+*/
+notifyValueChanged : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyValueChanged'>/**Called to indicate the value of an autofillable virtual view has changed.
+</span>@param {Object {View}} view the virtual view parent.
+@param {Number} virtualId id identifying the virtual child inside the parent view.
+@param {Object {AutofillValue}} value new value of the child.
+*/
+notifyValueChanged : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewClicked'>/**Called to indicate a {@link View} is clicked.
+</span>@param {Object {View}} view view that has been clicked.
+*/
+notifyViewClicked : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewClicked'>/**Called to indicate a virtual view has been clicked.
+</span>@param {Object {View}} view the virtual view parent.
+@param {Number} virtualId id identifying the virtual child inside the parent view.
+*/
+notifyViewClicked : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-onActivityFinishing'>/**Called by {@link android.app.Activity} to commit or cancel the session on finish.
+</span>@hide 
+*/
+onActivityFinishing : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-commit'>/**Called to indicate the current autofill context should be commited.
+</span>
+ &lt;p&gt;This method is typically called by {@link View Views} that manage virtual views; for
+ example, when the view is rendering an {@code HTML} page with a form and virtual views
+ that represent the HTML elements, it should call this method after the form is submitted and
+ another page is rendered.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method does not need to be called on regular application lifecycle
+ methods such as {@link android.app.Activity#finish()}.
+*/
+commit : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-cancel'>/**Called to indicate the current autofill context should be cancelled.
+</span>
+ &lt;p&gt;This method is typically called by {@link View Views} that manage virtual views; for
+ example, when the view is rendering an {@code HTML} page with a form and virtual views
+ that represent the HTML elements, it should call this method if the user does not post the
+ form but moves to another form in this page.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method does not need to be called on regular application lifecycle
+ methods such as {@link android.app.Activity#finish()}.
+*/
+cancel : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-disableOwnedAutofillServices'>/**
+</span>@hide 
+*/
+disableOwnedAutofillServices : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-disableAutofillServices'>/**If the app calling this API has enabled autofill services they
+</span> will be disabled.
+*/
+disableAutofillServices : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-hasEnabledAutofillServices'>/**Returns {@code true} if the calling application provides a {@link AutofillService} that is
+</span> enabled for the current user, or {@code false} otherwise.
+*/
+hasEnabledAutofillServices : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getAutofillServiceComponentName'>/**Returns the component name of the {@link AutofillService} that is enabled for the current
+</span> user.
+*/
+getAutofillServiceComponentName : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getUserDataId'>/**Gets the id of the {@link UserData} used for
+</span> &lt;a href=&quot;AutofillService.html#FieldClassification&quot;&gt;field classification&lt;/a&gt;.
+
+ &lt;p&gt;This method is useful when the service must check the status of the {@link UserData} in
+ the device without fetching the whole object.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method should only be called by an app providing an autofill service,
+ and it's ignored if the caller currently doesn't have an enabled autofill service for
+ the user.
+@return {String} id of the {@link UserData} previously set by {@link #setUserData(UserData)}
+ or {@code null} if it was reset or if the caller currently does not have an enabled autofill
+ service for the user.
+*/
+getUserDataId : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getUserData'>/**Gets the user data used for
+</span> &lt;a href=&quot;AutofillService.html#FieldClassification&quot;&gt;field classification&lt;/a&gt;.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method should only be called by an app providing an autofill service,
+ and it's ignored if the caller currently doesn't have an enabled autofill service for
+ the user.
+@return {Object {android.service.autofill.UserData}} value previously set by {@link #setUserData(UserData)} or {@code null} if it was
+ reset or if the caller currently does not have an enabled autofill service for the user.
+*/
+getUserData : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-setUserData'>/**Sets the {@link UserData} used for
+</span> &lt;a href=&quot;AutofillService.html#FieldClassification&quot;&gt;field classification&lt;/a&gt;
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method should only be called by an app providing an autofill service,
+ and it's ignored if the caller currently doesn't have an enabled autofill service for
+ the user.
+*/
+setUserData : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-isFieldClassificationEnabled'>/**Checks if &lt;a href=&quot;AutofillService.html#FieldClassification&quot;&gt;field classification&lt;/a&gt; is
+</span> enabled.
+
+ &lt;p&gt;As field classification is an expensive operation, it could be disabled, either
+ temporarily (for example, because the service exceeded a rate-limit threshold) or
+ permanently (for example, because the device is a low-level device).
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method should only be called by an app providing an autofill service,
+ and it's ignored if the caller currently doesn't have an enabled autofill service for
+ the user.
+*/
+isFieldClassificationEnabled : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getDefaultFieldClassificationAlgorithm'>/**Gets the name of the default algorithm used for
+</span> &lt;a href=&quot;AutofillService.html#FieldClassification&quot;&gt;field classification&lt;/a&gt;.
+
+ &lt;p&gt;The default algorithm is used when the algorithm on {@link UserData} is invalid or not
+ set.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method should only be called by an app providing an autofill service,
+ and it's ignored if the caller currently doesn't have an enabled autofill service for
+ the user.
+*/
+getDefaultFieldClassificationAlgorithm : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getAvailableFieldClassificationAlgorithms'>/**Gets the name of all algorithms currently available for
+</span> &lt;a href=&quot;AutofillService.html#FieldClassification&quot;&gt;field classification&lt;/a&gt;.
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method should only be called by an app providing an autofill service,
+ and it returns an empty list if the caller currently doesn't have an enabled autofill service
+ for the user.
+*/
+getAvailableFieldClassificationAlgorithms : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-isAutofillSupported'>/**Returns {@code true} if autofill is supported by the current device and
+</span> is supported for this user.
+
+ &lt;p&gt;Autofill is typically supported, but it could be unsupported in cases like:
+ &lt;ol&gt;
+     &lt;li&gt;Low-end devices.
+     &lt;li&gt;Device policy rules that forbid its usage.
+ &lt;/ol&gt;
+*/
+isAutofillSupported : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-isAutofillUiShowing'>/**Check if autofill ui is showing, must be called on UI thread.
+</span>@hide 
+*/
+isAutofillUiShowing : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-onAuthenticationResult'>/**
+</span>@hide 
+*/
+onAuthenticationResult : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getNextAutofillId'>/**Gets the next unique autofill ID for the activity context.
+</span>
+ &lt;p&gt;Typically used to manage views whose content is recycled - see
+ {@link View#setAutofillId(AutofillId)} for more info.
+@return {Object {android.view.autofill.AutofillId}} An ID that is unique in the activity, or {@code null} if autofill is not supported in
+ the {@link Context} associated with this {@link AutofillManager}.
+*/
+getNextAutofillId : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-registerCallback'>/**Registers a {@link android.view.autofill.AutofillManager.AutofillCallback} to receive autofill events.
+</span>@param {Object {AutofillManager.AutofillCallback}} callback callback to receive events.
+*/
+registerCallback : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-unregisterCallback'>/**Unregisters a {@link android.view.autofill.AutofillManager.AutofillCallback} to receive autofill events.
+</span>@param {Object {AutofillManager.AutofillCallback}} callback callback to stop receiving events.
+*/
+unregisterCallback : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-setAugmentedAutofillWhitelist'>/**Explicitly limits augmented autofill to the given packages and activities.
+</span>
+ &lt;p&gt;To reset the whitelist, call it passing {@code null} to both arguments.
+
+ &lt;p&gt;Useful when the service wants to restrict augmented autofill to a category of apps, like
+ apps that uses addresses. For example, if the service wants to support augmented autofill on
+ all activities of app {@code AddressApp1} and just activities {@code act1} and {@code act2}
+ of {@code AddressApp2}, it would call:
+ {@code setAugmentedAutofillWhitelist(Arrays.asList(&quot;AddressApp1&quot;),
+ Arrays.asList(new ComponentName(&quot;AddressApp2&quot;, &quot;act1&quot;),
+ new ComponentName(&quot;AddressApp2&quot;, &quot;act2&quot;)));}
+
+ &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This method should only be called by the app providing the augmented autofill
+ service, and it's ignored if the caller isn't it.
+@hide 
+*/
+setAugmentedAutofillWhitelist : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-notifyViewEnteredForAugmentedAutofill'>/**Notifies that a non-autofillable view was entered because the activity is whitelisted for
+</span> augmented autofill.
+
+ &lt;p&gt;This method is necessary to set the right flag on start, so the server-side session
+ doesn't trigger the standard autofill workflow, but the augmented's instead.
+@hide 
+*/
+notifyViewEnteredForAugmentedAutofill : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-requestHideFillUi'>/**
+</span>@hide 
+*/
+requestHideFillUi : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-hasAutofillFeature'>/**
+</span>@hide 
+*/
+hasAutofillFeature : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-onPendingSaveUi'>/**
+</span>@hide 
+*/
+onPendingSaveUi : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+<span id='android-view-autofill-AutofillManager-method-getSmartSuggestionModeToString'>/**
+</span>@hide 
+*/
+getSmartSuggestionModeToString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

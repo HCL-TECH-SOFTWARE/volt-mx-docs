@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ims-ImsCall'>/**@class com.android.ims.ImsCall
+</span> implements com.android.ims.internal.ICall
+
+@extends java.lang.Object
+
+ Handles an IMS voice / video call over LTE. You can instantiate this class with
+ {@link com.android.ims.ImsManager}.
+
+ @hide
+*/
+var ImsCall = {
+
+<span id='com-android-ims-ImsCall-property-USSD_MODE_NOTIFY'>/***/
+</span>USSD_MODE_NOTIFY : &quot;0&quot;,
+<span id='com-android-ims-ImsCall-property-USSD_MODE_REQUEST'>/***/
+</span>USSD_MODE_REQUEST : &quot;1&quot;,
+<span id='com-android-ims-ImsCall-property-uniqueId'>/** Unique identifier.
+</span>*/
+uniqueId : &quot;null&quot;,
+<span id='com-android-ims-ImsCall-method-close'>/**Closes this object. This object is not usable after being closed.
+</span>*/
+close : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-checkIfRemoteUserIsSame'>/**Checks if the call has a same remote user identity or not.
+</span>@param {String} userId the remote user identity
+@return {Boolean} true if the remote user identity is equal; otherwise, false
+*/
+checkIfRemoteUserIsSame : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-equalsTo'>/**Checks if the call is equal or not.
+</span>@param {Object {ICall}} call the call to be compared
+@return {Boolean} true if the call is equal; otherwise, false
+*/
+equalsTo : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isSessionAlive'>/**
+</span>*/
+isSessionAlive : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getCallProfile'>/**Gets the negotiated (local &amp; remote) call profile.
+</span>@return {Object {android.telephony.ims.ImsCallProfile}} a {@link ImsCallProfile} object that has the negotiated call profile
+*/
+getCallProfile : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-setCallProfile'>/**Replaces the current call profile with a new one, tracking whethere this was previously a
+</span> video call or not.
+@param {Object {ImsCallProfile}} profile The new call profile.
+*/
+setCallProfile : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getLocalCallProfile'>/**Gets the local call profile (local capabilities).
+</span>@return {Object {android.telephony.ims.ImsCallProfile}} a {@link ImsCallProfile} object that has the local call profile
+*/
+getLocalCallProfile : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getRemoteCallProfile'>/**Gets the remote call profile (remote capabilities).
+</span>@return {Object {android.telephony.ims.ImsCallProfile}} a {@link ImsCallProfile} object that has the remote call profile
+*/
+getRemoteCallProfile : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getProposedCallProfile'>/**Gets the call profile proposed by the local/remote user.
+</span>@return {Object {android.telephony.ims.ImsCallProfile}} a {@link ImsCallProfile} object that has the proposed call profile
+*/
+getProposedCallProfile : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getConferenceParticipants'>/**Gets the list of conference participants currently
+</span> associated with this call.
+@return {Object {java.util.List}} Copy of the list of conference participants.
+*/
+getConferenceParticipants : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getState'>/**Gets the state of the {@link com.android.ims.ImsCallSession} that carries this call.
+</span> The value returned must be one of the states in {@link com.android.ims.ImsCallSession#State}.
+@return {Number} the session state
+*/
+getState : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getCallSession'>/**Gets the {@link com.android.ims.ImsCallSession} that carries this call.
+</span>@return {Object {android.telephony.ims.ImsCallSession}} the session object that carries this call
+@hide 
+*/
+getCallSession : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getMediaSession'>/**Gets the {@link ImsStreamMediaSession} that handles the media operation of this call.
+</span> Almost interface APIs are for the VT (Video Telephony).
+@return {Object {com.android.ims.internal.ImsStreamMediaSession}} the media session object that handles the media operation of this call
+@hide 
+*/
+getMediaSession : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getCallExtra'>/**Gets the specified property of this call.
+</span>@param {String} name key to get the extra call information defined in {@link ImsCallProfile}
+@return {String} the extra call information as string
+*/
+getCallExtra : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getLastReasonInfo'>/**Gets the last reason information when the call is not established, cancelled or terminated.
+</span>@return {Object {android.telephony.ims.ImsReasonInfo}} the last reason information
+*/
+getLastReasonInfo : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-hasPendingUpdate'>/**Checks if the call has a pending update operation.
+</span>@return {Boolean} true if the call has a pending update operation
+*/
+hasPendingUpdate : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isPendingHold'>/**Checks if the call is pending a hold operation.
+</span>@return {Boolean} true if the call is pending a hold operation.
+*/
+isPendingHold : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isInCall'>/**Checks if the call is established.
+</span>@return {Boolean} true if the call is established
+*/
+isInCall : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isMuted'>/**Checks if the call is muted.
+</span>@return {Boolean} true if the call is muted
+*/
+isMuted : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isOnHold'>/**Checks if the call is on hold.
+</span>@return {Boolean} true if the call is on hold
+*/
+isOnHold : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isMultiparty'>/**Determines if the call is a multiparty call.
+</span>@return {Boolean} {@code True} if the call is a multiparty call.
+*/
+isMultiparty : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isConferenceHost'>/**Where {@link #isMultiparty}() is {@code true}, determines if this {@link com.android.ims.ImsCall} is the
+</span> origin of the conference call (i.e. {@code #isConferenceHost()} is {@code true}), or if this
+ {@link com.android.ims.ImsCall} is a member of a conference hosted on another device.
+@return {Boolean} {@code true} if this call is the origin of the conference call it is a member of,
+      {@code false} otherwise.
+*/
+isConferenceHost : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-setIsMerged'>/**Marks whether an IMS call is merged. This should be set {@code true} when the call merges
+</span> into a conference.
+@param {Boolean} isMerged Whether the call is merged.
+*/
+setIsMerged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isMerged'>/**
+</span>@return {Boolean} {@code true} if the call recently merged into a conference call.
+*/
+isMerged : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-setListener'>/**Sets the listener to listen to the IMS call events.
+</span> The method calls {@link #setListener setListener(listener, false)}.
+@param {Object {ImsCall.Listener}} listener to listen to the IMS call events of this object; null to remove listener
+@see #setListener(Listener, boolean)
+*/
+setListener : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-setListener'>/**Sets the listener to listen to the IMS call events.
+</span> A {@link com.android.ims.ImsCall} can only hold one listener at a time. Subsequent calls
+ to this method override the previous listener.
+@param {Object {ImsCall.Listener}} listener to listen to the IMS call events of this object; null to remove listener
+@param {Boolean} callbackImmediately set to true if the caller wants to be called
+        back immediately on the current state
+*/
+setListener : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-setMute'>/**Mutes or unmutes the mic for the active call.
+</span>@param {Boolean} muted true if the call is muted, false otherwise
+*/
+setMute : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-attachSession'>/**Attaches an incoming call to this call object.
+</span>@param {Object {ImsCallSession}} session the session that receives the incoming call
+@throws ImsException if the IMS service fails to attach this object to the session
+*/
+attachSession : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-start'>/**Initiates an IMS call with the call profile which is provided
+</span> when creating a {@link com.android.ims.ImsCall}.
+@param {Object {ImsCallSession}} session the {@link ImsCallSession} for carrying out the call
+@param {String} callee callee information to initiate an IMS call
+@throws ImsException if the IMS service fails to initiate the call
+*/
+start : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-start'>/**Initiates an IMS conferenca call with the call profile which is provided
+</span> when creating a {@link com.android.ims.ImsCall}.
+@param {Object {ImsCallSession}} session the {@link ImsCallSession} for carrying out the call
+@param {Object {java.lang.String[]}} participants participant list to initiate an IMS conference call
+@throws ImsException if the IMS service fails to initiate the call
+*/
+start : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-accept'>/**Accepts a call.
+</span>@param {Number} callType The call type the user agreed to for accepting the call.
+@param callType The call type the user agreed to for accepting the call.
+@throws ImsException if the IMS service fails to accept the call
+*/
+accept : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-accept'>/**Accepts a call.
+</span>@param {Number} callType call type to be answered in {@link ImsCallProfile}
+@param {Object {ImsStreamMediaProfile}} profile a media profile to be answered (audio/audio &amp; video, direction, ...)
+@see Listener#onCallStarted
+@throws ImsException if the IMS service fails to accept the call
+*/
+accept : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-deflect'>/**Deflects a call.
+</span>@param {String} number number to be deflected to.
+@throws ImsException if the IMS service fails to deflect the call
+*/
+deflect : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-reject'>/**Rejects a call.
+</span>@param {Number} reason reason code to reject an incoming call
+@see Listener#onCallStartFailed
+@throws ImsException if the IMS service fails to reject the call
+*/
+reject : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-terminate'>/**
+</span>*/
+terminate : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-terminate'>/**Terminates an IMS call (e.g. user initiated).
+</span>@param {Number} reason reason code to terminate a call
+*/
+terminate : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-hold'>/**Puts a call on hold. When succeeds, {@link com.android.ims.ImsCall.Listener#onCallHeld} is called.
+</span>@see Listener#onCallHeld, Listener#onCallHoldFailed
+@throws ImsException if the IMS service fails to hold the call
+*/
+hold : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-resume'>/**Continues a call that's on hold. When succeeds, {@link com.android.ims.ImsCall.Listener#onCallResumed} is called.
+</span>@see Listener#onCallResumed, Listener#onCallResumeFailed
+@throws ImsException if the IMS service fails to resume the call
+*/
+resume : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-merge'>/**Merges the active &amp; hold call.
+</span>@param {Object {ImsCall}} bgCall the background (holding) call
+@see Listener#onCallMerged, Listener#onCallMergeFailed
+@throws ImsException if the IMS service fails to merge the call
+*/
+merge : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-update'>/**Updates the current call's properties (ex. call mode change: video upgrade / downgrade).
+</span>*/
+update : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-extendToConference'>/**Extends this call (1-to-1 call) to the conference call
+</span> inviting the specified participants to.
+*/
+extendToConference : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-inviteParticipants'>/**Requests the conference server to invite an additional participants to the conference.
+</span>*/
+inviteParticipants : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-removeParticipants'>/**Requests the conference server to remove the specified participants from the conference.
+</span>*/
+removeParticipants : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-sendDtmf'>/**Sends a DTMF code. According to &lt;a href=&quot;http://tools.ietf.org/html/rfc2833&quot;&gt;RFC 2833&lt;/a&gt;,
+</span> event 0 ~ 9 maps to decimal value 0 ~ 9, '*' to 10, '#' to 11, event 'A' ~ 'D' to 12 ~ 15,
+ and event flash to 16. Currently, event flash is not supported.
+@param {String} c that represents the DTMF to send. '0' ~ '9', 'A' ~ 'D', '*', '#' are valid inputs.
+@param {Object {Message}} result the result message to send when done.
+*/
+sendDtmf : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-startDtmf'>/**Start a DTMF code. According to &lt;a href=&quot;http://tools.ietf.org/html/rfc2833&quot;&gt;RFC 2833&lt;/a&gt;,
+</span> event 0 ~ 9 maps to decimal value 0 ~ 9, '*' to 10, '#' to 11, event 'A' ~ 'D' to 12 ~ 15,
+ and event flash to 16. Currently, event flash is not supported.
+@param {String} c that represents the DTMF to send. '0' ~ '9', 'A' ~ 'D', '*', '#' are valid inputs.
+*/
+startDtmf : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-stopDtmf'>/**Stop a DTMF code.
+</span>*/
+stopDtmf : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-sendUssd'>/**Sends an USSD message.
+</span>@param {String} ussdMessage USSD message to send
+*/
+sendUssd : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-sendRttMessage'>/**
+</span>*/
+sendRttMessage : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-sendRttModifyRequest'>/**Sends a user-requested RTT upgrade request.
+</span>@param {Boolean} rttOn true if the request is to turn on RTT, false to turn off.
+*/
+sendRttModifyRequest : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-sendRttModifyResponse'>/**Sends the user's response to a remotely-issued RTT upgrade request
+</span>@param {Boolean} textStream A valid {@link Connection.RttTextStream} if the user
+                   accepts, {@code null} if not.
+*/
+sendRttModifyResponse : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-setAnswerWithRtt'>/**
+</span>*/
+setAnswerWithRtt : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getImsCallSessionListenerProxy'>/**
+</span>@return {Object {com.android.ims.ImsCall.ImsCallSessionListenerProxy}} the current ImsCallSessionListenerProxy.  NOTE: ONLY FOR USE WITH TESTING.
+*/
+getImsCallSessionListenerProxy : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isMergeRequestedByConf'>/**Checks if the merge was requested by foreground conference call
+</span>@return {Boolean} true if the merge was requested by foreground conference call
+*/
+isMergeRequestedByConf : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-resetIsMergeRequestedByConf'>/**Resets the flag which indicates merge request was sent by
+</span> foreground conference call
+*/
+resetIsMergeRequestedByConf : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getSession'>/**Returns current ImsCallSession
+</span>@return {Object {android.telephony.ims.ImsCallSession}} current session
+*/
+getSession : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-conferenceStateUpdated'>/**Report a new conference state to the current {@link com.android.ims.ImsCall} and inform listeners of the
+</span> change.  Marked as {@code VisibleForTesting} so that the
+ {@code com.android.internal.telephony.TelephonyTester} class can inject a test conference
+ event package into a regular ongoing IMS call.
+@param {Object {ImsConferenceState}} state The {@link ImsConferenceState}.
+*/
+conferenceStateUpdated : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-setMergeHost'>/**Sets the merge hody for the current call.  The merge host is the foreground call this call
+</span> will be merged into.  On the merge host, sets the merge peer to be this call.
+@param {Object {ImsCall}} mergeHost The merge host this call will be merged into.
+*/
+setMergeHost : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isCallSessionMergePending'>/**Determines if the call session is pending merge into a conference or not.
+</span>@return {Boolean} {@code true} if a merge into a conference is pending, {@code false} otherwise.
+*/
+isCallSessionMergePending : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-toString'>/**Provides a string representation of the {@link com.android.ims.ImsCall}.  Primarily intended for use in log
+</span> statements.
+@return {String} String representation of call.
+*/
+toString : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-wasVideoCall'>/**
+</span>@return {Boolean} {@code true} if this call was a video call at some point in its life span,
+      {@code false} otherwise.
+*/
+wasVideoCall : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isVideoCall'>/**
+</span>@return {Boolean} {@code true} if this call is a video call, {@code false} otherwise.
+*/
+isVideoCall : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-isWifiCall'>/**Determines if the current call radio access technology is over WIFI.
+</span> Note: This depends on the RIL exposing the {@link com.android.ims.ImsCallProfile#EXTRA_CALL_RAT_TYPE} extra.
+ This method is primarily intended to be used when checking if answering an incoming audio
+ call should cause a wifi video call to drop (e.g.
+ {@link android.telephony.CarrierConfigManager#
+ KEY_DROP_VIDEO_CALL_WHEN_ANSWERING_AUDIO_CALL_BOOL} is set).
+@return {Boolean} {@code true} if the call is over WIFI, {@code false} otherwise.
+*/
+isWifiCall : function(  ) {},
+
+<span id='com-android-ims-ImsCall-method-getRadioTechnology'>/**Determines the radio access technology for the {@link com.android.ims.ImsCall}.
+</span>@return {Number} The {@link ServiceState} {@code RIL_RADIO_TECHNOLOGY_*} code in use.
+*/
+getRadioTechnology : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

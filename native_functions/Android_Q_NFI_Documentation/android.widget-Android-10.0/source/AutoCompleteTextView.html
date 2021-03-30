@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-AutoCompleteTextView'>/**@class android.widget.AutoCompleteTextView
+</span> implements android.widget.Filter.FilterListener
+
+@extends android.widget.EditText
+
+ &lt;p&gt;An editable text view that shows completion suggestions automatically
+ while the user is typing. The list of suggestions is displayed in a drop
+ down menu from which the user can choose an item to replace the content
+ of the edit box with.&lt;/p&gt;
+
+ &lt;p&gt;The drop down can be dismissed at any time by pressing the back key or,
+ if no item is selected in the drop down, by pressing the enter/dpad center
+ key.&lt;/p&gt;
+
+ &lt;p&gt;The list of suggestions is obtained from a data adapter and appears
+ only after a given number of characters defined by
+ {@link #getThreshold() the threshold}.&lt;/p&gt;
+
+ &lt;p&gt;The following code snippet shows how to create a text view which suggests
+ various countries names while the user is typing:&lt;/p&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ public class CountriesActivity extends Activity {
+     protected void onCreate(Bundle icicle) {
+         super.onCreate(icicle);
+         setContentView(R.layout.countries);
+
+         ArrayAdapter&amp;lt;String&amp;gt; adapter = new ArrayAdapter&amp;lt;String&amp;gt;(this,
+                 android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+         AutoCompleteTextView textView = (AutoCompleteTextView)
+                 findViewById(R.id.countries_list);
+         textView.setAdapter(adapter);
+     }
+
+     private static final String[] COUNTRIES = new String[] {
+         &quot;Belgium&quot;, &quot;France&quot;, &quot;Italy&quot;, &quot;Germany&quot;, &quot;Spain&quot;
+     };
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;See the &lt;a href=&quot;{@docRoot}guide/topics/ui/controls/text.html&quot;&gt;Text Fields&lt;/a&gt;
+ guide.&lt;/p&gt;
+
+ @attr ref android.R.styleable#AutoCompleteTextView_completionHint
+ @attr ref android.R.styleable#AutoCompleteTextView_completionThreshold
+ @attr ref android.R.styleable#AutoCompleteTextView_completionHintView
+ @attr ref android.R.styleable#AutoCompleteTextView_dropDownSelector
+ @attr ref android.R.styleable#AutoCompleteTextView_dropDownAnchor
+ @attr ref android.R.styleable#AutoCompleteTextView_dropDownWidth
+ @attr ref android.R.styleable#AutoCompleteTextView_dropDownHeight
+ @attr ref android.R.styleable#ListPopupWindow_dropDownVerticalOffset
+ @attr ref android.R.styleable#ListPopupWindow_dropDownHorizontalOffset
+*/
+var AutoCompleteTextView = {
+
+<span id='android-widget-AutoCompleteTextView-method-setOnClickListener'>/**
+</span>*/
+setOnClickListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setCompletionHint'>/**&lt;p&gt;Sets the optional hint text that is displayed at the bottom of the
+</span> the matching list.  This can be used as a cue to the user on how to
+ best use the list, or to provide extra information.&lt;/p&gt;
+@param {Object {CharSequence}} hint the text to be displayed to the user
+@see #getCompletionHint()
+@attr ref android.R.styleable#AutoCompleteTextView_completionHint
+*/
+setCompletionHint : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getCompletionHint'>/**Gets the optional hint text displayed at the bottom of the the matching list.
+</span>@return {Object {java.lang.CharSequence}} The hint text, if any
+@see #setCompletionHint(CharSequence)
+@attr ref android.R.styleable#AutoCompleteTextView_completionHint
+*/
+getCompletionHint : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getDropDownWidth'>/**Returns the current width for the auto-complete drop down list.
+</span>
+ This can be a fixed width, or {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
+ to fill the screen, or {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
+ to fit the width of its anchor view.
+@return {Number} the width for the drop down list
+@attr ref android.R.styleable#AutoCompleteTextView_dropDownWidth
+*/
+getDropDownWidth : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownWidth'>/**Sets the current width for the auto-complete drop down list.
+</span>
+ This can be a fixed width, or {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
+ to fill the screen, or {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
+ to fit the width of its anchor view.
+@param {Number} width the width to use
+@attr ref android.R.styleable#AutoCompleteTextView_dropDownWidth
+*/
+setDropDownWidth : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getDropDownHeight'>/**&lt;p&gt;Returns the current height for the auto-complete drop down list.
+</span>
+ This can be a fixed width, or {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
+ to fill the screen, or {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
+ to fit the width of its anchor view.
+@return {Number} the height for the drop down list
+@attr ref android.R.styleable#AutoCompleteTextView_dropDownHeight
+*/
+getDropDownHeight : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownHeight'>/**Sets the current height for the auto-complete drop down list.
+</span>
+ This can be a fixed width, or {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
+ to fill the screen, or {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
+ to fit the width of its anchor view.
+@param {Number} height the height to use
+@attr ref android.R.styleable#AutoCompleteTextView_dropDownHeight
+*/
+setDropDownHeight : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getDropDownAnchor'>/**&lt;p&gt;Returns the id for the view that the auto-complete drop down list is anchored to.&lt;/p&gt;
+</span>@return {Number} the view's id, or {@link View#NO_ID} if none specified
+@attr ref android.R.styleable#AutoCompleteTextView_dropDownAnchor
+*/
+getDropDownAnchor : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownAnchor'>/**&lt;p&gt;Sets the view to which the auto-complete drop down list should anchor. The view
+</span> corresponding to this id will not be loaded until the next time it is needed to avoid
+ loading a view which is not yet instantiated.&lt;/p&gt;
+@param {Number} id the id to anchor the drop down list view to
+@attr ref android.R.styleable#AutoCompleteTextView_dropDownAnchor
+*/
+setDropDownAnchor : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getDropDownBackground'>/**&lt;p&gt;Gets the background of the auto-complete drop-down list.&lt;/p&gt;
+</span>@return {Object {android.graphics.drawable.Drawable}} the background drawable
+@attr ref android.R.styleable#PopupWindow_popupBackground
+*/
+getDropDownBackground : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownBackgroundDrawable'>/**&lt;p&gt;Sets the background of the auto-complete drop-down list.&lt;/p&gt;
+</span>@param {Object {Drawable}} d the drawable to set as the background
+@attr ref android.R.styleable#PopupWindow_popupBackground
+*/
+setDropDownBackgroundDrawable : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownBackgroundResource'>/**&lt;p&gt;Sets the background of the auto-complete drop-down list.&lt;/p&gt;
+</span>@param {Number} id the id of the drawable to set as the background
+@attr ref android.R.styleable#PopupWindow_popupBackground
+*/
+setDropDownBackgroundResource : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownVerticalOffset'>/**&lt;p&gt;Sets the vertical offset used for the auto-complete drop-down list.&lt;/p&gt;
+</span>@param {Number} offset the vertical offset
+@attr ref android.R.styleable#ListPopupWindow_dropDownVerticalOffset
+*/
+setDropDownVerticalOffset : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getDropDownVerticalOffset'>/**&lt;p&gt;Gets the vertical offset used for the auto-complete drop-down list.&lt;/p&gt;
+</span>@return {Number} the vertical offset
+@attr ref android.R.styleable#ListPopupWindow_dropDownVerticalOffset
+*/
+getDropDownVerticalOffset : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownHorizontalOffset'>/**&lt;p&gt;Sets the horizontal offset used for the auto-complete drop-down list.&lt;/p&gt;
+</span>@param {Number} offset the horizontal offset
+@attr ref android.R.styleable#ListPopupWindow_dropDownHorizontalOffset
+*/
+setDropDownHorizontalOffset : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getDropDownHorizontalOffset'>/**&lt;p&gt;Gets the horizontal offset used for the auto-complete drop-down list.&lt;/p&gt;
+</span>@return {Number} the horizontal offset
+@attr ref android.R.styleable#ListPopupWindow_dropDownHorizontalOffset
+*/
+getDropDownHorizontalOffset : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownAnimationStyle'>/**&lt;p&gt;Sets the animation style of the auto-complete drop-down list.&lt;/p&gt;
+</span>
+ &lt;p&gt;If the drop-down is showing, calling this method will take effect only
+ the next time the drop-down is shown.&lt;/p&gt;
+@param {Number} animationStyle animation style to use when the drop-down appears
+      and disappears.  Set to -1 for the default animation, 0 for no
+      animation, or a resource identifier for an explicit animation.
+@hide Pending API council approval
+*/
+setDropDownAnimationStyle : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getDropDownAnimationStyle'>/**&lt;p&gt;Returns the animation style that is used when the drop-down list appears and disappears
+</span> &lt;/p&gt;
+@return {Number} the animation style that is used when the drop-down list appears and disappears
+@hide Pending API council approval
+*/
+getDropDownAnimationStyle : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-isDropDownAlwaysVisible'>/**
+</span>@return {Boolean} Whether the drop-down is visible as long as there is {@link #enoughToFilter()}
+@hide Pending API council approval
+*/
+isDropDownAlwaysVisible : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownAlwaysVisible'>/**Sets whether the drop-down should remain visible as long as there is there is
+</span> {@link #enoughToFilter}().  This is useful if an unknown number of results are expected
+ to show up in the adapter sometime in the future.
+
+ The drop-down will occupy the entire screen below {@link #getDropDownAnchor} regardless
+ of the size or content of the list.  {@link #getDropDownBackground}() will fill any space
+ that is not used by the list.
+@param {Boolean} dropDownAlwaysVisible Whether to keep the drop-down visible.
+@hide Pending API council approval
+*/
+setDropDownAlwaysVisible : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-isDropDownDismissedOnCompletion'>/**Checks whether the drop-down is dismissed when a suggestion is clicked.
+</span>@hide Pending API council approval
+*/
+isDropDownDismissedOnCompletion : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setDropDownDismissedOnCompletion'>/**Sets whether the drop-down is dismissed when a suggestion is clicked. This is
+</span> true by default.
+@param {Boolean} dropDownDismissedOnCompletion Whether to dismiss the drop-down.
+@hide Pending API council approval
+*/
+setDropDownDismissedOnCompletion : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getThreshold'>/**&lt;p&gt;Returns the number of characters the user must type before the drop
+</span> down list is shown.&lt;/p&gt;
+@return {Number} the minimum number of characters to type to show the drop down
+@see #setThreshold(int)
+@attr ref android.R.styleable#AutoCompleteTextView_completionThreshold
+*/
+getThreshold : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setThreshold'>/**&lt;p&gt;Specifies the minimum number of characters the user has to type in the
+</span> edit box before the drop down list is shown.&lt;/p&gt;
+
+ &lt;p&gt;When &lt;code&gt;threshold&lt;/code&gt; is less than or equals 0, a threshold of
+ 1 is applied.&lt;/p&gt;
+@param {Number} threshold the number of characters to type before the drop down
+                  is shown
+@see #getThreshold()
+@attr ref android.R.styleable#AutoCompleteTextView_completionThreshold
+*/
+setThreshold : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setOnItemClickListener'>/**&lt;p&gt;Sets the listener that will be notified when the user clicks an item
+</span> in the drop down list.&lt;/p&gt;
+@param {Object {AdapterView.OnItemClickListener}} l the item click listener
+*/
+setOnItemClickListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setOnItemSelectedListener'>/**&lt;p&gt;Sets the listener that will be notified when the user selects an item
+</span> in the drop down list.&lt;/p&gt;
+@param {Object {AdapterView.OnItemSelectedListener}} l the item selected listener
+*/
+setOnItemSelectedListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getItemClickListener'>/**&lt;p&gt;Returns the listener that is notified whenever the user clicks an item
+</span> in the drop down list.&lt;/p&gt;
+@return {Object {android.widget.AdapterView.OnItemClickListener}} the item click listener
+@deprecated Use {@link #getOnItemClickListener()} intead
+*/
+getItemClickListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getItemSelectedListener'>/**&lt;p&gt;Returns the listener that is notified whenever the user selects an
+</span> item in the drop down list.&lt;/p&gt;
+@return {Object {android.widget.AdapterView.OnItemSelectedListener}} the item selected listener
+@deprecated Use {@link #getOnItemSelectedListener()} intead
+*/
+getItemSelectedListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getOnItemClickListener'>/**&lt;p&gt;Returns the listener that is notified whenever the user clicks an item
+</span> in the drop down list.&lt;/p&gt;
+@return {Object {android.widget.AdapterView.OnItemClickListener}} the item click listener
+*/
+getOnItemClickListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getOnItemSelectedListener'>/**&lt;p&gt;Returns the listener that is notified whenever the user selects an
+</span> item in the drop down list.&lt;/p&gt;
+@return {Object {android.widget.AdapterView.OnItemSelectedListener}} the item selected listener
+*/
+getOnItemSelectedListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setOnDismissListener'>/**Set a listener that will be invoked whenever the AutoCompleteTextView's
+</span> list of completions is dismissed.
+@param {Object {AutoCompleteTextView.OnDismissListener}} dismissListener Listener to invoke when completions are dismissed
+*/
+setOnDismissListener : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getAdapter'>/**&lt;p&gt;Returns a filterable list adapter used for auto completion.&lt;/p&gt;
+</span>@return {Object {android.widget.ListAdapter}} a data adapter used for auto completion
+*/
+getAdapter : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setAdapter'>/**&lt;p&gt;Changes the list of data used for auto completion. The provided list
+</span> must be a filterable list adapter.&lt;/p&gt;
+
+ &lt;p&gt;The caller is still responsible for managing any resources used by the adapter.
+ Notably, when the AutoCompleteTextView is closed or released, the adapter is not notified.
+ A common case is the use of {@link android.widget.CursorAdapter}, which
+ contains a {@link android.database.Cursor} that must be closed.  This can be done
+ automatically (see
+ {@link android.app.Activity#startManagingCursor(android.database.Cursor)
+ startManagingCursor()}),
+ or by manually closing the cursor when the AutoCompleteTextView is dismissed.&lt;/p&gt;
+@param {Object {ListAdapter}} adapter the adapter holding the auto completion data
+@see #getAdapter()
+@see android.widget.Filterable
+@see android.widget.ListAdapter
+*/
+setAdapter : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-onKeyPreIme'>/**
+</span>*/
+onKeyPreIme : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-onKeyUp'>/**
+</span>*/
+onKeyUp : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-onKeyDown'>/**
+</span>*/
+onKeyDown : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-enoughToFilter'>/**Returns &lt;code&gt;true&lt;/code&gt; if the amount of text in the field meets
+</span> or exceeds the {@link #getThreshold} requirement.  You can override
+ this to impose a different standard for when filtering will be
+ triggered.
+*/
+enoughToFilter : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-refreshAutoCompleteResults'>/**Refreshes the auto complete results. You usually shouldn't have to manually refresh the
+</span> AutoCompleteResults as this is done automatically whenever the text changes. However if the
+ results are not available and have to be fetched, you can call this function after fetching
+ the results.
+*/
+refreshAutoCompleteResults : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-isPopupShowing'>/**&lt;p&gt;Indicates whether the popup menu is showing.&lt;/p&gt;
+</span>@return {Boolean} true if the popup menu is showing, false otherwise
+*/
+isPopupShowing : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-clearListSelection'>/**&lt;p&gt;Clear the list selection.  This may only be temporary, as user input will often bring
+</span> it back.
+*/
+clearListSelection : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setListSelection'>/**Set the position of the dropdown view selection.
+</span>@param {Number} position The position to move the selector to.
+*/
+setListSelection : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getListSelection'>/**Get the position of the dropdown view selection, if there is one.  Returns
+</span> {@link android.widget.ListView#INVALID_POSITION android.widget.ListView.INVALID_POSITION} if there is no dropdown or if
+ there is no selection.
+@return {Number} the position of the current selection, if there is one, or
+ {@link ListView#INVALID_POSITION ListView.INVALID_POSITION} if not.
+@see ListView#getSelectedItemPosition()
+*/
+getListSelection : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-performCompletion'>/**&lt;p&gt;Performs the text completion by converting the selected item from
+</span> the drop down list into a string, replacing the text box's content with
+ this string and finally dismissing the drop down menu.&lt;/p&gt;
+*/
+performCompletion : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-onCommitCompletion'>/**
+</span>*/
+onCommitCompletion : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-isPerformingCompletion'>/**Identifies whether the view is currently performing a text completion, so subclasses
+</span> can decide whether to respond to text changed events.
+*/
+isPerformingCompletion : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setText'>/**Like {@link #setText}(CharSequence), except that it can disable filtering.
+</span>@param {Object {CharSequence}} filter If &lt;code&gt;false&lt;/code&gt;, no filtering will be performed
+        as a result of this call.
+*/
+setText : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-onFilterComplete'>/**{@inheritDoc}
+</span>*/
+onFilterComplete : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-onWindowFocusChanged'>/**
+</span>*/
+onWindowFocusChanged : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-dismissDropDown'>/**&lt;p&gt;Closes the drop down if present on screen.&lt;/p&gt;
+</span>*/
+dismissDropDown : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-showDropDownAfterLayout'>/**Issues a runnable to show the dropdown as soon as possible.
+</span>@hide internal used only by SearchDialog
+*/
+showDropDownAfterLayout : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-ensureImeVisible'>/**Ensures that the drop down is not obscuring the IME.
+</span>@param {Boolean} visible whether the ime should be in front. If false, the ime is pushed to
+ the background.
+
+ This method is deprecated. Please use the following methods instead.
+ Use {@link #setInputMethodMode} to ensure that the drop down is not obscuring the IME.
+ Use {@link #showDropDown()} to show the drop down immediately
+ A combination of {@link #isDropDownAlwaysVisible()} and {@link #enoughToFilter()} to decide
+ whether to manually trigger {@link #showDropDown()} or not.
+@hide internal used only here and SearchDialog
+*/
+ensureImeVisible : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-isInputMethodNotNeeded'>/**This method is deprecated. Please use {@link #getInputMethodMode}() instead.
+</span>@hide This API is not being used and can be removed.
+*/
+isInputMethodNotNeeded : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getInputMethodMode'>/**Returns the input method mode used by the auto complete dropdown.
+</span>*/
+getInputMethodMode : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setInputMethodMode'>/**Use this method to specify when the IME should be displayed. This function can be used to
+</span> prevent the dropdown from obscuring the IME.
+@param {Number} mode speficies the input method mode. use one of the following values:
+
+ {@link ListPopupWindow#INPUT_METHOD_FROM_FOCUSABLE} IME Displayed if the auto-complete box is
+ focusable.
+ {@link ListPopupWindow#INPUT_METHOD_NEEDED} Always display the IME.
+ {@link ListPopupWindow#INPUT_METHOD_NOT_NEEDED}. The auto-complete suggestions are always
+ displayed, even if the suggestions cover/hide the input method.
+*/
+setInputMethodMode : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-showDropDown'>/**&lt;p&gt;Displays the drop down on screen.&lt;/p&gt;
+</span>*/
+showDropDown : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setForceIgnoreOutsideTouch'>/**Forces outside touches to be ignored. Normally if {@link #isDropDownAlwaysVisible}() is
+</span> false, we allow outside touch to dismiss the dropdown. If this is set to true, then we
+ ignore outside touch even when the drop down is not set to always visible.
+@hide used only by SearchDialog
+*/
+setForceIgnoreOutsideTouch : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-setValidator'>/**Sets the validator used to perform text validation.
+</span>@param {Object {AutoCompleteTextView.Validator}} validator The validator used to validate the text entered in this widget.
+@see #getValidator()
+@see #performValidation()
+*/
+setValidator : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-getValidator'>/**Returns the Validator set with {@link #setValidator},
+</span> or &lt;code&gt;null&lt;/code&gt; if it was not set.
+@see #setValidator(android.widget.AutoCompleteTextView.Validator)
+@see #performValidation()
+*/
+getValidator : function(  ) {},
+
+<span id='android-widget-AutoCompleteTextView-method-performValidation'>/**If a validator was set on this view and the current string is not valid,
+</span> ask the validator to fix it.
+@see #getValidator()
+@see #setValidator(android.widget.AutoCompleteTextView.Validator)
+*/
+performValidation : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-VectorDrawable'>/**@class android.graphics.drawable.VectorDrawable
+</span>@extends android.graphics.drawable.Drawable
+
+ This lets you create a drawable based on an XML vector graphic.
+ &lt;p/&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; To optimize for the re-drawing performance, one bitmap cache is created
+ for each VectorDrawable. Therefore, referring to the same VectorDrawable means sharing the same
+ bitmap cache. If these references don't agree upon on the same size, the bitmap will be recreated
+ and redrawn every time size is changed. In other words, if a VectorDrawable is used for
+ different sizes, it is more efficient to create multiple VectorDrawables, one for each size.
+ &lt;p/&gt;
+ VectorDrawable can be defined in an XML file with the &lt;code&gt;&amp;lt;vector&gt;&lt;/code&gt; element.
+ &lt;p/&gt;
+ The vector drawable has the following elements:
+ &lt;p/&gt;
+ &lt;dt&gt;&lt;code&gt;&amp;lt;vector&gt;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dl&gt;
+ &lt;dd&gt;Used to define a vector drawable
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;android:name&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines the name of this vector drawable.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:width&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Used to define the intrinsic width of the drawable.
+ This support all the dimension units, normally specified with dp.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:height&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Used to define the intrinsic height the drawable.
+ This support all the dimension units, normally specified with dp.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:viewportWidth&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Used to define the width of the viewport space. Viewport is basically
+ the virtual canvas where the paths are drawn on.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:viewportHeight&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Used to define the height of the viewport space. Viewport is basically
+ the virtual canvas where the paths are drawn on.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:tint&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The color to apply to the drawable as a tint. By default, no tint is applied.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:tintMode&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The Porter-Duff blending mode for the tint color. Default is src_in.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:autoMirrored&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Indicates if the drawable needs to be mirrored when its layout direction is
+ RTL (right-to-left). Default is false.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:alpha&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The opacity of this drawable. Default is 1.0.&lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;/dl&gt;
+
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;&amp;lt;group&gt;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines a group of paths or subgroups, plus transformation information.
+ The transformations are defined in the same coordinates as the viewport.
+ And the transformations are applied in the order of scale, rotate then translate.
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;android:name&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines the name of the group.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:rotation&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The degrees of rotation of the group. Default is 0.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:pivotX&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The X coordinate of the pivot for the scale and rotation of the group.
+ This is defined in the viewport space. Default is 0.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:pivotY&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The Y coordinate of the pivot for the scale and rotation of the group.
+ This is defined in the viewport space. Default is 0.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:scaleX&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The amount of scale on the X Coordinate. Default is 1.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:scaleY&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The amount of scale on the Y coordinate. Default is 1.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:translateX&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The amount of translation on the X coordinate.
+ This is defined in the viewport space. Default is 0.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:translateY&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The amount of translation on the Y coordinate.
+ This is defined in the viewport space. Default is 0.&lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;/dl&gt;
+
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;&amp;lt;path&gt;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines paths to be drawn.
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;android:name&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines the name of the path.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:pathData&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines path data using exactly same format as &quot;d&quot; attribute
+ in the SVG's path data. This is defined in the viewport space.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:fillColor&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Specifies the color used to fill the path. May be a color or, for SDK 24+, a color state list
+ or a gradient color (See {@link android.R.styleable#GradientColor}
+ and {@link android.R.styleable#GradientColorItem}).
+ If this property is animated, any value set by the animation will override the original value.
+ No path fill is drawn if this property is not specified.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:strokeColor&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Specifies the color used to draw the path outline. May be a color or, for SDK 24+, a color
+ state list or a gradient color (See {@link android.R.styleable#GradientColor}
+ and {@link android.R.styleable#GradientColorItem}).
+ If this property is animated, any value set by the animation will override the original value.
+ No path outline is drawn if this property is not specified.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:strokeWidth&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The width a path stroke. Default is 0.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:strokeAlpha&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The opacity of a path stroke. Default is 1.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:fillAlpha&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The opacity to fill the path with. Default is 1.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:trimPathStart&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The fraction of the path to trim from the start, in the range from 0 to 1. Default is 0.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:trimPathEnd&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;The fraction of the path to trim from the end, in the range from 0 to 1. Default is 1.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:trimPathOffset&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Shift trim region (allows showed region to include the start and end), in the range
+ from 0 to 1. Default is 0.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:strokeLineCap&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Sets the linecap for a stroked path: butt, round, square. Default is butt.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:strokeLineJoin&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Sets the lineJoin for a stroked path: miter,round,bevel. Default is miter.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:strokeMiterLimit&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Sets the Miter limit for a stroked path. Default is 4.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:fillType&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;For SDK 24+, sets the fillType for a path. The types can be either &quot;evenOdd&quot; or &quot;nonZero&quot;. They behave the
+ same as SVG's &quot;fill-rule&quot; properties. Default is nonZero. For more details, see
+ &lt;a href=&quot;https://www.w3.org/TR/SVG/painting.html#FillRuleProperty&quot;&gt;FillRuleProperty&lt;/a&gt;&lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+
+ &lt;/dl&gt;
+
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;&amp;lt;clip-path&gt;&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines path to be the current clip. Note that the clip path only apply to
+ the current group and its children.
+ &lt;dl&gt;
+ &lt;dt&gt;&lt;code&gt;android:name&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines the name of the clip path.&lt;/dd&gt;
+ &lt;dd&gt;Animatable : No.&lt;/dd&gt;
+ &lt;dt&gt;&lt;code&gt;android:pathData&lt;/code&gt;&lt;/dt&gt;
+ &lt;dd&gt;Defines clip path using the same format as &quot;d&quot; attribute
+ in the SVG's path data.&lt;/dd&gt;
+ &lt;dd&gt;Animatable : Yes.&lt;/dd&gt;
+ &lt;/dl&gt;&lt;/dd&gt;
+ &lt;/dl&gt;
+ &lt;li&gt;Here is a simple VectorDrawable in this vectordrawable.xml file.
+ &lt;pre&gt;
+ &amp;lt;vector xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;
+     android:height=&amp;quot;64dp&amp;quot;
+     android:width=&amp;quot;64dp&amp;quot;
+     android:viewportHeight=&amp;quot;600&amp;quot;
+     android:viewportWidth=&amp;quot;600&amp;quot; &amp;gt;
+     &amp;lt;group
+         android:name=&amp;quot;rotationGroup&amp;quot;
+         android:pivotX=&amp;quot;300.0&amp;quot;
+         android:pivotY=&amp;quot;300.0&amp;quot;
+         android:rotation=&amp;quot;45.0&amp;quot; &amp;gt;
+         &amp;lt;path
+             android:name=&amp;quot;v&amp;quot;
+             android:fillColor=&amp;quot;#000000&amp;quot;
+             android:pathData=&amp;quot;M300,70 l 0,-70 70,70 0,0 -70,70z&amp;quot; /&amp;gt;
+     &amp;lt;/group&amp;gt;
+ &amp;lt;/vector&amp;gt;
+ &lt;/pre&gt;
+ &lt;/li&gt;
+ &lt;h4&gt;Gradient support&lt;/h4&gt;
+ We support 3 types of gradients: {@link android.graphics.LinearGradient},
+ {@link android.graphics.RadialGradient}, or {@link android.graphics.SweepGradient}.
+ &lt;p/&gt;
+ And we support all of 3 types of tile modes {@link android.graphics.Shader.TileMode}:
+ CLAMP, REPEAT, MIRROR.
+ &lt;p/&gt;
+ All of the attributes are listed in {@link android.R.styleable#GradientColor}.
+ Note that different attributes are relevant for different types of gradient.
+ &lt;table border=&quot;2&quot; align=&quot;center&quot; cellpadding=&quot;5&quot;&gt;
+     &lt;thead&gt;
+         &lt;tr&gt;
+             &lt;th&gt;LinearGradient&lt;/th&gt;
+             &lt;th&gt;RadialGradient&lt;/th&gt;
+             &lt;th&gt;SweepGradient&lt;/th&gt;
+         &lt;/tr&gt;
+     &lt;/thead&gt;
+     &lt;tr&gt;
+         &lt;td&gt;startColor &lt;/td&gt;
+         &lt;td&gt;startColor&lt;/td&gt;
+         &lt;td&gt;startColor&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;centerColor&lt;/td&gt;
+         &lt;td&gt;centerColor&lt;/td&gt;
+         &lt;td&gt;centerColor&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;endColor&lt;/td&gt;
+         &lt;td&gt;endColor&lt;/td&gt;
+         &lt;td&gt;endColor&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;type&lt;/td&gt;
+         &lt;td&gt;type&lt;/td&gt;
+         &lt;td&gt;type&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;tileMode&lt;/td&gt;
+         &lt;td&gt;tileMode&lt;/td&gt;
+         &lt;td&gt;tileMode&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;startX&lt;/td&gt;
+         &lt;td&gt;centerX&lt;/td&gt;
+         &lt;td&gt;centerX&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;startY&lt;/td&gt;
+         &lt;td&gt;centerY&lt;/td&gt;
+         &lt;td&gt;centerY&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;endX&lt;/td&gt;
+         &lt;td&gt;gradientRadius&lt;/td&gt;
+         &lt;td&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;endY&lt;/td&gt;
+         &lt;td&gt;&lt;/td&gt;
+         &lt;td&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;p/&gt;
+ Also note that if any color item {@link android.R.styleable#GradientColorItem} is defined, then
+ startColor, centerColor and endColor will be ignored.
+ &lt;p/&gt;
+ See more details in {@link android.R.styleable#GradientColor} and
+ {@link android.R.styleable#GradientColorItem}.
+ &lt;p/&gt;
+ Here is a simple example that defines a linear gradient.
+ &lt;pre&gt;
+ &amp;lt;gradient xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     android:startColor=&quot;?android:attr/colorPrimary&quot;
+     android:endColor=&quot;?android:attr/colorControlActivated&quot;
+     android:centerColor=&quot;#f00&quot;
+     android:startX=&quot;0&quot;
+     android:startY=&quot;0&quot;
+     android:endX=&quot;100&quot;
+     android:endY=&quot;100&quot;
+     android:type=&quot;linear&quot;&amp;gt;
+ &amp;lt;/gradient&amp;gt;
+ &lt;/pre&gt;
+ And here is a simple example that defines a radial gradient using color items.
+ &lt;pre&gt;
+ &amp;lt;gradient xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+     android:centerX=&quot;300&quot;
+     android:centerY=&quot;300&quot;
+     android:gradientRadius=&quot;100&quot;
+     android:type=&quot;radial&quot;&amp;gt;
+     &amp;lt;item android:offset=&quot;0.1&quot; android:color=&quot;#0ff&quot;/&amp;gt;
+     &amp;lt;item android:offset=&quot;0.4&quot; android:color=&quot;#fff&quot;/&amp;gt;
+     &amp;lt;item android:offset=&quot;0.9&quot; android:color=&quot;#ff0&quot;/&amp;gt;
+ &amp;lt;/gradient&amp;gt;
+ &lt;/pre&gt;
+
+*/
+var VectorDrawable = {
+
+<span id='android-graphics-drawable-VectorDrawable-method-mutate'>/**
+</span>*/
+mutate : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-clearMutated'>/**
+</span>@hide 
+*/
+clearMutated : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getConstantState'>/**
+</span>*/
+getConstantState : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getAlpha'>/**
+</span>*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-setAlpha'>/**
+</span>*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-setColorFilter'>/**
+</span>*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getColorFilter'>/**
+</span>*/
+getColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-setTintList'>/**
+</span>*/
+setTintList : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-setTintBlendMode'>/**
+</span>*/
+setTintBlendMode : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-isStateful'>/**
+</span>*/
+isStateful : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-hasFocusStateSpecified'>/**
+</span>@hide 
+*/
+hasFocusStateSpecified : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getOpacity'>/**
+</span>*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getIntrinsicWidth'>/**
+</span>*/
+getIntrinsicWidth : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getIntrinsicHeight'>/**
+</span>*/
+getIntrinsicHeight : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getOpticalInsets'>/**
+</span>*/
+getOpticalInsets : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-canApplyTheme'>/**
+</span>*/
+canApplyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-applyTheme'>/**
+</span>*/
+applyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getPixelSize'>/**The size of a pixel when scaled from the intrinsic dimension to the viewport dimension.
+</span> This is used to calculate the path animation accuracy.
+@hide 
+*/
+getPixelSize : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-create'>/**
+</span>@hide 
+*/
+create : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getChangingConfigurations'>/**
+</span>*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-setAutoMirrored'>/**
+</span>*/
+setAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-isAutoMirrored'>/**
+</span>*/
+isAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-getNativeTree'>/**
+</span>@hide 
+*/
+getNativeTree : function(  ) {},
+
+<span id='android-graphics-drawable-VectorDrawable-method-setAntiAlias'>/**
+</span>@hide 
+*/
+setAntiAlias : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

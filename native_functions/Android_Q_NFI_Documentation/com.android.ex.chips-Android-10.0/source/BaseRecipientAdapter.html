@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ex-chips-BaseRecipientAdapter'>/**@class com.android.ex.chips.BaseRecipientAdapter
+</span> implements android.widget.Filterable
+
+ implements com.android.ex.chips.AccountSpecifier
+
+ implements com.android.ex.chips.PhotoManager.PhotoManagerCallback
+
+@extends android.widget.BaseAdapter
+
+ Adapter for showing a recipient list.
+
+ &lt;p&gt;It checks whether all permissions are granted before doing
+ query. If not all permissions in {@link com.android.ex.chips.ChipsUtil#REQUIRED_PERMISSIONS} are granted and
+ {@link #mShowRequestPermissionsItem} is true it will return single entry that asks user to grant
+ permissions to the app. Any app that uses this library should set this when it wants us to
+ display that entry but then it should set
+ {@link com.android.ex.chips.RecipientEditTextView.PermissionsRequestItemClickedListener} on
+ {@link com.android.ex.chips.RecipientEditTextView} as well.
+*/
+var BaseRecipientAdapter = {
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-property-QUERY_TYPE_EMAIL'>/***/
+</span>QUERY_TYPE_EMAIL : &quot;0&quot;,
+<span id='com-android-ex-chips-BaseRecipientAdapter-property-QUERY_TYPE_PHONE'>/***/
+</span>QUERY_TYPE_PHONE : &quot;1&quot;,
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getContext'>/**
+</span>*/
+getContext : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getQueryType'>/**
+</span>*/
+getQueryType : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-setDropdownChipLayouter'>/**
+</span>*/
+setDropdownChipLayouter : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getDropdownChipLayouter'>/**
+</span>*/
+getDropdownChipLayouter : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-setPermissionsCheckListener'>/**
+</span>*/
+setPermissionsCheckListener : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getPermissionsCheckListener'>/**
+</span>*/
+getPermissionsCheckListener : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-setPhotoManager'>/**Enables overriding the default photo manager that is used.
+</span>*/
+setPhotoManager : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getPhotoManager'>/**
+</span>*/
+getPhotoManager : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-forceShowAddress'>/**If true, forces using the {@link com.android.ex.chips.SingleRecipientArrayAdapter}
+</span> instead of {@link com.android.ex.chips.RecipientAlternatesAdapter} when
+ clicking on a chip. Default implementation returns {@code false}.
+*/
+forceShowAddress : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getMatchingRecipients'>/**Used to replace email addresses with chips. Default behavior
+</span> queries the ContactsProvider for contact information about the contact.
+ Derived classes should override this method if they wish to use a
+ new data source.
+@param {Object {java.util.ArrayList}} inAddresses addresses to query
+@param {Object {RecipientAlternatesAdapter.RecipientMatchCallback}} callback callback to return results in case of success or failure
+*/
+getMatchingRecipients : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-setAccount'>/**Set the account when known. Causes the search to prioritize contacts from that account.
+</span>*/
+setAccount : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getRequiredPermissions'>/**Returns permissions that this adapter needs in order to provide results.
+</span>*/
+getRequiredPermissions : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-setShowRequestPermissionsItem'>/**Sets whether to ask user to grant permission if they are missing.
+</span>*/
+setShowRequestPermissionsItem : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getFilter'>/**Will be called from {@link AutoCompleteTextView} to prepare auto-complete list.
+</span>*/
+getFilter : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getMatchingRecipients'>/**An extension to {@link com.android.ex.chips.RecipientAlternatesAdapter#getMatchingRecipients} that allows
+</span> additional sources of contacts to be considered as matching recipients.
+@param {Object {java.util.Set}} addresses A set of addresses to be matched
+@return {Object {java.util.Map}} A list of matches or null if none found
+*/
+getMatchingRecipients : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-setupOtherDirectories'>/**
+</span>*/
+setupOtherDirectories : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-registerUpdateObserver'>/**
+</span>*/
+registerUpdateObserver : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getCount'>/**
+</span>*/
+getCount : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getItem'>/**
+</span>*/
+getItem : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getItemId'>/**
+</span>*/
+getItemId : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getViewTypeCount'>/**
+</span>*/
+getViewTypeCount : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getItemViewType'>/**
+</span>*/
+getItemViewType : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-isEnabled'>/**
+</span>*/
+isEnabled : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getView'>/**
+</span>*/
+getView : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-getAccount'>/**
+</span>*/
+getAccount : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-onPhotoBytesPopulated'>/**
+</span>*/
+onPhotoBytesPopulated : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-onPhotoBytesAsynchronouslyPopulated'>/**
+</span>*/
+onPhotoBytesAsynchronouslyPopulated : function(  ) {},
+
+<span id='com-android-ex-chips-BaseRecipientAdapter-method-onPhotoBytesAsyncLoadFailed'>/**
+</span>*/
+onPhotoBytesAsyncLoadFailed : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

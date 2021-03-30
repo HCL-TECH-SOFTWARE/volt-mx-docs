@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-MemoryFile'>/**@class android.os.MemoryFile
+</span>@extends java.lang.Object
+
+ MemoryFile is a wrapper for {@link android.os.SharedMemory} which can optionally be set to purgeable.
+
+ Applications should generally prefer to use {@link android.os.SharedMemory} which offers more flexible
+ access &amp; control over the shared memory region than MemoryFile does.
+
+ Purgeable files may have their contents reclaimed by the kernel
+ in low memory conditions (only if allowPurging is set to true).
+ After a file is purged, attempts to read or write the file will
+ cause an IOException to be thrown.
+*/
+var MemoryFile = {
+
+<span id='android-os-MemoryFile-method-close'>/**Closes the memory file. If there are no other open references to the memory
+</span> file, it will be deleted.
+*/
+close : function(  ) {},
+
+<span id='android-os-MemoryFile-method-length'>/**Returns the length of the memory file.
+</span>@return {Number} file length.
+*/
+length : function(  ) {},
+
+<span id='android-os-MemoryFile-method-isPurgingAllowed'>/**Is memory file purging enabled?
+</span>@return {Boolean} true if the file may be purged.
+@deprecated Purgable is considered generally fragile and hard to use safely. Applications
+ are recommend to instead use {@link android.content.ComponentCallbacks2#onTrimMemory(int)}
+ to react to memory events and release shared memory regions as appropriate.
+*/
+isPurgingAllowed : function(  ) {},
+
+<span id='android-os-MemoryFile-method-allowPurging'>/**Enables or disables purging of the memory file.
+</span>@param {Boolean} allowPurging true if the operating system can purge the contents
+ of the file in low memory situations
+@return {Boolean} previous value of allowPurging
+@deprecated Purgable is considered generally fragile and hard to use safely. Applications
+ are recommend to instead use {@link android.content.ComponentCallbacks2#onTrimMemory(int)}
+ to react to memory events and release shared memory regions as appropriate.
+*/
+allowPurging : function(  ) {},
+
+<span id='android-os-MemoryFile-method-getInputStream'>/**Creates a new InputStream for reading from the memory file.
+</span>@return {Object {java.io.InputStream}} InputStream
+*/
+getInputStream : function(  ) {},
+
+<span id='android-os-MemoryFile-method-getOutputStream'>/**Creates a new OutputStream for writing to the memory file.
+</span>@return {Object {java.io.OutputStream}} OutputStream
+*/
+getOutputStream : function(  ) {},
+
+<span id='android-os-MemoryFile-method-readBytes'>/**Reads bytes from the memory file.
+</span> Will throw an IOException if the file has been purged.
+@param {Object {byte[]}} buffer byte array to read bytes into.
+@param {Number} srcOffset offset into the memory file to read from.
+@param {Number} destOffset offset into the byte array buffer to read into.
+@param {Number} count number of bytes to read.
+@return {Number} number of bytes read.
+@throws IOException if the memory file has been purged or deactivated.
+*/
+readBytes : function(  ) {},
+
+<span id='android-os-MemoryFile-method-writeBytes'>/**Write bytes to the memory file.
+</span> Will throw an IOException if the file has been purged.
+@param {Object {byte[]}} buffer byte array to write bytes from.
+@param {Number} srcOffset offset into the byte array buffer to write from.
+@param {Number} destOffset offset  into the memory file to write to.
+@param {Number} count number of bytes to write.
+@throws IOException if the memory file has been purged or deactivated.
+*/
+writeBytes : function(  ) {},
+
+<span id='android-os-MemoryFile-method-getFileDescriptor'>/**Gets a FileDescriptor for the memory file.
+</span>
+ The returned file descriptor is not duplicated.
+@throws IOException If the memory file has been closed.
+@hide 
+*/
+getFileDescriptor : function(  ) {},
+
+<span id='android-os-MemoryFile-method-getSize'>/**Returns the size of the memory file that the file descriptor refers to,
+</span> or -1 if the file descriptor does not refer to a memory file.
+@throws IOException If &lt;code&gt;fd&lt;/code&gt; is not a valid file descriptor.
+@hide 
+*/
+getSize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

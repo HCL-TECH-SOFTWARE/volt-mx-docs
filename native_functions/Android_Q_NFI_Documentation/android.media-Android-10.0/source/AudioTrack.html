@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-AudioTrack'>/**@class android.media.AudioTrack
+</span> implements android.media.AudioRouting
+
+ implements android.media.VolumeAutomation
+
+@extends android.media.PlayerBase
+
+ The AudioTrack class manages and plays a single audio resource for Java applications.
+ It allows streaming of PCM audio buffers to the audio sink for playback. This is
+ achieved by &quot;pushing&quot; the data to the AudioTrack object using one of the
+  {@link #write(byte[], int, int)}, {@link #write(short[], int, int)},
+  and {@link #write(float[], int, int, int)} methods.
+
+ &lt;p&gt;An AudioTrack instance can operate under two modes: static or streaming.&lt;br&gt;
+ In Streaming mode, the application writes a continuous stream of data to the AudioTrack, using
+ one of the {@code write()} methods. These are blocking and return when the data has been
+ transferred from the Java layer to the native layer and queued for playback. The streaming
+ mode is most useful when playing blocks of audio data that for instance are:
+
+ &lt;ul&gt;
+   &lt;li&gt;too big to fit in memory because of the duration of the sound to play,&lt;/li&gt;
+   &lt;li&gt;too big to fit in memory because of the characteristics of the audio data
+         (high sampling rate, bits per sample ...)&lt;/li&gt;
+   &lt;li&gt;received or generated while previously queued audio is playing.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ The static mode should be chosen when dealing with short sounds that fit in memory and
+ that need to be played with the smallest latency possible. The static mode will
+ therefore be preferred for UI and game sounds that are played often, and with the
+ smallest overhead possible.
+
+ &lt;p&gt;Upon creation, an AudioTrack object initializes its associated audio buffer.
+ The size of this buffer, specified during the construction, determines how long an AudioTrack
+ can play before running out of data.&lt;br&gt;
+ For an AudioTrack using the static mode, this size is the maximum size of the sound that can
+ be played from it.&lt;br&gt;
+ For the streaming mode, data will be written to the audio sink in chunks of
+ sizes less than or equal to the total buffer size.
+
+ AudioTrack is not final and thus permits subclasses, but such use is not recommended.
+*/
+var AudioTrack = {
+
+<span id='android-media-AudioTrack-property-PLAYSTATE_STOPPED'>/**indicates AudioTrack state is stopped */
+</span>PLAYSTATE_STOPPED : &quot;1&quot;,
+<span id='android-media-AudioTrack-property-PLAYSTATE_PAUSED'>/**indicates AudioTrack state is paused */
+</span>PLAYSTATE_PAUSED : &quot;2&quot;,
+<span id='android-media-AudioTrack-property-PLAYSTATE_PLAYING'>/**indicates AudioTrack state is playing */
+</span>PLAYSTATE_PLAYING : &quot;3&quot;,
+<span id='android-media-AudioTrack-property-MODE_STATIC'>/** Creation mode where audio data is transferred from Java to the native layer
+</span> only once before the audio starts playing.
+*/
+MODE_STATIC : &quot;0&quot;,
+<span id='android-media-AudioTrack-property-MODE_STREAM'>/** Creation mode where audio data is streamed from Java to the native layer
+</span> as the audio is playing.
+*/
+MODE_STREAM : &quot;1&quot;,
+<span id='android-media-AudioTrack-property-STATE_UNINITIALIZED'>/** State of an AudioTrack that was not successfully initialized upon creation.
+</span>*/
+STATE_UNINITIALIZED : &quot;0&quot;,
+<span id='android-media-AudioTrack-property-STATE_INITIALIZED'>/** State of an AudioTrack that is ready to be used.
+</span>*/
+STATE_INITIALIZED : &quot;1&quot;,
+<span id='android-media-AudioTrack-property-STATE_NO_STATIC_DATA'>/** State of a successfully initialized AudioTrack that uses static data,
+</span> but that hasn't received that data yet.
+*/
+STATE_NO_STATIC_DATA : &quot;2&quot;,
+<span id='android-media-AudioTrack-property-SUCCESS'>/** Denotes a successful operation.
+</span>*/
+SUCCESS : &quot;0&quot;,
+<span id='android-media-AudioTrack-property-ERROR'>/** Denotes a generic operation failure.
+</span>*/
+ERROR : &quot;-1&quot;,
+<span id='android-media-AudioTrack-property-ERROR_BAD_VALUE'>/** Denotes a failure due to the use of an invalid value.
+</span>*/
+ERROR_BAD_VALUE : &quot;-2&quot;,
+<span id='android-media-AudioTrack-property-ERROR_INVALID_OPERATION'>/** Denotes a failure due to the improper use of a method.
+</span>*/
+ERROR_INVALID_OPERATION : &quot;-3&quot;,
+<span id='android-media-AudioTrack-property-ERROR_DEAD_OBJECT'>/** An error code indicating that the object reporting it is no longer valid and needs to
+</span> be recreated.
+*/
+ERROR_DEAD_OBJECT : &quot;-6&quot;,
+<span id='android-media-AudioTrack-property-ERROR_WOULD_BLOCK'>/** {@link #getTimestampWithStatus}(AudioTimestamp) is called in STOPPED or FLUSHED state,
+</span> or immediately after start/ACTIVE.
+ @hide
+*/
+ERROR_WOULD_BLOCK : &quot;-7&quot;,
+<span id='android-media-AudioTrack-property-WRITE_BLOCKING'>/** The write mode indicating the write operation will block until all data has been written,
+</span> to be used as the actual value of the writeMode parameter in
+ {@link #write(byte[], int, int, int)}, {@link #write(short[], int, int, int)},
+ {@link #write(float[], int, int, int)}, {@link #write(ByteBuffer, int, int)}, and
+ {@link #write(ByteBuffer, int, int, long)}.
+*/
+WRITE_BLOCKING : &quot;0&quot;,
+<span id='android-media-AudioTrack-property-WRITE_NON_BLOCKING'>/** The write mode indicating the write operation will return immediately after
+</span> queuing as much audio data for playback as possible without blocking,
+ to be used as the actual value of the writeMode parameter in
+ {@link #write(ByteBuffer, int, int)}, {@link #write(short[], int, int, int)},
+ {@link #write(float[], int, int, int)}, {@link #write(ByteBuffer, int, int)}, and
+ {@link #write(ByteBuffer, int, int, long)}.
+*/
+WRITE_NON_BLOCKING : &quot;1&quot;,
+<span id='android-media-AudioTrack-property-PERFORMANCE_MODE_NONE'>/** Default performance mode for an {@link android.media.AudioTrack}.
+</span>*/
+PERFORMANCE_MODE_NONE : &quot;0&quot;,
+<span id='android-media-AudioTrack-property-PERFORMANCE_MODE_LOW_LATENCY'>/** Low latency performance mode for an {@link android.media.AudioTrack}.
+</span> If the device supports it, this mode
+ enables a lower latency path through to the audio output sink.
+ Effects may no longer work with such an {@code AudioTrack} and
+ the sample rate must match that of the output sink.
+ &lt;p&gt;
+ Applications should be aware that low latency requires careful
+ buffer management, with smaller chunks of audio data written by each
+ {@code write()} call.
+ &lt;p&gt;
+ If this flag is used without specifying a {@code bufferSizeInBytes} then the
+ {@code AudioTrack}'s actual buffer size may be too small.
+ It is recommended that a fairly
+ large buffer should be specified when the {@code AudioTrack} is created.
+ Then the actual size can be reduced by calling
+ {@link #setBufferSizeInFrames}(int). The buffer size can be optimized
+ by lowering it after each {@code write()} call until the audio glitches,
+ which is detected by calling
+ {@link #getUnderrunCount}(). Then the buffer size can be increased
+ until there are no glitches.
+ This tuning step should be done while playing silence.
+ This technique provides a compromise between latency and glitch rate.
+*/
+PERFORMANCE_MODE_LOW_LATENCY : &quot;1&quot;,
+<span id='android-media-AudioTrack-property-PERFORMANCE_MODE_POWER_SAVING'>/** Power saving performance mode for an {@link android.media.AudioTrack}.
+</span> If the device supports it, this
+ mode will enable a lower power path to the audio output sink.
+ In addition, this lower power path typically will have
+ deeper internal buffers and better underrun resistance,
+ with a tradeoff of higher latency.
+ &lt;p&gt;
+ In this mode, applications should attempt to use a larger buffer size
+ and deliver larger chunks of audio data per {@code write()} call.
+ Use {@link #getBufferSizeInFrames}() to determine
+ the actual buffer size of the {@code AudioTrack} as it may have increased
+ to accommodate a deeper buffer.
+*/
+PERFORMANCE_MODE_POWER_SAVING : &quot;2&quot;,
+<span id='android-media-AudioTrack-method-setOffloadDelayPadding'>/**Configures the delay and padding values for the current compressed stream playing
+</span> in offload mode.
+ This can only be used on a track successfully initialized with
+ {@link android.media.AudioTrack.Builder#setOffloadedPlayback(boolean)}. The unit is frames, where a
+ frame indicates the number of samples per channel, e.g. 100 frames for a stereo compressed
+ stream corresponds to 200 decoded interleaved PCM samples.
+@param {Number} delayInFrames number of frames to be ignored at the beginning of the stream. A value
+     of 0 indicates no delay is to be applied.
+@param {Number} paddingInFrames number of frames to be ignored at the end of the stream. A value of 0
+     of 0 indicates no padding is to be applied.
+*/
+setOffloadDelayPadding : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getOffloadDelay'>/**Return the decoder delay of an offloaded track, expressed in frames, previously set with
+</span> {@link #setOffloadDelayPadding(int, int)}, or 0 if it was never modified.
+ &lt;p&gt;This delay indicates the number of frames to be ignored at the beginning of the stream.
+ This value can only be queried on a track successfully initialized with
+ {@link android.media.AudioTrack.Builder#setOffloadedPlayback(boolean)}.
+@return {Number} decoder delay expressed in frames.
+*/
+getOffloadDelay : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getOffloadPadding'>/**Return the decoder padding of an offloaded track, expressed in frames, previously set with
+</span> {@link #setOffloadDelayPadding(int, int)}, or 0 if it was never modified.
+ &lt;p&gt;This padding indicates the number of frames to be ignored at the end of the stream.
+ This value can only be queried on a track successfully initialized with
+ {@link android.media.AudioTrack.Builder#setOffloadedPlayback(boolean)}.
+@return {Number} decoder padding expressed in frames.
+*/
+getOffloadPadding : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setOffloadEndOfStream'>/**Declares that the last write() operation on this track provided the last buffer of this
+</span> stream.
+ After the end of stream, previously set padding and delay values are ignored.
+ Can only be called only if the AudioTrack is opened in offload mode
+ {@see Builder#setOffloadedPlayback(boolean)}.
+ Can only be called only if the AudioTrack is in state {@link #PLAYSTATE_PLAYING}
+ {@see #getPlaystate()}.
+ Use this method in the same thread as any write() operation.
+*/
+setOffloadEndOfStream : function(  ) {},
+
+<span id='android-media-AudioTrack-method-isOffloadedPlayback'>/**Returns whether the track was built with {@link android.media.AudioAttributes.Builder#setOffloadedPlayback(boolean)} set
+</span> to {@code true}.
+@return {Boolean} true if the track is using offloaded playback.
+*/
+isOffloadedPlayback : function(  ) {},
+
+<span id='android-media-AudioTrack-method-isDirectPlaybackSupported'>/**Returns whether direct playback of an audio format with the provided attributes is
+</span> currently supported on the system.
+ &lt;p&gt;Direct playback means that the audio stream is not resampled or downmixed
+ by the framework. Checking for direct support can help the app select the representation
+ of audio content that most closely matches the capabilities of the device and peripherials
+ (e.g. A/V receiver) connected to it. Note that the provided stream can still be re-encoded
+ or mixed with other streams, if needed.
+ &lt;p&gt;Also note that this query only provides information about the support of an audio format.
+ It does not indicate whether the resources necessary for the playback are available
+ at that instant.
+@param {Object {AudioFormat}} format a non-null {@link AudioFormat} instance describing the format of
+   the audio data.
+@param {Object {AudioAttributes}} attributes a non-null {@link AudioAttributes} instance.
+@return {Boolean} true if the given audio format can be played directly.
+*/
+isDirectPlaybackSupported : function(  ) {},
+
+<span id='android-media-AudioTrack-method-release'>/**Releases the native AudioTrack resources.
+</span>*/
+release : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getMinVolume'>/**Returns the minimum gain value, which is the constant 0.0.
+</span> Gain values less than 0.0 will be clamped to 0.0.
+ &lt;p&gt;The word &quot;volume&quot; in the API name is historical; this is actually a linear gain.
+@return {Number} the minimum value, which is the constant 0.0.
+*/
+getMinVolume : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getMaxVolume'>/**Returns the maximum gain value, which is greater than or equal to 1.0.
+</span> Gain values greater than the maximum will be clamped to the maximum.
+ &lt;p&gt;The word &quot;volume&quot; in the API name is historical; this is actually a gain.
+ expressed as a linear multiplier on sample values, where a maximum value of 1.0
+ corresponds to a gain of 0 dB (sample values left unmodified).
+@return {Number} the maximum value, which is greater than or equal to 1.0.
+*/
+getMaxVolume : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getSampleRate'>/**Returns the configured audio source sample rate in Hz.
+</span> The initial source sample rate depends on the constructor parameters,
+ but the source sample rate may change if {@link #setPlaybackRate}(int) is called.
+ If the constructor had a specific sample rate, then the initial sink sample rate is that
+ value.
+ If the constructor had {@link android.media.AudioFormat#SAMPLE_RATE_UNSPECIFIED},
+ then the initial sink sample rate is a route-dependent default value based on the source [sic].
+*/
+getSampleRate : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getPlaybackRate'>/**Returns the current playback sample rate rate in Hz.
+</span>*/
+getPlaybackRate : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getPlaybackParams'>/**Returns the current playback parameters.
+</span> See {@link #setPlaybackParams}(PlaybackParams) to set playback parameters
+@return {Object {android.media.PlaybackParams}} current {@link PlaybackParams}.
+@throws IllegalStateException if track is not initialized.
+*/
+getPlaybackParams : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getAudioAttributes'>/**Returns the {@link android.media.AudioAttributes} used in configuration.
+</span> If a {@code streamType} is used instead of an {@code AudioAttributes}
+ to configure the AudioTrack
+ (the use of {@code streamType} for configuration is deprecated),
+ then the {@code AudioAttributes}
+ equivalent to the {@code streamType} is returned.
+@return {Object {android.media.AudioAttributes}} The {@code AudioAttributes} used to configure the AudioTrack.
+@throws IllegalStateException If the track is not initialized.
+*/
+getAudioAttributes : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getAudioFormat'>/**Returns the configured audio data encoding. See {@link android.media.AudioFormat#ENCODING_PCM_8BIT},
+</span> {@link android.media.AudioFormat#ENCODING_PCM_16BIT}, and {@link android.media.AudioFormat#ENCODING_PCM_FLOAT}.
+*/
+getAudioFormat : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getStreamType'>/**Returns the volume stream type of this AudioTrack.
+</span> Compare the result against {@link android.media.AudioManager#STREAM_VOICE_CALL},
+ {@link android.media.AudioManager#STREAM_SYSTEM}, {@link android.media.AudioManager#STREAM_RING},
+ {@link android.media.AudioManager#STREAM_MUSIC}, {@link android.media.AudioManager#STREAM_ALARM},
+ {@link android.media.AudioManager#STREAM_NOTIFICATION}, {@link android.media.AudioManager#STREAM_DTMF} or
+ {@link android.media.AudioManager#STREAM_ACCESSIBILITY}.
+*/
+getStreamType : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getChannelConfiguration'>/**Returns the configured channel position mask.
+</span> &lt;p&gt; For example, refer to {@link android.media.AudioFormat#CHANNEL_OUT_MONO},
+ {@link android.media.AudioFormat#CHANNEL_OUT_STEREO}, {@link android.media.AudioFormat#CHANNEL_OUT_5POINT1}.
+ This method may return {@link android.media.AudioFormat#CHANNEL_INVALID} if
+ a channel index mask was used. Consider
+ {@link #getFormat}() instead, to obtain an {@link android.media.AudioFormat},
+ which contains both the channel position mask and the channel index mask.
+*/
+getChannelConfiguration : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getFormat'>/**Returns the configured &lt;code&gt;AudioTrack&lt;/code&gt; format.
+</span>@return {Object {android.media.AudioFormat}} an {@link AudioFormat} containing the
+ &lt;code&gt;AudioTrack&lt;/code&gt; parameters at the time of configuration.
+*/
+getFormat : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getChannelCount'>/**Returns the configured number of channels.
+</span>*/
+getChannelCount : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getState'>/**Returns the state of the AudioTrack instance. This is useful after the
+</span> AudioTrack instance has been created to check if it was initialized
+ properly. This ensures that the appropriate resources have been acquired.
+@see #STATE_UNINITIALIZED
+@see #STATE_INITIALIZED
+@see #STATE_NO_STATIC_DATA
+*/
+getState : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getPlayState'>/**Returns the playback state of the AudioTrack instance.
+</span>@see #PLAYSTATE_STOPPED
+@see #PLAYSTATE_PAUSED
+@see #PLAYSTATE_PLAYING
+*/
+getPlayState : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getBufferSizeInFrames'>/**Returns the effective size of the &lt;code&gt;AudioTrack&lt;/code&gt; buffer
+</span> that the application writes to.
+ &lt;p&gt; This will be less than or equal to the result of
+ {@link #getBufferCapacityInFrames}().
+ It will be equal if {@link #setBufferSizeInFrames}(int) has never been called.
+ &lt;p&gt; If the track is subsequently routed to a different output sink, the buffer
+ size and capacity may enlarge to accommodate.
+ &lt;p&gt; If the &lt;code&gt;AudioTrack&lt;/code&gt; encoding indicates compressed data,
+ e.g. {@link android.media.AudioFormat#ENCODING_AC3}, then the frame count returned is
+ the size of the &lt;code&gt;AudioTrack&lt;/code&gt; buffer in bytes.
+ &lt;p&gt; See also {@link android.media.AudioManager#getProperty(String)} for key
+ {@link android.media.AudioManager#PROPERTY_OUTPUT_FRAMES_PER_BUFFER}.
+@return {Number} current size in frames of the &lt;code&gt;AudioTrack&lt;/code&gt; buffer.
+@throws IllegalStateException if track is not initialized.
+*/
+getBufferSizeInFrames : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setBufferSizeInFrames'>/**Limits the effective size of the &lt;code&gt;AudioTrack&lt;/code&gt; buffer
+</span> that the application writes to.
+ &lt;p&gt; A write to this AudioTrack will not fill the buffer beyond this limit.
+ If a blocking write is used then the write will block until the data
+ can fit within this limit.
+ &lt;p&gt;Changing this limit modifies the latency associated with
+ the buffer for this track. A smaller size will give lower latency
+ but there may be more glitches due to buffer underruns.
+ &lt;p&gt;The actual size used may not be equal to this requested size.
+ It will be limited to a valid range with a maximum of
+ {@link #getBufferCapacityInFrames}().
+ It may also be adjusted slightly for internal reasons.
+ If bufferSizeInFrames is less than zero then {@link #ERROR_BAD_VALUE}
+ will be returned.
+ &lt;p&gt;This method is only supported for PCM audio.
+ It is not supported for compressed audio tracks.
+@param {Number} bufferSizeInFrames requested buffer size in frames
+@return {Number} the actual buffer size in frames or an error code,
+    {@link #ERROR_BAD_VALUE}, {@link #ERROR_INVALID_OPERATION}
+@throws IllegalStateException if track is not initialized.
+*/
+setBufferSizeInFrames : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getBufferCapacityInFrames'>/**Returns the maximum size of the &lt;code&gt;AudioTrack&lt;/code&gt; buffer in frames.
+</span>  &lt;p&gt; If the track's creation mode is {@link #MODE_STATIC},
+  it is equal to the specified bufferSizeInBytes on construction, converted to frame units.
+  A static track's frame count will not change.
+  &lt;p&gt; If the track's creation mode is {@link #MODE_STREAM},
+  it is greater than or equal to the specified bufferSizeInBytes converted to frame units.
+  For streaming tracks, this value may be rounded up to a larger value if needed by
+  the target output sink, and
+  if the track is subsequently routed to a different output sink, the
+  frame count may enlarge to accommodate.
+  &lt;p&gt; If the &lt;code&gt;AudioTrack&lt;/code&gt; encoding indicates compressed data,
+  e.g. {@link android.media.AudioFormat#ENCODING_AC3}, then the frame count returned is
+  the size of the &lt;code&gt;AudioTrack&lt;/code&gt; buffer in bytes.
+  &lt;p&gt; See also {@link android.media.AudioManager#getProperty(String)} for key
+  {@link android.media.AudioManager#PROPERTY_OUTPUT_FRAMES_PER_BUFFER}.
+@return {Number} maximum size in frames of the &lt;code&gt;AudioTrack&lt;/code&gt; buffer.
+@throws IllegalStateException if track is not initialized.
+*/
+getBufferCapacityInFrames : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getNotificationMarkerPosition'>/**Returns marker position expressed in frames.
+</span>@return {Number} marker position in wrapping frame units similar to {@link #getPlaybackHeadPosition},
+ or zero if marker is disabled.
+*/
+getNotificationMarkerPosition : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getPositionNotificationPeriod'>/**Returns the notification update period expressed in frames.
+</span> Zero means that no position update notifications are being delivered.
+*/
+getPositionNotificationPeriod : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getPlaybackHeadPosition'>/**Returns the playback head position expressed in frames.
+</span> Though the &quot;int&quot; type is signed 32-bits, the value should be reinterpreted as if it is
+ unsigned 32-bits.  That is, the next position after 0x7FFFFFFF is (int) 0x80000000.
+ This is a continuously advancing counter.  It will wrap (overflow) periodically,
+ for example approximately once every 27:03:11 hours:minutes:seconds at 44.1 kHz.
+ It is reset to zero by {@link #flush}(), {@link #reloadStaticData}(), and {@link #stop}().
+ If the track's creation mode is {@link #MODE_STATIC}, the return value indicates
+ the total number of frames played since reset,
+ &lt;i&gt;not&lt;/i&gt; the current offset within the buffer.
+*/
+getPlaybackHeadPosition : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getLatency'>/**Returns this track's estimated latency in milliseconds. This includes the latency due
+</span> to AudioTrack buffer size, AudioMixer (if any) and audio hardware driver.
+
+ DO NOT UNHIDE. The existing approach for doing A/V sync has too many problems. We need
+ a better solution.
+@hide 
+*/
+getLatency : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getUnderrunCount'>/**Returns the number of underrun occurrences in the application-level write buffer
+</span> since the AudioTrack was created.
+ An underrun occurs if the application does not write audio
+ data quickly enough, causing the buffer to underflow
+ and a potential audio glitch or pop.
+ &lt;p&gt;
+ Underruns are less likely when buffer sizes are large.
+ It may be possible to eliminate underruns by recreating the AudioTrack with
+ a larger buffer.
+ Or by using {@link #setBufferSizeInFrames}(int) to dynamically increase the
+ effective size of the buffer.
+*/
+getUnderrunCount : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getPerformanceMode'>/**Returns the current performance mode of the {@link android.media.AudioTrack}.
+</span>@return {Number} one of {@link AudioTrack#PERFORMANCE_MODE_NONE},
+ {@link AudioTrack#PERFORMANCE_MODE_LOW_LATENCY},
+ or {@link AudioTrack#PERFORMANCE_MODE_POWER_SAVING}.
+ Use {@link AudioTrack.Builder#setPerformanceMode}
+ in the {@link AudioTrack.Builder} to enable a performance mode.
+@throws IllegalStateException if track is not initialized.
+*/
+getPerformanceMode : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getNativeOutputSampleRate'>/**Returns the output sample rate in Hz for the specified stream type.
+</span>*/
+getNativeOutputSampleRate : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getMinBufferSize'>/**Returns the estimated minimum buffer size required for an AudioTrack
+</span> object to be created in the {@link #MODE_STREAM} mode.
+ The size is an estimate because it does not consider either the route or the sink,
+ since neither is known yet.  Note that this size doesn't
+ guarantee a smooth playback under load, and higher values should be chosen according to
+ the expected frequency at which the buffer will be refilled with additional data to play.
+ For example, if you intend to dynamically set the source sample rate of an AudioTrack
+ to a higher value than the initial source sample rate, be sure to configure the buffer size
+ based on the highest planned sample rate.
+@param {Number} sampleRateInHz the source sample rate expressed in Hz.
+   {@link AudioFormat#SAMPLE_RATE_UNSPECIFIED} is not permitted.
+@param {Number} channelConfig describes the configuration of the audio channels.
+   See {@link AudioFormat#CHANNEL_OUT_MONO} and
+   {@link AudioFormat#CHANNEL_OUT_STEREO}
+@param {Number} audioFormat the format in which the audio data is represented.
+   See {@link AudioFormat#ENCODING_PCM_16BIT} and
+   {@link AudioFormat#ENCODING_PCM_8BIT},
+   and {@link AudioFormat#ENCODING_PCM_FLOAT}.
+@return {Number} {@link #ERROR_BAD_VALUE} if an invalid parameter was passed,
+   or {@link #ERROR} if unable to query for output properties,
+   or the minimum buffer size expressed in bytes.
+*/
+getMinBufferSize : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getAudioSessionId'>/**Returns the audio session ID.
+</span>@return {Number} the ID of the audio session this AudioTrack belongs to.
+*/
+getAudioSessionId : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getTimestamp'>/**Poll for a timestamp on demand.
+</span> &lt;p&gt;
+ If you need to track timestamps during initial warmup or after a routing or mode change,
+ you should request a new timestamp periodically until the reported timestamps
+ show that the frame position is advancing, or until it becomes clear that
+ timestamps are unavailable for this route.
+ &lt;p&gt;
+ After the clock is advancing at a stable rate,
+ query for a new timestamp approximately once every 10 seconds to once per minute.
+ Calling this method more often is inefficient.
+ It is also counter-productive to call this method more often than recommended,
+ because the short-term differences between successive timestamp reports are not meaningful.
+ If you need a high-resolution mapping between frame position and presentation time,
+ consider implementing that at application level, based on low-resolution timestamps.
+ &lt;p&gt;
+ The audio data at the returned position may either already have been
+ presented, or may have not yet been presented but is committed to be presented.
+ It is not possible to request the time corresponding to a particular position,
+ or to request the (fractional) position corresponding to a particular time.
+ If you need such features, consider implementing them at application level.
+@param {Object {AudioTimestamp}} timestamp a reference to a non-null AudioTimestamp instance allocated
+        and owned by caller.
+@return {Boolean} true if a timestamp is available, or false if no timestamp is available.
+         If a timestamp is available,
+         the AudioTimestamp instance is filled in with a position in frame units, together
+         with the estimated time when that frame was presented or is committed to
+         be presented.
+         In the case that no timestamp is available, any supplied instance is left unaltered.
+         A timestamp may be temporarily unavailable while the audio clock is stabilizing,
+         or during and immediately after a route change.
+         A timestamp is permanently unavailable for a given route if the route does not support
+         timestamps.  In this case, the approximate frame position can be obtained
+         using {@link #getPlaybackHeadPosition}.
+         However, it may be useful to continue to query for
+         timestamps occasionally, to recover after a route change.
+*/
+getTimestamp : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getTimestampWithStatus'>/**Poll for a timestamp on demand.
+</span> &lt;p&gt;
+ Same as {@link #getTimestamp}(AudioTimestamp) but with a more useful return code.
+@param {Object {AudioTimestamp}} timestamp a reference to a non-null AudioTimestamp instance allocated
+        and owned by caller.
+@return {Number} {@link #SUCCESS} if a timestamp is available
+         {@link #ERROR_WOULD_BLOCK} if called in STOPPED or FLUSHED state, or if called
+         immediately after start/ACTIVE, when the number of frames consumed is less than the
+         overall hardware latency to physical output. In WOULD_BLOCK cases, one might poll
+         again, or use {@link #getPlaybackHeadPosition}, or use 0 position and current time
+         for the timestamp.
+         {@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+         needs to be recreated.
+         {@link #ERROR_INVALID_OPERATION} if current route does not support
+         timestamps. In this case, the approximate frame position can be obtained
+         using {@link #getPlaybackHeadPosition}.
+
+         The AudioTimestamp instance is filled in with a position in frame units, together
+         with the estimated time when that frame was presented or is committed to
+         be presented.
+@hide 
+*/
+getTimestampWithStatus : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getMetrics'>/**Return Metrics data about the current AudioTrack instance.
+</span>@return {Object {android.os.PersistableBundle}} a {@link PersistableBundle} containing the set of attributes and values
+ available for the media being handled by this instance of AudioTrack
+ The attributes are descibed in {@link MetricsConstants}.
+
+ Additional vendor-specific fields may also be present in
+ the return value.
+*/
+getMetrics : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPlaybackPositionUpdateListener'>/**Sets the listener the AudioTrack notifies when a previously set marker is reached or
+</span> for each periodic playback head position update.
+ Notifications will be received in the same thread as the one in which the AudioTrack
+ instance was created.
+@param {Object {AudioTrack.OnPlaybackPositionUpdateListener}} listener
+*/
+setPlaybackPositionUpdateListener : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPlaybackPositionUpdateListener'>/**Sets the listener the AudioTrack notifies when a previously set marker is reached or
+</span> for each periodic playback head position update.
+ Use this method to receive AudioTrack events in the Handler associated with another
+ thread than the one in which you created the AudioTrack instance.
+@param {Object {AudioTrack.OnPlaybackPositionUpdateListener}} listener
+@param {Object {Handler}} handler the Handler that will receive the event notification messages.
+*/
+setPlaybackPositionUpdateListener : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setStereoVolume'>/**Sets the specified left and right output gain values on the AudioTrack.
+</span> &lt;p&gt;Gain values are clamped to the closed interval [0.0, max] where
+ max is the value of {@link #getMaxVolume}.
+ A value of 0.0 results in zero gain (silence), and
+ a value of 1.0 means unity gain (signal unchanged).
+ The default value is 1.0 meaning unity gain.
+ &lt;p&gt;The word &quot;volume&quot; in the API name is historical; this is actually a linear gain.
+@param {Number} leftGain output gain for the left channel.
+@param {Number} rightGain output gain for the right channel
+@return {Number} error code or success, see {@link #SUCCESS},
+    {@link #ERROR_INVALID_OPERATION}
+@deprecated Applications should use {@link #setVolume} instead, as it
+ more gracefully scales down to mono, and up to multi-channel content beyond stereo.
+*/
+setStereoVolume : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setVolume'>/**Sets the specified output gain value on all channels of this track.
+</span> &lt;p&gt;Gain values are clamped to the closed interval [0.0, max] where
+ max is the value of {@link #getMaxVolume}.
+ A value of 0.0 results in zero gain (silence), and
+ a value of 1.0 means unity gain (signal unchanged).
+ The default value is 1.0 meaning unity gain.
+ &lt;p&gt;This API is preferred over {@link #setStereoVolume}, as it
+ more gracefully scales down to mono, and up to multi-channel content beyond stereo.
+ &lt;p&gt;The word &quot;volume&quot; in the API name is historical; this is actually a linear gain.
+@param {Number} gain output gain for all channels.
+@return {Number} error code or success, see {@link #SUCCESS},
+    {@link #ERROR_INVALID_OPERATION}
+*/
+setVolume : function(  ) {},
+
+<span id='android-media-AudioTrack-method-createVolumeShaper'>/**
+</span>*/
+createVolumeShaper : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPlaybackRate'>/**Sets the playback sample rate for this track. This sets the sampling rate at which
+</span> the audio data will be consumed and played back
+ (as set by the sampleRateInHz parameter in the
+ {@link #AudioTrack(int, int, int, int, int, int)} constructor),
+ not the original sampling rate of the
+ content. For example, setting it to half the sample rate of the content will cause the
+ playback to last twice as long, but will also result in a pitch shift down by one octave.
+ The valid sample rate range is from 1 Hz to twice the value returned by
+ {@link #getNativeOutputSampleRate}(int).
+ Use {@link #setPlaybackParams}(PlaybackParams) for speed control.
+ &lt;p&gt; This method may also be used to repurpose an existing &lt;code&gt;AudioTrack&lt;/code&gt;
+ for playback of content of differing sample rate,
+ but with identical encoding and channel mask.
+@param {Number} sampleRateInHz the sample rate expressed in Hz
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_BAD_VALUE},
+    {@link #ERROR_INVALID_OPERATION}
+*/
+setPlaybackRate : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPlaybackParams'>/**Sets the playback parameters.
+</span> This method returns failure if it cannot apply the playback parameters.
+ One possible cause is that the parameters for speed or pitch are out of range.
+ Another possible cause is that the &lt;code&gt;AudioTrack&lt;/code&gt; is streaming
+ (see {@link #MODE_STREAM}) and the
+ buffer size is too small. For speeds greater than 1.0f, the &lt;code&gt;AudioTrack&lt;/code&gt; buffer
+ on configuration must be larger than the speed multiplied by the minimum size
+ {@link #getMinBufferSize(int, int, int)}) to allow proper playback.
+@param {Object {PlaybackParams}} params see {@link PlaybackParams}. In particular,
+ speed, pitch, and audio mode should be set.
+@throws IllegalArgumentException if the parameters are invalid or not accepted.
+@throws IllegalStateException if track is not initialized.
+*/
+setPlaybackParams : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setNotificationMarkerPosition'>/**Sets the position of the notification marker.  At most one marker can be active.
+</span>@param {Number} markerInFrames marker position in wrapping frame units similar to
+ {@link #getPlaybackHeadPosition}, or zero to disable the marker.
+ To set a marker at a position which would appear as zero due to wraparound,
+ a workaround is to use a non-zero position near zero, such as -1 or 1.
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_BAD_VALUE},
+  {@link #ERROR_INVALID_OPERATION}
+*/
+setNotificationMarkerPosition : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPositionNotificationPeriod'>/**Sets the period for the periodic notification event.
+</span>@param {Number} periodInFrames update period expressed in frames.
+ Zero period means no position updates.  A negative period is not allowed.
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_INVALID_OPERATION}
+*/
+setPositionNotificationPeriod : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPlaybackHeadPosition'>/**Sets the playback head position within the static buffer.
+</span> The track must be stopped or paused for the position to be changed,
+ and must use the {@link #MODE_STATIC} mode.
+@param {Number} positionInFrames playback head position within buffer, expressed in frames.
+ Zero corresponds to start of buffer.
+ The position must not be greater than the buffer size in frames, or negative.
+ Though this method and {@link #getPlaybackHeadPosition()} have similar names,
+ the position values have different meanings.
+ &lt;br&gt;
+ If looping is currently enabled and the new position is greater than or equal to the
+ loop end marker, the behavior varies by API level:
+ as of {@link android.os.Build.VERSION_CODES#M},
+ the looping is first disabled and then the position is set.
+ For earlier API levels, the behavior is unspecified.
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_BAD_VALUE},
+    {@link #ERROR_INVALID_OPERATION}
+*/
+setPlaybackHeadPosition : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setLoopPoints'>/**Sets the loop points and the loop count. The loop can be infinite.
+</span> Similarly to setPlaybackHeadPosition,
+ the track must be stopped or paused for the loop points to be changed,
+ and must use the {@link #MODE_STATIC} mode.
+@param {Number} startInFrames loop start marker expressed in frames.
+ Zero corresponds to start of buffer.
+ The start marker must not be greater than or equal to the buffer size in frames, or negative.
+@param {Number} endInFrames loop end marker expressed in frames.
+ The total buffer size in frames corresponds to end of buffer.
+ The end marker must not be greater than the buffer size in frames.
+ For looping, the end marker must not be less than or equal to the start marker,
+ but to disable looping
+ it is permitted for start marker, end marker, and loop count to all be 0.
+ If any input parameters are out of range, this method returns {@link #ERROR_BAD_VALUE}.
+ If the loop period (endInFrames - startInFrames) is too small for the implementation to
+ support,
+ {@link #ERROR_BAD_VALUE} is returned.
+ The loop range is the interval [startInFrames, endInFrames).
+ &lt;br&gt;
+ As of {@link android.os.Build.VERSION_CODES#M}, the position is left unchanged,
+ unless it is greater than or equal to the loop end marker, in which case
+ it is forced to the loop start marker.
+ For earlier API levels, the effect on position is unspecified.
+@param {Number} loopCount the number of times the loop is looped; must be greater than or equal to -1.
+    A value of -1 means infinite looping, and 0 disables looping.
+    A value of positive N means to &quot;loop&quot; (go back) N times.  For example,
+    a value of one means to play the region two times in total.
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_BAD_VALUE},
+    {@link #ERROR_INVALID_OPERATION}
+*/
+setLoopPoints : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPresentation'>/**Sets the audio presentation.
+</span> If the audio presentation is invalid then {@link #ERROR_BAD_VALUE} will be returned.
+ If a multi-stream decoder (MSD) is not present, or the format does not support
+ multiple presentations, then {@link #ERROR_INVALID_OPERATION} will be returned.
+ {@link #ERROR} is returned in case of any other error.
+@param {Object {AudioPresentation}} presentation see {@link AudioPresentation}. In particular, id should be set.
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR},
+    {@link #ERROR_BAD_VALUE}, {@link #ERROR_INVALID_OPERATION}
+@throws IllegalArgumentException if the audio presentation is null.
+@throws IllegalStateException if track is not initialized.
+*/
+setPresentation : function(  ) {},
+
+<span id='android-media-AudioTrack-method-play'>/**Starts playing an AudioTrack.
+</span> &lt;p&gt;
+ If track's creation mode is {@link #MODE_STATIC}, you must have called one of
+ the write methods ({@link #write(byte[], int, int)}, {@link #write(byte[], int, int, int)},
+ {@link #write(short[], int, int)}, {@link #write(short[], int, int, int)},
+ {@link #write(float[], int, int, int)}, or {@link #write(ByteBuffer, int, int)}) prior to
+ play().
+ &lt;p&gt;
+ If the mode is {@link #MODE_STREAM}, you can optionally prime the data path prior to
+ calling play(), by writing up to &lt;code&gt;bufferSizeInBytes&lt;/code&gt; (from constructor).
+ If you don't call write() first, or if you call write() but with an insufficient amount of
+ data, then the track will be in underrun state at play().  In this case,
+ playback will not actually start playing until the data path is filled to a
+ device-specific minimum level.  This requirement for the path to be filled
+ to a minimum level is also true when resuming audio playback after calling stop().
+ Similarly the buffer will need to be filled up again after
+ the track underruns due to failure to call write() in a timely manner with sufficient data.
+ For portability, an application should prime the data path to the maximum allowed
+ by writing data until the write() method returns a short transfer count.
+ This allows play() to start immediately, and reduces the chance of underrun.
+@throws IllegalStateException if the track isn't properly initialized
+*/
+play : function(  ) {},
+
+<span id='android-media-AudioTrack-method-stop'>/**Stops playing the audio data.
+</span> When used on an instance created in {@link #MODE_STREAM} mode, audio will stop playing
+ after the last buffer that was written has been played. For an immediate stop, use
+ {@link #pause}(), followed by {@link #flush}() to discard audio data that hasn't been played
+ back yet.
+@throws IllegalStateException
+*/
+stop : function(  ) {},
+
+<span id='android-media-AudioTrack-method-pause'>/**Pauses the playback of the audio data. Data that has not been played
+</span> back will not be discarded. Subsequent calls to {@link #play} will play
+ this data back. See {@link #flush}() to discard this data.
+@throws IllegalStateException
+*/
+pause : function(  ) {},
+
+<span id='android-media-AudioTrack-method-flush'>/**Flushes the audio data currently queued for playback. Any data that has
+</span> been written but not yet presented will be discarded.  No-op if not stopped or paused,
+ or if the track's creation mode is not {@link #MODE_STREAM}.
+ &lt;BR&gt; Note that although data written but not yet presented is discarded, there is no
+ guarantee that all of the buffer space formerly used by that data
+ is available for a subsequent write.
+ For example, a call to {@link #write(byte[], int, int)} with &lt;code&gt;sizeInBytes&lt;/code&gt;
+ less than or equal to the total buffer size
+ may return a short actual transfer count.
+*/
+flush : function(  ) {},
+
+<span id='android-media-AudioTrack-method-write'>/**Writes the audio data to the audio sink for playback (streaming mode),
+</span> or copies audio data for later playback (static buffer mode).
+ The format specified in the AudioTrack constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_8BIT} to correspond to the data in the array.
+ The format can be {@link android.media.AudioFormat#ENCODING_PCM_16BIT}, but this is deprecated.
+ &lt;p&gt;
+ In streaming mode, the write will normally block until all the data has been enqueued for
+ playback, and will return a full transfer count.  However, if the track is stopped or paused
+ on entry, or another thread interrupts the write by calling stop or pause, or an I/O error
+ occurs during the write, then the write may return a short transfer count.
+ &lt;p&gt;
+ In static buffer mode, copies the data to the buffer starting at offset 0.
+ Note that the actual playback of this data might occur after this function returns.
+@param {Object {byte[]}} audioData the array that holds the data to play.
+@param {Number} offsetInBytes the offset expressed in bytes in audioData where the data to write
+    starts.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInBytes the number of bytes to write in audioData after the offset.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@return {Number} zero or the positive number of bytes that were written, or one of the following
+    error codes. The number of bytes will be a multiple of the frame size in bytes
+    not to exceed sizeInBytes.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the track isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next write()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+ This is equivalent to {@link #write(byte[], int, int, int)} with &lt;code&gt;writeMode&lt;/code&gt;
+ set to  {@link #WRITE_BLOCKING}.
+*/
+write : function(  ) {},
+
+<span id='android-media-AudioTrack-method-write'>/**Writes the audio data to the audio sink for playback (streaming mode),
+</span> or copies audio data for later playback (static buffer mode).
+ The format specified in the AudioTrack constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_8BIT} to correspond to the data in the array.
+ The format can be {@link android.media.AudioFormat#ENCODING_PCM_16BIT}, but this is deprecated.
+ &lt;p&gt;
+ In streaming mode, the blocking behavior depends on the write mode.  If the write mode is
+ {@link #WRITE_BLOCKING}, the write will normally block until all the data has been enqueued
+ for playback, and will return a full transfer count.  However, if the write mode is
+ {@link #WRITE_NON_BLOCKING}, or the track is stopped or paused on entry, or another thread
+ interrupts the write by calling stop or pause, or an I/O error
+ occurs during the write, then the write may return a short transfer count.
+ &lt;p&gt;
+ In static buffer mode, copies the data to the buffer starting at offset 0,
+ and the write mode is ignored.
+ Note that the actual playback of this data might occur after this function returns.
+@param {Object {byte[]}} audioData the array that holds the data to play.
+@param {Number} offsetInBytes the offset expressed in bytes in audioData where the data to write
+    starts.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInBytes the number of bytes to write in audioData after the offset.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} writeMode one of {@link #WRITE_BLOCKING}, {@link #WRITE_NON_BLOCKING}. It has no
+     effect in static mode.
+     &lt;br&gt;With {@link #WRITE_BLOCKING}, the write will block until all data has been written
+         to the audio sink.
+     &lt;br&gt;With {@link #WRITE_NON_BLOCKING}, the write will return immediately after
+     queuing as much audio data for playback as possible without blocking.
+@return {Number} zero or the positive number of bytes that were written, or one of the following
+    error codes. The number of bytes will be a multiple of the frame size in bytes
+    not to exceed sizeInBytes.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the track isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next write()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+write : function(  ) {},
+
+<span id='android-media-AudioTrack-method-write'>/**Writes the audio data to the audio sink for playback (streaming mode),
+</span> or copies audio data for later playback (static buffer mode).
+ The format specified in the AudioTrack constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_16BIT} to correspond to the data in the array.
+ &lt;p&gt;
+ In streaming mode, the write will normally block until all the data has been enqueued for
+ playback, and will return a full transfer count.  However, if the track is stopped or paused
+ on entry, or another thread interrupts the write by calling stop or pause, or an I/O error
+ occurs during the write, then the write may return a short transfer count.
+ &lt;p&gt;
+ In static buffer mode, copies the data to the buffer starting at offset 0.
+ Note that the actual playback of this data might occur after this function returns.
+@param {Object {short[]}} audioData the array that holds the data to play.
+@param {Number} offsetInShorts the offset expressed in shorts in audioData where the data to play
+     starts.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInShorts the number of shorts to read in audioData after the offset.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@return {Number} zero or the positive number of shorts that were written, or one of the following
+    error codes. The number of shorts will be a multiple of the channel count not to
+    exceed sizeInShorts.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the track isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next write()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+ This is equivalent to {@link #write(short[], int, int, int)} with &lt;code&gt;writeMode&lt;/code&gt;
+ set to  {@link #WRITE_BLOCKING}.
+*/
+write : function(  ) {},
+
+<span id='android-media-AudioTrack-method-write'>/**Writes the audio data to the audio sink for playback (streaming mode),
+</span> or copies audio data for later playback (static buffer mode).
+ The format specified in the AudioTrack constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_16BIT} to correspond to the data in the array.
+ &lt;p&gt;
+ In streaming mode, the blocking behavior depends on the write mode.  If the write mode is
+ {@link #WRITE_BLOCKING}, the write will normally block until all the data has been enqueued
+ for playback, and will return a full transfer count.  However, if the write mode is
+ {@link #WRITE_NON_BLOCKING}, or the track is stopped or paused on entry, or another thread
+ interrupts the write by calling stop or pause, or an I/O error
+ occurs during the write, then the write may return a short transfer count.
+ &lt;p&gt;
+ In static buffer mode, copies the data to the buffer starting at offset 0.
+ Note that the actual playback of this data might occur after this function returns.
+@param {Object {short[]}} audioData the array that holds the data to write.
+@param {Number} offsetInShorts the offset expressed in shorts in audioData where the data to write
+     starts.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInShorts the number of shorts to read in audioData after the offset.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} writeMode one of {@link #WRITE_BLOCKING}, {@link #WRITE_NON_BLOCKING}. It has no
+     effect in static mode.
+     &lt;br&gt;With {@link #WRITE_BLOCKING}, the write will block until all data has been written
+         to the audio sink.
+     &lt;br&gt;With {@link #WRITE_NON_BLOCKING}, the write will return immediately after
+     queuing as much audio data for playback as possible without blocking.
+@return {Number} zero or the positive number of shorts that were written, or one of the following
+    error codes. The number of shorts will be a multiple of the channel count not to
+    exceed sizeInShorts.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the track isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next write()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+write : function(  ) {},
+
+<span id='android-media-AudioTrack-method-write'>/**Writes the audio data to the audio sink for playback (streaming mode),
+</span> or copies audio data for later playback (static buffer mode).
+ The format specified in the AudioTrack constructor should be
+ {@link android.media.AudioFormat#ENCODING_PCM_FLOAT} to correspond to the data in the array.
+ &lt;p&gt;
+ In streaming mode, the blocking behavior depends on the write mode.  If the write mode is
+ {@link #WRITE_BLOCKING}, the write will normally block until all the data has been enqueued
+ for playback, and will return a full transfer count.  However, if the write mode is
+ {@link #WRITE_NON_BLOCKING}, or the track is stopped or paused on entry, or another thread
+ interrupts the write by calling stop or pause, or an I/O error
+ occurs during the write, then the write may return a short transfer count.
+ &lt;p&gt;
+ In static buffer mode, copies the data to the buffer starting at offset 0,
+ and the write mode is ignored.
+ Note that the actual playback of this data might occur after this function returns.
+@param {Object {float[]}} audioData the array that holds the data to write.
+     The implementation does not clip for sample values within the nominal range
+     [-1.0f, 1.0f], provided that all gains in the audio pipeline are
+     less than or equal to unity (1.0f), and in the absence of post-processing effects
+     that could add energy, such as reverb.  For the convenience of applications
+     that compute samples using filters with non-unity gain,
+     sample values +3 dB beyond the nominal range are permitted.
+     However such values may eventually be limited or clipped, depending on various gains
+     and later processing in the audio path.  Therefore applications are encouraged
+     to provide samples values within the nominal range.
+@param {Number} offsetInFloats the offset, expressed as a number of floats,
+     in audioData where the data to write starts.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} sizeInFloats the number of floats to write in audioData after the offset.
+    Must not be negative, or cause the data access to go out of bounds of the array.
+@param {Number} writeMode one of {@link #WRITE_BLOCKING}, {@link #WRITE_NON_BLOCKING}. It has no
+     effect in static mode.
+     &lt;br&gt;With {@link #WRITE_BLOCKING}, the write will block until all data has been written
+         to the audio sink.
+     &lt;br&gt;With {@link #WRITE_NON_BLOCKING}, the write will return immediately after
+     queuing as much audio data for playback as possible without blocking.
+@return {Number} zero or the positive number of floats that were written, or one of the following
+    error codes. The number of floats will be a multiple of the channel count not to
+    exceed sizeInFloats.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the track isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next write()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+write : function(  ) {},
+
+<span id='android-media-AudioTrack-method-write'>/**Writes the audio data to the audio sink for playback (streaming mode),
+</span> or copies audio data for later playback (static buffer mode).
+ The audioData in ByteBuffer should match the format specified in the AudioTrack constructor.
+ &lt;p&gt;
+ In streaming mode, the blocking behavior depends on the write mode.  If the write mode is
+ {@link #WRITE_BLOCKING}, the write will normally block until all the data has been enqueued
+ for playback, and will return a full transfer count.  However, if the write mode is
+ {@link #WRITE_NON_BLOCKING}, or the track is stopped or paused on entry, or another thread
+ interrupts the write by calling stop or pause, or an I/O error
+ occurs during the write, then the write may return a short transfer count.
+ &lt;p&gt;
+ In static buffer mode, copies the data to the buffer starting at offset 0,
+ and the write mode is ignored.
+ Note that the actual playback of this data might occur after this function returns.
+@param {Object {ByteBuffer}} audioData the buffer that holds the data to write, starting at the position reported
+     by &lt;code&gt;audioData.position()&lt;/code&gt;.
+     &lt;BR&gt;Note that upon return, the buffer position (&lt;code&gt;audioData.position()&lt;/code&gt;) will
+     have been advanced to reflect the amount of data that was successfully written to
+     the AudioTrack.
+@param {Number} sizeInBytes number of bytes to write.  It is recommended but not enforced
+     that the number of bytes requested be a multiple of the frame size (sample size in
+     bytes multiplied by the channel count).
+     &lt;BR&gt;Note this may differ from &lt;code&gt;audioData.remaining()&lt;/code&gt;, but cannot exceed it.
+@param {Number} writeMode one of {@link #WRITE_BLOCKING}, {@link #WRITE_NON_BLOCKING}. It has no
+     effect in static mode.
+     &lt;BR&gt;With {@link #WRITE_BLOCKING}, the write will block until all data has been written
+         to the audio sink.
+     &lt;BR&gt;With {@link #WRITE_NON_BLOCKING}, the write will return immediately after
+     queuing as much audio data for playback as possible without blocking.
+@return {Number} zero or the positive number of bytes that were written, or one of the following
+    error codes.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the track isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next write()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+write : function(  ) {},
+
+<span id='android-media-AudioTrack-method-write'>/**Writes the audio data to the audio sink for playback in streaming mode on a HW_AV_SYNC track.
+</span> The blocking behavior will depend on the write mode.
+@param {Object {ByteBuffer}} audioData the buffer that holds the data to write, starting at the position reported
+     by &lt;code&gt;audioData.position()&lt;/code&gt;.
+     &lt;BR&gt;Note that upon return, the buffer position (&lt;code&gt;audioData.position()&lt;/code&gt;) will
+     have been advanced to reflect the amount of data that was successfully written to
+     the AudioTrack.
+@param {Number} sizeInBytes number of bytes to write.  It is recommended but not enforced
+     that the number of bytes requested be a multiple of the frame size (sample size in
+     bytes multiplied by the channel count).
+     &lt;BR&gt;Note this may differ from &lt;code&gt;audioData.remaining()&lt;/code&gt;, but cannot exceed it.
+@param {Number} writeMode one of {@link #WRITE_BLOCKING}, {@link #WRITE_NON_BLOCKING}.
+     &lt;BR&gt;With {@link #WRITE_BLOCKING}, the write will block until all data has been written
+         to the audio sink.
+     &lt;BR&gt;With {@link #WRITE_NON_BLOCKING}, the write will return immediately after
+     queuing as much audio data for playback as possible without blocking.
+@param {Number} timestamp The timestamp, in nanoseconds, of the first decodable audio frame in the
+     provided audioData.
+@return {Number} zero or the positive number of bytes that were written, or one of the following
+    error codes.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #ERROR_INVALID_OPERATION} if the track isn't properly initialized&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_BAD_VALUE} if the parameters don't resolve to valid data and indexes&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR_DEAD_OBJECT} if the AudioTrack is not valid anymore and
+    needs to be recreated. The dead object error code is not returned if some data was
+    successfully transferred. In this case, the error is returned at the next write()&lt;/li&gt;
+ &lt;li&gt;{@link #ERROR} in case of other error&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+write : function(  ) {},
+
+<span id='android-media-AudioTrack-method-reloadStaticData'>/**Sets the playback head position within the static buffer to zero,
+</span> that is it rewinds to start of static buffer.
+ The track must be stopped or paused, and
+ the track's creation mode must be {@link #MODE_STATIC}.
+ &lt;p&gt;
+ As of {@link android.os.Build.VERSION_CODES#M}, also resets the value returned by
+ {@link #getPlaybackHeadPosition}() to zero.
+ For earlier API levels, the reset behavior is unspecified.
+ &lt;p&gt;
+ Use {@link #setPlaybackHeadPosition}(int) with a zero position
+ if the reset of &lt;code&gt;getPlaybackHeadPosition()&lt;/code&gt; is not needed.
+@return {Number} error code or success, see {@link #SUCCESS}, {@link #ERROR_BAD_VALUE},
+  {@link #ERROR_INVALID_OPERATION}
+*/
+reloadStaticData : function(  ) {},
+
+<span id='android-media-AudioTrack-method-attachAuxEffect'>/**Attaches an auxiliary effect to the audio track. A typical auxiliary
+</span> effect is a reverberation effect which can be applied on any sound source
+ that directs a certain amount of its energy to this effect. This amount
+ is defined by setAuxEffectSendLevel().
+ {@see #setAuxEffectSendLevel(float)}.
+ &lt;p&gt;After creating an auxiliary effect (e.g.
+ {@link android.media.audiofx.EnvironmentalReverb}), retrieve its ID with
+ {@link android.media.audiofx.AudioEffect#getId()} and use it when calling
+ this method to attach the audio track to the effect.
+ &lt;p&gt;To detach the effect from the audio track, call this method with a
+ null effect id.
+@param {Number} effectId system wide unique id of the effect to attach
+@return {Number} error code or success, see {@link #SUCCESS},
+    {@link #ERROR_INVALID_OPERATION}, {@link #ERROR_BAD_VALUE}
+*/
+attachAuxEffect : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setAuxEffectSendLevel'>/**Sets the send level of the audio track to the attached auxiliary effect
+</span> {@link #attachAuxEffect}(int).  Effect levels
+ are clamped to the closed interval [0.0, max] where
+ max is the value of {@link #getMaxVolume}.
+ A value of 0.0 results in no effect, and a value of 1.0 is full send.
+ &lt;p&gt;By default the send level is 0.0f, so even if an effect is attached to the player
+ this method must be called for the effect to be applied.
+ &lt;p&gt;Note that the passed level value is a linear scalar. UI controls should be scaled
+ logarithmically: the gain applied by audio framework ranges from -72dB to at least 0dB,
+ so an appropriate conversion from linear UI input x to level is:
+ x == 0 -&amp;gt; level = 0
+ 0 &amp;lt; x &amp;lt;= R -&amp;gt; level = 10^(72*(x-R)/20/R)
+@param {Number} level linear send level
+@return {Number} error code or success, see {@link #SUCCESS},
+    {@link #ERROR_INVALID_OPERATION}, {@link #ERROR}
+*/
+setAuxEffectSendLevel : function(  ) {},
+
+<span id='android-media-AudioTrack-method-setPreferredDevice'>/**Specifies an audio device (via an {@link android.media.AudioDeviceInfo} object) to route
+</span> the output from this AudioTrack.
+@param {Object {AudioDeviceInfo}} deviceInfo The {@link AudioDeviceInfo} specifying the audio sink.
+  If deviceInfo is null, default routing is restored.
+@return {Boolean} true if succesful, false if the specified {@link AudioDeviceInfo} is non-null and
+ does not correspond to a valid audio output device.
+*/
+setPreferredDevice : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getPreferredDevice'>/**Returns the selected output specified by {@link #setPreferredDevice}. Note that this
+</span> is not guaranteed to correspond to the actual device being used for playback.
+*/
+getPreferredDevice : function(  ) {},
+
+<span id='android-media-AudioTrack-method-getRoutedDevice'>/**Returns an {@link android.media.AudioDeviceInfo} identifying the current routing of this AudioTrack.
+</span> Note: The query is only valid if the AudioTrack is currently playing. If it is not,
+ &lt;code&gt;getRoutedDevice()&lt;/code&gt; will return null.
+*/
+getRoutedDevice : function(  ) {},
+
+<span id='android-media-AudioTrack-method-addOnRoutingChangedListener'>/**Adds an {@link android.media.AudioRouting.OnRoutingChangedListener} to receive notifications of routing
+</span> changes on this AudioTrack.
+@param {Object {AudioRouting.OnRoutingChangedListener}} listener The {@link AudioRouting.OnRoutingChangedListener} interface to receive
+ notifications of rerouting events.
+@param {Object {Handler}} handler  Specifies the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the {@link Handler} associated with the main
+ {@link Looper} will be used.
+*/
+addOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioTrack-method-removeOnRoutingChangedListener'>/**Removes an {@link android.media.AudioRouting.OnRoutingChangedListener} which has been previously added
+</span> to receive rerouting notifications.
+@param {Object {AudioRouting.OnRoutingChangedListener}} listener The previously added {@link AudioRouting.OnRoutingChangedListener} interface
+ to remove.
+*/
+removeOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioTrack-method-addOnRoutingChangedListener'>/**Adds an {@link android.media.AudioRecord.OnRoutingChangedListener} to receive notifications of routing changes
+</span> on this AudioTrack.
+@param {Object {AudioTrack.OnRoutingChangedListener}} listener The {@link OnRoutingChangedListener} interface to receive notifications
+ of rerouting events.
+@param {Object {Handler}} handler  Specifies the {@link Handler} object for the thread on which to execute
+ the callback. If &lt;code&gt;null&lt;/code&gt;, the {@link Handler} associated with the main
+ {@link Looper} will be used.
+@deprecated users should switch to the general purpose
+             {@link AudioRouting.OnRoutingChangedListener} class instead.
+*/
+addOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioTrack-method-removeOnRoutingChangedListener'>/**Removes an {@link android.media.AudioRecord.OnRoutingChangedListener} which has been previously added
+</span> to receive rerouting notifications.
+@param {Object {AudioTrack.OnRoutingChangedListener}} listener The previously added {@link OnRoutingChangedListener} interface to remove.
+@deprecated users should switch to the general purpose
+             {@link AudioRouting.OnRoutingChangedListener} class instead.
+*/
+removeOnRoutingChangedListener : function(  ) {},
+
+<span id='android-media-AudioTrack-method-registerStreamEventCallback'>/**Registers a callback for the notification of stream events.
+</span> This callback can only be registered for instances operating in offloaded mode
+ (see {@link android.media.AudioTrack.Builder#setOffloadedPlayback(boolean)} and
+ {@link android.media.AudioManager#isOffloadedPlaybackSupported(AudioFormat,AudioAttributes)} for
+ more details).
+@param {Object {Executor}} executor {@link Executor} to handle the callbacks.
+@param {Object {AudioTrack.StreamEventCallback}} eventCallback the callback to receive the stream event notifications.
+*/
+registerStreamEventCallback : function(  ) {},
+
+<span id='android-media-AudioTrack-method-unregisterStreamEventCallback'>/**Unregisters the callback for notification of stream events, previously registered
+</span> with {@link #registerandroid.media.AudioTrack.StreamEventCallback(Executor, android.media.AudioTrack.StreamEventCallback)}.
+@param {Object {AudioTrack.StreamEventCallback}} eventCallback the callback to unregister.
+*/
+unregisterStreamEventCallback : function(  ) {},
+
+<span id='android-media-AudioTrack-method-native_release'>/**
+</span>@hide 
+*/
+native_release : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

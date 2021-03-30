@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-Parcel'>/**@class android.os.Parcel
+</span>@extends java.lang.Object
+
+ Container for a message (data and object references) that can
+ be sent through an IBinder.  A Parcel can contain both flattened data
+ that will be unflattened on the other side of the IPC (using the various
+ methods here for writing specific types, or the general
+ {@link android.os.Parcelable} interface), and references to live {@link android.os.IBinder}
+ objects that will result in the other side receiving a proxy IBinder
+ connected with the original IBinder in the Parcel.
+
+ &lt;p class=&quot;note&quot;&gt;Parcel is &lt;strong&gt;not&lt;/strong&gt; a general-purpose
+ serialization mechanism.  This class (and the corresponding
+ {@link android.os.Parcelable} API for placing arbitrary objects into a Parcel) is
+ designed as a high-performance IPC transport.  As such, it is not
+ appropriate to place any Parcel data in to persistent storage: changes
+ in the underlying implementation of any of the data in the Parcel can
+ render older data unreadable.&lt;/p&gt;
+
+ &lt;p&gt;The bulk of the Parcel API revolves around reading and writing data
+ of various types.  There are six major classes of such functions available.&lt;/p&gt;
+
+ &lt;h3&gt;Primitives&lt;/h3&gt;
+
+ &lt;p&gt;The most basic data functions are for writing and reading primitive
+ data types: {@link #writeByte}, {@link #readByte}, {@link #writeDouble},
+ {@link #readDouble}, {@link #writeFloat}, {@link #readFloat}, {@link #writeInt},
+ {@link #readInt}, {@link #writeLong}, {@link #readLong},
+ {@link #writeString}, {@link #readString}.  Most other
+ data operations are built on top of these.  The given data is written and
+ read using the endianess of the host CPU.&lt;/p&gt;
+
+ &lt;h3&gt;Primitive Arrays&lt;/h3&gt;
+
+ &lt;p&gt;There are a variety of methods for reading and writing raw arrays
+ of primitive objects, which generally result in writing a 4-byte length
+ followed by the primitive data items.  The methods for reading can either
+ read the data into an existing array, or create and return a new array.
+ These available types are:&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt; {@link #writeBooleanArray(boolean[])},
+ {@link #readBooleanArray(boolean[])}, {@link #createBooleanArray}()
+ &lt;li&gt; {@link #writeByteArray(byte[])},
+ {@link #writeByteArray(byte[], int, int)}, {@link #readByteArray(byte[])},
+ {@link #createByteArray}()
+ &lt;li&gt; {@link #writeCharArray(char[])}, {@link #readCharArray(char[])},
+ {@link #createCharArray}()
+ &lt;li&gt; {@link #writeDoubleArray(double[])}, {@link #readDoubleArray(double[])},
+ {@link #createDoubleArray}()
+ &lt;li&gt; {@link #writeFloatArray(float[])}, {@link #readFloatArray(float[])},
+ {@link #createFloatArray}()
+ &lt;li&gt; {@link #writeIntArray(int[])}, {@link #readIntArray(int[])},
+ {@link #createIntArray}()
+ &lt;li&gt; {@link #writeLongArray(long[])}, {@link #readLongArray(long[])},
+ {@link #createLongArray}()
+ &lt;li&gt; {@link #writeStringArray(String[])}, {@link #readStringArray(String[])},
+ {@link #createStringArray}().
+ &lt;li&gt; {@link #writeSparseBooleanArray}(SparseBooleanArray),
+ {@link #readSparseBooleanArray}().
+ &lt;/ul&gt;
+
+ &lt;h3&gt;Parcelables&lt;/h3&gt;
+
+ &lt;p&gt;The {@link android.os.Parcelable} protocol provides an extremely efficient (but
+ low-level) protocol for objects to write and read themselves from Parcels.
+ You can use the direct methods {@link #writeParcelable(Parcelable, int)}
+ and {@link #readParcelable}(ClassLoader) or
+ {@link #writeParcelableArray} and
+ {@link #readParcelableArray}(ClassLoader) to write or read.  These
+ methods write both the class type and its data to the Parcel, allowing
+ that class to be reconstructed from the appropriate class loader when
+ later reading.&lt;/p&gt;
+
+ &lt;p&gt;There are also some methods that provide a more efficient way to work
+ with Parcelables: {@link #writeTypedObject}, {@link #writeTypedArray},
+ {@link #writeTypedList}, {@link #readTypedObject},
+ {@link #createTypedArray} and {@link #createTypedArrayList}.  These methods
+ do not write the class information of the original object: instead, the
+ caller of the read function must know what type to expect and pass in the
+ appropriate {@link android.os.Parcelable.Creator android.os.Parcelable.Creator} instead to
+ properly construct the new object and read its data.  (To more efficient
+ write and read a single Parcelable object that is not null, you can directly
+ call {@link android.os.Parcelable#writeToandroid.os.Parcel android.os.Parcelable.writeToandroid.os.Parcel} and
+ {@link android.os.Parcelable.Creator#createFromandroid.os.Parcel android.os.Parcelable.Creator.createFromandroid.os.Parcel}
+ yourself.)&lt;/p&gt;
+
+ &lt;h3&gt;Bundles&lt;/h3&gt;
+
+ &lt;p&gt;A special type-safe container, called {@link android.os.Bundle}, is available
+ for key/value maps of heterogeneous values.  This has many optimizations
+ for improved performance when reading and writing data, and its type-safe
+ API avoids difficult to debug type errors when finally marshalling the
+ data contents into a Parcel.  The methods to use are
+ {@link #writeBundle}(Bundle), {@link #readBundle}(), and
+ {@link #readBundle}(ClassLoader).
+
+ &lt;h3&gt;Active Objects&lt;/h3&gt;
+
+ &lt;p&gt;An unusual feature of Parcel is the ability to read and write active
+ objects.  For these objects the actual contents of the object is not
+ written, rather a special token referencing the object is written.  When
+ reading the object back from the Parcel, you do not get a new instance of
+ the object, but rather a handle that operates on the exact same object that
+ was originally written.  There are two forms of active objects available.&lt;/p&gt;
+
+ &lt;p&gt;{@link android.os.Binder} objects are a core facility of Android's general cross-process
+ communication system.  The {@link android.os.IBinder} interface describes an abstract
+ protocol with a Binder object.  Any such interface can be written in to
+ a Parcel, and upon reading you will receive either the original object
+ implementing that interface or a special proxy implementation
+ that communicates calls back to the original object.  The methods to use are
+ {@link #writeStrongBinder}(IBinder),
+ {@link #writeStrongInterface}(IInterface), {@link #readStrongBinder}(),
+ {@link #writeBinderArray(IBinder[])}, {@link #readBinderArray(IBinder[])},
+ {@link #createBinderArray}(),
+ {@link #writeBinderList}(List), {@link #readBinderList}(List),
+ {@link #createBinderArrayList}().&lt;/p&gt;
+
+ &lt;p&gt;FileDescriptor objects, representing raw Linux file descriptor identifiers,
+ can be written and {@link android.os.ParcelFileDescriptor} objects returned to operate
+ on the original file descriptor.  The returned file descriptor is a dup
+ of the original file descriptor: the object and fd is different, but
+ operating on the same underlying file stream, with the same position, etc.
+ The methods to use are {@link #writeFileDescriptor}(FileDescriptor),
+ {@link #readFileDescriptor}().
+
+ &lt;h3&gt;Untyped Containers&lt;/h3&gt;
+
+ &lt;p&gt;A final class of methods are for writing and reading standard Java
+ containers of arbitrary types.  These all revolve around the
+ {@link #writeValue}(Object) and {@link #readValue}(ClassLoader) methods
+ which define the types of objects allowed.  The container methods are
+ {@link #writeArray(Object[])}, {@link #readArray}(ClassLoader),
+ {@link #writeList}(List), {@link #readList(List, ClassLoader)},
+ {@link #readArrayList}(ClassLoader),
+ {@link #writeMap}(Map), {@link #readMap(Map, ClassLoader)},
+ {@link #writeSparseArray}(SparseArray),
+ {@link #readSparseArray}(ClassLoader).
+*/
+var Parcel = {
+
+<span id='android-os-Parcel-property-STRING_CREATOR'>/***/
+</span>STRING_CREATOR : &quot;null&quot;,
+<span id='android-os-Parcel-method-obtain'>/**Retrieve a new Parcel object from the pool.
+</span>*/
+obtain : function(  ) {},
+
+<span id='android-os-Parcel-method-recycle'>/**Put a Parcel object back into the pool.  You must not touch
+</span> the object after this call.
+*/
+recycle : function(  ) {},
+
+<span id='android-os-Parcel-method-setReadWriteHelper'>/**Set a {@link android.os.Parcel.ReadWriteHelper}, which can be used to avoid having duplicate strings, for
+</span> example.
+@hide 
+*/
+setReadWriteHelper : function(  ) {},
+
+<span id='android-os-Parcel-method-hasReadWriteHelper'>/**
+</span>@return {Boolean} whether this parcel has a {@link ReadWriteHelper}.
+@hide 
+*/
+hasReadWriteHelper : function(  ) {},
+
+<span id='android-os-Parcel-method-getGlobalAllocSize'>/**
+</span>@hide 
+*/
+getGlobalAllocSize : function(  ) {},
+
+<span id='android-os-Parcel-method-getGlobalAllocCount'>/**
+</span>@hide 
+*/
+getGlobalAllocCount : function(  ) {},
+
+<span id='android-os-Parcel-method-dataSize'>/**Returns the total amount of data contained in the parcel.
+</span>*/
+dataSize : function(  ) {},
+
+<span id='android-os-Parcel-method-dataAvail'>/**Returns the amount of data remaining to be read from the
+</span> parcel.  That is, {@link #dataSize}-{@link #dataPosition}.
+*/
+dataAvail : function(  ) {},
+
+<span id='android-os-Parcel-method-dataPosition'>/**Returns the current position in the parcel data.  Never
+</span> more than {@link #dataSize}.
+*/
+dataPosition : function(  ) {},
+
+<span id='android-os-Parcel-method-dataCapacity'>/**Returns the total amount of space in the parcel.  This is always
+</span> &gt;= {@link #dataSize}.  The difference between it and dataSize() is the
+ amount of room left until the parcel needs to re-allocate its
+ data buffer.
+*/
+dataCapacity : function(  ) {},
+
+<span id='android-os-Parcel-method-setDataSize'>/**Change the amount of data in the parcel.  Can be either smaller or
+</span> larger than the current size.  If larger than the current capacity,
+ more memory will be allocated.
+@param {Number} size The new number of bytes in the Parcel.
+*/
+setDataSize : function(  ) {},
+
+<span id='android-os-Parcel-method-setDataPosition'>/**Move the current read/write position in the parcel.
+</span>@param {Number} pos New offset in the parcel; must be between 0 and
+ {@link #dataSize}.
+*/
+setDataPosition : function(  ) {},
+
+<span id='android-os-Parcel-method-setDataCapacity'>/**Change the capacity (current available space) of the parcel.
+</span>@param {Number} size The new capacity of the parcel, in bytes.  Can not be
+ less than {@link #dataSize} -- that is, you can not drop existing data
+ with this method.
+*/
+setDataCapacity : function(  ) {},
+
+<span id='android-os-Parcel-method-pushAllowFds'>/**
+</span>@hide 
+*/
+pushAllowFds : function(  ) {},
+
+<span id='android-os-Parcel-method-restoreAllowFds'>/**
+</span>@hide 
+*/
+restoreAllowFds : function(  ) {},
+
+<span id='android-os-Parcel-method-marshall'>/**Returns the raw bytes of the parcel.
+</span>
+ &lt;p class=&quot;note&quot;&gt;The data you retrieve here &lt;strong&gt;must not&lt;/strong&gt;
+ be placed in any kind of persistent storage (on local disk, across
+ a network, etc).  For that, you should use standard serialization
+ or another kind of general serialization mechanism.  The Parcel
+ marshalled representation is highly optimized for local IPC, and as
+ such does not attempt to maintain compatibility with data created
+ in different versions of the platform.
+*/
+marshall : function(  ) {},
+
+<span id='android-os-Parcel-method-unmarshall'>/**Set the bytes in data to be the raw bytes of this Parcel.
+</span>*/
+unmarshall : function(  ) {},
+
+<span id='android-os-Parcel-method-appendFrom'>/**
+</span>*/
+appendFrom : function(  ) {},
+
+<span id='android-os-Parcel-method-compareData'>/**
+</span>@hide 
+*/
+compareData : function(  ) {},
+
+<span id='android-os-Parcel-method-setClassCookie'>/**
+</span>@hide 
+*/
+setClassCookie : function(  ) {},
+
+<span id='android-os-Parcel-method-getClassCookie'>/**
+</span>@hide 
+*/
+getClassCookie : function(  ) {},
+
+<span id='android-os-Parcel-method-adoptClassCookies'>/**
+</span>@hide 
+*/
+adoptClassCookies : function(  ) {},
+
+<span id='android-os-Parcel-method-copyClassCookies'>/**
+</span>@hide 
+*/
+copyClassCookies : function(  ) {},
+
+<span id='android-os-Parcel-method-putClassCookies'>/**
+</span>@hide 
+*/
+putClassCookies : function(  ) {},
+
+<span id='android-os-Parcel-method-hasFileDescriptors'>/**Report whether the parcel contains any marshalled file descriptors.
+</span>*/
+hasFileDescriptors : function(  ) {},
+
+<span id='android-os-Parcel-method-writeInterfaceToken'>/**Store or read an IBinder interface token in the parcel at the current
+</span> {@link #dataPosition}.  This is used to validate that the marshalled
+ transaction is intended for the target interface.
+*/
+writeInterfaceToken : function(  ) {},
+
+<span id='android-os-Parcel-method-enforceInterface'>/**
+</span>*/
+enforceInterface : function(  ) {},
+
+<span id='android-os-Parcel-method-replaceCallingWorkSourceUid'>/**Writes the work source uid to the request headers.
+</span>
+ &lt;p&gt;It requires the headers to have been written/read already to replace the work source.
+@return {Boolean} true if the request headers have been updated.
+@hide 
+*/
+replaceCallingWorkSourceUid : function(  ) {},
+
+<span id='android-os-Parcel-method-readCallingWorkSourceUid'>/**Reads the work source uid from the request headers.
+</span>
+ &lt;p&gt;Unlike other read methods, this method does not read the parcel at the current
+ {@link #dataPosition}. It will set the {@link #dataPosition} before the read and restore the
+ position after reading the request header.
+@return {Number} the work source uid or {@link Binder#UNSET_WORKSOURCE} if headers have not been
+ written/parsed yet.
+@hide 
+*/
+readCallingWorkSourceUid : function(  ) {},
+
+<span id='android-os-Parcel-method-writeByteArray'>/**Write a byte array into the parcel at the current {@link #dataPosition},
+</span> growing {@link #dataCapacity} if needed.
+@param {Object {byte[]}} b Bytes to place into the parcel.
+*/
+writeByteArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeByteArray'>/**Write a byte array into the parcel at the current {@link #dataPosition},
+</span> growing {@link #dataCapacity} if needed.
+@param {Object {byte[]}} b Bytes to place into the parcel.
+@param {Number} offset Index of first byte to be written.
+@param {Number} len Number of bytes to write.
+*/
+writeByteArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeBlob'>/**Write a blob of data into the parcel at the current {@link #dataPosition},
+</span> growing {@link #dataCapacity} if needed.
+@param {Object {byte[]}} b Bytes to place into the parcel.
+ {@hide}
+ {@SystemApi}
+*/
+writeBlob : function(  ) {},
+
+<span id='android-os-Parcel-method-writeBlob'>/**Write a blob of data into the parcel at the current {@link #dataPosition},
+</span> growing {@link #dataCapacity} if needed.
+@param {Object {byte[]}} b Bytes to place into the parcel.
+@param {Number} offset Index of first byte to be written.
+@param {Number} len Number of bytes to write.
+ {@hide}
+ {@SystemApi}
+*/
+writeBlob : function(  ) {},
+
+<span id='android-os-Parcel-method-writeInt'>/**Write an integer value into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeInt : function(  ) {},
+
+<span id='android-os-Parcel-method-writeLong'>/**Write a long integer value into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeLong : function(  ) {},
+
+<span id='android-os-Parcel-method-writeFloat'>/**Write a floating point value into the parcel at the current
+</span> dataPosition(), growing dataCapacity() if needed.
+*/
+writeFloat : function(  ) {},
+
+<span id='android-os-Parcel-method-writeDouble'>/**Write a double precision floating point value into the parcel at the
+</span> current dataPosition(), growing dataCapacity() if needed.
+*/
+writeDouble : function(  ) {},
+
+<span id='android-os-Parcel-method-writeString'>/**Write a string value into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeString : function(  ) {},
+
+<span id='android-os-Parcel-method-writeStringNoHelper'>/**Write a string without going though a {@link android.os.Parcel.ReadWriteHelper}.  Subclasses of
+</span> {@link android.os.Parcel.ReadWriteHelper} must use this method instead of {@link #writeString} to avoid
+ infinity recursive calls.
+@hide 
+*/
+writeStringNoHelper : function(  ) {},
+
+<span id='android-os-Parcel-method-writeBoolean'>/**Write a boolean value into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+
+ &lt;p&gt;Note: This method currently delegates to writeInt with a value of 1 or 0
+ for true or false, respectively, but may change in the future.
+*/
+writeBoolean : function(  ) {},
+
+<span id='android-os-Parcel-method-writeCharSequence'>/**Write a CharSequence value into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+@hide 
+*/
+writeCharSequence : function(  ) {},
+
+<span id='android-os-Parcel-method-writeStrongBinder'>/**Write an object into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeStrongBinder : function(  ) {},
+
+<span id='android-os-Parcel-method-writeStrongInterface'>/**Write an object into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeStrongInterface : function(  ) {},
+
+<span id='android-os-Parcel-method-writeFileDescriptor'>/**Write a FileDescriptor into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+
+ &lt;p class=&quot;caution&quot;&gt;The file descriptor will not be closed, which may
+ result in file descriptor leaks when objects are returned from Binder
+ calls.  Use {@link android.os.ParcelFileDescriptor#writeToandroid.os.Parcel} instead, which
+ accepts contextual flags and will close the original file descriptor
+ if {@link android.os.Parcelable#PARCELABLE_WRITE_RETURN_VALUE} is set.&lt;/p&gt;
+*/
+writeFileDescriptor : function(  ) {},
+
+<span id='android-os-Parcel-method-writeRawFileDescriptor'>/**{@hide}
+</span> This will be the new name for writeFileDescriptor, for consistency.
+*/
+writeRawFileDescriptor : function(  ) {},
+
+<span id='android-os-Parcel-method-writeRawFileDescriptorArray'>/**{@hide}
+</span> Write an array of FileDescriptor objects into the Parcel.
+@param {Object {java.io.FileDescriptor[]}} value The array of objects to be written.
+*/
+writeRawFileDescriptorArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeByte'>/**Write a byte value into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+
+ &lt;p&gt;Note: This method currently delegates to writeInt but may change in
+ the future.
+*/
+writeByte : function(  ) {},
+
+<span id='android-os-Parcel-method-writeMap'>/**Please use {@link #writeBundle} instead.  Flattens a Map into the parcel
+</span> at the current dataPosition(),
+ growing dataCapacity() if needed.  The Map keys must be String objects.
+ The Map values are written using {@link #writeValue} and must follow
+ the specification there.
+
+ &lt;p&gt;It is strongly recommended to use {@link #writeBundle} instead of
+ this method, since the Bundle class provides a type-safe API that
+ allows you to avoid mysterious type errors at the point of marshalling.
+*/
+writeMap : function(  ) {},
+
+<span id='android-os-Parcel-method-writeArrayMap'>/**
+</span>@hide For testing only.
+*/
+writeArrayMap : function(  ) {},
+
+<span id='android-os-Parcel-method-writeTypedArrayMap'>/**Flatten an {@link ArrayMap} with string keys containing a particular object
+</span> type into the parcel at the current dataPosition() and growing dataCapacity()
+ if needed. The type of the objects in the array must be one that implements
+ Parcelable. Only the raw data of the objects is written and not their type,
+ so you must use the corresponding {@link #createTypedArrayMap(Parcelable.Creator)}
+@param {Object {android.util.ArrayMap}} val The map of objects to be written.
+@param {Number} parcelableFlags The parcelable flags to use.
+@see #createTypedArrayMap(Parcelable.Creator)
+@see Parcelable
+*/
+writeTypedArrayMap : function(  ) {},
+
+<span id='android-os-Parcel-method-writeArraySet'>/**Write an array set to the parcel.
+</span>@param {Object {android.util.ArraySet}} val The array set to write.
+@hide 
+*/
+writeArraySet : function(  ) {},
+
+<span id='android-os-Parcel-method-writeBundle'>/**Flatten a Bundle into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeBundle : function(  ) {},
+
+<span id='android-os-Parcel-method-writePersistableBundle'>/**Flatten a PersistableBundle into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writePersistableBundle : function(  ) {},
+
+<span id='android-os-Parcel-method-writeSize'>/**Flatten a Size into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeSize : function(  ) {},
+
+<span id='android-os-Parcel-method-writeSizeF'>/**Flatten a SizeF into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.
+*/
+writeSizeF : function(  ) {},
+
+<span id='android-os-Parcel-method-writeList'>/**Flatten a List into the parcel at the current dataPosition(), growing
+</span> dataCapacity() if needed.  The List values are written using
+ {@link #writeValue} and must follow the specification there.
+*/
+writeList : function(  ) {},
+
+<span id='android-os-Parcel-method-writeArray'>/**Flatten an Object array into the parcel at the current dataPosition(),
+</span> growing dataCapacity() if needed.  The array values are written using
+ {@link #writeValue} and must follow the specification there.
+*/
+writeArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeSparseArray'>/**Flatten a generic SparseArray into the parcel at the current
+</span> dataPosition(), growing dataCapacity() if needed.  The SparseArray
+ values are written using {@link #writeValue} and must follow the
+ specification there.
+*/
+writeSparseArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeSparseBooleanArray'>/**
+</span>*/
+writeSparseBooleanArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeSparseIntArray'>/**
+</span>@hide 
+*/
+writeSparseIntArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeBooleanArray'>/**
+</span>*/
+writeBooleanArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createBooleanArray'>/**
+</span>*/
+createBooleanArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readBooleanArray'>/**
+</span>*/
+readBooleanArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeCharArray'>/**
+</span>*/
+writeCharArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createCharArray'>/**
+</span>*/
+createCharArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readCharArray'>/**
+</span>*/
+readCharArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeIntArray'>/**
+</span>*/
+writeIntArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createIntArray'>/**
+</span>*/
+createIntArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readIntArray'>/**
+</span>*/
+readIntArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeLongArray'>/**
+</span>*/
+writeLongArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createLongArray'>/**
+</span>*/
+createLongArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readLongArray'>/**
+</span>*/
+readLongArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeFloatArray'>/**
+</span>*/
+writeFloatArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createFloatArray'>/**
+</span>*/
+createFloatArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readFloatArray'>/**
+</span>*/
+readFloatArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeDoubleArray'>/**
+</span>*/
+writeDoubleArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createDoubleArray'>/**
+</span>*/
+createDoubleArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readDoubleArray'>/**
+</span>*/
+readDoubleArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeStringArray'>/**
+</span>*/
+writeStringArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createStringArray'>/**
+</span>*/
+createStringArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readStringArray'>/**
+</span>*/
+readStringArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeBinderArray'>/**
+</span>*/
+writeBinderArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeCharSequenceArray'>/**
+</span>@hide 
+*/
+writeCharSequenceArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeCharSequenceList'>/**
+</span>@hide 
+*/
+writeCharSequenceList : function(  ) {},
+
+<span id='android-os-Parcel-method-createBinderArray'>/**
+</span>*/
+createBinderArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readBinderArray'>/**
+</span>*/
+readBinderArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeTypedList'>/**Flatten a List containing a particular object type into the parcel, at
+</span> the current dataPosition() and growing dataCapacity() if needed.  The
+ type of the objects in the list must be one that implements Parcelable.
+ Unlike the generic writeList() method, however, only the raw data of the
+ objects is written and not their type, so you must use the corresponding
+ readTypedList() to unmarshall them.
+@param {Object {java.util.List}} val The list of objects to be written.
+@see #createTypedArrayList
+@see #readTypedList
+@see Parcelable
+*/
+writeTypedList : function(  ) {},
+
+<span id='android-os-Parcel-method-writeTypedSparseArray'>/**Flatten a {@link SparseArray} containing a particular object type into the parcel
+</span> at the current dataPosition() and growing dataCapacity() if needed. The
+ type of the objects in the array must be one that implements Parcelable.
+ Unlike the generic {@link #writeSparseArray}(SparseArray) method, however, only
+ the raw data of the objects is written and not their type, so you must use the
+ corresponding {@link #createTypedSparseArray(Parcelable.Creator)}.
+@param {Object {android.util.SparseArray}} val The list of objects to be written.
+@param {Number} parcelableFlags The parcelable flags to use.
+@see #createTypedSparseArray(Parcelable.Creator)
+@see Parcelable
+*/
+writeTypedSparseArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeTypedList'>/**
+</span>@hide 
+*/
+writeTypedList : function(  ) {},
+
+<span id='android-os-Parcel-method-writeStringList'>/**Flatten a List containing String objects into the parcel, at
+</span> the current dataPosition() and growing dataCapacity() if needed.  They
+ can later be retrieved with {@link #createStringArrayList} or
+ {@link #readStringList}.
+@param {Object {java.util.List}} val The list of strings to be written.
+@see #createStringArrayList
+@see #readStringList
+*/
+writeStringList : function(  ) {},
+
+<span id='android-os-Parcel-method-writeBinderList'>/**Flatten a List containing IBinder objects into the parcel, at
+</span> the current dataPosition() and growing dataCapacity() if needed.  They
+ can later be retrieved with {@link #createBinderArrayList} or
+ {@link #readBinderList}.
+@param {Object {java.util.List}} val The list of strings to be written.
+@see #createBinderArrayList
+@see #readBinderList
+*/
+writeBinderList : function(  ) {},
+
+<span id='android-os-Parcel-method-writeParcelableList'>/**Flatten a {@code List} containing arbitrary {@code Parcelable} objects into this parcel
+</span> at the current position. They can later be retrieved using
+ {@link #readParcelableList(List, ClassLoader)} if required.
+@see #readParcelableList(List, ClassLoader)
+*/
+writeParcelableList : function(  ) {},
+
+<span id='android-os-Parcel-method-writeTypedArray'>/**Flatten a homogeneous array containing a particular object type into
+</span> the parcel, at
+ the current dataPosition() and growing dataCapacity() if needed.  The
+ type of the objects in the array must be one that implements Parcelable.
+ Unlike the {@link #writeParcelableArray} method, however, only the
+ raw data of the objects is written and not their type, so you must use
+ {@link #readTypedArray} with the correct corresponding
+ {@link android.os.Parcelable.Creator} implementation to unmarshall them.
+@param {Object {android.os.Parcelable[]}} val The array of objects to be written.
+@param {Number} parcelableFlags Contextual flags as per
+ {@link Parcelable#writeToParcel(Parcel, int) Parcelable.writeToParcel()}.
+@see #readTypedArray
+@see #writeParcelableArray
+@see Parcelable.Creator
+*/
+writeTypedArray : function(  ) {},
+
+<span id='android-os-Parcel-method-writeTypedObject'>/**Flatten the Parcelable object into the parcel.
+</span>@param {Object {Parcelable}} val The Parcelable object to be written.
+@param {Number} parcelableFlags Contextual flags as per
+ {@link Parcelable#writeToParcel(Parcel, int) Parcelable.writeToParcel()}.
+@see #readTypedObject
+*/
+writeTypedObject : function(  ) {},
+
+<span id='android-os-Parcel-method-writeValue'>/**Flatten a generic object in to a parcel.  The given Object value may
+</span> currently be one of the following types:
+
+ &lt;ul&gt;
+ &lt;li&gt; null
+ &lt;li&gt; String
+ &lt;li&gt; Byte
+ &lt;li&gt; Short
+ &lt;li&gt; Integer
+ &lt;li&gt; Long
+ &lt;li&gt; Float
+ &lt;li&gt; Double
+ &lt;li&gt; Boolean
+ &lt;li&gt; String[]
+ &lt;li&gt; boolean[]
+ &lt;li&gt; byte[]
+ &lt;li&gt; int[]
+ &lt;li&gt; long[]
+ &lt;li&gt; Object[] (supporting objects of the same type defined here).
+ &lt;li&gt; {@link android.os.Bundle}
+ &lt;li&gt; Map (as supported by {@link #writeMap}).
+ &lt;li&gt; Any object that implements the {@link android.os.Parcelable} protocol.
+ &lt;li&gt; Parcelable[]
+ &lt;li&gt; CharSequence (as supported by {@link TextUtils#writeToParcel}).
+ &lt;li&gt; List (as supported by {@link #writeList}).
+ &lt;li&gt; {@link SparseArray} (as supported by {@link #writeSparseArray}(SparseArray)).
+ &lt;li&gt; {@link android.os.IBinder}
+ &lt;li&gt; Any object that implements Serializable (but see
+      {@link #writeSerializable} for caveats).  Note that all of the
+      previous types have relatively efficient implementations for
+      writing to a Parcel; having to rely on the generic serialization
+      approach is much less efficient and should be avoided whenever
+      possible.
+ &lt;/ul&gt;
+
+ &lt;p class=&quot;caution&quot;&gt;{@link android.os.Parcelable} objects are written with
+ {@link android.os.Parcelable#writeToandroid.os.Parcel} using contextual flags of 0.  When
+ serializing objects containing {@link android.os.ParcelFileDescriptor}s,
+ this may result in file descriptor leaks when they are returned from
+ Binder calls (where {@link android.os.Parcelable#PARCELABLE_WRITE_RETURN_VALUE}
+ should be used).&lt;/p&gt;
+*/
+writeValue : function(  ) {},
+
+<span id='android-os-Parcel-method-writeParcelable'>/**Flatten the name of the class of the Parcelable and its contents
+</span> into the parcel.
+@param {Object {Parcelable}} p The Parcelable object to be written.
+@param {Number} parcelableFlags Contextual flags as per
+ {@link Parcelable#writeToParcel(Parcel, int) Parcelable.writeToParcel()}.
+*/
+writeParcelable : function(  ) {},
+
+<span id='android-os-Parcel-method-writeParcelableCreator'>/**
+</span>@hide 
+*/
+writeParcelableCreator : function(  ) {},
+
+<span id='android-os-Parcel-method-writeSerializable'>/**Write a generic serializable object in to a Parcel.  It is strongly
+</span> recommended that this method be avoided, since the serialization
+ overhead is extremely large, and this approach will be much slower than
+ using the other approaches to writing data in to a Parcel.
+*/
+writeSerializable : function(  ) {},
+
+<span id='android-os-Parcel-method-setStackTraceParceling'>/**
+</span>@hide For debugging purposes
+*/
+setStackTraceParceling : function(  ) {},
+
+<span id='android-os-Parcel-method-writeException'>/**Special function for writing an exception result at the header of
+</span> a parcel, to be used when returning an exception from a transaction.
+ Note that this currently only supports a few exception types; any other
+ exception will be re-thrown by this function as a RuntimeException
+ (to be caught by the system's last-resort exception handling when
+ dispatching a transaction).
+
+ &lt;p&gt;The supported exception types are:
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.os.BadParcelableException}
+ &lt;li&gt;{@link IllegalArgumentException}
+ &lt;li&gt;{@link IllegalStateException}
+ &lt;li&gt;{@link NullPointerException}
+ &lt;li&gt;{@link SecurityException}
+ &lt;li&gt;{@link UnsupportedOperationException}
+ &lt;li&gt;{@link android.os.NetworkOnMainThreadException}
+ &lt;/ul&gt;
+@param {Object {Exception}} e The Exception to be written.
+@see #writeNoException
+@see #readException
+*/
+writeException : function(  ) {},
+
+<span id='android-os-Parcel-method-writeNoException'>/**Special function for writing information at the front of the Parcel
+</span> indicating that no exception occurred.
+@see #writeException
+@see #readException
+*/
+writeNoException : function(  ) {},
+
+<span id='android-os-Parcel-method-readException'>/**Special function for reading an exception result from the header of
+</span> a parcel, to be used after receiving the result of a transaction.  This
+ will throw the exception for you if it had been written to the Parcel,
+ otherwise return and let you read the normal result data from the Parcel.
+@see #writeException
+@see #writeNoException
+*/
+readException : function(  ) {},
+
+<span id='android-os-Parcel-method-readExceptionCode'>/**Parses the header of a Binder call's response Parcel and
+</span> returns the exception code.  Deals with lite or fat headers.
+ In the common successful case, this header is generally zero.
+ In less common cases, it's a small negative number and will be
+ followed by an error string.
+
+ This exists purely for android.database.DatabaseUtils and
+ insulating it from having to handle fat headers as returned by
+ e.g. StrictMode-induced RPC responses.
+@hide 
+*/
+readExceptionCode : function(  ) {},
+
+<span id='android-os-Parcel-method-readException'>/**Throw an exception with the given message. Not intended for use
+</span> outside the Parcel class.
+@param {Number} code Used to determine which exception class to throw.
+@param {String} msg The exception message.
+*/
+readException : function(  ) {},
+
+<span id='android-os-Parcel-method-readInt'>/**Read an integer value from the parcel at the current dataPosition().
+</span>*/
+readInt : function(  ) {},
+
+<span id='android-os-Parcel-method-readLong'>/**Read a long integer value from the parcel at the current dataPosition().
+</span>*/
+readLong : function(  ) {},
+
+<span id='android-os-Parcel-method-readFloat'>/**Read a floating point value from the parcel at the current
+</span> dataPosition().
+*/
+readFloat : function(  ) {},
+
+<span id='android-os-Parcel-method-readDouble'>/**Read a double precision floating point value from the parcel at the
+</span> current dataPosition().
+*/
+readDouble : function(  ) {},
+
+<span id='android-os-Parcel-method-readString'>/**Read a string value from the parcel at the current dataPosition().
+</span>*/
+readString : function(  ) {},
+
+<span id='android-os-Parcel-method-readStringNoHelper'>/**Read a string without going though a {@link android.os.Parcel.ReadWriteHelper}.  Subclasses of
+</span> {@link android.os.Parcel.ReadWriteHelper} must use this method instead of {@link #readString} to avoid
+ infinity recursive calls.
+@hide 
+*/
+readStringNoHelper : function(  ) {},
+
+<span id='android-os-Parcel-method-readBoolean'>/**Read a boolean value from the parcel at the current dataPosition().
+</span>*/
+readBoolean : function(  ) {},
+
+<span id='android-os-Parcel-method-readCharSequence'>/**Read a CharSequence value from the parcel at the current dataPosition().
+</span>@hide 
+*/
+readCharSequence : function(  ) {},
+
+<span id='android-os-Parcel-method-readStrongBinder'>/**Read an object from the parcel at the current dataPosition().
+</span>*/
+readStrongBinder : function(  ) {},
+
+<span id='android-os-Parcel-method-readFileDescriptor'>/**Read a FileDescriptor from the parcel at the current dataPosition().
+</span>*/
+readFileDescriptor : function(  ) {},
+
+<span id='android-os-Parcel-method-readRawFileDescriptor'>/**{@hide}
+</span>*/
+readRawFileDescriptor : function(  ) {},
+
+<span id='android-os-Parcel-method-createRawFileDescriptorArray'>/**{@hide}
+</span> Read and return a new array of FileDescriptors from the parcel.
+@return {Object {java.io.FileDescriptor}} the FileDescriptor array, or null if the array is null.
+*/
+createRawFileDescriptorArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readRawFileDescriptorArray'>/**{@hide}
+</span> Read an array of FileDescriptors from a parcel.
+ The passed array must be exactly the length of the array in the parcel.
+@return {Object {void}} the FileDescriptor array, or null if the array is null.
+*/
+readRawFileDescriptorArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readByte'>/**Read a byte value from the parcel at the current dataPosition().
+</span>*/
+readByte : function(  ) {},
+
+<span id='android-os-Parcel-method-readMap'>/**Please use {@link #readBundle}(ClassLoader) instead (whose data must have
+</span> been written with {@link #writeBundle}.  Read into an existing Map object
+ from the parcel at the current dataPosition().
+*/
+readMap : function(  ) {},
+
+<span id='android-os-Parcel-method-readList'>/**Read into an existing List object from the parcel at the current
+</span> dataPosition(), using the given class loader to load any enclosed
+ Parcelables.  If it is null, the default class loader is used.
+*/
+readList : function(  ) {},
+
+<span id='android-os-Parcel-method-readHashMap'>/**Please use {@link #readBundle}(ClassLoader) instead (whose data must have
+</span> been written with {@link #writeBundle}.  Read and return a new HashMap
+ object from the parcel at the current dataPosition(), using the given
+ class loader to load any enclosed Parcelables.  Returns null if
+ the previously written map object was null.
+*/
+readHashMap : function(  ) {},
+
+<span id='android-os-Parcel-method-readBundle'>/**Read and return a new Bundle object from the parcel at the current
+</span> dataPosition().  Returns null if the previously written Bundle object was
+ null.
+*/
+readBundle : function(  ) {},
+
+<span id='android-os-Parcel-method-readBundle'>/**Read and return a new Bundle object from the parcel at the current
+</span> dataPosition(), using the given class loader to initialize the class
+ loader of the Bundle for later retrieval of Parcelable objects.
+ Returns null if the previously written Bundle object was null.
+*/
+readBundle : function(  ) {},
+
+<span id='android-os-Parcel-method-readPersistableBundle'>/**Read and return a new Bundle object from the parcel at the current
+</span> dataPosition().  Returns null if the previously written Bundle object was
+ null.
+*/
+readPersistableBundle : function(  ) {},
+
+<span id='android-os-Parcel-method-readPersistableBundle'>/**Read and return a new Bundle object from the parcel at the current
+</span> dataPosition(), using the given class loader to initialize the class
+ loader of the Bundle for later retrieval of Parcelable objects.
+ Returns null if the previously written Bundle object was null.
+*/
+readPersistableBundle : function(  ) {},
+
+<span id='android-os-Parcel-method-readSize'>/**Read a Size from the parcel at the current dataPosition().
+</span>*/
+readSize : function(  ) {},
+
+<span id='android-os-Parcel-method-readSizeF'>/**Read a SizeF from the parcel at the current dataPosition().
+</span>*/
+readSizeF : function(  ) {},
+
+<span id='android-os-Parcel-method-createByteArray'>/**Read and return a byte[] object from the parcel.
+</span>*/
+createByteArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readByteArray'>/**Read a byte[] object from the parcel and copy it into the
+</span> given byte array.
+*/
+readByteArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readBlob'>/**Read a blob of data from the parcel and return it as a byte array.
+</span> {@hide}
+ {@SystemApi}
+*/
+readBlob : function(  ) {},
+
+<span id='android-os-Parcel-method-readStringArray'>/**Read and return a String[] object from the parcel.
+</span> {@hide}
+*/
+readStringArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readCharSequenceArray'>/**Read and return a CharSequence[] object from the parcel.
+</span> {@hide}
+*/
+readCharSequenceArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readCharSequenceList'>/**Read and return an ArrayList&amp;lt;CharSequence&amp;gt; object from the parcel.
+</span> {@hide}
+*/
+readCharSequenceList : function(  ) {},
+
+<span id='android-os-Parcel-method-readArrayList'>/**Read and return a new ArrayList object from the parcel at the current
+</span> dataPosition().  Returns null if the previously written list object was
+ null.  The given class loader will be used to load any enclosed
+ Parcelables.
+*/
+readArrayList : function(  ) {},
+
+<span id='android-os-Parcel-method-readArray'>/**Read and return a new Object array from the parcel at the current
+</span> dataPosition().  Returns null if the previously written array was
+ null.  The given class loader will be used to load any enclosed
+ Parcelables.
+*/
+readArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readSparseArray'>/**Read and return a new SparseArray object from the parcel at the current
+</span> dataPosition().  Returns null if the previously written list object was
+ null.  The given class loader will be used to load any enclosed
+ Parcelables.
+*/
+readSparseArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readSparseBooleanArray'>/**Read and return a new SparseBooleanArray object from the parcel at the current
+</span> dataPosition().  Returns null if the previously written list object was
+ null.
+*/
+readSparseBooleanArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readSparseIntArray'>/**Read and return a new SparseIntArray object from the parcel at the current
+</span> dataPosition(). Returns null if the previously written array object was null.
+@hide 
+*/
+readSparseIntArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createTypedArrayList'>/**Read and return a new ArrayList containing a particular object type from
+</span> the parcel that was written with {@link #writeTypedList} at the
+ current dataPosition().  Returns null if the
+ previously written list object was null.  The list &lt;em&gt;must&lt;/em&gt; have
+ previously been written via {@link #writeTypedList} with the same object
+ type.
+@return {Object {java.util.ArrayList}} A newly created ArrayList containing objects with the same data
+         as those that were previously written.
+@see #writeTypedList
+*/
+createTypedArrayList : function(  ) {},
+
+<span id='android-os-Parcel-method-readTypedList'>/**Read into the given List items containing a particular object type
+</span> that were written with {@link #writeTypedList} at the
+ current dataPosition().  The list &lt;em&gt;must&lt;/em&gt; have
+ previously been written via {@link #writeTypedList} with the same object
+ type.
+@return {Object {void}} A newly created ArrayList containing objects with the same data
+         as those that were previously written.
+@see #writeTypedList
+*/
+readTypedList : function(  ) {},
+
+<span id='android-os-Parcel-method-createTypedSparseArray'>/**Read into a new {@link SparseArray} items containing a particular object type
+</span> that were written with {@link #writeTypedSparseArray(SparseArray, int)} at the
+ current dataPosition().  The list &lt;em&gt;must&lt;/em&gt; have previously been written
+ via {@link #writeTypedSparseArray(SparseArray, int)} with the same object type.
+@param {Object {android.os.Parcelable.Creator}} creator The creator to use when for instantiation.
+@return {Object {android.util.SparseArray}} A newly created {@link SparseArray} containing objects with the same data
+         as those that were previously written.
+@see #writeTypedSparseArray(SparseArray, int)
+*/
+createTypedSparseArray : function(  ) {},
+
+<span id='android-os-Parcel-method-createTypedArrayMap'>/**Read into a new {@link ArrayMap} with string keys items containing a particular
+</span> object type that were written with {@link #writeTypedArrayMap(ArrayMap, int)} at the
+ current dataPosition().  The list &lt;em&gt;must&lt;/em&gt; have previously been written
+ via {@link #writeTypedArrayMap(ArrayMap, int)} with the same object type.
+@param {Object {android.os.Parcelable.Creator}} creator The creator to use when for instantiation.
+@return {Object {android.util.ArrayMap}} A newly created {@link ArrayMap} containing objects with the same data
+         as those that were previously written.
+@see #writeTypedArrayMap(ArrayMap, int)
+*/
+createTypedArrayMap : function(  ) {},
+
+<span id='android-os-Parcel-method-createStringArrayList'>/**Read and return a new ArrayList containing String objects from
+</span> the parcel that was written with {@link #writeStringList} at the
+ current dataPosition().  Returns null if the
+ previously written list object was null.
+@return {Object {java.util.ArrayList}} A newly created ArrayList containing strings with the same data
+         as those that were previously written.
+@see #writeStringList
+*/
+createStringArrayList : function(  ) {},
+
+<span id='android-os-Parcel-method-createBinderArrayList'>/**Read and return a new ArrayList containing IBinder objects from
+</span> the parcel that was written with {@link #writeBinderList} at the
+ current dataPosition().  Returns null if the
+ previously written list object was null.
+@return {Object {java.util.ArrayList}} A newly created ArrayList containing strings with the same data
+         as those that were previously written.
+@see #writeBinderList
+*/
+createBinderArrayList : function(  ) {},
+
+<span id='android-os-Parcel-method-readStringList'>/**Read into the given List items String objects that were written with
+</span> {@link #writeStringList} at the current dataPosition().
+@see #writeStringList
+*/
+readStringList : function(  ) {},
+
+<span id='android-os-Parcel-method-readBinderList'>/**Read into the given List items IBinder objects that were written with
+</span> {@link #writeBinderList} at the current dataPosition().
+@see #writeBinderList
+*/
+readBinderList : function(  ) {},
+
+<span id='android-os-Parcel-method-readParcelableList'>/**Read the list of {@code Parcelable} objects at the current data position into the
+</span> given {@code list}. The contents of the {@code list} are replaced. If the serialized
+ list was {@code null}, {@code list} is cleared.
+@see #writeParcelableList(List, int)
+*/
+readParcelableList : function(  ) {},
+
+<span id='android-os-Parcel-method-createTypedArray'>/**Read and return a new array containing a particular object type from
+</span> the parcel at the current dataPosition().  Returns null if the
+ previously written array was null.  The array &lt;em&gt;must&lt;/em&gt; have
+ previously been written via {@link #writeTypedArray} with the same
+ object type.
+@return {Object {java.lang.Object}} A newly created array containing objects with the same data
+         as those that were previously written.
+@see #writeTypedArray
+*/
+createTypedArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readTypedArray'>/**
+</span>*/
+readTypedArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readTypedArray'>/**
+</span>@deprecated 
+@hide 
+*/
+readTypedArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readTypedObject'>/**Read and return a typed Parcelable object from a parcel.
+</span> Returns null if the previous written object was null.
+ The object &lt;em&gt;must&lt;/em&gt; have previous been written via
+ {@link #writeTypedObject} with the same object type.
+@return {Object {java.lang.Object}} A newly created object of the type that was previously
+         written.
+@see #writeTypedObject
+*/
+readTypedObject : function(  ) {},
+
+<span id='android-os-Parcel-method-writeParcelableArray'>/**Write a heterogeneous array of Parcelable objects into the Parcel.
+</span> Each object in the array is written along with its class name, so
+ that the correct class can later be instantiated.  As a result, this
+ has significantly more overhead than {@link #writeTypedArray}, but will
+ correctly handle an array containing more than one type of object.
+@param {Object {android.os.Parcelable[]}} value The array of objects to be written.
+@param {Number} parcelableFlags Contextual flags as per
+ {@link Parcelable#writeToParcel(Parcel, int) Parcelable.writeToParcel()}.
+@see #writeTypedArray
+*/
+writeParcelableArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readValue'>/**Read a typed object from a parcel.  The given class loader will be
+</span> used to load any enclosed Parcelables.  If it is null, the default class
+ loader will be used.
+*/
+readValue : function(  ) {},
+
+<span id='android-os-Parcel-method-readParcelable'>/**Read and return a new Parcelable from the parcel.  The given class loader
+</span> will be used to load any enclosed Parcelables.  If it is null, the default
+ class loader will be used.
+@param {Object {ClassLoader}} loader A ClassLoader from which to instantiate the Parcelable
+ object, or null for the default class loader.
+@return {Object {android.os.Parcelable}} Returns the newly created Parcelable, or null if a null
+ object has been written.
+@throws BadParcelableException Throws BadParcelableException if there
+ was an error trying to instantiate the Parcelable.
+*/
+readParcelable : function(  ) {},
+
+<span id='android-os-Parcel-method-readCreator'>/**
+</span>@hide 
+*/
+readCreator : function(  ) {},
+
+<span id='android-os-Parcel-method-readParcelableCreator'>/**
+</span>@hide 
+*/
+readParcelableCreator : function(  ) {},
+
+<span id='android-os-Parcel-method-readParcelableArray'>/**Read and return a new Parcelable array from the parcel.
+</span> The given class loader will be used to load any enclosed
+ Parcelables.
+@return {Object {android.os.Parcelable}} the Parcelable array, or null if the array is null
+*/
+readParcelableArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readParcelableArray'>/**
+</span>@hide 
+*/
+readParcelableArray : function(  ) {},
+
+<span id='android-os-Parcel-method-readSerializable'>/**Read and return a new Serializable object from the parcel.
+</span>@return {Object {java.io.Serializable}} the Serializable object, or null if the Serializable name
+ wasn't found in the parcel.
+*/
+readSerializable : function(  ) {},
+
+<span id='android-os-Parcel-method-readArrayMap'>/**
+</span>@hide For testing only.
+*/
+readArrayMap : function(  ) {},
+
+<span id='android-os-Parcel-method-readArraySet'>/**Reads an array set.
+</span>@param {Object {ClassLoader}} loader The class loader to use.
+@hide 
+*/
+readArraySet : function(  ) {},
+
+<span id='android-os-Parcel-method-getBlobAshmemSize'>/**
+</span>@hide For testing
+*/
+getBlobAshmemSize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

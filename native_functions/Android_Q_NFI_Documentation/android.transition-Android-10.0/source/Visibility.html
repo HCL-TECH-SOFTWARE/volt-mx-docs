@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-transition-Visibility'>/**@class android.transition.Visibility
+</span>@extends android.transition.Transition
+
+ This transition tracks changes to the visibility of target views in the
+ start and end scenes. Visibility is determined not just by the
+ {@link View#setVisibility(int)} state of views, but also whether
+ views exist in the current view hierarchy. The class is intended to be a
+ utility for subclasses such as {@link android.transition.Fade}, which use this visibility
+ information to determine the specific animations to run when visibility
+ changes occur. Subclasses should implement one or both of the methods
+ {@link #onAppear(ViewGroup, android.transition.TransitionValues, int, android.transition.TransitionValues, int)},
+ {@link #onDisappear(ViewGroup, android.transition.TransitionValues, int, android.transition.TransitionValues, int)} or
+ {@link #onAppear(ViewGroup, View, android.transition.TransitionValues, android.transition.TransitionValues)},
+ {@link #onDisappear(ViewGroup, View, android.transition.TransitionValues, android.transition.TransitionValues)}.
+*/
+var Visibility = {
+
+<span id='android-transition-Visibility-property-MODE_IN'>/** Mode used in {@link #setMode}(int) to make the transition
+</span> operate on targets that are appearing. Maybe be combined with
+ {@link #MODE_OUT} to target Visibility changes both in and out.
+*/
+MODE_IN : &quot;1&quot;,
+<span id='android-transition-Visibility-property-MODE_OUT'>/** Mode used in {@link #setMode}(int) to make the transition
+</span> operate on targets that are disappearing. Maybe be combined with
+ {@link #MODE_IN} to target Visibility changes both in and out.
+*/
+MODE_OUT : &quot;2&quot;,
+<span id='android-transition-Visibility-method-setSuppressLayout'>/**This tells the Visibility transition to suppress layout during the transition and release
+</span> the suppression after the transition.
+@hide 
+*/
+setSuppressLayout : function(  ) {},
+
+<span id='android-transition-Visibility-method-setMode'>/**Changes the transition to support appearing and/or disappearing Views, depending
+</span> on &lt;code&gt;mode&lt;/code&gt;.
+@param {Number} mode The behavior supported by this transition, a combination of
+             {@link #MODE_IN} and {@link #MODE_OUT}.
+@attr ref android.R.styleable#VisibilityTransition_transitionVisibilityMode
+*/
+setMode : function(  ) {},
+
+<span id='android-transition-Visibility-method-getMode'>/**Returns whether appearing and/or disappearing Views are supported.
+</span>
+ Returns whether appearing and/or disappearing Views are supported. A combination of
+         {@link #MODE_IN} and {@link #MODE_OUT}.
+@attr ref android.R.styleable#VisibilityTransition_transitionVisibilityMode
+*/
+getMode : function(  ) {},
+
+<span id='android-transition-Visibility-method-getTransitionProperties'>/**
+</span>*/
+getTransitionProperties : function(  ) {},
+
+<span id='android-transition-Visibility-method-captureStartValues'>/**
+</span>*/
+captureStartValues : function(  ) {},
+
+<span id='android-transition-Visibility-method-captureEndValues'>/**
+</span>*/
+captureEndValues : function(  ) {},
+
+<span id='android-transition-Visibility-method-isVisible'>/**Returns whether the view is 'visible' according to the given values
+</span> object. This is determined by testing the same properties in the values
+ object that are used to determine whether the object is appearing or
+ disappearing in the {@link Transition#createAnimator(ViewGroup, android.transition.TransitionValues, android.transition.TransitionValues)}
+ method. This method can be called by, for example, subclasses that want
+ to know whether the object is visible in the same way that Visibility
+ determines it for the actual animation.
+@param {Object {TransitionValues}} values The TransitionValues object that holds the information by
+ which visibility is determined.
+@return {Boolean} True if the view reference by &lt;code&gt;values&lt;/code&gt; is visible,
+ false otherwise.
+*/
+isVisible : function(  ) {},
+
+<span id='android-transition-Visibility-method-createAnimator'>/**
+</span>*/
+createAnimator : function(  ) {},
+
+<span id='android-transition-Visibility-method-onAppear'>/**The default implementation of this method calls
+</span> {@link #onAppear(ViewGroup, View, android.transition.TransitionValues, android.transition.TransitionValues)}.
+ Subclasses should override this method or
+ {@link #onAppear(ViewGroup, View, android.transition.TransitionValues, android.transition.TransitionValues)}.
+ if they need to create an Animator when targets appear.
+ The method should only be called by the Visibility class; it is
+ not intended to be called from external classes.
+@param {Object {ViewGroup}} sceneRoot The root of the transition hierarchy
+@param {Object {TransitionValues}} startValues The target values in the start scene
+@param {Number} startVisibility The target visibility in the start scene
+@param {Object {TransitionValues}} endValues The target values in the end scene
+@param {Number} endVisibility The target visibility in the end scene
+@return {Object {android.animation.Animator}} An Animator to be started at the appropriate time in the
+ overall transition for this scene change. A null value means no animation
+ should be run.
+*/
+onAppear : function(  ) {},
+
+<span id='android-transition-Visibility-method-onAppear'>/**The default implementation of this method returns a null Animator. Subclasses should
+</span> override this method to make targets appear with the desired transition. The
+ method should only be called from
+ {@link #onAppear(ViewGroup, android.transition.TransitionValues, int, android.transition.TransitionValues, int)}.
+@param {Object {ViewGroup}} sceneRoot The root of the transition hierarchy
+@param {Object {View}} view The View to make appear. This will be in the target scene's View hierarchy and
+             will be VISIBLE.
+@param {Object {TransitionValues}} startValues The target values in the start scene
+@param {Object {TransitionValues}} endValues The target values in the end scene
+@return {Object {android.animation.Animator}} An Animator to be started at the appropriate time in the
+ overall transition for this scene change. A null value means no animation
+ should be run.
+*/
+onAppear : function(  ) {},
+
+<span id='android-transition-Visibility-method-onDisappear'>/**Subclasses should override this method or
+</span> {@link #onDisappear(ViewGroup, View, android.transition.TransitionValues, android.transition.TransitionValues)}
+ if they need to create an Animator when targets disappear.
+ The method should only be called by the Visibility class; it is
+ not intended to be called from external classes.
+ &lt;p&gt;
+ The default implementation of this method attempts to find a View to use to call
+ {@link #onDisappear(ViewGroup, View, android.transition.TransitionValues, android.transition.TransitionValues)},
+ based on the situation of the View in the View hierarchy. For example,
+ if a View was simply removed from its parent, then the View will be added
+ into a {@link android.view.ViewGroupOverlay} and passed as the &lt;code&gt;view&lt;/code&gt;
+ parameter in {@link #onDisappear(ViewGroup, View, android.transition.TransitionValues, android.transition.TransitionValues)}.
+ If a visible View is changed to be {@link View#GONE} or {@link View#INVISIBLE},
+ then it can be used as the &lt;code&gt;view&lt;/code&gt; and the visibility will be changed
+ to {@link View#VISIBLE} for the duration of the animation. However, if a View
+ is in a hierarchy which is also altering its visibility, the situation can be
+ more complicated. In general, if a view that is no longer in the hierarchy in
+ the end scene still has a parent (so its parent hierarchy was removed, but it
+ was not removed from its parent), then it will be left alone to avoid side-effects from
+ improperly removing it from its parent. The only exception to this is if
+ the previous {@link android.transition.Scene} was {@link android.transition.Scene#getandroid.transition.SceneForLayout(ViewGroup, int,
+ android.content.Context) created from a layout resource file}, then it is considered
+ safe to un-parent the starting scene view in order to make it disappear.&lt;/p&gt;
+@param {Object {ViewGroup}} sceneRoot The root of the transition hierarchy
+@param {Object {TransitionValues}} startValues The target values in the start scene
+@param {Number} startVisibility The target visibility in the start scene
+@param {Object {TransitionValues}} endValues The target values in the end scene
+@param {Number} endVisibility The target visibility in the end scene
+@return {Object {android.animation.Animator}} An Animator to be started at the appropriate time in the
+ overall transition for this scene change. A null value means no animation
+ should be run.
+*/
+onDisappear : function(  ) {},
+
+<span id='android-transition-Visibility-method-isTransitionRequired'>/**
+</span>*/
+isTransitionRequired : function(  ) {},
+
+<span id='android-transition-Visibility-method-onDisappear'>/**The default implementation of this method returns a null Animator. Subclasses should
+</span> override this method to make targets disappear with the desired transition. The
+ method should only be called from
+ {@link #onDisappear(ViewGroup, android.transition.TransitionValues, int, android.transition.TransitionValues, int)}.
+@param {Object {ViewGroup}} sceneRoot The root of the transition hierarchy
+@param {Object {View}} view The View to make disappear. This will be in the target scene's View
+             hierarchy or in an {@link android.view.ViewGroupOverlay} and will be
+             VISIBLE.
+@param {Object {TransitionValues}} startValues The target values in the start scene
+@param {Object {TransitionValues}} endValues The target values in the end scene
+@return {Object {android.animation.Animator}} An Animator to be started at the appropriate time in the
+ overall transition for this scene change. A null value means no animation
+ should be run.
+*/
+onDisappear : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

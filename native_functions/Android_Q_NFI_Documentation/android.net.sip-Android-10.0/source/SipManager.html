@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-sip-SipManager'>/**@class android.net.sip.SipManager
+</span>@extends java.lang.Object
+
+ Provides APIs for SIP tasks, such as initiating SIP connections, and provides access to related
+ SIP services. This class is the starting point for any SIP actions. You can acquire an instance
+ of it with {@link #newInstance newInstance()}.&lt;/p&gt;
+ &lt;p&gt;The APIs in this class allows you to:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Create a {@link android.net.sip.SipSession} to get ready for making calls or listen for incoming calls. See
+ {@link #createSipSession createSipSession()} and {@link #getSessionFor getSessionFor()}.&lt;/li&gt;
+ &lt;li&gt;Initiate and receive generic SIP calls or audio-only SIP calls. Generic SIP calls may
+ be video, audio, or other, and are initiated with {@link #open open()}. Audio-only SIP calls
+ should be handled with a {@link android.net.sip.SipAudioCall}, which you can acquire with {@link #makeAudioCall makeAudioCall()} and {@link #takeAudioCall takeAudioCall()}.&lt;/li&gt;
+ &lt;li&gt;Register and unregister with a SIP service provider, with
+      {@link #register register()} and {@link #unregister unregister()}.&lt;/li&gt;
+ &lt;li&gt;Verify session connectivity, with {@link #isOpened isOpened()} and
+      {@link #isRegistered isRegistered()}.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p class=&quot;note&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; Not all Android-powered devices support VOIP calls using
+ SIP. You should always call {@link android.net.sip.SipManager#isVoipSupported
+ isVoipSupported()} to verify that the device supports VOIP calling and {@link android.net.sip.SipManager#isApiSupported isApiSupported()} to verify that the device supports
+ the SIP APIs. Your application must also request the {@link android.Manifest.permission#INTERNET} and {@link android.Manifest.permission#USE_SIP}
+ permissions.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using SIP, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/network/sip.html&quot;&gt;Session Initiation Protocol&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var SipManager = {
+
+<span id='android-net-sip-SipManager-property-INCOMING_CALL_RESULT_CODE'>/** The result code to be sent back with the incoming call
+</span> {@link PendingIntent}.
+ @see #open(SipProfile, PendingIntent, SipRegistrationListener)
+*/
+INCOMING_CALL_RESULT_CODE : &quot;101&quot;,
+<span id='android-net-sip-SipManager-property-EXTRA_CALL_ID'>/** Key to retrieve the call ID from an incoming call intent.
+</span> @see #open(SipProfile, PendingIntent, SipRegistrationListener)
+*/
+EXTRA_CALL_ID : &quot;android:sipCallID&quot;,
+<span id='android-net-sip-SipManager-property-EXTRA_OFFER_SD'>/** Key to retrieve the offered session description from an incoming call
+</span> intent.
+ @see #open(SipProfile, PendingIntent, SipRegistrationListener)
+*/
+EXTRA_OFFER_SD : &quot;android:sipOfferSD&quot;,
+<span id='android-net-sip-SipManager-property-ACTION_SIP_SERVICE_UP'>/** Action to broadcast when SipService is up.
+</span> Internal use only.
+ @hide
+*/
+ACTION_SIP_SERVICE_UP : &quot;android.net.sip.SIP_SERVICE_UP&quot;,
+<span id='android-net-sip-SipManager-property-ACTION_SIP_INCOMING_CALL'>/** Action string for the incoming call intent for the Phone app.
+</span> Internal use only.
+ @hide
+*/
+ACTION_SIP_INCOMING_CALL : &quot;com.android.phone.SIP_INCOMING_CALL&quot;,
+<span id='android-net-sip-SipManager-property-ACTION_SIP_ADD_PHONE'>/** Action string for the add-phone intent.
+</span> Internal use only.
+ @hide
+*/
+ACTION_SIP_ADD_PHONE : &quot;com.android.phone.SIP_ADD_PHONE&quot;,
+<span id='android-net-sip-SipManager-property-ACTION_SIP_REMOVE_PHONE'>/** Action string for the remove-phone intent.
+</span> Internal use only.
+ @hide
+*/
+ACTION_SIP_REMOVE_PHONE : &quot;com.android.phone.SIP_REMOVE_PHONE&quot;,
+<span id='android-net-sip-SipManager-property-ACTION_SIP_CALL_OPTION_CHANGED'>/** Action string for the SIP call option configuration changed intent.
+</span> This is used to communicate  change to the SIP call option, triggering re-registration of
+ the SIP phone accounts.
+ Internal use only.
+ @hide
+*/
+ACTION_SIP_CALL_OPTION_CHANGED : &quot;com.android.phone.SIP_CALL_OPTION_CHANGED&quot;,
+<span id='android-net-sip-SipManager-property-EXTRA_LOCAL_URI'>/** Part of the ACTION_SIP_ADD_PHONE and ACTION_SIP_REMOVE_PHONE intents.
+</span> Internal use only.
+ @hide
+*/
+EXTRA_LOCAL_URI : &quot;android:localSipUri&quot;,
+<span id='android-net-sip-SipManager-method-newInstance'>/**Creates a manager instance. Returns null if SIP API is not supported.
+</span>@param {Object {Context}} context application context for creating the manager object
+@return {Object {android.net.sip.SipManager}} the manager instance or null if SIP API is not supported
+*/
+newInstance : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-isApiSupported'>/**Returns true if the SIP API is supported by the system.
+</span>*/
+isApiSupported : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-isVoipSupported'>/**Returns true if the system supports SIP-based VOIP API.
+</span>*/
+isVoipSupported : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-isSipWifiOnly'>/**Returns true if SIP is only available on WIFI.
+</span>*/
+isSipWifiOnly : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-open'>/**Opens the profile for making generic SIP calls. The caller may make subsequent calls
+</span> through {@link #makeAudioCall}. If one also wants to receive calls on the
+ profile, use
+ {@link #open(SipProfile, PendingIntent, android.net.sip.SipRegistrationListener)}
+ instead.
+@param {Object {SipProfile}} localProfile the SIP profile to make calls from
+@throws SipException if the profile contains incorrect settings or
+      calling the SIP service results in an error
+*/
+open : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-open'>/**Opens the profile for making calls and/or receiving generic SIP calls. The caller may
+</span> make subsequent calls through {@link #makeAudioCall}. If the
+ auto-registration option is enabled in the profile, the SIP service
+ will register the profile to the corresponding SIP provider periodically
+ in order to receive calls from the provider. When the SIP service
+ receives a new call, it will send out an intent with the provided action
+ string. The intent contains a call ID extra and an offer session
+ description string extra. Use {@link #getCallId} and
+ {@link #getOfferSessionDescription} to retrieve those extras.
+@param {Object {SipProfile}} localProfile the SIP profile to receive incoming calls for
+@param {Object {PendingIntent}} incomingCallPendingIntent When an incoming call is received, the
+      SIP service will call
+      {@link PendingIntent#send(Context, int, Intent)} to send back the
+      intent to the caller with {@link #INCOMING_CALL_RESULT_CODE} as the
+      result code and the intent to fill in the call ID and session
+      description information. It cannot be null.
+@param {Object {SipRegistrationListener}} listener to listen to registration events; can be null
+@see #getCallId
+@see #getOfferSessionDescription
+@see #takeAudioCall
+@throws NullPointerException if {@code incomingCallPendingIntent} is null
+@throws SipException if the profile contains incorrect settings or
+      calling the SIP service results in an error
+@see #isIncomingCallIntent
+@see #getCallId
+@see #getOfferSessionDescription
+*/
+open : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-setRegistrationListener'>/**Sets the listener to listen to registration events. No effect if the
+</span> profile has not been opened to receive calls (see
+ {@link #open(SipProfile, PendingIntent, android.net.sip.SipRegistrationListener)}).
+@param {String} localProfileUri the URI of the profile
+@param {Object {SipRegistrationListener}} listener to listen to registration events; can be null
+@throws SipException if calling the SIP service results in an error
+*/
+setRegistrationListener : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-close'>/**Closes the specified profile to not make/receive calls. All the resources
+</span> that were allocated to the profile are also released.
+@param {String} localProfileUri the URI of the profile to close
+@throws SipException if calling the SIP service results in an error
+*/
+close : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-isOpened'>/**Checks if the specified profile is opened in the SIP service for
+</span> making and/or receiving calls.
+@param {String} localProfileUri the URI of the profile in question
+@return {Boolean} true if the profile is enabled to receive calls
+@throws SipException if calling the SIP service results in an error
+*/
+isOpened : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-isRegistered'>/**Checks if the SIP service has successfully registered the profile to the
+</span> SIP provider (specified in the profile) for receiving calls. Returning
+ true from this method also implies the profile is opened
+ ({@link #isOpened}).
+@param {String} localProfileUri the URI of the profile in question
+@return {Boolean} true if the profile is registered to the SIP provider; false if
+        the profile has not been opened in the SIP service or the SIP
+        service has not yet successfully registered the profile to the SIP
+        provider
+@throws SipException if calling the SIP service results in an error
+*/
+isRegistered : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-makeAudioCall'>/**Creates a {@link android.net.sip.SipAudioCall} to make a call. The attempt will be timed
+</span> out if the call is not established within {@code timeout} seconds and
+ {@link SipAudioCall.Listener#onError onError(SipAudioCall, android.net.sip.SipErrorCode.TIME_OUT, String)}
+ will be called.
+@param {Object {SipProfile}} localProfile the SIP profile to make the call from
+@param {Object {SipProfile}} peerProfile the SIP profile to make the call to
+@param {Object {SipAudioCall.Listener}} listener to listen to the call events from {@link SipAudioCall};
+      can be null
+@param {Number} timeout the timeout value in seconds. Default value (defined by
+        SIP protocol) is used if {@code timeout} is zero or negative.
+@return {Object {android.net.sip.SipAudioCall}} a {@link SipAudioCall} object
+@throws SipException if calling the SIP service results in an error or
+      VOIP API is not supported by the device
+@see SipAudioCall.Listener#onError
+@see #isVoipSupported
+*/
+makeAudioCall : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-makeAudioCall'>/**Creates a {@link android.net.sip.SipAudioCall} to make an audio call. The attempt will be
+</span> timed out if the call is not established within {@code timeout} seconds
+ and
+ {@link SipAudioCall.Listener#onError onError(SipAudioCall, android.net.sip.SipErrorCode.TIME_OUT, String)}
+ will be called.
+@param {String} localProfileUri URI of the SIP profile to make the call from
+@param {String} peerProfileUri URI of the SIP profile to make the call to
+@param {Object {SipAudioCall.Listener}} listener to listen to the call events from {@link SipAudioCall};
+      can be null
+@param {Number} timeout the timeout value in seconds. Default value (defined by
+        SIP protocol) is used if {@code timeout} is zero or negative.
+@return {Object {android.net.sip.SipAudioCall}} a {@link SipAudioCall} object
+@throws SipException if calling the SIP service results in an error or
+      VOIP API is not supported by the device
+@see SipAudioCall.Listener#onError
+@see #isVoipSupported
+*/
+makeAudioCall : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-takeAudioCall'>/**Creates a {@link android.net.sip.SipAudioCall} to take an incoming call. Before the call
+</span> is returned, the listener will receive a
+ {@link android.net.sip.SipAudioCall.Listener#onRinging}
+ callback.
+@param {Object {Intent}} incomingCallIntent the incoming call broadcast intent
+@param {Object {SipAudioCall.Listener}} listener to listen to the call events from {@link SipAudioCall};
+      can be null
+@return {Object {android.net.sip.SipAudioCall}} a {@link SipAudioCall} object
+@throws SipException if calling the SIP service results in an error
+*/
+takeAudioCall : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-isIncomingCallIntent'>/**Checks if the intent is an incoming call broadcast intent.
+</span>@param {Object {Intent}} intent the intent in question
+@return {Boolean} true if the intent is an incoming call broadcast intent
+*/
+isIncomingCallIntent : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-getCallId'>/**Gets the call ID from the specified incoming call broadcast intent.
+</span>@param {Object {Intent}} incomingCallIntent the incoming call broadcast intent
+@return {String} the call ID or null if the intent does not contain it
+*/
+getCallId : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-getOfferSessionDescription'>/**Gets the offer session description from the specified incoming call
+</span> broadcast intent.
+@param {Object {Intent}} incomingCallIntent the incoming call broadcast intent
+@return {String} the offer session description or null if the intent does not
+      have it
+*/
+getOfferSessionDescription : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-createIncomingCallBroadcast'>/**Creates an incoming call broadcast intent.
+</span>@param {String} callId the call ID of the incoming call
+@param {String} sessionDescription the session description of the incoming call
+@return {Object {android.content.Intent}} the incoming call intent
+@hide 
+*/
+createIncomingCallBroadcast : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-register'>/**Manually registers the profile to the corresponding SIP provider for
+</span> receiving calls.
+ {@link #open(SipProfile, PendingIntent, android.net.sip.SipRegistrationListener)} is
+ still needed to be called at least once in order for the SIP service to
+ notify the caller with the {@link android.app.PendingIntent} when an incoming call is
+ received.
+@param {Object {SipProfile}} localProfile the SIP profile to register with
+@param {Number} expiryTime registration expiration time (in seconds)
+@param {Object {SipRegistrationListener}} listener to listen to the registration events
+@throws SipException if calling the SIP service results in an error
+*/
+register : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-unregister'>/**Manually unregisters the profile from the corresponding SIP provider for
+</span> stop receiving further calls. This may interference with the auto
+ registration process in the SIP service if the auto-registration option
+ in the profile is enabled.
+@param {Object {SipProfile}} localProfile the SIP profile to register with
+@param {Object {SipRegistrationListener}} listener to listen to the registration events
+@throws SipException if calling the SIP service results in an error
+*/
+unregister : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-getSessionFor'>/**Gets the {@link android.net.sip.SipSession} that handles the incoming call. For audio
+</span> calls, consider to use {@link android.net.sip.SipAudioCall} to handle the incoming call.
+ See {@link #takeAudioCall}. Note that the method may be called only once
+ for the same intent. For subsequent calls on the same intent, the method
+ returns null.
+@param {Object {Intent}} incomingCallIntent the incoming call broadcast intent
+@return {Object {android.net.sip.SipSession}} the session object that handles the incoming call
+*/
+getSessionFor : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-createSipSession'>/**Creates a {@link android.net.sip.SipSession} with the specified profile. Use other
+</span> methods, if applicable, instead of interacting with {@link android.net.sip.SipSession}
+ directly.
+@param {Object {SipProfile}} localProfile the SIP profile the session is associated with
+@param {Object {SipSession.Listener}} listener to listen to SIP session events
+*/
+createSipSession : function(  ) {},
+
+<span id='android-net-sip-SipManager-method-getListOfProfiles'>/**Gets the list of profiles hosted by the SIP service. The user information
+</span> (username, password and display name) are crossed out.
+@hide 
+*/
+getListOfProfiles : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

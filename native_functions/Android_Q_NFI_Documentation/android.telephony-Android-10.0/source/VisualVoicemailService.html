@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-VisualVoicemailService'>/**@class android.telephony.VisualVoicemailService
+</span>@extends android.app.Service
+
+ This service is implemented by dialer apps that wishes to handle OMTP or similar visual
+ voicemails. Telephony binds to this service when the cell service is first connected, a visual
+ voicemail SMS has been received, or when a SIM has been removed. Telephony will only bind to the
+ default dialer for such events (See {@link TelecomManager#getDefaultDialerPackage()}). The
+ {@link android.service.carrier.CarrierMessagingService} precedes the VisualVoicemailService in
+ the SMS filtering chain and may intercept the visual voicemail SMS before it reaches this
+ service.
+ &lt;p&gt;
+ To extend this class, The service must be declared in the manifest file with
+ the {@link android.Manifest.permission#BIND_VISUAL_VOICEMAIL_SERVICE} permission and include an
+ intent filter with the {@link #SERVICE_INTERFACE} action.
+ &lt;p&gt;
+ Below is an example manifest registration for a {@code VisualVoicemailService}.
+ &lt;pre&gt;
+ {@code
+ &lt;service android:name=&quot;your.package.YourVisualVoicemailServiceImplementation&quot;
+          android:permission=&quot;android.permission.BIND_VISUAL_VOICEMAIL_SERVICE&quot;&gt;
+      &lt;intent-filter&gt;
+          &lt;action android:name=&quot;android.telephony.VisualVoicemailService&quot;/&gt;
+      &lt;/intent-filter&gt;
+ &lt;/service&gt;
+ }
+ &lt;/pre&gt;
+*/
+var VisualVoicemailService = {
+
+<span id='android-telephony-VisualVoicemailService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>*/
+SERVICE_INTERFACE : &quot;android.telephony.VisualVoicemailService&quot;,
+<span id='android-telephony-VisualVoicemailService-property-MSG_ON_CELL_SERVICE_CONNECTED'>/** @hide
+</span>*/
+MSG_ON_CELL_SERVICE_CONNECTED : &quot;1&quot;,
+<span id='android-telephony-VisualVoicemailService-property-MSG_ON_SMS_RECEIVED'>/** @hide
+</span>*/
+MSG_ON_SMS_RECEIVED : &quot;2&quot;,
+<span id='android-telephony-VisualVoicemailService-property-MSG_ON_SIM_REMOVED'>/** @hide
+</span>*/
+MSG_ON_SIM_REMOVED : &quot;3&quot;,
+<span id='android-telephony-VisualVoicemailService-property-MSG_TASK_ENDED'>/** @hide
+</span>*/
+MSG_TASK_ENDED : &quot;4&quot;,
+<span id='android-telephony-VisualVoicemailService-property-MSG_TASK_STOPPED'>/** @hide
+</span>*/
+MSG_TASK_STOPPED : &quot;5&quot;,
+<span id='android-telephony-VisualVoicemailService-property-DATA_PHONE_ACCOUNT_HANDLE'>/** @hide
+</span>*/
+DATA_PHONE_ACCOUNT_HANDLE : &quot;data_phone_account_handle&quot;,
+<span id='android-telephony-VisualVoicemailService-property-DATA_SMS'>/** @hide
+</span>*/
+DATA_SMS : &quot;data_sms&quot;,
+<span id='android-telephony-VisualVoicemailService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-telephony-VisualVoicemailService-method-onCellServiceConnected'>/**Called when the cellular service is connected on a {@link PhoneAccountHandle} for the first
+</span> time, or when the carrier config has changed. It will not be called when the signal is lost
+ then restored.
+@param {Object {VisualVoicemailService.VisualVoicemailTask}} task The task representing this event. {@link VisualVoicemailTask#finish()} must be
+ called when the task is completed.
+@param {Object {PhoneAccountHandle}} phoneAccountHandle The {@link PhoneAccountHandle} triggering this event.
+*/
+onCellServiceConnected : function(  ) {},
+
+<span id='android-telephony-VisualVoicemailService-method-onSmsReceived'>/**Called when a SMS matching the {@link android.telephony.VisualVoicemailSmsFilterSettings} set by
+</span> {@link android.telephony.TelephonyManager#setVisualVoicemailSmsFilterSettings(VisualVoicemailSmsFilterSettings)
+ }
+ is received.
+@param {Object {VisualVoicemailService.VisualVoicemailTask}} task The task representing this event. {@link VisualVoicemailTask#finish()} must be
+ called when the task is completed.
+@param {Object {VisualVoicemailSms}} sms The content of the received SMS.
+*/
+onSmsReceived : function(  ) {},
+
+<span id='android-telephony-VisualVoicemailService-method-onSimRemoved'>/**Called when a SIM is removed.
+</span>@param {Object {VisualVoicemailService.VisualVoicemailTask}} task The task representing this event. {@link VisualVoicemailTask#finish()} must be
+ called when the task is completed.
+@param {Object {PhoneAccountHandle}} phoneAccountHandle The {@link PhoneAccountHandle} triggering this event.
+*/
+onSimRemoved : function(  ) {},
+
+<span id='android-telephony-VisualVoicemailService-method-onStopped'>/**Called before the system is about to terminate a task. The service should persist any
+</span> necessary data and call finish on the task immediately.
+*/
+onStopped : function(  ) {},
+
+<span id='android-telephony-VisualVoicemailService-method-setSmsFilterSettings'>/**Set the visual voicemail SMS filter settings for the VisualVoicemailService.
+</span> {@link #onSmsReceived(VisualVoicemailTask, android.telephony.VisualVoicemailSms)} will be called when
+ a SMS matching the settings is received. The caller should have
+ {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE} and implements a
+ VisualVoicemailService.
+ &lt;p&gt;
+ &lt;p&gt;Requires Permission:
+ {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
+@param {Object {Context}} phoneAccountHandle The account to apply the settings to.
+@param {Object {PhoneAccountHandle}} settings The settings for the filter, or {@code null} to disable the filter.
+@hide 
+*/
+setSmsFilterSettings : function(  ) {},
+
+<span id='android-telephony-VisualVoicemailService-method-sendVisualVoicemailSms'>/**Send a visual voicemail SMS. The caller must be the current default dialer.
+</span> &lt;p&gt;
+ &lt;p&gt;Requires Permission:
+ {@link android.Manifest.permission#SEND_SMS SEND_SMS}
+@param {Object {Context}} phoneAccountHandle The account to send the SMS with.
+@param {Object {PhoneAccountHandle}} number The destination number.
+@param {String} port The destination port for data SMS, or 0 for text SMS.
+@param {Number} text The message content. For data sms, it will be encoded as a UTF-8 byte stream.
+@param {String} sentIntent The sent intent passed to the {@link SmsManager}
+@throws SecurityException if the caller is not the current default dialer
+@see SmsManager#sendDataMessage(String, String, short, byte[], PendingIntent, PendingIntent)
+@see SmsManager#sendTextMessage(String, String, String, PendingIntent, PendingIntent)
+@hide 
+*/
+sendVisualVoicemailSms : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

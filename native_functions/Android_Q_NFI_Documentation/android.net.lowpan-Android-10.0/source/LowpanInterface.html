@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-lowpan-LowpanInterface'>/**@class android.net.lowpan.LowpanInterface
+</span>@extends java.lang.Object
+
+ Class for managing a specific Low-power Wireless Personal Area Network (LoWPAN) interface.
+
+ @hide
+*/
+var LowpanInterface = {
+
+<span id='android-net-lowpan-LowpanInterface-property-ROLE_DETACHED'>/**Detached role. The interface is not currently attached to a network. */
+</span>ROLE_DETACHED : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-ROLE_END_DEVICE'>/**End-device role. End devices do not route traffic for other nodes. */
+</span>ROLE_END_DEVICE : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-ROLE_ROUTER'>/**Router role. Routers help route traffic around the mesh network. */
+</span>ROLE_ROUTER : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-ROLE_SLEEPY_END_DEVICE'>/** Sleepy End-Device role.
+</span>
+ &lt;p&gt;End devices with this role are nominally asleep, waking up periodically to check in with
+ their parent to see if there are packets destined for them. Such devices are capable of
+ extraordinarilly low power consumption, but packet latency can be on the order of dozens of
+ seconds(depending on how the node is configured).
+*/
+ROLE_SLEEPY_END_DEVICE : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-ROLE_SLEEPY_ROUTER'>/** Sleepy-router role.
+</span>
+ &lt;p&gt;Routers with this role are nominally asleep, waking up periodically to check in with other
+ routers and their children.
+*/
+ROLE_SLEEPY_ROUTER : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-ROLE_LEADER'>/**TODO: doc */
+</span>ROLE_LEADER : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-ROLE_COORDINATOR'>/**TODO: doc */
+</span>ROLE_COORDINATOR : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-STATE_OFFLINE'>/** Offline state.
+</span>
+ &lt;p&gt;This is the initial state of the LoWPAN interface when the underlying driver starts. In
+ this state the NCP is idle and not connected to any network.
+
+ &lt;p&gt;This state can be explicitly entered by calling {@link #reset}(), {@link #leave}(), or
+ &lt;code&gt;setUp(false)&lt;/code&gt;, with the later two only working if we were not previously in the
+ {@link #STATE_FAULT} state.
+
+ @see #getState()
+ @see #STATE_FAULT
+*/
+STATE_OFFLINE : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-STATE_COMMISSIONING'>/** Commissioning state.
+</span>
+ &lt;p&gt;The interface enters this state after a call to {@link #startCommissioningSession}(). This
+ state may only be entered directly from the {@link #STATE_OFFLINE} state.
+
+ @see #startCommissioningSession()
+ @see #getState()
+ @hide
+*/
+STATE_COMMISSIONING : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-STATE_ATTACHING'>/** Attaching state.
+</span>
+ &lt;p&gt;The interface enters this state when it starts the process of trying to find other nodes
+ so that it can attach to any pre-existing network fragment, or when it is in the process of
+ calculating the optimal values for unspecified parameters when forming a new network.
+
+ &lt;p&gt;The interface may stay in this state for a prolonged period of time (or may spontaneously
+ enter this state from {@link #STATE_ATTACHED}) if the underlying network technology is
+ heirarchical (like ZigBeeIP) or if the device role is that of an &quot;end-device&quot; ({@link #ROLE_END_DEVICE} or {@link #ROLE_SLEEPY_END_DEVICE}). This is because such roles cannot
+ create their own network fragments.
+
+ @see #STATE_ATTACHED
+ @see #getState()
+*/
+STATE_ATTACHING : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-STATE_ATTACHED'>/** Attached state.
+</span>
+ &lt;p&gt;The interface enters this state from {@link #STATE_ATTACHING} once it is actively
+ participating on a network fragment.
+
+ @see #STATE_ATTACHING
+ @see #getState()
+*/
+STATE_ATTACHED : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-STATE_FAULT'>/** Fault state.
+</span>
+ &lt;p&gt;The interface will enter this state when the driver has detected some sort of problem from
+ which it was not immediately able to recover.
+
+ &lt;p&gt;This state can be entered spontaneously from any other state. Calling {@link #reset} will
+ cause the device to return to the {@link #STATE_OFFLINE} state.
+
+ @see #getState
+ @see #STATE_OFFLINE
+*/
+STATE_FAULT : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-NETWORK_TYPE_THREAD_V1'>/** Network type for Thread 1.x networks.
+</span>
+ @see android.net.lowpan.LowpanIdentity#getType
+ @see #getLowpanIdentity
+ @hide
+*/
+NETWORK_TYPE_THREAD_V1 : &quot;null&quot;,
+<span id='android-net-lowpan-LowpanInterface-property-EMPTY_PARTITION_ID'>/***/
+</span>EMPTY_PARTITION_ID : &quot;&quot;,
+<span id='android-net-lowpan-LowpanInterface-method-getService'>/**Returns the ILowpanInterface object associated with this interface.
+</span>@hide 
+*/
+getService : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-form'>/**Form a new network with the given network information optional credential. Unspecified fields
+</span> in the network information will be filled in with reasonable values. If the network
+ credential is unspecified, one will be generated automatically.
+
+ &lt;p&gt;This method will block until either the network was successfully formed or an error
+ prevents the network form being formed.
+
+ &lt;p&gt;Upon success, the interface will be up and attached to the newly formed network.
+@see #join(LowpanProvision)
+*/
+form : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-join'>/**Attempts to join a new network with the given network information. This method will block
+</span> until either the network was successfully joined or an error prevented the network from being
+ formed. Upon success, the interface will be up and attached to the newly joined network.
+
+ &lt;p&gt;Note that “joining” is distinct from “attaching”: Joining requires at least one other peer
+ device to be present in order for the operation to complete successfully.
+*/
+join : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-attach'>/**Attaches to the network described by identity and credential. This is similar to {@link #join}, except that (assuming the identity and credential are valid) it will always succeed
+</span> and provision the interface, even if there are no peers nearby.
+
+ &lt;p&gt;This method will block execution until the operation has completed.
+*/
+attach : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-leave'>/**Bring down the network interface and forget all non-volatile details about the current
+</span> network.
+
+ &lt;p&gt;This method will block execution until the operation has completed.
+*/
+leave : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-startCommissioningSession'>/**Start a new commissioning session. Will fail if the interface is attached to a network or if
+</span> the interface is disabled.
+*/
+startCommissioningSession : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-reset'>/**Reset this network interface as if it has been power cycled. Will bring the network interface
+</span> down if it was previously up. Will not erase any non-volatile settings.
+
+ &lt;p&gt;This method will block execution until the operation has completed.
+@hide 
+*/
+reset : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getName'>/**Returns the name of this network interface.
+</span>*/
+getName : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-isEnabled'>/**Indicates if the interface is enabled or disabled.
+</span>@see #setEnabled
+@see android.net.lowpan.LowpanException#LOWPAN_DISABLED
+*/
+isEnabled : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-setEnabled'>/**Enables or disables the LoWPAN interface. When disabled, the interface is put into a
+</span> low-power state and all commands that require the NCP to be queried will fail with {@link android.net.lowpan.LowpanException#LOWPAN_DISABLED}.
+@see #isEnabled
+@see android.net.lowpan.LowpanException#LOWPAN_DISABLED
+@hide 
+*/
+setEnabled : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-isUp'>/**Indicates if the network interface is up or down.
+</span>@hide 
+*/
+isUp : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-isConnected'>/**Indicates if there is at least one peer in range.
+</span>@return {Boolean} &lt;code&gt;true&lt;/code&gt; if we have at least one other peer in range, &lt;code&gt;false&lt;/code&gt;
+     otherwise.
+*/
+isConnected : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-isCommissioned'>/**Indicates if this interface is currently commissioned onto an existing network. If the
+</span> interface is commissioned, the interface may be brought up using setUp().
+*/
+isCommissioned : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getState'>/**Get interface state
+</span>
+ &lt;h3&gt;State Diagram&lt;/h3&gt;
+
+ &lt;img src=&quot;LowpanInterface-1.png&quot; /&gt;
+@return {String} The current state of the interface.
+@see #STATE_OFFLINE
+@see #STATE_COMMISSIONING
+@see #STATE_ATTACHING
+@see #STATE_ATTACHED
+@see #STATE_FAULT
+*/
+getState : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getPartitionId'>/**Get network partition/fragment identifier.
+</span>*/
+getPartitionId : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getLowpanIdentity'>/**TODO: doc
+</span>*/
+getLowpanIdentity : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getRole'>/**TODO: doc
+</span>*/
+getRole : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getLowpanCredential'>/**TODO: doc
+</span>*/
+getLowpanCredential : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getSupportedNetworkTypes'>/**
+</span>*/
+getSupportedNetworkTypes : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getSupportedChannels'>/**
+</span>*/
+getSupportedChannels : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-registerCallback'>/**Registers a subclass of {@link android.net.lowpan.LowpanInterface.Callback} to receive events.
+</span>@param {Object {LowpanInterface.Callback}} cb Subclass of {@link LowpanInterface.Callback} which will receive events.
+@param {Object {Handler}} handler If not &lt;code&gt;null&lt;/code&gt;, events will be dispatched via the given handler
+     object. If &lt;code&gt;null&lt;/code&gt;, the thread upon which events will be dispatched is
+     unspecified.
+@see #registerCallback(Callback)
+@see #unregisterCallback(Callback)
+*/
+registerCallback : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-registerCallback'>/**Registers a subclass of {@link android.net.lowpan.LowpanInterface.Callback} to receive events.
+</span>
+ &lt;p&gt;The thread upon which events will be dispatched is unspecified.
+@param {Object {LowpanInterface.Callback}} cb Subclass of {@link LowpanInterface.Callback} which will receive events.
+@see #registerCallback(Callback, Handler)
+@see #unregisterCallback(Callback)
+*/
+registerCallback : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-unregisterCallback'>/**Unregisters a previously registered callback class.
+</span>@param {Object {LowpanInterface.Callback}} cb Subclass of {@link LowpanInterface.Callback} which was previously registered to
+     receive events.
+@see #registerCallback(Callback, Handler)
+@see #registerCallback(Callback)
+*/
+unregisterCallback : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-createScanner'>/**Creates a new {@link android.net.lowpan.LowpanScanner} object for this interface.
+</span>
+ &lt;p&gt;This method allocates a new unique object for each call.
+@see android.net.lowpan.LowpanScanner
+*/
+createScanner : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getLinkAddresses'>/**Makes a copy of the internal list of LinkAddresses.
+</span>@hide 
+*/
+getLinkAddresses : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-getLinkNetworks'>/**Makes a copy of the internal list of networks reachable on via this link.
+</span>@hide 
+*/
+getLinkNetworks : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-addOnMeshPrefix'>/**Advertise the given IP prefix as an on-mesh prefix.
+</span>@hide 
+*/
+addOnMeshPrefix : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-removeOnMeshPrefix'>/**Remove an IP prefix previously advertised by this device from the list of advertised on-mesh
+</span> prefixes.
+@hide 
+*/
+removeOnMeshPrefix : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-addExternalRoute'>/**Advertise this device to other devices on the mesh network as having a specific route to the
+</span> given network. This device will then receive forwarded traffic for that network.
+@hide 
+*/
+addExternalRoute : function(  ) {},
+
+<span id='android-net-lowpan-LowpanInterface-method-removeExternalRoute'>/**Revoke a previously advertised specific route to the given network.
+</span>@hide 
+*/
+removeExternalRoute : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

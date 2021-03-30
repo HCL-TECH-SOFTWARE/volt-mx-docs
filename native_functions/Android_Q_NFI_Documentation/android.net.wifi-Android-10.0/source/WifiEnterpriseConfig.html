@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-WifiEnterpriseConfig'>/**@class android.net.wifi.WifiEnterpriseConfig
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Enterprise configuration details for Wi-Fi. Stores details about the EAP method
+ and any associated credentials.
+*/
+var WifiEnterpriseConfig = {
+
+<span id='android-net-wifi-WifiEnterpriseConfig-property-EMPTY_VALUE'>/**@hide */
+</span>EMPTY_VALUE : &quot;NULL&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-EAP_KEY'>/**@hide */
+</span>EAP_KEY : &quot;eap&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-PHASE2_KEY'>/**@hide */
+</span>PHASE2_KEY : &quot;phase2&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-IDENTITY_KEY'>/**@hide */
+</span>IDENTITY_KEY : &quot;identity&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-ANON_IDENTITY_KEY'>/**@hide */
+</span>ANON_IDENTITY_KEY : &quot;anonymous_identity&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-PASSWORD_KEY'>/**@hide */
+</span>PASSWORD_KEY : &quot;password&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-SUBJECT_MATCH_KEY'>/**@hide */
+</span>SUBJECT_MATCH_KEY : &quot;subject_match&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-ALTSUBJECT_MATCH_KEY'>/**@hide */
+</span>ALTSUBJECT_MATCH_KEY : &quot;altsubject_match&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-DOM_SUFFIX_MATCH_KEY'>/**@hide */
+</span>DOM_SUFFIX_MATCH_KEY : &quot;domain_suffix_match&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-OPP_KEY_CACHING'>/**@hide */
+</span>OPP_KEY_CACHING : &quot;proactive_key_caching&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-ENGINE_ID_KEYSTORE'>/** String representing the keystore OpenSSL ENGINE's ID.
+</span> @hide
+*/
+ENGINE_ID_KEYSTORE : &quot;keystore&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-KEYSTORE_URI'>/** String representing the keystore URI used for wpa_supplicant.
+</span> @hide
+*/
+KEYSTORE_URI : &quot;keystore://&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-KEYSTORES_URI'>/** String representing the keystore URI used for wpa_supplicant,
+</span> Unlike #KEYSTORE_URI, this supports a list of space-delimited aliases
+ @hide
+*/
+KEYSTORES_URI : &quot;keystores://&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-ENGINE_ENABLE'>/** String to set the engine value to when it should be enabled.
+</span> @hide
+*/
+ENGINE_ENABLE : &quot;1&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-ENGINE_DISABLE'>/** String to set the engine value to when it should be disabled.
+</span> @hide
+*/
+ENGINE_DISABLE : &quot;0&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-CA_CERT_PREFIX'>/**@hide */
+</span>CA_CERT_PREFIX : &quot;keystore://CACERT_&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-CLIENT_CERT_PREFIX'>/**@hide */
+</span>CLIENT_CERT_PREFIX : &quot;keystore://USRCERT_&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-CLIENT_CERT_KEY'>/**@hide */
+</span>CLIENT_CERT_KEY : &quot;client_cert&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-CA_CERT_KEY'>/**@hide */
+</span>CA_CERT_KEY : &quot;ca_cert&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-CA_PATH_KEY'>/**@hide */
+</span>CA_PATH_KEY : &quot;ca_path&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-ENGINE_KEY'>/**@hide */
+</span>ENGINE_KEY : &quot;engine&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-ENGINE_ID_KEY'>/**@hide */
+</span>ENGINE_ID_KEY : &quot;engine_id&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-PRIVATE_KEY_ID_KEY'>/**@hide */
+</span>PRIVATE_KEY_ID_KEY : &quot;key_id&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-REALM_KEY'>/**@hide */
+</span>REALM_KEY : &quot;realm&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-PLMN_KEY'>/**@hide */
+</span>PLMN_KEY : &quot;plmn&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-CA_CERT_ALIAS_DELIMITER'>/**@hide */
+</span>CA_CERT_ALIAS_DELIMITER : &quot; &quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-wifi-WifiEnterpriseConfig-method-copyFromExternal'>/**Copy fields from the provided external WifiEnterpriseConfig.
+</span> This is needed to handle the WifiEnterpriseConfig objects which were sent by apps with the
+ password field masked.
+@param {Object {WifiEnterpriseConfig}} externalConfig External WifiEnterpriseConfig object.
+@param {String} mask String mask to compare against.
+@hide 
+*/
+copyFromExternal : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-saveToSupplicant'>/**Internal use only; supply field values to wpa_supplicant config.  The configuration
+</span> process aborts on the first failed call on {@code saver}.
+@param {Object {WifiEnterpriseConfig.SupplicantSaver}} saver proxy for setting configuration in wpa_supplciant
+@return {Boolean} whether the save succeeded on all attempts
+@hide 
+*/
+saveToSupplicant : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-loadFromSupplicant'>/**Internal use only; retrieve configuration from wpa_supplicant config.
+</span>@param {Object {WifiEnterpriseConfig.SupplicantLoader}} loader proxy for retrieving configuration keys from wpa_supplicant
+@hide 
+*/
+loadFromSupplicant : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setEapMethod'>/**Set the EAP authentication method.
+</span>@param {Number} eapMethod is one {@link Eap#PEAP}, {@link Eap#TLS}, {@link Eap#TTLS} or
+                   {@link Eap#PWD}
+@throws IllegalArgumentException on an invalid eap method
+*/
+setEapMethod : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getEapMethod'>/**Get the eap method.
+</span>@return {Number} eap method configured
+*/
+getEapMethod : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setPhase2Method'>/**Set Phase 2 authentication method. Sets the inner authentication method to be used in
+</span> phase 2 after setting up a secure channel
+@param {Number} phase2Method is the inner authentication method and can be one of {@link Phase2#NONE},
+                     {@link Phase2#PAP}, {@link Phase2#MSCHAP}, {@link Phase2#MSCHAPV2},
+                     {@link Phase2#GTC}
+@throws IllegalArgumentException on an invalid phase2 method
+*/
+setPhase2Method : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getPhase2Method'>/**Get the phase 2 authentication method.
+</span>@return {Number} a phase 2 method defined at {@link Phase2}
+*/
+getPhase2Method : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setIdentity'>/**Set the identity
+</span>@param {String} identity
+*/
+setIdentity : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getIdentity'>/**Get the identity
+</span>@return {String} the identity
+*/
+getIdentity : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setAnonymousIdentity'>/**Set anonymous identity. This is used as the unencrypted identity with
+</span> certain EAP types
+@param {String} anonymousIdentity the anonymous identity
+*/
+setAnonymousIdentity : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getAnonymousIdentity'>/**Get the anonymous identity
+</span>@return {String} anonymous identity
+*/
+getAnonymousIdentity : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setPassword'>/**Set the password.
+</span>@param {String} password the password
+*/
+setPassword : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getPassword'>/**Get the password.
+</span>
+ Returns locally set password value. For networks fetched from
+ framework, returns &quot;*&quot;.
+*/
+getPassword : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-encodeCaCertificateAlias'>/**Encode a CA certificate alias so it does not contain illegal character.
+</span>@hide 
+*/
+encodeCaCertificateAlias : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-decodeCaCertificateAlias'>/**Decode a previously-encoded CA certificate alias.
+</span>@hide 
+*/
+decodeCaCertificateAlias : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setCaCertificateAlias'>/**Set CA certificate alias.
+</span>
+ &lt;p&gt; See the {@link android.security.KeyChain} for details on installing or choosing
+ a certificate
+ &lt;/p&gt;
+@param {String} alias identifies the certificate
+@hide 
+*/
+setCaCertificateAlias : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setCaCertificateAliases'>/**Set CA certificate aliases. When creating installing the corresponding certificate to
+</span> the keystore, please use alias encoded by {@link #encodeCaCertificateAlias}(String).
+
+ &lt;p&gt; See the {@link android.security.KeyChain} for details on installing or choosing
+ a certificate.
+ &lt;/p&gt;
+@param {Object {java.lang.String[]}} aliases identifies the certificate
+@hide 
+*/
+setCaCertificateAliases : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getCaCertificateAlias'>/**Get CA certificate alias
+</span>@return {String} alias to the CA certificate
+@hide 
+*/
+getCaCertificateAlias : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getCaCertificateAliases'>/**Get CA certificate aliases
+</span>@return {String} alias to the CA certificate
+@hide 
+*/
+getCaCertificateAliases : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setCaCertificate'>/**Specify a X.509 certificate that identifies the server.
+</span>
+ &lt;p&gt;A default name is automatically assigned to the certificate and used
+ with this configuration. The framework takes care of installing the
+ certificate when the config is saved and removing the certificate when
+ the config is removed.
+@param {Object {X509Certificate}} cert X.509 CA certificate
+@throws IllegalArgumentException if not a CA certificate
+*/
+setCaCertificate : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getCaCertificate'>/**Get CA certificate. If multiple CA certificates are configured previously,
+</span> return the first one.
+@return {Object {java.security.cert.X509Certificate}} X.509 CA certificate
+*/
+getCaCertificate : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setCaCertificates'>/**Specify a list of X.509 certificates that identifies the server. The validation
+</span> passes if the CA of server certificate matches one of the given certificates.
+
+ &lt;p&gt;Default names are automatically assigned to the certificates and used
+ with this configuration. The framework takes care of installing the
+ certificates when the config is saved and removing the certificates when
+ the config is removed.
+@param {Object {java.security.cert.X509Certificate[]}} certs X.509 CA certificates
+@throws IllegalArgumentException if any of the provided certificates is
+     not a CA certificate
+*/
+setCaCertificates : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getCaCertificates'>/**Get CA certificates.
+</span>*/
+getCaCertificates : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-resetCaCertificate'>/**
+</span>@hide 
+*/
+resetCaCertificate : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setCaPath'>/**Set the ca_path directive on wpa_supplicant.
+</span>
+ From wpa_supplicant documentation:
+
+ Directory path for CA certificate files (PEM). This path may contain
+ multiple CA certificates in OpenSSL format. Common use for this is to
+ point to system trusted CA list which is often installed into directory
+ like /etc/ssl/certs. If configured, these certificates are added to the
+ list of trusted CAs. ca_cert may also be included in that case, but it is
+ not required.
+@param {String} domain The path for CA certificate files
+@hide 
+*/
+setCaPath : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getCaPath'>/**Get the domain_suffix_match value. See setDomSuffixMatch.
+</span>@return {String} The path for CA certificate files.
+@hide 
+*/
+getCaPath : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setClientCertificateAlias'>/**Set Client certificate alias.
+</span>
+ &lt;p&gt; See the {@link android.security.KeyChain} for details on installing or choosing
+ a certificate
+ &lt;/p&gt;
+@param {String} alias identifies the certificate
+@hide 
+*/
+setClientCertificateAlias : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getClientCertificateAlias'>/**Get client certificate alias
+</span>@return {String} alias to the client certificate
+@hide 
+*/
+getClientCertificateAlias : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setClientKeyEntry'>/**Specify a private key and client certificate for client authorization.
+</span>
+ &lt;p&gt;A default name is automatically assigned to the key entry and used
+ with this configuration.  The framework takes care of installing the
+ key entry when the config is saved and removing the key entry when
+ the config is removed.
+@param {Object {PrivateKey}} privateKey a PrivateKey instance for the end certificate.
+@param {Object {X509Certificate}} clientCertificate an X509Certificate representing the end certificate.
+@throws IllegalArgumentException for an invalid key or certificate.
+*/
+setClientKeyEntry : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setClientKeyEntryWithCertificateChain'>/**Specify a private key and client certificate chain for client authorization.
+</span>
+ &lt;p&gt;A default name is automatically assigned to the key entry and used
+ with this configuration.  The framework takes care of installing the
+ key entry when the config is saved and removing the key entry when
+ the config is removed.
+@param {Object {PrivateKey}} privateKey a PrivateKey instance for the end certificate.
+@param {Object {java.security.cert.X509Certificate[]}} clientCertificateChain an array of X509Certificate instances which starts with
+         end certificate and continues with additional CA certificates necessary to
+         link the end certificate with some root certificate known by the authenticator.
+@throws IllegalArgumentException for an invalid key or certificate.
+*/
+setClientKeyEntryWithCertificateChain : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getClientCertificate'>/**Get client certificate
+</span>@return {Object {java.security.cert.X509Certificate}} X.509 client certificate
+*/
+getClientCertificate : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getClientCertificateChain'>/**Get the complete client certificate chain in the same order as it was last supplied.
+</span>
+ &lt;p&gt;If the chain was last supplied by a call to
+ {@link #setClientKeyEntry(java.security.PrivateKey, java.security.cert.X509Certificate)}
+ with a non-null * certificate instance, a single-element array containing the certificate
+ will be * returned. If {@link #setClientKeyEntryWithCertificateChain(
+ java.security.PrivateKey, java.security.cert.X509Certificate[])} was last called with a
+ non-empty array, this array will be returned in the same order as it was supplied.
+ Otherwise, {@code null} will be returned.
+@return {Object {java.security.cert.X509Certificate}} X.509 client certificates
+*/
+getClientCertificateChain : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-resetClientKeyEntry'>/**
+</span>@hide 
+*/
+resetClientKeyEntry : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getClientPrivateKey'>/**
+</span>@hide 
+*/
+getClientPrivateKey : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setSubjectMatch'>/**Set subject match (deprecated). This is the substring to be matched against the subject of
+</span> the authentication server certificate.
+@param {String} subjectMatch substring to be matched
+@deprecated in favor of altSubjectMatch
+*/
+setSubjectMatch : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getSubjectMatch'>/**Get subject match (deprecated)
+</span>@return {String} the subject match string
+@deprecated in favor of altSubjectMatch
+*/
+getSubjectMatch : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setAltSubjectMatch'>/**Set alternate subject match. This is the substring to be matched against the
+</span> alternate subject of the authentication server certificate.
+@param {String} altSubjectMatch substring to be matched, for example
+                     DNS:server.example.com;EMAIL:server@example.com
+*/
+setAltSubjectMatch : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getAltSubjectMatch'>/**Get alternate subject match
+</span>@return {String} the alternate subject match string
+*/
+getAltSubjectMatch : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setDomainSuffixMatch'>/**Set the domain_suffix_match directive on wpa_supplicant. This is the parameter to use
+</span> for Hotspot 2.0 defined matching of AAA server certs per WFA HS2.0 spec, section 7.3.3.2,
+ second paragraph.
+
+ &lt;p&gt;From wpa_supplicant documentation:
+ &lt;p&gt;Constraint for server domain name. If set, this FQDN is used as a suffix match requirement
+ for the AAAserver certificate in SubjectAltName dNSName element(s). If a matching dNSName is
+ found, this constraint is met.
+ &lt;p&gt;Suffix match here means that the host/domain name is compared one label at a time starting
+ from the top-level domain and all the labels in domain_suffix_match shall be included in the
+ certificate. The certificate may include additional sub-level labels in addition to the
+ required labels.
+ &lt;p&gt;More than one match string can be provided by using semicolons to separate the strings
+ (e.g., example.org;example.com). When multiple strings are specified, a match with any one of
+ the values is considered a sufficient match for the certificate, i.e., the conditions are
+ ORed ogether.
+ &lt;p&gt;For example, domain_suffix_match=example.com would match test.example.com but would not
+ match test-example.com.
+@param {String} domain The domain value
+*/
+setDomainSuffixMatch : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getDomainSuffixMatch'>/**Get the domain_suffix_match value. See setDomSuffixMatch.
+</span>@return {String} The domain value.
+*/
+getDomainSuffixMatch : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setRealm'>/**Set realm for Passpoint credential; realm identifies a set of networks where your
+</span> Passpoint credential can be used
+@param {String} realm the realm
+*/
+setRealm : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getRealm'>/**Get realm for Passpoint credential; see {@link #setRealm}(String) for more information
+</span>@return {String} the realm
+*/
+getRealm : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setPlmn'>/**Set plmn (Public Land Mobile Network) of the provider of Passpoint credential
+</span>@param {String} plmn the plmn value derived from mcc (mobile country code) &amp; mnc (mobile network code)
+*/
+setPlmn : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getPlmn'>/**Get plmn (Public Land Mobile Network) for Passpoint credential; see {@link #setPlmn
+</span> (String)} for more information
+@return {String} the plmn
+*/
+getPlmn : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getKeyId'>/**See {@link android.net.wifi.WifiConfiguration#getKeyIdForCredentials} @hide
+</span>*/
+getKeyId : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-getFieldValue'>/**Returns the field value for the key.
+</span>@param {String} key into the hash
+@return {String} value
+@hide 
+*/
+getFieldValue : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-setFieldValue'>/**Set a value at key
+</span>@param {String} key into the hash
+@param {String} value to be set
+@hide 
+*/
+setFieldValue : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-isAppInstalledDeviceKeyAndCert'>/**Check if certificate was installed by an app, or manually (not by an app). If true,
+</span> certificate and keys will be removed from key storage when this network is removed. If not,
+ then certificates and keys remain persistent until the user manually removes them.
+@return {Boolean} true if certificate was installed by an app, false if certificate was installed
+ manually by the user.
+@hide 
+*/
+isAppInstalledDeviceKeyAndCert : function(  ) {},
+
+<span id='android-net-wifi-WifiEnterpriseConfig-method-isAppInstalledCaCert'>/**Check if CA certificate was installed by an app, or manually (not by an app). If true,
+</span> CA certificate will be removed from key storage when this network is removed. If not,
+ then certificates and keys remain persistent until the user manually removes them.
+@return {Boolean} true if CA certificate was installed by an app, false if CA certificate was installed
+ manually by the user.
+@hide 
+*/
+isAppInstalledCaCert : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

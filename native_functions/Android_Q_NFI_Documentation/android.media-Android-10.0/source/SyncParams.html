@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-SyncParams'>/**@class android.media.SyncParams
+</span>@extends java.lang.Object
+
+ Structure for common A/V sync params.
+
+ Used by {@link android.media.MediaSync} {link MediaSync#getSyncParams()} and
+ {link MediaSync#setSyncParams(SyncParams)}
+ to control A/V sync behavior.
+ &lt;p&gt; &lt;strong&gt;audio adjust mode:&lt;/strong&gt;
+ select handling of audio track when changing playback speed due to sync.
+ &lt;ul&gt;
+ &lt;li&gt; {@link android.media.SyncParams#AUDIO_ADJUST_MODE_DEFAULT}:
+   System will determine best handling. &lt;/li&gt;
+ &lt;li&gt; {@link android.media.SyncParams#AUDIO_ADJUST_MODE_STRETCH}:
+   Change the speed of audio playback without altering its pitch.&lt;/li&gt;
+ &lt;li&gt; {@link android.media.SyncParams#AUDIO_ADJUST_MODE_RESAMPLE}:
+   Change the speed of audio playback by resampling the audio.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; &lt;strong&gt;sync source:&lt;/strong&gt; select
+ clock source for sync.
+ &lt;ul&gt;
+ &lt;li&gt; {@link android.media.SyncParams#SYNC_SOURCE_DEFAULT}:
+   System will determine best selection.&lt;/li&gt;
+ &lt;li&gt; {@link android.media.SyncParams#SYNC_SOURCE_SYSTEM_CLOCK}:
+   Use system clock for sync source.&lt;/li&gt;
+ &lt;li&gt; {@link android.media.SyncParams#SYNC_SOURCE_AUDIO}:
+   Use audio track for sync source.&lt;/li&gt;
+ &lt;li&gt; {@link android.media.SyncParams#SYNC_SOURCE_VSYNC}:
+   Syncronize media to vsync.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; &lt;strong&gt;tolerance:&lt;/strong&gt; specifies the amount of allowed playback rate
+ change to keep media in sync with the sync source. The handling of this depends
+ on the sync source, but must not be negative, and must be less than one.
+ &lt;p&gt; &lt;strong&gt;frameRate:&lt;/strong&gt; initial hint for video frame rate. Used when
+ sync source is vsync. Negative values can be used to clear a previous hint.
+*/
+var SyncParams = {
+
+<span id='android-media-SyncParams-property-SYNC_SOURCE_DEFAULT'>/** Use the default sync source (default). If media has video, the sync renders to a
+</span> surface that directly renders to a display, and tolerance is non zero (e.g. not
+ less than 0.001) vsync source is used for clock source.  Otherwise, if media has
+ audio, audio track is used. Finally, if media has no audio, system clock is used.
+*/
+SYNC_SOURCE_DEFAULT : &quot;0&quot;,
+<span id='android-media-SyncParams-property-SYNC_SOURCE_SYSTEM_CLOCK'>/** Use system monotonic clock for sync source.
+</span>
+ @see System#nanoTime
+*/
+SYNC_SOURCE_SYSTEM_CLOCK : &quot;1&quot;,
+<span id='android-media-SyncParams-property-SYNC_SOURCE_AUDIO'>/** Use audio track for sync source. This requires audio data and an audio track.
+</span>
+ @see android.media.AudioTrack#getTimestamp(android.media.AudioTimestamp)
+*/
+SYNC_SOURCE_AUDIO : &quot;2&quot;,
+<span id='android-media-SyncParams-property-SYNC_SOURCE_VSYNC'>/** Use vsync as the sync source. This requires video data and an output surface that
+</span> directly renders to the display, e.g. {@link android.view.SurfaceView}
+ &lt;p&gt;
+ This mode allows smoother playback experience by adjusting the playback speed
+ to match the vsync rate, e.g. playing 30fps content on a 59.94Hz display.
+ When using this mode, the tolerance should be set to greater than 0 (e.g. at least
+ 1/1000), so that the playback speed can actually be adjusted.
+ &lt;p&gt;
+ This mode can also be used to play 25fps content on a 60Hz display using
+ a 2:3 pulldown (basically playing the content at 24fps), which results on
+ better playback experience on most devices. In this case the tolerance should be
+ at least (1/24).
+
+ @see android.view.Choreographer.FrameCallback#doFrame
+ @see android.view.Display#getAppVsyncOffsetNanos
+*/
+SYNC_SOURCE_VSYNC : &quot;3&quot;,
+<span id='android-media-SyncParams-property-AUDIO_ADJUST_MODE_DEFAULT'>/** System will determine best handling of audio for playback rate
+</span> adjustments.
+ &lt;p&gt;
+ Used by default. This will make audio play faster or slower as required
+ by the sync source without changing its pitch; however, system may fall
+ back to some other method (e.g. change the pitch, or mute the audio) if
+ time stretching is no longer supported for the playback rate.
+*/
+AUDIO_ADJUST_MODE_DEFAULT : &quot;0&quot;,
+<span id='android-media-SyncParams-property-AUDIO_ADJUST_MODE_STRETCH'>/** Time stretch audio when playback rate must be adjusted.
+</span> &lt;p&gt;
+ This will make audio play faster or slower as required by the sync source
+ without changing its pitch, as long as it is supported for the playback
+ rate.
+*/
+AUDIO_ADJUST_MODE_STRETCH : &quot;1&quot;,
+<span id='android-media-SyncParams-property-AUDIO_ADJUST_MODE_RESAMPLE'>/** Resample audio when playback rate must be adjusted.
+</span> &lt;p&gt;
+ This will make audio play faster or slower as required by the sync source
+ by changing its pitch (making it lower to play slower, and higher to play
+ faster.)
+*/
+AUDIO_ADJUST_MODE_RESAMPLE : &quot;2&quot;,
+<span id='android-media-SyncParams-method-allowDefaults'>/**Allows defaults to be returned for properties not set.
+</span> Otherwise a {@link java.lang.IllegalArgumentException} exception
+ is raised when getting those properties
+ which have defaults but have never been set.
+@return {Object {android.media.SyncParams}} this &lt;code&gt;SyncParams&lt;/code&gt; instance.
+*/
+allowDefaults : function(  ) {},
+
+<span id='android-media-SyncParams-method-setAudioAdjustMode'>/**Sets the audio adjust mode.
+</span>@param {Number} audioAdjustMode
+@return {Object {android.media.SyncParams}} this &lt;code&gt;SyncParams&lt;/code&gt; instance.
+*/
+setAudioAdjustMode : function(  ) {},
+
+<span id='android-media-SyncParams-method-getAudioAdjustMode'>/**Retrieves the audio adjust mode.
+</span>@return {Number} audio adjust mode
+@throws IllegalStateException if the audio adjust mode is not set.
+*/
+getAudioAdjustMode : function(  ) {},
+
+<span id='android-media-SyncParams-method-setSyncSource'>/**Sets the sync source.
+</span>@param {Number} syncSource
+@return {Object {android.media.SyncParams}} this &lt;code&gt;SyncParams&lt;/code&gt; instance.
+*/
+setSyncSource : function(  ) {},
+
+<span id='android-media-SyncParams-method-getSyncSource'>/**Retrieves the sync source.
+</span>@return {Number} sync source
+@throws IllegalStateException if the sync source is not set.
+*/
+getSyncSource : function(  ) {},
+
+<span id='android-media-SyncParams-method-setTolerance'>/**Sets the tolerance. The default tolerance is platform specific, but is never more than 1/24.
+</span>@param {Number} tolerance A non-negative number representing
+     the maximum deviation of the playback rate from the playback rate
+     set. ({@code abs(actual_rate - set_rate) / set_rate})
+@return {Object {android.media.SyncParams}} this &lt;code&gt;SyncParams&lt;/code&gt; instance.
+@throws IllegalArgumentException if the tolerance is negative, or not less than one.
+*/
+setTolerance : function(  ) {},
+
+<span id='android-media-SyncParams-method-getTolerance'>/**Retrieves the tolerance factor.
+</span>@return {Number} tolerance factor. A non-negative number representing
+     the maximum deviation of the playback rate from the playback rate
+     set. ({@code abs(actual_rate - set_rate) / set_rate})
+@throws IllegalStateException if tolerance is not set.
+*/
+getTolerance : function(  ) {},
+
+<span id='android-media-SyncParams-method-setFrameRate'>/**Sets the video frame rate hint to be used. By default the frame rate is unspecified.
+</span>@param {Number} frameRate A non-negative number used as an initial hint on
+     the video frame rate to be used when using vsync as the sync source. A negative
+     number is used to clear a previous hint.
+@return {Object {android.media.SyncParams}} this &lt;code&gt;SyncParams&lt;/code&gt; instance.
+*/
+setFrameRate : function(  ) {},
+
+<span id='android-media-SyncParams-method-getFrameRate'>/**Retrieves the video frame rate hint.
+</span>@return {Number} frame rate factor. A non-negative number representing
+     the maximum deviation of the playback rate from the playback rate
+     set. ({@code abs(actual_rate - set_rate) / set_rate}), or a negative
+     number representing the desire to clear a previous hint using these params.
+@throws IllegalStateException if frame rate is not set.
+*/
+getFrameRate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

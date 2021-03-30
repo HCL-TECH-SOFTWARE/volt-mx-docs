@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-StatusUpdates'>/**@class android.provider.ContactsContract.StatusUpdates
+</span> implements android.provider.ContactsContract.StatusColumns
+
+ implements android.provider.ContactsContract.PresenceColumns
+
+@extends java.lang.Object
+
+ &lt;p&gt;
+ A status update is linked to a {@link android.provider.ContactsContract.Data} row and captures
+ the user's latest status update via the corresponding source, e.g.
+ &quot;Having lunch&quot; via &quot;Google Talk&quot;.
+ &lt;/p&gt;
+ &lt;p&gt;
+ There are two ways a status update can be inserted: by explicitly linking
+ it to a Data row using {@link #DATA_ID} or indirectly linking it to a data row
+ using a combination of {@link #PROTOCOL} (or {@link #CUSTOM_PROTOCOL}) and
+ {@link #IM_HANDLE}.  There is no difference between insert and update, you can use
+ either.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Inserting or updating a status update for the user's profile requires either using
+ the {@link #DATA_ID} to identify the data row to attach the update to, or
+ {@link android.provider.VoicemailContract.StatusUpdates#PROFILE_CONTENT_URI} to ensure that the change is scoped to the
+ profile.
+ &lt;/p&gt;
+ &lt;p&gt;
+ You cannot use {@link ContentResolver#update} to change a status, but
+ {@link ContentResolver#insert} will replace the latests status if it already
+ exists.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Use {@link ContentResolver#bulkInsert(Uri, ContentValues[])} to insert/update statuses
+ for multiple contacts at once.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Columns&lt;/h3&gt;
+ &lt;table class=&quot;jd-sumtable&quot;&gt;
+ &lt;tr&gt;
+ &lt;th colspan='4'&gt;StatusUpdates&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #DATA_ID}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;Reference to the {@link android.provider.ContactsContract.Data#_ID} entry that owns this presence. If this
+ field is &lt;i&gt;not&lt;/i&gt; specified, the provider will attempt to find a data row
+ that matches the {@link #PROTOCOL} (or {@link #CUSTOM_PROTOCOL}) and
+ {@link #IM_HANDLE} columns.
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #PROTOCOL}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.CommonDataKinds.Im} for a list of defined protocol constants.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #CUSTOM_PROTOCOL}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;Name of the custom protocol.  Should be supplied along with the {@link #PROTOCOL} value
+ {@link android.provider.ContactsContract.CommonDataKinds.Im#PROTOCOL_CUSTOM}.  Should be null or
+ omitted if {@link #PROTOCOL} value is not
+ {@link android.provider.ContactsContract.CommonDataKinds.Im#PROTOCOL_CUSTOM}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #IM_HANDLE}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt; The IM handle the presence item is for. The handle is scoped to
+ {@link #PROTOCOL}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #IM_ACCOUNT}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;The IM account for the local user that the presence data came from.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #PRESENCE}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;Contact IM presence status. The allowed values are:
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link #OFFLINE}&lt;/li&gt;
+ &lt;li&gt;{@link #INVISIBLE}&lt;/li&gt;
+ &lt;li&gt;{@link #AWAY}&lt;/li&gt;
+ &lt;li&gt;{@link #IDLE}&lt;/li&gt;
+ &lt;li&gt;{@link #DO_NOT_DISTURB}&lt;/li&gt;
+ &lt;li&gt;{@link #AVAILABLE}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ Since presence status is inherently volatile, the content provider
+ may choose not to store this field in long-term storage.
+ &lt;/p&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #CHAT_CAPABILITY}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;Contact IM chat compatibility value. The allowed values combinations of the following
+ flags. If None of these flags is set, the device can only do text messaging.
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link #CAPABILITY_HAS_VIDEO}&lt;/li&gt;
+ &lt;li&gt;{@link #CAPABILITY_HAS_VOICE}&lt;/li&gt;
+ &lt;li&gt;{@link #CAPABILITY_HAS_CAMERA}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ Since chat compatibility is inherently volatile as the contact's availability moves from
+ one device to another, the content provider may choose not to store this field in long-term
+ storage.
+ &lt;/p&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #STATUS}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;Contact's latest status update, e.g. &quot;having toast for breakfast&quot;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #STATUS_TIMESTAMP}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;The absolute time in milliseconds when the status was
+ entered by the user. If this value is not provided, the provider will follow
+ this logic: if there was no prior status update, the value will be left as null.
+ If there was a prior status update, the provider will default this field
+ to the current time.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #STATUS_RES_PACKAGE}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt; The package containing resources for this status: label and icon.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #STATUS_LABEL}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;The resource ID of the label describing the source of contact status,
+ e.g. &quot;Google Talk&quot;. This resource is scoped by the
+ {@link #STATUS_RES_PACKAGE}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #STATUS_ICON}&lt;/td&gt;
+ &lt;td&gt;read/write&lt;/td&gt;
+ &lt;td&gt;The resource ID of the icon for the source of contact status. This
+ resource is scoped by the {@link #STATUS_RES_PACKAGE}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+var StatusUpdates = {
+
+<span id='android-provider-ContactsContract-StatusUpdates-property-CONTENT_URI'>/** The content:// style URI for this table
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-StatusUpdates-property-PROFILE_CONTENT_URI'>/** The content:// style URI for this table, specific to the user's profile.
+</span>*/
+PROFILE_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-StatusUpdates-property-CONTENT_TYPE'>/** The MIME type of {@link #CONTENT_URI} providing a directory of
+</span> status update details.
+*/
+CONTENT_TYPE : &quot;vnd.android.cursor.dir/status-update&quot;,
+<span id='android-provider-ContactsContract-StatusUpdates-property-CONTENT_ITEM_TYPE'>/** The MIME type of a {@link #CONTENT_URI} subdirectory of a single
+</span> status update detail.
+*/
+CONTENT_ITEM_TYPE : &quot;vnd.android.cursor.item/status-update&quot;,
+<span id='android-provider-ContactsContract-StatusUpdates-method-getPresenceIconResourceId'>/**Gets the resource ID for the proper presence icon.
+</span>@param {Number} status the status to get the icon for
+@return {Number} the resource ID for the proper presence icon
+*/
+getPresenceIconResourceId : function(  ) {},
+
+<span id='android-provider-ContactsContract-StatusUpdates-method-getPresencePrecedence'>/**Returns the precedence of the status code the higher number being the higher precedence.
+</span>@param {Number} status The status code.
+@return {Number} An integer representing the precedence, 0 being the lowest.
+*/
+getPresencePrecedence : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

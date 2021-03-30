@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-contentcapture-ContentCaptureSession'>/**@class android.view.contentcapture.ContentCaptureSession
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ Session used when notifying the Android system about events associated with views.
+*/
+var ContentCaptureSession = {
+
+<span id='android-view-contentcapture-ContentCaptureSession-property-NO_SESSION_ID'>/**@hide */
+</span>NO_SESSION_ID : &quot;0&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-UNKNOWN_STATE'>/** Initial state, when there is no session.
+</span>
+ @hide
+*/
+UNKNOWN_STATE : &quot;0&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_WAITING_FOR_SERVER'>/** Service's startSession() was called, but server didn't confirm it was created yet.
+</span>
+ @hide
+*/
+STATE_WAITING_FOR_SERVER : &quot;1&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_ACTIVE'>/** Session is active.
+</span>
+ @hide
+*/
+STATE_ACTIVE : &quot;2&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_DISABLED'>/** Session is disabled because there is no service for this user.
+</span>
+ @hide
+*/
+STATE_DISABLED : &quot;4&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_DUPLICATED_ID'>/** Session is disabled because its id already existed on server.
+</span>
+ @hide
+*/
+STATE_DUPLICATED_ID : &quot;8&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_NO_SERVICE'>/** Session is disabled because service is not set for user.
+</span>
+ @hide
+*/
+STATE_NO_SERVICE : &quot;16&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_FLAG_SECURE'>/** Session is disabled by FLAG_SECURE
+</span>
+ @hide
+*/
+STATE_FLAG_SECURE : &quot;32&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_BY_APP'>/** Session is disabled manually by the specific app
+</span> (through {@link android.view.contentcapture.ContentCaptureManager#setContentCaptureEnabled(boolean)}).
+
+ @hide
+*/
+STATE_BY_APP : &quot;64&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_NO_RESPONSE'>/** Session is disabled because session start was never replied.
+</span>
+ @hide
+*/
+STATE_NO_RESPONSE : &quot;128&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_INTERNAL_ERROR'>/** Session is disabled because an internal error.
+</span>
+ @hide
+*/
+STATE_INTERNAL_ERROR : &quot;256&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_NOT_WHITELISTED'>/** Session is disabled because service didn't whitelist package or activity.
+</span>
+ @hide
+*/
+STATE_NOT_WHITELISTED : &quot;512&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_SERVICE_DIED'>/** Session is disabled because the service died.
+</span>
+ @hide
+*/
+STATE_SERVICE_DIED : &quot;1024&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_SERVICE_UPDATING'>/** Session is disabled because the service package is being udpated.
+</span>
+ @hide
+*/
+STATE_SERVICE_UPDATING : &quot;2048&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-STATE_SERVICE_RESURRECTED'>/** Session is enabled, after the service died and came back to live.
+</span>
+ @hide
+*/
+STATE_SERVICE_RESURRECTED : &quot;4096&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-FLUSH_REASON_FULL'>/**@hide */
+</span>FLUSH_REASON_FULL : &quot;1&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-FLUSH_REASON_VIEW_ROOT_ENTERED'>/**@hide */
+</span>FLUSH_REASON_VIEW_ROOT_ENTERED : &quot;2&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-FLUSH_REASON_SESSION_STARTED'>/**@hide */
+</span>FLUSH_REASON_SESSION_STARTED : &quot;3&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-FLUSH_REASON_SESSION_FINISHED'>/**@hide */
+</span>FLUSH_REASON_SESSION_FINISHED : &quot;4&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-FLUSH_REASON_IDLE_TIMEOUT'>/**@hide */
+</span>FLUSH_REASON_IDLE_TIMEOUT : &quot;5&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-property-FLUSH_REASON_TEXT_CHANGE_TIMEOUT'>/**@hide */
+</span>FLUSH_REASON_TEXT_CHANGE_TIMEOUT : &quot;6&quot;,
+<span id='android-view-contentcapture-ContentCaptureSession-method-getContentCaptureSessionId'>/**Gets the id used to identify this session.
+</span>*/
+getContentCaptureSessionId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-getId'>/**
+</span>@hide 
+*/
+getId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-createContentCaptureSession'>/**Creates a new {@link android.view.contentcapture.ContentCaptureSession}.
+</span>
+ &lt;p&gt;See {@link View#setContentCaptureSession(ContentCaptureSession)} for more info.
+*/
+createContentCaptureSession : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-setContentCaptureContext'>/**Sets the {@link android.view.contentcapture.ContentCaptureContext} associated with the session.
+</span>
+ &lt;p&gt;Typically used to change the context associated with the default session from an activity.
+*/
+setContentCaptureContext : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-getContentCaptureContext'>/**Gets the {@link android.view.contentcapture.ContentCaptureContext} associated with the session.
+</span>@return {Object {android.view.contentcapture.ContentCaptureContext}} context set on constructor or by
+         {@link #setContentCaptureContext(ContentCaptureContext)}, or {@code null} if never
+         explicitly set.
+*/
+getContentCaptureContext : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-destroy'>/**Destroys this session, flushing out all pending notifications.
+</span>
+ &lt;p&gt;Once destroyed, any new notification will be dropped.
+*/
+destroy : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-close'>/**
+</span>@hide 
+*/
+close : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-notifyViewAppeared'>/**Notifies the Android system that a node has been added to the view structure.
+</span>@param {Object {ViewStructure}} node node that has been added.
+*/
+notifyViewAppeared : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-notifyViewDisappeared'>/**Notifies the Android system that a node has been removed from the view structure.
+</span>@param {Object {AutofillId}} id id of the node that has been removed.
+*/
+notifyViewDisappeared : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-notifyViewsDisappeared'>/**Notifies the Android system that many nodes has been removed from a virtual view
+</span> structure.
+
+ &lt;p&gt;Should only be called by views that handle their own virtual view hierarchy.
+@param {Object {AutofillId}} hostId id of the non-virtual view hosting the virtual view hierarchy (it can be
+ obtained by calling {@link ViewStructure#getAutofillId()}).
+@param {Object {long[]}} virtualIds ids of the virtual children.
+@throws IllegalArgumentException if the {@code hostId} is an autofill id for a virtual view.
+@throws IllegalArgumentException if {@code virtualIds} is empty
+*/
+notifyViewsDisappeared : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-notifyViewTextChanged'>/**Notifies the Android system that the value of a text node has been changed.
+</span>@param {Object {AutofillId}} id of the node.
+@param {Object {CharSequence}} text new text.
+*/
+notifyViewTextChanged : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-internalNotifyViewTreeEvent'>/**
+</span>@hide 
+*/
+internalNotifyViewTreeEvent : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-newViewStructure'>/**Creates a {@link ViewStructure} for a &quot;standard&quot; view.
+</span>
+ &lt;p&gt;This method should be called after a visible view is laid out; the view then must populate
+ the structure and pass it to {@link #notifyViewAppeared}(ViewStructure).
+
+ &lt;b&gt;Note: &lt;/b&gt;views that manage a virtual structure under this view must populate just the
+ node representing this view and return right away, then asynchronously report (not
+ necessarily in the UI thread) when the children nodes appear, disappear or have their text
+ changed by calling {@link android.view.contentcapture.ContentCaptureSession#notifyViewAppeared(ViewStructure)},
+ {@link android.view.contentcapture.ContentCaptureSession#notifyViewDisappeared(AutofillId)}, and
+ {@link android.view.contentcapture.ContentCaptureSession#notifyViewTextChanged(AutofillId, CharSequence)} respectively.
+ The structure for the a child must be created using
+ {@link android.view.contentcapture.ContentCaptureSession#newVirtualViewStructure(AutofillId, long)}, and the
+ {@code autofillId} for a child can be obtained either through
+ {@code childStructure.getAutofillId()} or
+ {@link android.view.contentcapture.ContentCaptureSession#newAutofillId(AutofillId, long)}.
+
+ &lt;p&gt;When the virtual view hierarchy represents a web page, you should also:
+
+ &lt;ul&gt;
+ &lt;li&gt;Call {@link android.view.contentcapture.ContentCaptureManager#getContentCaptureConditions()} to infer content capture
+ events should be generate for that URL.
+ &lt;li&gt;Create a new {@link android.view.contentcapture.ContentCaptureSession} child for every HTML element that renders a
+ new URL (like an {@code IFRAME}) and use that session to notify events from that subtree.
+ &lt;/ul&gt;
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;the following methods of the {@code structure} will be ignored:
+ &lt;ul&gt;
+ &lt;li&gt;{@link ViewStructure#setChildCount(int)}
+ &lt;li&gt;{@link ViewStructure#addChildCount(int)}
+ &lt;li&gt;{@link ViewStructure#getChildCount()}
+ &lt;li&gt;{@link ViewStructure#newChild(int)}
+ &lt;li&gt;{@link ViewStructure#asyncNewChild(int)}
+ &lt;li&gt;{@link ViewStructure#asyncCommit()}
+ &lt;li&gt;{@link ViewStructure#setWebDomain(String)}
+ &lt;li&gt;{@link ViewStructure#newHtmlInfoBuilder(String)}
+ &lt;li&gt;{@link ViewStructure#setHtmlInfo(android.view.ViewStructure.HtmlInfo)}
+ &lt;li&gt;{@link ViewStructure#setDataIsSensitive(boolean)}
+ &lt;li&gt;{@link ViewStructure#setAlpha(float)}
+ &lt;li&gt;{@link ViewStructure#setElevation(float)}
+ &lt;li&gt;{@link ViewStructure#setTransformation(android.graphics.Matrix)}
+ &lt;/ul&gt;
+*/
+newViewStructure : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-newAutofillId'>/**Creates a new {@link AutofillId} for a virtual child, so it can be used to uniquely identify
+</span> the children in the session.
+@param {Object {AutofillId}} hostId id of the non-virtual view hosting the virtual view hierarchy (it can be
+ obtained by calling {@link ViewStructure#getAutofillId()}).
+@param {Number} virtualChildId id of the virtual child, relative to the parent.
+@return {Object {android.view.autofill.AutofillId}} if for the virtual child
+@throws IllegalArgumentException if the {@code parentId} is a virtual child id.
+*/
+newAutofillId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-newVirtualViewStructure'>/**Creates a {@link ViewStructure} for a &quot;virtual&quot; view, so it can be passed to
+</span> {@link #notifyViewAppeared}(ViewStructure) by the view managing the virtual view hierarchy.
+@param {Object {AutofillId}} parentId id of the virtual view parent (it can be obtained by calling
+ {@link ViewStructure#getAutofillId()} on the parent).
+@param {Number} virtualId id of the virtual child, relative to the parent.
+@return {Object {android.view.ViewStructure}} a new {@link ViewStructure} that can be used for Content Capture purposes.
+*/
+newVirtualViewStructure : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureSession-method-getFlushReasonAsString'>/**
+</span>@hide 
+*/
+getFlushReasonAsString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

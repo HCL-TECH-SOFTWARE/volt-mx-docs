@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-TextUtils'>/**@class android.text.TextUtils
+</span>@extends java.lang.Object
+
+*/
+var TextUtils = {
+
+<span id='android-text-TextUtils-property-SAFE_STRING_FLAG_TRIM'>/** Remove {@link Character#isWhitespace(int) whitespace} and non-breaking spaces from the edges
+</span> of the label.
+
+ @see #makeSafeForPresentation(String, int, float, int)
+*/
+SAFE_STRING_FLAG_TRIM : &quot;1&quot;,
+<span id='android-text-TextUtils-property-SAFE_STRING_FLAG_SINGLE_LINE'>/** Force entire string into single line of text (no newlines). Cannot be set at the same time as
+</span> {@link #SAFE_STRING_FLAG_FIRST_LINE}.
+
+ @see #makeSafeForPresentation(String, int, float, int)
+*/
+SAFE_STRING_FLAG_SINGLE_LINE : &quot;2&quot;,
+<span id='android-text-TextUtils-property-SAFE_STRING_FLAG_FIRST_LINE'>/** Return only first line of text (truncate at first newline). Cannot be set at the same time as
+</span> {@link #SAFE_STRING_FLAG_SINGLE_LINE}.
+
+ @see #makeSafeForPresentation(String, int, float, int)
+*/
+SAFE_STRING_FLAG_FIRST_LINE : &quot;4&quot;,
+<span id='android-text-TextUtils-property-ALIGNMENT_SPAN'>/**@hide */
+</span>ALIGNMENT_SPAN : &quot;1&quot;,
+<span id='android-text-TextUtils-property-FIRST_SPAN'>/**@hide */
+</span>FIRST_SPAN : &quot;1&quot;,
+<span id='android-text-TextUtils-property-FOREGROUND_COLOR_SPAN'>/**@hide */
+</span>FOREGROUND_COLOR_SPAN : &quot;2&quot;,
+<span id='android-text-TextUtils-property-RELATIVE_SIZE_SPAN'>/**@hide */
+</span>RELATIVE_SIZE_SPAN : &quot;3&quot;,
+<span id='android-text-TextUtils-property-SCALE_X_SPAN'>/**@hide */
+</span>SCALE_X_SPAN : &quot;4&quot;,
+<span id='android-text-TextUtils-property-STRIKETHROUGH_SPAN'>/**@hide */
+</span>STRIKETHROUGH_SPAN : &quot;5&quot;,
+<span id='android-text-TextUtils-property-UNDERLINE_SPAN'>/**@hide */
+</span>UNDERLINE_SPAN : &quot;6&quot;,
+<span id='android-text-TextUtils-property-STYLE_SPAN'>/**@hide */
+</span>STYLE_SPAN : &quot;7&quot;,
+<span id='android-text-TextUtils-property-BULLET_SPAN'>/**@hide */
+</span>BULLET_SPAN : &quot;8&quot;,
+<span id='android-text-TextUtils-property-QUOTE_SPAN'>/**@hide */
+</span>QUOTE_SPAN : &quot;9&quot;,
+<span id='android-text-TextUtils-property-LEADING_MARGIN_SPAN'>/**@hide */
+</span>LEADING_MARGIN_SPAN : &quot;10&quot;,
+<span id='android-text-TextUtils-property-URL_SPAN'>/**@hide */
+</span>URL_SPAN : &quot;11&quot;,
+<span id='android-text-TextUtils-property-BACKGROUND_COLOR_SPAN'>/**@hide */
+</span>BACKGROUND_COLOR_SPAN : &quot;12&quot;,
+<span id='android-text-TextUtils-property-TYPEFACE_SPAN'>/**@hide */
+</span>TYPEFACE_SPAN : &quot;13&quot;,
+<span id='android-text-TextUtils-property-SUPERSCRIPT_SPAN'>/**@hide */
+</span>SUPERSCRIPT_SPAN : &quot;14&quot;,
+<span id='android-text-TextUtils-property-SUBSCRIPT_SPAN'>/**@hide */
+</span>SUBSCRIPT_SPAN : &quot;15&quot;,
+<span id='android-text-TextUtils-property-ABSOLUTE_SIZE_SPAN'>/**@hide */
+</span>ABSOLUTE_SIZE_SPAN : &quot;16&quot;,
+<span id='android-text-TextUtils-property-TEXT_APPEARANCE_SPAN'>/**@hide */
+</span>TEXT_APPEARANCE_SPAN : &quot;17&quot;,
+<span id='android-text-TextUtils-property-ANNOTATION'>/**@hide */
+</span>ANNOTATION : &quot;18&quot;,
+<span id='android-text-TextUtils-property-SUGGESTION_SPAN'>/**@hide */
+</span>SUGGESTION_SPAN : &quot;19&quot;,
+<span id='android-text-TextUtils-property-SPELL_CHECK_SPAN'>/**@hide */
+</span>SPELL_CHECK_SPAN : &quot;20&quot;,
+<span id='android-text-TextUtils-property-SUGGESTION_RANGE_SPAN'>/**@hide */
+</span>SUGGESTION_RANGE_SPAN : &quot;21&quot;,
+<span id='android-text-TextUtils-property-EASY_EDIT_SPAN'>/**@hide */
+</span>EASY_EDIT_SPAN : &quot;22&quot;,
+<span id='android-text-TextUtils-property-LOCALE_SPAN'>/**@hide */
+</span>LOCALE_SPAN : &quot;23&quot;,
+<span id='android-text-TextUtils-property-TTS_SPAN'>/**@hide */
+</span>TTS_SPAN : &quot;24&quot;,
+<span id='android-text-TextUtils-property-ACCESSIBILITY_CLICKABLE_SPAN'>/**@hide */
+</span>ACCESSIBILITY_CLICKABLE_SPAN : &quot;25&quot;,
+<span id='android-text-TextUtils-property-ACCESSIBILITY_URL_SPAN'>/**@hide */
+</span>ACCESSIBILITY_URL_SPAN : &quot;26&quot;,
+<span id='android-text-TextUtils-property-LINE_BACKGROUND_SPAN'>/**@hide */
+</span>LINE_BACKGROUND_SPAN : &quot;27&quot;,
+<span id='android-text-TextUtils-property-LINE_HEIGHT_SPAN'>/**@hide */
+</span>LINE_HEIGHT_SPAN : &quot;28&quot;,
+<span id='android-text-TextUtils-property-LAST_SPAN'>/**@hide */
+</span>LAST_SPAN : &quot;28&quot;,
+<span id='android-text-TextUtils-property-CHAR_SEQUENCE_CREATOR'>/***/
+</span>CHAR_SEQUENCE_CREATOR : &quot;null&quot;,
+<span id='android-text-TextUtils-property-CAP_MODE_CHARACTERS'>/** Capitalization mode for {@link #getCapsMode}: capitalize all
+</span> characters.  This value is explicitly defined to be the same as
+ {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_CHARACTERS}.
+*/
+CAP_MODE_CHARACTERS : &quot;4096&quot;,
+<span id='android-text-TextUtils-property-CAP_MODE_WORDS'>/** Capitalization mode for {@link #getCapsMode}: capitalize the first
+</span> character of all words.  This value is explicitly defined to be the same as
+ {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_WORDS}.
+*/
+CAP_MODE_WORDS : &quot;8192&quot;,
+<span id='android-text-TextUtils-property-CAP_MODE_SENTENCES'>/** Capitalization mode for {@link #getCapsMode}: capitalize the first
+</span> character of each sentence.  This value is explicitly defined to be the same as
+ {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_SENTENCES}.
+*/
+CAP_MODE_SENTENCES : &quot;16384&quot;,
+<span id='android-text-TextUtils-method-getEllipsisString'>/**{@hide}
+</span>*/
+getEllipsisString : function(  ) {},
+
+<span id='android-text-TextUtils-method-getChars'>/**
+</span>*/
+getChars : function(  ) {},
+
+<span id='android-text-TextUtils-method-indexOf'>/**
+</span>*/
+indexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-indexOf'>/**
+</span>*/
+indexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-indexOf'>/**
+</span>*/
+indexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-lastIndexOf'>/**
+</span>*/
+lastIndexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-lastIndexOf'>/**
+</span>*/
+lastIndexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-lastIndexOf'>/**
+</span>*/
+lastIndexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-indexOf'>/**
+</span>*/
+indexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-indexOf'>/**
+</span>*/
+indexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-indexOf'>/**
+</span>*/
+indexOf : function(  ) {},
+
+<span id='android-text-TextUtils-method-regionMatches'>/**
+</span>*/
+regionMatches : function(  ) {},
+
+<span id='android-text-TextUtils-method-substring'>/**Create a new String object containing the given range of characters
+</span> from the source string.  This is different than simply calling
+ {@link CharSequence#subSequence(int, int) CharSequence.subSequence}
+ in that it does not preserve any style runs in the source sequence,
+ allowing a more efficient implementation.
+*/
+substring : function(  ) {},
+
+<span id='android-text-TextUtils-method-join'>/**Returns a string containing the tokens joined by delimiters.
+</span>@param {Object {CharSequence}} delimiter a CharSequence that will be inserted between the tokens. If null, the string
+     &quot;null&quot; will be used as the delimiter.
+@param {Object {java.lang.Object[]}} tokens an array objects to be joined. Strings will be formed from the objects by
+     calling object.toString(). If tokens is null, a NullPointerException will be thrown. If
+     tokens is an empty array, an empty string will be returned.
+*/
+join : function(  ) {},
+
+<span id='android-text-TextUtils-method-join'>/**Returns a string containing the tokens joined by delimiters.
+</span>@param {Object {CharSequence}} delimiter a CharSequence that will be inserted between the tokens. If null, the string
+     &quot;null&quot; will be used as the delimiter.
+@param {Object {java.lang.Iterable}} tokens an array objects to be joined. Strings will be formed from the objects by
+     calling object.toString(). If tokens is null, a NullPointerException will be thrown. If
+     tokens is empty, an empty string will be returned.
+*/
+join : function(  ) {},
+
+<span id='android-text-TextUtils-method-split'>/**This method yields the same result as {@code text.split(expression, -1)} except that if
+</span> {@code text.isEmpty()} then this method returns an empty array whereas
+ {@code &quot;&quot;.split(expression, -1)} would have returned an array with a single {@code &quot;&quot;}.
+
+ The {@code -1} means that trailing empty Strings are not removed from the result; for
+ example split(&quot;a,&quot;, &quot;,&quot;  ) returns {&quot;a&quot;, &quot;&quot;}. Note that whether a leading zero-width match
+ can result in a leading {@code &quot;&quot;} depends on whether your app
+ {@link android.content.pm.ApplicationInfo#targetSdkVersion targets an SDK version}
+ {@code &lt;= 28}; see {@link Pattern#split(CharSequence, int)}.
+@param {String} text the string to split
+@param {String} expression the regular expression to match
+@return {String} an array of strings. The array will be empty if text is empty
+@throws NullPointerException if expression or text is null
+*/
+split : function(  ) {},
+
+<span id='android-text-TextUtils-method-split'>/**Splits a string on a pattern. This method yields the same result as
+</span> {@code pattern.split(text, -1)} except that if {@code text.isEmpty()} then this method
+ returns an empty array whereas {@code pattern.split(&quot;&quot;, -1)} would have returned an array
+ with a single {@code &quot;&quot;}.
+
+ The {@code -1} means that trailing empty Strings are not removed from the result;
+ Note that whether a leading zero-width match can result in a leading {@code &quot;&quot;} depends
+ on whether your app {@link android.content.pm.ApplicationInfo#targetSdkVersion targets
+ an SDK version} {@code &lt;= 28}; see {@link Pattern#split(CharSequence, int)}.
+@param {String} text the string to split
+@param {Object {Pattern}} pattern the regular expression to match
+@return {String} an array of strings. The array will be empty if text is empty
+@throws NullPointerException if expression or text is null
+*/
+split : function(  ) {},
+
+<span id='android-text-TextUtils-method-stringOrSpannedString'>/**
+</span>*/
+stringOrSpannedString : function(  ) {},
+
+<span id='android-text-TextUtils-method-isEmpty'>/**Returns true if the string is null or 0-length.
+</span>@param {Object {CharSequence}} str the string to be examined
+@return {Boolean} true if str is null or zero length
+*/
+isEmpty : function(  ) {},
+
+<span id='android-text-TextUtils-method-nullIfEmpty'>/**{@hide}
+</span>*/
+nullIfEmpty : function(  ) {},
+
+<span id='android-text-TextUtils-method-emptyIfNull'>/**{@hide}
+</span>*/
+emptyIfNull : function(  ) {},
+
+<span id='android-text-TextUtils-method-firstNotEmpty'>/**{@hide}
+</span>*/
+firstNotEmpty : function(  ) {},
+
+<span id='android-text-TextUtils-method-length'>/**{@hide}
+</span>*/
+length : function(  ) {},
+
+<span id='android-text-TextUtils-method-safeIntern'>/**
+</span>@return {String} interned string if it's null.
+@hide 
+*/
+safeIntern : function(  ) {},
+
+<span id='android-text-TextUtils-method-getTrimmedLength'>/**Returns the length that the specified CharSequence would have if
+</span> spaces and ASCII control characters were trimmed from the start and end,
+ as by {@link String#trim}.
+*/
+getTrimmedLength : function(  ) {},
+
+<span id='android-text-TextUtils-method-equals'>/**Returns true if a and b are equal, including if they are both null.
+</span> &lt;p&gt;&lt;i&gt;Note: In platform versions 1.1 and earlier, this method only worked well if
+ both the arguments were instances of String.&lt;/i&gt;&lt;/p&gt;
+@param {Object {CharSequence}} a first CharSequence to check
+@param {Object {CharSequence}} b second CharSequence to check
+@return {Boolean} true if a and b are equal
+*/
+equals : function(  ) {},
+
+<span id='android-text-TextUtils-method-getReverse'>/**This function only reverses individual {@code char}s and not their associated
+</span> spans. It doesn't support surrogate pairs (that correspond to non-BMP code points), combining
+ sequences or conjuncts either.
+@deprecated Do not use.
+*/
+getReverse : function(  ) {},
+
+<span id='android-text-TextUtils-method-writeToParcel'>/**Flatten a CharSequence and whatever styles can be copied across processes
+</span> into the parcel.
+*/
+writeToParcel : function(  ) {},
+
+<span id='android-text-TextUtils-method-dumpSpans'>/**Debugging tool to print the spans in a CharSequence.  The output will
+</span> be printed one span per line.  If the CharSequence is not a Spanned,
+ then the entire string will be printed on a single line.
+*/
+dumpSpans : function(  ) {},
+
+<span id='android-text-TextUtils-method-replace'>/**Return a new CharSequence in which each of the source strings is
+</span> replaced by the corresponding element of the destinations.
+*/
+replace : function(  ) {},
+
+<span id='android-text-TextUtils-method-expandTemplate'>/**Replace instances of &quot;^1&quot;, &quot;^2&quot;, etc. in the
+</span> &lt;code&gt;template&lt;/code&gt; CharSequence with the corresponding
+ &lt;code&gt;values&lt;/code&gt;.  &quot;^^&quot; is used to produce a single caret in
+ the output.  Only up to 9 replacement values are supported,
+ &quot;^10&quot; will be produce the first replacement value followed by a
+ '0'.
+@param {Object {CharSequence}} template the input text containing &quot;^1&quot;-style
+ placeholder values.  This object is not modified; a copy is
+ returned.
+@param {Object {java.lang.CharSequence[]}} values CharSequences substituted into the template.  The
+ first is substituted for &quot;^1&quot;, the second for &quot;^2&quot;, and so on.
+@return {Object {java.lang.CharSequence}} the new CharSequence produced by doing the replacement
+@throws IllegalArgumentException if the template requests a
+ value that was not provided, or if more than 9 values are
+ provided.
+*/
+expandTemplate : function(  ) {},
+
+<span id='android-text-TextUtils-method-getOffsetBefore'>/**
+</span>*/
+getOffsetBefore : function(  ) {},
+
+<span id='android-text-TextUtils-method-getOffsetAfter'>/**
+</span>*/
+getOffsetAfter : function(  ) {},
+
+<span id='android-text-TextUtils-method-copySpansFrom'>/**Copies the spans from the region &lt;code&gt;start...end&lt;/code&gt; in
+</span> &lt;code&gt;source&lt;/code&gt; to the region
+ &lt;code&gt;destoff...destoff+end-start&lt;/code&gt; in &lt;code&gt;dest&lt;/code&gt;.
+ Spans in &lt;code&gt;source&lt;/code&gt; that begin before &lt;code&gt;start&lt;/code&gt;
+ or end after &lt;code&gt;end&lt;/code&gt; but overlap this range are trimmed
+ as if they began at &lt;code&gt;start&lt;/code&gt; or ended at &lt;code&gt;end&lt;/code&gt;.
+@throws IndexOutOfBoundsException if any of the copied spans
+ are out of range in &lt;code&gt;dest&lt;/code&gt;.
+*/
+copySpansFrom : function(  ) {},
+
+<span id='android-text-TextUtils-method-toUpperCase'>/**Transforms a CharSequences to uppercase, copying the sources spans and keeping them spans as
+</span> much as possible close to their relative original places. In the case the the uppercase
+ string is identical to the sources, the source itself is returned instead of being copied.
+
+ If copySpans is set, source must be an instance of Spanned.
+
+ {@hide}
+*/
+toUpperCase : function(  ) {},
+
+<span id='android-text-TextUtils-method-ellipsize'>/**Returns the original text if it fits in the specified width
+</span> given the properties of the specified Paint,
+ or, if it does not fit, a truncated
+ copy with ellipsis character added at the specified edge or center.
+*/
+ellipsize : function(  ) {},
+
+<span id='android-text-TextUtils-method-ellipsize'>/**Returns the original text if it fits in the specified width
+</span> given the properties of the specified Paint,
+ or, if it does not fit, a copy with ellipsis character added
+ at the specified edge or center.
+ If &lt;code&gt;preserveLength&lt;/code&gt; is specified, the returned copy
+ will be padded with zero-width spaces to preserve the original
+ length and offsets instead of truncating.
+ If &lt;code&gt;callback&lt;/code&gt; is non-null, it will be called to
+ report the start and end of the ellipsized range.  TextDirection
+ is determined by the first strong directional character.
+*/
+ellipsize : function(  ) {},
+
+<span id='android-text-TextUtils-method-ellipsize'>/**Returns the original text if it fits in the specified width
+</span> given the properties of the specified Paint,
+ or, if it does not fit, a copy with ellipsis character added
+ at the specified edge or center.
+ If &lt;code&gt;preserveLength&lt;/code&gt; is specified, the returned copy
+ will be padded with zero-width spaces to preserve the original
+ length and offsets instead of truncating.
+ If &lt;code&gt;callback&lt;/code&gt; is non-null, it will be called to
+ report the start and end of the ellipsized range.
+@hide 
+*/
+ellipsize : function(  ) {},
+
+<span id='android-text-TextUtils-method-listEllipsize'>/**Formats a list of CharSequences by repeatedly inserting the separator between them,
+</span> but stopping when the resulting sequence is too wide for the specified width.
+
+ This method actually tries to fit the maximum number of elements. So if {@code &quot;A, 11 more&quot;
+ fits}, {@code &quot;A, B, 10 more&quot;} doesn't fit, but {@code &quot;A, B, C, 9 more&quot;} fits again (due to
+ the glyphs for the digits being very wide, for example), it returns
+ {@code &quot;A, B, C, 9 more&quot;}. Because of this, this method may be inefficient for very long
+ lists.
+
+ Note that the elements of the returned value, as well as the string for {@code moreId}, will
+ be bidi-wrapped using {@link android.text.BidiFormatter#unicodeWrap} based on the locale of the input
+ Context. If the input {@code Context} is null, the default BidiFormatter from
+ {@link android.text.BidiFormatter#getInstance()} will be used.
+@param {Object {Context}} context the {@code Context} to get the {@code moreId} resource from. If {@code null},
+     an ellipsis (U+2026) would be used for {@code moreId}.
+@param {Object {java.util.List}} elements the list to format
+@param {String} separator a separator, such as {@code &quot;, &quot;}
+@param {Object {TextPaint}} paint the Paint with which to measure the text
+@param {Number} avail the horizontal width available for the text (in pixels)
+@param {Number} moreId the resource ID for the pluralized string to insert at the end of sequence when
+     some of the elements don't fit.
+@return {Object {java.lang.CharSequence}} the formatted CharSequence. If even the shortest sequence (e.g. {@code &quot;A, 11 more&quot;})
+     doesn't fit, it will return an empty string.
+*/
+listEllipsize : function(  ) {},
+
+<span id='android-text-TextUtils-method-commaEllipsize'>/**Converts a CharSequence of the comma-separated form &quot;Andy, Bob,
+</span> Charles, David&quot; that is too wide to fit into the specified width
+ into one like &quot;Andy, Bob, 2 more&quot;.
+@param {Object {CharSequence}} text the text to truncate
+@param {Object {TextPaint}} p the Paint with which to measure the text
+@param {Number} avail the horizontal width available for the text (in pixels)
+@param {String} oneMore the string for &quot;1 more&quot; in the current locale
+@param {String} more the string for &quot;%d more&quot; in the current locale
+@deprecated Do not use. This is not internationalized, and has known issues
+ with right-to-left text, languages that have more than one plural form, languages
+ that use a different character as a comma-like separator, etc.
+ Use {@link #listEllipsize} instead.
+*/
+commaEllipsize : function(  ) {},
+
+<span id='android-text-TextUtils-method-commaEllipsize'>/**
+</span>@hide 
+*/
+commaEllipsize : function(  ) {},
+
+<span id='android-text-TextUtils-method-htmlEncode'>/**Html-encode the string.
+</span>@param {String} s the string to be encoded
+@return {String} the encoded string
+*/
+htmlEncode : function(  ) {},
+
+<span id='android-text-TextUtils-method-concat'>/**Returns a CharSequence concatenating the specified CharSequences,
+</span> retaining their spans if any.
+
+ If there are no parameters, an empty string will be returned.
+
+ If the number of parameters is exactly one, that parameter is returned as output, even if it
+ is null.
+
+ If the number of parameters is at least two, any null CharSequence among the parameters is
+ treated as if it was the string &lt;code&gt;&quot;null&quot;&lt;/code&gt;.
+
+ If there are paragraph spans in the source CharSequences that satisfy paragraph boundary
+ requirements in the sources but would no longer satisfy them in the concatenated
+ CharSequence, they may get extended in the resulting CharSequence or not retained.
+*/
+concat : function(  ) {},
+
+<span id='android-text-TextUtils-method-isGraphic'>/**Returns whether the given CharSequence contains any printable characters.
+</span>*/
+isGraphic : function(  ) {},
+
+<span id='android-text-TextUtils-method-isGraphic'>/**Returns whether this character is a printable character.
+</span>
+ This does not support non-BMP characters and should not be used.
+@deprecated Use {@link #isGraphic(CharSequence)} instead.
+*/
+isGraphic : function(  ) {},
+
+<span id='android-text-TextUtils-method-isDigitsOnly'>/**Returns whether the given CharSequence contains only digits.
+</span>*/
+isDigitsOnly : function(  ) {},
+
+<span id='android-text-TextUtils-method-isPrintableAscii'>/**
+</span>@hide 
+*/
+isPrintableAscii : function(  ) {},
+
+<span id='android-text-TextUtils-method-isPrintableAsciiOnly'>/**
+</span>@hide 
+*/
+isPrintableAsciiOnly : function(  ) {},
+
+<span id='android-text-TextUtils-method-getCapsMode'>/**Determine what caps mode should be in effect at the current offset in
+</span> the text.  Only the mode bits set in &lt;var&gt;reqModes&lt;/var&gt; will be
+ checked.  Note that the caps mode flags here are explicitly defined
+ to match those in {@link android.text.InputType}.
+@param {Object {CharSequence}} cs The text that should be checked for caps modes.
+@param {Number} off Location in the text at which to check.
+@param {Number} reqModes The modes to be checked: may be any combination of
+ {@link #CAP_MODE_CHARACTERS}, {@link #CAP_MODE_WORDS}, and
+ {@link #CAP_MODE_SENTENCES}.
+@return {Number} Returns the actual capitalization modes that can be in effect
+ at the current position, which is any combination of
+ {@link #CAP_MODE_CHARACTERS}, {@link #CAP_MODE_WORDS}, and
+ {@link #CAP_MODE_SENTENCES}.
+*/
+getCapsMode : function(  ) {},
+
+<span id='android-text-TextUtils-method-delimitedStringContains'>/**Does a comma-delimited list 'delimitedString' contain a certain item?
+</span> (without allocating memory)
+@hide 
+*/
+delimitedStringContains : function(  ) {},
+
+<span id='android-text-TextUtils-method-removeEmptySpans'>/**Removes empty spans from the &lt;code&gt;spans&lt;/code&gt; array.
+</span>
+ When parsing a Spanned using {@link android.text.Spanned#nextSpanTransition(int, int, Class)}, empty spans
+ will (correctly) create span transitions, and calling getSpans on a slice of text bounded by
+ one of these transitions will (correctly) include the empty overlapping span.
+
+ However, these empty spans should not be taken into account when layouting or rendering the
+ string and this method provides a way to filter getSpans' results accordingly.
+@param {Object {java.lang.Object[]}} spans A list of spans retrieved using {@link Spanned#getSpans(int, int, Class)} from
+ the &lt;code&gt;spanned&lt;/code&gt;
+@param {Object {Spanned}} spanned The Spanned from which spans were extracted
+@return {Object {java.lang.Object}} A subset of spans where empty spans ({@link Spanned#getSpanStart(Object)}  ==
+ {@link Spanned#getSpanEnd(Object)} have been removed. The initial order is preserved
+@hide 
+*/
+removeEmptySpans : function(  ) {},
+
+<span id='android-text-TextUtils-method-packRangeInLong'>/**Pack 2 int values into a long, useful as a return value for a range
+</span>@see #unpackRangeStartFromLong(long)
+@see #unpackRangeEndFromLong(long)
+@hide 
+*/
+packRangeInLong : function(  ) {},
+
+<span id='android-text-TextUtils-method-unpackRangeStartFromLong'>/**Get the start value from a range packed in a long by {@link #packRangeInLong(int, int)}
+</span>@see #unpackRangeEndFromLong(long)
+@see #packRangeInLong(int, int)
+@hide 
+*/
+unpackRangeStartFromLong : function(  ) {},
+
+<span id='android-text-TextUtils-method-unpackRangeEndFromLong'>/**Get the end value from a range packed in a long by {@link #packRangeInLong(int, int)}
+</span>@see #unpackRangeStartFromLong(long)
+@see #packRangeInLong(int, int)
+@hide 
+*/
+unpackRangeEndFromLong : function(  ) {},
+
+<span id='android-text-TextUtils-method-getLayoutDirectionFromLocale'>/**Return the layout direction for a given Locale
+</span>@param {Object {Locale}} locale the Locale for which we want the layout direction. Can be null.
+@return {Number} the layout direction. This may be one of:
+ {@link android.view.View#LAYOUT_DIRECTION_LTR} or
+ {@link android.view.View#LAYOUT_DIRECTION_RTL}.
+
+ Be careful: this code will need to be updated when vertical scripts will be supported
+*/
+getLayoutDirectionFromLocale : function(  ) {},
+
+<span id='android-text-TextUtils-method-formatSelectedCount'>/**Return localized string representing the given number of selected items.
+</span>@hide 
+*/
+formatSelectedCount : function(  ) {},
+
+<span id='android-text-TextUtils-method-hasStyleSpan'>/**Returns whether or not the specified spanned text has a style span.
+</span>@hide 
+*/
+hasStyleSpan : function(  ) {},
+
+<span id='android-text-TextUtils-method-trimNoCopySpans'>/**If the {@code charSequence} is instance of {@link android.text.Spanned}, creates a new copy and
+</span> {@link android.text.NoCopySpan}'s are removed from the copy. Otherwise the given {@code charSequence} is
+ returned as it is.
+@hide 
+*/
+trimNoCopySpans : function(  ) {},
+
+<span id='android-text-TextUtils-method-wrap'>/**Prepends {@code start} and appends {@code end} to a given {@link StringBuilder}
+</span>@hide 
+*/
+wrap : function(  ) {},
+
+<span id='android-text-TextUtils-method-trimToParcelableSize'>/**Trims the text to {@link #PARCEL_SAFE_TEXT_LENGTH} length. Returns the string as it is if
+</span> the length() is smaller than {@link #PARCEL_SAFE_TEXT_LENGTH}. Used for text that is parceled
+ into a {@link Parcelable}.
+@hide 
+*/
+trimToParcelableSize : function(  ) {},
+
+<span id='android-text-TextUtils-method-trimToSize'>/**Trims the text to {@code size} length. Returns the string as it is if the length() is
+</span> smaller than {@code size}. If chars at {@code size-1} and {@code size} is a surrogate
+ pair, returns a CharSequence of length {@code size-1}.
+@param {Object {CharSequence}} size length of the result, should be greater than 0
+@hide 
+*/
+trimToSize : function(  ) {},
+
+<span id='android-text-TextUtils-method-trimToLengthWithEllipsis'>/**Trims the {@code text} to the first {@code size} characters and adds an ellipsis if the
+</span> resulting string is shorter than the input. This will result in an output string which is
+ longer than {@code size} for most inputs.
+@param {Object {CharSequence}} size length of the result, should be greater than 0
+@hide 
+*/
+trimToLengthWithEllipsis : function(  ) {},
+
+<span id='android-text-TextUtils-method-withoutPrefix'>/**
+</span>@hide 
+*/
+withoutPrefix : function(  ) {},
+
+<span id='android-text-TextUtils-method-makeSafeForPresentation'>/**Remove html, remove bad characters, and truncate string.
+</span>
+ &lt;p&gt;This method is meant to remove common mistakes and nefarious formatting from strings that
+ were loaded from untrusted sources (such as other packages).
+
+ &lt;p&gt;This method first {@link android.text.Html#fromandroid.text.Html treats the string like HTML} and then ...
+ &lt;ul&gt;
+ &lt;li&gt;Removes new lines or truncates at first new line
+ &lt;li&gt;Trims the white-space off the end
+ &lt;li&gt;Truncates the string
+ &lt;/ul&gt;
+ ... if specified.
+@param {String} unclean The input string
+@param {Number} maxCharactersToConsider The maximum number of characters of {@code unclean} to
+                                consider from the input string. {@code 0} disables this
+                                feature.
+@param {Number} ellipsizeDip Assuming maximum length of the string (in dip), assuming font size 42.
+                     This is roughly 50 characters for {@code ellipsizeDip == 1000}.&lt;br /&gt;
+                     Usually ellipsizing should be left to the view showing the string. If a
+                     string is used as an input to another string, it might be useful to
+                     control the length of the input string though. {@code 0} disables this
+                     feature.
+@param {Number} flags Flags controlling cleaning behavior (Can be {@link #SAFE_STRING_FLAG_TRIM},
+              {@link #SAFE_STRING_FLAG_SINGLE_LINE},
+              and {@link #SAFE_STRING_FLAG_FIRST_LINE})
+@return {Object {java.lang.CharSequence}} The cleaned string
+*/
+makeSafeForPresentation : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

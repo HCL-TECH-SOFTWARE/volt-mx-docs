@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-params-SessionConfiguration'>/**@class android.hardware.camera2.params.SessionConfiguration
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A helper class that aggregates all supported arguments for capture session initialization.
+*/
+var SessionConfiguration = {
+
+<span id='android-hardware-camera2-params-SessionConfiguration-property-SESSION_REGULAR'>/** A regular session type containing instances of {@link android.hardware.camera2.params.OutputConfiguration} running
+</span> at regular non high speed FPS ranges and optionally {@link android.hardware.camera2.params.InputConfiguration} for
+ reprocessable sessions.
+
+ @see CameraDevice#createCaptureSession
+ @see CameraDevice#createReprocessableCaptureSession
+*/
+SESSION_REGULAR : &quot;0&quot;,
+<span id='android-hardware-camera2-params-SessionConfiguration-property-SESSION_HIGH_SPEED'>/** A high speed session type that can only contain instances of {@link android.hardware.camera2.params.OutputConfiguration}.
+</span> The outputs can run using high speed FPS ranges. Calls to {@link #setInputConfiguration}
+ are not supported.
+
+ @see CameraDevice#createConstrainedHighSpeedCaptureSession
+*/
+SESSION_HIGH_SPEED : &quot;1&quot;,
+<span id='android-hardware-camera2-params-SessionConfiguration-property-SESSION_VENDOR_START'>/** First vendor-specific session mode
+</span> @hide
+*/
+SESSION_VENDOR_START : &quot;32768&quot;,
+<span id='android-hardware-camera2-params-SessionConfiguration-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-hardware-camera2-params-SessionConfiguration-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-equals'>/**Check if this {@link android.hardware.camera2.params.SessionConfiguration} is equal to another {@link android.hardware.camera2.params.SessionConfiguration}.
+</span>
+ &lt;p&gt;Two output session configurations are only equal if and only if the underlying input
+ configuration, output configurations, and session type are equal. &lt;/p&gt;
+@return {Boolean} {@code true} if the objects were equal, {@code false} otherwise
+*/
+equals : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-hashCode'>/**{@inheritDoc}
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-getSessionType'>/**Retrieve the type of the capture session.
+</span>@return {Number} The capture session type.
+*/
+getSessionType : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-getOutputConfigurations'>/**Retrieve the {@link android.hardware.camera2.params.OutputConfiguration} list for the capture session.
+</span>@return {Object {java.util.List}} A list of output configurations for the capture session.
+*/
+getOutputConfigurations : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-getStateCallback'>/**Retrieve the {@link CameraCaptureSession.StateCallback} for the capture session.
+</span>@return {Object {android.hardware.camera2.CameraCaptureSession.StateCallback}} A state callback interface implementation.
+*/
+getStateCallback : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-getExecutor'>/**Retrieve the {@link java.util.concurrent.Executor} for the capture session.
+</span>@return {Object {java.util.concurrent.Executor}} The Executor on which the callback will be invoked.
+*/
+getExecutor : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-setInputConfiguration'>/**Sets the {@link android.hardware.camera2.params.InputConfiguration} for a reprocessable session. Input configuration are not
+</span> supported for {@link #SESSION_HIGH_SPEED}.
+@param {Object {InputConfiguration}} input Input configuration.
+@throws UnsupportedOperationException In case it is called for {@link #SESSION_HIGH_SPEED}
+                                       type session configuration.
+*/
+setInputConfiguration : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-getInputConfiguration'>/**Retrieve the {@link android.hardware.camera2.params.InputConfiguration}.
+</span>@return {Object {android.hardware.camera2.params.InputConfiguration}} The capture session input configuration.
+*/
+getInputConfiguration : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-setSessionParameters'>/**Sets the session wide camera parameters (see {@link CaptureRequest}). This argument can
+</span> be set for every supported session type and will be passed to the camera device as part
+ of the capture session initialization. Session parameters are a subset of the available
+ capture request parameters (see {@link CameraCharacteristics#getAvailableSessionKeys})
+ and their application can introduce internal camera delays. To improve camera performance
+ it is suggested to change them sparingly within the lifetime of the capture session and
+ to pass their initial values as part of this method.
+@param {Object {CaptureRequest}} params A capture request that includes the initial values for any available
+               session wide capture keys. Tags (see {@link CaptureRequest.Builder#setTag}) and
+               output targets (see {@link CaptureRequest.Builder#addTarget}) are ignored if
+               set. Parameter values not part of
+               {@link CameraCharacteristics#getAvailableSessionKeys} will also be ignored. It
+               is recommended to build the session parameters using the same template type as
+               the initial capture request, so that the session and initial request parameters
+               match as much as possible.
+*/
+setSessionParameters : function(  ) {},
+
+<span id='android-hardware-camera2-params-SessionConfiguration-method-getSessionParameters'>/**Retrieve the session wide camera parameters (see {@link CaptureRequest}).
+</span>@return {Object {android.hardware.camera2.CaptureRequest}} A capture request that includes the initial values for any available
+         session wide capture keys.
+*/
+getSessionParameters : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

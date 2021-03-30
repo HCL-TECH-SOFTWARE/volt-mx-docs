@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate'>/**@class android.inputmethodservice.MultiClientInputMethodServiceDelegate
+</span>@extends java.lang.Object
+
+ Defines all the public APIs and interfaces that are necessary to implement multi-client IMEs.
+
+ &lt;p&gt;Actual implementation is further delegated to
+ {@link android.inputmethodservice.MultiClientInputMethodServiceDelegateImpl}.&lt;/p&gt;
+
+ @hide
+*/
+var MultiClientInputMethodServiceDelegate = {
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-property-SERVICE_INTERFACE'>/***/
+</span>SERVICE_INTERFACE : &quot;android.inputmethodservice.MultiClientInputMethodService&quot;,
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-property-INVALID_CLIENT_ID'>/** Special value that is guaranteed to be not used for IME client ID.
+</span>*/
+INVALID_CLIENT_ID : &quot;-1&quot;,
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-property-INVALID_WINDOW_HANDLE'>/** Special value that is guaranteed to be not used for window handle.
+</span>*/
+INVALID_WINDOW_HANDLE : &quot;-1&quot;,
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-create'>/**Must be called by the multi-client IME implementer to create
+</span> {@link android.inputmethodservice.MultiClientInputMethodServiceDelegate}.
+@param {Object {Context}} context {@link Context} with which the delegate should interact with the system.
+@param {Object {MultiClientInputMethodServiceDelegate.ServiceCallback}} serviceCallback {@link ServiceCallback} to receive service-level callbacks.
+@return {Object {android.inputmethodservice.MultiClientInputMethodServiceDelegate}} A new instance of {@link MultiClientInputMethodServiceDelegate}.
+*/
+create : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-onDestroy'>/**Must be called by the multi-client IME service when {@link android.app.Service#onDestroy()}
+</span> is called.
+*/
+onDestroy : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-onBind'>/**Must be called by the multi-client IME service when
+</span> {@link android.app.Service#onBind(Intent)} is called.
+@param {Object {Intent}} intent {@link Intent} passed to {@link android.app.Service#onBind(Intent)}.
+@return {Object {android.os.IBinder}} An {@link IBinder} object that needs to be returned from
+         {@link android.app.Service#onBind(Intent)}.
+*/
+onBind : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-onUnbind'>/**Must be called by the multi-client IME service when
+</span> {@link android.app.Service#onUnbind(Intent)} is called.
+@param {Object {Intent}} intent {@link Intent} passed to {@link android.app.Service#onUnbind(Intent)}.
+@return {Boolean} A boolean value that needs to be returned from
+         {@link android.app.Service#onUnbind(Intent)}.
+*/
+onUnbind : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-createInputMethodWindowToken'>/**Must be called by the multi-client IME service to create a special window token for IME
+</span> window.
+
+ &lt;p&gt;This method is available only after {@link android.inputmethodservice.MultiClientInputMethodServiceDelegate.ServiceCallback#initialized()}.&lt;/p&gt;
+@param {Number} displayId display ID on which the IME window will be shown.
+@return {Object {android.os.IBinder}} Window token to be specified to the IME window/
+*/
+createInputMethodWindowToken : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-acceptClient'>/**Must be called by the multi-client IME service to notify the system when the IME is ready to
+</span> accept callback events from the specified IME client.
+@param {Number} clientId The IME client ID specified in
+                 {@link ServiceCallback#addClient(int, int, int, int)}.
+@param {Object {MultiClientInputMethodServiceDelegate.ClientCallback}} clientCallback The {@link ClientCallback} to receive callback events from this IME
+                       client.
+@param {Object {KeyEvent.DispatcherState}} dispatcherState {@link KeyEvent.DispatcherState} to be used when receiving key-related
+                        callbacks in {@link ClientCallback}.
+@param {Object {Looper}} looper {@link Looper} on which {@link ClientCallback} will be called back.
+*/
+acceptClient : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-reportImeWindowTarget'>/**Must be called by the multi-client IME service to notify the system when the IME is ready to
+</span> interact with the window in the IME client.
+@param {Number} clientId The IME client ID specified in
+                 {@link ServiceCallback#addClient(int, int, int, int)}.
+@param {Number} targetWindowHandle The window handle specified in
+                           {@link ClientCallback#onStartInputOrWindowGainedFocus}.
+@param {Object {IBinder}} imeWindowToken The IME window token returned from
+                       {@link #createInputMethodWindowToken(int)}.
+*/
+reportImeWindowTarget : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-isUidAllowedOnDisplay'>/**Can be called by the multi-client IME service to check if the given {@code uid} is allowed
+</span> to access to {@code displayId}.
+@param {Number} displayId Display ID to be queried.
+@param {Number} uid UID to be queried.
+@return {Boolean} {@code true} if {@code uid} is allowed to access to {@code displayId}.
+*/
+isUidAllowedOnDisplay : function(  ) {},
+
+<span id='android-inputmethodservice-MultiClientInputMethodServiceDelegate-method-setActive'>/**Can be called by MSIME to activate/deactivate a client when it is gaining/losing focus
+</span> respectively.
+@param {Number} clientId client ID to activate/deactivate.
+@param {Boolean} active {@code true} to activate a client.
+*/
+setActive : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

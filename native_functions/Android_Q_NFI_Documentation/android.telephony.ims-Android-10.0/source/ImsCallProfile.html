@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-ImsCallProfile'>/**@class android.telephony.ims.ImsCallProfile
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Parcelable object to handle IMS call profile.
+ It is created from GSMA IR.92/IR.94, 3GPP TS 24.229/TS 26.114/TS26.111.
+ It provides the service and call type, the additional information related to the call.
+
+ @hide
+*/
+var ImsCallProfile = {
+
+<span id='android-telephony-ims-ImsCallProfile-property-SERVICE_TYPE_NONE'>/** It is for a special case. It helps that the application can make a call
+</span> without IMS connection (not registered).
+ In the moment of the call initiation, the device try to connect to the IMS network
+ and initiates the call.
+*/
+SERVICE_TYPE_NONE : &quot;0&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-SERVICE_TYPE_NORMAL'>/** It is a default type and can be selected when the device is connected to the IMS network.
+</span>*/
+SERVICE_TYPE_NORMAL : &quot;1&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-SERVICE_TYPE_EMERGENCY'>/** It is for an emergency call.
+</span>*/
+SERVICE_TYPE_EMERGENCY : &quot;2&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VOICE_N_VIDEO'>/** IMSPhone to support IR.92 &amp; IR.94 (voice + video upgrade/downgrade)
+</span>*/
+CALL_TYPE_VOICE_N_VIDEO : &quot;1&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VOICE'>/** IR.92 (Voice only)
+</span>*/
+CALL_TYPE_VOICE : &quot;2&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VIDEO_N_VOICE'>/** VT to support IR.92 &amp; IR.94 (voice + video upgrade/downgrade)
+</span>*/
+CALL_TYPE_VIDEO_N_VOICE : &quot;3&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VT'>/** Video Telephony (audio / video two way)
+</span>*/
+CALL_TYPE_VT : &quot;4&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VT_TX'>/** Video Telephony (audio two way / video TX one way)
+</span>*/
+CALL_TYPE_VT_TX : &quot;5&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VT_RX'>/** Video Telephony (audio two way / video RX one way)
+</span>*/
+CALL_TYPE_VT_RX : &quot;6&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VT_NODIR'>/** Video Telephony (audio two way / video inactive)
+</span>*/
+CALL_TYPE_VT_NODIR : &quot;7&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VS'>/** VideoShare (video two way)
+</span>*/
+CALL_TYPE_VS : &quot;8&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VS_TX'>/** VideoShare (video TX one way)
+</span>*/
+CALL_TYPE_VS_TX : &quot;9&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_TYPE_VS_RX'>/** VideoShare (video RX one way)
+</span>*/
+CALL_TYPE_VS_RX : &quot;10&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CONFERENCE'>/** @hide
+</span>*/
+EXTRA_CONFERENCE : &quot;conference&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_EMERGENCY_CALL'>/** Boolean extra property set on an {@link android.telephony.ims.ImsCallProfile} to indicate that this call is an
+</span> emergency call.  The {@link android.telephony.ims.ImsService} sets this on a call to indicate that the network has
+ identified the call as an emergency call.
+*/
+EXTRA_EMERGENCY_CALL : &quot;e_call&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_VMS'>/** @hide
+</span>*/
+EXTRA_VMS : &quot;vms&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CALL_MODE_CHANGEABLE'>/** @hide
+</span>*/
+EXTRA_CALL_MODE_CHANGEABLE : &quot;call_mode_changeable&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CONFERENCE_AVAIL'>/** @hide
+</span>*/
+EXTRA_CONFERENCE_AVAIL : &quot;conference_avail&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_OEM_EXTRAS'>/** @hide
+</span>*/
+EXTRA_OEM_EXTRAS : &quot;OemCallExtras&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_OIR'>/** Rule for originating identity (number) presentation, MO/MT.
+</span>      {@link android.telephony.ims.ImsCallProfile#OIR_DEFAULT}
+      {@link android.telephony.ims.ImsCallProfile#OIR_PRESENTATION_RESTRICTED}
+      {@link android.telephony.ims.ImsCallProfile#OIR_PRESENTATION_NOT_RESTRICTED}
+*/
+EXTRA_OIR : &quot;oir&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CNAP'>/** Rule for calling name presentation
+</span>      {@link android.telephony.ims.ImsCallProfile#OIR_DEFAULT}
+      {@link android.telephony.ims.ImsCallProfile#OIR_PRESENTATION_RESTRICTED}
+      {@link android.telephony.ims.ImsCallProfile#OIR_PRESENTATION_NOT_RESTRICTED}
+*/
+EXTRA_CNAP : &quot;cnap&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_DIALSTRING'>/** To identify the Ims call type, MO
+</span>      {@link android.telephony.ims.ImsCallProfile#DIALSTRING_NORMAL}
+      {@link android.telephony.ims.ImsCallProfile#DIALSTRING_SS_CONF}
+      {@link android.telephony.ims.ImsCallProfile#DIALSTRING_USSD}
+*/
+EXTRA_DIALSTRING : &quot;dialstring&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-OIR_DEFAULT'>/** Default presentation for Originating Identity.
+</span>*/
+OIR_DEFAULT : &quot;0&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-OIR_PRESENTATION_RESTRICTED'>/** Restricted presentation for Originating Identity.
+</span>*/
+OIR_PRESENTATION_RESTRICTED : &quot;1&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-OIR_PRESENTATION_NOT_RESTRICTED'>/** Not restricted presentation for Originating Identity.
+</span>*/
+OIR_PRESENTATION_NOT_RESTRICTED : &quot;2&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-OIR_PRESENTATION_UNKNOWN'>/** Presentation unknown for Originating Identity.
+</span>*/
+OIR_PRESENTATION_UNKNOWN : &quot;3&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-OIR_PRESENTATION_PAYPHONE'>/** Payphone presentation for Originating Identity.
+</span>*/
+OIR_PRESENTATION_PAYPHONE : &quot;4&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-DIALSTRING_NORMAL'>/** A default or normal normal call.
+</span>*/
+DIALSTRING_NORMAL : &quot;0&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-DIALSTRING_SS_CONF'>/** Call for SIP-based user configuration
+</span>*/
+DIALSTRING_SS_CONF : &quot;1&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-DIALSTRING_USSD'>/** Call for USSD message
+</span>*/
+DIALSTRING_USSD : &quot;2&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_RESTRICT_CAUSE_NONE'>/** Call is not restricted on peer side and High Definition media is supported
+</span>*/
+CALL_RESTRICT_CAUSE_NONE : &quot;0&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_RESTRICT_CAUSE_RAT'>/** High Definition media is not supported on the peer side due to the Radio Access Technology
+</span> (RAT) it is are connected to.
+*/
+CALL_RESTRICT_CAUSE_RAT : &quot;1&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_RESTRICT_CAUSE_DISABLED'>/** The service has been disabled on the peer side.
+</span>*/
+CALL_RESTRICT_CAUSE_DISABLED : &quot;2&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CALL_RESTRICT_CAUSE_HD'>/** High definition media is not currently supported.
+</span>*/
+CALL_RESTRICT_CAUSE_HD : &quot;3&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_OI'>/** String extra properties
+</span>  oi : Originating identity (number), MT only
+  cna : Calling name
+  ussd : For network-initiated USSD, MT only
+  remote_uri : Connected user identity (it can be used for the conference)
+  ChildNum: Child number info.
+  Codec: Codec info.
+  DisplayText: Display text for the call.
+  AdditionalCallInfo: Additional call info.
+  CallPull: Boolean value specifying if the call is a pulled call.
+*/
+EXTRA_OI : &quot;oi&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CNA'>/***/
+</span>EXTRA_CNA : &quot;cna&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_USSD'>/***/
+</span>EXTRA_USSD : &quot;ussd&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_REMOTE_URI'>/***/
+</span>EXTRA_REMOTE_URI : &quot;remote_uri&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CHILD_NUMBER'>/***/
+</span>EXTRA_CHILD_NUMBER : &quot;ChildNum&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CODEC'>/***/
+</span>EXTRA_CODEC : &quot;Codec&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_DISPLAY_TEXT'>/***/
+</span>EXTRA_DISPLAY_TEXT : &quot;DisplayText&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_ADDITIONAL_CALL_INFO'>/***/
+</span>EXTRA_ADDITIONAL_CALL_INFO : &quot;AdditionalCallInfo&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_IS_CALL_PULL'>/***/
+</span>EXTRA_IS_CALL_PULL : &quot;CallPull&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_ADDITIONAL_SIP_INVITE_FIELDS'>/** String extra property
+</span>  Containing fields from the SIP INVITE message for an IMS call
+*/
+EXTRA_ADDITIONAL_SIP_INVITE_FIELDS : &quot;android.telephony.ims.extra.ADDITIONAL_SIP_INVITE_FIELDS&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CALL_RAT_TYPE'>/** Extra key which the RIL can use to indicate the radio technology used for a call.
+</span> Valid values are:
+ {@link android.telephony.ServiceState#RIL_RADIO_TECHNOLOGY_LTE},
+ {@link android.telephony.ServiceState#RIL_RADIO_TECHNOLOGY_IWLAN}, and the other defined
+ {@code RIL_RADIO_TECHNOLOGY_*} constants.
+ Note: Despite the fact the {@link android.telephony.ServiceState} values are integer
+ constants, the values passed for the {@link #EXTRA_CALL_RAT_TYPE} should be strings (e.g.
+ &quot;14&quot; vs (int) 14).
+ Note: This is used by {@link com.android.internal.telephony.imsphone.ImsPhoneConnection#
+      updateImsCallRatFromExtras(Bundle)} to determine whether to set the
+ {@link android.telecom.TelecomManager#EXTRA_CALL_NETWORK_TYPE} extra value and
+ {@link android.telecom.Connection#PROPERTY_WIFI} property on a connection.
+*/
+EXTRA_CALL_RAT_TYPE : &quot;CallRadioTech&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-EXTRA_CALL_RAT_TYPE_ALT'>/** Similar to {@link #EXTRA_CALL_RAT_TYPE}, except with a lowercase 'c'.  Used to ensure
+</span> compatibility with modems that are non-compliant with the {@link #EXTRA_CALL_RAT_TYPE}
+ extra key.  Should be removed when the non-compliant modems are fixed.
+ @hide
+*/
+EXTRA_CALL_RAT_TYPE_ALT : &quot;callRadioTech&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-mServiceType'>/**@hide */
+</span>mServiceType : &quot;null&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-mCallType'>/**@hide */
+</span>mCallType : &quot;null&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-mRestrictCause'>/**@hide */
+</span>mRestrictCause : &quot;null&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-mCallExtras'>/**@hide */
+</span>mCallExtras : &quot;null&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-mMediaProfile'>/**@hide */
+</span>mMediaProfile : &quot;null&quot;,
+<span id='android-telephony-ims-ImsCallProfile-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-telephony-ims-ImsCallProfile-method-getCallExtra'>/**
+</span>*/
+getCallExtra : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallExtra'>/**
+</span>*/
+getCallExtra : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallExtraBoolean'>/**
+</span>*/
+getCallExtraBoolean : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallExtraBoolean'>/**
+</span>*/
+getCallExtraBoolean : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallExtraInt'>/**
+</span>*/
+getCallExtraInt : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallExtraInt'>/**
+</span>*/
+getCallExtraInt : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setCallExtra'>/**
+</span>*/
+setCallExtra : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setCallExtraBoolean'>/**
+</span>*/
+setCallExtraBoolean : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setCallExtraInt'>/**
+</span>*/
+setCallExtraInt : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setCallRestrictCause'>/**Set the call restrict cause, which provides the reason why a call has been restricted from
+</span> using High Definition media.
+*/
+setCallRestrictCause : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-updateCallType'>/**
+</span>*/
+updateCallType : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-updateCallExtras'>/**
+</span>*/
+updateCallExtras : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-updateMediaProfile'>/**Updates the media profile for the call.
+</span>@param {Object {ImsCallProfile}} profile Call profile with new media profile.
+*/
+updateMediaProfile : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getServiceType'>/**
+</span>*/
+getServiceType : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallType'>/**
+</span>*/
+getCallType : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getRestrictCause'>/**
+</span>@return {Number} The call restrict cause, which provides the reason why a call has been restricted
+ from using High Definition media.
+*/
+getRestrictCause : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallExtras'>/**
+</span>*/
+getCallExtras : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getMediaProfile'>/**
+</span>*/
+getMediaProfile : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getVideoStateFromImsCallProfile'>/**Converts from the call types defined in {@link android.telephony.ims.ImsCallProfile} to the
+</span> video state values defined in {@link VideoProfile}.
+@param {Object {ImsCallProfile}} callProfile The call profile.
+@return {Number} The video state.
+*/
+getVideoStateFromImsCallProfile : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getVideoStateFromCallType'>/**Translates a {@link android.telephony.ims.ImsCallProfile} {@code CALL_TYPE_*} constant into a video state.
+</span>@param {Number} callType The call type.
+@return {Number} The video state.
+*/
+getVideoStateFromCallType : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getCallTypeFromVideoState'>/**Converts from the video state values defined in {@link VideoProfile}
+</span> to the call types defined in {@link android.telephony.ims.ImsCallProfile}.
+@param {Number} videoState The video state.
+@return {Number} The call type.
+*/
+getCallTypeFromVideoState : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-presentationToOIR'>/**Badly named old method, kept for compatibility.
+</span> See {@link #presentationToOir}(int).
+@hide 
+*/
+presentationToOIR : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-presentationToOir'>/**Translate presentation value to OIR value
+</span>@param {Number} presentation
+@return {Number} OIR values
+*/
+presentationToOir : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-OIRToPresentation'>/**Translate OIR value to presentation value
+</span>@param {Number} oir value
+@return {Number} presentation value
+@hide 
+*/
+OIRToPresentation : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-isVideoPaused'>/**Checks if video call is paused
+</span>@return {Boolean} true if call is video paused
+*/
+isVideoPaused : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-isVideoCall'>/**Determines if the {@link android.telephony.ims.ImsCallProfile} represents a video call.
+</span>@return {Boolean} {@code true} if the profile is for a video call, {@code false} otherwise.
+*/
+isVideoCall : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setEmergencyCallInfo'>/**Set the emergency number information. The set value is valid
+</span> only if {@link #getServiceType} returns {@link #SERVICE_TYPE_EMERGENCY}
+
+ Reference: 3gpp 23.167, Section 6 - Functional description;
+            3gpp 24.503, Section 5.1.6.8.1 - General;
+            3gpp 22.101, Section 10 - Emergency Calls.
+@hide 
+*/
+setEmergencyCallInfo : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setEmergencyServiceCategories'>/**Set the emergency service categories. The set value is valid only if
+</span> {@link #getServiceType} returns {@link #SERVICE_TYPE_EMERGENCY}
+
+ If valid, the value is the bitwise-OR combination of the following constants:
+ &lt;ol&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_UNSPECIFIED} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_POLICE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_AMBULANCE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_FIRE_BRIGADE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_MARINE_GUARD} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_MOUNTAIN_RESCUE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_MIEC} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_AIEC} &lt;/li&gt;
+ &lt;/ol&gt;
+
+ Reference: 3gpp 23.167, Section 6 - Functional description;
+            3gpp 22.101, Section 10 - Emergency Calls.
+*/
+setEmergencyServiceCategories : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setEmergencyUrns'>/**Set the emergency Uniform Resource Names (URN), only valid if {@link #getServiceType}
+</span> returns {@link #SERVICE_TYPE_EMERGENCY}.
+
+ Reference: 3gpp 24.503, Section 5.1.6.8.1 - General;
+            3gpp 22.101, Section 10 - Emergency Calls.
+*/
+setEmergencyUrns : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setEmergencyCallRouting'>/**Set the emergency call routing, only valid if {@link #getServiceType} returns
+</span> {@link #SERVICE_TYPE_EMERGENCY}
+
+ If valid, the value is any of the following constants:
+ &lt;ol&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_CALL_ROUTING_UNKNOWN} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_CALL_ROUTING_NORMAL} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_CALL_ROUTING_EMERGENCY} &lt;/li&gt;
+ &lt;/ol&gt;
+*/
+setEmergencyCallRouting : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setEmergencyCallTesting'>/**Set if this is for testing emergency call, only valid if {@link #getServiceType} returns
+</span> {@link #SERVICE_TYPE_EMERGENCY}.
+*/
+setEmergencyCallTesting : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-setHasKnownUserIntentEmergency'>/**Set if we have known the user intent of the call is emergency.
+</span>
+ This is only used to specify when the dialed number is ambiguous when it can be identified
+ as both emergency number and any other non-emergency number; e.g. in some situation, 611
+ could be both an emergency number in a country and a non-emergency number of a carrier's
+ customer service hotline.
+*/
+setHasKnownUserIntentEmergency : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getEmergencyServiceCategories'>/**Get the emergency service categories, only valid if {@link #getServiceType} returns
+</span> {@link #SERVICE_TYPE_EMERGENCY}
+@return {Number} the emergency service categories,
+
+ If valid, the value is the bitwise-OR combination of the following constants:
+ &lt;ol&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_UNSPECIFIED} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_POLICE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_AMBULANCE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_FIRE_BRIGADE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_MARINE_GUARD} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_MOUNTAIN_RESCUE} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_MIEC} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_SERVICE_CATEGORY_AIEC} &lt;/li&gt;
+ &lt;/ol&gt;
+
+ Reference: 3gpp 23.167, Section 6 - Functional description;
+            3gpp 22.101, Section 10 - Emergency Calls.
+*/
+getEmergencyServiceCategories : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getEmergencyUrns'>/**Get the emergency Uniform Resource Names (URN), only valid if {@link #getServiceType}
+</span> returns {@link #SERVICE_TYPE_EMERGENCY}.
+
+ Reference: 3gpp 24.503, Section 5.1.6.8.1 - General;
+            3gpp 22.101, Section 10 - Emergency Calls.
+*/
+getEmergencyUrns : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-getEmergencyCallRouting'>/**Get the emergency call routing, only valid if {@link #getServiceType} returns
+</span> {@link #SERVICE_TYPE_EMERGENCY}
+
+ If valid, the value is any of the following constants:
+ &lt;ol&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_CALL_ROUTING_UNKNOWN} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_CALL_ROUTING_NORMAL} &lt;/li&gt;
+ &lt;li&gt;{@link EmergencyNumber#EMERGENCY_CALL_ROUTING_EMERGENCY} &lt;/li&gt;
+ &lt;/ol&gt;
+*/
+getEmergencyCallRouting : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-isEmergencyCallTesting'>/**Get if the emergency call is for testing purpose.
+</span>*/
+isEmergencyCallTesting : function(  ) {},
+
+<span id='android-telephony-ims-ImsCallProfile-method-hasKnownUserIntentEmergency'>/**Checks if we have known the user intent of the call is emergency.
+</span>
+ This is only used to specify when the dialed number is ambiguous when it can be identified
+ as both emergency number and any other non-emergency number; e.g. in some situation, 611
+ could be both an emergency number in a country and a non-emergency number of a carrier's
+ customer service hotline.
+*/
+hasKnownUserIntentEmergency : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

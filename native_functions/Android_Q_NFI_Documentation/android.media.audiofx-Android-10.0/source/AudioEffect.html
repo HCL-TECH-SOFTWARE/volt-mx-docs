@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiofx-AudioEffect'>/**@class android.media.audiofx.AudioEffect
+</span>@extends java.lang.Object
+
+ AudioEffect is the base class for controlling audio effects provided by the android audio
+ framework.
+ &lt;p&gt;Applications should not use the AudioEffect class directly but one of its derived classes to
+ control specific effects:
+ &lt;ul&gt;
+   &lt;li&gt; {@link android.media.audiofx.Equalizer}&lt;/li&gt;
+   &lt;li&gt; {@link android.media.audiofx.Virtualizer}&lt;/li&gt;
+   &lt;li&gt; {@link android.media.audiofx.BassBoost}&lt;/li&gt;
+   &lt;li&gt; {@link android.media.audiofx.PresetReverb}&lt;/li&gt;
+   &lt;li&gt; {@link android.media.audiofx.EnvironmentalReverb}&lt;/li&gt;
+   &lt;li&gt; {@link android.media.audiofx.DynamicsProcessing}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;To apply the audio effect to a specific AudioTrack or MediaPlayer instance,
+ the application must specify the audio session ID of that instance when creating the AudioEffect.
+ (see {@link android.media.MediaPlayer#getAudioSessionId()} for details on audio sessions).
+ &lt;p&gt;NOTE: attaching insert effects (equalizer, bass boost, virtualizer) to the global audio output
+ mix by use of session 0 is deprecated.
+ &lt;p&gt;Creating an AudioEffect object will create the corresponding effect engine in the audio
+ framework if no instance of the same effect type exists in the specified audio session.
+ If one exists, this instance will be used.
+ &lt;p&gt;The application creating the AudioEffect object (or a derived class) will either receive
+ control of the effect engine or not depending on the priority parameter. If priority is higher
+ than the priority used by the current effect engine owner, the control will be transfered to the
+ new object. Otherwise control will remain with the previous object. In this case, the new
+ application will be notified of changes in effect engine state or control ownership by the
+ appropriate listener.
+*/
+var AudioEffect = {
+
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_ENV_REVERB'>/** UUID for environmental reverberation effect
+</span>*/
+EFFECT_TYPE_ENV_REVERB : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_PRESET_REVERB'>/** UUID for preset reverberation effect
+</span>*/
+EFFECT_TYPE_PRESET_REVERB : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_EQUALIZER'>/** UUID for equalizer effect
+</span>*/
+EFFECT_TYPE_EQUALIZER : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_BASS_BOOST'>/** UUID for bass boost effect
+</span>*/
+EFFECT_TYPE_BASS_BOOST : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_VIRTUALIZER'>/** UUID for virtualizer effect
+</span>*/
+EFFECT_TYPE_VIRTUALIZER : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_AGC'>/** UUID for Automatic Gain Control (AGC)
+</span>*/
+EFFECT_TYPE_AGC : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_AEC'>/** UUID for Acoustic Echo Canceler (AEC)
+</span>*/
+EFFECT_TYPE_AEC : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_NS'>/** UUID for Noise Suppressor (NS)
+</span>*/
+EFFECT_TYPE_NS : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_LOUDNESS_ENHANCER'>/** UUID for Loudness Enhancer
+</span>*/
+EFFECT_TYPE_LOUDNESS_ENHANCER : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_DYNAMICS_PROCESSING'>/** UUID for Dynamics Processing
+</span>*/
+EFFECT_TYPE_DYNAMICS_PROCESSING : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_TYPE_NULL'>/** Null effect UUID. See {@link android.media.audiofx.AudioEffect(UUID, UUID, int, int)} for use.
+</span> @hide
+*/
+EFFECT_TYPE_NULL : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-STATE_UNINITIALIZED'>/** State of an AudioEffect object that was not successfully initialized upon
+</span> creation
+ @hide
+*/
+STATE_UNINITIALIZED : &quot;0&quot;,
+<span id='android-media-audiofx-AudioEffect-property-STATE_INITIALIZED'>/** State of an AudioEffect object that is ready to be used.
+</span> @hide
+*/
+STATE_INITIALIZED : &quot;1&quot;,
+<span id='android-media-audiofx-AudioEffect-property-NATIVE_EVENT_CONTROL_STATUS'>/** Event id for engine control ownership change notification.
+</span> @hide
+*/
+NATIVE_EVENT_CONTROL_STATUS : &quot;0&quot;,
+<span id='android-media-audiofx-AudioEffect-property-NATIVE_EVENT_ENABLED_STATUS'>/** Event id for engine state change notification.
+</span> @hide
+*/
+NATIVE_EVENT_ENABLED_STATUS : &quot;1&quot;,
+<span id='android-media-audiofx-AudioEffect-property-NATIVE_EVENT_PARAMETER_CHANGED'>/** Event id for engine parameter change notification.
+</span> @hide
+*/
+NATIVE_EVENT_PARAMETER_CHANGED : &quot;2&quot;,
+<span id='android-media-audiofx-AudioEffect-property-SUCCESS'>/** Successful operation.
+</span>*/
+SUCCESS : &quot;0&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ERROR'>/** Unspecified error.
+</span>*/
+ERROR : &quot;-1&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ALREADY_EXISTS'>/** Internal operation status. Not returned by any method.
+</span>*/
+ALREADY_EXISTS : &quot;-2&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ERROR_NO_INIT'>/** Operation failed due to bad object initialization.
+</span>*/
+ERROR_NO_INIT : &quot;-3&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ERROR_BAD_VALUE'>/** Operation failed due to bad parameter value.
+</span>*/
+ERROR_BAD_VALUE : &quot;-4&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ERROR_INVALID_OPERATION'>/** Operation failed because it was requested in wrong state.
+</span>*/
+ERROR_INVALID_OPERATION : &quot;-5&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ERROR_NO_MEMORY'>/** Operation failed due to lack of memory.
+</span>*/
+ERROR_NO_MEMORY : &quot;-6&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ERROR_DEAD_OBJECT'>/** Operation failed due to dead remote object.
+</span>*/
+ERROR_DEAD_OBJECT : &quot;-7&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_INSERT'>/** Effect connection mode is insert. Specifying an audio session ID when creating the effect
+</span> will insert this effect after all players in the same audio session.
+*/
+EFFECT_INSERT : &quot;Insert&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_AUXILIARY'>/** Effect connection mode is auxiliary.
+</span> &lt;p&gt;Auxiliary effects must be created on session 0 (global output mix). In order for a
+ MediaPlayer or AudioTrack to be fed into this effect, they must be explicitely attached to
+ this effect and a send level must be specified.
+ &lt;p&gt;Use the effect ID returned by {@link #getId}() to designate this particular effect when
+ attaching it to the MediaPlayer or AudioTrack.
+*/
+EFFECT_AUXILIARY : &quot;Auxiliary&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EFFECT_PRE_PROCESSING'>/** Effect connection mode is pre processing.
+</span> The audio pre processing effects are attached to an audio input (AudioRecord).
+ @hide
+*/
+EFFECT_PRE_PROCESSING : &quot;Pre Processing&quot;,
+<span id='android-media-audiofx-AudioEffect-property-mListenerLock'>/** Lock to protect listeners updates against event notifications
+</span> @hide
+*/
+mListenerLock : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-mNativeEventHandler'>/** Handler for events coming from the native code
+</span> @hide
+*/
+mNativeEventHandler : &quot;null&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL'>/**  Intent to launch an audio effect control panel UI.
+</span>  &lt;p&gt;The goal of this intent is to enable separate implementations of music/media player
+  applications and audio effect control application or services.
+  This will allow platform vendors to offer more advanced control options for standard effects
+  or control for platform specific effects.
+  &lt;p&gt;The intent carries a number of extras used by the player application to communicate
+  necessary pieces of information to the control panel application.
+  &lt;p&gt;The calling application must use the
+  {@link android.app.Activity#startActivityForResult(Intent, int)} method to launch the
+  control panel so that its package name is indicated and used by the control panel
+  application to keep track of changes for this particular application.
+  &lt;p&gt;The {@link #EXTRA_AUDIO_SESSION} extra will indicate an audio session to which the
+  audio effects should be applied. If no audio session is specified, either one of the
+  follownig will happen:
+  &lt;p&gt;- If an audio session was previously opened by the calling application with
+  {@link #ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION} intent, the effect changes will
+  be applied to that session.
+  &lt;p&gt;- If no audio session is opened, the changes will be stored in the package specific
+  storage area and applied whenever a new audio session is opened by this application.
+  &lt;p&gt;The {@link #EXTRA_CONTENT_TYPE} extra will help the control panel application
+  customize both the UI layout and the default audio effect settings if none are already
+  stored for the calling application.
+*/
+ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL : &quot;android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION'>/**  Intent to signal to the effect control application or service that a new audio session
+</span>  is opened and requires audio effects to be applied.
+  &lt;p&gt;This is different from {@link #ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL} in that no
+  UI should be displayed in this case. Music player applications can broadcast this intent
+  before starting playback to make sure that any audio effect settings previously selected
+  by the user are applied.
+  &lt;p&gt;The effect control application receiving this intent will look for previously stored
+  settings for the calling application, create all required audio effects and apply the
+  effect settings to the specified audio session.
+  &lt;p&gt;The calling package name is indicated by the {@link #EXTRA_PACKAGE_NAME} extra and the
+  audio session ID by the {@link #EXTRA_AUDIO_SESSION} extra. Both extras are mandatory.
+  &lt;p&gt;If no stored settings are found for the calling application, default settings for the
+  content type indicated by {@link #EXTRA_CONTENT_TYPE} will be applied. The default settings
+  for a given content type are platform specific.
+*/
+ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION : &quot;android.media.action.OPEN_AUDIO_EFFECT_CONTROL_SESSION&quot;,
+<span id='android-media-audiofx-AudioEffect-property-ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION'>/**  Intent to signal to the effect control application or service that an audio session
+</span>  is closed and that effects should not be applied anymore.
+  &lt;p&gt;The effect control application receiving this intent will delete all effects on
+  this session and store current settings in package specific storage.
+  &lt;p&gt;The calling package name is indicated by the {@link #EXTRA_PACKAGE_NAME} extra and the
+  audio session ID by the {@link #EXTRA_AUDIO_SESSION} extra. Both extras are mandatory.
+  &lt;p&gt;It is good practice for applications to broadcast this intent when music playback stops
+  and/or when exiting to free system resources consumed by audio effect engines.
+*/
+ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION : &quot;android.media.action.CLOSE_AUDIO_EFFECT_CONTROL_SESSION&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EXTRA_AUDIO_SESSION'>/** Contains the ID of the audio session the effects should be applied to.
+</span> &lt;p&gt;This extra is for use with {@link #ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL},
+ {@link #ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION} and
+ {@link #ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION} intents.
+ &lt;p&gt;The extra value is of type int and is the audio session ID.
+  @see android.media.MediaPlayer#getAudioSessionId() for details on audio sessions.
+*/
+EXTRA_AUDIO_SESSION : &quot;android.media.extra.AUDIO_SESSION&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EXTRA_PACKAGE_NAME'>/** Contains the package name of the calling application.
+</span> &lt;p&gt;This extra is for use with {@link #ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION} and
+ {@link #ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION} intents.
+ &lt;p&gt;The extra value is a string containing the full package name.
+*/
+EXTRA_PACKAGE_NAME : &quot;android.media.extra.PACKAGE_NAME&quot;,
+<span id='android-media-audiofx-AudioEffect-property-EXTRA_CONTENT_TYPE'>/** Indicates which type of content is played by the application.
+</span> &lt;p&gt;This extra is for use with {@link #ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL} and
+ {@link #ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION} intents.
+ &lt;p&gt;This information is used by the effect control application to customize UI and select
+ appropriate default effect settings. The content type is one of the following:
+ &lt;ul&gt;
+   &lt;li&gt;{@link #CONTENT_TYPE_MUSIC}&lt;/li&gt;
+   &lt;li&gt;{@link #CONTENT_TYPE_MOVIE}&lt;/li&gt;
+   &lt;li&gt;{@link #CONTENT_TYPE_GAME}&lt;/li&gt;
+   &lt;li&gt;{@link #CONTENT_TYPE_VOICE}&lt;/li&gt;
+ &lt;/ul&gt;
+ If omitted, the content type defaults to {@link #CONTENT_TYPE_MUSIC}.
+*/
+EXTRA_CONTENT_TYPE : &quot;android.media.extra.CONTENT_TYPE&quot;,
+<span id='android-media-audiofx-AudioEffect-property-CONTENT_TYPE_MUSIC'>/** Value for {@link #EXTRA_CONTENT_TYPE} when the type of content played is music
+</span>*/
+CONTENT_TYPE_MUSIC : &quot;0&quot;,
+<span id='android-media-audiofx-AudioEffect-property-CONTENT_TYPE_MOVIE'>/** Value for {@link #EXTRA_CONTENT_TYPE} when the type of content played is video or movie
+</span>*/
+CONTENT_TYPE_MOVIE : &quot;1&quot;,
+<span id='android-media-audiofx-AudioEffect-property-CONTENT_TYPE_GAME'>/** Value for {@link #EXTRA_CONTENT_TYPE} when the type of content played is game audio
+</span>*/
+CONTENT_TYPE_GAME : &quot;2&quot;,
+<span id='android-media-audiofx-AudioEffect-property-CONTENT_TYPE_VOICE'>/** Value for {@link #EXTRA_CONTENT_TYPE} when the type of content played is voice audio
+</span>*/
+CONTENT_TYPE_VOICE : &quot;3&quot;,
+<span id='android-media-audiofx-AudioEffect-method-release'>/**Releases the native AudioEffect resources. It is a good practice to
+</span> release the effect engine when not in use as control can be returned to
+ other applications or the native resources released.
+*/
+release : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getDescriptor'>/**Get the effect descriptor.
+</span>@see android.media.audiofx.AudioEffect.Descriptor
+@throws IllegalStateException
+*/
+getDescriptor : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-queryEffects'>/**Query all effects available on the platform. Returns an array of
+</span> {@link android.media.audiofx.AudioEffect.Descriptor} objects
+@throws IllegalStateException
+*/
+queryEffects : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-queryPreProcessings'>/**Query all audio pre-processing effects applied to the AudioRecord with the supplied
+</span> audio session ID. Returns an array of {@link android.media.audiofx.AudioEffect.Descriptor}
+ objects.
+@param {Number} audioSession system wide unique audio session identifier.
+@throws IllegalStateException
+@hide 
+*/
+queryPreProcessings : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-isEffectTypeAvailable'>/**Checks if the device implements the specified effect type.
+</span>@param {Object {UUID}} type the requested effect type.
+@return {Boolean} true if the device implements the specified effect type, false otherwise.
+@hide 
+*/
+isEffectTypeAvailable : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setEnabled'>/**Enable or disable the effect.
+</span> Creating an audio effect does not automatically apply this effect on the audio source. It
+ creates the resources necessary to process this effect but the audio signal is still bypassed
+ through the effect engine. Calling this method will make that the effect is actually applied
+ or not to the audio content being played in the corresponding audio session.
+@param {Boolean} enabled the requested enable state
+@return {Number} {@link #SUCCESS} in case of success, {@link #ERROR_INVALID_OPERATION}
+         or {@link #ERROR_DEAD_OBJECT} in case of failure.
+@throws IllegalStateException
+*/
+setEnabled : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameter'>/**Set effect parameter. The setParameter method is provided in several
+</span> forms addressing most common parameter formats. This form is the most
+ generic one where the parameter and its value are both specified as an
+ array of bytes. The parameter and value type and length are therefore
+ totally free. For standard effect defined by OpenSL ES, the parameter
+ format and values must match the definitions in the corresponding OpenSL
+ ES interface.
+@param {Object {byte[]}} param the identifier of the parameter to set
+@param {Object {byte[]}} value the new value for the specified parameter
+@return {Number} {@link #SUCCESS} in case of success, {@link #ERROR_BAD_VALUE},
+         {@link #ERROR_NO_MEMORY}, {@link #ERROR_INVALID_OPERATION} or
+         {@link #ERROR_DEAD_OBJECT} in case of failure
+@throws IllegalStateException
+@hide 
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameter'>/**Set effect parameter. The parameter and its value are integers.
+</span>@see #setParameter(byte[], byte[])
+@hide 
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameter'>/**Set effect parameter. The parameter is an integer and the value is a
+</span> short integer.
+@see #setParameter(byte[], byte[])
+@hide 
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameter'>/**Set effect parameter. The parameter is an integer and the value is an
+</span> array of bytes.
+@see #setParameter(byte[], byte[])
+@hide 
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameter'>/**Set effect parameter. The parameter is an array of 1 or 2 integers and
+</span> the value is also an array of 1 or 2 integers
+@see #setParameter(byte[], byte[])
+@hide 
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameter'>/**Set effect parameter. The parameter is an array of 1 or 2 integers and
+</span> the value is an array of 1 or 2 short integers
+@see #setParameter(byte[], byte[])
+@hide 
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameter'>/**Set effect parameter. The parameter is an array of 1 or 2 integers and
+</span> the value is an array of bytes
+@see #setParameter(byte[], byte[])
+@hide 
+*/
+setParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getParameter'>/**Get effect parameter. The getParameter method is provided in several
+</span> forms addressing most common parameter formats. This form is the most
+ generic one where the parameter and its value are both specified as an
+ array of bytes. The parameter and value type and length are therefore
+ totally free.
+@param {Object {byte[]}} param the identifier of the parameter to set
+@param {Object {byte[]}} value the new value for the specified parameter
+@return {Number} the number of meaningful bytes in value array in case of success or
+  {@link #ERROR_BAD_VALUE}, {@link #ERROR_NO_MEMORY}, {@link #ERROR_INVALID_OPERATION}
+  or {@link #ERROR_DEAD_OBJECT} in case of failure.
+@throws IllegalStateException
+@hide 
+*/
+getParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getParameter'>/**Get effect parameter. The parameter is an integer and the value is an
+</span> array of bytes.
+@see #getParameter(byte[], byte[])
+@hide 
+*/
+getParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getParameter'>/**Get effect parameter. The parameter is an integer and the value is an
+</span> array of 1 or 2 integers
+@see #getParameter(byte[], byte[])
+ In case of success, returns the number of meaningful integers in value array.
+@hide 
+*/
+getParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getParameter'>/**Get effect parameter. The parameter is an integer and the value is an
+</span> array of 1 or 2 short integers
+@see #getParameter(byte[], byte[])
+ In case of success, returns the number of meaningful short integers in value array.
+@hide 
+*/
+getParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getParameter'>/**Get effect parameter. The parameter is an array of 1 or 2 integers and
+</span> the value is also an array of 1 or 2 integers
+@see #getParameter(byte[], byte[])
+ In case of success, the returns the number of meaningful integers in value array.
+@hide 
+*/
+getParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getParameter'>/**Get effect parameter. The parameter is an array of 1 or 2 integers and
+</span> the value is an array of 1 or 2 short integers
+@see #getParameter(byte[], byte[])
+ In case of success, returns the number of meaningful short integers in value array.
+@hide 
+*/
+getParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getParameter'>/**Get effect parameter. The parameter is an array of 1 or 2 integers and
+</span> the value is an array of bytes
+@see #getParameter(byte[], byte[])
+@hide 
+*/
+getParameter : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-command'>/**Send a command to the effect engine. This method is intended to send
+</span> proprietary commands to a particular effect implementation.
+ In case of success, returns the number of meaningful bytes in reply array.
+ In case of failure, the returned value is negative and implementation specific.
+@hide 
+*/
+command : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getId'>/**Returns effect unique identifier. This system wide unique identifier can
+</span> be used to attach this effect to a MediaPlayer or an AudioTrack when the
+ effect is an auxiliary effect (Reverb)
+@return {Number} the effect identifier.
+@throws IllegalStateException
+*/
+getId : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-getEnabled'>/**Returns effect enabled state
+</span>@return {Boolean} true if the effect is enabled, false otherwise.
+@throws IllegalStateException
+*/
+getEnabled : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-hasControl'>/**Checks if this AudioEffect object is controlling the effect engine.
+</span>@return {Boolean} true if this instance has control of effect engine, false
+         otherwise.
+@throws IllegalStateException
+*/
+hasControl : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setEnableStatusListener'>/**Sets the listener AudioEffect notifies when the effect engine is enabled
+</span> or disabled.
+@param {Object {AudioEffect.OnEnableStatusChangeListener}} listener
+*/
+setEnableStatusListener : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setControlStatusListener'>/**Sets the listener AudioEffect notifies when the effect engine control is
+</span> taken or returned.
+@param {Object {AudioEffect.OnControlStatusChangeListener}} listener
+*/
+setControlStatusListener : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-setParameterListener'>/**Sets the listener AudioEffect notifies when a parameter is changed.
+</span>@param {Object {AudioEffect.OnParameterChangeListener}} listener
+@hide 
+*/
+setParameterListener : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-checkState'>/**
+</span>@hide 
+*/
+checkState : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-checkStatus'>/**
+</span>@hide 
+*/
+checkStatus : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-isError'>/**
+</span>@hide 
+*/
+isError : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-byteArrayToInt'>/**
+</span>@hide 
+*/
+byteArrayToInt : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-byteArrayToInt'>/**
+</span>@hide 
+*/
+byteArrayToInt : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-intToByteArray'>/**
+</span>@hide 
+*/
+intToByteArray : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-byteArrayToShort'>/**
+</span>@hide 
+*/
+byteArrayToShort : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-byteArrayToShort'>/**
+</span>@hide 
+*/
+byteArrayToShort : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-shortToByteArray'>/**
+</span>@hide 
+*/
+shortToByteArray : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-byteArrayToFloat'>/**
+</span>@hide 
+*/
+byteArrayToFloat : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-byteArrayToFloat'>/**
+</span>@hide 
+*/
+byteArrayToFloat : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-floatToByteArray'>/**
+</span>@hide 
+*/
+floatToByteArray : function(  ) {},
+
+<span id='android-media-audiofx-AudioEffect-method-concatArrays'>/**
+</span>@hide 
+*/
+concatArrays : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

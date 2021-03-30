@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-location-provider-LocationProviderBase'>/**@class com.android.location.provider.LocationProviderBase
+</span>@extends java.lang.Object
+
+ Base class for location providers implemented as unbundled services.
+
+ &lt;p&gt;The network location provider must export a service with action
+ &quot;com.android.location.service.v2.NetworkLocationProvider&quot;
+ and a valid minor version in a meta-data field on the service, and
+ then return the result of {@link #getBinder}() on service binding.
+
+ &lt;p&gt;The fused location provider must export a service with action
+ &quot;com.android.location.service.FusedLocationProvider&quot;
+ and a valid minor version in a meta-data field on the service, and
+ then return the result of {@link #getBinder}() on service binding.
+
+ &lt;p&gt;IMPORTANT: This class is effectively a public API for unbundled
+ applications, and must remain API stable. See README.txt in the root
+ of this package for more information.
+*/
+var LocationProviderBase = {
+
+<span id='com-android-location-provider-LocationProviderBase-property-EXTRA_NO_GPS_LOCATION'>/** Bundle key for a version of the location containing no GPS data.
+</span> Allows location providers to flag locations as being safe to
+ feed to LocationFudger.
+*/
+EXTRA_NO_GPS_LOCATION : &quot;noGPSLocation&quot;,
+<span id='com-android-location-provider-LocationProviderBase-property-FUSED_PROVIDER'>/** Name of the Fused location provider.
+</span>
+ &lt;p&gt;This provider combines inputs for all possible location sources
+ to provide the best possible Location fix.
+*/
+FUSED_PROVIDER : &quot;fused&quot;,
+<span id='com-android-location-provider-LocationProviderBase-method-getBinder'>/**
+</span>*/
+getBinder : function(  ) {},
+
+<span id='com-android-location-provider-LocationProviderBase-method-setEnabled'>/**Sets whether this provider is currently enabled or not. Note that this is specific to the
+</span> provider only, and is not related to global location settings. This is a hint to the Location
+ Manager that this provider will generally be unable to fulfill incoming requests. This
+ provider may still receive callbacks to onSetRequest while not enabled, and must decide
+ whether to attempt to satisfy those requests or not.
+
+ Some guidelines: providers should set their own enabled/disabled status based only on state
+ &quot;owned&quot; by that provider. For instance, providers should not take into account the state of
+ the location master setting when setting themselves enabled or disabled, as this state is not
+ owned by a particular provider. If a provider requires some additional user consent that is
+ particular to the provider, this should be use to set the enabled/disabled state. If the
+ provider proxies to another provider, the child provider's enabled/disabled state should be
+ taken into account in the parent's enabled/disabled state. For most providers, it is expected
+ that they will be always enabled.
+*/
+setEnabled : function(  ) {},
+
+<span id='com-android-location-provider-LocationProviderBase-method-setProperties'>/**Sets the provider properties that may be queried by clients. Generally speaking, providers
+</span> should try to avoid changing their properties after construction.
+*/
+setProperties : function(  ) {},
+
+<span id='com-android-location-provider-LocationProviderBase-method-setAdditionalProviderPackages'>/**Sets a list of additional packages that should be considered as part of this location
+</span> provider for the purposes of generating locations. This should generally only be used when
+ another package may issue location requests on behalf of this package in the course of
+ providing location. This will inform location services to treat the other packages as
+ location providers as well.
+*/
+setAdditionalProviderPackages : function(  ) {},
+
+<span id='com-android-location-provider-LocationProviderBase-method-isEnabled'>/**Returns true if this provider has been set as enabled. This will be true unless explicitly
+</span> set otherwise.
+*/
+isEnabled : function(  ) {},
+
+<span id='com-android-location-provider-LocationProviderBase-method-reportLocation'>/**Reports a new location from this provider.
+</span>*/
+reportLocation : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

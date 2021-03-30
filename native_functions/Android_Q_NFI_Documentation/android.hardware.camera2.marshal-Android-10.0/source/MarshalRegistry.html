@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-marshal-MarshalRegistry'>/**@class android.hardware.camera2.marshal.MarshalRegistry
+</span>@extends java.lang.Object
+
+ Registry of supported marshalers; add new query-able marshalers or lookup existing ones.&lt;/p&gt;
+*/
+var MarshalRegistry = {
+
+<span id='android-hardware-camera2-marshal-MarshalRegistry-method-registerMarshalQueryable'>/**Register a marshal queryable for the managed type {@code T}.
+</span>
+ &lt;p&gt;Multiple marshal queryables for the same managed type {@code T} may be registered;
+ this is desirable if they support different native types (e.g. marshaler 1 supports
+ {@code Integer &lt;-&gt; TYPE_INT32}, marshaler 2 supports {@code Integer &lt;-&gt; TYPE_BYTE}.&lt;/p&gt;
+@param {Object {android.hardware.camera2.marshal.MarshalQueryable}} queryable a non-{@code null} marshal queryable that supports marshaling {@code T}
+*/
+registerMarshalQueryable : function(  ) {},
+
+<span id='android-hardware-camera2-marshal-MarshalRegistry-method-getMarshaler'>/**Lookup a marshaler between {@code T} and {@code nativeType}.
+</span>
+ &lt;p&gt;Marshalers are looked up in the order they were registered; earlier registered
+ marshal queriers get priority.&lt;/p&gt;
+@param {Object {android.hardware.camera2.utils.TypeReference}} typeToken The compile-time type reference for {@code T}
+@param {Number} nativeType The native type, e.g. {@link CameraMetadataNative#TYPE_BYTE TYPE_BYTE}
+@return {Object {android.hardware.camera2.marshal.Marshaler}} marshaler a non-{@code null} marshaler that supports marshaling the type combo
+@throws UnsupportedOperationException If no marshaler matching the args could be found
+*/
+getMarshaler : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

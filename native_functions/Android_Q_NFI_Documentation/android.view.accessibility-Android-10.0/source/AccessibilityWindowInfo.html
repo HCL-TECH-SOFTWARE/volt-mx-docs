@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-accessibility-AccessibilityWindowInfo'>/**@class android.view.accessibility.AccessibilityWindowInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class represents a state snapshot of a window for accessibility
+ purposes. The screen content contains one or more windows where some
+ windows can be descendants of other windows, which is the windows are
+ hierarchically ordered. Note that there is no root window. Hence, the
+ screen content can be seen as a collection of window trees.
+*/
+var AccessibilityWindowInfo = {
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-TYPE_APPLICATION'>/** Window type: This is an application window. Such a window shows UI for
+</span> interacting with an application.
+*/
+TYPE_APPLICATION : &quot;1&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-TYPE_INPUT_METHOD'>/** Window type: This is an input method window. Such a window shows UI for
+</span> inputting text such as keyboard, suggestions, etc.
+*/
+TYPE_INPUT_METHOD : &quot;2&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-TYPE_SYSTEM'>/** Window type: This is an system window. Such a window shows UI for
+</span> interacting with the system.
+*/
+TYPE_SYSTEM : &quot;3&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-TYPE_ACCESSIBILITY_OVERLAY'>/** Window type: Windows that are overlaid &lt;em&gt;only&lt;/em&gt; by an {@link android.accessibilityservice.AccessibilityService} for interception of
+</span> user interactions without changing the windows an accessibility service
+ can introspect. In particular, an accessibility service can introspect
+ only windows that a sighted user can interact with which they can touch
+ these windows or can type into these windows. For example, if there
+ is a full screen accessibility overlay that is touchable, the windows
+ below it will be introspectable by an accessibility service regardless
+ they are covered by a touchable window.
+*/
+TYPE_ACCESSIBILITY_OVERLAY : &quot;4&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-TYPE_SPLIT_SCREEN_DIVIDER'>/** Window type: A system window used to divide the screen in split-screen mode.
+</span> This type of window is present only in split-screen mode.
+*/
+TYPE_SPLIT_SCREEN_DIVIDER : &quot;5&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-ACTIVE_WINDOW_ID'>/**@hide */
+</span>ACTIVE_WINDOW_ID : &quot;2147483647&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-UNDEFINED_WINDOW_ID'>/**@hide */
+</span>UNDEFINED_WINDOW_ID : &quot;-1&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-ANY_WINDOW_ID'>/**@hide */
+</span>ANY_WINDOW_ID : &quot;-2&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-PICTURE_IN_PICTURE_ACTION_REPLACER_WINDOW_ID'>/**@hide */
+</span>PICTURE_IN_PICTURE_ACTION_REPLACER_WINDOW_ID : &quot;-3&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getTitle'>/**Gets the title of the window.
+</span>@return {Object {java.lang.CharSequence}} The title of the window, or {@code null} if none is available.
+*/
+getTitle : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setTitle'>/**Sets the title of the window.
+</span>@param {Object {CharSequence}} title The title.
+@hide 
+*/
+setTitle : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getType'>/**Gets the type of the window.
+</span>@return {Number} The type.
+@see #TYPE_APPLICATION
+@see #TYPE_INPUT_METHOD
+@see #TYPE_SYSTEM
+@see #TYPE_ACCESSIBILITY_OVERLAY
+*/
+getType : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setType'>/**Sets the type of the window.
+</span>@param {Number} type The type
+@hide 
+*/
+setType : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getLayer'>/**Gets the layer which determines the Z-order of the window. Windows
+</span> with greater layer appear on top of windows with lesser layer.
+@return {Number} The window layer.
+*/
+getLayer : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setLayer'>/**Sets the layer which determines the Z-order of the window. Windows
+</span> with greater layer appear on top of windows with lesser layer.
+@param {Number} layer The window layer.
+@hide 
+*/
+setLayer : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getRoot'>/**Gets the root node in the window's hierarchy.
+</span>@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The root node.
+*/
+getRoot : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setAnchorId'>/**Sets the anchor node's ID.
+</span>@param {Number} anchorId The anchor's accessibility id in its window.
+@hide 
+*/
+setAnchorId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getAnchor'>/**Gets the node that anchors this window to another.
+</span>@return {Object {android.view.accessibility.AccessibilityNodeInfo}} The anchor node, or {@code null} if none exists.
+*/
+getAnchor : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setPictureInPicture'>/**
+</span>@hide 
+*/
+setPictureInPicture : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-isInPictureInPictureMode'>/**Check if the window is in picture-in-picture mode.
+</span>@return {Boolean} {@code true} if the window is in picture-in-picture mode, {@code false} otherwise.
+*/
+isInPictureInPictureMode : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getParent'>/**Gets the parent window.
+</span>@return {Object {android.view.accessibility.AccessibilityWindowInfo}} The parent window, or {@code null} if none exists.
+*/
+getParent : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setParentId'>/**Sets the parent window id.
+</span>@param {Number} parentId The parent id.
+@hide 
+*/
+setParentId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getId'>/**Gets the unique window id.
+</span>@return {Number} windowId The window id.
+*/
+getId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setId'>/**Sets the unique window id.
+</span>@param {Number} id The window id.
+@hide 
+*/
+setId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setConnectionId'>/**Sets the unique id of the IAccessibilityServiceConnection over which
+</span> this instance can send requests to the system.
+@param {Number} connectionId The connection id.
+@hide 
+*/
+setConnectionId : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getBoundsInScreen'>/**Gets the bounds of this window in the screen.
+</span>@param {Object {Rect}} outBounds The out window bounds.
+*/
+getBoundsInScreen : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setBoundsInScreen'>/**Sets the bounds of this window in the screen.
+</span>@param {Object {Rect}} bounds The out window bounds.
+@hide 
+*/
+setBoundsInScreen : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-isActive'>/**Gets if this window is active. An active window is the one
+</span> the user is currently touching or the window has input focus
+ and the user is not touching any window.
+@return {Boolean} Whether this is the active window.
+*/
+isActive : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setActive'>/**Sets if this window is active, which is this is the window
+</span> the user is currently touching or the window has input focus
+ and the user is not touching any window.
+@param {Boolean} active Whether this is the active window.
+@hide 
+*/
+setActive : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-isFocused'>/**Gets if this window has input focus.
+</span>@return {Boolean} Whether has input focus.
+*/
+isFocused : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setFocused'>/**Sets if this window has input focus.
+</span>@param {Boolean} focused Whether has input focus.
+@hide 
+*/
+setFocused : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-isAccessibilityFocused'>/**Gets if this window has accessibility focus.
+</span>@return {Boolean} Whether has accessibility focus.
+*/
+isAccessibilityFocused : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setAccessibilityFocused'>/**Sets if this window has accessibility focus.
+</span>@param {Boolean} focused Whether has accessibility focus.
+@hide 
+*/
+setAccessibilityFocused : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getChildCount'>/**Gets the number of child windows.
+</span>@return {Number} The child count.
+*/
+getChildCount : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-getChild'>/**Gets the child window at a given index.
+</span>@param {Number} index The index.
+@return {Object {android.view.accessibility.AccessibilityWindowInfo}} The child.
+*/
+getChild : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-addChild'>/**Adds a child window.
+</span>@param {Number} childId The child window id.
+@hide 
+*/
+addChild : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-obtain'>/**Returns a cached instance if such is available or a new one is
+</span> created.
+@return {Object {android.view.accessibility.AccessibilityWindowInfo}} An instance.
+*/
+obtain : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-obtain'>/**Returns a cached instance if such is available or a new one is
+</span> created. The returned instance is initialized from the given
+ &lt;code&gt;info&lt;/code&gt;.
+@param {Object {AccessibilityWindowInfo}} info The other info.
+@return {Object {android.view.accessibility.AccessibilityWindowInfo}} An instance.
+*/
+obtain : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-setNumInstancesInUseCounter'>/**Specify a counter that will be incremented on obtain() and decremented on recycle()
+</span>@hide 
+*/
+setNumInstancesInUseCounter : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-recycle'>/**Return an instance back to be reused.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; You must not touch the object after calling this function.
+ &lt;/p&gt;
+@throws IllegalStateException If the info is already recycled.
+*/
+recycle : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-changed'>/**Checks whether this window changed. The argument should be
+</span> another state of the same window, which is have the same id
+ and type as they never change.
+@param {Object {AccessibilityWindowInfo}} other The new state.
+@return {Boolean} Whether something changed.
+@hide 
+*/
+changed : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityWindowInfo-method-differenceFrom'>/**Reports how this window differs from a possibly different state of the same window. The
+</span> argument must have the same id and type as neither of those properties may change.
+@param {Object {AccessibilityWindowInfo}} other The new state.
+@return {Number} A set of flags showing how the window has changes, or 0 if the two states are the
+ same.
+@hide 
+*/
+differenceFrom : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

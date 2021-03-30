@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-KernelCpuThreadReaderDiff'>/**@class com.android.internal.os.KernelCpuThreadReaderDiff
+</span>@extends java.lang.Object
+
+ Delegates per-thread CPU collection to {@link com.android.internal.os.KernelCpuThreadReader}, and calculates the
+ difference between CPU usage at each call of {@link #getProcessCpuUsageDiffed}().
+
+ &lt;p&gt;Some notes on the diff calculation:
+
+ &lt;ul&gt;
+   &lt;li&gt;The diffing is done between each call of {@link #getProcessCpuUsageDiffed}(), i.e. call N
+       of this method will return CPU used by threads between call N-1 and N.
+   &lt;li&gt;The first call of {@link #getProcessCpuUsageDiffed}() will return no processes (&quot;first
+       call&quot; is the first call in the lifetime of a {@link com.android.internal.os.KernelCpuThreadReaderDiff} object).
+   &lt;li&gt;If a thread does not exist at call N, but does exist at call N+1, the diff will assume that
+       the CPU usage at call N was zero. Thus, the diff reported will be equivalent to the value
+       returned by {@link com.android.internal.os.KernelCpuThreadReader#getProcessCpuUsage()} at call N+1.
+   &lt;li&gt;If an error occurs in {@link com.android.internal.os.KernelCpuThreadReader} at call N, we will return no
+       information for CPU usage between call N-1 and N (as we don't know the start value) and
+       between N and N+1 (as we don't know the end value). Assuming all other calls are
+       successful, the next call to return data will be N+2, for the period between N+1 and N+2.
+   &lt;li&gt;If an error occurs in this class (but not in {@link com.android.internal.os.KernelCpuThreadReader}) at call N, the
+       data will only be dropped for call N, as we can still use the CPU data for the surrounding
+       calls.
+ &lt;/ul&gt;
+
+ &lt;p&gt;Additionally to diffing, this class also contains logic for thresholding reported threads. A
+ thread will not be reported unless its total CPU usage is at least equal to the value set in
+ {@link #setMinimumTotalCpuUsageMillis}. Filtered thread CPU usage is summed and reported under
+ one &quot;other threads&quot; thread. This reduces the cardinality of the {@link #getProcessCpuUsageDiffed}() result.
+
+ &lt;p&gt;Thresholding is done in this class, instead of {@link com.android.internal.os.KernelCpuThreadReader}, and instead of
+ WestWorld, because the thresholding should be done after diffing, not before. This is because of
+ two issues with thresholding before diffing:
+
+ &lt;ul&gt;
+   &lt;li&gt;We would threshold less and less threads as thread uptime increases.
+   &lt;li&gt;We would encounter errors as the filtered threads become unfiltered, as the &quot;other threads&quot;
+       result could have negative diffs, and the newly unfiltered threads would have incorrect
+       diffs that include CPU usage from when they were filtered.
+ &lt;/ul&gt;
+
+ @hide Only for use within the system server
+*/
+var KernelCpuThreadReaderDiff = {
+
+<span id='com-android-internal-os-KernelCpuThreadReaderDiff-method-getProcessCpuUsageDiffed'>/**Returns the difference in CPU usage since the last time this method was called.
+</span>@see KernelCpuThreadReader#getProcessCpuUsage()
+*/
+getProcessCpuUsageDiffed : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuThreadReaderDiff-method-getCpuFrequenciesKhz'>/**
+</span>@see KernelCpuThreadReader#getCpuFrequenciesKhz()
+*/
+getCpuFrequenciesKhz : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-accessibility-AccessibilityRequestPreparer'>/**@class android.view.accessibility.AccessibilityRequestPreparer
+</span>@extends java.lang.Object
+
+ Object responsible to ensuring that a {@link View} is prepared to meet a synchronous request for
+ accessibility data.
+ &lt;p&gt;
+ Because accessibility requests arrive to {@link View}s synchronously on the UI thread, a View
+ that requires information from other processes can struggle to meet those requests. Registering
+ an instance of this class with {@link android.view.accessibility.AccessibilityManager} allows a View to be notified when
+ a request is about to be made, and to asynchronously inform the accessibility system when it is
+ ready to meet the request.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; This class should only be needed in exceptional situations where a
+ {@link View} cannot otherwise synchronously meet the request for accessibility data.
+*/
+var AccessibilityRequestPreparer = {
+
+<span id='android-view-accessibility-AccessibilityRequestPreparer-property-REQUEST_TYPE_EXTRA_DATA'>/***/
+</span>REQUEST_TYPE_EXTRA_DATA : &quot;1&quot;,
+<span id='android-view-accessibility-AccessibilityRequestPreparer-method-onPrepareExtraData'>/**Callback to allow preparation for filling extra data. Only called back if
+</span> REQUEST_TYPE_EXTRA_DATA is requested.
+@param {Number} virtualViewId The ID of a virtual child node, if the {@link View} for this preparer
+ supports virtual descendents, or {@link AccessibilityNodeProvider#HOST_VIEW_ID}
+ if the request is for the view itself.
+@param {String} extraDataKey The extra data key for the request
+@param {Object {Bundle}} args The arguments for the request
+@param {Object {Message}} preparationFinishedMessage A message that must be sent to its target when preparations
+ are complete.
+@see View#addExtraDataToAccessibilityNodeInfo(AccessibilityNodeInfo, String, Bundle)
+@see View.AccessibilityDelegate#addExtraDataToAccessibilityNodeInfo(
+ View, AccessibilityNodeInfo, String, Bundle)
+@see AccessibilityNodeProvider#addExtraDataToAccessibilityNodeInfo(
+ int, AccessibilityNodeInfo, String, Bundle)
+*/
+onPrepareExtraData : function(  ) {},
+
+<span id='android-view-accessibility-AccessibilityRequestPreparer-method-getView'>/**Get the view this object was created with.
+</span>@return {Object {android.view.View}} The view this object was created with, or {@code null} if the weak reference held
+ to the view is no longer valid.
+*/
+getView : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

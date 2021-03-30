@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaSession2-SessionCallback'>/**@class android.media.MediaSession2.SessionCallback
+</span>@extends java.lang.Object
+
+ This API is not generally intended for third party application developers.
+ Use the &lt;a href=&quot;{@docRoot}jetpack/androidx.html&quot;&gt;AndroidX&lt;/a&gt;
+ &lt;a href=&quot;{@docRoot}reference/androidx/media2/session/package-summary.html&quot;&gt;Media2 session
+ Library&lt;/a&gt; for consistent behavior across all devices.
+ &lt;p&gt;
+ Callback to be called for all incoming commands from {@link android.media.MediaController2}s.
+*/
+var SessionCallback = {
+
+<span id='android-media-MediaSession2-SessionCallback-method-onConnect'>/**Called when a controller is created for this session. Return allowed commands for
+</span> controller. By default it returns {@code null}.
+ &lt;p&gt;
+ You can reject the connection by returning {@code null}. In that case, controller
+ receives {@link android.media.MediaController2.ControllerCallback#onDisconnected(android.media.MediaController2)}
+ and cannot be used.
+ &lt;p&gt;
+ The controller hasn't connected yet in this method, so calls to the controller
+ (e.g. {@link #sendSessionCommand}) would be ignored. Override {@link #onPostConnect} for
+ the custom initialization for the controller instead.
+@param {Object {MediaSession2}} session the session for this event
+@param {Object {MediaSession2.ControllerInfo}} controller controller information.
+@return {Object {android.media.Session2CommandGroup}} allowed commands. Can be {@code null} to reject connection.
+*/
+onConnect : function(  ) {},
+
+<span id='android-media-MediaSession2-SessionCallback-method-onPostConnect'>/**Called immediately after a controller is connected. This is a convenient method to add
+</span> custom initialization between the session and a controller.
+ &lt;p&gt;
+ Note that calls to the controller (e.g. {@link #sendSessionCommand}) work here but don't
+ work in {@link #onConnect} because the controller hasn't connected yet in
+ {@link #onConnect}.
+@param {Object {MediaSession2}} session the session for this event
+@param {Object {MediaSession2.ControllerInfo}} controller controller information.
+*/
+onPostConnect : function(  ) {},
+
+<span id='android-media-MediaSession2-SessionCallback-method-onDisconnected'>/**Called when a controller is disconnected
+</span>@param {Object {MediaSession2}} session the session for this event
+@param {Object {MediaSession2.ControllerInfo}} controller controller information
+*/
+onDisconnected : function(  ) {},
+
+<span id='android-media-MediaSession2-SessionCallback-method-onSessionCommand'>/**Called when a controller sent a session command.
+</span>@param {Object {MediaSession2}} session the session for this event
+@param {Object {MediaSession2.ControllerInfo}} controller controller information
+@param {Object {Session2Command}} command the session command
+@param {Object {Bundle}} args optional arguments
+@return {Object {android.media.Session2Command.Result}} the result for the session command. If {@code null}, RESULT_INFO_SKIPPED
+         will be sent to the session.
+*/
+onSessionCommand : function(  ) {},
+
+<span id='android-media-MediaSession2-SessionCallback-method-onCommandResult'>/**Called when the command sent to the controller is finished.
+</span>@param {Object {MediaSession2}} session the session for this event
+@param {Object {MediaSession2.ControllerInfo}} controller controller information
+@param {Object {Object}} token the token got from {@link MediaSession2#sendSessionCommand}
+@param {Object {Session2Command}} command the session command
+@param {Object {Session2Command.Result}} result the result of the session command
+*/
+onCommandResult : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

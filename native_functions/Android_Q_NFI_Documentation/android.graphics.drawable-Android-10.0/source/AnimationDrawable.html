@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-AnimationDrawable'>/**@class android.graphics.drawable.AnimationDrawable
+</span> implements java.lang.Runnable
+
+ implements android.graphics.drawable.Animatable
+
+@extends android.graphics.drawable.DrawableContainer
+
+ An object used to create frame-by-frame animations, defined by a series of
+ Drawable objects, which can be used as a View object's background.
+ &lt;p&gt;
+ The simplest way to create a frame-by-frame animation is to define the
+ animation in an XML file, placed in the res/drawable/ folder, and set it as
+ the background to a View object. Then, call {@link #start}() to run the
+ animation.
+ &lt;p&gt;
+ An AnimationDrawable defined in XML consists of a single
+ {@code &lt;animation-list&gt;} element and a series of nested
+ {@code &lt;item&gt;} tags. Each item defines a frame of the animation. See
+ the example below.
+ &lt;p&gt;
+ spin_animation.xml file in res/drawable/ folder:
+ &lt;pre&gt;
+ &amp;lt;!-- Animation frames are wheel0.png through wheel5.png
+     files inside the res/drawable/ folder --&amp;gt;
+ &amp;lt;animation-list android:id=&amp;quot;@+id/selected&amp;quot; android:oneshot=&amp;quot;false&amp;quot;&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/wheel0&amp;quot; android:duration=&amp;quot;50&amp;quot; /&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/wheel1&amp;quot; android:duration=&amp;quot;50&amp;quot; /&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/wheel2&amp;quot; android:duration=&amp;quot;50&amp;quot; /&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/wheel3&amp;quot; android:duration=&amp;quot;50&amp;quot; /&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/wheel4&amp;quot; android:duration=&amp;quot;50&amp;quot; /&amp;gt;
+    &amp;lt;item android:drawable=&amp;quot;@drawable/wheel5&amp;quot; android:duration=&amp;quot;50&amp;quot; /&amp;gt;
+ &amp;lt;/animation-list&amp;gt;&lt;/pre&gt;
+ &lt;p&gt;
+ Here is the code to load and play this animation.
+ &lt;pre&gt;
+ // Load the ImageView that will host the animation and
+ // set its background to our AnimationDrawable XML resource.
+ ImageView img = (ImageView)findViewById(R.id.spinning_wheel_image);
+ img.setBackgroundResource(R.drawable.spin_animation);
+
+ // Get the background, which has been compiled to an AnimationDrawable object.
+ AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+
+ // Start the animation (looped playback by default).
+ frameAnimation.start();
+ &lt;/pre&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about animating with {@code AnimationDrawable}, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/graphics/drawable-animation.html&quot;&gt;Drawable Animation&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ @attr ref android.R.styleable#AnimationDrawable_visible
+ @attr ref android.R.styleable#AnimationDrawable_variablePadding
+ @attr ref android.R.styleable#AnimationDrawable_oneshot
+ @attr ref android.R.styleable#AnimationDrawableItem_duration
+ @attr ref android.R.styleable#AnimationDrawableItem_drawable
+*/
+var AnimationDrawable = {
+
+<span id='android-graphics-drawable-AnimationDrawable-method-setVisible'>/**Sets whether this AnimationDrawable is visible.
+</span> &lt;p&gt;
+ When the drawable becomes invisible, it will pause its animation. A subsequent change to
+ visible with &lt;code&gt;restart&lt;/code&gt; set to true will restart the animation from the
+ first frame. If &lt;code&gt;restart&lt;/code&gt; is false, the drawable will resume from the most recent
+ frame. If the drawable has already reached the last frame, it will then loop back to the
+ first frame, unless it's a one shot drawable (set through {@link #setOneShot}(boolean)),
+ in which case, it will stay on the last frame.
+@param {Boolean} visible true if visible, false otherwise
+@param {Boolean} restart when visible, true to force the animation to restart
+                from the first frame
+@return {Boolean} true if the new visibility is different than its previous state
+*/
+setVisible : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-start'>/**Starts the animation from the first frame, looping if necessary. This method has no effect
+</span> if the animation is running.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Do not call this in the
+ {@link android.app.Activity#onCreate} method of your activity, because
+ the {@link android.graphics.drawable.AnimationDrawable} is not yet fully attached to the window.
+ If you want to play the animation immediately without requiring
+ interaction, then you might want to call it from the
+ {@link android.app.Activity#onWindowFocusChanged} method in your
+ activity, which will get called when Android brings your window into
+ focus.
+@see #isRunning()
+@see #stop()
+*/
+start : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-stop'>/**Stops the animation at the current frame. This method has no effect if the animation is not
+</span> running.
+@see #isRunning()
+@see #start()
+*/
+stop : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-isRunning'>/**Indicates whether the animation is currently running or not.
+</span>@return {Boolean} true if the animation is running, false otherwise
+*/
+isRunning : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-run'>/**This method exists for implementation purpose only and should not be
+</span> called directly. Invoke {@link #start}() instead.
+@see #start()
+*/
+run : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-unscheduleSelf'>/**
+</span>*/
+unscheduleSelf : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-getNumberOfFrames'>/**
+</span>@return {Number} The number of frames in the animation
+*/
+getNumberOfFrames : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-getFrame'>/**
+</span>@return {Object {android.graphics.drawable.Drawable}} The Drawable at the specified frame index
+*/
+getFrame : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-getDuration'>/**
+</span>@return {Number} The duration in milliseconds of the frame at the
+         specified index
+*/
+getDuration : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-isOneShot'>/**
+</span>@return {Boolean} True of the animation will play once, false otherwise
+*/
+isOneShot : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-setOneShot'>/**Sets whether the animation should play once or repeat.
+</span>@param {Boolean} oneShot Pass true if the animation should only play once
+*/
+setOneShot : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-addFrame'>/**Adds a frame to the animation
+</span>@param {Object {Drawable}} frame The frame to add
+@param {Number} duration How long in milliseconds the frame should appear
+*/
+addFrame : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-mutate'>/**
+</span>*/
+mutate : function(  ) {},
+
+<span id='android-graphics-drawable-AnimationDrawable-method-clearMutated'>/**
+</span>@hide 
+*/
+clearMutated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

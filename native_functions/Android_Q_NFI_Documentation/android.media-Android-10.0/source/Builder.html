@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-AudioAttributes-Builder'>/**@class android.media.AudioAttributes.Builder
+</span>@extends java.lang.Object
+
+ Builder class for {@link android.media.AudioAttributes} objects.
+ &lt;p&gt; Here is an example where &lt;code&gt;Builder&lt;/code&gt; is used to define the
+ {@link android.media.AudioAttributes} to be used by a new &lt;code&gt;AudioTrack&lt;/code&gt; instance:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ AudioTrack myTrack = new AudioTrack(
+         new AudioAttributes.Builder()
+             .setUsage(AudioAttributes.USAGE_MEDIA)
+             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+             .build(),
+         myFormat, myBuffSize, AudioTrack.MODE_STREAM, mySession);
+ &lt;/pre&gt;
+
+ &lt;p&gt;By default all types of information (usage, content type, flags) conveyed by an
+ &lt;code&gt;AudioAttributes&lt;/code&gt; instance are set to &quot;unknown&quot;. Unknown information will be
+ interpreted as a default value that is dependent on the context of use, for instance a
+ {@link android.media.MediaPlayer} will use a default usage of {@link android.media.AudioAttributes#USAGE_MEDIA}.
+*/
+var Builder = {
+
+<span id='android-media-AudioAttributes-Builder-method-build'>/**Combines all of the attributes that have been set and return a new
+</span> {@link android.media.AudioAttributes} object.
+@return {Object {android.media.AudioAttributes}} a new {@link AudioAttributes} object
+*/
+build : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setUsage'>/**Sets the attribute describing what is the intended use of the the audio signal,
+</span> such as alarm or ringtone.
+@param {Number} usage one of {@link AudioAttributes#USAGE_UNKNOWN},
+     {@link AudioAttributes#USAGE_MEDIA},
+     {@link AudioAttributes#USAGE_VOICE_COMMUNICATION},
+     {@link AudioAttributes#USAGE_VOICE_COMMUNICATION_SIGNALLING},
+     {@link AudioAttributes#USAGE_ALARM}, {@link AudioAttributes#USAGE_NOTIFICATION},
+     {@link AudioAttributes#USAGE_NOTIFICATION_RINGTONE},
+     {@link AudioAttributes#USAGE_NOTIFICATION_COMMUNICATION_REQUEST},
+     {@link AudioAttributes#USAGE_NOTIFICATION_COMMUNICATION_INSTANT},
+     {@link AudioAttributes#USAGE_NOTIFICATION_COMMUNICATION_DELAYED},
+     {@link AudioAttributes#USAGE_NOTIFICATION_EVENT},
+     {@link AudioAttributes#USAGE_ASSISTANT},
+     {@link AudioAttributes#USAGE_ASSISTANCE_ACCESSIBILITY},
+     {@link AudioAttributes#USAGE_ASSISTANCE_NAVIGATION_GUIDANCE},
+     {@link AudioAttributes#USAGE_ASSISTANCE_SONIFICATION},
+     {@link AudioAttributes#USAGE_GAME}.
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setUsage : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setContentType'>/**Sets the attribute describing the content type of the audio signal, such as speech,
+</span> or music.
+@param {Number} contentType the content type values, one of
+     {@link AudioAttributes#CONTENT_TYPE_MOVIE},
+     {@link AudioAttributes#CONTENT_TYPE_MUSIC},
+     {@link AudioAttributes#CONTENT_TYPE_SONIFICATION},
+     {@link AudioAttributes#CONTENT_TYPE_SPEECH},
+     {@link AudioAttributes#CONTENT_TYPE_UNKNOWN}.
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setContentType : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setFlags'>/**Sets the combination of flags.
+</span>
+ This is a bitwise OR with the existing flags.
+@param {Number} flags a combination of {@link AudioAttributes#FLAG_AUDIBILITY_ENFORCED},
+    {@link AudioAttributes#FLAG_HW_AV_SYNC}.
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setFlags : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setAllowedCapturePolicy'>/**Specifies whether the audio may or may not be captured by other apps or the system.
+</span>
+ The default is {@link android.media.AudioAttributes#ALLOW_CAPTURE_BY_ALL}.
+
+ There are multiple ways to set this policy:
+ &lt;ul&gt;
+ &lt;li&gt; for each track independently, with this method &lt;/li&gt;
+ &lt;li&gt; application-wide at runtime, with
+      {@link android.media.AudioManager#setAllowedCapturePolicy(int)} &lt;/li&gt;
+ &lt;li&gt; application-wide at build time, see {@code allowAudioPlaybackCapture} in the
+      application manifest. &lt;/li&gt;
+ &lt;/ul&gt;
+ The most restrictive policy is always applied.
+
+ See {@link android.media.AudioPlaybackCaptureConfiguration} for more details on
+ which audio signals can be captured.
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance
+@throws IllegalArgumentException if the argument is not a valid value.
+*/
+setAllowedCapturePolicy : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-replaceFlags'>/**
+</span>@param {Number} flags any combination of {@link AudioAttributes#FLAG_ALL}.
+@param flags any combination of {@link AudioAttributes#FLAG_ALL}.
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+replaceFlags : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-addBundle'>/**
+</span>@param {Object {Bundle}} bundle a non-null Bundle
+@param bundle a non-null Bundle
+@return {Object {android.media.AudioAttributes.Builder}} the same builder instance
+*/
+addBundle : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-addTag'>/**
+</span>@param {String} tag
+@param tag
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+addTag : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setLegacyStreamType'>/**Sets attributes as inferred from the legacy stream types.
+</span> Warning: do not use this method in combination with setting any other attributes such as
+ usage, content type, flags or haptic control, as this method will overwrite (the more
+ accurate) information describing the use case previously set in the &lt;code&gt;Builder&lt;/code&gt;.
+ In general, avoid using it and prefer setting usage and content type directly
+ with {@link #setUsage}(int) and {@link #setContentType}(int).
+ &lt;p&gt;Use this method when building an {@link android.media.AudioAttributes} instance to initialize some
+ of the attributes by information derived from a legacy stream type.
+@param {Number} streamType one of {@link AudioManager#STREAM_VOICE_CALL},
+   {@link AudioManager#STREAM_SYSTEM}, {@link AudioManager#STREAM_RING},
+   {@link AudioManager#STREAM_MUSIC}, {@link AudioManager#STREAM_ALARM},
+    or {@link AudioManager#STREAM_NOTIFICATION}.
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setLegacyStreamType : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setInternalLegacyStreamType'>/**
+</span>@param {Number} streamType
+@param streamType
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setInternalLegacyStreamType : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setCapturePreset'>/**
+</span>@param {Number} preset one of {@link MediaRecorder.AudioSource#DEFAULT},
+     {@link MediaRecorder.AudioSource#MIC}, {@link MediaRecorder.AudioSource#CAMCORDER},
+     {@link MediaRecorder.AudioSource#VOICE_RECOGNITION},
+     {@link MediaRecorder.AudioSource#VOICE_COMMUNICATION},
+     {@link MediaRecorder.AudioSource#UNPROCESSED} or
+     {@link MediaRecorder.AudioSource#VOICE_PERFORMANCE}
+@param preset one of {@link MediaRecorder.AudioSource#DEFAULT},
+     {@link MediaRecorder.AudioSource#MIC}, {@link MediaRecorder.AudioSource#CAMCORDER},
+     {@link MediaRecorder.AudioSource#VOICE_RECOGNITION},
+     {@link MediaRecorder.AudioSource#VOICE_COMMUNICATION},
+     {@link MediaRecorder.AudioSource#UNPROCESSED} or
+     {@link MediaRecorder.AudioSource#VOICE_PERFORMANCE}
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setCapturePreset : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setInternalCapturePreset'>/**
+</span>@param {Number} preset
+@param preset
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setInternalCapturePreset : function(  ) {},
+
+<span id='android-media-AudioAttributes-Builder-method-setHapticChannelsMuted'>/**Specifying if haptic should be muted or not when playing audio-haptic coupled data.
+</span> By default, haptic channels are disabled.
+@param {Boolean} muted true to force muting haptic channels.
+@return {Object {android.media.AudioAttributes.Builder}} the same Builder instance.
+*/
+setHapticChannelsMuted : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

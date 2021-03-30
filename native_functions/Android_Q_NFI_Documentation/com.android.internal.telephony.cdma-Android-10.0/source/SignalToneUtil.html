@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-cdma-SignalToneUtil'>/**@class com.android.internal.telephony.cdma.SignalToneUtil
+</span>@extends java.lang.Object
+
+*/
+var SignalToneUtil = {
+
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-CDMA_INVALID_TONE'>/**A marker that isn't a valid TONE */
+</span>CDMA_INVALID_TONE : &quot;-1&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIGNAL_TONE'>/***/
+</span>IS95_CONST_IR_SIGNAL_TONE : &quot;0&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIGNAL_ISDN'>/***/
+</span>IS95_CONST_IR_SIGNAL_ISDN : &quot;1&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIGNAL_IS54B'>/***/
+</span>IS95_CONST_IR_SIGNAL_IS54B : &quot;2&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIGNAL_USR_DEFD_ALERT'>/***/
+</span>IS95_CONST_IR_SIGNAL_USR_DEFD_ALERT : &quot;4&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_ALERT_MED'>/***/
+</span>IS95_CONST_IR_ALERT_MED : &quot;0&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_ALERT_HIGH'>/***/
+</span>IS95_CONST_IR_ALERT_HIGH : &quot;1&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_ALERT_LOW'>/***/
+</span>IS95_CONST_IR_ALERT_LOW : &quot;2&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-TAPIAMSSCDMA_SIGNAL_PITCH_UNKNOWN'>/***/
+</span>TAPIAMSSCDMA_SIGNAL_PITCH_UNKNOWN : &quot;0&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_NORMAL'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_NORMAL : &quot;0&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_INTGRP'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_INTGRP : &quot;1&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_SP_PRI'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_SP_PRI : &quot;2&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_PAT_3'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_PAT_3 : &quot;3&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_PING'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_PING : &quot;4&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_PAT_5'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_PAT_5 : &quot;5&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_PAT_6'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_PAT_6 : &quot;6&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_PAT_7'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_PAT_7 : &quot;7&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_ISDN_OFF'>/***/
+</span>IS95_CONST_IR_SIG_ISDN_OFF : &quot;15&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_DIAL'>/***/
+</span>IS95_CONST_IR_SIG_TONE_DIAL : &quot;0&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_RING'>/***/
+</span>IS95_CONST_IR_SIG_TONE_RING : &quot;1&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_INT'>/***/
+</span>IS95_CONST_IR_SIG_TONE_INT : &quot;2&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_ABB_INT'>/***/
+</span>IS95_CONST_IR_SIG_TONE_ABB_INT : &quot;3&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_REORDER'>/***/
+</span>IS95_CONST_IR_SIG_TONE_REORDER : &quot;4&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_ABB_RE'>/***/
+</span>IS95_CONST_IR_SIG_TONE_ABB_RE : &quot;5&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_BUSY'>/***/
+</span>IS95_CONST_IR_SIG_TONE_BUSY : &quot;6&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_CONFIRM'>/***/
+</span>IS95_CONST_IR_SIG_TONE_CONFIRM : &quot;7&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_ANSWER'>/***/
+</span>IS95_CONST_IR_SIG_TONE_ANSWER : &quot;8&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_CALL_W'>/***/
+</span>IS95_CONST_IR_SIG_TONE_CALL_W : &quot;9&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_PIP'>/***/
+</span>IS95_CONST_IR_SIG_TONE_PIP : &quot;10&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_NO_TONE'>/***/
+</span>IS95_CONST_IR_SIG_TONE_NO_TONE : &quot;63&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_NO_TONE'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_NO_TONE : &quot;0&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_L'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_L : &quot;1&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_SS'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_SS : &quot;2&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_SSL'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_SSL : &quot;3&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_SS_2'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_SS_2 : &quot;4&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_SLS'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_SLS : &quot;5&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_S_X4'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_S_X4 : &quot;6&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_PBX_L'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_PBX_L : &quot;7&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_PBX_SS'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_PBX_SS : &quot;8&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_PBX_SSL'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_PBX_SSL : &quot;9&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_PBX_SLS'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_PBX_SLS : &quot;10&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_IS54B_PBX_S_X4'>/***/
+</span>IS95_CONST_IR_SIG_IS54B_PBX_S_X4 : &quot;11&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-property-IS95_CONST_IR_SIG_TONE_ABBR_ALRT'>/***/
+</span>IS95_CONST_IR_SIG_TONE_ABBR_ALRT : &quot;0&quot;,
+<span id='com-android-internal-telephony-cdma-SignalToneUtil-method-getAudioToneFromSignalInfo'>/**
+</span>*/
+getAudioToneFromSignalInfo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

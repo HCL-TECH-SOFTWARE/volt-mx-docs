@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-textclassifier-TextClassifierEvent'>/**@class android.view.textclassifier.TextClassifierEvent
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ This class represents events that are sent by components to the {@link android.view.textclassifier.TextClassifier} to report
+ something of note that relates to a feature powered by the TextClassifier. The TextClassifier may
+ log these events or use them to improve future responses to queries.
+ &lt;p&gt;
+ Each category of events has its their own subclass. Events of each type have an associated
+ set of related properties. You can find their specification in the subclasses.
+*/
+var TextClassifierEvent = {
+
+<span id='android-view-textclassifier-TextClassifierEvent-property-CATEGORY_SELECTION'>/** Smart selection
+</span>
+ @see TextSelectionEvent
+*/
+CATEGORY_SELECTION : &quot;1&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-CATEGORY_LINKIFY'>/** Linkify
+</span>
+ @see TextLinkifyEvent
+*/
+CATEGORY_LINKIFY : &quot;2&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-CATEGORY_CONVERSATION_ACTIONS'>/**  Conversation actions
+</span>
+ @see ConversationActionsEvent
+*/
+CATEGORY_CONVERSATION_ACTIONS : &quot;3&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-CATEGORY_LANGUAGE_DETECTION'>/** Language detection
+</span>
+ @see LanguageDetectionEvent
+*/
+CATEGORY_LANGUAGE_DETECTION : &quot;4&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SELECTION_STARTED'>/**User started a new selection. */
+</span>TYPE_SELECTION_STARTED : &quot;1&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SELECTION_MODIFIED'>/**User modified an existing selection. */
+</span>TYPE_SELECTION_MODIFIED : &quot;2&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SMART_SELECTION_SINGLE'>/**Smart selection triggered for a single token (word). */
+</span>TYPE_SMART_SELECTION_SINGLE : &quot;3&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SMART_SELECTION_MULTI'>/**Smart selection triggered spanning multiple tokens (words). */
+</span>TYPE_SMART_SELECTION_MULTI : &quot;4&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_AUTO_SELECTION'>/**Something else other than user or the default TextClassifier triggered a selection. */
+</span>TYPE_AUTO_SELECTION : &quot;5&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_ACTIONS_SHOWN'>/**Smart actions shown to the user. */
+</span>TYPE_ACTIONS_SHOWN : &quot;6&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_LINK_CLICKED'>/**User clicked a link. */
+</span>TYPE_LINK_CLICKED : &quot;7&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_OVERTYPE'>/**User typed over the selection. */
+</span>TYPE_OVERTYPE : &quot;8&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_COPY_ACTION'>/**User clicked on Copy action. */
+</span>TYPE_COPY_ACTION : &quot;9&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_PASTE_ACTION'>/**User clicked on Paste action. */
+</span>TYPE_PASTE_ACTION : &quot;10&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_CUT_ACTION'>/**User clicked on Cut action. */
+</span>TYPE_CUT_ACTION : &quot;11&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SHARE_ACTION'>/**User clicked on Share action. */
+</span>TYPE_SHARE_ACTION : &quot;12&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SMART_ACTION'>/**User clicked on a Smart action. */
+</span>TYPE_SMART_ACTION : &quot;13&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SELECTION_DRAG'>/**User dragged+dropped the selection. */
+</span>TYPE_SELECTION_DRAG : &quot;14&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SELECTION_DESTROYED'>/**Selection is destroyed. */
+</span>TYPE_SELECTION_DESTROYED : &quot;15&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_OTHER_ACTION'>/**User clicked on a custom action. */
+</span>TYPE_OTHER_ACTION : &quot;16&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SELECT_ALL'>/**User clicked on Select All action */
+</span>TYPE_SELECT_ALL : &quot;17&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_SELECTION_RESET'>/**User reset the smart selection. */
+</span>TYPE_SELECTION_RESET : &quot;18&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_MANUAL_REPLY'>/**User composed a reply. */
+</span>TYPE_MANUAL_REPLY : &quot;19&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-TYPE_ACTIONS_GENERATED'>/**TextClassifier generated some actions */
+</span>TYPE_ACTIONS_GENERATED : &quot;20&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-mHiddenTempSessionId'>/** Session id holder to help with converting this event to the legacy SelectionEvent.
+</span> @hide
+*/
+mHiddenTempSessionId : &quot;null&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-textclassifier-TextClassifierEvent-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getEventCategory'>/**Returns the event category. e.g. {@link #CATEGORY_SELECTION}.
+</span>*/
+getEventCategory : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getEventType'>/**Returns the event type. e.g. {@link #TYPE_SELECTION_STARTED}.
+</span>*/
+getEventType : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getEntityTypes'>/**Returns an array of entity types. e.g. {@link android.view.textclassifier.TextClassifier#TYPE_ADDRESS}.
+</span>@see Builder#setEntityTypes(String...) for supported types.
+*/
+getEntityTypes : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getEventContext'>/**Returns the event context.
+</span>*/
+getEventContext : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getResultId'>/**Returns the id of the text classifier result related to this event.
+</span>*/
+getResultId : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getEventIndex'>/**Returns the index of this event in the series of event it belongs to.
+</span>*/
+getEventIndex : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getScores'>/**Returns the scores of the suggestions.
+</span>*/
+getScores : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getModelName'>/**Returns the model name.
+</span>*/
+getModelName : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getActionIndices'>/**Returns the indices of the actions relating to this event.
+</span> Actions are usually returned by the text classifier in priority order with the most
+ preferred action at index 0. This list gives an indication of the position of the actions
+ that are being reported.
+@see Builder#setActionIndices(int...)
+*/
+getActionIndices : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getLocale'>/**Returns the detected locale.
+</span>*/
+getLocale : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-getExtras'>/**Returns a bundle containing non-structured extra information about this event.
+</span>
+ &lt;p&gt;&lt;b&gt;NOTE: &lt;/b&gt;Do not modify this bundle.
+*/
+getExtras : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-view-textclassifier-TextClassifierEvent-method-toSelectionEvent'>/**Returns a {@link android.view.textclassifier.SelectionEvent} equivalent of this event; or {@code null} if it can not be
+</span> converted to a {@link android.view.textclassifier.SelectionEvent}.
+@hide 
+*/
+toSelectionEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

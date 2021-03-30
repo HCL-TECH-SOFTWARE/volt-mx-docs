@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-Uri'>/**@class android.net.Uri
+</span> implements android.os.Parcelable
+
+ implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ Immutable URI reference. A URI reference includes a URI and a fragment, the
+ component of the URI following a '#'. Builds and parses URI references
+ which conform to
+ &lt;a href=&quot;http://www.faqs.org/rfcs/rfc2396.html&quot;&gt;RFC 2396&lt;/a&gt;.
+
+ &lt;p&gt;In the interest of performance, this class performs little to no
+ validation. Behavior is undefined for invalid input. This class is very
+ forgiving--in the face of invalid input, it will return garbage
+ rather than throw an exception unless otherwise specified.
+*/
+var Uri = {
+
+<span id='android-net-Uri-property-EMPTY'>/** The empty URI, equivalent to &quot;&quot;.
+</span>*/
+EMPTY : &quot;null&quot;,
+<span id='android-net-Uri-property-CREATOR'>/** Reads Uris from Parcels.
+</span>*/
+CREATOR : &quot;null&quot;,
+<span id='android-net-Uri-method-isHierarchical'>/**Returns true if this URI is hierarchical like &quot;http://google.com&quot;.
+</span> Absolute URIs are hierarchical if the scheme-specific part starts with
+ a '/'. Relative URIs are always hierarchical.
+*/
+isHierarchical : function(  ) {},
+
+<span id='android-net-Uri-method-isOpaque'>/**Returns true if this URI is opaque like &quot;mailto:nobody@google.com&quot;. The
+</span> scheme-specific part of an opaque URI cannot start with a '/'.
+*/
+isOpaque : function(  ) {},
+
+<span id='android-net-Uri-method-isRelative'>/**Returns true if this URI is relative, i.e.&amp;nbsp;if it doesn't contain an
+</span> explicit scheme.
+@return {Boolean} true if this URI is relative, false if it's absolute
+*/
+isRelative : function(  ) {},
+
+<span id='android-net-Uri-method-isAbsolute'>/**Returns true if this URI is absolute, i.e.&amp;nbsp;if it contains an
+</span> explicit scheme.
+@return {Boolean} true if this URI is absolute, false if it's relative
+*/
+isAbsolute : function(  ) {},
+
+<span id='android-net-Uri-method-getScheme'>/**Gets the scheme of this URI. Example: &quot;http&quot;
+</span>@return {String} the scheme or null if this is a relative URI
+*/
+getScheme : function(  ) {},
+
+<span id='android-net-Uri-method-getSchemeSpecificPart'>/**Gets the scheme-specific part of this URI, i.e.&amp;nbsp;everything between
+</span> the scheme separator ':' and the fragment separator '#'. If this is a
+ relative URI, this method returns the entire URI. Decodes escaped octets.
+
+ &lt;p&gt;Example: &quot;//www.google.com/search?q=android&quot;
+@return {String} the decoded scheme-specific-part
+*/
+getSchemeSpecificPart : function(  ) {},
+
+<span id='android-net-Uri-method-getEncodedSchemeSpecificPart'>/**Gets the scheme-specific part of this URI, i.e.&amp;nbsp;everything between
+</span> the scheme separator ':' and the fragment separator '#'. If this is a
+ relative URI, this method returns the entire URI. Leaves escaped octets
+ intact.
+
+ &lt;p&gt;Example: &quot;//www.google.com/search?q=android&quot;
+@return {String} the encoded scheme-specific-part
+*/
+getEncodedSchemeSpecificPart : function(  ) {},
+
+<span id='android-net-Uri-method-getAuthority'>/**Gets the decoded authority part of this URI. For
+</span> server addresses, the authority is structured as follows:
+ {@code [ userinfo '@' ] host [ ':' port ]}
+
+ &lt;p&gt;Examples: &quot;google.com&quot;, &quot;bob@google.com:80&quot;
+@return {String} the authority for this URI or null if not present
+*/
+getAuthority : function(  ) {},
+
+<span id='android-net-Uri-method-getEncodedAuthority'>/**Gets the encoded authority part of this URI. For
+</span> server addresses, the authority is structured as follows:
+ {@code [ userinfo '@' ] host [ ':' port ]}
+
+ &lt;p&gt;Examples: &quot;google.com&quot;, &quot;bob@google.com:80&quot;
+@return {String} the authority for this URI or null if not present
+*/
+getEncodedAuthority : function(  ) {},
+
+<span id='android-net-Uri-method-getUserInfo'>/**Gets the decoded user information from the authority.
+</span> For example, if the authority is &quot;nobody@google.com&quot;, this method will
+ return &quot;nobody&quot;.
+@return {String} the user info for this URI or null if not present
+*/
+getUserInfo : function(  ) {},
+
+<span id='android-net-Uri-method-getEncodedUserInfo'>/**Gets the encoded user information from the authority.
+</span> For example, if the authority is &quot;nobody@google.com&quot;, this method will
+ return &quot;nobody&quot;.
+@return {String} the user info for this URI or null if not present
+*/
+getEncodedUserInfo : function(  ) {},
+
+<span id='android-net-Uri-method-getHost'>/**Gets the encoded host from the authority for this URI. For example,
+</span> if the authority is &quot;bob@google.com&quot;, this method will return
+ &quot;google.com&quot;.
+@return {String} the host for this URI or null if not present
+*/
+getHost : function(  ) {},
+
+<span id='android-net-Uri-method-getPort'>/**Gets the port from the authority for this URI. For example,
+</span> if the authority is &quot;google.com:80&quot;, this method will return 80.
+@return {Number} the port for this URI or -1 if invalid or not present
+*/
+getPort : function(  ) {},
+
+<span id='android-net-Uri-method-getPath'>/**Gets the decoded path.
+</span>@return {String} the decoded path, or null if this is not a hierarchical URI
+ (like &quot;mailto:nobody@google.com&quot;) or the URI is invalid
+*/
+getPath : function(  ) {},
+
+<span id='android-net-Uri-method-getEncodedPath'>/**Gets the encoded path.
+</span>@return {String} the encoded path, or null if this is not a hierarchical URI
+ (like &quot;mailto:nobody@google.com&quot;) or the URI is invalid
+*/
+getEncodedPath : function(  ) {},
+
+<span id='android-net-Uri-method-getQuery'>/**Gets the decoded query component from this URI. The query comes after
+</span> the query separator ('?') and before the fragment separator ('#'). This
+ method would return &quot;q=android&quot; for
+ &quot;http://www.google.com/search?q=android&quot;.
+@return {String} the decoded query or null if there isn't one
+*/
+getQuery : function(  ) {},
+
+<span id='android-net-Uri-method-getEncodedQuery'>/**Gets the encoded query component from this URI. The query comes after
+</span> the query separator ('?') and before the fragment separator ('#'). This
+ method would return &quot;q=android&quot; for
+ &quot;http://www.google.com/search?q=android&quot;.
+@return {String} the encoded query or null if there isn't one
+*/
+getEncodedQuery : function(  ) {},
+
+<span id='android-net-Uri-method-getFragment'>/**Gets the decoded fragment part of this URI, everything after the '#'.
+</span>@return {String} the decoded fragment or null if there isn't one
+*/
+getFragment : function(  ) {},
+
+<span id='android-net-Uri-method-getEncodedFragment'>/**Gets the encoded fragment part of this URI, everything after the '#'.
+</span>@return {String} the encoded fragment or null if there isn't one
+*/
+getEncodedFragment : function(  ) {},
+
+<span id='android-net-Uri-method-getPathSegments'>/**Gets the decoded path segments.
+</span>@return {Object {java.util.List}} decoded path segments, each without a leading or trailing '/'
+*/
+getPathSegments : function(  ) {},
+
+<span id='android-net-Uri-method-getLastPathSegment'>/**Gets the decoded last segment in the path.
+</span>@return {String} the decoded last segment or null if the path is empty
+*/
+getLastPathSegment : function(  ) {},
+
+<span id='android-net-Uri-method-equals'>/**Compares this Uri to another object for equality. Returns true if the
+</span> encoded string representations of this Uri and the given Uri are
+ equal. Case counts. Paths are not normalized. If one Uri specifies a
+ default port explicitly and the other leaves it implicit, they will not
+ be considered equal.
+*/
+equals : function(  ) {},
+
+<span id='android-net-Uri-method-hashCode'>/**Hashes the encoded string represention of this Uri consistently with
+</span> {@link #equals}(Object).
+*/
+hashCode : function(  ) {},
+
+<span id='android-net-Uri-method-compareTo'>/**Compares the string representation of this Uri with that of
+</span> another.
+*/
+compareTo : function(  ) {},
+
+<span id='android-net-Uri-method-toString'>/**Returns the encoded string representation of this URI.
+</span> Example: &quot;http://google.com/&quot;
+*/
+toString : function(  ) {},
+
+<span id='android-net-Uri-method-toSafeString'>/**Return a string representation of this URI that has common forms of PII redacted,
+</span> making it safer to use for logging purposes.  For example, {@code tel:800-466-4411} is
+ returned as {@code tel:xxx-xxx-xxxx} and {@code http://example.com/path/to/item/} is
+ returned as {@code http://example.com/...}.
+@return {String} the common forms PII redacted string of this URI
+@hide 
+*/
+toSafeString : function(  ) {},
+
+<span id='android-net-Uri-method-buildUpon'>/**Constructs a new builder, copying the attributes from this Uri.
+</span>*/
+buildUpon : function(  ) {},
+
+<span id='android-net-Uri-method-parse'>/**Creates a Uri which parses the given encoded URI string.
+</span>@param {String} uriString an RFC 2396-compliant, encoded URI
+@throws NullPointerException if uriString is null
+@return {Object {android.net.Uri}} Uri for this given uri string
+*/
+parse : function(  ) {},
+
+<span id='android-net-Uri-method-fromFile'>/**Creates a Uri from a file. The URI has the form
+</span> &quot;file://&lt;absolute path&gt;&quot;. Encodes path characters with the exception of
+ '/'.
+
+ &lt;p&gt;Example: &quot;file:///tmp/android.txt&quot;
+@throws NullPointerException if file is null
+@return {Object {android.net.Uri}} a Uri for the given file
+*/
+fromFile : function(  ) {},
+
+<span id='android-net-Uri-method-fromParts'>/**Creates an opaque Uri from the given components. Encodes the ssp
+</span> which means this method cannot be used to create hierarchical URIs.
+@param {String} scheme of the URI
+@param {String} ssp scheme-specific-part, everything between the
+  scheme separator (':') and the fragment separator ('#'), which will
+  get encoded
+@param {String} fragment fragment, everything after the '#', null if undefined,
+  will get encoded
+@throws NullPointerException if scheme or ssp is null
+@return {Object {android.net.Uri}} Uri composed of the given scheme, ssp, and fragment
+@see Builder if you don't want the ssp and fragment to be encoded
+*/
+fromParts : function(  ) {},
+
+<span id='android-net-Uri-method-getQueryParameterNames'>/**Returns a set of the unique names of all query parameters. Iterating
+</span> over the set will return the names in order of their first occurrence.
+@throws UnsupportedOperationException if this isn't a hierarchical URI
+@return {Object {java.util.Set}} a set of decoded names
+*/
+getQueryParameterNames : function(  ) {},
+
+<span id='android-net-Uri-method-getQueryParameters'>/**Searches the query string for parameter values with the given key.
+</span>@param {String} key which will be encoded
+@throws UnsupportedOperationException if this isn't a hierarchical URI
+@throws NullPointerException if key is null
+@return {Object {java.util.List}} a list of decoded values
+*/
+getQueryParameters : function(  ) {},
+
+<span id='android-net-Uri-method-getQueryParameter'>/**Searches the query string for the first value with the given key.
+</span>
+ &lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Prior to Jelly Bean, this decoded
+ the '+' character as '+' rather than ' '.
+@param {String} key which will be encoded
+@throws UnsupportedOperationException if this isn't a hierarchical URI
+@throws NullPointerException if key is null
+@return {String} the decoded value or null if no parameter is found
+*/
+getQueryParameter : function(  ) {},
+
+<span id='android-net-Uri-method-getBooleanQueryParameter'>/**Searches the query string for the first value with the given key and interprets it
+</span> as a boolean value. &quot;false&quot; and &quot;0&quot; are interpreted as &lt;code&gt;false&lt;/code&gt;, everything
+ else is interpreted as &lt;code&gt;true&lt;/code&gt;.
+@param {String} key which will be decoded
+@param {Boolean} defaultValue the default value to return if there is no query parameter for key
+@return {Boolean} the boolean interpretation of the query parameter key
+*/
+getBooleanQueryParameter : function(  ) {},
+
+<span id='android-net-Uri-method-normalizeScheme'>/**Return an equivalent URI with a lowercase scheme component.
+</span> This aligns the Uri with Android best practices for
+ intent filtering.
+
+ &lt;p&gt;For example, &quot;HTTP://www.android.com&quot; becomes
+ &quot;http://www.android.com&quot;
+
+ &lt;p&gt;All URIs received from outside Android (such as user input,
+ or external sources like Bluetooth, NFC, or the Internet) should
+ be normalized before they are used to create an Intent.
+
+ &lt;p class=&quot;note&quot;&gt;This method does &lt;em&gt;not&lt;/em&gt; validate bad URI's,
+ or 'fix' poorly formatted URI's - so do not use it for input validation.
+ A Uri will always be returned, even if the Uri is badly formatted to
+ begin with and a scheme component cannot be found.
+@return {Object {android.net.Uri}} normalized Uri (never null)
+@see android.content.Intent#setData
+@see android.content.Intent#setDataAndNormalize
+*/
+normalizeScheme : function(  ) {},
+
+<span id='android-net-Uri-method-writeToParcel'>/**Writes a Uri to a Parcel.
+</span>@param {Object {Parcel}} out parcel to write to
+@param {Object {Uri}} uri to write, can be null
+*/
+writeToParcel : function(  ) {},
+
+<span id='android-net-Uri-method-encode'>/**Encodes characters in the given string as '%'-escaped octets
+</span> using the UTF-8 scheme. Leaves letters (&quot;A-Z&quot;, &quot;a-z&quot;), numbers
+ (&quot;0-9&quot;), and unreserved characters (&quot;_-!.~'()*&quot;) intact. Encodes
+ all other characters.
+@param {String} s string to encode
+@return {String} an encoded version of s suitable for use as a URI component,
+  or null if s is null
+*/
+encode : function(  ) {},
+
+<span id='android-net-Uri-method-encode'>/**Encodes characters in the given string as '%'-escaped octets
+</span> using the UTF-8 scheme. Leaves letters (&quot;A-Z&quot;, &quot;a-z&quot;), numbers
+ (&quot;0-9&quot;), and unreserved characters (&quot;_-!.~'()*&quot;) intact. Encodes
+ all other characters with the exception of those specified in the
+ allow argument.
+@param {String} s string to encode
+@param {String} allow set of additional characters to allow in the encoded form,
+  null if no characters should be skipped
+@return {String} an encoded version of s suitable for use as a URI component,
+  or null if s is null
+*/
+encode : function(  ) {},
+
+<span id='android-net-Uri-method-decode'>/**Decodes '%'-escaped octets in the given string using the UTF-8 scheme.
+</span> Replaces invalid octets with the unicode replacement character
+ (&quot;\\uFFFD&quot;).
+@param {String} s encoded string to decode
+@return {String} the given string with escaped octets decoded, or null if
+  s is null
+*/
+decode : function(  ) {},
+
+<span id='android-net-Uri-method-withAppendedPath'>/**Creates a new Uri by appending an already-encoded path segment to a
+</span> base Uri.
+@param {Object {Uri}} baseUri Uri to append path segment to
+@param {String} pathSegment encoded path segment to append
+@return {Object {android.net.Uri}} a new Uri based on baseUri with the given segment appended to
+  the path
+@throws NullPointerException if baseUri is null
+*/
+withAppendedPath : function(  ) {},
+
+<span id='android-net-Uri-method-getCanonicalUri'>/**If this {@link android.net.Uri} is {@code file://}, then resolve and return its
+</span> canonical path. Also fixes legacy emulated storage paths so they are
+ usable across user boundaries. Should always be called from the app
+ process before sending elsewhere.
+@hide 
+*/
+getCanonicalUri : function(  ) {},
+
+<span id='android-net-Uri-method-checkFileUriExposed'>/**If this is a {@code file://} Uri, it will be reported to
+</span> {@link StrictMode}.
+@hide 
+*/
+checkFileUriExposed : function(  ) {},
+
+<span id='android-net-Uri-method-checkContentUriWithoutPermission'>/**If this is a {@code content://} Uri without access flags, it will be
+</span> reported to {@link StrictMode}.
+@hide 
+*/
+checkContentUriWithoutPermission : function(  ) {},
+
+<span id='android-net-Uri-method-isPathPrefixMatch'>/**Test if this is a path prefix match against the given Uri. Verifies that
+</span> scheme, authority, and atomic path segments match.
+@hide 
+*/
+isPathPrefixMatch : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

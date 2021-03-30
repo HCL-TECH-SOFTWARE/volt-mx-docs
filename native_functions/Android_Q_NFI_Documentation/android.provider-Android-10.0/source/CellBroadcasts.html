@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-Telephony-CellBroadcasts'>/**@class android.provider.Telephony.CellBroadcasts
+</span> implements android.provider.BaseColumns
+
+@extends java.lang.Object
+
+ Contains received SMS cell broadcast messages.
+ @hide
+*/
+var CellBroadcasts = {
+
+<span id='android-provider-Telephony-CellBroadcasts-property-CONTENT_URI'>/** The {@code content://} URI for this table.
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-GEOGRAPHICAL_SCOPE'>/** Message geographical scope.
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+GEOGRAPHICAL_SCOPE : &quot;geo_scope&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-SERIAL_NUMBER'>/** Message serial number.
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+SERIAL_NUMBER : &quot;serial_number&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-PLMN'>/** PLMN of broadcast sender. {@code SERIAL_NUMBER + PLMN + LAC + CID} uniquely identifies
+</span> a broadcast for duplicate detection purposes.
+ &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+PLMN : &quot;plmn&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-LAC'>/** Location Area (GSM) or Service Area (UMTS) of broadcast sender. Unused for CDMA.
+</span> Only included if Geographical Scope of message is not PLMN wide (01).
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+LAC : &quot;lac&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-CID'>/** Cell ID of message sender (GSM/UMTS). Unused for CDMA. Only included when the
+</span> Geographical Scope of message is cell wide (00 or 11).
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CID : &quot;cid&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-V1_MESSAGE_CODE'>/** Message code. &lt;em&gt;OBSOLETE: merged into SERIAL_NUMBER.&lt;/em&gt;
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+V1_MESSAGE_CODE : &quot;message_code&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-V1_MESSAGE_IDENTIFIER'>/** Message identifier. &lt;em&gt;OBSOLETE: renamed to SERVICE_CATEGORY.&lt;/em&gt;
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+V1_MESSAGE_IDENTIFIER : &quot;message_id&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-SERVICE_CATEGORY'>/** Service category (GSM/UMTS: message identifier; CDMA: service category).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+SERVICE_CATEGORY : &quot;service_category&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-LANGUAGE_CODE'>/** Message language code.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+LANGUAGE_CODE : &quot;language&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-MESSAGE_BODY'>/** Message body.
+</span> &lt;P&gt;Type: TEXT&lt;/P&gt;
+*/
+MESSAGE_BODY : &quot;body&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-DELIVERY_TIME'>/** Message delivery time.
+</span> &lt;P&gt;Type: INTEGER (long)&lt;/P&gt;
+*/
+DELIVERY_TIME : &quot;date&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-MESSAGE_READ'>/** Has the message been viewed?
+</span> &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+*/
+MESSAGE_READ : &quot;read&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-MESSAGE_FORMAT'>/** Message format (3GPP or 3GPP2).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+MESSAGE_FORMAT : &quot;format&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-MESSAGE_PRIORITY'>/** Message priority (including emergency).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+MESSAGE_PRIORITY : &quot;priority&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-ETWS_WARNING_TYPE'>/** ETWS warning type (ETWS alerts only).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+ETWS_WARNING_TYPE : &quot;etws_warning_type&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-CMAS_MESSAGE_CLASS'>/** CMAS message class (CMAS alerts only).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CMAS_MESSAGE_CLASS : &quot;cmas_message_class&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-CMAS_CATEGORY'>/** CMAS category (CMAS alerts only).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CMAS_CATEGORY : &quot;cmas_category&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-CMAS_RESPONSE_TYPE'>/** CMAS response type (CMAS alerts only).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CMAS_RESPONSE_TYPE : &quot;cmas_response_type&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-CMAS_SEVERITY'>/** CMAS severity (CMAS alerts only).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CMAS_SEVERITY : &quot;cmas_severity&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-CMAS_URGENCY'>/** CMAS urgency (CMAS alerts only).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CMAS_URGENCY : &quot;cmas_urgency&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-CMAS_CERTAINTY'>/** CMAS certainty (CMAS alerts only).
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+*/
+CMAS_CERTAINTY : &quot;cmas_certainty&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-DEFAULT_SORT_ORDER'>/**The default sort order for this table. */
+</span>DEFAULT_SORT_ORDER : &quot;date DESC&quot;,
+<span id='android-provider-Telephony-CellBroadcasts-property-QUERY_COLUMNS'>/** Query columns for instantiating {@link android.telephony.CellBroadcastMessage} objects.
+</span>*/
+QUERY_COLUMNS : &quot;null&quot;,
+
+};</pre>
+</body>
+</html>

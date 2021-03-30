@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-contentcapture-ContentCaptureEvent'>/**@class android.view.contentcapture.ContentCaptureEvent
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+@hide */
+var ContentCaptureEvent = {
+
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_SESSION_FINISHED'>/**@hide */
+</span>TYPE_SESSION_FINISHED : &quot;-2&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_SESSION_STARTED'>/**@hide */
+</span>TYPE_SESSION_STARTED : &quot;-1&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_VIEW_APPEARED'>/** Called when a node has been added to the screen and is visible to the user.
+</span>
+ &lt;p&gt;The metadata of the node is available through {@link #getViewNode}().
+*/
+TYPE_VIEW_APPEARED : &quot;1&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_VIEW_DISAPPEARED'>/** Called when one or more nodes have been removed from the screen and is not visible to the
+</span> user anymore.
+
+ &lt;p&gt;To get the id(s), first call {@link #getIds}() - if it returns {@code null}, then call
+ {@link #getId}().
+*/
+TYPE_VIEW_DISAPPEARED : &quot;2&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_VIEW_TEXT_CHANGED'>/** Called when the text of a node has been changed.
+</span>
+ &lt;p&gt;The id of the node is available through {@link #getId}(), and the new text is
+ available through {@link #getText}().
+*/
+TYPE_VIEW_TEXT_CHANGED : &quot;3&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_VIEW_TREE_APPEARING'>/** Called before events (such as {@link #TYPE_VIEW_APPEARED} and/or
+</span> {@link #TYPE_VIEW_DISAPPEARED}) representing a view hierarchy are sent.
+
+ &lt;p&gt;&lt;b&gt;NOTE&lt;/b&gt;: there is no guarantee this event will be sent. For example, it's not sent
+ if the initial view hierarchy doesn't initially have any view that's important for content
+ capture.
+*/
+TYPE_VIEW_TREE_APPEARING : &quot;4&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_VIEW_TREE_APPEARED'>/** Called after events (such as {@link #TYPE_VIEW_APPEARED} and/or
+</span> {@link #TYPE_VIEW_DISAPPEARED}) representing a view hierarchy were sent.
+
+ &lt;p&gt;&lt;b&gt;NOTE&lt;/b&gt;: there is no guarantee this event will be sent. For example, it's not sent
+ if the initial view hierarchy doesn't initially have any view that's important for content
+ capture.
+*/
+TYPE_VIEW_TREE_APPEARED : &quot;5&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_CONTEXT_UPDATED'>/** Called after a call to
+</span> {@link android.view.contentcapture.ContentCaptureSession#setContentCaptureContext(ContentCaptureContext)}.
+
+ &lt;p&gt;The passed context is available through {@link #getContentCaptureContext}().
+*/
+TYPE_CONTEXT_UPDATED : &quot;6&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_SESSION_RESUMED'>/** Called after the session is ready, typically after the activity resumed and the
+</span> initial views appeared
+*/
+TYPE_SESSION_RESUMED : &quot;7&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-TYPE_SESSION_PAUSED'>/** Called after the session is paused, typically after the activity paused and the
+</span> views disappeared.
+*/
+TYPE_SESSION_PAUSED : &quot;8&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-contentcapture-ContentCaptureEvent-method-setAutofillId'>/**
+</span>@hide 
+*/
+setAutofillId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-setAutofillIds'>/**
+</span>@hide 
+*/
+setAutofillIds : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-addAutofillId'>/**Adds an autofill id to the this event, merging the single id into a list if necessary.
+</span>@hide 
+*/
+addAutofillId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-setParentSessionId'>/**Used by {@link #TYPE_SESSION_STARTED} and {@link #TYPE_SESSION_FINISHED}.
+</span>@hide 
+*/
+setParentSessionId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-setClientContext'>/**Used by {@link #TYPE_SESSION_STARTED} and {@link #TYPE_SESSION_FINISHED}.
+</span>@hide 
+*/
+setClientContext : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getSessionId'>/**
+</span>@hide 
+*/
+getSessionId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getParentSessionId'>/**Used by {@link #TYPE_SESSION_STARTED} and {@link #TYPE_SESSION_FINISHED}.
+</span>@hide 
+*/
+getParentSessionId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getContentCaptureContext'>/**Gets the {@link android.view.contentcapture.ContentCaptureContext} set calls to
+</span> {@link android.view.contentcapture.ContentCaptureSession#setContentCaptureContext(ContentCaptureContext)}.
+
+ &lt;p&gt;Only set on {@link #TYPE_CONTEXT_UPDATED} events.
+*/
+getContentCaptureContext : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-setViewNode'>/**
+</span>@hide 
+*/
+setViewNode : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-setText'>/**
+</span>@hide 
+*/
+setText : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getType'>/**Gets the type of the event.
+</span>@return {Number} one of {@link #TYPE_VIEW_APPEARED}, {@link #TYPE_VIEW_DISAPPEARED},
+ {@link #TYPE_VIEW_TEXT_CHANGED}, {@link #TYPE_VIEW_TREE_APPEARING},
+ {@link #TYPE_VIEW_TREE_APPEARED}, {@link #TYPE_CONTEXT_UPDATED},
+ {@link #TYPE_SESSION_RESUMED}, or {@link #TYPE_SESSION_PAUSED}.
+*/
+getType : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getEventTime'>/**Gets when the event was generated, in millis since epoch.
+</span>*/
+getEventTime : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getViewNode'>/**Gets the whole metadata of the node associated with the event.
+</span>
+ &lt;p&gt;Only set on {@link #TYPE_VIEW_APPEARED} events.
+*/
+getViewNode : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getId'>/**Gets the {@link AutofillId} of the node associated with the event.
+</span>
+ &lt;p&gt;Only set on {@link #TYPE_VIEW_DISAPPEARED} (when the event contains just one node - if
+ it contains more than one, this method returns {@code null} and the actual ids should be
+ retrived by {@link #getIds}()) and {@link #TYPE_VIEW_TEXT_CHANGED} events.
+*/
+getId : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getIds'>/**Gets the {@link AutofillId AutofillIds} of the nodes associated with the event.
+</span>
+ &lt;p&gt;Only set on {@link #TYPE_VIEW_DISAPPEARED}, when the event contains more than one node
+ (if it contains just one node, it's returned by {@link #getId}() instead.
+*/
+getIds : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getText'>/**Gets the current text of the node associated with the event.
+</span>
+ &lt;p&gt;Only set on {@link #TYPE_VIEW_TEXT_CHANGED} events.
+*/
+getText : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-mergeEvent'>/**Merges event of the same type, either {@link #TYPE_VIEW_TEXT_CHANGED}
+</span> or {@link #TYPE_VIEW_DISAPPEARED}.
+@hide 
+*/
+mergeEvent : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-dump'>/**
+</span>@hide 
+*/
+dump : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-contentcapture-ContentCaptureEvent-method-getTypeAsString'>/**
+</span>@hide 
+*/
+getTypeAsString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

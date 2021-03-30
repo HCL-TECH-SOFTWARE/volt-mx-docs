@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-VolumeShaper'>/**@class android.media.VolumeShaper
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ The {@code VolumeShaper} class is used to automatically control audio volume during media
+ playback, allowing simple implementation of transition effects and ducking.
+ It is created from implementations of {@code VolumeAutomation},
+ such as {@code MediaPlayer} and {@code AudioTrack} (referred to as &quot;players&quot; below),
+ by {@link android.media.MediaPlayer#createVolumeShaper} or {@link android.media.AudioTrack#createVolumeShaper}.
+
+ A {@code VolumeShaper} is intended for short volume changes.
+ If the audio output sink changes during
+ a {@code VolumeShaper} transition, the precise curve position may be lost, and the
+ {@code VolumeShaper} may advance to the end of the curve for the new audio output sink.
+
+ The {@code VolumeShaper} appears as an additional scaling on the audio output,
+ and adjusts independently of track or stream volume controls.
+*/
+var VolumeShaper = {
+
+<span id='android-media-VolumeShaper-method-apply'>/**Applies the {@link android.media.VolumeShaper.Operation} to the {@code VolumeShaper}.
+</span>
+ Applying {@link android.media.VolumeShaper.Operation#PLAY} after {@code PLAY}
+ or {@link android.media.VolumeShaper.Operation#REVERSE} after
+ {@code REVERSE} has no effect.
+
+ Applying {@link android.media.VolumeShaper.Operation#PLAY} when the player
+ hasn't started will synchronously start the {@code VolumeShaper} when
+ playback begins.
+@param {Object {VolumeShaper.Operation}} operation the {@code operation} to apply.
+@throws IllegalStateException if the player is uninitialized or if there
+         is a critical failure. In that case, the {@code VolumeShaper} should be
+         recreated.
+*/
+apply : function(  ) {},
+
+<span id='android-media-VolumeShaper-method-replace'>/**Replaces the current {@code VolumeShaper}
+</span> {@code configuration} with a new {@code configuration}.
+
+ This allows the user to change the volume shape
+ while the existing {@code VolumeShaper} is in effect.
+
+ The effect of {@code replace()} is similar to an atomic close of
+ the existing {@code VolumeShaper} and creation of a new {@code VolumeShaper}.
+
+ If the {@code operation} is {@link android.media.VolumeShaper.Operation#PLAY} then the
+ new curve starts immediately.
+
+ If the {@code operation} is
+ {@link android.media.VolumeShaper.Operation#REVERSE}, then the new curve will
+ be delayed until {@code PLAY} is applied.
+@param {Object {VolumeShaper.Configuration}} configuration the new {@code configuration} to use.
+@param {Object {VolumeShaper.Operation}} operation the {@code operation} to apply to the {@code VolumeShaper}
+@param {Boolean} join if true, match the start volume of the
+             new {@code configuration} to the current volume of the existing
+             {@code VolumeShaper}, to avoid discontinuity.
+@throws IllegalStateException if the player is uninitialized or if there
+         is a critical failure. In that case, the {@code VolumeShaper} should be
+         recreated.
+*/
+replace : function(  ) {},
+
+<span id='android-media-VolumeShaper-method-getVolume'>/**Returns the current volume scale attributable to the {@code VolumeShaper}.
+</span>
+ This is the last volume from the {@code VolumeShaper} used for the player,
+ or the initial volume if the {@code VolumeShaper} hasn't been started with
+ {@link android.media.VolumeShaper.Operation#PLAY}.
+@return {Number} the volume, linearly represented as a value between 0.f and 1.f.
+@throws IllegalStateException if the player is uninitialized or if there
+         is a critical failure.  In that case, the {@code VolumeShaper} should be
+         recreated.
+*/
+getVolume : function(  ) {},
+
+<span id='android-media-VolumeShaper-method-close'>/**Releases the {@code VolumeShaper} object; any volume scale due to the
+</span> {@code VolumeShaper} is removed after closing.
+
+ If the volume does not reach 1.f when the {@code VolumeShaper} is closed
+ (or finalized), there may be an abrupt change of volume.
+
+ {@code close()} may be safely called after a prior {@code close()}.
+ This class implements the Java {@code AutoClosable} interface and
+ may be used with try-with-resources.
+*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

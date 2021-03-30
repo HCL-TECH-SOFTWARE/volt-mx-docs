@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-TimedRemoteCaller'>/**@class android.util.TimedRemoteCaller
+</span>@extends java.lang.Object
+
+ This is a helper class for making an async one way call and
+ its async one way response response in a sync fashion within
+ a timeout. The key idea is to call the remote method with a
+ sequence number and a callback and then starting to wait for
+ the response. The remote method calls back with the result and
+ the sequence number. If the response comes within the timeout
+ and its sequence number is the one sent in the method invocation,
+ then the call succeeded. If the response does not come within
+ the timeout then the call failed.
+ &lt;p&gt;
+ Typical usage is:
+ &lt;/p&gt;
+ &lt;p&gt;&lt;pre&gt;&lt;code&gt;
+ public class MyMethodCaller extends TimeoutRemoteCallHelper&lt;Object&gt; {
+     // The one way remote method to call.
+     private final IRemoteInterface mTarget;
+
+     // One way callback invoked when the remote method is done.
+     private final IRemoteCallback mCallback = new IRemoteCallback.Stub() {
+         public void onCompleted(Object result, int sequence) {
+             onRemoteMethodResult(result, sequence);
+         }
+     };
+
+     public MyMethodCaller(IRemoteInterface target) {
+         mTarget = target;
+     }
+
+     public Object onCallMyMethod(Object arg) throws RemoteException {
+         final int sequence = onBeforeRemoteCall();
+         mTarget.myMethod(arg, sequence);
+         return getResultTimed(sequence);
+     }
+ }
+ &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+
+ @param &lt;T&gt; The type of the expected result.
+
+ @hide
+*/
+var TimedRemoteCaller = {
+
+<span id='android-util-TimedRemoteCaller-property-DEFAULT_CALL_TIMEOUT_MILLIS'>/***/
+</span>DEFAULT_CALL_TIMEOUT_MILLIS : &quot;5000&quot;,
+
+};</pre>
+</body>
+</html>

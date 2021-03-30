@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-SSLCertificateSocketFactory'>/**@class android.net.SSLCertificateSocketFactory
+</span>@extends javax.net.ssl.SSLSocketFactory
+
+ SSLSocketFactory implementation with several extra features:
+
+ &lt;ul&gt;
+ &lt;li&gt;Timeout specification for SSL handshake operations
+ &lt;li&gt;Hostname verification in most cases (see WARNINGs below)
+ &lt;li&gt;Optional SSL session caching with {@link android.net.SSLSessionCache}
+ &lt;li&gt;Optionally bypass all SSL certificate checks
+ &lt;/ul&gt;
+
+ The handshake timeout does not apply to actual TCP socket connection.
+ If you want a connection timeout as well, use {@link #createSocket}()
+ and {@link Socket#connect(java.net.SocketAddress, int)}, after which you
+ must verify the identity of the server you are connected to.
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Most {@link SSLSocketFactory} implementations do not
+ verify the server's identity, allowing man-in-the-middle attacks.&lt;/b&gt;
+ This implementation does check the server's certificate hostname, but only
+ for createSocket variants that specify a hostname.  When using methods that
+ use {@link InetAddress} or which return an unconnected socket, you MUST
+ verify the server's identity yourself to ensure a secure connection.
+
+ Refer to
+ &lt;a href=&quot;https://developer.android.com/training/articles/security-gms-provider.html&quot;&gt;
+ Updating Your Security Provider to Protect Against SSL Exploits&lt;/a&gt;
+ for further information.&lt;/p&gt;
+
+ &lt;p&gt;The recommended way to verify the server's identity is to use
+ {@link HttpsURLConnection#getDefaultHostnameVerifier()} to get a
+ {@link HostnameVerifier} to verify the certificate hostname.
+
+ &lt;p&gt;&lt;b&gt;Warning&lt;/b&gt;: Some methods on this class return connected sockets and some return
+ unconnected sockets.  For the methods that return connected sockets, setting
+ connection- or handshake-related properties on those sockets will have no effect.
+
+ &lt;p&gt;On development devices, &quot;setprop socket.relaxsslcheck yes&quot; bypasses all
+ SSL certificate and hostname checks for testing purposes.  This setting
+ requires root access.
+
+ @deprecated This class has less error-prone replacements using standard APIs.  To create an
+ {@code SSLSocket}, obtain an {@link SSLSocketFactory} from {@link SSLSocketFactory#getDefault()}
+ or {@link javax.net.ssl.SSLContext#getSocketFactory()}.  To verify hostnames, pass
+ {@code &quot;HTTPS&quot;} to
+ {@link javax.net.ssl.SSLParameters#setEndpointIdentificationAlgorithm(String)}.  To enable ALPN,
+ use {@link javax.net.ssl.SSLParameters#setApplicationProtocols(String[])}.  To enable SNI,
+ use {@link javax.net.ssl.SSLParameters#setServerNames(java.util.List)}.
+*/
+var SSLCertificateSocketFactory = {
+
+<span id='android-net-SSLCertificateSocketFactory-method-getDefault'>/**Returns a new socket factory instance with an optional handshake timeout.
+</span>@param {Number} handshakeTimeoutMillis to use for SSL connection handshake, or 0
+         for none.  The socket timeout is reset to 0 after the handshake.
+@return {Object {javax.net.SocketFactory}} a new SSLSocketFactory with the specified parameters
+*/
+getDefault : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-getDefault'>/**Returns a new socket factory instance with an optional handshake timeout
+</span> and SSL session cache.
+@param {Number} handshakeTimeoutMillis to use for SSL connection handshake, or 0
+         for none.  The socket timeout is reset to 0 after the handshake.
+@param {Object {SSLSessionCache}} cache The {@link SSLSessionCache} to use, or null for no cache.
+@return {Object {javax.net.ssl.SSLSocketFactory}} a new SSLSocketFactory with the specified parameters
+*/
+getDefault : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-getInsecure'>/**Returns a new instance of a socket factory with all SSL security checks
+</span> disabled, using an optional handshake timeout and SSL session cache.
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Warning:&lt;/b&gt; Sockets created using this factory
+ are vulnerable to man-in-the-middle attacks!&lt;/p&gt;
+@param {Number} handshakeTimeoutMillis to use for SSL connection handshake, or 0
+         for none.  The socket timeout is reset to 0 after the handshake.
+@param {Object {SSLSessionCache}} cache The {@link SSLSessionCache} to use, or null for no cache.
+@return {Object {javax.net.ssl.SSLSocketFactory}} an insecure SSLSocketFactory with the specified parameters
+*/
+getInsecure : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-getHttpSocketFactory'>/**Returns a socket factory (also named SSLSocketFactory, but in a different
+</span> namespace) for use with the Apache HTTP stack.
+@param {Number} handshakeTimeoutMillis to use for SSL connection handshake, or 0
+         for none.  The socket timeout is reset to 0 after the handshake.
+@param {Object {SSLSessionCache}} cache The {@link SSLSessionCache} to use, or null for no cache.
+@return {Object {org.apache.http.conn.ssl.SSLSocketFactory}} a new SocketFactory with the specified parameters
+@deprecated Use {@link #getDefault()} along with a {@link javax.net.ssl.HttpsURLConnection}
+     instead. The Apache HTTP client is no longer maintained and may be removed in a future
+     release. Please visit &lt;a href=&quot;http://android-developers.blogspot.com/2011/09/androids-http-clients.html&quot;&gt;this webpage&lt;/a&gt;
+     for further details.
+@removed 
+*/
+getHttpSocketFactory : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-verifyHostname'>/**Verify the hostname of the certificate used by the other end of a connected socket using the
+</span> {@link HostnameVerifier} obtained from {@code
+ HttpsURLConnection.getDefaultHostnameVerifier()}. You MUST call this if you did not supply a
+ hostname to {@link #createSocket}().  It is harmless to call this method redundantly if the
+ hostname has already been verified.
+
+ &lt;p&gt;Wildcard certificates are allowed to verify any matching hostname, so
+ &quot;foo.bar.example.com&quot; is verified if the peer has a certificate for &quot;*.example.com&quot;.
+@param {Object {Socket}} socket An SSL socket which has been connected to a server
+@param {String} hostname The expected hostname of the remote server
+@throws IOException if something goes wrong handshaking with the server
+@throws SSLPeerUnverifiedException if the server cannot prove its identity
+@hide 
+*/
+verifyHostname : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setTrustManagers'>/**Sets the {@link TrustManager}s to be used for connections made by this factory.
+</span>*/
+setTrustManagers : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setNpnProtocols'>/**Sets the &lt;a href=&quot;http://technotes.googlecode.com/git/nextprotoneg.html&quot;&gt;Next
+</span> Protocol Negotiation (NPN)&lt;/a&gt; protocols that this peer is interested in.
+
+ &lt;p&gt;For servers this is the sequence of protocols to advertise as
+ supported, in order of preference. This list is sent unencrypted to
+ all clients that support NPN.
+
+ &lt;p&gt;For clients this is a list of supported protocols to match against the
+ server's list. If there is no protocol supported by both client and
+ server then the first protocol in the client's list will be selected.
+ The order of the client's protocols is otherwise insignificant.
+@param {Object {byte[][]}} npnProtocols a non-empty list of protocol byte arrays. All arrays
+     must be non-empty and of length less than 256.
+*/
+setNpnProtocols : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setAlpnProtocols'>/**Sets the
+</span> &lt;a href=&quot;http://tools.ietf.org/html/draft-ietf-tls-applayerprotoneg-01&quot;&gt;
+ Application Layer Protocol Negotiation (ALPN)&lt;/a&gt; protocols that this peer
+ is interested in.
+
+ &lt;p&gt;For servers this is the sequence of protocols to advertise as
+ supported, in order of preference. This list is sent unencrypted to
+ all clients that support ALPN.
+
+ &lt;p&gt;For clients this is a list of supported protocols to match against the
+ server's list. If there is no protocol supported by both client and
+ server then the first protocol in the client's list will be selected.
+ The order of the client's protocols is otherwise insignificant.
+@param {Object {byte[][]}} protocols a non-empty list of protocol byte arrays. All arrays
+     must be non-empty and of length less than 256.
+@hide 
+*/
+setAlpnProtocols : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-toLengthPrefixedList'>/**Returns an array containing the concatenation of length-prefixed byte
+</span> strings.
+@hide 
+*/
+toLengthPrefixedList : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-getNpnSelectedProtocol'>/**Returns the &lt;a href=&quot;http://technotes.googlecode.com/git/nextprotoneg.html&quot;&gt;Next
+</span> Protocol Negotiation (NPN)&lt;/a&gt; protocol selected by client and server, or
+ null if no protocol was negotiated.
+@param {Object {Socket}} socket a socket created by this factory.
+@throws IllegalArgumentException if the socket was not created by this factory.
+*/
+getNpnSelectedProtocol : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-getAlpnSelectedProtocol'>/**Returns the
+</span> &lt;a href=&quot;http://tools.ietf.org/html/draft-ietf-tls-applayerprotoneg-01&quot;&gt;Application
+ Layer Protocol Negotiation (ALPN)&lt;/a&gt; protocol selected by client and server, or null
+ if no protocol was negotiated.
+@param {Object {Socket}} socket a socket created by this factory.
+@throws IllegalArgumentException if the socket was not created by this factory.
+@hide 
+*/
+getAlpnSelectedProtocol : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setKeyManagers'>/**Sets the {@link KeyManager}s to be used for connections made by this factory.
+</span>*/
+setKeyManagers : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setChannelIdPrivateKey'>/**Sets the private key to be used for TLS Channel ID by connections made by this
+</span> factory.
+@param {Object {PrivateKey}} privateKey private key (enables TLS Channel ID) or {@code null} for no key (disables
+        TLS Channel ID). The private key has to be an Elliptic Curve (EC) key based on the
+        NIST P-256 curve (aka SECG secp256r1 or ANSI X9.62 prime256v1).
+@hide 
+*/
+setChannelIdPrivateKey : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setUseSessionTickets'>/**Enables &lt;a href=&quot;http://tools.ietf.org/html/rfc5077#section-3.2&quot;&gt;session ticket&lt;/a&gt;
+</span> support on the given socket.
+@param {Object {Socket}} socket a socket created by this factory
+@param {Boolean} useSessionTickets {@code true} to enable session ticket support on this socket.
+@throws IllegalArgumentException if the socket was not created by this factory.
+*/
+setUseSessionTickets : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setHostname'>/**Turns on &lt;a href=&quot;http://tools.ietf.org/html/rfc6066#section-3&quot;&gt;Server
+</span> Name Indication (SNI)&lt;/a&gt; on a given socket.
+@param {Object {Socket}} socket a socket created by this factory.
+@param {String} hostName the desired SNI hostname, null to disable.
+@throws IllegalArgumentException if the socket was not created by this factory.
+*/
+setHostname : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-setSoWriteTimeout'>/**Sets this socket's SO_SNDTIMEO write timeout in milliseconds.
+</span> Use 0 for no timeout.
+ To take effect, this option must be set before the blocking method was called.
+@param {Object {Socket}} socket a socket created by this factory.
+@param {Number} timeout the desired write timeout in milliseconds.
+@throws IllegalArgumentException if the socket was not created by this factory.
+@hide 
+*/
+setSoWriteTimeout : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-createSocket'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;By default, this method returns a &lt;i&gt;connected&lt;/i&gt; socket and verifies the peer's
+ certificate hostname after connecting using the {@link HostnameVerifier} obtained from
+ {@code HttpsURLConnection.getDefaultHostnameVerifier()}; if this instance was created with
+ {@link #getInsecure(int, android.net.SSLSessionCache)}, it returns a socket that is &lt;i&gt;not connected&lt;/i&gt;
+ instead.
+*/
+createSocket : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-createSocket'>/**Creates a new socket which is &lt;i&gt;not connected&lt;/i&gt; to any remote host.
+</span> You must use {@link Socket#connect} to connect the socket.
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Warning:&lt;/b&gt; Hostname verification is not performed
+ with this method.  You MUST verify the server's identity after connecting
+ the socket to avoid man-in-the-middle attacks.&lt;/p&gt;
+*/
+createSocket : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-createSocket'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;This method returns a socket that is &lt;i&gt;not connected&lt;/i&gt;.
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Warning:&lt;/b&gt; Hostname verification is not performed
+ with this method.  You MUST verify the server's identity after connecting
+ the socket to avoid man-in-the-middle attacks.&lt;/p&gt;
+*/
+createSocket : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-createSocket'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;This method returns a socket that is &lt;i&gt;not connected&lt;/i&gt;.
+
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Warning:&lt;/b&gt; Hostname verification is not performed
+ with this method.  You MUST verify the server's identity after connecting
+ the socket to avoid man-in-the-middle attacks.&lt;/p&gt;
+*/
+createSocket : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-createSocket'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;By default, this method returns a &lt;i&gt;connected&lt;/i&gt; socket and verifies the peer's
+ certificate hostname after connecting using the {@link HostnameVerifier} obtained from
+ {@code HttpsURLConnection.getDefaultHostnameVerifier()}; if this instance was created with
+ {@link #getInsecure(int, android.net.SSLSessionCache)}, it returns a socket that is &lt;i&gt;not connected&lt;/i&gt;
+ instead.
+*/
+createSocket : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-createSocket'>/**{@inheritDoc}
+</span>
+ &lt;p&gt;By default, this method returns a &lt;i&gt;connected&lt;/i&gt; socket and verifies the peer's
+ certificate hostname after connecting using the {@link HostnameVerifier} obtained from
+ {@code HttpsURLConnection.getDefaultHostnameVerifier()}; if this instance was created with
+ {@link #getInsecure(int, android.net.SSLSessionCache)}, it returns a socket that is &lt;i&gt;not connected&lt;/i&gt;
+ instead.
+*/
+createSocket : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-getDefaultCipherSuites'>/**
+</span>*/
+getDefaultCipherSuites : function(  ) {},
+
+<span id='android-net-SSLCertificateSocketFactory-method-getSupportedCipherSuites'>/**
+</span>*/
+getSupportedCipherSuites : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

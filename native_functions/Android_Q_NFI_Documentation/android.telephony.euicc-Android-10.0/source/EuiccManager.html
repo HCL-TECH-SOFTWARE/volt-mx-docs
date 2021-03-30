@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-euicc-EuiccManager'>/**@class android.telephony.euicc.EuiccManager
+</span>@extends java.lang.Object
+
+ EuiccManager is the application interface to eUICCs, or eSIMs/embedded SIMs.
+
+ &lt;p&gt;You do not instantiate this class directly; instead, you retrieve an instance through
+ {@link Context#getSystemService(String)} and {@link Context#EUICC_SERVICE}. This instance will be
+ created using the default eUICC.
+
+ &lt;p&gt;On a device with multiple eUICCs, you may want to create multiple EuiccManagers. To do this
+ you can call {@link #createForCardId}.
+
+ &lt;p&gt;See {@link #isEnabled} before attempting to use these APIs.
+*/
+var EuiccManager = {
+
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS'>/** Intent action to launch the embedded SIM (eUICC) management settings screen.
+</span>
+ &lt;p&gt;This screen shows a list of embedded profiles and offers the user the ability to switch
+ between them, download new profiles, and delete unused profiles.
+
+ &lt;p&gt;The activity will immediately finish with {@link android.app.Activity#RESULT_CANCELED} if
+ {@link #isEnabled} is false.
+
+ This is ued by non-LPA app to bring up LUI.
+*/
+ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS : &quot;android.telephony.euicc.action.MANAGE_EMBEDDED_SUBSCRIPTIONS&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_OTA_STATUS_CHANGED'>/** Broadcast Action: The eUICC OTA status is changed.
+</span> &lt;p class=&quot;note&quot;&gt;
+ Requires the {@link android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent
+ by the system.
+
+ @hide
+*/
+ACTION_OTA_STATUS_CHANGED : &quot;android.telephony.euicc.action.OTA_STATUS_CHANGED&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_NOTIFY_CARRIER_SETUP_INCOMPLETE'>/** Broadcast Action: The action sent to carrier app so it knows the carrier setup is not
+</span> completed.
+*/
+ACTION_NOTIFY_CARRIER_SETUP_INCOMPLETE : &quot;android.telephony.euicc.action.NOTIFY_CARRIER_SETUP_INCOMPLETE&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_PROVISION_EMBEDDED_SUBSCRIPTION'>/** Intent action to provision an embedded subscription.
+</span>
+ &lt;p&gt;May be called during device provisioning to launch a screen to perform embedded SIM
+ provisioning, e.g. if no physical SIM is present and the user elects to configure their
+ embedded SIM.
+
+ &lt;p&gt;The activity will immediately finish with {@link android.app.Activity#RESULT_CANCELED} if
+ {@link #isEnabled} is false.
+
+ @hide
+*/
+ACTION_PROVISION_EMBEDDED_SUBSCRIPTION : &quot;android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_RESOLVE_ERROR'>/** Intent action to handle a resolvable error.
+</span> @hide
+*/
+ACTION_RESOLVE_ERROR : &quot;android.telephony.euicc.action.RESOLVE_ERROR&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED'>/** Intent action sent by system apps (such as the Settings app) to the Telephony framework to
+</span> enable or disable a subscription. Must be accompanied with {@link #EXTRA_SUBSCRIPTION_ID} and
+ {@link #EXTRA_ENABLE_SUBSCRIPTION}, and optionally {@link #EXTRA_FROM_SUBSCRIPTION_ID}.
+
+ &lt;p&gt;Requires the caller to be a privileged process with the
+ {@link android.permission#CALL_PRIVILEGED} permission for the intent to reach the Telephony
+ stack.
+
+ &lt;p&gt;Unlike {@link #switchToSubscription(int, PendingIntent)}, using this action allows the
+ underlying eUICC service (i.e. the LPA app) to control the UI experience during this
+ operation. The action is received by the Telephony framework, which in turn selects and
+ launches an appropriate LPA activity to present UI to the user. For example, the activity may
+ show a confirmation dialog, a progress dialog, or an error dialog when necessary.
+
+ &lt;p&gt;The launched activity will immediately finish with
+ {@link android.app.Activity#RESULT_CANCELED} if {@link #isEnabled} is false.
+
+ @hide
+*/
+ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED : &quot;android.telephony.euicc.action.TOGGLE_SUBSCRIPTION_PRIVILEGED&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_DELETE_SUBSCRIPTION_PRIVILEGED'>/** Intent action sent by system apps (such as the Settings app) to the Telephony framework to
+</span> delete a subscription. Must be accompanied with {@link #EXTRA_SUBSCRIPTION_ID}.
+
+ &lt;p&gt;Requires the caller to be a privileged process with the
+ {@link android.permission#CALL_PRIVILEGED} permission for the intent to reach the Telephony
+ stack.
+
+ &lt;p&gt;Unlike {@link #deleteSubscription(int, PendingIntent)}, using this action allows the
+ underlying eUICC service (i.e. the LPA app) to control the UI experience during this
+ operation. The action is received by the Telephony framework, which in turn selects and
+ launches an appropriate LPA activity to present UI to the user. For example, the activity may
+ show a confirmation dialog, a progress dialog, or an error dialog when necessary.
+
+ &lt;p&gt;The launched activity will immediately finish with
+ {@link android.app.Activity#RESULT_CANCELED} if {@link #isEnabled} is false.
+
+ @hide
+*/
+ACTION_DELETE_SUBSCRIPTION_PRIVILEGED : &quot;android.telephony.euicc.action.DELETE_SUBSCRIPTION_PRIVILEGED&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-ACTION_RENAME_SUBSCRIPTION_PRIVILEGED'>/** Intent action sent by system apps (such as the Settings app) to the Telephony framework to
+</span> rename a subscription. Must be accompanied with {@link #EXTRA_SUBSCRIPTION_ID} and
+ {@link #EXTRA_SUBSCRIPTION_NICKNAME}.
+
+ &lt;p&gt;Requires the caller to be a privileged process with the
+ {@link android.permission#CALL_PRIVILEGED} permission for the intent to reach the Telephony
+ stack.
+
+ &lt;p&gt;Unlike {@link #updateSubscriptionNickname(int, String, PendingIntent)}, using this action
+ allows the the underlying eUICC service (i.e. the LPA app) to control the UI experience
+ during this operation. The action is received by the Telephony framework, which in turn
+ selects and launches an appropriate LPA activity to present UI to the user. For example, the
+ activity may show a confirmation dialog, a progress dialog, or an error dialog when
+ necessary.
+
+ &lt;p&gt;The launched activity will immediately finish with
+ {@link android.app.Activity#RESULT_CANCELED} if {@link #isEnabled} is false.
+
+ @hide
+*/
+ACTION_RENAME_SUBSCRIPTION_PRIVILEGED : &quot;android.telephony.euicc.action.RENAME_SUBSCRIPTION_PRIVILEGED&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EMBEDDED_SUBSCRIPTION_RESULT_OK'>/** Result code for an operation indicating that the operation succeeded.
+</span>*/
+EMBEDDED_SUBSCRIPTION_RESULT_OK : &quot;0&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR'>/** Result code for an operation indicating that the user must take some action before the
+</span> operation can continue.
+
+ @see #startResolutionActivity
+*/
+EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR : &quot;1&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EMBEDDED_SUBSCRIPTION_RESULT_ERROR'>/** Result code for an operation indicating that an unresolvable error occurred.
+</span>
+ {@link #EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE} will be populated with a detailed error
+ code for logging/debugging purposes only.
+*/
+EMBEDDED_SUBSCRIPTION_RESULT_ERROR : &quot;2&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_ACTIVATION_TYPE'>/** Key for an extra set on the {@link #ACTION_PROVISION_EMBEDDED_SUBSCRIPTION} intent for which
+</span> kind of activation flow will be evolved. (see {@code EUICC_ACTIVATION_})
+
+ @hide
+*/
+EXTRA_ACTIVATION_TYPE : &quot;android.telephony.euicc.extra.ACTIVATION_TYPE&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE'>/** Key for an extra set on {@link PendingIntent} result callbacks providing a detailed result
+</span> code.
+
+ &lt;p&gt;This code is an implementation detail of the embedded subscription manager and is only
+ intended for logging or debugging purposes.
+*/
+EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE : &quot;android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DETAILED_CODE&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION'>/** Key for an extra set on {@code #getDownloadableSubscriptionMetadata} PendingIntent result
+</span> callbacks providing the downloadable subscription metadata.
+*/
+EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION : &quot;android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS'>/** Key for an extra set on {@link #getDefaultDownloadableSubscriptionList} PendingIntent result
+</span> callbacks providing the list of available downloadable subscriptions.
+ @hide
+*/
+EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS : &quot;android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT'>/** Key for an extra set on {@link PendingIntent} result callbacks providing the resolution
+</span> pending intent for {@link #EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR}s.
+ @hide
+*/
+EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT : &quot;android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_ACTION'>/** Key for an extra set on the {@link #EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT} intent
+</span> containing the EuiccService action to launch for resolution.
+ @hide
+*/
+EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_ACTION : &quot;android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_ACTION&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT'>/** Key for an extra set on the {@link #EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT} intent
+</span> providing the callback to execute after resolution is completed.
+ @hide
+*/
+EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT : &quot;android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_FORCE_PROVISION'>/** Key for an extra set on the {@link #ACTION_PROVISION_EMBEDDED_SUBSCRIPTION} intent for
+</span> whether eSIM provisioning flow is forced to be started or not. If this extra hasn't been
+ set, eSIM provisioning flow may be skipped and the corresponding carrier's app will be
+ notified. Otherwise, eSIM provisioning flow will be started when
+ {@link #ACTION_PROVISION_EMBEDDED_SUBSCRIPTION} has been received.
+ @hide
+*/
+EXTRA_FORCE_PROVISION : &quot;android.telephony.euicc.extra.FORCE_PROVISION&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_SUBSCRIPTION_ID'>/** Key for an extra set on privileged actions {@link #ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED},
+</span> {@link #ACTION_DELETE_SUBSCRIPTION_PRIVILEGED}, and
+ {@link #ACTION_RENAME_SUBSCRIPTION_PRIVILEGED} providing the ID of the targeted subscription.
+
+ &lt;p&gt;Expected type of the extra data: int
+
+ @hide
+*/
+EXTRA_SUBSCRIPTION_ID : &quot;android.telephony.euicc.extra.SUBSCRIPTION_ID&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_ENABLE_SUBSCRIPTION'>/** Key for an extra set on {@link #ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED} providing a boolean
+</span> value of whether to enable or disable the targeted subscription.
+
+ &lt;p&gt;Expected type of the extra data: boolean
+
+ @hide
+*/
+EXTRA_ENABLE_SUBSCRIPTION : &quot;android.telephony.euicc.extra.ENABLE_SUBSCRIPTION&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_SUBSCRIPTION_NICKNAME'>/** Key for an extra set on {@link #ACTION_RENAME_SUBSCRIPTION_PRIVILEGED} providing a new
+</span> nickname for the targeted subscription.
+
+ &lt;p&gt;Expected type of the extra data: String
+
+ @hide
+*/
+EXTRA_SUBSCRIPTION_NICKNAME : &quot;android.telephony.euicc.extra.SUBSCRIPTION_NICKNAME&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_FROM_SUBSCRIPTION_ID'>/** Key for an extra set on {@link #ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED} providing the ID of
+</span> the subscription we're toggling from. This extra is optional and is only used for UI
+ purposes by the underlying eUICC service (i.e. the LPA app), such as displaying a dialog
+ titled &quot;Switch X with Y&quot;. If set, the provided subscription will be used as the &quot;from&quot;
+ subscription in UI (the &quot;X&quot; in the dialog example). Otherwise, the currently active
+ subscription that will be disabled is the &quot;from&quot; subscription.
+
+ &lt;p&gt;Expected type of the extra data: int
+
+ @hide
+*/
+EXTRA_FROM_SUBSCRIPTION_ID : &quot;android.telephony.euicc.extra.FROM_SUBSCRIPTION_ID&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EXTRA_PHYSICAL_SLOT_ID'>/** Key for an extra set on privileged actions {@link #ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED}
+</span> providing the physical slot ID of the target slot.
+
+ &lt;p&gt;Expected type of the extra data: int
+
+ @hide
+*/
+EXTRA_PHYSICAL_SLOT_ID : &quot;android.telephony.euicc.extra.PHYSICAL_SLOT_ID&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-META_DATA_CARRIER_ICON'>/** Optional meta-data attribute for a carrier app providing an icon to use to represent the
+</span> carrier. If not provided, the app's launcher icon will be used as a fallback.
+*/
+META_DATA_CARRIER_ICON : &quot;android.telephony.euicc.carriericon&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_ACTIVATION_TYPE_DEFAULT'>/** The default euicc activation type which includes checking server side and downloading the
+</span> profile based on carrier's download configuration.
+
+ @hide
+*/
+EUICC_ACTIVATION_TYPE_DEFAULT : &quot;1&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_ACTIVATION_TYPE_BACKUP'>/** The euicc activation type used when the default download process failed. LPA will start the
+</span> backup flow and try to download the profile for the carrier.
+
+ @hide
+*/
+EUICC_ACTIVATION_TYPE_BACKUP : &quot;2&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_ACTIVATION_TYPE_TRANSFER'>/** The activation flow of eSIM seamless transfer will be used. LPA will start normal eSIM
+</span> activation flow and if it's failed, the name of the carrier selected will be recorded. After
+ the future device pairing, LPA will contact this carrier to transfer it from the other device
+ to this device.
+
+ @hide
+*/
+EUICC_ACTIVATION_TYPE_TRANSFER : &quot;3&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_ACTIVATION_TYPE_ACCOUNT_REQUIRED'>/** The activation flow of eSIM requiring user account will be started. This can only be used
+</span> when there is user account signed in. Otherwise, the flow will be failed.
+
+ @hide
+*/
+EUICC_ACTIVATION_TYPE_ACCOUNT_REQUIRED : &quot;4&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_OTA_IN_PROGRESS'>/** An OTA is in progress. During this time, the eUICC is not available and the user may lose
+</span> network access.
+ @hide
+*/
+EUICC_OTA_IN_PROGRESS : &quot;1&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_OTA_FAILED'>/** The OTA update failed.
+</span> @hide
+*/
+EUICC_OTA_FAILED : &quot;2&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_OTA_SUCCEEDED'>/** The OTA update finished successfully.
+</span> @hide
+*/
+EUICC_OTA_SUCCEEDED : &quot;3&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_OTA_NOT_NEEDED'>/** The OTA update not needed since current eUICC OS is latest.
+</span> @hide
+*/
+EUICC_OTA_NOT_NEEDED : &quot;4&quot;,
+<span id='android-telephony-euicc-EuiccManager-property-EUICC_OTA_STATUS_UNAVAILABLE'>/** The OTA status is unavailable since eUICC service is unavailable.
+</span> @hide
+*/
+EUICC_OTA_STATUS_UNAVAILABLE : &quot;5&quot;,
+<span id='android-telephony-euicc-EuiccManager-method-createForCardId'>/**Create a new EuiccManager object pinned to the given card ID.
+</span>@return {Object {android.telephony.euicc.EuiccManager}} an EuiccManager that uses the given card ID for all calls.
+*/
+createForCardId : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-isEnabled'>/**Whether embedded subscriptions are currently enabled.
+</span>
+ &lt;p&gt;Even on devices with the {@link PackageManager#FEATURE_TELEPHONY_EUICC} feature, embedded
+ subscriptions may be turned off, e.g. because of a carrier restriction from an inserted
+ physical SIM. Therefore, this runtime check should be used before accessing embedded
+ subscription APIs.
+@return {Boolean} true if embedded subscriptions are currently enabled.
+*/
+isEnabled : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-getEid'>/**Returns the EID identifying the eUICC hardware.
+</span>
+ &lt;p&gt;Requires that the calling app has carrier privileges on the active subscription on the
+ current eUICC. A calling app with carrier privileges for one eUICC may not necessarily have
+ access to the EID of another eUICC.
+@return {String} the EID. May be null if the eUICC is not ready.
+*/
+getEid : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-getOtaStatus'>/**Returns the current status of eUICC OTA.
+</span>
+ &lt;p&gt;Requires the {@link android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission.
+@return {Number} the status of eUICC OTA. If the eUICC is not ready,
+         {@link OtaStatus#EUICC_OTA_STATUS_UNAVAILABLE} will be returned.
+@hide 
+*/
+getOtaStatus : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-downloadSubscription'>/**Attempt to download the given {@link android.telephony.euicc.DownloadableSubscription}.
+</span>
+ &lt;p&gt;Requires the {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission,
+ or the calling app must be authorized to manage both the currently-active subscription on the
+ current eUICC and the subscription to be downloaded according to the subscription metadata.
+ Without the former, an {@link #EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR} will be
+ returned in the callback intent to prompt the user to accept the download.
+
+ &lt;p&gt;On a multi-active SIM device, requires the
+ {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission, or a calling app
+ only if the targeted eUICC does not currently have an active subscription or the calling app
+ is authorized to manage the active subscription on the target eUICC, and the calling app is
+ authorized to manage any active subscription on any SIM. Without it, an
+ {@link #EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR} will be returned in the callback
+ intent to prompt the user to accept the download. The caller should also be authorized to
+ manage the subscription to be downloaded.
+@param {Object {DownloadableSubscription}} subscription the subscription to download.
+@param {Boolean} switchAfterDownload if true, the profile will be activated upon successful download.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+*/
+downloadSubscription : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-startResolutionActivity'>/**Start an activity to resolve a user-resolvable error.
+</span>
+ &lt;p&gt;If an operation returns {@link #EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR}, this
+ method may be called to prompt the user to resolve the issue.
+
+ &lt;p&gt;This method may only be called once for a particular error.
+@param {Object {Activity}} activity the calling activity (which should be in the foreground).
+@param {Number} requestCode an application-specific request code which will be provided to
+     {@link Activity#onActivityResult} upon completion. Note that the operation may still be
+     in progress when the resolution activity completes; it is not fully finished until the
+     callback intent is triggered.
+@param {Object {Intent}} resultIntent the Intent provided to the initial callback intent which failed with
+     {@link #EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR}.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes. This is
+     trigered upon completion of the original operation that required user resolution.
+@throws android.content.IntentSender.SendIntentException if called more than once.
+*/
+startResolutionActivity : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-continueOperation'>/**Continue an operation after the user resolves an error.
+</span>
+ &lt;p&gt;To be called by the LUI upon completion of a resolvable error flow.
+
+ &lt;p&gt;Requires that the calling app has the
+ {@link android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission.
+@param {Object {Intent}} resolutionIntent The original intent used to start the LUI.
+@param {Object {Bundle}} resolutionExtras Resolution-specific extras depending on the result of the resolution.
+     For example, this may indicate whether the user has consented or may include the input
+     they provided.
+@hide 
+*/
+continueOperation : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-getDownloadableSubscriptionMetadata'>/**Fills in the metadata for a DownloadableSubscription.
+</span>
+ &lt;p&gt;May be used in cases that a DownloadableSubscription was constructed to download a
+ profile, but the metadata for the profile is unknown (e.g. we only know the activation code).
+ The callback will be triggered with an Intent with
+ {@link #EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION} set to the
+ downloadable subscription metadata upon success.
+
+ &lt;p&gt;Requires that the calling app has the
+ {@link android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission. This is for
+ internal system use only.
+@param {Object {DownloadableSubscription}} subscription the subscription which needs metadata filled in
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+@hide 
+*/
+getDownloadableSubscriptionMetadata : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-getDefaultDownloadableSubscriptionList'>/**Gets metadata for subscription which are available for download on this device.
+</span>
+ &lt;p&gt;Subscriptions returned here may be passed to {@link #downloadSubscription}. They may have
+ been pre-assigned to this particular device, for example. The callback will be triggered with
+ an Intent with {@link #EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS} set to the
+ list of available subscriptions upon success.
+
+ &lt;p&gt;Requires that the calling app has the
+ {@link android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission. This is for
+ internal system use only.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+@hide 
+*/
+getDefaultDownloadableSubscriptionList : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-getEuiccInfo'>/**Returns information about the eUICC chip/device.
+</span>@return {Object {android.telephony.euicc.EuiccInfo}} the {@link EuiccInfo}. May be null if the eUICC is not ready.
+*/
+getEuiccInfo : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-deleteSubscription'>/**Deletes the given subscription.
+</span>
+ &lt;p&gt;If this subscription is currently active, the device will first switch away from it onto
+ an &quot;empty&quot; subscription.
+
+ &lt;p&gt;Requires that the calling app has carrier privileges according to the metadata of the
+ profile to be deleted, or the
+ {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission.
+@param {Number} subscriptionId the ID of the subscription to delete.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+*/
+deleteSubscription : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-switchToSubscription'>/**Switch to (enable) the given subscription.
+</span>
+ &lt;p&gt;Requires the {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission,
+ or the calling app must be authorized to manage both the currently-active subscription and
+ the subscription to be enabled according to the subscription metadata. Without the former,
+ an {@link #EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR} will be returned in the callback
+ intent to prompt the user to accept the download.
+
+ &lt;p&gt;On a multi-active SIM device, requires the
+ {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission, or a calling app
+  only if the targeted eUICC does not currently have an active subscription or the calling app
+ is authorized to manage the active subscription on the target eUICC, and the calling app is
+ authorized to manage any active subscription on any SIM. Without it, an
+ {@link #EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR} will be returned in the callback
+ intent to prompt the user to accept the download. The caller should also be authorized to
+ manage the subscription to be enabled.
+@param {Number} subscriptionId the ID of the subscription to enable. May be
+     {@link android.telephony.SubscriptionManager#INVALID_SUBSCRIPTION_ID} to deactivate the
+     current profile without activating another profile to replace it. If it's a disable
+     operation, requires the {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS}
+     permission, or the calling app must be authorized to manage the active subscription on
+     the target eUICC.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+*/
+switchToSubscription : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-updateSubscriptionNickname'>/**Update the nickname for the given subscription.
+</span>
+ &lt;p&gt;Requires that the calling app has carrier privileges according to the metadata of the
+ profile to be updated, or the
+ {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission.
+@param {Number} subscriptionId the ID of the subscription to update.
+@param {String} nickname the new nickname to apply.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+*/
+updateSubscriptionNickname : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-eraseSubscriptions'>/**Erase all subscriptions and reset the eUICC.
+</span>
+ &lt;p&gt;Requires that the calling app has the
+ {@code android.Manifest.permission#WRITE_EMBEDDED_SUBSCRIPTIONS} permission.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+@hide 
+*/
+eraseSubscriptions : function(  ) {},
+
+<span id='android-telephony-euicc-EuiccManager-method-retainSubscriptionsForFactoryReset'>/**Ensure that subscriptions will be retained on the next factory reset.
+</span>
+ &lt;p&gt;By default, all subscriptions on the eUICC are erased the first time a device boots (ever
+ and after factory resets). This ensures that the data is wiped after a factory reset is
+ performed via fastboot or recovery mode, as these modes do not support the necessary radio
+ communication needed to wipe the eSIM.
+
+ &lt;p&gt;However, this method may be called right before a factory reset issued via settings when
+ the user elects to retain subscriptions. Doing so will mark them for retention so that they
+ are not cleared after the ensuing reset.
+
+ &lt;p&gt;Requires that the calling app has the {@link android.Manifest.permission#MASTER_CLEAR}
+ permission. This is for internal system use only.
+@param {Object {PendingIntent}} callbackIntent a PendingIntent to launch when the operation completes.
+@hide 
+*/
+retainSubscriptionsForFactoryReset : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

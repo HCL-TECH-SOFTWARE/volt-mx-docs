@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-BatteryStatsHistory'>/**@class com.android.internal.os.BatteryStatsHistory
+</span>@extends java.lang.Object
+
+ BatteryStatsHistory encapsulates battery history files.
+ Battery history record is appended into buffer {@link #mHistoryBuffer} and backed up into
+ {@link #mActiveFile}.
+ When {@link #mHistoryBuffer} size reaches {@link com.android.internal.os.BatteryStatsImpl.Constants#MAX_HISTORY_BUFFER},
+ current mActiveFile is closed and a new mActiveFile is open.
+ History files are under directory /data/system/battery-history/.
+ History files have name battery-history-&lt;num&gt;.bin. The file number &lt;num&gt; starts from zero and
+ grows sequentially.
+ The mActiveFile is always the highest numbered history file.
+ The lowest number file is always the oldest file.
+ The highest number file is always the newest file.
+ The file number grows sequentially and we never skip number.
+ When count of history files exceeds {@link com.android.internal.os.BatteryStatsImpl.Constants#MAX_HISTORY_FILES},
+ the lowest numbered file is deleted and a new file is open.
+
+ All interfaces in BatteryStatsHistory should only be called by BatteryStatsImpl and protected by
+ locks on BatteryStatsImpl object.
+*/
+var BatteryStatsHistory = {
+
+<span id='com-android-internal-os-BatteryStatsHistory-property-HISTORY_DIR'>/***/
+</span>HISTORY_DIR : &quot;battery-history&quot;,
+<span id='com-android-internal-os-BatteryStatsHistory-property-FILE_SUFFIX'>/***/
+</span>FILE_SUFFIX : &quot;.bin&quot;,
+<span id='com-android-internal-os-BatteryStatsHistory-method-startNextFile'>/**When {@link #mHistoryBuffer} reaches {@link com.android.internal.os.BatteryStatsImpl.Constants#MAX_HISTORY_BUFFER},
+</span> create next history file.
+*/
+startNextFile : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-resetAllFiles'>/**Delete all existing history files. Active history file start from number 0 again.
+</span>*/
+resetAllFiles : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-startIteratingHistory'>/**Start iterating history files and history buffer.
+</span>@return {Boolean} always return true.
+*/
+startIteratingHistory : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-finishIteratingHistory'>/**Finish iterating history files and history buffer.
+</span>*/
+finishIteratingHistory : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-getNextParcel'>/**When iterating history files and history buffer, always start from the lowest numbered
+</span> history file, when reached the mActiveFile (highest numbered history file), do not read from
+ mActiveFile, read from history buffer instead because the buffer has more updated data.
+@param {Object {BatteryStats.HistoryItem}} out a history item.
+@return {Object {android.os.Parcel}} The parcel that has next record. null if finished all history files and history
+         buffer
+*/
+getNextParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-readFileToParcel'>/**Read history file into a parcel.
+</span>@param {Object {Parcel}} out the Parcel read into.
+@param {Object {AtomicFile}} file the File to read from.
+@return {Boolean} true if success, false otherwise.
+*/
+readFileToParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-writeToParcel'>/**Read all history files and serialize into a big Parcel. This is to send history files to
+</span> Settings app since Settings app can not access /data/system directory.
+ Checkin file also call this method.
+@param {Object {Parcel}} out the output parcel
+*/
+writeToParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-readFromParcel'>/**This is for Settings app, when Settings app receives big history parcel, it call
+</span> this method to parse it into list of parcels.
+ Checkin file also call this method.
+@param {Object {Parcel}} in the input parcel.
+*/
+readFromParcel : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-getFilesNumbers'>/**
+</span>*/
+getFilesNumbers : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-getActiveFile'>/**
+</span>*/
+getActiveFile : function(  ) {},
+
+<span id='com-android-internal-os-BatteryStatsHistory-method-getHistoryUsedSize'>/**
+</span>@return {Number} the total size of all history files and history buffer.
+*/
+getHistoryUsedSize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

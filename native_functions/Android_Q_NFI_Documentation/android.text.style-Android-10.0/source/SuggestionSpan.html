@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-text-style-SuggestionSpan'>/**@class android.text.style.SuggestionSpan
+</span> implements android.text.ParcelableSpan
+
+@extends android.text.style.CharacterStyle
+
+ Holds suggestion candidates for the text enclosed in this span.
+
+ When such a span is edited in an EditText, double tapping on the text enclosed in this span will
+ display a popup dialog listing suggestion replacement for that text. The user can then replace
+ the original text by one of the suggestions.
+
+ These spans should typically be created by the input method to provide correction and alternates
+ for the text.
+
+ @see TextView#isSuggestionsEnabled()
+*/
+var SuggestionSpan = {
+
+<span id='android-text-style-SuggestionSpan-property-FLAG_EASY_CORRECT'>/** Sets this flag if the suggestions should be easily accessible with few interactions.
+</span> This flag should be set for every suggestions that the user is likely to use.
+*/
+FLAG_EASY_CORRECT : &quot;1&quot;,
+<span id='android-text-style-SuggestionSpan-property-FLAG_MISSPELLED'>/** Sets this flag if the suggestions apply to a misspelled word/text. This type of suggestion is
+</span> rendered differently to highlight the error.
+*/
+FLAG_MISSPELLED : &quot;2&quot;,
+<span id='android-text-style-SuggestionSpan-property-FLAG_AUTO_CORRECTION'>/** Sets this flag if the auto correction is about to be applied to a word/text
+</span> that the user is typing/composing. This type of suggestion is rendered differently
+ to indicate the auto correction is happening.
+*/
+FLAG_AUTO_CORRECTION : &quot;4&quot;,
+<span id='android-text-style-SuggestionSpan-property-ACTION_SUGGESTION_PICKED'>/** This action is deprecated in {@link android.os.Build.VERSION_CODES#Q}.
+</span>
+ @deprecated For IMEs to receive this kind of user interaction signals, implement IMEs' own
+             suggestion picker UI instead of relying on {@link android.text.style.SuggestionSpan}. To retrieve
+             bounding boxes for each character of the composing text, use
+             {@link android.view.inputmethod.CursorAnchorInfo}.
+*/
+ACTION_SUGGESTION_PICKED : &quot;android.text.style.SUGGESTION_PICKED&quot;,
+<span id='android-text-style-SuggestionSpan-property-SUGGESTION_SPAN_PICKED_AFTER'>/** This is deprecated in {@link android.os.Build.VERSION_CODES#Q}.
+</span>
+ @deprecated See {@link #ACTION_SUGGESTION_PICKED}.
+*/
+SUGGESTION_SPAN_PICKED_AFTER : &quot;after&quot;,
+<span id='android-text-style-SuggestionSpan-property-SUGGESTION_SPAN_PICKED_BEFORE'>/** This is deprecated in {@link android.os.Build.VERSION_CODES#Q}.
+</span>
+ @deprecated See {@link #ACTION_SUGGESTION_PICKED}.
+*/
+SUGGESTION_SPAN_PICKED_BEFORE : &quot;before&quot;,
+<span id='android-text-style-SuggestionSpan-property-SUGGESTION_SPAN_PICKED_HASHCODE'>/** This is deprecated in {@link android.os.Build.VERSION_CODES#Q}.
+</span>
+ @deprecated See {@link #ACTION_SUGGESTION_PICKED}.
+*/
+SUGGESTION_SPAN_PICKED_HASHCODE : &quot;hashcode&quot;,
+<span id='android-text-style-SuggestionSpan-property-SUGGESTIONS_MAX_SIZE'>/***/
+</span>SUGGESTIONS_MAX_SIZE : &quot;5&quot;,
+<span id='android-text-style-SuggestionSpan-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-text-style-SuggestionSpan-method-getSuggestions'>/**
+</span>@return {String} an array of suggestion texts for this span
+*/
+getSuggestions : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-getLocale'>/**
+</span>@deprecated use {@link #getLocaleObject()} instead.
+@return {String} the locale of the suggestions. An empty string is returned if no locale is specified.
+*/
+getLocale : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-getLocaleObject'>/**Returns a well-formed BCP 47 language tag representation of the suggestions, as a
+</span> {@link Locale} object.
+
+ &lt;p&gt;&lt;b&gt;Caveat&lt;/b&gt;: The returned object is guaranteed to be a  a well-formed BCP 47 language tag
+ representation.  For example, this method can return an empty locale rather than returning a
+ malformed data when this object is initialized with an malformed {@link Locale} object, e.g.
+ {@code new Locale(&quot; a &quot;, &quot; b c d &quot;, &quot; &quot;}.&lt;/p&gt;
+@return {Object {java.util.Locale}} the locale of the suggestions. {@code null} is returned if no locale is specified.
+*/
+getLocaleObject : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-getNotificationTargetClassName'>/**
+</span>@return {String} {@code null}.
+@hide 
+@deprecated Do not use. Always returns {@code null}.
+*/
+getNotificationTargetClassName : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-getFlags'>/**
+</span>*/
+getFlags : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-setFlags'>/**
+</span>*/
+setFlags : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-writeToParcelInternal'>/**
+</span>@hide 
+*/
+writeToParcelInternal : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-getSpanTypeId'>/**
+</span>*/
+getSpanTypeId : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-getSpanTypeIdInternal'>/**
+</span>@hide 
+*/
+getSpanTypeIdInternal : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-updateDrawState'>/**
+</span>*/
+updateDrawState : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-getUnderlineColor'>/**
+</span>@return {Number} The color of the underline for that span, or 0 if there is no underline
+*/
+getUnderlineColor : function(  ) {},
+
+<span id='android-text-style-SuggestionSpan-method-notifySelection'>/**Does nothing.
+</span>@deprecated this is deprecated in {@link android.os.Build.VERSION_CODES#Q}.
+@hide 
+*/
+notifySelection : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

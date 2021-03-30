@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-helper-ItemTouchHelper'>/**@class com.android.internal.widget.helper.ItemTouchHelper
+</span> implements com.android.internal.widget.RecyclerView.OnChildAttachStateChangeListener
+
+@extends com.android.internal.widget.RecyclerView.ItemDecoration
+
+ This is a utility class to add swipe to dismiss and drag &amp; drop support to RecyclerView.
+ &lt;p&gt;
+ It works with a RecyclerView and a Callback class, which configures what type of interactions
+ are enabled and also receives events when user performs these actions.
+ &lt;p&gt;
+ Depending on which functionality you support, you should override
+ {@link com.android.internal.widget.helper.ItemTouchHelper.Callback#onMove(RecyclerView, ViewHolder, ViewHolder)} and / or
+ {@link com.android.internal.widget.helper.ItemTouchHelper.Callback#onSwiped(ViewHolder, int)}.
+ &lt;p&gt;
+ This class is designed to work with any LayoutManager but for certain situations, it can be
+ optimized for your custom LayoutManager by extending methods in the
+ {@link com.android.internal.widget.helper.ItemTouchHelper.Callback} class or implementing {@link com.android.internal.widget.helper.ItemTouchHelper.ViewDropHandler}
+ interface in your LayoutManager.
+ &lt;p&gt;
+ By default, ItemTouchHelper moves the items' translateX/Y properties to reposition them. On
+ platforms older than Honeycomb, ItemTouchHelper uses canvas translations and View's visibility
+ property to move items in response to touch events. You can customize these behaviors by
+ overriding {@link com.android.internal.widget.helper.ItemTouchHelper.Callback#onChildDraw(Canvas, RecyclerView, ViewHolder, float, float, int,
+ boolean)}
+ or {@link com.android.internal.widget.helper.ItemTouchHelper.Callback#onChildDrawOver(Canvas, RecyclerView, ViewHolder, float, float, int,
+ boolean)}.
+ &lt;p/&gt;
+ Most of the time, you only need to override &lt;code&gt;onChildDraw&lt;/code&gt; but due to limitations of
+ platform prior to Honeycomb, you may need to implement &lt;code&gt;onChildDrawOver&lt;/code&gt; as well.
+*/
+var ItemTouchHelper = {
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-UP'>/** Up direction, used for swipe &amp; drag control.
+</span>*/
+UP : &quot;1&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-DOWN'>/** Down direction, used for swipe &amp; drag control.
+</span>*/
+DOWN : &quot;2&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-LEFT'>/** Left direction, used for swipe &amp; drag control.
+</span>*/
+LEFT : &quot;4&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-RIGHT'>/** Right direction, used for swipe &amp; drag control.
+</span>*/
+RIGHT : &quot;8&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-START'>/** Horizontal start direction. Resolved to LEFT or RIGHT depending on RecyclerView's layout
+</span> direction. Used for swipe &amp; drag control.
+*/
+START : &quot;16&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-END'>/** Horizontal end direction. Resolved to LEFT or RIGHT depending on RecyclerView's layout
+</span> direction. Used for swipe &amp; drag control.
+*/
+END : &quot;32&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-ACTION_STATE_IDLE'>/** ItemTouchHelper is in idle state. At this state, either there is no related motion event by
+</span> the user or latest motion events have not yet triggered a swipe or drag.
+*/
+ACTION_STATE_IDLE : &quot;0&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-ACTION_STATE_SWIPE'>/** A View is currently being swiped.
+</span>*/
+ACTION_STATE_SWIPE : &quot;1&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-ACTION_STATE_DRAG'>/** A View is currently being dragged.
+</span>*/
+ACTION_STATE_DRAG : &quot;2&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-ANIMATION_TYPE_SWIPE_SUCCESS'>/** Animation type for views which are swiped successfully.
+</span>*/
+ANIMATION_TYPE_SWIPE_SUCCESS : &quot;2&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-ANIMATION_TYPE_SWIPE_CANCEL'>/** Animation type for views which are not completely swiped thus will animate back to their
+</span> original position.
+*/
+ANIMATION_TYPE_SWIPE_CANCEL : &quot;4&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-property-ANIMATION_TYPE_DRAG'>/** Animation type for views that were dragged and now will animate to their final position.
+</span>*/
+ANIMATION_TYPE_DRAG : &quot;8&quot;,
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-attachToRecyclerView'>/**Attaches the ItemTouchHelper to the provided RecyclerView. If TouchHelper is already
+</span> attached to a RecyclerView, it will first detach from the previous one. You can call this
+ method with {@code null} to detach it from the current RecyclerView.
+@param {Object {RecyclerView}} recyclerView The RecyclerView instance to which you want to add this helper or
+                     {@code null} if you want to remove ItemTouchHelper from the current
+                     RecyclerView.
+*/
+attachToRecyclerView : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-onDrawOver'>/**
+</span>*/
+onDrawOver : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-onDraw'>/**
+</span>*/
+onDraw : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-onChildViewAttachedToWindow'>/**
+</span>*/
+onChildViewAttachedToWindow : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-onChildViewDetachedFromWindow'>/**
+</span>*/
+onChildViewDetachedFromWindow : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-getItemOffsets'>/**
+</span>*/
+getItemOffsets : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-startDrag'>/**Starts dragging the provided ViewHolder. By default, ItemTouchHelper starts a drag when a
+</span> View is long pressed. You can disable that behavior by overriding
+ {@link com.android.internal.widget.helper.ItemTouchHelper.Callback#isLongPressDragEnabled()}.
+ &lt;p&gt;
+ For this method to work:
+ &lt;ul&gt;
+ &lt;li&gt;The provided ViewHolder must be a child of the RecyclerView to which this
+ ItemTouchHelper
+ is attached.&lt;/li&gt;
+ &lt;li&gt;{@link com.android.internal.widget.helper.ItemTouchHelper.Callback} must have dragging enabled.&lt;/li&gt;
+ &lt;li&gt;There must be a previous touch event that was reported to the ItemTouchHelper
+ through RecyclerView's ItemTouchListener mechanism. As long as no other ItemTouchListener
+ grabs previous events, this should work as expected.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ For example, if you would like to let your user to be able to drag an Item by touching one
+ of its descendants, you may implement it as follows:
+ &lt;pre&gt;
+     viewHolder.dragButton.setOnTouchListener(new View.OnTouchListener() {
+         public boolean onTouch(View v, MotionEvent event) {
+             if (MotionEvent.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                 mItemTouchHelper.startDrag(viewHolder);
+             }
+             return false;
+         }
+     });
+ &lt;/pre&gt;
+ &lt;p&gt;
+@param {Object {RecyclerView.ViewHolder}} viewHolder The ViewHolder to start dragging. It must be a direct child of
+                   RecyclerView.
+@see ItemTouchHelper.Callback#isItemViewSwipeEnabled()
+*/
+startDrag : function(  ) {},
+
+<span id='com-android-internal-widget-helper-ItemTouchHelper-method-startSwipe'>/**Starts swiping the provided ViewHolder. By default, ItemTouchHelper starts swiping a View
+</span> when user swipes their finger (or mouse pointer) over the View. You can disable this
+ behavior
+ by overriding {@link com.android.internal.widget.helper.ItemTouchHelper.Callback}
+ &lt;p&gt;
+ For this method to work:
+ &lt;ul&gt;
+ &lt;li&gt;The provided ViewHolder must be a child of the RecyclerView to which this
+ ItemTouchHelper is attached.&lt;/li&gt;
+ &lt;li&gt;{@link com.android.internal.widget.helper.ItemTouchHelper.Callback} must have swiping enabled.&lt;/li&gt;
+ &lt;li&gt;There must be a previous touch event that was reported to the ItemTouchHelper
+ through RecyclerView's ItemTouchListener mechanism. As long as no other ItemTouchListener
+ grabs previous events, this should work as expected.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ For example, if you would like to let your user to be able to swipe an Item by touching one
+ of its descendants, you may implement it as follows:
+ &lt;pre&gt;
+     viewHolder.dragButton.setOnTouchListener(new View.OnTouchListener() {
+         public boolean onTouch(View v, MotionEvent event) {
+             if (MotionEvent.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                 mItemTouchHelper.startSwipe(viewHolder);
+             }
+             return false;
+         }
+     });
+ &lt;/pre&gt;
+@param {Object {RecyclerView.ViewHolder}} viewHolder The ViewHolder to start swiping. It must be a direct child of
+                   RecyclerView.
+*/
+startSwipe : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

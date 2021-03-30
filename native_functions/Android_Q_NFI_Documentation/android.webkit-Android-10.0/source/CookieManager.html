@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-webkit-CookieManager'>/**@class android.webkit.CookieManager
+</span>@extends java.lang.Object
+
+ Manages the cookies used by an application's {@link android.webkit.WebView} instances.
+ Cookies are manipulated according to RFC2109.
+*/
+var CookieManager = {
+
+<span id='android-webkit-CookieManager-method-getInstance'>/**Gets the singleton CookieManager instance.
+</span>@return {Object {android.webkit.CookieManager}} the singleton CookieManager instance
+*/
+getInstance : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-setAcceptCookie'>/**Sets whether the application's {@link android.webkit.WebView} instances should send and
+</span> accept cookies.
+ By default this is set to {@code true} and the WebView accepts cookies.
+ &lt;p&gt;
+ When this is {@code true}
+ {@link android.webkit.CookieManager#setAcceptThirdPartyCookies setAcceptThirdPartyCookies} and
+ {@link android.webkit.CookieManager#setAcceptFileSchemeCookies setAcceptFileSchemeCookies}
+ can be used to control the policy for those specific types of cookie.
+@param {Boolean} accept whether {@link WebView} instances should send and accept
+               cookies
+*/
+setAcceptCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-acceptCookie'>/**Gets whether the application's {@link android.webkit.WebView} instances send and accept
+</span> cookies.
+@return {Boolean} {@code true} if {@link WebView} instances send and accept cookies
+*/
+acceptCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-setAcceptThirdPartyCookies'>/**Sets whether the {@link android.webkit.WebView} should allow third party cookies to be set.
+</span> Allowing third party cookies is a per WebView policy and can be set
+ differently on different WebView instances.
+ &lt;p&gt;
+ Apps that target {@link android.os.Build.VERSION_CODES#KITKAT} or below
+ default to allowing third party cookies. Apps targeting
+ {@link android.os.Build.VERSION_CODES#LOLLIPOP} or later default to disallowing
+ third party cookies.
+@param {Object {WebView}} webview the {@link WebView} instance to set the cookie policy on
+@param {Boolean} accept whether the {@link WebView} instance should accept
+               third party cookies
+*/
+setAcceptThirdPartyCookies : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-acceptThirdPartyCookies'>/**Gets whether the {@link android.webkit.WebView} should allow third party cookies to be set.
+</span>@param {Object {WebView}} webview the {@link WebView} instance to get the cookie policy for
+@return {Boolean} {@code true} if the {@link WebView} accepts third party cookies
+*/
+acceptThirdPartyCookies : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-setCookie'>/**Sets a cookie for the given URL. Any existing cookie with the same host,
+</span> path and name will be replaced with the new cookie. The cookie being set
+ will be ignored if it is expired.
+@param {String} url the URL for which the cookie is to be set
+@param {String} value the cookie as a string, using the format of the 'Set-Cookie'
+              HTTP response header
+*/
+setCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-setCookie'>/**Sets a cookie for the given URL. Any existing cookie with the same host,
+</span> path and name will be replaced with the new cookie. The cookie being set
+ will be ignored if it is expired.
+ &lt;p&gt;
+ This method is asynchronous.
+ If a {@link android.webkit.ValueCallback} is provided,
+ {@link android.webkit.ValueCallback#onReceiveValue(T) onReceiveValue()} will be called on the current
+ thread's {@link android.os.Looper} once the operation is complete.
+ The value provided to the callback indicates whether the cookie was set successfully.
+ You can pass {@code null} as the callback if you don't need to know when the operation
+ completes or whether it succeeded, and in this case it is safe to call the method from a
+ thread without a Looper.
+@param {String} url the URL for which the cookie is to be set
+@param {String} value the cookie as a string, using the format of the 'Set-Cookie'
+              HTTP response header
+@param {Object {android.webkit.ValueCallback}} callback a callback to be executed when the cookie has been set
+*/
+setCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-getCookie'>/**Gets the cookies for the given URL.
+</span>@param {String} url the URL for which the cookies are requested
+@return {String} value the cookies as a string, using the format of the 'Cookie'
+               HTTP request header
+*/
+getCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-getCookie'>/**See {@link #getCookie}(String).
+</span>@param {String} url the URL for which the cookies are requested
+@param {Boolean} privateBrowsing whether to use the private browsing cookie jar
+@return {String} value the cookies as a string, using the format of the 'Cookie'
+               HTTP request header
+@hide Used by Browser and by WebViewProvider implementations.
+*/
+getCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-getCookie'>/**Gets cookie(s) for a given uri so that it can be set to &quot;cookie:&quot; in http
+</span> request header.
+@param {Object {WebAddress}} uri the WebAddress for which the cookies are requested
+@return {String} value the cookies as a string, using the format of the 'Cookie'
+               HTTP request header
+@hide Used by RequestHandle and by WebViewProvider implementations.
+*/
+getCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-removeSessionCookie'>/**Removes all session cookies, which are cookies without an expiration
+</span> date.
+@deprecated use {@link #removeSessionCookies(ValueCallback)} instead.
+*/
+removeSessionCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-removeSessionCookies'>/**Removes all session cookies, which are cookies without an expiration
+</span> date.
+ &lt;p&gt;
+ This method is asynchronous.
+ If a {@link android.webkit.ValueCallback} is provided,
+ {@link android.webkit.ValueCallback#onReceiveValue(T) onReceiveValue()} will be called on the current
+ thread's {@link android.os.Looper} once the operation is complete.
+ The value provided to the callback indicates whether any cookies were removed.
+ You can pass {@code null} as the callback if you don't need to know when the operation
+ completes or whether any cookie were removed, and in this case it is safe to call the
+ method from a thread without a Looper.
+@param {Object {android.webkit.ValueCallback}} callback a callback which is executed when the session cookies have been removed
+*/
+removeSessionCookies : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-removeAllCookie'>/**Removes all cookies.
+</span>@deprecated Use {@link #removeAllCookies(ValueCallback)} instead.
+*/
+removeAllCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-removeAllCookies'>/**Removes all cookies.
+</span> &lt;p&gt;
+ This method is asynchronous.
+ If a {@link android.webkit.ValueCallback} is provided,
+ {@link android.webkit.ValueCallback#onReceiveValue(T) onReceiveValue()} will be called on the current
+ thread's {@link android.os.Looper} once the operation is complete.
+ The value provided to the callback indicates whether any cookies were removed.
+ You can pass {@code null} as the callback if you don't need to know when the operation
+ completes or whether any cookies were removed, and in this case it is safe to call the
+ method from a thread without a Looper.
+@param {Object {android.webkit.ValueCallback}} callback a callback which is executed when the cookies have been removed
+*/
+removeAllCookies : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-hasCookies'>/**Gets whether there are stored cookies.
+</span>@return {Boolean} {@code true} if there are stored cookies
+*/
+hasCookies : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-hasCookies'>/**See {@link #hasCookies}().
+</span>@param {Boolean} privateBrowsing whether to use the private browsing cookie jar
+@hide Used by Browser and WebViewProvider implementations.
+*/
+hasCookies : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-removeExpiredCookie'>/**Removes all expired cookies.
+</span>@deprecated The WebView handles removing expired cookies automatically.
+*/
+removeExpiredCookie : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-flush'>/**Ensures all cookies currently accessible through the getCookie API are
+</span> written to persistent storage.
+ This call will block the caller until it is done and may perform I/O.
+*/
+flush : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-allowFileSchemeCookies'>/**Gets whether the application's {@link android.webkit.WebView} instances send and accept
+</span> cookies for file scheme URLs.
+@return {Boolean} {@code true} if {@link WebView} instances send and accept cookies for
+         file scheme URLs
+*/
+allowFileSchemeCookies : function(  ) {},
+
+<span id='android-webkit-CookieManager-method-setAcceptFileSchemeCookies'>/**Sets whether the application's {@link android.webkit.WebView} instances should send and
+</span> accept cookies for file scheme URLs.
+ Use of cookies with file scheme URLs is potentially insecure and turned
+ off by default.
+ Do not use this feature unless you can be sure that no unintentional
+ sharing of cookie data can take place.
+ &lt;p&gt;
+ Note that calls to this method will have no effect if made after a
+ {@link android.webkit.WebView} or CookieManager instance has been created.
+*/
+setAcceptFileSchemeCookies : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

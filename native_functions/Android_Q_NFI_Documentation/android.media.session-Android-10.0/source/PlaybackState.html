@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-session-PlaybackState'>/**@class android.media.session.PlaybackState
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Playback state for a {@link android.media.session.MediaSession}. This includes a state like
+ {@link android.media.session.PlaybackState#STATE_PLAYING}, the current playback position,
+ and the current control capabilities.
+*/
+var PlaybackState = {
+
+<span id='android-media-session-PlaybackState-property-ACTION_STOP'>/** Indicates this session supports the stop command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_STOP : &quot;1&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PAUSE'>/** Indicates this session supports the pause command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PAUSE : &quot;2&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PLAY'>/** Indicates this session supports the play command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PLAY : &quot;4&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_REWIND'>/** Indicates this session supports the rewind command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_REWIND : &quot;8&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_SKIP_TO_PREVIOUS'>/** Indicates this session supports the previous command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_SKIP_TO_PREVIOUS : &quot;16&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_SKIP_TO_NEXT'>/** Indicates this session supports the next command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_SKIP_TO_NEXT : &quot;32&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_FAST_FORWARD'>/** Indicates this session supports the fast forward command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_FAST_FORWARD : &quot;64&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_SET_RATING'>/** Indicates this session supports the set rating command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_SET_RATING : &quot;128&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_SEEK_TO'>/** Indicates this session supports the seek to command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_SEEK_TO : &quot;256&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PLAY_PAUSE'>/** Indicates this session supports the play/pause toggle command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PLAY_PAUSE : &quot;512&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PLAY_FROM_MEDIA_ID'>/** Indicates this session supports the play from media id command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PLAY_FROM_MEDIA_ID : &quot;1024&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PLAY_FROM_SEARCH'>/** Indicates this session supports the play from search command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PLAY_FROM_SEARCH : &quot;2048&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_SKIP_TO_QUEUE_ITEM'>/** Indicates this session supports the skip to queue item command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_SKIP_TO_QUEUE_ITEM : &quot;4096&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PLAY_FROM_URI'>/** Indicates this session supports the play from URI command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PLAY_FROM_URI : &quot;8192&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PREPARE'>/** Indicates this session supports the prepare command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PREPARE : &quot;16384&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PREPARE_FROM_MEDIA_ID'>/** Indicates this session supports the prepare from media id command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PREPARE_FROM_MEDIA_ID : &quot;32768&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PREPARE_FROM_SEARCH'>/** Indicates this session supports the prepare from search command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PREPARE_FROM_SEARCH : &quot;65536&quot;,
+<span id='android-media-session-PlaybackState-property-ACTION_PREPARE_FROM_URI'>/** Indicates this session supports the prepare from URI command.
+</span>
+ @see Builder#setActions(long)
+*/
+ACTION_PREPARE_FROM_URI : &quot;131072&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_NONE'>/** This is the default playback state and indicates that no media has been
+</span> added yet, or the performer has been reset and has no content to play.
+
+ @see Builder#setState(int, long, float)
+ @see Builder#setState(int, long, float, long)
+*/
+STATE_NONE : &quot;0&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_STOPPED'>/** State indicating this item is currently stopped.
+</span>
+ @see Builder#setState
+*/
+STATE_STOPPED : &quot;1&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_PAUSED'>/** State indicating this item is currently paused.
+</span>
+ @see Builder#setState
+*/
+STATE_PAUSED : &quot;2&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_PLAYING'>/** State indicating this item is currently playing.
+</span>
+ @see Builder#setState
+*/
+STATE_PLAYING : &quot;3&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_FAST_FORWARDING'>/** State indicating this item is currently fast forwarding.
+</span>
+ @see Builder#setState
+*/
+STATE_FAST_FORWARDING : &quot;4&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_REWINDING'>/** State indicating this item is currently rewinding.
+</span>
+ @see Builder#setState
+*/
+STATE_REWINDING : &quot;5&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_BUFFERING'>/** State indicating this item is currently buffering and will begin playing
+</span> when enough data has buffered.
+
+ @see Builder#setState
+*/
+STATE_BUFFERING : &quot;6&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_ERROR'>/** State indicating this item is currently in an error state. The error
+</span> message should also be set when entering this state.
+
+ @see Builder#setState
+*/
+STATE_ERROR : &quot;7&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_CONNECTING'>/** State indicating the class doing playback is currently connecting to a
+</span> new destination.  Depending on the implementation you may return to the previous
+ state when the connection finishes or enter {@link #STATE_NONE}.
+ If the connection failed {@link #STATE_ERROR} should be used.
+
+ @see Builder#setState
+*/
+STATE_CONNECTING : &quot;8&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_SKIPPING_TO_PREVIOUS'>/** State indicating the player is currently skipping to the previous item.
+</span>
+ @see Builder#setState
+*/
+STATE_SKIPPING_TO_PREVIOUS : &quot;9&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_SKIPPING_TO_NEXT'>/** State indicating the player is currently skipping to the next item.
+</span>
+ @see Builder#setState
+*/
+STATE_SKIPPING_TO_NEXT : &quot;10&quot;,
+<span id='android-media-session-PlaybackState-property-STATE_SKIPPING_TO_QUEUE_ITEM'>/** State indicating the player is currently skipping to a specific item in
+</span> the queue.
+
+ @see Builder#setState
+*/
+STATE_SKIPPING_TO_QUEUE_ITEM : &quot;11&quot;,
+<span id='android-media-session-PlaybackState-property-PLAYBACK_POSITION_UNKNOWN'>/** Use this value for the position to indicate the position is not known.
+</span>*/
+PLAYBACK_POSITION_UNKNOWN : &quot;-1&quot;,
+<span id='android-media-session-PlaybackState-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-media-session-PlaybackState-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getState'>/**Get the current state of playback. One of the following:
+</span> &lt;ul&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_NONE}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_STOPPED}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_PLAYING}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_PAUSED}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_FAST_FORWARDING}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_REWINDING}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_BUFFERING}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_ERROR}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_CONNECTING}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_SKIPPING_TO_PREVIOUS}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_SKIPPING_TO_NEXT}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#STATE_SKIPPING_TO_QUEUE_ITEM}&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+getState : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getPosition'>/**Get the current playback position in ms.
+</span>*/
+getPosition : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getBufferedPosition'>/**Get the current buffered position in ms. This is the farthest playback
+</span> point that can be reached from the current position using only buffered
+ content.
+*/
+getBufferedPosition : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getPlaybackSpeed'>/**Get the current playback speed as a multiple of normal playback. This
+</span> should be negative when rewinding. A value of 1 means normal playback and
+ 0 means paused.
+@return {Number} The current speed of playback.
+*/
+getPlaybackSpeed : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getActions'>/**Get the current actions available on this session. This should use a
+</span> bitmask of the available actions.
+ &lt;ul&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_SKIP_TO_PREVIOUS}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_REWIND}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PLAY}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PAUSE}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_STOP}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_FAST_FORWARD}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_SKIP_TO_NEXT}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_SEEK_TO}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_SET_RATING}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PLAY_PAUSE}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PLAY_FROM_MEDIA_ID}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PLAY_FROM_SEARCH}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_SKIP_TO_QUEUE_ITEM}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PLAY_FROM_URI}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PREPARE}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PREPARE_FROM_MEDIA_ID}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PREPARE_FROM_SEARCH}&lt;/li&gt;
+ &lt;li&gt; {@link android.media.session.PlaybackState#ACTION_PREPARE_FROM_URI}&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+getActions : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getCustomActions'>/**Get the list of custom actions.
+</span>*/
+getCustomActions : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getErrorMessage'>/**Get a user readable error message. This should be set when the state is
+</span> {@link android.media.session.PlaybackState#STATE_ERROR}.
+*/
+getErrorMessage : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getLastPositionUpdateTime'>/**Get the elapsed real time at which position was last updated. If the
+</span> position has never been set this will return 0;
+@return {Number} The last time the position was updated.
+*/
+getLastPositionUpdateTime : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getActiveQueueItemId'>/**Get the id of the currently active item in the queue. If there is no
+</span> queue or a queue is not supported by the session this will be
+ {@link android.media.session.MediaSession.QueueItem#UNKNOWN_ID}.
+@return {Number} The id of the currently active item in the queue or
+         {@link MediaSession.QueueItem#UNKNOWN_ID}.
+*/
+getActiveQueueItemId : function(  ) {},
+
+<span id='android-media-session-PlaybackState-method-getExtras'>/**Get any custom extras that were set on this playback state.
+</span>@return {Object {android.os.Bundle}} The extras for this state or null.
+*/
+getExtras : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

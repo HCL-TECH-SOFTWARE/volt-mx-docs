@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-notification-NotificationListenerService-Ranking'>/**@class android.service.notification.NotificationListenerService.Ranking
+</span>@extends java.lang.Object
+
+ Stores ranking related information on a currently active notification.
+
+ &lt;p&gt;
+ Ranking objects aren't automatically updated as notification events
+ occur. Instead, ranking information has to be retrieved again via the
+ current {@link android.service.notification.NotificationListenerService.RankingMap}.
+*/
+var Ranking = {
+
+<span id='android-service-notification-NotificationListenerService-Ranking-property-VISIBILITY_NO_OVERRIDE'>/**Value signifying that the user has not expressed a per-app visibility override value.
+</span> @hide */
+VISIBILITY_NO_OVERRIDE : &quot;-1000&quot;,
+<span id='android-service-notification-NotificationListenerService-Ranking-property-USER_SENTIMENT_NEGATIVE'>/** The user is likely to have a negative reaction to this notification.
+</span>*/
+USER_SENTIMENT_NEGATIVE : &quot;-1&quot;,
+<span id='android-service-notification-NotificationListenerService-Ranking-property-USER_SENTIMENT_NEUTRAL'>/** It is not known how the user will react to this notification.
+</span>*/
+USER_SENTIMENT_NEUTRAL : &quot;0&quot;,
+<span id='android-service-notification-NotificationListenerService-Ranking-property-USER_SENTIMENT_POSITIVE'>/** The user is likely to have a positive reaction to this notification.
+</span>*/
+USER_SENTIMENT_POSITIVE : &quot;1&quot;,
+<span id='android-service-notification-NotificationListenerService-Ranking-method-writeToParcel'>/**
+</span>@hide 
+*/
+writeToParcel : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getKey'>/**Returns the key of the notification this Ranking applies to.
+</span>*/
+getKey : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getRank'>/**Returns the rank of the notification.
+</span>@return {Number} the rank of the notification, that is the 0-based index in
+     the list of active notifications.
+*/
+getRank : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-isAmbient'>/**Returns whether the notification is an ambient notification, that is
+</span> a notification that doesn't require the user's immediate attention.
+*/
+isAmbient : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getVisibilityOverride'>/**Returns the user specified visibility for the package that posted
+</span> this notification, or
+ {@link android.service.notification.NotificationListenerService.Ranking#VISIBILITY_NO_OVERRIDE} if
+ no such preference has been expressed.
+@hide 
+*/
+getVisibilityOverride : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getSuppressedVisualEffects'>/**Returns the type(s) of visual effects that should be suppressed for this notification.
+</span> See {@link NotificationManager.Policy}, e.g.
+ {@link NotificationManager.Policy#SUPPRESSED_EFFECT_LIGHTS}.
+*/
+getSuppressedVisualEffects : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-matchesInterruptionFilter'>/**Returns whether the notification matches the user's interruption
+</span> filter.
+@return {Boolean} {@code true} if the notification is allowed by the filter, or
+ {@code false} if it is blocked.
+*/
+matchesInterruptionFilter : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getImportance'>/**Returns the importance of the notification, which dictates its
+</span> modes of presentation, see: {@link NotificationManager#IMPORTANCE_DEFAULT}, etc.
+@return {Number} the importance of the notification
+*/
+getImportance : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getImportanceExplanation'>/**If the importance has been overridden by user preference, then this will be non-null,
+</span> and should be displayed to the user.
+@return {Object {java.lang.CharSequence}} the explanation for the importance, or null if it is the natural importance
+*/
+getImportanceExplanation : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getOverrideGroupKey'>/**If the system has overridden the group key, then this will be non-null, and this
+</span> key should be used to bundle notifications.
+*/
+getOverrideGroupKey : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getChannel'>/**Returns the notification channel this notification was posted to, which dictates
+</span> notification behavior and presentation.
+*/
+getChannel : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getUserSentiment'>/**Returns how the system thinks the user feels about notifications from the
+</span> channel provided by {@link #getChannel}(). You can use this information to expose
+ controls to help the user block this channel's notifications, if the sentiment is
+ {@link #USER_SENTIMENT_NEGATIVE}, or emphasize this notification if the sentiment is
+ {@link #USER_SENTIMENT_POSITIVE}.
+*/
+getUserSentiment : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getAdditionalPeople'>/**If the {@link android.service.notification.NotificationAssistantService} has added people to this notification, then
+</span> this will be non-null.
+@hide 
+@removed 
+*/
+getAdditionalPeople : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getSnoozeCriteria'>/**Returns snooze criteria provided by the {@link android.service.notification.NotificationAssistantService}. If your
+</span> user interface displays options for snoozing notifications these criteria should be
+ displayed as well.
+@hide 
+@removed 
+*/
+getSnoozeCriteria : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getSmartActions'>/**Returns a list of smart {@link Notification.Action} that can be added by the
+</span> {@link android.service.notification.NotificationAssistantService}
+*/
+getSmartActions : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getSmartReplies'>/**Returns a list of smart replies that can be added by the
+</span> {@link android.service.notification.NotificationAssistantService}
+*/
+getSmartReplies : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-canShowBadge'>/**Returns whether this notification can be displayed as a badge.
+</span>@return {Boolean} true if the notification can be displayed as a badge, false otherwise.
+*/
+canShowBadge : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-isSuspended'>/**Returns whether the app that posted this notification is suspended, so this notification
+</span> should be hidden.
+@return {Boolean} true if the notification should be hidden, false otherwise.
+*/
+isSuspended : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-getLastAudiblyAlertedMillis'>/**Returns the last time this notification alerted the user via sound or vibration.
+</span>@return {Number} the time of the last alerting behavior, in milliseconds.
+*/
+getLastAudiblyAlertedMillis : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-canBubble'>/**Returns whether the user has allowed bubbles globally, at the app level, and at the
+</span> channel level for this notification.
+
+ &lt;p&gt;This does not take into account the current importance of the notification, the
+ current DND state, or whether the posting app is foreground.&lt;/p&gt;
+*/
+canBubble : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-isNoisy'>/**
+</span>@hide 
+*/
+isNoisy : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-populate'>/**
+</span>@hide 
+*/
+populate : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-populate'>/**
+</span>@hide 
+*/
+populate : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-importanceToString'>/**{@hide}
+</span>*/
+importanceToString : function(  ) {},
+
+<span id='android-service-notification-NotificationListenerService-Ranking-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

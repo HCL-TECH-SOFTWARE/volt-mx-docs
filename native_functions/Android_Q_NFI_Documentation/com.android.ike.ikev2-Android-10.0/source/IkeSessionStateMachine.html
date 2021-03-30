@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ike-ikev2-IkeSessionStateMachine'>/**@class com.android.ike.ikev2.IkeSessionStateMachine
+</span>@extends com.android.internal.util.StateMachine
+
+ IkeSessionStateMachine tracks states and manages exchanges of this IKE session.
+
+ &lt;p&gt;IkeSessionStateMachine has two types of states. One type are states where there is no ongoing
+ procedure affecting IKE session (non-procedure state), including Initial, Closed, Idle and
+ Receiving. All other states are &quot;procedure&quot; states which are named as follows:
+
+ &lt;pre&gt;
+ State Name = [Procedure Type] + [Exchange Initiator] + [Exchange Type].
+ - An IKE procedure consists of one or two IKE exchanges:
+      Procedure Type = {CreateIke | DeleteIke | Info | RekeyIke | SimulRekeyIke}.
+ - Exchange Initiator indicates whether local or remote peer is the exchange initiator:
+      Exchange Initiator = {Local | Remote}
+ - Exchange type defines the function of this exchange. To make it more descriptive, we separate
+      Delete Exchange from generic Informational Exchange:
+      Exchange Type = {IkeInit | IkeAuth | Create | Delete | Info}
+ &lt;/pre&gt;
+*/
+var IkeSessionStateMachine = {
+
+<span id='com-android-ike-ikev2-IkeSessionStateMachine-method-receiveIkePacket'>/**Receive IKE packet from remote server.
+</span>
+ &lt;p&gt;This method is called synchronously from IkeSocket. It proxies the synchronous call as an
+ asynchronous job to the IkeSessionStateMachine handler.
+@param {Object {IkeHeader}} ikeHeader the decoded IKE header.
+@param {Object {byte[]}} ikePacketBytes the byte array of the entire received IKE packet.
+*/
+receiveIkePacket : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

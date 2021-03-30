@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-UserManager'>/**@class android.os.UserManager
+</span>@extends java.lang.Object
+
+ Manages users and user details on a multi-user system. There are two major categories of
+ users: fully customizable users with their own login, and managed profiles that share a workspace
+ with a related user.
+ &lt;p&gt;
+ Users are different from accounts, which are managed by
+ {@link AccountManager}. Each user can have their own set of accounts.
+ &lt;p&gt;
+ See {@link DevicePolicyManager#ACTION_PROVISION_MANAGED_PROFILE} for more on managed profiles.
+*/
+var UserManager = {
+
+<span id='android-os-UserManager-property-RESTRICTION_NOT_SET'>/** @hide
+</span> No user restriction.
+*/
+RESTRICTION_NOT_SET : &quot;0&quot;,
+<span id='android-os-UserManager-property-RESTRICTION_SOURCE_SYSTEM'>/** @hide
+</span> User restriction set by system/user.
+*/
+RESTRICTION_SOURCE_SYSTEM : &quot;1&quot;,
+<span id='android-os-UserManager-property-RESTRICTION_SOURCE_DEVICE_OWNER'>/** @hide
+</span> User restriction set by a device owner.
+*/
+RESTRICTION_SOURCE_DEVICE_OWNER : &quot;2&quot;,
+<span id='android-os-UserManager-property-RESTRICTION_SOURCE_PROFILE_OWNER'>/** @hide
+</span> User restriction set by a profile owner.
+*/
+RESTRICTION_SOURCE_PROFILE_OWNER : &quot;4&quot;,
+<span id='android-os-UserManager-property-DISALLOW_MODIFY_ACCOUNTS'>/** Specifies if a user is disallowed from adding and removing accounts, unless they are
+</span> {@link android.accounts.AccountManager#addAccountExplicitly programmatically} added by
+ Authenticator.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;From {@link android.os.Build.VERSION_CODES#N} a profile or device owner app can still
+ use {@link android.accounts.AccountManager} APIs to add or remove accounts when account
+ management is disallowed.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_MODIFY_ACCOUNTS : &quot;no_modify_accounts&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_WIFI'>/** Specifies if a user is disallowed from changing Wi-Fi
+</span> access points. The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect in a managed profile.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_WIFI : &quot;no_config_wifi&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_LOCALE'>/** Specifies if a user is disallowed from changing the device
+</span> language. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_LOCALE : &quot;no_config_locale&quot;,
+<span id='android-os-UserManager-property-DISALLOW_INSTALL_APPS'>/** Specifies if a user is disallowed from installing applications. This user restriction also
+</span> prevents device owners and profile owners installing apps. The default value is
+ {@code false}.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_INSTALL_APPS : &quot;no_install_apps&quot;,
+<span id='android-os-UserManager-property-DISALLOW_UNINSTALL_APPS'>/** Specifies if a user is disallowed from uninstalling applications.
+</span> The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_UNINSTALL_APPS : &quot;no_uninstall_apps&quot;,
+<span id='android-os-UserManager-property-DISALLOW_SHARE_LOCATION'>/** Specifies if a user is disallowed from turning on location sharing.
+</span> The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;In a managed profile, location sharing always reflects the primary user's setting, but
+ can be overridden and forced off by setting this restriction to true in the managed profile.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_SHARE_LOCATION : &quot;no_share_location&quot;,
+<span id='android-os-UserManager-property-DISALLOW_AIRPLANE_MODE'>/** Specifies if airplane mode is disallowed on the device.
+</span>
+ &lt;p&gt; This restriction can only be set by the device owner and the profile owner on the
+ primary user and it applies globally - i.e. it disables airplane mode on the entire device.
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_AIRPLANE_MODE : &quot;no_airplane_mode&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_BRIGHTNESS'>/** Specifies if a user is disallowed from configuring brightness. When device owner sets it,
+</span> it'll only be applied on the target(system) user.
+
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;This user restriction has no effect on managed profiles.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_BRIGHTNESS : &quot;no_config_brightness&quot;,
+<span id='android-os-UserManager-property-DISALLOW_AMBIENT_DISPLAY'>/** Specifies if ambient display is disallowed for the user.
+</span>
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;This user restriction has no effect on managed profiles.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_AMBIENT_DISPLAY : &quot;no_ambient_display&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_SCREEN_TIMEOUT'>/** Specifies if a user is disallowed from changing screen off timeout.
+</span>
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;This user restriction has no effect on managed profiles.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_SCREEN_TIMEOUT : &quot;no_config_screen_timeout&quot;,
+<span id='android-os-UserManager-property-DISALLOW_INSTALL_UNKNOWN_SOURCES'>/** Specifies if a user is disallowed from enabling the
+</span> &quot;Unknown Sources&quot; setting, that allows installation of apps from unknown sources.
+ Unknown sources exclude adb and special apps such as trusted app stores.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_INSTALL_UNKNOWN_SOURCES : &quot;no_install_unknown_sources&quot;,
+<span id='android-os-UserManager-property-DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY'>/** This restriction is a device-wide version of {@link #DISALLOW_INSTALL_UNKNOWN_SOURCES}.
+</span>
+ Specifies if all users on the device are disallowed from enabling the
+ &quot;Unknown Sources&quot; setting, that allows installation of apps from unknown sources.
+
+ This restriction can be enabled by the profile owner, in which case all accounts and
+ profiles will be affected.
+
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY : &quot;no_install_unknown_sources_globally&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_BLUETOOTH'>/** Specifies if a user is disallowed from configuring bluetooth.
+</span> This does &lt;em&gt;not&lt;/em&gt; restrict the user from turning bluetooth on or off.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction doesn't prevent the user from using bluetooth. For disallowing usage of
+ bluetooth completely on the device, use {@link #DISALLOW_BLUETOOTH}.
+ &lt;p&gt;This restriction has no effect in a managed profile.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_BLUETOOTH : &quot;no_config_bluetooth&quot;,
+<span id='android-os-UserManager-property-DISALLOW_BLUETOOTH'>/** Specifies if bluetooth is disallowed on the device.
+</span>
+ &lt;p&gt; This restriction can only be set by the device owner and the profile owner on the
+ primary user and it applies globally - i.e. it disables bluetooth on the entire device.
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_BLUETOOTH : &quot;no_bluetooth&quot;,
+<span id='android-os-UserManager-property-DISALLOW_BLUETOOTH_SHARING'>/** Specifies if outgoing bluetooth sharing is disallowed on the device. Device owner and profile
+</span> owner can set this restriction. When it is set by device owner, all users on this device will
+ be affected.
+
+ &lt;p&gt;Default is &lt;code&gt;true&lt;/code&gt; for managed profiles and false for otherwise. When a device
+ upgrades to {@link android.os.Build.VERSION_CODES#O}, the system sets it for all existing
+ managed profiles.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_BLUETOOTH_SHARING : &quot;no_bluetooth_sharing&quot;,
+<span id='android-os-UserManager-property-DISALLOW_USB_FILE_TRANSFER'>/** Specifies if a user is disallowed from transferring files over
+</span> USB. This can only be set by device owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_USB_FILE_TRANSFER : &quot;no_usb_file_transfer&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_CREDENTIALS'>/** Specifies if a user is disallowed from configuring user
+</span> credentials. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_CREDENTIALS : &quot;no_config_credentials&quot;,
+<span id='android-os-UserManager-property-DISALLOW_REMOVE_USER'>/** When set on the primary user this specifies if the user can remove other users.
+</span> When set on a secondary user, this specifies if the user can remove itself.
+ This restriction has no effect on managed profiles.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_REMOVE_USER : &quot;no_remove_user&quot;,
+<span id='android-os-UserManager-property-DISALLOW_REMOVE_MANAGED_PROFILE'>/** Specifies if managed profiles of this user can be removed, other than by its profile owner.
+</span> The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;
+ This restriction has no effect on managed profiles.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_REMOVE_MANAGED_PROFILE : &quot;no_remove_managed_profile&quot;,
+<span id='android-os-UserManager-property-DISALLOW_DEBUGGING_FEATURES'>/** Specifies if a user is disallowed from enabling or accessing debugging features. When set on
+</span> the primary user, disables debugging features altogether, including USB debugging. When set
+ on a managed profile or a secondary user, blocks debugging for that user only, including
+ starting activities, making service calls, accessing content providers, sending broadcasts,
+ installing/uninstalling packages, clearing user data, etc.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_DEBUGGING_FEATURES : &quot;no_debugging_features&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_VPN'>/** Specifies if a user is disallowed from configuring a VPN. The default value is
+</span> &lt;code&gt;false&lt;/code&gt;. This restriction has an effect when set by device owners and, in Android
+ 6.0 ({@linkplain android.os.Build.VERSION_CODES#M API level 23}) or higher, profile owners.
+ &lt;p&gt;This restriction also prevents VPNs from starting. However, in Android 7.0
+ ({@linkplain android.os.Build.VERSION_CODES#N API level 24}) or higher, the system does
+ start always-on VPNs created by the device or profile owner.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_VPN : &quot;no_config_vpn&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_LOCATION'>/** Specifies if a user is disallowed from enabling or disabling location providers. As a
+</span> result, user is disallowed from turning on or off location. Device owner and profile owners
+ can set this restriction and it only applies on the managed user.
+
+ &lt;p&gt;In a managed profile, location sharing is forced off when it's off on primary user, so
+ user can still turn off location sharing on managed profile when the restriction is set by
+ profile owner on managed profile.
+
+ &lt;p&gt;This user restriction is different from {@link #DISALLOW_SHARE_LOCATION},
+ as the device owner or profile owner can still enable or disable location mode via
+ {@link DevicePolicyManager#setSecureSetting} when this restriction is on.
+
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see android.location.LocationManager#isProviderEnabled(String)
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_LOCATION : &quot;no_config_location&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_DATE_TIME'>/** Specifies if date, time and timezone configuring is disallowed.
+</span>
+ &lt;p&gt;When restriction is set by device owners, it applies globally - i.e., it disables date,
+ time and timezone setting on the entire device and all users will be affected. When it's set
+ by profile owners, it's only applied to the managed user.
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;This user restriction has no effect on managed profiles.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_DATE_TIME : &quot;no_config_date_time&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_TETHERING'>/** Specifies if a user is disallowed from configuring Tethering
+</span> &amp; portable hotspots. This can only be set by device owners and profile owners on the
+ primary user. The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;In Android 9.0 or higher, if tethering is enabled when this restriction is set,
+ tethering will be automatically turned off.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_TETHERING : &quot;no_config_tethering&quot;,
+<span id='android-os-UserManager-property-DISALLOW_NETWORK_RESET'>/** Specifies if a user is disallowed from resetting network settings
+</span> from Settings. This can only be set by device owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect on secondary users and managed profiles since only the
+ primary user can reset the network settings of the device.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_NETWORK_RESET : &quot;no_network_reset&quot;,
+<span id='android-os-UserManager-property-DISALLOW_FACTORY_RESET'>/** Specifies if a user is disallowed from factory resetting
+</span> from Settings. This can only be set by device owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect on secondary users and managed profiles since only the
+ primary user can factory reset the device.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_FACTORY_RESET : &quot;no_factory_reset&quot;,
+<span id='android-os-UserManager-property-DISALLOW_ADD_USER'>/** Specifies if a user is disallowed from adding new users. This can only be set by device
+</span> owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect on secondary users and managed profiles since only the
+ primary user can add other users.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_ADD_USER : &quot;no_add_user&quot;,
+<span id='android-os-UserManager-property-DISALLOW_ADD_MANAGED_PROFILE'>/** Specifies if a user is disallowed from adding managed profiles.
+</span> &lt;p&gt;The default value for an unmanaged user is &lt;code&gt;false&lt;/code&gt;.
+ For users with a device owner set, the default is &lt;code&gt;true&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect on managed profiles.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_ADD_MANAGED_PROFILE : &quot;no_add_managed_profile&quot;,
+<span id='android-os-UserManager-property-ENSURE_VERIFY_APPS'>/** Specifies if a user is disallowed from disabling application verification. The default
+</span> value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;In Android 8.0 ({@linkplain android.os.Build.VERSION_CODES#O API level 26}) and higher,
+ this is a global user restriction. If a device owner or profile owner sets this restriction,
+ the system enforces app verification across all users on the device. Running in earlier
+ Android versions, this restriction affects only the profile that sets it.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+ENSURE_VERIFY_APPS : &quot;ensure_verify_apps&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_CELL_BROADCASTS'>/** Specifies if a user is disallowed from configuring cell
+</span> broadcasts. This can only be set by device owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect on secondary users and managed profiles since only the
+ primary user can configure cell broadcasts.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_CELL_BROADCASTS : &quot;no_config_cell_broadcasts&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_MOBILE_NETWORKS'>/** Specifies if a user is disallowed from configuring mobile
+</span> networks. This can only be set by device owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect on secondary users and managed profiles since only the
+ primary user can configure mobile networks.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_MOBILE_NETWORKS : &quot;no_config_mobile_networks&quot;,
+<span id='android-os-UserManager-property-DISALLOW_APPS_CONTROL'>/** Specifies if a user is disallowed from modifying
+</span> applications in Settings or launchers. The following actions will not be allowed when this
+ restriction is enabled:
+ &lt;li&gt;uninstalling apps&lt;/li&gt;
+ &lt;li&gt;disabling apps&lt;/li&gt;
+ &lt;li&gt;clearing app caches&lt;/li&gt;
+ &lt;li&gt;clearing app data&lt;/li&gt;
+ &lt;li&gt;force stopping apps&lt;/li&gt;
+ &lt;li&gt;clearing app defaults&lt;/li&gt;
+ &lt;p&gt;
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The user will still be able to perform those actions via other
+ means (such as adb). Third party apps will also be able to uninstall apps via the
+ {@link android.content.pm.PackageInstaller}. {@link #DISALLOW_UNINSTALL_APPS} or
+ {@link DevicePolicyManager#setUninstallBlocked(ComponentName, String, boolean)} should be
+ used to prevent the user from uninstalling apps completely, and
+ {@link DevicePolicyManager#addPersistentPreferredActivity(ComponentName, IntentFilter, ComponentName)}
+ to add a default intent handler for a given intent filter.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_APPS_CONTROL : &quot;no_control_apps&quot;,
+<span id='android-os-UserManager-property-DISALLOW_MOUNT_PHYSICAL_MEDIA'>/** Specifies if a user is disallowed from mounting
+</span> physical external media. This can only be set by device owners and profile owners on the
+ primary user. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_MOUNT_PHYSICAL_MEDIA : &quot;no_physical_media&quot;,
+<span id='android-os-UserManager-property-DISALLOW_UNMUTE_MICROPHONE'>/** Specifies if a user is disallowed from adjusting microphone volume. If set, the microphone
+</span> will be muted. This can be set by device owners and profile owners. The default value is
+ &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;This restriction has no effect on managed profiles.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_UNMUTE_MICROPHONE : &quot;no_unmute_microphone&quot;,
+<span id='android-os-UserManager-property-DISALLOW_ADJUST_VOLUME'>/** Specifies if a user is disallowed from adjusting the master volume. If set, the master volume
+</span> will be muted. This can be set by device owners from API 21 and profile owners from API 24.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;When the restriction is set by profile owners, then it only applies to relevant
+ profiles.
+
+ &lt;p&gt;This restriction has no effect on managed profiles.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_ADJUST_VOLUME : &quot;no_adjust_volume&quot;,
+<span id='android-os-UserManager-property-DISALLOW_OUTGOING_CALLS'>/** Specifies that the user is not allowed to make outgoing
+</span> phone calls. Emergency calls are still permitted.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+ &lt;p&gt;This restriction has no effect on managed profiles.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_OUTGOING_CALLS : &quot;no_outgoing_calls&quot;,
+<span id='android-os-UserManager-property-DISALLOW_SMS'>/** Specifies that the user is not allowed to send or receive
+</span> SMS messages. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_SMS : &quot;no_sms&quot;,
+<span id='android-os-UserManager-property-DISALLOW_FUN'>/** Specifies if the user is not allowed to have fun. In some cases, the
+</span> device owner may wish to prevent the user from experiencing amusement or
+ joy while using the device. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_FUN : &quot;no_fun&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CREATE_WINDOWS'>/** Specifies that windows besides app windows should not be
+</span> created. This will block the creation of the following types of windows.
+ &lt;li&gt;{@link LayoutParams#TYPE_TOAST}&lt;/li&gt;
+ &lt;li&gt;{@link LayoutParams#TYPE_PHONE}&lt;/li&gt;
+ &lt;li&gt;{@link LayoutParams#TYPE_PRIORITY_PHONE}&lt;/li&gt;
+ &lt;li&gt;{@link LayoutParams#TYPE_SYSTEM_ALERT}&lt;/li&gt;
+ &lt;li&gt;{@link LayoutParams#TYPE_SYSTEM_ERROR}&lt;/li&gt;
+ &lt;li&gt;{@link LayoutParams#TYPE_SYSTEM_OVERLAY}&lt;/li&gt;
+ &lt;li&gt;{@link LayoutParams#TYPE_APPLICATION_OVERLAY}&lt;/li&gt;
+
+ &lt;p&gt;This can only be set by device owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CREATE_WINDOWS : &quot;no_create_windows&quot;,
+<span id='android-os-UserManager-property-DISALLOW_SYSTEM_ERROR_DIALOGS'>/** Specifies that system error dialogs for crashed or unresponsive apps should not be shown.
+</span> In this case, the system will force-stop the app as if the user chooses the &quot;close app&quot;
+ option on the UI. A feedback report isn't collected as there is no way for the user to
+ provide explicit consent. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;When this user restriction is set by device owners, it's applied to all users. When set by
+ the profile owner of the primary user or a secondary user, the restriction affects only the
+ calling user. This user restriction has no effect on managed profiles.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_SYSTEM_ERROR_DIALOGS : &quot;no_system_error_dialogs&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CROSS_PROFILE_COPY_PASTE'>/** Specifies if the clipboard contents can be exported by pasting the data into other users or
+</span> profiles. This restriction doesn't prevent import, such as someone pasting clipboard data
+ from other profiles or users. The default value is {@code false}.
+
+ &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Because it's possible to extract data from screenshots using
+ optical character recognition (OCR), we strongly recommend combining this user restriction
+ with {@link DevicePolicyManager#setScreenCaptureDisabled(ComponentName, boolean)}.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CROSS_PROFILE_COPY_PASTE : &quot;no_cross_profile_copy_paste&quot;,
+<span id='android-os-UserManager-property-DISALLOW_OUTGOING_BEAM'>/** Specifies if the user is not allowed to use NFC to beam out data from apps.
+</span> The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_OUTGOING_BEAM : &quot;no_outgoing_beam&quot;,
+<span id='android-os-UserManager-property-DISALLOW_WALLPAPER'>/** Hidden user restriction to disallow access to wallpaper manager APIs. This restriction
+</span> generally means that wallpapers are not supported for the particular user. This user
+ restriction is always set for managed profiles, because such profiles don't have wallpapers.
+ @hide
+ @see #DISALLOW_SET_WALLPAPER
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_WALLPAPER : &quot;no_wallpaper&quot;,
+<span id='android-os-UserManager-property-DISALLOW_SET_WALLPAPER'>/** User restriction to disallow setting a wallpaper. Profile owner and device owner
+</span> are able to set wallpaper regardless of this restriction.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_SET_WALLPAPER : &quot;no_set_wallpaper&quot;,
+<span id='android-os-UserManager-property-DISALLOW_SAFE_BOOT'>/** Specifies if the user is not allowed to reboot the device into safe boot mode.
+</span> This can only be set by device owners and profile owners on the primary user.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_SAFE_BOOT : &quot;no_safe_boot&quot;,
+<span id='android-os-UserManager-property-DISALLOW_RECORD_AUDIO'>/** Specifies if a user is not allowed to record audio. This restriction is always enabled for
+</span> background users. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+ @hide
+*/
+DISALLOW_RECORD_AUDIO : &quot;no_record_audio&quot;,
+<span id='android-os-UserManager-property-DISALLOW_RUN_IN_BACKGROUND'>/** Specifies if a user is not allowed to run in the background and should be stopped during
+</span> user switch. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;This restriction can be set by device owners and profile owners.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+ @hide
+*/
+DISALLOW_RUN_IN_BACKGROUND : &quot;no_run_in_background&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CAMERA'>/** Specifies if a user is not allowed to use the camera.
+</span>
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+ @hide
+*/
+DISALLOW_CAMERA : &quot;no_camera&quot;,
+<span id='android-os-UserManager-property-DISALLOW_UNMUTE_DEVICE'>/** Specifies if a user is not allowed to unmute the device's master volume.
+</span>
+ @see DevicePolicyManager#setMasterVolumeMuted(ComponentName, boolean)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+ @hide
+*/
+DISALLOW_UNMUTE_DEVICE : &quot;disallow_unmute_device&quot;,
+<span id='android-os-UserManager-property-DISALLOW_DATA_ROAMING'>/** Specifies if a user is not allowed to use cellular data when roaming. This can only be set by
+</span> device owners. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_DATA_ROAMING : &quot;no_data_roaming&quot;,
+<span id='android-os-UserManager-property-DISALLOW_SET_USER_ICON'>/** Specifies if a user is not allowed to change their icon. Device owner and profile owner
+</span> can set this restriction. When it is set by device owner, only the target user will be
+ affected. The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_SET_USER_ICON : &quot;no_set_user_icon&quot;,
+<span id='android-os-UserManager-property-DISALLOW_OEM_UNLOCK'>/** Specifies if a user is not allowed to enable the oem unlock setting. The default value is
+</span> &lt;code&gt;false&lt;/code&gt;. Setting this restriction has no effect if the bootloader is already
+ unlocked.
+
+ &lt;p&gt;Not for use by third-party applications.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+ @deprecated use {@link OemLockManager#setOemUnlockAllowedByCarrier(boolean, byte[])} instead.
+ @hide
+*/
+DISALLOW_OEM_UNLOCK : &quot;no_oem_unlock&quot;,
+<span id='android-os-UserManager-property-DISALLOW_UNIFIED_PASSWORD'>/** Specifies that the managed profile is not allowed to have unified lock screen challenge with
+</span> the primary user.
+
+ &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Setting this restriction alone doesn't automatically set a
+ separate challenge. Profile owner can ask the user to set a new password using
+ {@link DevicePolicyManager#ACTION_SET_NEW_PASSWORD} and verify it using
+ {@link DevicePolicyManager#isUsingUnifiedPassword(ComponentName)}.
+
+ &lt;p&gt;Can be set by profile owners. It only has effect on managed profiles when set by managed
+ profile owner. Has no effect on non-managed profiles or users.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_UNIFIED_PASSWORD : &quot;no_unified_password&quot;,
+<span id='android-os-UserManager-property-ALLOW_PARENT_PROFILE_APP_LINKING'>/** Allows apps in the parent profile to handle web links from the managed profile.
+</span>
+ This user restriction has an effect only in a managed profile.
+ If set:
+ Intent filters of activities in the parent profile with action
+ {@link android.content.Intent#ACTION_VIEW},
+ category {@link android.content.Intent#CATEGORY_BROWSABLE}, scheme http or https, and which
+ define a host can handle intents from the managed profile.
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+ALLOW_PARENT_PROFILE_APP_LINKING : &quot;allow_parent_profile_app_linking&quot;,
+<span id='android-os-UserManager-property-DISALLOW_AUTOFILL'>/** Specifies if a user is not allowed to use Autofill Services.
+</span>
+ &lt;p&gt;Device owner and profile owner can set this restriction. When it is set by device owner,
+ only the target user will be affected.
+
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_AUTOFILL : &quot;no_autofill&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONTENT_CAPTURE'>/** Specifies if the contents of a user's screen is not allowed to be captured for artificial
+</span> intelligence purposes.
+
+ &lt;p&gt;Device owner and profile owner can set this restriction. When it is set by device owner,
+ only the target user will be affected.
+
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONTENT_CAPTURE : &quot;no_content_capture&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONTENT_SUGGESTIONS'>/** Specifies if the current user is able to receive content suggestions for selections based on
+</span> the contents of their screen.
+
+ &lt;p&gt;Device owner and profile owner can set this restriction. When it is set by device owner,
+ only the target user will be affected.
+
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONTENT_SUGGESTIONS : &quot;no_content_suggestions&quot;,
+<span id='android-os-UserManager-property-DISALLOW_USER_SWITCH'>/** Specifies if user switching is blocked on the current user.
+</span>
+ &lt;p&gt; This restriction can only be set by the device owner, it will be applied to all users.
+ Device owner can still switch user via
+ {@link DevicePolicyManager#switchUser(ComponentName, android.os.UserHandle)} when this restriction is
+ set.
+
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_USER_SWITCH : &quot;no_user_switch&quot;,
+<span id='android-os-UserManager-property-DISALLOW_SHARE_INTO_MANAGED_PROFILE'>/** Specifies whether the user can share file / picture / data from the primary user into the
+</span> managed profile, either by sending them from the primary side, or by picking up data within
+ an app in the managed profile.
+ &lt;p&gt;
+ When a managed profile is created, the system allows the user to send data from the primary
+ side to the profile by setting up certain default cross profile intent filters. If
+ this is undesired, this restriction can be set to disallow it. Note that this restriction
+ will not block any sharing allowed by explicit
+ {@link DevicePolicyManager#addCrossProfileIntentFilter} calls by the profile owner.
+ &lt;p&gt;
+ This restriction is only meaningful when set by profile owner. When it is set by device
+ owner, it does not have any effect.
+ &lt;p&gt;
+ The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_SHARE_INTO_MANAGED_PROFILE : &quot;no_sharing_into_profile&quot;,
+<span id='android-os-UserManager-property-DISALLOW_PRINTING'>/** Specifies whether the user is allowed to print.
+</span>
+ This restriction can be set by device or profile owner.
+
+ The default value is {@code false}.
+
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_PRINTING : &quot;no_printing&quot;,
+<span id='android-os-UserManager-property-DISALLOW_CONFIG_PRIVATE_DNS'>/** Specifies whether the user is allowed to modify private DNS settings.
+</span>
+ &lt;p&gt;The default value is &lt;code&gt;false&lt;/code&gt;.
+
+ &lt;p&gt;This user restriction can only be applied by the Device Owner.
+ &lt;p&gt;Key for user restrictions.
+ &lt;p&gt;Type: Boolean
+ @see DevicePolicyManager#addUserRestriction(ComponentName, String)
+ @see DevicePolicyManager#clearUserRestriction(ComponentName, String)
+ @see #getUserRestrictions()
+*/
+DISALLOW_CONFIG_PRIVATE_DNS : &quot;disallow_config_private_dns&quot;,
+<span id='android-os-UserManager-property-KEY_RESTRICTIONS_PENDING'>/** Application restriction key that is used to indicate the pending arrival
+</span> of real restrictions for the app.
+
+ &lt;p&gt;
+ Applications that support restrictions should check for the presence of this key.
+ A &lt;code&gt;true&lt;/code&gt; value indicates that restrictions may be applied in the near
+ future but are not available yet. It is the responsibility of any
+ management application that sets this flag to update it when the final
+ restrictions are enforced.
+
+ &lt;p&gt;Key for application restrictions.
+ &lt;p&gt;Type: Boolean
+ @see android.app.admin.DevicePolicyManager#setApplicationRestrictions(
+      android.content.ComponentName, String, Bundle)
+ @see android.app.admin.DevicePolicyManager#getApplicationRestrictions(
+      android.content.ComponentName, String)
+*/
+KEY_RESTRICTIONS_PENDING : &quot;restrictions_pending&quot;,
+<span id='android-os-UserManager-property-EXTRA_USER_NAME'>/** Extra containing a name for the user being created. Optional parameter passed to
+</span> ACTION_CREATE_USER activity.
+ @hide
+*/
+EXTRA_USER_NAME : &quot;android.os.extra.USER_NAME&quot;,
+<span id='android-os-UserManager-property-EXTRA_USER_ACCOUNT_NAME'>/** Extra containing account name for the user being created. Optional parameter passed to
+</span> ACTION_CREATE_USER activity.
+ @hide
+*/
+EXTRA_USER_ACCOUNT_NAME : &quot;android.os.extra.USER_ACCOUNT_NAME&quot;,
+<span id='android-os-UserManager-property-EXTRA_USER_ACCOUNT_TYPE'>/** Extra containing account type for the user being created. Optional parameter passed to
+</span> ACTION_CREATE_USER activity.
+ @hide
+*/
+EXTRA_USER_ACCOUNT_TYPE : &quot;android.os.extra.USER_ACCOUNT_TYPE&quot;,
+<span id='android-os-UserManager-property-EXTRA_USER_ACCOUNT_OPTIONS'>/** Extra containing account-specific data for the user being created. Optional parameter passed
+</span> to ACTION_CREATE_USER activity.
+ @hide
+*/
+EXTRA_USER_ACCOUNT_OPTIONS : &quot;android.os.extra.USER_ACCOUNT_OPTIONS&quot;,
+<span id='android-os-UserManager-property-PIN_VERIFICATION_FAILED_INCORRECT'>/**@hide */
+</span>PIN_VERIFICATION_FAILED_INCORRECT : &quot;-3&quot;,
+<span id='android-os-UserManager-property-PIN_VERIFICATION_FAILED_NOT_SET'>/**@hide */
+</span>PIN_VERIFICATION_FAILED_NOT_SET : &quot;-2&quot;,
+<span id='android-os-UserManager-property-PIN_VERIFICATION_SUCCESS'>/**@hide */
+</span>PIN_VERIFICATION_SUCCESS : &quot;-1&quot;,
+<span id='android-os-UserManager-property-ACTION_USER_RESTRICTIONS_CHANGED'>/** Sent when user restrictions have changed.
+</span>
+ @hide
+*/
+ACTION_USER_RESTRICTIONS_CHANGED : &quot;android.os.action.USER_RESTRICTIONS_CHANGED&quot;,
+<span id='android-os-UserManager-property-USER_CREATION_FAILED_NOT_PERMITTED'>/** Error result indicating that this user is not allowed to add other users on this device.
+</span> This is a result code returned from the activity created by the intent
+ {@link #createUserCreationIntent(String, String, String, android.os.PersistableBundle)}.
+*/
+USER_CREATION_FAILED_NOT_PERMITTED : &quot;1&quot;,
+<span id='android-os-UserManager-property-USER_CREATION_FAILED_NO_MORE_USERS'>/** Error result indicating that no more users can be created on this device.
+</span> This is a result code returned from the activity created by the intent
+ {@link #createUserCreationIntent(String, String, String, android.os.PersistableBundle)}.
+*/
+USER_CREATION_FAILED_NO_MORE_USERS : &quot;2&quot;,
+<span id='android-os-UserManager-property-SWITCHABILITY_STATUS_OK'>/** Indicates that users are switchable.
+</span> @hide
+*/
+SWITCHABILITY_STATUS_OK : &quot;0&quot;,
+<span id='android-os-UserManager-property-SWITCHABILITY_STATUS_USER_IN_CALL'>/** Indicated that the user is in a phone call.
+</span> @hide
+*/
+SWITCHABILITY_STATUS_USER_IN_CALL : &quot;1&quot;,
+<span id='android-os-UserManager-property-SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED'>/** Indicates that user switching is disallowed ({@link #DISALLOW_USER_SWITCH} is set).
+</span> @hide
+*/
+SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED : &quot;2&quot;,
+<span id='android-os-UserManager-property-SWITCHABILITY_STATUS_SYSTEM_USER_LOCKED'>/** Indicates that the system user is locked and user switching is not allowed.
+</span> @hide
+*/
+SWITCHABILITY_STATUS_SYSTEM_USER_LOCKED : &quot;4&quot;,
+<span id='android-os-UserManager-property-USER_OPERATION_SUCCESS'>/** Indicates user operation is successful.
+</span>*/
+USER_OPERATION_SUCCESS : &quot;0&quot;,
+<span id='android-os-UserManager-property-USER_OPERATION_ERROR_UNKNOWN'>/** Indicates user operation failed for unknown reason.
+</span>*/
+USER_OPERATION_ERROR_UNKNOWN : &quot;1&quot;,
+<span id='android-os-UserManager-property-USER_OPERATION_ERROR_MANAGED_PROFILE'>/** Indicates user operation failed because target user is a managed profile.
+</span>*/
+USER_OPERATION_ERROR_MANAGED_PROFILE : &quot;2&quot;,
+<span id='android-os-UserManager-property-USER_OPERATION_ERROR_MAX_RUNNING_USERS'>/** Indicates user operation failed because maximum running user limit has been reached.
+</span>*/
+USER_OPERATION_ERROR_MAX_RUNNING_USERS : &quot;3&quot;,
+<span id='android-os-UserManager-property-USER_OPERATION_ERROR_CURRENT_USER'>/** Indicates user operation failed because the target user is in the foreground.
+</span>*/
+USER_OPERATION_ERROR_CURRENT_USER : &quot;4&quot;,
+<span id='android-os-UserManager-property-USER_OPERATION_ERROR_LOW_STORAGE'>/** Indicates user operation failed because device has low data storage.
+</span>*/
+USER_OPERATION_ERROR_LOW_STORAGE : &quot;5&quot;,
+<span id='android-os-UserManager-property-USER_OPERATION_ERROR_MAX_USERS'>/** Indicates user operation failed because maximum user limit has been reached.
+</span>*/
+USER_OPERATION_ERROR_MAX_USERS : &quot;6&quot;,
+<span id='android-os-UserManager-method-get'>/**
+</span>@hide 
+*/
+get : function(  ) {},
+
+<span id='android-os-UserManager-method-supportsMultipleUsers'>/**Returns whether this device supports multiple users with their own login and customizable
+</span> space.
+@return {Boolean} whether the device supports multiple users.
+*/
+supportsMultipleUsers : function(  ) {},
+
+<span id='android-os-UserManager-method-isSplitSystemUser'>/**
+</span>@hide 
+@return {Boolean} Whether the device is running with split system user. It means the system user and
+ primary user are two separate users. Previously system user and primary user are combined as
+ a single owner user.  see @link {android.os.UserHandle#USER_OWNER}
+*/
+isSplitSystemUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isGuestUserEphemeral'>/**
+</span>@return {Boolean} Whether guest user is always ephemeral
+@hide 
+*/
+isGuestUserEphemeral : function(  ) {},
+
+<span id='android-os-UserManager-method-canSwitchUsers'>/**
+</span>@deprecated use {@link #getUserSwitchability()} instead.
+@removed 
+@hide 
+*/
+canSwitchUsers : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserSwitchability'>/**Returns whether switching users is currently allowed.
+</span> &lt;p&gt;
+ Switching users is not allowed in the following cases:
+ &lt;li&gt;the user is in a phone call&lt;/li&gt;
+ &lt;li&gt;{@link #DISALLOW_USER_SWITCH} is set&lt;/li&gt;
+ &lt;li&gt;system user hasn't been unlocked yet&lt;/li&gt;
+@return {Number} A {@link UserSwitchabilityResult} flag indicating if the user is switchable.
+@hide 
+*/
+getUserSwitchability : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserHandle'>/**Returns the user handle for the user that this process is running under.
+</span>@return {Number} the user handle of this process.
+@hide 
+*/
+getUserHandle : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserName'>/**Returns the user name of the user making this call.  This call is only
+</span> available to applications on the system image; it requires the
+ {@code android.permission.MANAGE_USERS} or {@code android.permission.GET_ACCOUNTS_PRIVILEGED}
+ permissions.
+@return {String} the user name
+*/
+getUserName : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserNameSet'>/**Returns whether user name has been set.
+</span> &lt;p&gt;This method can be used to check that the value returned by {@link #getUserName}() was
+ set by the user and is not a placeholder string provided by the system.
+@hide 
+*/
+isUserNameSet : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserAGoat'>/**Used to determine whether the user making this call is subject to
+</span> teleportations.
+
+ &lt;p&gt;As of {@link android.os.Build.VERSION_CODES#LOLLIPOP}, this method can
+ now automatically identify goats using advanced goat recognition technology.&lt;/p&gt;
+@return {Boolean} Returns true if the user making this call is a goat.
+*/
+isUserAGoat : function(  ) {},
+
+<span id='android-os-UserManager-method-isPrimaryUser'>/**Used to check if this process is running under the primary user. The primary user
+</span> is the first human user on a device.
+@return {Boolean} whether this process is running under the primary user.
+@hide 
+*/
+isPrimaryUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isSystemUser'>/**Used to check if this process is running under the system user. The system user
+</span> is the initial user that is implicitly created on first boot and hosts most of the
+ system services.
+@return {Boolean} whether this process is running under the system user.
+*/
+isSystemUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isAdminUser'>/**Used to check if this process is running as an admin user. An admin user is allowed to
+</span> modify or configure certain settings that aren't available to non-admin users,
+ create and delete additional users, etc. There can be more than one admin users.
+@return {Boolean} whether this process is running under an admin user.
+@hide 
+*/
+isAdminUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserAdmin'>/**
+</span>@hide Returns whether the provided user is an admin user. There can be more than one admin
+ user.
+*/
+isUserAdmin : function(  ) {},
+
+<span id='android-os-UserManager-method-isLinkedUser'>/**
+</span>@hide 
+@deprecated Use {@link #isRestrictedProfile()}
+*/
+isLinkedUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isRestrictedProfile'>/**Used to check if this process is running under a restricted profile. Restricted profiles
+</span> may have a reduced number of available apps, app restrictions, and account restrictions.
+@return {Boolean} whether this process is running under a restricted profile.
+@hide 
+*/
+isRestrictedProfile : function(  ) {},
+
+<span id='android-os-UserManager-method-isRestrictedProfile'>/**Check if a user is a restricted profile. Restricted profiles may have a reduced number of
+</span> available apps, app restrictions, and account restrictions.
+@param {Object {UserHandle}} user the user to check
+@return {Boolean} whether the user is a restricted profile.
+@hide 
+*/
+isRestrictedProfile : function(  ) {},
+
+<span id='android-os-UserManager-method-canHaveRestrictedProfile'>/**Checks if specified user can have restricted profile.
+</span>@hide 
+*/
+canHaveRestrictedProfile : function(  ) {},
+
+<span id='android-os-UserManager-method-hasRestrictedProfiles'>/**Returns whether the calling user has at least one restricted profile associated with it.
+</span>@return {Boolean} 
+@hide 
+*/
+hasRestrictedProfiles : function(  ) {},
+
+<span id='android-os-UserManager-method-isGuestUser'>/**Checks if a user is a guest user.
+</span>@return {Boolean} whether user is a guest user.
+@hide 
+*/
+isGuestUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isGuestUser'>/**Used to check if this process is running under a guest user. A guest user may be transient.
+</span>@return {Boolean} whether this process is running under a guest user.
+@hide 
+*/
+isGuestUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isDemoUser'>/**Checks if the calling app is running in a demo user. When running in a demo user,
+</span> apps can be more helpful to the user, or explain their features in more detail.
+@return {Boolean} whether the caller is a demo user.
+*/
+isDemoUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isManagedProfile'>/**Checks if the calling app is running in a managed profile.
+</span>@return {Boolean} whether the caller is in a managed profile.
+@hide 
+*/
+isManagedProfile : function(  ) {},
+
+<span id='android-os-UserManager-method-isManagedProfile'>/**Checks if the specified user is a managed profile.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission, otherwise the caller
+ must be in the same profile group of specified user.
+@return {Boolean} whether the specified user is a managed profile.
+@hide 
+*/
+isManagedProfile : function(  ) {},
+
+<span id='android-os-UserManager-method-getManagedProfileBadge'>/**Gets badge for a managed profile.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission, otherwise the caller
+ must be in the same profile group of specified user.
+@return {Number} which badge to use for the managed profile badge id will be less than
+         UserManagerService.getMaxManagedProfiles()
+@hide 
+*/
+getManagedProfileBadge : function(  ) {},
+
+<span id='android-os-UserManager-method-isEphemeralUser'>/**Checks if the calling app is running as an ephemeral user.
+</span>@return {Boolean} whether the caller is an ephemeral user.
+@hide 
+*/
+isEphemeralUser : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserEphemeral'>/**Returns whether the specified user is ephemeral.
+</span>@hide 
+*/
+isUserEphemeral : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserRunning'>/**Return whether the given user is actively running.  This means that
+</span> the user is in the &quot;started&quot; state, not &quot;stopped&quot; -- it is currently
+ allowed to run code through scheduled alarms, receiving broadcasts,
+ etc.  A started user may be either the current foreground user or a
+ background user; the result here does not distinguish between the two.
+
+ &lt;p&gt;Note prior to Android Nougat MR1 (SDK version &lt;= 24;
+ {@link android.os.Build.VERSION_CODES#N}, this API required a system permission
+ in order to check other profile's status.
+ Since Android Nougat MR1 (SDK version &gt;= 25;
+ {@link android.os.Build.VERSION_CODES#N_MR1}), the restriction has been relaxed, and now
+ it'll accept any {@link android.os.UserHandle} within the same profile group as the caller.
+@param {Object {UserHandle}} user The user to retrieve the running state for.
+*/
+isUserRunning : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserRunning'>/**{@hide}
+</span>*/
+isUserRunning : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserRunningOrStopping'>/**Return whether the given user is actively running &lt;em&gt;or&lt;/em&gt; stopping.
+</span> This is like {@link #isUserRunning}(UserHandle), but will also return
+ true if the user had been running but is in the process of being stopped
+ (but is not yet fully stopped, and still running some code).
+
+ &lt;p&gt;Note prior to Android Nougat MR1 (SDK version &lt;= 24;
+ {@link android.os.Build.VERSION_CODES#N}, this API required a system permission
+ in order to check other profile's status.
+ Since Android Nougat MR1 (SDK version &gt;= 25;
+ {@link android.os.Build.VERSION_CODES#N_MR1}), the restriction has been relaxed, and now
+ it'll accept any {@link android.os.UserHandle} within the same profile group as the caller.
+@param {Object {UserHandle}} user The user to retrieve the running state for.
+*/
+isUserRunningOrStopping : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserUnlocked'>/**Return whether the calling user is running in an &quot;unlocked&quot; state.
+</span> &lt;p&gt;
+ On devices with direct boot, a user is unlocked only after they've
+ entered their credentials (such as a lock pattern or PIN). On devices
+ without direct boot, a user is unlocked as soon as it starts.
+ &lt;p&gt;
+ When a user is locked, only device-protected data storage is available.
+ When a user is unlocked, both device-protected and credential-protected
+ private app data storage is available.
+@see Intent#ACTION_USER_UNLOCKED
+@see Context#createDeviceProtectedStorageContext()
+*/
+isUserUnlocked : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserUnlocked'>/**Return whether the given user is running in an &quot;unlocked&quot; state.
+</span> &lt;p&gt;
+ On devices with direct boot, a user is unlocked only after they've
+ entered their credentials (such as a lock pattern or PIN). On devices
+ without direct boot, a user is unlocked as soon as it starts.
+ &lt;p&gt;
+ When a user is locked, only device-protected data storage is available.
+ When a user is unlocked, both device-protected and credential-protected
+ private app data storage is available.
+ &lt;p&gt;Requires {@code android.permission.MANAGE_USERS} or
+ {@code android.permission.INTERACT_ACROSS_USERS}, otherwise specified {@link android.os.UserHandle user}
+ must be the calling user or a managed profile associated with it.
+@param {Object {UserHandle}} user to retrieve the unlocked state for.
+@see Intent#ACTION_USER_UNLOCKED
+@see Context#createDeviceProtectedStorageContext()
+*/
+isUserUnlocked : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserUnlocked'>/**{@hide}
+</span>*/
+isUserUnlocked : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserUnlockingOrUnlocked'>/**{@hide}
+</span>*/
+isUserUnlockingOrUnlocked : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserUnlockingOrUnlocked'>/**{@hide}
+</span>*/
+isUserUnlockingOrUnlocked : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserStartRealtime'>/**Return the time when the calling user started in elapsed milliseconds since boot,
+</span> or 0 if not started.
+@hide 
+*/
+getUserStartRealtime : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserUnlockRealtime'>/**Return the time when the calling user was unlocked elapsed milliseconds since boot,
+</span> or 0 if not unlocked.
+@hide 
+*/
+getUserUnlockRealtime : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserInfo'>/**Returns the UserInfo object describing a specific user.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {Number} userHandle the user handle of the user whose information is being requested.
+@return {Object {android.content.pm.UserInfo}} the UserInfo object for a specific user.
+@hide 
+*/
+getUserInfo : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserRestrictionSource'>/**
+</span>@param {String} restrictionKey the string key representing the restriction
+@param {Object {UserHandle}} userHandle the UserHandle of the user for whom to retrieve the restrictions.
+@param userHandle the UserHandle of the user for whom to retrieve the restrictions.
+@return {Number} The source of user restriction. Any combination of {@link #RESTRICTION_NOT_SET},
+         {@link #RESTRICTION_SOURCE_SYSTEM}, {@link #RESTRICTION_SOURCE_DEVICE_OWNER}
+         and {@link #RESTRICTION_SOURCE_PROFILE_OWNER}
+@deprecated use {@link #getUserRestrictionSources(String, int)} instead.
+*/
+getUserRestrictionSource : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserRestrictionSources'>/**
+</span>@param {String} restrictionKey the string key representing the restriction
+@param {Object {UserHandle}} userHandle the UserHandle of the user for whom to retrieve the restrictions.
+@param userHandle the UserHandle of the user for whom to retrieve the restrictions.
+@return {Object {java.util.List}} a list of user ids enforcing this restriction.
+*/
+getUserRestrictionSources : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserRestrictions'>/**Returns the user-wide restrictions imposed on this user.
+</span>@return {Object {android.os.Bundle}} a Bundle containing all the restrictions.
+*/
+getUserRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserRestrictions'>/**Returns the user-wide restrictions imposed on the user specified by &lt;code&gt;userHandle&lt;/code&gt;.
+</span>@param {Object {UserHandle}} userHandle the UserHandle of the user for whom to retrieve the restrictions.
+@return {Object {android.os.Bundle}} a Bundle containing all the restrictions.
+*/
+getUserRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-hasBaseUserRestriction'>/**
+</span>@param {String} restrictionKey the string key representing the restriction
+@param {Object {UserHandle}} userHandle the UserHandle of the user for whom to retrieve the restrictions.
+@param userHandle the UserHandle of the user for whom to retrieve the restrictions.
+*/
+hasBaseUserRestriction : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserRestrictions'>/**This will no longer work.  Device owners and profile owners should use
+</span> {@link DevicePolicyManager#addUserRestriction(ComponentName, String)} instead.
+*/
+setUserRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserRestrictions'>/**This will no longer work.  Device owners and profile owners should use
+</span> {@link DevicePolicyManager#addUserRestriction(ComponentName, String)} instead.
+*/
+setUserRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserRestriction'>/**Sets the value of a specific restriction.
+</span> Requires the MANAGE_USERS permission.
+@param {String} key the key of the restriction
+@param {Boolean} value the value for the restriction
+@deprecated use {@link android.app.admin.DevicePolicyManager#addUserRestriction(
+ android.content.ComponentName, String)} or
+ {@link android.app.admin.DevicePolicyManager#clearUserRestriction(
+ android.content.ComponentName, String)} instead.
+*/
+setUserRestriction : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserRestriction'>/**
+</span>@param {String} key the key of the restriction
+@param {Boolean} value the value for the restriction
+@param {Object {UserHandle}} userHandle the user whose restriction is to be changed.
+@param userHandle the user whose restriction is to be changed.
+@deprecated use {@link android.app.admin.DevicePolicyManager#addUserRestriction(
+ android.content.ComponentName, String)} or
+ {@link android.app.admin.DevicePolicyManager#clearUserRestriction(
+ android.content.ComponentName, String)} instead.
+*/
+setUserRestriction : function(  ) {},
+
+<span id='android-os-UserManager-method-hasUserRestriction'>/**Returns whether the current user has been disallowed from performing certain actions
+</span> or setting certain settings.
+@param {String} restrictionKey The string key representing the restriction.
+@return {Boolean} {@code true} if the current user has the given restriction, {@code false} otherwise.
+*/
+hasUserRestriction : function(  ) {},
+
+<span id='android-os-UserManager-method-hasUserRestriction'>/**
+</span>@param {String} restrictionKey the string key representing the restriction
+@param {Object {UserHandle}} userHandle the UserHandle of the user for whom to retrieve the restrictions.
+@param userHandle the UserHandle of the user for whom to retrieve the restrictions.
+*/
+hasUserRestriction : function(  ) {},
+
+<span id='android-os-UserManager-method-hasUserRestrictionOnAnyUser'>/**
+</span>@hide Returns whether any user on the device has the given user restriction set.
+*/
+hasUserRestrictionOnAnyUser : function(  ) {},
+
+<span id='android-os-UserManager-method-getSerialNumberForUser'>/**Return the serial number for a user.  This is a device-unique
+</span> number assigned to that user; if the user is deleted and then a new
+ user created, the new users will not be given the same serial number.
+@param {Object {UserHandle}} user The user whose serial number is to be retrieved.
+@return {Number} The serial number of the given user; returns -1 if the
+ given UserHandle does not exist.
+@see #getUserForSerialNumber(long)
+*/
+getSerialNumberForUser : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserForSerialNumber'>/**Return the user associated with a serial number previously
+</span> returned by {@link #getSerialNumberForUser}(UserHandle).
+@param {Number} serialNumber The serial number of the user that is being
+ retrieved.
+@return {Object {android.os.UserHandle}} Return the user associated with the serial number, or null
+ if there is not one.
+@see #getSerialNumberForUser(UserHandle)
+*/
+getUserForSerialNumber : function(  ) {},
+
+<span id='android-os-UserManager-method-createUser'>/**Creates a user with the specified name and options. For non-admin users, default user
+</span> restrictions are going to be applied.
+ Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {String} name the user's name
+@param {Number} flags flags that identify the type of user and other properties.
+@see UserInfo
+@return {Object {android.content.pm.UserInfo}} the UserInfo object for the created user, or null if the user could not be created.
+@hide 
+*/
+createUser : function(  ) {},
+
+<span id='android-os-UserManager-method-createGuest'>/**Creates a guest user and configures it.
+</span>@param {Object {Context}} context an application context
+@param {String} name the name to set for the user
+@hide 
+*/
+createGuest : function(  ) {},
+
+<span id='android-os-UserManager-method-createProfileForUser'>/**Creates a user with the specified name and options as a profile of another user.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {String} name the user's name
+@param {Number} flags flags that identify the type of user and other properties.
+@param {Number} userHandle new user will be a profile of this user.
+@return {Object {android.content.pm.UserInfo}} the {@link UserInfo} object for the created user, or null if the user
+         could not be created.
+@hide 
+*/
+createProfileForUser : function(  ) {},
+
+<span id='android-os-UserManager-method-createProfileForUser'>/**Version of {@link #createProfileForUser(String, int, int)} that allows you to specify
+</span> any packages that should not be installed in the new profile by default, these packages can
+ still be installed later by the user if needed.
+@param {String} name the user's name
+@param {Number} flags flags that identify the type of user and other properties.
+@param {Number} userHandle new user will be a profile of this user.
+@param {Object {java.lang.String[]}} disallowedPackages packages that will not be installed in the profile being created.
+@return {Object {android.content.pm.UserInfo}} the {@link UserInfo} object for the created user, or null if the user
+         could not be created.
+@hide 
+*/
+createProfileForUser : function(  ) {},
+
+<span id='android-os-UserManager-method-createProfileForUserEvenWhenDisallowed'>/**Similar to {@link #createProfileForUser(String, int, int, String[])}
+</span> except bypassing the checking of {@link android.os.UserManager#DISALLOW_ADD_MANAGED_PROFILE}.
+ Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@see #createProfileForUser(String, int, int, String[])
+@hide 
+*/
+createProfileForUserEvenWhenDisallowed : function(  ) {},
+
+<span id='android-os-UserManager-method-createRestrictedProfile'>/**Creates a restricted profile with the specified name. This method also sets necessary
+</span> restrictions and adds shared accounts.
+@param {String} name profile's name
+@return {Object {android.content.pm.UserInfo}} UserInfo object for the created user, or null if the user could not be created.
+@hide 
+*/
+createRestrictedProfile : function(  ) {},
+
+<span id='android-os-UserManager-method-createUserCreationIntent'>/**Returns an intent to create a user for the provided name and account name. The name
+</span> and account name will be used when the setup process for the new user is started.
+ &lt;p&gt;
+ The intent should be launched using startActivityForResult and the return result will
+ indicate if the user consented to adding a new user and if the operation succeeded. Any
+ errors in creating the user will be returned in the result code. If the user cancels the
+ request, the return result will be {@link Activity#RESULT_CANCELED}. On success, the
+ result code will be {@link Activity#RESULT_OK}.
+ &lt;p&gt;
+ Use {@link #supportsMultipleUsers}() to first check if the device supports this operation
+ at all.
+ &lt;p&gt;
+ The new user is created but not initialized. After switching into the user for the first
+ time, the preferred user name and account information are used by the setup process for that
+ user.
+@param {String} userName Optional name to assign to the user.
+@param {String} accountName Optional account name that will be used by the setup wizard to initialize
+                    the user.
+@param {String} accountType Optional account type for the account to be created. This is required
+                    if the account name is specified.
+@param {Object {PersistableBundle}} accountOptions Optional bundle of data to be passed in during account creation in the
+                       new user via {@link AccountManager#addAccount(String, String, String[],
+                       Bundle, android.app.Activity, android.accounts.AccountManagerCallback,
+                       Handler)}.
+@return {Object {android.content.Intent}} An Intent that can be launched from an Activity.
+@see #USER_CREATION_FAILED_NOT_PERMITTED
+@see #USER_CREATION_FAILED_NO_MORE_USERS
+@see #supportsMultipleUsers
+*/
+createUserCreationIntent : function(  ) {},
+
+<span id='android-os-UserManager-method-getSeedAccountName'>/**
+</span>@hide Returns the preferred account name for user creation.
+*/
+getSeedAccountName : function(  ) {},
+
+<span id='android-os-UserManager-method-getSeedAccountType'>/**
+</span>@hide Returns the preferred account type for user creation.
+*/
+getSeedAccountType : function(  ) {},
+
+<span id='android-os-UserManager-method-getSeedAccountOptions'>/**
+</span>@hide Returns the preferred account's options bundle for user creation.
+@return {Object {android.os.PersistableBundle}} Any options set by the requestor that created the user.
+*/
+getSeedAccountOptions : function(  ) {},
+
+<span id='android-os-UserManager-method-setSeedAccountData'>/**
+</span>@param {Number} userId
+@param {String} accountName
+@param {String} accountType
+@param {Object {PersistableBundle}} accountOptions
+@param accountOptions
+@see #createUserCreationIntent(String, String, String, PersistableBundle)
+*/
+setSeedAccountData : function(  ) {},
+
+<span id='android-os-UserManager-method-clearSeedAccountData'>/**
+</span>@hide Clears the seed information used to create this user.
+*/
+clearSeedAccountData : function(  ) {},
+
+<span id='android-os-UserManager-method-markGuestForDeletion'>/**
+</span>@param {Number} userHandle
+@param userHandle
+@return {Boolean} 
+*/
+markGuestForDeletion : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserEnabled'>/**Sets the user as enabled, if such an user exists.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+
+ &lt;p&gt;Note that the default is true, it's only that managed profiles might not be enabled.
+ Also ephemeral users can be disabled to indicate that their removal is in progress and they
+ shouldn't be re-entered. Therefore ephemeral users should not be re-enabled once disabled.
+@param {Number} userId the id of the profile to enable
+@hide 
+*/
+setUserEnabled : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserAdmin'>/**Assigns admin privileges to the user, if such a user exists.
+</span>
+ &lt;p&gt;Requires {@link android.Manifest.permission#MANAGE_USERS} and
+ {@link android.Manifest.permission#INTERACT_ACROSS_USERS_FULL} permissions.
+@param {Number} userHandle the id of the user to become admin
+@hide 
+*/
+setUserAdmin : function(  ) {},
+
+<span id='android-os-UserManager-method-evictCredentialEncryptionKey'>/**Evicts the user's credential encryption key from memory by stopping and restarting the user.
+</span>@hide 
+*/
+evictCredentialEncryptionKey : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserCount'>/**Return the number of users currently created on the device.
+</span>*/
+getUserCount : function(  ) {},
+
+<span id='android-os-UserManager-method-getUsers'>/**Returns information for all users on this device, including ones marked for deletion.
+</span> To retrieve only users that are alive, use {@link #getUsers}(boolean).
+ &lt;p&gt;
+ Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@return {Object {java.util.List}} the list of users that exist on the device.
+@hide 
+*/
+getUsers : function(  ) {},
+
+<span id='android-os-UserManager-method-getSerialNumbersOfUsers'>/**Returns serial numbers of all users on this device.
+</span>@param {Boolean} excludeDying specify if the list should exclude users being removed.
+@return {Number} the list of serial numbers of users that exist on the device.
+@hide 
+*/
+getSerialNumbersOfUsers : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserAccount'>/**
+</span>@return {String} the user's account name, null if not found.
+@hide 
+*/
+getUserAccount : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserAccount'>/**Set account name for the given user.
+</span>@hide 
+*/
+setUserAccount : function(  ) {},
+
+<span id='android-os-UserManager-method-getPrimaryUser'>/**Returns information for Primary user.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@return {Object {android.content.pm.UserInfo}} the Primary user, null if not found.
+@hide 
+*/
+getPrimaryUser : function(  ) {},
+
+<span id='android-os-UserManager-method-canAddMoreUsers'>/**Checks whether it's possible to add more users. Caller must hold the MANAGE_USERS
+</span> permission.
+@return {Boolean} true if more users can be added, false if limit has been reached.
+@hide 
+*/
+canAddMoreUsers : function(  ) {},
+
+<span id='android-os-UserManager-method-canAddMoreManagedProfiles'>/**Checks whether it's possible to add more managed profiles. Caller must hold the MANAGE_USERS
+</span> permission.
+ if allowedToRemoveOne is true and if the user already has a managed profile, then return if
+ we could add a new managed profile to this user after removing the existing one.
+@return {Boolean} true if more managed profiles can be added, false if limit has been reached.
+@hide 
+*/
+canAddMoreManagedProfiles : function(  ) {},
+
+<span id='android-os-UserManager-method-getProfiles'>/**Returns list of the profiles of userHandle including
+</span> userHandle itself.
+ Note that this returns both enabled and not enabled profiles. See
+ {@link #getEnabledProfiles}(int) if you need only the enabled ones.
+
+ Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {Number} userHandle profiles of this user will be returned.
+@return {Object {java.util.List}} the list of profiles.
+@hide 
+*/
+getProfiles : function(  ) {},
+
+<span id='android-os-UserManager-method-isSameProfileGroup'>/**Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+</span>@param {Number} userId one of the two user ids to check.
+@param {Number} otherUserId one of the two user ids to check.
+@return {Boolean} true if the two user ids are in the same profile group.
+@hide 
+*/
+isSameProfileGroup : function(  ) {},
+
+<span id='android-os-UserManager-method-getEnabledProfiles'>/**Returns list of the profiles of userHandle including
+</span> userHandle itself.
+ Note that this returns only enabled.
+
+ Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {Number} userHandle profiles of this user will be returned.
+@return {Object {java.util.List}} the list of profiles.
+@hide 
+*/
+getEnabledProfiles : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserProfiles'>/**Returns a list of UserHandles for profiles associated with the user that the calling process
+</span> is running on, including the user itself.
+@return {Object {java.util.List}} A non-empty list of UserHandles associated with the calling user.
+*/
+getUserProfiles : function(  ) {},
+
+<span id='android-os-UserManager-method-getProfileIds'>/**Returns a list of ids for profiles associated with the specified user including the user
+</span> itself.
+@param {Number} userId      id of the user to return profiles for
+@param {Boolean} enabledOnly whether return only {@link UserInfo#isEnabled() enabled} profiles
+@return {Number} A non-empty list of ids of profiles associated with the specified user.
+@hide 
+*/
+getProfileIds : function(  ) {},
+
+<span id='android-os-UserManager-method-getProfileIdsWithDisabled'>/**
+</span>@see #getProfileIds(int, boolean)
+@hide 
+*/
+getProfileIdsWithDisabled : function(  ) {},
+
+<span id='android-os-UserManager-method-getEnabledProfileIds'>/**
+</span>@see #getProfileIds(int, boolean)
+@hide 
+*/
+getEnabledProfileIds : function(  ) {},
+
+<span id='android-os-UserManager-method-getCredentialOwnerProfile'>/**Returns the device credential owner id of the profile from
+</span> which this method is called, or userHandle if called from a user that
+ is not a profile.
+@hide 
+*/
+getCredentialOwnerProfile : function(  ) {},
+
+<span id='android-os-UserManager-method-getProfileParent'>/**Returns the parent of the profile which this method is called from
+</span> or null if called from a user that is not a profile.
+@hide 
+*/
+getProfileParent : function(  ) {},
+
+<span id='android-os-UserManager-method-getProfileParent'>/**Get the parent of a user profile.
+</span>@param {Object {UserHandle}} user the handle of the user profile
+@return {Object {android.os.UserHandle}} the parent of the user or {@code null} if the user is not profile
+@hide 
+*/
+getProfileParent : function(  ) {},
+
+<span id='android-os-UserManager-method-requestQuietModeEnabled'>/**Enables or disables quiet mode for a managed profile. If quiet mode is enabled, apps in a
+</span> managed profile don't run, generate notifications, or consume data or battery.
+ &lt;p&gt;
+ If a user's credential is needed to turn off quiet mode, a confirm credential screen will be
+ shown to the user.
+ &lt;p&gt;
+ The change may not happen instantly, however apps can listen for
+ {@link Intent#ACTION_MANAGED_PROFILE_AVAILABLE} and
+ {@link Intent#ACTION_MANAGED_PROFILE_UNAVAILABLE} broadcasts in order to be notified of
+ the change of the quiet mode. Apps can also check the current state of quiet mode by
+ calling {@link #isQuietModeEnabled}(UserHandle).
+ &lt;p&gt;
+ The caller must either be the foreground default launcher or have one of these permissions:
+ {@code MANAGE_USERS} or {@code MODIFY_QUIET_MODE}.
+@param {Boolean} enableQuietMode whether quiet mode should be enabled or disabled
+@param {Object {UserHandle}} userHandle user handle of the profile
+@return {Boolean} {@code false} if user's credential is needed in order to turn off quiet mode,
+         {@code true} otherwise
+@throws SecurityException if the caller is invalid
+@throws IllegalArgumentException if {@code userHandle} is not a managed profile
+@see #isQuietModeEnabled(UserHandle)
+*/
+requestQuietModeEnabled : function(  ) {},
+
+<span id='android-os-UserManager-method-requestQuietModeEnabled'>/**Similar to {@link #requestQuietModeEnabled(boolean, android.os.UserHandle)}, except you can specify
+</span> a target to start when user is unlocked. If {@code target} is specified, caller must have
+ the {@link android.Manifest.permission#MANAGE_USERS} permission.
+@see {@link #requestQuietModeEnabled(boolean, UserHandle)}
+@hide 
+*/
+requestQuietModeEnabled : function(  ) {},
+
+<span id='android-os-UserManager-method-isQuietModeEnabled'>/**Returns whether the given profile is in quiet mode or not.
+</span> Notes: Quiet mode is only supported for managed profiles.
+@param {Object {UserHandle}} userHandle The user handle of the profile to be queried.
+@return {Boolean} true if the profile is in quiet mode, false otherwise.
+*/
+isQuietModeEnabled : function(  ) {},
+
+<span id='android-os-UserManager-method-getBadgedIconForUser'>/**If the target user is a managed profile of the calling user or the caller
+</span> is itself a managed profile, then this returns a badged copy of the given
+ icon to be able to distinguish it from the original icon. For badging an
+ arbitrary drawable use {@link #getBadgedDrawableForUser(
+ android.graphics.drawable.Drawable, android.os.UserHandle, android.graphics.Rect, int)}.
+ &lt;p&gt;
+ If the original drawable is a BitmapDrawable and the backing bitmap is
+ mutable as per {@link android.graphics.Bitmap#isMutable()}, the badging
+ is performed in place and the original drawable is returned.
+ &lt;/p&gt;
+@param {Object {Drawable}} icon The icon to badge.
+@param {Object {UserHandle}} user The target user.
+@return {Object {android.graphics.drawable.Drawable}} A drawable that combines the original icon and a badge as
+         determined by the system.
+@removed 
+*/
+getBadgedIconForUser : function(  ) {},
+
+<span id='android-os-UserManager-method-getBadgedDrawableForUser'>/**If the target user is a managed profile of the calling user or the caller
+</span> is itself a managed profile, then this returns a badged copy of the given
+ drawable allowing the user to distinguish it from the original drawable.
+ The caller can specify the location in the bounds of the drawable to be
+ badged where the badge should be applied as well as the density of the
+ badge to be used.
+ &lt;p&gt;
+ If the original drawable is a BitmapDrawable and the backing bitmap is
+ mutable as per {@link android.graphics.Bitmap#isMutable()}, the badging
+ is performed in place and the original drawable is returned.
+ &lt;/p&gt;
+@param {Object {Drawable}} badgedDrawable The drawable to badge.
+@param {Object {UserHandle}} user The target user.
+@param {Object {Rect}} badgeLocation Where in the bounds of the badged drawable to place
+         the badge. If it's {@code null}, the badge is applied on top of the entire
+         drawable being badged.
+@param {Number} badgeDensity The optional desired density for the badge as per
+         {@link android.util.DisplayMetrics#densityDpi}. If it's not positive,
+         the density of the display is used.
+@return {Object {android.graphics.drawable.Drawable}} A drawable that combines the original drawable and a badge as
+         determined by the system.
+@removed 
+*/
+getBadgedDrawableForUser : function(  ) {},
+
+<span id='android-os-UserManager-method-getBadgedLabelForUser'>/**If the target user is a managed profile of the calling user or the caller
+</span> is itself a managed profile, then this returns a copy of the label with
+ badging for accessibility services like talkback. E.g. passing in &quot;Email&quot;
+ and it might return &quot;Work Email&quot; for Email in the work profile.
+@param {Object {CharSequence}} label The label to change.
+@param {Object {UserHandle}} user The target user.
+@return {Object {java.lang.CharSequence}} A label that combines the original label and a badge as
+         determined by the system.
+@removed 
+*/
+getBadgedLabelForUser : function(  ) {},
+
+<span id='android-os-UserManager-method-getUsers'>/**Returns information for all users on this device. Requires
+</span> {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {Boolean} excludeDying specify if the list should exclude users being
+            removed.
+@return {Object {java.util.List}} the list of users that were created.
+@hide 
+*/
+getUsers : function(  ) {},
+
+<span id='android-os-UserManager-method-removeUser'>/**Removes a user and all associated data.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {Number} userHandle the integer handle of the user, where 0 is the primary user.
+@hide 
+*/
+removeUser : function(  ) {},
+
+<span id='android-os-UserManager-method-removeUser'>/**Removes a user and all associated data.
+</span>@param {Object {UserHandle}} user the user that needs to be removed.
+@return {Boolean} {@code true} if the user was successfully removed, {@code false} otherwise.
+@throws IllegalArgumentException if {@code user} is {@code null}
+@hide 
+*/
+removeUser : function(  ) {},
+
+<span id='android-os-UserManager-method-removeUserEvenWhenDisallowed'>/**Similar to {@link #removeUser}(int) except bypassing the checking of
+</span> {@link android.os.UserManager#DISALLOW_REMOVE_USER}
+ or {@link android.os.UserManager#DISALLOW_REMOVE_MANAGED_PROFILE}.
+@see {@link #removeUser(int)}
+@hide 
+*/
+removeUserEvenWhenDisallowed : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserName'>/**Updates the user's name.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {Number} userHandle the user's integer handle
+@param {String} name the new name for the user
+@hide 
+*/
+setUserName : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserName'>/**Updates the calling user's name.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {String} name the new name for the user
+@hide 
+*/
+setUserName : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserIcon'>/**Sets the user's photo.
+</span>@param {Number} userHandle the user for whom to change the photo.
+@param {Object {Bitmap}} icon the bitmap to set as the photo.
+@hide 
+*/
+setUserIcon : function(  ) {},
+
+<span id='android-os-UserManager-method-setUserIcon'>/**Sets the calling user's photo.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS} permission.
+@param {Object {Bitmap}} icon the bitmap to set as the photo.
+@hide 
+*/
+setUserIcon : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserIcon'>/**Returns a file descriptor for the user's photo. PNG data can be read from this file.
+</span>@param {Number} userHandle the user whose photo we want to read.
+@return {Object {android.graphics.Bitmap}} a {@link Bitmap} of the user's photo, or null if there's no photo.
+@see com.android.internal.util.UserIcons#getDefaultUserIcon for a default.
+@hide 
+*/
+getUserIcon : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserIcon'>/**Returns a Bitmap for the calling user's photo.
+</span> Requires {@link android.Manifest.permission#MANAGE_USERS}
+ or {@link android.Manifest.permission#GET_ACCOUNTS_PRIVILEGED} permissions.
+@return {Object {android.graphics.Bitmap}} a {@link Bitmap} of the user's photo, or null if there's no photo.
+@see com.android.internal.util.UserIcons#getDefaultUserIcon for a default.
+@hide 
+*/
+getUserIcon : function(  ) {},
+
+<span id='android-os-UserManager-method-getMaxSupportedUsers'>/**Returns the maximum number of users that can be created on this device. A return value
+</span> of 1 means that it is a single user device.
+@hide 
+@return {Number} a value greater than or equal to 1
+*/
+getMaxSupportedUsers : function(  ) {},
+
+<span id='android-os-UserManager-method-isUserSwitcherEnabled'>/**Returns true if the user switcher should be shown, this will be if device supports multi-user
+</span> and there are at least 2 users available that are not managed profiles.
+@hide 
+@return {Boolean} true if user switcher should be shown.
+*/
+isUserSwitcherEnabled : function(  ) {},
+
+<span id='android-os-UserManager-method-isDeviceInDemoMode'>/**
+</span>@hide 
+*/
+isDeviceInDemoMode : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserSerialNumber'>/**Returns a serial number on this device for a given userHandle. User handles can be recycled
+</span> when deleting and creating users, but serial numbers are not reused until the device is wiped.
+@param {Number} userHandle
+@return {Number} a serial number associated with that user, or -1 if the userHandle is not valid.
+@hide 
+*/
+getUserSerialNumber : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserHandle'>/**Returns a userHandle on this device for a given user serial number. User handles can be
+</span> recycled when deleting and creating users, but serial numbers are not reused until the device
+ is wiped.
+@param {Number} userSerialNumber
+@return {Number} the userHandle associated with that user serial number, or -1 if the serial number
+ is not valid.
+@hide 
+*/
+getUserHandle : function(  ) {},
+
+<span id='android-os-UserManager-method-getApplicationRestrictions'>/**Returns a {@link android.os.Bundle} containing any saved application restrictions for this user, for the
+</span> given package name. Only an application with this package name can call this method.
+
+ &lt;p&gt;The returned {@link android.os.Bundle} consists of key-value pairs, as defined by the application,
+ where the types of values may be:
+ &lt;ul&gt;
+ &lt;li&gt;{@code boolean}
+ &lt;li&gt;{@code int}
+ &lt;li&gt;{@code String} or {@code String[]}
+ &lt;li&gt;From {@link android.os.Build.VERSION_CODES#M}, {@code Bundle} or {@code Bundle[]}
+ &lt;/ul&gt;
+
+ &lt;p&gt;NOTE: The method performs disk I/O and shouldn't be called on the main thread
+@param {String} packageName the package name of the calling application
+@return {Object {android.os.Bundle}} a {@link Bundle} with the restrictions for that package, or an empty {@link Bundle}
+ if there are no saved restrictions.
+@see #KEY_RESTRICTIONS_PENDING
+*/
+getApplicationRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-getApplicationRestrictions'>/**
+</span>@hide 
+*/
+getApplicationRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-setApplicationRestrictions'>/**
+</span>@hide 
+*/
+setApplicationRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-setRestrictionsChallenge'>/**Sets a new challenge PIN for restrictions. This is only for use by pre-installed
+</span> apps and requires the MANAGE_USERS permission.
+@param {String} newPin the PIN to use for challenge dialogs.
+@return {Boolean} Returns true if the challenge PIN was set successfully.
+@deprecated The restrictions PIN functionality is no longer provided by the system.
+ This method is preserved for backwards compatibility reasons and always returns false.
+*/
+setRestrictionsChallenge : function(  ) {},
+
+<span id='android-os-UserManager-method-setDefaultGuestRestrictions'>/**
+</span>@hide Set restrictions that should apply to any future guest user that's created.
+*/
+setDefaultGuestRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-getDefaultGuestRestrictions'>/**
+</span>@hide Gets the default guest restrictions.
+*/
+getDefaultGuestRestrictions : function(  ) {},
+
+<span id='android-os-UserManager-method-getUserCreationTime'>/**Returns creation time of the user or of a managed profile associated with the calling user.
+</span>@param {Object {UserHandle}} userHandle user handle of the user or a managed profile associated with the
+                   calling user.
+@return {Number} creation time in milliseconds since Epoch time.
+*/
+getUserCreationTime : function(  ) {},
+
+<span id='android-os-UserManager-method-someUserHasSeedAccount'>/**
+</span>@param {String} accountName The account name to check for
+@param {String} accountType The account type of the account to check for
+@param accountType The account type of the account to check for
+@return {Boolean} whether the seed account was found
+*/
+someUserHasSeedAccount : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

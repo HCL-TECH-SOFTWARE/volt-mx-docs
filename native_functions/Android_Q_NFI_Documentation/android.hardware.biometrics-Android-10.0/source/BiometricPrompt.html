@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-biometrics-BiometricPrompt'>/**@class android.hardware.biometrics.BiometricPrompt
+</span> implements android.hardware.biometrics.BiometricAuthenticator
+
+ implements android.hardware.biometrics.BiometricConstants
+
+@extends java.lang.Object
+
+ A class that manages a system-provided biometric dialog.
+*/
+var BiometricPrompt = {
+
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_TITLE'>/** @hide
+</span>*/
+KEY_TITLE : &quot;title&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_USE_DEFAULT_TITLE'>/** @hide
+</span>*/
+KEY_USE_DEFAULT_TITLE : &quot;use_default_title&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_SUBTITLE'>/** @hide
+</span>*/
+KEY_SUBTITLE : &quot;subtitle&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_DESCRIPTION'>/** @hide
+</span>*/
+KEY_DESCRIPTION : &quot;description&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_POSITIVE_TEXT'>/** @hide
+</span>*/
+KEY_POSITIVE_TEXT : &quot;positive_text&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_NEGATIVE_TEXT'>/** @hide
+</span>*/
+KEY_NEGATIVE_TEXT : &quot;negative_text&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_REQUIRE_CONFIRMATION'>/** @hide
+</span>*/
+KEY_REQUIRE_CONFIRMATION : &quot;require_confirmation&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_ALLOW_DEVICE_CREDENTIAL'>/** @hide
+</span>*/
+KEY_ALLOW_DEVICE_CREDENTIAL : &quot;allow_device_credential&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-KEY_FROM_CONFIRM_DEVICE_CREDENTIAL'>/** @hide
+</span>*/
+KEY_FROM_CONFIRM_DEVICE_CREDENTIAL : &quot;from_confirm_device_credential&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-HIDE_DIALOG_DELAY'>/** Error/help message will show for this amount of time.
+</span> For error messages, the dialog will also be dismissed after this amount of time.
+ Error messages will be propagated back to the application via AuthenticationCallback
+ after this amount of time.
+ @hide
+*/
+HIDE_DIALOG_DELAY : &quot;2000&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-DISMISSED_REASON_POSITIVE'>/** @hide
+</span>*/
+DISMISSED_REASON_POSITIVE : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-DISMISSED_REASON_NEGATIVE'>/** @hide
+</span>*/
+DISMISSED_REASON_NEGATIVE : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-property-DISMISSED_REASON_USER_CANCEL'>/** @hide
+</span>*/
+DISMISSED_REASON_USER_CANCEL : &quot;3&quot;,
+<span id='android-hardware-biometrics-BiometricPrompt-method-authenticateUser'>/**Authenticates for the given user.
+</span>@param {Object {CancellationSignal}} cancel An object that can be used to cancel authentication
+@param {Object {Executor}} executor An executor to handle callback events
+@param {Object {BiometricPrompt.AuthenticationCallback}} callback An object to receive authentication events
+@param {Number} userId The user to authenticate
+@hide 
+*/
+authenticateUser : function(  ) {},
+
+<span id='android-hardware-biometrics-BiometricPrompt-method-authenticate'>/**This call warms up the biometric hardware, displays a system-provided dialog, and starts
+</span> scanning for a biometric. It terminates when {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback#onAuthenticationError(int, CharSequence)} is called, when {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback#onAuthenticationSucceeded( AuthenticationResult)}, or when the user
+ dismisses the system-provided dialog, at which point the crypto object becomes invalid. This
+ operation can be canceled by using the provided cancel object. The application will receive
+ authentication errors through {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback}, and button events through the
+ corresponding callback set in {@link android.hardware.biometrics.BiometricPrompt.Builder#setNegativeButton(CharSequence, Executor,
+ DialogInterface.OnClickListener)}. It is safe to reuse the {@link android.hardware.biometrics.BiometricPrompt} object,
+ and calling {@link BiometricPrompt#authenticate( CancellationSignal, Executor,
+ android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback)} while an existing authentication attempt is occurring will stop the
+ previous client and start a new authentication. The interrupted client will receive a
+ cancelled notification through {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback#onAuthenticationError(int,
+ CharSequence)}.
+
+ Note: Applications generally should not cancel and start authentication in quick succession.
+ For example, to properly handle authentication across configuration changes, it's recommended
+ to use BiometricPrompt in a fragment with setRetainInstance(true). By doing so, the
+ application will not need to cancel/restart authentication during the configuration change.
+@param {Object {BiometricPrompt.CryptoObject}} crypto Object associated with the call
+@param {Object {CancellationSignal}} cancel An object that can be used to cancel authentication
+@param {Object {Executor}} executor An executor to handle callback events
+@param {Object {BiometricPrompt.AuthenticationCallback}} callback An object to receive authentication events
+@param callback An object to receive authentication events
+*/
+authenticate : function(  ) {},
+
+<span id='android-hardware-biometrics-BiometricPrompt-method-authenticate'>/**This call warms up the biometric hardware, displays a system-provided dialog, and starts
+</span> scanning for a biometric. It terminates when {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback#onAuthenticationError(int, CharSequence)} is called, when {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback#onAuthenticationSucceeded( AuthenticationResult)} is called, or when
+ the user dismisses the system-provided dialog.  This operation can be canceled by using the
+ provided cancel object. The application will receive authentication errors through {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback}, and button events through the corresponding callback set in {@link android.hardware.biometrics.BiometricPrompt.Builder#setNegativeButton(CharSequence, Executor, DialogInterface.OnClickListener)}.  It is
+ safe to reuse the {@link android.hardware.biometrics.BiometricPrompt} object, and calling {@link BiometricPrompt#authenticate(CancellationSignal, Executor, android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback)} while
+ an existing authentication attempt is occurring will stop the previous client and start a new
+ authentication. The interrupted client will receive a cancelled notification through {@link android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback#onAuthenticationError(int, CharSequence)}.
+
+ Note: Applications generally should not cancel and start authentication in quick succession.
+ For example, to properly handle authentication across configuration changes, it's recommended
+ to use BiometricPrompt in a fragment with setRetainInstance(true). By doing so, the
+ application will not need to cancel/restart authentication during the configuration change.
+@param {Object {CancellationSignal}} cancel An object that can be used to cancel authentication
+@param {Object {Executor}} executor An executor to handle callback events
+@param {Object {BiometricPrompt.AuthenticationCallback}} callback An object to receive authentication events
+@param callback An object to receive authentication events
+*/
+authenticate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

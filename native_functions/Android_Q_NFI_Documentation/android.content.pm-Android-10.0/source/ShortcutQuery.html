@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-LauncherApps-ShortcutQuery'>/**@class android.content.pm.LauncherApps.ShortcutQuery
+</span>@extends java.lang.Object
+
+ Represents a query passed to {@link #getShortcuts(ShortcutQuery, UserHandle)}.
+*/
+var ShortcutQuery = {
+
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_MATCH_DYNAMIC'>/** Include dynamic shortcuts in the result.
+</span>*/
+FLAG_MATCH_DYNAMIC : &quot;1&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_GET_DYNAMIC'>/**@hide kept for unit tests */
+</span>FLAG_GET_DYNAMIC : &quot;1&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_MATCH_PINNED'>/** Include pinned shortcuts in the result.
+</span>
+ &lt;p&gt;If you are the selected assistant app, and wishes to fetch all shortcuts that the
+ user owns on the launcher (or by other launchers, in case the user has multiple), use
+ {@link #FLAG_MATCH_PINNED_BY_ANY_LAUNCHER} instead.
+
+ &lt;p&gt;If you're a regular launcher app, there's no way to get shortcuts pinned by other
+ launchers, and {@link #FLAG_MATCH_PINNED_BY_ANY_LAUNCHER} will be ignored. So use this
+ flag to get own pinned shortcuts.
+*/
+FLAG_MATCH_PINNED : &quot;2&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_GET_PINNED'>/**@hide kept for unit tests */
+</span>FLAG_GET_PINNED : &quot;2&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_MATCH_MANIFEST'>/** Include manifest shortcuts in the result.
+</span>*/
+FLAG_MATCH_MANIFEST : &quot;8&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_GET_MANIFEST'>/**@hide kept for unit tests */
+</span>FLAG_GET_MANIFEST : &quot;8&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_MATCH_PINNED_BY_ANY_LAUNCHER'>/** Include all pinned shortcuts by any launchers, not just by the caller,
+</span> in the result.
+
+ &lt;p&gt;The caller must be the selected assistant app to use this flag, or have the system
+ {@code ACCESS_SHORTCUTS} permission.
+
+ &lt;p&gt;If you are the selected assistant app, and wishes to fetch all shortcuts that the
+ user owns on the launcher (or by other launchers, in case the user has multiple), use
+ {@link #FLAG_MATCH_PINNED_BY_ANY_LAUNCHER} instead.
+
+ &lt;p&gt;If you're a regular launcher app (or any app that's not the selected assistant app)
+ then this flag will be ignored.
+*/
+FLAG_MATCH_PINNED_BY_ANY_LAUNCHER : &quot;1024&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_MATCH_ALL_KINDS'>/** FLAG_MATCH_DYNAMIC | FLAG_MATCH_PINNED | FLAG_MATCH_MANIFEST
+</span> @hide
+*/
+FLAG_MATCH_ALL_KINDS : &quot;11&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_MATCH_ALL_KINDS_WITH_ALL_PINNED'>/** FLAG_MATCH_DYNAMIC | FLAG_MATCH_PINNED | FLAG_MATCH_MANIFEST | FLAG_MATCH_ALL_PINNED
+</span> @hide
+*/
+FLAG_MATCH_ALL_KINDS_WITH_ALL_PINNED : &quot;1035&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_GET_ALL_KINDS'>/**@hide kept for unit tests */
+</span>FLAG_GET_ALL_KINDS : &quot;11&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-property-FLAG_GET_KEY_FIELDS_ONLY'>/** Requests &quot;key&quot; fields only.  See {@link android.content.pm.ShortcutInfo#hasKeyFieldsOnly()}'s javadoc to
+</span> see which fields fields &quot;key&quot;.
+ This allows quicker access to shortcut information in order to
+ determine whether the caller's in-memory cache needs to be updated.
+
+ &lt;p&gt;Typically, launcher applications cache all or most shortcut information
+ in memory in order to show shortcuts without a delay.
+
+ When a given launcher application wants to update its cache, such as when its process
+ restarts, it can fetch shortcut information with this flag.
+ The application can then check {@link android.content.pm.ShortcutInfo#getLastChangedTimestamp()} for each
+ shortcut, fetching a shortcut's non-key information only if that shortcut has been
+ updated.
+
+ @see ShortcutManager
+*/
+FLAG_GET_KEY_FIELDS_ONLY : &quot;4&quot;,
+<span id='android-content-pm-LauncherApps-ShortcutQuery-method-setChangedSince'>/**If non-zero, returns only shortcuts that have been added or updated
+</span> since the given timestamp, expressed in milliseconds since the Epoch&amp;mdash;see
+ {@link System#currentTimeMillis()}.
+*/
+setChangedSince : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-ShortcutQuery-method-setPackage'>/**If non-null, returns only shortcuts from the package.
+</span>*/
+setPackage : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-ShortcutQuery-method-setShortcutIds'>/**If non-null, return only the specified shortcuts by ID.  When setting this field,
+</span> a package name must also be set with {@link #setPackage}.
+*/
+setShortcutIds : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-ShortcutQuery-method-setActivity'>/**If non-null, returns only shortcuts associated with the activity; i.e.
+</span> {@link android.content.pm.ShortcutInfo}s whose {@link android.content.pm.ShortcutInfo#getActivity()} are equal
+ to {@code activity}.
+*/
+setActivity : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-ShortcutQuery-method-setQueryFlags'>/**Set query options.  At least one of the {@code MATCH} flags should be set.  Otherwise,
+</span> no shortcuts will be returned.
+
+ &lt;ul&gt;
+     &lt;li&gt;{@link #FLAG_MATCH_DYNAMIC}
+     &lt;li&gt;{@link #FLAG_MATCH_PINNED}
+     &lt;li&gt;{@link #FLAG_MATCH_MANIFEST}
+     &lt;li&gt;{@link #FLAG_GET_KEY_FIELDS_ONLY}
+ &lt;/ul&gt;
+*/
+setQueryFlags : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

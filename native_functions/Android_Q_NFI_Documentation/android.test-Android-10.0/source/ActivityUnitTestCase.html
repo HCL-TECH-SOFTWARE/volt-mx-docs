@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-test-ActivityUnitTestCase'>/**@class android.test.ActivityUnitTestCase
+</span>@extends android.test.ActivityTestCase
+
+ This class provides isolated testing of a single activity.  The activity under test will
+ be created with minimal connection to the system infrastructure, and you can inject mocked or
+ wrappered versions of many of Activity's dependencies.  Most of the work is handled
+ automatically here by {@link #setUp} and {@link #tearDown}.
+
+ &lt;p&gt;If you prefer a functional test, see {@link android.test.ActivityInstrumentationTestCase}.
+
+ &lt;p&gt;It must be noted that, as a true unit test, your Activity will not be running in the
+ normal system and will not participate in the normal interactions with other Activities.
+ The following methods should not be called in this configuration - most of them will throw
+ exceptions:
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.app.Activity#createPendingResult(int, Intent, int)}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#startActivityIfNeeded(Intent, int)}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#startActivityFromChild(Activity, Intent, int)}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#startNextMatchingActivity(Intent)}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#getCallingActivity()}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#getCallingPackage()}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#createPendingResult(int, Intent, int)}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#getTaskId()}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#isTaskRoot()}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#moveTaskToBack(boolean)}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The following methods may be called but will not do anything.  For test purposes, you can use
+ the methods {@link #getStartedActivityIntent}() and {@link #getStartedActivityRequest}() to
+ inspect the parameters that they were called with.
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.app.Activity#startActivity(Intent)}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#startActivityForResult(Intent, int)}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;The following methods may be called but will not do anything.  For test purposes, you can use
+ the methods {@link #isFinishCalled}() and {@link #getFinishedActivityRequest}() to inspect the
+ parameters that they were called with.
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.app.Activity#finish()}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#finishFromChild(Activity child)}&lt;/li&gt;
+ &lt;li&gt;{@link android.app.Activity#finishActivity(int requestCode)}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ @deprecated Write
+ &lt;a href=&quot;{@docRoot}training/testing/unit-testing/local-unit-tests.html&quot;&gt;Local Unit Tests&lt;/a&gt;
+ instead.
+*/
+var ActivityUnitTestCase = {
+
+<span id='android-test-ActivityUnitTestCase-method-getActivity'>/**
+</span>*/
+getActivity : function(  ) {},
+
+<span id='android-test-ActivityUnitTestCase-method-setApplication'>/**Set the application for use during the test.  You must call this function before calling
+</span> {@link #startActivity}.  If your test does not call this method,
+@param {Object {Application}} application The Application object that will be injected into the Activity under test.
+*/
+setApplication : function(  ) {},
+
+<span id='android-test-ActivityUnitTestCase-method-setActivityContext'>/**If you wish to inject a Mock, Isolated, or otherwise altered context, you can do so
+</span> here.  You must call this function before calling {@link #startActivity}.  If you wish to
+ obtain a real Context, as a building block, use getInstrumentation().getTargetContext().
+*/
+setActivityContext : function(  ) {},
+
+<span id='android-test-ActivityUnitTestCase-method-getRequestedOrientation'>/**This method will return the value if your Activity under test calls
+</span> {@link android.app.Activity#setRequestedOrientation}.
+*/
+getRequestedOrientation : function(  ) {},
+
+<span id='android-test-ActivityUnitTestCase-method-getStartedActivityIntent'>/**This method will return the launch intent if your Activity under test calls
+</span> {@link android.app.Activity#startActivity(Intent)} or
+ {@link android.app.Activity#startActivityForResult(Intent, int)}.
+@return {Object {android.content.Intent}} The Intent provided in the start call, or null if no start call was made.
+*/
+getStartedActivityIntent : function(  ) {},
+
+<span id='android-test-ActivityUnitTestCase-method-getStartedActivityRequest'>/**This method will return the launch request code if your Activity under test calls
+</span> {@link android.app.Activity#startActivityForResult(Intent, int)}.
+@return {Number} The request code provided in the start call, or -1 if no start call was made.
+*/
+getStartedActivityRequest : function(  ) {},
+
+<span id='android-test-ActivityUnitTestCase-method-isFinishCalled'>/**This method will notify you if the Activity under test called
+</span> {@link android.app.Activity#finish()},
+ {@link android.app.Activity#finishFromChild(Activity)}, or
+ {@link android.app.Activity#finishActivity(int)}.
+@return {Boolean} Returns true if one of the listed finish methods was called.
+*/
+isFinishCalled : function(  ) {},
+
+<span id='android-test-ActivityUnitTestCase-method-getFinishedActivityRequest'>/**This method will return the request code if the Activity under test called
+</span> {@link android.app.Activity#finishActivity(int)}.
+@return {Number} The request code provided in the start call, or -1 if no finish call was made.
+*/
+getFinishedActivityRequest : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageInstaller'>/**@class android.content.pm.PackageInstaller
+</span>@extends java.lang.Object
+
+ Offers the ability to install, upgrade, and remove applications on the
+ device. This includes support for apps packaged either as a single
+ &quot;monolithic&quot; APK, or apps packaged as multiple &quot;split&quot; APKs.
+ &lt;p&gt;
+ An app is delivered for installation through a
+ {@link android.content.pm.PackageParser.PackageInstaller.Session}, which any app can create. Once the session
+ is created, the installer can stream one or more APKs into place until it
+ decides to either commit or destroy the session. Committing may require user
+ intervention to complete the installation, unless the caller falls into one of the
+ following categories, in which case the installation will complete automatically.
+ &lt;ul&gt;
+ &lt;li&gt;the device owner
+ &lt;li&gt;the affiliated profile owner
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Sessions can install brand new apps, upgrade existing apps, or add new splits
+ into an existing app.
+ &lt;p&gt;
+ Apps packaged as multiple split APKs always consist of a single &quot;base&quot; APK
+ (with a {@code null} split name) and zero or more &quot;split&quot; APKs (with unique
+ split names). Any subset of these APKs can be installed together, as long as
+ the following constraints are met:
+ &lt;ul&gt;
+ &lt;li&gt;All APKs must have the exact same package name, version code, and signing
+ certificates.
+ &lt;li&gt;All APKs must have unique split names.
+ &lt;li&gt;All installations must contain a single base APK.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ The ApiDemos project contains examples of using this API:
+ &lt;code&gt;ApiDemos/src/com/example/android/apis/content/InstallApk*.java&lt;/code&gt;.
+ &lt;p&gt;
+ On Android Q or above, an app installed notification will be posted
+ by system after a new app is installed.
+ To customize installer's notification icon, you should declare the following in the manifest
+ &amp;lt;application&gt; as follows: &lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;meta-data android:name=&quot;com.android.packageinstaller.notification.smallIcon&quot;
+ android:resource=&quot;@drawable/installer_notification_icon&quot;/&gt;
+ &lt;/pre&gt;
+ &lt;pre&gt;
+ &amp;lt;meta-data android:name=&quot;com.android.packageinstaller.notification.color&quot;
+ android:resource=&quot;@color/installer_notification_color&quot;/&gt;
+ &lt;/pre&gt;
+*/
+var PackageInstaller = {
+
+<span id='android-content-pm-PackageInstaller-property-ENABLE_REVOCABLE_FD'>/**{@hide} */
+</span>ENABLE_REVOCABLE_FD : &quot;null&quot;,
+<span id='android-content-pm-PackageInstaller-property-ACTION_SESSION_DETAILS'>/** Activity Action: Show details about a particular install session. This
+</span> may surface actions such as pause, resume, or cancel.
+ &lt;p&gt;
+ This should always be scoped to the installer package that owns the
+ session. Clients should use {@link android.content.pm.PackageInstaller.SessionInfo#createDetailsIntent()} to
+ build this intent correctly.
+ &lt;p&gt;
+ In some cases, a matching Activity may not exist, so ensure you safeguard
+ against this.
+ &lt;p&gt;
+ The session to show details for is defined in {@link #EXTRA_SESSION_ID}.
+*/
+ACTION_SESSION_DETAILS : &quot;android.content.pm.action.SESSION_DETAILS&quot;,
+<span id='android-content-pm-PackageInstaller-property-ACTION_SESSION_COMMITTED'>/** Broadcast Action: Explicit broadcast sent to the last known default launcher when a session
+</span> for a new install is committed. For managed profile, this is sent to the default launcher
+ of the primary profile.
+ &lt;p&gt;
+ The associated session is defined in {@link #EXTRA_SESSION} and the user for which this
+ session was created in {@link Intent#EXTRA_USER}.
+*/
+ACTION_SESSION_COMMITTED : &quot;android.content.pm.action.SESSION_COMMITTED&quot;,
+<span id='android-content-pm-PackageInstaller-property-ACTION_SESSION_UPDATED'>/** Broadcast Action: Send information about a staged install session when its state is updated.
+</span> &lt;p&gt;
+ The associated session information is defined in {@link #EXTRA_SESSION}.
+*/
+ACTION_SESSION_UPDATED : &quot;android.content.pm.action.SESSION_UPDATED&quot;,
+<span id='android-content-pm-PackageInstaller-property-ACTION_CONFIRM_INSTALL'>/**{@hide} */
+</span>ACTION_CONFIRM_INSTALL : &quot;android.content.pm.action.CONFIRM_INSTALL&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_SESSION_ID'>/** An integer session ID that an operation is working with.
+</span>
+ @see Intent#getIntExtra(String, int)
+*/
+EXTRA_SESSION_ID : &quot;android.content.pm.extra.SESSION_ID&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_SESSION'>/** {@link android.content.pm.PackageInstaller.SessionInfo} that an operation is working with.
+</span>
+ @see Intent#getParcelableExtra(String)
+*/
+EXTRA_SESSION : &quot;android.content.pm.extra.SESSION&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_PACKAGE_NAME'>/** Package name that an operation is working with.
+</span>
+ @see Intent#getStringExtra(String)
+*/
+EXTRA_PACKAGE_NAME : &quot;android.content.pm.extra.PACKAGE_NAME&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_STATUS'>/** Current status of an operation. Will be one of
+</span> {@link #STATUS_PENDING_USER_ACTION}, {@link #STATUS_SUCCESS},
+ {@link #STATUS_FAILURE}, {@link #STATUS_FAILURE_ABORTED},
+ {@link #STATUS_FAILURE_BLOCKED}, {@link #STATUS_FAILURE_CONFLICT},
+ {@link #STATUS_FAILURE_INCOMPATIBLE}, {@link #STATUS_FAILURE_INVALID}, or
+ {@link #STATUS_FAILURE_STORAGE}.
+ &lt;p&gt;
+ More information about a status may be available through additional
+ extras; see the individual status documentation for details.
+
+ @see Intent#getIntExtra(String, int)
+*/
+EXTRA_STATUS : &quot;android.content.pm.extra.STATUS&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_STATUS_MESSAGE'>/** Detailed string representation of the status, including raw details that
+</span> are useful for debugging.
+
+ @see Intent#getStringExtra(String)
+*/
+EXTRA_STATUS_MESSAGE : &quot;android.content.pm.extra.STATUS_MESSAGE&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_OTHER_PACKAGE_NAME'>/** Another package name relevant to a status. This is typically the package
+</span> responsible for causing an operation failure.
+
+ @see Intent#getStringExtra(String)
+*/
+EXTRA_OTHER_PACKAGE_NAME : &quot;android.content.pm.extra.OTHER_PACKAGE_NAME&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_STORAGE_PATH'>/** Storage path relevant to a status.
+</span>
+ @see Intent#getStringExtra(String)
+*/
+EXTRA_STORAGE_PATH : &quot;android.content.pm.extra.STORAGE_PATH&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_PACKAGE_NAMES'>/**{@hide} */
+</span>EXTRA_PACKAGE_NAMES : &quot;android.content.pm.extra.PACKAGE_NAMES&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_LEGACY_STATUS'>/**{@hide} */
+</span>EXTRA_LEGACY_STATUS : &quot;android.content.pm.extra.LEGACY_STATUS&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_LEGACY_BUNDLE'>/**{@hide} */
+</span>EXTRA_LEGACY_BUNDLE : &quot;android.content.pm.extra.LEGACY_BUNDLE&quot;,
+<span id='android-content-pm-PackageInstaller-property-EXTRA_CALLBACK'>/**{@hide} */
+</span>EXTRA_CALLBACK : &quot;android.content.pm.extra.CALLBACK&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_PENDING_USER_ACTION'>/** User action is currently required to proceed. You can launch the intent
+</span> activity described by {@link Intent#EXTRA_INTENT} to involve the user and
+ continue.
+ &lt;p&gt;
+ You may choose to immediately launch the intent if the user is actively
+ using your app. Otherwise, you should use a notification to guide the
+ user back into your app before launching.
+
+ @see Intent#getParcelableExtra(String)
+*/
+STATUS_PENDING_USER_ACTION : &quot;-1&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_SUCCESS'>/** The operation succeeded.
+</span>*/
+STATUS_SUCCESS : &quot;0&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_FAILURE'>/** The operation failed in a generic way. The system will always try to
+</span> provide a more specific failure reason, but in some rare cases this may
+ be delivered.
+
+ @see #EXTRA_STATUS_MESSAGE
+*/
+STATUS_FAILURE : &quot;1&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_FAILURE_BLOCKED'>/** The operation failed because it was blocked. For example, a device policy
+</span> may be blocking the operation, a package verifier may have blocked the
+ operation, or the app may be required for core system operation.
+ &lt;p&gt;
+ The result may also contain {@link #EXTRA_OTHER_PACKAGE_NAME} with the
+ specific package blocking the install.
+
+ @see #EXTRA_STATUS_MESSAGE
+ @see #EXTRA_OTHER_PACKAGE_NAME
+*/
+STATUS_FAILURE_BLOCKED : &quot;2&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_FAILURE_ABORTED'>/** The operation failed because it was actively aborted. For example, the
+</span> user actively declined requested permissions, or the session was
+ abandoned.
+
+ @see #EXTRA_STATUS_MESSAGE
+*/
+STATUS_FAILURE_ABORTED : &quot;3&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_FAILURE_INVALID'>/** The operation failed because one or more of the APKs was invalid. For
+</span> example, they might be malformed, corrupt, incorrectly signed,
+ mismatched, etc.
+
+ @see #EXTRA_STATUS_MESSAGE
+*/
+STATUS_FAILURE_INVALID : &quot;4&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_FAILURE_CONFLICT'>/** The operation failed because it conflicts (or is inconsistent with) with
+</span> another package already installed on the device. For example, an existing
+ permission, incompatible certificates, etc. The user may be able to
+ uninstall another app to fix the issue.
+ &lt;p&gt;
+ The result may also contain {@link #EXTRA_OTHER_PACKAGE_NAME} with the
+ specific package identified as the cause of the conflict.
+
+ @see #EXTRA_STATUS_MESSAGE
+ @see #EXTRA_OTHER_PACKAGE_NAME
+*/
+STATUS_FAILURE_CONFLICT : &quot;5&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_FAILURE_STORAGE'>/** The operation failed because of storage issues. For example, the device
+</span> may be running low on space, or external media may be unavailable. The
+ user may be able to help free space or insert different external media.
+ &lt;p&gt;
+ The result may also contain {@link #EXTRA_STORAGE_PATH} with the path to
+ the storage device that caused the failure.
+
+ @see #EXTRA_STATUS_MESSAGE
+ @see #EXTRA_STORAGE_PATH
+*/
+STATUS_FAILURE_STORAGE : &quot;6&quot;,
+<span id='android-content-pm-PackageInstaller-property-STATUS_FAILURE_INCOMPATIBLE'>/** The operation failed because it is fundamentally incompatible with this
+</span> device. For example, the app may require a hardware feature that doesn't
+ exist, it may be missing native code for the ABIs supported by the
+ device, or it requires a newer SDK version, etc.
+
+ @see #EXTRA_STATUS_MESSAGE
+*/
+STATUS_FAILURE_INCOMPATIBLE : &quot;7&quot;,
+<span id='android-content-pm-PackageInstaller-method-createSession'>/**Create a new session using the given parameters, returning a unique ID
+</span> that represents the session. Once created, the session can be opened
+ multiple times across multiple device boots.
+ &lt;p&gt;
+ The system may automatically destroy sessions that have not been
+ finalized (either committed or abandoned) within a reasonable period of
+ time, typically on the order of a day.
+@throws IOException if parameters were unsatisfiable, such as lack of
+             disk space or unavailable media.
+@throws SecurityException when installation services are unavailable,
+             such as when called from a restricted user.
+@throws IllegalArgumentException when {@link SessionParams} is invalid.
+@return {Number} positive, non-zero unique ID that represents the created session.
+         This ID remains consistent across device reboots until the
+         session is finalized. IDs are not reused during a given boot.
+*/
+createSession : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-openSession'>/**Open an existing session to actively perform work. To succeed, the caller
+</span> must be the owner of the install session.
+@throws IOException if parameters were unsatisfiable, such as lack of
+             disk space or unavailable media.
+@throws SecurityException when the caller does not own the session, or
+             the session is invalid.
+*/
+openSession : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-updateSessionAppIcon'>/**Update the icon representing the app being installed in a specific
+</span> session. This should be roughly
+ {@link android.content.pm.PackageParser.ActivityManager#getLauncherLargeIconSize()} in both dimensions.
+@throws SecurityException when the caller does not own the session, or
+             the session is invalid.
+*/
+updateSessionAppIcon : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-updateSessionAppLabel'>/**Update the label representing the app being installed in a specific
+</span> session.
+@throws SecurityException when the caller does not own the session, or
+             the session is invalid.
+*/
+updateSessionAppLabel : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-abandonSession'>/**Completely abandon the given session, destroying all staged data and
+</span> rendering it invalid. Abandoned sessions will be reported to
+ {@link android.content.pm.PackageInstaller.SessionCallback} listeners as failures. This is equivalent to
+ opening the session and calling {@link android.content.pm.PackageInstaller.Session#abandon()}.
+@throws SecurityException when the caller does not own the session, or
+             the session is invalid.
+*/
+abandonSession : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-getSessionInfo'>/**Return details for a specific session. No special permissions are
+</span> required to retrieve these details.
+@return {Object {android.content.pm.PackageInstaller.SessionInfo}} details for the requested session, or {@code null} if the session
+         does not exist.
+*/
+getSessionInfo : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-getAllSessions'>/**Return list of all known install sessions, regardless of the installer.
+</span>*/
+getAllSessions : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-getMySessions'>/**Return list of all known install sessions owned by the calling app.
+</span>*/
+getMySessions : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-getStagedSessions'>/**Return list of all staged install sessions.
+</span>*/
+getStagedSessions : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-getActiveStagedSession'>/**Returns an active staged session, or {@code null} if there is none.
+</span>
+ &lt;p&gt;Staged session is active iff:
+ &lt;ul&gt;
+     &lt;li&gt;It is committed, i.e. {@link android.content.pm.PackageInstaller.SessionInfo#isCommitted()} is {@code true}, and
+     &lt;li&gt;it is not applied, i.e. {@link android.content.pm.PackageInstaller.SessionInfo#isStagedSessionApplied()} is {@code
+     false}, and
+     &lt;li&gt;it is not failed, i.e. {@link android.content.pm.PackageInstaller.SessionInfo#isStagedSessionFailed()} is {@code false}.
+ &lt;/ul&gt;
+
+ &lt;p&gt;In case of a multi-apk session, reasoning above is applied to the parent session, since
+ that is the one that should been {@link android.content.pm.PackageInstaller.Session#commit committed}.
+*/
+getActiveStagedSession : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-uninstall'>/**Uninstall the given package, removing it completely from the device. This
+</span> method is available to:
+ &lt;ul&gt;
+ &lt;li&gt;the current &quot;installer of record&quot; for the package
+ &lt;li&gt;the device owner
+ &lt;li&gt;the affiliated profile owner
+ &lt;/ul&gt;
+@param {String} packageName The package to uninstall.
+@param {Object {IntentSender}} statusReceiver Where to deliver the result.
+@see android.app.admin.DevicePolicyManager
+*/
+uninstall : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-uninstall'>/**Uninstall the given package, removing it completely from the device. This
+</span> method is only available to the current &quot;installer of record&quot; for the
+ package.
+@param {String} packageName The package to uninstall.
+@param {Number} flags Flags for uninstall.
+@param {Object {IntentSender}} statusReceiver Where to deliver the result.
+@hide 
+*/
+uninstall : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-uninstall'>/**Uninstall the given package with a specific version code, removing it
+</span> completely from the device. If the version code of the package
+ does not match the one passed in the versioned package argument this
+ method is a no-op. Use {@link android.content.pm.PackageParser.PackageManager#VERSION_CODE_HIGHEST} to
+ uninstall the latest version of the package.
+ &lt;p&gt;
+ This method is available to:
+ &lt;ul&gt;
+ &lt;li&gt;the current &quot;installer of record&quot; for the package
+ &lt;li&gt;the device owner
+ &lt;li&gt;the affiliated profile owner
+ &lt;/ul&gt;
+@param {Object {VersionedPackage}} versionedPackage The versioned package to uninstall.
+@param {Object {IntentSender}} statusReceiver Where to deliver the result.
+@see android.app.admin.DevicePolicyManager
+*/
+uninstall : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-uninstall'>/**Uninstall the given package with a specific version code, removing it
+</span> completely from the device. This method is only available to the current
+ &quot;installer of record&quot; for the package. If the version code of the package
+ does not match the one passed in the versioned package argument this
+ method is a no-op. Use {@link android.content.pm.PackageParser.PackageManager#VERSION_CODE_HIGHEST} to
+ uninstall the latest version of the package.
+@param {Object {VersionedPackage}} versionedPackage The versioned package to uninstall.
+@param {Number} flags Flags for uninstall.
+@param {Object {IntentSender}} statusReceiver Where to deliver the result.
+@hide 
+*/
+uninstall : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-installExistingPackage'>/**Install the given package, which already exists on the device, for the user for which this
+</span> installer was created.
+
+ &lt;p&gt;This will
+ {@link android.content.pm.PackageParser.PackageInstaller.SessionParams#setWhitelistedRestrictedPermissions(Set) whitelist
+ all restricted permissions}.
+@param {String} packageName The package to install.
+@param {Number} installReason Reason for install.
+@param {Object {IntentSender}} statusReceiver Where to deliver the result.
+*/
+installExistingPackage : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-setPermissionsResult'>/**{@hide}
+</span>*/
+setPermissionsResult : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-addSessionCallback'>/**{@hide}
+</span>*/
+addSessionCallback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-registerSessionCallback'>/**Register to watch for session lifecycle events. No special permissions
+</span> are required to watch for these events.
+*/
+registerSessionCallback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-addSessionCallback'>/**{@hide}
+</span>*/
+addSessionCallback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-registerSessionCallback'>/**Register to watch for session lifecycle events. No special permissions
+</span> are required to watch for these events.
+@param {Object {PackageInstaller.SessionCallback}} handler to dispatch callback events through, otherwise uses
+            calling thread.
+*/
+registerSessionCallback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-removeSessionCallback'>/**{@hide}
+</span>*/
+removeSessionCallback : function(  ) {},
+
+<span id='android-content-pm-PackageInstaller-method-unregisterSessionCallback'>/**Unregister a previously registered callback.
+</span>*/
+unregisterSessionCallback : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

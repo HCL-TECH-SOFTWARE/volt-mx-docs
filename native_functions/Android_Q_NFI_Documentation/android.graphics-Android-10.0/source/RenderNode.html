@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-RenderNode'>/**@class android.graphics.RenderNode
+</span>@extends java.lang.Object
+
+ &lt;p&gt;RenderNode is used to build hardware accelerated rendering hierarchies. Each RenderNode
+ contains both a display list as well as a set of properties that affect the rendering of the
+ display list. RenderNodes are used internally for all Views by default and are not typically
+ used directly.&lt;/p&gt;
+
+ &lt;p&gt;RenderNodes are used to divide up the rendering content of a complex scene into smaller
+ pieces that can then be updated individually more cheaply. Updating part of the scene only needs
+ to update the display list or properties of a small number of RenderNode instead of redrawing
+ everything from scratch. A RenderNode only needs its display list re-recorded when its content
+ alone should be changed. RenderNodes can also be transformed without re-recording the display
+ list through the transform properties.&lt;/p&gt;
+
+ &lt;p&gt;A text editor might for instance store each paragraph into its own RenderNode.
+ Thus when the user inserts or removes characters, only the display list of the
+ affected paragraph needs to be recorded again.&lt;/p&gt;
+
+ &lt;h3&gt;Hardware acceleration&lt;/h3&gt;
+ &lt;p&gt;RenderNodes can be drawn using a {@link android.graphics.RecordingCanvas}. They are not
+ supported in software. Always make sure that the {@link android.graphics.Canvas}
+ you are using to render a display list is hardware accelerated using
+ {@link android.graphics.Canvas#isHardwareAccelerated()}.&lt;/p&gt;
+
+ &lt;h3&gt;Creating a RenderNode&lt;/h3&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     RenderNode renderNode = new RenderNode(&quot;myRenderNode&quot;);
+     renderNode.setLeftTopRightBottom(0, 0, 50, 50); // Set the size to 50x50
+     RecordingCanvas canvas = renderNode.beginRecording();
+     try {
+         // Draw with the canvas
+         canvas.drawRect(...);
+     } finally {
+         renderNode.endRecording();
+     }&lt;/pre&gt;
+
+ &lt;h3&gt;Drawing a RenderNode in a View&lt;/h3&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     protected void onDraw(Canvas canvas) {
+         if (canvas.isHardwareAccelerated()) {
+             // Check that the RenderNode has a display list, re-recording it if it does not.
+             if (!myRenderNode.hasDisplayList()) {
+                 updateDisplayList(myRenderNode);
+             }
+             // Draw the RenderNode into this canvas.
+             canvas.drawRenderNode(myRenderNode);
+         }
+     }&lt;/pre&gt;
+
+ &lt;h3&gt;Releasing resources&lt;/h3&gt;
+ &lt;p&gt;This step is not mandatory but recommended if you want to release resources
+ held by a display list as soon as possible. Most significantly any bitmaps it may contain.&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     // Discards the display list content allowing for any held resources to be released.
+     // After calling this
+     renderNode.discardDisplayList();&lt;/pre&gt;
+
+
+ &lt;h3&gt;Properties&lt;/h3&gt;
+ &lt;p&gt;In addition, a RenderNode offers several properties, such as
+ {@link #setScaleX}(float) or {@link #setTranslationX}(float), that can be used to affect all
+ the drawing commands recorded within. For instance, these properties can be used
+ to move around a large number of images without re-issuing all the individual
+ &lt;code&gt;canvas.drawBitmap()&lt;/code&gt; calls.&lt;/p&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     private void createDisplayList() {
+         mRenderNode = new RenderNode(&quot;MyRenderNode&quot;);
+         mRenderNode.setLeftTopRightBottom(0, 0, width, height);
+         RecordingCanvas canvas = mRenderNode.beginRecording();
+         try {
+             for (Bitmap b : mBitmaps) {
+                 canvas.drawBitmap(b, 0.0f, 0.0f, null);
+                 canvas.translate(0.0f, b.getHeight());
+             }
+         } finally {
+             mRenderNode.endRecording();
+         }
+     }
+
+     protected void onDraw(Canvas canvas) {
+         if (canvas.isHardwareAccelerated())
+             canvas.drawRenderNode(mRenderNode);
+         }
+     }
+
+     private void moveContentBy(int x) {
+          // This will move all the bitmaps recorded inside the display list
+          // by x pixels to the right and redraw this view. All the commands
+          // recorded in createDisplayList() won't be re-issued, only onDraw()
+          // will be invoked and will execute very quickly
+          mRenderNode.offsetLeftAndRight(x);
+          invalidate();
+     }&lt;/pre&gt;
+
+ &lt;p&gt;A few of the properties may at first appear redundant, such as {@link #setElevation}(float)
+ and {@link #setTranslationZ}(float). The reason for these duplicates are to allow for a
+ separation between static &amp; transient usages. For example consider a button that raises from 2dp
+ to 8dp when pressed. To achieve that an application may decide to setElevation(2dip), and then
+ on press to animate setTranslationZ to 6dip. Combined this achieves the final desired 8dip
+ value, but the animation need only concern itself with animating the lift from press without
+ needing to know the initial starting value. {@link #setTranslationX}(float) and
+ {@link #setTranslationY}(float) are similarly provided for animation uses despite the functional
+ overlap with {@link #setPosition}(Rect).
+
+ &lt;p&gt;The RenderNode's transform matrix is computed at render time as follows:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     Matrix transform = new Matrix();
+     transform.setTranslate(renderNode.getTranslationX(), renderNode.getTranslationY());
+     transform.preRotate(renderNode.getRotationZ(),
+             renderNode.getPivotX(), renderNode.getPivotY());
+     transform.preScale(renderNode.getScaleX(), renderNode.getScaleY(),
+             renderNode.getPivotX(), renderNode.getPivotY());&lt;/pre&gt;
+ The current canvas transform matrix, which is translated to the RenderNode's position,
+ is then multiplied by the RenderNode's transform matrix. Therefore the ordering of calling
+ property setters does not affect the result. That is to say that:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     renderNode.setTranslationX(100);
+     renderNode.setScaleX(100);&lt;/pre&gt;
+
+ is equivalent to:
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     renderNode.setScaleX(100);
+     renderNode.setTranslationX(100);&lt;/pre&gt;
+
+ &lt;h3&gt;Threading&lt;/h3&gt;
+ &lt;p&gt;RenderNode may be created and used on any thread but they are not thread-safe. Only
+ a single thread may interact with a RenderNode at any given time. It is critical
+ that the RenderNode is only used on the same thread it is drawn with. For example when using
+ RenderNode with a custom View, then that RenderNode must only be used from the UI thread.&lt;/p&gt;
+
+ &lt;h3&gt;When to re-render&lt;/h3&gt;
+ &lt;p&gt;Many of the RenderNode mutation methods, such as {@link #setTranslationX}(float), return
+ a boolean indicating if the value actually changed or not. This is useful in detecting
+ if a new frame should be rendered or not. A typical usage would look like:
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+     public void translateTo(int x, int y) {
+         boolean needsUpdate = myRenderNode.setTranslationX(x);
+         needsUpdate |= myRenderNode.setTranslationY(y);
+         if (needsUpdate) {
+             myOwningView.invalidate();
+         }
+     }&lt;/pre&gt;
+ This is marginally faster than doing a more explicit up-front check if the value changed by
+ comparing the desired value against {@link #getTranslationX}() as it minimizes JNI transitions.
+ The actual mechanism of requesting a new frame to be rendered will depend on how this
+ RenderNode is being drawn. If it's drawn to a containing View, as in the above snippet,
+ then simply invalidating that View works. If instead the RenderNode is being drawn to a Canvas
+ directly such as with {@link Surface#lockHardwareCanvas()} then a new frame needs to be drawn
+ by calling {@link Surface#lockHardwareCanvas()}, re-drawing the root RenderNode or whatever
+ top-level content is desired, and finally calling {@link Surface#unlockCanvasAndPost(Canvas)}.
+ &lt;/p&gt;
+*/
+var RenderNode = {
+
+<span id='android-graphics-RenderNode-property-mNativeRenderNode'>/** Not for general use; use only if you are ThreadedRenderer or RecordingCanvas.
+</span>
+ @hide
+*/
+mNativeRenderNode : &quot;null&quot;,
+<span id='android-graphics-RenderNode-property-USAGE_UNKNOWN'>/** The default usage hint
+</span>
+ @hide
+*/
+USAGE_UNKNOWN : &quot;0&quot;,
+<span id='android-graphics-RenderNode-property-USAGE_BACKGROUND'>/** Usage is background content
+</span>
+ @hide
+*/
+USAGE_BACKGROUND : &quot;1&quot;,
+<span id='android-graphics-RenderNode-method-create'>/**
+</span>@hide 
+*/
+create : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-adopt'>/**Adopts an existing native render node.
+</span>
+ Note: This will *NOT* incRef() on the native object, however it will
+ decRef() when it is destroyed. The caller should have already incRef'd it
+@hide 
+*/
+adopt : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-addPositionUpdateListener'>/**Enable callbacks for position changes. Call only from the UI thread or with
+</span> external synchronization.
+@hide 
+*/
+addPositionUpdateListener : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-removePositionUpdateListener'>/**Disable a callback for position changes. Call only from the UI thread or with
+</span> external synchronization.
+@param {Object {RenderNode.PositionUpdateListener}} listener Callback to remove
+@hide 
+*/
+removePositionUpdateListener : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-beginRecording'>/**Starts recording a display list for the render node. All
+</span> operations performed on the returned canvas are recorded and
+ stored in this display list.
+
+ {@link #endRecording}() must be called when the recording is finished in order to apply
+ the updated display list. Failing to call {@link #endRecording}() will result in an
+ {@link IllegalStateException} if {@link #beginRecording(int, int)} is called again.
+@param {Number} width  The width of the recording viewport. This will not alter the width of the
+               RenderNode itself, that must be set with {@link #setPosition(Rect)}.
+@param {Number} height The height of the recording viewport. This will not alter the height of the
+               RenderNode itself, that must be set with {@link #setPosition(Rect)}.
+@return {Object {android.graphics.RecordingCanvas}} A canvas to record drawing operations.
+@throws IllegalStateException If a recording is already in progress. That is, the previous
+ call to {@link #beginRecording(int, int)} did not call {@link #endRecording()}.
+@see #endRecording()
+@see #hasDisplayList()
+*/
+beginRecording : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-beginRecording'>/**Same as {@link #beginRecording(int, int)} with the width &amp; height set
+</span> to the RenderNode's own width &amp; height. The RenderNode's width &amp; height may be set
+ with {@link #setPosition(int, int, int, int)}.
+@return {Object {android.graphics.RecordingCanvas}} A canvas to record drawing operations.
+@throws IllegalStateException If a recording is already in progress. That is, the previous
+ call to {@link #beginRecording(int, int)} did not call {@link #endRecording()}.
+@see #endRecording()
+@see #hasDisplayList()
+*/
+beginRecording : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-endRecording'>/**`
+</span> Ends the recording for this display list. Calling this method marks
+ the display list valid and {@link #hasDisplayList}() will return true.
+@see #beginRecording(int, int)
+@see #hasDisplayList()
+*/
+endRecording : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-start'>/**
+</span>@hide 
+@deprecated use {@link #beginRecording(int, int)} instead
+*/
+start : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-end'>/**
+</span>@hide 
+@deprecated use {@link #endRecording()} instead
+*/
+end : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-discardDisplayList'>/**Reset native resources. This is called when cleaning up the state of display lists
+</span> during destruction of hardware resources, to ensure that we do not hold onto
+ obsolete resources after related resources are gone.
+*/
+discardDisplayList : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-hasDisplayList'>/**Returns whether the RenderNode has a display list. If this returns false, the RenderNode
+</span> should be re-recorded with {@link #beginRecording}() and {@link #endRecording}().
+
+ A RenderNode without a display list may still be drawn, however it will have no impact
+ on the rendering content until its display list is updated.
+
+ When a RenderNode is no longer drawn by anything the system may automatically
+ invoke {@link #discardDisplayList}(). It is therefore important to ensure that
+ {@link #hasDisplayList}() is true on a RenderNode prior to drawing it.
+
+ See {@link #discardDisplayList}()
+@return {Boolean} boolean true if this RenderNode has a display list, false otherwise.
+*/
+hasDisplayList : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-hasIdentityMatrix'>/**Whether or not the RenderNode has an identity transform. This is a faster
+</span> way to do the otherwise equivalent {@link #getMatrix}(Matrix) {@link android.graphics.Matrix#isIdentity()}
+ as it doesn't require copying the Matrix first, thus minimizing overhead.
+@return {Boolean} true if the RenderNode has an identity transform, false otherwise
+*/
+hasIdentityMatrix : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getMatrix'>/**Gets the current transform matrix
+</span>@param {Object {Matrix}} outMatrix The matrix to store the transform of the RenderNode
+*/
+getMatrix : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getInverseMatrix'>/**Gets the current transform inverted. This is a faster way to do the otherwise
+</span> equivalent {@link #getMatrix}(Matrix) followed by {@link android.graphics.Matrix#invert(android.graphics.Matrix)}
+@param {Object {Matrix}} outMatrix The matrix to store the inverse transform of the RenderNode
+*/
+getInverseMatrix : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setLayerType'>/**
+</span>@hide 
+@deprecated use {@link #setUseCompositingLayer(boolean, Paint)} instead
+*/
+setLayerType : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setLayerPaint'>/**
+</span>@hide 
+@deprecated use {@link #setUseCompositingLayer(boolean, Paint)} instead
+*/
+setLayerPaint : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setUseCompositingLayer'>/**Controls whether or not to force this RenderNode to render to an intermediate buffer.
+</span> Internally RenderNode will already promote itself to a composition layer if it's useful
+ for performance or required for the current combination of {@link #setAlpha}(float) and
+ {@link #setHasOverlappingRendering}(boolean).
+
+ &lt;p&gt;The usage of this is instead to allow for either overriding of the internal behavior
+ if it's measured to be necessary for the particular rendering content in question or, more
+ usefully, to add a composition effect to the RenderNode via the optional paint parameter.
+
+ &lt;p&gt;Note: When a RenderNode is using a compositing layer it will also result in
+ clipToBounds=true behavior.
+@param {Boolean} forceToLayer if true this forces the RenderNode to use an intermediate buffer.
+                     Default &amp; generally recommended value is false.
+@param {Object {Paint}} paint        The blend mode, alpha, and ColorFilter to apply to the compositing layer.
+                     Only applies if forceToLayer is true. The paint's alpha is multiplied
+                     with {@link #getAlpha()} to resolve the final alpha of the RenderNode.
+                     If null then no additional composition effects are applied on top of the
+                     composition layer.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setUseCompositingLayer : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getUseCompositingLayer'>/**Gets whether or not a compositing layer is forced to be used. The default &amp; recommended
+</span> is false, as it is typically faster to avoid using compositing layers.
+ See {@link #setUseCompositingLayer(boolean, android.graphics.Paint)}.
+@return {Boolean} true if a compositing layer is forced, false otherwise
+*/
+getUseCompositingLayer : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setClipRect'>/**Sets an additional clip on the RenderNode. If null, the extra clip is removed from the
+</span> RenderNode. If non-null, the RenderNode will be clipped to this rect. In addition  if
+ {@link #setClipToBounds}(boolean) is true, then the RenderNode will be clipped to the
+ intersection of this rectangle and the bounds of the render node, which is set with
+ {@link #setPosition}(Rect).
+
+ &lt;p&gt;This is equivalent to do a {@link android.graphics.Canvas#clipRect(Rect)} at the start of this
+ RenderNode's display list. However, as this is a property of the RenderNode instead
+ of part of the display list it can be more easily animated for transient additional
+ clipping. An example usage of this would be the {@link android.transition.ChangeBounds}
+ transition animation with the resizeClip=true option.
+@param {Object {Rect}} rect the bounds to clip to. If null, the additional clip is removed.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setClipRect : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setClipToBounds'>/**Set whether the Render node should clip itself to its bounds. This defaults to true,
+</span> and is useful to the renderer in enable quick-rejection of chunks of the tree as well as
+ better partial invalidation support. Clipping can be further restricted or controlled
+ through the combination of this property as well as {@link #setClipRect}(Rect), which
+ allows for a different clipping rectangle to be used in addition to or instead of the
+ {@link #setPosition(int, int, int, int)} or the RenderNode.
+@param {Boolean} clipToBounds true if the display list should clip to its bounds, false otherwise.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setClipToBounds : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getClipToBounds'>/**Returns whether or not the RenderNode is clipping to its bounds. See
+</span> {@link #setClipToBounds}(boolean) and {@link #setPosition(int, int, int, int)}
+@return {Boolean} true if the render node clips to its bounds, false otherwise.
+*/
+getClipToBounds : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setProjectBackwards'>/**&lt;p&gt;Sets whether the RenderNode should be drawn immediately after the
+</span> closest ancestor RenderNode containing a projection receiver.
+
+ &lt;p&gt;The default is false, and the rendering of this node happens in the typical draw order.
+
+ &lt;p&gt;If true, then at rendering time this rendernode will not be drawn in order with the
+ {@link android.graphics.Canvas#drawRenderNode(RenderNode)} command that drew this RenderNode, but instead
+ it will be re-positioned in the RenderNode tree to be drawn on the closet ancestor with a
+ child rendernode that has {@link #setProjectionReceiver}(boolean) as true.
+
+ &lt;p&gt;The typical usage of this is to allow a child RenderNode to draw on a parent's background,
+ such as the platform's usage with {@link android.graphics.drawable.RippleDrawable}. Consider
+ the following structure, built out of which RenderNode called drawRenderNode on a different
+ RenderNode:
+
+ &lt;pre&gt;
+        +-------------+
+        |RenderNode: P|
+        +-+----------++
+          |          |
+          v          v
+  +-------+-----+  +-+--------------+
+  |RenderNode: C|  |RenderNode: P'BG|
+  +-------+-----+  +----------------+
+          |
+          |
+ +--------+-------+
+ |RenderNode: C'BG|
+ +----------------+
+ &lt;/pre&gt;
+
+ If P'BG is a projection receiver, and C'BG is set to project backwards then C'BG will
+ behave as if it was drawn directly by P'BG instead of by C. This includes inheriting P'BG's
+ clip instead of C's clip.
+@param {Boolean} shouldProject true if the display list should be projected onto a
+                      containing volume. Default is false.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setProjectBackwards : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setProjectionReceiver'>/**Sets whether the RenderNode is a projection receiver. If true then this RenderNode's parent
+</span> should draw any descendant RenderNodes with ProjectBackwards=true directly on top of it.
+ Default value is false. See
+ {@link #setProjectBackwards}(boolean) for a description of what this entails.
+@param {Boolean} shouldRecieve True if this RenderNode is a projection receiver, false otherwise.
+                      Default is false.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setProjectionReceiver : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setOutline'>/**Sets the outline, defining the shape that casts a shadow, and the path to
+</span> be clipped if setClipToOutline is set.
+
+ This will make a copy of the provided {@link android.graphics.Outline}, so any future modifications
+ to the outline will need to call {@link #setOutline}(Outline) with the modified
+ outline for those changes to be applied.
+@param {Object {Outline}} outline The outline to use for this RenderNode.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setOutline : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-hasShadow'>/**Checks if the RenderNode has a shadow. That is, if the combination of {@link #getElevation}()
+</span> and {@link #getTranslationZ}() is greater than zero, there is an {@link android.graphics.Outline} set with
+ a valid shadow caster path, and the provided outline has a non-zero
+ {@link android.graphics.Outline#getAlpha()}.
+@return {Boolean} True if this RenderNode has a shadow, false otherwise
+*/
+hasShadow : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setSpotShadowColor'>/**Sets the color of the spot shadow that is drawn when the RenderNode has a positive Z or
+</span> elevation value and is drawn inside of a {@link android.graphics.Canvas#enableZ()} section.
+ &lt;p&gt;
+ By default the shadow color is black. Generally, this color will be opaque so the intensity
+ of the shadow is consistent between different RenderNodes with different colors.
+ &lt;p&gt;
+ The opacity of the final spot shadow is a function of the shadow caster height, the
+ alpha channel of the outlineSpotShadowColor (typically opaque), and the
+ {@link android.R.attr#spotShadowAlpha} theme attribute
+@param {Number} color The color this RenderNode will cast for its elevation spot shadow.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setSpotShadowColor : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getSpotShadowColor'>/**
+</span>@return {Number} The shadow color set by {@link #setSpotShadowColor(int)}, or black if nothing
+ was set
+*/
+getSpotShadowColor : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setAmbientShadowColor'>/**Sets the color of the ambient shadow that is drawn when the RenderNode has a positive Z or
+</span> elevation value and is drawn inside of a {@link android.graphics.Canvas#enableZ()} section.
+ &lt;p&gt;
+ By default the shadow color is black. Generally, this color will be opaque so the intensity
+ of the shadow is consistent between different RenderNodes with different colors.
+ &lt;p&gt;
+ The opacity of the final ambient shadow is a function of the shadow caster height, the
+ alpha channel of the outlineAmbientShadowColor (typically opaque), and the
+ {@link android.R.attr#ambientShadowAlpha} theme attribute.
+@param {Number} color The color this RenderNode will cast for its elevation shadow.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setAmbientShadowColor : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getAmbientShadowColor'>/**
+</span>@return {Number} The shadow color set by {@link #setAmbientShadowColor(int)}, or black if
+ nothing was set
+*/
+getAmbientShadowColor : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setClipToOutline'>/**Enables or disables clipping to the outline.
+</span>@param {Boolean} clipToOutline true if clipping to the outline.
+@return {Boolean} True if the clipToOutline value changed, false if previous value matched the new
+         value.
+*/
+setClipToOutline : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getClipToOutline'>/**See {@link #setClipToOutline}(boolean)
+</span>@return {Boolean} True if this RenderNode clips to its outline, false otherwise
+*/
+getClipToOutline : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setRevealClip'>/**Controls the RenderNode's circular reveal clip.
+</span>@hide 
+*/
+setRevealClip : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setStaticMatrix'>/**Set the static matrix on the display list. The specified matrix is combined with other
+</span> transforms (such as {@link #setScaleX}(float), {@link #setRotationZ}(float), etc.)
+@param {Object {Matrix}} matrix A transform matrix to apply to this display list
+@hide TODO Do we want this?
+*/
+setStaticMatrix : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setAnimationMatrix'>/**Set the Animation matrix on the display list. This matrix exists if an Animation is
+</span> currently playing on a View, and is set on the display list during at draw() time. When
+ the Animation finishes, the matrix should be cleared by sending &lt;code&gt;null&lt;/code&gt;
+ for the matrix parameter.
+@param {Object {Matrix}} matrix The matrix, null indicates that the matrix should be cleared.
+@see #getAnimationMatrix()
+@hide TODO Do we want this?
+*/
+setAnimationMatrix : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getAnimationMatrix'>/**Returns the previously set Animation matrix. This matrix exists if an Animation is
+</span> currently playing on a View, and is set on the display list during at draw() time.
+ Returns &lt;code&gt;null&lt;/code&gt; when there is no transformation provided by
+ {@link #setAnimationMatrix}(Matrix).
+@return {Object {android.graphics.Matrix}} the current Animation matrix.
+@see #setAnimationMatrix(Matrix)
+@hide 
+*/
+getAnimationMatrix : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setAlpha'>/**Sets the translucency level for the display list.
+</span>@param {Number} alpha The translucency of the display list, must be a value between 0.0f and 1.0f
+@see View#setAlpha(float)
+@see #getAlpha()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getAlpha'>/**Returns the translucency level of this display list.
+</span>@return {Number} A value between 0.0f and 1.0f
+@see #setAlpha(float)
+*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setHasOverlappingRendering'>/**Sets whether the display list renders content which overlaps. Non-overlapping rendering
+</span> can use a fast path for alpha that avoids rendering to an offscreen buffer. By default
+ display lists consider they do not have overlapping content.
+@param {Boolean} hasOverlappingRendering False if the content is guaranteed to be non-overlapping,
+                                true otherwise.
+@see android.view.View#hasOverlappingRendering()
+@see #hasOverlappingRendering()
+*/
+setHasOverlappingRendering : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setUsageHint'>/**Provides a hint on what this RenderNode's display list content contains. This hint is used
+</span> for automatic content transforms to improve accessibility or similar.
+@hide 
+*/
+setUsageHint : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-hasOverlappingRendering'>/**Indicates whether the content of this display list overlaps.
+</span>@return {Boolean} True if this display list renders content which overlaps, false otherwise.
+@see #setHasOverlappingRendering(boolean)
+*/
+hasOverlappingRendering : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setElevation'>/**Sets the base elevation of this RenderNode in pixels
+</span>@param {Number} lift the elevation in pixels
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setElevation : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getElevation'>/**See {@link #setElevation}(float)
+</span>@return {Number} The RenderNode's current elevation
+*/
+getElevation : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setTranslationX'>/**Sets the translation value for the display list on the X axis.
+</span>@param {Number} translationX The X axis translation value of the display list, in pixels
+@see View#setTranslationX(float)
+@see #getTranslationX()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setTranslationX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getTranslationX'>/**Returns the translation value for this display list on the X axis, in pixels.
+</span>@see #setTranslationX(float)
+*/
+getTranslationX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setTranslationY'>/**Sets the translation value for the display list on the Y axis.
+</span>@param {Number} translationY The Y axis translation value of the display list, in pixels
+@see View#setTranslationY(float)
+@see #getTranslationY()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setTranslationY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getTranslationY'>/**Returns the translation value for this display list on the Y axis, in pixels.
+</span>@see #setTranslationY(float)
+*/
+getTranslationY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setTranslationZ'>/**Sets the translation value for the display list on the Z axis.
+</span>@see View#setTranslationZ(float)
+@see #getTranslationZ()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setTranslationZ : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getTranslationZ'>/**Returns the translation value for this display list on the Z axis.
+</span>@see #setTranslationZ(float)
+*/
+getTranslationZ : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setRotationZ'>/**Sets the rotation value for the display list around the Z axis.
+</span>@param {Number} rotation The rotation value of the display list, in degrees
+@see View#setRotationZ(float)
+@see #getRotationZ()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setRotationZ : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getRotationZ'>/**Returns the rotation value for this display list around the Z axis, in degrees.
+</span>@see #setRotationZ(float)
+*/
+getRotationZ : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setRotationX'>/**Sets the rotation value for the display list around the X axis.
+</span>@param {Number} rotationX The rotation value of the display list, in degrees
+@see View#setRotationX(float)
+@see #getRotationX()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setRotationX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getRotationX'>/**Returns the rotation value for this display list around the X axis, in degrees.
+</span>@see #setRotationX(float)
+*/
+getRotationX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setRotationY'>/**Sets the rotation value for the display list around the Y axis.
+</span>@param {Number} rotationY The rotation value of the display list, in degrees
+@see View#setRotationY(float)
+@see #getRotationY()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setRotationY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getRotationY'>/**Returns the rotation value for this display list around the Y axis, in degrees.
+</span>@see #setRotationY(float)
+*/
+getRotationY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setScaleX'>/**Sets the scale value for the display list on the X axis.
+</span>@param {Number} scaleX The scale value of the display list
+@see View#setScaleX(float)
+@see #getScaleX()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setScaleX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getScaleX'>/**Returns the scale value for this display list on the X axis.
+</span>@see #setScaleX(float)
+*/
+getScaleX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setScaleY'>/**Sets the scale value for the display list on the Y axis.
+</span>@param {Number} scaleY The scale value of the display list
+@see View#setScaleY(float)
+@see #getScaleY()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setScaleY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getScaleY'>/**Returns the scale value for this display list on the Y axis.
+</span>@see #setScaleY(float)
+*/
+getScaleY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setPivotX'>/**Sets the pivot value for the display list on the X axis
+</span>@param {Number} pivotX The pivot value of the display list on the X axis, in pixels
+@see View#setPivotX(float)
+@see #getPivotX()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setPivotX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getPivotX'>/**Returns the pivot value for this display list on the X axis, in pixels.
+</span>@see #setPivotX(float)
+*/
+getPivotX : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setPivotY'>/**Sets the pivot value for the display list on the Y axis
+</span>@param {Number} pivotY The pivot value of the display list on the Y axis, in pixels
+@see View#setPivotY(float)
+@see #getPivotY()
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setPivotY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getPivotY'>/**Returns the pivot value for this display list on the Y axis, in pixels.
+</span>@see #setPivotY(float)
+*/
+getPivotY : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-isPivotExplicitlySet'>/**
+</span>@return {Boolean} Whether or not a pivot was explicitly set with {@link #setPivotX(float)} or
+ {@link #setPivotY(float)}. If no pivot has been set then the pivot will be the center
+ of the RenderNode.
+*/
+isPivotExplicitlySet : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-resetPivot'>/**Clears any pivot previously set by a call to  {@link #setPivotX}(float) or
+</span> {@link #setPivotY}(float). After calling this {@link #isPivotExplicitlySet}() will be false
+ and the pivot used for rotation will return to default of being centered on the view.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+resetPivot : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setCameraDistance'>/**&lt;p&gt;Sets the distance along the Z axis (orthogonal to the X/Y plane on which
+</span> RenderNodes are drawn) from the camera to this RenderNode. The camera's distance
+ affects 3D transformations, for instance rotations around the X and Y
+ axis. If the rotationX or rotationY properties are changed and this view is
+ large (more than half the size of the screen), it is recommended to always
+ use a camera distance that's greater than the height (X axis rotation) or
+ the width (Y axis rotation) of this view.&lt;/p&gt;
+
+ &lt;p&gt;The distance of the camera from the drawing plane can have an affect on the
+ perspective distortion of the RenderNode when it is rotated around the x or y axis.
+ For example, a large distance will result in a large viewing angle, and there
+ will not be much perspective distortion of the view as it rotates. A short
+ distance may cause much more perspective distortion upon rotation, and can
+ also result in some drawing artifacts if the rotated view ends up partially
+ behind the camera (which is why the recommendation is to use a distance at
+ least as far as the size of the view, if the view is to be rotated.)&lt;/p&gt;
+
+ &lt;p&gt;The distance is expressed in pixels and must always be positive&lt;/p&gt;
+@param {Number} distance The distance in pixels, must always be positive
+@see #setRotationX(float)
+@see #setRotationY(float)
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setCameraDistance : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getCameraDistance'>/**Returns the distance in Z of the camera for this RenderNode
+</span>@return {Number} the distance along the Z axis in pixels.
+@see #setCameraDistance(float)
+*/
+getCameraDistance : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setLeft'>/**Sets the left position for the RenderNode.
+</span>@param {Number} left The left position, in pixels, of the RenderNode
+@return {Boolean} true if the value changed, false otherwise
+@hide 
+*/
+setLeft : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setTop'>/**Sets the top position for the RenderNode.
+</span>@param {Number} top The top position, in pixels, of the RenderNode
+@return {Boolean} true if the value changed, false otherwise.
+@hide 
+*/
+setTop : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setRight'>/**Sets the right position for the RenderNode.
+</span>@param {Number} right The right position, in pixels, of the RenderNode
+@return {Boolean} true if the value changed, false otherwise.
+@hide 
+*/
+setRight : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setBottom'>/**Sets the bottom position for the RenderNode.
+</span>@param {Number} bottom The bottom position, in pixels, of the RenderNode
+@return {Boolean} true if the value changed, false otherwise.
+@hide 
+*/
+setBottom : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getLeft'>/**Gets the left position for the RenderNode.
+</span>@return {Number} the left position in pixels
+*/
+getLeft : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getTop'>/**Gets the top position for the RenderNode.
+</span>@return {Number} the top position in pixels
+*/
+getTop : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getRight'>/**Gets the right position for the RenderNode.
+</span>@return {Number} the right position in pixels
+*/
+getRight : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getBottom'>/**Gets the bottom position for the RenderNode.
+</span>@return {Number} the bottom position in pixels
+*/
+getBottom : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getWidth'>/**Gets the width of the RenderNode, which is the right - left.
+</span>@return {Number} the width of the RenderNode
+*/
+getWidth : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getHeight'>/**Gets the height of the RenderNode, which is the bottom - top.
+</span>@return {Number} the height of the RenderNode
+*/
+getHeight : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setLeftTopRightBottom'>/**Sets the left, top, right, and bottom of the RenderNode.
+</span>@param {Number} left   The left position of the RenderNode, in pixels
+@param {Number} top    The top position of the RenderNode, in pixels
+@param {Number} right  The right position of the RenderNode, in pixels
+@param {Number} bottom The bottom position of the RenderNode, in pixels
+@return {Boolean} true if any values changed, false otherwise.
+@hide 
+*/
+setLeftTopRightBottom : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setPosition'>/**Sets the position of the RenderNode.
+</span>@param {Number} left   The left position of the RenderNode, in pixels
+@param {Number} top    The top position of the RenderNode, in pixels
+@param {Number} right  The right position of the RenderNode, in pixels
+@param {Number} bottom The bottom position of the RenderNode, in pixels
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setPosition : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setPosition'>/**Sets the position of the RenderNode.
+</span>@param {Object {Rect}} position The position rectangle in pixels
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setPosition : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-offsetLeftAndRight'>/**Offsets the left and right positions for the RenderNode
+</span>@param {Number} offset The amount that the left and right positions are offset in pixels
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+offsetLeftAndRight : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-offsetTopAndBottom'>/**Offsets the top and bottom values for the RenderNode
+</span>@param {Number} offset The amount that the left and right positions are offset in pixels
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+offsetTopAndBottom : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-output'>/**Outputs the RenderNode to the log. This method exists for use by
+</span> tools to output display lists for selected nodes to the log.
+@hide TODO: Expose? Should the shape of this be different than forced dump to logcat?
+*/
+output : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-computeApproximateMemoryUsage'>/**Gets the approximate memory usage of the RenderNode for debug purposes. Does not include
+</span> the memory usage of any child RenderNodes nor any bitmaps, only the memory usage of
+ this RenderNode and any data it owns.
+@return {Number} Approximate memory usage in bytes.
+*/
+computeApproximateMemoryUsage : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-setForceDarkAllowed'>/**Sets whether or not to allow force dark to apply to this RenderNode.
+</span>
+ Setting this to false will disable the auto-dark feature on everything this RenderNode
+ draws, including any descendants.
+
+ Setting this to true will allow this RenderNode to be automatically made dark, however
+ a value of 'true' will not override any 'false' value in its parent chain nor will
+ it prevent any 'false' in any of its children.
+@param {Boolean} allow Whether or not to allow force dark.
+@return {Boolean} True if the value changed, false if the new value was the same as the previous value.
+*/
+setForceDarkAllowed : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-isForceDarkAllowed'>/**See {@link #setForceDarkAllowed}(boolean)
+</span>@return {Boolean} true if force dark is allowed (default), false if it is disabled
+*/
+isForceDarkAllowed : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-getUniqueId'>/**Returns the unique ID that identifies this RenderNode. This ID is unique for the
+</span> lifetime of the process. IDs are reset on process death, and are unique only within
+ the process.
+
+ This ID is intended to be used with debugging tools to associate a particular
+ RenderNode across different debug dumping &amp; inspection tools. For example
+ a View layout inspector should include the unique ID for any RenderNodes that it owns
+ to associate the drawing content with the layout content.
+@return {Number} the unique ID for this RenderNode
+*/
+getUniqueId : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-addAnimator'>/**
+</span>@hide 
+*/
+addAnimator : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-isAttached'>/**
+</span>@hide 
+*/
+isAttached : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-registerVectorDrawableAnimator'>/**
+</span>@hide 
+*/
+registerVectorDrawableAnimator : function(  ) {},
+
+<span id='android-graphics-RenderNode-method-endAllAnimators'>/**
+</span>@hide 
+*/
+endAllAnimators : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-util-WakeupMessage'>/**@class com.android.internal.util.WakeupMessage
+</span> implements android.app.AlarmManager.OnAlarmListener
+
+@extends java.lang.Object
+
+ An AlarmListener that sends the specified message to a Handler and keeps the system awake until
+ the message is processed.
+
+ This is useful when using the AlarmManager direct callback interface to wake up the system and
+ request that an object whose API consists of messages (such as a StateMachine) perform some
+ action.
+
+ In this situation, using AlarmManager.onAlarmListener by itself will wake up the system to send
+ the message, but does not guarantee that the system will be awake until the target object has
+ processed it. This is because as soon as the onAlarmListener sends the message and returns, the
+ AlarmManager releases its wakelock and the system is free to go to sleep again.
+*/
+var WakeupMessage = {
+
+<span id='com-android-internal-util-WakeupMessage-method-schedule'>/**Schedule the message to be delivered at the time in milliseconds of the
+</span> {@link android.os.SystemClock#elapsedRealtime SystemClock.elapsedRealtime()} clock and wakeup
+ the device when it goes off. If schedule is called multiple times without the message being
+ dispatched then the alarm is rescheduled to the new time.
+*/
+schedule : function(  ) {},
+
+<span id='com-android-internal-util-WakeupMessage-method-cancel'>/**Cancel all pending messages. This includes alarms that may have been fired, but have not been
+</span> run on the handler yet.
+*/
+cancel : function(  ) {},
+
+<span id='com-android-internal-util-WakeupMessage-method-onAlarm'>/**
+</span>*/
+onAlarm : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

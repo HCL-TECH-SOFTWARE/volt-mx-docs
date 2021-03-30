@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-ProxyFileDescriptorCallback'>/**@class android.os.ProxyFileDescriptorCallback
+</span>@extends java.lang.Object
+
+ Callback that handles file system requests from ProxyFileDescriptor.
+
+ All callback methods except for onRelease should throw {@link android.system.ErrnoException}
+ with proper errno on errors. See
+ &lt;a href=&quot;http://man7.org/linux/man-pages/man3/errno.3.html&quot;&gt;errno(3)&lt;/a&gt; and
+ {@link android.system.OsConstants}.
+
+ Typical errnos are
+
+ &lt;ul&gt;
+ &lt;li&gt;{@link android.system.OsConstants#EIO} for general I/O issues
+ &lt;li&gt;{@link android.system.OsConstants#ENOENT} when the file is not found
+ &lt;li&gt;{@link android.system.OsConstants#EBADF} if the file doesn't allow read/write operations
+     based on how it was opened.  (For example, trying to write a file that was opened read-only.)
+ &lt;li&gt;{@link android.system.OsConstants#ENOSPC} if you cannot handle a write operation to
+     space/quota limitations.
+ &lt;/ul&gt;
+ @see android.os.storage.StorageManager#openProxyFileDescriptor(int, ProxyFileDescriptorCallback,
+     Handler)
+*/
+var ProxyFileDescriptorCallback = {
+
+<span id='android-os-ProxyFileDescriptorCallback-method-onGetSize'>/**Returns size of bytes provided by the file descriptor.
+</span>@return {Number} Size of bytes.
+@throws ErrnoException ErrnoException containing E constants in OsConstants.
+*/
+onGetSize : function(  ) {},
+
+<span id='android-os-ProxyFileDescriptorCallback-method-onRead'>/**Provides bytes read from file descriptor.
+</span> It needs to return exact requested size of bytes unless it reaches file end.
+@param {Number} offset Offset in bytes from the file head specifying where to read bytes. If a seek
+     operation is conducted on the file descriptor, then a read operation is requested, the
+     offset refrects the proper position of requested bytes.
+@param {Number} size Size for read bytes.
+@param {Object {byte[]}} data Byte array to store read bytes.
+@return {Number} Size of bytes returned by the function.
+@throws ErrnoException ErrnoException containing E constants in OsConstants.
+*/
+onRead : function(  ) {},
+
+<span id='android-os-ProxyFileDescriptorCallback-method-onWrite'>/**Handles bytes written to file descriptor.
+</span>@param {Number} offset Offset in bytes from the file head specifying where to write bytes. If a seek
+     operation is conducted on the file descriptor, then a write operation is requested, the
+     offset refrects the proper position of requested bytes.
+@param {Number} size Size for write bytes.
+@param {Object {byte[]}} data Byte array to be written to somewhere.
+@return {Number} Size of bytes processed by the function.
+@throws ErrnoException ErrnoException containing E constants in OsConstants.
+*/
+onWrite : function(  ) {},
+
+<span id='android-os-ProxyFileDescriptorCallback-method-onFsync'>/**Ensures all the written data are stored in permanent storage device.
+</span> For example, if it has data stored in on memory cache, it needs to flush data to storage
+ device.
+@throws ErrnoException ErrnoException containing E constants in OsConstants.
+*/
+onFsync : function(  ) {},
+
+<span id='android-os-ProxyFileDescriptorCallback-method-onRelease'>/**Invoked after the file is closed.
+</span>*/
+onRelease : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

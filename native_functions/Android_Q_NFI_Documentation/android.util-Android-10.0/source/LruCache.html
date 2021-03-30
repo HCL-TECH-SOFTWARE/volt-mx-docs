@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-util-LruCache'>/**@class android.util.LruCache
+</span>@extends java.lang.Object
+
+ BEGIN LAYOUTLIB CHANGE
+ This is a custom version that doesn't use the non standard LinkedHashMap#eldest.
+ END LAYOUTLIB CHANGE
+
+ A cache that holds strong references to a limited number of values. Each time
+ a value is accessed, it is moved to the head of a queue. When a value is
+ added to a full cache, the value at the end of that queue is evicted and may
+ become eligible for garbage collection.
+
+ &lt;p&gt;If your cached values hold resources that need to be explicitly released,
+ override {@link #entryRemoved}.
+
+ &lt;p&gt;If a cache miss should be computed on demand for the corresponding keys,
+ override {@link #create}. This simplifies the calling code, allowing it to
+ assume a value will always be returned, even when there's a cache miss.
+
+ &lt;p&gt;By default, the cache size is measured in the number of entries. Override
+ {@link #sizeOf} to size the cache in different units. For example, this cache
+ is limited to 4MiB of bitmaps:
+ &lt;pre&gt;   {@code
+   int cacheSize = 4 * 1024 * 1024; // 4MiB
+   LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;String, Bitmap&gt;(cacheSize) {
+       protected int sizeOf(String key, Bitmap value) {
+           return value.getByteCount();
+       }
+   }}&lt;/pre&gt;
+
+ &lt;p&gt;This class is thread-safe. Perform multiple cache operations atomically by
+ synchronizing on the cache: &lt;pre&gt;   {@code
+   synchronized (cache) {
+     if (cache.get(key) == null) {
+         cache.put(key, value);
+     }
+   }}&lt;/pre&gt;
+
+ &lt;p&gt;This class does not allow null to be used as a key or value. A return
+ value of null from {@link #get}, {@link #put} or {@link #remove} is
+ unambiguous: the key was not in the cache.
+
+ &lt;p&gt;This class appeared in Android 3.1 (Honeycomb MR1); it's available as part
+ of &lt;a href=&quot;http://developer.android.com/sdk/compatibility-library.html&quot;&gt;Android's
+ Support Package&lt;/a&gt; for earlier releases.
+*/
+var LruCache = {
+
+<span id='android-util-LruCache-method-resize'>/**Sets the size of the cache.
+</span>@param {Number} maxSize The new maximum size.
+@hide 
+*/
+resize : function(  ) {},
+
+<span id='android-util-LruCache-method-get'>/**Returns the value for {@code key} if it exists in the cache or can be
+</span> created by {@code #create}. If a value was returned, it is moved to the
+ head of the queue. This returns null if a value is not cached and cannot
+ be created.
+*/
+get : function(  ) {},
+
+<span id='android-util-LruCache-method-put'>/**Caches {@code value} for {@code key}. The value is moved to the head of
+</span> the queue.
+@return {Object {java.lang.Object}} the previous value mapped by {@code key}.
+*/
+put : function(  ) {},
+
+<span id='android-util-LruCache-method-remove'>/**Removes the entry for {@code key} if it exists.
+</span>@return {Object {java.lang.Object}} the previous value mapped by {@code key}.
+*/
+remove : function(  ) {},
+
+<span id='android-util-LruCache-method-evictAll'>/**Clear the cache, calling {@link #entryRemoved} on each removed entry.
+</span>*/
+evictAll : function(  ) {},
+
+<span id='android-util-LruCache-method-size'>/**For caches that do not override {@link #sizeOf}, this returns the number
+</span> of entries in the cache. For all other caches, this returns the sum of
+ the sizes of the entries in this cache.
+*/
+size : function(  ) {},
+
+<span id='android-util-LruCache-method-maxSize'>/**For caches that do not override {@link #sizeOf}, this returns the maximum
+</span> number of entries in the cache. For all other caches, this returns the
+ maximum sum of the sizes of the entries in this cache.
+*/
+maxSize : function(  ) {},
+
+<span id='android-util-LruCache-method-hitCount'>/**Returns the number of times {@link #get} returned a value that was
+</span> already present in the cache.
+*/
+hitCount : function(  ) {},
+
+<span id='android-util-LruCache-method-missCount'>/**Returns the number of times {@link #get} returned null or required a new
+</span> value to be created.
+*/
+missCount : function(  ) {},
+
+<span id='android-util-LruCache-method-createCount'>/**Returns the number of times {@link #create}(Object) returned a value.
+</span>*/
+createCount : function(  ) {},
+
+<span id='android-util-LruCache-method-putCount'>/**Returns the number of times {@link #put} was called.
+</span>*/
+putCount : function(  ) {},
+
+<span id='android-util-LruCache-method-evictionCount'>/**Returns the number of values that have been evicted.
+</span>*/
+evictionCount : function(  ) {},
+
+<span id='android-util-LruCache-method-snapshot'>/**Returns a copy of the current contents of the cache, ordered from least
+</span> recently accessed to most recently accessed.
+*/
+snapshot : function(  ) {},
+
+<span id='android-util-LruCache-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

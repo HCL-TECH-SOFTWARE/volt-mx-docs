@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-Path'>/**@class android.graphics.Path
+</span>@extends java.lang.Object
+
+ The Path class encapsulates compound (multiple contour) geometric paths
+ consisting of straight line segments, quadratic curves, and cubic curves.
+ It can be drawn with canvas.drawPath(path, paint), either filled or stroked
+ (based on the paint's Style), or it can be used for clipping or to draw
+ text on a path.
+*/
+var Path = {
+
+<span id='android-graphics-Path-property-mNativePath'>/** @hide
+</span>*/
+mNativePath : &quot;null&quot;,
+<span id='android-graphics-Path-property-isSimplePath'>/** @hide
+</span>*/
+isSimplePath : &quot;null&quot;,
+<span id='android-graphics-Path-property-rects'>/** @hide
+</span>*/
+rects : &quot;null&quot;,
+<span id='android-graphics-Path-method-reset'>/**Clear any lines and curves from the path, making it empty.
+</span> This does NOT change the fill-type setting.
+*/
+reset : function(  ) {},
+
+<span id='android-graphics-Path-method-rewind'>/**Rewinds the path: clears any lines and curves from the path but
+</span> keeps the internal data structure for faster reuse.
+*/
+rewind : function(  ) {},
+
+<span id='android-graphics-Path-method-set'>/**Replace the contents of this with the contents of src.
+</span>*/
+set : function(  ) {},
+
+<span id='android-graphics-Path-method-op'>/**Set this path to the result of applying the Op to this path and the specified path.
+</span> The resulting path will be constructed from non-overlapping contours.
+ The curve order is reduced where possible so that cubics may be turned
+ into quadratics, and quadratics maybe turned into lines.
+@param {Object {Path}} path The second operand (for difference, the subtrahend)
+@return {Boolean} True if operation succeeded, false otherwise and this path remains unmodified.
+@see Op
+@see #op(Path, Path, android.graphics.Path.Op)
+*/
+op : function(  ) {},
+
+<span id='android-graphics-Path-method-op'>/**Set this path to the result of applying the Op to the two specified paths.
+</span> The resulting path will be constructed from non-overlapping contours.
+ The curve order is reduced where possible so that cubics may be turned
+ into quadratics, and quadratics maybe turned into lines.
+@param {Object {Path}} path1 The first operand (for difference, the minuend)
+@param {Object {Path}} path2 The second operand (for difference, the subtrahend)
+@return {Boolean} True if operation succeeded, false otherwise and this path remains unmodified.
+@see Op
+@see #op(Path, android.graphics.Path.Op)
+*/
+op : function(  ) {},
+
+<span id='android-graphics-Path-method-isConvex'>/**Returns the path's convexity, as defined by the content of the path.
+</span> &lt;p&gt;
+ A path is convex if it has a single contour, and only ever curves in a
+ single direction.
+ &lt;p&gt;
+ This function will calculate the convexity of the path from its control
+ points, and cache the result.
+@return {Boolean} True if the path is convex.
+*/
+isConvex : function(  ) {},
+
+<span id='android-graphics-Path-method-getFillType'>/**Return the path's fill type. This defines how &quot;inside&quot; is
+</span> computed. The default value is WINDING.
+@return {Object {android.graphics.Path.FillType}} the path's fill type
+*/
+getFillType : function(  ) {},
+
+<span id='android-graphics-Path-method-setFillType'>/**Set the path's fill type. This defines how &quot;inside&quot; is computed.
+</span>@param {Object {Path.FillType}} ft The new fill type for this path
+*/
+setFillType : function(  ) {},
+
+<span id='android-graphics-Path-method-isInverseFillType'>/**Returns true if the filltype is one of the INVERSE variants
+</span>@return {Boolean} true if the filltype is one of the INVERSE variants
+*/
+isInverseFillType : function(  ) {},
+
+<span id='android-graphics-Path-method-toggleInverseFillType'>/**Toggles the INVERSE state of the filltype
+</span>*/
+toggleInverseFillType : function(  ) {},
+
+<span id='android-graphics-Path-method-isEmpty'>/**Returns true if the path is empty (contains no lines or curves)
+</span>@return {Boolean} true if the path is empty (contains no lines or curves)
+*/
+isEmpty : function(  ) {},
+
+<span id='android-graphics-Path-method-isRect'>/**Returns true if the path specifies a rectangle. If so, and if rect is
+</span> not null, set rect to the bounds of the path. If the path does not
+ specify a rectangle, return false and ignore rect.
+@param {Object {RectF}} rect If not null, returns the bounds of the path if it specifies
+             a rectangle
+@return {Boolean} true if the path specifies a rectangle
+*/
+isRect : function(  ) {},
+
+<span id='android-graphics-Path-method-computeBounds'>/**Compute the bounds of the control points of the path, and write the
+</span> answer into bounds. If the path contains 0 or 1 points, the bounds is
+ set to (0,0,0,0)
+@param {Object {RectF}} bounds Returns the computed bounds of the path's control points.
+@param {Boolean} exact This parameter is no longer used.
+*/
+computeBounds : function(  ) {},
+
+<span id='android-graphics-Path-method-incReserve'>/**Hint to the path to prepare for adding more points. This can allow the
+</span> path to more efficiently allocate its storage.
+@param {Number} extraPtCount The number of extra points that may be added to this
+                     path
+*/
+incReserve : function(  ) {},
+
+<span id='android-graphics-Path-method-moveTo'>/**Set the beginning of the next contour to the point (x,y).
+</span>@param {Number} x The x-coordinate of the start of a new contour
+@param {Number} y The y-coordinate of the start of a new contour
+*/
+moveTo : function(  ) {},
+
+<span id='android-graphics-Path-method-rMoveTo'>/**Set the beginning of the next contour relative to the last point on the
+</span> previous contour. If there is no previous contour, this is treated the
+ same as moveTo().
+@param {Number} dx The amount to add to the x-coordinate of the end of the
+           previous contour, to specify the start of a new contour
+@param {Number} dy The amount to add to the y-coordinate of the end of the
+           previous contour, to specify the start of a new contour
+*/
+rMoveTo : function(  ) {},
+
+<span id='android-graphics-Path-method-lineTo'>/**Add a line from the last point to the specified point (x,y).
+</span> If no moveTo() call has been made for this contour, the first point is
+ automatically set to (0,0).
+@param {Number} x The x-coordinate of the end of a line
+@param {Number} y The y-coordinate of the end of a line
+*/
+lineTo : function(  ) {},
+
+<span id='android-graphics-Path-method-rLineTo'>/**Same as lineTo, but the coordinates are considered relative to the last
+</span> point on this contour. If there is no previous point, then a moveTo(0,0)
+ is inserted automatically.
+@param {Number} dx The amount to add to the x-coordinate of the previous point on
+           this contour, to specify a line
+@param {Number} dy The amount to add to the y-coordinate of the previous point on
+           this contour, to specify a line
+*/
+rLineTo : function(  ) {},
+
+<span id='android-graphics-Path-method-quadTo'>/**Add a quadratic bezier from the last point, approaching control point
+</span> (x1,y1), and ending at (x2,y2). If no moveTo() call has been made for
+ this contour, the first point is automatically set to (0,0).
+@param {Number} x1 The x-coordinate of the control point on a quadratic curve
+@param {Number} y1 The y-coordinate of the control point on a quadratic curve
+@param {Number} x2 The x-coordinate of the end point on a quadratic curve
+@param {Number} y2 The y-coordinate of the end point on a quadratic curve
+*/
+quadTo : function(  ) {},
+
+<span id='android-graphics-Path-method-rQuadTo'>/**Same as quadTo, but the coordinates are considered relative to the last
+</span> point on this contour. If there is no previous point, then a moveTo(0,0)
+ is inserted automatically.
+@param {Number} dx1 The amount to add to the x-coordinate of the last point on
+            this contour, for the control point of a quadratic curve
+@param {Number} dy1 The amount to add to the y-coordinate of the last point on
+            this contour, for the control point of a quadratic curve
+@param {Number} dx2 The amount to add to the x-coordinate of the last point on
+            this contour, for the end point of a quadratic curve
+@param {Number} dy2 The amount to add to the y-coordinate of the last point on
+            this contour, for the end point of a quadratic curve
+*/
+rQuadTo : function(  ) {},
+
+<span id='android-graphics-Path-method-cubicTo'>/**Add a cubic bezier from the last point, approaching control points
+</span> (x1,y1) and (x2,y2), and ending at (x3,y3). If no moveTo() call has been
+ made for this contour, the first point is automatically set to (0,0).
+@param {Number} x1 The x-coordinate of the 1st control point on a cubic curve
+@param {Number} y1 The y-coordinate of the 1st control point on a cubic curve
+@param {Number} x2 The x-coordinate of the 2nd control point on a cubic curve
+@param {Number} y2 The y-coordinate of the 2nd control point on a cubic curve
+@param {Number} x3 The x-coordinate of the end point on a cubic curve
+@param {Number} y3 The y-coordinate of the end point on a cubic curve
+*/
+cubicTo : function(  ) {},
+
+<span id='android-graphics-Path-method-rCubicTo'>/**Same as cubicTo, but the coordinates are considered relative to the
+</span> current point on this contour. If there is no previous point, then a
+ moveTo(0,0) is inserted automatically.
+*/
+rCubicTo : function(  ) {},
+
+<span id='android-graphics-Path-method-arcTo'>/**Append the specified arc to the path as a new contour. If the start of
+</span> the path is different from the path's current last point, then an
+ automatic lineTo() is added to connect the current contour to the
+ start of the arc. However, if the path is empty, then we call moveTo()
+ with the first point of the arc.
+@param {Object {RectF}} oval        The bounds of oval defining shape and size of the arc
+@param {Number} startAngle  Starting angle (in degrees) where the arc begins
+@param {Number} sweepAngle  Sweep angle (in degrees) measured clockwise, treated
+                    mod 360.
+@param {Boolean} forceMoveTo If true, always begin a new contour with the arc
+*/
+arcTo : function(  ) {},
+
+<span id='android-graphics-Path-method-arcTo'>/**Append the specified arc to the path as a new contour. If the start of
+</span> the path is different from the path's current last point, then an
+ automatic lineTo() is added to connect the current contour to the
+ start of the arc. However, if the path is empty, then we call moveTo()
+ with the first point of the arc.
+@param {Object {RectF}} oval        The bounds of oval defining shape and size of the arc
+@param {Number} startAngle  Starting angle (in degrees) where the arc begins
+@param {Number} sweepAngle  Sweep angle (in degrees) measured clockwise
+*/
+arcTo : function(  ) {},
+
+<span id='android-graphics-Path-method-arcTo'>/**Append the specified arc to the path as a new contour. If the start of
+</span> the path is different from the path's current last point, then an
+ automatic lineTo() is added to connect the current contour to the
+ start of the arc. However, if the path is empty, then we call moveTo()
+ with the first point of the arc.
+@param {Number} startAngle  Starting angle (in degrees) where the arc begins
+@param {Number} sweepAngle  Sweep angle (in degrees) measured clockwise, treated
+                    mod 360.
+@param {Number} forceMoveTo If true, always begin a new contour with the arc
+*/
+arcTo : function(  ) {},
+
+<span id='android-graphics-Path-method-close'>/**Close the current contour. If the current point is not equal to the
+</span> first point of the contour, a line segment is automatically added.
+*/
+close : function(  ) {},
+
+<span id='android-graphics-Path-method-addRect'>/**Add a closed rectangle contour to the path
+</span>@param {Object {RectF}} rect The rectangle to add as a closed contour to the path
+@param {Object {Path.Direction}} dir  The direction to wind the rectangle's contour
+*/
+addRect : function(  ) {},
+
+<span id='android-graphics-Path-method-addRect'>/**Add a closed rectangle contour to the path
+</span>@param {Number} left   The left side of a rectangle to add to the path
+@param {Number} top    The top of a rectangle to add to the path
+@param {Number} right  The right side of a rectangle to add to the path
+@param {Number} bottom The bottom of a rectangle to add to the path
+@param {Object {Path.Direction}} dir    The direction to wind the rectangle's contour
+*/
+addRect : function(  ) {},
+
+<span id='android-graphics-Path-method-addOval'>/**Add a closed oval contour to the path
+</span>@param {Object {RectF}} oval The bounds of the oval to add as a closed contour to the path
+@param {Object {Path.Direction}} dir  The direction to wind the oval's contour
+*/
+addOval : function(  ) {},
+
+<span id='android-graphics-Path-method-addOval'>/**Add a closed oval contour to the path
+</span>@param {Number} dir The direction to wind the oval's contour
+*/
+addOval : function(  ) {},
+
+<span id='android-graphics-Path-method-addCircle'>/**Add a closed circle contour to the path
+</span>@param {Number} x   The x-coordinate of the center of a circle to add to the path
+@param {Number} y   The y-coordinate of the center of a circle to add to the path
+@param {Number} radius The radius of a circle to add to the path
+@param {Object {Path.Direction}} dir    The direction to wind the circle's contour
+*/
+addCircle : function(  ) {},
+
+<span id='android-graphics-Path-method-addArc'>/**Add the specified arc to the path as a new contour.
+</span>@param {Object {RectF}} oval The bounds of oval defining the shape and size of the arc
+@param {Number} startAngle Starting angle (in degrees) where the arc begins
+@param {Number} sweepAngle Sweep angle (in degrees) measured clockwise
+*/
+addArc : function(  ) {},
+
+<span id='android-graphics-Path-method-addArc'>/**Add the specified arc to the path as a new contour.
+</span>@param {Number} startAngle Starting angle (in degrees) where the arc begins
+@param {Number} sweepAngle Sweep angle (in degrees) measured clockwise
+*/
+addArc : function(  ) {},
+
+<span id='android-graphics-Path-method-addRoundRect'>/**Add a closed round-rectangle contour to the path
+</span>@param {Object {RectF}} rect The bounds of a round-rectangle to add to the path
+@param {Number} rx   The x-radius of the rounded corners on the round-rectangle
+@param {Number} ry   The y-radius of the rounded corners on the round-rectangle
+@param {Object {Path.Direction}} dir  The direction to wind the round-rectangle's contour
+*/
+addRoundRect : function(  ) {},
+
+<span id='android-graphics-Path-method-addRoundRect'>/**Add a closed round-rectangle contour to the path
+</span>@param {Number} rx   The x-radius of the rounded corners on the round-rectangle
+@param {Number} ry   The y-radius of the rounded corners on the round-rectangle
+@param {Number} dir  The direction to wind the round-rectangle's contour
+*/
+addRoundRect : function(  ) {},
+
+<span id='android-graphics-Path-method-addRoundRect'>/**Add a closed round-rectangle contour to the path. Each corner receives
+</span> two radius values [X, Y]. The corners are ordered top-left, top-right,
+ bottom-right, bottom-left
+@param {Object {RectF}} rect The bounds of a round-rectangle to add to the path
+@param {Object {float[]}} radii Array of 8 values, 4 pairs of [X,Y] radii
+@param {Object {Path.Direction}} dir  The direction to wind the round-rectangle's contour
+*/
+addRoundRect : function(  ) {},
+
+<span id='android-graphics-Path-method-addRoundRect'>/**Add a closed round-rectangle contour to the path. Each corner receives
+</span> two radius values [X, Y]. The corners are ordered top-left, top-right,
+ bottom-right, bottom-left
+@param {Number} radii Array of 8 values, 4 pairs of [X,Y] radii
+@param {Number} dir  The direction to wind the round-rectangle's contour
+*/
+addRoundRect : function(  ) {},
+
+<span id='android-graphics-Path-method-addPath'>/**Add a copy of src to the path, offset by (dx,dy)
+</span>@param {Object {Path}} src The path to add as a new contour
+@param {Number} dx  The amount to translate the path in X as it is added
+*/
+addPath : function(  ) {},
+
+<span id='android-graphics-Path-method-addPath'>/**Add a copy of src to the path
+</span>@param {Object {Path}} src The path that is appended to the current path
+*/
+addPath : function(  ) {},
+
+<span id='android-graphics-Path-method-addPath'>/**Add a copy of src to the path, transformed by matrix
+</span>@param {Object {Path}} src The path to add as a new contour
+*/
+addPath : function(  ) {},
+
+<span id='android-graphics-Path-method-offset'>/**Offset the path by (dx,dy)
+</span>@param {Number} dx  The amount in the X direction to offset the entire path
+@param {Number} dy  The amount in the Y direction to offset the entire path
+@param {Object {Path}} dst The translated path is written here. If this is null, then
+            the original path is modified.
+*/
+offset : function(  ) {},
+
+<span id='android-graphics-Path-method-offset'>/**Offset the path by (dx,dy)
+</span>@param {Number} dx The amount in the X direction to offset the entire path
+@param {Number} dy The amount in the Y direction to offset the entire path
+*/
+offset : function(  ) {},
+
+<span id='android-graphics-Path-method-setLastPoint'>/**Sets the last point of the path.
+</span>@param {Number} dx The new X coordinate for the last point
+@param {Number} dy The new Y coordinate for the last point
+*/
+setLastPoint : function(  ) {},
+
+<span id='android-graphics-Path-method-transform'>/**Transform the points in this path by matrix, and write the answer
+</span> into dst. If dst is null, then the the original path is modified.
+@param {Object {Matrix}} matrix The matrix to apply to the path
+@param {Object {Path}} dst    The transformed path is written here. If dst is null,
+               then the the original path is modified
+*/
+transform : function(  ) {},
+
+<span id='android-graphics-Path-method-transform'>/**Transform the points in this path by matrix.
+</span>@param {Object {Matrix}} matrix The matrix to apply to the path
+*/
+transform : function(  ) {},
+
+<span id='android-graphics-Path-method-readOnlyNI'>/**
+</span>@hide 
+*/
+readOnlyNI : function(  ) {},
+
+<span id='android-graphics-Path-method-approximate'>/**Approximate the &lt;code&gt;Path&lt;/code&gt; with a series of line segments.
+</span> This returns float[] with the array containing point components.
+ There are three components for each point, in order:
+ &lt;ul&gt;
+     &lt;li&gt;Fraction along the length of the path that the point resides&lt;/li&gt;
+     &lt;li&gt;The x coordinate of the point&lt;/li&gt;
+     &lt;li&gt;The y coordinate of the point&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;Two points may share the same fraction along its length when there is
+ a move action within the Path.&lt;/p&gt;
+@param {Number} acceptableError The acceptable error for a line on the
+                        Path. Typically this would be 0.5 so that
+                        the error is less than half a pixel.
+@return {Number} An array of components for points approximating the Path.
+*/
+approximate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

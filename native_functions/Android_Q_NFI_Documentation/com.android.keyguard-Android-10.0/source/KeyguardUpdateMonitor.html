@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-keyguard-KeyguardUpdateMonitor'>/**@class com.android.keyguard.KeyguardUpdateMonitor
+</span> implements android.app.trust.TrustManager.TrustListener
+
+@extends java.lang.Object
+
+ Watches for updates that may be interesting to the keyguard, and provides
+ the up to date information as well as a registration for callbacks that care
+ to be updated.
+*/
+var KeyguardUpdateMonitor = {
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-property-CORE_APPS_ONLY'>/** If true, the system is in the half-boot-to-decryption-screen state.
+</span> Prudently disable lockscreen.
+*/
+CORE_APPS_ONLY : &quot;null&quot;,
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-setCurrentUser'>/**
+</span>*/
+setCurrentUser : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getCurrentUser'>/**
+</span>*/
+getCurrentUser : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-onTrustChanged'>/**
+</span>*/
+onTrustChanged : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-onTrustError'>/**
+</span>*/
+onTrustError : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getSubscriptionInfo'>/**
+</span>@return {Object {java.util.List}} List of SubscriptionInfo records, maybe empty but never null
+*/
+getSubscriptionInfo : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-onTrustManagedChanged'>/**
+</span>*/
+onTrustManagedChanged : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-setKeyguardGoingAway'>/**Updates KeyguardUpdateMonitor's internal state to know if keyguard is goingAway
+</span>@param {Boolean} goingAway
+*/
+setKeyguardGoingAway : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-setKeyguardOccluded'>/**Updates KeyguardUpdateMonitor's internal state to know if keyguard is occluded
+</span>@param {Boolean} occluded
+*/
+setKeyguardOccluded : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isDreaming'>/**
+</span>@return {Boolean} a cached version of DreamManager.isDreaming()
+*/
+isDreaming : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-awakenFromDream'>/**If the device is dreaming, awakens the device
+</span>*/
+awakenFromDream : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isFaceUnlockRunning'>/**
+</span>*/
+isFaceUnlockRunning : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isFingerprintDetectionRunning'>/**
+</span>*/
+isFingerprintDetectionRunning : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isFaceDetectionRunning'>/**
+</span>*/
+isFaceDetectionRunning : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getUserCanSkipBouncer'>/**
+</span>*/
+getUserCanSkipBouncer : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getUserHasTrust'>/**
+</span>*/
+getUserHasTrust : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getUserUnlockedWithBiometric'>/**Returns whether the user is unlocked with biometrics.
+</span>*/
+getUserUnlockedWithBiometric : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getUserTrustIsManaged'>/**
+</span>*/
+getUserTrustIsManaged : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isUnlockingWithBiometricAllowed'>/**
+</span>*/
+isUnlockingWithBiometricAllowed : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isUserInLockdown'>/**
+</span>*/
+isUserInLockdown : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-needsSlowUnlockTransition'>/**
+</span>*/
+needsSlowUnlockTransition : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getStrongAuthTracker'>/**
+</span>*/
+getStrongAuthTracker : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isScreenOn'>/**
+</span>*/
+isScreenOn : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-onAuthInterruptDetected'>/**Called whenever passive authentication is requested or aborted by a sensor.
+</span>@param {Boolean} active If the interrupt started or ended.
+*/
+onAuthInterruptDetected : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-requestFaceAuth'>/**Requests face authentication if we're on a state where it's allowed.
+</span> This will re-trigger auth in case it fails.
+*/
+requestFaceAuth : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-onLockIconPressed'>/**Whenever the lock icon is long pressed, disabling trust agents.
+</span> This means that we cannot auth passively (face) until the user presses power.
+*/
+onLockIconPressed : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isUnlockingWithBiometricsPossible'>/**If biometrics hardware is available, not disabled, and user has enrolled templates.
+</span> This does NOT check if the device is encrypted or in lockdown.
+@param {Number} userId User that's trying to unlock.
+@return {Boolean} {@code true} if possible.
+*/
+isUnlockingWithBiometricsPossible : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isUnlockWithFacePossible'>/**If face hardware is available and user has enrolled. Not considering encryption or
+</span> lockdown state.
+*/
+isUnlockWithFacePossible : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-setHasLockscreenWallpaper'>/**Update the state whether Keyguard currently has a lockscreen wallpaper.
+</span>@param {Boolean} hasLockscreenWallpaper Whether Keyguard has a lockscreen wallpaper.
+*/
+setHasLockscreenWallpaper : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-hasLockscreenWallpaper'>/**
+</span>@return {Boolean} Whether Keyguard has a lockscreen wallpaper.
+*/
+hasLockscreenWallpaper : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchBootCompleted'>/**This is exposed since {@link Intent#ACTION_BOOT_COMPLETED} is not sticky. If
+</span> keyguard crashes sometime after boot, then it will never receive this
+ broadcast and hence not handle the event. This method is ultimately called by
+ PhoneWindowManager in this case.
+*/
+dispatchBootCompleted : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-hasBootCompleted'>/**We need to store this state in the KeyguardUpdateMonitor since this class will not be
+</span> destroyed.
+*/
+hasBootCompleted : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isKeyguardVisible'>/**
+</span>*/
+isKeyguardVisible : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-onKeyguardVisibilityChanged'>/**Notifies that the visibility state of Keyguard has changed.
+</span>
+ &lt;p&gt;Needs to be called from the main thread.
+*/
+onKeyguardVisibilityChanged : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-removeCallback'>/**Remove the given observer's callback.
+</span>@param {Object {KeyguardUpdateMonitorCallback}} callback The callback to remove
+*/
+removeCallback : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-registerCallback'>/**Register to receive notifications about general keyguard information
+</span> (see {@link InfoCallback}.
+@param {Object {KeyguardUpdateMonitorCallback}} callback The callback to register
+*/
+registerCallback : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isSwitchingUser'>/**
+</span>*/
+isSwitchingUser : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-setSwitchingUser'>/**
+</span>*/
+setSwitchingUser : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-sendKeyguardReset'>/**
+</span>*/
+sendKeyguardReset : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-sendKeyguardBouncerChanged'>/**
+</span>@see #handleKeyguardBouncerChanged(int)
+*/
+sendKeyguardBouncerChanged : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-reportSimUnlocked'>/**Report that the user successfully entered the SIM PIN or PUK/SIM PIN so we
+</span> have the information earlier than waiting for the intent
+ broadcast from the telephony code.
+
+ NOTE: Because handleSimStateChange() invokes callbacks immediately without going
+ through mHandler, this *must* be called from the UI thread.
+*/
+reportSimUnlocked : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-reportEmergencyCallAction'>/**Report that the emergency call button has been pressed and the emergency dialer is
+</span> about to be displayed.
+@param {Boolean} bypassHandler runs immediately.
+
+ NOTE: Must be called from UI thread if bypassHandler == true.
+*/
+reportEmergencyCallAction : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isDeviceProvisioned'>/**
+</span>@return {Boolean} Whether the device is provisioned (whether they have gone through
+   the setup wizard)
+*/
+isDeviceProvisioned : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getServiceState'>/**
+</span>*/
+getServiceState : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-clearBiometricRecognized'>/**
+</span>*/
+clearBiometricRecognized : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isSimPinVoiceSecure'>/**
+</span>*/
+isSimPinVoiceSecure : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isSimPinSecure'>/**If any SIM cards are currently secure.
+</span>@see #isSimPinSecure(State)
+*/
+isSimPinSecure : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getSimState'>/**
+</span>*/
+getSimState : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isSimPinSecure'>/**If the {@code state} is currently requiring a SIM PIN, PUK, or is disabled.
+</span>*/
+isSimPinSecure : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getCachedDisplayClientState'>/**
+</span>*/
+getCachedDisplayClientState : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchStartedWakingUp'>/**
+</span>*/
+dispatchStartedWakingUp : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchStartedGoingToSleep'>/**
+</span>*/
+dispatchStartedGoingToSleep : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchFinishedGoingToSleep'>/**
+</span>*/
+dispatchFinishedGoingToSleep : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchScreenTurnedOn'>/**
+</span>*/
+dispatchScreenTurnedOn : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchScreenTurnedOff'>/**
+</span>*/
+dispatchScreenTurnedOff : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchDreamingStarted'>/**
+</span>*/
+dispatchDreamingStarted : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dispatchDreamingStopped'>/**
+</span>*/
+dispatchDreamingStopped : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isDeviceInteractive'>/**
+</span>*/
+isDeviceInteractive : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isGoingToSleep'>/**
+</span>*/
+isGoingToSleep : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getNextSubIdForState'>/**Find the next SubscriptionId for a SIM in the given state, favoring lower slot numbers first.
+</span>@param {Object {IccCardConstants.State}} state
+@return {Number} subid or {@link SubscriptionManager#INVALID_SUBSCRIPTION_ID} if none found
+*/
+getNextSubIdForState : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-getSubscriptionInfoForSubId'>/**
+</span>*/
+getSubscriptionInfoForSubId : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-isLogoutEnabled'>/**
+</span>@return {Boolean} a cached version of DevicePolicyManager.isLogoutEnabled()
+*/
+isLogoutEnabled : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-disableHandlerCheckForTesting'>/**Turn off the handler check for testing.
+</span>
+ This is necessary because currently tests are not too careful about which thread they call
+ into this class on.
+
+ Note that this must be called before scheduling any work involving KeyguardUpdateMonitor
+ instances.
+
+ TODO: fix the tests and remove this.
+*/
+disableHandlerCheckForTesting : function(  ) {},
+
+<span id='com-android-keyguard-KeyguardUpdateMonitor-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

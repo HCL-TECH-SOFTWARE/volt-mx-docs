@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-inputmethod-InputMethodSession'>/**@class android.view.inputmethod.InputMethodSession
+</span> The InputMethodSession interface provides the per-client functionality
+ of {@link android.view.inputmethod.InputMethod} that is safe to expose to applications.
+
+ &lt;p&gt;Applications will not normally use this interface themselves, instead
+ relying on the standard interaction provided by
+ {@link android.widget.TextView} and {@link android.widget.EditText}.
+*/
+var InputMethodSession = {
+
+<span id='android-view-inputmethod-InputMethodSession-method-finishInput'>/**This method is called when the application would like to stop
+</span> receiving text input.
+*/
+finishInput : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-updateSelection'>/**This method is called when the selection or cursor in the current
+</span> target input field has changed.
+@param {Number} oldSelStart The previous text offset of the cursor selection
+ start position.
+@param {Number} oldSelEnd The previous text offset of the cursor selection
+ end position.
+@param {Number} newSelStart The new text offset of the cursor selection
+ start position.
+@param {Number} newSelEnd The new text offset of the cursor selection
+ end position.
+@param {Number} candidatesStart The text offset of the current candidate
+ text start position.
+@param {Number} candidatesEnd The text offset of the current candidate
+ text end position.
+*/
+updateSelection : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-viewClicked'>/**This method is called when the user tapped a text view.
+</span> IMEs can't rely on this method being called because this was not part of the original IME
+ protocol, so applications with custom text editing written before this method appeared will
+ not call to inform the IME of this interaction.
+@param {Boolean} focusChanged true if the user changed the focused view by this click.
+*/
+viewClicked : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-updateCursor'>/**This method is called when cursor location of the target input field
+</span> has changed within its window.  This is not normally called, but will
+ only be reported if requested by the input method.
+@param {Object {Rect}} newCursor The rectangle of the cursor currently being shown in
+ the input field's window coordinates.
+*/
+updateCursor : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-displayCompletions'>/**Called by a text editor that performs auto completion, to tell the
+</span> input method about the completions it has available.  This can be used
+ by the input method to display them to the user to select the text to
+ be inserted.
+@param {Object {android.view.inputmethod.CompletionInfo[]}} completions Array of text completions that are available, starting with
+ the best.  If this array is null, any existing completions will be
+ removed.
+*/
+displayCompletions : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-updateExtractedText'>/**Called by a text editor to report its new extracted text when its
+</span> contents change.  This will only be called if the input method
+ calls {@link android.view.inputmethod.InputConnection#getExtractedText(ExtractedTextRequest, int)
+ android.view.inputmethod.InputConnection.getExtractedText()} with the option to report updates.
+@param {Number} token The input method supplied token for identifying its request.
+@param {Object {ExtractedText}} text The new extracted text.
+*/
+updateExtractedText : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-dispatchKeyEvent'>/**This method is called when a key is pressed.  When done with the event,
+</span> the implementation must call back on &lt;var&gt;callback&lt;/var&gt; with its
+ result.
+
+ &lt;p&gt;
+ If the input method wants to handle this event, return true, otherwise
+ return false and the caller (i.e. the application) will handle the event.
+@param {Number} event The key event.
+@return {Object {void}} Whether the input method wants to handle this event.
+@see android.view.KeyEvent
+*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-dispatchTrackballEvent'>/**This method is called when there is a track ball event.
+</span>
+ &lt;p&gt;
+ If the input method wants to handle this event, return true, otherwise
+ return false and the caller (i.e. the application) will handle the event.
+@param {Number} event The motion event.
+@return {Object {void}} Whether the input method wants to handle this event.
+@see android.view.MotionEvent
+*/
+dispatchTrackballEvent : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-dispatchGenericMotionEvent'>/**This method is called when there is a generic motion event.
+</span>
+ &lt;p&gt;
+ If the input method wants to handle this event, return true, otherwise
+ return false and the caller (i.e. the application) will handle the event.
+@param {Number} event The motion event.
+@return {Object {void}} Whether the input method wants to handle this event.
+@see android.view.MotionEvent
+*/
+dispatchGenericMotionEvent : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-appPrivateCommand'>/**Process a private command sent from the application to the input method.
+</span> This can be used to provide domain-specific features that are
+ only known between certain input methods and their clients.
+@param {String} action Name of the command to be performed.  This &lt;em&gt;must&lt;/em&gt;
+ be a scoped name, i.e. prefixed with a package name you own, so that
+ different developers will not create conflicting commands.
+@param {Object {Bundle}} data Any data to include with the command.
+*/
+appPrivateCommand : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-toggleSoftInput'>/**Toggle the soft input window.
+</span> Applications can toggle the state of the soft input window.
+@param {Number} showFlags Provides additional operating flags.  May be
+ 0 or have the {@link InputMethodManager#SHOW_IMPLICIT},
+ {@link InputMethodManager#SHOW_FORCED} bit set.
+@param {Number} hideFlags Provides additional operating flags.  May be
+ 0 or have the {@link  InputMethodManager#HIDE_IMPLICIT_ONLY},
+ {@link  InputMethodManager#HIDE_NOT_ALWAYS} bit set.
+*/
+toggleSoftInput : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-updateCursorAnchorInfo'>/**This method is called when the cursor and/or the character position relevant to text input
+</span> is changed on the screen.  This is not called by default.  It will only be reported if
+ requested by the input method.
+@param {Object {CursorAnchorInfo}} cursorAnchorInfo Positional information relevant to text input, such as text
+ insertion point and composition string.
+*/
+updateCursorAnchorInfo : function(  ) {},
+
+<span id='android-view-inputmethod-InputMethodSession-method-notifyImeHidden'>/**Notifies {@link android.inputmethodservice.InputMethodService} that IME has been
+</span> hidden from user.
+@hide 
+*/
+notifyImeHidden : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

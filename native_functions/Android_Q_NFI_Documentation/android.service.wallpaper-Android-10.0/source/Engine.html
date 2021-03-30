@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-wallpaper-WallpaperService-Engine'>/**@class android.service.wallpaper.WallpaperService.Engine
+</span>@extends java.lang.Object
+
+ The actual implementation of a wallpaper.  A wallpaper service may
+ have multiple instances running (for example as a real wallpaper
+ and as a preview), each of which is represented by its own Engine
+ instance.  You must implement {@link android.service.wallpaper.WallpaperService#onCreateEngine()}
+ to return your concrete Engine implementation.
+*/
+var Engine = {
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-getSurfaceHolder'>/**Provides access to the surface in which this wallpaper is drawn.
+</span>*/
+getSurfaceHolder : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-getDesiredMinimumWidth'>/**Convenience for {@link WallpaperManager#getDesiredMinimumWidth()
+</span> WallpaperManager.getDesiredMinimumWidth()}, returning the width
+ that the system would like this wallpaper to run in.
+*/
+getDesiredMinimumWidth : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-getDesiredMinimumHeight'>/**Convenience for {@link WallpaperManager#getDesiredMinimumHeight()
+</span> WallpaperManager.getDesiredMinimumHeight()}, returning the height
+ that the system would like this wallpaper to run in.
+*/
+getDesiredMinimumHeight : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-isVisible'>/**Return whether the wallpaper is currently visible to the user,
+</span> this is the last value supplied to
+ {@link #onVisibilityChanged}(boolean).
+*/
+isVisible : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-isPreview'>/**Returns true if this engine is running in preview mode -- that is,
+</span> it is being shown to the user before they select it as the actual
+ wallpaper.
+*/
+isPreview : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-isInAmbientMode'>/**Returns true if this engine is running in ambient mode -- that is,
+</span> it is being shown in low power mode, on always on display.
+@hide 
+*/
+isInAmbientMode : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-setTouchEventsEnabled'>/**Control whether this wallpaper will receive raw touch events
+</span> from the window manager as the user interacts with the window
+ that is currently displaying the wallpaper.  By default they
+ are turned off.  If enabled, the events will be received in
+ {@link #onTouchEvent}(MotionEvent).
+*/
+setTouchEventsEnabled : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-setOffsetNotificationsEnabled'>/**Control whether this wallpaper will receive notifications when the wallpaper
+</span> has been scrolled. By default, wallpapers will receive notifications, although
+ the default static image wallpapers do not. It is a performance optimization to
+ set this to false.
+@param {Boolean} enabled whether the wallpaper wants to receive offset notifications
+*/
+setOffsetNotificationsEnabled : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-setFixedSizeAllowed'>/**{@hide}
+</span>*/
+setFixedSizeAllowed : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onCreate'>/**Called once to initialize the engine.  After returning, the
+</span> engine's surface will be created by the framework.
+*/
+onCreate : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onDestroy'>/**Called right before the engine is going away.  After this the
+</span> surface will be destroyed and this Engine object is no longer
+ valid.
+*/
+onDestroy : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onVisibilityChanged'>/**Called to inform you of the wallpaper becoming visible or
+</span> hidden.  &lt;em&gt;It is very important that a wallpaper only use
+ CPU while it is visible.&lt;/em&gt;.
+*/
+onVisibilityChanged : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onApplyWindowInsets'>/**Called with the current insets that are in effect for the wallpaper.
+</span> This gives you the part of the overall wallpaper surface that will
+ generally be visible to the user (ignoring position offsets applied to it).
+@param {Object {WindowInsets}} insets Insets to apply.
+*/
+onApplyWindowInsets : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onTouchEvent'>/**Called as the user performs touch-screen interaction with the
+</span> window that is currently showing this wallpaper.  Note that the
+ events you receive here are driven by the actual application the
+ user is interacting with, so if it is slow you will get fewer
+ move events.
+*/
+onTouchEvent : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onOffsetsChanged'>/**Called to inform you of the wallpaper's offsets changing
+</span> within its contain, corresponding to the container's
+ call to {@link WallpaperManager#setWallpaperOffsets(IBinder, float, float)
+ WallpaperManager.setWallpaperOffsets()}.
+*/
+onOffsetsChanged : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onCommand'>/**Process a command that was sent to the wallpaper with
+</span> {@link WallpaperManager#sendWallpaperCommand}.
+ The default implementation does nothing, and always returns null
+ as the result.
+@param {String} action The name of the command to perform.  This tells you
+ what to do and how to interpret the rest of the arguments.
+@param {Number} x Generic integer parameter.
+@param {Number} y Generic integer parameter.
+@param {Number} z Generic integer parameter.
+@param {Object {Bundle}} extras Any additional parameters.
+@param {Boolean} resultRequested If true, the caller is requesting that
+ a result, appropriate for the command, be returned back.
+@return {Object {android.os.Bundle}} If returning a result, create a Bundle and place the
+ result data in to it.  Otherwise return null.
+*/
+onCommand : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onAmbientModeChanged'>/**Called when the device enters or exits ambient mode.
+</span>@param {Boolean} inAmbientMode {@code true} if in ambient mode.
+@param {Number} animationDuration How long the transition animation to change the ambient state
+                          should run, in milliseconds. If 0 is passed as the argument
+                          here, the state should be switched immediately.
+@see #isInAmbientMode()
+@see WallpaperInfo#supportsAmbientMode()
+@hide 
+*/
+onAmbientModeChanged : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onDesiredSizeChanged'>/**Called when an application has changed the desired virtual size of
+</span> the wallpaper.
+*/
+onDesiredSizeChanged : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onSurfaceChanged'>/**Convenience for {@link SurfaceHolder.Callback#surfaceChanged
+</span> SurfaceHolder.Callback.surfaceChanged()}.
+*/
+onSurfaceChanged : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onSurfaceRedrawNeeded'>/**Convenience for {@link SurfaceHolder.Callback2#surfaceRedrawNeeded
+</span> SurfaceHolder.Callback.surfaceRedrawNeeded()}.
+*/
+onSurfaceRedrawNeeded : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onSurfaceCreated'>/**Convenience for {@link SurfaceHolder.Callback#surfaceCreated
+</span> SurfaceHolder.Callback.surfaceCreated()}.
+*/
+onSurfaceCreated : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onSurfaceDestroyed'>/**Convenience for {@link SurfaceHolder.Callback#surfaceDestroyed
+</span> SurfaceHolder.Callback.surfaceDestroyed()}.
+*/
+onSurfaceDestroyed : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-notifyColorsChanged'>/**Notifies the engine that wallpaper colors changed significantly.
+</span> This will trigger a {@link #onComputeColors}() call.
+*/
+notifyColorsChanged : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-onComputeColors'>/**Called by the system when it needs to know what colors the wallpaper is using.
+</span> You might return null if no color information is available at the moment.
+ In that case you might want to call {@link #notifyColorsChanged}() when
+ color information becomes available.
+ &lt;p&gt;
+ The simplest way of creating a {@link android.app.WallpaperColors} object is by using
+ {@link android.app.WallpaperColors#fromBitmap(Bitmap)} or
+ {@link android.app.WallpaperColors#fromDrawable(Drawable)}, but you can also specify
+ your main colors by constructing a {@link android.app.WallpaperColors} object manually.
+@return {Object {android.app.WallpaperColors}} Wallpaper colors.
+*/
+onComputeColors : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-setCreated'>/**Sets internal engine state. Only for testing.
+</span>@param {Boolean} created {@code true} or {@code false}.
+@hide 
+*/
+setCreated : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-getDisplayContext'>/**The {@link Context} with resources that match the current display the wallpaper is on.
+</span> For multiple display environment, multiple engines can be created to render on each
+ display, but these displays may have different densities. Use this context to get the
+ corresponding resources for currently display, avoiding the context of the service.
+ &lt;p&gt;
+ The display context will never be {@code null} after
+ {@link android.service.wallpaper.WallpaperService.Engine#onCreate(SurfaceHolder)} has been called.
+@return {Object {android.content.Context}} A {@link Context} for current display.
+*/
+getDisplayContext : function(  ) {},
+
+<span id='android-service-wallpaper-WallpaperService-Engine-method-doAmbientModeChanged'>/**Executes life cycle event and updates internal ambient mode state based on
+</span> message sent from handler.
+@param {Boolean} inAmbientMode {@code true} if in ambient mode.
+@param {Number} animationDuration For how long the transition will last, in ms.
+@hide 
+*/
+doAmbientModeChanged : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

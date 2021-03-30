@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-animation-LayoutAnimationController'>/**@class android.view.animation.LayoutAnimationController
+</span>@extends java.lang.Object
+
+ A layout animation controller is used to animated a layout's, or a view
+ group's, children. Each child uses the same animation but for every one of
+ them, the animation starts at a different time. A layout animation controller
+ is used by {@link android.view.ViewGroup} to compute the delay by which each
+ child's animation start must be offset. The delay is computed by using
+ characteristics of each child, like its index in the view group.
+
+ This standard implementation computes the delay by multiplying a fixed
+ amount of miliseconds by the index of the child in its parent view group.
+ Subclasses are supposed to override
+ {@link #getDelayForView(android.view.View)} to implement a different way
+ of computing the delay. For instance, a
+ {@link android.view.animation.GridLayoutAnimationController} will compute the
+ delay based on the column and row indices of the child in its parent view
+ group.
+
+ Information used to compute the animation delay of each child are stored
+ in an instance of
+ {@link android.view.animation.LayoutAnimationController.AnimationParameters},
+ itself stored in the {@link android.view.ViewGroup.LayoutParams} of the view.
+
+ @attr ref android.R.styleable#LayoutAnimation_delay
+ @attr ref android.R.styleable#LayoutAnimation_animationOrder
+ @attr ref android.R.styleable#LayoutAnimation_interpolator
+ @attr ref android.R.styleable#LayoutAnimation_animation
+*/
+var LayoutAnimationController = {
+
+<span id='android-view-animation-LayoutAnimationController-property-ORDER_NORMAL'>/** Distributes the animation delays in the order in which view were added
+</span> to their view group.
+*/
+ORDER_NORMAL : &quot;0&quot;,
+<span id='android-view-animation-LayoutAnimationController-property-ORDER_REVERSE'>/** Distributes the animation delays in the reverse order in which view were
+</span> added to their view group.
+*/
+ORDER_REVERSE : &quot;1&quot;,
+<span id='android-view-animation-LayoutAnimationController-property-ORDER_RANDOM'>/** Randomly distributes the animation delays.
+</span>*/
+ORDER_RANDOM : &quot;2&quot;,
+<span id='android-view-animation-LayoutAnimationController-method-getOrder'>/**Returns the order used to compute the delay of each child's animation.
+</span>@return {Number} one of {@link #ORDER_NORMAL}, {@link #ORDER_REVERSE} or
+         {@link #ORDER_RANDOM}
+@attr ref android.R.styleable#LayoutAnimation_animationOrder
+*/
+getOrder : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-setOrder'>/**Sets the order used to compute the delay of each child's animation.
+</span>@param {Number} order one of {@link #ORDER_NORMAL}, {@link #ORDER_REVERSE} or
+        {@link #ORDER_RANDOM}
+@attr ref android.R.styleable#LayoutAnimation_animationOrder
+*/
+setOrder : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-setAnimation'>/**Sets the animation to be run on each child of the view group on which
+</span> this layout animation controller is .
+@param {Object {Context}} context the context from which the animation must be inflated
+@param {Number} resourceID the resource identifier of the animation
+@see #setAnimation(Animation)
+@see #getAnimation()
+@attr ref android.R.styleable#LayoutAnimation_animation
+*/
+setAnimation : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-setAnimation'>/**Sets the animation to be run on each child of the view group on which
+</span> this layout animation controller is .
+@param {Object {Animation}} animation the animation to run on each child of the view group
+@see #setAnimation(android.content.Context, int)
+@see #getAnimation()
+@attr ref android.R.styleable#LayoutAnimation_animation
+*/
+setAnimation : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-getAnimation'>/**Returns the animation applied to each child of the view group on which
+</span> this controller is set.
+@return {Object {android.view.animation.Animation}} an {@link android.view.animation.Animation} instance
+@see #setAnimation(android.content.Context, int)
+@see #setAnimation(Animation)
+*/
+getAnimation : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-setInterpolator'>/**Sets the interpolator used to interpolate the delays between the
+</span> children.
+@param {Object {Context}} context the context from which the interpolator must be inflated
+@param {Number} resourceID the resource identifier of the interpolator
+@see #getInterpolator()
+@see #setInterpolator(Interpolator)
+@attr ref android.R.styleable#LayoutAnimation_interpolator
+*/
+setInterpolator : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-setInterpolator'>/**Sets the interpolator used to interpolate the delays between the
+</span> children.
+@param {Object {Interpolator}} interpolator the interpolator
+@see #getInterpolator()
+@see #setInterpolator(Interpolator)
+@attr ref android.R.styleable#LayoutAnimation_interpolator
+*/
+setInterpolator : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-getInterpolator'>/**Returns the interpolator used to interpolate the delays between the
+</span> children.
+@return {Object {android.view.animation.Interpolator}} an {@link android.view.animation.Interpolator}
+*/
+getInterpolator : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-getDelay'>/**Returns the delay by which the children's animation are offset. The
+</span> delay is expressed as a fraction of the animation duration.
+@return {Number} a fraction of the animation duration
+@see #setDelay(float)
+*/
+getDelay : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-setDelay'>/**Sets the delay, as a fraction of the animation duration, by which the
+</span> children's animations are offset. The general formula is:
+
+ &lt;pre&gt;
+ child animation delay = child index * delay * animation duration
+ &lt;/pre&gt;
+@param {Number} delay a fraction of the animation duration
+@see #getDelay()
+*/
+setDelay : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-willOverlap'>/**Indicates whether two children's animations will overlap. Animations
+</span> overlap when the delay is lower than 100% (or 1.0).
+@return {Boolean} true if animations will overlap, false otherwise
+*/
+willOverlap : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-start'>/**Starts the animation.
+</span>*/
+start : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-getAnimationForView'>/**Returns the animation to be applied to the specified view. The returned
+</span> animation is delayed by an offset computed according to the information
+ provided by
+ {@link android.view.animation.LayoutAnimationController.AnimationParameters}.
+ This method is called by view groups to obtain the animation to set on
+ a specific child.
+@param {Object {View}} view the view to animate
+@return {Object {android.view.animation.Animation}} an animation delayed by the number of milliseconds returned by
+         {@link #getDelayForView(android.view.View)}
+@see #getDelay()
+@see #setDelay(float)
+@see #getDelayForView(android.view.View)
+*/
+getAnimationForView : function(  ) {},
+
+<span id='android-view-animation-LayoutAnimationController-method-isDone'>/**Indicates whether the layout animation is over or not. A layout animation
+</span> is considered done when the animation with the longest delay is done.
+@return {Boolean} true if all of the children's animations are over, false otherwise
+*/
+isDone : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

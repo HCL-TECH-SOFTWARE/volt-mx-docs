@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-gsm-SuppServiceNotification'>/**@class com.android.internal.telephony.gsm.SuppServiceNotification
+</span>@extends java.lang.Object
+
+ Represents a Supplementary Service Notification received from the network.
+
+ {@hide}
+*/
+var SuppServiceNotification = {
+
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-notificationType'>/**Type of notification: 0 = code1; 1 = code2 */
+</span>notificationType : &quot;null&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-code'>/**TS 27.007 7.17 &quot;code1&quot; or &quot;code2&quot; */
+</span>code : &quot;null&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-index'>/**TS 27.007 7.17 &quot;index&quot; */
+</span>index : &quot;null&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-type'>/**TS 27.007 7.17 &quot;type&quot; (MT only) */
+</span>type : &quot;null&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-number'>/**TS 27.007 7.17 &quot;number&quot; (MT only) */
+</span>number : &quot;null&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-history'>/**List of forwarded numbers, if any */
+</span>history : &quot;null&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-NOTIFICATION_TYPE_CODE_1'>/** Notification type is from the &quot;code 1&quot; group (per TS 27.007 7.17).
+</span> This means the {@link #code} will be a code such as {@link #CODE_1_CALL_FORWARDED}.
+*/
+NOTIFICATION_TYPE_CODE_1 : &quot;0&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-NOTIFICATION_TYPE_CODE_2'>/** Notification type is from the &quot;code 2&quot; group (per TS 27.007 7.17).
+</span> This means the {@link #code} will be a code such as {@link #CODE_2_CALL_ON_HOLD}.
+*/
+NOTIFICATION_TYPE_CODE_2 : &quot;1&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_UNCONDITIONAL_CF_ACTIVE'>/** Indicates that unconditional call forwarding is active.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_UNCONDITIONAL_CF_ACTIVE : &quot;0&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_SOME_CF_ACTIVE'>/** Indicates that some conditional call forwarding options are active.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_SOME_CF_ACTIVE : &quot;1&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_CALL_FORWARDED'>/** Indicates that an outgoing call has been forwarded to another number.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_CALL_FORWARDED : &quot;2&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_CALL_IS_WAITING'>/** Indicates that an outgoing call is waiting.  This means that the called party is already in
+</span> another call and is hearing the call waiting tone.
+ Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_CALL_IS_WAITING : &quot;3&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_CUG_CALL'>/** Indicates that an outgoing call is to a number in a closed user group.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_CUG_CALL : &quot;4&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_OUTGOING_CALLS_BARRED'>/** Indicates that outgoing calls are barred.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_OUTGOING_CALLS_BARRED : &quot;5&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_INCOMING_CALLS_BARRED'>/** Indicates that incoming calls are barred.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_INCOMING_CALLS_BARRED : &quot;6&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_CLIR_SUPPRESSION_REJECTED'>/** Indicates that CLIR suppression has been rejected for an outgoing call.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_CLIR_SUPPRESSION_REJECTED : &quot;7&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_1_CALL_DEFLECTED'>/** Indicates that an outgoing call bas been deflected to another number.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_1}.
+ See TS 27.007 7.17.
+*/
+CODE_1_CALL_DEFLECTED : &quot;8&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_FORWARDED_CALL'>/** Indicates that an incoming call is a forwarded call.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_FORWARDED_CALL : &quot;0&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_CUG_CALL'>/** Indicates that an incoming call is from a member of a closed user group.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_CUG_CALL : &quot;1&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_CALL_ON_HOLD'>/** Indicates that a call has been remotely put on hold.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_CALL_ON_HOLD : &quot;2&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_CALL_RETRIEVED'>/** Indicates that a call has been remotely resumed (retrieved).
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_CALL_RETRIEVED : &quot;3&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_MULTI_PARTY_CALL'>/** Indicates that a conference call has been entered.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_MULTI_PARTY_CALL : &quot;4&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_ON_HOLD_CALL_RELEASED'>/** Indicates that an ongoing call on hold has been released.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_ON_HOLD_CALL_RELEASED : &quot;5&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_FORWARD_CHECK_RECEIVED'>/** Indicates that a forward check message was received.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_FORWARD_CHECK_RECEIVED : &quot;6&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_CALL_CONNECTING_ECT'>/** Indicates that a call is being connected (alerting) with another party as a result of an
+</span> explicit call transfer operation.
+ Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_CALL_CONNECTING_ECT : &quot;7&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_CALL_CONNECTED_ECT'>/** Indicates that a call has been connected with another party as a result of an explicit call
+</span> transfer operation.
+ Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_CALL_CONNECTED_ECT : &quot;8&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_DEFLECTED_CALL'>/** Indicates that an outgoing call has been deflected to another number.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_DEFLECTED_CALL : &quot;9&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-property-CODE_2_ADDITIONAL_CALL_FORWARDED'>/** Indicates that an additional incoming call has been forwarded.
+</span> Valid {@link #code} when {@link #type} is {@link #NOTIFICATION_TYPE_CODE_2}.
+ See TS 27.007 7.17.
+*/
+CODE_2_ADDITIONAL_CALL_FORWARDED : &quot;10&quot;,
+<span id='com-android-internal-telephony-gsm-SuppServiceNotification-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

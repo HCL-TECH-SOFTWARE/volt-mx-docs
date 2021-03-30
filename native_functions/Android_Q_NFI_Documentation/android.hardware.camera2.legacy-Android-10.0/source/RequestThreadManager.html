@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-legacy-RequestThreadManager'>/**@class android.hardware.camera2.legacy.RequestThreadManager
+</span>@extends java.lang.Object
+
+ This class executes requests to the {@link Camera}.
+
+ &lt;p&gt;
+ The main components of this class are:
+ - A message queue of requests to the {@link Camera}.
+ - A thread that consumes requests to the {@link Camera} and executes them.
+ - A {@link android.hardware.camera2.legacy.GLThreadManager} that draws to the configured output {@link Surface}s.
+ - An {@link android.hardware.camera2.legacy.CameraDeviceState} state machine that manages the callbacks for various operations.
+ &lt;/p&gt;
+*/
+var RequestThreadManager = {
+
+<span id='android-hardware-camera2-legacy-RequestThreadManager-method-start'>/**Start the request thread.
+</span>*/
+start : function(  ) {},
+
+<span id='android-hardware-camera2-legacy-RequestThreadManager-method-flush'>/**Flush any pending requests.
+</span>@return {Number} the last frame number.
+*/
+flush : function(  ) {},
+
+<span id='android-hardware-camera2-legacy-RequestThreadManager-method-quit'>/**Quit the request thread, and clean up everything.
+</span>*/
+quit : function(  ) {},
+
+<span id='android-hardware-camera2-legacy-RequestThreadManager-method-submitCaptureRequests'>/**Submit the given burst of requests to be captured.
+</span>
+ &lt;p&gt;If the burst is repeating, replace the current repeating burst.&lt;/p&gt;
+@param {Object {android.hardware.camera2.CaptureRequest[]}} requests the burst of requests to add to the queue.
+@param {Boolean} repeating true if the burst is repeating.
+@return {Object {android.hardware.camera2.utils.SubmitInfo}} the submission info, including the new request id, and the last frame number, which
+   contains either the frame number of the last frame that will be returned for this request,
+   or the frame number of the last frame that will be returned for the current repeating
+   request if this burst is set to be repeating.
+*/
+submitCaptureRequests : function(  ) {},
+
+<span id='android-hardware-camera2-legacy-RequestThreadManager-method-cancelRepeating'>/**Cancel a repeating request.
+</span>@param {Number} requestId the id of the repeating request to cancel.
+@return {Number} the last frame to be returned from the HAL for the given repeating request, or
+          {@code INVALID_FRAME} if none exists.
+*/
+cancelRepeating : function(  ) {},
+
+<span id='android-hardware-camera2-legacy-RequestThreadManager-method-configure'>/**Configure with the current list of output Surfaces.
+</span>
+ &lt;p&gt;
+ This operation blocks until the configuration is complete.
+ &lt;/p&gt;
+
+ &lt;p&gt;Using a {@code null} or empty {@code outputs} list is the equivalent of unconfiguring.&lt;/p&gt;
+@param {Object {java.util.Collection}} outputs a {@link java.util.Collection} of outputs to configure.
+*/
+configure : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

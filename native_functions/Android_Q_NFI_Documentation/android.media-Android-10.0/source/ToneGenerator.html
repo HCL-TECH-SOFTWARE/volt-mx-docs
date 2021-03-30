@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-ToneGenerator'>/**@class android.media.ToneGenerator
+</span>@extends java.lang.Object
+
+ This class provides methods to play DTMF tones (ITU-T Recommendation Q.23),
+ call supervisory tones (3GPP TS 22.001, CEPT) and proprietary tones (3GPP TS 31.111).
+ Depending on call state and routing options, tones are mixed to the downlink audio
+ or output to the speaker phone or headset.
+ This API is not for generating tones over the uplink audio path.
+*/
+var ToneGenerator = {
+
+<span id='android-media-ToneGenerator-property-TONE_UNKNOWN'>/** Default value for an unknown or unspecified tone.
+</span> @hide
+*/
+TONE_UNKNOWN : &quot;-1&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_0'>/** DTMF tone for key 0: 1336Hz, 941Hz, continuous&lt;/p&gt;
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_0 : &quot;0&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_1'>/** DTMF tone for key 1: 1209Hz, 697Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_1 : &quot;1&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_2'>/** DTMF tone for key 2: 1336Hz, 697Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_2 : &quot;2&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_3'>/** DTMF tone for key 3: 1477Hz, 697Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_3 : &quot;3&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_4'>/** DTMF tone for key 4: 1209Hz, 770Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_4 : &quot;4&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_5'>/** DTMF tone for key 5: 1336Hz, 770Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_5 : &quot;5&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_6'>/** DTMF tone for key 6: 1477Hz, 770Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_6 : &quot;6&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_7'>/** DTMF tone for key 7: 1209Hz, 852Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_7 : &quot;7&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_8'>/** DTMF tone for key 8: 1336Hz, 852Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_8 : &quot;8&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_9'>/** DTMF tone for key 9: 1477Hz, 852Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_9 : &quot;9&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_S'>/** DTMF tone for key *: 1209Hz, 941Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_S : &quot;10&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_P'>/** DTMF tone for key #: 1477Hz, 941Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_P : &quot;11&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_A'>/** DTMF tone for key A: 1633Hz, 697Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_A : &quot;12&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_B'>/** DTMF tone for key B: 1633Hz, 770Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_B : &quot;13&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_C'>/** DTMF tone for key C: 1633Hz, 852Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_C : &quot;14&quot;,
+<span id='android-media-ToneGenerator-property-TONE_DTMF_D'>/** DTMF tone for key D: 1633Hz, 941Hz, continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_DTMF_D : &quot;15&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_DIAL'>/** Call supervisory tone, Dial tone:
+</span>      CEPT:           425Hz, continuous
+      ANSI (IS-95):   350Hz+440Hz, continuous
+      JAPAN:          400Hz, continuous
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_DIAL : &quot;16&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_BUSY'>/** Call supervisory tone, Busy:
+</span>      CEPT:           425Hz, 500ms ON, 500ms OFF...
+      ANSI (IS-95):   480Hz+620Hz, 500ms ON, 500ms OFF...
+      JAPAN:          400Hz, 500ms ON, 500ms OFF...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_BUSY : &quot;17&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_CONGESTION'>/** Call supervisory tone, Congestion:
+</span>      CEPT, JAPAN:    425Hz, 200ms ON, 200ms OFF...
+      ANSI (IS-95):   480Hz+620Hz, 250ms ON, 250ms OFF...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_CONGESTION : &quot;18&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_RADIO_ACK'>/** Call supervisory tone, Radio path acknowlegment :
+</span>      CEPT, ANSI:    425Hz, 200ms ON
+      JAPAN:         400Hz, 1s ON, 2s OFF...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_RADIO_ACK : &quot;19&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_RADIO_NOTAVAIL'>/** Call supervisory tone, Radio path not available: 425Hz, 200ms ON, 200 OFF 3 bursts
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_RADIO_NOTAVAIL : &quot;20&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_ERROR'>/** Call supervisory tone, Error/Special info: 950Hz+1400Hz+1800Hz, 330ms ON, 1s OFF...
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_ERROR : &quot;21&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_CALL_WAITING'>/** Call supervisory tone, Call Waiting:
+</span>      CEPT, JAPAN:    425Hz, 200ms ON, 600ms OFF, 200ms ON, 3s OFF...
+      ANSI (IS-95):   440 Hz, 300 ms ON, 9.7 s OFF,
+                      (100 ms ON, 100 ms OFF, 100 ms ON, 9.7s OFF ...)
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_CALL_WAITING : &quot;22&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_RINGTONE'>/** Call supervisory tone, Ring Tone:
+</span>      CEPT, JAPAN:    425Hz, 1s ON, 4s OFF...
+      ANSI (IS-95):   440Hz + 480Hz, 2s ON, 4s OFF...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_RINGTONE : &quot;23&quot;,
+<span id='android-media-ToneGenerator-property-TONE_PROP_BEEP'>/** Proprietary tone, general beep: 400Hz+1200Hz, 35ms ON
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_PROP_BEEP : &quot;24&quot;,
+<span id='android-media-ToneGenerator-property-TONE_PROP_ACK'>/** Proprietary tone, positive acknowlegement: 1200Hz, 100ms ON, 100ms OFF 2 bursts
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_PROP_ACK : &quot;25&quot;,
+<span id='android-media-ToneGenerator-property-TONE_PROP_NACK'>/** Proprietary tone, negative acknowlegement: 300Hz+400Hz+500Hz, 400ms ON
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_PROP_NACK : &quot;26&quot;,
+<span id='android-media-ToneGenerator-property-TONE_PROP_PROMPT'>/** Proprietary tone, prompt tone: 400Hz+1200Hz, 200ms ON
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_PROP_PROMPT : &quot;27&quot;,
+<span id='android-media-ToneGenerator-property-TONE_PROP_BEEP2'>/** Proprietary tone, general double beep: twice 400Hz+1200Hz, 35ms ON, 200ms OFF, 35ms ON
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_PROP_BEEP2 : &quot;28&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_INTERCEPT'>/** Call supervisory tone (IS-95), intercept tone: alternating 440 Hz and 620 Hz tones,
+</span> each on for 250 ms
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_INTERCEPT : &quot;29&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_INTERCEPT_ABBREV'>/** Call supervisory tone (IS-95), abbreviated intercept: intercept tone limited to 4 seconds
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_INTERCEPT_ABBREV : &quot;30&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_CONGESTION_ABBREV'>/** Call supervisory tone (IS-95), abbreviated congestion: congestion tone limited to 4 seconds
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_CONGESTION_ABBREV : &quot;31&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_CONFIRM'>/** Call supervisory tone (IS-95), confirm tone: a 350 Hz tone added to a 440 Hz tone
+</span> repeated 3 times in a 100 ms on, 100 ms off cycle
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_CONFIRM : &quot;32&quot;,
+<span id='android-media-ToneGenerator-property-TONE_SUP_PIP'>/** Call supervisory tone (IS-95), pip tone: four bursts of 480 Hz tone (0.1 s on, 0.1 s off).
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_SUP_PIP : &quot;33&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_DIAL_TONE_LITE'>/**  CDMA Dial tone : 425Hz  continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_DIAL_TONE_LITE : &quot;34&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_NETWORK_USA_RINGBACK'>/** CDMA USA Ringback: 440Hz+480Hz 2s ON, 4000 OFF ...
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_NETWORK_USA_RINGBACK : &quot;35&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_INTERCEPT'>/**  CDMA Intercept tone: 440Hz 250ms ON, 620Hz 250ms ON ...
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_INTERCEPT : &quot;36&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ABBR_INTERCEPT'>/** CDMA Abbr Intercept tone: 440Hz 250ms ON, 620Hz 250ms ON
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ABBR_INTERCEPT : &quot;37&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_REORDER'>/** CDMA Reorder tone: 480Hz+620Hz 250ms ON, 250ms OFF...
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_REORDER : &quot;38&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ABBR_REORDER'>/**
+</span> CDMA Abbr Reorder tone: 480Hz+620Hz 250ms ON, 250ms OFF repeated for 8 times
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ABBR_REORDER : &quot;39&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_NETWORK_BUSY'>/** CDMA Network Busy tone: 480Hz+620Hz 500ms ON, 500ms OFF continuous
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_NETWORK_BUSY : &quot;40&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CONFIRM'>/** CDMA Confirm tone: 350Hz+440Hz 100ms ON, 100ms OFF repeated for 3 times
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CONFIRM : &quot;41&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ANSWER'>/**
+</span> CDMA answer tone: silent tone - defintion Frequency 0, 0ms ON, 0ms OFF
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ANSWER : &quot;42&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_NETWORK_CALLWAITING'>/**
+</span> CDMA Network Callwaiting tone: 440Hz 300ms ON
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_NETWORK_CALLWAITING : &quot;43&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_PIP'>/** CDMA PIP tone: 480Hz 100ms ON, 100ms OFF repeated for 4 times
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_PIP : &quot;44&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_NORMAL'>/**  ISDN Call Signal Normal tone: {2091Hz 32ms ON, 2556 64ms ON} 20 times,
+</span>  2091 32ms ON, 2556 48ms ON, 4s OFF
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_NORMAL : &quot;45&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP'>/**  ISDN Call Signal Intergroup tone: {2091Hz 32ms ON, 2556 64ms ON} 8 times,
+</span> 2091Hz 32ms ON, 400ms OFF, {2091Hz 32ms ON, 2556Hz 64ms ON} times,
+ 2091Hz 32ms ON, 4s OFF.
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP : &quot;46&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_SP_PRI'>/** ISDN Call Signal SP PRI tone:{2091Hz 32ms ON, 2556 64ms ON} 4 times
+</span> 2091Hz 16ms ON, 200ms OFF, {2091Hz 32ms ON, 2556Hz 64ms ON} 4 times,
+ 2091Hz 16ms ON, 200ms OFF
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_SP_PRI : &quot;47&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_PAT3'>/** ISDN Call sign PAT3 tone: silent tone
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_PAT3 : &quot;48&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_PING_RING'>/** ISDN Ping Ring tone: {2091Hz 32ms ON, 2556Hz 64ms ON} 5 times
+</span> 2091Hz 20ms ON
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_PING_RING : &quot;49&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_PAT5'>/**
+</span> ISDN Pat5 tone: silent tone
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_PAT5 : &quot;50&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_PAT6'>/**
+</span> ISDN Pat6 tone: silent tone
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_PAT6 : &quot;51&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALL_SIGNAL_ISDN_PAT7'>/** ISDN Pat7 tone: silent tone
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALL_SIGNAL_ISDN_PAT7 : &quot;52&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_L'>/** TONE_CDMA_HIGH_L tone: {3700Hz 25ms, 4000Hz 25ms} 40 times
+</span> 4000ms OFF, Repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_L : &quot;53&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_L'>/** TONE_CDMA_MED_L tone: {2600Hz 25ms, 2900Hz 25ms} 40 times
+</span> 4000ms OFF, Repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_L : &quot;54&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_L'>/** TONE_CDMA_LOW_L tone: {1300Hz 25ms, 1450Hz 25ms} 40 times,
+</span> 4000ms OFF, Repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_L : &quot;55&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_SS'>/** CDMA HIGH SS tone: {3700Hz 25ms, 4000Hz 25ms} repeat 16 times,
+</span> 400ms OFF, repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_SS : &quot;56&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_SS'>/** CDMA MED SS tone: {2600Hz 25ms, 2900Hz 25ms} repeat 16 times,
+</span> 400ms OFF, repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_SS : &quot;57&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_SS'>/** CDMA LOW SS tone: {1300z 25ms, 1450Hz 25ms} repeat 16 times,
+</span> 400ms OFF, repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_SS : &quot;58&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_SSL'>/** CDMA HIGH SSL tone: {3700Hz 25ms, 4000Hz 25ms} 8 times,
+</span> 200ms OFF, {3700Hz 25ms, 4000Hz 25ms} repeat 8 times,
+ 200ms OFF, {3700Hz 25ms, 4000Hz 25ms} repeat 16 times,
+ 4000ms OFF, repeat ...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_SSL : &quot;59&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_SSL'>/** CDMA MED SSL tone: {2600Hz 25ms, 2900Hz 25ms} 8 times,
+</span> 200ms OFF, {2600Hz 25ms, 2900Hz 25ms} repeat 8 times,
+ 200ms OFF, {2600Hz 25ms, 2900Hz 25ms} repeat 16 times,
+ 4000ms OFF, repeat ...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_SSL : &quot;60&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_SSL'>/** CDMA LOW SSL tone: {1300Hz 25ms, 1450Hz 25ms} 8 times,
+</span> 200ms OFF, {1300Hz 25ms, 1450Hz 25ms} repeat 8 times,
+ 200ms OFF, {1300Hz 25ms, 1450Hz 25ms} repeat 16 times,
+ 4000ms OFF, repeat ...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_SSL : &quot;61&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_SS_2'>/** CDMA HIGH SS2 tone: {3700Hz 25ms, 4000Hz 25ms} 20 times,
+</span> 1000ms OFF, {3700Hz 25ms, 4000Hz 25ms} 20 times,
+ 3000ms OFF, repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_SS_2 : &quot;62&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_SS_2'>/** CDMA MED SS2 tone: {2600Hz 25ms, 2900Hz 25ms} 20 times,
+</span> 1000ms OFF, {2600Hz 25ms, 2900Hz 25ms} 20 times,
+ 3000ms OFF, repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_SS_2 : &quot;63&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_SS_2'>/** CDMA LOW SS2 tone: {1300Hz 25ms, 1450Hz 25ms} 20 times,
+</span> 1000ms OFF, {1300Hz 25ms, 1450Hz 25ms} 20 times,
+ 3000ms OFF, repeat ....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_SS_2 : &quot;64&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_SLS'>/**  CDMA HIGH SLS tone: {3700Hz 25ms, 4000Hz 25ms} 10 times,
+</span>  500ms OFF, {3700Hz 25ms, 4000Hz 25ms} 20 times, 500ms OFF,
+  {3700Hz 25ms, 4000Hz 25ms} 10 times, 3000ms OFF, REPEAT
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_SLS : &quot;65&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_SLS'>/**  CDMA MED  SLS tone: {2600Hz 25ms, 2900Hz 25ms} 10 times,
+</span>  500ms OFF, {2600Hz 25ms, 2900Hz 25ms} 20 times, 500ms OFF,
+  {2600Hz 25ms, 2900Hz 25ms} 10 times, 3000ms OFF, REPEAT
+
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_SLS : &quot;66&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_SLS'>/**  CDMA LOW SLS tone: {1300Hz 25ms, 1450Hz 25ms} 10 times,
+</span>  500ms OFF, {1300Hz 25ms, 1450Hz 25ms} 20 times, 500ms OFF,
+  {1300Hz 25ms, 1450Hz 25ms} 10 times, 3000ms OFF, REPEAT
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_SLS : &quot;67&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_S_X4'>/**  CDMA HIGH S X4 tone: {3700Hz 25ms, 4000Hz 25ms} 10 times,
+</span>  500ms OFF, {3700Hz 25ms, 4000Hz 25ms} 10 times, 500ms OFF,
+  {3700Hz 25ms, 4000Hz 25ms} 10 times, 500ms OFF,
+  {3700Hz 25ms, 4000Hz 25ms} 10 times, 2500ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_S_X4 : &quot;68&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_S_X4'>/**  CDMA MED S X4 tone: {2600Hz 25ms, 2900Hz 25ms} 10 times,
+</span>  500ms OFF, {2600Hz 25ms, 2900Hz 25ms} 10 times, 500ms OFF,
+  {2600Hz 25ms, 2900Hz 25ms} 10 times, 500ms OFF,
+  {2600Hz 25ms, 2900Hz 25ms} 10 times, 2500ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_S_X4 : &quot;69&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_S_X4'>/**  CDMA LOW  S X4 tone: {2600Hz 25ms, 2900Hz 25ms} 10 times,
+</span>  500ms OFF, {2600Hz 25ms, 2900Hz 25ms} 10 times, 500ms OFF,
+  {2600Hz 25ms, 2900Hz 25ms} 10 times, 500ms OFF,
+  {2600Hz 25ms, 2900Hz 25ms} 10 times, 2500ms OFF, REPEAT....
+
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_S_X4 : &quot;70&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_PBX_L'>/** CDMA HIGH PBX L: {3700Hz 25ms, 4000Hz 25ms}20 times,
+</span> 2000ms OFF,  REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_PBX_L : &quot;71&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_PBX_L'>/**  CDMA MED PBX L: {2600Hz 25ms, 2900Hz 25ms}20 times,
+</span> 2000ms OFF,  REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_PBX_L : &quot;72&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_PBX_L'>/** CDMA LOW PBX L: {1300Hz 25ms,1450Hz 25ms}20 times,
+</span> 2000ms OFF,  REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_PBX_L : &quot;73&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_PBX_SS'>/** CDMA HIGH PBX SS tone: {3700Hz 25ms, 4000Hz 25ms} 8 times
+</span> 200 ms OFF, {3700Hz 25ms 4000Hz 25ms}8 times,
+ 2000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_PBX_SS : &quot;74&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_PBX_SS'>/** CDMA MED PBX SS tone: {2600Hz 25ms, 2900Hz 25ms} 8 times
+</span> 200 ms OFF, {2600Hz 25ms 2900Hz 25ms}8 times,
+ 2000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_PBX_SS : &quot;75&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_PBX_SS'>/** CDMA LOW PBX SS tone: {1300Hz 25ms, 1450Hz 25ms} 8 times
+</span> 200 ms OFF, {1300Hz 25ms 1450Hz 25ms}8 times,
+ 2000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_PBX_SS : &quot;76&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_PBX_SSL'>/** CDMA HIGH PBX SSL tone:{3700Hz 25ms, 4000Hz 25ms} 8 times
+</span> 200ms OFF, {3700Hz 25ms, 4000Hz 25ms} 8 times, 200ms OFF,
+ {3700Hz 25ms, 4000Hz 25ms} 16 times, 1000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_PBX_SSL : &quot;77&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_PBX_SSL'>/** CDMA MED PBX SSL tone:{2600Hz 25ms, 2900Hz 25ms} 8 times
+</span> 200ms OFF, {2600Hz 25ms, 2900Hz 25ms} 8 times, 200ms OFF,
+ {2600Hz 25ms, 2900Hz 25ms} 16 times, 1000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_PBX_SSL : &quot;78&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_PBX_SSL'>/** CDMA LOW PBX SSL tone:{1300Hz 25ms, 1450Hz 25ms} 8 times
+</span> 200ms OFF, {1300Hz 25ms, 1450Hz 25ms} 8 times, 200ms OFF,
+ {1300Hz 25ms, 1450Hz 25ms} 16 times, 1000ms OFF, REPEAT....
+
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_PBX_SSL : &quot;79&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_PBX_SLS'>/** CDMA HIGH PBX SSL tone:{3700Hz 25ms, 4000Hz 25ms} 8 times
+</span> 200ms OFF, {3700Hz 25ms, 4000Hz 25ms} 16 times, 200ms OFF,
+ {3700Hz 25ms, 4000Hz 25ms} 8 times, 1000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_PBX_SLS : &quot;80&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_PBX_SLS'>/** CDMA HIGH PBX SLS tone:{2600Hz 25ms, 2900Hz 25ms} 8 times
+</span> 200ms OFF, {2600Hz 25ms, 2900Hz 25ms} 16 times, 200ms OFF,
+ {2600Hz 25ms, 2900Hz 25ms} 8 times, 1000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_PBX_SLS : &quot;81&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_PBX_SLS'>/** CDMA HIGH PBX SLS tone:{1300Hz 25ms, 1450Hz 25ms} 8 times
+</span> 200ms OFF, {1300Hz 25ms, 1450Hz 25ms} 16 times, 200ms OFF,
+ {1300Hz 25ms, 1450Hz 25ms} 8 times, 1000ms OFF, REPEAT....
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_PBX_SLS : &quot;82&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_HIGH_PBX_S_X4'>/** CDMA HIGH PBX X S4 tone: {3700Hz 25ms 4000Hz 25ms} 8 times,
+</span> 200ms OFF, {3700Hz 25ms 4000Hz 25ms} 8 times, 200ms OFF,
+ {3700Hz 25ms 4000Hz 25ms} 8 times, 200ms OFF,
+ {3700Hz 25ms 4000Hz 25ms} 8 times, 800ms OFF, REPEAT...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_HIGH_PBX_S_X4 : &quot;83&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_MED_PBX_S_X4'>/** CDMA MED PBX X S4 tone: {2600Hz 25ms 2900Hz 25ms} 8 times,
+</span> 200ms OFF, {2600Hz 25ms 2900Hz 25ms} 8 times, 200ms OFF,
+ {2600Hz 25ms 2900Hz 25ms} 8 times, 200ms OFF,
+ {2600Hz 25ms 2900Hz 25ms} 8 times, 800ms OFF, REPEAT...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_MED_PBX_S_X4 : &quot;84&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_LOW_PBX_S_X4'>/** CDMA LOW PBX X S4 tone: {1300Hz 25ms 1450Hz 25ms} 8 times,
+</span> 200ms OFF, {1300Hz 25ms 1450Hz 25ms} 8 times, 200ms OFF,
+ {1300Hz 25ms 1450Hz 25ms} 8 times, 200ms OFF,
+ {1300Hz 25ms 1450Hz 25ms} 8 times, 800ms OFF, REPEAT...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_LOW_PBX_S_X4 : &quot;85&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ALERT_NETWORK_LITE'>/** CDMA Alert Network Lite tone: 1109Hz 62ms ON, 784Hz 62ms ON, 740Hz 62ms ON
+</span> 622Hz 62ms ON, 1109Hz 62ms ON
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ALERT_NETWORK_LITE : &quot;86&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ALERT_AUTOREDIAL_LITE'>/** CDMA Alert Auto Redial tone: {1245Hz 62ms ON, 659Hz 62ms ON} 3 times,
+</span> 1245 62ms ON
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ALERT_AUTOREDIAL_LITE : &quot;87&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ONE_MIN_BEEP'>/** CDMA One Min Beep tone: 1150Hz+770Hz 400ms ON
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ONE_MIN_BEEP : &quot;88&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_KEYPAD_VOLUME_KEY_LITE'>/**
+</span> CDMA KEYPAD Volume key lite tone: 941Hz+1477Hz 120ms ON
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_KEYPAD_VOLUME_KEY_LITE : &quot;89&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_PRESSHOLDKEY_LITE'>/** CDMA PRESSHOLDKEY LITE tone: 587Hz 375ms ON, 1175Hz 125ms ON
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_PRESSHOLDKEY_LITE : &quot;90&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ALERT_INCALL_LITE'>/** CDMA ALERT INCALL LITE tone: 587Hz 62ms, 784 62ms, 831Hz 62ms,
+</span> 784Hz 62ms, 1109 62ms, 784Hz 62ms, 831Hz 62ms, 784Hz 62ms
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ALERT_INCALL_LITE : &quot;91&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_EMERGENCY_RINGBACK'>/** CDMA EMERGENCY RINGBACK tone: {941Hz 125ms ON, 10ms OFF} 3times
+</span> 4990ms OFF, REPEAT...
+
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_EMERGENCY_RINGBACK : &quot;92&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ALERT_CALL_GUARD'>/** CDMA ALERT CALL GUARD tone: {1319Hz 125ms ON, 125ms OFF} 3 times
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ALERT_CALL_GUARD : &quot;93&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_SOFT_ERROR_LITE'>/** CDMA SOFT ERROR LITE  tone: 1047Hz 125ms ON, 370Hz 125ms
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_SOFT_ERROR_LITE : &quot;94&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_CALLDROP_LITE'>/** CDMA CALLDROP LITE tone: 1480Hz 125ms, 1397Hz 125ms, 784Hz 125ms
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_CALLDROP_LITE : &quot;95&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_NETWORK_BUSY_ONE_SHOT'>/** CDMA_NETWORK_BUSY_ONE_SHOT tone: 425Hz 500ms ON, 500ms OFF.
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_NETWORK_BUSY_ONE_SHOT : &quot;96&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_ABBR_ALERT'>/** CDMA_ABBR_ALERT tone: 1150Hz+770Hz 400ms ON
+</span> @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_ABBR_ALERT : &quot;97&quot;,
+<span id='android-media-ToneGenerator-property-TONE_CDMA_SIGNAL_OFF'>/** CDMA_SIGNAL_OFF - silent tone
+</span>
+ @see #ToneGenerator(int, int)
+*/
+TONE_CDMA_SIGNAL_OFF : &quot;98&quot;,
+<span id='android-media-ToneGenerator-property-MAX_VOLUME'>/**Maximum volume, for use with {@link #ToneGenerator(int,int)} */
+</span>MAX_VOLUME : &quot;100&quot;,
+<span id='android-media-ToneGenerator-property-MIN_VOLUME'>/**Minimum volume setting, for use with {@link #ToneGenerator(int,int)} */
+</span>MIN_VOLUME : &quot;0&quot;,
+<span id='android-media-ToneGenerator-method-startTone'>/**This method starts the playback of a tone of the specified type.
+</span> only one tone can play at a time: if a tone is playing while this method is called,
+ this tone is stopped and replaced by the one requested.
+@param {Number} toneType   The type of tone generated chosen from the following list:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #TONE_DTMF_0}
+ &lt;li&gt;{@link #TONE_DTMF_1}
+ &lt;li&gt;{@link #TONE_DTMF_2}
+ &lt;li&gt;{@link #TONE_DTMF_3}
+ &lt;li&gt;{@link #TONE_DTMF_4}
+ &lt;li&gt;{@link #TONE_DTMF_5}
+ &lt;li&gt;{@link #TONE_DTMF_6}
+ &lt;li&gt;{@link #TONE_DTMF_7}
+ &lt;li&gt;{@link #TONE_DTMF_8}
+ &lt;li&gt;{@link #TONE_DTMF_9}
+ &lt;li&gt;{@link #TONE_DTMF_A}
+ &lt;li&gt;{@link #TONE_DTMF_B}
+ &lt;li&gt;{@link #TONE_DTMF_C}
+ &lt;li&gt;{@link #TONE_DTMF_D}
+ &lt;li&gt;{@link #TONE_SUP_DIAL}
+ &lt;li&gt;{@link #TONE_SUP_BUSY}
+ &lt;li&gt;{@link #TONE_SUP_CONGESTION}
+ &lt;li&gt;{@link #TONE_SUP_RADIO_ACK}
+ &lt;li&gt;{@link #TONE_SUP_RADIO_NOTAVAIL}
+ &lt;li&gt;{@link #TONE_SUP_ERROR}
+ &lt;li&gt;{@link #TONE_SUP_CALL_WAITING}
+ &lt;li&gt;{@link #TONE_SUP_RINGTONE}
+ &lt;li&gt;{@link #TONE_PROP_BEEP}
+ &lt;li&gt;{@link #TONE_PROP_ACK}
+ &lt;li&gt;{@link #TONE_PROP_NACK}
+ &lt;li&gt;{@link #TONE_PROP_PROMPT}
+ &lt;li&gt;{@link #TONE_PROP_BEEP2}
+ &lt;li&gt;{@link #TONE_SUP_INTERCEPT}
+ &lt;li&gt;{@link #TONE_SUP_INTERCEPT_ABBREV}
+ &lt;li&gt;{@link #TONE_SUP_CONGESTION_ABBREV}
+ &lt;li&gt;{@link #TONE_SUP_CONFIRM}
+ &lt;li&gt;{@link #TONE_SUP_PIP}
+ &lt;li&gt;{@link #TONE_CDMA_DIAL_TONE_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_NETWORK_USA_RINGBACK}
+ &lt;li&gt;{@link #TONE_CDMA_INTERCEPT}
+ &lt;li&gt;{@link #TONE_CDMA_ABBR_INTERCEPT}
+ &lt;li&gt;{@link #TONE_CDMA_REORDER}
+ &lt;li&gt;{@link #TONE_CDMA_ABBR_REORDER}
+ &lt;li&gt;{@link #TONE_CDMA_NETWORK_BUSY}
+ &lt;li&gt;{@link #TONE_CDMA_CONFIRM}
+ &lt;li&gt;{@link #TONE_CDMA_ANSWER}
+ &lt;li&gt;{@link #TONE_CDMA_NETWORK_CALLWAITING}
+ &lt;li&gt;{@link #TONE_CDMA_PIP}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_NORMAL}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_SP_PRI}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_PAT3}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_PING_RING}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_PAT5}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_PAT6}
+ &lt;li&gt;{@link #TONE_CDMA_CALL_SIGNAL_ISDN_PAT7}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_L}
+ &lt;li&gt;{@link #TONE_CDMA_MED_L}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_L}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_SS}
+ &lt;li&gt;{@link #TONE_CDMA_MED_SS}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_SS}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_SSL}
+ &lt;li&gt;{@link #TONE_CDMA_MED_SSL}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_SSL}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_SS_2}
+ &lt;li&gt;{@link #TONE_CDMA_MED_SS_2}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_SS_2}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_SLS}
+ &lt;li&gt;{@link #TONE_CDMA_MED_SLS}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_SLS}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_S_X4}
+ &lt;li&gt;{@link #TONE_CDMA_MED_S_X4}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_S_X4}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_PBX_L}
+ &lt;li&gt;{@link #TONE_CDMA_MED_PBX_L}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_PBX_L}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_PBX_SS}
+ &lt;li&gt;{@link #TONE_CDMA_MED_PBX_SS}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_PBX_SS}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_PBX_SSL}
+ &lt;li&gt;{@link #TONE_CDMA_MED_PBX_SSL}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_PBX_SSL}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_PBX_SLS}
+ &lt;li&gt;{@link #TONE_CDMA_MED_PBX_SLS}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_PBX_SLS}
+ &lt;li&gt;{@link #TONE_CDMA_HIGH_PBX_S_X4}
+ &lt;li&gt;{@link #TONE_CDMA_MED_PBX_S_X4}
+ &lt;li&gt;{@link #TONE_CDMA_LOW_PBX_S_X4}
+ &lt;li&gt;{@link #TONE_CDMA_ALERT_NETWORK_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_ALERT_AUTOREDIAL_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_ONE_MIN_BEEP}
+ &lt;li&gt;{@link #TONE_CDMA_KEYPAD_VOLUME_KEY_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_PRESSHOLDKEY_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_ALERT_INCALL_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_EMERGENCY_RINGBACK}
+ &lt;li&gt;{@link #TONE_CDMA_ALERT_CALL_GUARD}
+ &lt;li&gt;{@link #TONE_CDMA_SOFT_ERROR_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_CALLDROP_LITE}
+ &lt;li&gt;{@link #TONE_CDMA_NETWORK_BUSY_ONE_SHOT}
+ &lt;li&gt;{@link #TONE_CDMA_ABBR_ALERT}
+ &lt;li&gt;{@link #TONE_CDMA_SIGNAL_OFF}
+ &lt;/ul&gt;
+@see #ToneGenerator(int, int)
+*/
+startTone : function(  ) {},
+
+<span id='android-media-ToneGenerator-method-startTone'>/**This method starts the playback of a tone of the specified type for the specified duration.
+</span>@param {Number} toneType   The type of tone generated @see {@link #startTone(int)}.
+@param {Number} durationMs  The tone duration in milliseconds. If the tone is limited in time by definition,
+ the actual duration will be the minimum of durationMs and the defined tone duration. Setting durationMs to -1,
+ is equivalent to calling {@link #startTone(int)}.
+*/
+startTone : function(  ) {},
+
+<span id='android-media-ToneGenerator-method-stopTone'>/**This method stops the tone currently playing playback.
+</span>@see #ToneGenerator(int, int)
+*/
+stopTone : function(  ) {},
+
+<span id='android-media-ToneGenerator-method-release'>/**Releases resources associated with this ToneGenerator object. It is good
+</span> practice to call this method when you're done using the ToneGenerator.
+*/
+release : function(  ) {},
+
+<span id='android-media-ToneGenerator-method-getAudioSessionId'>/**Returns the audio session ID.
+</span>@return {Number} the ID of the audio session this ToneGenerator belongs to or 0 if an error
+ occured.
+*/
+getAudioSessionId : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

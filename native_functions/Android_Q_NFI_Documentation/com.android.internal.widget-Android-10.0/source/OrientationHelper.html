@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-OrientationHelper'>/**@class com.android.internal.widget.OrientationHelper
+</span>@extends java.lang.Object
+
+ Helper class for LayoutManagers to abstract measurements depending on the View's orientation.
+ &lt;p&gt;
+ It is developed to easily support vertical and horizontal orientations in a LayoutManager but
+ can also be used to abstract calls around view bounds and child measurements with margins and
+ decorations.
+
+ @see #createHorizontalHelper(RecyclerView.LayoutManager)
+ @see #createVerticalHelper(RecyclerView.LayoutManager)
+*/
+var OrientationHelper = {
+
+<span id='com-android-internal-widget-OrientationHelper-property-HORIZONTAL'>/***/
+</span>HORIZONTAL : &quot;0&quot;,
+<span id='com-android-internal-widget-OrientationHelper-property-VERTICAL'>/***/
+</span>VERTICAL : &quot;1&quot;,
+<span id='com-android-internal-widget-OrientationHelper-method-onLayoutComplete'>/**Call this method after onLayout method is complete if state is NOT pre-layout.
+</span> This method records information like layout bounds that might be useful in the next layout
+ calculations.
+*/
+onLayoutComplete : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getTotalSpaceChange'>/**Returns the layout space change between the previous layout pass and current layout pass.
+</span> &lt;p&gt;
+ Make sure you call {@link #onLayoutComplete}() at the end of your LayoutManager's
+ {@link com.android.internal.widget.RecyclerView.LayoutManager#onLayoutChildren(com.android.internal.widget.RecyclerView.Recycler,
+ com.android.internal.widget.RecyclerView.State)} method.
+@return {Number} The difference between the current total space and previous layout's total space.
+@see #onLayoutComplete()
+*/
+getTotalSpaceChange : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getDecoratedStart'>/**Returns the start of the view including its decoration and margin.
+</span> &lt;p&gt;
+ For example, for the horizontal helper, if a View's left is at pixel 20, has 2px left
+ decoration and 3px left margin, returned value will be 15px.
+@param {Object {View}} view The view element to check
+@return {Number} The first pixel of the element
+@see #getDecoratedEnd(android.view.View)
+*/
+getDecoratedStart : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getDecoratedEnd'>/**Returns the end of the view including its decoration and margin.
+</span> &lt;p&gt;
+ For example, for the horizontal helper, if a View's right is at pixel 200, has 2px right
+ decoration and 3px right margin, returned value will be 205.
+@param {Object {View}} view The view element to check
+@return {Number} The last pixel of the element
+@see #getDecoratedStart(android.view.View)
+*/
+getDecoratedEnd : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getTransformedEndWithDecoration'>/**Returns the end of the View after its matrix transformations are applied to its layout
+</span> position.
+ &lt;p&gt;
+ This method is useful when trying to detect the visible edge of a View.
+ &lt;p&gt;
+ It includes the decorations but does not include the margins.
+@param {Object {View}} view The view whose transformed end will be returned
+@return {Number} The end of the View after its decor insets and transformation matrix is applied to
+ its position
+@see RecyclerView.LayoutManager#getTransformedBoundingBox(View, boolean, Rect)
+*/
+getTransformedEndWithDecoration : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getTransformedStartWithDecoration'>/**Returns the start of the View after its matrix transformations are applied to its layout
+</span> position.
+ &lt;p&gt;
+ This method is useful when trying to detect the visible edge of a View.
+ &lt;p&gt;
+ It includes the decorations but does not include the margins.
+@param {Object {View}} view The view whose transformed start will be returned
+@return {Number} The start of the View after its decor insets and transformation matrix is applied to
+ its position
+@see RecyclerView.LayoutManager#getTransformedBoundingBox(View, boolean, Rect)
+*/
+getTransformedStartWithDecoration : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getDecoratedMeasurement'>/**Returns the space occupied by this View in the current orientation including decorations and
+</span> margins.
+@param {Object {View}} view The view element to check
+@return {Number} Total space occupied by this view
+@see #getDecoratedMeasurementInOther(View)
+*/
+getDecoratedMeasurement : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getDecoratedMeasurementInOther'>/**Returns the space occupied by this View in the perpendicular orientation including
+</span> decorations and margins.
+@param {Object {View}} view The view element to check
+@return {Number} Total space occupied by this view in the perpendicular orientation to current one
+@see #getDecoratedMeasurement(View)
+*/
+getDecoratedMeasurementInOther : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getStartAfterPadding'>/**Returns the start position of the layout after the start padding is added.
+</span>@return {Number} The very first pixel we can draw.
+*/
+getStartAfterPadding : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getEndAfterPadding'>/**Returns the end position of the layout after the end padding is removed.
+</span>@return {Number} The end boundary for this layout.
+*/
+getEndAfterPadding : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getEnd'>/**Returns the end position of the layout without taking padding into account.
+</span>@return {Number} The end boundary for this layout without considering padding.
+*/
+getEnd : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-offsetChildren'>/**Offsets all children's positions by the given amount.
+</span>@param {Number} amount Value to add to each child's layout parameters
+*/
+offsetChildren : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getTotalSpace'>/**Returns the total space to layout. This number is the difference between
+</span> {@link #getEndAfterPadding}() and {@link #getStartAfterPadding}().
+@return {Number} Total space to layout children
+*/
+getTotalSpace : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-offsetChild'>/**Offsets the child in this orientation.
+</span>@param {Object {View}} view   View to offset
+@param {Number} offset offset amount
+*/
+offsetChild : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getEndPadding'>/**Returns the padding at the end of the layout. For horizontal helper, this is the right
+</span> padding and for vertical helper, this is the bottom padding. This method does not check
+ whether the layout is RTL or not.
+@return {Number} The padding at the end of the layout.
+*/
+getEndPadding : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getMode'>/**Returns the MeasureSpec mode for the current orientation from the LayoutManager.
+</span>@return {Number} The current measure spec mode.
+@see View.MeasureSpec
+@see RecyclerView.LayoutManager#getWidthMode()
+@see RecyclerView.LayoutManager#getHeightMode()
+*/
+getMode : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-getModeInOther'>/**Returns the MeasureSpec mode for the perpendicular orientation from the LayoutManager.
+</span>@return {Number} The current measure spec mode.
+@see View.MeasureSpec
+@see RecyclerView.LayoutManager#getWidthMode()
+@see RecyclerView.LayoutManager#getHeightMode()
+*/
+getModeInOther : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-createOrientationHelper'>/**Creates an OrientationHelper for the given LayoutManager and orientation.
+</span>@param {Object {RecyclerView.LayoutManager}} layoutManager LayoutManager to attach to
+@param {Number} orientation   Desired orientation. Should be {@link #HORIZONTAL} or {@link #VERTICAL}
+@return {Object {com.android.internal.widget.OrientationHelper}} A new OrientationHelper
+*/
+createOrientationHelper : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-createHorizontalHelper'>/**Creates a horizontal OrientationHelper for the given LayoutManager.
+</span>@param {Object {RecyclerView.LayoutManager}} layoutManager The LayoutManager to attach to.
+@return {Object {com.android.internal.widget.OrientationHelper}} A new OrientationHelper
+*/
+createHorizontalHelper : function(  ) {},
+
+<span id='com-android-internal-widget-OrientationHelper-method-createVerticalHelper'>/**Creates a vertical OrientationHelper for the given LayoutManager.
+</span>@param {Object {RecyclerView.LayoutManager}} layoutManager The LayoutManager to attach to.
+@return {Object {com.android.internal.widget.OrientationHelper}} A new OrientationHelper
+*/
+createVerticalHelper : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

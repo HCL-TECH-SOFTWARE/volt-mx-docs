@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-AtomicDirectory'>/**@class com.android.internal.os.AtomicDirectory
+</span>@extends java.lang.Object
+
+ Helper class for performing atomic operations on a directory, by creating a
+ backup directory until a write has successfully completed.
+ &lt;p&gt;
+ Atomic directory guarantees directory integrity by ensuring that a directory has
+ been completely written and sync'd to disk before removing its backup.
+ As long as the backup directory exists, the original directory is considered
+ to be invalid (leftover from a previous attempt to write).
+ &lt;p&gt;
+ Atomic directory does not confer any file locking semantics. Do not use this
+ class when the directory may be accessed or modified concurrently
+ by multiple threads or processes. The caller is responsible for ensuring
+ appropriate mutual exclusion invariants whenever it accesses the directory.
+ &lt;p&gt;
+ To ensure atomicity you must always use this class to interact with the
+ backing directory when checking existence, making changes, and deleting.
+*/
+var AtomicDirectory = {
+
+<span id='com-android-internal-os-AtomicDirectory-method-getBackupDirectory'>/**Gets the backup directory if present. This could be useful if you are
+</span> writing new state to the dir but need to access the last persisted state
+ at the same time. This means that this call is useful in between
+ {@link #startWrite}() and {@link #finishWrite}() or {@link #failWrite}().
+ You should not modify the content returned by this method.
+@see #startRead()
+*/
+getBackupDirectory : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-startRead'>/**Starts reading this directory. After calling this method you should
+</span> not make any changes to its contents.
+@throws IOException If an error occurs.
+@see #finishRead()
+@see #startWrite()
+*/
+startRead : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-finishRead'>/**Finishes reading this directory.
+</span>@see #startRead()
+@see #startWrite()
+*/
+finishRead : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-startWrite'>/**Starts editing this directory. After calling this method you should
+</span> add content to the directory only via the APIs on this class. To open a
+ file for writing in this directory you should use {@link #openWrite}(File)
+ and to close the file {@link #closeWrite}(FileOutputStream). Once all
+ content has been written and all files closed you should commit via a
+ call to {@link #finishWrite}() or discard via a call to {@link #failWrite}().
+@throws IOException If an error occurs.
+@see #startRead()
+@see #openWrite(File)
+@see #finishWrite()
+@see #failWrite()
+*/
+startWrite : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-openWrite'>/**Opens a file in this directory for writing.
+</span>@param {Object {File}} file The file to open. Must be a file in the base directory.
+@return {Object {java.io.FileOutputStream}} An input stream for reading.
+@throws IOException If an I/O error occurs.
+@see #closeWrite(FileOutputStream)
+*/
+openWrite : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-closeWrite'>/**Closes a previously opened file.
+</span>@param {Object {FileOutputStream}} destination The stream to the file returned by {@link #openWrite(File)}.
+@see #openWrite(File)
+*/
+closeWrite : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-failWrite'>/**
+</span>*/
+failWrite : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-finishWrite'>/**Finishes the edit and commits all changes.
+</span>@see #startWrite()
+@throws IllegalStateException is some files are not closed.
+*/
+finishWrite : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-failWrite'>/**Finishes the edit and discards all changes.
+</span>@see #startWrite()
+*/
+failWrite : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-exists'>/**
+</span>@return {Boolean} Whether this directory exists.
+*/
+exists : function(  ) {},
+
+<span id='com-android-internal-os-AtomicDirectory-method-delete'>/**Deletes this directory.
+</span>*/
+delete : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

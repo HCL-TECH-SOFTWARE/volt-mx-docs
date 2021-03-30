@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-RemoteControlClient'>/**@class android.media.RemoteControlClient
+</span>@extends java.lang.Object
+
+ RemoteControlClient enables exposing information meant to be consumed by remote controls
+ capable of displaying metadata, artwork and media transport control buttons.
+
+ &lt;p&gt;A remote control client object is associated with a media button event receiver. This
+ event receiver must have been previously registered with
+ {@link android.media.AudioManager#registerMediaButtonEventReceiver(ComponentName)} before the
+ RemoteControlClient can be registered through
+ {@link android.media.AudioManager#registerRemoteControlClient(RemoteControlClient)}.
+
+ &lt;p&gt;Here is an example of creating a RemoteControlClient instance after registering a media
+ button event receiver:
+ &lt;pre&gt;ComponentName myEventReceiver = new ComponentName(getPackageName(), MyRemoteControlEventReceiver.class.getName());
+ AudioManager myAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+ myAudioManager.registerMediaButtonEventReceiver(myEventReceiver);
+ // build the PendingIntent for the remote control client
+ Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+ mediaButtonIntent.setComponent(myEventReceiver);
+ PendingIntent mediaPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, 0);
+ // create and register the remote control client
+ RemoteControlClient myRemoteControlClient = new RemoteControlClient(mediaPendingIntent);
+ myAudioManager.registerRemoteControlClient(myRemoteControlClient);&lt;/pre&gt;
+
+ @deprecated Use {@link MediaSession} instead.
+*/
+var RemoteControlClient = {
+
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_STOPPED'>/** Playback state of a RemoteControlClient which is stopped.
+</span>
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_STOPPED : &quot;1&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_PAUSED'>/** Playback state of a RemoteControlClient which is paused.
+</span>
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_PAUSED : &quot;2&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_PLAYING'>/** Playback state of a RemoteControlClient which is playing media.
+</span>
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_PLAYING : &quot;3&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_FAST_FORWARDING'>/** Playback state of a RemoteControlClient which is fast forwarding in the media
+</span>    it is currently playing.
+
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_FAST_FORWARDING : &quot;4&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_REWINDING'>/** Playback state of a RemoteControlClient which is fast rewinding in the media
+</span>    it is currently playing.
+
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_REWINDING : &quot;5&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_SKIPPING_FORWARDS'>/** Playback state of a RemoteControlClient which is skipping to the next
+</span>    logical chapter (such as a song in a playlist) in the media it is currently playing.
+
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_SKIPPING_FORWARDS : &quot;6&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_SKIPPING_BACKWARDS'>/** Playback state of a RemoteControlClient which is skipping back to the previous
+</span>    logical chapter (such as a song in a playlist) in the media it is currently playing.
+
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_SKIPPING_BACKWARDS : &quot;7&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_BUFFERING'>/** Playback state of a RemoteControlClient which is buffering data to play before it can
+</span>    start or resume playback.
+
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_BUFFERING : &quot;8&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_ERROR'>/** Playback state of a RemoteControlClient which cannot perform any playback related
+</span>    operation because of an internal error. Examples of such situations are no network
+    connectivity when attempting to stream data from a server, or expired user credentials
+    when trying to play subscription-based content.
+
+ @see #setPlaybackState(int)
+*/
+PLAYSTATE_ERROR : &quot;9&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYSTATE_NONE'>/** @hide
+</span> The value of a playback state when none has been declared.
+ Intentionally hidden as an application shouldn't set such a playback state value.
+*/
+PLAYSTATE_NONE : &quot;0&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACK_TYPE_LOCAL'>/** @hide
+</span> The default playback type, &quot;local&quot;, indicating the presentation of the media is happening on
+ the same device (e.g. a phone, a tablet) as where it is controlled from.
+*/
+PLAYBACK_TYPE_LOCAL : &quot;0&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACK_TYPE_REMOTE'>/** @hide
+</span> A playback type indicating the presentation of the media is happening on
+ a different device (i.e. the remote device) than where it is controlled from.
+*/
+PLAYBACK_TYPE_REMOTE : &quot;1&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACK_VOLUME_FIXED'>/** @hide
+</span> Playback information indicating the playback volume is fixed, i.e. it cannot be controlled
+ from this object. An example of fixed playback volume is a remote player, playing over HDMI
+ where the user prefer to control the volume on the HDMI sink, rather than attenuate at the
+ source.
+ @see #PLAYBACKINFO_VOLUME_HANDLING.
+*/
+PLAYBACK_VOLUME_FIXED : &quot;0&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACK_VOLUME_VARIABLE'>/** @hide
+</span> Playback information indicating the playback volume is variable and can be controlled from
+ this object.
+ @see #PLAYBACKINFO_VOLUME_HANDLING.
+*/
+PLAYBACK_VOLUME_VARIABLE : &quot;1&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACKINFO_INVALID_VALUE'>/** @hide (to be un-hidden)
+</span> The playback information value indicating the value of a given information type is invalid.
+ @see #PLAYBACKINFO_VOLUME_HANDLING.
+*/
+PLAYBACKINFO_INVALID_VALUE : &quot;-2147483648&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACK_POSITION_INVALID'>/** @hide
+</span> An unknown or invalid playback position value.
+*/
+PLAYBACK_POSITION_INVALID : &quot;-1&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACK_POSITION_ALWAYS_UNKNOWN'>/** @hide
+</span> An invalid playback position value associated with the use of {@link #setPlaybackState}(int)
+ used to indicate that playback position will remain unknown.
+*/
+PLAYBACK_POSITION_ALWAYS_UNKNOWN : &quot;-9216204211029966080&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACK_SPEED_1X'>/** @hide
+</span> The default playback speed, 1x.
+*/
+PLAYBACK_SPEED_1X : &quot;1.0&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACKINFO_PLAYBACK_TYPE'>/** @hide
+</span> Playback information that defines the type of playback associated with this
+ RemoteControlClient. See {@link #PLAYBACK_TYPE_LOCAL} and {@link #PLAYBACK_TYPE_REMOTE}.
+*/
+PLAYBACKINFO_PLAYBACK_TYPE : &quot;1&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACKINFO_VOLUME'>/** @hide
+</span> Playback information that defines at what volume the playback associated with this
+ RemoteControlClient is performed. This information is only used when the playback type is not
+ local (see {@link #PLAYBACKINFO_PLAYBACK_TYPE}).
+*/
+PLAYBACKINFO_VOLUME : &quot;2&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACKINFO_VOLUME_MAX'>/** @hide
+</span> Playback information that defines the maximum volume volume value that is supported
+ by the playback associated with this RemoteControlClient. This information is only used
+ when the playback type is not local (see {@link #PLAYBACKINFO_PLAYBACK_TYPE}).
+*/
+PLAYBACKINFO_VOLUME_MAX : &quot;3&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACKINFO_VOLUME_HANDLING'>/** @hide
+</span> Playback information that defines how volume is handled for the presentation of the media.
+ @see #PLAYBACK_VOLUME_FIXED
+ @see #PLAYBACK_VOLUME_VARIABLE
+*/
+PLAYBACKINFO_VOLUME_HANDLING : &quot;4&quot;,
+<span id='android-media-RemoteControlClient-property-PLAYBACKINFO_USES_STREAM'>/** @hide
+</span> Playback information that defines over what stream type the media is presented.
+*/
+PLAYBACKINFO_USES_STREAM : &quot;5&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_PREVIOUS'>/** Flag indicating a RemoteControlClient makes use of the &quot;previous&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_PREVIOUS
+*/
+FLAG_KEY_MEDIA_PREVIOUS : &quot;1&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_REWIND'>/** Flag indicating a RemoteControlClient makes use of the &quot;rewind&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_REWIND
+*/
+FLAG_KEY_MEDIA_REWIND : &quot;2&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_PLAY'>/** Flag indicating a RemoteControlClient makes use of the &quot;play&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_PLAY
+*/
+FLAG_KEY_MEDIA_PLAY : &quot;4&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_PLAY_PAUSE'>/** Flag indicating a RemoteControlClient makes use of the &quot;play/pause&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_PLAY_PAUSE
+*/
+FLAG_KEY_MEDIA_PLAY_PAUSE : &quot;8&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_PAUSE'>/** Flag indicating a RemoteControlClient makes use of the &quot;pause&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_PAUSE
+*/
+FLAG_KEY_MEDIA_PAUSE : &quot;16&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_STOP'>/** Flag indicating a RemoteControlClient makes use of the &quot;stop&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_STOP
+*/
+FLAG_KEY_MEDIA_STOP : &quot;32&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_FAST_FORWARD'>/** Flag indicating a RemoteControlClient makes use of the &quot;fast forward&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_FAST_FORWARD
+*/
+FLAG_KEY_MEDIA_FAST_FORWARD : &quot;64&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_NEXT'>/** Flag indicating a RemoteControlClient makes use of the &quot;next&quot; media key.
+</span>
+ @see #setTransportControlFlags(int)
+ @see android.view.KeyEvent#KEYCODE_MEDIA_NEXT
+*/
+FLAG_KEY_MEDIA_NEXT : &quot;128&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_POSITION_UPDATE'>/** Flag indicating a RemoteControlClient can receive changes in the media playback position
+</span> through the {@link android.media.AudioTrack.OnPlaybackPositionUpdateListener} interface. This flag must be set
+ in order for components that display the RemoteControlClient information, to display and
+ let the user control media playback position.
+ @see #setTransportControlFlags(int)
+ @see #setOnGetPlaybackPositionListener(OnGetPlaybackPositionListener)
+ @see #setPlaybackPositionUpdateListener(OnPlaybackPositionUpdateListener)
+*/
+FLAG_KEY_MEDIA_POSITION_UPDATE : &quot;256&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_KEY_MEDIA_RATING'>/** Flag indicating a RemoteControlClient supports ratings.
+</span> This flag must be set in order for components that display the RemoteControlClient
+ information, to display ratings information, and, if ratings are declared editable
+ (by calling {@link android.media.MediaMetadataEditor#addEditableKey(int)} with the
+ {@link android.media.MediaMetadataEditor#RATING_KEY_BY_USER} key), it will enable the user to rate
+ the media, with values being received through the interface set with
+ {@link #setMetadataUpdateListener}(OnMetadataUpdateListener).
+ @see #setTransportControlFlags(int)
+*/
+FLAG_KEY_MEDIA_RATING : &quot;512&quot;,
+<span id='android-media-RemoteControlClient-property-FLAGS_KEY_MEDIA_NONE'>/** @hide
+</span> The flags for when no media keys are declared supported.
+ Intentionally hidden as an application shouldn't set the transport control flags
+     to this value.
+*/
+FLAGS_KEY_MEDIA_NONE : &quot;0&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_INFORMATION_REQUEST_METADATA'>/** @hide
+</span> Flag used to signal some type of metadata exposed by the RemoteControlClient is requested.
+*/
+FLAG_INFORMATION_REQUEST_METADATA : &quot;1&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_INFORMATION_REQUEST_KEY_MEDIA'>/** @hide
+</span> Flag used to signal that the transport control buttons supported by the
+     RemoteControlClient are requested.
+ This can for instance happen when playback is at the end of a playlist, and the &quot;next&quot;
+ operation is not supported anymore.
+*/
+FLAG_INFORMATION_REQUEST_KEY_MEDIA : &quot;2&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_INFORMATION_REQUEST_PLAYSTATE'>/** @hide
+</span> Flag used to signal that the playback state of the RemoteControlClient is requested.
+*/
+FLAG_INFORMATION_REQUEST_PLAYSTATE : &quot;4&quot;,
+<span id='android-media-RemoteControlClient-property-FLAG_INFORMATION_REQUEST_ALBUM_ART'>/** @hide
+</span> Flag used to signal that the album art for the RemoteControlClient is requested.
+*/
+FLAG_INFORMATION_REQUEST_ALBUM_ART : &quot;8&quot;,
+<span id='android-media-RemoteControlClient-property-MEDIA_POSITION_READABLE'>/** @hide
+</span> Flag to reflect that the application controlling this RemoteControlClient sends playback
+ position updates. The playback position being &quot;readable&quot; is considered from the application's
+ point of view.
+*/
+MEDIA_POSITION_READABLE : &quot;null&quot;,
+<span id='android-media-RemoteControlClient-property-MEDIA_POSITION_WRITABLE'>/** @hide
+</span> Flag to reflect that the application controlling this RemoteControlClient can receive
+ playback position updates. The playback position being &quot;writable&quot;
+ is considered from the application's point of view.
+*/
+MEDIA_POSITION_WRITABLE : &quot;null&quot;,
+<span id='android-media-RemoteControlClient-property-DEFAULT_PLAYBACK_VOLUME_HANDLING'>/**@hide */
+</span>DEFAULT_PLAYBACK_VOLUME_HANDLING : &quot;1&quot;,
+<span id='android-media-RemoteControlClient-property-DEFAULT_PLAYBACK_VOLUME'>/**@hide */
+</span>DEFAULT_PLAYBACK_VOLUME : &quot;15&quot;,
+<span id='android-media-RemoteControlClient-property-RCSE_ID_UNREGISTERED'>/** @hide
+</span> Default value for the unique identifier
+*/
+RCSE_ID_UNREGISTERED : &quot;-1&quot;,
+<span id='android-media-RemoteControlClient-method-registerWithSession'>/**
+</span>@hide 
+*/
+registerWithSession : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-unregisterWithSession'>/**
+</span>@hide 
+*/
+unregisterWithSession : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-getMediaSession'>/**Get a {@link MediaSession} associated with this RCC. It will only have a
+</span> session while it is registered with
+ {@link android.media.AudioManager#registerRemoteControlClient}. The session returned
+ should not be modified directly by the application but may be used with
+ other APIs that require a session.
+@return {Object {android.media.session.MediaSession}} A media session object or null.
+*/
+getMediaSession : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-editMetadata'>/**Creates a {@link android.media.MetadataEditor}.
+</span>@param {Boolean} startEmpty Set to false if you want the MetadataEditor to contain the metadata that
+     was previously applied to the RemoteControlClient, or true if it is to be created empty.
+@return {Object {android.media.RemoteControlClient.MetadataEditor}} a new MetadataEditor instance.
+*/
+editMetadata : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-setPlaybackState'>/**Sets the current playback state.
+</span>@param {Number} state The current playback state, one of the following values:
+       {@link #PLAYSTATE_STOPPED},
+       {@link #PLAYSTATE_PAUSED},
+       {@link #PLAYSTATE_PLAYING},
+       {@link #PLAYSTATE_FAST_FORWARDING},
+       {@link #PLAYSTATE_REWINDING},
+       {@link #PLAYSTATE_SKIPPING_FORWARDS},
+       {@link #PLAYSTATE_SKIPPING_BACKWARDS},
+       {@link #PLAYSTATE_BUFFERING},
+       {@link #PLAYSTATE_ERROR}.
+*/
+setPlaybackState : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-setPlaybackState'>/**Sets the current playback state and the matching media position for the current playback
+</span>   speed.
+@param {Number} state The current playback state, one of the following values:
+       {@link #PLAYSTATE_STOPPED},
+       {@link #PLAYSTATE_PAUSED},
+       {@link #PLAYSTATE_PLAYING},
+       {@link #PLAYSTATE_FAST_FORWARDING},
+       {@link #PLAYSTATE_REWINDING},
+       {@link #PLAYSTATE_SKIPPING_FORWARDS},
+       {@link #PLAYSTATE_SKIPPING_BACKWARDS},
+       {@link #PLAYSTATE_BUFFERING},
+       {@link #PLAYSTATE_ERROR}.
+@param {Number} timeInMs a 0 or positive value for the current media position expressed in ms
+    (same unit as for when sending the media duration, if applicable, with
+    {@link android.media.MediaMetadataRetriever#METADATA_KEY_DURATION} in the
+    {@link RemoteControlClient.MetadataEditor}). Negative values imply that position is not
+    known (e.g. listening to a live stream of a radio) or not applicable (e.g. when state
+    is {@link #PLAYSTATE_BUFFERING} and nothing had played yet).
+@param {Number} playbackSpeed a value expressed as a ratio of 1x playback: 1.0f is normal playback,
+    2.0f is 2x, 0.5f is half-speed, -2.0f is rewind at 2x speed. 0.0f means nothing is
+    playing (e.g. when state is {@link #PLAYSTATE_ERROR}).
+*/
+setPlaybackState : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-setTransportControlFlags'>/**Sets the flags for the media transport control buttons that this client supports.
+</span>@param {Number} transportControlFlags A combination of the following flags:
+      {@link #FLAG_KEY_MEDIA_PREVIOUS},
+      {@link #FLAG_KEY_MEDIA_REWIND},
+      {@link #FLAG_KEY_MEDIA_PLAY},
+      {@link #FLAG_KEY_MEDIA_PLAY_PAUSE},
+      {@link #FLAG_KEY_MEDIA_PAUSE},
+      {@link #FLAG_KEY_MEDIA_STOP},
+      {@link #FLAG_KEY_MEDIA_FAST_FORWARD},
+      {@link #FLAG_KEY_MEDIA_NEXT},
+      {@link #FLAG_KEY_MEDIA_POSITION_UPDATE},
+      {@link #FLAG_KEY_MEDIA_RATING}.
+*/
+setTransportControlFlags : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-setMetadataUpdateListener'>/**Sets the listener to be called whenever the metadata is updated.
+</span> New metadata values will be received in the same thread as the one in which
+ RemoteControlClient was created.
+@param {Object {RemoteControlClient.OnMetadataUpdateListener}} l the metadata update listener
+*/
+setMetadataUpdateListener : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-setPlaybackPositionUpdateListener'>/**Sets the listener to be called whenever the media playback position is requested
+</span> to be updated.
+ Notifications will be received in the same thread as the one in which RemoteControlClient
+ was created.
+@param {Object {RemoteControlClient.OnPlaybackPositionUpdateListener}} l the position update listener to be called
+*/
+setPlaybackPositionUpdateListener : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-setOnGetPlaybackPositionListener'>/**Sets the listener to be called whenever the media current playback position is needed.
+</span> Queries will be received in the same thread as the one in which RemoteControlClient
+ was created.
+@param {Object {RemoteControlClient.OnGetPlaybackPositionListener}} l the listener to be called to retrieve the playback position
+*/
+setOnGetPlaybackPositionListener : function(  ) {},
+
+<span id='android-media-RemoteControlClient-method-getRcMediaIntent'>/**
+</span>@hide Accessor to media button intent description (includes target component)
+*/
+getRcMediaIntent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

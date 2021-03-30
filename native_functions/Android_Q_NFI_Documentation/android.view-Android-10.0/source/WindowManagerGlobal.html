@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-WindowManagerGlobal'>/**@class android.view.WindowManagerGlobal
+</span>@extends java.lang.Object
+
+ Provides low-level communication with the system window manager for
+ operations that are not associated with any particular context.
+
+ This class is only used internally to implement global functions where
+ the caller already knows the display and relevant compatibility information
+ for the operation.  For most purposes, you should use {@link android.view.WindowManager} instead
+ since it is bound to a context.
+
+ @see WindowManagerImpl
+ @hide
+*/
+var WindowManagerGlobal = {
+
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_RES_IN_TOUCH_MODE'>/** The user is navigating with keys (not the touch screen), so
+</span> navigational focus should be shown.
+*/
+RELAYOUT_RES_IN_TOUCH_MODE : &quot;1&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_RES_FIRST_TIME'>/** This is the first time the window is being drawn,
+</span> so the client must call drawingFinished() when done
+*/
+RELAYOUT_RES_FIRST_TIME : &quot;2&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_RES_SURFACE_CHANGED'>/** The window manager has changed the surface from the last call.
+</span>*/
+RELAYOUT_RES_SURFACE_CHANGED : &quot;4&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_RES_DRAG_RESIZING_DOCKED'>/** The window is being resized by dragging on the docked divider. The client should render
+</span> at (0, 0) and extend its background to the background frame passed into
+ {@link IWindow#resized}.
+*/
+RELAYOUT_RES_DRAG_RESIZING_DOCKED : &quot;8&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_RES_DRAG_RESIZING_FREEFORM'>/** The window is being resized by dragging one of the window corners,
+</span> in this case the surface would be fullscreen-sized. The client should
+ render to the actual frame location (instead of (0,curScrollY)).
+*/
+RELAYOUT_RES_DRAG_RESIZING_FREEFORM : &quot;16&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_RES_SURFACE_RESIZED'>/** The window manager has changed the size of the surface from the last call.
+</span>*/
+RELAYOUT_RES_SURFACE_RESIZED : &quot;32&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_RES_CONSUME_ALWAYS_SYSTEM_BARS'>/** In multi-window we force show the system bars. Because we don't want that the surface size
+</span> changes in this mode, we instead have a flag whether the system bar sizes should always be
+ consumed, so the app is treated like there is no virtual system bars at all.
+*/
+RELAYOUT_RES_CONSUME_ALWAYS_SYSTEM_BARS : &quot;64&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_INSETS_PENDING'>/** Flag for relayout: the client will be later giving
+</span> internal insets; as a result, the window will not impact other window
+ layouts until the insets are given.
+*/
+RELAYOUT_INSETS_PENDING : &quot;1&quot;,
+<span id='android-view-WindowManagerGlobal-property-RELAYOUT_DEFER_SURFACE_DESTROY'>/** Flag for relayout: the client may be currently using the current surface,
+</span> so if it is to be destroyed as a part of the relayout the destroy must
+ be deferred until later.  The client will call performDeferredDestroy()
+ when it is okay.
+*/
+RELAYOUT_DEFER_SURFACE_DESTROY : &quot;2&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_FLAG_APP_VISIBLE'>/***/
+</span>ADD_FLAG_APP_VISIBLE : &quot;2&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_FLAG_IN_TOUCH_MODE'>/***/
+</span>ADD_FLAG_IN_TOUCH_MODE : &quot;1&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_FLAG_ALWAYS_CONSUME_SYSTEM_BARS'>/** Like {@link #RELAYOUT_RES_CONSUME_ALWAYS_SYSTEM_BARS}, but as a &quot;hint&quot; when adding the
+</span> window.
+*/
+ADD_FLAG_ALWAYS_CONSUME_SYSTEM_BARS : &quot;4&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_OKAY'>/***/
+</span>ADD_OKAY : &quot;0&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_BAD_APP_TOKEN'>/***/
+</span>ADD_BAD_APP_TOKEN : &quot;-1&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_BAD_SUBWINDOW_TOKEN'>/***/
+</span>ADD_BAD_SUBWINDOW_TOKEN : &quot;-2&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_NOT_APP_TOKEN'>/***/
+</span>ADD_NOT_APP_TOKEN : &quot;-3&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_APP_EXITING'>/***/
+</span>ADD_APP_EXITING : &quot;-4&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_DUPLICATE_ADD'>/***/
+</span>ADD_DUPLICATE_ADD : &quot;-5&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_STARTING_NOT_NEEDED'>/***/
+</span>ADD_STARTING_NOT_NEEDED : &quot;-6&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_MULTIPLE_SINGLETON'>/***/
+</span>ADD_MULTIPLE_SINGLETON : &quot;-7&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_PERMISSION_DENIED'>/***/
+</span>ADD_PERMISSION_DENIED : &quot;-8&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_INVALID_DISPLAY'>/***/
+</span>ADD_INVALID_DISPLAY : &quot;-9&quot;,
+<span id='android-view-WindowManagerGlobal-property-ADD_INVALID_TYPE'>/***/
+</span>ADD_INVALID_TYPE : &quot;-10&quot;,
+<span id='android-view-WindowManagerGlobal-method-initialize'>/**
+</span>*/
+initialize : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getInstance'>/**
+</span>*/
+getInstance : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getWindowManagerService'>/**
+</span>*/
+getWindowManagerService : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getWindowSession'>/**
+</span>*/
+getWindowSession : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-peekWindowSession'>/**
+</span>*/
+peekWindowSession : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getViewRootNames'>/**
+</span>*/
+getViewRootNames : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getRootViews'>/**
+</span>*/
+getRootViews : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getWindowViews'>/**
+</span>@return {Object {java.util.ArrayList}} the list of all views attached to the global window manager
+*/
+getWindowViews : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getWindowView'>/**
+</span>*/
+getWindowView : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-getRootView'>/**
+</span>*/
+getRootView : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-addView'>/**
+</span>*/
+addView : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-updateViewLayout'>/**
+</span>*/
+updateViewLayout : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-removeView'>/**
+</span>*/
+removeView : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-closeAll'>/**Remove all roots with specified token.
+</span>@param {Object {IBinder}} token app or window token.
+@param {String} who name of caller, used in logs.
+@param {String} what type of caller, used in logs.
+*/
+closeAll : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-closeAllExceptView'>/**Remove all roots with specified token, except maybe one view.
+</span>@param {Object {IBinder}} token app or window token.
+@param {Object {View}} view view that should be should be preserved along with it's root.
+             Pass null if everything should be removed.
+@param {String} who name of caller, used in logs.
+@param {String} what type of caller, used in logs.
+*/
+closeAllExceptView : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-shouldDestroyEglContext'>/**
+</span>*/
+shouldDestroyEglContext : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-trimMemory'>/**
+</span>*/
+trimMemory : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-trimForeground'>/**
+</span>*/
+trimForeground : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-dumpGfxInfo'>/**
+</span>*/
+dumpGfxInfo : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-setStoppedState'>/**
+</span>*/
+setStoppedState : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-reportNewConfiguration'>/**
+</span>*/
+reportNewConfiguration : function(  ) {},
+
+<span id='android-view-WindowManagerGlobal-method-changeCanvasOpacity'>/**
+</span>@hide 
+*/
+changeCanvasOpacity : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

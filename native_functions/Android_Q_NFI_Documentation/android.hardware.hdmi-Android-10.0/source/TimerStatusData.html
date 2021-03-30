@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData'>/**@class android.hardware.hdmi.HdmiRecordListener.TimerStatusData
+</span>@extends java.lang.Object
+
+ [Timer overlap warning] [Media Info] [Timer Programmed Info]
+ @hide
+*/
+var TimerStatusData = {
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-isOverlapped'>/**Indicates if there is another timer block already set which overlaps with this new
+</span> recording request.
+*/
+isOverlapped : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-getMediaInfo'>/**Indicates if removable media is present and its write protect state.
+</span> It should be one of the following values.
+ &lt;ul&gt;
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_MEDIA_INFO_PRESENT_NOT_PROTECTED}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_MEDIA_INFO_PRESENT_PROTECTED}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_MEDIA_INFO_NOT_PRESENT}
+ &lt;/ul&gt;
+*/
+getMediaInfo : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-isProgrammed'>/**Selector for [Timer Programmed Info].
+</span> If it is {@code true}, {@link #getProgrammedInfo}() would have meaningful value and
+ ignore result of {@link #getNotProgammedError}().
+*/
+isProgrammed : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-getProgrammedInfo'>/**Information indicating any non-fatal issues with the programming request.
+</span> It's set only if {@link #isProgrammed}() returns true.
+ It should be one of the following values.
+ &lt;ul&gt;
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_PROGRAMMED_INFO_ENOUGH_SPACE}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_PROGRAMMED_INFO_NOT_ENOUGH_SPACE}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_PROGRAMMED_INFO_MIGHT_NOT_ENOUGH_SPACE}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_PROGRAMMED_INFO_NO_MEDIA_INFO}
+ &lt;/ul&gt;
+@throws IllegalStateException if it's called when {@link #isProgrammed()}
+                               returns false
+*/
+getProgrammedInfo : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-getNotProgammedError'>/**Information indicating any fatal issues with the programming request.
+</span> It's set only if {@link #isProgrammed}() returns false.
+ it should be one of the following values.
+ &lt;ul&gt;
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_NO_FREE_TIME}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_DATE_OUT_OF_RANGE}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_INVALID_SEQUENCE}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_INVALID_EXTERNAL_PHYSICAL_NUMBER}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_CA_NOT_SUPPORTED}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_NO_CA_ENTITLEMENTS}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_UNSUPPORTED_RESOLUTION}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_PARENTAL_LOCK_ON}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_CLOCK_FAILURE}
+   &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_STATUS_NOT_PROGRAMMED_DUPLICATED}
+ &lt;/ul&gt;
+@throws IllegalStateException if it's called when {@link #isProgrammed()}
+                               returns true
+*/
+getNotProgammedError : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-getDurationHour'>/**Duration hours.
+</span> Optional parameter: Contains an estimate of the space left on the media, expressed as a
+ time. This parameter may be returned when:
+  - [Programmed Info] is “Not enough space available”; or
+  - [Not Programmed Info] is “Duplicate: already programmed”
+*/
+getDurationHour : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-getDurationMinute'>/**Duration minutes.
+</span> Optional parameter: Contains an estimate of the space left on the media, expressed as a
+ time. This parameter may be returned when:
+  - [Programmed Info] is “Not enough space available”; or
+  - [Not Programmed Info] is “Duplicate: already programmed”
+*/
+getDurationMinute : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiRecordListener-TimerStatusData-method-getExtraError'>/**Extra error code.
+</span> &lt;ul&gt;
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_RECORDING_RESULT_EXTRA_NO_ERROR}
+     No extra errors. Other values of this class might be available.
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_RECORDING_RESULT_EXTRA_CHECK_RECORDER_CONNECTION}
+     Check record connection. Other values of this class should be ignored.
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_RECORDING_RESULT_EXTRA_FAIL_TO_RECORD_SELECTED_SOURCE}
+     Fail to record selected source. Other values of this class should be ignored.
+ &lt;li&gt;{@link android.hardware.hdmi.HdmiControlManager#TIMER_RECORDING_RESULT_EXTRA_CEC_DISABLED}
+     Cec disabled. Other values of this class should be ignored.
+ &lt;/ul&gt;
+*/
+getExtraError : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

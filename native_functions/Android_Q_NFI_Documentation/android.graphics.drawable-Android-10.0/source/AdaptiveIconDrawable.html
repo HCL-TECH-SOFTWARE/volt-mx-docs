@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-AdaptiveIconDrawable'>/**@class android.graphics.drawable.AdaptiveIconDrawable
+</span> implements android.graphics.drawable.Drawable.Callback
+
+@extends android.graphics.drawable.Drawable
+
+ &lt;p&gt;This class can also be created via XML inflation using &lt;code&gt;&amp;lt;adaptive-icon&gt;&lt;/code&gt; tag
+ in addition to dynamic creation.
+
+ &lt;p&gt;This drawable supports two drawable layers: foreground and background. The layers are clipped
+ when rendering using the mask defined in the device configuration.
+
+ &lt;ul&gt;
+ &lt;li&gt;Both foreground and background layers should be sized at 108 x 108 dp.&lt;/li&gt;
+ &lt;li&gt;The inner 72 x 72 dp  of the icon appears within the masked viewport.&lt;/li&gt;
+ &lt;li&gt;The outer 18 dp on each of the 4 sides of the layers is reserved for use by the system UI
+ surfaces to create interesting visual effects, such as parallax or pulsing.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ Such motion effect is achieved by internally setting the bounds of the foreground and
+ background layer as following:
+ &lt;pre&gt;
+ Rect(getBounds().left - getBounds().getWidth() * #getExtraInsetFraction(),
+      getBounds().top - getBounds().getHeight() * #getExtraInsetFraction(),
+      getBounds().right + getBounds().getWidth() * #getExtraInsetFraction(),
+      getBounds().bottom + getBounds().getHeight() * #getExtraInsetFraction())
+ &lt;/pre&gt;
+*/
+var AdaptiveIconDrawable = {
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-property-MASK_SIZE'>/** Mask path is defined inside device configuration in following dimension: [100 x 100]
+</span> @hide
+*/
+MASK_SIZE : &quot;100.0&quot;,
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getExtraInsetFraction'>/**All four sides of the layers are padded with extra inset so as to provide
+</span> extra content to reveal within the clip path when performing affine transformations on the
+ layers.
+@see #getForeground() and #getBackground() for more info on how this value is used
+*/
+getExtraInsetFraction : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getExtraInsetPercentage'>/**
+</span>@hide 
+*/
+getExtraInsetPercentage : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getIconMask'>/**When called before the bound is set, the returned path is identical to
+</span> R.string.config_icon_mask. After the bound is set, the
+ returned path's computed bound is same as the #getBounds().
+@return {Object {android.graphics.Path}} the mask path object used to clip the drawable
+*/
+getIconMask : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getForeground'>/**Returns the foreground drawable managed by this class. The bound of this drawable is
+</span> extended by {@link #getExtraInsetFraction}() * getBounds().width on left/right sides and by
+ {@link #getExtraInsetFraction}() * getBounds().height on top/bottom sides.
+@return {Object {android.graphics.drawable.Drawable}} the foreground drawable managed by this drawable
+*/
+getForeground : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getBackground'>/**Returns the foreground drawable managed by this class. The bound of this drawable is
+</span> extended by {@link #getExtraInsetFraction}() * getBounds().width on left/right sides and by
+ {@link #getExtraInsetFraction}() * getBounds().height on top/bottom sides.
+@return {Object {android.graphics.drawable.Drawable}} the background drawable managed by this drawable
+*/
+getBackground : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-invalidateSelf'>/**
+</span>*/
+invalidateSelf : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getOutline'>/**
+</span>*/
+getOutline : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getSafeZone'>/**
+</span>@hide 
+*/
+getSafeZone : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getTransparentRegion'>/**
+</span>*/
+getTransparentRegion : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-applyTheme'>/**
+</span>*/
+applyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-canApplyTheme'>/**
+</span>*/
+canApplyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-isProjected'>/**
+</span>@hide 
+*/
+isProjected : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-invalidateDrawable'>/**
+</span>*/
+invalidateDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-scheduleDrawable'>/**
+</span>*/
+scheduleDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-unscheduleDrawable'>/**
+</span>*/
+unscheduleDrawable : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getChangingConfigurations'>/**
+</span>*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setHotspot'>/**
+</span>*/
+setHotspot : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setHotspotBounds'>/**
+</span>*/
+setHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getHotspotBounds'>/**
+</span>*/
+getHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setVisible'>/**
+</span>*/
+setVisible : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setDither'>/**
+</span>*/
+setDither : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setAlpha'>/**
+</span>*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getAlpha'>/**
+</span>*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setColorFilter'>/**
+</span>*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setTintList'>/**
+</span>*/
+setTintList : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setTintBlendMode'>/**
+</span>*/
+setTintBlendMode : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setOpacity'>/**
+</span>*/
+setOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getOpacity'>/**
+</span>*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-setAutoMirrored'>/**
+</span>*/
+setAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-isAutoMirrored'>/**
+</span>*/
+isAutoMirrored : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-jumpToCurrentState'>/**
+</span>*/
+jumpToCurrentState : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-isStateful'>/**
+</span>*/
+isStateful : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-hasFocusStateSpecified'>/**
+</span>@hide 
+*/
+hasFocusStateSpecified : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getIntrinsicWidth'>/**
+</span>*/
+getIntrinsicWidth : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getIntrinsicHeight'>/**
+</span>*/
+getIntrinsicHeight : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-getConstantState'>/**
+</span>*/
+getConstantState : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-mutate'>/**
+</span>*/
+mutate : function(  ) {},
+
+<span id='android-graphics-drawable-AdaptiveIconDrawable-method-clearMutated'>/**
+</span>@hide 
+*/
+clearMutated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

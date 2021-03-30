@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-ListPopupWindow'>/**@class android.widget.ListPopupWindow
+</span> implements com.android.internal.view.menu.ShowableListMenu
+
+@extends java.lang.Object
+
+ A ListPopupWindow anchors itself to a host view and displays a
+ list of choices.
+
+ &lt;p&gt;ListPopupWindow contains a number of tricky behaviors surrounding
+ positioning, scrolling parents to fit the dropdown, interacting
+ sanely with the IME if present, and others.
+
+ @see android.widget.AutoCompleteTextView
+ @see android.widget.Spinner
+*/
+var ListPopupWindow = {
+
+<span id='android-widget-ListPopupWindow-property-POSITION_PROMPT_ABOVE'>/** The provided prompt view should appear above list content.
+</span>
+ @see #setPromptPosition(int)
+ @see #getPromptPosition()
+ @see #setPromptView(View)
+*/
+POSITION_PROMPT_ABOVE : &quot;0&quot;,
+<span id='android-widget-ListPopupWindow-property-POSITION_PROMPT_BELOW'>/** The provided prompt view should appear below list content.
+</span>
+ @see #setPromptPosition(int)
+ @see #getPromptPosition()
+ @see #setPromptView(View)
+*/
+POSITION_PROMPT_BELOW : &quot;1&quot;,
+<span id='android-widget-ListPopupWindow-property-MATCH_PARENT'>/** Alias for {@link ViewGroup.LayoutParams#MATCH_PARENT}.
+</span> If used to specify a popup width, the popup will match the width of the anchor view.
+ If used to specify a popup height, the popup will fill available space.
+*/
+MATCH_PARENT : &quot;-1&quot;,
+<span id='android-widget-ListPopupWindow-property-WRAP_CONTENT'>/** Alias for {@link ViewGroup.LayoutParams#WRAP_CONTENT}.
+</span> If used to specify a popup width, the popup will use the width of its content.
+*/
+WRAP_CONTENT : &quot;-2&quot;,
+<span id='android-widget-ListPopupWindow-property-INPUT_METHOD_FROM_FOCUSABLE'>/** Mode for {@link #setInputMethodMode}(int): the requirements for the
+</span> input method should be based on the focusability of the popup.  That is
+ if it is focusable than it needs to work with the input method, else
+ it doesn't.
+*/
+INPUT_METHOD_FROM_FOCUSABLE : &quot;0&quot;,
+<span id='android-widget-ListPopupWindow-property-INPUT_METHOD_NEEDED'>/** Mode for {@link #setInputMethodMode}(int): this popup always needs to
+</span> work with an input method, regardless of whether it is focusable.  This
+ means that it will always be displayed so that the user can also operate
+ the input method while it is shown.
+*/
+INPUT_METHOD_NEEDED : &quot;1&quot;,
+<span id='android-widget-ListPopupWindow-property-INPUT_METHOD_NOT_NEEDED'>/** Mode for {@link #setInputMethodMode}(int): this popup never needs to
+</span> work with an input method, regardless of whether it is focusable.  This
+ means that it will always be displayed to use as much space on the
+ screen as needed, regardless of whether this covers the input method.
+*/
+INPUT_METHOD_NOT_NEEDED : &quot;2&quot;,
+<span id='android-widget-ListPopupWindow-method-setAdapter'>/**Sets the adapter that provides the data and the views to represent the data
+</span> in this popup window.
+@param {Object {ListAdapter}} adapter The adapter to use to create this window's content.
+*/
+setAdapter : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setPromptPosition'>/**Set where the optional prompt view should appear. The default is
+</span> {@link #POSITION_PROMPT_ABOVE}.
+@param {Number} position A position constant declaring where the prompt should be displayed.
+@see #POSITION_PROMPT_ABOVE
+@see #POSITION_PROMPT_BELOW
+*/
+setPromptPosition : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getPromptPosition'>/**
+</span>@return {Number} Where the optional prompt view should appear.
+@see #POSITION_PROMPT_ABOVE
+@see #POSITION_PROMPT_BELOW
+*/
+getPromptPosition : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setModal'>/**Set whether this window should be modal when shown.
+</span>
+ &lt;p&gt;If a popup window is modal, it will receive all touch and key input.
+ If the user touches outside the popup window's content area the popup window
+ will be dismissed.
+@param {Boolean} modal {@code true} if the popup window should be modal, {@code false} otherwise.
+*/
+setModal : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-isModal'>/**Returns whether the popup window will be modal when shown.
+</span>@return {Boolean} {@code true} if the popup window will be modal, {@code false} otherwise.
+*/
+isModal : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setForceIgnoreOutsideTouch'>/**Forces outside touches to be ignored. Normally if {@link #isDropDownAlwaysVisible}() is
+</span> false, we allow outside touch to dismiss the dropdown. If this is set to true, then we
+ ignore outside touch even when the drop down is not set to always visible.
+@hide Used only by AutoCompleteTextView to handle some internal special cases.
+*/
+setForceIgnoreOutsideTouch : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setDropDownAlwaysVisible'>/**Sets whether the drop-down should remain visible under certain conditions.
+</span>
+ The drop-down will occupy the entire screen below {@link #getAnchorView} regardless
+ of the size or content of the list.  {@link #getBackground}() will fill any space
+ that is not used by the list.
+@param {Boolean} dropDownAlwaysVisible Whether to keep the drop-down visible.
+@hide Only used by AutoCompleteTextView under special conditions.
+*/
+setDropDownAlwaysVisible : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-isDropDownAlwaysVisible'>/**
+</span>@return {Boolean} Whether the drop-down is visible under special conditions.
+@hide Only used by AutoCompleteTextView under special conditions.
+*/
+isDropDownAlwaysVisible : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setSoftInputMode'>/**Sets the operating mode for the soft input area.
+</span>@param {Number} mode The desired mode, see
+        {@link android.view.WindowManager.LayoutParams#softInputMode}
+        for the full list
+@see android.view.WindowManager.LayoutParams#softInputMode
+@see #getSoftInputMode()
+*/
+setSoftInputMode : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getSoftInputMode'>/**Returns the current value in {@link #setSoftInputMode}(int).
+</span>@see #setSoftInputMode(int)
+@see android.view.WindowManager.LayoutParams#softInputMode
+*/
+getSoftInputMode : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setListSelector'>/**Sets a drawable to use as the list item selector.
+</span>@param {Object {Drawable}} selector List selector drawable to use in the popup.
+*/
+setListSelector : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getBackground'>/**
+</span>@return {Object {android.graphics.drawable.Drawable}} The background drawable for the popup window.
+*/
+getBackground : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setBackgroundDrawable'>/**Sets a drawable to be the background for the popup window.
+</span>@param {Object {Drawable}} d A drawable to set as the background.
+*/
+setBackgroundDrawable : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setAnimationStyle'>/**Set an animation style to use when the popup window is shown or dismissed.
+</span>@param {Number} animationStyle Animation style to use.
+*/
+setAnimationStyle : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getAnimationStyle'>/**Returns the animation style that will be used when the popup window is
+</span> shown or dismissed.
+@return {Number} Animation style that will be used.
+*/
+getAnimationStyle : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getAnchorView'>/**Returns the view that will be used to anchor this popup.
+</span>@return {Object {android.view.View}} The popup's anchor view
+*/
+getAnchorView : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setAnchorView'>/**Sets the popup's anchor view. This popup will always be positioned relative to
+</span> the anchor view when shown.
+@param {Object {View}} anchor The view to use as an anchor.
+*/
+setAnchorView : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getHorizontalOffset'>/**
+</span>@return {Number} The horizontal offset of the popup from its anchor in pixels.
+*/
+getHorizontalOffset : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setHorizontalOffset'>/**Set the horizontal offset of this popup from its anchor view in pixels.
+</span>@param {Number} offset The horizontal offset of the popup from its anchor.
+*/
+setHorizontalOffset : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getVerticalOffset'>/**
+</span>@return {Number} The vertical offset of the popup from its anchor in pixels.
+*/
+getVerticalOffset : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setVerticalOffset'>/**Set the vertical offset of this popup from its anchor view in pixels.
+</span>@param {Number} offset The vertical offset of the popup from its anchor.
+*/
+setVerticalOffset : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setEpicenterBounds'>/**Specifies the anchor-relative bounds of the popup's transition
+</span> epicenter.
+@param {Object {Rect}} bounds anchor-relative bounds, or {@code null} to use default epicenter
+@see #getEpicenterBounds()
+*/
+setEpicenterBounds : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getEpicenterBounds'>/**Returns bounds which are used as a popup's epicenter
+</span> of the enter and exit transitions.
+@return {Object {android.graphics.Rect}} bounds relative to anchor view, or {@code null} if not set
+@see #setEpicenterBounds(Rect)
+*/
+getEpicenterBounds : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setDropDownGravity'>/**Set the gravity of the dropdown list. This is commonly used to
+</span> set gravity to START or END for alignment with the anchor.
+@param {Number} gravity Gravity value to use
+*/
+setDropDownGravity : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getWidth'>/**
+</span>@return {Number} The width of the popup window in pixels.
+*/
+getWidth : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setWidth'>/**Sets the width of the popup window in pixels. Can also be {@link #MATCH_PARENT}
+</span> or {@link #WRAP_CONTENT}.
+@param {Number} width Width of the popup window.
+*/
+setWidth : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setContentWidth'>/**Sets the width of the popup window by the size of its content. The final width may be
+</span> larger to accommodate styled window dressing.
+@param {Number} width Desired width of content in pixels.
+*/
+setContentWidth : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getHeight'>/**
+</span>@return {Number} The height of the popup window in pixels.
+*/
+getHeight : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setHeight'>/**Sets the height of the popup window in pixels. Can also be {@link #MATCH_PARENT}.
+</span>@param {Number} height Height of the popup window must be a positive value,
+               {@link #MATCH_PARENT}, or {@link #WRAP_CONTENT}.
+@throws IllegalArgumentException if height is set to negative value
+*/
+setHeight : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setWindowLayoutType'>/**Set the layout type for this popup window.
+</span> &lt;p&gt;
+ See {@link WindowManager.LayoutParams#type} for possible values.
+@param {Number} layoutType Layout type for this window.
+@see WindowManager.LayoutParams#type
+*/
+setWindowLayoutType : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setOnItemClickListener'>/**Sets a listener to receive events when a list item is clicked.
+</span>@param {Object {AdapterView.OnItemClickListener}} clickListener Listener to register
+@see ListView#setOnItemClickListener(android.widget.AdapterView.OnItemClickListener)
+*/
+setOnItemClickListener : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setOnItemSelectedListener'>/**Sets a listener to receive events when a list item is selected.
+</span>@param {Object {AdapterView.OnItemSelectedListener}} selectedListener Listener to register.
+@see ListView#setOnItemSelectedListener(OnItemSelectedListener)
+*/
+setOnItemSelectedListener : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setPromptView'>/**Set a view to act as a user prompt for this popup window. Where the prompt view will appear
+</span> is controlled by {@link #setPromptPosition}(int).
+@param {Object {View}} prompt View to use as an informational prompt.
+*/
+setPromptView : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-postShow'>/**Post a {@link #show}() call to the UI thread.
+</span>*/
+postShow : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-show'>/**Show the popup list. If the list is already showing, this method
+</span> will recalculate the popup's size and position.
+*/
+show : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-dismiss'>/**Dismiss the popup window.
+</span>*/
+dismiss : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setOnDismissListener'>/**Set a listener to receive a callback when the popup is dismissed.
+</span>@param {Object {PopupWindow.OnDismissListener}} listener Listener that will be notified when the popup is dismissed.
+*/
+setOnDismissListener : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setInputMethodMode'>/**Control how the popup operates with an input method: one of
+</span> {@link #INPUT_METHOD_FROM_FOCUSABLE}, {@link #INPUT_METHOD_NEEDED},
+ or {@link #INPUT_METHOD_NOT_NEEDED}.
+
+ &lt;p&gt;If the popup is showing, calling this method will take effect only
+ the next time the popup is shown or through a manual call to the {@link #show}()
+ method.&lt;/p&gt;
+@see #getInputMethodMode()
+@see #show()
+*/
+setInputMethodMode : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getInputMethodMode'>/**Return the current value in {@link #setInputMethodMode}(int).
+</span>@see #setInputMethodMode(int)
+*/
+getInputMethodMode : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setSelection'>/**Set the selected position of the list.
+</span> Only valid when {@link #isShowing}() == {@code true}.
+@param {Number} position List position to set as selected.
+*/
+setSelection : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-clearListSelection'>/**Clear any current list selection.
+</span> Only valid when {@link #isShowing}() == {@code true}.
+*/
+clearListSelection : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-isShowing'>/**
+</span>@return {Boolean} {@code true} if the popup is currently showing, {@code false} otherwise.
+*/
+isShowing : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-isInputMethodNotNeeded'>/**
+</span>@return {Boolean} {@code true} if this popup is configured to assume the user does not need
+ to interact with the IME while it is showing, {@code false} otherwise.
+*/
+isInputMethodNotNeeded : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-performItemClick'>/**Perform an item click operation on the specified list adapter position.
+</span>@param {Number} position Adapter position for performing the click
+@return {Boolean} true if the click action could be performed, false if not.
+         (e.g. if the popup was not showing, this method would return false.)
+*/
+performItemClick : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getSelectedItem'>/**
+</span>@return {Object {java.lang.Object}} The currently selected item or null if the popup is not showing.
+*/
+getSelectedItem : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getSelectedItemPosition'>/**
+</span>@return {Number} The position of the currently selected item or {@link ListView#INVALID_POSITION}
+ if {@link #isShowing()} == {@code false}.
+@see ListView#getSelectedItemPosition()
+*/
+getSelectedItemPosition : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getSelectedItemId'>/**
+</span>@return {Number} The ID of the currently selected item or {@link ListView#INVALID_ROW_ID}
+ if {@link #isShowing()} == {@code false}.
+@see ListView#getSelectedItemId()
+*/
+getSelectedItemId : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getSelectedView'>/**
+</span>@return {Object {android.view.View}} The View for the currently selected item or null if
+ {@link #isShowing()} == {@code false}.
+@see ListView#getSelectedView()
+*/
+getSelectedView : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-getListView'>/**
+</span>@return {Object {android.widget.ListView}} The {@link ListView} displayed within the popup window.
+ Only valid when {@link #isShowing()} == {@code true}.
+*/
+getListView : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-onKeyDown'>/**Filter key down events. By forwarding key down events to this function,
+</span> views using non-modal ListPopupWindow can have it handle key selection of items.
+@param {Number} keyCode keyCode param passed to the host view's onKeyDown
+@param {Object {KeyEvent}} event event param passed to the host view's onKeyDown
+@return {Boolean} true if the event was handled, false if it was ignored.
+@see #setModal(boolean)
+@see #onKeyUp(int, KeyEvent)
+*/
+onKeyDown : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-onKeyUp'>/**Filter key up events. By forwarding key up events to this function,
+</span> views using non-modal ListPopupWindow can have it handle key selection of items.
+@param {Number} keyCode keyCode param passed to the host view's onKeyUp
+@param {Object {KeyEvent}} event event param passed to the host view's onKeyUp
+@return {Boolean} true if the event was handled, false if it was ignored.
+@see #setModal(boolean)
+@see #onKeyDown(int, KeyEvent)
+*/
+onKeyUp : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-onKeyPreIme'>/**Filter pre-IME key events. By forwarding {@link View#onKeyPreIme(int, KeyEvent)}
+</span> events to this function, views using ListPopupWindow can have it dismiss the popup
+ when the back key is pressed.
+@param {Number} keyCode keyCode param passed to the host view's onKeyPreIme
+@param {Object {KeyEvent}} event event param passed to the host view's onKeyPreIme
+@return {Boolean} true if the event was handled, false if it was ignored.
+@see #setModal(boolean)
+*/
+onKeyPreIme : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-createDragToOpenListener'>/**Returns an {@link OnTouchListener} that can be added to the source view
+</span> to implement drag-to-open behavior. Generally, the source view should be
+ the same view that was passed to {@link #setAnchorView}.
+ &lt;p&gt;
+ When the listener is set on a view, touching that view and dragging
+ outside of its bounds will open the popup window. Lifting will select the
+ currently touched list item.
+ &lt;p&gt;
+ Example usage:
+ &lt;pre&gt;
+ ListPopupWindow myPopup = new ListPopupWindow(context);
+ myPopup.setAnchor(myAnchor);
+ OnTouchListener dragListener = myPopup.createDragToOpenListener(myAnchor);
+ myAnchor.setOnTouchListener(dragListener);
+ &lt;/pre&gt;
+@param {Object {View}} src the view on which the resulting listener will be set
+@return {Object {android.view.View.OnTouchListener}} a touch listener that controls drag-to-open behavior
+*/
+createDragToOpenListener : function(  ) {},
+
+<span id='android-widget-ListPopupWindow-method-setOverlapAnchor'>/**
+</span>@hide 
+*/
+setOverlapAnchor : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

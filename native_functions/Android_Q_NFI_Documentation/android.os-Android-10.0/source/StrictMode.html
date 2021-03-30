@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-StrictMode'>/**@class android.os.StrictMode
+</span>@extends java.lang.Object
+
+ StrictMode is a developer tool which detects things you might be doing by accident and brings
+ them to your attention so you can fix them.
+
+ &lt;p&gt;StrictMode is most commonly used to catch accidental disk or network access on the
+ application's main thread, where UI operations are received and animations take place. Keeping
+ disk and network operations off the main thread makes for much smoother, more responsive
+ applications. By keeping your application's main thread responsive, you also prevent &lt;a
+ href=&quot;{@docRoot}guide/practices/design/responsiveness.html&quot;&gt;ANR dialogs&lt;/a&gt; from being shown to
+ users.
+
+ &lt;p class=&quot;note&quot;&gt;Note that even though an Android device's disk is often on flash memory, many
+ devices run a filesystem on top of that memory with very limited concurrency. It's often the case
+ that almost all disk accesses are fast, but may in individual cases be dramatically slower when
+ certain I/O is happening in the background from other processes. If possible, it's best to assume
+ that such things are not fast.
+
+ &lt;p&gt;Example code to enable from early in your {@link android.app.Application}, {@link android.app.Activity}, or other application component's {@link android.app.Application#onCreate}
+ method:
+
+ &lt;pre&gt;
+ public void onCreate() {
+     if (DEVELOPER_MODE) {
+         StrictMode.setThreadPolicy(new {@link android.os.StrictMode.ThreadPolicy.Builder StrictMode.android.os.StrictMode.ThreadPolicy.Builder}()
+                 .detectDiskReads()
+                 .detectDiskWrites()
+                 .detectNetwork()   // or .detectAll() for all detectable problems
+                 .penaltyLog()
+                 .build());
+         StrictMode.setVmPolicy(new {@link android.os.StrictMode.VmPolicy.Builder StrictMode.android.os.StrictMode.VmPolicy.Builder}()
+                 .detectLeakedSqlLiteObjects()
+                 .detectLeakedClosableObjects()
+                 .penaltyLog()
+                 .penaltyDeath()
+                 .build());
+     }
+     super.onCreate();
+ }
+ &lt;/pre&gt;
+
+ &lt;p&gt;You can decide what should happen when a violation is detected. For example, using {@link android.os.StrictMode.ThreadPolicy.Builder#penaltyLog} you can watch the output of &lt;code&gt;adb logcat&lt;/code&gt; while you
+ use your application to see the violations as they happen.
+
+ &lt;p&gt;If you find violations that you feel are problematic, there are a variety of tools to help
+ solve them: threads, {@link android.os.Handler}, {@link android.os.AsyncTask}, {@link android.app.IntentService}, etc. But don't feel compelled to fix everything that StrictMode
+ finds. In particular, many cases of disk access are often necessary during the normal activity
+ lifecycle. Use StrictMode to find things you did by accident. Network requests on the UI thread
+ are almost always a problem, though.
+
+ &lt;p class=&quot;note&quot;&gt;StrictMode is not a security mechanism and is not guaranteed to find all disk or
+ network accesses. While it does propagate its state across process boundaries when doing {@link android.os.Binder} calls, it's still ultimately a best effort mechanism. Notably, disk or network
+ access from JNI calls won't necessarily trigger it. Future versions of Android may catch more (or
+ fewer) operations, so you should never leave StrictMode enabled in applications distributed on
+ Google Play.
+*/
+var StrictMode = {
+
+<span id='android-os-StrictMode-property-DISABLE_PROPERTY'>/** Boolean system property to disable strict mode checks outright. Set this to 'true' to force
+</span> disable; 'false' has no effect on other enable/disable policy.
+
+ @hide
+*/
+DISABLE_PROPERTY : &quot;persist.sys.strictmode.disable&quot;,
+<span id='android-os-StrictMode-property-VISUAL_PROPERTY'>/** The boolean system property to control screen flashes on violations.
+</span>
+ @hide
+*/
+VISUAL_PROPERTY : &quot;persist.sys.strictmode.visual&quot;,
+<span id='android-os-StrictMode-property-PENALTY_GATHER'>/** Non-public penalty mode which overrides all the other penalty bits and signals that we're in
+</span> a Binder call and we should ignore the other penalty bits and instead serialize back all our
+ offending stack traces to the caller to ultimately handle in the originating process.
+
+ &lt;p&gt;This must be kept in sync with the constant in libs/binder/Parcel.cpp
+
+ @hide
+*/
+PENALTY_GATHER : &quot;-2147483648&quot;,
+<span id='android-os-StrictMode-property-PENALTY_LOG'>/**{@hide} */
+</span>PENALTY_LOG : &quot;1073741824&quot;,
+<span id='android-os-StrictMode-property-PENALTY_DIALOG'>/**{@hide} */
+</span>PENALTY_DIALOG : &quot;536870912&quot;,
+<span id='android-os-StrictMode-property-PENALTY_DEATH'>/**{@hide} */
+</span>PENALTY_DEATH : &quot;268435456&quot;,
+<span id='android-os-StrictMode-property-PENALTY_FLASH'>/**{@hide} */
+</span>PENALTY_FLASH : &quot;134217728&quot;,
+<span id='android-os-StrictMode-property-PENALTY_DROPBOX'>/**{@hide} */
+</span>PENALTY_DROPBOX : &quot;67108864&quot;,
+<span id='android-os-StrictMode-property-PENALTY_DEATH_ON_NETWORK'>/**{@hide} */
+</span>PENALTY_DEATH_ON_NETWORK : &quot;33554432&quot;,
+<span id='android-os-StrictMode-property-PENALTY_DEATH_ON_CLEARTEXT_NETWORK'>/**{@hide} */
+</span>PENALTY_DEATH_ON_CLEARTEXT_NETWORK : &quot;16777216&quot;,
+<span id='android-os-StrictMode-property-PENALTY_DEATH_ON_FILE_URI_EXPOSURE'>/**{@hide} */
+</span>PENALTY_DEATH_ON_FILE_URI_EXPOSURE : &quot;8388608&quot;,
+<span id='android-os-StrictMode-property-PENALTY_ALL'>/**@hide */
+</span>PENALTY_ALL : &quot;-65536&quot;,
+<span id='android-os-StrictMode-property-NETWORK_POLICY_ACCEPT'>/**{@hide} */
+</span>NETWORK_POLICY_ACCEPT : &quot;0&quot;,
+<span id='android-os-StrictMode-property-NETWORK_POLICY_LOG'>/**{@hide} */
+</span>NETWORK_POLICY_LOG : &quot;1&quot;,
+<span id='android-os-StrictMode-property-NETWORK_POLICY_REJECT'>/**{@hide} */
+</span>NETWORK_POLICY_REJECT : &quot;2&quot;,
+<span id='android-os-StrictMode-method-setViolationLogger'>/**{@hide}
+</span>*/
+setViolationLogger : function(  ) {},
+
+<span id='android-os-StrictMode-method-setThreadPolicy'>/**Sets the policy for what actions on the current thread should be detected, as well as the
+</span> penalty if such actions occur.
+
+ &lt;p&gt;Internally this sets a thread-local variable which is propagated across cross-process IPC
+ calls, meaning you can catch violations when a system service or another process accesses the
+ disk or network on your behalf.
+@param {Object {StrictMode.ThreadPolicy}} policy the policy to put into place
+*/
+setThreadPolicy : function(  ) {},
+
+<span id='android-os-StrictMode-method-setThreadPolicyMask'>/**
+</span>@hide 
+*/
+setThreadPolicyMask : function(  ) {},
+
+<span id='android-os-StrictMode-method-getThreadPolicyMask'>/**Returns the bitmask of the current thread's policy.
+</span>@return {Number} the bitmask of all the DETECT_* and PENALTY_* bits currently enabled
+@hide 
+*/
+getThreadPolicyMask : function(  ) {},
+
+<span id='android-os-StrictMode-method-getThreadPolicy'>/**Returns the current thread's policy.
+</span>*/
+getThreadPolicy : function(  ) {},
+
+<span id='android-os-StrictMode-method-allowThreadDiskWrites'>/**A convenience wrapper that takes the current {@link android.os.StrictMode.ThreadPolicy} from {@link #getThreadPolicy}, modifies it to permit both disk reads &amp;amp; writes, and sets the new
+</span> policy with {@link #setThreadPolicy}, returning the old policy so you can restore it at the
+ end of a block.
+@return {Object {android.os.StrictMode.ThreadPolicy}} the old policy, to be passed to {@link #setThreadPolicy} to restore the policy at the
+     end of a block
+*/
+allowThreadDiskWrites : function(  ) {},
+
+<span id='android-os-StrictMode-method-allowThreadDiskWritesMask'>/**
+</span>@hide 
+*/
+allowThreadDiskWritesMask : function(  ) {},
+
+<span id='android-os-StrictMode-method-allowThreadDiskReads'>/**A convenience wrapper that takes the current {@link android.os.StrictMode.ThreadPolicy} from {@link #getThreadPolicy}, modifies it to permit disk reads, and sets the new policy with {@link #setThreadPolicy}, returning the old policy so you can restore it at the end of a block.
+</span>@return {Object {android.os.StrictMode.ThreadPolicy}} the old policy, to be passed to setThreadPolicy to restore the policy.
+*/
+allowThreadDiskReads : function(  ) {},
+
+<span id='android-os-StrictMode-method-allowThreadDiskReadsMask'>/**
+</span>@hide 
+*/
+allowThreadDiskReadsMask : function(  ) {},
+
+<span id='android-os-StrictMode-method-allowThreadViolations'>/**
+</span>@hide 
+*/
+allowThreadViolations : function(  ) {},
+
+<span id='android-os-StrictMode-method-allowVmViolations'>/**
+</span>@hide 
+*/
+allowVmViolations : function(  ) {},
+
+<span id='android-os-StrictMode-method-isBundledSystemApp'>/**Determine if the given app is &quot;bundled&quot; as part of the system image. These bundled apps are
+</span> developed in lock-step with the OS, and they aren't updated outside of an OTA, so we want to
+ chase any {@link android.os.StrictMode} regressions by enabling detection when running on {@link android.os.Build#IS_USERDEBUG} or {@link android.os.Build#IS_ENG} builds.
+
+ &lt;p&gt;Unbundled apps included in the system image are expected to detect and triage their own
+ {@link android.os.StrictMode} issues separate from the OS release process, which is why we don't enable
+ them here.
+@hide 
+*/
+isBundledSystemApp : function(  ) {},
+
+<span id='android-os-StrictMode-method-initThreadDefaults'>/**Initialize default {@link android.os.StrictMode.ThreadPolicy} for the current thread.
+</span>@hide 
+*/
+initThreadDefaults : function(  ) {},
+
+<span id='android-os-StrictMode-method-initVmDefaults'>/**Initialize default {@link android.os.StrictMode.VmPolicy} for the current VM.
+</span>@hide 
+*/
+initVmDefaults : function(  ) {},
+
+<span id='android-os-StrictMode-method-enableDeathOnFileUriExposure'>/**Used by the framework to make file usage a fatal error.
+</span>@hide 
+*/
+enableDeathOnFileUriExposure : function(  ) {},
+
+<span id='android-os-StrictMode-method-disableDeathOnFileUriExposure'>/**Used by lame internal apps that haven't done the hard work to get themselves off file:// Uris
+</span> yet.
+@hide 
+*/
+disableDeathOnFileUriExposure : function(  ) {},
+
+<span id='android-os-StrictMode-method-conditionallyCheckInstanceCounts'>/**
+</span>@hide 
+*/
+conditionallyCheckInstanceCounts : function(  ) {},
+
+<span id='android-os-StrictMode-method-setVmPolicy'>/**Sets the policy for what actions in the VM process (on any thread) should be detected, as
+</span> well as the penalty if such actions occur.
+@param {Object {StrictMode.VmPolicy}} policy the policy to put into place
+*/
+setVmPolicy : function(  ) {},
+
+<span id='android-os-StrictMode-method-getVmPolicy'>/**Gets the current VM policy.
+</span>*/
+getVmPolicy : function(  ) {},
+
+<span id='android-os-StrictMode-method-enableDefaults'>/**Enable the recommended StrictMode defaults, with violations just being logged.
+</span>
+ &lt;p&gt;This catches disk and network access on the main thread, as well as leaked SQLite cursors
+ and unclosed resources. This is simply a wrapper around {@link #setVmPolicy} and {@link #setThreadPolicy}.
+*/
+enableDefaults : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmSqliteObjectLeaksEnabled'>/**
+</span>@hide 
+*/
+vmSqliteObjectLeaksEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmClosableObjectLeaksEnabled'>/**
+</span>@hide 
+*/
+vmClosableObjectLeaksEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmRegistrationLeaksEnabled'>/**
+</span>@hide 
+*/
+vmRegistrationLeaksEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmFileUriExposureEnabled'>/**
+</span>@hide 
+*/
+vmFileUriExposureEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmCleartextNetworkEnabled'>/**
+</span>@hide 
+*/
+vmCleartextNetworkEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmContentUriWithoutPermissionEnabled'>/**
+</span>@hide 
+*/
+vmContentUriWithoutPermissionEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmUntaggedSocketEnabled'>/**
+</span>@hide 
+*/
+vmUntaggedSocketEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmImplicitDirectBootEnabled'>/**
+</span>@hide 
+*/
+vmImplicitDirectBootEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-vmCredentialProtectedWhileLockedEnabled'>/**
+</span>@hide 
+*/
+vmCredentialProtectedWhileLockedEnabled : function(  ) {},
+
+<span id='android-os-StrictMode-method-onSqliteObjectLeaked'>/**
+</span>@hide 
+*/
+onSqliteObjectLeaked : function(  ) {},
+
+<span id='android-os-StrictMode-method-onWebViewMethodCalledOnWrongThread'>/**
+</span>@hide 
+*/
+onWebViewMethodCalledOnWrongThread : function(  ) {},
+
+<span id='android-os-StrictMode-method-onIntentReceiverLeaked'>/**
+</span>@hide 
+*/
+onIntentReceiverLeaked : function(  ) {},
+
+<span id='android-os-StrictMode-method-onServiceConnectionLeaked'>/**
+</span>@hide 
+*/
+onServiceConnectionLeaked : function(  ) {},
+
+<span id='android-os-StrictMode-method-onFileUriExposed'>/**
+</span>@hide 
+*/
+onFileUriExposed : function(  ) {},
+
+<span id='android-os-StrictMode-method-onContentUriWithoutPermission'>/**
+</span>@hide 
+*/
+onContentUriWithoutPermission : function(  ) {},
+
+<span id='android-os-StrictMode-method-onCleartextNetworkDetected'>/**
+</span>@hide 
+*/
+onCleartextNetworkDetected : function(  ) {},
+
+<span id='android-os-StrictMode-method-onUntaggedSocket'>/**
+</span>@hide 
+*/
+onUntaggedSocket : function(  ) {},
+
+<span id='android-os-StrictMode-method-onImplicitDirectBoot'>/**
+</span>@hide 
+*/
+onImplicitDirectBoot : function(  ) {},
+
+<span id='android-os-StrictMode-method-onVmPolicyViolation'>/**
+</span>@hide 
+*/
+onVmPolicyViolation : function(  ) {},
+
+<span id='android-os-StrictMode-method-onVmPolicyViolation'>/**
+</span>@hide 
+*/
+onVmPolicyViolation : function(  ) {},
+
+<span id='android-os-StrictMode-method-enterCriticalSpan'>/**Enter a named critical span (e.g. an animation)
+</span>
+ &lt;p&gt;The name is an arbitary label (or tag) that will be applied to any strictmode violation
+ that happens while this span is active. You must call finish() on the span when done.
+
+ &lt;p&gt;This will never return null, but on devices without debugging enabled, this may return a
+ dummy object on which the finish() method is a no-op.
+
+ &lt;p&gt;TODO: add CloseGuard to this, verifying callers call finish.
+@hide 
+*/
+enterCriticalSpan : function(  ) {},
+
+<span id='android-os-StrictMode-method-noteSlowCall'>/**For code to note that it's slow. This is a no-op unless the current thread's {@link android.os.StrictMode.ThreadPolicy} has {@link android.os.StrictMode.ThreadPolicy.Builder#detectCustomSlowCalls} enabled.
+</span>@param {String} name a short string for the exception stack trace that's built if when this fires.
+*/
+noteSlowCall : function(  ) {},
+
+<span id='android-os-StrictMode-method-noteResourceMismatch'>/**For code to note that a resource was obtained using a type other than its defined type. This
+</span> is a no-op unless the current thread's {@link android.os.StrictMode.ThreadPolicy} has {@link android.os.StrictMode.ThreadPolicy.Builder#detectResourceMismatches()} enabled.
+@param {Object {Object}} tag an object for the exception stack trace that's built if when this fires.
+@hide 
+*/
+noteResourceMismatch : function(  ) {},
+
+<span id='android-os-StrictMode-method-noteUnbufferedIO'>/**
+</span>@hide 
+*/
+noteUnbufferedIO : function(  ) {},
+
+<span id='android-os-StrictMode-method-noteDiskRead'>/**
+</span>@hide 
+*/
+noteDiskRead : function(  ) {},
+
+<span id='android-os-StrictMode-method-noteDiskWrite'>/**
+</span>@hide 
+*/
+noteDiskWrite : function(  ) {},
+
+<span id='android-os-StrictMode-method-trackActivity'>/**Returns an object that is used to track instances of activites. The activity should store a
+</span> reference to the tracker object in one of its fields.
+@hide 
+*/
+trackActivity : function(  ) {},
+
+<span id='android-os-StrictMode-method-incrementExpectedActivityCount'>/**
+</span>@hide 
+*/
+incrementExpectedActivityCount : function(  ) {},
+
+<span id='android-os-StrictMode-method-decrementExpectedActivityCount'>/**
+</span>@hide 
+*/
+decrementExpectedActivityCount : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

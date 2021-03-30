@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiofx-EnvironmentalReverb'>/**@class android.media.audiofx.EnvironmentalReverb
+</span>@extends android.media.audiofx.AudioEffect
+
+ A sound generated within a room travels in many directions. The listener first hears the direct
+ sound from the source itself. Later, he or she hears discrete echoes caused by sound bouncing off
+ nearby walls, the ceiling and the floor. As sound waves arrive after undergoing more and more
+ reflections, individual reflections become indistinguishable and the listener hears continuous
+ reverberation that decays over time.
+ Reverb is vital for modeling a listener's environment. It can be used in music applications
+ to simulate music being played back in various environments, or in games to immerse the
+ listener within the game's environment.
+ The EnvironmentalReverb class allows an application to control each reverb engine property in a
+ global reverb environment and is more suitable for games. For basic control, more suitable for
+ music applications, it is recommended to use the
+ {@link android.media.audiofx.PresetReverb} class.
+ &lt;p&gt;An application creates a EnvironmentalReverb object to instantiate and control a reverb engine
+ in the audio framework.
+ &lt;p&gt;The methods, parameter types and units exposed by the EnvironmentalReverb implementation are
+ directly mapping those defined by the OpenSL ES 1.0.1 Specification
+ (http://www.khronos.org/opensles/) for the SLEnvironmentalReverbItf interface.
+ Please refer to this specification for more details.
+ &lt;p&gt;The EnvironmentalReverb is an output mix auxiliary effect and should be created on
+ Audio session 0. In order for a MediaPlayer or AudioTrack to be fed into this effect,
+ they must be explicitely attached to it and a send level must be specified. Use the effect ID
+ returned by getId() method to designate this particular effect when attaching it to the
+ MediaPlayer or AudioTrack.
+ &lt;p&gt;Creating a reverb on the output mix (audio session 0) requires permission
+ {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS}
+ &lt;p&gt;See {@link android.media.audiofx.AudioEffect} class for more details on controlling
+ audio effects.
+*/
+var EnvironmentalReverb = {
+
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_ROOM_LEVEL'>/** Room level. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_ROOM_LEVEL : &quot;0&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_ROOM_HF_LEVEL'>/** Room HF level. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_ROOM_HF_LEVEL : &quot;1&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_DECAY_TIME'>/** Decay time. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_DECAY_TIME : &quot;2&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_DECAY_HF_RATIO'>/** Decay HF ratio. Parameter ID for
+</span> {@link android.media.audiofx.EnvironmentalReverb.OnParameterChangeListener}
+*/
+PARAM_DECAY_HF_RATIO : &quot;3&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_REFLECTIONS_LEVEL'>/** Early reflections level. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_REFLECTIONS_LEVEL : &quot;4&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_REFLECTIONS_DELAY'>/** Early reflections delay. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_REFLECTIONS_DELAY : &quot;5&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_REVERB_LEVEL'>/** Reverb level. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_REVERB_LEVEL : &quot;6&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_REVERB_DELAY'>/** Reverb delay. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_REVERB_DELAY : &quot;7&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_DIFFUSION'>/** Diffusion. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_DIFFUSION : &quot;8&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-property-PARAM_DENSITY'>/** Density. Parameter ID for OnParameterChangeListener
+</span>*/
+PARAM_DENSITY : &quot;9&quot;,
+<span id='android-media-audiofx-EnvironmentalReverb-method-setRoomLevel'>/**Sets the master volume level of the environmental reverb effect.
+</span>@param {Number} room room level in millibels. The valid range is [-9000, 0].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setRoomLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getRoomLevel'>/**Gets the master volume level of the environmental reverb effect.
+</span>@return {Number} the room level in millibels.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getRoomLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setRoomHFLevel'>/**Sets the volume level at 5 kHz relative to the volume level at low frequencies of the
+</span> overall reverb effect.
+ &lt;p&gt;This controls a low-pass filter that will reduce the level of the high-frequency.
+@param {Number} roomHF high frequency attenuation level in millibels. The valid range is [-9000, 0].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setRoomHFLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getRoomHFLevel'>/**Gets the room HF level.
+</span>@return {Number} the room HF level in millibels.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getRoomHFLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setDecayTime'>/**Sets the time taken for the level of reverberation to decay by 60 dB.
+</span>@param {Number} decayTime decay time in milliseconds. The valid range is [100, 20000].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setDecayTime : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getDecayTime'>/**Gets the decay time.
+</span>@return {Number} the decay time in milliseconds.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getDecayTime : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setDecayHFRatio'>/**Sets the ratio of high frequency decay time (at 5 kHz) relative to the decay time at low
+</span> frequencies.
+@param {Number} decayHFRatio high frequency decay ratio using a permille scale. The valid range is
+ [100, 2000]. A ratio of 1000 indicates that all frequencies decay at the same rate.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setDecayHFRatio : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getDecayHFRatio'>/**Gets the ratio of high frequency decay time (at 5 kHz) relative to low frequencies.
+</span>@return {Number} the decay HF ration. See {@link #setDecayHFRatio(short)} for units.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getDecayHFRatio : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setReflectionsLevel'>/**Sets the volume level of the early reflections.
+</span> &lt;p&gt;This level is combined with the overall room level
+ (set using {@link #setRoomLevel}(short)).
+@param {Number} reflectionsLevel reflection level in millibels. The valid range is [-9000, 1000].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setReflectionsLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getReflectionsLevel'>/**Gets the volume level of the early reflections.
+</span>@return {Number} the early reflections level in millibels.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getReflectionsLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setReflectionsDelay'>/**Sets the delay time for the early reflections.
+</span> &lt;p&gt;This method sets the time between when the direct path is heard and when the first
+ reflection is heard.
+@param {Number} reflectionsDelay reflections delay in milliseconds. The valid range is [0, 300].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setReflectionsDelay : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getReflectionsDelay'>/**Gets the reflections delay.
+</span>@return {Number} the early reflections delay in milliseconds.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getReflectionsDelay : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setReverbLevel'>/**Sets the volume level of the late reverberation.
+</span> &lt;p&gt;This level is combined with the overall room level (set using {@link #setRoomLevel}(short)).
+@param {Number} reverbLevel reverb level in millibels. The valid range is [-9000, 2000].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setReverbLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getReverbLevel'>/**Gets the reverb level.
+</span>@return {Number} the reverb level in millibels.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getReverbLevel : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setReverbDelay'>/**Sets the time between the first reflection and the reverberation.
+</span>@param {Number} reverbDelay reverb delay in milliseconds. The valid range is [0, 100].
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setReverbDelay : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getReverbDelay'>/**Gets the reverb delay.
+</span>@return {Number} the reverb delay in milliseconds.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getReverbDelay : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setDiffusion'>/**Sets the echo density in the late reverberation decay.
+</span> &lt;p&gt;The scale should approximately map linearly to the perceived change in reverberation.
+@param {Number} diffusion diffusion specified using a permille scale. The diffusion valid range is
+ [0, 1000]. A value of 1000 o/oo indicates a smooth reverberation decay.
+ Values below this level give a more &lt;i&gt;grainy&lt;/i&gt; character.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setDiffusion : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getDiffusion'>/**Gets diffusion level.
+</span>@return {Number} the diffusion level. See {@link #setDiffusion(short)} for units.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getDiffusion : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setDensity'>/**Controls the modal density of the late reverberation decay.
+</span> &lt;p&gt; The scale should approximately map linearly to the perceived change in reverberation.
+ A lower density creates a hollow sound that is useful for simulating small reverberation
+ spaces such as bathrooms.
+@param {Number} density density specified using a permille scale. The valid range is [0, 1000].
+ A value of 1000 o/oo indicates a natural sounding reverberation. Values below this level
+ produce a more colored effect.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setDensity : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getDensity'>/**Gets the density level.
+</span>@return {Number} the density level. See {@link #setDiffusion(short)} for units.
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getDensity : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setParameterListener'>/**Registers an OnParameterChangeListener interface.
+</span>@param {Object {EnvironmentalReverb.OnParameterChangeListener}} listener OnParameterChangeListener interface registered
+*/
+setParameterListener : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-getProperties'>/**Gets the environmental reverb properties. This method is useful when a snapshot of current
+</span> reverb settings must be saved by the application.
+@return {Object {android.media.audiofx.EnvironmentalReverb.Settings}} an EnvironmentalReverb.Settings object containing all current parameters values
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+getProperties : function(  ) {},
+
+<span id='android-media-audiofx-EnvironmentalReverb-method-setProperties'>/**Sets the environmental reverb properties. This method is useful when reverb settings have to
+</span> be applied from a previous backup.
+@param {Object {EnvironmentalReverb.Settings}} settings a EnvironmentalReverb.Settings object containing the properties to apply
+@throws IllegalStateException
+@throws IllegalArgumentException
+@throws UnsupportedOperationException
+*/
+setProperties : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

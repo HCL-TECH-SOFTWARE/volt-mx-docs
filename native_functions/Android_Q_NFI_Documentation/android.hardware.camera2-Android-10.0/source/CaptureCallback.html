@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback'>/**@class android.hardware.camera2.CameraCaptureSession.CaptureCallback
+</span>@extends java.lang.Object
+
+ &lt;p&gt;A callback object for tracking the progress of a {@link android.hardware.camera2.CaptureRequest} submitted to the
+ camera device.&lt;/p&gt;
+
+ &lt;p&gt;This callback is invoked when a request triggers a capture to start,
+ and when the capture is complete. In case on an error capturing an image,
+ the error method is triggered instead of the completion method.&lt;/p&gt;
+
+ @see #capture
+ @see #captureBurst
+ @see #setRepeatingRequest
+ @see #setRepeatingBurst
+*/
+var CaptureCallback = {
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-property-NO_FRAMES_CAPTURED'>/** This constant is used to indicate that no images were captured for
+</span> the request.
+
+ @hide
+*/
+NO_FRAMES_CAPTURED : &quot;-1&quot;,
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCaptureStarted'>/**This method is called when the camera device has started capturing
+</span> the output image for the request, at the beginning of image exposure, or
+ when the camera device has started processing an input image for a reprocess
+ request.
+
+ &lt;p&gt;For a regular capture request, this callback is invoked right as
+ the capture of a frame begins, so it is the most appropriate time
+ for playing a shutter sound, or triggering UI indicators of capture.&lt;/p&gt;
+
+ &lt;p&gt;The request that is being used for this capture is provided, along
+ with the actual timestamp for the start of exposure. For a reprocess
+ request, this timestamp will be the input image's start of exposure
+ which matches {@link android.hardware.camera2.CaptureResult#SENSOR_TIMESTAMP the result timestamp field}
+ of the {@link android.hardware.camera2.TotalCaptureResult} that was used to
+ {@link android.hardware.camera2.CameraDevice#createReprocessCaptureRequest create the reprocess request}.
+ This timestamp matches the timestamps that will be
+ included in {@link android.hardware.camera2.CaptureResult#SENSOR_TIMESTAMP the result timestamp field},
+ and in the buffers sent to each output Surface. These buffer
+ timestamps are accessible through, for example,
+ {@link android.media.Image#getTimestamp() Image.getTimestamp()} or
+ {@link android.graphics.SurfaceTexture#getTimestamp()}.
+ The frame number included is equal to the frame number that will be included in
+ {@link android.hardware.camera2.CaptureResult#getFrameNumber}.&lt;/p&gt;
+
+ &lt;p&gt;For the simplest way to play a shutter sound camera shutter or a
+ video recording start/stop sound, see the
+ {@link android.media.MediaActionSound} class.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session the session returned by {@link CameraDevice#createCaptureSession}
+@param {Object {CaptureRequest}} request the request for the capture that just begun
+@param {Number} timestamp the timestamp at start of capture for a regular request, or
+                  the timestamp at the input image's start of capture for a
+                  reprocess request, in nanoseconds.
+@param {Number} frameNumber the frame number for this capture
+@see android.media.MediaActionSound
+*/
+onCaptureStarted : function(  ) {},
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCapturePartial'>/**This method is called when some results from an image capture are
+</span> available.
+
+ &lt;p&gt;The result provided here will contain some subset of the fields of
+ a full result. Multiple onCapturePartial calls may happen per
+ capture; a given result field will only be present in one partial
+ capture at most. The final onCaptureCompleted call will always
+ contain all the fields, whether onCapturePartial was called or
+ not.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session the session returned by {@link CameraDevice#createCaptureSession}
+@param {Object {CaptureRequest}} request The request that was given to the CameraDevice
+@param {Object {CaptureResult}} result The partial output metadata from the capture, which
+ includes a subset of the CaptureResult fields.
+@see #capture
+@see #captureBurst
+@see #setRepeatingRequest
+@see #setRepeatingBurst
+@hide 
+*/
+onCapturePartial : function(  ) {},
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCaptureProgressed'>/**This method is called when an image capture makes partial forward progress; some
+</span> (but not all) results from an image capture are available.
+
+ &lt;p&gt;The result provided here will contain some subset of the fields of
+ a full result. Multiple {@link #onCaptureProgressed} calls may happen per
+ capture; a given result field will only be present in one partial
+ capture at most. The final {@link #onCaptureCompleted} call will always
+ contain all the fields (in particular, the union of all the fields of all
+ the partial results composing the total result).&lt;/p&gt;
+
+ &lt;p&gt;For each request, some result data might be available earlier than others. The typical
+ delay between each partial result (per request) is a single frame interval.
+ For performance-oriented use-cases, applications should query the metadata they need
+ to make forward progress from the partial results and avoid waiting for the completed
+ result.&lt;/p&gt;
+
+ &lt;p&gt;For a particular request, {@link #onCaptureProgressed} may happen before or after
+ {@link #onCaptureStarted}.&lt;/p&gt;
+
+ &lt;p&gt;Each request will generate at least {@code 1} partial results, and at most
+ {@link android.hardware.camera2.CameraCharacteristics#REQUEST_PARTIAL_RESULT_COUNT} partial results.&lt;/p&gt;
+
+ &lt;p&gt;Depending on the request settings, the number of partial results per request
+ will vary, although typically the partial count could be the same as long as the
+ camera device subsystems enabled stay the same.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session the session returned by {@link CameraDevice#createCaptureSession}
+@param {Object {CaptureRequest}} request The request that was given to the CameraDevice
+@param {Object {CaptureResult}} partialResult The partial output metadata from the capture, which
+ includes a subset of the {@link TotalCaptureResult} fields.
+@see #capture
+@see #captureBurst
+@see #setRepeatingRequest
+@see #setRepeatingBurst
+*/
+onCaptureProgressed : function(  ) {},
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCaptureCompleted'>/**This method is called when an image capture has fully completed and all the
+</span> result metadata is available.
+
+ &lt;p&gt;This callback will always fire after the last {@link #onCaptureProgressed};
+ in other words, no more partial results will be delivered once the completed result
+ is available.&lt;/p&gt;
+
+ &lt;p&gt;For performance-intensive use-cases where latency is a factor, consider
+ using {@link #onCaptureProgressed} instead.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session the session returned by {@link CameraDevice#createCaptureSession}
+@param {Object {CaptureRequest}} request The request that was given to the CameraDevice
+@param {Object {TotalCaptureResult}} result The total output metadata from the capture, including the
+ final capture parameters and the state of the camera system during
+ capture.
+@see #capture
+@see #captureBurst
+@see #setRepeatingRequest
+@see #setRepeatingBurst
+*/
+onCaptureCompleted : function(  ) {},
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCaptureFailed'>/**This method is called instead of {@link #onCaptureCompleted} when the
+</span> camera device failed to produce a {@link android.hardware.camera2.CaptureResult} for the
+ request.
+
+ &lt;p&gt;Other requests are unaffected, and some or all image buffers from
+ the capture may have been pushed to their respective output
+ streams.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation of this method does nothing.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session
+            The session returned by {@link CameraDevice#createCaptureSession}
+@param {Object {CaptureRequest}} request
+            The request that was given to the CameraDevice
+@param {Object {CaptureFailure}} failure
+            The output failure from the capture, including the failure reason
+            and the frame number.
+@see #capture
+@see #captureBurst
+@see #setRepeatingRequest
+@see #setRepeatingBurst
+*/
+onCaptureFailed : function(  ) {},
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCaptureSequenceCompleted'>/**This method is called independently of the others in CaptureCallback,
+</span> when a capture sequence finishes and all {@link android.hardware.camera2.CaptureResult}
+ or {@link android.hardware.camera2.CaptureFailure} for it have been returned via this listener.
+
+ &lt;p&gt;In total, there will be at least one result/failure returned by this listener
+ before this callback is invoked. If the capture sequence is aborted before any
+ requests have been processed, {@link #onCaptureSequenceAborted} is invoked instead.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation does nothing.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session
+            The session returned by {@link CameraDevice#createCaptureSession}
+@param {Number} sequenceId
+            A sequence ID returned by the {@link #capture} family of functions.
+@param {Number} frameNumber
+            The last frame number (returned by {@link CaptureResult#getFrameNumber}
+            or {@link CaptureFailure#getFrameNumber}) in the capture sequence.
+@see CaptureResult#getFrameNumber()
+@see CaptureFailure#getFrameNumber()
+@see CaptureResult#getSequenceId()
+@see CaptureFailure#getSequenceId()
+@see #onCaptureSequenceAborted
+*/
+onCaptureSequenceCompleted : function(  ) {},
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCaptureSequenceAborted'>/**This method is called independently of the others in CaptureCallback,
+</span> when a capture sequence aborts before any {@link android.hardware.camera2.CaptureResult}
+ or {@link android.hardware.camera2.CaptureFailure} for it have been returned via this listener.
+
+ &lt;p&gt;Due to the asynchronous nature of the camera device, not all submitted captures
+ are immediately processed. It is possible to clear out the pending requests
+ by a variety of operations such as {@link android.hardware.camera2.CameraCaptureSession#stopRepeating} or
+ {@link android.hardware.camera2.CameraCaptureSession#abortCaptures}. When such an event happens,
+ {@link #onCaptureSequenceCompleted} will not be called.&lt;/p&gt;
+
+ &lt;p&gt;The default implementation does nothing.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session
+            The session returned by {@link CameraDevice#createCaptureSession}
+@param {Number} sequenceId
+            A sequence ID returned by the {@link #capture} family of functions.
+@see CaptureResult#getFrameNumber()
+@see CaptureFailure#getFrameNumber()
+@see CaptureResult#getSequenceId()
+@see CaptureFailure#getSequenceId()
+@see #onCaptureSequenceCompleted
+*/
+onCaptureSequenceAborted : function(  ) {},
+
+<span id='android-hardware-camera2-CameraCaptureSession-CaptureCallback-method-onCaptureBufferLost'>/**&lt;p&gt;This method is called if a single buffer for a capture could not be sent to its
+</span> destination surface.&lt;/p&gt;
+
+ &lt;p&gt;If the whole capture failed, then {@link #onCaptureFailed} will be called instead. If
+ some but not all buffers were captured but the result metadata will not be available,
+ then onCaptureFailed will be invoked with {@link android.hardware.camera2.CaptureFailure#wasImageCaptured}
+ returning true, along with one or more calls to {@link #onCaptureBufferLost} for the
+ failed outputs.&lt;/p&gt;
+@param {Object {CameraCaptureSession}} session
+            The session returned by {@link CameraDevice#createCaptureSession}
+@param {Object {CaptureRequest}} request
+            The request that was given to the CameraDevice
+@param {Object {Surface}} target
+            The target Surface that the buffer will not be produced for
+@param {Number} frameNumber
+            The frame number for the request
+*/
+onCaptureBufferLost : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

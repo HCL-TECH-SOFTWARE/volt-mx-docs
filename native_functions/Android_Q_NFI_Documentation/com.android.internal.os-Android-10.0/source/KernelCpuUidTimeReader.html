@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-os-KernelCpuUidTimeReader'>/**@class com.android.internal.os.KernelCpuUidTimeReader
+</span>@extends java.lang.Object
+
+ Reads per-UID CPU time proc files. Concrete implementations are all nested inside.
+
+ This class uses a throttler to reject any {@link #readDelta} or {@link #readAbsolute} call
+ within {@link #mMinTimeBetweenRead}. The throttler can be enable / disabled via a param in
+ the constructor.
+
+ This class and its subclasses are NOT thread-safe and NOT designed to be accessed by more than
+ one caller since each caller has its own view of delta.
+
+ @param &lt;T&gt; The type of CPU time for the callback.
+*/
+var KernelCpuUidTimeReader = {
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-method-readDelta'>/**Reads the proc file, calling into the callback with a delta of time for each UID.
+</span>@param {Object {com.android.internal.os.KernelCpuUidTimeReader.Callback}} cb The callback to invoke for each line of the proc file. If null,the data is
+           consumed and subsequent calls to readDelta will provide a fresh delta.
+*/
+readDelta : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-method-readAbsolute'>/**Reads the proc file, calling into the callback with cumulative time for each UID.
+</span>@param {Object {com.android.internal.os.KernelCpuUidTimeReader.Callback}} cb The callback to invoke for each line of the proc file. It cannot be null.
+*/
+readAbsolute : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-method-removeUid'>/**Removes the UID from internal accounting data. This method, overridden in
+</span> {@link com.android.internal.os.KernelCpuUidTimeReader.KernelCpuUidUserSysTimeReader}, also removes the UID from the kernel module.
+@param {Number} uid The UID to remove.
+@see KernelCpuUidUserSysTimeReader#removeUid(int)
+*/
+removeUid : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-method-removeUidsInRange'>/**Removes UIDs in a given range from internal accounting data. This method, overridden in
+</span> {@link com.android.internal.os.KernelCpuUidTimeReader.KernelCpuUidUserSysTimeReader}, also removes the UIDs from the kernel module.
+@param {Number} startUid the first uid to remove.
+@param {Number} endUid   the last uid to remove.
+@see KernelCpuUidUserSysTimeReader#removeUidsInRange(int, int)
+*/
+removeUidsInRange : function(  ) {},
+
+<span id='com-android-internal-os-KernelCpuUidTimeReader-method-setThrottle'>/**Set the minimum time in milliseconds between reads. If throttle is not enabled, this method
+</span> has no effect.
+@param {Number} minTimeBetweenRead The minimum time in milliseconds.
+*/
+setThrottle : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

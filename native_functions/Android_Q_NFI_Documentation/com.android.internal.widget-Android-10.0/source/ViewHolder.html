@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-RecyclerView-ViewHolder'>/**@class com.android.internal.widget.RecyclerView.ViewHolder
+</span>@extends java.lang.Object
+
+ A ViewHolder describes an item view and metadata about its place within the RecyclerView.
+
+ &lt;p&gt;{@link com.android.internal.widget.RecyclerView.Adapter} implementations should subclass ViewHolder and add fields for caching
+ potentially expensive {@link View#findViewById(int)} results.&lt;/p&gt;
+
+ &lt;p&gt;While {@link com.android.internal.widget.ActionBarOverlayLayout.LayoutParams} belong to the {@link com.android.internal.widget.RecyclerView.LayoutManager},
+ {@link com.android.internal.widget.RecyclerView.ViewHolder com.android.internal.widget.RecyclerView.ViewHolders} belong to the adapter. Adapters should feel free to use
+ their own custom ViewHolder implementations to store data that makes binding view contents
+ easier. Implementations should assume that individual item views will hold strong references
+ to &lt;code&gt;ViewHolder&lt;/code&gt; objects and that &lt;code&gt;RecyclerView&lt;/code&gt; instances may hold
+ strong references to extra off-screen item views for caching purposes&lt;/p&gt;
+*/
+var ViewHolder = {
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-property-itemView'>/***/
+</span>itemView : &quot;null&quot;,
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-getPosition'>/**
+</span>@deprecated This method is deprecated because its meaning is ambiguous due to the async
+ handling of adapter updates. Please use {@link #getLayoutPosition()} or
+ {@link #getAdapterPosition()} depending on your use case.
+@see #getLayoutPosition()
+@see #getAdapterPosition()
+*/
+getPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-getLayoutPosition'>/**Returns the position of the ViewHolder in terms of the latest layout pass.
+</span> &lt;p&gt;
+ This position is mostly used by RecyclerView components to be consistent while
+ RecyclerView lazily processes adapter updates.
+ &lt;p&gt;
+ For performance and animation reasons, RecyclerView batches all adapter updates until the
+ next layout pass. This may cause mismatches between the Adapter position of the item and
+ the position it had in the latest layout calculations.
+ &lt;p&gt;
+ LayoutManagers should always call this method while doing calculations based on item
+ positions. All methods in {@link com.android.internal.widget.RecyclerView.LayoutManager}, {@link com.android.internal.widget.RecyclerView.State},
+ {@link com.android.internal.widget.RecyclerView.Recycler} that receive a position expect it to be the layout position
+ of the item.
+ &lt;p&gt;
+ If LayoutManager needs to call an external method that requires the adapter position of
+ the item, it can use {@link #getAdapterPosition}() or
+ {@link com.android.internal.widget.RecyclerView.Recycler#convertPreLayoutPositionToPostLayout(int)}.
+@return {Number} Returns the adapter position of the ViewHolder in the latest layout pass.
+@see #getAdapterPosition()
+*/
+getLayoutPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-getAdapterPosition'>/**Returns the Adapter position of the item represented by this ViewHolder.
+</span> &lt;p&gt;
+ Note that this might be different than the {@link #getLayoutPosition}() if there are
+ pending adapter updates but a new layout pass has not happened yet.
+ &lt;p&gt;
+ RecyclerView does not handle any adapter updates until the next layout traversal. This
+ may create temporary inconsistencies between what user sees on the screen and what
+ adapter contents have. This inconsistency is not important since it will be less than
+ 16ms but it might be a problem if you want to use ViewHolder position to access the
+ adapter. Sometimes, you may need to get the exact adapter position to do
+ some actions in response to user events. In that case, you should use this method which
+ will calculate the Adapter position of the ViewHolder.
+ &lt;p&gt;
+ Note that if you've called {@link com.android.internal.widget.RecyclerView.Adapter#notifyDataSetChanged()}, until the
+ next layout pass, the return value of this method will be {@link #NO_POSITION}.
+@return {Number} The adapter position of the item if it still exists in the adapter.
+ {@link RecyclerView#NO_POSITION} if item has been removed from the adapter,
+ {@link RecyclerView.Adapter#notifyDataSetChanged()} has been called after the last
+ layout pass or the ViewHolder has already been recycled.
+*/
+getAdapterPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-getOldPosition'>/**When LayoutManager supports animations, RecyclerView tracks 3 positions for ViewHolders
+</span> to perform animations.
+ &lt;p&gt;
+ If a ViewHolder was laid out in the previous onLayout call, old position will keep its
+ adapter index in the previous layout.
+@return {Number} The previous adapter index of the Item represented by this ViewHolder or
+ {@link #NO_POSITION} if old position does not exists or cleared (pre-layout is
+ complete).
+*/
+getOldPosition : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-getItemId'>/**Returns The itemId represented by this ViewHolder.
+</span>@return {Number} The item's id if adapter has stable ids, {@link RecyclerView#NO_ID}
+ otherwise
+*/
+getItemId : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-getItemViewType'>/**
+</span>@return {Number} The view type of this ViewHolder.
+*/
+getItemViewType : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-setIsRecyclable'>/**Informs the recycler whether this item can be recycled. Views which are not
+</span> recyclable will not be reused for other items until setIsRecyclable() is
+ later set to true. Calls to setIsRecyclable() should always be paired (one
+ call to setIsRecyclabe(false) should always be matched with a later call to
+ setIsRecyclable(true)). Pairs of calls may be nested, as the state is internally
+ reference-counted.
+@param {Boolean} recyclable Whether this item is available to be recycled. Default value
+ is true.
+@see #isRecyclable()
+*/
+setIsRecyclable : function(  ) {},
+
+<span id='com-android-internal-widget-RecyclerView-ViewHolder-method-isRecyclable'>/**
+</span>@return {Boolean} true if this item is available to be recycled, false otherwise.
+@see #setIsRecyclable(boolean)
+*/
+isRecyclable : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

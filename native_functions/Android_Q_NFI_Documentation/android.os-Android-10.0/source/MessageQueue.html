@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-MessageQueue'>/**@class android.os.MessageQueue
+</span>@extends java.lang.Object
+
+ Low-level class holding the list of messages to be dispatched by a
+ {@link android.os.Looper}.  Messages are not added directly to a MessageQueue,
+ but rather through {@link android.os.Handler} objects associated with the Looper.
+
+ &lt;p&gt;You can retrieve the MessageQueue for the current thread with
+ {@link android.os.Looper#myQueue() android.os.Looper.myQueue()}.
+*/
+var MessageQueue = {
+
+<span id='android-os-MessageQueue-method-isIdle'>/**Returns true if the looper has no pending messages which are due to be processed.
+</span>
+ &lt;p&gt;This method is safe to call from any thread.
+@return {Boolean} True if the looper is idle.
+*/
+isIdle : function(  ) {},
+
+<span id='android-os-MessageQueue-method-addIdleHandler'>/**Add a new {@link android.os.MessageQueue.IdleHandler} to this message queue.  This may be
+</span> removed automatically for you by returning false from
+ {@link android.os.MessageQueue.IdleHandler#queueIdle android.os.MessageQueue.IdleHandler.queueIdle()} when it is
+ invoked, or explicitly removing it with {@link #removeIdleHandler}.
+
+ &lt;p&gt;This method is safe to call from any thread.
+@param {Object {MessageQueue.IdleHandler}} handler The IdleHandler to be added.
+*/
+addIdleHandler : function(  ) {},
+
+<span id='android-os-MessageQueue-method-removeIdleHandler'>/**Remove an {@link android.os.MessageQueue.IdleHandler} from the queue that was previously added
+</span> with {@link #addIdleHandler}.  If the given object is not currently
+ in the idle list, nothing is done.
+
+ &lt;p&gt;This method is safe to call from any thread.
+@param {Object {MessageQueue.IdleHandler}} handler The IdleHandler to be removed.
+*/
+removeIdleHandler : function(  ) {},
+
+<span id='android-os-MessageQueue-method-isPolling'>/**Returns whether this looper's thread is currently polling for more work to do.
+</span> This is a good signal that the loop is still alive rather than being stuck
+ handling a callback.  Note that this method is intrinsically racy, since the
+ state of the loop can change before you get the result back.
+
+ &lt;p&gt;This method is safe to call from any thread.
+@return {Boolean} True if the looper is currently polling for events.
+@hide 
+*/
+isPolling : function(  ) {},
+
+<span id='android-os-MessageQueue-method-addOnFileDescriptorEventListener'>/**Adds a file descriptor listener to receive notification when file descriptor
+</span> related events occur.
+ &lt;p&gt;
+ If the file descriptor has already been registered, the specified events
+ and listener will replace any that were previously associated with it.
+ It is not possible to set more than one listener per file descriptor.
+ &lt;/p&gt;&lt;p&gt;
+ It is important to always unregister the listener when the file descriptor
+ is no longer of use.
+ &lt;/p&gt;
+@param {Object {FileDescriptor}} fd The file descriptor for which a listener will be registered.
+@param {Number} events The set of events to receive: a combination of the
+ {@link OnFileDescriptorEventListener#EVENT_INPUT},
+ {@link OnFileDescriptorEventListener#EVENT_OUTPUT}, and
+ {@link OnFileDescriptorEventListener#EVENT_ERROR} event masks.  If the requested
+ set of events is zero, then the listener is unregistered.
+@param {Object {MessageQueue.OnFileDescriptorEventListener}} listener The listener to invoke when file descriptor events occur.
+@see OnFileDescriptorEventListener
+@see #removeOnFileDescriptorEventListener
+*/
+addOnFileDescriptorEventListener : function(  ) {},
+
+<span id='android-os-MessageQueue-method-removeOnFileDescriptorEventListener'>/**Removes a file descriptor listener.
+</span> &lt;p&gt;
+ This method does nothing if no listener has been registered for the
+ specified file descriptor.
+ &lt;/p&gt;
+@param {Object {FileDescriptor}} fd The file descriptor whose listener will be unregistered.
+@see OnFileDescriptorEventListener
+@see #addOnFileDescriptorEventListener
+*/
+removeOnFileDescriptorEventListener : function(  ) {},
+
+<span id='android-os-MessageQueue-method-postSyncBarrier'>/**Posts a synchronization barrier to the Looper's message queue.
+</span>
+ Message processing occurs as usual until the message queue encounters the
+ synchronization barrier that has been posted.  When the barrier is encountered,
+ later synchronous messages in the queue are stalled (prevented from being executed)
+ until the barrier is released by calling {@link #removeSyncBarrier} and specifying
+ the token that identifies the synchronization barrier.
+
+ This method is used to immediately postpone execution of all subsequently posted
+ synchronous messages until a condition is met that releases the barrier.
+ Asynchronous messages (see {@link android.os.Message#isAsynchronous} are exempt from the barrier
+ and continue to be processed as usual.
+
+ This call must be always matched by a call to {@link #removeSyncBarrier} with
+ the same token to ensure that the message queue resumes normal operation.
+ Otherwise the application will probably hang!
+@return {Number} A token that uniquely identifies the barrier.  This token must be
+ passed to {@link #removeSyncBarrier} to release the barrier.
+@hide 
+*/
+postSyncBarrier : function(  ) {},
+
+<span id='android-os-MessageQueue-method-removeSyncBarrier'>/**Removes a synchronization barrier.
+</span>@param {Number} token The synchronization barrier token that was returned by
+ {@link #postSyncBarrier}.
+@throws IllegalStateException if the barrier was not found.
+@hide 
+*/
+removeSyncBarrier : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

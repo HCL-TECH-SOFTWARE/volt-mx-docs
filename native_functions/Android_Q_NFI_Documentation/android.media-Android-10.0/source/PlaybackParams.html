@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-PlaybackParams'>/**@class android.media.PlaybackParams
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Structure for common playback params.
+
+ Used by {@link android.media.AudioTrack} {@link android.media.AudioTrack#getPlaybackParams()} and
+ {@link android.media.AudioTrack#setPlaybackParams(PlaybackParams)}
+ to control playback behavior.
+ &lt;p&gt; &lt;strong&gt;audio fallback mode:&lt;/strong&gt;
+ select out-of-range parameter handling.
+ &lt;ul&gt;
+ &lt;li&gt; {@link android.media.PlaybackParams#AUDIO_FALLBACK_MODE_DEFAULT}:
+   System will determine best handling. &lt;/li&gt;
+ &lt;li&gt; {@link android.media.PlaybackParams#AUDIO_FALLBACK_MODE_MUTE}:
+   Play silence for params normally out of range.&lt;/li&gt;
+ &lt;li&gt; {@link android.media.PlaybackParams#AUDIO_FALLBACK_MODE_FAIL}:
+   Return {@link java.lang.IllegalArgumentException} from
+   &lt;code&gt;AudioTrack.setPlaybackParams(PlaybackParams)&lt;/code&gt;.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt; &lt;strong&gt;pitch:&lt;/strong&gt; increases or decreases the tonal frequency of the audio content.
+ It is expressed as a multiplicative factor, where normal pitch is 1.0f.
+ &lt;p&gt; &lt;strong&gt;speed:&lt;/strong&gt; increases or decreases the time to
+ play back a set of audio or video frames.
+ It is expressed as a multiplicative factor, where normal speed is 1.0f.
+ &lt;p&gt; Different combinations of speed and pitch may be used for audio playback;
+ some common ones:
+ &lt;ul&gt;
+ &lt;li&gt; &lt;em&gt;Pitch equals 1.0f.&lt;/em&gt; Speed change will be done with pitch preserved,
+ often called &lt;em&gt;timestretching&lt;/em&gt;.&lt;/li&gt;
+ &lt;li&gt; &lt;em&gt;Pitch equals speed.&lt;/em&gt; Speed change will be done by &lt;em&gt;resampling&lt;/em&gt;,
+ similar to {@link android.media.AudioTrack#setPlaybackRate(int)}.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+var PlaybackParams = {
+
+<span id='android-media-PlaybackParams-property-AUDIO_FALLBACK_MODE_DEFAULT'>/***/
+</span>AUDIO_FALLBACK_MODE_DEFAULT : &quot;0&quot;,
+<span id='android-media-PlaybackParams-property-AUDIO_FALLBACK_MODE_MUTE'>/***/
+</span>AUDIO_FALLBACK_MODE_MUTE : &quot;1&quot;,
+<span id='android-media-PlaybackParams-property-AUDIO_FALLBACK_MODE_FAIL'>/***/
+</span>AUDIO_FALLBACK_MODE_FAIL : &quot;2&quot;,
+<span id='android-media-PlaybackParams-property-AUDIO_STRETCH_MODE_DEFAULT'>/**@hide */
+</span>AUDIO_STRETCH_MODE_DEFAULT : &quot;0&quot;,
+<span id='android-media-PlaybackParams-property-AUDIO_STRETCH_MODE_VOICE'>/**@hide */
+</span>AUDIO_STRETCH_MODE_VOICE : &quot;1&quot;,
+<span id='android-media-PlaybackParams-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-media-PlaybackParams-method-allowDefaults'>/**Allows defaults to be returned for properties not set.
+</span> Otherwise a {@link java.lang.IllegalArgumentException} exception
+ is raised when getting those properties
+ which have defaults but have never been set.
+@return {Object {android.media.PlaybackParams}} this &lt;code&gt;PlaybackParams&lt;/code&gt; instance.
+*/
+allowDefaults : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-setAudioFallbackMode'>/**Sets the audio fallback mode.
+</span>@param {Number} audioFallbackMode
+@return {Object {android.media.PlaybackParams}} this &lt;code&gt;PlaybackParams&lt;/code&gt; instance.
+*/
+setAudioFallbackMode : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-getAudioFallbackMode'>/**Retrieves the audio fallback mode.
+</span>@return {Number} audio fallback mode
+@throws IllegalStateException if the audio fallback mode is not set.
+*/
+getAudioFallbackMode : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-setAudioStretchMode'>/**
+</span>@param {Number} audioStretchMode
+@param audioStretchMode
+@return {Object {android.media.PlaybackParams}} this &lt;code&gt;PlaybackParams&lt;/code&gt; instance.
+*/
+setAudioStretchMode : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-getAudioStretchMode'>/**
+</span>@hide Retrieves the audio stretch mode.
+@return {Number} audio stretch mode
+@throws IllegalStateException if the audio stretch mode is not set.
+*/
+getAudioStretchMode : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-setPitch'>/**Sets the pitch factor.
+</span>@param {Number} pitch
+@return {Object {android.media.PlaybackParams}} this &lt;code&gt;PlaybackParams&lt;/code&gt; instance.
+@throws IllegalArgumentException if the pitch is negative.
+*/
+setPitch : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-getPitch'>/**Retrieves the pitch factor.
+</span>@return {Number} pitch
+@throws IllegalStateException if pitch is not set.
+*/
+getPitch : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-setSpeed'>/**Sets the speed factor.
+</span>@param {Number} speed
+@return {Object {android.media.PlaybackParams}} this &lt;code&gt;PlaybackParams&lt;/code&gt; instance.
+*/
+setSpeed : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-getSpeed'>/**Retrieves the speed factor.
+</span>@return {Number} speed
+@throws IllegalStateException if speed is not set.
+*/
+getSpeed : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-media-PlaybackParams-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

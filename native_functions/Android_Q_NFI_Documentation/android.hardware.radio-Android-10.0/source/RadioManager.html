@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-radio-RadioManager'>/**@class android.hardware.radio.RadioManager
+</span>@extends java.lang.Object
+
+ The RadioManager class allows to control a broadcast radio tuner present on the device.
+ It provides data structures and methods to query for available radio modules, list their
+ properties and open an interface to control tuning operations and receive callbacks when
+ asynchronous operations complete or events occur.
+ @hide
+*/
+var RadioManager = {
+
+<span id='android-hardware-radio-RadioManager-property-STATUS_OK'>/**Method return status: successful operation */
+</span>STATUS_OK : &quot;0&quot;,
+<span id='android-hardware-radio-RadioManager-property-STATUS_ERROR'>/**Method return status: unspecified error */
+</span>STATUS_ERROR : &quot;-2147483648&quot;,
+<span id='android-hardware-radio-RadioManager-property-STATUS_PERMISSION_DENIED'>/**Method return status: permission denied */
+</span>STATUS_PERMISSION_DENIED : &quot;-1&quot;,
+<span id='android-hardware-radio-RadioManager-property-STATUS_NO_INIT'>/**Method return status: initialization failure */
+</span>STATUS_NO_INIT : &quot;-19&quot;,
+<span id='android-hardware-radio-RadioManager-property-STATUS_BAD_VALUE'>/**Method return status: invalid argument provided */
+</span>STATUS_BAD_VALUE : &quot;-22&quot;,
+<span id='android-hardware-radio-RadioManager-property-STATUS_DEAD_OBJECT'>/**Method return status: cannot reach service */
+</span>STATUS_DEAD_OBJECT : &quot;-32&quot;,
+<span id='android-hardware-radio-RadioManager-property-STATUS_INVALID_OPERATION'>/**Method return status: invalid or out of sequence operation */
+</span>STATUS_INVALID_OPERATION : &quot;-38&quot;,
+<span id='android-hardware-radio-RadioManager-property-STATUS_TIMED_OUT'>/**Method return status: time out before operation completion */
+</span>STATUS_TIMED_OUT : &quot;-110&quot;,
+<span id='android-hardware-radio-RadioManager-property-CLASS_AM_FM'>/**Radio module class supporting FM (including HD radio) and AM */
+</span>CLASS_AM_FM : &quot;0&quot;,
+<span id='android-hardware-radio-RadioManager-property-CLASS_SAT'>/**Radio module class supporting satellite radio */
+</span>CLASS_SAT : &quot;1&quot;,
+<span id='android-hardware-radio-RadioManager-property-CLASS_DT'>/**Radio module class supporting Digital terrestrial radio */
+</span>CLASS_DT : &quot;2&quot;,
+<span id='android-hardware-radio-RadioManager-property-BAND_INVALID'>/***/
+</span>BAND_INVALID : &quot;-1&quot;,
+<span id='android-hardware-radio-RadioManager-property-BAND_AM'>/**AM radio band (LW/MW/SW).
+</span> @see BandDescriptor */
+BAND_AM : &quot;0&quot;,
+<span id='android-hardware-radio-RadioManager-property-BAND_FM'>/**FM radio band.
+</span> @see BandDescriptor */
+BAND_FM : &quot;1&quot;,
+<span id='android-hardware-radio-RadioManager-property-BAND_FM_HD'>/**FM HD radio or DRM  band.
+</span> @see BandDescriptor */
+BAND_FM_HD : &quot;2&quot;,
+<span id='android-hardware-radio-RadioManager-property-BAND_AM_HD'>/**AM HD radio or DRM band.
+</span> @see BandDescriptor */
+BAND_AM_HD : &quot;3&quot;,
+<span id='android-hardware-radio-RadioManager-property-REGION_ITU_1'>/**Africa, Europe.
+</span> @see BandDescriptor */
+REGION_ITU_1 : &quot;0&quot;,
+<span id='android-hardware-radio-RadioManager-property-REGION_ITU_2'>/**Americas.
+</span> @see BandDescriptor */
+REGION_ITU_2 : &quot;1&quot;,
+<span id='android-hardware-radio-RadioManager-property-REGION_OIRT'>/**Russia.
+</span> @see BandDescriptor */
+REGION_OIRT : &quot;2&quot;,
+<span id='android-hardware-radio-RadioManager-property-REGION_JAPAN'>/**Japan.
+</span> @see BandDescriptor */
+REGION_JAPAN : &quot;3&quot;,
+<span id='android-hardware-radio-RadioManager-property-REGION_KOREA'>/**Korea.
+</span> @see BandDescriptor */
+REGION_KOREA : &quot;4&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_FORCE_MONO'>/** Forces mono audio stream reception.
+</span>
+ Analog broadcasts can recover poor reception conditions by jointing
+ stereo channels into one. Mainly for, but not limited to AM/FM.
+*/
+CONFIG_FORCE_MONO : &quot;1&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_FORCE_ANALOG'>/** Forces the analog playback for the supporting radio technology.
+</span>
+ User may disable digital playback for FM HD Radio or hybrid FM/DAB with
+ this option. This is purely user choice, ie. does not reflect digital-
+ analog handover state managed from the HAL implementation side.
+
+ Some radio technologies may not support this, ie. DAB.
+*/
+CONFIG_FORCE_ANALOG : &quot;2&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_FORCE_DIGITAL'>/** Forces the digital playback for the supporting radio technology.
+</span>
+ User may disable digital-analog handover that happens with poor
+ reception conditions. With digital forced, the radio will remain silent
+ instead of switching to analog channel if it's available. This is purely
+ user choice, it does not reflect the actual state of handover.
+*/
+CONFIG_FORCE_DIGITAL : &quot;3&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_RDS_AF'>/** RDS Alternative Frequencies.
+</span>
+ If set and the currently tuned RDS station broadcasts on multiple
+ channels, radio tuner automatically switches to the best available
+ alternative.
+*/
+CONFIG_RDS_AF : &quot;4&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_RDS_REG'>/** RDS region-specific program lock-down.
+</span>
+ Allows user to lock to the current region as they move into the
+ other region.
+*/
+CONFIG_RDS_REG : &quot;5&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_DAB_DAB_LINKING'>/**Enables DAB-DAB hard- and implicit-linking (the same content). */
+</span>CONFIG_DAB_DAB_LINKING : &quot;6&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_DAB_FM_LINKING'>/**Enables DAB-FM hard- and implicit-linking (the same content). */
+</span>CONFIG_DAB_FM_LINKING : &quot;7&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_DAB_DAB_SOFT_LINKING'>/**Enables DAB-DAB soft-linking (related content). */
+</span>CONFIG_DAB_DAB_SOFT_LINKING : &quot;8&quot;,
+<span id='android-hardware-radio-RadioManager-property-CONFIG_DAB_FM_SOFT_LINKING'>/**Enables DAB-FM soft-linking (related content). */
+</span>CONFIG_DAB_FM_SOFT_LINKING : &quot;9&quot;,
+<span id='android-hardware-radio-RadioManager-method-listModules'>/**Returns a list of descriptors for all broadcast radio modules present on the device.
+</span>@param {Object {java.util.List}} modules An List of {@link ModuleProperties} where the list will be returned.
+@return {Number} &lt;ul&gt;
+  &lt;li&gt;{@link #STATUS_OK} in case of success, &lt;/li&gt;
+  &lt;li&gt;{@link #STATUS_ERROR} in case of unspecified error, &lt;/li&gt;
+  &lt;li&gt;{@link #STATUS_NO_INIT} if the native service cannot be reached, &lt;/li&gt;
+  &lt;li&gt;{@link #STATUS_BAD_VALUE} if modules is null, &lt;/li&gt;
+  &lt;li&gt;{@link #STATUS_DEAD_OBJECT} if the binder transaction to the native service fails, &lt;/li&gt;
+ &lt;/ul&gt;
+*/
+listModules : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-method-openTuner'>/**Open an interface to control a tuner on a given broadcast radio module.
+</span> Optionally selects and applies the configuration passed as &quot;config&quot; argument.
+@param {Number} moduleId radio module identifier {@link ModuleProperties#getId()}. Mandatory.
+@param {Object {RadioManager.BandConfig}} config desired band and configuration to apply when enabling the hardware module.
+ optional, can be null.
+@param {Boolean} withAudio {@code true} to request a tuner with an audio source.
+ This tuner is intended for live listening or recording or a radio program.
+ If {@code false}, the tuner can only be used to retrieve program informations.
+@param {Object {RadioTuner.Callback}} callback {@link RadioTuner.Callback} interface. Mandatory.
+@param {Object {Handler}} handler the Handler on which the callbacks will be received.
+ Can be null if default handler is OK.
+@return {Object {android.hardware.radio.RadioTuner}} a valid {@link RadioTuner} interface in case of success or null in case of error.
+*/
+openTuner : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-method-addAnnouncementListener'>/**Adds new announcement listener.
+</span>@param {Object {java.util.Set}} enabledAnnouncementTypes a set of announcement types to listen to
+@param {Object {Announcement.OnListUpdatedListener}} listener announcement listener
+*/
+addAnnouncementListener : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-method-addAnnouncementListener'>/**Adds new announcement listener with executor.
+</span>@param {Object {Executor}} executor the executor
+@param {Object {java.util.Set}} enabledAnnouncementTypes a set of announcement types to listen to
+@param {Object {Announcement.OnListUpdatedListener}} listener announcement listener
+*/
+addAnnouncementListener : function(  ) {},
+
+<span id='android-hardware-radio-RadioManager-method-removeAnnouncementListener'>/**Removes previously registered announcement listener.
+</span>@param {Object {Announcement.OnListUpdatedListener}} listener announcement listener, previously registered with
+        {@link addAnnouncementListener}
+*/
+removeAnnouncementListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

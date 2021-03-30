@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-hdmi-HdmiTimerRecordSources'>/**@class android.hardware.hdmi.HdmiTimerRecordSources
+</span>@extends java.lang.Object
+
+ Container for timer record source used for timer recording. Timer source consists of two parts,
+ timer info and record source.
+ &lt;p&gt;
+ Timer info contains all timing information used for recording. It consists of the following
+ values.
+ &lt;ul&gt;
+ &lt;li&gt;[Day of Month]
+ &lt;li&gt;[Month of Year]
+ &lt;li&gt;[Start Time]
+ &lt;li&gt;[Duration]
+ &lt;li&gt;[Recording Sequence]
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Record source containers all program information used for recording.
+ For more details, look at {@link android.hardware.hdmi.HdmiRecordSources}.
+ &lt;p&gt;
+ Usage
+ &lt;pre&gt;
+ TimeOrDuration startTime = HdmiTimerRecordSources.ofTime(18, 00);  // 6PM.
+ TimeOrDuration duration = HdmiTimerRecordSource.ofDuration(1, 00);  // 1 hour duration.
+ // For 1 hour from 6PM, August 10th every SaturDay and Sunday.
+ TimerInfo timerInfo = HdmiTimerRecordSource.timerInfoOf(10, 8, starTime, duration,
+            HdmiTimerRecordSource.RECORDING_SEQUENCE_REPEAT_SATURDAY |
+            HdmiTimerRecordSource.RECORDING_SEQUENCE_REPEAT_SUNDAY);
+ // create digital source.
+ DigitalServiceSource recordSource = HdmiRecordSource.ofDvb(...);
+ TimerRecordSource source = ofDigitalSource(timerInfo, recordSource);
+ &lt;/pre&gt;
+
+ @hide
+*/
+var HdmiTimerRecordSources = {
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_ONCE_ONLY'>/** Fields for recording sequence.
+</span> The following can be merged by OR(|) operation.
+*/
+RECORDING_SEQUENCE_REPEAT_ONCE_ONLY : &quot;0&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_SUNDAY'>/***/
+</span>RECORDING_SEQUENCE_REPEAT_SUNDAY : &quot;1&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_MONDAY'>/***/
+</span>RECORDING_SEQUENCE_REPEAT_MONDAY : &quot;2&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_TUESDAY'>/***/
+</span>RECORDING_SEQUENCE_REPEAT_TUESDAY : &quot;4&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_WEDNESDAY'>/***/
+</span>RECORDING_SEQUENCE_REPEAT_WEDNESDAY : &quot;8&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_THURSDAY'>/***/
+</span>RECORDING_SEQUENCE_REPEAT_THURSDAY : &quot;16&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_FRIDAY'>/***/
+</span>RECORDING_SEQUENCE_REPEAT_FRIDAY : &quot;32&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-property-RECORDING_SEQUENCE_REPEAT_SATUREDAY'>/***/
+</span>RECORDING_SEQUENCE_REPEAT_SATUREDAY : &quot;64&quot;,
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-ofDigitalSource'>/**Creates {@link android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource} for digital source which is used for &amp;lt;Set Digital
+</span> Timer&amp;gt;.
+@param {Object {HdmiTimerRecordSources.TimerInfo}} timerInfo timer info used for timer recording
+@param {Object {HdmiRecordSources.DigitalServiceSource}} source digital source used for timer recording
+@return {Object {android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource}} {@link TimerRecordSource}
+@throws IllegalArgumentException if {@code timerInfo} or {@code source} is null
+*/
+ofDigitalSource : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-ofAnalogueSource'>/**Creates {@link android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource} for analogue source which is used for &amp;lt;Set Analogue
+</span> Timer&amp;gt;.
+@param {Object {HdmiTimerRecordSources.TimerInfo}} timerInfo timer info used for timer recording
+@param {Object {HdmiRecordSources.AnalogueServiceSource}} source digital source used for timer recording
+@return {Object {android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource}} {@link TimerRecordSource}
+@throws IllegalArgumentException if {@code timerInfo} or {@code source} is null
+*/
+ofAnalogueSource : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-ofExternalPlug'>/**Creates {@link android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource} for external plug which is used for &amp;lt;Set External
+</span> Timer&amp;gt;.
+@param {Object {HdmiTimerRecordSources.TimerInfo}} timerInfo timer info used for timer recording
+@param {Object {HdmiRecordSources.ExternalPlugData}} source digital source used for timer recording
+@return {Object {android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource}} {@link TimerRecordSource}
+@throws IllegalArgumentException if {@code timerInfo} or {@code source} is null
+*/
+ofExternalPlug : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-ofExternalPhysicalAddress'>/**Creates {@link android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource} for external physical address which is used for &amp;lt;Set
+</span> External Timer&amp;gt;.
+@param {Object {HdmiTimerRecordSources.TimerInfo}} timerInfo timer info used for timer recording
+@param {Object {HdmiRecordSources.ExternalPhysicalAddress}} source digital source used for timer recording
+@return {Object {android.hardware.hdmi.HdmiTimerRecordSources.TimerRecordSource}} {@link TimerRecordSource}
+@throws IllegalArgumentException if {@code timerInfo} or {@code source} is null
+*/
+ofExternalPhysicalAddress : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-timeOf'>/**Creates {@link android.hardware.hdmi.HdmiTimerRecordSources.Duration} for time value.
+</span>@param {Number} hour hour in range of [0, 23]
+@param {Number} minute minute in range of [0, 60]
+@return {Object {android.hardware.hdmi.HdmiTimerRecordSources.Time}} {@link Duration}
+@throws IllegalArgumentException if hour or minute is out of range
+*/
+timeOf : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-durationOf'>/**Creates {@link android.hardware.hdmi.HdmiTimerRecordSources.Duration} for duration value.
+</span>@param {Number} hour hour in range of [0, 99]
+@param {Number} minute minute in range of [0, 59]
+@return {Object {android.hardware.hdmi.HdmiTimerRecordSources.Duration}} {@link Duration}
+@throws IllegalArgumentException if hour or minute is out of range
+*/
+durationOf : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-timerInfoOf'>/**Creates {@link android.hardware.hdmi.HdmiTimerRecordSources.TimerInfo} with the given information.
+</span>@param {Number} dayOfMonth day of month
+@param {Number} monthOfYear month of year
+@param {Object {HdmiTimerRecordSources.Time}} startTime start time in {@link Time}
+@param {Object {HdmiTimerRecordSources.Duration}} duration duration in {@link Duration}
+@param {Number} recordingSequence recording sequence. Use RECORDING_SEQUENCE_REPEAT_ONCE_ONLY for no
+            repeat. Otherwise use combination of {@link #RECORDING_SEQUENCE_REPEAT_SUNDAY},
+            {@link #RECORDING_SEQUENCE_REPEAT_MONDAY},
+            {@link #RECORDING_SEQUENCE_REPEAT_TUESDAY},
+            {@link #RECORDING_SEQUENCE_REPEAT_WEDNESDAY},
+            {@link #RECORDING_SEQUENCE_REPEAT_THURSDAY},
+            {@link #RECORDING_SEQUENCE_REPEAT_FRIDAY},
+            {@link #RECORDING_SEQUENCE_REPEAT_SATUREDAY}.
+@return {Object {android.hardware.hdmi.HdmiTimerRecordSources.TimerInfo}} {@link TimerInfo}.
+@throws IllegalArgumentException if input value is invalid
+*/
+timerInfoOf : function(  ) {},
+
+<span id='android-hardware-hdmi-HdmiTimerRecordSources-method-checkTimerRecordSource'>/**Checks the byte array of timer record source.
+</span>@param {Number} sourcetype
+@param {Object {byte[]}} recordSource
+@hide 
+*/
+checkTimerRecordSource : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

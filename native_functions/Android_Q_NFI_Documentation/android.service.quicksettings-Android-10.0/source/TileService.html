@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-quicksettings-TileService'>/**@class android.service.quicksettings.TileService
+</span>@extends android.app.Service
+
+ A TileService provides the user a tile that can be added to Quick Settings.
+ Quick Settings is a space provided that allows the user to change settings and
+ take quick actions without leaving the context of their current app.
+
+ &lt;p&gt;The lifecycle of a TileService is different from some other services in
+ that it may be unbound during parts of its lifecycle.  Any of the following
+ lifecycle events can happen indepently in a separate binding/creation of the
+ service.&lt;/p&gt;
+
+ &lt;ul&gt;
+ &lt;li&gt;When a tile is added by the user its TileService will be bound to and
+ {@link #onTileAdded}() will be called.&lt;/li&gt;
+
+ &lt;li&gt;When a tile should be up to date and listing will be indicated by
+ {@link #onStartListening}() and {@link #onStopListening}().&lt;/li&gt;
+
+ &lt;li&gt;When the user removes a tile from Quick Settings {@link #onTileRemoved}()
+ will be called.&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;TileService will be detected by tiles that match the {@value #ACTION_QS_TILE}
+ and require the permission &quot;android.permission.BIND_QUICK_SETTINGS_TILE&quot;.
+ The label and icon for the service will be used as the default label and
+ icon for the tile. Here is an example TileService declaration.&lt;/p&gt;
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ {@literal
+ &lt;service
+     android:name=&quot;.MyQSTileService&quot;
+     android:label=&quot;@string/my_default_tile_label&quot;
+     android:icon=&quot;@drawable/my_default_icon_label&quot;
+     android:permission=&quot;android.permission.BIND_QUICK_SETTINGS_TILE&quot;&gt;
+     &lt;intent-filter&gt;
+         &lt;action android:name=&quot;android.service.quicksettings.action.QS_TILE&quot; /&gt;
+     &lt;/intent-filter&gt;
+ &lt;/service&gt;}
+ &lt;/pre&gt;
+
+ @see Tile Tile for details about the UI of a Quick Settings Tile.
+*/
+var TileService = {
+
+<span id='android-service-quicksettings-TileService-property-ACTION_QS_TILE_PREFERENCES'>/** An activity that provides a user interface for adjusting TileService
+</span> preferences. Optional but recommended for apps that implement a
+ TileService.
+ &lt;p&gt;
+ This intent may also define a {@link Intent#EXTRA_COMPONENT_NAME} value
+ to indicate the {@link ComponentName} that caused the preferences to be
+ opened.
+ &lt;p&gt;
+ To ensure that the activity can only be launched through quick settings
+ UI provided by this service, apps can protect it with the
+ BIND_QUICK_SETTINGS_TILE permission.
+*/
+ACTION_QS_TILE_PREFERENCES : &quot;android.service.quicksettings.action.QS_TILE_PREFERENCES&quot;,
+<span id='android-service-quicksettings-TileService-property-ACTION_QS_TILE'>/** Action that identifies a Service as being a TileService.
+</span>*/
+ACTION_QS_TILE : &quot;android.service.quicksettings.action.QS_TILE&quot;,
+<span id='android-service-quicksettings-TileService-property-META_DATA_ACTIVE_TILE'>/** Meta-data for tile definition to set a tile into active mode.
+</span> &lt;p&gt;
+ Active mode is for tiles which already listen and keep track of their state in their
+ own process.  These tiles may request to send an update to the System while their process
+ is alive using {@link #requestListeningState}.  The System will only bind these tiles
+ on its own when a click needs to occur.
+
+ To make a TileService an active tile, set this meta-data to true on the TileService's
+ manifest declaration.
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ {@literal
+ &lt;meta-data android:name=&quot;android.service.quicksettings.ACTIVE_TILE&quot;
+      android:value=&quot;true&quot; /&gt;
+ }
+ &lt;/pre&gt;
+*/
+META_DATA_ACTIVE_TILE : &quot;android.service.quicksettings.ACTIVE_TILE&quot;,
+<span id='android-service-quicksettings-TileService-property-ACTION_REQUEST_LISTENING'>/** Used to notify SysUI that Listening has be requested.
+</span> @hide
+*/
+ACTION_REQUEST_LISTENING : &quot;android.service.quicksettings.action.REQUEST_LISTENING&quot;,
+<span id='android-service-quicksettings-TileService-property-EXTRA_SERVICE'>/** @hide
+</span>*/
+EXTRA_SERVICE : &quot;service&quot;,
+<span id='android-service-quicksettings-TileService-property-EXTRA_TOKEN'>/** @hide
+</span>*/
+EXTRA_TOKEN : &quot;token&quot;,
+<span id='android-service-quicksettings-TileService-property-EXTRA_STATE'>/** @hide
+</span>*/
+EXTRA_STATE : &quot;state&quot;,
+<span id='android-service-quicksettings-TileService-method-onDestroy'>/**
+</span>*/
+onDestroy : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-onTileAdded'>/**Called when the user adds this tile to Quick Settings.
+</span> &lt;p/&gt;
+ Note that this is not guaranteed to be called between {@link #onCreate}()
+ and {@link #onStartListening}(), it will only be called when the tile is added
+ and not on subsequent binds.
+*/
+onTileAdded : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-onTileRemoved'>/**Called when the user removes this tile from Quick Settings.
+</span>*/
+onTileRemoved : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-onStartListening'>/**Called when this tile moves into a listening state.
+</span> &lt;p/&gt;
+ When this tile is in a listening state it is expected to keep the
+ UI up to date.  Any listeners or callbacks needed to keep this tile
+ up to date should be registered here and unregistered in {@link #onStopListening}().
+@see #getQsTile()
+@see Tile#updateTile()
+*/
+onStartListening : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-onStopListening'>/**Called when this tile moves out of the listening state.
+</span>*/
+onStopListening : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-onClick'>/**Called when the user clicks on this tile.
+</span>*/
+onClick : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-setStatusIcon'>/**Sets an icon to be shown in the status bar.
+</span> &lt;p&gt;
+ The icon will be displayed before all other icons.  Can only be called between
+ {@link #onStartListening} and {@link #onStopListening}.  Can only be called by system apps.
+@param {Object {Icon}} icon The icon to be displayed, null to hide
+@param {String} contentDescription Content description of the icon to be displayed
+@hide 
+*/
+setStatusIcon : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-showDialog'>/**Used to show a dialog.
+</span>
+ This will collapse the Quick Settings panel and show the dialog.
+@param {Object {Dialog}} dialog Dialog to show.
+@see #isLocked()
+*/
+showDialog : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-unlockAndRun'>/**Prompts the user to unlock the device before executing the Runnable.
+</span> &lt;p&gt;
+ The user will be prompted for their current security method if applicable
+ and if successful, runnable will be executed.  The Runnable will not be
+ executed if the user fails to unlock the device or cancels the operation.
+*/
+unlockAndRun : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-isSecure'>/**Checks if the device is in a secure state.
+</span>
+ TileServices should detect when the device is secure and change their behavior
+ accordingly.
+@return {Boolean} true if the device is secure.
+*/
+isSecure : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-isLocked'>/**Checks if the lock screen is showing.
+</span>
+ When a device is locked, then {@link #showDialog} will not present a dialog, as it will
+ be under the lock screen. If the behavior of the Tile is safe to do while locked,
+ then the user should use {@link #startActivity} to launch an activity on top of the lock
+ screen, otherwise the tile should use {@link #unlockAndRun}(Runnable) to give the
+ user their security challenge.
+@return {Boolean} true if the device is locked.
+*/
+isLocked : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-startActivityAndCollapse'>/**Start an activity while collapsing the panel.
+</span>*/
+startActivityAndCollapse : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-getQsTile'>/**Gets the {@link android.service.quicksettings.Tile} for this service.
+</span> &lt;p/&gt;
+ This tile may be used to get or set the current state for this
+ tile. This tile is only valid for updates between {@link #onStartListening}()
+ and {@link #onStopListening}().
+*/
+getQsTile : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-isQuickSettingsSupported'>/**
+</span>@return {Boolean} True if the device supports quick settings and its assocated APIs.
+@hide 
+*/
+isQuickSettingsSupported : function(  ) {},
+
+<span id='android-service-quicksettings-TileService-method-requestListeningState'>/**Requests that a tile be put in the listening state so it can send an update.
+</span>
+ This method is only applicable to tiles that have {@link #META_DATA_ACTIVE_TILE} defined
+ as true on their TileService Manifest declaration, and will do nothing otherwise.
+*/
+requestListeningState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

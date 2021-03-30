@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-ImsMmTelManager'>/**@class android.telephony.ims.ImsMmTelManager
+</span>@extends java.lang.Object
+
+ A manager for the MmTel (Multimedia Telephony) feature of an IMS network, given an associated
+ subscription.
+
+ Allows a user to query the IMS MmTel feature information for a subscription, register for
+ registration and MmTel capability status callbacks, as well as query/modify user settings for the
+ associated subscription.
+
+ @see #createForSubscriptionId(int)
+ @hide
+*/
+var ImsMmTelManager = {
+
+<span id='android-telephony-ims-ImsMmTelManager-property-WIFI_MODE_WIFI_ONLY'>/** Register for IMS over IWLAN if WiFi signal quality is high enough. Do not hand over to LTE
+</span> registration if signal quality degrades.
+*/
+WIFI_MODE_WIFI_ONLY : &quot;0&quot;,
+<span id='android-telephony-ims-ImsMmTelManager-property-WIFI_MODE_CELLULAR_PREFERRED'>/** Prefer registering for IMS over LTE if LTE signal quality is high enough.
+</span>*/
+WIFI_MODE_CELLULAR_PREFERRED : &quot;1&quot;,
+<span id='android-telephony-ims-ImsMmTelManager-property-WIFI_MODE_WIFI_PREFERRED'>/** Prefer registering for IMS over IWLAN if possible if WiFi signal quality is high enough.
+</span>*/
+WIFI_MODE_WIFI_PREFERRED : &quot;2&quot;,
+<span id='android-telephony-ims-ImsMmTelManager-method-createForSubscriptionId'>/**Create an instance of {@link android.telephony.ims.ImsMmTelManager} for the subscription id specified.
+</span>@param {Number} subId The ID of the subscription that this ImsMmTelManager will use.
+@see android.telephony.SubscriptionManager#getActiveSubscriptionInfoList()
+@throws IllegalArgumentException if the subscription is invalid.
+*/
+createForSubscriptionId : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-registerImsRegistrationCallback'>/**Registers a {@link android.telephony.ims.ImsMmTelManager.RegistrationCallback} with the system, which will provide registration
+</span> updates for the subscription specified in {@link #createForSubscriptionId}(int). Use
+ {@link SubscriptionManager.OnSubscriptionsChangedListener} to listen to Subscription changed
+ events and call {@link #unregisterImsRegistrationCallback}(RegistrationCallback) to clean up.
+
+ When the callback is registered, it will initiate the callback c to be called with the
+ current registration state.
+@param {Object {Executor}} executor The executor the callback events should be run on.
+@param {Object {ImsMmTelManager.RegistrationCallback}} c The {@link RegistrationCallback} to be added.
+@see #unregisterImsRegistrationCallback(RegistrationCallback)
+@throws IllegalArgumentException if the subscription associated with this callback is not
+ active (SIM is not inserted, ESIM inactive) or invalid, or a null {@link Executor} or
+ {@link CapabilityCallback} callback.
+@throws ImsException if the subscription associated with this callback is valid, but
+ the {@link ImsService} associated with the subscription is not available. This can happen if
+ the service crashed, for example. See {@link ImsException#getCode()} for a more detailed
+ reason.
+*/
+registerImsRegistrationCallback : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-unregisterImsRegistrationCallback'>/**Removes an existing {@link android.telephony.ims.ImsMmTelManager.RegistrationCallback}.
+</span>
+ When the subscription associated with this callback is removed (SIM removed, ESIM swap,
+ etc...), this callback will automatically be removed. If this method is called for an
+ inactive subscription, it will result in a no-op.
+@param {Object {ImsMmTelManager.RegistrationCallback}} c The {@link RegistrationCallback} to be removed.
+@see SubscriptionManager.OnSubscriptionsChangedListener
+@see #registerImsRegistrationCallback(Executor, RegistrationCallback)
+@throws IllegalArgumentException if the subscription ID associated with this callback is
+ invalid.
+*/
+unregisterImsRegistrationCallback : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-registerMmTelCapabilityCallback'>/**Registers a {@link android.telephony.ims.ImsMmTelManager.CapabilityCallback} with the system, which will provide MmTel service
+</span> availability updates for the subscription specified in
+ {@link #createForSubscriptionId}(int). The method {@link #isAvailable(int, int)}
+ can also be used to query this information at any time.
+
+ Use {@link SubscriptionManager.OnSubscriptionsChangedListener} to listen to
+ subscription changed events and call
+ {@link #unregisterImsRegistrationCallback}(RegistrationCallback) to clean up.
+
+ When the callback is registered, it will initiate the callback c to be called with the
+ current capabilities.
+@param {Object {Executor}} executor The executor the callback events should be run on.
+@param {Object {ImsMmTelManager.CapabilityCallback}} c The MmTel {@link CapabilityCallback} to be registered.
+@see #unregisterMmTelCapabilityCallback(CapabilityCallback)
+@throws IllegalArgumentException if the subscription associated with this callback is not
+ active (SIM is not inserted, ESIM inactive) or invalid, or a null {@link Executor} or
+ {@link CapabilityCallback} callback.
+@throws ImsException if the subscription associated with this callback is valid, but
+ the {@link ImsService} associated with the subscription is not available. This can happen if
+ the service crashed, for example. See {@link ImsException#getCode()} for a more detailed
+ reason.
+*/
+registerMmTelCapabilityCallback : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-unregisterMmTelCapabilityCallback'>/**Removes an existing MmTel {@link android.telephony.ims.ImsMmTelManager.CapabilityCallback}.
+</span>
+ When the subscription associated with this callback is removed (SIM removed, ESIM swap,
+ etc...), this callback will automatically be removed. If this method is called for an
+ inactive subscription, it will result in a no-op.
+@param {Object {ImsMmTelManager.CapabilityCallback}} c The MmTel {@link CapabilityCallback} to be removed.
+@see #registerMmTelCapabilityCallback(Executor, CapabilityCallback)
+@throws IllegalArgumentException if the subscription ID associated with this callback is
+ invalid.
+*/
+unregisterMmTelCapabilityCallback : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-isAdvancedCallingSettingEnabled'>/**Query the user’s setting for “Advanced Calling” or &quot;Enhanced 4G LTE&quot;, which is used to
+</span> enable MmTel IMS features, depending on the carrier configuration for the current
+ subscription. If this setting is enabled, IMS voice and video telephony over IWLAN/LTE will
+ be enabled as long as the carrier has provisioned these services for the specified
+ subscription. Other IMS services (SMS/UT) are not affected by this user setting and depend on
+ carrier requirements.
+
+ Modifying this value may also trigger an IMS registration or deregistration, depending on
+ whether or not the new value is enabled or disabled.
+
+ Note: If the carrier configuration for advanced calling is not editable or hidden, this
+ method will do nothing and will instead always use the default value.
+@see android.telephony.CarrierConfigManager#KEY_CARRIER_VOLTE_PROVISIONING_REQUIRED_BOOL
+@see android.telephony.CarrierConfigManager#KEY_EDITABLE_ENHANCED_4G_LTE_BOOL
+@see android.telephony.CarrierConfigManager#KEY_HIDE_ENHANCED_4G_LTE_BOOL
+@see android.telephony.CarrierConfigManager#KEY_ENHANCED_4G_LTE_ON_BY_DEFAULT_BOOL
+@see android.telephony.CarrierConfigManager#KEY_CARRIER_VOLTE_AVAILABLE_BOOL
+@see #setAdvancedCallingSettingEnabled(boolean)
+@return {Boolean} true if the user's setting for advanced calling is enabled, false otherwise.
+*/
+isAdvancedCallingSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setAdvancedCallingSettingEnabled'>/**Modify the user’s setting for “Advanced Calling” or &quot;Enhanced 4G LTE&quot;, which is used to
+</span> enable MmTel IMS features, depending on the carrier configuration for the current
+ subscription. If this setting is enabled, IMS voice and video telephony over IWLAN/LTE will
+ be enabled as long as the carrier has provisioned these services for the specified
+ subscription. Other IMS services (SMS/UT) are not affected by this user setting and depend on
+ carrier requirements.
+
+ Modifying this value may also trigger an IMS registration or deregistration, depending on
+ whether or not the new value is enabled or disabled.
+
+ Note: If the carrier configuration for advanced calling is not editable or hidden, this
+ method will do nothing and will instead always use the default value.
+@see android.telephony.CarrierConfigManager#KEY_CARRIER_VOLTE_PROVISIONING_REQUIRED_BOOL
+@see android.telephony.CarrierConfigManager#KEY_EDITABLE_ENHANCED_4G_LTE_BOOL
+@see android.telephony.CarrierConfigManager#KEY_HIDE_ENHANCED_4G_LTE_BOOL
+@see android.telephony.CarrierConfigManager#KEY_ENHANCED_4G_LTE_ON_BY_DEFAULT_BOOL
+@see android.telephony.CarrierConfigManager#KEY_CARRIER_VOLTE_AVAILABLE_BOOL
+@see #isAdvancedCallingSettingEnabled()
+*/
+setAdvancedCallingSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-isCapable'>/**Query the IMS MmTel capability for a given registration technology. This does not
+</span> necessarily mean that we are registered and the capability is available, but rather the
+ subscription is capable of this service over IMS.
+@param {Number} imsRegTech The IMS registration technology, can be one of the following:
+         {@link ImsRegistrationImplBase#REGISTRATION_TECH_LTE},
+         {@link ImsRegistrationImplBase#REGISTRATION_TECH_IWLAN}
+@param {Number} capability The IMS MmTel capability to query, can be one of the following:
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VOICE},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VIDEO,
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_UT},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_SMS}
+@see android.telephony.CarrierConfigManager#KEY_CARRIER_IMS_GBA_REQUIRED_BOOL
+@see #isAvailable(int, int)
+@param imsRegTech The IMS registration technology, can be one of the following:
+         {@link ImsRegistrationImplBase#REGISTRATION_TECH_LTE},
+         {@link ImsRegistrationImplBase#REGISTRATION_TECH_IWLAN}
+@param capability The IMS MmTel capability to query, can be one of the following:
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VOICE},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VIDEO,
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_UT},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_SMS}
+@return {Boolean} {@code true} if the MmTel IMS capability is capable for this subscription, false
+         otherwise.
+*/
+isCapable : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-isAvailable'>/**Query the availability of an IMS MmTel capability for a given registration technology. If
+</span> a capability is available, IMS is registered and the service is currently available over IMS.
+@param {Number} imsRegTech The IMS registration technology, can be one of the following:
+         {@link ImsRegistrationImplBase#REGISTRATION_TECH_LTE},
+         {@link ImsRegistrationImplBase#REGISTRATION_TECH_IWLAN}
+@param {Number} capability The IMS MmTel capability to query, can be one of the following:
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VOICE},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VIDEO,
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_UT},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_SMS}
+@param capability The IMS MmTel capability to query, can be one of the following:
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VOICE},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_VIDEO,
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_UT},
+         {@link MmTelFeature.MmTelCapabilities#CAPABILITY_TYPE_SMS}
+@return {Boolean} {@code true} if the MmTel IMS capability is available for this subscription, false
+         otherwise.
+*/
+isAvailable : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-isVtSettingEnabled'>/**The user's setting for whether or not they have enabled the &quot;Video Calling&quot; setting.
+</span>@return {Boolean} true if the user’s “Video Calling” setting is currently enabled.
+@see #setVtSettingEnabled(boolean)
+*/
+isVtSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setVtSettingEnabled'>/**Change the user's setting for Video Telephony and enable the Video Telephony capability.
+</span>@see #isVtSettingEnabled()
+*/
+setVtSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-isVoWiFiSettingEnabled'>/**
+</span>@return {Boolean} true if the user's setting for Voice over WiFi is enabled and false if it is not.
+@see #setVoWiFiSettingEnabled(boolean)
+*/
+isVoWiFiSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setVoWiFiSettingEnabled'>/**Sets the user's setting for whether or not Voice over WiFi is enabled.
+</span>@param {Boolean} isEnabled true if the user's setting for Voice over WiFi is enabled, false otherwise=
+@see #isVoWiFiSettingEnabled()
+*/
+setVoWiFiSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-isVoWiFiRoamingSettingEnabled'>/**
+</span>@return {Boolean} true if the user's setting for Voice over WiFi while roaming is enabled, false
+ if disabled.
+@see #setVoWiFiRoamingSettingEnabled(boolean)
+*/
+isVoWiFiRoamingSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setVoWiFiRoamingSettingEnabled'>/**Change the user's setting for Voice over WiFi while roaming.
+</span>@param {Boolean} isEnabled true if the user's setting for Voice over WiFi while roaming is enabled,
+     false otherwise.
+@see #isVoWiFiRoamingSettingEnabled()
+*/
+setVoWiFiRoamingSettingEnabled : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setVoWiFiNonPersistent'>/**Overrides the Voice over WiFi capability to true for IMS, but do not persist the setting.
+</span> Typically used during the Voice over WiFi registration process for some carriers.
+@param {Boolean} isCapable true if the IMS stack should try to register for IMS over IWLAN, false
+     otherwise.
+@param {Number} mode the Voice over WiFi mode preference to set, which can be one of the following:
+ - {@link #WIFI_MODE_WIFI_ONLY}
+ - {@link #WIFI_MODE_CELLULAR_PREFERRED}
+ - {@link #WIFI_MODE_WIFI_PREFERRED}
+@see #setVoWiFiSettingEnabled(boolean)
+*/
+setVoWiFiNonPersistent : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-getVoWiFiModeSetting'>/**
+</span>@return {Number} The Voice over WiFi Mode preference set by the user, which can be one of the
+ following:
+ - {@link #WIFI_MODE_WIFI_ONLY}
+ - {@link #WIFI_MODE_CELLULAR_PREFERRED}
+ - {@link #WIFI_MODE_WIFI_PREFERRED}
+@see #setVoWiFiSettingEnabled(boolean)
+*/
+getVoWiFiModeSetting : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setVoWiFiModeSetting'>/**Set the user's preference for Voice over WiFi calling mode.
+</span>@param {Number} mode The user's preference for the technology to register for IMS over, can be one of
+    the following:
+ - {@link #WIFI_MODE_WIFI_ONLY}
+ - {@link #WIFI_MODE_CELLULAR_PREFERRED}
+ - {@link #WIFI_MODE_WIFI_PREFERRED}
+@see #getVoWiFiModeSetting()
+*/
+setVoWiFiModeSetting : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-getVoWiFiRoamingModeSetting'>/**Set the user's preference for Voice over WiFi calling mode while the device is roaming on
+</span> another network.
+@return {Number} The user's preference for the technology to register for IMS over when roaming on
+     another network, can be one of the following:
+     - {@link #WIFI_MODE_WIFI_ONLY}
+     - {@link #WIFI_MODE_CELLULAR_PREFERRED}
+     - {@link #WIFI_MODE_WIFI_PREFERRED}
+@see #setVoWiFiRoamingSettingEnabled(boolean)
+*/
+getVoWiFiRoamingModeSetting : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setVoWiFiRoamingModeSetting'>/**Set the user's preference for Voice over WiFi mode while the device is roaming on another
+</span> network.
+@param {Number} mode The user's preference for the technology to register for IMS over when roaming on
+     another network, can be one of the following:
+     - {@link #WIFI_MODE_WIFI_ONLY}
+     - {@link #WIFI_MODE_CELLULAR_PREFERRED}
+     - {@link #WIFI_MODE_WIFI_PREFERRED}
+@see #getVoWiFiRoamingModeSetting()
+*/
+setVoWiFiRoamingModeSetting : function(  ) {},
+
+<span id='android-telephony-ims-ImsMmTelManager-method-setRttCapabilitySetting'>/**Sets the capability of RTT for IMS calls placed on this subscription.
+</span>
+ Note: This does not affect the value of
+ {@link android.provider.Settings.Secure#RTT_CALLING_MODE}, which is the global user setting
+ for RTT. That value is enabled/disabled separately by the user through the Accessibility
+ settings.
+@param {Boolean} isEnabled if true RTT should be enabled during calls made on this subscription.
+*/
+setRttCapabilitySetting : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

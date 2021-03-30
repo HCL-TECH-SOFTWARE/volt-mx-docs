@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-usb-UsbRequest'>/**@class android.hardware.usb.UsbRequest
+</span>@extends java.lang.Object
+
+ A class representing USB request packet.
+ This can be used for both reading and writing data to or from a
+ {@link android.hardware.usb.UsbDeviceConnection}.
+ UsbRequests can be used to transfer data on bulk and interrupt endpoints.
+ Requests on bulk endpoints can be sent synchronously via {@link android.hardware.usb.UsbDeviceConnection#bulkTransfer}
+ or asynchronously via {@link #queue} and {@link android.hardware.usb.UsbDeviceConnection#requestWait}.
+ Requests on interrupt endpoints are only send and received asynchronously.
+
+ &lt;p&gt;Requests on endpoint zero are not supported by this class;
+ use {@link android.hardware.usb.UsbDeviceConnection#controlTransfer} for endpoint zero requests instead.
+*/
+var UsbRequest = {
+
+<span id='android-hardware-usb-UsbRequest-method-initialize'>/**Initializes the request so it can read or write data on the given endpoint.
+</span> Whether the request allows reading or writing depends on the direction of the endpoint.
+@param {Object {UsbDeviceConnection}} endpoint the endpoint to be used for this request.
+@return {Boolean} true if the request was successfully opened.
+*/
+initialize : function(  ) {},
+
+<span id='android-hardware-usb-UsbRequest-method-close'>/**Releases all resources related to this request.
+</span>*/
+close : function(  ) {},
+
+<span id='android-hardware-usb-UsbRequest-method-getEndpoint'>/**Returns the endpoint for the request, or null if the request is not opened.
+</span>@return {Object {android.hardware.usb.UsbEndpoint}} the request's endpoint
+*/
+getEndpoint : function(  ) {},
+
+<span id='android-hardware-usb-UsbRequest-method-getClientData'>/**Returns the client data for the request.
+</span> This can be used in conjunction with {@link #setClientData}
+ to associate another object with this request, which can be useful for
+ maintaining state between calls to {@link #queue} and
+ {@link android.hardware.usb.UsbDeviceConnection#requestWait}
+@return {Object {java.lang.Object}} the client data for the request
+*/
+getClientData : function(  ) {},
+
+<span id='android-hardware-usb-UsbRequest-method-setClientData'>/**Sets the client data for the request.
+</span> This can be used in conjunction with {@link #getClientData}
+ to associate another object with this request, which can be useful for
+ maintaining state between calls to {@link #queue} and
+ {@link android.hardware.usb.UsbDeviceConnection#requestWait}
+@param {Object {Object}} data the client data for the request
+*/
+setClientData : function(  ) {},
+
+<span id='android-hardware-usb-UsbRequest-method-queue'>/**Queues the request to send or receive data on its endpoint.
+</span> &lt;p&gt;For OUT endpoints, the given buffer data will be sent on the endpoint. For IN endpoints,
+ the endpoint will attempt to read the given number of bytes into the specified buffer. If the
+ queueing operation is successful, return true. The result will be returned via
+ {@link android.hardware.usb.UsbDeviceConnection#requestWait}&lt;/p&gt;
+@param {Object {ByteBuffer}} buffer the buffer containing the bytes to write, or location to store the results of a
+               read. Position and array offset will be ignored and assumed to be 0. Limit and
+               capacity will be ignored. Once the request
+               {@link UsbDeviceConnection#requestWait() is processed} the position will be set
+               to the number of bytes read/written.
+@param {Number} length number of bytes to read or write. Before {@value Build.VERSION_CODES#P}, a
+               value larger than 16384 bytes would be truncated down to 16384. In API
+               {@value Build.VERSION_CODES#P} and after, any value of length is valid.
+@return {Boolean} true if the queueing operation succeeded
+@deprecated Use {@link #queue(ByteBuffer)} instead.
+*/
+queue : function(  ) {},
+
+<span id='android-hardware-usb-UsbRequest-method-queue'>/**Queues the request to send or receive data on its endpoint.
+</span>
+ &lt;p&gt;For OUT endpoints, the remaining bytes of the buffer will be sent on the endpoint. For IN
+ endpoints, the endpoint will attempt to fill the remaining bytes of the buffer. If the
+ queueing operation is successful, return true. The result will be returned via
+ {@link android.hardware.usb.UsbDeviceConnection#requestWait}&lt;/p&gt;
+@param {Object {ByteBuffer}} buffer the buffer containing the bytes to send, or the buffer to fill. The state
+               of the buffer is undefined until the request is returned by
+               {@link UsbDeviceConnection#requestWait}. If the request failed the buffer
+               will be unchanged; if the request succeeded the position of the buffer is
+               incremented by the number of bytes sent/received. Before
+               {@value Build.VERSION_CODES#P}, a buffer of length larger than 16384 bytes
+               would throw IllegalArgumentException. In API {@value Build.VERSION_CODES#P}
+               and after, any size buffer is valid.
+@return {Boolean} true if the queueing operation succeeded
+*/
+queue : function(  ) {},
+
+<span id='android-hardware-usb-UsbRequest-method-cancel'>/**Cancels a pending queue operation.
+</span>@return {Boolean} true if cancelling succeeded
+*/
+cancel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

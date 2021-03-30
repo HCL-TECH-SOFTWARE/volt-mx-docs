@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-security-keystore-recovery-KeyChainProtectionParams'>/**@class android.security.keystore.recovery.KeyChainProtectionParams
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A {@link android.security.keystore.recovery.KeyChainSnapshot} is protected with a key derived from the user's lock screen. This
+ class wraps all the data necessary to derive the same key on a recovering device:
+
+ &lt;ul&gt;
+     &lt;li&gt;UI parameters for the user's lock screen - so that if e.g., the user was using a pattern,
+         the recovering device can display the pattern UI to the user when asking them to enter
+         the lock screen from their previous device.
+     &lt;li&gt;The algorithm used to derive a key from the user's lock screen, e.g. SHA-256 with a salt.
+ &lt;/ul&gt;
+
+ &lt;p&gt;As such, this data is sent along with the {@link android.security.keystore.recovery.KeyChainSnapshot} when syncing the current
+ version of the keychain.
+
+ &lt;p&gt;For now, the recoverable keychain only supports a single layer of protection, which is the
+ user's lock screen. In the future, the keychain will support multiple layers of protection
+ (e.g. an additional keychain password, along with the lock screen).
+
+ @hide
+*/
+var KeyChainProtectionParams = {
+
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-property-TYPE_LOCKSCREEN'>/** Lockscreen secret is required to recover KeyStore.
+</span>*/
+TYPE_LOCKSCREEN : &quot;100&quot;,
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-property-UI_FORMAT_PIN'>/** Pin with digits only.
+</span>*/
+UI_FORMAT_PIN : &quot;1&quot;,
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-property-UI_FORMAT_PASSWORD'>/** Password. String with latin-1 characters only.
+</span>*/
+UI_FORMAT_PASSWORD : &quot;2&quot;,
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-property-UI_FORMAT_PATTERN'>/** Pattern with 3 by 3 grid.
+</span>*/
+UI_FORMAT_PATTERN : &quot;3&quot;,
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-method-getUserSecretType'>/**
+</span>@see TYPE_LOCKSCREEN
+*/
+getUserSecretType : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-method-getLockScreenUiFormat'>/**Specifies UX shown to user during recovery.
+</span> Default value is {@code UI_FORMAT_LOCKSCREEN}
+@see UI_FORMAT_PIN
+@see UI_FORMAT_PASSWORD
+@see UI_FORMAT_PATTERN
+*/
+getLockScreenUiFormat : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-method-getKeyDerivationParams'>/**Specifies function used to derive symmetric key from user input
+</span> Format is defined in separate util class.
+*/
+getKeyDerivationParams : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-method-getSecret'>/**Secret derived from user input.
+</span> Default value is empty array
+@return {Number} secret or empty array
+*/
+getSecret : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-method-clearSecret'>/**Fills secret with zeroes.
+</span>*/
+clearSecret : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-security-keystore-recovery-KeyChainProtectionParams-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-AlarmClock'>/**@class android.provider.AlarmClock
+</span>@extends java.lang.Object
+
+ The AlarmClock provider contains an Intent action and extras that can be used
+ to start an Activity to set a new alarm or timer in an alarm clock application.
+
+ Applications that wish to receive the ACTION_SET_ALARM  and ACTION_SET_TIMER Intents
+ should create an activity to handle the Intent that requires the permission
+ com.android.alarm.permission.SET_ALARM.  Applications that wish to create a
+ new alarm or timer should use
+ {@link android.content.Context#startActivity Context.startActivity()} so that
+ the user has the option of choosing which alarm clock application to use.
+
+ Android TV devices may not support the alarm intents.
+*/
+var AlarmClock = {
+
+<span id='android-provider-AlarmClock-property-ACTION_SET_ALARM'>/** Activity Action: Set an alarm.
+</span> &lt;p&gt;
+ Activates an existing alarm or creates a new one.
+ &lt;/p&gt;&lt;p&gt;
+ This action requests an alarm to be set for a given time of day. If no time of day is
+ specified, an implementation should start an activity that is capable of setting an alarm
+ ({@link #EXTRA_SKIP_UI} is ignored in this case). If a time of day is specified, and
+ {@link #EXTRA_SKIP_UI} is {@code true}, and the alarm is not repeating, the implementation
+ should remove this alarm after it has been dismissed. If an identical alarm exists matching
+ all parameters, the implementation may re-use it instead of creating a new one (in this case,
+ the alarm should not be removed after dismissal).
+ &lt;/p&gt;&lt;p&gt;
+ This action always enables the alarm.
+ &lt;/p&gt;&lt;p&gt;
+ This activity could also be started in Voice Interaction mode. The activity should check
+ {@link android.app.Activity#isVoiceInteraction}, and if true, the implementation should
+ report a deeplink of the created/enabled alarm using
+ {@link android.app.VoiceInteractor.CompleteVoiceRequest}. This allows follow-on voice actions
+ such as {@link #ACTION_DISMISS_ALARM} to dismiss the alarm that was just enabled.
+ &lt;/p&gt;
+ &lt;h3&gt;Request parameters&lt;/h3&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link #EXTRA_HOUR} &lt;em&gt;(optional)&lt;/em&gt;: The hour of the alarm being set.
+ &lt;li&gt;{@link #EXTRA_MINUTES} &lt;em&gt;(optional)&lt;/em&gt;: The minutes of the alarm being set.
+ &lt;li&gt;{@link #EXTRA_DAYS} &lt;em&gt;(optional)&lt;/em&gt;: Weekdays for repeating alarm.
+ &lt;li&gt;{@link #EXTRA_MESSAGE} &lt;em&gt;(optional)&lt;/em&gt;: A custom message for the alarm.
+ &lt;li&gt;{@link #EXTRA_RINGTONE} &lt;em&gt;(optional)&lt;/em&gt;: A ringtone to play with this alarm.
+ &lt;li&gt;{@link #EXTRA_VIBRATE} &lt;em&gt;(optional)&lt;/em&gt;: Whether or not to activate the device
+ vibrator for this alarm.
+ &lt;li&gt;{@link #EXTRA_SKIP_UI} &lt;em&gt;(optional)&lt;/em&gt;: Whether or not to display an activity for
+ setting this alarm.
+ &lt;/ul&gt;
+*/
+ACTION_SET_ALARM : &quot;android.intent.action.SET_ALARM&quot;,
+<span id='android-provider-AlarmClock-property-ACTION_DISMISS_ALARM'>/** Activity Action: Dismiss an alarm.
+</span> &lt;p&gt;
+ The alarm to dismiss can be specified or searched for in one of the following ways:
+ &lt;ol&gt;
+ &lt;li&gt;The Intent's data URI, which represents a deeplink to the alarm.
+ &lt;li&gt;The extra {@link #EXTRA_ALARM_SEARCH_MODE} to determine how to search for the alarm.
+ &lt;/ol&gt;
+ &lt;/p&gt;&lt;p&gt;
+ If neither of the above are given then:
+ &lt;ul&gt;
+ &lt;li&gt;If exactly one active alarm exists, it is dismissed.
+ &lt;li&gt;If more than one active alarm exists, the user is prompted to choose the alarm to
+ dismiss.
+ &lt;/ul&gt;
+ &lt;/p&gt;&lt;p&gt;
+ If the extra {@link #EXTRA_ALARM_SEARCH_MODE} is used, and the search results contain two or
+ more matching alarms, then the implementation should show an UI with the results and allow
+ the user to select the alarm to dismiss. If the implementation supports
+ {@link android.content.Intent#CATEGORY_VOICE} and the activity is started in Voice
+ Interaction mode (i.e. check {@link android.app.Activity#isVoiceInteraction}), then the
+ implementation should additionally use {@link android.app.VoiceInteractor.PickOptionRequest}
+ to start a voice interaction follow-on flow to help the user disambiguate the alarm by voice.
+ &lt;/p&gt;&lt;p&gt;
+ If the specified alarm is a single occurrence alarm, then dismissing it effectively disables
+ the alarm; it will never ring again unless explicitly re-enabled.
+ &lt;/p&gt;&lt;p&gt;
+ If the specified alarm is a repeating alarm, then dismissing it only prevents the upcoming
+ instance from ringing. The alarm remains enabled so that it will still ring on the date and
+ time of the next instance (i.e. the instance after the upcoming one).
+ &lt;/p&gt;
+
+ @see #EXTRA_ALARM_SEARCH_MODE
+*/
+ACTION_DISMISS_ALARM : &quot;android.intent.action.DISMISS_ALARM&quot;,
+<span id='android-provider-AlarmClock-property-ACTION_SNOOZE_ALARM'>/** Activity Action: Snooze a currently ringing alarm.
+</span> &lt;p&gt;
+ Snoozes the currently ringing alarm. The extra {@link #EXTRA_ALARM_SNOOZE_DURATION} can be
+ optionally set to specify the snooze duration; if unset, the implementation should use a
+ reasonable default, for example 10 minutes. The alarm should ring again after the snooze
+ duration.
+ &lt;/p&gt;&lt;p&gt;
+ Note: setting the extra {@link #EXTRA_ALARM_SNOOZE_DURATION} does not change the default
+ snooze duration; it's only applied to the currently ringing alarm.
+ &lt;/p&gt;&lt;p&gt;
+ If there is no currently ringing alarm, then this is a no-op.
+ &lt;/p&gt;
+
+ @see #EXTRA_ALARM_SNOOZE_DURATION
+*/
+ACTION_SNOOZE_ALARM : &quot;android.intent.action.SNOOZE_ALARM&quot;,
+<span id='android-provider-AlarmClock-property-ACTION_SET_TIMER'>/** Activity Action: Set a timer.
+</span> &lt;p&gt;
+ Activates an existing timer or creates a new one.
+ &lt;/p&gt;&lt;p&gt;
+ This action requests a timer to be started for a specific {@link #EXTRA_LENGTH length} of
+ time. If no {@link #EXTRA_LENGTH length} is specified, the implementation should start an
+ activity that is capable of setting a timer ({@link #EXTRA_SKIP_UI} is ignored in this case).
+ If a {@link #EXTRA_LENGTH length} is specified, and {@link #EXTRA_SKIP_UI} is {@code true},
+ the implementation should remove this timer after it has been dismissed. If an identical,
+ unused timer exists matching both parameters, an implementation may re-use it instead of
+ creating a new one (in this case, the timer should not be removed after dismissal).
+
+ This action always starts the timer.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Request parameters&lt;/h3&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link #EXTRA_LENGTH} &lt;em&gt;(optional)&lt;/em&gt;: The length of the timer being set.
+ &lt;li&gt;{@link #EXTRA_MESSAGE} &lt;em&gt;(optional)&lt;/em&gt;: A custom message for the timer.
+ &lt;li&gt;{@link #EXTRA_SKIP_UI} &lt;em&gt;(optional)&lt;/em&gt;: Whether or not to display an activity for
+ setting this timer.
+ &lt;/ul&gt;
+*/
+ACTION_SET_TIMER : &quot;android.intent.action.SET_TIMER&quot;,
+<span id='android-provider-AlarmClock-property-ACTION_DISMISS_TIMER'>/** Activity Action: Dismiss a timer.
+</span> &lt;p&gt;
+ The timer to dismiss should be specified using the Intent's data URI, which represents a
+ deeplink to the timer.
+ &lt;/p&gt;&lt;p&gt;
+ If no data URI is provided, dismiss all expired timers.
+ &lt;/p&gt;
+*/
+ACTION_DISMISS_TIMER : &quot;android.intent.action.DISMISS_TIMER&quot;,
+<span id='android-provider-AlarmClock-property-ACTION_SHOW_TIMERS'>/** Activity Action: Show the timers.
+</span> &lt;p&gt;
+ This action opens the timers page.
+ &lt;/p&gt;
+*/
+ACTION_SHOW_TIMERS : &quot;android.intent.action.SHOW_TIMERS&quot;,
+<span id='android-provider-AlarmClock-property-ACTION_SHOW_ALARMS'>/** Activity Action: Show the alarms.
+</span> &lt;p&gt;
+ This action opens the alarms page.
+ &lt;/p&gt;
+*/
+ACTION_SHOW_ALARMS : &quot;android.intent.action.SHOW_ALARMS&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_ALARM_SEARCH_MODE'>/** Bundle extra: Specify the type of search mode to look up an alarm.
+</span> &lt;p&gt;
+ For example, used by {@link #ACTION_DISMISS_ALARM} to identify the alarm to dismiss.
+ &lt;/p&gt;&lt;p&gt;
+ This extra is only used when the alarm is not already identified by a deeplink as
+ specified in the Intent's data URI.
+ &lt;/p&gt;&lt;p&gt;
+ The value of this extra is a {@link String}, restricted to the following set of supported
+ search modes:
+ &lt;ul&gt;
+ &lt;li&gt;&lt;i&gt;Time&lt;/i&gt; - {@link #ALARM_SEARCH_MODE_TIME}: Selects the alarm that is most
+ closely matched by the search parameters {@link #EXTRA_HOUR}, {@link #EXTRA_MINUTES},
+ {@link #EXTRA_IS_PM}.
+ &lt;li&gt;&lt;i&gt;Next alarm&lt;/i&gt; - {@link #ALARM_SEARCH_MODE_NEXT}: Selects the alarm that will
+ ring next, or the alarm that is currently ringing, if any.
+ &lt;li&gt;&lt;i&gt;All alarms&lt;/i&gt; - {@link #ALARM_SEARCH_MODE_ALL}: Selects all alarms.
+ &lt;li&gt;&lt;i&gt;Label&lt;/i&gt; - {@link #ALARM_SEARCH_MODE_LABEL}: Search by alarm label. Should return
+ alarms that contain the word or phrase in given label.
+ &lt;/ul&gt;
+ &lt;/p&gt;
+
+ @see #ALARM_SEARCH_MODE_TIME
+ @see #ALARM_SEARCH_MODE_NEXT
+ @see #ALARM_SEARCH_MODE_ALL
+ @see #ALARM_SEARCH_MODE_LABEL
+ @see #ACTION_DISMISS_ALARM
+*/
+EXTRA_ALARM_SEARCH_MODE : &quot;android.intent.extra.alarm.SEARCH_MODE&quot;,
+<span id='android-provider-AlarmClock-property-ALARM_SEARCH_MODE_TIME'>/** Search for the alarm that is most closely matched by the search parameters
+</span> {@link #EXTRA_HOUR}, {@link #EXTRA_MINUTES}, {@link #EXTRA_IS_PM}.
+ In this search mode, at least one of these additional extras are required.
+ &lt;ul&gt;
+ &lt;li&gt;{@link #EXTRA_HOUR} - The hour to search for the alarm.
+ &lt;li&gt;{@link #EXTRA_MINUTES} - The minute to search for the alarm.
+ &lt;li&gt;{@link #EXTRA_IS_PM} - Whether the hour is AM or PM.
+ &lt;/ul&gt;
+
+ @see #EXTRA_ALARM_SEARCH_MODE
+*/
+ALARM_SEARCH_MODE_TIME : &quot;android.time&quot;,
+<span id='android-provider-AlarmClock-property-ALARM_SEARCH_MODE_NEXT'>/** Selects the alarm that will ring next, or the alarm that is currently ringing, if any.
+</span>
+ @see #EXTRA_ALARM_SEARCH_MODE
+*/
+ALARM_SEARCH_MODE_NEXT : &quot;android.next&quot;,
+<span id='android-provider-AlarmClock-property-ALARM_SEARCH_MODE_ALL'>/** Selects all alarms.
+</span>
+ @see #EXTRA_ALARM_SEARCH_MODE
+*/
+ALARM_SEARCH_MODE_ALL : &quot;android.all&quot;,
+<span id='android-provider-AlarmClock-property-ALARM_SEARCH_MODE_LABEL'>/** Search by alarm label. Should return alarms that contain the word or phrase in given label.
+</span>
+ @see #EXTRA_ALARM_SEARCH_MODE
+*/
+ALARM_SEARCH_MODE_LABEL : &quot;android.label&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_IS_PM'>/** Bundle extra: The AM/PM of the alarm.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_DISMISS_ALARM}.
+ &lt;/p&gt;&lt;p&gt;
+ This extra is optional and only used when {@link #EXTRA_ALARM_SEARCH_MODE} is set to
+ {@link #ALARM_SEARCH_MODE_TIME}. In this search mode, the {@link #EXTRA_IS_PM} is
+ used together with {@link #EXTRA_HOUR} and {@link #EXTRA_MINUTES}. The implementation should
+ look up the alarm that is most closely matched by these search parameters.
+ If {@link #EXTRA_IS_PM} is missing, then the AM/PM of the specified {@link #EXTRA_HOUR} is
+ ambiguous and the implementation should ask for clarification from the user.
+ &lt;/p&gt;&lt;p&gt;
+ The value is a {@link Boolean}, where false=AM and true=PM.
+ &lt;/p&gt;
+
+ @see #ACTION_DISMISS_ALARM
+ @see #EXTRA_HOUR
+ @see #EXTRA_MINUTES
+*/
+EXTRA_IS_PM : &quot;android.intent.extra.alarm.IS_PM&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_ALARM_SNOOZE_DURATION'>/** Bundle extra: The snooze duration of the alarm in minutes.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SNOOZE_ALARM}. This extra is optional and the value is an
+ {@link Integer} that specifies the duration in minutes for which to snooze the alarm.
+ &lt;/p&gt;
+
+ @see #ACTION_SNOOZE_ALARM
+*/
+EXTRA_ALARM_SNOOZE_DURATION : &quot;android.intent.extra.alarm.SNOOZE_DURATION&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_DAYS'>/** Bundle extra: Weekdays for repeating alarm.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM}.
+ &lt;/p&gt;&lt;p&gt;
+ The value is an {@code ArrayList&lt;Integer&gt;}. Each item can be:
+ &lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt; {@link java.util.Calendar#SUNDAY},
+ &lt;li&gt; {@link java.util.Calendar#MONDAY},
+ &lt;li&gt; {@link java.util.Calendar#TUESDAY},
+ &lt;li&gt; {@link java.util.Calendar#WEDNESDAY},
+ &lt;li&gt; {@link java.util.Calendar#THURSDAY},
+ &lt;li&gt; {@link java.util.Calendar#FRIDAY},
+ &lt;li&gt; {@link java.util.Calendar#SATURDAY}
+ &lt;/ul&gt;
+*/
+EXTRA_DAYS : &quot;android.intent.extra.alarm.DAYS&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_HOUR'>/** Bundle extra: The hour of the alarm.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM}.
+ &lt;/p&gt;&lt;p&gt;
+ This extra is optional. If not provided, an implementation should open an activity
+ that allows a user to set an alarm with user provided time.
+ &lt;/p&gt;&lt;p&gt;
+ The value is an {@link Integer} and ranges from 0 to 23.
+ &lt;/p&gt;
+
+ @see #ACTION_SET_ALARM
+ @see #EXTRA_MINUTES
+ @see #EXTRA_DAYS
+*/
+EXTRA_HOUR : &quot;android.intent.extra.alarm.HOUR&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_LENGTH'>/** Bundle extra: The length of the timer in seconds.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_TIMER}.
+ &lt;/p&gt;&lt;p&gt;
+ This extra is optional. If not provided, an implementation should open an activity
+ that allows a user to set a timer with user provided length.
+ &lt;/p&gt;&lt;p&gt;
+ The value is an {@link Integer} and ranges from 1 to 86400 (24 hours).
+ &lt;/p&gt;
+
+ @see #ACTION_SET_TIMER
+*/
+EXTRA_LENGTH : &quot;android.intent.extra.alarm.LENGTH&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_MESSAGE'>/** Bundle extra: A custom message for the alarm or timer.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM} and {@link #ACTION_SET_TIMER}.
+ &lt;/p&gt;&lt;p&gt;
+ The value is a {@link String}.
+ &lt;/p&gt;
+
+ @see #ACTION_SET_ALARM
+ @see #ACTION_SET_TIMER
+*/
+EXTRA_MESSAGE : &quot;android.intent.extra.alarm.MESSAGE&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_MINUTES'>/** Bundle extra: The minutes of the alarm.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM}.
+ &lt;/p&gt;&lt;p&gt;
+ The value is an {@link Integer} and ranges from 0 to 59. If not provided, it defaults to 0.
+ &lt;/p&gt;
+
+ @see #ACTION_SET_ALARM
+ @see #EXTRA_HOUR
+ @see #EXTRA_DAYS
+*/
+EXTRA_MINUTES : &quot;android.intent.extra.alarm.MINUTES&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_RINGTONE'>/** Bundle extra: A ringtone to be played with this alarm.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM}.
+ &lt;/p&gt;&lt;p&gt;
+ This value is a {@link String} and can either be set to {@link #VALUE_RINGTONE_SILENT} or
+ to a content URI of the media to be played. If not specified or the URI doesn't exist,
+ {@code &quot;content://settings/system/alarm_alert} will be used.
+ &lt;/p&gt;
+
+ @see #ACTION_SET_ALARM
+ @see #VALUE_RINGTONE_SILENT
+ @see #EXTRA_VIBRATE
+*/
+EXTRA_RINGTONE : &quot;android.intent.extra.alarm.RINGTONE&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_SKIP_UI'>/** Bundle extra: Whether or not to display an activity after performing the action.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM} and {@link #ACTION_SET_TIMER}.
+ &lt;/p&gt;&lt;p&gt;
+ If true, the application is asked to bypass any intermediate UI. If false, the application
+ may display intermediate UI like a confirmation dialog or settings.
+ &lt;/p&gt;&lt;p&gt;
+ The value is a {@link Boolean}. The default is {@code false}.
+ &lt;/p&gt;
+
+ @see #ACTION_SET_ALARM
+ @see #ACTION_SET_TIMER
+*/
+EXTRA_SKIP_UI : &quot;android.intent.extra.alarm.SKIP_UI&quot;,
+<span id='android-provider-AlarmClock-property-EXTRA_VIBRATE'>/** Bundle extra: Whether or not to activate the device vibrator.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM}.
+ &lt;/p&gt;&lt;p&gt;
+ The value is a {@link Boolean}. The default is {@code true}.
+ &lt;/p&gt;
+
+ @see #ACTION_SET_ALARM
+ @see #EXTRA_RINGTONE
+ @see #VALUE_RINGTONE_SILENT
+*/
+EXTRA_VIBRATE : &quot;android.intent.extra.alarm.VIBRATE&quot;,
+<span id='android-provider-AlarmClock-property-VALUE_RINGTONE_SILENT'>/** Bundle extra value: Indicates no ringtone should be played.
+</span> &lt;p&gt;
+ Used by {@link #ACTION_SET_ALARM}, passed in through {@link #EXTRA_RINGTONE}.
+ &lt;/p&gt;
+
+ @see #ACTION_SET_ALARM
+ @see #EXTRA_RINGTONE
+ @see #EXTRA_VIBRATE
+*/
+VALUE_RINGTONE_SILENT : &quot;silent&quot;,
+
+};</pre>
+</body>
+</html>

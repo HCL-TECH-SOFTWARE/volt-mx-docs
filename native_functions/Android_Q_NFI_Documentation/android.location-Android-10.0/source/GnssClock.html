@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-location-GnssClock'>/**@class android.location.GnssClock
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A class containing a GPS clock timestamp.
+
+ &lt;p&gt;It represents a measurement of the GPS receiver's clock.
+*/
+var GnssClock = {
+
+<span id='android-location-GnssClock-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-location-GnssClock-method-set'>/**Sets all contents to the values stored in the provided object.
+</span>@hide 
+*/
+set : function(  ) {},
+
+<span id='android-location-GnssClock-method-reset'>/**Resets all the contents to its original state.
+</span>@hide 
+*/
+reset : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasLeapSecond'>/**Returns {@code true} if {@link #getLeapSecond}() is available, {@code false} otherwise.
+</span>*/
+hasLeapSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-getLeapSecond'>/**Gets the leap second associated with the clock's time.
+</span>
+ &lt;p&gt;The sign of the value is defined by the following equation:
+ &lt;pre&gt;
+     UtcTimeNanos = TimeNanos - (FullBiasNanos + BiasNanos) - LeapSecond * 1,000,000,000&lt;/pre&gt;
+
+ &lt;p&gt;The value is only available if {@link #hasLeapSecond}() is {@code true}.
+*/
+getLeapSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-setLeapSecond'>/**Sets the leap second associated with the clock's time.
+</span>@hide 
+*/
+setLeapSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetLeapSecond'>/**Resets the leap second associated with the clock's time.
+</span>@hide 
+*/
+resetLeapSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-getTimeNanos'>/**Gets the GNSS receiver internal hardware clock value in nanoseconds.
+</span>
+ &lt;p&gt;This value is expected to be monotonically increasing while the hardware clock remains
+ powered on. For the case of a hardware clock that is not continuously on, see the
+ {@link #getHardwareClockDiscontinuityCount} field. The GPS time can be derived by subtracting
+ the sum of {@link #getFullBiasNanos}() and {@link #getBiasNanos}() (when they are available)
+ from this value. Sub-nanosecond accuracy can be provided by means of {@link #getBiasNanos}().
+
+ &lt;p&gt;The error estimate for this value (if applicable) is {@link #getTimeUncertaintyNanos}().
+*/
+getTimeNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-setTimeNanos'>/**Sets the GNSS receiver internal clock in nanoseconds.
+</span>@hide 
+*/
+setTimeNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasTimeUncertaintyNanos'>/**Returns {@code true} if {@link #getTimeUncertaintyNanos}() is available, {@code false}
+</span> otherwise.
+*/
+hasTimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-getTimeUncertaintyNanos'>/**Gets the clock's time Uncertainty (1-Sigma) in nanoseconds.
+</span>
+ &lt;p&gt;The uncertainty is represented as an absolute (single sided) value.
+
+ &lt;p&gt;The value is only available if {@link #hasTimeUncertaintyNanos}() is {@code true}.
+
+ &lt;p&gt;This value is often effectively zero (it is the reference clock by which all other times
+ and time uncertainties are measured), and thus this field may often be 0, or not provided.
+*/
+getTimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-setTimeUncertaintyNanos'>/**Sets the clock's Time Uncertainty (1-Sigma) in nanoseconds.
+</span>@hide 
+*/
+setTimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetTimeUncertaintyNanos'>/**Resets the clock's Time Uncertainty (1-Sigma) in nanoseconds.
+</span>@hide 
+*/
+resetTimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasFullBiasNanos'>/**Returns {@code true} if {@link #getFullBiasNanos}() is available, {@code false} otherwise.
+</span>*/
+hasFullBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-getFullBiasNanos'>/**Gets the difference between hardware clock ({@link #getTimeNanos}()) inside GPS receiver and
+</span> the true GPS time since 0000Z, January 6, 1980, in nanoseconds.
+
+ &lt;p&gt;This value is available if the receiver has estimated GPS time. If the computed time is
+ for a non-GPS constellation, the time offset of that constellation to GPS has to be applied
+ to fill this value. The value is only available if {@link #hasFullBiasNanos}() is
+ {@code true}.
+
+ &lt;p&gt;The error estimate for the sum of this field and {@link #getBiasNanos} is
+ {@link #getBiasUncertaintyNanos}().
+
+ &lt;p&gt;The sign of the value is defined by the following equation:
+
+ &lt;pre&gt;
+     local estimate of GPS time = TimeNanos - (FullBiasNanos + BiasNanos)&lt;/pre&gt;
+*/
+getFullBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-setFullBiasNanos'>/**Sets the full bias in nanoseconds.
+</span>@hide 
+*/
+setFullBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetFullBiasNanos'>/**Resets the full bias in nanoseconds.
+</span>@hide 
+*/
+resetFullBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasBiasNanos'>/**Returns {@code true} if {@link #getBiasNanos}() is available, {@code false} otherwise.
+</span>*/
+hasBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-getBiasNanos'>/**Gets the clock's sub-nanosecond bias.
+</span>
+ &lt;p&gt;See the description of how this field is part of converting from hardware clock time, to
+ GPS time, in {@link #getFullBiasNanos}().
+
+ &lt;p&gt;The error estimate for the sum of this field and {@link #getFullBiasNanos} is
+ {@link #getBiasUncertaintyNanos}().
+
+ &lt;p&gt;The value is only available if {@link #hasBiasNanos}() is {@code true}.
+*/
+getBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-setBiasNanos'>/**Sets the sub-nanosecond bias.
+</span>@hide 
+*/
+setBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetBiasNanos'>/**Resets the clock's Bias in nanoseconds.
+</span>@hide 
+*/
+resetBiasNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasBiasUncertaintyNanos'>/**Returns {@code true} if {@link #getBiasUncertaintyNanos}() is available, {@code false}
+</span> otherwise.
+*/
+hasBiasUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-getBiasUncertaintyNanos'>/**Gets the clock's Bias Uncertainty (1-Sigma) in nanoseconds.
+</span>
+ &lt;p&gt;See the description of how this field provides the error estimate in the conversion from
+ hardware clock time, to GPS time, in {@link #getFullBiasNanos}().
+
+ &lt;p&gt;The value is only available if {@link #hasBiasUncertaintyNanos}() is {@code true}.
+*/
+getBiasUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-setBiasUncertaintyNanos'>/**Sets the clock's Bias Uncertainty (1-Sigma) in nanoseconds.
+</span>@hide 
+*/
+setBiasUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetBiasUncertaintyNanos'>/**Resets the clock's Bias Uncertainty (1-Sigma) in nanoseconds.
+</span>@hide 
+*/
+resetBiasUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasDriftNanosPerSecond'>/**Returns {@code true} if {@link #getDriftNanosPerSecond}() is available, {@code false}
+</span> otherwise.
+*/
+hasDriftNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-getDriftNanosPerSecond'>/**Gets the clock's Drift in nanoseconds per second.
+</span>
+ &lt;p&gt;This value is the instantaneous time-derivative of the value provided by
+ {@link #getBiasNanos}().
+
+ &lt;p&gt;A positive value indicates that the frequency is higher than the nominal (e.g. GPS master
+ clock) frequency. The error estimate for this reported drift is
+ {@link #getDriftUncertaintyNanosPerSecond}().
+
+ &lt;p&gt;The value is only available if {@link #hasDriftNanosPerSecond}() is {@code true}.
+*/
+getDriftNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-setDriftNanosPerSecond'>/**Sets the clock's Drift in nanoseconds per second.
+</span>@hide 
+*/
+setDriftNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetDriftNanosPerSecond'>/**Resets the clock's Drift in nanoseconds per second.
+</span>@hide 
+*/
+resetDriftNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasDriftUncertaintyNanosPerSecond'>/**Returns {@code true} if {@link #getDriftUncertaintyNanosPerSecond}() is available,
+</span> {@code false} otherwise.
+*/
+hasDriftUncertaintyNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-getDriftUncertaintyNanosPerSecond'>/**Gets the clock's Drift Uncertainty (1-Sigma) in nanoseconds per second.
+</span>
+ &lt;p&gt;The value is only available if {@link #hasDriftUncertaintyNanosPerSecond}() is
+ {@code true}.
+*/
+getDriftUncertaintyNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-setDriftUncertaintyNanosPerSecond'>/**Sets the clock's Drift Uncertainty (1-Sigma) in nanoseconds per second.
+</span>@hide 
+*/
+setDriftUncertaintyNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetDriftUncertaintyNanosPerSecond'>/**Resets the clock's Drift Uncertainty (1-Sigma) in nanoseconds per second.
+</span>@hide 
+*/
+resetDriftUncertaintyNanosPerSecond : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasElapsedRealtimeNanos'>/**Returns {@code true} if {@link #getElapsedRealtimeNanos}() is available, {@code false}
+</span> otherwise.
+*/
+hasElapsedRealtimeNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-getElapsedRealtimeNanos'>/**Returns the elapsed real-time of this clock since system boot, in nanoseconds.
+</span>
+ &lt;p&gt;The value is only available if {@link #hasElapsedRealtimeNanos}() is
+ {@code true}.
+*/
+getElapsedRealtimeNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-setElapsedRealtimeNanos'>/**Sets the elapsed real-time of this clock since system boot, in nanoseconds.
+</span>@hide 
+*/
+setElapsedRealtimeNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetElapsedRealtimeNanos'>/**Resets the elapsed real-time of this clock since system boot, in nanoseconds.
+</span>@hide 
+*/
+resetElapsedRealtimeNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-hasElapsedRealtimeUncertaintyNanos'>/**Returns {@code true} if {@link #getElapsedRealtimeUncertaintyNanos}() is available, {@code
+</span> false} otherwise.
+*/
+hasElapsedRealtimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-getElapsedRealtimeUncertaintyNanos'>/**Gets the estimate of the relative precision of the alignment of the
+</span> {@link #getElapsedRealtimeNanos}() timestamp, with the reported measurements in
+ nanoseconds (68% confidence).
+
+ &lt;p&gt;The value is only available if {@link #hasElapsedRealtimeUncertaintyNanos}() is
+ {@code true}.
+*/
+getElapsedRealtimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-setElapsedRealtimeUncertaintyNanos'>/**Sets the estimate of the relative precision of the alignment of the
+</span> {@link #getElapsedRealtimeNanos}() timestamp, with the reported measurements in
+ nanoseconds (68% confidence).
+@hide 
+*/
+setElapsedRealtimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-resetElapsedRealtimeUncertaintyNanos'>/**Resets the estimate of the relative precision of the alignment of the
+</span> {@link #getElapsedRealtimeNanos}() timestamp, with the reported measurements in
+ nanoseconds (68% confidence).
+@hide 
+*/
+resetElapsedRealtimeUncertaintyNanos : function(  ) {},
+
+<span id='android-location-GnssClock-method-getHardwareClockDiscontinuityCount'>/**Gets count of hardware clock discontinuities.
+</span>
+ &lt;p&gt;When this value stays the same, vs. a value in a previously reported {@link android.location.GnssClock}, it
+ can be safely assumed that the {@code TimeNanos} value has been derived from a clock that has
+ been running continuously - e.g. a single continuously powered crystal oscillator, and thus
+ the {@code (FullBiasNanos + BiasNanos)} offset can be modelled with traditional clock bias
+ &amp;amp; drift models.
+
+ &lt;p&gt;Each time this value changes, vs. the value in a previously reported {@link android.location.GnssClock},
+ that suggests the hardware clock may have experienced a discontinuity (e.g. a power cycle or
+ other anomaly), so that any assumptions about modelling a smoothly changing
+ {@code (FullBiasNanos + BiasNanos)} offset, and a smoothly growing {@code (TimeNanos)}
+ between this and the previously reported {@code GnssClock}, should be reset.
+*/
+getHardwareClockDiscontinuityCount : function(  ) {},
+
+<span id='android-location-GnssClock-method-setHardwareClockDiscontinuityCount'>/**Sets count of last hardware clock discontinuity.
+</span>@hide 
+*/
+setHardwareClockDiscontinuityCount : function(  ) {},
+
+<span id='android-location-GnssClock-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-location-GnssClock-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-location-GnssClock-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-autofill-FillCallback'>/**@class android.service.autofill.FillCallback
+</span>@extends java.lang.Object
+
+ &lt;p&gt;&lt;code&gt;FillCallback&lt;/code&gt; handles autofill requests from the {@link android.service.autofill.AutofillService} into
+ the {@link Activity} being autofilled.
+
+ &lt;p&gt;To learn about using Autofill services in your app, read
+ &lt;a href=&quot;/guide/topics/text/autofill-services&quot;&gt;Build autofill services&lt;/a&gt;.
+*/
+var FillCallback = {
+
+<span id='android-service-autofill-FillCallback-method-onSuccess'>/**Notifies the Android System that a fill request
+</span> ({@link android.service.autofill.AutofillService#onFillRequest(FillRequest, android.os.CancellationSignal,
+ FillCallback)}) was successfully fulfilled by the service.
+
+ &lt;p&gt;This method should always be called, even if the service doesn't have the heuristics to
+ fulfill the request (in which case it should be called with {@code null}).
+
+ &lt;p&gt;See the main {@link android.service.autofill.AutofillService} documentation for more details and examples.
+@param {Object {FillResponse}} response autofill information for that activity, or {@code null} when the service
+ cannot autofill the activity.
+@throws IllegalStateException if this method or {@link #onFailure(CharSequence)} was already
+ called.
+*/
+onSuccess : function(  ) {},
+
+<span id='android-service-autofill-FillCallback-method-onFailure'>/**Notifies the Android System that a fill request (
+</span> {@link android.service.autofill.AutofillService#onFillRequest(FillRequest, android.os.CancellationSignal,
+ FillCallback)}) could not be fulfilled by the service (for example, because the user data was
+ not available yet), so the request could be retried later.
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;this method should not be used when the service didn't have the heursitics to
+ fulfill the request; in this case, the service should call {@link #onSuccess(FillResponse)
+ onSuccess(null)} instead.
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;prior to {@link android.os.Build.VERSION_CODES#Q}, this
+ method was not working as intended and the service should always call
+ {@link #onSuccess(FillResponse) onSuccess(null)} instead.
+
+ &lt;p&gt;&lt;b&gt;Note: &lt;/b&gt;for apps targeting {@link android.os.Build.VERSION_CODES#Q} or higher, this
+ method just logs the message on {@code logcat}; for apps targetting older SDKs, it also
+ displays the message to user using a {@link android.widget.Toast}. Generally speaking, you
+ should not display an error to the user if the request failed, unless the request had the
+ {@link android.service.autofill.FillRequest#FLAG_MANUAL_REQUEST} flag.
+@param {Object {CharSequence}} message error message. &lt;b&gt;Note: &lt;/b&gt; this message should &lt;b&gt;not&lt;/b&gt; contain PII
+ (Personally Identifiable Information, such as username or email address).
+@throws IllegalStateException if this method or {@link #onSuccess(FillResponse)} was already
+ called.
+*/
+onFailure : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

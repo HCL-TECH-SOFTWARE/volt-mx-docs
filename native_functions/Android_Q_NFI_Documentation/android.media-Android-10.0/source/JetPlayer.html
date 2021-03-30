@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-JetPlayer'>/**@class android.media.JetPlayer
+</span>@extends java.lang.Object
+
+ JetPlayer provides access to JET content playback and control.
+ 
+ &lt;p&gt;Please refer to the JET Creator User Manual for a presentation of the JET interactive
+ music concept and how to use the JetCreator tool to create content to be player by JetPlayer.
+ 
+ &lt;p&gt;Use of the JetPlayer class is based around the playback of a number of JET segments
+ sequentially added to a playback FIFO queue. The rendering of the MIDI content stored in each
+ segment can be dynamically affected by two mechanisms:
+ &lt;ul&gt;
+ &lt;li&gt;tracks in a segment can be muted or unmuted at any moment, individually or through
+    a mask (to change the mute state of multiple tracks at once)&lt;/li&gt;
+ &lt;li&gt;parts of tracks in a segment can be played at predefined points in the segment, in order
+    to maintain synchronization with the other tracks in the segment. This is achieved through
+    the notion of &quot;clips&quot;, which can be triggered at any time, but that will play only at the
+    right time, as authored in the corresponding JET file.&lt;/li&gt;
+ &lt;/ul&gt;
+ As a result of the rendering and playback of the JET segments, the user of the JetPlayer instance
+ can receive notifications from the JET engine relative to:
+ &lt;ul&gt;
+ &lt;li&gt;the playback state,&lt;/li&gt;
+ &lt;li&gt;the number of segments left to play in the queue,&lt;/li&gt;
+ &lt;li&gt;application controller events (CC80-83) to mark points in the MIDI segments.&lt;/li&gt;
+ &lt;/ul&gt;
+ Use {@link #getJetPlayer}() to construct a JetPlayer instance. JetPlayer is a singleton class.
+ &lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about how to use JetPlayer, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/media/jetplayer.html&quot;&gt;JetPlayer&lt;/a&gt; developer guide.&lt;/p&gt;&lt;/div&gt;
+*/
+var JetPlayer = {
+
+<span id='android-media-JetPlayer-method-getJetPlayer'>/**Factory method for the JetPlayer class.
+</span>@return {Object {android.media.JetPlayer}} the singleton JetPlayer instance
+*/
+getJetPlayer : function(  ) {},
+
+<span id='android-media-JetPlayer-method-clone'>/**Cloning a JetPlayer instance is not supported. Calling clone() will generate an exception.
+</span>*/
+clone : function(  ) {},
+
+<span id='android-media-JetPlayer-method-release'>/**Stops the current JET playback, and releases all associated native resources.
+</span> The object can no longer be used and the reference should be set to null
+ after a call to release().
+*/
+release : function(  ) {},
+
+<span id='android-media-JetPlayer-method-getMaxTracks'>/**Returns the maximum number of simultaneous MIDI tracks supported by JetPlayer
+</span>*/
+getMaxTracks : function(  ) {},
+
+<span id='android-media-JetPlayer-method-loadJetFile'>/**Loads a .jet file from a given path.
+</span>@param {String} path the path to the .jet file, for instance &quot;/sdcard/mygame/music.jet&quot;.
+@return {Boolean} true if loading the .jet file was successful, false if loading failed.
+*/
+loadJetFile : function(  ) {},
+
+<span id='android-media-JetPlayer-method-loadJetFile'>/**Loads a .jet file from an asset file descriptor.
+</span>@param {Object {AssetFileDescriptor}} afd the asset file descriptor.
+@return {Boolean} true if loading the .jet file was successful, false if loading failed.
+*/
+loadJetFile : function(  ) {},
+
+<span id='android-media-JetPlayer-method-closeJetFile'>/**Closes the resource containing the JET content.
+</span>@return {Boolean} true if successfully closed, false otherwise.
+*/
+closeJetFile : function(  ) {},
+
+<span id='android-media-JetPlayer-method-play'>/**Starts playing the JET segment queue.
+</span>@return {Boolean} true if rendering and playback is successfully started, false otherwise.
+*/
+play : function(  ) {},
+
+<span id='android-media-JetPlayer-method-pause'>/**Pauses the playback of the JET segment queue.
+</span>@return {Boolean} true if rendering and playback is successfully paused, false otherwise.
+*/
+pause : function(  ) {},
+
+<span id='android-media-JetPlayer-method-queueJetSegment'>/**Queues the specified segment in the JET queue.
+</span>@param {Number} segmentNum the identifier of the segment.
+@param {Number} libNum the index of the sound bank associated with the segment. Use -1 to indicate
+    that no sound bank (DLS file) is associated with this segment, in which case JET will use
+    the General MIDI library.
+@param {Number} repeatCount the number of times the segment will be repeated. 0 means the segment will
+    only play once. -1 means the segment will repeat indefinitely.
+@param {Number} transpose the amount of pitch transposition. Set to 0 for normal playback. 
+    Range is -12 to +12.
+@param {Number} muteFlags a bitmask to specify which MIDI tracks will be muted during playback. Bit 0
+    affects track 0, bit 1 affects track 1 etc.
+@param {Number} userID a value specified by the application that uniquely identifies the segment. 
+    this value is received in the
+    {@link OnJetEventListener#onJetUserIdUpdate(JetPlayer, int, int)} event listener method.
+    Normally, the application will keep a byte value that is incremented each time a new
+    segment is queued up. This can be used to look up any special characteristics of that
+    track including trigger clips and mute flags.
+@return {Boolean} true if the segment was successfully queued, false if the queue is full or if the
+    parameters are invalid.
+*/
+queueJetSegment : function(  ) {},
+
+<span id='android-media-JetPlayer-method-queueJetSegmentMuteArray'>/**Queues the specified segment in the JET queue.
+</span>@param {Number} segmentNum the identifier of the segment.
+@param {Number} libNum the index of the soundbank associated with the segment. Use -1 to indicate that
+    no sound bank (DLS file) is associated with this segment, in which case JET will use
+    the General MIDI library.
+@param {Number} repeatCount the number of times the segment will be repeated. 0 means the segment will
+    only play once. -1 means the segment will repeat indefinitely.
+@param {Number} transpose the amount of pitch transposition. Set to 0 for normal playback. 
+    Range is -12 to +12.
+@param {Object {boolean[]}} muteArray an array of booleans to specify which MIDI tracks will be muted during
+    playback. The value at index 0 affects track 0, value at index 1 affects track 1 etc. 
+    The length of the array must be {@link #getMaxTracks()} for the call to succeed.
+@param {Number} userID a value specified by the application that uniquely identifies the segment. 
+    this value is received in the
+    {@link OnJetEventListener#onJetUserIdUpdate(JetPlayer, int, int)} event listener method.
+    Normally, the application will keep a byte value that is incremented each time a new
+    segment is queued up. This can be used to look up any special characteristics of that
+    track including trigger clips and mute flags.
+@return {Boolean} true if the segment was successfully queued, false if the queue is full or if the
+    parameters are invalid.
+*/
+queueJetSegmentMuteArray : function(  ) {},
+
+<span id='android-media-JetPlayer-method-setMuteFlags'>/**Modifies the mute flags.
+</span>@param {Number} muteFlags a bitmask to specify which MIDI tracks are muted. Bit 0 affects track 0,
+    bit 1 affects track 1 etc.
+@param {Boolean} sync if false, the new mute flags will be applied as soon as possible by the JET
+    render and playback engine. If true, the mute flags will be updated at the start of the
+    next segment. If the segment is repeated, the flags will take effect the next time 
+    segment is repeated.
+@return {Boolean} true if the mute flags were successfully updated, false otherwise.
+*/
+setMuteFlags : function(  ) {},
+
+<span id='android-media-JetPlayer-method-setMuteArray'>/**Modifies the mute flags for the current active segment.
+</span>@param {Object {boolean[]}} muteArray an array of booleans to specify which MIDI tracks are muted. The value at
+    index 0 affects track 0, value at index 1 affects track 1 etc. 
+    The length of the array must be {@link #getMaxTracks()} for the call to succeed.
+@param {Boolean} sync if false, the new mute flags will be applied as soon as possible by the JET
+    render and playback engine. If true, the mute flags will be updated at the start of the
+    next segment. If the segment is repeated, the flags will take effect the next time 
+    segment is repeated.
+@return {Boolean} true if the mute flags were successfully updated, false otherwise.
+*/
+setMuteArray : function(  ) {},
+
+<span id='android-media-JetPlayer-method-setMuteFlag'>/**Mutes or unmutes a single track.
+</span>@param {Number} trackId the index of the track to mute.
+@param {Boolean} muteFlag set to true to mute, false to unmute.
+@param {Boolean} sync if false, the new mute flags will be applied as soon as possible by the JET
+    render and playback engine. If true, the mute flag will be updated at the start of the
+    next segment. If the segment is repeated, the flag will take effect the next time 
+    segment is repeated.
+@return {Boolean} true if the mute flag was successfully updated, false otherwise.
+*/
+setMuteFlag : function(  ) {},
+
+<span id='android-media-JetPlayer-method-triggerClip'>/**Schedules the playback of a clip.
+</span> This will automatically update the mute flags in sync with the JET Clip Marker (controller 
+ 103). The parameter clipID must be in the range of 0-63. After the call to triggerClip, when
+ JET next encounters a controller event 103 with bits 0-5 of the value equal to clipID and 
+ bit 6 set to 1, it will automatically unmute the track containing the controller event.
+ When JET encounters the complementary controller event 103 with bits 0-5 of the value equal
+ to clipID and bit 6 set to 0, it will mute the track again.
+@param {Number} clipId the identifier of the clip to trigger.
+@return {Boolean} true if the clip was successfully triggered, false otherwise.
+*/
+triggerClip : function(  ) {},
+
+<span id='android-media-JetPlayer-method-clearQueue'>/**Empties the segment queue, and clears all clips that are scheduled for playback.
+</span>@return {Boolean} true if the queue was successfully cleared, false otherwise.
+*/
+clearQueue : function(  ) {},
+
+<span id='android-media-JetPlayer-method-setEventListener'>/**Sets the listener JetPlayer notifies when a JET event is generated by the rendering and
+</span> playback engine.
+ Notifications will be received in the same thread as the one in which the JetPlayer
+ instance was created.
+@param {Object {JetPlayer.OnJetEventListener}} listener
+*/
+setEventListener : function(  ) {},
+
+<span id='android-media-JetPlayer-method-setEventListener'>/**Sets the listener JetPlayer notifies when a JET event is generated by the rendering and
+</span> playback engine.
+ Use this method to receive JET events in the Handler associated with another
+ thread than the one in which you created the JetPlayer instance.
+@param {Object {JetPlayer.OnJetEventListener}} listener
+@param {Object {Handler}} handler the Handler that will receive the event notification messages.
+*/
+setEventListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

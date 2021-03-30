@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-AnimatedVectorDrawable'>/**@class android.graphics.drawable.AnimatedVectorDrawable
+</span> implements android.graphics.drawable.Animatable2
+
+@extends android.graphics.drawable.Drawable
+
+ This class animates properties of a {@link android.graphics.drawable.VectorDrawable} with
+ animations defined using {@link android.animation.ObjectAnimator} or
+ {@link android.animation.AnimatorSet}.
+ &lt;p&gt;
+ Starting from API 25, AnimatedVectorDrawable runs on RenderThread (as opposed to on UI thread for
+ earlier APIs). This means animations in AnimatedVectorDrawable can remain smooth even when there
+ is heavy workload on the UI thread. Note: If the UI thread is unresponsive, RenderThread may
+ continue animating until the UI thread is capable of pushing another frame. Therefore, it is not
+ possible to precisely coordinate a RenderThread-enabled AnimatedVectorDrawable with UI thread
+ animations. Additionally,
+ {@link android.graphics.drawable.Animatable2.AnimationCallback#onAnimationEnd(Drawable)} will be
+ called the frame after the AnimatedVectorDrawable finishes on the RenderThread.
+ &lt;/p&gt;
+ &lt;p&gt;
+ AnimatedVectorDrawable can be defined in either &lt;a href=&quot;#ThreeXML&quot;&gt;three separate XML files&lt;/a&gt;,
+ or &lt;a href=&quot;#OneXML&quot;&gt;one XML&lt;/a&gt;.
+ &lt;/p&gt;
+ &lt;a name=&quot;ThreeXML&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Define an AnimatedVectorDrawable in three separate XML files&lt;/h3&gt;
+ &lt;ul&gt;
+ &lt;a name=&quot;VDExample&quot;&gt;&lt;/a&gt;
+ &lt;li&gt;&lt;h4&gt;XML for the VectorDrawable containing properties to be animated&lt;/h4&gt;
+ &lt;p&gt;
+ Animations can be performed on the animatable attributes in
+ {@link android.graphics.drawable.VectorDrawable}. These attributes will be animated by
+ {@link android.animation.ObjectAnimator}. The ObjectAnimator's target can be the root element,
+ a group element or a path element. The targeted elements need to be named uniquely within
+ the same VectorDrawable. Elements without animation do not need to be named.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Here are all the animatable attributes in {@link android.graphics.drawable.VectorDrawable}:
+ &lt;table border=&quot;2&quot; align=&quot;center&quot; cellpadding=&quot;5&quot;&gt;
+     &lt;thead&gt;
+         &lt;tr&gt;
+             &lt;th&gt;Element Name&lt;/th&gt;
+             &lt;th&gt;Animatable attribute name&lt;/th&gt;
+         &lt;/tr&gt;
+     &lt;/thead&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&amp;lt;vector&amp;gt;&lt;/td&gt;
+         &lt;td&gt;alpha&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td rowspan=&quot;7&quot;&gt;&amp;lt;group&amp;gt;&lt;/td&gt;
+         &lt;td&gt;rotation&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;pivotX&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;pivotY&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;scaleX&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;scaleY&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;translateX&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;translateY&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td rowspan=&quot;9&quot;&gt;&amp;lt;path&amp;gt;&lt;/td&gt;
+         &lt;td&gt;pathData&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;fillColor&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;strokeColor&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;strokeWidth&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;strokeAlpha&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;fillAlpha&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;trimPathStart&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;trimPathEnd&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;trimPathOffset&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td&gt;&amp;lt;clip-path&amp;gt;&lt;/td&gt;
+         &lt;td&gt;pathData&lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;/p&gt;
+ Below is an example of a VectorDrawable defined in vectordrawable.xml. This VectorDrawable is
+ referred to by its file name (not including file suffix) in the
+ &lt;a href=&quot;#AVDExample&quot;&gt;AnimatedVectorDrawable XML example&lt;/a&gt;.
+ &lt;pre&gt;
+ &amp;lt;vector xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;
+     android:height=&amp;quot;64dp&amp;quot;
+     android:width=&amp;quot;64dp&amp;quot;
+     android:viewportHeight=&amp;quot;600&amp;quot;
+     android:viewportWidth=&amp;quot;600&amp;quot; &amp;gt;
+     &amp;lt;group
+         android:name=&amp;quot;rotationGroup&amp;quot;
+         android:pivotX=&amp;quot;300.0&amp;quot;
+         android:pivotY=&amp;quot;300.0&amp;quot;
+         android:rotation=&amp;quot;45.0&amp;quot; &amp;gt;
+         &amp;lt;path
+             android:name=&amp;quot;v&amp;quot;
+             android:fillColor=&amp;quot;#000000&amp;quot;
+             android:pathData=&amp;quot;M300,70 l 0,-70 70,70 0,0 -70,70z&amp;quot; /&amp;gt;
+     &amp;lt;/group&amp;gt;
+ &amp;lt;/vector&amp;gt;
+ &lt;/pre&gt;&lt;/li&gt;
+
+ &lt;a name=&quot;AVDExample&quot;&gt;&lt;/a&gt;
+ &lt;li&gt;&lt;h4&gt;XML for AnimatedVectorDrawable&lt;/h4&gt;
+ &lt;p&gt;
+ An AnimatedVectorDrawable element has a VectorDrawable attribute, and one or more target
+ element(s). The target element can specify its target by android:name attribute, and link the
+ target with the proper ObjectAnimator or AnimatorSet by android:animation attribute.
+ &lt;/p&gt;
+ The following code sample defines an AnimatedVectorDrawable. Note that the names refer to the
+ groups and paths in the &lt;a href=&quot;#VDExample&quot;&gt;VectorDrawable XML above&lt;/a&gt;.
+ &lt;pre&gt;
+ &amp;lt;animated-vector xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;
+     android:drawable=&amp;quot;@drawable/vectordrawable&amp;quot; &amp;gt;
+     &amp;lt;target
+         android:name=&amp;quot;rotationGroup&amp;quot;
+         android:animation=&amp;quot;@animator/rotation&amp;quot; /&amp;gt;
+     &amp;lt;target
+         android:name=&amp;quot;v&amp;quot;
+         android:animation=&amp;quot;@animator/path_morph&amp;quot; /&amp;gt;
+ &amp;lt;/animated-vector&amp;gt;
+ &lt;/pre&gt;
+ &lt;/li&gt;
+
+ &lt;li&gt;&lt;h4&gt;XML for Animations defined using ObjectAnimator or AnimatorSet&lt;/h4&gt;
+ &lt;p&gt;
+ From the previous &lt;a href=&quot;#AVDExample&quot;&gt;example of AnimatedVectorDrawable&lt;/a&gt;, two animations
+ were used: rotation.xml and path_morph.xml.
+ &lt;/p&gt;
+ rotation.xml rotates the target group from 0 degree to 360 degrees over 6000ms:
+ &lt;pre&gt;
+ &amp;lt;objectAnimator
+     android:duration=&amp;quot;6000&amp;quot;
+     android:propertyName=&amp;quot;rotation&amp;quot;
+     android:valueFrom=&amp;quot;0&amp;quot;
+     android:valueTo=&amp;quot;360&amp;quot; /&amp;gt;
+ &lt;/pre&gt;
+
+ path_morph.xml morphs the path from one shape into the other. Note that the paths must be
+ compatible for morphing. Specifically, the paths must have the same commands, in the same order,
+ and must have the same number of parameters for each command. It is recommended to store path
+ strings as string resources for reuse.
+ &lt;pre&gt;
+ &amp;lt;set xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;&amp;gt;
+     &amp;lt;objectAnimator
+         android:duration=&amp;quot;3000&amp;quot;
+         android:propertyName=&amp;quot;pathData&amp;quot;
+         android:valueFrom=&amp;quot;M300,70 l 0,-70 70,70 0,0 -70,70z&amp;quot;
+         android:valueTo=&amp;quot;M300,70 l 0,-70 70,0  0,140 -70,0 z&amp;quot;
+         android:valueType=&amp;quot;pathType&amp;quot;/&amp;gt;
+ &amp;lt;/set&amp;gt;
+ &lt;/pre&gt;
+ &lt;/ul&gt;
+ &lt;a name=&quot;OneXML&quot;&gt;&lt;/a&gt;
+ &lt;h3&gt;Define an AnimatedVectorDrawable all in one XML file&lt;/h3&gt;
+ &lt;p&gt;
+ Since the AAPT tool supports a new format that bundles several related XML files together, we can
+ merge the XML files from the previous examples into one XML file:
+ &lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;animated-vector xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;
+                  xmlns:aapt=&amp;quothttp://schemas.android.com/aapt&amp;quot; &amp;gt;
+     &amp;lt;aapt:attr name=&quot;android:drawable&quot;&amp;gt;
+         &amp;lt;vector
+             android:height=&amp;quot;64dp&amp;quot;
+             android:width=&amp;quot;64dp&amp;quot;
+             android:viewportHeight=&amp;quot;600&amp;quot;
+             android:viewportWidth=&amp;quot;600&amp;quot; &amp;gt;
+             &amp;lt;group
+                 android:name=&amp;quot;rotationGroup&amp;quot;
+                 android:pivotX=&amp;quot;300.0&amp;quot;
+                 android:pivotY=&amp;quot;300.0&amp;quot;
+                 android:rotation=&amp;quot;45.0&amp;quot; &amp;gt;
+                 &amp;lt;path
+                     android:name=&amp;quot;v&amp;quot;
+                     android:fillColor=&amp;quot;#000000&amp;quot;
+                     android:pathData=&amp;quot;M300,70 l 0,-70 70,70 0,0 -70,70z&amp;quot; /&amp;gt;
+             &amp;lt;/group&amp;gt;
+         &amp;lt;/vector&amp;gt;
+     &amp;lt;/aapt:attr&amp;gt;
+
+     &amp;lt;target android:name=&amp;quot;rotationGroup&amp;quot;&amp;gt; *
+         &amp;lt;aapt:attr name=&quot;android:animation&quot;&amp;gt;
+             &amp;lt;objectAnimator
+             android:duration=&amp;quot;6000&amp;quot;
+             android:propertyName=&amp;quot;rotation&amp;quot;
+             android:valueFrom=&amp;quot;0&amp;quot;
+             android:valueTo=&amp;quot;360&amp;quot; /&amp;gt;
+         &amp;lt;/aapt:attr&amp;gt;
+     &amp;lt;/target&amp;gt;
+
+     &amp;lt;target android:name=&amp;quot;v&amp;quot; &amp;gt;
+         &amp;lt;aapt:attr name=&quot;android:animation&quot;&amp;gt;
+             &amp;lt;set&amp;gt;
+                 &amp;lt;objectAnimator
+                     android:duration=&amp;quot;3000&amp;quot;
+                     android:propertyName=&amp;quot;pathData&amp;quot;
+                     android:valueFrom=&amp;quot;M300,70 l 0,-70 70,70 0,0 -70,70z&amp;quot;
+                     android:valueTo=&amp;quot;M300,70 l 0,-70 70,0  0,140 -70,0 z&amp;quot;
+                     android:valueType=&amp;quot;pathType&amp;quot;/&amp;gt;
+             &amp;lt;/set&amp;gt;
+         &amp;lt;/aapt:attr&amp;gt;
+      &amp;lt;/target&amp;gt;
+ &amp;lt;/animated-vector&amp;gt;
+ &lt;/pre&gt;
+
+ @attr ref android.R.styleable#AnimatedVectorDrawable_drawable
+ @attr ref android.R.styleable#AnimatedVectorDrawableTarget_name
+ @attr ref android.R.styleable#AnimatedVectorDrawableTarget_animation
+*/
+var AnimatedVectorDrawable = {
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-mutate'>/**
+</span>*/
+mutate : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-clearMutated'>/**
+</span>@hide 
+*/
+clearMutated : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getConstantState'>/**
+</span>*/
+getConstantState : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getChangingConfigurations'>/**
+</span>*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-draw'>/**Draws the AnimatedVectorDrawable into the given canvas.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Calling this method with a software canvas when the
+ AnimatedVectorDrawable is being animated on RenderThread (for API 25 and later) may yield
+ outdated result, as the UI thread is not guaranteed to be in sync with RenderThread on
+ VectorDrawable's property changes during RenderThread animations.
+ &lt;/p&gt;
+@param {Object {Canvas}} canvas The canvas to draw into
+*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-onLayoutDirectionChanged'>/**
+</span>*/
+onLayoutDirectionChanged : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getAlpha'>/**For API 25 and later, AnimatedVectorDrawable runs on RenderThread. Therefore, when the
+</span> root alpha is being animated, this getter does not guarantee to return an up-to-date alpha
+ value.
+@return {Number} the containing vector drawable's root alpha value.
+*/
+getAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-setAlpha'>/**
+</span>*/
+setAlpha : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-setColorFilter'>/**
+</span>*/
+setColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getColorFilter'>/**
+</span>*/
+getColorFilter : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-setTintList'>/**
+</span>*/
+setTintList : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-setHotspot'>/**
+</span>*/
+setHotspot : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-setHotspotBounds'>/**
+</span>*/
+setHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-setTintBlendMode'>/**
+</span>*/
+setTintBlendMode : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-setVisible'>/**
+</span>*/
+setVisible : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-isStateful'>/**
+</span>*/
+isStateful : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getOpacity'>/**
+</span>*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getIntrinsicWidth'>/**
+</span>*/
+getIntrinsicWidth : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getIntrinsicHeight'>/**
+</span>*/
+getIntrinsicHeight : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getOutline'>/**
+</span>*/
+getOutline : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-getOpticalInsets'>/**
+</span>*/
+getOpticalInsets : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-forceAnimationOnUI'>/**Force to animate on UI thread.
+</span>@hide 
+*/
+forceAnimationOnUI : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-canApplyTheme'>/**
+</span>*/
+canApplyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-applyTheme'>/**
+</span>*/
+applyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-isRunning'>/**
+</span>*/
+isRunning : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-reset'>/**Resets the AnimatedVectorDrawable to the start state as specified in the animators.
+</span>*/
+reset : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-start'>/**
+</span>*/
+start : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-stop'>/**
+</span>*/
+stop : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-reverse'>/**Reverses ongoing animations or starts pending animations in reverse.
+</span> &lt;p&gt;
+ NOTE: Only works if all animations support reverse. Otherwise, this will
+ do nothing.
+@hide 
+*/
+reverse : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-canReverse'>/**
+</span>@hide 
+*/
+canReverse : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-registerAnimationCallback'>/**
+</span>*/
+registerAnimationCallback : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-unregisterAnimationCallback'>/**
+</span>*/
+unregisterAnimationCallback : function(  ) {},
+
+<span id='android-graphics-drawable-AnimatedVectorDrawable-method-clearAnimationCallbacks'>/**
+</span>*/
+clearAnimationCallbacks : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

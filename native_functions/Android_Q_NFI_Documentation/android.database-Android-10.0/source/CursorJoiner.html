@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-CursorJoiner'>/**@class android.database.CursorJoiner
+</span> implements java.util.Iterator
+
+ implements java.lang.Iterable
+
+@extends java.lang.Object
+
+ Does a join on two cursors using the specified columns. The cursors must already
+ be sorted on each of the specified columns in ascending order. This joiner only
+ supports the case where the tuple of key column values is unique.
+ &lt;p&gt;
+ Typical usage:
+
+ &lt;pre&gt;
+ CursorJoiner joiner = new CursorJoiner(cursorA, keyColumnsofA, cursorB, keyColumnsofB);
+ for (CursorJoiner.Result joinerResult : joiner) {
+     switch (joinerResult) {
+         case LEFT:
+             // handle case where a row in cursorA is unique
+             break;
+         case RIGHT:
+             // handle case where a row in cursorB is unique
+             break;
+         case BOTH:
+             // handle case where a row with the same key is in both cursors
+             break;
+     }
+ }
+ &lt;/pre&gt;
+*/
+var CursorJoiner = {
+
+<span id='android-database-CursorJoiner-method-iterator'>/**
+</span>*/
+iterator : function(  ) {},
+
+<span id='android-database-CursorJoiner-method-hasNext'>/**Returns whether or not there are more rows to compare using next().
+</span>@return {Boolean} true if there are more rows to compare
+*/
+hasNext : function(  ) {},
+
+<span id='android-database-CursorJoiner-method-next'>/**Returns the comparison result of the next row from each cursor. If one cursor
+</span> has no more rows but the other does then subsequent calls to this will indicate that
+ the remaining rows are unique.
+ &lt;p&gt;
+ The caller must check that hasNext() returns true before calling this.
+ &lt;p&gt;
+ Once next() has been called the cursors specified in the result of the call to
+ next() are guaranteed to point to the row that was indicated. Reading values
+ from the cursor that was not indicated in the call to next() will result in
+ undefined behavior.
+@return {Object {android.database.CursorJoiner.Result}} LEFT, if the row pointed to by the left cursor is unique, RIGHT
+   if the row pointed to by the right cursor is unique, BOTH if the rows in both
+   cursors are the same.
+*/
+next : function(  ) {},
+
+<span id='android-database-CursorJoiner-method-remove'>/**
+</span>*/
+remove : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

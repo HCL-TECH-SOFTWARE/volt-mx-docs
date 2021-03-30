@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-drawable-RippleDrawable'>/**@class android.graphics.drawable.RippleDrawable
+</span>@extends android.graphics.drawable.LayerDrawable
+
+ Drawable that shows a ripple effect in response to state changes. The
+ anchoring position of the ripple for a given state may be specified by
+ calling {@link #setHotspot(float, float)} with the corresponding state
+ attribute identifier.
+ &lt;p&gt;
+ A touch feedback drawable may contain multiple child layers, including a
+ special mask layer that is not drawn to the screen. A single layer may be
+ set as the mask from XML by specifying its {@code android:id} value as
+ {@link android.R.id#mask}. At run time, a single layer may be set as the
+ mask using {@code setId(..., android.R.id.mask)} or an existing mask layer
+ may be replaced using {@code setDrawableByLayerId(android.R.id.mask, ...)}.
+ &lt;pre&gt;
+ &lt;code&gt;&amp;lt;!-- A red ripple masked against an opaque rectangle. --/&gt;
+ &amp;lt;ripple android:color=&quot;#ffff0000&quot;&gt;
+   &amp;lt;item android:id=&quot;@android:id/mask&quot;
+         android:drawable=&quot;@android:color/white&quot; /&gt;
+ &amp;lt;/ripple&gt;&lt;/code&gt;
+ &lt;/pre&gt;
+ &lt;p&gt;
+ If a mask layer is set, the ripple effect will be masked against that layer
+ before it is drawn over the composite of the remaining child layers.
+ &lt;p&gt;
+ If no mask layer is set, the ripple effect is masked against the composite
+ of the child layers.
+ &lt;pre&gt;
+ &lt;code&gt;&amp;lt;!-- A green ripple drawn atop a black rectangle. --/&gt;
+ &amp;lt;ripple android:color=&quot;#ff00ff00&quot;&gt;
+   &amp;lt;item android:drawable=&quot;@android:color/black&quot; /&gt;
+ &amp;lt;/ripple&gt;
+
+ &amp;lt;!-- A blue ripple drawn atop a drawable resource. --/&gt;
+ &amp;lt;ripple android:color=&quot;#ff0000ff&quot;&gt;
+   &amp;lt;item android:drawable=&quot;@drawable/my_drawable&quot; /&gt;
+ &amp;lt;/ripple&gt;&lt;/code&gt;
+ &lt;/pre&gt;
+ &lt;p&gt;
+ If no child layers or mask is specified and the ripple is set as a View
+ background, the ripple will be drawn atop the first available parent
+ background within the View's hierarchy. In this case, the drawing region
+ may extend outside of the Drawable bounds.
+ &lt;pre&gt;
+ &lt;code&gt;&amp;lt;!-- An unbounded red ripple. --/&gt;
+ &amp;lt;ripple android:color=&quot;#ffff0000&quot; /&gt;&lt;/code&gt;
+ &lt;/pre&gt;
+
+ @attr ref android.R.styleable#RippleDrawable_color
+*/
+var RippleDrawable = {
+
+<span id='android-graphics-drawable-RippleDrawable-property-RADIUS_AUTO'>/** Radius value that specifies the ripple radius should be computed based
+</span> on the size of the ripple's container.
+*/
+RADIUS_AUTO : &quot;-1&quot;,
+<span id='android-graphics-drawable-RippleDrawable-method-jumpToCurrentState'>/**
+</span>*/
+jumpToCurrentState : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-getOpacity'>/**
+</span>*/
+getOpacity : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setVisible'>/**
+</span>*/
+setVisible : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-isProjected'>/**
+</span>@hide 
+*/
+isProjected : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-isStateful'>/**
+</span>*/
+isStateful : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-hasFocusStateSpecified'>/**
+</span>@hide 
+*/
+hasFocusStateSpecified : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setColor'>/**Sets the ripple color.
+</span>@param {Object {ColorStateList}} color Ripple color as a color state list.
+@attr ref android.R.styleable#RippleDrawable_color
+*/
+setColor : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setRadius'>/**Sets the radius in pixels of the fully expanded ripple.
+</span>@param {Number} radius ripple radius in pixels, or {@link #RADIUS_AUTO} to
+               compute the radius based on the container size
+@attr ref android.R.styleable#RippleDrawable_radius
+*/
+setRadius : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-getRadius'>/**
+</span>@return {Number} the radius in pixels of the fully expanded ripple if an explicit
+         radius has been set, or {@link #RADIUS_AUTO} if the radius is
+         computed based on the container size
+@attr ref android.R.styleable#RippleDrawable_radius
+*/
+getRadius : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-inflate'>/**
+</span>*/
+inflate : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setDrawableByLayerId'>/**
+</span>*/
+setDrawableByLayerId : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setPaddingMode'>/**Specifies how layer padding should affect the bounds of subsequent
+</span> layers. The default and recommended value for RippleDrawable is
+ {@link #PADDING_MODE_STACK}.
+@param {Number} mode padding mode, one of:
+            &lt;ul&gt;
+            &lt;li&gt;{@link #PADDING_MODE_NEST} to nest each layer inside the
+            padding of the previous layer
+            &lt;li&gt;{@link #PADDING_MODE_STACK} to stack each layer directly
+            atop the previous layer
+            &lt;/ul&gt;
+@see #getPaddingMode()
+*/
+setPaddingMode : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-applyTheme'>/**
+</span>*/
+applyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-canApplyTheme'>/**
+</span>*/
+canApplyTheme : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setHotspot'>/**
+</span>*/
+setHotspot : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setHotspotBounds'>/**
+</span>*/
+setHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-getHotspotBounds'>/**
+</span>*/
+getHotspotBounds : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-getOutline'>/**Populates &lt;code&gt;outline&lt;/code&gt; with the first available layer outline,
+</span> excluding the mask layer.
+@param {Object {Outline}} outline Outline in which to place the first available layer outline
+*/
+getOutline : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-draw'>/**Optimized for drawing ripples with a mask layer and optional content.
+</span>*/
+draw : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-invalidateSelf'>/**
+</span>*/
+invalidateSelf : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-getDirtyBounds'>/**
+</span>*/
+getDirtyBounds : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-setForceSoftware'>/**Sets whether to disable RenderThread animations for this ripple.
+</span>@param {Boolean} forceSoftware true if RenderThread animations should be disabled, false otherwise
+@hide 
+*/
+setForceSoftware : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-getConstantState'>/**
+</span>*/
+getConstantState : function(  ) {},
+
+<span id='android-graphics-drawable-RippleDrawable-method-mutate'>/**
+</span>*/
+mutate : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

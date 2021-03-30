@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-gallery3d-exif-ExifTag'>/**@class com.android.gallery3d.exif.ExifTag
+</span>@extends java.lang.Object
+
+ This class stores information of an EXIF tag. For more information about
+ defined EXIF tags, please read the Jeita EXIF 2.2 standard. Tags should be
+ instantiated using {@link com.android.gallery3d.exif.ExifInterface#buildTag}.
+
+ @see ExifInterface
+*/
+var ExifTag = {
+
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_UNSIGNED_BYTE'>/** The BYTE type in the EXIF standard. An 8-bit unsigned integer.
+</span>*/
+TYPE_UNSIGNED_BYTE : &quot;1&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_ASCII'>/** The ASCII type in the EXIF standard. An 8-bit byte containing one 7-bit
+</span> ASCII code. The final byte is terminated with NULL.
+*/
+TYPE_ASCII : &quot;2&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_UNSIGNED_SHORT'>/** The SHORT type in the EXIF standard. A 16-bit (2-byte) unsigned integer
+</span>*/
+TYPE_UNSIGNED_SHORT : &quot;3&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_UNSIGNED_LONG'>/** The LONG type in the EXIF standard. A 32-bit (4-byte) unsigned integer
+</span>*/
+TYPE_UNSIGNED_LONG : &quot;4&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_UNSIGNED_RATIONAL'>/** The RATIONAL type of EXIF standard. It consists of two LONGs. The first
+</span> one is the numerator and the second one expresses the denominator.
+*/
+TYPE_UNSIGNED_RATIONAL : &quot;5&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_UNDEFINED'>/** The UNDEFINED type in the EXIF standard. An 8-bit byte that can take any
+</span> value depending on the field definition.
+*/
+TYPE_UNDEFINED : &quot;7&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_LONG'>/** The SLONG type in the EXIF standard. A 32-bit (4-byte) signed integer
+</span> (2's complement notation).
+*/
+TYPE_LONG : &quot;9&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-property-TYPE_RATIONAL'>/** The SRATIONAL type of EXIF standard. It consists of two SLONGs. The first
+</span> one is the numerator and the second one is the denominator.
+*/
+TYPE_RATIONAL : &quot;10&quot;,
+<span id='com-android-gallery3d-exif-ExifTag-method-isValidIfd'>/**Returns true if the given IFD is a valid IFD.
+</span>*/
+isValidIfd : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-isValidType'>/**Returns true if a given type is a valid tag type.
+</span>*/
+isValidType : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getElementSize'>/**Gets the element size of the given data type in bytes.
+</span>@see #TYPE_ASCII
+@see #TYPE_LONG
+@see #TYPE_RATIONAL
+@see #TYPE_UNDEFINED
+@see #TYPE_UNSIGNED_BYTE
+@see #TYPE_UNSIGNED_LONG
+@see #TYPE_UNSIGNED_RATIONAL
+@see #TYPE_UNSIGNED_SHORT
+*/
+getElementSize : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getIfd'>/**Returns the ID of the IFD this tag belongs to.
+</span>@see IfdId#TYPE_IFD_0
+@see IfdId#TYPE_IFD_1
+@see IfdId#TYPE_IFD_EXIF
+@see IfdId#TYPE_IFD_GPS
+@see IfdId#TYPE_IFD_INTEROPERABILITY
+*/
+getIfd : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getTagId'>/**Gets the TID of this tag.
+</span>*/
+getTagId : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getDataType'>/**Gets the data type of this tag
+</span>@see #TYPE_ASCII
+@see #TYPE_LONG
+@see #TYPE_RATIONAL
+@see #TYPE_UNDEFINED
+@see #TYPE_UNSIGNED_BYTE
+@see #TYPE_UNSIGNED_LONG
+@see #TYPE_UNSIGNED_RATIONAL
+@see #TYPE_UNSIGNED_SHORT
+*/
+getDataType : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getDataSize'>/**Gets the total data size in bytes of the value of this tag.
+</span>*/
+getDataSize : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getComponentCount'>/**Gets the component count of this tag.
+</span>*/
+getComponentCount : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-hasValue'>/**Returns true if this ExifTag contains value; otherwise, this tag will
+</span> contain an offset value that is determined when the tag is written.
+*/
+hasValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets integer values into this tag. This method should be used for tags of
+</span> type {@link #TYPE_UNSIGNED_SHORT}. This method will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_SHORT},
+ {@link #TYPE_UNSIGNED_LONG}, or {@link #TYPE_LONG}.&lt;/li&gt;
+ &lt;li&gt;The value overflows.&lt;/li&gt;
+ &lt;li&gt;The value.length does NOT match the component count in the definition
+ for this tag.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets integer value into this tag. This method should be used for tags of
+</span> type {@link #TYPE_UNSIGNED_SHORT}, or {@link #TYPE_LONG}. This method
+ will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_SHORT},
+ {@link #TYPE_UNSIGNED_LONG}, or {@link #TYPE_LONG}.&lt;/li&gt;
+ &lt;li&gt;The value overflows.&lt;/li&gt;
+ &lt;li&gt;The component count in the definition of this tag is not 1.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets long values into this tag. This method should be used for tags of
+</span> type {@link #TYPE_UNSIGNED_LONG}. This method will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_LONG}.&lt;/li&gt;
+ &lt;li&gt;The value overflows.&lt;/li&gt;
+ &lt;li&gt;The value.length does NOT match the component count in the definition
+ for this tag.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets long values into this tag. This method should be used for tags of
+</span> type {@link #TYPE_UNSIGNED_LONG}. This method will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_LONG}.&lt;/li&gt;
+ &lt;li&gt;The value overflows.&lt;/li&gt;
+ &lt;li&gt;The component count in the definition for this tag is not 1.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets a string value into this tag. This method should be used for tags of
+</span> type {@link #TYPE_ASCII}. The string is converted to an ASCII string.
+ Characters that cannot be converted are replaced with '?'. The length of
+ the string must be equal to either (component count -1) or (component
+ count). The final byte will be set to the string null terminator '\0',
+ overwriting the last character in the string if the value.length is equal
+ to the component count. This method will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The data type is not {@link #TYPE_ASCII} or {@link #TYPE_UNDEFINED}.&lt;/li&gt;
+ &lt;li&gt;The length of the string is not equal to (component count -1) or
+ (component count) in the definition for this tag.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets Rational values into this tag. This method should be used for tags
+</span> of type {@link #TYPE_UNSIGNED_RATIONAL}, or {@link #TYPE_RATIONAL}. This
+ method will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_RATIONAL}
+ or {@link #TYPE_RATIONAL}.&lt;/li&gt;
+ &lt;li&gt;The value overflows.&lt;/li&gt;
+ &lt;li&gt;The value.length does NOT match the component count in the definition
+ for this tag.&lt;/li&gt;
+ &lt;/ul&gt;
+@see Rational
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets a Rational value into this tag. This method should be used for tags
+</span> of type {@link #TYPE_UNSIGNED_RATIONAL}, or {@link #TYPE_RATIONAL}. This
+ method will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_RATIONAL}
+ or {@link #TYPE_RATIONAL}.&lt;/li&gt;
+ &lt;li&gt;The value overflows.&lt;/li&gt;
+ &lt;li&gt;The component count in the definition for this tag is not 1.&lt;/li&gt;
+ &lt;/ul&gt;
+@see Rational
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets byte values into this tag. This method should be used for tags of
+</span> type {@link #TYPE_UNSIGNED_BYTE} or {@link #TYPE_UNDEFINED}. This method
+ will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_BYTE} or
+ {@link #TYPE_UNDEFINED} .&lt;/li&gt;
+ &lt;li&gt;The length does NOT match the component count in the definition for
+ this tag.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Equivalent to setValue(value, 0, value.length).
+</span>*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets byte value into this tag. This method should be used for tags of
+</span> type {@link #TYPE_UNSIGNED_BYTE} or {@link #TYPE_UNDEFINED}. This method
+ will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The component type of this tag is not {@link #TYPE_UNSIGNED_BYTE} or
+ {@link #TYPE_UNDEFINED} .&lt;/li&gt;
+ &lt;li&gt;The component count in the definition for this tag is not 1.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setValue'>/**Sets the value for this tag using an appropriate setValue method for the
+</span> given object. This method will fail if:
+ &lt;ul&gt;
+ &lt;li&gt;The corresponding setValue method for the class of the object passed
+ in would fail.&lt;/li&gt;
+ &lt;li&gt;There is no obvious way to cast the object passed in into an EXIF tag
+ type.&lt;/li&gt;
+ &lt;/ul&gt;
+*/
+setValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-setTimeValue'>/**Sets a timestamp to this tag. The method converts the timestamp with the
+</span> format of &quot;yyyy:MM:dd kk:mm:ss&quot; and calls {@link #setValue}(String). This
+ method will fail if the data type is not {@link #TYPE_ASCII} or the
+ component count of this tag is not 20 or undefined.
+@param {Number} time the number of milliseconds since Jan. 1, 1970 GMT
+@return {Boolean} true on success
+*/
+setTimeValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsString'>/**Gets the value as a String. This method should be used for tags of type
+</span> {@link #TYPE_ASCII}.
+@return {String} the value as a String, or null if the tag's value does not exist
+         or cannot be converted to a String.
+*/
+getValueAsString : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsString'>/**Gets the value as a String. This method should be used for tags of type
+</span> {@link #TYPE_ASCII}.
+@param {String} defaultValue the String to return if the tag's value does not
+            exist or cannot be converted to a String.
+@return {String} the tag's value as a String, or the defaultValue.
+*/
+getValueAsString : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsBytes'>/**Gets the value as a byte array. This method should be used for tags of
+</span> type {@link #TYPE_UNDEFINED} or {@link #TYPE_UNSIGNED_BYTE}.
+@return {Number} the value as a byte array, or null if the tag's value does not
+         exist or cannot be converted to a byte array.
+*/
+getValueAsBytes : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsByte'>/**Gets the value as a byte. If there are more than 1 bytes in this value,
+</span> gets the first byte. This method should be used for tags of type
+ {@link #TYPE_UNDEFINED} or {@link #TYPE_UNSIGNED_BYTE}.
+@param {Number} defaultValue the byte to return if tag's value does not exist or
+            cannot be converted to a byte.
+@return {Number} the tag's value as a byte, or the defaultValue.
+*/
+getValueAsByte : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsRationals'>/**Gets the value as an array of Rationals. This method should be used for
+</span> tags of type {@link #TYPE_RATIONAL} or {@link #TYPE_UNSIGNED_RATIONAL}.
+@return {Object {com.android.gallery3d.exif.Rational}} the value as as an array of Rationals, or null if the tag's value
+         does not exist or cannot be converted to an array of Rationals.
+*/
+getValueAsRationals : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsRational'>/**Gets the value as a Rational. If there are more than 1 Rationals in this
+</span> value, gets the first one. This method should be used for tags of type
+ {@link #TYPE_RATIONAL} or {@link #TYPE_UNSIGNED_RATIONAL}.
+@param {Object {Rational}} defaultValue the Rational to return if tag's value does not exist
+            or cannot be converted to a Rational.
+@return {Object {com.android.gallery3d.exif.Rational}} the tag's value as a Rational, or the defaultValue.
+*/
+getValueAsRational : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsRational'>/**Gets the value as a Rational. If there are more than 1 Rationals in this
+</span> value, gets the first one. This method should be used for tags of type
+ {@link #TYPE_RATIONAL} or {@link #TYPE_UNSIGNED_RATIONAL}.
+@param {Number} defaultValue the numerator of the Rational to return if tag's
+            value does not exist or cannot be converted to a Rational (the
+            denominator will be 1).
+@return {Object {com.android.gallery3d.exif.Rational}} the tag's value as a Rational, or the defaultValue.
+*/
+getValueAsRational : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsInts'>/**Gets the value as an array of ints. This method should be used for tags
+</span> of type {@link #TYPE_UNSIGNED_SHORT}, {@link #TYPE_UNSIGNED_LONG}.
+@return {Number} the value as as an array of ints, or null if the tag's value does
+         not exist or cannot be converted to an array of ints.
+*/
+getValueAsInts : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsInt'>/**Gets the value as an int. If there are more than 1 ints in this value,
+</span> gets the first one. This method should be used for tags of type
+ {@link #TYPE_UNSIGNED_SHORT}, {@link #TYPE_UNSIGNED_LONG}.
+@param {Number} defaultValue the int to return if tag's value does not exist or
+            cannot be converted to an int.
+@return {Number} the tag's value as a int, or the defaultValue.
+*/
+getValueAsInt : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsLongs'>/**Gets the value as an array of longs. This method should be used for tags
+</span> of type {@link #TYPE_UNSIGNED_LONG}.
+@return {Number} the value as as an array of longs, or null if the tag's value
+         does not exist or cannot be converted to an array of longs.
+*/
+getValueAsLongs : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValueAsLong'>/**Gets the value or null if none exists. If there are more than 1 longs in
+</span> this value, gets the first one. This method should be used for tags of
+ type {@link #TYPE_UNSIGNED_LONG}.
+@param {Number} defaultValue the long to return if tag's value does not exist or
+            cannot be converted to a long.
+@return {Number} the tag's value as a long, or the defaultValue.
+*/
+getValueAsLong : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-getValue'>/**Gets the tag's value or null if none exists.
+</span>*/
+getValue : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-forceGetValueAsLong'>/**Gets a long representation of the value.
+</span>@param {Number} defaultValue value to return if there is no value or value is a
+            rational with a denominator of 0.
+@return {Number} the tag's value as a long, or defaultValue if no representation
+         exists.
+*/
+forceGetValueAsLong : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-forceGetValueAsString'>/**Gets a string representation of the value.
+</span>*/
+forceGetValueAsString : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='com-android-gallery3d-exif-ExifTag-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

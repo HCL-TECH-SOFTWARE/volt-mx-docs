@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-LockPatternUtils'>/**@class com.android.internal.widget.LockPatternUtils
+</span>@extends java.lang.Object
+
+ Utilities for the lock pattern and its settings.
+*/
+var LockPatternUtils = {
+
+<span id='com-android-internal-widget-LockPatternUtils-property-LEGACY_LOCK_PATTERN_ENABLED'>/** The key to identify when the lock pattern enabled flag is being accessed for legacy reasons.
+</span>*/
+LEGACY_LOCK_PATTERN_ENABLED : &quot;legacy_lock_pattern_enabled&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-FAILED_ATTEMPT_COUNTDOWN_INTERVAL_MS'>/** The interval of the countdown for showing progress of the lockout.
+</span>*/
+FAILED_ATTEMPT_COUNTDOWN_INTERVAL_MS : &quot;1000&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-FAILED_ATTEMPTS_BEFORE_WIPE_GRACE'>/** This dictates when we start telling the user that continued failed attempts will wipe
+</span> their device.
+*/
+FAILED_ATTEMPTS_BEFORE_WIPE_GRACE : &quot;5&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-MIN_LOCK_PATTERN_SIZE'>/** The minimum number of dots in a valid pattern.
+</span>*/
+MIN_LOCK_PATTERN_SIZE : &quot;4&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-MIN_LOCK_PASSWORD_SIZE'>/** The minimum size of a valid password.
+</span>*/
+MIN_LOCK_PASSWORD_SIZE : &quot;4&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-MIN_PATTERN_REGISTER_FAIL'>/** The minimum number of dots the user must include in a wrong pattern attempt for it to be
+</span> counted.
+*/
+MIN_PATTERN_REGISTER_FAIL : &quot;4&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-CREDENTIAL_TYPE_NONE'>/***/
+</span>CREDENTIAL_TYPE_NONE : &quot;-1&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-CREDENTIAL_TYPE_PATTERN'>/***/
+</span>CREDENTIAL_TYPE_PATTERN : &quot;1&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-CREDENTIAL_TYPE_PASSWORD'>/***/
+</span>CREDENTIAL_TYPE_PASSWORD : &quot;2&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-USER_FRP'>/** Special user id for triggering the FRP verification flow.
+</span>*/
+USER_FRP : &quot;-9999&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-LOCKOUT_PERMANENT_KEY'>/***/
+</span>LOCKOUT_PERMANENT_KEY : &quot;lockscreen.lockedoutpermanently&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-PATTERN_EVER_CHOSEN_KEY'>/***/
+</span>PATTERN_EVER_CHOSEN_KEY : &quot;lockscreen.patterneverchosen&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-PASSWORD_TYPE_KEY'>/***/
+</span>PASSWORD_TYPE_KEY : &quot;lockscreen.password_type&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-PASSWORD_TYPE_ALTERNATE_KEY'>/***/
+</span>PASSWORD_TYPE_ALTERNATE_KEY : &quot;lockscreen.password_type_alternate&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-LOCK_PASSWORD_SALT_KEY'>/***/
+</span>LOCK_PASSWORD_SALT_KEY : &quot;lockscreen.password_salt&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-DISABLE_LOCKSCREEN_KEY'>/***/
+</span>DISABLE_LOCKSCREEN_KEY : &quot;lockscreen.disabled&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-LOCKSCREEN_OPTIONS'>/***/
+</span>LOCKSCREEN_OPTIONS : &quot;lockscreen.options&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK'>/***/
+</span>LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK : &quot;lockscreen.biometric_weak_fallback&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-BIOMETRIC_WEAK_EVER_CHOSEN_KEY'>/***/
+</span>BIOMETRIC_WEAK_EVER_CHOSEN_KEY : &quot;lockscreen.biometricweakeverchosen&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-LOCKSCREEN_POWER_BUTTON_INSTANTLY_LOCKS'>/***/
+</span>LOCKSCREEN_POWER_BUTTON_INSTANTLY_LOCKS : &quot;lockscreen.power_button_instantly_locks&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-LOCKSCREEN_WIDGETS_ENABLED'>/***/
+</span>LOCKSCREEN_WIDGETS_ENABLED : &quot;lockscreen.widgets_enabled&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-PASSWORD_HISTORY_KEY'>/***/
+</span>PASSWORD_HISTORY_KEY : &quot;lockscreen.passwordhistory&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-PROFILE_KEY_NAME_ENCRYPT'>/***/
+</span>PROFILE_KEY_NAME_ENCRYPT : &quot;profile_key_name_encrypt_&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-PROFILE_KEY_NAME_DECRYPT'>/***/
+</span>PROFILE_KEY_NAME_DECRYPT : &quot;profile_key_name_decrypt_&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-SYNTHETIC_PASSWORD_KEY_PREFIX'>/***/
+</span>SYNTHETIC_PASSWORD_KEY_PREFIX : &quot;synthetic_password_&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-SYNTHETIC_PASSWORD_HANDLE_KEY'>/***/
+</span>SYNTHETIC_PASSWORD_HANDLE_KEY : &quot;sp-handle&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-property-SYNTHETIC_PASSWORD_ENABLED_KEY'>/***/
+</span>SYNTHETIC_PASSWORD_ENABLED_KEY : &quot;enable-sp&quot;,
+<span id='com-android-internal-widget-LockPatternUtils-method-isTrustUsuallyManaged'>/**Use {@link TrustManager#isTrustUsuallyManaged(int)}.
+</span>
+ This returns the lazily-peristed value and should only be used by TrustManagerService.
+*/
+isTrustUsuallyManaged : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setTrustUsuallyManaged'>/**
+</span>*/
+setTrustUsuallyManaged : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-userPresent'>/**
+</span>*/
+userPresent : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getDevicePolicyManager'>/**
+</span>*/
+getDevicePolicyManager : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getLockSettings'>/**
+</span>*/
+getLockSettings : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedMinimumPasswordLength'>/**
+</span>*/
+getRequestedMinimumPasswordLength : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getMaximumPasswordLength'>/**
+</span>*/
+getMaximumPasswordLength : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedPasswordQuality'>/**Gets the device policy password mode. If the mode is non-specific, returns
+</span> MODE_PATTERN which allows the user to choose anything.
+*/
+getRequestedPasswordQuality : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedPasswordMinimumLetters'>/**
+</span>*/
+getRequestedPasswordMinimumLetters : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedPasswordMinimumUpperCase'>/**
+</span>*/
+getRequestedPasswordMinimumUpperCase : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedPasswordMinimumLowerCase'>/**
+</span>*/
+getRequestedPasswordMinimumLowerCase : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedPasswordMinimumNumeric'>/**
+</span>*/
+getRequestedPasswordMinimumNumeric : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedPasswordMinimumSymbols'>/**
+</span>*/
+getRequestedPasswordMinimumSymbols : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getRequestedPasswordMinimumNonLetter'>/**
+</span>*/
+getRequestedPasswordMinimumNonLetter : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-reportFailedPasswordAttempt'>/**
+</span>*/
+reportFailedPasswordAttempt : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-reportSuccessfulPasswordAttempt'>/**
+</span>*/
+reportSuccessfulPasswordAttempt : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-reportPasswordLockout'>/**
+</span>*/
+reportPasswordLockout : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getCurrentFailedPasswordAttempts'>/**
+</span>*/
+getCurrentFailedPasswordAttempts : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getMaximumFailedPasswordsForWipe'>/**
+</span>*/
+getMaximumFailedPasswordsForWipe : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-verifyPattern'>/**Check to see if a pattern matches the saved pattern.
+</span> If pattern matches, return an opaque attestation that the challenge
+ was verified.
+@param {Object {java.util.List}} pattern The pattern to check.
+@param {Number} challenge The challenge to verify against the pattern
+@return {Number} the attestation that the challenge was verified, or null.
+*/
+verifyPattern : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkPattern'>/**Check to see if a pattern matches the saved pattern.  If no pattern exists,
+</span> always returns true.
+@param {Object {java.util.List}} pattern The pattern to check.
+@return {Boolean} Whether the pattern matches the stored one.
+*/
+checkPattern : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkPattern'>/**Check to see if a pattern matches the saved pattern.  If no pattern exists,
+</span> always returns true.
+@param {Object {java.util.List}} pattern The pattern to check.
+@return {Boolean} Whether the pattern matches the stored one.
+*/
+checkPattern : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-verifyPassword'>/**Check to see if a password matches the saved password.
+</span> If password matches, return an opaque attestation that the challenge
+ was verified.
+@param {Object {byte[]}} password The password to check.
+@param {Number} challenge The challenge to verify against the password
+@return {Number} the attestation that the challenge was verified, or null.
+*/
+verifyPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-verifyTiedProfileChallenge'>/**Check to see if a password matches the saved password.
+</span> If password matches, return an opaque attestation that the challenge
+ was verified.
+@param {Object {byte[]}} password The password to check.
+@param {Boolean} challenge The challenge to verify against the password
+@return {Number} the attestation that the challenge was verified, or null.
+*/
+verifyTiedProfileChallenge : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkPassword'>/**Check to see if a password matches the saved password.  If no password exists,
+</span> always returns true.
+@param {String} password The password to check.
+@return {Boolean} Whether the password matches the stored one.
+*/
+checkPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkPassword'>/**Check to see if a password matches the saved password.  If no password exists,
+</span> always returns true.
+@param {Object {byte[]}} password The password to check.
+@return {Boolean} Whether the password matches the stored one.
+*/
+checkPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkPassword'>/**
+</span>*/
+checkPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkPassword'>/**Check to see if a password matches the saved password.  If no password exists,
+</span> always returns true.
+@param {Object {byte[]}} password The password to check.
+@return {Boolean} Whether the password matches the stored one.
+*/
+checkPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkVoldPassword'>/**Check to see if vold already has the password.
+</span> Note that this also clears vold's copy of the password.
+@return {Boolean} Whether the vold password matches or not.
+*/
+checkVoldPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getPasswordHistoryHashFactor'>/**Returns the password history hash factor, needed to check new password against password
+</span> history with {@link #checkPasswordHistory(String, byte[], int)}
+*/
+getPasswordHistoryHashFactor : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-checkPasswordHistory'>/**Check to see if a password matches any of the passwords stored in the
+</span> password history.
+@param {Object {byte[]}} passwordToCheck The password to check.
+@param {Object {byte[]}} hashFactor Hash factor of the current user returned from
+        {@link ILockSettings#getHashFactor}
+@return {Boolean} Whether the password matches any in the history.
+*/
+checkPasswordHistory : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isPatternEverChosen'>/**Return true if the user has ever chosen a pattern.  This is true even if the pattern is
+</span> currently cleared.
+@return {Boolean} True if the user has ever chosen a pattern.
+*/
+isPatternEverChosen : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-reportPatternWasChosen'>/**Records that the user has chosen a pattern at some time, even if the pattern is
+</span> currently cleared.
+*/
+reportPatternWasChosen : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getActivePasswordQuality'>/**Used by device policy manager to validate the current password
+</span> information it has.
+*/
+getActivePasswordQuality : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-resetKeyStore'>/**Use it to reset keystore without wiping work profile
+</span>*/
+resetKeyStore : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-clearLock'>/**Clear any lock pattern or password.
+</span>*/
+clearLock : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-clearLock'>/**Clear any lock pattern or password, with the option to ignore incorrect existing credential.
+</span>*/
+clearLock : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setLockScreenDisabled'>/**Disable showing lock screen at all for a given user.
+</span> This is only meaningful if pattern, pin or password are not set.
+@param {Boolean} disable Disables lock screen when true
+@param {Number} userId User ID of the user this has effect on
+*/
+setLockScreenDisabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isLockScreenDisabled'>/**Determine if LockScreen is disabled for the current user. This is used to decide whether
+</span> LockScreen is shown after reboot or after screen timeout / short press on power.
+@return {Boolean} true if lock screen is disabled
+*/
+isLockScreenDisabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-saveLockPattern'>/**Save a lock pattern.
+</span>@param {Object {java.util.List}} pattern The new pattern to save.
+@param {Object {byte[]}} savedPattern The previously saved pattern, converted to byte[] format
+@param {Number} userId the user whose pattern is to be saved.
+@return {Boolean} whether this was successful or not.
+*/
+saveLockPattern : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-saveLockPattern'>/**Save a lock pattern.
+</span>@param {Object {java.util.List}} pattern The new pattern to save.
+@param {Object {byte[]}} savedPattern The previously saved pattern, converted to byte[] format
+@param {Number} userId the user whose pattern is to be saved.
+@param {Boolean} allowUntrustedChange whether we want to allow saving a new password if the existing
+ password being provided is incorrect.
+@return {Boolean} whether this was successful or not.
+*/
+saveLockPattern : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setOwnerInfo'>/**
+</span>*/
+setOwnerInfo : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setOwnerInfoEnabled'>/**
+</span>*/
+setOwnerInfoEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getOwnerInfo'>/**
+</span>*/
+getOwnerInfo : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isOwnerInfoEnabled'>/**
+</span>*/
+isOwnerInfoEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setDeviceOwnerInfo'>/**Sets the device owner information. If the information is {@code null} or empty then the
+</span> device owner info is cleared.
+@param {String} info Device owner information which will be displayed instead of the user
+ owner info.
+*/
+setDeviceOwnerInfo : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getDeviceOwnerInfo'>/**
+</span>*/
+getDeviceOwnerInfo : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isDeviceOwnerInfoEnabled'>/**
+</span>*/
+isDeviceOwnerInfoEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-saveLockPassword'>/**Save a lock password.  Does not ensure that the password is as good
+</span> as the requested mode, but will adjust the mode to be as good as the
+ password.
+@param {String} password The password to save
+@param {String} savedPassword The previously saved lock password, or null if none
+@param {Number} requestedQuality {@see DevicePolicyManager#getPasswordQuality(
+ android.content.ComponentName)}
+@param {Number} userHandle The userId of the user to change the password for
+@return {Boolean} whether this was successful or not.
+@deprecated Pass password as a byte array
+*/
+saveLockPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-saveLockPassword'>/**Save a lock password.  Does not ensure that the password is as good
+</span> as the requested mode, but will adjust the mode to be as good as the
+ password.
+@param {Object {byte[]}} password The password to save
+@param {Object {byte[]}} savedPassword The previously saved lock password, or null if none
+@param {Number} requestedQuality {@see DevicePolicyManager#getPasswordQuality(
+ android.content.ComponentName)}
+@param {Number} userHandle The userId of the user to change the password for
+@return {Boolean} whether this was successful or not.
+*/
+saveLockPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-saveLockPassword'>/**Save a lock password.  Does not ensure that the password is as good
+</span> as the requested mode, but will adjust the mode to be as good as the
+ password.
+@param {Object {byte[]}} password The password to save
+@param {Object {byte[]}} savedPassword The previously saved lock password, or null if none
+@param {Number} requestedQuality {@see DevicePolicyManager#getPasswordQuality(
+ android.content.ComponentName)}
+@param {Number} userHandle The userId of the user to change the password for
+@param {Boolean} allowUntrustedChange whether we want to allow saving a new password if the existing
+ password being provided is incorrect.
+@return {Boolean} whether this method saved the new password successfully or not. This flow will fail
+ and return false if the given credential is wrong and allowUntrustedChange is false.
+*/
+saveLockPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isDeviceEncryptionEnabled'>/**Determine if the device supports encryption, even if it's set to default. This
+</span> differs from isDeviceEncrypted() in that it returns true even if the device is
+ encrypted with the default password.
+@return {Boolean} true if device encryption is enabled
+*/
+isDeviceEncryptionEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isFileEncryptionEnabled'>/**Determine if the device is file encrypted
+</span>@return {Boolean} true if device is file encrypted
+*/
+isFileEncryptionEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-clearEncryptionPassword'>/**Clears the encryption password.
+</span>*/
+clearEncryptionPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getKeyguardStoredPasswordQuality'>/**Retrieves the quality mode for {@param userHandle}.
+</span> {@see DevicePolicyManager#getPasswordQuality(android.content.ComponentName)}
+@return {Number} stored password quality
+*/
+getKeyguardStoredPasswordQuality : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setSeparateProfileChallengeEnabled'>/**Enables/disables the Separate Profile Challenge for this {@param userHandle}. This is a no-op
+</span> for user handles that do not belong to a managed profile.
+@param {Number} userHandle Managed profile user id
+@param {Boolean} enabled True if separate challenge is enabled
+@param {Object {byte[]}} managedUserPassword Managed profile previous password. Null when {@param enabled} is
+            true
+*/
+setSeparateProfileChallengeEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isSeparateProfileChallengeEnabled'>/**Returns true if {@param userHandle} is a managed profile with separate challenge.
+</span>*/
+isSeparateProfileChallengeEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isManagedProfileWithUnifiedChallenge'>/**Returns true if {@param userHandle} is a managed profile with unified challenge.
+</span>*/
+isManagedProfileWithUnifiedChallenge : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isSeparateProfileChallengeAllowed'>/**Retrieves whether the current DPM allows use of the Profile Challenge.
+</span>*/
+isSeparateProfileChallengeAllowed : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isSeparateProfileChallengeAllowedToUnify'>/**Retrieves whether the current profile and device locks can be unified.
+</span>@param {Number} userHandle profile user handle.
+*/
+isSeparateProfileChallengeAllowedToUnify : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-stringToPattern'>/**Deserialize a pattern.
+</span>@param {String} string The pattern serialized with {@link #patternToString}
+@return {Object {java.util.List}} The pattern.
+@deprecated Pass patterns as byte[] and use byteArrayToPattern
+*/
+stringToPattern : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-byteArrayToPattern'>/**Deserialize a pattern.
+</span>@param {Object {byte[]}} bytes The pattern serialized with {@link #patternToByteArray}
+@return {Object {java.util.List}} The pattern.
+*/
+byteArrayToPattern : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-patternToString'>/**Serialize a pattern.
+</span>@param {Object {java.util.List}} pattern The pattern.
+@return {String} The pattern in string form.
+@deprecated Use patternToByteArray instead.
+*/
+patternToString : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-patternToByteArray'>/**Serialize a pattern.
+</span>@param {Object {java.util.List}} pattern The pattern.
+@return {Number} The pattern in byte array form.
+*/
+patternToByteArray : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-patternByteArrayToBaseZero'>/**Transform a pattern byte array to base zero form.
+</span>@param {Object {byte[]}} bytes pattern byte array.
+@return {Number} The pattern in base zero form.
+*/
+patternByteArrayToBaseZero : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-patternToHash'>/**
+</span>*/
+patternToHash : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-legacyPasswordToHash'>/**Generate a hash for the given password. To avoid brute force attacks, we use a salted hash.
+</span> Not the most secure, but it is at least a second level of protection. First level is that
+ the file is in a location only readable by the system process.
+@param {Object {byte[]}} password the gesture pattern.
+@return {String} the hash of the pattern in a byte array.
+*/
+legacyPasswordToHash : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isSecure'>/**
+</span>@param {Number} userId the user for which to report the value
+@return {Boolean} Whether the lock screen is secured.
+*/
+isSecure : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isLockPasswordEnabled'>/**
+</span>*/
+isLockPasswordEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isLockPatternEnabled'>/**
+</span>@return {Boolean} Whether the lock pattern is enabled
+*/
+isLockPatternEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isLegacyLockPatternEnabled'>/**
+</span>*/
+isLegacyLockPatternEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setLegacyLockPatternEnabled'>/**
+</span>*/
+setLegacyLockPatternEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isVisiblePatternEnabled'>/**
+</span>@return {Boolean} Whether the visible pattern is enabled.
+*/
+isVisiblePatternEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setVisiblePatternEnabled'>/**Set whether the visible pattern is enabled.
+</span>*/
+setVisiblePatternEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isVisiblePatternEverChosen'>/**
+</span>*/
+isVisiblePatternEverChosen : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setVisiblePasswordEnabled'>/**Set whether the visible password is enabled for cryptkeeper screen.
+</span>*/
+setVisiblePasswordEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isTactileFeedbackEnabled'>/**
+</span>@return {Boolean} Whether tactile feedback for the pattern is enabled.
+*/
+isTactileFeedbackEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setLockoutAttemptDeadline'>/**Set and store the lockout deadline, meaning the user can't attempt his/her unlock
+</span> pattern until the deadline has passed.
+@return {Number} the chosen deadline.
+*/
+setLockoutAttemptDeadline : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getLockoutAttemptDeadline'>/**
+</span>@return {Number} The elapsed time in millis in the future when the user is allowed to
+   attempt to enter his/her lock pattern, or 0 if the user is welcome to
+   enter a pattern.
+*/
+getLockoutAttemptDeadline : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setPowerButtonInstantlyLocks'>/**
+</span>*/
+setPowerButtonInstantlyLocks : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getPowerButtonInstantlyLocks'>/**
+</span>*/
+getPowerButtonInstantlyLocks : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isPowerButtonInstantlyLocksEverChosen'>/**
+</span>*/
+isPowerButtonInstantlyLocksEverChosen : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setEnabledTrustAgents'>/**
+</span>*/
+setEnabledTrustAgents : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getEnabledTrustAgents'>/**
+</span>*/
+getEnabledTrustAgents : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-requireCredentialEntry'>/**Disable trust until credentials have been entered for user {@param userId}.
+</span>
+ Requires the {@link android.Manifest.permission#ACCESS_KEYGUARD_SECURE_STORAGE} permission.
+@param {Number} userId either an explicit user id or {@link android.os.UserHandle#USER_ALL}
+*/
+requireCredentialEntry : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-requireStrongAuth'>/**Requests strong authentication for user {@param userId}.
+</span>
+ Requires the {@link android.Manifest.permission#ACCESS_KEYGUARD_SECURE_STORAGE} permission.
+@param {Number} strongAuthReason a combination of {@link StrongAuthTracker.StrongAuthFlags} indicating
+                         the reason for and the strength of the requested authentication.
+@param {Number} userId either an explicit user id or {@link android.os.UserHandle#USER_ALL}
+*/
+requireStrongAuth : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isCredentialRequiredToDecrypt'>/**
+</span>*/
+isCredentialRequiredToDecrypt : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setCredentialRequiredToDecrypt'>/**
+</span>*/
+setCredentialRequiredToDecrypt : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-registerStrongAuthTracker'>/**
+</span>*/
+registerStrongAuthTracker : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-unregisterStrongAuthTracker'>/**
+</span>*/
+unregisterStrongAuthTracker : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-getStrongAuthForUser'>/**
+</span>@see StrongAuthTracker#getStrongAuthForUser
+*/
+getStrongAuthForUser : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isTrustAllowedForUser'>/**
+</span>@see StrongAuthTracker#isTrustAllowedForUser
+*/
+isTrustAllowedForUser : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isBiometricAllowedForUser'>/**
+</span>@see StrongAuthTracker#isBiometricAllowedForUser(int)
+*/
+isBiometricAllowedForUser : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isUserInLockdown'>/**
+</span>*/
+isUserInLockdown : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-addEscrowToken'>/**Create an escrow token for the current user, which can later be used to unlock FBE
+</span> or change user password.
+
+ After adding, if the user currently has lockscreen password, he will need to perform a
+ confirm credential operation in order to activate the token for future use. If the user
+ has no secure lockscreen, then the token is activated immediately.
+
+ &lt;p&gt;This method is only available to code running in the system server process itself.
+@return {Number} a unique 64-bit token handle which is needed to refer to this token later.
+*/
+addEscrowToken : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-removeEscrowToken'>/**Remove an escrow token.
+</span>
+ &lt;p&gt;This method is only available to code running in the system server process itself.
+@return {Boolean} true if the given handle refers to a valid token previously returned from
+ {@link #addEscrowToken}, whether it's active or not. return false otherwise.
+*/
+removeEscrowToken : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isEscrowTokenActive'>/**Check if the given escrow token is active or not. Only active token can be used to call
+</span> {@link #setLockCredentialWithToken} and {@link #unlockUserWithToken}
+
+ &lt;p&gt;This method is only available to code running in the system server process itself.
+*/
+isEscrowTokenActive : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-setLockCredentialWithToken'>/**Change a user's lock credential with a pre-configured escrow token.
+</span>
+ &lt;p&gt;This method is only available to code running in the system server process itself.
+@param {Object {byte[]}} credential The new credential to be set
+@param {Number} type Credential type: password / pattern / none.
+@param {Number} requestedQuality the requested password quality by DevicePolicyManager.
+        See {@link DevicePolicyManager#getPasswordQuality(android.content.ComponentName)}
+@param {Number} tokenHandle Handle of the escrow token
+@param {Object {byte[]}} token Escrow token
+@param {Number} userId The user who's lock credential to be changed
+@return {Boolean} {@code true} if the operation is successful.
+*/
+setLockCredentialWithToken : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-unlockUserWithToken'>/**Unlock the specified user by an pre-activated escrow token. This should have the same effect
+</span> on device encryption as the user entering his lockscreen credentials for the first time after
+ boot, this includes unlocking the user's credential-encrypted storage as well as the keystore
+
+ &lt;p&gt;This method is only available to code running in the system server process itself.
+@return {Boolean} {@code true} if the supplied token is valid and unlock succeeds,
+         {@code false} otherwise.
+*/
+unlockUserWithToken : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-enableSyntheticPassword'>/**
+</span>*/
+enableSyntheticPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-disableSyntheticPassword'>/**
+</span>*/
+disableSyntheticPassword : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-isSyntheticPasswordEnabled'>/**
+</span>*/
+isSyntheticPasswordEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-hasPendingEscrowToken'>/**Returns whether the given user has pending escrow tokens
+</span>*/
+hasPendingEscrowToken : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-hasSecureLockScreen'>/**Return true if the device supports the lock screen feature, false otherwise.
+</span>*/
+hasSecureLockScreen : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-userOwnsFrpCredential'>/**
+</span>*/
+userOwnsFrpCredential : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-frpCredentialEnabled'>/**
+</span>*/
+frpCredentialEnabled : function(  ) {},
+
+<span id='com-android-internal-widget-LockPatternUtils-method-charSequenceToByteArray'>/**Converts a CharSequence to a byte array without requiring a toString(), which creates an
+</span> additional copy.
+@param {Object {CharSequence}} chars The CharSequence to convert
+@return {Number} A byte array representing the input
+*/
+charSequenceToByteArray : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

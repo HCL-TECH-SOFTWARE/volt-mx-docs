@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaCodecInfo-CodecCapabilities'>/**@class android.media.MediaCodecInfo.CodecCapabilities
+</span>@extends java.lang.Object
+
+ Encapsulates the capabilities of a given codec component.
+ For example, what profile/level combinations it supports and what colorspaces
+ it is capable of providing the decoded data in, as well as some
+ codec-type specific capability flags.
+ &lt;p&gt;You can get an instance for a given {@link android.media.MediaCodecInfo} object with
+ {@link android.media.MediaCodecInfo#getCapabilitiesForType getCapabilitiesForType()}, passing a MIME type.
+*/
+var CodecCapabilities = {
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-profileLevels'>/***/
+</span>profileLevels : &quot;null&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatMonochrome'>/**@deprecated Use {@link #COLOR_Format24bitBGR888}. */
+</span>COLOR_FormatMonochrome : &quot;1&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format8bitRGB332'>/**@deprecated Use {@link #COLOR_Format24bitBGR888}. */
+</span>COLOR_Format8bitRGB332 : &quot;2&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format12bitRGB444'>/**@deprecated Use {@link #COLOR_Format24bitBGR888}. */
+</span>COLOR_Format12bitRGB444 : &quot;3&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format16bitARGB4444'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format16bitARGB4444 : &quot;4&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format16bitARGB1555'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format16bitARGB1555 : &quot;5&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format16bitRGB565'>/** 16 bits per pixel RGB color format, with 5-bit red &amp; blue and 6-bit green component.
+</span> &lt;p&gt;
+ Using 16-bit little-endian representation, colors stored as Red 15:11, Green 10:5, Blue 4:0.
+ &lt;pre&gt;
+            byte                   byte
+  &lt;--------- i --------&gt; | &lt;------ i + 1 ------&gt;
+ +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+ |     BLUE     |      GREEN      |     RED      |
+ +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  0           4  5     7   0     2  3           7
+ bit
+ &lt;/pre&gt;
+
+ This format corresponds to {@link android.graphics.PixelFormat#RGB_565} and
+ {@link android.graphics.ImageFormat#RGB_565}.
+*/
+COLOR_Format16bitRGB565 : &quot;6&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format16bitBGR565'>/**@deprecated Use {@link #COLOR_Format16bitRGB565}. */
+</span>COLOR_Format16bitBGR565 : &quot;7&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format18bitRGB666'>/**@deprecated Use {@link #COLOR_Format24bitBGR888}. */
+</span>COLOR_Format18bitRGB666 : &quot;8&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format18bitARGB1665'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format18bitARGB1665 : &quot;9&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format19bitARGB1666'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format19bitARGB1666 : &quot;10&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format24bitRGB888'>/**@deprecated Use {@link #COLOR_Format24bitBGR888} or {@link #COLOR_FormatRGBFlexible}. */
+</span>COLOR_Format24bitRGB888 : &quot;11&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format24bitBGR888'>/** 24 bits per pixel RGB color format, with 8-bit red, green &amp; blue components.
+</span> &lt;p&gt;
+ Using 24-bit little-endian representation, colors stored as Red 7:0, Green 15:8, Blue 23:16.
+ &lt;pre&gt;
+         byte              byte             byte
+  &lt;------ i -----&gt; | &lt;---- i+1 ----&gt; | &lt;---- i+2 -----&gt;
+ +-----------------+-----------------+-----------------+
+ |       RED       |      GREEN      |       BLUE      |
+ +-----------------+-----------------+-----------------+
+ &lt;/pre&gt;
+
+ This format corresponds to {@link android.graphics.PixelFormat#RGB_888}, and can also be
+ represented as a flexible format by {@link #COLOR_FormatRGBFlexible}.
+*/
+COLOR_Format24bitBGR888 : &quot;12&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format24bitARGB1887'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format24bitARGB1887 : &quot;13&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format25bitARGB1888'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format25bitARGB1888 : &quot;14&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format32bitBGRA8888'>/** @deprecated Use {@link #COLOR_Format32bitABGR8888} Or {@link #COLOR_FormatRGBAFlexible}.
+</span>*/
+COLOR_Format32bitBGRA8888 : &quot;15&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format32bitARGB8888'>/** @deprecated Use {@link #COLOR_Format32bitABGR8888} Or {@link #COLOR_FormatRGBAFlexible}.
+</span>*/
+COLOR_Format32bitARGB8888 : &quot;16&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV411Planar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_FormatYUV411Planar : &quot;17&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV411PackedPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_FormatYUV411PackedPlanar : &quot;18&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV420Planar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_FormatYUV420Planar : &quot;19&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV420PackedPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_FormatYUV420PackedPlanar : &quot;20&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV420SemiPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_FormatYUV420SemiPlanar : &quot;21&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV422Planar'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatYUV422Planar : &quot;22&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV422PackedPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatYUV422PackedPlanar : &quot;23&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV422SemiPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatYUV422SemiPlanar : &quot;24&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYCbYCr'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatYCbYCr : &quot;25&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYCrYCb'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatYCrYCb : &quot;26&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatCbYCrY'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatCbYCrY : &quot;27&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatCrYCbY'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatCrYCbY : &quot;28&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV444Interleaved'>/**@deprecated Use {@link #COLOR_FormatYUV444Flexible}. */
+</span>COLOR_FormatYUV444Interleaved : &quot;29&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatRawBayer8bit'>/** SMIA 8-bit Bayer format.
+</span> Each byte represents the top 8-bits of a 10-bit signal.
+*/
+COLOR_FormatRawBayer8bit : &quot;30&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatRawBayer10bit'>/** SMIA 10-bit Bayer format.
+</span>*/
+COLOR_FormatRawBayer10bit : &quot;31&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatRawBayer8bitcompressed'>/** SMIA 8-bit compressed Bayer format.
+</span> Each byte represents a sample from the 10-bit signal that is compressed into 8-bits
+ using DPCM/PCM compression, as defined by the SMIA Functional Specification.
+*/
+COLOR_FormatRawBayer8bitcompressed : &quot;32&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatL2'>/**@deprecated Use {@link #COLOR_FormatL8}. */
+</span>COLOR_FormatL2 : &quot;33&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatL4'>/**@deprecated Use {@link #COLOR_FormatL8}. */
+</span>COLOR_FormatL4 : &quot;34&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatL8'>/** 8 bits per pixel Y color format.
+</span> &lt;p&gt;
+ Each byte contains a single pixel.
+ This format corresponds to {@link android.graphics.PixelFormat#L_8}.
+*/
+COLOR_FormatL8 : &quot;35&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatL16'>/** 16 bits per pixel, little-endian Y color format.
+</span> &lt;p&gt;
+ &lt;pre&gt;
+            byte                   byte
+  &lt;--------- i --------&gt; | &lt;------ i + 1 ------&gt;
+ +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+ |                       Y                       |
+ +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  0                    7   0                    7
+ bit
+ &lt;/pre&gt;
+*/
+COLOR_FormatL16 : &quot;36&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatL24'>/**@deprecated Use {@link #COLOR_FormatL16}. */
+</span>COLOR_FormatL24 : &quot;37&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatL32'>/** 32 bits per pixel, little-endian Y color format.
+</span> &lt;p&gt;
+ &lt;pre&gt;
+         byte              byte             byte              byte
+  &lt;------ i -----&gt; | &lt;---- i+1 ----&gt; | &lt;---- i+2 ----&gt; | &lt;---- i+3 -----&gt;
+ +-----------------+-----------------+-----------------+-----------------+
+ |                                   Y                                   |
+ +-----------------+-----------------+-----------------+-----------------+
+  0               7 0               7 0               7 0               7
+ bit
+ &lt;/pre&gt;
+
+ @deprecated Use {@link #COLOR_FormatL16}.
+*/
+COLOR_FormatL32 : &quot;38&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV420PackedSemiPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_FormatYUV420PackedSemiPlanar : &quot;39&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV422PackedSemiPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV422Flexible}. */
+</span>COLOR_FormatYUV422PackedSemiPlanar : &quot;40&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format18BitBGR666'>/**@deprecated Use {@link #COLOR_Format24bitBGR888}. */
+</span>COLOR_Format18BitBGR666 : &quot;41&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format24BitARGB6666'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format24BitARGB6666 : &quot;42&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format24BitABGR6666'>/**@deprecated Use {@link #COLOR_Format32bitABGR8888}. */
+</span>COLOR_Format24BitABGR6666 : &quot;43&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_TI_FormatYUV420PackedSemiPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_TI_FormatYUV420PackedSemiPlanar : &quot;2130706688&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatSurface'>/***/
+</span>COLOR_FormatSurface : &quot;2130708361&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_Format32bitABGR8888'>/** 32 bits per pixel RGBA color format, with 8-bit red, green, blue, and alpha components.
+</span> &lt;p&gt;
+ Using 32-bit little-endian representation, colors stored as Red 7:0, Green 15:8,
+ Blue 23:16, and Alpha 31:24.
+ &lt;pre&gt;
+         byte              byte             byte              byte
+  &lt;------ i -----&gt; | &lt;---- i+1 ----&gt; | &lt;---- i+2 ----&gt; | &lt;---- i+3 -----&gt;
+ +-----------------+-----------------+-----------------+-----------------+
+ |       RED       |      GREEN      |       BLUE      |      ALPHA      |
+ +-----------------+-----------------+-----------------+-----------------+
+ &lt;/pre&gt;
+
+ This corresponds to {@link android.graphics.PixelFormat#RGBA_8888}.
+*/
+COLOR_Format32bitABGR8888 : &quot;2130747392&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV420Flexible'>/** Flexible 12 bits per pixel, subsampled YUV color format with 8-bit chroma and luma
+</span> components.
+ &lt;p&gt;
+ Chroma planes are subsampled by 2 both horizontally and vertically.
+ Use this format with {@link android.media.Image}.
+ This format corresponds to {@link android.graphics.ImageFormat#YUV_420_888},
+ and can represent the {@link #COLOR_FormatYUV411Planar},
+ {@link #COLOR_FormatYUV411PackedPlanar}, {@link #COLOR_FormatYUV420Planar},
+ {@link #COLOR_FormatYUV420PackedPlanar}, {@link #COLOR_FormatYUV420SemiPlanar}
+ and {@link #COLOR_FormatYUV420PackedSemiPlanar} formats.
+
+ @see Image#getFormat
+*/
+COLOR_FormatYUV420Flexible : &quot;2135033992&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV422Flexible'>/** Flexible 16 bits per pixel, subsampled YUV color format with 8-bit chroma and luma
+</span> components.
+ &lt;p&gt;
+ Chroma planes are horizontally subsampled by 2. Use this format with {@link android.media.Image}.
+ This format corresponds to {@link android.graphics.ImageFormat#YUV_422_888},
+ and can represent the {@link #COLOR_FormatYCbYCr}, {@link #COLOR_FormatYCrYCb},
+ {@link #COLOR_FormatCbYCrY}, {@link #COLOR_FormatCrYCbY},
+ {@link #COLOR_FormatYUV422Planar}, {@link #COLOR_FormatYUV422PackedPlanar},
+ {@link #COLOR_FormatYUV422SemiPlanar} and {@link #COLOR_FormatYUV422PackedSemiPlanar}
+ formats.
+
+ @see Image#getFormat
+*/
+COLOR_FormatYUV422Flexible : &quot;2135042184&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatYUV444Flexible'>/** Flexible 24 bits per pixel YUV color format with 8-bit chroma and luma
+</span> components.
+ &lt;p&gt;
+ Chroma planes are not subsampled. Use this format with {@link android.media.Image}.
+ This format corresponds to {@link android.graphics.ImageFormat#YUV_444_888},
+ and can represent the {@link #COLOR_FormatYUV444Interleaved} format.
+ @see Image#getFormat
+*/
+COLOR_FormatYUV444Flexible : &quot;2135181448&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatRGBFlexible'>/** Flexible 24 bits per pixel RGB color format with 8-bit red, green and blue
+</span> components.
+ &lt;p&gt;
+ Use this format with {@link android.media.Image}. This format corresponds to
+ {@link android.graphics.ImageFormat#FLEX_RGB_888}, and can represent
+ {@link #COLOR_Format24bitBGR888} and {@link #COLOR_Format24bitRGB888} formats.
+ @see Image#getFormat()
+*/
+COLOR_FormatRGBFlexible : &quot;2134292616&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_FormatRGBAFlexible'>/** Flexible 32 bits per pixel RGBA color format with 8-bit red, green, blue, and alpha
+</span> components.
+ &lt;p&gt;
+ Use this format with {@link android.media.Image}. This format corresponds to
+ {@link android.graphics.ImageFormat#FLEX_RGBA_8888}, and can represent
+ {@link #COLOR_Format32bitBGRA8888}, {@link #COLOR_Format32bitABGR8888} and
+ {@link #COLOR_Format32bitARGB8888} formats.
+
+ @see Image#getFormat()
+*/
+COLOR_FormatRGBAFlexible : &quot;2134288520&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-COLOR_QCOM_FormatYUV420SemiPlanar'>/**@deprecated Use {@link #COLOR_FormatYUV420Flexible}. */
+</span>COLOR_QCOM_FormatYUV420SemiPlanar : &quot;2141391872&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-colorFormats'>/** The color format for the media. This is one of the color constants defined in this class.
+</span>*/
+colorFormats : &quot;null&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_AdaptivePlayback'>/** &lt;b&gt;video decoder only&lt;/b&gt;: codec supports seamless resolution changes.
+</span>*/
+FEATURE_AdaptivePlayback : &quot;adaptive-playback&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_SecurePlayback'>/** &lt;b&gt;video decoder only&lt;/b&gt;: codec supports secure decryption.
+</span>*/
+FEATURE_SecurePlayback : &quot;secure-playback&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_TunneledPlayback'>/** &lt;b&gt;video or audio decoder only&lt;/b&gt;: codec supports tunneled playback.
+</span>*/
+FEATURE_TunneledPlayback : &quot;tunneled-playback&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_DynamicTimestamp'>/** If true, the timestamp of each output buffer is derived from the timestamp of the input
+</span> buffer that produced the output. If false, the timestamp of each output buffer is
+ derived from the timestamp of the first input buffer.
+*/
+FEATURE_DynamicTimestamp : &quot;dynamic-timestamp&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_FrameParsing'>/** &lt;b&gt;decoder only&lt;/b&gt;If true, the codec supports partial (including multiple) access units
+</span> per input buffer.
+*/
+FEATURE_FrameParsing : &quot;frame-parsing&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_MultipleFrames'>/** If true, the codec supports multiple access units (for decoding, or to output for
+</span> encoders). If false, the codec only supports single access units. Producing multiple
+ access units for output is an optional feature.
+*/
+FEATURE_MultipleFrames : &quot;multiple-frames&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_PartialFrame'>/** &lt;b&gt;video decoder only&lt;/b&gt;: codec supports queuing partial frames.
+</span>*/
+FEATURE_PartialFrame : &quot;partial-frame&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-property-FEATURE_IntraRefresh'>/** &lt;b&gt;video encoder only&lt;/b&gt;: codec supports intra refresh.
+</span>*/
+FEATURE_IntraRefresh : &quot;intra-refresh&quot;,
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-isFeatureSupported'>/**Query codec feature capabilities.
+</span> &lt;p&gt;
+ These features are supported to be used by the codec.  These
+ include optional features that can be turned on, as well as
+ features that are always on.
+*/
+isFeatureSupported : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-isFeatureRequired'>/**Query codec feature requirements.
+</span> &lt;p&gt;
+ These features are required to be used by the codec, and as such,
+ they are always turned on.
+*/
+isFeatureRequired : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-validFeatures'>/**
+</span>@hide 
+*/
+validFeatures : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-isRegular'>/**
+</span>@hide 
+*/
+isRegular : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-isFormatSupported'>/**Query whether codec supports a given {@link android.media.MediaFormat}.
+</span>
+ &lt;p class=note&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; On {@link android.os.Build.VERSION_CODES#LOLLIPOP},
+ {@code format} must not contain a {@linkplain android.media.MediaFormat#KEY_FRAME_RATE
+ frame rate}. Use
+ &lt;code class=prettyprint&gt;format.setString(MediaFormat.KEY_FRAME_RATE, null)&lt;/code&gt;
+ to clear any existing frame rate setting in the format.
+ &lt;p&gt;
+
+ The following table summarizes the format keys considered by this method.
+
+ &lt;table style=&quot;width: 0%&quot;&gt;
+  &lt;thead&gt;
+   &lt;tr&gt;
+    &lt;th rowspan=3&gt;OS Version(s)&lt;/th&gt;
+    &lt;td colspan=3&gt;{@code MediaFormat} keys considered for&lt;/th&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;th&gt;Audio Codecs&lt;/th&gt;
+    &lt;th&gt;Video Codecs&lt;/th&gt;
+    &lt;th&gt;Encoders&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP}&lt;/th&gt;
+    &lt;td rowspan=3&gt;{@link android.media.MediaFormat#KEY_MIME}&lt;sup&gt;*&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_SAMPLE_RATE},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_CHANNEL_COUNT},&lt;/td&gt;
+    &lt;td&gt;{@link android.media.MediaFormat#KEY_MIME}&lt;sup&gt;*&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaCodecInfo.CodecCapabilities#FEATURE_AdaptivePlayback}&lt;sup&gt;D&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaCodecInfo.CodecCapabilities#FEATURE_SecurePlayback}&lt;sup&gt;D&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaCodecInfo.CodecCapabilities#FEATURE_TunneledPlayback}&lt;sup&gt;D&lt;/sup&gt;,&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_WIDTH},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_HEIGHT},&lt;br&gt;
+        &lt;strong&gt;no&lt;/strong&gt; {@code KEY_FRAME_RATE}&lt;/td&gt;
+    &lt;td rowspan=4&gt;{@link android.media.MediaFormat#KEY_BITRATE_MODE},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_PROFILE}
+        (and/or {@link android.media.MediaFormat#KEY_AAC_PROFILE}&lt;sup&gt;~&lt;/sup&gt;),&lt;br&gt;
+        &lt;!-- {link MediaFormat#KEY_QUALITY},&lt;br&gt; --&gt;
+        {@link android.media.MediaFormat#KEY_COMPLEXITY}
+        (and/or {@link android.media.MediaFormat#KEY_FLAC_COMPRESSION_LEVEL}&lt;sup&gt;~&lt;/sup&gt;)&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#LOLLIPOP_MR1}&lt;/th&gt;
+    &lt;td rowspan=2&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_FRAME_RATE}&lt;/td&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#M}&lt;/th&gt;
+   &lt;/tr&gt;&lt;tr&gt;
+    &lt;td&gt;{@link android.os.Build.VERSION_CODES#N}&lt;/th&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_PROFILE},&lt;br&gt;
+        &lt;!-- {link MediaFormat#KEY_MAX_BIT_RATE},&lt;br&gt; --&gt;
+        {@link android.media.MediaFormat#KEY_BIT_RATE}&lt;/td&gt;
+    &lt;td&gt;as above, plus&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_PROFILE},&lt;br&gt;
+        {@link android.media.MediaFormat#KEY_LEVEL}&lt;sup&gt;+&lt;/sup&gt;,&lt;br&gt;
+        &lt;!-- {link MediaFormat#KEY_MAX_BIT_RATE},&lt;br&gt; --&gt;
+        {@link android.media.MediaFormat#KEY_BIT_RATE},&lt;br&gt;
+        {@link android.media.MediaCodecInfo.CodecCapabilities#FEATURE_IntraRefresh}&lt;sup&gt;E&lt;/sup&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td colspan=4&gt;
+     &lt;p class=note&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;br&gt;
+      *: must be specified; otherwise, method returns {@code false}.&lt;br&gt;
+      +: method does not verify that the format parameters are supported
+      by the specified level.&lt;br&gt;
+      D: decoders only&lt;br&gt;
+      E: encoders only&lt;br&gt;
+      ~: if both keys are provided values must match
+    &lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+ &lt;/table&gt;
+@param {Object {MediaFormat}} format media format with optional feature directives.
+@throws IllegalArgumentException if format is not a valid media format.
+@return {Boolean} whether the codec capabilities support the given format
+         and feature requests.
+*/
+isFormatSupported : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-getDefaultFormat'>/**Returns a MediaFormat object with default values for configurations that have
+</span> defaults.
+*/
+getDefaultFormat : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-getMimeType'>/**Returns the mime type for which this codec-capability object was created.
+</span>*/
+getMimeType : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-getMaxSupportedInstances'>/**Returns the max number of the supported concurrent codec instances.
+</span> &lt;p&gt;
+ This is a hint for an upper bound. Applications should not expect to successfully
+ operate more instances than the returned value, but the actual number of
+ concurrently operable instances may be less as it depends on the available
+ resources at time of use.
+*/
+getMaxSupportedInstances : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-getAudioCapabilities'>/**Returns the audio capabilities or {@code null} if this is not an audio codec.
+</span>*/
+getAudioCapabilities : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-getEncoderCapabilities'>/**Returns the encoding capabilities or {@code null} if this is not an encoder.
+</span>*/
+getEncoderCapabilities : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-getVideoCapabilities'>/**Returns the video capabilities or {@code null} if this is not a video codec.
+</span>*/
+getVideoCapabilities : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-dup'>/**
+</span>@hide 
+*/
+dup : function(  ) {},
+
+<span id='android-media-MediaCodecInfo-CodecCapabilities-method-createFromProfileLevel'>/**Retrieve the codec capabilities for a certain {@code mime type}, {@code
+</span> profile} and {@code level}.  If the type, or profile-level combination
+ is not understood by the framework, it returns null.
+ &lt;p class=note&gt; In {@link android.os.Build.VERSION_CODES#M}, calling this
+ method without calling any method of the {@link android.media.MediaCodecList} class beforehand
+ results in a {@link NullPointerException}.&lt;/p&gt;
+*/
+createFromProfileLevel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

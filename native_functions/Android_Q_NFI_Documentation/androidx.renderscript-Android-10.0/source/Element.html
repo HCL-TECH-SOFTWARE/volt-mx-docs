@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='androidx-renderscript-Element'>/**@class androidx.renderscript.Element
+</span>@extends androidx.renderscript.BaseObj
+
+ &lt;p&gt;An Element represents one item within an {@link androidx.renderscript.Allocation}.  An Element is roughly
+ equivalent to a C type in a RenderScript kernel. Elements may be basic or
+ complex. Some basic elements are&lt;/p&gt; &lt;ul&gt; &lt;li&gt;A single float value
+ (equivalent to a float in a kernel)&lt;/li&gt; &lt;li&gt;A four-element float vector
+ (equivalent to a float4 in a kernel)&lt;/li&gt; &lt;li&gt;An unsigned 32-bit integer
+ (equivalent to an unsigned int in a kernel)&lt;/li&gt; &lt;li&gt;A single signed 8-bit
+ integer (equivalent to a char in a kernel)&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;A complex element is
+ roughly equivalent to a C struct and contains a number of basic or complex
+ Elements. From Java code, a complex element contains a list of sub-elements
+ and names that represents a particular data structure. Structs used in RS
+ scripts are available to Java code by using the
+ {@code ScriptField_structname} class that is reflected from a particular
+ script.&lt;/p&gt;
+
+ &lt;p&gt;Basic Elements are comprised of a {@link androidx.renderscript.Element.DataType} and a {@link androidx.renderscript.Element.DataKind}. The DataType encodes C
+ type information of an Element, while the DataKind encodes how that Element
+ should be interpreted by a {@link androidx.renderscript.Sampler}.
+ Note that {@link androidx.renderscript.Allocation} objects with
+ DataKind {@link androidx.renderscript.Element.DataKind#USER} cannot
+ be used as input for a {@link androidx.renderscript.Sampler}. In
+ general, {@link androidx.renderscript.Allocation} objects that are
+ intended for use with a {@link androidx.renderscript.Sampler}
+ should use bitmap-derived Elements such as
+ {@link androidx.renderscript.Element#RGBA_8888} or {@link androidx.renderscript#Element.A_8}.&lt;/p&gt;
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about creating an application that uses RenderScript,
+ read the
+ &lt;a href=&quot;{@docRoot}guide/topics/renderscript/index.html&quot;&gt;RenderScript&lt;/a&gt;
+ developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+*/
+var Element = {
+
+<span id='androidx-renderscript-Element-method-getBytesSize'>/**
+</span>@return {Number} element size in bytes
+*/
+getBytesSize : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getVectorSize'>/**Returns the number of vector components. 2 for float2, 4 for
+</span> float4, etc.
+@return {Number} element vector size
+*/
+getVectorSize : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-isComplex'>/**Return if a element is too complex for use as a data source for a Mesh or
+</span> a Program.
+@return {Boolean} boolean
+*/
+isComplex : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getSubElementCount'>/**Elements could be simple, such as an int or a float, or a
+</span> structure with multiple sub elements, such as a collection of
+ floats, float2, float4. This function returns zero for simple
+ elements or the number of sub-elements otherwise.
+@return {Number} number of sub-elements in this element
+*/
+getSubElementCount : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getSubElement'>/**For complex elements, this function will return the
+</span> sub-element at index
+@param {Number} index index of the sub-element to return
+@return {Object {androidx.renderscript.Element}} sub-element in this element at given index
+*/
+getSubElement : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getSubElementName'>/**For complex elements, this function will return the
+</span> sub-element name at index
+@param {Number} index index of the sub-element
+@return {String} sub-element in this element at given index
+*/
+getSubElementName : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getSubElementArraySize'>/**For complex elements, some sub-elements could be statically
+</span> sized arrays. This function will return the array size for
+ sub-element at index
+@param {Number} index index of the sub-element
+@return {Number} array size of sub-element in this element at given index
+*/
+getSubElementArraySize : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getSubElementOffsetBytes'>/**This function specifies the location of a sub-element within
+</span> the element
+@param {Number} index index of the sub-element
+@return {Number} offset in bytes of sub-element in this element at given index
+*/
+getSubElementOffsetBytes : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getDataType'>/**
+</span>@return {Object {androidx.renderscript.Element.DataType}} element data type
+*/
+getDataType : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getDataKind'>/**
+</span>@return {Object {androidx.renderscript.Element.DataKind}} element data kind
+*/
+getDataKind : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-BOOLEAN'>/**Utility function for returning an Element containing a single Boolean.
+</span>@param {Object {RenderScript}} rs Context to which the element will belong.
+@return {Object {androidx.renderscript.Element}} Element
+*/
+BOOLEAN : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U8'>/**Utility function for returning an Element containing a single UNSIGNED_8.
+</span>@param {Object {RenderScript}} rs Context to which the element will belong.
+@return {Object {androidx.renderscript.Element}} Element
+*/
+U8 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I8'>/**Utility function for returning an Element containing a single SIGNED_8.
+</span>@param {Object {RenderScript}} rs Context to which the element will belong.
+@return {Object {androidx.renderscript.Element}} Element
+*/
+I8 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U16'>/**
+</span>*/
+U16 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I16'>/**
+</span>*/
+I16 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U32'>/**
+</span>*/
+U32 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I32'>/**
+</span>*/
+I32 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U64'>/**
+</span>*/
+U64 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I64'>/**
+</span>*/
+I64 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F32'>/**
+</span>*/
+F32 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F64'>/**
+</span>*/
+F64 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-ELEMENT'>/**
+</span>*/
+ELEMENT : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-TYPE'>/**
+</span>*/
+TYPE : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-ALLOCATION'>/**
+</span>*/
+ALLOCATION : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-SAMPLER'>/**
+</span>*/
+SAMPLER : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-SCRIPT'>/**
+</span>*/
+SCRIPT : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-A_8'>/**
+</span>*/
+A_8 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-RGB_565'>/**
+</span>*/
+RGB_565 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-RGB_888'>/**
+</span>*/
+RGB_888 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-RGBA_5551'>/**
+</span>*/
+RGBA_5551 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-RGBA_4444'>/**
+</span>*/
+RGBA_4444 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-RGBA_8888'>/**
+</span>*/
+RGBA_8888 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F32_2'>/**
+</span>*/
+F32_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F32_3'>/**
+</span>*/
+F32_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F32_4'>/**
+</span>*/
+F32_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F64_2'>/**
+</span>*/
+F64_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F64_3'>/**
+</span>*/
+F64_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-F64_4'>/**
+</span>*/
+F64_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U8_2'>/**
+</span>*/
+U8_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U8_3'>/**
+</span>*/
+U8_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U8_4'>/**
+</span>*/
+U8_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I8_2'>/**
+</span>*/
+I8_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I8_3'>/**
+</span>*/
+I8_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I8_4'>/**
+</span>*/
+I8_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U16_2'>/**
+</span>*/
+U16_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U16_3'>/**
+</span>*/
+U16_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U16_4'>/**
+</span>*/
+U16_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I16_2'>/**
+</span>*/
+I16_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I16_3'>/**
+</span>*/
+I16_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I16_4'>/**
+</span>*/
+I16_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U32_2'>/**
+</span>*/
+U32_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U32_3'>/**
+</span>*/
+U32_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U32_4'>/**
+</span>*/
+U32_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I32_2'>/**
+</span>*/
+I32_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I32_3'>/**
+</span>*/
+I32_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I32_4'>/**
+</span>*/
+I32_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U64_2'>/**
+</span>*/
+U64_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U64_3'>/**
+</span>*/
+U64_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-U64_4'>/**
+</span>*/
+U64_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I64_2'>/**
+</span>*/
+I64_2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I64_3'>/**
+</span>*/
+I64_3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-I64_4'>/**
+</span>*/
+I64_4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-MATRIX_4X4'>/**
+</span>*/
+MATRIX_4X4 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-MATRIX_3X3'>/**
+</span>*/
+MATRIX_3X3 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-MATRIX_2X2'>/**
+</span>*/
+MATRIX_2X2 : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-getDummyElement'>/**
+</span>*/
+getDummyElement : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-createVector'>/**Create a custom vector element of the specified DataType and vector size.
+</span> DataKind will be set to USER. Only primitive types (FLOAT_32, FLOAT_64,
+ SIGNED_8, SIGNED_16, SIGNED_32, SIGNED_64, UNSIGNED_8, UNSIGNED_16,
+ UNSIGNED_32, UNSIGNED_64, BOOLEAN) are supported.
+@param {Object {RenderScript}} rs The context associated with the new Element.
+@param {Object {Element.DataType}} dt The DataType for the new Element.
+@param {Number} size Vector size for the new Element.  Range 2-4 inclusive
+             supported.
+@return {Object {androidx.renderscript.Element}} Element
+*/
+createVector : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-createPixel'>/**Create a new pixel Element type.  A matching DataType and DataKind must
+</span> be provided.  The DataType and DataKind must contain the same number of
+ components.  Vector size will be set to 1.
+@param {Object {RenderScript}} rs The context associated with the new Element.
+@param {Object {Element.DataType}} dt The DataType for the new element.
+@param {Object {Element.DataKind}} dk The DataKind to specify the mapping of each component in the
+           DataType.
+@return {Object {androidx.renderscript.Element}} Element
+*/
+createPixel : function(  ) {},
+
+<span id='androidx-renderscript-Element-method-isCompatible'>/**Check if the current Element is compatible with another Element.
+</span> Primitive Elements are compatible if they share the same underlying
+ size and type (i.e. U8 is compatible with A_8). User-defined Elements
+ must be equal in order to be compatible. This requires strict name
+ equivalence for all sub-Elements (in addition to structural equivalence).
+@param {Object {Element}} e The Element to check compatibility with.
+@return {Boolean} boolean true if the Elements are compatible, otherwise false.
+*/
+isCompatible : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

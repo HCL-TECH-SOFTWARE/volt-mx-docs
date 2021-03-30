@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ims-internal-VideoPauseTracker'>/**@class com.android.ims.internal.VideoPauseTracker
+</span>@extends java.lang.Object
+
+ Used by an {@link com.android.ims.internal.ImsVideoCallProviderWrapper} to track requests to pause video from various
+ sources.
+
+ Requests to pause the video stream using the {@link VideoProfile#STATE_PAUSED} bit can come
+ from both the {@link android.telecom.InCallService}, as well as via the
+ {@link com.android.ims.internal.ImsVideoCallProviderWrapper#pauseVideo(int, int)} and
+ {@link com.android.ims.internal.ImsVideoCallProviderWrapper#resumeVideo(int, int)} methods.  As a result, multiple sources
+ can potentially pause or resume the video stream.
+
+ This class is responsible for tracking any active requests to pause the video.
+*/
+var VideoPauseTracker = {
+
+<span id='com-android-ims-internal-VideoPauseTracker-property-SOURCE_INCALL'>/**The pause or resume request originated from an InCallService. */
+</span>SOURCE_INCALL : &quot;1&quot;,
+<span id='com-android-ims-internal-VideoPauseTracker-property-SOURCE_DATA_ENABLED'>/** The pause or resume request originated from a change to the data enabled state from the
+</span> {@code ImsPhoneCallTracker#onDataEnabledChanged(boolean, int)} callback.  This happens when
+ the user reaches their data limit or enables and disables data.
+*/
+SOURCE_DATA_ENABLED : &quot;2&quot;,
+<span id='com-android-ims-internal-VideoPauseTracker-method-shouldPauseVideoFor'>/**Tracks a request to pause the video for a source (see {@link #SOURCE_DATA_ENABLED},
+</span> {@link #SOURCE_INCALL}) and determines whether a pause request should be issued to the
+ video provider.
+
+ We want to issue a pause request to the provider when we receive the first request
+ to pause via any source and we're not already paused.
+@param {Number} source The source of the pause request.
+@return {Boolean} {@code true} if a pause should be issued to the
+      {@link ImsVideoCallProvider}, {@code false} otherwise.
+*/
+shouldPauseVideoFor : function(  ) {},
+
+<span id='com-android-ims-internal-VideoPauseTracker-method-shouldResumeVideoFor'>/**Tracks a request to resume the video for a source (see {@link #SOURCE_DATA_ENABLED},
+</span> {@link #SOURCE_INCALL}) and determines whether a resume request should be issued to the
+ video provider.
+
+ We want to issue a resume request to the provider when we have issued a corresponding
+ resume for each previously issued pause.
+@param {Number} source The source of the resume request.
+@return {Boolean} {@code true} if a resume should be issued to the
+      {@link ImsVideoCallProvider}, {@code false} otherwise.
+*/
+shouldResumeVideoFor : function(  ) {},
+
+<span id='com-android-ims-internal-VideoPauseTracker-method-isPaused'>/**
+</span>@return {Boolean} {@code true} if the video should be paused, {@code false} otherwise.
+*/
+isPaused : function(  ) {},
+
+<span id='com-android-ims-internal-VideoPauseTracker-method-wasVideoPausedFromSource'>/**
+</span>@param {Number} source the source of the pause.
+@return {Boolean} {@code true} if the specified source initiated a pause request and the video is
+      currently paused, {@code false} otherwise.
+*/
+wasVideoPausedFromSource : function(  ) {},
+
+<span id='com-android-ims-internal-VideoPauseTracker-method-clearPauseRequests'>/**Clears pending pause requests for the tracker.
+</span>*/
+clearPauseRequests : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

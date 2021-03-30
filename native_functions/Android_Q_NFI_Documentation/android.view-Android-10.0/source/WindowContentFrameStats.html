@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-WindowContentFrameStats'>/**@class android.view.WindowContentFrameStats
+</span> implements android.os.Parcelable
+
+@extends android.view.FrameStats
+
+ This class contains window content frame statistics. For example, a window content
+ is rendred in frames when a view is scrolled. The frame statistics are a snapshot
+ for the time interval from {@link #getStartTimeNano}() to {@link #getEndTimeNano}().
+ &lt;p&gt;
+ The key idea is that in order to provide a smooth user experience an application
+ has to draw a frame at a specific time interval obtained by calling {@link #getRefreshPeriodNano}(). If the application does not render a frame every refresh
+ period the user will see irregular UI transitions.
+ &lt;/p&gt;
+ &lt;p&gt;
+ An application posts a frame for presentation by synchronously rendering its contents
+ in a buffer which is then posted or posting a buffer to which the application is
+ asychronously rendering the content via GL. After the frame is posted and rendered
+ (potentially asynchronosly) it is presented to the user. The time a frame was posted
+ can be obtained via {@link #getFramePostedTimeNano}(int), the time a frame content
+ was rendered and ready for dsiplay (GL case) via {@link #getFrameReadyTimeNano}(int),
+ and the time a frame was presented on the screen via {@link #getFramePresentedTimeNano}(int).
+ &lt;/p&gt;
+*/
+var WindowContentFrameStats = {
+
+<span id='android-view-WindowContentFrameStats-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-WindowContentFrameStats-method-init'>/**Initializes this isntance.
+</span>@param {Number} refreshPeriodNano The display refresh period.
+@param {Object {long[]}} framesPostedTimeNano The times in milliseconds for when the frame contents were posted.
+@param {Object {long[]}} framesPresentedTimeNano The times in milliseconds for when the frame contents were presented.
+@param {Object {long[]}} framesReadyTimeNano The times in milliseconds for when the frame contents were ready to be presented.
+@hide 
+*/
+init : function(  ) {},
+
+<span id='android-view-WindowContentFrameStats-method-getFramePostedTimeNano'>/**Get the time a frame at a given index was posted by the producer (e.g. the application).
+</span> It is either explicitly set or defaulted to the time when the render buffer was posted.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; A frame can be posted and still it contents being rendered
+ asynchronously in GL. To get the time the frame content was completely rendered and
+ ready to display call {@link #getFrameReadyTimeNano}(int).
+ &lt;/p&gt;
+@param {Number} index The frame index.
+@return {Number} The posted time in nanoseconds.
+*/
+getFramePostedTimeNano : function(  ) {},
+
+<span id='android-view-WindowContentFrameStats-method-getFrameReadyTimeNano'>/**Get the time a frame at a given index was ready for presentation.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; A frame can be posted and still it contents being rendered
+ asynchronously in GL. In such a case this is the time when the frame contents were
+ completely rendered.
+ &lt;/p&gt;
+@param {Number} index The frame index.
+@return {Number} The ready time in nanoseconds or {@link #UNDEFINED_TIME_NANO}
+         if the frame is not ready yet.
+*/
+getFrameReadyTimeNano : function(  ) {},
+
+<span id='android-view-WindowContentFrameStats-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-WindowContentFrameStats-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-WindowContentFrameStats-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

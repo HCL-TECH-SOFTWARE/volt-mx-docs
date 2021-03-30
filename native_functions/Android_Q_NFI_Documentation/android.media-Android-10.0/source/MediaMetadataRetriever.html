@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaMetadataRetriever'>/**@class android.media.MediaMetadataRetriever
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ MediaMetadataRetriever class provides a unified interface for retrieving
+ frame and meta data from an input media file.
+*/
+var MediaMetadataRetriever = {
+
+<span id='android-media-MediaMetadataRetriever-property-OPTION_PREVIOUS_SYNC'>/** This option is used with {@link #getFrameAtTime(long, int)} to retrieve
+</span> a sync (or key) frame associated with a data source that is located
+ right before or at the given time.
+
+ @see #getFrameAtTime(long, int)
+*/
+OPTION_PREVIOUS_SYNC : &quot;0&quot;,
+<span id='android-media-MediaMetadataRetriever-property-OPTION_NEXT_SYNC'>/** This option is used with {@link #getFrameAtTime(long, int)} to retrieve
+</span> a sync (or key) frame associated with a data source that is located
+ right after or at the given time.
+
+ @see #getFrameAtTime(long, int)
+*/
+OPTION_NEXT_SYNC : &quot;1&quot;,
+<span id='android-media-MediaMetadataRetriever-property-OPTION_CLOSEST_SYNC'>/** This option is used with {@link #getFrameAtTime(long, int)} to retrieve
+</span> a sync (or key) frame associated with a data source that is located
+ closest to (in time) or at the given time.
+
+ @see #getFrameAtTime(long, int)
+*/
+OPTION_CLOSEST_SYNC : &quot;2&quot;,
+<span id='android-media-MediaMetadataRetriever-property-OPTION_CLOSEST'>/** This option is used with {@link #getFrameAtTime(long, int)} to retrieve
+</span> a frame (not necessarily a key frame) associated with a data source that
+ is located closest to or at the given time.
+
+ @see #getFrameAtTime(long, int)
+*/
+OPTION_CLOSEST : &quot;3&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_CD_TRACK_NUMBER'>/** The metadata key to retrieve the numeric string describing the
+</span> order of the audio data source on its original recording.
+*/
+METADATA_KEY_CD_TRACK_NUMBER : &quot;0&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_ALBUM'>/** The metadata key to retrieve the information about the album title
+</span> of the data source.
+*/
+METADATA_KEY_ALBUM : &quot;1&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_ARTIST'>/** The metadata key to retrieve the information about the artist of
+</span> the data source.
+*/
+METADATA_KEY_ARTIST : &quot;2&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_AUTHOR'>/** The metadata key to retrieve the information about the author of
+</span> the data source.
+*/
+METADATA_KEY_AUTHOR : &quot;3&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_COMPOSER'>/** The metadata key to retrieve the information about the composer of
+</span> the data source.
+*/
+METADATA_KEY_COMPOSER : &quot;4&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_DATE'>/** The metadata key to retrieve the date when the data source was created
+</span> or modified.
+*/
+METADATA_KEY_DATE : &quot;5&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_GENRE'>/** The metadata key to retrieve the content type or genre of the data
+</span> source.
+*/
+METADATA_KEY_GENRE : &quot;6&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_TITLE'>/** The metadata key to retrieve the data source title.
+</span>*/
+METADATA_KEY_TITLE : &quot;7&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_YEAR'>/** The metadata key to retrieve the year when the data source was created
+</span> or modified.
+*/
+METADATA_KEY_YEAR : &quot;8&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_DURATION'>/** The metadata key to retrieve the playback duration of the data source.
+</span>*/
+METADATA_KEY_DURATION : &quot;9&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_NUM_TRACKS'>/** The metadata key to retrieve the number of tracks, such as audio, video,
+</span> text, in the data source, such as a mp4 or 3gpp file.
+*/
+METADATA_KEY_NUM_TRACKS : &quot;10&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_WRITER'>/** The metadata key to retrieve the information of the writer (such as
+</span> lyricist) of the data source.
+*/
+METADATA_KEY_WRITER : &quot;11&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_MIMETYPE'>/** The metadata key to retrieve the mime type of the data source. Some
+</span> example mime types include: &quot;video/mp4&quot;, &quot;audio/mp4&quot;, &quot;audio/amr-wb&quot;,
+ etc.
+*/
+METADATA_KEY_MIMETYPE : &quot;12&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_ALBUMARTIST'>/** The metadata key to retrieve the information about the performers or
+</span> artist associated with the data source.
+*/
+METADATA_KEY_ALBUMARTIST : &quot;13&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_DISC_NUMBER'>/** The metadata key to retrieve the numberic string that describes which
+</span> part of a set the audio data source comes from.
+*/
+METADATA_KEY_DISC_NUMBER : &quot;14&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_COMPILATION'>/** The metadata key to retrieve the music album compilation status.
+</span>*/
+METADATA_KEY_COMPILATION : &quot;15&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_HAS_AUDIO'>/** If this key exists the media contains audio content.
+</span>*/
+METADATA_KEY_HAS_AUDIO : &quot;16&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_HAS_VIDEO'>/** If this key exists the media contains video content.
+</span>*/
+METADATA_KEY_HAS_VIDEO : &quot;17&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_VIDEO_WIDTH'>/** If the media contains video, this key retrieves its width.
+</span>*/
+METADATA_KEY_VIDEO_WIDTH : &quot;18&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_VIDEO_HEIGHT'>/** If the media contains video, this key retrieves its height.
+</span>*/
+METADATA_KEY_VIDEO_HEIGHT : &quot;19&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_BITRATE'>/** This key retrieves the average bitrate (in bits/sec), if available.
+</span>*/
+METADATA_KEY_BITRATE : &quot;20&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_TIMED_TEXT_LANGUAGES'>/** This key retrieves the language code of text tracks, if available.
+</span> If multiple text tracks present, the return value will look like:
+ &quot;eng:chi&quot;
+ @hide
+*/
+METADATA_KEY_TIMED_TEXT_LANGUAGES : &quot;21&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_IS_DRM'>/** If this key exists the media is drm-protected.
+</span> @hide
+*/
+METADATA_KEY_IS_DRM : &quot;22&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_LOCATION'>/** This key retrieves the location information, if available.
+</span> The location should be specified according to ISO-6709 standard, under
+ a mp4/3gp box &quot;@xyz&quot;. Location with longitude of -90 degrees and latitude
+ of 180 degrees will be retrieved as &quot;+180.0000-90.0000/&quot;, for instance.
+*/
+METADATA_KEY_LOCATION : &quot;23&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_VIDEO_ROTATION'>/** This key retrieves the video rotation angle in degrees, if available.
+</span> The video rotation angle may be 0, 90, 180, or 270 degrees.
+*/
+METADATA_KEY_VIDEO_ROTATION : &quot;24&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_CAPTURE_FRAMERATE'>/** This key retrieves the original capture framerate, if it's
+</span> available. The capture framerate will be a floating point
+ number.
+*/
+METADATA_KEY_CAPTURE_FRAMERATE : &quot;25&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_HAS_IMAGE'>/** If this key exists the media contains still image content.
+</span>*/
+METADATA_KEY_HAS_IMAGE : &quot;26&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_IMAGE_COUNT'>/** If the media contains still images, this key retrieves the number
+</span> of still images.
+*/
+METADATA_KEY_IMAGE_COUNT : &quot;27&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_IMAGE_PRIMARY'>/** If the media contains still images, this key retrieves the image
+</span> index of the primary image.
+*/
+METADATA_KEY_IMAGE_PRIMARY : &quot;28&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_IMAGE_WIDTH'>/** If the media contains still images, this key retrieves the width
+</span> of the primary image.
+*/
+METADATA_KEY_IMAGE_WIDTH : &quot;29&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_IMAGE_HEIGHT'>/** If the media contains still images, this key retrieves the height
+</span> of the primary image.
+*/
+METADATA_KEY_IMAGE_HEIGHT : &quot;30&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_IMAGE_ROTATION'>/** If the media contains still images, this key retrieves the rotation
+</span> angle (in degrees clockwise) of the primary image. The image rotation
+ angle must be one of 0, 90, 180, or 270 degrees.
+*/
+METADATA_KEY_IMAGE_ROTATION : &quot;31&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_VIDEO_FRAME_COUNT'>/** If the media contains video and this key exists, it retrieves the
+</span> total number of frames in the video sequence.
+*/
+METADATA_KEY_VIDEO_FRAME_COUNT : &quot;32&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_EXIF_OFFSET'>/** If the media contains EXIF data, this key retrieves the offset value
+</span> of the data.
+*/
+METADATA_KEY_EXIF_OFFSET : &quot;33&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_EXIF_LENGTH'>/** If the media contains EXIF data, this key retrieves the length of the
+</span> data.
+*/
+METADATA_KEY_EXIF_LENGTH : &quot;34&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_COLOR_STANDARD'>/** This key retrieves the color standard, if available.
+</span>
+ @see MediaFormat#COLOR_STANDARD_BT709
+ @see MediaFormat#COLOR_STANDARD_BT601_PAL
+ @see MediaFormat#COLOR_STANDARD_BT601_NTSC
+ @see MediaFormat#COLOR_STANDARD_BT2020
+
+ @hide
+*/
+METADATA_KEY_COLOR_STANDARD : &quot;35&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_COLOR_TRANSFER'>/** This key retrieves the color transfer, if available.
+</span>
+ @see MediaFormat#COLOR_TRANSFER_LINEAR
+ @see MediaFormat#COLOR_TRANSFER_SDR_VIDEO
+ @see MediaFormat#COLOR_TRANSFER_ST2084
+ @see MediaFormat#COLOR_TRANSFER_HLG
+
+ @hide
+*/
+METADATA_KEY_COLOR_TRANSFER : &quot;36&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_COLOR_RANGE'>/** This key retrieves the color range, if available.
+</span>
+ @see MediaFormat#COLOR_RANGE_LIMITED
+ @see MediaFormat#COLOR_RANGE_FULL
+
+ @hide
+*/
+METADATA_KEY_COLOR_RANGE : &quot;37&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_SAMPLERATE'>/** This key retrieves the sample rate, if available.
+</span> @hide
+*/
+METADATA_KEY_SAMPLERATE : &quot;38&quot;,
+<span id='android-media-MediaMetadataRetriever-property-METADATA_KEY_BITS_PER_SAMPLE'>/** This key retrieves the bits per sample, if available.
+</span> @hide
+*/
+METADATA_KEY_BITS_PER_SAMPLE : &quot;39&quot;,
+<span id='android-media-MediaMetadataRetriever-method-setDataSource'>/**Sets the data source (file pathname) to use. Call this
+</span> method before the rest of the methods in this class. This method may be
+ time-consuming.
+@param {String} path The path of the input media file.
+@throws IllegalArgumentException If the path is invalid.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-setDataSource'>/**Sets the data source (URI) to use. Call this
+</span> method before the rest of the methods in this class. This method may be
+ time-consuming.
+@param {String} uri The URI of the input media.
+@param {Object {java.util.Map}} headers the headers to be sent together with the request for the data
+@throws IllegalArgumentException If the URI is invalid.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-setDataSource'>/**Sets the data source (FileDescriptor) to use.  It is the caller's
+</span> responsibility to close the file descriptor. It is safe to do so as soon
+ as this call returns. Call this method before the rest of the methods in
+ this class. This method may be time-consuming.
+@param {Object {FileDescriptor}} fd the FileDescriptor for the file you want to play
+@param {Number} offset the offset into the file where the data to be played starts,
+ in bytes. It must be non-negative
+@param {Number} length the length in bytes of the data to be played. It must be
+ non-negative.
+@throws IllegalArgumentException if the arguments are invalid
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-setDataSource'>/**Sets the data source (FileDescriptor) to use. It is the caller's
+</span> responsibility to close the file descriptor. It is safe to do so as soon
+ as this call returns. Call this method before the rest of the methods in
+ this class. This method may be time-consuming.
+@param {Object {FileDescriptor}} fd the FileDescriptor for the file you want to play
+@throws IllegalArgumentException if the FileDescriptor is invalid
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-setDataSource'>/**Sets the data source as a content Uri. Call this method before
+</span> the rest of the methods in this class. This method may be time-consuming.
+@param {Object {Context}} context the Context to use when resolving the Uri
+@param {Object {Uri}} uri the Content URI of the data you want to play
+@throws IllegalArgumentException if the Uri is invalid
+@throws SecurityException if the Uri cannot be used due to lack of
+ permission.
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-setDataSource'>/**Sets the data source (MediaDataSource) to use.
+</span>@param {Object {MediaDataSource}} dataSource the MediaDataSource for the media you want to play
+*/
+setDataSource : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-extractMetadata'>/**Call this method after setDataSource(). This method retrieves the
+</span> meta data value associated with the keyCode.
+
+ The keyCode currently supported is listed below as METADATA_XXX
+ constants. With any other value, it returns a null pointer.
+@param {Number} keyCode One of the constants listed below at the end of the class.
+@return {String} The meta data value associate with the given keyCode on success;
+ null on failure.
+*/
+extractMetadata : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getFrameAtTime'>/**Call this method after setDataSource(). This method finds a
+</span> representative frame close to the given time position by considering
+ the given option if possible, and returns it as a bitmap.
+
+ &lt;p&gt;If you don't need a full-resolution
+ frame (for example, because you need a thumbnail image), use
+ {@link #getScaledFrameAtTime getScaledFrameAtTime()} instead of this
+ method.&lt;/p&gt;
+@param {Number} timeUs The time position where the frame will be retrieved.
+ When retrieving the frame at the given time position, there is no
+ guarantee that the data source has a frame located at the position.
+ When this happens, a frame nearby will be returned. If timeUs is
+ negative, time position and option will ignored, and any frame
+ that the implementation considers as representative may be returned.
+@param {Number} option a hint on how the frame is found. Use
+ {@link #OPTION_PREVIOUS_SYNC} if one wants to retrieve a sync frame
+ that has a timestamp earlier than or the same as timeUs. Use
+ {@link #OPTION_NEXT_SYNC} if one wants to retrieve a sync frame
+ that has a timestamp later than or the same as timeUs. Use
+ {@link #OPTION_CLOSEST_SYNC} if one wants to retrieve a sync frame
+ that has a timestamp closest to or the same as timeUs. Use
+ {@link #OPTION_CLOSEST} if one wants to retrieve a frame that may
+ or may not be a sync frame but is closest to or the same as timeUs.
+ {@link #OPTION_CLOSEST} often has larger performance overhead compared
+ to the other options if there is no sync frame located at timeUs.
+@return {Object {android.graphics.Bitmap}} A Bitmap containing a representative video frame, which
+         can be null, if such a frame cannot be retrieved.
+*/
+getFrameAtTime : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getScaledFrameAtTime'>/**Retrieve a video frame near a given timestamp scaled to a desired size.
+</span> Call this method after setDataSource(). This method finds a representative
+ frame close to the given time position by considering the given option
+ if possible, and returns it as a bitmap with same aspect ratio as the source
+ while scaling it so that it fits into the desired size of dst_width by dst_height.
+ This is useful for generating a thumbnail for an input data source or just to
+ obtain a scaled frame at the given time position.
+@param {Number} timeUs The time position in microseconds where the frame will be retrieved.
+ When retrieving the frame at the given time position, there is no
+ guarantee that the data source has a frame located at the position.
+ When this happens, a frame nearby will be returned. If timeUs is
+ negative, time position and option will ignored, and any frame
+ that the implementation considers as representative may be returned.
+@param {Number} option a hint on how the frame is found. Use
+ {@link #OPTION_PREVIOUS_SYNC} if one wants to retrieve a sync frame
+ that has a timestamp earlier than or the same as timeUs. Use
+ {@link #OPTION_NEXT_SYNC} if one wants to retrieve a sync frame
+ that has a timestamp later than or the same as timeUs. Use
+ {@link #OPTION_CLOSEST_SYNC} if one wants to retrieve a sync frame
+ that has a timestamp closest to or the same as timeUs. Use
+ {@link #OPTION_CLOSEST} if one wants to retrieve a frame that may
+ or may not be a sync frame but is closest to or the same as timeUs.
+ {@link #OPTION_CLOSEST} often has larger performance overhead compared
+ to the other options if there is no sync frame located at timeUs.
+@param {Number} dstWidth expected output bitmap width
+@param {Number} dstHeight expected output bitmap height
+@return {Object {android.graphics.Bitmap}} A Bitmap of size not larger than dstWidth by dstHeight containing a
+         scaled video frame, which can be null, if such a frame cannot be retrieved.
+@throws IllegalArgumentException if passed in invalid option or width by height
+         is less than or equal to 0.
+*/
+getScaledFrameAtTime : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getFrameAtTime'>/**Call this method after setDataSource(). This method finds a
+</span> representative frame close to the given time position if possible,
+ and returns it as a bitmap. Call this method if one does not care
+ how the frame is found as long as it is close to the given time;
+ otherwise, please call {@link #getFrameAtTime(long, int)}.
+
+ &lt;p&gt;If you don't need a full-resolution
+ frame (for example, because you need a thumbnail image), use
+ {@link #getScaledFrameAtTime getScaledFrameAtTime()} instead of this
+ method.&lt;/p&gt;
+@param {Number} timeUs The time position where the frame will be retrieved.
+ When retrieving the frame at the given time position, there is no
+ guarentee that the data source has a frame located at the position.
+ When this happens, a frame nearby will be returned. If timeUs is
+ negative, time position and option will ignored, and any frame
+ that the implementation considers as representative may be returned.
+@return {Object {android.graphics.Bitmap}} A Bitmap of size dst_widthxdst_height containing a representative
+         video frame, which can be null, if such a frame cannot be retrieved.
+@see #getFrameAtTime(long, int)
+*/
+getFrameAtTime : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getFrameAtTime'>/**Call this method after setDataSource(). This method finds a
+</span> representative frame at any time position if possible,
+ and returns it as a bitmap. Call this method if one does not
+ care about where the frame is located; otherwise, please call
+ {@link #getFrameAtTime}(long) or {@link #getFrameAtTime(long, int)}
+
+ &lt;p&gt;If you don't need a full-resolution
+ frame (for example, because you need a thumbnail image), use
+ {@link #getScaledFrameAtTime getScaledFrameAtTime()} instead of this
+ method.&lt;/p&gt;
+@return {Object {android.graphics.Bitmap}} A Bitmap containing a representative video frame, which
+         can be null, if such a frame cannot be retrieved.
+@see #getFrameAtTime(long)
+@see #getFrameAtTime(long, int)
+*/
+getFrameAtTime : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getFrameAtIndex'>/**This method retrieves a video frame by its index. It should only be called
+</span> after {@link #setDataSource}.
+
+ After the bitmap is returned, you can query the actual parameters that were
+ used to create the bitmap from the {@code BitmapParams} argument, for instance
+ to query the bitmap config used for the bitmap with {@link android.media.MediaMetadataRetriever.BitmapParams#getActualConfig}.
+@param {Number} frameIndex 0-based index of the video frame. The frame index must be that of
+        a valid frame. The total number of frames available for retrieval can be queried
+        via the {@link #METADATA_KEY_VIDEO_FRAME_COUNT} key.
+@param {Object {MediaMetadataRetriever.BitmapParams}} params BitmapParams that controls the returned bitmap config (such as pixel formats).
+@throws IllegalStateException if the container doesn't contain video or image sequences.
+@throws IllegalArgumentException if the requested frame index does not exist.
+@return {Object {android.graphics.Bitmap}} A Bitmap containing the requested video frame, or null if the retrieval fails.
+@see #getFrameAtIndex(int)
+@see #getFramesAtIndex(int, int, BitmapParams)
+@see #getFramesAtIndex(int, int)
+*/
+getFrameAtIndex : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getFrameAtIndex'>/**This method is similar to {@link #getFrameAtIndex(int, android.media.MediaMetadataRetriever.BitmapParams)} except that
+</span> the default for {@link android.media.MediaMetadataRetriever.BitmapParams} will be used.
+@param {Number} frameIndex 0-based index of the video frame. The frame index must be that of
+        a valid frame. The total number of frames available for retrieval can be queried
+        via the {@link #METADATA_KEY_VIDEO_FRAME_COUNT} key.
+@throws IllegalStateException if the container doesn't contain video or image sequences.
+@throws IllegalArgumentException if the requested frame index does not exist.
+@return {Object {android.graphics.Bitmap}} A Bitmap containing the requested video frame, or null if the retrieval fails.
+@see #getFrameAtIndex(int, BitmapParams)
+@see #getFramesAtIndex(int, int, BitmapParams)
+@see #getFramesAtIndex(int, int)
+*/
+getFrameAtIndex : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getFramesAtIndex'>/**This method retrieves a consecutive set of video frames starting at the
+</span> specified index. It should only be called after {@link #setDataSource}.
+
+ If the caller intends to retrieve more than one consecutive video frames,
+ this method is preferred over {@link #getFrameAtIndex(int, android.media.MediaMetadataRetriever.BitmapParams)} for efficiency.
+
+ After the bitmaps are returned, you can query the actual parameters that were
+ used to create the bitmaps from the {@code BitmapParams} argument, for instance
+ to query the bitmap config used for the bitmaps with {@link android.media.MediaMetadataRetriever.BitmapParams#getActualConfig}.
+@param {Number} frameIndex 0-based index of the first video frame to retrieve. The frame index
+        must be that of a valid frame. The total number of frames available for retrieval
+        can be queried via the {@link #METADATA_KEY_VIDEO_FRAME_COUNT} key.
+@param {Number} numFrames number of consecutive video frames to retrieve. Must be a positive
+        value. The stream must contain at least numFrames frames starting at frameIndex.
+@param {Object {MediaMetadataRetriever.BitmapParams}} params BitmapParams that controls the returned bitmap config (such as pixel formats).
+@throws IllegalStateException if the container doesn't contain video or image sequences.
+@throws IllegalArgumentException if the frameIndex or numFrames is invalid, or the
+         stream doesn't contain at least numFrames starting at frameIndex.
+@return {Object {java.util.List}} An list of Bitmaps containing the requested video frames. The returned
+         array could contain less frames than requested if the retrieval fails.
+@see #getFrameAtIndex(int, BitmapParams)
+@see #getFrameAtIndex(int)
+@see #getFramesAtIndex(int, int)
+*/
+getFramesAtIndex : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getFramesAtIndex'>/**This method is similar to {@link #getFramesAtIndex(int, int, android.media.MediaMetadataRetriever.BitmapParams)} except that
+</span> the default for {@link android.media.MediaMetadataRetriever.BitmapParams} will be used.
+@param {Number} frameIndex 0-based index of the first video frame to retrieve. The frame index
+        must be that of a valid frame. The total number of frames available for retrieval
+        can be queried via the {@link #METADATA_KEY_VIDEO_FRAME_COUNT} key.
+@param {Number} numFrames number of consecutive video frames to retrieve. Must be a positive
+        value. The stream must contain at least numFrames frames starting at frameIndex.
+@throws IllegalStateException if the container doesn't contain video or image sequences.
+@throws IllegalArgumentException if the frameIndex or numFrames is invalid, or the
+         stream doesn't contain at least numFrames starting at frameIndex.
+@return {Object {java.util.List}} An list of Bitmaps containing the requested video frames. The returned
+         array could contain less frames than requested if the retrieval fails.
+@see #getFrameAtIndex(int, BitmapParams)
+@see #getFrameAtIndex(int)
+@see #getFramesAtIndex(int, int, BitmapParams)
+*/
+getFramesAtIndex : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getImageAtIndex'>/**This method retrieves a still image by its index. It should only be called
+</span> after {@link #setDataSource}.
+
+ After the bitmap is returned, you can query the actual parameters that were
+ used to create the bitmap from the {@code BitmapParams} argument, for instance
+ to query the bitmap config used for the bitmap with {@link android.media.MediaMetadataRetriever.BitmapParams#getActualConfig}.
+@param {Number} imageIndex 0-based index of the image.
+@param {Object {MediaMetadataRetriever.BitmapParams}} params BitmapParams that controls the returned bitmap config (such as pixel formats).
+@throws IllegalStateException if the container doesn't contain still images.
+@throws IllegalArgumentException if the requested image does not exist.
+@return {Object {android.graphics.Bitmap}} the requested still image, or null if the image cannot be retrieved.
+@see #getImageAtIndex(int)
+@see #getPrimaryImage(BitmapParams)
+@see #getPrimaryImage()
+*/
+getImageAtIndex : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getThumbnailImageAtIndex'>/**
+</span>@param {Number} imageIndex 0-based index of the image, negative value indicates primary image.
+@param {Object {MediaMetadataRetriever.BitmapParams}} params BitmapParams that controls the returned bitmap config (such as pixel formats).
+@param {Number} targetSize intended size of one edge (wdith or height) of the thumbnail,
+                   this is a heuristic for the framework to decide whether the embedded
+                   thumbnail should be used.
+@param {Number} maxPixels maximum pixels of thumbnail, this is a heuristic for the frameowrk to
+                  decide whehther the embedded thumnbail (or a downscaled version of it)
+                  should be used.
+@param maxPixels maximum pixels of thumbnail, this is a heuristic for the frameowrk to
+                  decide whehther the embedded thumnbail (or a downscaled version of it)
+                  should be used.
+@return {Object {android.graphics.Bitmap}} the retrieved thumbnail, or null if no suitable thumbnail is available.
+*/
+getThumbnailImageAtIndex : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getImageAtIndex'>/**This method is similar to {@link #getImageAtIndex(int, android.media.MediaMetadataRetriever.BitmapParams)} except that
+</span> the default for {@link android.media.MediaMetadataRetriever.BitmapParams} will be used.
+@param {Number} imageIndex 0-based index of the image.
+@throws IllegalStateException if the container doesn't contain still images.
+@throws IllegalArgumentException if the requested image does not exist.
+@return {Object {android.graphics.Bitmap}} the requested still image, or null if the image cannot be retrieved.
+@see #getImageAtIndex(int, BitmapParams)
+@see #getPrimaryImage(BitmapParams)
+@see #getPrimaryImage()
+*/
+getImageAtIndex : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getPrimaryImage'>/**This method retrieves the primary image of the media content. It should only
+</span> be called after {@link #setDataSource}.
+
+ After the bitmap is returned, you can query the actual parameters that were
+ used to create the bitmap from the {@code BitmapParams} argument, for instance
+ to query the bitmap config used for the bitmap with {@link android.media.MediaMetadataRetriever.BitmapParams#getActualConfig}.
+@param {Object {MediaMetadataRetriever.BitmapParams}} params BitmapParams that controls the returned bitmap config (such as pixel formats).
+@return {Object {android.graphics.Bitmap}} the primary image, or null if it cannot be retrieved.
+@throws IllegalStateException if the container doesn't contain still images.
+@see #getImageAtIndex(int, BitmapParams)
+@see #getImageAtIndex(int)
+@see #getPrimaryImage()
+*/
+getPrimaryImage : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getPrimaryImage'>/**This method is similar to {@link #getPrimaryImage}(BitmapParams) except that
+</span> the default for {@link android.media.MediaMetadataRetriever.BitmapParams} will be used.
+@return {Object {android.graphics.Bitmap}} the primary image, or null if it cannot be retrieved.
+@throws IllegalStateException if the container doesn't contain still images.
+@see #getImageAtIndex(int, BitmapParams)
+@see #getImageAtIndex(int)
+@see #getPrimaryImage(BitmapParams)
+*/
+getPrimaryImage : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-getEmbeddedPicture'>/**Call this method after setDataSource(). This method finds the optional
+</span> graphic or album/cover art associated associated with the data source. If
+ there are more than one pictures, (any) one of them is returned.
+@return {Number} null if no such graphic is found.
+*/
+getEmbeddedPicture : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-close'>/**
+</span>*/
+close : function(  ) {},
+
+<span id='android-media-MediaMetadataRetriever-method-release'>/**Call it when one is done with the object. This method releases the memory
+</span> allocated internally.
+*/
+release : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

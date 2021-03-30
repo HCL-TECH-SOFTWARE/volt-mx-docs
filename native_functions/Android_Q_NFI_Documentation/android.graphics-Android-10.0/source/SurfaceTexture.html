@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-graphics-SurfaceTexture'>/**@class android.graphics.SurfaceTexture
+</span>@extends java.lang.Object
+
+ Captures frames from an image stream as an OpenGL ES texture.
+
+ &lt;p&gt;The image stream may come from either camera preview or video decode. A
+ {@link android.view.Surface} created from a SurfaceTexture can be used as an output
+ destination for the {@link android.hardware.camera2}, {@link android.media.MediaCodec},
+ {@link android.media.MediaPlayer}, and {@link android.renderscript.Allocation} APIs.
+ When {@link #updateTexImage} is called, the contents of the texture object specified
+ when the SurfaceTexture was created are updated to contain the most recent image from the image
+ stream.  This may cause some frames of the stream to be skipped.
+
+ &lt;p&gt;A SurfaceTexture may also be used in place of a SurfaceHolder when specifying the output
+ destination of the older {@link android.hardware.Camera} API. Doing so will cause all the
+ frames from the image stream to be sent to the SurfaceTexture object rather than to the device's
+ display.
+
+ &lt;p&gt;When sampling from the texture one should first transform the texture coordinates using the
+ matrix queried via {@link #getTransformMatrix(float[])}.  The transform matrix may change each
+ time {@link #updateTexImage} is called, so it should be re-queried each time the texture image
+ is updated.
+ This matrix transforms traditional 2D OpenGL ES texture coordinate column vectors of the form (s,
+ t, 0, 1) where s and t are on the inclusive interval [0, 1] to the proper sampling location in
+ the streamed texture.  This transform compensates for any properties of the image stream source
+ that cause it to appear different from a traditional OpenGL ES texture.  For example, sampling
+ from the bottom left corner of the image can be accomplished by transforming the column vector
+ (0, 0, 0, 1) using the queried matrix, while sampling from the top right corner of the image can
+ be done by transforming (1, 1, 0, 1).
+
+ &lt;p&gt;The texture object uses the GL_TEXTURE_EXTERNAL_OES texture target, which is defined by the
+ &lt;a href=&quot;http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image_external.txt&quot;&gt;
+ GL_OES_EGL_image_external&lt;/a&gt; OpenGL ES extension.  This limits how the texture may be used.
+ Each time the texture is bound it must be bound to the GL_TEXTURE_EXTERNAL_OES target rather than
+ the GL_TEXTURE_2D target.  Additionally, any OpenGL ES 2.0 shader that samples from the texture
+ must declare its use of this extension using, for example, an &quot;#extension
+ GL_OES_EGL_image_external : require&quot; directive.  Such shaders must also access the texture using
+ the samplerExternalOES GLSL sampler type.
+
+ &lt;p&gt;SurfaceTexture objects may be created on any thread.  {@link #updateTexImage} may only be
+ called on the thread with the OpenGL ES context that contains the texture object.  The
+ frame-available callback is called on an arbitrary thread, so unless special care is taken {@link #updateTexImage} should not be called directly from the callback.
+*/
+var SurfaceTexture = {
+
+<span id='android-graphics-SurfaceTexture-method-setOnFrameAvailableListener'>/**Register a callback to be invoked when a new image frame becomes available to the
+</span> SurfaceTexture.
+ &lt;p&gt;
+ The callback may be called on an arbitrary thread, so it is not
+ safe to call {@link #updateTexImage} without first binding the OpenGL ES context to the
+ thread invoking the callback.
+ &lt;/p&gt;
+@param {Object {SurfaceTexture.OnFrameAvailableListener}} listener The listener to use, or null to remove the listener.
+*/
+setOnFrameAvailableListener : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-setOnFrameAvailableListener'>/**Register a callback to be invoked when a new image frame becomes available to the
+</span> SurfaceTexture.
+ &lt;p&gt;
+ If a handler is specified, the callback will be invoked on that handler's thread.
+ If no handler is specified, then the callback may be called on an arbitrary thread,
+ so it is not safe to call {@link #updateTexImage} without first binding the OpenGL ES
+ context to the thread invoking the callback.
+ &lt;/p&gt;
+@param {Object {SurfaceTexture.OnFrameAvailableListener}} listener The listener to use, or null to remove the listener.
+@param {Object {Handler}} handler The handler on which the listener should be invoked, or null
+ to use an arbitrary thread.
+*/
+setOnFrameAvailableListener : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-setDefaultBufferSize'>/**Set the default size of the image buffers.  The image producer may override the buffer size,
+</span> in which case the producer-set buffer size will be used, not the default size set by this
+ method.  Both video and camera based image producers do override the size.  This method may
+ be used to set the image size when producing images with {@link android.graphics.Canvas} (via
+ {@link android.view.Surface#lockCanvas}), or OpenGL ES (via an EGLSurface).
+
+ The new default buffer size will take effect the next time the image producer requests a
+ buffer to fill.  For {@link android.graphics.Canvas} this will be the next time {@link android.view.Surface#lockCanvas} is called.  For OpenGL ES, the EGLSurface should be
+ destroyed (via eglDestroySurface), made not-current (via eglMakeCurrent), and then recreated
+ (via eglCreateWindowSurface) to ensure that the new default size has taken effect.
+
+ The width and height parameters must be no greater than the minimum of
+ GL_MAX_VIEWPORT_DIMS and GL_MAX_TEXTURE_SIZE (see
+ {@link javax.microedition.khronos.opengles.GL10#glGetIntegerv glGetIntegerv}).
+ An error due to invalid dimensions might not be reported until
+ updateTexImage() is called.
+*/
+setDefaultBufferSize : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-updateTexImage'>/**Update the texture image to the most recent frame from the image stream.  This may only be
+</span> called while the OpenGL ES context that owns the texture is current on the calling thread.
+ It will implicitly bind its texture to the GL_TEXTURE_EXTERNAL_OES texture target.
+*/
+updateTexImage : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-releaseTexImage'>/**Releases the the texture content. This is needed in single buffered mode to allow the image
+</span> content producer to take ownership of the image buffer.
+ For more information see {@link #SurfaceTexture(int, boolean)}.
+*/
+releaseTexImage : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-detachFromGLContext'>/**Detach the SurfaceTexture from the OpenGL ES context that owns the OpenGL ES texture object.
+</span> This call must be made with the OpenGL ES context current on the calling thread.  The OpenGL
+ ES texture object will be deleted as a result of this call.  After calling this method all
+ calls to {@link #updateTexImage} will throw an {@link java.lang.IllegalStateException} until
+ a successful call to {@link #attachToGLContext} is made.
+
+ This can be used to access the SurfaceTexture image contents from multiple OpenGL ES
+ contexts.  Note, however, that the image contents are only accessible from one OpenGL ES
+ context at a time.
+*/
+detachFromGLContext : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-attachToGLContext'>/**Attach the SurfaceTexture to the OpenGL ES context that is current on the calling thread.  A
+</span> new OpenGL ES texture object is created and populated with the SurfaceTexture image frame
+ that was current at the time of the last call to {@link #detachFromGLContext}.  This new
+ texture is bound to the GL_TEXTURE_EXTERNAL_OES texture target.
+
+ This can be used to access the SurfaceTexture image contents from multiple OpenGL ES
+ contexts.  Note, however, that the image contents are only accessible from one OpenGL ES
+ context at a time.
+@param {Number} texName The name of the OpenGL ES texture that will be created.  This texture name
+ must be unusued in the OpenGL ES context that is current on the calling thread.
+*/
+attachToGLContext : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-getTransformMatrix'>/**Retrieve the 4x4 texture coordinate transform matrix associated with the texture image set by
+</span> the most recent call to updateTexImage.
+
+ This transform matrix maps 2D homogeneous texture coordinates of the form (s, t, 0, 1) with s
+ and t in the inclusive range [0, 1] to the texture coordinate that should be used to sample
+ that location from the texture.  Sampling the texture outside of the range of this transform
+ is undefined.
+
+ The matrix is stored in column-major order so that it may be passed directly to OpenGL ES via
+ the glLoadMatrixf or glUniformMatrix4fv functions.
+@param {Object {float[]}} mtx the array into which the 4x4 matrix will be stored.  The array must have exactly
+     16 elements.
+*/
+getTransformMatrix : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-getTimestamp'>/**Retrieve the timestamp associated with the texture image set by the most recent call to
+</span> updateTexImage.
+
+ &lt;p&gt;This timestamp is in nanoseconds, and is normally monotonically increasing. The timestamp
+ should be unaffected by time-of-day adjustments. The specific meaning and zero point of the
+ timestamp depends on the source providing images to the SurfaceTexture. Unless otherwise
+ specified by the image source, timestamps cannot generally be compared across SurfaceTexture
+ instances, or across multiple program invocations. It is mostly useful for determining time
+ offsets between subsequent frames.&lt;/p&gt;
+
+ &lt;p&gt;For camera sources, timestamps should be strictly monotonic. Timestamps from MediaPlayer
+ sources may be reset when the playback position is set. For EGL and Vulkan producers, the
+ timestamp is the desired present time set with the EGL_ANDROID_presentation_time or
+ VK_GOOGLE_display_timing extensions.&lt;/p&gt;
+*/
+getTimestamp : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-release'>/**release() frees all the buffers and puts the SurfaceTexture into the
+</span> 'abandoned' state. Once put in this state the SurfaceTexture can never
+ leave it. When in the 'abandoned' state, all methods of the
+ IGraphicBufferProducer interface will fail with the NO_INIT error.
+
+ Note that while calling this method causes all the buffers to be freed
+ from the perspective of the the SurfaceTexture, if there are additional
+ references on the buffers (e.g. if a buffer is referenced by a client or
+ by OpenGL ES as a texture) then those buffer will remain allocated.
+
+ Always call this method when you are done with SurfaceTexture. Failing
+ to do so may delay resource deallocation for a significant amount of
+ time.
+@see #isReleased()
+*/
+release : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-isReleased'>/**Returns true if the SurfaceTexture was released.
+</span>@see #release()
+*/
+isReleased : function(  ) {},
+
+<span id='android-graphics-SurfaceTexture-method-isSingleBuffered'>/**Returns true if the SurfaceTexture is single-buffered
+</span>@hide 
+*/
+isSingleBuffered : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-LauncherApps'>/**@class android.content.pm.LauncherApps
+</span>@extends java.lang.Object
+
+ Class for retrieving a list of launchable activities for the current user and any associated
+ managed profiles that are visible to the current user, which can be retrieved with
+ {@link #getProfiles}. This is mainly for use by launchers.
+
+ Apps can be queried for each user profile.
+ Since the PackageManager will not deliver package broadcasts for other profiles, you can register
+ for package changes here.
+ &lt;p&gt;
+ To watch for managed profiles being added or removed, register for the following broadcasts:
+ {@link Intent#ACTION_MANAGED_PROFILE_ADDED} and {@link Intent#ACTION_MANAGED_PROFILE_REMOVED}.
+ &lt;p&gt;
+ Note as of Android O, apps on a managed profile are no longer allowed to access apps on the
+ main profile.  Apps can only access profiles returned by {@link #getProfiles}().
+*/
+var LauncherApps = {
+
+<span id='android-content-pm-LauncherApps-property-ACTION_CONFIRM_PIN_SHORTCUT'>/** Activity Action: For the default launcher to show the confirmation dialog to create
+</span> a pinned shortcut.
+
+ &lt;p&gt;See the {@link android.content.pm.ShortcutManager} javadoc for details.
+
+ &lt;p&gt;
+ Use {@link #getPinItemRequest}(Intent) to get a {@link android.content.pm.LauncherApps.PinItemRequest} object,
+ and call {@link android.content.pm.LauncherApps.PinItemRequest#accept(Bundle)}
+ if the user accepts.  If the user doesn't accept, no further action is required.
+
+ @see #EXTRA_PIN_ITEM_REQUEST
+*/
+ACTION_CONFIRM_PIN_SHORTCUT : &quot;android.content.pm.action.CONFIRM_PIN_SHORTCUT&quot;,
+<span id='android-content-pm-LauncherApps-property-ACTION_CONFIRM_PIN_APPWIDGET'>/** Activity Action: For the default launcher to show the confirmation dialog to create
+</span> a pinned app widget.
+
+ &lt;p&gt;See the {@link android.appwidget.AppWidgetManager#requestPinAppWidget} javadoc for
+ details.
+
+ &lt;p&gt;
+ Use {@link #getPinItemRequest}(Intent) to get a {@link android.content.pm.LauncherApps.PinItemRequest} object,
+ and call {@link android.content.pm.LauncherApps.PinItemRequest#accept(Bundle)}
+ if the user accepts.  If the user doesn't accept, no further action is required.
+
+ @see #EXTRA_PIN_ITEM_REQUEST
+*/
+ACTION_CONFIRM_PIN_APPWIDGET : &quot;android.content.pm.action.CONFIRM_PIN_APPWIDGET&quot;,
+<span id='android-content-pm-LauncherApps-property-EXTRA_PIN_ITEM_REQUEST'>/** An extra for {@link #ACTION_CONFIRM_PIN_SHORTCUT} &amp;amp; {@link #ACTION_CONFIRM_PIN_APPWIDGET}
+</span> containing a {@link android.content.pm.LauncherApps.PinItemRequest} of appropriate type asked to pin.
+
+ &lt;p&gt;A helper function {@link #getPinItemRequest}(Intent) can be used
+ instead of using this constant directly.
+
+ @see #ACTION_CONFIRM_PIN_SHORTCUT
+ @see #ACTION_CONFIRM_PIN_APPWIDGET
+*/
+EXTRA_PIN_ITEM_REQUEST : &quot;android.content.pm.extra.PIN_ITEM_REQUEST&quot;,
+<span id='android-content-pm-LauncherApps-method-getProfiles'>/**Return a list of profiles that the caller can access via the {@link android.content.pm.LauncherApps} APIs.
+</span>
+ &lt;p&gt;If the caller is running on a managed profile, it'll return only the current profile.
+ Otherwise it'll return the same list as {@link UserManager#getUserProfiles()} would.
+*/
+getProfiles : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getActivityList'>/**Retrieves a list of launchable activities that match {@link Intent#ACTION_MAIN} and
+</span> {@link Intent#CATEGORY_LAUNCHER}, for a specified user. Result may include
+ synthesized activities like app details Activity injected by system.
+@param {String} packageName The specific package to query. If null, it checks all installed packages
+            in the profile.
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@return {Object {java.util.List}} List of launchable activities. Can be an empty list but will not be null.
+*/
+getActivityList : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-resolveActivity'>/**Returns the activity info for a given intent and user handle, if it resolves. Otherwise it
+</span> returns null.
+@param {Object {Intent}} intent The intent to find a match for.
+@param {Object {UserHandle}} user The profile to look in for a match.
+@return {Object {android.content.pm.LauncherActivityInfo}} An activity info object if there is a match.
+*/
+resolveActivity : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-startMainActivity'>/**Starts a Main activity in the specified profile.
+</span>@param {Object {ComponentName}} component The ComponentName of the activity to launch
+@param {Object {UserHandle}} user The UserHandle of the profile
+@param {Object {Rect}} sourceBounds The Rect containing the source bounds of the clicked icon
+@param {Object {Bundle}} opts Options to pass to startActivity
+*/
+startMainActivity : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-startPackageInstallerSessionDetailsActivity'>/**Starts an activity to show the details of the specified session.
+</span>@param {Object {PackageInstaller.SessionInfo}} sessionInfo The SessionInfo of the session
+@param {Object {Rect}} sourceBounds The Rect containing the source bounds of the clicked icon
+@param {Object {Bundle}} opts Options to pass to startActivity
+*/
+startPackageInstallerSessionDetailsActivity : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-startAppDetailsActivity'>/**Starts the settings activity to show the application details for a
+</span> package in the specified profile.
+@param {Object {ComponentName}} component The ComponentName of the package to launch settings for.
+@param {Object {UserHandle}} user The UserHandle of the profile
+@param {Object {Rect}} sourceBounds The Rect containing the source bounds of the clicked icon
+@param {Object {Bundle}} opts Options to pass to startActivity
+*/
+startAppDetailsActivity : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutConfigActivityList'>/**Retrieves a list of config activities for creating {@link android.content.pm.ShortcutInfo}.
+</span>@param {String} packageName The specific package to query. If null, it checks all installed packages
+            in the profile.
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@return {Object {java.util.List}} List of config activities. Can be an empty list but will not be null.
+@see Intent#ACTION_CREATE_SHORTCUT
+@see #getShortcutConfigActivityIntent(LauncherActivityInfo)
+*/
+getShortcutConfigActivityList : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutConfigActivityIntent'>/**Returns an intent sender which can be used to start the configure activity for creating
+</span> custom shortcuts. Use this method if the provider is in another profile as you are not
+ allowed to start an activity in another profile.
+
+ &lt;p&gt;The caller should receive {@link android.content.pm.LauncherApps.PinItemRequest} in onActivityResult on
+ {@link android.app.Activity#RESULT_OK}.
+
+ &lt;p&gt;Callers must be allowed to access the shortcut information, as defined in {@link #hasShortcutHostPermission}().
+@param {Object {LauncherActivityInfo}} info a configuration activity returned by {@link #getShortcutConfigActivityList}
+@throws IllegalStateException when the user is locked or not running.
+@throws SecurityException if {@link #hasShortcutHostPermission()} is false.
+@see #getPinItemRequest(Intent)
+@see Intent#ACTION_CREATE_SHORTCUT
+@see android.app.Activity#startIntentSenderForResult
+*/
+getShortcutConfigActivityIntent : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-isPackageEnabled'>/**Checks if the package is installed and enabled for a profile.
+</span>@param {String} packageName The package to check.
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@return {Boolean} true if the package exists and is enabled.
+*/
+isPackageEnabled : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getSuspendedPackageLauncherExtras'>/**Gets the launcher extras supplied to the system when the given package was suspended via
+</span> {@code PackageManager#setPackagesSuspended(String[], boolean, PersistableBundle,
+ PersistableBundle, String)}.
+
+ &lt;p&gt;The contents of this {@link Bundle} are supposed to be a contract between the suspending
+ app and the launcher.
+
+ &lt;p&gt;Note: This just returns whatever extras were provided to the system, &lt;em&gt;which might
+ even be {@code null}.&lt;/em&gt;
+@param {String} packageName The package for which to fetch the launcher extras.
+@param {Object {UserHandle}} user The {@link UserHandle} of the profile.
+@return {Object {android.os.Bundle}} A {@link Bundle} of launcher extras. Or {@code null} if the package is not currently
+         suspended.
+@see Callback#onPackagesSuspended(String[], UserHandle, Bundle)
+@see PackageManager#isPackageSuspended()
+*/
+getSuspendedPackageLauncherExtras : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-shouldHideFromSuggestions'>/**Returns whether a package should be hidden from suggestions to the user. Currently, this
+</span> could be done because the package was marked as distracting to the user via
+ {@code PackageManager.setDistractingPackageRestrictions(String[], int)}.
+@param {String} packageName The package for which to check.
+@param {Object {UserHandle}} user the {@link UserHandle} of the profile.
+@return {Boolean} 
+*/
+shouldHideFromSuggestions : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getApplicationInfo'>/**Returns {@link android.content.pm.ApplicationInfo} about an application installed for a specific user profile.
+</span>@param {String} packageName The package name of the application
+@param {Number} flags Additional option flags {@link PackageManager#getApplicationInfo}
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@return {Object {android.content.pm.ApplicationInfo}} {@link ApplicationInfo} containing information about the package. Returns
+         {@code null} if the package isn't installed for the given profile, or the profile
+         isn't enabled.
+*/
+getApplicationInfo : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getAppUsageLimit'>/**Returns an object describing the app usage limit for the given package.
+</span> If there are multiple limits that apply to the package, the one with the smallest
+ time remaining will be returned.
+@param {String} packageName name of the package whose app usage limit will be returned
+@param {Object {UserHandle}} user the user of the package
+@return {Object {android.content.pm.LauncherApps.AppUsageLimit}} an {@link AppUsageLimit} object describing the app time limit containing
+ the given package with the smallest time remaining, or {@code null} if none exist.
+@throws SecurityException when the caller is not the recents app.
+@hide 
+*/
+getAppUsageLimit : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-isActivityEnabled'>/**Checks if the activity exists and it enabled for a profile.
+</span>
+ &lt;p&gt;The activity may still not be exported, in which case {@link #startMainActivity} will
+ throw a {@link SecurityException} unless the caller has the same UID as the target app's.
+@param {Object {ComponentName}} component The activity to check.
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@return {Boolean} true if the activity exists and is enabled.
+*/
+isActivityEnabled : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-hasShortcutHostPermission'>/**Returns whether the caller can access the shortcut information.  Access is currently
+</span> available to:
+
+ &lt;ul&gt;
+     &lt;li&gt;The current launcher (or default launcher if there is no set current launcher).&lt;/li&gt;
+     &lt;li&gt;The currently active voice interaction service.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;Note when this method returns {@code false}, it may be a temporary situation because
+ the user is trying a new launcher application.  The user may decide to change the default
+ launcher back to the calling application again, so even if a launcher application loses
+ this permission, it does &lt;b&gt;not&lt;/b&gt; have to purge pinned shortcut information.
+ If the calling launcher application contains pinned shortcuts, they will still work,
+ even though the caller no longer has the shortcut host permission.
+@throws IllegalStateException when the user is locked.
+@see ShortcutManager
+*/
+hasShortcutHostPermission : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcuts'>/**Returns {@link android.content.pm.ShortcutInfo}s that match {@code query}.
+</span>
+ &lt;p&gt;Callers must be allowed to access the shortcut information, as defined in {@link #hasShortcutHostPermission}().
+@param {Object {LauncherApps.ShortcutQuery}} query result includes shortcuts matching this query.
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@return {Object {java.util.List}} the IDs of {@link ShortcutInfo}s that match the query.
+@throws IllegalStateException when the user is locked, or when the {@code user} user
+ is locked or not running.
+@see ShortcutManager
+*/
+getShortcuts : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutInfo'>/**
+</span>@hide // No longer used.  Use getShortcuts() instead.  Kept for unit tests.
+*/
+getShortcutInfo : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-pinShortcuts'>/**Pin shortcuts on a package.
+</span>
+ &lt;p&gt;This API is &lt;b&gt;NOT&lt;/b&gt; cumulative; this will replace all pinned shortcuts for the package.
+ However, different launchers may have different set of pinned shortcuts.
+
+ &lt;p&gt;The calling launcher application must be allowed to access the shortcut information,
+ as defined in {@link #hasShortcutHostPermission}().
+@param {String} packageName The target package name.
+@param {Object {java.util.List}} shortcutIds The IDs of the shortcut to be pinned.
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@throws IllegalStateException when the user is locked, or when the {@code user} user
+ is locked or not running.
+@see ShortcutManager
+*/
+pinShortcuts : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutIconResId'>/**
+</span>@hide kept for testing.
+*/
+getShortcutIconResId : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutIconResId'>/**
+</span>@hide kept for testing.
+*/
+getShortcutIconResId : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutIconFd'>/**
+</span>@hide internal/unit tests only
+*/
+getShortcutIconFd : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutIconFd'>/**
+</span>@hide internal/unit tests only
+*/
+getShortcutIconFd : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutIconDrawable'>/**Returns the icon for this shortcut, without any badging for the profile.
+</span>
+ &lt;p&gt;The calling launcher application must be allowed to access the shortcut information,
+ as defined in {@link #hasShortcutHostPermission}().
+@param {Object {ShortcutInfo}} density The preferred density of the icon, zero for default density. Use
+ density DPI values from {@link DisplayMetrics}.
+@return {Object {android.graphics.drawable.Drawable}} The drawable associated with the shortcut.
+@throws IllegalStateException when the user is locked, or when the {@code user} user
+ is locked or not running.
+@see ShortcutManager
+@see #getShortcutBadgedIconDrawable(ShortcutInfo, int)
+@see DisplayMetrics
+*/
+getShortcutIconDrawable : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getShortcutBadgedIconDrawable'>/**Returns the shortcut icon with badging appropriate for the profile.
+</span>
+ &lt;p&gt;The calling launcher application must be allowed to access the shortcut information,
+ as defined in {@link #hasShortcutHostPermission}().
+@param {Object {ShortcutInfo}} density Optional density for the icon, or 0 to use the default density. Use
+@return {Object {android.graphics.drawable.Drawable}} A badged icon for the shortcut.
+@throws IllegalStateException when the user is locked, or when the {@code user} user
+ is locked or not running.
+@see ShortcutManager
+@see #getShortcutIconDrawable(ShortcutInfo, int)
+@see DisplayMetrics
+*/
+getShortcutBadgedIconDrawable : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-startShortcut'>/**Starts a shortcut.
+</span>
+ &lt;p&gt;The calling launcher application must be allowed to access the shortcut information,
+ as defined in {@link #hasShortcutHostPermission}().
+@param {String} packageName The target shortcut package name.
+@param {String} shortcutId The target shortcut ID.
+@param {Object {Rect}} sourceBounds The Rect containing the source bounds of the clicked icon.
+@param {Object {Bundle}} startActivityOptions Options to pass to startActivity.
+@param {Object {UserHandle}} user The UserHandle of the profile.
+@throws IllegalStateException when the user is locked, or when the {@code user} user
+ is locked or not running.
+@throws android.content.ActivityNotFoundException failed to start shortcut. (e.g.
+ the shortcut no longer exists, is disabled, the intent receiver activity doesn't exist, etc)
+*/
+startShortcut : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-startShortcut'>/**Launches a shortcut.
+</span>
+ &lt;p&gt;The calling launcher application must be allowed to access the shortcut information,
+ as defined in {@link #hasShortcutHostPermission}().
+@param {Object {ShortcutInfo}} shortcut The target shortcut.
+@param {Object {Rect}} sourceBounds The Rect containing the source bounds of the clicked icon.
+@param {Object {Bundle}} startActivityOptions Options to pass to startActivity.
+@throws IllegalStateException when the user is locked, or when the {@code user} user
+ is locked or not running.
+@throws android.content.ActivityNotFoundException failed to start shortcut. (e.g.
+ the shortcut no longer exists, is disabled, the intent receiver activity doesn't exist, etc)
+*/
+startShortcut : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-registerCallback'>/**Registers a callback for changes to packages in this user and managed profiles.
+</span>@param {Object {LauncherApps.Callback}} callback The callback to register.
+*/
+registerCallback : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-registerCallback'>/**Registers a callback for changes to packages in this user and managed profiles.
+</span>@param {Object {LauncherApps.Callback}} callback The callback to register.
+@param {Object {Handler}} handler that should be used to post callbacks on, may be null.
+*/
+registerCallback : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-unregisterCallback'>/**Unregisters a callback that was previously registered.
+</span>@param {Object {LauncherApps.Callback}} callback The callback to unregister.
+@see #registerCallback(Callback)
+*/
+unregisterCallback : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-registerPackageInstallerSessionCallback'>/**Register a callback to watch for session lifecycle events in this user and managed profiles.
+</span>@param {Object {Executor}} callback The callback to register.
+@param {Object {PackageInstaller.SessionCallback}} executor {@link Executor} to handle the callbacks, cannot be null.
+@see PackageInstaller#registerSessionCallback(SessionCallback)
+*/
+registerPackageInstallerSessionCallback : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-unregisterPackageInstallerSessionCallback'>/**Unregisters a callback that was previously registered.
+</span>@param {Object {PackageInstaller.SessionCallback}} callback The callback to unregister.
+@see #registerPackageInstallerSessionCallback(Executor, SessionCallback)
+*/
+unregisterPackageInstallerSessionCallback : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getAllPackageInstallerSessions'>/**Return list of all known install sessions in this user and managed profiles, regardless
+</span> of the installer.
+@see PackageInstaller#getAllSessions()
+*/
+getAllPackageInstallerSessions : function(  ) {},
+
+<span id='android-content-pm-LauncherApps-method-getPinItemRequest'>/**A helper method to extract a {@link android.content.pm.LauncherApps.PinItemRequest} set to
+</span> the {@link #EXTRA_PIN_ITEM_REQUEST} extra.
+*/
+getPinItemRequest : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

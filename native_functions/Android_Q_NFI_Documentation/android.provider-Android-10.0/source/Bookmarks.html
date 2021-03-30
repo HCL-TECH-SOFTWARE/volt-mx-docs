@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-BrowserContract-Bookmarks'>/**@class android.provider.BrowserContract.Bookmarks
+</span> implements android.provider.BrowserContract.CommonColumns
+
+ implements android.provider.BrowserContract.ImageColumns
+
+ implements android.provider.BrowserContract.SyncColumns
+
+@extends java.lang.Object
+
+ The bookmarks table, which holds the user's browser bookmarks.
+*/
+var Bookmarks = {
+
+<span id='android-provider-BrowserContract-Bookmarks-property-CONTENT_URI'>/** The content:// style URI for this table
+</span>*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-BOOKMARK_TYPE_BOOKMARK'>/** Used in {@link android.provider.BrowserContract.Bookmarks#TYPE} column and indicats the row is a bookmark.
+</span>*/
+BOOKMARK_TYPE_BOOKMARK : &quot;1&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-BOOKMARK_TYPE_FOLDER'>/** Used in {@link android.provider.BrowserContract.Bookmarks#TYPE} column and indicats the row is a folder.
+</span>*/
+BOOKMARK_TYPE_FOLDER : &quot;2&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-BOOKMARK_TYPE_BOOKMARK_BAR_FOLDER'>/** Used in {@link android.provider.BrowserContract.Bookmarks#TYPE} column and indicats the row is the bookmark bar folder.
+</span>*/
+BOOKMARK_TYPE_BOOKMARK_BAR_FOLDER : &quot;3&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-BOOKMARK_TYPE_OTHER_FOLDER'>/** Used in {@link android.provider.BrowserContract.Bookmarks#TYPE} column and indicats the row is other folder and
+</span>*/
+BOOKMARK_TYPE_OTHER_FOLDER : &quot;4&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-BOOKMARK_TYPE_MOBILE_FOLDER'>/** Used in {@link android.provider.BrowserContract.Bookmarks#TYPE} column and indicats the row is other folder, .
+</span>*/
+BOOKMARK_TYPE_MOBILE_FOLDER : &quot;5&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-TYPE'>/** The type of the item.
+</span> &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ &lt;p&gt;Allowed values are:&lt;/p&gt;
+ &lt;p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;{@link #BOOKMARK_TYPE_BOOKMARK}&lt;/li&gt;
+ &lt;li&gt;{@link #BOOKMARK_TYPE_FOLDER}&lt;/li&gt;
+ &lt;li&gt;{@link #BOOKMARK_TYPE_BOOKMARK_BAR_FOLDER}&lt;/li&gt;
+ &lt;li&gt;{@link #BOOKMARK_TYPE_OTHER_FOLDER}&lt;/li&gt;
+ &lt;li&gt;{@link #BOOKMARK_TYPE_MOBILE_FOLDER}&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/p&gt;
+ &lt;p&gt; The TYPE_BOOKMARK_BAR_FOLDER, TYPE_OTHER_FOLDER and TYPE_MOBILE_FOLDER
+ can not be updated or deleted.&lt;/p&gt;
+*/
+TYPE : &quot;type&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-CONTENT_URI_DEFAULT_FOLDER'>/** The content:// style URI for the default folder
+</span> @hide
+*/
+CONTENT_URI_DEFAULT_FOLDER : &quot;null&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-PARAM_ACCOUNT_NAME'>/** Query parameter used to specify an account name
+</span> @hide
+*/
+PARAM_ACCOUNT_NAME : &quot;acct_name&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-PARAM_ACCOUNT_TYPE'>/** Query parameter used to specify an account type
+</span> @hide
+*/
+PARAM_ACCOUNT_TYPE : &quot;acct_type&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-CONTENT_TYPE'>/** The MIME type of {@link #CONTENT_URI} providing a directory of bookmarks.
+</span>*/
+CONTENT_TYPE : &quot;vnd.android.cursor.dir/bookmark&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-CONTENT_ITEM_TYPE'>/** The MIME type of a {@link #CONTENT_URI} of a single bookmark.
+</span>*/
+CONTENT_ITEM_TYPE : &quot;vnd.android.cursor.item/bookmark&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-QUERY_PARAMETER_SHOW_DELETED'>/** Query parameter to use if you want to see deleted bookmarks that are still
+</span> around on the device and haven't been synced yet.
+ @see #IS_DELETED
+ @hide
+*/
+QUERY_PARAMETER_SHOW_DELETED : &quot;show_deleted&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-IS_FOLDER'>/** Flag indicating if an item is a folder or bookmark. Non-zero values indicate
+</span> a folder and zero indicates a bookmark.
+ &lt;P&gt;Type: INTEGER (boolean)&lt;/P&gt;
+ @hide
+*/
+IS_FOLDER : &quot;folder&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-PARENT'>/** The ID of the parent folder. ID 0 is the root folder.
+</span> &lt;P&gt;Type: INTEGER (reference to item in the same table)&lt;/P&gt;
+*/
+PARENT : &quot;parent&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-PARENT_SOURCE_ID'>/** The source ID for an item's parent. Read-only.
+</span> @see #PARENT
+ @hide
+*/
+PARENT_SOURCE_ID : &quot;parent_source&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-POSITION'>/** The position of the bookmark in relation to it's siblings that share the same
+</span> {@link #PARENT}. May be negative.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ @hide
+*/
+POSITION : &quot;position&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-INSERT_AFTER'>/** The item that the bookmark should be inserted after.
+</span> May be negative.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ @hide
+*/
+INSERT_AFTER : &quot;insert_after&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-INSERT_AFTER_SOURCE_ID'>/** The source ID for the item that the bookmark should be inserted after. Read-only.
+</span> May be negative.
+ &lt;P&gt;Type: INTEGER&lt;/P&gt;
+ @see #INSERT_AFTER
+ @hide
+*/
+INSERT_AFTER_SOURCE_ID : &quot;insert_after_source&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-property-IS_DELETED'>/** A flag to indicate if an item has been deleted. Queries will not return deleted
+</span> entries unless you add the {@link #QUERY_PARAMETER_SHOW_DELETED} query paramter
+ to the URI when performing your query.
+ &lt;p&gt;Type: INTEGER (non-zero if the item has been deleted, zero if it hasn't)
+ @see #QUERY_PARAMETER_SHOW_DELETED
+ @hide
+*/
+IS_DELETED : &quot;deleted&quot;,
+<span id='android-provider-BrowserContract-Bookmarks-method-buildFolderUri'>/**Builds a URI that points to a specific folder.
+</span>@param {Number} folderId the ID of the folder to point to
+@hide 
+*/
+buildFolderUri : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

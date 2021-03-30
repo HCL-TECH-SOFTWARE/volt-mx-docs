@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-ListView'>/**@class android.widget.ListView
+</span>@extends android.widget.AbsListView
+
+ &lt;p&gt;Displays a vertically-scrollable collection of views, where each view is positioned
+ immediatelybelow the previous view in the list.  For a more modern, flexible, and performant
+ approach to displaying lists, use {@link android.support.v7.widget.RecyclerView}.&lt;/p&gt;
+
+ &lt;p&gt;To display a list, you can include a list view in your layout XML file:&lt;/p&gt;
+
+ &lt;pre&gt;&amp;lt;ListView
+      android:id=&quot;@+id/list_view&quot;
+      android:layout_width=&quot;match_parent&quot;
+      android:layout_height=&quot;match_parent&quot; /&amp;gt;&lt;/pre&gt;
+
+ &lt;p&gt;A list view is an &lt;a href=&quot;{@docRoot}guide/topics/ui/declaring-layout.html#AdapterViews&quot;&gt;
+ adapter view&lt;/a&gt; that does not know the details, such as type and contents, of the views it
+ contains. Instead list view requests views on demand from a {@link android.widget.ListAdapter} as needed,
+ such as to display new views as the user scrolls up or down.&lt;/p&gt;
+
+ &lt;p&gt;In order to display items in the list, call {@link #setAdapter}(ListAdapter adapter)
+ to associate an adapter with the list.  For a simple example, see the discussion of filling an
+ adapter view with text in the
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/declaring-layout.html#FillingTheLayout&quot;&gt;
+ Layouts&lt;/a&gt; guide.&lt;/p&gt;
+
+ &lt;p&gt;To display a more custom view for each item in your dataset, implement a ListAdapter.
+ For example, extend {@link android.widget.BaseAdapter} and create and configure the view for each data item in
+ {@code getView(...)}:&lt;/p&gt;
+
+  &lt;pre&gt;private class MyAdapter extends BaseAdapter {
+
+      // override other abstract methods here
+
+      &amp;#64;Override
+      public View getView(int position, View convertView, ViewGroup container) {
+          if (convertView == null) {
+              convertView = getLayoutInflater().inflate(R.layout.list_item, container, false);
+          }
+
+          ((TextView) convertView.findViewById(android.R.id.text1))
+                  .setText(getItem(position));
+          return convertView;
+      }
+  }&lt;/pre&gt;
+
+ &lt;p class=&quot;note&quot;&gt;ListView attempts to reuse view objects in order to improve performance and
+ avoid a lag in response to user scrolls.  To take advantage of this feature, check if the
+ {@code convertView} provided to {@code getView(...)} is null before creating or inflating a new
+ view object.  See
+ &lt;a href=&quot;{@docRoot}training/improving-layouts/smooth-scrolling.html&quot;&gt;
+ Making ListView Scrolling Smooth&lt;/a&gt; for more ways to ensure a smooth user experience.&lt;/p&gt;
+
+ &lt;p&gt;For a more complete example of creating a custom adapter, see the
+ &lt;a href=&quot;{@docRoot}samples/CustomChoiceList/index.html&quot;&gt;
+     Custom Choice List&lt;/a&gt; sample app.&lt;/p&gt;
+
+ &lt;p&gt;To specify an action when a user clicks or taps on a single list item, see
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/declaring-layout.html#HandlingUserSelections&quot;&gt;
+     Handling click events&lt;/a&gt;.&lt;/p&gt;
+
+ &lt;p&gt;To learn how to populate a list view with a CursorAdapter, see the discussion of filling an
+ adapter view with text in the
+ &lt;a href=&quot;{@docRoot}guide/topics/ui/declaring-layout.html#FillingTheLayout&quot;&gt;
+ Layouts&lt;/a&gt; guide.
+ See &lt;a href=&quot;{@docRoot}guide/topics/ui/layout/listview.html&quot;&gt;
+     Using a Loader&lt;/a&gt;
+ to learn how to avoid blocking the main thread when using a cursor.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;Note, many examples use {@link android.app.ListActivity ListActivity}
+ or {@link android.app.ListFragment ListFragment}
+ to display a list view. Instead, favor the more flexible approach when writing your own app:
+ use a more generic Activity subclass or Fragment subclass and add a list view to the layout
+ or view hierarchy directly.  This approach gives you more direct control of the
+ list view and adapter.&lt;/p&gt;
+
+ @attr ref android.R.styleable#ListView_entries
+ @attr ref android.R.styleable#ListView_divider
+ @attr ref android.R.styleable#ListView_dividerHeight
+ @attr ref android.R.styleable#ListView_headerDividersEnabled
+ @attr ref android.R.styleable#ListView_footerDividersEnabled
+*/
+var ListView = {
+
+<span id='android-widget-ListView-method-getMaxScrollAmount'>/**
+</span>@return {Number} The maximum amount a list view will scroll in response to
+   an arrow event.
+*/
+getMaxScrollAmount : function(  ) {},
+
+<span id='android-widget-ListView-method-addHeaderView'>/**Add a fixed view to appear at the top of the list. If this method is
+</span> called more than once, the views will appear in the order they were
+ added. Views added using this call can take focus if they want.
+ &lt;p&gt;
+ Note: When first introduced, this method could only be called before
+ setting the adapter with {@link #setAdapter}(ListAdapter). Starting with
+ {@link android.os.Build.VERSION_CODES#KITKAT}, this method may be
+ called at any time. If the ListView's adapter does not extend
+ {@link android.widget.HeaderViewListAdapter}, it will be wrapped with a supporting
+ instance of {@link android.widget.WrapperListAdapter}.
+@param {Object {View}} v The view to add.
+@param {Object {Object}} data Data to associate with this view
+@param {Boolean} isSelectable whether the item is selectable
+*/
+addHeaderView : function(  ) {},
+
+<span id='android-widget-ListView-method-addHeaderView'>/**Add a fixed view to appear at the top of the list. If addHeaderView is
+</span> called more than once, the views will appear in the order they were
+ added. Views added using this call can take focus if they want.
+ &lt;p&gt;
+ Note: When first introduced, this method could only be called before
+ setting the adapter with {@link #setAdapter}(ListAdapter). Starting with
+ {@link android.os.Build.VERSION_CODES#KITKAT}, this method may be
+ called at any time. If the ListView's adapter does not extend
+ {@link android.widget.HeaderViewListAdapter}, it will be wrapped with a supporting
+ instance of {@link android.widget.WrapperListAdapter}.
+@param {Object {View}} v The view to add.
+*/
+addHeaderView : function(  ) {},
+
+<span id='android-widget-ListView-method-getHeaderViewsCount'>/**
+</span>*/
+getHeaderViewsCount : function(  ) {},
+
+<span id='android-widget-ListView-method-removeHeaderView'>/**Removes a previously-added header view.
+</span>@param {Object {View}} v The view to remove
+@return {Boolean} true if the view was removed, false if the view was not a header
+         view
+*/
+removeHeaderView : function(  ) {},
+
+<span id='android-widget-ListView-method-addFooterView'>/**Add a fixed view to appear at the bottom of the list. If addFooterView is
+</span> called more than once, the views will appear in the order they were
+ added. Views added using this call can take focus if they want.
+ &lt;p&gt;
+ Note: When first introduced, this method could only be called before
+ setting the adapter with {@link #setAdapter}(ListAdapter). Starting with
+ {@link android.os.Build.VERSION_CODES#KITKAT}, this method may be
+ called at any time. If the ListView's adapter does not extend
+ {@link android.widget.HeaderViewListAdapter}, it will be wrapped with a supporting
+ instance of {@link android.widget.WrapperListAdapter}.
+@param {Object {View}} v The view to add.
+@param {Object {Object}} data Data to associate with this view
+@param {Boolean} isSelectable true if the footer view can be selected
+*/
+addFooterView : function(  ) {},
+
+<span id='android-widget-ListView-method-addFooterView'>/**Add a fixed view to appear at the bottom of the list. If addFooterView is
+</span> called more than once, the views will appear in the order they were
+ added. Views added using this call can take focus if they want.
+ &lt;p&gt;
+ Note: When first introduced, this method could only be called before
+ setting the adapter with {@link #setAdapter}(ListAdapter). Starting with
+ {@link android.os.Build.VERSION_CODES#KITKAT}, this method may be
+ called at any time. If the ListView's adapter does not extend
+ {@link android.widget.HeaderViewListAdapter}, it will be wrapped with a supporting
+ instance of {@link android.widget.WrapperListAdapter}.
+@param {Object {View}} v The view to add.
+*/
+addFooterView : function(  ) {},
+
+<span id='android-widget-ListView-method-getFooterViewsCount'>/**
+</span>*/
+getFooterViewsCount : function(  ) {},
+
+<span id='android-widget-ListView-method-removeFooterView'>/**Removes a previously-added footer view.
+</span>@param {Object {View}} v The view to remove
+@return {Boolean} true if the view was removed, false if the view was not a footer view
+*/
+removeFooterView : function(  ) {},
+
+<span id='android-widget-ListView-method-getAdapter'>/**Returns the adapter currently in use in this ListView. The returned adapter
+</span> might not be the same adapter passed to {@link #setAdapter}(ListAdapter) but
+ might be a {@link android.widget.WrapperListAdapter}.
+@return {Object {android.widget.ListAdapter}} The adapter currently used to display data in this ListView.
+@see #setAdapter(ListAdapter)
+*/
+getAdapter : function(  ) {},
+
+<span id='android-widget-ListView-method-setRemoteViewsAdapter'>/**Sets up this AbsListView to use a remote views adapter which connects to a RemoteViewsService
+</span> through the specified intent.
+@param {Object {Intent}} intent the intent used to identify the RemoteViewsService for the adapter to connect to.
+*/
+setRemoteViewsAdapter : function(  ) {},
+
+<span id='android-widget-ListView-method-setAdapter'>/**Sets the data behind this ListView.
+</span>
+ The adapter passed to this method may be wrapped by a {@link android.widget.WrapperListAdapter},
+ depending on the ListView features currently in use. For instance, adding
+ headers and/or footers will cause the adapter to be wrapped.
+@param {Object {ListAdapter}} adapter The ListAdapter which is responsible for maintaining the
+        data backing this list and for producing a view to represent an
+        item in that data set.
+@see #getAdapter()
+*/
+setAdapter : function(  ) {},
+
+<span id='android-widget-ListView-method-requestChildRectangleOnScreen'>/**
+</span>*/
+requestChildRectangleOnScreen : function(  ) {},
+
+<span id='android-widget-ListView-method-smoothScrollToPosition'>/**Smoothly scroll to the specified adapter position. The view will
+</span> scroll such that the indicated position is displayed.
+@param {Number} position Scroll to this adapter position.
+*/
+smoothScrollToPosition : function(  ) {},
+
+<span id='android-widget-ListView-method-smoothScrollByOffset'>/**Smoothly scroll to the specified adapter position offset. The view will
+</span> scroll such that the indicated position is displayed.
+@param {Number} offset The amount to offset from the adapter position to scroll to.
+*/
+smoothScrollByOffset : function(  ) {},
+
+<span id='android-widget-ListView-method-setSelection'>/**Sets the currently selected item. If in touch mode, the item will not be selected
+</span> but it will still be positioned appropriately. If the specified selection position
+ is less than 0, then the item at position 0 will be selected.
+@param {Number} position Index (starting at 0) of the data item to be selected.
+*/
+setSelection : function(  ) {},
+
+<span id='android-widget-ListView-method-setSelectionAfterHeaderView'>/**setSelectionAfterHeaderView set the selection to be the first list item
+</span> after the header views.
+*/
+setSelectionAfterHeaderView : function(  ) {},
+
+<span id='android-widget-ListView-method-dispatchKeyEvent'>/**
+</span>*/
+dispatchKeyEvent : function(  ) {},
+
+<span id='android-widget-ListView-method-onKeyDown'>/**
+</span>*/
+onKeyDown : function(  ) {},
+
+<span id='android-widget-ListView-method-onKeyMultiple'>/**
+</span>*/
+onKeyMultiple : function(  ) {},
+
+<span id='android-widget-ListView-method-onKeyUp'>/**
+</span>*/
+onKeyUp : function(  ) {},
+
+<span id='android-widget-ListView-method-setItemsCanFocus'>/**Indicates that the views created by the ListAdapter can contain focusable
+</span> items.
+@param {Boolean} itemsCanFocus true if items can get focus, false otherwise
+*/
+setItemsCanFocus : function(  ) {},
+
+<span id='android-widget-ListView-method-getItemsCanFocus'>/**
+</span>@return {Boolean} Whether the views created by the ListAdapter can contain focusable
+ items.
+*/
+getItemsCanFocus : function(  ) {},
+
+<span id='android-widget-ListView-method-isOpaque'>/**
+</span>*/
+isOpaque : function(  ) {},
+
+<span id='android-widget-ListView-method-setCacheColorHint'>/**
+</span>*/
+setCacheColorHint : function(  ) {},
+
+<span id='android-widget-ListView-method-getDivider'>/**Returns the drawable that will be drawn between each item in the list.
+</span>@return {Object {android.graphics.drawable.Drawable}} the current drawable drawn between list elements
+@attr ref R.styleable#ListView_divider
+*/
+getDivider : function(  ) {},
+
+<span id='android-widget-ListView-method-setDivider'>/**Sets the drawable that will be drawn between each item in the list.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; If the drawable does not have an intrinsic
+ height, you should also call {@link #setDividerHeight}(int).
+@param {Object {Drawable}} divider the drawable to use
+@attr ref R.styleable#ListView_divider
+*/
+setDivider : function(  ) {},
+
+<span id='android-widget-ListView-method-getDividerHeight'>/**
+</span>@return {Number} Returns the height of the divider that will be drawn between each item in the list.
+*/
+getDividerHeight : function(  ) {},
+
+<span id='android-widget-ListView-method-setDividerHeight'>/**Sets the height of the divider that will be drawn between each item in the list. Calling
+</span> this will override the intrinsic height as set by {@link #setDivider}(Drawable)
+@param {Number} height The new height of the divider in pixels.
+*/
+setDividerHeight : function(  ) {},
+
+<span id='android-widget-ListView-method-setHeaderDividersEnabled'>/**Enables or disables the drawing of the divider for header views.
+</span>@param {Boolean} headerDividersEnabled True to draw the headers, false otherwise.
+@see #setFooterDividersEnabled(boolean)
+@see #areHeaderDividersEnabled()
+@see #addHeaderView(android.view.View)
+*/
+setHeaderDividersEnabled : function(  ) {},
+
+<span id='android-widget-ListView-method-areHeaderDividersEnabled'>/**
+</span>@return {Boolean} Whether the drawing of the divider for header views is enabled
+@see #setHeaderDividersEnabled(boolean)
+*/
+areHeaderDividersEnabled : function(  ) {},
+
+<span id='android-widget-ListView-method-setFooterDividersEnabled'>/**Enables or disables the drawing of the divider for footer views.
+</span>@param {Boolean} footerDividersEnabled True to draw the footers, false otherwise.
+@see #setHeaderDividersEnabled(boolean)
+@see #areFooterDividersEnabled()
+@see #addFooterView(android.view.View)
+*/
+setFooterDividersEnabled : function(  ) {},
+
+<span id='android-widget-ListView-method-areFooterDividersEnabled'>/**
+</span>@return {Boolean} Whether the drawing of the divider for footer views is enabled
+@see #setFooterDividersEnabled(boolean)
+*/
+areFooterDividersEnabled : function(  ) {},
+
+<span id='android-widget-ListView-method-setOverscrollHeader'>/**Sets the drawable that will be drawn above all other list content.
+</span> This area can become visible when the user overscrolls the list.
+@param {Object {Drawable}} header The drawable to use
+*/
+setOverscrollHeader : function(  ) {},
+
+<span id='android-widget-ListView-method-getOverscrollHeader'>/**
+</span>@return {Object {android.graphics.drawable.Drawable}} The drawable that will be drawn above all other list content
+*/
+getOverscrollHeader : function(  ) {},
+
+<span id='android-widget-ListView-method-setOverscrollFooter'>/**Sets the drawable that will be drawn below all other list content.
+</span> This area can become visible when the user overscrolls the list,
+ or when the list's content does not fully fill the container area.
+@param {Object {Drawable}} footer The drawable to use
+*/
+setOverscrollFooter : function(  ) {},
+
+<span id='android-widget-ListView-method-getOverscrollFooter'>/**
+</span>@return {Object {android.graphics.drawable.Drawable}} The drawable that will be drawn below all other list content
+*/
+getOverscrollFooter : function(  ) {},
+
+<span id='android-widget-ListView-method-getCheckItemIds'>/**Returns the set of checked items ids. The result is only valid if the
+</span> choice mode has not been set to {@link #CHOICE_MODE_NONE}.
+@return {Number} A new array which contains the id of each checked item in the
+         list.
+@deprecated Use {@link #getCheckedItemIds()} instead.
+*/
+getCheckItemIds : function(  ) {},
+
+<span id='android-widget-ListView-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+<span id='android-widget-ListView-method-onInitializeAccessibilityNodeInfoInternal'>/**
+</span>@hide 
+*/
+onInitializeAccessibilityNodeInfoInternal : function(  ) {},
+
+<span id='android-widget-ListView-method-performAccessibilityActionInternal'>/**
+</span>@hide 
+*/
+performAccessibilityActionInternal : function(  ) {},
+
+<span id='android-widget-ListView-method-onInitializeAccessibilityNodeInfoForItem'>/**
+</span>*/
+onInitializeAccessibilityNodeInfoForItem : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

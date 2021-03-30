@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-SocketKeepalive'>/**@class android.net.SocketKeepalive
+</span> implements java.lang.AutoCloseable
+
+@extends java.lang.Object
+
+ Allows applications to request that the system periodically send specific packets on their
+ behalf, using hardware offload to save battery power.
+
+ To request that the system send keepalives, call one of the methods that return a
+ {@link android.net.SocketKeepalive} object, such as {@link android.net.ConnectivityManager#createSocketKeepalive},
+ passing in a non-null callback. If the {@link android.net.SocketKeepalive} is successfully
+ started, the callback's {@code onStarted} method will be called. If an error occurs,
+ {@code onError} will be called, specifying one of the {@code ERROR_*} constants in this
+ class.
+
+ To stop an existing keepalive, call {@link android.net.SocketKeepalive#stop}. The system will call
+ {@link android.net.SocketKeepalive.Callback#onStopped} if the operation was successful or
+ {@link android.net.SocketKeepalive.Callback#onError} if an error occurred.
+
+ For cellular, the device MUST support at least 1 keepalive slot.
+
+ For WiFi, the device SHOULD support keepalive offload. If it does not, it MUST reply with
+ {@link android.net.SocketKeepalive.Callback#onError} with {@code ERROR_UNSUPPORTED} to any keepalive offload
+ request. If it does, it MUST support at least 3 concurrent keepalive slots.
+*/
+var SocketKeepalive = {
+
+<span id='android-net-SocketKeepalive-property-SUCCESS'>/**@hide */
+</span>SUCCESS : &quot;0&quot;,
+<span id='android-net-SocketKeepalive-property-NO_KEEPALIVE'>/**@hide */
+</span>NO_KEEPALIVE : &quot;-1&quot;,
+<span id='android-net-SocketKeepalive-property-DATA_RECEIVED'>/**@hide */
+</span>DATA_RECEIVED : &quot;-2&quot;,
+<span id='android-net-SocketKeepalive-property-BINDER_DIED'>/**@hide */
+</span>BINDER_DIED : &quot;-10&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_INVALID_NETWORK'>/**The specified {@code Network} is not connected. */
+</span>ERROR_INVALID_NETWORK : &quot;-20&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_INVALID_IP_ADDRESS'>/**The specified IP addresses are invalid. For example, the specified source IP address is
+</span> not configured on the specified {@code Network}. */
+ERROR_INVALID_IP_ADDRESS : &quot;-21&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_INVALID_PORT'>/**The requested port is invalid. */
+</span>ERROR_INVALID_PORT : &quot;-22&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_INVALID_LENGTH'>/**The packet length is invalid (e.g., too long). */
+</span>ERROR_INVALID_LENGTH : &quot;-23&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_INVALID_INTERVAL'>/**The packet transmission interval is invalid (e.g., too short). */
+</span>ERROR_INVALID_INTERVAL : &quot;-24&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_INVALID_SOCKET'>/**The target socket is invalid. */
+</span>ERROR_INVALID_SOCKET : &quot;-25&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_SOCKET_NOT_IDLE'>/**The target socket is not idle. */
+</span>ERROR_SOCKET_NOT_IDLE : &quot;-26&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_UNSUPPORTED'>/**The device does not support this request. */
+</span>ERROR_UNSUPPORTED : &quot;-30&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_HARDWARE_UNSUPPORTED'>/**@hide TODO: delete when telephony code has been updated. */
+</span>ERROR_HARDWARE_UNSUPPORTED : &quot;-30&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_HARDWARE_ERROR'>/**The hardware returned an error. */
+</span>ERROR_HARDWARE_ERROR : &quot;-31&quot;,
+<span id='android-net-SocketKeepalive-property-ERROR_INSUFFICIENT_RESOURCES'>/**The limitation of resource is reached. */
+</span>ERROR_INSUFFICIENT_RESOURCES : &quot;-32&quot;,
+<span id='android-net-SocketKeepalive-property-MIN_INTERVAL_SEC'>/** The minimum interval in seconds between keepalive packet transmissions.
+</span>
+ @hide
+*/
+MIN_INTERVAL_SEC : &quot;10&quot;,
+<span id='android-net-SocketKeepalive-property-MAX_INTERVAL_SEC'>/** The maximum interval in seconds between keepalive packet transmissions.
+</span>
+ @hide
+*/
+MAX_INTERVAL_SEC : &quot;3600&quot;,
+<span id='android-net-SocketKeepalive-method-start'>/**Request that keepalive be started with the given {@code intervalSec}. See
+</span> {@link android.net.SocketKeepalive}. If the remote binder dies, or the binder call throws an exception
+ when invoking start or stop of the {@link android.net.SocketKeepalive}, a {@link RemoteException} will be
+ thrown into the {@code executor}. This is typically not important to catch because the remote
+ party is the system, so if it is not in shape to communicate through binder the system is
+ probably going down anyway. If the caller cares regardless, it can use a custom
+ {@link Executor} to catch the {@link RemoteException}.
+@param {Number} intervalSec The target interval in seconds between keepalive packet transmissions.
+                    The interval should be between 10 seconds and 3600 seconds, otherwise
+                    {@link #ERROR_INVALID_INTERVAL} will be returned.
+*/
+start : function(  ) {},
+
+<span id='android-net-SocketKeepalive-method-stop'>/**Requests that keepalive be stopped. The application must wait for {@link android.net.DnsResolver.Callback#onStopped}
+</span> before using the object. See {@link android.net.SocketKeepalive}.
+*/
+stop : function(  ) {},
+
+<span id='android-net-SocketKeepalive-method-close'>/**Deactivate this {@link android.net.SocketKeepalive} and free allocated resources. The instance won't be
+</span> usable again if {@code close()} is called.
+*/
+close : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

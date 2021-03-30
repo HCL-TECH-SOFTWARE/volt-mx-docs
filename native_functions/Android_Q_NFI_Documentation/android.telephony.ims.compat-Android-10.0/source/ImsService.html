@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-ims-compat-ImsService'>/**@class android.telephony.ims.compat.ImsService
+</span>@extends android.app.Service
+
+ Main ImsService implementation, which binds via the Telephony ImsResolver. Services that extend
+ ImsService must register the service in their AndroidManifest to be detected by the framework.
+ First, the application must declare that they use the &quot;android.permission.BIND_IMS_SERVICE&quot;
+ permission. Then, the ImsService definition in the manifest must follow the following format:
+
+ ...
+ &lt;service android:name=&quot;.EgImsService&quot;
+     android:permission=&quot;android.permission.BIND_IMS_SERVICE&quot; &gt;
+     &lt;!-- Apps must declare which features they support as metadata. The different categories are
+     defined below. In this example, the RCS_FEATURE feature is supported. --&gt;
+     &lt;meta-data android:name=&quot;android.telephony.ims.RCS_FEATURE&quot; android:value=&quot;true&quot; /&gt;
+     &lt;intent-filter&gt;
+         &lt;action android:name=&quot;android.telephony.ims.compat.ImsService&quot; /&gt;
+     &lt;/intent-filter&gt;
+ &lt;/service&gt;
+ ...
+
+ The telephony framework will then bind to the ImsService you have defined in your manifest
+ if you are either:
+ 1) Defined as the default ImsService for the device in the device overlay using
+    &quot;config_ims_package&quot;.
+ 2) Defined as a Carrier Provided ImsService in the Carrier Configuration using
+    {@link CarrierConfigManager#KEY_CONFIG_IMS_PACKAGE_OVERRIDE_STRING}.
+
+ The features that are currently supported in an ImsService are:
+ - RCS_FEATURE: This ImsService implements the RcsFeature class.
+ - MMTEL_FEATURE: This ImsService implements the MMTelFeature class.
+ - EMERGENCY_MMTEL_FEATURE: This ImsService implements the MMTelFeature class and will be
+   available to place emergency calls at all times. This MUST be implemented by the default
+   ImsService provided in the device overlay.
+   @hide
+*/
+var ImsService = {
+
+<span id='android-telephony-ims-compat-ImsService-property-SERVICE_INTERFACE'>/** The intent that must be defined as an intent-filter in the AndroidManifest of the ImsService.
+</span> @hide
+*/
+SERVICE_INTERFACE : &quot;android.telephony.ims.compat.ImsService&quot;,
+<span id='android-telephony-ims-compat-ImsService-method-onBind'>/**
+</span>@hide 
+*/
+onBind : function(  ) {},
+
+<span id='android-telephony-ims-compat-ImsService-method-getFeatures'>/**
+</span>@hide 
+*/
+getFeatures : function(  ) {},
+
+<span id='android-telephony-ims-compat-ImsService-method-onCreateEmergencyMMTelImsFeature'>/**
+</span>@return {Object {android.telephony.ims.compat.feature.MMTelFeature}} An implementation of MMTelFeature that will be used by the system for MMTel
+ functionality. Must be able to handle emergency calls at any time as well.
+@hide 
+*/
+onCreateEmergencyMMTelImsFeature : function(  ) {},
+
+<span id='android-telephony-ims-compat-ImsService-method-onCreateMMTelImsFeature'>/**
+</span>@return {Object {android.telephony.ims.compat.feature.MMTelFeature}} An implementation of MMTelFeature that will be used by the system for MMTel
+ functionality.
+@hide 
+*/
+onCreateMMTelImsFeature : function(  ) {},
+
+<span id='android-telephony-ims-compat-ImsService-method-onCreateRcsFeature'>/**
+</span>@return {Object {android.telephony.ims.compat.feature.RcsFeature}} An implementation of RcsFeature that will be used by the system for RCS.
+@hide 
+*/
+onCreateRcsFeature : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

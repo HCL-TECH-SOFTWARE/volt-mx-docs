@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-netlink-StructNdaCacheInfo'>/**@class android.net.netlink.StructNdaCacheInfo
+</span>@extends java.lang.Object
+
+ struct nda_cacheinfo
+
+ see: &amp;lt;linux_src&amp;gt;/include/uapi/linux/neighbour.h
+
+ @hide
+*/
+var StructNdaCacheInfo = {
+
+<span id='android-net-netlink-StructNdaCacheInfo-property-STRUCT_SIZE'>/***/
+</span>STRUCT_SIZE : &quot;16&quot;,
+<span id='android-net-netlink-StructNdaCacheInfo-property-ndm_used'>/** Explanatory notes, for reference.
+</span>
+ Before being returned to user space, the neighbor entry times are
+ converted to clock_t's like so:
+
+     ndm_used      = jiffies_to_clock_t(now - neigh-&gt;used);
+     ndm_confirmed = jiffies_to_clock_t(now - neigh-&gt;confirmed);
+     ndm_updated   = jiffies_to_clock_t(now - neigh-&gt;updated);
+
+ meaning that these values are expressed as &quot;clock ticks ago&quot;.  To
+ convert these clock ticks to seconds divide by sysconf(_SC_CLK_TCK).
+ When _SC_CLK_TCK is 100, for example, the ndm_* times are expressed
+ in centiseconds.
+
+ These values are unsigned, but fortunately being expressed as &quot;some
+ clock ticks ago&quot;, these values are typically very small (and 
+ 2^31 centiseconds = 248 days).
+
+ By observation, it appears that:
+     ndm_used: the last time ARP/ND took place for this neighbor
+     ndm_confirmed: the last time ARP/ND succeeded for this neighbor OR
+                    higher layer confirmation (TCP or MSG_CONFIRM)
+                    was received
+     ndm_updated: the time when the current NUD state was entered
+*/
+ndm_used : &quot;null&quot;,
+<span id='android-net-netlink-StructNdaCacheInfo-property-ndm_confirmed'>/***/
+</span>ndm_confirmed : &quot;null&quot;,
+<span id='android-net-netlink-StructNdaCacheInfo-property-ndm_updated'>/***/
+</span>ndm_updated : &quot;null&quot;,
+<span id='android-net-netlink-StructNdaCacheInfo-property-ndm_refcnt'>/***/
+</span>ndm_refcnt : &quot;null&quot;,
+<span id='android-net-netlink-StructNdaCacheInfo-method-parse'>/**
+</span>*/
+parse : function(  ) {},
+
+<span id='android-net-netlink-StructNdaCacheInfo-method-lastUsed'>/**
+</span>*/
+lastUsed : function(  ) {},
+
+<span id='android-net-netlink-StructNdaCacheInfo-method-lastConfirmed'>/**
+</span>*/
+lastConfirmed : function(  ) {},
+
+<span id='android-net-netlink-StructNdaCacheInfo-method-lastUpdated'>/**
+</span>*/
+lastUpdated : function(  ) {},
+
+<span id='android-net-netlink-StructNdaCacheInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-res-Resources-Theme'>/**@class android.content.res.Resources.Theme
+</span>@extends java.lang.Object
+
+ This class holds the current attribute values for a particular theme.
+ In other words, a Theme is a set of values for resource attributes;
+ these are used in conjunction with {@link android.content.res.TypedArray}
+ to resolve the final value for an attribute.
+ 
+ &lt;p&gt;The Theme's attributes come into play in two ways: (1) a styled
+ attribute can explicit reference a value in the theme through the
+ &quot;?themeAttribute&quot; syntax; (2) if no value has been defined for a
+ particular styled attribute, as a last resort we will try to find that
+ attribute's value in the Theme.
+ 
+ &lt;p&gt;You will normally use the {@link #obtainStyledAttributes} APIs to
+ retrieve XML attributes with style and theme information applied.
+*/
+var Theme = {
+
+<span id='android-content-res-Resources-Theme-method-applyStyle'>/**Place new attribute values into the theme.  The style resource
+</span> specified by &lt;var&gt;resid&lt;/var&gt; will be retrieved from this Theme's
+ resources, its values placed into the Theme object.
+ 
+ &lt;p&gt;The semantics of this function depends on the &lt;var&gt;force&lt;/var&gt;
+ argument:  If false, only values that are not already defined in
+ the theme will be copied from the system resource; otherwise, if
+ any of the style's attributes are already defined in the theme, the
+ current values in the theme will be overwritten.
+@param {Number} resId The resource ID of a style resource from which to
+              obtain attribute values.
+@param {Boolean} force If true, values in the style resource will always be
+              used in the theme; otherwise, they will only be used
+              if not already defined in the theme.
+*/
+applyStyle : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-setTo'>/**Set this theme to hold the same contents as the theme
+</span> &lt;var&gt;other&lt;/var&gt;.  If both of these themes are from the same
+ Resources object, they will be identical after this function
+ returns.  If they are from different Resources, only the resources
+ they have in common will be set in this theme.
+@param {Object {Resources.Theme}} other The existing Theme to copy from.
+*/
+setTo : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-obtainStyledAttributes'>/**Return a TypedArray holding the values defined by
+</span> &lt;var&gt;Theme&lt;/var&gt; which are listed in &lt;var&gt;attrs&lt;/var&gt;.
+ 
+ &lt;p&gt;Be sure to call {@link android.content.res.TypedArray#recycle() android.content.res.TypedArray.recycle()} when you are done
+ with the array.
+@param {Object {int[]}} attrs The desired attributes. These attribute IDs must be sorted in ascending
+              order.
+@throws NotFoundException Throws NotFoundException if the given ID does not exist.
+@return {Object {android.content.res.TypedArray}} Returns a TypedArray holding an array of the attribute values.
+ Be sure to call {@link TypedArray#recycle() TypedArray.recycle()}
+ when done with it.
+@see Resources#obtainAttributes
+@see #obtainStyledAttributes(int, int[])
+@see #obtainStyledAttributes(AttributeSet, int[], int, int)
+*/
+obtainStyledAttributes : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-obtainStyledAttributes'>/**Return a TypedArray holding the values defined by the style
+</span> resource &lt;var&gt;resid&lt;/var&gt; which are listed in &lt;var&gt;attrs&lt;/var&gt;.
+ 
+ &lt;p&gt;Be sure to call {@link android.content.res.TypedArray#recycle() android.content.res.TypedArray.recycle()} when you are done
+ with the array.
+@param {Number} resId The desired style resource.
+@param {Object {int[]}} attrs The desired attributes in the style. These attribute IDs must be sorted in
+              ascending order.
+@throws NotFoundException Throws NotFoundException if the given ID does not exist.
+@return {Object {android.content.res.TypedArray}} Returns a TypedArray holding an array of the attribute values.
+ Be sure to call {@link TypedArray#recycle() TypedArray.recycle()}
+ when done with it.
+@see Resources#obtainAttributes
+@see #obtainStyledAttributes(int[])
+@see #obtainStyledAttributes(AttributeSet, int[], int, int)
+*/
+obtainStyledAttributes : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-obtainStyledAttributes'>/**Return a TypedArray holding the attribute values in
+</span> &lt;var&gt;set&lt;/var&gt;
+ that are listed in &lt;var&gt;attrs&lt;/var&gt;.  In addition, if the given
+ AttributeSet specifies a style class (through the &quot;style&quot; attribute),
+ that style will be applied on top of the base attributes it defines.
+ 
+ &lt;p&gt;Be sure to call {@link android.content.res.TypedArray#recycle() android.content.res.TypedArray.recycle()} when you are done
+ with the array.
+ 
+ &lt;p&gt;When determining the final value of a particular attribute, there
+ are four inputs that come into play:&lt;/p&gt;
+ 
+ &lt;ol&gt;
+     &lt;li&gt; Any attribute values in the given AttributeSet.
+     &lt;li&gt; The style resource specified in the AttributeSet (named
+     &quot;style&quot;).
+     &lt;li&gt; The default style specified by &lt;var&gt;defStyleAttr&lt;/var&gt; and
+     &lt;var&gt;defStyleRes&lt;/var&gt;
+     &lt;li&gt; The base values in this theme.
+ &lt;/ol&gt;
+ 
+ &lt;p&gt;Each of these inputs is considered in-order, with the first listed
+ taking precedence over the following ones.  In other words, if in the
+ AttributeSet you have supplied &lt;code&gt;&amp;lt;Button
+ textColor=&quot;#ff000000&quot;&amp;gt;&lt;/code&gt;, then the button's text will
+ &lt;em&gt;always&lt;/em&gt; be black, regardless of what is specified in any of
+ the styles.
+@param {Object {AttributeSet}} set The base set of attribute values.  May be null.
+@param {Object {int[]}} attrs The desired attributes to be retrieved. These attribute IDs must be sorted
+              in ascending order.
+@param {Number} defStyleAttr An attribute in the current theme that contains a
+                     reference to a style resource that supplies
+                     defaults values for the TypedArray.  Can be
+                     0 to not look for defaults.
+@param {Number} defStyleRes A resource identifier of a style resource that
+                    supplies default values for the TypedArray,
+                    used only if defStyleAttr is 0 or can not be found
+                    in the theme.  Can be 0 to not look for defaults.
+@return {Object {android.content.res.TypedArray}} Returns a TypedArray holding an array of the attribute values.
+ Be sure to call {@link TypedArray#recycle() TypedArray.recycle()}
+ when done with it.
+@see Resources#obtainAttributes
+@see #obtainStyledAttributes(int[])
+@see #obtainStyledAttributes(int, int[])
+*/
+obtainStyledAttributes : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-resolveAttributes'>/**Retrieve the values for a set of attributes in the Theme. The
+</span> contents of the typed array are ultimately filled in by
+ {@link android.content.res.Resources#getValue}.
+@param {Object {int[]}} values The base set of attribute values, must be equal in
+               length to {@code attrs}. All values must be of type
+               {@link TypedValue#TYPE_ATTRIBUTE}.
+@param {Object {int[]}} attrs The desired attributes to be retrieved. These attribute IDs must be sorted
+              in ascending order.
+@return {Object {android.content.res.TypedArray}} Returns a TypedArray holding an array of the attribute
+         values. Be sure to call {@link TypedArray#recycle()}
+         when done with it.
+@hide 
+*/
+resolveAttributes : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-resolveAttribute'>/**Retrieve the value of an attribute in the Theme.  The contents of
+</span> &lt;var&gt;outValue&lt;/var&gt; are ultimately filled in by
+ {@link android.content.res.Resources#getValue}.
+@param {Number} resid The resource identifier of the desired theme
+              attribute.
+@param {Object {TypedValue}} outValue Filled in with the ultimate resource value supplied
+                 by the attribute.
+@param {Boolean} resolveRefs If true, resource references will be walked; if
+                    false, &lt;var&gt;outValue&lt;/var&gt; may be a
+                    TYPE_REFERENCE.  In either case, it will never
+                    be a TYPE_ATTRIBUTE.
+@return {Boolean} boolean Returns true if the attribute was found and
+         &lt;var&gt;outValue&lt;/var&gt; is valid, else false.
+*/
+resolveAttribute : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getAllAttributes'>/**Gets all of the attribute ids associated with this {@link android.content.res.Resources.Theme}. For debugging only.
+</span>@return {Number} The int array containing attribute ids associated with this {@link Theme}.
+@hide 
+*/
+getAllAttributes : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getResources'>/**Returns the resources to which this theme belongs.
+</span>@return {Object {android.content.res.Resources}} Resources to which this theme belongs.
+*/
+getResources : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getDrawable'>/**Return a drawable object associated with a particular resource ID
+</span> and styled for the Theme.
+@param {Number} id The desired resource identifier, as generated by the aapt
+           tool. This integer encodes the package, type, and resource
+           entry. The value 0 is an invalid identifier.
+@return {Object {android.graphics.drawable.Drawable}} Drawable An object that can be used to draw this resource.
+@throws NotFoundException Throws NotFoundException if the given ID
+         does not exist.
+*/
+getDrawable : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getChangingConfigurations'>/**Returns a bit mask of configuration changes that will impact this
+</span> theme (and thus require completely reloading it).
+@return {Number} a bit mask of configuration changes, as defined by
+         {@link ActivityInfo}
+@see ActivityInfo
+*/
+getChangingConfigurations : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-dump'>/**Print contents of this theme out to the log.  For debugging only.
+</span>@param {Number} priority The log priority to use.
+@param {String} tag The log tag to use.
+@param {String} prefix Text to prefix each line printed.
+*/
+dump : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getKey'>/**
+</span>@hide 
+*/
+getKey : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getTheme'>/**Parses {@link #getKey}() and returns a String array that holds pairs of
+</span> adjacent Theme data: resource name followed by whether or not it was
+ forced, as specified by {@link #applyStyle(int, boolean)}.
+@hide 
+*/
+getTheme : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-encode'>/**
+</span>@hide 
+*/
+encode : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-rebase'>/**Rebases the theme against the parent Resource object's current
+</span> configuration by re-applying the styles passed to
+ {@link #applyStyle(int, boolean)}.
+*/
+rebase : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getExplicitStyle'>/**Returns the resource ID for the style specified using {@code style=&quot;...&quot;} in the
+</span> {@link AttributeSet}'s backing XML element or {@link android.content.res.Resources#ID_NULL} otherwise if not
+ specified or otherwise not applicable.
+ &lt;p&gt;
+ Each {@link android.view.View} can have an explicit style specified in the layout file.
+ This style is used first during the {@link android.view.View} attribute resolution, then
+ if an attribute is not defined there the resource system looks at default style and theme
+ as fallbacks.
+@param {Object {AttributeSet}} set The base set of attribute values.
+@return {Number} The resource ID for the style specified using {@code style=&quot;...&quot;} in the
+      {@link AttributeSet}'s backing XML element or {@link Resources#ID_NULL} otherwise
+      if not specified or otherwise not applicable.
+*/
+getExplicitStyle : function(  ) {},
+
+<span id='android-content-res-Resources-Theme-method-getAttributeResolutionStack'>/**Returns the ordered list of resource ID that are considered when resolving attribute
+</span> values when making an equivalent call to
+ {@link #obtainStyledAttributes(AttributeSet, int[], int, int)} . The list will include
+ a set of explicit styles ({@code explicitStyleRes} and it will include the default styles
+ ({@code defStyleAttr} and {@code defStyleRes}).
+@param {Number} defStyleAttr An attribute in the current theme that contains a
+                     reference to a style resource that supplies
+                     defaults values for the TypedArray.  Can be
+                     0 to not look for defaults.
+@param {Number} defStyleRes A resource identifier of a style resource that
+                    supplies default values for the TypedArray,
+                    used only if defStyleAttr is 0 or can not be found
+                    in the theme.  Can be 0 to not look for defaults.
+@param {Number} explicitStyleRes A resource identifier of an explicit style resource.
+@return {Number} ordered list of resource ID that are considered when resolving attribute values.
+*/
+getAttributeResolutionStack : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

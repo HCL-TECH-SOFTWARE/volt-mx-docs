@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-printservice-PrinterDiscoverySession'>/**@class android.printservice.PrinterDiscoverySession
+</span>@extends java.lang.Object
+
+ This class encapsulates the interaction between a print service and the
+ system during printer discovery. During printer discovery you are responsible
+ for adding discovered printers, removing previously added printers that
+ disappeared, and updating already added printers.
+ &lt;p&gt;
+ During the lifetime of this session you may be asked to start and stop
+ performing printer discovery multiple times. You will receive a call to {@link android.printservice.PrinterDiscoverySession#onStartPrinterDiscovery(List)} to start printer
+ discovery and a call to {@link android.printservice.PrinterDiscoverySession#onStopPrinterDiscovery()}
+ to stop printer discovery. When the system is no longer interested in printers
+ discovered by this session you will receive a call to {@link #onDestroy}() at
+ which point the system will no longer call into the session and all the session
+ methods will do nothing.
+ &lt;/p&gt;
+ &lt;p&gt;
+ Discovered printers are added by invoking {@link android.printservice.PrinterDiscoverySession#addPrinters(List)}. Added printers that disappeared are
+ removed by invoking {@link android.printservice.PrinterDiscoverySession#removePrinters(List)}. Added
+ printers whose properties or capabilities changed are updated through a call to
+ {@link android.printservice.PrinterDiscoverySession#addPrinters(List)}. The printers added in this
+ session can be acquired via {@link #getPrinters}() where the returned printers
+ will be an up-to-date snapshot of the printers that you reported during the
+ session. Printers are &lt;strong&gt;not&lt;/strong&gt; persisted across sessions.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The system will make a call to {@link #onValidatePrinters}(List) if you
+ need to update some printers. It is possible that you add a printer without
+ specifying its capabilities. This enables you to avoid querying all discovered
+ printers for their capabilities, rather querying the capabilities of a printer
+ only if necessary. For example, the system will request that you update a printer
+ if it gets selected by the user. When validating printers you do not need to
+ provide the printers' capabilities but may do so.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If the system is interested in being constantly updated for the state of a
+ printer you will receive a call to {@link #onStartPrinterStateTracking}(PrinterId)
+ after which you will have to do a best effort to keep the system updated for
+ changes in the printer state and capabilities. You also &lt;strong&gt;must&lt;/strong&gt;
+ update the printer capabilities if you did not provide them when adding it, or
+ the printer will be ignored. When the system is no longer interested in getting
+ updates for a printer you will receive a call to {@link #onStopPrinterStateTracking}(
+ PrinterId).
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; All callbacks in this class are executed on the main
+ application thread. You also have to invoke any method of this class on the main
+ application thread.
+ &lt;/p&gt;
+*/
+var PrinterDiscoverySession = {
+
+<span id='android-printservice-PrinterDiscoverySession-method-getPrinters'>/**Gets the printers reported in this session. For example, if you add two
+</span> printers and remove one of them, the returned list will contain only
+ the printer that was added but not removed.
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; Calls to this method after the session is
+ destroyed, that is after the {@link #onDestroy}() callback, will be ignored.
+ &lt;/p&gt;
+@return {Object {java.util.List}} The printers.
+@see #addPrinters(List)
+@see #removePrinters(List)
+@see #isDestroyed()
+*/
+getPrinters : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-addPrinters'>/**Adds discovered printers. Adding an already added printer updates it.
+</span> Removed printers can be added again. You can call this method multiple
+ times during the life of this session. Duplicates will be ignored.
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; Calls to this method after the session is
+ destroyed, that is after the {@link #onDestroy}() callback, will be ignored.
+ &lt;/p&gt;
+@param {Object {java.util.List}} printers The printers to add.
+@see #removePrinters(List)
+@see #getPrinters()
+@see #isDestroyed()
+*/
+addPrinters : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-removePrinters'>/**Removes added printers. Removing an already removed or never added
+</span> printer has no effect. Removed printers can be added again. You can
+ call this method multiple times during the lifetime of this session.
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; Calls to this method after the session is
+ destroyed, that is after the {@link #onDestroy}() callback, will be ignored.
+ &lt;/p&gt;
+@param {Object {java.util.List}} printerIds The ids of the removed printers.
+@see #addPrinters(List)
+@see #getPrinters()
+@see #isDestroyed()
+*/
+removePrinters : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-onStartPrinterDiscovery'>/**Callback asking you to start printer discovery. Discovered printers should be
+</span> added via calling {@link #addPrinters}(List). Added printers that disappeared
+ should be removed via calling {@link #removePrinters}(List). Added printers
+ whose properties or capabilities changed should be updated via calling {@link #addPrinters}(List). You will receive a call to {@link #onStopPrinterDiscovery}()
+ when you should stop printer discovery.
+ &lt;p&gt;
+ During the lifetime of this session all printers that are known to your print
+ service have to be added. The system does not retain any printers across sessions.
+ However, if you were asked to start and then stop performing printer discovery
+ in this session, then a subsequent discovering should not re-discover already
+ discovered printers. You can get the printers reported during this session by
+ calling {@link #getPrinters}().
+ &lt;/p&gt;
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt;You are also given a list of printers whose availability
+ has to be checked first. For example, these printers could be the user's favorite
+ ones, therefore they have to be verified first. You do &lt;strong&gt;not need&lt;/strong&gt;
+ to provide the capabilities of the printers, rather verify whether they exist
+ similarly to {@link #onValidatePrinters}(List).
+ &lt;/p&gt;
+@param {Object {java.util.List}} priorityList The list of printers to validate first. Never null.
+@see #onStopPrinterDiscovery()
+@see #addPrinters(List)
+@see #removePrinters(List)
+@see #isPrinterDiscoveryStarted()
+*/
+onStartPrinterDiscovery : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-onStopPrinterDiscovery'>/**Callback notifying you that you should stop printer discovery.
+</span>@see #onStartPrinterDiscovery(List)
+@see #isPrinterDiscoveryStarted()
+*/
+onStopPrinterDiscovery : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-onValidatePrinters'>/**Callback asking you to validate that the given printers are valid, that
+</span> is they exist. You are responsible for checking whether these printers
+ exist and for the ones that do exist notify the system via calling
+ {@link #addPrinters}(List).
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; You are &lt;strong&gt;not required&lt;/strong&gt; to provide
+ the printer capabilities when updating the printers that do exist.
+ &lt;p&gt;
+@param {Object {java.util.List}} printerIds The printers to validate.
+@see android.print.PrinterInfo.Builder#setCapabilities(PrinterCapabilitiesInfo)
+      PrinterInfo.Builder.setCapabilities(PrinterCapabilitiesInfo)
+*/
+onValidatePrinters : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-onStartPrinterStateTracking'>/**Callback asking you to start tracking the state of a printer. Tracking
+</span> the state means that you should do a best effort to observe the state
+ of this printer and notify the system if that state changes via calling
+ {@link #addPrinters}(List).
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; A printer can be initially added without its
+ capabilities to avoid polling printers that the user will not select.
+ However, after this method is called you are expected to update the
+ printer &lt;strong&gt;including&lt;/strong&gt; its capabilities. Otherwise, the
+ printer will be ignored.
+ &lt;p&gt;
+ &lt;p&gt;
+ A scenario when you may be requested to track a printer's state is if
+ the user selects that printer and the system has to present print
+ options UI based on the printer's capabilities. In this case the user
+ should be promptly informed if, for example, the printer becomes
+ unavailable.
+ &lt;/p&gt;
+@param {Object {PrinterId}} printerId The printer to start tracking.
+@see #onStopPrinterStateTracking(PrinterId)
+@see android.print.PrinterInfo.Builder#setCapabilities(PrinterCapabilitiesInfo)
+      PrinterInfo.Builder.setCapabilities(PrinterCapabilitiesInfo)
+*/
+onStartPrinterStateTracking : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-onRequestCustomPrinterIcon'>/**Called by the system to request the custom icon for a printer. Once the icon is available the
+</span> print services uses {@link android.printservice.CustomPrinterIconCallback#onCustomPrinterIconLoaded} to send the
+ icon to the system.
+@param {Object {PrinterId}} printerId The printer to icon belongs to.
+@param {Object {CancellationSignal}} cancellationSignal Signal used to cancel the request.
+@param {Object {CustomPrinterIconCallback}} callback Callback for returning the icon to the system.
+@see android.print.PrinterInfo.Builder#setHasCustomPrinterIcon(boolean)
+*/
+onRequestCustomPrinterIcon : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-onStopPrinterStateTracking'>/**Callback asking you to stop tracking the state of a printer. The passed
+</span> in printer id is the one for which you received a call to {@link #onStartPrinterStateTracking}(PrinterId).
+@param {Object {PrinterId}} printerId The printer to stop tracking.
+@see #onStartPrinterStateTracking(PrinterId)
+*/
+onStopPrinterStateTracking : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-getTrackedPrinters'>/**Gets the printers that should be tracked. These are printers that are
+</span> important to the user and for which you received a call to {@link #onStartPrinterStateTracking}(PrinterId) asking you to observer their
+ state and reporting it to the system via {@link #addPrinters}(List).
+ You will receive a call to {@link #onStopPrinterStateTracking}(PrinterId)
+ if you should stop tracking a printer.
+ &lt;p&gt;
+ &lt;strong&gt;Note: &lt;/strong&gt; Calls to this method after the session is
+ destroyed, that is after the {@link #onDestroy}() callback, will be ignored.
+ &lt;/p&gt;
+@return {Object {java.util.List}} The printers.
+@see #onStartPrinterStateTracking(PrinterId)
+@see #onStopPrinterStateTracking(PrinterId)
+@see #isDestroyed()
+*/
+getTrackedPrinters : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-onDestroy'>/**Notifies you that the session is destroyed. After this callback is invoked
+</span> any calls to the methods of this class will be ignored, {@link #isDestroyed}()
+ will return true and you will also no longer receive callbacks.
+@see #isDestroyed()
+*/
+onDestroy : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-isDestroyed'>/**Gets whether the session is destroyed.
+</span>@return {Boolean} Whether the session is destroyed.
+@see #onDestroy()
+*/
+isDestroyed : function(  ) {},
+
+<span id='android-printservice-PrinterDiscoverySession-method-isPrinterDiscoveryStarted'>/**Gets whether printer discovery is started.
+</span>@return {Boolean} Whether printer discovery is destroyed.
+@see #onStartPrinterDiscovery(List)
+@see #onStopPrinterDiscovery()
+*/
+isPrinterDiscoveryStarted : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

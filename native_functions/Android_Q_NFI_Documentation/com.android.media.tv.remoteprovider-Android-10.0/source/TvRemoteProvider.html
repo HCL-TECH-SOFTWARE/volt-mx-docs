@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-media-tv-remoteprovider-TvRemoteProvider'>/**@class com.android.media.tv.remoteprovider.TvRemoteProvider
+</span>@extends java.lang.Object
+
+ Base class for emote providers implemented in unbundled service.
+ &lt;p/&gt;
+ This object is not thread safe.  It is only intended to be accessed on the
+ {@link Context#getMainLooper main looper thread} of an application.
+ &lt;/p&gt;&lt;p&gt;
+ IMPORTANT: This class is effectively a system API for unbundled emote service, and
+ must remain API stable. See README.txt in the root of this package for more information.
+ &lt;/p&gt;
+*/
+var TvRemoteProvider = {
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span> The service must also require the {@link android.Manifest.permission#BIND_TV_REMOTE_SERVICE}
+ permission so that other applications cannot abuse it.
+*/
+SERVICE_INTERFACE : &quot;com.android.media.tv.remoteprovider.TvRemoteProvider&quot;,
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-getContext'>/**Gets the context of the remote service provider.
+</span>*/
+getContext : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-getBinder'>/**Gets the Binder associated with the provider.
+</span> &lt;p&gt;
+ This is intended to be used for the onBind() method of a service that implements
+ a remote provider service.
+ &lt;/p&gt;
+@return {Object {android.os.IBinder}} The IBinder instance associated with the provider.
+*/
+getBinder : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-onInputBridgeConnected'>/**Information about the InputBridge connected status.
+</span>@param {Object {IBinder}} token Identifier for the connection. Null, if failed.
+*/
+onInputBridgeConnected : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-openRemoteInputBridge'>/**openRemoteInputBridge : Open an input bridge for a particular device.
+</span> Clients should pass in a token that can be used to match this request with a token that
+ will be returned by {@link com.android.media.tv.remoteprovider.TvRemoteProvider#onInputBridgeConnected(IBinder token)}
+ &lt;p&gt;
+ The token should be used for subsequent calls.
+ &lt;/p&gt;
+@param {Object {IBinder}} name        Device name
+@param {String} token       Identifier for this connection
+@param {Number} width       Width of the device's virtual touchpad
+@param {Number} height      Height of the device's virtual touchpad
+@param {Number} maxPointers Maximum supported pointers
+@throws RuntimeException
+*/
+openRemoteInputBridge : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-closeInputBridge'>/**closeInputBridge : Close input bridge for a device
+</span>@param {Object {IBinder}} token identifier for this connection
+@throws RuntimeException
+*/
+closeInputBridge : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-clearInputBridge'>/**clearInputBridge : Clear out any existing key or pointer events in queue for this device by
+</span>                    dropping them on the floor and sending an UP to all keys and pointer
+                    slots.
+@param {Object {IBinder}} token identifier for this connection
+@throws RuntimeException
+*/
+clearInputBridge : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-sendTimestamp'>/**sendTimestamp : Send a timestamp for a set of pointer events
+</span>@param {Object {IBinder}} token     identifier for the device
+@param {Number} timestamp Timestamp to be used in
+                  {@link android.os.SystemClock#uptimeMillis} time base
+@throws RuntimeException
+*/
+sendTimestamp : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-sendKeyUp'>/**sendKeyUp : Send key up event for a device
+</span>@param {Object {IBinder}} token   identifier for this connection
+@param {Number} keyCode Key code to be sent
+@throws RuntimeException
+*/
+sendKeyUp : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-sendKeyDown'>/**sendKeyDown : Send key down event for a device
+</span>@param {Object {IBinder}} token   identifier for this connection
+@param {Number} keyCode Key code to be sent
+@throws RuntimeException
+*/
+sendKeyDown : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-sendPointerUp'>/**sendPointerUp : Send pointer up event for a device
+</span>@param {Object {IBinder}} token     identifier for the device
+@param {Number} pointerId Pointer id to be used. Value may be from 0
+                  to {@link MotionEvent#getPointerCount()} -1
+@throws RuntimeException
+*/
+sendPointerUp : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-sendPointerDown'>/**sendPointerDown : Send pointer down event for a device
+</span>@param {Object {IBinder}} token     identifier for the device
+@param {Number} pointerId Pointer id to be used. Value may be from 0
+                  to {@link MotionEvent#getPointerCount()} -1
+@param {Number} x         X co-ordinates in display pixels
+@param {Number} y         Y co-ordinates in display pixels
+@throws RuntimeException
+*/
+sendPointerDown : function(  ) {},
+
+<span id='com-android-media-tv-remoteprovider-TvRemoteProvider-method-sendPointerSync'>/**sendPointerSync : Send pointer sync event for a device
+</span>@param {Object {IBinder}} token identifier for the device
+@throws RuntimeException
+*/
+sendPointerSync : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

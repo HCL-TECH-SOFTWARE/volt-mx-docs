@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-PackageParser'>/**@class android.content.pm.PackageParser
+</span>@extends java.lang.Object
+
+ Parser for package files (APKs) on disk. This supports apps packaged either
+ as a single &quot;monolithic&quot; APK, or apps packaged as a &quot;cluster&quot; of multiple
+ APKs in a single directory.
+ &lt;p&gt;
+ Apps packaged as multiple APKs always consist of a single &quot;base&quot; APK (with a
+ {@code null} split name) and zero or more &quot;split&quot; APKs (with unique split
+ names). Any subset of those split APKs are a valid install, as long as the
+ following constraints are met:
+ &lt;ul&gt;
+ &lt;li&gt;All APKs must have the exact same package name, version code, and signing
+ certificates.
+ &lt;li&gt;All APKs must have unique split names.
+ &lt;li&gt;All installations must contain a single base APK.
+ &lt;/ul&gt;
+
+ @hide
+*/
+var PackageParser = {
+
+<span id='android-content-pm-PackageParser-property-ANDROID_MANIFEST_FILENAME'>/**File name in an APK for the Android manifest. */
+</span>ANDROID_MANIFEST_FILENAME : &quot;AndroidManifest.xml&quot;,
+<span id='android-content-pm-PackageParser-property-sCachedPackageReadCount'>/** Total number of packages that were read from the cache.  We use it only for logging.
+</span>*/
+sCachedPackageReadCount : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-property-APK_FILE_EXTENSION'>/**@hide */
+</span>APK_FILE_EXTENSION : &quot;.apk&quot;,
+<span id='android-content-pm-PackageParser-property-NEW_PERMISSIONS'>/** List of new permissions that have been added since 1.0.
+</span> NOTE: These must be declared in SDK version order, with permissions
+ added to older SDKs appearing before those added to newer SDKs.
+ If sdkVersion is 0, then this is not a permission that we want to
+ automatically add to older apps, but we do want to allow it to be
+ granted during a platform update.
+ @hide
+*/
+NEW_PERMISSIONS : &quot;null&quot;,
+<span id='android-content-pm-PackageParser-property-PARSE_MUST_BE_APK'>/***/
+</span>PARSE_MUST_BE_APK : &quot;1&quot;,
+<span id='android-content-pm-PackageParser-property-PARSE_IGNORE_PROCESSES'>/***/
+</span>PARSE_IGNORE_PROCESSES : &quot;2&quot;,
+<span id='android-content-pm-PackageParser-property-PARSE_EXTERNAL_STORAGE'>/***/
+</span>PARSE_EXTERNAL_STORAGE : &quot;8&quot;,
+<span id='android-content-pm-PackageParser-property-PARSE_IS_SYSTEM_DIR'>/***/
+</span>PARSE_IS_SYSTEM_DIR : &quot;16&quot;,
+<span id='android-content-pm-PackageParser-property-PARSE_COLLECT_CERTIFICATES'>/***/
+</span>PARSE_COLLECT_CERTIFICATES : &quot;32&quot;,
+<span id='android-content-pm-PackageParser-property-PARSE_ENFORCE_CODE'>/***/
+</span>PARSE_ENFORCE_CODE : &quot;64&quot;,
+<span id='android-content-pm-PackageParser-property-PARSE_CHATTY'>/***/
+</span>PARSE_CHATTY : &quot;-2147483648&quot;,
+<span id='android-content-pm-PackageParser-method-setSeparateProcesses'>/**
+</span>*/
+setSeparateProcesses : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-setOnlyCoreApps'>/**Flag indicating this parser should only consider apps with
+</span> {@code coreApp} manifest attribute to be valid apps. This is useful when
+ creating a minimalist boot environment.
+*/
+setOnlyCoreApps : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-setDisplayMetrics'>/**
+</span>*/
+setDisplayMetrics : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-setCacheDir'>/**Sets the cache directory for this package parser.
+</span>*/
+setCacheDir : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-setCallback'>/**Set the {@link android.content.pm.LauncherApps.Callback} that can be used while parsing.
+</span>*/
+setCallback : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-isApkFile'>/**
+</span>*/
+isApkFile : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-isApkPath'>/**
+</span>*/
+isApkPath : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generatePackageInfo'>/**Generate and return the {@link android.content.pm.PackageParser.PackageInfo} for a parsed package.
+</span>@param {Object {PackageParser.Package}} p the parsed package.
+@param {Object {int[]}} flags indicating which optional information is included.
+*/
+generatePackageInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-isAvailable'>/**
+</span>*/
+isAvailable : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generatePackageInfo'>/**
+</span>*/
+generatePackageInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-parsePackageLite'>/**Parse only lightweight details about the package at the given location.
+</span> Automatically detects if the package is a monolithic style (single APK
+ file) or cluster style (directory of APKs).
+ &lt;p&gt;
+ This performs sanity checking on cluster style packages, such as
+ requiring identical package name and version codes, a single base APK,
+ and unique split names.
+@see PackageParser#parsePackage(File, int)
+*/
+parsePackageLite : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-parsePackage'>/**Parse the package at the given location. Automatically detects if the
+</span> package is a monolithic style (single APK file) or cluster style
+ (directory of APKs).
+ &lt;p&gt;
+ This performs sanity checking on cluster style packages, such as
+ requiring identical package name and version codes, a single base APK,
+ and unique split names.
+ &lt;p&gt;
+ Note that this &lt;em&gt;does not&lt;/em&gt; perform signature verification; that
+ must be done separately in {@link #collectCertificates(Package, int)}.
+
+ If {@code useCaches} is true, the package parser might return a cached
+ result from a previous parse of the same {@code packageFile} with the same
+ {@code flags}. Note that this method does not check whether {@code packageFile}
+ has changed since the last parse, it's up to callers to do so.
+@see #parsePackageLite(File, int)
+*/
+parsePackage : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-parsePackage'>/**Equivalent to {@link #parsePackage(File, int, boolean)} with {@code useCaches == false}.
+</span>*/
+parsePackage : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-fromCacheEntryStatic'>/**static version of {@link #fromCacheEntry} for unit tests.
+</span>*/
+fromCacheEntryStatic : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-toCacheEntryStatic'>/**static version of {@link #toCacheEntry} for unit tests.
+</span>*/
+toCacheEntryStatic : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-parseMonolithicPackage'>/**Parse the given APK file, treating it as as a single monolithic package.
+</span> &lt;p&gt;
+ Note that this &lt;em&gt;does not&lt;/em&gt; perform signature verification; that
+ must be done separately in {@link #collectCertificates(Package, int)}.
+@deprecated external callers should move to
+             {@link #parsePackage(File, int)}. Eventually this method will
+             be marked private.
+*/
+parseMonolithicPackage : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-toSigningKeys'>/**Parses the public keys from the set of signatures.
+</span>*/
+toSigningKeys : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-collectCertificates'>/**Collect certificates from all the APKs described in the given package,
+</span> populating {@link android.content.pm.PackageParser.Package#mSigningDetails}. Also asserts that all APK
+ contents are signed correctly and consistently.
+*/
+collectCertificates : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-parseApkLite'>/**Utility method that retrieves lightweight details about a single APK
+</span> file, including package name, split name, and install location.
+@param {Object {File}} apkFile path to a single APK
+@param {Number} flags optional parse flags, such as
+            {@link #PARSE_COLLECT_CERTIFICATES}
+*/
+parseApkLite : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-parseApkLite'>/**Utility method that retrieves lightweight details about a single APK
+</span> file, including package name, split name, and install location.
+@param {Object {FileDescriptor}} fd already open file descriptor of an apk file
+@param {String} debugPathName arbitrary text name for this file, for debug output
+@param {Number} flags optional parse flags, such as
+            {@link #PARSE_COLLECT_CERTIFICATES}
+*/
+parseApkLite : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-computeTargetSdkVersion'>/**Computes the targetSdkVersion to use at runtime. If the package is not
+</span> compatible with this platform, populates {@code outError[0]} with an
+ error message.
+ &lt;p&gt;
+ If {@code targetCode} is not specified, e.g. the value is {@code null},
+ then the {@code targetVers} will be returned unmodified.
+ &lt;p&gt;
+ Otherwise, the behavior varies based on whether the current platform
+ is a pre-release version, e.g. the {@code platformSdkCodenames} array
+ has length &gt; 0:
+ &lt;ul&gt;
+ &lt;li&gt;If this is a pre-release platform and the value specified by
+ {@code targetCode} is contained within the array of allowed pre-release
+ codenames, this method will return {@link Build.VERSION_CODES#CUR_DEVELOPMENT}.
+ &lt;li&gt;If this is a released platform, this method will return -1 to
+ indicate that the package is not compatible with this platform.
+ &lt;/ul&gt;
+@param {Number} targetVers targetSdkVersion number, if specified in the
+                   application manifest, or 0 otherwise
+@param {String} targetCode targetSdkVersion code, if specified in the application
+                   manifest, or {@code null} otherwise
+@param {Object {java.lang.String[]}} platformSdkCodenames array of allowed pre-release SDK codenames
+                             for this platform
+@param {Object {java.lang.String[]}} outError output array to populate with error, if applicable
+@return {Number} the targetSdkVersion to use at runtime, or -1 if the package is
+         not compatible with this platform
+@hide Exposed for unit testing only.
+*/
+computeTargetSdkVersion : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-computeMinSdkVersion'>/**Computes the minSdkVersion to use at runtime. If the package is not
+</span> compatible with this platform, populates {@code outError[0]} with an
+ error message.
+ &lt;p&gt;
+ If {@code minCode} is not specified, e.g. the value is {@code null},
+ then behavior varies based on the {@code platformSdkVersion}:
+ &lt;ul&gt;
+ &lt;li&gt;If the platform SDK version is greater than or equal to the
+ {@code minVers}, returns the {@code mniVers} unmodified.
+ &lt;li&gt;Otherwise, returns -1 to indicate that the package is not
+ compatible with this platform.
+ &lt;/ul&gt;
+ &lt;p&gt;
+ Otherwise, the behavior varies based on whether the current platform
+ is a pre-release version, e.g. the {@code platformSdkCodenames} array
+ has length &gt; 0:
+ &lt;ul&gt;
+ &lt;li&gt;If this is a pre-release platform and the value specified by
+ {@code targetCode} is contained within the array of allowed pre-release
+ codenames, this method will return {@link Build.VERSION_CODES#CUR_DEVELOPMENT}.
+ &lt;li&gt;If this is a released platform, this method will return -1 to
+ indicate that the package is not compatible with this platform.
+ &lt;/ul&gt;
+@param {Number} minVers minSdkVersion number, if specified in the application
+                manifest, or 1 otherwise
+@param {String} minCode minSdkVersion code, if specified in the application
+                manifest, or {@code null} otherwise
+@param {Number} platformSdkVersion platform SDK version number, typically
+                           Build.VERSION.SDK_INT
+@param {Object {java.lang.String[]}} platformSdkCodenames array of allowed prerelease SDK codenames
+                             for this platform
+@param {Object {java.lang.String[]}} outError output array to populate with error, if applicable
+@return {Number} the minSdkVersion to use at runtime, or -1 if the package is not
+         compatible with this platform
+@hide Exposed for unit testing only.
+*/
+computeMinSdkVersion : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-getActivityConfigChanges'>/**
+</span>@param {Number} configChanges The bit mask of configChanges fetched from AndroidManifest.xml.
+@param {Number} recreateOnConfigChanges The bit mask recreateOnConfigChanges fetched from
+                                AndroidManifest.xml.
+@hide Exposed for unit testing only.
+*/
+getActivityConfigChanges : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-parsePublicKey'>/**
+</span>*/
+parsePublicKey : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateApplicationInfo'>/**
+</span>*/
+generateApplicationInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateApplicationInfo'>/**
+</span>*/
+generateApplicationInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateApplicationInfo'>/**
+</span>*/
+generateApplicationInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generatePermissionInfo'>/**
+</span>*/
+generatePermissionInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generatePermissionGroupInfo'>/**
+</span>*/
+generatePermissionGroupInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateActivityInfo'>/**
+</span>*/
+generateActivityInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateActivityInfo'>/**
+</span>*/
+generateActivityInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateServiceInfo'>/**
+</span>*/
+generateServiceInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateProviderInfo'>/**
+</span>*/
+generateProviderInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generateInstrumentationInfo'>/**
+</span>*/
+generateInstrumentationInfo : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-setCompatibilityModeEnabled'>/**
+</span>@hide 
+*/
+setCompatibilityModeEnabled : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-readConfigUseRoundIcon'>/**
+</span>@hide 
+*/
+readConfigUseRoundIcon : function(  ) {},
+
+<span id='android-content-pm-PackageParser-method-generatePackageInfoFromApex'>/**PackageInfo parser specifically for apex files.
+</span> NOTE: It will collect certificates
+@param {Object {ApexInfo}} apexInfo
+@return {Object {android.content.pm.PackageInfo}} PackageInfo
+@throws PackageParserException
+*/
+generatePackageInfoFromApex : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

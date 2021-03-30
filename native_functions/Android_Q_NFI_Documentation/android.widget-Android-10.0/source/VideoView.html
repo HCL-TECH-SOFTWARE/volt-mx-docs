@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-VideoView'>/**@class android.widget.VideoView
+</span> implements android.widget.MediaController.MediaPlayerControl
+
+ implements android.media.SubtitleController.Anchor
+
+@extends android.view.SurfaceView
+
+ Displays a video file.  The VideoView class
+ can load images from various sources (such as resources or content
+ providers), takes care of computing its measurement from the video so that
+ it can be used in any layout manager, and provides various display options
+ such as scaling and tinting.&lt;p&gt;
+
+ &lt;em&gt;Note: VideoView does not retain its full state when going into the
+ background.&lt;/em&gt;  In particular, it does not restore the current play state,
+ play position, selected tracks, or any subtitle tracks added via
+ {@link #addSubtitleSource addSubtitleSource()}.  Applications should
+ save and restore these on their own in
+ {@link android.app.Activity#onSaveInstanceState} and
+ {@link android.app.Activity#onRestoreInstanceState}.&lt;p&gt;
+ Also note that the audio session id (from {@link #getAudioSessionId}) may
+ change from its previously returned value when the VideoView is restored.
+ &lt;p&gt;
+ By default, VideoView requests audio focus with {@link AudioManager#AUDIOFOCUS_GAIN}. Use
+ {@link #setAudioFocusRequest}(int) to change this behavior.
+ &lt;p&gt;
+ The default {@link AudioAttributes} used during playback have a usage of
+ {@link AudioAttributes#USAGE_MEDIA} and a content type of
+ {@link AudioAttributes#CONTENT_TYPE_MOVIE}, use {@link #setAudioAttributes}(AudioAttributes) to
+ modify them.
+*/
+var VideoView = {
+
+<span id='android-widget-VideoView-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+<span id='android-widget-VideoView-method-resolveAdjustedSize'>/**
+</span>*/
+resolveAdjustedSize : function(  ) {},
+
+<span id='android-widget-VideoView-method-setVideoPath'>/**Sets video path.
+</span>@param {String} path the path of the video.
+*/
+setVideoPath : function(  ) {},
+
+<span id='android-widget-VideoView-method-setVideoURI'>/**Sets video URI.
+</span>@param {Object {Uri}} uri the URI of the video.
+*/
+setVideoURI : function(  ) {},
+
+<span id='android-widget-VideoView-method-setVideoURI'>/**Sets video URI using specific headers.
+</span>@param {Object {Uri}} uri     the URI of the video.
+@param {Object {java.util.Map}} headers the headers for the URI request.
+                Note that the cross domain redirection is allowed by default, but that can be
+                changed with key/value pairs through the headers parameter with
+                &quot;android-allow-cross-domain-redirect&quot; as the key and &quot;0&quot; or &quot;1&quot; as the value
+                to disallow or allow cross domain redirection.
+*/
+setVideoURI : function(  ) {},
+
+<span id='android-widget-VideoView-method-setAudioFocusRequest'>/**Sets which type of audio focus will be requested during the playback, or configures playback
+</span> to not request audio focus. Valid values for focus requests are
+ {@link AudioManager#AUDIOFOCUS_GAIN}, {@link AudioManager#AUDIOFOCUS_GAIN_TRANSIENT},
+ {@link AudioManager#AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK}, and
+ {@link AudioManager#AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE}. Or use
+ {@link AudioManager#AUDIOFOCUS_NONE} to express that audio focus should not be
+ requested when playback starts. You can for instance use this when playing a silent animation
+ through this class, and you don't want to affect other audio applications playing in the
+ background.
+@param {Number} focusGain the type of audio focus gain that will be requested, or
+    {@link AudioManager#AUDIOFOCUS_NONE} to disable the use audio focus during playback.
+*/
+setAudioFocusRequest : function(  ) {},
+
+<span id='android-widget-VideoView-method-setAudioAttributes'>/**Sets the {@link AudioAttributes} to be used during the playback of the video.
+</span>@param {Object {AudioAttributes}} attributes non-null &lt;code&gt;AudioAttributes&lt;/code&gt;.
+*/
+setAudioAttributes : function(  ) {},
+
+<span id='android-widget-VideoView-method-addSubtitleSource'>/**Adds an external subtitle source file (from the provided input stream.)
+</span>
+ Note that a single external subtitle source may contain multiple or no
+ supported tracks in it. If the source contained at least one track in
+ it, one will receive an {@link MediaPlayer#MEDIA_INFO_METADATA_UPDATE}
+ info message. Otherwise, if reading the source takes excessive time,
+ one will receive a {@link MediaPlayer#MEDIA_INFO_SUBTITLE_TIMED_OUT}
+ message. If the source contained no supported track (including an empty
+ source file or null input stream), one will receive a {@link MediaPlayer#MEDIA_INFO_UNSUPPORTED_SUBTITLE} message. One can find the
+ total number of available tracks using {@link MediaPlayer#getTrackInfo()}
+ to see what additional tracks become available after this method call.
+@param {Object {InputStream}} is     input stream containing the subtitle data.  It will be
+               closed by the media framework.
+@param {Object {MediaFormat}} format the format of the subtitle track(s).  Must contain at least
+               the mime type ({@link MediaFormat#KEY_MIME}) and the
+               language ({@link MediaFormat#KEY_LANGUAGE}) of the file.
+               If the file itself contains the language information,
+               specify &quot;und&quot; for the language.
+*/
+addSubtitleSource : function(  ) {},
+
+<span id='android-widget-VideoView-method-stopPlayback'>/**
+</span>*/
+stopPlayback : function(  ) {},
+
+<span id='android-widget-VideoView-method-setMediaController'>/**
+</span>*/
+setMediaController : function(  ) {},
+
+<span id='android-widget-VideoView-method-setOnPreparedListener'>/**Register a callback to be invoked when the media file
+</span> is loaded and ready to go.
+@param {Object {MediaPlayer.OnPreparedListener}} l The callback that will be run
+*/
+setOnPreparedListener : function(  ) {},
+
+<span id='android-widget-VideoView-method-setOnCompletionListener'>/**Register a callback to be invoked when the end of a media file
+</span> has been reached during playback.
+@param {Object {MediaPlayer.OnCompletionListener}} l The callback that will be run
+*/
+setOnCompletionListener : function(  ) {},
+
+<span id='android-widget-VideoView-method-setOnErrorListener'>/**Register a callback to be invoked when an error occurs
+</span> during playback or setup.  If no listener is specified,
+ or if the listener returned false, VideoView will inform
+ the user of any errors.
+@param {Object {MediaPlayer.OnErrorListener}} l The callback that will be run
+*/
+setOnErrorListener : function(  ) {},
+
+<span id='android-widget-VideoView-method-setOnInfoListener'>/**Register a callback to be invoked when an informational event
+</span> occurs during playback or setup.
+@param {Object {MediaPlayer.OnInfoListener}} l The callback that will be run
+*/
+setOnInfoListener : function(  ) {},
+
+<span id='android-widget-VideoView-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='android-widget-VideoView-method-onTrackballEvent'>/**
+</span>*/
+onTrackballEvent : function(  ) {},
+
+<span id='android-widget-VideoView-method-onKeyDown'>/**
+</span>*/
+onKeyDown : function(  ) {},
+
+<span id='android-widget-VideoView-method-start'>/**
+</span>*/
+start : function(  ) {},
+
+<span id='android-widget-VideoView-method-pause'>/**
+</span>*/
+pause : function(  ) {},
+
+<span id='android-widget-VideoView-method-suspend'>/**
+</span>*/
+suspend : function(  ) {},
+
+<span id='android-widget-VideoView-method-resume'>/**
+</span>*/
+resume : function(  ) {},
+
+<span id='android-widget-VideoView-method-getDuration'>/**
+</span>*/
+getDuration : function(  ) {},
+
+<span id='android-widget-VideoView-method-getCurrentPosition'>/**
+</span>*/
+getCurrentPosition : function(  ) {},
+
+<span id='android-widget-VideoView-method-seekTo'>/**
+</span>*/
+seekTo : function(  ) {},
+
+<span id='android-widget-VideoView-method-isPlaying'>/**
+</span>*/
+isPlaying : function(  ) {},
+
+<span id='android-widget-VideoView-method-getBufferPercentage'>/**
+</span>*/
+getBufferPercentage : function(  ) {},
+
+<span id='android-widget-VideoView-method-canPause'>/**
+</span>*/
+canPause : function(  ) {},
+
+<span id='android-widget-VideoView-method-canSeekBackward'>/**
+</span>*/
+canSeekBackward : function(  ) {},
+
+<span id='android-widget-VideoView-method-canSeekForward'>/**
+</span>*/
+canSeekForward : function(  ) {},
+
+<span id='android-widget-VideoView-method-getAudioSessionId'>/**
+</span>*/
+getAudioSessionId : function(  ) {},
+
+<span id='android-widget-VideoView-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='android-widget-VideoView-method-setSubtitleWidget'>/**
+</span>@hide 
+*/
+setSubtitleWidget : function(  ) {},
+
+<span id='android-widget-VideoView-method-getSubtitleLooper'>/**
+</span>@hide 
+*/
+getSubtitleLooper : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

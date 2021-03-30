@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-widget-LinearSmoothScroller'>/**@class com.android.internal.widget.LinearSmoothScroller
+</span>@extends com.android.internal.widget.RecyclerView.SmoothScroller
+
+ {@link com.android.internal.widget.RecyclerView.SmoothScroller} implementation which uses a {@link LinearInterpolator} until
+ the target position becomes a child of the RecyclerView and then uses a
+ {@link DecelerateInterpolator} to slowly approach to target position.
+ &lt;p&gt;
+ If the {@link com.android.internal.widget.RecyclerView.LayoutManager} you are using does not implement the
+ {@link com.android.internal.widget.RecyclerView.SmoothScroller.ScrollVectorProvider} interface, then you must override the
+ {@link #computeScrollVectorForPosition}(int) method. All the LayoutManagers bundled with
+ the support library implement this interface.
+*/
+var LinearSmoothScroller = {
+
+<span id='com-android-internal-widget-LinearSmoothScroller-property-SNAP_TO_START'>/** Align child view's left or top with parent view's left or top
+</span>
+ @see #calculateDtToFit(int, int, int, int, int)
+ @see #calculateDxToMakeVisible(android.view.View, int)
+ @see #calculateDyToMakeVisible(android.view.View, int)
+*/
+SNAP_TO_START : &quot;-1&quot;,
+<span id='com-android-internal-widget-LinearSmoothScroller-property-SNAP_TO_END'>/** Align child view's right or bottom with parent view's right or bottom
+</span>
+ @see #calculateDtToFit(int, int, int, int, int)
+ @see #calculateDxToMakeVisible(android.view.View, int)
+ @see #calculateDyToMakeVisible(android.view.View, int)
+*/
+SNAP_TO_END : &quot;1&quot;,
+<span id='com-android-internal-widget-LinearSmoothScroller-property-SNAP_TO_ANY'>/** &lt;p&gt;Decides if the child should be snapped from start or end, depending on where it
+</span> currently is in relation to its parent.&lt;/p&gt;
+ &lt;p&gt;For instance, if the view is virtually on the left of RecyclerView, using
+ {@code SNAP_TO_ANY} is the same as using {@code SNAP_TO_START}&lt;/p&gt;
+
+ @see #calculateDtToFit(int, int, int, int, int)
+ @see #calculateDxToMakeVisible(android.view.View, int)
+ @see #calculateDyToMakeVisible(android.view.View, int)
+*/
+SNAP_TO_ANY : &quot;0&quot;,
+<span id='com-android-internal-widget-LinearSmoothScroller-method-calculateDtToFit'>/**Helper method for {@link #calculateDxToMakeVisible(android.view.View, int)} and
+</span> {@link #calculateDyToMakeVisible(android.view.View, int)}
+*/
+calculateDtToFit : function(  ) {},
+
+<span id='com-android-internal-widget-LinearSmoothScroller-method-calculateDyToMakeVisible'>/**Calculates the vertical scroll amount necessary to make the given view fully visible
+</span> inside the RecyclerView.
+@param {Object {View}} view           The view which we want to make fully visible
+@param {Number} snapPreference The edge which the view should snap to when entering the visible
+                       area. One of {@link #SNAP_TO_START}, {@link #SNAP_TO_END} or
+                       {@link #SNAP_TO_ANY}.
+@return {Number} The vertical scroll amount necessary to make the view visible with the given
+ snap preference.
+*/
+calculateDyToMakeVisible : function(  ) {},
+
+<span id='com-android-internal-widget-LinearSmoothScroller-method-calculateDxToMakeVisible'>/**Calculates the horizontal scroll amount necessary to make the given view fully visible
+</span> inside the RecyclerView.
+@param {Object {View}} view           The view which we want to make fully visible
+@param {Number} snapPreference The edge which the view should snap to when entering the visible
+                       area. One of {@link #SNAP_TO_START}, {@link #SNAP_TO_END} or
+                       {@link #SNAP_TO_END}
+@return {Number} The vertical scroll amount necessary to make the view visible with the given
+ snap preference.
+*/
+calculateDxToMakeVisible : function(  ) {},
+
+<span id='com-android-internal-widget-LinearSmoothScroller-method-computeScrollVectorForPosition'>/**Compute the scroll vector for a given target position.
+</span> &lt;p&gt;
+ This method can return null if the layout manager cannot calculate a scroll vector
+ for the given position (e.g. it has no current scroll position).
+@param {Number} targetPosition the position to which the scroller is scrolling
+@return {Object {android.graphics.PointF}} the scroll vector for a given target position
+*/
+computeScrollVectorForPosition : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-SmsUsageMonitor'>/**@class com.android.internal.telephony.SmsUsageMonitor
+</span>@extends java.lang.Object
+
+ Implement the per-application based SMS control, which limits the number of
+ SMS/MMS messages an app can send in the checking period.
+
+ This code was formerly part of {@link com.android.internal.telephony.SMSDispatcher}, and has been moved
+ into a separate class to support instantiation of multiple SMSDispatchers on
+ dual-mode devices that require support for both 3GPP and 3GPP2 format messages.
+*/
+var SmsUsageMonitor = {
+
+<span id='com-android-internal-telephony-SmsUsageMonitor-property-PREMIUM_SMS_PERMISSION_UNKNOWN'>/**Premium SMS permission for a new package (ask user when first premium SMS sent). */
+</span>PREMIUM_SMS_PERMISSION_UNKNOWN : &quot;0&quot;,
+<span id='com-android-internal-telephony-SmsUsageMonitor-property-PREMIUM_SMS_PERMISSION_ASK_USER'>/**Default premium SMS permission (ask user for each premium SMS sent). */
+</span>PREMIUM_SMS_PERMISSION_ASK_USER : &quot;1&quot;,
+<span id='com-android-internal-telephony-SmsUsageMonitor-property-PREMIUM_SMS_PERMISSION_NEVER_ALLOW'>/**Premium SMS permission when the owner has denied the app from sending premium SMS. */
+</span>PREMIUM_SMS_PERMISSION_NEVER_ALLOW : &quot;2&quot;,
+<span id='com-android-internal-telephony-SmsUsageMonitor-property-PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW'>/**Premium SMS permission when the owner has allowed the app to send premium SMS. */
+</span>PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW : &quot;3&quot;,
+<span id='com-android-internal-telephony-SmsUsageMonitor-method-mergeShortCodeCategories'>/**
+</span>@hide 
+*/
+mergeShortCodeCategories : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsUsageMonitor-method-check'>/**Check to see if an application is allowed to send new SMS messages, and confirm with
+</span> user if the send limit was reached or if a non-system app is potentially sending to a
+ premium SMS short code or number.
+@param {String} appName the package name of the app requesting to send an SMS
+@param {Number} smsWaiting the number of new messages desired to send
+@return {Boolean} true if application is allowed to send the requested number
+  of new sms messages
+*/
+check : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsUsageMonitor-method-checkDestination'>/**Check if the destination is a possible premium short code.
+</span> NOTE: the caller is expected to strip non-digits from the destination number with
+ {@link com.android.internal.telephony.PhoneNumberUtils#extractNetworkPortion} before calling this method.
+ This happens in {@link com.android.internal.telephony.SMSDispatcher#sendRawPdu} so that we use the same phone number
+ for testing and in the user confirmation dialog if the user needs to confirm the number.
+ This makes it difficult for malware to fool the user or the short code pattern matcher
+ by using non-ASCII characters to make the number appear to be different from the real
+ destination phone number.
+@param {String} destAddress the destination address to test for possible short code
+@return {Number} {@link SmsManager#SMS_CATEGORY_FREE_SHORT_CODE},
+ {@link SmsManager#SMS_CATEGORY_NOT_SHORT_CODE},
+  {@link SmsManager#SMS_CATEGORY_POSSIBLE_PREMIUM_SHORT_CODE},
+  {@link SmsManager#SMS_CATEGORY_STANDARD_SHORT_CODE}, or
+  {@link SmsManager#SMS_CATEGORY_POSSIBLE_PREMIUM_SHORT_CODE}
+*/
+checkDestination : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsUsageMonitor-method-getPremiumSmsPermission'>/**Returns the premium SMS permission for the specified package. If the package has never
+</span> been seen before, the default {@link #PREMIUM_SMS_PERMISSION_ASK_USER}
+ will be returned.
+@param {String} packageName the name of the package to query permission
+@return {Number} one of {@link #PREMIUM_SMS_PERMISSION_UNKNOWN},
+  {@link #PREMIUM_SMS_PERMISSION_ASK_USER},
+  {@link #PREMIUM_SMS_PERMISSION_NEVER_ALLOW}, or
+  {@link #PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW}
+@throws SecurityException if the caller is not a system process
+*/
+getPremiumSmsPermission : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsUsageMonitor-method-setPremiumSmsPermission'>/**Sets the premium SMS permission for the specified package and save the value asynchronously
+</span> to persistent storage.
+@param {String} packageName the name of the package to set permission
+@param {Number} permission one of {@link #PREMIUM_SMS_PERMISSION_ASK_USER},
+  {@link #PREMIUM_SMS_PERMISSION_NEVER_ALLOW}, or
+  {@link #PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW}
+@throws SecurityException if the caller is not a system process
+*/
+setPremiumSmsPermission : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

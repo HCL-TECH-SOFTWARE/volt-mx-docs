@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-test-ProviderTestCase2'>/**@class android.test.ProviderTestCase2
+</span>@extends android.test.AndroidTestCase
+
+ This test case class provides a framework for testing a single
+ {@link ContentProvider} and for testing your app code with an
+ isolated content provider. Instead of using the system map of
+ providers that is based on the manifests of other applications, the test
+ case creates its own internal map. It then uses this map to resolve providers
+ given an authority. This allows you to inject test providers and to null out
+ providers that you do not want to use.
+ &lt;p&gt;
+      This test case also sets up the following mock objects:
+ &lt;/p&gt;
+ &lt;ul&gt;
+      &lt;li&gt;
+          An {@link android.test.IsolatedContext} that stubs out Context methods that might
+          affect the rest of the running system, while allowing tests to do real file and
+          database work.
+      &lt;/li&gt;
+      &lt;li&gt;
+          A {@link android.test.mock.MockContentResolver} that provides the functionality of a
+          regular content resolver, but uses {@link android.test.IsolatedContext}. It stubs out
+          {@link ContentResolver#notifyChange(Uri, ContentObserver, boolean)} to
+          prevent the test from affecting the running system.
+      &lt;/li&gt;
+      &lt;li&gt;
+          An instance of the provider under test, running in an {@link android.test.IsolatedContext}.
+      &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+      This framework is set up automatically by the base class' {@link #setUp}() method. If you
+      override this method, you must call the super method as the first statement in
+      your override.
+ &lt;/p&gt;
+ &lt;p&gt;
+     In order for their tests to be run, concrete subclasses must provide their own
+     constructor with no arguments. This constructor must call
+     {@link #ProviderTestCase2(Class, String)} as  its first operation.
+ &lt;/p&gt;
+ For more information on content provider testing, please see
+ &lt;a href=&quot;{@docRoot}tools/testing/contentprovider_testing.html&quot;&gt;Content Provider Testing&lt;/a&gt;.
+*/
+var ProviderTestCase2 = {
+
+<span id='android-test-ProviderTestCase2-method-getProvider'>/**Returns the content provider created by this class in the {@link #setUp}() method.
+</span>@return {Object {android.content.ContentProvider}} T An instance of the provider class given as a parameter to the test case class.
+*/
+getProvider : function(  ) {},
+
+<span id='android-test-ProviderTestCase2-method-getMockContentResolver'>/**Gets the {@link MockContentResolver} created by this class during initialization. You
+</span> must use the methods of this resolver to access the provider under test.
+@return {Object {android.test.mock.MockContentResolver}} A {@link MockContentResolver} instance.
+*/
+getMockContentResolver : function(  ) {},
+
+<span id='android-test-ProviderTestCase2-method-getMockContext'>/**Gets the {@link android.test.IsolatedContext} created by this class during initialization.
+</span>@return {Object {android.test.IsolatedContext}} The {@link IsolatedContext} instance
+*/
+getMockContext : function(  ) {},
+
+<span id='android-test-ProviderTestCase2-method-newResolverWithContentProviderFromSql'>/**&lt;p&gt;
+</span>      Creates a new content provider of the same type as that passed to the test case class,
+      with an authority name set to the authority parameter, and using an SQLite database as
+      the underlying data source. The SQL statement parameter is used to create the database.
+      This method also creates a new {@link MockContentResolver} and adds the provider to it.
+ &lt;/p&gt;
+ &lt;p&gt;
+      Both the new provider and the new resolver are put into an {@link android.test.IsolatedContext}
+      that uses the targetContext parameter for file operations and a {@link MockContext}
+      for everything else. The IsolatedContext prepends the filenamePrefix parameter to
+      file, database, and directory names.
+ &lt;/p&gt;
+ &lt;p&gt;
+      This is a convenience method for creating a &quot;mock&quot; provider that can contain test data.
+ &lt;/p&gt;
+@param {Object {Context}} targetContext The context to use as the basis of the IsolatedContext
+@param {String} filenamePrefix A string that is prepended to file, database, and directory names
+@param {Object {java.lang.Class}} providerClass The type of the provider being tested
+@param {String} authority The authority string to associated with the test provider
+@param {String} databaseName The name assigned to the database
+@param {Number} databaseVersion The version assigned to the database
+@param {String} sql A string containing the SQL statements that are needed to create the desired
+ database and its tables. The format is the same as that generated by the
+ &lt;a href=&quot;http://www.sqlite.org/sqlite.html&quot;&gt;sqlite3&lt;/a&gt; tool's &lt;code&gt;.dump&lt;/code&gt; command.
+@return {Object {android.content.ContentResolver}} ContentResolver A new {@link MockContentResolver} linked to the provider
+@throws IllegalAccessException
+@throws InstantiationException
+*/
+newResolverWithContentProviderFromSql : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

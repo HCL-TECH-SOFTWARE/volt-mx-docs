@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-mtp-MtpStorageManager'>/**@class android.mtp.MtpStorageManager
+</span>@extends java.lang.Object
+
+ MtpStorageManager provides functionality for listing, tracking, and notifying MtpServer of
+ filesystem changes. As directories are listed, this class will cache the results,
+ and send events when objects are added/removed from cached directories.
+ {@hide}
+*/
+var MtpStorageManager = {
+
+<span id='android-mtp-MtpStorageManager-property-sDebug'>/***/
+</span>sDebug : &quot;null&quot;,
+<span id='android-mtp-MtpStorageManager-method-close'>/**Clean up resources used by the storage manager.
+</span>*/
+close : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-setSubdirectories'>/**Sets the special subdirectories, which are the subdirectories of root storage that queries
+</span> are restricted to. Must be done before any root storages are accessed.
+@param {Object {java.util.Set}} subDirs Subdirectories to set, or null to reset.
+*/
+setSubdirectories : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-addMtpStorage'>/**Allocates an MTP storage id for the given volume and add it to current roots.
+</span>@param {Object {StorageVolume}} volume Storage to add.
+@return {Object {android.mtp.MtpStorage}} the associated MtpStorage
+*/
+addMtpStorage : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-removeMtpStorage'>/**Removes the given storage and all associated items from the cache.
+</span>@param {Object {MtpStorage}} storage Storage to remove.
+*/
+removeMtpStorage : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-getByPath'>/**Get the object with the specified path. Visit any necessary directories on the way.
+</span>@param {String} path Full path of the object to find.
+@return {Object {android.mtp.MtpStorageManager.MtpObject}} The desired object, or null if it cannot be found.
+*/
+getByPath : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-getObject'>/**Get the object with specified id.
+</span>@param {Number} id Id of object. must not be 0 or 0xFFFFFFFF
+@return {Object {android.mtp.MtpStorageManager.MtpObject}} Object, or null if error.
+*/
+getObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-getStorageRoot'>/**Get the storage with specified id.
+</span>@param {Number} id Storage id.
+@return {Object {android.mtp.MtpStorageManager.MtpObject}} Object that is the root of the storage, or null if error.
+*/
+getStorageRoot : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-getObjects'>/**Get all objects matching the given parent, format, and storage
+</span>@param {Number} parent object id of the parent. 0 for all objects, 0xFFFFFFFF for all object in root
+@param {Number} format format of returned objects. 0 for any format
+@param {Number} storageId storage id to look in. 0xFFFFFFFF for all storages
+@return {Object {java.util.List}} A list of matched objects, or null if error
+*/
+getObjects : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-flushEvents'>/**Block the caller until all events currently in the event queue have been
+</span> read and processed. Used for testing purposes.
+*/
+flushEvents : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-dump'>/**Dumps a representation of the cache to log.
+</span>*/
+dump : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-checkConsistency'>/**Checks consistency of the cache. This checks whether all objects have correct links
+</span> to their parent, and whether directories are missing or have extraneous objects.
+@return {Boolean} true iff cache is consistent
+*/
+checkConsistency : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-beginSendObject'>/**Informs MtpStorageManager that an object with the given path is about to be added.
+</span>@param {Object {MtpStorageManager.MtpObject}} parent The parent object of the object to be added.
+@param {String} name Filename of object to add.
+@return {Number} Object id of the added object, or -1 if it cannot be added.
+*/
+beginSendObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-endSendObject'>/**Clean up the object state after a sendObject operation.
+</span>@param {Object {MtpStorageManager.MtpObject}} obj The object, returned from beginAddObject().
+@param {Boolean} succeeded Whether the file was successfully created.
+@return {Boolean} Whether cache state was successfully cleaned up.
+*/
+endSendObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-beginRenameObject'>/**Informs MtpStorageManager that the given object is about to be renamed.
+</span> If this returns true, it must be followed with an endRenameObject()
+@param {Object {MtpStorageManager.MtpObject}} obj Object to be renamed.
+@param {String} newName New name of the object.
+@return {Boolean} Whether renaming is allowed.
+*/
+beginRenameObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-endRenameObject'>/**Cleans up cache state after a rename operation and sends any events that were missed.
+</span>@param {Object {MtpStorageManager.MtpObject}} obj The object being renamed, the same one that was passed in beginRenameObject().
+@param {String} oldName The previous name of the object.
+@param {Boolean} success Whether the rename operation succeeded.
+@return {Boolean} Whether state was successfully cleaned up.
+*/
+endRenameObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-beginRemoveObject'>/**Informs MtpStorageManager that the given object is about to be deleted by the initiator,
+</span> so don't send an event.
+@param {Object {MtpStorageManager.MtpObject}} obj Object to be deleted.
+@return {Boolean} Whether cache deletion is allowed.
+*/
+beginRemoveObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-endRemoveObject'>/**Clean up cache state after a delete operation and send any events that were missed.
+</span>@param {Object {MtpStorageManager.MtpObject}} obj Object to be deleted, same one passed in beginRemoveObject().
+@param {Boolean} success Whether operation was completed successfully.
+@return {Boolean} Whether cache state is correct.
+*/
+endRemoveObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-beginMoveObject'>/**Informs MtpStorageManager that the given object is about to be moved to a new parent.
+</span>@param {Object {MtpStorageManager.MtpObject}} obj Object to be moved.
+@param {Object {MtpStorageManager.MtpObject}} newParent The new parent object.
+@return {Boolean} Whether the move is allowed.
+*/
+beginMoveObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-endMoveObject'>/**Clean up cache state after a move operation and send any events that were missed.
+</span>@param {Object {MtpStorageManager.MtpObject}} oldParent The old parent object.
+@param {Object {MtpStorageManager.MtpObject}} newParent The new parent object.
+@param {String} name The name of the object being moved.
+@param {Boolean} success Whether operation was completed successfully.
+@return {Boolean} Whether cache state is correct.
+*/
+endMoveObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-beginCopyObject'>/**Informs MtpStorageManager that the given object is about to be copied recursively.
+</span>@param {Object {MtpStorageManager.MtpObject}} object Object to be copied
+@param {Object {MtpStorageManager.MtpObject}} newParent New parent for the object.
+@return {Number} The object id for the new copy, or -1 if error.
+*/
+beginCopyObject : function(  ) {},
+
+<span id='android-mtp-MtpStorageManager-method-endCopyObject'>/**Cleans up cache state after a copy operation.
+</span>@param {Object {MtpStorageManager.MtpObject}} object Object that was copied.
+@param {Boolean} success Whether the operation was successful.
+@return {Boolean} Whether cache state is consistent.
+*/
+endCopyObject : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

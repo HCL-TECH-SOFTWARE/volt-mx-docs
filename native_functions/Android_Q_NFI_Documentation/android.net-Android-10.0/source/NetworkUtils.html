@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-NetworkUtils'>/**@class android.net.NetworkUtils
+</span>@extends java.lang.Object
+
+ Native methods for managing network interfaces.
+
+ {@hide}
+*/
+var NetworkUtils = {
+
+<span id='android-net-NetworkUtils-method-attachDropAllBPFFilter'>/**Attaches a socket filter that drops all of incoming packets.
+</span>@param {Object {FileDescriptor}} fd the socket's {@link FileDescriptor}.
+*/
+attachDropAllBPFFilter : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-detachBPFFilter'>/**Detaches a socket filter.
+</span>@param {Object {FileDescriptor}} fd the socket's {@link FileDescriptor}.
+*/
+detachBPFFilter : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-setupRaSocket'>/**Configures a socket for receiving ICMPv6 router solicitations and sending advertisements.
+</span>@param {Object {FileDescriptor}} fd the socket's {@link FileDescriptor}.
+@param {Number} ifIndex the interface index.
+*/
+setupRaSocket : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-bindProcessToNetwork'>/**Binds the current process to the network designated by {@code netId}.  All sockets created
+</span> in the future (and not explicitly bound via a bound {@link SocketFactory} (see
+ {@link android.net.Network#getSocketFactory}) will be bound to this network.  Note that if this
+ {@code Network} ever disconnects all sockets created in this way will cease to work.  This
+ is by design so an application doesn't accidentally use sockets it thinks are still bound to
+ a particular {@code Network}.  Passing NETID_UNSET clears the binding.
+*/
+bindProcessToNetwork : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-getBoundNetworkForProcess'>/**Return the netId last passed to {@link #bindProcessToNetwork}, or NETID_UNSET if
+</span> {@link #unbindProcessToNetwork} has been called since {@link #bindProcessToNetwork}.
+*/
+getBoundNetworkForProcess : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-bindProcessToNetworkForHostResolution'>/**Binds host resolutions performed by this process to the network designated by {@code netId}.
+</span> {@link #bindProcessToNetwork} takes precedence over this setting.  Passing NETID_UNSET clears
+ the binding.
+@deprecated This is strictly for legacy usage to support startUsingNetworkFeature().
+*/
+bindProcessToNetworkForHostResolution : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-bindSocketToNetwork'>/**Explicitly binds {@code socketfd} to the network designated by {@code netId}.  This
+</span> overrides any binding via {@link #bindProcessToNetwork}.
+@return {Number} 0 on success or negative errno on failure.
+*/
+bindSocketToNetwork : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-protectFromVpn'>/**Protect {@code fd} from VPN connections.  After protecting, data sent through
+</span> this socket will go directly to the underlying network, so its traffic will not be
+ forwarded through the VPN.
+*/
+protectFromVpn : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-protectFromVpn'>/**Protect {@code socketfd} from VPN connections.  After protecting, data sent through
+</span> this socket will go directly to the underlying network, so its traffic will not be
+ forwarded through the VPN.
+*/
+protectFromVpn : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-queryUserAccess'>/**Determine if {@code uid} can access network designated by {@code netId}.
+</span>@return {Boolean} {@code true} if {@code uid} can access network, {@code false} otherwise.
+*/
+queryUserAccess : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-resNetworkSend'>/**DNS resolver series jni method.
+</span> Issue the query {@code msg} on the network designated by {@code netId}.
+ {@code flags} is an additional config to control actual querying behavior.
+@return {Object {java.io.FileDescriptor}} a file descriptor to watch for read events
+*/
+resNetworkSend : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-resNetworkQuery'>/**DNS resolver series jni method.
+</span> Look up the {@code nsClass} {@code nsType} Resource Record (RR) associated
+ with Domain Name {@code dname} on the network designated by {@code netId}.
+ {@code flags} is an additional config to control actual querying behavior.
+@return {Object {java.io.FileDescriptor}} a file descriptor to watch for read events
+*/
+resNetworkQuery : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-resNetworkResult'>/**DNS resolver series jni method.
+</span> Read a result for the query associated with the {@code fd}.
+@return {Object {android.net.DnsResolver.DnsResponse}} DnsResponse containing blob answer and rcode
+*/
+resNetworkResult : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-resNetworkCancel'>/**DNS resolver series jni method.
+</span> Attempts to cancel the in-progress query associated with the {@code fd}.
+*/
+resNetworkCancel : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-getDnsNetwork'>/**DNS resolver series jni method.
+</span> Attempts to get network which resolver will use if no network is explicitly selected.
+*/
+getDnsNetwork : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-getTcpRepairWindow'>/**Get the tcp repair window associated with the {@code fd}.
+</span>@param {Object {FileDescriptor}} fd the tcp socket's {@link FileDescriptor}.
+@return {Object {android.net.TcpRepairWindow}} a {@link TcpRepairWindow} object indicates tcp window size.
+*/
+getTcpRepairWindow : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-intToInetAddress'>/**
+</span>@see Inet4AddressUtils#intToInet4AddressHTL(int)
+@deprecated Use either {@link Inet4AddressUtils#intToInet4AddressHTH(int)}
+             or {@link Inet4AddressUtils#intToInet4AddressHTL(int)}
+*/
+intToInetAddress : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-inetAddressToInt'>/**
+</span>@see Inet4AddressUtils#inet4AddressToIntHTL(Inet4Address)
+@deprecated Use either {@link Inet4AddressUtils#inet4AddressToIntHTH(Inet4Address)}
+             or {@link Inet4AddressUtils#inet4AddressToIntHTL(Inet4Address)}
+*/
+inetAddressToInt : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-prefixLengthToNetmaskInt'>/**
+</span>@see Inet4AddressUtils#prefixLengthToV4NetmaskIntHTL(int)
+@deprecated Use either {@link Inet4AddressUtils#prefixLengthToV4NetmaskIntHTH(int)}
+             or {@link Inet4AddressUtils#prefixLengthToV4NetmaskIntHTL(int)}
+*/
+prefixLengthToNetmaskInt : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-netmaskIntToPrefixLength'>/**Convert a IPv4 netmask integer to a prefix length
+</span>@param {Number} netmask as an integer (0xff000000 for a /8 subnet)
+@return {Number} the network prefix length
+*/
+netmaskIntToPrefixLength : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-netmaskToPrefixLength'>/**Convert an IPv4 netmask to a prefix length, checking that the netmask is contiguous.
+</span>@param {Object {Inet4Address}} netmask as a {@code Inet4Address}.
+@return {Number} the network prefix length
+@throws IllegalArgumentException the specified netmask was not contiguous.
+@hide 
+@deprecated use {@link Inet4AddressUtils#netmaskToPrefixLength(Inet4Address)}
+*/
+netmaskToPrefixLength : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-numericToInetAddress'>/**Create an InetAddress from a string where the string must be a standard
+</span> representation of a V4 or V6 address.  Avoids doing a DNS lookup on failure
+ but it will throw an IllegalArgumentException in that case.
+@param {String} addrString
+@return {Object {java.net.InetAddress}} the InetAddress
+@hide 
+@deprecated Use {@link InetAddresses#parseNumericAddress(String)}, if possible.
+*/
+numericToInetAddress : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-maskRawAddress'>/**Masks a raw IP address byte array with the specified prefix length.
+</span>*/
+maskRawAddress : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-getNetworkPart'>/**Get InetAddress masked with prefixLength.  Will never return null.
+</span>@param {Object {InetAddress}} address the IP address to mask with
+@param {Number} prefixLength the prefixLength used to mask the IP
+*/
+getNetworkPart : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-getImplicitNetmask'>/**Returns the implicit netmask of an IPv4 address, as was the custom before 1993.
+</span>*/
+getImplicitNetmask : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-parseIpAndMask'>/**Utility method to parse strings such as &quot;192.0.2.5/24&quot; or &quot;2001:db8::cafe:d00d/64&quot;.
+</span>@hide 
+*/
+parseIpAndMask : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-addressTypeMatches'>/**Check if IP address type is consistent between two InetAddress.
+</span>@return {Boolean} true if both are the same type.  False otherwise.
+*/
+addressTypeMatches : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-hexToInet6Address'>/**Convert a 32 char hex string into a Inet6Address.
+</span> throws a runtime exception if the string isn't 32 chars, isn't hex or can't be
+ made into an Inet6Address
+@param {String} addrHexString a 32 character hex string representing an IPv6 addr
+@return {Object {java.net.InetAddress}} addr an InetAddress representation for the string
+*/
+hexToInet6Address : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-makeStrings'>/**Create a string array of host addresses from a collection of InetAddresses
+</span>@param {Object {java.util.Collection}} addrs a Collection of InetAddresses
+@return {String} an array of Strings containing their host addresses
+*/
+makeStrings : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-trimV4AddrZeros'>/**Trim leading zeros from IPv4 address strings
+</span> Our base libraries will interpret that as octel..
+ Must leave non v4 addresses and host names alone.
+ For example, 192.168.000.010 -&gt; 192.168.0.10
+ TODO - fix base libraries and remove this function
+@param {String} addr a string representing an ip addr
+@return {String} a string propertly trimmed
+*/
+trimV4AddrZeros : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-routedIPv4AddressCount'>/**Returns how many IPv4 addresses match any of the prefixes in the passed ordered set.
+</span>
+ Obviously this returns an integral value between 0 and 2**32.
+ The behavior is undefined if any of the prefixes is not an IPv4 prefix or if the
+ set is not ordered smallest prefix to longer prefix.
+@param {Object {java.util.TreeSet}} prefixes the set of prefixes, ordered by length
+*/
+routedIPv4AddressCount : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-routedIPv6AddressCount'>/**Returns how many IPv6 addresses match any of the prefixes in the passed ordered set.
+</span>
+ This returns a BigInteger between 0 and 2**128.
+ The behavior is undefined if any of the prefixes is not an IPv6 prefix or if the
+ set is not ordered smallest prefix to longer prefix.
+*/
+routedIPv6AddressCount : function(  ) {},
+
+<span id='android-net-NetworkUtils-method-isWeaklyValidatedHostname'>/**Returns true if the hostname is weakly validated.
+</span>@param {String} hostname Name of host to validate.
+@return {Boolean} True if it's a valid-ish hostname.
+@hide 
+*/
+isWeaklyValidatedHostname : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

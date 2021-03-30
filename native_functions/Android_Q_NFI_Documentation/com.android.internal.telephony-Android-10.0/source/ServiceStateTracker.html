@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-ServiceStateTracker'>/**@class com.android.internal.telephony.ServiceStateTracker
+</span>@extends android.os.Handler
+
+ {@hide}
+*/
+var ServiceStateTracker = {
+
+<span id='com-android-internal-telephony-ServiceStateTracker-property-mSS'>/***/
+</span>mSS : &quot;null&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-mRestrictedState'>/***/
+</span>mRestrictedState : &quot;null&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-mPollingContext'>/** A unique identifier to track requests associated with a poll
+</span> and ignore stale responses.  The value is a count-down of
+ expected responses in this pollingContext.
+*/
+mPollingContext : &quot;null&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-DEFAULT_GPRS_CHECK_PERIOD_MILLIS'>/**Waiting period before recheck gprs and voice registration. */
+</span>DEFAULT_GPRS_CHECK_PERIOD_MILLIS : &quot;60000&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-EVENT_ICC_CHANGED'>/***/
+</span>EVENT_ICC_CHANGED : &quot;42&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CARRIER_NAME_DISPLAY_BITMASK_SHOW_SPN'>/***/
+</span>CARRIER_NAME_DISPLAY_BITMASK_SHOW_SPN : &quot;1&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CARRIER_NAME_DISPLAY_BITMASK_SHOW_PLMN'>/***/
+</span>CARRIER_NAME_DISPLAY_BITMASK_SHOW_PLMN : &quot;2&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-mSubId'>/***/
+</span>mSubId : &quot;null&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-PS_ENABLED'>/**Notification type. */
+</span>PS_ENABLED : &quot;1001&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-PS_DISABLED'>/***/
+</span>PS_DISABLED : &quot;1002&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_ENABLED'>/***/
+</span>CS_ENABLED : &quot;1003&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_DISABLED'>/***/
+</span>CS_DISABLED : &quot;1004&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_NORMAL_ENABLED'>/***/
+</span>CS_NORMAL_ENABLED : &quot;1005&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_EMERGENCY_ENABLED'>/***/
+</span>CS_EMERGENCY_ENABLED : &quot;1006&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_REJECT_CAUSE_ENABLED'>/***/
+</span>CS_REJECT_CAUSE_ENABLED : &quot;2001&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_REJECT_CAUSE_DISABLED'>/***/
+</span>CS_REJECT_CAUSE_DISABLED : &quot;2002&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-PS_NOTIFICATION'>/**Notification id. */
+</span>PS_NOTIFICATION : &quot;888&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_NOTIFICATION'>/***/
+</span>CS_NOTIFICATION : &quot;999&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-CS_REJECT_CAUSE_NOTIFICATION'>/***/
+</span>CS_REJECT_CAUSE_NOTIFICATION : &quot;111&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-UNACTIVATED_MIN2_VALUE'>/***/
+</span>UNACTIVATED_MIN2_VALUE : &quot;000000&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-UNACTIVATED_MIN_VALUE'>/***/
+</span>UNACTIVATED_MIN_VALUE : &quot;1111110111&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-INVALID_MCC'>/***/
+</span>INVALID_MCC : &quot;000&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-property-DEFAULT_MNC'>/***/
+</span>DEFAULT_MNC : &quot;00&quot;,
+<span id='com-android-internal-telephony-ServiceStateTracker-method-updatePhoneType'>/**
+</span>*/
+updatePhoneType : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-requestShutdown'>/**
+</span>*/
+requestShutdown : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-dispose'>/**
+</span>*/
+dispose : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getDesiredPowerState'>/**
+</span>*/
+getDesiredPowerState : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getPowerStateFromCarrier'>/**
+</span>*/
+getPowerStateFromCarrier : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForVoiceRoamingOn'>/**Registration point for combined roaming on of mobile voice
+</span> combined roaming is true when roaming is true and ONS differs SPN
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForVoiceRoamingOn : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForVoiceRoamingOn'>/**
+</span>*/
+unregisterForVoiceRoamingOn : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForVoiceRoamingOff'>/**Registration point for roaming off of mobile voice
+</span> combined roaming is true when roaming is true and ONS differs SPN
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForVoiceRoamingOff : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForVoiceRoamingOff'>/**
+</span>*/
+unregisterForVoiceRoamingOff : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForDataRoamingOn'>/**Registration point for combined roaming on of mobile data
+</span> combined roaming is true when roaming is true and ONS differs SPN
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForDataRoamingOn : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForDataRoamingOn'>/**
+</span>*/
+unregisterForDataRoamingOn : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForDataRoamingOff'>/**Registration point for roaming off of mobile data
+</span> combined roaming is true when roaming is true and ONS differs SPN
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+@param {Boolean} notifyNow notify upon registration if data roaming is off
+*/
+registerForDataRoamingOff : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForDataRoamingOff'>/**
+</span>*/
+unregisterForDataRoamingOff : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-reRegisterNetwork'>/**Re-register network by toggling preferred network type.
+</span> This is a work-around to deregister and register network since there is
+ no ril api to set COPS=2 (deregister) only.
+@param {Object {Message}} onComplete is dispatched when this is complete.  it will be
+ an AsyncResult, and onComplete.obj.exception will be non-null
+ on failure.
+*/
+reRegisterNetwork : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-setRadioPower'>/**
+</span>*/
+setRadioPower : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-setRadioPowerFromCarrier'>/**Radio power set from carrier action. if set to false means carrier desire to turn radio off
+</span> and radio wont be re-enabled unless carrier explicitly turn it back on.
+@param {Boolean} enable indicate if radio power is enabled or disabled from carrier action.
+*/
+setRadioPowerFromCarrier : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-enableSingleLocationUpdate'>/**
+</span>*/
+enableSingleLocationUpdate : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-enableLocationUpdates'>/**
+</span>*/
+enableLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-disableLocationUpdates'>/**
+</span>*/
+disableLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-handleMessage'>/**
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getServiceState'>/**
+</span>@return {Object {android.telephony.ServiceState}} a copy of the current service state.
+*/
+getServiceState : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getMdnNumber'>/**
+</span>*/
+getMdnNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getCdmaMin'>/**
+</span>*/
+getCdmaMin : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getPrlVersion'>/**Returns null if NV is not yet ready
+</span>*/
+getPrlVersion : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getImsi'>/**Returns IMSI as MCC + MNC + MIN
+</span>*/
+getImsi : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-isMinInfoReady'>/**Check if subscription data has been assigned to mMin
+</span>
+ return true if MIN info is ready; false otherwise.
+*/
+isMinInfoReady : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getOtasp'>/**Returns OTASP_UNKNOWN, OTASP_UNINITIALIZED, OTASP_NEEDED or OTASP_NOT_NEEDED
+</span>*/
+getOtasp : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-updateSpnDisplay'>/**
+</span>*/
+updateSpnDisplay : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getCurrentDataConnectionState'>/**
+</span>@return {Number} The current GPRS state. IN_SERVICE is the same as &quot;attached&quot;
+ and OUT_OF_SERVICE is the same as detached.
+*/
+getCurrentDataConnectionState : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-isConcurrentVoiceAndDataAllowed'>/**
+</span>@return {Boolean} true if phone is camping on a technology (eg UMTS)
+ that could support voice and data simultaneously.
+*/
+isConcurrentVoiceAndDataAllowed : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-onImsServiceStateChanged'>/**Called when the service state of ImsPhone is changed.
+</span>*/
+onImsServiceStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-setImsRegistrationState'>/**
+</span>*/
+setImsRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-onImsCapabilityChanged'>/**
+</span>*/
+onImsCapabilityChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-isRadioOn'>/**
+</span>*/
+isRadioOn : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-pollState'>/**A complete &quot;service state&quot; from our perspective is
+</span> composed of a handful of separate requests to the radio.
+
+ We make all of these requests at once, but then abandon them
+ and start over again if the radio notifies us that some
+ event has changed
+*/
+pollState : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-pollState'>/**
+</span>*/
+pollState : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getServiceProviderName'>/**Get the service provider name with highest priority among various source.
+</span>@return {String} service provider name.
+*/
+getServiceProviderName : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getCarrierNameDisplayBitmask'>/**Get the resolved carrier name display condition bitmask.
+</span>
+ &lt;p&gt; Show service provider name if only if {@link #CARRIER_NAME_DISPLAY_BITMASK_SHOW_SPN}
+ is set.
+
+ &lt;p&gt; Show PLMN network name if only if {@link #CARRIER_NAME_DISPLAY_BITMASK_SHOW_PLMN} is set.
+@param {Object {ServiceState}} ss service state
+@return {Number} carrier name display bitmask.
+*/
+getCarrierNameDisplayBitmask : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getCellLocation'>/**Get CellLocation from the ServiceState if available or guess from cached CellInfo
+</span>
+ Get the CellLocation by first checking if ServiceState has a current CID. If so
+ then return that info. Otherwise, check the latest List&lt;CellInfo&gt; and return the first GSM or
+ WCDMA result that appears. If no GSM or WCDMA results, then return an LTE result. The
+ behavior is kept consistent for backwards compatibility; (do not apply logic to determine
+ why the behavior is this way).
+@return {Object {android.telephony.CellLocation}} the current cell location if known or a non-null &quot;empty&quot; cell location
+*/
+getCellLocation : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-requestCellLocation'>/**Get CellLocation from the ServiceState if available or guess from CellInfo
+</span>
+ Get the CellLocation by first checking if ServiceState has a current CID. If so
+ then return that info. Otherwise, query AllCellInfo and return the first GSM or
+ WCDMA result that appears. If no GSM or WCDMA results, then return an LTE result.
+ The behavior is kept consistent for backwards compatibility; (do not apply logic
+ to determine why the behavior is this way).
+@param {Object {WorkSource}} workSource calling WorkSource
+@param {Object {Message}} rspMsg the response message which must be non-null
+*/
+requestCellLocation : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-setNotification'>/**Post a notification to NotificationManager for restricted state and
+</span> rejection cause for cs registration
+@param {Number} notifyType is one state of PS/CS_*_ENABLE/DISABLE
+*/
+setNotification : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForDataConnectionAttached'>/**Registration point for transition into DataConnection attached.
+</span>@param {Number} transport Transport type
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForDataConnectionAttached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForDataConnectionAttached'>/**Unregister for data attached event
+</span>@param {Number} transport Transport type
+@param {Object {Handler}} h Handler to notify
+*/
+unregisterForDataConnectionAttached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForDataConnectionDetached'>/**Registration point for transition into DataConnection detached.
+</span>@param {Number} transport Transport type
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForDataConnectionDetached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForDataConnectionDetached'>/**Unregister for data detatched event
+</span>@param {Number} transport Transport type
+@param {Object {Handler}} h Handler to notify
+*/
+unregisterForDataConnectionDetached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForVoiceRegStateOrRatChanged'>/**Registration for RIL Voice Radio Technology changing. The
+</span> new radio technology will be returned AsyncResult#result as an Integer Object.
+ The AsyncResult will be in the notification Message#obj.
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForVoiceRegStateOrRatChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForVoiceRegStateOrRatChanged'>/**
+</span>*/
+unregisterForVoiceRegStateOrRatChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForDataRegStateOrRatChanged'>/**Registration for DataConnection RIL Data Radio Technology changing. The
+</span> new radio technology will be returned AsyncResult#result as an Integer Object.
+ The AsyncResult will be in the notification Message#obj.
+@param {Number} transport Transport
+@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForDataRegStateOrRatChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForDataRegStateOrRatChanged'>/**Unregister for data registration state changed or RAT changed event
+</span>@param {Number} transport Transport
+@param {Object {Handler}} h The handler
+*/
+unregisterForDataRegStateOrRatChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForNetworkAttached'>/**Registration point for transition into network attached.
+</span>@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj in Message.obj
+*/
+registerForNetworkAttached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForNetworkAttached'>/**
+</span>*/
+unregisterForNetworkAttached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForNetworkDetached'>/**Registration point for transition into network detached.
+</span>@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj in Message.obj
+*/
+registerForNetworkDetached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForNetworkDetached'>/**
+</span>*/
+unregisterForNetworkDetached : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForPsRestrictedEnabled'>/**Registration point for transition into packet service restricted zone.
+</span>@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForPsRestrictedEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForPsRestrictedEnabled'>/**
+</span>*/
+unregisterForPsRestrictedEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForPsRestrictedDisabled'>/**Registration point for transition out of packet service restricted zone.
+</span>@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForPsRestrictedDisabled : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForPsRestrictedDisabled'>/**
+</span>*/
+unregisterForPsRestrictedDisabled : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForImsCapabilityChanged'>/**Registers for IMS capability changed.
+</span>@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForImsCapabilityChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForImsCapabilityChanged'>/**Unregisters for IMS capability changed.
+</span>@param {Object {Handler}} h handler to notify
+*/
+unregisterForImsCapabilityChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-powerOffRadioSafely'>/**Clean up existing voice and data connection then turn off radio power.
+</span>
+ Hang up the existing voice calls to decrease call drop rate.
+*/
+powerOffRadioSafely : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-processPendingRadioPowerOffAfterDataOff'>/**process the pending request to turn radio off after data is disconnected
+</span>
+ return true if there is pending request to process; false otherwise.
+*/
+processPendingRadioPowerOffAfterDataOff : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getSystemProperty'>/**
+</span>*/
+getSystemProperty : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getAllCellInfo'>/**
+</span>*/
+getAllCellInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-setCellInfoMinInterval'>/**Set the minimum time between CellInfo requests to the modem, in milliseconds
+</span>*/
+setCellInfoMinInterval : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-requestAllCellInfo'>/**Request the latest CellInfo from the modem.
+</span>
+ If sufficient time has elapsed, then this request will be sent to the modem. Otherwise
+ the latest cached List&lt;CellInfo&gt; will be returned.
+@param {Object {WorkSource}} workSource of the caller for power accounting
+@param {Object {Message}} rspMsg an optional response message to get the response to the CellInfo request. If
+     the rspMsg is not provided, then CellInfo will still be requested from the modem and
+     cached locally for future lookup.
+*/
+requestAllCellInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getSignalStrength'>/**
+</span>@return {Object {android.telephony.SignalStrength}} signal strength
+*/
+getSignalStrength : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-registerForSubscriptionInfoReady'>/**Registration point for subscription info ready
+</span>@param {Object {Handler}} h handler to notify
+@param {Number} what what code of message when delivered
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForSubscriptionInfoReady : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-unregisterForSubscriptionInfoReady'>/**
+</span>*/
+unregisterForSubscriptionInfoReady : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-isImsRegistered'>/**
+</span>*/
+isImsRegistered : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-isDeviceShuttingDown'>/**Check if the device is shutting down.
+</span>*/
+isDeviceShuttingDown : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-getLocaleTracker'>/**
+</span>*/
+getLocaleTracker : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-updateOperatorNameForCellInfo'>/**To modify the operator name of CellInfo by pattern.
+</span>@param {Object {java.util.List}} cellInfos List of CellInfo{@link CellInfo}.
+*/
+updateOperatorNameForCellInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-ServiceStateTracker-method-filterOperatorNameByPattern'>/**To modify the operator name by pattern.
+</span>@param {String} operatorName Registered operator name
+@return {String} An operator name.
+*/
+filterOperatorNameByPattern : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

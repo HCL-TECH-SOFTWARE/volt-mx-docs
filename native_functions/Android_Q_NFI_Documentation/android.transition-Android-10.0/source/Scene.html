@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-transition-Scene'>/**@class android.transition.Scene
+</span>@extends java.lang.Object
+
+ A scene represents the collection of values that various properties in the
+ View hierarchy will have when the scene is applied. A Scene can be
+ configured to automatically run a Transition when it is applied, which will
+ animate the various property changes that take place during the
+ scene change.
+*/
+var Scene = {
+
+<span id='android-transition-Scene-method-getSceneForLayout'>/**Returns a Scene described by the resource file associated with the given
+</span> &lt;code&gt;layoutId&lt;/code&gt; parameter. If such a Scene has already been created for
+ the given &lt;code&gt;sceneRoot&lt;/code&gt;, that same Scene will be returned.
+ This caching of layoutId-based scenes enables sharing of common scenes
+ between those created in code and those referenced by {@link android.transition.TransitionManager}
+ XML resource files.
+@param {Object {ViewGroup}} sceneRoot The root of the hierarchy in which scene changes
+ and transitions will take place.
+@param {Number} layoutId The id of a standard layout resource file.
+@param {Object {Context}} context The context used in the process of inflating
+ the layout resource.
+@return {Object {android.transition.Scene}} The scene for the given root and layout id
+*/
+getSceneForLayout : function(  ) {},
+
+<span id='android-transition-Scene-method-getSceneRoot'>/**Gets the root of the scene, which is the root of the view hierarchy
+</span> affected by changes due to this scene, and which will be animated
+ when this scene is entered.
+@return {Object {android.view.ViewGroup}} The root of the view hierarchy affected by this scene.
+*/
+getSceneRoot : function(  ) {},
+
+<span id='android-transition-Scene-method-exit'>/**Exits this scene, if it is the current scene
+</span> on the scene's {@link #getSceneRoot() scene root}. The current scene is
+ set when {@link #enter() entering} a scene.
+ Exiting a scene runs the {@link #setExitAction(Runnable) exit action}
+ if there is one.
+*/
+exit : function(  ) {},
+
+<span id='android-transition-Scene-method-enter'>/**Enters this scene, which entails changing all values that
+</span> are specified by this scene. These may be values associated
+ with a layout view group or layout resource file which will
+ now be added to the scene root, or it may be values changed by
+ an {@link #setEnterAction}(Runnable) enter action}, or a
+ combination of the these. No transition will be run when the
+ scene is entered. To get transition behavior in scene changes,
+ use one of the methods in {@link android.transition.TransitionManager} instead.
+*/
+enter : function(  ) {},
+
+<span id='android-transition-Scene-method-getCurrentScene'>/**Gets the current {@link android.transition.Scene} set on the given ViewGroup. A scene is set on a ViewGroup
+</span> only if that ViewGroup is the scene root.
+@param {Object {ViewGroup}} sceneRoot The ViewGroup on which the current scene will be returned
+@return {Object {android.transition.Scene}} The current Scene set on this ViewGroup. A value of null indicates that
+ no Scene is currently set.
+*/
+getCurrentScene : function(  ) {},
+
+<span id='android-transition-Scene-method-setEnterAction'>/**Scenes that are not defined with layout resources or
+</span> hierarchies, or which need to perform additional steps
+ after those hierarchies are changed to, should set an enter
+ action, and possibly an exit action as well. An enter action
+ will cause Scene to call back into application code to do
+ anything else the application needs after transitions have
+ captured pre-change values and after any other scene changes
+ have been applied, such as the layout (if any) being added to
+ the view hierarchy. After this method is called, Transitions will
+ be played.
+@param {Object {Runnable}} action The runnable whose {@link Runnable#run() run()} method will
+ be called when this scene is entered
+@see #setExitAction(Runnable)
+@see Scene#Scene(ViewGroup, View)
+*/
+setEnterAction : function(  ) {},
+
+<span id='android-transition-Scene-method-setExitAction'>/**Scenes that are not defined with layout resources or
+</span> hierarchies, or which need to perform additional steps
+ after those hierarchies are changed to, should set an enter
+ action, and possibly an exit action as well. An exit action
+ will cause Scene to call back into application code to do
+ anything the application needs to do after applicable transitions have
+ captured pre-change values, but before any other scene changes
+ have been applied, such as the new layout (if any) being added to
+ the view hierarchy. After this method is called, the next scene
+ will be entered, including a call to {@link #setEnterAction}(Runnable)
+ if an enter action is set.
+@see #setEnterAction(Runnable)
+@see Scene#Scene(ViewGroup, View)
+*/
+setExitAction : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

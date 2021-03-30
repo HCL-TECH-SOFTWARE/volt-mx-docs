@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-SmsApplication'>/**@class com.android.internal.telephony.SmsApplication
+</span>@extends java.lang.Object
+
+ Class for managing the primary application that we will deliver SMS/MMS messages to
+
+ {@hide}
+*/
+var SmsApplication = {
+
+<span id='com-android-internal-telephony-SmsApplication-method-getApplicationCollection'>/**Returns the list of available SMS apps defined as apps that are registered for both the
+</span> SMS_RECEIVED_ACTION (SMS) and WAP_PUSH_RECEIVED_ACTION (MMS) broadcasts (and their broadcast
+ receivers are enabled)
+
+ Requirements to be an SMS application:
+ Implement SMS_DELIVER_ACTION broadcast receiver.
+ Require BROADCAST_SMS permission.
+
+ Implement WAP_PUSH_DELIVER_ACTION broadcast receiver.
+ Require BROADCAST_WAP_PUSH permission.
+
+ Implement RESPOND_VIA_MESSAGE intent.
+ Support smsto Uri scheme.
+ Require SEND_RESPOND_VIA_MESSAGE permission.
+
+ Implement ACTION_SENDTO intent.
+ Support smsto Uri scheme.
+*/
+getApplicationCollection : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getApplicationCollectionAsUser'>/**Same as {@link #getApplicationCollection} but it takes a target user ID.
+</span>*/
+getApplicationCollectionAsUser : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getApplicationForPackage'>/**Checks to see if we have a valid installed SMS application for the specified package name
+</span>@return {Object {com.android.internal.telephony.SmsApplication.SmsApplicationData}} Data for the specified package name or null if there isn't one
+*/
+getApplicationForPackage : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-setDefaultApplication'>/**Sets the specified package as the default SMS/MMS application. The caller of this method
+</span> needs to have permission to set AppOps and write to secure settings.
+*/
+setDefaultApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-setDefaultApplicationAsUser'>/**Same as {@link #setDefaultApplication} but takes a target user id.
+</span>*/
+setDefaultApplicationAsUser : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-broadcastSmsAppChange'>/**Sends broadcasts on sms app change:
+</span> {@link Intent#ACTION_DEFAULT_SMS_PACKAGE_CHANGED}
+ {@link Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL}
+*/
+broadcastSmsAppChange : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-initSmsPackageMonitor'>/**
+</span>*/
+initSmsPackageMonitor : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getSmsApplicationData'>/**Returns SmsApplicationData for this package if this package is capable of being set as the
+</span> default SMS application.
+*/
+getSmsApplicationData : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getDefaultSmsApplication'>/**Gets the default SMS application
+</span>@param {Object {Context}} context context from the calling app
+@param {Boolean} updateIfNeeded update the default app if there is no valid default app configured.
+@return {Object {android.content.ComponentName}} component name of the app and class to deliver SMS messages to
+*/
+getDefaultSmsApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getDefaultSmsApplicationAsUser'>/**Gets the default SMS application on a given user
+</span>@param {Object {Context}} context context from the calling app
+@param {Boolean} updateIfNeeded update the default app if there is no valid default app configured.
+@param {Number} userId target user ID.
+@return {Object {android.content.ComponentName}} component name of the app and class to deliver SMS messages to
+*/
+getDefaultSmsApplicationAsUser : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getDefaultMmsApplication'>/**Gets the default MMS application
+</span>@param {Object {Context}} context context from the calling app
+@param {Boolean} updateIfNeeded update the default app if there is no valid default app configured.
+@return {Object {android.content.ComponentName}} component name of the app and class to deliver MMS messages to
+*/
+getDefaultMmsApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getDefaultRespondViaMessageApplication'>/**Gets the default Respond Via Message application
+</span>@param {Object {Context}} context context from the calling app
+@param {Boolean} updateIfNeeded update the default app if there is no valid default app configured.
+@return {Object {android.content.ComponentName}} component name of the app and class to direct Respond Via Message intent to
+*/
+getDefaultRespondViaMessageApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getDefaultSendToApplication'>/**Gets the default Send To (smsto) application.
+</span> &lt;p&gt;
+ Caller must pass in the correct user context if calling from a singleton service.
+@param {Object {Context}} context context from the calling app
+@param {Boolean} updateIfNeeded update the default app if there is no valid default app configured.
+@return {Object {android.content.ComponentName}} component name of the app and class to direct SEND_TO (smsto) intent to
+*/
+getDefaultSendToApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getDefaultExternalTelephonyProviderChangedApplication'>/**Gets the default application that handles external changes to the SmsProvider and
+</span> MmsProvider.
+@param {Object {Context}} context context from the calling app
+@param {Boolean} updateIfNeeded update the default app if there is no valid default app configured.
+@return {Object {android.content.ComponentName}} component name of the app and class to deliver change intents to
+*/
+getDefaultExternalTelephonyProviderChangedApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-getDefaultSimFullApplication'>/**Gets the default application that handles sim full event.
+</span>@param {Object {Context}} context context from the calling app
+@param {Boolean} updateIfNeeded update the default app if there is no valid default app configured.
+@return {Object {android.content.ComponentName}} component name of the app and class to deliver change intents to
+*/
+getDefaultSimFullApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-shouldWriteMessageForPackage'>/**Returns whether need to write the SMS message to SMS database for this package.
+</span> &lt;p&gt;
+ Caller must pass in the correct user context if calling from a singleton service.
+*/
+shouldWriteMessageForPackage : function(  ) {},
+
+<span id='com-android-internal-telephony-SmsApplication-method-isDefaultSmsApplication'>/**Check if a package is default sms app (or equivalent, like bluetooth)
+</span>@param {Object {Context}} context context from the calling app
+@param {String} packageName the name of the package to be checked
+@return {Boolean} true if the package is default sms app or bluetooth
+*/
+isDefaultSmsApplication : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

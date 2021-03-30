@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-service-contentcapture-ContentCaptureService'>/**@class android.service.contentcapture.ContentCaptureService
+</span>@extends android.app.Service
+
+ A service used to capture the content of the screen to provide contextual data in other areas of
+ the system such as Autofill.
+
+ @hide
+*/
+var ContentCaptureService = {
+
+<span id='android-service-contentcapture-ContentCaptureService-property-SERVICE_INTERFACE'>/** The {@link Intent} that must be declared as handled by the service.
+</span>
+ &lt;p&gt;To be supported, the service must also require the
+ {@link android.Manifest.permission#BIND_CONTENT_CAPTURE_SERVICE} permission so
+ that other applications can not abuse it.
+*/
+SERVICE_INTERFACE : &quot;android.service.contentcapture.ContentCaptureService&quot;,
+<span id='android-service-contentcapture-ContentCaptureService-property-SERVICE_META_DATA'>/** Name under which a ContentCaptureService component publishes information about itself.
+</span>
+ &lt;p&gt;This meta-data should reference an XML resource containing a
+ &lt;code&gt;&amp;lt;{@link android.R.styleable#ContentCaptureService content-capture-service}&amp;gt;&lt;/code&gt; tag.
+
+ &lt;p&gt;Here's an example of how to use it on {@code AndroidManifest.xml}:
+
+ &lt;pre&gt;
+ &amp;lt;service android:name=&quot;.MyContentCaptureService&quot;
+     android:permission=&quot;android.permission.BIND_CONTENT_CAPTURE_SERVICE&quot;&amp;gt;
+   &amp;lt;intent-filter&amp;gt;
+     &amp;lt;action android:name=&quot;android.service.contentcapture.ContentCaptureService&quot; /&amp;gt;
+   &amp;lt;/intent-filter&amp;gt;
+
+   &amp;lt;meta-data
+       android:name=&quot;android.content_capture&quot;
+       android:resource=&quot;@xml/my_content_capture_service&quot;/&amp;gt;
+ &amp;lt;/service&amp;gt;
+ &lt;/pre&gt;
+
+ &lt;p&gt;And then on {@code res/xml/my_content_capture_service.xml}:
+
+ &lt;pre&gt;
+   &amp;lt;content-capture-service xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+       android:settingsActivity=&quot;my.package.MySettingsActivity&quot;&amp;gt;
+   &amp;lt;/content-capture-service&amp;gt;
+ &lt;/pre&gt;
+*/
+SERVICE_META_DATA : &quot;android.content_capture&quot;,
+<span id='android-service-contentcapture-ContentCaptureService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onBind'>/**
+</span>@hide 
+*/
+onBind : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-setContentCaptureWhitelist'>/**Explicitly limits content capture to the given packages and activities.
+</span>
+ &lt;p&gt;To reset the whitelist, call it passing {@code null} to both arguments.
+
+ &lt;p&gt;Useful when the service wants to restrict content capture to a category of apps, like
+ chat apps. For example, if the service wants to support view captures on all activities of
+ app {@code ChatApp1} and just activities {@code act1} and {@code act2} of {@code ChatApp2},
+ it would call: {@code setContentCaptureWhitelist(Sets.newArraySet(&quot;ChatApp1&quot;),
+ Sets.newArraySet(new ComponentName(&quot;ChatApp2&quot;, &quot;act1&quot;),
+ new ComponentName(&quot;ChatApp2&quot;, &quot;act2&quot;)));}
+*/
+setContentCaptureWhitelist : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-setContentCaptureConditions'>/**Explicitly sets the conditions for which content capture should be available by an app.
+</span>
+ &lt;p&gt;Typically used to restrict content capture to a few websites on browser apps. Example:
+
+ &lt;code&gt;
+   ArraySet&lt;ContentCaptureCondition&gt; conditions = new ArraySet&lt;&gt;(1);
+   conditions.add(new ContentCaptureCondition(new LocusId(&quot;^https://.\*\.example\\.com$&quot;),
+       ContentCaptureCondition.FLAG_IS_REGEX));
+   service.setContentCaptureConditions(&quot;com.example.browser_app&quot;, conditions);
+
+ &lt;/code&gt;
+
+ &lt;p&gt;NOTE: &lt;/p&gt; this method doesn't automatically disable content capture for the given
+ conditions; it's up to the {@code packageName} implementation to call
+ {@link ContentCaptureManager#getContentCaptureConditions()} and disable it accordingly.
+@param {String} packageName name of the packages where the restrictions are set.
+@param {Object {java.util.Set}} conditions list of conditions, or {@code null} to reset the conditions for the
+ package.
+*/
+setContentCaptureConditions : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onConnected'>/**Called when the Android system connects to service.
+</span>
+ &lt;p&gt;You should generally do initialization here rather than in {@link #onCreate}.
+*/
+onConnected : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onCreateContentCaptureSession'>/**Creates a new content capture session.
+</span>@param {Object {ContentCaptureContext}} context content capture context
+@param {Object {ContentCaptureSessionId}} sessionId the session's Id
+*/
+onCreateContentCaptureSession : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onContentCaptureEvent'>/**Notifies the service of {@link ContentCaptureEvent events} associated with a content capture
+</span> session.
+@param {Object {ContentCaptureSessionId}} sessionId the session's Id
+@param {Object {ContentCaptureEvent}} event the event
+*/
+onContentCaptureEvent : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onDataRemovalRequest'>/**Notifies the service that the app requested to remove content capture data.
+</span>@param {Object {DataRemovalRequest}} request the content capture data requested to be removed
+*/
+onDataRemovalRequest : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onActivitySnapshot'>/**Notifies the service of {@link android.service.contentcapture.SnapshotData snapshot data} associated with a session.
+</span>@param {Object {ContentCaptureSessionId}} sessionId the session's Id
+@param {Object {SnapshotData}} snapshotData the data
+*/
+onActivitySnapshot : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onActivityEvent'>/**Notifies the service of an activity-level event that is not associated with a session.
+</span>
+ &lt;p&gt;This method can be used to track some high-level events for all activities, even those
+ that are not whitelisted for Content Capture.
+@param {Object {ActivityEvent}} event high-level activity event
+*/
+onActivityEvent : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onDestroyContentCaptureSession'>/**Destroys the content capture session.
+</span>@param {Object {ContentCaptureSessionId}} sessionId the id of the session to destroy
+*/
+onDestroyContentCaptureSession : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-disableSelf'>/**Disables the Content Capture service for the given user.
+</span>*/
+disableSelf : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-onDisconnected'>/**Called when the Android system disconnects from the service.
+</span>
+ &lt;p&gt; At this point this service may no longer be an active {@link android.service.contentcapture.ContentCaptureService}.
+ It should not make calls on {@link ContentCaptureManager} that requires the caller to be
+ the current service.
+*/
+onDisconnected : function(  ) {},
+
+<span id='android-service-contentcapture-ContentCaptureService-method-setClientState'>/**Sends the state of the {@link ContentCaptureManager} in the client app.
+</span>@param {Object {IResultReceiver}} clientReceiver receiver in the client app.
+@param {Number} sessionState state of the session
+@param {Object {IBinder}} binder handle to the {@code IContentCaptureDirectManager} object that resides in the
+ service.
+@hide 
+*/
+setClientState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

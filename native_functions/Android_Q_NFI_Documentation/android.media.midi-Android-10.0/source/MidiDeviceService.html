@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-midi-MidiDeviceService'>/**@class android.media.midi.MidiDeviceService
+</span>@extends android.app.Service
+
+ A service that implements a virtual MIDI device.
+ Subclasses must implement the {@link #onGetInputPortReceivers} method to provide a
+ list of {@link android.media.midi.MidiReceiver}s to receive data sent to the device's input ports.
+ Similarly, subclasses can call {@link #getOutputPortReceivers} to fetch a list
+ of {@link android.media.midi.MidiReceiver}s for sending data out the output ports.
+
+ &lt;p&gt;To extend this class, you must declare the service in your manifest file with
+ an intent filter with the {@link #SERVICE_INTERFACE} action
+ and meta-data to describe the virtual device.
+ For example:&lt;/p&gt;
+ &lt;pre&gt;
+ &amp;lt;service android:name=&quot;.VirtualDeviceService&quot;
+          android:label=&quot;&amp;#64;string/service_name&quot;&gt;
+     &amp;lt;intent-filter&gt;
+         &amp;lt;action android:name=&quot;android.media.midi.MidiDeviceService&quot; /&gt;
+     &amp;lt;/intent-filter&gt;
+           &amp;lt;meta-data android:name=&quot;android.media.midi.MidiDeviceService&quot;
+                android:resource=&quot;@xml/device_info&quot; /&gt;
+ &amp;lt;/service&gt;&lt;/pre&gt;
+*/
+var MidiDeviceService = {
+
+<span id='android-media-midi-MidiDeviceService-property-SERVICE_INTERFACE'>/***/
+</span>SERVICE_INTERFACE : &quot;android.media.midi.MidiDeviceService&quot;,
+<span id='android-media-midi-MidiDeviceService-method-onCreate'>/**
+</span>*/
+onCreate : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceService-method-onGetInputPortReceivers'>/**Returns an array of {@link android.media.midi.MidiReceiver} for the device's input ports.
+</span> Subclasses must override this to provide the receivers which will receive
+ data sent to the device's input ports. An empty array should be returned if
+ the device has no input ports.
+@return {Object {android.media.midi.MidiReceiver}} array of MidiReceivers
+*/
+onGetInputPortReceivers : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceService-method-getOutputPortReceivers'>/**Returns an array of {@link android.media.midi.MidiReceiver} for the device's output ports.
+</span> These can be used to send data out the device's output ports.
+@return {Object {android.media.midi.MidiReceiver}} array of MidiReceivers
+*/
+getOutputPortReceivers : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceService-method-getDeviceInfo'>/**returns the {@link android.media.midi.MidiDeviceInfo} instance for this service
+</span>@return {Object {android.media.midi.MidiDeviceInfo}} our MidiDeviceInfo
+*/
+getDeviceInfo : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceService-method-onDeviceStatusChanged'>/**Called to notify when an our {@link android.media.midi.MidiDeviceStatus} has changed
+</span>@param {Object {MidiDeviceStatus}} status the number of the port that was opened
+*/
+onDeviceStatusChanged : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceService-method-onClose'>/**Called to notify when our device has been closed by all its clients
+</span>*/
+onClose : function(  ) {},
+
+<span id='android-media-midi-MidiDeviceService-method-onBind'>/**
+</span>*/
+onBind : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

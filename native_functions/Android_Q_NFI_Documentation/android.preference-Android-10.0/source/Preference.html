@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-preference-Preference'>/**@class android.preference.Preference
+</span> implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ Represents the basic Preference UI building
+ block displayed by a {@link android.preference.PreferenceActivity} in the form of a
+ {@link ListView}. This class provides the {@link View} to be displayed in
+ the activity and associates with a {@link SharedPreferences} to
+ store/retrieve the preference data.
+ &lt;p&gt;
+ When specifying a preference hierarchy in XML, each element can point to a
+ subclass of {@link android.preference.Preference}, similar to the view hierarchy and layouts.
+ &lt;p&gt;
+ This class contains a {@code key} that will be used as the key into the
+ {@link SharedPreferences}. It is up to the subclass to decide how to store
+ the value.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For information about building a settings UI with Preferences,
+ read the &lt;a href=&quot;{@docRoot}guide/topics/ui/settings.html&quot;&gt;Settings&lt;/a&gt;
+ guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ @attr ref android.R.styleable#Preference_icon
+ @attr ref android.R.styleable#Preference_key
+ @attr ref android.R.styleable#Preference_title
+ @attr ref android.R.styleable#Preference_summary
+ @attr ref android.R.styleable#Preference_order
+ @attr ref android.R.styleable#Preference_fragment
+ @attr ref android.R.styleable#Preference_layout
+ @attr ref android.R.styleable#Preference_widgetLayout
+ @attr ref android.R.styleable#Preference_enabled
+ @attr ref android.R.styleable#Preference_selectable
+ @attr ref android.R.styleable#Preference_dependency
+ @attr ref android.R.styleable#Preference_persistent
+ @attr ref android.R.styleable#Preference_defaultValue
+ @attr ref android.R.styleable#Preference_shouldDisableView
+ @attr ref android.R.styleable#Preference_recycleEnabled
+ @attr ref android.R.styleable#Preference_singleLineTitle
+ @attr ref android.R.styleable#Preference_iconSpaceReserved
+
+ @deprecated Use the &lt;a href=&quot;{@docRoot}jetpack/androidx.html&quot;&gt;AndroidX&lt;/a&gt;
+      &lt;a href=&quot;{@docRoot}reference/androidx/preference/package-summary.html&quot;&gt;
+      Preference Library&lt;/a&gt; for consistent behavior across all devices. For more information on
+      using the AndroidX Preference Library see
+      &lt;a href=&quot;{@docRoot}guide/topics/ui/settings.html&quot;&gt;Settings&lt;/a&gt;.
+*/
+var Preference = {
+
+<span id='android-preference-Preference-property-DEFAULT_ORDER'>/** Specify for {@link #setOrder}(int) if a specific order is not required.
+</span>*/
+DEFAULT_ORDER : &quot;2147483647&quot;,
+<span id='android-preference-Preference-method-setIntent'>/**Sets an {@link Intent} to be used for
+</span> {@link Context#startActivity(Intent)} when this Preference is clicked.
+@param {Object {Intent}} intent The intent associated with this Preference.
+*/
+setIntent : function(  ) {},
+
+<span id='android-preference-Preference-method-getIntent'>/**Return the {@link Intent} associated with this Preference.
+</span>@return {Object {android.content.Intent}} The {@link Intent} last set via {@link #setIntent(Intent)} or XML.
+*/
+getIntent : function(  ) {},
+
+<span id='android-preference-Preference-method-setFragment'>/**Sets the class name of a fragment to be shown when this Preference is clicked.
+</span>@param {String} fragment The class name of the fragment associated with this Preference.
+*/
+setFragment : function(  ) {},
+
+<span id='android-preference-Preference-method-getFragment'>/**Return the fragment class name associated with this Preference.
+</span>@return {String} The fragment class name last set via {@link #setFragment} or XML.
+*/
+getFragment : function(  ) {},
+
+<span id='android-preference-Preference-method-setPreferenceDataStore'>/**Sets a {@link android.preference.PreferenceDataStore} to be used by this Preference instead of using
+</span> {@link android.content.SharedPreferences}.
+
+ &lt;p&gt;The data store will remain assigned even if the Preference is moved around the preference
+ hierarchy. It will also override a data store propagated from the {@link android.preference.PreferenceManager}
+ that owns this Preference.
+@param {Object {PreferenceDataStore}} dataStore The {@link PreferenceDataStore} to be used by this Preference.
+@see PreferenceManager#setPreferenceDataStore(PreferenceDataStore)
+*/
+setPreferenceDataStore : function(  ) {},
+
+<span id='android-preference-Preference-method-getPreferenceDataStore'>/**Returns {@link android.preference.PreferenceDataStore} used by this Preference. Returns {@code null} if
+</span> {@link android.content.SharedPreferences} is used instead.
+
+ &lt;p&gt;By default preferences always use {@link android.content.SharedPreferences}. To make this
+ preference to use the {@link android.preference.PreferenceDataStore} you need to assign your implementation
+ to the Preference itself via {@link #setPreferenceDataStore}(PreferenceDataStore) or to its
+ {@link android.preference.PreferenceManager} via
+ {@link android.preference.PreferenceManager#setPreferenceDataStore(PreferenceDataStore)}.
+@return {Object {android.preference.PreferenceDataStore}} The {@link PreferenceDataStore} used by this Preference or {@code null} if none.
+*/
+getPreferenceDataStore : function(  ) {},
+
+<span id='android-preference-Preference-method-getExtras'>/**Return the extras Bundle object associated with this preference, creating
+</span> a new Bundle if there currently isn't one.  You can use this to get and
+ set individual extra key/value pairs.
+*/
+getExtras : function(  ) {},
+
+<span id='android-preference-Preference-method-peekExtras'>/**Return the extras Bundle object associated with this preference, returning {@code null} if
+</span> there is not currently one.
+*/
+peekExtras : function(  ) {},
+
+<span id='android-preference-Preference-method-setLayoutResource'>/**Sets the layout resource that is inflated as the {@link View} to be shown
+</span> for this Preference. In most cases, the default layout is sufficient for
+ custom Preference objects and only the widget layout needs to be changed.
+ &lt;p&gt;
+ This layout should contain a {@link ViewGroup} with ID
+ {@link android.R.id#widget_frame} to be the parent of the specific widget
+ for this Preference. It should similarly contain
+ {@link android.R.id#title} and {@link android.R.id#summary}.
+@param {Number} layoutResId The layout resource ID to be inflated and returned as
+            a {@link View}.
+@see #setWidgetLayoutResource(int)
+*/
+setLayoutResource : function(  ) {},
+
+<span id='android-preference-Preference-method-getLayoutResource'>/**Gets the layout resource that will be shown as the {@link View} for this Preference.
+</span>@return {Number} The layout resource ID.
+*/
+getLayoutResource : function(  ) {},
+
+<span id='android-preference-Preference-method-setWidgetLayoutResource'>/**Sets the layout for the controllable widget portion of this Preference. This
+</span> is inflated into the main layout. For example, a {@link android.preference.CheckBoxPreference}
+ would specify a custom layout (consisting of just the CheckBox) here,
+ instead of creating its own main layout.
+@param {Number} widgetLayoutResId The layout resource ID to be inflated into the
+            main layout.
+@see #setLayoutResource(int)
+*/
+setWidgetLayoutResource : function(  ) {},
+
+<span id='android-preference-Preference-method-getWidgetLayoutResource'>/**Gets the layout resource for the controllable widget portion of this Preference.
+</span>@return {Number} The layout resource ID.
+*/
+getWidgetLayoutResource : function(  ) {},
+
+<span id='android-preference-Preference-method-getView'>/**Gets the View that will be shown in the {@link android.preference.PreferenceActivity}.
+</span>@param {Object {View}} convertView The old View to reuse, if possible. Note: You should
+            check that this View is non-null and of an appropriate type
+            before using. If it is not possible to convert this View to
+            display the correct data, this method can create a new View.
+@param {Object {ViewGroup}} parent The parent that this View will eventually be attached to.
+@return {Object {android.view.View}} Returns the same Preference object, for chaining multiple calls
+         into a single statement.
+@see #onCreateView(ViewGroup)
+@see #onBindView(View)
+*/
+getView : function(  ) {},
+
+<span id='android-preference-Preference-method-setOrder'>/**Sets the order of this Preference with respect to other Preference objects on the same level.
+</span> If this is not specified, the default behavior is to sort alphabetically. The
+ {@link android.preference.PreferenceGroup#setOrderingAsAdded(boolean)} can be used to order Preference objects
+ based on the order they appear in the XML.
+@param {Number} order the order for this Preference. A lower value will be shown first. Use
+              {@link #DEFAULT_ORDER} to sort alphabetically or allow ordering from XML
+@see PreferenceGroup#setOrderingAsAdded(boolean)
+@see #DEFAULT_ORDER
+*/
+setOrder : function(  ) {},
+
+<span id='android-preference-Preference-method-getOrder'>/**Gets the order of this Preference with respect to other Preference objects on the same level.
+</span>@return {Number} the order of this Preference
+@see #setOrder(int)
+*/
+getOrder : function(  ) {},
+
+<span id='android-preference-Preference-method-setTitle'>/**Sets the title for this Preference with a CharSequence. This title will be placed into the ID
+</span> {@link android.R.id#title} within the View created by {@link #onCreateView}(ViewGroup).
+@param {Object {CharSequence}} title the title for this Preference
+*/
+setTitle : function(  ) {},
+
+<span id='android-preference-Preference-method-setTitle'>/**Sets the title for this Preference with a resource ID.
+</span>@param {Number} titleResId the title as a resource ID
+@param titleResId the title as a resource ID
+*/
+setTitle : function(  ) {},
+
+<span id='android-preference-Preference-method-getTitleRes'>/**Returns the title resource ID of this Preference. If the title did not come from a resource,
+</span> {@code 0} is returned.
+@return {Number} the title resource
+@see #setTitle(int)
+*/
+getTitleRes : function(  ) {},
+
+<span id='android-preference-Preference-method-getTitle'>/**Returns the title of this Preference.
+</span>@return {Object {java.lang.CharSequence}} the title
+@see #setTitle(CharSequence)
+*/
+getTitle : function(  ) {},
+
+<span id='android-preference-Preference-method-setIcon'>/**Sets the icon for this Preference with a Drawable. This icon will be placed into the ID
+</span> {@link android.R.id#icon} within the View created by {@link #onCreateView}(ViewGroup).
+@param {Object {Drawable}} icon the optional icon for this Preference
+*/
+setIcon : function(  ) {},
+
+<span id='android-preference-Preference-method-setIcon'>/**Sets the icon for this Preference with a resource ID.
+</span>@param {Number} iconResId the icon as a resource ID
+@param iconResId the icon as a resource ID
+*/
+setIcon : function(  ) {},
+
+<span id='android-preference-Preference-method-getIcon'>/**Returns the icon of this Preference.
+</span>@return {Object {android.graphics.drawable.Drawable}} the icon
+@see #setIcon(Drawable)
+*/
+getIcon : function(  ) {},
+
+<span id='android-preference-Preference-method-getSummary'>/**Returns the summary of this Preference.
+</span>@return {Object {java.lang.CharSequence}} the summary
+@see #setSummary(CharSequence)
+*/
+getSummary : function(  ) {},
+
+<span id='android-preference-Preference-method-setSummary'>/**Sets the summary for this Preference with a CharSequence.
+</span>@param {Object {CharSequence}} summary the summary for the preference
+*/
+setSummary : function(  ) {},
+
+<span id='android-preference-Preference-method-setSummary'>/**Sets the summary for this Preference with a resource ID.
+</span>@param {Number} summaryResId the summary as a resource
+@param summaryResId the summary as a resource
+*/
+setSummary : function(  ) {},
+
+<span id='android-preference-Preference-method-setEnabled'>/**Sets whether this Preference is enabled. If disabled, it will
+</span> not handle clicks.
+@param {Boolean} enabled set {@code true} to enable it
+*/
+setEnabled : function(  ) {},
+
+<span id='android-preference-Preference-method-isEnabled'>/**Checks whether this Preference should be enabled in the list.
+</span>@return {Boolean} {@code true} if this Preference is enabled, false otherwise
+*/
+isEnabled : function(  ) {},
+
+<span id='android-preference-Preference-method-setSelectable'>/**Sets whether this Preference is selectable.
+</span>@param {Boolean} selectable set {@code true} to make it selectable
+*/
+setSelectable : function(  ) {},
+
+<span id='android-preference-Preference-method-isSelectable'>/**Checks whether this Preference should be selectable in the list.
+</span>@return {Boolean} {@code true} if it is selectable, {@code false} otherwise
+*/
+isSelectable : function(  ) {},
+
+<span id='android-preference-Preference-method-setShouldDisableView'>/**Sets whether this Preference should disable its view when it gets disabled.
+</span>
+ &lt;p&gt;For example, set this and {@link #setEnabled}(boolean) to false for preferences that are
+ only displaying information and 1) should not be clickable 2) should not have the view set to
+ the disabled state.
+@param {Boolean} shouldDisableView set {@code true} if this preference should disable its view when
+                          the preference is disabled
+*/
+setShouldDisableView : function(  ) {},
+
+<span id='android-preference-Preference-method-getShouldDisableView'>/**Checks whether this Preference should disable its view when it's action is disabled.
+</span>@see #setShouldDisableView(boolean)
+@return {Boolean} {@code true} if it should disable the view
+*/
+getShouldDisableView : function(  ) {},
+
+<span id='android-preference-Preference-method-setRecycleEnabled'>/**Sets whether this Preference has enabled to have its view recycled when used in the list
+</span> view. By default the recycling is enabled.
+
+ &lt;p&gt;The value can be changed only before this preference is added to the preference hierarchy.
+
+ &lt;p&gt;If view recycling is not allowed then each time the list view populates this preference
+ the {@link #getView(View, ViewGroup)} method receives a {@code null} convert view and needs
+ to recreate the view. Otherwise view gets recycled and only {@link #onBindView}(View) gets
+ called.
+@param {Boolean} enabled set {@code true} if this preference view should be recycled
+*/
+setRecycleEnabled : function(  ) {},
+
+<span id='android-preference-Preference-method-isRecycleEnabled'>/**Checks whether this Preference has enabled to have its view recycled when used in the list
+</span> view.
+@see #setRecycleEnabled(boolean)
+@return {Boolean} {@code true} if this preference view should be recycled
+*/
+isRecycleEnabled : function(  ) {},
+
+<span id='android-preference-Preference-method-setSingleLineTitle'>/**Sets whether to constrain the title of this Preference to a single line instead of
+</span> letting it wrap onto multiple lines.
+@param {Boolean} singleLineTitle set {@code true} if the title should be constrained to one line
+*/
+setSingleLineTitle : function(  ) {},
+
+<span id='android-preference-Preference-method-isSingleLineTitle'>/**Gets whether the title of this preference is constrained to a single line.
+</span>@see #setSingleLineTitle(boolean)
+@return {Boolean} {@code true} if the title of this preference is constrained to a single line
+*/
+isSingleLineTitle : function(  ) {},
+
+<span id='android-preference-Preference-method-setIconSpaceReserved'>/**Sets whether to reserve the space of this Preference icon view when no icon is provided.
+</span>@param {Boolean} iconSpaceReserved set {@code true} if the space for the icon view should be reserved
+*/
+setIconSpaceReserved : function(  ) {},
+
+<span id='android-preference-Preference-method-isIconSpaceReserved'>/**Gets whether the space this preference icon view is reserved.
+</span>@see #setIconSpaceReserved(boolean)
+@return {Boolean} {@code true} if the space of this preference icon view is reserved
+*/
+isIconSpaceReserved : function(  ) {},
+
+<span id='android-preference-Preference-method-setKey'>/**Sets the key for this Preference, which is used as a key to the {@link SharedPreferences} or
+</span> {@link android.preference.PreferenceDataStore}. This should be unique for the package.
+@param {String} key The key for the preference.
+*/
+setKey : function(  ) {},
+
+<span id='android-preference-Preference-method-getKey'>/**Gets the key for this Preference, which is also the key used for storing values into
+</span> {@link SharedPreferences} or {@link android.preference.PreferenceDataStore}.
+@return {String} The key.
+*/
+getKey : function(  ) {},
+
+<span id='android-preference-Preference-method-hasKey'>/**Checks whether this Preference has a valid key.
+</span>@return {Boolean} True if the key exists and is not a blank string, false otherwise.
+*/
+hasKey : function(  ) {},
+
+<span id='android-preference-Preference-method-isPersistent'>/**Checks whether this Preference is persistent. If it is, it stores its value(s) into
+</span> the persistent {@link SharedPreferences} storage by default or into
+ {@link android.preference.PreferenceDataStore} if assigned.
+@return {Boolean} True if it is persistent.
+*/
+isPersistent : function(  ) {},
+
+<span id='android-preference-Preference-method-setPersistent'>/**Sets whether this Preference is persistent. When persistent, it stores its value(s) into
+</span> the persistent {@link SharedPreferences} storage by default or into
+ {@link android.preference.PreferenceDataStore} if assigned.
+@param {Boolean} persistent set {@code true} if it should store its value(s) into the storage.
+*/
+setPersistent : function(  ) {},
+
+<span id='android-preference-Preference-method-setOnPreferenceChangeListener'>/**Sets the callback to be invoked when this Preference is changed by the
+</span> user (but before the internal state has been updated).
+@param {Object {Preference.OnPreferenceChangeListener}} onPreferenceChangeListener The callback to be invoked.
+*/
+setOnPreferenceChangeListener : function(  ) {},
+
+<span id='android-preference-Preference-method-getOnPreferenceChangeListener'>/**Returns the callback to be invoked when this Preference is changed by the
+</span> user (but before the internal state has been updated).
+@return {Object {android.preference.Preference.OnPreferenceChangeListener}} The callback to be invoked.
+*/
+getOnPreferenceChangeListener : function(  ) {},
+
+<span id='android-preference-Preference-method-setOnPreferenceClickListener'>/**Sets the callback to be invoked when this Preference is clicked.
+</span>@param {Object {Preference.OnPreferenceClickListener}} onPreferenceClickListener The callback to be invoked.
+*/
+setOnPreferenceClickListener : function(  ) {},
+
+<span id='android-preference-Preference-method-getOnPreferenceClickListener'>/**Returns the callback to be invoked when this Preference is clicked.
+</span>@return {Object {android.preference.Preference.OnPreferenceClickListener}} The callback to be invoked.
+*/
+getOnPreferenceClickListener : function(  ) {},
+
+<span id='android-preference-Preference-method-performClick'>/**Called when a click should be performed.
+</span>@param {Object {PreferenceScreen}} preferenceScreen A {@link PreferenceScreen} whose hierarchy click
+            listener should be called in the proper order (between other
+            processing). May be {@code null}.
+@hide 
+*/
+performClick : function(  ) {},
+
+<span id='android-preference-Preference-method-onKey'>/**Allows a Preference to intercept key events without having focus.
+</span> For example, SeekBarPreference uses this to intercept +/- to adjust
+ the progress.
+@return {Boolean} True if the Preference handled the key. Returns false by default.
+@hide 
+*/
+onKey : function(  ) {},
+
+<span id='android-preference-Preference-method-getContext'>/**Returns the {@link android.content.Context} of this Preference.
+</span> Each Preference in a Preference hierarchy can be
+ from different Context (for example, if multiple activities provide preferences into a single
+ {@link android.preference.PreferenceActivity}). This Context will be used to save the Preference values.
+@return {Object {android.content.Context}} The Context of this Preference.
+*/
+getContext : function(  ) {},
+
+<span id='android-preference-Preference-method-getSharedPreferences'>/**Returns the {@link SharedPreferences} where this Preference can read its
+</span> value(s). Usually, it's easier to use one of the helper read methods:
+ {@link #getPersistedBoolean}(boolean), {@link #getPersistedFloat}(float),
+ {@link #getPersistedInt}(int), {@link #getPersistedLong}(long),
+ {@link #getPersistedString}(String). To save values, see
+ {@link #getEditor}().
+ &lt;p&gt;
+ In some cases, writes to the {@link #getEditor}() will not be committed
+ right away and hence not show up in the returned
+ {@link SharedPreferences}, this is intended behavior to improve
+ performance.
+@return {Object {android.content.SharedPreferences}} the {@link SharedPreferences} where this Preference reads its value(s). If
+         this preference isn't attached to a Preference hierarchy or if
+         a {@link PreferenceDataStore} has been set, this method returns {@code null}.
+@see #getEditor()
+@see #setPreferenceDataStore(PreferenceDataStore)
+*/
+getSharedPreferences : function(  ) {},
+
+<span id='android-preference-Preference-method-getEditor'>/**Returns an {@link SharedPreferences.Editor} where this Preference can
+</span> save its value(s). Usually it's easier to use one of the helper save
+ methods: {@link #persistBoolean}(boolean), {@link #persistFloat}(float),
+ {@link #persistInt}(int), {@link #persistLong}(long),
+ {@link #persistString}(String). To read values, see
+ {@link #getSharedPreferences}(). If {@link #shouldCommit}() returns
+ true, it is this Preference's responsibility to commit.
+ &lt;p&gt;
+ In some cases, writes to this will not be committed right away and hence
+ not show up in the SharedPreferences, this is intended behavior to
+ improve performance.
+@return {Object {android.content.SharedPreferences.Editor}} a {@link SharedPreferences.Editor} where this preference saves its value(s). If
+         this preference isn't attached to a Preference hierarchy or if
+         a {@link PreferenceDataStore} has been set, this method returns {@code null}.
+@see #shouldCommit()
+@see #getSharedPreferences()
+@see #setPreferenceDataStore(PreferenceDataStore)
+*/
+getEditor : function(  ) {},
+
+<span id='android-preference-Preference-method-shouldCommit'>/**Returns whether the {@link android.preference.Preference} should commit its saved value(s) in
+</span> {@link #getEditor}(). This may return false in situations where batch
+ committing is being done (by the manager) to improve performance.
+
+ &lt;p&gt;If this preference is using {@link android.preference.PreferenceDataStore} this value is irrelevant.
+@return {Boolean} Whether the Preference should commit its saved value(s).
+@see #getEditor()
+*/
+shouldCommit : function(  ) {},
+
+<span id='android-preference-Preference-method-compareTo'>/**Compares Preference objects based on order (if set), otherwise alphabetically on the titles.
+</span>@param {Object {Preference}} another The Preference to compare to this one.
+@return {Number} 0 if the same; less than 0 if this Preference sorts ahead of &lt;var&gt;another&lt;/var&gt;;
+          greater than 0 if this Preference sorts after &lt;var&gt;another&lt;/var&gt;.
+*/
+compareTo : function(  ) {},
+
+<span id='android-preference-Preference-method-getPreferenceManager'>/**Gets the {@link android.preference.PreferenceManager} that manages this Preference object's tree.
+</span>@return {Object {android.preference.PreferenceManager}} The {@link PreferenceManager}.
+*/
+getPreferenceManager : function(  ) {},
+
+<span id='android-preference-Preference-method-notifyDependencyChange'>/**Notifies any listening dependents of a change that affects the
+</span> dependency.
+@param {Boolean} disableDependents Whether this Preference should disable
+            its dependents.
+*/
+notifyDependencyChange : function(  ) {},
+
+<span id='android-preference-Preference-method-onDependencyChanged'>/**Called when the dependency changes.
+</span>@param {Object {Preference}} dependency The Preference that this Preference depends on.
+@param {Boolean} disableDependent Set true to disable this Preference.
+*/
+onDependencyChanged : function(  ) {},
+
+<span id='android-preference-Preference-method-onParentChanged'>/**Called when the implicit parent dependency changes.
+</span>@param {Object {Preference}} parent The Preference that this Preference depends on.
+@param {Boolean} disableChild Set true to disable this Preference.
+*/
+onParentChanged : function(  ) {},
+
+<span id='android-preference-Preference-method-shouldDisableDependents'>/**Checks whether this preference's dependents should currently be
+</span> disabled.
+@return {Boolean} True if the dependents should be disabled, otherwise false.
+*/
+shouldDisableDependents : function(  ) {},
+
+<span id='android-preference-Preference-method-setDependency'>/**Sets the key of a Preference that this Preference will depend on. If that
+</span> Preference is not set or is off, this Preference will be disabled.
+@param {String} dependencyKey The key of the Preference that this depends on.
+*/
+setDependency : function(  ) {},
+
+<span id='android-preference-Preference-method-getDependency'>/**Returns the key of the dependency on this Preference.
+</span>@return {String} The key of the dependency.
+@see #setDependency(String)
+*/
+getDependency : function(  ) {},
+
+<span id='android-preference-Preference-method-getParent'>/**Returns the {@link android.preference.PreferenceGroup} which is this Preference assigned to or {@code null} if
+</span> this preference is not assigned to any group or is a root Preference.
+@return {Object {android.preference.PreferenceGroup}} the parent PreferenceGroup or {@code null} if not attached to any
+*/
+getParent : function(  ) {},
+
+<span id='android-preference-Preference-method-setDefaultValue'>/**Sets the default value for this Preference, which will be set either if
+</span> persistence is off or persistence is on and the preference is not found
+ in the persistent storage.
+@param {Object {Object}} defaultValue The default value.
+*/
+setDefaultValue : function(  ) {},
+
+<span id='android-preference-Preference-method-persistStringSet'>/**Attempts to persist a set of Strings if this Preference is persistent.
+</span>@param {Object {java.util.Set}} values The values to persist.
+@return {Boolean} True if this Preference is persistent. (This is not whether the
+         value was persisted, since we may not necessarily commit if there
+         will be a batch commit later.)
+@see #getPersistedStringSet(Set)
+*/
+persistStringSet : function(  ) {},
+
+<span id='android-preference-Preference-method-getPersistedStringSet'>/**Attempts to get a persisted set of Strings if this Preference is persistent.
+</span>@param {Object {java.util.Set}} defaultReturnValue The default value to return if either this
+            Preference is not persistent or this Preference is not present.
+@return {Object {java.util.Set}} The value from the data store or the default return
+         value.
+@see #persistStringSet(Set)
+*/
+getPersistedStringSet : function(  ) {},
+
+<span id='android-preference-Preference-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-preference-Preference-method-saveHierarchyState'>/**Store this Preference hierarchy's frozen state into the given container.
+</span>@param {Object {Bundle}} container The Bundle in which to save the instance of this Preference.
+@see #restoreHierarchyState
+@see #onSaveInstanceState
+*/
+saveHierarchyState : function(  ) {},
+
+<span id='android-preference-Preference-method-restoreHierarchyState'>/**Restore this Preference hierarchy's previously saved state from the given container.
+</span>@param {Object {Bundle}} container The Bundle that holds the previously saved state.
+@see #saveHierarchyState
+@see #onRestoreInstanceState
+*/
+restoreHierarchyState : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

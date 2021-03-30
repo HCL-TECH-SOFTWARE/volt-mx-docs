@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-NetworkScoreManager'>/**@class android.net.NetworkScoreManager
+</span>@extends java.lang.Object
+
+ Class that manages communication between network subsystems and a network scorer.
+
+ &lt;p&gt;A network scorer is any application which:
+ &lt;ul&gt;
+ &lt;li&gt;Is granted the {@link permission#SCORE_NETWORKS} permission.
+ &lt;li&gt;Is granted the {@link permission#ACCESS_COARSE_LOCATION} permission.
+ &lt;li&gt;Include a Service for the {@link #ACTION_RECOMMEND_NETWORKS} action
+     protected by the {@link permission#BIND_NETWORK_RECOMMENDATION_SERVICE}
+     permission.
+ &lt;/ul&gt;
+
+ @hide
+*/
+var NetworkScoreManager = {
+
+<span id='android-net-NetworkScoreManager-property-ACTION_CHANGE_ACTIVE'>/** Activity action: ask the user to change the active network scorer. This will show a dialog
+</span> that asks the user whether they want to replace the current active scorer with the one
+ specified in {@link #EXTRA_PACKAGE_NAME}. The activity will finish with RESULT_OK if the
+ active scorer was changed or RESULT_CANCELED if it failed for any reason.
+*/
+ACTION_CHANGE_ACTIVE : &quot;android.net.scoring.CHANGE_ACTIVE&quot;,
+<span id='android-net-NetworkScoreManager-property-EXTRA_PACKAGE_NAME'>/** Extra used with {@link #ACTION_CHANGE_ACTIVE} to specify the new scorer package. Set with
+</span> {@link android.content.Intent#putExtra(String, String)}.
+*/
+EXTRA_PACKAGE_NAME : &quot;packageName&quot;,
+<span id='android-net-NetworkScoreManager-property-ACTION_SCORE_NETWORKS'>/** Broadcast action: new network scores are being requested. This intent will only be delivered
+</span> to the current active scorer app. That app is responsible for scoring the networks and
+ calling {@link #updateScores} when complete. The networks to score are specified in
+ {@link #EXTRA_NETWORKS_TO_SCORE}, and will generally consist of all networks which have been
+ configured by the user as well as any open networks.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system.
+*/
+ACTION_SCORE_NETWORKS : &quot;android.net.scoring.SCORE_NETWORKS&quot;,
+<span id='android-net-NetworkScoreManager-property-EXTRA_NETWORKS_TO_SCORE'>/** Extra used with {@link #ACTION_SCORE_NETWORKS} to specify the networks to be scored, as an
+</span> array of {@link android.net.NetworkKey}s. Can be obtained with
+ {@link android.content.Intent#getParcelableArrayExtra(String)}}.
+*/
+EXTRA_NETWORKS_TO_SCORE : &quot;networksToScore&quot;,
+<span id='android-net-NetworkScoreManager-property-ACTION_CUSTOM_ENABLE'>/** Activity action: launch an activity for configuring a provider for the feature that connects
+</span> and secures open wifi networks available before enabling it. Applications that enable this
+ feature must provide an activity for this action. The framework will launch this activity
+ which must return RESULT_OK if the feature should be enabled.
+*/
+ACTION_CUSTOM_ENABLE : &quot;android.net.scoring.CUSTOM_ENABLE&quot;,
+<span id='android-net-NetworkScoreManager-property-RECOMMENDATION_SERVICE_LABEL_META_DATA'>/** Meta-data specified on a {@link android.net.NetworkRecommendationProvider} that provides a user-visible
+</span> label of the recommendation service.
+ @hide
+*/
+RECOMMENDATION_SERVICE_LABEL_META_DATA : &quot;android.net.scoring.recommendation_service_label&quot;,
+<span id='android-net-NetworkScoreManager-property-USE_OPEN_WIFI_PACKAGE_META_DATA'>/** Meta-data specified on a {@link android.net.NetworkRecommendationProvider} that specified the package
+</span> name of the application that connects and secures open wifi networks automatically. The
+ specified package must provide an Activity for {@link #ACTION_CUSTOM_ENABLE}.
+ @hide
+*/
+USE_OPEN_WIFI_PACKAGE_META_DATA : &quot;android.net.wifi.use_open_wifi_package&quot;,
+<span id='android-net-NetworkScoreManager-property-NETWORK_AVAILABLE_NOTIFICATION_CHANNEL_ID_META_DATA'>/** Meta-data specified on a {@link android.net.NetworkRecommendationProvider} that specifies the
+</span> {@link android.app.NotificationChannel} ID used to post open network notifications.
+ @hide
+*/
+NETWORK_AVAILABLE_NOTIFICATION_CHANNEL_ID_META_DATA : &quot;android.net.wifi.notification_channel_id_network_available&quot;,
+<span id='android-net-NetworkScoreManager-property-ACTION_SCORER_CHANGED'>/** Broadcast action: the active scorer has been changed. Scorer apps may listen to this to
+</span> perform initialization once selected as the active scorer, or clean up unneeded resources
+ if another scorer has been selected. This is an explicit broadcast only sent to the
+ previous scorer and new scorer. Note that it is unnecessary to clear existing scores as
+ this is handled by the system.
+
+ &lt;p&gt;The new scorer will be specified in {@link #EXTRA_NEW_SCORER}.
+
+ &lt;p class=&quot;note&quot;&gt;This is a protected intent that can only be sent by the system.
+*/
+ACTION_SCORER_CHANGED : &quot;android.net.scoring.SCORER_CHANGED&quot;,
+<span id='android-net-NetworkScoreManager-property-ACTION_RECOMMEND_NETWORKS'>/** Service action: Used to discover and bind to a network recommendation provider.
+</span> Implementations should return {@link android.net.NetworkRecommendationProvider#getBinder()} from
+ their &lt;code&gt;onBind()&lt;/code&gt; method.
+*/
+ACTION_RECOMMEND_NETWORKS : &quot;android.net.action.RECOMMEND_NETWORKS&quot;,
+<span id='android-net-NetworkScoreManager-property-EXTRA_NEW_SCORER'>/** Extra used with {@link #ACTION_SCORER_CHANGED} to specify the newly selected scorer's package
+</span> name. Will be null if scoring was disabled. Can be obtained with
+ {@link android.content.Intent#getStringExtra(String)}.
+*/
+EXTRA_NEW_SCORER : &quot;newScorer&quot;,
+<span id='android-net-NetworkScoreManager-property-CACHE_FILTER_NONE'>/** Do not filter updates sent to the cache.
+</span> @hide
+*/
+CACHE_FILTER_NONE : &quot;0&quot;,
+<span id='android-net-NetworkScoreManager-property-CACHE_FILTER_CURRENT_NETWORK'>/** Only send cache updates when the network matches the connected network.
+</span> @hide
+*/
+CACHE_FILTER_CURRENT_NETWORK : &quot;1&quot;,
+<span id='android-net-NetworkScoreManager-property-CACHE_FILTER_SCAN_RESULTS'>/** Only send cache updates when the network is part of the current scan result set.
+</span> @hide
+*/
+CACHE_FILTER_SCAN_RESULTS : &quot;2&quot;,
+<span id='android-net-NetworkScoreManager-property-RECOMMENDATIONS_ENABLED_FORCED_OFF'>/** Recommendations have been forced off.
+</span> &lt;p&gt;
+ This value is never set by any of the NetworkScore classes, it must be set via other means.
+ This state is also &quot;sticky&quot; and we won't transition out of this state once entered. To move
+ to a different state this value has to be explicitly set to a different value via
+ other means.
+ @hide
+*/
+RECOMMENDATIONS_ENABLED_FORCED_OFF : &quot;-1&quot;,
+<span id='android-net-NetworkScoreManager-property-RECOMMENDATIONS_ENABLED_OFF'>/** Recommendations are not enabled.
+</span> &lt;p&gt;
+ This is a transient state that can be entered when the default recommendation app is enabled
+ but no longer valid. This state will transition to RECOMMENDATIONS_ENABLED_ON when a valid
+ recommendation app is enabled.
+ @hide
+*/
+RECOMMENDATIONS_ENABLED_OFF : &quot;0&quot;,
+<span id='android-net-NetworkScoreManager-property-RECOMMENDATIONS_ENABLED_ON'>/** Recommendations are enabled.
+</span> &lt;p&gt;
+ This is a transient state that means a valid recommendation app is active. This state will
+ transition to RECOMMENDATIONS_ENABLED_OFF if the current and default recommendation apps
+ become invalid.
+ @hide
+*/
+RECOMMENDATIONS_ENABLED_ON : &quot;1&quot;,
+<span id='android-net-NetworkScoreManager-method-getActiveScorerPackage'>/**Obtain the package name of the current active network scorer.
+</span>
+ &lt;p&gt;At any time, only one scorer application will receive {@link #ACTION_SCORE_NETWORKS}
+ broadcasts and be allowed to call {@link #updateScores}. Applications may use this method to
+ determine the current scorer and offer the user the ability to select a different scorer via
+ the {@link #ACTION_CHANGE_ACTIVE} intent.
+@return {String} the full package name of the current active scorer, or null if there is no active
+         scorer.
+@throws SecurityException if the caller doesn't hold either {@link permission#SCORE_NETWORKS}
+                           or {@link permission#REQUEST_NETWORK_SCORES} permissions.
+*/
+getActiveScorerPackage : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-getActiveScorer'>/**Returns metadata about the active scorer or &lt;code&gt;null&lt;/code&gt; if there is no active scorer.
+</span>@throws SecurityException if the caller does not hold the
+         {@link permission#REQUEST_NETWORK_SCORES} permission.
+@hide 
+*/
+getActiveScorer : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-getAllValidScorers'>/**Returns the list of available scorer apps. The list will be empty if there are
+</span> no valid scorers.
+@throws SecurityException if the caller does not hold the
+         {@link permission#REQUEST_NETWORK_SCORES} permission.
+@hide 
+*/
+getAllValidScorers : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-updateScores'>/**Update network scores.
+</span>
+ &lt;p&gt;This may be called at any time to re-score active networks. Scores will generally be
+ updated quickly, but if this method is called too frequently, the scores may be held and
+ applied at a later time.
+@param {Object {android.net.ScoredNetwork[]}} networks the networks which have been scored by the scorer.
+@return {Boolean} whether the update was successful.
+@throws SecurityException if the caller is not the active scorer.
+*/
+updateScores : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-clearScores'>/**Clear network scores.
+</span>
+ &lt;p&gt;Should be called when all scores need to be invalidated, i.e. because the scoring
+ algorithm has changed and old scores can no longer be compared to future scores.
+
+ &lt;p&gt;Note that scores will be cleared automatically when the active scorer changes, as scores
+ from one scorer cannot be compared to those from another scorer.
+@return {Boolean} whether the clear was successful.
+@throws SecurityException if the caller is not the active scorer or if the caller doesn't
+                           hold the {@link permission#REQUEST_NETWORK_SCORES} permission.
+*/
+clearScores : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-setActiveScorer'>/**Set the active scorer to a new package and clear existing scores.
+</span>
+ &lt;p&gt;Should never be called directly without obtaining user consent. This can be done by using
+ the {@link #ACTION_CHANGE_ACTIVE} broadcast, or using a custom configuration activity.
+@return {Boolean} true if the operation succeeded, or false if the new package is not a valid scorer.
+@throws SecurityException if the caller doesn't hold either {@link permission#SCORE_NETWORKS}
+                           or {@link permission#REQUEST_NETWORK_SCORES} permissions.
+@hide 
+*/
+setActiveScorer : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-disableScoring'>/**Turn off network scoring.
+</span>
+ &lt;p&gt;May only be called by the current scorer app, or the system.
+@throws SecurityException if the caller is not the active scorer or if the caller doesn't
+                           hold the {@link permission#REQUEST_NETWORK_SCORES} permission.
+*/
+disableScoring : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-requestScores'>/**Request scoring for networks.
+</span>@return {Boolean} true if the broadcast was sent, or false if there is no active scorer.
+@throws SecurityException if the caller does not hold the
+         {@link permission#REQUEST_NETWORK_SCORES} permission.
+@hide 
+*/
+requestScores : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-registerNetworkScoreCache'>/**Register a network score cache.
+</span>@param {Number} networkType the type of network this cache can handle. See {@link NetworkKey#type}.
+@param {Object {INetworkScoreCache}} scoreCache implementation of {@link INetworkScoreCache} to store the scores.
+@throws SecurityException if the caller does not hold the
+         {@link permission#REQUEST_NETWORK_SCORES} permission.
+@throws IllegalArgumentException if a score cache is already registered for this type.
+@deprecated equivalent to registering for cache updates with CACHE_FILTER_NONE.
+@hide 
+*/
+registerNetworkScoreCache : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-registerNetworkScoreCache'>/**Register a network score cache.
+</span>@param {Number} networkType the type of network this cache can handle. See {@link NetworkKey#type}
+@param {Object {INetworkScoreCache}} scoreCache implementation of {@link INetworkScoreCache} to store the scores
+@param {Number} filterType the {@link CacheUpdateFilter} to apply
+@throws SecurityException if the caller does not hold the
+         {@link permission#REQUEST_NETWORK_SCORES} permission.
+@throws IllegalArgumentException if a score cache is already registered for this type.
+@hide 
+*/
+registerNetworkScoreCache : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-unregisterNetworkScoreCache'>/**Unregister a network score cache.
+</span>@param {Number} networkType the type of network this cache can handle. See {@link NetworkKey#type}.
+@param {Object {INetworkScoreCache}} scoreCache implementation of {@link INetworkScoreCache} to store the scores.
+@throws SecurityException if the caller does not hold the
+         {@link permission#REQUEST_NETWORK_SCORES} permission.
+@throws IllegalArgumentException if a score cache is already registered for this type.
+@hide 
+*/
+unregisterNetworkScoreCache : function(  ) {},
+
+<span id='android-net-NetworkScoreManager-method-isCallerActiveScorer'>/**Determine whether the application with the given UID is the enabled scorer.
+</span>@param {Number} callingUid the UID to check
+@return {Boolean} true if the provided UID is the active scorer, false otherwise.
+@throws SecurityException if the caller does not hold the
+         {@link permission#REQUEST_NETWORK_SCORES} permission.
+@hide 
+*/
+isCallerActiveScorer : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

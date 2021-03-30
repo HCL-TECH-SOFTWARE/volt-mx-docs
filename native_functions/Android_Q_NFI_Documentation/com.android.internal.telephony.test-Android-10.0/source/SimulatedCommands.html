@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-test-SimulatedCommands'>/**@class com.android.internal.telephony.test.SimulatedCommands
+</span> implements com.android.internal.telephony.CommandsInterface
+
+ implements com.android.internal.telephony.test.SimulatedRadioControl
+
+@extends com.android.internal.telephony.BaseCommands
+
+*/
+var SimulatedCommands = {
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-DEFAULT_SIM_PIN_CODE'>/***/
+</span>DEFAULT_SIM_PIN_CODE : &quot;1234&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-DEFAULT_SIM_PIN2_CODE'>/***/
+</span>DEFAULT_SIM_PIN2_CODE : &quot;5678&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-FAKE_LONG_NAME'>/***/
+</span>FAKE_LONG_NAME : &quot;Fake long name&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-FAKE_SHORT_NAME'>/***/
+</span>FAKE_SHORT_NAME : &quot;Fake short name&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-FAKE_MCC_MNC'>/***/
+</span>FAKE_MCC_MNC : &quot;310260&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-FAKE_IMEI'>/***/
+</span>FAKE_IMEI : &quot;012345678901234&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-FAKE_IMEISV'>/***/
+</span>FAKE_IMEISV : &quot;99&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-FAKE_ESN'>/***/
+</span>FAKE_ESN : &quot;1234&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-FAKE_MEID'>/***/
+</span>FAKE_MEID : &quot;1234&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-DEFAULT_PIN1_ATTEMPT'>/***/
+</span>DEFAULT_PIN1_ATTEMPT : &quot;5&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-DEFAULT_PIN2_ATTEMPT'>/***/
+</span>DEFAULT_PIN2_ATTEMPT : &quot;5&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-mCssSupported'>/***/
+</span>mCssSupported : &quot;null&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-mRoamingIndicator'>/***/
+</span>mRoamingIndicator : &quot;null&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-mSystemIsInPrl'>/***/
+</span>mSystemIsInPrl : &quot;null&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-mDefaultRoamingIndicator'>/***/
+</span>mDefaultRoamingIndicator : &quot;null&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-mReasonForDenial'>/***/
+</span>mReasonForDenial : &quot;null&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-property-mMaxDataCalls'>/***/
+</span>mMaxDataCalls : &quot;null&quot;,
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-dispose'>/**
+</span>*/
+dispose : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getIccCardStatus'>/**
+</span>*/
+getIccCardStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setIccSlotStatus'>/**
+</span>*/
+setIccSlotStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getIccSlotsStatus'>/**
+</span>*/
+getIccSlotsStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setLogicalToPhysicalSlotMapping'>/**
+</span>*/
+setLogicalToPhysicalSlotMapping : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPin'>/**
+</span>*/
+supplyIccPin : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPuk'>/**
+</span>*/
+supplyIccPuk : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPin2'>/**
+</span>*/
+supplyIccPin2 : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPuk2'>/**
+</span>*/
+supplyIccPuk2 : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-changeIccPin'>/**
+</span>*/
+changeIccPin : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-changeIccPin2'>/**
+</span>*/
+changeIccPin2 : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-changeBarringPassword'>/**
+</span>*/
+changeBarringPassword : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setSuppServiceNotifications'>/**
+</span>*/
+setSuppServiceNotifications : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryFacilityLock'>/**
+</span>*/
+queryFacilityLock : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryFacilityLockForApp'>/**
+</span>*/
+queryFacilityLockForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setFacilityLock'>/**
+</span>*/
+setFacilityLock : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setFacilityLockForApp'>/**
+</span>*/
+setFacilityLockForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyNetworkDepersonalization'>/**
+</span>*/
+supplyNetworkDepersonalization : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getCurrentCalls'>/**returned message
+</span>  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result contains a List of DriverCall
+      The ar.result List is sorted by DriverCall.index
+*/
+getCurrentCalls : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getPDPContextList'>/**
+</span>@deprecated 
+*/
+getPDPContextList : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getDataCallList'>/**returned message
+</span>  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result contains a List of DataCallResponse
+*/
+getDataCallList : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-dial'>/**returned message
+</span>  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+
+ CLIR_DEFAULT     == on &quot;use subscription default value&quot;
+ CLIR_SUPPRESSION == on &quot;CLIR suppression&quot; (allow CLI presentation)
+ CLIR_INVOCATION  == on &quot;CLIR invocation&quot; (restrict CLI presentation)
+*/
+dial : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-dial'>/**returned message
+</span>  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+
+ CLIR_DEFAULT     == on &quot;use subscription default value&quot;
+ CLIR_SUPPRESSION == on &quot;CLIR suppression&quot; (allow CLI presentation)
+ CLIR_INVOCATION  == on &quot;CLIR invocation&quot; (restrict CLI presentation)
+*/
+dial : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getIMSI'>/**
+</span>*/
+getIMSI : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getIMSIForApp'>/**returned message
+</span>  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is String containing IMSI on success
+*/
+getIMSIForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setIMEI'>/**
+</span>*/
+setIMEI : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getIMEI'>/**returned message
+</span>  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is String containing IMEI on success
+*/
+getIMEI : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setIMEISV'>/**
+</span>*/
+setIMEISV : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getIMEISV'>/**returned message
+</span>  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is String containing IMEISV on success
+*/
+getIMEISV : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-hangupConnection'>/**Hang up one individual connection.
+</span>  returned message
+  retMsg.obj = AsyncResult ar
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+
+  3GPP 22.030 6.5.5
+  &quot;Releases a specific active call X&quot;
+*/
+hangupConnection : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-hangupWaitingOrBackground'>/**3GPP 22.030 6.5.5
+</span>  &quot;Releases all held calls or sets User Determined User Busy (UDUB)
+   for a waiting call.&quot;
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+hangupWaitingOrBackground : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-hangupForegroundResumeBackground'>/**3GPP 22.030 6.5.5
+</span> &quot;Releases all active calls (if any exist) and accepts
+  the other (held or waiting) call.&quot;
+
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+hangupForegroundResumeBackground : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-switchWaitingOrHoldingAndActive'>/**3GPP 22.030 6.5.5
+</span> &quot;Places all active calls (if any exist) on hold and accepts
+  the other (held or waiting) call.&quot;
+
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+switchWaitingOrHoldingAndActive : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-conference'>/**3GPP 22.030 6.5.5
+</span> &quot;Adds a held call to the conversation&quot;
+
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+conference : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-explicitCallTransfer'>/**3GPP 22.030 6.5.5
+</span> &quot;Connects the two calls and disconnects the subscriber from both calls&quot;
+
+  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+explicitCallTransfer : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-separateConnection'>/**3GPP 22.030 6.5.5
+</span> &quot;Places all active calls on hold except call X with which
+  communication shall be supported.&quot;
+*/
+separateConnection : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-acceptCall'>/**ar.exception carries exception on failure
+</span>  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+acceptCall : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-rejectCall'>/**also known as UDUB
+</span>  ar.exception carries exception on failure
+  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+rejectCall : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getLastCallFailCause'>/**cause code returned as Integer in Message.obj.response
+</span> Returns integer cause code defined in TS 24.008
+ Annex H or closest approximation.
+ Most significant codes:
+ - Any defined in 22.001 F.4 (for generating busy/congestion)
+ - Cause 68: ACM &gt;= ACMMax
+*/
+getLastCallFailCause : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getLastPdpFailCause'>/**
+</span>@deprecated 
+*/
+getLastPdpFailCause : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getLastDataCallFailCause'>/**
+</span>*/
+getLastDataCallFailCause : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setMute'>/**
+</span>*/
+setMute : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getMute'>/**
+</span>*/
+getMute : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setSignalStrength'>/**
+</span>*/
+setSignalStrength : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getSignalStrength'>/**
+</span>*/
+getSignalStrength : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setBandMode'>/**Assign a specified band for RF configuration.
+</span>@param {Number} bandMode one of BM_*_BAND
+@param {Object {Message}} result is callback message
+*/
+setBandMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryAvailableBandMode'>/**Query the list of band mode supported by RF.
+</span>@param {Object {Message}} result is callback message
+        ((AsyncResult)response.obj).result  is an int[] where int[0] is
+        the size of the array and the rest of each element representing
+        one available BM_*_BAND
+*/
+queryAvailableBandMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendTerminalResponse'>/**{@inheritDoc}
+</span>*/
+sendTerminalResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendEnvelope'>/**{@inheritDoc}
+</span>*/
+sendEnvelope : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendEnvelopeWithStatus'>/**{@inheritDoc}
+</span>*/
+sendEnvelopeWithStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-handleCallSetupRequestFromSim'>/**{@inheritDoc}
+</span>*/
+handleCallSetupRequestFromSim : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setVoiceRadioTech'>/**
+</span>*/
+setVoiceRadioTech : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setVoiceRegState'>/**
+</span>*/
+setVoiceRegState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getVoiceRegistrationState'>/**response.obj.result is an String[14]
+</span> See ril.h for details
+
+ Please note that registration state 4 (&quot;unknown&quot;) is treated
+ as &quot;out of service&quot; above
+*/
+getVoiceRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getGetVoiceRegistrationStateCallCount'>/**
+</span>*/
+getGetVoiceRegistrationStateCallCount : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setDataRadioTech'>/**
+</span>*/
+setDataRadioTech : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setDataRegState'>/**
+</span>*/
+setDataRegState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getDataRegistrationState'>/**
+</span>*/
+getDataRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getGetDataRegistrationStateCallCount'>/**
+</span>*/
+getGetDataRegistrationStateCallCount : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getOperator'>/**response.obj.result is a String[3]
+</span> response.obj.result[0] is long alpha or null if unregistered
+ response.obj.result[1] is short alpha or null if unregistered
+ response.obj.result[2] is numeric or null if unregistered
+*/
+getOperator : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getGetOperatorCallCount'>/**
+</span>*/
+getGetOperatorCallCount : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendDtmf'>/**ar.exception carries exception on failure
+</span>  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+sendDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-startDtmf'>/**ar.exception carries exception on failure
+</span>  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+startDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-stopDtmf'>/**ar.exception carries exception on failure
+</span>  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+stopDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendBurstDtmf'>/**ar.exception carries exception on failure
+</span>  ar.userObject contains the original value of result.obj
+  ar.result is null on success and failure
+*/
+sendBurstDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendSMS'>/**smscPDU is smsc address in PDU form GSM BCD format prefixed
+</span>      by a length byte (as expected by TS 27.005) or NULL for default SMSC
+ pdu is SMS in PDU format as an ASCII hex string
+      less the SMSC address
+*/
+sendSMS : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendSMSExpectMore'>/**Send an SMS message, Identical to sendSMS,
+</span> except that more messages are expected to be sent soon
+ smscPDU is smsc address in PDU form GSM BCD format prefixed
+      by a length byte (as expected by TS 27.005) or NULL for default SMSC
+ pdu is SMS in PDU format as an ASCII hex string
+      less the SMSC address
+*/
+sendSMSExpectMore : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-deleteSmsOnSim'>/**
+</span>*/
+deleteSmsOnSim : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-deleteSmsOnRuim'>/**
+</span>*/
+deleteSmsOnRuim : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-writeSmsToSim'>/**
+</span>*/
+writeSmsToSim : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-writeSmsToRuim'>/**
+</span>*/
+writeSmsToRuim : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setDataCallResult'>/**
+</span>*/
+setDataCallResult : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerNITZupdate'>/**
+</span>*/
+triggerNITZupdate : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setupDataCall'>/**
+</span>*/
+setupDataCall : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-deactivateDataCall'>/**
+</span>*/
+deactivateDataCall : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setPreferredNetworkType'>/**
+</span>*/
+setPreferredNetworkType : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getPreferredNetworkType'>/**
+</span>*/
+getPreferredNetworkType : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setLocationUpdates'>/**
+</span>*/
+setLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getSmscAddress'>/**
+</span>*/
+getSmscAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setSmscAddress'>/**
+</span>*/
+setSmscAddress : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-reportSmsMemoryStatus'>/**
+</span>*/
+reportSmsMemoryStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-reportStkServiceIsRunning'>/**
+</span>*/
+reportStkServiceIsRunning : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getCdmaSubscriptionSource'>/**
+</span>*/
+getCdmaSubscriptionSource : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setRadioPower'>/**
+</span>*/
+setRadioPower : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-acknowledgeLastIncomingGsmSms'>/**
+</span>*/
+acknowledgeLastIncomingGsmSms : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-acknowledgeLastIncomingCdmaSms'>/**
+</span>*/
+acknowledgeLastIncomingCdmaSms : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-acknowledgeIncomingGsmSmsWithPdu'>/**
+</span>*/
+acknowledgeIncomingGsmSmsWithPdu : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-iccIO'>/**
+</span>*/
+iccIO : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-iccIOForApp'>/**parameters equivalent to 27.007 AT+CRSM command
+</span> response.obj will be an AsyncResult
+ response.obj.userObj will be a SimIoResult on success
+*/
+iccIOForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryCLIP'>/**(AsyncResult)response.obj).result is an int[] with element [0] set to
+</span> 1 for &quot;CLIP is provisioned&quot;, and 0 for &quot;CLIP is not provisioned&quot;.
+@param {Object {Message}} response is callback message
+*/
+queryCLIP : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getCLIR'>/**response.obj will be a an int[2]
+</span>
+ response.obj[0] will be TS 27.007 +CLIR parameter 'n'
+  0 presentation indicator is used according to the subscription of the CLIR service
+  1 CLIR invocation
+  2 CLIR suppression
+
+ response.obj[1] will be TS 27.007 +CLIR parameter 'm'
+  0 CLIR not provisioned
+  1 CLIR provisioned in permanent mode
+  2 unknown (e.g. no network, etc.)
+  3 CLIR temporary mode presentation restricted
+  4 CLIR temporary mode presentation allowed
+*/
+getCLIR : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCLIR'>/**clirMode is one of the CLIR_* constants above
+</span>
+ response.obj is null
+*/
+setCLIR : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryCallWaiting'>/**(AsyncResult)response.obj).result is an int[] with element [0] set to
+</span> 0 for disabled, 1 for enabled.
+@param {Number} serviceClass is a sum of SERVICE_CLASS_*
+@param {Object {Message}} response is callback message
+*/
+queryCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCallWaiting'>/**
+</span>@param {Boolean} enable is true to enable, false to disable
+@param {Number} serviceClass is a sum of SERVICE_CLASS_*
+@param {Object {Message}} response is callback message
+*/
+setCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCallForward'>/**
+</span>@param {Number} action is one of CF_ACTION_*
+@param {Number} cfReason is one of CF_REASON_*
+@param {Number} serviceClass is a sum of SERVICE_CLASSS_*
+*/
+setCallForward : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryCallForwardStatus'>/**cfReason is one of CF_REASON_*
+</span>
+ ((AsyncResult)response.obj).result will be an array of
+ CallForwardInfo's
+
+ An array of length 0 means &quot;disabled for all codes&quot;
+*/
+queryCallForwardStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setNetworkSelectionModeAutomatic'>/**
+</span>*/
+setNetworkSelectionModeAutomatic : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-exitEmergencyCallbackMode'>/**
+</span>*/
+exitEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setNetworkSelectionModeManual'>/**
+</span>*/
+setNetworkSelectionModeManual : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getNetworkSelectionMode'>/**Queries whether the current network selection mode is automatic
+</span> or manual
+
+ ((AsyncResult)response.obj).result  is an int[] with element [0] being
+ a 0 for automatic selection and a 1 for manual selection
+*/
+getNetworkSelectionMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getGetNetworkSelectionModeCallCount'>/**
+</span>*/
+getGetNetworkSelectionModeCallCount : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getAvailableNetworks'>/**Queries the currently available networks
+</span>
+ ((AsyncResult)response.obj).result  is a List of NetworkInfo objects
+*/
+getAvailableNetworks : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-startNetworkScan'>/**Starts a network scan
+</span>*/
+startNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-stopNetworkScan'>/**Stops an ongoing network scan
+</span>*/
+stopNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getBasebandVersion'>/**
+</span>*/
+getBasebandVersion : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerIncomingStkCcAlpha'>/**Simulates an Stk Call Control Alpha message
+</span>@param {String} alphaString Alpha string to send.
+*/
+triggerIncomingStkCcAlpha : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendStkCcAplha'>/**
+</span>*/
+sendStkCcAplha : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerIncomingUssd'>/**Simulates an incoming USSD message
+</span>@param {String} statusCode  Status code string. See &lt;code&gt;setOnUSSD&lt;/code&gt;
+ in CommandsInterface.java
+@param {String} message Message text to send or null if none
+*/
+triggerIncomingUssd : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendUSSD'>/**
+</span>*/
+sendUSSD : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-cancelPendingUssd'>/**
+</span>*/
+cancelPendingUssd : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-resetRadio'>/**
+</span>*/
+resetRadio : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-invokeOemRilRequestRaw'>/**
+</span>*/
+invokeOemRilRequestRaw : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCarrierInfoForImsiEncryption'>/**
+</span>*/
+setCarrierInfoForImsiEncryption : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-invokeOemRilRequestStrings'>/**
+</span>*/
+invokeOemRilRequestStrings : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerRing'>/**Start the simulated phone ringing
+</span>*/
+triggerRing : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-progressConnectingCallState'>/**
+</span>*/
+progressConnectingCallState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-progressConnectingToActive'>/**If a call is DIALING or ALERTING, progress it all the way to ACTIVE
+</span>*/
+progressConnectingToActive : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setAutoProgressConnectingCall'>/**automatically progress mobile originated calls to ACTIVE.
+</span>  default to true
+*/
+setAutoProgressConnectingCall : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setNextDialFailImmediately'>/**
+</span>*/
+setNextDialFailImmediately : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setNextCallFailCause'>/**
+</span>*/
+setNextCallFailCause : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerHangupForeground'>/**
+</span>*/
+triggerHangupForeground : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerHangupBackground'>/**hangup holding calls
+</span>*/
+triggerHangupBackground : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerSsn'>/**
+</span>*/
+triggerSsn : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-shutdown'>/**
+</span>*/
+shutdown : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerHangupAll'>/**hangup all
+</span>*/
+triggerHangupAll : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerIncomingSMS'>/**
+</span>*/
+triggerIncomingSMS : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-pauseResponses'>/**
+</span>*/
+pauseResponses : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-resumeResponses'>/**
+</span>*/
+resumeResponses : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getDeviceIdentity'>/**
+</span>*/
+getDeviceIdentity : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getCDMASubscription'>/**
+</span>*/
+getCDMASubscription : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCdmaSubscriptionSource'>/**
+</span>*/
+setCdmaSubscriptionSource : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryCdmaRoamingPreference'>/**
+</span>*/
+queryCdmaRoamingPreference : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCdmaRoamingPreference'>/**
+</span>*/
+setCdmaRoamingPreference : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setPhoneType'>/**
+</span>*/
+setPhoneType : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getPreferredVoicePrivacy'>/**
+</span>*/
+getPreferredVoicePrivacy : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setPreferredVoicePrivacy'>/**
+</span>*/
+setPreferredVoicePrivacy : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setTTYMode'>/**Set the TTY mode
+</span>@param {Number} ttyMode is one of the following:
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_OFF}
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_FULL}
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_HCO}
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_VCO}
+@param {Object {Message}} response is callback message
+*/
+setTTYMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-queryTTYMode'>/**Query the TTY mode
+</span> (AsyncResult)response.obj).result is an int[] with element [0] set to
+ tty mode:
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_OFF}
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_FULL}
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_HCO}
+ - {@link com.android.internal.telephony.Phone#TTY_MODE_VCO}
+@param {Object {Message}} response is callback message
+*/
+queryTTYMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendCDMAFeatureCode'>/**{@inheritDoc}
+</span>*/
+sendCDMAFeatureCode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendCdmaSms'>/**{@inheritDoc}
+</span>*/
+sendCdmaSms : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCdmaBroadcastActivation'>/**
+</span>*/
+setCdmaBroadcastActivation : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getCdmaBroadcastConfig'>/**
+</span>*/
+getCdmaBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCdmaBroadcastConfig'>/**
+</span>*/
+setCdmaBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-forceDataDormancy'>/**
+</span>*/
+forceDataDormancy : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setGsmBroadcastActivation'>/**
+</span>*/
+setGsmBroadcastActivation : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setGsmBroadcastConfig'>/**
+</span>*/
+setGsmBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getGsmBroadcastConfig'>/**
+</span>*/
+getGsmBroadcastConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPinForApp'>/**
+</span>*/
+supplyIccPinForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPukForApp'>/**
+</span>*/
+supplyIccPukForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPin2ForApp'>/**
+</span>*/
+supplyIccPin2ForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-supplyIccPuk2ForApp'>/**
+</span>*/
+supplyIccPuk2ForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-changeIccPinForApp'>/**
+</span>*/
+changeIccPinForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-changeIccPin2ForApp'>/**
+</span>*/
+changeIccPin2ForApp : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-requestIccSimAuthentication'>/**
+</span>*/
+requestIccSimAuthentication : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getVoiceRadioTechnology'>/**
+</span>*/
+getVoiceRadioTechnology : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCellInfoList'>/**
+</span>*/
+setCellInfoList : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCellInfoListBehavior'>/**
+</span>*/
+setCellInfoListBehavior : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getCellInfoList'>/**
+</span>*/
+getCellInfoList : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getRilVersion'>/**
+</span>*/
+getRilVersion : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setCellInfoListRate'>/**
+</span>*/
+setCellInfoListRate : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setInitialAttachApn'>/**
+</span>*/
+setInitialAttachApn : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setDataProfile'>/**
+</span>*/
+setDataProfile : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setImsRegistrationState'>/**
+</span>*/
+setImsRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getImsRegistrationState'>/**
+</span>*/
+getImsRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendImsCdmaSms'>/**
+</span>*/
+sendImsCdmaSms : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendImsGsmSms'>/**
+</span>*/
+sendImsGsmSms : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-iccOpenLogicalChannel'>/**
+</span>*/
+iccOpenLogicalChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-iccCloseLogicalChannel'>/**
+</span>*/
+iccCloseLogicalChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-iccTransmitApduLogicalChannel'>/**
+</span>*/
+iccTransmitApduLogicalChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-iccTransmitApduBasicChannel'>/**
+</span>*/
+iccTransmitApduBasicChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-nvReadItem'>/**
+</span>*/
+nvReadItem : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-nvWriteItem'>/**
+</span>*/
+nvWriteItem : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-nvWriteCdmaPrl'>/**
+</span>*/
+nvWriteCdmaPrl : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-nvResetConfig'>/**
+</span>*/
+nvResetConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getHardwareConfig'>/**
+</span>*/
+getHardwareConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-requestShutdown'>/**
+</span>*/
+requestShutdown : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-startLceService'>/**
+</span>*/
+startLceService : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-stopLceService'>/**
+</span>*/
+stopLceService : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-pullLceData'>/**
+</span>*/
+pullLceData : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-registerForLceInfo'>/**
+</span>*/
+registerForLceInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-unregisterForLceInfo'>/**
+</span>*/
+unregisterForLceInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getModemActivityInfo'>/**
+</span>*/
+getModemActivityInfo : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setAllowedCarriers'>/**
+</span>*/
+setAllowedCarriers : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getAllowedCarriers'>/**
+</span>*/
+getAllowedCarriers : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getRadioCapability'>/**
+</span>*/
+getRadioCapability : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifySmsStatus'>/**
+</span>*/
+notifySmsStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyGsmBroadcastSms'>/**
+</span>*/
+notifyGsmBroadcastSms : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyIccSmsFull'>/**
+</span>*/
+notifyIccSmsFull : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyEmergencyCallbackMode'>/**
+</span>*/
+notifyEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setEmergencyCallbackMode'>/**
+</span>*/
+setEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyExitEmergencyCallbackMode'>/**
+</span>*/
+notifyExitEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyImsNetworkStateChanged'>/**
+</span>*/
+notifyImsNetworkStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyModemReset'>/**
+</span>*/
+notifyModemReset : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-registerForExitEmergencyCallbackMode'>/**
+</span>*/
+registerForExitEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyRadioOn'>/**
+</span>*/
+notifyRadioOn : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyNetworkStateChanged'>/**
+</span>*/
+notifyNetworkStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifyOtaProvisionStatusChanged'>/**
+</span>*/
+notifyOtaProvisionStatusChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-notifySignalStrength'>/**
+</span>*/
+notifySignalStrength : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setIccCardStatus'>/**
+</span>*/
+setIccCardStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setIccIoResultForApduLogicalChannel'>/**
+</span>*/
+setIccIoResultForApduLogicalChannel : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setOpenChannelId'>/**
+</span>*/
+setOpenChannelId : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setPin1RemainingAttempt'>/**
+</span>*/
+setPin1RemainingAttempt : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setDataAllowed'>/**
+</span>*/
+setDataAllowed : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-isDataAllowed'>/**
+</span>*/
+isDataAllowed : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-registerForPcoData'>/**
+</span>*/
+registerForPcoData : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-unregisterForPcoData'>/**
+</span>*/
+unregisterForPcoData : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-registerForModemReset'>/**
+</span>*/
+registerForModemReset : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-sendDeviceState'>/**
+</span>*/
+sendDeviceState : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setUnsolResponseFilter'>/**
+</span>*/
+setUnsolResponseFilter : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setSignalStrengthReportingCriteria'>/**
+</span>*/
+setSignalStrengthReportingCriteria : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setLinkCapacityReportingCriteria'>/**
+</span>*/
+setLinkCapacityReportingCriteria : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setSimCardPower'>/**
+</span>*/
+setSimCardPower : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-triggerRestrictedStateChanged'>/**
+</span>*/
+triggerRestrictedStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setOnRestrictedStateChanged'>/**
+</span>*/
+setOnRestrictedStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-setRadioPowerFailResponse'>/**
+</span>*/
+setRadioPowerFailResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-registerForIccRefresh'>/**
+</span>*/
+registerForIccRefresh : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-unregisterForIccRefresh'>/**
+</span>*/
+unregisterForIccRefresh : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-registerForNattKeepaliveStatus'>/**
+</span>*/
+registerForNattKeepaliveStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-unregisterForNattKeepaliveStatus'>/**
+</span>*/
+unregisterForNattKeepaliveStatus : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-startNattKeepalive'>/**
+</span>*/
+startNattKeepalive : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-stopNattKeepalive'>/**
+</span>*/
+stopNattKeepalive : function(  ) {},
+
+<span id='com-android-internal-telephony-test-SimulatedCommands-method-getHandler'>/**
+</span>*/
+getHandler : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

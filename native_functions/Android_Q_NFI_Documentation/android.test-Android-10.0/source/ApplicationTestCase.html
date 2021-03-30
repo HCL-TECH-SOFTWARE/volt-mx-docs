@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-test-ApplicationTestCase'>/**@class android.test.ApplicationTestCase
+</span>@extends android.test.AndroidTestCase
+
+ This test case provides a framework in which you can test Application classes in
+ a controlled environment.  It provides basic support for the lifecycle of a
+ Application, and hooks by which you can inject various dependencies and control
+ the environment in which your Application is tested.
+
+ &lt;p&gt;&lt;b&gt;Lifecycle Support.&lt;/b&gt;
+ Every Application is designed to be accessed within a specific sequence of
+ method calls (see {@link android.app.Application} for more details).
+ In order to support the lifecycle of a Application, this test case will make the
+ following calls at the following times.
+
+ &lt;ul&gt;&lt;li&gt;The test case will not call onCreate() until your test calls
+ {@link #createApplication}().  This gives you a chance
+ to set up or adjust any additional framework or test logic before
+ onCreate().&lt;/li&gt;
+ &lt;li&gt;After your test completes, the test case {@link #tearDown} method is
+ automatically called, and it will stop &amp; destroy your application by calling its
+ onDestroy() method.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;&lt;b&gt;Dependency Injection.&lt;/b&gt;
+ Every Application has one inherent dependency, the {@link android.content.Context Context} in
+ which it runs.
+ This framework allows you to inject a modified, mock, or isolated replacement for this
+ dependencies, and thus perform a true unit test.
+
+ &lt;p&gt;If simply run your tests as-is, your Application will be injected with a fully-functional
+ Context.
+ You can create and inject alternative types of Contexts by calling
+ {@link android.test.AndroidTestCase#setContext(Context) setContext()}.  You must do this &lt;i&gt;before&lt;/i&gt; calling
+ {@link #createApplication}().  The test framework provides a
+ number of alternatives for Context, including {@link android.test.mock.MockContext MockContext},
+ {@link android.test.RenamingDelegatingContext RenamingDelegatingContext}, and
+ {@link android.content.ContextWrapper ContextWrapper}.
+
+ @deprecated Use
+ &lt;a href=&quot;{@docRoot}reference/android/support/test/InstrumentationRegistry.html&quot;&gt;
+ InstrumentationRegistry&lt;/a&gt; instead. New tests should be written using the
+ &lt;a href=&quot;{@docRoot}tools/testing-support-library/index.html&quot;&gt;Android Testing Support Library&lt;/a&gt;.
+*/
+var ApplicationTestCase = {
+
+<span id='android-test-ApplicationTestCase-method-getApplication'>/**
+</span>@return {Object {android.app.Application}} Returns the actual Application under test.
+*/
+getApplication : function(  ) {},
+
+<span id='android-test-ApplicationTestCase-method-getSystemContext'>/**Return a real (not mocked or instrumented) system Context that can be used when generating
+</span> Mock or other Context objects for your Application under test.
+@return {Object {android.content.Context}} Returns a reference to a normal Context.
+*/
+getSystemContext : function(  ) {},
+
+<span id='android-test-ApplicationTestCase-method-testApplicationTestCaseSetUpProperly'>/**This test simply confirms that the Application class can be instantiated properly.
+</span>@throws Exception
+*/
+testApplicationTestCaseSetUpProperly : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

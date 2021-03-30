@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-HardwareConfig'>/**@class com.android.internal.telephony.HardwareConfig
+</span>@extends java.lang.Object
+
+ {@hide}
+
+ hardware configuration information reported by the ril layer and for
+ use by the telephone framework.
+
+ the hardware configuration is managed by the TelephonyDevController
+ (aka: the 'TDC').
+
+ the hardware resources are:
+    - modem: physical entity providing acces technology.
+    - sim: physicaly entity providing a slot interface.
+*/
+var HardwareConfig = {
+
+<span id='com-android-internal-telephony-HardwareConfig-property-DEV_HARDWARE_TYPE_MODEM'>/** hardware configuration kind.
+</span>*/
+DEV_HARDWARE_TYPE_MODEM : &quot;0&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-DEV_HARDWARE_TYPE_SIM'>/***/
+</span>DEV_HARDWARE_TYPE_SIM : &quot;1&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-DEV_MODEM_RIL_MODEL_SINGLE'>/** ril attachment model.  if single, there is a one-to-one
+</span> relationship between a modem hardware and a ril daemon.
+ if multiple, there is a one-to-many relatioship between a
+ modem hardware and several ril simultaneous ril daemons.
+*/
+DEV_MODEM_RIL_MODEL_SINGLE : &quot;0&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-DEV_MODEM_RIL_MODEL_MULTIPLE'>/***/
+</span>DEV_MODEM_RIL_MODEL_MULTIPLE : &quot;1&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-DEV_HARDWARE_STATE_ENABLED'>/** hardware state of the resource.
+</span>
+   enabled: the resource can be used by the msim-framework,
+            call activity can be handled on it.
+   standby: the resource can be used by the msim-framework but
+            only for non call related activity.  as example:
+            reading the address book from a sim device. attempt
+            to use this resource for call activity leads to
+            undetermined results.
+   disabled: the resource  cannot be used and attempt to use
+             it leads to undetermined results.
+
+ by default, all resources are 'enabled', what causes a resource
+ to be marked otherwise is a property of the underlying hardware
+ knowledge and implementation and it is out of scope of the TDC.
+*/
+DEV_HARDWARE_STATE_ENABLED : &quot;0&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-DEV_HARDWARE_STATE_STANDBY'>/***/
+</span>DEV_HARDWARE_STATE_STANDBY : &quot;1&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-DEV_HARDWARE_STATE_DISABLED'>/***/
+</span>DEV_HARDWARE_STATE_DISABLED : &quot;2&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-type'>/** common hardware configuration.
+</span>
+ type - see DEV_HARDWARE_TYPE_
+ uuid - unique identifier for this hardware.
+ state - see DEV_HARDWARE_STATE_
+*/
+type : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-uuid'>/***/
+</span>uuid : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-state'>/***/
+</span>state : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-rilModel'>/** DEV_HARDWARE_TYPE_MODEM.
+</span>
+ rilModel - see DEV_MODEM_RIL_MODEL_
+ rat - BitSet value, based on android.telephony.ServiceState
+ maxActiveVoiceCall - maximum number of concurent active voice calls.
+ maxActiveDataCall - maximum number of concurent active data calls.
+ maxStandby - maximum number of concurent standby connections.
+
+ note: the maxStandby is not necessarily an equal sum of the maxActiveVoiceCall
+ and maxActiveDataCall (nor a derivative of it) since it really depends on the
+ modem capability, hence it is left for the hardware to define.
+*/
+rilModel : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-rat'>/***/
+</span>rat : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-maxActiveVoiceCall'>/***/
+</span>maxActiveVoiceCall : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-maxActiveDataCall'>/***/
+</span>maxActiveDataCall : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-maxStandby'>/***/
+</span>maxStandby : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-property-modemUuid'>/** DEV_HARDWARE_TYPE_SIM.
+</span>
+ modemUuid - unique association to a modem for a sim.
+*/
+modemUuid : &quot;null&quot;,
+<span id='com-android-internal-telephony-HardwareConfig-method-assignModem'>/**
+</span>*/
+assignModem : function(  ) {},
+
+<span id='com-android-internal-telephony-HardwareConfig-method-assignSim'>/**
+</span>*/
+assignSim : function(  ) {},
+
+<span id='com-android-internal-telephony-HardwareConfig-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-internal-telephony-HardwareConfig-method-compareTo'>/**
+</span>*/
+compareTo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-AudioRecordingConfiguration'>/**@class android.media.AudioRecordingConfiguration
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ The AudioRecordingConfiguration class collects the information describing an audio recording
+ session.
+ &lt;p&gt;Direct polling (see {@link android.media.AudioManager#getActiveRecordingConfigurations()}) or callback
+ (see {@link AudioManager#registerAudioRecordingCallback(android.media.AudioManager.AudioRecordingCallback, android.os.Handler)}
+ methods are ways to receive information about the current recording configuration of the device.
+ &lt;p&gt;An audio recording configuration contains information about the recording format as used by
+ the application ({@link #getClientFormat}(), as well as the recording format actually used by
+ the device ({@link #getFormat}()). The two recording formats may, for instance, be at different
+ sampling rates due to hardware limitations (e.g. application recording at 44.1kHz whereas the
+ device always records at 48kHz, and the Android framework resamples for the application).
+ &lt;p&gt;The configuration also contains the use case for which audio is recorded
+ ({@link #getClientAudioSource}()), enabling the ability to distinguish between different
+ activities such as ongoing voice recognition or camcorder recording.
+
+*/
+var AudioRecordingConfiguration = {
+
+<span id='android-media-AudioRecordingConfiguration-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-media-AudioRecordingConfiguration-method-dump'>/**
+</span>@param {Object {PrintWriter}} pw
+@param pw
+*/
+dump : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-toLogFriendlyString'>/**
+</span>@hide 
+*/
+toLogFriendlyString : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-anonymizedCopy'>/**
+</span>@param {Object {AudioRecordingConfiguration}} in
+@param in
+*/
+anonymizedCopy : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getClientAudioSource'>/**Returns the audio source selected by the client.
+</span>@return {Number} the audio source selected by the client.
+*/
+getClientAudioSource : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getClientAudioSessionId'>/**Returns the session number of the recording, see {@link android.media.AudioRecord#getAudioSessionId()}.
+</span>@return {Number} the session number.
+*/
+getClientAudioSessionId : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getFormat'>/**Returns the audio format at which audio is recorded on this Android device.
+</span> Note that it may differ from the client application recording format
+ (see {@link #getClientFormat}()).
+@return {Object {android.media.AudioFormat}} the device recording format
+*/
+getFormat : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getClientFormat'>/**Returns the audio format at which the client application is recording audio.
+</span> Note that it may differ from the actual recording format (see {@link #getFormat}()).
+@return {Object {android.media.AudioFormat}} the recording format
+*/
+getClientFormat : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getClientPackageName'>/**
+</span>@pending for SystemApi
+ Returns the package name of the application performing the recording.
+ Where there are multiple packages sharing the same user id through the &quot;sharedUserId&quot;
+ mechanism, only the first one with that id will be returned
+ (see {@link PackageManager#getPackagesForUid(int)}).
+ &lt;p&gt;This information is only available if the caller has the
+ {@link android.Manifest.permission.MODIFY_AUDIO_ROUTING} permission.
+ &lt;br&gt;When called without the permission, the result is an empty string.
+@return {String} the package name
+*/
+getClientPackageName : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getClientUid'>/**
+</span>@pending for SystemApi
+ Returns the user id of the application performing the recording.
+ &lt;p&gt;This information is only available if the caller has the
+ {@link android.Manifest.permission.MODIFY_AUDIO_ROUTING}
+ permission.
+ &lt;br&gt;The result is -1 without the permission.
+@return {Number} the user id
+*/
+getClientUid : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getAudioDevice'>/**Returns information about the audio input device used for this recording.
+</span>@return {Object {android.media.AudioDeviceInfo}} the audio recording device or null if this information cannot be retrieved
+*/
+getAudioDevice : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getClientPortId'>/**
+</span>@hide Returns the system unique ID assigned for the AudioRecord object corresponding to this
+ AudioRecordingConfiguration client.
+@return {Number} the port ID.
+*/
+getClientPortId : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-isClientSilenced'>/**Returns true if the audio returned to the client is currently being silenced by the
+</span> audio framework due to concurrent capture policy (e.g the capturing application does not have
+ an active foreground process or service anymore).
+@return {Boolean} true if captured audio is silenced, false otherwise .
+*/
+isClientSilenced : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getAudioSource'>/**Returns the audio source currently used to configure the capture path. It can be different
+</span> from the source returned by {@link #getClientAudioSource}() if another capture is active.
+@return {Number} the audio source active on the capture path.
+*/
+getAudioSource : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getClientEffects'>/**Returns the list of {@link AudioEffect.Descriptor} for all effects currently enabled on
+</span> the audio capture client (e.g. {@link android.media.AudioRecord} or {@link android.media.MediaRecorder}).
+@return {Object {java.util.List}} List of {@link AudioEffect.Descriptor} containing all effects enabled for the client.
+*/
+getClientEffects : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-getEffects'>/**Returns the list of {@link AudioEffect.Descriptor} for all effects currently enabled on
+</span> the capture stream.
+@return {Object {java.util.List}} List of {@link AudioEffect.Descriptor} containing all effects enabled on the
+ capture stream. This can be different from the list returned by {@link #getClientEffects()}
+ if another capture is active.
+*/
+getEffects : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-media-AudioRecordingConfiguration-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

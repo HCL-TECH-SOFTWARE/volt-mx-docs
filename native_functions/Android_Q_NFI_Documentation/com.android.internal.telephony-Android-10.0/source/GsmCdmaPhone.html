@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-telephony-GsmCdmaPhone'>/**@class com.android.internal.telephony.GsmCdmaPhone
+</span>@extends com.android.internal.telephony.Phone
+
+ {@hide}
+*/
+var GsmCdmaPhone = {
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-LOG_TAG'>/***/
+</span>LOG_TAG : &quot;GsmCdmaPhone&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-RESTART_ECM_TIMER'>/***/
+</span>RESTART_ECM_TIMER : &quot;0&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-CANCEL_ECM_TIMER'>/***/
+</span>CANCEL_ECM_TIMER : &quot;1&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-mCdmaSubscriptionSource'>/***/
+</span>mCdmaSubscriptionSource : &quot;null&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-PROPERTY_CDMA_HOME_OPERATOR_NUMERIC'>/***/
+</span>PROPERTY_CDMA_HOME_OPERATOR_NUMERIC : &quot;ro.cdma.home.operator.numeric&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-mCT'>/***/
+</span>mCT : &quot;null&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-mSST'>/***/
+</span>mSST : &quot;null&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-property-mEmergencyNumberTracker'>/***/
+</span>mEmergencyNumberTracker : &quot;null&quot;,
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isPhoneTypeGsm'>/**
+</span>*/
+isPhoneTypeGsm : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isPhoneTypeCdma'>/**
+</span>*/
+isPhoneTypeCdma : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isPhoneTypeCdmaLte'>/**
+</span>*/
+isPhoneTypeCdmaLte : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getServiceState'>/**
+</span>*/
+getServiceState : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCellLocation'>/**
+</span>*/
+getCellLocation : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getState'>/**
+</span>*/
+getState : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getPhoneType'>/**
+</span>*/
+getPhoneType : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getServiceStateTracker'>/**
+</span>*/
+getServiceStateTracker : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getEmergencyNumberTracker'>/**
+</span>*/
+getEmergencyNumberTracker : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCallTracker'>/**
+</span>*/
+getCallTracker : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getTransportManager'>/**
+</span>*/
+getTransportManager : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-updateVoiceMail'>/**
+</span>*/
+updateVoiceMail : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getPendingMmiCodes'>/**
+</span>*/
+getPendingMmiCodes : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getDataConnectionState'>/**
+</span>*/
+getDataConnectionState : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getDataActivityState'>/**
+</span>*/
+getDataActivityState : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyPhoneStateChanged'>/**Notify any interested party of a Phone state change
+</span> {@link com.android.internal.telephony.PhoneConstants.State}
+*/
+notifyPhoneStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyPreciseCallStateChanged'>/**Notify registrants of a change in the call state. This notifies changes in
+</span> {@link com.android.internal.telephony.Call.State}. Use this when changes
+ in the precise call state are needed, else use notifyPhoneStateChanged.
+*/
+notifyPreciseCallStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyNewRingingConnection'>/**
+</span>*/
+notifyNewRingingConnection : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyDisconnect'>/**
+</span>*/
+notifyDisconnect : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyUnknownConnection'>/**
+</span>*/
+notifyUnknownConnection : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isInEmergencyCall'>/**
+</span>*/
+isInEmergencyCall : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isInEmergencySmsMode'>/**
+</span>*/
+isInEmergencySmsMode : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-sendEmergencyCallStateChange'>/**
+</span>*/
+sendEmergencyCallStateChange : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setBroadcastEmergencyCallStateChanges'>/**
+</span>*/
+setBroadcastEmergencyCallStateChanges : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifySuppServiceFailed'>/**
+</span>*/
+notifySuppServiceFailed : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyServiceStateChanged'>/**
+</span>*/
+notifyServiceStateChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyLocationChanged'>/**Notify that the CellLocation has changed.
+</span>@param {Object {CellLocation}} cl the new CellLocation
+*/
+notifyLocationChanged : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyCallForwardingIndicator'>/**
+</span>*/
+notifyCallForwardingIndicator : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-registerForSuppServiceNotification'>/**
+</span>*/
+registerForSuppServiceNotification : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-unregisterForSuppServiceNotification'>/**
+</span>*/
+unregisterForSuppServiceNotification : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-registerForSimRecordsLoaded'>/**
+</span>*/
+registerForSimRecordsLoaded : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-unregisterForSimRecordsLoaded'>/**
+</span>*/
+unregisterForSimRecordsLoaded : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-acceptCall'>/**
+</span>*/
+acceptCall : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-rejectCall'>/**
+</span>*/
+rejectCall : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-switchHoldingAndActive'>/**
+</span>*/
+switchHoldingAndActive : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getIccSerialNumber'>/**
+</span>*/
+getIccSerialNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getFullIccSerialNumber'>/**
+</span>*/
+getFullIccSerialNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-canConference'>/**
+</span>*/
+canConference : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-conference'>/**
+</span>*/
+conference : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-enableEnhancedVoicePrivacy'>/**
+</span>*/
+enableEnhancedVoicePrivacy : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getEnhancedVoicePrivacy'>/**
+</span>*/
+getEnhancedVoicePrivacy : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-clearDisconnected'>/**
+</span>*/
+clearDisconnected : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-canTransfer'>/**
+</span>*/
+canTransfer : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-explicitCallTransfer'>/**
+</span>*/
+explicitCallTransfer : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getForegroundCall'>/**
+</span>*/
+getForegroundCall : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getBackgroundCall'>/**
+</span>*/
+getBackgroundCall : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getRingingCall'>/**
+</span>*/
+getRingingCall : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-handleInCallMmiCommands'>/**
+</span>*/
+handleInCallMmiCommands : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isInCall'>/**
+</span>*/
+isInCall : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-dial'>/**
+</span>*/
+dial : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isNotificationOfWfcCallRequired'>/**
+</span>@return {Boolean} {@code true} if the user should be informed of an attempt to dial an international
+ number while on WFC only, {@code false} otherwise.
+*/
+isNotificationOfWfcCallRequired : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-handlePinMmi'>/**
+</span>*/
+handlePinMmi : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-handleUssdRequest'>/**
+</span>*/
+handleUssdRequest : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-sendUssdResponse'>/**
+</span>*/
+sendUssdResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-sendDtmf'>/**
+</span>*/
+sendDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-startDtmf'>/**
+</span>*/
+startDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-stopDtmf'>/**
+</span>*/
+stopDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-sendBurstDtmf'>/**
+</span>*/
+sendBurstDtmf : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setRadioPower'>/**
+</span>*/
+setRadioPower : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getVoiceMailNumber'>/**
+</span>*/
+getVoiceMailNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getVoiceMailAlphaTag'>/**
+</span>*/
+getVoiceMailAlphaTag : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getDeviceId'>/**
+</span>*/
+getDeviceId : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getDeviceSvn'>/**
+</span>*/
+getDeviceSvn : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getIsimRecords'>/**
+</span>*/
+getIsimRecords : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getImei'>/**
+</span>*/
+getImei : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getEsn'>/**
+</span>*/
+getEsn : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getMeid'>/**
+</span>*/
+getMeid : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getNai'>/**
+</span>*/
+getNai : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getSubscriberId'>/**
+</span>*/
+getSubscriberId : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCarrierInfoForImsiEncryption'>/**
+</span>*/
+getCarrierInfoForImsiEncryption : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setCarrierInfoForImsiEncryption'>/**
+</span>*/
+setCarrierInfoForImsiEncryption : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCarrierId'>/**
+</span>*/
+getCarrierId : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCarrierName'>/**
+</span>*/
+getCarrierName : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getMNOCarrierId'>/**
+</span>*/
+getMNOCarrierId : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getSpecificCarrierId'>/**
+</span>*/
+getSpecificCarrierId : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getSpecificCarrierName'>/**
+</span>*/
+getSpecificCarrierName : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-resolveSubscriptionCarrierId'>/**
+</span>*/
+resolveSubscriptionCarrierId : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCarrierIdListVersion'>/**
+</span>*/
+getCarrierIdListVersion : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-resetCarrierKeysForImsiEncryption'>/**
+</span>*/
+resetCarrierKeysForImsiEncryption : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setCarrierTestOverride'>/**
+</span>*/
+setCarrierTestOverride : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getGroupIdLevel1'>/**
+</span>*/
+getGroupIdLevel1 : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getGroupIdLevel2'>/**
+</span>*/
+getGroupIdLevel2 : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getLine1Number'>/**
+</span>*/
+getLine1Number : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getPlmn'>/**
+</span>*/
+getPlmn : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCdmaPrlVersion'>/**
+</span>*/
+getCdmaPrlVersion : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCdmaMin'>/**
+</span>*/
+getCdmaMin : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isMinInfoReady'>/**
+</span>*/
+isMinInfoReady : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getMsisdn'>/**
+</span>*/
+getMsisdn : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getLine1AlphaTag'>/**
+</span>*/
+getLine1AlphaTag : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setLine1Number'>/**
+</span>*/
+setLine1Number : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setVoiceMailNumber'>/**
+</span>*/
+setVoiceMailNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getSystemProperty'>/**
+</span>*/
+getSystemProperty : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCallForwardingOption'>/**
+</span>*/
+getCallForwardingOption : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setCallForwardingOption'>/**
+</span>*/
+setCallForwardingOption : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCallBarring'>/**
+</span>*/
+getCallBarring : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setCallBarring'>/**
+</span>*/
+setCallBarring : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-changeCallBarringPassword'>/**Changes access code used for call barring
+</span>@param {String} facility is one of CB_FACILTY_*
+@param {String} oldPwd is old password
+@param {String} newPwd is new password
+@param {Object {Message}} onComplete is callback message when the action is completed.
+*/
+changeCallBarringPassword : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getOutgoingCallerIdDisplay'>/**
+</span>*/
+getOutgoingCallerIdDisplay : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setOutgoingCallerIdDisplay'>/**
+</span>*/
+setOutgoingCallerIdDisplay : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCallWaiting'>/**
+</span>*/
+getCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setCallWaiting'>/**
+</span>*/
+setCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getAvailableNetworks'>/**
+</span>*/
+getAvailableNetworks : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-startNetworkScan'>/**
+</span>*/
+startNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-stopNetworkScan'>/**
+</span>*/
+stopNetworkScan : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setTTYMode'>/**
+</span>*/
+setTTYMode : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setUiTTYMode'>/**
+</span>*/
+setUiTTYMode : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setMute'>/**
+</span>*/
+setMute : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getMute'>/**
+</span>*/
+getMute : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-updateServiceLocation'>/**
+</span>*/
+updateServiceLocation : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-enableLocationUpdates'>/**
+</span>*/
+enableLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-disableLocationUpdates'>/**
+</span>*/
+disableLocationUpdates : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getDataRoamingEnabled'>/**
+</span>*/
+getDataRoamingEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setDataRoamingEnabled'>/**
+</span>*/
+setDataRoamingEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-registerForCdmaOtaStatusChange'>/**
+</span>*/
+registerForCdmaOtaStatusChange : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-unregisterForCdmaOtaStatusChange'>/**
+</span>*/
+unregisterForCdmaOtaStatusChange : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-registerForSubscriptionInfoReady'>/**
+</span>*/
+registerForSubscriptionInfoReady : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-unregisterForSubscriptionInfoReady'>/**
+</span>*/
+unregisterForSubscriptionInfoReady : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setOnEcbModeExitResponse'>/**
+</span>*/
+setOnEcbModeExitResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-unsetOnEcbModeExitResponse'>/**
+</span>*/
+unsetOnEcbModeExitResponse : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-registerForCallWaiting'>/**
+</span>*/
+registerForCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-unregisterForCallWaiting'>/**
+</span>*/
+unregisterForCallWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isUserDataEnabled'>/**Whether data is enabled by user. Unlike isDataEnabled, this only
+</span> checks user setting stored in {@link android.provider.Settings.Global#MOBILE_DATA}
+ if not provisioning, or isProvisioningDataEnabled if provisioning.
+*/
+isUserDataEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-onMMIDone'>/**Removes the given MMI from the pending list and notifies
+</span> registrants that it is complete.
+@param {Object {MmiCode}} mmi MMI that is done
+*/
+onMMIDone : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-supports3gppCallForwardingWhileRoaming'>/**
+</span>*/
+supports3gppCallForwardingWhileRoaming : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-handleMessage'>/**
+</span>*/
+handleMessage : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getUiccCardApplication'>/**
+</span>*/
+getUiccCardApplication : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-updateCurrentCarrierInProvider'>/**Sets the &quot;current&quot; field in the telephony provider according to the SIM's operator
+</span>@return {Boolean} true for success; false otherwise.
+*/
+updateCurrentCarrierInProvider : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getIccPhoneBookInterfaceManager'>/**Retrieves the IccPhoneBookInterfaceManager of the GsmCdmaPhone
+</span>*/
+getIccPhoneBookInterfaceManager : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-activateCellBroadcastSms'>/**Activate or deactivate cell broadcast SMS.
+</span>@param {Number} activate 0 = activate, 1 = deactivate
+@param {Object {Message}} response Callback message is empty on completion
+*/
+activateCellBroadcastSms : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCellBroadcastSmsConfig'>/**Query the current configuration of cdma cell broadcast SMS.
+</span>@param {Object {Message}} response Callback message is empty on completion
+*/
+getCellBroadcastSmsConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setCellBroadcastSmsConfig'>/**Configure cdma cell broadcast SMS.
+</span>@param {Object {int[]}} response Callback message is empty on completion
+*/
+setCellBroadcastSmsConfig : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-needsOtaServiceProvisioning'>/**Returns true if OTA Service Provisioning needs to be performed.
+</span>*/
+needsOtaServiceProvisioning : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isCspPlmnEnabled'>/**
+</span>*/
+isCspPlmnEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-shouldForceAutoNetworkSelect'>/**Whether manual select is now allowed and we should set
+</span> to auto network select mode.
+*/
+shouldForceAutoNetworkSelect : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-exitEmergencyCallbackMode'>/**
+</span>*/
+exitEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyEmergencyCallRegistrants'>/**
+</span>*/
+notifyEmergencyCallRegistrants : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-handleTimerInEmergencyCallbackMode'>/**Handle to cancel or restart Ecm timer in emergency call back mode
+</span> if action is CANCEL_ECM_TIMER, cancel Ecm timer and notify apps the timer is canceled;
+ otherwise, restart Ecm timer and notify apps the timer is restarted.
+*/
+handleTimerInEmergencyCallbackMode : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isOtaSpNumber'>/**isOTASPNumber: checks a given number against the IS-683A OTASP dial string and carrier
+</span> OTASP dial string.
+@param {String} dialStr the number to look up.
+@return {Boolean} true if the number is in IS-683A OTASP dial string or carrier OTASP dial string
+*/
+isOtaSpNumber : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCdmaEriIconIndex'>/**
+</span>*/
+getCdmaEriIconIndex : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCdmaEriIconMode'>/**Returns the CDMA ERI icon mode,
+</span> 0 - ON
+ 1 - FLASHING
+*/
+getCdmaEriIconMode : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCdmaEriText'>/**Returns the CDMA ERI text,
+</span>*/
+getCdmaEriText : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isCdmaSubscriptionAppPresent'>/**
+</span>*/
+isCdmaSubscriptionAppPresent : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setSignalStrengthReportingCriteria'>/**
+</span>*/
+setSignalStrengthReportingCriteria : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setLinkCapacityReportingCriteria'>/**
+</span>*/
+setLinkCapacityReportingCriteria : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getIccSmsInterfaceManager'>/**
+</span>*/
+getIccSmsInterfaceManager : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-updatePhoneObject'>/**
+</span>*/
+updatePhoneObject : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setImsRegistrationState'>/**
+</span>*/
+setImsRegistrationState : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getIccRecordsLoaded'>/**
+</span>*/
+getIccRecordsLoaded : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getIccCard'>/**
+</span>*/
+getIccCard : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setOperatorBrandOverride'>/**
+</span>*/
+setOperatorBrandOverride : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCountryIso'>/**
+</span>@return {String} The country ISO for the subscription associated with this phone.
+*/
+getCountryIso : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-notifyEcbmTimerReset'>/**
+</span>*/
+notifyEcbmTimerReset : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getCsCallRadioTech'>/**Calculates current RIL voice radio technology for CS calls.
+</span>
+ This function should only be used in {@link com.android.internal.telephony.GsmCdmaConnection}
+ to indicate current CS call radio technology.
+@return {Number} the RIL voice radio technology used for CS calls,
+         see {@code RIL_RADIO_TECHNOLOGY_*} in {@link android.telephony.ServiceState}.
+*/
+getCsCallRadioTech : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-registerForEcmTimerReset'>/**Registration point for Ecm timer reset
+</span>@param {Object {Handler}} h handler to notify
+@param {Number} what User-defined message code
+@param {Object {Object}} obj placed in Message.obj
+*/
+registerForEcmTimerReset : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-unregisterForEcmTimerReset'>/**
+</span>*/
+unregisterForEcmTimerReset : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-setVoiceMessageWaiting'>/**Sets the SIM voice message waiting indicator records.
+</span>@param {Number} line GSM Subscriber Profile Number, one-based. Only '1' is supported
+@param {Number} countWaiting The number of messages waiting, if known. Use
+                     -1 to indicate that an unknown number of
+                      messages are waiting
+*/
+setVoiceMessageWaiting : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-isUtEnabled'>/**
+</span>*/
+isUtEnabled : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getDtmfToneDelayKey'>/**
+</span>*/
+getDtmfToneDelayKey : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getWakeLock'>/**
+</span>*/
+getWakeLock : function(  ) {},
+
+<span id='com-android-internal-telephony-GsmCdmaPhone-method-getLteOnCdmaMode'>/**
+</span>*/
+getLteOnCdmaMode : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

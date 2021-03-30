@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-ContactsContract-PhoneLookup'>/**@class android.provider.ContactsContract.PhoneLookup
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.ContactsContract.PhoneLookupColumns
+
+ implements android.provider.ContactsContract.ContactsColumns
+
+ implements android.provider.ContactsContract.ContactOptionsColumns
+
+ implements android.provider.ContactsContract.ContactNameColumns
+
+@extends java.lang.Object
+
+ A table that represents the result of looking up a phone number, for
+ example for caller ID. To perform a lookup you must append the number you
+ want to find to {@link #CONTENT_FILTER_URI}.  This query is highly
+ optimized.
+ &lt;pre&gt;
+ Uri uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+ resolver.query(uri, new String[]{PhoneLookup.DISPLAY_NAME,...
+ &lt;/pre&gt;
+
+ &lt;h3&gt;Columns&lt;/h3&gt;
+
+ &lt;table class=&quot;jd-sumtable&quot;&gt;
+ &lt;tr&gt;
+ &lt;th colspan='4'&gt;PhoneLookup&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #NUMBER}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Phone number.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #TYPE}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Phone number type. See {@link android.provider.ContactsContract.CommonDataKinds.Phone}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #LABEL}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Custom label for the phone number. See {@link android.provider.ContactsContract.CommonDataKinds.Phone}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;p&gt;
+ Columns from the Contacts table are also available through a join.
+ &lt;/p&gt;
+ &lt;table class=&quot;jd-sumtable&quot;&gt;
+ &lt;tr&gt;
+ &lt;th colspan='4'&gt;Join with {@link android.provider.Contacts}&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #_ID}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Contact ID.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #CONTACT_ID}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Contact ID.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #DATA_ID}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;Data ID.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #LOOKUP_KEY}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #DISPLAY_NAME}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;long&lt;/td&gt;
+ &lt;td&gt;{@link #PHOTO_ID}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #IN_VISIBLE_GROUP}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #HAS_PHONE_NUMBER}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #STARRED}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;String&lt;/td&gt;
+ &lt;td&gt;{@link #CUSTOM_RINGTONE}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int&lt;/td&gt;
+ &lt;td&gt;{@link #SEND_TO_VOICEMAIL}&lt;/td&gt;
+ &lt;td&gt;read-only&lt;/td&gt;
+ &lt;td&gt;See {@link android.provider.ContactsContract.Contacts}.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+*/
+var PhoneLookup = {
+
+<span id='android-provider-ContactsContract-PhoneLookup-property-CONTENT_FILTER_URI'>/** The content:// style URI for this table.
+</span>
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Caution: &lt;/b&gt;As of January 7, 2019, this field no longer
+ sorts results based on contacts frequency. For more information, see the
+ &lt;a href=&quot;/guide/topics/providers/contacts-provider#ObsoleteData&quot;&gt;Contacts Provider&lt;/a&gt;
+ page.
+
+ Append the phone number you want to lookup
+ to this URI and query it to perform a lookup. For example:
+ &lt;pre&gt;
+ Uri lookupUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI,
+         Uri.encode(phoneNumber));
+ &lt;/pre&gt;
+*/
+CONTENT_FILTER_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-PhoneLookup-property-ENTERPRISE_CONTENT_FILTER_URI'>/** &lt;p&gt;URI used for the &quot;enterprise caller-id&quot;.&lt;/p&gt;
+</span>
+ &lt;p class=&quot;caution&quot;&gt;&lt;b&gt;Caution: &lt;/b&gt;As of January 7, 2019, this field no longer
+ sorts results based on contacts frequency. For more information, see the
+ &lt;a href=&quot;/guide/topics/providers/contacts-provider#ObsoleteData&quot;&gt;Contacts Provider&lt;/a&gt;
+ page.
+
+ &lt;p&gt;
+ It supports the same semantics as {@link #CONTENT_FILTER_URI} and returns the same
+ columns.  If the device has no corp profile that is linked to the current profile, it
+ behaves in the exact same way as {@link #CONTENT_FILTER_URI}.  If there is a corp profile
+ linked to the current profile, it first queries against the personal contact database,
+ and if no matching contacts are found there, then queries against the
+ corp contacts database.
+ &lt;/p&gt;
+ &lt;p&gt;
+ If a result is from the corp profile, it makes the following changes to the data:
+ &lt;ul&gt;
+     &lt;li&gt;
+     {@link #PHOTO_THUMBNAIL_URI} and {@link #PHOTO_URI} will be rewritten to special
+     URIs.  Use {@link ContentResolver#openAssetFileDescriptor} or its siblings to
+     load pictures from them.
+     {@link #PHOTO_ID} and {@link #PHOTO_FILE_ID} will be set to null.  Do not use them.
+     &lt;/li&gt;
+     &lt;li&gt;
+     Corp contacts will get artificial {@link #_ID}s.  In order to tell whether a contact
+     is from the corp profile, use
+     {@link android.provider.ContactsContract.Contacts#isEnterpriseContactId(long)}.
+     &lt;/li&gt;
+     &lt;li&gt;
+     Corp contacts will get artificial {@link #LOOKUP_KEY}s too.
+     &lt;/li&gt;
+     &lt;li&gt;
+     Returned work contact IDs and lookup keys are not accepted in places that not
+     explicitly say to accept them.
+     &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;
+ A contact lookup URL built by
+ {@link android.provider.ContactsContract.Contacts#getLookupUri(long, String)}
+ with an {@link #_ID} and a {@link #LOOKUP_KEY} returned by this API can be passed to
+ {@link android.provider.ContactsContract.QuickContact#showQuickContact} even if a contact is from the
+ corp profile.
+ &lt;/p&gt;
+
+ &lt;pre&gt;
+ Uri lookupUri = Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
+         Uri.encode(phoneNumber));
+ &lt;/pre&gt;
+*/
+ENTERPRISE_CONTENT_FILTER_URI : &quot;null&quot;,
+<span id='android-provider-ContactsContract-PhoneLookup-property-CONTENT_TYPE'>/** The MIME type of {@link #CONTENT_FILTER_URI} providing a directory of phone lookup rows.
+</span>
+ @hide
+*/
+CONTENT_TYPE : &quot;vnd.android.cursor.dir/phone_lookup&quot;,
+<span id='android-provider-ContactsContract-PhoneLookup-property-QUERY_PARAMETER_SIP_ADDRESS'>/** If this boolean parameter is set to true, then the appended query is treated as a
+</span> SIP address and the lookup will be performed against SIP addresses in the user's
+ contacts.
+*/
+QUERY_PARAMETER_SIP_ADDRESS : &quot;sip&quot;,
+
+};</pre>
+</body>
+</html>

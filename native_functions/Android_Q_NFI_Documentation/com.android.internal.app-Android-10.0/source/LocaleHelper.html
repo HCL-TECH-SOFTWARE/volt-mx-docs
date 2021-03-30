@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-app-LocaleHelper'>/**@class com.android.internal.app.LocaleHelper
+</span>@extends java.lang.Object
+
+ This class implements some handy methods to process with locales.
+*/
+var LocaleHelper = {
+
+<span id='com-android-internal-app-LocaleHelper-method-toSentenceCase'>/**Sentence-case (first character uppercased).
+</span>
+ &lt;p&gt;There is no good API available for this, not even in ICU.
+ We can revisit this if we get some ICU support later.&lt;/p&gt;
+
+ &lt;p&gt;There are currently several tickets requesting this feature:&lt;/p&gt;
+ &lt;ul&gt;
+ &lt;li&gt;ICU needs to provide an easy way to titlecase only one first letter
+   http://bugs.icu-project.org/trac/ticket/11729&lt;/li&gt;
+ &lt;li&gt;Add &quot;initial case&quot;
+    http://bugs.icu-project.org/trac/ticket/8394&lt;/li&gt;
+ &lt;li&gt;Add code for initialCase, toTitlecase don't modify after Lt,
+   avoid 49Ers, low-level language-specific casing
+   http://bugs.icu-project.org/trac/ticket/10410&lt;/li&gt;
+ &lt;li&gt;BreakIterator.getFirstInstance: Often you need to titlecase just the first
+   word, and leave the rest of the string alone.  (closed as duplicate)
+   http://bugs.icu-project.org/trac/ticket/8946&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;A (clunky) option with the current ICU API is:&lt;/p&gt;
+ {{
+   BreakIterator breakIterator = BreakIterator.getSentenceInstance(locale);
+   String result = UCharacter.toTitleCase(locale,
+       source, breakIterator, UCharacter.TITLECASE_NO_LOWERCASE);
+ }}
+
+ &lt;p&gt;That also means creating a BreakIterator for each locale. Expensive...&lt;/p&gt;
+@param {String} str the string to sentence-case.
+@param {Object {Locale}} locale the locale used for the case conversion.
+@return {String} the string converted to sentence-case.
+*/
+toSentenceCase : function(  ) {},
+
+<span id='com-android-internal-app-LocaleHelper-method-normalizeForSearch'>/**Normalizes a string for locale name search. Does case conversion for now,
+</span> but might do more in the future.
+
+ &lt;p&gt;Warning: it is only intended to be used in searches by the locale picker.
+ Don't use it for other things, it is very limited.&lt;/p&gt;
+@param {String} str the string to normalize
+@param {Object {Locale}} locale the locale that might be used for certain operations (i.e. case conversion)
+@return {String} the string normalized for search
+*/
+normalizeForSearch : function(  ) {},
+
+<span id='com-android-internal-app-LocaleHelper-method-getDisplayName'>/**Returns the locale localized for display in the provided locale.
+</span>@param {Object {Locale}} locale the locale whose name is to be displayed.
+@param {Object {Locale}} displayLocale the locale in which to display the name.
+@param {Boolean} sentenceCase true if the result should be sentence-cased
+@return {String} the localized name of the locale.
+*/
+getDisplayName : function(  ) {},
+
+<span id='com-android-internal-app-LocaleHelper-method-getDisplayName'>/**Returns the locale localized for display in the default locale.
+</span>@param {Object {Locale}} locale the locale whose name is to be displayed.
+@param {Boolean} sentenceCase true if the result should be sentence-cased
+@return {String} the localized name of the locale.
+*/
+getDisplayName : function(  ) {},
+
+<span id='com-android-internal-app-LocaleHelper-method-getDisplayCountry'>/**Returns a locale's country localized for display in the provided locale.
+</span>@param {Object {Locale}} locale the locale whose country will be displayed.
+@param {Object {Locale}} displayLocale the locale in which to display the name.
+@return {String} the localized country name.
+*/
+getDisplayCountry : function(  ) {},
+
+<span id='com-android-internal-app-LocaleHelper-method-getDisplayCountry'>/**Returns a locale's country localized for display in the default locale.
+</span>@param {Object {Locale}} locale the locale whose country will be displayed.
+@return {String} the localized country name.
+*/
+getDisplayCountry : function(  ) {},
+
+<span id='com-android-internal-app-LocaleHelper-method-getDisplayLocaleList'>/**Returns the locale list localized for display in the provided locale.
+</span>@param {Object {LocaleList}} locales the list of locales whose names is to be displayed.
+@param {Object {Locale}} displayLocale the locale in which to display the names.
+                      If this is null, it will use the default locale.
+@param {Number} maxLocales maximum number of locales to display. Generates ellipsis after that.
+@return {String} the locale aware list of locale names
+*/
+getDisplayLocaleList : function(  ) {},
+
+<span id='com-android-internal-app-LocaleHelper-method-addLikelySubtags'>/**Adds the likely subtags for a provided locale ID.
+</span>@param {Object {Locale}} locale the locale to maximize.
+@return {Object {java.util.Locale}} the maximized Locale instance.
+*/
+addLikelySubtags : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

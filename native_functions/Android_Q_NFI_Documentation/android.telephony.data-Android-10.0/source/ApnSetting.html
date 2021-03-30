@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-data-ApnSetting'>/**@class android.telephony.data.ApnSetting
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ An Access Point Name (APN) configuration for a carrier data connection.
+
+ &lt;p&gt;The APN provides configuration to connect a cellular network device to an IP data network. A
+ carrier uses the name, type and other configuration in an {@code APNSetting} to decide which IP
+ address to assign, any security methods to apply, and how the device might be connected to
+ private networks.
+
+ &lt;p&gt;Use {@link android.telephony.data.ApnSetting.Builder} to create new instances.
+*/
+var ApnSetting = {
+
+<span id='android-telephony-data-ApnSetting-property-UNSET_MTU'>/** Default value for mtu if it's not set. Moved from PhoneConstants.
+</span> @hide
+*/
+UNSET_MTU : &quot;0&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_NONE'>/** APN type for none. Should only be used for initialization.
+</span> @hide
+*/
+TYPE_NONE : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_ALL'>/** APN type for all APNs (except wild-cardable types).
+</span> @hide
+*/
+TYPE_ALL : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_DEFAULT'>/**APN type for default data traffic. */
+</span>TYPE_DEFAULT : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_MMS'>/**APN type for MMS traffic. */
+</span>TYPE_MMS : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_SUPL'>/**APN type for SUPL assisted GPS. */
+</span>TYPE_SUPL : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_DUN'>/**APN type for DUN traffic. */
+</span>TYPE_DUN : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_HIPRI'>/**APN type for HiPri traffic. */
+</span>TYPE_HIPRI : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_FOTA'>/**APN type for accessing the carrier's FOTA portal, used for over the air updates. */
+</span>TYPE_FOTA : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_IMS'>/**APN type for IMS. */
+</span>TYPE_IMS : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_CBS'>/**APN type for CBS. */
+</span>TYPE_CBS : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_IA'>/**APN type for IA Initial Attach APN. */
+</span>TYPE_IA : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_EMERGENCY'>/** APN type for Emergency PDN. This is not an IA apn, but is used
+</span> for access to carrier services in an emergency call situation.
+*/
+TYPE_EMERGENCY : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-TYPE_MCX'>/**APN type for MCX (Mission Critical Service) where X can be PTT/Video/Data */
+</span>TYPE_MCX : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-property-AUTH_TYPE_NONE'>/**No authentication type. */
+</span>AUTH_TYPE_NONE : &quot;0&quot;,
+<span id='android-telephony-data-ApnSetting-property-AUTH_TYPE_PAP'>/**Authentication type for PAP. */
+</span>AUTH_TYPE_PAP : &quot;1&quot;,
+<span id='android-telephony-data-ApnSetting-property-AUTH_TYPE_CHAP'>/**Authentication type for CHAP. */
+</span>AUTH_TYPE_CHAP : &quot;2&quot;,
+<span id='android-telephony-data-ApnSetting-property-AUTH_TYPE_PAP_OR_CHAP'>/**Authentication type for PAP or CHAP. */
+</span>AUTH_TYPE_PAP_OR_CHAP : &quot;3&quot;,
+<span id='android-telephony-data-ApnSetting-property-PROTOCOL_IP'>/**Internet protocol. */
+</span>PROTOCOL_IP : &quot;0&quot;,
+<span id='android-telephony-data-ApnSetting-property-PROTOCOL_IPV6'>/**Internet protocol, version 6. */
+</span>PROTOCOL_IPV6 : &quot;1&quot;,
+<span id='android-telephony-data-ApnSetting-property-PROTOCOL_IPV4V6'>/**Virtual PDP type introduced to handle dual IP stack UE capability. */
+</span>PROTOCOL_IPV4V6 : &quot;2&quot;,
+<span id='android-telephony-data-ApnSetting-property-PROTOCOL_PPP'>/**Point to point protocol. */
+</span>PROTOCOL_PPP : &quot;3&quot;,
+<span id='android-telephony-data-ApnSetting-property-PROTOCOL_NON_IP'>/**Transfer of Non-IP data to external packet data network. */
+</span>PROTOCOL_NON_IP : &quot;4&quot;,
+<span id='android-telephony-data-ApnSetting-property-PROTOCOL_UNSTRUCTURED'>/**Transfer of Unstructured data to the Data Network via N6. */
+</span>PROTOCOL_UNSTRUCTURED : &quot;5&quot;,
+<span id='android-telephony-data-ApnSetting-property-MVNO_TYPE_SPN'>/**MVNO type for service provider name. */
+</span>MVNO_TYPE_SPN : &quot;0&quot;,
+<span id='android-telephony-data-ApnSetting-property-MVNO_TYPE_IMSI'>/**MVNO type for IMSI. */
+</span>MVNO_TYPE_IMSI : &quot;1&quot;,
+<span id='android-telephony-data-ApnSetting-property-MVNO_TYPE_GID'>/**MVNO type for group identifier level 1. */
+</span>MVNO_TYPE_GID : &quot;2&quot;,
+<span id='android-telephony-data-ApnSetting-property-MVNO_TYPE_ICCID'>/**MVNO type for ICCID. */
+</span>MVNO_TYPE_ICCID : &quot;3&quot;,
+<span id='android-telephony-data-ApnSetting-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-telephony-data-ApnSetting-method-getMtu'>/**Returns the MTU size of the mobile interface to which the APN connected.
+</span>@return {Number} the MTU size of the APN
+@hide 
+*/
+getMtu : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getProfileId'>/**Returns the profile id to which the APN saved in modem.
+</span>@return {Number} the profile id of the APN
+@hide 
+*/
+getProfileId : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-isPersistent'>/**Returns if the APN setting is persistent on the modem.
+</span>@return {Boolean} is the APN setting to be set in modem
+@hide 
+*/
+isPersistent : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMaxConns'>/**Returns the max connections of this APN.
+</span>@return {Number} the max connections of this APN
+@hide 
+*/
+getMaxConns : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getWaitTime'>/**Returns the wait time for retry of the APN.
+</span>@return {Number} the wait time for retry of the APN
+@hide 
+*/
+getWaitTime : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMaxConnsTime'>/**Returns the time to limit max connection for the APN.
+</span>@return {Number} the time to limit max connection for the APN
+@hide 
+*/
+getMaxConnsTime : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMvnoMatchData'>/**Returns the MVNO data. Examples:
+</span>   &quot;spn&quot;: A MOBILE, BEN NL
+   &quot;imsi&quot;: 302720x94, 2060188
+   &quot;gid&quot;: 4E, 33
+   &quot;iccid&quot;: 898603 etc..
+@return {String} the mvno match data
+@hide 
+*/
+getMvnoMatchData : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getApnSetId'>/**Returns the APN set id.
+</span>
+ APNs that are part of the same set should be preferred together, e.g. if the
+ user selects a default APN with apnSetId=1, then we will prefer all APNs with apnSetId = 1.
+
+ If the apnSetId = Carriers.NO_SET_SET(=0) then the APN is not part of a set.
+@return {Number} the APN set id
+@hide 
+*/
+getApnSetId : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getPermanentFailed'>/**Indicates this APN setting is permanently failed and cannot be
+</span> retried by the retry manager anymore.
+@return {Boolean} if this APN setting is permanently failed
+@hide 
+*/
+getPermanentFailed : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-setPermanentFailed'>/**Sets if this APN setting is permanently failed.
+</span>@param {Boolean} permanentFailed if this APN setting is permanently failed
+@hide 
+*/
+setPermanentFailed : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getEntryName'>/**Gets the human-readable name that describes the APN.
+</span>@return {String} the entry name for the APN
+*/
+getEntryName : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getApnName'>/**Returns the name of the APN.
+</span>@return {String} APN name
+*/
+getApnName : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getProxyAddress'>/**Gets the HTTP proxy address configured for the APN. The proxy address might be an IP address
+</span> or hostname. This method returns {@code null} if system networking (typically DNS) isn’t
+ available to resolve a hostname value—values set as IP addresses don’t have this restriction.
+ This is a known problem and will be addressed in a future release.
+@return {Object {java.net.InetAddress}} the HTTP proxy address or {@code null} if DNS isn’t available to resolve a hostname
+@deprecated use {@link #getProxyAddressAsString()} instead.
+*/
+getProxyAddress : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getProxyAddressAsString'>/**Returns the proxy address of the APN.
+</span>@return {String} proxy address.
+*/
+getProxyAddressAsString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getProxyPort'>/**Returns the proxy address of the APN.
+</span>@return {Number} proxy address.
+*/
+getProxyPort : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMmsc'>/**Returns the MMSC Uri of the APN.
+</span>@return {Object {android.net.Uri}} MMSC Uri.
+*/
+getMmsc : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMmsProxyAddress'>/**Gets the MMS proxy address configured for the APN. The MMS proxy address might be an IP
+</span> address or hostname. This method returns {@code null} if system networking (typically DNS)
+ isn’t available to resolve a hostname value—values set as IP addresses don’t have this
+ restriction. This is a known problem and will be addressed in a future release.
+@return {Object {java.net.InetAddress}} the MMS proxy address or {@code null} if DNS isn’t available to resolve a hostname
+@deprecated use {@link #getMmsProxyAddressAsString()} instead.
+*/
+getMmsProxyAddress : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMmsProxyAddressAsString'>/**Returns the MMS proxy address of the APN.
+</span>@return {String} MMS proxy address.
+*/
+getMmsProxyAddressAsString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMmsProxyPort'>/**Returns the MMS proxy port of the APN.
+</span>@return {Number} MMS proxy port
+*/
+getMmsProxyPort : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getUser'>/**Returns the APN username of the APN.
+</span>@return {String} APN username
+*/
+getUser : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getPassword'>/**Returns the APN password of the APN.
+</span>@return {String} APN password
+*/
+getPassword : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getAuthType'>/**Returns the authentication type of the APN.
+</span>@return {Number} authentication type
+*/
+getAuthType : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getApnTypeBitmask'>/**Returns the bitmask of APN types.
+</span>
+ &lt;p&gt;Apn types are usage categories for an APN entry. One APN entry may support multiple
+ APN types, eg, a single APN may service regular internet traffic (&quot;default&quot;) as well as
+ MMS-specific connections.
+
+ &lt;p&gt;The bitmask of APN types is calculated from APN types defined in {@link android.telephony.data.ApnSetting}.
+@see Builder#setApnTypeBitmask(int)
+@return {Number} a bitmask describing the types of the APN
+*/
+getApnTypeBitmask : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getId'>/**Returns the unique database id for this entry.
+</span>@return {Number} the unique database id
+*/
+getId : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getOperatorNumeric'>/**Returns the numeric operator ID for the APN. Numeric operator ID is defined as
+</span> {@link android.provider.Telephony.Carriers#MCC} +
+ {@link android.provider.Telephony.Carriers#MNC}.
+@return {String} the numeric operator ID
+*/
+getOperatorNumeric : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getProtocol'>/**Returns the protocol to use to connect to this APN.
+</span>
+ &lt;p&gt;Protocol is one of the {@code PDP_type} values in TS 27.007 section 10.1.1.
+@see Builder#setProtocol(int)
+@return {Number} the protocol
+*/
+getProtocol : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getRoamingProtocol'>/**Returns the protocol to use to connect to this APN while the device is roaming.
+</span>
+ &lt;p&gt;Roaming protocol is one of the {@code PDP_type} values in TS 27.007 section 10.1.1.
+@see Builder#setRoamingProtocol(int)
+@return {Number} the roaming protocol
+*/
+getRoamingProtocol : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-isEnabled'>/**Returns the current status of APN.
+</span>
+ {@code true} : enabled APN.
+ {@code false} : disabled APN.
+@return {Boolean} the current status
+*/
+isEnabled : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getNetworkTypeBitmask'>/**Returns a bitmask describing the Radio Technologies(Network Types) which this APN may use.
+</span>
+ NetworkType bitmask is calculated from NETWORK_TYPE defined in {@link TelephonyManager}.
+
+ Examples of Network Types include {@link TelephonyManager#NETWORK_TYPE_UNKNOWN},
+ {@link TelephonyManager#NETWORK_TYPE_GPRS}, {@link TelephonyManager#NETWORK_TYPE_EDGE}.
+@return {Number} a bitmask describing the Radio Technologies(Network Types)
+*/
+getNetworkTypeBitmask : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMvnoType'>/**Returns the MVNO match type for this APN.
+</span>@see Builder#setMvnoType(int)
+@return {Number} the MVNO match type
+*/
+getMvnoType : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getCarrierId'>/**Returns the carrier id for this APN.
+</span>@see Builder#setCarrierId(int)
+@return {Number} the carrier id
+*/
+getCarrierId : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getSkip464Xlat'>/**Returns the skip464xlat flag for this APN.
+</span>@return {Number} SKIP_464XLAT_DEFAULT, SKIP_464XLAT_DISABLE or SKIP_464XLAT_ENABLE
+@hide 
+*/
+getSkip464Xlat : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-makeApnSetting'>/**
+</span>@hide 
+*/
+makeApnSetting : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-makeApnSetting'>/**
+</span>@hide 
+*/
+makeApnSetting : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-makeApnSetting'>/**
+</span>@hide 
+*/
+makeApnSetting : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-makeApnSetting'>/**
+</span>@hide 
+*/
+makeApnSetting : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-fromString'>/**Creates an ApnSetting object from a string.
+</span>@param {String} data the string to read.
+
+ The string must be in one of two formats (newlines added for clarity,
+ spaces are optional):
+
+ v1 format:
+   &lt;carrier&gt;, &lt;apn&gt;, &lt;proxy&gt;, &lt;port&gt;, &lt;user&gt;, &lt;password&gt;, &lt;server&gt;,
+   &lt;mmsc&gt;, &lt;mmsproxy&gt;, &lt;mmsport&gt;, &lt;mcc&gt;, &lt;mnc&gt;, &lt;authtype&gt;,
+   &lt;type&gt;[| &lt;type&gt;...],
+
+ v2 format:
+   [ApnSettingV2] &lt;carrier&gt;, &lt;apn&gt;, &lt;proxy&gt;, &lt;port&gt;, &lt;user&gt;, &lt;password&gt;, &lt;server&gt;,
+   &lt;mmsc&gt;, &lt;mmsproxy&gt;, &lt;mmsport&gt;, &lt;mcc&gt;, &lt;mnc&gt;, &lt;authtype&gt;,
+   &lt;type&gt;[| &lt;type&gt;...], &lt;protocol&gt;, &lt;roaming_protocol&gt;, &lt;carrierEnabled&gt;, &lt;bearerBitmask&gt;,
+
+ v3 format:
+   [ApnSettingV3] &lt;carrier&gt;, &lt;apn&gt;, &lt;proxy&gt;, &lt;port&gt;, &lt;user&gt;, &lt;password&gt;, &lt;server&gt;,
+   &lt;mmsc&gt;, &lt;mmsproxy&gt;, &lt;mmsport&gt;, &lt;mcc&gt;, &lt;mnc&gt;, &lt;authtype&gt;,
+   &lt;type&gt;[| &lt;type&gt;...], &lt;protocol&gt;, &lt;roaming_protocol&gt;, &lt;carrierEnabled&gt;, &lt;bearerBitmask&gt;,
+   &lt;profileId&gt;, &lt;modemCognitive&gt;, &lt;maxConns&gt;, &lt;waitTime&gt;, &lt;maxConnsTime&gt;, &lt;mtu&gt;,
+   &lt;mvnoType&gt;, &lt;mvnoMatchData&gt;
+
+ v4 format:
+   [ApnSettingV4] &lt;carrier&gt;, &lt;apn&gt;, &lt;proxy&gt;, &lt;port&gt;, &lt;user&gt;, &lt;password&gt;, &lt;server&gt;,
+   &lt;mmsc&gt;, &lt;mmsproxy&gt;, &lt;mmsport&gt;, &lt;mcc&gt;, &lt;mnc&gt;, &lt;authtype&gt;,
+   &lt;type&gt;[| &lt;type&gt;...], &lt;protocol&gt;, &lt;roaming_protocol&gt;, &lt;carrierEnabled&gt;, &lt;bearerBitmask&gt;,
+   &lt;profileId&gt;, &lt;modemCognitive&gt;, &lt;maxConns&gt;, &lt;waitTime&gt;, &lt;maxConnsTime&gt;, &lt;mtu&gt;,
+   &lt;mvnoType&gt;, &lt;mvnoMatchData&gt;, &lt;networkTypeBitmask&gt;
+
+ v5 format:
+   [ApnSettingV5] &lt;carrier&gt;, &lt;apn&gt;, &lt;proxy&gt;, &lt;port&gt;, &lt;user&gt;, &lt;password&gt;, &lt;server&gt;,
+   &lt;mmsc&gt;, &lt;mmsproxy&gt;, &lt;mmsport&gt;, &lt;mcc&gt;, &lt;mnc&gt;, &lt;authtype&gt;,
+   &lt;type&gt;[| &lt;type&gt;...], &lt;protocol&gt;, &lt;roaming_protocol&gt;, &lt;carrierEnabled&gt;, &lt;bearerBitmask&gt;,
+   &lt;profileId&gt;, &lt;modemCognitive&gt;, &lt;maxConns&gt;, &lt;waitTime&gt;, &lt;maxConnsTime&gt;, &lt;mtu&gt;,
+   &lt;mvnoType&gt;, &lt;mvnoMatchData&gt;, &lt;networkTypeBitmask&gt;, &lt;apnSetId&gt;
+
+ v6 format:
+   [ApnSettingV6] &lt;carrier&gt;, &lt;apn&gt;, &lt;proxy&gt;, &lt;port&gt;, &lt;user&gt;, &lt;password&gt;, &lt;server&gt;,
+   &lt;mmsc&gt;, &lt;mmsproxy&gt;, &lt;mmsport&gt;, &lt;mcc&gt;, &lt;mnc&gt;, &lt;authtype&gt;,
+   &lt;type&gt;[| &lt;type&gt;...], &lt;protocol&gt;, &lt;roaming_protocol&gt;, &lt;carrierEnabled&gt;, &lt;bearerBitmask&gt;,
+   &lt;profileId&gt;, &lt;modemCognitive&gt;, &lt;maxConns&gt;, &lt;waitTime&gt;, &lt;maxConnsTime&gt;, &lt;mtu&gt;,
+   &lt;mvnoType&gt;, &lt;mvnoMatchData&gt;, &lt;networkTypeBitmask&gt;, &lt;apnSetId&gt;, &lt;carrierId&gt;
+
+ v7 format:
+   [ApnSettingV7] &lt;carrier&gt;, &lt;apn&gt;, &lt;proxy&gt;, &lt;port&gt;, &lt;user&gt;, &lt;password&gt;, &lt;server&gt;,
+   &lt;mmsc&gt;, &lt;mmsproxy&gt;, &lt;mmsport&gt;, &lt;mcc&gt;, &lt;mnc&gt;, &lt;authtype&gt;,
+   &lt;type&gt;[| &lt;type&gt;...], &lt;protocol&gt;, &lt;roaming_protocol&gt;, &lt;carrierEnabled&gt;, &lt;bearerBitmask&gt;,
+   &lt;profileId&gt;, &lt;modemCognitive&gt;, &lt;maxConns&gt;, &lt;waitTime&gt;, &lt;maxConnsTime&gt;, &lt;mtu&gt;,
+   &lt;mvnoType&gt;, &lt;mvnoMatchData&gt;, &lt;networkTypeBitmask&gt;, &lt;apnSetId&gt;, &lt;carrierId&gt;, &lt;skip464xlat&gt;
+
+ Note that the strings generated by {@link #toString()} do not contain the username
+ and password and thus cannot be read by this method.
+
+ This method may return {@code null} if the input string is invalid.
+@hide 
+*/
+fromString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-arrayFromString'>/**Creates an array of ApnSetting objects from a string.
+</span>@param {String} data the string to read.
+
+ Builds on top of the same format used by fromString, but allows for multiple entries
+ separated by &quot;;&quot;.
+@hide 
+*/
+arrayFromString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-toString'>/**Returns the string representation of ApnSetting.
+</span>
+ This method prints null for unset elements. The output doesn't contain password or user.
+@hide 
+*/
+toString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-hasMvnoParams'>/**Returns true if there are MVNO params specified.
+</span>@hide 
+*/
+hasMvnoParams : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-canHandleType'>/**
+</span>@hide 
+*/
+canHandleType : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-equals'>/**
+</span>@hide 
+*/
+equals : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-equals'>/**Compare two APN settings
+</span>
+ Note: This method does not compare 'mId', 'mNetworkTypeBitmask'. We only use this for
+ determining if tearing a data call is needed when conditions change. See
+ cleanUpConnectionsOnUpdatedApns in DcTracker.
+@param {Object {Object}} o the other object to compare
+@param {Boolean} isDataRoaming True if the device is on data roaming
+@return {Boolean} True if the two APN settings are same
+@hide 
+*/
+equals : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-similar'>/**Check if neither mention DUN and are substantially similar
+</span>@param {Object {ApnSetting}} other The other APN settings to compare
+@return {Boolean} True if two APN settings are similar
+@hide 
+*/
+similar : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-toContentValues'>/**
+</span>@hide Called by {@link android.app.admin.DevicePolicyManager} to convert this APN into
+ ContentValue. If a field is not specified then we put &quot;&quot; instead of null.
+*/
+toContentValues : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getApnTypes'>/**Get supported APN types
+</span>@return {Object {java.util.List}} list of APN types
+@hide 
+*/
+getApnTypes : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getApnTypesStringFromBitmask'>/**
+</span>@param {Number} apnTypeBitmask bitmask of APN types.
+@return {String} comma delimited list of APN types.
+@hide 
+*/
+getApnTypesStringFromBitmask : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getApnTypeString'>/**
+</span>@param {Number} apnType APN type
+@return {String} APN type in string format
+@hide 
+*/
+getApnTypeString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getApnTypesBitmaskFromString'>/**
+</span>@param {String} types comma delimited list of APN types.
+@return {Number} bitmask of APN types.
+@hide 
+*/
+getApnTypesBitmaskFromString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMvnoTypeIntFromString'>/**
+</span>@hide 
+*/
+getMvnoTypeIntFromString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getMvnoTypeStringFromInt'>/**
+</span>@hide 
+*/
+getMvnoTypeStringFromInt : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getProtocolIntFromString'>/**
+</span>@hide 
+*/
+getProtocolIntFromString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-getProtocolStringFromInt'>/**
+</span>@hide 
+*/
+getProtocolStringFromInt : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-inetAddressFromString'>/**
+</span>@hide 
+*/
+inetAddressFromString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-inetAddressToString'>/**
+</span>@hide 
+*/
+inetAddressToString : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-canSupportNetworkType'>/**Check if this APN setting can support the given network
+</span>@param {Number} networkType The network type
+@return {Boolean} {@code true} if this APN setting can support the given network.
+@hide 
+*/
+canSupportNetworkType : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-telephony-data-ApnSetting-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

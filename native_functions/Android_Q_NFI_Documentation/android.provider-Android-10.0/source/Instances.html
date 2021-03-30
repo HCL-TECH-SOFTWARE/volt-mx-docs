@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-provider-CalendarContract-Instances'>/**@class android.provider.CalendarContract.Instances
+</span> implements android.provider.BaseColumns
+
+ implements android.provider.CalendarContract.EventsColumns
+
+ implements android.provider.CalendarContract.CalendarColumns
+
+@extends java.lang.Object
+
+ Fields and helpers for interacting with Instances. An instance is a
+ single occurrence of an event including time zone specific start and end
+ days and minutes. The instances table is not writable and only provides a
+ way to query event occurrences.
+*/
+var Instances = {
+
+<span id='android-provider-CalendarContract-Instances-property-CONTENT_URI'>/** The content:// style URL for querying an instance range. The begin
+</span> and end of the range to query should be added as path segments if
+ this is used directly.
+*/
+CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-CONTENT_BY_DAY_URI'>/** The content:// style URL for querying an instance range by Julian
+</span> Day. The start and end day should be added as path segments if this
+ is used directly.
+*/
+CONTENT_BY_DAY_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-CONTENT_SEARCH_URI'>/** The content:// style URL for querying an instance range with a search
+</span> term. The begin, end, and search string should be appended as path
+ segments if this is used directly.
+*/
+CONTENT_SEARCH_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-CONTENT_SEARCH_BY_DAY_URI'>/** The content:// style URL for querying an instance range with a search
+</span> term. The start day, end day, and search string should be appended as
+ path segments if this is used directly.
+*/
+CONTENT_SEARCH_BY_DAY_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-ENTERPRISE_CONTENT_URI'>/** The content:// style URL for querying an instance range in the managed profile.
+</span> It supports similar semantics as {@link #CONTENT_URI}.
+
+ &lt;p&gt;The following columns plus the columns that are allowed by
+ {@link android.provider.CommonDataKinds.Events#ENTERPRISE_CONTENT_URI} are allowed to be queried via this uri:
+ &lt;ul&gt;
+ &lt;li&gt;{@link #_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #EVENT_ID}&lt;/li&gt;
+ &lt;li&gt;{@link #BEGIN}&lt;/li&gt;
+ &lt;li&gt;{@link #END}&lt;/li&gt;
+ &lt;li&gt;{@link #START_DAY}&lt;/li&gt;
+ &lt;li&gt;{@link #END_DAY}&lt;/li&gt;
+ &lt;li&gt;{@link #START_MINUTE}&lt;/li&gt;
+ &lt;li&gt;{@link #END_MINUTE}&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;p&gt;{@link IllegalArgumentException} is thrown if there exists columns in the
+ projection of the query to this uri that are not contained in the above list.
+
+ &lt;p&gt;This uri returns an empty cursor if the calling user is not a parent profile
+ of a managed profile, or the managed profile is disabled, or cross-profile calendar is
+ disabled in Settings, or this uri is queried from a package that is not allowed by
+ the profile owner of the managed profile via
+ {@link DevicePolicyManager#setCrossProfileCalendarPackages(ComponentName, Set)}.
+
+ @see DevicePolicyManager#getCrossProfileCalendarPackages(ComponentName)
+ @see Settings.Secure#CROSS_PROFILE_CALENDAR_ENABLED
+*/
+ENTERPRISE_CONTENT_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-ENTERPRISE_CONTENT_BY_DAY_URI'>/** The content:// style URL for querying an instance range by Julian
+</span> Day in the managed profile. It supports similar semantics as {@link #CONTENT_BY_DAY_URI}
+ and performs similar checks as {@link #ENTERPRISE_CONTENT_URI}.
+*/
+ENTERPRISE_CONTENT_BY_DAY_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-ENTERPRISE_CONTENT_SEARCH_URI'>/** The content:// style URL for querying an instance range with a search
+</span> term in the managed profile. It supports similar semantics as {@link #CONTENT_SEARCH_URI}
+ and performs similar checks as {@link #ENTERPRISE_CONTENT_URI}.
+*/
+ENTERPRISE_CONTENT_SEARCH_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-ENTERPRISE_CONTENT_SEARCH_BY_DAY_URI'>/** The content:// style URL for querying an instance range with a search
+</span> term in the managed profile. It supports similar semantics as
+ {@link #CONTENT_SEARCH_BY_DAY_URI} and performs similar checks as
+ {@link #ENTERPRISE_CONTENT_URI}.
+*/
+ENTERPRISE_CONTENT_SEARCH_BY_DAY_URI : &quot;null&quot;,
+<span id='android-provider-CalendarContract-Instances-property-BEGIN'>/** The beginning time of the instance, in UTC milliseconds. Column name.
+</span> &lt;P&gt;Type: INTEGER (long; millis since epoch)&lt;/P&gt;
+*/
+BEGIN : &quot;begin&quot;,
+<span id='android-provider-CalendarContract-Instances-property-END'>/** The ending time of the instance, in UTC milliseconds. Column name.
+</span> &lt;P&gt;Type: INTEGER (long; millis since epoch)&lt;/P&gt;
+*/
+END : &quot;end&quot;,
+<span id='android-provider-CalendarContract-Instances-property-EVENT_ID'>/** The _id of the event for this instance. Column name.
+</span> &lt;P&gt;Type: INTEGER (long, foreign key to the Events table)&lt;/P&gt;
+*/
+EVENT_ID : &quot;event_id&quot;,
+<span id='android-provider-CalendarContract-Instances-property-START_DAY'>/** The Julian start day of the instance, relative to the local time
+</span> zone. Column name.
+ &lt;P&gt;Type: INTEGER (int)&lt;/P&gt;
+*/
+START_DAY : &quot;startDay&quot;,
+<span id='android-provider-CalendarContract-Instances-property-END_DAY'>/** The Julian end day of the instance, relative to the local time
+</span> zone. Column name.
+ &lt;P&gt;Type: INTEGER (int)&lt;/P&gt;
+*/
+END_DAY : &quot;endDay&quot;,
+<span id='android-provider-CalendarContract-Instances-property-START_MINUTE'>/** The start minute of the instance measured from midnight in the
+</span> local time zone. Column name.
+ &lt;P&gt;Type: INTEGER (int)&lt;/P&gt;
+*/
+START_MINUTE : &quot;startMinute&quot;,
+<span id='android-provider-CalendarContract-Instances-property-END_MINUTE'>/** The end minute of the instance measured from midnight in the
+</span> local time zone. Column name.
+ &lt;P&gt;Type: INTEGER (int)&lt;/P&gt;
+*/
+END_MINUTE : &quot;endMinute&quot;,
+<span id='android-provider-CalendarContract-Instances-method-query'>/**Performs a query to return all visible instances in the given range.
+</span> This is a blocking function and should not be done on the UI thread.
+ This will cause an expansion of recurring events to fill this time
+ range if they are not already expanded and will slow down for larger
+ time ranges with many recurring events.
+@param {Object {ContentResolver}} cr The ContentResolver to use for the query
+@param {Object {java.lang.String[]}} projection The columns to return
+@param {Number} begin The start of the time range to query in UTC millis since
+            epoch
+@param {Number} end The end of the time range to query in UTC millis since
+            epoch
+@return {Object {android.database.Cursor}} A Cursor containing all instances in the given range
+*/
+query : function(  ) {},
+
+<span id='android-provider-CalendarContract-Instances-method-query'>/**Performs a query to return all visible instances in the given range
+</span> that match the given query. This is a blocking function and should
+ not be done on the UI thread. This will cause an expansion of
+ recurring events to fill this time range if they are not already
+ expanded and will slow down for larger time ranges with many
+ recurring events.
+@param {Object {ContentResolver}} cr The ContentResolver to use for the query
+@param {Object {java.lang.String[]}} projection The columns to return
+@param {Number} begin The start of the time range to query in UTC millis since
+            epoch
+@param {Number} end The end of the time range to query in UTC millis since
+            epoch
+@param {String} searchQuery A string of space separated search terms. Segments
+            enclosed by double quotes will be treated as a single
+            term.
+@return {Object {android.database.Cursor}} A Cursor of instances matching the search terms in the given
+         time range
+*/
+query : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-ex-editstyledtext-EditStyledText'>/**@class com.android.ex.editstyledtext.EditStyledText
+</span>@extends android.widget.EditText
+
+ EditStyledText extends EditText for managing the flow and status to edit the styled text. This
+ manages the states and flows of editing, supports inserting image, import/export HTML.
+*/
+var EditStyledText = {
+
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_NOTHING'>/**The mode that no editing action is done. */
+</span>MODE_NOTHING : &quot;0&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_COPY'>/**The mode of copy. */
+</span>MODE_COPY : &quot;1&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_PASTE'>/**The mode of paste. */
+</span>MODE_PASTE : &quot;2&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_SIZE'>/**The mode of changing size. */
+</span>MODE_SIZE : &quot;3&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_COLOR'>/**The mode of changing color. */
+</span>MODE_COLOR : &quot;4&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_SELECT'>/**The mode of selection. */
+</span>MODE_SELECT : &quot;5&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_ALIGN'>/**The mode of changing alignment. */
+</span>MODE_ALIGN : &quot;6&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_CUT'>/**The mode of changing cut. */
+</span>MODE_CUT : &quot;7&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_TELOP'>/***/
+</span>MODE_TELOP : &quot;8&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_SWING'>/***/
+</span>MODE_SWING : &quot;9&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_MARQUEE'>/***/
+</span>MODE_MARQUEE : &quot;10&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_SELECTALL'>/***/
+</span>MODE_SELECTALL : &quot;11&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_HORIZONTALLINE'>/***/
+</span>MODE_HORIZONTALLINE : &quot;12&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_STOP_SELECT'>/***/
+</span>MODE_STOP_SELECT : &quot;13&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_CLEARSTYLES'>/***/
+</span>MODE_CLEARSTYLES : &quot;14&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_IMAGE'>/***/
+</span>MODE_IMAGE : &quot;15&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_BGCOLOR'>/***/
+</span>MODE_BGCOLOR : &quot;16&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_PREVIEW'>/***/
+</span>MODE_PREVIEW : &quot;17&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_CANCEL'>/***/
+</span>MODE_CANCEL : &quot;18&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_TEXTVIEWFUNCTION'>/***/
+</span>MODE_TEXTVIEWFUNCTION : &quot;19&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_START_EDIT'>/***/
+</span>MODE_START_EDIT : &quot;20&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_END_EDIT'>/***/
+</span>MODE_END_EDIT : &quot;21&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_RESET'>/***/
+</span>MODE_RESET : &quot;22&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-MODE_SHOW_MENU'>/***/
+</span>MODE_SHOW_MENU : &quot;23&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-STATE_SELECT_OFF'>/**The state that selection isn't started. */
+</span>STATE_SELECT_OFF : &quot;0&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-STATE_SELECT_ON'>/**The state that selection is started. */
+</span>STATE_SELECT_ON : &quot;1&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-STATE_SELECTED'>/**The state that selection is done, but not fixed. */
+</span>STATE_SELECTED : &quot;2&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-STATE_SELECT_FIX'>/**The state that selection is done and not fixed. */
+</span>STATE_SELECT_FIX : &quot;3&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_NULL'>/** Help message strings.
+</span>*/
+HINT_MSG_NULL : &quot;0&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_COPY_BUF_BLANK'>/***/
+</span>HINT_MSG_COPY_BUF_BLANK : &quot;1&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_SELECT_START'>/***/
+</span>HINT_MSG_SELECT_START : &quot;2&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_SELECT_END'>/***/
+</span>HINT_MSG_SELECT_END : &quot;3&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_PUSH_COMPETE'>/***/
+</span>HINT_MSG_PUSH_COMPETE : &quot;4&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_BIG_SIZE_ERROR'>/***/
+</span>HINT_MSG_BIG_SIZE_ERROR : &quot;5&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_END_PREVIEW'>/***/
+</span>HINT_MSG_END_PREVIEW : &quot;6&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-HINT_MSG_END_COMPOSE'>/***/
+</span>HINT_MSG_END_COMPOSE : &quot;7&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-DEFAULT_TRANSPARENT_COLOR'>/** Fixed Values.
+</span>*/
+DEFAULT_TRANSPARENT_COLOR : &quot;16777215&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-DEFAULT_FOREGROUND_COLOR'>/***/
+</span>DEFAULT_FOREGROUND_COLOR : &quot;-16777216&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-ZEROWIDTHCHAR'>/***/
+</span>ZEROWIDTHCHAR : &quot;8288&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-property-IMAGECHAR'>/***/
+</span>IMAGECHAR : &quot;65532&quot;,
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onRestoreInstanceState'>/**
+</span>*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onTextContextMenuItem'>/**
+</span>*/
+onTextContextMenuItem : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onCreateInputConnection'>/**
+</span>*/
+onCreateInputConnection : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setStyledTextHtmlConverter'>/**
+</span>*/
+setStyledTextHtmlConverter : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-addEditStyledTextListener'>/**Add Notifier.
+</span>*/
+addEditStyledTextListener : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-removeEditStyledTextListener'>/**Remove Notifier.
+</span>*/
+removeEditStyledTextListener : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-isButtonsFocused'>/**
+</span>*/
+isButtonsFocused : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartEdit'>/**Start to edit styled text
+</span>*/
+onStartEdit : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onEndEdit'>/**End of editing styled text
+</span>*/
+onEndEdit : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onResetEdit'>/**
+</span>*/
+onResetEdit : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartCopy'>/**Start to copy styled text
+</span>*/
+onStartCopy : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartCut'>/**Start to cut styled text
+</span>*/
+onStartCut : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartPaste'>/**Start to paste styled text
+</span>*/
+onStartPaste : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartSize'>/**Start to change size
+</span>*/
+onStartSize : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartColor'>/**Start to change color
+</span>*/
+onStartColor : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartBackgroundColor'>/**Start to change background color
+</span>*/
+onStartBackgroundColor : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartAlign'>/**Start to change Alignment
+</span>*/
+onStartAlign : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartTelop'>/**
+</span>*/
+onStartTelop : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartSwing'>/**
+</span>*/
+onStartSwing : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartMarquee'>/**
+</span>*/
+onStartMarquee : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartSelect'>/**Start to select a text
+</span>*/
+onStartSelect : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartSelectAll'>/**Start to select all characters
+</span>*/
+onStartSelectAll : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartShowPreview'>/**
+</span>*/
+onStartShowPreview : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartShowMenuAlertDialog'>/**
+</span>*/
+onStartShowMenuAlertDialog : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onStartAction'>/**
+</span>*/
+onStartAction : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onFixSelectedItem'>/**Fix selection
+</span>*/
+onFixSelectedItem : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onInsertImage'>/**
+</span>*/
+onInsertImage : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onInsertImage'>/**InsertImage to TextView by using URI
+</span>@param {Object {Uri}} uri URI of the iamge inserted to TextView.
+*/
+onInsertImage : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onInsertImage'>/**InsertImage to TextView by using resource ID
+</span>@param {Number} resId Resource ID of the iamge inserted to TextView.
+*/
+onInsertImage : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onInsertHorizontalLine'>/**
+</span>*/
+onInsertHorizontalLine : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onClearStyles'>/**
+</span>*/
+onClearStyles : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onBlockSoftKey'>/**
+</span>*/
+onBlockSoftKey : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onUnblockSoftKey'>/**
+</span>*/
+onUnblockSoftKey : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-onCancelViewManagers'>/**
+</span>*/
+onCancelViewManagers : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setItemSize'>/**Set Size of the Item.
+</span>@param {Number} size The size of the Item.
+*/
+setItemSize : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setItemColor'>/**Set Color of the Item.
+</span>@param {Number} color The color of the Item.
+*/
+setItemColor : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setAlignment'>/**Set Alignment of the Item.
+</span>@param {Object {Layout.Alignment}} align The color of the Item.
+*/
+setAlignment : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setBackgroundColor'>/**Set Background color of View.
+</span>@param {Number} color The background color of view.
+*/
+setBackgroundColor : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setMarquee'>/**
+</span>*/
+setMarquee : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setHtml'>/**Set html to EditStyledText.
+</span>@param {String} html The html to be set.
+*/
+setHtml : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setBuilder'>/**Set Builder for AlertDialog.
+</span>@param {Object {AlertDialog.Builder}} builder Builder for opening Alert Dialog.
+*/
+setBuilder : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setColorAlertParams'>/**Set Parameters for ColorAlertDialog.
+</span>@param {Object {CharSequence}} colortitle Title for Alert Dialog.
+@param {Object {java.lang.CharSequence[]}} colornames List of name of selecting color.
+@param {Object {java.lang.CharSequence[]}} colorints List of int of color.
+*/
+setColorAlertParams : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setSizeAlertParams'>/**Set Parameters for SizeAlertDialog.
+</span>@param {Object {CharSequence}} sizetitle Title for Alert Dialog.
+@param {Object {java.lang.CharSequence[]}} sizenames List of name of selecting size.
+@param {Object {java.lang.CharSequence[]}} sizedisplayints List of int of size displayed in TextView.
+@param {Object {java.lang.CharSequence[]}} sizesendints List of int of size exported to HTML.
+*/
+setSizeAlertParams : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setAlignAlertParams'>/**
+</span>*/
+setAlignAlertParams : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setMarqueeAlertParams'>/**
+</span>*/
+setMarqueeAlertParams : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-setContextMenuStrings'>/**
+</span>*/
+setContextMenuStrings : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-isEditting'>/**Check whether editing is started or not.
+</span>@return {Boolean} Whether editing is started or not.
+*/
+isEditting : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-isStyledText'>/**Check whether styled text or not.
+</span>@return {Boolean} Whether styled text or not.
+*/
+isStyledText : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-isSoftKeyBlocked'>/**Check whether SoftKey is Blocked or not.
+</span>@return {Boolean} whether SoftKey is Blocked or not.
+*/
+isSoftKeyBlocked : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getEditMode'>/**Get the mode of the action.
+</span>@return {Number} The mode of the action.
+*/
+getEditMode : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getSelectState'>/**Get the state of the selection.
+</span>@return {Number} The state of the selection.
+*/
+getSelectState : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getHtml'>/**Get the state of the selection.
+</span>@return {String} The state of the selection.
+*/
+getHtml : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getHtml'>/**
+</span>*/
+getHtml : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getHtml'>/**Get the state of the selection.
+</span>@param {Object {java.util.ArrayList}} uris The array of used uris.
+@return {String} The state of the selection.
+*/
+getHtml : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getPreviewHtml'>/**
+</span>*/
+getPreviewHtml : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getBackgroundColor'>/**Get Background color of View.
+</span>@return {Number} The background color of View.
+*/
+getBackgroundColor : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getEditStyledTextManager'>/**
+</span>*/
+getEditStyledTextManager : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-getForegroundColor'>/**Get Foreground color of View.
+</span>@return {Number} The background color of View.
+*/
+getForegroundColor : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-addAction'>/**
+</span>*/
+addAction : function(  ) {},
+
+<span id='com-android-ex-editstyledtext-EditStyledText-method-addInputExtra'>/**
+</span>*/
+addInputExtra : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

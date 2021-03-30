@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-display-ColorDisplayManager'>/**@class android.hardware.display.ColorDisplayManager
+</span>@extends java.lang.Object
+
+ Manages the display's color transforms and modes.
+
+ @hide
+*/
+var ColorDisplayManager = {
+
+<span id='android-hardware-display-ColorDisplayManager-property-CAPABILITY_NONE'>/** The device does not support color transforms.
+</span>
+ @hide
+*/
+CAPABILITY_NONE : &quot;0&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-CAPABILITY_PROTECTED_CONTENT'>/** The device can use GPU composition on protected content (layers whose buffers are protected
+</span> in the trusted memory zone).
+
+ @hide
+*/
+CAPABILITY_PROTECTED_CONTENT : &quot;1&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-CAPABILITY_HARDWARE_ACCELERATION_GLOBAL'>/** The device's hardware can efficiently apply transforms to the entire display.
+</span>
+ @hide
+*/
+CAPABILITY_HARDWARE_ACCELERATION_GLOBAL : &quot;2&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-CAPABILITY_HARDWARE_ACCELERATION_PER_APP'>/** The device's hardware can efficiently apply transforms to a specific Surface (window) so
+</span> that apps can be transformed independently of one another.
+
+ @hide
+*/
+CAPABILITY_HARDWARE_ACCELERATION_PER_APP : &quot;4&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-AUTO_MODE_DISABLED'>/** Auto mode value to prevent Night display from being automatically activated. It can still
+</span> be activated manually via {@link #setNightDisplayActivated}(boolean).
+
+ @see #setNightDisplayAutoMode(int)
+
+ @hide
+*/
+AUTO_MODE_DISABLED : &quot;0&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-AUTO_MODE_CUSTOM_TIME'>/** Auto mode value to automatically activate Night display at a specific start and end time.
+</span>
+ @see #setNightDisplayAutoMode(int)
+ @see #setNightDisplayCustomStartTime(LocalTime)
+ @see #setNightDisplayCustomEndTime(LocalTime)
+
+ @hide
+*/
+AUTO_MODE_CUSTOM_TIME : &quot;1&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-AUTO_MODE_TWILIGHT'>/** Auto mode value to automatically activate Night display from sunset to sunrise.
+</span>
+ @see #setNightDisplayAutoMode(int)
+
+ @hide
+*/
+AUTO_MODE_TWILIGHT : &quot;2&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-COLOR_MODE_NATURAL'>/** Color mode with natural colors.
+</span>
+ @hide
+ @see #setColorMode(int)
+*/
+COLOR_MODE_NATURAL : &quot;0&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-COLOR_MODE_BOOSTED'>/** Color mode with boosted colors.
+</span>
+ @hide
+ @see #setColorMode(int)
+*/
+COLOR_MODE_BOOSTED : &quot;1&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-COLOR_MODE_SATURATED'>/** Color mode with saturated colors.
+</span>
+ @hide
+ @see #setColorMode(int)
+*/
+COLOR_MODE_SATURATED : &quot;2&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-COLOR_MODE_AUTOMATIC'>/** Color mode with automatic colors.
+</span>
+ @hide
+ @see #setColorMode(int)
+*/
+COLOR_MODE_AUTOMATIC : &quot;3&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-VENDOR_COLOR_MODE_RANGE_MIN'>/** Display color mode range reserved for vendor customizations by the RenderIntent definition in
+</span> hardware/interfaces/graphics/common/1.1/types.hal. These are NOT directly related to (but ARE
+ mutually exclusive with) the {@link android.hardware.display.ColorDisplayManager.ColorMode} constants, but ARE directly related (and ARE
+ mutually exclusive with) the DISPLAY_COLOR_* constants in DisplayTransformManager.
+
+ @hide
+*/
+VENDOR_COLOR_MODE_RANGE_MIN : &quot;256&quot;,
+<span id='android-hardware-display-ColorDisplayManager-property-VENDOR_COLOR_MODE_RANGE_MAX'>/** @hide
+</span>*/
+VENDOR_COLOR_MODE_RANGE_MAX : &quot;511&quot;,
+<span id='android-hardware-display-ColorDisplayManager-method-setNightDisplayActivated'>/**(De)activates the night display transform.
+</span>@hide 
+*/
+setNightDisplayActivated : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-isNightDisplayActivated'>/**Returns whether the night display transform is currently active.
+</span>@hide 
+*/
+isNightDisplayActivated : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setNightDisplayColorTemperature'>/**Sets the color temperature of the night display transform.
+</span>@hide 
+*/
+setNightDisplayColorTemperature : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getNightDisplayColorTemperature'>/**Gets the color temperature of the night display transform.
+</span>@hide 
+*/
+getNightDisplayColorTemperature : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getNightDisplayAutoMode'>/**Returns the current auto mode value controlling when Night display will be automatically
+</span> activated. One of {@link #AUTO_MODE_DISABLED}, {@link #AUTO_MODE_CUSTOM_TIME}, or
+ {@link #AUTO_MODE_TWILIGHT}.
+@hide 
+*/
+getNightDisplayAutoMode : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getNightDisplayAutoModeRaw'>/**Returns the current auto mode value, without validation, or {@code 1} if the auto mode has
+</span> never been set.
+@hide 
+*/
+getNightDisplayAutoModeRaw : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setNightDisplayAutoMode'>/**Sets the current auto mode value controlling when Night display will be automatically
+</span> activated. One of {@link #AUTO_MODE_DISABLED}, {@link #AUTO_MODE_CUSTOM_TIME}, or
+ {@link #AUTO_MODE_TWILIGHT}.
+@param {Number} autoMode the new auto mode to use
+@return {Boolean} {@code true} if new auto mode was set successfully
+@hide 
+*/
+setNightDisplayAutoMode : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getNightDisplayCustomStartTime'>/**Returns the local time when Night display will be automatically activated when using
+</span> {@link android.hardware.display.ColorDisplayManager#AUTO_MODE_CUSTOM_TIME}.
+@hide 
+*/
+getNightDisplayCustomStartTime : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setNightDisplayCustomStartTime'>/**Sets the local time when Night display will be automatically activated when using
+</span> {@link android.hardware.display.ColorDisplayManager#AUTO_MODE_CUSTOM_TIME}.
+@param {Object {LocalTime}} startTime the local time to automatically activate Night display
+@return {Boolean} {@code true} if the new custom start time was set successfully
+@hide 
+*/
+setNightDisplayCustomStartTime : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getNightDisplayCustomEndTime'>/**Returns the local time when Night display will be automatically deactivated when using
+</span> {@link #AUTO_MODE_CUSTOM_TIME}.
+@hide 
+*/
+getNightDisplayCustomEndTime : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setNightDisplayCustomEndTime'>/**Sets the local time when Night display will be automatically deactivated when using
+</span> {@link #AUTO_MODE_CUSTOM_TIME}.
+@param {Object {LocalTime}} endTime the local time to automatically deactivate Night display
+@return {Boolean} {@code true} if the new custom end time was set successfully
+@hide 
+*/
+setNightDisplayCustomEndTime : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setColorMode'>/**Sets the current display color mode.
+</span>@hide 
+*/
+setColorMode : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getColorMode'>/**Gets the current display color mode.
+</span>@hide 
+*/
+getColorMode : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-isDeviceColorManaged'>/**Returns whether the device has a wide color gamut display.
+</span>@hide 
+*/
+isDeviceColorManaged : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setSaturationLevel'>/**Set the level of color saturation to apply to the display.
+</span>@param {Number} saturationLevel 0-100 (inclusive), where 100 is full saturation
+@return {Boolean} whether the saturation level change was applied successfully
+@hide 
+*/
+setSaturationLevel : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-isSaturationActivated'>/**Gets whether or not a non-default saturation level is currently applied to the display.
+</span>@return {Boolean} {@code true} if the display is not at full saturation
+@hide 
+*/
+isSaturationActivated : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setAppSaturationLevel'>/**Set the level of color saturation to apply to a specific app.
+</span>@param {String} packageName the package name of the app whose windows should be desaturated
+@param {Number} saturationLevel 0-100 (inclusive), where 100 is full saturation
+@return {Boolean} whether the saturation level change was applied successfully
+@hide 
+*/
+setAppSaturationLevel : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-setDisplayWhiteBalanceEnabled'>/**Enables or disables display white balance.
+</span>@hide 
+*/
+setDisplayWhiteBalanceEnabled : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-isDisplayWhiteBalanceEnabled'>/**Returns whether display white balance is currently enabled. Even if enabled, it may or may
+</span> not be active, if another transform with higher priority is active.
+@hide 
+*/
+isDisplayWhiteBalanceEnabled : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-isNightDisplayAvailable'>/**Returns {@code true} if Night Display is supported by the device.
+</span>@hide 
+*/
+isNightDisplayAvailable : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getMinimumColorTemperature'>/**Returns the minimum allowed color temperature (in Kelvin) to tint the display when
+</span> activated.
+@hide 
+*/
+getMinimumColorTemperature : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getMaximumColorTemperature'>/**Returns the maximum allowed color temperature (in Kelvin) to tint the display when
+</span> activated.
+@hide 
+*/
+getMaximumColorTemperature : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-isDisplayWhiteBalanceAvailable'>/**Returns {@code true} if display white balance is supported by the device.
+</span>@hide 
+*/
+isDisplayWhiteBalanceAvailable : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-isColorTransformAccelerated'>/**Check if the color transforms are color accelerated. Some transforms are experimental only
+</span> on non-accelerated platforms due to the performance implications.
+@hide 
+*/
+isColorTransformAccelerated : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-getTransformCapabilities'>/**Returns the available software and hardware color transform capabilities of this device.
+</span>@hide 
+*/
+getTransformCapabilities : function(  ) {},
+
+<span id='android-hardware-display-ColorDisplayManager-method-areAccessibilityTransformsEnabled'>/**Returns whether accessibility transforms are currently enabled, which determines whether
+</span> color modes are currently configurable for this device.
+@hide 
+*/
+areAccessibilityTransformsEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

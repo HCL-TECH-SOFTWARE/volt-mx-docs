@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-content-pm-dex-ArtManager'>/**@class android.content.pm.dex.ArtManager
+</span>@extends java.lang.Object
+
+ Class for retrieving various kinds of information related to the runtime artifacts of
+ packages that are currently installed on the device.
+
+ @hide
+*/
+var ArtManager = {
+
+<span id='android-content-pm-dex-ArtManager-property-SNAPSHOT_FAILED_PACKAGE_NOT_FOUND'>/**The snapshot failed because the package was not found. */
+</span>SNAPSHOT_FAILED_PACKAGE_NOT_FOUND : &quot;0&quot;,
+<span id='android-content-pm-dex-ArtManager-property-SNAPSHOT_FAILED_CODE_PATH_NOT_FOUND'>/**The snapshot failed because the package code path does not exist. */
+</span>SNAPSHOT_FAILED_CODE_PATH_NOT_FOUND : &quot;1&quot;,
+<span id='android-content-pm-dex-ArtManager-property-SNAPSHOT_FAILED_INTERNAL_ERROR'>/**The snapshot failed because of an internal error (e.g. error during opening profiles). */
+</span>SNAPSHOT_FAILED_INTERNAL_ERROR : &quot;2&quot;,
+<span id='android-content-pm-dex-ArtManager-property-PROFILE_APPS'>/**Constant used for applications profiles. */
+</span>PROFILE_APPS : &quot;0&quot;,
+<span id='android-content-pm-dex-ArtManager-property-PROFILE_BOOT_IMAGE'>/**Constant used for the boot image profile. */
+</span>PROFILE_BOOT_IMAGE : &quot;1&quot;,
+<span id='android-content-pm-dex-ArtManager-method-snapshotRuntimeProfile'>/**Snapshots a runtime profile according to the {@code profileType} parameter.
+</span>
+ If {@code profileType} is {@link android.content.pm.dex.ArtManager#PROFILE_APPS} the method will snapshot
+ the profile for for an apk belonging to the package {@code packageName}.
+ The apk is identified by {@code codePath}.
+
+ If {@code profileType} is {@code ArtManager.PROFILE_BOOT_IMAGE} the method will snapshot
+ the profile for the boot image. In this case {@code codePath can be null}. The parameters
+ {@code packageName} and {@code codePath} are ignored.
+u
+ The calling process must have {@code android.permission.READ_RUNTIME_PROFILE} permission.
+
+ The result will be posted on the {@code executor} using the given {@code callback}.
+ The profile will be available as a read-only {@link android.os.ParcelFileDescriptor}.
+
+ This method will throw {@link IllegalStateException} if
+ {@link android.content.pm.dex.ArtManager#isRuntimeProfilingEnabled(int)} does not return true for the given
+ {@code profileType}.
+@param {Number} profileType the type of profile that should be snapshot (boot image or app)
+@param {String} packageName the target package name or null if the target is the boot image
+@param {String} codePath the code path for which the profile should be retrieved or null if
+                 the target is the boot image
+@param {Object {Executor}} callback the callback which should be used for the result
+@param {Object {ArtManager.SnapshotRuntimeProfileCallback}} executor the executor which should be used to post the result
+*/
+snapshotRuntimeProfile : function(  ) {},
+
+<span id='android-content-pm-dex-ArtManager-method-isRuntimeProfilingEnabled'>/**Returns true if runtime profiles are enabled for the given type, false otherwise.
+</span>
+ The calling process must have {@code android.permission.READ_RUNTIME_PROFILE} permission.
+@param {Number} profileType can be either {@link ArtManager#PROFILE_APPS}
+                    or {@link ArtManager#PROFILE_BOOT_IMAGE}
+*/
+isRuntimeProfilingEnabled : function(  ) {},
+
+<span id='android-content-pm-dex-ArtManager-method-getProfileName'>/**Return the profile name for the given split. If {@code splitName} is null the
+</span> method returns the profile name for the base apk.
+@hide 
+*/
+getProfileName : function(  ) {},
+
+<span id='android-content-pm-dex-ArtManager-method-getCurrentProfilePath'>/**Return the path to the current profile corresponding to given package and split.
+</span>@hide 
+*/
+getCurrentProfilePath : function(  ) {},
+
+<span id='android-content-pm-dex-ArtManager-method-getProfileSnapshotFileForName'>/**Return the snapshot profile file for the given package and profile name.
+</span>
+ KEEP in sync with installd dexopt.cpp.
+ TODO(calin): inject the snapshot profile name from PM to avoid the dependency.
+@hide 
+*/
+getProfileSnapshotFileForName : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

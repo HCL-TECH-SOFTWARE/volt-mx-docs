@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-image-DynamicSystemClient'>/**@class android.os.image.DynamicSystemClient
+</span>@extends java.lang.Object
+
+ &lt;p&gt;This class contains methods and constants used to start a {@code DynamicSystem} installation,
+ and a listener for status updates.&lt;/p&gt;
+
+ &lt;p&gt;{@code DynamicSystem} allows users to run certified system images in a non destructive manner
+ without needing to prior OEM unlock. It creates a temporary system partition to install the new
+ system image, and a temporary data partition for the newly installed system to run with.&lt;/p&gt;
+
+ After the installation is completed, the device will be running in the new system on next the
+ reboot. Then, when the user reboots the device again, it will leave {@code DynamicSystem} and go
+ back to the original system. While running in {@code DynamicSystem}, persitent storage for
+ factory reset protection (FRP) remains unchanged. Since the user is running the new system with
+ a temporarily created data partition, their original user data are kept unchanged.&lt;/p&gt;
+
+ &lt;p&gt;With {@link #setOnStatusChangedListener}, API users can register an
+ {@link #OnStatusChangedListener} to get status updates and their causes when the installation is
+ started, stopped, or cancelled. It also sends progress updates during the installation. With
+ {@link #start}, API users can start an installation with the {@link Uri} to a unsparsed and
+ gzipped system image. The {@link Uri} can be a web URL or a content Uri to a local path.&lt;/p&gt;
+
+ @hide
+*/
+var DynamicSystemClient = {
+
+<span id='android-os-image-DynamicSystemClient-property-STATUS_UNKNOWN'>/**We are bound to installation service, but failed to get its status */
+</span>STATUS_UNKNOWN : &quot;0&quot;,
+<span id='android-os-image-DynamicSystemClient-property-STATUS_NOT_STARTED'>/**Installation is not started yet. */
+</span>STATUS_NOT_STARTED : &quot;1&quot;,
+<span id='android-os-image-DynamicSystemClient-property-STATUS_IN_PROGRESS'>/**Installation is in progress. */
+</span>STATUS_IN_PROGRESS : &quot;2&quot;,
+<span id='android-os-image-DynamicSystemClient-property-STATUS_READY'>/**Installation is finished but the user has not launched it. */
+</span>STATUS_READY : &quot;3&quot;,
+<span id='android-os-image-DynamicSystemClient-property-STATUS_IN_USE'>/**Device is running in {@code DynamicSystem}. */
+</span>STATUS_IN_USE : &quot;4&quot;,
+<span id='android-os-image-DynamicSystemClient-property-CAUSE_NOT_SPECIFIED'>/**Cause is not specified. This means the status is not changed. */
+</span>CAUSE_NOT_SPECIFIED : &quot;0&quot;,
+<span id='android-os-image-DynamicSystemClient-property-CAUSE_INSTALL_COMPLETED'>/**Status changed because installation is completed. */
+</span>CAUSE_INSTALL_COMPLETED : &quot;1&quot;,
+<span id='android-os-image-DynamicSystemClient-property-CAUSE_INSTALL_CANCELLED'>/**Status changed because installation is cancelled. */
+</span>CAUSE_INSTALL_CANCELLED : &quot;2&quot;,
+<span id='android-os-image-DynamicSystemClient-property-CAUSE_ERROR_IO'>/**Installation failed due to {@code IOException}. */
+</span>CAUSE_ERROR_IO : &quot;3&quot;,
+<span id='android-os-image-DynamicSystemClient-property-CAUSE_ERROR_INVALID_URL'>/**Installation failed because the image URL source is not supported. */
+</span>CAUSE_ERROR_INVALID_URL : &quot;4&quot;,
+<span id='android-os-image-DynamicSystemClient-property-CAUSE_ERROR_IPC'>/**Installation failed due to IPC error. */
+</span>CAUSE_ERROR_IPC : &quot;5&quot;,
+<span id='android-os-image-DynamicSystemClient-property-CAUSE_ERROR_EXCEPTION'>/**Installation failed due to unhandled exception. */
+</span>CAUSE_ERROR_EXCEPTION : &quot;6&quot;,
+<span id='android-os-image-DynamicSystemClient-property-MSG_REGISTER_LISTENER'>/** Message to register listener.
+</span> @hide
+*/
+MSG_REGISTER_LISTENER : &quot;1&quot;,
+<span id='android-os-image-DynamicSystemClient-property-MSG_UNREGISTER_LISTENER'>/** Message to unregister listener.
+</span> @hide
+*/
+MSG_UNREGISTER_LISTENER : &quot;2&quot;,
+<span id='android-os-image-DynamicSystemClient-property-MSG_POST_STATUS'>/** Message for status updates.
+</span> @hide
+*/
+MSG_POST_STATUS : &quot;3&quot;,
+<span id='android-os-image-DynamicSystemClient-property-KEY_INSTALLED_SIZE'>/** Message key, for progress updates.
+</span> @hide
+*/
+KEY_INSTALLED_SIZE : &quot;KEY_INSTALLED_SIZE&quot;,
+<span id='android-os-image-DynamicSystemClient-property-KEY_EXCEPTION_DETAIL'>/** Message key, used when the service is sending exception detail to the client.
+</span> @hide
+*/
+KEY_EXCEPTION_DETAIL : &quot;KEY_EXCEPTION_DETAIL&quot;,
+<span id='android-os-image-DynamicSystemClient-property-ACTION_START_INSTALL'>/** Intent action: start installation.
+</span> @hide
+*/
+ACTION_START_INSTALL : &quot;android.os.image.action.START_INSTALL&quot;,
+<span id='android-os-image-DynamicSystemClient-property-ACTION_NOTIFY_IF_IN_USE'>/** Intent action: notify user if we are currently running in {@code DynamicSystem}.
+</span> @hide
+*/
+ACTION_NOTIFY_IF_IN_USE : &quot;android.os.image.action.NOTIFY_IF_IN_USE&quot;,
+<span id='android-os-image-DynamicSystemClient-property-KEY_SYSTEM_SIZE'>/** Intent key: Size of the system image, in bytes.
+</span> @hide
+*/
+KEY_SYSTEM_SIZE : &quot;KEY_SYSTEM_SIZE&quot;,
+<span id='android-os-image-DynamicSystemClient-property-KEY_USERDATA_SIZE'>/** Intent key: Number of bytes to reserve for userdata.
+</span> @hide
+*/
+KEY_USERDATA_SIZE : &quot;KEY_USERDATA_SIZE&quot;,
+<span id='android-os-image-DynamicSystemClient-method-setOnStatusChangedListener'>/**This method register a listener for status change. The listener is called using
+</span> the executor.
+*/
+setOnStatusChangedListener : function(  ) {},
+
+<span id='android-os-image-DynamicSystemClient-method-setOnStatusChangedListener'>/**This method register a listener for status change. The listener is called in main
+</span> thread.
+*/
+setOnStatusChangedListener : function(  ) {},
+
+<span id='android-os-image-DynamicSystemClient-method-bind'>/**Bind to {@code DynamicSystem} installation service. Binding to the installation service
+</span> allows it to send status updates to {@link #OnStatusChangedListener}. It is recommanded
+ to bind before calling {@link #start} and get status updates.
+@hide 
+*/
+bind : function(  ) {},
+
+<span id='android-os-image-DynamicSystemClient-method-unbind'>/**Unbind from {@code DynamicSystem} installation service. Unbinding from the installation
+</span> service stops it from sending following status updates.
+@hide 
+*/
+unbind : function(  ) {},
+
+<span id='android-os-image-DynamicSystemClient-method-start'>/**Start installing {@code DynamicSystem} from URL with default userdata size.
+</span>
+ Calling this function will first start an Activity to confirm device credential, using
+ {@link KeyguardManager}. If it's confirmed, the installation service will be started.
+
+ This function doesn't require prior calling {@link #bind}.
+@param {Object {Uri}} systemUrl a network Uri, a file Uri or a content Uri pointing to a system image file.
+@param {Number} systemSize size of system image.
+@hide 
+*/
+start : function(  ) {},
+
+<span id='android-os-image-DynamicSystemClient-method-start'>/**Start installing {@code DynamicSystem} from URL.
+</span>
+ Calling this function will first start an Activity to confirm device credential, using
+ {@link KeyguardManager}. If it's confirmed, the installation service will be started.
+
+ This function doesn't require prior calling {@link #bind}.
+@param {Object {Uri}} systemUrl a network Uri, a file Uri or a content Uri pointing to a system image file.
+@param {Number} systemSize size of system image.
+@param {Number} userdataSize bytes reserved for userdata.
+*/
+start : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

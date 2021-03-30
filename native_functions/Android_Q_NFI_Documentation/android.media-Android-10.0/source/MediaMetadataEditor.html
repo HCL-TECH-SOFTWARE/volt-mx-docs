@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-MediaMetadataEditor'>/**@class android.media.MediaMetadataEditor
+</span>@extends java.lang.Object
+
+ An abstract class for editing and storing metadata that can be published by
+ {@link android.media.RemoteControlClient}. See the {@link android.media.RemoteControlClient#editMetadata(boolean)}
+ method to instantiate a {@link android.media.RemoteControlClient.MetadataEditor} object.
+
+ @deprecated Use {@link android.media.MediaMetadata} instead together with {@link MediaSession}.
+*/
+var MediaMetadataEditor = {
+
+<span id='android-media-MediaMetadataEditor-property-BITMAP_KEY_ARTWORK'>/** The metadata key for the content artwork / album art.
+</span>*/
+BITMAP_KEY_ARTWORK : &quot;100&quot;,
+<span id='android-media-MediaMetadataEditor-property-RATING_KEY_BY_OTHERS'>/** The metadata key for the content's average rating, not the user's rating.
+</span> The value associated with this key is a {@link android.media.Rating} instance.
+ @see #RATING_KEY_BY_USER
+*/
+RATING_KEY_BY_OTHERS : &quot;101&quot;,
+<span id='android-media-MediaMetadataEditor-property-RATING_KEY_BY_USER'>/** The metadata key for the content's user rating.
+</span> The value associated with this key is a {@link android.media.Rating} instance.
+ This key can be flagged as &quot;editable&quot; (with {@link #addEditableKey}(int)) to enable
+ receiving user rating values through the
+ {@link android.media.RemoteControlClient.OnMetadataUpdateListener} interface.
+*/
+RATING_KEY_BY_USER : &quot;268435457&quot;,
+<span id='android-media-MediaMetadataEditor-property-KEY_EDITABLE_MASK'>/** @hide
+</span> Editable key mask
+*/
+KEY_EDITABLE_MASK : &quot;536870911&quot;,
+<span id='android-media-MediaMetadataEditor-method-apply'>/**Applies all of the metadata changes that have been set since the MediaMetadataEditor instance
+</span> was created or since {@link #clear}() was called. Subclasses should synchronize on
+ {@code this} for thread safety.
+*/
+apply : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-clear'>/**Clears all the pending metadata changes set since the MediaMetadataEditor instance was
+</span> created or since this method was last called.
+ Note that clearing the metadata doesn't reset the editable keys
+ (use {@link #removeEditableKeys}() instead).
+*/
+clear : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-addEditableKey'>/**Flags the given key as being editable.
+</span> This should only be used by metadata publishers, such as {@link android.media.RemoteControlClient},
+ which will declare the metadata field as eligible to be updated, with new values
+ received through the {@link android.media.RemoteControlClient.OnMetadataUpdateListener} interface.
+@param {Number} key the type of metadata that can be edited. The supported key is
+     {@link #RATING_KEY_BY_USER}.
+*/
+addEditableKey : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-removeEditableKeys'>/**Causes all metadata fields to be read-only.
+</span>*/
+removeEditableKeys : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-getEditableKeys'>/**Retrieves the keys flagged as editable.
+</span>@return {Number} null if there are no editable keys, or an array containing the keys.
+*/
+getEditableKeys : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-putString'>/**Adds textual information.
+</span> Note that none of the information added after {@link #apply}() has been called,
+ will be available to consumers of metadata stored by the MediaMetadataEditor.
+@param {Number} key The identifier of a the metadata field to set. Valid values are
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_ALBUM},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_ALBUMARTIST},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_TITLE},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_ARTIST},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_AUTHOR},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_COMPILATION},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_COMPOSER},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_DATE},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_GENRE},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_WRITER}.
+@param {String} value The text for the given key, or {@code null} to signify there is no valid
+      information for the field.
+@return {Object {android.media.MediaMetadataEditor}} Returns a reference to the same MediaMetadataEditor object, so you can chain put
+      calls together.
+*/
+putString : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-putLong'>/**Adds numerical information.
+</span> Note that none of the information added after {@link #apply}() has been called
+ will be available to consumers of metadata stored by the MediaMetadataEditor.
+@param {Number} key the identifier of a the metadata field to set. Valid values are
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_CD_TRACK_NUMBER},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_DISC_NUMBER},
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_DURATION} (with a value
+      expressed in milliseconds),
+      {@link android.media.MediaMetadataRetriever#METADATA_KEY_YEAR}.
+@param {Number} value The long value for the given key
+@return {Object {android.media.MediaMetadataEditor}} Returns a reference to the same MediaMetadataEditor object, so you can chain put
+      calls together.
+@throws IllegalArgumentException
+*/
+putLong : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-putBitmap'>/**Adds image.
+</span>@param {Number} key the identifier of the bitmap to set. The only valid value is
+      {@link #BITMAP_KEY_ARTWORK}
+@param {Object {Bitmap}} bitmap The bitmap for the artwork, or null if there isn't any.
+@return {Object {android.media.MediaMetadataEditor}} Returns a reference to the same MediaMetadataEditor object, so you can chain put
+      calls together.
+@throws IllegalArgumentException
+@see android.graphics.Bitmap
+*/
+putBitmap : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-putObject'>/**Adds information stored as an instance.
+</span> Note that none of the information added after {@link #apply}() has been called
+ will be available to consumers of metadata stored by the MediaMetadataEditor.
+@param {Number} key the identifier of a the metadata field to set. Valid keys for a:
+     &lt;ul&gt;
+     &lt;li&gt;{@link Bitmap} object are {@link #BITMAP_KEY_ARTWORK},&lt;/li&gt;
+     &lt;li&gt;{@link String} object are the same as for {@link #putString(int, String)}&lt;/li&gt;
+     &lt;li&gt;{@link Long} object are the same as for {@link #putLong(int, long)}&lt;/li&gt;
+     &lt;li&gt;{@link Rating} object are {@link #RATING_KEY_BY_OTHERS}
+         and {@link #RATING_KEY_BY_USER}.&lt;/li&gt;
+     &lt;/ul&gt;
+@param {Object {Object}} value the metadata to add.
+@return {Object {android.media.MediaMetadataEditor}} Returns a reference to the same MediaMetadataEditor object, so you can chain put
+      calls together.
+@throws IllegalArgumentException
+*/
+putObject : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-getLong'>/**Returns the long value for the key.
+</span>@param {Number} key one of the keys supported in {@link #putLong(int, long)}
+@param {Number} defaultValue the value returned if the key is not present
+@return {Number} the long value for the key, or the supplied default value if the key is not present
+@throws IllegalArgumentException
+*/
+getLong : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-getString'>/**Returns the {@link String} value for the key.
+</span>@param {Number} key one of the keys supported in {@link #putString(int, String)}
+@param {String} defaultValue the value returned if the key is not present
+@return {String} the {@link String} value for the key, or the supplied default value if the key is
+     not present
+@throws IllegalArgumentException
+*/
+getString : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-getBitmap'>/**Returns the {@link Bitmap} value for the key.
+</span>@param {Number} key the {@link #BITMAP_KEY_ARTWORK} key
+@param {Object {Bitmap}} defaultValue the value returned if the key is not present
+@return {Object {android.graphics.Bitmap}} the {@link Bitmap} value for the key, or the supplied default value if the key is
+     not present
+@throws IllegalArgumentException
+*/
+getBitmap : function(  ) {},
+
+<span id='android-media-MediaMetadataEditor-method-getObject'>/**Returns an object representation of the value for the key
+</span>@param {Number} key one of the keys supported in {@link #putObject(int, Object)}
+@param {Object {Object}} defaultValue the value returned if the key is not present
+@return {Object {java.lang.Object}} the object for the key, as a {@link Long}, {@link Bitmap}, {@link String}, or
+     {@link Rating} depending on the key value, or the supplied default value if the key is
+     not present
+@throws IllegalArgumentException
+*/
+getObject : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

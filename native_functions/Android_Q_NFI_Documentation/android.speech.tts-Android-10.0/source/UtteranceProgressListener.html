@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-speech-tts-UtteranceProgressListener'>/**@class android.speech.tts.UtteranceProgressListener
+</span>@extends java.lang.Object
+
+ Listener for events relating to the progress of an utterance through
+ the synthesis queue. Each utterance is associated with a call to
+ {@link android.speech.tts.TextToSpeech#speak} or {@link android.speech.tts.TextToSpeech#synthesizeToFile} with an
+ associated utterance identifier, as per {@link android.speech.tts.TextToSpeech.Engine#KEY_PARAM_UTTERANCE_ID}.
+
+ The callbacks specified in this method can be called from multiple threads.
+*/
+var UtteranceProgressListener = {
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onStart'>/**Called when an utterance &quot;starts&quot; as perceived by the caller. This will
+</span> be soon before audio is played back in the case of a {@link android.speech.tts.TextToSpeech#speak}
+ or before the first bytes of a file are written to the file system in the case
+ of {@link android.speech.tts.TextToSpeech#synthesizeToFile}.
+@param {String} utteranceId The utterance ID of the utterance.
+*/
+onStart : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onDone'>/**Called when an utterance has successfully completed processing.
+</span> All audio will have been played back by this point for audible output, and all
+ output will have been written to disk for file synthesis requests.
+
+ This request is guaranteed to be called after {@link #onStart}(String).
+@param {String} utteranceId The utterance ID of the utterance.
+*/
+onDone : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onError'>/**Called when an error has occurred during processing. This can be called
+</span> at any point in the synthesis process. Note that there might be calls
+ to {@link #onStart}(String) for specified utteranceId but there will never
+ be a call to both {@link #onDone}(String) and {@link #onError}(String) for
+ the same utterance.
+@param {String} utteranceId The utterance ID of the utterance.
+@deprecated Use {@link #onError(String,int)} instead
+*/
+onError : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onError'>/**Called when an error has occurred during processing. This can be called
+</span> at any point in the synthesis process. Note that there might be calls
+ to {@link #onStart}(String) for specified utteranceId but there will never
+ be a call to both {@link #onDone}(String) and {@link #onError(String,int)} for
+ the same utterance. The default implementation calls {@link #onError}(String).
+@param {String} utteranceId The utterance ID of the utterance.
+@param {Number} errorCode one of the ERROR_* codes from {@link TextToSpeech}
+*/
+onError : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onStop'>/**Called when an utterance has been stopped while in progress or flushed from the
+</span> synthesis queue. This can happen if a client calls {@link android.speech.tts.TextToSpeech#stop()}
+ or uses {@link android.speech.tts.TextToSpeech#QUEUE_FLUSH} as an argument with the
+ {@link android.speech.tts.TextToSpeech#speak} or {@link android.speech.tts.TextToSpeech#synthesizeToFile} methods.
+@param {String} utteranceId The utterance ID of the utterance.
+@param {Boolean} interrupted If true, then the utterance was interrupted while being synthesized
+        and its output is incomplete. If false, then the utterance was flushed
+        before the synthesis started.
+*/
+onStop : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onBeginSynthesis'>/**Called when the TTS engine begins to synthesize the audio for a request.
+</span>
+ &lt;p&gt;
+ It provides information about the format of the byte array for subsequent
+ {@link #onAudioAvailable} calls.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This is called when the TTS engine starts synthesizing audio for the request. If an
+ application wishes to know when the audio is about to start playing, {#onStart(String)}
+ should be used instead.
+ &lt;/p&gt;
+@param {String} utteranceId The utterance ID of the utterance.
+@param {Number} sampleRateInHz Sample rate in hertz of the generated audio.
+@param {Number} audioFormat Audio format of the generated audio. Should be one of
+        {@link AudioFormat#ENCODING_PCM_8BIT}, {@link AudioFormat#ENCODING_PCM_16BIT} or
+        {@link AudioFormat#ENCODING_PCM_FLOAT}.
+@param {Number} channelCount The number of channels.
+*/
+onBeginSynthesis : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onAudioAvailable'>/**This is called when a chunk of audio is ready for consumption.
+</span>
+ &lt;p&gt;
+ The audio parameter is a copy of what will be synthesized to the speakers (when synthesis was
+ initiated with a {@link android.speech.tts.TextToSpeech#speak} call) or written to the file system (for
+ {@link android.speech.tts.TextToSpeech#synthesizeToFile}). The audio bytes are delivered in one or more chunks;
+ if {@link #onDone} or {@link #onError} is called all chunks have been received.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ The audio received here may not be played for some time depending on buffer sizes and the
+ amount of items on the synthesis queue.
+ &lt;/p&gt;
+@param {String} utteranceId The utterance ID of the utterance.
+@param {Object {byte[]}} audio A chunk of audio; the format can be known by listening to
+        {@link #onBeginSynthesis(String, int, int, int)}.
+*/
+onAudioAvailable : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onRangeStart'>/**This is called when the TTS service is about to speak the specified range of the utterance
+</span> with the given utteranceId.
+
+ &lt;p&gt;This method is called when the audio is expected to start playing on the speaker. Note
+ that this is different from {@link #onAudioAvailable} which is called as soon as the audio is
+ generated.
+
+ &lt;p&gt;This information can be used, for example, to highlight ranges of the text while it is
+ spoken.
+
+ &lt;p&gt;Only called if the engine supplies timing information by calling {@link android.speech.tts.SynthesisCallback#rangeStart(int, int, int)}.
+@param {String} utteranceId Unique id identifying the synthesis request.
+@param {Number} start The start index of the range in the utterance text.
+@param {Number} end The end index of the range (exclusive) in the utterance text.
+@param {Number} frame The position in frames in the audio of the request where this range is spoken.
+*/
+onRangeStart : function(  ) {},
+
+<span id='android-speech-tts-UtteranceProgressListener-method-onUtteranceRangeStart'>/**
+</span>@removed 
+*/
+onUtteranceRangeStart : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

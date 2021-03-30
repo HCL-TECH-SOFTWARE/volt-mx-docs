@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-widget-AbsListView'>/**@class android.widget.AbsListView
+</span> implements android.text.TextWatcher
+
+ implements android.view.ViewTreeObserver.OnGlobalLayoutListener
+
+ implements android.widget.Filter.FilterListener
+
+ implements android.view.ViewTreeObserver.OnTouchModeChangeListener
+
+ implements android.widget.RemoteViewsAdapter.RemoteAdapterConnectionCallback
+
+@extends android.widget.AdapterView
+
+ Base class that can be used to implement virtualized lists of items. A list does
+ not have a spatial definition here. For instance, subclasses of this class can
+ display the content of the list in a grid, in a carousel, as stack, etc.
+
+ @attr ref android.R.styleable#AbsListView_listSelector
+ @attr ref android.R.styleable#AbsListView_drawSelectorOnTop
+ @attr ref android.R.styleable#AbsListView_stackFromBottom
+ @attr ref android.R.styleable#AbsListView_scrollingCache
+ @attr ref android.R.styleable#AbsListView_textFilterEnabled
+ @attr ref android.R.styleable#AbsListView_transcriptMode
+ @attr ref android.R.styleable#AbsListView_cacheColorHint
+ @attr ref android.R.styleable#AbsListView_fastScrollEnabled
+ @attr ref android.R.styleable#AbsListView_smoothScrollbar
+ @attr ref android.R.styleable#AbsListView_choiceMode
+*/
+var AbsListView = {
+
+<span id='android-widget-AbsListView-property-TRANSCRIPT_MODE_DISABLED'>/** Disables the transcript mode.
+</span>
+ @see #setTranscriptMode(int)
+*/
+TRANSCRIPT_MODE_DISABLED : &quot;0&quot;,
+<span id='android-widget-AbsListView-property-TRANSCRIPT_MODE_NORMAL'>/** The list will automatically scroll to the bottom when a data set change
+</span> notification is received and only if the last item is already visible
+ on screen.
+
+ @see #setTranscriptMode(int)
+*/
+TRANSCRIPT_MODE_NORMAL : &quot;1&quot;,
+<span id='android-widget-AbsListView-property-TRANSCRIPT_MODE_ALWAYS_SCROLL'>/** The list will automatically scroll to the bottom, no matter what items
+</span> are currently visible.
+
+ @see #setTranscriptMode(int)
+*/
+TRANSCRIPT_MODE_ALWAYS_SCROLL : &quot;2&quot;,
+<span id='android-widget-AbsListView-property-CHOICE_MODE_NONE'>/** Normal list that does not indicate choices
+</span>*/
+CHOICE_MODE_NONE : &quot;0&quot;,
+<span id='android-widget-AbsListView-property-CHOICE_MODE_SINGLE'>/** The list allows up to one choice
+</span>*/
+CHOICE_MODE_SINGLE : &quot;1&quot;,
+<span id='android-widget-AbsListView-property-CHOICE_MODE_MULTIPLE'>/** The list allows multiple choices
+</span>*/
+CHOICE_MODE_MULTIPLE : &quot;2&quot;,
+<span id='android-widget-AbsListView-property-CHOICE_MODE_MULTIPLE_MODAL'>/** The list allows multiple choices in a modal selection mode
+</span>*/
+CHOICE_MODE_MULTIPLE_MODAL : &quot;3&quot;,
+<span id='android-widget-AbsListView-method-setAdapter'>/**{@inheritDoc}
+</span>*/
+setAdapter : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getCheckedItemCount'>/**Returns the number of items currently selected. This will only be valid
+</span> if the choice mode is not {@link #CHOICE_MODE_NONE} (default).
+
+ &lt;p&gt;To determine the specific items that are currently selected, use one of
+ the &lt;code&gt;getChecked*&lt;/code&gt; methods.
+@return {Number} The number of items currently selected
+@see #getCheckedItemPosition()
+@see #getCheckedItemPositions()
+@see #getCheckedItemIds()
+*/
+getCheckedItemCount : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isItemChecked'>/**Returns the checked state of the specified position. The result is only
+</span> valid if the choice mode has been set to {@link #CHOICE_MODE_SINGLE}
+ or {@link #CHOICE_MODE_MULTIPLE}.
+@param {Number} position The item whose checked state to return
+@return {Boolean} The item's checked state or &lt;code&gt;false&lt;/code&gt; if choice mode
+         is invalid
+@see #setChoiceMode(int)
+*/
+isItemChecked : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getCheckedItemPosition'>/**Returns the currently checked item. The result is only valid if the choice
+</span> mode has been set to {@link #CHOICE_MODE_SINGLE}.
+@return {Number} The position of the currently checked item or
+         {@link #INVALID_POSITION} if nothing is selected
+@see #setChoiceMode(int)
+*/
+getCheckedItemPosition : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getCheckedItemPositions'>/**Returns the set of checked items in the list. The result is only valid if
+</span> the choice mode has not been set to {@link #CHOICE_MODE_NONE}.
+@return {Object {android.util.SparseBooleanArray}} A SparseBooleanArray which will return true for each call to
+          get(int position) where position is a checked position in the
+          list and false otherwise, or &lt;code&gt;null&lt;/code&gt; if the choice
+          mode is set to {@link #CHOICE_MODE_NONE}.
+*/
+getCheckedItemPositions : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getCheckedItemIds'>/**Returns the set of checked items ids. The result is only valid if the
+</span> choice mode has not been set to {@link #CHOICE_MODE_NONE} and the adapter
+ has stable IDs. ({@link android.widget.ListAdapter#hasStableIds()} == {@code true})
+@return {Number} A new array which contains the id of each checked item in the
+         list.
+*/
+getCheckedItemIds : function(  ) {},
+
+<span id='android-widget-AbsListView-method-clearChoices'>/**Clear any choices previously set
+</span>*/
+clearChoices : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setItemChecked'>/**Sets the checked state of the specified position. The is only valid if
+</span> the choice mode has been set to {@link #CHOICE_MODE_SINGLE} or
+ {@link #CHOICE_MODE_MULTIPLE}.
+@param {Number} position The item whose checked state is to be checked
+@param {Boolean} value The new checked state for the item
+*/
+setItemChecked : function(  ) {},
+
+<span id='android-widget-AbsListView-method-performItemClick'>/**
+</span>*/
+performItemClick : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getChoiceMode'>/**
+</span>@see #setChoiceMode(int)
+@return {Number} The current choice mode
+*/
+getChoiceMode : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setChoiceMode'>/**Defines the choice behavior for the List. By default, Lists do not have any choice behavior
+</span> ({@link #CHOICE_MODE_NONE}). By setting the choiceMode to {@link #CHOICE_MODE_SINGLE}, the
+ List allows up to one item to  be in a chosen state. By setting the choiceMode to
+ {@link #CHOICE_MODE_MULTIPLE}, the list allows any number of items to be chosen.
+@param {Number} choiceMode One of {@link #CHOICE_MODE_NONE}, {@link #CHOICE_MODE_SINGLE}, or
+ {@link #CHOICE_MODE_MULTIPLE}
+*/
+setChoiceMode : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setMultiChoiceModeListener'>/**Set a {@link android.widget.AbsListView.MultiChoiceModeListener} that will manage the lifecycle of the
+</span> selection {@link ActionMode}. Only used when the choice mode is set to
+ {@link #CHOICE_MODE_MULTIPLE_MODAL}.
+@param {Object {AbsListView.MultiChoiceModeListener}} listener Listener that will manage the selection mode
+@see #setChoiceMode(int)
+*/
+setMultiChoiceModeListener : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setFastScrollEnabled'>/**Specifies whether fast scrolling is enabled or disabled.
+</span> &lt;p&gt;
+ When fast scrolling is enabled, the user can quickly scroll through lists
+ by dragging the fast scroll thumb.
+ &lt;p&gt;
+ If the adapter backing this list implements {@link android.widget.SectionIndexer}, the
+ fast scroller will display section header previews as the user scrolls.
+ Additionally, the user will be able to quickly jump between sections by
+ tapping along the length of the scroll bar.
+@param {Boolean} enabled true to enable fast scrolling, false otherwise
+@see #isFastScrollEnabled()
+@param enabled true to enable fast scrolling, false otherwise
+*/
+setFastScrollEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setFastScrollStyle'>/**Specifies the style of the fast scroller decorations.
+</span>@param {Number} styleResId style resource containing fast scroller properties
+@see android.R.styleable#FastScroll
+*/
+setFastScrollStyle : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setFastScrollAlwaysVisible'>/**Set whether or not the fast scroller should always be shown in place of
+</span> the standard scroll bars. This will enable fast scrolling if it is not
+ already enabled.
+ &lt;p&gt;
+ Fast scrollers shown in this way will not fade out and will be a
+ permanent fixture within the list. This is best combined with an inset
+ scroll bar style to ensure the scroll bar does not overlap content.
+@param {Boolean} alwaysShow true if the fast scroller should always be displayed,
+            false otherwise
+@see #setScrollBarStyle(int)
+@see #setFastScrollEnabled(boolean)
+*/
+setFastScrollAlwaysVisible : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isFastScrollAlwaysVisible'>/**Returns true if the fast scroller is set to always show on this view.
+</span>@return {Boolean} true if the fast scroller will always show
+@see #setFastScrollAlwaysVisible(boolean)
+*/
+isFastScrollAlwaysVisible : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getVerticalScrollbarWidth'>/**
+</span>*/
+getVerticalScrollbarWidth : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isFastScrollEnabled'>/**Returns true if the fast scroller is enabled.
+</span>@see #setFastScrollEnabled(boolean)
+@return {Boolean} true if fast scroll is enabled, false otherwise
+*/
+isFastScrollEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setVerticalScrollbarPosition'>/**
+</span>*/
+setVerticalScrollbarPosition : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setScrollBarStyle'>/**
+</span>*/
+setScrollBarStyle : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setSmoothScrollbarEnabled'>/**When smooth scrollbar is enabled, the position and size of the scrollbar thumb
+</span> is computed based on the number of visible pixels in the visible items. This
+ however assumes that all list items have the same height. If you use a list in
+ which items have different heights, the scrollbar will change appearance as the
+ user scrolls through the list. To avoid this issue, you need to disable this
+ property.
+
+ When smooth scrollbar is disabled, the position and size of the scrollbar thumb
+ is based solely on the number of items in the adapter and the position of the
+ visible items inside the adapter. This provides a stable scrollbar as the user
+ navigates through a list of items with varying heights.
+@param {Boolean} enabled Whether or not to enable smooth scrollbar.
+@see #setSmoothScrollbarEnabled(boolean)
+@attr ref android.R.styleable#AbsListView_smoothScrollbar
+*/
+setSmoothScrollbarEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isSmoothScrollbarEnabled'>/**Returns the current state of the fast scroll feature.
+</span>@return {Boolean} True if smooth scrollbar is enabled is enabled, false otherwise.
+@see #setSmoothScrollbarEnabled(boolean)
+*/
+isSmoothScrollbarEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setOnScrollListener'>/**Set the listener that will receive notifications every time the list scrolls.
+</span>@param {Object {AbsListView.OnScrollListener}} l the scroll listener
+*/
+setOnScrollListener : function(  ) {},
+
+<span id='android-widget-AbsListView-method-sendAccessibilityEventUnchecked'>/**
+</span>@hide 
+*/
+sendAccessibilityEventUnchecked : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getAccessibilityClassName'>/**
+</span>*/
+getAccessibilityClassName : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onInitializeAccessibilityNodeInfoInternal'>/**
+</span>@hide 
+*/
+onInitializeAccessibilityNodeInfoInternal : function(  ) {},
+
+<span id='android-widget-AbsListView-method-performAccessibilityActionInternal'>/**
+</span>@hide 
+*/
+performAccessibilityActionInternal : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isScrollingCacheEnabled'>/**Indicates whether the children's drawing cache is used during a scroll.
+</span> By default, the drawing cache is enabled but this will consume more memory.
+@return {Boolean} true if the scrolling cache is enabled, false otherwise
+@see #setScrollingCacheEnabled(boolean)
+@see View#setDrawingCacheEnabled(boolean)
+*/
+isScrollingCacheEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setScrollingCacheEnabled'>/**Enables or disables the children's drawing cache during a scroll.
+</span> By default, the drawing cache is enabled but this will use more memory.
+
+ When the scrolling cache is enabled, the caches are kept after the
+ first scrolling. You can manually clear the cache by calling
+ {@link android.view.ViewGroup#setChildrenDrawingCacheEnabled(boolean)}.
+@param {Boolean} enabled true to enable the scroll cache, false otherwise
+@see #isScrollingCacheEnabled()
+@see View#setDrawingCacheEnabled(boolean)
+*/
+setScrollingCacheEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setTextFilterEnabled'>/**Enables or disables the type filter window. If enabled, typing when
+</span> this view has focus will filter the children to match the users input.
+ Note that the {@link android.widget.Adapter} used by this view must implement the
+ {@link android.widget.Filterable} interface.
+@param {Boolean} textFilterEnabled true to enable type filtering, false otherwise
+@see Filterable
+*/
+setTextFilterEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isTextFilterEnabled'>/**Indicates whether type filtering is enabled for this view
+</span>@return {Boolean} true if type filtering is enabled, false otherwise
+@see #setTextFilterEnabled(boolean)
+@see Filterable
+*/
+isTextFilterEnabled : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getFocusedRect'>/**
+</span>*/
+getFocusedRect : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isStackFromBottom'>/**Indicates whether the content of this view is pinned to, or stacked from,
+</span> the bottom edge.
+@return {Boolean} true if the content is stacked from the bottom edge, false otherwise
+*/
+isStackFromBottom : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setStackFromBottom'>/**When stack from bottom is set to true, the list fills its content starting from
+</span> the bottom of the view.
+@param {Boolean} stackFromBottom true to pin the view's content to the bottom edge,
+        false to pin the view's content to the top edge
+*/
+setStackFromBottom : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onSaveInstanceState'>/**
+</span>*/
+onSaveInstanceState : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onRestoreInstanceState'>/**
+</span>*/
+onRestoreInstanceState : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setFilterText'>/**Sets the initial value for the text filter.
+</span>@param {String} filterText The text to use for the filter.
+@see #setTextFilterEnabled
+*/
+setFilterText : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getTextFilter'>/**Returns the list's text filter, if available.
+</span>@return {Object {java.lang.CharSequence}} the list's text filter or null if filtering isn't enabled
+*/
+getTextFilter : function(  ) {},
+
+<span id='android-widget-AbsListView-method-requestLayout'>/**
+</span>*/
+requestLayout : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getSelectedView'>/**
+</span>*/
+getSelectedView : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getListPaddingTop'>/**List padding is the maximum of the normal view's padding and the padding of the selector.
+</span>@see android.view.View#getPaddingTop()
+@see #getSelector()
+@return {Number} The top list padding.
+*/
+getListPaddingTop : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getListPaddingBottom'>/**List padding is the maximum of the normal view's padding and the padding of the selector.
+</span>@see android.view.View#getPaddingBottom()
+@see #getSelector()
+@return {Number} The bottom list padding.
+*/
+getListPaddingBottom : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getListPaddingLeft'>/**List padding is the maximum of the normal view's padding and the padding of the selector.
+</span>@see android.view.View#getPaddingLeft()
+@see #getSelector()
+@return {Number} The left list padding.
+*/
+getListPaddingLeft : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getListPaddingRight'>/**List padding is the maximum of the normal view's padding and the padding of the selector.
+</span>@see android.view.View#getPaddingRight()
+@see #getSelector()
+@return {Number} The right list padding.
+*/
+getListPaddingRight : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onInitializeAccessibilityNodeInfoForItem'>/**Initializes an {@link AccessibilityNodeInfo} with information about a
+</span> particular item in the list.
+@param {Object {View}} view View representing the list item.
+@param {Number} position Position of the list item within the adapter.
+@param {Object {AccessibilityNodeInfo}} info Node info to populate.
+*/
+onInitializeAccessibilityNodeInfoForItem : function(  ) {},
+
+<span id='android-widget-AbsListView-method-shouldDrawSelector'>/**
+</span>@hide 
+*/
+shouldDrawSelector : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setDrawSelectorOnTop'>/**Controls whether the selection highlight drawable should be drawn on top of the item or
+</span> behind it.
+@param {Boolean} onTop If true, the selector will be drawn on the item it is highlighting. The default
+        is false.
+@attr ref android.R.styleable#AbsListView_drawSelectorOnTop
+*/
+setDrawSelectorOnTop : function(  ) {},
+
+<span id='android-widget-AbsListView-method-isDrawSelectorOnTop'>/**Returns whether the selection highlight drawable should be drawn on top of the item or
+</span> behind it.
+@return {Boolean} true if selector is drawn on top, false otherwise
+@attr ref android.R.styleable#AbsListView_drawSelectorOnTop
+*/
+isDrawSelectorOnTop : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setSelector'>/**Set a Drawable that should be used to highlight the currently selected item.
+</span>@param {Number} resID A Drawable resource to use as the selection highlight.
+@attr ref android.R.styleable#AbsListView_listSelector
+*/
+setSelector : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setSelector'>/**
+</span>*/
+setSelector : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getSelector'>/**Returns the selector {@link android.graphics.drawable.Drawable} that is used to draw the
+</span> selection in the list.
+@return {Object {android.graphics.drawable.Drawable}} the drawable used to display the selector
+*/
+getSelector : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setScrollIndicators'>/**
+</span>*/
+setScrollIndicators : function(  ) {},
+
+<span id='android-widget-AbsListView-method-verifyDrawable'>/**
+</span>*/
+verifyDrawable : function(  ) {},
+
+<span id='android-widget-AbsListView-method-jumpDrawablesToCurrentState'>/**
+</span>*/
+jumpDrawablesToCurrentState : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onWindowFocusChanged'>/**
+</span>*/
+onWindowFocusChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onRtlPropertiesChanged'>/**
+</span>*/
+onRtlPropertiesChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onCancelPendingInputEvents'>/**
+</span>*/
+onCancelPendingInputEvents : function(  ) {},
+
+<span id='android-widget-AbsListView-method-showContextMenu'>/**
+</span>*/
+showContextMenu : function(  ) {},
+
+<span id='android-widget-AbsListView-method-showContextMenu'>/**
+</span>*/
+showContextMenu : function(  ) {},
+
+<span id='android-widget-AbsListView-method-showContextMenuForChild'>/**
+</span>*/
+showContextMenuForChild : function(  ) {},
+
+<span id='android-widget-AbsListView-method-showContextMenuForChild'>/**
+</span>*/
+showContextMenuForChild : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onKeyDown'>/**
+</span>*/
+onKeyDown : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onKeyUp'>/**
+</span>*/
+onKeyUp : function(  ) {},
+
+<span id='android-widget-AbsListView-method-dispatchDrawableHotspotChanged'>/**
+</span>*/
+dispatchDrawableHotspotChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-pointToPosition'>/**Maps a point to a position in the list.
+</span>@param {Number} x X in local coordinate
+@param {Number} y Y in local coordinate
+@return {Number} The position of the item which contains the specified point, or
+         {@link #INVALID_POSITION} if the point does not intersect an item.
+*/
+pointToPosition : function(  ) {},
+
+<span id='android-widget-AbsListView-method-pointToRowId'>/**Maps a point to a the rowId of the item which intersects that point.
+</span>@param {Number} x X in local coordinate
+@param {Number} y Y in local coordinate
+@return {Number} The rowId of the item which contains the specified point, or {@link #INVALID_ROW_ID}
+         if the point does not intersect an item.
+*/
+pointToRowId : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onTouchModeChanged'>/**
+</span>*/
+onTouchModeChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onTouchEvent'>/**
+</span>*/
+onTouchEvent : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onGenericMotionEvent'>/**
+</span>*/
+onGenericMotionEvent : function(  ) {},
+
+<span id='android-widget-AbsListView-method-fling'>/**Initiate a fling with the given velocity.
+</span>
+ &lt;p&gt;Applications can use this method to manually initiate a fling as if the user
+ initiated it via touch interaction.&lt;/p&gt;
+@param {Number} velocityY Vertical velocity in pixels per second. Note that this is velocity of
+                  content, not velocity of a touch that initiated the fling.
+*/
+fling : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onStartNestedScroll'>/**
+</span>*/
+onStartNestedScroll : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onNestedScrollAccepted'>/**
+</span>*/
+onNestedScrollAccepted : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onNestedScroll'>/**
+</span>*/
+onNestedScroll : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onNestedFling'>/**
+</span>*/
+onNestedFling : function(  ) {},
+
+<span id='android-widget-AbsListView-method-draw'>/**
+</span>*/
+draw : function(  ) {},
+
+<span id='android-widget-AbsListView-method-requestDisallowInterceptTouchEvent'>/**
+</span>*/
+requestDisallowInterceptTouchEvent : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onInterceptHoverEvent'>/**
+</span>*/
+onInterceptHoverEvent : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onResolvePointerIcon'>/**
+</span>*/
+onResolvePointerIcon : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onInterceptTouchEvent'>/**
+</span>*/
+onInterceptTouchEvent : function(  ) {},
+
+<span id='android-widget-AbsListView-method-addTouchables'>/**{@inheritDoc}
+</span>*/
+addTouchables : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setFriction'>/**The amount of friction applied to flings. The default value
+</span> is {@link ViewConfiguration#getScrollFriction}.
+*/
+setFriction : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setVelocityScale'>/**Sets a scale factor for the fling velocity. The initial scale
+</span> factor is 1.0.
+@param {Number} scale The scale factor to multiply the velocity by.
+*/
+setVelocityScale : function(  ) {},
+
+<span id='android-widget-AbsListView-method-smoothScrollToPosition'>/**Smoothly scroll to the specified adapter position. The view will
+</span> scroll such that the indicated position is displayed.
+@param {Number} position Scroll to this adapter position.
+*/
+smoothScrollToPosition : function(  ) {},
+
+<span id='android-widget-AbsListView-method-smoothScrollToPositionFromTop'>/**Smoothly scroll to the specified adapter position. The view will scroll
+</span> such that the indicated position is displayed &lt;code&gt;offset&lt;/code&gt; pixels below
+ the top edge of the view. If this is impossible, (e.g. the offset would scroll
+ the first or last item beyond the boundaries of the list) it will get as close
+ as possible. The scroll will take &lt;code&gt;duration&lt;/code&gt; milliseconds to complete.
+@param {Number} position Position to scroll to
+@param {Number} offset Desired distance in pixels of &lt;code&gt;position&lt;/code&gt; from the top
+               of the view when scrolling is finished
+@param {Number} duration Number of milliseconds to use for the scroll
+*/
+smoothScrollToPositionFromTop : function(  ) {},
+
+<span id='android-widget-AbsListView-method-smoothScrollToPositionFromTop'>/**Smoothly scroll to the specified adapter position. The view will scroll
+</span> such that the indicated position is displayed &lt;code&gt;offset&lt;/code&gt; pixels below
+ the top edge of the view. If this is impossible, (e.g. the offset would scroll
+ the first or last item beyond the boundaries of the list) it will get as close
+ as possible.
+@param {Number} position Position to scroll to
+@param {Number} offset Desired distance in pixels of &lt;code&gt;position&lt;/code&gt; from the top
+               of the view when scrolling is finished
+*/
+smoothScrollToPositionFromTop : function(  ) {},
+
+<span id='android-widget-AbsListView-method-smoothScrollToPosition'>/**Smoothly scroll to the specified adapter position. The view will
+</span> scroll such that the indicated position is displayed, but it will
+ stop early if scrolling further would scroll boundPosition out of
+ view.
+@param {Number} position Scroll to this adapter position.
+@param {Number} boundPosition Do not scroll if it would move this adapter
+          position out of view.
+*/
+smoothScrollToPosition : function(  ) {},
+
+<span id='android-widget-AbsListView-method-smoothScrollBy'>/**Smoothly scroll by distance pixels over duration milliseconds.
+</span>@param {Number} distance Distance to scroll in pixels.
+@param {Number} duration Duration of the scroll animation in milliseconds.
+*/
+smoothScrollBy : function(  ) {},
+
+<span id='android-widget-AbsListView-method-scrollListBy'>/**Scrolls the list items within the view by a specified number of pixels.
+</span>
+ &lt;p&gt;The actual amount of scroll is capped by the list content viewport height
+ which is the list height minus top and bottom paddings minus one pixel.&lt;/p&gt;
+@param {Number} y the amount of pixels to scroll by vertically
+@see #canScrollList(int)
+*/
+scrollListBy : function(  ) {},
+
+<span id='android-widget-AbsListView-method-canScrollList'>/**Check if the items in the list can be scrolled in a certain direction.
+</span>@param {Number} direction Negative to check scrolling up, positive to check
+            scrolling down.
+@return {Boolean} true if the list can be scrolled in the specified direction,
+         false otherwise.
+@see #scrollListBy(int)
+*/
+canScrollList : function(  ) {},
+
+<span id='android-widget-AbsListView-method-invalidateViews'>/**Causes all the views to be rebuilt and redrawn.
+</span>*/
+invalidateViews : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onCreateInputConnection'>/**Return an InputConnection for editing of the filter text.
+</span>*/
+onCreateInputConnection : function(  ) {},
+
+<span id='android-widget-AbsListView-method-checkInputConnectionProxy'>/**For filtering we proxy an input connection to an internal text editor,
+</span> and this allows the proxying to happen.
+*/
+checkInputConnectionProxy : function(  ) {},
+
+<span id='android-widget-AbsListView-method-clearTextFilter'>/**Clear the text filter.
+</span>*/
+clearTextFilter : function(  ) {},
+
+<span id='android-widget-AbsListView-method-hasTextFilter'>/**Returns if the ListView currently has a text filter.
+</span>*/
+hasTextFilter : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onGlobalLayout'>/**
+</span>*/
+onGlobalLayout : function(  ) {},
+
+<span id='android-widget-AbsListView-method-beforeTextChanged'>/**For our text watcher that is associated with the text filter.  Does
+</span> nothing.
+*/
+beforeTextChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onTextChanged'>/**For our text watcher that is associated with the text filter. Performs
+</span> the actual filtering as the text changes, and takes care of hiding and
+ showing the popup displaying the currently entered filter text.
+*/
+onTextChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-afterTextChanged'>/**For our text watcher that is associated with the text filter.  Does
+</span> nothing.
+*/
+afterTextChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onFilterComplete'>/**
+</span>*/
+onFilterComplete : function(  ) {},
+
+<span id='android-widget-AbsListView-method-generateLayoutParams'>/**
+</span>*/
+generateLayoutParams : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setTranscriptMode'>/**Puts the list or grid into transcript mode. In this mode the list or grid will always scroll
+</span> to the bottom to show new items.
+@param {Number} mode the transcript mode to set
+@see #TRANSCRIPT_MODE_DISABLED
+@see #TRANSCRIPT_MODE_NORMAL
+@see #TRANSCRIPT_MODE_ALWAYS_SCROLL
+*/
+setTranscriptMode : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getTranscriptMode'>/**Returns the current transcript mode.
+</span>@return {Number} {@link #TRANSCRIPT_MODE_DISABLED}, {@link #TRANSCRIPT_MODE_NORMAL} or
+         {@link #TRANSCRIPT_MODE_ALWAYS_SCROLL}
+*/
+getTranscriptMode : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getSolidColor'>/**
+</span>*/
+getSolidColor : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setCacheColorHint'>/**When set to a non-zero value, the cache color hint indicates that this list is always drawn
+</span> on top of a solid, single-color, opaque background.
+
+ Zero means that what's behind this object is translucent (non solid) or is not made of a
+ single color. This hint will not affect any existing background drawable set on this view (
+ typically set via {@link #setBackgroundDrawable}(Drawable)).
+@param {Number} color The background color
+*/
+setCacheColorHint : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getCacheColorHint'>/**When set to a non-zero value, the cache color hint indicates that this list is always drawn
+</span> on top of a solid, single-color, opaque background
+@return {Number} The cache color hint
+*/
+getCacheColorHint : function(  ) {},
+
+<span id='android-widget-AbsListView-method-reclaimViews'>/**Move all views (excluding headers and footers) held by this AbsListView into the supplied
+</span> List. This includes views displayed on the screen as well as views stored in AbsListView's
+ internal view recycler.
+@param {Object {java.util.List}} views A list into which to put the reclaimed views
+*/
+reclaimViews : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setRemoteViewsAdapter'>/**Sets up this AbsListView to use a remote views adapter which connects to a RemoteViewsService
+</span> through the specified intent.
+@param {Object {Intent}} intent the intent used to identify the RemoteViewsService for the adapter to connect to.
+*/
+setRemoteViewsAdapter : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setRemoteViewsAdapterAsync'>/**
+</span>@hide 
+*/
+setRemoteViewsAdapterAsync : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setRemoteViewsAdapter'>/**
+</span>@hide 
+*/
+setRemoteViewsAdapter : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setRemoteViewsOnClickHandler'>/**Sets up the onClickHandler to be used by the RemoteViewsAdapter when inflating RemoteViews
+</span>@param {Object {RemoteViews.OnClickHandler}} handler The OnClickHandler to use when inflating RemoteViews.
+@hide 
+*/
+setRemoteViewsOnClickHandler : function(  ) {},
+
+<span id='android-widget-AbsListView-method-deferNotifyDataSetChanged'>/**This defers a notifyDataSetChanged on the pending RemoteViewsAdapter if it has not
+</span> connected yet.
+*/
+deferNotifyDataSetChanged : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onRemoteAdapterConnected'>/**Called back when the adapter connects to the RemoteViewsService.
+</span>*/
+onRemoteAdapterConnected : function(  ) {},
+
+<span id='android-widget-AbsListView-method-onRemoteAdapterDisconnected'>/**Called back when the adapter disconnects from the RemoteViewsService.
+</span>*/
+onRemoteAdapterDisconnected : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setEdgeEffectColor'>/**Sets the edge effect color for both top and bottom edge effects.
+</span>@param {Number} color The color for the edge effects.
+@see #setTopEdgeEffectColor(int)
+@see #setBottomEdgeEffectColor(int)
+@see #getTopEdgeEffectColor()
+@see #getBottomEdgeEffectColor()
+*/
+setEdgeEffectColor : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setBottomEdgeEffectColor'>/**Sets the bottom edge effect color.
+</span>@param {Number} color The color for the bottom edge effect.
+@see #setTopEdgeEffectColor(int)
+@see #setEdgeEffectColor(int)
+@see #getTopEdgeEffectColor()
+@see #getBottomEdgeEffectColor()
+*/
+setBottomEdgeEffectColor : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setTopEdgeEffectColor'>/**Sets the top edge effect color.
+</span>@param {Number} color The color for the top edge effect.
+@see #setBottomEdgeEffectColor(int)
+@see #setEdgeEffectColor(int)
+@see #getTopEdgeEffectColor()
+@see #getBottomEdgeEffectColor()
+*/
+setTopEdgeEffectColor : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getTopEdgeEffectColor'>/**Returns the top edge effect color.
+</span>@return {Number} The top edge effect color.
+@see #setEdgeEffectColor(int)
+@see #setTopEdgeEffectColor(int)
+@see #setBottomEdgeEffectColor(int)
+@see #getBottomEdgeEffectColor()
+*/
+getTopEdgeEffectColor : function(  ) {},
+
+<span id='android-widget-AbsListView-method-getBottomEdgeEffectColor'>/**Returns the bottom edge effect color.
+</span>@return {Number} The bottom edge effect color.
+@see #setEdgeEffectColor(int)
+@see #setTopEdgeEffectColor(int)
+@see #setBottomEdgeEffectColor(int)
+@see #getTopEdgeEffectColor()
+*/
+getBottomEdgeEffectColor : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setRecyclerListener'>/**Sets the recycler listener to be notified whenever a View is set aside in
+</span> the recycler for later reuse. This listener can be used to free resources
+ associated to the View.
+@param {Object {AbsListView.RecyclerListener}} listener The recycler listener to be notified of views set aside
+        in the recycler.
+@see android.widget.AbsListView.RecyclerListener
+*/
+setRecyclerListener : function(  ) {},
+
+<span id='android-widget-AbsListView-method-setSelectionFromTop'>/**Sets the selected item and positions the selection y pixels from the top edge
+</span> of the ListView. (If in touch mode, the item will not be selected but it will
+ still be positioned appropriately.)
+@param {Number} position Index (starting at 0) of the data item to be selected.
+@param {Number} y The distance from the top edge of the ListView (plus padding) that the
+        item will be positioned.
+*/
+setSelectionFromTop : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

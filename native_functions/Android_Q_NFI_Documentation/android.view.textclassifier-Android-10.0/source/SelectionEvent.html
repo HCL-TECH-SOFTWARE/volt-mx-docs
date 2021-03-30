@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-view-textclassifier-SelectionEvent'>/**@class android.view.textclassifier.SelectionEvent
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A selection event.
+ Specify index parameters as word token indices.
+*/
+var SelectionEvent = {
+
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_OVERTYPE'>/**User typed over the selection. */
+</span>ACTION_OVERTYPE : &quot;100&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_COPY'>/**User copied the selection. */
+</span>ACTION_COPY : &quot;101&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_PASTE'>/**User pasted over the selection. */
+</span>ACTION_PASTE : &quot;102&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_CUT'>/**User cut the selection. */
+</span>ACTION_CUT : &quot;103&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_SHARE'>/**User shared the selection. */
+</span>ACTION_SHARE : &quot;104&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_SMART_SHARE'>/**User clicked the textAssist menu item. */
+</span>ACTION_SMART_SHARE : &quot;105&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_DRAG'>/**User dragged+dropped the selection. */
+</span>ACTION_DRAG : &quot;106&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_ABANDON'>/**User abandoned the selection. */
+</span>ACTION_ABANDON : &quot;107&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_OTHER'>/**User performed an action on the selection. */
+</span>ACTION_OTHER : &quot;108&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_SELECT_ALL'>/**User activated Select All */
+</span>ACTION_SELECT_ALL : &quot;200&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-ACTION_RESET'>/**User reset the smart selection. */
+</span>ACTION_RESET : &quot;201&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-EVENT_SELECTION_STARTED'>/**User started a new selection. */
+</span>EVENT_SELECTION_STARTED : &quot;1&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-EVENT_SELECTION_MODIFIED'>/**User modified an existing selection. */
+</span>EVENT_SELECTION_MODIFIED : &quot;2&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-EVENT_SMART_SELECTION_SINGLE'>/**Smart selection triggered for a single token (word). */
+</span>EVENT_SMART_SELECTION_SINGLE : &quot;3&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-EVENT_SMART_SELECTION_MULTI'>/**Smart selection triggered spanning multiple tokens (words). */
+</span>EVENT_SMART_SELECTION_MULTI : &quot;4&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-EVENT_AUTO_SELECTION'>/**Something else other than User or the default TextClassifier triggered a selection. */
+</span>EVENT_AUTO_SELECTION : &quot;5&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-INVOCATION_MANUAL'>/**Selection was invoked by the user long pressing, double tapping, or dragging to select. */
+</span>INVOCATION_MANUAL : &quot;1&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-INVOCATION_LINK'>/**Selection was invoked by the user tapping on a link. */
+</span>INVOCATION_LINK : &quot;2&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-INVOCATION_UNKNOWN'>/**Unknown invocation method */
+</span>INVOCATION_UNKNOWN : &quot;0&quot;,
+<span id='android-view-textclassifier-SelectionEvent-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-view-textclassifier-SelectionEvent-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-createSelectionStartedEvent'>/**Creates a &quot;selection started&quot; event.
+</span>@param {Number} invocationMethod  the way the selection was triggered
+@param {Number} start  the index of the selected text
+*/
+createSelectionStartedEvent : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-createSelectionModifiedEvent'>/**Creates a &quot;selection modified&quot; event.
+</span> Use when the user modifies the selection.
+@param {Number} start  the start (inclusive) index of the selection
+@param {Number} end  the end (exclusive) index of the selection
+@throws IllegalArgumentException if end is less than start
+*/
+createSelectionModifiedEvent : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-createSelectionModifiedEvent'>/**Creates a &quot;selection modified&quot; event.
+</span> Use when the user modifies the selection and the selection's entity type is known.
+@param {Number} start  the start (inclusive) index of the selection
+@param {Number} end  the end (exclusive) index of the selection
+@param {Object {TextClassification}} classification  the TextClassification object returned by the TextClassifier that
+      classified the selected text
+@throws IllegalArgumentException if end is less than start
+*/
+createSelectionModifiedEvent : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-createSelectionModifiedEvent'>/**Creates a &quot;selection modified&quot; event.
+</span> Use when a TextClassifier modifies the selection.
+@param {Number} start  the start (inclusive) index of the selection
+@param {Number} end  the end (exclusive) index of the selection
+@param {Object {TextSelection}} selection  the TextSelection object returned by the TextClassifier for the
+      specified selection
+@throws IllegalArgumentException if end is less than start
+*/
+createSelectionModifiedEvent : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-createSelectionActionEvent'>/**Creates an event specifying an action taken on a selection.
+</span> Use when the user clicks on an action to act on the selected text.
+@param {Number} start  the start (inclusive) index of the selection
+@param {Number} end  the end (exclusive) index of the selection
+@param {Number} actionType  the action that was performed on the selection
+@throws IllegalArgumentException if end is less than start
+*/
+createSelectionActionEvent : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-createSelectionActionEvent'>/**Creates an event specifying an action taken on a selection.
+</span> Use when the user clicks on an action to act on the selected text and the selection's
+ entity type is known.
+@param {Number} start  the start (inclusive) index of the selection
+@param {Number} end  the end (exclusive) index of the selection
+@param {Number} actionType  the action that was performed on the selection
+@param {Object {TextClassification}} classification  the TextClassification object returned by the TextClassifier that
+      classified the selected text
+@throws IllegalArgumentException if end is less than start
+@throws IllegalArgumentException If actionType is not a valid SelectionEvent actionType
+*/
+createSelectionActionEvent : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getEventType'>/**Returns the type of event that was triggered. e.g. {@link #ACTION_COPY}.
+</span>*/
+getEventType : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setEventType'>/**Sets the event type.
+</span>@hide 
+*/
+setEventType : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getEntityType'>/**Returns the type of entity that is associated with this event. e.g.
+</span> {@link android.view.textclassifier.TextClassifier#TYPE_EMAIL}.
+*/
+getEntityType : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getPackageName'>/**Returns the package name of the app that this event originated in.
+</span>*/
+getPackageName : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getWidgetType'>/**Returns the type of widget that was involved in triggering this event.
+</span>*/
+getWidgetType : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getWidgetVersion'>/**Returns a string version info for the widget this event was triggered in.
+</span>*/
+getWidgetVersion : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setTextClassificationSessionContext'>/**Sets the {@link android.view.textclassifier.TextClassificationContext} for this event.
+</span>@hide 
+*/
+setTextClassificationSessionContext : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getInvocationMethod'>/**Returns the way the selection mode was invoked.
+</span>*/
+getInvocationMethod : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setInvocationMethod'>/**Sets the invocationMethod for this event.
+</span>@hide 
+*/
+setInvocationMethod : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getResultId'>/**Returns the id of the text classifier result associated with this event.
+</span>*/
+getResultId : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getEventTime'>/**Returns the time this event was triggered.
+</span>*/
+getEventTime : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getDurationSinceSessionStart'>/**Returns the duration in ms between when this event was triggered and when the first event in
+</span> the selection session was triggered.
+*/
+getDurationSinceSessionStart : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getDurationSincePreviousEvent'>/**Returns the duration in ms between when this event was triggered and when the previous event
+</span> in the selection session was triggered.
+*/
+getDurationSincePreviousEvent : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getEventIndex'>/**Returns the index (e.g. 1st event, 2nd event, etc.) of this event in the selection session.
+</span>*/
+getEventIndex : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setEventIndex'>/**
+</span>@hide 
+*/
+setEventIndex : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getSessionId'>/**Returns the selection session id.
+</span>*/
+getSessionId : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setSessionId'>/**
+</span>@hide 
+*/
+setSessionId : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getStart'>/**Returns the start index of this events relative to the index of the start selection
+</span> event in the selection session.
+*/
+getStart : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setStart'>/**
+</span>@hide 
+*/
+setStart : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getEnd'>/**Returns the end index of this events relative to the index of the start selection
+</span> event in the selection session.
+*/
+getEnd : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setEnd'>/**
+</span>@hide 
+*/
+setEnd : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getSmartStart'>/**Returns the start index of this events relative to the index of the smart selection
+</span> event in the selection session.
+*/
+getSmartStart : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setSmartStart'>/**
+</span>@hide 
+*/
+setSmartStart : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-getSmartEnd'>/**Returns the end index of this events relative to the index of the smart selection
+</span> event in the selection session.
+*/
+getSmartEnd : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-setSmartEnd'>/**
+</span>@hide 
+*/
+setSmartEnd : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-isTerminal'>/**Returns true if the eventType is a terminal event type. Otherwise returns false.
+</span> A terminal event is an event that ends a selection interaction.
+*/
+isTerminal : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-view-textclassifier-SelectionEvent-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

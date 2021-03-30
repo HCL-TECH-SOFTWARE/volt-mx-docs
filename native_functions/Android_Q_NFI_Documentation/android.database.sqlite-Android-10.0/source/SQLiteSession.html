@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-database-sqlite-SQLiteSession'>/**@class android.database.sqlite.SQLiteSession
+</span>@extends java.lang.Object
+
+ Provides a single client the ability to use a database.
+
+ &lt;h2&gt;About database sessions&lt;/h2&gt;
+ &lt;p&gt;
+ Database access is always performed using a session.  The session
+ manages the lifecycle of transactions and database connections.
+ &lt;/p&gt;&lt;p&gt;
+ Sessions can be used to perform both read-only and read-write operations.
+ There is some advantage to knowing when a session is being used for
+ read-only purposes because the connection pool can optimize the use
+ of the available connections to permit multiple read-only operations
+ to execute in parallel whereas read-write operations may need to be serialized.
+ &lt;/p&gt;&lt;p&gt;
+ When &lt;em&gt;Write Ahead Logging (WAL)&lt;/em&gt; is enabled, the database can
+ execute simultaneous read-only and read-write transactions, provided that
+ at most one read-write transaction is performed at a time.  When WAL is not
+ enabled, read-only transactions can execute in parallel but read-write
+ transactions are mutually exclusive.
+ &lt;/p&gt;
+
+ &lt;h2&gt;Ownership and concurrency guarantees&lt;/h2&gt;
+ &lt;p&gt;
+ Session objects are not thread-safe.  In fact, session objects are thread-bound.
+ The {@link android.database.sqlite.SQLiteDatabase} uses a thread-local variable to associate a session
+ with each thread for the use of that thread alone.  Consequently, each thread
+ has its own session object and therefore its own transaction state independent
+ of other threads.
+ &lt;/p&gt;&lt;p&gt;
+ A thread has at most one session per database.  This constraint ensures that
+ a thread can never use more than one database connection at a time for a
+ given database.  As the number of available database connections is limited,
+ if a single thread tried to acquire multiple connections for the same database
+ at the same time, it might deadlock.  Therefore we allow there to be only
+ one session (so, at most one connection) per thread per database.
+ &lt;/p&gt;
+
+ &lt;h2&gt;Transactions&lt;/h2&gt;
+ &lt;p&gt;
+ There are two kinds of transaction: implicit transactions and explicit
+ transactions.
+ &lt;/p&gt;&lt;p&gt;
+ An implicit transaction is created whenever a database operation is requested
+ and there is no explicit transaction currently in progress.  An implicit transaction
+ only lasts for the duration of the database operation in question and then it
+ is ended.  If the database operation was successful, then its changes are committed.
+ &lt;/p&gt;&lt;p&gt;
+ An explicit transaction is started by calling {@link #beginTransaction} and
+ specifying the desired transaction mode.  Once an explicit transaction has begun,
+ all subsequent database operations will be performed as part of that transaction.
+ To end an explicit transaction, first call {@link #setTransactionSuccessful} if the
+ transaction was successful, then call {@link #end}.  If the transaction was
+ marked successful, its changes will be committed, otherwise they will be rolled back.
+ &lt;/p&gt;&lt;p&gt;
+ Explicit transactions can also be nested.  A nested explicit transaction is
+ started with {@link #beginTransaction}, marked successful with
+ {@link #setTransactionSuccessful}and ended with {@link #endTransaction}.
+ If any nested transaction is not marked successful, then the entire transaction
+ including all of its nested transactions will be rolled back
+ when the outermost transaction is ended.
+ &lt;/p&gt;&lt;p&gt;
+ To improve concurrency, an explicit transaction can be yielded by calling
+ {@link #yieldTransaction}.  If there is contention for use of the database,
+ then yielding ends the current transaction, commits its changes, releases the
+ database connection for use by another session for a little while, and starts a
+ new transaction with the same properties as the original one.
+ Changes committed by {@link #yieldTransaction} cannot be rolled back.
+ &lt;/p&gt;&lt;p&gt;
+ When a transaction is started, the client can provide a {@link android.database.sqlite.SQLiteTransactionListener}
+ to listen for notifications of transaction-related events.
+ &lt;/p&gt;&lt;p&gt;
+ Recommended usage:
+ &lt;code&gt;&lt;pre&gt;
+ // First, begin the transaction.
+ session.beginTransaction(SQLiteSession.TRANSACTION_MODE_DEFERRED, 0);
+ try {
+     // Then do stuff...
+     session.execute(&quot;INSERT INTO ...&quot;, null, 0);
+
+     // As the very last step before ending the transaction, mark it successful.
+     session.setTransactionSuccessful();
+ } finally {
+     // Finally, end the transaction.
+     // This statement will commit the transaction if it was marked successful or
+     // roll it back otherwise.
+     session.endTransaction();
+ }
+ &lt;/pre&gt;&lt;/code&gt;
+ &lt;/p&gt;
+
+ &lt;h2&gt;Database connections&lt;/h2&gt;
+ &lt;p&gt;
+ A {@link android.database.sqlite.SQLiteDatabase} can have multiple active sessions at the same
+ time.  Each session acquires and releases connections to the database
+ as needed to perform each requested database transaction.  If all connections
+ are in use, then database transactions on some sessions will block until a
+ connection becomes available.
+ &lt;/p&gt;&lt;p&gt;
+ The session acquires a single database connection only for the duration
+ of a single (implicit or explicit) database transaction, then releases it.
+ This characteristic allows a small pool of database connections to be shared
+ efficiently by multiple sessions as long as they are not all trying to perform
+ database transactions at the same time.
+ &lt;/p&gt;
+
+ &lt;h2&gt;Responsiveness&lt;/h2&gt;
+ &lt;p&gt;
+ Because there are a limited number of database connections and the session holds
+ a database connection for the entire duration of a database transaction,
+ it is important to keep transactions short.  This is especially important
+ for read-write transactions since they may block other transactions
+ from executing.  Consider calling {@link #yieldTransaction} periodically
+ during long-running transactions.
+ &lt;/p&gt;&lt;p&gt;
+ Another important consideration is that transactions that take too long to
+ run may cause the application UI to become unresponsive.  Even if the transaction
+ is executed in a background thread, the user will get bored and
+ frustrated if the application shows no data for several seconds while
+ a transaction runs.
+ &lt;/p&gt;&lt;p&gt;
+ Guidelines:
+ &lt;ul&gt;
+ &lt;li&gt;Do not perform database transactions on the UI thread.&lt;/li&gt;
+ &lt;li&gt;Keep database transactions as short as possible.&lt;/li&gt;
+ &lt;li&gt;Simple queries often run faster than complex queries.&lt;/li&gt;
+ &lt;li&gt;Measure the performance of your database transactions.&lt;/li&gt;
+ &lt;li&gt;Consider what will happen when the size of the data set grows.
+ A query that works well on 100 rows may struggle with 10,000.&lt;/li&gt;
+ &lt;/ul&gt;
+
+ &lt;h2&gt;Reentrance&lt;/h2&gt;
+ &lt;p&gt;
+ This class must tolerate reentrant execution of SQLite operations because
+ triggers may call custom SQLite functions that perform additional queries.
+ &lt;/p&gt;
+
+ @hide
+*/
+var SQLiteSession = {
+
+<span id='android-database-sqlite-SQLiteSession-property-TRANSACTION_MODE_DEFERRED'>/** Transaction mode: Deferred.
+</span> &lt;p&gt;
+ In a deferred transaction, no locks are acquired on the database
+ until the first operation is performed.  If the first operation is
+ read-only, then a &lt;code&gt;SHARED&lt;/code&gt; lock is acquired, otherwise
+ a &lt;code&gt;RESERVED&lt;/code&gt; lock is acquired.
+ &lt;/p&gt;&lt;p&gt;
+ While holding a &lt;code&gt;SHARED&lt;/code&gt; lock, this session is only allowed to
+ read but other sessions are allowed to read or write.
+ While holding a &lt;code&gt;RESERVED&lt;/code&gt; lock, this session is allowed to read
+ or write but other sessions are only allowed to read.
+ &lt;/p&gt;&lt;p&gt;
+ Because the lock is only acquired when needed in a deferred transaction,
+ it is possible for another session to write to the database first before
+ this session has a chance to do anything.
+ &lt;/p&gt;&lt;p&gt;
+ Corresponds to the SQLite &lt;code&gt;BEGIN DEFERRED&lt;/code&gt; transaction mode.
+ &lt;/p&gt;
+*/
+TRANSACTION_MODE_DEFERRED : &quot;0&quot;,
+<span id='android-database-sqlite-SQLiteSession-property-TRANSACTION_MODE_IMMEDIATE'>/** Transaction mode: Immediate.
+</span> &lt;p&gt;
+ When an immediate transaction begins, the session acquires a
+ &lt;code&gt;RESERVED&lt;/code&gt; lock.
+ &lt;/p&gt;&lt;p&gt;
+ While holding a &lt;code&gt;RESERVED&lt;/code&gt; lock, this session is allowed to read
+ or write but other sessions are only allowed to read.
+ &lt;/p&gt;&lt;p&gt;
+ Corresponds to the SQLite &lt;code&gt;BEGIN IMMEDIATE&lt;/code&gt; transaction mode.
+ &lt;/p&gt;
+*/
+TRANSACTION_MODE_IMMEDIATE : &quot;1&quot;,
+<span id='android-database-sqlite-SQLiteSession-property-TRANSACTION_MODE_EXCLUSIVE'>/** Transaction mode: Exclusive.
+</span> &lt;p&gt;
+ When an exclusive transaction begins, the session acquires an
+ &lt;code&gt;EXCLUSIVE&lt;/code&gt; lock.
+ &lt;/p&gt;&lt;p&gt;
+ While holding an &lt;code&gt;EXCLUSIVE&lt;/code&gt; lock, this session is allowed to read
+ or write but no other sessions are allowed to access the database.
+ &lt;/p&gt;&lt;p&gt;
+ Corresponds to the SQLite &lt;code&gt;BEGIN EXCLUSIVE&lt;/code&gt; transaction mode.
+ &lt;/p&gt;
+*/
+TRANSACTION_MODE_EXCLUSIVE : &quot;2&quot;,
+<span id='android-database-sqlite-SQLiteSession-method-hasTransaction'>/**Returns true if the session has a transaction in progress.
+</span>@return {Boolean} True if the session has a transaction in progress.
+*/
+hasTransaction : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-hasNestedTransaction'>/**Returns true if the session has a nested transaction in progress.
+</span>@return {Boolean} True if the session has a nested transaction in progress.
+*/
+hasNestedTransaction : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-hasConnection'>/**Returns true if the session has an active database connection.
+</span>@return {Boolean} True if the session has an active database connection.
+*/
+hasConnection : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-beginTransaction'>/**Begins a transaction.
+</span> &lt;p&gt;
+ Transactions may nest.  If the transaction is not in progress,
+ then a database connection is obtained and a new transaction is started.
+ Otherwise, a nested transaction is started.
+ &lt;/p&gt;&lt;p&gt;
+ Each call to {@link #beginTransaction} must be matched exactly by a call
+ to {@link #endTransaction}.  To mark a transaction as successful,
+ call {@link #setTransactionSuccessful} before calling {@link #endTransaction}.
+ If the transaction is not successful, or if any of its nested
+ transactions were not successful, then the entire transaction will
+ be rolled back when the outermost transaction is ended.
+ &lt;/p&gt;
+@param {Number} transactionMode The transaction mode.  One of: {@link #TRANSACTION_MODE_DEFERRED},
+ {@link #TRANSACTION_MODE_IMMEDIATE}, or {@link #TRANSACTION_MODE_EXCLUSIVE}.
+ Ignored when creating a nested transaction.
+@param {Object {SQLiteTransactionListener}} transactionListener The transaction listener, or null if none.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@throws IllegalStateException if {@link #setTransactionSuccessful} has already been
+ called for the current transaction.
+@throws SQLiteException if an error occurs.
+@throws OperationCanceledException if the operation was canceled.
+@see #setTransactionSuccessful
+@see #yieldTransaction
+@see #endTransaction
+*/
+beginTransaction : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-setTransactionSuccessful'>/**Marks the current transaction as having completed successfully.
+</span> &lt;p&gt;
+ This method can be called at most once between {@link #beginTransaction} and
+ {@link #endTransaction} to indicate that the changes made by the transaction should be
+ committed.  If this method is not called, the changes will be rolled back
+ when the transaction is ended.
+ &lt;/p&gt;
+@throws IllegalStateException if there is no current transaction, or if
+ {@link #setTransactionSuccessful} has already been called for the current transaction.
+@see #beginTransaction
+@see #endTransaction
+*/
+setTransactionSuccessful : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-endTransaction'>/**Ends the current transaction and commits or rolls back changes.
+</span> &lt;p&gt;
+ If this is the outermost transaction (not nested within any other
+ transaction), then the changes are committed if {@link #setTransactionSuccessful}
+ was called or rolled back otherwise.
+ &lt;/p&gt;&lt;p&gt;
+ This method must be called exactly once for each call to {@link #beginTransaction}.
+ &lt;/p&gt;
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@throws IllegalStateException if there is no current transaction.
+@throws SQLiteException if an error occurs.
+@throws OperationCanceledException if the operation was canceled.
+@see #beginTransaction
+@see #setTransactionSuccessful
+@see #yieldTransaction
+*/
+endTransaction : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-yieldTransaction'>/**Temporarily ends a transaction to let other threads have use of
+</span> the database.  Begins a new transaction after a specified delay.
+ &lt;p&gt;
+ If there are other threads waiting to acquire connections,
+ then the current transaction is committed and the database
+ connection is released.  After a short delay, a new transaction
+ is started.
+ &lt;/p&gt;&lt;p&gt;
+ The transaction is assumed to be successful so far.  Do not call
+ {@link #setTransactionSuccessful}() before calling this method.
+ This method will fail if the transaction has already been marked
+ successful.
+ &lt;/p&gt;&lt;p&gt;
+ The changes that were committed by a yield cannot be rolled back later.
+ &lt;/p&gt;&lt;p&gt;
+ Before this method was called, there must already have been
+ a transaction in progress.  When this method returns, there will
+ still be a transaction in progress, either the same one as before
+ or a new one if the transaction was actually yielded.
+ &lt;/p&gt;&lt;p&gt;
+ This method should not be called when there is a nested transaction
+ in progress because it is not possible to yield a nested transaction.
+ If &lt;code&gt;throwIfNested&lt;/code&gt; is true, then attempting to yield
+ a nested transaction will throw {@link IllegalStateException}, otherwise
+ the method will return &lt;code&gt;false&lt;/code&gt; in that case.
+ &lt;/p&gt;&lt;p&gt;
+ If there is no nested transaction in progress but a previous nested
+ transaction failed, then the transaction is not yielded (because it
+ must be rolled back) and this method returns &lt;code&gt;false&lt;/code&gt;.
+ &lt;/p&gt;
+@param {Number} sleepAfterYieldDelayMillis A delay time to wait after yielding
+ the database connection to allow other threads some time to run.
+ If the value is less than or equal to zero, there will be no additional
+ delay beyond the time it will take to begin a new transaction.
+@param {Boolean} throwIfUnsafe If true, then instead of returning false when no
+ transaction is in progress, a nested transaction is in progress, or when
+ the transaction has already been marked successful, throws {@link IllegalStateException}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Boolean} True if the transaction was actually yielded.
+@throws IllegalStateException if &lt;code&gt;throwIfNested&lt;/code&gt; is true and
+ there is no current transaction, there is a nested transaction in progress or
+ if {@link #setTransactionSuccessful} has already been called for the current transaction.
+@throws SQLiteException if an error occurs.
+@throws OperationCanceledException if the operation was canceled.
+@see #beginTransaction
+@see #endTransaction
+*/
+yieldTransaction : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-prepare'>/**Prepares a statement for execution but does not bind its parameters or execute it.
+</span> &lt;p&gt;
+ This method can be used to check for syntax errors during compilation
+ prior to execution of the statement.  If the {@code outStatementInfo} argument
+ is not null, the provided {@link android.database.sqlite.SQLiteStatementInfo} object is populated
+ with information about the statement.
+ &lt;/p&gt;&lt;p&gt;
+ A prepared statement makes no reference to the arguments that may eventually
+ be bound to it, consequently it it possible to cache certain prepared statements
+ such as SELECT or INSERT/UPDATE statements.  If the statement is cacheable,
+ then it will be stored in the cache for later and reused if possible.
+ &lt;/p&gt;
+@param {String} sql The SQL statement to prepare.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@param {Object {SQLiteStatementInfo}} outStatementInfo The {@link SQLiteStatementInfo} object to populate
+ with information about the statement, or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error.
+@throws OperationCanceledException if the operation was canceled.
+*/
+prepare : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-execute'>/**Executes a statement that does not return a result.
+</span>@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+execute : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-executeForLong'>/**Executes a statement that returns a single &lt;code&gt;long&lt;/code&gt; result.
+</span>@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The value of the first column in the first row of the result set
+ as a &lt;code&gt;long&lt;/code&gt;, or zero if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForLong : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-executeForString'>/**Executes a statement that returns a single {@link String} result.
+</span>@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {String} The value of the first column in the first row of the result set
+ as a &lt;code&gt;String&lt;/code&gt;, or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForString : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-executeForBlobFileDescriptor'>/**Executes a statement that returns a single BLOB result as a
+</span> file descriptor to a shared memory region.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Object {android.os.ParcelFileDescriptor}} The file descriptor for a shared memory region that contains
+ the value of the first column in the first row of the result set as a BLOB,
+ or null if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForBlobFileDescriptor : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-executeForChangedRowCount'>/**Executes a statement that returns a count of the number of rows
+</span> that were changed.  Use for UPDATE or DELETE SQL statements.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The number of rows that were changed.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForChangedRowCount : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-executeForLastInsertedRowId'>/**Executes a statement that returns the row id of the last row inserted
+</span> by the statement.  Use for INSERT SQL statements.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The row id of the last row that was inserted, or 0 if none.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForLastInsertedRowId : function(  ) {},
+
+<span id='android-database-sqlite-SQLiteSession-method-executeForCursorWindow'>/**Executes a statement and populates the specified {@link CursorWindow}
+</span> with a range of results.  Returns the number of rows that were counted
+ during query execution.
+@param {String} sql The SQL statement to execute.
+@param {Object {java.lang.Object[]}} bindArgs The arguments to bind, or null if none.
+@param {Object {CursorWindow}} window The cursor window to clear and fill.
+@param {Number} startPos The start position for filling the window.
+@param {Number} requiredPos The position of a row that MUST be in the window.
+ If it won't fit, then the query should discard part of what it filled
+ so that it does.  Must be greater than or equal to &lt;code&gt;startPos&lt;/code&gt;.
+@param {Boolean} countAllRows True to count all rows that the query would return
+ regagless of whether they fit in the window.
+@param {Number} connectionFlags The connection flags to use if a connection must be
+ acquired by this operation.  Refer to {@link SQLiteConnectionPool}.
+@param {Object {CancellationSignal}} cancellationSignal A signal to cancel the operation in progress, or null if none.
+@return {Number} The number of rows that were counted during query execution.  Might
+ not be all rows in the result set unless &lt;code&gt;countAllRows&lt;/code&gt; is true.
+@throws SQLiteException if an error occurs, such as a syntax error
+ or invalid number of bind arguments.
+@throws OperationCanceledException if the operation was canceled.
+*/
+executeForCursorWindow : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-radio-RadioTuner-Callback'>/**@class android.hardware.radio.RadioTuner.Callback
+</span>@extends java.lang.Object
+
+ Callback provided by the client application when opening a {@link android.hardware.radio.RadioTuner}
+ to receive asynchronous operation results, updates and error notifications.
+*/
+var Callback = {
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onError'>/**onError() is called when an error occured while performing an asynchronous
+</span> operation of when the hardware or system service experiences a problem.
+ status is one of {@link #ERROR_HARDWARE_FAILURE}, {@link #ERROR_SERVER_DIED},
+ {@link #ERROR_CANCELLED}, {@link #ERROR_SCAN_TIMEOUT},
+ {@link #ERROR_CONFIG}
+@deprecated Use {@link onTuneFailed} for tune, scan and step;
+             other use cases (configuration, background scan) are already deprecated.
+*/
+onError : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onTuneFailed'>/**Called when tune, scan or step operation fails.
+</span>@param {Number} result cause of the failure
+@param {Object {ProgramSelector}} selector ProgramSelector argument of tune that failed;
+                 null for scan and step.
+*/
+onTuneFailed : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onConfigurationChanged'>/**onConfigurationChanged() is called upon successful completion of
+</span> {@link android.hardware.radio.RadioManager#openTuner(int, android.hardware.radio.RadioManager.BandConfig, boolean, android.hardware.radio.RadioTuner.Callback, Handler)}
+ or {@link android.hardware.radio.RadioTuner#setConfiguration(RadioManager.BandConfig)}
+@deprecated Only applicable for HAL 1.x.
+*/
+onConfigurationChanged : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onProgramInfoChanged'>/**Called when program info (including metadata) for the current program has changed.
+</span>
+ It happens either upon successful completion of {@link android.hardware.radio.RadioTuner#step(int, boolean)},
+ {@link android.hardware.radio.RadioTuner#scan(int, boolean)}, {@link android.hardware.radio.RadioTuner#tune(int, int)}; when
+ a switching to alternate frequency occurs; or when metadata is updated.
+*/
+onProgramInfoChanged : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onMetadataChanged'>/**Called when metadata is updated for the current program.
+</span>@deprecated Use {@link #onProgramInfoChanged(RadioManager.ProgramInfo)} instead.
+*/
+onMetadataChanged : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onTrafficAnnouncement'>/**onTrafficAnnouncement() is called when a traffic announcement starts and stops.
+</span>*/
+onTrafficAnnouncement : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onEmergencyAnnouncement'>/**onEmergencyAnnouncement() is called when an emergency annoucement starts and stops.
+</span>*/
+onEmergencyAnnouncement : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onAntennaState'>/**onAntennaState() is called when the antenna is connected or disconnected.
+</span>*/
+onAntennaState : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onControlChanged'>/**onControlChanged() is called when the client loses or gains control of the radio tuner.
+</span> The control is always granted after a successful call to
+ {@link android.hardware.radio.RadioManager#openTuner(int, android.hardware.radio.RadioManager.BandConfig, boolean, android.hardware.radio.RadioTuner.Callback, Handler)}.
+ If another client opens the same tuner, onControlChanged() will be called with
+ control set to {@code false} to indicate loss of control.
+ At this point, RadioTuner APIs other than getters will return
+ {@link android.hardware.radio.RadioManager#STATUS_INVALID_OPERATION}.
+ When the other client releases the tuner, onControlChanged() will be called
+ with control set to {@code true}.
+*/
+onControlChanged : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onBackgroundScanAvailabilityChange'>/**onBackgroundScanAvailabilityChange() is called when background scan
+</span> feature becomes available or not.
+@param {Boolean} isAvailable true, if the tuner turned temporarily background-
+                    capable, false in the other case.
+*/
+onBackgroundScanAvailabilityChange : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onBackgroundScanComplete'>/**Called when a background scan completes successfully.
+</span>*/
+onBackgroundScanComplete : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onProgramListChanged'>/**Called when available program list changed.
+</span>
+ Use {@link android.hardware.radio.RadioTuner#getProgramList(String)} to get an actual list.
+*/
+onProgramListChanged : function(  ) {},
+
+<span id='android-hardware-radio-RadioTuner-Callback-method-onParametersUpdated'>/**Generic callback for passing updates to vendor-specific parameter values.
+</span> The framework does not interpret the parameters, they are passed
+ in an opaque manner between a vendor application and HAL.
+
+ It's up to the HAL implementation if and how to implement this callback,
+ as long as it obeys the prefix rule. In particular, only selected keys
+ may be notified this way. However, setParameters must not trigger
+ this callback, while an internal event can change parameters
+ asynchronously.
+@param {Object {java.util.Map}} parameters Vendor-specific key-value pairs.
+*/
+onParametersUpdated : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

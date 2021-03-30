@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-nsd-NsdManager'>/**@class android.net.nsd.NsdManager
+</span>@extends java.lang.Object
+
+ The Network Service Discovery Manager class provides the API to discover services
+ on a network. As an example, if device A and device B are connected over a Wi-Fi
+ network, a game registered on device A can be discovered by a game on device
+ B. Another example use case is an application discovering printers on the network.
+
+ &lt;p&gt; The API currently supports DNS based service discovery and discovery is currently
+ limited to a local network over Multicast DNS. DNS service discovery is described at
+ http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt
+
+ &lt;p&gt; The API is asynchronous and responses to requests from an application are on listener
+ callbacks on a seperate internal thread.
+
+ &lt;p&gt; There are three main operations the API supports - registration, discovery and resolution.
+ &lt;pre&gt;
+                          Application start
+                                 |
+                                 |
+                                 |                  onServiceRegistered()
+                     Register any local services  /
+                      to be advertised with       \
+                       registerService()            onRegistrationFailed()
+                                 |
+                                 |
+                          discoverServices()
+                                 |
+                      Maintain a list to track
+                        discovered services
+                                 |
+                                 |---------&gt;
+                                 |          |
+                                 |      onServiceFound()
+                                 |          |
+                                 |     add service to list
+                                 |          |
+                                 |&lt;----------
+                                 |
+                                 |---------&gt;
+                                 |          |
+                                 |      onServiceLost()
+                                 |          |
+                                 |   remove service from list
+                                 |          |
+                                 |&lt;----------
+                                 |
+                                 |
+                                 | Connect to a service
+                                 | from list ?
+                                 |
+                          resolveService()
+                                 |
+                         onServiceResolved()
+                                 |
+                     Establish connection to service
+                     with the host and port information
+
+ &lt;/pre&gt;
+ An application that needs to advertise itself over a network for other applications to
+ discover it can do so with a call to {@link #registerService}. If Example is a http based
+ application that can provide HTML data to peer services, it can register a name &quot;Example&quot;
+ with service type &quot;_http._tcp&quot;. A successful registration is notified with a callback to
+ {@link android.net.nsd.NsdManager.RegistrationListener#onServiceRegistered} and a failure to register is notified
+ over {@link android.net.nsd.NsdManager.RegistrationListener#onRegistrationFailed}
+
+ &lt;p&gt; A peer application looking for http services can initiate a discovery for &quot;_http._tcp&quot;
+ with a call to {@link #discoverServices}. A service found is notified with a callback
+ to {@link android.net.nsd.NsdManager.DiscoveryListener#onServiceFound} and a service lost is notified on
+ {@link android.net.nsd.NsdManager.DiscoveryListener#onServiceLost}.
+
+ &lt;p&gt; Once the peer application discovers the &quot;Example&quot; http service, and either needs to read the
+ attributes of the service or wants to receive data from the &quot;Example&quot; application, it can
+ initiate a resolve with {@link #resolveService} to resolve the attributes, host, and port
+ details. A successful resolve is notified on {@link android.net.nsd.NsdManager.ResolveListener#onServiceResolved} and a
+ failure is notified on {@link android.net.nsd.NsdManager.ResolveListener#onResolveFailed}.
+
+ Applications can reserve for a service type at
+ http://www.iana.org/form/ports-service. Existing services can be found at
+ http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml
+
+ {@see NsdServiceInfo}
+*/
+var NsdManager = {
+
+<span id='android-net-nsd-NsdManager-property-ACTION_NSD_STATE_CHANGED'>/** Broadcast intent action to indicate whether network service discovery is
+</span> enabled or disabled. An extra {@link #EXTRA_NSD_STATE} provides the state
+ information as int.
+
+ @see #EXTRA_NSD_STATE
+*/
+ACTION_NSD_STATE_CHANGED : &quot;android.net.nsd.STATE_CHANGED&quot;,
+<span id='android-net-nsd-NsdManager-property-EXTRA_NSD_STATE'>/** The lookup key for an int that indicates whether network service discovery is enabled
+</span> or disabled. Retrieve it with {@link android.content.Intent#getIntExtra(String,int)}.
+
+ @see #NSD_STATE_DISABLED
+ @see #NSD_STATE_ENABLED
+*/
+EXTRA_NSD_STATE : &quot;nsd_state&quot;,
+<span id='android-net-nsd-NsdManager-property-NSD_STATE_DISABLED'>/** Network service discovery is disabled
+</span>
+ @see #ACTION_NSD_STATE_CHANGED
+*/
+NSD_STATE_DISABLED : &quot;1&quot;,
+<span id='android-net-nsd-NsdManager-property-NSD_STATE_ENABLED'>/** Network service discovery is enabled
+</span>
+ @see #ACTION_NSD_STATE_CHANGED
+*/
+NSD_STATE_ENABLED : &quot;2&quot;,
+<span id='android-net-nsd-NsdManager-property-DISCOVER_SERVICES'>/**@hide */
+</span>DISCOVER_SERVICES : &quot;393217&quot;,
+<span id='android-net-nsd-NsdManager-property-DISCOVER_SERVICES_STARTED'>/**@hide */
+</span>DISCOVER_SERVICES_STARTED : &quot;393218&quot;,
+<span id='android-net-nsd-NsdManager-property-DISCOVER_SERVICES_FAILED'>/**@hide */
+</span>DISCOVER_SERVICES_FAILED : &quot;393219&quot;,
+<span id='android-net-nsd-NsdManager-property-SERVICE_FOUND'>/**@hide */
+</span>SERVICE_FOUND : &quot;393220&quot;,
+<span id='android-net-nsd-NsdManager-property-SERVICE_LOST'>/**@hide */
+</span>SERVICE_LOST : &quot;393221&quot;,
+<span id='android-net-nsd-NsdManager-property-STOP_DISCOVERY'>/**@hide */
+</span>STOP_DISCOVERY : &quot;393222&quot;,
+<span id='android-net-nsd-NsdManager-property-STOP_DISCOVERY_FAILED'>/**@hide */
+</span>STOP_DISCOVERY_FAILED : &quot;393223&quot;,
+<span id='android-net-nsd-NsdManager-property-STOP_DISCOVERY_SUCCEEDED'>/**@hide */
+</span>STOP_DISCOVERY_SUCCEEDED : &quot;393224&quot;,
+<span id='android-net-nsd-NsdManager-property-REGISTER_SERVICE'>/**@hide */
+</span>REGISTER_SERVICE : &quot;393225&quot;,
+<span id='android-net-nsd-NsdManager-property-REGISTER_SERVICE_FAILED'>/**@hide */
+</span>REGISTER_SERVICE_FAILED : &quot;393226&quot;,
+<span id='android-net-nsd-NsdManager-property-REGISTER_SERVICE_SUCCEEDED'>/**@hide */
+</span>REGISTER_SERVICE_SUCCEEDED : &quot;393227&quot;,
+<span id='android-net-nsd-NsdManager-property-UNREGISTER_SERVICE'>/**@hide */
+</span>UNREGISTER_SERVICE : &quot;393228&quot;,
+<span id='android-net-nsd-NsdManager-property-UNREGISTER_SERVICE_FAILED'>/**@hide */
+</span>UNREGISTER_SERVICE_FAILED : &quot;393229&quot;,
+<span id='android-net-nsd-NsdManager-property-UNREGISTER_SERVICE_SUCCEEDED'>/**@hide */
+</span>UNREGISTER_SERVICE_SUCCEEDED : &quot;393230&quot;,
+<span id='android-net-nsd-NsdManager-property-RESOLVE_SERVICE'>/**@hide */
+</span>RESOLVE_SERVICE : &quot;393234&quot;,
+<span id='android-net-nsd-NsdManager-property-RESOLVE_SERVICE_FAILED'>/**@hide */
+</span>RESOLVE_SERVICE_FAILED : &quot;393235&quot;,
+<span id='android-net-nsd-NsdManager-property-RESOLVE_SERVICE_SUCCEEDED'>/**@hide */
+</span>RESOLVE_SERVICE_SUCCEEDED : &quot;393236&quot;,
+<span id='android-net-nsd-NsdManager-property-ENABLE'>/**@hide */
+</span>ENABLE : &quot;393240&quot;,
+<span id='android-net-nsd-NsdManager-property-DISABLE'>/**@hide */
+</span>DISABLE : &quot;393241&quot;,
+<span id='android-net-nsd-NsdManager-property-NATIVE_DAEMON_EVENT'>/**@hide */
+</span>NATIVE_DAEMON_EVENT : &quot;393242&quot;,
+<span id='android-net-nsd-NsdManager-property-PROTOCOL_DNS_SD'>/**Dns based service discovery protocol */
+</span>PROTOCOL_DNS_SD : &quot;1&quot;,
+<span id='android-net-nsd-NsdManager-property-FAILURE_INTERNAL_ERROR'>/** Failures are passed with {@link android.net.nsd.NsdManager.RegistrationListener#onRegistrationFailed},
+</span> {@link android.net.nsd.NsdManager.RegistrationListener#onUnregistrationFailed},
+ {@link android.net.nsd.NsdManager.DiscoveryListener#onStartDiscoveryFailed},
+ {@link android.net.nsd.NsdManager.DiscoveryListener#onStopDiscoveryFailed} or {@link android.net.nsd.NsdManager.ResolveListener#onResolveFailed}.
+
+ Indicates that the operation failed due to an internal error.
+*/
+FAILURE_INTERNAL_ERROR : &quot;0&quot;,
+<span id='android-net-nsd-NsdManager-property-FAILURE_ALREADY_ACTIVE'>/** Indicates that the operation failed because it is already active.
+</span>*/
+FAILURE_ALREADY_ACTIVE : &quot;3&quot;,
+<span id='android-net-nsd-NsdManager-property-FAILURE_MAX_LIMIT'>/** Indicates that the operation failed because the maximum outstanding
+</span> requests from the applications have reached.
+*/
+FAILURE_MAX_LIMIT : &quot;4&quot;,
+<span id='android-net-nsd-NsdManager-method-nameOf'>/**
+</span>@hide 
+*/
+nameOf : function(  ) {},
+
+<span id='android-net-nsd-NsdManager-method-disconnect'>/**
+</span>@hide 
+*/
+disconnect : function(  ) {},
+
+<span id='android-net-nsd-NsdManager-method-registerService'>/**Register a service to be discovered by other services.
+</span>
+ &lt;p&gt; The function call immediately returns after sending a request to register service
+ to the framework. The application is notified of a successful registration
+ through the callback {@link android.net.nsd.NsdManager.RegistrationListener#onServiceRegistered} or a failure
+ through {@link android.net.nsd.NsdManager.RegistrationListener#onRegistrationFailed}.
+
+ &lt;p&gt; The application should call {@link #unregisterService} when the service
+ registration is no longer required, and/or whenever the application is stopped.
+@param {Object {NsdServiceInfo}} serviceInfo The service being registered
+@param {Number} protocolType The service discovery protocol
+@param {Object {NsdManager.RegistrationListener}} listener The listener notifies of a successful registration and is used to
+ unregister this service through a call on {@link #unregisterService}. Cannot be null.
+ Cannot be in use for an active service registration.
+*/
+registerService : function(  ) {},
+
+<span id='android-net-nsd-NsdManager-method-unregisterService'>/**Unregister a service registered through {@link #registerService}. A successful
+</span> unregister is notified to the application with a call to
+ {@link android.net.nsd.NsdManager.RegistrationListener#onServiceUnregistered}.
+@param {Object {NsdManager.RegistrationListener}} listener This should be the listener object that was passed to
+ {@link #registerService}. It identifies the service that should be unregistered
+ and notifies of a successful or unsuccessful unregistration via the listener
+ callbacks.  In API versions 20 and above, the listener object may be used for
+ another service registration once the callback has been called.  In API versions &lt;= 19,
+ there is no entirely reliable way to know when a listener may be re-used, and a new
+ listener should be created for each service registration request.
+*/
+unregisterService : function(  ) {},
+
+<span id='android-net-nsd-NsdManager-method-discoverServices'>/**Initiate service discovery to browse for instances of a service type. Service discovery
+</span> consumes network bandwidth and will continue until the application calls
+ {@link #stopServiceDiscovery}.
+
+ &lt;p&gt; The function call immediately returns after sending a request to start service
+ discovery to the framework. The application is notified of a success to initiate
+ discovery through the callback {@link android.net.nsd.NsdManager.DiscoveryListener#onDiscoveryStarted} or a failure
+ through {@link android.net.nsd.NsdManager.DiscoveryListener#onStartDiscoveryFailed}.
+
+ &lt;p&gt; Upon successful start, application is notified when a service is found with
+ {@link android.net.nsd.NsdManager.DiscoveryListener#onServiceFound} or when a service is lost with
+ {@link android.net.nsd.NsdManager.DiscoveryListener#onServiceLost}.
+
+ &lt;p&gt; Upon failure to start, service discovery is not active and application does
+ not need to invoke {@link #stopServiceDiscovery}
+
+ &lt;p&gt; The application should call {@link #stopServiceDiscovery} when discovery of this
+ service type is no longer required, and/or whenever the application is paused or
+ stopped.
+@param {String} serviceType The service type being discovered. Examples include &quot;_http._tcp&quot; for
+ http services or &quot;_ipp._tcp&quot; for printers
+@param {Number} protocolType The service discovery protocol
+@param {Object {NsdManager.DiscoveryListener}} listener  The listener notifies of a successful discovery and is used
+ to stop discovery on this serviceType through a call on {@link #stopServiceDiscovery}.
+ Cannot be null. Cannot be in use for an active service discovery.
+*/
+discoverServices : function(  ) {},
+
+<span id='android-net-nsd-NsdManager-method-stopServiceDiscovery'>/**Stop service discovery initiated with {@link #discoverServices}.  An active service
+</span> discovery is notified to the application with {@link android.net.nsd.NsdManager.DiscoveryListener#onDiscoveryStarted}
+ and it stays active until the application invokes a stop service discovery. A successful
+ stop is notified to with a call to {@link android.net.nsd.NsdManager.DiscoveryListener#onDiscoveryStopped}.
+
+ &lt;p&gt; Upon failure to stop service discovery, application is notified through
+ {@link android.net.nsd.NsdManager.DiscoveryListener#onStopDiscoveryFailed}.
+@param {Object {NsdManager.DiscoveryListener}} listener This should be the listener object that was passed to {@link #discoverServices}.
+ It identifies the discovery that should be stopped and notifies of a successful or
+ unsuccessful stop.  In API versions 20 and above, the listener object may be used for
+ another service discovery once the callback has been called.  In API versions &lt;= 19,
+ there is no entirely reliable way to know when a listener may be re-used, and a new
+ listener should be created for each service discovery request.
+*/
+stopServiceDiscovery : function(  ) {},
+
+<span id='android-net-nsd-NsdManager-method-resolveService'>/**Resolve a discovered service. An application can resolve a service right before
+</span> establishing a connection to fetch the IP and port details on which to setup
+ the connection.
+@param {Object {NsdServiceInfo}} serviceInfo service to be resolved
+@param {Object {NsdManager.ResolveListener}} listener to receive callback upon success or failure. Cannot be null.
+ Cannot be in use for an active service resolution.
+*/
+resolveService : function(  ) {},
+
+<span id='android-net-nsd-NsdManager-method-setEnabled'>/**Internal use only @hide
+</span>*/
+setEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

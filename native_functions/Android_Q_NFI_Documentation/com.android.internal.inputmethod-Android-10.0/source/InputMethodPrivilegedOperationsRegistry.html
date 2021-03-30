@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-internal-inputmethod-InputMethodPrivilegedOperationsRegistry'>/**@class com.android.internal.inputmethod.InputMethodPrivilegedOperationsRegistry
+</span>@extends java.lang.Object
+
+ A weak-reference-based mapper from IME token to {@link com.android.internal.inputmethod.InputMethodPrivilegedOperations} that is
+ used only to support deprecated IME APIs in {@link android.view.inputmethod.InputMethodManager}.
+
+ &lt;p&gt;This class is designed to be used as a per-process global registry.&lt;/p&gt;
+*/
+var InputMethodPrivilegedOperationsRegistry = {
+
+<span id='com-android-internal-inputmethod-InputMethodPrivilegedOperationsRegistry-method-put'>/**Put a new entry to the registry.
+</span>
+ &lt;p&gt;Note: {@link com.android.internal.inputmethod.InputMethodPrivilegedOperationsRegistry} does not hold strong reference to
+ {@code token} and {@code ops}.  The caller must be responsible for holding strong references
+ to those objects, that is until {@link android.inputmethodservice.InputMethodService} is
+ destroyed.&lt;/p&gt;
+@param {Object {IBinder}} token IME token
+@param {Object {InputMethodPrivilegedOperations}} ops {@link InputMethodPrivilegedOperations} to be associated with the given IME token
+*/
+put : function(  ) {},
+
+<span id='com-android-internal-inputmethod-InputMethodPrivilegedOperationsRegistry-method-get'>/**Get a {@link com.android.internal.inputmethod.InputMethodPrivilegedOperations} from the given IME token.  If it is not
+</span> available, return a fake instance that does nothing except for showing warning messages.
+@param {Object {IBinder}} token IME token
+@return {Object {com.android.internal.inputmethod.InputMethodPrivilegedOperations}} real {@link InputMethodPrivilegedOperations} object if {@code token} is still valid.
+         Otherwise a fake instance of {@link InputMethodPrivilegedOperations} hat does nothing
+         except for showing warning messages
+*/
+get : function(  ) {},
+
+<span id='com-android-internal-inputmethod-InputMethodPrivilegedOperationsRegistry-method-remove'>/**Explicitly removes the specified entry.
+</span>
+ &lt;p&gt;Note: Calling this method is optional. In general, {@link WeakHashMap} and
+ {@link WeakReference} guarantee that the entry will be removed after specified binder proxies
+ are garbage collected.&lt;/p&gt;
+@param {Object {IBinder}} token IME token to be removed.
+*/
+remove : function(  ) {},
+
+<span id='com-android-internal-inputmethod-InputMethodPrivilegedOperationsRegistry-method-isRegistered'>/**Check the given IME token registration status.
+</span>@param {Object {IBinder}} token IME token
+@return {Boolean} {@code true} when the IME token has already registered
+         {@link InputMethodPrivilegedOperations}, {@code false} otherwise.
+*/
+isRegistered : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

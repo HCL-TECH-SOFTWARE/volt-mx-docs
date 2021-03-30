@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-biometrics-BiometricFingerprintConstants'>/**@class android.hardware.biometrics.BiometricFingerprintConstants
+</span> Interface containing all of the fingerprint-specific constants.
+
+ NOTE: The error messages must be consistent between BiometricConstants, Biometric*Constants,
+       and the frameworks/support/biometric/.../BiometricConstants files.
+
+ @hide
+*/
+var BiometricFingerprintConstants = {
+
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_HW_UNAVAILABLE'>/** The hardware is unavailable. Try again later.
+</span>*/
+FINGERPRINT_ERROR_HW_UNAVAILABLE : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_UNABLE_TO_PROCESS'>/** Error state returned when the sensor was unable to process the current image.
+</span>*/
+FINGERPRINT_ERROR_UNABLE_TO_PROCESS : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_TIMEOUT'>/** Error state returned when the current request has been running too long. This is intended to
+</span> prevent programs from waiting for the fingerprint sensor indefinitely. The timeout is
+ platform and sensor-specific, but is generally on the order of 30 seconds.
+*/
+FINGERPRINT_ERROR_TIMEOUT : &quot;3&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_NO_SPACE'>/** Error state returned for operations like enrollment; the operation cannot be completed
+</span> because there's not enough storage remaining to complete the operation.
+*/
+FINGERPRINT_ERROR_NO_SPACE : &quot;4&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_CANCELED'>/** The operation was canceled because the fingerprint sensor is unavailable. For example,
+</span> this may happen when the user is switched, the device is locked or another pending operation
+ prevents or disables it.
+*/
+FINGERPRINT_ERROR_CANCELED : &quot;5&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_UNABLE_TO_REMOVE'>/** The {@link FingerprintManager#remove} call failed. Typically this will happen when the
+</span> provided fingerprint id was incorrect.
+
+ @hide
+*/
+FINGERPRINT_ERROR_UNABLE_TO_REMOVE : &quot;6&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_LOCKOUT'>/** The operation was canceled because the API is locked out due to too many attempts.
+</span> This occurs after 5 failed attempts, and lasts for 30 seconds.
+*/
+FINGERPRINT_ERROR_LOCKOUT : &quot;7&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_VENDOR'>/** Hardware vendors may extend this list if there are conditions that do not fall under one of
+</span> the above categories. Vendors are responsible for providing error strings for these errors.
+ These messages are typically reserved for internal operations such as enrollment, but may be
+ used to express vendor errors not covered by the ones in fingerprint.h. Applications are
+ expected to show the error message string if they happen, but are advised not to rely on the
+ message id since they will be device and vendor-specific
+*/
+FINGERPRINT_ERROR_VENDOR : &quot;8&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_LOCKOUT_PERMANENT'>/** The operation was canceled because FINGERPRINT_ERROR_LOCKOUT occurred too many times.
+</span> Fingerprint authentication is disabled until the user unlocks with strong authentication
+ (PIN/Pattern/Password)
+*/
+FINGERPRINT_ERROR_LOCKOUT_PERMANENT : &quot;9&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_USER_CANCELED'>/** The user canceled the operation. Upon receiving this, applications should use alternate
+</span> authentication (e.g. a password). The application should also provide the means to return
+ to fingerprint authentication, such as a &quot;use fingerprint&quot; button.
+*/
+FINGERPRINT_ERROR_USER_CANCELED : &quot;10&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_NO_FINGERPRINTS'>/** The user does not have any fingerprints enrolled.
+</span>*/
+FINGERPRINT_ERROR_NO_FINGERPRINTS : &quot;11&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_HW_NOT_PRESENT'>/** The device does not have a fingerprint sensor.
+</span>*/
+FINGERPRINT_ERROR_HW_NOT_PRESENT : &quot;12&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_NEGATIVE_BUTTON'>/** The user pressed the negative button. This is a placeholder that is currently only used
+</span> by the support library.
+ @hide
+*/
+FINGERPRINT_ERROR_NEGATIVE_BUTTON : &quot;13&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL'>/** The device does not have pin, pattern, or password set up. See
+</span> {@link android.hardware.biometrics.BiometricPrompt.Builder#setDeviceCredentialAllowed(boolean)} and
+ {@link KeyguardManager#isDeviceSecure()}
+ @hide
+*/
+BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL : &quot;14&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ERROR_VENDOR_BASE'>/** @hide
+</span>*/
+FINGERPRINT_ERROR_VENDOR_BASE : &quot;1000&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_GOOD'>/** The image acquired was good.
+</span>*/
+FINGERPRINT_ACQUIRED_GOOD : &quot;0&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_PARTIAL'>/** Only a partial fingerprint image was detected. During enrollment, the user should be
+</span> informed on what needs to happen to resolve this problem, e.g. &quot;press firmly on sensor.&quot;
+*/
+FINGERPRINT_ACQUIRED_PARTIAL : &quot;1&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_INSUFFICIENT'>/** The fingerprint image was too noisy to process due to a detected condition (i.e. dry skin) or
+</span> a possibly dirty sensor (See {@link #FINGERPRINT_ACQUIRED_IMAGER_DIRTY}).
+*/
+FINGERPRINT_ACQUIRED_INSUFFICIENT : &quot;2&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_IMAGER_DIRTY'>/** The fingerprint image was too noisy due to suspected or detected dirt on the sensor.
+</span> For example, it's reasonable return this after multiple
+ {@link #FINGERPRINT_ACQUIRED_INSUFFICIENT} or actual detection of dirt on the sensor
+ (stuck pixels, swaths, etc.). The user is expected to take action to clean the sensor
+ when this is returned.
+*/
+FINGERPRINT_ACQUIRED_IMAGER_DIRTY : &quot;3&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_TOO_SLOW'>/** The fingerprint image was unreadable due to lack of motion. This is most appropriate for
+</span> linear array sensors that require a swipe motion.
+*/
+FINGERPRINT_ACQUIRED_TOO_SLOW : &quot;4&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_TOO_FAST'>/** The fingerprint image was incomplete due to quick motion. While mostly appropriate for
+</span> linear array sensors,  this could also happen if the finger was moved during acquisition.
+ The user should be asked to move the finger slower (linear) or leave the finger on the sensor
+ longer.
+*/
+FINGERPRINT_ACQUIRED_TOO_FAST : &quot;5&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_VENDOR'>/** Hardware vendors may extend this list if there are conditions that do not fall under one of
+</span> the above categories. Vendors are responsible for providing error strings for these errors.
+ @hide
+*/
+FINGERPRINT_ACQUIRED_VENDOR : &quot;6&quot;,
+<span id='android-hardware-biometrics-BiometricFingerprintConstants-property-FINGERPRINT_ACQUIRED_VENDOR_BASE'>/** @hide
+</span>*/
+FINGERPRINT_ACQUIRED_VENDOR_BASE : &quot;1000&quot;,
+
+};</pre>
+</body>
+</html>

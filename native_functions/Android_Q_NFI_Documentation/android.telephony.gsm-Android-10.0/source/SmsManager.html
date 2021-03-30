@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-telephony-gsm-SmsManager'>/**@class android.telephony.gsm.SmsManager
+</span>@extends java.lang.Object
+
+ Manages SMS operations such as sending data, text, and pdu SMS messages.
+ Get this object by calling the static method SmsManager.getDefault().
+ @deprecated Replaced by android.telephony.SmsManager that supports both GSM and CDMA.
+*/
+var SmsManager = {
+
+<span id='android-telephony-gsm-SmsManager-property-STATUS_ON_SIM_FREE'>/**Free space (TS 51.011 10.5.3).
+</span>  @deprecated Use android.telephony.SmsManager. */
+STATUS_ON_SIM_FREE : &quot;0&quot;,
+<span id='android-telephony-gsm-SmsManager-property-STATUS_ON_SIM_READ'>/**Received and read (TS 51.011 10.5.3).
+</span> @deprecated Use android.telephony.SmsManager. */
+STATUS_ON_SIM_READ : &quot;1&quot;,
+<span id='android-telephony-gsm-SmsManager-property-STATUS_ON_SIM_UNREAD'>/**Received and unread (TS 51.011 10.5.3).
+</span> @deprecated Use android.telephony.SmsManager. */
+STATUS_ON_SIM_UNREAD : &quot;3&quot;,
+<span id='android-telephony-gsm-SmsManager-property-STATUS_ON_SIM_SENT'>/**Stored and sent (TS 51.011 10.5.3).
+</span> @deprecated Use android.telephony.SmsManager. */
+STATUS_ON_SIM_SENT : &quot;5&quot;,
+<span id='android-telephony-gsm-SmsManager-property-STATUS_ON_SIM_UNSENT'>/**Stored and unsent (TS 51.011 10.5.3).
+</span> @deprecated Use android.telephony.SmsManager. */
+STATUS_ON_SIM_UNSENT : &quot;7&quot;,
+<span id='android-telephony-gsm-SmsManager-property-RESULT_ERROR_GENERIC_FAILURE'>/**Generic failure cause
+</span> @deprecated Use android.telephony.SmsManager. */
+RESULT_ERROR_GENERIC_FAILURE : &quot;1&quot;,
+<span id='android-telephony-gsm-SmsManager-property-RESULT_ERROR_RADIO_OFF'>/**Failed because radio was explicitly turned off
+</span> @deprecated Use android.telephony.SmsManager. */
+RESULT_ERROR_RADIO_OFF : &quot;2&quot;,
+<span id='android-telephony-gsm-SmsManager-property-RESULT_ERROR_NULL_PDU'>/**Failed because no pdu provided
+</span> @deprecated Use android.telephony.SmsManager. */
+RESULT_ERROR_NULL_PDU : &quot;3&quot;,
+<span id='android-telephony-gsm-SmsManager-property-RESULT_ERROR_NO_SERVICE'>/**Failed because service is currently unavailable
+</span> @deprecated Use android.telephony.SmsManager. */
+RESULT_ERROR_NO_SERVICE : &quot;4&quot;,
+<span id='android-telephony-gsm-SmsManager-method-getDefault'>/**Get the default instance of the SmsManager
+</span>@return {Object {android.telephony.gsm.SmsManager}} the default instance of the SmsManager
+@deprecated Use android.telephony.SmsManager.
+*/
+getDefault : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-sendTextMessage'>/**Send a text based SMS.
+</span>@param {String} destinationAddress the address to send the message to
+@param {String} scAddress is the service center address or null to use
+  the current default SMSC
+@param {String} text the body of the message to send
+@param {Object {PendingIntent}} sentIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is successfully sent, or failed.
+  The result code will be &lt;code&gt;Activity.RESULT_OK&lt;code&gt; for success,
+  or one of these errors:
+  &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt;
+  &lt;code&gt;RESULT_ERROR_RADIO_OFF&lt;/code&gt;
+  &lt;code&gt;RESULT_ERROR_NULL_PDU&lt;/code&gt;.
+  The per-application based SMS control checks sentIntent. If sentIntent
+  is NULL the caller will be checked against all unknown applications,
+  which cause smaller number of SMS to be sent in checking period.
+@param {Object {PendingIntent}} deliveryIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is delivered to the recipient.  The
+  raw pdu of the status report is in the extended data (&quot;pdu&quot;).
+@throws IllegalArgumentException if destinationAddress or text are empty
+@deprecated Use android.telephony.SmsManager.
+*/
+sendTextMessage : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-divideMessage'>/**Divide a text message into several messages, none bigger than
+</span> the maximum SMS message size.
+@param {String} text the original message.  Must not be null.
+@return {Object {java.util.ArrayList}} an &lt;code&gt;ArrayList&lt;/code&gt; of strings that, in order,
+   comprise the original message
+@deprecated Use android.telephony.SmsManager.
+*/
+divideMessage : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-sendMultipartTextMessage'>/**Send a multi-part text based SMS.  The callee should have already
+</span> divided the message into correctly sized parts by calling
+ &lt;code&gt;divideMessage&lt;/code&gt;.
+@param {String} destinationAddress the address to send the message to
+@param {String} scAddress is the service center address or null to use
+   the current default SMSC
+@param {Object {java.util.ArrayList}} parts an &lt;code&gt;ArrayList&lt;/code&gt; of strings that, in order,
+   comprise the original message
+@param {Object {java.util.ArrayList}} sentIntents if not null, an &lt;code&gt;ArrayList&lt;/code&gt; of
+   &lt;code&gt;PendingIntent&lt;/code&gt;s (one for each message part) that is
+   broadcast when the corresponding message part has been sent.
+   The result code will be &lt;code&gt;Activity.RESULT_OK&lt;code&gt; for success,
+   or one of these errors:
+   &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt;
+   &lt;code&gt;RESULT_ERROR_RADIO_OFF&lt;/code&gt;
+   &lt;code&gt;RESULT_ERROR_NULL_PDU&lt;/code&gt;.
+   The per-application based SMS control checks sentIntent. If sentIntent
+   is NULL the caller will be checked against all unknown applicaitons,
+   which cause smaller number of SMS to be sent in checking period.
+@param {Object {java.util.ArrayList}} deliveryIntents if not null, an &lt;code&gt;ArrayList&lt;/code&gt; of
+   &lt;code&gt;PendingIntent&lt;/code&gt;s (one for each message part) that is
+   broadcast when the corresponding message part has been delivered
+   to the recipient.  The raw pdu of the status report is in the
+   extended data (&quot;pdu&quot;).
+@throws IllegalArgumentException if destinationAddress or data are empty
+@deprecated Use android.telephony.SmsManager.
+*/
+sendMultipartTextMessage : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-sendDataMessage'>/**Send a data based SMS to a specific application port.
+</span>@param {String} destinationAddress the address to send the message to
+@param {String} scAddress is the service center address or null to use
+  the current default SMSC
+@param {Number} destinationPort the port to deliver the message to
+@param {Object {byte[]}} data the body of the message to send
+@param {Object {PendingIntent}} sentIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is sucessfully sent, or failed.
+  The result code will be &lt;code&gt;Activity.RESULT_OK&lt;code&gt; for success,
+  or one of these errors:
+  &lt;code&gt;RESULT_ERROR_GENERIC_FAILURE&lt;/code&gt;
+  &lt;code&gt;RESULT_ERROR_RADIO_OFF&lt;/code&gt;
+  &lt;code&gt;RESULT_ERROR_NULL_PDU&lt;/code&gt;.
+  The per-application based SMS control checks sentIntent. If sentIntent
+  is NULL the caller will be checked against all unknown applicaitons,
+  which cause smaller number of SMS to be sent in checking period.
+@param {Object {PendingIntent}} deliveryIntent if not NULL this &lt;code&gt;PendingIntent&lt;/code&gt; is
+  broadcast when the message is delivered to the recipient.  The
+  raw pdu of the status report is in the extended data (&quot;pdu&quot;).
+@throws IllegalArgumentException if destinationAddress or data are empty
+@deprecated Use android.telephony.SmsManager.
+*/
+sendDataMessage : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-copyMessageToSim'>/**Copy a raw SMS PDU to the SIM.
+</span>@param {Object {byte[]}} smsc the SMSC for this message, or NULL for the default SMSC
+@param {Object {byte[]}} pdu the raw PDU to store
+@param {Number} status message status (STATUS_ON_SIM_READ, STATUS_ON_SIM_UNREAD,
+               STATUS_ON_SIM_SENT, STATUS_ON_SIM_UNSENT)
+@return {Boolean} true for success
+@deprecated Use android.telephony.SmsManager.
+ {@hide}
+*/
+copyMessageToSim : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-deleteMessageFromSim'>/**Delete the specified message from the SIM.
+</span>@param {Number} messageIndex is the record index of the message on SIM
+@return {Boolean} true for success
+@deprecated Use android.telephony.SmsManager.
+ {@hide}
+*/
+deleteMessageFromSim : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-updateMessageOnSim'>/**Update the specified message on the SIM.
+</span>@param {Number} messageIndex record index of message to update
+@param {Number} newStatus new message status (STATUS_ON_SIM_READ,
+                  STATUS_ON_SIM_UNREAD, STATUS_ON_SIM_SENT,
+                  STATUS_ON_SIM_UNSENT, STATUS_ON_SIM_FREE)
+@param {Object {byte[]}} pdu the raw PDU to store
+@return {Boolean} true for success
+@deprecated Use android.telephony.SmsManager.
+ {@hide}
+*/
+updateMessageOnSim : function(  ) {},
+
+<span id='android-telephony-gsm-SmsManager-method-getAllMessagesFromSim'>/**Retrieves all messages currently stored on SIM.
+</span>@return {Object {java.util.ArrayList}} &lt;code&gt;ArrayList&lt;/code&gt; of &lt;code&gt;SmsMessage&lt;/code&gt; objects
+@deprecated Use android.telephony.SmsManager.
+ {@hide}
+*/
+getAllMessagesFromSim : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

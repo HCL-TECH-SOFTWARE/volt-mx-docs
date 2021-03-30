@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-wifi-WifiInfo'>/**@class android.net.wifi.WifiInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Describes the state of any Wifi connection that is active or
+ is in the process of being set up.
+*/
+var WifiInfo = {
+
+<span id='android-net-wifi-WifiInfo-property-DEFAULT_MAC_ADDRESS'>/** Default MAC address reported to a client that does not have the
+</span> android.permission.LOCAL_MAC_ADDRESS permission.
+
+ @hide
+*/
+DEFAULT_MAC_ADDRESS : &quot;02:00:00:00:00:00&quot;,
+<span id='android-net-wifi-WifiInfo-property-INVALID_RSSI'>/**@hide */
+</span>INVALID_RSSI : &quot;-127&quot;,
+<span id='android-net-wifi-WifiInfo-property-MIN_RSSI'>/**@hide */
+</span>MIN_RSSI : &quot;-126&quot;,
+<span id='android-net-wifi-WifiInfo-property-MAX_RSSI'>/**@hide */
+</span>MAX_RSSI : &quot;200&quot;,
+<span id='android-net-wifi-WifiInfo-property-LINK_SPEED_UNITS'>/** The unit in which links speeds are expressed.
+</span>*/
+LINK_SPEED_UNITS : &quot;Mbps&quot;,
+<span id='android-net-wifi-WifiInfo-property-LINK_SPEED_UNKNOWN'>/** Constant for unknown link speed.
+</span>*/
+LINK_SPEED_UNKNOWN : &quot;-1&quot;,
+<span id='android-net-wifi-WifiInfo-property-FREQUENCY_UNITS'>/** Frequency in MHz
+</span>*/
+FREQUENCY_UNITS : &quot;MHz&quot;,
+<span id='android-net-wifi-WifiInfo-property-txBad'>/** Running total count of lost (not ACKed) transmitted unicast data packets.
+</span> @hide
+*/
+txBad : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-txRetries'>/** Running total count of transmitted unicast data retry packets.
+</span> @hide
+*/
+txRetries : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-txSuccess'>/** Running total count of successfully transmitted (ACKed) unicast data packets.
+</span> @hide
+*/
+txSuccess : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-rxSuccess'>/** Running total count of received unicast data packets.
+</span> @hide
+*/
+rxSuccess : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-txBadRate'>/** Average rate of lost transmitted packets, in units of packets per second.
+</span> @hide
+*/
+txBadRate : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-txRetriesRate'>/** Average rate of transmitted retry packets, in units of packets per second.
+</span> @hide
+*/
+txRetriesRate : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-txSuccessRate'>/** Average rate of successfully transmitted unicast packets, in units of packets per second.
+</span> @hide
+*/
+txSuccessRate : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-rxSuccessRate'>/** Average rate of received unicast data packets, in units of packets per second.
+</span> @hide
+*/
+rxSuccessRate : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-score'>/** @hide
+</span>*/
+score : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-property-CREATOR'>/**Implement the Parcelable interface {@hide} */
+</span>CREATOR : &quot;null&quot;,
+<span id='android-net-wifi-WifiInfo-method-reset'>/**
+</span>@hide 
+*/
+reset : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setSSID'>/**
+</span>@hide 
+*/
+setSSID : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getSSID'>/**Returns the service set identifier (SSID) of the current 802.11 network.
+</span> &lt;p&gt;
+ If the SSID can be decoded as UTF-8, it will be returned surrounded by double
+ quotation marks. Otherwise, it is returned as a string of hex digits.
+ The SSID may be
+ &lt;lt&gt;&amp;lt;unknown ssid&amp;gt;, if there is no network currently connected or if the caller has
+ insufficient permissions to access the SSID.&lt;lt&gt;
+ &lt;/p&gt;
+ &lt;p&gt;
+ Prior to {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR1}, this method
+ always returned the SSID with no quotes around it.
+ &lt;/p&gt;
+@return {String} the SSID.
+*/
+getSSID : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getWifiSsid'>/**
+</span>@hide 
+*/
+getWifiSsid : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setBSSID'>/**
+</span>@hide 
+*/
+setBSSID : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getBSSID'>/**Return the basic service set identifier (BSSID) of the current access point.
+</span> &lt;p&gt;
+ The BSSID may be
+ &lt;lt&gt;{@code null}, if there is no network currently connected.&lt;/lt&gt;
+ &lt;lt&gt;{@code &quot;02:00:00:00:00:00&quot;}, if the caller has insufficient permissions to access the
+ BSSID.&lt;lt&gt;
+ &lt;/p&gt;
+@return {String} the BSSID, in the form of a six-byte MAC address: {@code XX:XX:XX:XX:XX:XX}
+*/
+getBSSID : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getRssi'>/**Returns the received signal strength indicator of the current 802.11
+</span> network, in dBm.
+
+ &lt;p&gt;Use {@link android.net.wifi.WifiManager#calculateSignalLevel} to convert this number into
+ an absolute signal level which can be displayed to a user.
+@return {Number} the RSSI.
+*/
+getRssi : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setRssi'>/**
+</span>@hide 
+*/
+setRssi : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getLinkSpeed'>/**Returns the current link speed in {@link #LINK_SPEED_UNITS}.
+</span>@return {Number} the link speed or {@link #LINK_SPEED_UNKNOWN} if link speed is unknown.
+@see #LINK_SPEED_UNITS
+@see #LINK_SPEED_UNKNOWN
+*/
+getLinkSpeed : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setLinkSpeed'>/**
+</span>@hide 
+*/
+setLinkSpeed : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getTxLinkSpeedMbps'>/**Returns the current transmit link speed in Mbps.
+</span>@return {Number} the Tx link speed or {@link #LINK_SPEED_UNKNOWN} if link speed is unknown.
+@see #LINK_SPEED_UNKNOWN
+*/
+getTxLinkSpeedMbps : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setTxLinkSpeedMbps'>/**Update the last transmitted packet bit rate in Mbps.
+</span>@hide 
+*/
+setTxLinkSpeedMbps : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getRxLinkSpeedMbps'>/**Returns the current receive link speed in Mbps.
+</span>@return {Number} the Rx link speed or {@link #LINK_SPEED_UNKNOWN} if link speed is unknown.
+@see #LINK_SPEED_UNKNOWN
+*/
+getRxLinkSpeedMbps : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setRxLinkSpeedMbps'>/**Update the last received packet bit rate in Mbps.
+</span>@hide 
+*/
+setRxLinkSpeedMbps : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getFrequency'>/**Returns the current frequency in {@link #FREQUENCY_UNITS}.
+</span>@return {Number} the frequency.
+@see #FREQUENCY_UNITS
+*/
+getFrequency : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setFrequency'>/**
+</span>@hide 
+*/
+setFrequency : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-is24GHz'>/**
+</span>@hide TODO: makes real freq boundaries
+*/
+is24GHz : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-is5GHz'>/**
+</span>@hide TODO: makes real freq boundaries
+*/
+is5GHz : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setMacAddress'>/**Record the MAC address of the WLAN interface
+</span>@param {String} macAddress the MAC address in {@code XX:XX:XX:XX:XX:XX} form
+@hide 
+*/
+setMacAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getMacAddress'>/**
+</span>*/
+getMacAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-hasRealMacAddress'>/**
+</span>@return {Boolean} true if {@link #getMacAddress()} has a real MAC address.
+@hide 
+*/
+hasRealMacAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setMeteredHint'>/**Indicates if we've dynamically detected this active network connection as
+</span> being metered.
+@see WifiConfiguration#isMetered(WifiConfiguration, WifiInfo)
+@hide 
+*/
+setMeteredHint : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getMeteredHint'>/**{@hide}
+</span>*/
+getMeteredHint : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setEphemeral'>/**{@hide}
+</span>*/
+setEphemeral : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-isEphemeral'>/**{@hide}
+</span>*/
+isEphemeral : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setTrusted'>/**{@hide}
+</span>*/
+setTrusted : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-isTrusted'>/**{@hide}
+</span>*/
+isTrusted : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setOsuAp'>/**{@hide}
+</span>*/
+setOsuAp : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-isOsuAp'>/**{@hide}
+</span>*/
+isOsuAp : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-isPasspointAp'>/**{@hide}
+</span>*/
+isPasspointAp : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setFQDN'>/**{@hide}
+</span>*/
+setFQDN : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getPasspointFqdn'>/**Returns the Fully Qualified Domain Name of the network if it is a Passpoint network.
+</span>*/
+getPasspointFqdn : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setProviderFriendlyName'>/**{@hide}
+</span>*/
+setProviderFriendlyName : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getPasspointProviderFriendlyName'>/**Returns the Provider Friendly Name of the network if it is a Passpoint network.
+</span>*/
+getPasspointProviderFriendlyName : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setNetworkSuggestionOrSpecifierPackageName'>/**{@hide}
+</span>*/
+setNetworkSuggestionOrSpecifierPackageName : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getNetworkSuggestionOrSpecifierPackageName'>/**{@hide}
+</span>*/
+getNetworkSuggestionOrSpecifierPackageName : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setNetworkId'>/**
+</span>@hide 
+*/
+setNetworkId : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getNetworkId'>/**Each configured network has a unique small integer ID, used to identify
+</span> the network. This method returns the ID for the currently connected network.
+ &lt;p&gt;
+ The networkId may be {@code -1} if there is no currently connected network or if the caller
+ has insufficient permissions to access the network ID.
+ &lt;/p&gt;
+@return {Number} the network ID.
+*/
+getNetworkId : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getSupplicantState'>/**Return the detailed state of the supplicant's negotiation with an
+</span> access point, in the form of a {@link android.net.wifi.SupplicantState android.net.wifi.SupplicantState} object.
+@return {Object {android.net.wifi.SupplicantState}} the current {@link SupplicantState SupplicantState}
+*/
+getSupplicantState : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setSupplicantState'>/**
+</span>@hide 
+*/
+setSupplicantState : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-setInetAddress'>/**
+</span>@hide 
+*/
+setInetAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getIpAddress'>/**
+</span>*/
+getIpAddress : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getHiddenSSID'>/**
+</span>@return {Boolean} {@code true} if this network does not broadcast its SSID, so an
+ SSID-specific probe request must be used for scans.
+*/
+getHiddenSSID : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-getDetailedStateOf'>/**Map a supplicant state into a fine-grained network connectivity state.
+</span>@param {Object {SupplicantState}} suppState the supplicant state
+@return {Object {android.net.NetworkInfo.DetailedState}} the corresponding {@link DetailedState}
+*/
+getDetailedStateOf : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-removeDoubleQuotes'>/**{@hide}
+</span>*/
+removeDoubleQuotes : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-describeContents'>/**Implement the Parcelable interface {@hide}
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-net-wifi-WifiInfo-method-writeToParcel'>/**Implement the Parcelable interface {@hide}
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

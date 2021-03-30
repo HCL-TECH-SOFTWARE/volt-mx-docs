@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-tv-TvInputService-RecordingSession'>/**@class android.media.tv.TvInputService.RecordingSession
+</span>@extends java.lang.Object
+
+ Base class for derived classes to implement to provide a TV input recording session.
+*/
+var RecordingSession = {
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-notifyTuned'>/**Informs the application that this recording session has been tuned to the given channel
+</span> and is ready to start recording.
+
+ &lt;p&gt;Upon receiving a call to {@link #onTune}(Uri), the session is expected to tune to the
+ passed channel and call this method to indicate that it is now available for immediate
+ recording. When {@link #onStartRecording}(Uri) is called, recording must start with
+ minimal delay.
+@param {Object {Uri}} channelUri The URI of a channel.
+*/
+notifyTuned : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-notifyRecordingStopped'>/**Informs the application that this recording session has stopped recording and created a
+</span> new data entry in the {@link android.media.tv.TvContract.RecordedPrograms} table that describes the newly
+ recorded program.
+
+ &lt;p&gt;The recording session must call this method in response to {@link #onStopRecording}().
+ The session may call it even before receiving a call to {@link #onStopRecording}() if a
+ partially recorded program is available when there is an error.
+@param {Object {Uri}} recordedProgramUri The URI of the newly recorded program.
+*/
+notifyRecordingStopped : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-notifyError'>/**Informs the application that there is an error and this recording session is no longer
+</span> able to start or continue recording. It may be called at any time after the recording
+ session is created until {@link #onRelease}() is called.
+
+ &lt;p&gt;The application may release the current session upon receiving the error code through
+ {@link android.media.tv.TvRecordingClient.RecordingCallback#onError(int)}. The session may call
+ {@link #notifyRecordingStopped}(Uri) if a partially recorded but still playable program
+ is available, before calling this method.
+@param {Number} error The error code. Should be one of the followings.
+ &lt;ul&gt;
+ &lt;li&gt;{@link TvInputManager#RECORDING_ERROR_UNKNOWN}
+ &lt;li&gt;{@link TvInputManager#RECORDING_ERROR_INSUFFICIENT_SPACE}
+ &lt;li&gt;{@link TvInputManager#RECORDING_ERROR_RESOURCE_BUSY}
+ &lt;/ul&gt;
+*/
+notifyError : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-notifySessionEvent'>/**Dispatches an event to the application using this recording session.
+</span>@param {String} eventType The type of the event.
+@param {Object {Bundle}} eventArgs Optional arguments of the event.
+@hide 
+*/
+notifySessionEvent : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-onTune'>/**Called when the application requests to tune to a given channel for TV program recording.
+</span>
+ &lt;p&gt;The application may call this method before starting or after stopping recording, but
+ not during recording.
+
+ &lt;p&gt;The session must call {@link #notifyTuned}(Uri) if the tune request was fulfilled, or
+ {@link #notifyError}(int) otherwise.
+@param {Object {Uri}} channelUri The URI of a channel.
+*/
+onTune : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-onTune'>/**Called when the application requests to tune to a given channel for TV program recording.
+</span> Override this method in order to handle domain-specific features that are only known
+ between certain TV inputs and their clients.
+
+ &lt;p&gt;The application may call this method before starting or after stopping recording, but
+ not during recording. The default implementation calls {@link #onTune}(Uri).
+
+ &lt;p&gt;The session must call {@link #notifyTuned}(Uri) if the tune request was fulfilled, or
+ {@link #notifyError}(int) otherwise.
+@param {Object {Uri}} channelUri The URI of a channel.
+@param {Object {Bundle}} params Domain-specific data for this tune request. Keys &lt;em&gt;must&lt;/em&gt; be a scoped
+            name, i.e. prefixed with a package name you own, so that different developers
+            will not create conflicting keys.
+*/
+onTune : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-onStartRecording'>/**Called when the application requests to start TV program recording. Recording must start
+</span> immediately when this method is called.
+
+ &lt;p&gt;The application may supply the URI for a TV program for filling in program specific
+ data fields in the {@link android.media.tv.TvContract.RecordedPrograms} table.
+ A non-null {@code programUri} implies the started recording should be of that specific
+ program, whereas null {@code programUri} does not impose such a requirement and the
+ recording can span across multiple TV programs. In either case, the application must call
+ {@link android.media.tv.TvRecordingClient#stopRecording()} to stop the recording.
+
+ &lt;p&gt;The session must call {@link #notifyError}(int) if the start request cannot be
+ fulfilled.
+@param {Object {Uri}} programUri The URI for the TV program to record, built by
+            {@link TvContract#buildProgramUri(long)}. Can be {@code null}.
+*/
+onStartRecording : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-onStopRecording'>/**Called when the application requests to stop TV program recording. Recording must stop
+</span> immediately when this method is called.
+
+ &lt;p&gt;The session must create a new data entry in the
+ {@link android.media.tv.TvContract.RecordedPrograms} table that describes the newly
+ recorded program and call {@link #notifyRecordingStopped}(Uri) with the URI to that
+ entry.
+ If the stop request cannot be fulfilled, the session must call {@link #notifyError}(int).
+*/
+onStopRecording : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-onRelease'>/**Called when the application requests to release all the resources held by this recording
+</span> session.
+*/
+onRelease : function(  ) {},
+
+<span id='android-media-tv-TvInputService-RecordingSession-method-onAppPrivateCommand'>/**Processes a private command sent from the application to the TV input. This can be used
+</span> to provide domain-specific features that are only known between certain TV inputs and
+ their clients.
+@param {String} action Name of the command to be performed. This &lt;em&gt;must&lt;/em&gt; be a scoped name,
+            i.e. prefixed with a package name you own, so that different developers will
+            not create conflicting commands.
+@param {Object {Bundle}} data Any data to include with the command.
+*/
+onAppPrivateCommand : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

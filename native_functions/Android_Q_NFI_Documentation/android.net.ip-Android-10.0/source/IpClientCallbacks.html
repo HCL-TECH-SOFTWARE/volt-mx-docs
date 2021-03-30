@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-net-ip-IpClientCallbacks'>/**@class android.net.ip.IpClientCallbacks
+</span>@extends java.lang.Object
+
+ Callbacks for handling IpClient events.
+
+ This is a convenience class to allow clients not to override all methods of IIpClientCallbacks,
+ and avoid unparceling arguments.
+ These methods are called asynchronously on a Binder thread, as IpClient lives in a different
+ process.
+ @hide
+*/
+var IpClientCallbacks = {
+
+<span id='android-net-ip-IpClientCallbacks-method-onIpClientCreated'>/**Callback called upon IpClient creation.
+</span>@param {Object {IIpClient}} ipClient The Binder token to communicate with IpClient.
+*/
+onIpClientCreated : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onPreDhcpAction'>/**Callback called prior to DHCP discovery/renewal.
+</span>
+ &lt;p&gt;In order to receive onPreDhcpAction(), call #withPreDhcpAction() when constructing a
+ ProvisioningConfiguration.
+
+ &lt;p&gt;Implementations of onPreDhcpAction() must call IpClient#completedPreDhcpAction() to
+ indicate that DHCP is clear to proceed.
+*/
+onPreDhcpAction : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onPostDhcpAction'>/**Callback called after DHCP discovery/renewal.
+</span>*/
+onPostDhcpAction : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onNewDhcpResults'>/**Callback called when new DHCP results are available.
+</span>
+ &lt;p&gt;This is purely advisory and not an indication of provisioning success or failure.  This is
+ only here for callers that want to expose DHCPv4 results to other APIs
+ (e.g., WifiInfo#setInetAddress).
+
+ &lt;p&gt;DHCPv4 or static IPv4 configuration failure or success can be determined by whether or not
+ the passed-in DhcpResults object is null.
+*/
+onNewDhcpResults : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onProvisioningSuccess'>/**Indicates that provisioning was successful.
+</span>*/
+onProvisioningSuccess : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onProvisioningFailure'>/**Indicates that provisioning failed.
+</span>*/
+onProvisioningFailure : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onLinkPropertiesChange'>/**Invoked on LinkProperties changes.
+</span>*/
+onLinkPropertiesChange : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onReachabilityLost'>/**Called when the internal IpReachabilityMonitor (if enabled) has
+</span> detected the loss of a critical number of required neighbors.
+*/
+onReachabilityLost : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-onQuit'>/**Called when the IpClient state machine terminates.
+</span>*/
+onQuit : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-installPacketFilter'>/**Called to indicate that a new APF program must be installed to filter incoming packets.
+</span>*/
+installPacketFilter : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-startReadPacketFilter'>/**Called to indicate that the APF Program &amp; data buffer must be read asynchronously from the
+</span> wifi driver.
+
+ &lt;p&gt;Due to Wifi HAL limitations, the current implementation only supports dumping the entire
+ buffer. In response to this request, the driver returns the data buffer asynchronously
+ by sending an IpClient#EVENT_READ_PACKET_FILTER_COMPLETE message.
+*/
+startReadPacketFilter : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-setFallbackMulticastFilter'>/**If multicast filtering cannot be accomplished with APF, this function will be called to
+</span> actuate multicast filtering using another means.
+*/
+setFallbackMulticastFilter : function(  ) {},
+
+<span id='android-net-ip-IpClientCallbacks-method-setNeighborDiscoveryOffload'>/**Enabled/disable Neighbor Discover offload functionality. This is called, for example,
+</span> whenever 464xlat is being started or stopped.
+*/
+setNeighborDiscoveryOffload : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

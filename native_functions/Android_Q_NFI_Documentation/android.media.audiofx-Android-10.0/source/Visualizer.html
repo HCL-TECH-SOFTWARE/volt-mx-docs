@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-media-audiofx-Visualizer'>/**@class android.media.audiofx.Visualizer
+</span>@extends java.lang.Object
+
+ The Visualizer class enables application to retrieve part of the currently playing audio for
+ visualization purpose. It is not an audio recording interface and only returns partial and low
+ quality audio content. However, to protect privacy of certain audio data (e.g voice mail) the use
+ of the visualizer requires the permission android.permission.RECORD_AUDIO.
+ &lt;p&gt;The audio session ID passed to the constructor indicates which audio content should be
+ visualized:&lt;br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;If the session is 0, the audio output mix is visualized&lt;/li&gt;
+   &lt;li&gt;If the session is not 0, the audio from a particular {@link android.media.MediaPlayer} or
+   {@link android.media.AudioTrack}
+   using this audio session is visualized &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;Two types of representation of audio content can be captured: &lt;br&gt;
+ &lt;ul&gt;
+   &lt;li&gt;Waveform data: consecutive 8-bit (unsigned) mono samples by using the
+   {@link #getWaveForm(byte[])} method&lt;/li&gt;
+   &lt;li&gt;Frequency data: 8-bit magnitude FFT by using the {@link #getFft(byte[])} method&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;The length of the capture can be retrieved or specified by calling respectively
+ {@link #getCaptureSize}() and {@link #setCaptureSize}(int) methods. The capture size must be a
+ power of 2 in the range returned by {@link #getCaptureSizeRange}().
+ &lt;p&gt;In addition to the polling capture mode described above with {@link #getWaveForm(byte[])} and
+  {@link #getFft(byte[])} methods, a callback mode is also available by installing a listener by
+  use of the {@link #setDataCaptureListener(OnDataCaptureListener, int, boolean, boolean)} method.
+  The rate at which the listener capture method is called as well as the type of data returned is
+  specified.
+ &lt;p&gt;Before capturing data, the Visualizer must be enabled by calling the
+ {@link #setEnabled}(boolean) method.
+ When data capture is not needed any more, the Visualizer should be disabled.
+ &lt;p&gt;It is good practice to call the {@link #release}() method when the Visualizer is not used
+ anymore to free up native resources associated to the Visualizer instance.
+ &lt;p&gt;Creating a Visualizer on the output mix (audio session 0) requires permission
+ {@link android.Manifest.permission#MODIFY_AUDIO_SETTINGS}
+ &lt;p&gt;The Visualizer class can also be used to perform measurements on the audio being played back.
+ The measurements to perform are defined by setting a mask of the requested measurement modes with
+ {@link #setMeasurementMode}(int). Supported values are {@link #MEASUREMENT_MODE_NONE} to cancel
+ any measurement, and {@link #MEASUREMENT_MODE_PEAK_RMS} for peak and RMS monitoring.
+ Measurements can be retrieved through {@link #getMeasurementPeakRms}(MeasurementPeakRms).
+*/
+var Visualizer = {
+
+<span id='android-media-audiofx-Visualizer-property-STATE_UNINITIALIZED'>/** State of a Visualizer object that was not successfully initialized upon creation
+</span>*/
+STATE_UNINITIALIZED : &quot;0&quot;,
+<span id='android-media-audiofx-Visualizer-property-STATE_INITIALIZED'>/** State of a Visualizer object that is ready to be used.
+</span>*/
+STATE_INITIALIZED : &quot;1&quot;,
+<span id='android-media-audiofx-Visualizer-property-STATE_ENABLED'>/** State of a Visualizer object that is active.
+</span>*/
+STATE_ENABLED : &quot;2&quot;,
+<span id='android-media-audiofx-Visualizer-property-SCALING_MODE_NORMALIZED'>/** Defines a capture mode where amplification is applied based on the content of the captured
+</span> data. This is the default Visualizer mode, and is suitable for music visualization.
+*/
+SCALING_MODE_NORMALIZED : &quot;0&quot;,
+<span id='android-media-audiofx-Visualizer-property-SCALING_MODE_AS_PLAYED'>/** Defines a capture mode where the playback volume will affect (scale) the range of the
+</span> captured data. A low playback volume will lead to low sample and fft values, and vice-versa.
+*/
+SCALING_MODE_AS_PLAYED : &quot;1&quot;,
+<span id='android-media-audiofx-Visualizer-property-MEASUREMENT_MODE_NONE'>/** Defines a measurement mode in which no measurements are performed.
+</span>*/
+MEASUREMENT_MODE_NONE : &quot;0&quot;,
+<span id='android-media-audiofx-Visualizer-property-MEASUREMENT_MODE_PEAK_RMS'>/** Defines a measurement mode which computes the peak and RMS value in mB, where 0mB is the
+</span> maximum sample value, and -9600mB is the minimum value.
+ Values for peak and RMS can be retrieved with
+ {@link #getMeasurementPeakRms}(MeasurementPeakRms).
+*/
+MEASUREMENT_MODE_PEAK_RMS : &quot;1&quot;,
+<span id='android-media-audiofx-Visualizer-property-SUCCESS'>/** Successful operation.
+</span>*/
+SUCCESS : &quot;0&quot;,
+<span id='android-media-audiofx-Visualizer-property-ERROR'>/** Unspecified error.
+</span>*/
+ERROR : &quot;-1&quot;,
+<span id='android-media-audiofx-Visualizer-property-ALREADY_EXISTS'>/** Internal operation status. Not returned by any method.
+</span>*/
+ALREADY_EXISTS : &quot;-2&quot;,
+<span id='android-media-audiofx-Visualizer-property-ERROR_NO_INIT'>/** Operation failed due to bad object initialization.
+</span>*/
+ERROR_NO_INIT : &quot;-3&quot;,
+<span id='android-media-audiofx-Visualizer-property-ERROR_BAD_VALUE'>/** Operation failed due to bad parameter value.
+</span>*/
+ERROR_BAD_VALUE : &quot;-4&quot;,
+<span id='android-media-audiofx-Visualizer-property-ERROR_INVALID_OPERATION'>/** Operation failed because it was requested in wrong state.
+</span>*/
+ERROR_INVALID_OPERATION : &quot;-5&quot;,
+<span id='android-media-audiofx-Visualizer-property-ERROR_NO_MEMORY'>/** Operation failed due to lack of memory.
+</span>*/
+ERROR_NO_MEMORY : &quot;-6&quot;,
+<span id='android-media-audiofx-Visualizer-property-ERROR_DEAD_OBJECT'>/** Operation failed due to dead remote object.
+</span>*/
+ERROR_DEAD_OBJECT : &quot;-7&quot;,
+<span id='android-media-audiofx-Visualizer-method-release'>/**Releases the native Visualizer resources. It is a good practice to release the
+</span> visualization engine when not in use.
+*/
+release : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-setEnabled'>/**Enable or disable the visualization engine.
+</span>@param {Boolean} enabled requested enable state
+@return {Number} {@link #SUCCESS} in case of success,
+ {@link #ERROR_INVALID_OPERATION} or {@link #ERROR_DEAD_OBJECT} in case of failure.
+@throws IllegalStateException
+*/
+setEnabled : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getEnabled'>/**Get current activation state of the visualizer.
+</span>@return {Boolean} true if the visualizer is active, false otherwise
+*/
+getEnabled : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getCaptureSizeRange'>/**Returns the capture size range.
+</span>@return {Number} the mininum capture size is returned in first array element and the maximum in second
+ array element.
+*/
+getCaptureSizeRange : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getMaxCaptureRate'>/**Returns the maximum capture rate for the callback capture method. This is the maximum value
+</span> for the rate parameter of the
+ {@link #setDataCaptureListener(OnDataCaptureListener, int, boolean, boolean)} method.
+@return {Number} the maximum capture rate expressed in milliHertz
+*/
+getMaxCaptureRate : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-setCaptureSize'>/**Sets the capture size, i.e. the number of bytes returned by {@link #getWaveForm(byte[])} and
+</span> {@link #getFft(byte[])} methods. The capture size must be a power of 2 in the range returned
+ by {@link #getCaptureSizeRange}().
+ This method must not be called when the Visualizer is enabled.
+@param {Number} size requested capture size
+@return {Number} {@link #SUCCESS} in case of success,
+ {@link #ERROR_BAD_VALUE} in case of failure.
+@throws IllegalStateException
+*/
+setCaptureSize : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getCaptureSize'>/**Returns current capture size.
+</span>@return {Number} the capture size in bytes.
+*/
+getCaptureSize : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-setScalingMode'>/**Set the type of scaling applied on the captured visualization data.
+</span>@param {Number} mode see {@link #SCALING_MODE_NORMALIZED}
+     and {@link #SCALING_MODE_AS_PLAYED}
+@return {Number} {@link #SUCCESS} in case of success,
+     {@link #ERROR_BAD_VALUE} in case of failure.
+@throws IllegalStateException
+*/
+setScalingMode : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getScalingMode'>/**Returns the current scaling mode on the captured visualization data.
+</span>@return {Number} the scaling mode, see {@link #SCALING_MODE_NORMALIZED}
+     and {@link #SCALING_MODE_AS_PLAYED}.
+@throws IllegalStateException
+*/
+getScalingMode : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-setMeasurementMode'>/**Sets the combination of measurement modes to be performed by this audio effect.
+</span>@param {Number} mode a mask of the measurements to perform. The valid values are
+     {@link #MEASUREMENT_MODE_NONE} (to cancel any measurement)
+     or {@link #MEASUREMENT_MODE_PEAK_RMS}.
+@return {Number} {@link #SUCCESS} in case of success, {@link #ERROR_BAD_VALUE} in case of failure.
+@throws IllegalStateException
+*/
+setMeasurementMode : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getMeasurementMode'>/**Returns the current measurement modes performed by this audio effect
+</span>@return {Number} the mask of the measurements,
+     {@link #MEASUREMENT_MODE_NONE} (when no measurements are performed)
+     or {@link #MEASUREMENT_MODE_PEAK_RMS}.
+@throws IllegalStateException
+*/
+getMeasurementMode : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getSamplingRate'>/**Returns the sampling rate of the captured audio.
+</span>@return {Number} the sampling rate in milliHertz.
+*/
+getSamplingRate : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getWaveForm'>/**Returns a waveform capture of currently playing audio content. The capture consists in
+</span> a number of consecutive 8-bit (unsigned) mono PCM samples equal to the capture size returned
+ by {@link #getCaptureSize}().
+ &lt;p&gt;This method must be called when the Visualizer is enabled.
+@param {Object {byte[]}} waveform array of bytes where the waveform should be returned
+@return {Number} {@link #SUCCESS} in case of success,
+ {@link #ERROR_NO_MEMORY}, {@link #ERROR_INVALID_OPERATION} or {@link #ERROR_DEAD_OBJECT}
+ in case of failure.
+@throws IllegalStateException
+*/
+getWaveForm : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getFft'>/**Returns a frequency capture of currently playing audio content.
+</span> &lt;p&gt;This method must be called when the Visualizer is enabled.
+ &lt;p&gt;The capture is an 8-bit magnitude FFT, the frequency range covered being 0 (DC) to half of
+ the sampling rate returned by {@link #getSamplingRate}(). The capture returns the real and
+ imaginary parts of a number of frequency points equal to half of the capture size plus one.
+ &lt;p&gt;Note: only the real part is returned for the first point (DC) and the last point
+ (sampling frequency / 2).
+ &lt;p&gt;The layout in the returned byte array is as follows:
+ &lt;ul&gt;
+   &lt;li&gt; n is the capture size returned by getCaptureSize()&lt;/li&gt;
+   &lt;li&gt; Rfk, Ifk are respectively  the real and imaginary parts of the kth frequency
+   component&lt;/li&gt;
+   &lt;li&gt; If Fs is the sampling frequency retuned by getSamplingRate() the kth frequency is:
+   k * Fs / n &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;table border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
+ &lt;tr&gt;&lt;td&gt;Index &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;0 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;1 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;2 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;3 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;4 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;5 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;... &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;n - 2 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;n - 1 &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;Data &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;Rf0 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;Rf(n/2) &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;Rf1 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;If1 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;Rf2 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;If2 &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;... &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;Rf(n/2-1) &lt;/p&gt;&lt;/td&gt;
+     &lt;td&gt;If(n/2-1) &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;p&gt;In order to obtain magnitude and phase values the following code can
+ be used:
+    &lt;pre class=&quot;prettyprint&quot;&gt;
+       int n = fft.size();
+       float[] magnitudes = new float[n / 2 + 1];
+       float[] phases = new float[n / 2 + 1];
+       magnitudes[0] = (float)Math.abs(fft[0]);      // DC
+       magnitudes[n / 2] = (float)Math.abs(fft[1]);  // Nyquist
+       phases[0] = phases[n / 2] = 0;
+       for (int k = 1; k &amp;lt; n / 2; k++) {
+           int i = k * 2;
+           magnitudes[k] = (float)Math.hypot(fft[i], fft[i + 1]);
+           phases[k] = (float)Math.atan2(fft[i + 1], fft[i]);
+       }&lt;/pre&gt;
+@param {Object {byte[]}} fft array of bytes where the FFT should be returned
+@return {Number} {@link #SUCCESS} in case of success,
+ {@link #ERROR_NO_MEMORY}, {@link #ERROR_INVALID_OPERATION} or {@link #ERROR_DEAD_OBJECT}
+ in case of failure.
+@throws IllegalStateException
+*/
+getFft : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-getMeasurementPeakRms'>/**Retrieves the latest peak and RMS measurement.
+</span> Sets the peak and RMS fields of the supplied {@link android.media.audiofx.Visualizer.MeasurementPeakRms} to the
+ latest measured values.
+@param {Object {Visualizer.MeasurementPeakRms}} measurement a non-null {@link Visualizer.MeasurementPeakRms} instance to store
+    the measurement values.
+@return {Number} {@link #SUCCESS} in case of success, {@link #ERROR_BAD_VALUE},
+    {@link #ERROR_NO_MEMORY}, {@link #ERROR_INVALID_OPERATION} or {@link #ERROR_DEAD_OBJECT}
+    in case of failure.
+*/
+getMeasurementPeakRms : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-setDataCaptureListener'>/**Registers an OnDataCaptureListener interface and specifies the rate at which the capture
+</span> should be updated as well as the type of capture requested.
+ &lt;p&gt;Call this method with a null listener to stop receiving the capture updates.
+@param {Object {Visualizer.OnDataCaptureListener}} listener OnDataCaptureListener registered
+@param {Number} rate rate in milliHertz at which the capture should be updated
+@param {Boolean} waveform true if a waveform capture is requested: the onWaveFormDataCapture()
+ method will be called on the OnDataCaptureListener interface.
+@param {Boolean} fft true if a frequency capture is requested: the onFftDataCapture() method will be
+ called on the OnDataCaptureListener interface.
+@return {Number} {@link #SUCCESS} in case of success,
+ {@link #ERROR_NO_INIT} or {@link #ERROR_BAD_VALUE} in case of failure.
+*/
+setDataCaptureListener : function(  ) {},
+
+<span id='android-media-audiofx-Visualizer-method-setServerDiedListener'>/**
+</span>@hide Registers an OnServerDiedListener interface.
+ &lt;p&gt;Call this method with a null listener to stop receiving server death notifications.
+@return {Number} {@link #SUCCESS} in case of success,
+*/
+setServerDiedListener : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

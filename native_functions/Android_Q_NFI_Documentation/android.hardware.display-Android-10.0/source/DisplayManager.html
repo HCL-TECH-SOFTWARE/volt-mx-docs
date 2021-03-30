@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-hardware-display-DisplayManager'>/**@class android.hardware.display.DisplayManager
+</span>@extends java.lang.Object
+
+ Manages the properties of attached displays.
+*/
+var DisplayManager = {
+
+<span id='android-hardware-display-DisplayManager-property-ACTION_WIFI_DISPLAY_STATUS_CHANGED'>/** Broadcast receiver that indicates when the Wifi display status changes.
+</span> &lt;p&gt;
+ The status is provided as a {@link android.hardware.display.WifiDisplayStatus} object in the
+ {@link #EXTRA_WIFI_DISPLAY_STATUS} extra.
+ &lt;/p&gt;&lt;p&gt;
+ This broadcast is only sent to registered receivers and can only be sent by the system.
+ &lt;/p&gt;
+ @hide
+*/
+ACTION_WIFI_DISPLAY_STATUS_CHANGED : &quot;android.hardware.display.action.WIFI_DISPLAY_STATUS_CHANGED&quot;,
+<span id='android-hardware-display-DisplayManager-property-EXTRA_WIFI_DISPLAY_STATUS'>/** Contains a {@link android.hardware.display.WifiDisplayStatus} object.
+</span> @hide
+*/
+EXTRA_WIFI_DISPLAY_STATUS : &quot;android.hardware.display.extra.WIFI_DISPLAY_STATUS&quot;,
+<span id='android-hardware-display-DisplayManager-property-DISPLAY_CATEGORY_PRESENTATION'>/** Display category: Presentation displays.
+</span> &lt;p&gt;
+ This category can be used to identify secondary displays that are suitable for
+ use as presentation displays such as HDMI or Wireless displays.  Applications
+ may automatically project their content to presentation displays to provide
+ richer second screen experiences.
+ &lt;/p&gt;
+
+ @see android.app.Presentation
+ @see Display#FLAG_PRESENTATION
+ @see #getDisplays(String)
+*/
+DISPLAY_CATEGORY_PRESENTATION : &quot;android.hardware.display.category.PRESENTATION&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_PUBLIC'>/** Virtual display flag: Create a public display.
+</span>
+ &lt;h3&gt;Public virtual displays&lt;/h3&gt;
+ &lt;p&gt;
+ When this flag is set, the virtual display is public.
+ &lt;/p&gt;&lt;p&gt;
+ A public virtual display behaves just like most any other display that is connected
+ to the system such as an HDMI or Wireless display.  Applications can open
+ windows on the display and the system may mirror the contents of other displays
+ onto it.
+ &lt;/p&gt;&lt;p&gt;
+ Creating a public virtual display that isn't restricted to own-content only implicitly
+ creates an auto-mirroring display. See {@link #VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR} for
+ restrictions on who is allowed to create an auto-mirroring display.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Private virtual displays&lt;/h3&gt;
+ &lt;p&gt;
+ When this flag is not set, the virtual display is private as defined by the
+ {@link Display#FLAG_PRIVATE} display flag.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ A private virtual display belongs to the application that created it.  Only the a owner of a
+ private virtual display and the apps that are already on that display are allowed to place
+ windows upon it.  The private virtual display also does not participate in display mirroring:
+ it will neither receive mirrored content from another display nor allow its own content to be
+ mirrored elsewhere.  More precisely, the only processes that are allowed to enumerate or
+ interact with the private display are those that have the same UID as the application that
+ originally created the private virtual display or as the activities that are already on that
+ display.
+ &lt;/p&gt;
+
+ @see #createVirtualDisplay
+ @see #VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY
+ @see #VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR
+*/
+VIRTUAL_DISPLAY_FLAG_PUBLIC : &quot;1&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_PRESENTATION'>/** Virtual display flag: Create a presentation display.
+</span>
+ &lt;h3&gt;Presentation virtual displays&lt;/h3&gt;
+ &lt;p&gt;
+ When this flag is set, the virtual display is registered as a presentation
+ display in the {@link #DISPLAY_CATEGORY_PRESENTATION presentation display category}.
+ Applications may automatically project their content to presentation displays
+ to provide richer second screen experiences.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Non-presentation virtual displays&lt;/h3&gt;
+ &lt;p&gt;
+ When this flag is not set, the virtual display is not registered as a presentation
+ display.  Applications can still project their content on the display but they
+ will typically not do so automatically.  This option is appropriate for
+ more special-purpose displays.
+ &lt;/p&gt;
+
+ @see android.app.Presentation
+ @see #createVirtualDisplay
+ @see #DISPLAY_CATEGORY_PRESENTATION
+ @see Display#FLAG_PRESENTATION
+*/
+VIRTUAL_DISPLAY_FLAG_PRESENTATION : &quot;2&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_SECURE'>/** Virtual display flag: Create a secure display.
+</span>
+ &lt;h3&gt;Secure virtual displays&lt;/h3&gt;
+ &lt;p&gt;
+ When this flag is set, the virtual display is considered secure as defined
+ by the {@link Display#FLAG_SECURE} display flag.  The caller promises to take
+ reasonable measures, such as over-the-air encryption, to prevent the contents
+ of the display from being intercepted or recorded on a persistent medium.
+ &lt;/p&gt;&lt;p&gt;
+ Creating a secure virtual display requires the CAPTURE_SECURE_VIDEO_OUTPUT permission.
+ This permission is reserved for use by system components and is not available to
+ third-party applications.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Non-secure virtual displays&lt;/h3&gt;
+ &lt;p&gt;
+ When this flag is not set, the virtual display is considered unsecure.
+ The content of secure windows will be blanked if shown on this display.
+ &lt;/p&gt;
+
+ @see Display#FLAG_SECURE
+ @see #createVirtualDisplay
+*/
+VIRTUAL_DISPLAY_FLAG_SECURE : &quot;4&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY'>/** Virtual display flag: Only show this display's own content; do not mirror
+</span> the content of another display.
+
+ &lt;p&gt;
+ This flag is used in conjunction with {@link #VIRTUAL_DISPLAY_FLAG_PUBLIC}.
+ Ordinarily public virtual displays will automatically mirror the content of the
+ default display if they have no windows of their own.  When this flag is
+ specified, the virtual display will only ever show its own content and
+ will be blanked instead if it has no windows.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This flag is mutually exclusive with {@link #VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR}.  If both
+ flags are specified then the own-content only behavior will be applied.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ This behavior of this flag is implied whenever neither {@link #VIRTUAL_DISPLAY_FLAG_PUBLIC}
+ nor {@link #VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR} have been set.  This flag is only required to
+ override the default behavior when creating a public display.
+ &lt;/p&gt;
+
+ @see #createVirtualDisplay
+*/
+VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY : &quot;8&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR'>/** Virtual display flag: Allows content to be mirrored on private displays when no content is
+</span> being shown.
+
+ &lt;p&gt;
+ This flag is mutually exclusive with {@link #VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY}.
+ If both flags are specified then the own-content only behavior will be applied.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ The behavior of this flag is implied whenever {@link #VIRTUAL_DISPLAY_FLAG_PUBLIC} is set
+ and {@link #VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY} has not been set.   This flag is only
+ required to override the default behavior when creating a private display.
+ &lt;/p&gt;
+
+ &lt;p&gt;
+ Creating an auto-mirroing virtual display requires the CAPTURE_VIDEO_OUTPUT
+ or CAPTURE_SECURE_VIDEO_OUTPUT permission.
+ These permissions are reserved for use by system components and are not available to
+ third-party applications.
+
+ Alternatively, an appropriate {@link MediaProjection} may be used to create an
+ auto-mirroring virtual display.
+ &lt;/p&gt;
+
+ @see #createVirtualDisplay
+*/
+VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR : &quot;16&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_CAN_SHOW_WITH_INSECURE_KEYGUARD'>/** Virtual display flag: Allows content to be displayed on private virtual displays when
+</span> keyguard is shown but is insecure.
+
+ &lt;p&gt;
+ This might be used in a case when the content of a virtual display is captured and sent to an
+ external hardware display that is not visible to the system directly. This flag will allow
+ the continued display of content while other displays will be covered by a keyguard which
+ doesn't require providing credentials to unlock. This means that there is either no password
+ or other authentication method set, or the device is in a trusted state -
+ {@link android.service.trust.TrustAgentService} has available and active trust agent.
+ &lt;/p&gt;&lt;p&gt;
+ This flag can only be applied to private displays as defined by the
+ {@link Display#FLAG_PRIVATE} display flag. It is mutually exclusive with
+ {@link #VIRTUAL_DISPLAY_FLAG_PUBLIC}. If both flags are specified then this flag's behavior
+ will not be applied.
+ &lt;/p&gt;
+
+ @see #createVirtualDisplay
+ @see KeyguardManager#isDeviceSecure()
+ @see KeyguardManager#isDeviceLocked()
+ @hide
+*/
+VIRTUAL_DISPLAY_FLAG_CAN_SHOW_WITH_INSECURE_KEYGUARD : &quot;32&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_SUPPORTS_TOUCH'>/** Virtual display flag: Specifies that the virtual display can be associated with a
+</span> touchpad device that matches its uniqueId.
+
+ @see #createVirtualDisplay
+ @hide
+*/
+VIRTUAL_DISPLAY_FLAG_SUPPORTS_TOUCH : &quot;64&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_ROTATES_WITH_CONTENT'>/** Virtual display flag: Indicates that the orientation of this display device is coupled to
+</span> the rotation of its associated logical display.
+
+ @see #createVirtualDisplay
+ @hide
+*/
+VIRTUAL_DISPLAY_FLAG_ROTATES_WITH_CONTENT : &quot;128&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_DESTROY_CONTENT_ON_REMOVAL'>/** Virtual display flag: Indicates that the contents will be destroyed once
+</span> the display is removed.
+
+ Public virtual displays without this flag will move their content to main display
+ stack once they're removed. Private vistual displays will always destroy their
+ content on removal even without this flag.
+
+ @see #createVirtualDisplay
+ @hide
+*/
+VIRTUAL_DISPLAY_FLAG_DESTROY_CONTENT_ON_REMOVAL : &quot;256&quot;,
+<span id='android-hardware-display-DisplayManager-property-VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS'>/** Virtual display flag: Indicates that the display should support system decorations. Virtual
+</span> displays without this flag shouldn't show home, IME or any other system decorations.
+
+ @see #createVirtualDisplay
+ @hide
+*/
+VIRTUAL_DISPLAY_FLAG_SHOULD_SHOW_SYSTEM_DECORATIONS : &quot;512&quot;,
+<span id='android-hardware-display-DisplayManager-method-getDisplay'>/**Gets information about a logical display.
+</span>
+ The display metrics may be adjusted to provide compatibility
+ for legacy applications.
+@param {Number} displayId The logical display id.
+@return {Object {android.view.Display}} The display object, or null if there is no valid display with the given id.
+*/
+getDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getDisplays'>/**Gets all currently valid logical displays.
+</span>@return {Object {android.view.Display}} An array containing all displays.
+*/
+getDisplays : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getDisplays'>/**Gets all currently valid logical displays of the specified category.
+</span> &lt;p&gt;
+ When there are multiple displays in a category the returned displays are sorted
+ of preference.  For example, if the requested category is
+ {@link #DISPLAY_CATEGORY_PRESENTATION} and there are multiple presentation displays
+ then the displays are sorted so that the first display in the returned array
+ is the most preferred presentation display.  The application may simply
+ use the first display or allow the user to choose.
+ &lt;/p&gt;
+@param {String} category The requested display category or null to return all displays.
+@return {Object {android.view.Display}} An array containing all displays sorted by order of preference.
+@see #DISPLAY_CATEGORY_PRESENTATION
+*/
+getDisplays : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-registerDisplayListener'>/**Registers an display listener to receive notifications about when
+</span> displays are added, removed or changed.
+@param {Object {DisplayManager.DisplayListener}} listener The listener to register.
+@param {Object {Handler}} handler The handler on which the listener should be invoked, or null
+ if the listener should be invoked on the calling thread's looper.
+@see #unregisterDisplayListener
+*/
+registerDisplayListener : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-unregisterDisplayListener'>/**Unregisters a display listener.
+</span>@param {Object {DisplayManager.DisplayListener}} listener The listener to unregister.
+@see #registerDisplayListener
+*/
+unregisterDisplayListener : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-startWifiDisplayScan'>/**Starts scanning for available Wifi displays.
+</span> The results are sent as a {@link #ACTION_WIFI_DISPLAY_STATUS_CHANGED} broadcast.
+ &lt;p&gt;
+ Calls to this method nest and must be matched by an equal number of calls to
+ {@link #stopWifiDisplayScan}().
+ &lt;/p&gt;&lt;p&gt;
+ Requires {@link android.Manifest.permission#CONFIGURE_WIFI_DISPLAY}.
+ &lt;/p&gt;
+@hide 
+*/
+startWifiDisplayScan : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-stopWifiDisplayScan'>/**Stops scanning for available Wifi displays.
+</span> &lt;p&gt;
+ Requires {@link android.Manifest.permission#CONFIGURE_WIFI_DISPLAY}.
+ &lt;/p&gt;
+@hide 
+*/
+stopWifiDisplayScan : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-connectWifiDisplay'>/**Connects to a Wifi display.
+</span> The results are sent as a {@link #ACTION_WIFI_DISPLAY_STATUS_CHANGED} broadcast.
+ &lt;p&gt;
+ Automatically remembers the display after a successful connection, if not
+ already remembered.
+ &lt;/p&gt;&lt;p&gt;
+ Requires {@link android.Manifest.permission#CONFIGURE_WIFI_DISPLAY}.
+ &lt;/p&gt;
+@param {String} deviceAddress The MAC address of the device to which we should connect.
+@hide 
+*/
+connectWifiDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-pauseWifiDisplay'>/**
+</span>@hide 
+*/
+pauseWifiDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-resumeWifiDisplay'>/**
+</span>@hide 
+*/
+resumeWifiDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-disconnectWifiDisplay'>/**Disconnects from the current Wifi display.
+</span> The results are sent as a {@link #ACTION_WIFI_DISPLAY_STATUS_CHANGED} broadcast.
+@hide 
+*/
+disconnectWifiDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-renameWifiDisplay'>/**Renames a Wifi display.
+</span> &lt;p&gt;
+ The display must already be remembered for this call to succeed.  In other words,
+ we must already have successfully connected to the display at least once and then
+ not forgotten it.
+ &lt;/p&gt;&lt;p&gt;
+ Requires {@link android.Manifest.permission#CONFIGURE_WIFI_DISPLAY}.
+ &lt;/p&gt;
+@param {String} deviceAddress The MAC address of the device to rename.
+@param {String} alias The alias name by which to remember the device, or null
+ or empty if no alias should be used.
+@hide 
+*/
+renameWifiDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-forgetWifiDisplay'>/**Forgets a previously remembered Wifi display.
+</span> &lt;p&gt;
+ Automatically disconnects from the display if currently connected to it.
+ &lt;/p&gt;&lt;p&gt;
+ Requires {@link android.Manifest.permission#CONFIGURE_WIFI_DISPLAY}.
+ &lt;/p&gt;
+@param {String} deviceAddress The MAC address of the device to forget.
+@hide 
+*/
+forgetWifiDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getWifiDisplayStatus'>/**Gets the current Wifi display status.
+</span> Watch for changes in the status by registering a broadcast receiver for
+ {@link #ACTION_WIFI_DISPLAY_STATUS_CHANGED}.
+@return {Object {android.hardware.display.WifiDisplayStatus}} The current Wifi display status.
+@hide 
+*/
+getWifiDisplayStatus : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-setSaturationLevel'>/**Set the level of color saturation to apply to the display.
+</span>@param {Number} level The amount of saturation to apply, between 0 and 1 inclusive.
+ 0 produces a grayscale image, 1 is normal.
+@hide 
+@deprecated use {@link ColorDisplayManager#setSaturationLevel(int)} instead. The level passed
+ as a parameter here will be rounded to the nearest hundredth.
+*/
+setSaturationLevel : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-createVirtualDisplay'>/**Creates a virtual display.
+</span>@see #createVirtualDisplay(String, int, int, int, Surface, int,
+ VirtualDisplay.Callback, Handler)
+*/
+createVirtualDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-createVirtualDisplay'>/**Creates a virtual display.
+</span> &lt;p&gt;
+ The content of a virtual display is rendered to a {@link Surface} provided
+ by the application.
+ &lt;/p&gt;&lt;p&gt;
+ The virtual display should be {@link android.hardware.display.VirtualDisplay#release released}
+ when no longer needed.  Because a virtual display renders to a surface
+ provided by the application, it will be released automatically when the
+ process terminates and all remaining windows on it will be forcibly removed.
+ &lt;/p&gt;&lt;p&gt;
+ The behavior of the virtual display depends on the flags that are provided
+ to this method.  By default, virtual displays are created to be private,
+ non-presentation and unsecure.  Permissions may be required to use certain flags.
+ &lt;/p&gt;&lt;p&gt;
+ As of {@link android.os.Build.VERSION_CODES#KITKAT_WATCH}, the surface may
+ be attached or detached dynamically using {@link android.hardware.display.VirtualDisplay#setSurface}.
+ Previously, the surface had to be non-null when {@link #createVirtualDisplay}
+ was called and could not be changed for the lifetime of the display.
+ &lt;/p&gt;&lt;p&gt;
+ Detaching the surface that backs a virtual display has a similar effect to
+ turning off the screen.
+ &lt;/p&gt;
+@param {String} name The name of the virtual display, must be non-empty.
+@param {Number} width The width of the virtual display in pixels, must be greater than 0.
+@param {Number} height The height of the virtual display in pixels, must be greater than 0.
+@param {Number} densityDpi The density of the virtual display in dpi, must be greater than 0.
+@param {Object {Surface}} surface The surface to which the content of the virtual display should
+ be rendered, or null if there is none initially.
+@param {Number} flags A combination of virtual display flags:
+ {@link #VIRTUAL_DISPLAY_FLAG_PUBLIC}, {@link #VIRTUAL_DISPLAY_FLAG_PRESENTATION},
+ {@link #VIRTUAL_DISPLAY_FLAG_SECURE}, {@link #VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY},
+ or {@link #VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR}.
+@param {Object {VirtualDisplay.Callback}} callback Callback to call when the state of the {@link VirtualDisplay} changes
+@param {Object {Handler}} handler The handler on which the listener should be invoked, or null
+ if the listener should be invoked on the calling thread's looper.
+@return {Object {android.hardware.display.VirtualDisplay}} The newly created virtual display, or null if the application could
+ not create the virtual display.
+@throws SecurityException if the caller does not have permission to create
+ a virtual display with the specified flags.
+*/
+createVirtualDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-createVirtualDisplay'>/**
+</span>@hide 
+*/
+createVirtualDisplay : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getStableDisplaySize'>/**Gets the stable device display size, in pixels.
+</span>
+ This should really only be used for things like server-side filtering of available
+ applications. Most applications don't need the level of stability guaranteed by this and
+ should instead query either the size of the display they're currently running on or the
+ size of the default display.
+@hide 
+*/
+getStableDisplaySize : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getBrightnessEvents'>/**Fetch {@link android.hardware.display.BrightnessChangeEvent}s.
+</span>@hide until we make it a system api.
+*/
+getBrightnessEvents : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getAmbientBrightnessStats'>/**Fetch {@link android.hardware.display.AmbientBrightnessDayStats}s.
+</span>@hide until we make it a system api
+*/
+getAmbientBrightnessStats : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-setBrightnessConfiguration'>/**Sets the global display brightness configuration.
+</span>@hide 
+*/
+setBrightnessConfiguration : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-setBrightnessConfigurationForUser'>/**Sets the global display brightness configuration for a specific user.
+</span>
+ Note this requires the INTERACT_ACROSS_USERS permission if setting the configuration for a
+ user other than the one you're currently running as.
+@hide 
+*/
+setBrightnessConfigurationForUser : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getBrightnessConfiguration'>/**Gets the global display brightness configuration or the default curve if one hasn't been set.
+</span>@hide 
+*/
+getBrightnessConfiguration : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getBrightnessConfigurationForUser'>/**Gets the global display brightness configuration or the default curve if one hasn't been set
+</span> for a specific user.
+
+ Note this requires the INTERACT_ACROSS_USERS permission if getting the configuration for a
+ user other than the one you're currently running as.
+@hide 
+*/
+getBrightnessConfigurationForUser : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getDefaultBrightnessConfiguration'>/**Gets the default global display brightness configuration or null one hasn't
+</span> been configured.
+@hide 
+*/
+getDefaultBrightnessConfiguration : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-setTemporaryBrightness'>/**Temporarily sets the brightness of the display.
+</span> &lt;p&gt;
+ Requires the {@link android.Manifest.permission#CONTROL_DISPLAY_BRIGHTNESS} permission.
+ &lt;/p&gt;
+@param {Number} brightness The brightness value from 0 to 255.
+@hide Requires signature permission.
+*/
+setTemporaryBrightness : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-setTemporaryAutoBrightnessAdjustment'>/**Temporarily sets the auto brightness adjustment factor.
+</span> &lt;p&gt;
+ Requires the {@link android.Manifest.permission#CONTROL_DISPLAY_BRIGHTNESS} permission.
+ &lt;/p&gt;
+@param {Number} adjustment The adjustment factor from -1.0 to 1.0.
+@hide Requires signature permission.
+*/
+setTemporaryAutoBrightnessAdjustment : function(  ) {},
+
+<span id='android-hardware-display-DisplayManager-method-getMinimumBrightnessCurve'>/**Returns the minimum brightness curve, which guarantess that any brightness curve that dips
+</span> below it is rejected by the system.
+ This prevent auto-brightness from setting the screen so dark as to prevent the user from
+ resetting or disabling it, and maps lux to the absolute minimum nits that are still readable
+ in that ambient brightness.
+@return {Object {android.util.Pair}} The minimum brightness curve (as lux values and their corresponding nits values).
+@hide 
+*/
+getMinimumBrightnessCurve : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

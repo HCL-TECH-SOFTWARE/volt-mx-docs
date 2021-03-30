@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-os-BatteryStats-Uid'>/**@class android.os.BatteryStats.Uid
+</span>@extends java.lang.Object
+
+ The statistics associated with a particular uid.
+*/
+var Uid = {
+
+<span id='android-os-BatteryStats-Uid-property-PROCESS_STATE_TOP'>/** Time this uid has any processes in the top state.
+</span>*/
+PROCESS_STATE_TOP : &quot;0&quot;,
+<span id='android-os-BatteryStats-Uid-property-PROCESS_STATE_FOREGROUND_SERVICE'>/** Time this uid has any process with a started foreground service, but
+</span> none in the &quot;top&quot; state.
+*/
+PROCESS_STATE_FOREGROUND_SERVICE : &quot;1&quot;,
+<span id='android-os-BatteryStats-Uid-property-PROCESS_STATE_FOREGROUND'>/** Time this uid has any process in an active foreground state, but none in the
+</span> &quot;foreground service&quot; or better state. Persistent and other foreground states go here.
+*/
+PROCESS_STATE_FOREGROUND : &quot;2&quot;,
+<span id='android-os-BatteryStats-Uid-property-PROCESS_STATE_BACKGROUND'>/** Time this uid has any process in an active background state, but none in the
+</span> &quot;foreground&quot; or better state.
+*/
+PROCESS_STATE_BACKGROUND : &quot;3&quot;,
+<span id='android-os-BatteryStats-Uid-property-PROCESS_STATE_TOP_SLEEPING'>/** Time this uid has any process that is top while the device is sleeping, but not
+</span> active for any other reason.  We kind-of consider it a kind of cached process
+ for execution restrictions.
+*/
+PROCESS_STATE_TOP_SLEEPING : &quot;4&quot;,
+<span id='android-os-BatteryStats-Uid-property-PROCESS_STATE_HEAVY_WEIGHT'>/** Time this uid has any process that is in the background but it has an activity
+</span> marked as &quot;can't save state&quot;.  This is essentially a cached process, though the
+ system will try much harder than normal to avoid killing it.
+*/
+PROCESS_STATE_HEAVY_WEIGHT : &quot;5&quot;,
+<span id='android-os-BatteryStats-Uid-property-PROCESS_STATE_CACHED'>/** Time this uid has any processes that are sitting around cached, not in one of the
+</span> other active states.
+*/
+PROCESS_STATE_CACHED : &quot;6&quot;,
+<span id='android-os-BatteryStats-Uid-property-NUM_PROCESS_STATE'>/** Total number of process states we track.
+</span>*/
+NUM_PROCESS_STATE : &quot;7&quot;,
+<span id='android-os-BatteryStats-Uid-property-UID_PROCESS_TYPES'>/***/
+</span>UID_PROCESS_TYPES : &quot;null&quot;,
+<span id='android-os-BatteryStats-Uid-property-CRITICAL_PROC_STATES'>/** When the process exits one of these states, we need to make sure cpu time in this state
+</span> is not attributed to any non-critical process states.
+*/
+CRITICAL_PROC_STATES : &quot;null&quot;,
+<span id='android-os-BatteryStats-Uid-property-NUM_WIFI_BATCHED_SCAN_BINS'>/***/
+</span>NUM_WIFI_BATCHED_SCAN_BINS : &quot;5&quot;,
+<span id='android-os-BatteryStats-Uid-property-NUM_USER_ACTIVITY_TYPES'>/***/
+</span>NUM_USER_ACTIVITY_TYPES : &quot;null&quot;,
+<span id='android-os-BatteryStats-Uid-method-getWakelockStats'>/**Returns a mapping containing wakelock statistics.
+</span>@return {Object {android.util.ArrayMap}} a Map from Strings to Uid.Wakelock objects.
+*/
+getWakelockStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getMulticastWakelockStats'>/**Returns the WiFi Multicast Wakelock statistics.
+</span>@return {Object {android.os.BatteryStats.Timer}} a Timer Object for the per uid Multicast statistics.
+*/
+getMulticastWakelockStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getSyncStats'>/**Returns a mapping containing sync statistics.
+</span>@return {Object {android.util.ArrayMap}} a Map from Strings to Timer objects.
+*/
+getSyncStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getJobStats'>/**Returns a mapping containing scheduled job statistics.
+</span>@return {Object {android.util.ArrayMap}} a Map from Strings to Timer objects.
+*/
+getJobStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getJobCompletionStats'>/**Returns statistics about how jobs have completed.
+</span>@return {Object {android.util.ArrayMap}} A Map of String job names to completion type -&gt; count mapping.
+*/
+getJobCompletionStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getAggregatedPartialWakelockTimer'>/**The cumulative time the uid spent holding any partial wakelocks. This will generally
+</span> differ from summing over the Wakelocks in getWakelockStats since the latter may have
+ wakelocks that overlap in time (and therefore over-counts).
+*/
+getAggregatedPartialWakelockTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getSensorStats'>/**Returns a mapping containing sensor statistics.
+</span>@return {Object {android.util.SparseArray}} a Map from Integer sensor ids to Uid.Sensor objects.
+*/
+getSensorStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getPidStats'>/**Returns a mapping containing active process data.
+</span>*/
+getPidStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getProcessStats'>/**Returns a mapping containing process statistics.
+</span>@return {Object {android.util.ArrayMap}} a Map from Strings to Uid.Proc objects.
+*/
+getProcessStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getPackageStats'>/**Returns a mapping containing package statistics.
+</span>@return {Object {android.util.ArrayMap}} a Map from Strings to Uid.Pkg objects.
+*/
+getPackageStats : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiControllerActivity'>/**
+</span>*/
+getWifiControllerActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getBluetoothControllerActivity'>/**
+</span>*/
+getBluetoothControllerActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getModemControllerActivity'>/**
+</span>*/
+getModemControllerActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getUid'>/**{@hide}
+</span>*/
+getUid : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiRunningLocked'>/**
+</span>*/
+noteWifiRunningLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiStoppedLocked'>/**
+</span>*/
+noteWifiStoppedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteFullWifiLockAcquiredLocked'>/**
+</span>*/
+noteFullWifiLockAcquiredLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteFullWifiLockReleasedLocked'>/**
+</span>*/
+noteFullWifiLockReleasedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiScanStartedLocked'>/**
+</span>*/
+noteWifiScanStartedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiScanStoppedLocked'>/**
+</span>*/
+noteWifiScanStoppedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiBatchedScanStartedLocked'>/**
+</span>*/
+noteWifiBatchedScanStartedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiBatchedScanStoppedLocked'>/**
+</span>*/
+noteWifiBatchedScanStoppedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiMulticastEnabledLocked'>/**
+</span>*/
+noteWifiMulticastEnabledLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteWifiMulticastDisabledLocked'>/**
+</span>*/
+noteWifiMulticastDisabledLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteActivityResumedLocked'>/**
+</span>*/
+noteActivityResumedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteActivityPausedLocked'>/**
+</span>*/
+noteActivityPausedLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiRunningTime'>/**
+</span>*/
+getWifiRunningTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getFullWifiLockTime'>/**
+</span>*/
+getFullWifiLockTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiScanTime'>/**
+</span>*/
+getWifiScanTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiScanCount'>/**
+</span>*/
+getWifiScanCount : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiScanTimer'>/**Returns the timer keeping track of wifi scans.
+</span>*/
+getWifiScanTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiScanBackgroundCount'>/**
+</span>*/
+getWifiScanBackgroundCount : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiScanActualTime'>/**
+</span>*/
+getWifiScanActualTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiScanBackgroundTime'>/**
+</span>*/
+getWifiScanBackgroundTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiScanBackgroundTimer'>/**Returns the timer keeping track of background wifi scans.
+</span>*/
+getWifiScanBackgroundTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiBatchedScanTime'>/**
+</span>*/
+getWifiBatchedScanTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiBatchedScanCount'>/**
+</span>*/
+getWifiBatchedScanCount : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiMulticastTime'>/**
+</span>*/
+getWifiMulticastTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getAudioTurnedOnTimer'>/**
+</span>*/
+getAudioTurnedOnTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getVideoTurnedOnTimer'>/**
+</span>*/
+getVideoTurnedOnTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getFlashlightTurnedOnTimer'>/**
+</span>*/
+getFlashlightTurnedOnTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getCameraTurnedOnTimer'>/**
+</span>*/
+getCameraTurnedOnTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getForegroundActivityTimer'>/**
+</span>*/
+getForegroundActivityTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getForegroundServiceTimer'>/**Returns the timer keeping track of Foreground Service time
+</span>*/
+getForegroundServiceTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getBluetoothScanTimer'>/**
+</span>*/
+getBluetoothScanTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getBluetoothScanBackgroundTimer'>/**
+</span>*/
+getBluetoothScanBackgroundTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getBluetoothUnoptimizedScanTimer'>/**
+</span>*/
+getBluetoothUnoptimizedScanTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getBluetoothUnoptimizedScanBackgroundTimer'>/**
+</span>*/
+getBluetoothUnoptimizedScanBackgroundTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getBluetoothScanResultCounter'>/**
+</span>*/
+getBluetoothScanResultCounter : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getBluetoothScanResultBgCounter'>/**
+</span>*/
+getBluetoothScanResultBgCounter : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getCpuFreqTimes'>/**
+</span>*/
+getCpuFreqTimes : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getScreenOffCpuFreqTimes'>/**
+</span>*/
+getScreenOffCpuFreqTimes : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getCpuActiveTime'>/**Returns cpu active time of an uid.
+</span>*/
+getCpuActiveTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getCpuClusterTimes'>/**Returns cpu times of an uid on each cluster
+</span>*/
+getCpuClusterTimes : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getCpuFreqTimes'>/**Returns cpu times of an uid at a particular process state.
+</span>*/
+getCpuFreqTimes : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getScreenOffCpuFreqTimes'>/**Returns cpu times of an uid while the screen if off at a particular process state.
+</span>*/
+getScreenOffCpuFreqTimes : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getProcessStateTime'>/**
+</span>*/
+getProcessStateTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getProcessStateTimer'>/**
+</span>*/
+getProcessStateTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getVibratorOnTimer'>/**
+</span>*/
+getVibratorOnTimer : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-noteUserActivityLocked'>/**
+</span>*/
+noteUserActivityLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-hasUserActivity'>/**
+</span>*/
+hasUserActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getUserActivityCount'>/**
+</span>*/
+getUserActivityCount : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-hasNetworkActivity'>/**
+</span>*/
+hasNetworkActivity : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getNetworkActivityBytes'>/**
+</span>*/
+getNetworkActivityBytes : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getNetworkActivityPackets'>/**
+</span>*/
+getNetworkActivityPackets : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getMobileRadioActiveTime'>/**
+</span>*/
+getMobileRadioActiveTime : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getMobileRadioActiveCount'>/**
+</span>*/
+getMobileRadioActiveCount : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getUserCpuTimeUs'>/**Get the total cpu time (in microseconds) this UID had processes executing in userspace.
+</span>*/
+getUserCpuTimeUs : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getSystemCpuTimeUs'>/**Get the total cpu time (in microseconds) this UID had processes executing kernel syscalls.
+</span>*/
+getSystemCpuTimeUs : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getTimeAtCpuSpeed'>/**Returns the approximate cpu time (in microseconds) spent at a certain CPU speed for a
+</span> given CPU cluster.
+@param {Number} cluster the index of the CPU cluster.
+@param {Number} step the index of the CPU speed. This is not the actual speed of the CPU.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+@see com.android.internal.os.PowerProfile#getNumCpuClusters()
+@see com.android.internal.os.PowerProfile#getNumSpeedStepsInCpuCluster(int)
+*/
+getTimeAtCpuSpeed : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getMobileRadioApWakeupCount'>/**Returns the number of times this UID woke up the Application Processor to
+</span> process a mobile radio packet.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+getMobileRadioApWakeupCount : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getWifiRadioApWakeupCount'>/**Returns the number of times this UID woke up the Application Processor to
+</span> process a WiFi packet.
+@param {Number} which one of STATS_SINCE_CHARGED, STATS_SINCE_UNPLUGGED, or STATS_CURRENT.
+*/
+getWifiRadioApWakeupCount : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getDeferredJobsCheckinLineLocked'>/**Appends the deferred jobs data to the StringBuilder passed in, in checkin format
+</span>@param {Object {StringBuilder}} sb StringBuilder that can be overwritten with the deferred jobs data
+@param {Number} which one of STATS_*
+*/
+getDeferredJobsCheckinLineLocked : function(  ) {},
+
+<span id='android-os-BatteryStats-Uid-method-getDeferredJobsLineLocked'>/**Appends the deferred jobs data to the StringBuilder passed in
+</span>@param {Object {StringBuilder}} sb StringBuilder that can be overwritten with the deferred jobs data
+@param {Number} which one of STATS_*
+*/
+getDeferredJobsLineLocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>
